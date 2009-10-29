@@ -1,0 +1,490 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ReportGenerator</name>
+    </assembly>
+    <members>
+        <member name="M:SystemsAnalysis.Reporting.StatusDisplayControl.AddInfoStatus(System.String)">
+            <summary>
+            Adds text to the Status Form display.
+            </summary>
+            <param name="status">The string to be added to the display. The newline
+            character will be automatically appended to the end of this string
+            if it is not already present.</param>
+        </member>
+        <member name="M:SystemsAnalysis.Reporting.StatusDisplayControl.AddWarningStatus(System.String)">
+            <summary>
+            Adds warning text to the Status Form display.
+            </summary>
+            <param name="status">The warning message to add.</param>
+        </member>
+        <member name="M:SystemsAnalysis.Reporting.StatusDisplayControl.AddErrorStatus(System.String)">
+            <summary>
+            Adds error text to the Status Form display.
+            </summary>
+            <param name="status">The error message to add.</param>
+        </member>
+        <member name="M:SystemsAnalysis.Reporting.StatusDisplayControl.AddInfoStatus(System.String,System.Boolean)">
+            <summary>
+            Adds text to the Status Form display.
+            </summary>
+            <param name="status">The string to be added to the display. The newline
+            character will be automatically appended to the end of this string
+            if it is not already present.</param>
+            <param name="newLine">Specifies whether a line break should be appended
+            to the end of the status text.</param>
+        </member>
+        <member name="M:SystemsAnalysis.Reporting.StatusDisplayControl.ClearStatusText">
+            <summary>
+            Clears the Status Form display.
+            </summary>
+        </member>
+        <member name="F:SystemsAnalysis.Reporting.StatusDisplayControl.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:SystemsAnalysis.Reporting.StatusDisplayControl.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:SystemsAnalysis.Reporting.StatusDisplayControl.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:SystemsAnalysis.Reporting.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:SystemsAnalysis.Reporting.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:SystemsAnalysis.Reporting.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="T:SystemsAnalysis.Reporting.Preferences">
+            <summary>
+            Summary description for Preferences.
+            </summary>
+        </member>
+        <member name="F:SystemsAnalysis.Reporting.Preferences.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:SystemsAnalysis.Reporting.Preferences.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+        </member>
+        <member name="M:SystemsAnalysis.Reporting.Preferences.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:SystemsAnalysis.Reporting.LicenseInitializer.LicenseMessage">
+            <summary>
+            A summary of the status of product and extensions initialization.
+            </summary>
+        </member>
+        <member name="M:SystemsAnalysis.Reporting.LicenseInitializer.ShutdownApplication">
+            <summary>
+            Shuts down AoInitialize object and check back in extensions to ensure
+            any ESRI libraries that have been used are unloaded in the correct order.
+            </summary>
+            <remarks>Once Shutdown has been called, you cannot re-initialize the product license
+            and should not make any ArcObjects call.</remarks>
+        </member>
+        <member name="M:SystemsAnalysis.Reporting.LicenseInitializer.IsExtensionCheckedOut(ESRI.ArcGIS.esriSystem.esriLicenseExtensionCode)">
+            <summary>
+            Indicates if the extension is currently checked out.
+            </summary>
+        </member>
+        <member name="M:SystemsAnalysis.Reporting.LicenseInitializer.AddExtensions(ESRI.ArcGIS.esriSystem.esriLicenseExtensionCode[])">
+            <summary>
+            Set the extension(s) to be checked out for your ArcObjects code. 
+            </summary>
+        </member>
+        <member name="M:SystemsAnalysis.Reporting.LicenseInitializer.RemoveExtensions(ESRI.ArcGIS.esriSystem.esriLicenseExtensionCode[])">
+            <summary>
+            Check in extension(s) when it is no longer needed.
+            </summary>
+        </member>
+        <member name="P:SystemsAnalysis.Reporting.LicenseInitializer.InitializeLowerProductFirst">
+            <summary>
+            Get/Set the ordering of product code checking. If true, check from lowest to 
+            highest license. True by default.
+            </summary>
+        </member>
+        <member name="P:SystemsAnalysis.Reporting.LicenseInitializer.InitializedProduct">
+            <summary>
+            Retrieves the product code initialized in the ArcObjects application
+            </summary>
+        </member>
+        <member name="M:SystemsAnalysis.Reporting.ApplicationInterface.Main">
+            <summary>
+            The main entry point for the application.
+            </summary>
+        </member>
+        <member name="M:SystemsAnalysis.Reporting.ApplicationInterface.DoSplash(System.Boolean)">
+            <summary>
+            Loads the Splash Screen during start-up.
+            </summary>
+        </member>
+        <member name="F:SystemsAnalysis.Reporting.ApplicationInterface.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:SystemsAnalysis.Reporting.ApplicationInterface.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:SystemsAnalysis.Reporting.ApplicationInterface.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:SystemsAnalysis.Reporting.AddModelForm.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:SystemsAnalysis.Reporting.AddModelForm.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:SystemsAnalysis.Reporting.AddModelForm.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:SystemsAnalysis.Reporting.EditModelForm.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:SystemsAnalysis.Reporting.EditModelForm.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:SystemsAnalysis.Reporting.EditModelForm.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:SystemsAnalysis.Reporting.Settings">
+             <summary>
+            Represents a strongly typed in-memory cache of data.
+            </summary>
+        </member>
+        <member name="T:SystemsAnalysis.Reporting.Settings.DataSourceDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:SystemsAnalysis.Reporting.Settings.DataSourceRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:SystemsAnalysis.Reporting.Settings.DataSourceRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="F:SystemsAnalysis.Reporting.ModelCatalogMaintForm.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:SystemsAnalysis.Reporting.ModelCatalogMaintForm.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:SystemsAnalysis.Reporting.ModelCatalogMaintForm.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:SystemsAnalysis.Reporting.SplashScreen">
+            <summary>
+            Form to display information screen about this application
+            </summary>
+        </member>
+        <member name="M:SystemsAnalysis.Reporting.SplashScreen.ShowDialog(System.Boolean)">
+            <summary>
+            Shows the SplashScreen as a modal dialog
+            </summary>
+            <param name="wait">Species whether to wait or user to click to close the dialog, or to close automatically</param>
+            <returns>DialogResult.OK</returns>
+        </member>
+        <member name="F:SystemsAnalysis.Reporting.SplashScreen.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:SystemsAnalysis.Reporting.SplashScreen.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:SystemsAnalysis.Reporting.SplashScreen.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:SystemsAnalysis.Reporting.MismatchedLinkException">
+            <summary>
+            Summary description for CharacterizationExceptions.
+            </summary>
+        </member>
+        <member name="T:SystemsAnalysis.Reporting.CreateReportForm">
+            <summary>
+            User interface for generating characterization reports
+            </summary>
+        </member>
+        <member name="M:SystemsAnalysis.Reporting.CreateReportForm.InitMstLinks">
+            <summary>
+            Lazy loader for _mstLinks
+            </summary>
+        </member>
+        <member name="M:SystemsAnalysis.Reporting.CreateReportForm.#ctor">
+            <summary>
+            Constructor for characterization user interface
+            </summary>
+        </member>
+        <member name="M:SystemsAnalysis.Reporting.CreateReportForm.OnStatusChanged(SystemsAnalysis.Utils.Events.StatusChangedArgs)">
+            <summary>
+            Internally called function that fires the OnStatusChanged event.
+            </summary>
+            <param name="e">Parameter that contains the string describing the new state.</param>
+        </member>
+        <member name="M:SystemsAnalysis.Reporting.CreateReportForm.LoadLayerFile(System.String,ESRI.ArcGIS.Controls.AxMapControl)">
+            <summary>
+            Loads a layerfile into the supplied ESRI map control at index 0 and returns a reference to the layer
+            </summary>
+            <param name="fullPath">Path to the layerfile</param>
+            <param name="mapControl">An ESRI map control object</param>
+            <returns>An ESRI ILayer object</returns>
+        </member>
+        <member name="F:SystemsAnalysis.Reporting.CreateReportForm.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:SystemsAnalysis.Reporting.CreateReportForm.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:SystemsAnalysis.Reporting.CreateReportForm.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="P:SystemsAnalysis.Reporting.CreateReportForm.MstLinks">
+            <summary>
+            Acccessor property for lazy loaded object _mstLinks
+            </summary>
+        </member>
+        <member name="E:SystemsAnalysis.Reporting.CreateReportForm.StatusChanged">
+            <summary>
+            Event that occurs when CharacterizationEngine reports that it's status has changed.
+            </summary>
+        </member>
+        <member name="T:SystemsAnalysis.Reporting.ModelCatalogViewForm">
+            <summary>
+            Form for read-only view of the ModelCatalog DataSet
+            </summary>
+        </member>
+        <member name="F:SystemsAnalysis.Reporting.ModelCatalogViewForm.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:SystemsAnalysis.Reporting.ModelCatalogViewForm.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:SystemsAnalysis.Reporting.ModelCatalogViewForm.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="P:SystemsAnalysis.Reporting.ModelCatalogViewForm.SelectedModels">
+            <summary>
+            Gets an array of selected models from the data grid
+            </summary>
+        </member>
+        <member name="P:SystemsAnalysis.Reporting.ModelCatalogViewForm.Scenario">
+            <summary>
+            Gets the name of the selected scenario
+            </summary>
+        </member>
+        <member name="P:SystemsAnalysis.Reporting.ModelCatalogViewForm.StudyArea">
+            <summary>
+            Gets the name of the selected model's study area
+            </summary>
+        </member>
+        <member name="T:SystemsAnalysis.Reporting.InputBox">
+            <summary>
+            A simple input box form. This should be moved to a utilities class.
+            </summary>
+        </member>
+        <member name="F:SystemsAnalysis.Reporting.InputBox.buttonOK">
+            <summary>
+            The OK button for this form.
+            </summary>
+        </member>
+        <member name="F:SystemsAnalysis.Reporting.InputBox.buttonCancel">
+            <summary>
+            The Cancel button for this form.
+            </summary>
+        </member>
+        <member name="F:SystemsAnalysis.Reporting.InputBox.labelPrompt">
+            <summary>
+            The label for this form.
+            </summary>
+        </member>
+        <member name="F:SystemsAnalysis.Reporting.InputBox.textBoxText">
+            <summary>
+            The text to be read by this form.
+            </summary>
+        </member>
+        <member name="F:SystemsAnalysis.Reporting.InputBox.errorProviderText">
+            <summary>
+            Error provider for this form.
+            </summary>
+        </member>
+        <member name="F:SystemsAnalysis.Reporting.InputBox._validator">
+            <summary>
+            Delegate used to validate the object
+            </summary>
+        </member>
+        <member name="M:SystemsAnalysis.Reporting.InputBox.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+        </member>
+        <member name="M:SystemsAnalysis.Reporting.InputBox.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:SystemsAnalysis.Reporting.InputBox.Show(System.String,System.String,System.String,SystemsAnalysis.Reporting.InputBoxValidatingHandler,System.Int32,System.Int32)">
+            <summary>
+            Displays a prompt in a dialog box, waits for the user to input text or click a button.
+            </summary>
+            <param name="prompt">String expression displayed as the message in the dialog box</param>
+            <param name="title">String expression displayed in the title bar of the dialog box</param>
+            <param name="defaultResponse">String expression displayed in the text box as the default response</param>
+            <param name="validator">Delegate used to validate the text</param>
+            <param name="xpos">Numeric expression that specifies the distance of the left edge of the dialog box from the left edge of the screen.</param>
+            <param name="ypos">Numeric expression that specifies the distance of the upper edge of the dialog box from the top of the screen</param>
+            <returns>An InputBoxResult object with the Text and the OK property set to true when OK was clicked.</returns>
+        </member>
+        <member name="M:SystemsAnalysis.Reporting.InputBox.Show(System.String,System.String,System.String,SystemsAnalysis.Reporting.InputBoxValidatingHandler)">
+            <summary>
+            Displays a prompt in a dialog box, waits for the user to input text or click a button.
+            </summary>
+            <param name="prompt">String expression displayed as the message in the dialog box</param>
+            <param name="title">String expression displayed in the title bar of the dialog box</param>
+            <param name="defaultText">String expression displayed in the text box as the default response</param>
+            <param name="validator">Delegate used to validate the text</param>
+            <returns>An InputBoxResult object with the Text and the OK property set to true when OK was clicked.</returns>
+        </member>
+        <member name="M:SystemsAnalysis.Reporting.InputBox.textBoxText_TextChanged(System.Object,System.EventArgs)">
+            <summary>
+            Reset the ErrorProvider
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:SystemsAnalysis.Reporting.InputBox.textBoxText_Validating(System.Object,System.ComponentModel.CancelEventArgs)">
+            <summary>
+            Validate the Text using the Validator
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="T:SystemsAnalysis.Reporting.InputBoxResult">
+            <summary>
+            Class used to store the result of an InputBox.Show message.
+            </summary>
+        </member>
+        <member name="T:SystemsAnalysis.Reporting.InputBoxValidatingArgs">
+            <summary>
+            EventArgs used to Validate an InputBox
+            </summary>
+        </member>
+        <member name="T:SystemsAnalysis.Reporting.InputBoxValidatingHandler">
+            <summary>
+            Delegate used to Validate an InputBox
+            </summary>
+        </member>
+        <member name="T:SystemsAnalysis.Reporting.CharacterizationEngine">
+            <summary>
+            A class to perform characterization queries for collections of Model
+            components. Characterization operations are assumed to take place against
+            component collections, not a Model or StartLinks/StopLinks collections.
+            </summary>
+        </member>
+        <member name="M:SystemsAnalysis.Reporting.CharacterizationEngine.#ctor(System.String)">
+            <summary>
+            Constructor for the CharacterizationEngine.
+            </summary>
+            <param name="charLinks">A Links collection to be characterized.</param>					
+        </member>
+        <member name="M:SystemsAnalysis.Reporting.CharacterizationEngine.Characterize(SystemsAnalysis.Modeling.Links,System.String,System.String,System.ComponentModel.BackgroundWorker,System.ComponentModel.DoWorkEventArgs)">
+            <summary>
+            Generates an XML characterization report using the parameters specified in the constructor.
+            </summary>
+            <returns>The name of the .xml file containing the characterization information.</returns>
+        </member>
+        <member name="M:SystemsAnalysis.Reporting.CharacterizationEngine.parseEmbeddedFunction(System.String)">
+            <summary>
+            Returns the results of the embedded function as a string
+            </summary>
+            <param name="xmlFragment">An xml fragment containing the functionName, the library and any parameters</param>
+            <returns>The results of the embedded function</returns>
+        </member>
+        <member name="M:SystemsAnalysis.Reporting.CharacterizationEngine.OnStatusChanged(SystemsAnalysis.Utils.Events.StatusChangedArgs)">
+            <summary>
+            Internally called function that fires the OnStatusChanged event.
+            </summary>
+            <param name="e">Parameter that contains the string describing the new state.</param>
+        </member>
+    </members>
+</doc>
