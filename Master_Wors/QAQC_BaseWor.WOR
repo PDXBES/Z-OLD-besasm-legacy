@@ -1,0 +1,362 @@
+!Workspace
+!Version 650
+!Charset WindowsLatin1
+Open Table "\\cassio\gis1\MI_DATA\STREET\CENTERLN\Cl_port" As Cl_port Interactive
+Open Table "\\cassio\gis1\MI_DATA\ENVIRON\TOPO\spot\spotelev" As spotelev Interactive
+Open Table "\\cassio\gis1\MI_DATA\ENVIRON\TOPO\TOP\Top" As Top Interactive
+Open Table "\\cassio\gis1\MI_DATA\ENVIRON\TOPO\TOS\Tos" As Tos Interactive
+Open Table "\\cassio\gis1\MI_DATA\FACILITY\HYDRA\Raingages_Active_20031107" As Raingage Interactive
+Open Table "\\cassio\modeling\AGMaster21_calcs\ImpA\IAprocessing\Mdl_BLDG" As Mdl_Building Interactive
+Open Table "\\cassio\modeling\AGMaster21_calcs\ImpA\IAprocessing\Mdl_STRT" As Mdl_Str_Surface Interactive
+Open Table "\\cassio\modeling\AGMaster21_calcs\ImpA\IAprocessing\Mdl_PRKG" As Mdl_Parking Interactive
+Open Table "\\cassio\GIS2\Aerials_2003\6in\_6-inch" As _6_inch Interactive
+Open Table "\\cassio\GIS1\MI_DATA\PHOTOBAS\Curbface\Curbface" As Curbface Interactive
+Open Table "\\cassio\gis1\Mi_data\WATER\Willamette_fill" As Willamette_fill Interactive
+Open Table "\\cassio\GIS1\MI_DATA\BOUNDARY\GRID\Qs_bound" As Qs_bound Interactive
+Open Table "\\cassio\GIS1\METRODAT\Rlislt01\STREETS\MAJ_ART" As MAJ_ART Interactive
+Open Table "\\cassio\GIS1\METRODAT\Rlislt01\WATER\RIV_FILL" As RIV_FILL Interactive
+Open Table "\\cassio\Modeling\SAMaster_22\Links\mst_links_ac" As mst_links_ac Interactive
+Open Table "\\cassio\Modeling\SAMaster_22\Parcels_Divides\mst_dsc_ac" As mst_dsc Interactive
+Open Table "\\cassio\GIS1\MI_DATA\ENVIRON\TOPO\contours\usgs10ft" As usgs10ft Interactive
+Open Table "\\cassio\GIS1\MI_DATA\FACILITY\SANITARY\WORKING\DME_Links" As DME_Links Interactive
+Open Table "\\cassio\GIS1\MI_DATA\BOUNDARY\COMBINED\Current_Adopted\Sewer_Basins_Pdx" As Sewer_Basins_Pdx Interactive
+Open Table "P:\8063_CombinedFacPlan\Models\Alts\Sewer_Basins_AltTrace" As Sewer_Basins_AltTrace Interactive
+Set Window Info
+  Position (6.97917,1.3125) Units "in"
+  Width 2.60417 Units "in" Height 3.60417 Units "in" 
+  Font ("Arial",0,8,0)
+Open Window Info
+Set Window MapBasic
+  Position (0.0208333,4.54167) Units "in"
+  Width 7.83333 Units "in" Height 1.375 Units "in" Min
+Open Window MapBasic
+Map From mst_links_ac,Sewer_Basins_Pdx,Top,Tos,DME_Links,usgs10ft,
+  Qs_bound,Cl_port,mst_dsc,Willamette_fill,_6_inch 
+  Position (1.83333,0.0520833) Units "in"
+  Width 7.10417 Units "in" Height 6.08333 Units "in" 
+Set Window FrontWindow() ScrollBars Off Autoscroll On
+Set Map
+  CoordSys Earth Projection 3, 33, "ft", -120.5, 43.6666666667, 44.3333333333, 46, 8202099.7379999999, 0
+  Center (7639700.511,711482.8207)
+  Zoom 15168.96175 Units "ft"
+  Preserve Zoom Display Zoom
+  Distance Units "ft" Area Units "sq mi" XY Units "ft"
+  Distance Type Cartesian
+shade 5 with SYMBOL_GRO values 
+  "" Line (1,2,0) ,
+  "ABANDONED MAIN" Line (1,3,0) ,
+  "COMBINED GRAVITY MAIN" Line (3,72,16765183) ,
+  "COMBINED PRESSURE MAIN" Line (2,26,16762032) ,
+  "CONNECTION" Line (1,1,12632256) ,
+  "CONSTRUCTED CHANNEL" Line (2,6,11593215) ,
+  "CULVERT" Line (2,21,11599792) ,
+  "DITCH" Line (3,6,11599871) ,
+  "FRENCH DRAIN" Line (1,2,0) ,
+  "INLET LEADS" Line (2,1,11593215) ,
+  "INLETS" Line (2,2,11599792) ,
+  "NATURAL CHANNEL" Line (2,21,10551295) ,
+  "PRF" Line (2,15,11599871) ,
+  "SANITARY GRAVITY MAIN" Line (3,2,16765088) ,
+  "SANITARY PRESSURE MAIN" Line (2,26,16760960) ,
+  "SEWER LATERALS" Line (2,1,16760960) ,
+  "STORM GRAVITY MAIN" Line (3,6,13893520) ,
+  "STORM LATERALS" Line (1,6,11599792) ,
+  "STORM PRESSURE MAIN" Line (2,26,10551200) 
+  default Line (1,2,0)   # color 1 # 
+Set Map Layer 0 Selectable
+Set Map
+  Layer 1
+    Display Global
+    Global   Symbol (35,0,12)  Line (1,5,8421504)  
+    Arrows On
+    Label Line Arrow Position Above Font ("Arial",0,9,0) Pen (1,2,0) 
+      With USNode
+      Parallel On Auto Off Overlap Off Duplicates Off Offset 2
+      Visibility On
+  Layer 2
+    Display Global
+    Global Pen (4,2,16750640)  Brush (1,16777215,16777215)  Symbol (35,0,12)   
+    Label Line None Position Center Font ("Arial",0,9,0) Pen (1,2,0) 
+      With Basin_ID
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+  Layer 3
+    Display Graphic
+    Global   Symbol (35,0,12)  Line (1,2,8421504)  
+    Selectable Off
+    Zoom (0, 500) Units "ft" 
+    Label Line None Position Center Font ("Arial",256,9,0,16777215) Pen (1,2,0) 
+      With ELEVATION
+      Parallel On Auto On Overlap On Duplicates On Offset 2
+      Visibility Zoom (0, 500) Units "ft"
+  Layer 4
+    Display Global
+    Global   Symbol (35,0,12)  Line (1,2,13684944)  
+    Selectable Off
+    Zoom (0, 500) Units "ft" 
+    Label Line None Position Center Font ("Arial",256,9,0,16777215) Pen (1,2,0) 
+      With ELEVATION
+      Parallel On Auto Off Overlap On Duplicates On Offset 2
+      Visibility On
+  Layer 5
+    Display Off
+    Global   Symbol (35,0,12)   
+    Selectable Off
+  Layer 6
+    Display Off
+    Global   Symbol (35,0,12)   
+    Label Line Arrow Position Above Font ("Arial",0,9,0) Pen (1,2,0) 
+      With UNITID
+      Parallel On Auto Off Overlap Off Duplicates Off Offset 2
+      Visibility On
+  Layer 7
+    Display Global
+    Global   Symbol (35,0,12)  Line (1,2,16711808)  
+    Zoom (0, 500) Units "ft" 
+    Label Line Arrow Position Center Font ("Arial",257,10,16711808,16777215) Pen (1,2,0) 
+      With ELEVATION
+      Parallel On Auto On Overlap On Duplicates On Offset 2
+      Visibility Zoom (0, 500) Units "ft"
+  Layer 8
+    Display Off
+    Global Pen (2,2,65535)  Brush (1,16777215,16777215)  Symbol (35,0,12)   
+    Selectable Off
+    Label Line None Position Center Font ("Arial",0,9,0) Pen (1,2,0) 
+      With QS
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+  Layer 9
+    Display Global
+    Global   Symbol (35,0,12)  Line (1,1,0)  
+    Selectable Off
+    Label Line Arrow Position Above Font ("Arial",257,9,16749680,16777215) Pen (1,2,0) 
+      With street_full
+      Parallel On Auto On Overlap Off Duplicates Off Offset 2
+      Visibility Zoom (0, 2500) Units "ft"
+  Layer 10
+    Display Global
+    Global Pen (1,2,11579568)  Brush (1,8245248)  Symbol (35,0,12)   
+    Selectable Off
+    Zoom (2000, 5000) Units "ft" 
+    Label Line None Position Center Font ("Arial",0,9,0) Pen (1,2,0) 
+      With RNO
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+  Layer 11
+    Display Global
+    Global Pen (1,2,27552)  Brush (2,32960,16777215)  Symbol (35,0,12)   
+    Selectable Off
+    Label Line None Position Center Font ("Arial",0,9,0) Pen (1,2,0) 
+      With ID
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+  Layer 12
+    Display Off
+    Global   Symbol (35,0,12)   
+  contrast 50 
+  brightness 50 
+  alpha 255 
+    transparency off 
+  color 0 
+    grayscale off 
+set legend 
+  layer 5 
+    display on 
+    shades off 
+    symbols off 
+    lines on 
+    count on 
+    title auto Font ("Arial",0,9,0)
+    subtitle auto Font ("Arial",0,8,0)
+    ascending off 
+    ranges Font ("Arial",0,8,0)
+      auto display off ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on  
+Set Window FrontWindow() Title "QAQC Check"
+Set Window FrontWindow() Printer
+ Name "\\PORTIA\Canon8" Orientation Portrait Copies 1
+ Papersize 1
+Create Cartographic Legend
+  Position (0.822917,0.177083) Units "in"
+  Width 2.76042 Units "in" Height 5 Units "in" 
+  Window Title "Legend of QAQC Check"
+  Portrait
+  Frame From Layer 5
+    Border Pen (0,1,0) 
+Set Window FrontWindow() Printer
+ Name "\\PORTIA\Canon8" Orientation Portrait Copies 1
+ Papersize 1
+Map From Curbface,Mdl_Parking,Mdl_Str_Surface,Mdl_Building 
+  Position (0.125,0.229167) Units "in"
+  Width 9.28125 Units "in" Height 5.61458 Units "in" Min
+Set Window FrontWindow() ScrollBars Off Autoscroll On
+Set Map
+  CoordSys Earth Projection 3, 33, "ft", -120.5, 43.6666666667, 44.3333333333, 46, 8202099.7379999999, 0
+  Center (7649743.373,680046.7111)
+  Zoom 1714.305666 Units "ft"
+  Preserve Zoom Display Zoom
+  Distance Units "ft" Area Units "sq mi" XY Units "ft"
+  Distance Type Cartesian
+Set Map
+  Layer 1
+    Display Global
+    Global   Symbol (35,0,12)   
+    Label Line Arrow Position Above Font ("Arial",0,9,0) Pen (1,2,0) 
+      With SideA
+      Parallel On Auto Off Overlap Off Duplicates Off Offset 2
+      Visibility On
+  Layer 2
+    Display Off
+    Global Pen (1,2,8388608)  Brush (49,8388608)  Symbol (35,0,12)   
+    Label Line None Position Center Font ("Arial",0,9,0) Pen (1,2,0) 
+      With GenSource
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+  Layer 3
+    Display Global
+    Global Pen (1,2,12632256)  Brush (16,12632256)  Symbol (35,0,12)   
+    Label Line None Position Center Font ("Arial",0,9,0) Pen (1,2,0) 
+      With GenSource
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+  Layer 4
+    Display Off
+    Global Pen (1,2,5258240)  Brush (65,5258240)  Symbol (35,0,12)   
+    Label Line None Position Center Font ("Arial",0,9,0) Pen (1,2,0) 
+      With GenSource
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+Set Window FrontWindow() Title "Impervious"
+Set Window FrontWindow() Printer
+ Name "\\PORTIA\Canon8" Orientation Portrait Copies 1
+ Papersize 1
+Map From mst_links_ac,mst_links_ac,RIV_FILL 
+  Position (0.104167,0.104167) Units "in"
+  Width 7.4375 Units "in" Height 4.88542 Units "in" Min
+Set Window FrontWindow() ScrollBars Off Autoscroll On
+Set Map
+  CoordSys Earth Projection 3, 33, "ft", -120.5, 43.6666666667, 44.3333333333, 46, 8202099.7379999999, 0
+  Center (7645996.256,702016.3297)
+  Zoom 0.4030963763 Units "mi"
+  Preserve Zoom Display Zoom
+  Distance Units "mi" Area Units "sq mi" XY Units "ft"
+  Distance Type Cartesian
+shade 2 with TimeFrame values 
+  "AB" Line (5,2,10502399) ,
+  "CE" Line (5,2,16776960) ,
+  "EX" Line (5,2,16750640) ,
+  "FC" Line (5,2,8421376) ,
+  "FU" Line (5,2,8388608) 
+  default Line (1,2,0)   # color 1 # 
+shade 1 with Hservstat values 
+  "" Line (2,2,16711680) ,
+  "ABAN" Line (2,2,16711935) ,
+  "IN" Line (2,2,7405424) ,
+  "NEW" Line (2,2,65280) ,
+  "PEND" Line (2,2,65280) ,
+  "TBAB" Line (2,2,255) ,
+  "UNK" Line (2,2,49344) 
+  default Line (1,2,0)   # color 1 # 
+Set Map
+  Layer 1
+    Display Value
+    Global   Symbol (35,0,12)  Line (1,2,12632256)  
+    Selectable Off
+  Layer 2
+    Display Global
+    Global   Symbol (35,0,12)  Line (1,2,12632256)  
+    Label Line Arrow Position Above Font ("Arial",0,9,0) Pen (1,2,0) 
+      With USNode
+      Parallel On Auto Off Overlap Off Duplicates Off Offset 2
+      Visibility On
+  Layer 3
+    Display Value
+    Global   Symbol (35,0,12)  Line (1,2,8421504)  
+    Selectable Off
+  Layer 4
+    Display Global
+    Global   Symbol (35,0,12)  Line (1,2,8421504)  
+    Label Line Arrow Position Above Font ("Arial",0,9,0) Pen (1,2,0) 
+      With USNode
+      Parallel On Auto Off Overlap Off Duplicates Off Offset 2
+      Visibility On
+  Layer 5
+    Display Global
+    Global Pen (1,2,255)  Brush (15,13689087)  Symbol (35,0,12)   
+    Label Line None Position Center Font ("Arial",0,9,0) Pen (1,2,0) 
+      With AREA
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+set legend 
+  layer 1 
+    display on 
+    shades off 
+    symbols off 
+    lines on 
+    count on 
+    title auto Font ("Arial",0,9,0)
+    subtitle auto Font ("Arial",0,8,0)
+    ascending on 
+    ranges Font ("Arial",0,8,0)
+      auto display off ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on  
+set legend 
+  layer 3 
+    display on 
+    shades off 
+    symbols off 
+    lines on 
+    count on 
+    title auto Font ("Arial",0,9,0)
+    subtitle auto Font ("Arial",0,8,0)
+    ascending on 
+    ranges Font ("Arial",0,8,0)
+      auto display off ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on  
+Set Window FrontWindow() Title "Mst_Links thru Time"
+Set Window FrontWindow() Printer
+ Name "\\PORTIA\Canon8" Orientation Portrait Copies 1
+ Papersize 1
+Create Cartographic Legend
+  Position (7.75,0.09375) Units "in"
+  Width 2.09375 Units "in" Height 2.8125 Units "in" 
+  Window Title "Legend of Mst_Links thru Time"
+  Portrait
+  Default Frame Title "# Legend" Font ("Arial",0,10,0)
+  Default Frame Style "%" Font ("Arial",0,8,0)
+  Frame From Layer 1
+    Border Pen (0,1,0) 
+  Frame From Layer 3
+    Border Pen (0,1,0) 
+Set Window FrontWindow() Min
+Set Window FrontWindow() Printer
+ Name "\\PORTIA\Canon8" Orientation Portrait Copies 1
+ Papersize 1
