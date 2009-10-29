@@ -1,0 +1,13 @@
+!table
+!version 410
+!charset WindowsLatin1
+
+Definition Table
+  File "alternative_package.mdb"
+  Type ACCESS TABLE "alt_pumpcurves" Charset "WindowsLatin1"
+  Fields 5
+    PumpType Char (254) ;
+    Index Integer ;
+    Rating Float ;
+    Flow Float ;
+    Rated_By Integer ;
