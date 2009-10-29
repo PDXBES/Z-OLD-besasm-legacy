@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<namespace name="dmMapinfo">
+  <procedure name="delay" visibility="private">
+    <parameters>
+      <parameter name="msecs" type="Integer" />
+    </parameters>
+  </procedure>
+  <function name="mapinfodo" visibility="private">
+    <parameters>
+      <parameter name="oleMI" type="Variant" paramflags="var" />
+      <parameter name="dostr" type="string" />
+      <retval type="Integer" />
+    </parameters>
+  </function>
+  <procedure name="showMIglobals" visibility="private">
+    <parameters>
+      <parameter name="oleMI" type="Variant" paramflags="var" />
+      <parameter name="MBappname" type="string" />
+    </parameters>
+  </procedure>
+</namespace>

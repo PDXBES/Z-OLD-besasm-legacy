@@ -1,0 +1,214 @@
+=======================
+ProcessViewer Unit V1.0
+by Leo
+March 2001
+=======================
+
+So you use it:
+1. Copy the ProcessViewer.pas file into a directory of your choice (recommend the directory of your project)
+2. Include the Unit in your USES block.
+
+Now you have access to the functions and properties.
+
+Hint: The ProcessViewer only examines processes with a window handle!
+
+
+Methods and functions
+---------------------
+
+METHOD GetProcessList:
+
+	Simply call this function in your code and the ProcessViewer Unit fills the ProcessInfo array.
+	You should ever use GetProcessList before you take your own action with processes.
+	So you can be sure to have the newest image of the processes.
+
+	The internal functions like kill-processes calls GetProcessList self, so you don't need this do.
+
+
+FUNCTION IsFileActive(FileName: string): boolean
+
+	This function checks, if the file "FileName" is executed.
+	You can include the path and drive letter or not.
+	The execution with path and drive letter is a little bit faster.
+	It returns TRUE, if the file is executed and FALSE, if not.
+
+	The function calls "GetProcessList" before it goes for checking so you don't need do this manually.
+
+	Example:
+
+		if IsFileActive('DELPHI32.EXE') then
+		begin
+			ShowMessage('Delphi runs!');
+		end;
+
+
+FUNCTION KillProcessByFileName(FileName: string, KillAll: boolean): boolean
+
+	Use this function when you want to terminate(kill) a process, when you know the name of the file.
+	"FileName" is the file name of the process, that you want to kill.
+	You can include the path and drive letter (i.e: c:\windows\cdplayer.exe) or not (i.e. cdplayer.exe).
+
+	"KillAll" is a flag. When it is TRUE, ALL processes executed by the file will be terminated (a file
+	can execute more than one process).
+	When it is FALSE, only the first found process executed by the file will be killed.
+	The order of the processes are managed by Windows, so you probably not know which process is
+	exactly "your" process.
+
+	The function returns TRUE, when it killed the process(es) successfully.
+	The function returns FALSE, when the termination of all processes (KillAll=true) or one file
+	(KillAll=false)	failed or the file are not executed at this time.
+
+	The function calls "GetProcessList" before it goes for terminating so you don't need do this manually.
+
+	Hint: On slower machines or at very busy systems it can be possible, that the return value are
+	FALSE but the process is killed anyway after some milliseconds. In this case you should increase the value
+	"SleepForReCheck" (see below in this file).
+
+	Example:
+
+		if KillProcessByFileName('CDPLAYER.EXE',true) then
+		begin
+			ShowMessage('All instances of the Windows CD player are closed.');
+		end;
+
+
+FUNCTION KillProcessByPID(PID: DWord): boolean
+
+	Use this function when you want to terminate(kill) a process,
+	when you know the ProcessID of the process. It's seldom, but sometimes you need this function.
+
+	It's also called internal from "KillProcessByFileName".
+
+	"PID" is the ProcessID of the process, that you want to kill.
+
+	The function calls "GetProcessList" before it goes for terminating so you don't need this manually.
+
+	The function returns TRUE, when it killed the process successfully.
+	The function returns FALSE, when the termination failed or the PID doesn't exist.
+
+	Hint: On slower machines or at very busy systems it can be possible, that the return value are
+	FALSE but the process is killed anyway. In this case you should increase the value
+	"SleepForReCheck" (see below in this file).
+
+	Example:
+
+		if KillProcessByPID(3278354) then
+		begin
+			ShowMessage('Process with PID '+IntToStr(3278354)+' are terminated.');
+		end;
+
+
+
+
+Properties
+----------
+
+This is the data structure of the ProcessInfo record:
+
+type TProcessInfo=record
+		FileName: string;
+		Caption: string;
+		Visible: boolean;
+		Handle: DWord;
+		PClass: string;
+		ThreadID: DWord;
+		PID: DWord;
+end;
+
+var ProcessInfo: array of TProcessInfo;
+
+	When you call "GetProcessList" the array "ProcessInfo" will be filled with all informations
+	about the running processes.
+
+	Here are the details of the ProcessInfo structure:
+
+	FileName:		The file that executed the process (with complete path)
+	Caption:		Caption of the window (can be empty)
+	Visible: 		If TRUE, the window is visible
+	Handle: 		Internal handle of the window
+	PClass:			Internal class of the window
+	ThreadID:		Internal ThreadID of the process
+	PID:				Internal ProcessID of the process (used for the kill-functions).
+
+
+	Ok, this example lists all file names in a TStringList:
+
+			procedure ListAllFiles;
+			var
+				i: integer;
+				FileList: TStringList;
+			begin
+				FileList:=TStringList.Create; 						//prepare the stringlist
+				GetProcessList; 													//update the ProcessInfo Array
+				for i:=0 to Length(ProcessInfo)-1 do 			//walk through the ProcessInfo array
+				begin
+					FileList.Add(ProcessInfo[i].FileName);	//copy the filenames in the list
+				end;
+				.
+				.
+				.
+			end;
+
+var
+	DateiList,CaptionList,VisibleList,HandleList,ClassList,ThreadIdList,PIDList: TStringList;
+
+	These lists are used internal by the ProcessViewer unit. They are published and can used in your code.
+
+	So the previous example can make easier:
+
+			procedure ListAllFiles;
+			var
+				FileList: TStringList;
+			begin
+				FileList:=TStringList.Create; 						//prepare the stringlist
+				GetProcessList; 													//update the ProcessInfo Array
+				FileList:=DateiList;                      //copy the filelist
+				.
+				.
+				.
+			end;
+
+		I recommend to use the ProcessInfo array and NOT the lists! When you use such created lists with
+		simply a=b then a can changed when b change.
+
+		Such programming is called "dirty code". Don't do this.
+
+		The ProcessInfo array will be constant until you call another function of the unit.
+
+
+const	SleepForReCheck;
+
+	I use a constant "SleepForReCheck" to give the process killing functions time
+	to finish the work (some processes needs more time to close all connections). The
+	constant is used in a For-To-loop together with Application.ProcessMessages.
+
+	The default value is 5000, this should be enough for the most processes. When you
+	expect that your application runs on slower or busy machines then increase the value.
+
+	Pay attention, some tools at the users controls processes (i.e. resources manager). They must recalculate
+	their data between your terminate-commands. Considerate this!
+	
+	A good pre-check is, to open a executable more times (about 15-20 times) and try to close all with
+	a KillProcessByFileName-Command. When it closes all without interrupt it is ok (on your machine).
+
+	You can change this constant directly in the source code.
+
+
+
+
+Last information
+----------------
+	When you don't know, what processes are and what you want with a processviewer, please don't use this unit.
+
+	The terminating of processes is the hardest way to kick a program out of the memory. It's not the same like
+	normal close with sending a WM_CLOSE message. It is like cut the powerline of a computer.
+
+	Don't kill system processes. I'm not responsible for damages on your hardware or software!
+
+	This Unit is freeware and I don't give support for this. Feel free to change some
+	things and develope your own Unit from this.
+
+	Leo
+	March 2001
+	email: leo@leoworld.de
+	Pages: www.leoworld.de, www.trojancheck.de, www.antispector.de
