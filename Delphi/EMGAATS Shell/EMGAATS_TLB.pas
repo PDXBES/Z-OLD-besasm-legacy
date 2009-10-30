@@ -12,7 +12,7 @@ unit EMGAATS_TLB;
 // ************************************************************************ //
 
 // PASTLWTR : 1.2
-// File generated on 4/29/2009 3:28:40 PM from Type Library described below.
+// File generated on 10/30/2009 2:28:06 PM from Type Library described below.
 
 // ************************************************************************  //
 // Type Lib: Z:\EMGAATS\EMGAATS Shell\EMGAATS.tlb (1)

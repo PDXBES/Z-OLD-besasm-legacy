@@ -457,7 +457,8 @@ Dim	InsertPkingAreaFt as float
 				BaseFlowEX,
 				BaseFlowDM,
 				IsActive,
-				Sewerable
+				Sewerable,
+				HasBasement
 			) select
 				ParcelID,
 				DivideID,
@@ -487,7 +488,8 @@ Dim	InsertPkingAreaFt as float
 				int(BaseFlowEXcfs*1000000)/1000000,
 				int(BaseFlowDMcfs*1000000)/1000000,
 				"T",
-				Sewerable
+				Sewerable,
+				HasBasement
 			from _DSCSans
 		case "FU"
 			insert into mdl_DSC (
@@ -519,7 +521,8 @@ Dim	InsertPkingAreaFt as float
 				BaseFlowEX,
 				BaseFlowDM,
 				IsActive,
-				Sewerable
+				Sewerable,
+				HasBasement
 			) select
 				ParcelID,
 				DivideID,
@@ -549,7 +552,8 @@ Dim	InsertPkingAreaFt as float
 				int(BaseFlowEXcfs*1000000)/1000000,
 				int(BaseFlowDMcfs*1000000)/1000000,
 				"T",
-				Sewerable
+				Sewerable,
+				HasBasement
 			from _DSCSans
 	end case
 	Commit Table mdl_dsc
@@ -594,7 +598,8 @@ Dim	InsertPkingAreaFt as float
 				BaseFlowEX,
 				BaseFlowDM,
 				IsActive,
-				Sewerable
+				Sewerable,
+				HasBasement
 			) select
 				ParcelID,
 				DivideID,
@@ -624,7 +629,8 @@ Dim	InsertPkingAreaFt as float
 				int(BaseFlowEXcfs*1000000)/1000000,
 				int(BaseFlowDMcfs*1000000)/1000000,
 				"T",
-				Sewerable
+				Sewerable,
+				HasBasement
 			from _Storm_Only_DSC_Still_Need_Append
 		case "FU"
 			insert into mdl_DSC (
@@ -656,7 +662,8 @@ Dim	InsertPkingAreaFt as float
 				BaseFlowEX,
 				BaseFlowDM,
 				IsActive,
-				Sewerable
+				Sewerable,
+				HasBasement
 			) select
 				ParcelID,
 				DivideID,
@@ -686,7 +693,8 @@ Dim	InsertPkingAreaFt as float
 				int(BaseFlowEXcfs*1000000)/1000000,
 				int(BaseFlowDMcfs*1000000)/1000000,
 				"T",
-				Sewerable
+				Sewerable,
+				HasBasement
 			from _Storm_Only_DSC_Still_Need_Append
 	end case
 	Commit Table mdl_dsc	

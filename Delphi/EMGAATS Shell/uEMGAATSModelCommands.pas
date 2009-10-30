@@ -1710,6 +1710,7 @@ begin
       MSAccessManager.OpenDatabase(ModelMDBPath + 'LinkQAQC.mdb');
       MSAccessManager.Relink('mdl_nodes_ac', 'mdl_nodes_ac', ModelPath + 'nodes\mdl_nodes_ac.mdb');
       MSAccessManager.Relink('mdl_links_ac', 'mdl_links_ac', ModelPath + 'links\mdl_links_ac.mdb');
+      MSAccessManager.Relink('mdl_SpecLinks_ac', 'mdl_speclinks_ac', ModelPath + 'links\mdl_SpecLinks_ac.mdb');
     end;
   except on E: Exception do
     fModel.AddError(TEMGAATSError.Create('Error relinking LinkQAQC database tables. ' +

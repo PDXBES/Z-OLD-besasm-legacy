@@ -125,8 +125,8 @@ Sub CreateQCWorkspace
   end if
   MasterWorsPath = MasterRoot & "Master_Wors\"
 
+
 	Run Application MasterWorsPath & "QAQC_BaseWor.WOR"
-	Open Table MasterRoot & "Nodes\mst_Nodes_ac.TAB"
 '	Open Table "W:\AGMaster2\Links\mst_links_ac.TAB" Interactive
 	Open Table MasterWorsPath & "QAQC_link.tab"
 	Open Table gmdlRootFolder & "\links\mdl_links_ac.tab"
@@ -142,7 +142,15 @@ Sub CreateQCWorkspace
   Set Map Window idWindow3 Zoom Entire Layer 1
 
 	sDir = Str$(gmdlRootFolder & "\qc\")
-
+	Select *  from mst_Nodes_ac , mst_SpecLinks_ac  where mst_Nodes_ac . Node = mst_SpecLinks_ac . Node and mst_SpecLinks_ac.timeframe <> "AB" into mstSpecialLinkNodes 
+	Select *  from mst_links_ac , mst_SpecLinks_ac  where mst_links_ac . MLinkID = mst_SpecLinks_ac . ToMLinkID and mst_SpecLinks_ac.timeframe <> "AB" into mstSpecialLinks 
+	commit table mstSpecialLinkNodes as sdir + "mstSpecialLinkNodes" TYPE NATIVE Charset "WindowsLatin1"
+	commit table mstSpecialLinks as sdir + "mstSpecialLinks" TYPE NATIVE Charset "WindowsLatin1"
+	close table mstSpecialLinkNodes
+	close table mstSpecialLinks
+	open table sdir + "mstSpecialLinkNodes.TAB" interactive
+	open table sdir + "mstSpecialLinks.TAB" interactive
+	
   j = 1
   nQCRows = TableInfo(QAQC_link,TAB_INFO_NROWS)
   nQCLink = 0
@@ -220,6 +228,24 @@ Sub CreateQCWorkspace
 
   Call LayerOrder
   Close Table QAQC_link
+
+	set map redraw off
+	Add Map Window format$(idWindow1,"0") Layer mstSpecialLinkNodes, mstSpecialLinks
+	Set Map Window format$(idWindow1,"0") Layer 1 Display Global Global Symbol (44,16776960,18) 
+	Set Map Window format$(idWindow1,"0") Layer 2 Display Global Global Line (110,65,16776960) 
+  nMapLayer = MapperInfo(idWindow1,MAPPER_INFO_LAYERS)
+  CommandStr = "Set Map Window " + format$(idWindow1,"0") + " Order "
+  if nMapLayer > 3 then
+	  for count3 = 1 to nMapLayer - 3 step 1
+	  	CommandStr = CommandStr & Format$(count3 + 2,"0") & ","
+	  next
+	  CommandStr = CommandStr & "1,2," & Format$(nMapLayer,"0")
+	  run command CommandStr
+	end if
+	set map redraw on
+	
+
+
 	sDir = Str$(gmdlRootFolder & "\wors\")
   Save Workspace As sDir & "QCWorkspace.WOR"
   Print "Doggy-Dog Done!"
@@ -230,16 +256,18 @@ Sub Main
   dim projfolderpath as string
   dim MasterRoot as String
   
-  mycolors(1)= PURPLE    
-  mycolors(2)= YELLOW1                           
-  mycolors(3)= RED1                              
-  mycolors(4)= GREEN1                            
-  mycolors(5)= BLUE1                             
-  mycolors(6)= CYAN1                             
-  mycolors(7)= MAGENTA1                          
-  mycolors(8)= ORANGE                          
+  mycolors(1)= PURPLE
+  mycolors(2)= YELLOW1
+  mycolors(3)= RED1
+  mycolors(4)= GREEN1
+  mycolors(5)= BLUE1
+  mycolors(6)= CYAN1
+  mycolors(7)= MAGENTA1
+  mycolors(8)= ORANGE
+  mycolors(9)= CRANNY
+  mycolors(10)= TEAL
                              	
-  ncolors = 8
+  ncolors = 10
 
 '	Call SetLogOptions (TRUE, TRUE, TRUE, TRUE)
 

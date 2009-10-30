@@ -506,7 +506,8 @@ Create Table		mdl_DirSC
 	c_RFtosurfImpFt integer,
 	c_PKtosurfImpFt integer,
 	IsActive logical,
-	Sewerable integer
+	Sewerable integer,
+	HasBasement integer
 	)
 	File mdlDirSCPath
 	Type Access Database mdlDirSCMDBPath Version 4.0 Table mdlDirSCTable

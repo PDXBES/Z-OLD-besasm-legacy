@@ -6,9 +6,9 @@ Open Table "\\cassio\gis1\MI_DATA\ENVIRON\TOPO\spot\spotelev" As spotelev Intera
 Open Table "\\cassio\gis1\MI_DATA\ENVIRON\TOPO\TOP\Top" As Top Interactive
 Open Table "\\cassio\gis1\MI_DATA\ENVIRON\TOPO\TOS\Tos" As Tos Interactive
 Open Table "\\cassio\gis1\MI_DATA\FACILITY\HYDRA\Raingages_Active_20031107" As Raingage Interactive
-Open Table "\\cassio\modeling\AGMaster21_calcs\ImpA\IAprocessing\Mdl_BLDG" As Mdl_Building Interactive
-Open Table "\\cassio\modeling\AGMaster21_calcs\ImpA\IAprocessing\Mdl_STRT" As Mdl_Str_Surface Interactive
-Open Table "\\cassio\modeling\AGMaster21_calcs\ImpA\IAprocessing\Mdl_PRKG" As Mdl_Parking Interactive
+Open Table "\\cassio\modeling\SAMaster_22_calcs\ImpA\Mdl_BLDG" As Mdl_Building Interactive
+Open Table "\\cassio\modeling\SAMaster_22_calcs\ImpA\Mdl_STRT" As Mdl_Str_Surface Interactive
+Open Table "\\cassio\modeling\SAMaster_22_calcs\ImpA\Mdl_PRKG" As Mdl_Parking Interactive
 Open Table "\\cassio\GIS2\Aerials_2003\6in\_6-inch" As _6_inch Interactive
 Open Table "\\cassio\GIS1\MI_DATA\PHOTOBAS\Curbface\Curbface" As Curbface Interactive
 Open Table "\\cassio\gis1\Mi_data\WATER\Willamette_fill" As Willamette_fill Interactive
@@ -16,11 +16,14 @@ Open Table "\\cassio\GIS1\MI_DATA\BOUNDARY\GRID\Qs_bound" As Qs_bound Interactiv
 Open Table "\\cassio\GIS1\METRODAT\Rlislt01\STREETS\MAJ_ART" As MAJ_ART Interactive
 Open Table "\\cassio\GIS1\METRODAT\Rlislt01\WATER\RIV_FILL" As RIV_FILL Interactive
 Open Table "\\cassio\Modeling\SAMaster_22\Links\mst_links_ac" As mst_links_ac Interactive
+Open Table "\\cassio\Modeling\SAMaster_22\Nodes\mst_nodes_ac" As mst_nodes_ac Interactive
 Open Table "\\cassio\Modeling\SAMaster_22\Parcels_Divides\mst_dsc_ac" As mst_dsc Interactive
+Open Table "\\cassio\Modeling\SAMaster_22\Links\mst_SpecLinks_ac" As mst_SpecLinks_ac Interactive
 Open Table "\\cassio\GIS1\MI_DATA\ENVIRON\TOPO\contours\usgs10ft" As usgs10ft Interactive
 Open Table "\\cassio\GIS1\MI_DATA\FACILITY\SANITARY\WORKING\DME_Links" As DME_Links Interactive
 Open Table "\\cassio\GIS1\MI_DATA\BOUNDARY\COMBINED\Current_Adopted\Sewer_Basins_Pdx" As Sewer_Basins_Pdx Interactive
-Open Table "P:\8063_CombinedFacPlan\Models\Alts\Sewer_Basins_AltTrace" As Sewer_Basins_AltTrace Interactive
+Select *  from mst_Nodes_ac , mst_SpecLinks_ac  where mst_Nodes_ac . Node = mst_SpecLinks_ac . Node  into mstSpecialLinkNodes noselect  
+Select *  from mst_links_ac , mst_SpecLinks_ac  where mst_links_ac . MLinkID = mst_SpecLinks_ac . ToMLinkID  into mstSpecialLinks noselect  
 Set Window Info
   Position (6.97917,1.3125) Units "in"
   Width 2.60417 Units "in" Height 3.60417 Units "in" 
@@ -30,8 +33,8 @@ Set Window MapBasic
   Position (0.0208333,4.54167) Units "in"
   Width 7.83333 Units "in" Height 1.375 Units "in" Min
 Open Window MapBasic
-Map From mst_links_ac,Sewer_Basins_Pdx,Top,Tos,DME_Links,usgs10ft,
-  Qs_bound,Cl_port,mst_dsc,Willamette_fill,_6_inch 
+Map From mstSpecialLinkNodes,mstSpecialLinks,mst_links_ac,Sewer_Basins_Pdx,Top,Tos,
+  DME_Links,usgs10ft,Qs_bound,Cl_port,mst_dsc,Willamette_fill,_6_inch 
   Position (1.83333,0.0520833) Units "in"
   Width 7.10417 Units "in" Height 6.08333 Units "in" 
 Set Window FrontWindow() ScrollBars Off Autoscroll On
@@ -42,7 +45,7 @@ Set Map
   Preserve Zoom Display Zoom
   Distance Units "ft" Area Units "sq mi" XY Units "ft"
   Distance Type Cartesian
-shade 5 with SYMBOL_GRO values 
+shade 7 with SYMBOL_GRO values 
   "" Line (1,2,0) ,
   "ABANDONED MAIN" Line (1,3,0) ,
   "COMBINED GRAVITY MAIN" Line (3,72,16765183) ,
@@ -67,20 +70,34 @@ Set Map Layer 0 Selectable
 Set Map
   Layer 1
     Display Global
+    Global   Symbol (44,16776960,14)   
+    Label Line Arrow Position Right Font ("Arial",0,9,0) Pen (1,2,0) 
+      With Node
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+  Layer 2
+    Display Global
+    Global   Symbol (35,0,12)  Line (2,193,16776960)  
+    Label Line Arrow Position Above Font ("Arial",0,9,0) Pen (1,2,0) 
+      With USNode
+      Parallel On Auto Off Overlap Off Duplicates Off Offset 2
+      Visibility On
+  Layer 3
+    Display Global
     Global   Symbol (35,0,12)  Line (1,5,8421504)  
     Arrows On
     Label Line Arrow Position Above Font ("Arial",0,9,0) Pen (1,2,0) 
       With USNode
       Parallel On Auto Off Overlap Off Duplicates Off Offset 2
       Visibility On
-  Layer 2
+  Layer 4
     Display Global
     Global Pen (4,2,16750640)  Brush (1,16777215,16777215)  Symbol (35,0,12)   
     Label Line None Position Center Font ("Arial",0,9,0) Pen (1,2,0) 
-      With Basin_ID
+      With BASIN_ID
       Parallel On Auto Off Overlap Off Duplicates On Offset 2
       Visibility On
-  Layer 3
+  Layer 5
     Display Graphic
     Global   Symbol (35,0,12)  Line (1,2,8421504)  
     Selectable Off
@@ -89,7 +106,7 @@ Set Map
       With ELEVATION
       Parallel On Auto On Overlap On Duplicates On Offset 2
       Visibility Zoom (0, 500) Units "ft"
-  Layer 4
+  Layer 6
     Display Global
     Global   Symbol (35,0,12)  Line (1,2,13684944)  
     Selectable Off
@@ -98,18 +115,18 @@ Set Map
       With ELEVATION
       Parallel On Auto Off Overlap On Duplicates On Offset 2
       Visibility On
-  Layer 5
+  Layer 7
     Display Off
     Global   Symbol (35,0,12)   
     Selectable Off
-  Layer 6
+  Layer 8
     Display Off
     Global   Symbol (35,0,12)   
     Label Line Arrow Position Above Font ("Arial",0,9,0) Pen (1,2,0) 
       With UNITID
       Parallel On Auto Off Overlap Off Duplicates Off Offset 2
       Visibility On
-  Layer 7
+  Layer 9
     Display Global
     Global   Symbol (35,0,12)  Line (1,2,16711808)  
     Zoom (0, 500) Units "ft" 
@@ -117,7 +134,7 @@ Set Map
       With ELEVATION
       Parallel On Auto On Overlap On Duplicates On Offset 2
       Visibility Zoom (0, 500) Units "ft"
-  Layer 8
+  Layer 10
     Display Off
     Global Pen (2,2,65535)  Brush (1,16777215,16777215)  Symbol (35,0,12)   
     Selectable Off
@@ -125,7 +142,7 @@ Set Map
       With QS
       Parallel On Auto Off Overlap Off Duplicates On Offset 2
       Visibility On
-  Layer 9
+  Layer 11
     Display Global
     Global   Symbol (35,0,12)  Line (1,1,0)  
     Selectable Off
@@ -133,7 +150,7 @@ Set Map
       With street_full
       Parallel On Auto On Overlap Off Duplicates Off Offset 2
       Visibility Zoom (0, 2500) Units "ft"
-  Layer 10
+  Layer 12
     Display Global
     Global Pen (1,2,11579568)  Brush (1,8245248)  Symbol (35,0,12)   
     Selectable Off
@@ -142,7 +159,7 @@ Set Map
       With RNO
       Parallel On Auto Off Overlap Off Duplicates On Offset 2
       Visibility On
-  Layer 11
+  Layer 13
     Display Global
     Global Pen (1,2,27552)  Brush (2,32960,16777215)  Symbol (35,0,12)   
     Selectable Off
@@ -150,7 +167,7 @@ Set Map
       With ID
       Parallel On Auto Off Overlap Off Duplicates On Offset 2
       Visibility On
-  Layer 12
+  Layer 14
     Display Off
     Global   Symbol (35,0,12)   
   contrast 50 
@@ -160,7 +177,7 @@ Set Map
   color 0 
     grayscale off 
 set legend 
-  layer 5 
+  layer 7 
     display on 
     shades off 
     symbols off 
@@ -199,7 +216,7 @@ Create Cartographic Legend
   Width 2.76042 Units "in" Height 5 Units "in" 
   Window Title "Legend of QAQC Check"
   Portrait
-  Frame From Layer 5
+  Frame From Layer 7
     Border Pen (0,1,0) 
 Set Window FrontWindow() Printer
  Name "\\PORTIA\Canon8" Orientation Portrait Copies 1
@@ -227,21 +244,21 @@ Set Map
     Display Off
     Global Pen (1,2,8388608)  Brush (49,8388608)  Symbol (35,0,12)   
     Label Line None Position Center Font ("Arial",0,9,0) Pen (1,2,0) 
-      With GenSource
+      With GENSOURCE
       Parallel On Auto Off Overlap Off Duplicates On Offset 2
       Visibility On
   Layer 3
     Display Global
     Global Pen (1,2,12632256)  Brush (16,12632256)  Symbol (35,0,12)   
     Label Line None Position Center Font ("Arial",0,9,0) Pen (1,2,0) 
-      With GenSource
+      With GENSOURCE
       Parallel On Auto Off Overlap Off Duplicates On Offset 2
       Visibility On
   Layer 4
     Display Off
     Global Pen (1,2,5258240)  Brush (65,5258240)  Symbol (35,0,12)   
     Label Line None Position Center Font ("Arial",0,9,0) Pen (1,2,0) 
-      With GenSource
+      With GENSOURCE
       Parallel On Auto Off Overlap Off Duplicates On Offset 2
       Visibility On
 Set Window FrontWindow() Title "Impervious"
