@@ -304,13 +304,14 @@
     <xs:annotation>
       <xs:documentation>Specifies how output should be produced.</xs:documentation>
     </xs:annotation>
-    <xs:sequence>
+    <xs:all>
       <xs:element name="path" type="xs:string">
         <xs:annotation>
           <xs:documentation>The directory where spooling products should be dumped.</xs:documentation>
         </xs:annotation>
       </xs:element>
-    </xs:sequence>
+      <xs:element name="baseName" type="xs:string" />
+    </xs:all>
     <xs:attribute default="false" name="createMXD" type="xs:boolean">
       <xs:annotation>
         <xs:documentation>Whether the MXD should be saved.  The filename of the MXD will be the same as the sourceField value for the spooling product with an MXD extension.</xs:documentation>

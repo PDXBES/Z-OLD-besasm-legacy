@@ -3,7 +3,7 @@
 // Path: D:\Development\ArcSpooler\UI, Author: arnelm
 // Code lines: 31, Size of file: 431 Bytes
 // Creation date: 10/31/2008 3:50 PM
-// Last modified: 3/6/2009 2:51 PM
+// Last modified: 11/17/2009 12:01 PM
 
 #region Using directives
 using System;
@@ -153,6 +153,12 @@ namespace ArcSpooler.UI
 		public string OutputPath { get; private set; } // OutputPath
 
 		/// <summary>
+		/// Output base name
+		/// </summary>
+		/// <returns>String</returns>
+		public string OutputBasename { get; private set; } // OutputBasename
+
+    /// <summary>
 		/// Create job log
 		/// </summary>
 		/// <returns>Bool</returns>
@@ -290,6 +296,14 @@ namespace ArcSpooler.UI
 			CreateGeoPDF = _OutputNode.Attribute("geoPDF") != null ?
 				Convert.ToBoolean(_OutputNode.Attribute("geoPDF").Value) : false;
 			OutputPath = _OutputNode.Descendants("path").First().Value;
+			if (_OutputNode.Descendants("baseName").Count() > 0)
+			{
+				string outputNodeBaseNameValue = _OutputNode.Descendants("baseName").First().Value;
+				OutputBasename = outputNodeBaseNameValue == null ? string.Empty :
+					outputNodeBaseNameValue;
+			} // if
+			else
+				OutputBasename = string.Empty;
 			PDFResolution = _OutputNode.Attribute("pdfResolution") != null ?
 				Convert.ToInt32(_OutputNode.Attribute("pdfResolution").Value) : 300;
 			CreateJobLog = _OutputNode.Attribute("createJobLog") != null ?
