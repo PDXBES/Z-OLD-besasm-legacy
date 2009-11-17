@@ -305,12 +305,12 @@
       <xs:documentation>Specifies how output should be produced.</xs:documentation>
     </xs:annotation>
     <xs:all>
-      <xs:element name="path" type="xs:string">
+      <xs:element minOccurs="1" maxOccurs="1" name="path" type="xs:string">
         <xs:annotation>
           <xs:documentation>The directory where spooling products should be dumped.</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name="baseName" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="baseName" type="xs:string" />
     </xs:all>
     <xs:attribute default="false" name="createMXD" type="xs:boolean">
       <xs:annotation>
