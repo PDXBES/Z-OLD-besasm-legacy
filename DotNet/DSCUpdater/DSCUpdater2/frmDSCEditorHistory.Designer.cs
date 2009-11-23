@@ -1,4 +1,4 @@
-﻿namespace DSCUpdater2
+﻿namespace DSCUpdater
 {
     partial class frmDSCEditorHistory
     {
@@ -31,9 +31,9 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmDSCEditorHistory));
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.projectDataSet = new DSCUpdater2.projectDataSet();
+            this.projectDataSet = new DSCUpdater.projectDataSet();
             this.sESSIONBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.sESSIONTableAdapter = new DSCUpdater2.projectDataSetTableAdapters.SESSIONTableAdapter();
+            this.sESSIONTableAdapter = new DSCUpdater.projectDataSetTableAdapters.SESSIONTableAdapter();
             this.bindingNavigator1 = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
@@ -255,7 +255,7 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private projectDataSet projectDataSet;
         private System.Windows.Forms.BindingSource sESSIONBindingSource;
-        private DSCUpdater2.projectDataSetTableAdapters.SESSIONTableAdapter sESSIONTableAdapter;
+        private DSCUpdater.projectDataSetTableAdapters.SESSIONTableAdapter sESSIONTableAdapter;
         private System.Windows.Forms.DataGridViewTextBoxColumn editidDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn editdateDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn editedbyDataGridViewTextBoxColumn;

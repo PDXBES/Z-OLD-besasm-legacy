@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("DSCUpdater2")]
+[assembly: AssemblyTitle("DSCUpdater")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("City of Portland")]
-[assembly: AssemblyProduct("DSCUpdater2")]
+[assembly: AssemblyCompany("City of Portland, BES - ASM")]
+[assembly: AssemblyProduct("DSCUpdater")]
 [assembly: AssemblyCopyright("Copyright © City of Portland 2009")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

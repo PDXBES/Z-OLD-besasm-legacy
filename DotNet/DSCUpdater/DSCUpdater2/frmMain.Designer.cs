@@ -1,4 +1,4 @@
-﻿namespace DSCUpdater2
+﻿namespace DSCUpdater
 {
     partial class frmMain
     {
@@ -43,6 +43,8 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            Infragistics.Win.Appearance appearance11 = new Infragistics.Win.Appearance();
+            Infragistics.Win.Appearance appearance10 = new Infragistics.Win.Appearance();
             this.txtFileName = new Infragistics.Win.UltraWinEditors.UltraTextEditor();
             this.btnLoadUpdates = new System.Windows.Forms.Button();
             this.btnCloseApplication = new System.Windows.Forms.Button();
@@ -79,11 +81,30 @@
             this.editdateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.editedbyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sESSIONBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.projectDataSet = new DSCUpdater2.projectDataSet();
+            this.projectDataSet = new DSCUpdater.projectDataSet();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.tabUpdaterEditor = new System.Windows.Forms.TabPage();
             this.dgvUpdaterEditor = new System.Windows.Forms.DataGridView();
+            this.dsceditidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.editidDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.editdateDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.editedbyDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.rnoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dscidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.oldroofareasqftDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.newroofareasqftDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.oldroofdiscoicareasqftDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.newroofdiscoicareasqftDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.oldroofdrywellicareasqftDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.newroofdrywellicareasqftDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.oldparkareasqftDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.newparkareasqftDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.oldparkdiscoicareasqftDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.newparkdiscoicareasqftDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.oldparkdrywellicareasqftDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.newparkdrywellicareasqftDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.updater_editor_value_changed = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dSCEDITBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.btnUpdaterHistoryReturn = new Infragistics.Win.Misc.UltraButton();
             this.ultraGroupBox1 = new Infragistics.Win.Misc.UltraGroupBox();
@@ -132,37 +153,27 @@
             this.btnImpAQC = new System.Windows.Forms.Button();
             this.lblPendingImpAChanges = new System.Windows.Forms.Label();
             this.dgvImpAQC = new System.Windows.Forms.DataGridView();
+            this.tabDBConnOptions = new System.Windows.Forms.TabPage();
+            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.btnCloseOptions = new Infragistics.Win.Misc.UltraButton();
+            this.grpBoxDbConnOptions = new Infragistics.Win.Misc.UltraGroupBox();
+            this.txtNewServerCon = new Infragistics.Win.UltraWinEditors.UltraTextEditor();
+            this.txtNewDatabaseCon = new Infragistics.Win.UltraWinEditors.UltraTextEditor();
+            this.btnChangeDBConnOption = new Infragistics.Win.Misc.UltraButton();
             this.menStripMain = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadUpdateFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.changeDatabaseConnectionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dbBindSourceDSCQC = new System.Windows.Forms.BindingSource(this.components);
             this.dbBindSourceParkQC = new System.Windows.Forms.BindingSource(this.components);
             this.dbBindSourceRoofQC = new System.Windows.Forms.BindingSource(this.components);
             this.sfdMain = new System.Windows.Forms.SaveFileDialog();
-            this.sESSIONTableAdapter = new DSCUpdater2.projectDataSetTableAdapters.SESSIONTableAdapter();
-            this.dSCEDITTableAdapter = new DSCUpdater2.projectDataSetTableAdapters.DSCEDITTableAdapter();
-            this.dsceditidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.editidDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.editdateDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.editedbyDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.rnoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dscidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.oldroofareasqftDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.newroofareasqftDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.oldroofdiscoicareasqftDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.newroofdiscoicareasqftDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.oldroofdrywellicareasqftDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.newroofdrywellicareasqftDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.oldparkareasqftDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.newparkareasqftDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.oldparkdiscoicareasqftDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.newparkdiscoicareasqftDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.oldparkdrywellicareasqftDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.newparkdrywellicareasqftDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.updater_editor_value_changed = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sESSIONTableAdapter = new DSCUpdater.projectDataSetTableAdapters.SESSIONTableAdapter();
+            this.dSCEDITTableAdapter = new DSCUpdater.projectDataSetTableAdapters.DSCEDITTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.txtFileName)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
             this.tabControlMain.SuspendLayout();
@@ -199,6 +210,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvRoofQC)).BeginInit();
             this.tabPendingImpAChanges.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvImpAQC)).BeginInit();
+            this.tabDBConnOptions.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.grpBoxDbConnOptions)).BeginInit();
+            this.grpBoxDbConnOptions.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtNewServerCon)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtNewDatabaseCon)).BeginInit();
             this.menStripMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dbBindSourceDSCQC)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dbBindSourceParkQC)).BeginInit();
@@ -271,10 +287,11 @@
             this.tabControlMain.Controls.Add(this.tabIncorrectParkICArea);
             this.tabControlMain.Controls.Add(this.tabIncorrectRoofICArea);
             this.tabControlMain.Controls.Add(this.tabPendingImpAChanges);
+            this.tabControlMain.Controls.Add(this.tabDBConnOptions);
             this.tabControlMain.Location = new System.Drawing.Point(0, 27);
             this.tabControlMain.Name = "tabControlMain";
             this.tabControlMain.SelectedIndex = 0;
-            this.tabControlMain.Size = new System.Drawing.Size(818, 437);
+            this.tabControlMain.Size = new System.Drawing.Size(832, 437);
             this.tabControlMain.TabIndex = 0;
             // 
             // tabMain
@@ -288,7 +305,7 @@
             this.tabMain.Location = new System.Drawing.Point(4, 22);
             this.tabMain.Name = "tabMain";
             this.tabMain.Padding = new System.Windows.Forms.Padding(3);
-            this.tabMain.Size = new System.Drawing.Size(810, 411);
+            this.tabMain.Size = new System.Drawing.Size(824, 411);
             this.tabMain.TabIndex = 0;
             this.tabMain.Text = "Load Update File";
             this.tabMain.UseVisualStyleBackColor = true;
@@ -329,7 +346,7 @@
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
             this.toolStripProgressBar1});
-            this.statusStrip1.Location = new System.Drawing.Point(5, 386);
+            this.statusStrip1.Location = new System.Drawing.Point(12, 386);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(275, 22);
             this.statusStrip1.TabIndex = 10;
@@ -359,9 +376,9 @@
             this.tabLoadedUpdateReview.Location = new System.Drawing.Point(4, 22);
             this.tabLoadedUpdateReview.Name = "tabLoadedUpdateReview";
             this.tabLoadedUpdateReview.Padding = new System.Windows.Forms.Padding(3);
-            this.tabLoadedUpdateReview.Size = new System.Drawing.Size(810, 411);
+            this.tabLoadedUpdateReview.Size = new System.Drawing.Size(824, 411);
             this.tabLoadedUpdateReview.TabIndex = 1;
-            this.tabLoadedUpdateReview.Text = "Review Loaded Update File";
+            this.tabLoadedUpdateReview.Text = "Update File Review";
             this.tabLoadedUpdateReview.UseVisualStyleBackColor = true;
             // 
             // statusStrip2
@@ -372,7 +389,7 @@
             this.statusStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel2,
             this.toolStripProgressBar2});
-            this.statusStrip2.Location = new System.Drawing.Point(5, 386);
+            this.statusStrip2.Location = new System.Drawing.Point(12, 386);
             this.statusStrip2.Name = "statusStrip2";
             this.statusStrip2.Size = new System.Drawing.Size(275, 22);
             this.statusStrip2.Stretch = false;
@@ -419,7 +436,7 @@
             this.tabUpdaterHistory.Location = new System.Drawing.Point(4, 22);
             this.tabUpdaterHistory.Name = "tabUpdaterHistory";
             this.tabUpdaterHistory.Padding = new System.Windows.Forms.Padding(3);
-            this.tabUpdaterHistory.Size = new System.Drawing.Size(810, 411);
+            this.tabUpdaterHistory.Size = new System.Drawing.Size(824, 411);
             this.tabUpdaterHistory.TabIndex = 2;
             this.tabUpdaterHistory.Text = "Updater History";
             this.tabUpdaterHistory.UseVisualStyleBackColor = true;
@@ -521,6 +538,7 @@
             // 
             // dgvUpdaterHistory
             // 
+            this.dgvUpdaterHistory.AllowUserToAddRows = false;
             this.dgvUpdaterHistory.AllowUserToDeleteRows = false;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.dgvUpdaterHistory.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
@@ -614,13 +632,15 @@
             this.tabUpdaterEditor.Location = new System.Drawing.Point(4, 22);
             this.tabUpdaterEditor.Name = "tabUpdaterEditor";
             this.tabUpdaterEditor.Padding = new System.Windows.Forms.Padding(3);
-            this.tabUpdaterEditor.Size = new System.Drawing.Size(810, 411);
+            this.tabUpdaterEditor.Size = new System.Drawing.Size(824, 411);
             this.tabUpdaterEditor.TabIndex = 3;
             this.tabUpdaterEditor.Text = "Updater Editor";
             this.tabUpdaterEditor.UseVisualStyleBackColor = true;
             // 
             // dgvUpdaterEditor
             // 
+            this.dgvUpdaterEditor.AllowUserToAddRows = false;
+            this.dgvUpdaterEditor.AllowUserToDeleteRows = false;
             this.dgvUpdaterEditor.AutoGenerateColumns = false;
             this.dgvUpdaterEditor.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvUpdaterEditor.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -649,6 +669,121 @@
             this.dgvUpdaterEditor.Size = new System.Drawing.Size(796, 130);
             this.dgvUpdaterEditor.TabIndex = 24;
             this.dgvUpdaterEditor.SelectionChanged += new System.EventHandler(this.dgvUpdaterEditor_SelectionChanged);
+            // 
+            // dsceditidDataGridViewTextBoxColumn
+            // 
+            this.dsceditidDataGridViewTextBoxColumn.DataPropertyName = "dsc_edit_id";
+            this.dsceditidDataGridViewTextBoxColumn.HeaderText = "DSC Edit ID";
+            this.dsceditidDataGridViewTextBoxColumn.Name = "dsceditidDataGridViewTextBoxColumn";
+            this.dsceditidDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // editidDataGridViewTextBoxColumn1
+            // 
+            this.editidDataGridViewTextBoxColumn1.DataPropertyName = "edit_id";
+            this.editidDataGridViewTextBoxColumn1.HeaderText = "Edit ID";
+            this.editidDataGridViewTextBoxColumn1.Name = "editidDataGridViewTextBoxColumn1";
+            // 
+            // editdateDataGridViewTextBoxColumn1
+            // 
+            this.editdateDataGridViewTextBoxColumn1.DataPropertyName = "edit_date";
+            this.editdateDataGridViewTextBoxColumn1.HeaderText = "Edit Date";
+            this.editdateDataGridViewTextBoxColumn1.Name = "editdateDataGridViewTextBoxColumn1";
+            // 
+            // editedbyDataGridViewTextBoxColumn1
+            // 
+            this.editedbyDataGridViewTextBoxColumn1.DataPropertyName = "edited_by";
+            this.editedbyDataGridViewTextBoxColumn1.HeaderText = "Edited By";
+            this.editedbyDataGridViewTextBoxColumn1.Name = "editedbyDataGridViewTextBoxColumn1";
+            // 
+            // rnoDataGridViewTextBoxColumn
+            // 
+            this.rnoDataGridViewTextBoxColumn.DataPropertyName = "rno";
+            this.rnoDataGridViewTextBoxColumn.HeaderText = "RNO";
+            this.rnoDataGridViewTextBoxColumn.Name = "rnoDataGridViewTextBoxColumn";
+            // 
+            // dscidDataGridViewTextBoxColumn
+            // 
+            this.dscidDataGridViewTextBoxColumn.DataPropertyName = "dsc_id";
+            this.dscidDataGridViewTextBoxColumn.HeaderText = "DSC ID";
+            this.dscidDataGridViewTextBoxColumn.Name = "dscidDataGridViewTextBoxColumn";
+            // 
+            // oldroofareasqftDataGridViewTextBoxColumn
+            // 
+            this.oldroofareasqftDataGridViewTextBoxColumn.DataPropertyName = "old_roof_area_sqft";
+            this.oldroofareasqftDataGridViewTextBoxColumn.HeaderText = "Old Roof Area (sqft)";
+            this.oldroofareasqftDataGridViewTextBoxColumn.Name = "oldroofareasqftDataGridViewTextBoxColumn";
+            // 
+            // newroofareasqftDataGridViewTextBoxColumn
+            // 
+            this.newroofareasqftDataGridViewTextBoxColumn.DataPropertyName = "new_roof_area_sqft";
+            this.newroofareasqftDataGridViewTextBoxColumn.HeaderText = "New Roof Area (sqft)";
+            this.newroofareasqftDataGridViewTextBoxColumn.Name = "newroofareasqftDataGridViewTextBoxColumn";
+            // 
+            // oldroofdiscoicareasqftDataGridViewTextBoxColumn
+            // 
+            this.oldroofdiscoicareasqftDataGridViewTextBoxColumn.DataPropertyName = "old_roof_disco_ic_area_sqft";
+            this.oldroofdiscoicareasqftDataGridViewTextBoxColumn.HeaderText = "Old Roof DISCO IC Area (sqft)";
+            this.oldroofdiscoicareasqftDataGridViewTextBoxColumn.Name = "oldroofdiscoicareasqftDataGridViewTextBoxColumn";
+            // 
+            // newroofdiscoicareasqftDataGridViewTextBoxColumn
+            // 
+            this.newroofdiscoicareasqftDataGridViewTextBoxColumn.DataPropertyName = "new_roof_disco_ic_area_sqft";
+            this.newroofdiscoicareasqftDataGridViewTextBoxColumn.HeaderText = "New Roof DISCO IC Area (sqft)";
+            this.newroofdiscoicareasqftDataGridViewTextBoxColumn.Name = "newroofdiscoicareasqftDataGridViewTextBoxColumn";
+            // 
+            // oldroofdrywellicareasqftDataGridViewTextBoxColumn
+            // 
+            this.oldroofdrywellicareasqftDataGridViewTextBoxColumn.DataPropertyName = "old_roof_drywell_ic_area_sqft";
+            this.oldroofdrywellicareasqftDataGridViewTextBoxColumn.HeaderText = "Old Roof Drywell IC Area (sqft)";
+            this.oldroofdrywellicareasqftDataGridViewTextBoxColumn.Name = "oldroofdrywellicareasqftDataGridViewTextBoxColumn";
+            // 
+            // newroofdrywellicareasqftDataGridViewTextBoxColumn
+            // 
+            this.newroofdrywellicareasqftDataGridViewTextBoxColumn.DataPropertyName = "new_roof_drywell_ic_area_sqft";
+            this.newroofdrywellicareasqftDataGridViewTextBoxColumn.HeaderText = "New Roof Drywell IC Area (sqft)";
+            this.newroofdrywellicareasqftDataGridViewTextBoxColumn.Name = "newroofdrywellicareasqftDataGridViewTextBoxColumn";
+            // 
+            // oldparkareasqftDataGridViewTextBoxColumn
+            // 
+            this.oldparkareasqftDataGridViewTextBoxColumn.DataPropertyName = "old_park_area_sqft";
+            this.oldparkareasqftDataGridViewTextBoxColumn.HeaderText = "Old Park Area (sqft)";
+            this.oldparkareasqftDataGridViewTextBoxColumn.Name = "oldparkareasqftDataGridViewTextBoxColumn";
+            // 
+            // newparkareasqftDataGridViewTextBoxColumn
+            // 
+            this.newparkareasqftDataGridViewTextBoxColumn.DataPropertyName = "new_park_area_sqft";
+            this.newparkareasqftDataGridViewTextBoxColumn.HeaderText = "New Park Area (sqft)";
+            this.newparkareasqftDataGridViewTextBoxColumn.Name = "newparkareasqftDataGridViewTextBoxColumn";
+            // 
+            // oldparkdiscoicareasqftDataGridViewTextBoxColumn
+            // 
+            this.oldparkdiscoicareasqftDataGridViewTextBoxColumn.DataPropertyName = "old_park_disco_ic_area_sqft";
+            this.oldparkdiscoicareasqftDataGridViewTextBoxColumn.HeaderText = "Old Park DISCO IC Area (sqft)";
+            this.oldparkdiscoicareasqftDataGridViewTextBoxColumn.Name = "oldparkdiscoicareasqftDataGridViewTextBoxColumn";
+            // 
+            // newparkdiscoicareasqftDataGridViewTextBoxColumn
+            // 
+            this.newparkdiscoicareasqftDataGridViewTextBoxColumn.DataPropertyName = "new_park_disco_ic_area_sqft";
+            this.newparkdiscoicareasqftDataGridViewTextBoxColumn.HeaderText = "New Park DISCO IC Area (sqft)";
+            this.newparkdiscoicareasqftDataGridViewTextBoxColumn.Name = "newparkdiscoicareasqftDataGridViewTextBoxColumn";
+            // 
+            // oldparkdrywellicareasqftDataGridViewTextBoxColumn
+            // 
+            this.oldparkdrywellicareasqftDataGridViewTextBoxColumn.DataPropertyName = "old_park_drywell_ic_area_sqft";
+            this.oldparkdrywellicareasqftDataGridViewTextBoxColumn.HeaderText = "Old Park Drywell IC Area (sqft)";
+            this.oldparkdrywellicareasqftDataGridViewTextBoxColumn.Name = "oldparkdrywellicareasqftDataGridViewTextBoxColumn";
+            // 
+            // newparkdrywellicareasqftDataGridViewTextBoxColumn
+            // 
+            this.newparkdrywellicareasqftDataGridViewTextBoxColumn.DataPropertyName = "new_park_drywell_ic_area_sqft";
+            this.newparkdrywellicareasqftDataGridViewTextBoxColumn.HeaderText = "New Park Drywell IC Area (sqft)";
+            this.newparkdrywellicareasqftDataGridViewTextBoxColumn.Name = "newparkdrywellicareasqftDataGridViewTextBoxColumn";
+            // 
+            // updater_editor_value_changed
+            // 
+            this.updater_editor_value_changed.DataPropertyName = "updater_editor_value_changed";
+            this.updater_editor_value_changed.HeaderText = "Value Changed";
+            this.updater_editor_value_changed.Name = "updater_editor_value_changed";
             // 
             // dSCEDITBindingSource
             // 
@@ -960,7 +1095,7 @@
             this.tabMissingDSC.Location = new System.Drawing.Point(4, 22);
             this.tabMissingDSC.Name = "tabMissingDSC";
             this.tabMissingDSC.Padding = new System.Windows.Forms.Padding(3);
-            this.tabMissingDSC.Size = new System.Drawing.Size(810, 411);
+            this.tabMissingDSC.Size = new System.Drawing.Size(824, 411);
             this.tabMissingDSC.TabIndex = 4;
             this.tabMissingDSC.Text = "Missing DSC Records";
             this.tabMissingDSC.UseVisualStyleBackColor = true;
@@ -1007,7 +1142,7 @@
             this.tabIncorrectParkICArea.Location = new System.Drawing.Point(4, 22);
             this.tabIncorrectParkICArea.Name = "tabIncorrectParkICArea";
             this.tabIncorrectParkICArea.Padding = new System.Windows.Forms.Padding(3);
-            this.tabIncorrectParkICArea.Size = new System.Drawing.Size(810, 411);
+            this.tabIncorrectParkICArea.Size = new System.Drawing.Size(824, 411);
             this.tabIncorrectParkICArea.TabIndex = 6;
             this.tabIncorrectParkICArea.Text = "Park IC Error";
             this.tabIncorrectParkICArea.UseVisualStyleBackColor = true;
@@ -1051,7 +1186,7 @@
             this.tabIncorrectRoofICArea.Location = new System.Drawing.Point(4, 22);
             this.tabIncorrectRoofICArea.Name = "tabIncorrectRoofICArea";
             this.tabIncorrectRoofICArea.Padding = new System.Windows.Forms.Padding(3);
-            this.tabIncorrectRoofICArea.Size = new System.Drawing.Size(810, 411);
+            this.tabIncorrectRoofICArea.Size = new System.Drawing.Size(824, 411);
             this.tabIncorrectRoofICArea.TabIndex = 5;
             this.tabIncorrectRoofICArea.Text = "Roof IC Error";
             this.tabIncorrectRoofICArea.UseVisualStyleBackColor = true;
@@ -1095,7 +1230,7 @@
             this.tabPendingImpAChanges.Location = new System.Drawing.Point(4, 22);
             this.tabPendingImpAChanges.Name = "tabPendingImpAChanges";
             this.tabPendingImpAChanges.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPendingImpAChanges.Size = new System.Drawing.Size(810, 411);
+            this.tabPendingImpAChanges.Size = new System.Drawing.Size(824, 411);
             this.tabPendingImpAChanges.TabIndex = 7;
             this.tabPendingImpAChanges.Text = "Pending Impervious Changes";
             this.tabPendingImpAChanges.UseVisualStyleBackColor = true;
@@ -1129,14 +1264,87 @@
             this.dgvImpAQC.Size = new System.Drawing.Size(379, 150);
             this.dgvImpAQC.TabIndex = 0;
             // 
+            // tabDBConnOptions
+            // 
+            this.tabDBConnOptions.Controls.Add(this.listBox1);
+            this.tabDBConnOptions.Controls.Add(this.btnCloseOptions);
+            this.tabDBConnOptions.Controls.Add(this.grpBoxDbConnOptions);
+            this.tabDBConnOptions.Location = new System.Drawing.Point(4, 22);
+            this.tabDBConnOptions.Name = "tabDBConnOptions";
+            this.tabDBConnOptions.Padding = new System.Windows.Forms.Padding(3);
+            this.tabDBConnOptions.Size = new System.Drawing.Size(824, 411);
+            this.tabDBConnOptions.TabIndex = 8;
+            this.tabDBConnOptions.Text = "Options";
+            this.tabDBConnOptions.UseVisualStyleBackColor = true;
+            // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.Location = new System.Drawing.Point(486, 82);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(120, 95);
+            this.listBox1.TabIndex = 5;
+            // 
+            // btnCloseOptions
+            // 
+            this.btnCloseOptions.ButtonStyle = Infragistics.Win.UIElementButtonStyle.WindowsVistaButton;
+            this.btnCloseOptions.Location = new System.Drawing.Point(715, 382);
+            this.btnCloseOptions.Name = "btnCloseOptions";
+            this.btnCloseOptions.Size = new System.Drawing.Size(103, 23);
+            this.btnCloseOptions.TabIndex = 4;
+            this.btnCloseOptions.Text = "Close Options";
+            this.btnCloseOptions.Click += new System.EventHandler(this.btnCloseOptions_Click);
+            // 
+            // grpBoxDbConnOptions
+            // 
+            this.grpBoxDbConnOptions.Controls.Add(this.txtNewServerCon);
+            this.grpBoxDbConnOptions.Controls.Add(this.txtNewDatabaseCon);
+            this.grpBoxDbConnOptions.Controls.Add(this.btnChangeDBConnOption);
+            this.grpBoxDbConnOptions.Location = new System.Drawing.Point(33, 30);
+            this.grpBoxDbConnOptions.Name = "grpBoxDbConnOptions";
+            this.grpBoxDbConnOptions.Size = new System.Drawing.Size(364, 187);
+            this.grpBoxDbConnOptions.TabIndex = 3;
+            this.grpBoxDbConnOptions.Text = "Database Connection Properties";
+            // 
+            // txtNewServerCon
+            // 
+            this.txtNewServerCon.Location = new System.Drawing.Point(33, 51);
+            this.txtNewServerCon.Name = "txtNewServerCon";
+            this.txtNewServerCon.NullText = "Type to specify new server (defaults to SIRTOBY)";
+            appearance11.FontData.ItalicAsString = "True";
+            this.txtNewServerCon.NullTextAppearance = appearance11;
+            this.txtNewServerCon.Size = new System.Drawing.Size(293, 21);
+            this.txtNewServerCon.TabIndex = 0;
+            // 
+            // txtNewDatabaseCon
+            // 
+            this.txtNewDatabaseCon.Location = new System.Drawing.Point(33, 78);
+            this.txtNewDatabaseCon.Name = "txtNewDatabaseCon";
+            this.txtNewDatabaseCon.NullText = "Type to specify new database (defaults to DSCEDITOR)";
+            appearance10.FontData.ItalicAsString = "True";
+            this.txtNewDatabaseCon.NullTextAppearance = appearance10;
+            this.txtNewDatabaseCon.Size = new System.Drawing.Size(293, 21);
+            this.txtNewDatabaseCon.TabIndex = 2;
+            // 
+            // btnChangeDBConnOption
+            // 
+            this.btnChangeDBConnOption.ButtonStyle = Infragistics.Win.UIElementButtonStyle.WindowsVistaButton;
+            this.btnChangeDBConnOption.Location = new System.Drawing.Point(33, 124);
+            this.btnChangeDBConnOption.Name = "btnChangeDBConnOption";
+            this.btnChangeDBConnOption.Size = new System.Drawing.Size(159, 23);
+            this.btnChangeDBConnOption.TabIndex = 1;
+            this.btnChangeDBConnOption.Text = "Change Database Options";
+            this.btnChangeDBConnOption.Click += new System.EventHandler(this.btnChangeDBConnOption_Click);
+            // 
             // menStripMain
             // 
             this.menStripMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
+            this.optionsToolStripMenuItem,
             this.helpToolStripMenuItem});
             this.menStripMain.Location = new System.Drawing.Point(0, 0);
             this.menStripMain.Name = "menStripMain";
-            this.menStripMain.Size = new System.Drawing.Size(830, 24);
+            this.menStripMain.Size = new System.Drawing.Size(867, 24);
             this.menStripMain.TabIndex = 0;
             this.menStripMain.Text = "menuStrip1";
             // 
@@ -1164,6 +1372,21 @@
             this.exitToolStripMenuItem.Text = "E&xit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
+            // optionsToolStripMenuItem
+            // 
+            this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.changeDatabaseConnectionsToolStripMenuItem});
+            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
+            this.optionsToolStripMenuItem.Text = "Options";
+            // 
+            // changeDatabaseConnectionsToolStripMenuItem
+            // 
+            this.changeDatabaseConnectionsToolStripMenuItem.Name = "changeDatabaseConnectionsToolStripMenuItem";
+            this.changeDatabaseConnectionsToolStripMenuItem.Size = new System.Drawing.Size(245, 22);
+            this.changeDatabaseConnectionsToolStripMenuItem.Text = "Change Database Connections...";
+            this.changeDatabaseConnectionsToolStripMenuItem.Click += new System.EventHandler(this.changeDatabaseConnectionsToolStripMenuItem_Click);
+            // 
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -1187,132 +1410,17 @@
             // 
             this.dSCEDITTableAdapter.ClearBeforeFill = true;
             // 
-            // dsceditidDataGridViewTextBoxColumn
-            // 
-            this.dsceditidDataGridViewTextBoxColumn.DataPropertyName = "dsc_edit_id";
-            this.dsceditidDataGridViewTextBoxColumn.HeaderText = "DSC Edit ID";
-            this.dsceditidDataGridViewTextBoxColumn.Name = "dsceditidDataGridViewTextBoxColumn";
-            this.dsceditidDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // editidDataGridViewTextBoxColumn1
-            // 
-            this.editidDataGridViewTextBoxColumn1.DataPropertyName = "edit_id";
-            this.editidDataGridViewTextBoxColumn1.HeaderText = "Edit ID";
-            this.editidDataGridViewTextBoxColumn1.Name = "editidDataGridViewTextBoxColumn1";
-            // 
-            // editdateDataGridViewTextBoxColumn1
-            // 
-            this.editdateDataGridViewTextBoxColumn1.DataPropertyName = "edit_date";
-            this.editdateDataGridViewTextBoxColumn1.HeaderText = "Edit Date";
-            this.editdateDataGridViewTextBoxColumn1.Name = "editdateDataGridViewTextBoxColumn1";
-            // 
-            // editedbyDataGridViewTextBoxColumn1
-            // 
-            this.editedbyDataGridViewTextBoxColumn1.DataPropertyName = "edited_by";
-            this.editedbyDataGridViewTextBoxColumn1.HeaderText = "Edited By";
-            this.editedbyDataGridViewTextBoxColumn1.Name = "editedbyDataGridViewTextBoxColumn1";
-            // 
-            // rnoDataGridViewTextBoxColumn
-            // 
-            this.rnoDataGridViewTextBoxColumn.DataPropertyName = "rno";
-            this.rnoDataGridViewTextBoxColumn.HeaderText = "RNO";
-            this.rnoDataGridViewTextBoxColumn.Name = "rnoDataGridViewTextBoxColumn";
-            // 
-            // dscidDataGridViewTextBoxColumn
-            // 
-            this.dscidDataGridViewTextBoxColumn.DataPropertyName = "dsc_id";
-            this.dscidDataGridViewTextBoxColumn.HeaderText = "DSC ID";
-            this.dscidDataGridViewTextBoxColumn.Name = "dscidDataGridViewTextBoxColumn";
-            // 
-            // oldroofareasqftDataGridViewTextBoxColumn
-            // 
-            this.oldroofareasqftDataGridViewTextBoxColumn.DataPropertyName = "old_roof_area_sqft";
-            this.oldroofareasqftDataGridViewTextBoxColumn.HeaderText = "Old Roof Area (sqft)";
-            this.oldroofareasqftDataGridViewTextBoxColumn.Name = "oldroofareasqftDataGridViewTextBoxColumn";
-            // 
-            // newroofareasqftDataGridViewTextBoxColumn
-            // 
-            this.newroofareasqftDataGridViewTextBoxColumn.DataPropertyName = "new_roof_area_sqft";
-            this.newroofareasqftDataGridViewTextBoxColumn.HeaderText = "New Roof Area (sqft)";
-            this.newroofareasqftDataGridViewTextBoxColumn.Name = "newroofareasqftDataGridViewTextBoxColumn";
-            // 
-            // oldroofdiscoicareasqftDataGridViewTextBoxColumn
-            // 
-            this.oldroofdiscoicareasqftDataGridViewTextBoxColumn.DataPropertyName = "old_roof_disco_ic_area_sqft";
-            this.oldroofdiscoicareasqftDataGridViewTextBoxColumn.HeaderText = "Old Roof DISCO IC Area (sqft)";
-            this.oldroofdiscoicareasqftDataGridViewTextBoxColumn.Name = "oldroofdiscoicareasqftDataGridViewTextBoxColumn";
-            // 
-            // newroofdiscoicareasqftDataGridViewTextBoxColumn
-            // 
-            this.newroofdiscoicareasqftDataGridViewTextBoxColumn.DataPropertyName = "new_roof_disco_ic_area_sqft";
-            this.newroofdiscoicareasqftDataGridViewTextBoxColumn.HeaderText = "New Roof DISCO IC Area (sqft)";
-            this.newroofdiscoicareasqftDataGridViewTextBoxColumn.Name = "newroofdiscoicareasqftDataGridViewTextBoxColumn";
-            // 
-            // oldroofdrywellicareasqftDataGridViewTextBoxColumn
-            // 
-            this.oldroofdrywellicareasqftDataGridViewTextBoxColumn.DataPropertyName = "old_roof_drywell_ic_area_sqft";
-            this.oldroofdrywellicareasqftDataGridViewTextBoxColumn.HeaderText = "Old Roof Drywell IC Area (sqft)";
-            this.oldroofdrywellicareasqftDataGridViewTextBoxColumn.Name = "oldroofdrywellicareasqftDataGridViewTextBoxColumn";
-            // 
-            // newroofdrywellicareasqftDataGridViewTextBoxColumn
-            // 
-            this.newroofdrywellicareasqftDataGridViewTextBoxColumn.DataPropertyName = "new_roof_drywell_ic_area_sqft";
-            this.newroofdrywellicareasqftDataGridViewTextBoxColumn.HeaderText = "New Roof Drywell IC Area (sqft)";
-            this.newroofdrywellicareasqftDataGridViewTextBoxColumn.Name = "newroofdrywellicareasqftDataGridViewTextBoxColumn";
-            // 
-            // oldparkareasqftDataGridViewTextBoxColumn
-            // 
-            this.oldparkareasqftDataGridViewTextBoxColumn.DataPropertyName = "old_park_area_sqft";
-            this.oldparkareasqftDataGridViewTextBoxColumn.HeaderText = "Old Park Area (sqft)";
-            this.oldparkareasqftDataGridViewTextBoxColumn.Name = "oldparkareasqftDataGridViewTextBoxColumn";
-            // 
-            // newparkareasqftDataGridViewTextBoxColumn
-            // 
-            this.newparkareasqftDataGridViewTextBoxColumn.DataPropertyName = "new_park_area_sqft";
-            this.newparkareasqftDataGridViewTextBoxColumn.HeaderText = "New Park Area (sqft)";
-            this.newparkareasqftDataGridViewTextBoxColumn.Name = "newparkareasqftDataGridViewTextBoxColumn";
-            // 
-            // oldparkdiscoicareasqftDataGridViewTextBoxColumn
-            // 
-            this.oldparkdiscoicareasqftDataGridViewTextBoxColumn.DataPropertyName = "old_park_disco_ic_area_sqft";
-            this.oldparkdiscoicareasqftDataGridViewTextBoxColumn.HeaderText = "Old Park DISCO IC Area (sqft)";
-            this.oldparkdiscoicareasqftDataGridViewTextBoxColumn.Name = "oldparkdiscoicareasqftDataGridViewTextBoxColumn";
-            // 
-            // newparkdiscoicareasqftDataGridViewTextBoxColumn
-            // 
-            this.newparkdiscoicareasqftDataGridViewTextBoxColumn.DataPropertyName = "new_park_disco_ic_area_sqft";
-            this.newparkdiscoicareasqftDataGridViewTextBoxColumn.HeaderText = "New Park DISCO IC Area (sqft)";
-            this.newparkdiscoicareasqftDataGridViewTextBoxColumn.Name = "newparkdiscoicareasqftDataGridViewTextBoxColumn";
-            // 
-            // oldparkdrywellicareasqftDataGridViewTextBoxColumn
-            // 
-            this.oldparkdrywellicareasqftDataGridViewTextBoxColumn.DataPropertyName = "old_park_drywell_ic_area_sqft";
-            this.oldparkdrywellicareasqftDataGridViewTextBoxColumn.HeaderText = "Old Park Drywell IC Area (sqft)";
-            this.oldparkdrywellicareasqftDataGridViewTextBoxColumn.Name = "oldparkdrywellicareasqftDataGridViewTextBoxColumn";
-            // 
-            // newparkdrywellicareasqftDataGridViewTextBoxColumn
-            // 
-            this.newparkdrywellicareasqftDataGridViewTextBoxColumn.DataPropertyName = "new_park_drywell_ic_area_sqft";
-            this.newparkdrywellicareasqftDataGridViewTextBoxColumn.HeaderText = "New Park Drywell IC Area (sqft)";
-            this.newparkdrywellicareasqftDataGridViewTextBoxColumn.Name = "newparkdrywellicareasqftDataGridViewTextBoxColumn";
-            // 
-            // updater_editor_value_changed
-            // 
-            this.updater_editor_value_changed.DataPropertyName = "updater_editor_value_changed";
-            this.updater_editor_value_changed.HeaderText = "Value Changed";
-            this.updater_editor_value_changed.Name = "updater_editor_value_changed";
-            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(830, 476);
+            this.ClientSize = new System.Drawing.Size(867, 476);
             this.Controls.Add(this.tabControlMain);
             this.Controls.Add(this.menStripMain);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menStripMain;
             this.Name = "frmMain";
-            this.Text = " ";
+            this.Text = " DSCUpdater";
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmMain_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.txtFileName)).EndInit();
@@ -1362,6 +1470,12 @@
             this.tabPendingImpAChanges.ResumeLayout(false);
             this.tabPendingImpAChanges.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvImpAQC)).EndInit();
+            this.tabDBConnOptions.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.grpBoxDbConnOptions)).EndInit();
+            this.grpBoxDbConnOptions.ResumeLayout(false);
+            this.grpBoxDbConnOptions.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtNewServerCon)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtNewDatabaseCon)).EndInit();
             this.menStripMain.ResumeLayout(false);
             this.menStripMain.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dbBindSourceDSCQC)).EndInit();
@@ -1401,7 +1515,7 @@
         private System.Windows.Forms.Button button1;
         private projectDataSet projectDataSet;
         private System.Windows.Forms.BindingSource sESSIONBindingSource;
-        private DSCUpdater2.projectDataSetTableAdapters.SESSIONTableAdapter sESSIONTableAdapter;
+        private DSCUpdater.projectDataSetTableAdapters.SESSIONTableAdapter sESSIONTableAdapter;
         private System.Windows.Forms.BindingNavigator bindingNavigator1;
         private System.Windows.Forms.ToolStripLabel bindingNavigatorCountItem;
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveFirstItem;
@@ -1424,7 +1538,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn editdateDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn editedbyDataGridViewTextBoxColumn;
         private System.Windows.Forms.BindingSource dSCEDITBindingSource;
-        private DSCUpdater2.projectDataSetTableAdapters.DSCEDITTableAdapter dSCEDITTableAdapter;
+        private DSCUpdater.projectDataSetTableAdapters.DSCEDITTableAdapter dSCEDITTableAdapter;
         public Infragistics.Win.UltraWinEditors.UltraTextEditor txtNewRoofArea;
         public Infragistics.Win.UltraWinEditors.UltraTextEditor txtNewRoofDrywellICArea;
         public Infragistics.Win.UltraWinEditors.UltraTextEditor txtNewRoofDISCOICArea;
@@ -1494,6 +1608,15 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn oldparkdrywellicareasqftDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn newparkdrywellicareasqftDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn updater_editor_value_changed;
+        private System.Windows.Forms.TabPage tabDBConnOptions;
+        private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem changeDatabaseConnectionsToolStripMenuItem;
+        private Infragistics.Win.Misc.UltraButton btnChangeDBConnOption;
+        private Infragistics.Win.UltraWinEditors.UltraTextEditor txtNewServerCon;
+        private Infragistics.Win.UltraWinEditors.UltraTextEditor txtNewDatabaseCon;
+        private Infragistics.Win.Misc.UltraGroupBox grpBoxDbConnOptions;
+        private Infragistics.Win.Misc.UltraButton btnCloseOptions;
+        private System.Windows.Forms.ListBox listBox1;
     }
 }
 

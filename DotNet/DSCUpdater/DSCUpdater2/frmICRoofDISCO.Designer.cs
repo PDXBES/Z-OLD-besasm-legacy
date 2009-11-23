@@ -1,4 +1,4 @@
-﻿namespace DSCUpdater2
+﻿namespace DSCUpdater
 {
     partial class frmICRoofDISCO
     {

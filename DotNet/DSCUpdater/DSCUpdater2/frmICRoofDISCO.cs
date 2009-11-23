@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace DSCUpdater2
+namespace DSCUpdater
 {
     public partial class frmICRoofDISCO : Form
     {
