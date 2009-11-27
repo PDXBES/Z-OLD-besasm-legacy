@@ -374,7 +374,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:DSCUpdaterSetup"
         "ProductCode" = "8:{1A7F9C89-BB81-49C2-9DFC-E77D25176D9D}"
-        "PackageCode" = "8:{70EB3878-5642-4203-94C3-E684E99620D9}"
+        "PackageCode" = "8:{90B5ABFB-2555-4E90-AAD3-627FC0933D5C}"
         "UpgradeCode" = "8:{3B561B39-FCE2-419A-876D-F55EEBD60944}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:FALSE"

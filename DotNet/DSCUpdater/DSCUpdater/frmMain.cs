@@ -1556,7 +1556,7 @@ namespace DSCUpdater
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string fi;
-            fi = @"\\Cassio\asm_apps\Apps\DSCUpdater\publish.htm";
+            fi = @"\\Cassio\asm_apps\Apps\DSCUpdater\DSCUpdaterPublish.htm";
             System.Diagnostics.Process.Start("IEXPLORE.EXE", fi);
         }
 
