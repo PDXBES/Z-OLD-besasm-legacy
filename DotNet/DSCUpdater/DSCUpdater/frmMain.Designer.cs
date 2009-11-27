@@ -154,7 +154,6 @@
             this.lblPendingImpAChanges = new System.Windows.Forms.Label();
             this.dgvImpAQC = new System.Windows.Forms.DataGridView();
             this.tabDBConnOptions = new System.Windows.Forms.TabPage();
-            this.listBox1 = new System.Windows.Forms.ListBox();
             this.btnCloseOptions = new Infragistics.Win.Misc.UltraButton();
             this.grpBoxDbConnOptions = new Infragistics.Win.Misc.UltraGroupBox();
             this.txtNewServerCon = new Infragistics.Win.UltraWinEditors.UltraTextEditor();
@@ -1266,7 +1265,6 @@
             // 
             // tabDBConnOptions
             // 
-            this.tabDBConnOptions.Controls.Add(this.listBox1);
             this.tabDBConnOptions.Controls.Add(this.btnCloseOptions);
             this.tabDBConnOptions.Controls.Add(this.grpBoxDbConnOptions);
             this.tabDBConnOptions.Location = new System.Drawing.Point(4, 22);
@@ -1276,14 +1274,6 @@
             this.tabDBConnOptions.TabIndex = 8;
             this.tabDBConnOptions.Text = "Options";
             this.tabDBConnOptions.UseVisualStyleBackColor = true;
-            // 
-            // listBox1
-            // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(486, 82);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(120, 95);
-            this.listBox1.TabIndex = 5;
             // 
             // btnCloseOptions
             // 
@@ -1616,7 +1606,6 @@
         private Infragistics.Win.UltraWinEditors.UltraTextEditor txtNewDatabaseCon;
         private Infragistics.Win.Misc.UltraGroupBox grpBoxDbConnOptions;
         private Infragistics.Win.Misc.UltraButton btnCloseOptions;
-        private System.Windows.Forms.ListBox listBox1;
     }
 }
 

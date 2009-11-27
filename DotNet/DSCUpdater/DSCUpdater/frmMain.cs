@@ -33,9 +33,9 @@ namespace DSCUpdater
         public int newRoofICArea = 0;
         public int newRoofArea = 0;
         public int newParkArea = 0;
-        //public int editID = 0;
         public int selectedIndex = 0;
         public int impAQCCounter = 0;
+        public string sqlConStr = "Data Source=WS09884\\SQLEXPRESS;Initial Catalog=DSCEDITOR;Integrated Security=True";
 
         SqlDataAdapter daUpdaterEditor;
         DataTable dtUpdaterEditor;
@@ -92,62 +92,6 @@ namespace DSCUpdater
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            #region XMLTransactions
-
-            #region LoadXMLNodes
-            //Clear all of the items out of the list box
-            listBox1.Items.Clear();
-
-            //the path to the xml file
-            string path = "DSCUpdaterConfig.xml";
-
-            //Open the filestream
-            FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
-
-            //create the xmldocument
-            System.Xml.XmlDocument CXML = new System.Xml.XmlDocument();
-
-            //load the xml into the XmlDocument
-            CXML.Load(fs);
-
-            //Get the number of nodes in the xml document
-            for (int i = 0; i < CXML.DocumentElement.ChildNodes.Count; i++)
-            {
-                //Add the innertext of the xml document to the listbox
-                listBox1.Items.AddRange(new object[] { CXML.DocumentElement.ChildNodes[i].InnerText });
-            }
-
-            //Close the filestream
-            fs.Close();
-            #endregion
-
-            #region AddXMLNodes
-
-            #endregion
-
-            #region RemoveXMLNodes
-
-            #endregion
-
-            #region AddXMLAttribute
-
-            #endregion
-
-            #region ChangeXMLAttributeContent
-
-            #endregion
-
-
-
-            #endregion
-
-            string strConn;
-            strConn = ConfigurationSettings.AppSettings["AppSQLConnection"];
-            SqlConnection sqlConnection = new SqlConnection();
-            sqlConnection.ConnectionString = strConn;
-            MessageBox.Show(sqlConnection.ConnectionString);
-            //sqlConnection.Open();
-
             // TODO: This line of code loads data into the 'projectDataSet.DSCEDIT' table. You can move, or remove it, as needed.
             projectDataSet.EnforceConstraints = false;
             //this.dSCEDITTableAdapter.Fill(this.projectDataSet.DSCEDIT);
@@ -155,13 +99,12 @@ namespace DSCUpdater
             this.sESSIONTableAdapter.Fill(this.projectDataSet.SESSION);
             bindingNavigator1.BindingSource = sESSIONBindingSource;
 
-            string strSQLCon = "Data Source=WS09884\\SQLEXPRESS;Initial Catalog=DSCEDITOR;Integrated Security=True";
-            SqlConnection conSQL = new SqlConnection(strSQLCon);
-            conSQL.Open();
-            SqlCommand cmdSQL = new SqlCommand();
-            cmdSQL.CommandText = "DELETE FROM USERUPDATE";
-            cmdSQL.Connection = conSQL;
-            cmdSQL.ExecuteNonQuery();
+            SqlConnection sqlCon = new SqlConnection(sqlConStr);
+            sqlCon.Open();
+            SqlCommand sqlCmd = new SqlCommand();
+            sqlCmd.CommandText = "DELETE FROM USERUPDATE";
+            sqlCmd.Connection = sqlCon;
+            sqlCmd.ExecuteNonQuery();
         }
 
         private string columnNames(DataTable dtSchemaTable, string delimiter)
@@ -179,7 +122,6 @@ namespace DSCUpdater
                 {
                     strOut += delimiter;
                 }
-
             }
             return strOut;
         }
@@ -187,16 +129,16 @@ namespace DSCUpdater
         private void ExportIMPUPDATEToCSV()
         {
             string fileOut = "C:\\temp\\IMPUPDATE.csv";
-            SqlConnection conSQL = new SqlConnection("Data Source=WS09884\\SQLEXPRESS;Initial Catalog=DSCEDITOR;Integrated Security=True");
+            SqlConnection sqlCon = new SqlConnection(sqlConStr);
             string sqlQuery = "SELECT * FROM IMPUPDATE";
-            SqlCommand cmdSQL = new SqlCommand(sqlQuery, conSQL);
-            conSQL.Open();
+            SqlCommand sqlCmd = new SqlCommand(sqlQuery, sqlCon);
+            sqlCon.Open();
 
             // Creates a SqlDataReader instance to read data from the table.
-            SqlDataReader dr = cmdSQL.ExecuteReader();
+            SqlDataReader sqlDataReader = sqlCmd.ExecuteReader();
 
             // Retrives the schema of the table.
-            DataTable dtSchema = dr.GetSchemaTable();
+            DataTable dtSchema = sqlDataReader.GetSchemaTable();
 
             // Creates the CSV file as a stream, using the given encoding.
             StreamWriter sw = new StreamWriter(fileOut, false, Encoding.ASCII);
@@ -210,13 +152,13 @@ namespace DSCUpdater
             // Reads the rows one by one from the SqlDataReader
             // transfers them to a string with the given separator character and
             // writes it to the file.
-            while (dr.Read())
+            while (sqlDataReader.Read())
             {
                 strRow = "";
-                for (int i = 0; i < dr.FieldCount; i++)
+                for (int i = 0; i < sqlDataReader.FieldCount; i++)
                 {
-                    strRow += dr.GetInt32(i);
-                    if (i < dr.FieldCount - 1)
+                    strRow += sqlDataReader.GetInt32(i);
+                    if (i < sqlDataReader.FieldCount - 1)
                     {
                         strRow += ",";
                     }
@@ -226,7 +168,7 @@ namespace DSCUpdater
 
             // Closes the text stream and the database connenction.
             sw.Close();
-            conSQL.Close();
+            sqlCon.Close();
         }    
 
         private void CreateTable()
@@ -274,7 +216,9 @@ namespace DSCUpdater
         private void HideTabPage(TabPage tp)
         {
             if (tabControlMain.TabPages.Contains(tp))
+            {
                 tabControlMain.TabPages.Remove(tp);
+            }
         }
 
         private void ShowTabPage(TabPage tp)
@@ -285,45 +229,53 @@ namespace DSCUpdater
         private void ShowTabPage(TabPage tp, int index)
         {
             if (tabControlMain.TabPages.Contains(tp)) return;
-            InsertTabPage(tp, index);
+            {
+                
+                InsertTabPage(tp, index);
+            }
         }
 
         private void InsertTabPage(TabPage tabpage, int index)
         {
-            if (index < 0 || index > tabControlMain.TabCount)
+            if (index < 0 || index > tabControlMain.TabCount)           
                 throw new ArgumentException("Index out of Range.");
-            tabControlMain.TabPages.Add(tabpage);
+                tabControlMain.TabPages.Add(tabpage);
+               
             if (index < tabControlMain.TabCount - 1)
+            {
                 do
                 {
                     SwapTabPages(tabpage, (tabControlMain.TabPages[tabControlMain.TabPages.IndexOf(tabpage) - 1]));
                 }
                 while (tabControlMain.TabPages.IndexOf(tabpage) != index);
-            tabControlMain.SelectedTab = tabpage;
+                tabControlMain.SelectedTab = tabpage;
+            }
         }
 
         private void SwapTabPages(TabPage tp1, TabPage tp2)
         {
             if (tabControlMain.TabPages.Contains(tp1) == false || tabControlMain.TabPages.Contains(tp2) == false)
+            
                 throw new ArgumentException("TabPages must be in the TabControls TabPageCollection.");
 
-            int Index1 = tabControlMain.TabPages.IndexOf(tp1);
-            int Index2 = tabControlMain.TabPages.IndexOf(tp2);
-            tabControlMain.TabPages[Index1] = tp2;
-            tabControlMain.TabPages[Index2] = tp1;
+                int Index1 = tabControlMain.TabPages.IndexOf(tp1);
+                int Index2 = tabControlMain.TabPages.IndexOf(tp2);
+                tabControlMain.TabPages[Index1] = tp2;
+                tabControlMain.TabPages[Index2] = tp1;
 
-            //Uncomment the following section to overcome bugs in the Compact Framework
-            //tabControl1.SelectedIndex = tabControl1.SelectedIndex; 
-            //string tp1Text, tp2Text;
-            //tp1Text = tp1.Text;
-            //tp2Text = tp2.Text;
-            //tp1.Text=tp2Text;
-            //tp2.Text=tp1Text;
+                //Uncomment the following section to overcome bugs in the Compact Framework
+                //tabControl1.SelectedIndex = tabControl1.SelectedIndex; 
+                //string tp1Text, tp2Text;
+                //tp1Text = tp1.Text;
+                //tp2Text = tp2.Text;
+                //tp1.Text=tp2Text;
+                //tp2.Text=tp1Text;
+            
         }
      
         private static void AddEditDateCommandParameter(SqlCommand sqlCmd, SqlConnection sqlCon)
         {
-            //add editDate parameter to SQL command cmdSQL
+            //add editDate parameter to SQL command sqlCmd
             DateTime editDate = DateTime.Now;
             SqlParameter pEditDate = sqlCmd.CreateParameter();
             pEditDate.ParameterName = "@editDate";
@@ -411,160 +363,160 @@ namespace DSCUpdater
             sqlCmd.Parameters.Add(pEditorEditID);
         }
         
-        private void AddNewParkAreaCommandParameter(SqlCommand cmdSQL, SqlConnection conSQL)
+        private void AddNewParkAreaCommandParameter(SqlCommand sqlCmd, SqlConnection sqlCon)
         {
             //add newParkArea parameter to SQL command cmd
-            SqlParameter pNewParkArea = cmdSQL.CreateParameter();
+            SqlParameter pNewParkArea = sqlCmd.CreateParameter();
             pNewParkArea.ParameterName = "@newParkArea";
             pNewParkArea.SqlDbType = SqlDbType.Int;
             pNewParkArea.Value = newParkArea;
             pNewParkArea.Direction = ParameterDirection.Input;
-            cmdSQL.Parameters.Add(pNewParkArea);
-            //cmdSQL.CommandTimeout = 300;
-            //cmdSQL.Connection = conSQL;
-            //conSQL.Open();
+            sqlCmd.Parameters.Add(pNewParkArea);
+            //sqlCmd.CommandTimeout = 300;
+            //sqlCmd.Connection = sqlCon;
+            //sqlCon.Open();
         }
 
-        private void AddNewParkDISCOAreaCommandParameter(SqlCommand cmdSQL, SqlConnection conSQL)
+        private void AddNewParkDISCOAreaCommandParameter(SqlCommand sqlCmd, SqlConnection sqlCon)
         {
             //add newParkDISCOArea parameter to SQL command cmd
-            SqlParameter pNewParkDISCOArea = cmdSQL.CreateParameter();
+            SqlParameter pNewParkDISCOArea = sqlCmd.CreateParameter();
             pNewParkDISCOArea.ParameterName = "@newParkDISCOArea";
             pNewParkDISCOArea.SqlDbType = SqlDbType.Int;
             pNewParkDISCOArea.Value = newParkDISCOICArea;
             pNewParkDISCOArea.Direction = ParameterDirection.Input;
-            cmdSQL.Parameters.Add(pNewParkDISCOArea);
-            //cmdSQL.CommandTimeout = 300;
-            //cmdSQL.Connection = conSQL;
-            //conSQL.Open();
+            sqlCmd.Parameters.Add(pNewParkDISCOArea);
+            //sqlCmd.CommandTimeout = 300;
+            //sqlCmd.Connection = sqlCon;
+            //sqlCon.Open();
         }
 
-        private void AddNewParkAreaDrywellCommandParameter(SqlCommand cmdSQL, SqlConnection conSQL)
+        private void AddNewParkAreaDrywellCommandParameter(SqlCommand sqlCmd, SqlConnection sqlCon)
         {
             //add newParkDrywellArea parameter to SQL command cmd
-            SqlParameter pNewParkDrywellArea = cmdSQL.CreateParameter();
+            SqlParameter pNewParkDrywellArea = sqlCmd.CreateParameter();
             pNewParkDrywellArea.ParameterName = "@newParkDrywellArea";
             pNewParkDrywellArea.SqlDbType = SqlDbType.Int;
             pNewParkDrywellArea.Value = newParkDrywellICArea;
             pNewParkDrywellArea.Direction = ParameterDirection.Input;
-            cmdSQL.Parameters.Add(pNewParkDrywellArea);
-            //cmdSQL.CommandTimeout = 300;
-            //cmdSQL.Connection = conSQL;
-            //conSQL.Open();
+            sqlCmd.Parameters.Add(pNewParkDrywellArea);
+            //sqlCmd.CommandTimeout = 300;
+            //sqlCmd.Connection = sqlCon;
+            //sqlCon.Open();
         }
 
-        private void AddNewRoofAreaCommandParameter(SqlCommand cmdSQL, SqlConnection conSQL)
+        private void AddNewRoofAreaCommandParameter(SqlCommand sqlCmd, SqlConnection sqlCon)
         {
             //add newRoofArea parameter to SQL command cmd
-            SqlParameter pNewRoofArea = cmdSQL.CreateParameter();
+            SqlParameter pNewRoofArea = sqlCmd.CreateParameter();
             pNewRoofArea.ParameterName = "@newRoofkArea";
             pNewRoofArea.SqlDbType = SqlDbType.Int;
             pNewRoofArea.Value = newRoofArea;
             pNewRoofArea.Direction = ParameterDirection.Input;
-            cmdSQL.Parameters.Add(pNewRoofArea);
-            //cmdSQL.CommandTimeout = 300;
-            //cmdSQL.Connection = conSQL;
-            //conSQL.Open();
+            sqlCmd.Parameters.Add(pNewRoofArea);
+            //sqlCmd.CommandTimeout = 300;
+            //sqlCmd.Connection = sqlCon;
+            //sqlCon.Open();
         }
 
-        private void AddNewRoofDISCOAreaCommandParameter(SqlCommand cmdSQL, SqlConnection conSQL)
+        private void AddNewRoofDISCOAreaCommandParameter(SqlCommand sqlCmd, SqlConnection sqlCon)
         {
             //add newRoofDISCOArea parameter to SQL command cmd
-            SqlParameter pNewRoofDISCOArea = cmdSQL.CreateParameter();
+            SqlParameter pNewRoofDISCOArea = sqlCmd.CreateParameter();
             pNewRoofDISCOArea.ParameterName = "@newRoofDISCOArea";
             pNewRoofDISCOArea.SqlDbType = SqlDbType.Int;
             pNewRoofDISCOArea.Value = newRoofDISCOICArea;
             pNewRoofDISCOArea.Direction = ParameterDirection.Input;
-            cmdSQL.Parameters.Add(pNewRoofDISCOArea);
-            //cmdSQL.CommandTimeout = 300;
-            //cmdSQL.Connection = conSQL;
-            //conSQL.Open();
+            sqlCmd.Parameters.Add(pNewRoofDISCOArea);
+            //sqlCmd.CommandTimeout = 300;
+            //sqlCmd.Connection = sqlCon;
+            //sqlCon.Open();
         }
 
-        private void AddNewRoofAreaDrywellCommandParameter(SqlCommand cmdSQL, SqlConnection conSQL)
+        private void AddNewRoofAreaDrywellCommandParameter(SqlCommand sqlCmd, SqlConnection sqlCon)
         {
-            //add newRoofkDrywellArea parameter to SQL command cmdSQL
-            SqlParameter pNewRoofDrywellArea = cmdSQL.CreateParameter();
+            //add newRoofkDrywellArea parameter to SQL command sqlCmd
+            SqlParameter pNewRoofDrywellArea = sqlCmd.CreateParameter();
             pNewRoofDrywellArea.ParameterName = "@newRoofDrywellArea";
             pNewRoofDrywellArea.SqlDbType = SqlDbType.Int;
             pNewRoofDrywellArea.Value = newRoofDrywellArea;
             pNewRoofDrywellArea.Direction = ParameterDirection.Input;
-            cmdSQL.Parameters.Add(pNewRoofDrywellArea);
-            //cmdSQL.CommandTimeout = 300;
-            //cmdSQL.Connection = conSQL;
-            //conSQL.Open();
+            sqlCmd.Parameters.Add(pNewRoofDrywellArea);
+            //sqlCmd.CommandTimeout = 300;
+            //sqlCmd.Connection = sqlCon;
+            //sqlCon.Open();
         }
 
-        private void AddUpdaterEditorParkAreaCommandParameter(SqlCommand cmdSQL)
+        private void AddUpdaterEditorParkAreaCommandParameter(SqlCommand sqlCmd)
         {
-            //add updaterEditorParkArea parameter to SQL command cmdSQL
-            SqlParameter pUpdaterEditorParkArea = cmdSQL.CreateParameter();
+            //add updaterEditorParkArea parameter to SQL command sqlCmd
+            SqlParameter pUpdaterEditorParkArea = sqlCmd.CreateParameter();
             pUpdaterEditorParkArea.ParameterName = "@updaterEditorParkArea";
             pUpdaterEditorParkArea.SqlDbType = SqlDbType.Int;
             pUpdaterEditorParkArea.Value = Convert.ToInt32(txtNewParkArea.Text);
             pUpdaterEditorParkArea.Direction = ParameterDirection.Input;
-            cmdSQL.Parameters.Add(pUpdaterEditorParkArea);
+            sqlCmd.Parameters.Add(pUpdaterEditorParkArea);
         }
 
-        private void AddUpdaterEditorParkDiscoICAreaCommandParameter(SqlCommand cmdSQL)
+        private void AddUpdaterEditorParkDiscoICAreaCommandParameter(SqlCommand sqlCmd)
         {
-            //add updaterEditorParkArea parameter to SQL command cmdSQL
-            SqlParameter pUpdaterEditorParkDiscoICArea = cmdSQL.CreateParameter();
+            //add updaterEditorParkArea parameter to SQL command sqlCmd
+            SqlParameter pUpdaterEditorParkDiscoICArea = sqlCmd.CreateParameter();
             pUpdaterEditorParkDiscoICArea.ParameterName = "@updaterEditorParkDiscoICArea";
             pUpdaterEditorParkDiscoICArea.SqlDbType = SqlDbType.Int;
             pUpdaterEditorParkDiscoICArea.Value = Convert.ToInt32(txtNewParkDISCOICArea.Text);
             pUpdaterEditorParkDiscoICArea.Direction = ParameterDirection.Input;
-            cmdSQL.Parameters.Add(pUpdaterEditorParkDiscoICArea);
+            sqlCmd.Parameters.Add(pUpdaterEditorParkDiscoICArea);
         }
 
-        private void AddUpdaterEditorParkDrywellICAreaCommandParameter(SqlCommand cmdSQL)
+        private void AddUpdaterEditorParkDrywellICAreaCommandParameter(SqlCommand sqlCmd)
         {
-            //add updaterEditorParkArea parameter to SQL command cmdSQL
-            SqlParameter pUpdaterEditorParkDrywellICArea = cmdSQL.CreateParameter();
+            //add updaterEditorParkArea parameter to SQL command sqlCmd
+            SqlParameter pUpdaterEditorParkDrywellICArea = sqlCmd.CreateParameter();
             pUpdaterEditorParkDrywellICArea.ParameterName = "@updaterEditorParkDrywellICArea";
             pUpdaterEditorParkDrywellICArea.SqlDbType = SqlDbType.Int;
             pUpdaterEditorParkDrywellICArea.Value = Convert.ToInt32(txtNewParkDrywellICArea.Text);
             pUpdaterEditorParkDrywellICArea.Direction = ParameterDirection.Input;
-            cmdSQL.Parameters.Add(pUpdaterEditorParkDrywellICArea);
+            sqlCmd.Parameters.Add(pUpdaterEditorParkDrywellICArea);
         }
 
-        private void AddUpdaterEditorRoofAreaCommandParameter(SqlCommand cmdSQL)
+        private void AddUpdaterEditorRoofAreaCommandParameter(SqlCommand sqlCmd)
         {
-            //add updaterEditorParkArea parameter to SQL command cmdSQL
-            SqlParameter pUpdaterEditorRoofArea = cmdSQL.CreateParameter();
+            //add updaterEditorParkArea parameter to SQL command sqlCmd
+            SqlParameter pUpdaterEditorRoofArea = sqlCmd.CreateParameter();
             pUpdaterEditorRoofArea.ParameterName = "@updaterEditorRoofArea";
             pUpdaterEditorRoofArea.SqlDbType = SqlDbType.Int;
             pUpdaterEditorRoofArea.Value = Convert.ToInt32(txtNewRoofArea.Text);
             pUpdaterEditorRoofArea.Direction = ParameterDirection.Input;
-            cmdSQL.Parameters.Add(pUpdaterEditorRoofArea);
+            sqlCmd.Parameters.Add(pUpdaterEditorRoofArea);
         }
 
-        private void AddUpdaterEditorRoofDiscoICAreaCommandParameter(SqlCommand cmdSQL)
+        private void AddUpdaterEditorRoofDiscoICAreaCommandParameter(SqlCommand sqlCmd)
         {
-            //add updaterEditorParkArea parameter to SQL command cmdSQL
-            SqlParameter pUpdaterEditorRoofDiscoIC = cmdSQL.CreateParameter();
+            //add updaterEditorParkArea parameter to SQL command sqlCmd
+            SqlParameter pUpdaterEditorRoofDiscoIC = sqlCmd.CreateParameter();
             pUpdaterEditorRoofDiscoIC.ParameterName = "@updaterEditorRoofDiscoICArea";
             pUpdaterEditorRoofDiscoIC.SqlDbType = SqlDbType.Int;
             pUpdaterEditorRoofDiscoIC.Value = Convert.ToInt32(txtNewRoofDISCOICArea.Text);
             pUpdaterEditorRoofDiscoIC.Direction = ParameterDirection.Input;
-            cmdSQL.Parameters.Add(pUpdaterEditorRoofDiscoIC);
+            sqlCmd.Parameters.Add(pUpdaterEditorRoofDiscoIC);
         }
 
-        private void AddUpdaterEditorRoofDrywellICAreaCommandParameter(SqlCommand cmdSQL)
+        private void AddUpdaterEditorRoofDrywellICAreaCommandParameter(SqlCommand sqlCmd)
         {
-            //add updaterEditorParkArea parameter to SQL command cmdSQL
-            SqlParameter pUpdaterEditorRoofDrywellICArea = cmdSQL.CreateParameter();
+            //add updaterEditorParkArea parameter to SQL command sqlCmd
+            SqlParameter pUpdaterEditorRoofDrywellICArea = sqlCmd.CreateParameter();
             pUpdaterEditorRoofDrywellICArea.ParameterName = "@updaterEditorRoofDrywellICArea";
             pUpdaterEditorRoofDrywellICArea.SqlDbType = SqlDbType.Int;
             pUpdaterEditorRoofDrywellICArea.Value = Convert.ToInt32(txtNewRoofDrywellICArea.Text);
             pUpdaterEditorRoofDrywellICArea.Direction = ParameterDirection.Input;
-            cmdSQL.Parameters.Add(pUpdaterEditorRoofDrywellICArea);
+            sqlCmd.Parameters.Add(pUpdaterEditorRoofDrywellICArea);
         }
 
-        private static void BatchDSCEDITAPPENDQueries(SqlCommand cmdSQL)
+        private static void BatchDSCEDITAPPENDQueries(SqlCommand sqlCmd)
         {
             //run Append2DSCEDITAPPEND query-appends user-defined file into DSCEDITAPPEND sql table                          
-            cmdSQL.CommandText = "INSERT INTO DSCEDITAPPEND (dsc_edit_id, edit_id, edit_date, edited_by, rno, dsc_id, " +
+            sqlCmd.CommandText = "INSERT INTO DSCEDITAPPEND (dsc_edit_id, edit_id, edit_date, edited_by, rno, dsc_id, " +
                                  "old_roof_area_sqft, new_roof_area_sqft, old_roof_disco_ic_area_sqft, " +
                                  "new_roof_disco_ic_area_sqft, old_park_area_sqft, new_park_area_sqft, " +
                                  "old_park_disco_ic_area_sqft, new_park_disco_ic_area_sqft, " +
@@ -579,17 +531,17 @@ namespace DSCUpdater
                                  "0 AS old_park_drywell_ic_area_sqft, 0 AS old_roof_drywell_ic_area_sqft, " +
                                  "0 AS new_roof_drywell_ic_area_sqft, 0 AS new_park_drywell_ic_area_sqft " +
                                  "FROM USERUPDATE INNER JOIN mst_DSC_ac ON USERUPDATE.dsc_id=mst_DSC_ac.DSCID";
-            cmdSQL.ExecuteNonQuery();
+            sqlCmd.ExecuteNonQuery();
 
             //run UpdateOldImperviousArea query to update the old_park_area_sqft and old_roof_area_sqft fields in the DSCEDITAPPEND table
-            cmdSQL.CommandText = "UPDATE DSCEDITAPPEND SET old_park_area_sqft = mst_DSC_ac.PkAreaFtEX, " +
+            sqlCmd.CommandText = "UPDATE DSCEDITAPPEND SET old_park_area_sqft = mst_DSC_ac.PkAreaFtEX, " +
                               "old_roof_area_sqft = mst_DSC_ac.RfAreaFtEX " +
                               "FROM DSCEDITAPPEND INNER JOIN mst_DSC_ac " +
                               "ON DSCEDITAPPEND.dsc_id = mst_DSC_ac.dscID";
-            cmdSQL.ExecuteNonQuery();
+            sqlCmd.ExecuteNonQuery();
 
             //run UpdateOldParkDISCOICArea query
-            cmdSQL.CommandText = "UPDATE DSCEDITAPPEND SET " +
+            sqlCmd.CommandText = "UPDATE DSCEDITAPPEND SET " +
                               "old_park_disco_ic_area_sqft = mst_ic_DiscoVeg_ac.SqFt " +
                               "FROM DSCEDITAPPEND INNER JOIN mst_ic_DiscoVeg_ac " +
                               "ON DSCEDITAPPEND.dsc_id = mst_ic_DiscoVeg_ac.dscID " +
@@ -597,10 +549,10 @@ namespace DSCUpdater
                               "AND ((mst_ic_DiscoVeg_ac.TimeFrame)=N'EX') " +
                               "AND ((mst_ic_DiscoVeg_ac.assumekey)=N'DDEX')) " +
                               "OR (((mst_ic_DiscoVeg_ac.assumekey)=N'SE01'))";
-            cmdSQL.ExecuteNonQuery();
+            sqlCmd.ExecuteNonQuery();
 
             //run UpdateOldParkDrywellArea query
-            cmdSQL.CommandText = "UPDATE DSCEDITAPPEND SET " +
+            sqlCmd.CommandText = "UPDATE DSCEDITAPPEND SET " +
                               "old_park_disco_ic_area_sqft = mst_ic_Drywell_ac.SqFt " +
                               "FROM DSCEDITAPPEND INNER JOIN mst_ic_Drywell_ac " +
                               "ON DSCEDITAPPEND.dsc_id = mst_ic_Drywell_ac.dscID " +
@@ -611,10 +563,10 @@ namespace DSCUpdater
                               "OR (((mst_ic_Drywell_ac.assumeKey)=N'SE01')) " +
                               "OR (((mst_ic_Drywell_ac.assumeKey)=N'EX01')) " +
                               "OR (((mst_ic_Drywell_ac.assumeKey)=N'INSU'))";
-            cmdSQL.ExecuteNonQuery();
+            sqlCmd.ExecuteNonQuery();
 
             //run UpdateOldRoofDISCOICArea query
-            cmdSQL.CommandText = "UPDATE DSCEDITAPPEND SET " +
+            sqlCmd.CommandText = "UPDATE DSCEDITAPPEND SET " +
                               "old_roof_disco_ic_area_sqft = mst_ic_DiscoVeg_ac.SqFt " +
                               "FROM DSCEDITAPPEND INNER JOIN mst_ic_DiscoVeg_ac " +
                               "ON DSCEDITAPPEND.dsc_id = mst_ic_DiscoVeg_ac.dscID " +
@@ -622,10 +574,10 @@ namespace DSCUpdater
                               "AND ((mst_ic_DiscoVeg_ac.TimeFrame)=N'EX') " +
                               "AND ((mst_ic_DiscoVeg_ac.assumekey)=N'DDEX')) " +
                               "OR (((mst_ic_DiscoVeg_ac.assumekey)=N'SE01'))";
-            cmdSQL.ExecuteNonQuery();
+            sqlCmd.ExecuteNonQuery();
 
             //run UpdateOldRoofDrywellIC Area query
-            cmdSQL.CommandText = "UPDATE DSCEDITAPPEND SET " +
+            sqlCmd.CommandText = "UPDATE DSCEDITAPPEND SET " +
                               "old_roof_drywell_ic_area_sqft = mst_ic_Drywell_ac.SqFt " +
                               "FROM DSCEDITAPPEND INNER JOIN mst_ic_Drywell_ac " +
                               "ON DSCEDITAPPEND.dsc_id = mst_ic_Drywell_ac.dscID " +
@@ -636,10 +588,10 @@ namespace DSCUpdater
                               "OR (((mst_ic_Drywell_ac.assumeKey)=N'SE01')) " +
                               "OR (((mst_ic_Drywell_ac.assumeKey)=N'EX01')) " +
                               "OR (((mst_ic_Drywell_ac.assumeKey)=N'INSU'))";
-            cmdSQL.ExecuteNonQuery();
+            sqlCmd.ExecuteNonQuery();
 
             //run UpdateDSCEDITAPPENDfromUSERUPDATE query
-            cmdSQL.CommandText = "UPDATE DSCEDITAPPEND SET " +
+            sqlCmd.CommandText = "UPDATE DSCEDITAPPEND SET " +
                               "new_roof_area_sqft = USERUPDATE.new_roof_area_sqft, " +
                               "new_roof_disco_ic_area_sqft=USERUPDATE.new_roof_disco_ic_area_sqft, " +
                               "new_roof_drywell_ic_area_sqft=USERUPDATE.new_roof_drywell_ic_area_sqft, " +
@@ -648,71 +600,68 @@ namespace DSCUpdater
                               "new_park_drywell_ic_area_sqft=USERUPDATE.new_park_drywell_ic_area_sqft " +
                               "FROM DSCEDITAPPEND INNER JOIN USERUPDATE " +
                               "ON DSCEDITAPPEND.dsc_id=USERUPDATE.dsc_id";
-            cmdSQL.ExecuteNonQuery();
+            sqlCmd.ExecuteNonQuery();
         }
         
-        private static void BatchNewICRecords(SqlCommand cmdSQL)
+        private static void BatchNewICRecords(SqlCommand sqlCmd)
         {
             //run AppendNewParkDISCORecords queries
-            cmdSQL.CommandText = "CREATE TABLE FIRSTLIST " +
+            sqlCmd.CommandText = "CREATE TABLE FIRSTLIST " +
                                  "([dsc_id] [int])";
-            cmdSQL.ExecuteNonQuery();
-            cmdSQL.CommandText = "INSERT INTO FIRSTLIST " +
+            sqlCmd.ExecuteNonQuery();
+            sqlCmd.CommandText = "INSERT INTO FIRSTLIST " +
                                  "SELECT DSCEDITAPPEND.dsc_id " +
                                  "FROM DSCEDITAPPEND " +
                                  "LEFT JOIN mst_ic_DiscoVeg_ac " +
                                  "ON DSCEDITAPPEND.dsc_id = mst_ic_DiscoVeg_ac.dscID " +
                                  "GROUP BY DSCEDITAPPEND.dsc_id";
-            cmdSQL.ExecuteNonQuery();
-            cmdSQL.CommandText = "CREATE TABLE SECONDLIST " +
+            sqlCmd.ExecuteNonQuery();
+            sqlCmd.CommandText = "CREATE TABLE SECONDLIST " +
                                  "([dsc_id] [int])";
-            cmdSQL.ExecuteNonQuery();
-
-            cmdSQL.CommandText = "INSERT INTO SECONDLIST " +
+            sqlCmd.ExecuteNonQuery();
+            sqlCmd.CommandText = "INSERT INTO SECONDLIST " +
                                  "SELECT DSCEDITAPPEND.dsc_id " +
                                  "FROM DSCEDITAPPEND " +
                                  "INNER JOIN mst_ic_DiscoVeg_ac " +
                                  "ON DSCEDITAPPEND.dsc_id = mst_ic_DiscoVeg_ac.dscID " +
                                  "GROUP BY DSCEDITAPPEND.dsc_id, mst_ic_DiscoVeg_ac.RoofRPark " +
                                  "HAVING (((mst_ic_DiscoVeg_ac.RoofRPark)='P'))";
-            cmdSQL.ExecuteNonQuery();
-
-            cmdSQL.CommandText = "CREATE TABLE THIRDLIST " +
-                                 "([dsc_id] [int], [RoofRPark] [varchar] (1))";
-            cmdSQL.ExecuteNonQuery();
-
-            cmdSQL.CommandText = "INSERT INTO THIRDLIST ([dsc_id]) " +
+            sqlCmd.ExecuteNonQuery();
+            sqlCmd.CommandText = "CREATE TABLE THIRDLIST " +
+                                 "([dsc_id] [int], [RoofRPark] [varchar] (1), [assume_key] [varchar] (2))";
+            sqlCmd.ExecuteNonQuery();
+            sqlCmd.CommandText = "INSERT INTO THIRDLIST ([dsc_id]) " +
                                  "SELECT FIRSTLIST.dsc_id " +
                                  "FROM FIRSTLIST " +
                                  "LEFT JOIN SECONDLIST " +
                                  "ON FIRSTLIST.dsc_id=SECONDLIST.dsc_id " +
                                  "WHERE (((SECONDLIST.dsc_id) Is Null))";
-            cmdSQL.ExecuteNonQuery();
-            cmdSQL.CommandText = "UPDATE THIRDLIST " +
-                                 "SET RoofRPark = 'P'";
-            cmdSQL.ExecuteNonQuery();
-            cmdSQL.CommandText = "INSERT INTO mst_ic_DiscoVeg_ac (dscID, RoofRPark) " +
-                                 "SELECT [THIRDLIST].[dsc_id], [THIRDLIST].[RoofRPark] " +
+            sqlCmd.ExecuteNonQuery();
+            sqlCmd.CommandText = "UPDATE THIRDLIST " +
+                                 "SET RoofRPark = 'P',assume_key='EX'";
+            sqlCmd.ExecuteNonQuery();
+            sqlCmd.CommandText = "INSERT INTO mst_ic_DiscoVeg_ac (dscID, RoofRPark, assumeKey) " +
+                                 "SELECT [THIRDLIST].[dsc_id], [THIRDLIST].[RoofRPark],[THIRDLIST].[assume_key] " +
                                  "FROM THIRDLIST";
-            cmdSQL.ExecuteNonQuery();
-            cmdSQL.CommandText = "DROP TABLE FIRSTLIST";
-            cmdSQL.ExecuteNonQuery();
-            cmdSQL.CommandText = "DROP TABLE SECONDLIST";
-            cmdSQL.ExecuteNonQuery();
-            cmdSQL.CommandText = "DROP TABLE THIRDLIST";
-            cmdSQL.ExecuteNonQuery();
+            sqlCmd.ExecuteNonQuery();
+            sqlCmd.CommandText = "DROP TABLE FIRSTLIST";
+            sqlCmd.ExecuteNonQuery();
+            sqlCmd.CommandText = "DROP TABLE SECONDLIST";
+            sqlCmd.ExecuteNonQuery();
+            sqlCmd.CommandText = "DROP TABLE THIRDLIST";
+            sqlCmd.ExecuteNonQuery();
 
-            //cmdSQL.CommandText = "INSERT INTO mst_ic_DiscoVeg_ac (dscID) " +
+            //sqlCmd.CommandText = "INSERT INTO mst_ic_DiscoVeg_ac (dscID) " +
             //                     "SELECT DSCEDITAPPEND.dsc_id, DSCEDITAPPEND.edit_date " +
             //                     "FROM DSCEDITAPPEND " +
             //                     "LEFT JOIN mst_ic_DiscoVeg_ac " +
             //                     "ON DSCEDITAPPEND.dsc_id = mst_ic_DiscoVeg_ac.dscID " +
             //                     "WHERE (mst_ic_DiscoVeg_ac.dscID IS NULL) " +
             //                     "AND (DSCEDITAPPEND.new_park_disco_ic_area_sqft <> 0)";
-            //cmdSQL.ExecuteNonQuery();
+            //sqlCmd.ExecuteNonQuery();
 
             //run UpdateNewParkDISCORecords query
-            cmdSQL.CommandText = "UPDATE mst_ic_DiscoVeg_ac " + 
+            sqlCmd.CommandText = "UPDATE mst_ic_DiscoVeg_ac " + 
                                  "SET ParcelID = LEFT(mst_ic_DiscoVeg_ac.dscID, 6), " +
                                  "DivideID = RIGHT(mst_ic_DiscoVeg_ac.dscID, 1), " +
                                  "assumekey = N'DDEX', TimeFrame = N'EX', " +
@@ -724,68 +673,68 @@ namespace DSCUpdater
                                  "ON ((mst_ic_DiscoVeg_ac.dscID = DSCEDITAPPEND.dsc_id) " +
                                  "AND (mst_ic_DiscoVeg_ac.RoofRPark = 'P')) " +
                                  "WHERE (DSCEDITAPPEND.new_park_disco_ic_area_sqft<>0)";
-            cmdSQL.ExecuteNonQuery();
+            sqlCmd.ExecuteNonQuery();
 
             //run AppendNewParkDrywellRecords query
-            cmdSQL.CommandText = "CREATE TABLE FIRSTLIST " +
+            sqlCmd.CommandText = "CREATE TABLE FIRSTLIST " +
                                  "([dsc_id] [int])";
-            cmdSQL.ExecuteNonQuery();
-            cmdSQL.CommandText = "INSERT INTO FIRSTLIST " +
+            sqlCmd.ExecuteNonQuery();
+            sqlCmd.CommandText = "INSERT INTO FIRSTLIST " +
                                  "SELECT DSCEDITAPPEND.dsc_id " +
                                  "FROM DSCEDITAPPEND " +
                                  "LEFT JOIN mst_ic_Drywell_ac " +
                                  "ON DSCEDITAPPEND.dsc_id = mst_ic_Drywell_ac.dscID " +
                                  "GROUP BY DSCEDITAPPEND.dsc_id";
-            cmdSQL.ExecuteNonQuery();
-            cmdSQL.CommandText = "CREATE TABLE SECONDLIST " +
+            sqlCmd.ExecuteNonQuery();
+            sqlCmd.CommandText = "CREATE TABLE SECONDLIST " +
                                  "([dsc_id] [int])";
-            cmdSQL.ExecuteNonQuery();
+            sqlCmd.ExecuteNonQuery();
 
-            cmdSQL.CommandText = "INSERT INTO SECONDLIST " +
+            sqlCmd.CommandText = "INSERT INTO SECONDLIST " +
                                  "SELECT DSCEDITAPPEND.dsc_id " +
                                  "FROM DSCEDITAPPEND " +
                                  "INNER JOIN mst_ic_Drywell_ac " +
                                  "ON DSCEDITAPPEND.dsc_id = mst_ic_Drywell_ac.dscID " +
                                  "GROUP BY DSCEDITAPPEND.dsc_id, mst_ic_Drywell_ac.RoofRPark " +
                                  "HAVING (((mst_ic_Drywell_ac.RoofRPark)='P'))";
-            cmdSQL.ExecuteNonQuery();
+            sqlCmd.ExecuteNonQuery();
 
-            cmdSQL.CommandText = "CREATE TABLE THIRDLIST " +
-                                 "([dsc_id] [int], [RoofRPark] [varchar] (1))";
-            cmdSQL.ExecuteNonQuery();
+            sqlCmd.CommandText = "CREATE TABLE THIRDLIST " +
+                                 "([dsc_id] [int], [RoofRPark] [varchar] (1),[assume_key] [varchar] (2))";
+            sqlCmd.ExecuteNonQuery();
 
-            cmdSQL.CommandText = "INSERT INTO THIRDLIST ([dsc_id]) " +
+            sqlCmd.CommandText = "INSERT INTO THIRDLIST ([dsc_id]) " +
                                  "SELECT FIRSTLIST.dsc_id " +
                                  "FROM FIRSTLIST " +
                                  "LEFT JOIN SECONDLIST " +
                                  "ON FIRSTLIST.dsc_id=SECONDLIST.dsc_id " +
                                  "WHERE (((SECONDLIST.dsc_id) Is Null))";
-            cmdSQL.ExecuteNonQuery();
-            cmdSQL.CommandText = "UPDATE THIRDLIST " +
-                                 "SET RoofRPark = 'P'";
-            cmdSQL.ExecuteNonQuery();
-            cmdSQL.CommandText = "INSERT INTO mst_ic_Drywell_ac (dscID, RoofRPark) " +
-                                 "SELECT [THIRDLIST].[dsc_id], [THIRDLIST].[RoofRPark] " +
+            sqlCmd.ExecuteNonQuery();
+            sqlCmd.CommandText = "UPDATE THIRDLIST " +
+                                 "SET RoofRPark = 'P', assume_key = 'EX'";
+            sqlCmd.ExecuteNonQuery();
+            sqlCmd.CommandText = "INSERT INTO mst_ic_Drywell_ac (dscID, RoofRPark, assumeKey) " +
+                                 "SELECT [THIRDLIST].[dsc_id], [THIRDLIST].[RoofRPark], [THIRDLIST].[assume_key]" +
                                  "FROM THIRDLIST";
-            cmdSQL.ExecuteNonQuery();
-            cmdSQL.CommandText = "DROP TABLE FIRSTLIST";
-            cmdSQL.ExecuteNonQuery();
-            cmdSQL.CommandText = "DROP TABLE SECONDLIST";
-            cmdSQL.ExecuteNonQuery();
-            cmdSQL.CommandText = "DROP TABLE THIRDLIST";
-            cmdSQL.ExecuteNonQuery();
+            sqlCmd.ExecuteNonQuery();
+            sqlCmd.CommandText = "DROP TABLE FIRSTLIST";
+            sqlCmd.ExecuteNonQuery();
+            sqlCmd.CommandText = "DROP TABLE SECONDLIST";
+            sqlCmd.ExecuteNonQuery();
+            sqlCmd.CommandText = "DROP TABLE THIRDLIST";
+            sqlCmd.ExecuteNonQuery();
             
-            //cmdSQL.CommandText = "INSERT INTO mst_ic_Drywell_ac (dscID) " +
+            //sqlCmd.CommandText = "INSERT INTO mst_ic_Drywell_ac (dscID) " +
             //                     "SELECT DSCEDITAPPEND.dsc_id " +
             //                     "FROM DSCEDITAPPEND  " +
             //                     "LEFT OUTER JOIN mst_ic_Drywell_ac " +
             //                     "ON DSCEDITAPPEND.dsc_id = mst_ic_Drywell_ac.dscID " +
             //                     "WHERE ((mst_ic_Drywell_ac.dscID IS NULL) " +
             //                     "AND (DSCEDITAPPEND.new_park_drywell_ic_area_sqft <> 0))";
-            //cmdSQL.ExecuteNonQuery();
+            //sqlCmd.ExecuteNonQuery();
 
             //run UpdateNewParkDrywellRecords query
-            cmdSQL.CommandText = "UPDATE mst_ic_Drywell_ac " +
+            sqlCmd.CommandText = "UPDATE mst_ic_Drywell_ac " +
                                  "SET ParcelID = Left(mst_ic_Drywell_ac.dscID, 6), " +
                                  "DivideID = Right(mst_ic_Drywell_ac.dscID, 1), " +
                                  "assumeKey = N'INSU', TimeFrame = N'EX', " +
@@ -797,112 +746,112 @@ namespace DSCUpdater
                                  "ON ((mst_ic_Drywell_ac.dscID = DSCEDITAPPEND.dsc_id) " +
                                  "AND (mst_ic_Drywell_ac.RoofRPark='P')) " +
                                  "WHERE (DSCEDITAPPEND.new_park_drywell_ic_area_sqft <> 0)";
-            cmdSQL.ExecuteNonQuery();
+            sqlCmd.ExecuteNonQuery();
 
             //AppendNewRoofDISCORecords
             //run queries that will identify which DSCs are in the mst_ic_DiscoVeg_ac table with Parking controls
             //then update the table to include any Roof controls
-            cmdSQL.CommandText = "CREATE TABLE FIRSTLIST " +
+            sqlCmd.CommandText = "CREATE TABLE FIRSTLIST " +
                                  "([dsc_id] [int])";
-            cmdSQL.ExecuteNonQuery();
-            cmdSQL.CommandText = "INSERT INTO FIRSTLIST " +
+            sqlCmd.ExecuteNonQuery();
+            sqlCmd.CommandText = "INSERT INTO FIRSTLIST " +
                                  "SELECT DSCEDITAPPEND.dsc_id " +
                                  "FROM DSCEDITAPPEND " +
                                  "LEFT JOIN mst_ic_DiscoVeg_ac " +
                                  "ON DSCEDITAPPEND.dsc_id = mst_ic_DiscoVeg_ac.dscID " +
                                  "GROUP BY DSCEDITAPPEND.dsc_id";
-            cmdSQL.ExecuteNonQuery();
-            cmdSQL.CommandText = "CREATE TABLE SECONDLIST " +
+            sqlCmd.ExecuteNonQuery();
+            sqlCmd.CommandText = "CREATE TABLE SECONDLIST " +
                                  "([dsc_id] [int])";
-            cmdSQL.ExecuteNonQuery();
+            sqlCmd.ExecuteNonQuery();
 
-            cmdSQL.CommandText = "INSERT INTO SECONDLIST " +
+            sqlCmd.CommandText = "INSERT INTO SECONDLIST " +
                                  "SELECT DSCEDITAPPEND.dsc_id " +
                                  "FROM DSCEDITAPPEND " +
                                  "INNER JOIN mst_ic_DiscoVeg_ac " +
                                  "ON DSCEDITAPPEND.dsc_id = mst_ic_DiscoVeg_ac.dscID " +
                                  "GROUP BY DSCEDITAPPEND.dsc_id, mst_ic_DiscoVeg_ac.RoofRPark " +
                                  "HAVING (((mst_ic_DiscoVeg_ac.RoofRPark)='R'))";
-            cmdSQL.ExecuteNonQuery();
+            sqlCmd.ExecuteNonQuery();
 
-            cmdSQL.CommandText = "CREATE TABLE THIRDLIST " +
-                                 "([dsc_id] [int], [RoofRPark] [varchar] (1))";
-            cmdSQL.ExecuteNonQuery();
+            sqlCmd.CommandText = "CREATE TABLE THIRDLIST " +
+                                 "([dsc_id] [int], [RoofRPark] [varchar] (1), [assume_key] [varchar] (2))";
+            sqlCmd.ExecuteNonQuery();
 
-            cmdSQL.CommandText = "INSERT INTO THIRDLIST ([dsc_id]) " +
+            sqlCmd.CommandText = "INSERT INTO THIRDLIST ([dsc_id]) " +
                                  "SELECT FIRSTLIST.dsc_id " +
                                  "FROM FIRSTLIST " +
                                  "LEFT JOIN SECONDLIST " +
                                  "ON FIRSTLIST.dsc_id=SECONDLIST.dsc_id " +
                                  "WHERE (((SECONDLIST.dsc_id) Is Null))";
-            cmdSQL.ExecuteNonQuery();           
-            cmdSQL.CommandText = "UPDATE THIRDLIST " +
-                                 "SET RoofRPark = 'R'";
-            cmdSQL.ExecuteNonQuery();          
-            cmdSQL.CommandText = "INSERT INTO mst_ic_DiscoVeg_ac (dscID, RoofRPark) " +
-                                 "SELECT [THIRDLIST].[dsc_id], [THIRDLIST].[RoofRPark] " +
+            sqlCmd.ExecuteNonQuery();           
+            sqlCmd.CommandText = "UPDATE THIRDLIST " +
+                                 "SET RoofRPark = 'R', assume_key = 'EX'";
+            sqlCmd.ExecuteNonQuery();          
+            sqlCmd.CommandText = "INSERT INTO mst_ic_DiscoVeg_ac (dscID, RoofRPark, assumeKey) " +
+                                 "SELECT [THIRDLIST].[dsc_id], [THIRDLIST].[RoofRPark], [THIRDLIST].[assume_key] " +
                                  "FROM THIRDLIST";
-            cmdSQL.ExecuteNonQuery();          
-            cmdSQL.CommandText = "DROP TABLE FIRSTLIST";
-            cmdSQL.ExecuteNonQuery();
-            cmdSQL.CommandText = "DROP TABLE SECONDLIST";
-            cmdSQL.ExecuteNonQuery();
-            cmdSQL.CommandText = "DROP TABLE THIRDLIST";
-            cmdSQL.ExecuteNonQuery();
+            sqlCmd.ExecuteNonQuery();          
+            sqlCmd.CommandText = "DROP TABLE FIRSTLIST";
+            sqlCmd.ExecuteNonQuery();
+            sqlCmd.CommandText = "DROP TABLE SECONDLIST";
+            sqlCmd.ExecuteNonQuery();
+            sqlCmd.CommandText = "DROP TABLE THIRDLIST";
+            sqlCmd.ExecuteNonQuery();
                      
             //AppendNewRoofDrywellRecords
             //run queries that will identify which DSCs are in the mst_ic_Drywell_ac table with Parking controls
             //then update the table to include any Roof controls
-            cmdSQL.CommandText = "CREATE TABLE FIRSTLIST " +
+            sqlCmd.CommandText = "CREATE TABLE FIRSTLIST " +
                                  "([dsc_id] [int])";
-            cmdSQL.ExecuteNonQuery();
-            cmdSQL.CommandText = "INSERT INTO FIRSTLIST " +
+            sqlCmd.ExecuteNonQuery();
+            sqlCmd.CommandText = "INSERT INTO FIRSTLIST " +
                                  "SELECT DSCEDITAPPEND.dsc_id " +
                                  "FROM DSCEDITAPPEND " +
                                  "LEFT JOIN mst_ic_Drywell_ac " +
                                  "ON DSCEDITAPPEND.dsc_id = mst_ic_Drywell_ac.dscID " +
                                  "GROUP BY DSCEDITAPPEND.dsc_id";
-            cmdSQL.ExecuteNonQuery();
-            cmdSQL.CommandText = "CREATE TABLE SECONDLIST " +
+            sqlCmd.ExecuteNonQuery();
+            sqlCmd.CommandText = "CREATE TABLE SECONDLIST " +
                                  "([dsc_id] [int])";
-            cmdSQL.ExecuteNonQuery();
+            sqlCmd.ExecuteNonQuery();
 
-            cmdSQL.CommandText = "INSERT INTO SECONDLIST " +
+            sqlCmd.CommandText = "INSERT INTO SECONDLIST " +
                                  "SELECT DSCEDITAPPEND.dsc_id " +
                                  "FROM DSCEDITAPPEND " +
                                  "INNER JOIN mst_ic_Drywell_ac " +
                                  "ON DSCEDITAPPEND.dsc_id = mst_ic_Drywell_ac.dscID " +
                                  "GROUP BY DSCEDITAPPEND.dsc_id, mst_ic_Drywell_ac.RoofRPark " +
                                  "HAVING (((mst_ic_Drywell_ac.RoofRPark)='R'))";
-            cmdSQL.ExecuteNonQuery();
+            sqlCmd.ExecuteNonQuery();
 
-            cmdSQL.CommandText = "CREATE TABLE THIRDLIST " +
-                                 "([dsc_id] [int], [RoofRPark] [varchar] (1))";
-            cmdSQL.ExecuteNonQuery();
+            sqlCmd.CommandText = "CREATE TABLE THIRDLIST " +
+                                 "([dsc_id] [int], [RoofRPark] [varchar] (1), [assume_key] [varchar] (2))";
+            sqlCmd.ExecuteNonQuery();
 
-            cmdSQL.CommandText = "INSERT INTO THIRDLIST ([dsc_id]) " +
+            sqlCmd.CommandText = "INSERT INTO THIRDLIST ([dsc_id]) " +
                                  "SELECT FIRSTLIST.dsc_id " +
                                  "FROM FIRSTLIST " +
                                  "LEFT JOIN SECONDLIST " +
                                  "ON FIRSTLIST.dsc_id=SECONDLIST.dsc_id " +
                                  "WHERE (((SECONDLIST.dsc_id) Is Null))";
-            cmdSQL.ExecuteNonQuery();
-            cmdSQL.CommandText = "UPDATE THIRDLIST " +
-                                 "SET RoofRPark = 'R'";
-            cmdSQL.ExecuteNonQuery();
-            cmdSQL.CommandText = "INSERT INTO mst_ic_Drywell_ac (dscID, RoofRPark) " +
-                                 "SELECT [THIRDLIST].[dsc_id], [THIRDLIST].[RoofRPark] " +
+            sqlCmd.ExecuteNonQuery();
+            sqlCmd.CommandText = "UPDATE THIRDLIST " +
+                                 "SET RoofRPark = 'R', assume_key = 'EX'";
+            sqlCmd.ExecuteNonQuery();
+            sqlCmd.CommandText = "INSERT INTO mst_ic_Drywell_ac (dscID, RoofRPark, assumeKey) " +
+                                 "SELECT [THIRDLIST].[dsc_id], [THIRDLIST].[RoofRPark], [THIRDLIST].[assume_key] " +
                                  "FROM THIRDLIST";
-            cmdSQL.ExecuteNonQuery();
-            cmdSQL.CommandText = "DROP TABLE FIRSTLIST";
-            cmdSQL.ExecuteNonQuery();
-            cmdSQL.CommandText = "DROP TABLE SECONDLIST";
-            cmdSQL.ExecuteNonQuery();
-            cmdSQL.CommandText = "DROP TABLE THIRDLIST";
-            cmdSQL.ExecuteNonQuery();
+            sqlCmd.ExecuteNonQuery();
+            sqlCmd.CommandText = "DROP TABLE FIRSTLIST";
+            sqlCmd.ExecuteNonQuery();
+            sqlCmd.CommandText = "DROP TABLE SECONDLIST";
+            sqlCmd.ExecuteNonQuery();
+            sqlCmd.CommandText = "DROP TABLE THIRDLIST";
+            sqlCmd.ExecuteNonQuery();
                      
             //run UpdateNewRoofDISCORecords query
-            cmdSQL.CommandText = "UPDATE mst_ic_DiscoVeg_ac SET " +
+            sqlCmd.CommandText = "UPDATE mst_ic_DiscoVeg_ac SET " +
                               "ParcelID = Left(mst_ic_DiscoVeg_ac.dscID, 6), " +
                               "DivideID = Right(mst_ic_DiscoVeg_ac.dscID, 1), " +
                               "assumekey = N'DDEX', TimeFrame = N'EX', " +
@@ -914,10 +863,10 @@ namespace DSCUpdater
                               "(mst_ic_DiscoVeg_ac.dscID = DSCEDITAPPEND.dsc_id " +
                               "AND mst_ic_DiscoVeg_ac.RoofRPark = 'R') " +
                               "WHERE (DSCEDITAPPEND.new_roof_disco_ic_area_sqft <> 0)";
-            cmdSQL.ExecuteNonQuery();
+            sqlCmd.ExecuteNonQuery();
 
             //run UpdateNewRoofDrywellRecords query
-            cmdSQL.CommandText = "UPDATE mst_ic_Drywell_ac SET " +
+            sqlCmd.CommandText = "UPDATE mst_ic_Drywell_ac SET " +
                               "ParcelID = Left(mst_ic_Drywell_ac.dscID, 6), " +
                               "DivideID = Right(mst_ic_Drywell_ac.dscID, 1), " +
                               "assumeKey = N'INSU', TimeFrame = N'EX', " +
@@ -928,13 +877,13 @@ namespace DSCUpdater
                               "(mst_ic_Drywell_ac.dscID = DSCEDITAPPEND.dsc_id " +
                               "AND mst_ic_Drywell_ac.RoofRPark = 'R') " +
                               "WHERE (DSCEDITAPPEND.new_roof_drywell_ic_area_sqft <> 0)";
-            cmdSQL.ExecuteNonQuery();
+            sqlCmd.ExecuteNonQuery();
         }
 
-        private static void BatchUpdateMasterICTables(SqlCommand cmdSQL)
+        private static void BatchUpdateMasterICTables(SqlCommand sqlCmd)
         {
             //run UpdateCurrentParkDISCORecords query
-            cmdSQL.CommandText = "UPDATE mst_ic_DiscoVeg_ac SET " +
+            sqlCmd.CommandText = "UPDATE mst_ic_DiscoVeg_ac SET " +
                               "SqFt = DSCEDITAPPEND.new_park_disco_ic_area_sqft " +
                               "FROM mst_ic_DiscoVeg_ac INNER JOIN DSCEDITAPPEND " +
                               "ON mst_ic_DiscoVeg_ac.dscID = DSCEDITAPPEND.dsc_id " +
@@ -942,10 +891,10 @@ namespace DSCUpdater
                               "AND ((mst_ic_DiscoVeg_ac.TimeFrame)=N'EX') " +
                               "AND ((mst_ic_DiscoVeg_ac.assumekey)=N'DDEX')) " +
                               "OR (((mst_ic_DiscoVeg_ac.assumekey)=N'SE01'))";
-            cmdSQL.ExecuteNonQuery();
+            sqlCmd.ExecuteNonQuery();
 
             //run UpdateCurrentParkDrywell query
-            cmdSQL.CommandText = "UPDATE mst_ic_Drywell_ac SET " +
+            sqlCmd.CommandText = "UPDATE mst_ic_Drywell_ac SET " +
                               "SqFt = DSCEDITAPPEND.new_park_drywell_ic_area_sqft " +
                               "FROM mst_ic_Drywell_ac INNER JOIN DSCEDITAPPEND ON " +
                               "mst_ic_Drywell_ac.dscID = DSCEDITAPPEND.dsc_id WHERE " +
@@ -956,10 +905,10 @@ namespace DSCUpdater
                               "(((mst_ic_Drywell_ac.assumeKey)=N'SE01')) OR " +
                               "(((mst_ic_Drywell_ac.assumeKey)=N'EX01')) OR " +
                               "(((mst_ic_Drywell_ac.assumeKey)=N'INSU'))";
-            cmdSQL.ExecuteNonQuery();
+            sqlCmd.ExecuteNonQuery();
 
             //run UpdateCurrentRoofDISCORecords query
-            cmdSQL.CommandText = "UPDATE mst_ic_DiscoVeg_ac SET " +
+            sqlCmd.CommandText = "UPDATE mst_ic_DiscoVeg_ac SET " +
                               "SqFt = DSCEDITAPPEND.new_roof_disco_ic_area_sqft FROM " +
                               "mst_ic_DiscoVeg_ac INNER JOIN DSCEDITAPPEND ON " +
                               "mst_ic_DiscoVeg_ac.dscID = DSCEDITAPPEND.dsc_id WHERE " +
@@ -967,10 +916,10 @@ namespace DSCUpdater
                               "((mst_ic_DiscoVeg_ac.TimeFrame)=N'EX') AND " +
                               "((mst_ic_DiscoVeg_ac.assumekey)=N'DDEX')) OR " +
                               "(((mst_ic_DiscoVeg_ac.assumekey)=N'SE01'))";
-            cmdSQL.ExecuteNonQuery();
+            sqlCmd.ExecuteNonQuery();
 
             //run UpdateCurrentRoofDrywellRecords query
-            cmdSQL.CommandText = "UPDATE mst_ic_Drywell_ac SET " +
+            sqlCmd.CommandText = "UPDATE mst_ic_Drywell_ac SET " +
                               "SqFt = DSCEDITAPPEND.new_roof_drywell_ic_area_sqft FROM " +
                               "mst_ic_Drywell_ac INNER JOIN DSCEDITAPPEND ON " +
                               "mst_ic_Drywell_ac.dscID = DSCEDITAPPEND.dsc_id WHERE " +
@@ -981,26 +930,26 @@ namespace DSCUpdater
                               "(((mst_ic_Drywell_ac.assumeKey)=N'SE01')) OR " +
                               "(((mst_ic_Drywell_ac.assumeKey)=N'EX01')) OR " +
                               "(((mst_ic_Drywell_ac.assumeKey)=N'INSU'))";
-            cmdSQL.ExecuteNonQuery();
+            sqlCmd.ExecuteNonQuery();
         }
 
-        private static void BatchUpdateDSCAreas(SqlCommand cmdSQL)
+        private static void BatchUpdateDSCAreas(SqlCommand sqlCmd)
         {
             //run UpdateMasterParkArea query
-            cmdSQL.CommandText = "UPDATE mst_DSC_ac SET " +
+            sqlCmd.CommandText = "UPDATE mst_DSC_ac SET " +
                               "surveyedPkAreaSqft = DSCEDITAPPEND.new_park_area_sqft, " +
                               "parkAreaNeedsUpdate = 1 FROM mst_DSC_ac INNER JOIN DSCEDITAPPEND " +
                               "ON mst_DSC_ac.DSCID = DSCEDITAPPEND.dsc_id " +
                               "AND mst_DSC_ac.PkAreaFtEX <> DSCEDITAPPEND.new_park_area_sqft";
-            cmdSQL.ExecuteNonQuery();
+            sqlCmd.ExecuteNonQuery();
 
             //run UpdateMasterRoofArea query
-            cmdSQL.CommandText = "UPDATE mst_DSC_ac SET " +
+            sqlCmd.CommandText = "UPDATE mst_DSC_ac SET " +
                               "surveyedRfAreaSqFt = DSCEDITAPPEND.new_roof_area_sqft, " +
                               "roofAreaNeedsUpdate = 1 FROM mst_DSC_ac INNER JOIN DSCEDITAPPEND " +
                               "ON mst_DSC_ac.DSCID = DSCEDITAPPEND.dsc_id AND " +
                               "mst_DSC_ac.RfAreaFtEX <> DSCEDITAPPEND.new_roof_area_sqft";
-            cmdSQL.ExecuteNonQuery();
+            sqlCmd.ExecuteNonQuery();
         }
 
         private static void BatchRevertICEdits(SqlCommand sqlCmd)
@@ -1170,19 +1119,19 @@ namespace DSCUpdater
             sqlCmd.ExecuteNonQuery();
         }
       
-        private static void BatchSESSION(SqlCommand cmdSQL)
+        private static void BatchSESSION(SqlCommand sqlCmd)
         {
             //insert new record into SESSION signifying the edit event
-            cmdSQL.CommandText = "SET IDENTITY_INSERT [SESSION] ON " +
+            sqlCmd.CommandText = "SET IDENTITY_INSERT [SESSION] ON " +
                                  "INSERT [SESSION] (edit_id,edit_date,edited_by) VALUES " +
                                  "(@editID, @editDate, @editedBy)";
-            cmdSQL.ExecuteNonQuery();
+            sqlCmd.ExecuteNonQuery();
         }
 
-        private static void BatchDSCEDIT(SqlCommand cmdSQL)
+        private static void BatchDSCEDIT(SqlCommand sqlCmd)
         {
             //run Append2DSCEDIT query                          
-            cmdSQL.CommandText = "INSERT INTO DSCEDIT (edit_id, " +
+            sqlCmd.CommandText = "INSERT INTO DSCEDIT (edit_id, " +
                                  "edit_date, edited_by, rno, dsc_id, old_roof_area_sqft, " +
                                  "new_roof_area_sqft, old_roof_disco_ic_area_sqft, " +
                                  "new_roof_disco_ic_area_sqft, old_roof_drywell_ic_area_sqft, " +
@@ -1208,21 +1157,21 @@ namespace DSCUpdater
                                  "DSCEDITAPPEND.old_park_drywell_ic_area_sqft AS old_park_drywell_ic_area_sqft, " +
                                  "DSCEDITAPPEND.new_park_drywell_ic_area_sqft AS new_park_drywell_ic_area_sqft " +
                                  "FROM DSCEDITAPPEND";          
-            cmdSQL.ExecuteNonQuery();
-            cmdSQL.CommandText = "UPDATE DSCEDIT SET updater_editor_value_changed = 'False'";
-            cmdSQL.ExecuteNonQuery();
+            sqlCmd.ExecuteNonQuery();
+            sqlCmd.CommandText = "UPDATE DSCEDIT SET updater_editor_value_changed = 'False'";
+            sqlCmd.ExecuteNonQuery();
 
         }
 
-        private static void BatchDeleteFromSQlTables(SqlCommand cmdSQL)
+        private static void BatchDeleteFromSQlTables(SqlCommand sqlCmd)
         {
             //run DeleteDSCEDITAPPEND Table query
-            cmdSQL.CommandText = "DELETE FROM DSCEDITAPPEND";
-            cmdSQL.ExecuteNonQuery();
+            sqlCmd.CommandText = "DELETE FROM DSCEDITAPPEND";
+            sqlCmd.ExecuteNonQuery();
 
             //run DeleteUserUpdate Table query
-            cmdSQL.CommandText = "DELETE FROM USERUPDATE";
-            cmdSQL.ExecuteNonQuery();
+            sqlCmd.CommandText = "DELETE FROM USERUPDATE";
+            sqlCmd.ExecuteNonQuery();
         }
 
         private static void SendImpAEmail()
@@ -1337,13 +1286,12 @@ namespace DSCUpdater
                 toolStripProgressBar2.PerformStep();
             }
 
-            string strSQLCon = "Data Source=WS09884\\SQLEXPRESS;Initial Catalog=DSCEDITOR;Integrated Security=True";
-            SqlConnection conSQL = new SqlConnection(strSQLCon);
-            conSQL.Open();
-            SqlCommand cmdSQL = new SqlCommand();
-            cmdSQL.CommandText = "DELETE FROM USERUPDATE";
-            cmdSQL.Connection = conSQL;
-            cmdSQL.ExecuteNonQuery();
+            SqlConnection sqlCon = new SqlConnection(sqlConStr);
+            sqlCon.Open();
+            SqlCommand sqlCmd = new SqlCommand();
+            sqlCmd.CommandText = "DELETE FROM USERUPDATE";
+            sqlCmd.Connection = sqlCon;
+            sqlCmd.ExecuteNonQuery();
 
             string filepath = "c:\\";
             string str = "SELECT * FROM temp.csv";
@@ -1351,7 +1299,7 @@ namespace DSCUpdater
             OleDbDataAdapter daUserUpdate = new OleDbDataAdapter(str, strCon);
             DataTable dtUserUpdate = new DataTable();
             daUserUpdate.Fill(dtUserUpdate);
-            SqlBulkCopy bulkcopy = new SqlBulkCopy(conSQL);
+            SqlBulkCopy bulkcopy = new SqlBulkCopy(sqlCon);
             bulkcopy.DestinationTableName = "USERUPDATE";
             SqlBulkCopyColumnMapping colmap1 = new SqlBulkCopyColumnMapping(0, "rno");
             SqlBulkCopyColumnMapping colmap2 = new SqlBulkCopyColumnMapping(1, "dsc_id");
@@ -1371,7 +1319,7 @@ namespace DSCUpdater
             bulkcopy.ColumnMappings.Add(colmap8);
             bulkcopy.WriteToServer(dtUserUpdate);
             bulkcopy.Close();
-            conSQL.Close();
+            sqlCon.Close();
 
             //create qcCOunter variable that is used to increment the number of QC checks that fail to pass
             int qcCounter = 0;
@@ -1386,7 +1334,7 @@ namespace DSCUpdater
                            "WHERE (((mst_DSC_ac.roofAreaNeedsUpdate)='True')) " +
                            "OR (((mst_DSC_ac.parkAreaNeedsUpdate)='True'))";
 
-            SqlDataAdapter sqlDAImpAQC = new SqlDataAdapter(strSQLImpAQC, strSQLCon);
+            SqlDataAdapter sqlDAImpAQC = new SqlDataAdapter(strSQLImpAQC, sqlConStr);
             SqlCommandBuilder sqlCBImpAQC = new SqlCommandBuilder(sqlDAImpAQC);
             DataTable dtImpAQC = new DataTable();
             sqlDAImpAQC.Fill(dtImpAQC);
@@ -1399,7 +1347,7 @@ namespace DSCUpdater
                      "mst_DSC_ac RIGHT OUTER JOIN USERUPDATE ON " +
                      "mst_DSC_ac.DSCID = USERUPDATE.dsc_id WHERE (mst_DSC_ac.DSCID IS NULL)";
 
-            SqlDataAdapter sqlDADSCQC = new SqlDataAdapter(strSQLDSCQC, strSQLCon);
+            SqlDataAdapter sqlDADSCQC = new SqlDataAdapter(strSQLDSCQC, sqlConStr);
             SqlCommandBuilder sqlCBDSCQC = new SqlCommandBuilder(sqlDADSCQC);
             DataTable dtDSCQC = new DataTable();
             sqlDADSCQC.Fill(dtDSCQC);
@@ -1412,7 +1360,7 @@ namespace DSCUpdater
                              "USERUPDATE WHERE " +
                              "((([new_park_disco_ic_area_sqft]+[new_park_drywell_ic_area_sqft])>[new_park_area_sqft]))";
 
-            SqlDataAdapter sqlDAParkQC = new SqlDataAdapter(strSQLParkQC, strSQLCon);
+            SqlDataAdapter sqlDAParkQC = new SqlDataAdapter(strSQLParkQC, sqlConStr);
             SqlCommandBuilder sqlCBParkQC = new SqlCommandBuilder(sqlDAParkQC);
             DataTable dtParkQC = new DataTable();
 
@@ -1425,7 +1373,7 @@ namespace DSCUpdater
                             "USERUPDATE.new_roof_disco_ic_area_sqft, " +
                             "USERUPDATE.new_roof_drywell_ic_area_sqft FROM USERUPDATE WHERE " +
                             "((([new_roof_disco_ic_area_sqft]+[new_roof_drywell_ic_area_sqft])>[new_roof_area_sqft]))";
-            SqlDataAdapter sqlDARoofQC = new SqlDataAdapter(strSQLRoofQC, strSQLCon);
+            SqlDataAdapter sqlDARoofQC = new SqlDataAdapter(strSQLRoofQC, sqlConStr);
             SqlCommandBuilder sqlCBRoofQC = new SqlCommandBuilder(sqlDARoofQC);
             DataTable dtRoofQC = new DataTable();
             sqlDARoofQC.Fill(dtRoofQC);
@@ -1538,41 +1486,41 @@ namespace DSCUpdater
                 try
                 {
                     //the following are extracted methods that add SQL command parameters
-                    AddEditDateCommandParameter(cmdSQL, conSQL);
-                    AddEditedByCommandParameter(cmdSQL, conSQL);
-                    AddNewParkAreaCommandParameter(cmdSQL, conSQL);
-                    AddNewParkAreaDrywellCommandParameter(cmdSQL, conSQL);
-                    AddNewParkDISCOAreaCommandParameter(cmdSQL, conSQL);
-                    AddNewRoofAreaCommandParameter(cmdSQL, conSQL);
-                    AddNewRoofAreaDrywellCommandParameter(cmdSQL, conSQL);
-                    AddNewRoofDISCOAreaCommandParameter(cmdSQL, conSQL);
-                    AddEditIDCommandParameter(cmdSQL);
+                    AddEditDateCommandParameter(sqlCmd, sqlCon);
+                    AddEditedByCommandParameter(sqlCmd, sqlCon);
+                    AddNewParkAreaCommandParameter(sqlCmd, sqlCon);
+                    AddNewParkAreaDrywellCommandParameter(sqlCmd, sqlCon);
+                    AddNewParkDISCOAreaCommandParameter(sqlCmd, sqlCon);
+                    AddNewRoofAreaCommandParameter(sqlCmd, sqlCon);
+                    AddNewRoofAreaDrywellCommandParameter(sqlCmd, sqlCon);
+                    AddNewRoofDISCOAreaCommandParameter(sqlCmd, sqlCon);
+                    AddEditIDCommandParameter(sqlCmd);
 
                     //the following are extracted methods based on batch queries:          
-                    BatchDSCEDITAPPENDQueries(cmdSQL);
-                    BatchNewICRecords(cmdSQL);
-                    BatchUpdateMasterICTables(cmdSQL);
-                    BatchUpdateDSCAreas(cmdSQL);
-                    BatchDSCEDIT(cmdSQL);
-                    BatchSESSION(cmdSQL);
+                    BatchDSCEDITAPPENDQueries(sqlCmd);
+                    BatchNewICRecords(sqlCmd);
+                    BatchUpdateMasterICTables(sqlCmd);
+                    BatchUpdateDSCAreas(sqlCmd);
+                    BatchDSCEDIT(sqlCmd);
+                    BatchSESSION(sqlCmd);
 
-                    cmdSQL.CommandText = "INSERT INTO IMPUPDATE SELECT dsc_edit_id, dsc_id, new_roof_area_sqft, " +
+                    sqlCmd.CommandText = "INSERT INTO IMPUPDATE SELECT dsc_edit_id, dsc_id, new_roof_area_sqft, " +
                                          "old_roof_area_sqft, new_park_area_sqft, old_park_area_sqft FROM [DSCEDIT] " +
                                          "WHERE ((([DSCEDIT].[new_roof_area_sqft])<>[DSCEDIT].[old_roof_area_sqft]) " +
                                          "AND (([DSCEDIT].[edit_id])=@editID)) " +
                                          "OR ((([DSCEDIT].[new_park_area_sqft])<>[DSCEDIT].[old_park_area_sqft]) " +
                                          "AND (([DSCEDIT].[edit_id])=@editID))";
-                    cmdSQL.ExecuteNonQuery(); 
+                    sqlCmd.ExecuteNonQuery(); 
 
                     ExportIMPUPDATEToCSV();
 
-                    cmdSQL.CommandText = "DELETE FROM IMPUPDATE";
-                    cmdSQL.ExecuteNonQuery();
+                    sqlCmd.CommandText = "DELETE FROM IMPUPDATE";
+                    sqlCmd.ExecuteNonQuery();
 
-                    BatchDeleteFromSQlTables(cmdSQL);
+                    BatchDeleteFromSQlTables(sqlCmd);
 
                     //close the SQL connection
-                    conSQL.Close();
+                    sqlCon.Close();
                     btnSubmit.Visible = false;
                     btnCancel.Text = "Return";
                     MessageBox.Show("All updates to the modeling system have completed sucessfully.  To review changes from this edit session, return to the main page, and click on the 'Load Update History' button to load the desired edit session.", "DSCUpdater: Update Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -1662,12 +1610,11 @@ namespace DSCUpdater
             }
             else
             {
-                string strSQLCon = "Data Source=WS09884\\SQLEXPRESS;Initial Catalog=DSCEDITOR;Integrated Security=True";
-                SqlConnection conSQL = new SqlConnection(strSQLCon);
-                conSQL.Open();
-                SqlCommand cmdSQL = new SqlCommand();
-                AddSESSIONEditIDCommandParameter(cmdSQL);
-                cmdSQL.CommandText = "SELECT dsc_edit_id, edit_id, edit_date, " +
+                SqlConnection sqlCon = new SqlConnection(sqlConStr);
+                sqlCon.Open();
+                SqlCommand sqlCmd = new SqlCommand();
+                AddSESSIONEditIDCommandParameter(sqlCmd);
+                sqlCmd.CommandText = "SELECT dsc_edit_id, edit_id, edit_date, " +
                                      "edited_by, rno, dsc_id, old_roof_area_sqft, new_roof_area_sqft, " +
                                      "old_roof_disco_ic_area_sqft, new_roof_disco_ic_area_sqft, " +
                                      "old_roof_drywell_ic_area_sqft, new_roof_drywell_ic_area_sqft, " +
@@ -1677,8 +1624,8 @@ namespace DSCUpdater
                                      "updater_editor_value_changed " +
                                      "FROM DSCEDIT WHERE (DSCEDIT.edit_id = @sessionEditID)";
 
-                cmdSQL.Connection = conSQL;
-                daUpdaterEditor = new SqlDataAdapter(cmdSQL);
+                sqlCmd.Connection = sqlCon;
+                daUpdaterEditor = new SqlDataAdapter(sqlCmd);
                 //this should be called dtUpdaterEditor
                 dtUpdaterEditor = new DataTable();
                 //MessageBox.Show(dtUpdaterEditor.Rows.Count.ToString());
@@ -1704,7 +1651,7 @@ namespace DSCUpdater
                 btnSubmitUpdaterEditorChanges.Enabled = true;
                 btnUpdaterEditorClear.Enabled = true;
                 btnUpdaterEditorCloseCancel.Text = "Cancel";
-                MessageBox.Show(dgvUpdaterEditor.RowCount.ToString());
+                //MessageBox.Show(dgvUpdaterEditor.RowCount.ToString());
             }
         }
 
@@ -1768,7 +1715,6 @@ namespace DSCUpdater
       
         private void btnSubmitUpdaterEditorChanges_Click(object sender, EventArgs e)
         {
-            string sqlConStr = "Data Source=WS09884\\SQLEXPRESS;Initial Catalog=DSCEDITOR;Integrated Security=True";
             SqlConnection sqlCon = new SqlConnection(sqlConStr);
             sqlCon.Open();
             SqlCommand sqlCmd = new SqlCommand();
@@ -2060,7 +2006,6 @@ namespace DSCUpdater
                 int editorEditID = 0;
                 dgvUpdaterEditor.Rows[0].Selected = true;
                 editorEditID = Convert.ToInt32(dgvUpdaterEditor.SelectedCells[1].Value);
-                string sqlConStr = "Data Source=WS09884\\SQLEXPRESS;Initial Catalog=DSCEDITOR;Integrated Security=True";
                 SqlConnection sqlCon = new SqlConnection(sqlConStr);
                 sqlCon.Open();
                 SqlCommand sqlCmd = new SqlCommand();
@@ -2333,39 +2278,81 @@ namespace DSCUpdater
             }
         }
 
+        private void changeDatabaseConnectionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TabPage currentTabPage = tabControlMain.SelectedTab;
+            HideTabPage(currentTabPage);
+            ShowTabPage(tabDBConnOptions);
+         }
+
         private void btnChangeDBConnOption_Click(object sender, EventArgs e)
         {
             //takes user input from text fields to set new connection property
             //where the data will be accessed and written
             string newServerCon = txtNewServerCon.Text;
             string newDatabaseCon = txtNewDatabaseCon.Text;
-            string newConStr = "Data Source="+newServerCon+";Initial Catalog="+newDatabaseCon+";Integrated Security=True";
+            string newConStr = "Data Source=" + newServerCon + ";Initial Catalog=" + newDatabaseCon + ";Integrated Security=True";
             SqlConnection newSQLCon = new SqlConnection();
-            newSQLCon.ConnectionString=newConStr;
-            if (txtNewDatabaseCon == null || txtNewServerCon == null)
+            newSQLCon.ConnectionString = newConStr;
+            if (txtNewDatabaseCon != null || txtNewServerCon != null)
             {
                 try
                 {
                     newSQLCon.Open();
                     MessageBox.Show("Connected to server = " + newServerCon + ", database = " + newDatabaseCon);
                     
+                    #region ChangeXMLAttributeContent
+
+                    //The Path to the xml file
+                    string xmlConfigFile = "DSCUpdaterConfig.xml";
+
+                    //Create FileStream fs
+                    FileStream fs = new FileStream(xmlConfigFile, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+
+                    //Create new XmlDocument
+                    System.Xml.XmlDocument xmlDoc = new System.Xml.XmlDocument();
+
+                    //Load the contents of the filestream into the XmlDocument (xmldoc)
+                    xmlDoc.Load(fs);
+
+                    //close the fs filestream
+                    fs.Close();
+
+                    //Change the contents of the attribute                     
+                    xmlDoc.DocumentElement.ChildNodes.Item(0).InnerText = newConStr;
+
+                    // Create the filestream for saving
+                    FileStream WRITER = new FileStream(xmlConfigFile, FileMode.Truncate, FileAccess.Write, FileShare.ReadWrite);
+
+                    // Save the xmldocument
+                    xmlDoc.Save(WRITER);
+
+                    //Close the writer filestream
+                    WRITER.Close();
+                    
+                    #endregion
                 }
                 catch (Exception ex)
                 {
                     if (newSQLCon != null)
+                    {
                         newSQLCon.Dispose();
-                    string errorMessage = "A error occured while trying to connect to the server. Please choose a valid server and database.";
+                    }
+                    string errorMessage = "A error occured while trying to connect to the server." + ex.Message;
                     errorMessage += Environment.NewLine;
                     errorMessage += Environment.NewLine;
                     errorMessage += ex.Message;
-
-                    MessageBox.Show(this, errorMessage, "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(this, errorMessage, "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error);              
                     return;
+                }
+                finally
+                {
+                    newSQLCon.Close();
                 }
             }
             else
             {
-                MessageBox.Show("Server or database not specified. Please specify a valid server and database.", "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                 MessageBox.Show("Server or database not specified. Please specify a valid server and database.", "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -2374,13 +2361,6 @@ namespace DSCUpdater
             HideTabPage(tabDBConnOptions);
             ShowTabPage(tabMain);
         }
-
-        private void changeDatabaseConnectionsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            TabPage currentTabPage = tabControlMain.SelectedTab;
-            HideTabPage(currentTabPage);
-            ShowTabPage(tabDBConnOptions);
-        }  
     }
 }
 
