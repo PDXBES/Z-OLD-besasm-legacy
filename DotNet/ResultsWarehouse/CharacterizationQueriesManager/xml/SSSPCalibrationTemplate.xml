@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="\\Cassio\Modeling\Model_Programs\ResultsWarehouse\CharacterizationQueriesManager\xml\excel_char.xsl" ?>
+<ReportGenerator reportName="SSSP Calibration Report" studyArea="" >
+	<CharacterizationTable tableNumber="1" tableTitle="Flow Estimation Catchment Summary" columnCount="10">
+		<Header>
+			<Cell data="Monitor/Manhole ID" cellType="COLUMNNAME" footerID=""></Cell>
+			<Cell data="Flow Estimation Method" cellType="COLUMNNAME"></Cell>
+			<Cell data="Total Tax Lot Area (acres)" cellType="COLUMNNAME"></Cell>
+			<Cell data="Total Sewered Area (acres)" cellType="COLUMNNAME"></Cell>
+			<Cell data="Number of Sewered Parcels" cellType="COLUMNNAME"></Cell>
+			<Cell data="SFR Sewered Area (acres)" cellType="COLUMNNAME"></Cell>
+			<Cell data="MFR Sewered Area (acres)" cellType="COLUMNNAME"></Cell>
+			<Cell data="IND Sewered Area (acres)" cellType="COLUMNNAME"></Cell>
+			<Cell data="COM Sewered Area (acres)" cellType="COLUMNNAME"></Cell>
+			<Cell data="POS Sewered Area (acres)" cellType="COLUMNNAME"></Cell>
+		</Header>		
+		<Row isMultiRow="true" multiRowKey="ZoningByFEC">
+			<Cell cellType="FUNCTION">
+				<Function functionName="FECName" />									
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="FEMethod" />									
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="FECTotalArea" />									
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="FECSeweredArea" />									
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="FECParcelCount" />									
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="FECSFRArea" />									
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="FECMFRArea" />									
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="FECINDArea" />									
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="FECCOMArea" />									
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="FECPOSArea" />									
+			</Cell>
+		</Row>	
+	</CharacterizationTable>
+	<CharacterizationTable tableNumber="2" tableTitle="Time Periods Used for Base Flow Calculation from Flow Data" columnCount="3">
+		<Header>
+			<Cell data="FE Catchment/Manhole ID" cellType="COLUMNNAME" footerID=""></Cell>
+			<Cell data="Start" cellType="COLUMNNAME"></Cell>
+			<Cell data="End" cellType="COLUMNNAME"></Cell>			
+		</Header>		
+		<Row isMultiRow="true" multiRowKey="ZoningByFEC">
+			<Cell cellType="FUNCTION">
+				<Function functionName="FECName" />									
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="FEMethod" />									
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="FECTotalArea" />									
+			</Cell>			
+		</Row>	
+	</CharacterizationTable>
+	<CharacterizationTable tableNumber="3" tableTitle="Base Flow Calculation Results" columnCount="16">
+		<Header>
+			<Cell data="FE Catchment" cellType="COLUMNNAME" footerID="" rowSpan="3"></Cell>
+			<Cell data="Type" cellType="COLUMNNAME" rowSpan="3"></Cell>
+			<Cell data="Design Manual Average Base Flow (cfs)" cellType="COLUMNNAME" rowSpan="3"></Cell>			
+			<Cell data="Calc'd Average Base Flow (cfs)" cellType="COLUMNNAME" rowSpan="3"></Cell>			
+			<Cell data="Hourly Peaking Factor" cellType="COLUMNNAME" colSpan="12"></Cell>			
+		</Header>		
+		<Header>
+			<Cell data="00" cellType ="COLUMNNAME"></Cell>
+			<Cell data="01" cellType ="COLUMNNAME"></Cell>
+			<Cell data="02" cellType ="COLUMNNAME"></Cell>
+			<Cell data="03" cellType ="COLUMNNAME"></Cell>
+			<Cell data="04" cellType ="COLUMNNAME"></Cell>
+			<Cell data="05" cellType ="COLUMNNAME"></Cell>
+			<Cell data="06" cellType ="COLUMNNAME"></Cell>
+			<Cell data="07" cellType ="COLUMNNAME"></Cell>
+			<Cell data="08" cellType ="COLUMNNAME"></Cell>
+			<Cell data="09" cellType ="COLUMNNAME"></Cell>
+			<Cell data="10" cellType ="COLUMNNAME"></Cell>
+			<Cell data="11" cellType ="COLUMNNAME"></Cell>
+		</Header>
+		<Header>
+			<Cell data="12" cellType ="COLUMNNAME"></Cell>
+			<Cell data="13" cellType ="COLUMNNAME"></Cell>
+			<Cell data="14" cellType ="COLUMNNAME"></Cell>
+			<Cell data="15" cellType ="COLUMNNAME"></Cell>
+			<Cell data="16" cellType ="COLUMNNAME"></Cell>
+			<Cell data="17" cellType ="COLUMNNAME"></Cell>
+			<Cell data="18" cellType ="COLUMNNAME"></Cell>
+			<Cell data="19" cellType ="COLUMNNAME"></Cell>
+			<Cell data="20" cellType ="COLUMNNAME"></Cell>
+			<Cell data="21" cellType ="COLUMNNAME"></Cell>
+			<Cell data="22" cellType ="COLUMNNAME"></Cell>
+			<Cell data="23" cellType ="COLUMNNAME"></Cell>
+		</Header>
+		<Row isMultiRow="true" multiRowKey="BaseflowByFEC">
+			<Cell cellType="FUNCTION" rowSpan="2">
+				<Function functionName="FECName" />									
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="BFType" />									
+			</Cell>
+			<Cell cellType="FUNCTION" rowSpan="2">
+				<Function functionName="BFDM" />									
+			</Cell>			
+			<Cell cellType="FUNCTION">
+				<Function functionName="BFCalced" />									
+			</Cell>	
+			<Cell data="00" cellType ="FUNCTION"></Cell>
+			<Cell data="01" cellType ="FUNCTION"></Cell>
+			<Cell data="02" cellType ="FUNCTION"></Cell>
+			<Cell data="03" cellType ="FUNCTION"></Cell>
+			<Cell data="04" cellType ="FUNCTION"></Cell>
+			<Cell data="05" cellType ="FUNCTION"></Cell>
+			<Cell data="06" cellType ="FUNCTION"></Cell>
+			<Cell data="07" cellType ="FUNCTION"></Cell>
+			<Cell data="08" cellType ="FUNCTION"></Cell>
+			<Cell data="09" cellType ="FUNCTION"></Cell>
+			<Cell data="10" cellType ="FUNCTION"></Cell>
+			<Cell data="11" cellType ="FUNCTION"></Cell>		
+		</Row>	
+		<Row isMultiRow="true" multiRowKey="BaseflowByFEC">			
+			<Cell cellType="FUNCTION">
+				<Function functionName="BFType" />									
+			</Cell>			
+			<Cell cellType="FUNCTION">
+				<Function functionName="BFCalced" />									
+			</Cell>			
+			<Cell data="12" cellType ="FUNCTION"></Cell>
+			<Cell data="13" cellType ="FUNCTION"></Cell>
+			<Cell data="14" cellType ="FUNCTION"></Cell>
+			<Cell data="15" cellType ="FUNCTION"></Cell>
+			<Cell data="16" cellType ="FUNCTION"></Cell>
+			<Cell data="17" cellType ="FUNCTION"></Cell>
+			<Cell data="18" cellType ="FUNCTION"></Cell>
+			<Cell data="19" cellType ="FUNCTION"></Cell>
+			<Cell data="20" cellType ="FUNCTION"></Cell>
+			<Cell data="21" cellType ="FUNCTION"></Cell>
+			<Cell data="22" cellType ="FUNCTION"></Cell>
+			<Cell data="23" cellType ="FUNCTION"></Cell>
+		</Row>
+	</CharacterizationTable>
+	<CharacterizationTable tableNumber="4" tableTitle="Flow Estimation Catchment Sewer System Summary" columnCount="5">
+		<Header>
+			<Cell data="Monitor/Manhole ID" cellType="COLUMNNAME" footerID=""></Cell>
+			<Cell data="Modeled Pipes" cellType="COLUMNNAME"></Cell>
+			<Cell data="Total Length of Pipes in FE Catchment (ft)" cellType="COLUMNNAME"></Cell>			
+			<Cell data="Range of Pipe Diameters (in)" cellType="COLUMNNAME"></Cell>			
+			<Cell data="Installation Date Range" cellType="COLUMNNAME"></Cell>			
+		</Header>		
+		<Row isMultiRow="true" multiRowKey="SewersByFEC">
+			<Cell cellType="FUNCTION">
+				<Function functionName="FECName" />									
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="FEPipeCount" />									
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="FEPipeLength" />									
+			</Cell>			
+			<Cell cellType="FUNCTION">
+				<Function functionName="FEPipeDiamRange" />									
+			</Cell>			
+			<Cell cellType="FUNCTION">
+				<Function functionName="FEPipeInstallDateRange" />									
+			</Cell>			
+		</Row>	
+	</CharacterizationTable>
+	<CharacterizationTable tableNumber="5" tableTitle="Wet Weather Calibration Storm Results Assessment" columnCount="3">
+		<Header>
+			<Cell data="Calibration Node ID & Asseessment" cellType="COLUMNNAME" footerID=""></Cell>
+			<Cell data="Calibration Period" cellType="COLUMNNAME"></Cell>
+			<Cell data="Qualitative Calibration Assessment" cellType="COLUMNNAME"></Cell>						
+		</Header>		
+		<Row isMultiRow="true" multiRowKey="CalibrationByFEC">
+			<Cell cellType="FUNCTION">
+				<Function functionName="FECName" />									
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="FECalibrationPeriod" />									
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="FECalibrationAssessment" />									
+			</Cell>						
+		</Row>	
+	</CharacterizationTable>
+	<CharacterizationTable tableNumber="6" tableTitle="5-Year Winter Design Storm Comparison to Regression Calibration Events" columnCount="4">
+		<Header>
+			<Cell data="" cellType="COLUMNNAME"></Cell>
+			<Cell data="24-hour Rainfall Depth (in)" cellType="COLUMNNAME" footerID=""></Cell>
+			<Cell data="72-hour Rainfall Depth (in)" cellType="COLUMNNAME"></Cell>
+			<Cell data="Maximum Observed RDII (gpad)" cellType="COLUMNNAME"></Cell>						
+		</Header>		
+		<Row isMultiRow="true" multiRowKey="CalibrationByFEC">
+			<Cell cellType="FUNCTION">
+				<Function functionName="FECName" />									
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="FECalibrationPeriod" />									
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="FECalibrationAssessment" />									
+			</Cell>	
+			<Cell cellType="FUNCTION">
+				<Function functionName="FECalibrationAssessment" />									
+			</Cell>						
+		</Row>	
+	</CharacterizationTable>
+	<CharacterizationTable tableNumber="7" tableTitle="Regression Calibration Results" columnCount="2">
+		<Header>
+			<Cell data="Catchment" cellType="COLUMNNAME"></Cell>
+			<Cell data="Regression Equation" cellType="COLUMNNAME" footerID=""></Cell>			
+		</Header>		
+		<Row isMultiRow="true" multiRowKey="CalibrationByFEC">
+			<Cell cellType="FUNCTION">
+				<Function functionName="FECName" />									
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="FECalibrationPeriod" />									
+			</Cell>							
+		</Row>	
+	</CharacterizationTable>
+	<CharacterizationTable tableNumber="8" tableTitle="Wet Weather Verification Storm Results Assessment" columnCount="2">
+		<Header>
+			<Cell data="Verification Event" cellType="COLUMNNAME"></Cell>
+			<Cell data="Qualitative Verification Assessment" cellType="COLUMNNAME" footerID=""></Cell>			
+		</Header>		
+		<Row isMultiRow="true" multiRowKey="CalibrationByFEC">
+			<Cell cellType="FUNCTION">
+				<Function functionName="FECName" />									
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="FECalibrationPeriod" />									
+			</Cell>							
+		</Row>	
+	</CharacterizationTable>
+</ReportGenerator>

@@ -1,0 +1,7 @@
+[Link] 
+Application=..\EXE\QCWorkspace.mbx
+Module=QAQC_wors4.mbo
+Module=..\..\Common\source\EMGMTabUtil.MBO
+Module=..\..\Common\source\EMGlogger.MBO
+Module=..\..\Common\source\IniUtils.MBO
+Module=..\..\Common\source\EMGOpenUtils.MBO

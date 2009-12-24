@@ -1,0 +1,5 @@
+'
+'	Declarations for link check support.
+'
+Declare Function LinkCheckSpace(Msg as string) as logical
+Declare	Function LinkCheckDup(Msg as string) as logical

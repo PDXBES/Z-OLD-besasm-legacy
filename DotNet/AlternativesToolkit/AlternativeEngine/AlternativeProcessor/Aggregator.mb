@@ -1,0 +1,162 @@
+include "MapBasic.def"
+'include "\\cassio\modeling\Model_Programs\Emgaats\CodeV2.2\Common\Inc\EMGGlobal.def"
+'include "\\cassio\modeling\Model_Programs\Emgaats\CodeV2.2\Common\Inc\EMGToolGlobal.def"
+'include "\\cassio\modeling\Model_Programs\Emgaats\CodeV2.2\Common\Inc\EMGLogger.def"
+'include "\\cassio\modeling\Model_Programs\Emgaats\CodeV2.2\Common\Inc\EMGOpenUtils.def"
+'include "\\cassio\modeling\Model_Programs\Emgaats\CodeV2.2\Common\Inc\EMGMTabUtil.def"
+'include "\\cassio\modeling\Model_Programs\Emgaats\CodeV2.2\Common\Inc\INIUtils.def"
+'include "\\cassio\modeling\Model_Programs\Emgaats\CodeV2.2\Workbench\Inc\EMGInit.def"
+'include "\\cassio\modeling\Model_Programs\Emgaats\CodeV2.2\LinkTool\Inc\EMGLinkColData.def"
+'include "\\cassio\modeling\Model_Programs\Emgaats\CodeV2.2\common\inc\EMGCoordSys.def"
+'
+Declare Sub Main()
+
+'Required for all Framework MBX Apps
+Declare Sub ExitApplication()
+Declare Sub Function_Menu()
+
+'Globals required for all Framework Apps
+Global gReturnStatus as String
+Global gDebugMode as Logical
+
+'Globals specific to this Framework App
+Global gInputAlternativePath as String
+Global gFocusArea as String
+Global gOutputAlternativePath as String
+
+Declare Sub Aggregate
+Declare Sub AddFocusAreaColumn(ByVal TableName as String)
+
+
+Sub AddFocusAreaColumn(ByVal TableName as String)
+	Dim i as Integer
+	Dim columnCount as Integer
+	Dim addColumn as Logical
+	addColumn = True
+	columnCount = TableInfo(TableName, TAB_INFO_NCOLS)
+	For i = 1 To columnCount
+		If ColumnInfo(TableName , "COL" & i, COL_INFO_NAME) = "FocusArea" Then		
+			addColumn = False			
+		End If
+	Next
+	If addColumn = True Then
+		Alter Table TableName (Add FocusArea Char(10))
+	End If
+	addColumn = False	
+End Sub
+
+'---------------------------------------------------------
+' Select all alternatives elements for a focus area and add to a new alternative
+'---------------------------------------------------------
+Sub Aggregate
+'1: Open alt tables located in gInputAlternativePath
+
+	
+	Open Table gInputAlternativePath & "alt_dsc_ac.tab" as alt_dsc	
+	Call AddFocusAreaColumn("alt_dsc")
+	
+	Open Table gInputAlternativePath & "alt_links_ac.tab" as alt_links
+	Call AddFocusAreaColumn("alt_links")
+
+	Open Table gInputAlternativePath & "alt_nodes_ac.tab" as alt_nodes
+	Call AddFocusAreaColumn("alt_nodes")
+
+	Open Table gInputAlternativePath & "alt_speclinks_ac.tab" as alt_speclinks
+	Call AddFocusAreaColumn("alt_speclinks")
+
+	Open Table gInputAlternativePath & "alt_ssc_ac.tab" as alt_ssc
+	Call AddFocusAreaColumn("alt_ssc")
+
+	Open Table gInputAlternativePath & "alt_rooftargets_ac.tab" as alt_rooftargets
+	Call AddFocusAreaColumn("alt_rooftargets")
+
+	Open Table gInputAlternativePath & "alt_streettargets_ac.tab" as alt_streettargets
+	Call AddFocusAreaColumn("alt_streettargets")
+
+	Open Table gInputAlternativePath & "alt_parkingtargets_ac.tab" as alt_parkingtargets
+	Call AddFocusAreaColumn("alt_parkingtargets")
+	
+'2: Open alt tables located in gInputAlternativePath
+	Open Table gOutputAlternativePath & "alt_dsc_ac.tab" as alt_dsc_agg
+	Open Table gOutputAlternativePath & "alt_links_ac.tab" as alt_links_agg
+	Open Table gOutputAlternativePath & "alt_nodes_ac.tab" as alt_nodes_agg
+	Open Table gOutputAlternativePath & "alt_speclinks_ac.tab" as alt_speclinks_agg
+	Open Table gOutputAlternativePath & "alt_ssc_ac.tab" as alt_ssc_agg
+	Open Table gOutputAlternativePath & "alt_rooftargets_ac.tab" as alt_rooftargets_agg
+	Open Table gOutputAlternativePath & "alt_streettargets_ac.tab" as alt_streettargets_agg
+	Open Table gOutputAlternativePath & "alt_parkingtargets_ac.tab" as alt_parkingtargets_agg
+	
+'3: Select from alt tables where focusArea = gFocusArea
+	Select * From alt_dsc Where focusArea = gFocusArea Into alt_dsc_fa
+	Select * From alt_links Where focusArea = gFocusArea Into alt_links_fa
+	Select * From alt_nodes Where focusArea = gFocusArea Into alt_nodes_fa
+	Select * From alt_speclinks Where focusArea = gFocusArea Into alt_speclinks_fa
+	Select * From alt_ssc Where focusArea = gFocusArea Into alt_ssc_fa
+	Select * From alt_rooftargets Where focusArea = gFocusArea Into alt_rooftargets_fa
+	Select * From alt_streettargets Where focusArea = gFocusArea Into alt_streettargets_fa
+	Select * From alt_parkingtargets Where focusArea = gFocusArea Into alt_parkingtargets_fa		
+
+'4: Append from selected alt tables into alternative located at gOutputAlternativePath
+	Insert Into alt_dsc_agg Select * From alt_dsc_fa
+	Insert Into alt_links_agg Select * From alt_links_fa
+	Insert Into alt_nodes_agg Select * From alt_nodes_fa
+	Insert Into alt_speclinks_agg Select * From alt_speclinks_fa
+	Insert Into alt_ssc_agg Select * From alt_ssc_fa
+	Insert Into alt_rooftargets_agg Select * From alt_rooftargets_fa
+	Insert Into alt_streettargets_agg Select * From alt_streettargets_fa
+	Insert Into alt_parkingtargets_agg Select * From alt_parkingtargets_fa
+
+'5: Save tables
+	Commit Table alt_dsc_fa
+	Commit Table alt_links_fa
+	Commit Table alt_nodes_fa
+	Commit Table alt_speclinks_fa
+	Commit Table alt_ssc_fa
+	Commit Table alt_rooftargets_fa
+	Commit Table alt_streettargets_fa
+	Commit Table alt_parkingtargets_fa
+End Sub
+
+
+'---------------------------------------------------------
+' Modify to	add	menuitems for testing
+'---------------------------------------------------------
+
+Sub	Function_Menu() 'Required for all Framework MBX apps
+
+Create Menu	"Function Menu"	as 
+	"Aggregate Focus Area" ID 10000 calling Aggregate,	
+	"Exit MBX Application" ID 9999 calling ExitApplication 'Required for all Framework MBX apps
+  
+  Alter	Menu Bar Remove	ID 6, ID 7 
+  Alter	Menu Bar Add "Function Menu", ID 6,	ID 7
+
+End	Sub
+
+'--------------------------------------------------------
+'No	changes	below here
+'--------------------------------------------------------
+
+Sub	Main()
+		 
+	gReturnStatus="Initialized"	
+	OnError GoTo ErrorHandler
+	'Call InitHousekeeping		' have to init some globals before we can say hello
+	'Call InitOpenUtilGlobals  ' this sets up table names for the EMGOpenUtils functions
+	
+	Call Function_Menu
+	
+	Exit Sub
+	
+	ErrorHandler:
+		gReturnStatus = "Error: " + Err()		
+		OnError GoTo 0
+		Error Err()
+	
+End	Sub
+
+'---------------------------------------------------------
+Sub ExitApplication()		
+	Close All		
+	End Program
+End Sub
