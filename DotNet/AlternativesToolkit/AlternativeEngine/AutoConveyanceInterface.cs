@@ -9,6 +9,7 @@ using System.IO;
 using System.Data.Odbc;
 using SystemsAnalysis.Modeling.ModelResults;
 using SystemsAnalysis.Modeling;
+using SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor;
 
 namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
 {

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using SystemsAnalysis.Utils.Events;
+using System.Collections.Generic;
 
 
 namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
@@ -12,6 +13,7 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
 	{		
 		void ExecuteLibrary(string libraryName, IDictionary parameterList);
         void ExecuteFunctionGroup(string execGroup, string baseModel, string alternativeName, string outputModel, bool interactive);
+        void ExecuteFunctionGroup(string execGroup, Dictionary<string, string> parameters);
 
 		void ShowGIS();
 		void HideGIS();

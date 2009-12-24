@@ -101,6 +101,8 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Infragistics2.Win.UltraWinListBar.v9.2, Version=9.2.20092.1003, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb" />
+    <Reference Include="Infragistics2.Win.UltraWinListView.v9.2, Version=9.2.20092.1003, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb" />
     <Reference Include="Microsoft.VisualBasic">
       <Name>Microsoft.VisualBasic</Name>
     </Reference>
@@ -129,13 +131,9 @@
     <Reference Include="System.Xml">
       <Name>System.XML</Name>
     </Reference>
-    <Reference Include="SystemsAnalysis.Modeling.ModelResults.XPSWMMResults, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7b0f2d94afd6a843, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>W:\Model_Programs\bin\DotNet\SystemsAnalysis.Modeling.ModelResults.XPSWMMResults.dll</HintPath>
-    </Reference>
     <Reference Include="SystemsAnalysis.Utils.AccessUtils.DatabaseManagement, Version=1.0.2880.21965, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>W:\Model_Programs\bin\DotNet\AccessUtils\SystemsAnalysis.Utils.AccessUtils.DatabaseManagement.dll</HintPath>
+      <HintPath>..\..\AccessUtils\DatabaseManagement\bin\Release\SystemsAnalysis.Utils.AccessUtils.DatabaseManagement.dll</HintPath>
     </Reference>
     <ProjectReference Include="..\..\Alternatives\SystemsAnalysis.Modeling.Alternatives.csproj">
       <Project>{D5E4B31B-D773-4877-9008-80F74475DE93}</Project>
@@ -166,9 +164,17 @@
       <Project>{19DE0713-65B7-4D46-A537-49704F93CB90}</Project>
       <Name>SystemsAnalysis.ModelConstruction.ModelConfiguration</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\ModelingUtils\ResultsExtractor\SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor.csproj">
+      <Project>{AA8663B3-4B31-4F11-BD73-9CC3EF99101F}</Project>
+      <Name>SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Modeling\SystemsAnalysis.Modeling.csproj">
       <Project>{54555B74-906E-4D29-9BC3-7653805B6AD0}</Project>
       <Name>SystemsAnalysis.Modeling</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ModelResults\SystemsAnalysis.Modeling.ModelResults.csproj">
+      <Project>{F1A132E6-4C70-4303-AFC2-82938D0F557A}</Project>
+      <Name>SystemsAnalysis.Modeling.ModelResults</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Tracer\SystemsAnalysis.Tracer.csproj">
       <Project>{C8B24858-1D99-4519-9A1D-CF129CED9ADA}</Project>
@@ -178,44 +184,44 @@
       <Project>{AFB81561-9859-4FA2-86AD-0C6833488E41}</Project>
       <Name>SystemsAnalysis.Types</Name>
     </ProjectReference>
-    <Reference Include="Infragistics2.Shared.v8.3, Version=8.3.20083.1009, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files\Infragistics\NetAdvantage for .NET 2008 Vol. 3 CLR 2.0\windows forms\bin\Infragistics2.Shared.v8.3.dll</HintPath>
+    <Reference Include="Infragistics2.Shared.v9.2, Version=9.2.20092.1003, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
+      <HintPath>C:\Program Files\Infragistics\NetAdvantage 2009.2\Windows Forms\Bin\Infragistics2.Shared.v9.2.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
-    <Reference Include="Infragistics2.Win.Misc.v8.3, Version=8.3.20083.1009, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files\Infragistics\NetAdvantage for .NET 2008 Vol. 3 CLR 2.0\windows forms\bin\Infragistics2.Win.Misc.v8.3.dll</HintPath>
+    <Reference Include="Infragistics2.Win.Misc.v9.2, Version=9.2.20092.1003, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
+      <HintPath>C:\Program Files\Infragistics\NetAdvantage 2009.2\Windows Forms\Bin\Infragistics2.Win.Misc.v9.2.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
-    <Reference Include="Infragistics2.Win.UltraWinDataSource.v8.3, Version=8.3.20083.1009, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files\Infragistics\NetAdvantage for .NET 2008 Vol. 3 CLR 2.0\windows forms\bin\Infragistics2.Win.UltraWinDataSource.v8.3.dll</HintPath>
+    <Reference Include="Infragistics2.Win.UltraWinDataSource.v9.2, Version=9.2.20092.1003, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
+      <HintPath>C:\Program Files\Infragistics\NetAdvantage 2009.2\Windows Forms\Bin\Infragistics2.Win.UltraWinDataSource.v9.2.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
-    <Reference Include="Infragistics2.Win.UltraWinEditors.v8.3, Version=8.3.20083.1009, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files\Infragistics\NetAdvantage for .NET 2008 Vol. 3 CLR 2.0\windows forms\bin\Infragistics2.Win.UltraWinEditors.v8.3.dll</HintPath>
+    <Reference Include="Infragistics2.Win.UltraWinEditors.v9.2, Version=9.2.20092.1003, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
+      <HintPath>C:\Program Files\Infragistics\NetAdvantage 2009.2\Windows Forms\Bin\Infragistics2.Win.UltraWinEditors.v9.2.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
-    <Reference Include="Infragistics2.Win.UltraWinExplorerBar.v8.3, Version=8.3.20083.1009, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files\Infragistics\NetAdvantage for .NET 2008 Vol. 3 CLR 2.0\windows forms\bin\Infragistics2.Win.UltraWinExplorerBar.v8.3.dll</HintPath>
+    <Reference Include="Infragistics2.Win.UltraWinExplorerBar.v9.2, Version=9.2.20092.1003, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
+      <HintPath>C:\Program Files\Infragistics\NetAdvantage 2009.2\Windows Forms\Bin\Infragistics2.Win.UltraWinExplorerBar.v9.2.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
-    <Reference Include="Infragistics2.Win.UltraWinGrid.v8.3, Version=8.3.20083.1009, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files\Infragistics\NetAdvantage for .NET 2008 Vol. 3 CLR 2.0\windows forms\bin\Infragistics2.Win.UltraWinGrid.v8.3.dll</HintPath>
+    <Reference Include="Infragistics2.Win.UltraWinGrid.v9.2, Version=9.2.20092.1003, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
+      <HintPath>C:\Program Files\Infragistics\NetAdvantage 2009.2\Windows Forms\Bin\Infragistics2.Win.UltraWinGrid.v9.2.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
-    <Reference Include="Infragistics2.Win.UltraWinStatusBar.v8.3, Version=8.3.20083.1009, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files\Infragistics\NetAdvantage for .NET 2008 Vol. 3 CLR 2.0\windows forms\bin\Infragistics2.Win.UltraWinStatusBar.v8.3.dll</HintPath>
+    <Reference Include="Infragistics2.Win.UltraWinStatusBar.v9.2, Version=9.2.20092.1003, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
+      <HintPath>C:\Program Files\Infragistics\NetAdvantage 2009.2\Windows Forms\Bin\Infragistics2.Win.UltraWinStatusBar.v9.2.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
-    <Reference Include="Infragistics2.Win.UltraWinTabbedMdi.v8.3, Version=8.3.20083.1009, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files\Infragistics\NetAdvantage for .NET 2008 Vol. 3 CLR 2.0\windows forms\bin\Infragistics2.Win.UltraWinTabbedMdi.v8.3.dll</HintPath>
+    <Reference Include="Infragistics2.Win.UltraWinTabbedMdi.v9.2, Version=9.2.20092.1003, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
+      <HintPath>C:\Program Files\Infragistics\NetAdvantage 2009.2\Windows Forms\Bin\Infragistics2.Win.UltraWinTabbedMdi.v9.2.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
-    <Reference Include="Infragistics2.Win.UltraWinTabControl.v8.3, Version=8.3.20083.1009, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files\Infragistics\NetAdvantage for .NET 2008 Vol. 3 CLR 2.0\windows forms\bin\Infragistics2.Win.UltraWinTabControl.v8.3.dll</HintPath>
+    <Reference Include="Infragistics2.Win.UltraWinTabControl.v9.2, Version=9.2.20092.1003, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
+      <HintPath>C:\Program Files\Infragistics\NetAdvantage 2009.2\Windows Forms\Bin\Infragistics2.Win.UltraWinTabControl.v9.2.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
-    <Reference Include="Infragistics2.Win.v8.3, Version=8.3.20083.1009, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files\Infragistics\NetAdvantage for .NET 2008 Vol. 3 CLR 2.0\windows forms\bin\Infragistics2.Win.v8.3.dll</HintPath>
+    <Reference Include="Infragistics2.Win.v9.2, Version=9.2.20092.1003, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
+      <HintPath>C:\Program Files\Infragistics\NetAdvantage 2009.2\Windows Forms\Bin\Infragistics2.Win.v9.2.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
   </ItemGroup>
@@ -351,46 +357,46 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="AltBuilderForm.ico" />
-    <Content Include="MBProcessor\AutoConveyance.MBX">
+    <Content Include="AlternativeProcessor\AutoConveyance.MBX">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="MBProcessor\DSCProcessor.MBX">
+    <Content Include="AlternativeProcessor\DSCProcessor.MBX">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="MBProcessor\ICProcessor.MBX">
+    <Content Include="AlternativeProcessor\ICProcessor.MBX">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="MBProcessor\LinkProcessor.MBX">
+    <Content Include="AlternativeProcessor\LinkProcessor.MBX">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="MBProcessor\NodeProcessor.MBX">
+    <Content Include="AlternativeProcessor\NodeProcessor.MBX">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="MBProcessor\SpecialProcessor.MBX">
+    <Content Include="AlternativeProcessor\SpecialProcessor.MBX">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="MBProcessor\SSCProcessor.MBX">
+    <Content Include="AlternativeProcessor\SSCProcessor.MBX">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="MBProcessor\UpdateVersion.MBX">
+    <Content Include="AlternativeProcessor\UpdateVersion.MBX">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="MBWorkbench\AlternativeWorkbench.MBX">
+    <Content Include="AlternativeWorkbench\AlternativeWorkbench.MBX">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="MBWorkbench\Mp_DSCpad.WOR">
+    <Content Include="AlternativeWorkbench\Mp_DSCpad.WOR">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="MBWorkbench\Mp_ICpad.WOR">
+    <Content Include="AlternativeWorkbench\Mp_ICpad.WOR">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="MBWorkbench\Mp_LINKpad.WOR">
+    <Content Include="AlternativeWorkbench\Mp_LINKpad.WOR">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="MBWorkbench\Mp_SPLpad.WOR">
+    <Content Include="AlternativeWorkbench\Mp_SPLpad.WOR">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="MBWorkbench\Mp_SSCpad.WOR">
+    <Content Include="AlternativeWorkbench\Mp_SSCpad.WOR">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <EmbeddedResource Include="Debug_Settings.xml">
@@ -401,7 +407,7 @@
       <LastGenOutput>EngineSettings.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="MBWorkbench\CustomIcons.dll">
+    <Content Include="AlternativeWorkbench\CustomIcons.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <EmbeddedResource Include="SplashAltToolkit.png" />

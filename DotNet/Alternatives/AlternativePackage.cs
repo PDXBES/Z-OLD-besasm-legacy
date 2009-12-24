@@ -31,14 +31,24 @@ namespace SystemsAnalysis.Modeling.Alternatives
 		private Model baseModel;
 		private string alternativePath;
 		private AlternativeConfiguration altConfiguration;
+        private string alternativeName;
 
-		private string BaseModelPathFromAlternativePath(string alternativePath)
+        /// <summary>
+        /// Returns the path to a base model
+        /// </summary>
+        /// <param name="alternativePath">The path to an alternative</param>
+        /// <returns>The path to the base model containing the provided alternative</returns>
+		public static string BaseModelPathFromAlternativePath(string alternativePath)
 		{
 			string baseModelPath;
 			baseModelPath = System.IO.Path.GetFullPath(alternativePath + @"\..\..");
 			return baseModelPath;
-		}
+		}        
 
+        /// <summary>
+        /// Creates a new AlternativePackage for the alternative located at the specified path
+        /// </summary>
+        /// <param name="alternativePath">The path to the alternative for which to create alternative objects</param>
 		public AlternativePackage(string alternativePath)
 		{
 			altConfiguration = new AlternativeConfiguration(alternativePath + (alternativePath.EndsWith("\\") ? "" : "\\") + "alternative_configuration.xml");            
@@ -55,10 +65,12 @@ namespace SystemsAnalysis.Modeling.Alternatives
 			LoadAltStreetTargets(alternativePath);
 			LoadFocusAreaList();
 			this.alternativePath = alternativePath;
+            string[] blah = alternativePath.Split(new char[] {'\\'});
+            alternativeName = blah[blah.Length-1];
 
 			try
 			{
-				LoadAltConflicts(alternativePath);
+				//LoadAltConflicts(alternativePath);
 			}
 			catch (Exception e)
 			{
@@ -194,6 +206,11 @@ namespace SystemsAnalysis.Modeling.Alternatives
 				return baseModel;
 			}
 		}
+
+        public string AlternativeName
+        {
+            get { return this.alternativeName; }
+        }
 		
 		void LoadAltParkingTargets(string alternativePath)
 		{
@@ -328,7 +345,6 @@ namespace SystemsAnalysis.Modeling.Alternatives
 
 			return ((usGround - link.USIE) + (dsGround - link.DSIE)) / 2;
 		}
-
 
 		public double TotalLengthOfPipes
 		{

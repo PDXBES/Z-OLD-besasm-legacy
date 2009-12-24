@@ -5,9 +5,10 @@
 Definition Table
   File "alternative_package.mdb"
   Type ACCESS TABLE "alt_pumpcurves" Charset "WindowsLatin1"
-  Fields 5
+  Fields 6
     PumpType Char (254) ;
     Index Integer ;
     Rating Float ;
     Flow Float ;
     Rated_By Integer ;
+    FocusArea Char (10) ;

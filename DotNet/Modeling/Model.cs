@@ -29,7 +29,7 @@ namespace SystemsAnalysis.Modeling
         private Dictionary<int, RoofTarget> modelRoofTargets;
         private Dictionary<int, ParkingTarget> modelParkingTargets;
         private Dictionary<int, StreetTarget> modelStreetTargets;
-			private Dictionary<int, PipXP> modelConflicts;
+        private Dictionary<int, PipXP> modelConflicts;
         private string version;
 
         private SystemsAnalysis.Utils.INIFile iniFile;
@@ -44,15 +44,7 @@ namespace SystemsAnalysis.Modeling
             catch (Exception e)
             {
                 throw new Exception("Could not create model: '" + e.ToString() + "'.", e);
-            }
-
-						try
-						{
-							LoadConflicts(modelPath);
-						} // try
-						catch
-						{
-						} // catch
+            }           
 
             if (!System.IO.File.Exists(modelPath + "\\Model.ini"))
             {
@@ -77,6 +69,16 @@ namespace SystemsAnalysis.Modeling
                 }
             }
             ModelBuilder.RefreshDataAccess(modelPath);
+
+            //This needs to occur only after data access has been refreshed, since links will be updated in case model has been moved
+            try
+            {
+                //TODO: Uncomment this and make it work prior to release (jhb 12/22/09)
+                //LoadConflicts(modelPath);
+            } // try
+            catch
+            {
+            } // catch
             return;
         }
 
@@ -464,34 +466,34 @@ namespace SystemsAnalysis.Modeling
 
         #endregion
 
-				/// <summary>
-				/// Load conflicts
-				/// </summary>
-				/// <param name="modelPath">Model path</param>
-				public void LoadConflicts(string modelPath)
-				{
-					try
-					{
-						DataAccess.ModelDataSetTableAdapters.MdlPipXPTableAdapter mdlPipXPAdapter =
-							new SystemsAnalysis.DataAccess.ModelDataSetTableAdapters.MdlPipXPTableAdapter(modelPath);
-							
-						DataAccess.ModelDataSet.MdlPipXPDataTable mdlPipXPTable =
-							new SystemsAnalysis.DataAccess.ModelDataSet.MdlPipXPDataTable();
+        /// <summary>
+        /// Load conflicts
+        /// </summary>
+        /// <param name="modelPath">Model path</param>
+        public void LoadConflicts(string modelPath)
+        {
+            try
+            {
+                DataAccess.ModelDataSetTableAdapters.MdlPipXPTableAdapter mdlPipXPAdapter =
+                    new SystemsAnalysis.DataAccess.ModelDataSetTableAdapters.MdlPipXPTableAdapter(modelPath);
 
-						mdlPipXPAdapter.Fill(mdlPipXPTable);
+                DataAccess.ModelDataSet.MdlPipXPDataTable mdlPipXPTable =
+                    new SystemsAnalysis.DataAccess.ModelDataSet.MdlPipXPDataTable();
 
-						modelConflicts = new Dictionary<int, PipXP>();
-						foreach (DataAccess.ModelDataSet.MdlPipXPRow row in mdlPipXPTable)
-						{
-							modelConflicts.Add(row.MLinkID, new PipXP(row));
-						} // foreach  (row)
-					} // try
-					catch (Exception e)
-					{
-						throw new Exception("Error loading pipe conflicts collection: '" +
-							e.ToString() + "'.", e);
-					} // catch
-				} // LoadConflicts(modelPath)
+                mdlPipXPAdapter.Fill(mdlPipXPTable);
+
+                modelConflicts = new Dictionary<int, PipXP>();
+                foreach (DataAccess.ModelDataSet.MdlPipXPRow row in mdlPipXPTable)
+                {
+                    modelConflicts.Add(row.MLinkID, new PipXP(row));
+                } // foreach  (row)
+            } // try
+            catch (Exception e)
+            {
+                throw new Exception("Error loading pipe conflicts collection: '" +
+                    e.ToString() + "'.", e);
+            } // catch
+        } // LoadConflicts(modelPath)
 
         /// <summary>
         /// Returns the average pipe depth of a Link in a Model
@@ -686,19 +688,19 @@ namespace SystemsAnalysis.Modeling
             return length;
         }
 
-			/// <summary>
-			/// Conflict from link
-			/// </summary>
-			/// <param name="link">Link</param>
-			/// <returns>Pip XP</returns>
-			public PipXP ConflictFromLink(Link link)
-			{
-				foreach (KeyValuePair<int, PipXP> kvPair in modelConflicts)
-				{
-					if (kvPair.Value.MstLinkID == link.MLinkID)
-						return kvPair.Value;
-				} // foreach  (kvPair)
-				return null;
-			} // ConflictFromLink(link)
+        /// <summary>
+        /// Conflict from link
+        /// </summary>
+        /// <param name="link">Link</param>
+        /// <returns>Pip XP</returns>
+        public PipXP ConflictFromLink(Link link)
+        {
+            foreach (KeyValuePair<int, PipXP> kvPair in modelConflicts)
+            {
+                if (kvPair.Value.MstLinkID == link.MLinkID)
+                    return kvPair.Value;
+            } // foreach  (kvPair)
+            return null;
+        } // ConflictFromLink(link)
     }
 }

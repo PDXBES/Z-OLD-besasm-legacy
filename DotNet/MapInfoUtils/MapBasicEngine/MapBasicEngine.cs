@@ -78,7 +78,7 @@ namespace SystemsAnalysis.Utils.MapInfoUtils
 			if (!File.Exists(this.library))
 			{
 				this.library = "";
-				throw new Exception("MapBasic Library not found: " + this.library + "'");
+				throw new Exception("MapBasic Library not found: '" + this.library + "'");
 			}	
 			
 			this.miWrapper.ExecuteLibrary(this.library);

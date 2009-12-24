@@ -21,14 +21,14 @@ namespace SystemsAnalysis.ModelConstruction
             ModelConfigurationDataSet modelConfigDS;
             modelConfigDS = new ModelConfigurationDataSet(modelRoot);
 
-            AccessHelper accessHelper = new AccessHelper();
+            AccessHelper accessHelper;// = new AccessHelper();
 
             Dictionary<string, string> databases;
             databases = modelConfigDS.GetRequiredDatabases();
 
             foreach (string dbName in databases.Keys)
             {
-                accessHelper.OpenDatabase(databases[dbName]);
+                accessHelper = new AccessHelper(databases[dbName]);
 
                 Dictionary<string, string> linkedTableSources;
                 linkedTableSources = modelConfigDS.GetLinkedTableSources(dbName);
@@ -50,14 +50,15 @@ namespace SystemsAnalysis.ModelConstruction
             ModelConfigurationDataSet modelConfigDS;
             modelConfigDS = new ModelConfigurationDataSet(modelRoot);
 
-            AccessHelper accessHelper = new AccessHelper();
+            AccessHelper accessHelper;// = new AccessHelper();
+
             try
             {
                 string dataAccessFileName = modelConfigDS.GetDataAccessFileName();
                 Dictionary<string, string[]> dataAccessTables;
                 dataAccessTables = modelConfigDS.GetDataAccessTables();
 
-                accessHelper.OpenDatabase(modelRoot + dataAccessFileName);
+                accessHelper = new AccessHelper(modelRoot + dataAccessFileName);
 
                 foreach (string linkName in dataAccessTables.Keys)
                 {
@@ -66,6 +67,7 @@ namespace SystemsAnalysis.ModelConstruction
 
                     accessHelper.LinkTable(tableName, databasePath, linkName);
                 }
+                accessHelper.Dispose();
             }
             catch (Exception ex)
             {
@@ -73,7 +75,7 @@ namespace SystemsAnalysis.ModelConstruction
             }
             finally
             {
-                accessHelper.Dispose();
+                accessHelper = null;
             }
         }
 

@@ -2,6 +2,7 @@ using System;
 using System.Drawing;
 using System.Collections;
 using System.Collections.Specialized;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
 using System.Data;
@@ -26,40 +27,42 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
         private string applicationDirectory;
         private string configPath;
         private AlternativeConfiguration altConfig;
-        private string version = AlternativeConfiguration.MasterVersion; 
-        
+        private string version = AlternativeConfiguration.MasterVersion;
+        private DataSet aggregatorDS;
+        private List<AlternativePackage> alternativePackages;
+
         private AltEngineConfiguration config;
-        
+
         /// <summary>
         /// Constructor for the AlternativeEngine. Loads the Splash Screen and
         /// performs some minor instatiation tasks.
         /// </summary>        
         public AlternativeEngineForm()
-		{
+        {
             this.Cursor = Cursors.WaitCursor;
             this.Visible = false;
             System.Threading.Thread th = new System.Threading.Thread(new System.Threading.ThreadStart(DoSplash));
-            th.Start();            
-                        
-			//
-			// Required for Windows Form Designer support
-			//
-			InitializeComponent();                               
-            			
-			this.debugMode = false;
+            th.Start();
+
+            //
+            // Required for Windows Form Designer support
+            //
+            InitializeComponent();
+
+            this.debugMode = false;
             this.applicationDirectory = Application.StartupPath + "\\"; // Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\BES_SystemsAnalysis\\Alternatives_Toolkit\\";
-            
+
             if (!Directory.Exists(this.applicationDirectory))
             {
                 Directory.CreateDirectory(this.applicationDirectory);
             }
 
-			engineOutput.AddStatus("Entering AlternativeEngine.", SeverityLevel.Info);
-            
+            engineOutput.AddStatus("Entering AlternativeEngine.", SeverityLevel.Info);
+
             LoadConfig(false);
-                                                
+
             th.Abort();
-            this.Visible = true;            
+            this.Visible = true;
             this.Refresh();
             this.Cursor = Cursors.Default;
             if (System.Deployment.Application.ApplicationDeployment.IsNetworkDeployed)
@@ -86,8 +89,8 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
             {
                 engineOutput.AddStatus("Application not run from ClickOnce mode.");
             }
-                            
-		}
+
+        }
 
         /// <summary>
         /// Loads the configuration file from user's application directory.  If the default 
@@ -102,16 +105,16 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
             {
                 if (debugSettings)
                 {
-                    this.configPath = @"W:\Model_Programs\Emgaats\CodeV2.2\Alternatives_Toolkit\AlternativeEngine\Debug_Settings.xml";
+                    this.configPath = @"Debug_Settings.xml";
                 }
                 else
                 {
                     this.configPath = this.applicationDirectory + "Default_Settings.xml";
                     if (!File.Exists(this.configPath))
                     {
-                        this.engineOutput.AddStatus("Could not find settings file. Reading embedded version...", SeverityLevel.Warning); 
+                        this.engineOutput.AddStatus("Could not find settings file. Reading embedded version...", SeverityLevel.Warning);
                         Stream configStream;
-                                    
+
                         configStream = GetType().Assembly.GetManifestResourceStream(
                             //"SystemsAnalysis.ModelConstruction.AlternativesToolkit.Default_Settings.xml");                    
                             "SystemsAnalysis.ModelConstruction.AlternativesToolkit.Default_Settings.xml");
@@ -122,16 +125,16 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
 
                         streamWriter.Write(streamReader.ReadToEnd());
                         streamWriter.Close();
-                    }                                                                
+                    }
                 }
-                            
+
                 //If the configuration file cannot be found, read the embedded config file and write
                 //it to disk with the default name.                
                 this.engineOutput.AddStatus("Reading Settings File from: " + this.configPath, SeverityLevel.Info);
 
                 this.config = new AltEngineConfiguration();
 
-                config.ReadXml(this.configPath);                
+                config.ReadXml(this.configPath);
 
                 if (config.FileHistory.Count != 1)
                 {
@@ -155,25 +158,25 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
             {
                 this.engineOutput.AddStatus(ex.ToString(), SeverityLevel.Error);
                 this.engineOutput.AddStatus("Error loading configuration file. See status log for details.", SeverityLevel.Error);
-            }      
+            }
         }
-	
-		/// <summary>
-		/// The main entry point for the application.
-		/// </summary>
-		[STAThread]
-		static void Main() 
-		{
+
+        /// <summary>
+        /// The main entry point for the application.
+        /// </summary>
+        [STAThread]
+        static void Main()
+        {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-			Application.Run(new AlternativeEngineForm());    
-		}
+            Application.Run(new AlternativeEngineForm());
+        }
 
         private static void DoSplash()
         {
             DoSplash(false);
         }
-        
+
         /// <summary>
         /// Loads the Splash Screen during start-up.
         /// </summary>
@@ -183,8 +186,8 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
             string dateText = "1/1/1900";
             if (System.Deployment.Application.ApplicationDeployment.IsNetworkDeployed)
             {
-                Version v = System.Deployment.Application.ApplicationDeployment.CurrentDeployment.CurrentVersion;               
-                versionText = v.Major + "." + v.Minor + "." + v.Build + "." + v.Revision;                
+                Version v = System.Deployment.Application.ApplicationDeployment.CurrentDeployment.CurrentVersion;
+                versionText = v.Major + "." + v.Minor + "." + v.Build + "." + v.Revision;
                 dateText = System.IO.File.GetLastWriteTime(System.Reflection.Assembly.GetExecutingAssembly().Location).ToString("MMMM dd yyyy");
             }
             else
@@ -195,14 +198,15 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
                 int build = System.Reflection.Assembly.GetExecutingAssembly().GetName(false).Version.Build;
                 int revision = System.Reflection.Assembly.GetExecutingAssembly().GetName(false).Version.Revision;
 
+                versionText = majorVersion + "." + minorVersion + "." + build + "." + revision;
                 FileInfo fi = new FileInfo("AlternativesToolkit.exe");
-                string date = fi.CreationTime.Date.ToString("MMMM dd yyyy");
+                dateText = fi.CreationTime.Date.ToString("MMMM dd yyyy");
             }
-                       
+
             SplashScreen sp = new SplashScreen(versionText, dateText);
             sp.ShowDialog(waitForClick);
         }
-  		
+
         #region MapBasic execution functions
         /// <summary>
         /// Creates a new, empty alternative by copying all alternative files from the
@@ -211,8 +215,8 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
         /// <param name="baseModel">The path to the EMGAATS model within which to create a new alternative.</param>
         /// <param name="alternativeName">The name of the new alternative to create.</param>
         /// <returns>Returns true if the new alternative was succesfully created, otherwise false.</returns>
-		private bool NewAlternative(string baseModel, string alternativeName)
-		{
+        private bool NewAlternative(string baseModel, string alternativeName)
+        {
             try
             {
                 this.Cursor = Cursors.WaitCursor;
@@ -242,7 +246,7 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
 
                 altConfig = new AlternativeConfiguration(alternativeName, baseModel, this.txtDefaultNodeName.Text);
                 altConfig.AddHistory("CREATED");
-                UpdateAlternativeList();
+                
                 this.mbExecuter.ExecuteFunctionGroup("Create", baseModel, alternativeName, "", false);
 
                 this.engineOutput.AddStatus("Alternative '" + alternativeName + "' Created!", SeverityLevel.Attention);
@@ -258,52 +262,52 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
                 this.Cursor = Cursors.Default;
             }
             return true;
-		
-		}
-		
+
+        }
+
         /// <summary>
         /// Launches the MapInfo Workbench for interactively editing an alternative.
         /// </summary>
         /// <param name="baseModel">The path to the EMGAATS model containing the alternative to be edited.</param>
         /// <param name="alternativeName">The name of the already existing alternative to edit.</param>
-		private void EditAlternative(string baseModel, string alternativeName)
-		{
-			try
-			{		
-				string DefaultNodeSuffix;
+        private void EditAlternative(string baseModel, string alternativeName)
+        {
+            try
+            {
+                string DefaultNodeSuffix;
                 DefaultNodeSuffix = this.txtDefaultNodeName.Text;
-                
-				string alternativePath = baseModel + 
-					"alternatives\\" + alternativeName + "\\";
-				if (!File.Exists(alternativePath + "alternative_configuration.xml"))
-				{
-					this.engineOutput.AddUpdate(
-						"Specified alternative does not exist... ",
-						SeverityLevel.Warning);					
-				}
+
+                string alternativePath = baseModel +
+                    "alternatives\\" + alternativeName + "\\";
+                if (!File.Exists(alternativePath + "alternative_configuration.xml"))
+                {
+                    this.engineOutput.AddUpdate(
+                        "Specified alternative does not exist... ",
+                        SeverityLevel.Warning);
+                }
                 foreach (string f in Directory.GetFiles(templateDirectory))
                 {
                     if (!File.Exists(alternativePath + Path.GetFileName(f)))
                     {
-                        File.Copy(f,alternativePath + Path.GetFileName(f));
+                        File.Copy(f, alternativePath + Path.GetFileName(f));
                         this.engineOutput.AddStatus("Could not find alt file: " + Path.GetFileName(f) + "; Copying from template.", SeverityLevel.Warning);
                     }
                 }
-                				
+
                 this.mbExecuter.ExecuteFunctionGroup("Edit", baseModel, alternativeName, "", true);
 
                 altConfig.DefaultNodeSuffix = DefaultNodeSuffix;
                 altConfig.AddHistory("EDITED");
-			}
-			catch (Exception ex)
-			{
+            }
+            catch (Exception ex)
+            {
                 this.engineOutput.AddStatus(ex.ToString(), SeverityLevel.Error);
-				this.engineOutput.AddStatus("Error editing alternative. See status log for details.", SeverityLevel.Error);                
-			}
+                this.engineOutput.AddStatus("Error editing alternative. See status log for details.", SeverityLevel.Error);
+            }
             config.UpdateBaseModelHistory(baseModel);
-            return;		
-		}
-		
+            return;
+        }
+
         /// <summary>
         /// Creates a new EMGAATS model that includes all changes specified by the selected alternative.
         /// </summary>
@@ -311,7 +315,7 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
         /// <param name="alternativeName">The name of the existing alternative that will be used to create a new EMGAATS model.</param>
         /// <param name="outputModel">The to the directory that will contain the EMGAATS model representing the alternative design.</param>
         private void ApplyAlternative(string baseModel, string alternativeName, string outputModel)
-		{
+        {
             //1) Delete any data in the outputModel directory
             //2) Validate the alternative, using QC from linkappend tool
             //  - If fail, write errors to MapInfo table and enter editing session
@@ -331,7 +335,7 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
                 this.engineOutput.AddStatus("Base Model: 'file:" + baseModel + "'");
                 this.engineOutput.AddStatus("Alternative Name: '" + alternativeName + "'");
                 this.engineOutput.AddStatus("Output Model: 'file:" + outputModel + "'");
-                int existingFileCount = Directory.GetFiles(outputModel,"*", SearchOption.AllDirectories).Length;
+                int existingFileCount = Directory.GetFiles(outputModel, "*", SearchOption.AllDirectories).Length;
                 if (existingFileCount > 0)
                 {
                     this.engineOutput.AddStatus(
@@ -344,7 +348,7 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
                     }
                     try
                     {
-                        DeleteModel(outputModel);                        
+                        DeleteModel(outputModel);
                     }
                     catch (System.IO.IOException ex)
                     {
@@ -354,12 +358,12 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
                     }
                     this.engineOutput.AddUpdate("Overwriting existing directory.\n", SeverityLevel.Warning);
                 }
-                
+
                 CopyModel(baseModel, outputModel);
 
                 try
                 {
-                    this.engineOutput.AddStatus("Relinking Model...");                    
+                    this.engineOutput.AddStatus("Relinking Model...");
                     ModelBuilder.RelinkModel(outputModel);
                 }
                 catch (Exception ex)
@@ -376,7 +380,7 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
                 //ConfigurationHelper modelConfigHelper;
                 //modelConfigHelper = new ConfigurationHelper(outputModel);                
                 //modelConfigHelper.AddAlternativeRow(alternativeName, baseModel);
-                
+
                 if (Directory.Exists(alternativePath + "error_check"))
                 {
                     Directory.Delete(alternativePath + "error_check", true);
@@ -387,14 +391,14 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
 
                 SystemsAnalysis.Utils.INIFile modelIni;
                 modelIni = new SystemsAnalysis.Utils.INIFile(outputModel + "model.ini");
-                
+
                 modelIni.WriteINIString("Admin", "CreatedVia", "Alternative");
                 //modelIni.WriteINIString("Admin", "AlternativeApplied", System.DateTime.Now.ToString(@"MM/dd/yyyy hh:mm:ss tt"));
                 modelIni.WriteINIString("Admin", "CreationDetail", baseModel + alternativeName);
                 modelIni.WriteINIString("Admin", "RefreshMDBs", "False");
 
                 altConfig.AddHistory("APPLIED to: " + outputModel);
-               
+
                 this.engineOutput.AddStatus("Output model available at: file:" + outputModel);
                 this.engineOutput.AddStatus("Alternative Succesfully Applied.", SeverityLevel.Attention);
             }
@@ -402,7 +406,7 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
             catch (Exception ex)
             {
                 this.engineOutput.AddStatus("Error applying alternative: " +
-                    ex.ToString(), SeverityLevel.Error);               
+                    ex.ToString(), SeverityLevel.Error);
                 this.engineOutput.SaveFile(alternativePath + "error_check\\errorlog.txt");
             }
             finally
@@ -434,102 +438,102 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
             config.UpdateBaseModelHistory(baseModel);
             config.UpdateOutputModelHistory(outputModel);
             return;
-		}						
-        
+        }
+
         #endregion
 
         #region Auto-Conveyance functions
-        
-        
-		        
+
+
+
         #endregion
 
         #region Utilities
         private void CopyDirectory(string src, string dst, bool includeFiles)
-		{
-			string[] files;
-			if (!dst.EndsWith(System.IO.Path.DirectorySeparatorChar.ToString()))
-			{
-				dst += System.IO.Path.DirectorySeparatorChar;
-			}
-			if (!System.IO.Directory.Exists(dst))
-			{
-				System.IO.Directory.CreateDirectory(dst);
-			}
-			files = System.IO.Directory.GetFileSystemEntries(src);
-			foreach (string s in files)
-			{
-				if (System.IO.Directory.Exists(s))
-				{
-					CopyDirectory(s, dst + System.IO.Path.GetFileName(s), true);
-				}
-				else if (includeFiles)
-				{
-					System.IO.File.Copy(s, dst + System.IO.Path.GetFileName(s), true);
-				}
-			}
-			return;
-		}
+        {
+            string[] files;
+            if (!dst.EndsWith(System.IO.Path.DirectorySeparatorChar.ToString()))
+            {
+                dst += System.IO.Path.DirectorySeparatorChar;
+            }
+            if (!System.IO.Directory.Exists(dst))
+            {
+                System.IO.Directory.CreateDirectory(dst);
+            }
+            files = System.IO.Directory.GetFileSystemEntries(src);
+            foreach (string s in files)
+            {
+                if (System.IO.Directory.Exists(s))
+                {
+                    CopyDirectory(s, dst + System.IO.Path.GetFileName(s), true);
+                }
+                else if (includeFiles)
+                {
+                    System.IO.File.Copy(s, dst + System.IO.Path.GetFileName(s), true);
+                }
+            }
+            return;
+        }
 
-		private void CopyModel(string src, string dst)
-		{
-			foreach (AltEngineConfiguration.BaseDirectoryRow dRow in this.config.BaseModelComponents[0].GetBaseDirectoryRows())
-			{
-				bool recurse = dRow.Recurse;
-				bool includeFiles = dRow.IncludeFiles;
-				string dir = dRow.BaseDirectory_text;
-				dir += dir.EndsWith("\\") ? "" : "\\";
+        private void CopyModel(string src, string dst)
+        {
+            foreach (AltEngineConfiguration.BaseDirectoryRow dRow in this.config.BaseModelComponents[0].GetBaseDirectoryRows())
+            {
+                bool recurse = dRow.Recurse;
+                bool includeFiles = dRow.IncludeFiles;
+                string dir = dRow.BaseDirectory_text;
+                dir += dir.EndsWith("\\") ? "" : "\\";
                 /*if (!Directory.Exists(src + dir))
                 {
                     this.engineOutput.AddStatus("Model directory '" + src + dir + "' does not exist.", SeverityLevel.Warning);
                     continue;
                 }*/
-				if (recurse && includeFiles)
-				{
-					CopyDirectory(src + dir, dst + dir, true);
-				}
-				else if (!recurse && includeFiles)
-				{
-					System.IO.Directory.CreateDirectory(dst + dir);
-					foreach (string f in System.IO.Directory.GetFiles(src + dir))
-					{
-						if (System.IO.File.Exists(f))
-						{
-							System.IO.File.Copy(f, dst + dir + System.IO.Path.GetFileName(f), true);
-						}
-					}
-				}
-				else if (!recurse && !includeFiles)
-				{
-					System.IO.Directory.CreateDirectory(dst + dir);
-				}
-				else if (recurse && !includeFiles)
-				{
-					CopyDirectory(src, dst, false);
-				}
-			}
+                if (recurse && includeFiles)
+                {
+                    CopyDirectory(src + dir, dst + dir, true);
+                }
+                else if (!recurse && includeFiles)
+                {
+                    System.IO.Directory.CreateDirectory(dst + dir);
+                    foreach (string f in System.IO.Directory.GetFiles(src + dir))
+                    {
+                        if (System.IO.File.Exists(f))
+                        {
+                            System.IO.File.Copy(f, dst + dir + System.IO.Path.GetFileName(f), true);
+                        }
+                    }
+                }
+                else if (!recurse && !includeFiles)
+                {
+                    System.IO.Directory.CreateDirectory(dst + dir);
+                }
+                else if (recurse && !includeFiles)
+                {
+                    CopyDirectory(src, dst, false);
+                }
+            }
 
-			foreach (AltEngineConfiguration.BaseFileRow fRow in this.config.BaseModelComponents[0].GetBaseFileRows())
-			{
-				int filePatternIndex = fRow.BaseFile_text.LastIndexOf("\\");
-				string filePattern = fRow.BaseFile_text.Substring(filePatternIndex + 1);
-				string dir = filePatternIndex >= 0  ?
-					fRow.BaseFile_text.Substring(0, filePatternIndex + 1) : "";
+            foreach (AltEngineConfiguration.BaseFileRow fRow in this.config.BaseModelComponents[0].GetBaseFileRows())
+            {
+                int filePatternIndex = fRow.BaseFile_text.LastIndexOf("\\");
+                string filePattern = fRow.BaseFile_text.Substring(filePatternIndex + 1);
+                string dir = filePatternIndex >= 0 ?
+                    fRow.BaseFile_text.Substring(0, filePatternIndex + 1) : "";
                 if (!Directory.Exists(src + dir))
                 {
                     this.engineOutput.AddStatus("Model directory '" + src + dir + "' does not exist.", SeverityLevel.Warning);
                     continue;
                 }
-				string[] files = System.IO.Directory.GetFiles(src + dir, filePattern);
-				foreach (string f in files)
-				{										
-					System.IO.File.Copy(f, dst + dir + System.IO.Path.GetFileName(f), true);
-					System.IO.File.SetAttributes(dst + dir + System.IO.Path.GetFileName(f), 
-						System.IO.File.GetAttributes(f) & ~System.IO.FileAttributes.ReadOnly);					
-				}					
-			}			
-					
-			return;
+                string[] files = System.IO.Directory.GetFiles(src + dir, filePattern);
+                foreach (string f in files)
+                {
+                    System.IO.File.Copy(f, dst + dir + System.IO.Path.GetFileName(f), true);
+                    System.IO.File.SetAttributes(dst + dir + System.IO.Path.GetFileName(f),
+                        System.IO.File.GetAttributes(f) & ~System.IO.FileAttributes.ReadOnly);
+                }
+            }
+
+            return;
         }
 
         private void DeleteModel(string model)
@@ -537,7 +541,7 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
             foreach (AltEngineConfiguration.BaseFileRow fRow in this.config.BaseModelComponents[0].GetBaseFileRows())
             {
                 int filePatternIndex = fRow.BaseFile_text.LastIndexOf("\\");
-                string filePattern = fRow.BaseFile_text.Substring(filePatternIndex + 1);                
+                string filePattern = fRow.BaseFile_text.Substring(filePatternIndex + 1);
                 string dir = filePatternIndex >= 0 ?
                     fRow.BaseFile_text.Substring(0, filePatternIndex + 1) : "";
                 if (!Directory.Exists(model + dir))
@@ -581,19 +585,26 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
                     //TODO: Need to check for read-only files and not crash when deleting them
                     //File.SetAttributes(model + dir, FileAttributes.Normal);
                 }
-            }           
+            }
         }
 
         private void UpdateAlternativeList()
         {
             try
             {
+                grdAlternativeHistory.DataSource = null;
+                grdFocusAreaChooser.DataSource = new DataTable();
+                alternativePackages = new List<AlternativePackage>();
+
                 string baseModel = this.cmbBaseModel.Text;
                 baseModel += baseModel.EndsWith("\\") ? "" : "\\";
-                this.cmbAlternativeList.DataSource = this.FindAlternatives(baseModel);
+                if (!ValidateInput(baseModel))
+                {
+                    return;
+                }
+                this.cmbAlternativeList.DataSource = this.GetAlternativeList(baseModel);
                 cmbAlternativeList.SelectedIndex = -1;
                 cmbAlternativeList.Text = "";
-                grdAlternativeHistory.DataSource = null;               
             }
             catch (Exception ex)
             {
@@ -602,15 +613,15 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
             }
         }
 
-        private IList FindAlternatives(string rootDirectory)
+        private List<string> GetAlternativeList(string baseModelPath)
         {
-            ArrayList altList;
-            altList = new ArrayList();
+            List<string> altList;
+            altList = new List<string>();
             string[] files;
             try
             {
-                files = System.IO.Directory.GetFileSystemEntries(rootDirectory + "alternatives\\");
-                engineOutput.AddStatus("Reading " + files.Length + " alternatives from BaseModel '" + rootDirectory + "'.", SeverityLevel.Info);
+                files = System.IO.Directory.GetFileSystemEntries(baseModelPath + "alternatives\\");
+                engineOutput.AddStatus("Reading " + files.Length + " alternatives from BaseModel '" + baseModelPath + "'.", SeverityLevel.Info);
             }
             catch
             {
@@ -623,7 +634,7 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
                 {
                     try
                     {
-                        AlternativeConfiguration alt = new AlternativeConfiguration(altFile);                       
+                        AlternativeConfiguration alt = new AlternativeConfiguration(altFile);
                         //Patch alternative data structure if versions don't match
                         if (alt.AlternativeVersion != this.version)
                         {
@@ -631,31 +642,30 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
                             mbEngine.ExecuteLibrary(this.config.UpdateVersionPatchMBX);
                             mbEngine.WriteGlobal("gTemplateDirectory", templateDirectory);
                             mbEngine.WriteGlobal("gVersion", this.version);
-                            mbEngine.WriteGlobal("gBaseModelPath", rootDirectory);
+                            mbEngine.WriteGlobal("gBaseModelPath", baseModelPath);
                             mbEngine.WriteGlobal("gAlternativePath", s);
                             mbEngine.ExecuteLibraryFunction("10000");
                             mbEngine.ExitCurrentLibrary();
                             mbEngine.CloseMapInfo();
-                            
+
                             alt.UpdateVersion(this.version);
                         }
-                        altList.Add(alt.AlternativeName);                        
+                        altList.Add(alt.AlternativeName);
                     }
                     catch (Exception ex)
                     {
                         engineOutput.AddStatus(ex.Message, SeverityLevel.Warning);
                         engineOutput.AddStatus("Could not process alternative '" + s + "'", SeverityLevel.Warning);
-                    }                                                  
-                }                
+                    }
+                }
             }
             return altList;
-
         }
 
         private void SwitchToDefaultView()
         {
             this.tabControl.SelectedTab = this.tabControl.Tabs["EngineStatus"];
-        }              
+        }
 
         private bool ValidateInput(string baseModel)
         {
@@ -692,12 +702,16 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
             if (!ValidateInput(baseModel))
             {
                 return false;
-            }            
-            
+            }
+
             if (alternativeName == null || alternativeName == "")
             {
                 MessageBox.Show("Please specify a name for the alternative",
                     "Alternative name not specified");
+            }
+            else if (alternativeName.ToLower() == "aggregate")
+            {
+                MessageBox.Show("The name 'aggregate' is reserved for internal use.", "Invalid Alternative Name");
             }
             else if (alternativeName.IndexOfAny(Path.GetInvalidPathChars()) >= 0)
             {
@@ -731,7 +745,7 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
                     MessageBoxIcon.Error);
                 return false;
             }
-            
+
             if (outputModel == null || outputModel == "" || outputModel == "\\")
             {
                 MessageBox.Show("Please specify a directory for the Output Model.",
@@ -769,22 +783,22 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
         }
 
         #endregion
-        
-        #region Miscellaneous Events        
 
-		private void engineOutput_LinkClicked(object sender, System.Windows.Forms.LinkClickedEventArgs e)
-		{
-				System.Diagnostics.Process.Start(e.LinkText);
-		}
+        #region Miscellaneous Events
+
+        private void engineOutput_LinkClicked(object sender, System.Windows.Forms.LinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start(e.LinkText);
+        }
         private void engineOutput_TextChanged(object sender, EventArgs e)
         {
             this.statusBar.Panels[0].Text = engineOutput.CurrentStatus;
         }
 
-		private void txtDebugMode_CheckedChanged(object sender, System.EventArgs e)
-		{            
-         
-			this.debugMode = txtDebugMode.Checked;
+        private void txtDebugMode_CheckedChanged(object sender, System.EventArgs e)
+        {
+
+            this.debugMode = txtDebugMode.Checked;
             if (debugMode)
             {
                 this.configPath = @"W:\Model_Programs\Emgaats\CodeV2.2\Alternatives_Toolkit\AlternativeEngine\Debug_Settings.xml";
@@ -794,7 +808,7 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
                 this.configPath = this.applicationDirectory + "Default_Settings.xml";
             }
             lblCurrentConfigFile.Text = this.configPath;
-		}
+        }
 
         #endregion
 
@@ -805,7 +819,7 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
             {
                 case "Exit":
                     this.Close();
-                    break;                
+                    break;
                 default:
                     this.tabControl.SelectedTab = this.tabControl.Tabs[e.Item.Key];
                     break;
@@ -818,11 +832,11 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
             //sp.ShowDialog(true);
             DoSplash(true);
         }
-       
+
         private void cmbBaseModel_SelectedIndexChanged(object sender, EventArgs e)
-        {            
-            UpdateAlternativeList();            
-            cmbAlternativeList.SelectedIndex = -1;            
+        {
+            UpdateAlternativeList();
+            cmbAlternativeList.SelectedIndex = -1;
         }
 
         private void mbExecuter_StatusChanged(SystemsAnalysis.Utils.Events.StatusChangedArgs e)
@@ -846,11 +860,11 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
 
             this.txtDefaultNodeName.Text = altConfig.DefaultNodeSuffix;// GetDefaultNodeSuffix(alternativePath);
             this.grdAlternativeHistory.DataSource = altConfig;
-            this.grdAlternativeHistory.DataMember = "History";  
+            this.grdAlternativeHistory.DataMember = "History";
         }
-                
+
         private void btnEditAlternative_Click(object sender, EventArgs e)
-        {            
+        {
             string baseModel;
             string alternativeName;
 
@@ -858,18 +872,18 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
             baseModel += baseModel.EndsWith("\\") ? "" : "\\";
             alternativeName = this.cmbAlternativeList.Text;
 
-            if (FindAlternatives(baseModel).Count == 0)
+            if (GetAlternativeList(baseModel).Count == 0)
             {
                 MessageBox.Show("The selected base model does not contain any alternatives.", "No Alternatives found");
                 return;
             }
-            
+
             if (ValidateInput(baseModel, alternativeName))
             {
                 SwitchToDefaultView();
-                EditAlternative(baseModel, alternativeName);                
+                EditAlternative(baseModel, alternativeName);
             }
-        }        
+        }
 
         private void btnNewAlternative_Click(object sender, EventArgs e)
         {
@@ -877,20 +891,21 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
             string baseModel = this.cmbBaseModel.Text;
             baseModel += baseModel.EndsWith("\\") ? "" : "\\";
             string alternativePath = baseModel + "alternatives\\" + alternativeName + "\\";
-            
+
             if (!ValidateInput(baseModel, alternativeName))
             {
                 return;
             }
-                if (!NewAlternative(baseModel, alternativeName))
-                {
-                    return;
-                }
-            
+            if (!NewAlternative(baseModel, alternativeName))
+            {
+                return;
+            }
+            UpdateAlternativeList();
+
 
             if (MessageBox.Show("Begin editing alternative '" + alternativeName + "'?\n(This will launch the MapInfo Workbench)", "Begin Editing?",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {                
+            {
                 EditAlternative(baseModel, alternativeName);
                 SwitchToDefaultView();
             }
@@ -918,14 +933,14 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
                     ApplyAlternative(baseModel, alternativeName, outputModel);
                     SwitchToDefaultView();
                 }
-                
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error applying alternative. See status log for details.", "Error Applying Alternative", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 engineOutput.AddStatus("Error generating conveyance alternative '" + alternativeName + "'.", SeverityLevel.Error);
                 engineOutput.AddStatus("    Base Model: file:" + baseModel);
-                engineOutput.AddStatus("    Output Model: file:" + outputModel);                 
+                engineOutput.AddStatus("    Output Model: file:" + outputModel);
                 engineOutput.AddStatus(ex.ToString(), SeverityLevel.Error);
             }
         }
@@ -934,12 +949,23 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
         {
             SwitchToDefaultView();
         }
-        
+
         private void btnDeleteAlternative_Click(object sender, EventArgs e)
         {
             string baseModel = this.cmbBaseModel.Text;
             baseModel += baseModel.EndsWith("\\") ? "" : "\\";
             string alternativeName = this.cmbAlternativeList.Text;
+            if (MessageBox.Show("Are you sure you wish to delete the selected alternative?",
+                "Delete Alternative?", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) != DialogResult.OK)
+            {
+                return;
+            }
+            DeleteAlternative(baseModel, alternativeName);
+            UpdateAlternativeList();
+        }
+
+        private void DeleteAlternative(string baseModel, string alternativeName)
+        {
             string alternativePath = baseModel + "alternatives\\" + alternativeName;
 
             if (!Directory.Exists(alternativePath))
@@ -948,22 +974,17 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
                 return;
             }
 
-            if (MessageBox.Show("Are you sure you wish to delete the selected alternative?",
-                "Delete Alternative?", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
+            engineOutput.AddStatus("Deleting alternative '" + alternativeName + "' from model " + baseModel, SeverityLevel.Info);
+            try
             {
-                engineOutput.AddStatus("Deleting alternative '" + alternativeName + "' from model " + baseModel, SeverityLevel.Info);
-                try
-                {
-                    Directory.Delete(alternativePath, true);
-                    UpdateAlternativeList();
-                    engineOutput.AddStatus("Successfully deleted alternative '" + alternativeName + "'.");
-                }
-                catch (Exception ex)
-                {
-                    engineOutput.AddStatus("Error deleting alternative: " + ex.ToString(), SeverityLevel.Error);
-                }
+                Directory.Delete(alternativePath, true);                
+                engineOutput.AddStatus("Successfully deleted alternative '" + alternativeName + "'.");
             }
-        }                                    
+            catch (Exception ex)
+            {
+                engineOutput.AddStatus("Error deleting alternative: " + ex.ToString(), SeverityLevel.Error);
+            }
+        }
 
         private void btnBrowseOutput_Click(object sender, EventArgs e)
         {
@@ -989,8 +1010,12 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
                 {
                     newBaseModel += "\\";
                 }
+                if (!ValidateInput(newBaseModel))
+                {
+                    return;
+                }
                 this.cmbBaseModel.Text = newBaseModel;
-                this.cmbAlternativeList.DataSource = this.FindAlternatives(newBaseModel);                
+                this.cmbAlternativeList.DataSource = this.GetAlternativeList(newBaseModel);
             }
         }
 
@@ -1001,31 +1026,47 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
 
         private void btnCopyAlternative_Click(object sender, EventArgs e)
         {
+            string baseModel = "";
+            string alternativeName = "";
+
+
+            baseModel = this.cmbBaseModel.Text;
+            baseModel += baseModel.EndsWith("\\") ? "" : "\\";
+            alternativeName = (string)cmbAlternativeList.Text;
+
+            InputBoxResult result;
+            result = InputBox.Show("Enter a name for the new alternative:", "Copy Alternative");
+            if (result.ReturnCode != DialogResult.OK)
+            {
+                if (!ValidateInput(baseModel, result.Text))
+                {
+                    return;
+                }
+                return;
+            }
+
+            string newAltName = result.Text;
+            CopyAlternative(baseModel, alternativeName, newAltName);
+            UpdateAlternativeList();
+        }
+
+        private void CopyAlternative(string baseModel, string alternativeName, string newAltName)
+        {
+            string newAltPath;
+            newAltPath = baseModel + "alternatives\\" + newAltName + "\\";
+
+            string alternativePath;
+            alternativePath = baseModel + "alternatives\\" + alternativeName + "\\";
             try
             {
                 engineOutput.AddStatus("Copying alternative.");
-                string baseModel = "";
-                string alternativeName = "";
-                string alternativePath;
 
-                baseModel = this.cmbBaseModel.Text;
-                baseModel += baseModel.EndsWith("\\") ? "" : "\\";
-                alternativeName = (string)cmbAlternativeList.Text;
-                alternativePath = baseModel + "alternatives\\" + alternativeName + "\\";
 
-                InputBoxResult result;
-                result = InputBox.Show("Enter a name for the new alternative:", "Copy Alternative");
-                if (result.ReturnCode == DialogResult.OK)
-                {
-                    string newAltPath;
-                    newAltPath = baseModel + "alternatives\\" + result.Text + "\\";
-                    Cursor = Cursors.WaitCursor;
-                    CopyDirectory(alternativePath, newAltPath, true);
-                    AlternativeConfiguration copiedAltConfig = new AlternativeConfiguration(result.Text, baseModel);
-
-                    UpdateAlternativeList();
-                    engineOutput.AddStatus("Succesfully copied alternative.");
-                }
+                Cursor = Cursors.WaitCursor;
+                CopyDirectory(alternativePath, newAltPath, true);
+                AlternativeConfiguration copiedAltConfig = new AlternativeConfiguration(newAltName, baseModel);
+                
+                engineOutput.AddStatus("Succesfully copied alternative.");
             }
             catch (Exception ex)
             {
@@ -1086,11 +1127,12 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
                     {
                         return;
                     }
+                    UpdateAlternativeList();
                     autoConveyanceInterface1.AutoConveyance(baseModel, alternativeName);
                     this.mbExecuter.ExecuteFunctionGroup("AutoConveyance", baseModel, alternativeName, "", false);
                     this.altConfig.AddHistory("Auto-Generated from conveyance grid");
                     config.UpdateBaseModelHistory(baseModel);
-                    this.engineOutput.AddStatus("Succesfully generated conveyance alternative '" + alternativeName + "'.");                    
+                    this.engineOutput.AddStatus("Succesfully generated conveyance alternative '" + alternativeName + "'.");
                     DisableAutoConveyance();
                 }
             }
@@ -1149,11 +1191,173 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
             //engineOutput.AddUpdate(".");
         }
 
-        private void autoConveyanceInterface1_Load(object sender, EventArgs e)
+        private void btnReadFocusAreas_Click(object sender, EventArgs e)
         {
+            string baseModel;
+
+            baseModel = this.cmbBaseModel.Text;
+            baseModel += baseModel.EndsWith("\\") ? "" : "\\";
+            List<string> alternativeList = this.GetAlternativeList(baseModel);
+
+            if (alternativeList.Count == 0)
+            {
+                MessageBox.Show("The selected base model does not contain any alternatives.", "No Alternatives found");
+                return;
+            }
+
+            List<string> focusAreaList = new List<string>();
+            aggregatorDS = new DataSet();
+            alternativePackages = new List<AlternativePackage>();
+
+            foreach (string alternativeName in alternativeList)
+            {
+                string alternativePath = Path.GetFullPath(baseModel + @"\alternatives\" + alternativeName);
+                AlternativePackage ap = new AlternativePackage(alternativePath);
+                alternativePackages.Add(ap);
+
+                foreach (string focusArea in ap.FocusAreaList)
+                {
+                    if (!focusAreaList.Contains(focusArea))
+                    {
+                        focusAreaList.Add(focusArea);
+                    }
+                }
+            }
+            focusAreaList.Sort();
+
+            DataTable dt = new DataTable();
+
+            dt.Columns.Add("Focus Area", typeof(string));
+            dt.Columns[0].ReadOnly = true;
+
+            foreach (string altName in alternativeList)
+            {
+                dt.Columns.Add(altName, typeof(bool));
+            }
+
+            foreach (string focusAreaName in focusAreaList)
+            {
+                DataRow r = dt.NewRow();
+                r[0] = focusAreaName;
+                r[1] = true;
+                for (int i = 2; i < alternativeList.Count + 1; i++)
+                {
+                    r[i] = false;
+                }
+                dt.Rows.Add(r);
+            }
+
+            grdFocusAreaChooser.DataSource = dt;
+        }
+
+        /// <summary>
+        /// Forces radio-button functionality (1 and only 1 selected) in a check-box (0 or more selected) interface
+        /// </summary>        
+        private void grdFocusAreaChooser_CellChange(object sender, Infragistics.Win.UltraWinGrid.CellEventArgs e)
+        {
+            if (e.Cell.Text == "False")
+            {
+                e.Cell.Value = true;
+            }
+            else
+            {
+                foreach (Infragistics.Win.UltraWinGrid.UltraGridCell c in e.Cell.Row.Cells)
+                {
+                    if (c.Column.Index == 0) continue;
+                    if (e.Cell.Column.Key != c.Column.Key)
+                    {
+                        c.Value = false;
+                    }
+                }
+            }
+        }
+
+        private void btnAggregate_Click(object sender, EventArgs e)
+        {
+            if (alternativePackages.Count == 0)
+            {
+                MessageBox.Show("No alternatives loaded - Use 'Read Focus Area' on a base model with 1 or more alternatives.", "No Alternatives loaded");
+                return;
+            }
+
+            string baseModel;
+
+            baseModel = this.cmbBaseModel.Text;
+            baseModel += baseModel.EndsWith("\\") ? "" : "\\";
+
+            string newAltName;
+            newAltName = InputBox.Show("Please enter a name for the new alternative:", "New Alternative Name").Text;
+
+            if (!ValidateInput(baseModel, newAltName))
+            {
+                return;
+            }
+
+            if (this.GetAlternativeList(baseModel).Contains(newAltName))
+            {
+                MessageBox.Show("An alternative named '" + newAltName + "' already exists. Please specify a unique name.", "Alternative Name Already Exists");
+                return;
+            }
+
+            try
+            {
+
+                if (this.GetAlternativeList(baseModel).Contains("aggregate"))
+                {
+                    DeleteAlternative(baseModel, "aggregate");
+                }
+                if (!NewAlternative(baseModel, "aggregate"))
+                {
+                    return;
+                }
+
+                DataTable dt = (DataTable)grdFocusAreaChooser.DataSource;
+                
+                foreach (DataRow row in dt.Rows)
+                {
+                    string focusArea = (string)row[0];
+
+                    for (int i = 1; i < row.ItemArray.Length; i++)
+                    {
+                        if (!(bool)row[i])
+                        {
+                            continue;
+                        }
+                        string alternativeName = dt.Columns[i].Caption;
+
+                        Dictionary<string, string> parameters = new Dictionary<string, string>();
+                        parameters.Add("gInputAlternativePath", baseModel + "alternatives\\" +  alternativeName + "\\");
+                        parameters.Add("gFocusArea", focusArea);
+                        parameters.Add("gOutputAlternativePath", baseModel + "alternatives\\aggregate\\");
+                        mbExecuter.ExecuteFunctionGroup("Aggregate", parameters);
+
+                    }
+                    
+                }
+
+                CopyAlternative(baseModel, "aggregate", newAltName);
+            }
+            catch (Exception ex)
+            {
+                if (this.GetAlternativeList(baseModel).Contains(newAltName))
+                {
+                    DeleteAlternative(baseModel, newAltName);
+                }
+                engineOutput.AddStatus("Unable to Aggregate Alternative: " + ex.Message, SeverityLevel.Error);
+                MessageBox.Show("Unable to Aggregate Alternative: " + ex.Message, "Error Aggregating Alternative", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                if (this.GetAlternativeList(baseModel).Contains("aggregate"))
+                {
+                    DeleteAlternative(baseModel, "aggregate");
+                }
+                UpdateAlternativeList();
+            }
+            
 
         }
-        
-        
+
+
     }
 }
