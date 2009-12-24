@@ -19,8 +19,9 @@ using System.Data.SqlTypes;
 using System.Data.SqlServerCe;
 using Microsoft.SqlServer.Server;
 using Microsoft.SqlServer;
+using System.Configuration.Assemblies;
 
-namespace DSCUpdater2
+namespace DSCUpdater
 {
     public partial class frmMain : Form
     {            
@@ -86,10 +87,67 @@ namespace DSCUpdater2
             tabControlMain.TabPages.Remove(tabIncorrectParkICArea);
             tabControlMain.TabPages.Remove(tabIncorrectRoofICArea);
             tabControlMain.TabPages.Remove(tabPendingImpAChanges);
+            tabControlMain.TabPages.Remove(tabDBConnOptions);
         }
 
         private void frmMain_Load(object sender, EventArgs e)
         {
+            #region XMLTransactions
+
+            #region LoadXMLNodes
+            //Clear all of the items out of the list box
+            listBox1.Items.Clear();
+
+            //the path to the xml file
+            string path = "DSCUpdaterConfig.xml";
+
+            //Open the filestream
+            FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+
+            //create the xmldocument
+            System.Xml.XmlDocument CXML = new System.Xml.XmlDocument();
+
+            //load the xml into the XmlDocument
+            CXML.Load(fs);
+
+            //Get the number of nodes in the xml document
+            for (int i = 0; i < CXML.DocumentElement.ChildNodes.Count; i++)
+            {
+                //Add the innertext of the xml document to the listbox
+                listBox1.Items.AddRange(new object[] { CXML.DocumentElement.ChildNodes[i].InnerText });
+            }
+
+            //Close the filestream
+            fs.Close();
+            #endregion
+
+            #region AddXMLNodes
+
+            #endregion
+
+            #region RemoveXMLNodes
+
+            #endregion
+
+            #region AddXMLAttribute
+
+            #endregion
+
+            #region ChangeXMLAttributeContent
+
+            #endregion
+
+
+
+            #endregion
+
+            string strConn;
+            strConn = ConfigurationSettings.AppSettings["AppSQLConnection"];
+            SqlConnection sqlConnection = new SqlConnection();
+            sqlConnection.ConnectionString = strConn;
+            MessageBox.Show(sqlConnection.ConnectionString);
+            //sqlConnection.Open();
+
             // TODO: This line of code loads data into the 'projectDataSet.DSCEDIT' table. You can move, or remove it, as needed.
             projectDataSet.EnforceConstraints = false;
             //this.dSCEDITTableAdapter.Fill(this.projectDataSet.DSCEDIT);
@@ -263,68 +321,68 @@ namespace DSCUpdater2
             //tp2.Text=tp1Text;
         }
      
-        private static void AddEditDateCommandParameter(SqlCommand cmdSQL, SqlConnection conSQL)
+        private static void AddEditDateCommandParameter(SqlCommand sqlCmd, SqlConnection sqlCon)
         {
             //add editDate parameter to SQL command cmdSQL
             DateTime editDate = DateTime.Now;
-            SqlParameter pEditDate = cmdSQL.CreateParameter();
+            SqlParameter pEditDate = sqlCmd.CreateParameter();
             pEditDate.ParameterName = "@editDate";
             pEditDate.SqlDbType = SqlDbType.DateTime;
             pEditDate.Value = editDate;
             pEditDate.Direction = ParameterDirection.Input;
-            cmdSQL.Parameters.Add(pEditDate);
-            cmdSQL.CommandTimeout = 300;
-            cmdSQL.Connection = conSQL;
-            if (conSQL.State == ConnectionState.Closed)
+            sqlCmd.Parameters.Add(pEditDate);
+            sqlCmd.CommandTimeout = 300;
+            sqlCmd.Connection = sqlCon;
+            if (sqlCon.State == ConnectionState.Closed)
             {
-                conSQL.Open();
+                sqlCon.Open();
             }           
         }
 
-        private static void AddEditedByCommandParameter(SqlCommand cmdSQL, SqlConnection conSQL)
+        private static void AddEditedByCommandParameter(SqlCommand sqlCmd, SqlConnection sqlCon)
         {
             //add editedBy parameter to SQL command cmd
             string editedBy;
             editedBy = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
-            SqlParameter pEditedBy = cmdSQL.CreateParameter();
+            SqlParameter pEditedBy = sqlCmd.CreateParameter();
             pEditedBy.ParameterName = "@editedBy";
             pEditedBy.SqlDbType = SqlDbType.VarChar;
             pEditedBy.Size = 50;
             pEditedBy.Value = editedBy;
             pEditedBy.Direction = ParameterDirection.Input;
-            cmdSQL.Parameters.Add(pEditedBy);
-            cmdSQL.CommandTimeout = 300;
-            cmdSQL.Connection = conSQL;
-            if (conSQL.State == ConnectionState.Closed)
+            sqlCmd.Parameters.Add(pEditedBy);
+            sqlCmd.CommandTimeout = 300;
+            sqlCmd.Connection = sqlCon;
+            if (sqlCon.State == ConnectionState.Closed)
             {
-                conSQL.Open();
+                sqlCon.Open();
             }           
         }
 
-        private void AddEditIDCommandParameter(SqlCommand cmdSQL)
+        private void AddEditIDCommandParameter(SqlCommand sqlCmd)
         {
             //add editID parameter to SQL command   
             int editID;
-            cmdSQL.CommandText = "SELECT Max(edit_id) FROM SESSION";         
-            if (cmdSQL.ExecuteScalar() is DBNull)
+            sqlCmd.CommandText = "SELECT Max(edit_id) FROM SESSION";
+            if (sqlCmd.ExecuteScalar() is DBNull)
             {
                 editID = 1;
-                SqlParameter pEditID = cmdSQL.CreateParameter();
+                SqlParameter pEditID = sqlCmd.CreateParameter();
                 pEditID.ParameterName = "@editID";
                 pEditID.SqlDbType = SqlDbType.Int;
                 pEditID.Value = editID;
                 pEditID.Direction = ParameterDirection.Input;
-                cmdSQL.Parameters.Add(pEditID);
+                sqlCmd.Parameters.Add(pEditID);
             }
             else
             {
-                editID = Convert.ToInt32(cmdSQL.ExecuteScalar());
-                SqlParameter pEditID = cmdSQL.CreateParameter();
+                editID = Convert.ToInt32(sqlCmd.ExecuteScalar());
+                SqlParameter pEditID = sqlCmd.CreateParameter();
                 pEditID.ParameterName = "@editID";
                 pEditID.SqlDbType = SqlDbType.Int;
                 pEditID.Value = editID + 1;
                 pEditID.Direction = ParameterDirection.Input;
-                cmdSQL.Parameters.Add(pEditID);
+                sqlCmd.Parameters.Add(pEditID);
             }
         }
 
@@ -595,52 +653,153 @@ namespace DSCUpdater2
         
         private static void BatchNewICRecords(SqlCommand cmdSQL)
         {
-            //run AppendNewParkDISCORecords query
-            cmdSQL.CommandText = "INSERT INTO mst_ic_DiscoVeg_ac (dscID) " +
+            //run AppendNewParkDISCORecords queries
+            cmdSQL.CommandText = "CREATE TABLE FIRSTLIST " +
+                                 "([dsc_id] [int])";
+            cmdSQL.ExecuteNonQuery();
+            cmdSQL.CommandText = "INSERT INTO FIRSTLIST " +
                                  "SELECT DSCEDITAPPEND.dsc_id " +
                                  "FROM DSCEDITAPPEND " +
-                                 "LEFT OUTER JOIN mst_ic_DiscoVeg_ac AS mst_ic_DiscoVeg_ac " +
+                                 "LEFT JOIN mst_ic_DiscoVeg_ac " +
                                  "ON DSCEDITAPPEND.dsc_id = mst_ic_DiscoVeg_ac.dscID " +
-                                 "WHERE (mst_ic_DiscoVeg_ac.dscID IS NULL) " +
-                                 "AND (DSCEDITAPPEND.new_park_disco_ic_area_sqft <> 0)";
+                                 "GROUP BY DSCEDITAPPEND.dsc_id";
+            cmdSQL.ExecuteNonQuery();
+            cmdSQL.CommandText = "CREATE TABLE SECONDLIST " +
+                                 "([dsc_id] [int])";
             cmdSQL.ExecuteNonQuery();
 
+            cmdSQL.CommandText = "INSERT INTO SECONDLIST " +
+                                 "SELECT DSCEDITAPPEND.dsc_id " +
+                                 "FROM DSCEDITAPPEND " +
+                                 "INNER JOIN mst_ic_DiscoVeg_ac " +
+                                 "ON DSCEDITAPPEND.dsc_id = mst_ic_DiscoVeg_ac.dscID " +
+                                 "GROUP BY DSCEDITAPPEND.dsc_id, mst_ic_DiscoVeg_ac.RoofRPark " +
+                                 "HAVING (((mst_ic_DiscoVeg_ac.RoofRPark)='P'))";
+            cmdSQL.ExecuteNonQuery();
+
+            cmdSQL.CommandText = "CREATE TABLE THIRDLIST " +
+                                 "([dsc_id] [int], [RoofRPark] [varchar] (1))";
+            cmdSQL.ExecuteNonQuery();
+
+            cmdSQL.CommandText = "INSERT INTO THIRDLIST ([dsc_id]) " +
+                                 "SELECT FIRSTLIST.dsc_id " +
+                                 "FROM FIRSTLIST " +
+                                 "LEFT JOIN SECONDLIST " +
+                                 "ON FIRSTLIST.dsc_id=SECONDLIST.dsc_id " +
+                                 "WHERE (((SECONDLIST.dsc_id) Is Null))";
+            cmdSQL.ExecuteNonQuery();
+            cmdSQL.CommandText = "UPDATE THIRDLIST " +
+                                 "SET RoofRPark = 'P'";
+            cmdSQL.ExecuteNonQuery();
+            cmdSQL.CommandText = "INSERT INTO mst_ic_DiscoVeg_ac (dscID, RoofRPark) " +
+                                 "SELECT [THIRDLIST].[dsc_id], [THIRDLIST].[RoofRPark] " +
+                                 "FROM THIRDLIST";
+            cmdSQL.ExecuteNonQuery();
+            cmdSQL.CommandText = "DROP TABLE FIRSTLIST";
+            cmdSQL.ExecuteNonQuery();
+            cmdSQL.CommandText = "DROP TABLE SECONDLIST";
+            cmdSQL.ExecuteNonQuery();
+            cmdSQL.CommandText = "DROP TABLE THIRDLIST";
+            cmdSQL.ExecuteNonQuery();
+
+            //cmdSQL.CommandText = "INSERT INTO mst_ic_DiscoVeg_ac (dscID) " +
+            //                     "SELECT DSCEDITAPPEND.dsc_id, DSCEDITAPPEND.edit_date " +
+            //                     "FROM DSCEDITAPPEND " +
+            //                     "LEFT JOIN mst_ic_DiscoVeg_ac " +
+            //                     "ON DSCEDITAPPEND.dsc_id = mst_ic_DiscoVeg_ac.dscID " +
+            //                     "WHERE (mst_ic_DiscoVeg_ac.dscID IS NULL) " +
+            //                     "AND (DSCEDITAPPEND.new_park_disco_ic_area_sqft <> 0)";
+            //cmdSQL.ExecuteNonQuery();
+
             //run UpdateNewParkDISCORecords query
-            cmdSQL.CommandText = "UPDATE mst_ic_DiscoVeg_ac SET " +
-                              "ParcelID = LEFT(mst_ic_DiscoVeg_ac.dscID, 6), " +
-                              "DivideID = RIGHT(mst_ic_DiscoVeg_ac.dscID, 1), " +
-                              "RoofRPark =N'P', assumekey = N'DDEX', TimeFrame = N'EX', " +
-                              "ApplyAreaTF = N'EX', ValidFromDate = @editDate, " +
-                              "ValidToDate = N'', SqFt = DSCEDITAPPEND.new_park_disco_ic_area_sqft, " +
-                              "Effectiveness = 0.7, Comment = N'DSCEditor', " +
-                              "AppendDate = @editDate FROM " +
-                              "mst_ic_DiscoVeg_ac INNER JOIN DSCEDITAPPEND ON " +
-                              "mst_ic_DiscoVeg_ac.dscID = DSCEDITAPPEND.dsc_id";
+            cmdSQL.CommandText = "UPDATE mst_ic_DiscoVeg_ac " + 
+                                 "SET ParcelID = LEFT(mst_ic_DiscoVeg_ac.dscID, 6), " +
+                                 "DivideID = RIGHT(mst_ic_DiscoVeg_ac.dscID, 1), " +
+                                 "assumekey = N'DDEX', TimeFrame = N'EX', " +
+                                 "ApplyAreaTF = N'EX', ValidFromDate = @editDate, " +
+                                 "ValidToDate = N'', SqFt = DSCEDITAPPEND.new_park_disco_ic_area_sqft, " +
+                                 "Effectiveness = 0.7, Comment = N'DSCEditor' " +
+                                 "FROM mst_ic_DiscoVeg_ac " +
+                                 "INNER JOIN DSCEDITAPPEND " +
+                                 "ON ((mst_ic_DiscoVeg_ac.dscID = DSCEDITAPPEND.dsc_id) " +
+                                 "AND (mst_ic_DiscoVeg_ac.RoofRPark = 'P')) " +
+                                 "WHERE (DSCEDITAPPEND.new_park_disco_ic_area_sqft<>0)";
             cmdSQL.ExecuteNonQuery();
 
             //run AppendNewParkDrywellRecords query
-            cmdSQL.CommandText = "INSERT INTO mst_ic_Drywell_ac (dscID) " +
-                                 "SELECT DSCEDITAPPEND.dsc_id " +
-                                 "FROM DSCEDITAPPEND  " +
-                                 "LEFT OUTER JOIN mst_ic_Drywell_ac AS mst_ic_Drywell_ac " +
-                                 "ON DSCEDITAPPEND.dsc_id = mst_ic_Drywell_ac.dscID " +
-                                 "WHERE (mst_ic_Drywell_ac.dscID IS NULL) " +
-                                 "AND (DSCEDITAPPEND.new_park_drywell_ic_area_sqft <> 0)";
+            cmdSQL.CommandText = "CREATE TABLE FIRSTLIST " +
+                                 "([dsc_id] [int])";
             cmdSQL.ExecuteNonQuery();
+            cmdSQL.CommandText = "INSERT INTO FIRSTLIST " +
+                                 "SELECT DSCEDITAPPEND.dsc_id " +
+                                 "FROM DSCEDITAPPEND " +
+                                 "LEFT JOIN mst_ic_Drywell_ac " +
+                                 "ON DSCEDITAPPEND.dsc_id = mst_ic_Drywell_ac.dscID " +
+                                 "GROUP BY DSCEDITAPPEND.dsc_id";
+            cmdSQL.ExecuteNonQuery();
+            cmdSQL.CommandText = "CREATE TABLE SECONDLIST " +
+                                 "([dsc_id] [int])";
+            cmdSQL.ExecuteNonQuery();
+
+            cmdSQL.CommandText = "INSERT INTO SECONDLIST " +
+                                 "SELECT DSCEDITAPPEND.dsc_id " +
+                                 "FROM DSCEDITAPPEND " +
+                                 "INNER JOIN mst_ic_Drywell_ac " +
+                                 "ON DSCEDITAPPEND.dsc_id = mst_ic_Drywell_ac.dscID " +
+                                 "GROUP BY DSCEDITAPPEND.dsc_id, mst_ic_Drywell_ac.RoofRPark " +
+                                 "HAVING (((mst_ic_Drywell_ac.RoofRPark)='P'))";
+            cmdSQL.ExecuteNonQuery();
+
+            cmdSQL.CommandText = "CREATE TABLE THIRDLIST " +
+                                 "([dsc_id] [int], [RoofRPark] [varchar] (1))";
+            cmdSQL.ExecuteNonQuery();
+
+            cmdSQL.CommandText = "INSERT INTO THIRDLIST ([dsc_id]) " +
+                                 "SELECT FIRSTLIST.dsc_id " +
+                                 "FROM FIRSTLIST " +
+                                 "LEFT JOIN SECONDLIST " +
+                                 "ON FIRSTLIST.dsc_id=SECONDLIST.dsc_id " +
+                                 "WHERE (((SECONDLIST.dsc_id) Is Null))";
+            cmdSQL.ExecuteNonQuery();
+            cmdSQL.CommandText = "UPDATE THIRDLIST " +
+                                 "SET RoofRPark = 'P'";
+            cmdSQL.ExecuteNonQuery();
+            cmdSQL.CommandText = "INSERT INTO mst_ic_Drywell_ac (dscID, RoofRPark) " +
+                                 "SELECT [THIRDLIST].[dsc_id], [THIRDLIST].[RoofRPark] " +
+                                 "FROM THIRDLIST";
+            cmdSQL.ExecuteNonQuery();
+            cmdSQL.CommandText = "DROP TABLE FIRSTLIST";
+            cmdSQL.ExecuteNonQuery();
+            cmdSQL.CommandText = "DROP TABLE SECONDLIST";
+            cmdSQL.ExecuteNonQuery();
+            cmdSQL.CommandText = "DROP TABLE THIRDLIST";
+            cmdSQL.ExecuteNonQuery();
+            
+            //cmdSQL.CommandText = "INSERT INTO mst_ic_Drywell_ac (dscID) " +
+            //                     "SELECT DSCEDITAPPEND.dsc_id " +
+            //                     "FROM DSCEDITAPPEND  " +
+            //                     "LEFT OUTER JOIN mst_ic_Drywell_ac " +
+            //                     "ON DSCEDITAPPEND.dsc_id = mst_ic_Drywell_ac.dscID " +
+            //                     "WHERE ((mst_ic_Drywell_ac.dscID IS NULL) " +
+            //                     "AND (DSCEDITAPPEND.new_park_drywell_ic_area_sqft <> 0))";
+            //cmdSQL.ExecuteNonQuery();
 
             //run UpdateNewParkDrywellRecords query
-            cmdSQL.CommandText = "UPDATE mst_ic_Drywell_ac SET " +
-                              "ParcelID = Left(mst_ic_Drywell_ac.dscID, 6), " +
-                              "DivideID = Right(mst_ic_Drywell_ac.dscID, 1), " +
-                              "RoofRPark = N'P', assumeKey = N'INSU', TimeFrame = N'EX', " +
-                              "ApplyAreaTF = N'EX', ValidFromDate = @editDate, " +
-                              "ValidToDate = N'', SqFt = DSCEDITAPPEND.new_park_drywell_ic_area_sqft, " +
-                              "Comment = N'DSCEditor', AppendDate = @editDate FROM " +
-                              "mst_ic_Drywell_ac INNER JOIN DSCEDITAPPEND ON " +
-                              "mst_ic_Drywell_ac.dscID = DSCEDITAPPEND.dsc_id WHERE " +
-                              "(DSCEDITAPPEND.new_park_drywell_ic_area_sqft <> 0)";
+            cmdSQL.CommandText = "UPDATE mst_ic_Drywell_ac " +
+                                 "SET ParcelID = Left(mst_ic_Drywell_ac.dscID, 6), " +
+                                 "DivideID = Right(mst_ic_Drywell_ac.dscID, 1), " +
+                                 "assumeKey = N'INSU', TimeFrame = N'EX', " +
+                                 "ApplyAreaTF = N'EX', ValidFromDate = @editDate, " +
+                                 "ValidToDate = N'', SqFt = DSCEDITAPPEND.new_park_drywell_ic_area_sqft, " +
+                                 "Comment = N'DSCEditor', AppendDate = @editDate " +
+                                 "FROM mst_ic_Drywell_ac " +
+                                 "INNER JOIN DSCEDITAPPEND " +
+                                 "ON ((mst_ic_Drywell_ac.dscID = DSCEDITAPPEND.dsc_id) " +
+                                 "AND (mst_ic_Drywell_ac.RoofRPark='P')) " +
+                                 "WHERE (DSCEDITAPPEND.new_park_drywell_ic_area_sqft <> 0)";
             cmdSQL.ExecuteNonQuery();
 
+            //AppendNewRoofDISCORecords
             //run queries that will identify which DSCs are in the mst_ic_DiscoVeg_ac table with Parking controls
             //then update the table to include any Roof controls
             cmdSQL.CommandText = "CREATE TABLE FIRSTLIST " +
@@ -691,6 +850,7 @@ namespace DSCUpdater2
             cmdSQL.CommandText = "DROP TABLE THIRDLIST";
             cmdSQL.ExecuteNonQuery();
                      
+            //AppendNewRoofDrywellRecords
             //run queries that will identify which DSCs are in the mst_ic_Drywell_ac table with Parking controls
             //then update the table to include any Roof controls
             cmdSQL.CommandText = "CREATE TABLE FIRSTLIST " +
@@ -769,7 +929,6 @@ namespace DSCUpdater2
                               "AND mst_ic_Drywell_ac.RoofRPark = 'R') " +
                               "WHERE (DSCEDITAPPEND.new_roof_drywell_ic_area_sqft <> 0)";
             cmdSQL.ExecuteNonQuery();
-            MessageBox.Show("I've made it past new ICs");
         }
 
         private static void BatchUpdateMasterICTables(SqlCommand cmdSQL)
@@ -1545,6 +1704,7 @@ namespace DSCUpdater2
                 btnSubmitUpdaterEditorChanges.Enabled = true;
                 btnUpdaterEditorClear.Enabled = true;
                 btnUpdaterEditorCloseCancel.Text = "Cancel";
+                MessageBox.Show(dgvUpdaterEditor.RowCount.ToString());
             }
         }
 
@@ -1563,8 +1723,8 @@ namespace DSCUpdater2
             sfdMain.InitialDirectory=@"C:\";
             sfdMain.FileName = "UserUpdate.csv";
             if (sfdMain.ShowDialog()==DialogResult.OK)
-            {
-                File.Copy(templatePath,sfdMain.FileName);
+            {      
+                File.Copy(templatePath,sfdMain.FileName,true);
             }           
         }
 
@@ -1642,8 +1802,7 @@ namespace DSCUpdater2
                                  "OR ((DSCEDIT.new_roof_drywell_ic_area_sqft<>DSCEDITAPPEND.new_roof_drywell_ic_area_sqft)) " +
                                  "OR ((DSCEDIT.new_park_area_sqft<>DSCEDITAPPEND.new_park_area_sqft)) " +
                                  "OR ((DSCEDIT.new_park_disco_ic_area_sqft<>DSCEDITAPPEND.new_park_disco_ic_area_sqft)) " +
-                                 "OR ((DSCEDIT.new_park_drywell_ic_area_sqft<> " +
-                                 "DSCEDITAPPEND.new_park_drywell_ic_area_sqft))";
+                                 "OR ((DSCEDIT.new_park_drywell_ic_area_sqft<>DSCEDITAPPEND.new_park_drywell_ic_area_sqft))";
             sqlCmd.ExecuteNonQuery();
 
             BatchNewICRecords(sqlCmd);
@@ -1660,7 +1819,8 @@ namespace DSCUpdater2
                                  "new_roof_drywell_ic_area_sqft, old_park_area_sqft, " +
                                  "new_park_area_sqft, old_park_disco_ic_area_sqft, " +
                                  "new_park_disco_ic_area_sqft, old_park_drywell_ic_area_sqft, " +
-                                 "new_park_drywell_ic_area_sqft) SELECT " +
+                                 "new_park_drywell_ic_area_sqft) " + 
+                                 "SELECT " +
                                  "DSCEDITAPPEND.edit_id AS edit_id, " +
                                  "DSCEDITAPPEND.edit_date AS edit_date, " +
                                  "DSCEDITAPPEND.edited_by AS edited_by, " +
@@ -1679,6 +1839,9 @@ namespace DSCUpdater2
                                  "DSCEDITAPPEND.old_park_drywell_ic_area_sqft AS old_park_drywell_ic_area_sqft, " +
                                  "DSCEDITAPPEND.new_park_drywell_ic_area_sqft AS new_park_drywell_ic_area_sqft " +
                                  "FROM DSCEDITAPPEND";
+            sqlCmd.ExecuteNonQuery();
+            sqlCmd.CommandText = "UPDATE DSCEDIT " +
+                                 "SET updater_editor_value_changed = 'False'";
             sqlCmd.ExecuteNonQuery();
             sqlCmd.CommandText = "DELETE FROM DSCEDITAPPEND";
             sqlCmd.ExecuteNonQuery();
@@ -1700,8 +1863,9 @@ namespace DSCUpdater2
             sqlCon.Close();
             btnUpdaterEditorCloseCancel.Text = "Return";
             btnUpdaterHistoryReturn.Visible=false;
-
-            SendImpAEmail();          
+            MessageBox.Show("Changes submitted.  Internal email will now be sent from Outlook", "DSCEditor: Changes Submitted",MessageBoxButtons.OK,MessageBoxIcon.Information);
+            btnSubmitUpdaterEditorChanges.Enabled = false;
+            SendImpAEmail();       
         }
 
         private void btnUpdaterEditorEnter_Click(object sender, EventArgs e)
@@ -1902,7 +2066,7 @@ namespace DSCUpdater2
                 SqlCommand sqlCmd = new SqlCommand();
 
                 AddEditorEditIDCommandParameter(sqlCmd);
-
+          
                 sqlCmd.CommandText = "DELETE FROM DSCEDITAPPEND";
                 sqlCmd.Connection = sqlCon;
                 sqlCmd.ExecuteNonQuery();
@@ -1945,6 +2109,44 @@ namespace DSCUpdater2
                 else
                 {
                     BatchRevertICEdits(sqlCmd);
+                    AddEditIDCommandParameter(sqlCmd);
+                    AddEditDateCommandParameter(sqlCmd, sqlCon);
+                    AddEditedByCommandParameter(sqlCmd, sqlCon);
+                    BatchSESSION(sqlCmd);
+
+                    sqlCmd.CommandText = "UPDATE DSCEDITAPPEND " +
+                                         "SET DSCEDITAPPEND.edit_id = @editID, " +
+                                         "DSCEDITAPPEND.edit_date = @editDate, " +
+                                         "DSCEDITAPPEND.edited_by = @editedBy";
+                    sqlCmd.ExecuteNonQuery();
+
+                    sqlCmd.CommandText = "INSERT INTO DSCEDIT " +
+                                         "(edit_id, edit_date, edited_by, rno, dsc_id, " +
+                                         "old_roof_area_sqft, new_roof_area_sqft, " +
+                                         "old_roof_disco_ic_area_sqft, new_roof_disco_ic_area_sqft, " +
+                                         "old_roof_drywell_ic_area_sqft, new_roof_drywell_ic_area_sqft, " +
+                                         "old_park_area_sqft, new_park_area_sqft, " +
+                                         "old_park_disco_ic_area_sqft, new_park_disco_ic_area_sqft, " +
+                                         "old_park_drywell_ic_area_sqft, updater_editor_value_changed) " +
+                                         "SELECT DSCEDITAPPEND.edit_id, " +
+                                         "DSCEDITAPPEND.edit_date, " +
+                                         "DSCEDITAPPEND.edited_by, " +
+                                         "DSCEDITAPPEND.rno, " +
+                                         "DSCEDITAPPEND.dsc_id, " +
+                                         "DSCEDITAPPEND.old_roof_area_sqft, " +
+                                         "DSCEDITAPPEND.new_roof_area_sqft, " +
+                                         "DSCEDITAPPEND.old_roof_disco_ic_area_sqft, " +
+                                         "DSCEDITAPPEND.new_roof_disco_ic_area_sqft, " +
+                                         "DSCEDITAPPEND.old_roof_drywell_ic_area_sqft, " +
+                                         "DSCEDITAPPEND.new_roof_drywell_ic_area_sqft, " +
+                                         "DSCEDITAPPEND.old_park_area_sqft, " + 
+                                         "DSCEDITAPPEND.new_park_area_sqft, " +
+                                         "DSCEDITAPPEND.old_park_disco_ic_area_sqft, " +
+                                         "DSCEDITAPPEND.new_park_disco_ic_area_sqft, " +
+                                         "DSCEDITAPPEND.old_park_drywell_ic_area_sqft, " +
+                                         "DSCEDITAPPEND.updater_editor_value_changed " +
+                                         "FROM DSCEDITAPPEND";
+                    sqlCmd.ExecuteNonQuery();
 
                     sqlCmd.CommandText = "DELETE FROM IMPUPDATE";
                     sqlCmd.ExecuteNonQuery();
@@ -2030,6 +2232,8 @@ namespace DSCUpdater2
                 tabControlMain.TabPages.Remove(tabUpdaterEditor);
                 tabControlMain.SelectedTab = tabUpdaterHistory;
             }
+            this.sESSIONTableAdapter.Fill(this.projectDataSet.SESSION);
+            bindingNavigator1.BindingSource = sESSIONBindingSource;
         }
       
         private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
@@ -2057,6 +2261,12 @@ namespace DSCUpdater2
             string currentRoofDiscoICAreaLblText = "";
             string currentRoofDrywellICAreaLblText = "";
 
+            //MessageBox.Show(dgvUpdaterEditor.SelectedRows.Count.ToString());
+            if (dgvUpdaterEditor.SelectedRows.Count == 0)
+            {
+                return;
+            }
+                        
             if (dgvUpdaterEditor.SelectedRows.Count == 1)
             {
                 txtNewParkArea.Enabled = true;
@@ -2065,16 +2275,10 @@ namespace DSCUpdater2
                 txtNewParkDrywellICArea.Enabled = true;
                 txtNewRoofDISCOICArea.Enabled = true;
                 txtNewRoofDrywellICArea.Enabled = true;
-                if (dgvUpdaterEditor.SelectedRows[0].Cells[4].Value.ToString() == "")
-                {
-                    MessageBox.Show("Null");
-                }
-            }
-
-            if (dgvUpdaterEditor.SelectedRows.Count > 0)
-            {
+                
                 if (dgvUpdaterEditor.SelectedRows[0].Cells[4].Value.ToString() != "" && dgvUpdaterEditor.SelectedRows[0].Cells[18].Value.ToString() == "False")
                 {
+                    //MessageBox.Show("If1");
                     rNoLblText = "RNO: Not Available";
                     currentParkAreaLblText = "Current park area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[13].Value.ToString();
                     currentParkDiscoICAreaLblText = "Current park DISCO IC area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[15].Value.ToString(); ;
@@ -2086,6 +2290,7 @@ namespace DSCUpdater2
 
                 if (dgvUpdaterEditor.SelectedRows[0].Cells[4].Value.ToString() != "" && dgvUpdaterEditor.SelectedRows[0].Cells[18].Value.ToString() == "True")
                 {
+                    //MessageBox.Show("If2");
                     rNoLblText = "RNO: " + dgvUpdaterEditor.SelectedRows[0].Cells[4].Value.ToString();
                     currentParkAreaLblText = "Updated park area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[13].Value.ToString();
                     currentParkDiscoICAreaLblText = "Updated park DISCO IC area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[15].Value.ToString(); ;
@@ -2097,6 +2302,7 @@ namespace DSCUpdater2
 
                 if (dgvUpdaterEditor.SelectedRows[0].Cells[4].Value.ToString() == "" && dgvUpdaterEditor.SelectedRows[0].Cells[18].Value.ToString() == "False")
                 {
+                    //MessageBox.Show("If3");
                     rNoLblText = "RNO: Not Available";
                     currentParkAreaLblText = "Current park area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[13].Value.ToString();
                     currentParkDiscoICAreaLblText = "Current park DISCO IC area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[15].Value.ToString(); ;
@@ -2108,6 +2314,7 @@ namespace DSCUpdater2
 
                 if (dgvUpdaterEditor.SelectedRows[0].Cells[4].Value.ToString() == "" && dgvUpdaterEditor.SelectedRows[0].Cells[18].Value.ToString() == "True")
                 {
+                    //MessageBox.Show("If4");
                     rNoLblText = "RNO: Not Available";
                     currentParkAreaLblText = "Updated park area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[13].Value.ToString();
                     currentParkDiscoICAreaLblText = "Updated park DISCO IC area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[15].Value.ToString(); ;
@@ -2124,7 +2331,56 @@ namespace DSCUpdater2
                 lblSelectedEditorRfDISCOICArea.Text = currentRoofDiscoICAreaLblText;
                 lblSelectedEditorRfDrywellICArea.Text = currentRoofDrywellICAreaLblText;
             }
-        }   
+        }
+
+        private void btnChangeDBConnOption_Click(object sender, EventArgs e)
+        {
+            //takes user input from text fields to set new connection property
+            //where the data will be accessed and written
+            string newServerCon = txtNewServerCon.Text;
+            string newDatabaseCon = txtNewDatabaseCon.Text;
+            string newConStr = "Data Source="+newServerCon+";Initial Catalog="+newDatabaseCon+";Integrated Security=True";
+            SqlConnection newSQLCon = new SqlConnection();
+            newSQLCon.ConnectionString=newConStr;
+            if (txtNewDatabaseCon == null || txtNewServerCon == null)
+            {
+                try
+                {
+                    newSQLCon.Open();
+                    MessageBox.Show("Connected to server = " + newServerCon + ", database = " + newDatabaseCon);
+                    
+                }
+                catch (Exception ex)
+                {
+                    if (newSQLCon != null)
+                        newSQLCon.Dispose();
+                    string errorMessage = "A error occured while trying to connect to the server. Please choose a valid server and database.";
+                    errorMessage += Environment.NewLine;
+                    errorMessage += Environment.NewLine;
+                    errorMessage += ex.Message;
+
+                    MessageBox.Show(this, errorMessage, "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Server or database not specified. Please specify a valid server and database.", "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnCloseOptions_Click(object sender, EventArgs e)
+        {
+            HideTabPage(tabDBConnOptions);
+            ShowTabPage(tabMain);
+        }
+
+        private void changeDatabaseConnectionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TabPage currentTabPage = tabControlMain.SelectedTab;
+            HideTabPage(currentTabPage);
+            ShowTabPage(tabDBConnOptions);
+        }  
     }
 }
 
