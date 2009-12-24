@@ -3,7 +3,7 @@
 // Path: D:\Development\ArcSpooler\UI, Author: arnelm
 // Code lines: 21, Size of file: 322 Bytes
 // Creation date: 11/2/2008 11:48 PM
-// Last modified: 3/6/2009 1:55 PM
+// Last modified: 11/17/2009 11:28 AM
 
 #region Using directives
 using System;
@@ -241,13 +241,13 @@ namespace ArcSpooler.UI
 				if (_Config.CreateMXD)
 				{
 					SaveMXD(key, doc);
-					WriteJobOutput(MXDFileName(key));
+					WriteJobOutput(OutputFileName(key, "mxd"));
 				} // if
 
 				if (_Config.CreatePDF)
 				{
 						SavePDF(key, doc, _Config.CreateGeoPDF);
-						WriteJobOutput(PDFFileName(key));
+						WriteJobOutput(OutputFileName(key, "mxd"));
 				} // if
 			} // try
 			catch (Exception e)
@@ -322,7 +322,7 @@ namespace ArcSpooler.UI
 				ITextElement textField = mdocHelper.TextElement(item.Name);
 				string specialFieldContent = string.Empty;
 				if (item.ModifyTo == "$FILENAME")
-					specialFieldContent = MXDFileName(key);
+					specialFieldContent = OutputFileName(key, "mxd");
 				else if (item.ModifyTo == "$DATE")
 					specialFieldContent = string.Format("{0:d}", DateTime.Now);
 				textField.Text = (specialFieldContent == string.Empty) ? item.ModifyTo : specialFieldContent;
@@ -461,22 +461,27 @@ namespace ArcSpooler.UI
 
 		private void SaveMXD(string key, IMapDocument doc)
 		{
-			string outputName = MXDFileName(key);
+			string outputName = OutputFileName(key, "mxd");
 			doc.SaveAs(outputName, false, true);
 		} // SaveMXD(key, doc)
 
 		/// <summary>
-		/// MXD file name
+		/// Output file name
 		/// </summary>
 		/// <param name="key">Key</param>
+		/// <param name="extension">Extension</param>
 		/// <returns>String</returns>
-		private string MXDFileName(string key)
+		private string OutputFileName(string key, string extension)
 		{
-			string outputName = _Config.OutputPath.EndsWith(System.IO.Path.DirectorySeparatorChar.ToString()) ?
-											_Config.OutputPath + key + ".mxd" :
-											_Config.OutputPath + System.IO.Path.DirectorySeparatorChar + key + ".mxd";
+			string outputName = string.Format("{0}{1}{2}.{3}",
+				_Config.OutputPath.EndsWith(System.IO.Path.DirectorySeparatorChar.ToString()) ?
+					_Config.OutputPath :
+					_Config.OutputPath + System.IO.Path.DirectorySeparatorChar,
+				_Config.OutputBasename,
+				key,
+				extension);
 			return outputName;
-		} // MXDFileName(key)
+		} // OutputFileName(key, extension)
 
 		/// <summary>
 		/// Save PDF
@@ -539,7 +544,7 @@ namespace ArcSpooler.UI
 				pageLayoutView.ExportFrame.right * convertResFactor,
 				pageLayoutView.ExportFrame.bottom * convertResFactor);
 
-			string outputName = PDFFileName(key);
+			string outputName = OutputFileName(key,  "pdf");
 			pdfExporter.ExportFileName = outputName;
 			pdfExporter.PixelBounds = pdfPageExtent;
 			pdfExporter.Resolution = exportResolution;
@@ -551,14 +556,6 @@ namespace ArcSpooler.UI
 			pdfExporter.FinishExporting();
 			pdfExporter.Cleanup();
 		} // SavePDF(key, doc)
-
-		private string PDFFileName(string key)
-		{
-			string outputName = _Config.OutputPath.EndsWith(System.IO.Path.DirectorySeparatorChar.ToString()) ?
-											_Config.OutputPath + key + ".pdf" :
-											_Config.OutputPath + System.IO.Path.DirectorySeparatorChar + key + ".pdf";
-			return outputName;
-		}
 
 		/// <summary>
 		/// Get screen resolution

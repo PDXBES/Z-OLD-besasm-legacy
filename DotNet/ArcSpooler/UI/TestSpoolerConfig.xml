@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:SpoolerConfigSchema.xsd">
-  <template filename="D:\Development\ArcSpooler\Resources\Test_Map_Template.mxd">
-    <masterDataFrame name="main map 1" layerToShift="UIC Map Views" layerKeyField="SUMPID1" zoomToObject="true" rotateMap="false" highlightLayer="UIC Locations Highlight" highlightField="UNITID" scaleInterval="50">
+  <template filename="\\Cassio\GIS2\PROJECTS\8292_UIC_RegionalPlan\GIS\mxd\Field_Eval_Maps\Mxd\Map_Template.mxd">
+    <masterDataFrame name="main map 1" layerToShift="UIC Map Views" layerKeyField="Mapping_ID" zoomToObject="true" rotateMap="false" highlightLayer="UIC Locations Highlight" highlightField="UNITID" scaleInterval="50">
       <highlightLayer hide="false" layerName="UIC Locations Highlight" layerField="UNITID" />
       <highlightLayer hide="true" layerName="All BES UIC's" layerField="UNITID" />
       <highlightLayer hide="false" layerName="UIC Drainage Basin Highlight" layerField="SUMPID1" />
@@ -35,43 +35,12 @@
     <sourceTable>UIC_Locations_To_Map_With_Comments</sourceTable>
     <sourceField>UNITID</sourceField>
   </sourceDatabase>
-  <output createMXD="true" createPDF="true" pdfResolution="300" createJobLog="true">
-    <path>D:\Development\ArcSpooler\TestOutput</path>
+  <output createMXD="true" createPDF="true" pdfResolution="300">
+    <path>C:\Development\ArcSpooler\TestOutput</path>
+	<baseName>Whatever_</baseName>
   </output>
-  <selection name="Cat3">
-    <objectID>ADR045</objectID>
-    <objectID>ADR046</objectID>
-    <objectID>ADR047</objectID>
-    <objectID>ADU200</objectID>
-    <objectID>ADU727</objectID>
-    <objectID>ADU731</objectID>
-    <objectID>ADU757</objectID>
-    <objectID>ADT689</objectID>
-    <objectID>ADT691</objectID>
-    <objectID>ADV121</objectID>
-    <objectID>ADV203</objectID>
-    <objectID>ADV244</objectID>
-    <objectID>ADV955</objectID>
-    <objectID>ADV956</objectID>
-    <objectID>AMR318</objectID>
-    <objectID>AMR771</objectID>
-  </selection>
-  <selection name="Doohickey">
-    <objectID>AAC311</objectID>
-    <objectID>AAJ188</objectID>
-    <objectID>ACK357</objectID>
-  </selection>
-  <selection name="TestDebugOutput">
-    <objectID>AAC311</objectID>
-    <objectID>AAJ188</objectID>
-    <objectID>ACK357</objectID>
-    <objectID>ADV126</objectID>
-    <objectID>ADV130</objectID>
-    <objectID>ADV135</objectID>
-  </selection>
   <selection name="ErrorPending">
-    <objectID>ADV126</objectID>
-    <objectID>ADV130</objectID>
-    <objectID>ADV135</objectID>
+    <objectID>ADT459</objectID>
+    <objectID>ANB177</objectID>
   </selection>
 </configuration>
