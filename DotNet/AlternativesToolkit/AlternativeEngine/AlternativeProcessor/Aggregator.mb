@@ -98,23 +98,22 @@ Sub Aggregate
 
 '4: Append from selected alt tables into alternative located at gOutputAlternativePath
 	Insert Into alt_dsc_agg Select * From alt_dsc_fa
+	Commit Table alt_dsc_agg Automatic ApplyUpdates
 	Insert Into alt_links_agg Select * From alt_links_fa
+	Commit Table alt_links_agg Automatic ApplyUpdates
 	Insert Into alt_nodes_agg Select * From alt_nodes_fa
+	Commit Table alt_nodes_agg Automatic ApplyUpdates
 	Insert Into alt_speclinks_agg Select * From alt_speclinks_fa
+	Commit Table alt_speclinks_agg Automatic ApplyUpdates
 	Insert Into alt_ssc_agg Select * From alt_ssc_fa
+	Commit Table alt_ssc_agg Automatic ApplyUpdates
 	Insert Into alt_rooftargets_agg Select * From alt_rooftargets_fa
+	Commit Table alt_rooftargets_agg Automatic ApplyUpdates
 	Insert Into alt_streettargets_agg Select * From alt_streettargets_fa
+	Commit Table alt_streettargets_agg Automatic ApplyUpdates
 	Insert Into alt_parkingtargets_agg Select * From alt_parkingtargets_fa
-
-'5: Save tables
-	Commit Table alt_dsc_fa
-	Commit Table alt_links_fa
-	Commit Table alt_nodes_fa
-	Commit Table alt_speclinks_fa
-	Commit Table alt_ssc_fa
-	Commit Table alt_rooftargets_fa
-	Commit Table alt_streettargets_fa
-	Commit Table alt_parkingtargets_fa
+	Commit Table alt_parkingtargets_agg Automatic ApplyUpdates
+	
 End Sub
 
 

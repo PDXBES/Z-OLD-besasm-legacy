@@ -6,25 +6,25 @@ using System.Collections.Generic;
 
 namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
 {
-	/// <summary>
-	/// Summary description for IGISExecuter.
-	/// </summary>
-	public interface IGISExecuter
-	{		
-		void ExecuteLibrary(string libraryName, IDictionary parameterList);
-        void ExecuteFunctionGroup(string execGroup, string baseModel, string alternativeName, string outputModel, bool interactive);
-        void ExecuteFunctionGroup(string execGroup, Dictionary<string, string> parameters);
+  /// <summary>
+  /// Summary description for IGISExecuter.
+  /// </summary>
+  public interface IGISExecuter
+  {
+    void ExecuteLibrary(string libraryName, IDictionary parameterList);
+    void ExecuteFunctionGroup(string execGroup, string baseModel, string alternativeName, string outputModel, bool interactive);
+    void ExecuteFunctionGroup(string execGroup, Dictionary<string, string> parameters);
 
-		void ShowGIS();
-		void HideGIS();
+    void ShowGIS();
+    void HideGIS();
 
-		void CloseGIS();
+    void CloseGIS();
 
-		string GetError();
+    string GetError();
 
-		bool WaitingForGIS { get; }
+    bool WaitingForGIS { get; }
 
-		event OnStatusChangedEventHandler StatusChanged;		
-		
-	}
+    event OnStatusChangedEventHandler StatusChanged;
+
+  }
 }

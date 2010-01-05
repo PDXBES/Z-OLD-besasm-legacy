@@ -320,6 +320,9 @@
     <Compile Include="WorkbenchRunning.cs">
       <SubType>Form</SubType>
     </Compile>
+    <None Include="AlternativeProcessor\Aggregator.MBX">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="ConveyanceBuilder.xsc">
       <DependentUpon>ConveyanceBuilder.xsd</DependentUpon>
     </None>
