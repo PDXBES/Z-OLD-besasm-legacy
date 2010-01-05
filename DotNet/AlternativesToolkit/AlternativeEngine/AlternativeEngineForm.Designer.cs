@@ -110,6 +110,7 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
           this.btnNewAlternative = new Infragistics.Win.Misc.UltraButton();
           this.txtDefaultNodeName = new System.Windows.Forms.TextBox();
           this.btnEditAlternative = new Infragistics.Win.Misc.UltraButton();
+          this.btnCancel = new Infragistics.Win.Misc.UltraButton();
           this.ultraTabPageControl3 = new Infragistics.Win.UltraWinTabControl.UltraTabPageControl();
           this.cmbOutputModel = new Infragistics.Win.UltraWinEditors.UltraComboEditor();
           this.btnBrowseOutput = new Infragistics.Win.Misc.UltraButton();
@@ -130,11 +131,11 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
           this.ultraLabel10 = new Infragistics.Win.Misc.UltraLabel();
           this.autoConveyanceInterface1 = new SystemsAnalysis.ModelConstruction.AlternativesToolkit.AutoConveyanceInterface();
           this.ultraTabPageControl7 = new Infragistics.Win.UltraWinTabControl.UltraTabPageControl();
+          this.chkRemoveRIK = new Infragistics.Win.UltraWinEditors.UltraCheckEditor();
           this.btnAggregate = new Infragistics.Win.Misc.UltraButton();
           this.grdFocusAreaChooser = new Infragistics.Win.UltraWinGrid.UltraGrid();
           this.btnReadFocusAreas = new Infragistics.Win.Misc.UltraButton();
           this.ultraLabel9 = new Infragistics.Win.Misc.UltraLabel();
-          this.btnCancel = new Infragistics.Win.Misc.UltraButton();
           this.alternativeExplorerBar = new Infragistics.Win.UltraWinExplorerBar.UltraExplorerBar();
           this.tabControl = new Infragistics.Win.UltraWinTabControl.UltraTabControl();
           this.ultraTabSharedControlsPage1 = new Infragistics.Win.UltraWinTabControl.UltraTabSharedControlsPage();
@@ -165,7 +166,6 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
           this.altEngineConfiguration = new SystemsAnalysis.ModelConstruction.AlternativesToolkit.AltEngineConfiguration();
           this.ultraLabel11 = new Infragistics.Win.Misc.UltraLabel();
           this.ultraGridBagLayoutManager1 = new Infragistics.Win.Misc.UltraGridBagLayoutManager(this.components);
-          this.chkRemoveRIK = new Infragistics.Win.UltraWinEditors.UltraCheckEditor();
           altConfigFile = new SystemsAnalysis.Modeling.Alternatives.AlternativeConfiguration();
           ((System.ComponentModel.ISupportInitialize)(altConfigFile)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.cmbAlternativeList)).BeginInit();
@@ -182,6 +182,7 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
           ((System.ComponentModel.ISupportInitialize)(this.txtDebugMode)).BeginInit();
           this.ultraTabPageControl6.SuspendLayout();
           this.ultraTabPageControl7.SuspendLayout();
+          ((System.ComponentModel.ISupportInitialize)(this.chkRemoveRIK)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.grdFocusAreaChooser)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.alternativeExplorerBar)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.tabControl)).BeginInit();
@@ -190,7 +191,6 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
           this.menuStrip1.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.altEngineConfiguration)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.ultraGridBagLayoutManager1)).BeginInit();
-          ((System.ComponentModel.ISupportInitialize)(this.chkRemoveRIK)).BeginInit();
           this.SuspendLayout();
           // 
           // altConfigFile
@@ -465,6 +465,17 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
           this.btnEditAlternative.Text = "Edit Existing";
           this.btnEditAlternative.Click += new System.EventHandler(this.btnEditAlternative_Click);
           // 
+          // btnCancel
+          // 
+          this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+          this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+          this.btnCancel.Location = new System.Drawing.Point(850, 582);
+          this.btnCancel.Name = "btnCancel";
+          this.btnCancel.Size = new System.Drawing.Size(66, 25);
+          this.btnCancel.TabIndex = 41;
+          this.btnCancel.Text = "Cancel";
+          this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+          // 
           // ultraTabPageControl3
           // 
           this.ultraTabPageControl3.Controls.Add(this.cmbOutputModel);
@@ -546,7 +557,8 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
           this.ultraTabPageControl5.Controls.Add(this.btnRestoreDefault);
           this.ultraTabPageControl5.Controls.Add(this.ultraLabel6);
           this.ultraTabPageControl5.Controls.Add(this.txtDebugMode);
-          this.ultraTabPageControl5.Location = new System.Drawing.Point(-10000, -10000);
+          this.ultraTabPageControl5.Controls.Add(this.btnCancel);
+          this.ultraTabPageControl5.Location = new System.Drawing.Point(0, 0);
           this.ultraTabPageControl5.Name = "ultraTabPageControl5";
           this.ultraTabPageControl5.Size = new System.Drawing.Size(923, 615);
           // 
@@ -655,13 +667,19 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
           this.ultraTabPageControl7.Controls.Add(this.grdFocusAreaChooser);
           this.ultraTabPageControl7.Controls.Add(this.btnReadFocusAreas);
           this.ultraTabPageControl7.Controls.Add(this.ultraLabel9);
-          this.ultraTabPageControl7.Controls.Add(this.btnCancel);
-          this.ultraTabPageControl7.Controls.Add(this.ultraLabel1);
-          this.ultraTabPageControl7.Controls.Add(this.cmbBaseModel);
-          this.ultraTabPageControl7.Controls.Add(this.btnBrowseBaseModel);
-          this.ultraTabPageControl7.Location = new System.Drawing.Point(0, 0);
+          this.ultraTabPageControl7.Location = new System.Drawing.Point(-10000, -10000);
           this.ultraTabPageControl7.Name = "ultraTabPageControl7";
           this.ultraTabPageControl7.Size = new System.Drawing.Size(923, 615);
+          // 
+          // chkRemoveRIK
+          // 
+          this.chkRemoveRIK.Checked = true;
+          this.chkRemoveRIK.CheckState = System.Windows.Forms.CheckState.Checked;
+          this.chkRemoveRIK.Location = new System.Drawing.Point(20, 434);
+          this.chkRemoveRIK.Name = "chkRemoveRIK";
+          this.chkRemoveRIK.Size = new System.Drawing.Size(380, 20);
+          this.chkRemoveRIK.TabIndex = 46;
+          this.chkRemoveRIK.Text = "Remove RIK Links from Aggregated Alternative?";
           // 
           // btnAggregate
           // 
@@ -763,17 +781,6 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
           this.ultraLabel9.Size = new System.Drawing.Size(631, 27);
           this.ultraLabel9.TabIndex = 32;
           this.ultraLabel9.Text = "Aggregate Multiple Alternatives to New Alternative";
-          // 
-          // btnCancel
-          // 
-          this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-          this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-          this.btnCancel.Location = new System.Drawing.Point(850, 582);
-          this.btnCancel.Name = "btnCancel";
-          this.btnCancel.Size = new System.Drawing.Size(66, 25);
-          this.btnCancel.TabIndex = 41;
-          this.btnCancel.Text = "Cancel";
-          this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
           // 
           // alternativeExplorerBar
           // 
@@ -1081,16 +1088,6 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
           this.ultraLabel11.TabIndex = 6;
           this.ultraLabel11.Text = "ultraLabel11";
           // 
-          // chkRemoveRIK
-          // 
-          this.chkRemoveRIK.Checked = true;
-          this.chkRemoveRIK.CheckState = System.Windows.Forms.CheckState.Checked;
-          this.chkRemoveRIK.Location = new System.Drawing.Point(20, 434);
-          this.chkRemoveRIK.Name = "chkRemoveRIK";
-          this.chkRemoveRIK.Size = new System.Drawing.Size(380, 20);
-          this.chkRemoveRIK.TabIndex = 46;
-          this.chkRemoveRIK.Text = "Remove RIK Links from Aggregated Alternative?";
-          // 
           // AlternativeEngineForm
           // 
           this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
@@ -1120,7 +1117,7 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
           ((System.ComponentModel.ISupportInitialize)(this.txtDebugMode)).EndInit();
           this.ultraTabPageControl6.ResumeLayout(false);
           this.ultraTabPageControl7.ResumeLayout(false);
-          this.ultraTabPageControl7.PerformLayout();
+          ((System.ComponentModel.ISupportInitialize)(this.chkRemoveRIK)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.grdFocusAreaChooser)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.alternativeExplorerBar)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.tabControl)).EndInit();
@@ -1131,7 +1128,6 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
           this.menuStrip1.PerformLayout();
           ((System.ComponentModel.ISupportInitialize)(this.altEngineConfiguration)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.ultraGridBagLayoutManager1)).EndInit();
-          ((System.ComponentModel.ISupportInitialize)(this.chkRemoveRIK)).EndInit();
           this.ResumeLayout(false);
           this.PerformLayout();
 

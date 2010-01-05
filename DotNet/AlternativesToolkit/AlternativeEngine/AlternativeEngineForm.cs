@@ -801,7 +801,7 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
       this.debugMode = txtDebugMode.Checked;
       if (debugMode)
       {
-        this.configPath = @"W:\Model_Programs\Emgaats\CodeV2.2\Alternatives_Toolkit\AlternativeEngine\Debug_Settings.xml";
+        this.configPath = @"Debug_Settings.xml";
       }
       else
       {
@@ -1193,6 +1193,8 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
 
     private void btnReadFocusAreas_Click(object sender, EventArgs e)
     {
+
+
       string baseModel;
 
       baseModel = this.cmbBaseModel.Text;
@@ -1209,47 +1211,73 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
       aggregatorDS = new DataSet();
       alternativePackages = new List<AlternativePackage>();
 
-      foreach (string alternativeName in alternativeList)
+      try
       {
-        string alternativePath = Path.GetFullPath(baseModel + @"\alternatives\" + alternativeName);
-        AlternativePackage ap = new AlternativePackage(alternativePath);
-        alternativePackages.Add(ap);
+        this.Cursor = Cursors.WaitCursor;
 
-        foreach (string focusArea in ap.FocusAreaList)
+        foreach (string alternativeName in alternativeList)
         {
-          if (!focusAreaList.Contains(focusArea))
+          string alternativePath = Path.GetFullPath(baseModel + @"\alternatives\" + alternativeName);
+
+          try
           {
-            focusAreaList.Add(focusArea);
+            AlternativePackage ap = new AlternativePackage(alternativePath);
+            alternativePackages.Add(ap);
+
+            foreach (string focusArea in ap.FocusAreaList)
+            {
+              if (!focusAreaList.Contains(focusArea))
+              {
+                focusAreaList.Add(focusArea);
+              }
+            }
+          }                    
+          catch (Exception ex)
+          {
+            this.Cursor = Cursors.Default;
+            MessageBox.Show(ex.Message);
+            engineOutput.AddStatus(ex.Message, SeverityLevel.Error);
+            return;
           }
         }
-      }
-      focusAreaList.Sort();
+        focusAreaList.Sort();
 
-      DataTable dt = new DataTable();
+        DataTable dt = new DataTable();
 
-      dt.Columns.Add("Focus Area", typeof(string));
-      dt.Columns[0].ReadOnly = true;
+        dt.Columns.Add("Focus Area", typeof(string));
+        dt.Columns[0].ReadOnly = true;
 
-      foreach (string altName in alternativeList)
-      {
-        dt.Columns.Add(altName, typeof(bool));
-      }
-
-      dt.Columns.Add("(Exclude)", typeof(bool));
-
-      foreach (string focusAreaName in focusAreaList)
-      {
-        DataRow r = dt.NewRow();
-        r[0] = focusAreaName;
-        r[1] = true;
-        for (int i = 2; i < alternativeList.Count + 2; i++)
+        foreach (string altName in alternativeList)
         {
-          r[i] = false;
+          dt.Columns.Add(altName, typeof(bool));
         }
-        dt.Rows.Add(r);
-      }
 
-      grdFocusAreaChooser.DataSource = dt;
+        dt.Columns.Add("(Exclude)", typeof(bool));
+
+        foreach (string focusAreaName in focusAreaList)
+        {
+          DataRow r = dt.NewRow();
+          r[0] = focusAreaName;
+          r[1] = true;
+          for (int i = 2; i < alternativeList.Count + 2; i++)
+          {
+            r[i] = false;
+          }
+          dt.Rows.Add(r);
+        }
+        engineOutput.AddStatus("Aggregtor read focus areas succesfully.", SeverityLevel.Info);
+
+        grdFocusAreaChooser.DataSource = dt;
+      }
+      catch (Exception ex)
+      {
+        MessageBox.Show("Error reading focus areas: " + ex.Message);
+        engineOutput.AddStatus("Error reading focus areas: " + ex.Message, SeverityLevel.Error);
+      }
+      finally
+      {
+        this.Cursor = Cursors.Default;
+      }
     }
 
     /// <summary>

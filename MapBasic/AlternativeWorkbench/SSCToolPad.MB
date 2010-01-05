@@ -5,7 +5,7 @@ include "MapBasic.def"
 include "Menu.def"
 include "Icons.def"
 include "AlternativeWorkbench.def"
-include "..\Common\trunk\inc\EMGCoordSys.def"
+include "..\Common\inc\EMGCoordSys.def"
 
 declare sub FindBrokenSSCConnections
 declare sub EditSaveSSC
