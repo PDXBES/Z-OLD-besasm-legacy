@@ -23,6 +23,7 @@ Global gDebugMode as Logical
 Global gInputAlternativePath as String
 Global gFocusArea as String
 Global gOutputAlternativePath as String
+Global gRemoveRIK as Logical
 
 Declare Sub Aggregate
 Declare Sub AddFocusAreaColumn(ByVal TableName as String)
@@ -113,6 +114,12 @@ Sub Aggregate
 	Commit Table alt_streettargets_agg Automatic ApplyUpdates
 	Insert Into alt_parkingtargets_agg Select * From alt_parkingtargets_fa
 	Commit Table alt_parkingtargets_agg Automatic ApplyUpdates
+	
+	If gRemoveRIK = TRUE Then
+		Select * From alt_links_agg Where Operation = "RIK" Into alt_links_agg_delete
+		Delete From alt_links_agg_delete
+		Commit Table alt_links_agg Automatic ApplyUpdates
+	End If
 	
 End Sub
 

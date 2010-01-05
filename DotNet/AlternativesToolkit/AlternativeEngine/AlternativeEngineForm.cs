@@ -1235,12 +1235,14 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
         dt.Columns.Add(altName, typeof(bool));
       }
 
+      dt.Columns.Add("(Exclude)", typeof(bool));
+
       foreach (string focusAreaName in focusAreaList)
       {
         DataRow r = dt.NewRow();
         r[0] = focusAreaName;
         r[1] = true;
-        for (int i = 2; i < alternativeList.Count + 1; i++)
+        for (int i = 2; i < alternativeList.Count + 2; i++)
         {
           r[i] = false;
         }
@@ -1295,19 +1297,19 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
         return;
       }
       newAltName = result.Text;
-      if (!ValidateInput(baseModel, newAltName))
-      {
-        return;
-      }
-
-      if (this.GetAlternativeList(baseModel).Contains(newAltName))
-      {
-        MessageBox.Show("An alternative named '" + newAltName + "' already exists. Please specify a unique name.", "Alternative Name Already Exists");
-        return;
-      }
 
       try
       {
+        if (!ValidateInput(baseModel, newAltName))
+        {
+          return;
+        }
+
+        if (this.GetAlternativeList(baseModel).Contains(newAltName))
+        {
+          MessageBox.Show("An alternative named '" + newAltName + "' already exists. Please specify a unique name.", "Alternative Name Already Exists");
+          return;
+        }
 
         if (this.GetAlternativeList(baseModel).Contains("aggregate"))
         {
@@ -1327,18 +1329,26 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
         {
           string focusArea = (string)row[0];
 
+          if ((bool)row[dt.Columns.Count - 1])
+          {
+            continue;
+          }
+
           for (int i = 1; i < row.ItemArray.Length; i++)
           {
+            //If focus area is not selected, then keep searching for a checked entry
             if (!(bool)row[i])
             {
               continue;
             }
+            //Otherwise aggregate the focus area
             string alternativeName = dt.Columns[i].Caption;
 
             Dictionary<string, string> parameters = new Dictionary<string, string>();
             parameters.Add("gInputAlternativePath", baseModel + "alternatives\\" + alternativeName + "\\");
             parameters.Add("gFocusArea", focusArea);
             parameters.Add("gOutputAlternativePath", baseModel + "alternatives\\aggregate\\");
+            parameters.Add("gRemoveRIK", chkRemoveRIK.Checked.ToString());
             mbExecuter.ExecuteFunctionGroup("Aggregate", parameters);
 
           }
