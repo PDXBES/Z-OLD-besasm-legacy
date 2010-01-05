@@ -9,13 +9,13 @@
 '
 include "MapBasic.def"
 include "AlternativeWorkbench.def"
-include "..\Common\trunk\Inc\EMGGlobal.def"
-include "..\Common\trunk\Inc\EMGLogger.def"
-include "..\Common\trunk\Inc\EMGOpenUtils.def"
-include "..\Common\trunk\Inc\EMGMTabUtil.def"
-include "..\Common\trunk\Inc\INIUtils.def"
-include "..\Workbench\trunk\Inc\EMGInit.def"
-include "..\Common\trunk\inc\EMGCoordSys.def"
+include "..\Common\Inc\EMGGlobal.def"
+include "..\Common\Inc\EMGLogger.def"
+include "..\Common\Inc\EMGOpenUtils.def"
+include "..\Common\Inc\EMGMTabUtil.def"
+include "..\Common\Inc\INIUtils.def"
+include "..\Workbench\Inc\EMGInit.def"
+include "..\Common\inc\EMGCoordSys.def"
 
 declare sub Main()
 

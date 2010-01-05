@@ -56,17 +56,25 @@ namespace SystemsAnalysis.Modeling.Alternatives
       {
         throw new Exception("Error reading alternative: Supported version is " + AlternativeConfiguration.MasterVersion + "; Provided version is " + altConfiguration.AlternativeVersion + ". Update using the AlternativesToolkit.");
       }
-      baseModel = new Model(BaseModelPathFromAlternativePath(alternativePath));
-      this.altLinks = new AltLinks(alternativePath);
-      this.altNodes = new AltNodes(alternativePath);
-      this.altDscs = new AltDscs(alternativePath);
-      LoadAltParkingTargets(alternativePath);
-      LoadAltRoofTargets(alternativePath);
-      LoadAltStreetTargets(alternativePath);
-      LoadFocusAreaList();
-      this.alternativePath = alternativePath;
-      string[] blah = alternativePath.Split(new char[] { '\\' });
-      alternativeName = blah[blah.Length - 1];
+
+      try
+      {
+        baseModel = new Model(BaseModelPathFromAlternativePath(alternativePath));
+        this.altLinks = new AltLinks(alternativePath);
+        this.altNodes = new AltNodes(alternativePath);
+        this.altDscs = new AltDscs(alternativePath);
+        LoadAltParkingTargets(alternativePath);
+        LoadAltRoofTargets(alternativePath);
+        LoadAltStreetTargets(alternativePath);
+        LoadFocusAreaList();
+        this.alternativePath = alternativePath;
+        string[] blah = alternativePath.Split(new char[] { '\\' });
+        alternativeName = blah[blah.Length - 1];
+      }
+      catch (Exception ex)
+      {
+        throw new Exception("Unable to load alternative '" + alternativePath + "': " + ex.Message);
+      }
 
       try
       {

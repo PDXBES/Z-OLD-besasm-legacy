@@ -191,8 +191,15 @@ sub FixBrokenDSCConnection
 		Open Table gTempDir & "QyDSC_NotInAlt_NotInMdl.tab"
 		
 		Select * from QyDSC_NotInAlt_NotInMdl, alt_links_applied where QyDSC_NotInAlt_NotInMdl.ToLinkSan = alt_links_applied.MdlLinkID and alt_links_applied.operation = "UPD" into QyDSC_NotInAlt_NotInMdl_Upd
-		Run Menu Command 311 'M_QUERY_INVERTSELECT
-		Select * from selection into QyDSC_NotInAlt_NotInMdl_NotUpd
+		
+		'The statement "Run Menu Command 311" only works if at least 1 row is selected. If not, the invert selection operation fails and the query must be built manually
+		Run Menu Command 311 'M_QUERY_INVERTSELECT		
+		If SelectionInfo(SEL_INFO_NROWS) > 0 Then				
+			Select * From selection Into QyDSC_NotInAlt_NotInMdl_NotUpd
+		Else
+			Select * From QyDSC_NotInAlt_NotInMdl Into QyDSC_NotInAlt_NotInMdl_NotUpd
+		End If
+		
 		Print "Creating alternatives for broken sanitary connections."
 	
 		Insert Into alt_dsc ( AltDSCID, MdlDSCid,LinkIDSan, DiscoClass, IsActive) Select 0, DSCID, 0, DiscoClass, 0 From QyDSC_NotInAlt_NotInMdl_NotUpd		
@@ -231,8 +238,15 @@ sub FixBrokenDSCConnection
 		Open Table gTempDir & "QyDSC_NotInAlt_NotInMdl.tab"
 		
 		Select * from QyDSC_NotInAlt_NotInMdl, alt_links_applied where QyDSC_NotInAlt_NotInMdl.ToLinkStorm = alt_links_applied.MdlLinkID and alt_links_applied.operation = "UPD" into QyDSC_NotInAlt_NotInMdl_Upd
+		
+		'The statement "Run Menu Command 311" only works if at least 1 row is selected. If not, the invert selection operation fails and the query must be built manually
 		Run Menu Command 311 'M_QUERY_INVERTSELECT
-		Select * from selection into QyDSC_NotInAlt_NotInMdl_NotUpd
+		If SelectionInfo(SEL_INFO_NROWS) > 0 Then				
+			Select * From selection Into QyDSC_NotInAlt_NotInMdl_NotUpd
+		Else
+			Select * From QyDSC_NotInAlt_NotInMdl Into QyDSC_NotInAlt_NotInMdl_NotUpd
+		End If
+				
 		Print "Creating alternatives for broken storm connections."
 	
 		Insert Into alt_dsc ( AltDSCID, MdlDSCid,LinkIDStorm, DiscoClass, IsActive) Select 0, DSCID, 0, DiscoClass, 0 From QyDSC_NotInAlt_NotInMdl_NotUpd
