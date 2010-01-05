@@ -4,23 +4,23 @@ using System.Text;
 
 namespace SystemsAnalysis.Modeling
 {
-    public interface InflowControl
+  public interface InflowControl
+  {
+
+    int ID
     {
-
-        int ID
-        {
-            get;
-            set;
-        }
-
-        Types.Enumerators.InflowControlTypes ICType
-        {
-            get;
-        }
-
-        bool InModel
-        {
-            get;
-        }
+      get;
+      set;
     }
+
+    Types.Enumerators.InflowControlTypes ICType
+    {
+      get;
+    }
+
+    bool InModel
+    {
+      get;
+    }
+  }
 }

@@ -52,7 +52,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="SystemsAnalysis.Utils.AccessUtils.DatabaseManagement, Version=1.0.2880.21965, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="SystemsAnalysis.Utils.AccessUtils.DatabaseManagement, Version=1.0.3656.24731, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\AccessUtils\DatabaseManagement\bin\Release\SystemsAnalysis.Utils.AccessUtils.DatabaseManagement.dll</HintPath>
     </Reference>
