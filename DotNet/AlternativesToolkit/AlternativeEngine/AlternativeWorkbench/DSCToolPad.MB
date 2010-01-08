@@ -5,8 +5,8 @@ include "MapBasic.def"
 include "Menu.def"
 include "Icons.def"
 include "AlternativeWorkbench.def"
-include "..\Common\trunk\Inc\EMGMTabUtil.def"
-include "..\common\trunk\inc\EMGCoordSys.def"
+include "..\Common\Inc\EMGMTabUtil.def"
+include "..\common\inc\EMGCoordSys.def"
 
 declare sub FixBrokenDSCConnection
 declare sub EditSaveDSC
@@ -135,6 +135,7 @@ Create ButtonPad "DSC Editing Tools" As
 		ToolButton HelpMsg  "\n Zoom Out"		ID 90012	Icon	5	Calling 1706
 		PushButton HelpMsg  "\n Save Edits"		    		ID 90004	Icon	40	Calling EditSaveDSC		 
 		PushButton HelpMsg  "\n Revert to Last Save"			ID 90005	Icon	62 File gIconFile Calling EditRevertDSC		 
+
 	  						Separator		
 		PushButton HelpMsg  "\n Add Chicklets" 	ID 90006	Icon	108	File gIconFile Calling AddChicklets			 			 
 	  						Separator	
@@ -192,25 +193,33 @@ sub FixBrokenDSCConnection
 		
 		Select * from QyDSC_NotInAlt_NotInMdl, alt_links_applied where QyDSC_NotInAlt_NotInMdl.ToLinkSan = alt_links_applied.MdlLinkID and alt_links_applied.operation = "UPD" into QyDSC_NotInAlt_NotInMdl_Upd
 		
-		'The statement "Run Menu Command 311" only works if at least 1 row is selected. If not, the invert selection operation fails and the query must be built manually
-		Run Menu Command 311 'M_QUERY_INVERTSELECT		
-		If SelectionInfo(SEL_INFO_NROWS) > 0 Then				
-			Select * From selection Into QyDSC_NotInAlt_NotInMdl_NotUpd
+		If TableInfo(QyDSC_NotInAlt_NotInMdl,TAB_INFO_NROWS) = SelectionInfo(SEL_INFO_NROWS) Then
+			Print "No sanitary DSCs to reconnect"
 		Else
-			Select * From QyDSC_NotInAlt_NotInMdl Into QyDSC_NotInAlt_NotInMdl_NotUpd
-		End If
+			'The statement "Run Menu Command 311" only works if at least 1 row is selected. If not, the invert selection operation fails and the query must be built manually
+			Run Menu Command 311 'M_QUERY_INVERTSELECT		
+			
+			
+			If SelectionInfo(SEL_INFO_NROWS) > 0 Then				
+				Select * From selection Into QyDSC_NotInAlt_NotInMdl_NotUpd
+			Else			
+				Select * From QyDSC_NotInAlt_NotInMdl Into QyDSC_NotInAlt_NotInMdl_NotUpd
+			End If
+			
+			Print "Creating alternatives for broken sanitary connections."
 		
-		Print "Creating alternatives for broken sanitary connections."
-	
-		Insert Into alt_dsc ( AltDSCID, MdlDSCid,LinkIDSan, DiscoClass, IsActive) Select 0, DSCID, 0, DiscoClass, 0 From QyDSC_NotInAlt_NotInMdl_NotUpd		
-		Drop Table QyDSC_NotInAlt_NotInMdl_NotUpd
+			Insert Into alt_dsc ( AltDSCID, MdlDSCid,LinkIDSan, DiscoClass, IsActive) Select 0, DSCID, 0, DiscoClass, 0 From QyDSC_NotInAlt_NotInMdl_NotUpd		
+			Drop Table QyDSC_NotInAlt_NotInMdl_NotUpd			
+		End If
 		Drop Table QyDSC_NotInAlt_NotInMdl
+		
 	End If
 	
 	Print "Finding broken storm connections."
 	Close Table QyDSC_NotInAlt
 	'Close Table QyDSC_NotInAlt_NotInMdl
 	
+
 	Select Mdl_DSC.DscId, Mdl_DSC.ToLinkStorm, Mdl_DSC.DiscoClass From Mdl_DSC, Alt_DSC Where Mdl_DSC.DscId = Alt_DSC.MdlDSCID into QyDSC_InAlt
 	If SelectionInfo(SEL_INFO_NROWS) > 0 Then
 		Run Menu Command 311 'M_QUERY_INVERTSELECT
@@ -239,18 +248,22 @@ sub FixBrokenDSCConnection
 		
 		Select * from QyDSC_NotInAlt_NotInMdl, alt_links_applied where QyDSC_NotInAlt_NotInMdl.ToLinkStorm = alt_links_applied.MdlLinkID and alt_links_applied.operation = "UPD" into QyDSC_NotInAlt_NotInMdl_Upd
 		
-		'The statement "Run Menu Command 311" only works if at least 1 row is selected. If not, the invert selection operation fails and the query must be built manually
-		Run Menu Command 311 'M_QUERY_INVERTSELECT
-		If SelectionInfo(SEL_INFO_NROWS) > 0 Then				
-			Select * From selection Into QyDSC_NotInAlt_NotInMdl_NotUpd
+		If TableInfo(QyDSC_NotInAlt_NotInMdl,TAB_INFO_NROWS) = SelectionInfo(SEL_INFO_NROWS) Then
+			Print "No DSCs to reconnect"
 		Else
-			Select * From QyDSC_NotInAlt_NotInMdl Into QyDSC_NotInAlt_NotInMdl_NotUpd
-		End If
+			'The statement "Run Menu Command 311" only works if at least 1 row is selected. If not, the invert selection operation fails and the query must be built manually
+			Run Menu Command 311 'M_QUERY_INVERTSELECT
+			If SelectionInfo(SEL_INFO_NROWS) > 0 Then				
+				Select * From selection Into QyDSC_NotInAlt_NotInMdl_NotUpd
+			Else
+				Select * From QyDSC_NotInAlt_NotInMdl Into QyDSC_NotInAlt_NotInMdl_NotUpd
+			End If
 				
-		Print "Creating alternatives for broken storm connections."
+			Print "Creating alternatives for broken storm connections."
 	
-		Insert Into alt_dsc ( AltDSCID, MdlDSCid,LinkIDStorm, DiscoClass, IsActive) Select 0, DSCID, 0, DiscoClass, 0 From QyDSC_NotInAlt_NotInMdl_NotUpd
-		Drop Table QyDSC_NotInAlt_NotInMdl_NotUpd
+			Insert Into alt_dsc ( AltDSCID, MdlDSCid,LinkIDStorm, DiscoClass, IsActive) Select 0, DSCID, 0, DiscoClass, 0 From QyDSC_NotInAlt_NotInMdl_NotUpd
+			Drop Table QyDSC_NotInAlt_NotInMdl_NotUpd
+		End If
 	End If
 
 	Close Table QyDSC_InAlt
@@ -460,21 +473,21 @@ altPipCount=0
 
 		IF sFlowTO = "toSAN" THEN
 			'CHECKING FOR NEAREST MDL SEGMENT TO STUB
-			Select * from mdl_links_applied where PipeFlowType in ("C", "S") and obj intersects stubPt into qyMdlPipeTo
+			Select * from mdl_links_applied where LinkType in("C","S","IS","IC") and  obj intersects stubPt into qyMdlPipeTo
 				mdlPipCount=tableinfo(qyMdlPipeTo,8)
 	
 			'CHECKING FOR NEAREST ALT SEGMENT TO STUB
-			Select * from alt_links_applied where PipeFlowType in ("C", "S") and obj intersects stubPt into qyAltPipeTo
+			Select * from alt_links_applied where LinkType in("C","S","IS","IC") and obj intersects stubPt into qyAltPipeTo
 				altPipCount = tableinfo(qyAltPipeTo,8)
 		END IF
 
 		IF sFlowTO = "toSTORM" THEN
 			'CHECKING FOR NEAREST MDL SEGMENT TO STUB
-			Select * from mdl_links_applied where PipeFlowType in ("D", "C") and  obj intersects stubPt into qyMdlPipeTo
+			Select * from mdl_links_applied where LinkType in("D","C") and  obj intersects stubPt into qyMdlPipeTo
 				mdlPipCount=tableinfo(qyMdlPipeTo,8)
 	
 			'CHECKING FOR NEAREST ALT SEGMENT TO STUB
-			Select * from alt_links_applied where PipeFlowType in ("D", "C") and obj intersects stubPt into qyAltPipeTo
+			Select * from alt_links_applied where LinkType in("D","C") and obj intersects stubPt into qyAltPipeTo
 				altPipCount = tableinfo(qyAltPipeTo,8)
 		END IF
 		IF mdlPipCount>0 and altPIpCount=0 THEN
@@ -537,7 +550,7 @@ altPipCount=0
 		DO CASE sFlowTO	
 			Case "toSAN"
 				Update QyOneDSC set LinkIDSan = exLID, LinkSourceSAN = sSource, IsActive=1
-				Update QyOneDSC set ConnectFractionSAN = 1 - Round(StubDist/objectLen(linkObj,"FT"), 0.001)
+				Update QyOneDSC set ConnectFractionSAN = 1- Round(StubDist/objectLen(linkObj,"FT"), 0.001)
 				'IF ExDiscoClass in("C","S") THEN
 				'	Update QyOneDSC set isActiveStorm = 1
 				'END IF
@@ -558,7 +571,7 @@ altPipCount=0
 				End If
 			Case "toSTORM"
 				Update QyOneDSC set LinkIDStorm = exLID, LinkSourceStorm = sSource, IsActive=1
-				Update QyOneDSC set ConnectFractionSTORM = 1 - Round(StubDist/objectLen(linkObj,"FT"), 0.001)
+				Update QyOneDSC set ConnectFractionSTORM = 1-Round(StubDist/objectLen(linkObj,"FT"), 0.001)
 				If VerifyDiscoClassChange("D", ExDiscoClass) Then
 						Print "Made storm connection, Setting DiscoClass to 'D'"
 						Update QyOneDSC Set DiscoClass = "D"
