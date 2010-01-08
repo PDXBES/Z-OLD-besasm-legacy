@@ -49,7 +49,7 @@
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>35</ApplicationRevision>
+    <ApplicationRevision>39</ApplicationRevision>
     <ApplicationVersion>1.2.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -335,9 +335,9 @@
     <Compile Include="WorkbenchRunning.cs">
       <SubType>Form</SubType>
     </Compile>
-    <None Include="AlternativeProcessor\Aggregator.MBX">
+    <Content Include="AlternativeProcessor\Aggregator.MBX">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    </Content>
     <None Include="ConveyanceBuilder.xsc">
       <DependentUpon>ConveyanceBuilder.xsd</DependentUpon>
     </None>

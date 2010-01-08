@@ -205,7 +205,7 @@
     </Library>
     <Library>
       <LibraryName>Aggregator</LibraryName>
-      <Location>AlternativeProcessor\Aggregator.MBX</Location>
+      <Location>%Application%\AlternativeProcessor\Aggregator.MBX</Location>
       <ExecGroup>Aggregate</ExecGroup>      
       <GlobalVariable Name="gInputAlternativePath" Value="" RelativeTo="Alternative" />
       <GlobalVariable Name="gOutputAlternativePath" Value="alternatives\aggregated" RelativeTo="BaseModel" />
