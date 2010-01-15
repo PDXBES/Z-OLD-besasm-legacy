@@ -88,9 +88,13 @@ Sub Aggregate
 	Open Table gOutputAlternativePath & "alt_parkingtargets_ac.tab" as alt_parkingtargets_agg
 	
 '3: Select from alt tables where focusArea = gFocusArea
-	Select * From alt_dsc Where focusArea = gFocusArea Into alt_dsc_fa
 	Select * From alt_links Where focusArea = gFocusArea Into alt_links_fa
-	Select * From alt_nodes Where focusArea = gFocusArea Into alt_nodes_fa
+	
+	Select * From alt_dsc Where focusArea = gFocusArea Into alt_dsc_fa
+	
+	'Select * From alt_nodes Where focusArea = gFocusArea Into alt_nodes_fa
+	Select * From alt_nodes, alt_links Where alt_nodes.node = alt_links.usnode Into alt_nodes_fa
+	
 	Select * From alt_speclinks Where focusArea = gFocusArea Into alt_speclinks_fa
 	Select * From alt_ssc Where focusArea = gFocusArea Into alt_ssc_fa
 	Select * From alt_rooftargets Where focusArea = gFocusArea Into alt_rooftargets_fa

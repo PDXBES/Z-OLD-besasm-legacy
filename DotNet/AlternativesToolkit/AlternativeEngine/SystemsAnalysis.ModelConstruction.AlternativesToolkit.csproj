@@ -46,8 +46,6 @@
     <SupportUrl>http://twiki.bes-sa.org/bin/view/Development/AlternativesToolkit</SupportUrl>
     <ProductName>Alternatives Toolkit</ProductName>
     <PublisherName>BES Systems Analysis</PublisherName>
-    <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
-    <WebPage>publish.htm</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <ApplicationRevision>39</ApplicationRevision>
     <ApplicationVersion>1.2.1.%2a</ApplicationVersion>

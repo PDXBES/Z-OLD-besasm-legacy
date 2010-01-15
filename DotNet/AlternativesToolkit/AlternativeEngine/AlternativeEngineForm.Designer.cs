@@ -33,8 +33,7 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
         {
           this.components = new System.ComponentModel.Container();
           SystemsAnalysis.Modeling.Alternatives.AlternativeConfiguration altConfigFile;
-          Infragistics.Win.Appearance appearance19 = new Infragistics.Win.Appearance();
-          Infragistics.Win.Appearance appearance20 = new Infragistics.Win.Appearance();
+          Infragistics.Win.UltraWinTabControl.UltraTabPageControl ultraTabPageControl2;
           Infragistics.Win.Appearance appearance21 = new Infragistics.Win.Appearance();
           Infragistics.Win.Appearance appearance22 = new Infragistics.Win.Appearance();
           Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand1 = new Infragistics.Win.UltraWinGrid.UltraGridBand("History", -1);
@@ -89,17 +88,14 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
           Infragistics.Win.UltraWinTabControl.UltraTab ultraTab12 = new Infragistics.Win.UltraWinTabControl.UltraTab();
           Infragistics.Win.UltraWinTabControl.UltraTab ultraTab1 = new Infragistics.Win.UltraWinTabControl.UltraTab();
           Infragistics.Win.UltraWinStatusBar.UltraStatusPanel ultraStatusPanel1 = new Infragistics.Win.UltraWinStatusBar.UltraStatusPanel();
+          Infragistics.Win.Appearance appearance20 = new Infragistics.Win.Appearance();
+          Infragistics.Win.Appearance appearance19 = new Infragistics.Win.Appearance();
+          Infragistics.Win.Appearance appearance2 = new Infragistics.Win.Appearance();
           System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AlternativeEngineForm));
-          this.cmbAlternativeList = new Infragistics.Win.UltraWinEditors.UltraComboEditor();
-          this.ultraLabel2 = new Infragistics.Win.Misc.UltraLabel();
-          this.ultraLabel1 = new Infragistics.Win.Misc.UltraLabel();
-          this.cmbBaseModel = new Infragistics.Win.UltraWinEditors.UltraComboEditor();
-          this.btnBrowseBaseModel = new Infragistics.Win.Misc.UltraButton();
           this.ultraTabPageControl1 = new Infragistics.Win.UltraWinTabControl.UltraTabPageControl();
           this.engineOutput = new SystemsAnalysis.Utils.StatusTextBox.StatusTextBox();
           this.panel2 = new System.Windows.Forms.Panel();
           this.ultraLabel7 = new Infragistics.Win.Misc.UltraLabel();
-          this.ultraTabPageControl2 = new Infragistics.Win.UltraWinTabControl.UltraTabPageControl();
           this.ultraLabel13 = new Infragistics.Win.Misc.UltraLabel();
           this.grdAlternativeHistory = new Infragistics.Win.UltraWinGrid.UltraGrid();
           this.altConfigFileBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -166,13 +162,21 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
           this.altEngineConfiguration = new SystemsAnalysis.ModelConstruction.AlternativesToolkit.AltEngineConfiguration();
           this.ultraLabel11 = new Infragistics.Win.Misc.UltraLabel();
           this.ultraGridBagLayoutManager1 = new Infragistics.Win.Misc.UltraGridBagLayoutManager(this.components);
+          this.ultraGroupBox1 = new Infragistics.Win.Misc.UltraGroupBox();
+          this.lblFocusAreas = new Infragistics.Win.Misc.UltraLabel();
+          this.btnBrowseFocusAreas = new Infragistics.Win.Misc.UltraButton();
+          this.ultraTextEditor1 = new Infragistics.Win.UltraWinEditors.UltraTextEditor();
+          this.cmbAlternativeList = new Infragistics.Win.UltraWinEditors.UltraComboEditor();
+          this.ultraLabel2 = new Infragistics.Win.Misc.UltraLabel();
+          this.ultraLabel1 = new Infragistics.Win.Misc.UltraLabel();
+          this.cmbBaseModel = new Infragistics.Win.UltraWinEditors.UltraComboEditor();
+          this.btnBrowseBaseModel = new Infragistics.Win.Misc.UltraButton();
           altConfigFile = new SystemsAnalysis.Modeling.Alternatives.AlternativeConfiguration();
+          ultraTabPageControl2 = new Infragistics.Win.UltraWinTabControl.UltraTabPageControl();
           ((System.ComponentModel.ISupportInitialize)(altConfigFile)).BeginInit();
-          ((System.ComponentModel.ISupportInitialize)(this.cmbAlternativeList)).BeginInit();
-          ((System.ComponentModel.ISupportInitialize)(this.cmbBaseModel)).BeginInit();
           this.ultraTabPageControl1.SuspendLayout();
           this.panel2.SuspendLayout();
-          this.ultraTabPageControl2.SuspendLayout();
+          ultraTabPageControl2.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.grdAlternativeHistory)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.altConfigFileBindingSource)).BeginInit();
           this.ultraTabPageControl3.SuspendLayout();
@@ -191,6 +195,11 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
           this.menuStrip1.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.altEngineConfiguration)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.ultraGridBagLayoutManager1)).BeginInit();
+          ((System.ComponentModel.ISupportInitialize)(this.ultraGroupBox1)).BeginInit();
+          this.ultraGroupBox1.SuspendLayout();
+          ((System.ComponentModel.ISupportInitialize)(this.ultraTextEditor1)).BeginInit();
+          ((System.ComponentModel.ISupportInitialize)(this.cmbAlternativeList)).BeginInit();
+          ((System.ComponentModel.ISupportInitialize)(this.cmbBaseModel)).BeginInit();
           this.SuspendLayout();
           // 
           // altConfigFile
@@ -199,56 +208,6 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
           altConfigFile.DefaultNodeSuffix = "ALT";
           altConfigFile.Locale = new System.Globalization.CultureInfo("");
           altConfigFile.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-          // 
-          // cmbAlternativeList
-          // 
-          this.cmbAlternativeList.DisplayMember = "";
-          this.cmbAlternativeList.Location = new System.Drawing.Point(20, 96);
-          this.cmbAlternativeList.Name = "cmbAlternativeList";
-          this.cmbAlternativeList.Size = new System.Drawing.Size(204, 21);
-          this.cmbAlternativeList.TabIndex = 38;
-          this.cmbAlternativeList.ValueMember = "";
-          this.cmbAlternativeList.SelectionChanged += new System.EventHandler(this.cmbAlternativeList_SelectionChanged);
-          // 
-          // ultraLabel2
-          // 
-          appearance19.TextVAlignAsString = "Bottom";
-          this.ultraLabel2.Appearance = appearance19;
-          this.ultraLabel2.Location = new System.Drawing.Point(20, 77);
-          this.ultraLabel2.Name = "ultraLabel2";
-          this.ultraLabel2.Size = new System.Drawing.Size(159, 17);
-          this.ultraLabel2.TabIndex = 40;
-          this.ultraLabel2.Text = "Alternative Name:";
-          // 
-          // ultraLabel1
-          // 
-          appearance20.TextVAlignAsString = "Bottom";
-          this.ultraLabel1.Appearance = appearance20;
-          this.ultraLabel1.Location = new System.Drawing.Point(20, 33);
-          this.ultraLabel1.Name = "ultraLabel1";
-          this.ultraLabel1.Size = new System.Drawing.Size(73, 17);
-          this.ultraLabel1.TabIndex = 39;
-          this.ultraLabel1.Text = "Base Model:";
-          // 
-          // cmbBaseModel
-          // 
-          this.cmbBaseModel.DisplayMember = "BaseModel_text";
-          this.cmbBaseModel.Location = new System.Drawing.Point(20, 51);
-          this.cmbBaseModel.Name = "cmbBaseModel";
-          this.cmbBaseModel.Size = new System.Drawing.Size(504, 21);
-          this.cmbBaseModel.TabIndex = 36;
-          this.cmbBaseModel.ValueMember = "BaseModel_text";
-          this.cmbBaseModel.SelectionChanged += new System.EventHandler(this.cmbBaseModel_SelectedIndexChanged);
-          this.cmbBaseModel.ValueChanged += new System.EventHandler(this.cmbBaseModel_ValueChanged);
-          // 
-          // btnBrowseBaseModel
-          // 
-          this.btnBrowseBaseModel.Location = new System.Drawing.Point(529, 51);
-          this.btnBrowseBaseModel.Name = "btnBrowseBaseModel";
-          this.btnBrowseBaseModel.Size = new System.Drawing.Size(64, 22);
-          this.btnBrowseBaseModel.TabIndex = 37;
-          this.btnBrowseBaseModel.Text = "Browse...";
-          this.btnBrowseBaseModel.Click += new System.EventHandler(this.btnBrowseBaseModel_Click);
           // 
           // ultraTabPageControl1
           // 
@@ -291,24 +250,25 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
           // 
           // ultraTabPageControl2
           // 
-          this.ultraTabPageControl2.Controls.Add(this.ultraLabel13);
-          this.ultraTabPageControl2.Controls.Add(this.grdAlternativeHistory);
-          this.ultraTabPageControl2.Controls.Add(this.btnCopyAlternative);
-          this.ultraTabPageControl2.Controls.Add(this.ultraLabel12);
-          this.ultraTabPageControl2.Controls.Add(this.btnDeleteAlternative);
-          this.ultraTabPageControl2.Controls.Add(this.ultraLabel3);
-          this.ultraTabPageControl2.Controls.Add(this.btnNewAlternative);
-          this.ultraTabPageControl2.Controls.Add(this.txtDefaultNodeName);
-          this.ultraTabPageControl2.Controls.Add(this.btnEditAlternative);
-          this.ultraTabPageControl2.Location = new System.Drawing.Point(-10000, -10000);
-          this.ultraTabPageControl2.Name = "ultraTabPageControl2";
-          this.ultraTabPageControl2.Size = new System.Drawing.Size(923, 615);
+          ultraTabPageControl2.Controls.Add(this.ultraTextEditor1);
+          ultraTabPageControl2.Controls.Add(this.lblFocusAreas);
+          ultraTabPageControl2.Controls.Add(this.btnBrowseFocusAreas);
+          ultraTabPageControl2.Controls.Add(this.ultraGroupBox1);
+          ultraTabPageControl2.Controls.Add(this.ultraLabel13);
+          ultraTabPageControl2.Controls.Add(this.grdAlternativeHistory);
+          ultraTabPageControl2.Controls.Add(this.ultraLabel12);
+          ultraTabPageControl2.Controls.Add(this.ultraLabel3);
+          ultraTabPageControl2.Controls.Add(this.txtDefaultNodeName);
+          ultraTabPageControl2.Controls.Add(this.btnCancel);
+          ultraTabPageControl2.Location = new System.Drawing.Point(-10000, -10000);
+          ultraTabPageControl2.Name = "ultraTabPageControl2";
+          ultraTabPageControl2.Size = new System.Drawing.Size(923, 615);
           // 
           // ultraLabel13
           // 
           appearance21.TextVAlignAsString = "Bottom";
           this.ultraLabel13.Appearance = appearance21;
-          this.ultraLabel13.Location = new System.Drawing.Point(20, 128);
+          this.ultraLabel13.Location = new System.Drawing.Point(20, 173);
           this.ultraLabel13.Name = "ultraLabel13";
           this.ultraLabel13.Size = new System.Drawing.Size(159, 18);
           this.ultraLabel13.TabIndex = 43;
@@ -386,9 +346,9 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
           this.grdAlternativeHistory.DisplayLayout.ScrollBounds = Infragistics.Win.UltraWinGrid.ScrollBounds.ScrollToFill;
           this.grdAlternativeHistory.DisplayLayout.ScrollStyle = Infragistics.Win.UltraWinGrid.ScrollStyle.Immediate;
           this.grdAlternativeHistory.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-          this.grdAlternativeHistory.Location = new System.Drawing.Point(20, 151);
+          this.grdAlternativeHistory.Location = new System.Drawing.Point(20, 197);
           this.grdAlternativeHistory.Name = "grdAlternativeHistory";
-          this.grdAlternativeHistory.Size = new System.Drawing.Size(893, 426);
+          this.grdAlternativeHistory.Size = new System.Drawing.Size(893, 380);
           this.grdAlternativeHistory.TabIndex = 0;
           this.grdAlternativeHistory.Text = "ultraGrid2";
           // 
@@ -399,8 +359,7 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
           // 
           // btnCopyAlternative
           // 
-          this.btnCopyAlternative.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-          this.btnCopyAlternative.Location = new System.Drawing.Point(691, 582);
+          this.btnCopyAlternative.Location = new System.Drawing.Point(180, 16);
           this.btnCopyAlternative.Name = "btnCopyAlternative";
           this.btnCopyAlternative.Size = new System.Drawing.Size(75, 25);
           this.btnCopyAlternative.TabIndex = 3;
@@ -419,8 +378,7 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
           // 
           // btnDeleteAlternative
           // 
-          this.btnDeleteAlternative.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-          this.btnDeleteAlternative.Location = new System.Drawing.Point(771, 582);
+          this.btnDeleteAlternative.Location = new System.Drawing.Point(260, 16);
           this.btnDeleteAlternative.Name = "btnDeleteAlternative";
           this.btnDeleteAlternative.Size = new System.Drawing.Size(75, 25);
           this.btnDeleteAlternative.TabIndex = 4;
@@ -438,8 +396,7 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
           // 
           // btnNewAlternative
           // 
-          this.btnNewAlternative.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-          this.btnNewAlternative.Location = new System.Drawing.Point(531, 582);
+          this.btnNewAlternative.Location = new System.Drawing.Point(6, 16);
           this.btnNewAlternative.Name = "btnNewAlternative";
           this.btnNewAlternative.Size = new System.Drawing.Size(75, 25);
           this.btnNewAlternative.TabIndex = 1;
@@ -457,10 +414,9 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
           // 
           // btnEditAlternative
           // 
-          this.btnEditAlternative.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-          this.btnEditAlternative.Location = new System.Drawing.Point(611, 582);
+          this.btnEditAlternative.Location = new System.Drawing.Point(87, 16);
           this.btnEditAlternative.Name = "btnEditAlternative";
-          this.btnEditAlternative.Size = new System.Drawing.Size(75, 25);
+          this.btnEditAlternative.Size = new System.Drawing.Size(88, 25);
           this.btnEditAlternative.TabIndex = 2;
           this.btnEditAlternative.Text = "Edit Existing";
           this.btnEditAlternative.Click += new System.EventHandler(this.btnEditAlternative_Click);
@@ -557,8 +513,7 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
           this.ultraTabPageControl5.Controls.Add(this.btnRestoreDefault);
           this.ultraTabPageControl5.Controls.Add(this.ultraLabel6);
           this.ultraTabPageControl5.Controls.Add(this.txtDebugMode);
-          this.ultraTabPageControl5.Controls.Add(this.btnCancel);
-          this.ultraTabPageControl5.Location = new System.Drawing.Point(0, 0);
+          this.ultraTabPageControl5.Location = new System.Drawing.Point(-10000, -10000);
           this.ultraTabPageControl5.Name = "ultraTabPageControl5";
           this.ultraTabPageControl5.Size = new System.Drawing.Size(923, 615);
           // 
@@ -667,7 +622,10 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
           this.ultraTabPageControl7.Controls.Add(this.grdFocusAreaChooser);
           this.ultraTabPageControl7.Controls.Add(this.btnReadFocusAreas);
           this.ultraTabPageControl7.Controls.Add(this.ultraLabel9);
-          this.ultraTabPageControl7.Location = new System.Drawing.Point(-10000, -10000);
+          this.ultraTabPageControl7.Controls.Add(this.ultraLabel1);
+          this.ultraTabPageControl7.Controls.Add(this.cmbBaseModel);
+          this.ultraTabPageControl7.Controls.Add(this.btnBrowseBaseModel);
+          this.ultraTabPageControl7.Location = new System.Drawing.Point(0, 0);
           this.ultraTabPageControl7.Name = "ultraTabPageControl7";
           this.ultraTabPageControl7.Size = new System.Drawing.Size(923, 615);
           // 
@@ -840,7 +798,7 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
           appearance36.ForeColor = System.Drawing.SystemColors.Control;
           this.tabControl.Appearance = appearance36;
           this.tabControl.Controls.Add(this.ultraTabSharedControlsPage1);
-          this.tabControl.Controls.Add(this.ultraTabPageControl2);
+          this.tabControl.Controls.Add(ultraTabPageControl2);
           this.tabControl.Controls.Add(this.ultraTabPageControl1);
           this.tabControl.Controls.Add(this.ultraTabPageControl3);
           this.tabControl.Controls.Add(this.ultraTabPageControl4);
@@ -851,7 +809,6 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
           this.tabControl.Location = new System.Drawing.Point(171, 24);
           this.tabControl.Name = "tabControl";
           this.tabControl.SharedControls.AddRange(new System.Windows.Forms.Control[] {
-            this.btnCancel,
             this.cmbAlternativeList,
             this.ultraLabel2,
             this.ultraLabel1,
@@ -871,7 +828,7 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
           ultraTab7.TabPage = this.ultraTabPageControl1;
           ultraTab7.Text = "tab1";
           ultraTab8.Key = "ManageAlternatives";
-          ultraTab8.TabPage = this.ultraTabPageControl2;
+          ultraTab8.TabPage = ultraTabPageControl2;
           ultraTab8.Text = "tab2";
           ultraTab9.Key = "ApplyAlternative";
           ultraTab9.TabPage = this.ultraTabPageControl3;
@@ -888,9 +845,6 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
           ultraTab11.Key = "ModifySettings";
           ultraTab11.TabPage = this.ultraTabPageControl5;
           ultraTab11.Text = "tab5";
-          ultraTab12.ExcludedSharedControls.AddRange(new System.Windows.Forms.Control[] {
-            this.cmbAlternativeList,
-            this.ultraLabel2});
           ultraTab12.Key = "AutoConveyance";
           ultraTab12.TabPage = this.ultraTabPageControl6;
           ultraTab12.Text = "tab6";
@@ -909,10 +863,10 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
             ultraTab12,
             ultraTab1});
           this.tabControl.SelectedTabChanging += new Infragistics.Win.UltraWinTabControl.SelectedTabChangingEventHandler(this.tabControl_SelectedTabChanging);
+          this.tabControl.SelectedTabChanged += new Infragistics.Win.UltraWinTabControl.SelectedTabChangedEventHandler(this.tabControl_SelectedTabChanged);
           // 
           // ultraTabSharedControlsPage1
           // 
-          this.ultraTabSharedControlsPage1.Controls.Add(this.btnCancel);
           this.ultraTabSharedControlsPage1.Controls.Add(this.cmbAlternativeList);
           this.ultraTabSharedControlsPage1.Controls.Add(this.ultraLabel2);
           this.ultraTabSharedControlsPage1.Controls.Add(this.ultraLabel1);
@@ -1088,6 +1042,90 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
           this.ultraLabel11.TabIndex = 6;
           this.ultraLabel11.Text = "ultraLabel11";
           // 
+          // ultraGroupBox1
+          // 
+          this.ultraGroupBox1.Controls.Add(this.btnNewAlternative);
+          this.ultraGroupBox1.Controls.Add(this.btnEditAlternative);
+          this.ultraGroupBox1.Controls.Add(this.btnDeleteAlternative);
+          this.ultraGroupBox1.Controls.Add(this.btnCopyAlternative);
+          this.ultraGroupBox1.Location = new System.Drawing.Point(345, 77);
+          this.ultraGroupBox1.Name = "ultraGroupBox1";
+          this.ultraGroupBox1.Size = new System.Drawing.Size(344, 49);
+          this.ultraGroupBox1.TabIndex = 44;
+          this.ultraGroupBox1.Text = "Configure Alternative";
+          // 
+          // lblFocusAreas
+          // 
+          appearance20.TextVAlignAsString = "Bottom";
+          this.lblFocusAreas.Appearance = appearance20;
+          this.lblFocusAreas.Location = new System.Drawing.Point(20, 123);
+          this.lblFocusAreas.Name = "lblFocusAreas";
+          this.lblFocusAreas.Size = new System.Drawing.Size(73, 17);
+          this.lblFocusAreas.TabIndex = 46;
+          this.lblFocusAreas.Text = "Focus Areas:";
+          // 
+          // btnBrowseFocusAreas
+          // 
+          this.btnBrowseFocusAreas.Location = new System.Drawing.Point(529, 141);
+          this.btnBrowseFocusAreas.Name = "btnBrowseFocusAreas";
+          this.btnBrowseFocusAreas.Size = new System.Drawing.Size(64, 22);
+          this.btnBrowseFocusAreas.TabIndex = 45;
+          this.btnBrowseFocusAreas.Text = "Browse...";
+          // 
+          // ultraTextEditor1
+          // 
+          this.ultraTextEditor1.Location = new System.Drawing.Point(20, 141);
+          this.ultraTextEditor1.Name = "ultraTextEditor1";
+          this.ultraTextEditor1.Size = new System.Drawing.Size(504, 21);
+          this.ultraTextEditor1.TabIndex = 47;
+          this.ultraTextEditor1.Text = "txtFocusAreas";
+          // 
+          // cmbAlternativeList
+          // 
+          this.cmbAlternativeList.DisplayMember = "";
+          this.cmbAlternativeList.Location = new System.Drawing.Point(22, 96);
+          this.cmbAlternativeList.Name = "cmbAlternativeList";
+          this.cmbAlternativeList.Size = new System.Drawing.Size(204, 21);
+          this.cmbAlternativeList.TabIndex = 43;
+          this.cmbAlternativeList.ValueMember = "";
+          // 
+          // ultraLabel2
+          // 
+          appearance19.TextVAlignAsString = "Bottom";
+          this.ultraLabel2.Appearance = appearance19;
+          this.ultraLabel2.Location = new System.Drawing.Point(22, 77);
+          this.ultraLabel2.Name = "ultraLabel2";
+          this.ultraLabel2.Size = new System.Drawing.Size(159, 17);
+          this.ultraLabel2.TabIndex = 45;
+          this.ultraLabel2.Text = "Alternative Name:";
+          // 
+          // ultraLabel1
+          // 
+          appearance2.TextVAlignAsString = "Bottom";
+          this.ultraLabel1.Appearance = appearance2;
+          this.ultraLabel1.Location = new System.Drawing.Point(22, 33);
+          this.ultraLabel1.Name = "ultraLabel1";
+          this.ultraLabel1.Size = new System.Drawing.Size(73, 17);
+          this.ultraLabel1.TabIndex = 44;
+          this.ultraLabel1.Text = "Base Model:";
+          // 
+          // cmbBaseModel
+          // 
+          this.cmbBaseModel.DisplayMember = "BaseModel_text";
+          this.cmbBaseModel.Location = new System.Drawing.Point(22, 51);
+          this.cmbBaseModel.Name = "cmbBaseModel";
+          this.cmbBaseModel.Size = new System.Drawing.Size(504, 21);
+          this.cmbBaseModel.TabIndex = 41;
+          this.cmbBaseModel.ValueMember = "BaseModel_text";
+          // 
+          // btnBrowseBaseModel
+          // 
+          this.btnBrowseBaseModel.Location = new System.Drawing.Point(531, 51);
+          this.btnBrowseBaseModel.Name = "btnBrowseBaseModel";
+          this.btnBrowseBaseModel.Size = new System.Drawing.Size(64, 22);
+          this.btnBrowseBaseModel.TabIndex = 42;
+          this.btnBrowseBaseModel.Text = "Browse...";
+          // 
           // AlternativeEngineForm
           // 
           this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
@@ -1101,12 +1139,10 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
           this.Name = "AlternativeEngineForm";
           this.Text = "Alternatives Toolkit";
           ((System.ComponentModel.ISupportInitialize)(altConfigFile)).EndInit();
-          ((System.ComponentModel.ISupportInitialize)(this.cmbAlternativeList)).EndInit();
-          ((System.ComponentModel.ISupportInitialize)(this.cmbBaseModel)).EndInit();
           this.ultraTabPageControl1.ResumeLayout(false);
           this.panel2.ResumeLayout(false);
-          this.ultraTabPageControl2.ResumeLayout(false);
-          this.ultraTabPageControl2.PerformLayout();
+          ultraTabPageControl2.ResumeLayout(false);
+          ultraTabPageControl2.PerformLayout();
           ((System.ComponentModel.ISupportInitialize)(this.grdAlternativeHistory)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.altConfigFileBindingSource)).EndInit();
           this.ultraTabPageControl3.ResumeLayout(false);
@@ -1117,6 +1153,7 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
           ((System.ComponentModel.ISupportInitialize)(this.txtDebugMode)).EndInit();
           this.ultraTabPageControl6.ResumeLayout(false);
           this.ultraTabPageControl7.ResumeLayout(false);
+          this.ultraTabPageControl7.PerformLayout();
           ((System.ComponentModel.ISupportInitialize)(this.chkRemoveRIK)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.grdFocusAreaChooser)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.alternativeExplorerBar)).EndInit();
@@ -1128,6 +1165,11 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
           this.menuStrip1.PerformLayout();
           ((System.ComponentModel.ISupportInitialize)(this.altEngineConfiguration)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.ultraGridBagLayoutManager1)).EndInit();
+          ((System.ComponentModel.ISupportInitialize)(this.ultraGroupBox1)).EndInit();
+          this.ultraGroupBox1.ResumeLayout(false);
+          ((System.ComponentModel.ISupportInitialize)(this.ultraTextEditor1)).EndInit();
+          ((System.ComponentModel.ISupportInitialize)(this.cmbAlternativeList)).EndInit();
+          ((System.ComponentModel.ISupportInitialize)(this.cmbBaseModel)).EndInit();
           this.ResumeLayout(false);
           this.PerformLayout();
 
@@ -1159,7 +1201,6 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
         private Infragistics.Win.UltraWinTabControl.UltraTabSharedControlsPage ultraTabSharedControlsPage1;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private Infragistics.Win.UltraWinTabControl.UltraTabControl tabControl;
-        private Infragistics.Win.UltraWinTabControl.UltraTabPageControl ultraTabPageControl2;
         private Infragistics.Win.Misc.UltraButton btnCopyAlternative;
         private Infragistics.Win.Misc.UltraLabel ultraLabel12;
         private Infragistics.Win.Misc.UltraButton btnDeleteAlternative;
@@ -1200,11 +1241,6 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
         private Infragistics.Win.Misc.UltraButton btnEditAutoConveyance;
         private Infragistics.Win.UltraWinTabControl.UltraTabPageControl ultraTabPageControl7;
         private Infragistics.Win.Misc.UltraLabel ultraLabel9;
-        private Infragistics.Win.UltraWinEditors.UltraComboEditor cmbAlternativeList;
-        private Infragistics.Win.Misc.UltraLabel ultraLabel2;
-        private Infragistics.Win.Misc.UltraLabel ultraLabel1;
-        private Infragistics.Win.UltraWinEditors.UltraComboEditor cmbBaseModel;
-        private Infragistics.Win.Misc.UltraButton btnBrowseBaseModel;
         private Infragistics.Win.Misc.UltraButton btnReadFocusAreas;
         private Infragistics.Win.Misc.UltraButton btnCancel;
         private Infragistics.Win.Misc.UltraLabel ultraLabel11;
@@ -1212,5 +1248,14 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
         private Infragistics.Win.UltraWinGrid.UltraGrid grdFocusAreaChooser;
         private Infragistics.Win.Misc.UltraButton btnAggregate;
         private Infragistics.Win.UltraWinEditors.UltraCheckEditor chkRemoveRIK;
+        private Infragistics.Win.Misc.UltraGroupBox ultraGroupBox1;
+        private Infragistics.Win.Misc.UltraLabel lblFocusAreas;
+        private Infragistics.Win.Misc.UltraButton btnBrowseFocusAreas;
+        private Infragistics.Win.UltraWinEditors.UltraTextEditor ultraTextEditor1;
+        private Infragistics.Win.UltraWinEditors.UltraComboEditor cmbAlternativeList;
+        private Infragistics.Win.Misc.UltraLabel ultraLabel2;
+        private Infragistics.Win.Misc.UltraLabel ultraLabel1;
+        private Infragistics.Win.UltraWinEditors.UltraComboEditor cmbBaseModel;
+        private Infragistics.Win.Misc.UltraButton btnBrowseBaseModel;
     }
 }
