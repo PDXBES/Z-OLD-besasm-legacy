@@ -146,6 +146,7 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
         this.engineOutput.AddUpdate("Alternative Template located at:\n	" + this.templateDirectory + "\n");
         this.cmbBaseModel.DataSource = this.config.BaseModel;
         this.cmbOutputModel.DataSource = this.config.OutputModel;
+        this.txtFocusAreas.Text = this.config.ProgramSettings[0].FocusAreasTable;
 
         mbExecuter = new MapBasicExecuter(this.config, this.debugMode, this.applicationDirectory);
         this.mbExecuter.StatusChanged += new SystemsAnalysis.Utils.Events.OnStatusChangedEventHandler(mbExecuter_StatusChanged);
@@ -1409,9 +1410,49 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
 
     }
 
-    private void tabControl_SelectedTabChanged(object sender, Infragistics.Win.UltraWinTabControl.SelectedTabChangedEventArgs e)
+    private void btnBrowseFocusAreas_Click(object sender, EventArgs e)
     {
+      if (this.folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+      {
+        string focusArea;
+        focusArea = this.folderBrowserDialog1.SelectedPath;
+        if (!focusArea.EndsWith("\\"))
+        {
+          focusArea += "\\";
+        }
+        
+        this.txtFocusAreas.Text = focusArea;        
+      }
+    }
 
+    private void btnRefreshFocusAreas_Click(object sender, EventArgs e)
+    {
+      string alternativeName = (string)cmbAlternativeList.Text;
+      string baseModel = this.cmbBaseModel.Text;
+      baseModel += baseModel.EndsWith("\\") ? "" : "\\";
+      string alternativePath = baseModel + "alternatives\\" + alternativeName + "\\";
+
+      if (!ValidateInput(baseModel, alternativeName))
+      {
+        return;
+      }
+
+      try
+      {
+        Dictionary<string, string> parameters = new Dictionary<string, string>();
+        parameters.Add("gAlternativePath", baseModel + "alternatives\\" + alternativeName + "\\");
+        parameters.Add("gIncludeLinksAndNodes", chkFocusAreaLinks.Checked.ToString());
+        parameters.Add("gIncludeCatchments", chkFocusAreaCatchments.Checked.ToString());
+        parameters.Add("gIncludeICTargets", chkFocusAreaTargets.Checked.ToString());
+        parameters.Add("gFocusAreas", txtFocusAreas.Text);
+        mbExecuter.ExecuteFunctionGroup("UpdateFocusAreas", parameters);
+      }
+      catch (Exception ex)
+      {
+        this.engineOutput.AddStatus("Error updating focus areas: " + ex.Message, SeverityLevel.Error);
+      }
+
+      return;
     }
 
 

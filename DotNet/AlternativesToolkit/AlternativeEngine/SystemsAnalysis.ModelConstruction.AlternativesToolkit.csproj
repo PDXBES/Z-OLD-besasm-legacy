@@ -336,6 +336,9 @@
     <Content Include="AlternativeProcessor\Aggregator.MBX">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="AlternativeProcessor\UpdateFocusAreas.MBX">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="ConveyanceBuilder.xsc">
       <DependentUpon>ConveyanceBuilder.xsd</DependentUpon>
     </None>

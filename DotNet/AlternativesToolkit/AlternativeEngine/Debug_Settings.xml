@@ -3,6 +3,7 @@
   <ProgramSettings>
     <AlternativeTemplate>C:\Data\Dev\BESASM\legacy\DotNet\AlternativesToolkit\AlternativeTemplate</AlternativeTemplate>
     <UpdateVersionPatchMBX>MBProcessor\UpdateVersion.MBX</UpdateVersionPatchMBX>
+    <FocusAreasTable>R:\41800023-1 BES_DataManagement\Data\Original_Client_Data\Master_Focus_Areas.tab</FocusAreasTable>
   </ProgramSettings>
   <BaseModelComponents>
     <BaseFile>Model.ini</BaseFile>
@@ -184,11 +185,11 @@
       <GlobalVariable Name="gAlternativePath" Value="" RelativeTo="Alternative" />
       <GlobalVariable Name="gTempDir" Value="AltTemp\" RelativeTo="SystemTemp" />
       <GlobalVariable Name="gIconFile" Value="C:\Data\Dev\BESASM\legacy\DotNet\AlternativesToolkit\AlternativeEngine\AlternativeWorkbench\CustomIcons.dll" RelativeTo="" />
-      <GlobalVariable Name="gLinkEditingTemplate" Value="W:\Model_Programs\Emgaats\CodeV2.2\Alternatives_Toolkit\MBWorkbench\Mp_LINKpad.WOR" RelativeTo="" />
-      <GlobalVariable Name="gDSCEditingTemplate" Value="W:\Model_Programs\Emgaats\CodeV2.2\Alternatives_Toolkit\MBWorkbench\Mp_DSCpad.WOR" RelativeTo="" />
-      <GlobalVariable Name="gSSCEditingTemplate" Value="W:\Model_Programs\Emgaats\CodeV2.2\Alternatives_Toolkit\MBWorkbench\Mp_SSCpad.WOR" RelativeTo="" />
-      <GlobalVariable Name="gSpecLinkEditingTemplate" Value="W:\Model_Programs\Emgaats\CodeV2.2\Alternatives_Toolkit\MBWorkbench\Mp_SPLpad.WOR" RelativeTo="" />
-      <GlobalVariable Name="gICEditingTemplate" Value="W:\Model_Programs\Emgaats\CodeV2.2\Alternatives_Toolkit\MBWorkbench\Mp_ICpad.WOR" RelativeTo="" />
+      <GlobalVariable Name="gLinkEditingTemplate" Value="C:\Data\Dev\BESASM\legacy\DotNet\AlternativesToolkit\AlternativeEngine\AlternativeWorkbench\Mp_LINKpad.WOR" RelativeTo="" />
+      <GlobalVariable Name="gDSCEditingTemplate" Value="C:\Data\Dev\BESASM\legacy\DotNet\AlternativesToolkit\AlternativeEngine\AlternativeWorkbench\Mp_DSCpad.WOR" RelativeTo="" />
+      <GlobalVariable Name="gSSCEditingTemplate" Value="C:\Data\Dev\BESASM\legacy\DotNet\AlternativesToolkit\AlternativeEngine\AlternativeWorkbench\Mp_SSCpad.WOR" RelativeTo="" />
+      <GlobalVariable Name="gSpecLinkEditingTemplate" Value="C:\Data\Dev\BESASM\legacy\DotNet\AlternativesToolkit\AlternativeEngine\AlternativeWorkbench\Mp_SPLpad.WOR" RelativeTo="" />
+      <GlobalVariable Name="gICEditingTemplate" Value="C:\Data\Dev\BESASM\legacy\DotNet\AlternativesToolkit\AlternativeEngine\AlternativeWorkbench\Mp_ICpad.WOR" RelativeTo="" />
       <GlobalVariable Name="gDefaultNodeSuffix" Value="" RelativeTo="AlternativeConfiguration" />
       <Function>
         <Name>SetupAltWorkbench</Name>
@@ -218,5 +219,19 @@
         <CommandID>10000</CommandID>
       </Function>
     </Library>
+    <Library>
+      <LibraryName>UpdateFocusAreas</LibraryName>
+      <Location>AlternativeProcessor\UpdateFocusAreas.MBX</Location>
+      <ExecGroup>UpdateFocusAreas</ExecGroup>      
+      <GlobalVariable Name="gAlternativePath" Value="" RelativeTo="" />
+      <GlobalVariable Name="gIncludeLinksAndNodes" Value="" RelativeTo="" />
+      <GlobalVariable Name="gIncludeCatchments" Value="" RelativeTo="" />
+      <GlobalVariable Name="gIncludeICTargets" Value="" RelativeTo="" />
+      <GlobalVariable Name="gFocusAreas" Value="" RelativeTo="" />
+      <Function>
+        <Name>UpdateFocusAreas</Name>
+        <CommandID>10000</CommandID>
+      </Function>
+    </Library>    
   </MapBasicFramework>
 </AltEngineConfiguration>
