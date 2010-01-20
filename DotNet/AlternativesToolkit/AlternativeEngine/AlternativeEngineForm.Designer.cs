@@ -55,7 +55,7 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
           Infragistics.Win.Appearance appearance34 = new Infragistics.Win.Appearance();
           Infragistics.Win.Appearance appearance19 = new Infragistics.Win.Appearance();
           Infragistics.Win.Appearance appearance2 = new Infragistics.Win.Appearance();
-          Infragistics.Win.Appearance appearance1 = new Infragistics.Win.Appearance();
+          Infragistics.Win.Appearance appearance3 = new Infragistics.Win.Appearance();
           Infragistics.Win.Appearance appearance14 = new Infragistics.Win.Appearance();
           Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand2 = new Infragistics.Win.UltraWinGrid.UltraGridBand("Band 0", -1);
           Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn4 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Focus Area");
@@ -78,10 +78,11 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
           Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarItem ultraExplorerBarItem3 = new Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarItem();
           Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarItem ultraExplorerBarItem4 = new Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarItem();
           Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarItem ultraExplorerBarItem5 = new Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarItem();
-          Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarGroup ultraExplorerBarGroup2 = new Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarGroup();
           Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarItem ultraExplorerBarItem6 = new Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarItem();
+          Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarGroup ultraExplorerBarGroup2 = new Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarGroup();
           Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarItem ultraExplorerBarItem7 = new Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarItem();
           Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarItem ultraExplorerBarItem8 = new Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarItem();
+          Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarItem ultraExplorerBarItem9 = new Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarItem();
           Infragistics.Win.Appearance appearance36 = new Infragistics.Win.Appearance();
           Infragistics.Win.UltraWinTabControl.UltraTab ultraTab7 = new Infragistics.Win.UltraWinTabControl.UltraTab();
           Infragistics.Win.UltraWinTabControl.UltraTab ultraTab8 = new Infragistics.Win.UltraWinTabControl.UltraTab(true);
@@ -90,7 +91,11 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
           Infragistics.Win.UltraWinTabControl.UltraTab ultraTab11 = new Infragistics.Win.UltraWinTabControl.UltraTab();
           Infragistics.Win.UltraWinTabControl.UltraTab ultraTab12 = new Infragistics.Win.UltraWinTabControl.UltraTab();
           Infragistics.Win.UltraWinTabControl.UltraTab ultraTab1 = new Infragistics.Win.UltraWinTabControl.UltraTab();
+          Infragistics.Win.UltraWinTabControl.UltraTab ultraTab2 = new Infragistics.Win.UltraWinTabControl.UltraTab();
           Infragistics.Win.UltraWinStatusBar.UltraStatusPanel ultraStatusPanel1 = new Infragistics.Win.UltraWinStatusBar.UltraStatusPanel();
+          Infragistics.Win.Appearance appearance5 = new Infragistics.Win.Appearance();
+          Infragistics.Win.Appearance appearance4 = new Infragistics.Win.Appearance();
+          Infragistics.Win.Appearance appearance1 = new Infragistics.Win.Appearance();
           System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AlternativeEngineForm));
           this.ultraGroupBox1 = new Infragistics.Win.Misc.UltraGroupBox();
           this.chkFocusAreaTargets = new Infragistics.Win.UltraWinEditors.UltraCheckEditor();
@@ -178,6 +183,15 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
           this.ultraGridBagLayoutManager1 = new Infragistics.Win.Misc.UltraGridBagLayoutManager(this.components);
           this.autoConveyanceInterface1 = new SystemsAnalysis.ModelConstruction.AlternativesToolkit.AutoConveyanceInterface();
           this.btnCancel = new Infragistics.Win.Misc.UltraButton();
+          this.ultraTabPageControl8 = new Infragistics.Win.UltraWinTabControl.UltraTabPageControl();
+          this.ultraLabel1 = new Infragistics.Win.Misc.UltraLabel();
+          this.ultraTextEditor1 = new Infragistics.Win.UltraWinEditors.UltraTextEditor();
+          this.ultraButton1 = new Infragistics.Win.Misc.UltraButton();
+          this.ultraTextEditor2 = new Infragistics.Win.UltraWinEditors.UltraTextEditor();
+          this.ultraLabel2 = new Infragistics.Win.Misc.UltraLabel();
+          this.btnMoveAlternative = new Infragistics.Win.Misc.UltraButton();
+          this.ultraTextEditor3 = new Infragistics.Win.UltraWinEditors.UltraTextEditor();
+          this.ultraLabel12 = new Infragistics.Win.Misc.UltraLabel();
           ultraTabPageControl2 = new Infragistics.Win.UltraWinTabControl.UltraTabPageControl();
           altConfigFile = new SystemsAnalysis.Modeling.Alternatives.AlternativeConfiguration();
           ultraTabPageControl2.SuspendLayout();
@@ -214,6 +228,10 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
           this.ultraTabSharedControlsPage1.SuspendLayout();
           this.menuStrip1.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.ultraGridBagLayoutManager1)).BeginInit();
+          this.ultraTabPageControl8.SuspendLayout();
+          ((System.ComponentModel.ISupportInitialize)(this.ultraTextEditor1)).BeginInit();
+          ((System.ComponentModel.ISupportInitialize)(this.ultraTextEditor2)).BeginInit();
+          ((System.ComponentModel.ISupportInitialize)(this.ultraTextEditor3)).BeginInit();
           this.SuspendLayout();
           // 
           // ultraTabPageControl2
@@ -581,13 +599,7 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
           this.ultraTabPageControl3.Controls.Add(this.ultraLabel8);
           this.ultraTabPageControl3.Controls.Add(this.btnApplyAlternative);
           this.ultraTabPageControl3.Controls.Add(this.ultraLabel4);
-          this.ultraTabPageControl3.Controls.Add(this.btnCancel);
-          this.ultraTabPageControl3.Controls.Add(this.cmbAlternativeList);
-          this.ultraTabPageControl3.Controls.Add(this.lblAlternativeName);
-          this.ultraTabPageControl3.Controls.Add(this.lblBaseModel);
-          this.ultraTabPageControl3.Controls.Add(this.cmbBaseModel);
-          this.ultraTabPageControl3.Controls.Add(this.btnBrowseBaseModel);
-          this.ultraTabPageControl3.Location = new System.Drawing.Point(0, 0);
+          this.ultraTabPageControl3.Location = new System.Drawing.Point(-10000, -10000);
           this.ultraTabPageControl3.Name = "ultraTabPageControl3";
           this.ultraTabPageControl3.Size = new System.Drawing.Size(923, 615);
           // 
@@ -611,8 +623,8 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
           // 
           // ultraLabel8
           // 
-          appearance1.TextVAlignAsString = "Bottom";
-          this.ultraLabel8.Appearance = appearance1;
+          appearance3.TextVAlignAsString = "Bottom";
+          this.ultraLabel8.Appearance = appearance3;
           this.ultraLabel8.Location = new System.Drawing.Point(22, 123);
           this.ultraLabel8.Name = "ultraLabel8";
           this.ultraLabel8.Size = new System.Drawing.Size(96, 16);
@@ -900,25 +912,28 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
           ultraExplorerBarItem4.ToolTipText = "Automatically Generate a Conveyance Alternative";
           ultraExplorerBarItem5.Key = "Aggregator";
           ultraExplorerBarItem5.Text = "Aggregator";
+          ultraExplorerBarItem6.Key = "MoveAlternative";
+          ultraExplorerBarItem6.Text = "Move Alternative";
           ultraExplorerBarGroup1.Items.AddRange(new Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarItem[] {
             ultraExplorerBarItem1,
             ultraExplorerBarItem2,
             ultraExplorerBarItem3,
             ultraExplorerBarItem4,
-            ultraExplorerBarItem5});
+            ultraExplorerBarItem5,
+            ultraExplorerBarItem6});
           ultraExplorerBarGroup1.Settings.ContainerHeight = 19;
           ultraExplorerBarGroup1.Text = "Tools";
-          ultraExplorerBarItem6.Key = "EngineStatus";
-          ultraExplorerBarItem6.Text = "Status Log";
-          ultraExplorerBarItem7.Checked = true;
-          ultraExplorerBarItem7.Key = "ModifySettings";
-          ultraExplorerBarItem7.Text = "Settings";
-          ultraExplorerBarItem8.Key = "Exit";
-          ultraExplorerBarItem8.Text = "Exit";
+          ultraExplorerBarItem7.Key = "EngineStatus";
+          ultraExplorerBarItem7.Text = "Status Log";
+          ultraExplorerBarItem8.Checked = true;
+          ultraExplorerBarItem8.Key = "ModifySettings";
+          ultraExplorerBarItem8.Text = "Settings";
+          ultraExplorerBarItem9.Key = "Exit";
+          ultraExplorerBarItem9.Text = "Exit";
           ultraExplorerBarGroup2.Items.AddRange(new Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarItem[] {
-            ultraExplorerBarItem6,
             ultraExplorerBarItem7,
-            ultraExplorerBarItem8});
+            ultraExplorerBarItem8,
+            ultraExplorerBarItem9});
           ultraExplorerBarGroup2.Text = "Application";
           this.alternativeExplorerBar.Groups.AddRange(new Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarGroup[] {
             ultraExplorerBarGroup1,
@@ -946,6 +961,7 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
           this.tabControl.Controls.Add(this.ultraTabPageControl5);
           this.tabControl.Controls.Add(this.ultraTabPageControl6);
           this.tabControl.Controls.Add(this.ultraTabPageControl7);
+          this.tabControl.Controls.Add(this.ultraTabPageControl8);
           this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
           this.tabControl.Location = new System.Drawing.Point(171, 24);
           this.tabControl.Name = "tabControl";
@@ -996,6 +1012,9 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
           ultraTab1.Key = "Aggregator";
           ultraTab1.TabPage = this.ultraTabPageControl7;
           ultraTab1.Text = "tab7";
+          ultraTab2.Key = "MoveAlternative";
+          ultraTab2.TabPage = this.ultraTabPageControl8;
+          ultraTab2.Text = "Move Alternative";
           this.tabControl.Tabs.AddRange(new Infragistics.Win.UltraWinTabControl.UltraTab[] {
             ultraTab7,
             ultraTab8,
@@ -1003,8 +1022,10 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
             ultraTab10,
             ultraTab11,
             ultraTab12,
-            ultraTab1});
+            ultraTab1,
+            ultraTab2});
           this.tabControl.SelectedTabChanging += new Infragistics.Win.UltraWinTabControl.SelectedTabChangingEventHandler(this.tabControl_SelectedTabChanging);
+          this.tabControl.SelectedTabChanged += new Infragistics.Win.UltraWinTabControl.SelectedTabChangedEventHandler(this.tabControl_SelectedTabChanged);
           // 
           // ultraTabSharedControlsPage1
           // 
@@ -1203,6 +1224,92 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
           this.btnCancel.TabIndex = 46;
           this.btnCancel.Text = "Close";
           // 
+          // ultraTabPageControl8
+          // 
+          this.ultraTabPageControl8.Controls.Add(this.ultraLabel12);
+          this.ultraTabPageControl8.Controls.Add(this.ultraTextEditor3);
+          this.ultraTabPageControl8.Controls.Add(this.btnMoveAlternative);
+          this.ultraTabPageControl8.Controls.Add(this.ultraLabel2);
+          this.ultraTabPageControl8.Controls.Add(this.ultraTextEditor2);
+          this.ultraTabPageControl8.Controls.Add(this.ultraTextEditor1);
+          this.ultraTabPageControl8.Controls.Add(this.ultraButton1);
+          this.ultraTabPageControl8.Controls.Add(this.ultraLabel1);
+          this.ultraTabPageControl8.Location = new System.Drawing.Point(0, 0);
+          this.ultraTabPageControl8.Name = "ultraTabPageControl8";
+          this.ultraTabPageControl8.Size = new System.Drawing.Size(923, 615);
+          // 
+          // ultraLabel1
+          // 
+          appearance5.TextVAlignAsString = "Bottom";
+          this.ultraLabel1.Appearance = appearance5;
+          this.ultraLabel1.Location = new System.Drawing.Point(22, 153);
+          this.ultraLabel1.Name = "ultraLabel1";
+          this.ultraLabel1.Size = new System.Drawing.Size(254, 27);
+          this.ultraLabel1.TabIndex = 49;
+          this.ultraLabel1.Text = "Move Alternative to Model:";
+          // 
+          // ultraTextEditor1
+          // 
+          this.ultraTextEditor1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.altEngineConfiguration, "ProgramSettings.FocusAreasTable", true));
+          this.ultraTextEditor1.Location = new System.Drawing.Point(22, 186);
+          this.ultraTextEditor1.Name = "ultraTextEditor1";
+          this.ultraTextEditor1.Size = new System.Drawing.Size(504, 21);
+          this.ultraTextEditor1.TabIndex = 52;
+          // 
+          // ultraButton1
+          // 
+          this.ultraButton1.Location = new System.Drawing.Point(531, 184);
+          this.ultraButton1.Name = "ultraButton1";
+          this.ultraButton1.Size = new System.Drawing.Size(64, 23);
+          this.ultraButton1.TabIndex = 51;
+          this.ultraButton1.Text = "Browse...";
+          // 
+          // ultraTextEditor2
+          // 
+          this.ultraTextEditor2.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.altEngineConfiguration, "ProgramSettings.FocusAreasTable", true));
+          this.ultraTextEditor2.Location = new System.Drawing.Point(22, 232);
+          this.ultraTextEditor2.Name = "ultraTextEditor2";
+          this.ultraTextEditor2.Size = new System.Drawing.Size(504, 21);
+          this.ultraTextEditor2.TabIndex = 53;
+          // 
+          // ultraLabel2
+          // 
+          appearance4.TextVAlignAsString = "Bottom";
+          this.ultraLabel2.Appearance = appearance4;
+          this.ultraLabel2.Location = new System.Drawing.Point(22, 210);
+          this.ultraLabel2.Name = "ultraLabel2";
+          this.ultraLabel2.Size = new System.Drawing.Size(254, 16);
+          this.ultraLabel2.TabIndex = 54;
+          this.ultraLabel2.Text = "New Alternative Name:";
+          // 
+          // btnMoveAlternative
+          // 
+          this.btnMoveAlternative.Enabled = false;
+          this.btnMoveAlternative.Location = new System.Drawing.Point(22, 260);
+          this.btnMoveAlternative.Name = "btnMoveAlternative";
+          this.btnMoveAlternative.Size = new System.Drawing.Size(172, 23);
+          this.btnMoveAlternative.TabIndex = 55;
+          this.btnMoveAlternative.Text = "Move Alternative";
+          // 
+          // ultraTextEditor3
+          // 
+          this.ultraTextEditor3.Location = new System.Drawing.Point(22, 305);
+          this.ultraTextEditor3.Multiline = true;
+          this.ultraTextEditor3.Name = "ultraTextEditor3";
+          this.ultraTextEditor3.ReadOnly = true;
+          this.ultraTextEditor3.Size = new System.Drawing.Size(818, 302);
+          this.ultraTextEditor3.TabIndex = 56;
+          // 
+          // ultraLabel12
+          // 
+          appearance1.TextVAlignAsString = "Bottom";
+          this.ultraLabel12.Appearance = appearance1;
+          this.ultraLabel12.Location = new System.Drawing.Point(22, 289);
+          this.ultraLabel12.Name = "ultraLabel12";
+          this.ultraLabel12.Size = new System.Drawing.Size(254, 16);
+          this.ultraLabel12.TabIndex = 57;
+          this.ultraLabel12.Text = "Reconciliation Report:";
+          // 
           // AlternativeEngineForm
           // 
           this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
@@ -1253,6 +1360,11 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
           this.menuStrip1.ResumeLayout(false);
           this.menuStrip1.PerformLayout();
           ((System.ComponentModel.ISupportInitialize)(this.ultraGridBagLayoutManager1)).EndInit();
+          this.ultraTabPageControl8.ResumeLayout(false);
+          this.ultraTabPageControl8.PerformLayout();
+          ((System.ComponentModel.ISupportInitialize)(this.ultraTextEditor1)).EndInit();
+          ((System.ComponentModel.ISupportInitialize)(this.ultraTextEditor2)).EndInit();
+          ((System.ComponentModel.ISupportInitialize)(this.ultraTextEditor3)).EndInit();
           this.ResumeLayout(false);
           this.PerformLayout();
 
@@ -1347,5 +1459,14 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
         private System.Windows.Forms.BindingSource programSettingsBindingSource;
         private AltEngineConfiguration altEngineConfiguration1;
         private Infragistics.Win.Misc.UltraButton btnCancel;
+        private Infragistics.Win.UltraWinTabControl.UltraTabPageControl ultraTabPageControl8;
+        private Infragistics.Win.Misc.UltraLabel ultraLabel1;
+        private Infragistics.Win.UltraWinEditors.UltraTextEditor ultraTextEditor1;
+        private Infragistics.Win.Misc.UltraButton ultraButton1;
+        private Infragistics.Win.UltraWinEditors.UltraTextEditor ultraTextEditor2;
+        private Infragistics.Win.Misc.UltraLabel ultraLabel12;
+        private Infragistics.Win.UltraWinEditors.UltraTextEditor ultraTextEditor3;
+        private Infragistics.Win.Misc.UltraButton btnMoveAlternative;
+        private Infragistics.Win.Misc.UltraLabel ultraLabel2;
     }
 }

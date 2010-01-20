@@ -1455,6 +1455,11 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
       return;
     }
 
+    private void tabControl_SelectedTabChanged(object sender, Infragistics.Win.UltraWinTabControl.SelectedTabChangedEventArgs e)
+    {
+
+    }
+
 
   }
 }
