@@ -3,6 +3,7 @@
   <ProgramSettings>
     <AlternativeTemplate>\\Cassio\Modeling\Model_Programs\bin\AlternativesToolkit\AlternativeTemplate\</AlternativeTemplate>
     <UpdateVersionPatchMBX>AlternativeProcessor\UpdateVersion.MBX</UpdateVersionPatchMBX>
+    <FocusAreasTable>R:\41800023-1 BES_DataManagement\Data\Original_Client_Data\Master_Focus_Areas.tab</FocusAreasTable>
   </ProgramSettings>
   <BaseModelComponents>
     <BaseFile>Model.ini</BaseFile>

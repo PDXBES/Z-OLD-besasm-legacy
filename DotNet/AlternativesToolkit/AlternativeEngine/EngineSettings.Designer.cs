@@ -692,6 +692,8 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit {
             
             private global::System.Data.DataColumn columnUpdateVersionPatchMBX;
             
+            private global::System.Data.DataColumn columnFocusAreasTable;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public ProgramSettingsDataTable() {
                 this.TableName = "ProgramSettings";
@@ -737,6 +739,13 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn FocusAreasTableColumn {
+                get {
+                    return this.columnFocusAreasTable;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -765,11 +774,12 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public ProgramSettingsRow AddProgramSettingsRow(string AlternativeTemplate, string UpdateVersionPatchMBX) {
+            public ProgramSettingsRow AddProgramSettingsRow(string AlternativeTemplate, string UpdateVersionPatchMBX, string FocusAreasTable) {
                 ProgramSettingsRow rowProgramSettingsRow = ((ProgramSettingsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         AlternativeTemplate,
-                        UpdateVersionPatchMBX};
+                        UpdateVersionPatchMBX,
+                        FocusAreasTable};
                 rowProgramSettingsRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowProgramSettingsRow);
                 return rowProgramSettingsRow;
@@ -796,6 +806,7 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit {
             internal void InitVars() {
                 this.columnAlternativeTemplate = base.Columns["AlternativeTemplate"];
                 this.columnUpdateVersionPatchMBX = base.Columns["UpdateVersionPatchMBX"];
+                this.columnFocusAreasTable = base.Columns["FocusAreasTable"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -804,6 +815,8 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit {
                 base.Columns.Add(this.columnAlternativeTemplate);
                 this.columnUpdateVersionPatchMBX = new global::System.Data.DataColumn("UpdateVersionPatchMBX", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnUpdateVersionPatchMBX);
+                this.columnFocusAreasTable = new global::System.Data.DataColumn("FocusAreasTable", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnFocusAreasTable);
                 this.columnAlternativeTemplate.AllowDBNull = false;
             }
             
@@ -3538,6 +3551,21 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string FocusAreasTable {
+                get {
+                    try {
+                        return ((string)(this[this.tableProgramSettings.FocusAreasTableColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'FocusAreasTable\' in table \'ProgramSettings\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableProgramSettings.FocusAreasTableColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public bool IsUpdateVersionPatchMBXNull() {
                 return this.IsNull(this.tableProgramSettings.UpdateVersionPatchMBXColumn);
             }
@@ -3545,6 +3573,16 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public void SetUpdateVersionPatchMBXNull() {
                 this[this.tableProgramSettings.UpdateVersionPatchMBXColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsFocusAreasTableNull() {
+                return this.IsNull(this.tableProgramSettings.FocusAreasTableColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetFocusAreasTableNull() {
+                this[this.tableProgramSettings.FocusAreasTableColumn] = global::System.Convert.DBNull;
             }
         }
         

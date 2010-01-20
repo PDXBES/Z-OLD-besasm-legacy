@@ -64,6 +64,9 @@ Sub Aggregate
 
 	Open Table gInputAlternativePath & "alt_speclinks_ac.tab" as alt_speclinks
 	Call AddFocusAreaColumn("alt_speclinks")
+	
+	Open Table gInputAlternativePath & "alt_speclinkdata_ac.tab" as alt_speclinkdata
+	Call AddFocusAreaColumn("alt_speclinkdata")
 
 	Open Table gInputAlternativePath & "alt_ssc_ac.tab" as alt_ssc
 	Call AddFocusAreaColumn("alt_ssc")
@@ -82,6 +85,7 @@ Sub Aggregate
 	Open Table gOutputAlternativePath & "alt_links_ac.tab" as alt_links_agg
 	Open Table gOutputAlternativePath & "alt_nodes_ac.tab" as alt_nodes_agg
 	Open Table gOutputAlternativePath & "alt_speclinks_ac.tab" as alt_speclinks_agg
+	Open Table gOutputAlternativePath & "alt_speclinkdata_ac.tab" as alt_speclinkdata_agg
 	Open Table gOutputAlternativePath & "alt_ssc_ac.tab" as alt_ssc_agg
 	Open Table gOutputAlternativePath & "alt_rooftargets_ac.tab" as alt_rooftargets_agg
 	Open Table gOutputAlternativePath & "alt_streettargets_ac.tab" as alt_streettargets_agg
@@ -92,10 +96,12 @@ Sub Aggregate
 	
 	Select * From alt_dsc Where focusArea = gFocusArea Into alt_dsc_fa
 	
-	'Select * From alt_nodes Where focusArea = gFocusArea Into alt_nodes_fa
-	Select * From alt_nodes, alt_links Where alt_nodes.node = alt_links.usnode Into alt_nodes_fa
+	Select * From alt_nodes Where focusArea = gFocusArea Into alt_nodes_fa
+	'Select * From alt_nodes, alt_links Where alt_nodes.node = alt_links.usnode Into alt_nodes_fa
 	
 	Select * From alt_speclinks Where focusArea = gFocusArea Into alt_speclinks_fa
+	Select * From alt_speclinkdata Where focusArea = gFocusArea Into alt_speclinkdata_fa
+	
 	Select * From alt_ssc Where focusArea = gFocusArea Into alt_ssc_fa
 	Select * From alt_rooftargets Where focusArea = gFocusArea Into alt_rooftargets_fa
 	Select * From alt_streettargets Where focusArea = gFocusArea Into alt_streettargets_fa
@@ -110,6 +116,8 @@ Sub Aggregate
 	Commit Table alt_nodes_agg Automatic ApplyUpdates
 	Insert Into alt_speclinks_agg Select * From alt_speclinks_fa
 	Commit Table alt_speclinks_agg Automatic ApplyUpdates
+	Insert Into alt_speclinkdata_agg Select * From alt_speclinkdata_fa
+	Commit Table alt_speclinkdata_agg Automatic ApplyUpdates
 	Insert Into alt_ssc_agg Select * From alt_ssc_fa
 	Commit Table alt_ssc_agg Automatic ApplyUpdates
 	Insert Into alt_rooftargets_agg Select * From alt_rooftargets_fa
