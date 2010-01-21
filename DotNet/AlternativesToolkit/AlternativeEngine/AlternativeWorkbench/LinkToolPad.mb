@@ -34,7 +34,6 @@ declare sub ChkAttribs
 declare sub SplitPip    
 declare sub DlgSUpdt    
 declare sub OkUpdt
-declare sub CancelUpdt
 declare sub DoPipLen
 declare sub FromDSnode
 declare sub FromUSnode
@@ -229,7 +228,7 @@ OnError goto skipSetDS
 		Close table qyPrevNodID
 		print Time(12) + " -" + PrevNodID
 	ELSE
-		Note "Invalid selection... please select a Node"
+		Note "INVALID SELECTION! PLS. SELECT A NODE!"
 		Exit sub
 	END IF
 
@@ -302,7 +301,7 @@ OnError GOTO skipMkNwPip
 
 	IF nwLEN < 10 or nwLEN >1000 THEN
 
-		IF Ask(("Pipe Length is "+round(nwLEN,0.1)+" ft... " +CHR$(10)+ CHR$(10)+ "Continue ?"), "Yes", "No")=0 THEN
+		IF Ask(("Pipe Length is "+round(nwLEN,0.1)+" FT!" +CHR$(10)+ CHR$(10)+ "CONTINUE ?"), "Yes", "NO")=0 THEN
 			Exit Sub
 		END IF
 	END IF
@@ -719,7 +718,9 @@ OnError GOTO skipSplit
 		chkobj = CreateCircle(x1, y1, 50)
 		IF chkobj intersects splitobj Then
 		Else
-			Select * From Alt_Nodes Where RowID = TableInfo(ALt_Nodes, TAB_INFO_NROWS) Into QyDeleteNode
+			Dim i as Integer
+			i = TableInfo(ALt_Nodes, TAB_INFO_NROWS)
+			Select * From Alt_Nodes Where RowID = i Into QyDeleteNode
 			Delete From QyDeleteNode
 			Close Table QyDeleteNode
 		   Note "Please select a location within 50' of the pipe to split."
@@ -893,7 +894,7 @@ Sub DlgSUpdt
 
 	sLTyp = qyRecUpdt.LinkType
 	fLen = qyRecUpdt.Length
-	fDiam = qyRecUpdt.DiamWidth	
+	fDiam = qyRecUpdt.DiamWidth
 	fHt= qyRecUpdt.Height
 	sMat= qyRecUpdt.Material
 	fUIE = qyRecUpdt.USIE
@@ -901,39 +902,31 @@ Sub DlgSUpdt
 
 	NoObjLen=0
 	
-	Dim sTempLen, sTempDiam, sTempHt, sTempUIE, sTempDIE as String
-	
 	Print "Showing update dialog for " + sPip
 	Dialog   
 	Title "Update Segment Attributes" Position 250,100 'Calling ChkExObj
 	Control StaticText		ID 8500	Position 10,7			Width 120		Title sPip    
-	Control StaticText		ID 8500	Position 10,20		Width 60		Title "Link Type:"    
-	Control EditText		ID 8490	Position 75,20		Width 60		Value sLTyp		into sLTyp
-	Control StaticText		ID 8480	Position 10,30		Width 60		Title "Flow Type:"    
-	Control EditText		ID 8470	Position 75,30		Width 60		Value sFtyp		into sFtyp
-	Control StaticText		ID 8462	Position 10,40		Width 60		Title "Length (ft):"    
-	Control EditText		ID 8461	Position 75,40		Width 60		Value fLen	into sTempLen
-	Control StaticText		ID 8460	Position 10,50		Width 60		Title "Diameter (in):"    
-	Control EditText		ID 8450	Position 75,50		Width 60		Value fDiam	into sTempDiam
-	Control StaticText		ID 8440	Position 10,60		Width 60		Title "Height (in):"    
-	Control EditText		ID 8430	Position 75,60		Width 60		Value fHt		into sTempHt
-	Control StaticText		ID 8420	Position 10,70		Width 60		Title "Shape:"    
+	Control StaticText		ID 8500	Position 10,20		Width 60		Title "LINK TYPE:"    
+	Control EditText		ID 8490	Position 75,20		Width 60		Value "C"		into sLTyp
+	Control StaticText		ID 8480	Position 10,30		Width 60		Title "FLOW TYPE:"    
+	Control EditText		ID 8470	Position 75,30		Width 60		Value "C"		into sFtyp
+	Control StaticText		ID 8462	Position 10,40		Width 60		Title "LENGTH (ft):"    
+	Control EditText		ID 8461	Position 75,40		Width 60		Value fLen	into fLen
+	Control StaticText		ID 8460	Position 10,50		Width 60		Title "DIAMETER (in):"    
+	Control EditText		ID 8450	Position 75,50		Width 60		Value fDiam	into fDiam
+	Control StaticText		ID 8440	Position 10,60		Width 60		Title "HEIGHT (in):"    
+	Control EditText		ID 8430	Position 75,60		Width 60		Value fHt		into fHt
+	Control StaticText		ID 8420	Position 10,70		Width 60		Title "SHAPE:"    
 	Control EditText		ID 8410	Position 75,70		Width 60		Value sShp	into sShp
-	Control StaticText		ID 8400	Position 10,80		Width 60		Title "Material:"		    
+	Control StaticText		ID 8400	Position 10,80		Width 60		Title "MATERIAL:"		    
 	Control EditText		ID 8390	Position 75,80		Width 60		Value sMat	into sMat
-	Control StaticText		ID 8380	Position 10,90		Width 60		Title "Upstream IE (ft):"    
-	Control EditText		ID 8370	Position 75,90		Width 60		Value fUIE	into sTempUIE
-	Control StaticText		ID 8360	Position 10,100		Width 60		Title "Downstream IE (ft):"    
-	Control EditText		ID 8350	Position 75,100		Width 60		Value fDIE	into sTempDIE
+	Control StaticText		ID 8380	Position 10,90		Width 60		Title "USIE (ft):"    
+	Control EditText		ID 8370	Position 75,90		Width 60		Value fUIE	into fUIE
+	Control StaticText		ID 8360	Position 10,100		Width 60		Title "DSIE (ft):"    
+	Control EditText		ID 8350	Position 75,100		Width 60		Value fDIE	into fDIE
 	Control Checkbox  		ID 8349	Position 10,115		Width 120		Title "Update Attributes Only"	Value NoObjLen    
 	Control OKButton		ID 8340	Position 10,135		Width 45		Title "OK"			Calling OkUpdt   
-	Control CancelButton	ID 8330	Position 60,135 		Width 45		Title "Cancel"	Calling CancelUpdt
-	
-	fLen = Val(sTempLen)
-	fDiam = Val(sTempDiam)
-	fHt = Val(sTempHt)
-	fUIE = Val(sTempUIE)
-	fDIE = Val(sTempDIE)
+	Control CancelButton	ID 8330	Position 60,135 		Width 45		Title "Cancel"	'Calling EndHandler
 
 End Sub
 '--------------------------------------------------------
@@ -981,20 +974,13 @@ Call PipAttribs
 	upFTyp = ReadControlValue(8470)
 	upShp = ReadControlValue(8410)
 	upMAT = ReadControlValue(8390)
-	upUIE = Val(ReadControlValue(8370))
-	upDIE = Val(ReadControlValue(8350))
-	upDia = Val(ReadControlValue(8450))
-	upHT = Val(ReadControlValue(8430))
-	'if ReadControlValue(8430) = "" Then		
-	'	upHT = 0
-	'	ReadControlValue(8430) = 0
-	'	Print "Replacing null height with 0"
-	'Else
-	'	
-	'End If
-
-	upLEN = Val(ReadControlValue(8461))
-			
+	upUIE = ReadControlValue(8370)
+	upDIE = ReadControlValue(8350)
+	upDia = ReadControlValue(8450)
+	upHT = ReadControlValue(8430)
+	upLEN = ReadControlValue(8461)
+	
+		
 	IF ABS(upLEN-nwLEN)>1 THEN iUpdt = iUpdt + 1 END IF
 	IF upLTYP<>nwLTYP THEN iUpdt = iUpdt + 1 END IF
 	IF upFTYP<>nwFTYP THEN iUpdt = iUpdt + 1 END IF
@@ -1045,38 +1031,33 @@ Call PipAttribs
 		End If
 		Update qyUpdt set obj = iObj 
 		Select * from alt_links where AltLinkID = maxlinkID +1 into qyUpdt noselect
-
 		Goto DoUpdt
 
 	End Case
 
 DoUpdt:
-	Update qyUpdt set 
-		LinkType = uCase$(upLTyp),	
-		PipeShape = uCase$(upSHP),
-		Material = uCase$(upMAT),	
-		USIE = upUIE,	
-		DSIE = upDIE,	
-		DiamWidth = upDIA,	
-		Height = upHT	
-	Print "Setting updated attributes"
-	IF NoObjLen THEN
-		Update qyUpdt set Length = upLEN
-	ELSE
-		Update qyUpdt set Length = round(objectlen(obj,"ft"),0.1)	
-	END IF
-		
+		Update qyUpdt set 
+			LinkType = uCase$(upLTyp),	
+			PipeShape = uCase$(upSHP),
+			Material = uCase$(upMAT),	
+			USIE = upUIE,	
+			DSIE = upDIE,	
+			DiamWidth = upDIA,	
+			Height = upHT	
+
+		IF NoObjLen THEN
+			Update qyUpdt set Length = upLEN
+		ELSE
+			Update qyUpdt set Length = round(objectlen(obj,"ft"),0.1)	
+		END IF
+
 	Call FixLgdTheme
 	Close table qyRecUpdt
-	Exit Sub
+Exit Sub
 skipOKUpdt:
 	Call DebugNote("OKUpdt Error: " & Err() & " " & Error$() )
-	Exit Sub
+	Resume Next
 
-End Sub
-'--------------------------------------------------------
-Sub CancelUpdt
-	Print "Canceling update"
 End Sub
 '--------------------------------------------------------
 Sub DoPipLen
@@ -1257,8 +1238,8 @@ OnError goto SkipDelOp
 
 	IF DelCase = "" THEN 
 
-		Print "Invalid selection...." + CHR$(10)+
-				"Please select a link or node!"
+		Print "INVALID SELECTION...." + CHR$(10)+
+				"PLEASE MAKE ANOTHER SELECTION!"
 		Exit Sub
 	END IF
 
@@ -1378,7 +1359,9 @@ Do Case DelCase
 			Close Table QyApp2Alt
 			Exit Sub
 		END IF
-						
+				
+		Close Table LinksToDelete
+		Select MdlLinkID, UsNode, DsNode from selection into QyApp2Alt
 		Insert into Alt_links(col1, col2, UsNode, DsNode, Operation) select MaxLinkID+1, LinkID, UsNode, DsNode, "DEL" from QyApp2Alt	
 		
 '	Case DelMdlSsc
@@ -1471,8 +1454,8 @@ RUN MENU COMMAND 1701
 
 exit sub
 SkipDelOp:
-	Call Debugnote("Delete pipe error: " + Err() & " " & Error$())
-	exit sub
+	Call Debugnote(Err() & " " & Error$())
+	Resume Next
 
 End Sub
 '--------------------------------------------------------
