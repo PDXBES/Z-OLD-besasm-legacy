@@ -3,7 +3,7 @@
   <ProgramSettings>
     <AlternativeTemplate>\\Cassio\Modeling\Model_Programs\bin\AlternativesToolkit\AlternativeTemplate\</AlternativeTemplate>
     <UpdateVersionPatchMBX>AlternativeProcessor\UpdateVersion.MBX</UpdateVersionPatchMBX>
-    <FocusAreasTable>R:\41800023-1 BES_DataManagement\Data\Original_Client_Data\Master_Focus_Areas.tab</FocusAreasTable>
+    <FocusAreasTable>\\cassio\systems_planning\8063_CombinedFacPlan\Models\Alts\Focus_Areas\MapInfo\Tab\Master_Current\Master_Focus_Areas.tab</FocusAreasTable>
   </ProgramSettings>
   <BaseModelComponents>
     <BaseFile>Model.ini</BaseFile>
@@ -216,5 +216,19 @@
         <CommandID>10000</CommandID>
       </Function>
     </Library>
+    <Library>
+      <LibraryName>UpdateFocusAreas</LibraryName>
+      <Location>%Application%\AlternativeProcessor\UpdateFocusAreas.MBX</Location>
+      <ExecGroup>UpdateFocusAreas</ExecGroup>      
+      <GlobalVariable Name="gAlternativePath" Value="" RelativeTo="" />
+      <GlobalVariable Name="gIncludeLinksAndNodes" Value="" RelativeTo="" />
+      <GlobalVariable Name="gIncludeCatchments" Value="" RelativeTo="" />
+      <GlobalVariable Name="gIncludeICTargets" Value="" RelativeTo="" />
+      <GlobalVariable Name="gFocusAreas" Value="" RelativeTo="" />
+      <Function>
+        <Name>UpdateFocusAreas</Name>
+        <CommandID>10000</CommandID>
+      </Function>
+    </Library> 
   </MapBasicFramework>
 </AltEngineConfiguration>
