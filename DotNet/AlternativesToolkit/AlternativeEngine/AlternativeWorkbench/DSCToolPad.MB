@@ -97,6 +97,13 @@ sub DSCToolPad
 	Open Table gTempDir & "mdl_links_applied.tab"
 	Open Table gTempDir & "alt_links_applied.tab"
 	
+	'Work-around: alt_links should have a PipeFlowType instead of LinkType. However, refactoring for this would be expensive. Therefore this code
+	'simply adds the PipeFlowType field and uses data from LinkType as the source.
+	Alter table alt_links_applied (add PipeFlowType char(2))
+	Update alt_links_applied set pipeflowtype = linktype
+	Commit Table alt_links_applied
+
+	
 	Run Application gDSCEditingTemplate
 	
 	Set distance units "ft"
@@ -332,7 +339,7 @@ sub PipeAttribs
 
 	exDSN= Selection.DSnode
 	exUSN= Selection.USnode
-	exLTP= Selection.LinkType
+	exLTP= Selection.PipeFlowType
 	exDIA= Selection.DiamWidth
 	exHGT= Selection.Height
 	exUIE= Selection.USIE
@@ -447,7 +454,7 @@ altPipCount=0
 	'and sets the following variables:	
 	'exLID =qySetPipeTo.linkID
 	'sSource="mdl"
-	'exLTYP=qySetPipeTo.LinkType
+	'exLTYP=qySetPipeTo.PipeFlowType
 	'LinkObj= qySetPipeTo.obj	
 	stubX = commandinfo(CMD_INFO_X)
 	stubY = commandinfo(CMD_INFO_Y)
@@ -473,28 +480,28 @@ altPipCount=0
 
 		IF sFlowTO = "toSAN" THEN
 			'CHECKING FOR NEAREST MDL SEGMENT TO STUB
-			Select * from mdl_links_applied where LinkType in("C","S","IS","IC") and  obj intersects stubPt into qyMdlPipeTo
+			Select * from mdl_links_applied where PipeFlowType in("C","S","IS","IC") and  obj intersects stubPt into qyMdlPipeTo
 				mdlPipCount=tableinfo(qyMdlPipeTo,8)
 	
 			'CHECKING FOR NEAREST ALT SEGMENT TO STUB
-			Select * from alt_links_applied where LinkType in("C","S","IS","IC") and obj intersects stubPt into qyAltPipeTo
+			Select * from alt_links_applied where PipeFlowType in("C","S","IS","IC") and obj intersects stubPt into qyAltPipeTo
 				altPipCount = tableinfo(qyAltPipeTo,8)
 		END IF
 
 		IF sFlowTO = "toSTORM" THEN
 			'CHECKING FOR NEAREST MDL SEGMENT TO STUB
-			Select * from mdl_links_applied where LinkType in("D","C") and  obj intersects stubPt into qyMdlPipeTo
+			Select * from mdl_links_applied where PipeFlowType in("D","C") and  obj intersects stubPt into qyMdlPipeTo
 				mdlPipCount=tableinfo(qyMdlPipeTo,8)
 	
 			'CHECKING FOR NEAREST ALT SEGMENT TO STUB
-			Select * from alt_links_applied where LinkType in("D","C") and obj intersects stubPt into qyAltPipeTo
+			Select * from alt_links_applied where PipeFlowType in("D","C") and obj intersects stubPt into qyAltPipeTo
 				altPipCount = tableinfo(qyAltPipeTo,8)
 		END IF
 		IF mdlPipCount>0 and altPIpCount=0 THEN
 			Select * from qyMdlPipeTo where rowid=1 into qySetPipeTo
 			exLID =qySetPipeTo.linkID
 			sSource="mdl"
-			exLTYP=qySetPipeTo.LinkType
+			exLTYP=qySetPipeTo.PipeFlowType
 			LinkObj= qySetPipeTo.obj
 
 			Close table qyMdlPipeTo
@@ -509,7 +516,7 @@ altPipCount=0
 			Select * from qyAltPipeTo where rowid=1 into qySetPipeTo
 			exLID = qySetPipeTo.AltlinkID
 			sSource="alt"
-			exLTYP=qySetPipeTo.LinkType
+			exLTYP=qySetPipeTo.PipeFlowType
 			LinkObj= qySetPipeTo.obj
 
 			Close table qyAltPipeTo
@@ -524,7 +531,7 @@ altPipCount=0
 			Select * from qyMdlPipeTo where rowid=1 into qySetPipeTo
 			exLID =qySetPipeTo.linkID
 			sSource="mdl"
-			exLTYP=qySetPipeTo.LinkType
+			exLTYP=qySetPipeTo.PipeFlowType
 			LinkObj= qySetPipeTo.obj
 
 			Close table qyMdlPipeTo
