@@ -1,8 +1,9 @@
 <?xml version="1.0" standalone="yes"?>
 <AltEngineConfiguration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="SystemsAnalysis.ModelConstruction.AlternativesToolkit.EngineConfiguration">
   <ProgramSettings>
-    <AlternativeTemplate>\\Cassio\Modeling\Model_Programs\Emgaats\CodeV2.2\Alternatives_Toolkit\AlternativeTemplate\</AlternativeTemplate>
+    <AlternativeTemplate>C:\Data\Dev\BESASM\legacy\DotNet\AlternativesToolkit\AlternativeTemplate</AlternativeTemplate>
     <UpdateVersionPatchMBX>MBProcessor\UpdateVersion.MBX</UpdateVersionPatchMBX>
+    <FocusAreasTable>R:\41800023-1 BES_DataManagement\Data\Original_Client_Data\Master_Focus_Areas.tab</FocusAreasTable>
   </ProgramSettings>
   <BaseModelComponents>
     <BaseFile>Model.ini</BaseFile>
@@ -35,7 +36,7 @@
   <MapBasicFramework>
     <Library>
       <LibraryName>LinkProcessor</LibraryName>
-      <Location>W:\Model_Programs\Emgaats\CodeV2.2\Alternatives_Toolkit\MBEngine\exe\LinkProcessor.MBX</Location>
+      <Location>C:\Data\Dev\BESASM\legacy\DotNet\AlternativesToolkit\AlternativeEngine\AlternativeProcessor\LinkProcessor.MBX</Location>
       <ExecGroup>Apply</ExecGroup>
       <GlobalVariable Name="gLinkAlternative" Value="alt_links_ac.tab" RelativeTo="Alternative" />
       <GlobalVariable Name="gErrorCheckPath" Value="error_check" RelativeTo="Alternative" />
@@ -66,7 +67,7 @@
     </Library>
     <Library>
       <LibraryName>SpecialProcessor</LibraryName>
-      <Location>W:\Model_Programs\Emgaats\CodeV2.2\Alternatives_Toolkit\MBEngine\exe\SpecialProcessor.MBX</Location>
+      <Location>C:\Data\Dev\BESASM\legacy\DotNet\AlternativesToolkit\AlternativeEngine\AlternativeProcessor\SpecialProcessor.MBX</Location>
       <ExecGroup>Apply</ExecGroup>
       <GlobalVariable Name="gLinkAlternative" Value="alt_links_ac.tab" RelativeTo="Alternative" />
       <GlobalVariable Name="gAltSpecLinks" Value="alt_speclinks_ac.tab" RelativeTo="Alternative" />
@@ -99,7 +100,7 @@
     </Library>
     <Library>
       <LibraryName>NodeProcessor</LibraryName>
-      <Location>W:\Model_Programs\Emgaats\CodeV2.2\Alternatives_Toolkit\MBEngine\exe\NodeProcessor.MBX</Location>
+      <Location>C:\Data\Dev\BESASM\legacy\DotNet\AlternativesToolkit\AlternativeEngine\AlternativeProcessor\NodeProcessor.MBX</Location>
       <ExecGroup>Apply</ExecGroup>
       <GlobalVariable Name="gOutputModelPath" Value="" RelativeTo="OutputModel" />
       <GlobalVariable Name="gElevField" Value="GrndElev" />
@@ -120,7 +121,7 @@
     </Library>
     <Library>
       <LibraryName>DSCProcessor</LibraryName>
-      <Location>W:\Model_Programs\Emgaats\CodeV2.2\Alternatives_Toolkit\MBEngine\exe\DSCProcessor.MBX</Location>
+      <Location>C:\Data\Dev\BESASM\legacy\DotNet\AlternativesToolkit\AlternativeEngine\AlternativeProcessor\DSCProcessor.MBX</Location>
       <ExecGroup>Apply</ExecGroup>
       <GlobalVariable Name="gLinkAlternative" Value="alt_links_ac.tab" RelativeTo="Alternative" />
       <GlobalVariable Name="gDSCAlternative" Value="alt_dsc_ac.tab" RelativeTo="Alternative" />
@@ -138,7 +139,7 @@
     </Library>
     <Library>
       <LibraryName>SSCProcessor</LibraryName>
-      <Location>W:\Model_Programs\Emgaats\CodeV2.2\Alternatives_Toolkit\MBEngine\exe\SSCProcessor.MBX</Location>
+      <Location>C:\Data\Dev\BESASM\legacy\DotNet\AlternativesToolkit\AlternativeEngine\AlternativeProcessor\SSCProcessor.MBX</Location>
       <ExecGroup>Apply</ExecGroup>
       <GlobalVariable Name="gLinkAlternative" Value="alt_links_ac.tab" RelativeTo="Alternative" />
       <GlobalVariable Name="gSSCAlternative" Value="alt_ssc_ac.tab" RelativeTo="Alternative" />
@@ -157,7 +158,7 @@
     </Library>
     <Library>
       <LibraryName>ICProcessor</LibraryName>
-      <Location>W:\Model_Programs\Emgaats\CodeV2.2\Alternatives_Toolkit\MBEngine\exe\ICProcessor.MBX</Location>
+      <Location>C:\Data\Dev\BESASM\legacy\DotNet\AlternativesToolkit\AlternativeEngine\AlternativeProcessor\ICProcessor.MBX</Location>
       <ExecGroup>Apply</ExecGroup>
       <GlobalVariable Name="gLinkAlternative" Value="alt_links_ac.tab" RelativeTo="Alternative" />
       <GlobalVariable Name="gAltRoofTargets" Value="alt_rooftargets_ac.tab" RelativeTo="Alternative" />
@@ -178,17 +179,17 @@
     </Library>
     <Library>
       <LibraryName>AlternativeWorkbench</LibraryName>
-      <Location>W:\Model_Programs\Emgaats\CodeV2.2\Alternatives_Toolkit\MBWorkbench\exe\AlternativeWorkbench.MBX</Location>
+      <Location>C:\Data\Dev\BESASM\legacy\DotNet\AlternativesToolkit\AlternativeEngine\AlternativeWorkbench\AlternativeWorkbench.MBX</Location>
       <ExecGroup>Edit</ExecGroup>
       <GlobalVariable Name="gBaseModelPath" Value="" RelativeTo="BaseModel" />
       <GlobalVariable Name="gAlternativePath" Value="" RelativeTo="Alternative" />
       <GlobalVariable Name="gTempDir" Value="AltTemp\" RelativeTo="SystemTemp" />
-      <GlobalVariable Name="gIconFile" Value="W:\Model_Programs\Emgaats\CodeV2.2\Alternatives_Toolkit\MBWorkbench\exe\CustomIcons.dll" RelativeTo="" />
-      <GlobalVariable Name="gLinkEditingTemplate" Value="W:\Model_Programs\Emgaats\CodeV2.2\Alternatives_Toolkit\MBWorkbench\Mp_LINKpad.WOR" RelativeTo="" />
-      <GlobalVariable Name="gDSCEditingTemplate" Value="W:\Model_Programs\Emgaats\CodeV2.2\Alternatives_Toolkit\MBWorkbench\Mp_DSCpad.WOR" RelativeTo="" />
-      <GlobalVariable Name="gSSCEditingTemplate" Value="W:\Model_Programs\Emgaats\CodeV2.2\Alternatives_Toolkit\MBWorkbench\Mp_SSCpad.WOR" RelativeTo="" />
-      <GlobalVariable Name="gSpecLinkEditingTemplate" Value="W:\Model_Programs\Emgaats\CodeV2.2\Alternatives_Toolkit\MBWorkbench\Mp_SPLpad.WOR" RelativeTo="" />
-      <GlobalVariable Name="gICEditingTemplate" Value="W:\Model_Programs\Emgaats\CodeV2.2\Alternatives_Toolkit\MBWorkbench\Mp_ICpad.WOR" RelativeTo="" />
+      <GlobalVariable Name="gIconFile" Value="C:\Data\Dev\BESASM\legacy\DotNet\AlternativesToolkit\AlternativeEngine\AlternativeWorkbench\CustomIcons.dll" RelativeTo="" />
+      <GlobalVariable Name="gLinkEditingTemplate" Value="C:\Data\Dev\BESASM\legacy\DotNet\AlternativesToolkit\AlternativeEngine\AlternativeWorkbench\Mp_LINKpad.WOR" RelativeTo="" />
+      <GlobalVariable Name="gDSCEditingTemplate" Value="C:\Data\Dev\BESASM\legacy\DotNet\AlternativesToolkit\AlternativeEngine\AlternativeWorkbench\Mp_DSCpad.WOR" RelativeTo="" />
+      <GlobalVariable Name="gSSCEditingTemplate" Value="C:\Data\Dev\BESASM\legacy\DotNet\AlternativesToolkit\AlternativeEngine\AlternativeWorkbench\Mp_SSCpad.WOR" RelativeTo="" />
+      <GlobalVariable Name="gSpecLinkEditingTemplate" Value="C:\Data\Dev\BESASM\legacy\DotNet\AlternativesToolkit\AlternativeEngine\AlternativeWorkbench\Mp_SPLpad.WOR" RelativeTo="" />
+      <GlobalVariable Name="gICEditingTemplate" Value="C:\Data\Dev\BESASM\legacy\DotNet\AlternativesToolkit\AlternativeEngine\AlternativeWorkbench\Mp_ICpad.WOR" RelativeTo="" />
       <GlobalVariable Name="gDefaultNodeSuffix" Value="" RelativeTo="AlternativeConfiguration" />
       <Function>
         <Name>SetupAltWorkbench</Name>
@@ -197,7 +198,7 @@
     </Library>
     <Library>
       <LibraryName>AutoConveyance</LibraryName>
-      <Location>W:\Model_Programs\Emgaats\CodeV2.2\Alternatives_Toolkit\MBEngine\exe\AutoConveyance.MBX</Location>
+      <Location>C:\Data\Dev\BESASM\legacy\DotNet\AlternativesToolkit\AlternativeEngine\AlternativeProcessor\AutoConveyance.MBX</Location>
       <ExecGroup>AutoConveyance</ExecGroup>
       <GlobalVariable Name="gMdlLinkTable" Value="links\mdl_links_ac.tab" RelativeTo="BaseModel" />
       <GlobalVariable Name="gAltLinkTable" Value="alt_links_ac.tab" RelativeTo="Alternative" />
@@ -206,5 +207,31 @@
         <CommandID>10000</CommandID>
       </Function>
     </Library>
+    <Library>
+      <LibraryName>Aggregator</LibraryName>
+      <Location>AlternativeProcessor\Aggregator.MBX</Location>
+      <ExecGroup>Aggregate</ExecGroup>      
+      <GlobalVariable Name="gInputAlternativePath" Value="" RelativeTo="Alternative" />
+      <GlobalVariable Name="gOutputAlternativePath" Value="alternatives\aggregated" RelativeTo="BaseModel" />
+      <GlobalVariable Name="gFocusArea" Value="" RelativeTo="" />
+      <Function>
+        <Name>Aggregate</Name>
+        <CommandID>10000</CommandID>
+      </Function>
+    </Library>
+    <Library>
+      <LibraryName>UpdateFocusAreas</LibraryName>
+      <Location>AlternativeProcessor\UpdateFocusAreas.MBX</Location>
+      <ExecGroup>UpdateFocusAreas</ExecGroup>      
+      <GlobalVariable Name="gAlternativePath" Value="" RelativeTo="" />
+      <GlobalVariable Name="gIncludeLinksAndNodes" Value="" RelativeTo="" />
+      <GlobalVariable Name="gIncludeCatchments" Value="" RelativeTo="" />
+      <GlobalVariable Name="gIncludeICTargets" Value="" RelativeTo="" />
+      <GlobalVariable Name="gFocusAreas" Value="" RelativeTo="" />
+      <Function>
+        <Name>UpdateFocusAreas</Name>
+        <CommandID>10000</CommandID>
+      </Function>
+    </Library>    
   </MapBasicFramework>
 </AltEngineConfiguration>

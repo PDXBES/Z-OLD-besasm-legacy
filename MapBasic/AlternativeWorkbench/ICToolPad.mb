@@ -5,7 +5,7 @@ INCLUDE "MapBasic.def"
 INCLUDE "Menu.def"
 INCLUDE "Icons.def"
 INCLUDE "AlternativeWorkbench.def"
-INCLUDE "..\common\trunk\inc\EMGCoordSys.def"
+INCLUDE "..\common\inc\EMGCoordSys.def"
 
 '---------------------------------------------------------
 DECLARE SUB ToggleBuildModelIC
