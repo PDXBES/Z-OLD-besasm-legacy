@@ -1,0 +1,33 @@
+'
+'	============ EMGAATS Workbench =================
+'
+'	Copyright (c) 2001, 2003  City of Portland, OR Bureau of Environmental Services and CH2M HILL, Inc.
+'
+'	3apr03	Cautley
+'		take out any call to 'note' function.
+'
+include "Mapbasic.def"
+include "..\inc\EMGEnd.def"
+include "..\..\common\inc\EMGLogger.def"
+
+
+'****************************************************************************
+' Sub procedure: EndEMGAATS
+'
+'	Do all final housekeeping and quit
+'****************************************************************************
+Sub EndEMGAATS
+
+  OnError Goto HandleError
+	close all
+  End Program
+
+  Exit Sub
+
+HandleError:
+  gstrCurrentMessage =  "EndEMGAATS: " + Error$()
+  gstrReturnStatus = "ERROR"
+  call loggit(gstrCurrentMessage)
+  Resume Next
+
+End Sub

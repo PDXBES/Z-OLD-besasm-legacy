@@ -1,0 +1,864 @@
+PROJ = 32XTRAN5
+DEBUG = 1
+PROGTYPE = 0
+CALLER = 
+ARGS = 
+DLLS = 
+D_RCDEFINES = -d_DEBUG
+R_RCDEFINES = -dNDEBUG
+ORIGIN = F32VWB
+ORIGIN_VER = 1.00
+PROJPATH = D:\APP_DEV\MF32\PDXSWMM\32XTRAN5\
+KNARF = 
+F32 = fl32
+F32FLAGS_D_DEXE = /FR /Zi 
+F32FLAGS_R_DEXE = /Ox /D "NDEBUG" 
+F32FLAGS_D_LIB = /Zi
+F32FLAGS_R_LIB = /Ox /DNDEBUG
+L32FLAGS_D_DEXE = -machine:i386 -base:0x00010000 -subsystem:console -entry:mainCRTStartup -debug:full -debugtype:cv4
+L32FLAGS_R_DEXE = -machine:i386 -base:0x00010000 -subsystem:console -entry:mainCRTStartup
+L32FLAGS_D_DEXEUB = -machine:i386 -base:0x00010000 -subsystem:console -entry:mainCRTStartup -debug:full -debugtype:cv4
+L32FLAGS_R_DEXEUB = -machine:i386 -base:0x00010000 -subsystem:console -entry:mainCRTStartup
+LIBS_D_DEXE = libf.lib libc.lib kernel32.lib ntdll.lib
+LIBS_R_DEXE = libf.lib libc.lib kernel32.lib ntdll.lib
+LIBS_D_BEXE = libf.lib libc.lib kernel32.lib ntdll.lib
+LIBS_R_BEXE = libf.lib libc.lib kernel32.lib ntdll.lib
+RUNFLAGS = 
+OBJS_EXT = 
+LIBS_EXT = 
+!if "$(DEBUG)" == "1"
+F32FLAGS = $(F32FLAGS_D_DEXE)
+L32FLAGS = $(L32FLAGS_D_DEXE)
+LIBS = $(LIBS_D_DEXE)
+!else
+F32FLAGS = $(F32FLAGS_R_DEXE)
+L32FLAGS = $(L32FLAGS_R_DEXE)
+LIBS = $(LIBS_R_DEXE)
+!endif
+SBRS = BLKDATA.SBR \
+		BLKMN.SBR \
+		BOUNDPX.SBR \
+		CDFREE.SBR \
+		CDSUB.SBR \
+		CKFILEPX.SBR \
+		CURVE.SBR \
+		DATED.SBR \
+		DEPTHX.SBR \
+		ENDOFF.SBR \
+		ERROR.SBR \
+		EXTRANPX.SBR \
+		FLCOND.SBR \
+		FLDETM.SBR \
+		FRECAL.SBR \
+		FRFLOW.SBR \
+		GETCUR.SBR \
+		GETDEP.SBR \
+		GETSUM.SBR \
+		HEAD.SBR \
+		HTIDESPX.SBR \
+		HYDRAD.SBR \
+		IERROR.SBR \
+		INDAT11P.SBR \
+		INDAT12P.SBR \
+		INDAT2PX.SBR \
+		INDAT3PX.SBR \
+		INFACE.SBR \
+		INFLOWPX.SBR \
+		JDATE.SBR \
+		LEAPIN.SBR \
+		LEAPING.SBR \
+		MAINEXT.SBR \
+		NDATE.SBR \
+		NTIME.SBR \
+		OUTPUT.SBR \
+		PINE.SBR \
+		POWER.SBR \
+		PPLOT.SBR \
+		RGATE.SBR \
+		RGFREE.SBR \
+		RGINIT.SBR \
+		RGINPT.SBR \
+		RGOPEN.SBR \
+		RGOUT.SBR \
+		RGSECT.SBR \
+		RGSUB.SBR \
+		SCALE.SBR \
+		STIME.SBR \
+		STRIP.SBR \
+		SUBCAL.SBR \
+		SUBFLW.SBR \
+		SYINPT.SBR \
+		SYPHON.SBR \
+		TBLUP.SBR \
+		TIDCF.SBR \
+		TRANSXPX.SBR \
+		XROUTE.SBR \
+		YROUTE.SBR \
+		ZROUTE.SBR
+
+
+BLKDATA_DEP = d:\app_dev\mf32\pdxswmm\32xtran5\tapes.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\bd.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\surchg.inc
+
+
+BLKMN_DEP = d:\app_dev\mf32\pdxswmm\32xtran5\tapes.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\inter.inc
+
+
+BOUNDPX_DEP = d:\app_dev\mf32\pdxswmm\32xtran5\tapes.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\bd.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\contr.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\junc.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\pipe.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\store.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\orf.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\weir.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\pump.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\bnd.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\tide.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\voldat.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\surchg.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\rdgate.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\lrg.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\ringat.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\siphon.inc
+
+
+CDFREE_DEP = d:\app_dev\mf32\pdxswmm\32xtran5\tapes.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\rdgate.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\rgflow.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\discof.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\lrg.inc
+
+
+CDSUB_DEP = d:\app_dev\mf32\pdxswmm\32xtran5\tapes.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\rdgate.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\rgflow.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\discof.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\lrg.inc
+
+
+CKFILEPX_DEP = d:\app_dev\mf32\pdxswmm\32xtran5\tapes.inc
+
+
+CURVE_DEP = d:\app_dev\mf32\pdxswmm\32xtran5\lab.inc
+
+
+DATED_DEP = d:\app_dev\mf32\pdxswmm\32xtran5\stimer.inc
+
+
+DEPTHX_DEP = d:\app_dev\mf32\pdxswmm\32xtran5\tapes.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\bd.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\contr.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\pipe.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\flodat.inc
+
+
+ENDOFF_DEP = d:\app_dev\mf32\pdxswmm\32xtran5\tapes.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\contr.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\rdgate.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\lrg.inc
+
+
+ERROR_DEP = d:\app_dev\mf32\pdxswmm\32xtran5\tapes.inc
+
+
+EXTRANPX_DEP = d:\app_dev\mf32\pdxswmm\32xtran5\tapes.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\inter.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\stimer.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\bnd.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\bd.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\contr.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\junc.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\orf.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\pipe.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\exstat.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\surchg.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\tide.inc
+
+
+FLCOND_DEP = d:\app_dev\mf32\pdxswmm\32xtran5\tapes.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\rdgate.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\rgintk.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\ringat.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\rgflow.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\const.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\pipe.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\lrg.inc
+
+
+FLDETM_DEP = d:\app_dev\mf32\pdxswmm\32xtran5\tapes.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\rdgate.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\rgflow.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\const.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\flcomn.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\ringat.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\lrg.inc
+
+
+FRECAL_DEP = d:\app_dev\mf32\pdxswmm\32xtran5\tapes.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\rdgate.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\const.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\rgflow.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\flcomn.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\lrg.inc
+
+
+FRFLOW_DEP = d:\app_dev\mf32\pdxswmm\32xtran5\tapes.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\rdgate.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\const.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\rgflow.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\flcomn.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\discof.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\lrg.inc
+
+
+GETCUR_DEP = d:\app_dev\mf32\pdxswmm\32xtran5\tapes.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\flodat.inc
+
+
+GETDEP_DEP = 
+
+GETSUM_DEP = 
+
+HEAD_DEP = d:\app_dev\mf32\pdxswmm\32xtran5\tapes.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\bd.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\contr.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\junc.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\pipe.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\exstat.inc
+
+
+HTIDESPX_DEP = d:\app_dev\mf32\pdxswmm\32xtran5\tapes.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\tide.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\contr.inc
+
+
+HYDRAD_DEP = d:\app_dev\mf32\pdxswmm\32xtran5\tapes.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\bd.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\pipe.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\junc.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\contr.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\flodat.inc
+
+
+IERROR_DEP = d:\app_dev\mf32\pdxswmm\32xtran5\tapes.inc
+
+
+INDAT11P_DEP = d:\app_dev\mf32\pdxswmm\32xtran5\tapes.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\bd.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\contr.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\inter.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\junc.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\pipe.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\store.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\orf.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\weir.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\pump.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\bnd.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\out.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\tide.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\hyflow.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\surchg.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\flodat.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\pdxtrn.inc
+
+
+INDAT12P_DEP = d:\app_dev\mf32\pdxswmm\32xtran5\tapes.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\bd.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\contr.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\inter.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\junc.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\pipe.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\store.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\orf.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\weir.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\pump.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\bnd.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\out.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\tide.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\hyflow.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\surchg.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\flodat.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\pdxtrn.inc
+
+
+INDAT2PX_DEP = d:\app_dev\mf32\pdxswmm\32xtran5\tapes.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\bd.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\contr.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\junc.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\pipe.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\store.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\orf.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\weir.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\pump.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\bnd.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\out.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\tide.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\hyflow.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\surchg.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\voldat.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\pdxtrn.inc
+
+
+INDAT3PX_DEP = d:\app_dev\mf32\pdxswmm\32xtran5\tapes.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\bd.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\stimer.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\inter.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\contr.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\junc.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\pipe.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\store.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\orf.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\weir.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\pump.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\bnd.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\out.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\tide.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\hyflow.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\surchg.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\pdxtrn.inc
+
+
+INFACE_DEP = d:\app_dev\mf32\pdxswmm\32xtran5\tapes.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\inter.inc
+
+
+INFLOWPX_DEP = d:\app_dev\mf32\pdxswmm\32xtran5\tapes.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\inter.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\stimer.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\contr.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\junc.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\out.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\orf.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\pipe.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\hyflow.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\rdgate.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\ringat.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\rgflow.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\lrg.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\pdxtrn.inc
+
+
+JDATE_DEP = 
+
+LEAPIN_DEP = d:\app_dev\mf32\pdxswmm\32xtran5\tapes.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\contr.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\junc.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\pipe.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\leapw.inc
+
+
+LEAPING_DEP = d:\app_dev\mf32\pdxswmm\32xtran5\tapes.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\stimer.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\contr.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\junc.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\pipe.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\leapw.inc
+
+
+MAINEXT_DEP = d:\app_dev\mf32\pdxswmm\32xtran5\tapes.inc
+
+
+NDATE_DEP = d:\app_dev\mf32\pdxswmm\32xtran5\stimer.inc
+
+
+NTIME_DEP = d:\app_dev\mf32\pdxswmm\32xtran5\stimer.inc
+
+
+OUTPUT_DEP = d:\app_dev\mf32\pdxswmm\32xtran5\tapes.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\stimer.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\contr.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\junc.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\pipe.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\lab.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\store.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\out.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\exstat.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\rgprnt.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\lrg.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\pdxtrn.inc
+
+
+PINE_DEP = 
+
+POWER_DEP = 
+
+PPLOT_DEP = d:\app_dev\mf32\pdxswmm\32xtran5\tapes.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\pltary.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\contr.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\lab.inc
+
+
+RGATE_DEP = d:\app_dev\mf32\pdxswmm\32xtran5\tapes.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\rdgate.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\ringat.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\rgflow.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\lrg.inc
+
+
+RGFREE_DEP = d:\app_dev\mf32\pdxswmm\32xtran5\tapes.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\rdgate.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\ringat.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\rgintk.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\const.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\rgflow.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\flcomn.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\lrg.inc
+
+
+RGINIT_DEP = d:\app_dev\mf32\pdxswmm\32xtran5\tapes.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\contr.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\const.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\rdgate.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\ringat.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\rgintk.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\rgflow.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\lrg.inc
+
+
+RGINPT_DEP = d:\app_dev\mf32\pdxswmm\32xtran5\tapes.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\contr.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\rdgate.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\ringat.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\rgintk.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\rgflow.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\pipe.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\junc.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\lrg.inc
+
+
+RGOPEN_DEP = d:\app_dev\mf32\pdxswmm\32xtran5\tapes.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\ringat.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\rdgate.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\lrg.inc
+
+
+RGOUT_DEP = d:\app_dev\mf32\pdxswmm\32xtran5\tapes.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\lrg.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\rgprnt.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\contr.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\pipe.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\out.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\pdxtrn.inc
+
+
+RGSECT_DEP = d:\app_dev\mf32\pdxswmm\32xtran5\tapes.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\rdgate.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\rgintk.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\ringat.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\const.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\lrg.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\pipe.inc
+
+
+RGSUB_DEP = d:\app_dev\mf32\pdxswmm\32xtran5\tapes.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\rdgate.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\const.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\ringat.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\rgflow.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\flcomn.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\lrg.inc
+
+
+SCALE_DEP = d:\app_dev\mf32\pdxswmm\32xtran5\tapes.inc
+
+
+STIME_DEP = d:\app_dev\mf32\pdxswmm\32xtran5\stimer.inc
+
+
+STRIP_DEP = d:\app_dev\mf32\pdxswmm\32xtran5\tapes.inc
+
+
+SUBCAL_DEP = d:\app_dev\mf32\pdxswmm\32xtran5\tapes.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\rdgate.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\const.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\rgflow.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\flcomn.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\lrg.inc
+
+
+SUBFLW_DEP = d:\app_dev\mf32\pdxswmm\32xtran5\tapes.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\rdgate.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\const.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\rgflow.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\flcomn.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\discof.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\lrg.inc
+
+
+SYINPT_DEP = d:\app_dev\mf32\pdxswmm\32xtran5\tapes.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\contr.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\siphon.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\pipe.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\junc.inc
+
+
+SYPHON_DEP = d:\app_dev\mf32\pdxswmm\32xtran5\tapes.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\siphon.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\const.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\contr.inc
+
+
+TBLUP_DEP = d:\app_dev\mf32\pdxswmm\32xtran5\tapes.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\ringat.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\lrg.inc
+
+
+TIDCF_DEP = d:\app_dev\mf32\pdxswmm\32xtran5\tapes.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\contr.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\tide.inc
+
+
+TRANSXPX_DEP = d:\app_dev\mf32\pdxswmm\32xtran5\tapes.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\stimer.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\bd.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\bnd.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\hyflow.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\inter.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\contr.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\junc.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\pipe.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\tide.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\store.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\out.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\orf.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\exstat.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\surchg.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\pump.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\voldat.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\rgprnt.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\rdgate.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\ringat.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\rgflow.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\lrg.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\leapw.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\pdxtrn.inc
+
+
+XROUTE_DEP = d:\app_dev\mf32\pdxswmm\32xtran5\tapes.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\bd.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\bnd.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\hyflow.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\contr.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\junc.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\pipe.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\tide.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\store.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\out.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\exstat.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\surchg.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\pump.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\flodat.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\lrg.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\siphon.inc
+
+
+YROUTE_DEP = d:\app_dev\mf32\pdxswmm\32xtran5\tapes.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\bd.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\bnd.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\hyflow.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\contr.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\junc.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\pipe.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\tide.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\store.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\out.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\orf.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\exstat.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\surchg.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\pump.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\flodat.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\lrg.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\siphon.inc
+
+
+ZROUTE_DEP = d:\app_dev\mf32\pdxswmm\32xtran5\tapes.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\bd.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\bnd.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\hyflow.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\contr.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\junc.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\pipe.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\tide.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\store.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\out.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\orf.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\exstat.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\surchg.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\pump.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\flodat.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\lrg.inc \
+	d:\app_dev\mf32\pdxswmm\32xtran5\siphon.inc
+
+
+all:	$(PROJ).EXE $(PROJ).BSC
+
+BLKDATA.OBJ:	BLKDATA.FOR $(BLKDATA_DEP)
+	$(F32) $(F32FLAGS) /c BLKDATA.FOR
+
+BLKMN.OBJ:	BLKMN.FOR $(BLKMN_DEP)
+	$(F32) $(F32FLAGS) /c BLKMN.FOR
+
+BOUNDPX.OBJ:	BOUNDPX.FOR $(BOUNDPX_DEP)
+	$(F32) $(F32FLAGS) /c BOUNDPX.FOR
+
+CDFREE.OBJ:	CDFREE.FOR $(CDFREE_DEP)
+	$(F32) $(F32FLAGS) /c CDFREE.FOR
+
+CDSUB.OBJ:	CDSUB.FOR $(CDSUB_DEP)
+	$(F32) $(F32FLAGS) /c CDSUB.FOR
+
+CKFILEPX.OBJ:	CKFILEPX.FOR $(CKFILEPX_DEP)
+	$(F32) $(F32FLAGS) /c CKFILEPX.FOR
+
+CURVE.OBJ:	CURVE.FOR $(CURVE_DEP)
+	$(F32) $(F32FLAGS) /c CURVE.FOR
+
+DATED.OBJ:	DATED.FOR $(DATED_DEP)
+	$(F32) $(F32FLAGS) /c DATED.FOR
+
+DEPTHX.OBJ:	DEPTHX.FOR $(DEPTHX_DEP)
+	$(F32) $(F32FLAGS) /c DEPTHX.FOR
+
+ENDOFF.OBJ:	ENDOFF.FOR $(ENDOFF_DEP)
+	$(F32) $(F32FLAGS) /c ENDOFF.FOR
+
+ERROR.OBJ:	ERROR.FOR $(ERROR_DEP)
+	$(F32) $(F32FLAGS) /c ERROR.FOR
+
+EXTRANPX.OBJ:	EXTRANPX.FOR $(EXTRANPX_DEP)
+	$(F32) $(F32FLAGS) /c EXTRANPX.FOR
+
+FLCOND.OBJ:	FLCOND.FOR $(FLCOND_DEP)
+	$(F32) $(F32FLAGS) /c FLCOND.FOR
+
+FLDETM.OBJ:	FLDETM.FOR $(FLDETM_DEP)
+	$(F32) $(F32FLAGS) /c FLDETM.FOR
+
+FRECAL.OBJ:	FRECAL.FOR $(FRECAL_DEP)
+	$(F32) $(F32FLAGS) /c FRECAL.FOR
+
+FRFLOW.OBJ:	FRFLOW.FOR $(FRFLOW_DEP)
+	$(F32) $(F32FLAGS) /c FRFLOW.FOR
+
+GETCUR.OBJ:	GETCUR.FOR $(GETCUR_DEP)
+	$(F32) $(F32FLAGS) /c GETCUR.FOR
+
+GETDEP.OBJ:	GETDEP.FOR $(GETDEP_DEP)
+	$(F32) $(F32FLAGS) /c GETDEP.FOR
+
+GETSUM.OBJ:	GETSUM.FOR $(GETSUM_DEP)
+	$(F32) $(F32FLAGS) /c GETSUM.FOR
+
+HEAD.OBJ:	HEAD.FOR $(HEAD_DEP)
+	$(F32) $(F32FLAGS) /c HEAD.FOR
+
+HTIDESPX.OBJ:	HTIDESPX.FOR $(HTIDESPX_DEP)
+	$(F32) $(F32FLAGS) /c HTIDESPX.FOR
+
+HYDRAD.OBJ:	HYDRAD.FOR $(HYDRAD_DEP)
+	$(F32) $(F32FLAGS) /c HYDRAD.FOR
+
+IERROR.OBJ:	IERROR.FOR $(IERROR_DEP)
+	$(F32) $(F32FLAGS) /c IERROR.FOR
+
+INDAT11P.OBJ:	INDAT11P.FOR $(INDAT11P_DEP)
+	$(F32) $(F32FLAGS) /c INDAT11P.FOR
+
+INDAT12P.OBJ:	INDAT12P.FOR $(INDAT12P_DEP)
+	$(F32) $(F32FLAGS) /c INDAT12P.FOR
+
+INDAT2PX.OBJ:	INDAT2PX.FOR $(INDAT2PX_DEP)
+	$(F32) $(F32FLAGS) /c INDAT2PX.FOR
+
+INDAT3PX.OBJ:	INDAT3PX.FOR $(INDAT3PX_DEP)
+	$(F32) $(F32FLAGS) /c INDAT3PX.FOR
+
+INFACE.OBJ:	INFACE.FOR $(INFACE_DEP)
+	$(F32) $(F32FLAGS) /c INFACE.FOR
+
+INFLOWPX.OBJ:	INFLOWPX.FOR $(INFLOWPX_DEP)
+	$(F32) $(F32FLAGS) /c INFLOWPX.FOR
+
+JDATE.OBJ:	JDATE.FOR $(JDATE_DEP)
+	$(F32) $(F32FLAGS) /c JDATE.FOR
+
+LEAPIN.OBJ:	LEAPIN.FOR $(LEAPIN_DEP)
+	$(F32) $(F32FLAGS) /c LEAPIN.FOR
+
+LEAPING.OBJ:	LEAPING.FOR $(LEAPING_DEP)
+	$(F32) $(F32FLAGS) /c LEAPING.FOR
+
+MAINEXT.OBJ:	MAINEXT.FOR $(MAINEXT_DEP)
+	$(F32) $(F32FLAGS) /c MAINEXT.FOR
+
+NDATE.OBJ:	NDATE.FOR $(NDATE_DEP)
+	$(F32) $(F32FLAGS) /c NDATE.FOR
+
+NTIME.OBJ:	NTIME.FOR $(NTIME_DEP)
+	$(F32) $(F32FLAGS) /c NTIME.FOR
+
+OUTPUT.OBJ:	OUTPUT.FOR $(OUTPUT_DEP)
+	$(F32) $(F32FLAGS) /c OUTPUT.FOR
+
+PINE.OBJ:	PINE.FOR $(PINE_DEP)
+	$(F32) $(F32FLAGS) /c PINE.FOR
+
+POWER.OBJ:	POWER.FOR $(POWER_DEP)
+	$(F32) $(F32FLAGS) /c POWER.FOR
+
+PPLOT.OBJ:	PPLOT.FOR $(PPLOT_DEP)
+	$(F32) $(F32FLAGS) /c PPLOT.FOR
+
+RGATE.OBJ:	RGATE.FOR $(RGATE_DEP)
+	$(F32) $(F32FLAGS) /c RGATE.FOR
+
+RGFREE.OBJ:	RGFREE.FOR $(RGFREE_DEP)
+	$(F32) $(F32FLAGS) /c RGFREE.FOR
+
+RGINIT.OBJ:	RGINIT.FOR $(RGINIT_DEP)
+	$(F32) $(F32FLAGS) /c RGINIT.FOR
+
+RGINPT.OBJ:	RGINPT.FOR $(RGINPT_DEP)
+	$(F32) $(F32FLAGS) /c RGINPT.FOR
+
+RGOPEN.OBJ:	RGOPEN.FOR $(RGOPEN_DEP)
+	$(F32) $(F32FLAGS) /c RGOPEN.FOR
+
+RGOUT.OBJ:	RGOUT.FOR $(RGOUT_DEP)
+	$(F32) $(F32FLAGS) /c RGOUT.FOR
+
+RGSECT.OBJ:	RGSECT.FOR $(RGSECT_DEP)
+	$(F32) $(F32FLAGS) /c RGSECT.FOR
+
+RGSUB.OBJ:	RGSUB.FOR $(RGSUB_DEP)
+	$(F32) $(F32FLAGS) /c RGSUB.FOR
+
+SCALE.OBJ:	SCALE.FOR $(SCALE_DEP)
+	$(F32) $(F32FLAGS) /c SCALE.FOR
+
+STIME.OBJ:	STIME.FOR $(STIME_DEP)
+	$(F32) $(F32FLAGS) /c STIME.FOR
+
+STRIP.OBJ:	STRIP.FOR $(STRIP_DEP)
+	$(F32) $(F32FLAGS) /c STRIP.FOR
+
+SUBCAL.OBJ:	SUBCAL.FOR $(SUBCAL_DEP)
+	$(F32) $(F32FLAGS) /c SUBCAL.FOR
+
+SUBFLW.OBJ:	SUBFLW.FOR $(SUBFLW_DEP)
+	$(F32) $(F32FLAGS) /c SUBFLW.FOR
+
+SYINPT.OBJ:	SYINPT.FOR $(SYINPT_DEP)
+	$(F32) $(F32FLAGS) /c SYINPT.FOR
+
+SYPHON.OBJ:	SYPHON.FOR $(SYPHON_DEP)
+	$(F32) $(F32FLAGS) /c SYPHON.FOR
+
+TBLUP.OBJ:	TBLUP.FOR $(TBLUP_DEP)
+	$(F32) $(F32FLAGS) /c TBLUP.FOR
+
+TIDCF.OBJ:	TIDCF.FOR $(TIDCF_DEP)
+	$(F32) $(F32FLAGS) /c TIDCF.FOR
+
+TRANSXPX.OBJ:	TRANSXPX.FOR $(TRANSXPX_DEP)
+	$(F32) $(F32FLAGS) /c TRANSXPX.FOR
+
+XROUTE.OBJ:	XROUTE.FOR $(XROUTE_DEP)
+	$(F32) $(F32FLAGS) /c XROUTE.FOR
+
+YROUTE.OBJ:	YROUTE.FOR $(YROUTE_DEP)
+	$(F32) $(F32FLAGS) /c YROUTE.FOR
+
+ZROUTE.OBJ:	ZROUTE.FOR $(ZROUTE_DEP)
+	$(F32) $(F32FLAGS) /c ZROUTE.FOR
+
+$(PROJ).EXE::	BLKDATA.OBJ BLKMN.OBJ BOUNDPX.OBJ CDFREE.OBJ CDSUB.OBJ CKFILEPX.OBJ \
+	CURVE.OBJ DATED.OBJ DEPTHX.OBJ ENDOFF.OBJ ERROR.OBJ EXTRANPX.OBJ FLCOND.OBJ FLDETM.OBJ \
+	FRECAL.OBJ FRFLOW.OBJ GETCUR.OBJ GETDEP.OBJ GETSUM.OBJ HEAD.OBJ HTIDESPX.OBJ HYDRAD.OBJ \
+	IERROR.OBJ INDAT11P.OBJ INDAT12P.OBJ INDAT2PX.OBJ INDAT3PX.OBJ INFACE.OBJ INFLOWPX.OBJ \
+	JDATE.OBJ LEAPIN.OBJ LEAPING.OBJ MAINEXT.OBJ NDATE.OBJ NTIME.OBJ OUTPUT.OBJ PINE.OBJ \
+	POWER.OBJ PPLOT.OBJ RGATE.OBJ RGFREE.OBJ RGINIT.OBJ RGINPT.OBJ RGOPEN.OBJ RGOUT.OBJ \
+	RGSECT.OBJ RGSUB.OBJ SCALE.OBJ STIME.OBJ STRIP.OBJ SUBCAL.OBJ SUBFLW.OBJ SYINPT.OBJ \
+	SYPHON.OBJ TBLUP.OBJ TIDCF.OBJ TRANSXPX.OBJ XROUTE.OBJ YROUTE.OBJ ZROUTE.OBJ $(OBJS_EXT)
+	echo >NUL @<<$(PROJ).CRF
+BLKDATA.OBJ 
+BLKMN.OBJ 
+BOUNDPX.OBJ 
+CDFREE.OBJ 
+CDSUB.OBJ 
+CKFILEPX.OBJ 
+CURVE.OBJ 
+DATED.OBJ 
+DEPTHX.OBJ 
+ENDOFF.OBJ 
+ERROR.OBJ 
+EXTRANPX.OBJ 
+FLCOND.OBJ 
+FLDETM.OBJ 
+FRECAL.OBJ 
+FRFLOW.OBJ 
+GETCUR.OBJ 
+GETDEP.OBJ 
+GETSUM.OBJ 
+HEAD.OBJ 
+HTIDESPX.OBJ 
+HYDRAD.OBJ 
+IERROR.OBJ 
+INDAT11P.OBJ 
+INDAT12P.OBJ 
+INDAT2PX.OBJ 
+INDAT3PX.OBJ 
+INFACE.OBJ 
+INFLOWPX.OBJ 
+JDATE.OBJ 
+LEAPIN.OBJ 
+LEAPING.OBJ 
+MAINEXT.OBJ 
+NDATE.OBJ 
+NTIME.OBJ 
+OUTPUT.OBJ 
+PINE.OBJ 
+POWER.OBJ 
+PPLOT.OBJ 
+RGATE.OBJ 
+RGFREE.OBJ 
+RGINIT.OBJ 
+RGINPT.OBJ 
+RGOPEN.OBJ 
+RGOUT.OBJ 
+RGSECT.OBJ 
+RGSUB.OBJ 
+SCALE.OBJ 
+STIME.OBJ 
+STRIP.OBJ 
+SUBCAL.OBJ 
+SUBFLW.OBJ 
+SYINPT.OBJ 
+SYPHON.OBJ 
+TBLUP.OBJ 
+TIDCF.OBJ 
+TRANSXPX.OBJ 
+XROUTE.OBJ 
+YROUTE.OBJ 
+ZROUTE.OBJ 
+$(OBJS_EXT)
+$(L32FLAGS)
+-out:$(PROJ).EXE
+$(MAPFILE)
+$(LIBS)
+
+<<
+	link32 -link @$(PROJ).CRF
+	bindmsf $(PROJ).EXE
+
+run: $(PROJ).EXE
+	$(PROJ) $(RUNFLAGS)
+
+
+$(PROJ).BSC: $(SBRS)
+	bscmake @<<
+/o$@ $(SBRS)
+<<

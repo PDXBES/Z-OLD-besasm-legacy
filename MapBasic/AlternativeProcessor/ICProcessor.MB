@@ -1,0 +1,208 @@
+'
+'	============ EMGAATS Workbench =================
+'
+'	Copyright (c) 2001,	2003  City of Portland,	OR Bureau of Environmental Services
+'
+' 20Jul2006	Adapted
+'	22Mar2004 Collins added	call to	InitOpenUtilGlobals	so that	EMGOpenUtils can be	used here
+'
+'
+include "MapBasic.def"
+'include "\\cassio\modeling\Model_Programs\Emgaats\CodeV2.2\Common\Inc\EMGGlobal.def"
+include "\\cassio\modeling\Model_Programs\Emgaats\CodeV2.2\Common\Inc\EMGToolGlobal.def"
+include "\\cassio\modeling\Model_Programs\Emgaats\CodeV2.2\Common\Inc\EMGLogger.def"
+include "\\cassio\modeling\Model_Programs\Emgaats\CodeV2.2\Common\Inc\EMGOpenUtils.def"
+include "\\cassio\modeling\Model_Programs\Emgaats\CodeV2.2\Common\Inc\EMGMTabUtil.def"
+include "\\cassio\modeling\Model_Programs\Emgaats\CodeV2.2\Common\Inc\INIUtils.def"
+include "\\cassio\modeling\Model_Programs\Emgaats\CodeV2.2\Workbench\Inc\EMGInit.def"
+include "\\cassio\modeling\Model_Programs\Emgaats\CodeV2.2\LinkTool\Inc\EMGLinkColData.def"
+include "\\cassio\modeling\Model_Programs\Emgaats\CodeV2.2\common\inc\EMGCoordSys.def"
+
+Declare Sub Main()
+
+'Required for all Framework MBX Apps
+Declare Sub ExitApplication()
+Declare Sub Function_Menu()
+
+'Globals required for all Framework Apps
+Global gReturnStatus as String
+Global gDebugMode as Logical
+
+'Functions specific to this Framework App
+Declare Sub UpdateIC
+Declare Sub SetupICProcessor
+Declare Sub ExtractAltLinkId
+Declare Sub UpdateNGToSan
+Declare Sub UpdateNGToStorm
+
+'Globals specific to this Framework App
+global gOutputModelPath as String
+global gLinkAlternative as String
+global gDSCAlternative as String
+global gTempDir as String
+global gAltID as integer
+Global gErrorCheckPath as String
+global gAltRoofTargets as String
+global gAltStreetTargets as String
+global gAltParkingTargets as String
+global gBaseModelPath as String
+
+'---------------------------------------------------------
+' the following	is a delphi	code snippit that shows	how	the	MB globals are accessed
+'---------------------------------------------------------
+  'strMBmsg	= 'gstrCurrentMessage';
+  'strMBrc = 'gstrReturnStatus';
+
+  'STEP	ONE: Start mapinfo
+  'goleMI :=Zcreateoleobject('Mapinfo.Application');
+ 
+  'STEP	TWO: find the full path	of the application
+  'mbxFullPath := systemini.ReadString('code','TestBench','notfound');
+
+	'STEP THREE: Run the mbx
+	'DoStr := 'Run Application '+ #34 +	mbxFullPath	+ #34;
+	'oleMI.do doStr
+
+  'STEP	FOUR: Initialize global	to something that is not SUCCESS
+  'oleMI.mbapplications.item('TestBench').mbglobals.item(strMBrc).value	:= 'NULL';
+
+  'STEP	FIVE: run subroutines within the mapinfo application and test for success
+  'olemi.do	('Run Menu Command ID '	+ cmdID);
+  'sleep(1000);
+  'if myrc <> 'SUCCESS'	Then
+	' error	stuff here
+  'end if
+'---------------------------------------------------------
+Sub UpdateIC
+	gReturnStatus="Entered UpdateIC()"
+
+	IF  FileExists(gAltRoofTargets)  Then	
+		Open Table gAltRoofTargets as alt_rooftargets
+	ELSE
+		Print "gAltRoofTargets not found"
+		EXIT SUB
+	END IF
+	
+	IF  FileExists(gAltStreetTargets)  Then	
+		Open Table gAltStreetTargets as alt_streettargets
+	ELSE
+		Print "gAltStreetTargets not found"
+		Close Table alt_rooftargets
+		EXIT SUB
+	END IF
+	
+	IF  FileExists(gAltParkingTargets)  Then	
+		Open Table gAltParkingTargets as alt_parkingtargets
+	ELSE
+		Print "gAltParkingTargets not found"
+		Close Table alt_rooftargets
+		Close Table alt_streettargets
+		EXIT SUB
+	END IF
+	
+	
+	
+	If TableInfo(alt_rooftargets, TAB_INFO_NROWS) = 0 AND TableInfo(alt_streettargets, TAB_INFO_NROWS) = 0 AND TableInfo(alt_parkingtargets, TAB_INFO_NROWS) = 0 Then
+		Print "No IC found for update"
+		Exit Sub
+	End If
+	Print "Found " & TableInfo(alt_rooftargets, TAB_INFO_NROWS) & " roof targets for tabular update."
+	Print "Found " & TableInfo(alt_streettargets, TAB_INFO_NROWS) & " street targets for tabular update."
+	Print "Found " & TableInfo(alt_parkingtargets, TAB_INFO_NROWS) & " parking targets for tabular update."
+
+	'Join the alt and mst tables based upon the ICID values, then
+	'take the values from the alt_rooftargets.BuildModelIC values
+	'and update mst table based upon the results.
+	'I dont know how much easier that can get.
+	If TableInfo(alt_rooftargets, TAB_INFO_NROWS) <> 0 THEN
+		Select alt_rooftargets.BuildModelIC "newBuildModelIC", mst_ic_RoofTargets.BuildModelIC FROM mst_ic_RoofTargets, alt_rooftargets WHERE mst_ic_RoofTargets.ICID = alt_rooftargets.ICID INTO mst_ic_RoofTargets_update_BuildModelIC
+		Update mst_ic_RoofTargets_update_BuildModelIC Set BuildModelIC = newBuildModelIC
+		Commit Table mst_ic_RoofTargets
+	END IF
+
+	If TableInfo(alt_parkingtargets, TAB_INFO_NROWS) <> 0 THEN
+		Select alt_parkingtargets.BuildModelIC "newBuildModelIC", mst_ic_ParkingTargets.BuildModelIC FROM mst_ic_ParkingTargets, alt_parkingtargets WHERE mst_ic_ParkingTargets.ICID = alt_parkingtargets.ICID INTO mst_ic_ParkingTargets_update_BuildModelIC
+		Update mst_ic_ParkingTargets_update_BuildModelIC Set BuildModelIC = newBuildModelIC
+		Commit Table mst_ic_ParkingTargets
+	END IF
+
+	If TableInfo(alt_streettargets, TAB_INFO_NROWS) <> 0 THEN
+		Select alt_streettargets.BuildModelIC "newBuildModelIC", mst_ic_StreetTargets.BuildModelIC FROM mst_ic_StreetTargets, alt_streettargets WHERE mst_ic_StreetTargets.ICID = alt_streettargets.ICID INTO mst_ic_StreetTargets_update_BuildModelIC
+		Update mst_ic_StreetTargets_update_BuildModelIC Set BuildModelIC = newBuildModelIC
+		Commit Table mst_ic_StreetTargets
+	END IF
+
+End Sub
+'---------------------------------------------------------
+Sub SetupICProcessor
+	gReturnStatus="Entered SetupICProcessor()"
+	gmdlINIfullpath = gOutputModelPath
+	call InitOpenUtilGlobals()
+	Call SetStdCoordSys()
+	
+	IF  FileExists(gAltRoofTargets)  AND  FileExists(gAltRoofTargets)  AND  FileExists(gAltRoofTargets)  Then
+		DIM nothing as integer
+		nothing = 0	
+	ELSE
+		EXIT SUB
+	END IF
+	
+	Open Table gLinkAlternative as alt_links
+
+	dim mdlIndex(7) as integer
+	mdlIndex(1) = NDX_MDL_LINKS
+	mdlIndex(2) = NDX_MDL_NODES
+	mdlIndex(3) = NDX_MDL_DIRSC
+	mdlIndex(4) = NDX_MDL_SURFSC
+	mdlIndex(5) = NDX_MDL_ROOFTARGETS
+	mdlIndex(6) = NDX_MDL_STREETTARGETS
+	mdlIndex(7) = NDX_MDL_PARKINGTARGETS
+
+	dim result as integer
+	result = setOKToOpen(gmdlFiles, mdlIndex)
+	result = setAllowWrite(gmdlFiles, mdlIndex)
+	result = ReallyOpenModel()
+	gReturnStatus="Succesfully called SetupICProcessor()"	
+
+END SUB
+'---------------------------------------------------------
+Sub ExitApplication()
+	Close All
+	End Program
+End Sub
+'---------------------------------------------------------
+' Modify to	add	menuitems for testing
+'---------------------------------------------------------
+Sub	Function_Menu() 'Required for all Framework MBX apps
+
+Create Menu	"Function Menu"	as
+	"Setup IC Processor" ID 10000 calling SetupICProcessor,
+	"Update IC" ID 10001 calling UpdateIC,
+
+	"Exit MBX Application" ID 9999 calling ExitApplication 'Required for all Framework MBX apps
+ 
+  Alter	Menu Bar Remove	ID 6, ID 7
+  Alter	Menu Bar Add "Function Menu", ID 6,	ID 7
+
+End	Sub
+'--------------------------------------------------------
+'No	changes	below here
+'--------------------------------------------------------
+Sub	Main()
+
+	gReturnStatus="Initialized"
+	OnError GoTo ErrorHandler
+	Call InitHousekeeping		' have to init some globals before we can say hello
+  Call InitOpenUtilGlobals  ' this sets up table names for the EMGOpenUtils functions
+
+	Call Function_Menu
+
+	Exit Sub
+
+	ErrorHandler:
+		gReturnStatus = "Error: " + Err()
+		OnError GoTo 0
+		Error Err()
+
+End	Sub
+

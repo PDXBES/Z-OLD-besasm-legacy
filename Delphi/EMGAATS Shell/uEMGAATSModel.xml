@@ -1,0 +1,279 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<namespace name="uEMGAATSModel">
+  <struct name="TEMGAATSModelStats">
+    <field name="NumLinks" type="Integer" visibility="public" />
+    <field name="NumNodes" type="Integer" visibility="public" />
+    <field name="NumDSCs" type="Integer" visibility="public" />
+    <field name="NumSurfSCs" type="Integer" visibility="public" />
+    <field name="NumConstructedRoofTargets" type="Integer" visibility="public" />
+    <field name="NumConstructedParkingTargets" type="Integer" visibility="public" />
+    <field name="NumConstructedStreetTargets" type="Integer" visibility="public" />
+    <field name="NumBuildRoofTargets" type="Integer" visibility="public" />
+    <field name="NumBuildParkingTargets" type="Integer" visibility="public" />
+    <field name="NumBuildStreetTargets" type="Integer" visibility="public" />
+  </struct>
+  <class name="TEMGAATSModel">
+    <ancestor name="TObject" namespace="System">
+      <methodref name="Create" visibility="public">
+      </methodref>
+      <methodref name="Free" visibility="public">
+      </methodref>
+      <methodref name="InitInstance" visibility="public">
+      </methodref>
+      <methodref name="CleanupInstance" visibility="public">
+      </methodref>
+      <methodref name="ClassType" visibility="public">
+      </methodref>
+      <methodref name="ClassName" visibility="public">
+      </methodref>
+      <methodref name="ClassNameIs" visibility="public">
+      </methodref>
+      <methodref name="ClassParent" visibility="public">
+      </methodref>
+      <methodref name="ClassInfo" visibility="public">
+      </methodref>
+      <methodref name="InstanceSize" visibility="public">
+      </methodref>
+      <methodref name="InheritsFrom" visibility="public">
+      </methodref>
+      <methodref name="MethodAddress" visibility="public">
+      </methodref>
+      <methodref name="MethodName" visibility="public">
+      </methodref>
+      <methodref name="FieldAddress" visibility="public">
+      </methodref>
+      <methodref name="GetInterface" visibility="public">
+      </methodref>
+      <methodref name="GetInterfaceEntry" visibility="public">
+      </methodref>
+      <methodref name="GetInterfaceTable" visibility="public">
+      </methodref>
+      <methodref name="SafeCallException" visibility="public">
+      </methodref>
+      <methodref name="AfterConstruction" visibility="public">
+      </methodref>
+      <methodref name="BeforeDestruction" visibility="public">
+      </methodref>
+      <methodref name="Dispatch" visibility="public">
+      </methodref>
+      <methodref name="DefaultHandler" visibility="public">
+      </methodref>
+      <methodref name="NewInstance" visibility="public">
+      </methodref>
+      <methodref name="FreeInstance" visibility="public">
+      </methodref>
+      <methodref name="Destroy" visibility="public">
+      </methodref>
+    </ancestor>
+    <members>
+      <field name="fConfig" type="TModelConfig" visibility="private" />
+      <field name="fPath" type="string" visibility="private" />
+      <field name="fName" type="string" visibility="private" />
+      <field name="fDescription" type="string" visibility="private" />
+      <field name="fIsDirty" type="Boolean" visibility="private" />
+      <field name="fErrLog" type="TStringList" visibility="private" />
+      <field name="fModelStats" type="TEMGAATSModelStats" visibility="private" />
+      <field name="fSilent" type="Boolean" visibility="private" />
+      <field name="fTimeFrame" type="TTimeFrame" visibility="private" />
+      <field name="fProgressLabel" type="TLabel" visibility="private" />
+      <field name="fProgressBar" type="TRzProgressBar" visibility="private" />
+      <procedure name="SetPath" visibility="private">
+        <parameters>
+          <parameter name="Value" type="string" paramflags="const" />
+        </parameters>
+      </procedure>
+      <procedure name="SetSilent" visibility="private">
+        <parameters>
+          <parameter name="Value" type="Boolean" paramflags="const" />
+        </parameters>
+      </procedure>
+      <function name="CreateNameValuePair" visibility="private">
+        <parameters>
+          <parameter name="AString" type="string" />
+          <retval type="string" />
+        </parameters>
+      </function>
+      <function name="GetMDB" visibility="private">
+        <parameters>
+          <parameter name="Index" type="string" />
+          <retval type="string" />
+        </parameters>
+      </function>
+      <function name="GetQCWorkbookFileName" visibility="private">
+        <parameters>
+          <retval type="string" />
+        </parameters>
+      </function>
+      <function name="GetMapFileName" visibility="private">
+        <parameters>
+          <parameter name="Index" type="string" />
+          <retval type="string" />
+        </parameters>
+      </function>
+      <constructor name="Create" visibility="public">
+        <parameters>
+          <parameter name="APath" type="string" />
+          <parameter name="IsNewModel" type="Boolean">
+            <value>
+              False
+            </value>
+          </parameter>
+        </parameters>
+      </constructor>
+      <destructor name="Destroy" visibility="public">
+        <parameters>
+        </parameters>
+      </destructor>
+      <procedure name="Build" visibility="public">
+      </procedure>
+      <procedure name="BuildOverExistingModel" visibility="public">
+      </procedure>
+      <procedure name="BuildEmptyModel" visibility="public">
+      </procedure>
+      <procedure name="ConfigureModelForBuilding" visibility="public">
+      </procedure>
+      <procedure name="BuildNetwork" visibility="public">
+      </procedure>
+      <procedure name="BuildDirectSubcatchments" visibility="public">
+      </procedure>
+      <procedure name="BuildSurfaceSubcatchments" visibility="public">
+      </procedure>
+      <procedure name="CalculateHydrology" visibility="public">
+      </procedure>
+      <procedure name="RemoveNetwork" visibility="public">
+      </procedure>
+      <procedure name="DeployRunoffFile" visibility="public">
+      </procedure>
+      <procedure name="CreateModelBatchFile" visibility="public">
+        <parameters>
+          <parameter name="Block" type="string" />
+        </parameters>
+      </procedure>
+      <procedure name="CreateReconciliationSpreadsheet" visibility="public">
+      </procedure>
+      <procedure name="DeployEngineFile" visibility="public">
+      </procedure>
+      <procedure name="AssignRoots" visibility="public">
+        <parameters>
+          <parameter name="AList" type="TStrings" />
+        </parameters>
+      </procedure>
+      <procedure name="AssignStops" visibility="public">
+        <parameters>
+          <parameter name="AList" type="TStrings" />
+        </parameters>
+      </procedure>
+      <procedure name="MakeDirty" visibility="public">
+      </procedure>
+      <procedure name="Update" visibility="public">
+      </procedure>
+      <procedure name="CreateModelConfigFile" visibility="public">
+      </procedure>
+      <procedure name="CreateStandardDirectories" visibility="public">
+      </procedure>
+      <procedure name="CopyMasterTemplate" visibility="public">
+      </procedure>
+      <procedure name="CreateEmptyModelData" visibility="public">
+      </procedure>
+      <procedure name="DeleteModelMDB" visibility="public">
+        <parameters>
+          <parameter name="AFileName" type="TFileName" />
+        </parameters>
+      </procedure>
+      <procedure name="CreateDataAccessFile" visibility="public">
+      </procedure>
+      <procedure name="OpenModelAndMasterData" visibility="public">
+      </procedure>
+      <procedure name="CheckModelLocation" visibility="public">
+      </procedure>
+      <procedure name="RelinkModelData" visibility="public">
+      </procedure>
+      <procedure name="ClearErrorLog" visibility="public">
+      </procedure>
+      <procedure name="AddError" visibility="public">
+        <parameters>
+          <parameter name="AError" type="TEMGAATSError" />
+        </parameters>
+      </procedure>
+      <procedure name="TransferErrors" visibility="public">
+        <parameters>
+          <parameter name="AList" type="TStrings" />
+        </parameters>
+      </procedure>
+      <procedure name="GetModelStats" visibility="public">
+      </procedure>
+      <procedure name="TransferStats" visibility="public">
+        <parameters>
+          <parameter name="AList" type="TStrings" />
+        </parameters>
+      </procedure>
+      <property name="Path" visibility="public" read="fPath" write="SetPath" type="string" />
+      <property name="Silent" visibility="public" read="fSilent" write="SetSilent" type="Boolean" />
+      <property name="TimeFrame" visibility="public" read="fTimeFrame" type="TTimeFrame" />
+      <property name="ProgressLabel" visibility="public" read="fProgressLabel" write="fProgressLabel" type="TLabel" />
+      <property name="ProgressBar" visibility="public" read="fProgressBar" write="fProgressBar" type="TRzProgressBar" />
+      <procedure name="ShowProgressMessage" visibility="public">
+        <parameters>
+          <parameter name="AMessage" type="string" />
+        </parameters>
+      </procedure>
+      <procedure name="SetProgressParts" visibility="public">
+        <parameters>
+          <parameter name="NumSteps" type="Integer" />
+        </parameters>
+      </procedure>
+      <procedure name="IncProgress" visibility="public">
+      </procedure>
+      <procedure name="CopyBoundariesFromModel" visibility="public">
+        <parameters>
+          <parameter name="AModelINIFile" type="TFileName" />
+        </parameters>
+      </procedure>
+      <procedure name="GetRootLinks" visibility="public">
+        <parameters>
+          <parameter name="AList" type="TStrings" />
+          <parameter name="AErrHandler" type="TRzErrorHandler">
+            <value>
+              nil
+            </value>
+          </parameter>
+        </parameters>
+      </procedure>
+      <procedure name="GetStopLinks" visibility="public">
+        <parameters>
+          <parameter name="AList" type="TStrings" />
+          <parameter name="AErrHandler" type="TRzErrorHandler">
+            <value>
+              nil
+            </value>
+          </parameter>
+        </parameters>
+      </procedure>
+      <procedure name="GetForcedRootLinks" visibility="public">
+        <parameters>
+          <parameter name="AList" type="TStrings" />
+          <parameter name="AErrHandler" type="TRzErrorHandler">
+            <value>
+              nil
+            </value>
+          </parameter>
+        </parameters>
+      </procedure>
+      <procedure name="GetForcedStopLinks" visibility="public">
+        <parameters>
+          <parameter name="AList" type="TStrings" />
+          <parameter name="AErrHandler" type="TRzErrorHandler">
+            <value>
+              nil
+            </value>
+          </parameter>
+        </parameters>
+      </procedure>
+      <property name="MDBs" visibility="public" read="GetMDB" type="string" />
+      <property name="MapFileNames" visibility="public" read="GetMapFileName" type="string" />
+      <property name="QCWorkbookFileName" visibility="public" read="GetQCWorkbookFileName" type="string" />
+      <property name="Config" visibility="public" read="fConfig" type="TModelConfig" />
+    </members>
+  </class>
+  <variable name="CurrentModel" type="TEMGAATSModel" />
+</namespace>
