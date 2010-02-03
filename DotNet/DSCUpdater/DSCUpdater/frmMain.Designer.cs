@@ -30,19 +30,19 @@
         {
             this.components = new System.ComponentModel.Container();
             Infragistics.Win.Appearance appearance1 = new Infragistics.Win.Appearance();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
             Infragistics.Win.Appearance appearance5 = new Infragistics.Win.Appearance();
             Infragistics.Win.Appearance appearance4 = new Infragistics.Win.Appearance();
             Infragistics.Win.Appearance appearance6 = new Infragistics.Win.Appearance();
             Infragistics.Win.Appearance appearance7 = new Infragistics.Win.Appearance();
             Infragistics.Win.Appearance appearance3 = new Infragistics.Win.Appearance();
             Infragistics.Win.Appearance appearance2 = new Infragistics.Win.Appearance();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
             Infragistics.Win.Appearance appearance11 = new Infragistics.Win.Appearance();
             Infragistics.Win.Appearance appearance10 = new Infragistics.Win.Appearance();
             this.txtFileName = new Infragistics.Win.UltraWinEditors.UltraTextEditor();
@@ -267,8 +267,8 @@
             // dgvData
             // 
             this.dgvData.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.dgvData.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.dgvData.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle13;
             this.dgvData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvData.Location = new System.Drawing.Point(6, 9);
             this.dgvData.Name = "dgvData";
@@ -539,8 +539,8 @@
             // 
             this.dgvUpdaterHistory.AllowUserToAddRows = false;
             this.dgvUpdaterHistory.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.dgvUpdaterHistory.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.dgvUpdaterHistory.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle14;
             this.dgvUpdaterHistory.AutoGenerateColumns = false;
             this.dgvUpdaterHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvUpdaterHistory.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -1123,8 +1123,8 @@
             // dgvDSCQC
             // 
             this.dgvDSCQC.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.dgvDSCQC.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle15.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.dgvDSCQC.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle15;
             this.dgvDSCQC.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dgvDSCQC.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDSCQC.Location = new System.Drawing.Point(8, 6);
@@ -1168,8 +1168,8 @@
             // dgvParkQC
             // 
             this.dgvParkQC.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.dgvParkQC.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle16.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.dgvParkQC.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle16;
             this.dgvParkQC.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvParkQC.Location = new System.Drawing.Point(8, 6);
             this.dgvParkQC.Name = "dgvParkQC";
@@ -1212,8 +1212,8 @@
             // dgvRoofQC
             // 
             this.dgvRoofQC.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.dgvRoofQC.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.dgvRoofQC.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle17;
             this.dgvRoofQC.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvRoofQC.Location = new System.Drawing.Point(8, 6);
             this.dgvRoofQC.Name = "dgvRoofQC";
@@ -1255,8 +1255,8 @@
             // 
             // dgvImpAQC
             // 
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.dgvImpAQC.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle18.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.dgvImpAQC.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle18;
             this.dgvImpAQC.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvImpAQC.Location = new System.Drawing.Point(8, 6);
             this.dgvImpAQC.Name = "dgvImpAQC";
@@ -1281,7 +1281,7 @@
             this.btnCloseOptions.Location = new System.Drawing.Point(715, 382);
             this.btnCloseOptions.Name = "btnCloseOptions";
             this.btnCloseOptions.Size = new System.Drawing.Size(103, 23);
-            this.btnCloseOptions.TabIndex = 4;
+            this.btnCloseOptions.TabIndex = 3;
             this.btnCloseOptions.Text = "Close Options";
             this.btnCloseOptions.Click += new System.EventHandler(this.btnCloseOptions_Click);
             // 
@@ -1314,7 +1314,7 @@
             appearance10.FontData.ItalicAsString = "True";
             this.txtNewDatabaseCon.NullTextAppearance = appearance10;
             this.txtNewDatabaseCon.Size = new System.Drawing.Size(293, 21);
-            this.txtNewDatabaseCon.TabIndex = 2;
+            this.txtNewDatabaseCon.TabIndex = 1;
             // 
             // btnChangeDBConnOption
             // 
@@ -1322,7 +1322,7 @@
             this.btnChangeDBConnOption.Location = new System.Drawing.Point(33, 124);
             this.btnChangeDBConnOption.Name = "btnChangeDBConnOption";
             this.btnChangeDBConnOption.Size = new System.Drawing.Size(159, 23);
-            this.btnChangeDBConnOption.TabIndex = 1;
+            this.btnChangeDBConnOption.TabIndex = 2;
             this.btnChangeDBConnOption.Text = "Change Database Options";
             this.btnChangeDBConnOption.Click += new System.EventHandler(this.btnChangeDBConnOption_Click);
             // 
@@ -1388,7 +1388,7 @@
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.aboutToolStripMenuItem.Text = "&About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
