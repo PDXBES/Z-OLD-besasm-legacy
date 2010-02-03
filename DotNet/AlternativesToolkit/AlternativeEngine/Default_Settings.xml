@@ -2,7 +2,8 @@
 <AltEngineConfiguration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="SystemsAnalysis.ModelConstruction.AlternativesToolkit.EngineConfiguration">
   <ProgramSettings>
     <AlternativeTemplate>\\Cassio\Modeling\Model_Programs\bin\AlternativesToolkit\AlternativeTemplate\</AlternativeTemplate>
-    <UpdateVersionPatchMBX>MBProcessor\UpdateVersion.MBX</UpdateVersionPatchMBX>
+    <UpdateVersionPatchMBX>AlternativeProcessor\UpdateVersion.MBX</UpdateVersionPatchMBX>
+    <FocusAreasTable>\\cassio\systems_planning\8063_CombinedFacPlan\Models\Alts\Focus_Areas\MapInfo\Tab\Master_Current\Master_Focus_Areas.tab</FocusAreasTable>
   </ProgramSettings>
   <BaseModelComponents>
     <BaseFile>Model.ini</BaseFile>
@@ -32,7 +33,7 @@
   <MapBasicFramework>
     <Library>
       <LibraryName>LinkProcessor</LibraryName>
-      <Location>%Application%\MBProcessor\LinkProcessor.MBX</Location>
+      <Location>%Application%\AlternativeProcessor\LinkProcessor.MBX</Location>
       <ExecGroup>Apply</ExecGroup>
       <GlobalVariable Name="gLinkAlternative" Value="alt_links_ac.tab" RelativeTo="Alternative" />
       <GlobalVariable Name="gErrorCheckPath" Value="error_check" RelativeTo="Alternative" />
@@ -63,7 +64,7 @@
     </Library>
     <Library>
       <LibraryName>SpecialProcessor</LibraryName>
-      <Location>%Application%\MBProcessor\SpecialProcessor.MBX</Location>
+      <Location>%Application%\AlternativeProcessor\SpecialProcessor.MBX</Location>
       <ExecGroup>Apply</ExecGroup>
       <GlobalVariable Name="gLinkAlternative" Value="alt_links_ac.tab" RelativeTo="Alternative" />
       <GlobalVariable Name="gAltSpecLinks" Value="alt_speclinks_ac.tab" RelativeTo="Alternative" />
@@ -96,7 +97,7 @@
     </Library>    
     <Library>
       <LibraryName>NodeProcessor</LibraryName>
-      <Location>%Application%\MBProcessor\NodeProcessor.MBX</Location>
+      <Location>%Application%\AlternativeProcessor\NodeProcessor.MBX</Location>
       <ExecGroup>Apply</ExecGroup>
       <GlobalVariable Name="gOutputModelPath" Value="" RelativeTo="OutputModel" />
       <GlobalVariable Name="gElevField" Value="GrndElev" />
@@ -117,7 +118,7 @@
     </Library>    
     <Library>
       <LibraryName>DSCProcessor</LibraryName>
-      <Location>%Application%\MBProcessor\DSCProcessor.MBX</Location>
+      <Location>%Application%\AlternativeProcessor\DSCProcessor.MBX</Location>
       <ExecGroup>Apply</ExecGroup>
       <GlobalVariable Name="gLinkAlternative" Value="alt_links_ac.tab" RelativeTo="Alternative" />
       <GlobalVariable Name="gDSCAlternative" Value="alt_dsc_ac.tab" RelativeTo="Alternative" />
@@ -135,7 +136,7 @@
     </Library>
     <Library>
       <LibraryName>SSCProcessor</LibraryName>
-      <Location>%Application%\MBProcessor\SSCProcessor.MBX</Location>
+      <Location>%Application%\AlternativeProcessor\SSCProcessor.MBX</Location>
       <ExecGroup>Apply</ExecGroup>
       <GlobalVariable Name="gLinkAlternative" Value="alt_links_ac.tab" RelativeTo="Alternative" />
       <GlobalVariable Name="gSSCAlternative" Value="alt_ssc_ac.tab" RelativeTo="Alternative" />
@@ -154,7 +155,7 @@
     </Library>
     <Library>
       <LibraryName>ICProcessor</LibraryName>
-      <Location>%Application%\MBProcessor\ICProcessor.MBX</Location>
+      <Location>%Application%\AlternativeProcessor\ICProcessor.MBX</Location>
       <ExecGroup>Apply</ExecGroup>
       <GlobalVariable Name="gLinkAlternative" Value="alt_links_ac.tab" RelativeTo="Alternative" />
       <GlobalVariable Name="gAltRoofTargets" Value="alt_rooftargets_ac.tab" RelativeTo="Alternative" />
@@ -175,17 +176,17 @@
     </Library>
     <Library>
       <LibraryName>AlternativeWorkbench</LibraryName>
-      <Location>%Application%\MBWorkbench\AlternativeWorkbench.MBX</Location>
+      <Location>%Application%\AlternativeWorkbench\AlternativeWorkbench.MBX</Location>
       <ExecGroup>Edit</ExecGroup>
       <GlobalVariable Name="gBaseModelPath" Value="" RelativeTo="BaseModel" />
       <GlobalVariable Name="gAlternativePath" Value="" RelativeTo="Alternative" />
       <GlobalVariable Name="gTempDir" Value="AltTemp\" RelativeTo="SystemTemp" />
-      <GlobalVariable Name="gIconFile" Value="MBWorkbench\CustomIcons.dll" RelativeTo="Application" />
-      <GlobalVariable Name="gLinkEditingTemplate" Value="MBWorkbench\Mp_LINKpad.WOR" RelativeTo="Application" />
-      <GlobalVariable Name="gDSCEditingTemplate" Value="MBWorkbench\Mp_DSCpad.WOR" RelativeTo="Application" />
-      <GlobalVariable Name="gSSCEditingTemplate" Value="MBWorkbench\Mp_SSCpad.WOR" RelativeTo="Application" />
-      <GlobalVariable Name="gSpecLinkEditingTemplate" Value="MBWorkbench\Mp_SPLpad.WOR" RelativeTo="Application" />
-      <GlobalVariable Name="gICEditingTemplate" Value="MBWorkbench\Mp_ICpad.WOR" RelativeTo="Application" />
+      <GlobalVariable Name="gIconFile" Value="AlternativeWorkbench\CustomIcons.dll" RelativeTo="Application" />
+      <GlobalVariable Name="gLinkEditingTemplate" Value="AlternativeWorkbench\Mp_LINKpad.WOR" RelativeTo="Application" />
+      <GlobalVariable Name="gDSCEditingTemplate" Value="AlternativeWorkbench\Mp_DSCpad.WOR" RelativeTo="Application" />
+      <GlobalVariable Name="gSSCEditingTemplate" Value="AlternativeWorkbench\Mp_SSCpad.WOR" RelativeTo="Application" />
+      <GlobalVariable Name="gSpecLinkEditingTemplate" Value="AlternativeWorkbench\Mp_SPLpad.WOR" RelativeTo="Application" />
+      <GlobalVariable Name="gICEditingTemplate" Value="AlternativeWorkbench\Mp_ICpad.WOR" RelativeTo="Application" />
       <GlobalVariable Name="gDefaultNodeSuffix" Value="" RelativeTo="AlternativeConfiguration" />
       <Function>
         <Name>SetupAltWorkbench</Name>
@@ -194,7 +195,7 @@
     </Library>
     <Library>
       <LibraryName>AutoConveyance</LibraryName>
-      <Location>%Application%\MBProcessor\AutoConveyance.MBX</Location>
+      <Location>%Application%\AlternativeProcessor\AutoConveyance.MBX</Location>
       <ExecGroup>AutoConveyance</ExecGroup>
       <GlobalVariable Name="gMdlLinkTable" Value="links\mdl_links_ac.tab" RelativeTo="BaseModel" />
       <GlobalVariable Name="gAltLinkTable" Value="alt_links_ac.tab" RelativeTo="Alternative" />
@@ -203,5 +204,31 @@
         <CommandID>10000</CommandID>
       </Function>
     </Library>
+    <Library>
+      <LibraryName>Aggregator</LibraryName>
+      <Location>%Application%\AlternativeProcessor\Aggregator.MBX</Location>
+      <ExecGroup>Aggregate</ExecGroup>      
+      <GlobalVariable Name="gInputAlternativePath" Value="" RelativeTo="Alternative" />
+      <GlobalVariable Name="gOutputAlternativePath" Value="alternatives\aggregated" RelativeTo="BaseModel" />
+      <GlobalVariable Name="gFocusArea" Value="" RelativeTo="" />
+      <Function>
+        <Name>Aggregate</Name>
+        <CommandID>10000</CommandID>
+      </Function>
+    </Library>
+    <Library>
+      <LibraryName>UpdateFocusAreas</LibraryName>
+      <Location>%Application%\AlternativeProcessor\UpdateFocusAreas.MBX</Location>
+      <ExecGroup>UpdateFocusAreas</ExecGroup>      
+      <GlobalVariable Name="gAlternativePath" Value="" RelativeTo="" />
+      <GlobalVariable Name="gIncludeLinksAndNodes" Value="" RelativeTo="" />
+      <GlobalVariable Name="gIncludeCatchments" Value="" RelativeTo="" />
+      <GlobalVariable Name="gIncludeICTargets" Value="" RelativeTo="" />
+      <GlobalVariable Name="gFocusAreas" Value="" RelativeTo="" />
+      <Function>
+        <Name>UpdateFocusAreas</Name>
+        <CommandID>10000</CommandID>
+      </Function>
+    </Library> 
   </MapBasicFramework>
 </AltEngineConfiguration>

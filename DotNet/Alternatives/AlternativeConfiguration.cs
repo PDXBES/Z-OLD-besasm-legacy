@@ -167,12 +167,23 @@ namespace SystemsAnalysis.Modeling.Alternatives {
         {
             get
             {
-                return this.tableAlternativeConfiguration[0].DefaultNodeSuffix;
+                if (this.tableAlternativeConfiguration.Count != 0)
+                {
+                    return this.tableAlternativeConfiguration[0].DefaultNodeSuffix;
+                }
+                else
+                {
+                    return (string)this.tableAlternativeConfiguration.DefaultNodeSuffixColumn.DefaultValue;
+                }
             }
             set
             {
-                this.tableAlternativeConfiguration[0].DefaultNodeSuffix = value;
-                this.WriteXml(configPath);
+                if (this.tableAlternativeConfiguration.Count != 0)
+                {
+                    this.tableAlternativeConfiguration[0].DefaultNodeSuffix = value;
+                    this.WriteXml(configPath);
+                }
+
             }
             /*alternativePath += alternativePath.EndsWith("\\") ? "" : "\\";
             if (File.Exists(alternativePath + "alternative_configuration.xml"))

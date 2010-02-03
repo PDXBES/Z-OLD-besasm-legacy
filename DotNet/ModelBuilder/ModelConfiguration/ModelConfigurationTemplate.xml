@@ -400,6 +400,11 @@
       <TableLocation>links\mdl_speclinkdata_ac.mdb</TableLocation>
     </DataSource>
     <DataSource>
+      <LinkName>mdl_pipxp_ac</LinkName>
+      <TableName>mdl_pipxp_ac</TableName>
+      <TableLocation>links\mdl_pipxp_ac.mdb</TableLocation>
+    </DataSource>
+    <DataSource>
       <LinkName>mst_ic_parkingtargets_ac</LinkName>
       <TableName>mst_ic_parkingtargets_ac</TableName>
       <TableLocation>icalt\mst_ic_parkingtargets_ac.mdb</TableLocation>

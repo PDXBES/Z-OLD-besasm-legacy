@@ -5,8 +5,9 @@
 Definition Table
   File "alternative_package.mdb"
   Type ACCESS TABLE "alt_speclinkdata_ac" Charset "WindowsLatin1"
-  Fields 4
+  Fields 5
     AltSpecLinkDataID Integer Index 1 ;
     AltSpecLinkID Integer ;
     Tag Char (15) ;
     Value Char (30) ;
+    FocusArea Char (10) ;
