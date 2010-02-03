@@ -235,7 +235,7 @@
 			<Cell cellType="CONST" />
 			<Cell cellType="CONST" />							
 		</Row>		
-		<Footer footerID="*" footerText="The ratios will be calculated by diriving the present worth cost by the scores." />		
+		<Footer footerID="*" footerText="The ratios will be calculated by dividing the present worth cost by the scores." />		
 	</CharacterizationTable>
 	<CharacterizationTable tableNumber="Reference" tableTitle="Constructed Stormwater Controls" columnCount="10">
 		<Header>

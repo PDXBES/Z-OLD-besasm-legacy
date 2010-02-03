@@ -40,6 +40,8 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "INIFile", "DotNetUtils\INIF
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "ReportGeneratorSetup", "ReportGeneratorSetup\ReportGeneratorSetup.vdproj", "{5A60686C-3D45-4AEB-B0F7-6560C51F5A79}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{57666C31-A47A-4250-9BA9-B0DFFF0B9063}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

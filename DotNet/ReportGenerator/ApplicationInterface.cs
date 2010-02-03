@@ -100,7 +100,7 @@ namespace SystemsAnalysis.Reporting
 			else
 			{
 				System.Reflection.AssemblyName assemblyName =
-					System.Reflection.Assembly.GetExecutingAssembly().GetName(false);
+				System.Reflection.Assembly.GetExecutingAssembly().GetName(false);
 				int minorVersion = assemblyName.Version.Minor;
 				int majorVersion = assemblyName.Version.Major;
 				int build = assemblyName.Version.Build;
@@ -399,6 +399,11 @@ namespace SystemsAnalysis.Reporting
 		private void onlineHelpToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			System.Diagnostics.Process.Start("http://twiki.bes-sa.org/bin/view/Modeling/ReportGenerator");
-		} // onlineHelpToolStripMenuItem_Click(sender, e)
+		}
+
+        private void ApplicationInterface_Load(object sender, EventArgs e)
+        {
+
+        } // onlineHelpToolStripMenuItem_Click(sender, e)
 	} // class ApplicationInterface
 }
