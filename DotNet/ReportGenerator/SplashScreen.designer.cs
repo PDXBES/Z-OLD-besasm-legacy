@@ -43,9 +43,10 @@ namespace SystemsAnalysis.Reporting
             this.ultraLabel1.BorderStyleInner = Infragistics.Win.UIElementBorderStyle.None;
             this.ultraLabel1.BorderStyleOuter = Infragistics.Win.UIElementBorderStyle.None;
             this.ultraLabel1.Font = new System.Drawing.Font("Arial", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ultraLabel1.Location = new System.Drawing.Point(235, 290);
+            this.ultraLabel1.Location = new System.Drawing.Point(176, 236);
+            this.ultraLabel1.Margin = new System.Windows.Forms.Padding(2);
             this.ultraLabel1.Name = "ultraLabel1";
-            this.ultraLabel1.Size = new System.Drawing.Size(213, 36);
+            this.ultraLabel1.Size = new System.Drawing.Size(160, 29);
             this.ultraLabel1.TabIndex = 0;
             this.ultraLabel1.Text = "Version X.X, January 1st 1996";
             // 
@@ -56,13 +57,14 @@ namespace SystemsAnalysis.Reporting
             // 
             // SplashScreen
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.ClientSize = new System.Drawing.Size(482, 351);
+            this.ClientSize = new System.Drawing.Size(362, 285);
             this.ControlBox = false;
             this.Controls.Add(this.ultraLabel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "SplashScreen";
@@ -70,6 +72,7 @@ namespace SystemsAnalysis.Reporting
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SplashScreen";
             this.TopMost = true;
+            this.Load += new System.EventHandler(this.SplashScreen_Load);
             this.Click += new System.EventHandler(this.SplashScreen_Click);
             this.ResumeLayout(false);
 

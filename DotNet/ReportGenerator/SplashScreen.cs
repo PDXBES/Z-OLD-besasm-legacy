@@ -1,5 +1,4 @@
 using ESRI.ArcGIS.Utility;
-
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -27,6 +26,7 @@ ultraLabel1.Text = "Version " + versionText + "\n" + dateText;
 //'b.MakeTransparent(b.GetPixel(1, 1));
 //this.BackgroundImage = b; 
 timer1.Start();
+
 }
 
 private void SplashScreen_Click(object sender, EventArgs e)
@@ -48,7 +48,7 @@ protected override void OnPaintBackground(PaintEventArgs e)
 {
 Graphics gfx = e.Graphics; 
 Assembly ass = Assembly.GetExecutingAssembly();
-Stream stream = ass.GetManifestResourceStream("SystemsAnalysis.Reporting.SplashRepGen.png");
+Stream stream = ass.GetManifestResourceStream("SystemsAnalysis.Reporting.SplashGReMLIn.png");
 Image SplashScreen = Image.FromStream(stream);
 
 gfx.DrawImage(SplashScreen, new Rectangle(0, 0, this.Width, this.Height));
@@ -72,6 +72,11 @@ if (wait)
 timer1.Stop();
 }
 return this.ShowDialog();
+}
+
+private void SplashScreen_Load(object sender, EventArgs e)
+{
+
 }
 }
 }

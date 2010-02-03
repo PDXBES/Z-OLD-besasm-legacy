@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{B6E1DEF7-D4EB-4D0A-8867-A324FE226D34}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -47,11 +47,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ModelConstruction.ModelConfiguration\SystemsAnalysis.ModelConstruction.ModelConfiguration.csproj">
+    <ProjectReference Include="..\ModelConfiguration\SystemsAnalysis.ModelConstruction.ModelConfiguration.csproj">
       <Project>{19DE0713-65B7-4D46-A537-49704F93CB90}</Project>
       <Name>SystemsAnalysis.ModelConstruction.ModelConfiguration</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Utils.Events\SystemsAnalysis.Utils.Events.csproj">
+    <ProjectReference Include="..\..\DotNetUtils\Events\SystemsAnalysis.Utils.Events.csproj">
       <Project>{9AE8BF25-3ABF-402D-BC63-841E8588D20C}</Project>
       <Name>SystemsAnalysis.Utils.Events</Name>
     </ProjectReference>
