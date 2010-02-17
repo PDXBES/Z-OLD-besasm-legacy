@@ -1,19 +1,20 @@
-unit uIM_SWMM_XP_InterfaceFiles;
+unit uIM_SWMM_TEXT_InterfaceFiles;
 
 interface
 
-uses SysUtils, Classes, Math, DateUtils, Variants,
-	PDXDateUtils, StStrms, StStrL,
-	uIM_InterfaceFiles, uIM_ExpressionEngine, uIM_ConvertEngine, uIM_IndexLookup;
+uses SysUtils, Classes, Math, DateUtils, Variants, PDXDateUtils, StStrms,
+  StStrL, StrUtils, uIM_InterfaceFiles, uIM_ExpressionEngine, uIM_ConvertEngine,
+  uIM_IndexLookup;
 
 const
-	IM_SWMMXP_TITLE_LENGTH = 80;
-	IM_SWMMXP_SOURCEBLOCK_LENGTH = 20;
-	IM_SWMMXP_ALPHAID_LENGTH = 16;
-	IM_SWMMXP_FORMAT_DESC = 'SWMM-XP';
+ 	IM_SWMMTEXT_TITLE_LENGTH = 80;
+	IM_SWMMTEXT_SOURCEBLOCK_LENGTH = 20;
+	IM_SWMMTEXT_ALPHAID_LENGTH = 16;
+	IM_SWMMTEXT_FORMAT_DESC = 'SWMM-TEXT';
+
 type
 
-	T_SWMM_XP_InterfaceFile_NodeFilter = class(TInterfacedObject,
+	T_SWMM_TEXT_InterfaceFile_NodeFilter = class(TInterfacedObject,
 		IIM_ConvertFilter)
 	private
 		fID: String;
@@ -48,15 +49,44 @@ type
 		property Expression: String read GetExpression write SetExpression;
 	end;
 
-	T_SWMM_XP_StandardInterfaceFileHeader = class;
-	T_SWMM_XP_InterfaceFileIO = class;
 	{=============================================================================
-		 Name: T_SWMM_XP_StandardInterfaceFile
+		Name: T_SWMM_XP_ConvertFilterPackage
+		Purpose: Provides filter information for a source XP interface file
+		Requirements:
+	=============================================================================}
+	T_SWMM_TEXT_ConvertFilterPackage = class(TInterfacedObject,
+		IIM_ConvertFilterPackage)
+	private
+		fFilters: TInterfaceList;
+	protected
+		function GetFilter(AIndex: Integer): IIM_ConvertFilter; overload;
+		procedure SetFilter(AIndex: Integer; Value: IIM_ConvertFilter);
+		function GetFilterByID(ID: String): IIM_ConvertFilter; overload;
+		procedure SetFilterByID(ID: String; Value: IIM_ConvertFilter);
+	public
+		constructor Create; virtual;
+		destructor Destroy; override;
+		procedure SetupFilters(SourceInterface: IIM_InterfaceFile);
+		function NumIncludes: Integer;
+		function IsIncluded(AIndex: Integer): Boolean;
+		function IncludeLookup: TIndexLookupList;
+		procedure AddFilter(AFilter: IIM_ConvertFilter);
+		procedure DeleteFilter(AFilter: IIM_ConvertFilter);
+	//----------------------------------------------------------------------------
+		property Filter[AIndex: Integer]: IIM_ConvertFilter read GetFilter
+			write SetFilter;
+		property FilterByID[ID: String]: IIM_ConvertFilter read GetFilterByID
+			write SetFilterByID;
+	end;
+
+	T_SWMM_TEXT_StandardInterfaceFileHeader = class;
+	{=============================================================================
+		 Name: T_SWMM_TEXT_StandardInterfaceFile
 		 Purpose: Provides services for reading, writing, and manipulating standard
-			 swmm interface files in XP 8.x+ format
+			 swmm interface files in Text format
 		 Requirements: -
 	=============================================================================}
-	T_SWMM_XP_StandardInterfaceFile = class(TInterfacedObject,
+	T_SWMM_TEXT_StandardInterfaceFile = class(TInterfacedObject,
 		IIM_InterfaceFile,
 		IIM_Convert)
 	private
@@ -87,49 +117,16 @@ type
 	//-IIM_Convertible implementation-------------------------------------------
 		procedure ConvertFrom(ASourceInterface: IIM_InterfaceFile;
 			AFilterPackage: IIM_ConvertFilterPackage = nil);
-{		procedure ConvertTo(ADestInterface: IIM_InterfaceFile;
-			AFilterPackage: IIM_ConvertFilterPackage = nil);}
 	end;
 
 	{=============================================================================
-		Name: T_SWMM_XP_ConvertFilterPackage
-		Purpose: Provides filter information for a source XP interface file
-		Requirements:
-	=============================================================================}
-	T_SWMM_XP_ConvertFilterPackage = class(TInterfacedObject,
-		IIM_ConvertFilterPackage)
-	private
-		fFilters: TInterfaceList;
-	protected
-		function GetFilter(AIndex: Integer): IIM_ConvertFilter; overload;
-		procedure SetFilter(AIndex: Integer; Value: IIM_ConvertFilter);
-		function GetFilterByID(ID: String): IIM_ConvertFilter; overload;
-		procedure SetFilterByID(ID: String; Value: IIM_ConvertFilter);
-	public
-		constructor Create; virtual;
-		destructor Destroy; override;
-		procedure SetupFilters(SourceInterface: IIM_InterfaceFile);
-		function NumIncludes: Integer;
-		function IsIncluded(AIndex: Integer): Boolean;
-		function IncludeLookup: TIndexLookupList;
-		procedure AddFilter(AFilter: IIM_ConvertFilter);
-		procedure DeleteFilter(AFilter: IIM_ConvertFilter);
-	//----------------------------------------------------------------------------
-		property Filter[AIndex: Integer]: IIM_ConvertFilter read GetFilter
-			write SetFilter;
-		property FilterByID[ID: String]: IIM_ConvertFilter read GetFilterByID
-			write SetFilterByID;
-	end;
-
-	T_SWMM_XP_StandardInterfaceFile_TimeSeriesData = class;
-	{=============================================================================
-		 Name: T_SWMM_XP_StandardInterfaceFile_DataIterator
-		 Purpose: Provides a way to traverse back and forth an XP standard interface
+		 Name: T_SWMM_TEXT_StandardInterfaceFile_TimeSeriesDataIterator
+		 Purpose: Provides a way to traverse back and forth an F95 standard interface
 			 file
-		 Requirements: a T_SWMM_XP_StandardInterfaceFile
-		 Restrictions: usage restricted to T_SWMM_XP_StandardInterfaceFile
+		 Requirements: a T_SWMM_TEXT_StandardInterfaceFile
+		 Restrictions: usage restricted to T_SWMM_TEXT_StandardInterfaceFile
 	=============================================================================}
-	T_SWMM_XP_StandardInterfaceFile_DataIterator = class(TInterfacedObject,
+	T_SWMM_TEXT_StandardInterfaceFile_DataIterator = class(TInterfacedObject,
 		IIM_InterfaceTimeSeriesDataIterator)
 	private
 		fInterfaceFile: Pointer;
@@ -159,11 +156,11 @@ type
 	end;
 
 	{=============================================================================
-		 Name: T_SWMM_XP_StandardInterfaceFile_TimeSeriesData
+		 Name: T_SWMM_TEXT_StandardInterfaceFile_TimeSeriesData
 		 Purpose: Provides access to standard interface file data
-		 Requirements: a T_SWMM_XP_StandardInterfaceFile_TimeSeriesDataIterator
+		 Requirements: a T_SWMM_TEXT_StandardInterfaceFile_DataIterator
 	=============================================================================}
-	T_SWMM_XP_StandardInterfaceFile_TimeSeriesData = class(TInterfacedObject,
+	T_SWMM_TEXT_StandardInterfaceFile_TimeSeriesData = class(TInterfacedObject,
 		IIM_InterfaceTimeSeriesData)
 	private
 		fIterator: Pointer;
@@ -192,12 +189,12 @@ type
 	end;
 
 	{=============================================================================
-		 Name: T_SWMM_XP_StandardInterfaceFileHeader
+		 Name: T_SWMM_TEXT_StandardInterfaceFileHeader
 		 Purpose:
 		 Requirements:
-		 Restrictions: usage restricted to T_SWMM_XP_StandardInterfaceFile
+		 Restrictions: usage restricted to TSWMM_F95_StandardInterfaceFile
 	=============================================================================}
-	T_SWMM_XP_StandardInterfaceFileHeader = class(TInterfacedObject,
+	T_SWMM_TEXT_StandardInterfaceFileHeader = class(TInterfacedObject,
 		IIM_InterfaceHeader)
 	private
 		fTitles: array[1..4] of String;
@@ -256,15 +253,23 @@ type
 	end;
 
 	{=============================================================================
-		 Name: T_SWMM_XP_InterfaceFileIO
+		 Name: T_SWMM_TEXT_InterfaceFileIO
 		 Purpose:	Provides IO services for XP interface file
-		 Requirements: usage restricted to T_SWMM_XP_StandardInterfaceFile
+		 Requirements: usage restricted to T_SWMM_TEXT_StandardInterfaceFile
 	=============================================================================}
-	T_SWMM_XP_InterfaceFileIO = class(TInterfacedObject,
+	T_SWMM_TEXT_InterfaceFileIO = class(TInterfacedObject,
 		IIM_InterfaceFileIO)
 	private
 		fStream: TStBufferedStream;
+    fTextStream: TStAnsiTextStream;
 		fInterfaceFile: Pointer;
+		fTokens: TStringList;
+		fCurrentWriteRecordStream: String;
+		fCurrentWriteRecordSize: Integer;
+		fCurrentTokenIndex: Integer;
+    fCurrentLine: String;
+		procedure CheckCurrentLineTokens;
+    function IsEndOfRecord: Boolean;
 	public
 	//-Object management----------------------------------------------------------
 		constructor Create(AInterfaceFile: IIM_InterfaceFile; AStream: TStBufferedStream);
@@ -300,14 +305,14 @@ implementation
 
 uses CodeSiteLogging, fProgress, Forms, Types;
 
-{ T_SWMM_XP_StandardInterfaceFile }
+{ T_SWMM_TEXT_StandardInterfaceFile }
 
-procedure T_SWMM_XP_StandardInterfaceFile.WriteInterface;
+procedure T_SWMM_TEXT_StandardInterfaceFile.WriteInterface;
 begin
 	fHeader.WriteHeader;
 end;
 
-constructor T_SWMM_XP_StandardInterfaceFile.Create(AFile: TFileName;
+constructor T_SWMM_TEXT_StandardInterfaceFile.Create(AFile: TFileName;
 	Mode: Word);
 var
 	i: Integer;
@@ -316,137 +321,52 @@ begin
 	fFileName := AFile;
 	fStream := TFileStream.Create(fFileName, Mode);
 	fBuffer := TStBufferedStream.Create(fStream);
-	fHeader := T_SWMM_XP_StandardInterfaceFileHeader.Create(Self);
-	IO := T_SWMM_XP_InterfaceFileIO.Create(Self, fBuffer);
+	fHeader := T_SWMM_TEXT_StandardInterfaceFileHeader.Create(Self);
+	IO := T_SWMM_TEXT_InterfaceFileIO.Create(Self, fBuffer);
 	if Mode <> fmCreate then
 		fHeader.ReadHeader;
 end;
 
-procedure T_SWMM_XP_StandardInterfaceFile.SetHeaderValue(AIndex: String;
+procedure T_SWMM_TEXT_StandardInterfaceFile.SetHeaderValue(AIndex: String;
 	Value: Variant);
 begin
-	Assert(false, 'T_SWMM_XP_StandardInterfaceFile.SetHeaderValue not implemented');
+	Assert(false, 'T_SWMM_TEXT_StandardInterfaceFile.SetHeaderValue not implemented');
 end;
 
-function T_SWMM_XP_StandardInterfaceFile.GetIOServices: IIM_InterfaceFileIO;
+function T_SWMM_TEXT_StandardInterfaceFile.GetIOServices: IIM_InterfaceFileIO;
 begin
 	Result := IO;
 end;
 
-function T_SWMM_XP_StandardInterfaceFile.GetTimeSeriesDataIterator: IIM_InterfaceTimeSeriesDataIterator;
+function T_SWMM_TEXT_StandardInterfaceFile.GetTimeSeriesDataIterator: IIM_InterfaceTimeSeriesDataIterator;
 begin
-	Result := T_SWMM_XP_StandardInterfaceFile_DataIterator.Create(Self);
+	Result := T_SWMM_TEXT_StandardInterfaceFile_DataIterator.Create(Self);
 end;
 
-function T_SWMM_XP_StandardInterfaceFile.GetHeaderValue(
+function T_SWMM_TEXT_StandardInterfaceFile.GetHeaderValue(
 	AIndex: String): Variant;
 begin
-	Assert(false, 'T_SWMM_XP_StandardInterfaceFile.GetHeaderValue not implemented');
+	Assert(false, 'T_SWMM_TEXT_StandardInterfaceFile.GetHeaderValue not implemented');
 end;
 
-procedure T_SWMM_XP_StandardInterfaceFile.ReadInterface;
+procedure T_SWMM_TEXT_StandardInterfaceFile.ReadInterface;
 begin
 	fHeader.ReadHeader;
 end;
 
-destructor T_SWMM_XP_StandardInterfaceFile.Destroy;
+destructor T_SWMM_TEXT_StandardInterfaceFile.Destroy;
 begin
 	fBuffer.Free;
 	fStream.Free;
 	inherited;
 end;
 
-function T_SWMM_XP_StandardInterfaceFile.GetHeader: IIM_InterfaceHeader;
+function T_SWMM_TEXT_StandardInterfaceFile.GetHeader: IIM_InterfaceHeader;
 begin
 	Result := fHeader;
 end;
 
-{procedure T_SWMM_XP_StandardInterfaceFile.ConvertTo(
-	ADestInterface: IIM_InterfaceFile;
-	AFilterPackage: IIM_ConvertFilterPackage = nil);
-var
-	DestHeader: IIM_InterfaceHeader;
-	SourceData: IIM_InterfaceTimeSeriesData;
-	SourceDataIterator: IIM_InterfaceTimeSeriesDataIterator;
-	FilteredData: TGenericTimeSeriesData;
-	i: Integer;
-	FilteredIndices: TIndexLookupList;
-	SourceIDs: TIM_ExprEngineVarNames;
-	SourceDataValues: TIM_ExprEngineVars;
-	ExprEngine: TIM_ExprEngine;
-begin
-	DestHeader := ADestInterface.GetHeader;
-
-	// Assign Header Values
-	DestHeader.HeaderValue[IM_IFHDR_TITLE1] := fHeader.HeaderValue[IM_IFHDR_TITLE1];
-	DestHeader.HeaderValue[IM_IFHDR_TITLE2] := fHeader.HeaderValue[IM_IFHDR_TITLE2];
-	DestHeader.HeaderValue[IM_IFHDR_TITLE3] := fHeader.HeaderValue[IM_IFHDR_TITLE3];
-	DestHeader.HeaderValue[IM_IFHDR_TITLE4] := fHeader.HeaderValue[IM_IFHDR_TITLE4];
-	DestHeader.HeaderValue[IM_IFHDR_SOURCE] := fHeader.HeaderValue[IM_IFHDR_SOURCE];
-	DestHeader.HeaderValue[IM_IFHDR_STARTDATE] := fHeader.HeaderValue[IM_IFHDR_STARTDATE];
-	DestHeader.HeaderValue[IM_IFHDR_AREA] := fHeader.HeaderValue[IM_IFHDR_AREA];
-	DestHeader.HeaderValue[IM_IFHDR_MULTIPLIER] := fHeader.HeaderValue[IM_IFHDR_MULTIPLIER];
-
-	// Assign Header IDs
-	if Assigned(AFilterPackage) then
-	begin
-		FilteredIndices := AFilterPackage.IncludeLookup;
-		for i := 0 to AFilterPackage.NumIncludes-1 do
-			DestHeader.AddIndexedHeaderValue(AFilterPackage.Filter[FilteredIndices[i]].FinalID);
-	end
-	else
-	begin
-		for i := 0 to fHeader.NumIndexedHeaderValues-1 do
-			DestHeader.AddIndexedHeaderValue(fHeader.IndexedHeaderValue[i]);
-	end;
-
-	DestHeader.WriteHeader;
-
-	// Write out Data Series
-	if Assigned(AFilterPackage) then
-	begin
-		SetLength(SourceIDs, fHeader.NumIndexedHeaderValues);
-		for i := 0 to fHeader.NumIndexedHeaderValues-1 do
-			SourceIDs[i] := fHeader.IndexedHeaderValue[i];
-
-		ExprEngine := GetExpressionEngine;
-		ExprEngine.SetupVars(SourceIDs, SourceDataValues);
-
-		SourceDataIterator := GetTimeSeriesDataIterator;
-		ADestInterface.SetTimeSeriesDataIterator(SourceDataIterator);
-		while SourceDataIterator.HasNext do
-		begin
-			SourceData := SourceDataIterator.Next;
-
-			FilteredData := TGenericTimeSeriesData.Create;
-			for i := 0 to AFilterPackage.NumIncludes-1 do
-			begin
-				ExprEngine.Expression := AFilterPackage.Filter[FilteredIndices[i]].Expression;
-				FilteredData.AddIndexedDataValue(ExprEngine.Evaluate);
-			end;
-
-			ADestInterface.WriteData(FilteredData);
-
-			FilteredData.Free;
-			SourceData := nil;
-		end;
-																										 S
-		FilteredIndices.Free;
-	end
-	else
-	begin
-		SourceDataIterator := GetTimeSeriesDataIterator;
-		while SourceDataIterator.HasNext do
-		begin
-			SourceData := SourceDataIterator.Next;
-			ADestInterface.WriteData(SourceData);
-			SourceData := nil;
-		end;
-	end;
-
-end;}
-
-procedure T_SWMM_XP_StandardInterfaceFile.ConvertFrom(
+procedure T_SWMM_TEXT_StandardInterfaceFile.ConvertFrom(
 	ASourceInterface: IIM_InterfaceFile;
 	AFilterPackage: IIM_ConvertFilterPackage);
 var
@@ -560,31 +480,31 @@ begin
 
 end;
 
-function T_SWMM_XP_StandardInterfaceFile.GetFileName: TFileName;
+function T_SWMM_TEXT_StandardInterfaceFile.GetFileName: TFileName;
 begin
 	Result := fFileName;
 end;
 
-function T_SWMM_XP_StandardInterfaceFile.GetFormat: String;
+function T_SWMM_TEXT_StandardInterfaceFile.GetFormat: String;
 begin
-	Result := IM_SWMMXP_FORMAT_DESC;
+	Result := IM_SWMMTEXT_FORMAT_DESC;
 end;
 
-{ T_SWMM_XP_StandardInterfaceFileHeader }
+{ T_SWMM_TEXT_StandardInterfaceFileHeader }
 
-procedure T_SWMM_XP_StandardInterfaceFileHeader.WriteHeader;
+procedure T_SWMM_TEXT_StandardInterfaceFileHeader.WriteHeader;
 var
 	IO: IIM_InterfaceFileIO;
 	i: Integer;
 begin
 	IO := IIM_InterfaceFile(fInterfaceFile).GetIOServices;
-	IO.WriteString(fTitles[1], IM_SWMMXP_TITLE_LENGTH);
-	IO.WriteString(fTitles[2], IM_SWMMXP_TITLE_LENGTH);
+	IO.WriteString(fTitles[1], IM_SWMMTEXT_TITLE_LENGTH);
+	IO.WriteString(fTitles[2], IM_SWMMTEXT_TITLE_LENGTH);
 	IO.WriteInteger(Y2KJulDateOfDateTime(fStartDate));
 	IO.WriteDouble(SecondsOfDayOfDateTime(fStartDate));
-	IO.WriteString(fTitles[3], IM_SWMMXP_TITLE_LENGTH);
-	IO.WriteString(fTitles[4], IM_SWMMXP_TITLE_LENGTH);
-	IO.WriteString(fSourceBlock, IM_SWMMXP_SOURCEBLOCK_LENGTH);
+	IO.WriteString(fTitles[3], IM_SWMMTEXT_TITLE_LENGTH);
+	IO.WriteString(fTitles[4], IM_SWMMTEXT_TITLE_LENGTH);
+	IO.WriteString(fSourceBlock, IM_SWMMTEXT_SOURCEBLOCK_LENGTH);
 	IO.WriteInteger(Length(fFlowIDs));
 	IO.WriteInteger(fNumPollutants);
 	if IsZero(fArea) then
@@ -592,87 +512,87 @@ begin
 	else
 		IO.WriteDouble(-Abs(fArea));
 	for i := 0 to Length(fFlowIDs)-1 do
-		IO.WriteString(fFlowIDs[i], IM_SWMMXP_ALPHAID_LENGTH);
+		IO.WriteString(fFlowIDs[i], IM_SWMMTEXT_ALPHAID_LENGTH);
 	IO.WriteDouble(fFlowMultiplier);
 end;
 
-procedure T_SWMM_XP_StandardInterfaceFileHeader.SetFlowMultiplier(
+procedure T_SWMM_TEXT_StandardInterfaceFileHeader.SetFlowMultiplier(
 	Value: Double);
 begin
 	if not SameValue(fFlowMultiplier, Value, IM_EPSILON) then
 		fFlowMultiplier := Value;
 end;
 
-constructor T_SWMM_XP_StandardInterfaceFileHeader.Create(
+constructor T_SWMM_TEXT_StandardInterfaceFileHeader.Create(
 	AInterfaceFile: IIM_InterfaceFile);
 begin
 	fInterfaceFile := Pointer(AInterfaceFile);
 end;
 
-procedure T_SWMM_XP_StandardInterfaceFileHeader.SetFlowID(AIndex: Integer;
+procedure T_SWMM_TEXT_StandardInterfaceFileHeader.SetFlowID(AIndex: Integer;
 	Value: String);
 begin
 	if CompareStr(fFlowIDs[AIndex], Value) <> 0 then
 		fFlowIDs[AIndex] := Value;
 end;
 
-procedure T_SWMM_XP_StandardInterfaceFileHeader.SetSourceBlock(Value: String);
+procedure T_SWMM_TEXT_StandardInterfaceFileHeader.SetSourceBlock(Value: String);
 begin
 	if CompareStr(fSourceBlock, Value) <> 0 then
 		fSourceBlock := Value;
 end;
 
-function T_SWMM_XP_StandardInterfaceFileHeader.GetUsesAlphaNumericIDs: Boolean;
+function T_SWMM_TEXT_StandardInterfaceFileHeader.GetUsesAlphaNumericIDs: Boolean;
 begin
 	Result := True; // XP always uses alphanumeric IDs
 end;
 
-procedure T_SWMM_XP_StandardInterfaceFileHeader.SetTitles(AIndex: Integer;
+procedure T_SWMM_TEXT_StandardInterfaceFileHeader.SetTitles(AIndex: Integer;
 	Value: String);
 begin
 	if CompareStr(fTitles[AIndex], Value) <> 0 then
 		fTitles[AIndex] := Value;
 end;
 
-function T_SWMM_XP_StandardInterfaceFileHeader.GetStartDate: TDateTime;
+function T_SWMM_TEXT_StandardInterfaceFileHeader.GetStartDate: TDateTime;
 begin
 	Result := fStartDate;
 end;
 
-procedure T_SWMM_XP_StandardInterfaceFileHeader.SetUsesAlphaNumericIDs(
+procedure T_SWMM_TEXT_StandardInterfaceFileHeader.SetUsesAlphaNumericIDs(
 	Value: Boolean);
 begin
 	// Do nothing; XP always uses alphanumeric IDs
 end;
 
-function T_SWMM_XP_StandardInterfaceFileHeader.GetArea: Double;
+function T_SWMM_TEXT_StandardInterfaceFileHeader.GetArea: Double;
 begin
 	Result := fArea;
 end;
 
-function T_SWMM_XP_StandardInterfaceFileHeader.GetFlowMultiplier: Double;
+function T_SWMM_TEXT_StandardInterfaceFileHeader.GetFlowMultiplier: Double;
 begin
 	Result := fFlowMultiplier;
 end;
 
-function T_SWMM_XP_StandardInterfaceFileHeader.GetFlowID(
+function T_SWMM_TEXT_StandardInterfaceFileHeader.GetFlowID(
 	AIndex: Integer): String;
 begin
 	Result := fFlowIDs[AIndex];
 end;
 
-function T_SWMM_XP_StandardInterfaceFileHeader.GetSourceBlock: String;
+function T_SWMM_TEXT_StandardInterfaceFileHeader.GetSourceBlock: String;
 begin
 	Result := fSourceBlock;
 end;
 
-procedure T_SWMM_XP_StandardInterfaceFileHeader.SetStartDate(Value: TDateTime);
+procedure T_SWMM_TEXT_StandardInterfaceFileHeader.SetStartDate(Value: TDateTime);
 begin
 	if not SameDateTime(fStartDate, Value) then
 		fStartDate := Value;
 end;
 
-procedure T_SWMM_XP_StandardInterfaceFileHeader.ReadHeader;
+procedure T_SWMM_TEXT_StandardInterfaceFileHeader.ReadHeader;
 var
 	StartJulDate: Integer;
 	StartTime: Double;
@@ -681,57 +601,57 @@ var
 begin
 	IO := IIM_InterfaceFile(fInterfaceFile).GetIOServices;
 	IO.MoveToBeginning;
-	fTitles[1] := IO.ReadString(IM_SWMMXP_TITLE_LENGTH);
-	fTitles[2] := IO.ReadString(IM_SWMMXP_TITLE_LENGTH);
+	fTitles[1] := IO.ReadString(IM_SWMMTEXT_TITLE_LENGTH);
+	fTitles[2] := IO.ReadString(IM_SWMMTEXT_TITLE_LENGTH);
 	StartJulDate := IO.ReadInteger;
 	StartTime := IO.ReadDouble;
 	fStartDate := DateTimeOfJulDate(StartJulDate, StartTime);
-	fTitles[3] := IO.ReadString(IM_SWMMXP_TITLE_LENGTH);
-	fTitles[4] := IO.ReadString(IM_SWMMXP_TITLE_LENGTH);
-	fSourceBlock := IO.ReadString(IM_SWMMXP_SOURCEBLOCK_LENGTH);
+	fTitles[3] := IO.ReadString(IM_SWMMTEXT_TITLE_LENGTH);
+	fTitles[4] := IO.ReadString(IM_SWMMTEXT_TITLE_LENGTH);
+	fSourceBlock := IO.ReadString(IM_SWMMTEXT_SOURCEBLOCK_LENGTH);
 	fNumFlows := IO.ReadInteger;
 	SetLength(fFlowIDs, fNumFlows);
 	fNumPollutants := IO.ReadInteger;
 	fArea := IO.ReadDouble; //WARNING! XP designates this as negative
-	fUsesAlphaNumericIDs := True; // XP *always* uses alphanum IDs
+	fUsesAlphaNumericIDs := IO.ReadInteger = 1; // XP *always* uses alphanum IDs
 	for i := 0 to fNumFlows-1 do
-		fFlowIDs[i] := IO.ReadString(IM_SWMMXP_ALPHAID_LENGTH);
+		fFlowIDs[i] := IO.ReadString(IM_SWMMTEXT_ALPHAID_LENGTH);
 	fFlowMultiplier := IO.ReadDouble;
 end;
 
-procedure T_SWMM_XP_StandardInterfaceFileHeader.SetArea(Value: Double);
+procedure T_SWMM_TEXT_StandardInterfaceFileHeader.SetArea(Value: Double);
 begin
 	if not SameValue(Value, fArea, IM_EPSILON) then
 		fArea := Value;
 end;
 
-destructor T_SWMM_XP_StandardInterfaceFileHeader.Destroy;
+destructor T_SWMM_TEXT_StandardInterfaceFileHeader.Destroy;
 begin
 	fInterfaceFile := nil;
 	inherited;
 end;
 
-function T_SWMM_XP_StandardInterfaceFileHeader.GetTitles(
+function T_SWMM_TEXT_StandardInterfaceFileHeader.GetTitles(
 	AIndex: Integer): String;
 begin
 	Result := fTitles[AIndex];
 end;
 
-function T_SWMM_XP_StandardInterfaceFileHeader.Size: Int64;
+function T_SWMM_TEXT_StandardInterfaceFileHeader.Size: Int64;
 begin
 	Result :=
-		IM_SWMMXP_TITLE_LENGTH +
-		IM_SWMMXP_TITLE_LENGTH +
+		IM_SWMMTEXT_TITLE_LENGTH +
+		IM_SWMMTEXT_TITLE_LENGTH +
 		SizeOf(Integer) + SizeOf (Double) +
-		IM_SWMMXP_TITLE_LENGTH +
-		IM_SWMMXP_TITLE_LENGTH +
-		IM_SWMMXP_SOURCEBLOCK_LENGTH +
+		IM_SWMMTEXT_TITLE_LENGTH +
+		IM_SWMMTEXT_TITLE_LENGTH +
+		IM_SWMMTEXT_SOURCEBLOCK_LENGTH +
 		SizeOf(Integer) + SizeOf(Integer) + SizeOf(Double) +
-		fNumFlows * IM_SWMMXP_ALPHAID_LENGTH +
+		fNumFlows * IM_SWMMTEXT_ALPHAID_LENGTH +
 		SizeOf(Double);
 end;
 
-procedure T_SWMM_XP_StandardInterfaceFileHeader.SetHeaderValue(AIndex: String;
+procedure T_SWMM_TEXT_StandardInterfaceFileHeader.SetHeaderValue(AIndex: String;
 	Value: Variant);
 begin
 	if AIndex = IM_IFHDR_TITLE1 then
@@ -757,11 +677,11 @@ begin
 	else if AIndex = IM_IFHDR_MULTIPLIER then
 		fFlowMultiplier := Value
 	else
-		raise EIMSetHeaderValue.CreateFmt('Called T_SWMM_XP_StandardInterfaceFileHeader.'+
+		raise EIMSetHeaderValue.CreateFmt('Called T_SWMM_TEXT_StandardInterfaceFileHeader.'+
 			'SetHeaderValue with %s = %s', [AIndex, Value]);
 end;
 
-function T_SWMM_XP_StandardInterfaceFileHeader.GetHeaderValue(
+function T_SWMM_TEXT_StandardInterfaceFileHeader.GetHeaderValue(
   AIndex: String): Variant;
 begin
 	if AIndex = IM_IFHDR_TITLE1 then
@@ -788,24 +708,24 @@ begin
 		Result := Unassigned;
 end;
 
-function T_SWMM_XP_StandardInterfaceFileHeader.GetIndexedHeaderValue(
+function T_SWMM_TEXT_StandardInterfaceFileHeader.GetIndexedHeaderValue(
 	AIndex: Integer): Variant;
 begin
 	Result := fFlowIDs[AIndex];
 end;
 
-function T_SWMM_XP_StandardInterfaceFileHeader.NumIndexedHeaderValues: Integer;
+function T_SWMM_TEXT_StandardInterfaceFileHeader.NumIndexedHeaderValues: Integer;
 begin
 	Result := Length(fFlowIDs);
 end;
 
-procedure T_SWMM_XP_StandardInterfaceFileHeader.SetIndexedHeaderValue(
+procedure T_SWMM_TEXT_StandardInterfaceFileHeader.SetIndexedHeaderValue(
 	AIndex: Integer; Value: Variant);
 begin
 	fFlowIDs[AIndex] := Value;
 end;
 
-function T_SWMM_XP_StandardInterfaceFileHeader.AddIndexedHeaderValue(
+function T_SWMM_TEXT_StandardInterfaceFileHeader.AddIndexedHeaderValue(
   Value: Variant): Integer;
 begin
 	SetLength(fFlowIDs, Length(fFlowIDs)+1);
@@ -813,215 +733,237 @@ begin
   fNumFlows := Length(fFlowIDs);
 end;
 
-procedure T_SWMM_XP_StandardInterfaceFileHeader.ClearIndexedHeaderValues;
+procedure T_SWMM_TEXT_StandardInterfaceFileHeader.ClearIndexedHeaderValues;
 begin
 	SetLength(fFlowIDs, 0);
 	Finalize(fFlowIDs);
 end;
 
-{ T_SWMM_XP_InterfaceFileIO }
+{ T_SWMM_TEXT_InterfaceFileIO }
 
-function T_SWMM_XP_InterfaceFileIO.ReadByte: Byte;
+function T_SWMM_TEXT_InterfaceFileIO.ReadByte: Byte;
+begin
+	CheckCurrentLineTokens;
+	Result := Byte(StrToInt(fTokens[fCurrentTokenIndex]));
+	Inc(fCurrentTokenIndex);
+end;
+
+procedure T_SWMM_TEXT_InterfaceFileIO.WriteByte(Value: Byte);
+begin
+	Inc(fCurrentWriteRecordSize, Length(IntToStr(Value))+1);
+	fCurrentWriteRecordStream := fCurrentWriteRecordStream + IntToStr(Value) +',';
+end;
+
+function T_SWMM_TEXT_InterfaceFileIO.ReadInteger: Integer;
+begin
+	CheckCurrentLineTokens;
+	Result := StrToInt(fTokens[fCurrentTokenIndex]);
+	Inc(fCurrentTokenIndex);
+end;
+
+procedure T_SWMM_TEXT_InterfaceFileIO.WriteInteger(Value: Integer);
+begin
+	Inc(fCurrentWriteRecordSize, Length(IntToStr(Value))+1);
+	fCurrentWriteRecordStream := fCurrentWriteRecordStream + IntToStr(Value) + ',';
+end;
+
+function T_SWMM_TEXT_InterfaceFileIO.ReadDouble: Double;
+begin
+	CheckCurrentLineTokens;
+	Result := StrToFloat(fTokens[fCurrentTokenIndex]);
+	Inc(fCurrentTokenIndex);
+end;
+
+procedure T_SWMM_TEXT_InterfaceFileIO.WriteDouble(Value: Double);
+begin
+	Inc(fCurrentWriteRecordSize, Length(FloatToStrF(Value,ffFixed,15,4))+1);
+	fCurrentWriteRecordStream := fCurrentWriteRecordStream + FloatToStrF(Value,ffFixed,15,4) + ',';
+end;
+
+function T_SWMM_TEXT_InterfaceFileIO.ReadExtended: Extended;
+begin
+	CheckCurrentLineTokens;
+	Result := StrToFloat(fTokens[fCurrentTokenIndex]);
+	Inc(fCurrentTokenIndex);
+end;
+
+procedure T_SWMM_TEXT_InterfaceFileIO.WriteExtended(Value: Extended);
+begin
+	Inc(fCurrentWriteRecordSize, Length(FloatToStrF(Value,ffFixed,18,4))+1);
+	fCurrentWriteRecordStream := fCurrentWriteRecordStream + FloatToStrF(Value,ffFixed,18,4) + ',';
+end;
+
+function T_SWMM_TEXT_InterfaceFileIO.ReadSingle: Single;
+begin
+	CheckCurrentLineTokens;
+	Result := StrToFloat(fTokens[fCurrentTokenIndex]);
+	Inc(fCurrentTokenIndex);
+end;
+
+procedure T_SWMM_TEXT_InterfaceFileIO.WriteSingle(Value: Single);
+begin
+	Inc(fCurrentWriteRecordSize, Length(FloatToStrF(Value,ffFixed,7,4))+1);
+	fCurrentWriteRecordStream := fCurrentWriteRecordStream + FloatToStrF(Value,ffFixed,7,4) + ',';
+end;
+
+function T_SWMM_TEXT_InterfaceFileIO.ReadString: String;
+begin
+	CheckCurrentLineTokens;
+	Result := fTokens[fCurrentTokenIndex];
+	Inc(fCurrentTokenIndex);
+end;
+
+function T_SWMM_TEXT_InterfaceFileIO.ReadString(ALength: Integer): String;
+begin
+	CheckCurrentLineTokens;
+	Result := LeftStr(fTokens[fCurrentTokenIndex], ALength);
+	Inc(fCurrentTokenIndex);
+end;
+
+procedure T_SWMM_TEXT_InterfaceFileIO.WriteString(Value: String);
 var
-	Buf: Byte;
+	QuotedString: String;
 begin
-	fStream.Read(Buf, SizeOf(Byte));
-	Result := Buf;
+//	inherited;
+	QuotedString := AnsiQuotedStr(AnsiDequotedStr(Value,''''),'''');
+	Inc(fCurrentWriteRecordSize, Length(QuotedString)+3);
+	fCurrentWriteRecordStream := fCurrentWriteRecordStream + QuotedString + ',';
 end;
 
-procedure T_SWMM_XP_InterfaceFileIO.WriteInteger(Value: Integer);
-begin
-	fStream.Write(Value, SizeOf(Value));
-end;
-
-constructor T_SWMM_XP_InterfaceFileIO.Create(AInterfaceFile: IIM_InterfaceFile;
-	AStream: TStBufferedStream);
-begin
-	fInterfaceFile := Pointer(AInterfaceFile);
-	fStream := AStream;
-end;
-
-procedure T_SWMM_XP_InterfaceFileIO.WriteByte(Value: Byte);
-begin
-	fStream.Write(Value, SizeOf(Value));
-end;
-
-function T_SWMM_XP_InterfaceFileIO.ReadDouble: Double;
-var
-	Buf: Double;
-begin
-	fStream.Read(Buf, SizeOf(Double));
-	Result := Buf;
-end;
-
-procedure T_SWMM_XP_InterfaceFileIO.WriteDouble(Value: Double);
-begin
-	fStream.Write(Value, SizeOf(Value));
-end;
-
-procedure T_SWMM_XP_InterfaceFileIO.MoveToBeginning;
-begin
-	fStream.Seek(0, soFromBeginning);
-end;
-
-function T_SWMM_XP_InterfaceFileIO.ReadExtended: Extended;
-var
-	Buf: Extended;
-begin
-	fStream.Read(Buf, SizeOf(Extended));
-	Result := Buf;
-end;
-
-procedure T_SWMM_XP_InterfaceFileIO.MoveToEnd;
-begin
-	MoveTo(0, soEnd);
-end;
-
-function T_SWMM_XP_InterfaceFileIO.MoveTo(Offset: Int64;
-	Origin: TSeekOrigin): Int64;
-begin
-	fStream.Seek(Offset, Origin);
-end;
-
-procedure T_SWMM_XP_InterfaceFileIO.WriteExtended(Value: Extended);
-begin
-	fStream.Write(Value, SizeOf(Value));
-end;
-
-function T_SWMM_XP_InterfaceFileIO.IsEOF: Boolean;
-begin
-	Result := fStream.Position >= fStream.FastSize-1;
-end;
-
-function T_SWMM_XP_InterfaceFileIO.ReadSingle: Single;
-var
-	Buf: Single;
-begin
-	fStream.Read(Buf, SizeOf(Single));
-	Result := Buf;
-end;
-
-function T_SWMM_XP_InterfaceFileIO.ReadString: String;
-begin
-	Result := '';
-end;
-
-function T_SWMM_XP_InterfaceFileIO.ReadString(ALength: Integer): String;
-var
-	Buf: String;
-begin
-	SetLength(Buf, ALength);
-	fStream.Read(Buf[1], ALength);
-	Result := Buf;
-end;
-
-procedure T_SWMM_XP_InterfaceFileIO.WriteSingle(Value: Single);
-begin
-	fStream.Write(Value, SizeOf(Value));
-end;
-
-procedure T_SWMM_XP_InterfaceFileIO.WriteString(Value: String);
-begin
-	fStream.Write(Value[1], Length(Value));
-end;
-
-procedure T_SWMM_XP_InterfaceFileIO.WriteString(Value: String;
+procedure T_SWMM_TEXT_InterfaceFileIO.WriteString(Value: String;
 	ALength: Integer);
 begin
 	WriteString(PadL(Value, ALength));
 end;
 
-function T_SWMM_XP_InterfaceFileIO.ReadInteger: Integer;
-var
-	Buf: Integer;
+procedure T_SWMM_TEXT_InterfaceFileIO.CheckCurrentLineTokens;
 begin
-	fStream.Read(Buf, SizeOf(Integer));
-	Result := Buf;
+	if fCurrentTokenIndex = fTokens.Count then
+	begin
+		fCurrentLine := fTextStream.ReadLine;
+		ExtractTokensL(fCurrentLine, ',', '''', True, fTokens);
+		fCurrentTokenIndex := 0;
+	end;
 end;
 
-destructor T_SWMM_XP_InterfaceFileIO.Destroy;
+constructor T_SWMM_TEXT_InterfaceFileIO.Create(AInterfaceFile: IIM_InterfaceFile;
+	AStream: TStBufferedStream);
+begin
+	fInterfaceFile := Pointer(AInterfaceFile);
+	fStream := AStream;
+  fTextStream := TStAnsiTextStream.Create(fStream);
+  fTokens := TStringList.Create;
+end;
+
+procedure T_SWMM_TEXT_InterfaceFileIO.MoveToBeginning;
+begin
+	fStream.Seek(0, soFromBeginning);
+end;
+
+procedure T_SWMM_TEXT_InterfaceFileIO.MoveToEnd;
+begin
+	MoveTo(0, soEnd);
+end;
+
+function T_SWMM_TEXT_InterfaceFileIO.MoveTo(Offset: Int64;
+	Origin: TSeekOrigin): Int64;
+begin
+	fStream.Seek(Offset, Origin);
+end;
+
+function T_SWMM_TEXT_InterfaceFileIO.IsEndOfRecord: Boolean;
+begin
+	Result := (fCurrentTokenIndex = fTokens.Count);
+end;
+
+function T_SWMM_TEXT_InterfaceFileIO.IsEOF: Boolean;
+begin
+	Result := fTextStream.AtEndOfStream and IsEndOfRecord;
+end;
+
+destructor T_SWMM_TEXT_InterfaceFileIO.Destroy;
 begin
 	fInterfaceFile := nil;
+  fTextStream.Free;
 	fStream := nil;
 	inherited;
 end;
 
-function T_SWMM_XP_InterfaceFileIO.IsBeginningOfData: Boolean;
+function T_SWMM_TEXT_InterfaceFileIO.IsBeginningOfData: Boolean;
 begin
 	Result := fStream.Position < IIM_InterfaceFile(fInterfaceFile).GetHeader.Size;
 end;
 
-procedure T_SWMM_XP_InterfaceFileIO.MoveToBeginningOfData;
+procedure T_SWMM_TEXT_InterfaceFileIO.MoveToBeginningOfData;
 begin
 	fStream.Seek(IIM_InterfaceFile(fInterfaceFile).GetHeader.Size, soBeginning);
 end;
 
-procedure T_SWMM_XP_InterfaceFileIO.PreviousLine;
+procedure T_SWMM_TEXT_InterfaceFileIO.PreviousLine;
+var
+  CurPos: Int64;
+  CurLine: Int64;
 begin
-	// No record markers in XP interface files; don't do anything
+	fTextStream.SeekNearestLine(fTextStream.Position);
+  fCurrentTokenIndex := 0;
 end;
 
-procedure T_SWMM_XP_InterfaceFileIO.NextLine;
+procedure T_SWMM_TEXT_InterfaceFileIO.NextLine;
 begin
-	// No record markers in XP interface files; don't do anything
+	fCurrentLine := fTextStream.ReadLine;
+	ExtractTokensL(fCurrentLine, ',', '''', True, fTokens);
+	fCurrentTokenIndex := 0;
 end;
 
-function T_SWMM_XP_InterfaceFileIO.Position: Int64;
+function T_SWMM_TEXT_InterfaceFileIO.Position: Int64;
 begin
 	Result := fStream.Position;
 end;
 
-function T_SWMM_XP_InterfaceFileIO.Size: Int64;
+function T_SWMM_TEXT_InterfaceFileIO.Size: Int64;
 begin
 	Result := fStream.FastSize;
 end;
 
-{ T_SWMM_XP_StandardInterfaceFile_DataIterator }
+{ T_SWMM_TEXT_StandardInterfaceFile_DataIterator }
 
-function T_SWMM_XP_StandardInterfaceFile_DataIterator.HasNext: Boolean;
+function T_SWMM_TEXT_StandardInterfaceFile_DataIterator.HasNext: Boolean;
 begin
 	Result := not IIM_InterfaceFile(fInterfaceFile).GetIOServices.IsEOF;
 end;
 
-constructor T_SWMM_XP_StandardInterfaceFile_DataIterator.Create(
+constructor T_SWMM_TEXT_StandardInterfaceFile_DataIterator.Create(
 	AInterfaceFile: IIM_InterfaceFile);
 begin
 	fInterfaceFile := Pointer(AInterfaceFile);
 end;
 
-function T_SWMM_XP_StandardInterfaceFile_DataIterator.PreviousTime: TDateTime;
+function T_SWMM_TEXT_StandardInterfaceFile_DataIterator.PreviousTime: TDateTime;
 begin
 	Result := fPreviousTime;
 end;
 
-function T_SWMM_XP_StandardInterfaceFile_DataIterator.CurrentTimeStep: Double;
+function T_SWMM_TEXT_StandardInterfaceFile_DataIterator.CurrentTimeStep: Double;
 begin
-{	if SameDateTime(fNextTime, MaxDateTime) then
-		Result := fCurrentTimeStep
-	else
-	begin
-		Result := fNextTime - fCurrentTime;
-		fCurrentTimeStep := Result;
-	end;}
 	Result := fCurrentTimeStep;
 end;
 
-function T_SWMM_XP_StandardInterfaceFile_DataIterator.NextTime: TDateTime;
+function T_SWMM_TEXT_StandardInterfaceFile_DataIterator.NextTime: TDateTime;
 begin
 	Result := fNextTime;
 end;
 
-function T_SWMM_XP_StandardInterfaceFile_DataIterator.Current: IIM_InterfaceTimeSeriesData;
+function T_SWMM_TEXT_StandardInterfaceFile_DataIterator.Current: IIM_InterfaceTimeSeriesData;
 begin
 	Result := IIM_InterfaceTimeSeriesData(fData);
 end;
 
-function T_SWMM_XP_StandardInterfaceFile_DataIterator.CurrentTime: TDateTime;
+function T_SWMM_TEXT_StandardInterfaceFile_DataIterator.CurrentTime: TDateTime;
 begin
 	Result := IIM_InterfaceTimeSeriesData(fData).Time;
 end;
 
-function T_SWMM_XP_StandardInterfaceFile_DataIterator.Previous: IIM_InterfaceTimeSeriesData;
+function T_SWMM_TEXT_StandardInterfaceFile_DataIterator.Previous: IIM_InterfaceTimeSeriesData;
 var
 	IO: IIM_InterfaceFileIO;
 	SecondPreviousData: IIM_InterfaceTimeSeriesData;
@@ -1039,11 +981,11 @@ begin
 			fPreviousTime := MinDateTime
 		else
 		begin
-			SecondPreviousData := T_SWMM_XP_StandardInterfaceFile_TimeSeriesData.Create(
+			SecondPreviousData := T_SWMM_TEXT_StandardInterfaceFile_TimeSeriesData.Create(
 				IIM_InterfaceFile(fInterfaceFile), Self);
 			fPreviousTime := SecondPreviousData.Time;
 		end;
-		Result := T_SWMM_XP_StandardInterfaceFile_TimeSeriesData.Create(
+		Result := T_SWMM_TEXT_StandardInterfaceFile_TimeSeriesData.Create(
 			IIM_InterfaceFile(fInterfaceFile), Self);
 		fData := Pointer(Result);
 		fCurrentTime := Result.Time;
@@ -1059,14 +1001,14 @@ begin
 	end;
 end;
 
-destructor T_SWMM_XP_StandardInterfaceFile_DataIterator.Destroy;
+destructor T_SWMM_TEXT_StandardInterfaceFile_DataIterator.Destroy;
 begin
 	fData := nil;
 	fInterfaceFile := nil;
 	inherited;
 end;
 
-function T_SWMM_XP_StandardInterfaceFile_DataIterator.Next: IIM_InterfaceTimeSeriesData;
+function T_SWMM_TEXT_StandardInterfaceFile_DataIterator.Next: IIM_InterfaceTimeSeriesData;
 var
 	IO: IIM_InterfaceFileIO;
 	SecondNextData: IIM_InterfaceTimeSeriesData;
@@ -1079,7 +1021,7 @@ begin
 		else
 			fPreviousTime := MinDateTime;
 		fData := nil;
-		Result := T_SWMM_XP_StandardInterfaceFile_TimeSeriesData.Create(IIM_InterfaceFile(fInterfaceFile), Self);
+		Result := T_SWMM_TEXT_StandardInterfaceFile_TimeSeriesData.Create(IIM_InterfaceFile(fInterfaceFile), Self);
 		fCurrentTimeStep := Result.DataValue[IM_IF_TIMESTEP];
 		fData := Pointer(Result);
 		fCurrentTime:= Result.Time;
@@ -1087,12 +1029,8 @@ begin
 			fNextTime := MaxDateTime
 		else
 		begin
-//			SecondNextData := T_SWMM_XP_StandardInterfaceFile_TimeSeriesData.Create(IIM_InterfaceFile(fInterfaceFile),
-//				Self);
-//			fNextTime := SecondNextData.Time;
 			fNextTime := IncSecond(fCurrentTime, Round(fCurrentTimeStep));
 		end;
-//		IIM_InterfaceFile(fInterfaceFile).GetIOServices.MoveTo(-SecondNextData.Size, soCurrent);
 	end
 	else
 	begin
@@ -1104,12 +1042,12 @@ begin
 	end;
 end;
 
-function T_SWMM_XP_StandardInterfaceFile_DataIterator.HasPrevious: Boolean;
+function T_SWMM_TEXT_StandardInterfaceFile_DataIterator.HasPrevious: Boolean;
 begin
 	Result := not IIM_InterfaceFile(fInterfaceFile).GetIOServices.IsBeginningOfData;
 end;
 
-function T_SWMM_XP_StandardInterfaceFile_DataIterator.PositionPercent: Integer;
+function T_SWMM_TEXT_StandardInterfaceFile_DataIterator.PositionPercent: Integer;
 var
 	IFPos: Int64;
 	IFSize: Int64;
@@ -1123,21 +1061,21 @@ begin
 	Result := Round(IFPercentPos);
 end;
 
-function T_SWMM_XP_StandardInterfaceFile_DataIterator.Position: Int64;
+function T_SWMM_TEXT_StandardInterfaceFile_DataIterator.Position: Int64;
 begin
 	Result := IIM_InterfaceFile(fInterfaceFile).GetIOServices.Position;
 end;
 
-function T_SWMM_XP_StandardInterfaceFile_DataIterator.DataValidUntilTime: TDateTime;
+function T_SWMM_TEXT_StandardInterfaceFile_DataIterator.DataValidUntilTime: TDateTime;
 begin
 	Result := IncSecond(fCurrentTime, Round(fCurrentTimeStep));
 	if CompareDateTime(Result, MaxDateTime) = GreaterThanValue then
 		Result := MaxDateTime;
 end;
 
-{ T_SWMM_XP_StandardInterfaceFile_TimeSeriesData }
+{ T_SWMM_TEXT_StandardInterfaceFile_TimeSeriesData }
 
-constructor T_SWMM_XP_StandardInterfaceFile_TimeSeriesData.Create
+constructor T_SWMM_TEXT_StandardInterfaceFile_TimeSeriesData.Create
 	(AInterfaceFile: IIM_InterfaceFile;
 	AIterator: IIM_InterfaceTimeSeriesDataIterator);
 var
@@ -1155,27 +1093,27 @@ begin
 	ReadData;
 end;
 
-procedure T_SWMM_XP_StandardInterfaceFile_TimeSeriesData.SetIndexedDataValue(
+procedure T_SWMM_TEXT_StandardInterfaceFile_TimeSeriesData.SetIndexedDataValue(
 	AIndex: Integer; Value: Variant);
 begin
 	if fIndexedData[AIndex] <> Value then
 		fIndexedData[AIndex] := Value;
 end;
 
-function T_SWMM_XP_StandardInterfaceFile_TimeSeriesData.GetDataValue(
+function T_SWMM_TEXT_StandardInterfaceFile_TimeSeriesData.GetDataValue(
 	AIndex: String): Variant;
 begin
 	if AIndex = IM_IF_TIMESTEP then
 		Result := fTimeStep;
 end;
 
-function T_SWMM_XP_StandardInterfaceFile_TimeSeriesData.GetIndexedDataValue(
+function T_SWMM_TEXT_StandardInterfaceFile_TimeSeriesData.GetIndexedDataValue(
 	AIndex: Integer): Variant;
 begin
 	Result := fIndexedData[AIndex];
 end;
 
-procedure T_SWMM_XP_StandardInterfaceFile_TimeSeriesData.SetDataValue(
+procedure T_SWMM_TEXT_StandardInterfaceFile_TimeSeriesData.SetDataValue(
 	AIndex: String; Value: Variant);
 begin
 	if AIndex = IM_IF_TIMESTEP then
@@ -1183,7 +1121,7 @@ begin
 			fTimeStep := Value;
 end;
 
-procedure T_SWMM_XP_StandardInterfaceFile_TimeSeriesData.ReadData;
+procedure T_SWMM_TEXT_StandardInterfaceFile_TimeSeriesData.ReadData;
 var
 	i: Integer;
 	Header: IIM_InterfaceHeader;
@@ -1198,13 +1136,13 @@ begin
 		fIndexedData[i] := IO.ReadDouble;
 end;
 
-destructor T_SWMM_XP_StandardInterfaceFile_TimeSeriesData.Destroy;
+destructor T_SWMM_TEXT_StandardInterfaceFile_TimeSeriesData.Destroy;
 begin
 	fInterfaceFile := nil;
 	inherited;
 end;
 
-procedure T_SWMM_XP_StandardInterfaceFile_TimeSeriesData.WriteData;
+procedure T_SWMM_TEXT_StandardInterfaceFile_TimeSeriesData.WriteData;
 var
 	i: Integer;
 	Header: IIM_InterfaceHeader;
@@ -1221,114 +1159,25 @@ begin
 		IO.WriteDouble(fIndexedData[i]);
 end;
 
-function T_SWMM_XP_StandardInterfaceFile_TimeSeriesData.Time: TDateTime;
+function T_SWMM_TEXT_StandardInterfaceFile_TimeSeriesData.Time: TDateTime;
 begin
 	Result := fTime;
 end;
 
-function T_SWMM_XP_StandardInterfaceFile_TimeSeriesData.Size: Int64;
+function T_SWMM_TEXT_StandardInterfaceFile_TimeSeriesData.Size: Int64;
 begin
 	Result := SizeOf(Integer) + SizeOf(Double) + SizeOf(Double) +
 		NumIndexedDataValues * SizeOf(Double);
 end;
 
-function T_SWMM_XP_StandardInterfaceFile_TimeSeriesData.NumIndexedDataValues: Integer;
+function T_SWMM_TEXT_StandardInterfaceFile_TimeSeriesData.NumIndexedDataValues: Integer;
 begin
 	Result := Length(fIndexedData);
 end;
 
-{ T_SWMM_XP_InterfaceFile_NodeFilter }
+{ T_SWMM_TEXT_ConvertFilterPackage }
 
-constructor T_SWMM_XP_InterfaceFile_NodeFilter.Create(AID, ANewID, ANewSeries: String;
-	AInclude: Boolean; AExpression: String);
-begin
-	fID := AID;
-	fNewID := ANewID;
-	fNewSeries := ANewSeries;
-	fInclude := AInclude;
-	if AExpression = '' then
-		fExpression := fID
-	else
-		fExpression := AExpression;
-end;
-
-constructor T_SWMM_XP_InterfaceFile_NodeFilter.Create;
-begin
-	// Do nothing
-end;
-
-function T_SWMM_XP_InterfaceFile_NodeFilter.GetInclude: Boolean;
-begin
-	Result := fInclude;
-end;
-
-function T_SWMM_XP_InterfaceFile_NodeFilter.GetID: String;
-begin
-	Result := fID;
-end;
-
-function T_SWMM_XP_InterfaceFile_NodeFilter.GetExpression: String;
-begin
-	Result := fExpression;
-end;
-
-procedure T_SWMM_XP_InterfaceFile_NodeFilter.SetInclude(Value: Boolean);
-begin
-	if Value <> fInclude then
-		fInclude := Value;
-end;
-
-procedure T_SWMM_XP_InterfaceFile_NodeFilter.SetID(Value: String);
-begin
-	if CompareStr(Value, fID) <> 0 then
-		fID := Value;
-end;
-
-function T_SWMM_XP_InterfaceFile_NodeFilter.GetNewID: String;
-begin
-	Result := fNewID;
-end;
-
-procedure T_SWMM_XP_InterfaceFile_NodeFilter.SetExpression(Value: String);
-begin
-	if CompareStr(Value, fExpression) <> 0 then
-		fExpression := Value;
-end;
-
-destructor T_SWMM_XP_InterfaceFile_NodeFilter.Destroy;
-begin
-	// Do nothing
-	inherited;
-end;
-
-procedure T_SWMM_XP_InterfaceFile_NodeFilter.SetNewID(Value: String);
-begin
-	if CompareStr(Value, fNewID) <> 0 then
-		fNewID := Value;
-end;
-
-function T_SWMM_XP_InterfaceFile_NodeFilter.GetNewSeries: String;
-begin
-	Result := fNewSeries;
-end;
-
-procedure T_SWMM_XP_InterfaceFile_NodeFilter.SetNewSeries(Value: String);
-begin
-	if CompareStr(Value, fNewSeries) <> 0 then
-		fNewSeries := Value;
-end;
-
-function T_SWMM_XP_InterfaceFile_NodeFilter.GetFinalID: String;
-begin
-	if Length(fNewID) = 0 then
-		Result := fID
-	else
-		Result := fNewID;
-end;
-
-{ T_SWMM_XP_ConvertFilterPackage }
-
-procedure T_SWMM_XP_ConvertFilterPackage.SetupFilters(
+procedure T_SWMM_TEXT_ConvertFilterPackage.SetupFilters(
   SourceInterface: IIM_InterfaceFile);
 var
 	i: Integer;
@@ -1338,11 +1187,11 @@ begin
 
 	fFilters.Clear;
 	for i := 0 to SourceHeader.NumIndexedHeaderValues-1 do
-		AddFilter(T_SWMM_XP_InterfaceFile_NodeFilter.Create(
+		AddFilter(T_SWMM_TEXT_InterfaceFile_NodeFilter.Create(
 			SourceHeader.IndexedHeaderValue[i]));
 end;
 
-function T_SWMM_XP_ConvertFilterPackage.NumIncludes: Integer;
+function T_SWMM_TEXT_ConvertFilterPackage.NumIncludes: Integer;
 var
 	NumIncluded: Integer;
 	Intf: IInterface;
@@ -1354,19 +1203,19 @@ begin
 	Result := NumIncluded;
 end;
 
-function T_SWMM_XP_ConvertFilterPackage.GetFilter(
+function T_SWMM_TEXT_ConvertFilterPackage.GetFilter(
   AIndex: Integer): IIM_ConvertFilter;
 begin
 	Result := IIM_ConvertFilter(fFilters[AIndex]);
 end;
 
-procedure T_SWMM_XP_ConvertFilterPackage.DeleteFilter(
+procedure T_SWMM_TEXT_ConvertFilterPackage.DeleteFilter(
   AFilter: IIM_ConvertFilter);
 begin
 	fFilters.Delete(fFilters.IndexOf(AFilter));
 end;
 
-function T_SWMM_XP_ConvertFilterPackage.IncludeLookup: TIndexLookupList;
+function T_SWMM_TEXT_ConvertFilterPackage.IncludeLookup: TIndexLookupList;
 var
 	i: Integer;
 begin
@@ -1376,12 +1225,12 @@ begin
 			Result.Add(i);
 end;
 
-function T_SWMM_XP_ConvertFilterPackage.IsIncluded(AIndex: Integer): Boolean;
+function T_SWMM_TEXT_ConvertFilterPackage.IsIncluded(AIndex: Integer): Boolean;
 begin
 	Result := IIM_ConvertFilter(fFilters[AIndex]).Include;
 end;
 
-function T_SWMM_XP_ConvertFilterPackage.GetFilterByID(
+function T_SWMM_TEXT_ConvertFilterPackage.GetFilterByID(
   ID: String): IIM_ConvertFilter;
 var
 	FindIndex: Integer;
@@ -1393,19 +1242,19 @@ begin
 			Result := IIM_ConvertFilter(fFilters[i]);
 end;
 
-procedure T_SWMM_XP_ConvertFilterPackage.SetFilter(AIndex: Integer;
+procedure T_SWMM_TEXT_ConvertFilterPackage.SetFilter(AIndex: Integer;
   Value: IIM_ConvertFilter);
 begin
 	fFilters[AIndex] := nil;
 	fFilters[AIndex] := Value;
 end;
 
-procedure T_SWMM_XP_ConvertFilterPackage.AddFilter(AFilter: IIM_ConvertFilter);
+procedure T_SWMM_TEXT_ConvertFilterPackage.AddFilter(AFilter: IIM_ConvertFilter);
 begin
 	fFilters.Add(AFilter);
 end;
 
-procedure T_SWMM_XP_ConvertFilterPackage.SetFilterByID(ID: String;
+procedure T_SWMM_TEXT_ConvertFilterPackage.SetFilterByID(ID: String;
 	Value: IIM_ConvertFilter);
 var
 	i: Integer;
@@ -1419,15 +1268,104 @@ begin
 		end;
 end;
 
-constructor T_SWMM_XP_ConvertFilterPackage.Create;
+constructor T_SWMM_TEXT_ConvertFilterPackage.Create;
 begin
 	fFilters := TInterfaceList.Create;
 end;
 
-destructor T_SWMM_XP_ConvertFilterPackage.Destroy;
+destructor T_SWMM_TEXT_ConvertFilterPackage.Destroy;
 begin
 	fFilters.Free;
   inherited;
+end;
+
+{ T_SWMM_XP_InterfaceFile_NodeFilter }
+
+constructor T_SWMM_TEXT_InterfaceFile_NodeFilter.Create(AID, ANewID, ANewSeries: String;
+	AInclude: Boolean; AExpression: String);
+begin
+	fID := AID;
+	fNewID := ANewID;
+	fNewSeries := ANewSeries;
+	fInclude := AInclude;
+	if AExpression = '' then
+		fExpression := fID
+	else
+		fExpression := AExpression;
+end;
+
+constructor T_SWMM_TEXT_InterfaceFile_NodeFilter.Create;
+begin
+	// Do nothing
+end;
+
+function T_SWMM_TEXT_InterfaceFile_NodeFilter.GetInclude: Boolean;
+begin
+	Result := fInclude;
+end;
+
+function T_SWMM_TEXT_InterfaceFile_NodeFilter.GetID: String;
+begin
+	Result := fID;
+end;
+
+function T_SWMM_TEXT_InterfaceFile_NodeFilter.GetExpression: String;
+begin
+	Result := fExpression;
+end;
+
+procedure T_SWMM_TEXT_InterfaceFile_NodeFilter.SetInclude(Value: Boolean);
+begin
+	if Value <> fInclude then
+		fInclude := Value;
+end;
+
+procedure T_SWMM_TEXT_InterfaceFile_NodeFilter.SetID(Value: String);
+begin
+	if CompareStr(Value, fID) <> 0 then
+		fID := Value;
+end;
+
+function T_SWMM_TEXT_InterfaceFile_NodeFilter.GetNewID: String;
+begin
+	Result := fNewID;
+end;
+
+procedure T_SWMM_TEXT_InterfaceFile_NodeFilter.SetExpression(Value: String);
+begin
+	if CompareStr(Value, fExpression) <> 0 then
+		fExpression := Value;
+end;
+
+destructor T_SWMM_TEXT_InterfaceFile_NodeFilter.Destroy;
+begin
+	// Do nothing
+	inherited;
+end;
+
+procedure T_SWMM_TEXT_InterfaceFile_NodeFilter.SetNewID(Value: String);
+begin
+	if CompareStr(Value, fNewID) <> 0 then
+		fNewID := Value;
+end;
+
+function T_SWMM_TEXT_InterfaceFile_NodeFilter.GetNewSeries: String;
+begin
+	Result := fNewSeries;
+end;
+
+procedure T_SWMM_TEXT_InterfaceFile_NodeFilter.SetNewSeries(Value: String);
+begin
+	if CompareStr(Value, fNewSeries) <> 0 then
+		fNewSeries := Value;
+end;
+
+function T_SWMM_TEXT_InterfaceFile_NodeFilter.GetFinalID: String;
+begin
+	if Length(fNewID) = 0 then
+		Result := fID
+	else
+		Result := fNewID;
 end;
 
 end.

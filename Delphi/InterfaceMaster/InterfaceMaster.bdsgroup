@@ -11,8 +11,7 @@
 	<Default.Personality>  <Projects>
       <Projects Name="InterfaceMaster.exe">InterfaceMaster.bdsproj</Projects>
       <Projects Name="InterfaceMasterTests.exe">Test\InterfaceMasterTests.bdsproj</Projects>
-      <Projects Name="AQTimeProfiling">C:\Documents and Settings\ARNELM\My Documents\Borland Studio Projects\AQTimeProfiling.bdsproj</Projects>
-      <Projects Name="Targets">InterfaceMaster.exe InterfaceMasterTests.exe AQTimeProfiling</Projects>
+      <Projects Name="Targets">InterfaceMaster.exe InterfaceMasterTests.exe</Projects>
     </Projects>
     <Dependencies/>
   </Default.Personality>

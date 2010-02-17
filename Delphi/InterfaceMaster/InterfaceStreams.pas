@@ -2628,6 +2628,14 @@ begin
 	fNumWeirs := ReadInteger;
 	fTimeStep := ReadSingle;
 
+  // Additional data inserted into header (unknown contents) between 9.5
+  // and 10.6
+  ReadInteger;
+  ReadInteger;
+  ReadInteger;
+  ReadInteger;
+  ReadByte;
+
 	SetLength(fNodes, fNumJunctions);
 	for i := 1 to fNumJunctions do
 		fNodes[i-1].ID := Trim(ReadString(12));

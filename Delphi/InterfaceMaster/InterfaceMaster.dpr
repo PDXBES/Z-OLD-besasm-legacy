@@ -60,7 +60,8 @@ uses
   uTNodesList in 'FlowDistributorModel\uTNodesList.pas',
   uTFlowFileSpecs in 'FlowDistributorModel\uTFlowFileSpecs.pas',
   fDistributeFlowsToModel in 'fDistributeFlowsToModel.pas' {frmDistributeFlowsToModel},
-  uTMainConfigSpecs in 'FlowDistributorModel\uTMainConfigSpecs.pas';
+  uTMainConfigSpecs in 'FlowDistributorModel\uTMainConfigSpecs.pas',
+  uIM_SWMM_TEXT_InterfaceFiles in 'uIM_SWMM_TEXT_InterfaceFiles.pas';
 
 {$R *.res}
 var
