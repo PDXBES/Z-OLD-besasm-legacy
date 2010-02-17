@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemsAnalysis.Modeling.PumpStations", "SystemsAnalysis.Modeling.PumpStations.csproj", "{3623E8C3-4DFB-4635-801C-C577328937C3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemsAnalysis.DataAccess", "..\DataAccess\SystemsAnalysis.DataAccess.csproj", "{D81499E0-ED3E-4C85-9F8E-72C263AA24C4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemsAnalysis.Modeling", "..\Modeling\SystemsAnalysis.Modeling.csproj", "{54555B74-906E-4D29-9BC3-7653805B6AD0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3623E8C3-4DFB-4635-801C-C577328937C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3623E8C3-4DFB-4635-801C-C577328937C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3623E8C3-4DFB-4635-801C-C577328937C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3623E8C3-4DFB-4635-801C-C577328937C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D81499E0-ED3E-4C85-9F8E-72C263AA24C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D81499E0-ED3E-4C85-9F8E-72C263AA24C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D81499E0-ED3E-4C85-9F8E-72C263AA24C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D81499E0-ED3E-4C85-9F8E-72C263AA24C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54555B74-906E-4D29-9BC3-7653805B6AD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54555B74-906E-4D29-9BC3-7653805B6AD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54555B74-906E-4D29-9BC3-7653805B6AD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54555B74-906E-4D29-9BC3-7653805B6AD0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

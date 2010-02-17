@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="\\Cassio\Modeling\Model_Programs\bin\ReportGenerator\excel_char.xsl" ?>
+<ReportGenerator reportName="CSSP Alternative Report Part 1 - Conveyance Alternative" studyArea="" >
+<CharacterizationTable tableNumber="1" tableTitle="Alternative Summary" columnCount="5">
+		<Header>
+			<Cell data="Focus Area" cellType="COLUMNNAME"></Cell>			
+			<Cell data="2-Year Storm (Existing Conditions)" cellType="COLUMNNAME" footerID="*"></Cell>
+			<Cell data="5-Year Storm (Existing Conditions)" cellType="COLUMNNAME" footerID="*"></Cell>
+			<Cell data="25-Year Storm (Existing Conditions)" cellType="COLUMNNAME" footerID="*"></Cell>
+			<Cell data="25-Year Storm (Existing Conditions)" cellType="COLUMNNAME" footerID="*"></Cell>
+		</Header>				
+		<Row isMultiRow="true" multiRowKey="FocusArea">
+			<Cell cellType="FUNCTION">
+				<Function functionName="FocusAreaName" library="AlternativeReport">
+					<Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>					
+				</Function>
+			</Cell>
+			<Cell cellType="CONST" data="" />											
+			<Cell cellType="CONST" data="" />
+			<Cell cellType="CONST" data="" />
+			<Cell cellType="CONST" data="" />
+		</Row>	
+		<Footer footerID="*" footerText="Number of tax lots with BSBR; source: Sellwood, Insley &amp; Western Lents Basins Study Area Sewer Hydraulic Characterization Technical Memorandum (BES, October 23, 2006)." />		
+	</CharacterizationTable>
+	<CharacterizationTable tableNumber="2" tableTitle="Components and Effectiveness of the Conveyance Alternative" columnCount="5">
+		<Header>
+			<Cell data="Focus Area" cellType="COLUMNNAME"></Cell>			
+			<Cell data="Number of New or Upsized Pipes" cellType="COLUMNNAME"></Cell>
+			<Cell data="Length of New or Upsized Pipes (ft)" cellType="COLUMNNAME"></Cell>
+			<Cell data="Number of BSBR Eliminated" cellType="COLUMNNAME" footerID="*"></Cell>
+			<Cell data="Number of BSBR Remaining" cellType="COLUMNNAME" footerID="*"></Cell>
+		</Header>	
+		<Row isMultiRow="true" multiRowKey="FocusArea">
+			<Cell cellType="FUNCTION">
+				<Function functionName="FocusAreaName" library="AlternativeReport">
+					<Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="NewAndUpsizedPipeCount" library="AlternativeReport" format="N0">
+					<Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="NewAndUpsizedPipeLength" library="AlternativeReport" format="N0" suffix="'">		
+					<Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+				</Function>							
+			</Cell>
+			<Cell cellType="CONST" data="" />							
+			<Cell cellType="CONST" data="" />							
+		</Row>					
+		<Footer footerID="*" footerText="Based on the 25-year design storm for future conditions." />    
+	</CharacterizationTable>
+	<CharacterizationTable tableNumber="3" tableTitle="Poor-Condition Pipe Replacements under Conveyance Alternative" columnCount="7">
+		<Header>
+			<Cell data="Focus Area" cellType="COLUMNNAME" rowSpan="2"></Cell>			
+			<Cell data="Poor Condition Pipes" cellType="COLUMNNAME" colSpan="2"></Cell>
+			<Cell data="Poor Condition Pipes Replaced through Upsizing" cellType="COLUMNNAME" colSpan="2"></Cell>
+			<Cell data="Poor Condition Pipes Remaining to be Repaired or Replaced" cellType="COLUMNNAME" colSpan="2"></Cell>				
+		</Header>	
+		<Header>				
+			<Cell data="Number" cellType="COLUMNNAME"></Cell>
+			<Cell data="Length (ft)" cellType="COLUMNNAME"></Cell>
+			<Cell data="Number" cellType="COLUMNNAME"></Cell>
+			<Cell data="Length (ft)" cellType="COLUMNNAME"></Cell>
+			<Cell data="Number" cellType="COLUMNNAME"></Cell>
+			<Cell data="Length (ft)" cellType="COLUMNNAME"></Cell>
+		</Header>	
+		<Row isMultiRow="true" multiRowKey="FocusArea">
+			<Cell cellType="FUNCTION">
+				<Function functionName="FocusAreaName" library="AlternativeReport">
+					<Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PoorConditionPipeCount" library="AlternativeReport" format="N0">
+					<Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>					
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PoorConditionPipeLength" library="AlternativeReport" format="N0" suffix="'">
+					<Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="UpsizedPoorConditionPipeCount" library="AlternativeReport" format="N0">		
+					<Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+				</Function>							
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="UpsizedPoorConditionPipeLength" library="AlternativeReport" format="N0" suffix="'">		
+					<Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+				</Function>						
+			</Cell>			
+			<Cell cellType="FUNCTION">
+				<Function functionName="RIKPipeCount" library="AlternativeReport" format="N0">		
+					<Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+				</Function>							
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="RIKPipeLength" library="AlternativeReport" format="N0" suffix="'">		
+					<Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+				</Function>						
+			</Cell>				
+		</Row>					   
+	</CharacterizationTable>	
+</ReportGenerator>

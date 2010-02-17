@@ -1,0 +1,23 @@
+Lahey MAKE, Version 5.2
+(C) Copyright OPUS Software 1987-91.  All rights reserved.
+
+f77l3 axtparse.for 
+
+Compiling line 1:       PROGRAM AXTPARSE
+File axtparse.for, line 658:
+' USING INTERFACE FILE 'A//)
+                       ^
+Warning - Next character ',' assumed.
+
+Warning - CHARACTER*12 variable (FILOUT) is declared but never used, 
+File axtparse.for, line 14.
+Warning - CHARACTER*12 variable (STATION) is declared but never used, 
+File axtparse.for, line 14.
+
+Warning - INTEGER array (JSUR) assigned a value, never used, 
+File axtparse.for, lines 136, 564.
+Warning - REAL array (DEPTH) assigned a value, never used, 
+File axtparse.for, lines 348, 354, 556, 560.
+
+386link axtparse.obj -EXE AXTParse.exe -MAP nul -LIB  -SYMBOLS -FULLWARN -80486 -STUB RUNB
+386|LINK: 4.1L -- Copyright (C) 1986-91 Phar Lap Software, Inc.
