@@ -890,6 +890,7 @@ Sub DlgSUpdt
 			End If					
 	ELSE
 			sShp= qyRecUpdt.PipeShape
+			sFTyp = qyRecUpdt.LinkType
 	END IF
 
 	sLTyp = qyRecUpdt.LinkType
@@ -907,9 +908,9 @@ Sub DlgSUpdt
 	Title "Update Segment Attributes" Position 250,100 'Calling ChkExObj
 	Control StaticText		ID 8500	Position 10,7			Width 120		Title sPip    
 	Control StaticText		ID 8500	Position 10,20		Width 60		Title "LINK TYPE:"    
-	Control EditText		ID 8490	Position 75,20		Width 60		Value "C"		into sLTyp
+	Control EditText		ID 8490	Position 75,20		Width 60		Value sLTyp	into sLTyp
 	Control StaticText		ID 8480	Position 10,30		Width 60		Title "FLOW TYPE:"    
-	Control EditText		ID 8470	Position 75,30		Width 60		Value "C"		into sFtyp
+	Control EditText		ID 8470	Position 75,30		Width 60		Value sFTyp	into sFtyp
 	Control StaticText		ID 8462	Position 10,40		Width 60		Title "LENGTH (ft):"    
 	Control EditText		ID 8461	Position 75,40		Width 60		Value fLen	into fLen
 	Control StaticText		ID 8460	Position 10,50		Width 60		Title "DIAMETER (in):"    
@@ -1037,7 +1038,7 @@ Call PipAttribs
 
 DoUpdt:
 		Update qyUpdt set 
-			LinkType = uCase$(upLTyp),	
+			LinkType = uCase$(upFTyp),	
 			PipeShape = uCase$(upSHP),
 			Material = uCase$(upMAT),	
 			USIE = upUIE,	
