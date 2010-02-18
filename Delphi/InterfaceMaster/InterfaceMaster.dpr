@@ -1,6 +1,7 @@
 program InterfaceMaster;
 
 {%TogetherDiagram 'ModelSupport\default.txaPackage'}
+{%TogetherDiagram 'ModelSupport_InterfaceMaster\default.txaPackage'}
 
 uses
   ShareMem,
@@ -61,7 +62,8 @@ uses
   uTFlowFileSpecs in 'FlowDistributorModel\uTFlowFileSpecs.pas',
   fDistributeFlowsToModel in 'fDistributeFlowsToModel.pas' {frmDistributeFlowsToModel},
   uTMainConfigSpecs in 'FlowDistributorModel\uTMainConfigSpecs.pas',
-  uIM_SWMM_TEXT_InterfaceFiles in 'uIM_SWMM_TEXT_InterfaceFiles.pas';
+  uIM_SWMM_TEXT_InterfaceFiles in 'uIM_SWMM_TEXT_InterfaceFiles.pas',
+  uIM_SWMM_F95_InterfaceFiles in 'uIM_SWMM_F95_InterfaceFiles.pas';
 
 {$R *.res}
 var
