@@ -612,8 +612,8 @@ begin
 	fNumFlows := IO.ReadInteger;
 	SetLength(fFlowIDs, fNumFlows);
 	fNumPollutants := IO.ReadInteger;
-	fArea := IO.ReadDouble; //WARNING! XP designates this as negative
-	fUsesAlphaNumericIDs := IO.ReadInteger = 1; // XP *always* uses alphanum IDs
+	fArea := IO.ReadDouble;
+	fUsesAlphaNumericIDs := IO.ReadInteger <> 0;
 	for i := 0 to fNumFlows-1 do
 		fFlowIDs[i] := IO.ReadString(IM_SWMMTEXT_ALPHAID_LENGTH);
 	fFlowMultiplier := IO.ReadDouble;
