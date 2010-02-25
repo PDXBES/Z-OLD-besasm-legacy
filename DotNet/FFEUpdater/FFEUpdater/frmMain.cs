@@ -31,26 +31,63 @@ namespace FFEUpdater
     {
         public frmMain()
         {
-            InitializeComponent();      
+            System.Threading.Thread th = new System.Threading.Thread(DoSplash);
+            th.Start();
+            InitializeComponent();
         }
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            statusStrip1.Text = "Initializing...";
+            statusStrip.Text = "Initializing...";
+            tabControlMain.Visible = false;
+            //tabControlMain.Tabs.Remove(tabPageMain);
         }
 
-        public void FnPrBar()
+        /// <summary>
+        /// Displays splash screen (for multithreading)
+        /// </summary>
+        private static void DoSplash()
         {
-            //progressBar1.Increment(1);
-            //statusStrip1.Text = "Running FFE Update " + progressBar1.Value.ToString() + "% Complete";
-            //if (progressBar1.Value == progressBar1.Maximum)
-            //{
-            //    timer1.Stop();
-            //    MessageBox.Show("FFE Update Complete");
-            //    this.Close();
-            //    timer1.Stop();
-            //}
-        }
+            DoSplash(false);
+        } // DoSplash()
+
+        /// <summary>
+        /// Loads the splash screen during start-up
+        /// </summary>
+        private static void DoSplash(bool waitForClick)
+        {
+            string versionText = "x.x.x.x";
+            string dateText = "1/1/1900";
+            if (System.Deployment.Application.ApplicationDeployment.IsNetworkDeployed)
+            {
+                Version v = System.Deployment.Application.ApplicationDeployment.CurrentDeployment.CurrentVersion;
+                versionText = v.Major + "." + v.Minor + "." + v.Build + "." + v.Revision;
+                //debug msg
+                //MessageBox.Show("is network deployed");
+                //MessageBox.Show("Major=" + v.Major + "Minor=" + v.Minor + "Build=" + v.Build + "Revision=" + v.Revision);
+                dateText = System.IO.File.GetLastWriteTime(System.Reflection.Assembly.GetExecutingAssembly().Location).ToString("MMMM dd yyyy");
+            } // if
+            else
+            {
+                System.Reflection.AssemblyName assemblyName =
+                System.Reflection.Assembly.GetExecutingAssembly().GetName(false);
+                int minorVersion = assemblyName.Version.Minor;
+                int majorVersion = assemblyName.Version.Major;
+                int build = assemblyName.Version.Build;
+                int revision = assemblyName.Version.Revision;
+                versionText = string.Format("{0}.{1}.{2}.{3}", majorVersion, minorVersion, build, revision);
+                //debug msg
+                //MessageBox.Show("not network deployed");
+                //MessageBox.Show("Major=" + majorVersion + "Minor=" + minorVersion + "Build=" + build + "Revision=" + revision);
+                FileInfo fi = new FileInfo("FFEUpdater.exe");
+                dateText = fi.CreationTime.Date.ToString("MMMM dd yyyy");
+            } // else
+
+            using (frmSplashScreen sp = new frmSplashScreen(versionText, dateText))
+            {
+                sp.ShowDialog(waitForClick);
+            }
+        } // DoSplash(waitForClick)
 
         private void btnUpdateFFE_Click(object sender, EventArgs e)
         {
@@ -60,10 +97,10 @@ namespace FFEUpdater
                 object oMissing = System.Reflection.Missing.Value;
 
                 // Create an instance of Microsoft Access, make it visible,
-                // and open mst_DSC_ac.mdb
+                // and open Survey_FFE.mdb
                 Access.ApplicationClass oAccess = new Access.ApplicationClass();
                 oAccess.Visible = true;
-                oAccess.OpenCurrentDatabase("W:\\SAMaster_22\\Parcels_Divides\\mst_DSC_ac.mdb", false, "");
+                oAccess.OpenCurrentDatabase("W:\\SAMaster_22\\Parcels_Divides\\Survey_FFE.mdb", false, "");
 
                 //Debug message
                 //MessageBox.Show("Access open");
@@ -80,25 +117,16 @@ namespace FFEUpdater
             }
             catch (System.Exception ex)
             {
-                throw ex;
+                MessageBox.Show(ex.Message, "FFEUpdater: Exception Thrown", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
 
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string fi;
-            fi=@"\\Cassio\asm_apps\Apps\FFEUpdater\publish.htm";
+            fi = @"\\Cassio\asm_apps\Apps\FFEUpdater\publish.htm";
             System.Diagnostics.Process.Start("IEXPLORE.EXE", fi);
-        }
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            FnPrBar();
         }
 
         private void RunMacro(object oApp, object[] oRunArgs)
@@ -107,6 +135,44 @@ namespace FFEUpdater
                 System.Reflection.BindingFlags.Default |
                 System.Reflection.BindingFlags.InvokeMethod,
                 null, oApp, oRunArgs);
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void btnCloseFFEUpdater_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void expBarMain_ItemClick(object sender, Infragistics.Win.UltraWinExplorerBar.ItemEventArgs e)
+        {
+            try
+            {
+                Cursor = Cursors.WaitCursor;
+                switch (e.Item.Key)
+                {
+                    case "RunFFEUpdate":
+                        RunFFEUpdate();
+                        break;
+                    default:
+                        return;
+                } //switch
+                return;
+            } //try
+            finally
+            {
+                Cursor = Cursors.Default;
+            }//finally
+        } //expBarMain_ItemClick (sender, e)
+
+        private void RunFFEUpdate()
+        {
+            //debug msg
+            //MessageBox.Show("Running RunFFEUpdate");
+            tabControlMain.Visible = true;
         }
     }
 }
