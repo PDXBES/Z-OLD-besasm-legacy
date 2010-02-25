@@ -51,6 +51,7 @@ namespace SystemsAnalysis.Reporting
             Infragistics.Win.UltraWinDock.DockAreaPane dockAreaPane2 = new Infragistics.Win.UltraWinDock.DockAreaPane(Infragistics.Win.UltraWinDock.DockedLocation.DockedLeft, new System.Guid("06568699-2f4d-4df6-a3dc-20fe0cb29ece"));
             Infragistics.Win.UltraWinDock.DockableControlPane dockableControlPane2 = new Infragistics.Win.UltraWinDock.DockableControlPane(new System.Guid("647f36e1-daa0-4825-9370-169f2cdc2952"), new System.Guid("00000000-0000-0000-0000-000000000000"), -1, new System.Guid("06568699-2f4d-4df6-a3dc-20fe0cb29ece"), -1);
             this.panel1 = new System.Windows.Forms.Panel();
+            this.statusDisplayControl = new SystemsAnalysis.Reporting.StatusDisplayControl();
             this.ultraExplorerBar1 = new Infragistics.Win.UltraWinExplorerBar.UltraExplorerBar();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.fileMenu = new System.Windows.Forms.ToolStripMenuItem();
@@ -112,7 +113,6 @@ namespace SystemsAnalysis.Reporting
             this.dockableWindow7 = new Infragistics.Win.UltraWinDock.DockableWindow();
             this.windowDockingArea1 = new Infragistics.Win.UltraWinDock.WindowDockingArea();
             this.windowDockingArea3 = new Infragistics.Win.UltraWinDock.WindowDockingArea();
-            this.statusDisplayControl = new SystemsAnalysis.Reporting.StatusDisplayControl();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ultraExplorerBar1)).BeginInit();
             this.menuStrip.SuspendLayout();
@@ -133,6 +133,15 @@ namespace SystemsAnalysis.Reporting
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(632, 77);
             this.panel1.TabIndex = 35;
+            // 
+            // statusDisplayControl
+            // 
+            this.statusDisplayControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.statusDisplayControl.Location = new System.Drawing.Point(0, 0);
+            this.statusDisplayControl.Margin = new System.Windows.Forms.Padding(2);
+            this.statusDisplayControl.Name = "statusDisplayControl";
+            this.statusDisplayControl.Size = new System.Drawing.Size(632, 77);
+            this.statusDisplayControl.TabIndex = 0;
             // 
             // ultraExplorerBar1
             // 
@@ -164,7 +173,6 @@ namespace SystemsAnalysis.Reporting
             ultraExplorerBarGroup2.Settings.MaxLines = 2;
             ultraExplorerBarGroup2.Text = "Model Catalog";
             ultraExplorerBarGroup3.Enabled = false;
-            ultraExplorerBarGroup3.Expanded = false;
             ultraExplorerBarItem3.Key = "CreateCostEstimate";
             appearance5.Image = global::SystemsAnalysis.Reporting.Properties.Resources.icon_cost;
             appearance5.TextVAlignAsString = "Middle";
@@ -195,7 +203,7 @@ namespace SystemsAnalysis.Reporting
             ultraExplorerBarGroup3,
             ultraExplorerBarGroup4});
             this.ultraExplorerBar1.GroupSettings.Style = Infragistics.Win.UltraWinExplorerBar.GroupStyle.LargeImagesWithText;
-            this.ultraExplorerBar1.ItemSettings.Style = Infragistics.Win.UltraWinExplorerBar.ItemStyle.Button;
+            this.ultraExplorerBar1.ItemSettings.Style = Infragistics.Win.UltraWinExplorerBar.ItemStyle.Separator;
             this.ultraExplorerBar1.Location = new System.Drawing.Point(0, 18);
             this.ultraExplorerBar1.Margin = new System.Windows.Forms.Padding(2);
             this.ultraExplorerBar1.Name = "ultraExplorerBar1";
@@ -762,15 +770,6 @@ namespace SystemsAnalysis.Reporting
             this.windowDockingArea3.Owner = this.ultraDockManager1;
             this.windowDockingArea3.Size = new System.Drawing.Size(185, 282);
             this.windowDockingArea3.TabIndex = 38;
-            // 
-            // statusDisplayControl
-            // 
-            this.statusDisplayControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.statusDisplayControl.Location = new System.Drawing.Point(0, 0);
-            this.statusDisplayControl.Margin = new System.Windows.Forms.Padding(2);
-            this.statusDisplayControl.Name = "statusDisplayControl";
-            this.statusDisplayControl.Size = new System.Drawing.Size(632, 77);
-            this.statusDisplayControl.TabIndex = 0;
             // 
             // ApplicationInterface
             // 
