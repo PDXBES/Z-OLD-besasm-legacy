@@ -1,0 +1,78 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{F1A132E6-4C70-4303-AFC2-82938D0F557A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SystemsAnalysis.Modeling.ModelResults</RootNamespace>
+    <AssemblyName>SystemsAnalysis.Modeling.ModelResults</AssemblyName>
+    <SignAssembly>false</SignAssembly>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>2.0</OldToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="SystemsAnalysis.Tracer, Version=1.0.2769.27443, Culture=neutral, PublicKeyToken=67201288e9c4ff90, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>W:\Model_Programs\bin\DotNet\SystemsAnalysis.Tracer.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DscHydraulic.cs" />
+    <Compile Include="DscHydraulics.cs" />
+    <Compile Include="LinkHydraulic.cs" />
+    <Compile Include="LinkHydraulics.cs" />
+    <Compile Include="NodeHydraulic.cs" />
+    <Compile Include="NodeHydraulics.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataAccess\SystemsAnalysis.DataAccess.csproj">
+      <Project>{D81499E0-ED3E-4C85-9F8E-72C263AA24C4}</Project>
+      <Name>SystemsAnalysis.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Modeling\SystemsAnalysis.Modeling.csproj">
+      <Project>{54555B74-906E-4D29-9BC3-7653805B6AD0}</Project>
+      <Name>SystemsAnalysis.Modeling</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Types\SystemsAnalysis.Types.csproj">
+      <Project>{AFB81561-9859-4FA2-86AD-0C6833488E41}</Project>
+      <Name>SystemsAnalysis.Types</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

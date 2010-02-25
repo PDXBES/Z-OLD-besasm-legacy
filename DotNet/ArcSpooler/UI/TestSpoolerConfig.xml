@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:SpoolerConfigSchema.xsd">
+  <template filename="\\Cassio\GIS2\PROJECTS\8292_UIC_RegionalPlan\GIS\mxd\Field_Eval_Maps\Mxd\Map_Template.mxd">
+    <masterDataFrame name="main map 1" layerToShift="UIC Map Views" layerKeyField="Mapping_ID" zoomToObject="true" rotateMap="false" highlightLayer="UIC Locations Highlight" highlightField="UNITID" scaleInterval="50">
+      <highlightLayer hide="false" layerName="UIC Locations Highlight" layerField="UNITID" />
+      <highlightLayer hide="true" layerName="All BES UIC's" layerField="UNITID" />
+      <highlightLayer hide="false" layerName="UIC Drainage Basin Highlight" layerField="SUMPID1" />
+      <highlightLayer hide="true" layerName="UIC Subcatchments to Map" layerField="SUMPID1" />
+      <highlightLayer hide="false" layerName="Potential Surface Facilities Browser" layerField="UNITID" />
+      <highlightLayer hide="false" layerName="Potential Surface Facilities Labels" layerField="UNITID" />
+    </masterDataFrame>
+    <dataFrame name="UIC Project Overview" matchMasterZoom="false" />
+    <textField name="main title" modifyTo="Category 3 UICs in Shallow Groundwater Regional Plan" />
+    <textField name="filename" modifyTo="$FILENAME" />
+    <textField name="project number" modifyTo="8811" />
+    <textField name="date" modifyTo="$DATE" />
+    <dynamicTextField baseName="main id" replaceFormat="{0}" modifyToField="UNITID" />
+    <dynamicTextField baseName="comments" replaceFormat="{0}" modifyToField="Comment_Tmplt" boundaryFrame="comments frame" borderXFromBoundary="0.1" borderYFromBoundary="0.1" />
+    <group name="pictures" modifyToField="UNITID">
+      <sql>
+				SELECT UIC_Map_Photos.UNITID, UIC_Map_Photos.Photo_Slot, UIC_Map_Photos.Facility_ID, UIC_Map_Photos.Path_To_Photo, UIC_Map_Photos.Description
+				FROM UIC_Map_Photos
+				WHERE (((UIC_Map_Photos.UNITID)="{0}"))
+				ORDER BY UIC_Map_Photos.Photo_Slot;
+			</sql>
+      <slot field="Photo_Slot" />
+      <dynamicText baseName="image id {0}" replaceFormat="{0}" modifyToField="Facility_ID" />
+      <dynamicText baseName="image description {0}" replaceFormat="{0}" modifyToField="Description" />
+      <dynamicPicture baseName="image frame {0}" modifyToField="Path_To_Photo" />
+    </group>
+    <table name="potential surface facilities" layerName="Potential Surface Facilities Browser" orderByField="ObjectID" />
+  </template>
+  <sourceDatabase>
+    <connectionString>Provider=Microsoft.Jet.OLEDB.4.0;Data Source=\\Cassio\gis2\PROJECTS\8292_UIC_RegionalPlan\GIS\PGDB\UIC_Photos_To_Map.mdb;User Id=admin;Password=;</connectionString>
+    <sourceTable>UIC_Locations_To_Map_With_Comments</sourceTable>
+    <sourceField>UNITID</sourceField>
+  </sourceDatabase>
+  <output createMXD="true" createPDF="true" pdfResolution="300">
+    <path>C:\Development\ArcSpooler\TestOutput</path>
+	<baseName>Whatever_</baseName>
+  </output>
+  <selection name="ErrorPending">
+    <objectID>ADT459</objectID>
+    <objectID>ANB177</objectID>
+  </selection>
+</configuration>

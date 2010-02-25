@@ -1,0 +1,2137 @@
+'
+'	============ EMGAATS Workbench =================
+'
+'	Copyright (c) 2001, 2002, 2003
+'	City of Portland, OR Bureau of Environmental Services and 
+'	CH2M HILL, Inc.
+'
+'	12Mar03	Cautley
+'		Set TraceVisit flag = "T" as initial condition
+'		Add TraceVisit, LatPickedFlag handling when mode = MODEL
+'	14Mar03	Cautley
+'		Remove LatSourceflag from master... only model.
+'	14Mar03	Cautley
+'		Add ReSnapmodelLaterals Sub.
+'	17Mar03	Cautley
+'		Add call to SnapLatToDSC;
+'		All laterals will be processed;
+'		Make call to SnapLatToSewer conditional on SWRQCFlag <> "T"
+'	18Mar03	Cautley
+'		Add Timeframe to WriteLateral() in MASTER mode
+'	01Apr03	Cautley
+'		re-trace laterals checks for pipe, copies pipe TraceVisit value,
+'		other related changes.
+'	03Apr03	Cautley
+'		Take away progress bar on lateral re-trace function
+'
+' 12/6/2006 AMM
+' Most of these routines will no longer be called since mst_DSC_ac already
+' contains lateral information.  The new routine, TraceDSCs, will be the
+' only one in use.
+'
+include "MapBasic.def"
+include "..\inc\EMGLaterals.def"
+include "..\inc\tableutils.def"
+include "..\inc\EMGCoordSys.def"
+include "..\inc\EMGLineGeo.def"
+include "..\inc\EMGCircleGeo.def"
+include "..\inc\EMGLogger.def"
+include "..\inc\EMGModMake.def"
+include "..\inc\EMGGlobal.def"
+include "..\inc\EMGLatSnap.def"
+include "..\inc\EMGLatShare.def"
+include "..\inc\INIUtils.def"
+include "..\..\workbench\inc\EMGCalcDSC.def"
+include "..\..\workbench\inc\EMGInit.def"
+include "..\..\common\inc\EMGOpenUtils.def"
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  
+'	Private functions & Subs (usable only in this module)
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  
+Declare Sub HandleOneLateral()
+Declare Sub SetMaxLateralEndID()
+Declare Sub SetMaxMDLLatID()
+Declare Sub SetMaxMSTLatID()
+Declare Function GetLinkIDByMLinkID(ByVal AMLinkID as integer) as string
+Declare Function GetNGTOByLinkID(Byval MyLinkID as integer) as string
+Declare Function GetPipeFlowTypeByLinkID(ByVal AMLinkID as integer) as string
+
+DEFINE LOG_FILE_NAME "LatSnapLog.txt"
+
+'dim 	mSelectionSetName as string
+'dim 	mRecordCount as integer
+'dim 	mLatPtsName as string
+'dim 	mSewerName as string
+Dim		mDSCTrace as logical
+Declare Sub HandleOneLateralSnap()
+Declare Function ComputeAllLaterals(
+	ShowPBar as logical, 
+	SelectionSet as string, 
+	tblLatEndPts as string,
+	tblDSC as string,
+	tblMastDSC as string,
+	tblMastTax as string,
+	tblSewers as string
+	) as logical
+Declare Sub ComputeOneLateral()
+
+Declare Function ImportAllLaterals(
+	ShowPBar as logical, 
+	SelectionSet as string, 
+	tblLaterals as string, 
+	tblLatEndPts as string,
+	tblDSC as string,
+	tblMastDSC as string,
+	tblMastTax as string,
+	tblSewers as string
+	) as logical
+Declare Sub ImportOneLateral()
+Dim 	mLateralsName as string
+Declare Sub		WriteLateral(
+			TheLateral as Lateral, 
+			LateralsName as string
+		)
+'Declare Sub		ReadLateral(
+'			TheLateral as Lateral,
+'			LateralsName as string
+'		)
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  
+'	ReadLateralINIParams()
+'	
+'		Read and set globals:
+'			SNAP_TOLERANCE
+'			SEARCH_STEP
+'			SEARCH_MAX
+'			LINE_EXTEND_RATIO
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  
+Sub ReadLateralINIParams()
+Dim		msg as string
+Dim		ModelINIPath as string
+
+	ModelINIPath = gmdlRootFolder & "model.ini"
+
+	SNAP_TOLERANCE = ReadINI(ModelINIPath, "TraceLaterals","SnapTolerance", "0.5")
+	msg = "Snap Tolerance set to: " & str$(SNAP_TOLERANCE)
+	call Loggit(msg)
+	SEARCH_STEP = ReadINI(ModelINIPath, "TraceLaterals","SearchStep", "5")
+	msg = "Search Step set to: " & str$(SEARCH_STEP)
+	call Loggit(msg)
+	SEARCH_MAX = ReadINI(ModelINIPath, "TraceLaterals","SearchMax", "50")
+	msg = "Search Max set to: " & str$(SEARCH_MAX)
+	call Loggit(msg)
+	LINE_EXTEND_RATIO = ReadINI(ModelINIPath, "TraceLaterals","LineExtendRatio", "3.0")
+	msg = "Line Extend Ratio set to: " & str$(LINE_EXTEND_RATIO)
+	call Loggit(msg)
+
+
+End Sub
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  
+'	TraceLaterals
+'
+'	Based on mdl_links, pull all the laterals from the master to the model,
+'	then compute them (gets the mdl LinkIDs, also pulling DSCs as a side effect)
+'
+'	ASSERT:
+'		model and master tables open
+'	
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  
+Sub TraceLaterals()
+Dim		lResult as logical
+Dim		ShowPB as logical
+Dim		tblLaterals as string
+Dim		tblEndPts as string
+Dim		tblDSC as string
+Dim		tblMastDSC as string
+Dim		tblMastTax as string
+Dim		tblSewers as string
+Dim		Msg as string
+
+
+Dim		NumRecs as integer
+Dim		RecordCount as integer
+Dim		MyLat as Lateral
+Dim		ThisRowID as integer
+Dim		LatEndName as string
+Dim		TempLogical as logical
+Dim		DSCName as string
+Dim		MastDSCName as string
+Dim		MastTaxName as string
+Dim		ObjChange as logical
+Dim		SewersName as string
+
+	call	ReadLateralINIParams()
+
+	ShowPB = False
+	tbllaterals = "mdl_Laterals"
+	tblEndPts = "mdl_LatEndPts"
+	tblDSC = "mdl_DSC"
+	tblMastDSC = "mst_Divides"
+	tblMastTax = "mst_Parcels"
+	tblSewers = "mdl_Links"
+
+	mLatPtsName = tblEndPts
+	mSewerName = tblSewers
+	mDSCName = tblDSC
+	mMastDSCName = tblMastDSC
+	mMastTaxName = tblMastTax
+
+	delete from mdl_laterals
+
+	commit table mdl_laterals
+	Pack Table mdl_Laterals Graphic Data
+
+	Call Loggit( "Laterals cleared..."	)
+
+	delete from mdl_DSC
+	commit table mdl_DSC
+	Pack Table mdl_DSC Graphic Data
+
+	Call Loggit ("DSC cleared...")
+
+	' Timeframe:  remember that timeframe is considered in the snap logic,
+	' so the MLINKID already handles that issue.
+
+	Select
+		mst_Laterals.MLateralID,
+		mst_Laterals.MLinkID,
+		mst_Laterals.ParcelID,
+		mst_Laterals.DivideID,
+		mst_Laterals.LinkType,
+		mst_Laterals.PipeFlowType,
+		mst_Laterals.created,
+		mst_Laterals.USFloodRefElev,
+		mst_Laterals.DSSewerIE,
+		mst_laterals.SewerDiameter,
+		mst_Laterals.Frac2SwrBeg,
+		mst_laterals.Pumped,
+		mst_Laterals.SwrQCFlag,
+		mst_Laterals.DSCQCFlag,
+		mst_Laterals.LatQCFlag,
+		mst_Laterals.QCDate
+	From mst_laterals, mdl_links
+	where mst_laterals.MLinkID = mdl_links.MLinkID
+	  and mdl_Links.MLinkID <> 0
+	  and mdl_links.IsSpecLink <> true
+	  and mst_Laterals.SWRQCFlag = "T"
+	into _mdlLats
+
+	NumRecs = TableInfo(_mdlLats, TAB_INFO_NROWS)
+	Msg = str$(NumRecs) & 	" Temp Lats Selected"
+	call loggit(msg)
+
+	Insert Into mdl_Laterals (
+		ParcelID,
+		DivideID,
+		MLinkID,
+		MLateralID,
+		LinkType,
+		PipeFlowType,
+		Created,
+		USFloodRefElev,
+		DSSewerIE,
+		SewerDiameter,
+		Frac2SwrBeg,
+		Pumped,
+		SWRQCFlag,
+		DSCQCFlag,
+		LatQCFlag,
+		QCDate,
+		LatPickedFlag	,
+		LatSourceFlag,
+		TraceVisit
+	)
+	Select
+		ParcelID,
+		DivideID,
+		MLinkID,
+		MLateralID,
+		LinkType,
+		PipeFlowType,
+		created,
+		USFloodRefElev,
+		DSSewerIE,
+		SewerDiameter,
+		Frac2SwrBeg,
+		Pumped,
+		SWRQCFlag,
+		DSCQCFlag,
+		LatQCFlag,
+		QCDate,
+		"F"	,		' lat not picked
+		"M",			' from master
+		"T"			' re-trace is ok on intial build
+	From _mdlLats
+	call loggit("Insert to model complete.")
+
+	close table _mdlLats
+
+	gstrLateralContext = "MODEL"
+	' can't use "compute all", because it has a progress bar.
+
+	Select * from mdl_laterals
+	into _LatSet
+
+		LatEndName = "mdl_LatEndPts"
+		TempLogical = TRUE
+		DSCName = "mdl_DSC"
+		MastDSCName = "mst_divides"
+		MastTaxName = "mst_parcels"
+		LatEndName = "mdl_LatEndPts"
+		SewersName = "mdl_Links"
+
+	NumRecs = TableInfo (_LatSet, TAB_INFO_NROWS)
+
+	Fetch First from _LatSet
+	RecordCount = 0
+	Do While NOT (EOT(_LatSet))
+
+		RecordCount = RecordCount + 1
+
+		ThisRowID = _LatSet.RowID
+		MyLat.LateralObj = _LatSet.obj
+		MyLat.LateralID =_LatSet.LateralID
+		MyLat.ParcelID =_LatSet.ParcelID
+		MyLat.DivideID = _LatSet.DivideID
+		MyLat.LinkID =_LatSet.LinkID
+		MyLat.MLinkID = _LatSet.MLinkID
+		MyLat.MLateralID = _LatSet.MLateralID
+		MyLat.LinkType =_LatSet.LinkType
+		MyLat.PipeFlowType =_LatSet.PipeFlowType
+		MyLat.Created =_LatSet.Created
+		MyLat.USFloodRefElev =_LatSet.USFloodRefElev
+		MyLat.DSSewerIE =_LatSet.DSSewerIE
+		MyLat.SewerDiameter =_LatSet.SewerDiameter
+		MyLat.Frac2SwrBeg =_LatSet.Frac2SwrBeg
+		MyLat.Pumped =_LatSet.Pumped
+		MyLat.SwrQCFlag =_LatSet.SwrQCFlag
+		MyLat.DSCQCFlag =_LatSet.DSCQCFlag
+		MyLat.LatQCFlag =_LatSet.LatQCFlag
+		MyLat.QCDate = _LatSet.QCDate
+		MyLat.LatPickedFlag = "F"
+		MyLat.LatSourceFlag = _LatSet.LatSourceFlag
+		Mylat.TraceVisit = _LatSet.TraceVisit
+	
+		' have to snap to sewer first or you wont get the DSC.
+		' or, you can look up the linkID (which is what you need) using MLinkID
+
+
+		select LinkID
+		from mdl_Links
+		where MLinkID = MyLat.MLinkID
+			and IsSpecLink <> "T"
+		into _ThisLink
+
+		if TableInfo(_ThisLink, TAB_INFO_NROWS) <> 1 then
+			msg = "Unexpected: couldn't rosetta via MLinkID.  Found " & str$(TableInfo(_ThisLink, TAB_INFO_NROWS)) & " of them. ID is " & str$(MyLat.MLinkID)
+	
+			call loggit(msg)
+		else
+			MyLat.LinkID = _ThisLink.LinkID
+			if MyLat.LinkID = 0 then
+				msg = "Unexpected LinkID of zero, MLinkID = " & str$(Mylat.MLinkID)
+				call loggit(msg)
+			end if
+		end if
+
+		lResult = ConstructLateralEndPoint(LatEndName, MyLat)
+		if Ucase$(gstrLateralLinkSnap) = "LINKSNAP" then
+			lResult = SnapLatToSewer (SewersName, Mylat, ObjChange)
+		end if
+		lResult = SnapLatToDSC(DSCName, MastDSCName, MastTaxName, LatEndName, TempLogical, MyLat,ObjChange)
+
+	' Generate a lateralID for the model
+		Mylat.LateralID = RecordCount
+	' 
+'	Now, write the lateral
+	update _LatSet set 
+		obj =MyLat.Lateralobj,
+		LateralID =MyLat.LateralID,
+		ParcelID = MyLat.ParcelID,
+		DivideID = MyLat.DivideID,
+		LinkID =MyLat.LinkID,
+		MLinkID = MyLat.MLinkID,
+		MLateralID = Mylat.MLateralID,
+		LinkType =MyLat.LinkType,
+		PipeFlowType =MyLat.PipeFlowType,
+		Created =MyLat.Created,
+		USFloodRefElev =MyLat.USFloodRefElev,
+		DSSewerIE =MyLat.DSSewerIE,
+		SewerDiameter =MyLat.SewerDiameter,
+		Frac2SwrBeg =MyLat.Frac2SwrBeg,
+		Pumped =MyLat.Pumped,
+		SwrQCFlag =MyLat.SwrQCFlag,
+		DSCQCFlag =MyLat.DSCQCFlag,
+		LatQCFlag =MyLat.LatQCFlag,
+		QCDate = MyLat.QCDate,
+		LatPickedFlag = Mylat.LatPickedFlag,
+		LatSourceFlag = Mylat.LatSourceFlag,
+		TraceVisit = MyLat.TraceVisit
+   	Where RowID = ThisRowID
+
+	statusbar message "Record " & str$(RecordCount) & " of " & NumRecs
+		Fetch Next From _LatSet
+	Loop
+
+	call CommitModel()
+
+	gstrReturnStatus = "SUCCESS"
+	gstrCurrentMessage = "Trace laterals complete."
+
+End Sub
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  
+'	TraceDSCs
+'
+'	Based on mdl_links, pull all the DSCs from the master to the model.
+' Replaces TraceLaterals
+'
+'	ASSERT:
+'		model and master tables open
+'	
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  
+Sub TraceDSCs()
+Dim tblDSC as string
+Dim tblMasterDSC as string
+Dim tblSewers as string
+Dim Msg as string
+Dim CurrentDSCID as integer
+Dim ThisRowID as integer
+Dim RowCount as integer
+Dim ToLinkSanFromModel as integer
+Dim ToLinkStormFromModel as integer
+Dim SanNode as string
+Dim StormNode as string
+Dim SanPipeFlowType as string
+Dim StormPipeFlowType as string
+Dim MdlDSCNodeCount as integer
+Dim InsertBaseFlowEX as float
+Dim InsertBaseFlowFB as float
+Dim InsertBaseFlowDM as float
+Dim InsertBaseFlow as float
+Dim	InsertRoofAreaFt as float
+Dim	InsertPkingAreaFt as float
+
+	tblDSC = "mdl_DSC"
+	tblMasterDSC = "mst_DSC"
+	tblSewers = "mdl_Links"
+
+	delete from mdl_DSC
+	commit table mdl_DSC
+	Pack Table mdl_DSC Graphic Data
+	Call Loggit ("DSC cleared...")
+
+	' Get list of unique DSCIDs
+	Call Loggit ("Inserting sanitary DSC objects")
+	
+	select *
+  	from	mst_DSC, mdl_Links
+  	where (mst_DSC.ToMLinkSan = mdl_Links.MLinkID)
+  	into	_DSCSans
+
+	do case gstrTimeFrame
+		case "EX"
+			insert into mdl_DSC (
+				ParcelID,
+				DivideID,
+				DSCID,
+				discoSiteID,
+				DiscoClass,
+				ToLinkSan,
+				ToLinkStorm,
+				NGTOSan,
+				NGTOStorm,
+				PipeFlowTypeSan,
+				PipeFlowTypeStorm,
+				SanSwrCrown,
+				Frac2SwrBeg,
+				FloodRefElev,
+				FalseBFRisk,
+				ZoneEX,
+				ZoneCP,
+				GenEX,
+				GenCP,
+				ImpFractEX,
+				ImpFractCP,
+				ImpFractFB,
+				AreaFt,
+				RfAreaFt,
+				pkAreaFt,
+				BaseFlowEX,
+				BaseFlowDM,
+				IsActive,
+				Sewerable,
+				HasBasement
+			) select
+				ParcelID,
+				DivideID,
+				DSCID,
+				discoSiteID,
+				DiscoClass,
+				LinkID,
+				0,
+				USNode,
+				"",
+				PipeFlowType,
+				"",
+				SanSwrCrown,
+				Frac2SwrBeg,
+				FloodRefElev,
+				FalseBFRisk,
+				ZoneEX,
+				ZoneCP,
+				GenEX,
+				GenCP,
+				ImpFractEX,
+				ImpFractCP,
+				ImpFractFB,
+				AreaFt,
+				RfAreaFtEX,
+				PkAreaFtEX,
+				int(BaseFlowEXcfs*1000000)/1000000,
+				int(BaseFlowDMcfs*1000000)/1000000,
+				"T",
+				Sewerable,
+				HasBasement
+			from _DSCSans
+		case "FU"
+			insert into mdl_DSC (
+				ParcelID,
+				DivideID,
+				DSCID,
+				discoSiteID,
+				DiscoClass,
+				ToLinkSan,
+				ToLinkStorm,
+				NGTOSan,
+				NGTOStorm,
+				PipeFlowTypeSan,
+				PipeFlowTypeStorm,
+				SanSwrCrown,
+				Frac2SwrBeg,
+				FloodRefElev,
+				FalseBFRisk,
+				ZoneEX,
+				ZoneCP,
+				GenEX,
+				GenCP,
+				ImpFractEX,
+				ImpFractCP,
+				ImpFractFB,
+				AreaFt,
+				RfAreaFt,
+				pkAreaFt,
+				BaseFlowEX,
+				BaseFlowDM,
+				IsActive,
+				Sewerable,
+				HasBasement
+			) select
+				ParcelID,
+				DivideID,
+				DSCID,
+				discoSiteID,
+				DiscoClass,
+				LinkID,
+				0,
+				USNode,
+				"",
+				PipeFlowType,
+				"",
+				SanSwrCrown,
+				Frac2SwrBeg,
+				FloodRefElev,
+				FalseBFRisk,
+				ZoneEX,
+				ZoneCP,
+				GenEX,
+				GenCP,
+				ImpFractEX,
+				ImpFractCP,
+				ImpFractFB,
+				AreaFt,
+				RfAreaFtFB,
+				PkAreaFtFB,
+				int(BaseFlowEXcfs*1000000)/1000000,
+				int(BaseFlowDMcfs*1000000)/1000000,
+				"T",
+				Sewerable,
+				HasBasement
+			from _DSCSans
+	end case
+	Commit Table mdl_dsc
+	
+	'************************************************************************
+	 'JHB 02/20/2007: Appears to be a bug here - Some parcels have no 
+	 'ToMLinkSan and will not at this poin exist in mdl_dsc. I think we need to select 
+	 'the mst_dsc that have no ToMLinkSan but do have a ToMLinkStorm and append them.
+	Select * 
+		From mst_dsc, mdl_links 
+		Where (mst_DSC.ToMLinkStorm = mdl_links.MLinkID) 
+		And (mst_DSC.DSCID Not In (Select DSCID From mdl_DSC))
+		Into _Storm_Only_DSC_Still_Need_Append
+	do case gstrTimeFrame
+		case "EX"
+			insert into mdl_DSC (
+				ParcelID,
+				DivideID,
+				DSCID,
+				discoSiteID,
+				DiscoClass,
+				ToLinkSan,
+				ToLinkStorm,
+				NGTOSan,
+				NGTOStorm,
+				PipeFlowTypeSan,
+				PipeFlowTypeStorm,
+				SanSwrCrown,
+				Frac2SwrBeg,
+				FloodRefElev,
+				FalseBFRisk,
+				ZoneEX,
+				ZoneCP,
+				GenEX,
+				GenCP,
+				ImpFractEX,
+				ImpFractCP,
+				ImpFractFB,
+				AreaFt,
+				RfAreaFt,
+				pkAreaFt,
+				BaseFlowEX,
+				BaseFlowDM,
+				IsActive,
+				Sewerable,
+				HasBasement
+			) select
+				ParcelID,
+				DivideID,
+				DSCID,
+				discoSiteID,
+				DiscoClass,
+				0,
+				LinkID,				
+				"",
+				USNode,				
+				"",
+				PipeFlowType,
+				SanSwrCrown,
+				Frac2SwrBeg,
+				FloodRefElev,
+				FalseBFRisk,
+				ZoneEX,
+				ZoneCP,
+				GenEX,
+				GenCP,
+				ImpFractEX,
+				ImpFractCP,
+				ImpFractFB,
+				AreaFt,
+				RfAreaFtEX,
+				PkAreaFtEX,
+				int(BaseFlowEXcfs*1000000)/1000000,
+				int(BaseFlowDMcfs*1000000)/1000000,
+				"T",
+				Sewerable,
+				HasBasement
+			from _Storm_Only_DSC_Still_Need_Append
+		case "FU"
+			insert into mdl_DSC (
+				ParcelID,
+				DivideID,
+				DSCID,
+				discoSiteID,
+				DiscoClass,
+				ToLinkSan,
+				ToLinkStorm,
+				NGTOSan,
+				NGTOStorm,
+				PipeFlowTypeSan,
+				PipeFlowTypeStorm,
+				SanSwrCrown,
+				Frac2SwrBeg,
+				FloodRefElev,
+				FalseBFRisk,
+				ZoneEX,
+				ZoneCP,
+				GenEX,
+				GenCP,
+				ImpFractEX,
+				ImpFractCP,
+				ImpFractFB,
+				AreaFt,
+				RfAreaFt,
+				pkAreaFt,
+				BaseFlowEX,
+				BaseFlowDM,
+				IsActive,
+				Sewerable,
+				HasBasement
+			) select
+				ParcelID,
+				DivideID,
+				DSCID,
+				discoSiteID,
+				DiscoClass,
+				0,
+				LinkID,				
+				"",
+				USNode,
+				"",
+				PipeFlowType,				
+				SanSwrCrown,
+				Frac2SwrBeg,
+				FloodRefElev,
+				FalseBFRisk,
+				ZoneEX,
+				ZoneCP,
+				GenEX,
+				GenCP,
+				ImpFractEX,
+				ImpFractCP,
+				ImpFractFB,
+				AreaFt,
+				RfAreaFtFB,
+				PkAreaFtFB,
+				int(BaseFlowEXcfs*1000000)/1000000,
+				int(BaseFlowDMcfs*1000000)/1000000,
+				"T",
+				Sewerable,
+				HasBasement
+			from _Storm_Only_DSC_Still_Need_Append
+	end case
+	Commit Table mdl_dsc	
+	'************************************************************************
+
+	' Temporarily alter mdl_dsc to grab the ToMLinkStorm to convert to a ToLinkStorm
+	Select mdl_dsc.DSCID, mdl_dsc.ToLinkStorm, mdl_dsc.NGTOStorm, mdl_dsc.PipeFlowTypeStorm, mdl_links.linkid, mdl_Links.MLinkID, mdl_links.usnode, mdl_links.pipeflowtype from mdl_dsc, mst_DSC, mdl_Links where mdl_dsc.dscID = mst_DSC.dsciD and mst_DSC.ToMLinkStorm=mdl_Links.MLinkID into update_tolinkstorm
+	Update update_tolinkstorm Set ToLinkStorm = LinkID
+	Update update_tolinkstorm Set NGTOStorm = USNode
+	Update update_tolinkstorm Set PipeFlowTypeStorm = PipeFlowType
+	Commit Table mdl_dsc
+
+	'Alter Table mdl_dsc (Add ToMLinkStorm Integer)	
+	'JHB: For parcels without a sanitary connection, get ToMLinkStorm from mdl_links
+	'Add Column "mdl_dsc" (ToMLinkStorm) From mst_dsc Set To MLinkID Where mdl_dsc.dscid = mst_dsc.dscid
+	'Commit Table mdl_dsc
+	'JHB: For parcels with a sanitary connection, get the ToMLinkStorm from mst_dsc
+	'Select * from mdl_dsc, mst_dsc where mdl_dsc.ToLinkStorm = mst_dsc.ToMLinkStorm Into updateStorm
+	'Update updateStorm Set ToMLinkStorm = MLinkID
+	'Commit Table mdl_dsc
+	
+	'select *
+  '	from	mst_DSC, mdl_Links
+  '	where (mst_DSC.ToMLinkStorm = mdl_Links.MLinkID)
+  '	into	_DSCStorms
+  	
+	' Update the storm data
+	'Add Column "mdl_dsc" (ToLinkStorm) From _DSCStorms Set To LinkID Where ToMLinkStorm = MLinkID 
+	'Add Column "mdl_dsc" (NGTOStorm) From _DSCStorms Set To USNode Where ToMLinkStorm = MLinkID 
+	'Add Column "mdl_dsc" (PipeFlowTypeStorm) From _DSCStorms Set To PipeFlowType Where ToMLinkStorm = MLinkID
+	'Commit Table mdl_dsc
+	
+	'Alter Table mdl_dsc (Drop ToMLinkStorm)
+		
+	call CommitModel()
+
+	Close Table _DSCSans
+	
+	gstrReturnStatus = "SUCCESS"
+	gstrCurrentMessage = "Trace DSCs complete."
+
+End Sub ' TraceDSCs()
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  
+'	SnapAllLatsToSewers
+'
+'	Params:
+
+'
+
+'
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  
+Function SnapAllLatsToSewers(
+	ShowPBar as logical, 
+	SelectionSet as string, 
+	tblSewers as string, 
+	tblEndPts as string,
+	tblDSC as string,
+	tblMastDSC as string,
+	tblMastTax as string
+	) as logical
+Dim NRows as integer
+Dim Msg as string
+Dim		lResult as logical
+
+	call ReadLateralINIParams()
+
+	SnapAllLatsToSewers = False
+	CLS	
+	msg = "======================================="
+	call loggit(msg)
+
+	Msg = "We Begin at " + time(24) + " on " + formatDate$(Curdate())
+	call loggit(msg)
+	msg = "snapping..."
+	call loggit(msg)
+	msg = "Laterals: " + SelectionSet
+	call loggit(msg)
+	msg = "Sewers: " + tblSewers
+	call loggit(msg)
+if ShowPBar then
+	Set ProgressBars On
+else
+	Set ProgressBars Off
+end if
+mSelectionSetName = SelectionSet		' need to make accessable to ProgressBar driven routines
+mLatPtsName = tblEndPts
+mSewerName = tblSewers
+mDSCName = tblDSC
+mMastDSCName = tblMastDSC
+mMastTaxName = tblMastTax
+
+'	Need to do this because you can't de-reference a field from a variable table name...
+
+Select * from mSelectionSetName into _LatSet
+
+NRows = TableInfo(_LatSet, TAB_INFO_NROWS)
+mRecordCount = 0
+
+print "There are " & str$(NRows) & " rows."
+Dim		sTabname, sColName as string
+	sTabName = "_LatSet"
+	sColName = "MLateralID"
+	lResult = IsColumnThere(sTabname, sColName)
+	if lResult then
+		gstrLateralContext = "MASTER"
+	else
+		gstrLateralContext = "MODEL"
+	end if
+
+
+Fetch First from _LatSet
+
+ProgressBar   "Snapping Lateral End Points to Sewers" 
+	Calling   HandleOneLateralSnap  
+	Range   NRows 
+ 
+close table _LatSet
+	Msg = "End at " + time(24) + " on " + formatDate$(Curdate())
+	call loggit(msg)
+
+End Function
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  
+'	HandleOneLateralSnap
+'
+'	Parms:		<none>
+'
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  
+Sub HandleOneLateralSnap()
+Dim MyLat as Lateral
+dim lResult, lResult2 as logical
+Dim ThisObj as object
+Dim CurRowID as integer
+
+
+
+Dim WasChanged, WasChanged2 as logical
+Dim		Msg as string
+
+	if EOT(_LatSet) then
+		ProgressBar = -1
+		msg = "End of lateral set"
+		call loggit(msg)
+		exit sub
+	end if
+	'
+	if ucase$(gstrLateralContext) = "MASTER" then
+		MyLat.LateralObj = _LatSet.obj
+		MyLat.LateralID = _LatSet.MLateralID
+		Mylat.LinkID = _LatSet.MLinkID
+		MyLat.LinkType = _LatSet.LinkType
+		MyLat.TimeFrame = _LatSet.Timeframe
+	else
+		MyLat.LateralObj = _LatSet.obj
+		MyLat.LateralID = _LatSet.LateralID
+		Mylat.LinkID = _LatSet.LinkID
+		MyLat.LinkType = _LatSet.LinkType
+	end if
+	CurRowID = _LatSet.RowID
+
+	lResult = SnapLatToSewer(mSewerName, MyLat, WasChanged)
+	lResult = ConstructLateralEndPoint(mLatPtsName, MyLat)
+	msg = "back from Snap to Sewer"
+	call loggit(msg)
+	if ucase$(gstrLateralContext) = "MODEL" then
+		lResult2 = SnapLatToDSC(mDSCName, mMastDSCName, mMastTaxName, mLatPtsName, mDSCTrace, Mylat, WasChanged2)
+	end if
+	'print "Been Snapped"
+	' update the lateral (just the object)
+	msg = "Result: " & str$(lResult) & " Changed: " & str$(WasChanged)
+	call loggit(msg)
+	'always update
+	'If (lResult and WasChanged) or (lResult2 and WasChanged2) then
+		msg =  "Boinging Lateral"
+		call loggit(msg)
+		if UCASE$(gstrLateralContext) = "MASTER" then
+			update _LatSet
+			set 
+				obj = MyLat.LateralObj,
+				MLateralID = MyLat.LateralID,
+				MLinkID = MyLat.LinkID,
+				ParcelID = MyLat.ParcelID,
+				DivideID = MyLat.DivideID,
+				LinkType = MyLat.LinkType,
+				PipeFlowType = Mylat.PipeFlowType,
+				Created = MyLat.Created,
+				USFloodRefElev = Mylat.USFloodRefElev,
+				DSSewerIE =	MyLat.DSSewerIE,
+				SewerDiameter = Mylat.SewerDiameter,
+				Frac2SwrBeg = Mylat.Frac2SwrBeg,
+				SwrQCFlag = Mylat.SwrQCFlag,
+				DSCQCFlag = MyLat.DSCQCFlag,
+				LatQCFlag = MyLat.LatQCFlag,
+				QCDate = Mylat.QCDate
+			where RowID = CurRowID
+
+		else
+			update _LatSet
+			set 
+				obj = MyLat.LateralObj,
+				LateralID = MyLat.LateralID,
+				LinkID = MyLat.LinkID,
+				ParcelID = MyLat.ParcelID,
+				DivideID = MyLat.DivideID,
+				LinkType = MyLat.LinkType,
+				PipeFlowType = Mylat.PipeFlowType,
+				Created = MyLat.Created,
+				USFloodRefElev = Mylat.USFloodRefElev,
+				DSSewerIE =	MyLat.DSSewerIE,
+				SewerDiameter = Mylat.SewerDiameter,
+				Frac2SwrBeg = Mylat.Frac2SwrBeg,
+				SwrQCFlag = Mylat.SwrQCFlag,
+				DSCQCFlag = MyLat.DSCQCFlag,
+				LatQCFlag = MyLat.LatQCFlag,
+				QCDate = Mylat.QCDate,
+				LatPickedFlag = MyLat.LatPickedFlag,
+				TraceVisit = MyLat.TraceVisit
+			where RowID = CurRowID
+		end if
+	'end if
+	'print "Been Updated"
+	'    
+	mRecordCount = mRecordCount + 1
+	ProgressBar = mRecordCount
+	Fetch Next from _LatSet
+
+End Sub
+
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  
+'
+'	Show a dialog, get params, then call the calculator
+'
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  
+Sub ShowLatSnapDialog
+dim		ShowPB as logical
+dim		tblLaterals as string
+dim 	tblEndPts as string
+dim 	tblSewers as string
+dim		tblDSC as string
+dim		tblMastDSC as string
+dim		tblMastTax as string
+dim 	lResult as logical
+
+Dim 	LoopCount as integer
+Dim 	Semi as string
+dim 	TableCount as integer
+dim		TableList as string
+
+Dim 	dlgWidth as integer
+dim		dlgHeight as integer
+
+dim 	dlgButtonWidth as integer
+dim 	dlgButtonHeight as integer
+dim 	dlgButtonY as integer
+dim 	dlgButtonOKX, dlgButtonCancelX as integer
+dim 	TableNames() as string
+dim 	TableIndex as integer
+dim		SewerTableIndex as integer
+dim		DSCTableIndex as integer
+
+ShowPB = True
+
+tblLaterals = "selection"
+
+tblEndPts = "mdl_LateralEndPts"
+tblSewers = "mdl_sewers_ac"
+tblDSC = "mdl_DirSC_ac"
+tblMastDSC = "mst_DSCDivides_ac"
+tblMastTax = "AG_mult"
+
+TableCount = NumTables()
+redim TableNames(TableCount+1)
+Semi = ""
+For LoopCount = 1 to TableCount
+	TableList = TableList + Semi + TableInfo(LoopCount, TAB_INFO_NAME)
+	TableNames(LoopCount+1) = TableInfo(LoopCount, TAB_INFO_NAME)
+	Semi = ";"
+Next
+TableNames(1) = "Selection"
+TableList = "Selection;" + TableList
+
+dlgWidth = 300
+dlgHeight = 200
+dlgButtonWidth = 40
+dlgButtonHeight = 15
+
+dlgButtonY = dlgHeight - 25
+dlgButtonOKX = (dlgwidth / 3.0) - (dlgButtonWidth / 2.0)
+dlgButtonCancelX = ((dlgwidth / 3.0) * 2) - (dlgButtonWidth / 2.0)
+
+
+Dialog  
+	Title   "Lateral End Snapper"
+	Width   dlgWIdth  Height   dlgHeight 
+	Position  150 , 150
+
+	Control StaticText
+		Position	30, 30
+		Title		"Lateral table or selection to process:"
+	Control PopupMenu  
+		Title  from variable TableNames
+		Value 1
+		ID 5 
+		Into  TableIndex
+		Position  175, 30
+
+	Control StaticText
+		Position	30, 50
+		Title		"Sewer table or selection to process:"
+	Control PopupMenu  
+		Title  from variable TableNames
+		Value 1
+		ID 15 
+		Into  SewerTableIndex
+		Position  175, 50
+
+'	Control StaticText
+'		Position	30, 70
+'		Title		"DSC table or selection to process:"
+'	Control PopupMenu  
+'		Title  from variable TableNames
+'		Value 1
+'		ID 25 
+'		Into  DSCTableIndex
+'		Position  175, 70
+
+ 	Control OKButton
+		Position	dlgButtonOKX, dlgButtonY
+		Width	dlgButtonWidth
+		Height	dlgButtonHeight
+		Title		"OK"
+		
+	Control CancelButton
+		Position	dlgButtonCancelX, dlgButtonY
+		Width	dlgButtonWidth
+		Height	dlgButtonHeight
+		Title		"Cancel"
+
+If CommandInfo(CMD_INFO_DLG_OK) Then 
+	tbllaterals = TableNames(TableIndex)
+	tblsewers = TableNames(SewerTableIndex)
+'	tblDSC = Tablenames(DSCTableIndex)
+
+	lResult = SnapAllLatsToSewers(ShowPB, tblLaterals, tblSewers, TblEndPts, tblDSC, tblMastDSC, tblMastTax)
+
+End If 
+
+
+End Sub
+
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  
+'	Find a unique record number for new lateral end points
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  
+Sub SetMaxLateralEndID()
+
+	print "In SetMaxLateralEndID: end pts table is " + mLatPtsName
+	select max(LateralEndID) from mLatPtsName into _MaxLatID
+	
+Fetch First from _MaxLatID
+	mNextLateralEndID = _MaxLatID.Col1 + 1
+	close table _MaxLatID
+	Call Loggit( "Max Lat End ID is: " + str$(mNextLateralEndID))
+
+End Sub
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  
+'	Find a unique record number for new lateral
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  
+Sub SetMaxMDLLatID()
+	select max(LateralID) from mdl_Laterals into _MaxLatID
+	
+Fetch First from _MaxLatID
+	mNextMDLLateralID = _MaxLatID.Col1 + 1
+	close table _MaxLatID
+	Call Loggit( "Max Model Lat ID is: " + str$(mNextMDLLateralID))
+
+End Sub
+Sub SetMaxMSTLatID()
+	select max(mLateralID) from mst_Laterals into _MaxLatID
+	
+Fetch First from _MaxLatID
+	mNextMSTLateralID = _MaxLatID.Col1 + 1
+	close table _MaxLatID
+	Call Loggit( "Max Master Lat ID is: " + str$(mNextMSTLateralID))
+
+End Sub
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  
+'	ConstructLateralEndPoint (  ... )
+'
+'	Correct, replace or compute the lateral end points for the given lateral.
+'	Params:
+'		tlbEndPts as String		Name of the table containing lateral end points
+'		TheLateral as Lateral		structure containing lateral information
+'	Assert:
+'		requested table must already be open.
+'		lateral object is good
+'
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  
+Function ConstructLateralEndPoint(tblEndPts as string, TheLateral as Lateral) as logical
+Dim BegX , BegY, EndX, EndY as float
+Dim NewPoint as Object
+Dim BegPt, EndPt as Symbol
+
+ConstructLateralEndPoint = False			' initialize to "didn't work" condition
+if not IsTableOpen(tblEndPts) then		' make sure requested table is open.
+	call Loggit("End points table is not open.")
+	exit function
+end if
+
+mLatPtsName = tblEndPts
+
+'   delete any existing end points for this lateral.
+
+Select * from tblEndPts
+where LateralID = TheLateral.LateralID
+into tmpDelete
+
+delete from tmpDelete
+close table tmpDelete
+
+Call SetStdCoordSys()
+
+
+BegPt = MakeSymbol(BEGSYM, RGB(255, 0, 0), BEGSYMSIZE)
+EndPt = MakeSymbol(ENDSYM, RGB(0, 0, 255), ENDSYMSIZE)
+
+' make sure we know of a unique record ID
+if mNextLateralEndID = 0 then
+	Call SetMaxLateralEndID()
+end if
+'  get the end points
+if Not CalcEnds(TheLateral.LateralObj, Begx, BegY, EndX, EndY) then
+	'note "Problem in CalcEnds called from ConstructLateraEndPoint"
+	gstrReturnStatus = "ERROR"
+	gstrCurrentMessage = "Problem in CalcEnds called from ConstructionLateralEndPoint"
+
+	ConstructLateralEndPoint = false
+	exit function
+end if
+' create the objects then insert them
+Create Point into Variable NewPoint (BegX, BegY) SYMBOL BegPt
+
+Insert into tblEndPts (
+	obj,
+	LateralEndID,
+	ToOrFrom,
+	LateralID
+) Values (
+	NewPoint,
+	mNextLateralEndID,
+	"F",
+	TheLateral.LateralID
+)
+mNextLateralEndID = mNextLateralEndID + 1
+
+Create Point into Variable NewPoint (EndX, EndY) Symbol EndPt
+Insert into tblEndPts (
+	obj,
+	LateralEndID,
+	ToOrFrom,
+	LateralID
+) Values (
+	NewPoint,
+	mNextLateralEndID,
+	"T",
+	TheLateral.LateralID
+)
+mNextLateralEndID = mNextLateralEndID + 1
+ConstructLateralEndPoint = true
+'call loggit("Construct lateral end is good")
+
+end Function
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  
+Function ConstructAllLateralEndPoints(DelFirst as logical, ShowPBar as logical, SelectionSet as string, tblEndPts as string) as logical
+dim NRows as integer
+ConstructAllLateralEndPoints = False		' initialize to "didn't work" condition
+if ShowPBar then
+	Set ProgressBars On
+else
+	Set ProgressBars Off
+end if
+if DelFirst then
+	delete from tblEndPts			' delete all records to start with, guarantees no orphans
+	Commit Table tblEndPts
+	Pack Table tblEndPts Graphic Data
+	Add Map Layer tblEndPts
+end if
+
+mSelectionSetName = SelectionSet		' need to make accessable to ProgressBar driven routines
+mLatPtsName = tblEndPts
+
+'note mSelectionSetName
+
+Select * from mSelectionSetName into _LatSet
+
+NRows = TableInfo(_LatSet, TAB_INFO_NROWS)
+mRecordCount = 0
+
+Fetch First from _LatSet
+
+ProgressBar   "Computing Lateral End Points" 
+	Calling   HandleOneLateral  
+	Range   NRows 
+ 
+close table _LatSet
+
+End Function
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  
+'	Progress Bar Handler.
+'	Manages one lateral at a time, and loops...
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  
+Sub HandleOneLateral()
+Dim MyLat as Lateral
+dim lResult as logical
+Dim ThisObj as object
+
+	if EOT(_LatSet) then
+		ProgressBar = -1
+		exit sub
+	end if
+	'
+	MyLat.LateralObj = _LatSet.obj
+
+
+	MyLat.LateralID = _LatSet.LateralID
+
+	lResult = ConstructLateralEndPoint(mLatPtsName, MyLat)
+	'    
+	mRecordCount = mRecordCount + 1
+	ProgressBar = mRecordCount
+	Fetch Next from _LatSet
+
+End Sub
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  
+'
+'	Show a dialog, get params, then call the calculator
+'
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  
+Sub ShowLatEndDialog
+dim 	DelFirst as logical
+dim		ShowPB as logical
+dim		tblLaterals as string
+dim 	tblEndPts as string
+dim 	lResult as logical
+
+Dim 	LoopCount as integer
+Dim 	Semi as string
+dim 	TableCount as integer
+dim		TableList as string
+Dim 	dlgWidth as integer
+dim		dlgHeight as integer
+
+dim 	dlgButtonWidth as integer
+dim 	dlgButtonHeight as integer
+dim 	dlgButtonY as integer
+dim 	dlgButtonOKX, dlgButtonCancelX as integer
+dim 	TableNames() as string
+dim 	TableIndex as integer
+
+
+DelFirst = True
+
+ShowPB = True
+tblLaterals = "mdl_Laterals_ac"
+tblLaterals = "selection"
+tblEndPts = "mdl_LateralEndPts"
+
+TableCount = NumTables()
+redim TableNames(TableCount+1)
+Semi = ""
+For LoopCount = 1 to TableCount
+	TableList = TableList + Semi + TableInfo(LoopCount, TAB_INFO_NAME)
+	TableNames(LoopCount+1) = TableInfo(LoopCount, TAB_INFO_NAME)
+	Semi = ";"
+Next
+TableNames(1) = "Selection"
+TableList = "Selection;" + TableList
+
+dlgWidth = 300
+dlgHeight = 200
+dlgButtonWidth = 40
+dlgButtonHeight = 15
+
+dlgButtonY = dlgHeight - 25
+dlgButtonOKX = (dlgwidth / 3.0) - (dlgButtonWidth / 2.0)
+dlgButtonCancelX = ((dlgwidth / 3.0) * 2) - (dlgButtonWidth / 2.0)
+
+
+Dialog  
+	Title   "Lateral End Point Creator"
+	Width   dlgWIdth  Height   dlgHeight 
+	Position  150 , 150
+
+	Control StaticText
+		Position	30, 30
+		Title		"Lateral table or selection to process:"
+		 	Control PopupMenu  
+		Title  from variable TableNames
+		Value 1
+		ID 5 
+		Into  TableIndex
+		Position  175, 30
+
+	Control  CheckBox  
+		Position  30, 50 
+		Title  "Erase All Endpoints before beginning"
+		Value  False
+		Into  DelFirst 	
+
+	Control OKButton
+		Position	dlgButtonOKX, dlgButtonY
+		Width	dlgButtonWidth
+		Height	dlgButtonHeight
+		Title		"OK"
+		
+	Control CancelButton
+		Position	dlgButtonCancelX, dlgButtonY
+		Width	dlgButtonWidth
+		Height	dlgButtonHeight
+		Title		"Cancel"
+
+If CommandInfo(CMD_INFO_DLG_OK) Then 
+	tbllaterals = TableNames(TableIndex)
+	lResult = ConstructAllLateralEndPoints(DelFirst, ShowPB, tblLaterals, TblEndPts)
+
+End If 
+
+
+End Sub
+
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  
+'
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  
+'Sub		ReadLateral(
+'			TheLateral as Lateral,
+'			LateralsName as string
+'		)
+
+'	TheLateral.Lateralobj = LateralsName.obj
+'	TheLateral.LateralID = LateralsName.LateralID
+'	TheLateral.LinkID = LateralsName.LinkID
+'	TheLateral.ParcelID = LateralsName.ParcelID
+'	TheLateral.DivideID = LateralsName.DivideID
+'	TheLateral.LinkType = LateralsName.LinkType
+'	TheLateral.PipeFlowType = LateralsName.PipeFlowType
+'	TheLateral.Created = LateralsName.Created
+'	TheLateral.USFloodRefElev = LateralsName.USFloodRefElev
+'	TheLateral.DSSewerIE = LateralsName.DSSewerIE
+'	TheLateral.SewerDiameter = LateralsName.SewerDiameter
+'	TheLateral.Frac2SwrBeg = LateralsName.Frac2SwrBeg
+'	TheLateral.Pumped = LateralsName.Pumped
+'	TheLateral.SwrQCFlag = LateralsName.SwrQCFlag
+'	TheLateral.DSCQCFlag = LateralsName.DSCQCFlag
+'	TheLateral.LatQCFlag = LateralsName.LatQCFlag
+'	TheLateral.QCDate = LateralsName.QCDatae
+'
+'End Sub
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  
+'
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  
+Sub		WriteLateral(
+			TheLateral as Lateral, 
+			LateralsName as string
+		)
+
+'	Now, write the lateral
+print "Write Lateral: " + gstrLateralContext
+
+do case ucase$(gstrLateralContext)
+	case "MODEL"
+		print "MODEL: insert lateral into " + LateralsName
+		Insert into LateralsName (
+			obj,
+			LateralID,
+			LinkID,
+			mLateralID,
+			mLinkID,
+			ParcelID,
+			DivideID,
+			LinkType,
+			PipeFlowType,
+			Created,
+			USFloodRefElev,
+			DSSewerIE,
+			SewerDiameter,
+			Frac2SwrBeg,
+			Pumped,
+			SwrQCFlag,
+			DSCQCFlag,
+			LatQCFlag,
+			QCDate,
+			LatPickedFlag,
+			TraceVisit
+		) Values (
+			TheLateral.Lateralobj,
+			TheLateral.LateralID,
+			TheLateral.LinkID,
+			TheLateral.MLateralID,
+			TheLateral.MLinkID,
+			TheLateral.ParcelID,
+			TheLateral.DivideID,
+			TheLateral.LinkType,
+			TheLateral.PipeFlowType,
+			TheLateral.Created,
+			TheLateral.USFloodRefElev,
+			TheLateral.DSSewerIE,
+			TheLateral.SewerDiameter,
+			TheLateral.Frac2SwrBeg,
+			TheLateral.Pumped,
+			TheLateral.SwrQCFlag,
+			TheLateral.DSCQCFlag,
+			TheLateral.LatQCFlag,
+			TheLateral.QCDate,
+			TheLateral.LatPickedFlag,
+			TheLateral.TraceVisit
+		)
+	case "MASTER"
+		print "MASTER: insert lateral into " + LateralsName + " MLateralID, MLinkID " + str$(TheLateral.MLateralID) + " " + str$(TheLateral.MLinkID)
+		Insert into LateralsName (
+			obj,
+			mLateralID,
+			mLinkID,
+			ParcelID,
+			DivideID,
+			LinkType,
+			PipeFlowType,
+			Created,
+			USFloodRefElev,
+			DSSewerIE,
+			SewerDiameter,
+			Frac2SwrBeg,
+			Pumped,
+			SwrQCFlag,
+			DSCQCFlag,
+			LatQCFlag,
+			QCDate,
+			TimeFrame
+		) Values (
+			TheLateral.Lateralobj,
+			TheLateral.mLateralID,
+			TheLateral.mLinkID,
+			TheLateral.ParcelID,
+			TheLateral.DivideID,
+			TheLateral.LinkType,
+			TheLateral.PipeFlowType,
+			TheLateral.Created,
+			TheLateral.USFloodRefElev,
+			TheLateral.DSSewerIE,
+			TheLateral.SewerDiameter,
+			TheLateral.Frac2SwrBeg,
+			TheLateral.Pumped,
+			TheLateral.SwrQCFlag,
+			TheLateral.DSCQCFlag,
+			TheLateral.LatQCFlag,
+			TheLateral.QCDate,
+			TheLateral.TimeFrame
+		)
+	end case
+
+End Sub
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  
+'
+'	Show a dialog, get params, then call the lateral Re-computer
+'
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  
+Sub 	ShowLatComputeDialog
+dim 		DelFirst as logical
+dim		ShowPB as logical
+dim		tblLaterals as string
+dim 		tblEndPts as string
+dim		tblDSC as string
+dim		tblMastDSC as string
+dim		tblMastTax as string
+dim		tblSewers as string
+
+dim 		lResult as logical
+
+Dim 		LoopCount as integer
+Dim 		Semi as string
+dim 		TableCount as integer
+dim		TableList as string
+Dim 		dlgWidth as integer
+dim		dlgHeight as integer
+
+dim 		dlgButtonWidth as integer
+dim 		dlgButtonHeight as integer
+dim 		dlgButtonY as integer
+dim 		dlgButtonOKX, dlgButtonCancelX as integer
+dim 		TableNames() as string
+dim 		TableIndex, TableIndex2 as integer
+
+
+DelFirst = True
+ShowPB = True
+tblLaterals = "selection"
+tblEndPts = "mst_LatlEndPts"
+tblDSC = "mdl_DirSC_ac"
+tblMastDSC = "mst_divides"
+tblMastTax = "mst_parcels"
+tblSewers = "mst_links"
+
+TableCount = NumTables()
+redim TableNames(TableCount+1)
+Semi = ""
+For LoopCount = 1 to TableCount
+	TableList = TableList + Semi + TableInfo(LoopCount, TAB_INFO_NAME)
+	TableNames(LoopCount+1) = TableInfo(LoopCount, TAB_INFO_NAME)
+	Semi = ";"
+Next
+TableNames(1) = "Selection"
+TableList = "Selection;" + TableList
+
+dlgWidth = 300
+dlgHeight = 200
+dlgButtonWidth = 40
+dlgButtonHeight = 15
+
+dlgButtonY = dlgHeight - 25
+dlgButtonOKX = (dlgwidth / 3.0) - (dlgButtonWidth / 2.0)
+dlgButtonCancelX = ((dlgwidth / 3.0) * 2) - (dlgButtonWidth / 2.0)
+
+
+Dialog  
+	Title   "Lateral Data Computer"
+	Width   dlgWIdth  Height   dlgHeight 
+	Position  150 , 150
+
+	Control StaticText
+		Position	30, 30
+		Title		"Lateral table or selection to process:"
+ 	Control PopupMenu  
+		Title  from variable TableNames
+		Value 1
+		ID 5 
+		Into  TableIndex
+		Position  175, 30
+
+	Control OKButton
+		Position	dlgButtonOKX, dlgButtonY
+		Width	dlgButtonWidth
+		Height	dlgButtonHeight
+		Title		"OK"
+
+		
+	Control CancelButton
+		Position	dlgButtonCancelX, dlgButtonY
+		Width	dlgButtonWidth
+		Height	dlgButtonHeight
+		Title		"Cancel"
+
+If CommandInfo(CMD_INFO_DLG_OK) Then 
+	tblLaterals = TableNames(TableIndex)
+
+	gstrLateralContext = "MASTER"			' hard coded for immediate compute need... needs relaxed
+	lResult = ComputeAllLaterals(ShowPB, tblLaterals , tblEndPts, tblDSC, tblMastDSC, tblMastTax, tblSewers) 
+
+End If 
+
+
+End Sub
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  
+'	Import all the dumb laterals in a specified file or selection
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  
+Function ComputeAllLaterals(
+	ShowPBar as logical, 
+	SelectionSet as string, 
+	tblLatEndPts as string,
+	tblDSC as string,
+	tblMastDSC as string,
+	tblMastTax as string,
+	tblSewers as string
+	) as logical
+dim NRows as integer
+
+ComputeAllLaterals = False		' initialize to "didn't work" condition
+if ShowPBar then
+	Set ProgressBars On
+else
+	Set ProgressBars Off
+end if
+
+call ReadLateralINIParams()
+
+mSelectionSetName = SelectionSet		' need to make accessable to ProgressBar driven routines
+mLatPtsname = tblLatEndPts
+mDSCName = tblDSC
+mMastDSCName = tblMastDSC
+mMastTaxName = tblMastTax
+mSewerName = tblSewers
+
+Select * from mSelectionSetName into _LatSet
+
+NRows = TableInfo(_LatSet, TAB_INFO_NROWS)
+mRecordCount = 0
+
+Fetch First from _LatSet
+
+ProgressBar   "Re-Computing Laterals" 
+	Calling   ComputeOneLateral  
+	Range   NRows 
+ 
+close table _LatSet
+
+End Function
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  
+'	Progress Bar Handler.
+'	Manages one lateral at a time, and loops...
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  
+Sub ComputeOneLateral()
+Dim MyLat as Lateral
+dim lResult as logical
+Dim ThisObj as object
+Dim	ThisRowID as integer
+
+	if EOT(_LatSet) then
+		ProgressBar = -1
+		exit sub
+	end if
+	'
+	ThisRowID = _LatSet.RowID
+	MyLat.LateralObj = _LatSet.obj
+	MyLat.LateralID =_LatSet.MLateralID
+	MyLat.LinkID =_LatSet.MLinkID
+	MyLat.ParcelID =_LatSet.ParcelID
+	MyLat.DivideID = _LatSet.DivideID
+	MyLat.LinkType =_LatSet.LinkType
+	MyLat.PipeFlowType =_LatSet.PipeFlowType
+
+	MyLat.Created =_LatSet.Created
+	MyLat.USFloodRefElev =_LatSet.USFloodRefElev
+	MyLat.DSSewerIE =_LatSet.DSSewerIE
+	MyLat.SewerDiameter =_LatSet.SewerDiameter
+	MyLat.Frac2SwrBeg =_LatSet.Frac2SwrBeg
+	MyLat.Pumped =_LatSet.Pumped
+	MyLat.SwrQCFlag =_LatSet.SwrQCFlag
+	MyLat.DSCQCFlag =_LatSet.DSCQCFlag
+	MyLat.LatQCFlag =_LatSet.LatQCFlag
+	MyLat.QCDate = _LatSet.QCDate
+	if gstrLateralContext = "MODEL" then
+		MyLat.LateralID =_LatSet.LateralID
+		MyLat.LinkID = _LatSet.LinkID
+		MyLat.LatPickedFlag = _LatSet.LatPickedFlag
+		MyLat.TraceVisit = _LatSet.TraceVisit
+	end if
+	
+
+	lResult = ComputeLateral(MyLat, mLateralsName, mLatPtsname, mDSCName, mMastDSCName, mMastTaxName, mSewerName)
+	' 
+'	Now, write the lateral
+	if gstrLateralContext = "MASTER" then
+	update _LatSet set 
+		obj =MyLat.Lateralobj,
+		MLateralID =MyLat.MLateralID,
+		MLinkID =MyLat.MLinkID,
+		ParcelID = MyLat.ParcelID,
+		DivideID = MyLat.DivideID,
+		LinkType =MyLat.LinkType,
+		PipeFlowType =MyLat.PipeFlowType,
+		Created =MyLat.Created,
+		USFloodRefElev =MyLat.USFloodRefElev,
+		DSSewerIE =MyLat.DSSewerIE,
+		SewerDiameter =MyLat.SewerDiameter,
+		Frac2SwrBeg =MyLat.Frac2SwrBeg,
+		Pumped =MyLat.Pumped,
+		SwrQCFlag =MyLat.SwrQCFlag,
+		DSCQCFlag =MyLat.DSCQCFlag,
+		LatQCFlag =MyLat.LatQCFlag,
+		QCDate = MyLat.QCDate
+   	Where RowID = ThisRowID
+	else
+	update _LatSet set 
+		obj =MyLat.Lateralobj,
+		MLateralID =MyLat.MLateralID,
+		MLinkID =MyLat.MLinkID,
+		LateralID = MyLat.LateralID,
+		LinkID = MyLat.LinkID,
+		ParcelID = MyLat.ParcelID,
+		DivideID = MyLat.DivideID,
+		LinkType =MyLat.LinkType,
+		PipeFlowType =MyLat.PipeFlowType,
+		Created =MyLat.Created,
+		USFloodRefElev =MyLat.USFloodRefElev,
+		DSSewerIE =MyLat.DSSewerIE,
+		SewerDiameter =MyLat.SewerDiameter,
+		Frac2SwrBeg =MyLat.Frac2SwrBeg,
+		Pumped =MyLat.Pumped,
+		SwrQCFlag =MyLat.SwrQCFlag,
+		DSCQCFlag =MyLat.DSCQCFlag,
+		LatQCFlag =MyLat.LatQCFlag,
+		QCDate = MyLat.QCDate,
+		LatPickedFlag = MyLat.LatPickedFlag,
+		TraceVisit = MyLat.TraceVisit
+   	Where RowID = ThisRowID
+
+	end if
+	mRecordCount = mRecordCount + 1
+	ProgressBar = mRecordCount
+	Fetch Next from _LatSet
+
+End Sub
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  
+
+'	
+'	
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  
+Function ComputeLateral (
+	TheLateral as Lateral, 
+	LateralsName as string, 
+	LatEndPtsName as string,
+	DSCName as string,
+	MastDSCName as string,
+	MastTaxName as string,
+	SewersName as string
+	) as logical
+Dim 		lResult as logical
+Dim		ObjChange as logical
+Dim		TempLogical as logical
+
+ComputeLateral = FALSE
+'	
+'	Create End points.
+lResult = ConstructLateralEndPoint(LatEndPtsName, TheLateral)
+'
+'	See if parcel exists, trace it if not.
+TempLogical = TRUE
+if ucase$(gstrLateralContext) = "MODEL" then
+	lResult = SnapLatToDSC(DSCName, MastDSCName, MastTaxName, LatEndPtsName, TempLogical, TheLateral, ObjChange)
+end if
+'
+'	find a likely sewer
+lResult = SnapLatToSewer (SewersName, TheLateral, ObjChange)
+'
+
+End Function
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  
+'
+'	ImportTempLats()
+'
+'	ASSERT:
+'		The LatTemp table you want to append is open as mdl_LatTemp
+'	INPUT:
+'		gstrLateralContext				indicates import to MODEL or MASTER
+'	PROCESSING:
+'		import the graphical object and data.
+'		create lateral end points in the correct context.
+'		most importantly, assign the unique LateralID appropriate for the context.
+'	AT END:
+'		all tables left open
+'
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  
+Sub ImportTempLats()
+Dim 		lResult as Logical
+Dim		MyLat as Lateral
+Dim		CurRowID  as integer
+Dim		LatEndsname as string
+Dim		LatsName as string
+
+	'	note: these are internal aliases, not physical table names
+
+Print "Import Temp Lats: " & gstrLateralContext
+do case ucase$(gstrLateralContext )
+	case "MASTER"
+		LatEndsName = "mst_LatEndPts"
+		LatsName = "mst_laterals"
+		if mNextMSTLateralID = 0 then
+			create index on mst_Laterals (MLateralID)
+			call SetMaxMSTLatID()
+		end if
+
+	case "MODEL"
+		LatEndsName = "mdl_LatEndPts"
+		LatsName = "mdl_laterals"
+		if mNextMDLLateralID = 0 then
+			create index on mdl_Laterals (LateralID)
+			call SetMaxMDLLatID()
+		end if
+	case else
+		gstrCurrentMessage = "Unexpected lateral context: '" & gstrLateralContext & "'"
+		gstrReturnStatus = "FAILURE"
+End Case
+
+	Fetch First from mdl_LatTemp			' ensure rewound
+	Do While not EOT(mdl_LatTemp)
+		MyLat.LateralObj = mdl_LatTemp.obj
+		CurRowID = mdl_LatTemp.RowID
+		MyLat.Lateralobj = mdl_LatTemp.obj
+		MyLat.LateralID = mdl_LatTemp.LateralID
+		MyLat.LinkID = mdl_LatTemp.LinkID
+		MyLat.ParcelID = mdl_LatTemp.ParcelID
+		MyLat.DivideID = mdl_LatTemp.DivideID
+		MyLat.LinkType = mdl_LatTemp.LinkType
+		MyLat.PipeFlowType = mdl_LatTemp.PipeFlowType
+		MyLat.Created = mdl_LatTemp.Created
+		MyLat.USFloodRefElev = mdl_LatTemp.USFloodRefElev
+		MyLat.DSSewerIE = mdl_LatTemp.DSSewerIE
+		MyLat.SewerDiameter = mdl_LatTemp.SewerDiameter
+		MyLat.Frac2SwrBeg = mdl_LatTemp.Frac2SwrBeg
+		MyLat.Pumped = mdl_LatTemp.Pumped
+		MyLat.SwrQCFlag = mdl_LatTemp.SwrQCFlag
+		MyLat.DSCQCFlag = mdl_LatTemp.DSCQCFlag
+		MyLat.LatQCFlag = mdl_LatTemp.LatQCFlag
+		MyLat.QCDate = mdl_LatTemp.QCDate
+
+
+		If ucase$(gstrLateralContext ) = "MASTER" then
+			MyLat.MLateralID = mNextMSTLateralID
+			mNextMSTLateralID = mNextMSTLateralID + 1
+			MyLat.MLinkID = mdl_LatTemp.MLinkID
+		else
+			MyLat.LatPickedFlag = mdl_LatTemp.LatPickedFlag
+			MyLat.TraceVisit = mdl_LatTemp.TraceVisit
+			MyLat.LateralID = mNextMDLLateralID
+			mNextMDLLateralID = mNextMDLLateralID + 1
+		end if
+
+
+		lResult = ConstructLateralEndPoint(LatEndsname, MyLat)
+
+		call WriteLateral(MyLat, LatsName)
+
+		Fetch Next From mdl_LatTemp
+	Loop
+
+
+End Sub
+
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  
+'
+'	DeleteUnpickedLatsFromMaster   (XXXX)
+'
+'		Using the LatPickedFlag field in the model laterals, following MLateralID, 
+'		delete unused laterals (from a particular model) from the master laterals table.
+'	Assert:
+'		Model (and master) is already open
+'		gmdlRootPath				' the root path of the currently open model
+'		The CalcDSC sub MUST have been called to properly set the LatPickedFlag field.
+'	Input:
+'
+'	At End:
+'
+'
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  
+Sub DeleteUnpickedLatsFromMaster()
+Dim MastRowID as integer
+Dim		Msg as string
+Dim		RecCount as integer
+Dim		TheLatID as integer
+Dim		DelCount as integer
+
+	select mst_laterals.MLateralID, mst_Laterals.RowID
+	from mdl_laterals, mst_laterals
+	where mdl_laterals.MLateralID = mst_laterals.MLateralID
+	  and mdl_Laterals.LatPickedFlag <> "T"
+	into _LatsToDelete
+	
+	Msg = "There are " & str$(TableInfo(_LatsToDelete, TAB_INFO_NROWS)) & " unpicked laterals."
+	call loggit(Msg)
+
+	RecCount = 0
+	do while NOT EOT(_LatsToDelete)
+
+		RecCount = RecCount + 1
+		call loggit("----------------------------------------")
+
+		Msg = "Unpicked Lateral # " & str$(RecCount)
+		call loggit(msg)
+
+		TheLatID = _LatsToDelete.col1
+		Msg = " MLateralID = " & str$(TheLatID)
+		call loggit(msg)
+
+		Select MLateralID, RowID from mst_laterals where MLateralID = TheLatID
+		into _TheRow
+		DelCount = TableInfo(_TheRow, TAB_INFO_NROWS)
+
+		If DelCount = 1 then
+			delete from _TheRow
+		else
+			msg = msg & " ***OOPS, not finding master lateral"
+		end if
+		call loggit(msg)
+
+		fetch next from _LatsToDelete
+	loop
+
+	select * from mdl_Laterals
+	where LatPickedFlag <> "T"
+	into _DieLateralsDie
+
+	delete from _DieLateralsDie
+
+	close table _DieLateralsDie
+	close table _LatsToDelete
+	close table _TheRow
+End Sub
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  
+
+dim	mtbldsc as string
+dim	mtblMastDSC as string
+dim	mtblMastTax as string
+dim	mtblLatEnds as string
+
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  
+'	ReSnapModelLaterals
+'
+'	Process all laterals.
+'	Check that the pipe exists.  If not, re-snap.
+'	For model laterals where SWRQCFlag = "F", 
+'	resnap the lateral.  Will adjust spatially where necessary.
+'	Set TraceVisit of lateral to be the same as TraceVisit of the pipe it's connected to.
+'	Set TraceVisit = "T" in DSCs where the lateral was successfully re-traced.
+'
+'	ASSERT:
+'		model and master tables open
+'
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  
+Declare Function ReSnapOne() as integer
+
+Sub ReSnapModellaterals()
+Dim	NRows as integer
+dim	msg as string
+
+	Call SetStdCoordSys()
+	Call ReadLateralINIParams()
+	Call SetLogOptions (TRUE, TRUE, TRUE, TRUE)
+	set window message
+		position (1,1) 
+		width 5
+		height 2
+
+	mtbldsc = "mdl_DSC"
+	mtblMastDSC = "mst_divides"
+	mtblMastTax = "mst_parcels"
+	mtblLatEnds = "mdl_LatEndPts"
+
+	'Select * from mdl_laterals
+	'where SWRQCFlag <> "T"
+	'into _LatReDo
+	
+	Set Progressbars OFF
+
+	' Since we want to do all DSCs, need to process all laterals
+	Select * from mdl_Laterals
+	into _LatReDo
+
+	' Unset the TraceVisit flag in DSCs, so one can check to see that
+	' all DSCs are still hooked up to something.
+	Update mdl_DSC
+	set TraceVisit = "F"
+
+	NRows = TableInfo(_LatReDo, TAB_INFO_NROWS)
+
+	gstrLateralContext = "MODEL"
+	Fetch First from _LatReDo
+	mRecordCount = 0
+	
+	msg = "There are " + str$(NRows) + " laterals to re-do."
+	call loggit(msg)
+
+	'ProgressBar		"Re-Visit laterals and DSCs"
+	'	calling	ReSnapOne
+	'	Range 	NRows
+
+	Set ProgressBars Off	' just be quiet ...
+	Do 
+
+	Loop Until ReSnapOne() < 0
+
+	close table _LatReDo
+
+	call CommitModel()
+
+	gstrReturnStatus = "SUCCESS"
+	gstrCurrentMessage = "Re-Trace laterals complete."
+
+	msg = "Lateral re-trace complete."
+	call loggit(msg)
+
+End Sub
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  
+'	Do one deserving lateral ...
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  
+Function ReSnapOne() as integer
+Dim MyLat as Lateral
+Dim	SewerName as string
+Dim	WasChanged as logical
+Dim	DSCTrace as logical
+Dim	lResult as logical
+Dim	CurRow as integer
+Dim	RecCount as integer
+Dim	msg as string
+
+	if EOT(_LatReDo) then
+		'ProgressBar = -1
+		ReSnapOne = -1
+		exit Function
+	end if
+
+	SewerName = "mdl_Links"
+	
+	CurRow = _LatReDo.ROWID
+	MyLat.LateralObj = _LatReDo.obj
+	MyLat.LateralID = _LatReDo.LateralID
+	MyLat.LinkID = _LatReDo.LinkID
+	MyLat.LinkType = _LatReDo.LinkType
+	MyLat.Pumped = _LatReDo.Pumped
+	MyLat.SWRQCFlag = _LatReDo.SWRQCFlag
+
+	' is the pipe I'm supposed to be connected to there?
+	Select * from mdl_links
+	where LinkID = MyLat.LinkID
+	into _LatsLink
+	RecCount = TableInfo(_LatsLink, TAB_INFO_NROWS)
+	If RecCount <> 1 then
+		MyLat.SWRQCFlag = "F"
+		msg = "Couldn't find link, ID = " & MyLat.LinkID
+		call loggit(msg)
+		MyLat.TraceVisit = "X"
+	else
+		MyLat.TraceVisit = _LatsLink.TraceVisit
+		msg = "Link found, visit = " & _LatsLink.TraceVisit
+		call loggit(msg)
+	end if 
+
+	' only re-snap the lateral to the pipe if the QC flag got turned off
+
+	if _LatReDo.SWRQCFlag <> "T" then
+		lResult = SnapLatToSewer(SewerName, MyLat, WasChanged)
+		if lResult then
+			MyLat.TraceVisit = "T"
+			Mylat.LatSourceFlag = "R"
+
+		else
+			MyLat.TraceVisit = "F"
+		end if
+	end if
+
+	' Only let the DSC get it's TraceVisit set if the lateral was visited.
+
+	if MyLat.TraceVisit = "T" then
+		lResult = SnapLatToDSC(
+			mtbldsc,
+			mtblMastDSC,
+			mtblMastTax,
+			mtblLatEnds,
+			DSCTrace,
+			MyLat,
+			WasChanged
+			)
+	end if
+
+	'MyLat.TraceVisit = "T"
+	'MyLat.Pumped = "F"		' for now, leave it alone...
+	MyLat.DSCQCFlag = "F"
+	MyLat.LATQCFlag = "F"
+	MyLat.LatPickedFlag = "F"
+
+	update _LatReDo set 
+		obj =MyLat.Lateralobj,
+		LateralID =MyLat.LateralID,
+		ParcelID = MyLat.ParcelID,
+		DivideID = MyLat.DivideID,
+		LinkID =MyLat.LinkID,
+		MLinkID = MyLat.MLinkID,
+		MLateralID = Mylat.MLateralID,
+		LinkType =MyLat.LinkType,
+		PipeFlowType =MyLat.PipeFlowType,
+		Created =MyLat.Created,
+		USFloodRefElev =MyLat.USFloodRefElev,
+		DSSewerIE =MyLat.DSSewerIE,
+		SewerDiameter =MyLat.SewerDiameter,
+		Frac2SwrBeg =MyLat.Frac2SwrBeg,
+		Pumped =MyLat.Pumped,
+		SwrQCFlag =MyLat.SwrQCFlag,
+		DSCQCFlag =MyLat.DSCQCFlag,
+		LatQCFlag =MyLat.LatQCFlag,
+		QCDate = MyLat.QCDate,
+		LatPickedFlag = Mylat.LatPickedFlag,
+		LatSourceFlag = Mylat.LatSourceFlag,
+		TraceVisit = MyLat.TraceVisit
+   	Where RowID = CurRow
+
+	mRecordCount = MRecordCount + 1
+	'ProgressBar = mRecordCount
+	ReSnapOne = 1
+	Fetch Next from _LatReDo
+
+
+End Function
+'
+' AMM 12/7/2006 Added
+'
+Function GetLinkIDByMLinkID(ByVal AMLinkID as integer) as string
+	Select LinkID
+	from mdl_links
+	where MLinkID = AMLinkID
+	into _tmpLink
+
+	if not EOT(_tmpLink) then
+		GetLinkIDByMLinkID = _tmpLink.LinkID
+	else
+		GetLinkIDByMLinkID = ""
+	end if
+	
+	close table _tmpLink
+End Function
+
+Function GetNGTOByLinkID(Byval MyLinkID as integer) as string
+Dim Msg as string
+
+	msg = "Looking for link " & MyLinkID
+	call loggit(msg)
+
+	Select USNode
+	from mdl_links
+	where LinkID = MyLinkID
+	into _tmpLink
+
+	if not EOT(_tmpLink) then
+		GetNGTOByLinkID = _tmpLink.USNode
+		Msg = "Found Link NGTO: " & _tmpLink.USNode & " Link: " & MyLinkID
+	else
+		GetNGTOByLinkID = ""
+		Msg = "Link not found: " & MyLinkID
+	end if
+	call Loggit(msg)
+	close table _tmpLink
+End Function
+
+Function GetPipeFlowTypeByLinkID(ByVal ALinkID as integer) as string
+	Select PipeFlowType
+	from mdl_links
+	where LinkID = ALinkID
+	into _tmpLink
+	
+	if not EOT(_tmpLink) then
+		GetPipeFlowTypeByLinkID = _tmpLink.PipeFlowType
+	else
+		GetPipeFlowTypeByLinkID = ""
+	end if
+	close table _tmpLink
+End Function

@@ -1,0 +1,191 @@
+'
+'	============ EMGAATS Workbench =================
+'
+'	Copyright (c) 2001,	2003  City of Portland,	OR Bureau of Environmental Services	
+'
+' 20Jul2006	Adapted
+'	22Mar2004 Collins added	call to	InitOpenUtilGlobals	so that	EMGOpenUtils can be	used here
+'
+'
+include "MapBasic.def"
+'include "\\cassio\modeling\Model_Programs\Emgaats\CodeV2.1\Common\Inc\EMGGlobal.def"
+include "\\cassio\modeling\Model_Programs\Emgaats\CodeV2.2\Common\Inc\EMGToolGlobal.def"
+include "\\cassio\modeling\Model_Programs\Emgaats\CodeV2.2\Common\Inc\EMGLogger.def"
+include "\\cassio\modeling\Model_Programs\Emgaats\CodeV2.2\Common\Inc\EMGOpenUtils.def"
+include "\\cassio\modeling\Model_Programs\Emgaats\CodeV2.2\Common\Inc\EMGMTabUtil.def"
+include "\\cassio\modeling\Model_Programs\Emgaats\CodeV2.2\Common\Inc\INIUtils.def"
+include "\\cassio\modeling\Model_Programs\Emgaats\CodeV2.2\Workbench\Inc\EMGInit.def"
+include "\\cassio\modeling\Model_Programs\Emgaats\CodeV2.2\LinkTool\Inc\EMGLinkColData.def"
+include "\\cassio\modeling\Model_Programs\Emgaats\CodeV2.2\common\inc\EMGCoordSys.def"
+
+Declare Sub Main()
+'Declare Sub EndHandler()
+
+'Required for all Framework MBX Apps
+Declare Sub ExitApplication()
+Declare Sub Function_Menu()
+
+'Globals required for all Framework Apps
+Global gReturnStatus as String
+Global gDebugMode as Logical
+
+'Functions specific to this Framework App
+Declare Sub UpdateSSC
+Declare Sub SetupSSCProcessor
+
+'Globals specific to this Framework App
+global gOutputModelPath as String
+global gLinkAlternative as String
+global gSSCAlternative as String
+global gTempDir as String
+global gAltID as integer
+Global gErrorCheckPath as String
+
+'---------------------------------------------------------
+' the following	is a delphi	code snippit that shows	how	the	MB globals are accessed
+'---------------------------------------------------------
+  'strMBmsg	= 'gstrCurrentMessage';
+  'strMBrc = 'gstrReturnStatus';
+
+  'STEP	ONE: Start mapinfo
+  'goleMI :=Zcreateoleobject('Mapinfo.Application');
+  
+  'STEP	TWO: find the full path	of the application
+  'mbxFullPath := systemini.ReadString('code','TestBench','notfound');	
+	
+	'STEP THREE: Run the mbx
+	'DoStr := 'Run Application '+ #34 +	mbxFullPath	+ #34;
+	'oleMI.do doStr
+	
+  'STEP	FOUR: Initialize global	to something that is not SUCCESS
+  'oleMI.mbapplications.item('TestBench').mbglobals.item(strMBrc).value	:= 'NULL';
+  
+  'STEP	FIVE: run subroutines within the mapinfo application and test for success
+  'olemi.do	('Run Menu Command ID '	+ cmdID);
+  'sleep(1000);
+  'if myrc <> 'SUCCESS'	Then
+	' error	stuff here
+  'end if
+
+
+'---------------------------------------------------------
+Sub UpdateSSC
+	gReturnStatus="Entered UpdateSSC()"	
+	Open Table gSSCAlternative as alt_ssc	
+	
+	If TableInfo(alt_ssc, TAB_INFO_NROWS) = 0 Then
+		Print "No SSC found for update"
+		Exit Sub
+	End If
+	Print "Found " & TableInfo(alt_ssc, TAB_INFO_NROWS) & " SSC for tabular update."
+	
+	Select * From alt_ssc Where MdlSurfSCId Not In (Select SurfSCID From mdl_surfSC) Into alt_not_in_mdl
+	'Select * From mst_dsc where DscId In (select MdlDscId From alt_not_in_mdl) Into NewToServiceAreaDSC
+	'Select (Correct colums) From NewToServiceAreaDSC
+	'Append into mdl_dsc From NewToServiceAreaDSC
+			
+	Select mdl_surfSC.NGTO "oldNGTO", alt_ssc.NGTO "newNGTO" From mdl_surfSC, alt_ssc 
+		Where mdl_surfSC.SurfSCID = alt_ssc.MdlSurfSCID 	
+		Into update_ssc
+		
+	If TableInfo(update_ssc, TAB_INFO_NROWS) <> 0 Then
+		Update update_ssc Set oldNGTO = newNGTO
+	End If
+		
+	'Select * From alt_ssc Where IsActive = 0 Into deactivate_alt_ssc
+	'Select * From mdl_surfSC Where SurfSCID In (Select MdlSurfSCID From deactivate_alt_ssc) Into deactivate_mdl_ssc
+	Select mdl_surfSC.SurfSCID, mdl_surfSC.IsActive From mdl_surfSC, alt_ssc Where mdl_surfSC.SurfSCID = alt_ssc.MdlSurfSCID And alt_ssc.IsActive = 0 into deactivate_mdl_ssc
+	Update deactivate_mdl_ssc Set IsActive = 0
+		
+	dim updateCount as integer
+	updateCount = TableInfo(Alt_ssc, TAB_INFO_NROWS)
+	
+	Select * From mdl_surfSC, mdl_nodes Where NGTO = Node and IsSumped = 0 Into ssc_found_node
+	Commit Table ssc_found_node as gTempDir & "ssc_found_node.tab"
+	Close Table ssc_found_node
+	Open Table gTempDir & "ssc_found_node.tab"
+		
+	'dim sumpedCount as integer
+	'Select * From mdl_SurfSC Where IsSumped <> 0
+	'sumpedCount = SelectionInfo(SEL_INFO_NROWS)
+	
+	'missingCount = TableInfo(mdl_surfSC, TAB_INFO_NROWS) - sumpedCount - TableInfo(ssc_found_node, TAB_INFO_NROWS)
+				
+	Commit Table mdl_surfSC
+	gReturnStatus = "Found " & Str$(updateCount) & " SSC(s) specified for update."'Found " & Str$(missingCount) & " with broken connection(s)."
+	
+End Sub
+
+'---------------------------------------------------------
+Sub SetupSSCProcessor
+
+	gReturnStatus="Entered SetupSSCProcessor()"	
+	gmdlINIfullpath = gOutputModelPath
+	call InitOpenUtilGlobals()
+	Call SetStdCoordSys()
+	Open Table gLinkAlternative as alt_links
+	Open Table gSSCAlternative as alt_ssc
+	
+	dim mdlIndex(4) as integer
+	mdlIndex(1) = NDX_MDL_LINKS
+	mdlIndex(2) = NDX_MDL_NODES 				
+	mdlIndex(3) = NDX_MDL_DIRSC 				
+	mdlIndex(4) = NDX_MDL_SURFSC
+	
+	dim result as integer
+	result = setOKToOpen(gmdlFiles, mdlIndex)	
+	result = setAllowWrite(gmdlFiles, mdlIndex)
+	result = ReallyOpenModel()
+	gReturnStatus="Succesfully called SetupSSCProcessor()"	
+End Sub 
+'---------------------------------------------------------
+Sub ExitApplication()		
+	Close All		
+	End Program
+End Sub
+
+'---------------------------------------------------------
+' Modify to	add	menuitems for testing
+'---------------------------------------------------------
+
+Sub	Function_Menu() 'Required for all Framework MBX apps
+
+Create Menu	"Function Menu"	as 
+	"Setup SSC Processor" ID 10000 calling SetupSSCProcessor,	
+	"Update SSC" ID 10001 calling UpdateSSC,	
+
+	"Exit MBX Application" ID 9999 calling ExitApplication 'Required for all Framework MBX apps
+  
+  Alter	Menu Bar Remove	ID 6, ID 7 
+  Alter	Menu Bar Add "Function Menu", ID 6,	ID 7
+
+End	Sub
+
+'--------------------------------------------------------
+'No	changes	below here
+'--------------------------------------------------------
+
+Sub	Main()
+		 
+	gReturnStatus="Initialized"	
+	OnError GoTo ErrorHandler
+	Call InitHousekeeping		' have to init some globals before we can say hello
+  Call InitOpenUtilGlobals  ' this sets up table names for the EMGOpenUtils functions
+	
+	Call Function_Menu
+	
+	Exit Sub
+	
+	ErrorHandler:
+		gReturnStatus = "Error: " + Err()		
+		OnError GoTo 0
+		Error Err()
+	
+End	Sub
+'---------------------------------------------------------
+'All functions should be sure to save tables as needed. When MapInfo exits,
+'all tables will be closed without saving (to prevent user prompt in event of a crash
+'Sub EndHandler
+'	Close All
+'End Sub
+

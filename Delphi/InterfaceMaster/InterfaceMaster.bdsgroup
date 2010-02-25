@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<PersonalityInfo>
+		<Option>
+			<Option Name="Personality">Default.Personality</Option>
+			<Option Name="ProjectType"></Option>
+			<Option Name="Version">1.0</Option>
+			<Option Name="GUID">{54960D58-15FE-454D-A8E5-A16D453E293A}</Option>
+		</Option>
+	</PersonalityInfo>
+	<Default.Personality>  <Projects>
+      <Projects Name="InterfaceMaster.exe">InterfaceMaster.bdsproj</Projects>
+      <Projects Name="InterfaceMasterTests.exe">Test\InterfaceMasterTests.bdsproj</Projects>
+      <Projects Name="AQTimeProfiling">C:\Documents and Settings\ARNELM\My Documents\Borland Studio Projects\AQTimeProfiling.bdsproj</Projects>
+      <Projects Name="Targets">InterfaceMaster.exe InterfaceMasterTests.exe AQTimeProfiling</Projects>
+    </Projects>
+    <Dependencies/>
+  </Default.Personality>
+	<StarTeamAssociation></StarTeamAssociation>
+	<StarTeamNonRelativeFiles></StarTeamNonRelativeFiles>
+</BorlandProject>

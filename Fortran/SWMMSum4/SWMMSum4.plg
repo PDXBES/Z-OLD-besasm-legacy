@@ -1,0 +1,23 @@
+--------------------Configuration: SWMMSum4 - Win32 Release--------------------
+Begining build with project "D:\Development\F32\SWMMSUM4\SWMMSum4.dsp", at root.
+Active configuration is Win32 (x86) Console Application (based on Win32 (x86) Console Application)
+
+Project's tools are:
+			"Fortran 90 Compiler for 80x86" with flags "/include:"Release/" /compile_only /nologo /warn:nofileopt /module:"Release/" /object:"Release/" "
+			"Win32 Resource Compiler" with flags "/l 0x409 /d "NDEBUG" "
+			"Browser Database Maker" with flags "/nologo /o"Release/SWMMSum4.bsc" "
+			"COFF Linker for 80x86" with flags "kernel32.lib /nologo /subsystem:console /incremental:no /pdb:"Release/SWMMSum4.pdb" /machine:I386 /out:"Release/SWMMSum4.exe" "
+			"Custom Build" with flags ""
+			"<Component 0xa>" with flags ""
+
+Creating temp file "C:\TEMP\RSP255.tmp" with contents </include:"Release/" /compile_only /nologo /warn:nofileopt /module:"Release/" /object:"Release/" 
+"D:\Development\F32\SWMMSUM4\SUM400.FOR"
+>
+Creating command line "link.exe kernel32.lib /nologo /subsystem:console /incremental:no /pdb:"Release/SWMMSum4.pdb" /machine:I386 /out:"Release/SWMMSum4.exe"  .\Release\SUM400.OBJ" 
+Compiling Fortran...
+D:\Development\F32\SWMMSUM4\SUM400.FOR
+Linking...
+
+
+
+SWMMSum4.exe - 0 error(s), 0 warning(s)
