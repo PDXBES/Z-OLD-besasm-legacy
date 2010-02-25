@@ -30,42 +30,57 @@
         {
             this.components = new System.ComponentModel.Container();
             Infragistics.Win.Appearance appearance1 = new Infragistics.Win.Appearance();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            Infragistics.Win.Appearance appearance18 = new Infragistics.Win.Appearance();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            Infragistics.Win.Appearance appearance5 = new Infragistics.Win.Appearance();
-            Infragistics.Win.Appearance appearance4 = new Infragistics.Win.Appearance();
-            Infragistics.Win.Appearance appearance6 = new Infragistics.Win.Appearance();
-            Infragistics.Win.Appearance appearance7 = new Infragistics.Win.Appearance();
-            Infragistics.Win.Appearance appearance3 = new Infragistics.Win.Appearance();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            Infragistics.Win.Appearance appearance17 = new Infragistics.Win.Appearance();
+            Infragistics.Win.Appearance appearance15 = new Infragistics.Win.Appearance();
             Infragistics.Win.Appearance appearance2 = new Infragistics.Win.Appearance();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            Infragistics.Win.Appearance appearance3 = new Infragistics.Win.Appearance();
+            Infragistics.Win.Appearance appearance7 = new Infragistics.Win.Appearance();
+            Infragistics.Win.Appearance appearance6 = new Infragistics.Win.Appearance();
+            Infragistics.Win.Appearance appearance4 = new Infragistics.Win.Appearance();
+            Infragistics.Win.Appearance appearance5 = new Infragistics.Win.Appearance();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             Infragistics.Win.Appearance appearance11 = new Infragistics.Win.Appearance();
             Infragistics.Win.Appearance appearance10 = new Infragistics.Win.Appearance();
+            Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarGroup ultraExplorerBarGroup1 = new Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarGroup();
+            Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarItem ultraExplorerBarItem1 = new Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarItem();
+            Infragistics.Win.Appearance appearance8 = new Infragistics.Win.Appearance();
+            Infragistics.Win.Appearance appearance9 = new Infragistics.Win.Appearance();
+            Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarGroup ultraExplorerBarGroup2 = new Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarGroup();
+            Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarItem ultraExplorerBarItem2 = new Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarItem();
+            Infragistics.Win.Appearance appearance12 = new Infragistics.Win.Appearance();
+            Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarGroup ultraExplorerBarGroup3 = new Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarGroup();
+            Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarItem ultraExplorerBarItem3 = new Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarItem();
+            Infragistics.Win.Appearance appearance13 = new Infragistics.Win.Appearance();
+            Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarItem ultraExplorerBarItem4 = new Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarItem();
+            Infragistics.Win.Appearance appearance16 = new Infragistics.Win.Appearance();
+            Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarGroup ultraExplorerBarGroup4 = new Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarGroup();
+            Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarItem ultraExplorerBarItem5 = new Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarItem();
+            Infragistics.Win.Appearance appearance14 = new Infragistics.Win.Appearance();
             this.txtFileName = new Infragistics.Win.UltraWinEditors.UltraTextEditor();
-            this.btnLoadUpdates = new System.Windows.Forms.Button();
-            this.btnCloseApplication = new System.Windows.Forms.Button();
-            this.btnLoadUpdaterHistory = new System.Windows.Forms.Button();
             this.ofdMain = new System.Windows.Forms.OpenFileDialog();
             this.dgvData = new System.Windows.Forms.DataGridView();
             this.tabControlMain = new System.Windows.Forms.TabControl();
             this.tabMain = new System.Windows.Forms.TabPage();
+            this.btnCancelUpdate = new Infragistics.Win.Misc.UltraButton();
+            this.btnLoadUpdateFile = new Infragistics.Win.Misc.UltraButton();
+            this.tabDownloadTemplate = new System.Windows.Forms.TabPage();
             this.ultraGroupBox = new Infragistics.Win.Misc.UltraGroupBox();
+            this.btnCancelDownload = new Infragistics.Win.Misc.UltraButton();
             this.btnDownloadUpdateTemplate = new Infragistics.Win.Misc.UltraButton();
             this.lblDownloadTemplate = new Infragistics.Win.Misc.UltraLabel();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
             this.tabLoadedUpdateReview = new System.Windows.Forms.TabPage();
-            this.statusStrip2 = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripProgressBar2 = new System.Windows.Forms.ToolStripProgressBar();
+            this.btnSubmitUpdates = new Infragistics.Win.Misc.UltraButton();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.btnSubmit = new System.Windows.Forms.Button();
             this.tabUpdaterHistory = new System.Windows.Forms.TabPage();
+            this.btnCloseUpdaterHistory = new Infragistics.Win.Misc.UltraButton();
+            this.btnLoadSelectedEditSession = new Infragistics.Win.Misc.UltraButton();
             this.bindingNavigator1 = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
@@ -83,8 +98,29 @@
             this.sESSIONBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.projectDataSet = new DSCUpdater.projectDataSet();
             this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.tabUpdaterEditor = new System.Windows.Forms.TabPage();
+            this.btnUpdaterEditorCloseCancel = new Infragistics.Win.Misc.UltraButton();
+            this.btnSubmitUpdaterEditorChanges = new Infragistics.Win.Misc.UltraButton();
+            this.btnUpdaterEditorClear = new Infragistics.Win.Misc.UltraButton();
+            this.btnUpdaterEditorEnter = new Infragistics.Win.Misc.UltraButton();
+            this.pnlCurrentDSCAreas = new Infragistics.Win.Misc.UltraPanel();
+            this.lblSelectedEditorRfArea = new System.Windows.Forms.Label();
+            this.lblSelectedEditorRfDrywellICArea = new System.Windows.Forms.Label();
+            this.lblSelectedEditorPkArea = new System.Windows.Forms.Label();
+            this.lblSelectedEditorPkDISCOICArea = new System.Windows.Forms.Label();
+            this.lblSelectedEditorRfDISCOICArea = new System.Windows.Forms.Label();
+            this.lblSelectedEditorRNO = new System.Windows.Forms.Label();
+            this.lblSelectedEditorPkDrywellICArea = new System.Windows.Forms.Label();
+            this.ultraGroupBox1 = new Infragistics.Win.Misc.UltraGroupBox();
+            this.lblRevertSession = new Infragistics.Win.Misc.UltraLabel();
+            this.btnRevertSession = new Infragistics.Win.Misc.UltraButton();
+            this.pnlNewDSCAreas = new Infragistics.Win.Misc.UltraPanel();
+            this.txtNewRoofArea = new Infragistics.Win.UltraWinEditors.UltraTextEditor();
+            this.txtNewParkArea = new Infragistics.Win.UltraWinEditors.UltraTextEditor();
+            this.txtNewRoofDISCOICArea = new Infragistics.Win.UltraWinEditors.UltraTextEditor();
+            this.txtNewRoofDrywellICArea = new Infragistics.Win.UltraWinEditors.UltraTextEditor();
+            this.txtNewParkDISCOICArea = new Infragistics.Win.UltraWinEditors.UltraTextEditor();
+            this.txtNewParkDrywellICArea = new Infragistics.Win.UltraWinEditors.UltraTextEditor();
             this.dgvUpdaterEditor = new System.Windows.Forms.DataGridView();
             this.dsceditidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.editidDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -107,10 +143,6 @@
             this.updater_editor_value_changed = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dSCEDITBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.btnUpdaterHistoryReturn = new Infragistics.Win.Misc.UltraButton();
-            this.ultraGroupBox1 = new Infragistics.Win.Misc.UltraGroupBox();
-            this.lblRevertSession = new Infragistics.Win.Misc.UltraLabel();
-            this.btnRevertSession = new Infragistics.Win.Misc.UltraButton();
-            this.btnUpdaterEditorEnter = new System.Windows.Forms.Button();
             this.bindingNavigator2 = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorCountItem1 = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorMoveFirstItem1 = new System.Windows.Forms.ToolStripButton();
@@ -121,22 +153,6 @@
             this.bindingNavigatorMoveNextItem1 = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem1 = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-            this.txtNewParkDrywellICArea = new Infragistics.Win.UltraWinEditors.UltraTextEditor();
-            this.txtNewParkDISCOICArea = new Infragistics.Win.UltraWinEditors.UltraTextEditor();
-            this.lblSelectedEditorPkDISCOICArea = new System.Windows.Forms.Label();
-            this.lblSelectedEditorRfDrywellICArea = new System.Windows.Forms.Label();
-            this.btnSubmitUpdaterEditorChanges = new System.Windows.Forms.Button();
-            this.btnUpdaterEditorCloseCancel = new System.Windows.Forms.Button();
-            this.btnUpdaterEditorClear = new System.Windows.Forms.Button();
-            this.txtNewRoofDrywellICArea = new Infragistics.Win.UltraWinEditors.UltraTextEditor();
-            this.txtNewRoofDISCOICArea = new Infragistics.Win.UltraWinEditors.UltraTextEditor();
-            this.txtNewParkArea = new Infragistics.Win.UltraWinEditors.UltraTextEditor();
-            this.txtNewRoofArea = new Infragistics.Win.UltraWinEditors.UltraTextEditor();
-            this.lblSelectedEditorPkDrywellICArea = new System.Windows.Forms.Label();
-            this.lblSelectedEditorRfDISCOICArea = new System.Windows.Forms.Label();
-            this.lblSelectedEditorPkArea = new System.Windows.Forms.Label();
-            this.lblSelectedEditorRfArea = new System.Windows.Forms.Label();
-            this.lblSelectedEditorRNO = new System.Windows.Forms.Label();
             this.tabMissingDSC = new System.Windows.Forms.TabPage();
             this.lblMissingDSCError = new System.Windows.Forms.Label();
             this.btnQCTab = new System.Windows.Forms.Button();
@@ -159,29 +175,35 @@
             this.txtNewServerCon = new Infragistics.Win.UltraWinEditors.UltraTextEditor();
             this.txtNewDatabaseCon = new Infragistics.Win.UltraWinEditors.UltraTextEditor();
             this.btnChangeDBConnOption = new Infragistics.Win.Misc.UltraButton();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
             this.menStripMain = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.downloadUpdateTemplateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadUpdateFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadUpdaterHistoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.changeDatabaseConnectionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dbBindSourceDSCQC = new System.Windows.Forms.BindingSource(this.components);
-            this.dbBindSourceParkQC = new System.Windows.Forms.BindingSource(this.components);
-            this.dbBindSourceRoofQC = new System.Windows.Forms.BindingSource(this.components);
             this.sfdMain = new System.Windows.Forms.SaveFileDialog();
             this.sESSIONTableAdapter = new DSCUpdater.projectDataSetTableAdapters.SESSIONTableAdapter();
             this.dSCEDITTableAdapter = new DSCUpdater.projectDataSetTableAdapters.DSCEDITTableAdapter();
+            this.btnCloseApplication = new Infragistics.Win.Misc.UltraButton();
+            this.expBarMain = new Infragistics.Win.UltraWinExplorerBar.UltraExplorerBar();
+            this.dbBindSourceDSCQC = new System.Windows.Forms.BindingSource(this.components);
+            this.dbBindSourceParkQC = new System.Windows.Forms.BindingSource(this.components);
+            this.dbBindSourceRoofQC = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.txtFileName)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
             this.tabControlMain.SuspendLayout();
             this.tabMain.SuspendLayout();
+            this.tabDownloadTemplate.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ultraGroupBox)).BeginInit();
             this.ultraGroupBox.SuspendLayout();
-            this.statusStrip1.SuspendLayout();
             this.tabLoadedUpdateReview.SuspendLayout();
-            this.statusStrip2.SuspendLayout();
             this.tabUpdaterHistory.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
             this.bindingNavigator1.SuspendLayout();
@@ -189,18 +211,22 @@
             ((System.ComponentModel.ISupportInitialize)(this.sESSIONBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.projectDataSet)).BeginInit();
             this.tabUpdaterEditor.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvUpdaterEditor)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dSCEDITBindingSource)).BeginInit();
+            this.pnlCurrentDSCAreas.ClientArea.SuspendLayout();
+            this.pnlCurrentDSCAreas.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ultraGroupBox1)).BeginInit();
             this.ultraGroupBox1.SuspendLayout();
+            this.pnlNewDSCAreas.ClientArea.SuspendLayout();
+            this.pnlNewDSCAreas.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtNewRoofArea)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtNewParkArea)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtNewRoofDISCOICArea)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtNewRoofDrywellICArea)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtNewParkDISCOICArea)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtNewParkDrywellICArea)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvUpdaterEditor)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dSCEDITBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator2)).BeginInit();
             this.bindingNavigator2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtNewParkDrywellICArea)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtNewParkDISCOICArea)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtNewRoofDrywellICArea)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtNewRoofDISCOICArea)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtNewParkArea)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtNewRoofArea)).BeginInit();
             this.tabMissingDSC.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDSCQC)).BeginInit();
             this.tabIncorrectParkICArea.SuspendLayout();
@@ -214,7 +240,9 @@
             this.grpBoxDbConnOptions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtNewServerCon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtNewDatabaseCon)).BeginInit();
+            this.statusStrip1.SuspendLayout();
             this.menStripMain.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.expBarMain)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dbBindSourceDSCQC)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dbBindSourceParkQC)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dbBindSourceRoofQC)).BeginInit();
@@ -224,41 +252,11 @@
             // 
             this.txtFileName.Location = new System.Drawing.Point(8, 35);
             this.txtFileName.Name = "txtFileName";
-            this.txtFileName.NullText = "Click \'Load Update File\' button for new DSC updates";
+            this.txtFileName.NullText = "Click \'Load Update File\' button to select a file containing DSC updates";
             appearance1.FontData.ItalicAsString = "True";
             this.txtFileName.NullTextAppearance = appearance1;
-            this.txtFileName.Size = new System.Drawing.Size(639, 21);
+            this.txtFileName.Size = new System.Drawing.Size(538, 21);
             this.txtFileName.TabIndex = 0;
-            // 
-            // btnLoadUpdates
-            // 
-            this.btnLoadUpdates.Location = new System.Drawing.Point(653, 35);
-            this.btnLoadUpdates.Name = "btnLoadUpdates";
-            this.btnLoadUpdates.Size = new System.Drawing.Size(151, 23);
-            this.btnLoadUpdates.TabIndex = 1;
-            this.btnLoadUpdates.Text = "Load Update File";
-            this.btnLoadUpdates.UseVisualStyleBackColor = true;
-            this.btnLoadUpdates.Click += new System.EventHandler(this.btnLoadUpdates_Click);
-            // 
-            // btnCloseApplication
-            // 
-            this.btnCloseApplication.Location = new System.Drawing.Point(680, 382);
-            this.btnCloseApplication.Name = "btnCloseApplication";
-            this.btnCloseApplication.Size = new System.Drawing.Size(124, 23);
-            this.btnCloseApplication.TabIndex = 2;
-            this.btnCloseApplication.Text = "Close DSCUpdater";
-            this.btnCloseApplication.UseVisualStyleBackColor = true;
-            this.btnCloseApplication.Click += new System.EventHandler(this.btnCloseApplication_Click);
-            // 
-            // btnLoadUpdaterHistory
-            // 
-            this.btnLoadUpdaterHistory.Location = new System.Drawing.Point(680, 353);
-            this.btnLoadUpdaterHistory.Name = "btnLoadUpdaterHistory";
-            this.btnLoadUpdaterHistory.Size = new System.Drawing.Size(124, 23);
-            this.btnLoadUpdaterHistory.TabIndex = 3;
-            this.btnLoadUpdaterHistory.Text = "Load Updater History";
-            this.btnLoadUpdaterHistory.UseVisualStyleBackColor = true;
-            this.btnLoadUpdaterHistory.Click += new System.EventHandler(this.btnLoadUpdaterHistory_Click);
             // 
             // ofdMain
             // 
@@ -267,18 +265,22 @@
             // dgvData
             // 
             this.dgvData.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.dgvData.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.dgvData.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvData.Location = new System.Drawing.Point(6, 9);
             this.dgvData.Name = "dgvData";
             this.dgvData.ReadOnly = true;
-            this.dgvData.Size = new System.Drawing.Size(599, 367);
+            this.dgvData.Size = new System.Drawing.Size(579, 357);
             this.dgvData.TabIndex = 5;
             // 
             // tabControlMain
             // 
+            this.tabControlMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControlMain.Controls.Add(this.tabMain);
+            this.tabControlMain.Controls.Add(this.tabDownloadTemplate);
             this.tabControlMain.Controls.Add(this.tabLoadedUpdateReview);
             this.tabControlMain.Controls.Add(this.tabUpdaterHistory);
             this.tabControlMain.Controls.Add(this.tabUpdaterEditor);
@@ -287,124 +289,120 @@
             this.tabControlMain.Controls.Add(this.tabIncorrectRoofICArea);
             this.tabControlMain.Controls.Add(this.tabPendingImpAChanges);
             this.tabControlMain.Controls.Add(this.tabDBConnOptions);
-            this.tabControlMain.Location = new System.Drawing.Point(0, 27);
+            this.tabControlMain.Location = new System.Drawing.Point(226, 27);
             this.tabControlMain.Name = "tabControlMain";
             this.tabControlMain.SelectedIndex = 0;
-            this.tabControlMain.Size = new System.Drawing.Size(832, 437);
+            this.tabControlMain.Size = new System.Drawing.Size(702, 410);
             this.tabControlMain.TabIndex = 0;
             // 
             // tabMain
             // 
-            this.tabMain.Controls.Add(this.ultraGroupBox);
-            this.tabMain.Controls.Add(this.statusStrip1);
-            this.tabMain.Controls.Add(this.btnCloseApplication);
-            this.tabMain.Controls.Add(this.btnLoadUpdaterHistory);
+            this.tabMain.Controls.Add(this.btnCancelUpdate);
+            this.tabMain.Controls.Add(this.btnLoadUpdateFile);
             this.tabMain.Controls.Add(this.txtFileName);
-            this.tabMain.Controls.Add(this.btnLoadUpdates);
             this.tabMain.Location = new System.Drawing.Point(4, 22);
             this.tabMain.Name = "tabMain";
             this.tabMain.Padding = new System.Windows.Forms.Padding(3);
-            this.tabMain.Size = new System.Drawing.Size(824, 411);
+            this.tabMain.Size = new System.Drawing.Size(694, 384);
             this.tabMain.TabIndex = 0;
             this.tabMain.Text = "Load Update File";
             this.tabMain.UseVisualStyleBackColor = true;
             // 
+            // btnCancelUpdate
+            // 
+            this.btnCancelUpdate.ButtonStyle = Infragistics.Win.UIElementButtonStyle.WindowsXPCommandButton;
+            this.btnCancelUpdate.Location = new System.Drawing.Point(552, 62);
+            this.btnCancelUpdate.Name = "btnCancelUpdate";
+            this.btnCancelUpdate.Size = new System.Drawing.Size(134, 23);
+            this.btnCancelUpdate.TabIndex = 15;
+            this.btnCancelUpdate.Text = "Cancel Update";
+            this.btnCancelUpdate.Click += new System.EventHandler(this.btnCancelUpdate_Click);
+            // 
+            // btnLoadUpdateFile
+            // 
+            this.btnLoadUpdateFile.ButtonStyle = Infragistics.Win.UIElementButtonStyle.WindowsVistaButton;
+            this.btnLoadUpdateFile.Location = new System.Drawing.Point(552, 33);
+            this.btnLoadUpdateFile.Name = "btnLoadUpdateFile";
+            this.btnLoadUpdateFile.Size = new System.Drawing.Size(134, 23);
+            this.btnLoadUpdateFile.TabIndex = 14;
+            this.btnLoadUpdateFile.Text = "Load Update File";
+            this.btnLoadUpdateFile.Click += new System.EventHandler(this.btnLoadUpdateFile_Click);
+            // 
+            // tabDownloadTemplate
+            // 
+            this.tabDownloadTemplate.Controls.Add(this.ultraGroupBox);
+            this.tabDownloadTemplate.Location = new System.Drawing.Point(4, 22);
+            this.tabDownloadTemplate.Name = "tabDownloadTemplate";
+            this.tabDownloadTemplate.Padding = new System.Windows.Forms.Padding(3);
+            this.tabDownloadTemplate.Size = new System.Drawing.Size(694, 384);
+            this.tabDownloadTemplate.TabIndex = 9;
+            this.tabDownloadTemplate.Text = "Download Update Template";
+            this.tabDownloadTemplate.UseVisualStyleBackColor = true;
+            // 
             // ultraGroupBox
             // 
+            this.ultraGroupBox.Controls.Add(this.btnCancelDownload);
             this.ultraGroupBox.Controls.Add(this.btnDownloadUpdateTemplate);
             this.ultraGroupBox.Controls.Add(this.lblDownloadTemplate);
-            this.ultraGroupBox.Location = new System.Drawing.Point(653, 64);
+            this.ultraGroupBox.Location = new System.Drawing.Point(180, 108);
             this.ultraGroupBox.Name = "ultraGroupBox";
-            this.ultraGroupBox.Size = new System.Drawing.Size(151, 90);
-            this.ultraGroupBox.TabIndex = 13;
+            this.ultraGroupBox.Size = new System.Drawing.Size(332, 164);
+            this.ultraGroupBox.TabIndex = 14;
             this.ultraGroupBox.ViewStyle = Infragistics.Win.Misc.GroupBoxViewStyle.VisualStudio2005;
+            // 
+            // btnCancelDownload
+            // 
+            this.btnCancelDownload.ButtonStyle = Infragistics.Win.UIElementButtonStyle.WindowsXPCommandButton;
+            this.btnCancelDownload.Location = new System.Drawing.Point(198, 136);
+            this.btnCancelDownload.Name = "btnCancelDownload";
+            this.btnCancelDownload.Size = new System.Drawing.Size(129, 23);
+            this.btnCancelDownload.TabIndex = 13;
+            this.btnCancelDownload.Text = "Cancel Download";
+            this.btnCancelDownload.Click += new System.EventHandler(this.btnCancelDownload_Click);
             // 
             // btnDownloadUpdateTemplate
             // 
             this.btnDownloadUpdateTemplate.ButtonStyle = Infragistics.Win.UIElementButtonStyle.WindowsVistaButton;
-            this.btnDownloadUpdateTemplate.Location = new System.Drawing.Point(23, 58);
+            this.btnDownloadUpdateTemplate.Location = new System.Drawing.Point(198, 107);
             this.btnDownloadUpdateTemplate.Name = "btnDownloadUpdateTemplate";
-            this.btnDownloadUpdateTemplate.Size = new System.Drawing.Size(105, 23);
+            this.btnDownloadUpdateTemplate.Size = new System.Drawing.Size(129, 23);
             this.btnDownloadUpdateTemplate.TabIndex = 11;
-            this.btnDownloadUpdateTemplate.Text = "Download";
+            this.btnDownloadUpdateTemplate.Text = "Download Template";
             this.btnDownloadUpdateTemplate.Click += new System.EventHandler(this.btnDownloadUpdateTemplate_Click);
             // 
             // lblDownloadTemplate
             // 
-            this.lblDownloadTemplate.Location = new System.Drawing.Point(23, 9);
+            appearance18.TextHAlignAsString = "Left";
+            appearance18.TextVAlignAsString = "Middle";
+            this.lblDownloadTemplate.Appearance = appearance18;
+            this.lblDownloadTemplate.Location = new System.Drawing.Point(7, 12);
             this.lblDownloadTemplate.Name = "lblDownloadTemplate";
-            this.lblDownloadTemplate.Size = new System.Drawing.Size(105, 43);
+            this.lblDownloadTemplate.Size = new System.Drawing.Size(286, 76);
             this.lblDownloadTemplate.TabIndex = 12;
-            this.lblDownloadTemplate.Text = "Don\'t have a User Update template? Download here.";
-            // 
-            // statusStrip1
-            // 
-            this.statusStrip1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.statusStrip1.AutoSize = false;
-            this.statusStrip1.Dock = System.Windows.Forms.DockStyle.None;
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1,
-            this.toolStripProgressBar1});
-            this.statusStrip1.Location = new System.Drawing.Point(12, 386);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(275, 22);
-            this.statusStrip1.TabIndex = 10;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
-            // toolStripStatusLabel1
-            // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(109, 17);
-            this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
-            // 
-            // toolStripProgressBar1
-            // 
-            this.toolStripProgressBar1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripProgressBar1.AutoSize = false;
-            this.toolStripProgressBar1.Name = "toolStripProgressBar1";
-            this.toolStripProgressBar1.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
-            this.toolStripProgressBar1.Size = new System.Drawing.Size(100, 16);
+            this.lblDownloadTemplate.Text = resources.GetString("lblDownloadTemplate.Text");
             // 
             // tabLoadedUpdateReview
             // 
-            this.tabLoadedUpdateReview.Controls.Add(this.statusStrip2);
+            this.tabLoadedUpdateReview.Controls.Add(this.btnSubmitUpdates);
             this.tabLoadedUpdateReview.Controls.Add(this.btnCancel);
-            this.tabLoadedUpdateReview.Controls.Add(this.btnSubmit);
             this.tabLoadedUpdateReview.Controls.Add(this.dgvData);
             this.tabLoadedUpdateReview.Location = new System.Drawing.Point(4, 22);
             this.tabLoadedUpdateReview.Name = "tabLoadedUpdateReview";
             this.tabLoadedUpdateReview.Padding = new System.Windows.Forms.Padding(3);
-            this.tabLoadedUpdateReview.Size = new System.Drawing.Size(824, 411);
+            this.tabLoadedUpdateReview.Size = new System.Drawing.Size(694, 384);
             this.tabLoadedUpdateReview.TabIndex = 1;
             this.tabLoadedUpdateReview.Text = "Update File Review";
             this.tabLoadedUpdateReview.UseVisualStyleBackColor = true;
             // 
-            // statusStrip2
+            // btnSubmitUpdates
             // 
-            this.statusStrip2.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.statusStrip2.AutoSize = false;
-            this.statusStrip2.Dock = System.Windows.Forms.DockStyle.None;
-            this.statusStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel2,
-            this.toolStripProgressBar2});
-            this.statusStrip2.Location = new System.Drawing.Point(12, 386);
-            this.statusStrip2.Name = "statusStrip2";
-            this.statusStrip2.Size = new System.Drawing.Size(275, 22);
-            this.statusStrip2.Stretch = false;
-            this.statusStrip2.TabIndex = 8;
-            this.statusStrip2.Text = "statusStrip2";
-            // 
-            // toolStripStatusLabel2
-            // 
-            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(109, 17);
-            this.toolStripStatusLabel2.Text = "toolStripStatusLabel2";
-            // 
-            // toolStripProgressBar2
-            // 
-            this.toolStripProgressBar2.Name = "toolStripProgressBar2";
-            this.toolStripProgressBar2.Size = new System.Drawing.Size(100, 16);
+            this.btnSubmitUpdates.ButtonStyle = Infragistics.Win.UIElementButtonStyle.WindowsVistaButton;
+            this.btnSubmitUpdates.Location = new System.Drawing.Point(591, 343);
+            this.btnSubmitUpdates.Name = "btnSubmitUpdates";
+            this.btnSubmitUpdates.Size = new System.Drawing.Size(95, 23);
+            this.btnSubmitUpdates.TabIndex = 9;
+            this.btnSubmitUpdates.Text = "Submit Updates";
+            this.btnSubmitUpdates.Click += new System.EventHandler(this.btnSubmitUpdates_Click);
             // 
             // btnCancel
             // 
@@ -416,37 +414,47 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // btnSubmit
-            // 
-            this.btnSubmit.Location = new System.Drawing.Point(713, 353);
-            this.btnSubmit.Name = "btnSubmit";
-            this.btnSubmit.Size = new System.Drawing.Size(91, 23);
-            this.btnSubmit.TabIndex = 6;
-            this.btnSubmit.Text = "Submit Updates";
-            this.btnSubmit.UseVisualStyleBackColor = true;
-            this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
-            // 
             // tabUpdaterHistory
             // 
+            this.tabUpdaterHistory.Controls.Add(this.btnCloseUpdaterHistory);
+            this.tabUpdaterHistory.Controls.Add(this.btnLoadSelectedEditSession);
             this.tabUpdaterHistory.Controls.Add(this.bindingNavigator1);
             this.tabUpdaterHistory.Controls.Add(this.dgvUpdaterHistory);
             this.tabUpdaterHistory.Controls.Add(this.button2);
-            this.tabUpdaterHistory.Controls.Add(this.button1);
             this.tabUpdaterHistory.Location = new System.Drawing.Point(4, 22);
             this.tabUpdaterHistory.Name = "tabUpdaterHistory";
             this.tabUpdaterHistory.Padding = new System.Windows.Forms.Padding(3);
-            this.tabUpdaterHistory.Size = new System.Drawing.Size(824, 411);
+            this.tabUpdaterHistory.Size = new System.Drawing.Size(694, 384);
             this.tabUpdaterHistory.TabIndex = 2;
             this.tabUpdaterHistory.Text = "Updater History";
             this.tabUpdaterHistory.UseVisualStyleBackColor = true;
             // 
+            // btnCloseUpdaterHistory
+            // 
+            this.btnCloseUpdaterHistory.ButtonStyle = Infragistics.Win.UIElementButtonStyle.WindowsXPCommandButton;
+            this.btnCloseUpdaterHistory.Location = new System.Drawing.Point(433, 330);
+            this.btnCloseUpdaterHistory.Name = "btnCloseUpdaterHistory";
+            this.btnCloseUpdaterHistory.Size = new System.Drawing.Size(154, 23);
+            this.btnCloseUpdaterHistory.TabIndex = 5;
+            this.btnCloseUpdaterHistory.Text = "Close Updater History";
+            this.btnCloseUpdaterHistory.Click += new System.EventHandler(this.btnCloseUpdaterHistory_Click);
+            // 
+            // btnLoadSelectedEditSession
+            // 
+            this.btnLoadSelectedEditSession.ButtonStyle = Infragistics.Win.UIElementButtonStyle.WindowsVistaButton;
+            this.btnLoadSelectedEditSession.Location = new System.Drawing.Point(433, 304);
+            this.btnLoadSelectedEditSession.Name = "btnLoadSelectedEditSession";
+            this.btnLoadSelectedEditSession.Size = new System.Drawing.Size(154, 23);
+            this.btnLoadSelectedEditSession.TabIndex = 4;
+            this.btnLoadSelectedEditSession.Text = "Load Selected Edit Session";
+            this.btnLoadSelectedEditSession.Click += new System.EventHandler(this.btnLoadSelectedEditSession_Click);
+            // 
             // bindingNavigator1
             // 
             this.bindingNavigator1.AddNewItem = null;
-            this.bindingNavigator1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.bindingNavigator1.CountItem = this.bindingNavigatorCountItem;
             this.bindingNavigator1.DeleteItem = null;
-            this.bindingNavigator1.Dock = System.Windows.Forms.DockStyle.None;
+            this.bindingNavigator1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.bindingNavigator1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.bindingNavigatorMoveFirstItem,
             this.bindingNavigatorMovePreviousItem,
@@ -457,14 +465,15 @@
             this.bindingNavigatorMoveNextItem,
             this.bindingNavigatorMoveLastItem,
             this.bindingNavigatorSeparator2});
-            this.bindingNavigator1.Location = new System.Drawing.Point(8, 162);
+            this.bindingNavigator1.Location = new System.Drawing.Point(3, 356);
             this.bindingNavigator1.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
             this.bindingNavigator1.MoveLastItem = this.bindingNavigatorMoveLastItem;
             this.bindingNavigator1.MoveNextItem = this.bindingNavigatorMoveNextItem;
             this.bindingNavigator1.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.bindingNavigator1.Name = "bindingNavigator1";
             this.bindingNavigator1.PositionItem = this.bindingNavigatorPositionItem;
-            this.bindingNavigator1.Size = new System.Drawing.Size(208, 25);
+            this.bindingNavigator1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
+            this.bindingNavigator1.Size = new System.Drawing.Size(688, 25);
             this.bindingNavigator1.TabIndex = 3;
             this.bindingNavigator1.Text = "bindingNavigator1";
             // 
@@ -539,8 +548,8 @@
             // 
             this.dgvUpdaterHistory.AllowUserToAddRows = false;
             this.dgvUpdaterHistory.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.dgvUpdaterHistory.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.dgvUpdaterHistory.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvUpdaterHistory.AutoGenerateColumns = false;
             this.dgvUpdaterHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvUpdaterHistory.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -551,7 +560,7 @@
             this.dgvUpdaterHistory.Location = new System.Drawing.Point(8, 6);
             this.dgvUpdaterHistory.Name = "dgvUpdaterHistory";
             this.dgvUpdaterHistory.ReadOnly = true;
-            this.dgvUpdaterHistory.Size = new System.Drawing.Size(419, 150);
+            this.dgvUpdaterHistory.Size = new System.Drawing.Size(419, 347);
             this.dgvUpdaterHistory.TabIndex = 2;
             // 
             // editidDataGridViewTextBoxColumn
@@ -595,46 +604,257 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.btnCloseEditorHistory_Click);
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(274, 162);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(153, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Load Selected Edit Session";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.btnLoadSelectedEditSession_Click);
-            // 
             // tabUpdaterEditor
             // 
+            this.tabUpdaterEditor.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.tabUpdaterEditor.Controls.Add(this.btnUpdaterEditorCloseCancel);
+            this.tabUpdaterEditor.Controls.Add(this.btnSubmitUpdaterEditorChanges);
+            this.tabUpdaterEditor.Controls.Add(this.btnUpdaterEditorClear);
+            this.tabUpdaterEditor.Controls.Add(this.btnUpdaterEditorEnter);
+            this.tabUpdaterEditor.Controls.Add(this.pnlCurrentDSCAreas);
+            this.tabUpdaterEditor.Controls.Add(this.ultraGroupBox1);
+            this.tabUpdaterEditor.Controls.Add(this.pnlNewDSCAreas);
             this.tabUpdaterEditor.Controls.Add(this.dgvUpdaterEditor);
             this.tabUpdaterEditor.Controls.Add(this.btnUpdaterHistoryReturn);
-            this.tabUpdaterEditor.Controls.Add(this.ultraGroupBox1);
-            this.tabUpdaterEditor.Controls.Add(this.btnUpdaterEditorEnter);
             this.tabUpdaterEditor.Controls.Add(this.bindingNavigator2);
-            this.tabUpdaterEditor.Controls.Add(this.txtNewParkDrywellICArea);
-            this.tabUpdaterEditor.Controls.Add(this.txtNewParkDISCOICArea);
-            this.tabUpdaterEditor.Controls.Add(this.lblSelectedEditorPkDISCOICArea);
-            this.tabUpdaterEditor.Controls.Add(this.lblSelectedEditorRfDrywellICArea);
-            this.tabUpdaterEditor.Controls.Add(this.btnSubmitUpdaterEditorChanges);
-            this.tabUpdaterEditor.Controls.Add(this.btnUpdaterEditorCloseCancel);
-            this.tabUpdaterEditor.Controls.Add(this.btnUpdaterEditorClear);
-            this.tabUpdaterEditor.Controls.Add(this.txtNewRoofDrywellICArea);
-            this.tabUpdaterEditor.Controls.Add(this.txtNewRoofDISCOICArea);
-            this.tabUpdaterEditor.Controls.Add(this.txtNewParkArea);
-            this.tabUpdaterEditor.Controls.Add(this.txtNewRoofArea);
-            this.tabUpdaterEditor.Controls.Add(this.lblSelectedEditorPkDrywellICArea);
-            this.tabUpdaterEditor.Controls.Add(this.lblSelectedEditorRfDISCOICArea);
-            this.tabUpdaterEditor.Controls.Add(this.lblSelectedEditorPkArea);
-            this.tabUpdaterEditor.Controls.Add(this.lblSelectedEditorRfArea);
-            this.tabUpdaterEditor.Controls.Add(this.lblSelectedEditorRNO);
             this.tabUpdaterEditor.Location = new System.Drawing.Point(4, 22);
             this.tabUpdaterEditor.Name = "tabUpdaterEditor";
             this.tabUpdaterEditor.Padding = new System.Windows.Forms.Padding(3);
-            this.tabUpdaterEditor.Size = new System.Drawing.Size(824, 411);
+            this.tabUpdaterEditor.Size = new System.Drawing.Size(694, 384);
             this.tabUpdaterEditor.TabIndex = 3;
             this.tabUpdaterEditor.Text = "Updater Editor";
             this.tabUpdaterEditor.UseVisualStyleBackColor = true;
+            // 
+            // btnUpdaterEditorCloseCancel
+            // 
+            this.btnUpdaterEditorCloseCancel.ButtonStyle = Infragistics.Win.UIElementButtonStyle.WindowsVistaButton;
+            this.btnUpdaterEditorCloseCancel.Location = new System.Drawing.Point(567, 347);
+            this.btnUpdaterEditorCloseCancel.Name = "btnUpdaterEditorCloseCancel";
+            this.btnUpdaterEditorCloseCancel.Size = new System.Drawing.Size(116, 23);
+            this.btnUpdaterEditorCloseCancel.TabIndex = 31;
+            this.btnUpdaterEditorCloseCancel.Text = "Cancel";
+            this.btnUpdaterEditorCloseCancel.Click += new System.EventHandler(this.btnUpdaterEditorCloseCancel_Click);
+            // 
+            // btnSubmitUpdaterEditorChanges
+            // 
+            this.btnSubmitUpdaterEditorChanges.ButtonStyle = Infragistics.Win.UIElementButtonStyle.WindowsVistaButton;
+            this.btnSubmitUpdaterEditorChanges.Location = new System.Drawing.Point(567, 318);
+            this.btnSubmitUpdaterEditorChanges.Name = "btnSubmitUpdaterEditorChanges";
+            this.btnSubmitUpdaterEditorChanges.Size = new System.Drawing.Size(116, 23);
+            this.btnSubmitUpdaterEditorChanges.TabIndex = 30;
+            this.btnSubmitUpdaterEditorChanges.Text = "Submit Changes";
+            this.btnSubmitUpdaterEditorChanges.Click += new System.EventHandler(this.btnSubmitUpdaterEditorChanges_Click);
+            // 
+            // btnUpdaterEditorClear
+            // 
+            this.btnUpdaterEditorClear.ButtonStyle = Infragistics.Win.UIElementButtonStyle.WindowsXPCommandButton;
+            this.btnUpdaterEditorClear.Location = new System.Drawing.Point(373, 339);
+            this.btnUpdaterEditorClear.Name = "btnUpdaterEditorClear";
+            this.btnUpdaterEditorClear.Size = new System.Drawing.Size(75, 23);
+            this.btnUpdaterEditorClear.TabIndex = 29;
+            this.btnUpdaterEditorClear.Text = "Clear";
+            this.btnUpdaterEditorClear.Click += new System.EventHandler(this.btnUpdaterEditorClear_Click);
+            // 
+            // btnUpdaterEditorEnter
+            // 
+            this.btnUpdaterEditorEnter.ButtonStyle = Infragistics.Win.UIElementButtonStyle.WindowsXPCommandButton;
+            this.btnUpdaterEditorEnter.Location = new System.Drawing.Point(292, 339);
+            this.btnUpdaterEditorEnter.Name = "btnUpdaterEditorEnter";
+            this.btnUpdaterEditorEnter.Size = new System.Drawing.Size(75, 23);
+            this.btnUpdaterEditorEnter.TabIndex = 28;
+            this.btnUpdaterEditorEnter.Text = "Enter";
+            this.btnUpdaterEditorEnter.Click += new System.EventHandler(this.btnUpdaterEditorEnter_Click);
+            // 
+            // pnlCurrentDSCAreas
+            // 
+            appearance17.BackColor = System.Drawing.Color.LightGray;
+            this.pnlCurrentDSCAreas.Appearance = appearance17;
+            this.pnlCurrentDSCAreas.BorderStyle = Infragistics.Win.UIElementBorderStyle.WindowsVista;
+            // 
+            // pnlCurrentDSCAreas.ClientArea
+            // 
+            this.pnlCurrentDSCAreas.ClientArea.Controls.Add(this.lblSelectedEditorRfArea);
+            this.pnlCurrentDSCAreas.ClientArea.Controls.Add(this.lblSelectedEditorRfDrywellICArea);
+            this.pnlCurrentDSCAreas.ClientArea.Controls.Add(this.lblSelectedEditorPkArea);
+            this.pnlCurrentDSCAreas.ClientArea.Controls.Add(this.lblSelectedEditorPkDISCOICArea);
+            this.pnlCurrentDSCAreas.ClientArea.Controls.Add(this.lblSelectedEditorRfDISCOICArea);
+            this.pnlCurrentDSCAreas.ClientArea.Controls.Add(this.lblSelectedEditorRNO);
+            this.pnlCurrentDSCAreas.ClientArea.Controls.Add(this.lblSelectedEditorPkDrywellICArea);
+            this.pnlCurrentDSCAreas.Location = new System.Drawing.Point(8, 175);
+            this.pnlCurrentDSCAreas.Name = "pnlCurrentDSCAreas";
+            this.pnlCurrentDSCAreas.Size = new System.Drawing.Size(232, 162);
+            this.pnlCurrentDSCAreas.TabIndex = 27;
+            // 
+            // lblSelectedEditorRfArea
+            // 
+            this.lblSelectedEditorRfArea.AutoSize = true;
+            this.lblSelectedEditorRfArea.Location = new System.Drawing.Point(2, 24);
+            this.lblSelectedEditorRfArea.Name = "lblSelectedEditorRfArea";
+            this.lblSelectedEditorRfArea.Size = new System.Drawing.Size(118, 13);
+            this.lblSelectedEditorRfArea.TabIndex = 3;
+            this.lblSelectedEditorRfArea.Text = "Current roof area (sq ft):";
+            // 
+            // lblSelectedEditorRfDrywellICArea
+            // 
+            this.lblSelectedEditorRfDrywellICArea.AutoSize = true;
+            this.lblSelectedEditorRfDrywellICArea.Location = new System.Drawing.Point(2, 93);
+            this.lblSelectedEditorRfDrywellICArea.Name = "lblSelectedEditorRfDrywellICArea";
+            this.lblSelectedEditorRfDrywellICArea.Size = new System.Drawing.Size(168, 13);
+            this.lblSelectedEditorRfDrywellICArea.TabIndex = 9;
+            this.lblSelectedEditorRfDrywellICArea.Text = "Current roof Drywell IC area (sq ft):";
+            // 
+            // lblSelectedEditorPkArea
+            // 
+            this.lblSelectedEditorPkArea.AutoSize = true;
+            this.lblSelectedEditorPkArea.Location = new System.Drawing.Point(2, 47);
+            this.lblSelectedEditorPkArea.Name = "lblSelectedEditorPkArea";
+            this.lblSelectedEditorPkArea.Size = new System.Drawing.Size(121, 13);
+            this.lblSelectedEditorPkArea.TabIndex = 5;
+            this.lblSelectedEditorPkArea.Text = "Current park area (sq ft):";
+            // 
+            // lblSelectedEditorPkDISCOICArea
+            // 
+            this.lblSelectedEditorPkDISCOICArea.AutoSize = true;
+            this.lblSelectedEditorPkDISCOICArea.Location = new System.Drawing.Point(2, 116);
+            this.lblSelectedEditorPkDISCOICArea.Name = "lblSelectedEditorPkDISCOICArea";
+            this.lblSelectedEditorPkDISCOICArea.Size = new System.Drawing.Size(170, 13);
+            this.lblSelectedEditorPkDISCOICArea.TabIndex = 11;
+            this.lblSelectedEditorPkDISCOICArea.Text = "Current park DISCO IC area (sq ft):";
+            // 
+            // lblSelectedEditorRfDISCOICArea
+            // 
+            this.lblSelectedEditorRfDISCOICArea.AutoSize = true;
+            this.lblSelectedEditorRfDISCOICArea.Location = new System.Drawing.Point(2, 70);
+            this.lblSelectedEditorRfDISCOICArea.Name = "lblSelectedEditorRfDISCOICArea";
+            this.lblSelectedEditorRfDISCOICArea.Size = new System.Drawing.Size(167, 13);
+            this.lblSelectedEditorRfDISCOICArea.TabIndex = 7;
+            this.lblSelectedEditorRfDISCOICArea.Text = "Current roof DISCO IC area (sq ft):";
+            // 
+            // lblSelectedEditorRNO
+            // 
+            this.lblSelectedEditorRNO.AutoSize = true;
+            this.lblSelectedEditorRNO.Location = new System.Drawing.Point(2, 1);
+            this.lblSelectedEditorRNO.Name = "lblSelectedEditorRNO";
+            this.lblSelectedEditorRNO.Size = new System.Drawing.Size(34, 13);
+            this.lblSelectedEditorRNO.TabIndex = 2;
+            this.lblSelectedEditorRNO.Text = "RNO:";
+            // 
+            // lblSelectedEditorPkDrywellICArea
+            // 
+            this.lblSelectedEditorPkDrywellICArea.AutoSize = true;
+            this.lblSelectedEditorPkDrywellICArea.Location = new System.Drawing.Point(2, 139);
+            this.lblSelectedEditorPkDrywellICArea.Name = "lblSelectedEditorPkDrywellICArea";
+            this.lblSelectedEditorPkDrywellICArea.Size = new System.Drawing.Size(171, 13);
+            this.lblSelectedEditorPkDrywellICArea.TabIndex = 13;
+            this.lblSelectedEditorPkDrywellICArea.Text = "Current park Drywell IC area (sq ft):";
+            // 
+            // ultraGroupBox1
+            // 
+            this.ultraGroupBox1.Controls.Add(this.lblRevertSession);
+            this.ultraGroupBox1.Controls.Add(this.btnRevertSession);
+            this.ultraGroupBox1.Location = new System.Drawing.Point(503, 175);
+            this.ultraGroupBox1.Name = "ultraGroupBox1";
+            this.ultraGroupBox1.Size = new System.Drawing.Size(179, 124);
+            this.ultraGroupBox1.TabIndex = 26;
+            this.ultraGroupBox1.ViewStyle = Infragistics.Win.Misc.GroupBoxViewStyle.VisualStudio2005;
+            // 
+            // lblRevertSession
+            // 
+            this.lblRevertSession.Location = new System.Drawing.Point(7, 9);
+            this.lblRevertSession.Name = "lblRevertSession";
+            this.lblRevertSession.Size = new System.Drawing.Size(164, 77);
+            this.lblRevertSession.TabIndex = 22;
+            this.lblRevertSession.Text = "Reverts all values of currently displayed table to the previous edit session.  If" +
+                " no records were previously edited, values will be restored to original values i" +
+                "n the Master data.";
+            // 
+            // btnRevertSession
+            // 
+            this.btnRevertSession.ButtonStyle = Infragistics.Win.UIElementButtonStyle.WindowsXPCommandButton;
+            this.btnRevertSession.Location = new System.Drawing.Point(7, 92);
+            this.btnRevertSession.Name = "btnRevertSession";
+            this.btnRevertSession.Size = new System.Drawing.Size(164, 23);
+            this.btnRevertSession.TabIndex = 21;
+            this.btnRevertSession.Text = "Revert Session Changes";
+            // 
+            // pnlNewDSCAreas
+            // 
+            appearance15.BackColor = System.Drawing.Color.DarkGray;
+            this.pnlNewDSCAreas.Appearance = appearance15;
+            this.pnlNewDSCAreas.BorderStyle = Infragistics.Win.UIElementBorderStyle.WindowsVista;
+            // 
+            // pnlNewDSCAreas.ClientArea
+            // 
+            this.pnlNewDSCAreas.ClientArea.Controls.Add(this.txtNewRoofArea);
+            this.pnlNewDSCAreas.ClientArea.Controls.Add(this.txtNewParkArea);
+            this.pnlNewDSCAreas.ClientArea.Controls.Add(this.txtNewRoofDISCOICArea);
+            this.pnlNewDSCAreas.ClientArea.Controls.Add(this.txtNewRoofDrywellICArea);
+            this.pnlNewDSCAreas.ClientArea.Controls.Add(this.txtNewParkDISCOICArea);
+            this.pnlNewDSCAreas.ClientArea.Controls.Add(this.txtNewParkDrywellICArea);
+            this.pnlNewDSCAreas.Location = new System.Drawing.Point(246, 175);
+            this.pnlNewDSCAreas.Name = "pnlNewDSCAreas";
+            this.pnlNewDSCAreas.Size = new System.Drawing.Size(241, 162);
+            this.pnlNewDSCAreas.TabIndex = 25;
+            // 
+            // txtNewRoofArea
+            // 
+            this.txtNewRoofArea.Location = new System.Drawing.Point(15, 8);
+            this.txtNewRoofArea.Name = "txtNewRoofArea";
+            this.txtNewRoofArea.NullText = "Type to enter new roof area";
+            appearance2.FontData.ItalicAsString = "True";
+            this.txtNewRoofArea.NullTextAppearance = appearance2;
+            this.txtNewRoofArea.Size = new System.Drawing.Size(210, 21);
+            this.txtNewRoofArea.TabIndex = 4;
+            // 
+            // txtNewParkArea
+            // 
+            this.txtNewParkArea.Location = new System.Drawing.Point(15, 33);
+            this.txtNewParkArea.Name = "txtNewParkArea";
+            this.txtNewParkArea.NullText = "Type to enter new park area";
+            appearance3.FontData.ItalicAsString = "True";
+            this.txtNewParkArea.NullTextAppearance = appearance3;
+            this.txtNewParkArea.Size = new System.Drawing.Size(210, 21);
+            this.txtNewParkArea.TabIndex = 6;
+            // 
+            // txtNewRoofDISCOICArea
+            // 
+            this.txtNewRoofDISCOICArea.Location = new System.Drawing.Point(15, 58);
+            this.txtNewRoofDISCOICArea.Name = "txtNewRoofDISCOICArea";
+            this.txtNewRoofDISCOICArea.NullText = "Type to enter new roof DISCO IC area";
+            appearance7.FontData.ItalicAsString = "True";
+            this.txtNewRoofDISCOICArea.NullTextAppearance = appearance7;
+            this.txtNewRoofDISCOICArea.Size = new System.Drawing.Size(210, 21);
+            this.txtNewRoofDISCOICArea.TabIndex = 8;
+            // 
+            // txtNewRoofDrywellICArea
+            // 
+            this.txtNewRoofDrywellICArea.Location = new System.Drawing.Point(15, 83);
+            this.txtNewRoofDrywellICArea.Name = "txtNewRoofDrywellICArea";
+            this.txtNewRoofDrywellICArea.NullText = "Type to enter new roof Drywell IC area";
+            appearance6.FontData.ItalicAsString = "True";
+            this.txtNewRoofDrywellICArea.NullTextAppearance = appearance6;
+            this.txtNewRoofDrywellICArea.Size = new System.Drawing.Size(210, 21);
+            this.txtNewRoofDrywellICArea.TabIndex = 10;
+            // 
+            // txtNewParkDISCOICArea
+            // 
+            this.txtNewParkDISCOICArea.Location = new System.Drawing.Point(15, 108);
+            this.txtNewParkDISCOICArea.Name = "txtNewParkDISCOICArea";
+            this.txtNewParkDISCOICArea.NullText = "Type to enter new park DISCO IC area";
+            appearance4.FontData.ItalicAsString = "True";
+            this.txtNewParkDISCOICArea.NullTextAppearance = appearance4;
+            this.txtNewParkDISCOICArea.Size = new System.Drawing.Size(210, 21);
+            this.txtNewParkDISCOICArea.TabIndex = 12;
+            // 
+            // txtNewParkDrywellICArea
+            // 
+            this.txtNewParkDrywellICArea.Location = new System.Drawing.Point(15, 133);
+            this.txtNewParkDrywellICArea.Name = "txtNewParkDrywellICArea";
+            this.txtNewParkDrywellICArea.NullText = "Type to enter new park Drywell IC area";
+            appearance5.FontData.ItalicAsString = "True";
+            this.txtNewParkDrywellICArea.NullTextAppearance = appearance5;
+            this.txtNewParkDrywellICArea.Size = new System.Drawing.Size(210, 21);
+            this.txtNewParkDrywellICArea.TabIndex = 14;
             // 
             // dgvUpdaterEditor
             // 
@@ -665,7 +885,7 @@
             this.dgvUpdaterEditor.DataSource = this.dSCEDITBindingSource;
             this.dgvUpdaterEditor.Location = new System.Drawing.Point(8, 6);
             this.dgvUpdaterEditor.Name = "dgvUpdaterEditor";
-            this.dgvUpdaterEditor.Size = new System.Drawing.Size(796, 130);
+            this.dgvUpdaterEditor.Size = new System.Drawing.Size(664, 130);
             this.dgvUpdaterEditor.TabIndex = 24;
             this.dgvUpdaterEditor.SelectionChanged += new System.EventHandler(this.dgvUpdaterEditor_SelectionChanged);
             // 
@@ -792,52 +1012,12 @@
             // btnUpdaterHistoryReturn
             // 
             this.btnUpdaterHistoryReturn.ButtonStyle = Infragistics.Win.UIElementButtonStyle.WindowsVistaButton;
-            this.btnUpdaterHistoryReturn.Location = new System.Drawing.Point(8, 382);
+            this.btnUpdaterHistoryReturn.Location = new System.Drawing.Point(8, 343);
             this.btnUpdaterHistoryReturn.Name = "btnUpdaterHistoryReturn";
             this.btnUpdaterHistoryReturn.Size = new System.Drawing.Size(161, 23);
             this.btnUpdaterHistoryReturn.TabIndex = 23;
             this.btnUpdaterHistoryReturn.Text = "<-- Return to Updater History";
             this.btnUpdaterHistoryReturn.Click += new System.EventHandler(this.btnUpdaterHistoryReturn_Click);
-            // 
-            // ultraGroupBox1
-            // 
-            this.ultraGroupBox1.Controls.Add(this.lblRevertSession);
-            this.ultraGroupBox1.Controls.Add(this.btnRevertSession);
-            this.ultraGroupBox1.Location = new System.Drawing.Point(611, 142);
-            this.ultraGroupBox1.Name = "ultraGroupBox1";
-            this.ultraGroupBox1.Size = new System.Drawing.Size(193, 138);
-            this.ultraGroupBox1.TabIndex = 22;
-            this.ultraGroupBox1.ViewStyle = Infragistics.Win.Misc.GroupBoxViewStyle.VisualStudio2005;
-            // 
-            // lblRevertSession
-            // 
-            this.lblRevertSession.Location = new System.Drawing.Point(14, 45);
-            this.lblRevertSession.Name = "lblRevertSession";
-            this.lblRevertSession.Size = new System.Drawing.Size(164, 77);
-            this.lblRevertSession.TabIndex = 22;
-            this.lblRevertSession.Text = "Reverts all values of currently displayed table to the previous edit session.  If" +
-                " no records were previously edited, values will be restored to original values i" +
-                "n the Master data.";
-            // 
-            // btnRevertSession
-            // 
-            this.btnRevertSession.ButtonStyle = Infragistics.Win.UIElementButtonStyle.WindowsVistaButton;
-            this.btnRevertSession.Location = new System.Drawing.Point(14, 16);
-            this.btnRevertSession.Name = "btnRevertSession";
-            this.btnRevertSession.Size = new System.Drawing.Size(164, 23);
-            this.btnRevertSession.TabIndex = 21;
-            this.btnRevertSession.Text = "Revert Session Changes";
-            this.btnRevertSession.Click += new System.EventHandler(this.btnRevertSession_Click);
-            // 
-            // btnUpdaterEditorEnter
-            // 
-            this.btnUpdaterEditorEnter.Location = new System.Drawing.Point(310, 357);
-            this.btnUpdaterEditorEnter.Name = "btnUpdaterEditorEnter";
-            this.btnUpdaterEditorEnter.Size = new System.Drawing.Size(102, 23);
-            this.btnUpdaterEditorEnter.TabIndex = 20;
-            this.btnUpdaterEditorEnter.Text = "Enter";
-            this.btnUpdaterEditorEnter.UseVisualStyleBackColor = true;
-            this.btnUpdaterEditorEnter.Click += new System.EventHandler(this.btnUpdaterEditorEnter_Click);
             // 
             // bindingNavigator2
             // 
@@ -933,159 +1113,6 @@
             this.bindingNavigatorSeparator5.Name = "bindingNavigatorSeparator5";
             this.bindingNavigatorSeparator5.Size = new System.Drawing.Size(6, 25);
             // 
-            // txtNewParkDrywellICArea
-            // 
-            this.txtNewParkDrywellICArea.Location = new System.Drawing.Point(310, 330);
-            this.txtNewParkDrywellICArea.Name = "txtNewParkDrywellICArea";
-            this.txtNewParkDrywellICArea.NullText = "Type to enter new park Drywell IC area";
-            appearance5.FontData.ItalicAsString = "True";
-            this.txtNewParkDrywellICArea.NullTextAppearance = appearance5;
-            this.txtNewParkDrywellICArea.Size = new System.Drawing.Size(210, 21);
-            this.txtNewParkDrywellICArea.TabIndex = 14;
-            // 
-            // txtNewParkDISCOICArea
-            // 
-            this.txtNewParkDISCOICArea.Location = new System.Drawing.Point(310, 303);
-            this.txtNewParkDISCOICArea.Name = "txtNewParkDISCOICArea";
-            this.txtNewParkDISCOICArea.NullText = "Type to enter new park DISCO IC area";
-            appearance4.FontData.ItalicAsString = "True";
-            this.txtNewParkDISCOICArea.NullTextAppearance = appearance4;
-            this.txtNewParkDISCOICArea.Size = new System.Drawing.Size(210, 21);
-            this.txtNewParkDISCOICArea.TabIndex = 12;
-            // 
-            // lblSelectedEditorPkDISCOICArea
-            // 
-            this.lblSelectedEditorPkDISCOICArea.AutoSize = true;
-            this.lblSelectedEditorPkDISCOICArea.Location = new System.Drawing.Point(91, 303);
-            this.lblSelectedEditorPkDISCOICArea.Name = "lblSelectedEditorPkDISCOICArea";
-            this.lblSelectedEditorPkDISCOICArea.Size = new System.Drawing.Size(170, 13);
-            this.lblSelectedEditorPkDISCOICArea.TabIndex = 11;
-            this.lblSelectedEditorPkDISCOICArea.Text = "Current park DISCO IC area (sq ft):";
-            // 
-            // lblSelectedEditorRfDrywellICArea
-            // 
-            this.lblSelectedEditorRfDrywellICArea.AutoSize = true;
-            this.lblSelectedEditorRfDrywellICArea.Location = new System.Drawing.Point(93, 277);
-            this.lblSelectedEditorRfDrywellICArea.Name = "lblSelectedEditorRfDrywellICArea";
-            this.lblSelectedEditorRfDrywellICArea.Size = new System.Drawing.Size(168, 13);
-            this.lblSelectedEditorRfDrywellICArea.TabIndex = 9;
-            this.lblSelectedEditorRfDrywellICArea.Text = "Current roof Drywell IC area (sq ft):";
-            // 
-            // btnSubmitUpdaterEditorChanges
-            // 
-            this.btnSubmitUpdaterEditorChanges.Location = new System.Drawing.Point(699, 357);
-            this.btnSubmitUpdaterEditorChanges.Name = "btnSubmitUpdaterEditorChanges";
-            this.btnSubmitUpdaterEditorChanges.Size = new System.Drawing.Size(105, 23);
-            this.btnSubmitUpdaterEditorChanges.TabIndex = 16;
-            this.btnSubmitUpdaterEditorChanges.Text = "Submit Changes";
-            this.btnSubmitUpdaterEditorChanges.UseVisualStyleBackColor = true;
-            this.btnSubmitUpdaterEditorChanges.Click += new System.EventHandler(this.btnSubmitUpdaterEditorChanges_Click);
-            // 
-            // btnUpdaterEditorCloseCancel
-            // 
-            this.btnUpdaterEditorCloseCancel.Location = new System.Drawing.Point(699, 382);
-            this.btnUpdaterEditorCloseCancel.Name = "btnUpdaterEditorCloseCancel";
-            this.btnUpdaterEditorCloseCancel.Size = new System.Drawing.Size(105, 23);
-            this.btnUpdaterEditorCloseCancel.TabIndex = 17;
-            this.btnUpdaterEditorCloseCancel.Text = "Cancel";
-            this.btnUpdaterEditorCloseCancel.UseVisualStyleBackColor = true;
-            this.btnUpdaterEditorCloseCancel.Click += new System.EventHandler(this.btnUpdaterEditorCloseCancel_Click);
-            // 
-            // btnUpdaterEditorClear
-            // 
-            this.btnUpdaterEditorClear.Location = new System.Drawing.Point(418, 357);
-            this.btnUpdaterEditorClear.Name = "btnUpdaterEditorClear";
-            this.btnUpdaterEditorClear.Size = new System.Drawing.Size(102, 23);
-            this.btnUpdaterEditorClear.TabIndex = 15;
-            this.btnUpdaterEditorClear.Text = "Clear";
-            this.btnUpdaterEditorClear.UseVisualStyleBackColor = true;
-            this.btnUpdaterEditorClear.Click += new System.EventHandler(this.btnUpdaterEditorClear_Click);
-            // 
-            // txtNewRoofDrywellICArea
-            // 
-            this.txtNewRoofDrywellICArea.Location = new System.Drawing.Point(310, 277);
-            this.txtNewRoofDrywellICArea.Name = "txtNewRoofDrywellICArea";
-            this.txtNewRoofDrywellICArea.NullText = "Type to enter new roof Drywell IC area";
-            appearance6.FontData.ItalicAsString = "True";
-            this.txtNewRoofDrywellICArea.NullTextAppearance = appearance6;
-            this.txtNewRoofDrywellICArea.Size = new System.Drawing.Size(210, 21);
-            this.txtNewRoofDrywellICArea.TabIndex = 10;
-            // 
-            // txtNewRoofDISCOICArea
-            // 
-            this.txtNewRoofDISCOICArea.Location = new System.Drawing.Point(310, 250);
-            this.txtNewRoofDISCOICArea.Name = "txtNewRoofDISCOICArea";
-            this.txtNewRoofDISCOICArea.NullText = "Type to enter new roof DISCO IC area";
-            appearance7.FontData.ItalicAsString = "True";
-            this.txtNewRoofDISCOICArea.NullTextAppearance = appearance7;
-            this.txtNewRoofDISCOICArea.Size = new System.Drawing.Size(210, 21);
-            this.txtNewRoofDISCOICArea.TabIndex = 8;
-            // 
-            // txtNewParkArea
-            // 
-            this.txtNewParkArea.Location = new System.Drawing.Point(310, 223);
-            this.txtNewParkArea.Name = "txtNewParkArea";
-            this.txtNewParkArea.NullText = "Type to enter new park area";
-            appearance3.FontData.ItalicAsString = "True";
-            this.txtNewParkArea.NullTextAppearance = appearance3;
-            this.txtNewParkArea.Size = new System.Drawing.Size(166, 21);
-            this.txtNewParkArea.TabIndex = 6;
-            // 
-            // txtNewRoofArea
-            // 
-            this.txtNewRoofArea.Location = new System.Drawing.Point(310, 196);
-            this.txtNewRoofArea.Name = "txtNewRoofArea";
-            this.txtNewRoofArea.NullText = "Type to enter new roof area";
-            appearance2.FontData.ItalicAsString = "True";
-            this.txtNewRoofArea.NullTextAppearance = appearance2;
-            this.txtNewRoofArea.Size = new System.Drawing.Size(166, 21);
-            this.txtNewRoofArea.TabIndex = 4;
-            // 
-            // lblSelectedEditorPkDrywellICArea
-            // 
-            this.lblSelectedEditorPkDrywellICArea.AutoSize = true;
-            this.lblSelectedEditorPkDrywellICArea.Location = new System.Drawing.Point(90, 330);
-            this.lblSelectedEditorPkDrywellICArea.Name = "lblSelectedEditorPkDrywellICArea";
-            this.lblSelectedEditorPkDrywellICArea.Size = new System.Drawing.Size(171, 13);
-            this.lblSelectedEditorPkDrywellICArea.TabIndex = 13;
-            this.lblSelectedEditorPkDrywellICArea.Text = "Current park Drywell IC area (sq ft):";
-            // 
-            // lblSelectedEditorRfDISCOICArea
-            // 
-            this.lblSelectedEditorRfDISCOICArea.AutoSize = true;
-            this.lblSelectedEditorRfDISCOICArea.Location = new System.Drawing.Point(94, 250);
-            this.lblSelectedEditorRfDISCOICArea.Name = "lblSelectedEditorRfDISCOICArea";
-            this.lblSelectedEditorRfDISCOICArea.Size = new System.Drawing.Size(167, 13);
-            this.lblSelectedEditorRfDISCOICArea.TabIndex = 7;
-            this.lblSelectedEditorRfDISCOICArea.Text = "Current roof DISCO IC area (sq ft):";
-            // 
-            // lblSelectedEditorPkArea
-            // 
-            this.lblSelectedEditorPkArea.AutoSize = true;
-            this.lblSelectedEditorPkArea.Location = new System.Drawing.Point(140, 223);
-            this.lblSelectedEditorPkArea.Name = "lblSelectedEditorPkArea";
-            this.lblSelectedEditorPkArea.Size = new System.Drawing.Size(121, 13);
-            this.lblSelectedEditorPkArea.TabIndex = 5;
-            this.lblSelectedEditorPkArea.Text = "Current park area (sq ft):";
-            // 
-            // lblSelectedEditorRfArea
-            // 
-            this.lblSelectedEditorRfArea.AutoSize = true;
-            this.lblSelectedEditorRfArea.Location = new System.Drawing.Point(143, 196);
-            this.lblSelectedEditorRfArea.Name = "lblSelectedEditorRfArea";
-            this.lblSelectedEditorRfArea.Size = new System.Drawing.Size(118, 13);
-            this.lblSelectedEditorRfArea.TabIndex = 3;
-            this.lblSelectedEditorRfArea.Text = "Current roof area (sq ft):";
-            // 
-            // lblSelectedEditorRNO
-            // 
-            this.lblSelectedEditorRNO.AutoSize = true;
-            this.lblSelectedEditorRNO.Location = new System.Drawing.Point(143, 173);
-            this.lblSelectedEditorRNO.Name = "lblSelectedEditorRNO";
-            this.lblSelectedEditorRNO.Size = new System.Drawing.Size(34, 13);
-            this.lblSelectedEditorRNO.TabIndex = 2;
-            this.lblSelectedEditorRNO.Text = "RNO:";
-            // 
             // tabMissingDSC
             // 
             this.tabMissingDSC.Controls.Add(this.lblMissingDSCError);
@@ -1094,7 +1121,7 @@
             this.tabMissingDSC.Location = new System.Drawing.Point(4, 22);
             this.tabMissingDSC.Name = "tabMissingDSC";
             this.tabMissingDSC.Padding = new System.Windows.Forms.Padding(3);
-            this.tabMissingDSC.Size = new System.Drawing.Size(824, 411);
+            this.tabMissingDSC.Size = new System.Drawing.Size(694, 384);
             this.tabMissingDSC.TabIndex = 4;
             this.tabMissingDSC.Text = "Missing DSC Records";
             this.tabMissingDSC.UseVisualStyleBackColor = true;
@@ -1123,8 +1150,8 @@
             // dgvDSCQC
             // 
             this.dgvDSCQC.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle15.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.dgvDSCQC.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.dgvDSCQC.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvDSCQC.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dgvDSCQC.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDSCQC.Location = new System.Drawing.Point(8, 6);
@@ -1141,7 +1168,7 @@
             this.tabIncorrectParkICArea.Location = new System.Drawing.Point(4, 22);
             this.tabIncorrectParkICArea.Name = "tabIncorrectParkICArea";
             this.tabIncorrectParkICArea.Padding = new System.Windows.Forms.Padding(3);
-            this.tabIncorrectParkICArea.Size = new System.Drawing.Size(824, 411);
+            this.tabIncorrectParkICArea.Size = new System.Drawing.Size(694, 384);
             this.tabIncorrectParkICArea.TabIndex = 6;
             this.tabIncorrectParkICArea.Text = "Park IC Error";
             this.tabIncorrectParkICArea.UseVisualStyleBackColor = true;
@@ -1168,8 +1195,8 @@
             // dgvParkQC
             // 
             this.dgvParkQC.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle16.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.dgvParkQC.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.dgvParkQC.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvParkQC.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvParkQC.Location = new System.Drawing.Point(8, 6);
             this.dgvParkQC.Name = "dgvParkQC";
@@ -1185,7 +1212,7 @@
             this.tabIncorrectRoofICArea.Location = new System.Drawing.Point(4, 22);
             this.tabIncorrectRoofICArea.Name = "tabIncorrectRoofICArea";
             this.tabIncorrectRoofICArea.Padding = new System.Windows.Forms.Padding(3);
-            this.tabIncorrectRoofICArea.Size = new System.Drawing.Size(824, 411);
+            this.tabIncorrectRoofICArea.Size = new System.Drawing.Size(694, 384);
             this.tabIncorrectRoofICArea.TabIndex = 5;
             this.tabIncorrectRoofICArea.Text = "Roof IC Error";
             this.tabIncorrectRoofICArea.UseVisualStyleBackColor = true;
@@ -1212,8 +1239,8 @@
             // dgvRoofQC
             // 
             this.dgvRoofQC.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.dgvRoofQC.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.dgvRoofQC.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvRoofQC.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvRoofQC.Location = new System.Drawing.Point(8, 6);
             this.dgvRoofQC.Name = "dgvRoofQC";
@@ -1229,7 +1256,7 @@
             this.tabPendingImpAChanges.Location = new System.Drawing.Point(4, 22);
             this.tabPendingImpAChanges.Name = "tabPendingImpAChanges";
             this.tabPendingImpAChanges.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPendingImpAChanges.Size = new System.Drawing.Size(824, 411);
+            this.tabPendingImpAChanges.Size = new System.Drawing.Size(694, 384);
             this.tabPendingImpAChanges.TabIndex = 7;
             this.tabPendingImpAChanges.Text = "Pending Impervious Changes";
             this.tabPendingImpAChanges.UseVisualStyleBackColor = true;
@@ -1255,8 +1282,8 @@
             // 
             // dgvImpAQC
             // 
-            dataGridViewCellStyle18.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.dgvImpAQC.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.dgvImpAQC.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
             this.dgvImpAQC.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvImpAQC.Location = new System.Drawing.Point(8, 6);
             this.dgvImpAQC.Name = "dgvImpAQC";
@@ -1270,15 +1297,15 @@
             this.tabDBConnOptions.Location = new System.Drawing.Point(4, 22);
             this.tabDBConnOptions.Name = "tabDBConnOptions";
             this.tabDBConnOptions.Padding = new System.Windows.Forms.Padding(3);
-            this.tabDBConnOptions.Size = new System.Drawing.Size(824, 411);
+            this.tabDBConnOptions.Size = new System.Drawing.Size(694, 384);
             this.tabDBConnOptions.TabIndex = 8;
-            this.tabDBConnOptions.Text = "Options";
+            this.tabDBConnOptions.Text = "Database Options";
             this.tabDBConnOptions.UseVisualStyleBackColor = true;
             // 
             // btnCloseOptions
             // 
             this.btnCloseOptions.ButtonStyle = Infragistics.Win.UIElementButtonStyle.WindowsVistaButton;
-            this.btnCloseOptions.Location = new System.Drawing.Point(715, 382);
+            this.btnCloseOptions.Location = new System.Drawing.Point(607, 308);
             this.btnCloseOptions.Name = "btnCloseOptions";
             this.btnCloseOptions.Size = new System.Drawing.Size(103, 23);
             this.btnCloseOptions.TabIndex = 3;
@@ -1326,6 +1353,34 @@
             this.btnChangeDBConnOption.Text = "Change Database Options";
             this.btnChangeDBConnOption.Click += new System.EventHandler(this.btnChangeDBConnOption_Click);
             // 
+            // statusStrip1
+            // 
+            this.statusStrip1.AutoSize = false;
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1,
+            this.toolStripProgressBar1});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 469);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
+            this.statusStrip1.Size = new System.Drawing.Size(932, 19);
+            this.statusStrip1.TabIndex = 10;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(109, 14);
+            this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
+            // 
+            // toolStripProgressBar1
+            // 
+            this.toolStripProgressBar1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripProgressBar1.AutoSize = false;
+            this.toolStripProgressBar1.Name = "toolStripProgressBar1";
+            this.toolStripProgressBar1.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
+            this.toolStripProgressBar1.Size = new System.Drawing.Size(100, 13);
+            // 
             // menStripMain
             // 
             this.menStripMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -1334,31 +1389,47 @@
             this.helpToolStripMenuItem});
             this.menStripMain.Location = new System.Drawing.Point(0, 0);
             this.menStripMain.Name = "menStripMain";
-            this.menStripMain.Size = new System.Drawing.Size(867, 24);
+            this.menStripMain.Size = new System.Drawing.Size(932, 24);
             this.menStripMain.TabIndex = 0;
             this.menStripMain.Text = "menuStrip1";
             // 
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.downloadUpdateTemplateToolStripMenuItem,
             this.loadUpdateFileToolStripMenuItem,
+            this.loadUpdaterHistoryToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
             this.fileToolStripMenuItem.Text = "&File";
             // 
+            // downloadUpdateTemplateToolStripMenuItem
+            // 
+            this.downloadUpdateTemplateToolStripMenuItem.Name = "downloadUpdateTemplateToolStripMenuItem";
+            this.downloadUpdateTemplateToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+            this.downloadUpdateTemplateToolStripMenuItem.Text = "&Download Update Template";
+            this.downloadUpdateTemplateToolStripMenuItem.Click += new System.EventHandler(this.downloadUpdateTemplateToolStripMenuItem_Click);
+            // 
             // loadUpdateFileToolStripMenuItem
             // 
             this.loadUpdateFileToolStripMenuItem.Name = "loadUpdateFileToolStripMenuItem";
-            this.loadUpdateFileToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.loadUpdateFileToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
             this.loadUpdateFileToolStripMenuItem.Text = "&Load Update File";
-            this.loadUpdateFileToolStripMenuItem.Click += new System.EventHandler(this.btnLoadUpdates_Click);
+            this.loadUpdateFileToolStripMenuItem.Click += new System.EventHandler(this.loadUpdateFileToolStripMenuItem_Click);
+            // 
+            // loadUpdaterHistoryToolStripMenuItem
+            // 
+            this.loadUpdaterHistoryToolStripMenuItem.Name = "loadUpdaterHistoryToolStripMenuItem";
+            this.loadUpdaterHistoryToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+            this.loadUpdaterHistoryToolStripMenuItem.Text = "Load Updater &History";
+            this.loadUpdaterHistoryToolStripMenuItem.Click += new System.EventHandler(this.loadUpdaterHistoryToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -1368,13 +1439,13 @@
             this.changeDatabaseConnectionsToolStripMenuItem});
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
             this.optionsToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
-            this.optionsToolStripMenuItem.Text = "Options";
+            this.optionsToolStripMenuItem.Text = "&Options";
             // 
             // changeDatabaseConnectionsToolStripMenuItem
             // 
             this.changeDatabaseConnectionsToolStripMenuItem.Name = "changeDatabaseConnectionsToolStripMenuItem";
             this.changeDatabaseConnectionsToolStripMenuItem.Size = new System.Drawing.Size(245, 22);
-            this.changeDatabaseConnectionsToolStripMenuItem.Text = "Change Database Connections...";
+            this.changeDatabaseConnectionsToolStripMenuItem.Text = "&Change Database Connections...";
             this.changeDatabaseConnectionsToolStripMenuItem.Click += new System.EventHandler(this.changeDatabaseConnectionsToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
@@ -1388,7 +1459,7 @@
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.aboutToolStripMenuItem.Text = "&About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -1400,14 +1471,91 @@
             // 
             this.dSCEDITTableAdapter.ClearBeforeFill = true;
             // 
+            // btnCloseApplication
+            // 
+            this.btnCloseApplication.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCloseApplication.ButtonStyle = Infragistics.Win.UIElementButtonStyle.WindowsXPCommandButton;
+            this.btnCloseApplication.Location = new System.Drawing.Point(770, 439);
+            this.btnCloseApplication.Name = "btnCloseApplication";
+            this.btnCloseApplication.Size = new System.Drawing.Size(158, 27);
+            this.btnCloseApplication.TabIndex = 14;
+            this.btnCloseApplication.Text = "Close DSC Updater";
+            this.btnCloseApplication.UseOsThemes = Infragistics.Win.DefaultableBoolean.False;
+            this.btnCloseApplication.Click += new System.EventHandler(this.btnCloseApplication_Click);
+            // 
+            // expBarMain
+            // 
+            this.expBarMain.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.expBarMain.AnimationSpeed = Infragistics.Win.UltraWinExplorerBar.AnimationSpeed.Fast;
+            this.expBarMain.ColumnSpacing = 0;
+            ultraExplorerBarItem1.Key = "DownloadUpdateTemplate";
+            appearance8.Image = global::DSCUpdater.Properties.Resources.Spreadsheet;
+            ultraExplorerBarItem1.Settings.AppearancesLarge.ActiveAppearance = appearance8;
+            appearance9.Image = global::DSCUpdater.Properties.Resources.Spreadsheet;
+            ultraExplorerBarItem1.Settings.AppearancesLarge.Appearance = appearance9;
+            ultraExplorerBarItem1.Text = "Download Update Template";
+            ultraExplorerBarGroup1.Items.AddRange(new Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarItem[] {
+            ultraExplorerBarItem1});
+            ultraExplorerBarGroup1.Text = "Prepare New DSC Updates";
+            ultraExplorerBarItem2.Key = "ApplyUpdates";
+            appearance12.Image = global::DSCUpdater.Properties.Resources.UploadFile;
+            ultraExplorerBarItem2.Settings.AppearancesLarge.Appearance = appearance12;
+            ultraExplorerBarItem2.Text = "Apply Updates Using Template";
+            ultraExplorerBarGroup2.Items.AddRange(new Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarItem[] {
+            ultraExplorerBarItem2});
+            ultraExplorerBarGroup2.Text = "Upload DSC Updates";
+            ultraExplorerBarItem3.Key = "LoadUpdaterHistory";
+            appearance13.Image = global::DSCUpdater.Properties.Resources.Calendar;
+            ultraExplorerBarItem3.Settings.AppearancesLarge.Appearance = appearance13;
+            ultraExplorerBarItem3.Text = "Load Updater History";
+            ultraExplorerBarItem4.Key = "RevertSessionChanges";
+            appearance16.Image = global::DSCUpdater.Properties.Resources.DocumentRevert;
+            ultraExplorerBarItem4.Settings.AppearancesLarge.Appearance = appearance16;
+            ultraExplorerBarItem4.Text = "Revert Session Changes";
+            ultraExplorerBarItem4.ToolTipText = "Open dialog to revert current session changes";
+            ultraExplorerBarItem4.Visible = false;
+            ultraExplorerBarGroup3.Items.AddRange(new Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarItem[] {
+            ultraExplorerBarItem3,
+            ultraExplorerBarItem4});
+            ultraExplorerBarGroup3.Text = "Updater History";
+            ultraExplorerBarItem5.Key = "ViewChangeConnectionSettings";
+            appearance14.Image = global::DSCUpdater.Properties.Resources.Server;
+            ultraExplorerBarItem5.Settings.AppearancesLarge.Appearance = appearance14;
+            ultraExplorerBarItem5.Text = "View/Change Connection Settings";
+            ultraExplorerBarGroup4.Items.AddRange(new Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarItem[] {
+            ultraExplorerBarItem5});
+            ultraExplorerBarGroup4.Text = "Server Connection Options";
+            this.expBarMain.Groups.AddRange(new Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarGroup[] {
+            ultraExplorerBarGroup1,
+            ultraExplorerBarGroup2,
+            ultraExplorerBarGroup3,
+            ultraExplorerBarGroup4});
+            this.expBarMain.GroupSettings.Style = Infragistics.Win.UltraWinExplorerBar.GroupStyle.LargeImagesWithText;
+            this.expBarMain.ItemSettings.Style = Infragistics.Win.UltraWinExplorerBar.ItemStyle.Button;
+            this.expBarMain.Location = new System.Drawing.Point(4, 27);
+            this.expBarMain.Margin = new System.Windows.Forms.Padding(2);
+            this.expBarMain.Name = "expBarMain";
+            this.expBarMain.Size = new System.Drawing.Size(217, 439);
+            this.expBarMain.Style = Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarStyle.VisualStudio2005Toolbox;
+            this.expBarMain.TabIndex = 15;
+            this.expBarMain.UseOsThemes = Infragistics.Win.DefaultableBoolean.True;
+            this.expBarMain.ViewStyle = Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarViewStyle.VisualStudio2005;
+            this.expBarMain.ItemClick += new Infragistics.Win.UltraWinExplorerBar.ItemClickEventHandler(this.expBarMain_ItemClick);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(867, 476);
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.ClientSize = new System.Drawing.Size(932, 488);
+            this.Controls.Add(this.expBarMain);
+            this.Controls.Add(this.btnCloseApplication);
             this.Controls.Add(this.tabControlMain);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menStripMain);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.IsMdiContainer = true;
             this.MainMenuStrip = this.menStripMain;
             this.Name = "frmMain";
             this.Text = " DSCUpdater";
@@ -1418,13 +1566,10 @@
             this.tabControlMain.ResumeLayout(false);
             this.tabMain.ResumeLayout(false);
             this.tabMain.PerformLayout();
+            this.tabDownloadTemplate.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ultraGroupBox)).EndInit();
             this.ultraGroupBox.ResumeLayout(false);
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
             this.tabLoadedUpdateReview.ResumeLayout(false);
-            this.statusStrip2.ResumeLayout(false);
-            this.statusStrip2.PerformLayout();
             this.tabUpdaterHistory.ResumeLayout(false);
             this.tabUpdaterHistory.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).EndInit();
@@ -1435,19 +1580,25 @@
             ((System.ComponentModel.ISupportInitialize)(this.projectDataSet)).EndInit();
             this.tabUpdaterEditor.ResumeLayout(false);
             this.tabUpdaterEditor.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvUpdaterEditor)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dSCEDITBindingSource)).EndInit();
+            this.pnlCurrentDSCAreas.ClientArea.ResumeLayout(false);
+            this.pnlCurrentDSCAreas.ClientArea.PerformLayout();
+            this.pnlCurrentDSCAreas.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ultraGroupBox1)).EndInit();
             this.ultraGroupBox1.ResumeLayout(false);
+            this.pnlNewDSCAreas.ClientArea.ResumeLayout(false);
+            this.pnlNewDSCAreas.ClientArea.PerformLayout();
+            this.pnlNewDSCAreas.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.txtNewRoofArea)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtNewParkArea)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtNewRoofDISCOICArea)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtNewRoofDrywellICArea)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtNewParkDISCOICArea)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtNewParkDrywellICArea)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvUpdaterEditor)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dSCEDITBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator2)).EndInit();
             this.bindingNavigator2.ResumeLayout(false);
             this.bindingNavigator2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtNewParkDrywellICArea)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtNewParkDISCOICArea)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtNewRoofDrywellICArea)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtNewRoofDISCOICArea)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtNewParkArea)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtNewRoofArea)).EndInit();
             this.tabMissingDSC.ResumeLayout(false);
             this.tabMissingDSC.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDSCQC)).EndInit();
@@ -1466,8 +1617,11 @@
             this.grpBoxDbConnOptions.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtNewServerCon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtNewDatabaseCon)).EndInit();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.menStripMain.ResumeLayout(false);
             this.menStripMain.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.expBarMain)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dbBindSourceDSCQC)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dbBindSourceParkQC)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dbBindSourceRoofQC)).EndInit();
@@ -1479,9 +1633,6 @@
         #endregion
 
         private Infragistics.Win.UltraWinEditors.UltraTextEditor txtFileName;
-        private System.Windows.Forms.Button btnLoadUpdates;
-        private System.Windows.Forms.Button btnCloseApplication;
-        private System.Windows.Forms.Button btnLoadUpdaterHistory;
         private System.Windows.Forms.OpenFileDialog ofdMain;
         private System.Windows.Forms.DataGridView dgvData;
         private System.Windows.Forms.TabControl tabControlMain;
@@ -1493,7 +1644,6 @@
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Button btnSubmit;
         private System.Windows.Forms.ToolStripMenuItem loadUpdateFileToolStripMenuItem;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
@@ -1502,7 +1652,6 @@
         private System.Windows.Forms.TabPage tabUpdaterEditor;
         private System.Windows.Forms.DataGridView dgvUpdaterHistory;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
         private projectDataSet projectDataSet;
         private System.Windows.Forms.BindingSource sESSIONBindingSource;
         private DSCUpdater.projectDataSetTableAdapters.SESSIONTableAdapter sESSIONTableAdapter;
@@ -1521,9 +1670,6 @@
         private System.Windows.Forms.Label lblSelectedEditorPkDrywellICArea;
         private System.Windows.Forms.Label lblSelectedEditorRfDISCOICArea;
         private System.Windows.Forms.Label lblSelectedEditorPkArea;
-        private System.Windows.Forms.Button btnUpdaterEditorClear;
-        private System.Windows.Forms.Button btnUpdaterEditorCloseCancel;
-        private System.Windows.Forms.Button btnSubmitUpdaterEditorChanges;
         private System.Windows.Forms.DataGridViewTextBoxColumn editidDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn editdateDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn editedbyDataGridViewTextBoxColumn;
@@ -1536,9 +1682,6 @@
         private System.Windows.Forms.BindingSource dbBindSourceDSCQC;
         private System.Windows.Forms.TabPage tabMissingDSC;
         private System.Windows.Forms.DataGridView dgvDSCQC;
-        private System.Windows.Forms.StatusStrip statusStrip2;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
-        private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar2;
         private System.Windows.Forms.Button btnQCTab;
         private System.Windows.Forms.TabPage tabIncorrectRoofICArea;
         private System.Windows.Forms.TabPage tabIncorrectParkICArea;
@@ -1566,17 +1709,10 @@
         private System.Windows.Forms.Button btnParkICQC;
         private System.Windows.Forms.Button btnRoofICQC;
         private System.Windows.Forms.Button btnImpAQC;
-        private Infragistics.Win.Misc.UltraLabel lblDownloadTemplate;
-        private Infragistics.Win.Misc.UltraButton btnDownloadUpdateTemplate;
         private System.Windows.Forms.SaveFileDialog sfdMain;
-        private Infragistics.Win.Misc.UltraGroupBox ultraGroupBox;
         private System.Windows.Forms.Label lblMissingDSCError;
         private System.Windows.Forms.Label lblParkICError;
         private System.Windows.Forms.Label lblRoofICError;
-        private System.Windows.Forms.Button btnUpdaterEditorEnter;
-        private Infragistics.Win.Misc.UltraButton btnRevertSession;
-        private Infragistics.Win.Misc.UltraGroupBox ultraGroupBox1;
-        private Infragistics.Win.Misc.UltraLabel lblRevertSession;
         private Infragistics.Win.Misc.UltraButton btnUpdaterHistoryReturn;
         private System.Windows.Forms.DataGridView dgvUpdaterEditor;
         private System.Windows.Forms.DataGridViewTextBoxColumn dsceditidDataGridViewTextBoxColumn;
@@ -1606,6 +1742,29 @@
         private Infragistics.Win.UltraWinEditors.UltraTextEditor txtNewDatabaseCon;
         private Infragistics.Win.Misc.UltraGroupBox grpBoxDbConnOptions;
         private Infragistics.Win.Misc.UltraButton btnCloseOptions;
+        private Infragistics.Win.Misc.UltraButton btnCloseApplication;
+        private Infragistics.Win.UltraWinExplorerBar.UltraExplorerBar expBarMain;
+        private Infragistics.Win.Misc.UltraPanel pnlNewDSCAreas;
+        private Infragistics.Win.Misc.UltraButton btnSubmitUpdates;
+        private Infragistics.Win.Misc.UltraButton btnLoadSelectedEditSession;
+        private Infragistics.Win.Misc.UltraPanel pnlCurrentDSCAreas;
+        private Infragistics.Win.Misc.UltraGroupBox ultraGroupBox1;
+        private Infragistics.Win.Misc.UltraLabel lblRevertSession;
+        private Infragistics.Win.Misc.UltraButton btnRevertSession;
+        private Infragistics.Win.Misc.UltraButton btnSubmitUpdaterEditorChanges;
+        private Infragistics.Win.Misc.UltraButton btnUpdaterEditorClear;
+        private Infragistics.Win.Misc.UltraButton btnUpdaterEditorEnter;
+        private Infragistics.Win.Misc.UltraButton btnLoadUpdateFile;
+        private System.Windows.Forms.TabPage tabDownloadTemplate;
+        private Infragistics.Win.Misc.UltraGroupBox ultraGroupBox;
+        private Infragistics.Win.Misc.UltraButton btnDownloadUpdateTemplate;
+        private Infragistics.Win.Misc.UltraLabel lblDownloadTemplate;
+        private System.Windows.Forms.ToolStripMenuItem downloadUpdateTemplateToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem loadUpdaterHistoryToolStripMenuItem;
+        private Infragistics.Win.Misc.UltraButton btnUpdaterEditorCloseCancel;
+        private Infragistics.Win.Misc.UltraButton btnCancelDownload;
+        private Infragistics.Win.Misc.UltraButton btnCancelUpdate;
+        private Infragistics.Win.Misc.UltraButton btnCloseUpdaterHistory;
     }
 }
 
