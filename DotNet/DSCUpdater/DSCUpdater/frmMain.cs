@@ -66,7 +66,7 @@ namespace DSCUpdater
 
             TempFileName = @"C:\Temp.csv";
             toolStripStatusLabel1.Text = "Ready";
-            toolStripStatusLabel2.Text = "Ready";
+            toolStripStatusLabel1.Text = "Ready";
 
             //CreateTable();
             dataset.Tables.Add(datatable);
@@ -75,10 +75,7 @@ namespace DSCUpdater
             toolStripProgressBar1.Minimum = 0;
             toolStripProgressBar1.Maximum = 1000000;
             toolStripProgressBar1.Step = 1;
-            toolStripProgressBar2.Minimum = 0;
-            toolStripProgressBar2.Maximum = 1000000;
-            toolStripProgressBar2.Step = 1;
-
+            
             //Hide all but first tab
             tabControlMain.TabPages.Remove(tabLoadedUpdateReview);
             tabControlMain.TabPages.Remove(tabUpdaterHistory);
@@ -88,23 +85,32 @@ namespace DSCUpdater
             tabControlMain.TabPages.Remove(tabIncorrectRoofICArea);
             tabControlMain.TabPages.Remove(tabPendingImpAChanges);
             tabControlMain.TabPages.Remove(tabDBConnOptions);
+            tabControlMain.TabPages.Remove(tabDownloadTemplate);
         }
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'projectDataSet.DSCEDIT' table. You can move, or remove it, as needed.
-            projectDataSet.EnforceConstraints = false;
-            //this.dSCEDITTableAdapter.Fill(this.projectDataSet.DSCEDIT);
-            // TODO: This line of code loads data into the 'projectDataSet.SESSION' table. You can move, or remove it, as needed.
-            this.sESSIONTableAdapter.Fill(this.projectDataSet.SESSION);
-            bindingNavigator1.BindingSource = sESSIONBindingSource;
+            tabControlMain.Visible = false;
+            try
+            {
+                // TODO: This line of code loads data into the 'projectDataSet.DSCEDIT' table. You can move, or remove it, as needed.
+                projectDataSet.EnforceConstraints = false;
+                //this.dSCEDITTableAdapter.Fill(this.projectDataSet.DSCEDIT);
+                // TODO: This line of code loads data into the 'projectDataSet.SESSION' table. You can move, or remove it, as needed.
+                this.sESSIONTableAdapter.Fill(this.projectDataSet.SESSION);
+                bindingNavigator1.BindingSource = sESSIONBindingSource;
 
-            SqlConnection sqlCon = new SqlConnection(sqlConStr);
-            sqlCon.Open();
-            SqlCommand sqlCmd = new SqlCommand();
-            sqlCmd.CommandText = "DELETE FROM USERUPDATE";
-            sqlCmd.Connection = sqlCon;
-            sqlCmd.ExecuteNonQuery();
+                SqlConnection sqlCon = new SqlConnection(sqlConStr);
+                sqlCon.Open();
+                SqlCommand sqlCmd = new SqlCommand();
+                sqlCmd.CommandText = "DELETE FROM USERUPDATE";
+                sqlCmd.Connection = sqlCon;
+                sqlCmd.ExecuteNonQuery();
+            }
+            catch (SqlException sqlException)
+            {
+                MessageBox.Show(sqlException.Message +"\n"+"Please specify server and database connection parameters on the Database Connection Options tab.", "DSCUpdater: SQL Exception Thrown", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }             
         }
 
         private string columnNames(DataTable dtSchemaTable, string delimiter)
@@ -1185,105 +1191,422 @@ namespace DSCUpdater
             oMail.AddToOutbox(toValue, subjectValue, bodyValue);
         }
         
-        private void btnLoadUpdates_Click(object sender, EventArgs e)
+        private void btnCloseApplication_Click(object sender, EventArgs e)
         {
-            /// <summary>
-            /// Open TEMP.CSV as ODBC database file
-            /// Access data using SQL 'Select' command
-            /// Move data from DATABASE to DataTable and assign to DataGridView object
-            /// Make each column UNSORTABLE to stop user messing with data!!!
-            /// </summary>
-            
-            toolStripStatusLabel1.Text = "Loading";
-            tabControlMain.TabPages.Clear();
+            Application.Exit();
+        }
+        
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            impAQCCounter = 0;
             tabControlMain.TabPages.Add(tabMain);
-            tabControlMain.TabPages.Add(tabLoadedUpdateReview);
+            tabControlMain.TabPages.Remove(tabLoadedUpdateReview);
             tabControlMain.SelectedTab = tabMain;
+            toolStripStatusLabel1.Text = "Ready";
+            toolStripProgressBar1.Value = 0;
+            txtFileName.Text = "";
+        }
+     
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string fi;
+            fi = @"\\Cassio\asm_apps\Apps\DSCUpdater\DSCUpdaterPublish.htm";
+            System.Diagnostics.Process.Start("IEXPLORE.EXE", fi);
+        }
 
-            //Open file dialog handling
-            ofdMain.DefaultExt = "*.csv";
-            ofdMain.FileName = "*.csv";
-            ofdMain.Filter = "csv files|*.csv|txt files|*.txt";
-            DialogResult result = ofdMain.ShowDialog();
+        private void btnCloseEditorHistory_Click(object sender, EventArgs e)
+        {
+            tabControlMain.TabPages.Add(tabMain);
+            tabControlMain.TabPages.Remove(tabUpdaterHistory);
+            tabControlMain.SelectedTab = tabMain;
+        }
 
-            //Check to make sure the OFD dialog result is "OK"
-            if (result == DialogResult.OK)
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }       
+
+        private void btnDSCQC_Click(object sender, EventArgs e)
+        {
+            HideTabPage(tabMissingDSC);
+            ShowTabPage(tabLoadedUpdateReview);
+            selectedIndex = tabControlMain.TabCount - 1;
+            tabControlMain.SelectedIndex = selectedIndex;
+        }
+
+        private void btnParkICQC_Click(object sender, EventArgs e)
+        {
+            HideTabPage(tabIncorrectParkICArea);
+            ShowTabPage(tabLoadedUpdateReview);
+            selectedIndex = tabControlMain.TabCount - 1;
+            tabControlMain.SelectedIndex = selectedIndex;
+        }
+
+        private void btnRoofICQC_Click(object sender, EventArgs e)
+        {
+            HideTabPage(tabIncorrectRoofICArea);
+            ShowTabPage(tabLoadedUpdateReview);
+            selectedIndex = tabControlMain.TabCount - 1;
+            tabControlMain.SelectedIndex = selectedIndex;
+        }
+
+        private void btnImpAQC_Click(object sender, EventArgs e)
+        {
+            impAQCCounter = impAQCCounter + 1;
+            HideTabPage(tabPendingImpAChanges);
+            ShowTabPage(tabLoadedUpdateReview);
+            selectedIndex = tabControlMain.TabCount - 1;
+            tabControlMain.SelectedIndex = selectedIndex;
+        }
+      
+        private void btnUpdaterHistoryReturn_Click(object sender, EventArgs e)
+        {
+            if (txtNewParkArea.Text != "" || txtNewRoofArea.Text != "" || txtNewRoofDrywellICArea.Text != "" || txtNewRoofDISCOICArea.Text != "")
             {
-                txtFileName.Text = ofdMain.FileName;
-
-                // Clear datagrid contents
-                dgvData.SelectAll();
-                dgvData.ClearSelection();
-                // Set file name
-                FileName = txtFileName.Text;
-                CSVDataSource = FileName;
-                if (File.Exists(TempFileName))
+                if (MessageBox.Show("Abandon editing without saving?", "DSC Updater", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
                 {
-                    File.Delete(TempFileName);
+                    tabControlMain.TabPages.Add(tabUpdaterHistory);
+                    tabControlMain.TabPages.Remove(tabUpdaterEditor);
+                    tabControlMain.SelectedTab = tabUpdaterHistory;
                 }
-
-                StreamReader sr = new StreamReader(FileName);
-                StreamWriter sw = new StreamWriter(TempFileName);
-
-                // Read & dump header
-                string junk = sr.ReadLine();
-
-                // Read file into string       
-                string FileData = sr.ReadToEnd();
-
-                FileSize = FileData.Length.ToString("N");
-                FileSize = FileSize.Substring(0, FileSize.IndexOf("."));
-                //toolStripStatusLabel1.Text = "Loading" + FileSize + "  bytes. Please wait a moment.";
-
-                //progress bar starts working here
-                if (toolStripProgressBar1.Value == toolStripProgressBar1.Maximum)
-                {
-                    toolStripProgressBar1.Value = toolStripProgressBar1.Minimum;
-                }
-                for (int i = toolStripProgressBar1.Minimum; i <= toolStripProgressBar1.Maximum; i++)
-                {
-                    toolStripProgressBar1.PerformStep();
-                }
-
-                sw.WriteLine("RNO,DSCID,New Roof Area,New Roof DISCO IC Area,New Roof Drywell IC Area, New Park Area, New Park DISCO IC Area, New Park Drywell IC Area");
-                //sw.WriteLine(LineText);
-                sw.Write(FileData);
-                sr.Close();
-                sw.Close();
-                ReadData();
-                dgvData.Update();
-                dgvData.Columns[0].HeaderText = "RNO";
-                dgvData.Columns[1].HeaderText = "DSCID";
-                dgvData.Columns[2].HeaderText = "New Roof Area";
-                dgvData.Columns[3].HeaderText = "New Roof DISCO IC Area";
-                dgvData.Columns[4].HeaderText = "New Roof Drywell IC Area";
-                dgvData.Columns[5].HeaderText = "New Park Area";
-                dgvData.Columns[6].HeaderText = "New Park DISCO IC Area";
-                dgvData.Columns[7].HeaderText = "New Park Drywell IC Area";
-
-                tabControlMain.SelectedTab = tabLoadedUpdateReview;
-                tabControlMain.TabPages.Remove(tabMain);
             }
             else
             {
-                tabControlMain.TabPages.Remove(tabLoadedUpdateReview);
-                tabControlMain.SelectedTab = tabMain;
+                tabControlMain.TabPages.Add(tabUpdaterHistory);
+                tabControlMain.TabPages.Remove(tabUpdaterEditor);
+                tabControlMain.SelectedTab = tabUpdaterHistory;
             }
-            toolStripProgressBar1.Value = 0;
-            toolStripStatusLabel1.Text = "Ready";
+            this.sESSIONTableAdapter.Fill(this.projectDataSet.SESSION);
+            bindingNavigator1.BindingSource = sESSIONBindingSource;
+        }
+      
+        private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (File.Exists(TempFileName))
+            {
+                File.Delete(TempFileName);
+            }
         }
 
-        private void btnSubmit_Click(object sender, EventArgs e)
+        private void dgvUpdaterEditor_SelectionChanged(object sender, EventArgs e)
         {
-            toolStripStatusLabel2.Text = "Submitting";
+            txtNewRoofArea.Text = "";
+            txtNewRoofDISCOICArea.Text = "";
+            txtNewRoofDrywellICArea.Text = "";
+            txtNewParkArea.Text = "";
+            txtNewParkDISCOICArea.Text = "";
+            txtNewParkDrywellICArea.Text = "";
 
-            if (toolStripProgressBar2.Value == toolStripProgressBar2.Maximum)
+            string rNoLblText = "";
+            string currentParkAreaLblText = "";
+            string currentParkDiscoICAreaLblText = "";
+            string currentParkDrywellICAreaLblText = "";
+            string currentRoofAreaLblText = "";
+            string currentRoofDiscoICAreaLblText = "";
+            string currentRoofDrywellICAreaLblText = "";
+
+            //MessageBox.Show(dgvUpdaterEditor.SelectedRows.Count.ToString());
+            if (dgvUpdaterEditor.SelectedRows.Count == 0)
             {
-                toolStripProgressBar2.Value = toolStripProgressBar2.Minimum;
+                return;
             }
-            for (int i = toolStripProgressBar2.Minimum; i <= toolStripProgressBar2.Maximum; i++)
+                        
+            if (dgvUpdaterEditor.SelectedRows.Count == 1)
             {
-                toolStripProgressBar2.PerformStep();
+                txtNewParkArea.Enabled = true;
+                txtNewRoofArea.Enabled = true;
+                txtNewParkDISCOICArea.Enabled = true;
+                txtNewParkDrywellICArea.Enabled = true;
+                txtNewRoofDISCOICArea.Enabled = true;
+                txtNewRoofDrywellICArea.Enabled = true;
+                
+                if (dgvUpdaterEditor.SelectedRows[0].Cells[4].Value.ToString() != "" && dgvUpdaterEditor.SelectedRows[0].Cells[18].Value.ToString() == "False")
+                {
+                    //MessageBox.Show("If1");
+                    rNoLblText = "RNO: Not Available";
+                    currentParkAreaLblText = "Current park area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[13].Value.ToString();
+                    currentParkDiscoICAreaLblText = "Current park DISCO IC area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[15].Value.ToString(); ;
+                    currentParkDrywellICAreaLblText = "Current park drywell IC area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[17].Value.ToString();
+                    currentRoofAreaLblText = "Current roof area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[7].Value.ToString();
+                    currentRoofDiscoICAreaLblText = "Current roof DISCO IC area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[9].Value.ToString();
+                    currentRoofDrywellICAreaLblText = "Current roof drywell IC area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[11].Value.ToString();
+                }
+
+                if (dgvUpdaterEditor.SelectedRows[0].Cells[4].Value.ToString() != "" && dgvUpdaterEditor.SelectedRows[0].Cells[18].Value.ToString() == "True")
+                {
+                    //MessageBox.Show("If2");
+                    rNoLblText = "RNO: " + dgvUpdaterEditor.SelectedRows[0].Cells[4].Value.ToString();
+                    currentParkAreaLblText = "Updated park area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[13].Value.ToString();
+                    currentParkDiscoICAreaLblText = "Updated park DISCO IC area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[15].Value.ToString(); ;
+                    currentParkDrywellICAreaLblText = "Updated park drywell IC area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[17].Value.ToString();
+                    currentRoofAreaLblText = "Updated roof area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[7].Value.ToString();
+                    currentRoofDiscoICAreaLblText = "Updated roof DISCO IC area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[9].Value.ToString();
+                    currentRoofDrywellICAreaLblText = "Updated roof drywell IC area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[11].Value.ToString();
+                }
+
+                if (dgvUpdaterEditor.SelectedRows[0].Cells[4].Value.ToString() == "" && dgvUpdaterEditor.SelectedRows[0].Cells[18].Value.ToString() == "False")
+                {
+                    //MessageBox.Show("If3");
+                    rNoLblText = "RNO: Not Available";
+                    currentParkAreaLblText = "Current park area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[13].Value.ToString();
+                    currentParkDiscoICAreaLblText = "Current park DISCO IC area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[15].Value.ToString(); ;
+                    currentParkDrywellICAreaLblText = "Current park drywell IC area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[17].Value.ToString();
+                    currentRoofAreaLblText = "Current roof area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[7].Value.ToString();
+                    currentRoofDiscoICAreaLblText = "Current roof DISCO IC area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[9].Value.ToString();
+                    currentRoofDrywellICAreaLblText = "Current roof drywell IC area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[11].Value.ToString();
+                }
+
+                if (dgvUpdaterEditor.SelectedRows[0].Cells[4].Value.ToString() == "" && dgvUpdaterEditor.SelectedRows[0].Cells[18].Value.ToString() == "True")
+                {
+                    //MessageBox.Show("If4");
+                    rNoLblText = "RNO: Not Available";
+                    currentParkAreaLblText = "Updated park area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[13].Value.ToString();
+                    currentParkDiscoICAreaLblText = "Updated park DISCO IC area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[15].Value.ToString(); ;
+                    currentParkDrywellICAreaLblText = "Updated park drywell IC area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[17].Value.ToString();
+                    currentRoofAreaLblText = "Updated roof area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[7].Value.ToString();
+                    currentRoofDiscoICAreaLblText = "Updated roof DISCO IC area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[9].Value.ToString();
+                    currentRoofDrywellICAreaLblText = "Updated roof drywell IC area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[11].Value.ToString();
+                }
+                lblSelectedEditorRNO.Text = rNoLblText;
+                lblSelectedEditorPkArea.Text = currentParkAreaLblText;
+                lblSelectedEditorPkDISCOICArea.Text = currentParkDiscoICAreaLblText;
+                lblSelectedEditorPkDrywellICArea.Text = currentParkDrywellICAreaLblText;
+                lblSelectedEditorRfArea.Text = currentRoofAreaLblText;
+                lblSelectedEditorRfDISCOICArea.Text = currentRoofDiscoICAreaLblText;
+                lblSelectedEditorRfDrywellICArea.Text = currentRoofDrywellICAreaLblText;
+            }
+        }
+
+        private void changeDatabaseConnectionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TabPage currentTabPage = tabControlMain.SelectedTab;
+            HideTabPage(currentTabPage);
+            ShowTabPage(tabDBConnOptions);
+         }
+
+        private void btnChangeDBConnOption_Click(object sender, EventArgs e)
+        {
+            //takes user input from text fields to set new connection property
+            //where the data will be accessed and written
+            string newServerCon = txtNewServerCon.Text;
+            string newDatabaseCon = txtNewDatabaseCon.Text;
+            string newConStr = "Data Source=" + newServerCon + ";Initial Catalog=" + newDatabaseCon + ";Integrated Security=True";
+            SqlConnection newSQLCon = new SqlConnection();
+            newSQLCon.ConnectionString = newConStr;
+            if (txtNewDatabaseCon != null || txtNewServerCon != null)
+            {
+                try
+                {
+                    Cursor = Cursors.WaitCursor;
+                    newSQLCon.Open();
+                    MessageBox.Show("Connected to server = " + newServerCon + ", database = " + newDatabaseCon);
+                    
+                    #region ChangeXMLAttributeContent
+
+                    //The Path to the xml file
+                    string xmlConfigFile = "DSCUpdaterConfig.xml";
+
+                    //Create FileStream fs
+                    FileStream fs = new FileStream(xmlConfigFile, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+
+                    //Create new XmlDocument
+                    System.Xml.XmlDocument xmlDoc = new System.Xml.XmlDocument();
+
+                    //Load the contents of the filestream into the XmlDocument (xmldoc)
+                    xmlDoc.Load(fs);
+
+                    //close the fs filestream
+                    fs.Close();
+
+                    //Change the contents of the attribute                     
+                    xmlDoc.DocumentElement.ChildNodes.Item(0).InnerText = newConStr;
+
+                    // Create the filestream for saving
+                    FileStream WRITER = new FileStream(xmlConfigFile, FileMode.Truncate, FileAccess.Write, FileShare.ReadWrite);
+
+                    // Save the xmldocument
+                    xmlDoc.Save(WRITER);
+
+                    //Close the writer filestream
+                    WRITER.Close();
+                    
+                    #endregion
+                }
+                catch (Exception ex)
+                {
+                    if (newSQLCon != null)
+                    {
+                        newSQLCon.Dispose();
+                    }
+                    string errorMessage = "A error occured while trying to connect to the server." + ex.Message;
+                    errorMessage += Environment.NewLine;
+                    errorMessage += Environment.NewLine;
+                    errorMessage += ex.Message;
+                    MessageBox.Show(this, errorMessage, "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error);              
+                    return;
+                }
+                finally
+                {
+                    newSQLCon.Close();
+                    Cursor = Cursors.Default;
+                }
+            }
+            else
+            {
+                 MessageBox.Show("Server or database not specified. Please specify a valid server and database.", "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnCloseOptions_Click(object sender, EventArgs e)
+        {
+            tabControlMain.TabPages.Remove(tabMain);
+            tabControlMain.TabPages.Remove(tabDBConnOptions);
+            tabControlMain.TabPages.Remove(tabDownloadTemplate);
+            tabControlMain.TabPages.Remove(tabIncorrectParkICArea);
+            tabControlMain.TabPages.Remove(tabIncorrectRoofICArea);
+            tabControlMain.TabPages.Remove(tabLoadedUpdateReview);
+            tabControlMain.TabPages.Remove(tabMissingDSC);
+            tabControlMain.TabPages.Remove(tabUpdaterEditor);
+            tabControlMain.TabPages.Remove(tabUpdaterHistory);
+            tabControlMain.Visible = false;
+        }
+
+        private void expBarMain_ItemClick(object sender, Infragistics.Win.UltraWinExplorerBar.ItemEventArgs e)
+        {
+            try
+            {
+                Cursor = Cursors.WaitCursor;
+                switch (e.Item.Key)
+                {
+                    case "DownloadUpdateTemplate":
+                        DownloadUpdateTemplate();
+                        break;
+                    case "ApplyUpdates":
+                        ApplyUpdates();
+                        break;
+                    case "LoadUpdaterHistory":
+                        LoadUpdaterHistory();
+                        break;
+                    case "RevertSessionChanges":
+                        RevertSessionChanges();
+                        break;
+                    case "ViewChangeConnectionSettings":
+                        ViewChangeConnectionSettings();
+                        break;
+                    default:
+                        return;
+                } //switch
+                return;
+            } //try
+            finally
+            {
+                Cursor = Cursors.Default;
+            } //finally
+        } //expBarMain_ItemClick (sender, e)
+
+        private void DownloadUpdateTemplate()
+        {
+            //MessageBox.Show("DownloadUpdateTemplate");
+            tabControlMain.TabPages.Remove(tabMain);
+            tabControlMain.TabPages.Remove(tabDownloadTemplate);
+            tabControlMain.TabPages.Remove(tabLoadedUpdateReview);
+            tabControlMain.TabPages.Remove(tabUpdaterHistory);
+            tabControlMain.TabPages.Remove(tabUpdaterEditor);
+            tabControlMain.TabPages.Remove(tabMissingDSC);
+            tabControlMain.TabPages.Remove(tabIncorrectParkICArea);
+            tabControlMain.TabPages.Remove(tabIncorrectRoofICArea);
+            tabControlMain.TabPages.Remove(tabPendingImpAChanges);
+            tabControlMain.TabPages.Remove(tabDBConnOptions);    
+            tabControlMain.TabPages.Add(tabDownloadTemplate);
+            tabControlMain.SelectedTab = tabDownloadTemplate;
+            tabControlMain.Visible = true;
+        }
+
+        private void ApplyUpdates()
+        {
+            tabControlMain.TabPages.Remove(tabMain);
+            tabControlMain.TabPages.Remove(tabLoadedUpdateReview);
+            tabControlMain.TabPages.Remove(tabUpdaterHistory);
+            tabControlMain.TabPages.Remove(tabUpdaterEditor);
+            tabControlMain.TabPages.Remove(tabMissingDSC);
+            tabControlMain.TabPages.Remove(tabIncorrectParkICArea);
+            tabControlMain.TabPages.Remove(tabIncorrectRoofICArea);
+            tabControlMain.TabPages.Remove(tabPendingImpAChanges);
+            tabControlMain.TabPages.Remove(tabDBConnOptions);
+            tabControlMain.TabPages.Remove(tabDownloadTemplate);    
+            tabControlMain.TabPages.Add(tabMain);
+            tabControlMain.SelectedTab = tabMain;
+            tabControlMain.Visible = true;
+            //MessageBox.Show("ApplyUpdates");
+        }
+
+        private void LoadUpdaterHistory()
+        {
+            tabControlMain.TabPages.Remove(tabUpdaterHistory);
+            tabControlMain.TabPages.Remove(tabMain);
+            tabControlMain.TabPages.Remove(tabLoadedUpdateReview);  
+            tabControlMain.TabPages.Remove(tabUpdaterEditor);
+            tabControlMain.TabPages.Remove(tabMissingDSC);
+            tabControlMain.TabPages.Remove(tabIncorrectParkICArea);
+            tabControlMain.TabPages.Remove(tabIncorrectRoofICArea);
+            tabControlMain.TabPages.Remove(tabPendingImpAChanges);
+            tabControlMain.TabPages.Remove(tabDBConnOptions);
+            tabControlMain.TabPages.Remove(tabDownloadTemplate);
+            tabControlMain.TabPages.Add(tabUpdaterHistory);
+            tabControlMain.SelectedTab = tabUpdaterHistory;
+            //MessageBox.Show("LoadUpdaterHistory");     
+            this.sESSIONTableAdapter.Fill(this.projectDataSet.SESSION);
+            bindingNavigator1.BindingSource = sESSIONBindingSource;
+            tabControlMain.Visible = true;
+            Cursor.Current = Cursors.Arrow;
+        }
+
+        private void RevertSessionChanges()
+        {
+            //tabControlMain.TabPages.Remove(tabMain);
+            //tabControlMain.TabPages.Remove(tabLoadedUpdateReview);
+            //tabControlMain.TabPages.Remove(tabUpdaterEditor);
+            //tabControlMain.TabPages.Remove(tabMissingDSC);
+            //tabControlMain.TabPages.Remove(tabIncorrectParkICArea);
+            //tabControlMain.TabPages.Remove(tabIncorrectRoofICArea);
+            //tabControlMain.TabPages.Remove(tabPendingImpAChanges);
+            //tabControlMain.TabPages.Remove(tabDBConnOptions);
+            //tabControlMain.TabPages.Remove(tabDownloadTemplate);       
+            //tabControlMain.Visible = true;
+            //MessageBox.Show("RevertSessionChanges");
+        }
+
+        private void ViewChangeConnectionSettings()
+        {
+            tabControlMain.TabPages.Remove(tabMain);
+            tabControlMain.TabPages.Remove(tabLoadedUpdateReview);
+            tabControlMain.TabPages.Remove(tabUpdaterEditor);
+            tabControlMain.TabPages.Remove(tabUpdaterHistory);
+            tabControlMain.TabPages.Remove(tabMissingDSC);
+            tabControlMain.TabPages.Remove(tabIncorrectParkICArea);
+            tabControlMain.TabPages.Remove(tabIncorrectRoofICArea);
+            tabControlMain.TabPages.Remove(tabPendingImpAChanges);
+            tabControlMain.TabPages.Remove(tabDownloadTemplate);
+            tabControlMain.TabPages.Remove(tabDBConnOptions);
+            tabControlMain.TabPages.Add(tabDBConnOptions);
+            tabControlMain.SelectedTab=tabDBConnOptions;
+            tabControlMain.Visible = true;
+            //MessageBox.Show("ViewChangeConnectionSettings");
+            Cursor.Current = Cursors.Arrow;
+        }
+
+        private void btnSubmitUpdates_Click(object sender, EventArgs e)
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            toolStripStatusLabel1.Text = "Submitting";
+
+            if (toolStripProgressBar1.Value == toolStripProgressBar1.Maximum)
+            {
+                toolStripProgressBar1.Value = toolStripProgressBar1.Minimum;
+            }
+            for (int i = toolStripProgressBar1.Minimum; i <= toolStripProgressBar1.Maximum; i++)
+            {
+                toolStripProgressBar1.PerformStep();
             }
 
             SqlConnection sqlCon = new SqlConnection(sqlConStr);
@@ -1510,7 +1833,7 @@ namespace DSCUpdater
                                          "AND (([DSCEDIT].[edit_id])=@editID)) " +
                                          "OR ((([DSCEDIT].[new_park_area_sqft])<>[DSCEDIT].[old_park_area_sqft]) " +
                                          "AND (([DSCEDIT].[edit_id])=@editID))";
-                    sqlCmd.ExecuteNonQuery(); 
+                    sqlCmd.ExecuteNonQuery();
 
                     ExportIMPUPDATEToCSV();
 
@@ -1521,7 +1844,7 @@ namespace DSCUpdater
 
                     //close the SQL connection
                     sqlCon.Close();
-                    btnSubmit.Visible = false;
+                    btnSubmitUpdates.Visible = false;
                     btnCancel.Text = "Return";
                     MessageBox.Show("All updates to the modeling system have completed sucessfully.  To review changes from this edit session, return to the main page, and click on the 'Load Update History' button to load the desired edit session.", "DSCUpdater: Update Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -1532,74 +1855,16 @@ namespace DSCUpdater
                     MessageBox.Show(ex.Message, "DSCUpdater: Exception Thrown", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            toolStripStatusLabel2.Text = "Ready";
-            toolStripProgressBar2.Value = 0;
-            qcCounter = 0;
-        }
-        
-        private void btnCloseApplication_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-        
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            impAQCCounter = 0;
-            tabControlMain.TabPages.Add(tabMain);
-            tabControlMain.TabPages.Remove(tabLoadedUpdateReview);
-            tabControlMain.SelectedTab = tabMain;
             toolStripStatusLabel1.Text = "Ready";
             toolStripProgressBar1.Value = 0;
-            txtFileName.Text = "";
-        }
-     
-        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            string fi;
-            fi = @"\\Cassio\asm_apps\Apps\DSCUpdater\DSCUpdaterPublish.htm";
-            System.Diagnostics.Process.Start("IEXPLORE.EXE", fi);
-        }
-
-        private void btnUpdaterEditorClear_Click(object sender, EventArgs e)
-        {
-            txtNewParkDISCOICArea.Text = "";
-            txtNewParkDrywellICArea.Text = "";
-            txtNewParkArea.Text = "";
-
-            txtNewRoofDISCOICArea.Text = "";
-            txtNewRoofDrywellICArea.Text = "";
-            txtNewRoofArea.Text = "";
-
-            newParkDISCOICArea = 0;
-            newParkDrywellICArea = 0;
-            newParkArea = 0;
-
-            newRoofDISCOICArea = 0;
-            newRoofDrywellArea = 0;
-            newRoofArea = 0;
-        }
-
-        private void btnLoadUpdaterHistory_Click(object sender, EventArgs e)
-        {
-            btnLoadUpdaterHistory.Visible = true;
-            tabControlMain.TabPages.Add(tabUpdaterHistory);
-            tabControlMain.TabPages.Remove(tabMain);
-            tabControlMain.SelectedTab = tabUpdaterHistory;
-            this.sESSIONTableAdapter.Fill(this.projectDataSet.SESSION);
-            bindingNavigator1.BindingSource = sESSIONBindingSource;
-        }
-
-        private void btnCloseEditorHistory_Click(object sender, EventArgs e)
-        {
-            tabControlMain.TabPages.Add(tabMain);
-            tabControlMain.TabPages.Remove(tabUpdaterHistory);
-            tabControlMain.SelectedTab = tabMain;
+            Cursor.Current = Cursors.WaitCursor;
+            qcCounter = 0;
         }
 
         private void btnLoadSelectedEditSession_Click(object sender, EventArgs e)
         {
             btnUpdaterHistoryReturn.Visible = true;
-            if (dgvUpdaterHistory.SelectedRows.Count > 1 )
+            if (dgvUpdaterHistory.SelectedRows.Count > 1)
             {
                 MessageBox.Show("Only one Editor History session may be selected at a time.", "DSC Editor History: Selection Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
@@ -1635,7 +1900,7 @@ namespace DSCUpdater
                 bsSQL.DataSource = dtUpdaterEditor;
                 bindingNavigator2.BindingSource = bsSQL;
                 dgvUpdaterEditor.DataSource = bsSQL;
-                              
+
                 //begin tab control
                 tabControlMain.TabPages.Add(tabUpdaterEditor);
                 tabControlMain.TabPages.Remove(tabUpdaterHistory);
@@ -1655,163 +1920,105 @@ namespace DSCUpdater
             }
         }
 
-        private void btnUpdaterEditorCloseCancel_Click(object sender, EventArgs e)
+        private void btnLoadUpdateFile_Click(object sender, EventArgs e)
         {
+            /// <summary>
+            /// Open TEMP.CSV as ODBC database file
+            /// Access data using SQL 'Select' command
+            /// Move data from DATABASE to DataTable and assign to DataGridView object
+            /// Make each column UNSORTABLE to stop user messing with data!!!
+            /// </summary>
+
+            toolStripStatusLabel1.Text = "Loading";
+            tabControlMain.TabPages.Clear();
             tabControlMain.TabPages.Add(tabMain);
-            tabControlMain.TabPages.Remove(tabUpdaterEditor);
+            tabControlMain.TabPages.Add(tabLoadedUpdateReview);
             tabControlMain.SelectedTab = tabMain;
+
+            //Open file dialog handling
+            ofdMain.DefaultExt = "*.csv";
+            ofdMain.FileName = "*.csv";
+            ofdMain.Filter = "csv files|*.csv|txt files|*.txt";
+            DialogResult result = ofdMain.ShowDialog();
+
+            //Check to make sure the OFD dialog result is "OK"
+            if (result == DialogResult.OK)
+            {
+                txtFileName.Text = ofdMain.FileName;
+
+                // Clear datagrid contents
+                dgvData.SelectAll();
+                dgvData.ClearSelection();
+                // Set file name
+                FileName = txtFileName.Text;
+                CSVDataSource = FileName;
+                if (File.Exists(TempFileName))
+                {
+                    File.Delete(TempFileName);
+                }
+
+                StreamReader sr = new StreamReader(FileName);
+                StreamWriter sw = new StreamWriter(TempFileName);
+
+                // Read & dump header
+                string junk = sr.ReadLine();
+
+                // Read file into string       
+                string FileData = sr.ReadToEnd();
+
+                FileSize = FileData.Length.ToString("N");
+                FileSize = FileSize.Substring(0, FileSize.IndexOf("."));
+                //toolStripStatusLabel1.Text = "Loading" + FileSize + "  bytes. Please wait a moment.";
+
+                //progress bar starts working here
+                if (toolStripProgressBar1.Value == toolStripProgressBar1.Maximum)
+                {
+                    toolStripProgressBar1.Value = toolStripProgressBar1.Minimum;
+                }
+                for (int i = toolStripProgressBar1.Minimum; i <= toolStripProgressBar1.Maximum; i++)
+                {
+                    toolStripProgressBar1.PerformStep();
+                }
+
+                sw.WriteLine("RNO,DSCID,New Roof Area,New Roof DISCO IC Area,New Roof Drywell IC Area, New Park Area, New Park DISCO IC Area, New Park Drywell IC Area");
+                //sw.WriteLine(LineText);
+                sw.Write(FileData);
+                sr.Close();
+                sw.Close();
+                ReadData();
+                dgvData.Update();
+                dgvData.Columns[0].HeaderText = "RNO";
+                dgvData.Columns[1].HeaderText = "DSCID";
+                dgvData.Columns[2].HeaderText = "New Roof Area";
+                dgvData.Columns[3].HeaderText = "New Roof DISCO IC Area";
+                dgvData.Columns[4].HeaderText = "New Roof Drywell IC Area";
+                dgvData.Columns[5].HeaderText = "New Park Area";
+                dgvData.Columns[6].HeaderText = "New Park DISCO IC Area";
+                dgvData.Columns[7].HeaderText = "New Park Drywell IC Area";
+
+                tabControlMain.SelectedTab = tabLoadedUpdateReview;
+                tabControlMain.TabPages.Remove(tabMain);
+            }
+            else
+            {
+                tabControlMain.TabPages.Remove(tabLoadedUpdateReview);
+                tabControlMain.SelectedTab = tabMain;
+            }
+            toolStripProgressBar1.Value = 0;
+            toolStripStatusLabel1.Text = "Ready";
         }
 
         private void btnDownloadUpdateTemplate_Click(object sender, EventArgs e)
         {
-            string templatePath = "C:\\Temp\\UserUpdate.csv";           
+            string templatePath = Path.GetDirectoryName(Application.ExecutablePath)+"\\Template\\UserUpdate.csv";
             SaveFileDialog sfdMain = new SaveFileDialog();
             sfdMain.Title = "Where do you want to save the UserUpdate file?";
-            sfdMain.InitialDirectory=@"C:\";
+            sfdMain.InitialDirectory = @"C:\";
             sfdMain.FileName = "UserUpdate.csv";
-            if (sfdMain.ShowDialog()==DialogResult.OK)
-            {      
-                File.Copy(templatePath,sfdMain.FileName,true);
+            if (sfdMain.ShowDialog() == DialogResult.OK)
+            {
+                File.Copy(templatePath, sfdMain.FileName, true);
             }           
-        }
-
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }       
-
-        private void btnDSCQC_Click(object sender, EventArgs e)
-        {
-            HideTabPage(tabMissingDSC);
-            ShowTabPage(tabLoadedUpdateReview);
-            selectedIndex = tabControlMain.TabCount - 1;
-            tabControlMain.SelectedIndex = selectedIndex;
-        }
-
-        private void btnParkICQC_Click(object sender, EventArgs e)
-        {
-            HideTabPage(tabIncorrectParkICArea);
-            ShowTabPage(tabLoadedUpdateReview);
-            selectedIndex = tabControlMain.TabCount - 1;
-            tabControlMain.SelectedIndex = selectedIndex;
-        }
-
-        private void btnRoofICQC_Click(object sender, EventArgs e)
-        {
-            HideTabPage(tabIncorrectRoofICArea);
-            ShowTabPage(tabLoadedUpdateReview);
-            selectedIndex = tabControlMain.TabCount - 1;
-            tabControlMain.SelectedIndex = selectedIndex;
-        }
-
-        private void btnImpAQC_Click(object sender, EventArgs e)
-        {
-            impAQCCounter = impAQCCounter + 1;
-            HideTabPage(tabPendingImpAChanges);
-            ShowTabPage(tabLoadedUpdateReview);
-            selectedIndex = tabControlMain.TabCount - 1;
-            tabControlMain.SelectedIndex = selectedIndex;
-        }
-      
-        private void btnSubmitUpdaterEditorChanges_Click(object sender, EventArgs e)
-        {
-            SqlConnection sqlCon = new SqlConnection(sqlConStr);
-            sqlCon.Open();
-            SqlCommand sqlCmd = new SqlCommand();
-            sqlCmd.CommandText = "DELETE FROM DSCEDITAPPEND";
-            sqlCmd.Connection = sqlCon;
-            sqlCmd.ExecuteNonQuery();
-
-            SqlBulkCopy bulkcopy = new SqlBulkCopy(sqlCon);
-            bulkcopy.DestinationTableName = "DSCEDITAPPEND";
-            bulkcopy.WriteToServer(dtUpdaterEditor);
-            bulkcopy.Close();
-            sqlCon.Close();
-
-            AddEditDateCommandParameter(sqlCmd, sqlCon);
-            AddEditedByCommandParameter(sqlCmd, sqlCon);
-            AddEditIDCommandParameter(sqlCmd);
-            
-            sqlCmd.CommandText = "UPDATE DSCEDITAPPEND SET edit_id=@editID,edit_date=@editDate, " +
-                                 "edited_by=@editedBy";
-            sqlCmd.ExecuteNonQuery();
-            sqlCmd.CommandText = "UPDATE [DSCEDITAPPEND] SET old_roof_area_sqft = DSCEDIT.new_roof_area_sqft, " +
-                                 "old_roof_disco_ic_area_sqft = DSCEDIT.new_roof_disco_ic_area_sqft, " +
-                                 "old_roof_drywell_ic_area_sqft = DSCEDIT.new_roof_drywell_ic_area_sqft, " +
-                                 "old_park_area_sqft = DSCEDIT.new_park_area_sqft, " +
-                                 "old_park_disco_ic_area_sqft = DSCEDIT.new_park_disco_ic_area_sqft, " +
-                                 "old_park_drywell_ic_area_sqft = DSCEDIT.new_park_drywell_ic_area_sqft " +
-                                 "FROM [DSCEDITAPPEND] INNER JOIN [DSCEDIT] ON " +
-                                 "[DSCEDITAPPEND].[dsc_edit_id] = [DSCEDIT].[dsc_edit_id]" +
-                                 "WHERE ((DSCEDIT.new_roof_area_sqft<>DSCEDITAPPEND.new_roof_area_sqft)) " +
-                                 "OR ((DSCEDIT.new_roof_disco_ic_area_sqft<>DSCEDITAPPEND.new_roof_disco_ic_area_sqft)) " +
-                                 "OR ((DSCEDIT.new_roof_drywell_ic_area_sqft<>DSCEDITAPPEND.new_roof_drywell_ic_area_sqft)) " +
-                                 "OR ((DSCEDIT.new_park_area_sqft<>DSCEDITAPPEND.new_park_area_sqft)) " +
-                                 "OR ((DSCEDIT.new_park_disco_ic_area_sqft<>DSCEDITAPPEND.new_park_disco_ic_area_sqft)) " +
-                                 "OR ((DSCEDIT.new_park_drywell_ic_area_sqft<>DSCEDITAPPEND.new_park_drywell_ic_area_sqft))";
-            sqlCmd.ExecuteNonQuery();
-
-            BatchNewICRecords(sqlCmd);
-            BatchUpdateMasterICTables(sqlCmd);
-            BatchUpdateDSCAreas(sqlCmd);
-            BatchSESSION(sqlCmd);
-
-            sqlCmd.CommandText = "UPDATE DSCEDITAPPEND SET dsc_edit_id=0";
-            sqlCmd.ExecuteNonQuery();
-            sqlCmd.CommandText = "INSERT INTO DSCEDIT (edit_id, " +
-                                 "edit_date, edited_by, rno, dsc_id, old_roof_area_sqft, " +
-                                 "new_roof_area_sqft, old_roof_disco_ic_area_sqft, " +
-                                 "new_roof_disco_ic_area_sqft, old_roof_drywell_ic_area_sqft, " +
-                                 "new_roof_drywell_ic_area_sqft, old_park_area_sqft, " +
-                                 "new_park_area_sqft, old_park_disco_ic_area_sqft, " +
-                                 "new_park_disco_ic_area_sqft, old_park_drywell_ic_area_sqft, " +
-                                 "new_park_drywell_ic_area_sqft) " + 
-                                 "SELECT " +
-                                 "DSCEDITAPPEND.edit_id AS edit_id, " +
-                                 "DSCEDITAPPEND.edit_date AS edit_date, " +
-                                 "DSCEDITAPPEND.edited_by AS edited_by, " +
-                                 "DSCEDITAPPEND.RNO AS rno, " +
-                                 "DSCEDITAPPEND.dsc_id AS dsc_id, " +
-                                 "DSCEDITAPPEND.old_roof_area_sqft AS old_roof_area_sqft, " +
-                                 "DSCEDITAPPEND.new_roof_area_sqft AS new_roof_area_sqft, " +
-                                 "DSCEDITAPPEND.old_roof_disco_ic_area_sqft AS old_roof_disco_ic_area_sqft, " +
-                                 "DSCEDITAPPEND.new_roof_disco_ic_area_sqft AS new_roof_disco_ic_area_sqft, " +
-                                 "DSCEDITAPPEND.old_roof_drywell_ic_area_sqft AS old_roof_drywell_ic_area_sqft, " +
-                                 "DSCEDITAPPEND.new_roof_drywell_ic_area_sqft AS new_roof_drywell_ic_area_sqft, " +
-                                 "DSCEDITAPPEND.old_park_area_sqft AS old_park_area_sqft, " +
-                                 "DSCEDITAPPEND.new_park_area_sqft AS new_park_area_sqft, " +
-                                 "DSCEDITAPPEND.old_park_disco_ic_area_sqft AS old_park_disco_ic_area_sqft, " +
-                                 "DSCEDITAPPEND.new_park_disco_ic_area_sqft AS new_park_disco_ic_area_sqft, " +
-                                 "DSCEDITAPPEND.old_park_drywell_ic_area_sqft AS old_park_drywell_ic_area_sqft, " +
-                                 "DSCEDITAPPEND.new_park_drywell_ic_area_sqft AS new_park_drywell_ic_area_sqft " +
-                                 "FROM DSCEDITAPPEND";
-            sqlCmd.ExecuteNonQuery();
-            sqlCmd.CommandText = "UPDATE DSCEDIT " +
-                                 "SET updater_editor_value_changed = 'False'";
-            sqlCmd.ExecuteNonQuery();
-            sqlCmd.CommandText = "DELETE FROM DSCEDITAPPEND";
-            sqlCmd.ExecuteNonQuery();
-            sqlCmd.CommandText = "DELETE FROM IMPUPDATE";
-            sqlCmd.ExecuteNonQuery();
-            sqlCmd.CommandText = "INSERT INTO IMPUPDATE SELECT dsc_edit_id, dsc_id, new_roof_area_sqft, " +
-                                 "old_roof_area_sqft, new_park_area_sqft, old_park_area_sqft FROM [DSCEDIT] " +
-                                 "WHERE ((([DSCEDIT].[new_roof_area_sqft])<>[DSCEDIT].[old_roof_area_sqft]) " +
-                                 "AND (([DSCEDIT].[edit_id])=@editID)) " +
-                                 "OR ((([DSCEDIT].[new_park_area_sqft])<>[DSCEDIT].[old_park_area_sqft]) " +
-                                 "AND (([DSCEDIT].[edit_id])=@editID))";
-            sqlCmd.ExecuteNonQuery();
-
-            ExportIMPUPDATEToCSV();
-
-            sqlCmd.CommandText = "DELETE FROM IMPUPDATE";
-            sqlCmd.ExecuteNonQuery();
-
-            sqlCon.Close();
-            btnUpdaterEditorCloseCancel.Text = "Return";
-            btnUpdaterHistoryReturn.Visible=false;
-            MessageBox.Show("Changes submitted.  Internal email will now be sent from Outlook", "DSCEditor: Changes Submitted",MessageBoxButtons.OK,MessageBoxIcon.Information);
-            btnSubmitUpdaterEditorChanges.Enabled = false;
-            SendImpAEmail();       
         }
 
         private void btnUpdaterEditorEnter_Click(object sender, EventArgs e)
@@ -1995,6 +2202,126 @@ namespace DSCUpdater
             txtNewRoofDrywellICArea.Text = "";
         }
 
+        private void btnUpdaterEditorClear_Click(object sender, EventArgs e)
+        {
+            txtNewParkDISCOICArea.Text = "";
+            txtNewParkDrywellICArea.Text = "";
+            txtNewParkArea.Text = "";
+
+            txtNewRoofDISCOICArea.Text = "";
+            txtNewRoofDrywellICArea.Text = "";
+            txtNewRoofArea.Text = "";
+
+            newParkDISCOICArea = 0;
+            newParkDrywellICArea = 0;
+            newParkArea = 0;
+
+            newRoofDISCOICArea = 0;
+            newRoofDrywellArea = 0;
+            newRoofArea = 0;
+        }
+
+        private void btnSubmitUpdaterEditorChanges_Click(object sender, EventArgs e)
+        {
+            SqlConnection sqlCon = new SqlConnection(sqlConStr);
+            sqlCon.Open();
+            SqlCommand sqlCmd = new SqlCommand();
+            sqlCmd.CommandText = "DELETE FROM DSCEDITAPPEND";
+            sqlCmd.Connection = sqlCon;
+            sqlCmd.ExecuteNonQuery();
+
+            SqlBulkCopy bulkcopy = new SqlBulkCopy(sqlCon);
+            bulkcopy.DestinationTableName = "DSCEDITAPPEND";
+            bulkcopy.WriteToServer(dtUpdaterEditor);
+            bulkcopy.Close();
+            sqlCon.Close();
+
+            AddEditDateCommandParameter(sqlCmd, sqlCon);
+            AddEditedByCommandParameter(sqlCmd, sqlCon);
+            AddEditIDCommandParameter(sqlCmd);
+
+            sqlCmd.CommandText = "UPDATE DSCEDITAPPEND SET edit_id=@editID,edit_date=@editDate, " +
+                                 "edited_by=@editedBy";
+            sqlCmd.ExecuteNonQuery();
+            sqlCmd.CommandText = "UPDATE [DSCEDITAPPEND] SET old_roof_area_sqft = DSCEDIT.new_roof_area_sqft, " +
+                                 "old_roof_disco_ic_area_sqft = DSCEDIT.new_roof_disco_ic_area_sqft, " +
+                                 "old_roof_drywell_ic_area_sqft = DSCEDIT.new_roof_drywell_ic_area_sqft, " +
+                                 "old_park_area_sqft = DSCEDIT.new_park_area_sqft, " +
+                                 "old_park_disco_ic_area_sqft = DSCEDIT.new_park_disco_ic_area_sqft, " +
+                                 "old_park_drywell_ic_area_sqft = DSCEDIT.new_park_drywell_ic_area_sqft " +
+                                 "FROM [DSCEDITAPPEND] INNER JOIN [DSCEDIT] ON " +
+                                 "[DSCEDITAPPEND].[dsc_edit_id] = [DSCEDIT].[dsc_edit_id]" +
+                                 "WHERE ((DSCEDIT.new_roof_area_sqft<>DSCEDITAPPEND.new_roof_area_sqft)) " +
+                                 "OR ((DSCEDIT.new_roof_disco_ic_area_sqft<>DSCEDITAPPEND.new_roof_disco_ic_area_sqft)) " +
+                                 "OR ((DSCEDIT.new_roof_drywell_ic_area_sqft<>DSCEDITAPPEND.new_roof_drywell_ic_area_sqft)) " +
+                                 "OR ((DSCEDIT.new_park_area_sqft<>DSCEDITAPPEND.new_park_area_sqft)) " +
+                                 "OR ((DSCEDIT.new_park_disco_ic_area_sqft<>DSCEDITAPPEND.new_park_disco_ic_area_sqft)) " +
+                                 "OR ((DSCEDIT.new_park_drywell_ic_area_sqft<>DSCEDITAPPEND.new_park_drywell_ic_area_sqft))";
+            sqlCmd.ExecuteNonQuery();
+
+            BatchNewICRecords(sqlCmd);
+            BatchUpdateMasterICTables(sqlCmd);
+            BatchUpdateDSCAreas(sqlCmd);
+            BatchSESSION(sqlCmd);
+
+            sqlCmd.CommandText = "UPDATE DSCEDITAPPEND SET dsc_edit_id=0";
+            sqlCmd.ExecuteNonQuery();
+            sqlCmd.CommandText = "INSERT INTO DSCEDIT (edit_id, " +
+                                 "edit_date, edited_by, rno, dsc_id, old_roof_area_sqft, " +
+                                 "new_roof_area_sqft, old_roof_disco_ic_area_sqft, " +
+                                 "new_roof_disco_ic_area_sqft, old_roof_drywell_ic_area_sqft, " +
+                                 "new_roof_drywell_ic_area_sqft, old_park_area_sqft, " +
+                                 "new_park_area_sqft, old_park_disco_ic_area_sqft, " +
+                                 "new_park_disco_ic_area_sqft, old_park_drywell_ic_area_sqft, " +
+                                 "new_park_drywell_ic_area_sqft) " +
+                                 "SELECT " +
+                                 "DSCEDITAPPEND.edit_id AS edit_id, " +
+                                 "DSCEDITAPPEND.edit_date AS edit_date, " +
+                                 "DSCEDITAPPEND.edited_by AS edited_by, " +
+                                 "DSCEDITAPPEND.RNO AS rno, " +
+                                 "DSCEDITAPPEND.dsc_id AS dsc_id, " +
+                                 "DSCEDITAPPEND.old_roof_area_sqft AS old_roof_area_sqft, " +
+                                 "DSCEDITAPPEND.new_roof_area_sqft AS new_roof_area_sqft, " +
+                                 "DSCEDITAPPEND.old_roof_disco_ic_area_sqft AS old_roof_disco_ic_area_sqft, " +
+                                 "DSCEDITAPPEND.new_roof_disco_ic_area_sqft AS new_roof_disco_ic_area_sqft, " +
+                                 "DSCEDITAPPEND.old_roof_drywell_ic_area_sqft AS old_roof_drywell_ic_area_sqft, " +
+                                 "DSCEDITAPPEND.new_roof_drywell_ic_area_sqft AS new_roof_drywell_ic_area_sqft, " +
+                                 "DSCEDITAPPEND.old_park_area_sqft AS old_park_area_sqft, " +
+                                 "DSCEDITAPPEND.new_park_area_sqft AS new_park_area_sqft, " +
+                                 "DSCEDITAPPEND.old_park_disco_ic_area_sqft AS old_park_disco_ic_area_sqft, " +
+                                 "DSCEDITAPPEND.new_park_disco_ic_area_sqft AS new_park_disco_ic_area_sqft, " +
+                                 "DSCEDITAPPEND.old_park_drywell_ic_area_sqft AS old_park_drywell_ic_area_sqft, " +
+                                 "DSCEDITAPPEND.new_park_drywell_ic_area_sqft AS new_park_drywell_ic_area_sqft " +
+                                 "FROM DSCEDITAPPEND";
+            sqlCmd.ExecuteNonQuery();
+            sqlCmd.CommandText = "UPDATE DSCEDIT " +
+                                 "SET updater_editor_value_changed = 'False'";
+            sqlCmd.ExecuteNonQuery();
+            sqlCmd.CommandText = "DELETE FROM DSCEDITAPPEND";
+            sqlCmd.ExecuteNonQuery();
+            sqlCmd.CommandText = "DELETE FROM IMPUPDATE";
+            sqlCmd.ExecuteNonQuery();
+            sqlCmd.CommandText = "INSERT INTO IMPUPDATE SELECT dsc_edit_id, dsc_id, new_roof_area_sqft, " +
+                                 "old_roof_area_sqft, new_park_area_sqft, old_park_area_sqft FROM [DSCEDIT] " +
+                                 "WHERE ((([DSCEDIT].[new_roof_area_sqft])<>[DSCEDIT].[old_roof_area_sqft]) " +
+                                 "AND (([DSCEDIT].[edit_id])=@editID)) " +
+                                 "OR ((([DSCEDIT].[new_park_area_sqft])<>[DSCEDIT].[old_park_area_sqft]) " +
+                                 "AND (([DSCEDIT].[edit_id])=@editID))";
+            sqlCmd.ExecuteNonQuery();
+
+            ExportIMPUPDATEToCSV();
+
+            sqlCmd.CommandText = "DELETE FROM IMPUPDATE";
+            sqlCmd.ExecuteNonQuery();
+
+            sqlCon.Close();
+            btnUpdaterEditorCloseCancel.Text = "Return";
+            btnUpdaterHistoryReturn.Visible = false;
+            MessageBox.Show("Changes submitted.  Internal email will now be sent from Outlook", "DSCEditor: Changes Submitted", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            btnSubmitUpdaterEditorChanges.Enabled = false;
+            SendImpAEmail();
+        }
+
         private void btnRevertSession_Click(object sender, EventArgs e)
         {
             int dgvRowCount = 0;
@@ -2011,7 +2338,7 @@ namespace DSCUpdater
                 SqlCommand sqlCmd = new SqlCommand();
 
                 AddEditorEditIDCommandParameter(sqlCmd);
-          
+
                 sqlCmd.CommandText = "DELETE FROM DSCEDITAPPEND";
                 sqlCmd.Connection = sqlCon;
                 sqlCmd.ExecuteNonQuery();
@@ -2050,7 +2377,7 @@ namespace DSCUpdater
                 {
                     MessageBox.Show("There is at least one record that has been edited in a subsequent edit session.  Try reverting from a later edit session.", "DSCUpdater: Updater Editor", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                 }
-                
+
                 else
                 {
                     BatchRevertICEdits(sqlCmd);
@@ -2084,7 +2411,7 @@ namespace DSCUpdater
                                          "DSCEDITAPPEND.new_roof_disco_ic_area_sqft, " +
                                          "DSCEDITAPPEND.old_roof_drywell_ic_area_sqft, " +
                                          "DSCEDITAPPEND.new_roof_drywell_ic_area_sqft, " +
-                                         "DSCEDITAPPEND.old_park_area_sqft, " + 
+                                         "DSCEDITAPPEND.old_park_area_sqft, " +
                                          "DSCEDITAPPEND.new_park_area_sqft, " +
                                          "DSCEDITAPPEND.old_park_disco_ic_area_sqft, " +
                                          "DSCEDITAPPEND.new_park_disco_ic_area_sqft, " +
@@ -2095,7 +2422,7 @@ namespace DSCUpdater
 
                     sqlCmd.CommandText = "DELETE FROM IMPUPDATE";
                     sqlCmd.ExecuteNonQuery();
-       
+
                     sqlCmd.CommandText = "INSERT INTO IMPUPDATE (dsc_edit_id, dsc_id, old_roof_area_sqft, " +
                                          "new_roof_area_sqft, old_park_area_sqft, new_park_area_sqft) " +
                                          "SELECT DSCEDITAPPEND.dsc_edit_id,  DSCEDITAPPEND.dsc_id, DSCEDITAPPEND.new_roof_area_sqft, " +
@@ -2115,10 +2442,10 @@ namespace DSCUpdater
                                          "SET [mst_DSC_ac].[RfAreaFtEX] = [DSCEDITAPPEND].[old_roof_area_sqft], " +
                                          "[mst_DSC_ac].[PkAreaFtEX] = [DSCEDITAPPEND].[old_park_area_sqft] " +
                                          "FROM [mst_DSC_ac] " +
-                                         "INNER JOIN [DSCEDITAPPEND] " + 
-                                         "ON [mst_DSC_ac].[DSCID] = [DSCEDITAPPEND].[dsc_id]";             
+                                         "INNER JOIN [DSCEDITAPPEND] " +
+                                         "ON [mst_DSC_ac].[DSCID] = [DSCEDITAPPEND].[dsc_id]";
                     sqlCmd.ExecuteNonQuery();
-                    
+
                     //update mst_DSC_ac records to previous IC values (original values from previous edit session)
                     sqlCmd.CommandText = "UPDATE [mst_DSC_ac] " +
                                          "SET [mst_DSC_ac].[ICFtRoofEX] = " +
@@ -2132,7 +2459,7 @@ namespace DSCUpdater
                                          "[DSCEDITAPPEND].[old_park_drywell_ic_area_sqft]), " +
                                          "[mst_DSC_ac].[EICFtParkEX] = " +
                                          "(([DSCEDITAPPEND].[old_park_disco_ic_area_sqft]*0.7) + " +
-                                         "[DSCEDITAPPEND].[old_roof_drywell_ic_area_sqft]) " +                
+                                         "[DSCEDITAPPEND].[old_roof_drywell_ic_area_sqft]) " +
                                          "FROM [mst_DSC_ac] INNER JOIN [DSCEDITAPPEND] " +
                                          "ON [mst_DSC_ac].[DSCID] = [DSCEDITAPPEND].[dsc_id] " +
                                          "WHERE (([new_roof_disco_ic_area_sqft]<>[old_roof_disco_ic_area_sqft]) " +
@@ -2146,7 +2473,7 @@ namespace DSCUpdater
                     sqlCmd.ExecuteNonQuery();
                     sqlCmd.CommandText = "DELETE FROM DSCEDITAPPEND";
                     sqlCmd.ExecuteNonQuery();
-                    
+
                     MessageBox.Show("Edit session reverted.", "DSCUpdater: Updater Editor", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     btnRevertSession.Enabled = false;
                     btnUpdaterEditorEnter.Enabled = false;
@@ -2155,211 +2482,104 @@ namespace DSCUpdater
                     btnUpdaterEditorCloseCancel.Text = "Close Editor";
                     dtUpdaterEditor.Clear();
                     dgvUpdaterEditor.Refresh();
-                    SendImpAEmail();    
-                }           
+                    SendImpAEmail();
+                }
             }
         }
 
-        private void btnUpdaterHistoryReturn_Click(object sender, EventArgs e)
+        private void btnUpdaterEditorCloseCancel_Click(object sender, EventArgs e)
         {
-            if (txtNewParkArea.Text != "" || txtNewRoofArea.Text != "" || txtNewRoofDrywellICArea.Text != "" || txtNewRoofDISCOICArea.Text != "")
-            {
-                if (MessageBox.Show("Abandon editing without saving?", "DSC Updater", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
-                {
-                    tabControlMain.TabPages.Add(tabUpdaterHistory);
-                    tabControlMain.TabPages.Remove(tabUpdaterEditor);
-                    tabControlMain.SelectedTab = tabUpdaterHistory;
-                }
-            }
-            else
-            {
-                tabControlMain.TabPages.Add(tabUpdaterHistory);
-                tabControlMain.TabPages.Remove(tabUpdaterEditor);
-                tabControlMain.SelectedTab = tabUpdaterHistory;
-            }
-            this.sESSIONTableAdapter.Fill(this.projectDataSet.SESSION);
-            bindingNavigator1.BindingSource = sESSIONBindingSource;
-        }
-      
-        private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            if (File.Exists(TempFileName))
-            {
-                File.Delete(TempFileName);
-            }
+            tabControlMain.Visible = false;
         }
 
-        private void dgvUpdaterEditor_SelectionChanged(object sender, EventArgs e)
+        private void btnCancelDownload_Click(object sender, EventArgs e)
         {
-            txtNewRoofArea.Text = "";
-            txtNewRoofDISCOICArea.Text = "";
-            txtNewRoofDrywellICArea.Text = "";
-            txtNewParkArea.Text = "";
-            txtNewParkDISCOICArea.Text = "";
-            txtNewParkDrywellICArea.Text = "";
-
-            string rNoLblText = "";
-            string currentParkAreaLblText = "";
-            string currentParkDiscoICAreaLblText = "";
-            string currentParkDrywellICAreaLblText = "";
-            string currentRoofAreaLblText = "";
-            string currentRoofDiscoICAreaLblText = "";
-            string currentRoofDrywellICAreaLblText = "";
-
-            //MessageBox.Show(dgvUpdaterEditor.SelectedRows.Count.ToString());
-            if (dgvUpdaterEditor.SelectedRows.Count == 0)
-            {
-                return;
-            }
-                        
-            if (dgvUpdaterEditor.SelectedRows.Count == 1)
-            {
-                txtNewParkArea.Enabled = true;
-                txtNewRoofArea.Enabled = true;
-                txtNewParkDISCOICArea.Enabled = true;
-                txtNewParkDrywellICArea.Enabled = true;
-                txtNewRoofDISCOICArea.Enabled = true;
-                txtNewRoofDrywellICArea.Enabled = true;
-                
-                if (dgvUpdaterEditor.SelectedRows[0].Cells[4].Value.ToString() != "" && dgvUpdaterEditor.SelectedRows[0].Cells[18].Value.ToString() == "False")
-                {
-                    //MessageBox.Show("If1");
-                    rNoLblText = "RNO: Not Available";
-                    currentParkAreaLblText = "Current park area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[13].Value.ToString();
-                    currentParkDiscoICAreaLblText = "Current park DISCO IC area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[15].Value.ToString(); ;
-                    currentParkDrywellICAreaLblText = "Current park drywell IC area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[17].Value.ToString();
-                    currentRoofAreaLblText = "Current roof area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[7].Value.ToString();
-                    currentRoofDiscoICAreaLblText = "Current roof DISCO IC area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[9].Value.ToString();
-                    currentRoofDrywellICAreaLblText = "Current roof drywell IC area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[11].Value.ToString();
-                }
-
-                if (dgvUpdaterEditor.SelectedRows[0].Cells[4].Value.ToString() != "" && dgvUpdaterEditor.SelectedRows[0].Cells[18].Value.ToString() == "True")
-                {
-                    //MessageBox.Show("If2");
-                    rNoLblText = "RNO: " + dgvUpdaterEditor.SelectedRows[0].Cells[4].Value.ToString();
-                    currentParkAreaLblText = "Updated park area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[13].Value.ToString();
-                    currentParkDiscoICAreaLblText = "Updated park DISCO IC area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[15].Value.ToString(); ;
-                    currentParkDrywellICAreaLblText = "Updated park drywell IC area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[17].Value.ToString();
-                    currentRoofAreaLblText = "Updated roof area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[7].Value.ToString();
-                    currentRoofDiscoICAreaLblText = "Updated roof DISCO IC area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[9].Value.ToString();
-                    currentRoofDrywellICAreaLblText = "Updated roof drywell IC area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[11].Value.ToString();
-                }
-
-                if (dgvUpdaterEditor.SelectedRows[0].Cells[4].Value.ToString() == "" && dgvUpdaterEditor.SelectedRows[0].Cells[18].Value.ToString() == "False")
-                {
-                    //MessageBox.Show("If3");
-                    rNoLblText = "RNO: Not Available";
-                    currentParkAreaLblText = "Current park area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[13].Value.ToString();
-                    currentParkDiscoICAreaLblText = "Current park DISCO IC area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[15].Value.ToString(); ;
-                    currentParkDrywellICAreaLblText = "Current park drywell IC area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[17].Value.ToString();
-                    currentRoofAreaLblText = "Current roof area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[7].Value.ToString();
-                    currentRoofDiscoICAreaLblText = "Current roof DISCO IC area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[9].Value.ToString();
-                    currentRoofDrywellICAreaLblText = "Current roof drywell IC area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[11].Value.ToString();
-                }
-
-                if (dgvUpdaterEditor.SelectedRows[0].Cells[4].Value.ToString() == "" && dgvUpdaterEditor.SelectedRows[0].Cells[18].Value.ToString() == "True")
-                {
-                    //MessageBox.Show("If4");
-                    rNoLblText = "RNO: Not Available";
-                    currentParkAreaLblText = "Updated park area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[13].Value.ToString();
-                    currentParkDiscoICAreaLblText = "Updated park DISCO IC area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[15].Value.ToString(); ;
-                    currentParkDrywellICAreaLblText = "Updated park drywell IC area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[17].Value.ToString();
-                    currentRoofAreaLblText = "Updated roof area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[7].Value.ToString();
-                    currentRoofDiscoICAreaLblText = "Updated roof DISCO IC area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[9].Value.ToString();
-                    currentRoofDrywellICAreaLblText = "Updated roof drywell IC area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[11].Value.ToString();
-                }
-                lblSelectedEditorRNO.Text = rNoLblText;
-                lblSelectedEditorPkArea.Text = currentParkAreaLblText;
-                lblSelectedEditorPkDISCOICArea.Text = currentParkDiscoICAreaLblText;
-                lblSelectedEditorPkDrywellICArea.Text = currentParkDrywellICAreaLblText;
-                lblSelectedEditorRfArea.Text = currentRoofAreaLblText;
-                lblSelectedEditorRfDISCOICArea.Text = currentRoofDiscoICAreaLblText;
-                lblSelectedEditorRfDrywellICArea.Text = currentRoofDrywellICAreaLblText;
-            }
+            tabControlMain.TabPages.Remove(tabMain);
+            tabControlMain.TabPages.Remove(tabDBConnOptions);
+            tabControlMain.TabPages.Remove(tabDownloadTemplate);
+            tabControlMain.TabPages.Remove(tabIncorrectParkICArea);
+            tabControlMain.TabPages.Remove(tabIncorrectRoofICArea);
+            tabControlMain.TabPages.Remove(tabLoadedUpdateReview);
+            tabControlMain.TabPages.Remove(tabMissingDSC);
+            tabControlMain.TabPages.Remove(tabUpdaterEditor);
+            tabControlMain.TabPages.Remove(tabUpdaterHistory);
+            tabControlMain.Visible = false;
         }
 
-        private void changeDatabaseConnectionsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void btnCancelUpdate_Click(object sender, EventArgs e)
         {
-            TabPage currentTabPage = tabControlMain.SelectedTab;
-            HideTabPage(currentTabPage);
-            ShowTabPage(tabDBConnOptions);
-         }
-
-        private void btnChangeDBConnOption_Click(object sender, EventArgs e)
-        {
-            //takes user input from text fields to set new connection property
-            //where the data will be accessed and written
-            string newServerCon = txtNewServerCon.Text;
-            string newDatabaseCon = txtNewDatabaseCon.Text;
-            string newConStr = "Data Source=" + newServerCon + ";Initial Catalog=" + newDatabaseCon + ";Integrated Security=True";
-            SqlConnection newSQLCon = new SqlConnection();
-            newSQLCon.ConnectionString = newConStr;
-            if (txtNewDatabaseCon != null || txtNewServerCon != null)
-            {
-                try
-                {
-                    newSQLCon.Open();
-                    MessageBox.Show("Connected to server = " + newServerCon + ", database = " + newDatabaseCon);
-                    
-                    #region ChangeXMLAttributeContent
-
-                    //The Path to the xml file
-                    string xmlConfigFile = "DSCUpdaterConfig.xml";
-
-                    //Create FileStream fs
-                    FileStream fs = new FileStream(xmlConfigFile, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
-
-                    //Create new XmlDocument
-                    System.Xml.XmlDocument xmlDoc = new System.Xml.XmlDocument();
-
-                    //Load the contents of the filestream into the XmlDocument (xmldoc)
-                    xmlDoc.Load(fs);
-
-                    //close the fs filestream
-                    fs.Close();
-
-                    //Change the contents of the attribute                     
-                    xmlDoc.DocumentElement.ChildNodes.Item(0).InnerText = newConStr;
-
-                    // Create the filestream for saving
-                    FileStream WRITER = new FileStream(xmlConfigFile, FileMode.Truncate, FileAccess.Write, FileShare.ReadWrite);
-
-                    // Save the xmldocument
-                    xmlDoc.Save(WRITER);
-
-                    //Close the writer filestream
-                    WRITER.Close();
-                    
-                    #endregion
-                }
-                catch (Exception ex)
-                {
-                    if (newSQLCon != null)
-                    {
-                        newSQLCon.Dispose();
-                    }
-                    string errorMessage = "A error occured while trying to connect to the server." + ex.Message;
-                    errorMessage += Environment.NewLine;
-                    errorMessage += Environment.NewLine;
-                    errorMessage += ex.Message;
-                    MessageBox.Show(this, errorMessage, "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error);              
-                    return;
-                }
-                finally
-                {
-                    newSQLCon.Close();
-                }
-            }
-            else
-            {
-                 MessageBox.Show("Server or database not specified. Please specify a valid server and database.", "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            tabControlMain.TabPages.Remove(tabMain);
+            tabControlMain.TabPages.Remove(tabDBConnOptions);
+            tabControlMain.TabPages.Remove(tabDownloadTemplate);
+            tabControlMain.TabPages.Remove(tabIncorrectParkICArea);
+            tabControlMain.TabPages.Remove(tabIncorrectRoofICArea);
+            tabControlMain.TabPages.Remove(tabLoadedUpdateReview);
+            tabControlMain.TabPages.Remove(tabMissingDSC);
+            tabControlMain.TabPages.Remove(tabUpdaterEditor);
+            tabControlMain.TabPages.Remove(tabUpdaterHistory);
+            tabControlMain.Visible = false;
         }
 
-        private void btnCloseOptions_Click(object sender, EventArgs e)
+        private void downloadUpdateTemplateToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            HideTabPage(tabDBConnOptions);
-            ShowTabPage(tabMain);
+            tabControlMain.TabPages.Remove(tabMain);
+            tabControlMain.TabPages.Remove(tabDBConnOptions);
+            tabControlMain.TabPages.Remove(tabDownloadTemplate);
+            tabControlMain.TabPages.Remove(tabIncorrectParkICArea);
+            tabControlMain.TabPages.Remove(tabIncorrectRoofICArea);
+            tabControlMain.TabPages.Remove(tabLoadedUpdateReview);
+            tabControlMain.TabPages.Remove(tabMissingDSC);
+            tabControlMain.TabPages.Remove(tabUpdaterEditor);
+            tabControlMain.TabPages.Remove(tabUpdaterHistory);
+            tabControlMain.TabPages.Add(tabDownloadTemplate);
+            tabControlMain.SelectedTab = tabDownloadTemplate;
+            tabControlMain.Visible = true;
+        }
+
+        private void loadUpdateFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            tabControlMain.TabPages.Remove(tabMain);
+            tabControlMain.TabPages.Remove(tabDBConnOptions);
+            tabControlMain.TabPages.Remove(tabDownloadTemplate);
+            tabControlMain.TabPages.Remove(tabIncorrectParkICArea);
+            tabControlMain.TabPages.Remove(tabIncorrectRoofICArea);
+            tabControlMain.TabPages.Remove(tabLoadedUpdateReview);
+            tabControlMain.TabPages.Remove(tabMissingDSC);
+            tabControlMain.TabPages.Remove(tabUpdaterEditor);
+            tabControlMain.TabPages.Remove(tabUpdaterHistory);
+            tabControlMain.TabPages.Add(tabMain);
+            tabControlMain.SelectedTab = tabMain;
+            tabControlMain.Visible = true;
+        }
+
+        private void loadUpdaterHistoryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            tabControlMain.TabPages.Remove(tabMain);
+            tabControlMain.TabPages.Remove(tabDBConnOptions);
+            tabControlMain.TabPages.Remove(tabDownloadTemplate);
+            tabControlMain.TabPages.Remove(tabIncorrectParkICArea);
+            tabControlMain.TabPages.Remove(tabIncorrectRoofICArea);
+            tabControlMain.TabPages.Remove(tabLoadedUpdateReview);
+            tabControlMain.TabPages.Remove(tabMissingDSC);
+            tabControlMain.TabPages.Remove(tabUpdaterEditor);
+            tabControlMain.TabPages.Remove(tabUpdaterHistory);
+            tabControlMain.TabPages.Add(tabUpdaterHistory);
+            tabControlMain.SelectedTab = tabUpdaterHistory;
+            tabControlMain.Visible = true;
+        }
+
+        private void btnCloseUpdaterHistory_Click(object sender, EventArgs e)
+        {
+            tabControlMain.TabPages.Remove(tabMain);
+            tabControlMain.TabPages.Remove(tabDBConnOptions);
+            tabControlMain.TabPages.Remove(tabDownloadTemplate);
+            tabControlMain.TabPages.Remove(tabIncorrectParkICArea);
+            tabControlMain.TabPages.Remove(tabIncorrectRoofICArea);
+            tabControlMain.TabPages.Remove(tabLoadedUpdateReview);
+            tabControlMain.TabPages.Remove(tabMissingDSC);
+            tabControlMain.TabPages.Remove(tabUpdaterEditor);
+            tabControlMain.TabPages.Remove(tabUpdaterHistory);
+            tabControlMain.Visible = false;
         }
     }
 }

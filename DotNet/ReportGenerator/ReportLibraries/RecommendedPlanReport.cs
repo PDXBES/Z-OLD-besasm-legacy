@@ -86,7 +86,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
                 string recommendedPlanPath;
                 recommendedPlanPath = AuxilaryData["RecommendedPlanPath"].Value;
                 recommendedPlanPath = System.IO.Path.GetDirectoryName(recommendedPlanPath);
-                altPackage = new AlternativePackage(recommendedPlanPath);
+                recPlanPackage = new AlternativePackage(recommendedPlanPath);
             }
             catch (Exception ex)
             {
@@ -96,7 +96,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
 
         public IList FocusAreaList()
         {
-            return altPackage.FocusAreaList;
+            return recPlanPackage.FocusAreaList;
         }
 
         public string FocusAreaName(IDictionary<string, Parameter> parameters)
@@ -114,7 +114,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
             {
                 focusArea = parameters["FocusArea"].Value;
             }
-            foreach (AltLink altLink in altPackage.ModelAltLinks.Values)
+            foreach (AltLink altLink in recPlanPackage.ModelAltLinks.Values)
             {
                 if (filterByFocusArea && altLink.FocusArea != focusArea)
                 {
@@ -144,7 +144,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
                 focusArea = parameters["FocusArea"].Value;
             }
 
-            foreach (AltLink altLink in altPackage.ModelAltLinks.Values)
+            foreach (AltLink altLink in recPlanPackage.ModelAltLinks.Values)
             {
                 if (filterByFocusArea && altLink.FocusArea != focusArea)
                 {
@@ -171,8 +171,8 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
                 focusArea = parameters["FocusArea"].Value;
             }
 
-            Links links = altPackage.BaseModel.ModelLinks;
-            foreach (AltLink altLink in altPackage.ModelAltLinks.Values)
+            Links links = recPlanPackage.BaseModel.ModelLinks;
+            foreach (AltLink altLink in recPlanPackage.ModelAltLinks.Values)
             {
                 if (filterByFocusArea && altLink.FocusArea != focusArea)
                 {
@@ -192,7 +192,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
                     continue;
                 }
 
-                inspectionRow = piDS.PipeInspectionGrades.FindByMLinkID(mdlLink.MLinkID);
+                inspectionRow = pipeInspectDS.PipeInspectionGrades.FindByMLinkID(mdlLink.MLinkID);
                 if (inspectionRow == null || inspectionRow.IsGradeNull())
                 {
                     continue;
@@ -216,8 +216,8 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
                 focusArea = parameters["FocusArea"].Value;
             }
 
-            Links links = altPackage.BaseModel.ModelLinks;
-            foreach (AltLink altLink in altPackage.ModelAltLinks.Values)
+            Links links = recPlanPackage.BaseModel.ModelLinks;
+            foreach (AltLink altLink in recPlanPackage.ModelAltLinks.Values)
             {
                 if (filterByFocusArea && altLink.FocusArea != focusArea)
                 {
@@ -237,7 +237,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
                     continue;
                 }
 
-                inspectionRow = piDS.PipeInspectionGrades.FindByMLinkID(mdlLink.MLinkID);
+                inspectionRow = pipeInspectDS.PipeInspectionGrades.FindByMLinkID(mdlLink.MLinkID);
                 if (inspectionRow == null || inspectionRow.IsGradeNull())
                 {
                     continue;
@@ -262,8 +262,8 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
                 focusArea = parameters["FocusArea"].Value;
             }
 
-            Links links = altPackage.BaseModel.ModelLinks;
-            foreach (AltLink altLink in altPackage.ModelAltLinks.Values)
+            Links links = recPlanPackage.BaseModel.ModelLinks;
+            foreach (AltLink altLink in recPlanPackage.ModelAltLinks.Values)
             {
                 if (filterByFocusArea && altLink.FocusArea != focusArea)
                 {
@@ -282,7 +282,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
                     continue;
                 }
 
-                inspectionRow = piDS.PipeInspectionGrades.FindByMLinkID(mdlLink.MLinkID);
+                inspectionRow = pipeInspectDS.PipeInspectionGrades.FindByMLinkID(mdlLink.MLinkID);
                 if (inspectionRow == null || inspectionRow.IsGradeNull())
                 {
                     continue;
@@ -306,8 +306,8 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
                 focusArea = parameters["FocusArea"].Value;
             }
 
-            Links links = altPackage.BaseModel.ModelLinks;
-            foreach (AltLink altLink in altPackage.ModelAltLinks.Values)
+            Links links = recPlanPackage.BaseModel.ModelLinks;
+            foreach (AltLink altLink in recPlanPackage.ModelAltLinks.Values)
             {
                 if (filterByFocusArea && altLink.FocusArea != focusArea)
                 {
@@ -326,7 +326,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
                     continue;
                 }
 
-                inspectionRow = piDS.PipeInspectionGrades.FindByMLinkID(mdlLink.MLinkID);
+                inspectionRow = pipeInspectDS.PipeInspectionGrades.FindByMLinkID(mdlLink.MLinkID);
                 if (inspectionRow == null || inspectionRow.IsGradeNull())
                 {
                     continue;
@@ -350,7 +350,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
             {
                 focusArea = parameters["FocusArea"].Value;
             }
-            foreach (AltLink altLink in altPackage.ModelAltLinks.Values)
+            foreach (AltLink altLink in recPlanPackage.ModelAltLinks.Values)
             {
                 if (filterByFocusArea && altLink.FocusArea != focusArea)
                 {
@@ -374,7 +374,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
                 focusArea = parameters["FocusArea"].Value;
             }
 
-            foreach (AltLink altLink in altPackage.ModelAltLinks.Values)
+            foreach (AltLink altLink in recPlanPackage.ModelAltLinks.Values)
             {
                 if (filterByFocusArea && altLink.FocusArea != focusArea)
                 {
@@ -410,7 +410,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
                 constructed = parameters["Constructed"].ValueAsInt;
             }
 
-            foreach (ParkingTarget pt in altPackage.ModelAltParkingTargets.Values)
+            foreach (ParkingTarget pt in recPlanPackage.ModelAltParkingTargets.Values)
             {
                 if (filterByFocusArea && pt.FocusArea != focusArea)
                 {
@@ -448,7 +448,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
                 constructed = parameters["Constructed"].ValueAsInt;
             }
 
-            foreach (RoofTarget rt in altPackage.ModelAltRoofTargets.Values)
+            foreach (RoofTarget rt in recPlanPackage.ModelAltRoofTargets.Values)
             {
                 if (filterByFocusArea && rt.FocusArea != focusArea)
                 {
@@ -486,7 +486,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
                 constructed = parameters["Constructed"].ValueAsInt;
             }
 
-            foreach (StreetTarget st in altPackage.ModelAltStreetTargets.Values)
+            foreach (StreetTarget st in recPlanPackage.ModelAltStreetTargets.Values)
             {
                 if (filterByFocusArea && st.FocusArea != focusArea)
                 {
