@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FFEUpdater", "FFEUpdater\FFEUpdater.csproj", "{6EEDECC2-546E-48AF-9016-85E09E95F3C2}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "FFEUpdaterSetup", "FFEUpdaterSetup\FFEUpdaterSetup.vdproj", "{0DDDEABE-460A-431A-A24C-7238DBB6FD96}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "FFEUpdaterSetup", "FFEUpdaterSetup\FFEUpdaterSetup.vdproj", "{6C133407-0783-4A53-A9D4-E6D82339EB86}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,8 +15,8 @@ Global
 		{6EEDECC2-546E-48AF-9016-85E09E95F3C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6EEDECC2-546E-48AF-9016-85E09E95F3C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6EEDECC2-546E-48AF-9016-85E09E95F3C2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0DDDEABE-460A-431A-A24C-7238DBB6FD96}.Debug|Any CPU.ActiveCfg = Debug
-		{0DDDEABE-460A-431A-A24C-7238DBB6FD96}.Release|Any CPU.ActiveCfg = Release
+		{6C133407-0783-4A53-A9D4-E6D82339EB86}.Debug|Any CPU.ActiveCfg = Debug
+		{6C133407-0783-4A53-A9D4-E6D82339EB86}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
