@@ -35,6 +35,7 @@
             Infragistics.Win.UltraWinTabControl.UltraTab ultraTab1 = new Infragistics.Win.UltraWinTabControl.UltraTab();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.tabPageMain = new Infragistics.Win.UltraWinTabControl.UltraTabPageControl();
+            this.btnUpdateFFE = new Infragistics.Win.Misc.UltraButton();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -42,7 +43,6 @@
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolTipUpdateDSCs = new System.Windows.Forms.ToolTip(this.components);
-            this.btnUpdateFFE = new Infragistics.Win.Misc.UltraButton();
             this.lblDescription = new System.Windows.Forms.Label();
             this.expBarMain = new Infragistics.Win.UltraWinExplorerBar.UltraExplorerBar();
             this.tabControlMain = new Infragistics.Win.UltraWinTabControl.UltraTabControl();
@@ -62,6 +62,17 @@
             this.tabPageMain.Location = new System.Drawing.Point(2, 24);
             this.tabPageMain.Name = "tabPageMain";
             this.tabPageMain.Size = new System.Drawing.Size(324, 282);
+            // 
+            // btnUpdateFFE
+            // 
+            this.btnUpdateFFE.ButtonStyle = Infragistics.Win.UIElementButtonStyle.WindowsXPCommandButton;
+            this.btnUpdateFFE.Location = new System.Drawing.Point(75, 121);
+            this.btnUpdateFFE.Name = "btnUpdateFFE";
+            this.btnUpdateFFE.Size = new System.Drawing.Size(175, 41);
+            this.btnUpdateFFE.TabIndex = 7;
+            this.btnUpdateFFE.Text = "Update FFE Data";
+            this.toolTipUpdateDSCs.SetToolTip(this.btnUpdateFFE, "Updates Master DSC data\r\nafter manual data entry\r\n to the FFE database");
+            this.btnUpdateFFE.Click += new System.EventHandler(this.btnUpdateFFE_Click);
             // 
             // menuStrip
             // 
@@ -120,17 +131,6 @@
             // toolTipUpdateDSCs
             // 
             this.toolTipUpdateDSCs.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
-            // 
-            // btnUpdateFFE
-            // 
-            this.btnUpdateFFE.ButtonStyle = Infragistics.Win.UIElementButtonStyle.WindowsXPCommandButton;
-            this.btnUpdateFFE.Location = new System.Drawing.Point(75, 121);
-            this.btnUpdateFFE.Name = "btnUpdateFFE";
-            this.btnUpdateFFE.Size = new System.Drawing.Size(175, 41);
-            this.btnUpdateFFE.TabIndex = 7;
-            this.btnUpdateFFE.Text = "Update FFE Data";
-            this.toolTipUpdateDSCs.SetToolTip(this.btnUpdateFFE, "Updates Master DSC data\r\nafter manual data entry\r\n to the FFE database");
-            this.btnUpdateFFE.Click += new System.EventHandler(this.btnUpdateFFE_Click);
             // 
             // lblDescription
             // 
