@@ -20,10 +20,10 @@ using System.Text;
 using System.Windows.Forms;
 using ADODB;
 using System.Reflection;
-using Access = Microsoft.Office.Interop.Access;
-using Microsoft.Office.Core;
 using System.Threading;
 using System.IO;
+using Access = Microsoft.Office.Interop.Access;
+using Microsoft.Office.Core;
 
 namespace FFEUpdater
 {
@@ -89,6 +89,21 @@ namespace FFEUpdater
             }
         } // DoSplash(waitForClick)
 
+        private void RunMacro(object oApp, object[] oRunArgs)
+        {
+            try
+            {
+                oApp.GetType().InvokeMember("Run",
+                System.Reflection.BindingFlags.Default |
+                System.Reflection.BindingFlags.InvokeMethod,
+                null, oApp, oRunArgs);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.InnerException.Message);
+            }
+        }
+        
         private void btnUpdateFFE_Click(object sender, EventArgs e)
         {
             try
@@ -99,11 +114,11 @@ namespace FFEUpdater
                 // Create an instance of Microsoft Access, make it visible,
                 // and open Survey_FFE.mdb
                 Access.ApplicationClass oAccess = new Access.ApplicationClass();
-                oAccess.Visible = true;
+                oAccess.Visible = false;
                 oAccess.OpenCurrentDatabase("W:\\SAMaster_22\\Parcels_Divides\\Survey_FFE.mdb", false, "");
 
                 //Debug message
-                //MessageBox.Show("Access open");
+                MessageBox.Show("Access open, running macro");
 
                 //Run the macro.
                 RunMacro(oAccess, new Object[] { "UpdateFFE" });
@@ -115,11 +130,11 @@ namespace FFEUpdater
 
                 MessageBox.Show("All update processes ran successfully", "Update Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+
             catch (System.Exception ex)
             {
                 MessageBox.Show(ex.Message, "FFEUpdater: Exception Thrown", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -127,14 +142,6 @@ namespace FFEUpdater
             string fi;
             fi = @"\\Cassio\asm_apps\Apps\FFEUpdater\publish.htm";
             System.Diagnostics.Process.Start("IEXPLORE.EXE", fi);
-        }
-
-        private void RunMacro(object oApp, object[] oRunArgs)
-        {
-            oApp.GetType().InvokeMember("Run",
-                System.Reflection.BindingFlags.Default |
-                System.Reflection.BindingFlags.InvokeMethod,
-                null, oApp, oRunArgs);
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
