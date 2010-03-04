@@ -132,7 +132,7 @@ implementation
 
 uses uIM_MOUSE_PRF_InterfaceFiles,
 	uIM_SWMM_XP_InterfaceFiles, uIM_SWMM_TEXT_InterfaceFiles,
-  StStrL, CodeSiteLogging;
+  uIM_SWMM_F95_InterfaceFiles, StStrL, CodeSiteLogging;
 
 { TIM_BCC_BatchEngine }
 
@@ -384,7 +384,9 @@ begin
 	else if fSourceFormat = BATCH_COMMAND_FILE_FORMAT_SWMM_XP then
 		SourceFile := T_SWMM_XP_StandardInterfaceFile.Create(fSourceFile, fmShareDenyWrite)
   else if fSourceFormat = BATCH_COMMAND_FILE_FORMAT_SWMM_TEXT then
-    SourceFile := T_SWMM_TEXT_StandardInterfaceFile.Create(fSourceFile, fmShareDenyWrite);
+    SourceFile := T_SWMM_TEXT_StandardInterfaceFile.Create(fSourceFile, fmShareDenyWrite)
+  else if fSourceFormat = BATCH_COMMAND_FILE_FORMAT_SWMM_F95 then
+    SourceFile := T_SWMM_F95_StandardInterfaceFile.Create(fSourceFile, fmShareDenyWrite);
 
 	// Destination File Assignment
 	//if DestFormat = BATCH_COMMAND_FILE_FORMAT_DHI_MOUSE_PRF then
@@ -393,7 +395,9 @@ begin
   if fDestFormat = BATCH_COMMAND_FILE_FORMAT_SWMM_XP then
 		DestFile := T_SWMM_XP_StandardInterfaceFile.Create(fDestFile, fmCreate)
   else if fDestFormat = BATCH_COMMAND_FILE_FORMAT_SWMM_TEXT then
-    DestFile := T_SWMM_TEXT_StandardInterfaceFile.Create(fDestFile, fmCreate);
+    DestFile := T_SWMM_TEXT_StandardInterfaceFile.Create(fDestFile, fmCreate)
+  else if fDestFormat = BATCH_COMMAND_FILE_FORMAT_SWMM_F95 then
+    DestFile := T_SWMM_F95_StandardInterfaceFile.Create(fDestFile, fmCreate);
 
 	fEngine.SourceFile := SourceFile;
 	fEngine.DestFile := DestFile;

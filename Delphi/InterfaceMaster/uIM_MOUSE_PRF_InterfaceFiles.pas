@@ -241,6 +241,7 @@ type
 		function Size: Int64;
 		procedure NextLine;
 		procedure PreviousLine;
+    procedure FlushLine;
 	end;
 
 function StripAngleBrackets(AString: String): String;
@@ -867,6 +868,11 @@ begin
 	fStream := nil;
 	fTokens.Free;
 	inherited;
+end;
+
+procedure T_MOUSE_PRF_InterfaceFileIO.FlushLine;
+begin
+  // Do nothing
 end;
 
 procedure T_MOUSE_PRF_InterfaceFileIO.CheckCurrentLineTokens;
