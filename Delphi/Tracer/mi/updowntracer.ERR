@@ -1,0 +1,15 @@
+(updowntracer.mb:17) Array dimension exceeds allowable maximum value.  Too many errors.  Error information has been lost.
+(updowntracer.mb:53) Invalid variable type: IMouseCursor.  Too many errors.  Error information has been lost.
+(updowntracer.mb:54) Invalid variable type: IMxDocument.  Too many errors.  Error information has been lost.
+(updowntracer.mb:55) Invalid variable type: IMap.  Too many errors.  Error information has been lost.
+(updowntracer.mb:56) Invalid variable type: IActiveView.  Too many errors.  Error information has been lost.
+(updowntracer.mb:59) Invalid variable type: ILayer.  Too many errors.  Error information has been lost.
+(updowntracer.mb:60) Invalid variable type: IFeatureLayer.  Too many errors.  Error information has been lost.
+(updowntracer.mb:61) Invalid variable type: IFeatureSelection.  Too many errors.  Error information has been lost.
+(updowntracer.mb:64) Invalid variable type: IEnumGeometry.  Too many errors.  Error information has been lost.
+(updowntracer.mb:65) Invalid variable type: IEnumGeometryBind.  Too many errors.  Error information has been lost.
+(updowntracer.mb:66) Invalid variable type: IGeometryFactory.  Too many errors.  Error information has been lost.
+(updowntracer.mb:67) Invalid variable type: IGeometry.  Too many errors.  Error information has been lost.
+(updowntracer.mb:70) Invalid variable type: IFeatureCursor.  Too many errors.  Error information has been lost.
+(updowntracer.mb:71) Invalid variable type: IRow.  Too many errors.  Error information has been lost.
+(updowntracer.mb:86) Unrecognized command: MsgBox.  Too many errors.  Error information has been lost.

@@ -1,0 +1,198 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<namespace name="uMapInfoManager">
+  <class name="TMapInfoDisplayManager">
+    <ancestor name="TObject" namespace="System">
+      <methodref name="Create" visibility="public">
+      </methodref>
+      <methodref name="Free" visibility="public">
+      </methodref>
+      <methodref name="InitInstance" visibility="public">
+      </methodref>
+      <methodref name="CleanupInstance" visibility="public">
+      </methodref>
+      <methodref name="ClassType" visibility="public">
+      </methodref>
+      <methodref name="ClassName" visibility="public">
+      </methodref>
+      <methodref name="ClassNameIs" visibility="public">
+      </methodref>
+      <methodref name="ClassParent" visibility="public">
+      </methodref>
+      <methodref name="ClassInfo" visibility="public">
+      </methodref>
+      <methodref name="InstanceSize" visibility="public">
+      </methodref>
+      <methodref name="InheritsFrom" visibility="public">
+      </methodref>
+      <methodref name="MethodAddress" visibility="public">
+      </methodref>
+      <methodref name="MethodName" visibility="public">
+      </methodref>
+      <methodref name="FieldAddress" visibility="public">
+      </methodref>
+      <methodref name="GetInterface" visibility="public">
+      </methodref>
+      <methodref name="GetInterfaceEntry" visibility="public">
+      </methodref>
+      <methodref name="GetInterfaceTable" visibility="public">
+      </methodref>
+      <methodref name="SafeCallException" visibility="public">
+      </methodref>
+      <methodref name="AfterConstruction" visibility="public">
+      </methodref>
+      <methodref name="BeforeDestruction" visibility="public">
+      </methodref>
+      <methodref name="Dispatch" visibility="public">
+      </methodref>
+      <methodref name="DefaultHandler" visibility="public">
+      </methodref>
+      <methodref name="NewInstance" visibility="public">
+      </methodref>
+      <methodref name="FreeInstance" visibility="public">
+      </methodref>
+      <methodref name="Destroy" visibility="public">
+      </methodref>
+    </ancestor>
+    <members>
+      <field name="fMapInfoApp" type="OleVariant" visibility="private" />
+      <field name="fMapWindowID" type="Integer" visibility="private" />
+      <field name="fTables" type="TStringList" visibility="private" />
+      <function name="GetTables" visibility="private">
+        <parameters>
+          <parameter name="Index" type="Integer" />
+          <retval type="string" />
+        </parameters>
+      </function>
+      <function name="GetTableCount" visibility="private">
+        <parameters>
+          <retval type="Integer" />
+        </parameters>
+      </function>
+      <constructor name="Create" visibility="public">
+        <parameters>
+        </parameters>
+      </constructor>
+      <destructor name="Destroy" visibility="public">
+        <parameters>
+        </parameters>
+      </destructor>
+      <procedure name="AssignMapWindow" visibility="public">
+        <parameters>
+          <parameter name="AHandle" type="HWND" />
+        </parameters>
+      </procedure>
+      <procedure name="AssignInfoWindow" visibility="public">
+        <parameters>
+          <parameter name="AHandle" type="HWND" />
+        </parameters>
+      </procedure>
+      <procedure name="OpenTable" visibility="public">
+        <parameters>
+          <parameter name="TableFileName" type="TFileName" />
+          <parameter name="ReadOnly" type="Boolean">
+            <value>
+              True
+            </value>
+          </parameter>
+          <parameter name="Interactive" type="Boolean">
+            <value>
+              True
+            </value>
+          </parameter>
+        </parameters>
+      </procedure>
+      <procedure name="OpenWorkspace" visibility="public">
+        <parameters>
+          <parameter name="WorkspaceFileName" type="TFileName" />
+        </parameters>
+      </procedure>
+      <procedure name="AddLayer" visibility="public">
+        <parameters>
+          <parameter name="ATable" type="string" />
+        </parameters>
+      </procedure>
+      <procedure name="CreateMap" visibility="public">
+      </procedure>
+      <procedure name="SelectTool" visibility="public">
+        <parameters>
+          <parameter name="ATool" type="Integer" />
+        </parameters>
+      </procedure>
+      <procedure name="ResizeMapWindow" visibility="public">
+        <parameters>
+          <parameter name="Width" type="Integer" />
+          <parameter name="Height" type="Integer" />
+        </parameters>
+      </procedure>
+      <procedure name="MinimizeMapWindow" visibility="public">
+      </procedure>
+      <procedure name="MaximizeMapWindow" visibility="public">
+      </procedure>
+      <procedure name="RestoreMapWindow" visibility="public">
+      </procedure>
+      <procedure name="RunCommand" visibility="public">
+        <parameters>
+          <parameter name="Command" type="string" />
+        </parameters>
+      </procedure>
+      <procedure name="ZoomLayer" visibility="public">
+        <parameters>
+          <parameter name="ATable" type="string" />
+        </parameters>
+      </procedure>
+      <procedure name="CloseAll" visibility="public">
+      </procedure>
+      <function name="WindowID" visibility="public">
+        <parameters>
+          <parameter name="AWindowName" type="string" />
+          <retval type="Integer" />
+        </parameters>
+      </function>
+      <function name="NumRecords" visibility="public">
+        <parameters>
+          <parameter name="ATableName" type="string" />
+          <retval type="Integer" />
+        </parameters>
+      </function>
+      <function name="NumCols" visibility="public">
+        <parameters>
+          <parameter name="ATableName" type="string" />
+          <retval type="Integer" />
+        </parameters>
+      </function>
+      <function name="ColName" visibility="public">
+        <parameters>
+          <parameter name="ATableName" type="string" />
+          <parameter name="Index" type="Integer" />
+          <retval type="string" />
+        </parameters>
+      </function>
+      <procedure name="AddColumn" visibility="public">
+        <parameters>
+          <parameter name="ATableName" type="string" />
+          <parameter name="AColumnName" type="string" />
+          <parameter name="AColumnType" type="string" />
+        </parameters>
+      </procedure>
+      <procedure name="SaveTable" visibility="public">
+        <parameters>
+          <parameter name="ATableName" type="string" />
+        </parameters>
+      </procedure>
+      <function name="TableIsOpen" visibility="public">
+        <parameters>
+          <parameter name="ATableName" type="string" />
+          <retval type="Boolean" />
+        </parameters>
+      </function>
+      <function name="Zoom" visibility="public">
+        <parameters>
+          <parameter name="AWindowName" type="string" />
+          <retval type="Double" />
+        </parameters>
+      </function>
+      <property name="Tables" visibility="public" read="GetTables" type="string" />
+      <property name="TableCount" visibility="public" read="GetTableCount" type="Integer" />
+    </members>
+  </class>
+</namespace>
