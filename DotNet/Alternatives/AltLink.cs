@@ -12,7 +12,7 @@ namespace SystemsAnalysis.Modeling.Alternatives
     private int altLinkID;
     private string usNodeName;
     private string dsNodeName;
-    private int linkID;
+    private int linkId;
     private Enumerators.AlternativeOperation operation;
     private double length;
     private string material;
@@ -31,7 +31,7 @@ namespace SystemsAnalysis.Modeling.Alternatives
       this.altLinkID = altLinksRow.AltLinkID;
       this.usNodeName = altLinksRow.USNode;
       this.dsNodeName = altLinksRow.DSNode;
-      this.linkID = altLinksRow.MdlLinkID;
+      this.linkId = altLinksRow.MdlLinkID;
       this.operation = Types.Enumerators.GetAlternativeOperationEnum(altLinksRow.Operation);
       this.length = altLinksRow.Length;
       this.material = altLinksRow.IsMaterialNull() ? "" : altLinksRow.Material;
@@ -53,7 +53,8 @@ namespace SystemsAnalysis.Modeling.Alternatives
     /// </summary>
     public int LinkID
     {
-      get { return this.linkID; }
+      get { return this.linkId; }
+      set { this.linkId = value; }
     }
     /// <summary>
     /// Gets the Upstream Node name of this AltLink
