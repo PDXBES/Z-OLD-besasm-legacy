@@ -1,0 +1,70 @@
+PROJ = AXTPARSE
+DEBUG = 0
+PROGTYPE = 0
+CALLER = 
+ARGS = 
+DLLS = 
+D_RCDEFINES = -d_DEBUG
+R_RCDEFINES = -dNDEBUG
+ORIGIN = F32VWB
+ORIGIN_VER = 1.00
+PROJPATH = D:\APP_DEV\MF32\AXTPARSE\
+KNARF = 
+F32 = fl32
+F32FLAGS_D_DEXE = /Zi
+F32FLAGS_R_DEXE = /Ox /DNDEBUG
+F32FLAGS_D_LIB = /Zi
+F32FLAGS_R_LIB = /Ox /DNDEBUG
+L32FLAGS_D_DEXE = -machine:i386 -base:0x00010000 -subsystem:console -entry:mainCRTStartup -debug:full -debugtype:cv4
+L32FLAGS_R_DEXE = -machine:i386 -base:0x00010000 -subsystem:console -entry:mainCRTStartup
+L32FLAGS_D_DEXEUB = -machine:i386 -base:0x00010000 -subsystem:console -entry:mainCRTStartup -debug:full -debugtype:cv4
+L32FLAGS_R_DEXEUB = -machine:i386 -base:0x00010000 -subsystem:console -entry:mainCRTStartup
+LIBS_D_DEXE = libf.lib libc.lib kernel32.lib ntdll.lib
+LIBS_R_DEXE = libf.lib libc.lib kernel32.lib ntdll.lib
+LIBS_D_BEXE = libf.lib libc.lib kernel32.lib ntdll.lib
+LIBS_R_BEXE = libf.lib libc.lib kernel32.lib ntdll.lib
+RUNFLAGS = 
+OBJS_EXT = 
+LIBS_EXT = 
+!if "$(DEBUG)" == "1"
+F32FLAGS = $(F32FLAGS_D_DEXE)
+L32FLAGS = $(L32FLAGS_D_DEXE)
+LIBS = $(LIBS_D_DEXE)
+!else
+F32FLAGS = $(F32FLAGS_R_DEXE)
+L32FLAGS = $(L32FLAGS_R_DEXE)
+LIBS = $(LIBS_R_DEXE)
+!endif
+SBRS = AXTPARSE.SBR
+
+
+AXTPARSE_DEP = d:\app_dev\mf32\axtparse\tapesir.inc \
+	d:\app_dev\mf32\axtparse\inter.inc
+
+
+all:	$(PROJ).EXE
+
+AXTPARSE.OBJ:	AXTPARSE.FOR $(AXTPARSE_DEP)
+	$(F32) $(F32FLAGS) /c AXTPARSE.FOR
+
+$(PROJ).EXE::	AXTPARSE.OBJ $(OBJS_EXT)
+	echo >NUL @<<$(PROJ).CRF
+AXTPARSE.OBJ 
+$(OBJS_EXT)
+$(L32FLAGS)
+-out:$(PROJ).EXE
+$(MAPFILE)
+$(LIBS)
+
+<<
+	link32 -link @$(PROJ).CRF
+	bindmsf $(PROJ).EXE
+
+run: $(PROJ).EXE
+	$(PROJ) $(RUNFLAGS)
+
+
+$(PROJ).BSC: $(SBRS)
+	bscmake @<<
+/o$@ $(SBRS)
+<<

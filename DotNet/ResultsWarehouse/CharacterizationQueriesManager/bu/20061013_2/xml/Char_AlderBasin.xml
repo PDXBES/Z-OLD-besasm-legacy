@@ -1,0 +1,218 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="excel_char.xsl" ?>
+<StudyArea studyArea="">
+  <CharacterizationTable tableNumber="1" tableTitle="Overview of Collection System Performance" columnCount="5">
+    <Header>
+      <Cell data="Criteria" cellType="COLUMNNAME" footerID="" />
+      <Cell data="2-Year Storm Existing Conditions" cellType="COLUMNNAME" />
+      <Cell data="5-Year Storm Existing Conditions" cellType="COLUMNNAME" />
+      <Cell data="25-Year Storm Existing Conditions" cellType="COLUMNNAME" />
+      <Cell data="25-Year Storm Future Conditions" cellType="COLUMNNAME" />
+    </Header>
+    <Row>
+      <Cell data="Pipe Surcharge: Percent of study area where the hydraulic grade line is &gt; 4 feet above the pipe crown" cellType="ROWNAME" footerID="a" />
+      <Cell cellType="FUNCTION" data="19%" />
+      <Cell cellType="FUNCTION" data="32%" />
+      <Cell cellType="FUNCTION" data="51%" />
+      <Cell cellType="FUNCTION" data="52%" />
+    </Row>
+    <Row>
+      <Cell data="Deficient Pipe Capacity: Percent of the study area with peak flow to design flow ratio &gt; 1.2" cellType="ROWNAME" footerID="a" />
+      <Cell cellType="FUNCTION" data="14%" />
+      <Cell cellType="FUNCTION" data="20%" />
+      <Cell cellType="FUNCTION" data="28%" />
+      <Cell cellType="FUNCTION" data="28%" />
+    </Row>
+    <Row>
+      <Cell data="Basement Sewer Backup Risk: Percent of study are where hydraulic grade line is within 0 to 8 feet of finished floor." cellType="ROWNAME" footerID="b" />
+      <Cell cellType="FUNCTION" data="11%" />
+      <Cell cellType="FUNCTION" data="20%" />
+      <Cell cellType="FUNCTION" data="35%" />
+      <Cell cellType="FUNCTION" data="35%" />
+    </Row>
+    <Footer footerID="a" footerText="Based on number of pipe segments." />
+    <Footer footerID="b" footerText="Based on number of direct subcatchments as defined in EMD-074, provided in Appendix A of the Combined Sewer System Plan Characterization Summary Report." />
+  </CharacterizationTable>
+  <CharacterizationTable tableNumber="2" tableTitle="Zoning and Effective Impervious Area" columnCount="9">
+    <Header>
+      <Cell data="" cellType="COLUMNNAME" />
+      <Cell data="Total Area (acres)" cellType="COLUMNNAME" footerID="" />
+      <Cell data="Single Family Residential (acres)" cellType="COLUMNNAME" footerID="" />
+      <Cell data="Mutli-Family Residential (acres)" cellType="COLUMNNAME" footerID="" />
+      <Cell data="Industrial (acres)" cellType="COLUMNNAME" footerID="" />
+      <Cell data="Commercial (acres)" cellType="COLUMNNAME" footerID="" />
+      <Cell data="Parks and Open Spaces (acres)" cellType="COLUMNNAME" footerID="" />
+      <Cell data="Other (acres)" cellType="COLUMNNAME" footerID="" />
+      <Cell data="Effective Impervious Area (acres)" cellType="COLUMNNAME" footerID="*" />
+    </Header>
+    <Row>
+      <Cell data="Existing (2006)" cellType="ROWNAME" />
+      <Cell cellType="CONST" data="Manual Entry" />
+      <Cell cellType="FUNCTION" data="308" />
+      <Cell cellType="FUNCTION" data="65" />
+      <Cell cellType="FUNCTION" data="184" />
+      <Cell cellType="FUNCTION" data="63" />
+      <Cell cellType="FUNCTION" data="42" />
+      <Cell cellType="CONST" data="Manual Entry" />
+      <Cell cellType="CONST" data="Manual Entry" />
+    </Row>
+    <Row>
+      <Cell data="Future (2040)" cellType="ROWNAME" />
+      <Cell cellType="CONST" data="Manual Entry" />
+      <Cell cellType="FUNCTION" data="308" />
+      <Cell cellType="FUNCTION" data="65" />
+      <Cell cellType="FUNCTION" data="184" />
+      <Cell cellType="FUNCTION" data="63" />
+      <Cell cellType="FUNCTION" data="42" />
+      <Cell cellType="CONST" data="Manual Entry" />
+      <Cell cellType="CONST" data="Manual Entry" />
+    </Row>
+    <Footer footerID="*" footerText="For information about how effective impervious area is calculated, refer to EMD-074, provided in Appendix A of the Summary Report." />
+  </CharacterizationTable>
+  <CharacterizationTable tableNumber="3" tableTitle="Collection System Features" columnCount="4">
+    <Header>
+      <Cell data="Feature" cellType="COLUMNNAME" />
+      <Cell data="No. of Segments" cellType="COLUMNNAME" />
+      <Cell data="Length (miles)" cellType="COLUMNNAME" />
+      <Cell data="Maximum Diameter" cellType="COLUMNNAME" />
+    </Header>
+    <Row>
+      <Cell data="Combined sewer" cellType="ROWNAME" />
+      <Cell cellType="FUNCTION" data="844" />
+      <Cell cellType="FUNCTION" data="31" />
+      <Cell cellType="FUNCTION" data="144&quot;" />
+    </Row>
+    <Row>
+      <Cell data="Stormwater" cellType="ROWNAME" />
+      <Cell cellType="FUNCTION" data="171" />
+      <Cell cellType="FUNCTION" data="4" />
+      <Cell cellType="FUNCTION" data="84&quot;" />
+    </Row>
+    <Row>
+      <Cell data="Sanitary sewer" cellType="ROWNAME" />
+      <Cell cellType="FUNCTION" data="104" />
+      <Cell cellType="FUNCTION" data="3" />
+      <Cell cellType="FUNCTION" data="36&quot;" />
+    </Row>
+    <Row>
+      <Cell data="Interceptor" cellType="COLUMNNAME" />
+      <Cell data="Length (miles)" cellType="COLUMNNAME" />
+      <Cell data="Notes" cellType="COLUMNNAME" colSpan="2" />
+    </Row>
+    <Row>
+      <Cell cellType="CONST" data="Manual Entry" />
+      <Cell cellType="CONST" data="..." />
+      <Cell cellType="CONST" data="..." colSpan="2" />
+    </Row>
+  </CharacterizationTable>
+  <CharacterizationTable tableNumber="4" tableTitle="Diversion Locations and Locations of Future Connections to Tunnel System" columnCount="6">
+    <Header>
+      <Cell data="Location" cellType="COLUMNNAME" />
+      <Cell data="Node ID" cellType="COLUMNNAME" />
+      <Cell data="Diversion ID" cellType="COLUMNNAME" />
+      <Cell data="Node Type" cellType="COLUMNNAME" />
+      <Cell data="Status" cellType="COLUMNNAME" />
+      <Cell data="Outfall ID" cellType="COLUMNNAME" />
+    </Header>
+    <Row>
+      <Cell cellType="FUNCTION" data="SE 9TH &amp; ALDER" />
+      <Cell cellType="FUNCTION" data="ABQ979" />
+      <Cell cellType="FUNCTION" data="SE25" />
+      <Cell cellType="FUNCTION" data="" />
+      <Cell cellType="FUNCTION" data="Active" />
+      <Cell cellType="FUNCTION" data="OF 36" />
+    </Row>
+    <Row>
+      <Cell cellType="FUNCTION" data="SE 7TH &amp; WASHINGTON" />
+      <Cell cellType="FUNCTION" data="ABQ961" />
+      <Cell cellType="FUNCTION" data="SE22" />
+      <Cell cellType="FUNCTION" data="" />
+      <Cell cellType="FUNCTION" data="Active" />
+      <Cell cellType="FUNCTION" data="OF 36" />
+    </Row>
+    <Row>
+      <Cell cellType="FUNCTION" data="SE 6TH &amp; ALDER, SW CORNER" />
+      <Cell cellType="FUNCTION" data="ABQ970" />
+      <Cell cellType="FUNCTION" data="SE19" />
+      <Cell cellType="FUNCTION" data="" />
+      <Cell cellType="FUNCTION" data="Active" />
+      <Cell cellType="FUNCTION" data="OF 36" />
+    </Row>
+    <Row>
+      <Cell cellType="FUNCTION" data="SE 6TH &amp; ALDER, NW CORNER" />
+      <Cell cellType="FUNCTION" data="ABQ968" />
+      <Cell cellType="FUNCTION" data="SE20" />
+      <Cell cellType="FUNCTION" data="" />
+      <Cell cellType="FUNCTION" data="Active" />
+      <Cell cellType="FUNCTION" data="OF 36" />
+    </Row>
+    <Row>
+      <Cell cellType="FUNCTION" data="SE 9TH &amp; BELMONT" />
+      <Cell cellType="FUNCTION" data="ABR027" />
+      <Cell cellType="FUNCTION" data="SE34" />
+      <Cell cellType="FUNCTION" data="" />
+      <Cell cellType="FUNCTION" data="Active" />
+      <Cell cellType="FUNCTION" data="OF 36" />
+    </Row>
+    <Row>
+      <Cell cellType="FUNCTION" data="SE 8TH &amp; TAYLOR" />
+      <Cell cellType="FUNCTION" data="ABR049" />
+      <Cell cellType="FUNCTION" data="SE32" />
+      <Cell cellType="FUNCTION" data="" />
+      <Cell cellType="FUNCTION" data="Active" />
+      <Cell cellType="FUNCTION" data="OF 36" />
+    </Row>
+    <Row>
+      <Cell cellType="FUNCTION" data="SE 2ND &amp; CLAY, E OF SE CORNER" />
+      <Cell cellType="FUNCTION" data="ABU889" />
+      <Cell cellType="FUNCTION" data="SE106A" />
+      <Cell cellType="FUNCTION" data="" />
+      <Cell cellType="FUNCTION" data="Active" />
+      <Cell cellType="FUNCTION" data="OF 33" />
+    </Row>
+    <Row>
+      <Cell cellType="FUNCTION" data="SE10TH &amp; YAMHILL" />
+      <Cell cellType="FUNCTION" data="ABR096" />
+      <Cell cellType="FUNCTION" data="SE37A" />
+      <Cell cellType="FUNCTION" data="" />
+      <Cell cellType="FUNCTION" data="Active" />
+      <Cell cellType="FUNCTION" data="OF 36" />
+    </Row>
+    <Row>
+      <Cell cellType="FUNCTION" data="SE SALMON 40' W OF 10TH" />
+      <Cell cellType="FUNCTION" data="ABR118" />
+      <Cell cellType="FUNCTION" data="SE41" />
+      <Cell cellType="FUNCTION" data="" />
+      <Cell cellType="FUNCTION" data="Active" />
+      <Cell cellType="FUNCTION" data="OF 36" />
+    </Row>
+    <Row>
+      <Cell cellType="FUNCTION" data="SE 2ND &amp; HAWTHORNE" />
+      <Cell cellType="FUNCTION" data="ABQ920" />
+      <Cell cellType="FUNCTION" data="SE105" />
+      <Cell cellType="FUNCTION" data="" />
+      <Cell cellType="FUNCTION" data="Active" />
+      <Cell cellType="FUNCTION" data="OF 34" />
+    </Row>
+    <Row>
+      <Cell cellType="FUNCTION" data="SE MAIN 100' E OF 8TH" />
+      <Cell cellType="FUNCTION" data="ABR071" />
+      <Cell cellType="FUNCTION" data="SE43" />
+      <Cell cellType="FUNCTION" data="" />
+      <Cell cellType="FUNCTION" data="Active" />
+      <Cell cellType="FUNCTION" data="OF 36" />
+    </Row>
+    <Row>
+      <Cell cellType="FUNCTION" data="SE MAIN BETWEEN 9TH &amp; 10TH" />
+      <Cell cellType="FUNCTION" data="ABR131" />
+      <Cell cellType="FUNCTION" data="SE44" />
+      <Cell cellType="FUNCTION" data="" />
+      <Cell cellType="FUNCTION" data="Active" />
+      <Cell cellType="FUNCTION" data="OF 36" />
+    </Row>
+    <Row>
+      <Cell cellType="FUNCTION" data="SE 9TH &amp; MADISON, NW CORNER" />
+      <Cell cellType="FUNCTION" data="ABR168" />
+      <Cell cellType="FUNCTION" data="SE46" />
+      <Cell cellType="FUNCTION" data="" />
+      <Cell cellType="FUNCTION" dat

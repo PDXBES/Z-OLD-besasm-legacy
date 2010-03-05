@@ -1,0 +1,21 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapControlHelper", "MapControlHelper.csproj", "{D08971DD-9DAD-4DE1-88CA-35EE30AB6B23}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{D08971DD-9DAD-4DE1-88CA-35EE30AB6B23}.Debug.ActiveCfg = Debug|.NET
+		{D08971DD-9DAD-4DE1-88CA-35EE30AB6B23}.Debug.Build.0 = Debug|.NET
+		{D08971DD-9DAD-4DE1-88CA-35EE30AB6B23}.Release.ActiveCfg = Release|.NET
+		{D08971DD-9DAD-4DE1-88CA-35EE30AB6B23}.Release.Build.0 = Release|.NET
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

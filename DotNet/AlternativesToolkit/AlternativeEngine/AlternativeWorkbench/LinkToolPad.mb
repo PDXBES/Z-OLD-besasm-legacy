@@ -1,0 +1,1618 @@
+'
+'	============ EMGAATS Workbench =================
+'
+'	Copyright (c) 2001,	2003  City of Portland,	OR Bureau of Environmental Services	
+'
+' 20Jul2006	Adapted
+'	22Mar2004 Collins added	call to	InitOpenUtilGlobals	so that	EMGOpenUtils can be	used here
+'
+'
+include "MapBasic.def"
+include "Menu.def"
+include "Icons.def"
+include "AlternativeWorkbench.def"
+
+'Globals required for all Framework Apps
+global Wshd(5) As String
+
+'Functions specific to this Framework App
+declare sub SetupLinkToolPad
+declare sub SetLinkEditingPads    
+
+declare function GetUniqueNode() as String 'Returns a unique nodename ending with gDefaultNodeSuffix if possible  
+declare sub MakeNod   
+declare sub OkAddPip
+declare sub MkNwPip
+declare sub MaxAltID
+declare sub DlgNewPip    
+declare sub SetUsNod
+declare sub SetDsNod
+declare sub PipAttribs
+declare sub UpdtAttribs
+declare sub ChkSelTbl
+declare sub ChkAttribs
+declare sub SplitPip    
+declare sub DlgSUpdt    
+declare sub OkUpdt
+declare sub DoPipLen
+declare sub FromDSnode
+declare sub FromUSnode
+declare sub CloseQry
+declare sub DEMPts
+declare sub MHPts
+declare sub FixLgdTheme
+declare sub DelObj    
+
+'Globals specific to this Framework App
+
+dim iOp, iRec, iRun as integer
+dim sOp, NwNodID,PrevNodID as string
+dim nwLID,MaxLinkID, MaxNodID, iLgd as integer
+
+dim nwUSID, nwDSID, nwLTyp, nwFTyp,nwShp, nwMAT, exShp, exMAT as string
+dim nwUIE, nwDIE, nwXIE, nwXUIE, nwXDIE, nwDia, nwHT, nwLEN as float
+dim nwUSx, nwUSy, NwDSx, nwDSy, ExPipSlope as float
+
+dim upUSID, upDSID, upLTyp, upFTyp,upShp, upMAT as string
+dim upUIE, upDIE, upXIE, upXUIE, upXDIE, upDia, upHT, upLEN as float
+
+dim PctSlope, ratio as float
+dim splitObj,UpdtObj as object
+dim x1, y1, x2, y2, xDist as float
+dim sx1,sx2,sy1,sy2 as float
+
+dim USx,USy,DSx,DSy as float
+dim nwPipObj, iObj, DemObj as object
+
+dim sPip, sLTyp, sFTyp, sShp, sMat as string
+dim flen, fDiam, fHt, fUIE, fDIE, fElev as float
+
+dim sFx as logical
+dim NoObjLen as logical
+'---------------------------------------------------------
+Sub	LinkToolPad
+
+OnError GOTO skipPad
+
+	iOp=0
+	iRun=0
+
+	Call ResetAltWorkbench			
+			
+	Alter ButtonPad "Link Editing Tools" Show
+		
+	Run Application gLinkEditingTemplate
+	
+	Set distance units "ft"
+	Set area units "sq ft"
+		
+Call ZoomToLayer("Main Map", "Mdl_Links")
+Run Menu Command ID 90014
+Set Window FindWindowIDByName("Main Map") Front
+
+Exit Sub
+skipPad:
+	Call Debugnote("Toolpad: "& Err() & " " & Error$())
+	Print "Toolpad Err: "& Err() & " " & Error$()
+	Resume Next
+
+End	Sub   
+'--------------------------------------------------------
+Sub InitLinkToolPad            
+Create ButtonPad "Link Editing Tools" ID 5 As 
+		ToolButton HelpMsg  "\n Select"		ID 90014	Icon	0	Calling 1701 
+		ToolButton HelpMsg  "\n Pan/Grabber"	ID 90013	Icon	7	Calling 1702
+		ToolButton HelpMsg  "\n Zoom In"		ID 90011	Icon	4	Calling 1705
+		ToolButton HelpMsg  "\n Zoom Out"		ID 90012	Icon	5	Calling 1706
+		PushButton HelpMsg  "\n Save Edits"		    		ID 90004	Icon	40	Calling EditSave		 
+		PushButton HelpMsg  "\n Revert to Last Save"			ID 90005	Icon	62 File gIconFile Calling EditRevert		 
+	  						Separator		
+		PushButton HelpMsg  "\n Add Chicklets" 	ID 90006	Icon	108	File gIconFile Calling AddChicklets			 
+	  						Separator	
+
+		ToolButton HelpMsg  "\n Add New Manhole"					ID 90008	Icon	50 File gIconFile 	Calling MakeNod 
+							Drawmode	DM_CUSTOM_POINT	Cursor	MI_CURSOR_CROSSHAIR								
+		PushButton HelpMsg  "\n Assign Selection as US Node"	ID 80501	Icon  58 File gIconFile	Calling SetUSnod	  						
+		PushButton HelpMsg  "\n Assign Selection as DS Node"	ID 80502	Icon  60 File gIconFile	Calling SetDSnod
+	  						Separator	  						
+	  PushButton HelpMsg  "\n Add New Pipe"					ID 90007	Icon	54 File gIconFile 	Calling DlgNewPip		  		
+		PushButton HelpMsg  "\n Update Pipe Attributes" 	ID 90010	Icon	52 File gIconFile Calling DlgSUpdt 		  							
+		
+		ToolButton  HelpMsg "\n Split Pipe at Point"    		ID 90009	Icon 64 File gIconFile	Calling SplitPip	
+	  						Drawmode	DM_CUSTOM_POINT	Cursor	MI_CURSOR_CROSSHAIR	
+	  PushButton HelpMsg  "\n Delete Pipe" 	ID 90006	Icon	56 File gIconFile 	Calling DelObj			 								
+		Title "Link Editing Tools" 	Width 10	Hide	Float position(7,1.5) 'units "in"
+End Sub		
+'--------------------------------------------------------
+Sub MakeNod       
+
+	OnError Goto skipNod
+	
+	Set CoordSys Earth Projection 3, 33, "ft", -120.5, 43.6666666667, 44.3333333333, 46, 8202099.7379999999, 0
+	dim sOp as string
+	dim nRecs as integer
+	dim iObj as object
+	dim NwAltID as integer
+	'sFx= TmpTbls()
+
+		x1 = commandinfo(CMD_INFO_X)
+		y1 = commandinfo(CMD_INFO_Y)
+	Print "Creating new node at: (" & x1 & "," & y1 & ")"
+
+	Insert into "alt_nodes"(obj)
+		Values( CreatePoint( x1, y1))
+
+	nRecs = tableinfo(alt_nodes,TAB_INFO_NROWS)
+
+	IF  nRecs= 1  THEN
+		MaxNodID= 0
+		Print "MaxNodID: "+ MaxNodID	
+	ELSE
+		Call MaxAltID
+'		MaxNodID = MaxNodID +1
+	END IF
+	
+	'print nRecs
+	Select * from alt_nodes where rowid = nRecs  into QyNwNod noselect
+	Call DemPts
+	
+	NwNodID = GetUniqueNode()
+	Update QyNwNod set 
+		altNodeID = MaxNodID +1, 
+		node = NwNodID, 
+		Operation = "ADD"
+
+	Select Node from alt_nodes where rowid = nRecs -1  into QyPrevID noselect
+	PrevNodID = qyPrevID.col1
+	Close table QyPrevID
+	
+	Call DebugNote("Set Node Attributes")
+
+RUN MENU  COMMAND 1701
+Exit Sub
+
+skipNod:	
+	Call DebugNote("Create Node Crashed - Error: " & Err() & " " & Error$() )
+	Resume Next
+
+End Sub
+'--------------------------------------------------------
+Sub DlgNewPip
+	Dialog   
+	Title "Adding New Pipe" Position  500,100
+	Control GroupBox		ID  2510	Position 5,10		Width 130	Height 82 		Title "Please Enter Node IDs:"    
+	Control StaticText	ID  2520	Position 10,21	Width 40	Title "UsNode:"    
+	Control EditText		ID  2530	Position 50,20	Width 60	Value nwNodID into nwUSID    
+	Control StaticText	ID  2540	Position 10,34	Width 40	Title "DsNode:"    
+	Control EditText		ID  2550	Position 50,32	Width 60	Value PrevNodID into nwDSID    
+	Control StaticText	ID  2551	Position 10,46	Width 70	Title "Apply Slope(%):"    
+	Control EditText		ID  2552	Position 80,44	Width 30	Value gDefaultPctSlope 	into PctSlope    
+	Control OKButton		ID  2560	Position 15, 62	Width 50	Title "OK"	   	Calling OkAddPip   
+	Control CancelButton 	ID  2570	Position 80, 62	Width 50	Title "Cancel"	'Calling EndHandler
+End Sub
+'--------------------------------------------------------
+Sub SetUSnod
+OnError goto skipSetUS
+	IF NOT Selectioninfo(1) THEN
+		Note "Please select a node to assign as Upstream Node!"
+		Exit sub
+	END IF
+	IF Selectioninfo(1) like "%node%" THEN
+		Select Node from selection into qynwNodID
+		nwNodID =uCase$(qynwNodID.col1)
+		print Time(12) + " -" + nwNodID
+		Close table qynwNodID
+	ELSE
+		Note "Invalid selection. Please select a node."
+		Exit sub
+	END IF
+
+Exit sub
+
+skipSetUS:
+	Call DebugNote("SetUSNode Error: " & Err() & " " & Error$() )
+	Resume Next
+
+End Sub
+'--------------------------------------------------------
+Sub SetDSnod
+OnError goto skipSetDS
+
+	IF NOT Selectioninfo(1) THEN
+		Note "Please select a node to assign as Downstream Node"
+		Exit sub
+	END IF
+	IF Selectioninfo(1) like "%node%" THEN
+		Select Node from selection into qyPrevNodID
+		PrevNodID =uCase$(qyPrevNodID.col1)
+		Close table qyPrevNodID
+		print Time(12) + " -" + PrevNodID
+	ELSE
+		Note "INVALID SELECTION! PLS. SELECT A NODE!"
+		Exit sub
+	END IF
+
+Exit Sub
+skipSetDS:
+	Call DebugNote("SetDSNode Error: " & Err() & " " & Error$() )
+	Resume Next
+
+End Sub
+'--------------------------------------------------------
+Sub OkAddPip
+	nwUSID = uCase$(ReadControlValue(2530))
+	nwDSID = uCase$(ReadControlValue(2550))
+	PctSlope = ReadControlValue(2552)
+
+	CALL MkNwPip
+
+End Sub
+'--------------------------------------------------------
+Sub MkNwPip
+dim sIEnode as string
+Print "nwUSID: " + nwUSID
+Print "nwDSID: " + nwDSID
+
+IF nwDSID=nwUSID THEN
+	Note "Invalid Node Assigments (US=DS)" + chr$(10) 
+			+ "Please try again...!"
+	Exit Sub
+END IF
+IF nwDSID="" or nwUSID="" THEN
+	Note "Missing Node Assigment!" + chr$(10) 
+			+ "Please try again...!"
+	Exit Sub
+END IF
+
+Print "PctSlope: " + PctSlope
+
+OnError GOTO skipMkNwPip
+	
+	Select centroidx(obj), centroidY(obj) from Alt_nodes where Node = nwUSID into QyUSxy
+		IF tableinfo(QyUSxy,8)=0 THEN
+			Select centroidx(obj), centroidY(obj) from Mdl_nodes where Node = nwUSID into QyUSxy
+		END IF
+	If (TableInfo(QyUSxy, TAB_INFO_NROWS) <> 1) Then
+		Note "USNode Error: Found " & TableInfo(QyUSxy, TAB_INFO_NROWS) & " Nodes with ID " & nwUSID & "."
+		Exit Sub
+	End If
+	
+	USx= QyUSxy.col1
+	USy= QyUSxy.col2
+	Close table QyUSxy
+
+	Select centroidx(obj), centroidY(obj) from Alt_nodes where Node = nwDSid into QyDSxy
+		IF tableinfo(QyDSxy,8)=0 THEN
+			Select centroidx(obj), centroidy(obj) from Mdl_nodes where Node = nwDSid into QyDSxy
+		END IF
+	If (TableInfo(QyDSxy, TAB_INFO_NROWS) <> 1) Then
+		Note "DSNode Error: Found " & TableInfo(QyDSxy, TAB_INFO_NROWS) & " Nodes with ID " & nwDSID & "."
+		Exit Sub
+	End If
+	
+	DSx= QyDSxy.col1
+	DSy= QyDSxy.col2
+	Close table QyDSxy
+
+	nwPipObj= createline(USx, USy, DSx, DSy)
+	nwPipObj= convertToPline(nwPipObj)
+	nwLEN = Distance(USx, USy, DSx, DSy, "FT")
+		Print "New Pipe Length(FT): " + round(nwLEN,0.1)
+
+	IF nwLEN < 10 or nwLEN >1000 THEN
+
+		IF Ask(("Pipe Length is "+round(nwLEN,0.1)+" FT!" +CHR$(10)+ CHR$(10)+ "CONTINUE ?"), "Yes", "NO")=0 THEN
+			Exit Sub
+		END IF
+	END IF
+
+	Call MaxAltID
+
+	Insert into Alt_links(AltLinkID, USnode, DSNode, operation) 
+					values (MaxLinkID+1, nwUSID, NwDSID,"ADD")
+	Select * from Alt_Links where USnode = nwUSID and DSnode= nwDSID into QyUpdt
+	Set Window WIN_INFO Table Alt_Links Rec TableInfo(Alt_Links, TAB_INFO_NROWS) 
+	Update QyUpdt set obj=nwPipObj
+
+
+'Extracting IE using DSnode
+
+		'(SELECTING DOWNSTREAM MDL DATA)
+		sOP="ADD"
+		CALL ChkAttribs
+		CALL UpdtAttribs
+
+		Update QyUpdt set DiamWidth= nwDIA, LInkType=nwLTyp
+		Update QyUpdt set DSIE= round(nwXDIE, 0.01) + 0.01
+		Update QyUpdt set USIE= round(nwXUIE, 0.01)
+
+Call FixLgdTheme
+Exit Sub
+
+skipMkNwPip:
+	Call DebugNote("SetDSNode Error: " & Err() & " " & Error$() )
+	Resume Next
+
+End Sub
+'--------------------------------------------------------
+Sub MaxAltID
+
+	Select max(AltLinkID) from alt_links where USNode into qyMaxAltLinkID noselect
+		MaxLinkID=qyMaxAltLinkID.col1
+		Close Table qyMaxAltLinkID
+
+	Select max(AltNodeID) from alt_nodes into qyMaxAltNodID noselect
+		MaxNodID = qyMaxAltNodID.col1
+		Close table qyMaxAltNodID
+	
+End Sub
+'--------------------------------------------------------
+'Assigns selection attributes to variables
+'Assert: Only one object is selected
+Sub PipAttribs
+
+onError goto skipdat
+	If SelectionInfo(SEL_INFO_NROWS) > 1 Then
+		Note "Error: Multiple objects selected. Try again!"
+		Exit Sub
+	End If
+	If SelectionInfo(SEL_INFO_NROWS) = 0 Then
+		Note "Error: No objects selected. Try again!"
+		Exit Sub
+	End If
+
+		iObj= Selection.Obj
+		USx= objectnodex(Selection.obj,1,1)
+		USy= objectnodey(Selection.obj,1,1)
+		DSx= objectnodex(Selection.obj,1,2)
+		DSy= objectnodey(Selection.obj,1,2)
+				nwLTyp=Selection.LinkType
+				nwUIE=Selection.USIE
+				nwDIE=Selection.DSIE
+				nwDia=Selection.DiamWidth
+				nwLEN=Selection.Length
+				nwMAT=Selection.Material
+				nwHT=Selection.Height
+			IF Selectioninfo(1) like "mdl%" THEN
+				nwLID=Selection.LinkID		
+				nwFTyp=Selection.PipeFlowType
+				nwShp=Selection.PipeShape
+'			ELSE
+'				nwShp=Selection.PipeShape
+			END IF
+
+Exit sub
+
+skipdat:
+	Call DebugNote("PipAttribs Error: " & Err() & " " & Error$() )
+	Exit Sub
+
+End Sub
+'--------------------------------------------------------
+Sub UpdtAttribs
+
+OnError GOTO skipUpdtAtt
+		Update QyUpdt set 
+			LinkType=uCase$(nwLTyp), 
+			DiamWidth=nwDia, 
+			Height=nwHT, 
+			PipeShape="CIRC",	'===>nwSHP, 
+			Material="CSP",	'===>nwMAT, 
+			Length=Round(objectlen(obj, "ft"), 0.01) 
+
+RUN MENU COMMAND 304
+RUN MENU COMMAND 1701
+
+Exit Sub
+skipUpdtAtt:
+	Call DebugNote("Attribs Updt Error: " & Err() & " " & Error$() )
+	Resume Next
+
+End Sub
+'--------------------------------------------------------
+Sub ChkAttribs
+
+nwXUIE=0
+nwXDIE=0
+
+OnError GOTO skipAttribChk
+	Select * from mdl_links where USnode = nwDSID into qyDsPip noselect
+	IF tableinfo(QyDsPip,8) >0 THEN
+		Print "Extracting xDIE from mdl"
+
+		Select * from QyDsPip where rowid=1 into QyAttrib
+		Call PipAttribs
+
+		Select min(USIE) from QyDsPip into QynwXDIE noselect
+		nwXDIE = round(QynwXDIE.col1, 0.01)
+			print "extracted DIE=" + nwXDIE
+
+		Select max(DiamWidth) from QyDsPip into QynwDIA noselect
+		nwDIA =QynwDIA.col1
+
+		IF nwXDIE>0 THEN
+			GOTO getUIE
+		END IF
+	END IF
+
+	Select * from alt_links where USnode = nwDSID into qyDsPip noselect
+	IF tableinfo(QyDsPip,8) >0 THEN
+		Print "Extracting xDIE from alts"
+		Select * from QyDsPip where rowid=1 into QyAttrib noselect
+		Call PipAttribs
+
+		Select min(USIE) from QyDsPip into QynwXDIE noselect
+		nwXDIE = round(QynwXDIE.col1, 0.01) 
+			print "extracted DIE=" + nwXDIE
+	
+		Select max(DiamWidth) from QyDsPip into QynwDIA noselect
+		nwDIA =QynwDIA.col1
+	END IF
+
+getUIE:
+
+	'UIE from US mdl pipe
+	Select * from mdl_links where DSnode = nwUSID into qyUsPip noselect
+	IF tableinfo(QyUsPip,8) >0 THEN
+		Print "Extracting xUIE from mdl"
+
+		Select min(DSIE) from QyUsPip into QynwXUIE noselect
+		nwXUIE = round(QynwXUIE.col1, 0.01)
+			print "extracted UIE=" + nwXUIE
+
+
+		IF nwDIA=0 THEN
+			Select * from QyUsPip where rowid=1 into QyAttrib noselect
+			Call PipAttribs
+
+			Select max(DiamWidth) from QyUsPip into QynwDIA noselect
+			nwDIA =QynwDIA.col1
+		END IF
+
+		IF nwXUIE>0 THEN
+			GOTO CalcIE
+		END IF
+	END IF
+
+	'UIE from US alt pipe
+	Select * from alt_links where DSnode = nwUSID into qyUsPip noselect
+	IF tableinfo(QyUsPip,8) >0 THEN
+		Print "Extracting USIE from alts"
+		Select min(DSIE) from QyUsPip into QynwXUIE noselect
+		nwXUIE = round(QynwXUIE.col1, 0.01)
+			print "extracted UIE=" + nwXUIE
+
+		IF nwDIA=0 THEN
+			Select * from QyUsPip where rowid=1 into QyAttrib noselect
+			Call PipAttribs
+
+			Select max(DiamWidth) from QyUsPip into QynwDIA noselect
+			nwDIA =QynwDIA.col1
+		END IF
+	END IF
+	
+CalcIE:
+
+	IF nwXUIE>0 and nwXDIE=0 THEN
+		nwXDIE= nwXUIE - (PctSlope*0.01*objectlen(nwPipObj,"ft"))  
+		exit sub
+	END IF
+
+	IF nwXUIE=0 and nwXDIE>0 THEN
+		nwXUIE= nwXDIE + (PctSlope*0.01*objectlen(nwPipObj,"ft"))  
+		exit sub
+	END IF
+
+	IF nwXDIE>nwXUIE THEN
+		Note "WARNING!!! DSIE higher than USIE!" + chr$(10) 
+				+ "Please check and modify as needed!" 		
+	END IF
+
+Exit Sub
+skipAttribChk:
+	Call DebugNote("Attribs Check Error: " & Err() & " " & Error$() )
+	Resume Next
+
+End Sub
+'--------------------------------------------------------
+Sub SplitPip
+	Dim sUSID, sDSID as string
+	Dim sLink as string
+	Dim sLinkID, splitOp as integer
+	Dim splitLinkType as string
+	
+	iOp=0
+	sOP="SPL"
+
+OnError GOTO skipSplit
+
+	IF NOT selectioninfo(1) THEN
+		Note "Please select a segment to split!"
+		Exit Sub
+	END IF
+
+	IF selectioninfo(1)NOT LIKE "%links%" THEN
+		Note "Split operation applicable to links tables only !"
+		exit sub
+	END IF
+
+	Select * from selection into qyTarget
+
+	IF	Tableinfo(qyTarget,TAB_INFO_NROWS)<>1 THEN
+		Note "Split operation available to one object at a time!"
+		Exit sub
+	End If
+	sUSID = qyTarget.USnode
+	sDSID = qyTarget.DSnode
+	splitLinkType = qyTarget.LinkType
+	SplitObj= qyTarget.Obj
+		sx1=objectnodex(SplitObj, 1,1)
+		sy1=objectnodey(SplitObj, 1,1)
+		
+	'Make sure we are working with a pipe that has not been previously modified.
+	'If we are selecting a mdl link, check the alt links tables for a link that has
+	'the same MdlLinkID.  If there are any operations within alt_links that have
+	'Operation field as 'SPL' 'CON' 'DEL' and MdlLinkID as the same, then do not
+	'allow this procedure to continue.
+	DIM iID AS Integer
+	 IF Selectioninfo(1) like "mdl%" THEN
+	 	iID = qyTarget.LinkID
+	 	
+	 	Select * FROM alt_links WHERE MdlLinkID = iID  AND Operation IN ("SPL", "CON", "DEL") into alreadyModified
+	 	IF	Tableinfo(alreadyModified,TAB_INFO_NROWS) > 0 THEN
+	 		CLOSE TABLE alreadyModified
+	 		NOTE "Please do not attempt to modify mdl_links that already have non-update operations in alt_links."
+	 		EXIT SUB
+	 	END IF
+	 	
+	 	CLOSE TABLE alreadyModified
+	 END IF
+	 
+	 'We should now check all of the tables that could be affected by a change in the
+	 'link we are trying to change.  This will need to include changes done by simple
+	 'updates as well, because such changes may have unforeseen problems with future,
+	 'as yet unimplemented toolpads.
+	 '--
+	 'The primary process here will include looking at all of the alt_* tables that
+	 'associate with the links.  I suppose that we cannot enforce that all tables
+	 'must share the same foreign interface column for MdlLinkID, so we really
+	 'will need each future toolset writer to include their own version of the interface.
+	 'We should have the compiler spit an error if someone tries to create a new toolset
+	 'but does not come here to identify whether or not the table should be checked for
+	 'model link associativity.
+	 '--
+	 'Ignore the following warning for now:
+	 'IF THIS CODE IS THROWING ERRORS FOR YOUR COMPILE, DO NOT ATTEMPT TO MODIFY THIS SECTION.
+	 'GO TO THE SECTION FOLLOWING THIS AND EXPLICITY IDENTIFY YOUR TABLE AS HAVING EITHER 
+	 'A DIRECT RELATION WITH MODEL LINKS OR NOTHING TO DO WITH MODEL LINKS AT ALL.  THANK YOU.
+	 '--
+	 'look at all of the tables which interface with the mdlLinkID, or USIE or DSIE, or anything
+	 'else that could be modified by changing a pipe.
+	 'Use a variable to track whether or not there are objects which should be deleted from the
+	 'alt tables.  DeleteItAll = 0 if there are no alt tables associated with this link, DeleteItAll
+	 '= 1 if there are alt tables associated with this link and the user wants to delete all
+	 'alternatives associated with the link, DeleteItAll = 2 if there are alt tables associated with
+	 'this link and the user does not want to delete any alternatives associated with the link.
+	 DIM DeleteItAll AS Integer
+	 DeleteItAll = 0
+	 'Start with alt_speclinks
+	IF Selectioninfo(1) like "mdl%" THEN
+	 	iID = qyTarget.LinkID
+		Select SLID From mdl_SpecLinks where ToLinkID = iID into SpecCheck0
+		Select * From alt_SpecLinks where MdlSpecLinkID IN (SELECT * FROM SpecCheck0) into SpecCheck
+		
+		IF Tableinfo(SpecCheck, TAB_INFO_NROWS) > 0 THEN
+			IF Ask("Modifying this pipe will delete all dependent alternative data associated with it, OK?:", "YES", "NO") = "T" THEN
+				DeleteItAll = 1
+			ELSE
+				DeleteItAll = 2
+			END IF
+		END IF
+
+		CLOSE TABLE SpecCheck0
+		CLOSE TABLE SpecCheck
+
+		'now do alt_dsc
+		Select * From alt_dsc where LinkIDSan = iID AND LinkSourceSan like "mdl" into DSCCheck
+		Select * From alt_dsc where LinkIDStorm = iID AND LinkSourceStorm like "mdl" into DSCCheck2
+		Insert Into DSCCheck Select * from DSCCheck2
+
+		IF Tableinfo(DSCCheck, TAB_INFO_NROWS) > 0 AND DeleteItAll <> 2 THEN
+			IF Ask("Modifying this pipe will delete all dependent alternative data associated with it, OK?:", "YES", "NO")= "T" THEN
+				DeleteItAll = 1
+			ELSE
+				DeleteItAll = 2
+			END IF
+		END IF
+
+		CLOSE TABLE DSCCheck
+		CLOSE TABLE DSCCheck2
+		
+		IF DeleteItAll = 1 THEN
+			Select SLID From mdl_SpecLinks where ToLinkID = iID into SpecCheck0
+			Select * From alt_SpecLinks where MdlSpecLinkID IN (SELECT * FROM SpecCheck0) into SpecCheck
+			Select * From alt_SpecLinkData Where AltSpecLinkID IN (SELECT AltSpecLinkID FROM SpecCheck) into SpecCheck2
+			
+			Select * From alt_dsc where LinkIDSan = iID AND LinkSourceSan like "mdl" into DSCCheck
+			Select * From alt_dsc where LinkIDStorm = iID AND LinkSourceStorm like "mdl" into DSCCheck2
+			Insert Into DSCCheck Select * from DSCCheck2
+			
+			Delete From SpecCheck
+			Delete From SpecCheck2
+			Delete From DSCCheck
+			
+			Commit Table alt_SpecLinks
+			Commit Table alt_SpecLinkData
+			Commit Table alt_dsc
+			
+			Close Table SpecCheck0
+			Close Table SpecCheck
+			Close Table SpecCheck2
+			Close Table DSCCheck
+			Close Table DSCCheck2
+		END IF		
+	END IF
+	
+	'Start with alt_speclinks
+	IF Selectioninfo(1) like "alt%" THEN
+	 	iID = selection.AltLinkID
+		Select * From alt_SpecLinks where AltLinkID = iID into SpecCheck
+		
+		IF Tableinfo(SpecCheck, TAB_INFO_NROWS) > 0 THEN
+			IF Ask("Modifying this pipe will delete all dependent alternative data associated with it, OK?:", "YES", "NO") = "T" THEN
+				DeleteItAll = 1
+			ELSE
+				DeleteItAll = 2
+			END IF
+		END IF
+
+		CLOSE TABLE SpecCheck
+
+		'now do alt_dsc
+		Select * From alt_dsc where LinkIDSan = iID AND LinkSourceSan like "alt" into DSCCheck
+		Select * From alt_dsc where LinkIDStorm = iID AND LinkSourceStorm like "alt" into DSCCheck2
+		Insert Into DSCCheck Select * from DSCCheck2
+
+		IF Tableinfo(DSCCheck, TAB_INFO_NROWS) > 0 AND DeleteItAll <> 2 THEN
+			IF Ask("Modifying this pipe will delete all dependent alternative data associated with it, OK?:", "YES", "NO")= "T" THEN
+				DeleteItAll = 1
+			ELSE
+				DeleteItAll = 2
+			END IF
+		END IF
+
+		CLOSE TABLE DSCCheck
+		CLOSE TABLE DSCCheck2
+		
+		IF DeleteItAll = 1 THEN
+			Select * From alt_SpecLinks where AltLinkID = iID into SpecCheck
+			Select * From alt_SpecLinkData Where AltSpecLinkID IN (SELECT AltSpecLinkID FROM SpecCheck) into SpecCheck2
+			
+			Select * From alt_dsc where LinkIDSan = iID AND LinkSourceSan like "alt" into DSCCheck
+			Select * From alt_dsc where LinkIDStorm = iID AND LinkSourceStorm like "alt" into DSCCheck2
+			Insert Into DSCCheck Select * from DSCCheck2
+			
+			Delete From SpecCheck
+			Delete From SpecCheck2
+			Delete From DSCCheck
+			
+			Commit Table alt_SpecLinks
+			Commit Table alt_SpecLinkData
+			Commit Table alt_dsc
+			
+			Close Table SpecCheck
+			Close Table SpecCheck2
+			Close Table DSCCheck
+			CLOSE TABLE DSCCheck2
+		END IF	
+		
+		IF DeleteItAll = 2 Then
+			Exit Sub
+		END IF	
+	END IF
+				
+	Call MakeNod   'Create point & Get new Node ID 
+	
+	'Verify that clicks was within 50' of pipe; If not, then quit
+	dim chkobj as object
+		chkobj = CreateCircle(x1, y1, 50)
+		IF chkobj intersects splitobj Then
+		Else
+			Dim i as Integer
+			i = TableInfo(ALt_Nodes, TAB_INFO_NROWS)
+			Select * From Alt_Nodes Where RowID = i Into QyDeleteNode
+			Delete From QyDeleteNode
+			Close Table QyDeleteNode
+		   Note "Please select a location within 50' of the pipe to split."
+		   Exit Sub
+		end if
+	
+	Call MaxAltID
+	Select * from qyTarget
+	Call PipAttribs
+
+		FOR iRun= 1 to 3
+			Insert into alt_links(AltLinkID, UsNode, DsNode, Operation, LinkType) 
+							values (MaxLinkID +iRun, sUSID, sDSID, "SPL", splitLinkType)
+			Select * from alt_links where AltLinkID = MaxLinkID +iRun into QySplitRec noselect
+			Update QySplitRec set obj = SplitObj 
+		NEXT
+
+		IF Selectioninfo(1) like "mdl%" THEN		
+			SplitOp=1  ' 1= Splitting mdl seg 
+			sLinkID = Selection.LinkID
+				exShp=Selection.PipeShape
+				exMAT=Selection.Material
+				print exShp & "/"& exMat
+
+		ELSE
+			SplitOp=0  ' 0= Splitting alt seg
+		END IF
+
+	Select * from Alt_Links where AltLinkID = MaxLinkID +3 into QySplitter
+	
+	print nwNodID + ": node for split"
+		
+		Select * from alt_nodes where AltNodeID= MaxNodId+1 into QySplitPt
+			sx2= x1
+			sy2= y1
+
+	xDist=objectlen(SplitObj, "FT")
+	nwXIE = (nwUIE-nwDIE)/xDist
+	
+	Set CoordSys Earth Projection 3, 33, "ft", -120.5, 43.6666666667, 44.3333333333, 46, 8202099.7379999999, 0
+
+		Update QySplitter set obj = CreateCircle(sx1,sy1, distance(sx1,sy1,sx2,sy2, "ft") )
+
+		IF splitOp = 1 THEN
+			sOp="CON"
+		ELSE
+			sOp="ADD"
+		END IF
+
+		Call MaxAltId
+
+		Select * from Alt_Links where AltLinkID=MaxLinkID -2 into QyUpdt
+		Update QyUpdt set 	UsNode=sUSID,
+								DsNode=nwNodID, 
+								Operation = sOp
+
+		Select * from Alt_Links where AltLinkID=MaxLinkID -2 into QyUpdt
+		Set Target On
+		Select obj from QySplitter
+		Objects intersect into Target Data AltLinkID=AltLinkID, UsNode =UsNode, DsNode = DsNode, Operation= Operation
+		Select * from Alt_Links where AltLinkID=MaxLinkID -2 into QyUpdt
+		Select * from QyUpdt into QyUpdtSeg1
+
+		nwXIE= Round(nwUIE - ((nwUIE - nwDIE)*(objectlen(QyUpdt.obj, "ft")/objectlen(SplitObj, "ft"))) ,0.01)
+
+		CALL UpdtAttribs
+
+		Select * from Alt_Links where AltLinkID=MaxLinkID -2 into QyUpdt
+		sx2=round(objectnodex(QyUpdt.obj,1,2), 0.1)
+		sy2=round(objectnodey(QyUpdt.obj,1,2), 0.1)
+
+		Update QyUpdt set 
+			USIE=nwUIE, 
+			DSIE=nwXIE
+
+		Select * from Alt_Links where AltLinkID=MaxLinkID -1 into QyUpdt
+		Update QyUpdt set UsNode=nwNodID,
+								DsNode=sDSID, 
+								Operation = sOp
+
+		Select * from Alt_Links where AltLinkID=MaxLinkID -1 into QyUpdt
+		Set Target On
+		Select * from QySplitter
+		Objects erase into Target Data AltLinkID=AltLinkID, UsNode =UsNode, DsNode = DsNode,Operation=Operation
+		Select * from Alt_Links where AltLinkID=MaxLinkID -1 into QyUpdt
+		Select * from QyUpdt into QyUpdtSeg2
+
+		CALL UpdtAttribs
+
+		Update QyUpdt set 
+			USIE=nwXIE, 
+			DSIE=nwDIE 
+
+		Update qyNwNod set obj = createpoint(sx2,sy2)
+
+		IF splitOp = 1 THEN
+			print "splitOp=1"
+			Update QySplitter set obj = splitObj
+			Update QySplitter set MdlLinkID = sLinkID
+			Update QyUpdtSeg1 set PipeShape = exSHP, Material = exMAT  
+			Update QyUpdtSeg2 set PipeShape = exSHP, Material = exMAT
+		ELSE
+			print "splitOp=0"
+			Delete from QySplitter 
+			Delete from QyTarget 
+			Update QyUpdtSeg2 set 
+						DSIE=DSIE +0.1, 
+						USIE=nwUIE +0.1
+
+		END IF
+		Print "splitOp= " + SplitOP
+
+		sx1=0
+		sy1=0
+
+Call FixLgdTheme
+RUN MENU COMMAND 304
+RUN MENU COMMAND 1701
+
+Exit Sub
+skipSplit:
+	Call DebugNote("Pipe Split Error: " & Err() & " " & Error$() )
+	Resume Next
+
+End Sub
+'--------------------------------------------------------
+Sub DlgSUpdt 
+	dim sTbl as string
+	dim tmplinkid as integer
+
+	IF NOT selectioninfo(1) THEN
+		Note "Please select a segment to update!"
+		Exit Sub
+	END IF
+	
+	If SelectionInfo(SEL_INFO_NROWS) <> 1 Then
+		Note "You may only update one link at a time."
+		Exit Sub
+	End If
+
+	sTbl = selectioninfo(1)
+	
+	IF sTbl NOT LIKE "%links%" THEN
+		Note "Update operation applicable to links tables only !"
+		exit sub
+	END IF
+
+	Select * from selection into qyRecUpdt
+	
+	sPip= "Segment:  " + qyRecUpdt.UsNode + " - " + qyRecUpdt.DsNode 
+				
+	IF sTbl = "mdl_links" THEN
+			tmplinkid = qyRecUpdt.LinkID
+			sFTyp = qyRecUpdt.PipeFlowType
+			sShp= qyRecUpdt.PipeShape
+			'Check if the selected mdl_link already exists in alt_links
+			'If so, then do not add a new entry to alt_links: instead, 
+			'select the corresponding entry from alt_links and proceed.
+			Select * From qyRecUpdt Where qyRecUpdt.LinkId In (Select MdlLinkId From alt_links Where Operation <> Any("DEL", "SPL")) Into QyTestAlreadyInAlt
+			Print "Checking if selected mdl_link already exist in alt_links..."
+			If TableInfo(QyTestAlreadyInAlt, TAB_INFO_NROWS) <> 0 Then
+				Print "Replacing selected mdl_link with corresponding alt_link"
+				Select * From alt_links Where MdlLinkId In (Select LinkId From QyRecUpdt) Into QyRecUpdt
+				Close Table QyTestAlreadyInAlt
+			Else
+				Select * From mdl_links Where LinkID = tmplinkid Into qyRecUpdt
+			End If					
+	ELSE
+			sShp= qyRecUpdt.PipeShape
+	END IF
+
+	sLTyp = qyRecUpdt.LinkType
+	fLen = qyRecUpdt.Length
+	fDiam = qyRecUpdt.DiamWidth
+	fHt= qyRecUpdt.Height
+	sMat= qyRecUpdt.Material
+	fUIE = qyRecUpdt.USIE
+	fDIE = qyRecUpdt.DSIE
+
+	NoObjLen=0
+	
+	Print "Showing update dialog for " + sPip
+	Dialog   
+	Title "Update Segment Attributes" Position 250,100 'Calling ChkExObj
+	Control StaticText		ID 8500	Position 10,7			Width 120		Title sPip    
+	Control StaticText		ID 8500	Position 10,20		Width 60		Title "LINK TYPE:"    
+	Control EditText		ID 8490	Position 75,20		Width 60		Value "C"		into sLTyp
+	Control StaticText		ID 8480	Position 10,30		Width 60		Title "FLOW TYPE:"    
+	Control EditText		ID 8470	Position 75,30		Width 60		Value "C"		into sFtyp
+	Control StaticText		ID 8462	Position 10,40		Width 60		Title "LENGTH (ft):"    
+	Control EditText		ID 8461	Position 75,40		Width 60		Value fLen	into fLen
+	Control StaticText		ID 8460	Position 10,50		Width 60		Title "DIAMETER (in):"    
+	Control EditText		ID 8450	Position 75,50		Width 60		Value fDiam	into fDiam
+	Control StaticText		ID 8440	Position 10,60		Width 60		Title "HEIGHT (in):"    
+	Control EditText		ID 8430	Position 75,60		Width 60		Value fHt		into fHt
+	Control StaticText		ID 8420	Position 10,70		Width 60		Title "SHAPE:"    
+	Control EditText		ID 8410	Position 75,70		Width 60		Value sShp	into sShp
+	Control StaticText		ID 8400	Position 10,80		Width 60		Title "MATERIAL:"		    
+	Control EditText		ID 8390	Position 75,80		Width 60		Value sMat	into sMat
+	Control StaticText		ID 8380	Position 10,90		Width 60		Title "USIE (ft):"    
+	Control EditText		ID 8370	Position 75,90		Width 60		Value fUIE	into fUIE
+	Control StaticText		ID 8360	Position 10,100		Width 60		Title "DSIE (ft):"    
+	Control EditText		ID 8350	Position 75,100		Width 60		Value fDIE	into fDIE
+	Control Checkbox  		ID 8349	Position 10,115		Width 120		Title "Update Attributes Only"	Value NoObjLen    
+	Control OKButton		ID 8340	Position 10,135		Width 45		Title "OK"			Calling OkUpdt   
+	Control CancelButton	ID 8330	Position 60,135 		Width 45		Title "Cancel"	'Calling EndHandler
+
+End Sub
+'--------------------------------------------------------
+Sub ChkSelTbl
+	IF NOT Selectioninfo(1) THEN
+		note "Please make a selection!"
+		exit sub
+	END IF
+
+	IF Selectioninfo(1) Like "%mdl%"THEN
+		iOp=1
+		Print "Selection from mdl table"
+	ELSE
+		iOp=0
+		Print "Selection from alt table"
+	END IF
+End Sub
+'--------------------------------------------------------
+'Assert: 	One item is selected from either alt_links or mdl_links
+'			qyRecUpdt contains the selected link
+'			DlgSUpdt was run and control values are populated			
+Sub OkUpdt
+dim iUpdt as integer
+dim UpdtOp as string
+OnError GOTO skipOKUpdt
+
+iUpdt= 0
+
+Call ChkSelTbl
+
+Select * from selection into qyUpdt   'checking selection source/Alt or mdl, Sets iOp
+'UpdtObj = QyUpdt.obj
+
+'Read attributes from existing selection into nw*** variables
+Call PipAttribs
+
+'check if object to update is already appended in alt_links
+
+	IF iUpdt>0 THEN 
+		sOp = "ADD" 
+	END IF
+
+	NoObjLen= ReadControlValue(8349)
+	upLTyp = ReadControlValue(8490)
+	upFTyp = ReadControlValue(8470)
+	upShp = ReadControlValue(8410)
+	upMAT = ReadControlValue(8390)
+	upUIE = ReadControlValue(8370)
+	upDIE = ReadControlValue(8350)
+	upDia = ReadControlValue(8450)
+	upHT = ReadControlValue(8430)
+	upLEN = ReadControlValue(8461)
+	
+		
+	IF ABS(upLEN-nwLEN)>1 THEN iUpdt = iUpdt + 1 END IF
+	IF upLTYP<>nwLTYP THEN iUpdt = iUpdt + 1 END IF
+	IF upFTYP<>nwFTYP THEN iUpdt = iUpdt + 1 END IF
+	IF upDIA<>nwDIA THEN iUpdt = iUpdt + 1 END IF
+	IF upMAT<>nwMAT THEN iUpdt = iUpdt + 1 END IF
+	IF upSHP<>nwSHP THEN iUpdt = iUpdt + 1 END IF
+	IF upUIE<>nwUIE THEN iUpdt = iUpdt + 1 END IF
+	IF upDIE<>nwDIE THEN iUpdt = iUpdt + 1 END IF
+	IF upHT <>nwHT THEN  iUpdt = iUpdt + 1 END IF
+
+	Do Case iOp
+
+		Case 0	'alt updt
+
+			UpdtOp= QyUpdt.Operation
+
+			IF NoObjLen THEN
+				Goto DoUpdt
+			END IF
+
+			IF ABS(upLEN-nwLEN)>1 THEN
+				Call DoPipLen
+			END IF
+
+			Goto DoUpdt
+
+		Case 1 'mdl updt
+			IF ABS(upLEN-nwLEN)>0.5 THEN
+				Note "Cannot changes length of pipe. Manhole locations are fixed." + chr$(10) + "Instead, you may wish to delete this pipe and add a new one."
+				exit sub
+			END IF		
+
+			IF iUpdt=0 THEN
+				print "No changes entered...exiting sub"
+				exit sub
+			END IF
+		nwUSID = qyRecUpdt.UsNode
+		nwDSID = qyRecUpdt.DsNode
+				
+		Call MaxAltID
+		'What the hells does this do?
+		insert into alt_links(AltLinkID,MdlLInkID, USnode,DsNode, Operation) values (maxlinkID +1,nwLID,nwUSID, nwDSID, "UPD")
+		
+		Select * from alt_links where AltLinkID = maxlinkID +1 into qyUpdt noselect
+		If TableInfo(qyUpdt, TAB_INFO_NROWS) <> 1 Then
+			Note "Oops... found multiple links to update.  Please pack alt_links, select 'Reset Alternative Workbench' and try again"
+			Goto SkipOKUpdt
+		End If
+		Update qyUpdt set obj = iObj 
+		Select * from alt_links where AltLinkID = maxlinkID +1 into qyUpdt noselect
+		Goto DoUpdt
+
+	End Case
+
+DoUpdt:
+		Update qyUpdt set 
+			LinkType = uCase$(upLTyp),	
+			PipeShape = uCase$(upSHP),
+			Material = uCase$(upMAT),	
+			USIE = upUIE,	
+			DSIE = upDIE,	
+			DiamWidth = upDIA,	
+			Height = upHT	
+
+		IF NoObjLen THEN
+			Update qyUpdt set Length = upLEN
+		ELSE
+			Update qyUpdt set Length = round(objectlen(obj,"ft"),0.1)	
+		END IF
+
+	Call FixLgdTheme
+	Close table qyRecUpdt
+Exit Sub
+skipOKUpdt:
+	Call DebugNote("OKUpdt Error: " & Err() & " " & Error$() )
+	Resume Next
+
+End Sub
+'--------------------------------------------------------
+Sub DoPipLen
+dim AskLen as logical
+Dim LenObj as float
+
+sOp=""
+iOp=0
+
+OnError GOTO SkipDoPipLen
+
+UpdtObj=qyRecUpdt.obj
+UpUSID =qyRecUpdt.UsNode
+UpDSID =qyRecUpdt.DsNode
+LenObj= objectlen(UpdtObj, "ft")
+
+ratio = upLEN/LenObj
+print "ratio = "+ratio
+
+Select * from alt_links where USnode =upUSID and DSnode = upDSID into qyRecUpdt
+Select * from alt_nodes where Node=UpUSID and Operation="ADD" into qyUSxNod
+	IF tableinfo(qyUSxNod, 8)>0 then
+		iOp=1
+		USx=centroidX(QyUsxNod.obj)
+		USy=centroidY(QyUsxNod.obj)
+	END IF
+Select * from alt_nodes where Node =UpDSID  and Operation="ADD" into qyDSxNod
+
+	IF tableinfo(qyDSxNod, 8)>0 then
+		iOp=iOP+2
+		DSx=centroidX(QyDsxNod.obj)
+		DSy=centroidY(QyDsxNod.obj)
+	END IF
+
+Print "iOp; "+ iOp
+
+DO CASE iOp
+
+	Case 0		'Both endpoints fixed
+		note "Cannot Extend/Trim Length...Existing Manholes!"
+		exit sub
+	Case 1		
+		' Print "UsNode movable; DsNode fixed"
+		Call FromDSnode
+	Case 2		
+		' Print "DsNode movable; UsNode fixed"
+		Call FromUSnode
+	Case 3		
+		' Print "Both endpoints movable"
+		IF Ask("Pipe Length distance to be measured from:", "DSnode", "USnode")= "T" THEN
+			'Measure from DSNode
+			Call FromDSnode
+		ELSE
+			'Measure from USNode
+			Call FromUSnode
+		END IF
+
+END CASE
+
+		Update qyRecUpdt set Length = round(objectlen(obj,"ft"), 1) 
+		' Print "LEN Updated"
+		RUN MENU COMMAND 304
+
+Exit Sub
+SkipDoPipLen:
+	Call DebugNote("DoPipLen Error: " & Err() & " " & Error$() )
+	Resume Next
+
+End Sub
+'--------------------------------------------------------
+Sub FromUSnode
+
+OnError GOTO skipFrUSnode
+			'Measure from USNode
+				nwUSx = USx - ((USx - DSx) * ratio)
+				nwUSy = USy - ((USy - DSy) * ratio)
+			Alter Object UpdtObj node set position 1,2(nwUSx,nwUSy)
+			Update qyRecUpdt set obj = UpdtObj
+
+			Update qyRecUpdt Set USIE = Round(DSIE +(exPipSlope * objectlen(UpdtObj, "FT")),0.01)
+
+			Update qyDSxNod set obj = createpoint(nwUSx,nwUSy)
+
+			Select * from alt_links where UsNode = upDSID and Operation <> "SPL" into QyUpdtLinks
+				FOR iRec = 1 to tableinfo(QyUpdtLinks,8)
+					Select * from QyUpdtLinks where rowid = iRec into QyUpdtObj
+					UpdtObj = QyUpdtObj.obj
+					Alter object UpdtObj node set position 1,1(nwUSx,nwUSy)
+					Update QyUpdtObj set obj = UpdtObj
+					Update QyUpdtObj set LENGTH = round(objectlen(obj,"ft"),0.1)
+				NEXT
+
+			Select * from alt_links where DsNode = upDSID and Operation <> "SPL" into QyUpdtLinks
+				FOR iRec = 1 to tableinfo(QyUpdtLinks,8)
+					Select * from QyUpdtLinks where rowid = iRec into QyUpdtObj
+					UpdtObj = QyUpdtObj.obj
+					Alter object UpdtObj node set position 1,2(nwUSx,nwUSy)
+					Update QyUpdtObj set obj = UpdtObj
+					Update QyUpdtObj set LENGTH = round(objectlen(obj,"ft"),0.1)
+				NEXT
+
+Exit Sub
+skipFrUSnode:
+	Call DebugNote("OKUpdt Error: " & Err() & " " & Error$() )
+	Resume Next
+
+End sub
+'--------------------------------------------------------
+Sub FromDSnode
+
+OnError GOTO skipFrDSnode
+			'Measure from DSNode
+				nwDSx = DSx - ((DSx - USx) * ratio)
+				nwDSy = DSy - ((DSy - USy) * ratio)
+			Alter Object UpdtObj node set position 1,1(nwDSx,nwDSy)
+			Update qyRecUpdt set obj = UpdtObj
+			Update qyUSxNod set obj = createpoint(nwDSx,nwDSy)
+
+			Select * from alt_links where DsNode = upUSID and Operation <> "SPL" into QyUpdtLinks
+				FOR iRec = 1 to tableinfo(QyUpdtLinks,8)
+					Select * from QyUpdtLinks where rowid = iRec into QyUpdtObj
+					UpdtObj = QyUpdtObj.obj
+					Alter object UpdtObj node set position 1,2(nwDSx,nwDSy)
+					Update QyUpdtObj set obj = UpdtObj
+					Update QyUpdtObj set LENGTH = round(objectlen(obj,"ft"),0.1)
+				NEXT
+
+			Select * from alt_links where DsNode = upDSID and Operation <> "SPL" OR UsNode = upUSID and Operation <> "SPL" into QyUpdtLinks
+				FOR iRec = 1 to tableinfo(QyUpdtLinks,8)
+					Select * from QyUpdtLinks where rowid = iRec into QyUpdtObj
+					UpdtObj = QyUpdtObj.obj
+					Alter object UpdtObj node set position 1,1(nwDSx,nwDSy)
+					Update QyUpdtObj set obj = UpdtObj
+					Update QyUpdtObj set LENGTH = round(objectlen(obj,"ft"),0.1)
+				NEXT
+
+			Close table QyUpdtLinks
+
+Exit Sub
+
+skipFrDSnode:
+
+	Call DebugNote("FrDSnode Error: " & Err() & " " & Error$() )
+	Resume Next
+
+End Sub
+'--------------------------------------------------------
+Sub DelObj
+	Dim DelObj as object
+	Dim DelCase as string
+
+	DelCase = ""	
+
+	IF NOT Selectioninfo(1) THEN
+		Note "Please select an object to delete!"
+
+		exit sub
+	END IF
+			print "selecting..." +selectioninfo(1) 
+	
+	Select * from selection into QyDelRec 
+
+	'IF tableinfo(QyDelRec,8)>1 THEN
+	'	Note "You can only delete One(1) object at a time !"
+	'	Exit Sub
+	'END IF
+
+OnError goto SkipDelOp
+                                         
+	IF selectioninfo(1) like "mdl_nod%" THEN DelCase= "DelMdLNod" END IF
+	IF selectioninfo(1) like "mdl_lin%" THEN DelCase= "DelMdLSeg" END IF
+'	IF selectioninfo(1) like "mdl_sur%" THEN DelCase= "DelMdLSsc" END IF
+'	IF selectioninfo(1) like "mdl_d%"   THEN DelCase= "DelMdLDsc" END IF
+	IF selectioninfo(1) like "alt_nod%" THEN DelCase= "DelAltNod" END IF
+	IF selectioninfo(1) like "alt_lin%" THEN DelCase= "DelAltSeg" END IF
+'	IF selectioninfo(1) like "alt_ssc%" THEN DelCase= "DelAltSsc" END IF
+'	IF selectioninfo(1) like "alt_d%"   THEN DelCase= "DelAltDsc" END IF
+
+	IF DelCase = "" THEN 
+
+		Print "INVALID SELECTION...." + CHR$(10)+
+				"PLEASE MAKE ANOTHER SELECTION!"
+		Exit Sub
+	END IF
+
+	IF Not FileExists("C:\Temp\AltAutoDelete.txt") THEN
+		IF ask("Do you really want to delete " & SelectionInfo(SEL_INFO_NROWS) & " selected object(s)?", "Yes", "No")= 0 THEN
+			Print "Deletion cancelled..."
+			Exit Sub
+		END IF
+	END IF
+DIM DeleteItAll AS Integer
+DeleteItAll = 0
+
+Call MaxAltID
+Do Case DelCase
+
+	'MODEL OBJECTS
+	Case "DelMdlNod"
+		Select Node from selection into QyApp2Alt
+		Select * From alt_ssc Where NGTO IN (Select * From QyApp2Alt) into AffectedSSC
+		
+		IF	Tableinfo(AffectedSSC,TAB_INFO_NROWS) > 0 THEN
+			IF Ask("Deleting this node will delete all dependent alternative data associated with it, OK?:", "YES", "NO") = "T" THEN
+				DeleteItAll = 1
+			ELSE
+				DeleteItAll = 2
+			END IF
+		END IF
+		
+		IF DeleteItAll = 1 THEN
+			Delete From AffectedSSC
+			Commit Table alt_ssc
+		ELSEIF DeleteItAll = 2 THEN
+			CLOSE TABLE AffectedSSC
+			CLOSE TABLE QyApp2Alt
+			Exit Sub
+		END IF
+		
+		CLOSE TABLE AffectedSSC
+		
+		Insert into Alt_nodes(col1, col2, Operation) select MaxNodID+1, Node, "DEL" from QyApp2Alt	
+		
+	Case "DelMdlSeg"
+		'Make sure we are working with a pipe that has not been previously modified.
+		'If we are selecting a mdl link, check the alt links tables for a link that has
+		'the same MdlLinkID.  If there are any operations within alt_links that have
+		'Operation field as 'SPL' 'CON' 'DEL' and MdlLinkID as the same, then do not
+		'allow this procedure to continue.
+		
+		Select LinkID, UsNode, DsNode from selection into QyApp2Alt
+		Select LinkID From QyApp2Alt into LinksToDelete 
+	 	
+	 	Select * FROM alt_links WHERE MdlLinkID IN (Select * From LinksToDelete) into alreadyModified
+	 	IF	Tableinfo(alreadyModified,TAB_INFO_NROWS) > 0 THEN
+	 		CLOSE TABLE alreadyModified
+	 		CLOSE TABLE LinksToDelete
+	 		Close Table QyApp2Alt
+	 		NOTE "Please do not attempt to delete mdl_links that already have operations in alt_links."
+	 		EXIT SUB
+	 	END IF
+	 	
+	 	CLOSE TABLE alreadyModified
+	 	
+		Select SLID From mdl_SpecLinks where ToLinkID IN (SELECT * FROM LinksToDelete) into SpecCheck0
+		Select * From alt_SpecLinks where MdlSpecLinkID IN (SELECT * FROM SpecCheck0) into SpecCheck
+		
+		IF Tableinfo(SpecCheck, TAB_INFO_NROWS) > 0 THEN
+			IF Ask("Deleting this pipe will delete all dependent alternative data associated with it, OK?:", "YES", "NO") = "T" THEN
+				DeleteItAll = 1
+			ELSE
+				DeleteItAll = 2
+			END IF
+		END IF
+
+		CLOSE TABLE SpecCheck0
+		CLOSE TABLE SpecCheck
+
+		'now do alt_dsc
+		Select * From alt_dsc where LinkIDSan IN (SELECT * FROM LinksToDelete) AND LinkSourceSan like "mdl" into DSCCheck
+		Select * From alt_dsc where LinkIDStorm IN (SELECT * FROM LinksToDelete) AND LinkSourceStorm like "mdl" into DSCCheck2
+		Insert Into DSCCheck Select * from DSCCheck2
+
+		IF Tableinfo(DSCCheck, TAB_INFO_NROWS) > 0 AND DeleteItAll <> 2 THEN
+			IF Ask("Deleting this pipe will delete all dependent alternative data associated with it, OK?:", "YES", "NO")= "T" THEN
+				DeleteItAll = 1
+			ELSE
+				DeleteItAll = 2
+			END IF
+		END IF
+
+		CLOSE TABLE DSCCheck
+		CLOSE TABLE DSCCheck2
+		
+		IF DeleteItAll = 1 THEN
+			Select SLID From mdl_SpecLinks where ToLinkID IN (SELECT * FROM LinksToDelete) into SpecCheck0
+			Select * From alt_SpecLinks where MdlSpecLinkID IN (SELECT * FROM SpecCheck0) into SpecCheck
+			Select * From alt_SpecLinkData Where AltSpecLinkID IN (SELECT AltSpecLinkID FROM SpecCheck) into SpecCheck2
+			
+			Select * From alt_dsc where LinkIDSan IN (SELECT * FROM LinksToDelete) AND LinkSourceSan like "mdl" into DSCCheck
+			Select * From alt_dsc where LinkIDStorm IN (SELECT * FROM LinksToDelete) AND LinkSourceStorm like "mdl" into DSCCheck2
+			Insert Into DSCCheck Select * from DSCCheck2
+			
+			Delete From SpecCheck
+			Delete From SpecCheck2
+			Delete From DSCCheck
+			
+			Commit Table alt_SpecLinks
+			Commit Table alt_SpecLinkData
+			Commit Table alt_dsc
+			
+			Close Table SpecCheck0
+			Close Table SpecCheck
+			Close Table SpecCheck2
+			Close Table DSCCheck
+			Close Table DSCCheck2
+		ELSEIF DeleteItAll = 2 THEN
+			Close Table LinksToDelete
+			Close Table QyApp2Alt
+			Exit Sub
+		END IF
+				
+		Close Table LinksToDelete
+		Select MdlLinkID, UsNode, DsNode from selection into QyApp2Alt
+		Insert into Alt_links(col1, col2, UsNode, DsNode, Operation) select MaxLinkID+1, LinkID, UsNode, DsNode, "DEL" from QyApp2Alt	
+		
+'	Case DelMdlSsc
+'		Select SurfSCID from selection into QyApp2Alt
+'		Insert into Alt_ssc(col1, col2,  col3) select 0, SurfSCID, "DEL" from QyApp2Alt	
+		
+'	Case DelMdlDsc
+'		Select Node from selection into QyApp2Alt
+'		Insert into Alt_nodes(col1, col2, col3) select 0, Node, "DEL" from QyApp2Alt	
+		
+	'ALTERNATIVE OBJECTS
+	Case "DelAltNod"
+		Delete from QyDelRec		
+
+	Case "DelAltSeg"
+		Select AltLinkID From QyDelRec into LinksToDelete 
+	 	
+		Select * From alt_SpecLinks where AltLinkID IN (SELECT * FROM LinksToDelete) into SpecCheck
+		
+		IF Tableinfo(SpecCheck, TAB_INFO_NROWS) > 0 THEN
+			IF Ask("Deleting this pipe will delete all dependent alternative data associated with it, OK?:", "YES", "NO") = "T" THEN
+				DeleteItAll = 1
+			ELSE
+				DeleteItAll = 2
+			END IF
+		END IF
+
+		CLOSE TABLE SpecCheck
+
+		'now do alt_dsc
+		Select * From alt_dsc where LinkIDSan IN (SELECT * FROM LinksToDelete) AND LinkSourceSan like "alt" into DSCCheck
+		Select * From alt_dsc where LinkIDStorm IN (SELECT * FROM LinksToDelete) AND LinkSourceStorm like "alt" into DSCCheck2
+		Insert Into DSCCheck Select * from DSCCheck2
+
+		IF Tableinfo(DSCCheck, TAB_INFO_NROWS) > 0 AND DeleteItAll <> 2 THEN
+			IF Ask("Deleting this pipe will delete all dependent alternative data associated with it, OK?:", "YES", "NO")= "T" THEN
+				DeleteItAll = 1
+			ELSE
+				DeleteItAll = 2
+			END IF
+		END IF
+
+		CLOSE TABLE DSCCheck
+		CLOSE TABLE DSCCheck2
+		
+		IF DeleteItAll = 1 THEN
+			Select * From alt_SpecLinks where AltLinkID IN (SELECT * FROM LinksToDelete) into SpecCheck
+			Select * From alt_SpecLinkData Where AltSpecLinkID IN (SELECT AltSpecLinkID FROM SpecCheck) into SpecCheck2
+			
+			Select * From alt_dsc where LinkIDSan IN (SELECT * FROM LinksToDelete) AND LinkSourceSan like "alt" into DSCCheck
+			Select * From alt_dsc where LinkIDStorm IN (SELECT * FROM LinksToDelete) AND LinkSourceStorm like "alt" into DSCCheck2
+			Insert Into DSCCheck Select * from DSCCheck2
+			
+			Delete From SpecCheck
+			Delete From SpecCheck2
+			Delete From DSCCheck
+			
+			Commit Table alt_SpecLinks
+			Commit Table alt_SpecLinkData
+			Commit Table alt_dsc
+			
+			Close Table SpecCheck
+			Close Table SpecCheck2
+			Close Table DSCCheck
+			Close Table DSCCheck2
+		ELSEIF DeleteItAll = 2 THEN
+			Close Table LinksToDelete
+			Close Table QyDelRec
+			Exit Sub
+		END IF
+				
+		Close Table LinksToDelete
+		
+		Delete from QyDelRec
+	
+'	Case DelAltSsc
+'		Delete from QyDelRec				
+
+'	Case DelAltDsc
+'		Delete from QyDelRec		
+
+End Case
+
+
+'Close table QyApp2Alt	
+
+Call FixLgdTheme
+RUN MENU COMMAND 304
+RUN MENU COMMAND 1701
+
+exit sub
+SkipDelOp:
+	Call Debugnote(Err() & " " & Error$())
+	Resume Next
+
+End Sub
+'--------------------------------------------------------
+Sub CloseQry
+dim iTbl as integer
+iTbl=1
+
+	DO until iTbl= numtables()-1
+		IF tableinfo(iTbl,1) like "qy%" THEN
+			Close table tableinfo(iTbl,1)
+'			IF iTbl= numtables()-1 THEN
+'				Exit Sub
+'			END IF
+			iTbl = iTbl +1
+		END IF
+	LOOP
+End Sub
+'--------------------------------------------------------
+Sub DemPts
+Dim i as integer
+Dim xa,ya, fDist as float
+Dim PtsPath,sFile as string
+Dim PtsTbl as string
+Dim TmpLst, DoStr as string
+PtsPath = "\\Cassio\GIS1\MI_DATA\ENVIRON\TOPO\GRD\2004\PtsTbl\"
+
+OnError GOTO SkipElev
+	sFile = PtsPath + "WshdPts.txt"
+TmpLst= "" 
+
+	i = 1
+	Open File sFile For Input as #99
+	Do While Not EOF(99)
+			input #99, Wshd(i)
+			TmpLst = TmpLst + Wshd(i) + ";"
+			i = i + 1
+	    		  If (i + 1) >= UBound(Wshd) Then 
+	      		  	ReDim Wshd(i + 5)
+	      		End If 
+	Loop
+	Close File #99
+
+	Select * from QyNwNod into QyUpdt
+		xa=round(centroidx(QyNwNod.obj),0.1)
+		ya=round(centroidy(QyNwNod.obj),0.1)
+
+	Update QyNwNod set object = createcircle(centroidx(Obj), centroidy(Obj), 5)
+
+	FOR i = 1 to 8
+	 	PtsTbl= wshd(i)
+
+		DoStr = Str$("Open Table " & Chr$(34) & Ptspath & PtsTbl & ".tab"& Chr$(34) & " Hide")
+			Run Command DoStr
+
+		DoStr =Str$("Select Avg(col1) from " & PtsTbl &	" where object within(Select obj from QyNwNod) into QyElev" )
+			Run Command DoStr
+
+		IF tableinfo(QyElev,8)>=1 THEN
+			fElev= Format$(QyElev.col1, "###.#")
+			Update QynwNod set GrndElev = fElev
+			Update QynwNod set object = createpoint(xa,ya)
+			Close Table PtsTbl
+			Exit For
+		END IF
+	NEXT
+
+	IF fElev >0 THEN
+		Print "Elev from DEM: "+ fElev
+		Exit Sub
+	END IF 
+
+Exit Sub 'PORTION BELOW DISABLED (Not needed at this time)
+MHPts:
+
+	fDist = 10
+
+	iObj = createPoint(xa,ya)
+
+	DO
+		iobj = buffer(iobj, 9,fdist, "ft")
+		Select grndelev from mdl_nodes where
+			grndelev>0 and  obj intersects iObj into QySet
+		
+		IF tableinfo(QySet,8)>3  THEN
+			exit Do
+		ELSE
+			fDist = fDist +10 
+		END IF
+
+	LOOP
+
+		Select Avg(col1) from QySet  into QyElev
+		fElev = Format$(QyElev.col1, "###.#")
+		Update NwNod set obj  = createPoint(xa,ya)
+		Update NwNod set grndElev = fElev
+
+	Print "Elev. from MHs : " + fElev
+	Exit Sub
+
+SKIPMH:
+	Print "Elev. Error: " + Error$()
+	Print "Skippping MhPts...."
+	Exit Sub
+
+SkipElev:
+	Print "Elev. Error " + Err() + " "+ Error$()
+	Print "Skippping DemPts...."
+	Resume Next
+End Sub
+'--------------------------------------------------------
+Sub FixLgdTheme
+
+OnError GOTO SkipLgd
+
+Dim iMainWindow as integer
+iMainWindow = FindWindowIDByName("Main Map")
+	
+set legend 
+  layer FindLayerIDByName(iMainWindow, "alt_links(1)") 
+    display on 
+    shades off 
+    symbols off 
+    lines on 
+    count on 
+    title auto Font ("Arial Narrow",5,9,0)
+    subtitle auto Font ("Arial",0,8,0)
+    ascending on 
+    ranges Font ("Arial Narrow",1,8,0)
+      auto display off ,
+      "ADD - Newly Added Pipes" display on ,
+      "CON - Re-Connected Pipes" display on ,
+      "DEL - Deleted Pipes" display on ,
+      "SPL - Split Pipes" display on ,
+      "UPD - Updated Attributes" display on            
+
+exit sub
+SkipLgd:
+	print "LgdError: " + Err()+": " + Error$()
+	Resume NExt
+End Sub
+'--------------------------------------------------------
+Function GetUniqueNode() as String
+	Dim NodeID as String	
+	NodeID=Format$(MaxNodID+1, "00#") + uCase$(gDefaultNodeSuffix)
+		Select * From mdl_nodes Where Node = NodeID Into UniqueCheck
+		If TableInfo(UniqueCheck, TAB_INFO_NROWS) = 0 Then
+			Select * From alt_nodes Where Node = NodeID Into UniqueCheck
+		End If
+		If TableInfo(UniqueCheck, TAB_INFO_NROWS) <> 0 Then
+			Print "Duplicate node name found, generating new node name."
+			MaxNodID = MaxNodID + 1
+			If MaxNodID = 999 Then
+				gDefaultNodeSuffix = Chr$(Round(Rnd(1)*(90-65), 1)+65)+Chr$(Round(Rnd(1)*(90-65), 1)+65)+Chr$(Round(Rnd(1)*(90-65), 1)+65)
+			End If
+			NodeID = GetUniqueNode()
+			Close Table UniqueCheck
+	End If
+	GetUniqueNode = NodeID		
+		
+End Function
