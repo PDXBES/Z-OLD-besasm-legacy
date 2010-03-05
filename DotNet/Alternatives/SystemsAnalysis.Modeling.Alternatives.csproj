@@ -81,6 +81,10 @@
       <Project>{54555B74-906E-4D29-9BC3-7653805B6AD0}</Project>
       <Name>SystemsAnalysis.Modeling</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Tracer\SystemsAnalysis.Tracer.csproj">
+      <Project>{C8B24858-1D99-4519-9A1D-CF129CED9ADA}</Project>
+      <Name>SystemsAnalysis.Tracer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Types\SystemsAnalysis.Types.csproj">
       <Project>{AFB81561-9859-4FA2-86AD-0C6833488E41}</Project>
       <Name>SystemsAnalysis.Types</Name>
