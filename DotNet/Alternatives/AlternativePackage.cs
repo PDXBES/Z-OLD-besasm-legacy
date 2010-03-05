@@ -220,6 +220,72 @@ namespace SystemsAnalysis.Modeling.Alternatives
       get { return this.alternativeName; }
     }
 
+    /// <summary>
+    /// Copies the Alternative to a new Base Model. Model IDs are updated to be consistent with the new Base Model. Any elements which
+    /// can't be matched to a Link in the new Base Model will receive MdlLinkId = -1;
+    /// </summary>
+    /// <param name="newModel"></param>
+    public void Copy(Model newModel)
+    {
+      Links baseModelLinks = baseModel.ModelLinks;
+      Links newModelLinks = newModel.ModelLinks;
+      foreach (AltLink altLink in this.ModelAltLinks)
+      {
+        //ADD operation does not need to be updated, because ADDs have no reference to an existing link
+        if (altLink.Operation == Enumerators.AlternativeOperation.ADD)
+        {
+          continue;
+        }
+        Link oldMdlLink;
+        Link newMdlLink;
+        int mstLinkId;
+
+        oldMdlLink = baseModelLinks[altLink.LinkID];
+        mstLinkId = oldMdlLink.MLinkID;
+
+        newMdlLink = newModelLinks.FindByMLinkID(mstLinkId);
+        if (newMdlLink == null)
+        {
+          altLink.LinkID = -1;
+        }
+
+        altLink.LinkID = newMdlLink.LinkID;
+      }
+
+      Dscs baseModelDscs = baseModel.ModelDscs;
+      Dscs newModelDscs = baseModel.ModelDscs;
+      foreach (AltDsc altDsc in this.ModelAltDscs)
+      {
+        Dsc oldMdlDsc;
+        Dsc newMdlDsc;
+
+        Link oldMdlLink;
+        Link newMdlLink;
+
+        oldMdlDsc = baseModelDscs[altDsc.DscId];
+        newMdlDsc = newModelDscs[altDsc.DscId];
+
+        if (altDsc.LinkSourceSan == "mdl")
+        {
+          int mstLinkId = oldMdlDsc.ToMLinkSan;
+
+
+          newMdlLink = newModelLinks.FindByMLinkID(mstLinkId);
+          if (newMdlLink == null)
+          {
+            altDsc.LinkIDSan = -1;
+          }
+
+          altDsc.LinkIDSan = newMdlLink.LinkID;
+        }
+
+        if (altDsc.LinkSourceStorm == "mdl")
+        {
+        }
+
+      }
+    }
+
     void LoadAltParkingTargets(string alternativePath)
     {
       try
