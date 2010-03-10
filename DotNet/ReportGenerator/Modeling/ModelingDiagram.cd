@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="SystemsAnalysis.Modeling.AbstractInflowControl" Collapsed="true">
+    <Position X="2.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIgAAAAAAgAAAADAAIAAAAAAAAAAARAACAAEMAQA=</HashCode>
+      <FileName>AbstractInflowControl.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SystemsAnalysis.Modeling.DiversionStructure" Collapsed="true">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAEQAEAAAABCAAAAAgAAAAAAIAAAACAAAAAAAAABE=</HashCode>
+      <FileName>DiversionStructure.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SystemsAnalysis.Modeling.DiversionStructures" Collapsed="true">
+    <Position X="9.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAACAEABAAAAAAAAAAAAAAgAAAQAAA=</HashCode>
+      <FileName>DiversionStructures.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SystemsAnalysis.Modeling.Dsc">
+    <Position X="5" Y="2.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>YAECXIBhCiC4AgojgGMAQ4CBADLQAAACAAgAQwgIAE0=</HashCode>
+      <FileName>Dsc.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SystemsAnalysis.Modeling.Dscs">
+    <Position X="11" Y="3.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAYAgACAAAQAAAEAiAEQBAAYAEAAAQAAAAAgRUgQgAA=</HashCode>
+      <FileName>Dscs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SystemsAnalysis.Modeling.FlowEstimationCatchment" Collapsed="true">
+    <Position X="7.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gABIQAAAQAAQAAAAgAAAQAAAAAAQEAgCABAAABAAAEA=</HashCode>
+      <FileName>FlowEstimationCatchment.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SystemsAnalysis.Modeling.Link" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="9.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEBAABAABACAAEwAmMAIACjACAAikhEACBYBMABAADA=</HashCode>
+      <FileName>Link.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="SystemsAnalysis.Modeling.Links" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACIEgEMEAQAAAQAACAEIBRAAAEAAQBAAACQkCIxQEiA=</HashCode>
+      <FileName>Links.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="SystemsAnalysis.Modeling.Model" Collapsed="true">
+    <Position X="12.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAgKQIQIggAAISDAJUDEEAEEFBHAAAiAQACCAAEAg=</HashCode>
+      <FileName>Model.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SystemsAnalysis.Modeling.Node">
+    <Position X="3.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IBCAASAAAAAAAAAAAAEAAAQBAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Node.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SystemsAnalysis.Modeling.Nodes" Collapsed="true">
+    <Position X="9.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAgAAAAAQAAAAACAEABAAAAEAAAAAAAAAgAEAQAAA=</HashCode>
+      <FileName>Nodes.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SystemsAnalysis.Modeling.ParkingTarget" Collapsed="true">
+    <Position X="2.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ParkingTarget.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SystemsAnalysis.Modeling.PipeConstruction" Collapsed="true">
+    <Position X="11" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAQAAAAAAAAAAA=</HashCode>
+      <FileName>PipeConstruction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SystemsAnalysis.Modeling.PipXP" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="12.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>RgJ2qYaDWanSvaGba5PsKiiAAEGAeUOYSz5EclhKkAA=</HashCode>
+      <FileName>PipXP.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="SystemsAnalysis.Modeling.RoofTarget" Collapsed="true">
+    <Position X="5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BIEAAgIACAAAABAAAgEAAACBAIAAAwEAAQEAQAAABAA=</HashCode>
+      <FileName>RoofTarget.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SystemsAnalysis.Modeling.StreetTarget" Collapsed="true">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAQAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAIAAA=</HashCode>
+      <FileName>StreetTarget.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="SystemsAnalysis.Modeling.InflowControl" Collapsed="true">
+    <Position X="7.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAIAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>InflowControl.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="SystemsAnalysis.Modeling.PipeConflict" Collapsed="true">
+    <Position X="9.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>RAJmoYYCUYGQoAGKQwJMCCiAAACAeAEYQCpEMkBAAAA=</HashCode>
+      <FileName>PipeConflict.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="SystemsAnalysis.Modeling.PipeConstructionType" Collapsed="true">
+    <Position X="7.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAABAEAA=</HashCode>
+      <FileName>PipeConstruction.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Delegate Name="SystemsAnalysis.Modeling.OnAddLinkEventHandler" Collapsed="true">
+    <Position X="7.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Links.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="SystemsAnalysis.Modeling.OnRemoveLinkEventHandler" Collapsed="true">
+    <Position X="9.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Links.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>
