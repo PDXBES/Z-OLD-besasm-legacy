@@ -240,7 +240,7 @@
 			</Cell>	
 			<Cell cellType="FUNCTION">
 				<Function functionName="DscAreaSummary" library="ModelReport" format="N0">							
-					<Parameter parameterName="DevelopmentState" parameterValue="ConnectedFutureRedevelopment" />
+					<Parameter parameterName="ConnectionAssumption" parameterValue="ConnectedFutureRedevelopment" />
 					<Parameter parameterName="TimeFrame" parameterValue="EX" />
 					<Parameter parameterName="Zoning" parameterValue="SFR" />
 				</Function>						
@@ -1142,5 +1142,129 @@
 				</Function>
 			</Cell>
 		</Row>						
-	</CharacterizationTable>	
+	</CharacterizationTable>
+  <CharacterizationTable tableNumber="16" tableTitle="FE Catchment Area QA" columnCount="9">
+    <Header>
+      <Cell data="FE Catchment" cellType="COLUMNNAME" rowSpan="2"></Cell>
+      <Cell data="Connection and Development Assumption" cellType="COLUMNNAME"></Cell>
+      <Cell data="Zoning" cellType="COLUMNNAME"> </Cell>
+      <Cell data="Sewerable" cellType="COLUMNNAME"> </Cell>
+      <Cell data="Development State" cellType="COLUMNNAME"> </Cell>
+      <Cell data="C and D Subtotal" cellType="COLUMNNAME"> </Cell>
+      <Cell data="C and D Subtotal AND Sewerable = 0" cellType="COLUMNNAME"> </Cell>
+      <Cell data="Zoning Subtotal" cellType="COLUMNNAME"> </Cell>
+      <Cell data="TOTAL" cellType="COLUMNNAME"> </Cell>
+    </Header>
+    <Header>
+      <Cell data="Unspecified (acres)" cellType="COLUMNNAME"></Cell>
+      <Cell data="UNK (acres)" cellType="COLUMNNAME"></Cell>
+      <Cell data="No Determination (acres)" cellType="COLUMNNAME"></Cell>
+      <Cell data="Unspecified (acres)" cellType="COLUMNNAME"></Cell>
+      <Cell data=" (acres)" cellType="COLUMNNAME"></Cell>
+      <Cell data=" (acres)" cellType="COLUMNNAME"></Cell>
+      <Cell data=" (acres)" cellType="COLUMNNAME"></Cell>
+      <Cell data="Total (acres)" cellType="COLUMNNAME"></Cell>
+    </Header>
+    <Row isMultiRow="true" multiRowKey="FECID">
+      <Cell cellType="FUNCTION">
+        <Function functionName="Name" library="FecReport">
+          <Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+        </Function>
+      </Cell>
+      <Cell cellType="FUNCTION">
+        <Function functionName="QADscAreaSummary" library="FecReport" format="N0">
+          <Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+          <Parameter parameterName="ConnectionAssumption" parameterValue="Unspecified" />
+        </Function>
+      </Cell>
+      <Cell cellType="FUNCTION">
+        <Function functionName="QADscAreaSummary" library="FecReport" format="N0">
+          <Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+          <Parameter parameterName="TimeFrame" parameterValue="EX" />
+          <Parameter parameterName="Zoning" parameterValue="UNK" />
+        </Function>
+      </Cell>
+      <Cell cellType="FUNCTION">
+        <Function functionName="QADscAreaSummary" library="FecReport" format="N0">
+          <Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+          <Parameter parameterName="Sewerable" parameterValue="0" />
+        </Function>
+      </Cell>
+      <Cell cellType="FUNCTION">
+        <Function functionName="QADscAreaSummary" library="FecReport" format="N0">
+          <Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+          <Parameter parameterName="DevelopmentState" parameterValue="Unspecified" />
+        </Function>
+      </Cell>
+      <Cell cellType="FUNCTION">
+        <Function functionName="QADscAreaByAssumptionSummary" library="FecReport" format="N0">
+          <Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+          <Parameter parameterName="ConnectionAssumption" parameterValue="AllValidTypes" />
+        </Function>
+      </Cell>
+      <Cell cellType="FUNCTION">
+        <Function functionName="QADscAreaByAssumptionSummary" library="FecReport" format="N0">
+          <Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+          <Parameter parameterName="ConnectionAssumption" parameterValue="AllValidTypes" />
+          <Parameter parameterName="Sewerable" parameterValue="0" />
+        </Function>
+      </Cell>
+      <Cell cellType="FUNCTION">
+        <Function functionName="QADscAreaByAssumptionSummary" library="FecReport" format="N0">
+          <Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+          <Parameter parameterName="Zoning" parameterValue="AllValidTypes" />
+        </Function>
+      </Cell>
+      <Cell cellType="FUNCTION">
+        <Function functionName="QADscAreaSummary" library="FecReport" format="N0">
+          <Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+        </Function>
+      </Cell>
+    </Row>
+    <Row>
+      <Cell cellType="CONST" data="Total" />
+      <Cell cellType="FUNCTION">
+        <Function functionName="QADscAreaSummary" library="ModelReport" format="N0">
+          <Parameter parameterName="ConnectionAssumption" parameterValue="Unspecified" />
+        </Function>
+      </Cell>
+      <Cell cellType="FUNCTION">
+        <Function functionName="QADscAreaSummary" library="ModelReport" format="N0">
+          <Parameter parameterName="TimeFrame" parameterValue="EX" />
+          <Parameter parameterName="Zoning" parameterValue="UNK" />
+        </Function>
+      </Cell>
+      <Cell cellType="FUNCTION">
+        <Function functionName="QADscAreaSummary" library="ModelReport" format="N0">
+          <Parameter parameterName="Sewerable" parameterValue="0" />
+        </Function>
+      </Cell>
+      <Cell cellType="FUNCTION">
+        <Function functionName="QADscAreaSummary" library="ModelReport" format="N0">
+          <Parameter parameterName="DevelopmentState" parameterValue="Unspecified" />
+        </Function>
+      </Cell>
+      <Cell cellType="FUNCTION">
+        <Function functionName="QADscAreaByAssumptionSummary" library="ModelReport" format="N0">
+          <Parameter parameterName="ConnectionAssumption" parameterValue="AllValidTypes" />
+        </Function>
+      </Cell>
+      <Cell cellType="FUNCTION">
+        <Function functionName="QADscAreaByAssumptionSummary" library="ModelReport" format="N0">
+          <Parameter parameterName="ConnectionAssumption" parameterValue="AllValidTypes" />
+          <Parameter parameterName="Sewerable" parameterValue="0" />
+        </Function>
+      </Cell>
+      <Cell cellType="FUNCTION">
+        <Function functionName="QADscAreaByAssumptionSummary" library="ModelReport" format="N0">
+          <Parameter parameterName="Zoning" parameterValue="AllValidTypes" />
+        </Function>
+      </Cell>
+      <Cell cellType="FUNCTION">
+        <Function functionName="QADscAreaSummary" library="ModelReport" format="N0">
+        </Function>
+      </Cell>
+    </Row>
+  </CharacterizationTable>
+  
 </ReportGenerator>

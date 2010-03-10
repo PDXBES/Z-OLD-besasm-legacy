@@ -1,15 +1,16 @@
+#region Using directives
 using ESRI.ArcGIS.Geometry;
 using ESRI.ArcGIS.Utility;
-
 using System;
-using System.Collections.Generic;
-using System.Text;
-using SystemsAnalysis.Modeling;
 using System.Collections;
+using System.Collections.Generic;
 using System.Collections.Specialized;
-using SystemsAnalysis.Utils.Events;
-using SystemsAnalysis.Types;
+using System.Text;
 using SystemsAnalysis.DataAccess;
+using SystemsAnalysis.Modeling;
+using SystemsAnalysis.Types;
+using SystemsAnalysis.Utils.Events;
+#endregion
 
 namespace SystemsAnalysis.Reporting.ReportLibraries
 {
@@ -272,6 +273,47 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
             fecID = parameters["FECID"].ValueAsInt;
             return FecReports[fecID].DscAreaSummary(parameters);
         }
+
+        /// <summary>
+        /// QADsc area
+        /// </summary>
+        public double QADscArea(IDictionary<string, Parameter> parameters)
+        {
+            int fecID;
+            fecID = parameters["FECID"].ValueAsInt;
+            return FecReports[fecID].QADscArea(parameters);
+            //return FecReports[fecID].DscArea(parameters);
+        } // QADscArea(parameters)
+
+        /// <summary>
+        /// QADsc area summary
+        /// </summary>
+        public string QADscAreaSummary(IDictionary<string, Parameter> parameters)
+        {
+            int fecID;
+            fecID = parameters["FECID"].ValueAsInt;
+            return FecReports[fecID].QADscAreaSummary(parameters);
+        } // QADscAreaSummary(parameters)
+
+        /// <summary>
+        /// QADsc area by assumption
+        /// </summary>
+        public double QADscAreaByAssumption(IDictionary<string, Parameter> parameters)
+        {
+            int fecID;
+            fecID = parameters["FECID"].ValueAsInt;
+            return FecReports[fecID].QADscAreaByAssumption(parameters);
+        } // QADscAreaByAssumption(parameter)
+
+        /// <summary>
+        /// QADsc area by assumption summary
+        /// </summary>
+        public string QADscAreaByAssumptionSummary(IDictionary<string, Parameter> parameters)
+        {
+            int fecID;
+            fecID = parameters["FECID"].ValueAsInt;
+            return FecReports[fecID].QADscAreaByAssumptionSummary(parameters);
+        } // QADscAreaByAssumptionSummary(parameter)
 
         public int DscCount(IDictionary<string, Parameter> parameters)
         {
