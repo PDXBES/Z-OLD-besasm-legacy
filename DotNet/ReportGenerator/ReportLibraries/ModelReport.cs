@@ -130,14 +130,32 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
 
             foreach (Dsc dsc in this.dscs.Values)
             {
-                if ((!filteredBySewerable || dsc.Sewerable == sewerable) &&
-                (!filteredByZoning ||
-                (timeFrame == Enumerators.TimeFrames.EX ? dsc.GenZoneEX : dsc.GenZoneCP) == zoning) &&
-                (!filteredByDevelopmentState || dsc.DevelopmentState == devState) &&
-                (!filteredByConnectionAssumption || dsc.ConnectionAssumption == connectionAssumption))
+                // We wlll NOT count DSC where the Sewerable is Not Determined
+                if (dsc.Sewerable != Enumerators.Sewerable.NoDetermination)
                 {
-                    area += dsc.Area / 43560.0;
-                }
+                    if (!filteredBySewerable || dsc.Sewerable == sewerable)
+                    {
+                        if (!filteredByZoning || (timeFrame == Enumerators.TimeFrames.EX ? dsc.GenZoneEX : dsc.GenZoneCP) == zoning)
+                        {
+                            if (!filteredByDevelopmentState || dsc.DevelopmentState == devState)
+                            {
+                                if (!filteredByConnectionAssumption || dsc.ConnectionAssumption == connectionAssumption)
+                                {
+                                    area += dsc.Area / 43560.0;
+                                } // if
+                            } // if
+                        } // if
+                    } // if
+                } // if
+
+                //if ((!filteredBySewerable || dsc.Sewerable == sewerable) &&
+                //(!filteredByZoning ||
+                //(timeFrame == Enumerators.TimeFrames.EX ? dsc.GenZoneEX : dsc.GenZoneCP) == zoning) &&
+                //(!filteredByDevelopmentState || dsc.DevelopmentState == devState) &&
+                //(!filteredByConnectionAssumption || dsc.ConnectionAssumption == connectionAssumption))
+                //{
+                //    area += dsc.Area / 43560.0;
+                //}
             }
             return area;
         }
@@ -590,6 +608,148 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
                 else { }
             }
             return count;
+        }
+
+        public string QADscAreaSummary(IDictionary<string, Parameter> parameters)
+        {
+            double fraction;
+            double area;
+
+            area = QADscArea(parameters);
+            fraction = area / dscs.Area() * 100.0;
+
+            return area.ToString("N1") + " (" + fraction.ToString("N0") + "%)";
+        }
+
+        public double QADscArea(IDictionary<string, Parameter> parameters)
+        {
+            double area = 0;
+
+            bool filteredByZoning;
+            Enumerators.ZoningTypes zoning = Enumerators.ZoningTypes.UNK;
+            Enumerators.TimeFrames timeFrame = Enumerators.TimeFrames.EX;
+            filteredByZoning = parameters.ContainsKey("Zoning");
+            if (filteredByZoning)
+            {
+                zoning = Enumerators.GetZoningEnum(parameters["Zoning"].Value);
+                timeFrame = Enumerators.GetTimeFrameEnum(parameters["TimeFrame"].Value);
+            }
+
+            bool filteredBySewerable;
+            Enumerators.Sewerable sewerable = Enumerators.Sewerable.NoDetermination;
+            filteredBySewerable = parameters.ContainsKey("Sewerable");
+            if (filteredBySewerable)
+            {
+                sewerable = (Enumerators.Sewerable)parameters["Sewerable"].ValueAsInt;
+            }
+
+            bool filteredByDevelopmentState;
+            Enumerators.DevelopmentState devState = Enumerators.DevelopmentState.Unspecified;
+            filteredByDevelopmentState = parameters.ContainsKey("DevelopmentState");
+            if (filteredByDevelopmentState)
+            {
+                devState = Enumerators.GetDevelopmentStateEnum(parameters["DevelopmentState"].Value);
+            }
+
+            bool filteredByConnectionAssumption;
+            Enumerators.ConnectionAssumption connectionAssumption = Enumerators.ConnectionAssumption.Unspecified;
+            filteredByConnectionAssumption = parameters.ContainsKey("ConnectionAssumption");
+            if (filteredByConnectionAssumption)
+            {
+                connectionAssumption = Enumerators.GetConnectionAssumptionEnum(parameters["ConnectionAssumption"].Value);
+            }
+
+            foreach (Dsc dsc in this.dscs.Values)
+            {
+               
+                if (!filteredBySewerable || dsc.Sewerable == sewerable)
+                {
+                    if (!filteredByZoning || (timeFrame == Enumerators.TimeFrames.EX ? dsc.GenZoneEX : dsc.GenZoneCP) == zoning)
+                    {
+                        if (!filteredByDevelopmentState || dsc.DevelopmentState == devState)
+                        {
+                            if (!filteredByConnectionAssumption || dsc.ConnectionAssumption == connectionAssumption)
+                            {
+                                area += dsc.Area / 43560.0;
+                            } // if
+                        } // if
+                    } // if
+                } // if
+
+                //if ((!filteredBySewerable || dsc.Sewerable == sewerable) &&
+                //(!filteredByZoning ||
+                //(timeFrame == Enumerators.TimeFrames.EX ? dsc.GenZoneEX : dsc.GenZoneCP) == zoning) &&
+                //(!filteredByDevelopmentState || dsc.DevelopmentState == devState) &&
+                //(!filteredByConnectionAssumption || dsc.ConnectionAssumption == connectionAssumption))
+                //{
+                //    area += dsc.Area / 43560.0;
+                //}
+            }
+            return area;
+        }
+
+        public double QADscAreaByAssumption(IDictionary<string, Parameter> parameters)
+        {
+            double area = 0;
+
+            List<Enumerators.ConnectionAssumption> validConnectionList = new List<Enumerators.ConnectionAssumption>();
+            validConnectionList.Add(Enumerators.ConnectionAssumption.ConnectedFutureRedevelopment);
+            validConnectionList.Add(Enumerators.ConnectionAssumption.ConnectedNoChange);
+            validConnectionList.Add(Enumerators.ConnectionAssumption.FutureNewConnection);
+            validConnectionList.Add(Enumerators.ConnectionAssumption.WillNotConnect);
+
+            List<Enumerators.ZoningTypes> validZoningList = new List<Enumerators.ZoningTypes>();
+            validZoningList.Add(Enumerators.ZoningTypes.COM);
+            validZoningList.Add(Enumerators.ZoningTypes.IND);
+            validZoningList.Add(Enumerators.ZoningTypes.MFR);
+            validZoningList.Add(Enumerators.ZoningTypes.POS);
+            validZoningList.Add(Enumerators.ZoningTypes.SFR);
+
+            bool filteredByZoning;
+            filteredByZoning = parameters.ContainsKey("Zoning");
+
+            bool filteredByConnectionAssumption;
+            filteredByConnectionAssumption = parameters.ContainsKey("ConnectionAssumption");
+
+            bool filteredByValidSewerable;
+            filteredByValidSewerable = parameters.ContainsKey("Sewerable");
+
+            foreach (Dsc dsc in this.dscs.Values)
+            {
+                // Valid Connection Assumptions AND where Sewerable !=0
+                if(filteredByConnectionAssumption && 
+                    validConnectionList.Contains(dsc.ConnectionAssumption) && 
+                    filteredByValidSewerable && 
+                    dsc.Sewerable != Enumerators.Sewerable.NoDetermination)
+                {
+                    area += dsc.Area / 43560.0;
+                } // if
+                    // Valid Connection Assumption only.  Will pick up Sewerable = 0
+                else if (filteredByConnectionAssumption && 
+                    !filteredByValidSewerable && 
+                    validConnectionList.Contains(dsc.ConnectionAssumption))
+                {
+                    area += dsc.Area / 43560.0;
+                }// if 
+                // Valid zoning.  Will pick up Sewerable = 0
+                else if (filteredByZoning && 
+                    validZoningList.Contains(dsc.GenZoneEX))
+                {
+                    area += dsc.Area / 43560.0;
+                } // else if
+            } // foreach
+            return area;
+        }
+
+        public string QADscAreaByAssumptionSummary(IDictionary<string, Parameter> parameters)
+        {
+            double fraction;
+            double area;
+
+            area = QADscAreaByAssumption(parameters);
+            fraction = area / dscs.Area() * 100.0;
+
+            return area.ToString("N1") + " (" + fraction.ToString("N0") + "%)";
         }
     }
 }

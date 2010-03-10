@@ -1,5 +1,5 @@
-Microsoft Visual Studio Solution File, Format Version 9.00
-# Visual Studio 2005
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemsAnalysis.Modeling", "SystemsAnalysis.Modeling.csproj", "{54555B74-906E-4D29-9BC3-7653805B6AD0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemsAnalysis.DataAccess", "..\DataAccess\SystemsAnalysis.DataAccess.csproj", "{D81499E0-ED3E-4C85-9F8E-72C263AA24C4}"

@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{AA8663B3-4B31-4F11-BD73-9CC3EF99101F}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="TableE01DataSet.cs">
       <DependentUpon>TableE01DataSet.xsd</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="TableE01DataSet.Designer.cs">
       <DependentUpon>TableE01DataSet.xsd</DependentUpon>
