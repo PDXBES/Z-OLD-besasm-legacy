@@ -1,0 +1,210 @@
+<?xml version="1.0" standalone="yes"?>
+<AltEngineConfiguration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="SystemsAnalysis.ModelConstruction.AlternativesToolkit.EngineConfiguration">
+  <ProgramSettings>
+    <AlternativeTemplate>\\Cassio\Modeling\Model_Programs\Emgaats\CodeV2.2\Alternatives_Toolkit\AlternativeTemplate\</AlternativeTemplate>
+    <UpdateVersionPatchMBX>MBProcessor\UpdateVersion.MBX</UpdateVersionPatchMBX>
+  </ProgramSettings>
+  <BaseModelComponents>
+    <BaseFile>Model.ini</BaseFile>
+    <BaseFile>Model.xml</BaseFile>
+    <BaseFile>\dsc\mdl_DirSC_ac.*</BaseFile>
+    <BaseFile>\ic\mdl_ic_*</BaseFile>
+    <BaseFile>\mdbs\*</BaseFile>
+    <BaseFile>\links\mdl_*</BaseFile>
+    <BaseFile>\nodes\mdl_*</BaseFile>
+    <BaseFile>\surfsc\mdl_*</BaseFile>
+    <BaseFile>\icalt\mst_*</BaseFile>
+    <BaseDirectory IncludeFiles="false" Recurse="false">dsc</BaseDirectory>
+    <BaseDirectory IncludeFiles="false" Recurse="false">ic</BaseDirectory>
+    <BaseDirectory IncludeFiles="false" Recurse="false">icalt</BaseDirectory>
+    <BaseDirectory IncludeFiles="false" Recurse="false">links</BaseDirectory>
+    <BaseDirectory IncludeFiles="false" Recurse="false">mdbs</BaseDirectory>
+    <BaseDirectory IncludeFiles="false" Recurse="false">mxd</BaseDirectory>
+    <BaseDirectory IncludeFiles="false" Recurse="false">mxd\lyr</BaseDirectory>
+    <BaseDirectory IncludeFiles="false" Recurse="false">nodes</BaseDirectory>
+    <BaseDirectory IncludeFiles="false" Recurse="false">qc</BaseDirectory>
+    <BaseDirectory IncludeFiles="false" Recurse="false">sim</BaseDirectory>
+    <BaseDirectory IncludeFiles="false" Recurse="false">surfsc</BaseDirectory>
+    <BaseDirectory IncludeFiles="false" Recurse="false">wors</BaseDirectory>
+  </BaseModelComponents>
+  <FileHistory HistoryCount="4">
+    <BaseModel Date="6/26/2007 8:56:43 AM">C:\Documents and Settings\ISSACG\Desktop\Lents_2\LE2_FU\</BaseModel>
+    <BaseModel Date="6/8/2007 10:08:02 AM">D:\Temp\HOSTSU\HSS_FU\</BaseModel>
+    <BaseModel Date="6/7/2007 4:33:04 PM">C:\Documents and Settings\ISSACG\Desktop\Aldera\</BaseModel>
+  </FileHistory>
+  <MapBasicFramework>
+    <Library>
+      <LibraryName>LinkProcessor</LibraryName>
+      <Location>W:\Model_Programs\Emgaats\CodeV2.2\Alternatives_Toolkit\MBEngine\exe\LinkProcessor.MBX</Location>
+      <ExecGroup>Apply</ExecGroup>
+      <GlobalVariable Name="gLinkAlternative" Value="alt_links_ac.tab" RelativeTo="Alternative" />
+      <GlobalVariable Name="gErrorCheckPath" Value="error_check" RelativeTo="Alternative" />
+      <GlobalVariable Name="gMasterModelMode" Value="2" />
+      <GlobalVariable Name="gOutputModelPath" Value="" RelativeTo="OutputModel" />
+      <GlobalVariable Name="gTempDir" Value="Engine\" RelativeTo="SystemTemp" />
+      <GlobalVariable Name="gAltID" Value="" RelativeTo="ModelConfiguration" />
+      <Function>
+        <Name>SetupLinkProcessor</Name>
+        <CommandID>10003</CommandID>
+      </Function>
+      <Function>
+        <Name>UpdateLinks</Name>
+        <CommandID>10002</CommandID>
+      </Function>
+      <Function>
+        <Name>DeleteLinks</Name>
+        <CommandID>10001</CommandID>
+      </Function>
+      <Function>
+        <Name>CheckLinks</Name>
+        <CommandID>10004</CommandID>
+      </Function>
+      <Function>
+        <Name>AppendLinks</Name>
+        <CommandID>10000</CommandID>
+      </Function>
+    </Library>
+    <Library>
+      <LibraryName>SpecialProcessor</LibraryName>
+      <Location>W:\Model_Programs\Emgaats\CodeV2.2\Alternatives_Toolkit\MBEngine\exe\SpecialProcessor.MBX</Location>
+      <ExecGroup>Apply</ExecGroup>
+      <GlobalVariable Name="gLinkAlternative" Value="alt_links_ac.tab" RelativeTo="Alternative" />
+      <GlobalVariable Name="gAltSpecLinks" Value="alt_speclinks_ac.tab" RelativeTo="Alternative" />
+      <GlobalVariable Name="gAltSpecLinkData" Value="alt_speclinkdata_ac.tab" RelativeTo="Alternative" />
+      <GlobalVariable Name="gAltPumpCurves" Value="alt_pumpcurves.tab" RelativeTo="Alternative" />
+      <GlobalVariable Name="gOutputModelPath" Value="" RelativeTo="OutputModel" />
+      <GlobalVariable Name="gBaseModelPath" Value="" RelativeTo="BaseModel" />
+      <GlobalVariable Name="gTempDir" Value="Engine\" RelativeTo="SystemTemp" />
+      <GlobalVariable Name="gAltID" Value="" RelativeTo="ModelConfiguration" />
+      <Function>
+        <Name>SetupSpecialLinkProcessor</Name>
+        <CommandID>10003</CommandID>
+      </Function>
+      <Function>
+        <Name>DeleteSpecialLinks</Name>
+        <CommandID>10001</CommandID>
+      </Function>
+      <Function>
+        <Name>UpdateSpecialLinks</Name>
+        <CommandID>10002</CommandID>
+      </Function>
+      <Function>
+        <Name>CheckSpecialLinks</Name>
+        <CommandID>10004</CommandID>
+      </Function>
+      <Function>
+        <Name>AppendSpecialLinks</Name>
+        <CommandID>10000</CommandID>
+      </Function>
+    </Library>
+    <Library>
+      <LibraryName>NodeProcessor</LibraryName>
+      <Location>W:\Model_Programs\Emgaats\CodeV2.2\Alternatives_Toolkit\MBEngine\exe\NodeProcessor.MBX</Location>
+      <ExecGroup>Apply</ExecGroup>
+      <GlobalVariable Name="gOutputModelPath" Value="" RelativeTo="OutputModel" />
+      <GlobalVariable Name="gElevField" Value="GrndElev" />
+      <GlobalVariable Name="gMasterModelMode" Value="2" />
+      <GlobalVariable Name="gElevationSubSectionList" Value="\\cassio\modeling\Model_Programs\Emgaats\CodeV2.2\NodeTool\data\WshdPts.txt" />
+      <Function>
+        <Name>SetupNodeProcessor</Name>
+        <CommandID>10003</CommandID>
+      </Function>
+      <Function>
+        <Name>DeleteOrphanNodes</Name>
+        <CommandID>10001</CommandID>
+      </Function>
+      <Function>
+        <Name>AddGroundElevations</Name>
+        <CommandID>10002</CommandID>
+      </Function>
+    </Library>
+    <Library>
+      <LibraryName>DSCProcessor</LibraryName>
+      <Location>W:\Model_Programs\Emgaats\CodeV2.2\Alternatives_Toolkit\MBEngine\exe\DSCProcessor.MBX</Location>
+      <ExecGroup>Apply</ExecGroup>
+      <GlobalVariable Name="gLinkAlternative" Value="alt_links_ac.tab" RelativeTo="Alternative" />
+      <GlobalVariable Name="gDSCAlternative" Value="alt_dsc_ac.tab" RelativeTo="Alternative" />
+      <GlobalVariable Name="gOutputModelPath" Value="" RelativeTo="OutputModel" />
+      <GlobalVariable Name="gTempDir" Value="Engine\" RelativeTo="SystemTemp" />
+      <GlobalVariable Name="gAltID" Value="" RelativeTo="ModelConfiguration" />
+      <Function>
+        <Name>SetupDSCProcessor</Name>
+        <CommandID>10000</CommandID>
+      </Function>
+      <Function>
+        <Name>UpdateDSC</Name>
+        <CommandID>10001</CommandID>
+      </Function>
+    </Library>
+    <Library>
+      <LibraryName>SSCProcessor</LibraryName>
+      <Location>W:\Model_Programs\Emgaats\CodeV2.2\Alternatives_Toolkit\MBEngine\exe\SSCProcessor.MBX</Location>
+      <ExecGroup>Apply</ExecGroup>
+      <GlobalVariable Name="gLinkAlternative" Value="alt_links_ac.tab" RelativeTo="Alternative" />
+      <GlobalVariable Name="gSSCAlternative" Value="alt_ssc_ac.tab" RelativeTo="Alternative" />
+      <GlobalVariable Name="gErrorCheckPath" Value="error_check" RelativeTo="Alternative" />
+      <GlobalVariable Name="gOutputModelPath" Value="" RelativeTo="OutputModel" />
+      <GlobalVariable Name="gTempDir" Value="Engine\" RelativeTo="SystemTemp" />
+      <GlobalVariable Name="gAltID" Value="" RelativeTo="ModelConfiguration" />
+      <Function>
+        <Name>SetupSSCProcessor</Name>
+        <CommandID>10000</CommandID>
+      </Function>
+      <Function>
+        <Name>UpdateSSC</Name>
+        <CommandID>10001</CommandID>
+      </Function>
+    </Library>
+    <Library>
+      <LibraryName>ICProcessor</LibraryName>
+      <Location>W:\Model_Programs\Emgaats\CodeV2.2\Alternatives_Toolkit\MBEngine\exe\ICProcessor.MBX</Location>
+      <ExecGroup>Apply</ExecGroup>
+      <GlobalVariable Name="gLinkAlternative" Value="alt_links_ac.tab" RelativeTo="Alternative" />
+      <GlobalVariable Name="gAltRoofTargets" Value="alt_rooftargets_ac.tab" RelativeTo="Alternative" />
+      <GlobalVariable Name="gAltStreetTargets" Value="alt_streettargets_ac.tab" RelativeTo="Alternative" />
+      <GlobalVariable Name="gAltParkingTargets" Value="alt_parkingtargets_ac.tab" RelativeTo="Alternative" />
+      <GlobalVariable Name="gOutputModelPath" Value="" RelativeTo="OutputModel" />
+      <GlobalVariable Name="gBaseModelPath" Value="" RelativeTo="BaseModel" />
+      <GlobalVariable Name="gTempDir" Value="Engine\" RelativeTo="SystemTemp" />
+      <GlobalVariable Name="gAltID" Value="" RelativeTo="ModelConfiguration" />
+      <Function>
+        <Name>SetupICProcessor</Name>
+        <CommandID>10000</CommandID>
+      </Function>
+      <Function>
+        <Name>UpdateIC</Name>
+        <CommandID>10001</CommandID>
+      </Function>
+    </Library>
+    <Library>
+      <LibraryName>AlternativeWorkbench</LibraryName>
+      <Location>W:\Model_Programs\Emgaats\CodeV2.2\Alternatives_Toolkit\MBWorkbench\exe\AlternativeWorkbench.MBX</Location>
+      <ExecGroup>Edit</ExecGroup>
+      <GlobalVariable Name="gBaseModelPath" Value="" RelativeTo="BaseModel" />
+      <GlobalVariable Name="gAlternativePath" Value="" RelativeTo="Alternative" />
+      <GlobalVariable Name="gTempDir" Value="AltTemp\" RelativeTo="SystemTemp" />
+      <GlobalVariable Name="gIconFile" Value="W:\Model_Programs\Emgaats\CodeV2.2\Alternatives_Toolkit\MBWorkbench\exe\CustomIcons.dll" RelativeTo="" />
+      <GlobalVariable Name="gLinkEditingTemplate" Value="W:\Model_Programs\Emgaats\CodeV2.2\Alternatives_Toolkit\MBWorkbench\Mp_LINKpad.WOR" RelativeTo="" />
+      <GlobalVariable Name="gDSCEditingTemplate" Value="W:\Model_Programs\Emgaats\CodeV2.2\Alternatives_Toolkit\MBWorkbench\Mp_DSCpad.WOR" RelativeTo="" />
+      <GlobalVariable Name="gSSCEditingTemplate" Value="W:\Model_Programs\Emgaats\CodeV2.2\Alternatives_Toolkit\MBWorkbench\Mp_SSCpad.WOR" RelativeTo="" />
+      <GlobalVariable Name="gSpecLinkEditingTemplate" Value="W:\Model_Programs\Emgaats\CodeV2.2\Alternatives_Toolkit\MBWorkbench\Mp_SPLpad.WOR" RelativeTo="" />
+      <GlobalVariable Name="gICEditingTemplate" Value="W:\Model_Programs\Emgaats\CodeV2.2\Alternatives_Toolkit\MBWorkbench\Mp_ICpad.WOR" RelativeTo="" />
+      <GlobalVariable Name="gDefaultNodeSuffix" Value="" RelativeTo="AlternativeConfiguration" />
+      <Function>
+        <Name>SetupAltWorkbench</Name>
+        <CommandID>10000</CommandID>
+      </Function>
+    </Library>
+    <Library>
+      <LibraryName>AutoConveyance</LibraryName>
+      <Location>W:\Model_Programs\Emgaats\CodeV2.2\Alternatives_Toolkit\MBEngine\exe\AutoConveyance.MBX</Location>
+      <ExecGroup>AutoConveyance</ExecGroup>
+      <GlobalVariable Name="gMdlLinkTable" Value="links\mdl_links_ac.tab" RelativeTo="BaseModel" />
+      <GlobalVariable Name="gAltLinkTable" Value="alt_links_ac.tab" RelativeTo="Alternative" />
+      <Function>
+        <Name>PrepareAutoConveyance</Name>
+        <CommandID>10000</CommandID>
+      </Function>
+    </Library>
+  </MapBasicFramework>
+</AltEngineConfiguration>

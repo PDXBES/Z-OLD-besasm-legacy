@@ -1,0 +1,6 @@
+'
+'	============ EMGAATS Workbench =================
+'
+'	Copyright (c) 2001  City of Portland, OR Bureau of Environmental Services and David J Collins Engineering and CH2M HILL, Inc.
+'
+declare Sub ShowAbout()

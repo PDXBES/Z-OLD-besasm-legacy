@@ -1,0 +1,21 @@
+'
+'	EMGTools globals
+'
+Global gMasterModelMode as smallint
+Global gAppDelMode as smallint
+global gstrVersion as string
+global gstrAppName as string
+global	gstrAppFolder as string
+global	gstrCopyRight as string
+global gstrVerDate as string
+global gstrSelectedTablename as string
+Global	glDupSpace as logical
+Global	glDupKey as logical
+Global gmdlRootFolder as string
+Global gmstRootFolder as string
+Global	gstrLatImportPath as string
+Global	gstrTempLateralName as string
+'
+'
+Global	gintNodeWindow as integer
+Global gintLinkWindow as integer
