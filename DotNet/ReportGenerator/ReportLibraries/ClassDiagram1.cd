@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="SystemsAnalysis.Reporting.ReportLibraries.AlternativeReport" Collapsed="true">
+    <Position X="0.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAgAAAAAAgEAAAAAACCMBAAACFgAAEAABAAAIAAAA=</HashCode>
+      <FileName>AlternativeReport.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SystemsAnalysis.Reporting.ReportLibraries.FecReport" Collapsed="true">
+    <Position X="7.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>UQEwAAkECVAAAAAACQAgEIZCQEKMACQCABECDkWkJQA=</HashCode>
+      <FileName>FecReport.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SystemsAnalysis.Reporting.ReportLibraries.ModelReport">
+    <Position X="11.75" Y="2.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>QUAgBAMACAIAAAAEAQAAEAARYEAIAQCQgAAABkggIAA=</HashCode>
+      <FileName>ModelReport.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SystemsAnalysis.Reporting.ReportLibraries.ModelResultsReport">
+    <Position X="2.75" Y="2.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AQQAAJgEAQIAASEgAAACAIYAAEEIAgAAygGAgAQgIAA=</HashCode>
+      <FileName>ModelResultsReport.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SystemsAnalysis.Reporting.ReportLibraries.PumpStationReport" Collapsed="true">
+    <Position X="9.5" Y="2.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>CAAAABAACEhAAAAAAAIgRCQAAAAIABABCwAAIKAAIgE=</HashCode>
+      <FileName>PumpStationReport.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SystemsAnalysis.Reporting.ReportLibraries.ReportBase">
+    <Position X="6" Y="0.5" Width="1.5" />
+    <NestedTypes>
+      <Class Name="SystemsAnalysis.Reporting.ReportLibraries.ReportBase.ReportInfo" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>ReportBase.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Delegate Name="SystemsAnalysis.Reporting.ReportLibraries.ReportBase.EvaluateIntFunctionDelegate" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>ReportBase.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+      <Delegate Name="SystemsAnalysis.Reporting.ReportLibraries.ReportBase.EvaluateStringFunctionDelegate" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>ReportBase.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+      <Delegate Name="SystemsAnalysis.Reporting.ReportLibraries.ReportBase.EvaluateDoubleFunctionDelegate" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>ReportBase.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+      <Class Name="SystemsAnalysis.Reporting.ReportLibraries.ReportBase.Parameter" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>ReportBase.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAEAAAEAAAAAAAAggAAAAAAA=</HashCode>
+      <FileName>ReportBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SystemsAnalysis.Reporting.ReportLibraries.UicReport" Collapsed="true">
+    <Position X="5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAIAAEAAAAAAEAAIAA=</HashCode>
+      <FileName>UicReport.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>

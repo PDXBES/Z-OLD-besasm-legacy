@@ -16,6 +16,7 @@ using SystemsAnalysis.Modeling.ModelResults;
 using SystemsAnalysis.Modeling;
 using SystemsAnalysis.Utils.AccessUtils;
 using SystemsAnalysis.Modeling.Alternatives;
+using SystemsAnalysis.Types;
 
 namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
 {
@@ -226,8 +227,7 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
         this.engineOutput.AddStatus("Base Model: 'file:" + baseModel + "'");
         this.engineOutput.AddStatus("Alternative Name: '" + alternativeName + "'");
 
-        string alternativePath = baseModel +
-            "alternatives\\" + alternativeName + "\\";
+        string alternativePath = GetAlternativePath(baseModel, alternativeName);
         if (File.Exists(alternativePath + "alternative_configuration.xml"))
         {
           this.engineOutput.AddStatus(
@@ -278,8 +278,8 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
         string DefaultNodeSuffix;
         DefaultNodeSuffix = this.txtDefaultNodeName.Text;
 
-        string alternativePath = baseModel +
-            "alternatives\\" + alternativeName + "\\";
+        string alternativePath = GetAlternativePath(baseModel, alternativeName);
+
         if (!File.Exists(alternativePath + "alternative_configuration.xml"))
         {
           this.engineOutput.AddUpdate(
@@ -326,7 +326,7 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
       //  - If fail, write errors to MapInfo table and enter editing session
       //6) Relink the new model tables
 
-      string alternativePath = baseModel + "alternatives\\" + alternativeName + "\\";
+      string alternativePath = GetAlternativePath(baseModel, alternativeName);
 
       try
       {
@@ -599,7 +599,7 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
 
         string baseModel = this.cmbBaseModel.Text;
         baseModel += baseModel.EndsWith("\\") ? "" : "\\";
-        if (!ValidateInput(baseModel))
+        if (!ValidateBaseModelInput(baseModel))
         {
           return;
         }
@@ -668,7 +668,7 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
       this.tabControl.SelectedTab = this.tabControl.Tabs["EngineStatus"];
     }
 
-    private bool ValidateInput(string baseModel)
+    private bool ValidateBaseModelInput(string baseModel)
     {
       if (baseModel == "" || baseModel == null || baseModel == "\\")
       {
@@ -698,9 +698,9 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
       }
       return false;
     }
-    private bool ValidateInput(string baseModel, string alternativeName)
+    private bool ValidateAlternativeInput(string baseModel, string alternativeName)
     {
-      if (!ValidateInput(baseModel))
+      if (!ValidateBaseModelInput(baseModel))
       {
         return false;
       }
@@ -731,9 +731,9 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
       }
       return false;
     }
-    private bool ValidateInput(string baseModel, string alternativeName, string outputModel)
+    private bool ValidateOutputModelInput(string baseModel, string alternativeName, string outputModel)
     {
-      if (!ValidateInput(baseModel, alternativeName))
+      if (!ValidateAlternativeInput(baseModel, alternativeName))
       {
         return false;
       }
@@ -827,7 +827,7 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
       }
     }
 
-    private void aboutToolStripMenuItem1_Click(object sender, EventArgs e)
+    private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
     {
       //SplashScreen sp = new SplashScreen();
       //sp.ShowDialog(true);
@@ -855,7 +855,8 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
       string baseModel = this.cmbBaseModel.Text;
       baseModel += baseModel.EndsWith("\\") ? "" : "\\";
       string alternativeName = (string)cmbAlternativeList.Value;
-      string alternativePath = baseModel + "alternatives\\" + alternativeName + "\\";
+
+      string alternativePath = GetAlternativePath(baseModel, alternativeName);
 
       altConfig = new AlternativeConfiguration(alternativeName, baseModel);
 
@@ -879,7 +880,7 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
         return;
       }
 
-      if (ValidateInput(baseModel, alternativeName))
+      if (ValidateAlternativeInput(baseModel, alternativeName))
       {
         SwitchToDefaultView();
         EditAlternative(baseModel, alternativeName);
@@ -891,9 +892,10 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
       string alternativeName = (string)cmbAlternativeList.Text;
       string baseModel = this.cmbBaseModel.Text;
       baseModel += baseModel.EndsWith("\\") ? "" : "\\";
-      string alternativePath = baseModel + "alternatives\\" + alternativeName + "\\";
 
-      if (!ValidateInput(baseModel, alternativeName))
+      string alternativePath = GetAlternativePath(baseModel, alternativeName);
+
+      if (!ValidateAlternativeInput(baseModel, alternativeName))
       {
         return;
       }
@@ -929,7 +931,7 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
         outputModel += outputModel.EndsWith("\\") ? "" : "\\";
         alternativeName = this.cmbAlternativeList.Text;
 
-        if (ValidateInput(baseModel, alternativeName, outputModel))
+        if (ValidateOutputModelInput(baseModel, alternativeName, outputModel))
         {
           ApplyAlternative(baseModel, alternativeName, outputModel);
           SwitchToDefaultView();
@@ -967,7 +969,7 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
 
     private void DeleteAlternative(string baseModel, string alternativeName)
     {
-      string alternativePath = baseModel + "alternatives\\" + alternativeName;
+      string alternativePath = GetAlternativePath(baseModel, alternativeName);
 
       if (!Directory.Exists(alternativePath))
       {
@@ -1011,7 +1013,7 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
         {
           newBaseModel += "\\";
         }
-        if (!ValidateInput(newBaseModel))
+        if (!ValidateBaseModelInput(newBaseModel))
         {
           return;
         }
@@ -1039,7 +1041,7 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
       result = InputBox.Show("Enter a name for the new alternative:", "Copy Alternative");
       if (result.ReturnCode != DialogResult.OK)
       {
-        if (!ValidateInput(baseModel, result.Text))
+        if (!ValidateAlternativeInput(baseModel, result.Text))
         {
           return;
         }
@@ -1054,10 +1056,10 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
     private void CopyAlternative(string baseModel, string alternativeName, string newAltName)
     {
       string newAltPath;
-      newAltPath = baseModel + "alternatives\\" + newAltName + "\\";
+      newAltPath = GetAlternativePath(baseModel, newAltName);
 
-      string alternativePath;
-      alternativePath = baseModel + "alternatives\\" + alternativeName + "\\";
+      string alternativePath = GetAlternativePath(baseModel, alternativeName);
+
       try
       {
         engineOutput.AddStatus("Copying alternative.");
@@ -1092,7 +1094,7 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
 
     private void btnEditAutoConveyance_Click(object sender, EventArgs e)
     {
-      if (autoConveyanceInterface1.AutoConveyanceMode)
+      if (autoConveyanceInterface.AutoConveyanceMode)
       {
         DisableAutoConveyance();
         return;
@@ -1102,7 +1104,7 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
       baseModel = cmbBaseModel.Text;
 
       baseModel += baseModel.EndsWith("\\") ? "" : "\\";
-      if (!ValidateInput(baseModel))
+      if (!ValidateBaseModelInput(baseModel))
       {
         return;
       }
@@ -1120,16 +1122,16 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
         alternativeName = (string)cmbAlternativeList.Text;
         baseModel = this.cmbBaseModel.Text;
         baseModel += baseModel.EndsWith("\\") ? "" : "\\";
-        string alternativePath = baseModel + "alternatives\\" + alternativeName + "\\";
+        string alternativePath = GetAlternativePath(baseModel, alternativeName);
 
-        if (ValidateInput(baseModel, alternativeName))
+        if (ValidateAlternativeInput(baseModel, alternativeName))
         {
           if (!NewAlternative(baseModel, alternativeName))
           {
             return;
           }
           UpdateAlternativeList();
-          autoConveyanceInterface1.AutoConveyance(baseModel, alternativeName);
+          autoConveyanceInterface.AutoConveyance(baseModel, alternativeName);
           this.mbExecuter.ExecuteFunctionGroup("AutoConveyance", baseModel, alternativeName, "", false);
           this.altConfig.AddHistory("Auto-Generated from conveyance grid");
           config.UpdateBaseModelHistory(baseModel);
@@ -1150,11 +1152,11 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
     {
       btnEditAutoConveyance.Text = "Exit Conveyance Mode";
       cmbBaseModel.Enabled = false;
-      autoConveyanceInterface1.BaseModel = baseModel;
-      autoConveyanceInterface1.EnableAutoConveyanceMode();
+      autoConveyanceInterface.BaseModel = baseModel;
+      autoConveyanceInterface.EnableAutoConveyanceMode();
       btnGenerateConveyance.Enabled = true;
 
-      autoConveyanceInterface1.BaseModel = baseModel;
+      autoConveyanceInterface.BaseModel = baseModel;
       engineOutput.AddStatus("Entering auto-conveyance mode. Base model: " + baseModel);
     }
 
@@ -1162,7 +1164,7 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
     {
       btnEditAutoConveyance.Text = "Prepare Conveyance Alternative";
       cmbBaseModel.Enabled = true;
-      autoConveyanceInterface1.DisableAutoConveyanceMode();
+      autoConveyanceInterface.DisableAutoConveyanceMode();
       btnGenerateConveyance.Enabled = false;
       engineOutput.AddStatus("Exiting auto-conveyance mode.");
       return;
@@ -1170,7 +1172,7 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
 
     private void tabControl_SelectedTabChanging(object sender, Infragistics.Win.UltraWinTabControl.SelectedTabChangingEventArgs e)
     {
-      if (autoConveyanceInterface1.AutoConveyanceMode)
+      if (autoConveyanceInterface.AutoConveyanceMode)
       {
         if (MessageBox.Show("You are navigating away from an Auto-Conveyance editing session. Unsaved changes will be lost. Continue?", "Exit Auto-Conveyance?", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
         {
@@ -1218,7 +1220,7 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
 
         foreach (string alternativeName in alternativeList)
         {
-          string alternativePath = Path.GetFullPath(baseModel + @"\alternatives\" + alternativeName);
+          string alternativePath = GetAlternativePath(baseModel, alternativeName);
 
           try
           {
@@ -1232,7 +1234,7 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
                 focusAreaList.Add(focusArea);
               }
             }
-          }                    
+          }
           catch (Exception ex)
           {
             this.Cursor = Cursors.Default;
@@ -1329,7 +1331,7 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
 
       try
       {
-        if (!ValidateInput(baseModel, newAltName))
+        if (!ValidateAlternativeInput(baseModel, newAltName))
         {
           return;
         }
@@ -1374,9 +1376,9 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
             string alternativeName = dt.Columns[i].Caption;
 
             Dictionary<string, string> parameters = new Dictionary<string, string>();
-            parameters.Add("gInputAlternativePath", baseModel + "alternatives\\" + alternativeName + "\\");
+            parameters.Add("gInputAlternativePath", GetAlternativePath(baseModel, alternativeName));
             parameters.Add("gFocusArea", focusArea);
-            parameters.Add("gOutputAlternativePath", baseModel + "alternatives\\aggregate\\");
+            parameters.Add("gOutputAlternativePath", GetAlternativePath(baseModel, "aggregate"));
             parameters.Add("gRemoveRIK", chkRemoveRIK.Checked.ToString());
             mbExecuter.ExecuteFunctionGroup("Aggregate", parameters);
 
@@ -1420,8 +1422,8 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
         {
           focusArea += "\\";
         }
-        
-        this.txtFocusAreas.Text = focusArea;        
+
+        this.txtFocusAreas.Text = focusArea;
       }
     }
 
@@ -1430,9 +1432,9 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
       string alternativeName = (string)cmbAlternativeList.Text;
       string baseModel = this.cmbBaseModel.Text;
       baseModel += baseModel.EndsWith("\\") ? "" : "\\";
-      string alternativePath = baseModel + "alternatives\\" + alternativeName + "\\";
+      string alternativePath = GetAlternativePath(baseModel, alternativeName);
 
-      if (!ValidateInput(baseModel, alternativeName))
+      if (!ValidateAlternativeInput(baseModel, alternativeName))
       {
         return;
       }
@@ -1440,7 +1442,7 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
       try
       {
         Dictionary<string, string> parameters = new Dictionary<string, string>();
-        parameters.Add("gAlternativePath", baseModel + "alternatives\\" + alternativeName + "\\");
+        parameters.Add("gAlternativePath", alternativePath);
         parameters.Add("gIncludeLinksAndNodes", chkFocusAreaLinks.Checked.ToString());
         parameters.Add("gIncludeCatchments", chkFocusAreaCatchments.Checked.ToString());
         parameters.Add("gIncludeICTargets", chkFocusAreaTargets.Checked.ToString());
@@ -1455,11 +1457,77 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
       return;
     }
 
-    private void tabControl_SelectedTabChanged(object sender, Infragistics.Win.UltraWinTabControl.SelectedTabChangedEventArgs e)
+    private void btnMoveAlternative_Click(object sender, EventArgs e)
     {
+      string baseModelPath = this.cmbBaseModel.Text;
+      baseModelPath += baseModelPath.EndsWith("\\") ? "" : "\\";
 
+      string alternativeName = (string)cmbAlternativeList.Text;
+
+      string newModelPath;
+      newModelPath = this.txtNewModel.Text;
+
+      InputBoxResult result;
+      string newAltName;
+      result = InputBox.Show("Please enter a name for the new alternative:", "New Alternative Name");
+
+      if (result.ReturnCode != DialogResult.OK)
+      {
+        return;
+      }
+      newAltName = result.Text;
+
+      if (!ValidateAlternativeInput(baseModelPath, alternativeName))
+      {
+        return;
+      }
+      if (!ValidateAlternativeInput(newModelPath, newAltName))
+      {
+        return;
+      }
+
+      if (this.GetAlternativeList(baseModelPath).Contains(newAltName))
+      {
+        MessageBox.Show("An alternative named '" + newAltName + "' already exists. Please specify a unique name.", "Alternative Name Already Exists");
+        return;
+      }
+
+      try
+      {
+        this.Cursor = Cursors.WaitCursor;
+
+        string alternativePath = GetAlternativePath(baseModelPath, alternativeName);
+        string newAlternativePath = GetAlternativePath(newModelPath, newAltName);
+
+        Model baseModel = new Model(baseModelPath);
+        Model newModel = new Model(newModelPath);
+
+        AlternativePackage ap = new AlternativePackage(alternativePath);
+
+        ap.Copy(newModel);
+        
+
+        MessageBox.Show("The alternative '" + alternativeName + "' was succesfully moved.");
+      }
+      catch (Exception ex)
+      {
+        engineOutput.AddStatus("Unable to Move Alternative: " + ex.Message, SeverityLevel.Error);
+
+        MessageBox.Show("Unable to Move Alternative: " + ex.Message, "Error Moving Alternative", MessageBoxButtons.OK, MessageBoxIcon.Error);
+      }
+      finally
+      {
+        this.Cursor = Cursors.Default;
+
+      }
     }
 
+    public string GetAlternativePath(string baseModel, string alternativeName)
+    {
+      string alternativePath;
+      alternativePath = baseModel + "alternatives\\" + alternativeName + "\\";
+      return alternativePath;
+    }
 
   }
 }

@@ -62,6 +62,24 @@ namespace SystemsAnalysis.Modeling.Alternatives
       return (AltLink)linkList[linkID];
     }
 
+    public void SaveAltLinks(string alternativePath)
+    {
+      AlternativeDataSet.AltLinksDataTable altLinksTable = new AlternativeDataSet.AltLinksDataTable();
+      DataAccess.AlternativeDataSetTableAdapters.AltLinksTableAdapter altLinksTA;
+      altLinksTA = new DataAccess.AlternativeDataSetTableAdapters.AltLinksTableAdapter(alternativePath);
+      try
+      {
+        foreach (AltLink altLink in this)
+        {
+          altLinksTable.AddAltLinksRow(altLink.AltLinkID, altLink.LinkID, altLink.USNodeName, altLink.DSNodeName, altLink.Operation.ToString(), "", altLink.Diameter, 0, altLink.USIE, altLink.DSIE, "CIRC", altLink.Material, altLink.Length, false, altLink.FocusArea);
+        }
+        altLinksTA.Update(altLinksTable);
+      }
+      catch
+      {
+      }
+    }
+
     #region Overriden methods from DictionaryBase
     /// <summary>
     /// Gets the Link object with the specified altLinkID. 		

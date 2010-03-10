@@ -45,6 +45,7 @@ namespace SystemsAnalysis.Modeling.Alternatives
     public int LinkIDSan
     {
       get { return this.linkIDSan; }
+      set { this.linkIDSan = value; }
     }
     /// <summary>
     /// Gets the LinkIDStorm of this object.
@@ -52,13 +53,14 @@ namespace SystemsAnalysis.Modeling.Alternatives
     public int LinkIDStorm
     {
       get { return this.linkIDStorm; }
+      set { this.linkIDStorm = value; }
     }
     /// <summary>
     /// Gets the LinkSourceSan of this object.
     /// </summary>
     public string LinkSourceSan
     {
-      get { return this.linkSourceSan; }
+      get { return this.linkSourceSan; }      
     }
     /// <summary>
     /// Gets the LinkSourceStorm of this object.
@@ -66,6 +68,11 @@ namespace SystemsAnalysis.Modeling.Alternatives
     public string LinkSourceStorm
     {
       get { return this.linkSourceStorm; }
+    }
+
+    public int DscId
+    {
+      get { return this.dscID; }
     }
 
   }

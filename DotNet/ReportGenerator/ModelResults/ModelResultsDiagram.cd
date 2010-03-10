@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="SystemsAnalysis.Modeling.ModelResults.DscHydraulic">
+    <Position X="1.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BCCAABAAQAAAAIAAAAAAABAAAAAAAAIAAABCQAQgAAA=</HashCode>
+      <FileName>DscHydraulic.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SystemsAnalysis.Modeling.ModelResults.DscHydraulics">
+    <Position X="1.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAACAEABAAAAAACAAAAAAAgAAAQAAA=</HashCode>
+      <FileName>DscHydraulics.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SystemsAnalysis.Modeling.ModelResults.LinkHydraulic">
+    <Position X="4.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QCAkgEAAIABAAAAAAAAAAAEAAAAAECAAAhAAQAAgBEA=</HashCode>
+      <FileName>LinkHydraulic.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SystemsAnalysis.Modeling.ModelResults.LinkHydraulics">
+    <Position X="4.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAIAAAAAAAAAACAEABAQAAkAAAAAAAAAgAAAQAAA=</HashCode>
+      <FileName>LinkHydraulics.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SystemsAnalysis.Modeling.ModelResults.NodeHydraulic">
+    <Position X="8" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>DAACMQAAAgAAAAAAAAAAAAAAAAAAAEEAAABBAAQAABE=</HashCode>
+      <FileName>NodeHydraulic.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SystemsAnalysis.Modeling.ModelResults.NodeHydraulics">
+    <Position X="8" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAACAEABAAAAAAAAAAAAAAgAAAQAAA=</HashCode>
+      <FileName>NodeHydraulics.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>
