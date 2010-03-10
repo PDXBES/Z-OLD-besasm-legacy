@@ -4,6 +4,23 @@
         <name>ReportGenerator</name>
     </assembly>
     <members>
+        <member name="F:SystemsAnalysis.Reporting.StatusDisplayControl.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:SystemsAnalysis.Reporting.StatusDisplayControl.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:SystemsAnalysis.Reporting.StatusDisplayControl.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
         <member name="M:SystemsAnalysis.Reporting.StatusDisplayControl.AddInfoStatus(System.String)">
             <summary>
             Adds text to the Status Form display.
@@ -37,60 +54,6 @@
         <member name="M:SystemsAnalysis.Reporting.StatusDisplayControl.ClearStatusText">
             <summary>
             Clears the Status Form display.
-            </summary>
-        </member>
-        <member name="F:SystemsAnalysis.Reporting.StatusDisplayControl.components">
-            <summary> 
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:SystemsAnalysis.Reporting.StatusDisplayControl.Dispose(System.Boolean)">
-            <summary> 
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:SystemsAnalysis.Reporting.StatusDisplayControl.InitializeComponent">
-            <summary> 
-            Required method for Designer support - do not modify 
-            the contents of this method with the code editor.
-            </summary>
-        </member>
-        <member name="T:SystemsAnalysis.Reporting.Properties.Resources">
-            <summary>
-              A strongly-typed resource class, for looking up localized strings, etc.
-            </summary>
-        </member>
-        <member name="P:SystemsAnalysis.Reporting.Properties.Resources.ResourceManager">
-            <summary>
-              Returns the cached ResourceManager instance used by this class.
-            </summary>
-        </member>
-        <member name="P:SystemsAnalysis.Reporting.Properties.Resources.Culture">
-            <summary>
-              Overrides the current thread's CurrentUICulture property for all
-              resource lookups using this strongly typed resource class.
-            </summary>
-        </member>
-        <member name="T:SystemsAnalysis.Reporting.Preferences">
-            <summary>
-            Summary description for Preferences.
-            </summary>
-        </member>
-        <member name="F:SystemsAnalysis.Reporting.Preferences.components">
-            <summary>
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:SystemsAnalysis.Reporting.Preferences.Dispose(System.Boolean)">
-            <summary>
-            Clean up any resources being used.
-            </summary>
-        </member>
-        <member name="M:SystemsAnalysis.Reporting.Preferences.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify
-            the contents of this method with the code editor.
             </summary>
         </member>
         <member name="M:SystemsAnalysis.Reporting.LicenseInitializer.LicenseMessage">
@@ -132,45 +95,76 @@
             Retrieves the product code initialized in the ArcObjects application
             </summary>
         </member>
-        <member name="M:SystemsAnalysis.Reporting.ApplicationInterface.Main">
+        <member name="T:SystemsAnalysis.Reporting.ModelCatalogViewForm">
             <summary>
-            The main entry point for the application.
+            Form for read-only view of the ModelCatalog DataSet
             </summary>
         </member>
-        <member name="M:SystemsAnalysis.Reporting.ApplicationInterface.DoSplash(System.Boolean)">
-            <summary>
-            Loads the Splash Screen during start-up.
-            </summary>
-        </member>
-        <member name="F:SystemsAnalysis.Reporting.ApplicationInterface.components">
+        <member name="F:SystemsAnalysis.Reporting.ModelCatalogViewForm.components">
             <summary>
             Required designer variable.
             </summary>
         </member>
-        <member name="M:SystemsAnalysis.Reporting.ApplicationInterface.Dispose(System.Boolean)">
+        <member name="M:SystemsAnalysis.Reporting.ModelCatalogViewForm.Dispose(System.Boolean)">
             <summary>
             Clean up any resources being used.
             </summary>
             <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         </member>
-        <member name="M:SystemsAnalysis.Reporting.ApplicationInterface.InitializeComponent">
+        <member name="M:SystemsAnalysis.Reporting.ModelCatalogViewForm.InitializeComponent">
             <summary>
             Required method for Designer support - do not modify
             the contents of this method with the code editor.
             </summary>
         </member>
-        <member name="F:SystemsAnalysis.Reporting.AddModelForm.components">
+        <member name="P:SystemsAnalysis.Reporting.ModelCatalogViewForm.SelectedModels">
+            <summary>
+            Gets an array of selected models from the data grid
+            </summary>
+        </member>
+        <member name="P:SystemsAnalysis.Reporting.ModelCatalogViewForm.Scenario">
+            <summary>
+            Gets the name of the selected scenario
+            </summary>
+        </member>
+        <member name="P:SystemsAnalysis.Reporting.ModelCatalogViewForm.StudyArea">
+            <summary>
+            Gets the name of the selected model's study area
+            </summary>
+        </member>
+        <member name="F:SystemsAnalysis.Reporting.ModelCatalogMaintForm.components">
             <summary>
             Required designer variable.
             </summary>
         </member>
-        <member name="M:SystemsAnalysis.Reporting.AddModelForm.Dispose(System.Boolean)">
+        <member name="M:SystemsAnalysis.Reporting.ModelCatalogMaintForm.Dispose(System.Boolean)">
             <summary>
             Clean up any resources being used.
             </summary>
             <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         </member>
-        <member name="M:SystemsAnalysis.Reporting.AddModelForm.InitializeComponent">
+        <member name="M:SystemsAnalysis.Reporting.ModelCatalogMaintForm.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:SystemsAnalysis.Reporting.Preferences">
+            <summary>
+            Summary description for Preferences.
+            </summary>
+        </member>
+        <member name="F:SystemsAnalysis.Reporting.Preferences.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:SystemsAnalysis.Reporting.Preferences.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+        </member>
+        <member name="M:SystemsAnalysis.Reporting.Preferences.InitializeComponent">
             <summary>
             Required method for Designer support - do not modify
             the contents of this method with the code editor.
@@ -193,75 +187,53 @@
             the contents of this method with the code editor.
             </summary>
         </member>
-        <member name="T:SystemsAnalysis.Reporting.Settings">
-             <summary>
-            Represents a strongly typed in-memory cache of data.
+        <member name="T:SystemsAnalysis.Reporting.CharacterizationEngine">
+            <summary>
+            A class to perform characterization queries for collections of Model
+            components. Characterization operations are assumed to take place against
+            component collections, not a Model or StartLinks/StopLinks collections.
             </summary>
         </member>
-        <member name="T:SystemsAnalysis.Reporting.Settings.DataSourceDataTable">
-             <summary>
-            Represents the strongly named DataTable class.
+        <member name="M:SystemsAnalysis.Reporting.CharacterizationEngine.#ctor(System.String)">
+            <summary>
+            Constructor for the CharacterizationEngine.
             </summary>
+            <param name="charLinks">A Links collection to be characterized.</param>					
         </member>
-        <member name="T:SystemsAnalysis.Reporting.Settings.DataSourceRow">
-             <summary>
-            Represents strongly named DataRow class.
+        <member name="M:SystemsAnalysis.Reporting.CharacterizationEngine.Characterize(SystemsAnalysis.Modeling.Links,System.String,System.String,System.ComponentModel.BackgroundWorker,System.ComponentModel.DoWorkEventArgs)">
+            <summary>
+            Generates an XML characterization report using the parameters specified in the constructor.
             </summary>
+            <returns>The name of the .xml file containing the characterization information.</returns>
         </member>
-        <member name="T:SystemsAnalysis.Reporting.Settings.DataSourceRowChangeEvent">
-             <summary>
-            Row event argument class
+        <member name="M:SystemsAnalysis.Reporting.CharacterizationEngine.parseEmbeddedFunction(System.String)">
+            <summary>
+            Returns the results of the embedded function as a string
             </summary>
+            <param name="xmlFragment">An xml fragment containing the functionName, the library and any parameters</param>
+            <returns>The results of the embedded function</returns>
         </member>
-        <member name="F:SystemsAnalysis.Reporting.ModelCatalogMaintForm.components">
+        <member name="M:SystemsAnalysis.Reporting.CharacterizationEngine.OnStatusChanged(SystemsAnalysis.Utils.Events.StatusChangedArgs)">
+            <summary>
+            Internally called function that fires the OnStatusChanged event.
+            </summary>
+            <param name="e">Parameter that contains the string describing the new state.</param>
+        </member>
+        <member name="F:SystemsAnalysis.Reporting.AddModelForm.components">
             <summary>
             Required designer variable.
             </summary>
         </member>
-        <member name="M:SystemsAnalysis.Reporting.ModelCatalogMaintForm.Dispose(System.Boolean)">
+        <member name="M:SystemsAnalysis.Reporting.AddModelForm.Dispose(System.Boolean)">
             <summary>
             Clean up any resources being used.
             </summary>
             <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         </member>
-        <member name="M:SystemsAnalysis.Reporting.ModelCatalogMaintForm.InitializeComponent">
+        <member name="M:SystemsAnalysis.Reporting.AddModelForm.InitializeComponent">
             <summary>
             Required method for Designer support - do not modify
             the contents of this method with the code editor.
-            </summary>
-        </member>
-        <member name="T:SystemsAnalysis.Reporting.SplashScreen">
-            <summary>
-            Form to display information screen about this application
-            </summary>
-        </member>
-        <member name="M:SystemsAnalysis.Reporting.SplashScreen.ShowDialog(System.Boolean)">
-            <summary>
-            Shows the SplashScreen as a modal dialog
-            </summary>
-            <param name="wait">Species whether to wait or user to click to close the dialog, or to close automatically</param>
-            <returns>DialogResult.OK</returns>
-        </member>
-        <member name="F:SystemsAnalysis.Reporting.SplashScreen.components">
-            <summary>
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:SystemsAnalysis.Reporting.SplashScreen.Dispose(System.Boolean)">
-            <summary>
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:SystemsAnalysis.Reporting.SplashScreen.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify
-            the contents of this method with the code editor.
-            </summary>
-        </member>
-        <member name="T:SystemsAnalysis.Reporting.MismatchedLinkException">
-            <summary>
-            Summary description for CharacterizationExceptions.
             </summary>
         </member>
         <member name="T:SystemsAnalysis.Reporting.CreateReportForm">
@@ -320,41 +292,255 @@
             Event that occurs when CharacterizationEngine reports that it's status has changed.
             </summary>
         </member>
-        <member name="T:SystemsAnalysis.Reporting.ModelCatalogViewForm">
+        <member name="T:SystemsAnalysis.Reporting.ApplicationInterface">
             <summary>
-            Form for read-only view of the ModelCatalog DataSet
+            Main user interface for ReportGenerator
             </summary>
+            <returns>Form</returns>
         </member>
-        <member name="F:SystemsAnalysis.Reporting.ModelCatalogViewForm.components">
+        <member name="F:SystemsAnalysis.Reporting.ApplicationInterface.components">
             <summary>
             Required designer variable.
             </summary>
         </member>
-        <member name="M:SystemsAnalysis.Reporting.ModelCatalogViewForm.Dispose(System.Boolean)">
+        <member name="M:SystemsAnalysis.Reporting.ApplicationInterface.Dispose(System.Boolean)">
             <summary>
             Clean up any resources being used.
             </summary>
             <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         </member>
-        <member name="M:SystemsAnalysis.Reporting.ModelCatalogViewForm.InitializeComponent">
+        <member name="M:SystemsAnalysis.Reporting.ApplicationInterface.InitializeComponent">
             <summary>
             Required method for Designer support - do not modify
             the contents of this method with the code editor.
             </summary>
         </member>
-        <member name="P:SystemsAnalysis.Reporting.ModelCatalogViewForm.SelectedModels">
+        <member name="M:SystemsAnalysis.Reporting.ApplicationInterface.#ctor">
             <summary>
-            Gets an array of selected models from the data grid
+            Creates application interface
             </summary>
         </member>
-        <member name="P:SystemsAnalysis.Reporting.ModelCatalogViewForm.Scenario">
+        <member name="M:SystemsAnalysis.Reporting.ApplicationInterface.Main">
             <summary>
-            Gets the name of the selected scenario
+            The main entry point for the application.
             </summary>
         </member>
-        <member name="P:SystemsAnalysis.Reporting.ModelCatalogViewForm.StudyArea">
+        <member name="M:SystemsAnalysis.Reporting.ApplicationInterface.DoSplash">
             <summary>
-            Gets the name of the selected model's study area
+            Displays splash screen (for multithreading)
+            </summary>
+        </member>
+        <member name="M:SystemsAnalysis.Reporting.ApplicationInterface.DoSplash(System.Boolean)">
+            <summary>
+            Loads the splash screen during start-up
+            </summary>
+        </member>
+        <member name="M:SystemsAnalysis.Reporting.ApplicationInterface.ExitToolsStripMenuItem_Click(System.Object,System.EventArgs)">
+            <summary>
+            Exit tools strip menu item _ click
+            </summary>
+            <param name="sender">Sender</param>
+            <param name="e">E</param>
+        </member>
+        <member name="M:SystemsAnalysis.Reporting.ApplicationInterface.ToolBarToolStripMenuItem_Click(System.Object,System.EventArgs)">
+            <summary>
+            Tool bar tool strip menu item _ click
+            </summary>
+            <param name="sender">Sender</param>
+            <param name="e">E</param>
+        </member>
+        <member name="M:SystemsAnalysis.Reporting.ApplicationInterface.StatusBarToolStripMenuItem_Click(System.Object,System.EventArgs)">
+            <summary>
+            Status bar tool strip menu item _ click
+            </summary>
+            <param name="sender">Sender</param>
+            <param name="e">E</param>
+        </member>
+        <member name="M:SystemsAnalysis.Reporting.ApplicationInterface.CascadeToolStripMenuItem_Click(System.Object,System.EventArgs)">
+            <summary>
+            Cascade tool strip menu item _ click
+            </summary>
+            <param name="sender">Sender</param>
+            <param name="e">E</param>
+        </member>
+        <member name="M:SystemsAnalysis.Reporting.ApplicationInterface.TileVerticalToolStripMenuItem_Click(System.Object,System.EventArgs)">
+            <summary>
+            Tile vertical tool strip menu item _ click
+            </summary>
+            <param name="sender">Sender</param>
+            <param name="e">E</param>
+        </member>
+        <member name="M:SystemsAnalysis.Reporting.ApplicationInterface.TileHorizontalToolStripMenuItem_Click(System.Object,System.EventArgs)">
+            <summary>
+            Tile horizontal tool strip menu item _ click
+            </summary>
+            <param name="sender">Sender</param>
+            <param name="e">E</param>
+        </member>
+        <member name="M:SystemsAnalysis.Reporting.ApplicationInterface.ArrangeIconsToolStripMenuItem_Click(System.Object,System.EventArgs)">
+            <summary>
+            Arrange icons tool strip menu item _ click
+            </summary>
+            <param name="sender">Sender</param>
+            <param name="e">E</param>
+        </member>
+        <member name="M:SystemsAnalysis.Reporting.ApplicationInterface.CloseAllToolStripMenuItem_Click(System.Object,System.EventArgs)">
+            <summary>
+            Close all tool strip menu item _ click
+            </summary>
+            <param name="sender">Sender</param>
+            <param name="e">E</param>
+        </member>
+        <member name="M:SystemsAnalysis.Reporting.ApplicationInterface.ultraExplorerBar1_ItemClick(System.Object,Infragistics.Win.UltraWinExplorerBar.ItemEventArgs)">
+            <summary>
+            Ultra explorer bar 1_ item click
+            </summary>
+            <param name="sender">Sender</param>
+            <param name="e">E</param>
+        </member>
+        <member name="M:SystemsAnalysis.Reporting.ApplicationInterface.ActivateCreateReportForm">
+            <summary>
+            Activate create report form
+            </summary>
+        </member>
+        <member name="M:SystemsAnalysis.Reporting.ApplicationInterface.ActivateManageModelCatalogForm">
+            <summary>
+            Activate manage model catalog form
+            </summary>
+        </member>
+        <member name="M:SystemsAnalysis.Reporting.ApplicationInterface.ActivateStatusLog">
+            <summary>
+            Activate status log
+            </summary>
+        </member>
+        <member name="M:SystemsAnalysis.Reporting.ApplicationInterface.ActiveFormList">
+            <summary>
+            Active form list
+            </summary>
+            <returns>List dictionary</returns>
+        </member>
+        <member name="M:SystemsAnalysis.Reporting.ApplicationInterface.aboutToolStripMenuItem_Click(System.Object,System.EventArgs)">
+            <summary>
+            About tool strip menu item _ click
+            </summary>
+            <param name="sender">Sender</param>
+            <param name="e">E</param>
+        </member>
+        <member name="M:SystemsAnalysis.Reporting.ApplicationInterface.OnStatusChanged(SystemsAnalysis.Utils.Events.StatusChangedArgs)">
+            <summary>
+            On status changed
+            </summary>
+            <param name="e">E</param>
+        </member>
+        <member name="M:SystemsAnalysis.Reporting.ApplicationInterface.ChangeStatus(System.String)">
+            <summary>
+            Change status
+            </summary>
+            <param name="newStatus">New status</param>
+        </member>
+        <member name="M:SystemsAnalysis.Reporting.ApplicationInterface.createReportToolStripMenuItem_Click(System.Object,System.EventArgs)">
+            <summary>
+            Create report tool strip menu item _ click
+            </summary>
+            <param name="sender">Sender</param>
+            <param name="e">E</param>
+        </member>
+        <member name="M:SystemsAnalysis.Reporting.ApplicationInterface.manageModelCatalogToolStripMenuItem_Click(System.Object,System.EventArgs)">
+            <summary>
+            Manage model catalog tool strip menu item _ click
+            </summary>
+            <param name="sender">Sender</param>
+            <param name="e">E</param>
+        </member>
+        <member name="M:SystemsAnalysis.Reporting.ApplicationInterface.showLogToolStripMenuItem_Click(System.Object,System.EventArgs)">
+            <summary>
+            Show log tool strip menu item _ click
+            </summary>
+            <param name="sender">Sender</param>
+            <param name="e">E</param>
+        </member>
+        <member name="M:SystemsAnalysis.Reporting.ApplicationInterface.statusStrip_ItemClicked(System.Object,System.Windows.Forms.ToolStripItemClickedEventArgs)">
+            <summary>
+            Status strip _ item clicked
+            </summary>
+            <param name="sender">Sender</param>
+            <param name="e">E</param>
+        </member>
+        <member name="M:SystemsAnalysis.Reporting.ApplicationInterface.onlineHelpToolStripMenuItem_Click(System.Object,System.EventArgs)">
+            <summary>
+            Online help tool strip menu item _ click
+            </summary>
+            <param name="sender">Sender</param>
+            <param name="e">E</param>
+        </member>
+        <member name="T:SystemsAnalysis.Reporting.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:SystemsAnalysis.Reporting.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:SystemsAnalysis.Reporting.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="T:SystemsAnalysis.Reporting.Settings">
+             <summary>
+            Represents a strongly typed in-memory cache of data.
+            </summary>
+        </member>
+        <member name="T:SystemsAnalysis.Reporting.Settings.DataSourceDataTable">
+             <summary>
+            Represents the strongly named DataTable class.
+            </summary>
+        </member>
+        <member name="T:SystemsAnalysis.Reporting.Settings.DataSourceRow">
+             <summary>
+            Represents strongly named DataRow class.
+            </summary>
+        </member>
+        <member name="T:SystemsAnalysis.Reporting.Settings.DataSourceRowChangeEvent">
+             <summary>
+            Row event argument class
+            </summary>
+        </member>
+        <member name="T:SystemsAnalysis.Reporting.MismatchedLinkException">
+            <summary>
+            Summary description for CharacterizationExceptions.
+            </summary>
+        </member>
+        <member name="T:SystemsAnalysis.Reporting.SplashScreen">
+            <summary>
+            Form to display information screen about this application
+            </summary>
+        </member>
+        <member name="M:SystemsAnalysis.Reporting.SplashScreen.ShowDialog(System.Boolean)">
+            <summary>
+            Shows the SplashScreen as a modal dialog
+            </summary>
+            <param name="wait">Species whether to wait or user to click to close the dialog, or to close automatically</param>
+            <returns>DialogResult.OK</returns>
+        </member>
+        <member name="F:SystemsAnalysis.Reporting.SplashScreen.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:SystemsAnalysis.Reporting.SplashScreen.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:SystemsAnalysis.Reporting.SplashScreen.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
             </summary>
         </member>
         <member name="T:SystemsAnalysis.Reporting.InputBox">
@@ -453,38 +639,6 @@
             <summary>
             Delegate used to Validate an InputBox
             </summary>
-        </member>
-        <member name="T:SystemsAnalysis.Reporting.CharacterizationEngine">
-            <summary>
-            A class to perform characterization queries for collections of Model
-            components. Characterization operations are assumed to take place against
-            component collections, not a Model or StartLinks/StopLinks collections.
-            </summary>
-        </member>
-        <member name="M:SystemsAnalysis.Reporting.CharacterizationEngine.#ctor(System.String)">
-            <summary>
-            Constructor for the CharacterizationEngine.
-            </summary>
-            <param name="charLinks">A Links collection to be characterized.</param>					
-        </member>
-        <member name="M:SystemsAnalysis.Reporting.CharacterizationEngine.Characterize(SystemsAnalysis.Modeling.Links,System.String,System.String,System.ComponentModel.BackgroundWorker,System.ComponentModel.DoWorkEventArgs)">
-            <summary>
-            Generates an XML characterization report using the parameters specified in the constructor.
-            </summary>
-            <returns>The name of the .xml file containing the characterization information.</returns>
-        </member>
-        <member name="M:SystemsAnalysis.Reporting.CharacterizationEngine.parseEmbeddedFunction(System.String)">
-            <summary>
-            Returns the results of the embedded function as a string
-            </summary>
-            <param name="xmlFragment">An xml fragment containing the functionName, the library and any parameters</param>
-            <returns>The results of the embedded function</returns>
-        </member>
-        <member name="M:SystemsAnalysis.Reporting.CharacterizationEngine.OnStatusChanged(SystemsAnalysis.Utils.Events.StatusChangedArgs)">
-            <summary>
-            Internally called function that fires the OnStatusChanged event.
-            </summary>
-            <param name="e">Parameter that contains the string describing the new state.</param>
         </member>
     </members>
 </doc>
