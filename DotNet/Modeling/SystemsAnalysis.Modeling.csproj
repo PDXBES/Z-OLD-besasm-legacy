@@ -149,6 +149,10 @@
       <Project>{D81499E0-ED3E-4C85-9F8E-72C263AA24C4}</Project>
       <Name>SystemsAnalysis.DataAccess</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DotNetUtils\Events\SystemsAnalysis.Utils.Events.csproj">
+      <Project>{9AE8BF25-3ABF-402D-BC63-841E8588D20C}</Project>
+      <Name>SystemsAnalysis.Utils.Events</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DotNetUtils\INIFile\INIFile.vbproj">
       <Project>{61209491-B242-4237-A7B3-A6196906471A}</Project>
       <Name>INIFile</Name>
@@ -168,10 +172,6 @@
     <ProjectReference Include="..\Types\SystemsAnalysis.Types.csproj">
       <Project>{AFB81561-9859-4FA2-86AD-0C6833488E41}</Project>
       <Name>SystemsAnalysis.Types</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DotNetUtils\Events\SystemsAnalysis.Utils.Events.csproj">
-      <Project>{9AE8BF25-3ABF-402D-BC63-841E8588D20C}</Project>
-      <Name>SystemsAnalysis.Utils.Events</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
