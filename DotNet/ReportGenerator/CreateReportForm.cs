@@ -190,7 +190,7 @@ namespace SystemsAnalysis.Reporting
                 axMapControl.CenterAt(point);
                 axMapControl.MapScale = 10000.0;                
                                                            
-                LoadLayerFile(Application.StartupPath + "\\lyr\\cgis_streets.lyr", axMapControl);                                
+                //LoadLayerFile(Application.StartupPath + "\\lyr\\cgis_streets.lyr", axMapControl);                                
                 pFL = (FeatureLayer)LoadLayerFile(Application.StartupPath + "\\lyr\\mst_links.lyr", axMapControl);
                 tracerExtension.SetupTracer(MstLinks.LinkNetwork, pFL, "USNode", "DSNode", axMapControl.Map);
                 pFL.Selectable = true;
