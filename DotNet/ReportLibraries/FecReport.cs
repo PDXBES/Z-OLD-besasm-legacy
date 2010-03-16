@@ -297,6 +297,12 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
             fecID = parameters["FECID"].ValueAsInt;
             return FecReports[fecID].PipeLength(parameters);
         }
+        public double PipeLengthFraction(IDictionary<string, Parameter> parameters)
+        {
+          int fecID;
+          fecID = parameters["FECID"].ValueAsInt;
+          return FecReports[fecID].PipeLengthFraction(parameters);
+        }
         public double PipeLengthNonstandardMaterial(IDictionary<string, Parameter> parameters)
         {
             int fecID;
@@ -312,6 +318,11 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
                 }
             }
             return length / 5280.0;
+        }
+        public double PipeLengthFractionNonstandardMaterial(IDictionary<string, Parameter> parameters)
+        {
+          double length = PipeLengthNonstandardMaterial(parameters);
+          return length / PipeLength(new Dictionary<string, Parameter>());
         }
         public string PipeDiamRange(IDictionary<string, Parameter> parameters)
         {
@@ -504,7 +515,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
             existingPeak = CharacterizationPeakTotalFlow(parameters);
             parameters["TimeFrame"] = new Parameter("TimeFrame", "FU");
             futurePeak = CharacterizationPeakTotalFlow(parameters);
-            return (futurePeak - existingPeak) / existingPeak * 100;
+            return (futurePeak - existingPeak) / existingPeak;
         }
 
         public int SurfaceFloodingCount(IDictionary<string, Parameter> parameters)
