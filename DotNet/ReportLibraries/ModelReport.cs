@@ -151,6 +151,16 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
 
             return area.ToString("N1") + " (" + fraction.ToString("N0") + "%)";
         }
+        public double DscAreaFraction(IDictionary<string, Parameter> parameters)
+        {
+          double fraction;
+          double area;
+
+          area = DscArea(parameters);
+          fraction = area / dscs.Area();
+
+          return fraction;
+        }
 
         public string DscAreaBySewerable(IDictionary<string, Parameter> parameters)
         {
@@ -358,6 +368,32 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
             }
 
             return length / 5280.0;
+        }
+        public double PipeLengthFraction(IDictionary<string, Parameter> parameters)
+        {
+          double length = PipeLength(parameters);
+          double totalLength = PipeLength(new Dictionary<string, Parameter>());
+
+          return length / totalLength;
+        }
+        public double PipeLengthNonstandardMaterial(IDictionary<string, Parameter> parameters)
+        {          
+          double length = 0;
+          foreach (Link l in links)
+          {
+            int yearBuilt = l.InstallDate.Year;
+            double diameter = l.Diameter;
+            if (l.IsGravityFlow && l.Material != "CSP" && l.Material != "HDPE" && l.Material != "PVC")
+            {
+              length += l.Length;
+            }
+          }
+          return length / 5280.0;
+        }
+        public double PipeLengthFractionNonstandardMaterial(IDictionary<string, Parameter> parameters)
+        {
+          double length = PipeLengthNonstandardMaterial(parameters);
+          return length / PipeLength(new Dictionary<string, Parameter>());
         }
         public int PipeMinDiameter(IDictionary<string, Parameter> parameters)
         {
