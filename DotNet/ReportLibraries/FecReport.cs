@@ -15,6 +15,8 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
 {
   public class FecReport : ReportBase
   {
+    public const double DESIGN_MANUAL_RDII_GPAD = 1000;
+    public const double CFS_TO_GPD = 646272;
     private Dictionary<int, FlowEstimationCatchment> fecs;
     private Dictionary<int, Links> _fecLinks;
     private Dictionary<int, Dscs> _fecDscs;
@@ -321,7 +323,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
     public double PipeLengthFractionNonstandardMaterial(IDictionary<string, Parameter> parameters)
     {
       double length = PipeLengthNonstandardMaterial(parameters);
-      return length / PipeLength(new Dictionary<string, Parameter>());
+      return length / PipeLength(parameters);
     }
     public string PipeDiamRange(IDictionary<string, Parameter> parameters)
     {
@@ -436,11 +438,25 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
       int fecID;
       fecID = parameters["FECID"].ValueAsInt;
       FlowEstimationCatchment fec = fecs[fecID];
-      if (fec.FEMethod == Enumerators.FlowEstimationMethods.NS || fec.FEMethod == Enumerators.FlowEstimationMethods.ME)
+      /*if (fec.FEMethod == Enumerators.FlowEstimationMethods.NS || fec.FEMethod == Enumerators.FlowEstimationMethods.ME)
       {
         throw new Exception("PeakMeasuredRDIIPerAcre does not apply to unmonitored FECs");
       }
-      return (double)fec.FecResults.EXRDIIGpad;
+      return (double)fec.FecResults.EXRDIIGpad;*/
+      double connectedNoChangeAcres = 0;
+      double connectedFutureRedevelopment = 0;
+      parameters.Add("ConnectionAssumption", new Parameter("ConnectionAssumption", "ConnectedNoChange"));
+      connectedNoChangeAcres = this.DscArea(parameters);      
+      parameters["ConnectionAssumption"] = new Parameter("ConnectionAssumption", "ConnectedFutureRedevelopment");
+      connectedFutureRedevelopment = this.DscArea(parameters);
+
+      double rdiiGpad = Convert.ToDouble(fec.FecResults.EXRDIICfs) * CFS_TO_GPD / (connectedNoChangeAcres + connectedFutureRedevelopment + double.Epsilon);
+      return Math.Round(rdiiGpad / 100) * 100;
+
+    }
+    public double MeasuredToDMPeakRDII(IDictionary<string, Parameter> parameters)
+    {
+      return PeakMeasuredRDIIPerAcre(parameters) / DESIGN_MANUAL_RDII_GPAD;
     }
 
     public double CharacterizationABF(IDictionary<string, Parameter> parameters)
@@ -531,7 +547,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
     public double BasinCharacterizationPeakBF(IDictionary<string, Parameter> parameters)
     {
       double peakbf = 0;
-      parameters.Add("FECID", new Parameter("FECID", "0"));
+      if (!parameters.ContainsKey("FECID")) parameters.Add("FECID", new Parameter("FECID", "0"));
       foreach (FlowEstimationCatchment fec in fecs.Values)
       {
         parameters["FECID"] = new Parameter("FECID", fec.FecID.ToString());
@@ -542,7 +558,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
     public double BasinCharacterizationPeakRDII(IDictionary<string, Parameter> parameters)
     {
       double peakRdii = 0;
-      parameters.Add("FECID", new Parameter("FECID", "0"));
+      if (!parameters.ContainsKey("FECID")) parameters.Add("FECID", new Parameter("FECID", "0"));
       foreach (FlowEstimationCatchment fec in fecs.Values)
       {
         parameters["FECID"] = new Parameter("FECID", fec.FecID.ToString());
@@ -551,7 +567,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
       return peakRdii;
     }
     public double BasinCharacterizationPeakTotalFlow(IDictionary<string, Parameter> parameters)
-    {
+    {      
       return BasinCharacterizationPeakBF(parameters) + BasinCharacterizationPeakRDII(parameters);
     }
     public double BasinCharacterizationPercentIncrease(IDictionary<string, Parameter> parameters)
@@ -564,7 +580,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
       foreach (FlowEstimationCatchment fec in fecs.Values)
       {
         parameters["FECID"] = new Parameter("FECID", fec.FecID.ToString());
-        parameters["TimeFrame"] = new Parameter("TimeFrame", "FU");
+        parameters["TimeFrame"] = new Parameter("TimeFrame", "EX");
         existingPeak += this.BasinCharacterizationPeakTotalFlow(parameters);
         parameters["TimeFrame"] = new Parameter("TimeFrame", "FU");
         futurePeak += this.BasinCharacterizationPeakTotalFlow(parameters);
@@ -622,6 +638,48 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
       ModelReport modelReport = this._fecReports[fecID];
       return modelReport.PipesWithoutGradeCount(parameters);
     }
+
+    /// <summary>
+    /// QADsc area
+    /// </summary>
+    public double QADscArea(IDictionary<string, Parameter> parameters)
+    {
+      int fecID;
+      fecID = parameters["FECID"].ValueAsInt;
+      return FecReports[fecID].QADscArea(parameters);
+      //return FecReports[fecID].DscArea(parameters);
+    } // QADscArea(parameters)
+
+    /// <summary>
+    /// QADsc area summary
+    /// </summary>
+    public string QADscAreaSummary(IDictionary<string, Parameter> parameters)
+    {
+      int fecID;
+      fecID = parameters["FECID"].ValueAsInt;
+      return FecReports[fecID].QADscAreaSummary(parameters);
+    } // QADscAreaSummary(parameters)
+
+    /// <summary>
+    /// QADsc area by assumption
+    /// </summary>
+    public double QADscAreaByAssumption(IDictionary<string, Parameter> parameters)
+    {
+      int fecID;
+      fecID = parameters["FECID"].ValueAsInt;
+      return FecReports[fecID].QADscAreaByAssumption(parameters);
+    } // QADscAreaByAssumption(parameter)
+
+    /// <summary>
+    /// QADsc area by assumption summary
+    /// </summary>
+    public string QADscAreaByAssumptionSummary(IDictionary<string, Parameter> parameters)
+    {
+      int fecID;
+      fecID = parameters["FECID"].ValueAsInt;
+      return FecReports[fecID].QADscAreaByAssumptionSummary(parameters);
+    } // QADscAreaByAssumptionSummary(parameter)
+
 
 
 

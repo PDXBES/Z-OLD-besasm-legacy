@@ -518,7 +518,7 @@ namespace SystemsAnalysis.Reporting
                     return AlternativeReport.FocusAreaList();
                 case "PumpStationID":
                     return PSReport.PumpStationIDList;
-                case "DIVERSIONID":
+                case "DiversionID":
                 default:
                     multiRowKeyList = new int[0];
                     return (IList)multiRowKeyList;

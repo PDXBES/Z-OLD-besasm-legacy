@@ -734,7 +734,7 @@
 			<Cell data="Monitoring Equipment" cellType="COLUMNNAME"></Cell>
 			<Cell data="Description" cellType="COLUMNNAME"></Cell>
 		</Header>
-		<Row isMultiRow="true" multiRowKey="DiversionMultiRow">
+		<Row isMultiRow="true" multiRowKey="DiversionID">
 			<Cell cellType="CONST" data="" />
 			<Cell cellType="FUNCTION">
 				<Function functionName="DiversionNodeName" library="ModelReport">
@@ -793,9 +793,9 @@
 			<Cell cellType="COLUMNNAME" data="Elevation" />
 			<Cell cellType="COLUMNNAME" data="Outfall" />
 		</Header>
-		<Row isMultiRow="true" multoRowKey="PumpStationID">
-			<Cell cellType="FUNCTION" colSpan="2">
-				<Function functionName="Name" library="PumpStationReport">
+		<Row isMultiRow="true" multiRowKey="PumpStationID">
+			<Cell cellType="FUNCTION">
+				<Function functionName="NameAndLocation" library="PumpStationReport">
           <Parameter parameterName="PumpStationID" parameterValue="@PumpStationID"></Parameter>
         </Function>
 			</Cell>
@@ -993,7 +993,7 @@
 				</Function>
 			</Cell>
 			<Cell cellType="FUNCTION">
-				<Function functionName="CharacterizationPercentIncrease" library="FecReport" format="N1" suffix="%">
+				<Function functionName="CharacterizationPercentIncrease" library="FecReport" format="P0">
 					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
 				</Function>
 			</Cell>
