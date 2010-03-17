@@ -41,7 +41,6 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
       this.dscs = dscs;
       fecs = FlowEstimationCatchment.GetFecsFromLinks(links);
       //fecs = new Dictionary<int, FlowEstimationCatchment>();
-
     }
 
     private Dictionary<int, Links> FecLinks
