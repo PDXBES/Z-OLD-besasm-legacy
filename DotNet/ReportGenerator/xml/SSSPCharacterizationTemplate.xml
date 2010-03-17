@@ -102,7 +102,7 @@
 				</Function>
 			</Cell>
 			<Cell cellType = "FUNCTION">
-				<Function functionName="DscArea" library="FecReport">
+				<Function functionName="DscArea" library="FecReport" format="N0">
 					<Parameter parameterName="FECID" parameterValue="@FECID" />
 				</Function>
 			</Cell>
@@ -169,7 +169,7 @@
 		<Row>
 			<Cell cellType="CONST" data="Total" />
 			<Cell cellType = "FUNCTION">
-				<Function functionName="DscArea" library="ModelReport">					
+				<Function functionName="DscArea" library="ModelReport">
 				</Function>
 			</Cell>
 			<Cell cellType="FUNCTION">
@@ -227,11 +227,11 @@
 	</CharacterizationTable>
 	<CharacterizationTable tableNumber="3" tableTitle="Development Assumption and Zoning Detail" columnCount="5">
 		<Header>
-			<Cell data="Zoning (acres)" cellType="COLUMNNAME"></Cell>
-			<Cell data="Will Not Connect (acres)" cellType="COLUMNNAME"></Cell>
-			<Cell data="Connected, No Changes (acres)" cellType="COLUMNNAME"></Cell>
-			<Cell data="Connected, Future Redevelopment (acres)" cellType="COLUMNNAME"></Cell>
-			<Cell data="Future New Connection (acres)" cellType="COLUMNNAME"></Cell>
+			<Cell data="Zoning (percent)" cellType="COLUMNNAME"></Cell>
+			<Cell data="Will Not Connect (percent)" cellType="COLUMNNAME"></Cell>
+			<Cell data="Connected, No Changes (percent)" cellType="COLUMNNAME"></Cell>
+			<Cell data="Connected, Future Redevelopment (percent)" cellType="COLUMNNAME"></Cell>
+			<Cell data="Future New Connection (percent)" cellType="COLUMNNAME"></Cell>
 		</Header>
 		<Row>
 			<Cell cellType="CONST" data="SFR" />
@@ -460,33 +460,33 @@
 			</Cell>
 		</Row>
 		<Row>
-			<Cell cellType="CONST" data="Total" />						
+			<Cell cellType="CONST" data="Total" />
 			<Cell cellType="FUNCTION">
-				<Function functionName="PipeLength" library="ModelReport"  format="N1" />				
+				<Function functionName="PipeLength" library="ModelReport"  format="N1" />
 			</Cell>
 			<Cell cellType="FUNCTION">
-				<Function functionName="PipeLengthFraction" library="ModelReport" format="P0" >					
+				<Function functionName="PipeLengthFraction" library="ModelReport" format="P0" >
 					<Parameter parameterName="MaxDiameter" parameterValue = "8" />
 				</Function>
 			</Cell>
 			<Cell cellType="FUNCTION">
-				<Function functionName="PipeLengthFraction" library="ModelReport" format="P0" >					
+				<Function functionName="PipeLengthFraction" library="ModelReport" format="P0" >
 					<Parameter parameterName="MinDiameter" parameterValue = "8.0001" />
 					<Parameter parameterName="MaxDiameter" parameterValue = "15.0000" />
 				</Function>
 			</Cell>
 			<Cell cellType="FUNCTION">
-				<Function functionName="PipeLengthFraction" library="ModelReport" format="P0" >					
+				<Function functionName="PipeLengthFraction" library="ModelReport" format="P0" >
 					<Parameter parameterName="MinDiameter" parameterValue = "15.0001" />
 				</Function>
 			</Cell>
 			<Cell cellType="FUNCTION">
-				<Function functionName="PipeLengthFraction" library="ModelReport" format="P0" >					
+				<Function functionName="PipeLengthFraction" library="ModelReport" format="P0" >
 					<Parameter parameterName="Material" parameterValue="CSP" />
 				</Function>
 			</Cell>
 			<Cell cellType="FUNCTION">
-				<Function functionName="PipeLengthFraction" library="ModelReport" format="P0" >					
+				<Function functionName="PipeLengthFraction" library="ModelReport" format="P0" >
 					<Parameter parameterName="Material" parameterValue="HDPE" />
 				</Function>
 			</Cell>
@@ -496,7 +496,7 @@
 				</Function>
 			</Cell>
 			<Cell cellType="FUNCTION">
-				<Function functionName="PipeLengthFractionNonstandardMaterial" library="ModelReport" format="P0" >					
+				<Function functionName="PipeLengthFractionNonstandardMaterial" library="ModelReport" format="P0" >
 				</Function>
 			</Cell>
 		</Row>
@@ -577,47 +577,47 @@
 			</Cell>
 		</Row>
 		<Row>
-			<Cell cellType="CONST" data="Total" />				
+			<Cell cellType="CONST" data="Total" />
 			<Cell cellType="FUNCTION">
-				<Function functionName="PipeLength" library="ModelReport" format="N1" />					
+				<Function functionName="PipeLength" library="ModelReport" format="N1" />
 			</Cell>
 			<Cell cellType="FUNCTION">
-				<Function functionName="PipeLengthFraction" library="ModelReport" format="P0" >					
+				<Function functionName="PipeLengthFraction" library="ModelReport" format="P0" >
 					<Parameter parameterName="MinYearBuilt" parameterValue="1800" />
 					<Parameter parameterName="MaxYearBuilt" parameterValue="1949" />
 				</Function>
 			</Cell>
 			<Cell cellType="FUNCTION">
-				<Function functionName="PipeLengthFraction" library="ModelReport" format="P0" >					
+				<Function functionName="PipeLengthFraction" library="ModelReport" format="P0" >
 					<Parameter parameterName="MinYearBuilt" parameterValue="1950" />
 					<Parameter parameterName="MaxYearBuilt" parameterValue="1959" />
 				</Function>
 			</Cell>
 			<Cell cellType="FUNCTION">
-				<Function functionName="PipeLengthFraction" library="ModelReport" format="P0" >					
+				<Function functionName="PipeLengthFraction" library="ModelReport" format="P0" >
 					<Parameter parameterName="MinYearBuilt" parameterValue="1960" />
 					<Parameter parameterName="MaxYearBuilt" parameterValue="1969" />
 				</Function>
 			</Cell>
 			<Cell cellType="FUNCTION">
-				<Function functionName="PipeLengthFraction" library="ModelReport" format="P0" >					
+				<Function functionName="PipeLengthFraction" library="ModelReport" format="P0" >
 					<Parameter parameterName="MinYearBuilt" parameterValue="1970" />
 					<Parameter parameterName="MaxYearBuilt" parameterValue="1984" />
 				</Function>
 			</Cell>
 			<Cell cellType="FUNCTION">
-				<Function functionName="PipeLengthFraction" library="ModelReport" format="P0" >					
+				<Function functionName="PipeLengthFraction" library="ModelReport" format="P0" >
 					<Parameter parameterName="MinYearBuilt" parameterValue="1985" />
 					<Parameter parameterName="MaxYearBuilt" parameterValue="1999" />
 				</Function>
 			</Cell>
 			<Cell cellType="FUNCTION">
-				<Function functionName="PipeLengthFraction" library="ModelReport" format="P0" >					
+				<Function functionName="PipeLengthFraction" library="ModelReport" format="P0" >
 					<Parameter parameterName="MinYearBuilt" parameterValue="2000" />
 				</Function>
 			</Cell>
 			<Cell cellType="FUNCTION">
-				<Function functionName="PipeLengthFraction" library="ModelReport" format="P0" >					
+				<Function functionName="PipeLengthFraction" library="ModelReport" format="P0" >
 					<Parameter parameterName="YearBuiltIsNull" parameterValue="true" />
 				</Function>
 			</Cell>
@@ -686,39 +686,39 @@
 			</Cell>
 		</Row>
 		<Row>
-			<Cell cellType="CONST" data="Total" />				
+			<Cell cellType="CONST" data="Total" />
 			<Cell cellType="FUNCTION">
-				<Function functionName="PipeGradeCount" library="ModelReport">					
+				<Function functionName="PipeGradeCount" library="ModelReport">
 					<Parameter parameterName="PipeGrade" parameterValue="1"></Parameter>
 				</Function>
 			</Cell>
 			<Cell cellType="FUNCTION">
-				<Function functionName="PipeGradeCount" library="ModelReport">															
+				<Function functionName="PipeGradeCount" library="ModelReport">
 					<Parameter parameterName="PipeGrade" parameterValue="2"></Parameter>
 				</Function>
 			</Cell>
 			<Cell cellType="FUNCTION">
-				<Function functionName="PipeGradeCount" library="ModelReport">										
+				<Function functionName="PipeGradeCount" library="ModelReport">
 					<Parameter parameterName="PipeGrade" parameterValue="3"></Parameter>
 				</Function>
 			</Cell>
 			<Cell cellType="FUNCTION">
-				<Function functionName="PipeGradeCount" library="ModelReport">										
+				<Function functionName="PipeGradeCount" library="ModelReport">
 					<Parameter parameterName="PipeGrade" parameterValue="4"></Parameter>
 				</Function>
 			</Cell>
 			<Cell cellType="FUNCTION">
-				<Function functionName="PipeGradeCount" library="ModelReport">										
+				<Function functionName="PipeGradeCount" library="ModelReport">
 					<Parameter parameterName="PipeGrade" parameterValue="5"></Parameter>
 				</Function>
 			</Cell>
 			<Cell cellType="FUNCTION">
-				<Function functionName="PipeGradeCount" library="ModelReport">										
+				<Function functionName="PipeGradeCount" library="ModelReport">
 					<Parameter parameterName="PipeGrade" parameterValue="6"></Parameter>
 				</Function>
 			</Cell>
 			<Cell cellType="FUNCTION">
-				<Function functionName="PipesWithoutGradeCount" library="ModelReport" />									
+				<Function functionName="PipesWithoutGradeCount" library="ModelReport" />
 			</Cell>
 		</Row>
 		<Footer footerID="a" footerText="1 = excellent, 2 = good, 3 = fair, 4 = poor, 5 = needs immediate attention, 6 = spot repair." />
@@ -800,7 +800,7 @@
           <Parameter parameterName="PumpStationID" parameterValue="@PumpStationID"></Parameter>
         </Function>
 			</Cell>
-			<Cell cellType="CONST" data="Hansen ID" />				
+			<Cell cellType="CONST" data="Hansen ID" />
 			<Cell cellType="FUNCTION">
 				<Function functionName="FirmCapacity" library="PumpStationReport" suffix=" gpm">
           <Parameter parameterName="PumpStationID" parameterValue="@PumpStationID"></Parameter>
@@ -811,11 +811,11 @@
           <Parameter parameterName="PumpStationID" parameterValue="@PumpStationID"></Parameter>
         </Function>
 			</Cell>
-			<Cell cellType="CONST" data="1: Manhole; 2: Pipe; 3: Diversion; 4: Other" />				
-			<Cell cellType="CONST" data="1: Hansen ID; 2: Wetwell; 3: Hansen ID; 4: ??" />				
-			<Cell cellType="CONST" data="May be Unknown" />				
-			<Cell cellType="CONST" data="May be N/A" />				
-		</Row>		
+			<Cell cellType="CONST" data="1: Manhole; 2: Pipe; 3: Diversion; 4: Other" />
+			<Cell cellType="CONST" data="1: Hansen ID; 2: Wetwell; 3: Hansen ID; 4: ??" />
+			<Cell cellType="CONST" data="May be Unknown" />
+			<Cell cellType="CONST" data="May be N/A" />
+		</Row>
 	</CharacterizationTable>
 	<CharacterizationTable tableNumber="10" tableTitle="Basis for Existing Flows and Design Manual Comparison" columnCount="11">
 		<Header>
@@ -882,7 +882,7 @@
 					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
 				</Function>
 			</Cell>
-			<Cell cellType="CONST" data="1,000" />				
+			<Cell cellType="CONST" data="1,000" />
 			<Cell cellType="FUNCTION">
 				<Function functionName="MeasuredToDMPeakRDII" library="FecReport" format="N2" defaultValue="N/A">
 					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
@@ -933,22 +933,22 @@
 		<Row>
 			<Cell cellType="CONST" data="Total" />
 			<Cell cellType="FUNCTION">
-				<Function functionName="CharacterizationABF" library="ModelReport" format="N2">					
+				<Function functionName="BasinCharacterizationABF" library="FecReport" format="N2">
 					<Parameter parameterName="TimeFrame" parameterValue="EX" />
 				</Function>
 			</Cell>
 			<Cell cellType="FUNCTION">
-				<Function functionName="CharacterizationPeakBF" library="ModelReport" format="N2">					
+				<Function functionName="BasinCharacterizationPeakBF" library="FecReport" format="N2">
 					<Parameter parameterName="TimeFrame" parameterValue="EX" />
 				</Function>
 			</Cell>
 			<Cell cellType="FUNCTION">
-				<Function functionName="CharacterizationPeakRDII" library="ModelReport" format="N2">					
+				<Function functionName="BasinCharacterizationPeakRDII" library="FecReport" format="N2">
 					<Parameter parameterName="TimeFrame" parameterValue="EX" />
 				</Function>
 			</Cell>
 			<Cell cellType="FUNCTION">
-				<Function functionName="CharacterizationPeakTotalFlow" library="ModelReport" format="N2">					
+				<Function functionName="BasinCharacterizationPeakTotalFlow" library="FecReport" format="N2">
 					<Parameter parameterName="TimeFrame" parameterValue="EX" />
 				</Function>
 			</Cell>
@@ -1000,29 +1000,29 @@
 			</Cell>
 		</Row>
 		<Row>
-			<Cell cellType="CONST" data="Total" />				
+			<Cell cellType="CONST" data="Total" />
 			<Cell cellType="FUNCTION">
-				<Function functionName="CharacterizationABF" library="ModelReport" format="N2">					
+				<Function functionName="BasinCharacterizationABF" library="FecReport" format="N2">
 					<Parameter parameterName="TimeFrame" parameterValue="FU" />
 				</Function>
 			</Cell>
 			<Cell cellType="FUNCTION">
-				<Function functionName="CharacterizationPeakBF" library="ModelReport" format="N2">					
+				<Function functionName="BasinCharacterizationPeakBF" library="FecReport" format="N2">
 					<Parameter parameterName="TimeFrame" parameterValue="FU" />
 				</Function>
 			</Cell>
 			<Cell cellType="FUNCTION">
-				<Function functionName="CharacterizationPeakRDII" library="ModelReport" format="N2">
+				<Function functionName="BasinCharacterizationPeakRDII" library="FecReport" format="N2">
 					<Parameter parameterName="TimeFrame" parameterValue="FU" />
 				</Function>
 			</Cell>
 			<Cell cellType="FUNCTION">
-				<Function functionName="CharacterizationPeakTotalFlow" library="ModelReport" format="N2">					
+				<Function functionName="BasinCharacterizationPeakTotalFlow" library="FecReport" format="N2">
 					<Parameter parameterName="TimeFrame" parameterValue="FU" />
 				</Function>
 			</Cell>
 			<Cell cellType="FUNCTION">
-				<Function functionName="CharacterizationPercentIncrease" library="ModelReport" format="P0">					
+				<Function functionName="BasinCharacterizationPercentIncrease" library="FecReport" format="P0">
 				</Function>
 			</Cell>
 		</Row>
