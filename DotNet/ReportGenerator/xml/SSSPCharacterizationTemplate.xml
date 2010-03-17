@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<!--<?xml-stylesheet type="text/xsl" href="\\Cassio\Modeling\Model_Programs\bin\ReportGenerator\excel_char.xsl" ?>-->
-<?xml-stylesheet type="text/xsl" href="excel_char.xsl" ?>
+<?xml-stylesheet type="text/xsl" href="\\Cassio\Modeling\Model_Programs\bin\ReportGenerator\excel_char.xsl" ?>
+<!--<?xml-stylesheet type="text/xsl" href="excel_char.xsl" ?>-->
 <ReportGenerator reportName="SSSP Characterization Report" studyArea="" >
 	<CharacterizationTable tableNumber="1" tableTitle="Overview of Collection System Performance" columnCount="3">
 		<Header>
@@ -169,8 +169,7 @@
 		<Row>
 			<Cell cellType="CONST" data="Total" />
 			<Cell cellType = "FUNCTION">
-				<Function functionName="DscArea" library="ModelReport">
-				</Function>
+				<Function functionName="DscArea" library="ModelReport" format="N0" />				
 			</Cell>
 			<Cell cellType="FUNCTION">
 				<Function functionName="DscArea" library="ModelReport" format="N0">
