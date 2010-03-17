@@ -878,7 +878,7 @@
 				</Function>
 			</Cell>
 			<Cell cellType="FUNCTION">
-				<Function functionName="PeakMeasuredRDIIPerAcre" library="FecReport" format="N-2" defaultValue="N/A">
+				<Function functionName="PeakMeasuredRDIIPerAcre" library="FecReport" format="#,#00" defaultValue="N/A">
 					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
 				</Function>
 			</Cell>
