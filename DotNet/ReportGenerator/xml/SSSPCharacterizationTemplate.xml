@@ -221,8 +221,7 @@
 					<Parameter parameterName="Zoning" parameterValue="POS" />
 				</Function>
 			</Cell>
-		</Row>
-		<Footer footerID="*" footerText="Properties identified as connected to septic system by the Mandatory Sewer Connection Program." />
+		</Row>		
 	</CharacterizationTable>
 	<CharacterizationTable tableNumber="3" tableTitle="Development Assumption and Zoning Detail" columnCount="5">
 		<Header>

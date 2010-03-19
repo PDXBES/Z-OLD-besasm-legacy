@@ -402,7 +402,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
       int fecID;
       fecID = parameters["FECID"].ValueAsInt;
       FlowEstimationCatchment fec = fecs[fecID];
-      if (fec.FEMethod == Enumerators.FlowEstimationMethods.NS || fec.FEMethod == Enumerators.FlowEstimationMethods.ME)
+      if (fec.FEMethod == Enumerators.FlowEstimationMethods.NS)
       {
         throw new Exception("MeasuredABF does not apply to unmonitored FECs");
       }
@@ -418,7 +418,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
       int fecID;
       fecID = parameters["FECID"].ValueAsInt;
       FlowEstimationCatchment fec = fecs[fecID];
-      if (fec.FEMethod == Enumerators.FlowEstimationMethods.NS || fec.FEMethod == Enumerators.FlowEstimationMethods.ME)
+      if (fec.FEMethod == Enumerators.FlowEstimationMethods.NS)
       {
         throw new Exception("MeasuredPeakBF does not apply to unmonitored FECs");
       }
