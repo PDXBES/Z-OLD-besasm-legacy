@@ -36,6 +36,15 @@ namespace SystemsAnalysis.Modeling
     {
     }
 
+    protected override void OnClear()
+    {
+      foreach (Link l in this.Values)
+      {
+        OnRemovedLink(l, new LinkChangedEventArgs(l));
+      }
+      base.OnClear();
+    }
+
     public Network LinkNetwork
     {
       get

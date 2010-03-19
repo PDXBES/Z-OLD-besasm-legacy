@@ -1218,7 +1218,7 @@
 			</Cell>
 		</Row>
 	</CharacterizationTable>
-  <CharacterizationTable tableNumber="15" tableTitle="FE Catchment Area QA" columnCount="9">
+  <CharacterizationTable tableNumber="QA1" tableTitle="FE Catchment Area QA" columnCount="9">
     <Header>
       <Cell data="FE Catchment" cellType="COLUMNNAME" rowSpan="2"></Cell>
       <Cell data="Connection and Development Assumption" cellType="COLUMNNAME"></Cell>
@@ -1341,4 +1341,18 @@
       </Cell>
     </Row>
   </CharacterizationTable>
+  <CharacterizationTable tableNumber="QA2" tableTitle="FEC Area vs. Model Trace Area" columnCount="3">
+    <Row>
+      <Cell cellType="ROWNAME" data="Total DSC Area Within FECs" />
+      <Cell cellType="FUNCTION">
+        <Function functionName="TotalDscArea" library="FecReport" format="N0" />
+      </Cell>
+    </Row>
+    <Row>
+      <Cell cellType="ROWNAME" data="Total DSC Area Within Study Area Trace" />
+      <Cell cellType="FUNCTION">
+        <Function functionName="DscArea" library="ModelReport" format ="N0" />
+      </Cell>
+    </Row>
+   </CharacterizationTable>
 </ReportGenerator>

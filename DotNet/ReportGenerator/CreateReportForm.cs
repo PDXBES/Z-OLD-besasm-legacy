@@ -18,6 +18,7 @@ using SystemsAnalysis.Modeling.ModelResults;
 using SystemsAnalysis.Utils.Events;
 using SystemsAnalysis.Reporting;
 using SystemsAnalysis.Reporting.ReportLibraries;
+using System.Xml;
 
 namespace SystemsAnalysis.Reporting
 {
@@ -334,10 +335,8 @@ namespace SystemsAnalysis.Reporting
       return;
     }
 
-
-
     private void executeSync(CharacterizationData charData)
-    {      
+    {
       string studyArea = charData.studyArea;
       string outputFile = charData.outputFile;
       string reportTemplate = charData.reportTemplate;
@@ -345,21 +344,21 @@ namespace SystemsAnalysis.Reporting
 
       try
       {
-        backgroundWorker1.ReportProgress(0, new StatusChangedArgs("Performing trace."));
+        this.OnStatusChanged(new StatusChangedArgs("Performing trace."));
 
         charLinks = MstLinks.Trace(this.startLinks, this.stopLinks);
         if (charLinks == null || charLinks.Count <= 0)
         {
           throw new Exception("Error: No links were selected. Please verify start links.");
         }
-        
+
         this.OnStatusChanged(new StatusChangedArgs("Traced " + charLinks.Count + " links."));
 
         this.OnStatusChanged(new StatusChangedArgs("Creating characterization engine."));
 
         charEngine = new CharacterizationEngine(reportTemplate);
-        charEngine.StatusChanged += new Utils.Events.OnStatusChangedEventHandler(OnBackgroundStatusChanged);
-        
+        charEngine.StatusChanged += new Utils.Events.OnStatusChangedEventHandler(OnStatusChanged);
+
         foreach (ReportBase.ReportInfo reportInfo in charEngine.ReportInfos.Values)
         {
           if (!reportInfo.RequiresAuxilaryData)
@@ -373,15 +372,46 @@ namespace SystemsAnalysis.Reporting
           }
         }
         charEngine.Characterize(charLinks, outputFile, studyArea, null, null);
-
+        writeMetaData(outputFile, charLinks.Count);
 
       }
       catch (Exception ex)
       {
+        this.OnStatusChanged(new StatusChangedArgs("Batched execute failed", StatusChangeType.Error));
+        throw new Exception("Batch execute failed" + ex.Message, ex);
       }
     }
-    
+
+    private void writeMetaData(string outputFile, int linkCount)
+    {
+      XmlDocument xmlMetaData = new XmlDocument();
       
+      string metaData;
+      metaData = @"<GeneratedBy>" + System.Environment.UserName + "</GeneratedBy>";
+      metaData += "<Date>" + System.DateTime.Now.ToString("MM/dd/yy hh:mm tt") + "</Date>";
+      metaData += @"<StudyAreaSummary><StartLinks>";
+      foreach (Link l in startLinks.Values)
+      {
+        metaData += @"<StartLink>" + l.MLinkID + "</StartLink>";
+      }
+      metaData += @"</StartLinks><StopLinks>";
+      foreach (Link l in stopLinks.Values)
+      {
+        metaData += @"<StopLink>" + l.MLinkID + "</StopLink>";
+      }
+      metaData += @"</StopLinks><LinkCount>" + linkCount + "</LinkCount></StudyAreaSummary>";
+     
+      XmlDocument xmlDoc = new XmlDocument();
+      xmlDoc.Load(outputFile);                 
+      XmlNode root = xmlDoc.DocumentElement;
+      //Create a new node.
+      XmlElement elem = xmlDoc.CreateElement("MetaData");
+      elem.InnerXml = metaData;
+      //Add the node to the document.
+      root.AppendChild(elem);            
+      xmlDoc.Save(outputFile);
+    }
+
     private void btnPreviewTrace_Click(object sender, System.EventArgs e)
     {
       TraceNetwork();
@@ -413,9 +443,7 @@ namespace SystemsAnalysis.Reporting
     {
       MstLinks.ClearSubNetwork();
       startLinks.Clear();
-      lstStartLinks.Items.Clear();
       stopLinks.Clear();
-      lstStopLinks.Items.Clear();
       IFeatureLayer pFeatLayer;
       pFeatLayer = (IFeatureLayer)axMapControl.get_Layer(0);
       Utils.ArcObjects.MapControl.MapControlHelper.ClearSelection(
@@ -774,6 +802,8 @@ namespace SystemsAnalysis.Reporting
     {
       SystemsAnalysis.Utils.INIFile iniFile;
       iniFile = new SystemsAnalysis.Utils.INIFile(iniFileName);
+      startLinks.Clear();
+      stopLinks.Clear();
       if (iniFile.GetINIKeys("RootLinks") != null)
       {
         foreach (string s in iniFile.GetINIKeys("RootLinks"))
@@ -994,6 +1024,7 @@ namespace SystemsAnalysis.Reporting
           }
         }
         charEngine.Characterize(charLinks, outputFile, studyArea, backgroundWorker1, e);
+        writeMetaData(outputFile, charLinks.Count);
         e.Result = outputFile;
       }
       catch (Exception ex)
@@ -1089,6 +1120,7 @@ namespace SystemsAnalysis.Reporting
     private void btnGenerateBatchReports_Click(object sender, EventArgs e)
     {
       ofd.DefaultExt = ".txt";
+      ofd.Filter = "*|*";
       ofd.Title = "Find a Batch File list";
       if (ofd.ShowDialog() != DialogResult.OK)
       {

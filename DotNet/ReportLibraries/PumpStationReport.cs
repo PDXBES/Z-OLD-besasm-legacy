@@ -71,7 +71,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
     }
     public string NameAndLocation(IDictionary<string, Parameter> parameters)
     {
-      return this.Name(parameters) + " (" + this.Location(parameters) + ") ";
+      return this.Name(parameters) + "; " + this.Location(parameters);
     }
     /// <summary>
     /// Returns the firm capacity (capacity with the largest pump offline) of a pump station in gpm
