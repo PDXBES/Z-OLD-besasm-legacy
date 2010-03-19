@@ -17,8 +17,7 @@
     <SupportUrlHistory>http://twiki.bes-sa.org/bin/view/Modeling/ReportGenerator</SupportUrlHistory>
     <UpdateUrlHistory>
     </UpdateUrlHistory>
-    <BootstrapperUrlHistory>
-    </BootstrapperUrlHistory>
+    <BootstrapperUrlHistory>\\Cassio\ASM_Apps\ThirdPartyApps\MSDotNet</BootstrapperUrlHistory>
     <FallbackCulture>en-US</FallbackCulture>
     <VerifyUploadedFiles>false</VerifyUploadedFiles>
     <ErrorReportUrlHistory>

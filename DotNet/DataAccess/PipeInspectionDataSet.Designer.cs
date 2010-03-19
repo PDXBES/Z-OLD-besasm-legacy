@@ -268,11 +268,7 @@ namespace SystemsAnalysis.DataAccess {
             
             private global::System.Data.DataColumn columnCompKey;
             
-            private global::System.Data.DataColumn columnInspKey;
-            
             private global::System.Data.DataColumn columnTVDate;
-            
-            private global::System.Data.DataColumn columnGradeQualifier;
             
             private global::System.Data.DataColumn columnGrade;
             
@@ -328,23 +324,9 @@ namespace SystemsAnalysis.DataAccess {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn InspKeyColumn {
-                get {
-                    return this.columnInspKey;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public global::System.Data.DataColumn TVDateColumn {
                 get {
                     return this.columnTVDate;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn GradeQualifierColumn {
-                get {
-                    return this.columnGradeQualifier;
                 }
             }
             
@@ -384,15 +366,13 @@ namespace SystemsAnalysis.DataAccess {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public PipeInspectionGradesRow AddPipeInspectionGradesRow(int ObjectID, int MLinkID, int CompKey, int InspKey, System.DateTime TVDate, string GradeQualifier, int Grade) {
+            public PipeInspectionGradesRow AddPipeInspectionGradesRow(int ObjectID, int MLinkID, int CompKey, System.DateTime TVDate, int Grade) {
                 PipeInspectionGradesRow rowPipeInspectionGradesRow = ((PipeInspectionGradesRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         ObjectID,
                         MLinkID,
                         CompKey,
-                        InspKey,
                         TVDate,
-                        GradeQualifier,
                         Grade};
                 rowPipeInspectionGradesRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowPipeInspectionGradesRow);
@@ -427,9 +407,7 @@ namespace SystemsAnalysis.DataAccess {
                 this.columnObjectID = base.Columns["ObjectID"];
                 this.columnMLinkID = base.Columns["MLinkID"];
                 this.columnCompKey = base.Columns["CompKey"];
-                this.columnInspKey = base.Columns["InspKey"];
                 this.columnTVDate = base.Columns["TVDate"];
-                this.columnGradeQualifier = base.Columns["GradeQualifier"];
                 this.columnGrade = base.Columns["Grade"];
             }
             
@@ -441,12 +419,8 @@ namespace SystemsAnalysis.DataAccess {
                 base.Columns.Add(this.columnMLinkID);
                 this.columnCompKey = new global::System.Data.DataColumn("CompKey", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnCompKey);
-                this.columnInspKey = new global::System.Data.DataColumn("InspKey", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnInspKey);
                 this.columnTVDate = new global::System.Data.DataColumn("TVDate", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnTVDate);
-                this.columnGradeQualifier = new global::System.Data.DataColumn("GradeQualifier", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnGradeQualifier);
                 this.columnGrade = new global::System.Data.DataColumn("Grade", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnGrade);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
@@ -454,10 +428,10 @@ namespace SystemsAnalysis.DataAccess {
                 this.columnObjectID.AllowDBNull = false;
                 this.columnObjectID.Unique = true;
                 this.columnObjectID.Caption = "OBJECTID";
-                this.columnInspKey.Caption = "inspkey";
-                this.columnTVDate.Caption = "tvdate";
-                this.columnGradeQualifier.Caption = "GradeQuali";
-                this.columnGradeQualifier.MaxLength = 50;
+                this.columnMLinkID.Caption = "MLINKID";
+                this.columnCompKey.Caption = "COMPKEY";
+                this.columnTVDate.Caption = "TV_DATE";
+                this.columnGrade.Caption = "TV_GRADE";
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -630,21 +604,6 @@ namespace SystemsAnalysis.DataAccess {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public int InspKey {
-                get {
-                    try {
-                        return ((int)(this[this.tablePipeInspectionGrades.InspKeyColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'InspKey\' in table \'PipeInspectionGrades\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tablePipeInspectionGrades.InspKeyColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public System.DateTime TVDate {
                 get {
                     try {
@@ -656,21 +615,6 @@ namespace SystemsAnalysis.DataAccess {
                 }
                 set {
                     this[this.tablePipeInspectionGrades.TVDateColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string GradeQualifier {
-                get {
-                    try {
-                        return ((string)(this[this.tablePipeInspectionGrades.GradeQualifierColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'GradeQualifier\' in table \'PipeInspectionGrades\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tablePipeInspectionGrades.GradeQualifierColumn] = value;
                 }
             }
             
@@ -710,16 +654,6 @@ namespace SystemsAnalysis.DataAccess {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsInspKeyNull() {
-                return this.IsNull(this.tablePipeInspectionGrades.InspKeyColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetInspKeyNull() {
-                this[this.tablePipeInspectionGrades.InspKeyColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public bool IsTVDateNull() {
                 return this.IsNull(this.tablePipeInspectionGrades.TVDateColumn);
             }
@@ -727,16 +661,6 @@ namespace SystemsAnalysis.DataAccess {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public void SetTVDateNull() {
                 this[this.tablePipeInspectionGrades.TVDateColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsGradeQualifierNull() {
-                return this.IsNull(this.tablePipeInspectionGrades.GradeQualifierColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetGradeQualifierNull() {
-                this[this.tablePipeInspectionGrades.GradeQualifierColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -874,26 +798,21 @@ namespace SystemsAnalysis.DataAccess.PipeInspectionDataSetTableAdapters {
             tableMapping.SourceTable = "Table";
             tableMapping.DataSetTable = "PipeInspectionGrades";
             tableMapping.ColumnMappings.Add("OBJECTID", "ObjectID");
-            tableMapping.ColumnMappings.Add("MLinkID", "MLinkID");
-            tableMapping.ColumnMappings.Add("CompKey", "CompKey");
-            tableMapping.ColumnMappings.Add("inspkey", "InspKey");
-            tableMapping.ColumnMappings.Add("tvdate", "TVDate");
-            tableMapping.ColumnMappings.Add("GradeQuali", "GradeQualifier");
-            tableMapping.ColumnMappings.Add("Grade", "Grade");
+            tableMapping.ColumnMappings.Add("MLINKID", "MLinkID");
+            tableMapping.ColumnMappings.Add("COMPKEY", "CompKey");
+            tableMapping.ColumnMappings.Add("TV_DATE", "TVDate");
+            tableMapping.ColumnMappings.Add("TV_GRADE", "Grade");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [ModelAdmin].[SP_PIPEINSPECTIONGRADES] ([OBJECTID], [MLinkID], [CompK" +
-                "ey], [inspkey], [tvdate], [GradeQuali], [Grade]) VALUES (@OBJECTID, @MLinkID, @C" +
-                "ompKey, @inspkey, @tvdate, @GradeQuali, @Grade)";
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [SP_PIPEINSPECTIONGRADES] ([OBJECTID], [MLINKID], [COMPKEY], [TV_DATE" +
+                "], [TV_GRADE]) VALUES (@OBJECTID, @MLINKID, @COMPKEY, @TV_DATE, @TV_GRADE)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@OBJECTID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "OBJECTID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MLinkID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MLinkID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CompKey", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CompKey", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@inspkey", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "inspkey", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@tvdate", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "tvdate", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@GradeQuali", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "GradeQuali", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Grade", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Grade", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MLINKID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MLINKID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@COMPKEY", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "COMPKEY", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TV_DATE", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TV_DATE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@TV_GRADE", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "TV_GRADE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -907,8 +826,8 @@ namespace SystemsAnalysis.DataAccess.PipeInspectionDataSetTableAdapters {
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT OBJECTID, MLinkID, CompKey, inspkey, tvdate, GradeQuali, Grade FROM ModelA" +
-                "dmin.SP_PIPEINSPECTIONGRADES";
+            this._commandCollection[0].CommandText = "SELECT     OBJECTID, MLINKID, COMPKEY, TV_DATE, TV_GRADE\r\nFROM         SP_PIPEINS" +
+                "PECTIONGRADES";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -957,63 +876,6 @@ namespace SystemsAnalysis.DataAccess.PipeInspectionDataSetTableAdapters {
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         public virtual int Update(global::System.Data.DataRow[] dataRows) {
             return this.Adapter.Update(dataRows);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(int OBJECTID, global::System.Nullable<int> MLinkID, global::System.Nullable<int> CompKey, global::System.Nullable<int> inspkey, global::System.Nullable<global::System.DateTime> tvdate, string GradeQuali, global::System.Nullable<int> Grade) {
-            this.Adapter.InsertCommand.Parameters[0].Value = ((int)(OBJECTID));
-            if ((MLinkID.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[1].Value = ((int)(MLinkID.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
-            if ((CompKey.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[2].Value = ((int)(CompKey.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            if ((inspkey.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[3].Value = ((int)(inspkey.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            if ((tvdate.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[4].Value = ((System.DateTime)(tvdate.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
-            if ((GradeQuali == null)) {
-                this.Adapter.InsertCommand.Parameters[5].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[5].Value = ((string)(GradeQuali));
-            }
-            if ((Grade.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[6].Value = ((int)(Grade.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
-            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.InsertCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.InsertCommand.Connection.Close();
-                }
-            }
         }
     }
 }
