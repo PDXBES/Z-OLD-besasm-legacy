@@ -11,7 +11,7 @@
     <CopyProjectOption>0</CopyProjectOption>
     <ProjectView>ProjectFiles</ProjectView>
     <ProjectTrust>0</ProjectTrust>
-    <PublishUrlHistory>\\Cassio\Modeling\Model_Programs\bin\ReportGenerator\|a\|ffdsafaf\</PublishUrlHistory>
+    <PublishUrlHistory>\\Cassio\ASM_Apps\Apps\ReportGenerator\|\\Cassio\Modeling\Model_Programs\bin\ReportGenerator\|a\|ffdsafaf\</PublishUrlHistory>
     <InstallUrlHistory>
     </InstallUrlHistory>
     <SupportUrlHistory>http://twiki.bes-sa.org/bin/view/Modeling/ReportGenerator</SupportUrlHistory>
@@ -21,6 +21,8 @@
     </BootstrapperUrlHistory>
     <FallbackCulture>en-US</FallbackCulture>
     <VerifyUploadedFiles>false</VerifyUploadedFiles>
+    <ErrorReportUrlHistory>
+    </ErrorReportUrlHistory>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <EnableASPDebugging>false</EnableASPDebugging>

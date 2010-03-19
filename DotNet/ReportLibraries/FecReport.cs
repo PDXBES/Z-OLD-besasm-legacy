@@ -17,6 +17,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
   {
     public const double DESIGN_MANUAL_RDII_GPAD = 1000;
     public const double CFS_TO_GPD = 646272;
+    public const double FT_TO_MI = 5280.0;
     private Dictionary<int, FlowEstimationCatchment> fecs;
     private Dictionary<int, Links> _fecLinks;
     private Dictionary<int, Dscs> _fecDscs;
@@ -241,11 +242,28 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
       int i = 0;
       int[] fecIDList;
       fecIDList = new int[fecs.Count];
+      ArrayList fecNameList = new ArrayList(fecs.Count);
+
       foreach (FlowEstimationCatchment fec in fecs.Values)
+      {        
+        fecNameList.Add(fec.FecName);        
+      }
+      fecNameList.Sort();
+      i = 0;
+      foreach (string fecName in fecNameList)
       {
-        fecIDList[i] = fec.FecID;
+        FlowEstimationCatchment matchedFec = null;
+        foreach (FlowEstimationCatchment fec in fecs.Values)
+        {
+          if (fecName == fec.FecName)
+          {
+            matchedFec = fec;
+          }
+        }
+        fecIDList[i] = matchedFec.FecID;
         i++;
       }
+
       return fecIDList;
     }
 
@@ -318,7 +336,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
           length += l.Length;
         }
       }
-      return length / 5280.0;
+      return length / FT_TO_MI; 
     }
     public double PipeLengthFractionNonstandardMaterial(IDictionary<string, Parameter> parameters)
     {
@@ -680,7 +698,18 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
       return FecReports[fecID].QADscAreaByAssumptionSummary(parameters);
     } // QADscAreaByAssumptionSummary(parameter)
 
+    public double TotalDscArea(IDictionary<string, Parameter> parameters)
+    {
+      double fecArea = 0;            
 
+      parameters.Add("FECID", new Parameter("FECID", "0"));
+      foreach (FlowEstimationCatchment fec in fecs.Values)
+      {
+        parameters["FECID"] = new Parameter("FECID", fec.FecID.ToString());
+        fecArea += this.DscArea(parameters);
+      }
+      return fecArea;
+    }
 
 
   }
