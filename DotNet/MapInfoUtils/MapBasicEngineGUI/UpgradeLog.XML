@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="MapBasicEngineGUI">
+</Property><Property Name="Solution File" Value="W:\Model_Programs\DotNet\MapInfoUtils\MapBasinEngineGUI\MapBasicEngineGUI.sln">
+</Property><Property Name="User Options File" Value="W:\Model_Programs\DotNet\MapInfoUtils\MapBasinEngineGUI\MapBasicEngineGUI.suo">
+</Property><Property Name="Date" Value="Thursday, December 07, 2006">
+</Property><Property Name="Time" Value="14:23 PM">
+</Property></Properties><Event ErrorLevel="0" Project="" Source="MapBasicEngineGUI.sln" Description="File successfully backed up as W:\Model_Programs\DotNet\MapInfoUtils\MapBasinEngineGUI\Backup1\MapBasicEngineGUI.sln">
+</Event><Event ErrorLevel="0" Project="" Source="MapBasicEngineGUI.suo" Description="File successfully backed up as W:\Model_Programs\DotNet\MapInfoUtils\MapBasinEngineGUI\Backup1\MapBasicEngineGUI.suo">
+</Event><Event ErrorLevel="0" Project="SystemsAnalysis.Utils.MapInfoUtils.MapBasicEngineGUI" Source="SystemsAnalysis.Utils.MapInfoUtils.MapBasicEngineGUI.csproj" Description="Project file successfully backed up as W:\Model_Programs\DotNet\MapInfoUtils\MapBasinEngineGUI\Backup1\SystemsAnalysis.Utils.MapInfoUtils.MapBasicEngineGUI.csproj">
+</Event><Event ErrorLevel="0" Project="SystemsAnalysis.Utils.MapInfoUtils.MapBasicEngineGUI" Source="SystemsAnalysis.Utils.MapInfoUtils.MapBasicEngineGUI.csproj.user" Description="Project user file successfully backed up as W:\Model_Programs\DotNet\MapInfoUtils\MapBasinEngineGUI\Backup1\SystemsAnalysis.Utils.MapInfoUtils.MapBasicEngineGUI.csproj.user">
+</Event><Event ErrorLevel="0" Project="SystemsAnalysis.Utils.MapInfoUtils.MapBasicEngineGUI" Source="AssemblyInfo.cs" Description="File successfully backed up as W:\Model_Programs\DotNet\MapInfoUtils\MapBasinEngineGUI\Backup1\AssemblyInfo.cs">
+</Event><Event ErrorLevel="0" Project="SystemsAnalysis.Utils.MapInfoUtils.MapBasicEngineGUI" Source="EngineSettings1.cs" Description="File successfully backed up as W:\Model_Programs\DotNet\MapInfoUtils\MapBasinEngineGUI\Backup1\EngineSettings1.cs">
+</Event><Event ErrorLevel="0" Project="SystemsAnalysis.Utils.MapInfoUtils.MapBasicEngineGUI" Source="IGISExecuter.cs" Description="File successfully backed up as W:\Model_Programs\DotNet\MapInfoUtils\MapBasinEngineGUI\Backup1\IGISExecuter.cs">
+</Event><Event ErrorLevel="0" Project="SystemsAnalysis.Utils.MapInfoUtils.MapBasicEngineGUI" Source="MapBasicEngineGUI.cs" Description="File successfully backed up as W:\Model_Programs\DotNet\MapInfoUtils\MapBasinEngineGUI\Backup1\MapBasicEngineGUI.cs">
+</Event><Event ErrorLevel="0" Project="SystemsAnalysis.Utils.MapInfoUtils.MapBasicEngineGUI" Source="MapBasicExecuter.cs" Description="File successfully backed up as W:\Model_Programs\DotNet\MapInfoUtils\MapBasinEngineGUI\Backup1\MapBasicExecuter.cs">
+</Event><Event ErrorLevel="0" Project="SystemsAnalysis.Utils.MapInfoUtils.MapBasicEngineGUI" Source="WorkbenchRunning.cs" Description="File successfully backed up as W:\Model_Programs\DotNet\MapInfoUtils\MapBasinEngineGUI\Backup1\WorkbenchRunning.cs">
+</Event><Event ErrorLevel="0" Project="SystemsAnalysis.Utils.MapInfoUtils.MapBasicEngineGUI" Source="EngineSettings.xsx" Description="File successfully backed up as W:\Model_Programs\DotNet\MapInfoUtils\MapBasinEngineGUI\Backup1\EngineSettings.xsx">
+</Event><Event ErrorLevel="0" Project="SystemsAnalysis.Utils.MapInfoUtils.MapBasicEngineGUI" Source="App.ico" Description="File successfully backed up as W:\Model_Programs\DotNet\MapInfoUtils\MapBasinEngineGUI\Backup1\App.ico">
+</Event><Event ErrorLevel="0" Project="SystemsAnalysis.Utils.MapInfoUtils.MapBasicEngineGUI" Source="EngineSettings.xsd" Description="File successfully backed up as W:\Model_Programs\DotNet\MapInfoUtils\MapBasinEngineGUI\Backup1\EngineSettings.xsd">
+</Event><Event ErrorLevel="0" Project="SystemsAnalysis.Utils.MapInfoUtils.MapBasicEngineGUI" Source="Default_Settings.xml" Description="File successfully backed up as W:\Model_Programs\DotNet\MapInfoUtils\MapBasinEngineGUI\Backup1\Default_Settings.xml">
+</Event><Event ErrorLevel="0" Project="SystemsAnalysis.Utils.MapInfoUtils.MapBasicEngineGUI" Source="licenses.licx" Description="File successfully backed up as W:\Model_Programs\DotNet\MapInfoUtils\MapBasinEngineGUI\Backup1\licenses.licx">
+</Event><Event ErrorLevel="0" Project="SystemsAnalysis.Utils.MapInfoUtils.MapBasicEngineGUI" Source="MapBasicEngineGUI.resx" Description="File successfully backed up as W:\Model_Programs\DotNet\MapInfoUtils\MapBasinEngineGUI\Backup1\MapBasicEngineGUI.resx">
+</Event><Event ErrorLevel="0" Project="SystemsAnalysis.Utils.MapInfoUtils.MapBasicEngineGUI" Source="WorkbenchRunning.resx" Description="File successfully backed up as W:\Model_Programs\DotNet\MapInfoUtils\MapBasinEngineGUI\Backup1\WorkbenchRunning.resx">
+</Event><Event ErrorLevel="0" Project="SystemsAnalysis.Utils.MapInfoUtils.MapBasicEngineGUI" Source="SystemsAnalysis.Utils.MapInfoUtils.MapBasicEngineGUI.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="SystemsAnalysis.Utils.MapInfoUtils.MapBasicEngineGUI" Source="SystemsAnalysis.Utils.MapInfoUtils.MapBasicEngineGUI.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="MapBasicEngineGUI.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="MapBasicEngineGUI.sln" Description="Converted">
+</Event><Event ErrorLevel="0" Project="SystemsAnalysis.Utils.MapInfoUtils.MapBasicEngineGUI" Source="SystemsAnalysis.Utils.MapInfoUtils.MapBasicEngineGUI.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event></UpgradeLog>

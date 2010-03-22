@@ -1,0 +1,102 @@
+!Workspace
+!Version 650
+!Charset WindowsLatin1
+Layout
+  Position (0.104167,0.03125) Units "in"
+  Width 8.10417 Units "in" Height 5.38542 Units "in"   
+Set CoordSys Layout Units "in"
+
+' Setup rectangles and lines
+Create Rect (0.52018*x,0.5*y) (16.4299*x,10.45*y)
+  Pen (20,2,0)   
+  Brush (2,5079040,16777215)
+Create Rect (12.7201*x,0.6403*y) (16.3*x,10.3097*y)
+  Pen (17,2,0)   
+  Brush (2,16777215,16777215)
+Create Rect (11.7833*x,9.9007*y) (12.6153*x,10.2944*y)
+  Pen (1,2,0)   
+  Brush (1,16777215,16777215)
+Create Rect (0.6403*x,0.6403*y) (12.6201*x,10.3097*y)
+  Pen (17,2,0)   
+  Brush (2,16777215,16777215)
+Create Rect (12.75*x,3.691*y) (16.2701*x,8.7701*y)
+  Pen (1,2,0)
+  Brush (1,16777215,16777215)
+Create Rect (12.75*x,8.8*y) (16.2701*x,9.4201*y)
+  Pen (1,2,0)
+  Brush (1,16777215,16777215)
+Create Rect (12.75*x,9.45*y) (14.4299*x,9.85*y)
+  Pen (1,2,0)
+  Brush (1,16777215,16777215)
+Create Rect (14.4597*x,9.8799*y) (16.2701*x,10.2799*y)
+  Pen (1,2,0)
+  Brush (1,16777215,16777215)
+Create Rect (12.75*x,9.8799*y) (14.4299*x,10.2799*y)
+  Pen (1,2,0)
+  Brush (1,16777215,16777215)
+Create Rect (12.75*x,0.6701*y) (16.2701*x,3.6701*y)
+  Pen (1,2,0)
+  Brush (1,16777215,16777215)
+Create Rect (14.4597*x,9.45*y) (16.2701*x,9.85*y)
+  Pen (1,2,0)
+  Brush (1,16777215,16777215)
+
+' Setup main map frame
+Create Frame (0.6701*x,0.6701*y) (12.5903*x,10.2799*y)
+  Pen (1,2,0)
+  Brush (2,16777215,16777215)
+  Title "Main Map"
+  FillFrame On
+' Setup map frames
+Create Frame (12.75*x,8*y) (16.2701*x,8.7701*y)
+  Pen (1,1,12632256)
+  Brush (1,16777215,16777215)
+  Title "Scalebar Map"
+  FillFrame On
+Create Frame (14.0111*x,7.3243*y) (14.8868*x,8.0743*y)
+  Pen (1,1,12632256)
+  Brush (1,16777215,16777215)
+  Title "North2 Map"
+  FillFrame On
+Create Frame (12.75*x,0.6701*y) (16.2701*x,3.6701*y)
+  Pen (1,2,0)
+  Brush (2,14737632,16777215)
+  Title "Overview Mp"
+  FillFrame On
+Create Frame (12.7493*x,3.8937*y) (16.2701*x,8.5*y)
+  Pen (1,1,12632256)
+  Brush (1,0,16777215)
+  Title "Legend of Main Map"
+  FillFrame Off
+Create Frame (14.5972*x,9.5076*y) (16.0347*x,9.841*y)
+  Pen (1,1,0)
+  Brush (1,0,16777215)
+  Title "Date Map"
+  FillFrame On
+Create Frame (14.4597*x,9.8799*y) (16.2701*x,10.2799*y)
+  Pen (1,2,0)
+  Brush (2,16777215,16777215)
+  Title "SysAnaLog Map"
+  FillFrame On
+
+' Setup labels
+Create Text
+  "Sheet No."
+  (12.7813*x,9.4625*y) (13.0965*x,9.5583*y)	'Font FontStr
+Create Text
+  "Overview Map"
+  (12.7597*x,0.6903*y) (13.8403*x,0.9042*y)
+Create Text
+  "Legend"
+  (12.8264*x,3.716*y) (13.3542*x,3.9104*y)
+Create Text
+  "Project No."
+  (12.7729*x,9.9021*y) (13.134*x,9.9979*y)
+Create Text
+  "Date Printed:"
+  (14.4813*x,9.459*y) (14.9049*x,9.5549*y)
+
+Set Layout Ruler On Pagebreaks On Frame Contents On
+  Zoom 45.2381/x Center (8.50822*x,5.50822*y) Extents To Fit
+Set Window FrontWindow() Title "Main Layout" Autoscroll On
+'Set CoordSys Earth

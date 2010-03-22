@@ -1,0 +1,1357 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="\\Cassio\Modeling\Model_Programs\bin\ReportGenerator\excel_char.xsl" ?>
+<!--<?xml-stylesheet type="text/xsl" href="excel_char.xsl" ?>-->
+<ReportGenerator reportName="SSSP Characterization Report" studyArea="" >
+	<CharacterizationTable tableNumber="1" tableTitle="Overview of Collection System Performance" columnCount="3">
+		<Header>
+			<Cell data="Hydraulic Performance Indicators" cellType="COLUMNNAME"></Cell>
+			<Cell data="5-Year Storm Existing Conditions" cellType="COLUMNNAME"></Cell>
+			<Cell data="5-Year Storm Future Conditions" cellType="COLUMNNAME"></Cell>
+		</Header>
+		<Row>
+			<Cell cellType="ROWNAME" data="Surface Flooding Risk: Number of manholes where water surface elevation is &lt; 2 feet from ground surface elevation" />
+			<Cell cellType="FUNCTION">
+			<Function functionName="SurfaceFloodingCount" library="ModelResultsReport" format="N0">
+					<Parameter parameterName="MaxFreeboard" parameterValue="2"></Parameter>
+					<Parameter parameterName="ScenarioID" parameterValue="5" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+			<Function functionName="SurfaceFloodingCount" library="ModelResultsReport" format="N0">
+					<Parameter parameterName="MaxFreeboard" parameterValue="2"></Parameter>
+					<Parameter parameterName="ScenarioID" parameterValue="6" />
+				</Function>
+			</Cell>
+		</Row>
+		<Row>
+			<Cell cellType="ROWNAME" data="Basement Sewer Backup Risk: Number of parcels where hydraulic grade line is &lt; 8 feet from estimated finished floor elevation" footerID="a" />
+			<Cell cellType="FUNCTION">
+				<Function functionName="SewerBackupRiskCount" library="ModelResultsReport" format="N0">
+					<Parameter parameterName="MaxDeltaHGL" parameterValue="8" />
+					<Parameter parameterName="ScenarioID" parameterValue="5" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="SewerBackupRiskCount" library="ModelResultsReport" format="N0">
+					<Parameter parameterName="MaxDeltaHGL" parameterValue="8"></Parameter>
+					<Parameter parameterName="ScenarioID" parameterValue="6" />
+				</Function>
+			</Cell>
+		</Row>
+		<Row>
+			<Cell cellType="ROWNAME" data="Pipe Surcharge Risk: Length of pipe in miles (number of segments) that meet two conditions: (1) surcharge lasts 30 minutes or longer and also (2) the peak hydraulic grade line is &gt; 4 feet above the pipe crown" footerID="b"/>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeSurchargeLengthCountSummary" library="ModelResultsReport">
+					<Parameter parameterName="MinSurchargeDepth" parameterValue="4"></Parameter>
+					<Parameter parameterName="ScenarioID" parameterValue="5" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeSurchargeLengthCountSummary" library="ModelResultsReport">
+					<Parameter parameterName="MinSurchargeDepth" parameterValue="4"></Parameter>
+					<Parameter parameterName="ScenarioID" parameterValue="6" />
+				</Function>
+			</Cell>
+		</Row>
+		<Row>
+			<Cell cellType="ROWNAME" data="Pipe Capacity: Length of pipe in miles (number of segments) with peak flow to design flow ratio &gt; 1.2" />
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioLengthCountSummary" library="ModelResultsReport">
+					<Parameter parameterName="MinQQRatio" parameterValue="1.2"></Parameter>
+					<Parameter parameterName="ScenarioID" parameterValue="5" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioLengthCountSummary" library="ModelResultsReport">
+					<Parameter parameterName="MinQQRatio" parameterValue="1.2"></Parameter>
+					<Parameter parameterName="ScenarioID" parameterValue="6" />
+				</Function>
+			</Cell>
+		</Row>
+		<Row>
+			<Cell cellType="ROWNAME" data="Pump Stations: Number of pump stations where firm pumping capacity is insufficient to convey expected design flow"  footerID="c" />
+			<Cell cellType="CONST" data="Manual Entry" />
+			<Cell cellType="CONST" data="Manual Entry" />
+		</Row>
+		<Footer footerID="a" footerText="Basement elevation is estimated at 8 feet below finished floor elevation of the parcel." />
+		<Footer footerID="b" footerText="These are considered to be hydraulically deficient pipes; operating under these conditions is detrimental to pipe integrity." />
+		<Footer footerID="c" footerText="Pump stations that have firm capacity less than expected peak inflow but safely store excess flow in the collection system are not included." />
+	</CharacterizationTable>
+	<CharacterizationTable tableNumber="2" tableTitle="Flow Estimation Catchment Area by Development Assumptions and Zoning" columnCount="11">
+		<Header>
+			<Cell data="FE Catchment" cellType="COLUMNNAME" rowSpan="2"></Cell>
+			<Cell data="Total Area (acres)" cellType="COLUMNNAME" rowSpan="2"></Cell>
+			<Cell data="Connection and Development Assumption" cellType="COLUMNNAME" colSpan="4"></Cell>
+			<Cell data="Zoning" cellType="COLUMNNAME" colSpan="5"></Cell>
+		</Header>
+		<Header>
+			<Cell data="Will Not Connect (acres)" cellType="COLUMNNAME"></Cell>
+			<Cell data="Connected, No Changes (acres)" cellType="COLUMNNAME"></Cell>
+			<Cell data="Connected, Future Redevelopment (acres)" cellType="COLUMNNAME"></Cell>
+			<Cell data="Future New Connection (acres)" cellType="COLUMNNAME"></Cell>
+			<Cell data="SFR (acres)" cellType="COLUMNNAME"></Cell>
+			<Cell data="MFR (acres)" cellType="COLUMNNAME"></Cell>
+			<Cell data="COM (acres)" cellType="COLUMNNAME"></Cell>
+			<Cell data="IND (acres)" cellType="COLUMNNAME"></Cell>
+			<Cell data="POS (acres)" cellType="COLUMNNAME"></Cell>
+		</Header>
+		<Row isMultiRow="true" multiRowKey="FECID">
+			<Cell cellType="FUNCTION">
+				<Function functionName="Name" library="FecReport">
+					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType = "FUNCTION">
+				<Function functionName="DscArea" library="FecReport" format="N0">
+					<Parameter parameterName="FECID" parameterValue="@FECID" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="DscArea" library="FecReport" format="N0">
+					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+					<Parameter parameterName="ConnectionAssumption" parameterValue="WillNotConnect" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="DscArea" library="FecReport" format="N0">
+					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+					<Parameter parameterName="ConnectionAssumption" parameterValue="ConnectedNoChange" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="DscArea" library="FecReport" format="N0">
+					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+					<Parameter parameterName="ConnectionAssumption" parameterValue="ConnectedFutureRedevelopment" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="DscArea" library="FecReport" format="N0">
+					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+					<Parameter parameterName="ConnectionAssumption" parameterValue="FutureNewConnection" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="DscArea" library="FecReport" format="N0">
+					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+					<Parameter parameterName="TimeFrame" parameterValue="EX" />
+					<Parameter parameterName="Zoning" parameterValue="SFR" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="DscArea" library="FecReport" format="N0">
+					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+					<Parameter parameterName="TimeFrame" parameterValue="EX" />
+					<Parameter parameterName="Zoning" parameterValue="MFR" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="DscArea" library="FecReport" format="N0">
+					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+					<Parameter parameterName="TimeFrame" parameterValue="EX" />
+					<Parameter parameterName="Zoning" parameterValue="COM" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="DscArea" library="FecReport" format="N0">
+					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+					<Parameter parameterName="TimeFrame" parameterValue="EX" />
+					<Parameter parameterName="Zoning" parameterValue="IND" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="DscArea" library="FecReport" format="N0">
+					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+					<Parameter parameterName="TimeFrame" parameterValue="EX" />
+					<Parameter parameterName="Zoning" parameterValue="POS" />
+				</Function>
+			</Cell>
+		</Row>
+		<Row>
+			<Cell cellType="CONST" data="Total" />
+			<Cell cellType = "FUNCTION">
+				<Function functionName="DscArea" library="ModelReport" format="N0" />				
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="DscArea" library="ModelReport" format="N0">
+					<Parameter parameterName="ConnectionAssumption" parameterValue="WillNotConnect" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="DscArea" library="ModelReport" format="N0">
+					<Parameter parameterName="ConnectionAssumption" parameterValue="ConnectedNoChange" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="DscArea" library="ModelReport" format="N0">
+					<Parameter parameterName="ConnectionAssumption" parameterValue="ConnectedFutureRedevelopment" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="DscArea" library="ModelReport" format="N0">
+					<Parameter parameterName="ConnectionAssumption" parameterValue="FutureNewConnection" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="DscArea" library="ModelReport" format="N0">
+					<Parameter parameterName="TimeFrame" parameterValue="EX" />
+					<Parameter parameterName="Zoning" parameterValue="SFR" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="DscArea" library="ModelReport" format="N0">
+					<Parameter parameterName="TimeFrame" parameterValue="EX" />
+					<Parameter parameterName="Zoning" parameterValue="MFR" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="DscArea" library="ModelReport" format="N0">
+					<Parameter parameterName="TimeFrame" parameterValue="EX" />
+					<Parameter parameterName="Zoning" parameterValue="COM" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="DscArea" library="ModelReport" format="N0">
+					<Parameter parameterName="TimeFrame" parameterValue="EX" />
+					<Parameter parameterName="Zoning" parameterValue="IND" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="DscArea" library="ModelReport" format="N0">
+					<Parameter parameterName="TimeFrame" parameterValue="EX" />
+					<Parameter parameterName="Zoning" parameterValue="POS" />
+				</Function>
+			</Cell>
+		</Row>		
+	</CharacterizationTable>
+	<CharacterizationTable tableNumber="3" tableTitle="Development Assumption and Zoning Detail" columnCount="5">
+		<Header>
+			<Cell data="Zoning (percent)" cellType="COLUMNNAME"></Cell>
+			<Cell data="Will Not Connect (percent)" cellType="COLUMNNAME"></Cell>
+			<Cell data="Connected, No Changes (percent)" cellType="COLUMNNAME"></Cell>
+			<Cell data="Connected, Future Redevelopment (percent)" cellType="COLUMNNAME"></Cell>
+			<Cell data="Future New Connection (percent)" cellType="COLUMNNAME"></Cell>
+		</Header>
+		<Row>
+			<Cell cellType="CONST" data="SFR" />
+			<Cell cellType="FUNCTION">
+				<Function functionName="DscAreaFraction" library="ModelReport" format="P0">
+					<Parameter parameterName="ConnectionAssumption" parameterValue="WillNotConnect" />
+					<Parameter parameterName="TimeFrame" parameterValue="EX" />
+					<Parameter parameterName="Zoning" parameterValue="SFR" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="DscAreaFraction" library="ModelReport" format="P0">
+					<Parameter parameterName="ConnectionAssumption" parameterValue="ConnectedNoChange" />
+					<Parameter parameterName="TimeFrame" parameterValue="EX" />
+					<Parameter parameterName="Zoning" parameterValue="SFR" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="DscAreaFraction" library="ModelReport" format="P0">
+					<Parameter parameterName="ConnectionAssumption" parameterValue="ConnectedFutureRedevelopment" />
+					<Parameter parameterName="TimeFrame" parameterValue="EX" />
+					<Parameter parameterName="Zoning" parameterValue="SFR" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="DscAreaFraction" library="ModelReport" format="P0">
+					<Parameter parameterName="ConnectionAssumption" parameterValue="FutureNewConnection" />
+					<Parameter parameterName="TimeFrame" parameterValue="EX" />
+					<Parameter parameterName="Zoning" parameterValue="SFR" />
+				</Function>
+			</Cell>
+		</Row>
+		<Row>
+			<Cell cellType="CONST" data="MFR" />
+			<Cell cellType="FUNCTION">
+				<Function functionName="DscAreaFraction" library="ModelReport" format="P0">
+					<Parameter parameterName="ConnectionAssumption" parameterValue="WillNotConnect" />
+					<Parameter parameterName="TimeFrame" parameterValue="EX" />
+					<Parameter parameterName="Zoning" parameterValue="MFR" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="DscAreaFraction" library="ModelReport" format="P0">
+					<Parameter parameterName="ConnectionAssumption" parameterValue="ConnectedNoChange" />
+					<Parameter parameterName="TimeFrame" parameterValue="EX" />
+					<Parameter parameterName="Zoning" parameterValue="MFR" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="DscAreaFraction" library="ModelReport" format="P0">
+					<Parameter parameterName="ConnectionAssumption" parameterValue="ConnectedFutureRedevelopment" />
+					<Parameter parameterName="TimeFrame" parameterValue="EX" />
+					<Parameter parameterName="Zoning" parameterValue="MFR" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="DscAreaFraction" library="ModelReport" format="P0">
+					<Parameter parameterName="ConnectionAssumption" parameterValue="FutureNewConnection" />
+					<Parameter parameterName="TimeFrame" parameterValue="EX" />
+					<Parameter parameterName="Zoning" parameterValue="MFR" />
+				</Function>
+			</Cell>
+		</Row>
+		<Row>
+			<Cell cellType="CONST" data="COM" />
+			<Cell cellType="FUNCTION">
+				<Function functionName="DscAreaFraction" library="ModelReport" format="P0">
+					<Parameter parameterName="ConnectionAssumption" parameterValue="WillNotConnect" />
+					<Parameter parameterName="TimeFrame" parameterValue="EX" />
+					<Parameter parameterName="Zoning" parameterValue="COM" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="DscAreaFraction" library="ModelReport" format="P0">
+					<Parameter parameterName="ConnectionAssumption" parameterValue="ConnectedNoChange" />
+					<Parameter parameterName="TimeFrame" parameterValue="EX" />
+					<Parameter parameterName="Zoning" parameterValue="COM" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="DscAreaFraction" library="ModelReport" format="P0">
+					<Parameter parameterName="ConnectionAssumption" parameterValue="ConnectedFutureRedevelopment" />
+					<Parameter parameterName="TimeFrame" parameterValue="EX" />
+					<Parameter parameterName="Zoning" parameterValue="COM" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="DscAreaFraction" library="ModelReport" format="P0">
+					<Parameter parameterName="ConnectionAssumption" parameterValue="FutureNewConnection" />
+					<Parameter parameterName="TimeFrame" parameterValue="EX" />
+					<Parameter parameterName="Zoning" parameterValue="COM" />
+				</Function>
+			</Cell>
+		</Row>
+		<Row>
+			<Cell cellType="CONST" data="IND" />
+			<Cell cellType="FUNCTION">
+				<Function functionName="DscAreaFraction" library="ModelReport" format="P0">
+					<Parameter parameterName="ConnectionAssumption" parameterValue="WillNotConnect" />
+					<Parameter parameterName="TimeFrame" parameterValue="EX" />
+					<Parameter parameterName="Zoning" parameterValue="IND" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="DscAreaFraction" library="ModelReport" format="P0">
+					<Parameter parameterName="ConnectionAssumption" parameterValue="ConnectedNoChange" />
+					<Parameter parameterName="TimeFrame" parameterValue="EX" />
+					<Parameter parameterName="Zoning" parameterValue="IND" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="DscAreaFraction" library="ModelReport" format="P0">
+					<Parameter parameterName="ConnectionAssumption" parameterValue="ConnectedFutureRedevelopment" />
+					<Parameter parameterName="TimeFrame" parameterValue="EX" />
+					<Parameter parameterName="Zoning" parameterValue="IND" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="DscAreaFraction" library="ModelReport" format="P0">
+					<Parameter parameterName="ConnectionAssumption" parameterValue="FutureNewConnection" />
+					<Parameter parameterName="TimeFrame" parameterValue="EX" />
+					<Parameter parameterName="Zoning" parameterValue="IND" />
+				</Function>
+			</Cell>
+		</Row>
+		<Row>
+			<Cell cellType="CONST" data="POS" />
+			<Cell cellType="FUNCTION">
+				<Function functionName="DscAreaFraction" library="ModelReport" format="P0">
+					<Parameter parameterName="ConnectionAssumption" parameterValue="WillNotConnect" />
+					<Parameter parameterName="TimeFrame" parameterValue="EX" />
+					<Parameter parameterName="Zoning" parameterValue="POS" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="DscAreaFraction" library="ModelReport" format="P0">
+					<Parameter parameterName="ConnectionAssumption" parameterValue="ConnectedNoChange" />
+					<Parameter parameterName="TimeFrame" parameterValue="EX" />
+					<Parameter parameterName="Zoning" parameterValue="POS" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="DscAreaFraction" library="ModelReport" format="P0">
+					<Parameter parameterName="ConnectionAssumption" parameterValue="ConnectedFutureRedevelopment" />
+					<Parameter parameterName="TimeFrame" parameterValue="EX" />
+					<Parameter parameterName="Zoning" parameterValue="POS" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="DscAreaFraction" library="ModelReport" format="P0">
+					<Parameter parameterName="ConnectionAssumption" parameterValue="FutureNewConnection" />
+					<Parameter parameterName="TimeFrame" parameterValue="EX" />
+					<Parameter parameterName="Zoning" parameterValue="POS" />
+				</Function>
+			</Cell>
+		</Row>
+	</CharacterizationTable>
+	<CharacterizationTable tableNumber="4" tableTitle="Collection System Summary - Diameter and Material" columnCount="9">
+		<Header>
+			<Cell data="FE Catchment" cellType="COLUMNNAME" rowSpan="2"></Cell>
+			<Cell data="Total Length (miles)" cellType="COLUMNNAME" rowSpan="2"></Cell>
+			<Cell data="Percent by Diameter" cellType="COLUMNNAME" colSpan="3"></Cell>
+			<Cell data="Percent by Material" cellType="COLUMNNAME" colSpan="4" footerID="*"></Cell>
+		</Header>
+		<Header>
+			<Cell data="&lt;=8&quot;" cellType="COLUMNNAME"></Cell>
+			<Cell data="10&quot;-15&quot;" cellType="COLUMNNAME"></Cell>
+			<Cell data="&gt;15&quot;" cellType="COLUMNNAME"></Cell>
+			<Cell data="CSP" cellType="COLUMNNAME"></Cell>
+			<Cell data="HDPE" cellType="COLUMNNAME"></Cell>
+			<Cell data="PVC" cellType="COLUMNNAME"></Cell>
+			<Cell data="Other" cellType="COLUMNNAME"></Cell>
+		</Header>
+		<Row isMultiRow="true" multiRowKey="FECID">
+			<Cell cellType="FUNCTION">
+				<Function functionName="Name" library="FecReport">
+					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeLength" library="FecReport"  format="N1">
+					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeLengthFraction" library="FecReport" format="P0" >
+					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+					<Parameter parameterName="MaxDiameter" parameterValue = "8" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeLengthFraction" library="FecReport" format="P0" >
+					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+					<Parameter parameterName="MinDiameter" parameterValue = "8.0001" />
+					<Parameter parameterName="MaxDiameter" parameterValue = "15.0000" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeLengthFraction" library="FecReport" format="P0" >
+					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+					<Parameter parameterName="MinDiameter" parameterValue = "15.0001" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeLengthFraction" library="FecReport" format="P0" >
+					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+					<Parameter parameterName="Material" parameterValue="CSP" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeLengthFraction" library="FecReport" format="P0" >
+					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+					<Parameter parameterName="Material" parameterValue="HDPE" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeLengthFraction" library="FecReport" format="P0" >
+					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+					<Parameter parameterName="Material" parameterValue="PVC" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeLengthFractionNonstandardMaterial" library="FecReport" format="P0" >
+					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+				</Function>
+			</Cell>
+		</Row>
+		<Row>
+			<Cell cellType="CONST" data="Total" />
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeLength" library="ModelReport"  format="N1" />
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeLengthFraction" library="ModelReport" format="P0" >
+					<Parameter parameterName="MaxDiameter" parameterValue = "8" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeLengthFraction" library="ModelReport" format="P0" >
+					<Parameter parameterName="MinDiameter" parameterValue = "8.0001" />
+					<Parameter parameterName="MaxDiameter" parameterValue = "15.0000" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeLengthFraction" library="ModelReport" format="P0" >
+					<Parameter parameterName="MinDiameter" parameterValue = "15.0001" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeLengthFraction" library="ModelReport" format="P0" >
+					<Parameter parameterName="Material" parameterValue="CSP" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeLengthFraction" library="ModelReport" format="P0" >
+					<Parameter parameterName="Material" parameterValue="HDPE" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeLengthFraction" library="ModelReport" format="P0" >
+					<Parameter parameterName="Material" parameterValue="PVC" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeLengthFractionNonstandardMaterial" library="ModelReport" format="P0" >
+				</Function>
+			</Cell>
+		</Row>
+		<Footer footerID="*" footerText="CSP = concrete sewer pipe; HDPE = high-density polyethylene; PVC = polyvinyl chloride." />
+	</CharacterizationTable>
+	<CharacterizationTable tableNumber="5" tableTitle="Collection System Summary - Construction Date" columnCount="9">
+		<Header>
+			<Cell data="FE Catchment" cellType="COLUMNNAME" rowSpan="2"></Cell>
+			<Cell data="Total Length (miles)" cellType="COLUMNNAME" rowSpan="2"></Cell>
+			<Cell data="Length by Year Constructed (miles)" cellType="COLUMNNAME" colSpan="7"></Cell>
+		</Header>
+		<Header>
+			<Cell data="pre-1950" cellType="COLUMNNAME"></Cell>
+			<Cell data="1950-1960" cellType="COLUMNNAME"></Cell>
+			<Cell data="1960-1970" cellType="COLUMNNAME"></Cell>
+			<Cell data="1970-1985" cellType="COLUMNNAME"></Cell>
+			<Cell data="1985-2000" cellType="COLUMNNAME"></Cell>
+			<Cell data="post-2000" cellType="COLUMNNAME"></Cell>
+			<Cell data="Unknown" cellType="COLUMNNAME"></Cell>
+		</Header>
+		<Row isMultiRow="true" multiRowKey="FECID">
+			<Cell cellType="FUNCTION">
+				<Function functionName="Name" library="FecReport">
+					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeLength" library="FecReport" format="N1">
+					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeLengthFraction" library="FecReport" format="P0" >
+					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+					<Parameter parameterName="MinYearBuilt" parameterValue="1800" />
+					<Parameter parameterName="MaxYearBuilt" parameterValue="1949" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeLengthFraction" library="FecReport" format="P0" >
+					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+					<Parameter parameterName="MinYearBuilt" parameterValue="1950" />
+					<Parameter parameterName="MaxYearBuilt" parameterValue="1959" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeLengthFraction" library="FecReport" format="P0" >
+					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+					<Parameter parameterName="MinYearBuilt" parameterValue="1960" />
+					<Parameter parameterName="MaxYearBuilt" parameterValue="1969" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeLengthFraction" library="FecReport" format="P0" >
+					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+					<Parameter parameterName="MinYearBuilt" parameterValue="1970" />
+					<Parameter parameterName="MaxYearBuilt" parameterValue="1984" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeLengthFraction" library="FecReport" format="P0" >
+					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+					<Parameter parameterName="MinYearBuilt" parameterValue="1985" />
+					<Parameter parameterName="MaxYearBuilt" parameterValue="1999" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeLengthFraction" library="FecReport" format="P0" >
+					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+					<Parameter parameterName="MinYearBuilt" parameterValue="2000" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeLengthFraction" library="FecReport" format="P0" >
+					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+					<Parameter parameterName="YearBuiltIsNull" parameterValue="true" />
+				</Function>
+			</Cell>
+		</Row>
+		<Row>
+			<Cell cellType="CONST" data="Total" />
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeLength" library="ModelReport" format="N1" />
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeLengthFraction" library="ModelReport" format="P0" >
+					<Parameter parameterName="MinYearBuilt" parameterValue="1800" />
+					<Parameter parameterName="MaxYearBuilt" parameterValue="1949" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeLengthFraction" library="ModelReport" format="P0" >
+					<Parameter parameterName="MinYearBuilt" parameterValue="1950" />
+					<Parameter parameterName="MaxYearBuilt" parameterValue="1959" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeLengthFraction" library="ModelReport" format="P0" >
+					<Parameter parameterName="MinYearBuilt" parameterValue="1960" />
+					<Parameter parameterName="MaxYearBuilt" parameterValue="1969" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeLengthFraction" library="ModelReport" format="P0" >
+					<Parameter parameterName="MinYearBuilt" parameterValue="1970" />
+					<Parameter parameterName="MaxYearBuilt" parameterValue="1984" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeLengthFraction" library="ModelReport" format="P0" >
+					<Parameter parameterName="MinYearBuilt" parameterValue="1985" />
+					<Parameter parameterName="MaxYearBuilt" parameterValue="1999" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeLengthFraction" library="ModelReport" format="P0" >
+					<Parameter parameterName="MinYearBuilt" parameterValue="2000" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeLengthFraction" library="ModelReport" format="P0" >
+					<Parameter parameterName="YearBuiltIsNull" parameterValue="true" />
+				</Function>
+			</Cell>
+		</Row>
+	</CharacterizationTable>
+	<CharacterizationTable tableNumber="6" tableTitle="Collection System Summary - Pipe Structural Grade" columnCount="8">
+		<Header>
+			<Cell data="FE Catchment" cellType="COLUMNNAME" rowSpan="2"></Cell>
+			<Cell data="Structural Grade" cellType="COLUMNNAME" colSpan="6" footerID="a"></Cell>
+			<Cell data="Ungraded" cellType="COLUMNNAME" rowSpan="2" footerID="b"></Cell>
+		</Header>
+		<Header>
+			<Cell data="1" cellType="COLUMNNAME"></Cell>
+			<Cell data="2" cellType="COLUMNNAME"></Cell>
+			<Cell data="3" cellType="COLUMNNAME"></Cell>
+			<Cell data="4" cellType="COLUMNNAME"></Cell>
+			<Cell data="5" cellType="COLUMNNAME"></Cell>
+			<Cell data="6" cellType="COLUMNNAME"></Cell>
+		</Header>
+		<Row isMultiRow="true" multiRowKey="FECID">
+			<Cell cellType="FUNCTION">
+				<Function functionName="Name" library="FecReport">
+					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeGradeCount" library="FecReport">
+					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+					<Parameter parameterName="PipeGrade" parameterValue="1"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeGradeCount" library="FecReport">
+					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+					<Parameter parameterName="PipeGrade" parameterValue="2"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeGradeCount" library="FecReport">
+					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+					<Parameter parameterName="PipeGrade" parameterValue="3"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeGradeCount" library="FecReport">
+					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+					<Parameter parameterName="PipeGrade" parameterValue="4"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeGradeCount" library="FecReport">
+					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+					<Parameter parameterName="PipeGrade" parameterValue="5"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeGradeCount" library="FecReport">
+					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+					<Parameter parameterName="PipeGrade" parameterValue="6"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipesWithoutGradeCount" library="FecReport">
+					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+				</Function>
+			</Cell>
+		</Row>
+		<Row>
+			<Cell cellType="CONST" data="Total" />
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeGradeCount" library="ModelReport">
+					<Parameter parameterName="PipeGrade" parameterValue="1"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeGradeCount" library="ModelReport">
+					<Parameter parameterName="PipeGrade" parameterValue="2"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeGradeCount" library="ModelReport">
+					<Parameter parameterName="PipeGrade" parameterValue="3"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeGradeCount" library="ModelReport">
+					<Parameter parameterName="PipeGrade" parameterValue="4"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeGradeCount" library="ModelReport">
+					<Parameter parameterName="PipeGrade" parameterValue="5"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeGradeCount" library="ModelReport">
+					<Parameter parameterName="PipeGrade" parameterValue="6"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipesWithoutGradeCount" library="ModelReport" />
+			</Cell>
+		</Row>
+		<Footer footerID="a" footerText="1 = excellent, 2 = good, 3 = fair, 4 = poor, 5 = needs immediate attention, 6 = spot repair." />
+		<Footer footerID="b" footerText="Not been graded, or last inspection occured before 2000." />
+	</CharacterizationTable>
+	<CharacterizationTable tableNumber="7" tableTitle="Flow Control Structures" columnCount="8">
+		<Header>
+			<Cell data="FE Catchment" cellType="COLUMNNAME"></Cell>
+			<Cell data="Node ID" cellType="COLUMNNAME"></Cell>
+			<Cell data="Location" cellType="COLUMNNAME"></Cell>
+			<Cell data="Structure Type" cellType="COLUMNNAME"></Cell>
+			<Cell data="Underflow Destination" cellType="COLUMNNAME"></Cell>
+			<Cell data="Overflow Destination" cellType="COLUMNNAME"></Cell>
+			<Cell data="Monitoring Equipment" cellType="COLUMNNAME"></Cell>
+			<Cell data="Description" cellType="COLUMNNAME"></Cell>
+		</Header>
+		<Row isMultiRow="true" multiRowKey="DiversionID">
+			<Cell cellType="CONST" data="" />
+			<Cell cellType="FUNCTION">
+				<Function functionName="DiversionNodeName" library="ModelReport">
+          <Parameter parameterName="DiversionID" parameterValue="@DiversionID"></Parameter>
+        </Function>
+      </Cell>
+			<Cell cellType="FUNCTION">
+        <Function functionName="DiversionLocation" library="ModelReport">
+          <Parameter parameterName="DiversionID" parameterValue="@DiversionID"></Parameter>
+        </Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="DiversionNodeType" library="ModelReport">
+          <Parameter parameterName="DiversionID" parameterValue="@DiversionID"></Parameter>
+        </Function>
+			</Cell>
+			<Cell cellType="CONST" data="" />
+			<Cell cellType="FUNCTION">
+        <Function functionName="DiversionOutfall" library="ModelReport">
+          <Parameter parameterName="DiversionID" parameterValue="@DiversionID"></Parameter>
+        </Function>
+			</Cell>
+			<Cell cellType="CONST" data="" />
+			<Cell cellType="FUNCTION">
+        <Function functionName="DiversionID" library="ModelReport">
+          <Parameter parameterName="DiversionID" parameterValue="@DiversionID"></Parameter>
+        </Function>
+			</Cell>
+		</Row>
+	</CharacterizationTable>
+	<CharacterizationTable tableNumber="8" tableTitle="Boundary Conditions" columnCount="4">
+		<Header>
+			<Cell data="FE Catchment" cellType="COLUMNNAME"></Cell>
+			<Cell data="Node" cellType="COLUMNNAME"></Cell>
+			<Cell data="Type" cellType="COLUMNNAME"></Cell>
+			<Cell data="Description" cellType="COLUMNNAME"></Cell>
+		</Header>
+		<Row>
+			<Cell cellType="CONST" data="ABC123" />
+			<Cell cellType="CONST" data="Manual Entry" />
+			<Cell cellType="CONST" data="Downstream/Upstream" />
+			<Cell cellType="CONST" data="Manual Entry" />
+		</Row>
+	</CharacterizationTable>
+	<CharacterizationTable tableNumber="9" tableTitle="Pump Station and Force Main" columnCount="8">
+		<Header>
+			<Cell cellType="COLUMNNAME" data="Name and Location" rowSpan="2"></Cell>
+			<Cell cellType="COLUMNNAME" data="Force Main Discharge Location" rowSpan="2"></Cell>
+			<Cell cellType="COLUMNNAME" data="Firm Capacity (cfs)" rowSpan="2"></Cell>
+			<Cell cellType="COLUMNNAME" data="Full Capacity (cfs)" rowSpan="2"></Cell>
+			<Cell cellType="COLUMNNAME" data="Emergency Overflow" colSpan="4" />
+		</Header>
+		<Header>
+			<Cell cellType="COLUMNNAME" data="Type" />
+			<Cell cellType="COLUMNNAME" data="Location" />
+			<Cell cellType="COLUMNNAME" data="Elevation" />
+			<Cell cellType="COLUMNNAME" data="Outfall" />
+		</Header>
+		<Row isMultiRow="true" multiRowKey="PumpStationID">
+			<Cell cellType="FUNCTION">
+				<Function functionName="NameAndLocation" library="PumpStationReport">
+          <Parameter parameterName="PumpStationID" parameterValue="@PumpStationID"></Parameter>
+        </Function>
+			</Cell>
+			<Cell cellType="CONST" data="Hansen ID" />
+			<Cell cellType="FUNCTION">
+				<Function functionName="FirmCapacity" library="PumpStationReport" suffix=" gpm">
+          <Parameter parameterName="PumpStationID" parameterValue="@PumpStationID"></Parameter>
+        </Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="FullCapacity" library="PumpStationReport" suffix=" gpm">
+          <Parameter parameterName="PumpStationID" parameterValue="@PumpStationID"></Parameter>
+        </Function>
+			</Cell>
+			<Cell cellType="CONST" data="1: Manhole; 2: Pipe; 3: Diversion; 4: Other" />
+			<Cell cellType="CONST" data="1: Hansen ID; 2: Wetwell; 3: Hansen ID; 4: ??" />
+			<Cell cellType="CONST" data="May be Unknown" />
+			<Cell cellType="CONST" data="May be N/A" />
+		</Row>
+	</CharacterizationTable>
+	<CharacterizationTable tableNumber="10" tableTitle="Basis for Existing Flows and Design Manual Comparison" columnCount="11">
+		<Header>
+			<Cell data="FE Catchment" cellType="COLUMNNAME" rowSpan="2"></Cell>
+			<Cell data="Basis of Flow Assumptions" cellType="COLUMNNAME" rowSpan="2" footerID="*"></Cell>
+			<Cell data="Average Base Flow" cellType="COLUMNNAME" colSpan="3"></Cell>
+			<Cell data="Peak Base Flow" cellType="COLUMNNAME" colSpan="3"></Cell>
+			<Cell data="I/I" cellType="COLUMNNAME" colSpan="3"></Cell>
+		</Header>
+		<Header>
+			<Cell data="Assumed (cfs)" cellType="COLUMNNAME"></Cell>
+			<Cell data="Design Manual (cfs)" cellType="COLUMNNAME"></Cell>
+			<Cell data="Ratio of Assumed to Design Manual" cellType="COLUMNNAME"></Cell>
+			<Cell data="Assumed (cfs)" cellType="COLUMNNAME"></Cell>
+			<Cell data="Design Manual (cfs)" cellType="COLUMNNAME"></Cell>
+			<Cell data="Ratio of Assumed to Design Manual" cellType="COLUMNNAME"></Cell>
+			<Cell data="I/I Unit Rate (gpad)" cellType="COLUMNNAME" />
+			<Cell data="Design Manual (gpad)" cellType="COLUMNNAME" />
+			<Cell data="Ratio of Assumed to Design Manual" cellType="COLUMNNAME" />
+		</Header>
+		<Row isMultiRow="true" multiRowKey="FECID">
+			<Cell cellType="FUNCTION">
+				<Function functionName="Name" library="FecReport">
+					<Parameter parameterName="FECID" parameterValue="@FECID" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="Method" library="FecReport">
+					<Parameter parameterName="FECID" parameterValue="@FECID" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="MeasuredABF" library="FecReport" format="N2" defaultValue="N/A">
+					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="DMAverageBaseFlow" library="FecReport" format="N2" >
+					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="MeasuredToDMABFRatio" library="FecReport" format="N2" defaultValue="N/A">
+					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="MeasuredPeakBF" library="FecReport" format="N2" defaultValue="N/A">
+					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="DMPeakBaseFlow" library="FecReport" format="N2" >
+					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="MeasuredToDMPeakBFRatio" library="FecReport" format="N2" defaultValue="N/A">
+					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PeakMeasuredRDIIPerAcre" library="FecReport" format="#,#00" defaultValue="N/A">
+					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="CONST" data="1,000" />
+			<Cell cellType="FUNCTION">
+				<Function functionName="MeasuredToDMPeakRDII" library="FecReport" format="N2" defaultValue="N/A">
+					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+				</Function>
+			</Cell>
+		</Row>
+		<Footer footerID="*" footerText="TM: Temporary Monitor; PM: Permanent Monitor; PS: Pump Station; ME: Manual Estimate; NS: Not Sewered." />
+	</CharacterizationTable>
+	<CharacterizationTable tableNumber="11" tableTitle="Existing Characterization Flows" columnCount="5">
+		<Header>
+			<Cell data="FE Catchment" cellType="COLUMNNAME"></Cell>
+			<Cell data="Average Base Flow (cfs)" cellType="COLUMNNAME"></Cell>
+			<Cell data="Peak Base Flow (cfs)" cellType="COLUMNNAME"></Cell>
+			<Cell data="Peak I/I (cfs)" cellType="COLUMNNAME"></Cell>
+			<Cell data="Peak Total Flow (cfs)" cellType="COLUMNNAME"></Cell>
+		</Header>
+		<Row isMultiRow="true" multiRowKey="FECID">
+			<Cell cellType="FUNCTION">
+				<Function functionName="Name" library="FecReport">
+					<Parameter parameterName="FECID" parameterValue="@FECID" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="CharacterizationABF" library="FecReport" format="N2">
+					<Parameter parameterName="FECID" parameterValue="@FECID" />
+					<Parameter parameterName="TimeFrame" parameterValue="EX" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="CharacterizationPeakBF" library="FecReport" format="N2">
+					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+					<Parameter parameterName="TimeFrame" parameterValue="EX" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="CharacterizationPeakRDII" library="FecReport" format="N2">
+					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+					<Parameter parameterName="TimeFrame" parameterValue="EX" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="CharacterizationPeakTotalFlow" library="FecReport" format="N2">
+					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+					<Parameter parameterName="TimeFrame" parameterValue="EX" />
+				</Function>
+			</Cell>
+		</Row>
+		<Row>
+			<Cell cellType="CONST" data="Total" />
+			<Cell cellType="FUNCTION">
+				<Function functionName="BasinCharacterizationABF" library="FecReport" format="N2">
+					<Parameter parameterName="TimeFrame" parameterValue="EX" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="BasinCharacterizationPeakBF" library="FecReport" format="N2">
+					<Parameter parameterName="TimeFrame" parameterValue="EX" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="BasinCharacterizationPeakRDII" library="FecReport" format="N2">
+					<Parameter parameterName="TimeFrame" parameterValue="EX" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="BasinCharacterizationPeakTotalFlow" library="FecReport" format="N2">
+					<Parameter parameterName="TimeFrame" parameterValue="EX" />
+				</Function>
+			</Cell>
+			</Row>
+	</CharacterizationTable>
+	<CharacterizationTable tableNumber="12" tableTitle="Future Characterization Flows" columnCount="6">
+		<Header>
+			<Cell data="FE Catchment" cellType="COLUMNNAME"></Cell>
+			<Cell data="Average Base Flow (cfs)" cellType="COLUMNNAME"></Cell>
+			<Cell data="Peak Base Flow (cfs)" cellType="COLUMNNAME"></Cell>
+			<Cell data="Peak I/I (cfs)" cellType="COLUMNNAME"></Cell>
+			<Cell data="Peak Total Flow (cfs)" cellType="COLUMNNAME"></Cell>
+			<Cell data="Increase from Existing" cellType="COLUMNNAME"></Cell>
+		</Header>
+		<Row isMultiRow="true" multiRowKey="FECID">
+			<Cell cellType="FUNCTION">
+				<Function functionName="Name" library="FecReport">
+					<Parameter parameterName="FECID" parameterValue="@FECID" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="CharacterizationABF" library="FecReport" format="N2">
+					<Parameter parameterName="FECID" parameterValue="@FECID" />
+					<Parameter parameterName="TimeFrame" parameterValue="FU" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="CharacterizationPeakBF" library="FecReport" format="N2">
+					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+					<Parameter parameterName="TimeFrame" parameterValue="FU" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="CharacterizationPeakRDII" library="FecReport" format="N2">
+					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+					<Parameter parameterName="TimeFrame" parameterValue="FU" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="CharacterizationPeakTotalFlow" library="FecReport" format="N2">
+					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+					<Parameter parameterName="TimeFrame" parameterValue="FU" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="CharacterizationPercentIncrease" library="FecReport" format="P0">
+					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+				</Function>
+			</Cell>
+		</Row>
+		<Row>
+			<Cell cellType="CONST" data="Total" />
+			<Cell cellType="FUNCTION">
+				<Function functionName="BasinCharacterizationABF" library="FecReport" format="N2">
+					<Parameter parameterName="TimeFrame" parameterValue="FU" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="BasinCharacterizationPeakBF" library="FecReport" format="N2">
+					<Parameter parameterName="TimeFrame" parameterValue="FU" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="BasinCharacterizationPeakRDII" library="FecReport" format="N2">
+					<Parameter parameterName="TimeFrame" parameterValue="FU" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="BasinCharacterizationPeakTotalFlow" library="FecReport" format="N2">
+					<Parameter parameterName="TimeFrame" parameterValue="FU" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="BasinCharacterizationPercentIncrease" library="FecReport" format="P0">
+				</Function>
+			</Cell>
+		</Row>
+	</CharacterizationTable>
+	<CharacterizationTable tableNumber="13" tableTitle="Flooding Risk for Existing and Future Conditions" columnCount="5">
+		<Header>
+			<Cell data="FE Catchment" cellType="COLUMNNAME" rowSpan="2"></Cell>
+			<Cell data="Surface Flooding Risk Count" cellType="COLUMNNAME" colSpan="2" footerID="a"></Cell>
+			<Cell data="Basement Sewer Backup Risk Count" cellType="COLUMNNAME" colSpan="2" footerID="b"></Cell>
+		</Header>
+		<Header>
+			<Cell data="Existing" cellType="COLUMNNAME" />
+			<Cell data="Future" cellType="COLUMNNAME" />
+			<Cell data="Existing" cellType="COLUMNNAME" />
+			<Cell data="Future" cellType="COLUMNNAME" />
+		</Header>
+		<Row isMultiRow="true" multiRowKey="FECID">
+			<Cell cellType="FUNCTION">
+				<Function functionName="Name" library="FecReport">
+					<Parameter parameterName="FECID" parameterValue="@FECID" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="SurfaceFloodingCount" library="FecReport">
+					<Parameter parameterName="FECID" parameterValue="@FECID" />
+					<Parameter parameterName="MaxFreeboard" parameterValue="2.0000" />
+					<Parameter parameterName="ScenarioID" parameterValue="5" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="SurfaceFloodingCount" library="FecReport">
+					<Parameter parameterName="FECID" parameterValue="@FECID" />
+					<Parameter parameterName="MaxFreeboard" parameterValue="2.0000" />
+					<Parameter parameterName="ScenarioID" parameterValue="6" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="SewerBackupRiskCount" library="FecReport">
+					<Parameter parameterName="FECID" parameterValue="@FECID" />
+					<Parameter parameterName="MaxDeltaHGL" parameterValue="8.0000" />
+					<Parameter parameterName="ScenarioID" parameterValue="5" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="SewerBackupRiskCount" library="FecReport">
+					<Parameter parameterName="FECID" parameterValue="@FECID" />
+					<Parameter parameterName="MaxDeltaHGL" parameterValue="8.0000" />
+					<Parameter parameterName="ScenarioID" parameterValue="6" />
+				</Function>
+			</Cell>
+		</Row>
+		<Row>
+			<Cell cellType="CONST" data="Total" />
+			<Cell cellType="FUNCTION">
+				<Function functionName="SurfaceFloodingCount" library="ModelResultsReport">
+					<Parameter parameterName="MaxFreeboard" parameterValue="2.0000" />
+					<Parameter parameterName="ScenarioID" parameterValue="5" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="SurfaceFloodingCount" library="ModelResultsReport">
+					<Parameter parameterName="MaxFreeboard" parameterValue="2.0000" />
+					<Parameter parameterName="ScenarioID" parameterValue="6" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="SewerBackupRiskCount" library="ModelResultsReport">
+					<Parameter parameterName="MaxDeltaHGL" parameterValue="8.0000" />
+					<Parameter parameterName="ScenarioID" parameterValue="5" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="SewerBackupRiskCount" library="ModelResultsReport">
+					<Parameter parameterName="MaxDeltaHGL" parameterValue="8.0000" />
+					<Parameter parameterName="ScenarioID" parameterValue="6" />
+				</Function>
+			</Cell>
+		</Row>
+		<Footer footerID="a" footerText="Water Surface Elevation &lt; 2-feet from ground surface." />
+		<Footer footerID="b" footerText="Water Surface Elevation &lt; 8-feet from estimated finished floor elevation." />
+	</CharacterizationTable>
+	<CharacterizationTable tableNumber="14" tableTitle="Pipe Surcharge Summary" columnCount="7">
+		<Header>
+			<Cell data="FE Catchment" cellType="COLUMNNAME" rowSpan="3"></Cell>
+			<Cell data="Miles of Pipe Experiencing Surcharge (Number of Segments)" cellType="COLUMNNAME" colSpan="6"></Cell>
+		</Header>
+		<Header>
+			<Cell data="&lt;=4 feet" cellType="COLUMNNAME" colSpan="2"></Cell>
+			<Cell data="&gt;4 feet" cellType="COLUMNNAME" colSpan="2"></Cell>
+			<Cell data="&gt;4 feet and &gt;30 minutes" cellType="COLUMNNAME" colSpan="2"></Cell>
+		</Header>
+		<Header>
+			<Cell data="Existing" cellType="COLUMNNAME" />
+			<Cell data="Future" cellType="COLUMNNAME" />
+			<Cell data="Existing" cellType="COLUMNNAME" />
+			<Cell data="Future" cellType="COLUMNNAME" />
+			<Cell data="Existing" cellType="COLUMNNAME" />
+			<Cell data="Future" cellType="COLUMNNAME" />
+		</Header>
+		<Row isMultiRow="true" multiRowKey="FECID">
+			<Cell cellType="FUNCTION">
+				<Function functionName="Name" library="FecReport">
+					<Parameter parameterName="FECID" parameterValue="@FECID" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeSurchargeLengthCountSummary" library="FecReport">
+					<Parameter parameterName="FECID" parameterValue="@FECID" />
+					<Parameter parameterName="MinSurchargeDepth" parameterValue="0" />
+					<Parameter parameterName="MaxSurchargeDepth" parameterValue="3.9999" />
+					<Parameter parameterName="ScenarioID" parameterValue="5" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeSurchargeLengthCountSummary" library="FecReport">
+					<Parameter parameterName="FECID" parameterValue="@FECID" />
+					<Parameter parameterName="MinSurchargeDepth" parameterValue="0" />
+					<Parameter parameterName="MaxSurchargeDepth" parameterValue="3.9999" />
+					<Parameter parameterName="ScenarioID" parameterValue="6" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeSurchargeLengthCountSummary" library="FecReport">
+					<Parameter parameterName="FECID" parameterValue="@FECID" />
+					<Parameter parameterName="MinSurchargeDepth" parameterValue="4.0000" />
+					<Parameter parameterName="ScenarioID" parameterValue="5" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeSurchargeLengthCountSummary" library="FecReport">
+					<Parameter parameterName="FECID" parameterValue="@FECID" />
+					<Parameter parameterName="MinSurchargeDepth" parameterValue="4.0000" />
+					<Parameter parameterName="ScenarioID" parameterValue="6" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeSurchargeLengthCountSummary" library="FecReport">
+					<Parameter parameterName="FECID" parameterValue="@FECID" />
+					<Parameter parameterName="MinSurchargeTime" parameterValue="30" />
+					<Parameter parameterName="MinSurchargeDepth" parameterValue="4.0000" />
+					<Parameter parameterName="ScenarioID" parameterValue="5" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeSurchargeLengthCountSummary" library="FecReport">
+					<Parameter parameterName="FECID" parameterValue="@FECID" />
+					<Parameter parameterName="MinSurchargeTime" parameterValue="30" />
+					<Parameter parameterName="MinSurchargeDepth" parameterValue="4.0000" />
+					<Parameter parameterName="ScenarioID" parameterValue="6" />
+				</Function>
+			</Cell>
+		</Row>
+		<Row>
+			<Cell cellType="CONST" data="Total" />
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeSurchargeLengthCountSummary" library="ModelResultsReport">
+					<Parameter parameterName="MinSurchargeDepth" parameterValue="0" />
+					<Parameter parameterName="MaxSurchargeDepth" parameterValue="3.9999" />
+					<Parameter parameterName="ScenarioID" parameterValue="5" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeSurchargeLengthCountSummary" library="ModelResultsReport">
+					<Parameter parameterName="MinSurchargeDepth" parameterValue="0" />
+					<Parameter parameterName="MaxSurchargeDepth" parameterValue="3.9999" />
+					<Parameter parameterName="ScenarioID" parameterValue="6" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeSurchargeLengthCountSummary" library="ModelResultsReport">
+					<Parameter parameterName="MinSurchargeDepth" parameterValue="4.0000" />
+					<Parameter parameterName="ScenarioID" parameterValue="5" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeSurchargeLengthCountSummary" library="ModelResultsReport">
+					<Parameter parameterName="MinSurchargeDepth" parameterValue="4.0000" />
+					<Parameter parameterName="ScenarioID" parameterValue="6" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeSurchargeLengthCountSummary" library="ModelResultsReport">
+					<Parameter parameterName="MinSurchargeTime" parameterValue="30" />
+					<Parameter parameterName="MinSurchargeDepth" parameterValue="4.0000" />
+					<Parameter parameterName="ScenarioID" parameterValue="5" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeSurchargeLengthCountSummary" library="ModelResultsReport">
+					<Parameter parameterName="MinSurchargeTime" parameterValue="30" />
+					<Parameter parameterName="MinSurchargeDepth" parameterValue="4.0000" />
+					<Parameter parameterName="ScenarioID" parameterValue="6" />
+				</Function>
+			</Cell>
+		</Row>
+	</CharacterizationTable>
+  <CharacterizationTable tableNumber="QA1" tableTitle="FE Catchment Area QA" columnCount="9">
+    <Header>
+      <Cell data="FE Catchment" cellType="COLUMNNAME" rowSpan="2"></Cell>
+      <Cell data="Connection and Development Assumption" cellType="COLUMNNAME"></Cell>
+      <Cell data="Zoning" cellType="COLUMNNAME"> </Cell>
+      <Cell data="Sewerable" cellType="COLUMNNAME"> </Cell>
+      <Cell data="Development State" cellType="COLUMNNAME"> </Cell>
+      <Cell data="C and D Subtotal" cellType="COLUMNNAME"> </Cell>
+      <Cell data="C and D Subtotal AND Sewerable = 0" cellType="COLUMNNAME"> </Cell>
+      <Cell data="Zoning Subtotal" cellType="COLUMNNAME"> </Cell>
+      <Cell data="TOTAL" cellType="COLUMNNAME"> </Cell>
+    </Header>
+    <Header>
+      <Cell data="Unspecified (acres)" cellType="COLUMNNAME"></Cell>
+      <Cell data="UNK (acres)" cellType="COLUMNNAME"></Cell>
+      <Cell data="No Determination (acres)" cellType="COLUMNNAME"></Cell>
+      <Cell data="Unspecified (acres)" cellType="COLUMNNAME"></Cell>
+      <Cell data=" (acres)" cellType="COLUMNNAME"></Cell>
+      <Cell data=" (acres)" cellType="COLUMNNAME"></Cell>
+      <Cell data=" (acres)" cellType="COLUMNNAME"></Cell>
+      <Cell data="Total (acres)" cellType="COLUMNNAME"></Cell>
+    </Header>
+    <Row isMultiRow="true" multiRowKey="FECID">
+      <Cell cellType="FUNCTION">
+        <Function functionName="Name" library="FecReport">
+          <Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+        </Function>
+      </Cell>
+      <Cell cellType="FUNCTION">
+        <Function functionName="QADscAreaSummary" library="FecReport" format="N0">
+          <Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+          <Parameter parameterName="ConnectionAssumption" parameterValue="Unspecified" />
+        </Function>
+      </Cell>
+      <Cell cellType="FUNCTION">
+        <Function functionName="QADscAreaSummary" library="FecReport" format="N0">
+          <Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+          <Parameter parameterName="TimeFrame" parameterValue="EX" />
+          <Parameter parameterName="Zoning" parameterValue="UNK" />
+        </Function>
+      </Cell>
+      <Cell cellType="FUNCTION">
+        <Function functionName="QADscAreaSummary" library="FecReport" format="N0">
+          <Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+          <Parameter parameterName="Sewerable" parameterValue="0" />
+        </Function>
+      </Cell>
+      <Cell cellType="FUNCTION">
+        <Function functionName="QADscAreaSummary" library="FecReport" format="N0">
+          <Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+          <Parameter parameterName="DevelopmentState" parameterValue="Unspecified" />
+        </Function>
+      </Cell>
+      <Cell cellType="FUNCTION">
+        <Function functionName="QADscAreaByAssumptionSummary" library="FecReport" format="N0">
+          <Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+          <Parameter parameterName="ConnectionAssumption" parameterValue="AllValidTypes" />
+        </Function>
+      </Cell>
+      <Cell cellType="FUNCTION">
+        <Function functionName="QADscAreaByAssumptionSummary" library="FecReport" format="N0">
+          <Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+          <Parameter parameterName="ConnectionAssumption" parameterValue="AllValidTypes" />
+          <Parameter parameterName="Sewerable" parameterValue="0" />
+        </Function>
+      </Cell>
+      <Cell cellType="FUNCTION">
+        <Function functionName="QADscAreaByAssumptionSummary" library="FecReport" format="N0">
+          <Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+          <Parameter parameterName="Zoning" parameterValue="AllValidTypes" />
+        </Function>
+      </Cell>
+      <Cell cellType="FUNCTION">
+        <Function functionName="QADscAreaSummary" library="FecReport" format="N0">
+          <Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+        </Function>
+      </Cell>
+    </Row>
+    <Row>
+      <Cell cellType="CONST" data="Total" />
+      <Cell cellType="FUNCTION">
+        <Function functionName="QADscAreaSummary" library="ModelReport" format="N0">
+          <Parameter parameterName="ConnectionAssumption" parameterValue="Unspecified" />
+        </Function>
+      </Cell>
+      <Cell cellType="FUNCTION">
+        <Function functionName="QADscAreaSummary" library="ModelReport" format="N0">
+          <Parameter parameterName="TimeFrame" parameterValue="EX" />
+          <Parameter parameterName="Zoning" parameterValue="UNK" />
+        </Function>
+      </Cell>
+      <Cell cellType="FUNCTION">
+        <Function functionName="QADscAreaSummary" library="ModelReport" format="N0">
+          <Parameter parameterName="Sewerable" parameterValue="0" />
+        </Function>
+      </Cell>
+      <Cell cellType="FUNCTION">
+        <Function functionName="QADscAreaSummary" library="ModelReport" format="N0">
+          <Parameter parameterName="DevelopmentState" parameterValue="Unspecified" />
+        </Function>
+      </Cell>
+      <Cell cellType="FUNCTION">
+        <Function functionName="QADscAreaByAssumptionSummary" library="ModelReport" format="N0">
+          <Parameter parameterName="ConnectionAssumption" parameterValue="AllValidTypes" />
+        </Function>
+      </Cell>
+      <Cell cellType="FUNCTION">
+        <Function functionName="QADscAreaByAssumptionSummary" library="ModelReport" format="N0">
+          <Parameter parameterName="ConnectionAssumption" parameterValue="AllValidTypes" />
+          <Parameter parameterName="Sewerable" parameterValue="0" />
+        </Function>
+      </Cell>
+      <Cell cellType="FUNCTION">
+        <Function functionName="QADscAreaByAssumptionSummary" library="ModelReport" format="N0">
+          <Parameter parameterName="Zoning" parameterValue="AllValidTypes" />
+        </Function>
+      </Cell>
+      <Cell cellType="FUNCTION">
+        <Function functionName="QADscAreaSummary" library="ModelReport" format="N0">
+        </Function>
+      </Cell>
+    </Row>
+  </CharacterizationTable>
+  <CharacterizationTable tableNumber="QA2" tableTitle="FEC Area vs. Model Trace Area" columnCount="3">
+    <Row>
+      <Cell cellType="ROWNAME" data="Total DSC Area Within FECs" />
+      <Cell cellType="FUNCTION">
+        <Function functionName="TotalDscArea" library="FecReport" format="N0" />
+      </Cell>
+    </Row>
+    <Row>
+      <Cell cellType="ROWNAME" data="Total DSC Area Within Study Area Trace" />
+      <Cell cellType="FUNCTION">
+        <Function functionName="DscArea" library="ModelReport" format ="N0" />
+      </Cell>
+    </Row>
+   </CharacterizationTable>
+</ReportGenerator>
