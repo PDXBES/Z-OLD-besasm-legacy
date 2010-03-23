@@ -377,7 +377,7 @@ namespace SystemsAnalysis.Reporting
       }
       catch (Exception ex)
       {
-        this.OnStatusChanged(new StatusChangedArgs("Batched execute failed", StatusChangeType.Error));
+        this.OnStatusChanged(new StatusChangedArgs("Batch execute failed", StatusChangeType.Error));
         throw new Exception("Batch execute failed" + ex.Message, ex);
       }
     }
