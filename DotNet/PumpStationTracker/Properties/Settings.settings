@@ -1,0 +1,22 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="CA5.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="PumpStationDBConnectionString" Type="(Connection string)" Scope="Application">
+      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;ConnectionString&gt;Provider=Microsoft.Jet.OLEDB.4.0;Data Source=W:\AGMaster21\Pumps\PumpStationDB.mdb&lt;/ConnectionString&gt;
+  &lt;ProviderName&gt;System.Data.OleDb&lt;/ProviderName&gt;
+&lt;/SerializableConnectionString&gt;</DesignTimeValue>
+      <Value Profile="(Default)">Provider=Microsoft.Jet.OLEDB.4.0;Data Source=W:\AGMaster21\Pumps\PumpStationDB.mdb</Value>
+    </Setting>
+    <Setting Name="ConnectionString" Type="(Connection string)" Scope="Application">
+      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;ConnectionString&gt;Data Source=FIDDLE;Persist Security Info=True;User ID=ModelAdmin;Password=daW7Horn&lt;/ConnectionString&gt;
+  &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
+&lt;/SerializableConnectionString&gt;</DesignTimeValue>
+      <Value Profile="(Default)">Data Source=FIDDLE;Persist Security Info=True;User ID=ModelAdmin;Password=daW7Horn</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

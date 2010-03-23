@@ -1,0 +1,1468 @@
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+'		Link Import Module
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+'
+'	06-Mar-03	DFC	Recovered version .4 from Cautley machine
+'				fixed includes for new V2 structure
+'	13Mar03	DFC	Fixed bug in EMGLinkCommit.
+'
+include "MapBasic.def"
+include "Icons.def"
+include "..\..\common\inc\EMGMTabUtil.def"
+include "..\..\common\inc\EMGToolGlobal.def"
+include "..\inc\EMGLinkCheck.def"
+include "..\inc\EMGLinkColData.def"
+include "..\inc\EMGLinkCommit.def"
+include "..\inc\EMGFinder.def"
+include "..\inc\EMGDelList.def"
+include "..\..\common\inc\EMGCoordSys.def"
+include "..\..\common\inc\EMGLogger.def"
+include "..\..\common\inc\INIUtils.def"
+
+
+Declare Sub Main()
+Declare	Sub OpenMaster()
+Declare	Sub	 OpenModel()
+Declare Sub ShowAbout()
+Declare Sub EndAppDel()
+Declare Sub BuildMenus()
+Declare Sub ShowPreCheckDialog()
+Declare Sub ShowAppendDialog()
+Declare Sub ShowDeleteDialog()
+Declare Sub GettaFileName()
+Declare Sub GettaFileName2()
+Declare Sub GettaRealFilename(byval WhatID as integer)
+Declare Sub AddLinkCheck(ByVal TName as string)
+Declare Sub	CheckOneLink()
+Declare Function IsInt(byval InString as string) as logical
+Declare Function IsAlpha(byval InString as string) as logical
+Declare Function ModelIsOpen() as logical
+Declare	Sub 	DelLinkCheck()
+Declare 	Sub		CheckOneLinkDel()
+Declare	Sub		OpenBrowsers()
+Declare	Sub		OpenWarnBrowser()
+Declare	Sub		OpenFailBrowser()
+Declare	Sub		SplitFile()
+Declare	Sub		PreOrphanDelete()
+
+Type FileSpec
+	Name as string
+	FullPath as string
+	Alias as string
+	IniSection as string
+	IniKey as string
+End Type
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+'	Globals and module level data
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+Dim		mTableNames() as string
+Dim		DelLinkCount as integer
+Dim		mModelFiles(13) as FileSpec
+Dim		mMasterFiles(8) as FileSpec
+Dim		mDeleteTableIndex as integer
+
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+'
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+Sub Main()
+
+	CLS
+	Call SetLogOptions (TRUE, TRUE, TRUE, FALSE)
+
+	gstrAppName = "EMGAATS Append and Delete Links Utility"
+	gstrVersion = "2.1c"
+
+
+	gstrCopyRight = "Copyright (c) 2001, 2002, 2003 " & chr$(10) 
+		& "City of Portland Bureau of Environmental Services" & chr$(10) 
+		& "and CH2M HILL, Inc."
+	gstrVerDate = "Mar 25, 2003"
+	gstrAppFolder = ApplicationDirectory$()
+	'gstrAppFolder = FixFolderSlash (gstrAppFolder)
+
+	' Aliases are by necessity hard coded elsewhere in the program, can cannot be changed.
+
+	' the names and locations of model files are hard coded, relative to the "Model Root".
+	mModelFiles(1).Name = "Links"
+	mModelFiles(1).FullPath = "Links\mdl_Links_ac.tab"
+	mModelFiles(1).Alias = "mdl_Links"
+
+	mModelFiles(2).Name = "Nodes"
+	mModelFiles(2).Fullpath = "Nodes\mdl_Nodes_ac.tab"
+	mModelFiles(2).Alias = "mdl_Nodes"
+
+	mModelFiles(3).Name = "Direct Subcatchments"
+	mModelFiles(3).FullPath = "DSC\mdl_DirSC_ac.tab"
+	mModelFiles(3).Alias = "mdl_DSC"
+
+	mModelFiles(4).Name = "Laterals"
+	mModelFiles(4).FullPath = "Laterals\mdl_laterals_ac.tab"
+	mModelFiles(4).Alias = "mdl_Laterals"
+
+	mModelFiles(5).Name = "Lateral End Points"
+	mModelFiles(5).FullPath = "Laterals\mdl_lateralEndPts.tab"
+	mModelFiles(5).Alias = "mdl_LatEndPts"
+
+	mModelFiles(6).Name = "Link Results"
+	mModelFiles(6).FullPath = "Links\mdl_LinkRes_ac.tab"
+	mModelFiles(6).Alias = "mdl_LinkRes"
+
+	mModelFiles(7).Name = "Node Results"
+	mModelFiles(7).FullPath = "Nodes\mdl_NodeRes_ac.tab"
+	mModelFiles(7).Alias = "mdl_NodeRes"
+
+	mModelFiles(8).Name = "Special Links"
+	mModelFiles(8).FullPath = "Links\mdl_SpecLinks_ac.tab"
+	mModelFiles(8).Alias = "mdl_SpecLinks"
+
+	mModelFiles(9).Name = "Special Link Data"
+	mModelFiles(9).FullPath = "Links\mdl_SpecLinkData_ac.tab"
+	mModelFiles(9).Alias = "mdl_SpecLinkData"
+
+	mModelFiles(10).Name = "Special Node Data"
+	mModelFiles(10).FullPath = "Nodes\mdl_SpecNodeData_ac.tab"
+	mModelFiles(10).Alias = "mdl_SpecNodeData"
+
+	mModelFiles(11).Name = "Tag Definitions"
+	mModelFiles(11).FullPath = "Nodes\mdl_DefineTags_ac.tab"
+	mModelFiles(11).Alias = "mdl_DefineTags"
+
+	mModelFiles(12).Name = "Surface Subcatchments"
+	mModelFiles(12).FullPath = "SurfSC\mdl_SurfSC_ac.tab"
+	mModelFiles(12).Alias = "mdl_SurfSC"
+
+	mModelFiles(13).Name = "Surface Zingers"
+	mModelFiles(13).FullPath = "SurfSC\mdl_SurfZing.tab"
+	mModelFiles(13).Alias = "mdl_SurfZing"
+
+
+	'  the names and locations of the master files need not be hard coded.  If the INI file
+	'  contains a value for the "Root" Key, and/or INIKey, then use it, otherwise just use the 'FullPath'.
+	'	in other words, FullPath is the default.
+	mMasterFiles(1).Name = "Master Links"
+	mMasterFiles(1).FullPath = "Links\mst_Links_ac"
+	mMasterFiles(1).INISection = "masterfiles"
+	mMasterFiles(1).INIKey = "links"
+	mMasterFiles(1).Alias = "mst_links"
+
+	mMasterFiles(2).Name = "Master Nodes"
+	mMasterFiles(2).FullPath = "Nodes\mst_Nodes_ac"
+	mMasterFiles(2).INISection = "masterfiles"
+	mMasterFiles(2).INIKey = "Nodes"
+	mMasterFiles(2).Alias = "mst_nodes"
+
+	mMasterFiles(3).Name = "Master Divides"
+	mMasterFiles(3).FullPath = "Parcels_divides\mst_DSCDivides_ac"
+	mMasterFiles(3).INISection = "masterfiles"
+	mMasterFiles(3).INIKey = "Divides"
+	mMasterFiles(3).Alias = "mst_divides"
+
+	mMasterFiles(4).Name = "Master Parcels"
+	mMasterFiles(4).FullPath = "Parcels_divides\AG_Mult"
+	mMasterFiles(4).INISection = "masterfiles"
+	mMasterFiles(4).INIKey = "Parcels"
+
+	mMasterFiles(4).Alias = "mst_parcels"
+
+	mMasterFiles(5).Name = "Master Laterals"
+	mMasterFiles(5).FullPath = "Laterals\mst_Laterals_ac"
+	mMasterFiles(5).INISection = "masterfiles"
+	mMasterFiles(5).INIKey = "Laterals"
+	mMasterFiles(5).Alias = "mst_laterals"
+
+	mMasterFiles(6).Name = "Master Lateral End Points"
+	mMasterFiles(6).FullPath = "Laterals\mst_LateralEndPts"
+	mMasterFiles(6).INISection = "masterfiles"
+	mMasterFiles(6).INIKey = "LateralEndPts"
+	mMasterFiles(6).Alias = "mst_LatEndPts"
+
+	mMasterFiles(7).Name = "Master Special Links"
+	mMasterFiles(7).FullPath = "Links\mst_SpecLinks_ac"
+	mMasterFiles(7).INISection = "masterfiles"
+	mMasterFiles(7).INIKey = "SpecialLinks"
+	mMasterFiles(7).Alias = "mst_SpecLinks"
+
+	mMasterFiles(8).Name = "Master Surface Subcatchments"
+	mMasterFiles(8).FullPath = "SurfSC\mst_SurfSC_ac"
+	mMasterFiles(8).INISection = "masterfiles"
+	mMasterFiles(8).INIKey = "surface"
+	mMasterFiles(8).Alias = "mst_SurfSC"
+
+	print	gstrAppName & " " & gstrVersion
+
+	Call	SetStdCoordSys()
+	gMasterModelMode = 1
+	glDupSpace = TRUE
+	glDupKey = TRUE
+	gstrSelectedTableName = "Pre-Check First!"
+
+	Call	LoadReqColumnArray()
+	Call	LoadAuditColumnAdd()
+	Call	LoadAuditColumnDel()
+	Call BuildMenus()
+
+End Sub
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+'		Ask for a new model path, then open the tables...
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+Sub OpenModel()
+Dim		ProjFolderPath as String
+Dim		ModelINIPath as String
+Dim		LoopCount as integer
+Dim		AliasName as string
+Dim		FullPath as string
+Dim		TableName as string
+Dim		PathName as string
+Dim		ModelVersion as string
+
+	ProjFolderPath = APIBrowseFolders("Select an EMGAATS Project Folder")
+	gmdlRootFolder = FixFolderSlash(ProjFolderPath)
+	print "Selected directory '" & gmdlRootFolder & "'"
+
+	close all interactive
+
+'	If we know what our project folder is, open those, otherwise, ask
+
+	if len(gmdlRootFolder) = 0 then
+
+		ProjFolderPath = APIBrowseFolders("Select an EMGAATS Project Folder")
+		gmdlRootFolder = FixFolderSlash(ProjFolderPath)
+
+		Call Loggit ( "Selected directory '" & gmdlRootFolder & "'")
+	end if
+
+	gmdlRootFolder = FixFolderSlash(gmdlRootFolder)
+
+'	Get the path to the master files, and open them.
+	ModelINIPath = gmdlRootFolder & "model.ini"
+	if not FileExists(ModelINIPath) then
+		note "The current model directory does not contain a 'model.ini' file. " & ModelINIPath
+		Exit Sub
+	end if
+	Call Loggit ( "Model.ini exists where it's supposed to")
+	' Check for required version
+	ModelVersion = ReadINI(ModelINIPath, "Control", "Version", "nada")
+	'Checking for multiple supported versions look like this...
+	'If ModelVersion <> "X.X" and ModelVersion <> "Y.Y" then
+	If ModelVersion <> "2.11" then
+		'Note "Model version is: " + ModelVersion + chr$(10) +
+		'	" We support version X.X or Y.Y"
+		Note "Model version is: " + ModelVersion + chr$(10) +
+			" We support version 2.11"
+		exit sub
+	end if
+	For LoopCount = 1 to UBound(mModelFiles)
+		AliasName = mModelFiles(LoopCount).Alias
+		FullPath = gmdlRootFolder & mModelFiles(LoopCount).FullPath
+		TableName = PathToTableName$(FullPath)
+		PathName = PathToDirectory$(FullPath)
+
+		Call Loggit ( "Open Table " & FullPath & " as " & AliasName)
+		Open Table FullPath as AliasName
+
+	Next
+
+	create index on mdl_links (USNode)
+	create index on mdl_links (DSNode)
+
+	Alter Menu Item ShowPreCHeckDialog Enable
+	Alter Menu Item ShowAppendDialog Enable
+	Alter Menu Item ShowDeleteDialog Enable
+	Alter Menu Item PreOrphanDelete Enable
+	gMasterModelMode = 2
+
+End Sub
+
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+'
+'
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+Sub OpenMaster()
+Dim		ProjFolderPath as String
+Dim		MasterINIPath as String
+Dim		AliasName as string
+dim		PathName as string
+Dim		FullPath as string
+Dim		LoopCount as integer
+Dim		TableName as string
+Dim		Msg as string
+	
+	' get the master root folder from the INI file that is in the application(exe)
+	' directory.
+
+
+	gstrAppFolder = FixFolderSlash(gstrAppFolder)	
+
+	close all interactive
+
+'	If we know what our project folder is, open those, otherwise, ask
+
+'	Get the path to the master files, and open them.
+	MasterINIPath = gstrAppFolder & "Emgaats.ini"
+	if not FileExists(MasterINIPath) then
+		note "The current directory does not contain a 'emgaats.ini' file. " & MasterINIPath
+		Exit Sub
+	end if
+	Call Loggit ( "Emgaats.ini exists where it's supposed to")
+'
+'	read the master root
+	gmstRootFolder = ReadINI(MasterINIPath, "Masterfiles", "Root", "")
+	if len(gmstRootFolder) = 0 then
+		msg = "Master root folder not set in INI file."
+		call loggit(msg)
+		exit sub
+	end if
+	msg = "Master root folder is: " & gmstRootFolder
+	call loggit(msg)
+	gmstRootFolder = FixFolderSlash(gmstRootFolder)
+	For LoopCount = 1 to UBound(mMasterFiles)
+	'For LoopCount = 1 to 2					this is a hack for testing...
+		AliasName = mMasterFiles(LoopCount).Alias
+		PathName = ReadINI(MasterINIPath, mMasterFiles(LoopCount).INISection, 
+					mMasterFiles(LoopCount).INIKey, mMasterFiles(LoopCount).FullPath)
+		If left$(PathName,1) = "\" then
+			FullPath = gmstRootFolder & Mid$(PathName,2,99) & ".tab"
+		else
+			FullPath = gmstRootFolder & PathName & ".tab"
+		end if
+		TableName = PathToTableName$(FullPath)
+		PathName = PathToDirectory$(FullPath)
+
+		Call Loggit ( "Open Table " & FullPath & " as " & AliasName)
+
+		Open Table FullPath as AliasName
+	Next
+
+	create index on mst_links (USNode)
+	create index on mst_links (DSNode)
+
+
+	Alter Menu Item ShowPreCHeckDialog Enable
+	Alter Menu Item ShowAppendDialog Enable
+	Alter Menu Item ShowDeleteDialog Enable
+	Alter Menu Item PreOrphanDelete Enable
+	gMasterModelMode = 1
+
+End Sub
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+'
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+Function ModelIsOpen() as logical
+Dim		RequiredTables(4) as string
+Dim		NumRequired as integer
+Dim		LoopCount as integer
+
+	RequiredTables(1) = "mdl_Links"
+	RequiredTables(2) = "mdl_nodes"
+	RequiredTables(3) = "mst_links"
+	RequiredTables(4) =	"mst_nodes"
+
+	NumRequired = ubound(RequiredTables)
+	For LoopCount = 1 to NumRequired
+		if not IsTableOpen(RequiredTables(LoopCount)) then
+			print "Model table " & requiredTables(LoopCount) & " is not open."
+			ModelIsOpen = FALSE
+			exit function
+		end if
+		print "Model table " & requiredTables(LoopCount) & " is ok."
+	Next	
+	ModelIsOpen = TRUE
+
+
+End Function
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+'
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+sub BuildMenus()
+
+
+Create Menu "EMGTools" As 
+	"Open EMGAATS Master" ID 1001 calling OpenMaster,
+	"Open An EMGAATS Model" ID 1002 calling OpenModel,
+	"Set Append Layer" calling SetAppendTable,
+	"(-",
+	"(Pre-Check Links" ID 3001 calling ShowPreCHeckDialog,
+	"(Append Links" ID 3002 calling ShowAppendDialog,
+	"Delete Links" ID 3003 calling ShowDeleteDialog,
+	"(Orphan node delete" ID 3004 Calling PreOrphanDelete,
+	"(-",
+	"Browse Previously Checked Links" ID 3010 calling OpenBrowsers,
+	"Split out problems" ID 3011 calling SplitFile,
+
+	"(-",
+    "&About EMGAATS Append and Delete Links" Calling ShowAbout,
+    "(-",
+    "E&xit EMGAATS App && Del utility" ID 5005 Calling EndAppDel
+
+Alter Menu Bar Remove ID 6, ID 7 
+    	Alter Menu Bar Add "EMGTools", ID 6, ID 7
+
+Create ButtonPad "Tools" As 
+  PushButton  
+    HelpMsg "Find Selected Link" 
+    Calling FindSelectedLink 
+    Icon  MI_ICON_LETTERS_L
+  PushButton  
+    HelpMsg "Find Selected US Node" 
+    Calling FindSelectedUSNode 
+    Icon  MI_ICON_LETTERS_U
+  PushButton  
+    HelpMsg "Find Selected DS Node" 
+    Calling FindSelectedDSNode 
+    Icon  MI_ICON_LETTERS_D
+	Separator  	PushButton
+		HelpMsg "Mark link for deletion"
+		calling AddToDeleteList
+		Icon MI_ICON_CUT
+  Title "EMG Tools" 
+  Width 3
+  Show 
+End Sub
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+'
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+Sub ShowAbout
+Dialog
+    Title "About " + gstrAppName + " (Version " + gstrVersion + ")"
+	Width 200
+	Height 200
+
+	Control StaticText
+
+		Title gstrAppName
+		Position 20, 20
+
+	Control StaticText
+		Title "Version " & gstrVersion
+		Position 20, 30
+	Control StaticText
+		Title gstrVerDate
+		Position 20, 40
+
+	Control StaticText
+		Title	gstrCopyRight
+		Position 20, 50
+		Height 30
+
+    
+    Control OKButton
+		Position 90, 180
+
+End Sub
+
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+'
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+Sub EndAPpDel
+	End Program
+End Sub
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+'
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+Sub PreOrphanDelete()
+dim 	lResult as logical
+
+Dim 	LoopCount as integer
+Dim 	Semi as string
+dim 	TableCount as integer
+dim		BaseTableCount as integer
+dim		TableList as string
+Dim		Msg as string
+
+Dim 	dlgWidth as integer
+dim		dlgHeight as integer
+dim 	dlgButtonWidth as integer
+dim 	dlgButtonHeight as integer
+dim 	dlgButtonY as integer
+dim 	dlgButtonOKX, dlgButtonCancelX as integer
+
+dim 	AppendTableIndex as integer
+dim		DupCheckType as integer
+dim		DupActionType as integer
+Dim		CheckDupSpatial as logical
+Dim		CheckDupToFrom as logical
+Dim		QueryFail as logical
+Dim		QueryWarn as logical
+
+gAppDelMode = 2
+
+dlgWidth = 300
+dlgHeight = 200
+dlgButtonWidth = 40
+dlgButtonHeight = 15
+
+dlgButtonY = dlgHeight - 25
+dlgButtonOKX = (dlgwidth / 3.0) - (dlgButtonWidth / 2.0)
+dlgButtonCancelX = ((dlgwidth / 3.0) * 2) - (dlgButtonWidth / 2.0)
+
+Dialog  
+	Title   "Delete Orphan Nodes Pre-Check"
+	Width   dlgWIdth  Height   dlgHeight 
+	Position  150 , 150
+
+	Control StaticText
+		Position	30, 25
+		Title		"Checking for and deleting orphan nodes takes a long time."
+ 	Control OKButton
+		Position	dlgButtonOKX, dlgButtonY
+		Width	dlgButtonWidth
+		Height	dlgButtonHeight
+		Title		"OK"
+		
+	Control CancelButton
+		Position	dlgButtonCancelX, dlgButtonY
+		Width	dlgButtonWidth
+		Height	dlgButtonHeight
+		Title		"Cancel"
+
+If CommandInfo(CMD_INFO_DLG_OK) Then 
+'	do the deed here...
+		call OrphanNodes()
+End If 
+
+
+End Sub
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+'
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+Sub ShowPreCheckDialog
+dim 	lResult as logical
+
+Dim 	LoopCount as integer
+Dim 	Semi as string
+dim 	TableCount as integer
+dim		BaseTableCount as integer
+dim		TableList as string
+Dim		Msg as string
+
+Dim 	dlgWidth as integer
+dim		dlgHeight as integer
+dim 	dlgButtonWidth as integer
+dim 	dlgButtonHeight as integer
+dim 	dlgButtonY as integer
+dim 	dlgButtonOKX, dlgButtonCancelX as integer
+
+dim 	AppendTableIndex as integer
+dim		DupCheckType as integer
+dim		DupActionType as integer
+Dim		CheckDupSpatial as logical
+Dim		CheckDupToFrom as logical
+Dim		QueryFail as logical
+Dim		QueryWarn as logical
+
+gAppDelMode = 1
+
+TableCount = numtables()
+Semi = ""
+For LoopCount = 1 to TableCount
+	' Only load names of base tables...
+	if TableInfo(LoopCount, TAB_INFO_TYPE) = TAB_TYPE_BASE then
+		BaseTableCount = BaseTableCOunt + 1		
+		redim mTableNames(BaseTableCount)
+		TableList = TableList + Semi + TableInfo(LoopCount, TAB_INFO_NAME)
+		mTableNames(BaseTableCount) = TableInfo(LoopCount, TAB_INFO_NAME)
+		Semi = ";"
+	end if
+Next
+
+dlgWidth = 300
+dlgHeight = 200
+dlgButtonWidth = 40
+dlgButtonHeight = 15
+
+dlgButtonY = dlgHeight - 25
+dlgButtonOKX = (dlgwidth / 3.0) - (dlgButtonWidth / 2.0)
+dlgButtonCancelX = ((dlgwidth / 3.0) * 2) - (dlgButtonWidth / 2.0)
+
+If gstrSelectedTableName <> "" then
+	For LoopCount = 1 to BaseTableCount
+		if mTableNames(LoopCount) = gstrSelectedTableName then
+			AppendTableIndex = LoopCount
+			exit for
+		end if
+	Next
+else
+	AppendTableIndex = 1
+End If
+
+Dialog  
+	Title   "Link Append Pre-Check"
+	Width   dlgWIdth  Height   dlgHeight 
+	Position  150 , 150
+
+	Control StaticText
+		Position	30, 25
+		Title		"Link table or selection to process:"
+	Control PopupMenu  
+		Title  from variable mTableNames
+		Value AppendTableIndex
+		ID 5 
+		Into  AppendTableIndex
+		Position  155, 25
+		Width 75
+	Control Button
+		Position  235 , 25
+		Width  40
+		Height 13 
+		Calling GettaFileName
+		Title  "Find" 
+
+	Control StaticText
+		Position 30, 50
+		Title	"Criteria for duplicate check"
+
+	control Checkbox
+		position 175, 50
+		width		70
+		title		"Spatial"
+		value		glDupSpace
+		into		glDupSpace
+	Control Checkbox
+		Position	175, 65
+		Width		70
+		title		"To / From Node"
+		value		glDupKey
+		Into		glDupKey
+	Control GroupBox
+		Position	165, 43
+		Height		35
+		Width		100
+
+	Control StaticText
+		Position 30, 90
+		Title	"Select and browse records when done:"
+ 	control Checkbox
+		position 175, 90
+		width		70
+		title		"Failed"
+		value		QueryFail
+		into		QueryFail
+	Control Checkbox
+		Position	175, 105
+		Width		70
+		title		"Warned"
+		value		QueryWarn
+		Into		QueryWarn
+	Control GroupBox
+		Position	165, 83
+		Height		35
+		Width		100 
+
+
+	Control StaticText
+		Position 30, 125
+		Title	"Links to be imported to:"
+	Control  RadioGroup 
+		Position  175, 125
+		Title  "Master;Model"
+		Value  	gMasterModelMode 
+		Into  		gMasterModelMode
+		Disable
+	Control GroupBox
+		Position	165, 118
+		Height		35
+		Width		100 
+
+ 	Control OKButton
+		Position	dlgButtonOKX, dlgButtonY
+		Width	dlgButtonWidth
+		Height	dlgButtonHeight
+		Title		"OK"
+		
+	Control CancelButton
+		Position	dlgButtonCancelX, dlgButtonY
+		Width	dlgButtonWidth
+		Height	dlgButtonHeight
+		Title		"Cancel"
+
+If CommandInfo(CMD_INFO_DLG_OK) Then 
+'	do the deed here...
+	gstrSelectedTableName = mTableNames(AppendTableIndex)
+	Call AddLinkCheck(gstrSelectedTableName)
+	if QueryFail then
+		call OpenFailBrowser()
+	end if
+	if QueryWarn then
+		call OpenWarnBrowser()
+	end if
+End If 
+
+End Sub
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+'
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+Sub		SplitFile()
+Dim		OKRecName as string
+Dim		NORecName as string
+Dim		FullPath as string
+Dim		DirPath as string
+
+	FullPath = TableInfo(gstrSelectedTableName, TAB_INFO_TABFILE)
+	DirPath = PathToDirectory$(FullPath)
+	
+	OKRecName = gstrSelectedTableName + "_OK"
+	NORecname = gstrSelectedTableName + "_NO"
+
+	print OKRecName + " " + NORecName
+	Select * from gstrSelectedTableName
+	where AuditOK2GO
+	into OKRecName
+
+	FullPath = DirPath + OKRecName
+	Commit Table OKRecName as Fullpath
+
+	Select * from gstrSelectedTableName
+	where Not AuditOK2GO
+	into NoRecName
+
+	FullPath = DirPath + NORecName
+	Commit Table NORecName as FullPath	
+End Sub
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+'
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+Sub	OpenBrowsers
+	Call OpenWarnBrowser()
+	Call OpenFailBrowser()
+End Sub
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+'
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+Sub OpenWarnBrowser
+		Select * from gstrSelectedTableName
+		where AuditOK2GO = "T"
+			and (AuditNodeID <> "" or AuditDups <> "" or AuditSpatial <> "")
+		into _Warned
+		Browse USNode, DSNode, AuditNodeID, AuditDups, AuditSpatial,AuditOK2Go from _Warned
+		Set Window frontwindow() title "Warned Append Records"
+End Sub
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+'
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+Sub OpenFailBrowser
+		Select * from gstrSelectedTableName
+		where AuditOK2GO <> "T"
+		into _Failed
+		Browse USNode, DSNode, AuditNodeID, AuditDups, AuditSpatial,AuditOK2Go from _Failed
+		Set Window frontwindow() title "Failed Append Records"
+End Sub
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+'
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+
+Sub ShowAppendDialog
+dim 	lResult as logical
+
+Dim 	LoopCount as integer
+Dim 	Semi as string
+dim 	TableCount as integer
+dim		TableList as string
+
+Dim 	dlgWidth as integer
+dim		dlgHeight as integer
+
+dim 	dlgButtonWidth as integer
+dim 	dlgButtonHeight as integer
+dim 	dlgButtonY as integer
+dim 	dlgButtonOKX, dlgButtonCancelX as integer
+dim 	TableNames() as string
+
+dim 	AppendTableIndex as integer
+dim		DupCheckType as integer
+dim		DupActionType as integer
+Dim		CheckDupSpatial as logical
+Dim		CheckDupToFrom as logical
+
+Call SetLogOptions(True,True, True, False)
+
+gAppDelMode = 1
+
+TableCount = NumTables()
+redim TableNames(TableCount+1)
+Semi = ""
+For LoopCount = 1 to TableCount
+	TableList = TableList + Semi + TableInfo(LoopCount, TAB_INFO_NAME)
+	TableNames(LoopCount+1) = TableInfo(LoopCount, TAB_INFO_NAME)
+	Semi = ";"
+Next
+TableNames(1) = "Selection"
+TableList = "Selection;" + TableList
+
+dlgWidth = 300
+dlgHeight = 200
+dlgButtonWidth = 40
+dlgButtonHeight = 15
+
+dlgButtonY = dlgHeight - 25
+dlgButtonOKX = (dlgwidth / 3.0) - (dlgButtonWidth / 2.0)
+dlgButtonCancelX = ((dlgwidth / 3.0) * 2) - (dlgButtonWidth / 2.0)
+
+
+Dialog  
+	Title   "Link Append Commit"
+	Width   dlgWIdth  Height   dlgHeight 
+	Position  150 , 150
+
+	Control StaticText
+		Position	30, 25
+		Title		"Table or selection to commit:"
+	
+	Control  EditText  
+		Position  155,25  
+		Width  75  
+		Height 15
+		Value  gstrSelectedTableName
+		Into  gstrSelectedTableName
+		Disable
+
+
+'	Control PopupMenu  
+'		Title  from variable mTableNames
+'		Value 1
+'		ID 5 
+'		Into  AppendTableIndex
+'		Position  155, 25
+'		Width 75
+'	Control Button
+'		Position  235 , 25
+'		Width  40
+'		Height 13 
+'		Calling GettaFileName
+'		Title  "Find" 
+
+  	Control OKButton
+		Position	dlgButtonOKX, dlgButtonY
+		Width	dlgButtonWidth
+		Height	dlgButtonHeight
+		Title		"OK"
+		
+
+	Control CancelButton
+		Position	dlgButtonCancelX, dlgButtonY
+		Width	dlgButtonWidth
+		Height	dlgButtonHeight
+		Title		"Cancel"
+
+If CommandInfo(CMD_INFO_DLG_OK) Then 
+
+'	do the deed here...
+	if gstrSelectedTableName = "Pre-Check First!" then
+		beep
+		note "Please pre-check your append table first."
+		exit sub
+	end if
+	call CommitAppend()
+End If 
+
+
+End Sub
+
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+'
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+Sub ShowDeleteDialog
+dim 	lResult as logical
+
+Dim 	LoopCount as integer
+Dim 	Semi as string
+dim 	TableCount as integer
+dim		TableList as string
+
+Dim 	dlgWidth as integer
+dim		dlgHeight as integer
+
+dim 	dlgButtonWidth as integer
+dim 	dlgButtonHeight as integer
+dim 	dlgButtonY as integer
+dim 	dlgButtonOKX, dlgButtonCheckX, dlgButtonCancelX as integer
+
+Call SetLogOptions(True,True, True, False)
+
+gAppDelMode = 2
+
+TableCount = NumTables()
+redim mTableNames(TableCount+1)
+Semi = ""
+For LoopCount = 1 to TableCount
+	TableList = TableList + Semi + TableInfo(LoopCount, TAB_INFO_NAME)
+	mTableNames(LoopCount+1) = TableInfo(LoopCount, TAB_INFO_NAME)
+	Semi = ";"
+Next
+mTableNames(1) = "Selection"
+TableList = "Selection;" + TableList
+
+dlgWidth = 300
+dlgHeight = 200
+dlgButtonWidth = 40
+dlgButtonHeight = 15
+
+dlgButtonY = dlgHeight - 25
+dlgButtonOKX = (dlgwidth / 4.0) - (dlgButtonWidth / 2.0)
+dlgButtonCheckX = ((dlgwidth / 4.0) * 2) - (dlgButtonWIdth / 2.0)
+dlgButtonCancelX = ((dlgwidth / 4.0) * 3) - (dlgButtonWidth / 2.0)
+
+mDeleteTableIndex = 1
+
+Dialog  
+	Title   "Link Deleter"
+	Width   dlgWIdth  Height   dlgHeight 
+	Position  150 , 150
+
+	Control StaticText
+		Position	30, 25
+		Title		"Link table or selection to Delete:"
+	Control PopupMenu  
+		Title  from variable mTableNames
+		Value mDeleteTableIndex
+		ID 6 
+		Into  mDeleteTableIndex
+		Position  155, 25
+	Control Button
+		Position  235 , 25
+		Width  40
+		Height 13 
+		Calling GettaFileName2
+		Title  "Find" 
+
+	Control StaticText
+		Position 30, 125
+		Title	"Links to be deleted from:"
+	Control  RadioGroup 
+		Position  175, 125
+		Title  "Master;Model"
+		Value  	gMasterModelMode 
+		Into  		gMasterModelMode
+		Disable
+	Control GroupBox
+		Position	165, 118
+		Height		35
+		Width		100 
+
+	Control CheckBox
+  		Position  30, 75
+		Title  "Check for orphan nodes (Very time consuming.)"
+		Into  gOrphanCheck  
+
+
+	Control  Button
+		Position  dlgButtonCheckX , dlgButtonY
+		Width  dlgButtonWidth Height dlgButtonHeight 
+		ID 500 
+		Calling  DelLinkCheck 
+		Title  "Check"   	Control OKButton
+		Position	dlgButtonOKX, dlgButtonY
+		ID		501
+		Width	dlgButtonWidth
+		Height	dlgButtonHeight
+		Title		"OK"
+		Disable
+		
+	Control CancelButton
+		Position	dlgButtonCancelX, dlgButtonY
+		Width	dlgButtonWidth
+		Height	dlgButtonHeight
+		Title		"Cancel"
+
+If CommandInfo(CMD_INFO_DLG_OK) Then 
+
+'	do the deed here...
+'	OK  button will not be enabled unless check passes...
+	gstrSelectedTableName = mTableNames(mDeleteTableIndex)
+	
+	Call		CommitDelete
+
+End If 
+
+
+End Sub
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+'
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+Sub DelLinkCheck()
+Dim		lResult as logical
+Dim		ColErrs as string
+Dim		NumLinks as integer
+Dim		LinkCount as integer
+Dim		Msg as string
+
+	mDeleteTableIndex = ReadControlValue(6)
+	print "Entering DelLinkCheck..."
+	print "Index is " + mDeleteTableIndex
+
+	gstrSelectedTableName = mTableNames(mDeleteTableIndex)
+
+	call CheckOrCreateAuditColumns(gstrSelectedTableName, "DEL")
+	if gMasterModelMode = 1 then
+		call LoadReqColumnArrayDelMst
+		print "In Master Mode"
+	else
+		call LoadReqColumnArrayDelMdl
+		print "In Model Mode"
+	end if
+	lResult = TabHasReqColumns(gstrSelectedTableName, ColErrs)
+	if not lResult then
+		print ColErrs
+		note "Table to delete missing one or more required columns" + chr$(10) +
+			ColErrs
+
+
+	else
+		print "OK to go, required columns check"
+		select * from gstrSelectedTableName 
+		into _LinkCheck
+		
+		NumLinks = TableInfo(_LinkCheck, TAB_INFO_NROWS)
+		LinkCount = 0
+		' reset all check fields
+		update _LinkCheck
+			set 	AuditExistLinkID = "",
+					AuditOK2Go = False,
+					AuditProcTimestamp = ""
+		Fetch first from _LinkCheck
+
+		DelLinkCount = 0
+
+		ProgressBar "Checking Links to be deleted ..."
+			calling CheckOneLinkDel
+			range		NumLinks
+
+		close table _LinkCheck
+	end if
+
+
+'	*** following stuff is approximately what we need
+		select * from gstrSelectedTableName
+		where AuditOK2Go <> "T"
+		into _Failed
+		
+		do case gMasterModelMode
+			case 1
+				browse MLinkID, AuditOK2Go, AuditExistLinkID from _Failed
+				set window frontwindow() title "Failed Delete records"
+			case 2
+				browse LinkID, AuditOK2Go, AuditExistLinkID from _Failed
+				set window frontwindow() title "Failed Delete records"
+
+		end case
+	if TableInfo(_Failed, TAB_INFO_NROWS) = 0 then		
+		Alter Control 501 Enable
+	end if
+End Sub
+
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+'
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+Sub		CheckOneLinkDel()
+Dim		MyRow as integer
+Dim		NumFound as integer
+Dim		WhatID as integer
+dim		Msg as string
+Dim		BadMsg as string
+
+	if EOT(_LinkCheck) then
+		ProgressBar = -1
+		exit sub
+	end if
+	DelLinkCount = DelLinkCount + 1
+	ProgressBar = DelLinkCount
+
+	MyRow = _LinkCheck.ROWID
+' ----------------------------------------------------------------------------------------------
+'		actual check between the bars
+
+	do case gMasterModelMode
+		case 1
+			WhatID = _LinkCheck.MLinkID
+			select * from mst_links
+			where MLinkID = WhatID
+			into _FoundLinks
+			BadMsg = "No MLINKID " & str$(WhatID)
+		case 2
+			WhatID = _LinkCHeck.LinkID
+			select * from mdl_Links
+			where LinkID = WhatID
+			into _FoundLinks
+			BadMsg = "No LINKID " & str$(WhatID)
+	end case
+	NumFound = TableInfo(_FoundLinks, TAB_INFO_NROWS)
+	close table _FoundLinks
+
+	msg = "Num delete links found: " & str$(NumFound)
+	call loggit(msg)
+	If NumFound <> 0 then
+		update _LinkCheck
+			set AuditOK2Go = TRUE
+			where ROWID = MyRow
+	else
+		update _LinkCheck
+			set AuditExistLinkID = BadMsg
+			where ROWID = MyRow
+	end if
+' ----------------------------------------------------------------------------------------------
+	fetch next from _LinkCheck
+End Sub
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+'
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+Sub GettaFilename
+	Call GettaRealFilename(5)
+End Sub
+Sub GettaFilename2
+	Call GettaRealFilename(6)
+End Sub
+
+Sub GettaRealFileName(byval WhatID as integer)
+Dim		MyPath as string
+Dim		MyFile as string
+Dim		MyFileType as string
+Dim		MyPrompt as string
+Dim		WhatFile as string
+Dim		ArraySize as integer
+Dim 	i as integer
+
+	MyPath = ""
+	MyFile = ""
+	MyFileType = "TAB"
+	MyPrompt = "Select file of links to import"
+
+	WhatFile = FileOpenDlg( Mypath ,  MyFile ,  MyFileType ,  MyPrompt )
+	If Len(WhatFile) <> 0 then	
+		
+		Open Table WhatFile
+
+		ArraySize = UBound(mTableNames)
+		redim mTablenames(ArraySize + 1)    ' don't need "preserve" in mapbasic
+		For i = ArraySize + 1 to 2 step -1
+			mTableNames(i) = mTableNames(i-1)
+		next
+		mTableNames(1) = PathToTableName$(WhatFile)
+		Alter Control WhatID
+			Title from variable mTableNames
+			Value 1
+		mDeleteTableIndex = 1
+	end if
+End sub
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+'
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+Dim		LinkCount as integer
+
+Sub AddLinkCheck(ByVal TableName as string)
+dim		lResult as logical
+Dim		ColErrs as string
+Dim		NumLinks as integer
+
+	call CheckOrCreateAuditColumns(TableName, "ADD")
+	print "Mode flag: " + gMasterModelMode
+	if gMasterModelMode = 1 then
+		gReqColCount = gMastMax
+		print "Master mode"
+	else
+		gReqColCount = gModelMax
+		print "Model Mode"
+	end if
+	lResult = TabHasReqColumns(TableName, ColErrs)
+	
+	if not lResult then
+		print ColErrs
+		note "Table to add missing one or more required columns." + chr$(10) +
+			ColErrs
+
+	else		' OK to go
+		print "OK to go; required columns check"
+		select * from gstrSelectedTableName into _LinkCheck
+		NumLinks = TableInfo(_LinkCheck, TAB_INFO_NROWS)
+		LinkCount = 0
+		' reset all check fields
+		update _LinkCheck
+			set AuditNodeID = "",
+				AuditDups = "",
+				AuditSpatial = "",
+				AuditOK2Go = False,
+				AuditProcTimestamp = ""
+		Fetch First from _LinkCheck
+
+		ProgressBar   "Checking links to be added ..." 
+			Calling   CheckOneLink  
+			Range   NumLinks 
+
+
+	end if
+End Sub
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+'
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+Sub		CheckOneLink()
+Dim		MyOK2Go as logical
+Dim		TempStr as string
+Dim		MyRow as integer
+Dim		NodeFirst3 as string
+Dim		NodeLast3 as string
+Dim		NodeIDLen as integer
+Dim		lResult as logical
+Dim		TimeFrame as string
+Dim		LinkType as string
+
+	if EOT(_LinkCheck) then
+		Progressbar = -1
+		exit sub
+	end if
+
+	LinkCount = Linkcount + 1
+	Progressbar = LinkCount
+	MyRow = _LinkCheck.ROWID
+
+' ----------------------------------------------------------------------------------
+'		Actual check of each link between bars...
+	MyOK2Go = TRUE
+
+
+' . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+'			Node ID checks, US and DS
+' . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+
+	print "USNode: " & _LinkCheck.USNode
+		NodeIDLen = len(lTrim$(rtrim$(_LinkCheck.USNode)))
+		if NodeIDLen <> 6 then
+			MyOK2Go = FALSE
+			TempStr = _LinkCheck.AuditNodeID
+			TempStr = TempStr & " US Len" & str$(NodeIDLen)
+			update _LinkCheck
+				set AuditNodeID = TempStr
+				where ROWID = MyRow
+			
+		else
+		' check Node IDs for license plate format.
+			NodeFirst3 = mid$(_LinkCheck.USNode,1,3)
+			NodeLast3 = mid$(_LinkCheck.USNode, 4,3)
+			' if first part is integer, second part must be alpha.
+			' if first part is alpha, second part must be integer.
+			if IsInt(NodeFirst3) then
+				print "1st 3 int"
+				if IsAlpha(NodeLast3) then
+					' USNode is OK, no need to do anything
+					print "2nd 3 alpha, ok"
+				else	
+					' USNode incorrect format
+					print "2nd 3 not alpha, not ok"
+					MyOK2Go = FALSE
+					TempStr = _LinkCheck.AuditNodeID
+					TempStr = TempStr & " US 2NA"
+					update _LinkCheck
+						set AuditNodeID = TempStr
+						where ROWID = MyRow
+				end if
+			else
+				if IsAlpha(NodeFirst3) then
+					print "1st 3 alpha"
+					if IsInt(NodeLast3) then
+						' US Node is OK, no need to do anything
+						print "2nd 3 int, ok"
+					else
+						' US Node incorrect format
+						print "2nd 3 not int, not ok"
+						MyOK2Go = FALSE
+						TempStr = _LinkCheck.AuditNodeID
+						TempStr = TempStr & " US 2NN"
+						update _LinkCheck
+							set AuditNodeID = TempStr
+							where ROWID = MyRow
+
+					end if
+				else
+					' first 3 passes neither int or alpha
+					print "1st 3 neither int nor alpha, not ok"
+					MyOK2Go = FALSE
+					TempStr = _LinkCheck.AuditNodeID
+					TempStr = TempStr & " US Allbad"
+					update _LinkCheck
+						set AuditNodeID = TempStr
+						where ROWID = MyRow
+				
+				end if
+			end if
+		end if
+	print "DSNode: " & _LinkCheck.DSNode
+		NodeIDLen = len(lTrim$(rtrim$(_LinkCheck.DSNode)))
+		if NodeIDLen <> 6 then
+			MyOK2Go = FALSE
+			TempStr = _LinkCheck.AuditNodeID
+			TempStr = TempStr & " DS Len" & str$(NodeIDLen)
+			update _LinkCheck
+				set AuditNodeID = TempStr
+				where ROWID = MyRow
+		else
+			' check Node IDs for license plate format.
+			NodeFirst3 = mid$(_LinkCheck.DSNode,1,3)
+			NodeLast3 = mid$(_LinkCheck.DSNode, 4,3)
+			' if first part is integer, second part must be alpha.
+
+			' if first part is alpha, second part must be integer.
+			if IsInt(NodeFirst3) then
+				print "1st 3 int"
+				if IsAlpha(NodeLast3) then
+					' USNode is OK, no need to do anything
+					print "2nd 3 alpha, ok"
+				else	
+					' USNode incorrect format
+					print "2nd 3 not alpha, not ok"
+					MyOK2Go = FALSE
+					TempStr = _LinkCheck.AuditNodeID
+					TempStr = TempStr & " DS 2NA"
+					update _LinkCheck
+						set AuditNodeID = TempStr
+						where ROWID = MyRow
+				end if
+			else
+				if IsAlpha(NodeFirst3) then
+					print "1st 3 alpha"
+					if IsInt(NodeLast3) then
+						' US Node is OK, no need to do anything
+						print "2nd 3 int, ok"
+					else
+						' US Node incorrect format
+						print "2nd 3 not int, not ok"
+
+						MyOK2Go = FALSE
+						TempStr = _LinkCheck.AuditNodeID
+						TempStr = TempStr & " DS 2NN"
+						update _LinkCheck
+							set AuditNodeID = TempStr
+							where ROWID = MyRow
+
+					end if
+				else
+					' first 3 passes neither int or alpha
+					print "1st 3 neither int nor alpha, not ok"
+					MyOK2Go = FALSE
+					TempStr = _LinkCheck.AuditNodeID
+					TempStr = TempStr & " DS1 bad"
+					update _LinkCheck
+						set AuditNodeID = TempStr
+						where ROWID = MyRow
+				
+				end if
+			end if
+		end if
+' . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+'			Ends consistent with nodes
+' . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+Dim		SpaceMsg as string
+Dim		DupMsg as string
+
+		lResult = LinkCheckSpace(SpaceMsg)
+		if Len(SpaceMsg) > 0 then
+			TempStr = _LinkCheck.AuditSpatial
+			TempStr = TempStr & SpaceMsg
+			update _LinkCheck
+				set AuditSpatial = TempStr
+				where ROWID = MyRow
+		end if
+		if not lResult then
+			MyOK2Go = FALSE
+		end if
+' . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+'			Look for potential duplicates
+' . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+
+		lResult = LinkCheckDup(DupMsg)
+		if Len(DupMsg) > 0 then
+			TempStr = _LinkCheck.AuditDups
+			TempStr = TempStr & DupMsg
+			update _LinkCheck
+				set AuditDups = TempStr
+				where ROWID = MyRow
+		End If
+		if not lResult then
+			'  dups are not fatal !  leave MyOK2GO alone
+		end if
+' . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+'			Valid Timeframe
+' . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+	do case gMasterModelMode
+		case 1
+			TimeFrame = _LinkCheck.TimeFrame
+			do case ltrim$(rtrim$(TimeFrame))
+				case "AB", "EX", "CE", "FC", "FU"
+					' ok
+				case ""
+					' will be ok, append will translate to EX
+				case else
+					TempStr = _LinkCheck.AuditDups
+					TempStr = TempStr & " Bad Time"
+					update _LinkCheck
+						set AuditDups = TempStr
+						where ROWID = MyRow
+
+					MyOK2GO = FALSE
+			end case
+	end case
+' . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+'			Valid Flow Type
+' . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+	Linktype = _LinkCheck.LinkType
+	do case LinkType
+		case "C", "IC", "D", "ID", "PS", "PD", "PC", "FD", "S", "IS", "V", "F", "X"
+			' valid types
+		case else
+					TempStr = _LinkCheck.AuditDups
+					TempStr = TempStr & " Bad Type"
+					update _LinkCheck
+						set AuditDups = TempStr
+						where ROWID = MyRow
+			
+	end case
+' . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+		' set the ok to go field to the combined opinion
+		print "Final OK? " & str$(MyOK2Go) & " in ROWID " & str$(MyRow)
+		Update _LinkCheck
+			set AuditOK2Go = MyOK2Go
+			where ROWID = MyRow
+' ----------------------------------------------------------------------------------
+	fetch next from _LinkCheck
+End sub
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+'
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+Function IsInt(byval InString as string) as logical
+Dim		CurChar as string
+
+	IsInt = false
+		CurChar = mid$(InString, 1, 1)
+		if CurChar < "0" or CurChar > "9" then
+			exit function
+		end if
+		CurChar = mid$(InString, 2, 1)
+		if CurChar < "0" or CurChar > "9" then
+			exit function
+		end if
+		CurChar = mid$(InString, 3, 1)
+		if CurChar < "0" or CurChar > "9" then
+			exit function
+		end if
+	IsInt = TRUE
+
+End Function
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+'
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+Function IsAlpha(byval InString as string) as logical
+Dim		CurChar as string
+
+	IsAlpha = false
+		CurChar = mid$(InString, 1, 1)
+		if CurChar < "A" or CurChar > "z" then
+			exit function
+		end if
+		CurChar = mid$(InString, 2, 1)
+		if CurChar < "A" or CurChar > "z" then
+			exit function
+		end if
+		CurChar = mid$(InString, 3, 1)
+		if CurChar < "A" or CurChar > "z" then
+			exit function
+		end if
+	IsAlpha = TRUE
+
+
+End Function

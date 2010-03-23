@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema id="ModelCatalog" targetNamespace="http://tempuri.org/ModelCatalog.xsd" elementFormDefault="qualified"
+	attributeFormDefault="qualified" xmlns="http://tempuri.org/ModelCatalog.xsd" xmlns:mstns="http://tempuri.org/ModelCatalog.xsd"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+	<xs:element name="ModelCatalog" msdata:IsDataSet="true">
+		<xs:complexType>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element name="DSCHydraulics">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="DSCHydraulicsID" msdata:AutoIncrement="true" type="xs:int" />
+							<xs:element name="scenarioID" type="xs:int" minOccurs="0" />
+							<xs:element name="DSCID" type="xs:int" minOccurs="0" />
+							<xs:element name="modelID" type="xs:int" minOccurs="0" />
+							<xs:element name="HGL" type="xs:double" minOccurs="0" />
+							<xs:element name="deltaHGL" type="xs:double" minOccurs="0" />
+							<xs:element name="surcharge" type="xs:double" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="StormCatalog">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="stormID" msdata:AutoIncrement="true" type="xs:int" />
+							<xs:element name="stormName" type="xs:string" minOccurs="0" />
+							<xs:element name="recurrenceInterval" type="xs:int" minOccurs="0" />
+							<xs:element name="duration" type="xs:int" minOccurs="0" />
+							<xs:element name="interfaceFile" type="xs:string" minOccurs="0" />
+							<xs:element name="startDate" type="xs:dateTime" minOccurs="0" />
+							<xs:element name="description" type="xs:string" minOccurs="0" />
+							<xs:element name="timeStep" type="xs:int" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="LinkHydraulics">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="linkHydraulicsID" msdata:AutoIncrement="true" type="xs:int" />
+							<xs:element name="scenarioID" type="xs:int" minOccurs="0" />
+							<xs:element name="MLinkID" type="xs:int" minOccurs="0" />
+							<xs:element name="modelID" type="xs:int" minOccurs="0" />
+							<xs:element name="maxQ" type="xs:double" minOccurs="0" />
+							<xs:element name="timeOfMaxQ" type="xs:dateTime" minOccurs="0" />
+							<xs:element name="maxV" type="xs:double" minOccurs="0" />
+							<xs:element name="timeOfMaxV" type="xs:dateTime" minOccurs="0" />
+							<xs:element name="QqRatio" type="xs:double" minOccurs="0" />
+							<xs:element name="maxUSElev" type="xs:double" minOccurs="0" />
+							<xs:element name="maxDSElev" type="xs:double" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="ModelCatalog">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="modelID" msdata:AutoIncrement="true" type="xs:int" />
+							<xs:element name="scenarioID" type="xs:int" minOccurs="0" />
+							<xs:element name="modelName" type="xs:string" minOccurs="0" />
+							<xs:element name="modelDescription" type="xs:string" minOccurs="0" />
+							<xs:element name="modelType" type="xs:string" minOccurs="0" />
+							<xs:element name="timeFrame" type="xs:string" minOccurs="0" />
+							<xs:element name="modelPath" type="xs:string" minOccurs="0" />
+							<xs:element name="modelOutputFile" type="xs:string" minOccurs="0" />
+							<xs:element name="userName" type="xs:string" minOccurs="0" />
+							<xs:element name="isUploaded" type="xs:boolean" minOccurs="0" />
+							<xs:element name="uploadDate" type="xs:dateTime" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="ModelScenario">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="scenarioID" msdata:AutoIncrement="true" type="xs:int" />
+							<xs:element name="stormID" type="xs:int" minOccurs="0" />
+							<xs:element name="description" type="xs:string" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="NodeHydraulics">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="nodeHydraulicsID" msdata:AutoIncrement="true" type="xs:int" />
+							<xs:element name="scenarioID" type="xs:int" minOccurs="0" />
+							<xs:element name="modelID" type="xs:int" minOccurs="0" />
+							<xs:element name="nodeName" type="xs:string" minOccurs="0" />
+							<xs:element name="maxElevation" type="xs:double" minOccurs="0" />
+							<xs:element name="timeOfMaxElev" type="xs:dateTime" minOccurs="0" />
+							<xs:element name="surcharge" type="xs:double" minOccurs="0" />
+							<xs:element name="freeboard" type="xs:double" minOccurs="0" />
+							<xs:element name="surchargeTime" type="xs:double" minOccurs="0" />
+							<xs:element name="floodedTime" type="xs:double" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+		</xs:complexType>
+		<xs:unique name="ModelCatalogKey1" msdata:PrimaryKey="true">
+			<xs:selector xpath=".//mstns:DSCHydraulics" />
+			<xs:field xpath="mstns:DSCHydraulicsID" />
+		</xs:unique>
+		<xs:unique name="ModelCatalogKey2" msdata:PrimaryKey="true">
+			<xs:selector xpath=".//mstns:StormCatalog" />
+			<xs:field xpath="mstns:stormID" />
+		</xs:unique>
+		<xs:unique name="ModelCatalogKey3" msdata:PrimaryKey="true">
+			<xs:selector xpath=".//mstns:LinkHydraulics" />
+			<xs:field xpath="mstns:linkHydraulicsID" />
+		</xs:unique>
+		<xs:unique name="ModelCatalogKey4" msdata:PrimaryKey="true">
+			<xs:selector xpath=".//mstns:ModelCatalog" />
+			<xs:field xpath="mstns:modelID" />
+		</xs:unique>
+		<xs:unique name="ModelCatalogKey5" msdata:PrimaryKey="true">
+			<xs:selector xpath=".//mstns:ModelScenario" />
+			<xs:field xpath="mstns:scenarioID" />
+		</xs:unique>
+		<xs:unique name="ModelCatalogKey6" msdata:PrimaryKey="true">
+			<xs:selector xpath=".//mstns:NodeHydraulics" />
+			<xs:field xpath="mstns:nodeHydraulicsID" />
+		</xs:unique>
+		<xs:keyref name="StormCatalogModelScenario" refer="ModelCatalogKey2" msdata:AcceptRejectRule="Cascade"
+			msdata:DeleteRule="Cascade" msdata:UpdateRule="Cascade">
+			<xs:selector xpath=".//mstns:ModelScenario" />
+			<xs:field xpath="mstns:stormID" />
+		</xs:keyref>
+		<xs:keyref name="ModelScenarioModelCatalog" refer="ModelCatalogKey5" msdata:AcceptRejectRule="Cascade"
+			msdata:DeleteRule="Cascade" msdata:UpdateRule="Cascade">
+			<xs:selector xpath=".//mstns:ModelCatalog" />
+			<xs:field xpath="mstns:scenarioID" />
+		</xs:keyref>
+		<xs:keyref name="ModelCatalogDSCHydraulics" refer="ModelCatalogKey4" msdata:AcceptRejectRule="Cascade"
+			msdata:DeleteRule="Cascade" msdata:UpdateRule="Cascade">
+			<xs:selector xpath=".//mstns:DSCHydraulics" />
+			<xs:field xpath="mstns:modelID" />
+		</xs:keyref>
+		<xs:keyref name="ModelCatalogNodeHydraulics" refer="ModelCatalogKey4" msdata:AcceptRejectRule="Cascade"
+			msdata:DeleteRule="Cascade" msdata:UpdateRule="Cascade">
+			<xs:selector xpath=".//mstns:NodeHydraulics" />
+			<xs:field xpath="mstns:modelID" />
+		</xs:keyref>
+		<xs:keyref name="ModelCatalogLinkHydraulics" refer="ModelCatalogKey4" msdata:AcceptRejectRule="Cascade"
+			msdata:DeleteRule="Cascade" msdata:UpdateRule="Cascade">
+			<xs:selector xpath=".//mstns:LinkHydraulics" />
+			<xs:field xpath="mstns:modelID" />
+		</xs:keyref>
+		<xs:keyref name="ModelScenarioDSCHydraulics" refer="ModelCatalogKey5" msdata:AcceptRejectRule="Cascade"
+			msdata:DeleteRule="Cascade" msdata:UpdateRule="Cascade">
+			<xs:selector xpath=".//mstns:DSCHydraulics" />
+			<xs:field xpath="mstns:scenarioID" />
+		</xs:keyref>
+		<xs:keyref name="ModelScenarioNodeHydraulics" refer="ModelCatalogKey5" msdata:AcceptRejectRule="Cascade"
+			msdata:DeleteRule="Cascade" msdata:UpdateRule="Cascade">
+			<xs:selector xpath=".//mstns:NodeHydraulics" />
+			<xs:field xpath="mstns:scenarioID" />
+		</xs:keyref>
+		<xs:keyref name="ModelScenarioLinkHydraulics" refer="ModelCatalogKey5" msdata:AcceptRejectRule="Cascade"
+			msdata:DeleteRule="Cascade" msdata:UpdateRule="Cascade">
+			<xs:selector xpath=".//mstns:LinkHydraulics" />
+			<xs:field xpath="mstns:scenarioID" />
+		</xs:keyref>
+	</xs:element>
+</xs:schema>

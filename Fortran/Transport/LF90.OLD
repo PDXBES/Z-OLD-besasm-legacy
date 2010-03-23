@@ -1,0 +1,3 @@
+# LF90.FIG: user default options for Lahey Fortran 90.
+# Place your default options here. You may remove these comment lines.
+ -vax -winconsole -nap -ndal -nsav -o0 -tpp -nchk -ntrace -stchk -inln -nw -nwo

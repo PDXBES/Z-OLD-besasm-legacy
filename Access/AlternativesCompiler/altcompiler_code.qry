@@ -1,0 +1,54 @@
+1.0	Query: ~sq_fbasinlist  Type: Select  Created: 8/27/2008 4:26:04 PM
+1.0.1	SQL Statement: SELECT DISTINCTROW * FROM modelresults; 
+
+1.1	Query: alt_list_compare  Type: Select  Created: 5/2/2008 2:35:42 PM
+1.1.1	SQL Statement: SELECT ALTScorrected_20080501.ID, ALTScorrected_20080501.Path, ALTSLIST_working.Path, ALTScorrected_20080501.Database, ALTSLIST_working.Database, ALTScorrected_20080501.NewUF, ALTSLIST_working.USEFLAG, ALTScorrected_20080501.ExistUF FROM ALTScorrected_20080501 INNER JOIN ALTSLIST_working ON (ALTScorrected_20080501.Path=ALTSLIST_working.Path) AND (ALTScorrected_20080501.Database=ALTSLIST_working.Database); 
+
+1.2	Query: alt_list_update  Type: Update  Created: 5/2/2008 2:55:38 PM
+1.2.1	SQL Statement: UPDATE ALTScorrected_20080501 INNER JOIN ALTSLIST_working_old ON ALTScorrected_20080501.ID = ALTSLIST_working_old.ID SET ALTSLIST_working_old.USEFLAG = ALTScorrected_20080501!NewUF; 
+
+1.3	Query: AVN_LIST_TEMP  Type: Select  Created: 10/10/2008 9:00:45 AM
+1.3.1	SQL Statement: SELECT * FROM modelresults WHERE (((modelresults.USEFLAG)<>-99)) OR (((modelresults.USEFLAG)<>-88)) ORDER BY modelresults.USEFLAG; 
+
+1.4	Query: compareAltPackages  Type: Select  Created: 5/1/2008 2:15:15 PM
+1.4.1	SQL Statement: SELECT ALTSLIST20081204.ID, ALTSLIST_working.Path, ALTSLIST_working.Database, ALTSLIST_working.BASINCODE AS ExistBasin, ALTSLIST20081204.BASINCODE AS NewBasin, ALTSLIST_working.USEFLAG AS ExistUF, ALTSLIST20081204.USEFLAG AS NewUF FROM ALTSLIST_working INNER JOIN ALTSLIST20081204 ON (ALTSLIST_working.Database=ALTSLIST20081204.Database) AND (ALTSLIST_working.Path=ALTSLIST20081204.Path); 
+
+1.5	Query: compareDSC  Type: Select  Created: 5/2/2008 4:34:38 PM
+1.5.1	SQL Statement: SELECT DSCLIST20081209.ID, DSCLIST20081209.Path, DSCLIST20081209.Database, DSCLIST20081209.BASINCODE, DSCLIST20081209.USEFLAG, DSCLIST20081209.STORM, modelresults.USEFLAG AS OLD_UF, modelresults.STORM AS OLD_STORM FROM DSCLIST20081209 INNER JOIN modelresults ON (DSCLIST20081209.Path = modelresults.Path) AND (DSCLIST20081209.Database = modelresults.Database); 
+
+1.6	Query: DUP_DSCs  Type: Select  Created: 9/10/2008 3:09:24 PM
+1.6.1	SQL Statement: SELECT modelresults.BASINCODE, modelresults.USEFLAG, modelresults.STORM, Count(modelresults.ID) AS CountOfID FROM modelresults GROUP BY modelresults.BASINCODE, modelresults.USEFLAG, modelresults.STORM HAVING (((modelresults.USEFLAG)>0) AND ((modelresults.STORM) Is Not Null) AND ((Count(modelresults.ID))>1)); 
+
+1.7	Query: DUPDSC_DETAIL  Type: Select  Created: 9/10/2008 3:15:32 PM
+1.7.1	SQL Statement: SELECT modelresults.ID, modelresults.Path, modelresults.Database, modelresults.Description, modelresults.BASINCODE, modelresults.USEFLAG, modelresults.TABLENAME, modelresults.DATEAPPEND, modelresults.STORM, modelresults.RawPath FROM DUP_DSCs INNER JOIN modelresults ON (DUP_DSCs.STORM = modelresults.STORM) AND (DUP_DSCs.USEFLAG = modelresults.USEFLAG) AND (DUP_DSCs.BASINCODE = modelresults.BASINCODE); 
+
+1.8	Query: link_tabs  Type: Select  Created: 3/21/2008 4:34:42 PM
+1.8.1	SQL Statement: SELECT fGetAltModel([path]) AS linkspath FROM ALTSLIST_working WHERE (((ALTSLIST_working.USEFLAG)>0)) GROUP BY fGetAltModel([path]); 
+
+1.9	Query: NEWDSC  Type: Select  Created: 12/9/2008 3:38:56 PM
+1.9.1	SQL Statement: SELECT DSCLIST20081209.ID, DSCLIST20081209.Path, DSCLIST20081209.Database, DSCLIST20081209.BASINCODE, DSCLIST20081209.USEFLAG, DSCLIST20081209.STORM, DSCLIST20081209.RawPath FROM DSCLIST20081209 LEFT JOIN modelresults ON (DSCLIST20081209.Path = modelresults.Path) AND (DSCLIST20081209.Database = modelresults.Database) WHERE (((modelresults.ID) Is Null)); 
+
+1.10	Query: NEWMODELS  Type: Select  Created: 12/4/2008 4:13:58 PM
+1.10.1	SQL Statement: SELECT ALTSLIST20081204.ID, ALTSLIST20081204.Path, ALTSLIST20081204.Database, ALTSLIST20081204.BASINCODE, ALTSLIST20081204.USEFLAG, ALTSLIST20081204.TABLENAME, ALTSLIST20081204.RawPath FROM ALTSLIST_working RIGHT JOIN ALTSLIST20081204 ON (ALTSLIST_working.Path = ALTSLIST20081204.Path) AND (ALTSLIST_working.Database = ALTSLIST20081204.Database) WHERE (((ALTSLIST_working.ID) Is Null)); 
+
+1.11	Query: OLDDSC_NOTFOUND  Type: Select  Created: 12/9/2008 3:40:45 PM
+1.11.1	SQL Statement: SELECT modelresults.ID, modelresults.Path, modelresults.Database, modelresults.BASINCODE, modelresults.USEFLAG, modelresults.STORM, modelresults.RawPath FROM DSCLIST20081209 RIGHT JOIN modelresults ON (DSCLIST20081209.Path = modelresults.Path) AND (DSCLIST20081209.Database = modelresults.Database) WHERE (((DSCLIST20081209.ID) Is Null)); 
+
+1.12	Query: OLDMODELS_NOTFOUND  Type: Select  Created: 12/4/2008 4:14:58 PM
+1.12.1	SQL Statement: SELECT ALTSLIST_working.ID, ALTSLIST_working.Path, ALTSLIST_working.Database, ALTSLIST_working.BASINCODE, ALTSLIST_working.USEFLAG, ALTSLIST_working.TABLENAME, ALTSLIST_working.RawPath FROM ALTSLIST_working LEFT JOIN ALTSLIST20081204 ON (ALTSLIST_working.Database = ALTSLIST20081204.Database) AND (ALTSLIST_working.Path = ALTSLIST20081204.Path) WHERE (((ALTSLIST20081204.ID) Is Null)); 
+
+1.13	Query: parse_altpackages  Type: Select  Created: 5/1/2008 2:01:56 PM
+1.13.1	SQL Statement: SELECT ALTSLIST20080501.ID, Mid$([rawpath],1,InStrRev([RawPath],"alternative_package")-1) AS nPath, "alternatives_package.mdb" AS nDatabase, Mid$([rawpath],InStr(InStr([rawpath],"alts")+5,[rawpath],'\')+1,3) AS nBasin, fGetUSEFLAG([rawpath]) AS nUseFlag, ALTSLIST20080501.RawPath FROM ALTSLIST20080501; 
+
+1.14	Query: Query1  Type: Select  Created: 5/5/2008 3:14:24 PM
+1.14.1	SQL Statement: SELECT ALTSLIST_working.Path, ALTSLIST_working.BASINCODE, ALTSLIST_working.USEFLAG, ALTSLIST_working.USEFLAG FROM ALTSLIST_working WHERE (((ALTSLIST_working.USEFLAG)=1)); 
+
+1.15	Query: Query2_QC_ic  Type: Select  Created: 8/28/2008 10:29:54 AM
+1.15.1	SQL Statement: SELECT ALTSLIST20080828.Path, ALTSLIST20080828.Database, ALTSLIST20080828.BASINCODE, ALTSLIST20080828.USEFLAG, ALTSLIST20080828.RawPath FROM ALTSLIST20080828 WHERE (((ALTSLIST20080828.BASINCODE)="TAB")); 
+
+1.16	Query: Query3_QC_dsc  Type: Select  Created: 8/28/2008 11:39:01 AM
+1.16.1	SQL Statement: SELECT DSCLIST20080828.Path, DSCLIST20080828.Database, DSCLIST20080828.BASINCODE, DSCLIST20080828.USEFLAG, DSCLIST20080828.STORM, DSCLIST20080828.RawPath FROM DSCLIST20080828 WHERE (((DSCLIST20080828.BASINCODE)="WSS")); 
+
+1.17	Query: update_altlist  Type: Update  Created: 5/1/2008 2:03:52 PM
+1.17.1	SQL Statement: UPDATE ALTSLIST20080501 INNER JOIN parse_altpackages ON ALTSLIST20080501.ID = parse_altpackages.ID SET ALTSLIST20080501.Path = parse_altpackages!nPath, ALTSLIST20080501.[Database] = parse_altpackages!nDatabase, ALTSLIST20080501.BASINCODE = parse_altpackages!nBasin, ALTSLIST20080501.USEFLAG = parse_altpackages!nUseFlag; 
+
