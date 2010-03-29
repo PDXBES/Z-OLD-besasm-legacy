@@ -22,10 +22,10 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
         /// </summary>
         public class ReportInfo
         {
-            private string reportName;
+            private string reportName;            
             public ReportInfo(string reportName)
             {
-                this.reportName = reportName; // this.GetType().DeclaringType.Name;
+                this.reportName = reportName; // this.GetType().DeclaringType.Name;                
             }
             public string ReportName
             {
