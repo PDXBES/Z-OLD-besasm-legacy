@@ -8,7 +8,7 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor
 {
     /// <summary>
     /// Extracts results from a version 11.2-11.6 (Retail 9.0-10.6, Engine 8.87-10.60)
-    /// XP-SWMM output file. Will extract Table E09, Table E10, and Table E20. Output
+    /// XP-SWMM output file. Will extract Table E09, Table E10, Table E18, Table E19 and Table E20. Output
     /// can be obtained through the GetTableXX() functions, which return strongly-typed 
     /// DataSets included in this assembly, or by calling WriteToAccessDatabase() which
     /// places the output tables in the provided database.
@@ -21,6 +21,8 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor
         private TableE01DataSet.TableE01DataTable tableE01;
         private TableE09DataSet.TableE09DataTable tableE09;
         private TableE10DataSet.TableE10DataTable tableE10;
+        private TableE18DataSet.TableE18DataTable tableE18;
+        private TableE19DataSet.TableE19DataTable tableE19;
         private TableE20DataSet.TableE20DataTable tableE20;
                 
         private DateTime beginDateTime;
@@ -41,11 +43,15 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor
             tableE01 = new TableE01DataSet.TableE01DataTable();
             tableE09 = new TableE09DataSet.TableE09DataTable();
             tableE10 = new TableE10DataSet.TableE10DataTable();
+            tableE18 = new TableE18DataSet.TableE18DataTable();
+            tableE19 = new TableE19DataSet.TableE19DataTable();
             tableE20 = new TableE20DataSet.TableE20DataTable();
 
             ExtractTableE01();
             ExtractTableE09();
             ExtractTableE10();
+            ExtractTableE18();
+            ExtractTableE19();
             ExtractTableE20();
         }
 
@@ -321,6 +327,93 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor
 
             return tableE10.Count;
         }
+
+        private int ExtractTableE18()
+        {
+            string currentLine = "";
+            string[] tokens;
+            string nodeName;
+            double storageVolumeCuFt;
+
+            do
+            {
+                currentLine = outputReader.ReadLine();
+                if (outputReader.EndOfStream)
+                {
+                    throw new Exception("Table E18 not found within " + this.outputFile);
+                }
+
+            } while (!currentLine.Contains("Table E18  - Junction Continuity Error"));
+
+            try
+            {
+                for ( int i = 0; i <18;i++) //not sure what the value here should be - ask John B.
+                {
+                    currentLine = outputReader.ReadLine();
+                }
+                
+                while (currentLine != "")
+                {
+                    tokens = currentLine.Split(new Char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                    nodeName = tokens[0];
+                    storageVolumeCuFt= Convert.ToDouble(tokens[4]);
+
+                    tableE18.AddTableE18Row(nodeName,storageVolumeCuFt);
+                    currentLine = outputReader.ReadLine();
+                }
+            }
+        
+            catch (Exception)
+                {
+                    throw new Exception("Error parsing Table E18");
+                }
+
+            return tableE18.Count;
+        }
+
+        private int ExtractTableE19()
+        {
+            string currentLine = "";
+            string[] tokens;
+            string nodeName;
+            double infiltrationVolumeCuFt;
+
+            do
+            {
+                currentLine = outputReader.ReadLine();
+                if (outputReader.EndOfStream)
+                {
+                    throw new Exception("Table E19 not found within " + this.outputFile);
+                }
+
+            } while (!currentLine.Contains("Table E19 - Junction Inflow & Outflow Listing"));
+
+            try
+            {
+                for (int i = 0; i < 18; i++) //not sure what the value here should be - ask John B.
+                {
+                    currentLine = outputReader.ReadLine();
+                }
+
+                while (currentLine != "")
+                {
+                    tokens = currentLine.Split(new Char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                    nodeName = tokens[0];
+                    infiltrationVolumeCuFt = Convert.ToDouble(tokens[7]);
+
+                    tableE19.AddTableE19Row(nodeName, infiltrationVolumeCuFt);
+                    currentLine = outputReader.ReadLine();
+                }
+            }
+
+            catch (Exception)
+            {
+                throw new Exception("Error parsing Table E19");
+            }
+
+            return tableE19.Count;
+        }
+
         private int ExtractTableE20()
         {
             string currentLine = "";
@@ -394,6 +487,7 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor
         {
             return this.tableE09;
         }
+
         /// <summary>
         /// Gets a strongly typed DataSet containing the contents of
         /// Table E10.
@@ -404,6 +498,29 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor
         {
             return this.tableE10;
         }
+
+        /// <summary>
+        /// Gets a strongly typed DataSet containing the contents of
+        /// Table E18.
+        /// </summary>
+        /// <returns>A strongly typed TableE18DataSet.TableE18DataTable
+        /// containing the contents of Table E18</returns>
+        public TableE18DataSet.TableE18DataTable GetTableE18()
+        {
+            return this.tableE18;
+        }
+
+        /// <summary>
+        /// Gets a strongly typed DataSet containing the contents of
+        /// Table E19.
+        /// </summary>
+        /// <returns>A strongly typed TableE19DataSet.TableE19DataTable
+        /// containing the contents of Table E19</returns>
+        public TableE19DataSet.TableE19DataTable GetTableE19()
+        {
+            return this.tableE19;
+        }
+
         /// <summary>
         /// Gets a strongly typed DataSet containing the contents of
         /// Table E20.
@@ -435,6 +552,7 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor
             OdbcCommand command = new OdbcCommand();
             command.Connection = connection;            
             connection.Open();
+
             #region Create and Write Table E01
             try
             {
@@ -505,6 +623,54 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor
 
             tableE10Adapter.Connection = connection;
             tableE10Adapter.Update(tableE10);
+            #endregion
+
+            #region Create and Write Table E18
+            try
+            {
+                command.CommandText = "Drop Table TableE18";
+                command.ExecuteNonQuery();
+            }
+            catch (OdbcException ex)
+            {
+                if (!ex.Message.Contains("does not exist."))
+                {
+                    throw;
+                }
+            }
+
+            command.CommandText = "Create Table TableE18 (NodeName String, SurchargeTime Double, FloodedTime Double, FloodVol Double, MaxStoredVol Double, PondingVol Double)";
+            command.ExecuteNonQuery();
+
+            TableE18DataSetTableAdapters.TableE18TableAdapter tableE18Adapter;
+            tableE18Adapter = new TableE18DataSetTableAdapters.TableE18TableAdapter();
+
+            tableE18Adapter.Connection = connection;
+            tableE18Adapter.Update(tableE18);
+            #endregion
+
+            #region Create and Write Table E19
+            try
+            {
+                command.CommandText = "Drop Table TableE19";
+                command.ExecuteNonQuery();
+            }
+            catch (OdbcException ex)
+            {
+                if (!ex.Message.Contains("does not exist."))
+                {
+                    throw;
+                }
+            }
+
+            command.CommandText = "Create Table TableE19 (NodeName String, SurchargeTime Double, FloodedTime Double, FloodVol Double, MaxStoredVol Double, PondingVol Double)";
+            command.ExecuteNonQuery();
+
+            TableE19DataSetTableAdapters.TableE19TableAdapter tableE19Adapter;
+            tableE19Adapter = new TableE19DataSetTableAdapters.TableE19TableAdapter();
+
+            tableE19Adapter.Connection = connection;
+            tableE19Adapter.Update(tableE19);
             #endregion
 
             #region Create and Write Table E20
