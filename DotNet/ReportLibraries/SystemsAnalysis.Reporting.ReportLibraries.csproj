@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.50727</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{5B1CB42C-93D9-4C90-902B-AF403D8ECED8}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -81,6 +81,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AlternativeReport.cs" />
+    <Compile Include="FecQaReport.cs" />
     <Compile Include="FecReport.cs" />
     <Compile Include="ModelReport.cs" />
     <Compile Include="ModelResultsReport.cs" />
@@ -90,6 +91,10 @@
     <Compile Include="UicReport.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AccessUtils\DatabaseManagement\SystemsAnalysis.Utils.AccessUtils.DatabaseManagement.csproj">
+      <Project>{1DCF1AAE-A211-4A29-AE5C-13AAAD890B08}</Project>
+      <Name>SystemsAnalysis.Utils.AccessUtils.DatabaseManagement</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Alternatives\SystemsAnalysis.Modeling.Alternatives.csproj">
       <Project>{D5E4B31B-D773-4877-9008-80F74475DE93}</Project>
       <Name>SystemsAnalysis.Modeling.Alternatives</Name>
