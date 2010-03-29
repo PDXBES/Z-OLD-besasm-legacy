@@ -1,0 +1,45 @@
+1.0	Query: ALT_DUPS  Type: Select  Created: 2/25/2008 9:17:18 AM
+1.0.1	SQL Statement: SELECT ALTSLIST_working.BASINCODE, ALTSLIST_working.USEFLAG, Count(ALTSLIST_working.ID) AS CountOfID FROM ALTSLIST_working GROUP BY ALTSLIST_working.BASINCODE, ALTSLIST_working.USEFLAG HAVING (((ALTSLIST_working.USEFLAG)>0) AND ((Count(ALTSLIST_working.ID))>1)); 
+
+1.1	Query: basincount_25  Type: Select  Created: 12/12/2007 11:05:40 AM
+1.1.1	SQL Statement: SELECT basinlist.BASINCODE, Count(BASINS_25.USEFLAG) AS [COUNT] FROM basinlist LEFT JOIN BASINS_25 ON basinlist.BASINCODE = BASINS_25.BASINCODE GROUP BY basinlist.BASINCODE; 
+
+1.2	Query: basincount_4S6  Type: Select  Created: 12/12/2007 11:13:02 AM
+1.2.1	SQL Statement: SELECT basinlist.BASINCODE, Count(BASINS_4S6.USEFLAG) AS [COUNT] FROM basinlist LEFT JOIN BASINS_4S6 ON basinlist.BASINCODE = BASINS_4S6.BASINCODE GROUP BY basinlist.BASINCODE; 
+
+1.3	Query: basinlist  Type: Select  Created: 12/12/2007 10:56:37 AM
+1.3.1	SQL Statement: SELECT modelresults.BASINCODE FROM modelresults WHERE (((modelresults.USEFLAG)<>-99)) GROUP BY modelresults.BASINCODE HAVING (((modelresults.BASINCODE) Is Not Null)); 
+
+1.4	Query: BASINS_25  Type: Select  Created: 12/12/2007 10:51:18 AM
+1.4.1	SQL Statement: SELECT modelresults.Path, modelresults.Database, modelresults.Description, modelresults.BASINCODE, modelresults.USEFLAG, modelresults.TABLENAME, modelresults.DATEAPPEND, modelresults.STORM FROM modelresults WHERE (((modelresults.USEFLAG)>0) AND ((modelresults.STORM)="25")) ORDER BY modelresults.BASINCODE, modelresults.USEFLAG; 
+
+1.5	Query: BASINS_4S6  Type: Select  Created: 12/12/2007 10:51:38 AM
+1.5.1	SQL Statement: SELECT modelresults.Path, modelresults.Database, modelresults.Description, modelresults.BASINCODE, modelresults.USEFLAG, modelresults.TABLENAME, modelresults.DATEAPPEND, modelresults.STORM FROM modelresults WHERE (((modelresults.USEFLAG)>0) AND ((modelresults.STORM)="4S6")) ORDER BY modelresults.BASINCODE, modelresults.USEFLAG; 
+
+1.6	Query: BSBR_TEST  Type: Select  Created: 12/12/2007 9:53:19 AM
+1.6.1	SQL Statement: SELECT DSCHGLs_TEST_1.DSCID, DSCHGLs_TEST_1.ParcelID, DSCHGLs_TEST_1.DivideID, DSCHGLs_TEST_1.USJelev, DSCHGLs_TEST_1.DSJelev, DSCHGLs_TEST_1.Frac2SwrBeg, DSCHGLs_TEST_1.CalculatedHGL, DSCHGLs_TEST_1.CalculatedDHGL FROM DSCHGLs_TEST_1 INNER JOIN mst_DSC_ac ON DSCHGLs_TEST_1.DSCID = mst_DSC_ac.DSCID WHERE (((DSCHGLs_TEST_1.CalculatedDHGL)<=8) AND ((mst_DSC_ac.SanSwrCrown)>[mst_DSC_AC]![floodrefelev]-8)); 
+
+1.7	Query: Missing_links  Type: Select  Created: 2/28/2008 7:47:49 AM
+1.7.1	SQL Statement: SELECT PIP_COMP.AltLinkID, PIP_COMP.MdlLinkID, PIP_COMP.USNode, PIP_COMP.DSNode, PIP_COMP.BASIN, PIP_COMP.USEFLAG FROM PIP_COMP LEFT JOIN mst_links_ac ON (PIP_COMP.DSNode = mst_links_ac.DSNode) AND (PIP_COMP.USNode = mst_links_ac.USNode) WHERE (((mst_links_ac.MAPINFO_ID) Is Null)) GROUP BY PIP_COMP.AltLinkID, PIP_COMP.MdlLinkID, PIP_COMP.USNode, PIP_COMP.DSNode, PIP_COMP.BASIN, PIP_COMP.USEFLAG; 
+
+1.8	Query: parse_altpackages  Type: Select  Created: 2/19/2008 4:39:57 PM
+1.8.1	SQL Statement: SELECT ALTSLIST20080219.ID, Mid$([rawpath],2,InStrRev([RawPath],"alternative_package")-2) AS nPath, "alternatives_package.mdb" AS nDatabase, Mid$([rawpath],InStr(InStr([rawpath],"alts")+5,[rawpath],'\')+1,3) AS nBasin, fGetUSEFLAG([rawpath]) AS nUseFlag, ALTSLIST20080219.RawPath FROM ALTSLIST20080219; 
+
+1.9	Query: qry_injaninventorynotinDecember  Type: Select  Created: 1/14/2008 5:10:22 PM
+1.9.1	SQL Statement: SELECT modelresults.Path, modelresults.Database, modelresults.BASINCODE, modelresults.USEFLAG FROM modellist_20071220 RIGHT JOIN modelresults ON (modellist_20071220.Database = modelresults.Database) AND (modellist_20071220.Path = modelresults.Path) WHERE (((modellist_20071220.Path) Is Null)); 
+
+1.10	Query: qry_inprevinventoryconfirmed  Type: Select  Created: 1/14/2008 5:03:59 PM
+1.10.1	SQL Statement: SELECT modellist_20071220.Path, modellist_20071220.Database, modellist_20071220.BASINCODE, modellist_20071220.USEFLAG FROM modellist_20071220 LEFT JOIN modelresults ON (modellist_20071220.Path=modelresults.Path) AND (modellist_20071220.Database=modelresults.Database) WHERE (((modellist_20071220.USEFLAG)<>0) AND ((modelresults.Path) Is Null)); 
+
+1.11	Query: testappend  Type: Append  Created: 1/10/2008 2:32:41 PM
+1.11.1	SQL Statement: INSERT INTO HGL_COMP ( DSCID, ParcelID, DivideID, USJelev, DSJelev, Frac2SwrBeg, CalculatedHGL, CalculatedDHGL, MAPINFO_ID, STORM, BASIN ) SELECT HGL_ALD_25.DSCID, HGL_ALD_25.ParcelID, HGL_ALD_25.DivideID, HGL_ALD_25.USJelev, HGL_ALD_25.DSJelev, HGL_ALD_25.Frac2SwrBeg, HGL_ALD_25.CalculatedHGL, HGL_ALD_25.CalculatedDHGL, HGL_ALD_25.MAPINFO_ID, "25" AS STORM, "ALD" AS BASIN FROM HGL_ALD_25; 
+
+1.12	Query: update_altlist  Type: Update  Created: 2/19/2008 4:42:58 PM
+1.12.1	SQL Statement: UPDATE ALTSLIST20080219 INNER JOIN parse_altpackages ON ALTSLIST20080219.ID=parse_altpackages.ID SET ALTSLIST20080219.Path = parse_altpackages!nPath, ALTSLIST20080219.[Database] = parse_altpackages!nDatabase, ALTSLIST20080219.BASINCODE = parse_altpackages!nBasin, ALTSLIST20080219.USEFLAG = parse_altpackages!nUseFlag; 
+
+1.13	Query: update_list_20080112  Type: Update  Created: 1/11/2008 2:31:26 PM
+1.13.1	SQL Statement: UPDATE modelresults INNER JOIN modellist_20071220 ON (modelresults.Path = modellist_20071220.Path) AND (modelresults.Database = modellist_20071220.Database) SET modelresults.USEFLAG = modellist_20071220!useflag, modelresults.STORM = modellist_20071220!STORM; 
+
+1.14	Query: workingmodels  Type: Select  Created: 12/12/2007 9:29:50 AM
+1.14.1	SQL Statement: SELECT modelresults.Path, modelresults.Database, modelresults.Description, modelresults.BASINCODE, modelresults.USEFLAG, modelresults.TABLENAME, modelresults.DATEAPPEND, modelresults.STORM FROM modelresults WHERE (((modelresults.USEFLAG)=1)); 
+
