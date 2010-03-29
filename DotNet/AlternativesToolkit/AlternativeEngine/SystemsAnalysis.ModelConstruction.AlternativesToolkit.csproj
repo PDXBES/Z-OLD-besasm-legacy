@@ -47,7 +47,7 @@
     <ProductName>Alternatives Toolkit</ProductName>
     <PublisherName>BES Systems Analysis</PublisherName>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>41</ApplicationRevision>
+    <ApplicationRevision>43</ApplicationRevision>
     <ApplicationVersion>1.2.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -336,9 +336,9 @@
     <Content Include="AlternativeProcessor\Aggregator.MBX">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="AlternativeProcessor\UpdateFocusAreas.MBX">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <Content Include="AlternativeProcessor\UpdateFocusAreas.MBX">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="ConveyanceBuilder.xsc">
       <DependentUpon>ConveyanceBuilder.xsd</DependentUpon>
     </None>
