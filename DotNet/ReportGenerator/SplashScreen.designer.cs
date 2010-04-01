@@ -30,7 +30,6 @@ namespace SystemsAnalysis.Reporting
         {
             this.components = new System.ComponentModel.Container();
             Infragistics.Win.Appearance appearance1 = new Infragistics.Win.Appearance();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SplashScreen));
             this.ultraLabel1 = new Infragistics.Win.Misc.UltraLabel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
@@ -59,7 +58,7 @@ namespace SystemsAnalysis.Reporting
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
+            this.BackgroundImage = global::SystemsAnalysis.Reporting.Properties.Resources.SplashGReMLIn;
             this.ClientSize = new System.Drawing.Size(362, 285);
             this.ControlBox = false;
             this.Controls.Add(this.ultraLabel1);
