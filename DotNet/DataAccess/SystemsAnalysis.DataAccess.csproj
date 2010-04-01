@@ -1,7 +1,7 @@
 ﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
   <PropertyGroup>
     <ProjectType>Local</ProjectType>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{D81499E0-ED3E-4C85-9F8E-72C263AA24C4}</ProjectGuid>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -182,6 +182,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SAMasterDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="StormwaterControls.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StormwaterControls.xsd</DependentUpon>
+    </Compile>
     <None Include="AlternativeDataSet.xsc">
       <DependentUpon>AlternativeDataSet.xsd</DependentUpon>
     </None>
@@ -274,6 +279,17 @@
     </None>
     <None Include="SAMasterDataSet.xss">
       <DependentUpon>SAMasterDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="StormwaterControls.xsc">
+      <DependentUpon>StormwaterControls.xsd</DependentUpon>
+    </None>
+    <None Include="StormwaterControls.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>StormwaterControls.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="StormwaterControls.xss">
+      <DependentUpon>StormwaterControls.xsd</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
