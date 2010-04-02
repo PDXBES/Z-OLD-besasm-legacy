@@ -29,6 +29,7 @@ namespace SystemsAnalysis.Reporting
     private UicReport _uicReport;
     private PumpStationReport _psReport;
     private AlternativeReport _alternativeReport;
+    private FecQaReport _fecQaReport;
 
     private DoWorkEventArgs doWorkEventArgs;
     private BackgroundWorker bw;
@@ -143,6 +144,9 @@ namespace SystemsAnalysis.Reporting
             case "UicReport":
               reports.Add(library, UicReport);
               break;
+            case "FecQaReport":
+              reports.Add(library, FecQaReport);
+              break;
             default:
               break;
             //return "Unknown Library";
@@ -154,9 +158,10 @@ namespace SystemsAnalysis.Reporting
         }
         xmlDoc.GetElementsByTagName("ReportGenerator")[0].Attributes["studyArea"].Value = studyArea;
 
+        replaceSubstitutionStrings();
         expandMultiTables();
         expandMultiRows();
-        parseEmbeddedFunctions();        
+        parseEmbeddedFunctions();
 
         xmlDoc.Save(reportOutput);
       }
@@ -166,7 +171,39 @@ namespace SystemsAnalysis.Reporting
       }
       return reportOutput;
     }
-    
+
+    private void replaceSubstitutionStrings()
+    {
+      System.Xml.XmlNodeList xmlNodeList;
+      xmlNodeList = xmlDoc.GetElementsByTagName("Row");
+
+      foreach (XmlNode xmlNode in xmlNodeList)
+      {
+        try
+        {
+          if (xmlNode.Attributes["isMultiRow"] == null || xmlNode.Attributes["isMultiRow"].Value != "true")
+          {
+            continue;
+          }
+
+          XmlNode[] multiRowResultsNodes = expandMultiRow(xmlNode);
+
+          foreach (XmlNode newNode in multiRowResultsNodes)
+          {
+            xmlNode.ParentNode.InsertBefore(newNode, xmlNode);
+          }
+          xmlNode.ParentNode.RemoveChild(xmlNode);
+          expandMultiRows();
+          break;
+        }
+        catch (Exception ex)
+        {
+          this.OnStatusChanged(new StatusChangedArgs("Error expanding MultiRow!"));
+          this.OnStatusChanged(new StatusChangedArgs(ex.Message));
+        }
+      }
+    }
+
     public Dictionary<string, ReportBase.ReportInfo> ReportInfos
     {
       get
@@ -295,6 +332,25 @@ namespace SystemsAnalysis.Reporting
       this._alternativeReport.StatusChanged += new OnStatusChangedEventHandler(this.OnStatusChanged);
     }
 
+    private FecQaReport FecQaReport
+    {
+      [System.Diagnostics.DebuggerStepThroughAttribute]
+      get
+      {
+        if (this._fecQaReport == null)
+        {
+          this.InitFecQaReport();
+        }
+        return this._fecQaReport;
+      }
+    }
+    private void InitFecQaReport()
+    {
+      this.OnStatusChanged(new StatusChangedArgs("Creating FEC QA Report."));
+      this._fecQaReport = new FecQaReport(CharLinks, CharNodes, CharDscs);
+      this._fecQaReport.StatusChanged += new OnStatusChangedEventHandler(this.OnStatusChanged);
+    }
+
     private Links CharLinks
     {
       [System.Diagnostics.DebuggerStepThroughAttribute]
@@ -412,6 +468,17 @@ namespace SystemsAnalysis.Reporting
             string parameterValue;
             parameterName = functionReader.GetAttribute("parameterName");
             parameterValue = functionReader.GetAttribute("parameterValue");
+            switch (parameterValue)
+            {
+              case "@studyArea":
+                parameterValue = this.studyArea;
+                break;
+              case "@reportPath":
+                parameterValue = Path.GetDirectoryName(this.reportOutput);
+                break;
+              default:
+                break;
+            }
             parameters.Add(parameterName, new ReportBase.Parameter(parameterName, parameterValue));
             break;
         }

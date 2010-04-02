@@ -1353,5 +1353,5 @@
         <Function functionName="DscArea" library="ModelReport" format ="N0" />
       </Cell>
     </Row>
-   </CharacterizationTable>
+   </CharacterizationTable>   
 </ReportGenerator>

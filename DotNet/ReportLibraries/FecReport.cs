@@ -10,6 +10,8 @@ using System.Collections.Specialized;
 using SystemsAnalysis.Utils.Events;
 using SystemsAnalysis.Types;
 using SystemsAnalysis.DataAccess;
+using SystemsAnalysis.Utils.AccessUtils;
+using System.IO;
 
 namespace SystemsAnalysis.Reporting.ReportLibraries
 {
@@ -18,7 +20,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
     public const double DESIGN_MANUAL_RDII_GPAD = 1000;
     public const double CFS_TO_GPD = 646272;
     public const double FT_TO_MI = 5280.0;
-    private Dictionary<int, FlowEstimationCatchment> fecs;
+    protected Dictionary<int, FlowEstimationCatchment> fecs;
     private Dictionary<int, Links> _fecLinks;
     private Dictionary<int, Dscs> _fecDscs;
     private Dictionary<int, Nodes> _fecNodes;
@@ -46,7 +48,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
       //fecs = new Dictionary<int, FlowEstimationCatchment>();
     }
 
-    private Dictionary<int, Links> FecLinks
+    protected Dictionary<int, Links> FecLinks
     {
       [System.Diagnostics.DebuggerStepThroughAttribute]
       get
@@ -145,7 +147,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
       }
       tw.Close();*/
     }
-    private Dictionary<int, Nodes> FecNodes
+    protected Dictionary<int, Nodes> FecNodes
     {
       [System.Diagnostics.DebuggerStepThroughAttribute]
       get
@@ -175,7 +177,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
       }
 
     }
-    private Dictionary<int, Dscs> FecDscs
+    protected Dictionary<int, Dscs> FecDscs
     {
       [System.Diagnostics.DebuggerStepThroughAttribute]
       get
@@ -710,6 +712,8 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
       }
       return fecArea;
     }
+
+    
 
 
   }

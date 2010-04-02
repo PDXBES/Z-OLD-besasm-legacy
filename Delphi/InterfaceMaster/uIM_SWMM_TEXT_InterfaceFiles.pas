@@ -299,6 +299,7 @@ type
 		function Size: Int64;
 		procedure NextLine;
 		procedure PreviousLine;
+    procedure FlushLine;
 	end;
 
 implementation
@@ -887,6 +888,11 @@ begin
   fTextStream.Free;
 	fStream := nil;
 	inherited;
+end;
+
+procedure T_SWMM_TEXT_InterfaceFileIO.FlushLine;
+begin
+  // Do nothing
 end;
 
 function T_SWMM_TEXT_InterfaceFileIO.IsBeginningOfData: Boolean;

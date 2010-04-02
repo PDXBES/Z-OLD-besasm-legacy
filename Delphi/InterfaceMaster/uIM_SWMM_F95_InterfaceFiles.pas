@@ -265,6 +265,14 @@ type
 	private
 		fStream: TStBufferedStream;
 		fInterfaceFile: Pointer;
+		fCurrentWriteRecordStream: TMemoryStream;
+		fCurrentWriteRecordSize: Integer;
+    fPosInRec: Integer;
+    fCurrentRecSize: Integer;
+    function IsEndOfRecord: Boolean;
+    function IsStartOfRecord: Boolean;
+    procedure CheckRecordSize;
+    function ReadRecordSize: Integer;
 	public
 	//-Object management----------------------------------------------------------
 		constructor Create(AInterfaceFile: IIM_InterfaceFile; AStream: TStBufferedStream);
@@ -294,6 +302,8 @@ type
 		function Size: Int64;
 		procedure NextLine;
 		procedure PreviousLine;
+  //-Format specific implementation---------------------------------------------
+    procedure FlushLine;
 	end;
 
 implementation
@@ -387,6 +397,7 @@ begin
 	fHeader.HeaderValue[IM_IFHDR_STARTDATE] := SourceHeader.HeaderValue[IM_IFHDR_STARTDATE];
 	fHeader.HeaderValue[IM_IFHDR_AREA] := SourceHeader.HeaderValue[IM_IFHDR_AREA];
 	fHeader.HeaderValue[IM_IFHDR_MULTIPLIER] := SourceHeader.HeaderValue[IM_IFHDR_MULTIPLIER];
+  fHeader.HeaderValue[IM_IFHDR_ISALPHA] := SourceHeader.HeaderValue[IM_IFHDR_ISALPHA];
 
 	// Assign Header IDs
 	if Assigned(AFilterPackage) then
@@ -441,6 +452,7 @@ begin
 				IO.WriteSingle(ExprEngine.Evaluate);
 			end;
 //			CodeSite.SendNote('Wrote flow data');
+      IO.FlushLine;
 
 			frmProgress.prgProgress.Percent := SourceDataIterator.PositionPercent;
 			Application.ProcessMessages;
@@ -467,6 +479,7 @@ begin
 			begin
 				IO.WriteSingle(SourceData.IndexedDataValue[i]);
 			end;
+      IO.FlushLine;
 			frmProgress.prgProgress.Percent := SourceDataIterator.PositionPercent;
 			Application.ProcessMessages;
 		end;
@@ -494,11 +507,16 @@ var
 begin
 	IO := IIM_InterfaceFile(fInterfaceFile).GetIOServices;
 	IO.WriteString(fTitles[1], IM_SWMMF95_TITLE_LENGTH);
+  IO.FlushLine;
 	IO.WriteString(fTitles[2], IM_SWMMF95_TITLE_LENGTH);
+  IO.FlushLine;
 	IO.WriteInteger(Y2KJulDateOfDateTime(fStartDate));
 	IO.WriteSingle(SecondsOfDayOfDateTime(fStartDate));
+  IO.FlushLine;
 	IO.WriteString(fTitles[3], IM_SWMMF95_TITLE_LENGTH);
+  IO.FlushLine;
 	IO.WriteString(fTitles[4], IM_SWMMF95_TITLE_LENGTH);
+  IO.FlushLine;
 	IO.WriteString(fSourceBlock, IM_SWMMF95_SOURCEBLOCK_LENGTH);
 	IO.WriteInteger(Length(fFlowIDs));
 	IO.WriteInteger(fNumPollutants);
@@ -506,9 +524,13 @@ begin
 		IO.WriteSingle(-1.0)
 	else
 		IO.WriteSingle(-Abs(fArea));
+  IO.WriteInteger(IfThen(fUsesAlphaNumericIDs,1,0));
+  IO.FlushLine;
 	for i := 0 to Length(fFlowIDs)-1 do
 		IO.WriteString(fFlowIDs[i], IM_SWMMF95_ALPHAID_LENGTH);
+  IO.FlushLine;
 	IO.WriteSingle(fFlowMultiplier);
+  IO.FlushLine;
 end;
 
 procedure T_SWMM_F95_StandardInterfaceFileHeader.SetFlowMultiplier(
@@ -608,9 +630,9 @@ begin
 	SetLength(fFlowIDs, fNumFlows);
 	fNumPollutants := IO.ReadInteger;
 	fArea := IO.ReadSingle;
-	fUsesAlphaNumericIDs := IO.ReadSingle <> 0;
+	fUsesAlphaNumericIDs := IO.ReadInteger <> 0;
 	for i := 0 to fNumFlows-1 do
-		fFlowIDs[i] := IO.ReadString();
+		fFlowIDs[i] := IO.ReadString(IM_SWMMF95_ALPHAID_LENGTH);
 	fFlowMultiplier := IO.ReadSingle;
 end;
 
@@ -664,9 +686,7 @@ begin
 	else if AIndex = IM_IFHDR_NUMDATA then
 		fNumFlows := Value
 	else if AIndex = IM_IFHDR_ISALPHA then
-	begin
-		// XP files always use alphanum IDs, so don't do anything
-	end
+    fUsesAlphaNumericIDs := Value
 	else if AIndex = IM_IFHDR_AREA then
 		fArea := Value
 	else if AIndex = IM_IFHDR_MULTIPLIER then
@@ -694,7 +714,7 @@ begin
 	else if AIndex = IM_IFHDR_NUMDATA then
 		Result := fNumFlows
 	else if AIndex = IM_IFHDR_ISALPHA then
-		Result := True
+		Result := fUsesAlphaNumericIDs
 	else if AIndex = IM_IFHDR_AREA then
 		Result := fArea
 	else if AIndex = IM_IFHDR_MULTIPLIER then
@@ -741,12 +761,30 @@ var
 	Buf: Byte;
 begin
 	fStream.Read(Buf, SizeOf(Byte));
+  Inc(fPosInRec, SizeOf(Byte));
+  CheckRecordSize;
 	Result := Buf;
 end;
 
 procedure T_SWMM_F95_InterfaceFileIO.WriteInteger(Value: Integer);
 begin
-	fStream.Write(Value, SizeOf(Value));
+	fCurrentWriteRecordStream.Write(Value, SizeOf(Value));
+	Inc(fCurrentWriteRecordSize, SizeOf(Value));
+end;
+
+procedure T_SWMM_F95_InterfaceFileIO.CheckRecordSize;
+begin
+	if IsEndOfRecord then
+	begin
+		fCurrentRecSize := ReadRecordSize; // Read end-of-record delimiter (previous record's size)
+		if not IsEOF then
+			fCurrentRecSize := ReadRecordSize // Read current record's size
+		else
+		begin
+			fCurrentRecSize := 0;
+		end;
+		fPosInRec := 0;
+	end;
 end;
 
 constructor T_SWMM_F95_InterfaceFileIO.Create(AInterfaceFile: IIM_InterfaceFile;
@@ -754,11 +792,14 @@ constructor T_SWMM_F95_InterfaceFileIO.Create(AInterfaceFile: IIM_InterfaceFile;
 begin
 	fInterfaceFile := Pointer(AInterfaceFile);
 	fStream := AStream;
+  fCurrentWriteRecordStream := TMemoryStream.Create;
+  fCurrentWriteRecordSize := 0;
 end;
 
 procedure T_SWMM_F95_InterfaceFileIO.WriteByte(Value: Byte);
 begin
-	fStream.Write(Value, SizeOf(Value));
+	fCurrentWriteRecordStream.Write(Value, SizeOf(Value));
+	Inc(fCurrentWriteRecordSize, SizeOf(Value));
 end;
 
 function T_SWMM_F95_InterfaceFileIO.ReadDouble: Double;
@@ -766,12 +807,15 @@ var
 	Buf: Double;
 begin
 	fStream.Read(Buf, SizeOf(Double));
+  Inc(fPosInRec, SizeOf(Double));
+  CheckRecordSize;
 	Result := Buf;
 end;
 
 procedure T_SWMM_F95_InterfaceFileIO.WriteDouble(Value: Double);
 begin
-	fStream.Write(Value, SizeOf(Value));
+	fCurrentWriteRecordStream.Write(Value, SizeOf(Value));
+	Inc(fCurrentWriteRecordSize, SizeOf(Value));
 end;
 
 procedure T_SWMM_F95_InterfaceFileIO.MoveToBeginning;
@@ -784,6 +828,8 @@ var
 	Buf: Extended;
 begin
 	fStream.Read(Buf, SizeOf(Extended));
+  Inc(fPosInRec, SizeOf(Extended));
+  CheckRecordSize;
 	Result := Buf;
 end;
 
@@ -800,7 +846,13 @@ end;
 
 procedure T_SWMM_F95_InterfaceFileIO.WriteExtended(Value: Extended);
 begin
-	fStream.Write(Value, SizeOf(Value));
+	fCurrentWriteRecordStream.Write(Value, SizeOf(Value));
+	Inc(fCurrentWriteRecordSize, SizeOf(Value));
+end;
+
+function T_SWMM_F95_InterfaceFileIO.IsEndOfRecord: Boolean;
+begin
+	Result := fPosInRec = fCurrentRecSize;
 end;
 
 function T_SWMM_F95_InterfaceFileIO.IsEOF: Boolean;
@@ -808,11 +860,18 @@ begin
 	Result := fStream.Position >= fStream.FastSize-1;
 end;
 
+function T_SWMM_F95_InterfaceFileIO.IsStartOfRecord: Boolean;
+begin
+	Result := fPosInRec = 0;
+end;
+
 function T_SWMM_F95_InterfaceFileIO.ReadSingle: Single;
 var
 	Buf: Single;
 begin
 	fStream.Read(Buf, SizeOf(Single));
+  Inc(fPosInRec, SizeOf(Byte));
+  CheckRecordSize;
 	Result := Buf;
 end;
 
@@ -827,17 +886,21 @@ var
 begin
 	SetLength(Buf, ALength);
 	fStream.Read(Buf[1], ALength);
+  Inc(fPosInRec, ALength);
+  CheckRecordSize;
 	Result := Buf;
 end;
 
 procedure T_SWMM_F95_InterfaceFileIO.WriteSingle(Value: Single);
 begin
-	fStream.Write(Value, SizeOf(Value));
+	fCurrentWriteRecordStream.Write(Value, SizeOf(Value));
+	Inc(fCurrentWriteRecordSize, SizeOf(Value));
 end;
 
 procedure T_SWMM_F95_InterfaceFileIO.WriteString(Value: String);
 begin
-	fStream.Write(Value[1], Length(Value));
+	fCurrentWriteRecordStream.Write(Value[1], Length(Value));
+	Inc(fCurrentWriteRecordSize, Length(Value));
 end;
 
 procedure T_SWMM_F95_InterfaceFileIO.WriteString(Value: String;
@@ -851,14 +914,39 @@ var
 	Buf: Integer;
 begin
 	fStream.Read(Buf, SizeOf(Integer));
+  Inc(fPosInRec, SizeOf(Integer));
+  CheckRecordSize;
 	Result := Buf;
+end;
+
+function T_SWMM_F95_InterfaceFileIO.ReadRecordSize: Integer;
+var
+  Buf: Integer;
+begin
+	fStream.Read(Buf, SizeOf(Integer));
+  Result := Buf;
 end;
 
 destructor T_SWMM_F95_InterfaceFileIO.Destroy;
 begin
+  fCurrentWriteRecordStream.Free;
 	fInterfaceFile := nil;
 	fStream := nil;
 	inherited;
+end;
+
+procedure T_SWMM_F95_InterfaceFileIO.FlushLine;
+begin
+	// Write BOR size
+	fStream.Write(fCurrentWriteRecordSize, SizeOf(fCurrentWriteRecordSize));
+	// Write record
+	fCurrentWriteRecordStream.Position := 0;
+	fStream.Write(fCurrentWriteRecordStream.Memory^, fCurrentWriteRecordSize);
+	// Write EOR size
+	fStream.Write(fCurrentWriteRecordSize, SizeOf(fCurrentWriteRecordSize));
+
+	fCurrentWriteRecordStream.Clear;
+	fCurrentWriteRecordSize := 0;
 end;
 
 function T_SWMM_F95_InterfaceFileIO.IsBeginningOfData: Boolean;
@@ -1134,6 +1222,7 @@ begin
 	IO.WriteSingle(fTimeStep);
 	for i := 0 to NumDataPoints-1 do
 		IO.WriteSingle(fIndexedData[i]);
+  IO.FlushLine;
 end;
 
 function T_SWMM_F95_StandardInterfaceFile_TimeSeriesData.Time: TDateTime;
