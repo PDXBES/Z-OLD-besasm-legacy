@@ -7,7 +7,7 @@
 
 namespace SystemsAnalysis.DataAccess
 {
-    partial class ModelDataSet
+  partial class ModelDataSet
   {
   }
 }
@@ -17,15 +17,10 @@ namespace SystemsAnalysis.DataAccess.ModelDataSetTableAdapters
 
   public static class ModelAdapterSetup
   {
-    private static string NormalizePath(string alternativePath)
+    private static string NormalizePath(string databasePath)
     {
-      return alternativePath + (alternativePath.EndsWith("\\") ? "" : "\\");
-    }
-
-    public static string GetAlternativePackageConnectionString(string alternativePath)
-    {
-      return GetConnectionString(alternativePath, "alternative_package.mdb");
-    }
+      return databasePath + (databasePath.EndsWith("\\") ? "" : "\\");
+    }    
 
     public static string GetModelConnectionString(string modelPath)
     {
@@ -41,49 +36,51 @@ namespace SystemsAnalysis.DataAccess.ModelDataSetTableAdapters
 }
 
 namespace SystemsAnalysis.DataAccess.ModelDataSetTableAdapters
-{          
-    public partial class MdlDscTableAdapter
+{
+  public partial class MdlDscTableAdapter
+  {
+    public MdlDscTableAdapter(string modelPath)
+      : this()
     {
-        public MdlDscTableAdapter(string modelPath): this()
-        {
-          this.Connection.ConnectionString = ModelAdapterSetup.GetModelConnectionString(modelPath);
-        }
+      this.Connection.ConnectionString = ModelAdapterSetup.GetModelConnectionString(modelPath);
     }
+  }
 
-    public partial class MdlLinksTableAdapter
+  public partial class MdlLinksTableAdapter
+  {
+    public MdlLinksTableAdapter(string modelPath)
+      : this()
     {
-        public MdlLinksTableAdapter(string modelPath): this()
-        {
-          this.Connection.ConnectionString = ModelAdapterSetup.GetModelConnectionString(modelPath);
-        }
+      this.Connection.ConnectionString = ModelAdapterSetup.GetModelConnectionString(modelPath);
     }
+  }
 
-    public partial class MdlNodesTableAdapter
+  public partial class MdlNodesTableAdapter
+  {
+    public MdlNodesTableAdapter(string modelPath)
+      : this()
     {
-        public MdlNodesTableAdapter(string modelPath)
-            : this()
-        {
-          this.Connection.ConnectionString = ModelAdapterSetup.GetModelConnectionString(modelPath);
-        }
+      this.Connection.ConnectionString = ModelAdapterSetup.GetModelConnectionString(modelPath);
     }
+  }
 
-    public partial class MdlSpecLinksTableAdapter
+  public partial class MdlSpecLinksTableAdapter
+  {
+    public MdlSpecLinksTableAdapter(string modelPath)
+      : this()
     {
-        public MdlSpecLinksTableAdapter(string modelPath)
-            : this()
-        {
-          this.Connection.ConnectionString = ModelAdapterSetup.GetModelConnectionString(modelPath);
-        }
+      this.Connection.ConnectionString = ModelAdapterSetup.GetModelConnectionString(modelPath);
     }
+  }
 
-    public partial class MdlSpecLinkDataTableAdapter
+  public partial class MdlSpecLinkDataTableAdapter
+  {
+    public MdlSpecLinkDataTableAdapter(string modelPath)
+      : this()
     {
-        public MdlSpecLinkDataTableAdapter(string modelPath)
-            : this()
-        {
-          this.Connection.ConnectionString = ModelAdapterSetup.GetModelConnectionString(modelPath);
-        }
+      this.Connection.ConnectionString = ModelAdapterSetup.GetModelConnectionString(modelPath);
     }
+  }
 
   public partial class MdlParkingTargetsTableAdapter
   {
@@ -112,20 +109,21 @@ namespace SystemsAnalysis.DataAccess.ModelDataSetTableAdapters
     }
   }
 
-	/// <summary>
-	/// Mdl pip XP table adapter
-	/// </summary>
-	public partial class MdlPipXPTableAdapter
-	{
-		/// <summary>
-		/// Create mdl pip XP table adapter
-		/// </summary>
-		/// <param name="modelPath">Model path</param>
-		public MdlPipXPTableAdapter(string modelPath)
-			: this()
-		{
-			this.Connection.ConnectionString = ModelAdapterSetup.GetModelConnectionString(modelPath);
-		} // MdlPipXPTableAdapter(modelPath)
-	} // class MdlPipXPTableAdapter
+  /// <summary>
+  /// Mdl pip XP table adapter
+  /// </summary>
+  public partial class MdlPipXPTableAdapter
+  {
+    /// <summary>
+    /// Create mdl pip XP table adapter
+    /// </summary>
+    /// <param name="modelPath">Model path</param>
+    public MdlPipXPTableAdapter(string modelPath)
+      : this()
+    {
+      this.Connection.ConnectionString = ModelAdapterSetup.GetModelConnectionString(modelPath);
+    } // MdlPipXPTableAdapter(modelPath)
+  } // class MdlPipXPTableAdapter
 }
 
+  
