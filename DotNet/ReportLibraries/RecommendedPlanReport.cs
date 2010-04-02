@@ -9,7 +9,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
 {
   public class RecommendedPlanReport : ReportBase
   {
-    private StormwaterControlsDataSet _stormwaterControlDS;
+    private StormwaterControlsDataSet stormwaterControlDS;
     private AccessHelper accessHelper;
     private string modelPath;
 
@@ -17,7 +17,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
     {
     }
 
-    public class ReportInfo : ReportBase.ReportInfo
+    public new class ReportInfo : ReportBase.ReportInfo
     {
       private Dictionary<string, Parameter> auxilaryData;
       private Dictionary<string, string> auxilaryDataDescription;
@@ -66,6 +66,12 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
       {        
         modelPath = AuxilaryData["ModelPath"].Value;
         modelPath = System.IO.Path.GetDirectoryName(modelPath);        
+        accessHelper = new AccessHelper(modelPath + @"mdbs\StormwaterControls_v12.mdb");
+        
+        //Execute queries in StormwaterControls_v12
+        //Load ic_target tables into StormwaterControlsDataSet
+        stormwaterControlDS = new StormwaterControlsDataSet();        
+        stormwaterControlDS.InitStormwaterControlDataSet(modelPath);        
       }
       catch (Exception ex)
       {

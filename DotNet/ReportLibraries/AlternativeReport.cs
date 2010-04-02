@@ -37,7 +37,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
       piTA.Fill(piDS.PipeInspectionGrades);
     }
 
-    public class ReportInfo : ReportBase.ReportInfo
+    public new class ReportInfo : ReportBase.ReportInfo
     {
       private Dictionary<string, Parameter> auxilaryData;
       private Dictionary<string, string> auxilaryDataDescription;
