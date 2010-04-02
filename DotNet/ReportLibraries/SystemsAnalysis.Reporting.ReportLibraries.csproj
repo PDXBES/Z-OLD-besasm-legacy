@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{5B1CB42C-93D9-4C90-902B-AF403D8ECED8}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -87,6 +87,7 @@
     <Compile Include="ModelResultsReport.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PumpStationReport.cs" />
+    <Compile Include="RecommendedPlanReport.cs" />
     <Compile Include="ReportBase.cs" />
     <Compile Include="UicReport.cs" />
   </ItemGroup>
