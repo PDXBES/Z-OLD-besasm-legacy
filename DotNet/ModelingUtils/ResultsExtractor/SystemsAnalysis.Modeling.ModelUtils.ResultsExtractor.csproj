@@ -53,14 +53,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Table19DataSet.cs">
-      <DependentUpon>Table19DataSet.xsd</DependentUpon>
+    <Compile Include="TableE19DataSet.cs">
+      <DependentUpon>TableE19DataSet.xsd</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Table19DataSet.Designer.cs">
+    <Compile Include="TableE19DataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Table19DataSet.xsd</DependentUpon>
+      <DependentUpon>TableE19DataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="TableE01DataSet.cs">
       <DependentUpon>TableE01DataSet.xsd</DependentUpon>
@@ -109,16 +109,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="Table19DataSet.xsc">
-      <DependentUpon>Table19DataSet.xsd</DependentUpon>
+    <None Include="TableE19DataSet.xsc">
+      <DependentUpon>TableE19DataSet.xsd</DependentUpon>
     </None>
-    <None Include="Table19DataSet.xsd">
+    <None Include="TableE19DataSet.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>Table19DataSet.Designer.cs</LastGenOutput>
+      <LastGenOutput>TableE19DataSet.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Table19DataSet.xss">
-      <DependentUpon>Table19DataSet.xsd</DependentUpon>
+    <None Include="TableE19DataSet.xss">
+      <DependentUpon>TableE19DataSet.xsd</DependentUpon>
     </None>
     <None Include="TableE01DataSet.xsc">
       <DependentUpon>TableE01DataSet.xsd</DependentUpon>
