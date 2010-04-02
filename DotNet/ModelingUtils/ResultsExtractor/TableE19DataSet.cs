@@ -1,10 +1,10 @@
 ﻿namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor {
     
     
-    public partial class Table19DataSet {
+    public partial class TableE19DataSet {
     }
 }
-namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor.Table19DataSetTableAdapters
+namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor.TableE19DataSetTableAdapters
 {
     
     
