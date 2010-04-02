@@ -30,6 +30,7 @@ namespace SystemsAnalysis.Reporting
     private PumpStationReport _psReport;
     private AlternativeReport _alternativeReport;
     private FecQaReport _fecQaReport;
+    private RecommendedPlanReport _recommendedPlanReport;
 
     private DoWorkEventArgs doWorkEventArgs;
     private BackgroundWorker bw;
@@ -148,7 +149,7 @@ namespace SystemsAnalysis.Reporting
               reports.Add(library, FecQaReport);
               break;
             case "RecommendedPlanReport":
-              reports.Add(library, FecQaReport);
+              reports.Add(library, RecommendedPlanReport);
               break;
             default:
               break;
@@ -321,6 +322,23 @@ namespace SystemsAnalysis.Reporting
       this._fecQaReport.StatusChanged += new OnStatusChangedEventHandler(this.OnStatusChanged);
     }
 
+    private RecommendedPlanReport RecommendedPlanReport
+    {
+      get
+      {
+        if (this._recommendedPlanReport == null)
+        {
+          this.InitRecommendedPlanReport();
+        }
+        return this._recommendedPlanReport;
+      }
+    }
+    private void InitRecommendedPlanReport()
+    {
+      this.OnStatusChanged(new StatusChangedArgs("Creating Recommended Plan Report."));
+      this._recommendedPlanReport = new RecommendedPlanReport(CharLinks, CharNodes, CharDscs);
+      this._recommendedPlanReport.StatusChanged += new OnStatusChangedEventHandler(this.OnStatusChanged);
+    }
     private Links CharLinks
     {
       [System.Diagnostics.DebuggerStepThroughAttribute]

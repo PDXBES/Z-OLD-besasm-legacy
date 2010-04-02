@@ -2,6 +2,25 @@
 {
   public partial class StormwaterControlsDataSet
   {
+    public void InitStormwaterControlDataSet(string modelPath)
+    {
+      StormwaterControlsDataSetTableAdapters.ICNodeTableAdapter icNodeTA;
+      icNodeTA = new StormwaterControlsDataSetTableAdapters.ICNodeTableAdapter(modelPath);      
+      icNodeTA.Fill(this.ICNode);
+
+      StormwaterControlsDataSetTableAdapters.ICTargetParkTableAdapter icTargetParkTA;
+      icTargetParkTA = new StormwaterControlsDataSetTableAdapters.ICTargetParkTableAdapter(modelPath);
+      icTargetParkTA.Fill(this.ICTargetPark);
+
+      StormwaterControlsDataSetTableAdapters.ICTargetRoofTableAdapter icTargetRoofTA;
+      icTargetRoofTA = new StormwaterControlsDataSetTableAdapters.ICTargetRoofTableAdapter(modelPath);
+      icTargetRoofTA.Fill(this.ICTargetRoof);
+
+      StormwaterControlsDataSetTableAdapters.mdl_SurfSC_acTableAdapter mdlSscTA;
+      mdlSscTA = new StormwaterControlsDataSetTableAdapters.mdl_SurfSC_acTableAdapter(modelPath);
+      mdlSscTA.Fill(this.mdl_SurfSC_ac);
+    }
+
   }
 }
 
@@ -26,17 +45,14 @@ namespace SystemsAnalysis.DataAccess.StormwaterControlsDataSetTableAdapters
         NormalizePath(databasePath) + databaseName;
     }
   }
-}
 
-namespace SystemsAnalysis.DataAccess.StormwaterControlsDataSetTableAdapters
-{
   public partial class ICTargetRoofTableAdapter
   {
     public ICTargetRoofTableAdapter(string modelPath)
       : this()
     {
       this.Connection.ConnectionString = StormwaterControlsAdapterSetup.GetModelConnectionString(modelPath);
-    } 
+    }
   }
 
   public partial class ICTargetParkTableAdapter
@@ -45,14 +61,23 @@ namespace SystemsAnalysis.DataAccess.StormwaterControlsDataSetTableAdapters
       : this()
     {
       this.Connection.ConnectionString = StormwaterControlsAdapterSetup.GetModelConnectionString(modelPath);
-    } 
+    }
   }
   public partial class ICNodeTableAdapter
   {
     public ICNodeTableAdapter(string modelPath)
       : this()
     {
+      this.Connection.ConnectionString = StormwaterControlsAdapterSetup.GetModelConnectionString(modelPath);      
+    }
+  }
+
+  public partial class mdl_SurfSC_acTableAdapter
+  {
+    public mdl_SurfSC_acTableAdapter(string modelPath)
+      : this()
+    {
       this.Connection.ConnectionString = StormwaterControlsAdapterSetup.GetModelConnectionString(modelPath);
-    } 
+    }
   }
 }
