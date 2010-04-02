@@ -1467,15 +1467,16 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
       string newModelPath;
       newModelPath = this.txtNewModel.Text;
 
-      InputBoxResult result;
       string newAltName;
+      newAltName = this.txtNewAltName.Text;
+      /*InputBoxResult result;
       result = InputBox.Show("Please enter a name for the new alternative:", "New Alternative Name");
 
       if (result.ReturnCode != DialogResult.OK)
       {
         return;
       }
-      newAltName = result.Text;
+      newAltName = result.Text;*/
 
       if (!ValidateAlternativeInput(baseModelPath, alternativeName))
       {
@@ -1486,7 +1487,7 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
         return;
       }
 
-      if (this.GetAlternativeList(baseModelPath).Contains(newAltName))
+      if (this.GetAlternativeList(newModelPath).Contains(newAltName))
       {
         MessageBox.Show("An alternative named '" + newAltName + "' already exists. Please specify a unique name.", "Alternative Name Already Exists");
         return;
@@ -1505,7 +1506,7 @@ namespace SystemsAnalysis.ModelConstruction.AlternativesToolkit
         AlternativePackage ap = new AlternativePackage(alternativePath);
 
         ap.Copy(newModel);
-        
+
 
         MessageBox.Show("The alternative '" + alternativeName + "' was succesfully moved.");
       }

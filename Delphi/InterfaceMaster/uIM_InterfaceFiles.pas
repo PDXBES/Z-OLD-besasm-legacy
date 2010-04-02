@@ -122,6 +122,7 @@ type
 	//-Record services------------------------------------------------------------
 		procedure NextLine;
 		procedure PreviousLine;
+    procedure FlushLine;
 	end;
 
 	{=============================================================================

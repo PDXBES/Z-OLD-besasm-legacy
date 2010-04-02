@@ -294,6 +294,7 @@ type
 		function Size: Int64;
 		procedure NextLine;
 		procedure PreviousLine;
+    procedure FlushLine;
 	end;
 
 implementation
@@ -859,6 +860,11 @@ begin
 	fInterfaceFile := nil;
 	fStream := nil;
 	inherited;
+end;
+
+procedure T_SWMM_XP_InterfaceFileIO.FlushLine;
+begin
+  // Do nothing
 end;
 
 function T_SWMM_XP_InterfaceFileIO.IsBeginningOfData: Boolean;
