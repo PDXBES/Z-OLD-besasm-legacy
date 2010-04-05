@@ -75,12 +75,12 @@ FROM         TableE20</CommandText>
               </DbSource>
             </MainSource>
             <Mappings>
-              <Mapping SourceColumn="nodeName" DataSetColumn="nodeName" />
-              <Mapping SourceColumn="surchargeTime" DataSetColumn="surchargeTime" />
-              <Mapping SourceColumn="floodedTime" DataSetColumn="floodedTime" />
-              <Mapping SourceColumn="floodVol" DataSetColumn="floodVol" />
-              <Mapping SourceColumn="maxStoredVol" DataSetColumn="maxStoredVol" />
-              <Mapping SourceColumn="pondingVol" DataSetColumn="pondingVol" />
+              <Mapping SourceColumn="nodeName" DataSetColumn="NodeName" />
+              <Mapping SourceColumn="surchargeTime" DataSetColumn="SurchargeTime" />
+              <Mapping SourceColumn="floodedTime" DataSetColumn="FloodedTime" />
+              <Mapping SourceColumn="floodVol" DataSetColumn="FloodVol" />
+              <Mapping SourceColumn="maxStoredVol" DataSetColumn="MaxStoredVol" />
+              <Mapping SourceColumn="pondingVol" DataSetColumn="PondingVol" />
             </Mappings>
             <Sources />
           </TableAdapter>
@@ -92,21 +92,21 @@ FROM         TableE20</CommandText>
   <xs:element name="TableE20DataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="TableE20DataSet" msprop:Generator_DataSetName="TableE20DataSet" msprop:EnableTableAdapterManager="true">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="TableE20" msprop:Generator_UserTableName="TableE20" msprop:Generator_RowDeletedName="TableE20RowDeleted" msprop:Generator_TableClassName="TableE20DataTable" msprop:Generator_RowChangedName="TableE20RowChanged" msprop:Generator_RowClassName="TableE20Row" msprop:Generator_RowChangingName="TableE20RowChanging" msprop:Generator_RowEvArgName="TableE20RowChangeEvent" msprop:Generator_RowEvHandlerName="TableE20RowChangeEventHandler" msprop:Generator_TablePropName="TableE20" msprop:Generator_TableVarName="tableTableE20" msprop:Generator_RowDeletingName="TableE20RowDeleting">
+        <xs:element name="TableE20" msprop:Generator_UserTableName="TableE20" msprop:Generator_RowDeletedName="TableE20RowDeleted" msprop:Generator_RowChangedName="TableE20RowChanged" msprop:Generator_RowClassName="TableE20Row" msprop:Generator_RowChangingName="TableE20RowChanging" msprop:Generator_RowEvArgName="TableE20RowChangeEvent" msprop:Generator_RowEvHandlerName="TableE20RowChangeEventHandler" msprop:Generator_TableClassName="TableE20DataTable" msprop:Generator_TableVarName="tableTableE20" msprop:Generator_RowDeletingName="TableE20RowDeleting" msprop:Generator_TablePropName="TableE20">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="nodeName" msprop:Generator_UserColumnName="nodeName" msprop:Generator_ColumnPropNameInRow="nodeName" msprop:Generator_ColumnVarNameInTable="columnnodeName" msprop:Generator_ColumnPropNameInTable="nodeNameColumn">
+              <xs:element name="NodeName" msprop:Generator_UserColumnName="NodeName" msprop:Generator_ColumnPropNameInRow="NodeName" msprop:Generator_ColumnVarNameInTable="columnNodeName" msprop:Generator_ColumnPropNameInTable="NodeNameColumn">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="15" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="surchargeTime" msprop:Generator_UserColumnName="surchargeTime" msprop:Generator_ColumnPropNameInRow="surchargeTime" msprop:Generator_ColumnVarNameInTable="columnsurchargeTime" msprop:Generator_ColumnPropNameInTable="surchargeTimeColumn" type="xs:double" minOccurs="0" />
-              <xs:element name="floodedTime" msprop:Generator_UserColumnName="floodedTime" msprop:Generator_ColumnPropNameInRow="floodedTime" msprop:Generator_ColumnVarNameInTable="columnfloodedTime" msprop:Generator_ColumnPropNameInTable="floodedTimeColumn" type="xs:double" minOccurs="0" />
-              <xs:element name="floodVol" msprop:Generator_UserColumnName="floodVol" msprop:Generator_ColumnPropNameInRow="floodVol" msprop:Generator_ColumnVarNameInTable="columnfloodVol" msprop:Generator_ColumnPropNameInTable="floodVolColumn" type="xs:int" minOccurs="0" />
-              <xs:element name="maxStoredVol" msprop:Generator_UserColumnName="maxStoredVol" msprop:Generator_ColumnPropNameInRow="maxStoredVol" msprop:Generator_ColumnVarNameInTable="columnmaxStoredVol" msprop:Generator_ColumnPropNameInTable="maxStoredVolColumn" type="xs:int" minOccurs="0" />
-              <xs:element name="pondingVol" msprop:Generator_UserColumnName="pondingVol" msprop:Generator_ColumnPropNameInRow="pondingVol" msprop:Generator_ColumnVarNameInTable="columnpondingVol" msprop:Generator_ColumnPropNameInTable="pondingVolColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="SurchargeTime" msprop:Generator_UserColumnName="SurchargeTime" msprop:Generator_ColumnPropNameInRow="SurchargeTime" msprop:Generator_ColumnVarNameInTable="columnSurchargeTime" msprop:Generator_ColumnPropNameInTable="SurchargeTimeColumn" type="xs:double" minOccurs="0" />
+              <xs:element name="FloodedTime" msprop:Generator_UserColumnName="FloodedTime" msprop:Generator_ColumnPropNameInRow="FloodedTime" msprop:Generator_ColumnVarNameInTable="columnFloodedTime" msprop:Generator_ColumnPropNameInTable="FloodedTimeColumn" type="xs:double" minOccurs="0" />
+              <xs:element name="FloodVol" msprop:Generator_UserColumnName="FloodVol" msprop:Generator_ColumnPropNameInRow="FloodVol" msprop:Generator_ColumnVarNameInTable="columnFloodVol" msprop:Generator_ColumnPropNameInTable="FloodVolColumn" type="xs:double" minOccurs="0" />
+              <xs:element name="MaxStoredVol" msprop:Generator_UserColumnName="MaxStoredVol" msprop:Generator_ColumnPropNameInRow="MaxStoredVol" msprop:Generator_ColumnVarNameInTable="columnMaxStoredVol" msprop:Generator_ColumnPropNameInTable="MaxStoredVolColumn" type="xs:double" minOccurs="0" />
+              <xs:element name="PondingVol" msprop:Generator_UserColumnName="PondingVol" msprop:Generator_ColumnPropNameInRow="PondingVol" msprop:Generator_ColumnVarNameInTable="columnPondingVol" msprop:Generator_ColumnPropNameInTable="PondingVolColumn" type="xs:double" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
@@ -114,7 +114,7 @@ FROM         TableE20</CommandText>
     </xs:complexType>
     <xs:unique name="Constraint1" msdata:PrimaryKey="true">
       <xs:selector xpath=".//mstns:TableE20" />
-      <xs:field xpath="mstns:nodeName" />
+      <xs:field xpath="mstns:NodeName" />
     </xs:unique>
   </xs:element>
 </xs:schema>

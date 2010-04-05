@@ -81,13 +81,13 @@ FROM         TableE01</CommandText>
               </DbSource>
             </MainSource>
             <Mappings>
-              <Mapping SourceColumn="condName" DataSetColumn="condName" />
-              <Mapping SourceColumn="length" DataSetColumn="length" />
-              <Mapping SourceColumn="condClass" DataSetColumn="condClass" />
-              <Mapping SourceColumn="area" DataSetColumn="area" />
-              <Mapping SourceColumn="manningsN" DataSetColumn="manningsN" />
-              <Mapping SourceColumn="maxWidth" DataSetColumn="maxWidth" />
-              <Mapping SourceColumn="depth" DataSetColumn="depth" />
+              <Mapping SourceColumn="condName" DataSetColumn="CondName" />
+              <Mapping SourceColumn="length" DataSetColumn="Length" />
+              <Mapping SourceColumn="condClass" DataSetColumn="CondClass" />
+              <Mapping SourceColumn="area" DataSetColumn="Area" />
+              <Mapping SourceColumn="manningsN" DataSetColumn="ManningsN" />
+              <Mapping SourceColumn="maxWidth" DataSetColumn="MaxWidth" />
+              <Mapping SourceColumn="depth" DataSetColumn="Depth" />
             </Mappings>
             <Sources />
           </TableAdapter>
@@ -99,28 +99,28 @@ FROM         TableE01</CommandText>
   <xs:element name="TableE01DataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="TableE01DataSet" msprop:Generator_DataSetName="TableE01DataSet" msprop:EnableTableAdapterManager="true">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="TableE01" msprop:Generator_UserTableName="TableE01" msprop:Generator_RowDeletedName="TableE01RowDeleted" msprop:Generator_TableClassName="TableE01DataTable" msprop:Generator_RowChangedName="TableE01RowChanged" msprop:Generator_RowClassName="TableE01Row" msprop:Generator_RowChangingName="TableE01RowChanging" msprop:Generator_RowEvArgName="TableE01RowChangeEvent" msprop:Generator_RowEvHandlerName="TableE01RowChangeEventHandler" msprop:Generator_TablePropName="TableE01" msprop:Generator_TableVarName="tableTableE01" msprop:Generator_RowDeletingName="TableE01RowDeleting">
+        <xs:element name="TableE01" msprop:Generator_UserTableName="TableE01" msprop:Generator_RowDeletedName="TableE01RowDeleted" msprop:Generator_RowChangedName="TableE01RowChanged" msprop:Generator_RowClassName="TableE01Row" msprop:Generator_RowChangingName="TableE01RowChanging" msprop:Generator_RowEvArgName="TableE01RowChangeEvent" msprop:Generator_RowEvHandlerName="TableE01RowChangeEventHandler" msprop:Generator_TableClassName="TableE01DataTable" msprop:Generator_TableVarName="tableTableE01" msprop:Generator_RowDeletingName="TableE01RowDeleting" msprop:Generator_TablePropName="TableE01">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="condName" msprop:Generator_UserColumnName="condName" msprop:Generator_ColumnPropNameInRow="condName" msprop:Generator_ColumnVarNameInTable="columncondName" msprop:Generator_ColumnPropNameInTable="condNameColumn">
+              <xs:element name="CondName" msprop:Generator_UserColumnName="CondName" msprop:Generator_ColumnVarNameInTable="columnCondName" msprop:Generator_ColumnPropNameInRow="CondName" msprop:Generator_ColumnPropNameInTable="CondNameColumn">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="50" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="length" msprop:Generator_UserColumnName="length" msprop:Generator_ColumnPropNameInRow="length" msprop:Generator_ColumnVarNameInTable="columnlength" msprop:Generator_ColumnPropNameInTable="lengthColumn" type="xs:double" minOccurs="0" />
-              <xs:element name="condClass" msprop:Generator_UserColumnName="condClass" msprop:Generator_ColumnPropNameInRow="condClass" msprop:Generator_ColumnVarNameInTable="columncondClass" msprop:Generator_ColumnPropNameInTable="condClassColumn" minOccurs="0">
+              <xs:element name="Length" msprop:Generator_UserColumnName="Length" msprop:Generator_ColumnVarNameInTable="columnLength" msprop:Generator_ColumnPropNameInRow="Length" msprop:Generator_ColumnPropNameInTable="LengthColumn" type="xs:double" minOccurs="0" />
+              <xs:element name="CondClass" msprop:Generator_UserColumnName="CondClass" msprop:Generator_ColumnVarNameInTable="columnCondClass" msprop:Generator_ColumnPropNameInRow="CondClass" msprop:Generator_ColumnPropNameInTable="CondClassColumn" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="50" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="area" msprop:Generator_UserColumnName="area" msprop:Generator_ColumnPropNameInRow="area" msprop:Generator_ColumnVarNameInTable="columnarea" msprop:Generator_ColumnPropNameInTable="areaColumn" type="xs:double" minOccurs="0" />
-              <xs:element name="manningsN" msprop:Generator_UserColumnName="manningsN" msprop:Generator_ColumnPropNameInRow="manningsN" msprop:Generator_ColumnVarNameInTable="columnmanningsN" msprop:Generator_ColumnPropNameInTable="manningsNColumn" type="xs:double" minOccurs="0" />
-              <xs:element name="maxWidth" msprop:Generator_UserColumnName="maxWidth" msprop:Generator_ColumnPropNameInRow="maxWidth" msprop:Generator_ColumnVarNameInTable="columnmaxWidth" msprop:Generator_ColumnPropNameInTable="maxWidthColumn" type="xs:double" minOccurs="0" />
-              <xs:element name="depth" msprop:Generator_UserColumnName="depth" msprop:Generator_ColumnPropNameInRow="depth" msprop:Generator_ColumnVarNameInTable="columndepth" msprop:Generator_ColumnPropNameInTable="depthColumn" type="xs:double" minOccurs="0" />
+              <xs:element name="Area" msprop:Generator_UserColumnName="Area" msprop:Generator_ColumnVarNameInTable="columnArea" msprop:Generator_ColumnPropNameInRow="Area" msprop:Generator_ColumnPropNameInTable="AreaColumn" type="xs:double" minOccurs="0" />
+              <xs:element name="ManningsN" msprop:Generator_UserColumnName="ManningsN" msprop:Generator_ColumnVarNameInTable="columnManningsN" msprop:Generator_ColumnPropNameInRow="ManningsN" msprop:Generator_ColumnPropNameInTable="ManningsNColumn" type="xs:double" minOccurs="0" />
+              <xs:element name="MaxWidth" msprop:Generator_UserColumnName="MaxWidth" msprop:Generator_ColumnVarNameInTable="columnMaxWidth" msprop:Generator_ColumnPropNameInRow="MaxWidth" msprop:Generator_ColumnPropNameInTable="MaxWidthColumn" type="xs:double" minOccurs="0" />
+              <xs:element name="Depth" msprop:Generator_UserColumnName="Depth" msprop:Generator_ColumnVarNameInTable="columnDepth" msprop:Generator_ColumnPropNameInRow="Depth" msprop:Generator_ColumnPropNameInTable="DepthColumn" type="xs:double" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
@@ -128,7 +128,7 @@ FROM         TableE01</CommandText>
     </xs:complexType>
     <xs:unique name="Constraint1" msdata:PrimaryKey="true">
       <xs:selector xpath=".//mstns:TableE01" />
-      <xs:field xpath="mstns:condName" />
+      <xs:field xpath="mstns:CondName" />
     </xs:unique>
   </xs:element>
 </xs:schema>
