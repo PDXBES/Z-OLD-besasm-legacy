@@ -79,5 +79,25 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
       }
     }
 
+    public double BSBRCount(IDictionary<string, Parameter> parameters)
+    {
+      string focusArea;
+      string useFlag;
+      string stormEvent;
+
+      useFlag = parameters["USEFLAG"].Value;
+      stormEvent = parameters["STORMEVENT"].Value;
+      focusArea = parameters["FocusArea"].Value;
+
+
+    }
+
+    public double VolumeStormwaterInfiltrated(IDictionary<string, Parameter> parameters)
+    {
+      string focusArea;
+
+      focusArea = parameters["FocusArea"].Value;
+    }
+
   }
 }
