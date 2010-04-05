@@ -955,7 +955,7 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor.TableE09DataSetTa
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_maxJElev", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "maxJElev", global::System.Data.DataRowVersion.Original, true, null));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_maxJElev", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "maxJElev", global::System.Data.DataRowVersion.Original, false, null));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_timeOfMax", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "timeOfMax", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_timeOfMax", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "timeOfMax", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_timeOfMax", global::System.Data.OleDb.OleDbType.Date, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "timeOfMax", global::System.Data.DataRowVersion.Original, false, null));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_surcharge", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "surcharge", global::System.Data.DataRowVersion.Original, true, null));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_surcharge", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "surcharge", global::System.Data.DataRowVersion.Original, false, null));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_freeboard", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "freeboard", global::System.Data.DataRowVersion.Original, true, null));
@@ -971,7 +971,7 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor.TableE09DataSetTa
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("grElev", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "grElev", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("maxCrown", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "maxCrown", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("maxJElev", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "maxJElev", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("timeOfMax", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "timeOfMax", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("timeOfMax", global::System.Data.OleDb.OleDbType.Date, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "timeOfMax", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("surcharge", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "surcharge", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("freeboard", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "freeboard", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("maxArea", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "maxArea", global::System.Data.DataRowVersion.Current, false, null));
@@ -983,7 +983,7 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor.TableE09DataSetTa
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("grElev", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "grElev", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("maxCrown", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "maxCrown", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("maxJElev", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "maxJElev", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("timeOfMax", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "timeOfMax", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("timeOfMax", global::System.Data.OleDb.OleDbType.Date, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "timeOfMax", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("surcharge", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "surcharge", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("freeboard", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "freeboard", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("maxArea", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "maxArea", global::System.Data.DataRowVersion.Current, false, null));
@@ -995,7 +995,7 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor.TableE09DataSetTa
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_maxJElev", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "maxJElev", global::System.Data.DataRowVersion.Original, true, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_maxJElev", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "maxJElev", global::System.Data.DataRowVersion.Original, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_timeOfMax", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "timeOfMax", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_timeOfMax", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "timeOfMax", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_timeOfMax", global::System.Data.OleDb.OleDbType.Date, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "timeOfMax", global::System.Data.DataRowVersion.Original, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_surcharge", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "surcharge", global::System.Data.DataRowVersion.Original, true, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_surcharge", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "surcharge", global::System.Data.DataRowVersion.Original, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_freeboard", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "freeboard", global::System.Data.DataRowVersion.Original, true, null));
@@ -1070,7 +1070,7 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor.TableE09DataSetTa
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(string Original_nodeName, global::System.Nullable<double> Original_grElev, global::System.Nullable<double> Original_maxCrown, global::System.Nullable<double> Original_maxJElev, global::System.Nullable<double> Original_timeOfMax, global::System.Nullable<double> Original_surcharge, global::System.Nullable<double> Original_freeboard, global::System.Nullable<double> Original_maxArea) {
+        public virtual int Delete(string Original_nodeName, global::System.Nullable<double> Original_grElev, global::System.Nullable<double> Original_maxCrown, global::System.Nullable<double> Original_maxJElev, global::System.Nullable<global::System.DateTime> Original_timeOfMax, global::System.Nullable<double> Original_surcharge, global::System.Nullable<double> Original_freeboard, global::System.Nullable<double> Original_maxArea) {
             if ((Original_nodeName == null)) {
                 this.Adapter.DeleteCommand.Parameters[0].Value = global::System.DBNull.Value;
             }
@@ -1103,7 +1103,7 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor.TableE09DataSetTa
             }
             if ((Original_timeOfMax.HasValue == true)) {
                 this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[8].Value = ((double)(Original_timeOfMax.Value));
+                this.Adapter.DeleteCommand.Parameters[8].Value = ((System.DateTime)(Original_timeOfMax.Value));
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(1));
@@ -1152,7 +1152,7 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor.TableE09DataSetTa
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string nodeName, global::System.Nullable<double> grElev, global::System.Nullable<double> maxCrown, global::System.Nullable<double> maxJElev, global::System.Nullable<double> timeOfMax, global::System.Nullable<double> surcharge, global::System.Nullable<double> freeboard, global::System.Nullable<double> maxArea) {
+        public virtual int Insert(string nodeName, global::System.Nullable<double> grElev, global::System.Nullable<double> maxCrown, global::System.Nullable<double> maxJElev, global::System.Nullable<global::System.DateTime> timeOfMax, global::System.Nullable<double> surcharge, global::System.Nullable<double> freeboard, global::System.Nullable<double> maxArea) {
             if ((nodeName == null)) {
                 this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
             }
@@ -1178,7 +1178,7 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor.TableE09DataSetTa
                 this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
             }
             if ((timeOfMax.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[4].Value = ((double)(timeOfMax.Value));
+                this.Adapter.InsertCommand.Parameters[4].Value = ((System.DateTime)(timeOfMax.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
@@ -1225,7 +1225,7 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor.TableE09DataSetTa
                     global::System.Nullable<double> grElev, 
                     global::System.Nullable<double> maxCrown, 
                     global::System.Nullable<double> maxJElev, 
-                    global::System.Nullable<double> timeOfMax, 
+                    global::System.Nullable<global::System.DateTime> timeOfMax, 
                     global::System.Nullable<double> surcharge, 
                     global::System.Nullable<double> freeboard, 
                     global::System.Nullable<double> maxArea, 
@@ -1233,7 +1233,7 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor.TableE09DataSetTa
                     global::System.Nullable<double> Original_grElev, 
                     global::System.Nullable<double> Original_maxCrown, 
                     global::System.Nullable<double> Original_maxJElev, 
-                    global::System.Nullable<double> Original_timeOfMax, 
+                    global::System.Nullable<global::System.DateTime> Original_timeOfMax, 
                     global::System.Nullable<double> Original_surcharge, 
                     global::System.Nullable<double> Original_freeboard, 
                     global::System.Nullable<double> Original_maxArea) {
@@ -1262,7 +1262,7 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor.TableE09DataSetTa
                 this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
             }
             if ((timeOfMax.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((double)(timeOfMax.Value));
+                this.Adapter.UpdateCommand.Parameters[4].Value = ((System.DateTime)(timeOfMax.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
@@ -1317,7 +1317,7 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor.TableE09DataSetTa
             }
             if ((Original_timeOfMax.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[15].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[16].Value = ((double)(Original_timeOfMax.Value));
+                this.Adapter.UpdateCommand.Parameters[16].Value = ((System.DateTime)(Original_timeOfMax.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[15].Value = ((object)(1));
@@ -1366,7 +1366,7 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor.TableE09DataSetTa
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(global::System.Nullable<double> grElev, global::System.Nullable<double> maxCrown, global::System.Nullable<double> maxJElev, global::System.Nullable<double> timeOfMax, global::System.Nullable<double> surcharge, global::System.Nullable<double> freeboard, global::System.Nullable<double> maxArea, string Original_nodeName, global::System.Nullable<double> Original_grElev, global::System.Nullable<double> Original_maxCrown, global::System.Nullable<double> Original_maxJElev, global::System.Nullable<double> Original_timeOfMax, global::System.Nullable<double> Original_surcharge, global::System.Nullable<double> Original_freeboard, global::System.Nullable<double> Original_maxArea) {
+        public virtual int Update(global::System.Nullable<double> grElev, global::System.Nullable<double> maxCrown, global::System.Nullable<double> maxJElev, global::System.Nullable<global::System.DateTime> timeOfMax, global::System.Nullable<double> surcharge, global::System.Nullable<double> freeboard, global::System.Nullable<double> maxArea, string Original_nodeName, global::System.Nullable<double> Original_grElev, global::System.Nullable<double> Original_maxCrown, global::System.Nullable<double> Original_maxJElev, global::System.Nullable<global::System.DateTime> Original_timeOfMax, global::System.Nullable<double> Original_surcharge, global::System.Nullable<double> Original_freeboard, global::System.Nullable<double> Original_maxArea) {
             return this.Update(Original_nodeName, grElev, maxCrown, maxJElev, timeOfMax, surcharge, freeboard, maxArea, Original_nodeName, Original_grElev, Original_maxCrown, Original_maxJElev, Original_timeOfMax, Original_surcharge, Original_freeboard, Original_maxArea);
         }
     }

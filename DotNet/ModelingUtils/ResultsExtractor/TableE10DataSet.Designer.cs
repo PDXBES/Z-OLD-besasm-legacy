@@ -1074,11 +1074,11 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor.TableE10DataSetTa
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_maxQ", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "maxQ", global::System.Data.DataRowVersion.Original, true, null));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_maxQ", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "maxQ", global::System.Data.DataRowVersion.Original, false, null));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_timeMaxQ", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "timeMaxQ", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_timeMaxQ", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "timeMaxQ", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_timeMaxQ", global::System.Data.OleDb.OleDbType.Date, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "timeMaxQ", global::System.Data.DataRowVersion.Original, false, null));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_maxV", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "maxV", global::System.Data.DataRowVersion.Original, true, null));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_maxV", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "maxV", global::System.Data.DataRowVersion.Original, false, null));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_timeMaxV", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "timeMaxV", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_timeMaxV", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "timeMaxV", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_timeMaxV", global::System.Data.OleDb.OleDbType.Date, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "timeMaxV", global::System.Data.DataRowVersion.Original, false, null));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_qQRatio", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "qQRatio", global::System.Data.DataRowVersion.Original, true, null));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_qQRatio", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "qQRatio", global::System.Data.DataRowVersion.Original, false, null));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_maxUsElev", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "maxUsElev", global::System.Data.DataRowVersion.Original, true, null));
@@ -1096,9 +1096,9 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor.TableE10DataSetTa
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("designV", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "designV", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("maxD", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "maxD", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("maxQ", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "maxQ", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("timeMaxQ", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "timeMaxQ", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("timeMaxQ", global::System.Data.OleDb.OleDbType.Date, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "timeMaxQ", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("maxV", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "maxV", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("timeMaxV", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "timeMaxV", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("timeMaxV", global::System.Data.OleDb.OleDbType.Date, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "timeMaxV", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("qQRatio", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "qQRatio", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("maxUsElev", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "maxUsElev", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("maxDsElev", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "maxDsElev", global::System.Data.DataRowVersion.Current, false, null));
@@ -1111,9 +1111,9 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor.TableE10DataSetTa
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("designV", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "designV", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("maxD", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "maxD", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("maxQ", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "maxQ", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("timeMaxQ", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "timeMaxQ", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("timeMaxQ", global::System.Data.OleDb.OleDbType.Date, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "timeMaxQ", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("maxV", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "maxV", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("timeMaxV", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "timeMaxV", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("timeMaxV", global::System.Data.OleDb.OleDbType.Date, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "timeMaxV", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("qQRatio", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "qQRatio", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("maxUsElev", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "maxUsElev", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("maxDsElev", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "maxDsElev", global::System.Data.DataRowVersion.Current, false, null));
@@ -1127,11 +1127,11 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor.TableE10DataSetTa
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_maxQ", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "maxQ", global::System.Data.DataRowVersion.Original, true, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_maxQ", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "maxQ", global::System.Data.DataRowVersion.Original, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_timeMaxQ", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "timeMaxQ", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_timeMaxQ", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "timeMaxQ", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_timeMaxQ", global::System.Data.OleDb.OleDbType.Date, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "timeMaxQ", global::System.Data.DataRowVersion.Original, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_maxV", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "maxV", global::System.Data.DataRowVersion.Original, true, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_maxV", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "maxV", global::System.Data.DataRowVersion.Original, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_timeMaxV", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "timeMaxV", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_timeMaxV", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "timeMaxV", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_timeMaxV", global::System.Data.OleDb.OleDbType.Date, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "timeMaxV", global::System.Data.DataRowVersion.Original, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_qQRatio", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "qQRatio", global::System.Data.DataRowVersion.Original, true, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_qQRatio", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "qQRatio", global::System.Data.DataRowVersion.Original, false, null));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_maxUsElev", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "maxUsElev", global::System.Data.DataRowVersion.Original, true, null));
@@ -1206,7 +1206,7 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor.TableE10DataSetTa
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(string Original_condName, global::System.Nullable<double> Original_designQ, global::System.Nullable<double> Original_designV, global::System.Nullable<double> Original_maxD, global::System.Nullable<double> Original_maxQ, global::System.Nullable<double> Original_timeMaxQ, global::System.Nullable<double> Original_maxV, global::System.Nullable<double> Original_timeMaxV, global::System.Nullable<double> Original_qQRatio, global::System.Nullable<double> Original_maxUsElev, global::System.Nullable<double> Original_maxDsElev) {
+        public virtual int Delete(string Original_condName, global::System.Nullable<double> Original_designQ, global::System.Nullable<double> Original_designV, global::System.Nullable<double> Original_maxD, global::System.Nullable<double> Original_maxQ, global::System.Nullable<global::System.DateTime> Original_timeMaxQ, global::System.Nullable<double> Original_maxV, global::System.Nullable<global::System.DateTime> Original_timeMaxV, global::System.Nullable<double> Original_qQRatio, global::System.Nullable<double> Original_maxUsElev, global::System.Nullable<double> Original_maxDsElev) {
             if ((Original_condName == null)) {
                 this.Adapter.DeleteCommand.Parameters[0].Value = global::System.DBNull.Value;
             }
@@ -1247,7 +1247,7 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor.TableE10DataSetTa
             }
             if ((Original_timeMaxQ.HasValue == true)) {
                 this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[10].Value = ((double)(Original_timeMaxQ.Value));
+                this.Adapter.DeleteCommand.Parameters[10].Value = ((System.DateTime)(Original_timeMaxQ.Value));
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(1));
@@ -1263,7 +1263,7 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor.TableE10DataSetTa
             }
             if ((Original_timeMaxV.HasValue == true)) {
                 this.Adapter.DeleteCommand.Parameters[13].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[14].Value = ((double)(Original_timeMaxV.Value));
+                this.Adapter.DeleteCommand.Parameters[14].Value = ((System.DateTime)(Original_timeMaxV.Value));
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[13].Value = ((object)(1));
@@ -1312,7 +1312,7 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor.TableE10DataSetTa
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string condName, global::System.Nullable<double> designQ, global::System.Nullable<double> designV, global::System.Nullable<double> maxD, global::System.Nullable<double> maxQ, global::System.Nullable<double> timeMaxQ, global::System.Nullable<double> maxV, global::System.Nullable<double> timeMaxV, global::System.Nullable<double> qQRatio, global::System.Nullable<double> maxUsElev, global::System.Nullable<double> maxDsElev) {
+        public virtual int Insert(string condName, global::System.Nullable<double> designQ, global::System.Nullable<double> designV, global::System.Nullable<double> maxD, global::System.Nullable<double> maxQ, global::System.Nullable<global::System.DateTime> timeMaxQ, global::System.Nullable<double> maxV, global::System.Nullable<global::System.DateTime> timeMaxV, global::System.Nullable<double> qQRatio, global::System.Nullable<double> maxUsElev, global::System.Nullable<double> maxDsElev) {
             if ((condName == null)) {
                 this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
             }
@@ -1344,7 +1344,7 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor.TableE10DataSetTa
                 this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
             }
             if ((timeMaxQ.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[5].Value = ((double)(timeMaxQ.Value));
+                this.Adapter.InsertCommand.Parameters[5].Value = ((System.DateTime)(timeMaxQ.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[5].Value = global::System.DBNull.Value;
@@ -1356,7 +1356,7 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor.TableE10DataSetTa
                 this.Adapter.InsertCommand.Parameters[6].Value = global::System.DBNull.Value;
             }
             if ((timeMaxV.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[7].Value = ((double)(timeMaxV.Value));
+                this.Adapter.InsertCommand.Parameters[7].Value = ((System.DateTime)(timeMaxV.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[7].Value = global::System.DBNull.Value;
@@ -1404,9 +1404,9 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor.TableE10DataSetTa
                     global::System.Nullable<double> designV, 
                     global::System.Nullable<double> maxD, 
                     global::System.Nullable<double> maxQ, 
-                    global::System.Nullable<double> timeMaxQ, 
+                    global::System.Nullable<global::System.DateTime> timeMaxQ, 
                     global::System.Nullable<double> maxV, 
-                    global::System.Nullable<double> timeMaxV, 
+                    global::System.Nullable<global::System.DateTime> timeMaxV, 
                     global::System.Nullable<double> qQRatio, 
                     global::System.Nullable<double> maxUsElev, 
                     global::System.Nullable<double> maxDsElev, 
@@ -1415,9 +1415,9 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor.TableE10DataSetTa
                     global::System.Nullable<double> Original_designV, 
                     global::System.Nullable<double> Original_maxD, 
                     global::System.Nullable<double> Original_maxQ, 
-                    global::System.Nullable<double> Original_timeMaxQ, 
+                    global::System.Nullable<global::System.DateTime> Original_timeMaxQ, 
                     global::System.Nullable<double> Original_maxV, 
-                    global::System.Nullable<double> Original_timeMaxV, 
+                    global::System.Nullable<global::System.DateTime> Original_timeMaxV, 
                     global::System.Nullable<double> Original_qQRatio, 
                     global::System.Nullable<double> Original_maxUsElev, 
                     global::System.Nullable<double> Original_maxDsElev) {
@@ -1452,7 +1452,7 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor.TableE10DataSetTa
                 this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
             }
             if ((timeMaxQ.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((double)(timeMaxQ.Value));
+                this.Adapter.UpdateCommand.Parameters[5].Value = ((System.DateTime)(timeMaxQ.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[5].Value = global::System.DBNull.Value;
@@ -1464,7 +1464,7 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor.TableE10DataSetTa
                 this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
             }
             if ((timeMaxV.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((double)(timeMaxV.Value));
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((System.DateTime)(timeMaxV.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
@@ -1527,7 +1527,7 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor.TableE10DataSetTa
             }
             if ((Original_timeMaxQ.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[20].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[21].Value = ((double)(Original_timeMaxQ.Value));
+                this.Adapter.UpdateCommand.Parameters[21].Value = ((System.DateTime)(Original_timeMaxQ.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[20].Value = ((object)(1));
@@ -1543,7 +1543,7 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor.TableE10DataSetTa
             }
             if ((Original_timeMaxV.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[24].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[25].Value = ((double)(Original_timeMaxV.Value));
+                this.Adapter.UpdateCommand.Parameters[25].Value = ((System.DateTime)(Original_timeMaxV.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[24].Value = ((object)(1));
@@ -1597,9 +1597,9 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor.TableE10DataSetTa
                     global::System.Nullable<double> designV, 
                     global::System.Nullable<double> maxD, 
                     global::System.Nullable<double> maxQ, 
-                    global::System.Nullable<double> timeMaxQ, 
+                    global::System.Nullable<global::System.DateTime> timeMaxQ, 
                     global::System.Nullable<double> maxV, 
-                    global::System.Nullable<double> timeMaxV, 
+                    global::System.Nullable<global::System.DateTime> timeMaxV, 
                     global::System.Nullable<double> qQRatio, 
                     global::System.Nullable<double> maxUsElev, 
                     global::System.Nullable<double> maxDsElev, 
@@ -1608,9 +1608,9 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor.TableE10DataSetTa
                     global::System.Nullable<double> Original_designV, 
                     global::System.Nullable<double> Original_maxD, 
                     global::System.Nullable<double> Original_maxQ, 
-                    global::System.Nullable<double> Original_timeMaxQ, 
+                    global::System.Nullable<global::System.DateTime> Original_timeMaxQ, 
                     global::System.Nullable<double> Original_maxV, 
-                    global::System.Nullable<double> Original_timeMaxV, 
+                    global::System.Nullable<global::System.DateTime> Original_timeMaxV, 
                     global::System.Nullable<double> Original_qQRatio, 
                     global::System.Nullable<double> Original_maxUsElev, 
                     global::System.Nullable<double> Original_maxDsElev) {
