@@ -89,7 +89,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
       stormEvent = parameters["STORMEVENT"].Value;
       focusArea = parameters["FocusArea"].Value;
 
-
+      return 0;
     }
 
     public double VolumeStormwaterInfiltrated(IDictionary<string, Parameter> parameters)
@@ -97,7 +97,19 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
       string focusArea;
 
       focusArea = parameters["FocusArea"].Value;
+
+      return 0;
     }
+
+    public double InfiltratedArea(IDictionary<string, Parameter> parameters)
+    {
+      string focusArea;
+
+      focusArea = parameters["FocusArea"].Value;
+
+      return 0;
+    }
+
 
   }
 }

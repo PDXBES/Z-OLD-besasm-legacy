@@ -51,8 +51,8 @@ FROM         TableE18</CommandText>
               </DbSource>
             </MainSource>
             <Mappings>
-              <Mapping SourceColumn="nodeName" DataSetColumn="nodeName" />
-              <Mapping SourceColumn="storageVolumeCuFt" DataSetColumn="storageVolumeCuFt" />
+              <Mapping SourceColumn="nodeName" DataSetColumn="NodeName" />
+              <Mapping SourceColumn="storageVolumeCuFt" DataSetColumn="StorageVolumeCuFt" />
             </Mappings>
             <Sources />
           </TableAdapter>
@@ -61,20 +61,20 @@ FROM         TableE18</CommandText>
       </DataSource>
     </xs:appinfo>
   </xs:annotation>
-  <xs:element name="TableE18DataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_DataSetName="TableE18DataSet" msprop:Generator_UserDSName="TableE18DataSet" msprop:EnableTableAdapterManager="true">
+  <xs:element name="TableE18DataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="TableE18DataSet" msprop:Generator_DataSetName="TableE18DataSet" msprop:EnableTableAdapterManager="true">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="TableE18" msprop:Generator_UserTableName="TableE18" msprop:Generator_RowDeletedName="TableE18RowDeleted" msprop:Generator_TableClassName="TableE18DataTable" msprop:Generator_RowChangedName="TableE18RowChanged" msprop:Generator_RowClassName="TableE18Row" msprop:Generator_RowChangingName="TableE18RowChanging" msprop:Generator_RowEvArgName="TableE18RowChangeEvent" msprop:Generator_RowEvHandlerName="TableE18RowChangeEventHandler" msprop:Generator_TablePropName="TableE18" msprop:Generator_TableVarName="tableTableE18" msprop:Generator_RowDeletingName="TableE18RowDeleting">
+        <xs:element name="TableE18" msprop:Generator_UserTableName="TableE18" msprop:Generator_RowDeletedName="TableE18RowDeleted" msprop:Generator_RowChangedName="TableE18RowChanged" msprop:Generator_RowClassName="TableE18Row" msprop:Generator_RowChangingName="TableE18RowChanging" msprop:Generator_RowEvArgName="TableE18RowChangeEvent" msprop:Generator_RowEvHandlerName="TableE18RowChangeEventHandler" msprop:Generator_TableClassName="TableE18DataTable" msprop:Generator_TableVarName="tableTableE18" msprop:Generator_RowDeletingName="TableE18RowDeleting" msprop:Generator_TablePropName="TableE18">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="nodeName" msprop:Generator_UserColumnName="nodeName" msprop:Generator_ColumnPropNameInRow="nodeName" msprop:Generator_ColumnVarNameInTable="columnnodeName" msprop:Generator_ColumnPropNameInTable="nodeNameColumn">
+              <xs:element name="NodeName" msprop:Generator_UserColumnName="NodeName" msprop:Generator_ColumnPropNameInRow="NodeName" msprop:Generator_ColumnVarNameInTable="columnNodeName" msprop:Generator_ColumnPropNameInTable="NodeNameColumn">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="15" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="storageVolumeCuFt" msprop:Generator_UserColumnName="storageVolumeCuFt" msprop:Generator_ColumnPropNameInRow="storageVolumeCuFt" msprop:Generator_ColumnVarNameInTable="columnstorageVolumeCuFt" msprop:Generator_ColumnPropNameInTable="storageVolumeCuFtColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="StorageVolumeCuFt" msprop:Generator_UserColumnName="StorageVolumeCuFt" msprop:Generator_ColumnPropNameInRow="StorageVolumeCuFt" msprop:Generator_ColumnVarNameInTable="columnStorageVolumeCuFt" msprop:Generator_ColumnPropNameInTable="StorageVolumeCuFtColumn" type="xs:double" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
@@ -82,7 +82,7 @@ FROM         TableE18</CommandText>
     </xs:complexType>
     <xs:unique name="Constraint1" msdata:PrimaryKey="true">
       <xs:selector xpath=".//mstns:TableE18" />
-      <xs:field xpath="mstns:nodeName" />
+      <xs:field xpath="mstns:NodeName" />
     </xs:unique>
   </xs:element>
 </xs:schema>
