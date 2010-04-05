@@ -53,41 +53,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TableE19DataSet.cs">
-      <DependentUpon>TableE19DataSet.xsd</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="TableE19DataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TableE19DataSet.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="TableE01DataSet.cs">
-      <DependentUpon>TableE01DataSet.xsd</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="TableE01DataSet.Designer.cs">
-      <DependentUpon>TableE01DataSet.xsd</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="TableE09DataSet.cs">
-      <DependentUpon>TableE09DataSet.xsd</DependentUpon>
-      <SubType>Component</SubType>
+      <DependentUpon>TableE01DataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="TableE09DataSet.Designer.cs">
-      <DependentUpon>TableE09DataSet.xsd</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="TableE10DataSet.cs">
-      <DependentUpon>TableE10DataSet.xsd</DependentUpon>
-      <SubType>Component</SubType>
+      <DependentUpon>TableE09DataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="TableE10DataSet.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -99,6 +78,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TableE18DataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="TableE19DataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TableE19DataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="TableE20DataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -109,31 +93,20 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="TableE19DataSet.xsc">
-      <DependentUpon>TableE19DataSet.xsd</DependentUpon>
-    </None>
-    <None Include="TableE19DataSet.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>TableE19DataSet.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="TableE19DataSet.xss">
-      <DependentUpon>TableE19DataSet.xsd</DependentUpon>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <None Include="TableE01DataSet.xsc">
       <DependentUpon>TableE01DataSet.xsd</DependentUpon>
     </None>
     <None Include="TableE01DataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
       <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>TableE01DataSet.Designer.cs</LastGenOutput>
     </None>
     <None Include="TableE01DataSet.xss">
       <DependentUpon>TableE01DataSet.xsd</DependentUpon>
-    </None>
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <None Include="TableE09DataSet.xsc">
       <DependentUpon>TableE09DataSet.xsd</DependentUpon>
@@ -167,6 +140,17 @@
     </None>
     <None Include="TableE18DataSet.xss">
       <DependentUpon>TableE18DataSet.xsd</DependentUpon>
+    </None>
+    <None Include="TableE19DataSet.xsc">
+      <DependentUpon>TableE19DataSet.xsd</DependentUpon>
+    </None>
+    <None Include="TableE19DataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>TableE19DataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="TableE19DataSet.xss">
+      <DependentUpon>TableE19DataSet.xsd</DependentUpon>
     </None>
     <None Include="TableE20DataSet.xsc">
       <DependentUpon>TableE20DataSet.xsd</DependentUpon>
@@ -206,6 +190,17 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="XPSWMMResults.mdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\AccessUtils\DatabaseManagement\SystemsAnalysis.Utils.AccessUtils.DatabaseManagement.csproj">
+      <Project>{1DCF1AAE-A211-4A29-AE5C-13AAAD890B08}</Project>
+      <Name>SystemsAnalysis.Utils.AccessUtils.DatabaseManagement</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
