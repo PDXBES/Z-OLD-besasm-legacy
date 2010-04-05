@@ -552,13 +552,39 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor
       }
       AccessHelper accessHelper = new AccessHelper(database);
 
-      OleDbConnection connection = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + database);
+      try
+      {
+        
+        CreateAndWriteTableE01(database, accessHelper);
 
-      OleDbCommand command = new OleDbCommand();
+        CreateAndWriteTableE09(database, accessHelper);
+
+        CreateAndWriteTableE10(database, accessHelper);
+
+        CreateAndWriteTableE18(database, accessHelper);
+
+        CreateAndWriteTableE19(database, accessHelper);
+
+        CreateAndWriteTableE20(database, accessHelper);
+        
+      }
+      finally
+      {
+        accessHelper.Dispose();
+      }
+
+      return;
+    }
+
+    private void CreateAndWriteTableE01(string database, AccessHelper accessHelper)
+    {
+      OleDbConnection connection;
+      OleDbCommand command;
+      connection = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + database);
+      command = new OleDbCommand();
       command.Connection = connection;
       connection.Open();
 
-      #region Create and Write Table E01
       try
       {
         if (accessHelper.TableExists("TableE01"))
@@ -574,22 +600,29 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor
         }
       }
 
-      
       command.CommandText = "Create Table TableE01 (CondName Text, Length Double, CondClass Text, Area Double, ManningsN Double, MaxWidth Double, Depth Double)";
       command.ExecuteNonQuery();
-
       TableE01DataSetTableAdapters.TableE01TableAdapter tableE01Adapter;
       tableE01Adapter = new TableE01DataSetTableAdapters.TableE01TableAdapter();
-
       tableE01Adapter.Connection = connection;
       tableE01Adapter.Update(tableE01);
-      #endregion
+    }
 
-      #region Create and Write Table E09
+    private void CreateAndWriteTableE09(string database, AccessHelper accessHelper)
+    {
+      OleDbConnection connection;
+      OleDbCommand command;
+      connection = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + database);
+      command = new OleDbCommand();
+      command.Connection = connection;
+      connection.Open();
+      
       try
       {
-        command.CommandText = "Drop Table TableE09";
-        command.ExecuteNonQuery();
+        if (accessHelper.TableExists("TableE09"))
+        {
+          accessHelper.DeleteTable("TableE09");
+        }
       }
       catch (OleDbException ex)
       {
@@ -601,19 +634,26 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor
 
       command.CommandText = "Create Table TableE09 (NodeName Text, GrElev Double, MaxCrown Double, MaxJElev Double, TimeOfMax DateTime, Surcharge Double, Freeboard Double, MaxArea Double)";
       command.ExecuteNonQuery();
-
       TableE09DataSetTableAdapters.TableE09TableAdapter tableE09Adapter;
       tableE09Adapter = new TableE09DataSetTableAdapters.TableE09TableAdapter();
-
       tableE09Adapter.Connection = connection;
       tableE09Adapter.Update(tableE09);
-      #endregion
+    }
 
-      #region Create and Write Table E10
+    private void CreateAndWriteTableE10(string database, AccessHelper accessHelper)
+    {
+      OleDbConnection connection;
+      OleDbCommand command;
+      connection = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + database);
+      command = new OleDbCommand();
+      command.Connection = connection;
+      connection.Open();
       try
       {
-        command.CommandText = "Drop Table TableE10";
-        command.ExecuteNonQuery();
+        if (accessHelper.TableExists("TableE10"))
+        {
+          accessHelper.DeleteTable("TableE10");
+        }
       }
       catch (OleDbException ex)
       {
@@ -631,13 +671,22 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor
 
       tableE10Adapter.Connection = connection;
       tableE10Adapter.Update(tableE10);
-      #endregion
+    }
 
-      #region Create and Write Table E18
+    private void CreateAndWriteTableE18(string database, AccessHelper accessHelper)
+    {
+      OleDbConnection connection;
+      OleDbCommand command;
+      connection = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + database);
+      command = new OleDbCommand();
+      command.Connection = connection;
+      connection.Open();
       try
       {
-        command.CommandText = "Drop Table TableE18";
-        command.ExecuteNonQuery();
+        if (accessHelper.TableExists("TableE18"))
+        {
+          accessHelper.DeleteTable("TableE18");
+        }
       }
       catch (OleDbException ex)
       {
@@ -655,13 +704,23 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor
 
       tableE18Adapter.Connection = connection;
       tableE18Adapter.Update(tableE18);
-      #endregion
+    }
 
-      #region Create and Write Table E19
+    private void CreateAndWriteTableE19(string database, AccessHelper accessHelper)
+    {
+      OleDbConnection connection;
+      OleDbCommand command;
+      connection = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + database);
+      command = new OleDbCommand();
+      command.Connection = connection;
+      connection.Open();
+
       try
       {
-        command.CommandText = "Drop Table TableE19";
-        command.ExecuteNonQuery();
+        if (accessHelper.TableExists("TableE19"))
+        {
+          accessHelper.DeleteTable("TableE19");
+        }
       }
       catch (OleDbException ex)
       {
@@ -679,13 +738,23 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor
 
       tableE19Adapter.Connection = connection;
       tableE19Adapter.Update(tableE19);
-      #endregion
+    }
 
-      #region Create and Write Table E20
+    private void CreateAndWriteTableE20(string database, AccessHelper accessHelper)
+    {
+      OleDbConnection connection;
+      OleDbCommand command;
+      connection = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + database);
+      command = new OleDbCommand();
+      command.Connection = connection;
+      connection.Open();
+
       try
       {
-        command.CommandText = "Drop Table TableE20";
-        command.ExecuteNonQuery();
+        if (accessHelper.TableExists("TableE20"))
+        {
+          accessHelper.DeleteTable("TableE20");
+        }
       }
       catch (OleDbException ex)
       {
@@ -703,10 +772,6 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor
 
       tableE20Adapter.Connection = connection;
       tableE20Adapter.Update(tableE20);
-      #endregion
-
-      return;
     }
-
   }
 }
