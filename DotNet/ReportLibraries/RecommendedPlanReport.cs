@@ -62,20 +62,25 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
 
     public override void LoadAuxilaryData(Dictionary<string, Parameter> AuxilaryData)
     {
+      modelPath = AuxilaryData["ModelPath"].Value;
+      modelPath = System.IO.Path.GetDirectoryName(modelPath);
+
+      string stormwaterControlsDB = modelPath + @"\mdbs\StormwaterControls_v12.mdb";
+      //accessHelper = new AccessHelper(stormwaterControlsDB);
       try
-      {        
-        modelPath = AuxilaryData["ModelPath"].Value;
-        modelPath = System.IO.Path.GetDirectoryName(modelPath);        
-        accessHelper = new AccessHelper(modelPath + @"mdbs\StormwaterControls_v12.mdb");
-        
+      {                
         //Execute queries in StormwaterControls_v12
         //Load ic_target tables into StormwaterControlsDataSet
-        stormwaterControlDS = new StormwaterControlsDataSet();        
-        stormwaterControlDS.InitStormwaterControlDataSet(modelPath);        
+        stormwaterControlDS = new StormwaterControlsDataSet();
+        stormwaterControlDS.InitStormwaterControlDataSet(modelPath);
       }
       catch (Exception ex)
       {
         throw new Exception("Could not read auxilary data 'ModelPath': " + ex.Message, ex);
+      }
+      finally
+      {
+        //accessHelper.Dispose();
       }
     }
 
@@ -85,8 +90,8 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
       string useFlag;
       string stormEvent;
 
-      useFlag = parameters["USEFLAG"].Value;
-      stormEvent = parameters["STORMEVENT"].Value;
+      useFlag = parameters["UseFlag"].Value;
+      stormEvent = parameters["StormEvent"].Value;
       focusArea = parameters["FocusArea"].Value;
 
       return 0;

@@ -41,9 +41,17 @@ namespace SystemsAnalysis.ModelConstruction
     }
 
     /// <summary>
-    /// Relinks all tables in DataAccess.mdb to point relative to modelPath
+    /// Relinks all tables in DataAccess.mdb to point relative to modelPath. Exception will be thrown if a linked file is missing.
     /// </summary>
     public static void RefreshDataAccess(string modelRoot)
+    {
+      RefreshDataAccess(modelRoot, false);      
+    }
+
+    /// <summary>
+    /// Relinks all tables in DataAccess.mdb to point relative to modelPath. Exception will optionally be thrown if a linked file is missing.
+    /// </summary>    
+    public static void RefreshDataAccess(string modelRoot, bool allowMissingLinks)
     {
       modelRoot += modelRoot.EndsWith("\\") ? "" : "\\";
 
@@ -65,13 +73,23 @@ namespace SystemsAnalysis.ModelConstruction
           string tableName = dataAccessTables[linkName][0];
           string databasePath = modelRoot + dataAccessTables[linkName][1];
 
-          accessHelper.LinkTable(tableName, databasePath, linkName);
+          try
+          {
+            accessHelper.LinkTable(tableName, databasePath, linkName);
+          }
+          catch (Exception ex)
+          {
+            if (!allowMissingLinks || !ex.Message.Contains("Could not find file"))
+            {
+              throw new Exception("Failed to relink table '" + tableName + "': " + ex.Message);
+            }
+          }
         }
         accessHelper.Dispose();
       }
       catch (Exception ex)
       {
-        throw new Exception("Could not relink DataAccess tables.", ex);
+        throw new Exception("Could not refresh the DataAccess tables.", ex);
       }
       finally
       {

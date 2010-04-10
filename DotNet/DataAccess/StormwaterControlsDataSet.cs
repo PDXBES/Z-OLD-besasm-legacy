@@ -1,4 +1,5 @@
-﻿namespace SystemsAnalysis.DataAccess
+﻿using SystemsAnalysis.Utils.AccessUtils;
+namespace SystemsAnalysis.DataAccess
 {
   public partial class StormwaterControlsDataSet
   {
@@ -18,7 +19,17 @@
 
       StormwaterControlsDataSetTableAdapters.mdl_SurfSC_acTableAdapter mdlSscTA;
       mdlSscTA = new StormwaterControlsDataSetTableAdapters.mdl_SurfSC_acTableAdapter(modelPath);
-      mdlSscTA.Fill(this.mdl_SurfSC_ac);
+
+      AccessHelper accessHelper = new AccessHelper(modelPath + @"\mdbs\StormwaterControls_v12.mdb");
+      try
+      {
+        accessHelper.LinkTable("mdl_surfsc_ac", modelPath + @"\surfsc\mdl_SurfSC_ac.mdb");
+        mdlSscTA.Fill(this.mdl_SurfSC_ac);
+      }
+      finally
+      {
+        accessHelper.Dispose();
+      }
     }
 
   }
