@@ -356,7 +356,7 @@ namespace SystemsAnalysis.DataAccess {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class ICTargetParkDataTable : global::System.Data.DataTable, global::System.Collections.IEnumerable {
+        public partial class ICTargetParkDataTable : global::System.Data.TypedTableBase<ICTargetParkRow> {
             
             private global::System.Data.DataColumn columnMst_targetMIID;
             
@@ -509,11 +509,6 @@ namespace SystemsAnalysis.DataAccess {
             public ICTargetParkRow FindByMst_targetMIID(int Mst_targetMIID) {
                 return ((ICTargetParkRow)(this.Rows.Find(new object[] {
                             Mst_targetMIID})));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public virtual global::System.Collections.IEnumerator GetEnumerator() {
-                return this.Rows.GetEnumerator();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -685,7 +680,7 @@ namespace SystemsAnalysis.DataAccess {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class ICNodeDataTable : global::System.Data.DataTable, global::System.Collections.IEnumerable {
+        public partial class ICNodeDataTable : global::System.Data.TypedTableBase<ICNodeRow> {
             
             private global::System.Data.DataColumn columnRefNode;
             
@@ -959,11 +954,6 @@ namespace SystemsAnalysis.DataAccess {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public virtual global::System.Collections.IEnumerator GetEnumerator() {
-                return this.Rows.GetEnumerator();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public override global::System.Data.DataTable Clone() {
                 ICNodeDataTable cln = ((ICNodeDataTable)(base.Clone()));
                 cln.InitVars();
@@ -1167,7 +1157,7 @@ namespace SystemsAnalysis.DataAccess {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class ICTargetRoofDataTable : global::System.Data.DataTable, global::System.Collections.IEnumerable {
+        public partial class ICTargetRoofDataTable : global::System.Data.TypedTableBase<ICTargetRoofRow> {
             
             private global::System.Data.DataColumn columnMst_targetMIID;
             
@@ -1320,11 +1310,6 @@ namespace SystemsAnalysis.DataAccess {
             public ICTargetRoofRow FindByMst_targetMIID(int Mst_targetMIID) {
                 return ((ICTargetRoofRow)(this.Rows.Find(new object[] {
                             Mst_targetMIID})));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public virtual global::System.Collections.IEnumerator GetEnumerator() {
-                return this.Rows.GetEnumerator();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1496,7 +1481,7 @@ namespace SystemsAnalysis.DataAccess {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class mdl_SurfSC_acDataTable : global::System.Data.DataTable, global::System.Collections.IEnumerable {
+        public partial class mdl_SurfSC_acDataTable : global::System.Data.TypedTableBase<mdl_SurfSC_acRow> {
             
             private global::System.Data.DataColumn columnMAPINFO_ID;
             
@@ -1942,11 +1927,6 @@ namespace SystemsAnalysis.DataAccess {
             public mdl_SurfSC_acRow FindByMAPINFO_ID(int MAPINFO_ID) {
                 return ((mdl_SurfSC_acRow)(this.Rows.Find(new object[] {
                             MAPINFO_ID})));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public virtual global::System.Collections.IEnumerator GetEnumerator() {
-                return this.Rows.GetEnumerator();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
