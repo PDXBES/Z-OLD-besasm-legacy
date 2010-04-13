@@ -91,4 +91,31 @@ namespace SystemsAnalysis.DataAccess.StormwaterControlsDataSetTableAdapters
       this.Connection.ConnectionString = StormwaterControlsAdapterSetup.GetModelConnectionString(modelPath);
     }
   }
+
+  public partial class ic_StreetTargetsTableAdapter
+  {
+    public ic_StreetTargetsTableAdapter(string modelPath)
+      : this()
+    {
+      this.Connection.ConnectionString = StormwaterControlsAdapterSetup.GetModelConnectionString(modelPath);
+    }
+  }
+
+  public partial class ic_ParkingTargetsTableAdapter
+  {
+    public ic_ParkingTargetsTableAdapter(string modelPath)
+      : this()
+    {
+      this.Connection.ConnectionString = StormwaterControlsAdapterSetup.GetModelConnectionString(modelPath);
+    }
+  }
+
+  public partial class ic_RoofTargetsTableAdapter
+  {
+    public ic_RoofTargetsTableAdapter(string modelPath)
+      : this()
+    {
+      this.Connection.ConnectionString = StormwaterControlsAdapterSetup.GetModelConnectionString(modelPath);
+    }
+  }
 }
