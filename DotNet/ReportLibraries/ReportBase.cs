@@ -111,11 +111,6 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
       }
     }
 
-    public string GenericCount(IDictionary<string, Parameter> parameters)
-    {
-      return "";
-    }
-
     /// <summary>
     /// Delegate signature for functions executed via HandleFunction
     /// </summary>
@@ -173,6 +168,11 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
       public string Op
       {
         get { if (op != null) { return op; } else { throw new Exception("Operator not set"); } }
+      }
+      public string FormatString
+      {
+        get { return this.formatString; }
+        set { this.formatString = value; }
       }
       public bool ValueAsBool
       {
