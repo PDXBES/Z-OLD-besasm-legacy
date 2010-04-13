@@ -1,0 +1,7 @@
+'
+'	Routines to support investigation and editing
+'
+Declare Sub FindSelectedLink()
+Declare Sub FindSelectedUSNode()
+Declare Sub FindSelectedDSNode()
+Declare Sub	SetAppendTable()

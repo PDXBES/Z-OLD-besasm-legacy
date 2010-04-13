@@ -1,0 +1,896 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<namespace name="uEMGAATSModelConfig">
+  <class name="TModelConfig">
+    <ancestor name="TObject" namespace="System">
+      <methodref name="Create" visibility="public">
+      </methodref>
+      <methodref name="Free" visibility="public">
+      </methodref>
+      <methodref name="InitInstance" visibility="public">
+      </methodref>
+      <methodref name="CleanupInstance" visibility="public">
+      </methodref>
+      <methodref name="ClassType" visibility="public">
+      </methodref>
+      <methodref name="ClassName" visibility="public">
+      </methodref>
+      <methodref name="ClassNameIs" visibility="public">
+      </methodref>
+      <methodref name="ClassParent" visibility="public">
+      </methodref>
+      <methodref name="ClassInfo" visibility="public">
+      </methodref>
+      <methodref name="InstanceSize" visibility="public">
+      </methodref>
+      <methodref name="InheritsFrom" visibility="public">
+      </methodref>
+      <methodref name="MethodAddress" visibility="public">
+      </methodref>
+      <methodref name="MethodName" visibility="public">
+      </methodref>
+      <methodref name="FieldAddress" visibility="public">
+      </methodref>
+      <methodref name="GetInterface" visibility="public">
+      </methodref>
+      <methodref name="GetInterfaceEntry" visibility="public">
+      </methodref>
+      <methodref name="GetInterfaceTable" visibility="public">
+      </methodref>
+      <methodref name="SafeCallException" visibility="public">
+      </methodref>
+      <methodref name="AfterConstruction" visibility="public">
+      </methodref>
+      <methodref name="BeforeDestruction" visibility="public">
+      </methodref>
+      <methodref name="Dispatch" visibility="public">
+      </methodref>
+      <methodref name="DefaultHandler" visibility="public">
+      </methodref>
+      <methodref name="NewInstance" visibility="public">
+      </methodref>
+      <methodref name="FreeInstance" visibility="public">
+      </methodref>
+      <methodref name="Destroy" visibility="public">
+      </methodref>
+    </ancestor>
+    <members>
+      <field name="fConfig" type="IConfigFile" visibility="private" />
+      <field name="fMDBFiles" type="THashedStringList" visibility="private" />
+      <field name="fStandardDirectories" type="THashedStringList" visibility="private" />
+      <field name="fRootLinks" type="THashedStringList" visibility="private" />
+      <field name="fStopLinks" type="THashedStringList" visibility="private" />
+      <field name="fForcedRootLinks" type="THashedStringList" visibility="private" />
+      <field name="fForcedStopLinks" type="THashedStringList" visibility="private" />
+      <field name="fStormsToBuild" type="TStringList" visibility="private" />
+      <function name="GetHasDirectSubcatchments" visibility="private">
+        <parameters>
+          <retval type="Boolean" />
+        </parameters>
+      </function>
+      <function name="GetHasNetwork" visibility="private">
+        <parameters>
+          <retval type="Boolean" />
+        </parameters>
+      </function>
+      <function name="GetHasSurfaceSubcatchments" visibility="private">
+        <parameters>
+          <retval type="Boolean" />
+        </parameters>
+      </function>
+      <function name="GetModelCreateDate" visibility="private">
+        <parameters>
+          <retval type="TDateTime" />
+        </parameters>
+      </function>
+      <function name="GetModelModifiedDate" visibility="private">
+        <parameters>
+          <retval type="TDateTime" />
+        </parameters>
+      </function>
+      <function name="GetModelName" visibility="private">
+        <parameters>
+          <retval type="string" />
+        </parameters>
+      </function>
+      <function name="GetVersion" visibility="private">
+        <parameters>
+          <retval type="string" />
+        </parameters>
+      </function>
+      <function name="GetMasterMDBFiles" visibility="private">
+        <parameters>
+          <parameter name="index" type="Integer" />
+          <retval type="string" />
+        </parameters>
+      </function>
+      <function name="GetMasterMDBFilesCount" visibility="private">
+        <parameters>
+          <retval type="Integer" />
+        </parameters>
+      </function>
+      <function name="GetMasterMDBFileIDs" visibility="private">
+        <parameters>
+          <parameter name="index" type="Integer" />
+          <retval type="string" />
+        </parameters>
+      </function>
+      <function name="GetFileName" visibility="private">
+        <parameters>
+          <retval type="string" />
+        </parameters>
+      </function>
+      <function name="GetPath" visibility="private">
+        <parameters>
+          <retval type="string" />
+        </parameters>
+      </function>
+      <function name="GetStandardDirectory" visibility="private">
+        <parameters>
+          <parameter name="Index" type="Integer" />
+          <retval type="string" />
+        </parameters>
+      </function>
+      <function name="GetStandardDirectoryByName" visibility="private">
+        <parameters>
+          <parameter name="Index" type="string" />
+          <retval type="string" />
+        </parameters>
+      </function>
+      <function name="GetStandardDirectoryCount" visibility="private">
+        <parameters>
+          <retval type="Integer" />
+        </parameters>
+      </function>
+      <function name="GetDebugFileName" visibility="private">
+        <parameters>
+          <retval type="TFileName" />
+        </parameters>
+      </function>
+      <function name="GetDebugTrace" visibility="private">
+        <parameters>
+          <retval type="Boolean" />
+        </parameters>
+      </function>
+      <function name="GetDSNodeField" visibility="private">
+        <parameters>
+          <retval type="string" />
+        </parameters>
+      </function>
+      <function name="GetElementField" visibility="private">
+        <parameters>
+          <retval type="string" />
+        </parameters>
+      </function>
+      <function name="GetEMGWorkbenchPath" visibility="private">
+        <parameters>
+          <retval type="string" />
+        </parameters>
+      </function>
+      <function name="GetEngineExportFileName" visibility="private">
+        <parameters>
+          <retval type="TFileName" />
+        </parameters>
+      </function>
+      <function name="GetForceMDBRefresh" visibility="private">
+        <parameters>
+          <retval type="Boolean" />
+        </parameters>
+      </function>
+      <function name="GetLinkExistingTable" visibility="private">
+        <parameters>
+          <retval type="string" />
+        </parameters>
+      </function>
+      <function name="GetLinkField" visibility="private">
+        <parameters>
+          <retval type="string" />
+        </parameters>
+      </function>
+      <function name="GetLinkFutureTable" visibility="private">
+        <parameters>
+          <retval type="string" />
+        </parameters>
+      </function>
+      <function name="GetMasterLinksPath" visibility="private">
+        <parameters>
+          <retval type="string" />
+        </parameters>
+      </function>
+      <function name="GetMasterNodesPath" visibility="private">
+        <parameters>
+          <retval type="string" />
+        </parameters>
+      </function>
+      <function name="GetMasterParcelsPath" visibility="private">
+        <parameters>
+          <retval type="string" />
+        </parameters>
+      </function>
+      <function name="GetMasterQuartersectionPath" visibility="private">
+        <parameters>
+          <retval type="string" />
+        </parameters>
+      </function>
+      <function name="GetMasterRootPath" visibility="private">
+        <parameters>
+          <retval type="string" />
+        </parameters>
+      </function>
+      <function name="GetMasterSpecLinksDataPath" visibility="private">
+        <parameters>
+          <retval type="string" />
+        </parameters>
+      </function>
+      <function name="GetMasterSpecLinksPath" visibility="private">
+        <parameters>
+          <retval type="string" />
+        </parameters>
+      </function>
+      <function name="GetMasterSurfacePath" visibility="private">
+        <parameters>
+          <retval type="string" />
+        </parameters>
+      </function>
+      <function name="GetRootLink" visibility="private">
+        <parameters>
+          <parameter name="Index" type="Integer" />
+          <retval type="Integer" />
+        </parameters>
+      </function>
+      <function name="GetRootLinkComment" visibility="private">
+        <parameters>
+          <parameter name="Index" type="Integer" />
+          <retval type="string" />
+        </parameters>
+      </function>
+      <function name="GetRootLinksCount" visibility="private">
+        <parameters>
+          <retval type="Integer" />
+        </parameters>
+      </function>
+      <function name="GetRunoffDeployDate" visibility="private">
+        <parameters>
+          <retval type="TDateTime" />
+        </parameters>
+      </function>
+      <function name="GetRunoffFileName" visibility="private">
+        <parameters>
+          <retval type="TFileName" />
+        </parameters>
+      </function>
+      <function name="GetStopLink" visibility="private">
+        <parameters>
+          <parameter name="Index" type="Integer" />
+          <retval type="Integer" />
+        </parameters>
+      </function>
+      <function name="GetStopLinkComment" visibility="private">
+        <parameters>
+          <parameter name="Index" type="Integer" />
+          <retval type="string" />
+        </parameters>
+      </function>
+      <function name="GetStopLinksCount" visibility="private">
+        <parameters>
+          <retval type="Integer" />
+        </parameters>
+      </function>
+      <function name="GetSystemMDBRefreshDate" visibility="private">
+        <parameters>
+          <retval type="TDateTime" />
+        </parameters>
+      </function>
+      <function name="GetTimeFrame" visibility="private">
+        <parameters>
+          <retval type="TTimeFrame" />
+        </parameters>
+      </function>
+      <function name="GetTraceFileName" visibility="private">
+        <parameters>
+          <retval type="TFileName" />
+        </parameters>
+      </function>
+      <function name="GetTraceSourceDatabase" visibility="private">
+        <parameters>
+          <retval type="TFileName" />
+        </parameters>
+      </function>
+      <function name="GetTraceSourceTable" visibility="private">
+        <parameters>
+          <retval type="string" />
+        </parameters>
+      </function>
+      <function name="GetTransportFileName" visibility="private">
+        <parameters>
+          <retval type="TFileName" />
+        </parameters>
+      </function>
+      <function name="GetUSNodeField" visibility="private">
+        <parameters>
+          <retval type="string" />
+        </parameters>
+      </function>
+      <procedure name="SetDebugFileName" visibility="private">
+        <parameters>
+          <parameter name="Value" type="TFileName" paramflags="const" />
+        </parameters>
+      </procedure>
+      <procedure name="SetDebugTrace" visibility="private">
+        <parameters>
+          <parameter name="Value" type="Boolean" paramflags="const" />
+        </parameters>
+      </procedure>
+      <procedure name="SetDSNodeField" visibility="private">
+        <parameters>
+          <parameter name="Value" type="string" paramflags="const" />
+        </parameters>
+      </procedure>
+      <procedure name="SetElementField" visibility="private">
+        <parameters>
+          <parameter name="Value" type="string" paramflags="const" />
+        </parameters>
+      </procedure>
+      <procedure name="SetEMGWorkbenchPath" visibility="private">
+        <parameters>
+          <parameter name="Value" type="string" paramflags="const" />
+        </parameters>
+      </procedure>
+      <procedure name="SetEngineExportFileName" visibility="private">
+        <parameters>
+          <parameter name="Value" type="TFileName" paramflags="const" />
+        </parameters>
+      </procedure>
+      <procedure name="SetForceMDBRefresh" visibility="private">
+        <parameters>
+          <parameter name="Value" type="Boolean" paramflags="const" />
+        </parameters>
+      </procedure>
+      <procedure name="SetHasDirectSubcatchments" visibility="private">
+        <parameters>
+          <parameter name="Value" type="Boolean" paramflags="const" />
+        </parameters>
+      </procedure>
+      <procedure name="SetHasNetwork" visibility="private">
+        <parameters>
+          <parameter name="Value" type="Boolean" paramflags="const" />
+        </parameters>
+      </procedure>
+      <procedure name="SetHasSurfaceSubcatchments" visibility="private">
+        <parameters>
+          <parameter name="Value" type="Boolean" paramflags="const" />
+        </parameters>
+      </procedure>
+      <procedure name="SetLinkExistingTable" visibility="private">
+        <parameters>
+          <parameter name="Value" type="string" paramflags="const" />
+        </parameters>
+      </procedure>
+      <procedure name="SetLinkField" visibility="private">
+        <parameters>
+          <parameter name="Value" type="string" paramflags="const" />
+        </parameters>
+      </procedure>
+      <procedure name="SetLinkFutureTable" visibility="private">
+        <parameters>
+          <parameter name="Value" type="string" paramflags="const" />
+        </parameters>
+      </procedure>
+      <procedure name="SetMasterLinksPath" visibility="private">
+        <parameters>
+          <parameter name="Value" type="string" paramflags="const" />
+        </parameters>
+      </procedure>
+      <procedure name="SetMasterNodesPath" visibility="private">
+        <parameters>
+          <parameter name="Value" type="string" paramflags="const" />
+        </parameters>
+      </procedure>
+      <procedure name="SetMasterParcelsPath" visibility="private">
+        <parameters>
+          <parameter name="Value" type="string" paramflags="const" />
+        </parameters>
+      </procedure>
+      <procedure name="SetMasterQuartersectionPath" visibility="private">
+        <parameters>
+          <parameter name="Value" type="string" paramflags="const" />
+        </parameters>
+      </procedure>
+      <procedure name="SetMasterRootPath" visibility="private">
+        <parameters>
+          <parameter name="Value" type="string" paramflags="const" />
+        </parameters>
+      </procedure>
+      <procedure name="SetMasterSpecLinksDataPath" visibility="private">
+        <parameters>
+          <parameter name="Value" type="string" paramflags="const" />
+        </parameters>
+      </procedure>
+      <procedure name="SetMasterSpecLinksPath" visibility="private">
+        <parameters>
+          <parameter name="Value" type="string" paramflags="const" />
+        </parameters>
+      </procedure>
+      <procedure name="SetMasterSurfacePath" visibility="private">
+        <parameters>
+          <parameter name="Value" type="string" paramflags="const" />
+        </parameters>
+      </procedure>
+      <procedure name="SetModelCreateDate" visibility="private">
+        <parameters>
+          <parameter name="Value" type="TDateTime" paramflags="const" />
+        </parameters>
+      </procedure>
+      <procedure name="SetModelModifiedDate" visibility="private">
+        <parameters>
+          <parameter name="Value" type="TDateTime" paramflags="const" />
+        </parameters>
+      </procedure>
+      <procedure name="SetRootLink" visibility="private">
+        <parameters>
+          <parameter name="Index" type="Integer" />
+          <parameter name="Value" type="Integer" paramflags="const" />
+        </parameters>
+      </procedure>
+      <procedure name="SetRootLinkComment" visibility="private">
+        <parameters>
+          <parameter name="Index" type="Integer" />
+          <parameter name="Value" type="string" paramflags="const" />
+        </parameters>
+      </procedure>
+      <procedure name="SetRunoffDeployDate" visibility="private">
+        <parameters>
+          <parameter name="Value" type="TDateTime" paramflags="const" />
+        </parameters>
+      </procedure>
+      <procedure name="SetRunoffFileName" visibility="private">
+        <parameters>
+          <parameter name="Value" type="TFileName" paramflags="const" />
+        </parameters>
+      </procedure>
+      <procedure name="SetStopLink" visibility="private">
+        <parameters>
+          <parameter name="Index" type="Integer" />
+          <parameter name="Value" type="Integer" paramflags="const" />
+        </parameters>
+      </procedure>
+      <procedure name="SetStopLinkComment" visibility="private">
+        <parameters>
+          <parameter name="Index" type="Integer" />
+          <parameter name="Value" type="string" paramflags="const" />
+        </parameters>
+      </procedure>
+      <procedure name="SetTraceFileName" visibility="private">
+        <parameters>
+          <parameter name="Value" type="TFileName" paramflags="const" />
+        </parameters>
+      </procedure>
+      <procedure name="SetTraceSourceDatabase" visibility="private">
+        <parameters>
+          <parameter name="Value" type="TFileName" paramflags="const" />
+        </parameters>
+      </procedure>
+      <procedure name="SetTraceSourceTable" visibility="private">
+        <parameters>
+          <parameter name="Value" type="string" paramflags="const" />
+        </parameters>
+      </procedure>
+      <procedure name="SetTransportFileName" visibility="private">
+        <parameters>
+          <parameter name="Value" type="TFileName" paramflags="const" />
+        </parameters>
+      </procedure>
+      <procedure name="SetUSNodeField" visibility="private">
+        <parameters>
+          <parameter name="Value" type="string" paramflags="const" />
+        </parameters>
+      </procedure>
+      <function name="GetReachField" visibility="private">
+        <parameters>
+          <retval type="string" />
+        </parameters>
+      </function>
+      <procedure name="SetReachField" visibility="private">
+        <parameters>
+          <parameter name="Value" type="string" paramflags="const" />
+        </parameters>
+      </procedure>
+      <function name="GetMasterMDBFilesByName" visibility="private">
+        <parameters>
+          <parameter name="index" type="string" />
+          <retval type="string" />
+        </parameters>
+      </function>
+      <function name="GetHydroQCFileName" visibility="private">
+        <parameters>
+          <retval type="string" />
+        </parameters>
+      </function>
+      <procedure name="SetHydroQCFileName" visibility="private">
+        <parameters>
+          <parameter name="Value" type="string" paramflags="const" />
+        </parameters>
+      </procedure>
+      <function name="GetForcedRootLink" visibility="private">
+        <parameters>
+          <parameter name="Index" type="Integer" />
+          <retval type="Integer" />
+        </parameters>
+      </function>
+      <function name="GetForcedRootLinkComment" visibility="private">
+        <parameters>
+          <parameter name="Index" type="Integer" />
+          <retval type="string" />
+        </parameters>
+      </function>
+      <function name="GetForcedRootLinksCount" visibility="private">
+        <parameters>
+          <retval type="Integer" />
+        </parameters>
+      </function>
+      <function name="GetForcedStopLink" visibility="private">
+        <parameters>
+          <parameter name="Index" type="Integer" />
+          <retval type="Integer" />
+        </parameters>
+      </function>
+      <function name="GetForcedStopLinkComment" visibility="private">
+        <parameters>
+          <parameter name="Index" type="Integer" />
+          <retval type="string" />
+        </parameters>
+      </function>
+      <function name="GetForcedStopLinksCount" visibility="private">
+        <parameters>
+          <retval type="Integer" />
+        </parameters>
+      </function>
+      <procedure name="SetForcedRootLink" visibility="private">
+        <parameters>
+          <parameter name="Index" type="Integer" />
+          <parameter name="Value" type="Integer" paramflags="const" />
+        </parameters>
+      </procedure>
+      <procedure name="SetForcedRootLinkComment" visibility="private">
+        <parameters>
+          <parameter name="Index" type="Integer" />
+          <parameter name="Value" type="string" paramflags="const" />
+        </parameters>
+      </procedure>
+      <procedure name="SetForcedStopLink" visibility="private">
+        <parameters>
+          <parameter name="Index" type="Integer" />
+          <parameter name="Value" type="Integer" paramflags="const" />
+        </parameters>
+      </procedure>
+      <procedure name="SetForcedStopLinkComment" visibility="private">
+        <parameters>
+          <parameter name="Index" type="Integer" />
+          <parameter name="Value" type="string" paramflags="const" />
+        </parameters>
+      </procedure>
+      <function name="GetHasSkeletonModel" visibility="private">
+        <parameters>
+          <retval type="Boolean" />
+        </parameters>
+      </function>
+      <procedure name="SetHasSkeletonModel" visibility="private">
+        <parameters>
+          <parameter name="Value" type="Boolean" paramflags="const" />
+        </parameters>
+      </procedure>
+      <function name="GetHasStandardDirectories" visibility="private">
+        <parameters>
+          <retval type="Boolean" />
+        </parameters>
+      </function>
+      <procedure name="SetHasStandardDirectories" visibility="private">
+        <parameters>
+          <parameter name="Value" type="Boolean" paramflags="const" />
+        </parameters>
+      </procedure>
+      <function name="GetStormsToBuild" visibility="private">
+        <parameters>
+          <parameter name="Index" type="Integer" />
+          <retval type="string" />
+        </parameters>
+      </function>
+      <function name="GetStormsToBuildCount" visibility="private">
+        <parameters>
+          <retval type="Integer" />
+        </parameters>
+      </function>
+      <procedure name="GetStormsToBuildFromConfig" visibility="private">
+      </procedure>
+      <function name="GetStormsToBuildList" visibility="private">
+        <parameters>
+          <retval type="string" />
+        </parameters>
+      </function>
+      <procedure name="SetStormsToBuildList" visibility="private">
+        <parameters>
+          <parameter name="Value" type="string" paramflags="const" />
+        </parameters>
+      </procedure>
+      <procedure name="SetTimeFrame" visibility="private">
+        <parameters>
+          <parameter name="Value" type="TTimeFrame" paramflags="const" />
+        </parameters>
+      </procedure>
+      <function name="GetDescription" visibility="private">
+        <parameters>
+          <retval type="string" />
+        </parameters>
+      </function>
+      <function name="GetTitle" visibility="private">
+        <parameters>
+          <retval type="string" />
+        </parameters>
+      </function>
+      <procedure name="SetDescription" visibility="private">
+        <parameters>
+          <parameter name="Value" type="string" paramflags="const" />
+        </parameters>
+      </procedure>
+      <procedure name="SetTitle" visibility="private">
+        <parameters>
+          <parameter name="Value" type="string" paramflags="const" />
+        </parameters>
+      </procedure>
+      <function name="GetRootLinkAsString" visibility="private">
+        <parameters>
+          <parameter name="Index" type="Integer" />
+          <retval type="string" />
+        </parameters>
+      </function>
+      <function name="GetStopLinkAsString" visibility="private">
+        <parameters>
+          <parameter name="Index" type="Integer" />
+          <retval type="string" />
+        </parameters>
+      </function>
+      <function name="GetForcedRootLinkAsString" visibility="private">
+        <parameters>
+          <parameter name="Index" type="Integer" />
+          <retval type="string" />
+        </parameters>
+      </function>
+      <function name="GetForcedStopLinkAsString" visibility="private">
+        <parameters>
+          <parameter name="Index" type="Integer" />
+          <retval type="string" />
+        </parameters>
+      </function>
+      <function name="GetCreatedVia" visibility="private">
+        <parameters>
+          <retval type="string" />
+        </parameters>
+      </function>
+      <function name="GetResultViewsProjectDescription" visibility="private">
+        <parameters>
+          <retval type="string" />
+        </parameters>
+      </function>
+      <function name="GetResultViewsProjectNumber" visibility="private">
+        <parameters>
+          <retval type="string" />
+        </parameters>
+      </function>
+      <function name="GetResultViewsStudyAreaID" visibility="private">
+        <parameters>
+          <retval type="string" />
+        </parameters>
+      </function>
+      <procedure name="SetResultViewsProjectDescription" visibility="private">
+        <parameters>
+          <parameter name="Value" type="string" paramflags="const" />
+        </parameters>
+      </procedure>
+      <procedure name="SetResultViewsProjectNumber" visibility="private">
+        <parameters>
+          <parameter name="Value" type="string" paramflags="const" />
+        </parameters>
+      </procedure>
+      <procedure name="SetResultViewsStudyAreaID" visibility="private">
+        <parameters>
+          <parameter name="Value" type="string" paramflags="const" />
+        </parameters>
+      </procedure>
+      <function name="GetUseBaseflow" visibility="private">
+        <parameters>
+          <retval type="Boolean" />
+        </parameters>
+      </function>
+      <procedure name="SetUseBaseflow" visibility="private">
+        <parameters>
+          <parameter name="Value" type="Boolean" paramflags="const" />
+        </parameters>
+      </procedure>
+      <function name="GetModelEnteredDate" visibility="private">
+        <parameters>
+          <retval type="TDateTime" />
+        </parameters>
+      </function>
+      <procedure name="SetModelEnteredDate" visibility="private">
+        <parameters>
+          <parameter name="Value" type="TDateTime" paramflags="const" />
+        </parameters>
+      </procedure>
+      <procedure name="SetSystemMDBRefreshDate" visibility="private">
+        <parameters>
+          <parameter name="Value" type="TDateTime" paramflags="const" />
+        </parameters>
+      </procedure>
+      <procedure name="GetMDBFiles" visibility="protected">
+      </procedure>
+      <procedure name="GetStandardDirectories" visibility="protected">
+      </procedure>
+      <procedure name="GetRootLinks" visibility="protected">
+      </procedure>
+      <procedure name="GetStopLinks" visibility="protected">
+      </procedure>
+      <procedure name="GetForcedRootLinks" visibility="protected">
+      </procedure>
+      <procedure name="GetForcedStopLinks" visibility="protected">
+      </procedure>
+      <constructor name="Create" visibility="public">
+        <parameters>
+          <parameter name="AFileName" type="TFileName" />
+        </parameters>
+      </constructor>
+      <destructor name="Destroy" visibility="public">
+        <parameters>
+        </parameters>
+      </destructor>
+      <property name="MasterMDBFileIDs" visibility="public" read="GetMasterMDBFileIDs" type="string" />
+      <property name="MasterMDBFiles" visibility="public" read="GetMasterMDBFiles" type="string" />
+      <property name="MasterMDBFilesCount" visibility="public" read="GetMasterMDBFilesCount" type="Integer" />
+      <property name="MasterMDBFilesByName" visibility="public" read="GetMasterMDBFilesByName" type="string" />
+      <procedure name="CommentOutMasterMDB" visibility="public">
+        <parameters>
+          <parameter name="Index" type="Integer" />
+        </parameters>
+      </procedure>
+      <property name="Version" visibility="public" read="GetVersion" type="string" />
+      <property name="TimeFrame" visibility="public" read="GetTimeFrame" write="SetTimeFrame" type="TTimeFrame" />
+      <property name="HasStandardDirectories" visibility="public" read="GetHasStandardDirectories" write="SetHasStandardDirectories" type="Boolean" />
+      <property name="HasSkeletonModel" visibility="public" read="GetHasSkeletonModel" write="SetHasSkeletonModel" type="Boolean" />
+      <property name="HasNetwork" visibility="public" read="GetHasNetwork" write="SetHasNetwork" type="Boolean" />
+      <property name="HasDirectSubcatchments" visibility="public" read="GetHasDirectSubcatchments" write="SetHasDirectSubcatchments" type="Boolean" />
+      <property name="HasSurfaceSubcatchments" visibility="public" read="GetHasSurfaceSubcatchments" write="SetHasSurfaceSubcatchments" type="Boolean" />
+      <property name="ForceMDBRefresh" visibility="public" read="GetForceMDBRefresh" write="SetForceMDBRefresh" type="Boolean" />
+      <property name="SystemMDBRefreshDate" visibility="public" read="GetSystemMDBRefreshDate" write="SetSystemMDBRefreshDate" type="TDateTime" />
+      <property name="ModelName" visibility="public" read="GetModelName" type="string" />
+      <property name="ModelCreateDate" visibility="public" read="GetModelCreateDate" write="SetModelCreateDate" type="TDateTime" />
+      <property name="ModelEnteredDate" visibility="public" read="GetModelEnteredDate" write="SetModelEnteredDate" type="TDateTime" />
+      <property name="ModelModifiedDate" visibility="public" read="GetModelModifiedDate" write="SetModelModifiedDate" type="TDateTime" />
+      <property name="RunoffDeployDate" visibility="public" read="GetRunoffDeployDate" write="SetRunoffDeployDate" type="TDateTime" />
+      <property name="FileName" visibility="public" read="GetFileName" type="string" />
+      <property name="Path" visibility="public" read="GetPath" type="string" />
+      <property name="Title" visibility="public" read="GetTitle" write="SetTitle" type="string" />
+      <property name="Description" visibility="public" read="GetDescription" write="SetDescription" type="string" />
+      <property name="HydroQCFileName" visibility="public" read="GetHydroQCFileName" write="SetHydroQCFileName" type="string" />
+      <property name="MasterRootPath" visibility="public" read="GetMasterRootPath" write="SetMasterRootPath" type="string" />
+      <property name="MasterLinksPath" visibility="public" read="GetMasterLinksPath" write="SetMasterLinksPath" type="string" />
+      <property name="MasterSpecLinksDataPath" visibility="public" read="GetMasterSpecLinksDataPath" write="SetMasterSpecLinksDataPath" type="string" />
+      <property name="MasterSpecLinksPath" visibility="public" read="GetMasterSpecLinksPath" write="SetMasterSpecLinksPath" type="string" />
+      <property name="MasterNodesPath" visibility="public" read="GetMasterNodesPath" write="SetMasterNodesPath" type="string" />
+      <property name="MasterParcelsPath" visibility="public" read="GetMasterParcelsPath" write="SetMasterParcelsPath" type="string" />
+      <property name="MasterSurfacePath" visibility="public" read="GetMasterSurfacePath" write="SetMasterSurfacePath" type="string" />
+      <property name="MasterQuartersctionPath" visibility="public" read="GetMasterQuartersectionPath" write="SetMasterQuartersectionPath" type="string" />
+      <property name="EMGWorkbenchPath" visibility="public" read="GetEMGWorkbenchPath" write="SetEMGWorkbenchPath" type="string" />
+      <property name="StandardDirectories" visibility="public" read="GetStandardDirectory" type="string" />
+      <property name="StandardDirectoriesByName" visibility="public" read="GetStandardDirectoryByName" type="string" />
+      <property name="StandardDirectoryCount" visibility="public" read="GetStandardDirectoryCount" type="Integer" />
+      <property name="TraceFileName" visibility="public" read="GetTraceFileName" write="SetTraceFileName" type="TFileName" />
+      <property name="TraceSourceDatabase" visibility="public" read="GetTraceSourceDatabase" write="SetTraceSourceDatabase" type="TFileName" />
+      <property name="TraceSourceTable" visibility="public" read="GetTraceSourceTable" write="SetTraceSourceTable" type="string" />
+      <property name="LinkField" visibility="public" read="GetLinkField" write="SetLinkField" type="string" />
+      <property name="USNodeField" visibility="public" read="GetUSNodeField" write="SetUSNodeField" type="string" />
+      <property name="DSNodeField" visibility="public" read="GetDSNodeField" write="SetDSNodeField" type="string" />
+      <property name="ReachField" visibility="public" read="GetReachField" write="SetReachField" type="string" />
+      <property name="ElementField" visibility="public" read="GetElementField" write="SetElementField" type="string" />
+      <property name="DebugTrace" visibility="public" read="GetDebugTrace" write="SetDebugTrace" type="Boolean" />
+      <property name="DebugFileName" visibility="public" read="GetDebugFileName" write="SetDebugFileName" type="TFileName" />
+      <property name="LinkExistingTable" visibility="public" read="GetLinkExistingTable" write="SetLinkExistingTable" type="string" />
+      <property name="LinkFutureTable" visibility="public" read="GetLinkFutureTable" write="SetLinkFutureTable" type="string" />
+      <property name="RunoffFileName" visibility="public" read="GetRunoffFileName" write="SetRunoffFileName" type="TFileName" />
+      <property name="TransportFileName" visibility="public" read="GetTransportFileName" write="SetTransportFileName" type="TFileName" />
+      <property name="EngineExportFileName" visibility="public" read="GetEngineExportFileName" write="SetEngineExportFileName" type="TFileName" />
+      <property name="StormsToBuildCount" visibility="public" read="GetStormsToBuildCount" type="Integer" />
+      <property name="StormsToBuild" visibility="public" read="GetStormsToBuild" type="string" />
+      <function name="AddStormToBuild" visibility="public">
+        <parameters>
+          <parameter name="AStormCode" type="string" />
+          <retval type="Integer" />
+        </parameters>
+      </function>
+      <property name="StormsToBuildList" visibility="public" read="GetStormsToBuildList" write="SetStormsToBuildList" type="string" />
+      <procedure name="ClearStormsToBuild" visibility="public">
+      </procedure>
+      <property name="UseBaseflow" visibility="public" read="GetUseBaseflow" write="SetUseBaseflow" type="Boolean" />
+      <property name="RootLinks" visibility="public" read="GetRootLink" write="SetRootLink" type="Integer" />
+      <property name="RootLinksAsString" visibility="public" read="GetRootLinkAsString" type="string" />
+      <property name="RootLinkComments" visibility="public" read="GetRootLinkComment" write="SetRootLinkComment" type="string" />
+      <property name="RootLinksCount" visibility="public" read="GetRootLinksCount" type="Integer" />
+      <procedure name="AddRootLink" visibility="public">
+        <parameters>
+          <parameter name="ARoot" type="Integer" />
+          <parameter name="Comment" type="string">
+            <value>
+              
+            </value>
+          </parameter>
+        </parameters>
+      </procedure>
+      <procedure name="RemoveRootLinkByIndex" visibility="public">
+        <parameters>
+          <parameter name="Index" type="Integer" />
+        </parameters>
+      </procedure>
+      <procedure name="RemoveRootLink" visibility="public">
+        <parameters>
+          <parameter name="ARoot" type="Integer" />
+        </parameters>
+      </procedure>
+      <procedure name="ClearRootLinks" visibility="public">
+      </procedure>
+      <property name="ForcedRootLinks" visibility="public" read="GetForcedRootLink" write="SetForcedRootLink" type="Integer" />
+      <property name="ForcedRootLinksAsString" visibility="public" read="GetForcedRootLinkAsString" type="string" />
+      <property name="ForcedRootLinkComments" visibility="public" read="GetForcedRootLinkComment" write="SetForcedRootLinkComment" type="string" />
+      <property name="ForcedRootLinksCount" visibility="public" read="GetForcedRootLinksCount" type="Integer" />
+      <property name="StopLinks" visibility="public" read="GetStopLink" write="SetStopLink" type="Integer" />
+      <property name="StopLinksAsString" visibility="public" read="GetStopLinkAsString" type="string" />
+      <property name="StopLinkComments" visibility="public" read="GetStopLinkComment" write="SetStopLinkComment" type="string" />
+      <property name="StopLinksCount" visibility="public" read="GetStopLinksCount" type="Integer" />
+      <procedure name="AddStopLink" visibility="public">
+        <parameters>
+          <parameter name="AStop" type="Integer" />
+          <parameter name="Comment" type="string">
+            <value>
+              
+            </value>
+          </parameter>
+        </parameters>
+      </procedure>
+      <procedure name="RemoveStopLinkByIndex" visibility="public">
+        <parameters>
+          <parameter name="Index" type="Integer" />
+        </parameters>
+      </procedure>
+      <procedure name="RemoveStopLink" visibility="public">
+        <parameters>
+          <parameter name="AStop" type="Integer" />
+        </parameters>
+      </procedure>
+      <procedure name="ClearStopLinks" visibility="public">
+      </procedure>
+      <property name="ForcedStopLinks" visibility="public" read="GetForcedStopLink" write="SetForcedStopLink" type="Integer" />
+      <property name="ForcedStopLinksAsString" visibility="public" read="GetForcedStopLinkAsString" type="string" />
+      <property name="ForcedStopLinkComments" visibility="public" read="GetForcedStopLinkComment" write="SetForcedStopLinkComment" type="string" />
+      <property name="ForcedStopLinksCount" visibility="public" read="GetForcedStopLinksCount" type="Integer" />
+      <property name="CreatedVia" visibility="public" read="GetCreatedVia" type="string" />
+      <procedure name="CopyBoundariesFromModel" visibility="public">
+        <parameters>
+          <parameter name="AModelPath" type="string" />
+        </parameters>
+      </procedure>
+      <procedure name="CopyConfigFromModelTemplate" visibility="public">
+      </procedure>
+      <procedure name="CopyConfigFromSystem" visibility="public">
+      </procedure>
+      <procedure name="Update" visibility="public">
+      </procedure>
+      <procedure name="Revert" visibility="public">
+      </procedure>
+      <procedure name="SetMDBRootToModel" visibility="public">
+      </procedure>
+      <procedure name="SetMDBRootToSystem" visibility="public">
+      </procedure>
+      <procedure name="SetEMGWorkbenchToSystem" visibility="public">
+      </procedure>
+      <property name="ResultViewsProjectNumber" visibility="public" read="GetResultViewsProjectNumber" write="SetResultViewsProjectNumber" type="string" />
+      <property name="ResultViewsProjectDescription" visibility="public" read="GetResultViewsProjectDescription" write="SetResultViewsProjectDescription" type="string" />
+      <property name="ResultViewsStudyAreaID" visibility="public" read="GetResultViewsStudyAreaID" write="SetResultViewsStudyAreaID" type="string" />
+    </members>
+  </class>
+</namespace>

@@ -1,0 +1,12 @@
+"Junction WSElev Data From XTParser"
+"huh39800.xot                            "
+
+"HOLLADAY, STARK, SULLIVAN BASIN EXTRAN  - 2/5/99 CALIBRATION STORM              "
+" EXISTING CONDITION,  ALL PIPES IN BASIN IN EXTRAN MODEL                        "
+"Starting Date =",  99036, "Starting Time = ",    0.00
+"Holaday,Sullivan, Stark Predesign, February 5, 1999 Storm                       "
+"EXIST CONDITION,                                                                "
+"PDXTran-AXTParser   ", "Area = ", 3613.09
+"Output Time Step (secs) = ",   30000.00
+"Number of Locations = ",     16
+"JUNC", 27330078,28340066,28340002,27330086,28350097,29340024,29370011,29370015,30380095,30350109,30320073,29310072,29300150,29300088,30311144,29320059,

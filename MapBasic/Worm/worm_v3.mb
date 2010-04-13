@@ -1,0 +1,458 @@
+'*************************************************
+'                                                 
+'	Application name:  WORM_v3.mbx
+'	Synth pipe editing tool
+'	Created By Mark A. Liebe, P.E., Ph.D.
+'	Date Modified:  4/4/2002 6:00AM
+'	Date Modified:  8/19/2002 8:00 AM
+'*************************************************
+'includes
+include "mapbasic.def"
+include "menu.def"
+include "icons.def"
+include "mistdlib.def"	'library of 
+include "str_lib.def"	'library of string handling commands
+
+'function/sub declares
+declare sub main
+declare sub button_make_buffer
+declare sub button_clear_cosmetic
+declare sub button_quit_tool
+declare sub button_append_synth
+declare sub button_save_synth
+declare sub set_map_window(byval Window_ID as integer, byval editLayer as string, byval multi_node as logical)
+declare function Init_vars() as logical
+declare function check_base_tables() as logical
+declare function check_append_table_structure() as logical
+declare function geocode_address (byval address_string as string, mapwindow as integer, x as float, y as float) as logical
+declare function clean_address (byval add_num as string, byval add_prefix as string, byval add_name as string, byval add_suffix as string) as string
+
+
+'constant definition
+define ini_filename "detang.ini"
+'define synth_tab "all_synth_data_go"
+'define SYNTH_PIPE_LENGTH "pipelen"
+'define base_tables "all_synth_data_go;synth_transaction;	Mdl_Sewers;STREETS;all_s"
+'define street_fields "STNO;PREDIR;STNAME;SUFFIX"
+define num_street_fields 4
+define SYNTH_USER_FIELD_NAME "SYNTH_USER"
+define SYNTH_APPEND_DATESTAMP "SYNTH_DATE"
+
+'dim variables
+dim street_field_index(num_street_fields) as integer
+dim STREET_FIELD, 
+		base_tables, 
+		STREET_TAB, 
+		street_fields, 
+		SYNTH_PIPE_LENGTH, 
+		synth_tab,
+		SYNTH_KEY_FIELD,
+		SYNTH_APPEND_TAB,
+		SYNTH_APPEND_KEY_FIELD,
+		USER,
+		gSYNTH_COL_LIST as string
+
+sub main
+	if not init_vars() then
+		note "Could not fine detang.ini file."
+		exit sub
+	end if
+	if not check_base_tables() then
+		exit sub
+	end if
+	if not check_append_table_structure() then
+		exit sub
+	end if
+	set distance units "ft"
+	Set coordsys earth projection 3, 74, 3, -120.5, 43.6666666667, 44.3333333333, 46, 8202099.738, 0
+	Create ButtonPad "WORM" As 
+	  PushButton  
+	    HelpMsg "Choose this button to create DS synth location indicators DS\nDS Synth Clues" 
+	    Calling button_make_buffer
+	    Icon  MI_ICON_MISC_4
+	  PushButton  
+	    HelpMsg "Choose this button to append selected lines to append table\nAppend select" 
+	    Calling button_append_synth
+	    Icon  MI_ICON_MB_14
+	  PushButton  
+	    HelpMsg "Choose this button to save the corrected synth user file\nSave Corrected Synths" 
+	    Calling button_save_synth
+	    Icon  MI_ICON_SAVE_FILE
+		PushButton  
+	    HelpMsg "Choose this button to clear synth clues\nClear Synth Clues" 
+	    Calling button_clear_cosmetic
+	    Icon  MI_ICON_MISC_18
+	  PushButton  
+	    HelpMsg "Choose this button to unload the application\nQuit Detangler" 
+	    Calling button_quit_tool
+	    Icon  MI_ICON_SIGNS_1
+	  
+	  Title "WORM"
+	  Width 5
+	  Show
+end sub
+
+sub button_make_buffer
+	dim num_segs, i, map_win_id, num_poly as integer
+	dim cosmetic_layer, do_str as string
+	dim x1, x2, y1, y2 as float
+	'get window ID             
+	map_win_id = FrontWindow()
+	if WindowInfo(map_win_id, WIN_INFO_TYPE) <> WIN_MAPPER then
+		Note "A map window needs to have the focus to use this button."
+	  exit sub
+	end if
+	cosmetic_layer = WindowInfo(map_win_id, WIN_INFO_TABLE)
+	if selectioninfo(SEL_INFO_NROWS) = 1 and selectioninfo(SEL_INFO_TABLENAME) = synth_tab then
+		call set_map_window(map_win_id , synth_tab, True)
+		'if ask("Buffer upstream or downstream end of segment?","DOWNSTRM","UPSTRM") then
+			'downstream
+			select * from selection where str$(obj) = "line" or str$(obj) = "polyline" into pipestobuffer
+			call button_clear_cosmetic
+			fetch first from pipestobuffer
+		 	'do 
+		 			num_poly = objectinfo(pipestobuffer.obj,OBJ_INFO_NPOLYGONS)
+		 			x1 = objectnodex(pipestobuffer.obj,num_poly,objectinfo(pipestobuffer.obj,OBJ_INFO_NPOLYGONS+num_poly))
+		 			y1 = objectnodey(pipestobuffer.obj,num_poly,objectinfo(pipestobuffer.obj,OBJ_INFO_NPOLYGONS+num_poly)) 
+		 			if pipestobuffer.pipelen > 0 then ' use Hansen pipe length
+						set style brush makebrush(1, RED, RED)
+						set style pen makepen(2, 2, MAGENTA)
+						do_str = "insert into " & cosmetic_layer & " (obj) values( createcircle(" & x1 & " ," & y1 & ", " & pipestobuffer.pipelen & "))"
+					else 'use map length
+						set style brush makebrush(1, RED, RED)
+						set style pen makepen(2, 12, MAGENTA)
+						do_str = "insert into " & cosmetic_layer & " (obj) values( createcircle(" & x1 & " ," & y1 & ", " & objectlen(pipestobuffer.obj, "ft") & "))"
+					end if						
+					run command do_str
+					'fetch next from pipestobuffer
+			'loop while not eot(pipestobuffer) 
+'			do_str =  clean_address(pipestobuffer.col(street_field_index(1)), pipestobuffer.col(street_field_index(2)), pipestobuffer.col(street_field_index(3)), pipestobuffer.col(street_field_index(4)))
+			do_str =  clean_address(pipestobuffer.StNo, pipestobuffer.Predir, pipestobuffer.StName, pipestobuffer.Suffix)
+			if len(do_str) > 0 then 'go geocode
+				if not geocode_address (do_str, map_win_id, x2, y2) then
+					note "Could not geocode upstream address" 
+				else
+						set style pen makepen(4, 54, MAGENTA)
+						do_str = "insert into " & cosmetic_layer & " (obj) values( createline(" & x2 & " ," & y2 & ", " & x1 & " ," & y1 & "))"
+						run command do_str
+				end if
+			end if
+			'RESELECT LINE AND SET EDITING TOOL TO NODE
+			SELECT * FROM pipestobuffer
+			Run Menu Command M_EDIT_RESHAPE
+	else
+		note "Tool currently operates on single segments selected from the table " & synth_tab
+	end if
+end sub
+
+sub button_append_synth
+	'appends selected synth pipes to SYNTH_APPEND_TAB
+	dim dum_str, SYNTH_COLS as string
+	dim i_field, num_cols as integer
+	if selectioninfo(SEL_INFO_NROWS) > 0 and selectioninfo(SEL_INFO_TABLENAME) = synth_tab then
+		SELECT * from selection into pipestoAPPEND
+		'select pipes in selection set already in APPEND table. Delete from APPEND table and reappend. 
+		dum_str = "select * from " + SYNTH_APPEND_TAB + " where " + SYNTH_APPEND_KEY_FIELD + " in(select " + SYNTH_KEY_FIELD + " from pipestoAPPEND) into pipestodelete"
+		run command dum_str
+		if SelectionInfo(SEL_INFO_NROWS) > 0 then
+			delete from pipestoDELETE
+		end if
+		'build select string and add fields for username and synthdate
+		dum_str = "select "
+		num_cols = count_items(gSYNTH_COL_LIST)
+		for i_field = 1 to num_cols
+			dum_str = dum_str + GetListString$(gSYNTH_COL_LIST, i_field) + ","
+		next 'i_field
+		dum_str = dum_str + """" + USER + """" + "," + CurDate() + " from pipestoAppend into to_append"
+		print dum_str
+		run command dum_str
+		dum_str = "insert into " + SYNTH_APPEND_TAB + " select * from to_append"
+		run command dum_str
+		close table to_append
+		close table pipestoAppend
+		close table pipestodelete
+	end if
+end sub
+
+sub button_save_synth
+	'saves synth changes
+	commit table SYNTH_APPEND_TAB
+	commit table SYNTH_TAB
+end sub
+
+sub button_clear_cosmetic
+'clears cosmetic layer
+	dim num_segs, i, map_win_id as integer
+	dim cosmetic_layer, do_str as string
+	'get window ID             
+	map_win_id = FrontWindow()
+	if WindowInfo(map_win_id, WIN_INFO_TYPE) <> WIN_MAPPER then
+		Note "A map window needs to have the focus to use this button."
+	  exit sub
+	end if
+	cosmetic_layer = WindowInfo(map_win_id, WIN_INFO_TABLE)
+	do_str = "select * from " & cosmetic_layer & " into junk"
+	Run command do_str
+	delete from junk
+	'Run Menu Command M_MAP_CLEAR_COSMETIC
+end sub  
+
+sub button_quit_tool
+	End Program
+end sub
+
+function check_base_tables() as logical
+	dim err_msg as string
+	dim i as integer
+	dim l_dum as logical
+	err_msg = "These tables are NOT open and need to be:"
+	l_dum = true
+	for i = 1 to count_items(base_tables) 
+		if not IsTableOpen(sExtract(i, base_tables)) then
+			err_msg = err_msg & chr$(10) &  sExtract(i, base_tables)
+			l_dum = false
+		end if
+  next 'i
+	if not l_dum then
+	  note err_msg
+	end if
+	for i = 1 to num_street_fields 
+		street_field_index(i) = Get_Index(GetListString$(street_fields,i), gSYNTH_COL_LIST)
+	next 'i
+	check_base_tables = l_dum
+end function
+
+function check_append_table_structure() as logical
+	'checks structure of append table for presence of synth_user and synth_date fields
+	check_append_table_structure = false
+	if not ColumnExists(SYNTH_APPEND_TAB, SYNTH_USER_FIELD_NAME, COL_TYPE_CHAR) then
+		'add column
+		Alter Table SYNTH_APPEND_TAB ( add SYNTH_USER_FIELD_NAME Char(8) ) Interactive
+	end if
+	if not ColumnExists(SYNTH_APPEND_TAB, SYNTH_APPEND_DATESTAMP, COL_TYPE_DATE) then
+		'add column
+		Alter Table SYNTH_APPEND_TAB ( add SYNTH_APPEND_DATESTAMP DATE ) Interactive
+	end if
+	check_append_table_structure = true
+end function
+
+function geocode_address (byval address_string as string, mapwindow as integer, x as float, y as float) as logical
+	'dim x, y as float
+	dim dum_str as string
+	dum_str = "find using " + STREET_TAB + "(" + STREET_FIELD + ")"
+	run command dum_str
+	find address_string
+	If CommandInfo(CMD_INFO_FIND_RC) >= 1 Then
+  x = CommandInfo(CMD_INFO_X)
+  y = CommandInfo(CMD_INFO_Y)                          
+'  Set Map
+'     Window mapwindow 
+'     Center (x, y)
+  ' Now create a symbol at the location we found. 
+  ' Create the object in the Cosmetic layer. 
+  Set Style Symbol MakeSymbol( 34, RED, 12)
+  Insert Into 
+    WindowInfo( mapwindow, WIN_INFO_TABLE)  (Object) 
+    Values ( CreatePoint(x, y) ) 
+    geocode_address = True
+Else
+      geocode_address = False
+End If 
+end function
+
+function clean_address (byval add_num as string, byval add_prefix as string, byval add_name as string, byval add_suffix as string) as string
+	add_num = trim$(add_num)
+	add_prefix = trim$(add_prefix)
+	add_name = trim$(add_name)
+	add_suffix = trim$(add_suffix)		
+  clean_address = ""
+  if len(add_num) = 0 then
+  	exit function
+  end if
+  if len(add_name) = 0 then
+  	exit function
+  end if
+  if len(add_suffix) = 0 then
+  	exit function
+  end if
+  if len(add_prefix) > 0 then
+	  clean_address = add_num & " " & add_prefix & " " & add_name & " " & add_suffix
+  else
+	  clean_address = add_num & " " & add_name & " " & add_suffix
+	end if  
+end function
+
+function Init_vars() as logical
+	'assumes structure of ini file as:
+	'[USER]
+	'Username
+	'[SYNTH_TAB]
+	'Name of synth table goes here (NO .TAB on end)
+	'[SYNTH_KEY_FIELD]
+	'Name of synth table key field
+	'[SYNTH_STREET_FIELDS]
+	'Name of field in synth table containing street NUMBER here
+	'Name of field in synth table containing street PREFIX here (SW, SE, etc)
+	'Name of field in synth table containing street NAME here
+	'Name of field in synth table containing street SUFFIX here
+	'[SYNTH_PIPE_LENGTH]
+	'Name of field in synth table containing Pipe length (ft) here
+	'[SYNTH_APPEND_TAB]
+	'Name of append synth table goes here (NO .TAB on end - assumes same structure as SYNTH_TAB)
+	'[SYNTH_APPEND_KEY_FIELD]
+	'Name of synth table key field
+	'[STREET_TAB]
+	'Name of Street file to geocode to here
+	'[STREET_FIELD]
+	'Name of street name in STREET file here
+	dim dum_str as string
+	dim i as integer
+	init_vars = false
+	print "init variables"
+	print "Getting ini data: " + ApplicationDirectory$() + ini_filename
+	if fileexists(ApplicationDirectory$() + ini_filename) then
+		print "opening INI file"
+ 		open file ApplicationDirectory$() + ini_filename for input as #1
+		'[USER]
+		line input #1, dum_str
+		if not EOF(1) then
+			if dum_str = "[USER]" then
+				line input #1, dum_str
+				USER = dum_str
+				print "USER" + " : " + USER
+			end if
+		else
+			Note "BAD ini file - SYNTH_TAB"
+			exit function
+		end if
+		'[SYNTH_TAB]
+		line input #1, dum_str
+		if not EOF(1) then
+			if dum_str = "[SYNTH_TAB]" then
+				line input #1, dum_str
+				base_tables = dum_str
+				SYNTH_TAB = dum_str
+				print "SYNTH_TAB" + " : " + base_tables
+			end if
+		else
+			Note "BAD ini file - SYNTH_TAB"
+			exit function
+		end if
+		'[SYNTH_KEY_FIELD]
+		line input #1, dum_str
+		if not EOF(1) then
+			if dum_str = "[SYNTH_KEY_FIELD]" then
+				line input #1, dum_str
+				SYNTH_KEY_FIELD = dum_str
+				print "SYNTH_KEY_FIELD" + ": " + SYNTH_KEY_FIELD 
+			end if
+		else
+			Note "BAD ini file - SYNTH_KEY_FIELD"
+			exit function
+		end if
+		'[SYNTH_STREET_FIELDS]
+		line input #1, dum_str
+		if not EOF(1) then
+			street_fields = ""
+			if dum_str = "[SYNTH_STREET_FIELDS]" then
+				line input #1, dum_str	' STNO
+				street_fields = street_fields + dum_str + ";"
+				line input #1, dum_str	' PREDIR
+				street_fields = street_fields + dum_str + ";"
+				line input #1, dum_str	' STNAME
+				street_fields = street_fields + dum_str + ";"
+				line input #1, dum_str	' SUFFIX
+				street_fields = street_fields + dum_str
+			end if
+		else
+			Note "BAD ini file - SYNTH_STREET_FIELDS"
+			exit function
+		end if
+		'[SYNTH_PIPE_LENGTH]
+		line input #1, dum_str
+		if not EOF(1) then
+			if dum_str = "[SYNTH_PIPE_LENGTH]" then
+				line input #1, SYNTH_PIPE_LENGTH
+				print "SYNTH_PIPE_LENGTH" + " : " + SYNTH_PIPE_LENGTH
+			end if
+		else
+			Note "BAD ini file - SYNTH_PIPELEN"
+			exit function
+		end if
+		'[SYNTH_APPEND_TAB]
+		line input #1, dum_str
+		if not EOF(1) then
+			if dum_str = "[SYNTH_APPEND_TAB]" then
+				line input #1, dum_str
+				base_tables = base_tables + ";" + dum_str
+				SYNTH_APPEND_TAB = dum_str
+				print "SYNTH_APPEND_TAB" + " : " + base_tables
+			else
+				Note "BAD ini file - SYNTH_APPEND_TAB"
+			end if
+		else
+			Note "BAD ini file - SYNTH_APPEND_TAB"
+			exit function
+		end if
+		'[SYNTH_APPEND_KEY_FIELD]
+		line input #1, dum_str
+		if not EOF(1) then
+			if dum_str = "[SYNTH_APPEND_KEY_FIELD]" then
+				line input #1, dum_str
+				SYNTH_APPEND_KEY_FIELD = dum_str
+				print "SYNTH_APPEND_KEY_FIELD" + " : " + SYNTH_APPEND_KEY_FIELD
+			end if
+		else
+			Note "BAD ini file - SYNTH_APPEND_KEY_FIELD"
+			exit function
+		end if
+	'[STREET_TAB]
+		line input #1, dum_str
+		if not EOF(1) then
+			if dum_str = "[STREET_TAB]" then
+				line input #1, dum_str
+'				base_tables = base_tables + ";" + dum_str
+				STREET_TAB = dum_str
+'				print "STREET_TAB" + " : " + base_tables
+				print "STREET_TAB" + " : " + dum_str
+			end if
+		else
+			Note "BAD ini file - STREETS_TAB"
+			exit function				
+		end if
+		'[STREET_FIELD]
+		line input #1, dum_str
+		if not EOF(1) then
+			if dum_str = "[STREET_FIELD]" then
+				line input #1, STREET_FIELD 
+				print "STREET_FIELD" + " : " + STREET_FIELD
+			end if
+		else
+			Note "BAD ini file - STREET_FIELD"
+			exit function				
+		end if
+ 	end if	
+	init_vars = true	
+	print "FINAL base_tables: " + base_tables
+	print "FINAL street_fields: " + street_fields
+	print "FINAL key_fields: " + SYNTH_KEY_FIELD + ";" + SYNTH_APPEND_KEY_FIELD
+	gSYNTH_COL_LIST = MakeColList$(SYNTH_TAB)
+	print "FINAL col_list: " + gSYNTH_COL_LIST
+close file #1
+end function
+
+sub set_map_window(byval Window_ID as integer, byval editLayer as string, byval multi_node as logical)
+	'sets up mapper window with the proper configuration
+	set map 
+		window window_id
+		layer editlayer editable on
+	if multi_node then
+		set map 
+			window window_id
+			move nodes 1
+	else
+		set map 
+			window window_id
+			move nodes 0
+	end if
+end sub
