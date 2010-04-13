@@ -4,17 +4,20 @@ using System.Text;
 using SystemsAnalysis.DataAccess;
 using SystemsAnalysis.Utils.AccessUtils;
 using SystemsAnalysis.Modeling;
+using System.Data.Linq;
+using System.Linq.Expressions;
+using System.Linq;
 
 namespace SystemsAnalysis.Reporting.ReportLibraries
 {
   public class RecommendedPlanReport : ReportBase
   {
     private StormwaterControlsDataSet stormwaterControlDS;
-    private AccessHelper accessHelper;
     private string modelPath;
 
     public RecommendedPlanReport(Links links, Nodes nodes, Dscs dscs)
     {
+      
     }
 
     public new class ReportInfo : ReportBase.ReportInfo
@@ -73,6 +76,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
         //Load ic_target tables into StormwaterControlsDataSet
         stormwaterControlDS = new StormwaterControlsDataSet();
         stormwaterControlDS.InitStormwaterControlDataSet(modelPath);
+        IQueryable q = (IQueryable)stormwaterControlDS;
       }
       catch (Exception ex)
       {
