@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 using System.Data.Odbc;
+using System.Data.OleDb;
+using SystemsAnalysis.Utils.AccessUtils;
+
 
 namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor
 {
@@ -69,7 +72,7 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor
       } while (!currentLine.Contains("Data File Version"));
 
       tokens = currentLine.Split(new char[] { ' ', '|' }, StringSplitOptions.RemoveEmptyEntries);
-      if (Convert.ToDouble(tokens[4]) < 11.2 || Convert.ToDouble(tokens[4]) > 11.9)
+      if (Convert.ToDouble(tokens[4]) < 11.2 || Convert.ToDouble(tokens[4]) > 12.0)
       {
         throw new Exception("Output file was version " + tokens[4] + ". Expected 11.2-11.9.");
       }
@@ -132,13 +135,13 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor
     {
       string currentLine = "";
       string[] tokens;
-      string CondName;
-      double Length;
-      string CondClass;
-      double Area;
-      double ManningsN;
-      double MaxWidth;
-      double Depth;
+      string condName;
+      double length;
+      string condClass;
+      double area;
+      double manningsN;
+      double maxWidth;
+      double depth;
 
       do
       {
@@ -160,25 +163,25 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor
         {
           tokens = currentLine.Split(new Char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
-          CondName = tokens[1];
-          Length = Convert.ToDouble(tokens[2]);
-          CondClass = tokens[3];
-          if (CondClass == "Closd")
+          condName = tokens[1];
+          length = Convert.ToDouble(tokens[2]);
+          condClass = tokens[3];
+          if (condClass == "Closd")
           {
-            Area = Convert.ToDouble(tokens[5]);
-            ManningsN = Convert.ToDouble(tokens[6]);
-            MaxWidth = Convert.ToDouble(tokens[7]);
-            Depth = Convert.ToDouble(tokens[8]);
+            area = Convert.ToDouble(tokens[5]);
+            manningsN = Convert.ToDouble(tokens[6]);
+            maxWidth = Convert.ToDouble(tokens[7]);
+            depth = Convert.ToDouble(tokens[8]);
           }
           else
           {
-            Area = Convert.ToDouble(tokens[4]);
-            ManningsN = Convert.ToDouble(tokens[5]);
-            MaxWidth = Convert.ToDouble(tokens[6]);
-            Depth = Convert.ToDouble(tokens[7]);
+            area = Convert.ToDouble(tokens[4]);
+            manningsN = Convert.ToDouble(tokens[5]);
+            maxWidth = Convert.ToDouble(tokens[6]);
+            depth = Convert.ToDouble(tokens[7]);
           }
 
-          tableE01.AddTableE01Row(CondName, Length, CondClass, Area, ManningsN, MaxWidth, Depth);
+          tableE01.AddTableE01Row(condName, length, condClass, area, manningsN, maxWidth, depth);
 
           currentLine = outputReader.ReadLine();
         }
@@ -195,16 +198,16 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor
     {
       string currentLine = "";
       string[] tokens;
-      string NodeName;
-      double GrElev;
-      double MaxCrown;
-      double MaxJElev;
+      string nodeName;
+      double grElev;
+      double maxCrown;
+      double maxJElev;
       double Hour;
       double Min;
-      System.DateTime TimeOfMax;
-      double Surcharge;
-      double Freeboard;
-      double MaxArea;
+      System.DateTime timeOfMax;
+      double surcharge;
+      double freeboard;
+      double maxArea;
 
       do
       {
@@ -226,18 +229,18 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor
         {
           tokens = currentLine.Split(new Char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
-          NodeName = tokens[0];
-          GrElev = Convert.ToDouble(tokens[1]);
-          MaxCrown = Convert.ToDouble(tokens[2]);
-          MaxJElev = Convert.ToDouble(tokens[3]);
+          nodeName = tokens[0];
+          grElev = Convert.ToDouble(tokens[1]);
+          maxCrown = Convert.ToDouble(tokens[2]);
+          maxJElev = Convert.ToDouble(tokens[3]);
           Hour = Convert.ToDouble(tokens[4]);
           Min = Convert.ToDouble(tokens[5]);
-          TimeOfMax = this.beginDateTime.AddHours(Hour + Min / 60);
-          Surcharge = Convert.ToDouble(tokens[6]);
-          Freeboard = Convert.ToDouble(tokens[7]);
-          MaxArea = Convert.ToDouble(tokens[8]);
+          timeOfMax = this.beginDateTime.AddHours(Hour + Min / 60);
+          surcharge = Convert.ToDouble(tokens[6]);
+          freeboard = Convert.ToDouble(tokens[7]);
+          maxArea = Convert.ToDouble(tokens[8]);
 
-          tableE09.AddTableE09Row(NodeName, GrElev, MaxCrown, MaxJElev, TimeOfMax, Surcharge, Freeboard, MaxArea);
+          tableE09.AddTableE09Row(nodeName, grElev, maxCrown, maxJElev, timeOfMax, surcharge, freeboard, maxArea);
 
           currentLine = outputReader.ReadLine();
         }
@@ -249,23 +252,24 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor
 
       return tableE09.Count;
     }
+
     private int ExtractTableE10()
     {
       string currentLine = "";
       string[] tokens;
-      string CondName;
-      double DesignQ;
-      double DesignV;
-      double MaxD;
-      double MaxQ;
+      string condName;
+      double designQ;
+      double designV;
+      double maxD;
+      double maxQ;
       double Hour;
       double Min;
-      System.DateTime TimeMaxQ;
-      double MaxV;
-      System.DateTime TimeMaxV;
-      double QqRatio;
-      double MaxUsElev;
-      double MaxDsElev;
+      System.DateTime timeMaxQ;
+      double maxV;
+      System.DateTime timeMaxV;
+      double qQRatio;
+      double maxUsElev;
+      double maxDsElev;
 
       do
       {
@@ -296,23 +300,23 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor
             case 9: //Free #
               break;
             case 15:
-              CondName = tokens[0];
-              DesignQ = Convert.ToDouble(tokens[1]);
-              DesignV = Convert.ToDouble(tokens[2]);
-              MaxD = Convert.ToDouble(tokens[3]);
-              MaxQ = Convert.ToDouble(tokens[4]);
+              condName = tokens[0];
+              designQ = Convert.ToDouble(tokens[1]);
+              designV = Convert.ToDouble(tokens[2]);
+              maxD = Convert.ToDouble(tokens[3]);
+              maxQ = Convert.ToDouble(tokens[4]);
               Hour = Convert.ToInt32(tokens[5]);
               Min = Convert.ToInt32(tokens[6]);
-              TimeMaxQ = this.beginDateTime.AddHours(Hour + Min / 60);
-              MaxV = Convert.ToDouble(tokens[7]);
+              timeMaxQ = this.beginDateTime.AddHours(Hour + Min / 60);
+              maxV = Convert.ToDouble(tokens[7]);
               Hour = Convert.ToInt32(tokens[8]);
               Min = Convert.ToInt32(tokens[9]);
-              TimeMaxV = this.beginDateTime.AddHours(Hour + Min / 60);
-              QqRatio = Convert.ToDouble(tokens[10]);
-              MaxUsElev = Convert.ToDouble(tokens[11]);
-              MaxDsElev = Convert.ToDouble(tokens[12]);
+              timeMaxV = this.beginDateTime.AddHours(Hour + Min / 60);
+              qQRatio = Convert.ToDouble(tokens[10]);
+              maxUsElev = Convert.ToDouble(tokens[11]);
+              maxDsElev = Convert.ToDouble(tokens[12]);
 
-              tableE10.AddTableE10Row(CondName, DesignQ, DesignV, MaxD, MaxQ, TimeMaxQ, MaxV, TimeMaxV, QqRatio, MaxUsElev, MaxDsElev);
+              tableE10.AddTableE10Row(condName, designQ, designV, maxD, maxQ, timeMaxQ, maxV, timeMaxV, qQRatio, maxUsElev, maxDsElev);
               break;
             default:
               throw new Exception();
@@ -343,16 +347,16 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor
           throw new Exception("Table E18 not found within " + this.outputFile);
         }
 
-      } while (!currentLine.Contains("Table E18  - Junction Continuity Error"));
+      } while (!currentLine.Contains("Table E18 - Junction Continuity Error"));
 
       try
       {
-        for (int i = 0; i < 18; i++) //not sure what the value here should be - ask John B.
+        for (int i = 0; i < 18; i++)
         {
           currentLine = outputReader.ReadLine();
         }
 
-        while (currentLine != "")
+        while (!currentLine.Contains("The total continuity error was"))
         {
           tokens = currentLine.Split(new Char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
           nodeName = tokens[0];
@@ -390,7 +394,7 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor
 
       try
       {
-        for (int i = 0; i < 18; i++) //not sure what the value here should be - ask John B.
+        for (int i = 0; i < 9; i++)
         {
           currentLine = outputReader.ReadLine();
         }
@@ -419,12 +423,12 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor
       string currentLine = "";
       string[] tokens;
 
-      string NodeName;
-      double SurchargeTime;
-      double FloodedTime;
-      double FloodVol;
-      double MaxStoredVol;
-      double PondingVol;
+      string nodeName;
+      double surchargeTime;
+      double floodedTime;
+      double floodVol;
+      double maxStoredVol;
+      double pondingVol;
 
       do
       {
@@ -446,14 +450,14 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor
         {
           tokens = currentLine.Split(new Char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
-          NodeName = tokens[0];
-          SurchargeTime = Convert.ToDouble(tokens[1]);
-          FloodedTime = Convert.ToDouble(tokens[2]);
-          FloodVol = Convert.ToDouble(tokens[3]);
-          MaxStoredVol = Convert.ToDouble(tokens[4]);
-          PondingVol = Convert.ToDouble(tokens[5]);
+          nodeName = tokens[0];
+          surchargeTime = Convert.ToDouble(tokens[1]);
+          floodedTime = Convert.ToDouble(tokens[2]);
+          floodVol = Convert.ToDouble(tokens[3]);
+          maxStoredVol = Convert.ToDouble(tokens[4]);
+          pondingVol = Convert.ToDouble(tokens[5]);
 
-          tableE20.AddTableE20Row(NodeName, SurchargeTime, FloodedTime, FloodVol, MaxStoredVol, PondingVol);
+          tableE20.AddTableE20Row(nodeName, surchargeTime, floodedTime, floodVol, maxStoredVol, pondingVol);
 
           currentLine = outputReader.ReadLine();
         }
@@ -544,22 +548,51 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor
     {
       if (!File.Exists(database))
       {
-        throw new FileNotFoundException();
+        AccessHelper.CreateNewMdb(database);        
+      }
+      AccessHelper accessHelper = new AccessHelper(database);
+
+      try
+      {
+        
+        CreateAndWriteTableE01(database, accessHelper);
+
+        CreateAndWriteTableE09(database, accessHelper);
+
+        CreateAndWriteTableE10(database, accessHelper);
+
+        CreateAndWriteTableE18(database, accessHelper);
+
+        CreateAndWriteTableE19(database, accessHelper);
+
+        CreateAndWriteTableE20(database, accessHelper);
+        
+      }
+      finally
+      {
+        accessHelper.Dispose();
       }
 
-      OdbcConnection connection = new OdbcConnection(@"Dsn=MS Access Database;dbq=" + database + ";driverid=25;fil=MS Access;maxbuffersize=2048;pagetimeout=5");
+      return;
+    }
 
-      OdbcCommand command = new OdbcCommand();
+    private void CreateAndWriteTableE01(string database, AccessHelper accessHelper)
+    {
+      OleDbConnection connection;
+      OleDbCommand command;
+      connection = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + database);
+      command = new OleDbCommand();
       command.Connection = connection;
       connection.Open();
 
-      #region Create and Write Table E01
       try
       {
-        command.CommandText = "Drop Table TableE01";
-        command.ExecuteNonQuery();
+        if (accessHelper.TableExists("TableE01"))
+        {
+          accessHelper.DeleteTable("TableE01");
+        }
       }
-      catch (OdbcException ex)
+      catch (OleDbException ex)
       {
         if (!ex.Message.Contains("does not exist."))
         {
@@ -569,21 +602,29 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor
 
       command.CommandText = "Create Table TableE01 (CondName Text, Length Double, CondClass Text, Area Double, ManningsN Double, MaxWidth Double, Depth Double)";
       command.ExecuteNonQuery();
-
       TableE01DataSetTableAdapters.TableE01TableAdapter tableE01Adapter;
       tableE01Adapter = new TableE01DataSetTableAdapters.TableE01TableAdapter();
-
       tableE01Adapter.Connection = connection;
       tableE01Adapter.Update(tableE01);
-      #endregion
+    }
 
-      #region Create and Write Table E09
+    private void CreateAndWriteTableE09(string database, AccessHelper accessHelper)
+    {
+      OleDbConnection connection;
+      OleDbCommand command;
+      connection = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + database);
+      command = new OleDbCommand();
+      command.Connection = connection;
+      connection.Open();
+      
       try
       {
-        command.CommandText = "Drop Table TableE09";
-        command.ExecuteNonQuery();
+        if (accessHelper.TableExists("TableE09"))
+        {
+          accessHelper.DeleteTable("TableE09");
+        }
       }
-      catch (OdbcException ex)
+      catch (OleDbException ex)
       {
         if (!ex.Message.Contains("does not exist."))
         {
@@ -593,21 +634,28 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor
 
       command.CommandText = "Create Table TableE09 (NodeName Text, GrElev Double, MaxCrown Double, MaxJElev Double, TimeOfMax DateTime, Surcharge Double, Freeboard Double, MaxArea Double)";
       command.ExecuteNonQuery();
-
       TableE09DataSetTableAdapters.TableE09TableAdapter tableE09Adapter;
       tableE09Adapter = new TableE09DataSetTableAdapters.TableE09TableAdapter();
-
       tableE09Adapter.Connection = connection;
       tableE09Adapter.Update(tableE09);
-      #endregion
+    }
 
-      #region Create and Write Table E10
+    private void CreateAndWriteTableE10(string database, AccessHelper accessHelper)
+    {
+      OleDbConnection connection;
+      OleDbCommand command;
+      connection = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + database);
+      command = new OleDbCommand();
+      command.Connection = connection;
+      connection.Open();
       try
       {
-        command.CommandText = "Drop Table TableE10";
-        command.ExecuteNonQuery();
+        if (accessHelper.TableExists("TableE10"))
+        {
+          accessHelper.DeleteTable("TableE10");
+        }
       }
-      catch (OdbcException ex)
+      catch (OleDbException ex)
       {
         if (!ex.Message.Contains("does not exist."))
         {
@@ -623,15 +671,24 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor
 
       tableE10Adapter.Connection = connection;
       tableE10Adapter.Update(tableE10);
-      #endregion
+    }
 
-      #region Create and Write Table E18
+    private void CreateAndWriteTableE18(string database, AccessHelper accessHelper)
+    {
+      OleDbConnection connection;
+      OleDbCommand command;
+      connection = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + database);
+      command = new OleDbCommand();
+      command.Connection = connection;
+      connection.Open();
       try
       {
-        command.CommandText = "Drop Table TableE18";
-        command.ExecuteNonQuery();
+        if (accessHelper.TableExists("TableE18"))
+        {
+          accessHelper.DeleteTable("TableE18");
+        }
       }
-      catch (OdbcException ex)
+      catch (OleDbException ex)
       {
         if (!ex.Message.Contains("does not exist."))
         {
@@ -639,24 +696,33 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor
         }
       }
 
-      command.CommandText = "Create Table TableE18 (NodeName String, SurchargeTime Double, FloodedTime Double, FloodVol Double, MaxStoredVol Double, PondingVol Double)";
+      command.CommandText = "Create Table TableE18 (nodeName String, storageVolumeCuFt Double)";
       command.ExecuteNonQuery();
 
-      //TODO: Implement E18 TableAdapters
-      //TableE18DataSetTableAdapters.TableE18TableAdapter tableE18Adapter;
-      //tableE18Adapter = new TableE18DataSetTableAdapters.TableE18TableAdapter();
+      TableE18DataSetTableAdapters.TableE18TableAdapter tableE18Adapter;
+      tableE18Adapter = new TableE18DataSetTableAdapters.TableE18TableAdapter();
 
-      //tableE18Adapter.Connection = connection;
-      //tableE18Adapter.Update(tableE18);
-      #endregion
+      tableE18Adapter.Connection = connection;
+      tableE18Adapter.Update(tableE18);
+    }
 
-      #region Create and Write Table E19
+    private void CreateAndWriteTableE19(string database, AccessHelper accessHelper)
+    {
+      OleDbConnection connection;
+      OleDbCommand command;
+      connection = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + database);
+      command = new OleDbCommand();
+      command.Connection = connection;
+      connection.Open();
+
       try
       {
-        command.CommandText = "Drop Table TableE19";
-        command.ExecuteNonQuery();
+        if (accessHelper.TableExists("TableE19"))
+        {
+          accessHelper.DeleteTable("TableE19");
+        }
       }
-      catch (OdbcException ex)
+      catch (OleDbException ex)
       {
         if (!ex.Message.Contains("does not exist."))
         {
@@ -664,24 +730,33 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor
         }
       }
 
-      command.CommandText = "Create Table TableE19 (NodeName String, SurchargeTime Double, FloodedTime Double, FloodVol Double, MaxStoredVol Double, PondingVol Double)";
+      command.CommandText = "Create Table TableE19 (nodeName String, infiltrationVolumeCuFt Double)";
       command.ExecuteNonQuery();
 
-      //TODO: Implement E19 Table Adapter
-      //TableE19DataSetTableAdapters.TableE19TableAdapter tableE19Adapter;
-      //tableE19Adapter = new TableE19DataSetTableAdapters.TableE19TableAdapter();
+      TableE19DataSetTableAdapters.TableE19TableAdapter tableE19Adapter;
+      tableE19Adapter = new TableE19DataSetTableAdapters.TableE19TableAdapter();
 
-      //tableE19Adapter.Connection = connection;
-      //tableE19Adapter.Update(tableE19);
-      #endregion
+      tableE19Adapter.Connection = connection;
+      tableE19Adapter.Update(tableE19);
+    }
 
-      #region Create and Write Table E20
+    private void CreateAndWriteTableE20(string database, AccessHelper accessHelper)
+    {
+      OleDbConnection connection;
+      OleDbCommand command;
+      connection = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + database);
+      command = new OleDbCommand();
+      command.Connection = connection;
+      connection.Open();
+
       try
       {
-        command.CommandText = "Drop Table TableE20";
-        command.ExecuteNonQuery();
+        if (accessHelper.TableExists("TableE20"))
+        {
+          accessHelper.DeleteTable("TableE20");
+        }
       }
-      catch (OdbcException ex)
+      catch (OleDbException ex)
       {
         if (!ex.Message.Contains("does not exist."))
         {
@@ -697,10 +772,6 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor
 
       tableE20Adapter.Connection = connection;
       tableE20Adapter.Update(tableE20);
-      #endregion
-
-      return;
     }
-
   }
 }

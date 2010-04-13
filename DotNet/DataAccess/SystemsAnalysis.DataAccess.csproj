@@ -1,7 +1,7 @@
 ﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
   <PropertyGroup>
     <ProjectType>Local</ProjectType>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{D81499E0-ED3E-4C85-9F8E-72C263AA24C4}</ProjectGuid>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -43,6 +43,7 @@
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <OutputPath>bin\Debug\</OutputPath>
@@ -94,14 +95,29 @@
     <Reference Include="System">
       <Name>System</Name>
     </Reference>
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Data">
       <Name>System.Data</Name>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Xml">
       <Name>System.XML</Name>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AltCompilerDataSet.cs">
+      <DependentUpon>AltCompilerDataSet.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="AltCompilerDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AltCompilerDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="AlternativeDataSet.cs">
       <DependentUpon>AlternativeDataSet.xsd</DependentUpon>
       <SubType>Component</SubType>
@@ -191,6 +207,17 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>StormwaterControlsDataSet.xsd</DependentUpon>
     </Compile>
+    <None Include="AltCompilerDataSet.xsc">
+      <DependentUpon>AltCompilerDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="AltCompilerDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>AltCompilerDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="AltCompilerDataSet.xss">
+      <DependentUpon>AltCompilerDataSet.xsd</DependentUpon>
+    </None>
     <None Include="AlternativeDataSet.xsc">
       <DependentUpon>AlternativeDataSet.xsd</DependentUpon>
     </None>
@@ -322,6 +349,17 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AccessUtils\DatabaseManagement\SystemsAnalysis.Utils.AccessUtils.DatabaseManagement.csproj">
+      <Project>{1DCF1AAE-A211-4A29-AE5C-13AAAD890B08}</Project>
+      <Name>SystemsAnalysis.Utils.AccessUtils.DatabaseManagement</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="StormwaterControls_V12.mdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

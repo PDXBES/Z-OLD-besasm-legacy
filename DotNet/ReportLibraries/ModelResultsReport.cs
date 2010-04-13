@@ -409,24 +409,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
     }
     public string QQRatioSummary(IDictionary<string, Parameter> parameters)
     {
-      return QQRatioPercent(parameters).ToString("N1") + " (" + QQRatioCount(parameters).ToString("N0") + ")";
-
-      LinkHydraulics linkHyd;
-      double length;
-      int count;
-      linkHyd = (LinkHydraulics)LinkResults(parameters["ScenarioID"].ValueAsInt);
-      length = Math.Round(linkHyd.CountByQQRatioLength(
-      parameters["MinValue"].ValueAsDouble,
-      parameters["MaxValue"].ValueAsDouble,
-      parameters["MinPipeSize"].ValueAsDouble,
-      parameters["MaxPipeSize"].ValueAsDouble) / 5280.0, 1);
-      count = linkHyd.CountByQQRatio(
-      parameters["MinValue"].ValueAsDouble,
-      parameters["MaxValue"].ValueAsDouble,
-      parameters["MinPipeSize"].ValueAsDouble,
-      parameters["MaxPipeSize"].ValueAsDouble);
-      return length.ToString("N1") + " ("
-      + count.ToString("N0") + ")";
+      return QQRatioPercent(parameters).ToString("N1") + " (" + QQRatioCount(parameters).ToString("N0") + ")";      
     }
     public string QQRatioLengthCountSummary(IDictionary<string, Parameter> parameters)
     {

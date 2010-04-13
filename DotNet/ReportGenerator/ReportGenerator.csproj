@@ -33,6 +33,7 @@
     <SignAssembly>false</SignAssembly>
     <OldToolsVersion>2.0</OldToolsVersion>
     <PublishWizardCompleted>true</PublishWizardCompleted>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <PublishUrl>\\Cassio\ASM_Apps\Apps\ReportGenerator\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Unc</InstallFrom>
@@ -160,6 +161,9 @@
     </Reference>
     <Reference Include="System">
       <Name>System</Name>
+    </Reference>
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Data">
       <Name>System.Data</Name>
