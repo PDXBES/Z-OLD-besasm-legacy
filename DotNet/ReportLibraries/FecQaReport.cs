@@ -30,10 +30,9 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
 
     }
 
-    private string qaDatabase = "";
-    private string qaDatabaseTemplate = "";
+    private string qaDatabase = "";    
 
-    public class ReportInfo : ReportBase.ReportInfo
+    public new class ReportInfo : ReportBase.ReportInfo
     {
       private Dictionary<string, Parameter> auxilaryData;
       private Dictionary<string, string> auxilaryDataDescription;

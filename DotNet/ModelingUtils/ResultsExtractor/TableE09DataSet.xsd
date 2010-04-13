@@ -1,183 +1,128 @@
-<?xml version="1.0" encoding="utf-8"?>
-<xs:schema id="TableE09DataSet" targetNamespace="http://tempuri.org/TableE09.xsd" xmlns:mstns="http://tempuri.org/TableE09.xsd" xmlns="http://tempuri.org/TableE09.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="TableE09DataSet" targetNamespace="http://tempuri.org/TableE09DataSet.xsd" xmlns:mstns="http://tempuri.org/TableE09DataSet.xsd" xmlns="http://tempuri.org/TableE09DataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
   <xs:annotation>
     <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
-      <DataSource DefaultConnectionIndex="1" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
         <Connections>
-          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="ConnectionString" ConnectionStringObject="" IsAppSettingsProperty="True" Modifier="Assembly" Name="ConnectionString (Settings)" PropertyReference="ApplicationSettings.SystemsAnalysis.Modeling.ModelResults.Properties.Settings.GlobalReference.Default.ConnectionString" Provider="System.Data.Odbc">
-          </Connection>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="XPSWMMResultsConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="XPSWMMResultsConnectionString (Settings)" PropertyReference="ApplicationSettings.SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor.Properties.Settings.GlobalReference.Default.XPSWMMResultsConnectionString" Provider="System.Data.OleDb" />
         </Connections>
         <Tables>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="TableE09TableAdapter" GeneratorDataComponentClassName="TableE09TableAdapter" Name="TableE09" UserDataComponentName="TableE09TableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="ConnectionString (Settings)" DbObjectName="[P:\8063_CombinedFacPlan\Models\Characterization\Alder\AL_EX_2\mdbs\ModelResults].tableE09" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="True" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="True" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="XPSWMMResultsConnectionString (Settings)" DbObjectName="TableE09" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <DeleteCommand>
-                  <DbCommand CommandType="Text" ModifiedByUser="False">
-                    <CommandText>DELETE FROM [tableE09] WHERE (([NodeName] = ?) AND ((? = 1 AND [GrElev] IS NULL) OR ([GrElev] = ?)) AND ((? = 1 AND [MaxCrown] IS NULL) OR ([MaxCrown] = ?)) AND ((? = 1 AND [MaxJElev] IS NULL) OR ([MaxJElev] = ?)) AND ((? = 1 AND [TimeOfMax] IS NULL) OR ([TimeOfMax] = ?)) AND ((? = 1 AND [Surcharge] IS NULL) OR ([Surcharge] = ?)) AND ((? = 1 AND [Freeboard] IS NULL) OR ([Freeboard] = ?)) AND ((? = 1 AND [MaxArea] IS NULL) OR ([MaxArea] = ?)) AND ([MAPINFO_ID] = ?))</CommandText>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>DELETE FROM `TableE09` WHERE ((`nodeName` = ?) AND ((? = 1 AND `grElev` IS NULL) OR (`grElev` = ?)) AND ((? = 1 AND `maxCrown` IS NULL) OR (`maxCrown` = ?)) AND ((? = 1 AND `maxJElev` IS NULL) OR (`maxJElev` = ?)) AND ((? = 1 AND `timeOfMax` IS NULL) OR (`timeOfMax` = ?)) AND ((? = 1 AND `surcharge` IS NULL) OR (`surcharge` = ?)) AND ((? = 1 AND `freeboard` IS NULL) OR (`freeboard` = ?)) AND ((? = 1 AND `maxArea` IS NULL) OR (`maxArea` = ?)))</CommandText>
                     <Parameters>
-                      <Parameter AllowDbNull="True" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_NodeName" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="NodeName" SourceColumnNullMapping="False" SourceVersion="Original">
-                      </Parameter>
-                      <Parameter AllowDbNull="True" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_GrElev" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="GrElev" SourceColumnNullMapping="True" SourceVersion="Original">
-                      </Parameter>
-                      <Parameter AllowDbNull="True" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="Original_GrElev" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="GrElev" SourceColumnNullMapping="False" SourceVersion="Original">
-                      </Parameter>
-                      <Parameter AllowDbNull="True" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_MaxCrown" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="MaxCrown" SourceColumnNullMapping="True" SourceVersion="Original">
-                      </Parameter>
-                      <Parameter AllowDbNull="True" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="Original_MaxCrown" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="MaxCrown" SourceColumnNullMapping="False" SourceVersion="Original">
-                      </Parameter>
-                      <Parameter AllowDbNull="True" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_MaxJElev" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="MaxJElev" SourceColumnNullMapping="True" SourceVersion="Original">
-                      </Parameter>
-                      <Parameter AllowDbNull="True" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="Original_MaxJElev" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="MaxJElev" SourceColumnNullMapping="False" SourceVersion="Original">
-                      </Parameter>
-                      <Parameter AllowDbNull="True" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_TimeOfMax" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="TimeOfMax" SourceColumnNullMapping="True" SourceVersion="Original">
-                      </Parameter>
-                      <Parameter AllowDbNull="True" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="Original_TimeOfMax" Precision="0" ProviderType="DateTime" Scale="0" Size="0" SourceColumn="TimeOfMax" SourceColumnNullMapping="False" SourceVersion="Original">
-                      </Parameter>
-                      <Parameter AllowDbNull="True" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_Surcharge" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="Surcharge" SourceColumnNullMapping="True" SourceVersion="Original">
-                      </Parameter>
-                      <Parameter AllowDbNull="True" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="Original_Surcharge" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="Surcharge" SourceColumnNullMapping="False" SourceVersion="Original">
-                      </Parameter>
-                      <Parameter AllowDbNull="True" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_Freeboard" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="Freeboard" SourceColumnNullMapping="True" SourceVersion="Original">
-                      </Parameter>
-                      <Parameter AllowDbNull="True" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="Original_Freeboard" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="Freeboard" SourceColumnNullMapping="False" SourceVersion="Original">
-                      </Parameter>
-                      <Parameter AllowDbNull="True" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_MaxArea" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="MaxArea" SourceColumnNullMapping="True" SourceVersion="Original">
-                      </Parameter>
-                      <Parameter AllowDbNull="True" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="Original_MaxArea" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="MaxArea" SourceColumnNullMapping="False" SourceVersion="Original">
-                      </Parameter>
-                      <Parameter AllowDbNull="False" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="Original_MAPINFO_ID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="MAPINFO_ID" SourceColumnNullMapping="False" SourceVersion="Original">
-                      </Parameter>
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_nodeName" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="nodeName" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_grElev" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="grElev" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="Original_grElev" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="grElev" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_maxCrown" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="maxCrown" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="Original_maxCrown" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="maxCrown" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_maxJElev" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="maxJElev" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="Original_maxJElev" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="maxJElev" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_timeOfMax" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="timeOfMax" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="Original_timeOfMax" Precision="0" ProviderType="Date" Scale="0" Size="0" SourceColumn="timeOfMax" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_surcharge" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="surcharge" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="Original_surcharge" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="surcharge" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_freeboard" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="freeboard" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="Original_freeboard" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="freeboard" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_maxArea" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="maxArea" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="Original_maxArea" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="maxArea" SourceColumnNullMapping="false" SourceVersion="Original" />
                     </Parameters>
                   </DbCommand>
                 </DeleteCommand>
                 <InsertCommand>
-                  <DbCommand CommandType="Text" ModifiedByUser="False">
-                    <CommandText>INSERT INTO [tableE09] ([NodeName], [GrElev], [MaxCrown], [MaxJElev], [TimeOfMax], [Surcharge], [Freeboard], [MaxArea]) VALUES (?, ?, ?, ?, ?, ?, ?, ?)</CommandText>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>INSERT INTO `TableE09` (`nodeName`, `grElev`, `maxCrown`, `maxJElev`, `timeOfMax`, `surcharge`, `freeboard`, `maxArea`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)</CommandText>
                     <Parameters>
-                      <Parameter AllowDbNull="True" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="NodeName" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="NodeName" SourceColumnNullMapping="False" SourceVersion="Current">
-                      </Parameter>
-                      <Parameter AllowDbNull="True" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="GrElev" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="GrElev" SourceColumnNullMapping="False" SourceVersion="Current">
-                      </Parameter>
-                      <Parameter AllowDbNull="True" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="MaxCrown" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="MaxCrown" SourceColumnNullMapping="False" SourceVersion="Current">
-                      </Parameter>
-                      <Parameter AllowDbNull="True" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="MaxJElev" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="MaxJElev" SourceColumnNullMapping="False" SourceVersion="Current">
-                      </Parameter>
-                      <Parameter AllowDbNull="True" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="TimeOfMax" Precision="0" ProviderType="DateTime" Scale="0" Size="0" SourceColumn="TimeOfMax" SourceColumnNullMapping="False" SourceVersion="Current">
-                      </Parameter>
-                      <Parameter AllowDbNull="True" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="Surcharge" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="Surcharge" SourceColumnNullMapping="False" SourceVersion="Current">
-                      </Parameter>
-                      <Parameter AllowDbNull="True" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="Freeboard" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="Freeboard" SourceColumnNullMapping="False" SourceVersion="Current">
-                      </Parameter>
-                      <Parameter AllowDbNull="True" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="MaxArea" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="MaxArea" SourceColumnNullMapping="False" SourceVersion="Current">
-                      </Parameter>
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="nodeName" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="nodeName" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="grElev" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="grElev" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="maxCrown" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="maxCrown" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="maxJElev" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="maxJElev" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="timeOfMax" Precision="0" ProviderType="Date" Scale="0" Size="0" SourceColumn="timeOfMax" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="surcharge" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="surcharge" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="freeboard" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="freeboard" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="maxArea" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="maxArea" SourceColumnNullMapping="false" SourceVersion="Current" />
                     </Parameters>
                   </DbCommand>
                 </InsertCommand>
                 <SelectCommand>
-                  <DbCommand CommandType="Text" ModifiedByUser="False">
-                    <CommandText>SELECT NodeName, GrElev, MaxCrown, MaxJElev, TimeOfMax, Surcharge, Freeboard, MaxArea, MAPINFO_ID FROM tableE09</CommandText>
-                    <Parameters>
-                    </Parameters>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT     nodeName, grElev, maxCrown, maxJElev, timeOfMax, surcharge, freeboard, maxArea
+FROM         TableE09</CommandText>
+                    <Parameters />
                   </DbCommand>
                 </SelectCommand>
                 <UpdateCommand>
-                  <DbCommand CommandType="Text" ModifiedByUser="False">
-                    <CommandText>UPDATE [tableE09] SET [NodeName] = ?, [GrElev] = ?, [MaxCrown] = ?, [MaxJElev] = ?, [TimeOfMax] = ?, [Surcharge] = ?, [Freeboard] = ?, [MaxArea] = ? WHERE (([NodeName] = ?) AND ((? = 1 AND [GrElev] IS NULL) OR ([GrElev] = ?)) AND ((? = 1 AND [MaxCrown] IS NULL) OR ([MaxCrown] = ?)) AND ((? = 1 AND [MaxJElev] IS NULL) OR ([MaxJElev] = ?)) AND ((? = 1 AND [TimeOfMax] IS NULL) OR ([TimeOfMax] = ?)) AND ((? = 1 AND [Surcharge] IS NULL) OR ([Surcharge] = ?)) AND ((? = 1 AND [Freeboard] IS NULL) OR ([Freeboard] = ?)) AND ((? = 1 AND [MaxArea] IS NULL) OR ([MaxArea] = ?)) AND ([MAPINFO_ID] = ?))</CommandText>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>UPDATE `TableE09` SET `nodeName` = ?, `grElev` = ?, `maxCrown` = ?, `maxJElev` = ?, `timeOfMax` = ?, `surcharge` = ?, `freeboard` = ?, `maxArea` = ? WHERE ((`nodeName` = ?) AND ((? = 1 AND `grElev` IS NULL) OR (`grElev` = ?)) AND ((? = 1 AND `maxCrown` IS NULL) OR (`maxCrown` = ?)) AND ((? = 1 AND `maxJElev` IS NULL) OR (`maxJElev` = ?)) AND ((? = 1 AND `timeOfMax` IS NULL) OR (`timeOfMax` = ?)) AND ((? = 1 AND `surcharge` IS NULL) OR (`surcharge` = ?)) AND ((? = 1 AND `freeboard` IS NULL) OR (`freeboard` = ?)) AND ((? = 1 AND `maxArea` IS NULL) OR (`maxArea` = ?)))</CommandText>
                     <Parameters>
-                      <Parameter AllowDbNull="True" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="NodeName" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="NodeName" SourceColumnNullMapping="False" SourceVersion="Current">
-                      </Parameter>
-                      <Parameter AllowDbNull="True" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="GrElev" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="GrElev" SourceColumnNullMapping="False" SourceVersion="Current">
-                      </Parameter>
-                      <Parameter AllowDbNull="True" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="MaxCrown" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="MaxCrown" SourceColumnNullMapping="False" SourceVersion="Current">
-                      </Parameter>
-                      <Parameter AllowDbNull="True" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="MaxJElev" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="MaxJElev" SourceColumnNullMapping="False" SourceVersion="Current">
-                      </Parameter>
-                      <Parameter AllowDbNull="True" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="TimeOfMax" Precision="0" ProviderType="DateTime" Scale="0" Size="0" SourceColumn="TimeOfMax" SourceColumnNullMapping="False" SourceVersion="Current">
-                      </Parameter>
-                      <Parameter AllowDbNull="True" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="Surcharge" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="Surcharge" SourceColumnNullMapping="False" SourceVersion="Current">
-                      </Parameter>
-                      <Parameter AllowDbNull="True" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="Freeboard" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="Freeboard" SourceColumnNullMapping="False" SourceVersion="Current">
-                      </Parameter>
-                      <Parameter AllowDbNull="True" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="MaxArea" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="MaxArea" SourceColumnNullMapping="False" SourceVersion="Current">
-                      </Parameter>
-                      <Parameter AllowDbNull="True" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_NodeName" Precision="0" ProviderType="NVarChar" Scale="0" Size="0" SourceColumn="NodeName" SourceColumnNullMapping="False" SourceVersion="Original">
-                      </Parameter>
-                      <Parameter AllowDbNull="True" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_GrElev" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="GrElev" SourceColumnNullMapping="True" SourceVersion="Original">
-                      </Parameter>
-                      <Parameter AllowDbNull="True" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="Original_GrElev" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="GrElev" SourceColumnNullMapping="False" SourceVersion="Original">
-                      </Parameter>
-                      <Parameter AllowDbNull="True" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_MaxCrown" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="MaxCrown" SourceColumnNullMapping="True" SourceVersion="Original">
-                      </Parameter>
-                      <Parameter AllowDbNull="True" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="Original_MaxCrown" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="MaxCrown" SourceColumnNullMapping="False" SourceVersion="Original">
-                      </Parameter>
-                      <Parameter AllowDbNull="True" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_MaxJElev" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="MaxJElev" SourceColumnNullMapping="True" SourceVersion="Original">
-                      </Parameter>
-                      <Parameter AllowDbNull="True" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="Original_MaxJElev" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="MaxJElev" SourceColumnNullMapping="False" SourceVersion="Original">
-                      </Parameter>
-                      <Parameter AllowDbNull="True" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_TimeOfMax" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="TimeOfMax" SourceColumnNullMapping="True" SourceVersion="Original">
-                      </Parameter>
-                      <Parameter AllowDbNull="True" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="Original_TimeOfMax" Precision="0" ProviderType="DateTime" Scale="0" Size="0" SourceColumn="TimeOfMax" SourceColumnNullMapping="False" SourceVersion="Original">
-                      </Parameter>
-                      <Parameter AllowDbNull="True" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_Surcharge" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="Surcharge" SourceColumnNullMapping="True" SourceVersion="Original">
-                      </Parameter>
-                      <Parameter AllowDbNull="True" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="Original_Surcharge" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="Surcharge" SourceColumnNullMapping="False" SourceVersion="Original">
-                      </Parameter>
-                      <Parameter AllowDbNull="True" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_Freeboard" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="Freeboard" SourceColumnNullMapping="True" SourceVersion="Original">
-                      </Parameter>
-                      <Parameter AllowDbNull="True" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="Original_Freeboard" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="Freeboard" SourceColumnNullMapping="False" SourceVersion="Original">
-                      </Parameter>
-                      <Parameter AllowDbNull="True" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_MaxArea" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="MaxArea" SourceColumnNullMapping="True" SourceVersion="Original">
-                      </Parameter>
-                      <Parameter AllowDbNull="True" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="Original_MaxArea" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="MaxArea" SourceColumnNullMapping="False" SourceVersion="Original">
-                      </Parameter>
-                      <Parameter AllowDbNull="False" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="Original_MAPINFO_ID" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="MAPINFO_ID" SourceColumnNullMapping="False" SourceVersion="Original">
-                      </Parameter>
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="nodeName" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="nodeName" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="grElev" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="grElev" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="maxCrown" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="maxCrown" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="maxJElev" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="maxJElev" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="timeOfMax" Precision="0" ProviderType="Date" Scale="0" Size="0" SourceColumn="timeOfMax" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="surcharge" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="surcharge" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="freeboard" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="freeboard" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="maxArea" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="maxArea" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="Original_nodeName" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="nodeName" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_grElev" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="grElev" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="Original_grElev" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="grElev" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_maxCrown" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="maxCrown" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="Original_maxCrown" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="maxCrown" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_maxJElev" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="maxJElev" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="Original_maxJElev" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="maxJElev" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_timeOfMax" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="timeOfMax" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="DateTime" Direction="Input" ParameterName="Original_timeOfMax" Precision="0" ProviderType="Date" Scale="0" Size="0" SourceColumn="timeOfMax" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_surcharge" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="surcharge" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="Original_surcharge" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="surcharge" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_freeboard" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="freeboard" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="Original_freeboard" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="freeboard" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="IsNull_maxArea" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="maxArea" SourceColumnNullMapping="true" SourceVersion="Original" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="Original_maxArea" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="maxArea" SourceColumnNullMapping="false" SourceVersion="Original" />
                     </Parameters>
                   </DbCommand>
                 </UpdateCommand>
               </DbSource>
             </MainSource>
             <Mappings>
-              <Mapping SourceColumn="NodeName" DataSetColumn="NodeName" />
-              <Mapping SourceColumn="GrElev" DataSetColumn="GrElev" />
-              <Mapping SourceColumn="MaxCrown" DataSetColumn="MaxCrown" />
-              <Mapping SourceColumn="MaxJElev" DataSetColumn="MaxJElev" />
-              <Mapping SourceColumn="TimeOfMax" DataSetColumn="TimeOfMax" />
-              <Mapping SourceColumn="Surcharge" DataSetColumn="Surcharge" />
-              <Mapping SourceColumn="Freeboard" DataSetColumn="Freeboard" />
-              <Mapping SourceColumn="MaxArea" DataSetColumn="MaxArea" />
-              <Mapping SourceColumn="MAPINFO_ID" DataSetColumn="MAPINFO_ID" />
+              <Mapping SourceColumn="nodeName" DataSetColumn="NodeName" />
+              <Mapping SourceColumn="grElev" DataSetColumn="GrElev" />
+              <Mapping SourceColumn="maxCrown" DataSetColumn="MaxCrown" />
+              <Mapping SourceColumn="maxJElev" DataSetColumn="MaxJElev" />
+              <Mapping SourceColumn="timeOfMax" DataSetColumn="TimeOfMax" />
+              <Mapping SourceColumn="surcharge" DataSetColumn="Surcharge" />
+              <Mapping SourceColumn="freeboard" DataSetColumn="Freeboard" />
+              <Mapping SourceColumn="maxArea" DataSetColumn="MaxArea" />
             </Mappings>
-            <Sources>
-            </Sources>
+            <Sources />
           </TableAdapter>
         </Tables>
-        <Sources>
-        </Sources>
+        <Sources />
       </DataSource>
     </xs:appinfo>
   </xs:annotation>
-  <xs:element name="TableE09DataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="TableE09DataSet" msprop:Generator_DataSetName="TableE09DataSet">
+  <xs:element name="TableE09DataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="TableE09DataSet" msprop:Generator_DataSetName="TableE09DataSet" msprop:EnableTableAdapterManager="true">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="TableE09" msprop:Generator_UserTableName="TableE09" msprop:Generator_RowDeletedName="TableE09RowDeleted" msprop:Generator_TableClassName="TableE09DataTable" msprop:Generator_RowChangedName="TableE09RowChanged" msprop:Generator_RowClassName="TableE09Row" msprop:Generator_RowChangingName="TableE09RowChanging" msprop:Generator_RowEvArgName="TableE09RowChangeEvent" msprop:Generator_RowEvHandlerName="TableE09RowChangeEventHandler" msprop:Generator_TablePropName="_TableE09" msprop:Generator_TableVarName="tableTableE09" msprop:Generator_RowDeletingName="TableE09RowDeleting">
+        <xs:element name="TableE09" msprop:Generator_UserTableName="TableE09" msprop:Generator_RowDeletedName="TableE09RowDeleted" msprop:Generator_RowChangedName="TableE09RowChanged" msprop:Generator_RowClassName="TableE09Row" msprop:Generator_RowChangingName="TableE09RowChanging" msprop:Generator_RowEvArgName="TableE09RowChangeEvent" msprop:Generator_RowEvHandlerName="TableE09RowChangeEventHandler" msprop:Generator_TableClassName="TableE09DataTable" msprop:Generator_TableVarName="tableTableE09" msprop:Generator_RowDeletingName="TableE09RowDeleting" msprop:Generator_TablePropName="TableE09">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="NodeName" msprop:Generator_UserColumnName="NodeName" msprop:Generator_ColumnPropNameInRow="NodeName" msprop:Generator_ColumnVarNameInTable="columnNodeName" msprop:Generator_ColumnPropNameInTable="NodeNameColumn">
+              <xs:element name="NodeName" msprop:Generator_UserColumnName="NodeName" msprop:Generator_ColumnVarNameInTable="columnNodeName" msprop:Generator_ColumnPropNameInRow="NodeName" msprop:Generator_ColumnPropNameInTable="NodeNameColumn">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
-                    <xs:maxLength value="10" />
+                    <xs:maxLength value="50" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="GrElev" msprop:Generator_UserColumnName="GrElev" msprop:Generator_ColumnPropNameInRow="GrElev" msprop:Generator_ColumnVarNameInTable="columnGrElev" msprop:Generator_ColumnPropNameInTable="GrElevColumn" type="xs:double" minOccurs="0" />
-              <xs:element name="MaxCrown" msprop:Generator_UserColumnName="MaxCrown" msprop:Generator_ColumnPropNameInRow="MaxCrown" msprop:Generator_ColumnVarNameInTable="columnMaxCrown" msprop:Generator_ColumnPropNameInTable="MaxCrownColumn" type="xs:double" minOccurs="0" />
-              <xs:element name="MaxJElev" msprop:Generator_UserColumnName="MaxJElev" msprop:Generator_ColumnPropNameInRow="MaxJElev" msprop:Generator_ColumnVarNameInTable="columnMaxJElev" msprop:Generator_ColumnPropNameInTable="MaxJElevColumn" type="xs:double" minOccurs="0" />
-              <xs:element name="TimeOfMax" msprop:Generator_UserColumnName="TimeOfMax" msprop:Generator_ColumnPropNameInRow="TimeOfMax" msprop:Generator_ColumnVarNameInTable="columnTimeOfMax" msprop:Generator_ColumnPropNameInTable="TimeOfMaxColumn" type="xs:dateTime" minOccurs="0" />
-              <xs:element name="Surcharge" msprop:Generator_UserColumnName="Surcharge" msprop:Generator_ColumnPropNameInRow="Surcharge" msprop:Generator_ColumnVarNameInTable="columnSurcharge" msprop:Generator_ColumnPropNameInTable="SurchargeColumn" type="xs:double" minOccurs="0" />
-              <xs:element name="Freeboard" msprop:Generator_UserColumnName="Freeboard" msprop:Generator_ColumnPropNameInRow="Freeboard" msprop:Generator_ColumnVarNameInTable="columnFreeboard" msprop:Generator_ColumnPropNameInTable="FreeboardColumn" type="xs:double" minOccurs="0" />
-              <xs:element name="MaxArea" msprop:Generator_UserColumnName="MaxArea" msprop:Generator_ColumnPropNameInRow="MaxArea" msprop:Generator_ColumnVarNameInTable="columnMaxArea" msprop:Generator_ColumnPropNameInTable="MaxAreaColumn" type="xs:double" minOccurs="0" />
-              <xs:element name="MAPINFO_ID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msprop:Generator_UserColumnName="MAPINFO_ID" msprop:Generator_ColumnPropNameInRow="MAPINFO_ID" msprop:Generator_ColumnVarNameInTable="columnMAPINFO_ID" msprop:Generator_ColumnPropNameInTable="MAPINFO_IDColumn" type="xs:int" />
+              <xs:element name="GrElev" msprop:Generator_UserColumnName="GrElev" msprop:Generator_ColumnVarNameInTable="columnGrElev" msprop:Generator_ColumnPropNameInRow="GrElev" msprop:Generator_ColumnPropNameInTable="GrElevColumn" type="xs:double" minOccurs="0" />
+              <xs:element name="MaxCrown" msprop:Generator_UserColumnName="MaxCrown" msprop:Generator_ColumnVarNameInTable="columnMaxCrown" msprop:Generator_ColumnPropNameInRow="MaxCrown" msprop:Generator_ColumnPropNameInTable="MaxCrownColumn" type="xs:double" minOccurs="0" />
+              <xs:element name="MaxJElev" msprop:Generator_UserColumnName="MaxJElev" msprop:Generator_ColumnVarNameInTable="columnMaxJElev" msprop:Generator_ColumnPropNameInRow="MaxJElev" msprop:Generator_ColumnPropNameInTable="MaxJElevColumn" type="xs:double" minOccurs="0" />
+              <xs:element name="TimeOfMax" msprop:Generator_UserColumnName="TimeOfMax" msprop:Generator_ColumnVarNameInTable="columnTimeOfMax" msprop:Generator_ColumnPropNameInRow="TimeOfMax" msprop:Generator_ColumnPropNameInTable="TimeOfMaxColumn" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="Surcharge" msprop:Generator_UserColumnName="Surcharge" msprop:Generator_ColumnVarNameInTable="columnSurcharge" msprop:Generator_ColumnPropNameInRow="Surcharge" msprop:Generator_ColumnPropNameInTable="SurchargeColumn" type="xs:double" minOccurs="0" />
+              <xs:element name="Freeboard" msprop:Generator_UserColumnName="Freeboard" msprop:Generator_ColumnVarNameInTable="columnFreeboard" msprop:Generator_ColumnPropNameInRow="Freeboard" msprop:Generator_ColumnPropNameInTable="FreeboardColumn" type="xs:double" minOccurs="0" />
+              <xs:element name="MaxArea" msprop:Generator_UserColumnName="MaxArea" msprop:Generator_ColumnVarNameInTable="columnMaxArea" msprop:Generator_ColumnPropNameInRow="MaxArea" msprop:Generator_ColumnPropNameInTable="MaxAreaColumn" type="xs:double" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

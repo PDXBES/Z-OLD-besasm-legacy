@@ -68,7 +68,7 @@ namespace SystemsAnalysis.Modeling
           throw new Exception("Could not determine model version.");
         }
       }
-      ModelBuilder.RefreshDataAccess(modelPath);
+      ModelBuilder.RefreshDataAccess(modelPath, true);
 
       //This needs to occur only after data access has been refreshed, since links will be updated in case model has been moved
       try

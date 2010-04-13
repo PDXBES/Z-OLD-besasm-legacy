@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using SystemsAnalysis.Modeling.ModelResults;
+using SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor;
 
 namespace ResultsExtractorTestBench
 {
@@ -9,16 +9,17 @@ namespace ResultsExtractorTestBench
     {
         static void Main(string[] args)
         {
-            XPSWMMResults xpResults = new XPSWMMResults(@"\\Cassio\Modeling\Projects\9049_62nd&MorrisonRHB\sim\25\9049_25FU_Base.out");
+          //XPSWMMResults xpResults = new XPSWMMResults(@"C:\Data\Projects\41800023-1 BES_DataManagement\TGD_FU_2011\sim\25");
+          XPSWMMResults xpResults = new XPSWMMResults(@"C:\Data\Projects\41800023-1 BES_DataManagement\TGD_FU_2011\sim\25\TGD_FU_25_2011.out");
 
-            TableE09DataSet.TableE09DataTable tableE09 = xpResults.GetTableE09();
+            TableE19DataSet.TableE19DataTable tableE19 = xpResults.GetTableE19();
 
-            foreach (TableE09DataSet.TableE09Row row in tableE09)
+            foreach (TableE19DataSet.TableE19Row row in tableE19)
             {
                 Console.WriteLine(row.NodeName);
             }
 
-            xpResults.WriteToAccessDatabase(@"C:\Results.mdb");
+            xpResults.WriteToAccessDatabase(@"C:\temp\XPSWMMResults.mdb");
         }
     }
 }

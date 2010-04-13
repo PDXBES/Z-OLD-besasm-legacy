@@ -30,6 +30,7 @@ namespace SystemsAnalysis.Reporting
     private PumpStationReport _psReport;
     private AlternativeReport _alternativeReport;
     private FecQaReport _fecQaReport;
+    private RecommendedPlanReport _recommendedPlanReport;
 
     private DoWorkEventArgs doWorkEventArgs;
     private BackgroundWorker bw;
@@ -147,6 +148,9 @@ namespace SystemsAnalysis.Reporting
             case "FecQaReport":
               reports.Add(library, FecQaReport);
               break;
+            case "RecommendedPlanReport":
+              reports.Add(library, RecommendedPlanReport);
+              break;
             default:
               break;
             //return "Unknown Library";
@@ -157,8 +161,7 @@ namespace SystemsAnalysis.Reporting
           }
         }
         xmlDoc.GetElementsByTagName("ReportGenerator")[0].Attributes["studyArea"].Value = studyArea;
-
-        replaceSubstitutionStrings();
+        
         expandMultiTables();
         expandMultiRows();
         parseEmbeddedFunctions();
@@ -170,39 +173,7 @@ namespace SystemsAnalysis.Reporting
         this.OnStatusChanged(new StatusChangedArgs(ex.Message, StatusChangeType.Error));
       }
       return reportOutput;
-    }
-
-    private void replaceSubstitutionStrings()
-    {
-      System.Xml.XmlNodeList xmlNodeList;
-      xmlNodeList = xmlDoc.GetElementsByTagName("Row");
-
-      foreach (XmlNode xmlNode in xmlNodeList)
-      {
-        try
-        {
-          if (xmlNode.Attributes["isMultiRow"] == null || xmlNode.Attributes["isMultiRow"].Value != "true")
-          {
-            continue;
-          }
-
-          XmlNode[] multiRowResultsNodes = expandMultiRow(xmlNode);
-
-          foreach (XmlNode newNode in multiRowResultsNodes)
-          {
-            xmlNode.ParentNode.InsertBefore(newNode, xmlNode);
-          }
-          xmlNode.ParentNode.RemoveChild(xmlNode);
-          expandMultiRows();
-          break;
-        }
-        catch (Exception ex)
-        {
-          this.OnStatusChanged(new StatusChangedArgs("Error expanding MultiRow!"));
-          this.OnStatusChanged(new StatusChangedArgs(ex.Message));
-        }
-      }
-    }
+    }  
 
     public Dictionary<string, ReportBase.ReportInfo> ReportInfos
     {
@@ -351,6 +322,23 @@ namespace SystemsAnalysis.Reporting
       this._fecQaReport.StatusChanged += new OnStatusChangedEventHandler(this.OnStatusChanged);
     }
 
+    private RecommendedPlanReport RecommendedPlanReport
+    {
+      get
+      {
+        if (this._recommendedPlanReport == null)
+        {
+          this.InitRecommendedPlanReport();
+        }
+        return this._recommendedPlanReport;
+      }
+    }
+    private void InitRecommendedPlanReport()
+    {
+      this.OnStatusChanged(new StatusChangedArgs("Creating Recommended Plan Report."));
+      this._recommendedPlanReport = new RecommendedPlanReport(CharLinks, CharNodes, CharDscs);
+      this._recommendedPlanReport.StatusChanged += new OnStatusChangedEventHandler(this.OnStatusChanged);
+    }
     private Links CharLinks
     {
       [System.Diagnostics.DebuggerStepThroughAttribute]
@@ -575,8 +563,7 @@ namespace SystemsAnalysis.Reporting
     }
     private IList getMultiRowKeyList(string multiRowKey)
     {
-      int[] multiRowKeyList;
-      int i = 0;
+      int[] multiRowKeyList;      
       switch (multiRowKey)
       {
         case "FECID":
@@ -593,8 +580,7 @@ namespace SystemsAnalysis.Reporting
     }
     private int[] getFilteredMultiRowKeyList(string multiRowKey, string multiRowFilterName, string multiRowFilterValue)
     {
-      int[] multiRowKeyList;
-      int i = 0;
+      int[] multiRowKeyList;      
       switch (multiRowKey)
       {
         case "WetWellIndex":
