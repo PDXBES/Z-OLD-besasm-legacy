@@ -13,11 +13,16 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
   public class RecommendedPlanReport : ReportBase
   {
     private StormwaterControlsDataSet stormwaterControlDS;
+    private AltCompilerDataSet altCompilerDS;
     private string modelPath;
 
     public RecommendedPlanReport(Links links, Nodes nodes, Dscs dscs)
     {
-      
+      DataAccess.AltCompilerDataSetTableAdapters.SP_ALT_BSBRTableAdapter altBSBRTA;
+      altBSBRTA = new SystemsAnalysis.DataAccess.AltCompilerDataSetTableAdapters.SP_ALT_BSBRTableAdapter();
+      //TODO: alt_BSBR table adapter should probably require UseFlag (and possibly Storm or other fields)
+      //as query parameters to save memory and reduce load times from SirToby
+      //altBSBRTA.Fill(altCompilerDS.SP_ALT_BSBR);
     }
 
     public new class ReportInfo : ReportBase.ReportInfo
