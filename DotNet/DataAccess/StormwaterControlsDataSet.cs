@@ -1,4 +1,6 @@
 ﻿using SystemsAnalysis.Utils.AccessUtils;
+using System.IO;
+
 namespace SystemsAnalysis.DataAccess
 {
   public partial class StormwaterControlsDataSet
@@ -49,6 +51,21 @@ namespace SystemsAnalysis.DataAccess
         accessHelper.Dispose();
       }      
       
+    }
+
+    public void InitAltTargetDataTables(string alternativePath)
+    {
+      StormwaterControlsDataSetTableAdapters.AltStreetTargetsTableAdapter altStreetTargetsTA;
+      altStreetTargetsTA = new SystemsAnalysis.DataAccess.StormwaterControlsDataSetTableAdapters.AltStreetTargetsTableAdapter(alternativePath);
+      altStreetTargetsTA.Fill(this.AltStreetTargets);
+
+      StormwaterControlsDataSetTableAdapters.AltRoofTargetsTableAdapter altRoofTargetsTA;
+      altRoofTargetsTA = new SystemsAnalysis.DataAccess.StormwaterControlsDataSetTableAdapters.AltRoofTargetsTableAdapter(alternativePath);
+      altRoofTargetsTA.Fill(this.AltRoofTargets);
+
+      StormwaterControlsDataSetTableAdapters.AltParkingTargetsTableAdapter altParkingTargetsTA;
+      altParkingTargetsTA = new SystemsAnalysis.DataAccess.StormwaterControlsDataSetTableAdapters.AltParkingTargetsTableAdapter(alternativePath);
+      altParkingTargetsTA.Fill(this.AltParkingTargets);
     }
 
   }
@@ -135,6 +152,39 @@ namespace SystemsAnalysis.DataAccess.StormwaterControlsDataSetTableAdapters
       : this()
     {
       this.Connection.ConnectionString = StormwaterControlsAdapterSetup.GetModelConnectionString(modelPath);
+    }
+  }
+
+  public partial class AltStreetTargetsTableAdapter
+  {
+    public AltStreetTargetsTableAdapter(string alternativePath)
+      : this()
+    {
+      alternativePath = alternativePath + (alternativePath.EndsWith(Path.DirectorySeparatorChar.ToString()) ? "" :
+        Path.DirectorySeparatorChar.ToString());
+      this.Connection.ConnectionString = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + alternativePath + "alternative_package.mdb";
+    }
+  }
+
+  public partial class AltRoofTargetsTableAdapter
+  {
+    public AltRoofTargetsTableAdapter(string alternativePath)
+      : this()
+    {
+      alternativePath = alternativePath + (alternativePath.EndsWith(Path.DirectorySeparatorChar.ToString()) ? "" :
+        Path.DirectorySeparatorChar.ToString());
+      this.Connection.ConnectionString = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + alternativePath + "alternative_package.mdb";
+    }
+  }
+
+  public partial class AltParkingTargetsTableAdapter
+  {
+    public AltParkingTargetsTableAdapter(string alternativePath)
+      : this()
+    {
+      alternativePath = alternativePath + (alternativePath.EndsWith(Path.DirectorySeparatorChar.ToString()) ? "" :
+        Path.DirectorySeparatorChar.ToString());
+      this.Connection.ConnectionString = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + alternativePath + "alternative_package.mdb";
     }
   }
 }
