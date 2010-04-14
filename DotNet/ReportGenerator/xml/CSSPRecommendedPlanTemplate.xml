@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--<?xml-stylesheet type="text/xsl" href="excel_char.xsl" ?>-->
+<?xml-stylesheet type="text/xsl" href="\\Cassio\Modeling\Model_Programs\bin\ReportGenerator\excel_char.xsl" ?>
+<ReportGenerator reportName="CSSP Recommended Plan Report" studyArea="" >
+  <CharacterizationTable tableNumber="1" tableTitle="Recommended Plan Summary" columnCount="5">
+      <Header>
+         <Cell data="Project" cellType="COLUMNNAME"></Cell>
+         <Cell data="2-Year Storm" cellType="COLUMNNAME"></Cell>
+         <Cell data="5-Year Storm" cellType="COLUMNNAME"></Cell>
+         <Cell data="25-Year Storm" cellType="COLUMNNAME"></Cell>
+         <Cell data="25-Year Storm" cellType="COLUMNNAME"></Cell>
+      </Header>
+      <Header>
+         <Cell data="Area" cellType="SUBCOLUMN"></Cell>
+         <Cell data="(Existing Conditions)" cellType="SUBCOLUMN" footerID="*"></Cell>
+         <Cell data="(Existing Conditions)" cellType="SUBCOLUMN" footerID="*"></Cell>
+         <Cell data="(Existing Conditions)" cellType="SUBCOLUMN" footerID="*"></Cell>
+         <Cell data="(Future Conditions)" cellType="SUBCOLUMN" footerID="*"></Cell>
+      </Header>
+      <Row isMultiRow="true" multiRowKey="FocusArea">
+        <Cell cellType="FUNCTION">
+          <Function functionName="FocusAreaName" library="AlternativeReport">
+            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+          </Function>
+        </Cell>
+        <Cell cellType="FUNCTION">
+          <Function functionName="BSBRCount" library="RecommendedPlanReport" format="N0">
+            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+            <Parameter parameterName="UseFlag" parameterValue="EX_BASE" />
+            <Parameter parameterName="StormEvent" parameterValue="2_YEAR" />
+          </Function>
+        </Cell>
+        <Cell cellType="FUNCTION">
+          <Function functionName="BSBRCount" library="RecommendedPlanReport" format="N0">
+            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+            <Parameter parameterName="UseFlag" parameterValue="EX_BASE" />
+            <Parameter parameterName="StormEvent" parameterValue="5_YEAR" />
+          </Function>
+        </Cell>
+        <Cell cellType="FUNCTION">
+        <Function functionName="BSBRCount" library="RecommendedPlanReport" format="N0">
+            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+            <Parameter parameterName="UseFlag" parameterValue="EX_BASE" />
+            <Parameter parameterName="StormEvent" parameterValue="25_YEAR" />
+          </Function>
+        </Cell>
+        <Cell cellType="FUNCTION">
+          <Function functionName="BSBRCount" library="RecommendedPlanReport" format="N0">
+            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+            <Parameter parameterName="UseFlag" parameterValue="FU_BASE" />
+            <Parameter parameterName="StormEvent" parameterValue="25_YEAR" />
+          </Function>
+        </Cell>
+      </Row>
+      <Footer footerID="*" footerText="Number of tax lots with BSBR; source: Sellwood, Insley &amp; Western Lents Basins Study Area Sewer Hydraulic Characterization Technical Memorandum (BES, October 23, 2006)." />
+  </CharacterizationTable>
+  <CharacterizationTable tableNumber="2" tableTitle="Recommended Plan Components" columnCount="6">
+      <Header>
+        <Cell data="Project Area" cellType="COLUMNNAME"></Cell>
+        <Cell data="Number of Street Controls" cellType="COLUMNNAME"></Cell>
+        <Cell data="Number of Roof Controls" cellType="COLUMNNAME"></Cell>
+        <Cell data="Number of Parking Controls" cellType="COLUMNNAME"></Cell>
+        <Cell data="Number of New or Upsized Pipes" cellType="COLUMNNAME"></Cell>
+        <Cell data="Length of New or Upsized Pipe (ft)" cellType="COLUMNNAME"></Cell>
+      </Header>
+      <Row isMultiRow="true" multiRowKey="FocusArea">
+        <Cell cellType="FUNCTION">
+          <Function functionName="FocusAreaName" library="AlternativeReport">
+            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+          </Function>
+        </Cell>
+        <Cell cellType="FUNCTION">
+          <Function functionName="StreetControlCount" library="AlternativeReport" format="N0">
+            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+          </Function>
+        </Cell>
+        <Cell cellType="FUNCTION">
+          <Function functionName="RoofControlCount" library="AlternativeReport" format="N0">
+            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+          </Function>
+        </Cell>
+        <Cell cellType="FUNCTION">
+          <Function functionName="ParkingControlCount" library="AlternativeReport" format="N0">
+            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+          </Function>
+        </Cell>
+        <Cell cellType="FUNCTION">
+          <Function functionName="NewAndUpsizedPipeCount" library="AlternativeReport" format="N0">
+            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+          </Function>
+        </Cell>
+        <Cell cellType="FUNCTION">
+          <Function functionName="NewAndUpsizedPipeLength" library="AlternativeReport" format="N0" suffix="'">
+            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+          </Function>
+        </Cell>
+      </Row>
+  </CharacterizationTable>
+  <CharacterizationTable tableNumber="3" tableTitle="Effectiveness of the Recommended Plan" columnCount="3">
+      <Header>
+        <Cell data="Project Area" cellType="COLUMNNAME"></Cell>
+        <Cell data="Number of BSBR Remaining" cellType="COLUMNNAME" footerID="*"></Cell>
+        <Cell data="Volume of Stormwater Runoff Removed from the Tunnel System (gallons)" cellType="COLUMNNAME" footerID="**"></Cell>
+      </Header>
+      <Row isMultiRow="true" multiRowKey="FocusArea">
+        <Cell cellType="FUNCTION">
+          <Function functionName="FocusAreaName" library="AlternativeReport">
+            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+          </Function>
+        </Cell>
+        <Cell cellType="FUNCTION">
+					<Function functionName="BSBRCount" library="RecommendedPlanReport" format="N0">
+            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+            <Parameter parameterName="UseFlag" parameterValue="RP" />
+            <Parameter parameterName="StormEvent" parameterValue="25_YEAR" />
+          </Function>
+        </Cell>
+        <Cell cellType="FUNCTION">
+          <Function functionName="VolumeStormwaterInfiltrated" library="RecommendedPlanReport" format="N0">
+            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+          </Function>
+        </Cell>
+      </Row>
+        <Footer footerID="*" footerText="Based on the 25-year design storm for future conditions." />
+        <Footer footerID="**" footerText="Based on the 4th storm of the summer six series of storms" />
+  </CharacterizationTable>
+  <CharacterizationTable tableNumber="4" tableTitle="Cost Estimates" columnCount="6">
+      <Header>
+        <Cell data="Project Area" cellType="COLUMNNAME" />
+        <Cell data="Capital Cost" cellType="COLUMNNAME" />
+        <Cell data="Credit for Removing Volume from Tunnel System" cellType="COLUMNNAME"></Cell>
+        <Cell data="Annual Operations and Maintenance Cost" cellType="COLUMNNAME"></Cell>
+        <Cell data="Present Worth Cost" cellType="COLUMNNAME"></Cell>
+        <Cell data="Cost per BSBR Eliminated" cellType="COLUMNNAME"></Cell>
+      </Header>
+      <Row isMultiRow="true" multiRowKey="FocusArea">
+        <Cell cellType="FUNCTION">
+          <Function functionName="FocusAreaName" library="AlternativeReport">
+            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+          </Function>
+        </Cell>
+        <Cell cellType="FUNCTION">
+          <Function functionName="CapitalCost" library="RecommendedPlanReport" format="N0">
+            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+          </Function>
+        </Cell>
+        <Cell cellType="FUNCTION">
+          <Function functionName="CreditRemovingVolumeTunnel" library="RecommendedPlanReport" format="N0">
+            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+          </Function>
+        </Cell>
+        <Cell cellType="FUNCTION">
+          <Function functionName="AnnualOperationMaintenceCost" library="RecommendedPlanReport" format="N0">
+            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+          </Function>
+        </Cell>
+        <Cell cellType="FUNCTION">
+          <Function functionName="PresentWorthCost" library="RecommendedPlanReport" format="N0">
+            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+          </Function>
+        </Cell>
+        <Cell cellType="FUNCTION">
+          <Function functionName="BSBREliminated" library="RecommendedPlanReport" format="N0">
+            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+          </Function>
+       </Cell>
+      </Row>
+      <Row  rowType="TOTALROW">
+        <Cell cellType="CONST" data="Total" />
+        <Cell cellType="FUNCTION">
+          <Function functionName="TotalCapitalCost" library="RecommendedPlanReport" format="N0">
+            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+          </Function>
+        </Cell>
+        <Cell cellType="FUNCTION">
+          <Function functionName="TotalCreditRemovingVolumeTunnel" library="RecommendedPlanReport" format="N0">
+            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+          </Function>
+        </Cell>
+        <Cell cellType="FUNCTION">
+          <Function functionName="TotalAnnualOperationMaintenceCost" library="RecommendedPlanReport" format="N0">
+            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+          </Function>
+        </Cell>
+        <Cell cellType="FUNCTION">
+          <Function functionName="TotalPresentWorthCost" library="RecommendedPlanReport" format="N0">
+            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+          </Function>
+        </Cell>
+        <Cell cellType="FUNCTION">
+          <Function functionName="TotalBSBREliminated" library="RecommendedPlanReport" format="N0">
+            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+          </Function>
+        </Cell>
+      </Row>
+  </CharacterizationTable>
+  <CharacterizationTable tableNumber="5" tableTitle="Watershed Benefits" columnCount="5">
+      <Header>
+        <Cell data="Project" cellType="COLUMNNAME"></Cell>
+        <Cell data="Infiltrate Stormwater" cellType="COLUMNNAME"></Cell>
+        <Cell data="Reduce Pollutants" cellType="COLUMNNAME"></Cell>
+        <Cell data="Protect and Improve Terrestrial Habitat" cellType="COLUMNNAME"></Cell>
+        <Cell data="Protect and Improve Aquatic Habitat" cellType="COLUMNNAME"></Cell>
+      </Header>
+      <Header>
+        <Cell data="Area" cellType="SUBCOLUMN"></Cell>
+        <Cell data="(acres)" cellType="SUBCOLUMN"></Cell>
+        <Cell data="(acres)" cellType="SUBCOLUMN"></Cell>
+        <Cell data="(acres)" cellType="SUBCOLUMN"></Cell>
+        <Cell data="(linear feet)" cellType="SUBCOLUMN"></Cell>
+      </Header>
+      <Row isMultiRow="true" multiRowKey="FocusArea">
+        <Cell cellType="FUNCTION">
+          <Function functionName="FocusAreaName" library="AlternativeReport">
+            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+          </Function>
+        </Cell>
+        <Cell cellType="FUNCTION">
+          <Function functionName="InfiltrateStormwater" library="RecommendedPlanReport" format="N0">
+            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+          </Function>
+        </Cell>
+        <Cell cellType="FUNCTION">
+          <Function functionName="ReducePollutants" library="RecommendedPlanReport" format="N0">
+            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+          </Function>
+        </Cell>
+        <Cell cellType="FUNCTION">
+          <Function functionName="ProtectImproveTerrestrialHabitat" library="RecommendedPlanReport" format="N0">
+            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+          </Function>
+        </Cell>
+        <Cell cellType="FUNCTION">
+          <Function functionName="ProtectImproveAquaticHabitat" library="RecommendedPlanReport" format="N0">
+            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+          </Function>
+        </Cell>
+      </Row>
+      <Row  rowType="TOTALROW">
+        <Cell cellType="CONST" data="Total" />
+        <Cell cellType="FUNCTION">
+          <Function functionName="InfiltrationArea" library="RecommendedPlanReport" format="N0">
+            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+          </Function>
+        </Cell>
+        <Cell cellType="FUNCTION">
+          <Function functionName="InfiltrationArea" library="RecommendedPlanReport" format="N0">
+            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+          </Function>
+        </Cell>
+        <Cell cellType="FUNCTION">
+          <Function functionName="TotalProtectImproveTerrestrialHabitat" library="RecommendedPlanReport" format="N0">
+            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+          </Function>
+        </Cell>
+        <Cell cellType="CONST" value="Manual Entry" />          
+      </Row>
+  </CharacterizationTable>
+  <CharacterizationTable tableNumber="6" tableTitle="Environmental and Community Values" columnCount="5">
+      <Header>
+        <Cell data="Project" cellType="COLUMNNAME"></Cell>
+        <Cell data="Watershed Benefits" cellType="COLUMNNAME"></Cell>
+        <Cell data="Implementation Risks" cellType="COLUMNNAME"></Cell>
+        <Cell data="Neighborhood Impacts" cellType="COLUMNNAME"></Cell>
+        <Cell data="Total ECV Indicator Score" cellType="COLUMNNAME"></Cell>
+      </Header>
+      <Header>
+        <Cell data="Area" cellType="SUBCOLUMNB"></Cell>
+        <Cell data="(Max Score = 40)" cellType="SUBCOLUMN"></Cell>
+        <Cell data="(Max Score = 30)" cellType="SUBCOLUMN"></Cell>
+        <Cell data="(Max Score = 30)" cellType="SUBCOLUMN"></Cell>
+        <Cell data="(Max Score = 100)" cellType="SUBCOLUMN"></Cell>
+      </Header>
+      <Row isMultiRow="true" multiRowKey="FocusArea">
+        <Cell cellType="FUNCTION">
+          <Function functionName="FocusAreaName" library="AlternativeReport">
+            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+          </Function>
+        </Cell>
+        <Cell cellType="CONST" value="Manual Entry" />
+        <Cell cellType="CONST" value="Manual Entry" />
+        <Cell cellType="CONST" value="Manual Entry" />
+        <Cell cellType="CONST" value="Manual Entry" />
+      </Row>
+  </CharacterizationTable>
+  <CharacterizationTable tableNumber="7" tableTitle="Cost/Benefit Evaluation" columnCount="7">
+      <Header>
+        <Cell data="Project Area" cellType="COLUMNNAME"></Cell>
+        <Cell data="Mortality Risk" cellType="COLUMNNAME" footerID="^"></Cell>
+        <Cell data="Capacity Risk" cellType="COLUMNNAME"></Cell>
+        <Cell data="Base Risk" cellType="COLUMNNAME"></Cell>
+        <Cell data="Project Present Worth" cellType="COLUMNNAME"></Cell>
+        <Cell data="Project Capital Cost" cellType="COLUMNNAME"></Cell>
+        <Cell data="Cost Benefit Ratio (CBR)" cellType="COLUMNNAME"></Cell>
+      </Header>
+      <Row isMultiRow="true" multiRowKey="FocusArea">
+         <Cell cellType="FUNCTION">
+          <Function functionName="FocusAreaName" library="AlternativeReport">
+            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+          </Function>
+        </Cell>
+        <Cell cellType="FUNCTION">
+          <Function functionName="MortalityRisk" library="RecommendedPlanReport" format="N0">
+            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+          </Function>
+        </Cell>
+        <Cell cellType="FUNCTION">
+          <Function functionName="CapacityRisk" library="RecommendedPlanReport" format="N0">
+            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+          </Function>
+        </Cell>
+        <Cell cellType="FUNCTION">
+          <Function functionName="BaseRisk" library="RecommendedPlanReport" format="N0">
+            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+          </Function>
+        </Cell>
+        <Cell cellType="FUNCTION">
+          <Function functionName="ProjectPresentWorth" library="RecommendedPlanReport" format="N0">
+            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+          </Function>
+        </Cell>
+        <Cell cellType="FUNCTION">
+          <Function functionName="ProjectCapitalCost" library="RecommendedPlanReport" format="N0">
+            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+          </Function>
+        </Cell>
+        <Cell cellType="FUNCTION">
+          <Function functionName="CostBenefitRatio" library="RecommendedPlanReport" format="N0">
+            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+          </Function>
+        </Cell>
+      </Row>
+      <Row rowType="TOTALROW">
+        <Cell cellType="CONST" data="Total" />
+        <Cell cellType="FUNCTION">
+          <Function functionName="TotalMortalityRisk" library="RecommendedPlanReport" format="N0">
+            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+          </Function>
+        </Cell>
+        <Cell cellType="FUNCTION">
+          <Function functionName="TotalCapacityRisk" library="RecommendedPlanReport" format="N0">
+            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+          </Function>
+        </Cell>
+        <Cell cellType="FUNCTION">
+          <Function functionName="TotalBaseRisk" library="RecommendedPlanReport" format="N0">
+            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+          </Function>
+        </Cell>
+        <Cell cellType="FUNCTION">
+          <Function functionName="TotalProjectPresentWorth" library="RecommendedPlanReport" format="N0">
+            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+          </Function>
+        </Cell>
+        <Cell cellType="FUNCTION">
+          <Function functionName="TotalProjectCapitalCost" library="RecommendedPlanReport" format="N0">
+            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+          </Function>
+        </Cell>
+        <Cell cellType="FUNCTION">
+          <Function functionName="TotalCostBenefitRatio" library="RecommendedPlanReport" format="N0">
+            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+          </Function>
+        </Cell>
+      </Row>
+      <Footer footerID="^" footerText="From Task 3 (Collection System Rehabilitation Plan)" />
+  </CharacterizationTable>
+</ReportGenerator>

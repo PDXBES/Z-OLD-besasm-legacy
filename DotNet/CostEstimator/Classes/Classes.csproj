@@ -1,0 +1,143 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{3176DA9C-B2C1-46C8-B7DC-E3B71F13E7F9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SystemsAnalysis.Analysis.CostEstimator.Classes</RootNamespace>
+    <AssemblyName>SystemsAnalysis.Analysis.CostEstimator.Classes</AssemblyName>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AncillaryCost.cs" />
+    <Compile Include="AncillaryCoster.cs" />
+    <Compile Include="AncillaryFactor.cs" />
+    <Compile Include="BoringJackingAncillaryCost.cs" />
+    <Compile Include="BypassPumpingAncillaryCost.cs" />
+    <Compile Include="CasedStringProcessor.cs" />
+    <Compile Include="ConflictPackage.cs" />
+    <Compile Include="ConstructionDurationCalculator.cs" />
+    <Compile Include="CostEngine.cs">
+    </Compile>
+    <Compile Include="CosterParameter.cs" />
+    <Compile Include="CostFactor.cs" />
+    <Compile Include="CostItem.cs" />
+    <Compile Include="CostItemFactor.cs" />
+    <Compile Include="CostItemOrigin.cs" />
+    <Compile Include="CrossingRelocationAncillaryCost.cs" />
+    <Compile Include="DifficultAreaAncillaryFactor.cs" />
+    <Compile Include="EnvironmentalMitigationAncillaryCost.cs" />
+    <Compile Include="HazardousMaterialAncillaryCost.cs" />
+    <Compile Include="InflowControlCoster.cs" />
+    <Compile Include="ParallelRelocationAncillaryCost.cs" />
+    <Compile Include="PipeCoster.cs" />
+    <Compile Include="ReportFocusAreaInfo.cs" />
+    <Compile Include="ReportGenericItem.cs" />
+    <Compile Include="ReportInflowControlItem.cs" />
+    <Compile Include="ReportItem.cs" />
+    <Compile Include="ReportPipeItem.cs" />
+    <Compile Include="Project.cs" />
+    <Compile Include="ProjectInfo.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReportSummaryItem.cs" />
+    <Compile Include="TrafficControlAncillaryCost.cs" />
+    <Compile Include="UnitCost.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Alternatives\SystemsAnalysis.Modeling.Alternatives.csproj">
+      <Project>{D5E4B31B-D773-4877-9008-80F74475DE93}</Project>
+      <Name>SystemsAnalysis.Modeling.Alternatives</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lib\DataAccess\SystemsAnalysis.DataAccess.csproj">
+      <Project>{D81499E0-ED3E-4C85-9F8E-72C263AA24C4}</Project>
+      <Name>SystemsAnalysis.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lib\Modeling\SystemsAnalysis.Modeling.csproj">
+      <Project>{54555B74-906E-4D29-9BC3-7653805B6AD0}</Project>
+      <Name>SystemsAnalysis.Modeling</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lib\Tracer\SystemsAnalysis.Tracer.csproj">
+      <Project>{C8B24858-1D99-4519-9A1D-CF129CED9ADA}</Project>
+      <Name>SystemsAnalysis.Tracer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lib\Types\SystemsAnalysis.Types.csproj">
+      <Project>{AFB81561-9859-4FA2-86AD-0C6833488E41}</Project>
+      <Name>SystemsAnalysis.Types</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DirectConstructionItems.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DirectConstructionItems.xsx">
+      <DependentUpon>DirectConstructionItems.xsd</DependentUpon>
+    </None>
+    <None Include="PipeCostReference.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="PipeCostReference.xsx">
+      <DependentUpon>PipeCostReference.xsd</DependentUpon>
+    </None>
+    <None Include="InflowControlCostReference.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="InflowControlCostReference.xsx">
+      <DependentUpon>InflowControlCostReference.xsd</DependentUpon>
+    </None>
+    <None Include="CostEstimateProject.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="CostEstimateProject.xsx">
+      <DependentUpon>CostEstimateProject.xsd</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DirectConstructionItems.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="InflowControlCostReference.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PipeCostReference.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

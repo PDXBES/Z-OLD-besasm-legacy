@@ -1,0 +1,148 @@
+'
+'	Function to add currently selected item to a delete list.
+'	create the delete list if not currently open.
+'	check that item is in fact a link.
+'
+include 	"MapBasic.Def"
+include 	"..\inc\EMGDelList.def"
+include 	"..\..\common\inc\EMGToolGlobal.def"
+include	"..\..\common\inc\EMGMTabUtil.def"
+
+Sub AddToDeleteList()
+Dim 	BaseTable as string
+Dim		NumRows as integer
+Dim		HasLinkID as logical
+Dim		ColName as string
+Dim		FullPath as string
+Dim		DirPath as string
+dim		DelObj as object
+Dim		DelId as integer
+Dim		DelTableName as string
+Dim		DelTableCount as integer
+Dim		BaseName as string
+Dim		DelTablePath as string
+Dim		KeyAlias as alias
+Dim		MLinkAlias as alias
+
+
+	BaseTable = SelectionInfo(SEL_INFO_TABLENAME)
+	if BaseTable = "" then
+		Beep
+		note "Nothing is selected!"
+		exit sub
+	end if
+	Do Case BaseTable
+		case "mst_links"
+			gMasterModelMode = 1
+		case "mdl_links"
+			gMasterModelMode = 2
+		case else
+			note "Please select a links layer"
+			exit sub
+	end case
+	do case gMasterModelMode
+		case 1
+			ColName = "MLinkID"
+			KeyAlias = "MLinkID"
+			MLinkAlias = "MLinkID"
+			HasLinkID = IsColumnThere(BaseTable, ColName)
+		case 2
+			ColName = "LinkID"
+			KeyAlias = "LinkID"
+			MLinkAlias = "MLinkID"
+			HasLinkID = IsColumnTHere(BaseTable, ColName)
+	end case
+	if not HasLinkID then
+		Beep
+		Note "Selected item is not a link (no link ID)"
+		exit sub
+	end if
+	NumRows = SelectionInfo(SEL_INFO_NROWS)
+	if NumRows > 1 then
+		Beep
+		'*** could be dialog that confirms desire to do multiple deletion...
+		Note "More than one row selected"
+	end if
+
+	if not IsTableOpen("DeleteList") then
+		FullPath = TableInfo(BaseTable, TAB_INFO_TABFILE)
+		DirPath = PathToDirectory$(FullPath)
+		BaseName = BaseTable + "_DEL_" + curdate() + "_"
+		DelTableCount = 0
+		Do 
+			DelTableCount = DelTableCount + 1
+			print "Count = " + str$(DelTableCount)
+			DelTableName = BaseName + format$(DelTableCount, "00") + ".TAB"
+			DelTablePath = DirPath + DelTableName
+			if FileExists(DelTablePath) then
+				print "file exists: " + DelTablePath
+			else
+				print "Name available: " + DelTablePath
+			end if
+		Loop While FileExists(DelTablePath)
+		print "Will create: " + DelTableName
+		print "at path " + DelTablePath
+		do case gMasterModelMode
+			case 1
+				print "Master Mode"
+				create table DeleteList
+				(
+					MLinkID	integer
+				)
+				File DelTablepath
+			case 2
+				print "Model Mode"
+				create table DeleteList
+				(
+					LinkID	integer,
+					MLinkID	integer
+				)
+				File DelTablepath
+
+		end case
+		Create Map 
+			For   DeleteList 
+			CoordSys Earth Projection 3, 74, 3, -120.5, 43.6666666667, 44.3333333333, 46, 8202099.738, 0 Bounds (7500000, 500000) (8000000, 750000)
+		commit table DeleteList
+
+	End If
+	print "Table of selection: " + BaseTable
+Dim		Key as string
+Dim		MLink as string
+
+	fetch first from selection
+	do
+		DelObj = selection.obj
+		print Key
+		do case gMasterModelMode
+			case 1
+				Key = selection.MLinkID
+				MLink = Selection.MLinkID
+				Insert into DeleteList
+					( 
+					obj,
+					MLinkID
+					) values (
+					DelObj,
+					Key
+					)
+			case 2
+				Key = selection.LinkID
+				MLink = Selection.MLinkID
+
+				Insert into DeleteList
+					( 
+					obj,
+					LinkID,
+					MLinkID
+					) values (
+					DelObj,
+					Key,
+					MLink
+					)
+
+		end case
+		fetch next from selection
+	loop until EOT(Selection)
+
+End Sub

@@ -1,0 +1,31 @@
+'
+'	header for table utilities
+'
+Declare 	Function		TabHasReqColumns(ByVal TName as string, CErrs as string) as logical
+Declare 	Sub				CheckOrCreateAuditColumns(ByVal TableName as string, ByVal AddOrDel as string)
+Declare Function CheckOrCreateColumn( ByVal sTabName as string, ByVal sColname as string, ByVal SColType as String ) as Logical
+Declare Function IsColumnThere(ByVal sTabName as String, sColName as String) as Logical
+Declare Function	 IsTableOpen(byval TName as string) as logical
+Declare Function FixFolderSlash(ByVal FolderName as string) as string
+Declare Function APIBrowseFolders(ByVal szTitle as string) as string 
+Declare Function OpenTable(sPathName As String,  ByVal sTabName as String, ByVal sAlias as String, ByVal Gentle as logical) As Logical
+
+Type		AuditColumn
+	Name as string				' name of audit column to add
+	Type as string				' type of column to add
+End Type
+
+Type		ReqColumn
+	Name	as string			' name of required column
+	Type		as smallint			' data type
+	Width	as smallint			' width of char or decimal types
+End Type
+
+Global	gAuditColAdd() as AuditColumn
+Global	gAuditColDel() as AuditColumn
+Global	gReqCols() as ReqColumn
+Global gMastMax as integer
+Global gModelMax as integer
+Global gMastMaxDel as integer
+Global gModelMaxDel as integer
+Global gReqColCount as integer
