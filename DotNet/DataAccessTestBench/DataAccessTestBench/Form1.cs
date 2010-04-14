@@ -77,5 +77,10 @@ namespace DataAccessTestBench
         textBox1.AppendText("Focus Area " + row.FocusArea + ": " + row.FacilityVolume + "\n");
       }
     }
+
+    private void Form1_Load(object sender, EventArgs e)
+    {
+
+    }
   }
 }
