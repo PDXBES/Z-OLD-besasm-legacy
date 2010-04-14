@@ -19,6 +19,9 @@ namespace SystemsAnalysis.DataAccess
       icTargetRoofTA = new StormwaterControlsDataSetTableAdapters.ICTargetRoofTableAdapter(modelPath);
       icTargetRoofTA.Fill(this.ICTargetRoof);
 
+      StormwaterControlsDataSetTableAdapters.mdl_dirsc_acTableAdapter mdlDscTA;
+      mdlDscTA = new StormwaterControlsDataSetTableAdapters.mdl_dirsc_acTableAdapter(modelPath);
+      
       StormwaterControlsDataSetTableAdapters.mdl_SurfSC_acTableAdapter mdlSscTA;
       mdlSscTA = new StormwaterControlsDataSetTableAdapters.mdl_SurfSC_acTableAdapter(modelPath);
 
@@ -34,6 +37,9 @@ namespace SystemsAnalysis.DataAccess
       AccessHelper accessHelper = new AccessHelper(modelPath + @"\mdbs\StormwaterControls_v12.mdb");
       try
       {
+        accessHelper.LinkTable("mdl_DirSC_ac", modelPath + @"\dsc\mdl_DirSC_ac.mdb","mdl_dirsc_ac");
+        mdlDscTA.Fill(this.mdl_dirsc_ac);
+
         accessHelper.LinkTable("mdl_surfsc_ac", modelPath + @"\surfsc\mdl_SurfSC_ac.mdb");
         mdlSscTA.Fill(this.mdl_SurfSC_ac);
 
