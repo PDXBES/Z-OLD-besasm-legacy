@@ -39,6 +39,12 @@ namespace SystemsAnalysis.DataAccess {
         
         private ic_ParkingTargetsDataTable tableic_ParkingTargets;
         
+        private AltRoofTargetsDataTable tableAltRoofTargets;
+        
+        private AltParkingTargetsDataTable tableAltParkingTargets;
+        
+        private AltStreetTargetsDataTable tableAltStreetTargets;
+        
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -85,6 +91,15 @@ namespace SystemsAnalysis.DataAccess {
                 }
                 if ((ds.Tables["ic_ParkingTargets"] != null)) {
                     base.Tables.Add(new ic_ParkingTargetsDataTable(ds.Tables["ic_ParkingTargets"]));
+                }
+                if ((ds.Tables["AltRoofTargets"] != null)) {
+                    base.Tables.Add(new AltRoofTargetsDataTable(ds.Tables["AltRoofTargets"]));
+                }
+                if ((ds.Tables["AltParkingTargets"] != null)) {
+                    base.Tables.Add(new AltParkingTargetsDataTable(ds.Tables["AltParkingTargets"]));
+                }
+                if ((ds.Tables["AltStreetTargets"] != null)) {
+                    base.Tables.Add(new AltStreetTargetsDataTable(ds.Tables["AltStreetTargets"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -168,6 +183,33 @@ namespace SystemsAnalysis.DataAccess {
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public AltRoofTargetsDataTable AltRoofTargets {
+            get {
+                return this.tableAltRoofTargets;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public AltParkingTargetsDataTable AltParkingTargets {
+            get {
+                return this.tableAltParkingTargets;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public AltStreetTargetsDataTable AltStreetTargets {
+            get {
+                return this.tableAltStreetTargets;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.BrowsableAttribute(true)]
         [global::System.ComponentModel.DesignerSerializationVisibilityAttribute(global::System.ComponentModel.DesignerSerializationVisibility.Visible)]
         public override global::System.Data.SchemaSerializationMode SchemaSerializationMode {
@@ -247,6 +289,15 @@ namespace SystemsAnalysis.DataAccess {
                 if ((ds.Tables["ic_ParkingTargets"] != null)) {
                     base.Tables.Add(new ic_ParkingTargetsDataTable(ds.Tables["ic_ParkingTargets"]));
                 }
+                if ((ds.Tables["AltRoofTargets"] != null)) {
+                    base.Tables.Add(new AltRoofTargetsDataTable(ds.Tables["AltRoofTargets"]));
+                }
+                if ((ds.Tables["AltParkingTargets"] != null)) {
+                    base.Tables.Add(new AltParkingTargetsDataTable(ds.Tables["AltParkingTargets"]));
+                }
+                if ((ds.Tables["AltStreetTargets"] != null)) {
+                    base.Tables.Add(new AltStreetTargetsDataTable(ds.Tables["AltStreetTargets"]));
+                }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
                 this.Namespace = ds.Namespace;
@@ -319,6 +370,24 @@ namespace SystemsAnalysis.DataAccess {
                     this.tableic_ParkingTargets.InitVars();
                 }
             }
+            this.tableAltRoofTargets = ((AltRoofTargetsDataTable)(base.Tables["AltRoofTargets"]));
+            if ((initTable == true)) {
+                if ((this.tableAltRoofTargets != null)) {
+                    this.tableAltRoofTargets.InitVars();
+                }
+            }
+            this.tableAltParkingTargets = ((AltParkingTargetsDataTable)(base.Tables["AltParkingTargets"]));
+            if ((initTable == true)) {
+                if ((this.tableAltParkingTargets != null)) {
+                    this.tableAltParkingTargets.InitVars();
+                }
+            }
+            this.tableAltStreetTargets = ((AltStreetTargetsDataTable)(base.Tables["AltStreetTargets"]));
+            if ((initTable == true)) {
+                if ((this.tableAltStreetTargets != null)) {
+                    this.tableAltStreetTargets.InitVars();
+                }
+            }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -342,6 +411,12 @@ namespace SystemsAnalysis.DataAccess {
             base.Tables.Add(this.tableic_RoofTargets);
             this.tableic_ParkingTargets = new ic_ParkingTargetsDataTable();
             base.Tables.Add(this.tableic_ParkingTargets);
+            this.tableAltRoofTargets = new AltRoofTargetsDataTable();
+            base.Tables.Add(this.tableAltRoofTargets);
+            this.tableAltParkingTargets = new AltParkingTargetsDataTable();
+            base.Tables.Add(this.tableAltParkingTargets);
+            this.tableAltStreetTargets = new AltStreetTargetsDataTable();
+            base.Tables.Add(this.tableAltStreetTargets);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -376,6 +451,21 @@ namespace SystemsAnalysis.DataAccess {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private bool ShouldSerializeic_ParkingTargets() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private bool ShouldSerializeAltRoofTargets() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private bool ShouldSerializeAltParkingTargets() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private bool ShouldSerializeAltStreetTargets() {
             return false;
         }
         
@@ -445,6 +535,12 @@ namespace SystemsAnalysis.DataAccess {
         public delegate void ic_RoofTargetsRowChangeEventHandler(object sender, ic_RoofTargetsRowChangeEvent e);
         
         public delegate void ic_ParkingTargetsRowChangeEventHandler(object sender, ic_ParkingTargetsRowChangeEvent e);
+        
+        public delegate void AltRoofTargetsRowChangeEventHandler(object sender, AltRoofTargetsRowChangeEvent e);
+        
+        public delegate void AltParkingTargetsRowChangeEventHandler(object sender, AltParkingTargetsRowChangeEvent e);
+        
+        public delegate void AltStreetTargetsRowChangeEventHandler(object sender, AltStreetTargetsRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -4312,6 +4408,1030 @@ namespace SystemsAnalysis.DataAccess {
         }
         
         /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class AltRoofTargetsDataTable : global::System.Data.TypedTableBase<AltRoofTargetsRow> {
+            
+            private global::System.Data.DataColumn columnMapInfoID;
+            
+            private global::System.Data.DataColumn columnNGToRoof;
+            
+            private global::System.Data.DataColumn columnBuildModelIC;
+            
+            private global::System.Data.DataColumn columnICID;
+            
+            private global::System.Data.DataColumn columnConstructed;
+            
+            private global::System.Data.DataColumn columnAltICID;
+            
+            private global::System.Data.DataColumn columnDifficulty;
+            
+            private global::System.Data.DataColumn columnFocusArea;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public AltRoofTargetsDataTable() {
+                this.TableName = "AltRoofTargets";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal AltRoofTargetsDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected AltRoofTargetsDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn MapInfoIDColumn {
+                get {
+                    return this.columnMapInfoID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn NGToRoofColumn {
+                get {
+                    return this.columnNGToRoof;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn BuildModelICColumn {
+                get {
+                    return this.columnBuildModelIC;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn ICIDColumn {
+                get {
+                    return this.columnICID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn ConstructedColumn {
+                get {
+                    return this.columnConstructed;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn AltICIDColumn {
+                get {
+                    return this.columnAltICID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn DifficultyColumn {
+                get {
+                    return this.columnDifficulty;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn FocusAreaColumn {
+                get {
+                    return this.columnFocusArea;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public AltRoofTargetsRow this[int index] {
+                get {
+                    return ((AltRoofTargetsRow)(this.Rows[index]));
+                }
+            }
+            
+            public event AltRoofTargetsRowChangeEventHandler AltRoofTargetsRowChanging;
+            
+            public event AltRoofTargetsRowChangeEventHandler AltRoofTargetsRowChanged;
+            
+            public event AltRoofTargetsRowChangeEventHandler AltRoofTargetsRowDeleting;
+            
+            public event AltRoofTargetsRowChangeEventHandler AltRoofTargetsRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void AddAltRoofTargetsRow(AltRoofTargetsRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public AltRoofTargetsRow AddAltRoofTargetsRow(string NGToRoof, bool BuildModelIC, int ICID, int Constructed, int AltICID, short Difficulty, string FocusArea) {
+                AltRoofTargetsRow rowAltRoofTargetsRow = ((AltRoofTargetsRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        null,
+                        NGToRoof,
+                        BuildModelIC,
+                        ICID,
+                        Constructed,
+                        AltICID,
+                        Difficulty,
+                        FocusArea};
+                rowAltRoofTargetsRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowAltRoofTargetsRow);
+                return rowAltRoofTargetsRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public AltRoofTargetsRow FindByMapInfoID(int MapInfoID) {
+                return ((AltRoofTargetsRow)(this.Rows.Find(new object[] {
+                            MapInfoID})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public override global::System.Data.DataTable Clone() {
+                AltRoofTargetsDataTable cln = ((AltRoofTargetsDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new AltRoofTargetsDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal void InitVars() {
+                this.columnMapInfoID = base.Columns["MapInfoID"];
+                this.columnNGToRoof = base.Columns["NGToRoof"];
+                this.columnBuildModelIC = base.Columns["BuildModelIC"];
+                this.columnICID = base.Columns["ICID"];
+                this.columnConstructed = base.Columns["Constructed"];
+                this.columnAltICID = base.Columns["AltICID"];
+                this.columnDifficulty = base.Columns["Difficulty"];
+                this.columnFocusArea = base.Columns["FocusArea"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            private void InitClass() {
+                this.columnMapInfoID = new global::System.Data.DataColumn("MapInfoID", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMapInfoID);
+                this.columnNGToRoof = new global::System.Data.DataColumn("NGToRoof", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNGToRoof);
+                this.columnBuildModelIC = new global::System.Data.DataColumn("BuildModelIC", typeof(bool), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnBuildModelIC);
+                this.columnICID = new global::System.Data.DataColumn("ICID", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnICID);
+                this.columnConstructed = new global::System.Data.DataColumn("Constructed", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnConstructed);
+                this.columnAltICID = new global::System.Data.DataColumn("AltICID", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnAltICID);
+                this.columnDifficulty = new global::System.Data.DataColumn("Difficulty", typeof(short), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDifficulty);
+                this.columnFocusArea = new global::System.Data.DataColumn("FocusArea", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnFocusArea);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnMapInfoID}, true));
+                this.columnMapInfoID.AutoIncrement = true;
+                this.columnMapInfoID.AllowDBNull = false;
+                this.columnMapInfoID.Unique = true;
+                this.columnNGToRoof.MaxLength = 6;
+                this.columnFocusArea.MaxLength = 10;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public AltRoofTargetsRow NewAltRoofTargetsRow() {
+                return ((AltRoofTargetsRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new AltRoofTargetsRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Type GetRowType() {
+                return typeof(AltRoofTargetsRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.AltRoofTargetsRowChanged != null)) {
+                    this.AltRoofTargetsRowChanged(this, new AltRoofTargetsRowChangeEvent(((AltRoofTargetsRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.AltRoofTargetsRowChanging != null)) {
+                    this.AltRoofTargetsRowChanging(this, new AltRoofTargetsRowChangeEvent(((AltRoofTargetsRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.AltRoofTargetsRowDeleted != null)) {
+                    this.AltRoofTargetsRowDeleted(this, new AltRoofTargetsRowChangeEvent(((AltRoofTargetsRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.AltRoofTargetsRowDeleting != null)) {
+                    this.AltRoofTargetsRowDeleting(this, new AltRoofTargetsRowChangeEvent(((AltRoofTargetsRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void RemoveAltRoofTargetsRow(AltRoofTargetsRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                StormwaterControlsDataSet ds = new StormwaterControlsDataSet();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "AltRoofTargetsDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class AltParkingTargetsDataTable : global::System.Data.TypedTableBase<AltParkingTargetsRow> {
+            
+            private global::System.Data.DataColumn columnMapInfoID;
+            
+            private global::System.Data.DataColumn columnNGToStreet;
+            
+            private global::System.Data.DataColumn columnNGToSurface;
+            
+            private global::System.Data.DataColumn columnNGTOParking;
+            
+            private global::System.Data.DataColumn columnNGTo;
+            
+            private global::System.Data.DataColumn columnBuildModelIC;
+            
+            private global::System.Data.DataColumn columnICID;
+            
+            private global::System.Data.DataColumn columnConstructed;
+            
+            private global::System.Data.DataColumn columnAltICID;
+            
+            private global::System.Data.DataColumn columnDifficulty;
+            
+            private global::System.Data.DataColumn columnFocusArea;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public AltParkingTargetsDataTable() {
+                this.TableName = "AltParkingTargets";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal AltParkingTargetsDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected AltParkingTargetsDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn MapInfoIDColumn {
+                get {
+                    return this.columnMapInfoID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn NGToStreetColumn {
+                get {
+                    return this.columnNGToStreet;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn NGToSurfaceColumn {
+                get {
+                    return this.columnNGToSurface;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn NGTOParkingColumn {
+                get {
+                    return this.columnNGTOParking;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn NGToColumn {
+                get {
+                    return this.columnNGTo;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn BuildModelICColumn {
+                get {
+                    return this.columnBuildModelIC;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn ICIDColumn {
+                get {
+                    return this.columnICID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn ConstructedColumn {
+                get {
+                    return this.columnConstructed;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn AltICIDColumn {
+                get {
+                    return this.columnAltICID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn DifficultyColumn {
+                get {
+                    return this.columnDifficulty;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn FocusAreaColumn {
+                get {
+                    return this.columnFocusArea;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public AltParkingTargetsRow this[int index] {
+                get {
+                    return ((AltParkingTargetsRow)(this.Rows[index]));
+                }
+            }
+            
+            public event AltParkingTargetsRowChangeEventHandler AltParkingTargetsRowChanging;
+            
+            public event AltParkingTargetsRowChangeEventHandler AltParkingTargetsRowChanged;
+            
+            public event AltParkingTargetsRowChangeEventHandler AltParkingTargetsRowDeleting;
+            
+            public event AltParkingTargetsRowChangeEventHandler AltParkingTargetsRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void AddAltParkingTargetsRow(AltParkingTargetsRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public AltParkingTargetsRow AddAltParkingTargetsRow(string NGToStreet, string NGToSurface, string NGTOParking, string NGTo, bool BuildModelIC, int ICID, int Constructed, int AltICID, short Difficulty, string FocusArea) {
+                AltParkingTargetsRow rowAltParkingTargetsRow = ((AltParkingTargetsRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        null,
+                        NGToStreet,
+                        NGToSurface,
+                        NGTOParking,
+                        NGTo,
+                        BuildModelIC,
+                        ICID,
+                        Constructed,
+                        AltICID,
+                        Difficulty,
+                        FocusArea};
+                rowAltParkingTargetsRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowAltParkingTargetsRow);
+                return rowAltParkingTargetsRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public AltParkingTargetsRow FindByMapInfoID(int MapInfoID) {
+                return ((AltParkingTargetsRow)(this.Rows.Find(new object[] {
+                            MapInfoID})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public override global::System.Data.DataTable Clone() {
+                AltParkingTargetsDataTable cln = ((AltParkingTargetsDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new AltParkingTargetsDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal void InitVars() {
+                this.columnMapInfoID = base.Columns["MapInfoID"];
+                this.columnNGToStreet = base.Columns["NGToStreet"];
+                this.columnNGToSurface = base.Columns["NGToSurface"];
+                this.columnNGTOParking = base.Columns["NGTOParking"];
+                this.columnNGTo = base.Columns["NGTo"];
+                this.columnBuildModelIC = base.Columns["BuildModelIC"];
+                this.columnICID = base.Columns["ICID"];
+                this.columnConstructed = base.Columns["Constructed"];
+                this.columnAltICID = base.Columns["AltICID"];
+                this.columnDifficulty = base.Columns["Difficulty"];
+                this.columnFocusArea = base.Columns["FocusArea"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            private void InitClass() {
+                this.columnMapInfoID = new global::System.Data.DataColumn("MapInfoID", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMapInfoID);
+                this.columnNGToStreet = new global::System.Data.DataColumn("NGToStreet", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNGToStreet);
+                this.columnNGToSurface = new global::System.Data.DataColumn("NGToSurface", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNGToSurface);
+                this.columnNGTOParking = new global::System.Data.DataColumn("NGTOParking", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNGTOParking);
+                this.columnNGTo = new global::System.Data.DataColumn("NGTo", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNGTo);
+                this.columnBuildModelIC = new global::System.Data.DataColumn("BuildModelIC", typeof(bool), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnBuildModelIC);
+                this.columnICID = new global::System.Data.DataColumn("ICID", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnICID);
+                this.columnConstructed = new global::System.Data.DataColumn("Constructed", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnConstructed);
+                this.columnAltICID = new global::System.Data.DataColumn("AltICID", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnAltICID);
+                this.columnDifficulty = new global::System.Data.DataColumn("Difficulty", typeof(short), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDifficulty);
+                this.columnFocusArea = new global::System.Data.DataColumn("FocusArea", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnFocusArea);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnMapInfoID}, true));
+                this.columnMapInfoID.AutoIncrement = true;
+                this.columnMapInfoID.AllowDBNull = false;
+                this.columnMapInfoID.Unique = true;
+                this.columnNGToStreet.MaxLength = 7;
+                this.columnNGToSurface.MaxLength = 7;
+                this.columnNGTOParking.MaxLength = 7;
+                this.columnNGTo.MaxLength = 7;
+                this.columnFocusArea.MaxLength = 10;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public AltParkingTargetsRow NewAltParkingTargetsRow() {
+                return ((AltParkingTargetsRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new AltParkingTargetsRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Type GetRowType() {
+                return typeof(AltParkingTargetsRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.AltParkingTargetsRowChanged != null)) {
+                    this.AltParkingTargetsRowChanged(this, new AltParkingTargetsRowChangeEvent(((AltParkingTargetsRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.AltParkingTargetsRowChanging != null)) {
+                    this.AltParkingTargetsRowChanging(this, new AltParkingTargetsRowChangeEvent(((AltParkingTargetsRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.AltParkingTargetsRowDeleted != null)) {
+                    this.AltParkingTargetsRowDeleted(this, new AltParkingTargetsRowChangeEvent(((AltParkingTargetsRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.AltParkingTargetsRowDeleting != null)) {
+                    this.AltParkingTargetsRowDeleting(this, new AltParkingTargetsRowChangeEvent(((AltParkingTargetsRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void RemoveAltParkingTargetsRow(AltParkingTargetsRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                StormwaterControlsDataSet ds = new StormwaterControlsDataSet();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "AltParkingTargetsDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class AltStreetTargetsDataTable : global::System.Data.TypedTableBase<AltStreetTargetsRow> {
+            
+            private global::System.Data.DataColumn columnMapInfoID;
+            
+            private global::System.Data.DataColumn columnNGToStreet;
+            
+            private global::System.Data.DataColumn columnBuildModelIC;
+            
+            private global::System.Data.DataColumn columnICID;
+            
+            private global::System.Data.DataColumn columnConstructed;
+            
+            private global::System.Data.DataColumn columnAltICID;
+            
+            private global::System.Data.DataColumn columnEvaluation;
+            
+            private global::System.Data.DataColumn columnFocusArea;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public AltStreetTargetsDataTable() {
+                this.TableName = "AltStreetTargets";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal AltStreetTargetsDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected AltStreetTargetsDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn MapInfoIDColumn {
+                get {
+                    return this.columnMapInfoID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn NGToStreetColumn {
+                get {
+                    return this.columnNGToStreet;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn BuildModelICColumn {
+                get {
+                    return this.columnBuildModelIC;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn ICIDColumn {
+                get {
+                    return this.columnICID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn ConstructedColumn {
+                get {
+                    return this.columnConstructed;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn AltICIDColumn {
+                get {
+                    return this.columnAltICID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn EvaluationColumn {
+                get {
+                    return this.columnEvaluation;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn FocusAreaColumn {
+                get {
+                    return this.columnFocusArea;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public AltStreetTargetsRow this[int index] {
+                get {
+                    return ((AltStreetTargetsRow)(this.Rows[index]));
+                }
+            }
+            
+            public event AltStreetTargetsRowChangeEventHandler AltStreetTargetsRowChanging;
+            
+            public event AltStreetTargetsRowChangeEventHandler AltStreetTargetsRowChanged;
+            
+            public event AltStreetTargetsRowChangeEventHandler AltStreetTargetsRowDeleting;
+            
+            public event AltStreetTargetsRowChangeEventHandler AltStreetTargetsRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void AddAltStreetTargetsRow(AltStreetTargetsRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public AltStreetTargetsRow AddAltStreetTargetsRow(string NGToStreet, bool BuildModelIC, int ICID, int Constructed, int AltICID, string Evaluation, string FocusArea) {
+                AltStreetTargetsRow rowAltStreetTargetsRow = ((AltStreetTargetsRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        null,
+                        NGToStreet,
+                        BuildModelIC,
+                        ICID,
+                        Constructed,
+                        AltICID,
+                        Evaluation,
+                        FocusArea};
+                rowAltStreetTargetsRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowAltStreetTargetsRow);
+                return rowAltStreetTargetsRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public AltStreetTargetsRow FindByMapInfoID(int MapInfoID) {
+                return ((AltStreetTargetsRow)(this.Rows.Find(new object[] {
+                            MapInfoID})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public override global::System.Data.DataTable Clone() {
+                AltStreetTargetsDataTable cln = ((AltStreetTargetsDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new AltStreetTargetsDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal void InitVars() {
+                this.columnMapInfoID = base.Columns["MapInfoID"];
+                this.columnNGToStreet = base.Columns["NGToStreet"];
+                this.columnBuildModelIC = base.Columns["BuildModelIC"];
+                this.columnICID = base.Columns["ICID"];
+                this.columnConstructed = base.Columns["Constructed"];
+                this.columnAltICID = base.Columns["AltICID"];
+                this.columnEvaluation = base.Columns["Evaluation"];
+                this.columnFocusArea = base.Columns["FocusArea"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            private void InitClass() {
+                this.columnMapInfoID = new global::System.Data.DataColumn("MapInfoID", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMapInfoID);
+                this.columnNGToStreet = new global::System.Data.DataColumn("NGToStreet", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNGToStreet);
+                this.columnBuildModelIC = new global::System.Data.DataColumn("BuildModelIC", typeof(bool), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnBuildModelIC);
+                this.columnICID = new global::System.Data.DataColumn("ICID", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnICID);
+                this.columnConstructed = new global::System.Data.DataColumn("Constructed", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnConstructed);
+                this.columnAltICID = new global::System.Data.DataColumn("AltICID", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnAltICID);
+                this.columnEvaluation = new global::System.Data.DataColumn("Evaluation", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEvaluation);
+                this.columnFocusArea = new global::System.Data.DataColumn("FocusArea", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnFocusArea);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnMapInfoID}, true));
+                this.columnMapInfoID.AutoIncrement = true;
+                this.columnMapInfoID.AllowDBNull = false;
+                this.columnMapInfoID.Unique = true;
+                this.columnNGToStreet.MaxLength = 7;
+                this.columnEvaluation.MaxLength = 1;
+                this.columnFocusArea.MaxLength = 10;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public AltStreetTargetsRow NewAltStreetTargetsRow() {
+                return ((AltStreetTargetsRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new AltStreetTargetsRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Type GetRowType() {
+                return typeof(AltStreetTargetsRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.AltStreetTargetsRowChanged != null)) {
+                    this.AltStreetTargetsRowChanged(this, new AltStreetTargetsRowChangeEvent(((AltStreetTargetsRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.AltStreetTargetsRowChanging != null)) {
+                    this.AltStreetTargetsRowChanging(this, new AltStreetTargetsRowChangeEvent(((AltStreetTargetsRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.AltStreetTargetsRowDeleted != null)) {
+                    this.AltStreetTargetsRowDeleted(this, new AltStreetTargetsRowChangeEvent(((AltStreetTargetsRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.AltStreetTargetsRowDeleting != null)) {
+                    this.AltStreetTargetsRowDeleting(this, new AltStreetTargetsRowChangeEvent(((AltStreetTargetsRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void RemoveAltStreetTargetsRow(AltStreetTargetsRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                StormwaterControlsDataSet ds = new StormwaterControlsDataSet();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "AltStreetTargetsDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
@@ -6413,11 +7533,11 @@ namespace SystemsAnalysis.DataAccess {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string XPSWMM_Name {
                 get {
-                    try {
-                        return ((string)(this[this.tableic_StreetTargets.XPSWMM_NameColumn]));
+                    if (this.IsXPSWMM_NameNull()) {
+                        return string.Empty;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'XPSWMM_Name\' in table \'ic_StreetTargets\' is DBNull.", e);
+                    else {
+                        return ((string)(this[this.tableic_StreetTargets.XPSWMM_NameColumn]));
                     }
                 }
                 set {
@@ -8414,6 +9534,681 @@ namespace SystemsAnalysis.DataAccess {
         }
         
         /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public partial class AltRoofTargetsRow : global::System.Data.DataRow {
+            
+            private AltRoofTargetsDataTable tableAltRoofTargets;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal AltRoofTargetsRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableAltRoofTargets = ((AltRoofTargetsDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int MapInfoID {
+                get {
+                    return ((int)(this[this.tableAltRoofTargets.MapInfoIDColumn]));
+                }
+                set {
+                    this[this.tableAltRoofTargets.MapInfoIDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string NGToRoof {
+                get {
+                    try {
+                        return ((string)(this[this.tableAltRoofTargets.NGToRoofColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'NGToRoof\' in table \'AltRoofTargets\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableAltRoofTargets.NGToRoofColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool BuildModelIC {
+                get {
+                    try {
+                        return ((bool)(this[this.tableAltRoofTargets.BuildModelICColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'BuildModelIC\' in table \'AltRoofTargets\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableAltRoofTargets.BuildModelICColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int ICID {
+                get {
+                    try {
+                        return ((int)(this[this.tableAltRoofTargets.ICIDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ICID\' in table \'AltRoofTargets\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableAltRoofTargets.ICIDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int Constructed {
+                get {
+                    try {
+                        return ((int)(this[this.tableAltRoofTargets.ConstructedColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Constructed\' in table \'AltRoofTargets\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableAltRoofTargets.ConstructedColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int AltICID {
+                get {
+                    try {
+                        return ((int)(this[this.tableAltRoofTargets.AltICIDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'AltICID\' in table \'AltRoofTargets\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableAltRoofTargets.AltICIDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public short Difficulty {
+                get {
+                    try {
+                        return ((short)(this[this.tableAltRoofTargets.DifficultyColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Difficulty\' in table \'AltRoofTargets\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableAltRoofTargets.DifficultyColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string FocusArea {
+                get {
+                    try {
+                        return ((string)(this[this.tableAltRoofTargets.FocusAreaColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'FocusArea\' in table \'AltRoofTargets\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableAltRoofTargets.FocusAreaColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsNGToRoofNull() {
+                return this.IsNull(this.tableAltRoofTargets.NGToRoofColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetNGToRoofNull() {
+                this[this.tableAltRoofTargets.NGToRoofColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsBuildModelICNull() {
+                return this.IsNull(this.tableAltRoofTargets.BuildModelICColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetBuildModelICNull() {
+                this[this.tableAltRoofTargets.BuildModelICColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsICIDNull() {
+                return this.IsNull(this.tableAltRoofTargets.ICIDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetICIDNull() {
+                this[this.tableAltRoofTargets.ICIDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsConstructedNull() {
+                return this.IsNull(this.tableAltRoofTargets.ConstructedColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetConstructedNull() {
+                this[this.tableAltRoofTargets.ConstructedColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsAltICIDNull() {
+                return this.IsNull(this.tableAltRoofTargets.AltICIDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetAltICIDNull() {
+                this[this.tableAltRoofTargets.AltICIDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsDifficultyNull() {
+                return this.IsNull(this.tableAltRoofTargets.DifficultyColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetDifficultyNull() {
+                this[this.tableAltRoofTargets.DifficultyColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsFocusAreaNull() {
+                return this.IsNull(this.tableAltRoofTargets.FocusAreaColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetFocusAreaNull() {
+                this[this.tableAltRoofTargets.FocusAreaColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public partial class AltParkingTargetsRow : global::System.Data.DataRow {
+            
+            private AltParkingTargetsDataTable tableAltParkingTargets;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal AltParkingTargetsRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableAltParkingTargets = ((AltParkingTargetsDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int MapInfoID {
+                get {
+                    return ((int)(this[this.tableAltParkingTargets.MapInfoIDColumn]));
+                }
+                set {
+                    this[this.tableAltParkingTargets.MapInfoIDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string NGToStreet {
+                get {
+                    try {
+                        return ((string)(this[this.tableAltParkingTargets.NGToStreetColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'NGToStreet\' in table \'AltParkingTargets\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableAltParkingTargets.NGToStreetColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string NGToSurface {
+                get {
+                    try {
+                        return ((string)(this[this.tableAltParkingTargets.NGToSurfaceColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'NGToSurface\' in table \'AltParkingTargets\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableAltParkingTargets.NGToSurfaceColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string NGTOParking {
+                get {
+                    try {
+                        return ((string)(this[this.tableAltParkingTargets.NGTOParkingColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'NGTOParking\' in table \'AltParkingTargets\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableAltParkingTargets.NGTOParkingColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string NGTo {
+                get {
+                    try {
+                        return ((string)(this[this.tableAltParkingTargets.NGToColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'NGTo\' in table \'AltParkingTargets\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableAltParkingTargets.NGToColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool BuildModelIC {
+                get {
+                    try {
+                        return ((bool)(this[this.tableAltParkingTargets.BuildModelICColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'BuildModelIC\' in table \'AltParkingTargets\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableAltParkingTargets.BuildModelICColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int ICID {
+                get {
+                    try {
+                        return ((int)(this[this.tableAltParkingTargets.ICIDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ICID\' in table \'AltParkingTargets\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableAltParkingTargets.ICIDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int Constructed {
+                get {
+                    try {
+                        return ((int)(this[this.tableAltParkingTargets.ConstructedColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Constructed\' in table \'AltParkingTargets\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableAltParkingTargets.ConstructedColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int AltICID {
+                get {
+                    try {
+                        return ((int)(this[this.tableAltParkingTargets.AltICIDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'AltICID\' in table \'AltParkingTargets\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableAltParkingTargets.AltICIDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public short Difficulty {
+                get {
+                    try {
+                        return ((short)(this[this.tableAltParkingTargets.DifficultyColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Difficulty\' in table \'AltParkingTargets\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableAltParkingTargets.DifficultyColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string FocusArea {
+                get {
+                    try {
+                        return ((string)(this[this.tableAltParkingTargets.FocusAreaColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'FocusArea\' in table \'AltParkingTargets\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableAltParkingTargets.FocusAreaColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsNGToStreetNull() {
+                return this.IsNull(this.tableAltParkingTargets.NGToStreetColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetNGToStreetNull() {
+                this[this.tableAltParkingTargets.NGToStreetColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsNGToSurfaceNull() {
+                return this.IsNull(this.tableAltParkingTargets.NGToSurfaceColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetNGToSurfaceNull() {
+                this[this.tableAltParkingTargets.NGToSurfaceColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsNGTOParkingNull() {
+                return this.IsNull(this.tableAltParkingTargets.NGTOParkingColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetNGTOParkingNull() {
+                this[this.tableAltParkingTargets.NGTOParkingColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsNGToNull() {
+                return this.IsNull(this.tableAltParkingTargets.NGToColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetNGToNull() {
+                this[this.tableAltParkingTargets.NGToColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsBuildModelICNull() {
+                return this.IsNull(this.tableAltParkingTargets.BuildModelICColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetBuildModelICNull() {
+                this[this.tableAltParkingTargets.BuildModelICColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsICIDNull() {
+                return this.IsNull(this.tableAltParkingTargets.ICIDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetICIDNull() {
+                this[this.tableAltParkingTargets.ICIDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsConstructedNull() {
+                return this.IsNull(this.tableAltParkingTargets.ConstructedColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetConstructedNull() {
+                this[this.tableAltParkingTargets.ConstructedColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsAltICIDNull() {
+                return this.IsNull(this.tableAltParkingTargets.AltICIDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetAltICIDNull() {
+                this[this.tableAltParkingTargets.AltICIDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsDifficultyNull() {
+                return this.IsNull(this.tableAltParkingTargets.DifficultyColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetDifficultyNull() {
+                this[this.tableAltParkingTargets.DifficultyColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsFocusAreaNull() {
+                return this.IsNull(this.tableAltParkingTargets.FocusAreaColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetFocusAreaNull() {
+                this[this.tableAltParkingTargets.FocusAreaColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public partial class AltStreetTargetsRow : global::System.Data.DataRow {
+            
+            private AltStreetTargetsDataTable tableAltStreetTargets;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal AltStreetTargetsRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableAltStreetTargets = ((AltStreetTargetsDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int MapInfoID {
+                get {
+                    return ((int)(this[this.tableAltStreetTargets.MapInfoIDColumn]));
+                }
+                set {
+                    this[this.tableAltStreetTargets.MapInfoIDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string NGToStreet {
+                get {
+                    try {
+                        return ((string)(this[this.tableAltStreetTargets.NGToStreetColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'NGToStreet\' in table \'AltStreetTargets\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableAltStreetTargets.NGToStreetColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool BuildModelIC {
+                get {
+                    try {
+                        return ((bool)(this[this.tableAltStreetTargets.BuildModelICColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'BuildModelIC\' in table \'AltStreetTargets\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableAltStreetTargets.BuildModelICColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int ICID {
+                get {
+                    try {
+                        return ((int)(this[this.tableAltStreetTargets.ICIDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ICID\' in table \'AltStreetTargets\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableAltStreetTargets.ICIDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int Constructed {
+                get {
+                    try {
+                        return ((int)(this[this.tableAltStreetTargets.ConstructedColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Constructed\' in table \'AltStreetTargets\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableAltStreetTargets.ConstructedColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int AltICID {
+                get {
+                    try {
+                        return ((int)(this[this.tableAltStreetTargets.AltICIDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'AltICID\' in table \'AltStreetTargets\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableAltStreetTargets.AltICIDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string Evaluation {
+                get {
+                    try {
+                        return ((string)(this[this.tableAltStreetTargets.EvaluationColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Evaluation\' in table \'AltStreetTargets\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableAltStreetTargets.EvaluationColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string FocusArea {
+                get {
+                    try {
+                        return ((string)(this[this.tableAltStreetTargets.FocusAreaColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'FocusArea\' in table \'AltStreetTargets\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableAltStreetTargets.FocusAreaColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsNGToStreetNull() {
+                return this.IsNull(this.tableAltStreetTargets.NGToStreetColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetNGToStreetNull() {
+                this[this.tableAltStreetTargets.NGToStreetColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsBuildModelICNull() {
+                return this.IsNull(this.tableAltStreetTargets.BuildModelICColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetBuildModelICNull() {
+                this[this.tableAltStreetTargets.BuildModelICColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsICIDNull() {
+                return this.IsNull(this.tableAltStreetTargets.ICIDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetICIDNull() {
+                this[this.tableAltStreetTargets.ICIDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsConstructedNull() {
+                return this.IsNull(this.tableAltStreetTargets.ConstructedColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetConstructedNull() {
+                this[this.tableAltStreetTargets.ConstructedColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsAltICIDNull() {
+                return this.IsNull(this.tableAltStreetTargets.AltICIDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetAltICIDNull() {
+                this[this.tableAltStreetTargets.AltICIDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsEvaluationNull() {
+                return this.IsNull(this.tableAltStreetTargets.EvaluationColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetEvaluationNull() {
+                this[this.tableAltStreetTargets.EvaluationColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsFocusAreaNull() {
+                return this.IsNull(this.tableAltStreetTargets.FocusAreaColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetFocusAreaNull() {
+                this[this.tableAltStreetTargets.FocusAreaColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
@@ -8617,6 +10412,99 @@ namespace SystemsAnalysis.DataAccess {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public ic_ParkingTargetsRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public class AltRoofTargetsRowChangeEvent : global::System.EventArgs {
+            
+            private AltRoofTargetsRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public AltRoofTargetsRowChangeEvent(AltRoofTargetsRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public AltRoofTargetsRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public class AltParkingTargetsRowChangeEvent : global::System.EventArgs {
+            
+            private AltParkingTargetsRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public AltParkingTargetsRowChangeEvent(AltParkingTargetsRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public AltParkingTargetsRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public class AltStreetTargetsRowChangeEvent : global::System.EventArgs {
+            
+            private AltStreetTargetsRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public AltStreetTargetsRowChangeEvent(AltStreetTargetsRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public AltStreetTargetsRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -16338,6 +18226,1582 @@ namespace SystemsAnalysis.DataAccess.StormwaterControlsDataSetTableAdapters {
     }
     
     /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class AltRoofTargetsTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.OleDb.OleDbDataAdapter _adapter;
+        
+        private global::System.Data.OleDb.OleDbConnection _connection;
+        
+        private global::System.Data.OleDb.OleDbTransaction _transaction;
+        
+        private global::System.Data.OleDb.OleDbCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public AltRoofTargetsTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected internal global::System.Data.OleDb.OleDbDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.OleDb.OleDbConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.OleDb.OleDbCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.OleDb.OleDbTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected global::System.Data.OleDb.OleDbCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.OleDb.OleDbDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "AltRoofTargets";
+            tableMapping.ColumnMappings.Add("MAPINFO_ID", "MapInfoID");
+            tableMapping.ColumnMappings.Add("NGTORoof", "NGToRoof");
+            tableMapping.ColumnMappings.Add("BuildModelIC", "BuildModelIC");
+            tableMapping.ColumnMappings.Add("ICID", "ICID");
+            tableMapping.ColumnMappings.Add("Constructed", "Constructed");
+            tableMapping.ColumnMappings.Add("AltICID", "AltICID");
+            tableMapping.ColumnMappings.Add("Difficulty", "Difficulty");
+            tableMapping.ColumnMappings.Add("FocusArea", "FocusArea");
+            this._adapter.TableMappings.Add(tableMapping);
+            this._adapter.DeleteCommand = new global::System.Data.OleDb.OleDbCommand();
+            this._adapter.DeleteCommand.Connection = this.Connection;
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM `alt_rooftargets_ac` WHERE ((`MAPINFO_ID` = ?) AND ((? = 1 AND `NGTORoof` IS NULL) OR (`NGTORoof` = ?)) AND ((? = 1 AND `BuildModelIC` IS NULL) OR (`BuildModelIC` = ?)) AND ((? = 1 AND `ICID` IS NULL) OR (`ICID` = ?)) AND ((? = 1 AND `Constructed` IS NULL) OR (`Constructed` = ?)) AND ((? = 1 AND `AltICID` IS NULL) OR (`AltICID` = ?)) AND ((? = 1 AND `Difficulty` IS NULL) OR (`Difficulty` = ?)) AND ((? = 1 AND `FocusArea` IS NULL) OR (`FocusArea` = ?)))";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_MAPINFO_ID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "MAPINFO_ID", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_NGTORoof", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "NGTORoof", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_NGTORoof", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "NGTORoof", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_BuildModelIC", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "BuildModelIC", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_BuildModelIC", global::System.Data.OleDb.OleDbType.Boolean, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "BuildModelIC", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_ICID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ICID", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_ICID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ICID", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_Constructed", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Constructed", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_Constructed", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Constructed", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_AltICID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "AltICID", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_AltICID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "AltICID", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_Difficulty", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Difficulty", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_Difficulty", global::System.Data.OleDb.OleDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Difficulty", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_FocusArea", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "FocusArea", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_FocusArea", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "FocusArea", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.InsertCommand = new global::System.Data.OleDb.OleDbCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = "INSERT INTO `alt_rooftargets_ac` (`NGTORoof`, `BuildModelIC`, `ICID`, `Constructe" +
+                "d`, `AltICID`, `Difficulty`, `FocusArea`) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("NGTORoof", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "NGTORoof", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("BuildModelIC", global::System.Data.OleDb.OleDbType.Boolean, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "BuildModelIC", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("ICID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ICID", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Constructed", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Constructed", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("AltICID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "AltICID", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Difficulty", global::System.Data.OleDb.OleDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Difficulty", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("FocusArea", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "FocusArea", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand = new global::System.Data.OleDb.OleDbCommand();
+            this._adapter.UpdateCommand.Connection = this.Connection;
+            this._adapter.UpdateCommand.CommandText = @"UPDATE `alt_rooftargets_ac` SET `NGTORoof` = ?, `BuildModelIC` = ?, `ICID` = ?, `Constructed` = ?, `AltICID` = ?, `Difficulty` = ?, `FocusArea` = ? WHERE ((`MAPINFO_ID` = ?) AND ((? = 1 AND `NGTORoof` IS NULL) OR (`NGTORoof` = ?)) AND ((? = 1 AND `BuildModelIC` IS NULL) OR (`BuildModelIC` = ?)) AND ((? = 1 AND `ICID` IS NULL) OR (`ICID` = ?)) AND ((? = 1 AND `Constructed` IS NULL) OR (`Constructed` = ?)) AND ((? = 1 AND `AltICID` IS NULL) OR (`AltICID` = ?)) AND ((? = 1 AND `Difficulty` IS NULL) OR (`Difficulty` = ?)) AND ((? = 1 AND `FocusArea` IS NULL) OR (`FocusArea` = ?)))";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("NGTORoof", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "NGTORoof", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("BuildModelIC", global::System.Data.OleDb.OleDbType.Boolean, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "BuildModelIC", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("ICID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ICID", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Constructed", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Constructed", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("AltICID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "AltICID", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Difficulty", global::System.Data.OleDb.OleDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Difficulty", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("FocusArea", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "FocusArea", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_MAPINFO_ID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "MAPINFO_ID", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_NGTORoof", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "NGTORoof", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_NGTORoof", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "NGTORoof", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_BuildModelIC", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "BuildModelIC", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_BuildModelIC", global::System.Data.OleDb.OleDbType.Boolean, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "BuildModelIC", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_ICID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ICID", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_ICID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ICID", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_Constructed", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Constructed", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_Constructed", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Constructed", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_AltICID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "AltICID", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_AltICID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "AltICID", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_Difficulty", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Difficulty", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_Difficulty", global::System.Data.OleDb.OleDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Difficulty", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_FocusArea", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "FocusArea", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_FocusArea", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "FocusArea", global::System.Data.DataRowVersion.Original, false, null));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitConnection() {
+            this._connection = new global::System.Data.OleDb.OleDbConnection();
+            this._connection.ConnectionString = global::SystemsAnalysis.DataAccess.Properties.Settings.Default.alternative_packageConnectionString;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.OleDb.OleDbCommand[1];
+            this._commandCollection[0] = new global::System.Data.OleDb.OleDbCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = "SELECT MAPINFO_ID, NGTORoof, BuildModelIC, ICID, Constructed, AltICID, Difficulty" +
+                ", FocusArea FROM alt_rooftargets_ac";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(StormwaterControlsDataSet.AltRoofTargetsDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual StormwaterControlsDataSet.AltRoofTargetsDataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            StormwaterControlsDataSet.AltRoofTargetsDataTable dataTable = new StormwaterControlsDataSet.AltRoofTargetsDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(StormwaterControlsDataSet.AltRoofTargetsDataTable dataTable) {
+            return this.Adapter.Update(dataTable);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(StormwaterControlsDataSet dataSet) {
+            return this.Adapter.Update(dataSet, "AltRoofTargets");
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow dataRow) {
+            return this.Adapter.Update(new global::System.Data.DataRow[] {
+                        dataRow});
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow[] dataRows) {
+            return this.Adapter.Update(dataRows);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
+        public virtual int Delete(int Original_MAPINFO_ID, string Original_NGTORoof, bool Original_BuildModelIC, global::System.Nullable<int> Original_ICID, global::System.Nullable<int> Original_Constructed, global::System.Nullable<int> Original_AltICID, global::System.Nullable<short> Original_Difficulty, string Original_FocusArea) {
+            this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_MAPINFO_ID));
+            if ((Original_NGTORoof == null)) {
+                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[2].Value = ((string)(Original_NGTORoof));
+            }
+            this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
+            this.Adapter.DeleteCommand.Parameters[4].Value = ((bool)(Original_BuildModelIC));
+            if ((Original_ICID.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[6].Value = ((int)(Original_ICID.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            if ((Original_Constructed.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[8].Value = ((int)(Original_Constructed.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[8].Value = global::System.DBNull.Value;
+            }
+            if ((Original_AltICID.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[10].Value = ((int)(Original_AltICID.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[10].Value = global::System.DBNull.Value;
+            }
+            if ((Original_Difficulty.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[11].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[12].Value = ((short)(Original_Difficulty.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[11].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[12].Value = global::System.DBNull.Value;
+            }
+            if ((Original_FocusArea == null)) {
+                this.Adapter.DeleteCommand.Parameters[13].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[14].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[13].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[14].Value = ((string)(Original_FocusArea));
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
+            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.DeleteCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.DeleteCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(string NGTORoof, bool BuildModelIC, global::System.Nullable<int> ICID, global::System.Nullable<int> Constructed, global::System.Nullable<int> AltICID, global::System.Nullable<short> Difficulty, string FocusArea) {
+            if ((NGTORoof == null)) {
+                this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(NGTORoof));
+            }
+            this.Adapter.InsertCommand.Parameters[1].Value = ((bool)(BuildModelIC));
+            if ((ICID.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[2].Value = ((int)(ICID.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            if ((Constructed.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[3].Value = ((int)(Constructed.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            if ((AltICID.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[4].Value = ((int)(AltICID.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            if ((Difficulty.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[5].Value = ((short)(Difficulty.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[5].Value = global::System.DBNull.Value;
+            }
+            if ((FocusArea == null)) {
+                this.Adapter.InsertCommand.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[6].Value = ((string)(FocusArea));
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(string NGTORoof, bool BuildModelIC, global::System.Nullable<int> ICID, global::System.Nullable<int> Constructed, global::System.Nullable<int> AltICID, global::System.Nullable<short> Difficulty, string FocusArea, int Original_MAPINFO_ID, string Original_NGTORoof, bool Original_BuildModelIC, global::System.Nullable<int> Original_ICID, global::System.Nullable<int> Original_Constructed, global::System.Nullable<int> Original_AltICID, global::System.Nullable<short> Original_Difficulty, string Original_FocusArea) {
+            if ((NGTORoof == null)) {
+                this.Adapter.UpdateCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(NGTORoof));
+            }
+            this.Adapter.UpdateCommand.Parameters[1].Value = ((bool)(BuildModelIC));
+            if ((ICID.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(ICID.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            if ((Constructed.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(Constructed.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            if ((AltICID.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(AltICID.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            if ((Difficulty.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[5].Value = ((short)(Difficulty.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[5].Value = global::System.DBNull.Value;
+            }
+            if ((FocusArea == null)) {
+                this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((string)(FocusArea));
+            }
+            this.Adapter.UpdateCommand.Parameters[7].Value = ((int)(Original_MAPINFO_ID));
+            if ((Original_NGTORoof == null)) {
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[9].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((string)(Original_NGTORoof));
+            }
+            this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(0));
+            this.Adapter.UpdateCommand.Parameters[11].Value = ((bool)(Original_BuildModelIC));
+            if ((Original_ICID.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[13].Value = ((int)(Original_ICID.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[13].Value = global::System.DBNull.Value;
+            }
+            if ((Original_Constructed.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[15].Value = ((int)(Original_Constructed.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[15].Value = global::System.DBNull.Value;
+            }
+            if ((Original_AltICID.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[17].Value = ((int)(Original_AltICID.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[17].Value = global::System.DBNull.Value;
+            }
+            if ((Original_Difficulty.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[18].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[19].Value = ((short)(Original_Difficulty.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[18].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[19].Value = global::System.DBNull.Value;
+            }
+            if ((Original_FocusArea == null)) {
+                this.Adapter.UpdateCommand.Parameters[20].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[21].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[20].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[21].Value = ((string)(Original_FocusArea));
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
+            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.UpdateCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.UpdateCommand.Connection.Close();
+                }
+            }
+        }
+    }
+    
+    /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class AltParkingTargetsTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.OleDb.OleDbDataAdapter _adapter;
+        
+        private global::System.Data.OleDb.OleDbConnection _connection;
+        
+        private global::System.Data.OleDb.OleDbTransaction _transaction;
+        
+        private global::System.Data.OleDb.OleDbCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public AltParkingTargetsTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected internal global::System.Data.OleDb.OleDbDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.OleDb.OleDbConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.OleDb.OleDbCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.OleDb.OleDbTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected global::System.Data.OleDb.OleDbCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.OleDb.OleDbDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "AltParkingTargets";
+            tableMapping.ColumnMappings.Add("MAPINFO_ID", "MapInfoID");
+            tableMapping.ColumnMappings.Add("NGTO_Direct", "NGToStreet");
+            tableMapping.ColumnMappings.Add("NGTO_Surface", "NGToSurface");
+            tableMapping.ColumnMappings.Add("NGTOParking", "NGTOParking");
+            tableMapping.ColumnMappings.Add("NGTO", "NGTo");
+            tableMapping.ColumnMappings.Add("BuildModelIC", "BuildModelIC");
+            tableMapping.ColumnMappings.Add("ICID", "ICID");
+            tableMapping.ColumnMappings.Add("Constructed", "Constructed");
+            tableMapping.ColumnMappings.Add("AltICID", "AltICID");
+            tableMapping.ColumnMappings.Add("Difficulty", "Difficulty");
+            tableMapping.ColumnMappings.Add("FocusArea", "FocusArea");
+            this._adapter.TableMappings.Add(tableMapping);
+            this._adapter.DeleteCommand = new global::System.Data.OleDb.OleDbCommand();
+            this._adapter.DeleteCommand.Connection = this.Connection;
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM `alt_parkingtargets_ac` WHERE ((`MAPINFO_ID` = ?) AND ((? = 1 AND `NGTO_Direct` IS NULL) OR (`NGTO_Direct` = ?)) AND ((? = 1 AND `NGTO_Surface` IS NULL) OR (`NGTO_Surface` = ?)) AND ((? = 1 AND `NGTOParking` IS NULL) OR (`NGTOParking` = ?)) AND ((? = 1 AND `NGTO` IS NULL) OR (`NGTO` = ?)) AND ((? = 1 AND `BuildModelIC` IS NULL) OR (`BuildModelIC` = ?)) AND ((? = 1 AND `ICID` IS NULL) OR (`ICID` = ?)) AND ((? = 1 AND `Constructed` IS NULL) OR (`Constructed` = ?)) AND ((? = 1 AND `AltICID` IS NULL) OR (`AltICID` = ?)) AND ((? = 1 AND `Difficulty` IS NULL) OR (`Difficulty` = ?)) AND ((? = 1 AND `FocusArea` IS NULL) OR (`FocusArea` = ?)))";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_MAPINFO_ID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "MAPINFO_ID", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_NGTO_Direct", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "NGTO_Direct", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_NGTO_Direct", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "NGTO_Direct", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_NGTO_Surface", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "NGTO_Surface", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_NGTO_Surface", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "NGTO_Surface", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_NGTOParking", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "NGTOParking", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_NGTOParking", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "NGTOParking", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_NGTO", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "NGTO", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_NGTO", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "NGTO", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_BuildModelIC", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "BuildModelIC", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_BuildModelIC", global::System.Data.OleDb.OleDbType.Boolean, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "BuildModelIC", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_ICID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ICID", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_ICID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ICID", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_Constructed", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Constructed", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_Constructed", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Constructed", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_AltICID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "AltICID", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_AltICID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "AltICID", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_Difficulty", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Difficulty", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_Difficulty", global::System.Data.OleDb.OleDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Difficulty", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_FocusArea", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "FocusArea", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_FocusArea", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "FocusArea", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.InsertCommand = new global::System.Data.OleDb.OleDbCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = "INSERT INTO `alt_parkingtargets_ac` (`NGTO_Direct`, `NGTO_Surface`, `NGTOParking`" +
+                ", `NGTO`, `BuildModelIC`, `ICID`, `Constructed`, `AltICID`, `Difficulty`, `Focus" +
+                "Area`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("NGTO_Direct", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "NGTO_Direct", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("NGTO_Surface", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "NGTO_Surface", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("NGTOParking", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "NGTOParking", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("NGTO", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "NGTO", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("BuildModelIC", global::System.Data.OleDb.OleDbType.Boolean, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "BuildModelIC", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("ICID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ICID", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Constructed", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Constructed", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("AltICID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "AltICID", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Difficulty", global::System.Data.OleDb.OleDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Difficulty", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("FocusArea", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "FocusArea", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand = new global::System.Data.OleDb.OleDbCommand();
+            this._adapter.UpdateCommand.Connection = this.Connection;
+            this._adapter.UpdateCommand.CommandText = @"UPDATE `alt_parkingtargets_ac` SET `NGTO_Direct` = ?, `NGTO_Surface` = ?, `NGTOParking` = ?, `NGTO` = ?, `BuildModelIC` = ?, `ICID` = ?, `Constructed` = ?, `AltICID` = ?, `Difficulty` = ?, `FocusArea` = ? WHERE ((`MAPINFO_ID` = ?) AND ((? = 1 AND `NGTO_Direct` IS NULL) OR (`NGTO_Direct` = ?)) AND ((? = 1 AND `NGTO_Surface` IS NULL) OR (`NGTO_Surface` = ?)) AND ((? = 1 AND `NGTOParking` IS NULL) OR (`NGTOParking` = ?)) AND ((? = 1 AND `NGTO` IS NULL) OR (`NGTO` = ?)) AND ((? = 1 AND `BuildModelIC` IS NULL) OR (`BuildModelIC` = ?)) AND ((? = 1 AND `ICID` IS NULL) OR (`ICID` = ?)) AND ((? = 1 AND `Constructed` IS NULL) OR (`Constructed` = ?)) AND ((? = 1 AND `AltICID` IS NULL) OR (`AltICID` = ?)) AND ((? = 1 AND `Difficulty` IS NULL) OR (`Difficulty` = ?)) AND ((? = 1 AND `FocusArea` IS NULL) OR (`FocusArea` = ?)))";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("NGTO_Direct", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "NGTO_Direct", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("NGTO_Surface", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "NGTO_Surface", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("NGTOParking", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "NGTOParking", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("NGTO", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "NGTO", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("BuildModelIC", global::System.Data.OleDb.OleDbType.Boolean, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "BuildModelIC", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("ICID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ICID", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Constructed", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Constructed", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("AltICID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "AltICID", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Difficulty", global::System.Data.OleDb.OleDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Difficulty", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("FocusArea", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "FocusArea", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_MAPINFO_ID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "MAPINFO_ID", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_NGTO_Direct", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "NGTO_Direct", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_NGTO_Direct", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "NGTO_Direct", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_NGTO_Surface", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "NGTO_Surface", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_NGTO_Surface", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "NGTO_Surface", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_NGTOParking", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "NGTOParking", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_NGTOParking", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "NGTOParking", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_NGTO", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "NGTO", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_NGTO", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "NGTO", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_BuildModelIC", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "BuildModelIC", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_BuildModelIC", global::System.Data.OleDb.OleDbType.Boolean, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "BuildModelIC", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_ICID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ICID", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_ICID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ICID", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_Constructed", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Constructed", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_Constructed", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Constructed", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_AltICID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "AltICID", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_AltICID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "AltICID", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_Difficulty", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Difficulty", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_Difficulty", global::System.Data.OleDb.OleDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Difficulty", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_FocusArea", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "FocusArea", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_FocusArea", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "FocusArea", global::System.Data.DataRowVersion.Original, false, null));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitConnection() {
+            this._connection = new global::System.Data.OleDb.OleDbConnection();
+            this._connection.ConnectionString = global::SystemsAnalysis.DataAccess.Properties.Settings.Default.alternative_packageConnectionString;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.OleDb.OleDbCommand[1];
+            this._commandCollection[0] = new global::System.Data.OleDb.OleDbCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = "SELECT MAPINFO_ID, NGTO_Direct, NGTO_Surface, NGTOParking, NGTO, BuildModelIC, IC" +
+                "ID, Constructed, AltICID, Difficulty, FocusArea FROM alt_parkingtargets_ac";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(StormwaterControlsDataSet.AltParkingTargetsDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual StormwaterControlsDataSet.AltParkingTargetsDataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            StormwaterControlsDataSet.AltParkingTargetsDataTable dataTable = new StormwaterControlsDataSet.AltParkingTargetsDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(StormwaterControlsDataSet.AltParkingTargetsDataTable dataTable) {
+            return this.Adapter.Update(dataTable);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(StormwaterControlsDataSet dataSet) {
+            return this.Adapter.Update(dataSet, "AltParkingTargets");
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow dataRow) {
+            return this.Adapter.Update(new global::System.Data.DataRow[] {
+                        dataRow});
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow[] dataRows) {
+            return this.Adapter.Update(dataRows);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
+        public virtual int Delete(int Original_MAPINFO_ID, string Original_NGTO_Direct, string Original_NGTO_Surface, string Original_NGTOParking, string Original_NGTO, bool Original_BuildModelIC, global::System.Nullable<int> Original_ICID, global::System.Nullable<int> Original_Constructed, global::System.Nullable<int> Original_AltICID, global::System.Nullable<short> Original_Difficulty, string Original_FocusArea) {
+            this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_MAPINFO_ID));
+            if ((Original_NGTO_Direct == null)) {
+                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[2].Value = ((string)(Original_NGTO_Direct));
+            }
+            if ((Original_NGTO_Surface == null)) {
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[4].Value = ((string)(Original_NGTO_Surface));
+            }
+            if ((Original_NGTOParking == null)) {
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[6].Value = ((string)(Original_NGTOParking));
+            }
+            if ((Original_NGTO == null)) {
+                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[8].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[8].Value = ((string)(Original_NGTO));
+            }
+            this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(0));
+            this.Adapter.DeleteCommand.Parameters[10].Value = ((bool)(Original_BuildModelIC));
+            if ((Original_ICID.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[11].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[12].Value = ((int)(Original_ICID.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[11].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[12].Value = global::System.DBNull.Value;
+            }
+            if ((Original_Constructed.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[13].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[14].Value = ((int)(Original_Constructed.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[13].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[14].Value = global::System.DBNull.Value;
+            }
+            if ((Original_AltICID.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[15].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[16].Value = ((int)(Original_AltICID.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[15].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[16].Value = global::System.DBNull.Value;
+            }
+            if ((Original_Difficulty.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[17].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[18].Value = ((short)(Original_Difficulty.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[17].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[18].Value = global::System.DBNull.Value;
+            }
+            if ((Original_FocusArea == null)) {
+                this.Adapter.DeleteCommand.Parameters[19].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[20].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[19].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[20].Value = ((string)(Original_FocusArea));
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
+            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.DeleteCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.DeleteCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(string NGTO_Direct, string NGTO_Surface, string NGTOParking, string NGTO, bool BuildModelIC, global::System.Nullable<int> ICID, global::System.Nullable<int> Constructed, global::System.Nullable<int> AltICID, global::System.Nullable<short> Difficulty, string FocusArea) {
+            if ((NGTO_Direct == null)) {
+                this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(NGTO_Direct));
+            }
+            if ((NGTO_Surface == null)) {
+                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(NGTO_Surface));
+            }
+            if ((NGTOParking == null)) {
+                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(NGTOParking));
+            }
+            if ((NGTO == null)) {
+                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[3].Value = ((string)(NGTO));
+            }
+            this.Adapter.InsertCommand.Parameters[4].Value = ((bool)(BuildModelIC));
+            if ((ICID.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[5].Value = ((int)(ICID.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[5].Value = global::System.DBNull.Value;
+            }
+            if ((Constructed.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[6].Value = ((int)(Constructed.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            if ((AltICID.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[7].Value = ((int)(AltICID.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[7].Value = global::System.DBNull.Value;
+            }
+            if ((Difficulty.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[8].Value = ((short)(Difficulty.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[8].Value = global::System.DBNull.Value;
+            }
+            if ((FocusArea == null)) {
+                this.Adapter.InsertCommand.Parameters[9].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[9].Value = ((string)(FocusArea));
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(
+                    string NGTO_Direct, 
+                    string NGTO_Surface, 
+                    string NGTOParking, 
+                    string NGTO, 
+                    bool BuildModelIC, 
+                    global::System.Nullable<int> ICID, 
+                    global::System.Nullable<int> Constructed, 
+                    global::System.Nullable<int> AltICID, 
+                    global::System.Nullable<short> Difficulty, 
+                    string FocusArea, 
+                    int Original_MAPINFO_ID, 
+                    string Original_NGTO_Direct, 
+                    string Original_NGTO_Surface, 
+                    string Original_NGTOParking, 
+                    string Original_NGTO, 
+                    bool Original_BuildModelIC, 
+                    global::System.Nullable<int> Original_ICID, 
+                    global::System.Nullable<int> Original_Constructed, 
+                    global::System.Nullable<int> Original_AltICID, 
+                    global::System.Nullable<short> Original_Difficulty, 
+                    string Original_FocusArea) {
+            if ((NGTO_Direct == null)) {
+                this.Adapter.UpdateCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(NGTO_Direct));
+            }
+            if ((NGTO_Surface == null)) {
+                this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(NGTO_Surface));
+            }
+            if ((NGTOParking == null)) {
+                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(NGTOParking));
+            }
+            if ((NGTO == null)) {
+                this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[3].Value = ((string)(NGTO));
+            }
+            this.Adapter.UpdateCommand.Parameters[4].Value = ((bool)(BuildModelIC));
+            if ((ICID.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(ICID.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[5].Value = global::System.DBNull.Value;
+            }
+            if ((Constructed.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((int)(Constructed.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            if ((AltICID.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((int)(AltICID.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
+            }
+            if ((Difficulty.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((short)(Difficulty.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
+            }
+            if ((FocusArea == null)) {
+                this.Adapter.UpdateCommand.Parameters[9].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((string)(FocusArea));
+            }
+            this.Adapter.UpdateCommand.Parameters[10].Value = ((int)(Original_MAPINFO_ID));
+            if ((Original_NGTO_Direct == null)) {
+                this.Adapter.UpdateCommand.Parameters[11].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[12].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[11].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[12].Value = ((string)(Original_NGTO_Direct));
+            }
+            if ((Original_NGTO_Surface == null)) {
+                this.Adapter.UpdateCommand.Parameters[13].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[14].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[13].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[14].Value = ((string)(Original_NGTO_Surface));
+            }
+            if ((Original_NGTOParking == null)) {
+                this.Adapter.UpdateCommand.Parameters[15].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[16].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[15].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[16].Value = ((string)(Original_NGTOParking));
+            }
+            if ((Original_NGTO == null)) {
+                this.Adapter.UpdateCommand.Parameters[17].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[18].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[17].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[18].Value = ((string)(Original_NGTO));
+            }
+            this.Adapter.UpdateCommand.Parameters[19].Value = ((object)(0));
+            this.Adapter.UpdateCommand.Parameters[20].Value = ((bool)(Original_BuildModelIC));
+            if ((Original_ICID.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[21].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[22].Value = ((int)(Original_ICID.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[21].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[22].Value = global::System.DBNull.Value;
+            }
+            if ((Original_Constructed.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[23].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[24].Value = ((int)(Original_Constructed.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[23].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[24].Value = global::System.DBNull.Value;
+            }
+            if ((Original_AltICID.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[25].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[26].Value = ((int)(Original_AltICID.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[25].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[26].Value = global::System.DBNull.Value;
+            }
+            if ((Original_Difficulty.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[27].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[28].Value = ((short)(Original_Difficulty.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[27].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[28].Value = global::System.DBNull.Value;
+            }
+            if ((Original_FocusArea == null)) {
+                this.Adapter.UpdateCommand.Parameters[29].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[30].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[29].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[30].Value = ((string)(Original_FocusArea));
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
+            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.UpdateCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.UpdateCommand.Connection.Close();
+                }
+            }
+        }
+    }
+    
+    /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class AltStreetTargetsTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.OleDb.OleDbDataAdapter _adapter;
+        
+        private global::System.Data.OleDb.OleDbConnection _connection;
+        
+        private global::System.Data.OleDb.OleDbTransaction _transaction;
+        
+        private global::System.Data.OleDb.OleDbCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public AltStreetTargetsTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected internal global::System.Data.OleDb.OleDbDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.OleDb.OleDbConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.OleDb.OleDbCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.OleDb.OleDbTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected global::System.Data.OleDb.OleDbCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.OleDb.OleDbDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "AltStreetTargets";
+            tableMapping.ColumnMappings.Add("MAPINFO_ID", "MapInfoID");
+            tableMapping.ColumnMappings.Add("NGTOStreet", "NGToStreet");
+            tableMapping.ColumnMappings.Add("BuildModelIC", "BuildModelIC");
+            tableMapping.ColumnMappings.Add("ICID", "ICID");
+            tableMapping.ColumnMappings.Add("Constructed", "Constructed");
+            tableMapping.ColumnMappings.Add("AltICID", "AltICID");
+            tableMapping.ColumnMappings.Add("Evaluation", "Evaluation");
+            tableMapping.ColumnMappings.Add("FocusArea", "FocusArea");
+            this._adapter.TableMappings.Add(tableMapping);
+            this._adapter.DeleteCommand = new global::System.Data.OleDb.OleDbCommand();
+            this._adapter.DeleteCommand.Connection = this.Connection;
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM `alt_streettargets_ac` WHERE ((`MAPINFO_ID` = ?) AND ((? = 1 AND `NGTOStreet` IS NULL) OR (`NGTOStreet` = ?)) AND ((? = 1 AND `BuildModelIC` IS NULL) OR (`BuildModelIC` = ?)) AND ((? = 1 AND `ICID` IS NULL) OR (`ICID` = ?)) AND ((? = 1 AND `Constructed` IS NULL) OR (`Constructed` = ?)) AND ((? = 1 AND `AltICID` IS NULL) OR (`AltICID` = ?)) AND ((? = 1 AND `Evaluation` IS NULL) OR (`Evaluation` = ?)) AND ((? = 1 AND `FocusArea` IS NULL) OR (`FocusArea` = ?)))";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_MAPINFO_ID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "MAPINFO_ID", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_NGTOStreet", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "NGTOStreet", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_NGTOStreet", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "NGTOStreet", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_BuildModelIC", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "BuildModelIC", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_BuildModelIC", global::System.Data.OleDb.OleDbType.Boolean, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "BuildModelIC", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_ICID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ICID", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_ICID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ICID", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_Constructed", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Constructed", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_Constructed", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Constructed", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_AltICID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "AltICID", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_AltICID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "AltICID", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_Evaluation", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Evaluation", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_Evaluation", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Evaluation", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_FocusArea", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "FocusArea", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_FocusArea", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "FocusArea", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.InsertCommand = new global::System.Data.OleDb.OleDbCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = "INSERT INTO `alt_streettargets_ac` (`NGTOStreet`, `BuildModelIC`, `ICID`, `Constr" +
+                "ucted`, `AltICID`, `Evaluation`, `FocusArea`) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("NGTOStreet", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "NGTOStreet", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("BuildModelIC", global::System.Data.OleDb.OleDbType.Boolean, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "BuildModelIC", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("ICID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ICID", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Constructed", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Constructed", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("AltICID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "AltICID", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Evaluation", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Evaluation", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("FocusArea", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "FocusArea", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand = new global::System.Data.OleDb.OleDbCommand();
+            this._adapter.UpdateCommand.Connection = this.Connection;
+            this._adapter.UpdateCommand.CommandText = @"UPDATE `alt_streettargets_ac` SET `NGTOStreet` = ?, `BuildModelIC` = ?, `ICID` = ?, `Constructed` = ?, `AltICID` = ?, `Evaluation` = ?, `FocusArea` = ? WHERE ((`MAPINFO_ID` = ?) AND ((? = 1 AND `NGTOStreet` IS NULL) OR (`NGTOStreet` = ?)) AND ((? = 1 AND `BuildModelIC` IS NULL) OR (`BuildModelIC` = ?)) AND ((? = 1 AND `ICID` IS NULL) OR (`ICID` = ?)) AND ((? = 1 AND `Constructed` IS NULL) OR (`Constructed` = ?)) AND ((? = 1 AND `AltICID` IS NULL) OR (`AltICID` = ?)) AND ((? = 1 AND `Evaluation` IS NULL) OR (`Evaluation` = ?)) AND ((? = 1 AND `FocusArea` IS NULL) OR (`FocusArea` = ?)))";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("NGTOStreet", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "NGTOStreet", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("BuildModelIC", global::System.Data.OleDb.OleDbType.Boolean, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "BuildModelIC", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("ICID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ICID", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Constructed", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Constructed", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("AltICID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "AltICID", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Evaluation", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Evaluation", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("FocusArea", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "FocusArea", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_MAPINFO_ID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "MAPINFO_ID", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_NGTOStreet", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "NGTOStreet", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_NGTOStreet", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "NGTOStreet", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_BuildModelIC", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "BuildModelIC", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_BuildModelIC", global::System.Data.OleDb.OleDbType.Boolean, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "BuildModelIC", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_ICID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ICID", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_ICID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ICID", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_Constructed", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Constructed", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_Constructed", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Constructed", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_AltICID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "AltICID", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_AltICID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "AltICID", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_Evaluation", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Evaluation", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_Evaluation", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Evaluation", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_FocusArea", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "FocusArea", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_FocusArea", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "FocusArea", global::System.Data.DataRowVersion.Original, false, null));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitConnection() {
+            this._connection = new global::System.Data.OleDb.OleDbConnection();
+            this._connection.ConnectionString = global::SystemsAnalysis.DataAccess.Properties.Settings.Default.alternative_packageConnectionString;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.OleDb.OleDbCommand[1];
+            this._commandCollection[0] = new global::System.Data.OleDb.OleDbCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = "SELECT MAPINFO_ID, NGTOStreet, BuildModelIC, ICID, Constructed, AltICID, Evaluati" +
+                "on, FocusArea FROM alt_streettargets_ac";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(StormwaterControlsDataSet.AltStreetTargetsDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual StormwaterControlsDataSet.AltStreetTargetsDataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            StormwaterControlsDataSet.AltStreetTargetsDataTable dataTable = new StormwaterControlsDataSet.AltStreetTargetsDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(StormwaterControlsDataSet.AltStreetTargetsDataTable dataTable) {
+            return this.Adapter.Update(dataTable);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(StormwaterControlsDataSet dataSet) {
+            return this.Adapter.Update(dataSet, "AltStreetTargets");
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow dataRow) {
+            return this.Adapter.Update(new global::System.Data.DataRow[] {
+                        dataRow});
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow[] dataRows) {
+            return this.Adapter.Update(dataRows);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
+        public virtual int Delete(int Original_MAPINFO_ID, string Original_NGTOStreet, bool Original_BuildModelIC, global::System.Nullable<int> Original_ICID, global::System.Nullable<int> Original_Constructed, global::System.Nullable<int> Original_AltICID, string Original_Evaluation, string Original_FocusArea) {
+            this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_MAPINFO_ID));
+            if ((Original_NGTOStreet == null)) {
+                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[2].Value = ((string)(Original_NGTOStreet));
+            }
+            this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
+            this.Adapter.DeleteCommand.Parameters[4].Value = ((bool)(Original_BuildModelIC));
+            if ((Original_ICID.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[6].Value = ((int)(Original_ICID.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            if ((Original_Constructed.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[8].Value = ((int)(Original_Constructed.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[8].Value = global::System.DBNull.Value;
+            }
+            if ((Original_AltICID.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[10].Value = ((int)(Original_AltICID.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[10].Value = global::System.DBNull.Value;
+            }
+            if ((Original_Evaluation == null)) {
+                this.Adapter.DeleteCommand.Parameters[11].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[12].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[11].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[12].Value = ((string)(Original_Evaluation));
+            }
+            if ((Original_FocusArea == null)) {
+                this.Adapter.DeleteCommand.Parameters[13].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[14].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[13].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[14].Value = ((string)(Original_FocusArea));
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
+            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.DeleteCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.DeleteCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(string NGTOStreet, bool BuildModelIC, global::System.Nullable<int> ICID, global::System.Nullable<int> Constructed, global::System.Nullable<int> AltICID, string Evaluation, string FocusArea) {
+            if ((NGTOStreet == null)) {
+                this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(NGTOStreet));
+            }
+            this.Adapter.InsertCommand.Parameters[1].Value = ((bool)(BuildModelIC));
+            if ((ICID.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[2].Value = ((int)(ICID.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            if ((Constructed.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[3].Value = ((int)(Constructed.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            if ((AltICID.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[4].Value = ((int)(AltICID.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            if ((Evaluation == null)) {
+                this.Adapter.InsertCommand.Parameters[5].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[5].Value = ((string)(Evaluation));
+            }
+            if ((FocusArea == null)) {
+                this.Adapter.InsertCommand.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[6].Value = ((string)(FocusArea));
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(string NGTOStreet, bool BuildModelIC, global::System.Nullable<int> ICID, global::System.Nullable<int> Constructed, global::System.Nullable<int> AltICID, string Evaluation, string FocusArea, int Original_MAPINFO_ID, string Original_NGTOStreet, bool Original_BuildModelIC, global::System.Nullable<int> Original_ICID, global::System.Nullable<int> Original_Constructed, global::System.Nullable<int> Original_AltICID, string Original_Evaluation, string Original_FocusArea) {
+            if ((NGTOStreet == null)) {
+                this.Adapter.UpdateCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(NGTOStreet));
+            }
+            this.Adapter.UpdateCommand.Parameters[1].Value = ((bool)(BuildModelIC));
+            if ((ICID.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(ICID.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            if ((Constructed.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(Constructed.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            if ((AltICID.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(AltICID.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            if ((Evaluation == null)) {
+                this.Adapter.UpdateCommand.Parameters[5].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[5].Value = ((string)(Evaluation));
+            }
+            if ((FocusArea == null)) {
+                this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((string)(FocusArea));
+            }
+            this.Adapter.UpdateCommand.Parameters[7].Value = ((int)(Original_MAPINFO_ID));
+            if ((Original_NGTOStreet == null)) {
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[9].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((string)(Original_NGTOStreet));
+            }
+            this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(0));
+            this.Adapter.UpdateCommand.Parameters[11].Value = ((bool)(Original_BuildModelIC));
+            if ((Original_ICID.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[13].Value = ((int)(Original_ICID.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[13].Value = global::System.DBNull.Value;
+            }
+            if ((Original_Constructed.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[15].Value = ((int)(Original_Constructed.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[15].Value = global::System.DBNull.Value;
+            }
+            if ((Original_AltICID.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[17].Value = ((int)(Original_AltICID.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[17].Value = global::System.DBNull.Value;
+            }
+            if ((Original_Evaluation == null)) {
+                this.Adapter.UpdateCommand.Parameters[18].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[19].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[18].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[19].Value = ((string)(Original_Evaluation));
+            }
+            if ((Original_FocusArea == null)) {
+                this.Adapter.UpdateCommand.Parameters[20].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[21].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[20].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[21].Value = ((string)(Original_FocusArea));
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
+            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.UpdateCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.UpdateCommand.Connection.Close();
+                }
+            }
+        }
+    }
+    
+    /// <summary>
     ///TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
     ///</summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
@@ -16363,6 +19827,12 @@ namespace SystemsAnalysis.DataAccess.StormwaterControlsDataSetTableAdapters {
         private ic_RoofTargetsTableAdapter _ic_RoofTargetsTableAdapter;
         
         private ic_ParkingTargetsTableAdapter _ic_ParkingTargetsTableAdapter;
+        
+        private AltRoofTargetsTableAdapter _altRoofTargetsTableAdapter;
+        
+        private AltParkingTargetsTableAdapter _altParkingTargetsTableAdapter;
+        
+        private AltStreetTargetsTableAdapter _altStreetTargetsTableAdapter;
         
         private bool _backupDataSetBeforeUpdate;
         
@@ -16470,6 +19940,45 @@ namespace SystemsAnalysis.DataAccess.StormwaterControlsDataSetTableAdapters {
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
+            "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
+            "", "System.Drawing.Design.UITypeEditor")]
+        public AltRoofTargetsTableAdapter AltRoofTargetsTableAdapter {
+            get {
+                return this._altRoofTargetsTableAdapter;
+            }
+            set {
+                this._altRoofTargetsTableAdapter = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
+            "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
+            "", "System.Drawing.Design.UITypeEditor")]
+        public AltParkingTargetsTableAdapter AltParkingTargetsTableAdapter {
+            get {
+                return this._altParkingTargetsTableAdapter;
+            }
+            set {
+                this._altParkingTargetsTableAdapter = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
+            "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
+            "", "System.Drawing.Design.UITypeEditor")]
+        public AltStreetTargetsTableAdapter AltStreetTargetsTableAdapter {
+            get {
+                return this._altStreetTargetsTableAdapter;
+            }
+            set {
+                this._altStreetTargetsTableAdapter = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         public bool BackupDataSetBeforeUpdate {
             get {
                 return this._backupDataSetBeforeUpdate;
@@ -16514,6 +20023,18 @@ namespace SystemsAnalysis.DataAccess.StormwaterControlsDataSetTableAdapters {
                             && (this._ic_ParkingTargetsTableAdapter.Connection != null))) {
                     return this._ic_ParkingTargetsTableAdapter.Connection;
                 }
+                if (((this._altRoofTargetsTableAdapter != null) 
+                            && (this._altRoofTargetsTableAdapter.Connection != null))) {
+                    return this._altRoofTargetsTableAdapter.Connection;
+                }
+                if (((this._altParkingTargetsTableAdapter != null) 
+                            && (this._altParkingTargetsTableAdapter.Connection != null))) {
+                    return this._altParkingTargetsTableAdapter.Connection;
+                }
+                if (((this._altStreetTargetsTableAdapter != null) 
+                            && (this._altStreetTargetsTableAdapter.Connection != null))) {
+                    return this._altStreetTargetsTableAdapter.Connection;
+                }
                 return null;
             }
             set {
@@ -16547,6 +20068,15 @@ namespace SystemsAnalysis.DataAccess.StormwaterControlsDataSetTableAdapters {
                 if ((this._ic_ParkingTargetsTableAdapter != null)) {
                     count = (count + 1);
                 }
+                if ((this._altRoofTargetsTableAdapter != null)) {
+                    count = (count + 1);
+                }
+                if ((this._altParkingTargetsTableAdapter != null)) {
+                    count = (count + 1);
+                }
+                if ((this._altStreetTargetsTableAdapter != null)) {
+                    count = (count + 1);
+                }
                 return count;
             }
         }
@@ -16557,12 +20087,12 @@ namespace SystemsAnalysis.DataAccess.StormwaterControlsDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private int UpdateUpdatedRows(StormwaterControlsDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
-            if ((this._ic_StreetTargetsTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.ic_StreetTargets.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+            if ((this._ic_ParkingTargetsTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.ic_ParkingTargets.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
-                    result = (result + this._ic_StreetTargetsTableAdapter.Update(updatedRows));
+                    result = (result + this._ic_ParkingTargetsTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -16575,30 +20105,30 @@ namespace SystemsAnalysis.DataAccess.StormwaterControlsDataSetTableAdapters {
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._ic_ParkingTargetsTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.ic_ParkingTargets.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+            if ((this._altRoofTargetsTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.AltRoofTargets.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
-                    result = (result + this._ic_ParkingTargetsTableAdapter.Update(updatedRows));
+                    result = (result + this._altRoofTargetsTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._mdl_SurfSC_acTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.mdl_SurfSC_ac.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+            if ((this._altStreetTargetsTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.AltStreetTargets.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
-                    result = (result + this._mdl_SurfSC_acTableAdapter.Update(updatedRows));
+                    result = (result + this._altStreetTargetsTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._iCTargetParkTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.ICTargetPark.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+            if ((this._altParkingTargetsTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.AltParkingTargets.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
-                    result = (result + this._iCTargetParkTableAdapter.Update(updatedRows));
+                    result = (result + this._altParkingTargetsTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -16611,12 +20141,39 @@ namespace SystemsAnalysis.DataAccess.StormwaterControlsDataSetTableAdapters {
                     allChangedRows.AddRange(updatedRows);
                 }
             }
+            if ((this._iCTargetParkTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.ICTargetPark.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._iCTargetParkTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
             if ((this._iCTargetRoofTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.ICTargetRoof.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
                     result = (result + this._iCTargetRoofTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._ic_StreetTargetsTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.ic_StreetTargets.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._ic_StreetTargetsTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._mdl_SurfSC_acTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.mdl_SurfSC_ac.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._mdl_SurfSC_acTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -16629,11 +20186,11 @@ namespace SystemsAnalysis.DataAccess.StormwaterControlsDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private int UpdateInsertedRows(StormwaterControlsDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
-            if ((this._ic_StreetTargetsTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.ic_StreetTargets.Select(null, null, global::System.Data.DataViewRowState.Added);
+            if ((this._ic_ParkingTargetsTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.ic_ParkingTargets.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
-                    result = (result + this._ic_StreetTargetsTableAdapter.Update(addedRows));
+                    result = (result + this._ic_ParkingTargetsTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -16645,27 +20202,27 @@ namespace SystemsAnalysis.DataAccess.StormwaterControlsDataSetTableAdapters {
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._ic_ParkingTargetsTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.ic_ParkingTargets.Select(null, null, global::System.Data.DataViewRowState.Added);
+            if ((this._altRoofTargetsTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.AltRoofTargets.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
-                    result = (result + this._ic_ParkingTargetsTableAdapter.Update(addedRows));
+                    result = (result + this._altRoofTargetsTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._mdl_SurfSC_acTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.mdl_SurfSC_ac.Select(null, null, global::System.Data.DataViewRowState.Added);
+            if ((this._altStreetTargetsTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.AltStreetTargets.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
-                    result = (result + this._mdl_SurfSC_acTableAdapter.Update(addedRows));
+                    result = (result + this._altStreetTargetsTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._iCTargetParkTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.ICTargetPark.Select(null, null, global::System.Data.DataViewRowState.Added);
+            if ((this._altParkingTargetsTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.AltParkingTargets.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
-                    result = (result + this._iCTargetParkTableAdapter.Update(addedRows));
+                    result = (result + this._altParkingTargetsTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -16677,11 +20234,35 @@ namespace SystemsAnalysis.DataAccess.StormwaterControlsDataSetTableAdapters {
                     allAddedRows.AddRange(addedRows);
                 }
             }
+            if ((this._iCTargetParkTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.ICTargetPark.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._iCTargetParkTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
             if ((this._iCTargetRoofTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.ICTargetRoof.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
                     result = (result + this._iCTargetRoofTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._ic_StreetTargetsTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.ic_StreetTargets.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._ic_StreetTargetsTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._mdl_SurfSC_acTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.mdl_SurfSC_ac.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._mdl_SurfSC_acTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -16694,19 +20275,27 @@ namespace SystemsAnalysis.DataAccess.StormwaterControlsDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private int UpdateDeletedRows(StormwaterControlsDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
             int result = 0;
+            if ((this._mdl_SurfSC_acTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.mdl_SurfSC_ac.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._mdl_SurfSC_acTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._ic_StreetTargetsTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.ic_StreetTargets.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._ic_StreetTargetsTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
             if ((this._iCTargetRoofTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.ICTargetRoof.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._iCTargetRoofTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
-            if ((this._iCNodeTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.ICNode.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._iCNodeTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -16718,19 +20307,35 @@ namespace SystemsAnalysis.DataAccess.StormwaterControlsDataSetTableAdapters {
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._mdl_SurfSC_acTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.mdl_SurfSC_ac.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+            if ((this._iCNodeTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.ICNode.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    result = (result + this._mdl_SurfSC_acTableAdapter.Update(deletedRows));
+                    result = (result + this._iCNodeTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._ic_ParkingTargetsTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.ic_ParkingTargets.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+            if ((this._altParkingTargetsTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.AltParkingTargets.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    result = (result + this._ic_ParkingTargetsTableAdapter.Update(deletedRows));
+                    result = (result + this._altParkingTargetsTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._altStreetTargetsTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.AltStreetTargets.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._altStreetTargetsTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._altRoofTargetsTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.AltRoofTargets.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._altRoofTargetsTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -16742,11 +20347,11 @@ namespace SystemsAnalysis.DataAccess.StormwaterControlsDataSetTableAdapters {
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._ic_StreetTargetsTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.ic_StreetTargets.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+            if ((this._ic_ParkingTargetsTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.ic_ParkingTargets.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    result = (result + this._ic_StreetTargetsTableAdapter.Update(deletedRows));
+                    result = (result + this._ic_ParkingTargetsTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -16819,6 +20424,21 @@ namespace SystemsAnalysis.DataAccess.StormwaterControlsDataSetTableAdapters {
             }
             if (((this._ic_ParkingTargetsTableAdapter != null) 
                         && (this.MatchTableAdapterConnection(this._ic_ParkingTargetsTableAdapter.Connection) == false))) {
+                throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
+                        "tring.");
+            }
+            if (((this._altRoofTargetsTableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._altRoofTargetsTableAdapter.Connection) == false))) {
+                throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
+                        "tring.");
+            }
+            if (((this._altParkingTargetsTableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._altParkingTargetsTableAdapter.Connection) == false))) {
+                throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
+                        "tring.");
+            }
+            if (((this._altStreetTargetsTableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._altStreetTargetsTableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
                         "tring.");
             }
@@ -16917,6 +20537,33 @@ namespace SystemsAnalysis.DataAccess.StormwaterControlsDataSetTableAdapters {
                         adaptersWithAcceptChangesDuringUpdate.Add(this._ic_ParkingTargetsTableAdapter.Adapter);
                     }
                 }
+                if ((this._altRoofTargetsTableAdapter != null)) {
+                    revertConnections.Add(this._altRoofTargetsTableAdapter, this._altRoofTargetsTableAdapter.Connection);
+                    this._altRoofTargetsTableAdapter.Connection = ((global::System.Data.OleDb.OleDbConnection)(workConnection));
+                    this._altRoofTargetsTableAdapter.Transaction = ((global::System.Data.OleDb.OleDbTransaction)(workTransaction));
+                    if (this._altRoofTargetsTableAdapter.Adapter.AcceptChangesDuringUpdate) {
+                        this._altRoofTargetsTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
+                        adaptersWithAcceptChangesDuringUpdate.Add(this._altRoofTargetsTableAdapter.Adapter);
+                    }
+                }
+                if ((this._altParkingTargetsTableAdapter != null)) {
+                    revertConnections.Add(this._altParkingTargetsTableAdapter, this._altParkingTargetsTableAdapter.Connection);
+                    this._altParkingTargetsTableAdapter.Connection = ((global::System.Data.OleDb.OleDbConnection)(workConnection));
+                    this._altParkingTargetsTableAdapter.Transaction = ((global::System.Data.OleDb.OleDbTransaction)(workTransaction));
+                    if (this._altParkingTargetsTableAdapter.Adapter.AcceptChangesDuringUpdate) {
+                        this._altParkingTargetsTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
+                        adaptersWithAcceptChangesDuringUpdate.Add(this._altParkingTargetsTableAdapter.Adapter);
+                    }
+                }
+                if ((this._altStreetTargetsTableAdapter != null)) {
+                    revertConnections.Add(this._altStreetTargetsTableAdapter, this._altStreetTargetsTableAdapter.Connection);
+                    this._altStreetTargetsTableAdapter.Connection = ((global::System.Data.OleDb.OleDbConnection)(workConnection));
+                    this._altStreetTargetsTableAdapter.Transaction = ((global::System.Data.OleDb.OleDbTransaction)(workTransaction));
+                    if (this._altStreetTargetsTableAdapter.Adapter.AcceptChangesDuringUpdate) {
+                        this._altStreetTargetsTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
+                        adaptersWithAcceptChangesDuringUpdate.Add(this._altStreetTargetsTableAdapter.Adapter);
+                    }
+                }
                 // 
                 //---- Perform updates -----------
                 //
@@ -17002,6 +20649,18 @@ namespace SystemsAnalysis.DataAccess.StormwaterControlsDataSetTableAdapters {
                 if ((this._ic_ParkingTargetsTableAdapter != null)) {
                     this._ic_ParkingTargetsTableAdapter.Connection = ((global::System.Data.OleDb.OleDbConnection)(revertConnections[this._ic_ParkingTargetsTableAdapter]));
                     this._ic_ParkingTargetsTableAdapter.Transaction = null;
+                }
+                if ((this._altRoofTargetsTableAdapter != null)) {
+                    this._altRoofTargetsTableAdapter.Connection = ((global::System.Data.OleDb.OleDbConnection)(revertConnections[this._altRoofTargetsTableAdapter]));
+                    this._altRoofTargetsTableAdapter.Transaction = null;
+                }
+                if ((this._altParkingTargetsTableAdapter != null)) {
+                    this._altParkingTargetsTableAdapter.Connection = ((global::System.Data.OleDb.OleDbConnection)(revertConnections[this._altParkingTargetsTableAdapter]));
+                    this._altParkingTargetsTableAdapter.Transaction = null;
+                }
+                if ((this._altStreetTargetsTableAdapter != null)) {
+                    this._altStreetTargetsTableAdapter.Connection = ((global::System.Data.OleDb.OleDbConnection)(revertConnections[this._altStreetTargetsTableAdapter]));
+                    this._altStreetTargetsTableAdapter.Transaction = null;
                 }
                 if ((0 < adaptersWithAcceptChangesDuringUpdate.Count)) {
                     global::System.Data.Common.DataAdapter[] adapters = new System.Data.Common.DataAdapter[adaptersWithAcceptChangesDuringUpdate.Count];
