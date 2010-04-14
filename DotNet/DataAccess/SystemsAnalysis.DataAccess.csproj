@@ -198,6 +198,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SAMasterDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="StormwaterControls.cs" />
     <Compile Include="StormwaterControlsDataSet.cs">
       <DependentUpon>StormwaterControlsDataSet.xsd</DependentUpon>
       <SubType>Component</SubType>
