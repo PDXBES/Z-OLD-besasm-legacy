@@ -20,16 +20,35 @@ namespace SystemsAnalysis.DataAccess
       StormwaterControlsDataSetTableAdapters.mdl_SurfSC_acTableAdapter mdlSscTA;
       mdlSscTA = new StormwaterControlsDataSetTableAdapters.mdl_SurfSC_acTableAdapter(modelPath);
 
+      StormwaterControlsDataSetTableAdapters.ic_RoofTargetsTableAdapter icRoofTargetsTA;
+      icRoofTargetsTA = new StormwaterControlsDataSetTableAdapters.ic_RoofTargetsTableAdapter(modelPath);
+
+      StormwaterControlsDataSetTableAdapters.ic_StreetTargetsTableAdapter icStreetTargetsTA;
+      icStreetTargetsTA = new StormwaterControlsDataSetTableAdapters.ic_StreetTargetsTableAdapter(modelPath);
+
+      StormwaterControlsDataSetTableAdapters.ic_ParkingTargetsTableAdapter icParkingTargetsTA;
+      icParkingTargetsTA = new StormwaterControlsDataSetTableAdapters.ic_ParkingTargetsTableAdapter(modelPath);
+      
       AccessHelper accessHelper = new AccessHelper(modelPath + @"\mdbs\StormwaterControls_v12.mdb");
       try
       {
         accessHelper.LinkTable("mdl_surfsc_ac", modelPath + @"\surfsc\mdl_SurfSC_ac.mdb");
         mdlSscTA.Fill(this.mdl_SurfSC_ac);
+
+        accessHelper.LinkTable("mst_ic_StreetTargets_ac", modelPath + @"\icalt\mst_ic_StreetTargets_ac.mdb","ic_StreetTargets");
+        icStreetTargetsTA.Fill(this.ic_StreetTargets);
+
+        accessHelper.LinkTable("mst_ic_RoofTargets_ac", modelPath + @"\icalt\mst_ic_RoofTargets_ac.mdb", "ic_RoofTargets");
+        icRoofTargetsTA.Fill(this.ic_RoofTargets);
+
+        accessHelper.LinkTable("mst_ic_ParkingTargets_ac", modelPath + @"\icalt\mst_ic_ParkingTargets_ac.mdb", "ic_ParkingTargets");
+        icParkingTargetsTA.Fill(this.ic_ParkingTargets);
       }
       finally
       {
         accessHelper.Dispose();
-      }
+      }      
+      
     }
 
   }

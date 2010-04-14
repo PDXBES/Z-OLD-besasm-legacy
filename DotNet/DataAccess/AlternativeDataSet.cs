@@ -6,8 +6,37 @@
 // Last modified: 6/2/2008 4:49 PM
 using System.IO;
 
-namespace SystemsAnalysis.DataAccess.AlternativeDataSetTableAdapters
+namespace SystemsAnalysis.DataAccess
 {
+  public partial class AlternativeDataSet
+  {
+    public void InitAlternativeDataSet(string alternativePath)
+    {
+      AlternativeDataSetTableAdapters.AltDscTableAdapter altDscTA;
+      altDscTA = new SystemsAnalysis.DataAccess.AlternativeDataSetTableAdapters.AltDscTableAdapter(alternativePath);
+      altDscTA.Fill(this.AltDsc);
+
+      AlternativeDataSetTableAdapters.AltLinksTableAdapter altLinksTA;
+      altLinksTA = new SystemsAnalysis.DataAccess.AlternativeDataSetTableAdapters.AltLinksTableAdapter(alternativePath);
+      altLinksTA.Fill(this.AltLinks);
+
+      AlternativeDataSetTableAdapters.AltNodesTableAdapter altNodesTA;
+      altNodesTA = new SystemsAnalysis.DataAccess.AlternativeDataSetTableAdapters.AltNodesTableAdapter(alternativePath);
+      altNodesTA.Fill(this.AltNodes);
+
+      AlternativeDataSetTableAdapters.AltStreetTargetsTableAdapter altStreetTargetsTA;
+      altStreetTargetsTA = new SystemsAnalysis.DataAccess.AlternativeDataSetTableAdapters.AltStreetTargetsTableAdapter(alternativePath);
+      altStreetTargetsTA.Fill(this.AltStreetTargets);
+
+      AlternativeDataSetTableAdapters.AltRoofTargetsTableAdapter altRoofTargetsTA;
+      altRoofTargetsTA = new SystemsAnalysis.DataAccess.AlternativeDataSetTableAdapters.AltRoofTargetsTableAdapter(alternativePath);
+      altRoofTargetsTA.Fill(this.AltRoofTargets);
+
+      AlternativeDataSetTableAdapters.AltParkingTargetsTableAdapter altParkingTargetsTA;
+      altParkingTargetsTA = new SystemsAnalysis.DataAccess.AlternativeDataSetTableAdapters.AltParkingTargetsTableAdapter(alternativePath);
+      altParkingTargetsTA.Fill(this.AltParkingTargets);
+    }
+  }
 }
 
 namespace SystemsAnalysis.DataAccess.AlternativeDataSetTableAdapters
