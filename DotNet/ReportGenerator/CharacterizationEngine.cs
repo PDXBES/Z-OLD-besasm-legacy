@@ -336,7 +336,7 @@ namespace SystemsAnalysis.Reporting
     private void InitRecommendedPlanReport()
     {
       this.OnStatusChanged(new StatusChangedArgs("Creating Recommended Plan Report."));
-      this._recommendedPlanReport = new RecommendedPlanReport(CharLinks, CharNodes, CharDscs);
+      this._recommendedPlanReport = new RecommendedPlanReport();
       this._recommendedPlanReport.StatusChanged += new OnStatusChangedEventHandler(this.OnStatusChanged);
     }
     private Links CharLinks
