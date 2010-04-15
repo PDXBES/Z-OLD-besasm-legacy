@@ -134,6 +134,15 @@ namespace SystemsAnalysis.DataAccess.StormwaterControlsDataSetTableAdapters
     }
   }
 
+  public partial class mdl_dirsc_acTableAdapter
+  {
+    public mdl_dirsc_acTableAdapter(string modelPath)
+      : this()
+    {
+      this.Connection.ConnectionString = StormwaterControlsAdapterSetup.GetModelConnectionString(modelPath);
+    }
+  }
+
   public partial class ic_StreetTargetsTableAdapter
   {
     public ic_StreetTargetsTableAdapter(string modelPath)

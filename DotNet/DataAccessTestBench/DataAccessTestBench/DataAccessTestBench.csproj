@@ -84,6 +84,10 @@
       <Project>{D81499E0-ED3E-4C85-9F8E-72C263AA24C4}</Project>
       <Name>SystemsAnalysis.DataAccess</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\ReportLibraries\SystemsAnalysis.Reporting.ReportLibraries.csproj">
+      <Project>{5B1CB42C-93D9-4C90-902B-AF403D8ECED8}</Project>
+      <Name>SystemsAnalysis.Reporting.ReportLibraries</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
