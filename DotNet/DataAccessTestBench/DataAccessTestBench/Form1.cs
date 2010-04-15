@@ -7,30 +7,38 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using SystemsAnalysis.DataAccess;
+using SystemsAnalysis.Reporting.ReportLibraries;
 
 namespace DataAccessTestBench
 {
   public partial class Form1 : Form
   {
-    SystemsAnalysis.DataAccess.StormwaterControlsDataSet scDS;    
+    private SystemsAnalysis.DataAccess.StormwaterControlsDataSet scDS;
+    private RecommendedPlanReport rpReport;
 
     public Form1()
     {
       InitializeComponent();
 
-      scDS = new StormwaterControlsDataSet();
+      string testModelPath = @"C:\Data\Projects\41800023-1 BES_DataManagement\Beech_Essex\BEE_RP\";
+      //string testModelPath = @"\\Cassio\systems_planning\8063_CombinedFacPlan\Models\Alts\Beech_Essex\BEE_NP-Pipe\";
 
-      string testModelPath = @"C:\Data\Projects\41800023-1 BES_DataManagement\Beech_Essex\BEE_RP";
-      //string testModelPath = @"\\Cassio\systems_planning\8063_CombinedFacPlan\Models\Alts\Beech_Essex\BEE_NP-Pipe";
-      scDS.InitStormwaterControlDataSet(testModelPath);
-      
-      string testAlternativePath = @"C:\Data\Projects\41800023-1 BES_DataManagement\Beech_Essex\BEE_FU\alternatives\BEE_RP";
+      string testAlternativePath = @"C:\Data\Projects\41800023-1 BES_DataManagement\Beech_Essex\BEE_FU\alternatives\BEE_RP\";
       //string testAlternativePath = @"\\Cassio\systems_planning\8063_CombinedFacPlan\Models\Alts\Beech_Essex\BEE_NP_Base\alternatives\BEE_NP_NP-Pipe";
+      
+      scDS = new StormwaterControlsDataSet();
+      scDS.InitStormwaterControlDataSet(testModelPath);
       scDS.InitAltTargetDataTables(testAlternativePath);
+      rpReport = new RecommendedPlanReport();
+      Dictionary<string, ReportBase.Parameter> parameters = new Dictionary<string, ReportBase.Parameter>();
+      parameters.Add("ModelPath", new ReportBase.Parameter("ModelPath", testModelPath));
+      parameters.Add("AlternativePath", new ReportBase.Parameter("AlternativePath", testAlternativePath));
+      rpReport.LoadAuxilaryData(parameters);
+
     }
 
     private void button1_Click(object sender, EventArgs e)
-    {      
+    {
       var query =
         from icNode in scDS.ICNode
         join icStreetTarget in scDS.ic_StreetTargets
@@ -57,7 +65,7 @@ namespace DataAccessTestBench
       textBox1.AppendText("\n");
       textBox1.AppendText("Protect and Improve Terrestrial Habitat\n");
       textBox1.AppendText("------------------------------------\n");
-      var query2 = 
+      var query2 =
         from icNode in scDS.ICNode
         join icStreetTarget in scDS.ic_StreetTargets
         on icNode.FacNode equals icStreetTarget.XPSWMM_Name
@@ -81,6 +89,44 @@ namespace DataAccessTestBench
     private void Form1_Load(object sender, EventArgs e)
     {
 
+    }
+
+    private void button2_Click(object sender, EventArgs e)
+    {
+      textBox1.Clear();
+
+      textBox1.AppendText("Infiltrate Stormwater\n");
+      textBox1.AppendText("------------------------------------\n");
+
+      var query =
+        from altStreetTargets in scDS.AltStreetTargets
+        group altStreetTargets by altStreetTargets.FocusArea into grpFocusArea
+        orderby grpFocusArea.Key
+        select new
+        {
+          FocusArea = grpFocusArea.Key
+        };
+
+      foreach (var row in query)
+      {
+        Dictionary<string, ReportBase.Parameter> parameters = new Dictionary<string, ReportBase.Parameter>();
+        parameters.Add("FocusArea", new ReportBase.Parameter("FocusArea", row.FocusArea));
+        double infiltratedArea = rpReport.InfiltrateStormwaterArea(parameters);
+
+        textBox1.AppendText("Focus Area: " + row.FocusArea + "; Infiltrated Area = " + infiltratedArea + "\n");        
+      }
+
+      textBox1.AppendText("\n");
+      textBox1.AppendText("Protect and Improve Terrestrial Habitat\n");
+      textBox1.AppendText("------------------------------------\n");
+      foreach (var row in query)
+      {
+        Dictionary<string, ReportBase.Parameter> parameters = new Dictionary<string, ReportBase.Parameter>();
+        parameters.Add("FocusArea", new ReportBase.Parameter("FocusArea", row.FocusArea));
+        double infiltratedArea = rpReport.ProtectAndImproveTerrestrialHabitialArea(parameters);
+
+        textBox1.AppendText("Focus Area: " + row.FocusArea + "; Infiltrated Area = " + infiltratedArea + "\n");        
+      }
     }
   }
 }

@@ -5,6 +5,7 @@ using SystemsAnalysis.DataAccess;
 using SystemsAnalysis.Utils.AccessUtils;
 using SystemsAnalysis.Modeling;
 using System.Data.Linq;
+using System.IO;
 using System.Linq.Expressions;
 using System.Linq;
 
@@ -12,11 +13,12 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
 {
   public class RecommendedPlanReport : ReportBase
   {
-    private StormwaterControlsDataSet stormwaterControlDS;
+    private StormwaterControlsDataSet scDS;
     private AltCompilerDataSet altCompilerDS;
     private string modelPath;
+    private string alternativePath;
 
-    public RecommendedPlanReport(Links links, Nodes nodes, Dscs dscs)
+    public RecommendedPlanReport()
     {
       DataAccess.AltCompilerDataSetTableAdapters.SP_ALT_BSBRTableAdapter altBSBRTA;
       altBSBRTA = new SystemsAnalysis.DataAccess.AltCompilerDataSetTableAdapters.SP_ALT_BSBRTableAdapter();
@@ -46,7 +48,8 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
       private void SetAuxilaryDataDescription()
       {
         auxilaryDataDescription = new Dictionary<string, string>();
-        auxilaryDataDescription.Add("ModelPath", "Model Directory (Model.ini)");
+        auxilaryDataDescription.Add("ModelPath", "Model Directory (Model.ini)");        
+        auxilaryDataDescription.Add("AlternativePath", "Alternative Package (alternative_package.mdb)");
       }
       public override bool RequiresAuxilaryData
       {
@@ -71,17 +74,17 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
     public override void LoadAuxilaryData(Dictionary<string, Parameter> AuxilaryData)
     {
       modelPath = AuxilaryData["ModelPath"].Value;
-      modelPath = System.IO.Path.GetDirectoryName(modelPath);
-
-      string stormwaterControlsDB = modelPath + @"\mdbs\StormwaterControls_v12.mdb";
-      //accessHelper = new AccessHelper(stormwaterControlsDB);
+      //modelPath = Path.GetDirectoryName(modelPath);
+      alternativePath = AuxilaryData["AlternativePath"].Value;
+      //alternativePath = Path.GetDirectoryName(alternativePath);
+            
       try
       {                
         //Execute queries in StormwaterControls_v12
         //Load ic_target tables into StormwaterControlsDataSet
-        stormwaterControlDS = new StormwaterControlsDataSet();
-        stormwaterControlDS.InitStormwaterControlDataSet(modelPath);
-        IQueryable q = (IQueryable)stormwaterControlDS;
+        scDS = new StormwaterControlsDataSet();
+        scDS.InitStormwaterControlDataSet(modelPath);
+        scDS.InitAltTargetDataTables(alternativePath);        
       }
       catch (Exception ex)
       {
@@ -89,7 +92,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
       }
       finally
       {
-        //accessHelper.Dispose();
+        
       }
     }
 
@@ -115,14 +118,71 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
       return 0;
     }
 
-    public double InfiltratedArea(IDictionary<string, Parameter> parameters)
+    public double InfiltrateStormwaterArea(IDictionary<string, Parameter> parameters)
     {
       string focusArea;
-
       focusArea = parameters["FocusArea"].Value;
 
-      return 0;
+      var query =
+        from icNode in scDS.ICNode
+        join icStreetTarget in scDS.ic_StreetTargets
+        on icNode.FacNode equals icStreetTarget.XPSWMM_Name
+        join altStreetTarget in scDS.AltStreetTargets
+        on icStreetTarget.icID equals altStreetTarget.ICID
+        join mdlSurfSc in scDS.mdl_SurfSC_ac
+        on icStreetTarget.surfSCID equals mdlSurfSc.SurfSCID        
+        where altStreetTarget.FocusArea == focusArea
+        group mdlSurfSc by altStreetTarget.FocusArea into grpFocusArea
+        orderby grpFocusArea.Key
+        select new
+        {
+          FocusArea = grpFocusArea.Key,
+          NetIA = grpFocusArea.Sum(p => p.c_netIMPacres)
+        };
+
+      if (query.Count() != 1)
+      {
+        throw new Exception("InfiltratedArea returned more than one row");
+      }
+
+      return query.First().NetIA;
+      
     }
+
+    public double ReducePollutantsArea(IDictionary<string, Parameter> parameters)
+    {
+      return InfiltrateStormwaterArea(parameters);
+    }
+
+    public double ProtectAndImproveTerrestrialHabitialArea(IDictionary<string, Parameter> parameters)
+    {
+      string focusArea;
+      focusArea = parameters["FocusArea"].Value;
+
+      var query =
+        from icNode in scDS.ICNode
+        join icStreetTarget in scDS.ic_StreetTargets
+        on icNode.FacNode equals icStreetTarget.XPSWMM_Name
+        join altStreetTarget in scDS.AltStreetTargets
+        on icStreetTarget.icID equals altStreetTarget.ICID
+        where icNode.Factype == "C" && icStreetTarget.constructed == 0 && altStreetTarget.FocusArea == focusArea
+        group icNode by altStreetTarget.FocusArea into grpFocusArea
+        orderby grpFocusArea.Key
+        select new
+        {
+          FocusArea = grpFocusArea.Key,
+          FacilityVolume = grpFocusArea.Sum(p => p.FacVolCuFt) / 0.75 / 43560,
+        };
+
+      if (query.Count() != 1)
+      {
+        throw new Exception("HabitatArea returned more than one row");
+      }
+
+      return query.First().FacilityVolume;
+    }
+
+    
 
 
   }
