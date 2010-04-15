@@ -8,12 +8,14 @@ using System.Text;
 using System.Windows.Forms;
 using SystemsAnalysis.DataAccess;
 using SystemsAnalysis.Reporting.ReportLibraries;
-
+using SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor;
+  
 namespace DataAccessTestBench
 {
   public partial class Form1 : Form
   {
     private SystemsAnalysis.DataAccess.StormwaterControlsDataSet scDS;
+    
     private RecommendedPlanReport rpReport;
 
     public Form1()
@@ -25,7 +27,9 @@ namespace DataAccessTestBench
 
       string testAlternativePath = @"C:\Data\Projects\41800023-1 BES_DataManagement\Beech_Essex\BEE_FU\alternatives\BEE_RP\";
       //string testAlternativePath = @"\\Cassio\systems_planning\8063_CombinedFacPlan\Models\Alts\Beech_Essex\BEE_NP_Base\alternatives\BEE_NP_NP-Pipe";
-      
+
+      string testSwmmOutput = @"C:\Data\Projects\41800023-1 BES_DataManagement\Beech_Essex\BEE_FU\sim\25\BEE_FU_25.out";
+           
       scDS = new StormwaterControlsDataSet();
       scDS.InitStormwaterControlDataSet(testModelPath);
       scDS.InitAltTargetDataTables(testAlternativePath);
@@ -35,6 +39,9 @@ namespace DataAccessTestBench
       parameters.Add("AlternativePath", new ReportBase.Parameter("AlternativePath", testAlternativePath));
       rpReport.LoadAuxilaryData(parameters);
 
+      XPSWMMResults xpSwmmResults = new XPSWMMResults(testSwmmOutput);
+      scDS.Tables.Add(xpSwmmResults.GetTableE18());
+      
     }
 
     private void button1_Click(object sender, EventArgs e)

@@ -216,22 +216,22 @@
           </Function>
         </Cell>
         <Cell cellType="FUNCTION">
-          <Function functionName="InfiltrateStormwater" library="RecommendedPlanReport" format="N0">
+          <Function functionName="InfiltrateStormwaterArea" library="RecommendedPlanReport" format="N0">
             <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
           </Function>
         </Cell>
         <Cell cellType="FUNCTION">
-          <Function functionName="ReducePollutants" library="RecommendedPlanReport" format="N0">
+          <Function functionName="ReducePollutantsArea" library="RecommendedPlanReport" format="N0">
             <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
           </Function>
         </Cell>
         <Cell cellType="FUNCTION">
-          <Function functionName="ProtectImproveTerrestrialHabitat" library="RecommendedPlanReport" format="N0">
+          <Function functionName="ProtectImproveTerrestrialHabitatArea" library="RecommendedPlanReport" format="N0">
             <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
           </Function>
         </Cell>
         <Cell cellType="FUNCTION">
-          <Function functionName="ProtectImproveAquaticHabitat" library="RecommendedPlanReport" format="N0">
+          <Function functionName="ProtectImproveAquaticHabitatArea" library="RecommendedPlanReport" format="N0">
             <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
           </Function>
         </Cell>
@@ -239,19 +239,13 @@
       <Row  rowType="TOTALROW">
         <Cell cellType="CONST" data="Total" />
         <Cell cellType="FUNCTION">
-          <Function functionName="InfiltrationArea" library="RecommendedPlanReport" format="N0">
-            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
-          </Function>
+          <Function functionName="TotalInfiltrateStormwaterArea" library="RecommendedPlanReport" format="N0" />                      
         </Cell>
         <Cell cellType="FUNCTION">
-          <Function functionName="InfiltrationArea" library="RecommendedPlanReport" format="N0">
-            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
-          </Function>
+          <Function functionName="TotalReducePollutantsArea" library="RecommendedPlanReport" format="N0" />                      
         </Cell>
         <Cell cellType="FUNCTION">
-          <Function functionName="TotalProtectImproveTerrestrialHabitat" library="RecommendedPlanReport" format="N0">
-            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
-          </Function>
+          <Function functionName="TotalProtectImproveTerrestrialHabitatArea" library="RecommendedPlanReport" format="N0" />                      
         </Cell>
         <Cell cellType="CONST" value="Manual Entry" />          
       </Row>
