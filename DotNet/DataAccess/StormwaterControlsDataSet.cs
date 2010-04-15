@@ -11,17 +11,17 @@ namespace SystemsAnalysis.DataAccess
       icNodeTA = new StormwaterControlsDataSetTableAdapters.ICNodeTableAdapter(modelPath);      
       icNodeTA.Fill(this.ICNode);
 
-      StormwaterControlsDataSetTableAdapters.ICTargetParkTableAdapter icTargetParkTA;
-      icTargetParkTA = new StormwaterControlsDataSetTableAdapters.ICTargetParkTableAdapter(modelPath);
-      icTargetParkTA.Fill(this.ICTargetPark);
+      StormwaterControlsDataSetTableAdapters._mdl_roofTargetsTableAdapter mdlRoofTargetsTA;
+      mdlRoofTargetsTA = new StormwaterControlsDataSetTableAdapters._mdl_roofTargetsTableAdapter(modelPath);
+      mdlRoofTargetsTA.Fill(this._mdl_roofTargets);
 
-      StormwaterControlsDataSetTableAdapters.ICTargetRoofTableAdapter icTargetRoofTA;
-      icTargetRoofTA = new StormwaterControlsDataSetTableAdapters.ICTargetRoofTableAdapter(modelPath);
-      icTargetRoofTA.Fill(this.ICTargetRoof);
+      StormwaterControlsDataSetTableAdapters._mdl_ParkingTargetsTableAdapter mdlParkingTargetsTA;
+      mdlParkingTargetsTA = new StormwaterControlsDataSetTableAdapters._mdl_ParkingTargetsTableAdapter(modelPath);
+      mdlParkingTargetsTA.Fill(this._mdl_ParkingTargets);
 
       StormwaterControlsDataSetTableAdapters.mdl_dirsc_acTableAdapter mdlDscTA;
       mdlDscTA = new StormwaterControlsDataSetTableAdapters.mdl_dirsc_acTableAdapter(modelPath);
-      
+
       StormwaterControlsDataSetTableAdapters.mdl_SurfSC_acTableAdapter mdlSscTA;
       mdlSscTA = new StormwaterControlsDataSetTableAdapters.mdl_SurfSC_acTableAdapter(modelPath);
 
@@ -33,7 +33,7 @@ namespace SystemsAnalysis.DataAccess
 
       StormwaterControlsDataSetTableAdapters.ic_ParkingTargetsTableAdapter icParkingTargetsTA;
       icParkingTargetsTA = new StormwaterControlsDataSetTableAdapters.ic_ParkingTargetsTableAdapter(modelPath);
-      
+
       AccessHelper accessHelper = new AccessHelper(modelPath + @"\mdbs\StormwaterControls_v12.mdb");
       try
       {
@@ -99,23 +99,6 @@ namespace SystemsAnalysis.DataAccess.StormwaterControlsDataSetTableAdapters
     }
   }
 
-  public partial class ICTargetRoofTableAdapter
-  {
-    public ICTargetRoofTableAdapter(string modelPath)
-      : this()
-    {
-      this.Connection.ConnectionString = StormwaterControlsAdapterSetup.GetModelConnectionString(modelPath);
-    }
-  }
-
-  public partial class ICTargetParkTableAdapter
-  {
-    public ICTargetParkTableAdapter(string modelPath)
-      : this()
-    {
-      this.Connection.ConnectionString = StormwaterControlsAdapterSetup.GetModelConnectionString(modelPath);
-    }
-  }
   public partial class ICNodeTableAdapter
   {
     public ICNodeTableAdapter(string modelPath)
@@ -164,6 +147,24 @@ namespace SystemsAnalysis.DataAccess.StormwaterControlsDataSetTableAdapters
   public partial class ic_RoofTargetsTableAdapter
   {
     public ic_RoofTargetsTableAdapter(string modelPath)
+      : this()
+    {
+      this.Connection.ConnectionString = StormwaterControlsAdapterSetup.GetModelConnectionString(modelPath);
+    }
+  }
+
+  public partial class _mdl_roofTargetsTableAdapter
+  {
+    public _mdl_roofTargetsTableAdapter(string modelPath)
+      : this()
+    {
+      this.Connection.ConnectionString = StormwaterControlsAdapterSetup.GetModelConnectionString(modelPath);
+    }
+  }
+
+  public partial class _mdl_ParkingTargetsTableAdapter
+  {
+    public _mdl_ParkingTargetsTableAdapter(string modelPath)
       : this()
     {
       this.Connection.ConnectionString = StormwaterControlsAdapterSetup.GetModelConnectionString(modelPath);
