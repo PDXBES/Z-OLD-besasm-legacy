@@ -1,5 +1,7 @@
 ﻿using SystemsAnalysis.Utils.AccessUtils;
 using System.IO;
+using SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor;
+using System.Data;
 
 namespace SystemsAnalysis.DataAccess
 {
@@ -14,7 +16,11 @@ namespace SystemsAnalysis.DataAccess
       StormwaterControlsDataSetTableAdapters._mdl_roofTargetsTableAdapter mdlRoofTargetsTA;
       mdlRoofTargetsTA = new StormwaterControlsDataSetTableAdapters._mdl_roofTargetsTableAdapter(modelPath);
       mdlRoofTargetsTA.Fill(this._mdl_roofTargets);
-
+      
+      foreach (System.Data.DataRow row in this._mdl_roofTargets.GetErrors())
+      {
+        
+      }
       StormwaterControlsDataSetTableAdapters._mdl_ParkingTargetsTableAdapter mdlParkingTargetsTA;
       mdlParkingTargetsTA = new StormwaterControlsDataSetTableAdapters._mdl_ParkingTargetsTableAdapter(modelPath);
       mdlParkingTargetsTA.Fill(this._mdl_ParkingTargets);
@@ -72,6 +78,13 @@ namespace SystemsAnalysis.DataAccess
       StormwaterControlsDataSetTableAdapters.AltParkingTargetsTableAdapter altParkingTargetsTA;
       altParkingTargetsTA = new SystemsAnalysis.DataAccess.StormwaterControlsDataSetTableAdapters.AltParkingTargetsTableAdapter(alternativePath);
       altParkingTargetsTA.Fill(this.AltParkingTargets);
+    }
+
+    public void InitResultsDataTables(string swmmOutputFile)
+    {
+      XPSWMMResults xpSwmmResults = new XPSWMMResults(swmmOutputFile);
+      xpSwmmResults.GetTableE18().CopyToDataTable(this.TableE18, LoadOption.PreserveChanges);
+      xpSwmmResults.GetTableE19().CopyToDataTable(this.TableE19, LoadOption.PreserveChanges);
     }
 
   }

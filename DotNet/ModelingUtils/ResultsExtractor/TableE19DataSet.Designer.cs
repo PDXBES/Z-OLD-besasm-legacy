@@ -260,7 +260,7 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class TableE19DataTable : global::System.Data.DataTable, global::System.Collections.IEnumerable {
+        public partial class TableE19DataTable : global::System.Data.TypedTableBase<TableE19Row> {
             
             private global::System.Data.DataColumn columnNodeName;
             
@@ -353,11 +353,6 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor {
             public TableE19Row FindByNodeName(string NodeName) {
                 return ((TableE19Row)(this.Rows.Find(new object[] {
                             NodeName})));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public virtual global::System.Collections.IEnumerator GetEnumerator() {
-                return this.Rows.GetEnumerator();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
