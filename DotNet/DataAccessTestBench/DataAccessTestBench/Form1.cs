@@ -22,7 +22,7 @@ namespace DataAccessTestBench
     {
       InitializeComponent();
 
-      string testModelPath = @"C:\Data\Projects\41800023-1 BES_DataManagement\Beech_Essex\BEE_RP\";
+      string testModelPath = @"C:\Data\Projects\41800023-1 BES_DataManagement\Beech_Essex\BEE_FU\";
       //string testModelPath = @"\\Cassio\systems_planning\8063_CombinedFacPlan\Models\Alts\Beech_Essex\BEE_NP-Pipe\";
 
       string testAlternativePath = @"C:\Data\Projects\41800023-1 BES_DataManagement\Beech_Essex\BEE_FU\alternatives\BEE_RP\";
@@ -33,14 +33,14 @@ namespace DataAccessTestBench
       scDS = new StormwaterControlsDataSet();
       scDS.InitStormwaterControlDataSet(testModelPath);
       scDS.InitAltTargetDataTables(testAlternativePath);
+      scDS.InitResultsDataTables(testSwmmOutput);
+
       rpReport = new RecommendedPlanReport();
       Dictionary<string, ReportBase.Parameter> parameters = new Dictionary<string, ReportBase.Parameter>();
       parameters.Add("ModelPath", new ReportBase.Parameter("ModelPath", testModelPath));
       parameters.Add("AlternativePath", new ReportBase.Parameter("AlternativePath", testAlternativePath));
+      parameters.Add("SwmmOutputFile", new ReportBase.Parameter("SwmmOutputFile", testSwmmOutput));
       rpReport.LoadAuxilaryData(parameters);
-
-      XPSWMMResults xpSwmmResults = new XPSWMMResults(testSwmmOutput);
-      scDS.Tables.Add(xpSwmmResults.GetTableE18());
       
     }
 
@@ -134,6 +134,20 @@ namespace DataAccessTestBench
 
         textBox1.AppendText("Focus Area: " + row.FocusArea + "; Infiltrated Area = " + infiltratedArea + "\n");        
       }
+
+      textBox1.AppendText("\n");
+      textBox1.AppendText("Vol. Removed Street Storage\n");
+      textBox1.AppendText("------------------------------------\n");
+      foreach (var row in query)
+      {
+        Dictionary<string, ReportBase.Parameter> parameters = new Dictionary<string, ReportBase.Parameter>();
+        parameters.Add("FocusArea", new ReportBase.Parameter("FocusArea", row.FocusArea));
+        double streetStorageVol = rpReport.StormwaterRemovalVolStreetStorage(parameters);
+
+        textBox1.AppendText("Focus Area: " + row.FocusArea + "; Vol Remove: = " + streetStorageVol + "\n");
+      }
+
+
     }
   }
 }

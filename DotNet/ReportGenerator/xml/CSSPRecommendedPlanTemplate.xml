@@ -116,7 +116,7 @@
           </Function>
         </Cell>
         <Cell cellType="FUNCTION">
-          <Function functionName="VolumeStormwaterInfiltrated" library="RecommendedPlanReport" format="N0">
+          <Function functionName="StormwaterRemovalVol" library="RecommendedPlanReport" format="N0">
             <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
           </Function>
         </Cell>

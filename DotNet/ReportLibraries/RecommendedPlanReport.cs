@@ -17,6 +17,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
     private AltCompilerDataSet altCompilerDS;
     private string modelPath;
     private string alternativePath;
+    private string swmmOutputFile;
 
     public RecommendedPlanReport()
     {
@@ -50,6 +51,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
         auxilaryDataDescription = new Dictionary<string, string>();
         auxilaryDataDescription.Add("ModelPath", "Model Directory (Model.ini)");        
         auxilaryDataDescription.Add("AlternativePath", "Alternative Package (alternative_package.mdb)");
+        auxilaryDataDescription.Add("SwmmOutputFile", "Swmm Output File (*.out)");
       }
       public override bool RequiresAuxilaryData
       {
@@ -77,6 +79,8 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
       //modelPath = Path.GetDirectoryName(modelPath);
       alternativePath = AuxilaryData["AlternativePath"].Value;
       //alternativePath = Path.GetDirectoryName(alternativePath);
+      swmmOutputFile = AuxilaryData["SwmmOutputFile"].Value;
+      
             
       try
       {                
@@ -84,7 +88,8 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
         //Load ic_target tables into StormwaterControlsDataSet
         scDS = new StormwaterControlsDataSet();
         scDS.InitStormwaterControlDataSet(modelPath);
-        scDS.InitAltTargetDataTables(alternativePath);        
+        scDS.InitAltTargetDataTables(alternativePath);
+        scDS.InitResultsDataTables(swmmOutputFile);
       }
       catch (Exception ex)
       {
@@ -109,13 +114,96 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
       return 0;
     }
 
-    public double VolumeStormwaterInfiltrated(IDictionary<string, Parameter> parameters)
+
+    public double StormwaterRemovalVolStreetStorage(IDictionary<string, Parameter> parameters)
+    {
+      var query =
+        from tableE18 in scDS.TableE18
+        join icNode in scDS.ICNode
+        on tableE18.NodeName equals icNode.FacNode
+        join icStreetTargets in scDS.ic_StreetTargets
+        on icNode.FacNode equals icStreetTargets.XPSWMM_Name
+        join altStreetTargets in scDS.AltStreetTargets
+        on icStreetTargets.icID equals altStreetTargets.ICID        
+        group tableE18 by altStreetTargets.FocusArea into grpFocusArea
+        orderby grpFocusArea.Key
+        select new
+        {
+          FocusArea = grpFocusArea.Key,
+          StreetStorage = grpFocusArea.Sum(p => p.StorageVolumeCuFt)
+        };
+
+      if (query.Count() > 1)
+      {
+        throw new Exception("StormwaterVol returned more than one row");
+      }
+      else if (query.Count() == 0)
+      {
+        return 0;
+      }
+
+      return query.First().StreetStorage;
+    }
+
+    public double StormwaterRemovalVolStreetInfiltration(IDictionary<string, Parameter> parameters)
     {
       string focusArea;
-
       focusArea = parameters["FocusArea"].Value;
 
       return 0;
+    }
+
+    public double StormwaterRemovalVolRoofStorage(IDictionary<string, Parameter> parameters)
+    {
+      string focusArea;
+      focusArea = parameters["FocusArea"].Value;
+
+      return 0;
+    }
+
+    public double StormwaterRemovalVolRoofInfiltration(IDictionary<string, Parameter> parameters)
+    {
+      string focusArea;
+      focusArea = parameters["FocusArea"].Value;
+
+      return 0;
+    }
+
+    public double StormwaterRemovalVolParkStorage(IDictionary<string, Parameter> parameters)
+    {
+      string focusArea;
+      focusArea = parameters["FocusArea"].Value;
+
+      return 0;
+    }
+
+    public double StormwaterRemovalVolParkInfiltration(IDictionary<string, Parameter> parameters)
+    {
+      string focusArea;
+      focusArea = parameters["FocusArea"].Value;
+
+      return 0;
+    }
+
+
+    public double StormwaterRemovalVol(IDictionary<string, Parameter> parameters)
+    {
+      double volStreetStorage, volStreetInfiltration;
+      double volRoofStorage, volRoofInfiltration;
+      double volParkStorage, volParkInfiltration;
+
+      volStreetStorage = StormwaterRemovalVolStreetStorage(parameters);
+      volStreetInfiltration = StormwaterRemovalVolStreetInfiltration(parameters);
+
+      volRoofStorage = StormwaterRemovalVolRoofStorage(parameters);
+      volRoofInfiltration = StormwaterRemovalVolRoofInfiltration(parameters);
+
+      volParkStorage = StormwaterRemovalVolParkStorage(parameters);
+      volParkInfiltration = StormwaterRemovalVolParkInfiltration(parameters);
+
+      return volStreetStorage + volStreetInfiltration + 
+        volRoofStorage + volRoofInfiltration + 
+        volParkStorage + volParkInfiltration;
     }
 
     public double InfiltrateStormwaterArea(IDictionary<string, Parameter> parameters)
@@ -140,9 +228,13 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
           NetIA = grpFocusArea.Sum(p => p.c_netIMPacres)
         };
 
-      if (query.Count() != 1)
+      if (query.Count() > 1)
       {
         throw new Exception("InfiltratedArea returned more than one row");
+      }
+      else if (query.Count() == 0)
+      {
+        return 0;
       }
 
       return query.First().NetIA;
@@ -174,9 +266,13 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
           FacilityVolume = grpFocusArea.Sum(p => p.FacVolCuFt) / 0.75 / 43560,
         };
 
-      if (query.Count() != 1)
+      if (query.Count() > 1)
       {
         throw new Exception("HabitatArea returned more than one row");
+      }
+      else if (query.Count() == 0)
+      {
+        return 0;
       }
 
       return query.First().FacilityVolume;
