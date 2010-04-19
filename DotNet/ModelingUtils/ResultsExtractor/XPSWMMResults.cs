@@ -5,12 +5,12 @@ using System.IO;
 using System.Data.Odbc;
 using System.Data.OleDb;
 using SystemsAnalysis.Utils.AccessUtils;
-
+using System.Globalization;
 
 namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor
 {
   /// <summary>
-  /// Extracts results from a version 11.2-11.6 (Retail 9.0-10.6, Engine 8.87-10.60)
+  /// Extracts results from a version 11.2-12.0 (Retail 9.0-10.6, Engine 8.87-10.60)
   /// XP-SWMM output file. Will extract Table E09, Table E10, Table E18, Table E19 and Table E20. Output
   /// can be obtained through the GetTableXX() functions, which return strongly-typed 
   /// DataSets included in this assembly, or by calling WriteToAccessDatabase() which
@@ -137,11 +137,16 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor
       string[] tokens;
       string condName;
       double length;
+      string lenString;
       string condClass;
       double area;
+      string areaString;
       double manningsN;
+      string mannNString;
       double maxWidth;
+      string maxWidthString;
       double depth;
+      string depthString;
 
       do
       {
@@ -164,21 +169,39 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor
           tokens = currentLine.Split(new Char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
           condName = tokens[1];
-          length = Convert.ToDouble(tokens[2]);
+          lenString = tokens[2];
+          //length = Convert.ToDouble(tokens[2]);
+          length = Double.Parse(lenString, NumberStyles.Any, CultureInfo.InvariantCulture);
           condClass = tokens[3];
           if (condClass == "Closd")
           {
-            area = Convert.ToDouble(tokens[5]);
-            manningsN = Convert.ToDouble(tokens[6]);
-            maxWidth = Convert.ToDouble(tokens[7]);
-            depth = Convert.ToDouble(tokens[8]);
+            areaString = tokens[5];
+            //area = Convert.ToDouble(tokens[5]);
+            area = Double.Parse(areaString, NumberStyles.Any, CultureInfo.InvariantCulture);
+            mannNString = tokens[6];
+            //manningsN = Convert.ToDouble(tokens[6]);
+            manningsN = Double.Parse(mannNString, NumberStyles.Any, CultureInfo.InvariantCulture);
+            maxWidthString = tokens[7];
+            //maxWidth = Convert.ToDouble(tokens[7]);
+            maxWidth = Double.Parse(maxWidthString, NumberStyles.Any, CultureInfo.InvariantCulture);
+            depthString = tokens[8];
+            //depth = Convert.ToDouble(tokens[8]);
+            depth = Double.Parse(depthString, NumberStyles.Any, CultureInfo.InvariantCulture);
           }
           else
           {
-            area = Convert.ToDouble(tokens[4]);
-            manningsN = Convert.ToDouble(tokens[5]);
-            maxWidth = Convert.ToDouble(tokens[6]);
-            depth = Convert.ToDouble(tokens[7]);
+            areaString = tokens[4];
+            //area = Convert.ToDouble(tokens[4]);
+            area = Double.Parse(areaString, NumberStyles.Any, CultureInfo.InvariantCulture);
+            mannNString = tokens[5];
+            //manningsN = Convert.ToDouble(tokens[5]);
+            manningsN = Double.Parse(mannNString, NumberStyles.Any, CultureInfo.InvariantCulture);
+            maxWidthString = tokens[6];
+            //maxWidth = Convert.ToDouble(tokens[6]);
+            maxWidth = Double.Parse(maxWidthString, NumberStyles.Any, CultureInfo.InvariantCulture);
+            depthString = tokens[7];
+            //depth = Convert.ToDouble(tokens[7]);
+            depth = Double.Parse(depthString, NumberStyles.Any, CultureInfo.InvariantCulture);
           }
 
           tableE01.AddTableE01Row(condName, length, condClass, area, manningsN, maxWidth, depth);
@@ -188,7 +211,7 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor
       }
       catch (Exception ex)
       {
-        throw new Exception("Error parsing Table E01: " + ex.ToString());
+        throw new Exception("Error parsing Table E01: " + ex.Message);
       }
 
       return tableE01.Count;
@@ -200,14 +223,20 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor
       string[] tokens;
       string nodeName;
       double grElev;
+      string grElString;
       double maxCrown;
+      string maxCrownString;
       double maxJElev;
+      string maxJElString;
       double Hour;
       double Min;
       System.DateTime timeOfMax;
       double surcharge;
+      string surchString;
       double freeboard;
+      string freeBoardString;
       double maxArea;
+      string maxAreaString;
 
       do
       {
@@ -230,24 +259,36 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor
           tokens = currentLine.Split(new Char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
           nodeName = tokens[0];
-          grElev = Convert.ToDouble(tokens[1]);
-          maxCrown = Convert.ToDouble(tokens[2]);
-          maxJElev = Convert.ToDouble(tokens[3]);
+          grElString = tokens[1];
+          //grElev = Convert.ToDouble(tokens[1]);
+          grElev = Double.Parse(grElString, NumberStyles.Any, CultureInfo.InvariantCulture);
+          maxCrownString = tokens[2];
+          //maxCrown = Convert.ToDouble(tokens[2]);
+          maxCrown = Double.Parse(maxCrownString, NumberStyles.Any, CultureInfo.InvariantCulture);
+          maxJElString = tokens[3];
+          //maxJElev = Convert.ToDouble(tokens[3]);
+          maxJElev = Double.Parse(maxJElString, NumberStyles.Any, CultureInfo.InvariantCulture);
           Hour = Convert.ToDouble(tokens[4]);
           Min = Convert.ToDouble(tokens[5]);
           timeOfMax = this.beginDateTime.AddHours(Hour + Min / 60);
-          surcharge = Convert.ToDouble(tokens[6]);
-          freeboard = Convert.ToDouble(tokens[7]);
-          maxArea = Convert.ToDouble(tokens[8]);
+          surchString = tokens[6];
+          //surcharge = Convert.ToDouble(tokens[6]);
+          surcharge = Double.Parse(surchString, NumberStyles.Any, CultureInfo.InvariantCulture);
+          freeBoardString = tokens[7];
+          //freeboard = Convert.ToDouble(tokens[7]);
+          freeboard = Double.Parse(freeBoardString, NumberStyles.Any, CultureInfo.InvariantCulture);
+          maxAreaString = tokens[8];
+          //maxArea = Convert.ToDouble(tokens[8]);
+          maxArea = Double.Parse(maxAreaString, NumberStyles.Any, CultureInfo.InvariantCulture);
 
           tableE09.AddTableE09Row(nodeName, grElev, maxCrown, maxJElev, timeOfMax, surcharge, freeboard, maxArea);
 
           currentLine = outputReader.ReadLine();
         }
       }
-      catch (Exception)
+      catch (Exception ex)
       {
-        throw new Exception("Error parsing Table E09");
+        throw new Exception("Error parsing Table E09: "+ex.Message);
       }
 
       return tableE09.Count;
@@ -258,17 +299,27 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor
       string currentLine = "";
       string[] tokens;
       string condName;
+      string designQString;
       double designQ;
+      string designVString;
       double designV;
+      string maxDString;
       double maxD;
+      string maxQString;
       double maxQ;
+      string hourString;
       double Hour;
+      string minString;
       double Min;
       System.DateTime timeMaxQ;
+      string maxVString;
       double maxV;
       System.DateTime timeMaxV;
+      string qQRatioString;
       double qQRatio;
+      string maxUsElString;
       double maxUsElev;
+      string maxDsElString;
       double maxDsElev;
 
       do
@@ -301,20 +352,36 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor
               break;
             case 15:
               condName = tokens[0];
-              designQ = Convert.ToDouble(tokens[1]);
-              designV = Convert.ToDouble(tokens[2]);
-              maxD = Convert.ToDouble(tokens[3]);
-              maxQ = Convert.ToDouble(tokens[4]);
+              designQString = tokens[1];
+              //designQ = Convert.ToDouble(tokens[1]);
+              designQ = Double.Parse(designQString, NumberStyles.Any, CultureInfo.InvariantCulture);
+              designVString = tokens[2];
+              //designV = Convert.ToDouble(tokens[2]);
+              designV = Double.Parse(designVString, NumberStyles.Any, CultureInfo.InvariantCulture);
+              maxDString = tokens[3];
+              //maxD = Convert.ToDouble(tokens[3]);
+              maxD = Double.Parse(maxDString, NumberStyles.Any, CultureInfo.InvariantCulture);
+              maxQString = tokens[4];
+              //maxQ = Convert.ToDouble(tokens[4]);
+              maxQ = Double.Parse(maxQString, NumberStyles.Any, CultureInfo.InvariantCulture);
               Hour = Convert.ToInt32(tokens[5]);
               Min = Convert.ToInt32(tokens[6]);
               timeMaxQ = this.beginDateTime.AddHours(Hour + Min / 60);
-              maxV = Convert.ToDouble(tokens[7]);
+              maxVString = tokens[7];
+              //maxV = Convert.ToDouble(tokens[7]);
+              maxV = Double.Parse(maxVString, NumberStyles.Any, CultureInfo.InvariantCulture);
               Hour = Convert.ToInt32(tokens[8]);
               Min = Convert.ToInt32(tokens[9]);
               timeMaxV = this.beginDateTime.AddHours(Hour + Min / 60);
-              qQRatio = Convert.ToDouble(tokens[10]);
-              maxUsElev = Convert.ToDouble(tokens[11]);
-              maxDsElev = Convert.ToDouble(tokens[12]);
+              qQRatioString = tokens[10];
+              //qQRatio = Convert.ToDouble(tokens[10]);
+              qQRatio = Double.Parse(qQRatioString, NumberStyles.Any, CultureInfo.InvariantCulture);
+              maxUsElString = tokens[11];
+              //maxUsElev = Convert.ToDouble(tokens[11]);
+              maxUsElev = Double.Parse(maxUsElString, NumberStyles.Any, CultureInfo.InvariantCulture);
+              maxDsElString = tokens[12];
+              //maxDsElev = Convert.ToDouble(tokens[12]);
+              maxDsElev = Double.Parse(maxDsElString, NumberStyles.Any, CultureInfo.InvariantCulture);
 
               tableE10.AddTableE10Row(condName, designQ, designV, maxD, maxQ, timeMaxQ, maxV, timeMaxV, qQRatio, maxUsElev, maxDsElev);
               break;
@@ -337,6 +404,7 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor
       string currentLine = "";
       string[] tokens;
       string nodeName;
+      string stoVolString;
       double storageVolumeCuFt;
 
       do
@@ -360,16 +428,18 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor
         {
           tokens = currentLine.Split(new Char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
           nodeName = tokens[0];
-          storageVolumeCuFt = Convert.ToDouble(tokens[4]);
+          stoVolString = tokens[4];
+          storageVolumeCuFt = Double.Parse(stoVolString, NumberStyles.Any, CultureInfo.InvariantCulture);
+          //storageVolumeCuFt = Convert.ToDouble(tokens[4]);
 
           tableE18.AddTableE18Row(nodeName, storageVolumeCuFt);
           currentLine = outputReader.ReadLine();
         }
       }
 
-      catch (Exception)
+      catch (Exception ex)
       {
-        throw new Exception("Error parsing Table E18");
+        throw new Exception("Error parsing Table E18: "+ ex.Message);
       }
 
       return tableE18.Count;
@@ -380,6 +450,7 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor
       string currentLine = "";
       string[] tokens;
       string nodeName;
+      string infilVolString;
       double infiltrationVolumeCuFt;
 
       do
@@ -403,19 +474,24 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor
         {
           tokens = currentLine.Split(new Char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
           nodeName = tokens[0];
-          infiltrationVolumeCuFt = Convert.ToDouble(tokens[7]);
+          infilVolString = tokens[7];
+          infiltrationVolumeCuFt = Double.Parse(infilVolString, NumberStyles.Any,CultureInfo.InvariantCulture);
 
           tableE19.AddTableE19Row(nodeName, infiltrationVolumeCuFt);
           currentLine = outputReader.ReadLine();
         }
       }
 
-      catch (Exception)
+      catch (Exception ex)
       {
-        throw new Exception("Error parsing Table E19");
+        throw new Exception("Error Parsing Table E19: " + ex.Message);
       }
+      finally
+      {
 
+      }
       return tableE19.Count;
+      
     }
 
     private int ExtractTableE20()
@@ -424,10 +500,15 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor
       string[] tokens;
 
       string nodeName;
+      string surchTimeString;
       double surchargeTime;
+      string floodTimeString;
       double floodedTime;
+      string floodVolString;
       double floodVol;
+      string maxStorVolString;
       double maxStoredVol;
+      string pondVolString;
       double pondingVol;
 
       do
@@ -451,20 +532,30 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor
           tokens = currentLine.Split(new Char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
           nodeName = tokens[0];
-          surchargeTime = Convert.ToDouble(tokens[1]);
-          floodedTime = Convert.ToDouble(tokens[2]);
-          floodVol = Convert.ToDouble(tokens[3]);
-          maxStoredVol = Convert.ToDouble(tokens[4]);
-          pondingVol = Convert.ToDouble(tokens[5]);
+          surchTimeString = tokens[1];
+          surchargeTime = Double.Parse(surchTimeString, NumberStyles.Any, CultureInfo.InvariantCulture);
+          //surchargeTime = Convert.ToDouble(tokens[1]);
+          floodTimeString = tokens[2];
+          floodedTime = Double.Parse(floodTimeString, NumberStyles.Any, CultureInfo.InvariantCulture);
+          //floodedTime = Convert.ToDouble(tokens[2]);
+          floodVolString = tokens[3];
+          floodVol = Double.Parse(floodVolString, NumberStyles.Any, CultureInfo.InvariantCulture);
+          //floodVol = Convert.ToDouble(tokens[3]);
+          maxStorVolString = tokens[4];
+          maxStoredVol = Double.Parse(maxStorVolString, NumberStyles.Any, CultureInfo.InvariantCulture);
+          //maxStoredVol = Convert.ToDouble(tokens[4]);
+          pondVolString = tokens[5];
+          pondingVol = Double.Parse(pondVolString, NumberStyles.Any, CultureInfo.InvariantCulture);
+          //pondingVol = Convert.ToDouble(tokens[5]);
 
           tableE20.AddTableE20Row(nodeName, surchargeTime, floodedTime, floodVol, maxStoredVol, pondingVol);
 
           currentLine = outputReader.ReadLine();
         }
       }
-      catch (Exception)
+      catch (Exception ex)
       {
-        throw new Exception("Error parsing Table E20");
+        throw new Exception("Error parsing Table E20: "+ex.Message);
       }
 
       return tableE20.Count;
