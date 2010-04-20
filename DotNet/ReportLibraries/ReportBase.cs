@@ -87,7 +87,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
       m = this.GetType().GetMethod(functionName);
       if (m == null) { return "Function '" + functionName + "'  not found"; }
       IFormattable formattable;
-      object[] o = new object[parameters.Count];      
+      object[] o = new object[parameters.Count];
 
       switch (m.ReturnParameter.ParameterType.Name.ToUpper())
       {
@@ -152,7 +152,8 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
         this.name = name;
         this.value = value;
       }
-      public Parameter(string name, string value, string op, string formatString) : this(name, value)
+      public Parameter(string name, string value, string op, string formatString)
+        : this(name, value)
       {
         this.op = op;
         this.formatString = formatString;
