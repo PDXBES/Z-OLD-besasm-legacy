@@ -13,6 +13,8 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
 {
   public class RecommendedPlanReport : ReportBase
   {
+      const double SQ_FT_PER_ACRE = 43560;
+
     private StormwaterControlsDataSet scDS;
     private AltCompilerDataSet altCompilerDS;
     private string modelPath;
@@ -113,7 +115,6 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
       return 0;
     }
 
-
     public double StormwaterRemovalVolStreetStorage(IDictionary<string, Parameter> parameters)
     {
       string focusArea;
@@ -147,7 +148,6 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
 
       return query.First().StreetStorage;
     }
-
     public double StormwaterRemovalVolStreetInfiltration(IDictionary<string, Parameter> parameters)
     {
       string focusArea;
@@ -265,7 +265,6 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
       }
       return roofTargetsPlant;
     }
-
     public double RoofBioStorageVolume(IDictionary<string, Parameter> parameters)
     {
       string focusArea;
@@ -418,10 +417,10 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
           FocusArea = grpNodeName.Key.FocusArea,
           NodeName = grpNodeName.Key.NodeName
         };
-      
+
       //Roof Bioinfiltration Storage - Filtered and grouped by Focus Area
       var qryParkTargetsBio =
-        from query1 in qryParkTargetsBioGroupByFacNodeName        
+        from query1 in qryParkTargetsBioGroupByFacNodeName
         join tableE18 in scDS.TableE18
         on query1.NodeName equals tableE18.NodeName
         where query1.FocusArea == focusArea
@@ -524,7 +523,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
       string focusArea;
       focusArea = parameters["FocusArea"].Value;
 
-      var query =
+      var qryInfiltrationAreaStreet =
         from icNode in scDS.ICNode
         join icStreetTarget in scDS.ic_StreetTargets
         on icNode.FacNode equals icStreetTarget.XPSWMM_Name
@@ -541,16 +540,73 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
           NetIA = grpFocusArea.Sum(p => p.c_netIMPacres)
         };
 
-      if (query.Count() > 1)
+      double infiltrationAreaStreet = 0;
+      if (qryInfiltrationAreaStreet.Count() > 1)
       {
-        throw new Exception("InfiltratedArea returned more than one row");
+        throw new Exception("InfiltrationStreetdArea returned more than one row");
       }
-      else if (query.Count() == 0)
+      else if (qryInfiltrationAreaStreet.Count() != 0)
       {
-        return 0;
+        infiltrationAreaStreet = qryInfiltrationAreaStreet.First().NetIA;
       }
 
-      return query.First().NetIA;
+      var qryInfiltrationAreaRoof =
+        from mdlDsc in scDS.mdl_dirsc_ac
+        join icRoofTargets in scDS.ic_RoofTargets
+        on mdlDsc.DSCID equals icRoofTargets.dscID
+        join altRoofTargets in scDS.AltRoofTargets
+        on icRoofTargets.icID equals altRoofTargets.ICID
+        join mdlRoofTargets in scDS._mdl_roofTargets
+        on icRoofTargets.dscID equals mdlRoofTargets.dscID
+        where icRoofTargets.constructed == 0 &&
+          icRoofTargets.buildModelIC &&
+          altRoofTargets.FocusArea == focusArea          
+        group mdlRoofTargets by altRoofTargets.FocusArea into grpFocusArea        
+        select new
+        {
+          FocusArea = grpFocusArea.Key,
+          InfiltrationAreaRoof = grpFocusArea.Sum(p => p.SqFt_Bioret + p.SqFt_Drywell + p.SqFt_Eco + p.SqFt_Plntr + p.SqFt_Veg)          
+        };
+
+      double infiltrationAreaRoof = 0;
+      if (qryInfiltrationAreaRoof.Count() > 1)
+      {
+        throw new Exception("InfiltrationRoofArea returned more than one row");
+      }
+      else if (qryInfiltrationAreaRoof.Count() != 0)
+      {
+        infiltrationAreaRoof = qryInfiltrationAreaRoof.First().InfiltrationAreaRoof;
+      }
+
+      var qryInfiltrationAreaPark =
+        from mdlDsc in scDS.mdl_dirsc_ac
+        join icParkTargets in scDS.ic_ParkingTargets
+        on mdlDsc.DSCID equals icParkTargets.dscID
+        join altParkTargets in scDS.AltParkingTargets
+        on icParkTargets.icID equals altParkTargets.ICID
+        join mdlParkTargets in scDS._mdl_ParkingTargets
+        on icParkTargets.dscID equals mdlParkTargets.dscID
+        where icParkTargets.constructed == 0 &&
+          icParkTargets.buildModelIC &&
+          altParkTargets.FocusArea == focusArea
+        group mdlParkTargets by altParkTargets.FocusArea into grpFocusArea
+        select new
+        {
+          FocusArea = grpFocusArea.Key,
+          InfiltrationAreaPark = grpFocusArea.Sum(p => p.SqFt_Bioret) / SQ_FT_PER_ACRE
+        };
+
+      double infiltrationAreaPark = 0;
+      if (qryInfiltrationAreaPark.Count() > 1)
+      {
+        throw new Exception("InfiltrationParkArea returned more than one row");
+      }
+      else if (qryInfiltrationAreaPark.Count() != 0)
+      {
+        infiltrationAreaPark = qryInfiltrationAreaPark.First().InfiltrationAreaPark;
+      }
+
+      return infiltrationAreaStreet + infiltrationAreaRoof + infiltrationAreaPark;
 
     }
 
