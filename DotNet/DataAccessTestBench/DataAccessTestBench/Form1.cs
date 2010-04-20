@@ -103,7 +103,7 @@ namespace DataAccessTestBench
     {
       textBox1.Clear();
 
-      textBox1.AppendText("Infiltrate Stormwater\n");
+      textBox1.AppendText("Infiltrate Stormwater Area\n");
       textBox1.AppendText("------------------------------------\n");
 
       var query =
@@ -125,7 +125,7 @@ namespace DataAccessTestBench
       }
 
       textBox1.AppendText("\n");
-      textBox1.AppendText("Protect and Improve Terrestrial Habitat\n");
+      textBox1.AppendText("Protect and Improve Terrestrial Habitat Area\n");
       textBox1.AppendText("------------------------------------\n");
       foreach (var row in query)
       {
@@ -180,6 +180,30 @@ namespace DataAccessTestBench
         Dictionary<string, ReportBase.Parameter> parameters = new Dictionary<string, ReportBase.Parameter>();
         parameters.Add("FocusArea", new ReportBase.Parameter("FocusArea", row.FocusArea));
         double stormwaterRemovalVol = rpReport.RoofBioInfiltrationVolume(parameters);
+
+        textBox1.AppendText("Focus Area: " + row.FocusArea + "; Vol Remove: = " + stormwaterRemovalVol + "\n");
+      }
+
+      textBox1.AppendText("\n");
+      textBox1.AppendText("Park Bio Storage Volume\n");
+      textBox1.AppendText("------------------------------------\n");
+      foreach (var row in query)
+      {
+        Dictionary<string, ReportBase.Parameter> parameters = new Dictionary<string, ReportBase.Parameter>();
+        parameters.Add("FocusArea", new ReportBase.Parameter("FocusArea", row.FocusArea));
+        double stormwaterRemovalVol = rpReport.ParkBioStorageVolume(parameters);
+
+        textBox1.AppendText("Focus Area: " + row.FocusArea + "; Vol Remove: = " + stormwaterRemovalVol + "\n");
+      }
+
+      textBox1.AppendText("\n");
+      textBox1.AppendText("Park Bio Infiltration Volume\n");
+      textBox1.AppendText("------------------------------------\n");
+      foreach (var row in query)
+      {
+        Dictionary<string, ReportBase.Parameter> parameters = new Dictionary<string, ReportBase.Parameter>();
+        parameters.Add("FocusArea", new ReportBase.Parameter("FocusArea", row.FocusArea));
+        double stormwaterRemovalVol = rpReport.ParkBioInfiltrationVolume(parameters);
 
         textBox1.AppendText("Focus Area: " + row.FocusArea + "; Vol Remove: = " + stormwaterRemovalVol + "\n");
       }

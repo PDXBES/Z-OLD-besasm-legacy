@@ -290,7 +290,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
       var qryRoofTargetsBioGroupByFacNodeName =
         from tableE18 in scDS.TableE18
         join icNode in scDS.ICNode
-        on tableE18.NodeName equals icNode.OutfallNode
+        on tableE18.NodeName equals icNode.FacNode
         join altRoofTargets in scDS.AltRoofTargets
         on icNode.RefNode equals altRoofTargets.NGToRoof
         where icNode.Factype == "B" && altRoofTargets.BuildModelIC && altRoofTargets.Constructed == 0
@@ -305,11 +305,11 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
       var qryRoofTargetsBio =
         from roof in qryRoofTargetsBioGroupByFacNodeName
         join park in qryParkTargetsBioGroupByFacNodeName
-        on roof.NodeName equals park.NodeName into parkJoin        
-        from parkSub in parkJoin.DefaultIfEmpty()        
+        on roof.NodeName equals park.NodeName into parkJoin
+        from parkSub in parkJoin.DefaultIfEmpty() //use to create LINQ left outer join
         join tableE18 in scDS.TableE18
         on roof.NodeName equals tableE18.NodeName into e18Join
-        from e18Sub in e18Join.DefaultIfEmpty()
+        from e18Sub in e18Join.DefaultIfEmpty() //use to create LINQ left outer join
         where roof.FocusArea == focusArea && parkSub == null
         group e18Sub by roof.FocusArea into grpFocusArea
         select new
@@ -399,56 +399,6 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
       return roofTargetsBio;
     }
 
-    public double ParkPlanterStorageVolume(IDictionary<string, Parameter> parameters)
-    {
-      string focusArea;
-      focusArea = parameters["FocusArea"].Value;
-      //Roof Planter Storage - Grouped By Node Name
-      var qryRoofTargetsPlantGroupByFacNodeName =
-        from tableE18 in scDS.TableE18
-        join icNode in scDS.ICNode
-        on tableE18.NodeName equals icNode.FacNode
-        join altRoofTargets in scDS.AltRoofTargets
-        on icNode.RefNode equals altRoofTargets.NGToRoof
-        where (icNode.Factype == "P" && altRoofTargets.BuildModelIC && altRoofTargets.Constructed == 0)
-        group tableE18 by new { altRoofTargets.FocusArea, tableE18.NodeName } into grpNodeName
-        select new
-        {
-          FocusArea = grpNodeName.Key.FocusArea,
-          NodeName = grpNodeName.Key.NodeName
-        };
-
-      //Roof Planter Storage - Filtered and grouped by Focus Area
-      var qryRoofTargetsPlant =
-        from tableE18 in scDS.TableE18
-        join query1 in qryRoofTargetsPlantGroupByFacNodeName
-        on tableE18.NodeName equals query1.NodeName
-        where query1.FocusArea == focusArea
-        group tableE18 by query1.FocusArea into grpFocusArea
-        select new
-        {
-          FocusArea = grpFocusArea.Key,
-          StorageVolume = grpFocusArea.Sum(p => p.StorageVolumeCuFt)
-        };
-
-      if (qryRoofTargetsPlant.Count() > 1)
-      {
-        throw new Exception("RoofPlanterStorageVol returned more than one row");
-      }
-
-      double roofTargetsPlant = 0;
-      if (qryRoofTargetsPlant.Count() != 0)
-      {
-        roofTargetsPlant = qryRoofTargetsPlant.First().StorageVolume;
-      }
-
-      return roofTargetsPlant;
-    }
-    public double ParkPlanterInfiltrationVolume(IDictionary<string, Parameter> parameters)
-    {
-      return 0;
-    }
-
     public double ParkBioStorageVolume(IDictionary<string, Parameter> parameters)
     {
       string focusArea;
@@ -468,30 +418,13 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
           FocusArea = grpNodeName.Key.FocusArea,
           NodeName = grpNodeName.Key.NodeName
         };
-
-      //Roof Bioinfiltration Storage - Grouped by Node Name
-      var qryRoofTargetsBioGroupByFacNodeName =
-        from tableE18 in scDS.TableE18
-        join icNode in scDS.ICNode
-        on tableE18.NodeName equals icNode.OutfallNode
-        join altRoofTargets in scDS.AltRoofTargets
-        on icNode.RefNode equals altRoofTargets.NGToRoof
-        where icNode.FacNode == "B" && altRoofTargets.BuildModelIC && altRoofTargets.Constructed == 0
-        group tableE18 by new { altRoofTargets.FocusArea, tableE18.NodeName } into grpNodeName
-        select new
-        {
-          FocusArea = grpNodeName.Key.FocusArea,
-          NodeName = grpNodeName.Key.NodeName
-        };
-
+      
       //Roof Bioinfiltration Storage - Filtered and grouped by Focus Area
-      var qryRoofTargetsBio =
-        from query1 in qryParkTargetsBioGroupByFacNodeName
-        join query2 in qryRoofTargetsBioGroupByFacNodeName
-        on query1.NodeName equals query2.NodeName
+      var qryParkTargetsBio =
+        from query1 in qryParkTargetsBioGroupByFacNodeName        
         join tableE18 in scDS.TableE18
-        on query2.NodeName equals tableE18.NodeName
-        where query2.FocusArea == focusArea
+        on query1.NodeName equals tableE18.NodeName
+        where query1.FocusArea == focusArea
         group tableE18 by query1.FocusArea into grpFocusArea
         select new
         {
@@ -499,31 +432,72 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
           StorageVolume = grpFocusArea.Sum(p => p.StorageVolumeCuFt)
         };
 
-      if (qryRoofTargetsBio.Count() > 1)
+      if (qryParkTargetsBio.Count() > 1)
       {
-        throw new Exception("RoofPlanterInfiltrationVol returned more than one row");
+        throw new Exception("ParkBioStorageVol returned more than one row");
       }
 
-      double roofTargetsBio = 0;
-      if (qryRoofTargetsBio.Count() != 0)
+      double parkTargetsBio = 0;
+      if (qryParkTargetsBio.Count() != 0)
       {
-        roofTargetsBio = qryRoofTargetsBio.First().StorageVolume;
+        parkTargetsBio = qryParkTargetsBio.First().StorageVolume;
       }
 
-      return roofTargetsBio;
+      return parkTargetsBio;
     }
     public double ParkBioInfiltrationVolume(IDictionary<string, Parameter> parameters)
     {
-      return 0;
+      string focusArea;
+      focusArea = parameters["FocusArea"].Value;
+
+      //Parking Bioinfiltration Storage - Grouped by Node Name
+      var qryParkTargetsBioGroupByFacNodeName =
+        from tableE19 in scDS.TableE19
+        join icNode in scDS.ICNode
+        on tableE19.NodeName equals icNode.OutfallNode
+        join altParkingTargets in scDS.AltParkingTargets
+        on icNode.RefNode equals altParkingTargets.NGTo
+        where icNode.Factype == "B" && altParkingTargets.BuildModelIC && altParkingTargets.Constructed == 0
+        group tableE19 by new { altParkingTargets.FocusArea, tableE19.NodeName } into grpNodeName
+        select new
+        {
+          FocusArea = grpNodeName.Key.FocusArea,
+          NodeName = grpNodeName.Key.NodeName
+        };
+
+      //Roof Bioinfiltration Storage - Filtered and grouped by Focus Area
+      var qryParkTargetsBio =
+        from query1 in qryParkTargetsBioGroupByFacNodeName
+        join tableE19 in scDS.TableE19
+        on query1.NodeName equals tableE19.NodeName
+        where query1.FocusArea == focusArea
+        group tableE19 by query1.FocusArea into grpFocusArea
+        select new
+        {
+          FocusArea = grpFocusArea.Key,
+          InfiltrationVolume = grpFocusArea.Sum(p => p.InfiltrationVolumeCuFt)
+        };
+
+      if (qryParkTargetsBio.Count() > 1)
+      {
+        throw new Exception("ParkBioStorageVol returned more than one row");
+      }
+
+      double parkTargetsBio = 0;
+      if (qryParkTargetsBio.Count() != 0)
+      {
+        parkTargetsBio = qryParkTargetsBio.First().InfiltrationVolume;
+      }
+
+      return parkTargetsBio;
     }
-    
+
     public double StormwaterRemovalVol(IDictionary<string, Parameter> parameters)
     {
       double volStreetStorage, volStreetInfiltration;
       double volRoofPlantStorage, volRoofPlantInfiltration;
       double volRoofBioStorage, volRoofBioInfiltration;
 
-      double volParkPlantStorage, volParkPlantInfiltration;
       double volParkBioStorage, volParkBioInfiltration;
 
       volStreetStorage = StormwaterRemovalVolStreetStorage(parameters);
@@ -535,16 +509,12 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
       volRoofBioStorage = RoofBioStorageVolume(parameters);
       volRoofBioInfiltration = RoofBioInfiltrationVolume(parameters);
 
-      volParkPlantStorage = ParkPlanterStorageVolume(parameters);
-      volParkPlantInfiltration = ParkPlanterInfiltrationVolume(parameters);
-
       volParkBioStorage = ParkBioStorageVolume(parameters);
       volParkBioInfiltration = ParkBioInfiltrationVolume(parameters);
 
       return volStreetStorage + volStreetInfiltration +
         volRoofPlantStorage + volRoofPlantInfiltration +
         volRoofBioStorage + volRoofBioInfiltration +
-        volParkPlantStorage + volParkPlantInfiltration +
         volParkBioStorage + volParkBioInfiltration;
 
     }
