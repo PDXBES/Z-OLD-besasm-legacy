@@ -1,0 +1,1215 @@
+'*******************************************************************
+'* Program Name:  AltPipXP.mbx
+'*
+'* Description/Purpose:   
+'* Creates a table of proximity information for modeling alternative pipes;
+'* Modified version Pip_xpDat_v96.mbx for application to modeling alternative pipes;
+'* This routine runs spatial queries to determine proximity of pipes to other adjacent facilities
+'* and was created as a support routine for alternative costing analysis;
+'* Created By:    Albert Tabino, Systems Analysis, BES
+'* Date:          05/09/08
+'* 
+'* Source:
+'* ==>\\Oberon\grp117\_ATtemp\_MITools\PipXP\source\Pip_xpDat_v96.mb
+'* Revisions:
+'* ==>05/21/08-eliminatied buffering for water and Bldg;
+'* ==>05/21/08-implemented prebuffering and opening tables;
+'* ==>05/21/08-eliminated creating local tables
+'* ==>06/09/08-Saved previous version as AltPipXPv94.mb
+'* ==>06/09/08-included areaoverlap for environmental zoning
+'* ==>06/10/08-Fields added xPipSlope, xEzAreaC, xEzAreaP
+'* ==>06/12/08-included volume for hazardous material(ECSI)
+'* ==>06/14/08-Added fields xEcsiLen, xEcsiVol
+'* ==>06/23/08-Addressed other crossing Mst_Links_ac facilities
+'* ==>12/11/08-Addressed error msg per AMM 
+'===================================================================
+INCLUDE "mapbasic.def"
+INCLUDE "menu.def"
+'Include "C:\Program Files\MapInfo\MapBasic65\SAMPLES\MAPBASIC\INC\auto_Lib.def"
+'include "C:\Program Files\MapInfo\MapBasic65\SAMPLES\MAPBASIC\INC\MISTDLIB.DEF"
+
+
+DECLARE SUB MAIN
+DECLARE SUB RunXP
+DECLARE SUB GetPaths
+DECLARE SUB MakTbl
+DECLARE Sub GetXPdat
+	(
+	ByVal sBuffType as integer,
+	ByVal iDoCase as integer,
+	ByVal sAlias as string,
+	ByVal iStart as integer,
+	ByVal iStop as integer,
+	ByVal iStep as integer,
+	ByVal sUpdtFld1 as string,
+	ByVal sUpdtFld2 as string,
+	ByVal sUpdtFld3 as string,
+	ByVal sUpdtFld4 as string,
+	ByVal sUpdtFld5 as string
+ 	)
+DIM tStart as string
+DIM sAppPath as string
+DIM sAltPath as string
+DIM sTmpPath as string
+DIM oMbr as object
+DIM oBuffer as Object 
+DIM objTmp as Object 
+DIM iBuff as integer
+DIM sTbl as string
+DIM sInputTbl as string
+DIM sOutputTbl as string
+DIM sOutputPath as string
+DIM sTblName as string
+DIM sFld as string
+DIM DoStr as string
+DIM cTmp as string
+DIM sCase as string
+DIM sUSER as string
+DIM iLoop as integer
+DIM iNum as integer
+DIM testing as integer
+dim sTblPath as string
+
+'=========================================================================================================
+SUB MAIN
+'=========================================================================================================
+tStart = time(12)
+
+Print ""
+Print "======================"
+Print tStart + "...STARTING ROUTINE!"
+Set CoordSys Earth Projection 3, 33, "ft", -120.5, 43.6666666667, 44.3333333333, 46, 8202099.7379999999, 0
+Set distance units "ft"
+
+Set window message
+	Position(0.25,2.25) units "in"
+	Width 4.0 Height 6.0 units "in"
+
+sTblPath ="\\Cassio\Gis3\Projects_Arc\mst_PIPxp\Data\MI\Tbls\"
+
+'DIRECTORY LOCATION OF APPLICATION(MBX) FILE
+	sAppPath= ApplicationDirectory$()
+	Print "sAppPath: " + sAppPath
+
+'DETERMINING USERNAME AND USER SPECIFIC DIRECTORY 
+'WHERE PROCESSING FILES AND OUTPUT WILL BE STORED
+	Call GetPaths
+
+'OPENING TABLE CONTAINING PARAMETERS FOR XP ROUTINE 
+'THIS TABLE SHOULD BE IN THE SAME DIRECTORY AS MBX FILE
+	Open Table str$(sAppPath + "ListOfTbls")as Tbl2Copy Interactive
+	Call MakTbl
+	Commit table TblList
+
+'EXTRACTING PROXIMITY INFORMATION
+	Call RunXP
+
+'UPDATING OUTPUT TABLE WITH ALTERNATIVE PIPXP ATTRIBUTES
+Select * from OutputTbl where AltLinkID in(Select AltLinkID from Altpips) into QyUpdt 
+FOR iLoop = 6 to Tableinfo(QyUpdt,4)
+	sFld= Columninfo(QyUpdt, "col" + iLoop, 1)
+	DoStr= "Add Column QyUpdt(" + sFld +") from AltPips set to " + sFld +" where AltLinkID = AltLinkID"
+	Run Command DoStr	
+NEXT
+	Commit table OutputTbl
+	Commit table AltPips
+'	Close all interactive		'(CLOSE ALL TABLES )
+'	RUN MENU COMMAND 113	 '(CLOSE  MAPINFO SESSION)
+
+END SUB
+'=========================================================================================================
+Sub GetPaths
+'=========================================================================================================
+'
+'=====>DETERMINING USER LOCAL APP DIRECTORY
+sTmpPath =  GetFolderPath$(FOLDER_LOCAL_APPDATA)
+	IF Right$(sTmpPath ,1) = "\" THEN
+		sTmpPath = sTmpPath + "AltPipXP\"
+	ELSE
+		sTmpPath = sTmpPath + "\AltPipXP\"
+	END IF
+
+	
+'=====>DETERMINING USER NAME
+iNum = InStr(1,sTmpPath,"Settings\")		
+sUser = Mid$( sTmpPath, iNum + 9, len(sTmpPath))
+iNum = InStr(1,sUser, "\Local")
+sUser = Left$(sUser, iNum-1)
+print "-------------------------------"
+print "USER: " + sUSER 
+print "DIR_TMP: " + sTmpPath
+
+'=====>DETERMINING PATH TO ALTERNATIVE FROM INI FILE
+IF NOT FileExists(sTmpPath + "altpipxp.ini") THEN
+	Note sTmpPath + "altpipxp.ini  does not exist!"
+	End Program 
+END IF
+
+Open File sTmpPath + "altpipxp.ini" for Input As #99
+
+DO WHILE not EOF(99)
+	Input #99, sAltPath
+	IF sAltPath LIKE "%Path%" THEN
+		Exit Do
+	END IF 
+	'print ">" + sAltPath
+LOOP
+
+iNum =instr(1,sAltPath,chr$(34))
+sAltPath = mid$(sAltPath, iNum+1,250)
+sAltPath = Left$(sAltPath, Len(sAltPath)-1)
+Print "DIR_ALT: " + sAltPath
+print "-------------------------------" 
+
+END SUB
+
+'=========================================================================================================
+SUB MAKTBL
+'=========================================================================================================
+print "Initializing Tables..." + Time(12)
+OnError GOTO  ErrPass
+
+'COPYING PARAMETERS TABLE TO LOCAL TEMP DIRECTORY
+Commit table "Tbl2Copy" as sTmpPath + "TblList.TAB"
+	TYPE NATIVE Charset "WindowsLatin1"
+
+Open table sTmpPath + "TblList.TAB" interactive
+Close Table Tbl2Copy
+
+'=====>UPDATING TABLE LIST WITH PATH TO ALTERNATIVE PIPES  
+Select * from TblList where LstAlias= "InTbl" into QyText
+Update QyText set 
+	sText = sAltPath + "\alt_links_ac.tab",
+	GetFld= "AltLinkID"
+
+'=====>UPDATING TABLE LIST WITH PATH TO OUTPUT PIPXP DATA
+Select * from TblList where LstAlias= "OutTbl" into QyText
+Update QyText set 
+	sText = sAltPath + "\alt_PipXP_ac.tab"
+
+'=====>SETTING TEMPORARY DIRECTORY PATH TO "C:\DOCUMENT...."
+Select * from TblList where LstAlias= "cTmp" into QyText
+Update QyText set 
+	sText = sTmpPath
+Commit table TblList
+
+'=====>OPENING ALT PIPES TABLE FROM LIST(i.e. "AltPips")
+	Select sText from TblList where LstAlias= "InTbl" into QyText
+		sInputTbl= QyText.col1 
+		Print "InputTbl:" + sInputTbl
+		Open table sInputTbl as InputTbl Interactive
+
+dim iSlash1 as integer
+dim iSlash2 as integer
+'dim iLenStr as integer
+dim sChar as string
+dim iLen as integer
+dim sPath as string
+
+	sPath= sAltPath
+	iLen = Len(sAltPath)
+
+	iSlash1 = 0
+
+For iLoop= 1 to iLen
+	sChar = mid$(sPath,iLen-iLoop,1)
+	IF sChar="\" then
+		iSlash1= iSlash1+1
+	END IF 
+	IF iSlash1=2 THEN
+		IF sChar="\" then
+			iSlash2 = iLoop
+			exit for
+		END IF 
+	END IF
+   sPath = Left$(sPath, ilen-iLoop) 
+Next
+
+sPath = Left$(sAltPath, iLen-iSlash2) 
+
+'=====>PREPARING TABLE STRUCTURE OF OUTPUT TABLE
+	Select GetFld + ", UsNode, DsNode" from TblList where LstAlias= "InTbl" into QyText
+		sFld= QyText.col1  
+		Print "UniqueID Field..." + sFld
+
+	Select sText from TblList where LstAlias= "cTmp" into QyText
+		cTmp= QyText.col1 
+
+	Select sText from TblList where LstAlias= "OutTbl" into QyText
+		sOutputTbl = QyText.col1 
+
+		DoStr = "Select " + sFld + " from InputTbl into QySaver Noselect"
+		RUN COMMAND DoStr
+
+'=====>OPENING MASTER/MODEL TABLES TO RETRIEVE ATTRIBUTES
+Open table "\\Cassio\modeling\SAMaster_22\Links\mst_PipXP_ac.TAB" interactive
+Open table "\\Cassio\modeling\SAMaster_22\Links\mst_Links_ac.TAB" as MLA interactive
+
+		Commit Table QySaver As sOutputTbl TYPE NATIVE Charset "WindowsLatin1"
+		Open Table sOutputTbl Interactive
+		sOutputPath=sOutputTbl	
+
+		sOutputTbl= tableinfo(numtables(),1)
+		sOutputPath= left$(sOutputPath, len(sOutputPath)-(len(sOutputTbl)+4))
+
+			Print "OutPath: " + sOutputPath  
+			Print "OutTable: " + sOutputTbl  
+
+'=====>'CONVERTING OUTPUT TABLE TO ACCESS BASED TABLE
+		Close Table tableinfo(numtables(),1)
+		Commit Table QySaver As 
+			Str$(sOutputPath + sOutputTbl+ ".TAB") 
+			Type ACCESS Database 
+			Str$(sOutputPath + sOutputTbl + ".mdb") Version 4.0 
+			Table str$(sOutputTbl)
+		Open Table Str$(sOutputPath + sOutputTbl+ ".TAB") as OutputTbl Interactive
+
+	if tableinfo(outputTbl,8)=0 THEN
+			Exit Sub
+	End if
+
+'=====>'ADDING FIELDS TO OUTPUT TABLE FOR ATTRIBUTION
+
+'======> replaced 6/24/08		xStorm Integer, xDMinD Integer, xDMaxD Integer, 
+'======> replaced 6/24/08		pStorm Integer, pDMaxD Integer, pFt2Storm Integer,
+	Alter Table OutputTbl 
+		( add
+		MstLinkID integer, COMPKEY integer,
+		xWtr Integer, xWMinD Integer, xWMaxD Integer, 
+		pWtr Integer, pWtrMaxD Integer, pFt2Wtr Integer,
+		xSewer Integer, xSwrMinD Integer, xSwrMaxD Integer, 
+		pSewer Integer, pSwrMaxD Integer, pFt2Swr Integer,
+		xStrt Integer, xArt Integer, xMJArt Integer, xFrwy Integer,
+		pStrt Integer, pStrtTyp Integer, pFt2Strt Integer, pTraffic Integer,
+		uxCLx Integer, uxFt2CLx Integer, dxCLx Integer, dxFt2CLx Integer,
+		xFiber Integer, pFiber Integer, pFt2Fiber Integer,
+		xGas Integer, pGas Integer, pFt2Gas Integer,
+		xRail Integer, pRail Integer, pFt2Rail Integer,
+		xLRT Integer, pLRT Integer, pFt2LRT Integer,
+		xEmt Integer, pEmt Integer, pFt2Emt Integer,
+		xEzonC Integer, xEzonP Integer,xFtEzonC integer,xFtEzonP integer, 
+		xEzAreaC Integer, xEzAreaP Integer,
+		uxMS4 Integer, uxUIC Integer,
+		uDepth Float, dDepth Float, xPipSlope Float, gSlope Integer, 
+		xEcsi Integer,xFt2Ecsi Integer,xEcsiLen Integer, xEcsiVol Integer,
+		xSchl Integer, xFt2Schl Integer, xHosp Integer, xFt2Hosp Integer,
+		xPol Integer, xFt2Pol Integer, xFire Integer, xFt2Fire Integer,
+		xBldg Integer, xFt2Bldg Integer, xHyd Integer, xFt2Hyd Integer,
+		HardArea Integer
+		)Interactive
+
+	Close Table QyText
+	Select * from OutputTbl, MLA
+		where OutputTbl.USnode=MLA.UsNode 
+		and OutputTbl.DsNode =MLA.DsNode
+		into QyUpdt
+	Update QyUpdt set MstLinkID = MLinkID
+
+	Add Column OutputTbl(Compkey) from MLA set to Compkey where MstlinkID = MlinkID 
+	Add Column OutputTbl(Compkey) from MLA set to Compkey where MstlinkID = MlinkID 
+
+'=====>UPDATING FIELDS OF OUTPUT TABLE WITH ATTRIBUTES FROM MST_PIPXP_AC
+FOR iLoop = 6 to Tableinfo(OutputTbl,4)
+	sFld= Columninfo(OutputTbl, "col" + iLoop, 1)
+	DoStr= "Add Column OutputTbl(" + sFld +") from Mst_PipXP_ac set to " + sFld +" where MstlinkID = MlinkID"
+	Run Command DoStr	
+NEXT
+	Commit table OutputTbl
+
+	Select * from OutputTbl where MstlinkID = 0 order by AltLinkID into QySaver
+	Commit Table QySaver As cTmp+ "AltPips.TAB" TYPE NATIVE Charset "WindowsLatin1"
+	Open table cTmp+ "AltPips.TAB" interactive
+
+	Close table MLA
+	Close table mst_pipxp_ac
+
+Open table sPath + "nodes\mdl_nodes_ac.tab" as NodTbl interactive
+
+'=====>CREATING BOUNDARY FOR PIPXP TABLES
+
+	Select col1 from AltPips where rowid = -1 into QyAOI
+	Commit table QyAOI As sTmpPath + "xpArea.tab" 
+		TYPE NATIVE Charset "WindowsLatin1"
+	Open table sTmpPath + "xpArea.tab" interactive
+	Insert into xpArea(col1) select col1 from InputTbl
+	Select * from xpArea
+	Objects Combine
+
+	Select * from xpArea where obj into QyUpdt 
+	Update QyUpdt set obj = buffer(obj, 9, 300, "FT")
+	oMBR = selection.obj
+	close table xpArea
+
+'=====>  
+GOTO NoSubSets  Print "@NoSubSets"     '(ignore: TEST SHORTCUT-enter before "GOTO")
+
+'=====>CREATING SUBSETS OF TABLES ON LOCAL DRIVE 		'( Currently DISABLED)
+Select LstAlias, sText from TblList where rowid>3 into QyTblGrp
+
+Print "Creating Local Tables...."
+FOR iLoop= 1 to tableinfo(QyTblGrp, 8)-1
+	Select * from QyTblGrp where rowid = iLoop into QyCurTbl 
+	sCase 	= QyCurTbl.LstAlias
+	sTbl= QyCurTbl.sText
+	print time(12) + "....." + sCase
+	Open table sTbl as CurTbl interactive
+	Select * from CurTbl where obj intersects oMBR into QySaver
+	Commit Table QySaver as sTmpPath + sCase + ".tab" 	TYPE NATIVE Charset "WindowsLatin1"
+	Update QyCurTbl set sText = sTmpPath + sCase + ".tab"
+	Close Table CurTbl
+NEXT
+
+Close Table QyCurTbl
+Close table QyTblGrp
+
+NoSubSets:
+
+Exit sub
+'============================^
+ErrPass:
+Resume Next
+END SUB
+'=========================================================================================================
+SUB RunXP
+'=========================================================================================================
+
+	IF tableinfo(outputTbl,8) = 0 THEN
+		GOTO TestRun	
+	END IF
+
+'=======> GOTO TestRun '(ignore line: TEST SHORTCUT-enter before "GOTO") 
+
+
+'============>(Alias,Start, Stop, Step, UpdtFld1, UpdtFld2, UpdtFld3, UpdtFld4, UpdtFld5)
+	CALL GetXPdat(1,0,"WtrTbl", 	2,12,2,"pWtr","pFt2Wtr", "", "", "")
+	CALL GetXPdat(1,0,"SewerP",	2,10,2,"pSewer","pFt2Swr", "", "", "")
+	CALL GetXPdat(0,1,"StrtTbl",	10,30,10,"pStrt","pFt2Strt", "","", "")
+	CALL GetXPdat(0,0,"CLnods", 	10,30,10,"","","", "", "")
+	CALL GetXPdat(0,0,"EnvZon", 	2,10,2,"","","", "", "")
+	CALL GetXPdat(0,0,"MS4csr", 	1,3,1,"","","", "", "")
+	CALL GetXPdat(0,0,"UIC", 		2,10,2,"","","", "", "")
+	CALL GetXPdat(1,1,"FiberTbl",	2,10,2,"pFiber", "pFt2Fiber", "xFiber","", "")
+	CALL GetXPdat(1,1,"GasTbl",	2,10,2,"pGas", "pFt2Gas", "xGas", "", "")
+	CALL GetXPdat(1,1,"LiteRail",	2,10,2,"pLRT", "pFt2LRT", "xLRT", "", "")
+	CALL GetXPdat(1,1,"EmtTbl",	2,10,2,"pEmt", "pFt2Emt", "xEmt", "", "")
+	CALL GetXPdat(1,1,"RailTbl",	2,10,2,"pRail", "pFt2Rail", "xRail", "", "")
+
+	CALL GetXPdat(2,0,"School", 	50,250,50,"", "", "xSchl",	"xFt2Schl","")
+	CALL GetXPdat(2,0,"Hospital",	50,250,50,"", "", "xHosp", "xFt2Hosp","")
+	CALL GetXPdat(2,0,"Police", 	50,250,50,"", "", "xPol",	"xFt2Pol","")
+	CALL GetXPdat(2,0,"Fire", 		50,250,50,"", "", "xFire",	"xFt2Fire","")
+	CALL GetXPdat(2,0,"Hydrant", 	5,25,5,"", "", "xHyd",	"xFt2Hyd","")
+	CALL GetXPdat(1,0,"HardAreas", 0,0,0,"", "", "HardArea",	"","")
+	CALL GetXPdat(1,0,"Bldg", 		2,10,2,"", "", "xBldg", "xFt2Bldg","")
+	CALL GetXPdat(3,0,"gSlope", 	1,8,1,	"","","", "", "")
+	CALL GetXPdat(1,0,"ECSI", 		10,60,10,	"", "", "xEcsi",	"xFt2Ecsi","")
+
+GOTO NoTest
+TestRun:   '  ====> Start TestRun 
+
+'(Copy and Insert Test Lines)
+
+	CALL GetXPdat(0,1,"StrtTbl",	10,30,10,"pStrt","pFt2Strt", "","", "")
+	CALL GetXPdat(1,0,"HArea", 0,0,0,"", "", "HardArea",	"","")
+
+	Map from altPips
+'	Add Map Layer objTbl
+	Print "ALL DONE! Check RESULTS!"
+	end program
+' End TestRun ====> End TestRun
+
+NoTest:
+
+
+'==>Browse * from OutputTbl
+	print ""
+	print tStart + "...Starting Time"
+	print time(12) + "...ALL PROCESSES COMPLETE!" 
+	Print "=========================="
+
+END SUB
+
+'=========================================================================================================
+Sub GetXPdat
+	(
+	ByVal sBuffType as integer,
+	ByVal iDoCase as integer,
+	ByVal sAlias as string,
+	ByVal iStart as integer,
+	ByVal iStop as integer,
+	ByVal iStep as integer,
+	ByVal sUpdtFld1 as string,
+	ByVal sUpdtFld2 as string,
+	ByVal sUpdtFld3 as string,
+	ByVal sUpdtFld4 as string,
+	ByVal sUpdtFld5 as string
+ 	)
+
+
+	PRINT "========================="
+	PRINT sAlias + "...processing table " + time(12)
+
+set area units "sq ft"
+set distance units "ft"
+Set CoordSys Earth Projection 3, 33, "ft", -120.5, 43.6666666667, 44.3333333333, 46, 8202099.7379999999, 0
+
+	IF sBuffType=3 THEN
+		sCase= sAlias
+		GOTO xpCASE
+	END IF
+
+	OnError GOTO BuffPass
+
+				For iLoop = 1 to numtables()
+					IF Tableinfo(iLoop,1)= "TrgtTbl" THEN
+						Close Table TrgtTbl
+						Exit For
+					END IF 
+				Next
+
+	Select sText from TblList where LstAlias = sAlias into QyTblPath
+		sTbl= QyTblPath.col1
+		Open table sTbl as TrgtTbl Interactive
+		Close Table QyTblPath
+
+
+				For iLoop = 1 to numtables()
+					IF Tableinfo(iLoop,1)= "ObjTbl" THEN
+						Close Table ObjTbl
+						Exit For
+					END IF 
+				Next
+
+		Select * from TrgtTbl where obj intersects oMBR into QySaver
+
+				IF Selectioninfo(3) >0 THEN
+					Commit Table QySaver As Str$(cTmp + sAlias + "obj.TAB") TYPE NATIVE Charset "WindowsLatin1"
+					Open Table Str$(cTmp + sAlias + "obj.TAB") as objTbl Interactive
+				ELSE
+					Print "NO OBJECTS IN AREA...SKIPPING!"
+					Close Table TrgtTbl
+					Exit sub 
+				END IF
+
+	sCase = sAlias
+
+	IF sBuffType=1 THEN
+		
+		IF iDoCase=0 THEN
+				'(1,0,""...)
+				GOTO XPCASE 
+		END IF
+
+		IF iDoCase=1 THEN
+			'(1,1,""...)	'DETERMINING PARALLEL LINES/DIST ; NO FIELD VALUES REQUIRED
+				FOR iBuff = iStart to iStop step iStep
+					PRINT "     buffering @ " + iBuff
+					Create Object As Buffer From ObjTbl 
+						Width iBuff Units "ft" Type Cartesian Resolution 8 
+						Into variable oBuffer
+					DoStr = "Select * from AltPips where " + sUpdtFld1+ " =0 into QyUpdt"
+
+					Run Command DoStr
+
+					Select * from QyUpdt where obj entirely within oBuffer into QyUpdt 
+		   			Update QyUpdt set  
+						sUpdtFld1 = 1, 
+						sUpdtFld2 = iBuff
+					Commit Table AltPips
+				NEXT
+					IF 	sUpdtFld3 <> "" THEN
+						Select AltPips.col1, count(*) "nX" 
+							from AltPips, ObjTbl 
+							where AltPips.obj intersects ObjTbl.obj
+							group by AltPips.col1
+							into QyxData
+						Add Column AltPips (sUpdtFld3) from QyxData set to nx where col1 = col1
+						Commit Table AltPips
+						Close Table TrgtTbl
+						Close Table ObjTbl
+						Exit Sub
+					ELSE
+						GOTO xpCASE
+					END IF 
+		END IF
+		IF iDoCase=2 THEN
+				'(1,2,""...)  Condition Reserved 
+		END IF
+	END IF
+
+	IF sBuffType=2 THEN
+			IF iDoCase = 0 THEN
+					'(2,0, "",...)
+				print tableinfo(objTbl,8) + " TblChk"
+				Print tableinfo(objTbl,19)	
+				FOR iBuff = iStart to iStop step iStep
+					Print "     buffering @ " + iBuff
+					Update objTbl set obj = buffer(obj, 9, iBuff, "ft")
+
+					Select AltPips.col1, count(*) "nX" 
+						from AltPips, ObjTbl 
+						where AltPips.obj intersects ObjTbl.obj
+						group by AltPips.col1
+						into QyxData
+					DoStr = "Select * from AltPips where " + sUpdtFld3+ "  =0 into qyUpdt"
+					Run Command DoStr	
+					Add Column QyUpdt (sUpdtFld3) from QyxData set to nX where col1 = col1
+					Add Column QyUpdt (sUpdtFld4) from QyxData set to iBuff where col1 = col1
+					Rollback Table ObjTbl
+				NEXT
+					Commit Table AltPips
+					Close Table TrgtTbl
+					Close Table ObjTbl
+					Exit Sub
+			END IF
+
+			IF iDoCase = 1 THEN
+				'(2,1, "",...) Condtion Reserved
+				sCase = sAlias + "21"
+			END IF
+
+			IF iDoCase = 2 THEN
+				'(2,2, "",...) Condtion Reserved
+				sCase = sAlias + "22"
+			END IF
+	END IF
+
+
+			'======================================================
+XPCASE:	'sBuffType=3  ===>BEGINNING OF CASE APPLICATIONS=======
+			'======================================================
+	Print "starting case..." + sCase + " " +  time(12)
+	DO CASE sCase		
+
+		CASE "WtrTbl"		'=========================
+
+			'IDENTIFYING CROSSING WATER PIPES
+			Select AltPips.col1, count(*) "nX", min(ObjTbl.MAINSIZE) "xMin", max(ObjTbl.MAINSIZE) "xMax" 
+				from  AltPips, ObjTbl 
+				where AltPips.Obj intersects ObjTbl.Obj 
+				group by AltPips.col1 
+				into QyxData
+			
+				Add Column AltPips (xWtr)From QyxData Set To nX Where COL1 = COL1	' 
+				Add Column AltPips (xWMinD )From QyxData Set To xMin Where COL1 = COL1 
+				Add Column AltPips (xWMaxD )From QyxData Set To xMax Where COL1 = COL1 
+				Commit Table AltPips Interactive
+
+			'IDENTIFYING PARALLEL WATER PIPES AND DIAMETERS
+				Open table sTblPath + "WtrTbl_FB12" as WtrBsnFB interactive
+				Print "    Opening table...WtrTbl_FB"+ iStop
+				Select * from  AltPips,WtrBsnFB 
+					where AltPips.obj entirely within WtrBsnFB.obj into QyUpdt
+
+'===> 12/11/2008 Addresed per AMM msg : Replaced original line below
+'===> 			where WtrBsnFB.obj entirely within AltPips.obj into QyUpdt
+
+				Update QyUpdt set pWtr = 1
+				Commit table Altpips
+				Close table WtrBsnFB
+
+				For iBuff = iStart to iStop step iStep
+					Open table sTblPath + "WtrTbl_12" as WtrBuff interactive
+					Print "    Opening table...WtrTbl_"+ iBuff
+					Select AltPips.col1, Max(WtrBuff.Mainsize) 
+					from AltPips, WtrBuff 
+						where AltPips.pFt2Wtr=0 
+						and AltPips.obj intersects WtrBuff.obj 
+						group by AltPips.col1 into QypData
+					Add column "QypData"(pWtrMaxD) from QypData set to Col2 where col1= col1
+					Add column "QypData"(pFt2Wtr) from QypData set to iBuff where col1= col1
+					Commit Table AltPips				
+					Close table WtrBuff
+				Next
+					
+				Select * from AltPips where pWtr= 0 into QyUpdt
+				Commit Table QyUpdt As STR$(cTmp + sCase +"PObj.TAB") TYPE NATIVE Charset "WindowsLatin1"
+				Open Table STR$(cTmp + sCase +"PObj.TAB") as PObjTbl Interactive
+
+				Update PObjTbl set obj = buffer(obj, 9, iStop, "ft")
+				Select PObjTbl.col1, Max(objTbl.Mainsize) from PObjTbl, objTbl 
+					where objectlen(ObjTbl.obj, "Ft")> 50 and 
+					ObjTbl.obj entirely within PObjTbl.obj 
+					group by PObjTbl.col1 into QypData
+
+					Add column "QyUpdt"(pWtr) from QypData set to 2 where col1= col1
+					Add column "QyUpdt"(pWtrMaxD) from QypData set to Col2 where col1= col1
+				Commit Table AltPips
+
+				Close Table PObjTbl
+				Close Table TrgtTbl
+				Close Table ObjTbl
+
+		CASE "SewerP"		'=========================
+
+			'IDENTIFYING OTHER CROSSING PIPES(STORM, CSO, SAN) 061808
+			dim sUs as string
+			dim sDs as string
+			dim xObj as Object
+			dim xBuffObj as Object
+			dim xCount as integer
+			dim xMinD as integer
+			dim xMaxD as integer
+			dim pAngle as integer
+			dim pLoop as integer
+			
+			'LOOPING THRU INDIVIDUAL ALTERNATIVE PIPES
+			FOR iLoop = 1 to tableinfo(AltPips,8)	
+
+				For pLoop = 1 to numtables()
+					IF Tableinfo(pLoop,1)= "TblxBuffObjs" THEN
+						Close Table TblxBuffObjs
+						Exit For
+					END IF 
+				Next
+
+				Select * from AltPips where rowid = iLoop into QyCurPip
+				sUs= QyCurPip.UsNode
+				sDs= QyCurPip.DsNode
+				xObj= QyCurPip.obj
+				xBuffObj= buffer(xObj, 9,iStop,"ft")
+				pAngle=Round(57.29*
+					Atn(
+					(1e-008+ObjectNodeY(xObj, 1, 1)-ObjectNodeY(xObj, 1, 2))/
+					(1e-008+ObjectNodeX(xObj, 1, 1)-ObjectNodeX(xObj, 1, 2)))
+					, 0.1)
+
+			'EXCLUDING US pipes, DSpipes AND CURRENT PIPE SELECTION FROM TARGET TABLE 
+				Select * from TrgtTbl 
+					where obj intersects xBuffObj 
+					and UsNode not in (sUs, sDs)
+					and DsNode not in (sUs, sDs)
+					into QyXBuffObjs
+
+				IF tableinfo(QyXBuffObjs,8)=0 THEN
+					Print "No xpPipes Closeby...Exiting Gracefully!"
+					GOTO NoXpipes
+				END IF
+
+				Commit Table QyXBuffObjs As STR$(cTmp + "TblxBuffObjs.TAB") TYPE NATIVE Charset "WindowsLatin1"
+				Open Table STR$(cTmp + "TblxBuffObjs.TAB") Interactive
+				TblIsOpen:	
+
+					Alter table TblxBuffObjs (Add PipAngle integer) interactive					
+					Update TblxBuffObjs set PipAngle = 
+						Round(57.29*
+						Atn(
+						(1e-008+ObjectNodeY(Object, 1, 1)-ObjectNodeY(Object, 1, 2))/
+						(1e-008+ObjectNodeX(Object, 1, 1)-ObjectNodeX(Object, 1, 2)))
+						, 0.1)
+					Commit table TblxBuffObjs
+
+			'IDENTIFYING PARALLEL MST_LINKS_AC SEGMENTS (EXCLUDING US, DS AND CURRENT PIPE SELECTION!)
+				Create Object as Buffer from TblxBuffObjs into variable XbuffObj Width iStop Units "ft" Resolution 9   
+				Select * from TblxBuffObjs 
+					where abs(abs(PipAngle)- abs(pAngle))< 20  
+					and obj entirely within xBuffObj 
+					into QyChkWithin	
+
+				IF Tableinfo(QyChkWithin,8)>0 THEN
+					Update QyCurPip set pSewer = 1
+			'DETERMINING DISTANCE TO PARALLEL PIPE
+					FOR pLoop = iStart to iStop step iStep
+						xBuffObj= buffer(xObj,9, pLoop,"ft")
+						Select max(DiamWidth)"xMax" from TblxBuffObjs where obj intersects xBuffObj into QyGetDiam
+							IF Tableinfo(QyGetDiam,8)>0 THEN
+								xMaxD= QyGetDiam.Col1
+								Update QyCurPip set pSwrMaxD = xMaxD
+								Update QyCurPip set pFt2Swr = pLoop
+								Exit For
+							END IF
+					NEXT
+				END IF
+
+
+			'IDENTIFYING CROSSING MST_LINKS_AC SEGMENTS (EXCLUDING US, DS AND CURRENT PIPE SELECTION!)  
+				Select count(*) "nX", Min(DiamWidth)"xMin", Max(DiamWidth)"xMax" 
+					from TblxBuffObjs 
+					where abs(abs(PipAngle)- abs(pAngle))>20  
+					and obj intersects xObj 
+					into QyXData 
+
+				xCount = QyxData.Nx
+				xMinD = QyxData.xMin
+				xMaxD = QyxData.xMax
+				Update QyCurPip set xSewer = xCount
+				Update QyCurPip set xSwrMinD = xMinD
+				Update QyCurPip set xSwrMaxD = xMaxD
+
+				Commit table AltPips
+				'Rollback table TblxBuffObjs
+NoXpipes:
+			NEXT
+			Close table TrgtTbl
+			Close table ObjTbl
+			FOR iLoop = 1 to numtables()
+				IF Tableinfo(iLoop,1)= "TblxBuffObjs" THEN
+					Drop table TblxBuffObjs
+					Exit For
+				End IF	
+			NEXT
+
+		CASE "CLnods"		'1=========================
+			'IDENTIFYING US AND DS NODES IN STREET INTERSECTIONS
+			Commit Table AltPips As STR$(cTmp + sCase +"UsObj.TAB") TYPE NATIVE Charset "WindowsLatin1"
+				Open Table STR$(cTmp + sCase +"UsObj.TAB") as UsTbl Interactive
+				Update UsTbl set obj = CreatePoint(ObjectGeography(obj,1),ObjectGeography(obj,2)) 
+
+			Commit Table AltPips As STR$(cTmp + sCase +"DsObj.TAB") TYPE NATIVE Charset "WindowsLatin1"
+				Open Table STR$(cTmp + sCase +"DsObj.TAB") as DsTbl Interactive
+				Update DsTbl set obj = CreatePoint(ObjectGeography(obj,3),ObjectGeography(obj,4)) 
+
+				FOR iBuff = iStart to iStop step iStep
+					Print "     buffering @ " + iBuff
+					Update ObjTbl set obj = buffer(obj,6, iBuff, "ft")
+				
+					'IDENTIFYING UPSTREAM NODES IN INTERSECTION
+					Select UsTbl.col1, ObjTbl.StrtX "nX" from UsTbl, ObjTbl 
+						where	UsTbl.obj within ObjTbl.obj 
+						into QyxUsData
+					Select * from AltPips where uxCLx= 0 into QyUpdt 	
+					Add Column QyUpdt (uxCLx)From QyxUsData Set To nX Where COL1 = COL1	 
+					Add Column QyUpdt (uxFt2CLx)From QyxUsData Set To iBuff Where COL1 = COL1
+
+					'IDENTIFYING DOWNSTREAM NODES IN INTERSECTION
+					Select DsTbl.col1, ObjTbl.StrtX "nX" from DsTbl, ObjTbl 
+						where	DsTbl.obj within ObjTbl.obj 
+						into QyxDsData
+					Select * from AltPips where dxCLx= 0 into QyUpdt 	
+
+					Add Column QyUpdt (dxCLx)From QyxDsData Set To nX Where COL1 = COL1	 
+					Add Column QyUpdt (dxFt2CLx)From QyxDsData Set To iBuff Where COL1 = COL1
+
+					Rollback table ObjTbl						 
+				NEXT
+
+			Commit Table AltPips
+			Close Table UsTbl									
+			Close Table DsTbl									
+			Close Table TrgtTbl
+			Close Table ObjTbl									
+
+		CASE "StrtTbl"	'=========================
+
+		'==>DETERMINING FREEWAY CROSSINGS
+			Select AltPips.col1, count(*) "nX" 
+				from AltPips, ObjTbl
+				where ObjTbl.Type>0 
+				and ObjTbl.Type < 1250 
+				and  AltPips.Obj intersects ObjTbl.Obj 
+				group by AltPips.col1
+				into QyxData
+			Add Column AltPips(xFRWY )From QyxData Set To nX Where COL1 = COL1	 
+
+		'==>DETERMINING MAJOR ARTERIAL CROSSINGS
+			Select AltPips.col1, count(*) "nX" 
+				from AltPips, ObjTbl
+				where ObjTbl.Type>1250 
+				and ObjTbl.Type < 1350 
+				and  AltPips.Obj intersects ObjTbl.Obj 
+				group by AltPips.col1
+				into QyxData
+			Add Column AltPips(xMJART )From QyxData Set To nX Where COL1 = COL1	 
+
+		'==>DETERMINING ARTERIAL CROSSINGS
+			Select AltPips.col1, count(*) "nX" 
+				from AltPips, ObjTbl 
+				where ObjTbl.Type>1350 
+				and ObjTbl.Type < 1460 
+				and  AltPips.Obj intersects ObjTbl.Obj 
+				group by AltPips.col1 
+				into QyxData
+			Add Column AltPips(xART )From QyxData Set To nX Where COL1 = COL1	 
+
+		'==>DETERMINING STREET CROSSINGS
+			Select AltPips.col1, count(*) "nX" 
+				from AltPips, ObjTbl 
+				where ObjTbl.Type>1460 
+				and  AltPips.Obj intersects ObjTbl.Obj 
+				group by AltPips.col1 
+				into QyxData
+			Add Column AltPips(xSTRT )From QyxData Set To nX Where COL1 = COL1	 
+
+			Commit Table AltPips	
+
+
+		'==>DETERMINING PARALLEL STREET PROXIMITY
+			Select streetname, Type from TrgtTbl where obj intersects oMBR into QySaver
+			Select * from QySaver where rowid = -1 into QySet 
+
+			Commit Table QySet As Str$(cTmp + sCase + "pOBj.TAB") TYPE NATIVE Charset "WindowsLatin1"
+			Open Table Str$(cTmp + sCase + "pOBj.TAB") as pObjTbl Interactive
+
+			Create Object As Union From QySaver Into Table pObjTbl 
+					Group by STREETNAME 
+					Data STREETNAME=STREETNAME,TYPE=TYPE
+			Commit Table pObjTbl Interactive
+
+			FOR iBuff = iStart to iStop step iStep
+					Print "     buffering @ " + iBuff
+				Update pObjTbl set obj = buffer(obj, 9,iBuff, "ft")
+	
+				Select AltPips.col1, pObjTbl.TYPE "pTyp" 
+					from AltPips, pObjTbl 
+					where AltPips.Obj within pObjTbl.Obj 
+					into QypData
+				Select * from AltPips where pStrtTyp=0 into QyUpdt 
+				Add Column QyUpdt (pStrt )From QypData Set To 1 Where COL1 = COL1	 
+				Add Column QyUpdt (pStrtTyp)From QypData Set To pTyp Where COL1 = COL1	 		
+				Add Column QyUpdt (pFt2Strt )From QypData Set To iBuff Where COL1 = COL1	 
+
+				Rollback table pObjTbl  
+			NEXT
+
+		'==>DETERMINING TRAFFIC VOLUME (MAX) OF PARALLEL STREET
+			Select * from AltPips where pStrt=1 into QyGetPpipes
+
+			IF Tableinfo(QyGetPpipes,8)> 0 THEN 
+				Commit Table QyGetPpipes As Str$(cTmp + "pPipesTmp.TAB") TYPE NATIVE Charset "WindowsLatin1"
+				Open table Str$(cTmp + "pPipesTmp") interactive
+
+				Update pPipesTmp set obj = buffer(obj, 9,iStop, "FT")
+				Select pPipesTmp.col1,  max(TrgtTbl.SagisVol)"TrafficVOL" from pPipesTmp, TrgtTbl
+					where pPipesTmp.obj intersects TrgtTbl.obj
+					group by pPipesTmp.col1 
+					into QyTrafficVOL
+
+				Add Column QyGetPpipes (pTraffic )From QyTrafficVOL Set To TrafficVOL Where COL1 = COL1	 
+				Close table QyGetPpipes
+
+				Commit Table AltPips Interactive
+
+				Drop table pPipesTmp
+			END IF
+
+
+			Close Table TrgtTbl
+			Close Table ObjTbl									
+			Close Table pObjTbl									
+
+			Commit Table AltPips Interactive
+
+		CASE "EnvZon"		'=========================
+
+'			DETERMINING PIPE LENGTH WITHIN EZONE "C"
+				Select * from AltPips, ObjTbl
+						where ObjTbl.OVRLY ="C" and  
+						AltPips.obj intersects ObjTbl.obj 
+						into QyUpdt
+				Update QyUpdt set xEzonC = 1 
+
+			IF SelectionInfo(3)= 0 THEN
+				print "No C EZones...skipping!"
+				GOTO NoEzonC
+			END IF
+					Commit Table altPIps As STR$(cTmp + "EZtmp.TAB") TYPE NATIVE Charset "WindowsLatin1"
+					Open Table STR$(cTmp + "EZtmp.TAB") interactive
+					Select * from EZtmp into QyTarget
+					Set Target On
+					Select * from ObjTbl where Ovrly= "C" into QyCutter
+					Objects intersect into Target
+						Data AltLinkID=AltLinkID,USNode=USNode,DSNode=DSNode,MstLinkID=MstLinkID,COMPKEY=COMPKEY
+				
+					Add Column QyUpdt(xFtEzonC)from EZtmp set to round(objectlen(obj, "FT"), 0.1) where AltLinkID=AltLinkID
+					Commit table EZtmp
+
+'			DETERMINING OVERLAP AREA INTERSECTING EZONE "C"
+				Select * from EZtmp where obj into QyEZbuff 
+				Update QyEZbuff set obj = buffer(obj,9,12.5, "ft")
+				Select EZtmp.AltLinkId, Sum(AreaOverlap(ObjTbl.obj, EZtmp.obj)) "SFovrlp"
+					from ObjTbl, EZtmp
+					group by EZtmp.AltLinkId
+					where ObjTbl.Ovrly = "C" and ObjTbl.obj intersects EZtmp.obj
+					into QyOvrlpSF
+				Add Column QyUpdt(xEzAreaC)from QyOvrlpSF set to round(SFovrlp, 0.1) where AltLinkID=AltLinkID
+				Commit table AltPips
+				Drop Table EZtmp
+
+			NoEzonC:
+
+'			DETERMINING PIPE LENGTH WITHIN EZONE "P"
+				Select * from AltPips, ObjTbl
+						where ObjTbl.OVRLY ="P" and  
+						AltPips.obj intersects ObjTbl.obj 
+						into QyUpdt
+				Update QyUpdt set xEzonP = 1 
+
+			IF SelectionInfo(3)=0 THEN
+				Print "No P Ezones...skipping!"
+				GOTO NoEzonP
+			END IF		
+
+				Commit Table altPIps As STR$(cTmp + "EZtmp.TAB") TYPE NATIVE Charset "WindowsLatin1"
+				Open Table STR$(cTmp + "EZtmp.TAB") interactive
+				Select * from EZtmp into QyTarget
+				Set Target On
+				Select * from ObjTbl where Ovrly= "P" into QyCutter
+				Objects intersect into Target
+					Data AltLinkID=AltLinkID,USNode=USNode,DSNode=DSNode,MstLinkID=MstLinkID,COMPKEY=COMPKEY
+				
+				Add Column QyUpdt(xFtEzonP)from EZtmp set to round(objectlen(obj, "FT"), 0.1) where AltLinkID=AltLinkID
+
+ 
+'			DETERMINING OVERLAP AREA INTERSECTING EZONE "P"
+				Select * from EZtmp where obj into QyEZbuff 
+				Update QyEZbuff set obj = buffer(obj,9,12.5, "ft")
+				Select EZtmp.AltLinkId, Sum(AreaOverlap(ObjTbl.obj, EZtmp.obj)) "SFovrlp"
+					from ObjTbl, EZtmp
+					group by EZtmp.AltLinkId
+					where ObjTbl.Ovrly = "P" and ObjTbl.obj intersects EZtmp.obj
+					into QyOvrlpSF
+				Add Column QyUpdt(xEzAreaP)from QyOvrlpSF set to round(SFovrlp, 0.1) where AltLinkID=AltLinkID
+				Commit table AltPips
+
+				Drop Table EZtmp
+
+			Close Table TrgtTbl
+			'Drop Table ObjTbl									
+			Close Table ObjTbl									
+'			Rollback Table AltPips
+
+			NoEzonP:
+
+
+		CASE "MS4csr"		'=========================
+				Select col1, 0 "nX" from AltPips into QySaver 
+				Commit Table QySaver As STR$(cTmp + sCase +"OutObj.TAB") TYPE NATIVE Charset "WindowsLatin1"
+				Open Table STR$(cTmp + sCase +"OutObj.TAB") as OutTbl Interactive
+
+				Update OutTbl set obj = CreatePoint(ObjectGeography(obj,1),ObjectGeography(obj,2)) 
+
+					Select sText from TblList where LstAlias = sAlias into QyTblPath
+					sTbl= QyTblPath.col1
+					Open table sTbl as TrgtTbl Interactive
+
+				Select * from TrgtTbl where obj intersects oMBR into QySaver
+					Commit Table QySaver As STR$(cTmp + sCase +"xObj.TAB") TYPE NATIVE Charset "WindowsLatin1"
+					Open Table STR$(cTmp + sCase +"xObj.TAB") as xObjTbl Interactive
+				
+				Select * from OutTbl where obj within any(select obj from xObjTbl) into QyUpdt
+				Update QyUpdt set nX = iBuff
+				Commit Table OutTbl  
+				
+				Add column AltPips(uxMS4) from OutTbl set to nX where COL1 = COL1
+				Commit table AltPips
+				'Drop Table xObjTbl
+				'Drop Table OutTbl
+				Close Table xObjTbl
+				Close Table OutTbl
+				Close Table TrgtTbl
+				'Drop Table ObjTbl									
+				Close Table ObjTbl									
+
+				
+		CASE "UIC"		'============================
+			Commit Table AltPips As STR$(cTmp + sCase +"OutObj.TAB") TYPE NATIVE Charset "WindowsLatin1"
+			Open Table STR$(cTmp + sCase +"OutObj.TAB") as OutTbl Interactive
+			Update OutTbl set obj = CreatePoint(ObjectGeography(obj,1),ObjectGeography(obj,2)) 
+
+				Select OutTbl.col1 
+					from OutTbl, ObjTbl 
+					where	OutTbl.obj within ObjTbl.obj 
+					into QyxData
+				Add Column AltPips (uxUIC)From QyxData Set To 1 Where COL1 = COL1	 
+
+				Close Table OutTbl	'replacing: Drop Table OutTbl									
+				Close Table TrgtTbl
+				Close Table ObjTbl	'replacing: Drop Table ObjTbl
+
+			Commit table AltPips
+
+
+		CASE "ECSI"		'=========================
+ 				FOR iBuff = iStart to iStop step iStep
+					Print "     buffering @ " + iBuff
+					Update objTbl set obj = buffer(obj, 9, iBuff, "ft")
+
+					Select AltPips.col1, count(*) "nX" 
+						from AltPips, ObjTbl 
+						where AltPips.obj intersects ObjTbl.obj
+						group by AltPips.col1
+						into QyxData
+					DoStr = "Select * from AltPips where " + sUpdtFld3+ "  =0 into qyUpdt"
+					Run Command DoStr	
+					Add Column QyUpdt (sUpdtFld3) from QyxData set to nX where col1 = col1
+					Add Column QyUpdt (sUpdtFld4) from QyxData set to iBuff where col1 = col1
+					Rollback Table ObjTbl
+				NEXT
+					Commit Table AltPips
+					
+					Select * from AltPips where  xECSI >0 into QyUpdt 
+
+'061908  PER AMM ERROR CATCH:
+
+				IF tableinfo(QyUpdt,8)= 0 THEN
+					Print "No xEcsi...exiting gracefully!"
+					Exit Sub
+				END IF
+
+					Update objTbl set obj = buffer(obj, 9, 50, "ft")
+
+					Commit Table QyUpdt As STR$(cTmp + "PipBuff.TAB") TYPE NATIVE Charset "WindowsLatin1"
+					Open Table STR$(cTmp + "PipBuff.TAB") interactive
+					Update PipBuff set xEcsiLen = objectlen(obj, "ft")
+					Update PipBuff set obj = buffer(obj, 9, 12.5, "ft")
+					Select  PipBuff.AltLinkID, xEcsiLen, Sum(AreaOverlap(objTbl.obj, PipBuff.obj)) "SFovrlp"
+						from objTbl, PipBuff
+						where objTbl.obj intersects PipBuff.obj
+						group by PipBuff.AltLinkID
+						into QyOvrlpSF
+
+					Add Column QyUpdt (xEcsiLen) from QyOvrlpSF set to xEcsiLen where AltLinkID = AltLinkID
+
+					Commit Table AltPips
+'			DETERMINING VOLUME OF MATERIAL OVERLAPPING ECSI(50 FT BUFFER) AND PIPE (12.5 FT BUFFER)
+
+				Commit Table QyUpdt As STR$(cTmp + "ECSIpip.TAB") TYPE NATIVE Charset "WindowsLatin1"
+				Open Table STR$(cTmp + "ECSIpip.TAB") interactive
+				Alter table ECSIpip(Add
+					OvrlapSf float, 
+					Xu float, 
+					Yu float,
+					X11 float, 
+					Y11 float,
+					Dist2x11 float,
+					X12 float, 
+					Y12 float,
+					Dist2x12 float,
+					d11 float, 
+					d12 float,
+					AvgDpth float,
+					gNewElev float,
+					TotCuYd float,
+					CuYdOff float
+					) interactive
+
+				Update EcsiPip set 
+					Xu = objectNodeX(obj, 1,1), 
+					Yu = objectNodeY(obj, 1,1),
+					xEcsiLen = objectlen(obj,"ft")
+
+				Add column ECSIpip (OvrlapSf) from QyOvrlpSF set to SFovrlp where AltLinkID = AltLinkID
+
+				Select * from EcsiPip into QyTarget
+				Set Target ON
+				Select * from objTbl into QyCutter
+				Objects intersect into Target
+					Data AltLinkID=AltLinkID,
+					USNode=USNode,DSNode=DSNode,
+					MstLinkID=MstLinkID,COMPKEY=COMPKEY,
+					uDepth=uDepth,dDepth=dDepth,
+					OvrlapSf = OvrlapSf, gSlope= gSlope,
+					xPipSlope = xPipSlope, Xu= Xu, Yu= Yu
+
+				Commit table EcsiPip
+
+				Select * from ECSIpip where obj into QySaver
+				Commit Table QySaver As STR$(cTmp + "ECSIpip2.TAB") TYPE NATIVE Charset "WindowsLatin1"
+				Open Table STR$(cTmp + "ECSIpip2.TAB") interactive
+
+'			DISAGGREGATE MULTI REGION LINES INTO INDIVIDUAL OBJECTS
+			Select * from ECSIpip2 into QyExplode
+			Objects Disaggregate All Into Table ECSIpip2 Data 
+				AltLinkID=AltLinkID,USNode=USNode,DSNode=DSNode,MstLinkID=MstLinkID,COMPKEY=COMPKEY,
+				uDepth=uDepth,dDepth=dDepth,xPipSlope=xPipSlope,gSlope=gSlope,
+				xEcsi=xEcsi,xFt2Ecsi=xFt2Ecsi,xEcsiLen=xEcsiLen,xEcsiVol=xEcsiVol,
+				OvrlapSf = OvrlapSf, gSlope= gSlope,	xPipSlope = xPipSlope, Xu= Xu, Yu= Yu
+
+'			UPDATING INTERMEDIATE TABLE WITH ATTRIBUTE VALUES 
+				Update EcsiPip2 set 
+					X11 = objectNodeX(obj, 1,1), 
+					Y11 = objectNodeY(obj, 1,1),
+					X12 = objectNodeX(obj, 1,2), 
+					Y12 = objectNodeY(obj, 1,2)
+				Update EcsiPip2 set Dist2x11 = Distance(xu,yu,x11,y11, "ft")
+				Update EcsiPip2 set Dist2x12 = Distance(xu,yu,x12,y12, "ft")
+				Update EcsiPip2 set 
+					d11 = Dist2x11 * xPipSlope, 
+					d12 = Dist2x12 * xPipSlope
+				Update EcsiPip2 set AvgDpth = uDepth + (d11+d12 )/ 2
+				Update EcsiPip2 set gNewElev = (gSlope/100 * (Dist2x12-Dist2x11))/2
+				Update EcsiPip2 set CuYdOff = (gNewElev * OvrlapSf)/27
+				Update EcsiPip2 set TotCuYd = (AvgDpth * OvrlapSf)/27 - CuYdOff
+				Commit table EcsiPip2
+
+				Select AltLinkId, sum(TotCuYd)"TotalVOL" from EcsiPip2 group by AltLinkId into QyTotalVOL
+				Add Column QyUpdt (xEcsiVol) from QyTotalVOL set to TotalVOL where AltLinkID = AltLinkID
+				Commit table AltPips
+
+				Drop Table PipBuff
+				Drop table EcsiPip
+				Drop table EcsiPip2
+					Close Table TrgtTbl
+					Close Table ObjTbl
+
+
+		CASE "gSlope"		'=========================
+			Select AltLinkID, UsNode, DsNode,usie,dsie,
+				usie "USgElev",dsie "DSgElev",
+				Length,USIE "gSlopPct",USIE "xPipSlope"     
+				from inputTbl into QySaver
+			Commit table QySaver as sTmpPath + "SlopeDat.tab"
+				TYPE NATIVE Charset "WindowsLatin1"
+			Open table sTmpPath + "SlopeDat.tab" interactive
+			Add column SlopeDat(USgElev) from NodTbl set to GrndElev where USnode = Node
+			Add column SlopeDat(DSgElev) from NodTbl set to GrndElev where DSnode = Node
+			Select * from SlopeDat where Length = 0 into QyZeroLen
+			Update QyZeroLen set Length = 0.0001
+			Update  SlopeDat set gSlopPct = 100 * (USgelev-DSgelev)/Length
+			Update  SlopeDat set xPipSlope = (usie-dsie)/Length
+			Commit Table SlopeDat interactive
+
+			Add Column AltPips(gSlope) from SlopeDat set to Round(gSlopPct,0)where AltLinkID = AltLinkID
+			Add Column AltPips(xPipSlope) from SlopeDat set to xPipSlope where AltLinkID = AltLinkID
+
+					Add column AltPips(uDepth) from InputTbl set to USIE where col1 = col1
+					Add column AltPips(dDepth) from InputTbl set to DSIE where col1 = col1
+
+			Close Table NodTbl
+			Close Table SlopeDat
+
+		CASE "Bldg"		'=========================
+			FOR iBuff = iStart to iStop step iStep
+				Open table sTblPath + "Mdl_Bldg_" + iBuff as BldgBuff interactive
+				Print "     Opening Mdl_Bldg_" + iBuff
+				Select AltPips.col1, count(*) "nX" 
+					from AltPips, BldgBuff 
+					where AltPips.obj intersects BldgBuff.obj
+					group by AltPips.col1
+					into QyxData
+
+				DoStr = "Select * from AltPips where " + sUpdtFld3+ "  =0 into qyUpdt"
+				Run Command DoStr	
+
+				Add Column QyUpdt (sUpdtFld3) from QyxData set to nX where col1 = col1
+				Add Column QyUpdt (sUpdtFld4) from QyxData set to iBuff where col1 = col1
+				Close Table BldgBuff
+			NEXT
+	          Close table TrgtTbl  
+				Close Table ObjTbl
+
+		CASE "HardAreas"		'=========================
+
+			Select * from AltPips,TrgtTbl where AltPips.obj intersects TrgtTbl.obj into QyUpdt
+			IF Tableinfo(QyUpdt, 8) THEN
+				Update QyUpdt set HardArea = 1
+				Commit table Altpips
+				END IF
+
+			Print "Hard Areas Identified " + Time(12)
+
+	'========================================\
+	END CASE '=== E N D  O F  C A S E S ======>
+	'========================================/
+	
+	Exit Sub
+	
+'ERROR HANDLING
+	GOTO ErrPass
+	BuffPass:	
+	 	print Error$()
+		Resume Next
+	ErrPass:
+
+END SUB
+'=========================================================================================================
