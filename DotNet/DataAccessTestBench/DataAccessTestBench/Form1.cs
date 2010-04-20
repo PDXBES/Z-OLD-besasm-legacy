@@ -22,13 +22,14 @@ namespace DataAccessTestBench
     {
       InitializeComponent();
 
-      string testModelPath = @"C:\Data\Projects\41800023-1 BES_DataManagement\Beech_Essex\BEE_FU\";
+      string testModelPath = @"C:\Data\Projects\41800023-1 BES_DataManagement\Beech_Essex\BEE_RP\";
       //string testModelPath = @"\\Cassio\systems_planning\8063_CombinedFacPlan\Models\Alts\Beech_Essex\BEE_NP-Pipe\";
 
       string testAlternativePath = @"C:\Data\Projects\41800023-1 BES_DataManagement\Beech_Essex\BEE_FU\alternatives\BEE_RP\";
       //string testAlternativePath = @"\\Cassio\systems_planning\8063_CombinedFacPlan\Models\Alts\Beech_Essex\BEE_NP_Base\alternatives\BEE_NP_NP-Pipe";
 
-      string testSwmmOutput = @"C:\Data\Projects\41800023-1 BES_DataManagement\Beech_Essex\BEE_FU\sim\25\BEE_FU_25.out";
+      //string testSwmmOutput = @"C:\Data\Projects\41800023-1 BES_DataManagement\Beech_Essex\BEE_FU\sim\25\BEE_FU_25.out";
+      string testSwmmOutput = @"C:\Data\Projects\41800023-1 BES_DataManagement\Beech_Essex\BEE_NP-Pipe_FU_4S6.out";
            
       scDS = new StormwaterControlsDataSet();
       scDS.InitStormwaterControlDataSet(testModelPath);
@@ -136,15 +137,51 @@ namespace DataAccessTestBench
       }
 
       textBox1.AppendText("\n");
-      textBox1.AppendText("Vol. Removed Street Storage\n");
+      textBox1.AppendText("Roof Planter Storage Volume\n");
       textBox1.AppendText("------------------------------------\n");
       foreach (var row in query)
       {
         Dictionary<string, ReportBase.Parameter> parameters = new Dictionary<string, ReportBase.Parameter>();
         parameters.Add("FocusArea", new ReportBase.Parameter("FocusArea", row.FocusArea));
-        double streetStorageVol = rpReport.StormwaterRemovalVolStreetStorage(parameters);
+        double stormwaterRemovalVol = rpReport.RoofPlanterStorageVolume(parameters);
 
-        textBox1.AppendText("Focus Area: " + row.FocusArea + "; Vol Remove: = " + streetStorageVol + "\n");
+        textBox1.AppendText("Focus Area: " + row.FocusArea + "; Vol Remove: = " + stormwaterRemovalVol + "\n");
+      }
+
+      textBox1.AppendText("\n");
+      textBox1.AppendText("Roof Planter Infiltration Volume\n");
+      textBox1.AppendText("------------------------------------\n");
+      foreach (var row in query)
+      {
+        Dictionary<string, ReportBase.Parameter> parameters = new Dictionary<string, ReportBase.Parameter>();
+        parameters.Add("FocusArea", new ReportBase.Parameter("FocusArea", row.FocusArea));
+        double stormwaterRemovalVol = rpReport.RoofPlanterInfiltrationVolume(parameters);
+
+        textBox1.AppendText("Focus Area: " + row.FocusArea + "; Vol Remove: = " + stormwaterRemovalVol + "\n");
+      }
+
+      textBox1.AppendText("\n");
+      textBox1.AppendText("Roof Bio Storage Volume\n");
+      textBox1.AppendText("------------------------------------\n");
+      foreach (var row in query)
+      {
+        Dictionary<string, ReportBase.Parameter> parameters = new Dictionary<string, ReportBase.Parameter>();
+        parameters.Add("FocusArea", new ReportBase.Parameter("FocusArea", row.FocusArea));
+        double stormwaterRemovalVol = rpReport.RoofBioStorageVolume(parameters);
+
+        textBox1.AppendText("Focus Area: " + row.FocusArea + "; Vol Remove: = " + stormwaterRemovalVol + "\n");
+      }
+
+      textBox1.AppendText("\n");
+      textBox1.AppendText("Roof Bio Infiltration Volume\n");
+      textBox1.AppendText("------------------------------------\n");
+      foreach (var row in query)
+      {
+        Dictionary<string, ReportBase.Parameter> parameters = new Dictionary<string, ReportBase.Parameter>();
+        parameters.Add("FocusArea", new ReportBase.Parameter("FocusArea", row.FocusArea));
+        double stormwaterRemovalVol = rpReport.RoofBioInfiltrationVolume(parameters);
+
+        textBox1.AppendText("Focus Area: " + row.FocusArea + "; Vol Remove: = " + stormwaterRemovalVol + "\n");
       }
 
 

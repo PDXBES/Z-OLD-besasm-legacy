@@ -11764,11 +11764,11 @@ namespace SystemsAnalysis.DataAccess {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string NGTOParking {
                 get {
-                    try {
-                        return ((string)(this[this.tableAltParkingTargets.NGTOParkingColumn]));
+                    if (this.IsNGTOParkingNull()) {
+                        return string.Empty;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'NGTOParking\' in table \'AltParkingTargets\' is DBNull.", e);
+                    else {
+                        return ((string)(this[this.tableAltParkingTargets.NGTOParkingColumn]));
                     }
                 }
                 set {

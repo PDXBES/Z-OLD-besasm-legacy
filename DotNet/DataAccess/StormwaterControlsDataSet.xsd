@@ -2550,7 +2550,7 @@ FROM         TableE19</CommandText>
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="NGTOParking" msprop:Generator_UserColumnName="NGTOParking" msprop:Generator_ColumnPropNameInRow="NGTOParking" msprop:Generator_ColumnVarNameInTable="columnNGTOParking" msprop:Generator_ColumnPropNameInTable="NGTOParkingColumn" minOccurs="0">
+              <xs:element name="NGTOParking" msprop:Generator_UserColumnName="NGTOParking" msprop:Generator_ColumnPropNameInRow="NGTOParking" msprop:nullValue="_empty" msprop:Generator_ColumnVarNameInTable="columnNGTOParking" msprop:Generator_ColumnPropNameInTable="NGTOParkingColumn" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="7" />

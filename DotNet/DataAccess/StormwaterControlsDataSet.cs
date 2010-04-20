@@ -85,8 +85,8 @@ namespace SystemsAnalysis.DataAccess
       XPSWMMResults xpSwmmResults = new XPSWMMResults(swmmOutputFile);
       xpSwmmResults.GetTableE18().CopyToDataTable(this.TableE18, LoadOption.PreserveChanges);
       xpSwmmResults.GetTableE19().CopyToDataTable(this.TableE19, LoadOption.PreserveChanges);
+      
     }
-
   }
 }
 
