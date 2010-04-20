@@ -17,36 +17,36 @@
          <Cell data="(Existing Conditions)" cellType="SUBCOLUMN" footerID="*"></Cell>
          <Cell data="(Future Conditions)" cellType="SUBCOLUMN" footerID="*"></Cell>
       </Header>
-      <Row isMultiRow="true" multiRowKey="FocusArea">
+      <Row isMultiRow="true" multiRowKey="RPFocusArea">
         <Cell cellType="FUNCTION">
-          <Function functionName="FocusAreaName" library="AlternativeReport">
-            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+          <Function functionName="FocusAreaName" library="RecommendedPlanReport">
+            <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
           </Function>
         </Cell>
         <Cell cellType="FUNCTION">
           <Function functionName="BSBRCount" library="RecommendedPlanReport" format="N0">
-            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+            <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
             <Parameter parameterName="UseFlag" parameterValue="EX_BASE" />
             <Parameter parameterName="StormEvent" parameterValue="2_YEAR" />
           </Function>
         </Cell>
         <Cell cellType="FUNCTION">
           <Function functionName="BSBRCount" library="RecommendedPlanReport" format="N0">
-            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+            <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
             <Parameter parameterName="UseFlag" parameterValue="EX_BASE" />
             <Parameter parameterName="StormEvent" parameterValue="5_YEAR" />
           </Function>
         </Cell>
         <Cell cellType="FUNCTION">
         <Function functionName="BSBRCount" library="RecommendedPlanReport" format="N0">
-            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+            <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
             <Parameter parameterName="UseFlag" parameterValue="EX_BASE" />
             <Parameter parameterName="StormEvent" parameterValue="25_YEAR" />
           </Function>
         </Cell>
         <Cell cellType="FUNCTION">
           <Function functionName="BSBRCount" library="RecommendedPlanReport" format="N0">
-            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+            <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
             <Parameter parameterName="UseFlag" parameterValue="FU_BASE" />
             <Parameter parameterName="StormEvent" parameterValue="25_YEAR" />
           </Function>
@@ -63,35 +63,35 @@
         <Cell data="Number of New or Upsized Pipes" cellType="COLUMNNAME"></Cell>
         <Cell data="Length of New or Upsized Pipe (ft)" cellType="COLUMNNAME"></Cell>
       </Header>
-      <Row isMultiRow="true" multiRowKey="FocusArea">
+      <Row isMultiRow="true" multiRowKey="RPFocusArea">
         <Cell cellType="FUNCTION">
-          <Function functionName="FocusAreaName" library="AlternativeReport">
-            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+          <Function functionName="FocusAreaName" library="RecommendedPlanReport">
+            <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
           </Function>
         </Cell>
         <Cell cellType="FUNCTION">
-          <Function functionName="StreetControlCount" library="AlternativeReport" format="N0">
-            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+          <Function functionName="StreetControlCount" library="RecommendedPlanReport" format="N0">
+            <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
           </Function>
         </Cell>
         <Cell cellType="FUNCTION">
-          <Function functionName="RoofControlCount" library="AlternativeReport" format="N0">
-            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+          <Function functionName="RoofControlCount" library="RecommendedPlanReport" format="N0">
+            <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
           </Function>
         </Cell>
         <Cell cellType="FUNCTION">
-          <Function functionName="ParkingControlCount" library="AlternativeReport" format="N0">
-            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+          <Function functionName="ParkingControlCount" library="RecommendedPlanReport" format="N0">
+            <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
           </Function>
         </Cell>
         <Cell cellType="FUNCTION">
-          <Function functionName="NewAndUpsizedPipeCount" library="AlternativeReport" format="N0">
-            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+          <Function functionName="NewAndUpsizedPipeCount" library="RecommendedPlanReport" format="N0">
+            <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
           </Function>
         </Cell>
         <Cell cellType="FUNCTION">
-          <Function functionName="NewAndUpsizedPipeLength" library="AlternativeReport" format="N0" suffix="'">
-            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+          <Function functionName="NewAndUpsizedPipeLength" library="RecommendedPlanReport" format="N0" suffix="'">
+            <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
           </Function>
         </Cell>
       </Row>
@@ -102,22 +102,22 @@
         <Cell data="Number of BSBR Remaining" cellType="COLUMNNAME" footerID="*"></Cell>
         <Cell data="Volume of Stormwater Runoff Removed from the Tunnel System (gallons)" cellType="COLUMNNAME" footerID="**"></Cell>
       </Header>
-      <Row isMultiRow="true" multiRowKey="FocusArea">
+      <Row isMultiRow="true" multiRowKey="RPFocusArea">
         <Cell cellType="FUNCTION">
-          <Function functionName="FocusAreaName" library="AlternativeReport">
-            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+          <Function functionName="FocusAreaName" library="RecommendedPlanReport">
+            <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
           </Function>
         </Cell>
         <Cell cellType="FUNCTION">
 					<Function functionName="BSBRCount" library="RecommendedPlanReport" format="N0">
-            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+            <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
             <Parameter parameterName="UseFlag" parameterValue="RP" />
             <Parameter parameterName="StormEvent" parameterValue="25_YEAR" />
           </Function>
         </Cell>
         <Cell cellType="FUNCTION">
           <Function functionName="StormwaterRemovalVol" library="RecommendedPlanReport" format="N0">
-            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+            <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
           </Function>
         </Cell>
       </Row>
@@ -133,35 +133,35 @@
         <Cell data="Present Worth Cost" cellType="COLUMNNAME"></Cell>
         <Cell data="Cost per BSBR Eliminated" cellType="COLUMNNAME"></Cell>
       </Header>
-      <Row isMultiRow="true" multiRowKey="FocusArea">
+      <Row isMultiRow="true" multiRowKey="RPFocusArea">
         <Cell cellType="FUNCTION">
-          <Function functionName="FocusAreaName" library="AlternativeReport">
-            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+          <Function functionName="FocusAreaName" library="RecommendedPlanReport">
+            <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
           </Function>
         </Cell>
         <Cell cellType="FUNCTION">
           <Function functionName="CapitalCost" library="RecommendedPlanReport" format="N0">
-            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+            <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
           </Function>
         </Cell>
         <Cell cellType="FUNCTION">
-          <Function functionName="CreditRemovingVolumeTunnel" library="RecommendedPlanReport" format="N0">
-            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+          <Function functionName="CreditRemovingVolumeTunnel" library="RecommendedPlanReport" format="$#,###.00">
+            <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
           </Function>
         </Cell>
         <Cell cellType="FUNCTION">
           <Function functionName="AnnualOperationMaintenceCost" library="RecommendedPlanReport" format="N0">
-            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+            <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
           </Function>
         </Cell>
         <Cell cellType="FUNCTION">
           <Function functionName="PresentWorthCost" library="RecommendedPlanReport" format="N0">
-            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+            <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
           </Function>
         </Cell>
         <Cell cellType="FUNCTION">
           <Function functionName="BSBREliminated" library="RecommendedPlanReport" format="N0">
-            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+            <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
           </Function>
        </Cell>
       </Row>
@@ -169,27 +169,27 @@
         <Cell cellType="CONST" data="Total" />
         <Cell cellType="FUNCTION">
           <Function functionName="TotalCapitalCost" library="RecommendedPlanReport" format="N0">
-            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+            <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
           </Function>
         </Cell>
         <Cell cellType="FUNCTION">
           <Function functionName="TotalCreditRemovingVolumeTunnel" library="RecommendedPlanReport" format="N0">
-            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+            <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
           </Function>
         </Cell>
         <Cell cellType="FUNCTION">
           <Function functionName="TotalAnnualOperationMaintenceCost" library="RecommendedPlanReport" format="N0">
-            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+            <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
           </Function>
         </Cell>
         <Cell cellType="FUNCTION">
           <Function functionName="TotalPresentWorthCost" library="RecommendedPlanReport" format="N0">
-            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+            <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
           </Function>
         </Cell>
         <Cell cellType="FUNCTION">
           <Function functionName="TotalBSBREliminated" library="RecommendedPlanReport" format="N0">
-            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+            <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
           </Function>
         </Cell>
       </Row>
@@ -209,30 +209,30 @@
         <Cell data="(acres)" cellType="SUBCOLUMN"></Cell>
         <Cell data="(linear feet)" cellType="SUBCOLUMN"></Cell>
       </Header>
-      <Row isMultiRow="true" multiRowKey="FocusArea">
+      <Row isMultiRow="true" multiRowKey="RPFocusArea">
         <Cell cellType="FUNCTION">
-          <Function functionName="FocusAreaName" library="AlternativeReport">
-            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+          <Function functionName="FocusAreaName" library="RecommendedPlanReport">
+            <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
           </Function>
         </Cell>
         <Cell cellType="FUNCTION">
           <Function functionName="InfiltrateStormwaterArea" library="RecommendedPlanReport" format="N0">
-            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+            <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
           </Function>
         </Cell>
         <Cell cellType="FUNCTION">
           <Function functionName="ReducePollutantsArea" library="RecommendedPlanReport" format="N0">
-            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+            <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
           </Function>
         </Cell>
         <Cell cellType="FUNCTION">
           <Function functionName="ProtectImproveTerrestrialHabitatArea" library="RecommendedPlanReport" format="N0">
-            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+            <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
           </Function>
         </Cell>
         <Cell cellType="FUNCTION">
           <Function functionName="ProtectImproveAquaticHabitatArea" library="RecommendedPlanReport" format="N0">
-            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+            <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
           </Function>
         </Cell>
       </Row>
@@ -265,10 +265,10 @@
         <Cell data="(Max Score = 30)" cellType="SUBCOLUMN"></Cell>
         <Cell data="(Max Score = 100)" cellType="SUBCOLUMN"></Cell>
       </Header>
-      <Row isMultiRow="true" multiRowKey="FocusArea">
+      <Row isMultiRow="true" multiRowKey="RPFocusArea">
         <Cell cellType="FUNCTION">
-          <Function functionName="FocusAreaName" library="AlternativeReport">
-            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+          <Function functionName="FocusAreaName" library="RecommendedPlanReport">
+            <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
           </Function>
         </Cell>
         <Cell cellType="CONST" value="Manual Entry" />
@@ -287,40 +287,40 @@
         <Cell data="Project Capital Cost" cellType="COLUMNNAME"></Cell>
         <Cell data="Cost Benefit Ratio (CBR)" cellType="COLUMNNAME"></Cell>
       </Header>
-      <Row isMultiRow="true" multiRowKey="FocusArea">
+      <Row isMultiRow="true" multiRowKey="RPFocusArea">
          <Cell cellType="FUNCTION">
-          <Function functionName="FocusAreaName" library="AlternativeReport">
-            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+          <Function functionName="FocusAreaName" library="RecommendedPlanReport">
+            <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
           </Function>
         </Cell>
         <Cell cellType="FUNCTION">
           <Function functionName="MortalityRisk" library="RecommendedPlanReport" format="N0">
-            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+            <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
           </Function>
         </Cell>
         <Cell cellType="FUNCTION">
           <Function functionName="CapacityRisk" library="RecommendedPlanReport" format="N0">
-            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+            <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
           </Function>
         </Cell>
         <Cell cellType="FUNCTION">
           <Function functionName="BaseRisk" library="RecommendedPlanReport" format="N0">
-            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+            <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
           </Function>
         </Cell>
         <Cell cellType="FUNCTION">
           <Function functionName="ProjectPresentWorth" library="RecommendedPlanReport" format="N0">
-            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+            <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
           </Function>
         </Cell>
         <Cell cellType="FUNCTION">
           <Function functionName="ProjectCapitalCost" library="RecommendedPlanReport" format="N0">
-            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+            <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
           </Function>
         </Cell>
         <Cell cellType="FUNCTION">
           <Function functionName="CostBenefitRatio" library="RecommendedPlanReport" format="N0">
-            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+            <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
           </Function>
         </Cell>
       </Row>
@@ -328,32 +328,32 @@
         <Cell cellType="CONST" data="Total" />
         <Cell cellType="FUNCTION">
           <Function functionName="TotalMortalityRisk" library="RecommendedPlanReport" format="N0">
-            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+            <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
           </Function>
         </Cell>
         <Cell cellType="FUNCTION">
           <Function functionName="TotalCapacityRisk" library="RecommendedPlanReport" format="N0">
-            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+            <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
           </Function>
         </Cell>
         <Cell cellType="FUNCTION">
           <Function functionName="TotalBaseRisk" library="RecommendedPlanReport" format="N0">
-            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+            <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
           </Function>
         </Cell>
         <Cell cellType="FUNCTION">
           <Function functionName="TotalProjectPresentWorth" library="RecommendedPlanReport" format="N0">
-            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+            <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
           </Function>
         </Cell>
         <Cell cellType="FUNCTION">
           <Function functionName="TotalProjectCapitalCost" library="RecommendedPlanReport" format="N0">
-            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+            <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
           </Function>
         </Cell>
         <Cell cellType="FUNCTION">
           <Function functionName="TotalCostBenefitRatio" library="RecommendedPlanReport" format="N0">
-            <Parameter parameterName="FocusArea" parameterValue="@FocusArea"></Parameter>
+            <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
           </Function>
         </Cell>
       </Row>

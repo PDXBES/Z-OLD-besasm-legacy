@@ -86,7 +86,10 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
       {
         string alternativePath;
         alternativePath = AuxilaryData["AlternativePath"].Value;
-        alternativePath = System.IO.Path.GetDirectoryName(alternativePath);
+        if (alternativePath.EndsWith("alternative_package.mdb"))
+        {
+          alternativePath = System.IO.Path.GetDirectoryName(alternativePath);
+        }
         altPackage = new AlternativePackage(alternativePath);
       }
       catch (Exception ex)

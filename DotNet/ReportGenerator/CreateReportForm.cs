@@ -999,7 +999,7 @@ namespace SystemsAnalysis.Reporting
         backgroundWorker1.ReportProgress(0, new StatusChangedArgs("Performing trace."));
 
         charLinks = MstLinks.Trace(this.startLinks, this.stopLinks);
-        if (charLinks == null || charLinks.Count <= 0)
+        if (charLinks == null)
         {
           throw new Exception("Error: No links were selected. Please verify start links.");
         }

@@ -22,14 +22,14 @@ namespace DataAccessTestBench
     {
       InitializeComponent();
 
-      string testModelPath = @"C:\Data\Projects\41800023-1 BES_DataManagement\Beech_Essex\BEE_RP\";
-      //string testModelPath = @"\\Cassio\systems_planning\8063_CombinedFacPlan\Models\Alts\Beech_Essex\BEE_NP-Pipe\";
+      //string testModelPath = @"C:\Data\Projects\41800023-1 BES_DataManagement\Beech_Essex\BEE_RP\";
+      string testModelPath = @"\\Cassio\systems_planning\8063_CombinedFacPlan\Models\RP\Beech_Essex\BEE_RP\";
 
-      string testAlternativePath = @"C:\Data\Projects\41800023-1 BES_DataManagement\Beech_Essex\BEE_FU\alternatives\BEE_RP\";
-      //string testAlternativePath = @"\\Cassio\systems_planning\8063_CombinedFacPlan\Models\Alts\Beech_Essex\BEE_NP_Base\alternatives\BEE_NP_NP-Pipe";
-
-      //string testSwmmOutput = @"C:\Data\Projects\41800023-1 BES_DataManagement\Beech_Essex\BEE_FU\sim\25\BEE_FU_25.out";
-      string testSwmmOutput = @"C:\Data\Projects\41800023-1 BES_DataManagement\Beech_Essex\BEE_NP-Pipe_FU_4S6.out";
+      //string testAlternativePath = @"C:\Data\Projects\41800023-1 BES_DataManagement\Beech_Essex\BEE_FU\alternatives\BEE_RP\";
+      string testAlternativePath = @"\\Cassio\systems_planning\8063_CombinedFacPlan\Models\RP\Beech_Essex\BEE_FU\alternatives\BEE_RP";
+      
+      //string testSwmmOutput = @"C:\Data\Projects\41800023-1 BES_DataManagement\Beech_Essex\BEE_NP-Pipe_FU_4S6.out";
+      string testSwmmOutput = @"\\Cassio\systems_planning\8063_CombinedFacPlan\Models\RP\Beech_Essex\BEE_RP\sim\4S6\BEE_RP_4S6.out";
            
       scDS = new StormwaterControlsDataSet();
       scDS.InitStormwaterControlDataSet(testModelPath);
@@ -121,7 +121,7 @@ namespace DataAccessTestBench
         parameters.Add("FocusArea", new ReportBase.Parameter("FocusArea", row.FocusArea));
         double infiltratedArea = rpReport.InfiltrateStormwaterArea(parameters);
 
-        textBox1.AppendText("Focus Area: " + row.FocusArea + "; Infiltrated Area = " + infiltratedArea + "\n");        
+        textBox1.AppendText("Focus Area: " + row.FocusArea + "; Infiltrated Area = " + infiltratedArea + "/n");        
       }
 
       textBox1.AppendText("\n");

@@ -430,6 +430,7 @@ namespace SystemsAnalysis.Reporting
       string library = "";
       string formatString = "";
       string suffix = "";
+      string prefix = "";
       string defaultValue = "";
 
       IDictionary<string, ReportBase.Parameter> parameters = new Dictionary<string, ReportBase.Parameter>();
@@ -449,6 +450,7 @@ namespace SystemsAnalysis.Reporting
             library = functionReader.GetAttribute("library");
             formatString = functionReader.GetAttribute("format") == null ? String.Empty : functionReader.GetAttribute("format");
             suffix = functionReader.GetAttribute("suffix") == null ? String.Empty : functionReader.GetAttribute("suffix");
+            prefix = functionReader.GetAttribute("prefix") == null ? String.Empty : functionReader.GetAttribute("prefix");
             defaultValue = functionReader.GetAttribute("defaultValue") == null ? String.Empty : functionReader.GetAttribute("defaultValue");
             break;
           case "Parameter":
@@ -473,7 +475,7 @@ namespace SystemsAnalysis.Reporting
       }
       try
       {
-        return reports[library].EvaluateFunction(functionName, parameters, formatString) + suffix;
+        return prefix + reports[library].EvaluateFunction(functionName, parameters, formatString) + suffix;
       }
       catch (Exception ex)
       {
@@ -568,10 +570,12 @@ namespace SystemsAnalysis.Reporting
       {
         case "FECID":
           return (IList)FecReport.FecIDList();
-        case "FocusArea":
+        case "FocusArea":           
           return AlternativeReport.FocusAreaList();
         case "PumpStationID":
           return PSReport.PumpStationIDList;
+        case "RPFocusArea":
+          return RecommendedPlanReport.FocusAreaList();
         case "DiversionID":
         default:
           multiRowKeyList = new int[0];

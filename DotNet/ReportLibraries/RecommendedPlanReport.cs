@@ -4,6 +4,7 @@ using System.Text;
 using SystemsAnalysis.DataAccess;
 using SystemsAnalysis.Utils.AccessUtils;
 using SystemsAnalysis.Modeling;
+using SystemsAnalysis.ModelConstruction;
 using System.Data.Linq;
 using System.IO;
 using System.Linq.Expressions;
@@ -11,15 +12,18 @@ using System.Linq;
 
 namespace SystemsAnalysis.Reporting.ReportLibraries
 {
-  public class RecommendedPlanReport : ReportBase
+  public class RecommendedPlanReport : AlternativeReport //ReportBase
   {
-      const double SQ_FT_PER_ACRE = 43560;
+    const double SQ_FT_PER_ACRE = 43560;
+    const double GAL_PER_FT_3 = 7.48;
+    const double CREDIT_PER_GALLON_STORMWATER_REMOVAL = 3;
 
     private StormwaterControlsDataSet scDS;
     private AltCompilerDataSet altCompilerDS;
     private string modelPath;
     private string alternativePath;
     private string swmmOutputFile;
+    private AlternativeReport alternativeReport;
 
     public RecommendedPlanReport()
     {
@@ -52,8 +56,8 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
       {
         auxilaryDataDescription = new Dictionary<string, string>();
         auxilaryDataDescription.Add("ModelPath", "Model Directory (Model.ini)");
-        auxilaryDataDescription.Add("AlternativePath", "Alternative Package (alternative_package.mdb)");
-        auxilaryDataDescription.Add("SwmmOutputFile", "Swmm Output File (*.out)");
+        //auxilaryDataDescription.Add("AlternativePath", "Alternative Package (alternative_package.mdb)");
+        auxilaryDataDescription.Add("SwmmOutputFile", "Swmm Output File (.out)");
       }
       public override bool RequiresAuxilaryData
       {
@@ -78,9 +82,21 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
     public override void LoadAuxilaryData(Dictionary<string, Parameter> AuxilaryData)
     {
       modelPath = AuxilaryData["ModelPath"].Value;
-      //modelPath = Path.GetDirectoryName(modelPath);
-      alternativePath = AuxilaryData["AlternativePath"].Value;
-      //alternativePath = Path.GetDirectoryName(alternativePath);
+      if (modelPath.ToLower().EndsWith("model.ini"))
+      {
+        modelPath = Path.GetDirectoryName(modelPath);
+      }
+
+
+      ModelConfigurationDataSet modelConfigDS = new ModelConfigurationDataSet(Path.GetFullPath(modelPath));
+      ModelConfigurationDataSet.AlternativeRow[] altRow = modelConfigDS.GetIncludedAlternatives();
+      alternativePath = altRow[0].BaseModel + "alternatives\\" + altRow[0].Name;
+      AuxilaryData.Add("AlternativePath", new Parameter("AlternativePath", alternativePath));
+      base.LoadAuxilaryData(AuxilaryData);
+      //alternativePath = AuxilaryData["AlternativePath"].Value;
+      //alternativeReport = new AlternativeReport();
+      //alternativeReport.LoadAuxilaryData(AuxilaryData);
+
       swmmOutputFile = AuxilaryData["SwmmOutputFile"].Value;
 
       try
@@ -129,12 +145,12 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
         join altStreetTargets in scDS.AltStreetTargets
         on icStreetTargets.icID equals altStreetTargets.ICID
         where altStreetTargets.FocusArea == focusArea
-        group tableE18 by altStreetTargets.FocusArea into grpFocusArea
-        orderby grpFocusArea.Key
+        group tableE18 by altStreetTargets.FocusArea into gFocusArea
+        orderby gFocusArea.Key
         select new
         {
-          FocusArea = grpFocusArea.Key,
-          StreetStorage = grpFocusArea.Sum(p => p.StorageVolumeCuFt)
+          FocusArea = gFocusArea.Key,
+          StreetStorage = gFocusArea.Sum(p => p.StorageVolumeCuFt) * GAL_PER_FT_3
         };
 
       if (query.Count() > 1)
@@ -162,12 +178,12 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
         join altStreetTargets in scDS.AltStreetTargets
         on icStreetTargets.icID equals altStreetTargets.ICID
         where altStreetTargets.FocusArea == focusArea
-        group tableE19 by altStreetTargets.FocusArea into grpFocusArea
-        orderby grpFocusArea.Key
+        group tableE19 by altStreetTargets.FocusArea into gFocusArea
+        orderby gFocusArea.Key
         select new
         {
-          FocusArea = grpFocusArea.Key,
-          InfiltrationVolume = grpFocusArea.Sum(p => p.InfiltrationVolumeCuFt)
+          FocusArea = gFocusArea.Key,
+          InfiltrationVolume = gFocusArea.Sum(p => p.InfiltrationVolumeCuFt) * GAL_PER_FT_3
         };
 
       if (query.Count() > 1)
@@ -207,11 +223,11 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
         join query1 in qryRoofTargetsPlantGroupByFacNodeName
         on tableE18.NodeName equals query1.NodeName
         where query1.FocusArea == focusArea
-        group tableE18 by query1.FocusArea into grpFocusArea
+        group tableE18 by query1.FocusArea into gFocusArea
         select new
         {
-          FocusArea = grpFocusArea.Key,
-          StorageVolume = grpFocusArea.Sum(p => p.StorageVolumeCuFt)
+          FocusArea = gFocusArea.Key,
+          StorageVolume = gFocusArea.Sum(p => p.StorageVolumeCuFt) * GAL_PER_FT_3
         };
 
       if (qryRoofTargetsPlant.Count() > 1)
@@ -251,11 +267,11 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
         join query1 in qryRoofTargetsPlantGroupByFacNodeName
         on tableE19.NodeName equals query1.NodeName
         where query1.FocusArea == focusArea
-        group tableE19 by query1.FocusArea into grpFocusArea
+        group tableE19 by query1.FocusArea into gFocusArea
         select new
         {
-          FocusArea = grpFocusArea.Key,
-          InfiltrationVolume = grpFocusArea.Sum(p => p.InfiltrationVolumeCuFt)
+          FocusArea = gFocusArea.Key,
+          InfiltrationVolume = gFocusArea.Sum(p => p.InfiltrationVolumeCuFt) * GAL_PER_FT_3
         };
 
       double roofTargetsPlant = 0;
@@ -310,11 +326,11 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
         on roof.NodeName equals tableE18.NodeName into e18Join
         from e18Sub in e18Join.DefaultIfEmpty() //use to create LINQ left outer join
         where roof.FocusArea == focusArea && parkSub == null
-        group e18Sub by roof.FocusArea into grpFocusArea
+        group e18Sub by roof.FocusArea into gFocusArea
         select new
         {
-          FocusArea = grpFocusArea.Key,
-          StorageVolume = grpFocusArea.Sum(p => p.StorageVolumeCuFt)
+          FocusArea = gFocusArea.Key,
+          StorageVolume = gFocusArea.Sum(p => p.StorageVolumeCuFt) * GAL_PER_FT_3
 
         };
 
@@ -376,11 +392,11 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
         on roof.NodeName equals tableE19.NodeName into E19Join
         from E19Sub in E19Join.DefaultIfEmpty()
         where roof.FocusArea == focusArea && parkSub == null
-        group E19Sub by roof.FocusArea into grpFocusArea
+        group E19Sub by roof.FocusArea into gFocusArea
         select new
         {
-          FocusArea = grpFocusArea.Key,
-          InfiltrationVolume = grpFocusArea.Sum(p => p.InfiltrationVolumeCuFt)
+          FocusArea = gFocusArea.Key,
+          InfiltrationVolume = gFocusArea.Sum(p => p.InfiltrationVolumeCuFt) * GAL_PER_FT_3
 
         };
 
@@ -424,11 +440,11 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
         join tableE18 in scDS.TableE18
         on query1.NodeName equals tableE18.NodeName
         where query1.FocusArea == focusArea
-        group tableE18 by query1.FocusArea into grpFocusArea
+        group tableE18 by query1.FocusArea into gFocusArea
         select new
         {
-          FocusArea = grpFocusArea.Key,
-          StorageVolume = grpFocusArea.Sum(p => p.StorageVolumeCuFt)
+          FocusArea = gFocusArea.Key,
+          StorageVolume = gFocusArea.Sum(p => p.StorageVolumeCuFt) * GAL_PER_FT_3
         };
 
       if (qryParkTargetsBio.Count() > 1)
@@ -470,11 +486,11 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
         join tableE19 in scDS.TableE19
         on query1.NodeName equals tableE19.NodeName
         where query1.FocusArea == focusArea
-        group tableE19 by query1.FocusArea into grpFocusArea
+        group tableE19 by query1.FocusArea into gFocusArea
         select new
         {
-          FocusArea = grpFocusArea.Key,
-          InfiltrationVolume = grpFocusArea.Sum(p => p.InfiltrationVolumeCuFt)
+          FocusArea = gFocusArea.Key,
+          InfiltrationVolume = gFocusArea.Sum(p => p.InfiltrationVolumeCuFt) * GAL_PER_FT_3
         };
 
       if (qryParkTargetsBio.Count() > 1)
@@ -532,12 +548,12 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
         join mdlSurfSc in scDS.mdl_SurfSC_ac
         on icStreetTarget.surfSCID equals mdlSurfSc.SurfSCID
         where altStreetTarget.FocusArea == focusArea
-        group mdlSurfSc by altStreetTarget.FocusArea into grpFocusArea
-        orderby grpFocusArea.Key
+        group mdlSurfSc by altStreetTarget.FocusArea into gFocusArea
+        orderby gFocusArea.Key
         select new
         {
-          FocusArea = grpFocusArea.Key,
-          NetIA = grpFocusArea.Sum(p => p.c_netIMPacres)
+          FocusArea = gFocusArea.Key,
+          NetIA = gFocusArea.Sum(p => p.c_netIMPacres)
         };
 
       double infiltrationAreaStreet = 0;
@@ -560,12 +576,12 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
         on icRoofTargets.dscID equals mdlRoofTargets.dscID
         where icRoofTargets.constructed == 0 &&
           icRoofTargets.buildModelIC &&
-          altRoofTargets.FocusArea == focusArea          
-        group mdlRoofTargets by altRoofTargets.FocusArea into grpFocusArea        
+          altRoofTargets.FocusArea == focusArea
+        group mdlRoofTargets by altRoofTargets.FocusArea into gFocusArea
         select new
         {
-          FocusArea = grpFocusArea.Key,
-          InfiltrationAreaRoof = grpFocusArea.Sum(p => p.SqFt_Bioret + p.SqFt_Drywell + p.SqFt_Eco + p.SqFt_Plntr + p.SqFt_Veg)          
+          FocusArea = gFocusArea.Key,
+          InfiltrationAreaRoof = gFocusArea.Sum(p => p.SqFt_Bioret + p.SqFt_Drywell + p.SqFt_Eco + p.SqFt_Plntr + p.SqFt_Veg) / SQ_FT_PER_ACRE
         };
 
       double infiltrationAreaRoof = 0;
@@ -589,11 +605,11 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
         where icParkTargets.constructed == 0 &&
           icParkTargets.buildModelIC &&
           altParkTargets.FocusArea == focusArea
-        group mdlParkTargets by altParkTargets.FocusArea into grpFocusArea
+        group mdlParkTargets by altParkTargets.FocusArea into gFocusArea
         select new
         {
-          FocusArea = grpFocusArea.Key,
-          InfiltrationAreaPark = grpFocusArea.Sum(p => p.SqFt_Bioret) / SQ_FT_PER_ACRE
+          FocusArea = gFocusArea.Key,
+          InfiltrationAreaPark = gFocusArea.Sum(p => p.SqFt_Bioret) / SQ_FT_PER_ACRE
         };
 
       double infiltrationAreaPark = 0;
@@ -614,8 +630,8 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
     {
       return InfiltrateStormwaterArea(parameters);
     }
-
-    public double ProtectAndImproveTerrestrialHabitialArea(IDictionary<string, Parameter> parameters)
+                  
+    public double ProtectImproveTerrestrialHabitatArea(IDictionary<string, Parameter> parameters)
     {
       string focusArea;
       focusArea = parameters["FocusArea"].Value;
@@ -627,12 +643,12 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
         join altStreetTarget in scDS.AltStreetTargets
         on icStreetTarget.icID equals altStreetTarget.ICID
         where icNode.Factype == "C" && icStreetTarget.constructed == 0 && altStreetTarget.FocusArea == focusArea
-        group icNode by altStreetTarget.FocusArea into grpFocusArea
-        orderby grpFocusArea.Key
+        group icNode by altStreetTarget.FocusArea into gFocusArea
+        orderby gFocusArea.Key
         select new
         {
-          FocusArea = grpFocusArea.Key,
-          FacilityVolume = grpFocusArea.Sum(p => p.FacVolCuFt) / 0.75 / 43560,
+          FocusArea = gFocusArea.Key,
+          FacilityVolume = gFocusArea.Sum(p => p.FacVolCuFt) / 0.75 / SQ_FT_PER_ACRE,
         };
 
       if (query.Count() > 1)
@@ -645,6 +661,18 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
       }
 
       return query.First().FacilityVolume;
+    }
+    public double ProtectImproveAquaticHabitatArea (IDictionary<string, Parameter> parameters)
+    {
+      return 0;
+    }
+
+    public double CreditRemovingVolumeTunnel(IDictionary<string, Parameter> parameters)
+    {
+      string focusArea;
+      focusArea = parameters["FocusArea"].Value;
+
+      return StormwaterRemovalVol(parameters) * CREDIT_PER_GALLON_STORMWATER_REMOVAL;
     }
 
 
