@@ -298,7 +298,7 @@ namespace SystemsAnalysis.Reporting
 			//statusDisplayControl.Show();              
 			ultraDockManager1.PaneFromControl(panel1).Activate();
 			ultraDockManager1.PaneFromControl(panel1).Closed = false;
-			ultraDockManager1.PaneFromControl(panel1).Pin();
+			//ultraDockManager1.PaneFromControl(panel1).Pin();
 
 
 			//this.ultraDockManager1.PaneFromControl(panel1).Activate();

@@ -18,7 +18,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
   public class AlternativeReport : ReportBase
   {
     private AlternativePackage altPackage;
-    private PipeInspectionDataSet piDS;
+    private PipeInspectionDataSet _piDS;
 
     /// <summary>
     /// Creates a AlternativeReport from a collections of Links, Nodes and Dscs
@@ -30,11 +30,21 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
     //: base(links, nodes, dscs)
     {
       this.OnStatusChanged(new StatusChangedArgs("Creating alternative objects."));
+    }
 
-      piDS = new PipeInspectionDataSet();
-      DataAccess.PipeInspectionDataSetTableAdapters.PipeInspectionGradesTableAdapter piTA;
-      piTA = new DataAccess.PipeInspectionDataSetTableAdapters.PipeInspectionGradesTableAdapter();
-      piTA.Fill(piDS.PipeInspectionGrades);
+    public PipeInspectionDataSet PiDS
+    {
+      get
+      {
+        if (_piDS == null)
+        {
+          _piDS = new PipeInspectionDataSet();
+          DataAccess.PipeInspectionDataSetTableAdapters.PipeInspectionGradesTableAdapter piTA;
+          piTA = new DataAccess.PipeInspectionDataSetTableAdapters.PipeInspectionGradesTableAdapter();
+          piTA.Fill(_piDS.PipeInspectionGrades);
+        }
+        return _piDS;
+      }
     }
 
     public new class ReportInfo : ReportBase.ReportInfo
@@ -196,7 +206,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
           continue;
         }
 
-        inspectionRow = piDS.PipeInspectionGrades.FindByMLinkID(mdlLink.MLinkID);
+        inspectionRow = PiDS.PipeInspectionGrades.FindByMLinkID(mdlLink.MLinkID);
         if (inspectionRow == null || inspectionRow.IsGradeNull())
         {
           continue;
@@ -241,7 +251,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
           continue;
         }
 
-        inspectionRow = piDS.PipeInspectionGrades.FindByMLinkID(mdlLink.MLinkID);
+        inspectionRow = PiDS.PipeInspectionGrades.FindByMLinkID(mdlLink.MLinkID);
         if (inspectionRow == null || inspectionRow.IsGradeNull())
         {
           continue;
@@ -286,7 +296,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
           continue;
         }
 
-        inspectionRow = piDS.PipeInspectionGrades.FindByMLinkID(mdlLink.MLinkID);
+        inspectionRow = PiDS.PipeInspectionGrades.FindByMLinkID(mdlLink.MLinkID);
         if (inspectionRow == null || inspectionRow.IsGradeNull())
         {
           continue;
@@ -330,7 +340,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
           continue;
         }
 
-        inspectionRow = piDS.PipeInspectionGrades.FindByMLinkID(mdlLink.MLinkID);
+        inspectionRow = PiDS.PipeInspectionGrades.FindByMLinkID(mdlLink.MLinkID);
         if (inspectionRow == null || inspectionRow.IsGradeNull())
         {
           continue;

@@ -89,6 +89,7 @@ namespace SystemsAnalysis.Reporting
       {
         this.OnStatusChanged(new StatusChangedArgs("Could not load master links preview", StatusChangeType.Error));
         this.OnStatusChanged(new StatusChangedArgs(ex.Message, StatusChangeType.Error));
+        _mstLinks = new Links();
       }
 
       this.OnStatusChanged(new StatusChangedArgs("Finished loading master data.", StatusChangeType.Info));
@@ -258,7 +259,7 @@ namespace SystemsAnalysis.Reporting
 
         if (studyArea == null || studyArea.Length <= 0)
         {
-          MessageBox.Show("You must enter a Study Area.", "No Study Area Name Specified", MessageBoxButtons.OK, MessageBoxIcon.Error);
+          MessageBox.Show("You must enter a Study Area Name.", "No Study Area Name Specified", MessageBoxButtons.OK, MessageBoxIcon.Error);
           return;
         }
         this.OnStatusChanged(new StatusChangedArgs("Characterizing study area '" + studyArea + "'."));
