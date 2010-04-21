@@ -91,7 +91,11 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
       ModelConfigurationDataSet modelConfigDS = new ModelConfigurationDataSet(Path.GetFullPath(modelPath));
       ModelConfigurationDataSet.AlternativeRow[] altRow = modelConfigDS.GetIncludedAlternatives();
       alternativePath = altRow[0].BaseModel + "alternatives\\" + altRow[0].Name;
-      AuxilaryData.Add("AlternativePath", new Parameter("AlternativePath", alternativePath));
+
+      if (!AuxilaryData.ContainsKey("AlternativePath"))
+      {
+        AuxilaryData.Add("AlternativePath", new Parameter("AlternativePath", alternativePath));
+      }
       base.LoadAuxilaryData(AuxilaryData);
       //alternativePath = AuxilaryData["AlternativePath"].Value;
       //alternativeReport = new AlternativeReport();
