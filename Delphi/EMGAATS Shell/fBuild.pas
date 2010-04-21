@@ -1074,6 +1074,7 @@ begin
   vgrdRunoffBaseFileName.Properties.Value := CurrentModel.Config.RunoffFileName;
   vgrdEngineBaseFileName.Properties.Value := CurrentModel.Config.EngineExportFileName;
   vgrdUseBaseflow.Properties.Value := CurrentModel.Config.UseBaseflow;
+  vgrdTraceStormwater.Properties.Value := CurrentModel.Config.TraceStormwater;
 
   pnlBuild.Enabled := True;
   pnlProgress.Hide;
