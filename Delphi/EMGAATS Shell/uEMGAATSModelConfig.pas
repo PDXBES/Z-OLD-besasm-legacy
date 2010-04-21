@@ -15,6 +15,7 @@ type
     fForcedRootLinks: THashedStringList;
     fForcedStopLinks: THashedStringList;
     fStormsToBuild: TStringList;
+    fTraceStormwater: Boolean;
     function GetHasDirectSubcatchments: Boolean;
     function GetHasNetwork: Boolean;
     function GetHasSurfaceSubcatchments: Boolean;
@@ -142,6 +143,7 @@ type
     function GetModelEnteredDate: TDateTime;
     procedure SetModelEnteredDate(const Value: TDateTime);
     procedure SetSystemMDBRefreshDate(const Value: TDateTime);
+    procedure SetTraceStormwater(const Value: Boolean);
   protected
     procedure GetMDBFiles;
     procedure GetStandardDirectories;
@@ -288,6 +290,7 @@ type
 
     procedure CopyBoundariesFromModel(AModelPath: String);
 
+    property TraceStormwater: Boolean read fTraceStormwater write SetTraceStormwater;
     // Operations
     // Copies standard entries from model template file
     procedure CopyConfigFromModelTemplate;
@@ -1337,6 +1340,12 @@ end;
 procedure TModelConfig.SetTraceSourceTable(const Value: String);
 begin
   fConfig.WriteString(TreeVerseSection, SourceTableKey, Value);
+end;
+
+procedure TModelConfig.SetTraceStormwater(const Value: Boolean);
+begin
+  if fTraceStormwater <> Value then
+    fTraceStormwater := Value;
 end;
 
 procedure TModelConfig.SetTransportFileName(const Value: TFileName);

@@ -62,6 +62,7 @@
       <field name="fForcedRootLinks" type="THashedStringList" visibility="private" />
       <field name="fForcedStopLinks" type="THashedStringList" visibility="private" />
       <field name="fStormsToBuild" type="TStringList" visibility="private" />
+      <field name="fTraceStormwater" type="Boolean" visibility="private" />
       <function name="GetHasDirectSubcatchments" visibility="private">
         <parameters>
           <retval type="Boolean" />
@@ -720,6 +721,11 @@
           <parameter name="Value" type="TDateTime" paramflags="const" />
         </parameters>
       </procedure>
+      <procedure name="SetTraceStormwater" visibility="private">
+        <parameters>
+          <parameter name="Value" type="Boolean" paramflags="const" />
+        </parameters>
+      </procedure>
       <procedure name="GetMDBFiles" visibility="protected">
       </procedure>
       <procedure name="GetStandardDirectories" visibility="protected">
@@ -874,6 +880,7 @@
           <parameter name="AModelPath" type="string" />
         </parameters>
       </procedure>
+      <property name="TraceStormwater" visibility="public" read="fTraceStormwater" write="SetTraceStormwater" type="Boolean" />
       <procedure name="CopyConfigFromModelTemplate" visibility="public">
       </procedure>
       <procedure name="CopyConfigFromSystem" visibility="public">
