@@ -144,6 +144,7 @@ type
     procedure SetModelEnteredDate(const Value: TDateTime);
     procedure SetSystemMDBRefreshDate(const Value: TDateTime);
     procedure SetTraceStormwater(const Value: Boolean);
+    function GetTraceStormwater: Boolean;
   protected
     procedure GetMDBFiles;
     procedure GetStandardDirectories;
@@ -290,7 +291,7 @@ type
 
     procedure CopyBoundariesFromModel(AModelPath: String);
 
-    property TraceStormwater: Boolean read fTraceStormwater write SetTraceStormwater;
+    property TraceStormwater: Boolean read GetTraceStormwater write SetTraceStormwater;
     // Operations
     // Copies standard entries from model template file
     procedure CopyConfigFromModelTemplate;
@@ -401,6 +402,7 @@ resourcestring
   EnableMessagesKey = 'EnableMessages';
   LinkExistingKey = 'LinkExisting';
   LinkFutureKey = 'LinkFuture';
+  TraceStormwaterKey = 'TraceStormwater';
 
   // Simulation Config Keys
   RunoffFileKey = 'RunoffFile';
@@ -1018,6 +1020,11 @@ begin
   Result := fConfig.ReadString(TreeVerseSection, SourceTableKey, '');
 end;
 
+function TModelConfig.GetTraceStormwater: Boolean;
+begin
+  Result := fConfig.ReadBool(TreeVerseSection, TraceStormwaterKey, False);
+end;
+
 function TModelConfig.GetTransportFileName: TFileName;
 begin
   Result := fConfig.ReadString(SimulationSection, TransportFileKey, '');
@@ -1344,8 +1351,7 @@ end;
 
 procedure TModelConfig.SetTraceStormwater(const Value: Boolean);
 begin
-  if fTraceStormwater <> Value then
-    fTraceStormwater := Value;
+  fConfig.WriteBool(TreeVerseSection, TraceStormwaterKey, Value);
 end;
 
 procedure TModelConfig.SetTransportFileName(const Value: TFileName);

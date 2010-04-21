@@ -726,6 +726,11 @@
           <parameter name="Value" type="Boolean" paramflags="const" />
         </parameters>
       </procedure>
+      <function name="GetTraceStormwater" visibility="private">
+        <parameters>
+          <retval type="Boolean" />
+        </parameters>
+      </function>
       <procedure name="GetMDBFiles" visibility="protected">
       </procedure>
       <procedure name="GetStandardDirectories" visibility="protected">
@@ -880,7 +885,7 @@
           <parameter name="AModelPath" type="string" />
         </parameters>
       </procedure>
-      <property name="TraceStormwater" visibility="public" read="fTraceStormwater" write="SetTraceStormwater" type="Boolean" />
+      <property name="TraceStormwater" visibility="public" read="GetTraceStormwater" write="SetTraceStormwater" type="Boolean" />
       <procedure name="CopyConfigFromModelTemplate" visibility="public">
       </procedure>
       <procedure name="CopyConfigFromSystem" visibility="public">
