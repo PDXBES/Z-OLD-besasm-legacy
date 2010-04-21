@@ -3,14 +3,10 @@
   <class name="TfrmWelcome">
     <ancestor name="TfrmLabeledChild" namespace="fLabeledChild">
       <ancestor name="TfrmChild" namespace="fChild">
-        <methodref name="FormClose" visibility="published">
-        </methodref>
-        <methodref name="CreateParams" visibility="protected">
-        </methodref>
-        <methodref name="Loaded" visibility="protected">
-        </methodref>
-        <methodref name="Create" visibility="public">
-        </methodref>
+        <methodref name="FormClose" visibility="published" />
+        <methodref name="CreateParams" visibility="protected" />
+        <methodref name="Loaded" visibility="protected" />
+        <methodref name="Create" visibility="public" />
         <ancestor name="TForm" namespace="Forms">
           <methodref name="ArrangeIcons" visibility="public">
           </methodref>
