@@ -698,7 +698,10 @@ begin
     SystemConfig.MDBsByName['TraceSourceDatabase'];
 
   if fModel.Config.TraceSourceTable = '' then
-    fModel.Config.TraceSourceTable := 'mst_links_existing';
+    if fModel.Config.TraceStormwater then
+      fModel.Config.TraceSourceTable := 'mst_links_allex'
+    else
+      fModel.Config.TraceSourceTable := 'mst_links_existing';
   if fModel.Config.LinkField = '' then
     fModel.Config.LinkField := 'MLinkID';
   if fModel.Config.USNodeField = '' then

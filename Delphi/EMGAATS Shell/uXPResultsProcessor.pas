@@ -598,12 +598,10 @@ begin
       end
       else
       begin
-
         ExtractTokensL(CurrentLine, ' ', '''', False, Tokens);
         Version := Tokens[2];
         if not TryStrToFloat(Version, VersionNum) then
         begin
-          CurrentLine := InTextStream.ReadLine;
           ExtractTokensL(CurrentLine, ' ', '''', False, Tokens);
           Version := Tokens[3];
           if not TryStrToFloat(Version, VersionNum) then
