@@ -90,6 +90,7 @@ type
     btnBuildModel: TRzButton;
     actPresetBuildStreetStormwaterControls: TAction;
     Buildstreetstormwatercontrols1: TMenuItem;
+    vgrdTraceStormwater: TcxEditorRow;
     procedure btnBrowseModelDirectoryClick(Sender: TObject);
     procedure btnBuildModelClick(Sender: TObject);
     procedure btnCancelBuildClick(Sender: TObject);
@@ -616,6 +617,7 @@ begin
       CurrentModel.Config.RunoffFileName := vgrdRunoffBaseFileName.Properties.Value;
       CurrentModel.Config.EngineExportFileName := vgrdEngineBaseFileName.Properties.Value;
       CurrentModel.Config.UseBaseflow := vgrdUseBaseflow.Properties.Value;
+      CurrentModel.Config.TraceStormwater := vgrdTraceStormwater.Properties.Value;
       CurrentModel.Config.Update;
 
       // Set status

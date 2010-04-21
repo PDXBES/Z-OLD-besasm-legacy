@@ -2244,6 +2244,7 @@
       <field name="btnBuildModel" type="TRzButton" visibility="published" />
       <field name="actPresetBuildStreetStormwaterControls" type="TAction" visibility="published" />
       <field name="Buildstreetstormwatercontrols1" type="TMenuItem" visibility="published" />
+      <field name="vgrdTraceStormwater" type="TcxEditorRow" visibility="published" />
       <procedure name="btnBrowseModelDirectoryClick" visibility="published">
         <parameters>
           <parameter name="Sender" type="TObject" />
