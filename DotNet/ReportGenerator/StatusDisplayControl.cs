@@ -26,8 +26,7 @@ namespace SystemsAnalysis.Reporting
       {        
         this.statusTextBox.AppendText(text);
         this.statusTextBox.Focus();
-        this.statusTextBox.ScrollToCaret();
-        this.statusTextBox.SelectionColor = Color.Black;
+        this.statusTextBox.ScrollToCaret();        
       }
     }
     public void SetColorThreadSafe(Color color)
@@ -77,6 +76,7 @@ namespace SystemsAnalysis.Reporting
     /// if it is not already present.</param>
     public void AddInfoStatus(string status)
     {
+      SetColorThreadSafe(Color.Black);
       AppendTextThreadSafe(System.DateTime.Now + ": ");
       AppendTextThreadSafe(status);
       if (!status.EndsWith("\n"))
