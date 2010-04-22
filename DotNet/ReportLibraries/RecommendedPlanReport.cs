@@ -585,7 +585,9 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
         select new
         {
           FocusArea = gFocusArea.Key,
-          InfiltrationAreaRoof = gFocusArea.Sum(p => p.SqFt_Bioret + p.SqFt_Drywell + p.SqFt_Eco + p.SqFt_Plntr + p.SqFt_Veg) / SQ_FT_PER_ACRE
+          InfiltrationAreaRoof = gFocusArea.Sum(p => 
+            Math.Max(0, p.SqFt_Bioret) + Math.Max(0,p.SqFt_Drywell) + Math.Max(0, p.SqFt_Eco) 
+            + Math.Max(0, p.SqFt_Plntr) + Math.Max(0, p.SqFt_Veg)) / SQ_FT_PER_ACRE
         };
 
       double infiltrationAreaRoof = 0;
@@ -613,7 +615,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
         select new
         {
           FocusArea = gFocusArea.Key,
-          InfiltrationAreaPark = gFocusArea.Sum(p => p.SqFt_Bioret) / SQ_FT_PER_ACRE
+          InfiltrationAreaPark = gFocusArea.Sum(p => Math.Max(0, p.SqFt_Bioret)) / SQ_FT_PER_ACRE
         };
 
       double infiltrationAreaPark = 0;
@@ -637,10 +639,11 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
                   
     public double ProtectImproveTerrestrialHabitatArea(IDictionary<string, Parameter> parameters)
     {
+      double streetArea = 0, roofArea = 0, parkArea = 0;
       string focusArea;
       focusArea = parameters["FocusArea"].Value;
 
-      var query =
+      var qryStreetArea =
         from icNode in scDS.ICNode
         join icStreetTarget in scDS.ic_StreetTargets
         on icNode.FacNode equals icStreetTarget.XPSWMM_Name
@@ -654,17 +657,42 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
           FocusArea = gFocusArea.Key,
           FacilityVolume = gFocusArea.Sum(p => p.FacVolCuFt) / 0.75 / SQ_FT_PER_ACRE,
         };
-
-      if (query.Count() > 1)
+      
+      if (qryStreetArea.Count() > 1)
       {
-        throw new Exception("HabitatArea returned more than one row");
+        throw new Exception("HabitatStreetArea returned more than one row");
       }
-      else if (query.Count() == 0)
+      else if (qryStreetArea.Count() == 1)
       {
-        return 0;
+        streetArea = qryStreetArea.First().FacilityVolume;
+      }
+      //TODO: Implement these queries
+      /*
+      var qryRoofArea =
+        
+
+      if (qryRoofArea.Count() > 1)
+      {
+        throw new Exception("HabitatRoofArea returned more than one row");
+      }
+      else if (qryRoofArea.Count() == 1)
+      {
+        roofArea = qryRoofArea.First().FacilityVolume;
       }
 
-      return query.First().FacilityVolume;
+      var qryParkArea =
+       
+
+      if (qryParkArea.Count() > 1)
+      {
+        throw new Exception("HabitatParkArea returned more than one row");
+      }
+      else if (qryParkArea.Count() == 1)
+      {
+        parkArea = qryParkArea.First().FacilityVolume;
+      }*/
+
+      return streetArea + roofArea + parkArea;
     }
     public double ProtectImproveAquaticHabitatArea (IDictionary<string, Parameter> parameters)
     {
