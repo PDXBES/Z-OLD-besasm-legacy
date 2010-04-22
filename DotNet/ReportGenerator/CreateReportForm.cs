@@ -401,6 +401,22 @@ namespace SystemsAnalysis.Reporting
         metaData += @"<StopLink>" + l.MLinkID + "</StopLink>";
       }
       metaData += @"</StopLinks><LinkCount>" + linkCount + "</LinkCount></StudyAreaSummary>";
+
+      metaData += @"<AuxilaryData>";
+      foreach (ReportBase.ReportInfo ri in charEngine.ReportInfos.Values)
+      {
+        metaData += "<ReportLibrary>";
+        metaData += @"<ReportName>" + ri.ReportName + "</ReportName>";
+        foreach (ReportBase.Parameter parameter in ri.AuxilaryData.Values)
+        {
+          metaData += "<Parameter>";
+          metaData += "<ParameterName>" + parameter.Name + "</ParameterName>";
+          metaData += "<ParameterValue>" + parameter.Value + "</ParameterValue>";
+          metaData += "</Parameter>";
+        }        
+        metaData += "</ReportLibrary>";
+      }
+      metaData += @"</AuxilaryData>";
      
       XmlDocument xmlDoc = new XmlDocument();
       xmlDoc.Load(outputFile);                 
@@ -411,6 +427,7 @@ namespace SystemsAnalysis.Reporting
       //Add the node to the document.
       root.AppendChild(elem);            
       xmlDoc.Save(outputFile);
+      
     }
 
     private void btnPreviewTrace_Click(object sender, System.EventArgs e)
@@ -1157,8 +1174,7 @@ namespace SystemsAnalysis.Reporting
         catch (Exception ex)
         {
           sw.WriteLine("Failed: " + ex.Message);
-        }
-
+        }        
       }
       sw.Close();
     }
