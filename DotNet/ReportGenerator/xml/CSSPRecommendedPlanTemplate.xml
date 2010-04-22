@@ -17,7 +17,7 @@
          <Cell data="(Existing Conditions)" cellType="SUBCOLUMN" footerID="*"></Cell>
          <Cell data="(Future Conditions)" cellType="SUBCOLUMN" footerID="*"></Cell>
       </Header>
-      <Row isMultiRow="true" multiRowKey="RPFocusArea">
+      <Row isMultiRow="true" multiRowKey="RPFocusArea" multiRowExcludeList="NA,STORM-ONLY">
         <Cell cellType="FUNCTION">
           <Function functionName="FocusAreaName" library="RecommendedPlanReport">
             <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
@@ -63,7 +63,7 @@
         <Cell data="Number of New or Upsized Pipes" cellType="COLUMNNAME"></Cell>
         <Cell data="Length of New or Upsized Pipe (ft)" cellType="COLUMNNAME"></Cell>
       </Header>
-      <Row isMultiRow="true" multiRowKey="RPFocusArea">
+      <Row isMultiRow="true" multiRowKey="RPFocusArea" multiRowExcludeList="NA,STORM-ONLY">
         <Cell cellType="FUNCTION">
           <Function functionName="FocusAreaName" library="RecommendedPlanReport">
             <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
@@ -102,7 +102,7 @@
         <Cell data="Number of BSBR Remaining" cellType="COLUMNNAME" footerID="*"></Cell>
         <Cell data="Volume of Stormwater Runoff Removed from the Tunnel System (gallons)" cellType="COLUMNNAME" footerID="**"></Cell>
       </Header>
-      <Row isMultiRow="true" multiRowKey="RPFocusArea">
+      <Row isMultiRow="true" multiRowKey="RPFocusArea" multiRowExcludeList="NA,STORM-ONLY">
         <Cell cellType="FUNCTION">
           <Function functionName="FocusAreaName" library="RecommendedPlanReport">
             <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
@@ -133,7 +133,7 @@
         <Cell data="Present Worth Cost" cellType="COLUMNNAME"></Cell>
         <Cell data="Cost per BSBR Eliminated" cellType="COLUMNNAME"></Cell>
       </Header>
-      <Row isMultiRow="true" multiRowKey="RPFocusArea">
+      <Row isMultiRow="true" multiRowKey="RPFocusArea" multiRowExcludeList="NA,STORM-ONLY">
         <Cell cellType="FUNCTION">
           <Function functionName="FocusAreaName" library="RecommendedPlanReport">
             <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
@@ -209,7 +209,7 @@
         <Cell data="(acres)" cellType="SUBCOLUMN"></Cell>
         <Cell data="(linear feet)" cellType="SUBCOLUMN"></Cell>
       </Header>
-      <Row isMultiRow="true" multiRowKey="RPFocusArea">
+      <Row isMultiRow="true" multiRowKey="RPFocusArea" multiRowExcludeList="NA,STORM-ONLY">
         <Cell cellType="FUNCTION">
           <Function functionName="FocusAreaName" library="RecommendedPlanReport">
             <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
@@ -265,7 +265,7 @@
         <Cell data="(Max Score = 30)" cellType="SUBCOLUMN"></Cell>
         <Cell data="(Max Score = 100)" cellType="SUBCOLUMN"></Cell>
       </Header>
-      <Row isMultiRow="true" multiRowKey="RPFocusArea">
+      <Row isMultiRow="true" multiRowKey="RPFocusArea" multiRowExcludeList="NA,STORM-ONLY">
         <Cell cellType="FUNCTION">
           <Function functionName="FocusAreaName" library="RecommendedPlanReport">
             <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
@@ -287,7 +287,7 @@
         <Cell data="Project Capital Cost" cellType="COLUMNNAME"></Cell>
         <Cell data="Cost Benefit Ratio (CBR)" cellType="COLUMNNAME"></Cell>
       </Header>
-      <Row isMultiRow="true" multiRowKey="RPFocusArea">
+      <Row isMultiRow="true" multiRowKey="RPFocusArea" multiRowExcludeList="NA,STORM-ONLY">
          <Cell cellType="FUNCTION">
           <Function functionName="FocusAreaName" library="RecommendedPlanReport">
             <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>

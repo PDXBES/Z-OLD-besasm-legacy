@@ -161,7 +161,7 @@ namespace SystemsAnalysis.Reporting
           }
         }
         xmlDoc.GetElementsByTagName("ReportGenerator")[0].Attributes["studyArea"].Value = studyArea;
-        
+
         expandMultiTables();
         expandMultiRows();
         parseEmbeddedFunctions();
@@ -173,7 +173,7 @@ namespace SystemsAnalysis.Reporting
         this.OnStatusChanged(new StatusChangedArgs(ex.Message, StatusChangeType.Error));
       }
       return reportOutput;
-    }  
+    }
 
     public Dictionary<string, ReportBase.ReportInfo> ReportInfos
     {
@@ -533,9 +533,7 @@ namespace SystemsAnalysis.Reporting
     {
       string multiRowKey = xmlNode.Attributes["multiRowKey"].Value;
 
-      IList multiRowKeyList;
-      //ArrayList sortedMultiRowKeyList;
-
+      IList multiRowKeyList;      
       if (xmlNode.Attributes["multiRowFilterName"] == null)
       {
         multiRowKeyList = getMultiRowKeyList(multiRowKey);
@@ -547,16 +545,19 @@ namespace SystemsAnalysis.Reporting
         multiRowFilterValue = xmlNode.Attributes["multiRowFilterValue"] == null ? "" : xmlNode.Attributes["multiRowFilterValue"].Value;
         multiRowKeyList = getFilteredMultiRowKeyList(multiRowKey, multiRowFilterName, multiRowFilterValue);
       }
-      //sortedMultiRowKeyList = new ArrayList(multiRowKeyList);
-      //sortedMultiRowKeyList.Sort();
-
+      IList multiRowExcludeList = xmlNode.Attributes["multiRowExcludeList"] == null ? new string[0] : xmlNode.Attributes["multiRowExcludeList"].Value.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
+      
       xmlNode.Attributes.RemoveAll(); //Remove the isMultiRow and multiRowKey attributes
 
       XmlNode[] rowXmlNodes = new XmlNode[multiRowKeyList.Count];
-
+      
       //XmlNode rowXmlNode = xmlNode;
       for (int i = 0; i < multiRowKeyList.Count; i++)
       {
+        if (multiRowExcludeList.Contains(multiRowKeyList[i]))
+        {
+          continue;
+        }
         rowXmlNodes[i] = xmlNode.Clone();
         rowXmlNodes[i].InnerXml = rowXmlNodes[i].InnerXml.Replace("@" + multiRowKey, Convert.ToString(multiRowKeyList[i]));
       }
@@ -565,12 +566,12 @@ namespace SystemsAnalysis.Reporting
     }
     private IList getMultiRowKeyList(string multiRowKey)
     {
-      int[] multiRowKeyList;      
+      int[] multiRowKeyList;
       switch (multiRowKey)
       {
         case "FECID":
           return (IList)FecReport.FecIDList();
-        case "FocusArea":           
+        case "FocusArea":
           return AlternativeReport.FocusAreaList();
         case "PumpStationID":
           return PSReport.PumpStationIDList;
@@ -584,7 +585,7 @@ namespace SystemsAnalysis.Reporting
     }
     private int[] getFilteredMultiRowKeyList(string multiRowKey, string multiRowFilterName, string multiRowFilterValue)
     {
-      int[] multiRowKeyList;      
+      int[] multiRowKeyList;
       switch (multiRowKey)
       {
         case "WetWellIndex":
