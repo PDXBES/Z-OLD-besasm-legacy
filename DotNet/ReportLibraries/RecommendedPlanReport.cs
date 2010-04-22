@@ -87,7 +87,6 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
         modelPath = Path.GetDirectoryName(modelPath);
       }
 
-
       ModelConfigurationDataSet modelConfigDS = new ModelConfigurationDataSet(Path.GetFullPath(modelPath));
       ModelConfigurationDataSet.AlternativeRow[] altRow = modelConfigDS.GetIncludedAlternatives();
       alternativePath = altRow[0].BaseModel + "alternatives\\" + altRow[0].Name;
@@ -105,8 +104,6 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
 
       try
       {
-        //Execute queries in StormwaterControls_v12
-        //Load ic_target tables into StormwaterControlsDataSet
         scDS = new StormwaterControlsDataSet();
         scDS.InitStormwaterControlDataSet(modelPath);
         scDS.InitAltTargetDataTables(alternativePath);
@@ -563,7 +560,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
       double infiltrationAreaStreet = 0;
       if (qryInfiltrationAreaStreet.Count() > 1)
       {
-        throw new Exception("InfiltrationStreetdArea returned more than one row");
+        throw new Exception("InfiltrationStreetArea returned more than one row");
       }
       else if (qryInfiltrationAreaStreet.Count() != 0)
       {
@@ -649,7 +646,8 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
         on icNode.FacNode equals icStreetTarget.XPSWMM_Name
         join altStreetTarget in scDS.AltStreetTargets
         on icStreetTarget.icID equals altStreetTarget.ICID
-        where icNode.Factype == "C" && icStreetTarget.constructed == 0 && altStreetTarget.FocusArea == focusArea
+        where icNode.Factype == "C" && icStreetTarget.constructed == 0 &&
+          altStreetTarget.FocusArea == focusArea
         group icNode by altStreetTarget.FocusArea into gFocusArea
         orderby gFocusArea.Key
         select new
@@ -666,11 +664,27 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
       {
         streetArea = qryStreetArea.First().FacilityVolume;
       }
-      //TODO: Implement these queries
-      /*
+      
       var qryRoofArea =
-        
-
+        from mdlDsc in scDS.mdl_dirsc_ac
+        join icRoofTargets in scDS.ic_RoofTargets
+        on mdlDsc.DSCID equals icRoofTargets.dscID
+        join altRoofTargets in scDS.AltRoofTargets
+        on icRoofTargets.icID equals altRoofTargets.ICID
+        join mdlRoofTargets in scDS._mdl_roofTargets
+        on icRoofTargets.dscID equals mdlRoofTargets.dscID
+        where icRoofTargets.constructed == 0 && icRoofTargets.buildModelIC &&
+          altRoofTargets.FocusArea == focusArea
+        group mdlRoofTargets by altRoofTargets.FocusArea into grpFocusArea
+        select new
+        {
+          FocusArea = grpFocusArea.Key,
+          FacilityVolume = grpFocusArea.Sum(p => 
+            Math.Max(0, p.SqFt_Bioret) * 0.83 * 0.09 + 
+            Math.Max(0, p.SqFt_Plntr) * 0.06 + 
+            Math.Max(0, p.SqFt_Eco)) / SQ_FT_PER_ACRE
+        };
+                        
       if (qryRoofArea.Count() > 1)
       {
         throw new Exception("HabitatRoofArea returned more than one row");
@@ -681,8 +695,23 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
       }
 
       var qryParkArea =
-       
-
+        from mdlDsc in scDS.mdl_dirsc_ac
+        join icParkTargets in scDS.ic_ParkingTargets
+        on mdlDsc.DSCID equals icParkTargets.dscID
+        join altParkTargets in scDS.AltParkingTargets
+        on icParkTargets.icID equals altParkTargets.ICID
+        join mdlParkTargets in scDS._mdl_ParkingTargets
+        on icParkTargets.dscID equals mdlParkTargets.dscID
+        where icParkTargets.constructed == 0 && icParkTargets.buildModelIC &&
+          altParkTargets.FocusArea == focusArea
+        group mdlParkTargets by altParkTargets.FocusArea into grpFocusArea
+        select new
+        {
+          FocusArea = grpFocusArea.Key,
+          FacilityVolume = grpFocusArea.Sum(p => 
+            Math.Max(0, p.SqFt_Bioret) * 0.83 * 0.09) / SQ_FT_PER_ACRE
+        };
+               
       if (qryParkArea.Count() > 1)
       {
         throw new Exception("HabitatParkArea returned more than one row");
@@ -690,7 +719,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
       else if (qryParkArea.Count() == 1)
       {
         parkArea = qryParkArea.First().FacilityVolume;
-      }*/
+      }
 
       return streetArea + roofArea + parkArea;
     }
