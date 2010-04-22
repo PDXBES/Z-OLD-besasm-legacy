@@ -20,11 +20,9 @@
 					.CONST { font-family:"arial narrow"; font-size:9pt; }
 					THEAD {  display:table-header-group; }	
 					TBODY { }
-					TFOOT { }
-															
+					TFOOT { }															
 				</STYLE>
-			</HEAD>
-					
+			</HEAD>					
 			<BODY>
 				<xsl:for-each select="ReportGenerator/CharacterizationTable"><p>							
 					<xsl:variable name="COLCOUNT" select="@columnCount" />	
@@ -108,30 +106,43 @@
 		        <td><xsl:value-of select="ReportGenerator/MetaData/Date" /></td>
 		       </tr>
 		    </table>
-		      <em>Model</em>		       
-		       <table>
-		       <xsl:for-each select="ReportGenerator/MetaData/StudyAreaSummary/StartLinks/StartLink">
-		       <tr>
-		        <td>Start Link:</td>
-		        <td>		          
-		            <xsl:value-of select="." />
-		        </td>
-		       </tr>
-		       </xsl:for-each>
-		       <xsl:for-each select="ReportGenerator/MetaData/StudyAreaSummary/StopLinks/StopLink">
-		       <tr>
-		        <td>Stop Link:</td>
-		        <td>		          
-		            <xsl:value-of select="." />
-		        </td>
-		       </tr>
-		       </xsl:for-each>	
-		       <tr>
-		        <td>Link Count:</td>
-		        <td><xsl:value-of select="ReportGenerator/MetaData/StudyAreaSummary/LinkCount" /></td>
-		       </tr>
-		    </table>	
-		   </div>	    
+	    	<br /><em>Model</em><br />	       
+      	<table>
+       		<xsl:for-each select="ReportGenerator/MetaData/StudyAreaSummary/StartLinks/StartLink">
+       			<tr>
+        			<td>Start Link:</td>
+        			<td>		          
+            		<xsl:value-of select="." />
+        			</td>
+       			</tr>
+       		</xsl:for-each>
+       		<xsl:for-each select="ReportGenerator/MetaData/StudyAreaSummary/StopLinks/StopLink">
+       			<tr>
+        			<td>Stop Link:</td>
+        			<td>		          
+            		<xsl:value-of select="." />
+        			</td>
+       			</tr>
+       		</xsl:for-each>	
+       		<tr>
+        		<td>Link Count:</td>
+        		<td><xsl:value-of select="ReportGenerator/MetaData/StudyAreaSummary/LinkCount" /></td>
+       		</tr>
+    		</table>	
+		    <br /><em>Auxilary Data</em>
+				<xsl:for-each select="ReportGenerator/MetaData/AuxilaryData/ReportLibrary">							
+					<br />
+					<u>Library: <xsl:value-of select="ReportName" /></u>
+						<table>
+	       			<xsl:for-each select="Parameter">	       		
+	       				<tr>	     							
+		       				<td><xsl:value-of select="ParameterName" />:</td>
+		      				<td><xsl:value-of select="ParameterValue" /></td>
+		      			</tr>
+							</xsl:for-each>														
+						</table>
+					</xsl:for-each>		        										
+				</div>	    
 		 	</BODY>
 		</HTML>
   </xsl:template>

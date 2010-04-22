@@ -736,8 +736,5 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
       return StormwaterRemovalVol(parameters) * CREDIT_PER_GALLON_STORMWATER_REMOVAL;
     }
 
-
-
-
   }
 }
