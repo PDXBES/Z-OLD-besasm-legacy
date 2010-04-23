@@ -154,6 +154,12 @@
     <Reference Include="Microsoft.VisualBasic">
       <Name>Microsoft.VisualBasic</Name>
     </Reference>
+    <Reference Include="PresentationCore">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
     <Reference Include="stdole">
       <Name>stdole</Name>
       <HintPath>C:\Program Files\Microsoft.NET\Primary Interop Assemblies\stdole.dll</HintPath>
@@ -236,6 +242,12 @@
     <Reference Include="Infragistics2.Win.v9.2, Version=9.2.20092.1003, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
       <HintPath>C:\Program Files\Infragistics\NetAdvantage 2009.2\Windows Forms\Bin\Infragistics2.Win.v9.2.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="UIAutomationProvider">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
   </ItemGroup>
   <ItemGroup>

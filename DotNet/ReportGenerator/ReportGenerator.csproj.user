@@ -22,6 +22,7 @@
     <VerifyUploadedFiles>false</VerifyUploadedFiles>
     <ErrorReportUrlHistory>
     </ErrorReportUrlHistory>
+    <EnableSecurityDebugging>false</EnableSecurityDebugging>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <EnableASPDebugging>false</EnableASPDebugging>
