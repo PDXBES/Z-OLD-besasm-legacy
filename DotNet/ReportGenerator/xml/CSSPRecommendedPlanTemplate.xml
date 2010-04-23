@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<?xml-stylesheet type="text/xsl" href="C:\Data\Dev\BESASM\legacy\DotNet\ReportGenerator\xml\excel_char.xsl" ?>
-<!--<?xml-stylesheet type="text/xsl" href="\\Cassio\Modeling\Model_Programs\bin\ReportGenerator\excel_char.xsl" ?>-->
+<!--<?xml-stylesheet type="text/xsl" href="C:\Data\Dev\BESASM\legacy\DotNet\ReportGenerator\xml\excel_char.xsl" ?>-->
+<?xml-stylesheet type="text/xsl" href="\\Cassio\Modeling\Model_Programs\bin\ReportGenerator\excel_char.xsl" ?>
 <ReportGenerator reportName="CSSP Recommended Plan Report" studyArea="" >
   <CharacterizationTable tableNumber="1" tableTitle="Recommended Plan Summary" columnCount="5">
       <Header>
@@ -52,7 +52,34 @@
           </Function>
         </Cell>
       </Row>
-      <Footer footerID="*" footerText="Number of tax lots with BSBR; source: Sellwood, Insley &amp; Western Lents Basins Study Area Sewer Hydraulic Characterization Technical Memorandum (BES, October 23, 2006)." />
+      <Row rowType="TOTALROW">
+        <Cell cellType="CONST" data="Total" />
+        <Cell cellType="FUNCTION">
+          <Function functionName="BSBRCount" library="RecommendedPlanReport" format="N0">            
+            <Parameter parameterName="UseFlag" parameterValue="EX_BASE" />
+            <Parameter parameterName="StormEvent" parameterValue="2_YEAR" />
+          </Function>
+        </Cell>
+        <Cell cellType="FUNCTION">
+          <Function functionName="BSBRCount" library="RecommendedPlanReport" format="N0">            
+            <Parameter parameterName="UseFlag" parameterValue="EX_BASE" />
+            <Parameter parameterName="StormEvent" parameterValue="5_YEAR" />
+          </Function>
+        </Cell>
+        <Cell cellType="FUNCTION">
+        <Function functionName="BSBRCount" library="RecommendedPlanReport" format="N0">            
+            <Parameter parameterName="UseFlag" parameterValue="EX_BASE" />
+            <Parameter parameterName="StormEvent" parameterValue="25_YEAR" />
+          </Function>
+        </Cell>
+        <Cell cellType="FUNCTION">
+          <Function functionName="BSBRCount" library="RecommendedPlanReport" format="N0">            
+            <Parameter parameterName="UseFlag" parameterValue="FU_BASE" />
+            <Parameter parameterName="StormEvent" parameterValue="25_YEAR" />
+          </Function>
+        </Cell>
+      </Row>
+      <Footer footerID="*" footerText="Number of tax lots with BSBR; source: Sewer Hydraulic Characterization Technical Memorandum (BES, October 23, 2006)." />
   </CharacterizationTable>
   <CharacterizationTable tableNumber="2" tableTitle="Recommended Plan Components" columnCount="6">
       <Header>
@@ -121,6 +148,19 @@
           </Function>
         </Cell>
       </Row>
+      <Row rowType="TOTALROW">
+        <Cell cellType="CONST" data="Total" />
+        <Cell cellType="FUNCTION">
+					<Function functionName="BSBRCount" library="RecommendedPlanReport" format="N0">            
+            <Parameter parameterName="UseFlag" parameterValue="RP" />
+            <Parameter parameterName="StormEvent" parameterValue="25_YEAR" />
+          </Function>
+        </Cell>
+        <Cell cellType="FUNCTION">
+          <Function functionName="StormwaterRemovalVol" library="RecommendedPlanReport" format="N0">            
+          </Function>
+        </Cell>
+      </Row>
         <Footer footerID="*" footerText="Based on the 25-year design storm for future conditions." />
         <Footer footerID="**" footerText="Based on the 4th storm of the summer six series of storms" />
   </CharacterizationTable>
@@ -145,7 +185,7 @@
           </Function>
         </Cell>
         <Cell cellType="FUNCTION">
-          <Function functionName="CreditRemovingVolumeTunnel" library="RecommendedPlanReport" format="$#,###.00">
+          <Function functionName="CreditRemovingVolumeTunnel" library="RecommendedPlanReport" format="$#,##0.00">
             <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
           </Function>
         </Cell>
@@ -165,31 +205,27 @@
           </Function>
        </Cell>
       </Row>
-      <Row  rowType="TOTALROW">
+      <Row rowType="TOTALROW">
         <Cell cellType="CONST" data="Total" />
         <Cell cellType="FUNCTION">
-          <Function functionName="TotalCapitalCost" library="RecommendedPlanReport" format="N0">
+          <Function functionName="CapitalCost" library="RecommendedPlanReport" format="N0">          
+          </Function>
+        </Cell>
+        <Cell cellType="FUNCTION">
+          <Function functionName="CreditRemovingVolumeTunnel" library="RecommendedPlanReport" format="$#,##0.00">
+          </Function>
+        </Cell>
+        <Cell cellType="FUNCTION">
+          <Function functionName="AnnualOperationMaintenceCost" library="RecommendedPlanReport" format="N0">
             <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
           </Function>
         </Cell>
         <Cell cellType="FUNCTION">
-          <Function functionName="TotalCreditRemovingVolumeTunnel" library="RecommendedPlanReport" format="N0">
-            <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
+          <Function functionName="PresentWorthCost" library="RecommendedPlanReport" format="N0">          
           </Function>
         </Cell>
         <Cell cellType="FUNCTION">
-          <Function functionName="TotalAnnualOperationMaintenceCost" library="RecommendedPlanReport" format="N0">
-            <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
-          </Function>
-        </Cell>
-        <Cell cellType="FUNCTION">
-          <Function functionName="TotalPresentWorthCost" library="RecommendedPlanReport" format="N0">
-            <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
-          </Function>
-        </Cell>
-        <Cell cellType="FUNCTION">
-          <Function functionName="TotalBSBREliminated" library="RecommendedPlanReport" format="N0">
-            <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
+          <Function functionName="BSBREliminated" library="RecommendedPlanReport" format="N0">            
           </Function>
         </Cell>
       </Row>
@@ -239,15 +275,21 @@
       <Row  rowType="TOTALROW">
         <Cell cellType="CONST" data="Total" />
         <Cell cellType="FUNCTION">
-          <Function functionName="TotalInfiltrateStormwaterArea" library="RecommendedPlanReport" format="N0" />                      
+          <Function functionName="InfiltrateStormwaterArea" library="RecommendedPlanReport" format="N0">            
+          </Function>
         </Cell>
         <Cell cellType="FUNCTION">
-          <Function functionName="TotalReducePollutantsArea" library="RecommendedPlanReport" format="N0" />                      
+          <Function functionName="ReducePollutantsArea" library="RecommendedPlanReport" format="N0">            
+          </Function>
         </Cell>
         <Cell cellType="FUNCTION">
-          <Function functionName="TotalProtectImproveTerrestrialHabitatArea" library="RecommendedPlanReport" format="N0" />                      
+          <Function functionName="ProtectImproveTerrestrialHabitatArea" library="RecommendedPlanReport" format="N0">            
+          </Function>
         </Cell>
-        <Cell cellType="CONST" value="Manual Entry" />          
+        <Cell cellType="FUNCTION">
+          <Function functionName="ProtectImproveAquaticHabitatArea" library="RecommendedPlanReport" format="N0">            
+          </Function>
+        </Cell>          
       </Row>
   </CharacterizationTable>
   <CharacterizationTable tableNumber="6" tableTitle="Environmental and Community Values" columnCount="5">
@@ -327,33 +369,27 @@
       <Row rowType="TOTALROW">
         <Cell cellType="CONST" data="Total" />
         <Cell cellType="FUNCTION">
-          <Function functionName="TotalMortalityRisk" library="RecommendedPlanReport" format="N0">
-            <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
+          <Function functionName="MortalityRisk" library="RecommendedPlanReport" format="N0">            
           </Function>
         </Cell>
         <Cell cellType="FUNCTION">
-          <Function functionName="TotalCapacityRisk" library="RecommendedPlanReport" format="N0">
-            <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
+          <Function functionName="CapacityRisk" library="RecommendedPlanReport" format="N0">            
           </Function>
         </Cell>
         <Cell cellType="FUNCTION">
-          <Function functionName="TotalBaseRisk" library="RecommendedPlanReport" format="N0">
-            <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
+          <Function functionName="BaseRisk" library="RecommendedPlanReport" format="N0">            
           </Function>
         </Cell>
         <Cell cellType="FUNCTION">
-          <Function functionName="TotalProjectPresentWorth" library="RecommendedPlanReport" format="N0">
-            <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
+          <Function functionName="ProjectPresentWorth" library="RecommendedPlanReport" format="N0">            
           </Function>
         </Cell>
         <Cell cellType="FUNCTION">
-          <Function functionName="TotalProjectCapitalCost" library="RecommendedPlanReport" format="N0">
-            <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
+          <Function functionName="ProjectCapitalCost" library="RecommendedPlanReport" format="N0">            
           </Function>
         </Cell>
         <Cell cellType="FUNCTION">
-          <Function functionName="TotalCostBenefitRatio" library="RecommendedPlanReport" format="N0">
-            <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
+          <Function functionName="CostBenefitRatio" library="RecommendedPlanReport" format="N0">            
           </Function>
         </Cell>
       </Row>

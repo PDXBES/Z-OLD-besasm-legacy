@@ -533,7 +533,7 @@ namespace SystemsAnalysis.Reporting
     {
       string multiRowKey = xmlNode.Attributes["multiRowKey"].Value;
 
-      IList multiRowKeyList;      
+      IList multiRowKeyList;
       if (xmlNode.Attributes["multiRowFilterName"] == null)
       {
         multiRowKeyList = getMultiRowKeyList(multiRowKey);
@@ -545,19 +545,22 @@ namespace SystemsAnalysis.Reporting
         multiRowFilterValue = xmlNode.Attributes["multiRowFilterValue"] == null ? "" : xmlNode.Attributes["multiRowFilterValue"].Value;
         multiRowKeyList = getFilteredMultiRowKeyList(multiRowKey, multiRowFilterName, multiRowFilterValue);
       }
-      IList multiRowExcludeList = xmlNode.Attributes["multiRowExcludeList"] == null ? new string[0] : xmlNode.Attributes["multiRowExcludeList"].Value.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
-      
+
+      string[] multiRowExcludeList =
+        xmlNode.Attributes["multiRowExcludeList"] == null ? new string[0]
+        : xmlNode.Attributes["multiRowExcludeList"].Value.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
+      foreach (string s in multiRowExcludeList)
+      {
+        if (multiRowKeyList.Contains(s)) multiRowKeyList.Remove(s);
+      }
+
       xmlNode.Attributes.RemoveAll(); //Remove the isMultiRow and multiRowKey attributes
 
       XmlNode[] rowXmlNodes = new XmlNode[multiRowKeyList.Count];
-      
+
       //XmlNode rowXmlNode = xmlNode;
       for (int i = 0; i < multiRowKeyList.Count; i++)
       {
-        if (multiRowExcludeList.Contains(multiRowKeyList[i]))
-        {
-          continue;
-        }
         rowXmlNodes[i] = xmlNode.Clone();
         rowXmlNodes[i].InnerXml = rowXmlNodes[i].InnerXml.Replace("@" + multiRowKey, Convert.ToString(multiRowKeyList[i]));
       }
