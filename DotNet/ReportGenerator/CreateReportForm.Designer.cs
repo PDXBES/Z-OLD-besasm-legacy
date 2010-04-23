@@ -104,6 +104,8 @@ namespace SystemsAnalysis.Reporting
           this.btnImportFromIni = new Infragistics.Win.Misc.UltraButton();
           this.tabInteractiveSelect = new Infragistics.Win.UltraWinTabControl.UltraTabPageControl();
           this.tabPolygonSelect = new Infragistics.Win.UltraWinTabControl.UltraTabPageControl();
+          this.ultraTabPageControl1 = new Infragistics.Win.UltraWinTabControl.UltraTabPageControl();
+          this.btnGenerateBatchReports = new Infragistics.Win.Misc.UltraButton();
           this.tabControlOutputDisplay = new Infragistics.Win.UltraWinTabControl.UltraTabControl();
           this.tabOutputDisplaySharedControlsPage = new Infragistics.Win.UltraWinTabControl.UltraTabSharedControlsPage();
           this.txtStudyAreaName = new System.Windows.Forms.TextBox();
@@ -118,8 +120,6 @@ namespace SystemsAnalysis.Reporting
           this.ofd = new System.Windows.Forms.OpenFileDialog();
           this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
           this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
-          this.ultraTabPageControl1 = new Infragistics.Win.UltraWinTabControl.UltraTabPageControl();
-          this.btnGenerateBatchReports = new Infragistics.Win.Misc.UltraButton();
           this.tabMapView.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.axMapControl)).BeginInit();
           this.pnlMapControls.SuspendLayout();
@@ -143,6 +143,7 @@ namespace SystemsAnalysis.Reporting
           ((System.ComponentModel.ISupportInitialize)(this.grpboxStopLinks)).BeginInit();
           this.grpboxStopLinks.SuspendLayout();
           this.panel4.SuspendLayout();
+          this.ultraTabPageControl1.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.tabControlOutputDisplay)).BeginInit();
           this.tabControlOutputDisplay.SuspendLayout();
           this.pnlCharacterizationView.SuspendLayout();
@@ -151,7 +152,6 @@ namespace SystemsAnalysis.Reporting
           this.splitContainer1.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.tabControlStudyArea)).BeginInit();
           this.tabControlStudyArea.SuspendLayout();
-          this.ultraTabPageControl1.SuspendLayout();
           this.SuspendLayout();
           // 
           // tabMapView
@@ -284,7 +284,7 @@ namespace SystemsAnalysis.Reporting
           this.ultraLabel3.Margin = new System.Windows.Forms.Padding(2);
           this.ultraLabel3.MinimumSize = new System.Drawing.Size(137, 55);
           this.ultraLabel3.Name = "ultraLabel3";
-          this.ultraLabel3.Size = new System.Drawing.Size(391, 55);
+          this.ultraLabel3.Size = new System.Drawing.Size(299, 55);
           this.ultraLabel3.TabIndex = 3;
           this.ultraLabel3.Text = "Generating Report";
           // 
@@ -298,7 +298,7 @@ namespace SystemsAnalysis.Reporting
           this.btnCancel.Margin = new System.Windows.Forms.Padding(2);
           this.btnCancel.MinimumSize = new System.Drawing.Size(137, 37);
           this.btnCancel.Name = "btnCancel";
-          this.btnCancel.Size = new System.Drawing.Size(391, 37);
+          this.btnCancel.Size = new System.Drawing.Size(299, 37);
           this.btnCancel.TabIndex = 2;
           this.btnCancel.Text = "Cancel";
           this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -371,7 +371,7 @@ namespace SystemsAnalysis.Reporting
           this.reportOptionsLayoutPanel.ColumnCount = 3;
           this.reportOptionsLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
           this.reportOptionsLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-          this.reportOptionsLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 116F));
+          this.reportOptionsLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 117F));
           this.reportOptionsLayoutPanel.Controls.Add(this.lblIncludedLibrary, 0, 0);
           this.reportOptionsLayoutPanel.Controls.Add(this.lblIncludedLibraryName, 1, 0);
           this.reportOptionsLayoutPanel.Controls.Add(this.lblAuxilaryData, 0, 1);
@@ -433,13 +433,13 @@ namespace SystemsAnalysis.Reporting
           this.txtAuxilaryDataValue.Location = new System.Drawing.Point(86, 22);
           this.txtAuxilaryDataValue.Margin = new System.Windows.Forms.Padding(2);
           this.txtAuxilaryDataValue.Name = "txtAuxilaryDataValue";
-          this.txtAuxilaryDataValue.Size = new System.Drawing.Size(258, 21);
+          this.txtAuxilaryDataValue.Size = new System.Drawing.Size(257, 21);
           this.txtAuxilaryDataValue.TabIndex = 3;
           this.txtAuxilaryDataValue.Text = "ultraTextEditor1";
           // 
           // btnBrowseAuxilaryData
           // 
-          this.btnBrowseAuxilaryData.Location = new System.Drawing.Point(349, 22);
+          this.btnBrowseAuxilaryData.Location = new System.Drawing.Point(348, 22);
           this.btnBrowseAuxilaryData.Margin = new System.Windows.Forms.Padding(2);
           this.btnBrowseAuxilaryData.Name = "btnBrowseAuxilaryData";
           this.btnBrowseAuxilaryData.Size = new System.Drawing.Size(52, 19);
@@ -496,7 +496,7 @@ namespace SystemsAnalysis.Reporting
           this.cmbReportChooser.DisplayLayout.AutoFitStyle = Infragistics.Win.UltraWinGrid.AutoFitStyle.ResizeAllColumns;
           ultraGridColumn1.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
           ultraGridColumn1.Header.VisiblePosition = 0;
-          ultraGridColumn1.Width = 26;
+          ultraGridColumn1.Width = 279;
           ultraGridColumn2.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
           ultraGridColumn2.AutoSizeMode = Infragistics.Win.UltraWinGrid.ColumnAutoSizeMode.None;
           ultraGridColumn2.Header.Enabled = false;
@@ -803,6 +803,22 @@ namespace SystemsAnalysis.Reporting
           this.tabPolygonSelect.Name = "tabPolygonSelect";
           this.tabPolygonSelect.Size = new System.Drawing.Size(385, 381);
           // 
+          // ultraTabPageControl1
+          // 
+          this.ultraTabPageControl1.Controls.Add(this.btnGenerateBatchReports);
+          this.ultraTabPageControl1.Location = new System.Drawing.Point(-10000, -10000);
+          this.ultraTabPageControl1.Name = "ultraTabPageControl1";
+          this.ultraTabPageControl1.Size = new System.Drawing.Size(385, 381);
+          // 
+          // btnGenerateBatchReports
+          // 
+          this.btnGenerateBatchReports.Location = new System.Drawing.Point(131, 98);
+          this.btnGenerateBatchReports.Name = "btnGenerateBatchReports";
+          this.btnGenerateBatchReports.Size = new System.Drawing.Size(106, 39);
+          this.btnGenerateBatchReports.TabIndex = 0;
+          this.btnGenerateBatchReports.Text = "Generate Batch Reports";
+          this.btnGenerateBatchReports.Click += new System.EventHandler(this.btnGenerateBatchReports_Click);
+          // 
           // tabControlOutputDisplay
           // 
           this.tabControlOutputDisplay.Controls.Add(this.tabOutputDisplaySharedControlsPage);
@@ -968,22 +984,6 @@ namespace SystemsAnalysis.Reporting
           this.printPreviewDialog1.Name = "printPreviewDialog1";
           this.printPreviewDialog1.Visible = false;
           // 
-          // ultraTabPageControl1
-          // 
-          this.ultraTabPageControl1.Controls.Add(this.btnGenerateBatchReports);
-          this.ultraTabPageControl1.Location = new System.Drawing.Point(-10000, -10000);
-          this.ultraTabPageControl1.Name = "ultraTabPageControl1";
-          this.ultraTabPageControl1.Size = new System.Drawing.Size(385, 381);
-          // 
-          // btnGenerateBatchReports
-          // 
-          this.btnGenerateBatchReports.Location = new System.Drawing.Point(131, 98);
-          this.btnGenerateBatchReports.Name = "btnGenerateBatchReports";
-          this.btnGenerateBatchReports.Size = new System.Drawing.Size(106, 39);
-          this.btnGenerateBatchReports.TabIndex = 0;
-          this.btnGenerateBatchReports.Text = "Generate Batch Reports";
-          this.btnGenerateBatchReports.Click += new System.EventHandler(this.btnGenerateBatchReports_Click);
-          // 
           // CreateReportForm
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1023,6 +1023,7 @@ namespace SystemsAnalysis.Reporting
           ((System.ComponentModel.ISupportInitialize)(this.grpboxStopLinks)).EndInit();
           this.grpboxStopLinks.ResumeLayout(false);
           this.panel4.ResumeLayout(false);
+          this.ultraTabPageControl1.ResumeLayout(false);
           ((System.ComponentModel.ISupportInitialize)(this.tabControlOutputDisplay)).EndInit();
           this.tabControlOutputDisplay.ResumeLayout(false);
           this.pnlCharacterizationView.ResumeLayout(false);
@@ -1032,7 +1033,6 @@ namespace SystemsAnalysis.Reporting
           this.splitContainer1.ResumeLayout(false);
           ((System.ComponentModel.ISupportInitialize)(this.tabControlStudyArea)).EndInit();
           this.tabControlStudyArea.ResumeLayout(false);
-          this.ultraTabPageControl1.ResumeLayout(false);
           this.ResumeLayout(false);
 
         }

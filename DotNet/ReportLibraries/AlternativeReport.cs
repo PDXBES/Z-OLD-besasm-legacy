@@ -12,6 +12,9 @@ using SystemsAnalysis.Types;
 using SystemsAnalysis.DataAccess;
 using SystemsAnalysis.Reporting;
 using SystemsAnalysis.Reporting.ReportLibraries;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Data.Linq;
 
 namespace SystemsAnalysis.Reporting.ReportLibraries
 {
@@ -121,26 +124,12 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
     public int NewAndUpsizedPipeCount(IDictionary<string, Parameter> parameters)
     {
       bool filterByFocusArea = parameters.ContainsKey("FocusArea");
-      int pipeCount = 0;
+      string focusArea = filterByFocusArea ? parameters["FocusArea"].Value : "";
 
-      string focusArea = "";
-      if (filterByFocusArea)
-      {
-        focusArea = parameters["FocusArea"].Value;
-      }
-      foreach (AltLink altLink in altPackage.ModelAltLinks.Values)
-      {
-        if (filterByFocusArea && altLink.FocusArea != focusArea)
-        {
-          continue;
-        }
-        if (altLink.Operation == Enumerators.AlternativeOperation.UPD ||
-        altLink.Operation == Enumerators.AlternativeOperation.ADD)
-        {
-          pipeCount++;
-        }
-      }
-      return (Int32)pipeCount;
+      return altPackage.ModelAltLinks.Values.Cast<AltLink>().Count(p =>
+        (!filterByFocusArea || p.FocusArea == focusArea) &&
+        (p.Operation == Enumerators.AlternativeOperation.UPD ||
+        p.Operation == Enumerators.AlternativeOperation.ADD));
     }
     /// <summary>
     /// Returns the Pipe Length in miles
@@ -150,28 +139,12 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
     public double NewAndUpsizedPipeLength(IDictionary<string, Parameter> parameters)
     {
       bool filterByFocusArea = parameters.ContainsKey("FocusArea");
-      double pipeLength = 0;
+      string focusArea = filterByFocusArea ? parameters["FocusArea"].Value : "";
 
-      string focusArea = "";
-      if (filterByFocusArea)
-      {
-        focusArea = parameters["FocusArea"].Value;
-      }
-
-      foreach (AltLink altLink in altPackage.ModelAltLinks.Values)
-      {
-        if (filterByFocusArea && altLink.FocusArea != focusArea)
-        {
-          continue;
-        }
-        if (altLink.Operation == Enumerators.AlternativeOperation.UPD ||
-        altLink.Operation == Enumerators.AlternativeOperation.ADD)
-        {
-          pipeLength += altLink.Length;
-        }
-      }
-
-      return pipeLength;
+      return altPackage.ModelAltLinks.Values.Cast<AltLink>().Where(p =>
+      (!filterByFocusArea || p.FocusArea == focusArea) &&
+      (p.Operation == Enumerators.AlternativeOperation.UPD ||
+      p.Operation == Enumerators.AlternativeOperation.ADD)).Sum(p => p.Length);
     }
 
     public int PoorConditionPipeCount(IDictionary<string, Parameter> parameters)
@@ -357,50 +330,22 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
     public int RIKPipeCount(IDictionary<string, Parameter> parameters)
     {
       bool filterByFocusArea = parameters.ContainsKey("FocusArea");
-      int pipeCount = 0;
+      string focusArea = filterByFocusArea ? parameters["FocusArea"].Value : "";
 
-      string focusArea = "";
-      if (filterByFocusArea)
-      {
-        focusArea = parameters["FocusArea"].Value;
-      }
-      foreach (AltLink altLink in altPackage.ModelAltLinks.Values)
-      {
-        if (filterByFocusArea && altLink.FocusArea != focusArea)
-        {
-          continue;
-        }
-        if (altLink.Operation == Enumerators.AlternativeOperation.RIK)
-        {
-          pipeCount++;
-        }
-      }
-      return pipeCount;
+      return altPackage.ModelAltLinks.Values.Cast<AltLink>().Count(p =>
+        (!filterByFocusArea || p.FocusArea == focusArea) &&
+        p.Operation == Enumerators.AlternativeOperation.RIK);
     }
     public double RIKPipeLength(IDictionary<string, Parameter> parameters)
     {
       bool filterByFocusArea = parameters.ContainsKey("FocusArea");
-      double pipeLength = 0;
+      string focusArea = filterByFocusArea ? parameters["FocusArea"].Value : "";
 
-      string focusArea = "";
-      if (filterByFocusArea)
-      {
-        focusArea = parameters["FocusArea"].Value;
-      }
-
-      foreach (AltLink altLink in altPackage.ModelAltLinks.Values)
-      {
-        if (filterByFocusArea && altLink.FocusArea != focusArea)
-        {
-          continue;
-        }
-        if (altLink.Operation == Enumerators.AlternativeOperation.RIK)
-        {
-          pipeLength += altLink.Length;
-        }
-      }
-      return pipeLength;
+      return altPackage.ModelAltLinks.Values.Cast<AltLink>().Where(p =>
+        (!filterByFocusArea || p.FocusArea == focusArea) &&
+        p.Operation == Enumerators.AlternativeOperation.RIK).Sum(p => p.Length);
     }
+
     /// <summary>
     /// Returns the count of Parking Control Targets identified to to include in the alternative, optionally filtered by focus area.
     /// </summary>
@@ -408,36 +353,17 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
     /// <returns>Count of Parking Control Targets indentified to include in the alternative, optionally filtered by FocusArea.</returns>
     public int ParkingControlCount(IDictionary<string, Parameter> parameters)
     {
-      int count = 0;
-
       bool filterByFocusArea = parameters.ContainsKey("FocusArea");
-      string focusArea = "";
-      if (filterByFocusArea)
-      {
-        focusArea = parameters["FocusArea"].Value;
-      }
+      string focusArea = filterByFocusArea ? parameters["FocusArea"].Value : "";
 
       bool filterByConstructed = parameters.ContainsKey("Constructed");
-      int constructed = 0;
-      if (filterByConstructed)
-      {
-        constructed = parameters["Constructed"].ValueAsInt;
-      }
+      int constructed = filterByConstructed ? parameters["Constructed"].ValueAsInt : 0;
 
-      foreach (ParkingTarget pt in altPackage.ModelAltParkingTargets.Values)
-      {
-        if (filterByFocusArea && pt.FocusArea != focusArea)
-        {
-          continue;
-        }
-        if (!pt.InModel ||
-        (filterByConstructed && pt.Constructed != constructed))
-        {
-          continue;
-        }
-        count++;
-      }
-      return count;
+      return altPackage.ModelAltParkingTargets.Values.Count(p =>
+        (!filterByFocusArea || p.FocusArea == focusArea) &&
+        (!filterByConstructed || p.Constructed == constructed) &&
+        p.InModel);
+
     }
     /// <summary>
     /// Returns the count of Roof Control Targets identified to to include in the alternative, optionally filtered by focus area.
@@ -447,35 +373,15 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
     public int RoofControlCount(IDictionary<string, Parameter> parameters)
     {
       bool filterByFocusArea = parameters.ContainsKey("FocusArea");
-      int count = 0;
-
-      string focusArea = "";
-      if (filterByFocusArea)
-      {
-        focusArea = parameters["FocusArea"].Value;
-      }
+      string focusArea = filterByFocusArea ? parameters["FocusArea"].Value : "";
 
       bool filterByConstructed = parameters.ContainsKey("Constructed");
-      int constructed = 0;
-      if (filterByConstructed)
-      {
-        constructed = parameters["Constructed"].ValueAsInt;
-      }
+      int constructed = filterByConstructed ? parameters["Constructed"].ValueAsInt : 0;
 
-      foreach (RoofTarget rt in altPackage.ModelAltRoofTargets.Values)
-      {
-        if (filterByFocusArea && rt.FocusArea != focusArea)
-        {
-          continue;
-        }
-        if (!rt.InModel ||
-        (filterByConstructed && rt.Constructed != constructed))
-        {
-          continue;
-        }
-        count++;
-      }
-      return count;
+      return altPackage.ModelAltRoofTargets.Values.Count(p =>
+           (!filterByFocusArea || p.FocusArea == focusArea) &&
+          (!filterByConstructed || p.Constructed == constructed) &&
+          p.InModel);
     }
     /// <summary>
     /// Returns the count of Street Control Targets identified to to include in the alternative, optionally filtered by focus area.
@@ -485,35 +391,15 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
     public int StreetControlCount(IDictionary<string, Parameter> parameters)
     {
       bool filterByFocusArea = parameters.ContainsKey("FocusArea");
-      int count = 0;
-
-      string focusArea = "";
-      if (filterByFocusArea)
-      {
-        focusArea = parameters["FocusArea"].Value;
-      }
+      string focusArea = filterByFocusArea ? parameters["FocusArea"].Value : "";
 
       bool filterByConstructed = parameters.ContainsKey("Constructed");
-      int constructed = 0;
-      if (filterByConstructed)
-      {
-        constructed = parameters["Constructed"].ValueAsInt;
-      }
+      int constructed = filterByConstructed ? parameters["Constructed"].ValueAsInt : 0;
 
-      foreach (StreetTarget st in altPackage.ModelAltStreetTargets.Values)
-      {
-        if (filterByFocusArea && st.FocusArea != focusArea)
-        {
-          continue;
-        }
-        if (!st.InModel ||
-        (filterByConstructed && st.Constructed != constructed))
-        {
-          continue;
-        }
-        count++;
-      }
-      return count;
+      return altPackage.ModelAltStreetTargets.Values.Count(p =>
+           (!filterByFocusArea || p.FocusArea == focusArea) &&
+          (!filterByConstructed || p.Constructed == constructed) &&
+          p.InModel);
     }
 
   }

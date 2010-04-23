@@ -7,6 +7,7 @@ using SystemsAnalysis.Modeling;
 using SystemsAnalysis.ModelConstruction;
 using System.Data.Linq;
 using System.IO;
+using System.Data.Linq;
 using System.Linq.Expressions;
 using System.Linq;
 
@@ -604,9 +605,9 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
         select new
         {
           FocusArea = gFocusArea.Key,
-          InfiltrationAreaRoof = gFocusArea.Sum(p => 
-            Math.Max(0, p.SqFt_Bioret) + Math.Max(0,p.SqFt_Drywell) + Math.Max(0, p.SqFt_Eco) 
-            + Math.Max(0, p.SqFt_Plntr) + Math.Max(0, p.SqFt_Veg)) / SQ_FT_PER_ACRE
+          InfiltrationAreaRoof = gFocusArea.Sum(p =>
+            Math.Max(0.0, (double)p.SqFt_Bioret) + Math.Max(0.0, (double)p.SqFt_Drywell) + Math.Max(0.0, (double)p.SqFt_Eco)
+            + Math.Max(0.0, (double)p.SqFt_Plntr) + Math.Max(0.0, (double)p.SqFt_Veg)) / SQ_FT_PER_ACRE
         };
 
       double infiltrationAreaRoof = 0;
@@ -634,7 +635,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
         select new
         {
           FocusArea = gFocusArea.Key,
-          InfiltrationAreaPark = gFocusArea.Sum(p => Math.Max(0, p.SqFt_Bioret)) / SQ_FT_PER_ACRE
+          InfiltrationAreaPark = gFocusArea.Sum(p => Math.Max(0.0, (double)p.SqFt_Bioret)) / SQ_FT_PER_ACRE
         };
 
       double infiltrationAreaPark = 0;
@@ -685,7 +686,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
       {
         throw new Exception("HabitatStreetArea returned more than one row");
       }
-      else if (qryStreetArea.Count() == 1)
+      else if (qryStreetArea.Count() != 0)
       {
         streetArea = qryStreetArea.Sum(p => p.FacilityVolume);
       }
@@ -705,16 +706,16 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
         {
           FocusArea = grpFocusArea.Key,
           FacilityVolume = grpFocusArea.Sum(p => 
-            Math.Max(0, p.SqFt_Bioret) * 0.83 * 0.09 + 
-            Math.Max(0, p.SqFt_Plntr) * 0.06 + 
-            Math.Max(0, p.SqFt_Eco)) / SQ_FT_PER_ACRE
+            Math.Max(0.0, (double)p.SqFt_Bioret) * 0.83 * 0.09 + 
+            Math.Max(0.0, (double)p.SqFt_Plntr) * 0.06 + 
+            Math.Max(0.0, (double)p.SqFt_Eco)) / SQ_FT_PER_ACRE
         };
                         
       if (qryRoofArea.Count() > 1 && filteredByFocusArea)
       {
         throw new Exception("HabitatRoofArea returned more than one row");
       }
-      else if (qryRoofArea.Count() == 1)
+      else if (qryRoofArea.Count() != 0)
       {
         roofArea = qryRoofArea.Sum(p =>p.FacilityVolume);
       }
@@ -733,15 +734,15 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
         select new
         {
           FocusArea = grpFocusArea.Key,
-          FacilityVolume = grpFocusArea.Sum(p => 
-            Math.Max(0, p.SqFt_Bioret) * 0.83 * 0.09) / SQ_FT_PER_ACRE
+          FacilityVolume = grpFocusArea.Sum(p =>
+            Math.Max(0.0, (double)p.SqFt_Bioret) * 0.83 * 0.09) / SQ_FT_PER_ACRE
         };
                
       if (qryParkArea.Count() > 1 && filteredByFocusArea)
       {
         throw new Exception("HabitatParkArea returned more than one row");
       }
-      else if (qryParkArea.Count() == 1)
+      else if (qryParkArea.Count() != 0)
       {
         parkArea = qryParkArea.Sum(p => p.FacilityVolume);
       }

@@ -119,7 +119,7 @@ namespace DataAccessTestBench
       {
         Dictionary<string, ReportBase.Parameter> parameters = new Dictionary<string, ReportBase.Parameter>();
         parameters.Add("FocusArea", new ReportBase.Parameter("FocusArea", row.FocusArea));
-        double infiltratedArea = rpReport.InfiltrateStormwaterArea(parameters);
+        double infiltratedArea = rpReport.InfiltrateStormwaterArea(parameters);       
 
         textBox1.AppendText("Focus Area: " + row.FocusArea + "; Infiltrated Area = " + infiltratedArea + "\n");        
       }

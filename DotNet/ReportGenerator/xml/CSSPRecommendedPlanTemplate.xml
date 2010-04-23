@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<!--<?xml-stylesheet type="text/xsl" href="C:\Data\Dev\BESASM\legacy\DotNet\ReportGenerator\xml\excel_char.xsl" ?>-->
+<?xml-stylesheet type="text/xsl" href="C:\Data\Dev\BESASM\legacy\DotNet\ReportGenerator\xml\excel_char.xsl" ?>
 <?xml-stylesheet type="text/xsl" href="\\Cassio\Modeling\Model_Programs\bin\ReportGenerator\excel_char.xsl" ?>
 <ReportGenerator reportName="CSSP Recommended Plan Report" studyArea="" >
   <CharacterizationTable tableNumber="1" tableTitle="Recommended Plan Summary" columnCount="5">
@@ -93,32 +93,63 @@
       <Row isMultiRow="true" multiRowKey="RPFocusArea" multiRowExcludeList="NA,STORM-ONLY">
         <Cell cellType="FUNCTION">
           <Function functionName="FocusAreaName" library="RecommendedPlanReport">
-            <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
+            <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>            
           </Function>
         </Cell>
         <Cell cellType="FUNCTION">
           <Function functionName="StreetControlCount" library="RecommendedPlanReport" format="N0">
             <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
+            <Parameter parameterName="Constructed" parameterValue="0" />
           </Function>
         </Cell>
         <Cell cellType="FUNCTION">
           <Function functionName="RoofControlCount" library="RecommendedPlanReport" format="N0">
             <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
+            <Parameter parameterName="Constructed" parameterValue="0" />
           </Function>
         </Cell>
         <Cell cellType="FUNCTION">
           <Function functionName="ParkingControlCount" library="RecommendedPlanReport" format="N0">
             <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
+            <Parameter parameterName="Constructed" parameterValue="0" />
           </Function>
         </Cell>
         <Cell cellType="FUNCTION">
           <Function functionName="NewAndUpsizedPipeCount" library="RecommendedPlanReport" format="N0">
             <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
+            <Parameter parameterName="Constructed" parameterValue="0" />
           </Function>
         </Cell>
         <Cell cellType="FUNCTION">
           <Function functionName="NewAndUpsizedPipeLength" library="RecommendedPlanReport" format="N0" suffix="'">
             <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
+            <Parameter parameterName="Constructed" parameterValue="0" />
+          </Function>
+        </Cell>
+      </Row>
+      <Row rowType="TOTALROW">
+        <Cell cellType="CONST" data="Total" />
+        <Cell cellType="FUNCTION">
+          <Function functionName="StreetControlCount" library="RecommendedPlanReport" format="N0">            
+          	<Parameter parameterName="Constructed" parameterValue="0" />
+          </Function>
+        </Cell>
+        <Cell cellType="FUNCTION">
+          <Function functionName="RoofControlCount" library="RecommendedPlanReport" format="N0">            
+          	<Parameter parameterName="Constructed" parameterValue="0" />
+          </Function>
+        </Cell>
+        <Cell cellType="FUNCTION">
+          <Function functionName="ParkingControlCount" library="RecommendedPlanReport" format="N0">            
+          	<Parameter parameterName="Constructed" parameterValue="0" />
+          </Function>
+        </Cell>
+        <Cell cellType="FUNCTION">
+          <Function functionName="NewAndUpsizedPipeCount" library="RecommendedPlanReport" format="N0">                      	
+          </Function>
+        </Cell>
+        <Cell cellType="FUNCTION">
+          <Function functionName="NewAndUpsizedPipeLength" library="RecommendedPlanReport" format="N0" suffix="'">            
           </Function>
         </Cell>
       </Row>
@@ -252,22 +283,22 @@
           </Function>
         </Cell>
         <Cell cellType="FUNCTION">
-          <Function functionName="InfiltrateStormwaterArea" library="RecommendedPlanReport" format="N0">
+          <Function functionName="InfiltrateStormwaterArea" library="RecommendedPlanReport" format="N1">
             <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
           </Function>
         </Cell>
         <Cell cellType="FUNCTION">
-          <Function functionName="ReducePollutantsArea" library="RecommendedPlanReport" format="N0">
+          <Function functionName="ReducePollutantsArea" library="RecommendedPlanReport" format="N1">
             <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
           </Function>
         </Cell>
         <Cell cellType="FUNCTION">
-          <Function functionName="ProtectImproveTerrestrialHabitatArea" library="RecommendedPlanReport" format="N0">
+          <Function functionName="ProtectImproveTerrestrialHabitatArea" library="RecommendedPlanReport" format="N1">
             <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
           </Function>
         </Cell>
         <Cell cellType="FUNCTION">
-          <Function functionName="ProtectImproveAquaticHabitatArea" library="RecommendedPlanReport" format="N0">
+          <Function functionName="ProtectImproveAquaticHabitatArea" library="RecommendedPlanReport" format="N1">
             <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
           </Function>
         </Cell>
@@ -275,19 +306,19 @@
       <Row  rowType="TOTALROW">
         <Cell cellType="CONST" data="Total" />
         <Cell cellType="FUNCTION">
-          <Function functionName="InfiltrateStormwaterArea" library="RecommendedPlanReport" format="N0">            
+          <Function functionName="InfiltrateStormwaterArea" library="RecommendedPlanReport" format="N1">            
           </Function>
         </Cell>
         <Cell cellType="FUNCTION">
-          <Function functionName="ReducePollutantsArea" library="RecommendedPlanReport" format="N0">            
+          <Function functionName="ReducePollutantsArea" library="RecommendedPlanReport" format="N1">            
           </Function>
         </Cell>
         <Cell cellType="FUNCTION">
-          <Function functionName="ProtectImproveTerrestrialHabitatArea" library="RecommendedPlanReport" format="N0">            
+          <Function functionName="ProtectImproveTerrestrialHabitatArea" library="RecommendedPlanReport" format="N1">            
           </Function>
         </Cell>
         <Cell cellType="FUNCTION">
-          <Function functionName="ProtectImproveAquaticHabitatArea" library="RecommendedPlanReport" format="N0">            
+          <Function functionName="ProtectImproveAquaticHabitatArea" library="RecommendedPlanReport" format="N1">            
           </Function>
         </Cell>          
       </Row>

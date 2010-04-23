@@ -31,6 +31,7 @@ namespace SystemsAnalysis.Reporting
       System.Threading.Thread th = new System.Threading.Thread(DoSplash);
       th.Start();
 
+      this.Hide();
       InitializeComponent();
 
       if (System.Deployment.Application.ApplicationDeployment.IsNetworkDeployed)
@@ -59,6 +60,10 @@ namespace SystemsAnalysis.Reporting
         } 
       } 
       ChangeStatus("Welcome to Report Generator.");
+
+      System.Threading.Thread.Sleep(2000);
+      this.Show();
+      return;
     }
 
     /// <summary>
