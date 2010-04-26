@@ -28,11 +28,8 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
 
     public RecommendedPlanReport()
     {
-      DataAccess.AltCompilerDataSetTableAdapters.SP_ALT_BSBRTableAdapter altBSBRTA;
-      altBSBRTA = new SystemsAnalysis.DataAccess.AltCompilerDataSetTableAdapters.SP_ALT_BSBRTableAdapter();
-      //TODO: alt_BSBR table adapter should probably require UseFlag (and possibly Storm or other fields)
-      //as query parameters to save memory and reduce load times from SirToby
-      //altBSBRTA.Fill(altCompilerDS.SP_ALT_BSBR);
+      altCompilerDS = new AltCompilerDataSet();
+      altCompilerDS.InitAltCompilerDataSet();
     }
 
     public new class ReportInfo : ReportBase.ReportInfo
@@ -132,6 +129,125 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
       useFlag = parameters["UseFlag"].Value;
       stormEvent = parameters["StormEvent"].Value;      
 
+      //TO-DO: continue implementation of BsbrCount Linq queries
+
+      #region CountBsbr2yrEx
+//        var qryCountBsbr2yrEx = 
+//          from tableSpRpBsbr in altCompilerDS.SP_RP_BSBR
+//          where (((!filteredByFocusArea) || (tableSpRpBsbr.focus_area == focusArea)) && (tableSpRpBsbr.useflag == 14) && (tableSpRpBsbr.storm.ToString() == "2"))
+//          group tableSpRpBsbr by tableSpRpBsbr.focus_area into gFocusArea
+//          orderby gFocusArea.Key
+//          select new
+//          {
+//            FocusArea = gFocusArea.Key,
+//            Bsbr2yrEx = gFocusArea.Count(p=>p.OBJECTID)
+//          };
+
+//      if (qryCountBsbr2yrEx.Count() > 1 && filteredByFocusArea)
+//      {
+//        throw new Exception("2yrExBsbrCount returned more than one row");
+//      }
+//      else if (qryCountBsbr2yrEx.Count()==0)
+//      {
+//        return 0;
+//      }
+//      return qryCountBsbr2yrEx.Count(p => p.Bsbr2yrEx);
+      #endregion 
+
+      #region CountBsbr5yrEx
+//      var qryCountBsbr5yrEx = 
+//            from tableSpRpBsbr in altCompilerDS.SP_RP_BSBR
+//            where (((!filteredByFocusArea) || (tableSpRpBsbr.focus_area == focusArea)) && (tableSpRpBsbr.useflag == 14) && (tableSpRpBsbr.storm.ToString() == "5"))
+//            group tableSpRpBsbr by tableSpRpBsbr.focus_area into gFocusArea
+//            orderby gFocusArea.Key
+//            select new
+//            {
+//              FocusArea = gFocusArea.Key,
+//              Bsbr5yrEx = gFocusArea.Count(p=>p.OBJECTID)
+//            };
+
+//      if (qryCountBsbr5yrEx.Count() > 1 && filteredByFocusArea)
+//      {
+//        throw new Exception("Bsbr5yrEx returned more than one row");
+//      }
+//      else if (qryCountBsbr5yrEx.Count()==0)
+//      {
+//        return 0;
+//      }
+//      return qryCountBsbr5yrEx.Count(p => p.Bsbr5yrEx);
+#endregion
+
+      #region CountBsbr25yrEx
+
+//      var qryCountBsbr25yrEx =
+//           from tableSpRpBsbr in altCompilerDS.SP_RP_BSBR
+//           where (((!filteredByFocusArea) || (tableSpRpBsbr.focus_area == focusArea)) && (tableSpRpBsbr.useflag == 14) && (tableSpRpBsbr.storm.ToString() == "25"))
+//           group tableSpRpBsbr by tableSpRpBsbr.focus_area into gFocusArea
+//           orderby gFocusArea.Key
+//           select new
+//           {
+//             FocusArea = gFocusArea.Key,
+//             Bsbr25yrEx = gFocusArea.Count(p => p.OBJECTID)
+//           };
+
+//      if (qryCountBsbr25yrEx.Count() > 1 && filteredByFocusArea)
+//      {
+//        throw new Exception("Bsbr25yrEx returned more than one row");
+//      }
+//      else if (qryCountBsbr25yrEx.Count() == 0)
+//      {
+//        return 0;
+//      }
+//      return qryCountBsbr25yrEx.Count(p => p.Bsbr25yrEx);
+      #endregion
+
+      #region CountBsbr25yrFu
+
+//      var qryCountBsbr25yrFu =
+//           from tableSpRpBsbr in altCompilerDS.SP_RP_BSBR
+//           where (((!filteredByFocusArea) || (tableSpRpBsbr.focus_area == focusArea)) && (tableSpRpBsbr.useflag == 15) && (tableSpRpBsbr.storm.ToString() == "25"))
+//           group tableSpRpBsbr by tableSpRpBsbr.focus_area into gFocusArea
+//           orderby gFocusArea.Key
+//           select new
+//           {
+//             FocusArea = gFocusArea.Key,
+//             Bsbr25yrFu = gFocusArea.Count(p => p.OBJECTID)
+//           };
+
+//      if (qryCountBsbr25yrFu.Count() > 1 && filteredByFocusArea)
+//      {
+//        throw new Exception("Bsbr25yrFu returned more than one row");
+//      }
+//      else if (qryCountBsbr25yrFu.Count() == 0)
+//      {
+//        return 0;
+//      }
+//      return qryCountBsbr25yrFu.Count(p => p.Bsbr25yrFu);
+      #endregion
+
+      #region CountBsbr2yrRp
+
+//      var qryCountBsbr25yrRp =
+//             from tableSpRpBsbr in altCompilerDS.SP_RP_BSBR
+//             where (((!filteredByFocusArea) || (tableSpRpBsbr.focus_area == focusArea)) && (tableSpRpBsbr.useflag == 13) && (tableSpRpBsbr.storm.ToString() == "25"))
+//             group tableSpRpBsbr by tableSpRpBsbr.focus_area into gFocusArea
+//             orderby gFocusArea.Key
+//             select new
+//           {
+//             FocusArea = gFocusArea.Key,
+//             Bsbr25yrRp = gFocusArea.Count(p => p.OBJECTID)
+//           };
+
+//      if (qryCountBsbr25yrRp.Count() > 1 && filteredByFocusArea)
+//      {
+//        throw new Exception("Bsbr25yrRp returned more than one row");
+//      }
+//      else if (qryCountBsbr25yrRp.Count() == 0)
+//      {
+//        return 0;
+//      }
+//      return qryCountBsbr25yrRp.Count(p => p.Bsbr25yrRp);
+      #endregion
       return 0;
     }
 
