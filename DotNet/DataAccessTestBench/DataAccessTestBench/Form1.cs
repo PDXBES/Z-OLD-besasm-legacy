@@ -9,32 +9,33 @@ using System.Windows.Forms;
 using SystemsAnalysis.DataAccess;
 using SystemsAnalysis.Reporting.ReportLibraries;
 using SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor;
-  
+
 namespace DataAccessTestBench
 {
   public partial class Form1 : Form
   {
     private SystemsAnalysis.DataAccess.StormwaterControlsDataSet scDS;
-    
+
     private RecommendedPlanReport rpReport;
 
     public Form1()
     {
       InitializeComponent();
 
-      string testModelPath = @"C:\Data\Projects\41800023-1 BES_DataManagement\Beech_Essex\BEE_RP\";
-      //string testModelPath = @"\\Cassio\systems_planning\8063_CombinedFacPlan\Models\RP\Beech_Essex\BEE_RP\";
+      //string testModelPath = @"C:\Data\Projects\41800023-1 BES_DataManagement\Beech_Essex\BEE_RP\";
+      string testModelPath = @"\\Cassio\systems_planning\8063_CombinedFacPlan\Models\RP\Beech_Essex\BEE_RP\";
 
-      string testAlternativePath = @"C:\Data\Projects\41800023-1 BES_DataManagement\Beech_Essex\BEE_FU\alternatives\BEE_RP\";
-      //string testAlternativePath = @"\\Cassio\systems_planning\8063_CombinedFacPlan\Models\RP\Beech_Essex\BEE_FU\alternatives\BEE_RP";
+      //string testAlternativePath = @"C:\Data\Projects\41800023-1 BES_DataManagement\Beech_Essex\BEE_FU\alternatives\BEE_RP\";
+      string testAlternativePath = @"\\Cassio\systems_planning\8063_CombinedFacPlan\Models\RP\Beech_Essex\BEE_FU\alternatives\BEE_RP";
+
+      //string testSwmmOutput = @"C:\Data\Projects\41800023-1 BES_DataManagement\Beech_Essex\BEE_RP\sim\4S6\BEE_NP-Pipe_FU_4S6.out";
+      string testSwmmOutput = @"\\Cassio\systems_planning\8063_CombinedFacPlan\Models\RP\Beech_Essex\BEE_RP\sim\4S6\BEE_RP_4S6.out";
+
+      //scDS = new StormwaterControlsDataSet();
+      //scDS.InitStormwaterControlDataSet(testModelPath);
+      //scDS.InitAltTargetDataTables(testAlternativePath);
+      //scDS.InitResultsDataTables(testSwmmOutput);
       
-      string testSwmmOutput = @"C:\Data\Projects\41800023-1 BES_DataManagement\Beech_Essex\BEE_RP\sim\4S6\BEE_NP-Pipe_FU_4S6.out";
-      //string testSwmmOutput = @"\\Cassio\systems_planning\8063_CombinedFacPlan\Models\RP\Beech_Essex\BEE_RP\sim\4S6\BEE_RP_4S6.out";
-           
-      scDS = new StormwaterControlsDataSet();
-      scDS.InitStormwaterControlDataSet(testModelPath);
-      scDS.InitAltTargetDataTables(testAlternativePath);
-      scDS.InitResultsDataTables(testSwmmOutput);
 
       rpReport = new RecommendedPlanReport();
       Dictionary<string, ReportBase.Parameter> parameters = new Dictionary<string, ReportBase.Parameter>();
@@ -42,7 +43,7 @@ namespace DataAccessTestBench
       parameters.Add("AlternativePath", new ReportBase.Parameter("AlternativePath", testAlternativePath));
       parameters.Add("SwmmOutputFile", new ReportBase.Parameter("SwmmOutputFile", testSwmmOutput));
       rpReport.LoadAuxilaryData(parameters);
-      
+
     }
 
     private void button1_Click(object sender, EventArgs e)
@@ -119,9 +120,9 @@ namespace DataAccessTestBench
       {
         Dictionary<string, ReportBase.Parameter> parameters = new Dictionary<string, ReportBase.Parameter>();
         parameters.Add("FocusArea", new ReportBase.Parameter("FocusArea", row.FocusArea));
-        double infiltratedArea = rpReport.InfiltrateStormwaterArea(parameters);       
+        double infiltratedArea = rpReport.InfiltrateStormwaterArea(parameters);
 
-        textBox1.AppendText("Focus Area: " + row.FocusArea + "; Infiltrated Area = " + infiltratedArea + "\n");        
+        textBox1.AppendText("Focus Area: " + row.FocusArea + "; Infiltrated Area = " + infiltratedArea + "\n");
       }
 
       textBox1.AppendText("\n");
@@ -133,7 +134,7 @@ namespace DataAccessTestBench
         parameters.Add("FocusArea", new ReportBase.Parameter("FocusArea", row.FocusArea));
         double infiltratedArea = rpReport.ProtectImproveTerrestrialHabitatArea(parameters);
 
-        textBox1.AppendText("Focus Area: " + row.FocusArea + "; Habitat Area = " + infiltratedArea + "\n");        
+        textBox1.AppendText("Focus Area: " + row.FocusArea + "; Habitat Area = " + infiltratedArea + "\n");
       }
 
       textBox1.AppendText("\n");
@@ -209,6 +210,46 @@ namespace DataAccessTestBench
       }
 
 
+    }
+
+    private void button3_Click(object sender, EventArgs e)
+    {
+      textBox1.Clear();
+
+      textBox1.AppendText("BSBR Count\n");
+      textBox1.AppendText("------------------------------------\n");
+
+      var query =
+       from focusAreas in rpReport.altCompilerDS.SP_RP_BSBR
+       group focusAreas by focusAreas.focus_area into grpFocusArea
+       orderby grpFocusArea.Key
+       select new
+       {
+         FocusArea = grpFocusArea.Key
+       };
+
+      Dictionary<string, ReportBase.Parameter> parameters;
+      int bsbrCount = 0;
+      foreach (var row in query)
+      {
+        parameters = new Dictionary<string, ReportBase.Parameter>();
+        parameters.Add("StormEvent", new ReportBase.Parameter("StormEvent", "25"));
+        parameters.Add("UseFlag", new ReportBase.Parameter("UseFlag", "14"));
+        parameters.Add("FocusArea", new ReportBase.Parameter("FocusArea", row.FocusArea));
+        bsbrCount = rpReport.BSBRCount(parameters);
+
+        textBox1.AppendText(row.FocusArea + "BSBR Count: " + bsbrCount.ToString() + "\n");
+      }
+      parameters = new Dictionary<string, ReportBase.Parameter>();
+      
+      parameters.Add("UseFlag", new ReportBase.Parameter("UseFlag", "14"));
+      parameters.Add("StormEvent", new ReportBase.Parameter("StormEvent", "25"));      
+      bsbrCount = rpReport.BSBRCount(parameters);
+
+      textBox1.AppendText("Total BSBR Count: " + bsbrCount.ToString() + "\n");
+     
+
+      
     }
   }
 }
