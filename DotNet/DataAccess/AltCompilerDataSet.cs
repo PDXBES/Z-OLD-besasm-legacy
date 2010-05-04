@@ -5,11 +5,11 @@
     {
       public void InitAltCompilerDataSet()
       {
-        AltCompilerDataSet altCompilerDS;
-        altCompilerDS = new AltCompilerDataSet();
+        //AltCompilerDataSet altCompilerDS;
+        //altCompilerDS = new AltCompilerDataSet();
         AltCompilerDataSetTableAdapters.SP_RP_BSBRTableAdapter rpBsbrTA;
         rpBsbrTA = new AltCompilerDataSetTableAdapters.SP_RP_BSBRTableAdapter();
-        rpBsbrTA.Fill(altCompilerDS.SP_RP_BSBR);
+        rpBsbrTA.Fill(this.SP_RP_BSBR);
       }
     }
 }

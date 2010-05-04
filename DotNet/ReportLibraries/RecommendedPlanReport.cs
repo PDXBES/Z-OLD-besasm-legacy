@@ -20,7 +20,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
     const double CREDIT_PER_GALLON_STORMWATER_REMOVAL = 3;
 
     private StormwaterControlsDataSet scDS;
-    private AltCompilerDataSet altCompilerDS;
+    public AltCompilerDataSet altCompilerDS;
     private string modelPath;
     private string alternativePath;
     private string swmmOutputFile;
@@ -117,31 +117,35 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
       }
     }
 
-    public double BSBRCount(IDictionary<string, Parameter> parameters)
+    public int BSBRCount(IDictionary<string, Parameter> parameters)
     {
       string focusArea;
       bool filteredByFocusArea;
       filteredByFocusArea = parameters.Keys.Contains("FocusArea");
       focusArea = filteredByFocusArea ? parameters["FocusArea"].Value : "";
 
-      string useFlag;
+      int useFlag;
       string stormEvent;
-      useFlag = parameters["UseFlag"].Value;
+      useFlag = parameters["UseFlag"].ValueAsInt;
       stormEvent = parameters["StormEvent"].Value;      
 
       //TO-DO: continue implementation of BsbrCount Linq queries
-
-      #region CountBsbr2yrEx
-//        var qryCountBsbr2yrEx = 
-//          from tableSpRpBsbr in altCompilerDS.SP_RP_BSBR
-//          where (((!filteredByFocusArea) || (tableSpRpBsbr.focus_area == focusArea)) && (tableSpRpBsbr.useflag == 14) && (tableSpRpBsbr.storm.ToString() == "2"))
-//          group tableSpRpBsbr by tableSpRpBsbr.focus_area into gFocusArea
-//          orderby gFocusArea.Key
-//          select new
-//          {
-//            FocusArea = gFocusArea.Key,
-//            Bsbr2yrEx = gFocusArea.Count(p=>p.OBJECTID)
-//          };
+        #region CountBsbr2yrEx
+        var qryCountBsbr =
+          from tableSpRpBsbr in altCompilerDS.SP_RP_BSBR
+          where (tableSpRpBsbr.useflag == useFlag) 
+            && (tableSpRpBsbr.storm == stormEvent)
+          group tableSpRpBsbr by tableSpRpBsbr.focus_area into gFocusArea
+          orderby gFocusArea.Key
+          select new
+          {
+            FocusArea = gFocusArea.Key,
+            BsbrCount = gFocusArea.Count()
+          };
+        return qryCountBsbr.Where(
+          p => !filteredByFocusArea
+            || p.FocusArea == focusArea).Sum(p => p.BsbrCount); //qryCountBsbr.;// qryCountBsbr.BsbrCount;
+    
 
 //      if (qryCountBsbr2yrEx.Count() > 1 && filteredByFocusArea)
 //      {
@@ -247,8 +251,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
 //        return 0;
 //      }
 //      return qryCountBsbr25yrRp.Count(p => p.Bsbr25yrRp);
-      #endregion
-      return 0;
+      #endregion      
     }
 
     public double StormwaterRemovalVolStreetStorage(IDictionary<string, Parameter> parameters)
@@ -272,7 +275,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
         select new
         {
           FocusArea = gFocusArea.Key,
-          StreetStorage = gFocusArea.Sum(p => p.StorageVolumeCuFt) * GAL_PER_FT_3
+          StreetStorage = gFocusArea.Sum(p => p.StorageVolumeCuFt) * GAL_PER_FT_3          
         };
 
       if (query.Count() > 1 && filteredByFocusArea)

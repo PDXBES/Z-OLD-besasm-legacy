@@ -53,7 +53,7 @@ namespace SystemsAnalysis.Utils.AccessUtils
       //access will fail to close completely (managed code doesn't always
       //implement a destructor completely).
       startTime = System.DateTime.Now;
-      accessApp = ShellGetDB(databaseName, 1000);
+      accessApp = ShellGetDB(databaseName, 2000);
       //accessApp = new Access.Application();
       CurrentDB = this.accessApp.CurrentDb();
 
