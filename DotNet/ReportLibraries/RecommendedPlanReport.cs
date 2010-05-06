@@ -29,7 +29,13 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
     public RecommendedPlanReport()
     {
       altCompilerDS = new AltCompilerDataSet();
-      altCompilerDS.InitAltCompilerDataSet();
+      try
+      {
+        altCompilerDS.InitAltCompilerDataSet();
+      }
+      catch (Exception ex)
+      {
+      }
     }
 
     public new class ReportInfo : ReportBase.ReportInfo
@@ -127,131 +133,55 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
       int useFlag;
       string stormEvent;
       useFlag = parameters["UseFlag"].ValueAsInt;
-      stormEvent = parameters["StormEvent"].Value;      
+      stormEvent = parameters["StormEvent"].Value;
 
       //TO-DO: continue implementation of BsbrCount Linq queries
-        #region CountBsbr2yrEx
-        var qryCountBsbr =
-          from tableSpRpBsbr in altCompilerDS.SP_RP_BSBR
-          where (tableSpRpBsbr.useflag == useFlag) 
-            && (tableSpRpBsbr.storm == stormEvent)
-          group tableSpRpBsbr by tableSpRpBsbr.focus_area into gFocusArea
-          orderby gFocusArea.Key
-          select new
-          {
-            FocusArea = gFocusArea.Key,
-            BsbrCount = gFocusArea.Count()
-          };
-        return qryCountBsbr.Where(
-          p => !filteredByFocusArea
-            || p.FocusArea == focusArea).Sum(p => p.BsbrCount); //qryCountBsbr.;// qryCountBsbr.BsbrCount;
-    
 
-//      if (qryCountBsbr2yrEx.Count() > 1 && filteredByFocusArea)
-//      {
-//        throw new Exception("2yrExBsbrCount returned more than one row");
-//      }
-//      else if (qryCountBsbr2yrEx.Count()==0)
-//      {
-//        return 0;
-//      }
-//      return qryCountBsbr2yrEx.Count(p => p.Bsbr2yrEx);
-      #endregion 
+      var qryCountBsbr =
+        from tableSpRpBsbr in altCompilerDS.SP_RP_BSBR
+        where (tableSpRpBsbr.useflag == useFlag)
+          && (tableSpRpBsbr.storm == stormEvent)
+        group tableSpRpBsbr by tableSpRpBsbr.focus_area into gFocusArea
+        orderby gFocusArea.Key
+        select new
+        {
+          FocusArea = gFocusArea.Key,
+          BsbrCount = gFocusArea.Count()
+        };
 
-      #region CountBsbr5yrEx
-//      var qryCountBsbr5yrEx = 
-//            from tableSpRpBsbr in altCompilerDS.SP_RP_BSBR
-//            where (((!filteredByFocusArea) || (tableSpRpBsbr.focus_area == focusArea)) && (tableSpRpBsbr.useflag == 14) && (tableSpRpBsbr.storm.ToString() == "5"))
-//            group tableSpRpBsbr by tableSpRpBsbr.focus_area into gFocusArea
-//            orderby gFocusArea.Key
-//            select new
-//            {
-//              FocusArea = gFocusArea.Key,
-//              Bsbr5yrEx = gFocusArea.Count(p=>p.OBJECTID)
-//            };
+      int bsbrCount = qryCountBsbr.Where(
+        p => !filteredByFocusArea
+          || p.FocusArea == focusArea).Sum(p => p.BsbrCount); //qryCountBsbr.;// qryCountBsbr.BsbrCount;
 
-//      if (qryCountBsbr5yrEx.Count() > 1 && filteredByFocusArea)
-//      {
-//        throw new Exception("Bsbr5yrEx returned more than one row");
-//      }
-//      else if (qryCountBsbr5yrEx.Count()==0)
-//      {
-//        return 0;
-//      }
-//      return qryCountBsbr5yrEx.Count(p => p.Bsbr5yrEx);
-#endregion
+      return bsbrCount;
+    }
+    public int BSBRDelta(IDictionary<string, Parameter> parameters)
+    {
+      string focusArea;
+      bool filteredByFocusArea;
+      filteredByFocusArea = parameters.Keys.Contains("FocusArea");
+      focusArea = filteredByFocusArea ? parameters["FocusArea"].Value : "";
 
-      #region CountBsbr25yrEx
+      int useFlag1;
+      string stormEvent1;
+      useFlag1 = parameters["UseFlag1"].ValueAsInt;
+      stormEvent1 = parameters["StormEvent1"].Value;
 
-//      var qryCountBsbr25yrEx =
-//           from tableSpRpBsbr in altCompilerDS.SP_RP_BSBR
-//           where (((!filteredByFocusArea) || (tableSpRpBsbr.focus_area == focusArea)) && (tableSpRpBsbr.useflag == 14) && (tableSpRpBsbr.storm.ToString() == "25"))
-//           group tableSpRpBsbr by tableSpRpBsbr.focus_area into gFocusArea
-//           orderby gFocusArea.Key
-//           select new
-//           {
-//             FocusArea = gFocusArea.Key,
-//             Bsbr25yrEx = gFocusArea.Count(p => p.OBJECTID)
-//           };
+      int useFlag2;
+      string stormEvent2;
+      useFlag2 = parameters["UseFlag2"].ValueAsInt;
+      stormEvent2 = parameters["StormEvent2"].Value;
 
-//      if (qryCountBsbr25yrEx.Count() > 1 && filteredByFocusArea)
-//      {
-//        throw new Exception("Bsbr25yrEx returned more than one row");
-//      }
-//      else if (qryCountBsbr25yrEx.Count() == 0)
-//      {
-//        return 0;
-//      }
-//      return qryCountBsbr25yrEx.Count(p => p.Bsbr25yrEx);
-      #endregion
+      int bsbrCount1;
+      IDictionary<string, Parameter> parameters1;
+      parameters1 = (IDictionary<string, Parameter>)parameters.Select(p => p.Key.EndsWith("1") || p.Key == "FocusArea");
+      bsbrCount1 = BSBRCount(parameters1);
+      int bsbrCount2;
+      IDictionary<string, Parameter> parameters2;
+      parameters2 = (IDictionary<string, Parameter>)parameters.Select(p => p.Key.EndsWith("2") || p.Key == "FocusArea");
+      bsbrCount2 = BSBRCount(parameters2);
 
-      #region CountBsbr25yrFu
-
-//      var qryCountBsbr25yrFu =
-//           from tableSpRpBsbr in altCompilerDS.SP_RP_BSBR
-//           where (((!filteredByFocusArea) || (tableSpRpBsbr.focus_area == focusArea)) && (tableSpRpBsbr.useflag == 15) && (tableSpRpBsbr.storm.ToString() == "25"))
-//           group tableSpRpBsbr by tableSpRpBsbr.focus_area into gFocusArea
-//           orderby gFocusArea.Key
-//           select new
-//           {
-//             FocusArea = gFocusArea.Key,
-//             Bsbr25yrFu = gFocusArea.Count(p => p.OBJECTID)
-//           };
-
-//      if (qryCountBsbr25yrFu.Count() > 1 && filteredByFocusArea)
-//      {
-//        throw new Exception("Bsbr25yrFu returned more than one row");
-//      }
-//      else if (qryCountBsbr25yrFu.Count() == 0)
-//      {
-//        return 0;
-//      }
-//      return qryCountBsbr25yrFu.Count(p => p.Bsbr25yrFu);
-      #endregion
-
-      #region CountBsbr2yrRp
-
-//      var qryCountBsbr25yrRp =
-//             from tableSpRpBsbr in altCompilerDS.SP_RP_BSBR
-//             where (((!filteredByFocusArea) || (tableSpRpBsbr.focus_area == focusArea)) && (tableSpRpBsbr.useflag == 13) && (tableSpRpBsbr.storm.ToString() == "25"))
-//             group tableSpRpBsbr by tableSpRpBsbr.focus_area into gFocusArea
-//             orderby gFocusArea.Key
-//             select new
-//           {
-//             FocusArea = gFocusArea.Key,
-//             Bsbr25yrRp = gFocusArea.Count(p => p.OBJECTID)
-//           };
-
-//      if (qryCountBsbr25yrRp.Count() > 1 && filteredByFocusArea)
-//      {
-//        throw new Exception("Bsbr25yrRp returned more than one row");
-//      }
-//      else if (qryCountBsbr25yrRp.Count() == 0)
-//      {
-//        return 0;
-//      }
-//      return qryCountBsbr25yrRp.Count(p => p.Bsbr25yrRp);
-      #endregion      
+      return bsbrCount1 - bsbrCount2;
     }
 
     public double StormwaterRemovalVolStreetStorage(IDictionary<string, Parameter> parameters)
@@ -275,7 +205,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
         select new
         {
           FocusArea = gFocusArea.Key,
-          StreetStorage = gFocusArea.Sum(p => p.StorageVolumeCuFt) * GAL_PER_FT_3          
+          StreetStorage = gFocusArea.Sum(p => p.StorageVolumeCuFt) * GAL_PER_FT_3
         };
 
       if (query.Count() > 1 && filteredByFocusArea)
@@ -764,7 +694,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
       }
       else if (qryInfiltrationAreaPark.Count() != 0)
       {
-        infiltrationAreaPark = qryInfiltrationAreaPark.Sum(p =>p.InfiltrationAreaPark);
+        infiltrationAreaPark = qryInfiltrationAreaPark.Sum(p => p.InfiltrationAreaPark);
       }
 
       return infiltrationAreaStreet + infiltrationAreaRoof + infiltrationAreaPark;
@@ -775,16 +705,16 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
     {
       return InfiltrateStormwaterArea(parameters);
     }
-                  
+
     public double ProtectImproveTerrestrialHabitatArea(IDictionary<string, Parameter> parameters)
-    {      
+    {
       string focusArea;
       bool filteredByFocusArea;
       filteredByFocusArea = parameters.Keys.Contains("FocusArea");
       focusArea = filteredByFocusArea ? parameters["FocusArea"].Value : "";
-      
+
       double streetArea = 0, roofArea = 0, parkArea = 0;
-     
+
       var qryStreetArea =
         from icNode in scDS.ICNode
         join icStreetTarget in scDS.ic_StreetTargets
@@ -800,7 +730,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
           FocusArea = gFocusArea.Key,
           FacilityVolume = gFocusArea.Sum(p => p.FacVolCuFt) / 0.75 / SQ_FT_PER_ACRE,
         };
-      
+
       if (qryStreetArea.Count() > 1 && filteredByFocusArea)
       {
         throw new Exception("HabitatStreetArea returned more than one row");
@@ -809,7 +739,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
       {
         streetArea = qryStreetArea.Sum(p => p.FacilityVolume);
       }
-      
+
       var qryRoofArea =
         from mdlDsc in scDS.mdl_dirsc_ac
         join icRoofTargets in scDS.ic_RoofTargets
@@ -824,19 +754,19 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
         select new
         {
           FocusArea = grpFocusArea.Key,
-          FacilityVolume = grpFocusArea.Sum(p => 
-            Math.Max(0.0, (double)p.SqFt_Bioret) * 0.83 * 0.09 + 
-            Math.Max(0.0, (double)p.SqFt_Plntr) * 0.06 + 
+          FacilityVolume = grpFocusArea.Sum(p =>
+            Math.Max(0.0, (double)p.SqFt_Bioret) * 0.83 * 0.09 +
+            Math.Max(0.0, (double)p.SqFt_Plntr) * 0.06 +
             Math.Max(0.0, (double)p.SqFt_Eco)) / SQ_FT_PER_ACRE
         };
-                        
+
       if (qryRoofArea.Count() > 1 && filteredByFocusArea)
       {
         throw new Exception("HabitatRoofArea returned more than one row");
       }
       else if (qryRoofArea.Count() != 0)
       {
-        roofArea = qryRoofArea.Sum(p =>p.FacilityVolume);
+        roofArea = qryRoofArea.Sum(p => p.FacilityVolume);
       }
 
       var qryParkArea =
@@ -856,7 +786,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
           FacilityVolume = grpFocusArea.Sum(p =>
             Math.Max(0.0, (double)p.SqFt_Bioret) * 0.83 * 0.09) / SQ_FT_PER_ACRE
         };
-               
+
       if (qryParkArea.Count() > 1 && filteredByFocusArea)
       {
         throw new Exception("HabitatParkArea returned more than one row");
@@ -868,7 +798,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
 
       return streetArea + roofArea + parkArea;
     }
-    public double ProtectImproveAquaticHabitatArea (IDictionary<string, Parameter> parameters)
+    public double ProtectImproveAquaticHabitatArea(IDictionary<string, Parameter> parameters)
     {
       return 0;
     }
