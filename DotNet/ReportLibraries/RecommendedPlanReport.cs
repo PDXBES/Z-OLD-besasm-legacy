@@ -127,8 +127,13 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
     {
       string focusArea;
       bool filteredByFocusArea;
+      IList<string> focusAreaList = (IList<string>)FocusAreaList();
       filteredByFocusArea = parameters.Keys.Contains("FocusArea");
       focusArea = filteredByFocusArea ? parameters["FocusArea"].Value : "";
+      if (!focusAreaList.Contains(focusArea))
+      {
+        return 0;
+      }
 
       int useFlag;
       string stormEvent;
@@ -139,8 +144,10 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
 
       var qryCountBsbr =
         from tableSpRpBsbr in altCompilerDS.SP_RP_BSBR
+        join faList in focusAreaList
+        on tableSpRpBsbr.focus_area equals faList
         where (tableSpRpBsbr.useflag == useFlag)
-          && (tableSpRpBsbr.storm == stormEvent)
+          && (tableSpRpBsbr.storm == stormEvent)          
         group tableSpRpBsbr by tableSpRpBsbr.focus_area into gFocusArea
         orderby gFocusArea.Key
         select new
@@ -173,16 +180,22 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
       stormEvent2 = parameters["StormEvent2"].Value;
 
       int bsbrCount1;
-      IDictionary<string, Parameter> parameters1;
-      parameters1 = (IDictionary<string, Parameter>)parameters.Select(p => p.Key.EndsWith("1") || p.Key == "FocusArea");
+      IDictionary<string, Parameter> parameters1 = new Dictionary<string, Parameter>();
+      if (filteredByFocusArea) { parameters1.Add("FocusArea", parameters["FocusArea"]); }
+      parameters1.Add("UseFlag", parameters["UseFlag1"]);
+      parameters1.Add("StormEvent", parameters["StormEvent1"]);
       bsbrCount1 = BSBRCount(parameters1);
+
       int bsbrCount2;
-      IDictionary<string, Parameter> parameters2;
-      parameters2 = (IDictionary<string, Parameter>)parameters.Select(p => p.Key.EndsWith("2") || p.Key == "FocusArea");
+      IDictionary<string, Parameter> parameters2 = new Dictionary<string, Parameter>();
+      if (filteredByFocusArea) { parameters2.Add("FocusArea", parameters["FocusArea"]); }
+      parameters2.Add("UseFlag", parameters["UseFlag2"]);
+      parameters2.Add("StormEvent", parameters["StormEvent2"]);
       bsbrCount2 = BSBRCount(parameters2);
 
       return bsbrCount1 - bsbrCount2;
     }
+
 
     public double StormwaterRemovalVolStreetStorage(IDictionary<string, Parameter> parameters)
     {

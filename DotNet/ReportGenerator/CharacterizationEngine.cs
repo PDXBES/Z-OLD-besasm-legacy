@@ -496,7 +496,7 @@ namespace SystemsAnalysis.Reporting
         }
         return "Parse Error";
       }
-    }
+    }    
 
     private void expandMultiRows()
     {
@@ -533,10 +533,14 @@ namespace SystemsAnalysis.Reporting
     {
       string multiRowKey = xmlNode.Attributes["multiRowKey"].Value;
 
+      string[] multiRowExcludeList =
+        xmlNode.Attributes["multiRowExcludeList"] == null ? new string[0]
+        : xmlNode.Attributes["multiRowExcludeList"].Value.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
+
       IList multiRowKeyList;
       if (xmlNode.Attributes["multiRowFilterName"] == null)
       {
-        multiRowKeyList = getMultiRowKeyList(multiRowKey);
+        multiRowKeyList = getMultiRowKeyList(multiRowKey, multiRowExcludeList);
       }
       else
       {
@@ -545,10 +549,7 @@ namespace SystemsAnalysis.Reporting
         multiRowFilterValue = xmlNode.Attributes["multiRowFilterValue"] == null ? "" : xmlNode.Attributes["multiRowFilterValue"].Value;
         multiRowKeyList = getFilteredMultiRowKeyList(multiRowKey, multiRowFilterName, multiRowFilterValue);
       }
-
-      string[] multiRowExcludeList =
-        xmlNode.Attributes["multiRowExcludeList"] == null ? new string[0]
-        : xmlNode.Attributes["multiRowExcludeList"].Value.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
+      
       foreach (string s in multiRowExcludeList)
       {
         if (multiRowKeyList.Contains(s)) multiRowKeyList.Remove(s);
@@ -567,24 +568,29 @@ namespace SystemsAnalysis.Reporting
 
       return rowXmlNodes;
     }
-    private IList getMultiRowKeyList(string multiRowKey)
+    private IList getMultiRowKeyList(string multiRowKey, string[] multieRowExcludeList)
     {
-      int[] multiRowKeyList;
+      IList multiRowKeyList;
       switch (multiRowKey)
       {
         case "FECID":
-          return (IList)FecReport.FecIDList();
+          multiRowKeyList = (IList)FecReport.FecIDList();
+          break;
         case "FocusArea":
-          return AlternativeReport.FocusAreaList();
+          multiRowKeyList = (IList)AlternativeReport.FocusAreaList();
+          break;
         case "PumpStationID":
-          return PSReport.PumpStationIDList;
+          multiRowKeyList = (IList)PSReport.PumpStationIDList;
+          break;
         case "RPFocusArea":
-          return RecommendedPlanReport.FocusAreaList();
+          multiRowKeyList = (IList)RecommendedPlanReport.FocusAreaList();
+          break;
         case "DiversionID":
         default:
           multiRowKeyList = new int[0];
-          return (IList)multiRowKeyList;
+          break;
       }
+      return multiRowKeyList;
     }
     private int[] getFilteredMultiRowKeyList(string multiRowKey, string multiRowFilterName, string multiRowFilterValue)
     {
