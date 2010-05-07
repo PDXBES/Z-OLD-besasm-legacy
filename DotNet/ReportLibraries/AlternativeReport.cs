@@ -21,6 +21,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
   public class AlternativeReport : ReportBase
   {
     private AlternativePackage altPackage;
+    private IList focusAreaList;
     private PipeInspectionDataSet _piDS;
 
     /// <summary>
@@ -101,6 +102,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
           alternativePath = System.IO.Path.GetDirectoryName(alternativePath);
         }
         altPackage = new AlternativePackage(alternativePath);
+        focusAreaList = new List<string>(altPackage.FocusAreaList.Cast<string>());
       }
       catch (Exception ex)
       {
@@ -110,7 +112,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
 
     public IList FocusAreaList()
     {
-      return altPackage.FocusAreaList;
+      return focusAreaList; 
     }
 
     public string FocusAreaName(IDictionary<string, Parameter> parameters)
