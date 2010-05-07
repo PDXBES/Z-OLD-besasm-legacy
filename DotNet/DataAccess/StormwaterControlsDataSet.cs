@@ -8,23 +8,7 @@ namespace SystemsAnalysis.DataAccess
   public partial class StormwaterControlsDataSet
   {
     public void InitStormwaterControlDataSet(string modelPath)
-    {
-      StormwaterControlsDataSetTableAdapters.ICNodeTableAdapter icNodeTA;
-      icNodeTA = new StormwaterControlsDataSetTableAdapters.ICNodeTableAdapter(modelPath);      
-      icNodeTA.Fill(this.ICNode);
-
-      StormwaterControlsDataSetTableAdapters._mdl_roofTargetsTableAdapter mdlRoofTargetsTA;
-      mdlRoofTargetsTA = new StormwaterControlsDataSetTableAdapters._mdl_roofTargetsTableAdapter(modelPath);
-      mdlRoofTargetsTA.Fill(this._mdl_roofTargets);
-      
-      foreach (System.Data.DataRow row in this._mdl_roofTargets.GetErrors())
-      {
-        
-      }
-      StormwaterControlsDataSetTableAdapters._mdl_ParkingTargetsTableAdapter mdlParkingTargetsTA;
-      mdlParkingTargetsTA = new StormwaterControlsDataSetTableAdapters._mdl_ParkingTargetsTableAdapter(modelPath);
-      mdlParkingTargetsTA.Fill(this._mdl_ParkingTargets);
-
+    {      
       StormwaterControlsDataSetTableAdapters.mdl_dirsc_acTableAdapter mdlDscTA;
       mdlDscTA = new StormwaterControlsDataSetTableAdapters.mdl_dirsc_acTableAdapter(modelPath);
 
@@ -61,8 +45,24 @@ namespace SystemsAnalysis.DataAccess
       finally
       {
         accessHelper.Dispose();
-      }      
-      
+      }
+
+      StormwaterControlsDataSetTableAdapters.ICNodeTableAdapter icNodeTA;
+      icNodeTA = new StormwaterControlsDataSetTableAdapters.ICNodeTableAdapter(modelPath);
+      icNodeTA.Fill(this.ICNode);
+
+      StormwaterControlsDataSetTableAdapters._mdl_roofTargetsTableAdapter mdlRoofTargetsTA;
+      mdlRoofTargetsTA = new StormwaterControlsDataSetTableAdapters._mdl_roofTargetsTableAdapter(modelPath);
+      mdlRoofTargetsTA.Fill(this._mdl_roofTargets);
+
+      foreach (System.Data.DataRow row in this._mdl_roofTargets.GetErrors())
+      {
+
+      }
+
+      StormwaterControlsDataSetTableAdapters._mdl_ParkingTargetsTableAdapter mdlParkingTargetsTA;
+      mdlParkingTargetsTA = new StormwaterControlsDataSetTableAdapters._mdl_ParkingTargetsTableAdapter(modelPath);
+      mdlParkingTargetsTA.Fill(this._mdl_ParkingTargets);      
     }
 
     public void InitAltTargetDataTables(string alternativePath)
