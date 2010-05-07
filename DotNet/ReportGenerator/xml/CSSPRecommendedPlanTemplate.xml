@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<?xml-stylesheet type="text/xsl" href="C:\Data\Dev\BESASM\legacy\DotNet\ReportGenerator\xml\excel_char.xsl" ?>
 <?xml-stylesheet type="text/xsl" href="\\Cassio\Modeling\Model_Programs\bin\ReportGenerator\excel_char.xsl" ?>
 <ReportGenerator reportName="CSSP Recommended Plan Report" studyArea="" >
   <CharacterizationTable tableNumber="1" tableTitle="Recommended Plan Summary" columnCount="5">
@@ -26,29 +25,29 @@
         <Cell cellType="FUNCTION">
           <Function functionName="BSBRCount" library="RecommendedPlanReport" format="N0">
             <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
-            <Parameter parameterName="UseFlag" parameterValue="EX_BASE" />
-            <Parameter parameterName="StormEvent" parameterValue="2_YEAR" />
+            <Parameter parameterName="UseFlag" parameterValue="14" />
+            <Parameter parameterName="StormEvent" parameterValue="2" />
           </Function>
         </Cell>
         <Cell cellType="FUNCTION">
           <Function functionName="BSBRCount" library="RecommendedPlanReport" format="N0">
             <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
-            <Parameter parameterName="UseFlag" parameterValue="EX_BASE" />
-            <Parameter parameterName="StormEvent" parameterValue="5_YEAR" />
+            <Parameter parameterName="UseFlag" parameterValue="14" />
+            <Parameter parameterName="StormEvent" parameterValue="5" />
           </Function>
         </Cell>
         <Cell cellType="FUNCTION">
         <Function functionName="BSBRCount" library="RecommendedPlanReport" format="N0">
             <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
-            <Parameter parameterName="UseFlag" parameterValue="EX_BASE" />
-            <Parameter parameterName="StormEvent" parameterValue="25_YEAR" />
+            <Parameter parameterName="UseFlag" parameterValue="14" />
+            <Parameter parameterName="StormEvent" parameterValue="25" />
           </Function>
         </Cell>
         <Cell cellType="FUNCTION">
           <Function functionName="BSBRCount" library="RecommendedPlanReport" format="N0">
             <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
-            <Parameter parameterName="UseFlag" parameterValue="FU_BASE" />
-            <Parameter parameterName="StormEvent" parameterValue="25_YEAR" />
+            <Parameter parameterName="UseFlag" parameterValue="15" />
+            <Parameter parameterName="StormEvent" parameterValue="25" />
           </Function>
         </Cell>
       </Row>
@@ -56,26 +55,26 @@
         <Cell cellType="CONST" data="Total" />
         <Cell cellType="FUNCTION">
           <Function functionName="BSBRCount" library="RecommendedPlanReport" format="N0">            
-            <Parameter parameterName="UseFlag" parameterValue="EX_BASE" />
-            <Parameter parameterName="StormEvent" parameterValue="2_YEAR" />
+            <Parameter parameterName="UseFlag" parameterValue="14" />
+            <Parameter parameterName="StormEvent" parameterValue="2" />
           </Function>
         </Cell>
         <Cell cellType="FUNCTION">
           <Function functionName="BSBRCount" library="RecommendedPlanReport" format="N0">            
-            <Parameter parameterName="UseFlag" parameterValue="EX_BASE" />
-            <Parameter parameterName="StormEvent" parameterValue="5_YEAR" />
+            <Parameter parameterName="UseFlag" parameterValue="14" />
+            <Parameter parameterName="StormEvent" parameterValue="5" />
           </Function>
         </Cell>
         <Cell cellType="FUNCTION">
         <Function functionName="BSBRCount" library="RecommendedPlanReport" format="N0">            
-            <Parameter parameterName="UseFlag" parameterValue="EX_BASE" />
-            <Parameter parameterName="StormEvent" parameterValue="25_YEAR" />
+            <Parameter parameterName="UseFlag" parameterValue="14" />
+            <Parameter parameterName="StormEvent" parameterValue="25" />
           </Function>
         </Cell>
         <Cell cellType="FUNCTION">
           <Function functionName="BSBRCount" library="RecommendedPlanReport" format="N0">            
-            <Parameter parameterName="UseFlag" parameterValue="FU_BASE" />
-            <Parameter parameterName="StormEvent" parameterValue="25_YEAR" />
+            <Parameter parameterName="UseFlag" parameterValue="15" />
+            <Parameter parameterName="StormEvent" parameterValue="25" />
           </Function>
         </Cell>
       </Row>
@@ -167,10 +166,12 @@
           </Function>
         </Cell>
         <Cell cellType="FUNCTION">
-					<Function functionName="BSBRCount" library="RecommendedPlanReport" format="N0">
+					<Function functionName="BSBRDelta" library="RecommendedPlanReport" format="N0">
             <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
-            <Parameter parameterName="UseFlag" parameterValue="RP" />
-            <Parameter parameterName="StormEvent" parameterValue="25_YEAR" />
+            <Parameter parameterName="UseFlag1" parameterValue="15" />
+            <Parameter parameterName="StormEvent1" parameterValue="25" />
+            <Parameter parameterName="UseFlag2" parameterValue="13" />
+            <Parameter parameterName="StormEvent2" parameterValue="25" />
           </Function>
         </Cell>
         <Cell cellType="FUNCTION">
@@ -182,9 +183,11 @@
       <Row rowType="TOTALROW">
         <Cell cellType="CONST" data="Total" />
         <Cell cellType="FUNCTION">
-					<Function functionName="BSBRCount" library="RecommendedPlanReport" format="N0">            
-            <Parameter parameterName="UseFlag" parameterValue="RP" />
-            <Parameter parameterName="StormEvent" parameterValue="25_YEAR" />
+					<Function functionName="BSBRDelta" library="RecommendedPlanReport" format="N0">            
+            <Parameter parameterName="UseFlag1" parameterValue="15" />
+            <Parameter parameterName="StormEvent1" parameterValue="25" />
+            <Parameter parameterName="UseFlag2" parameterValue="13" />
+            <Parameter parameterName="StormEvent2" parameterValue="25" />
           </Function>
         </Cell>
         <Cell cellType="FUNCTION">
