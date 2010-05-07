@@ -1,0 +1,98 @@
+'	============ EMGAATS Workbench =================
+'
+'	Copyright (c) 2001  City of Portland, OR Bureau of Environmental Services and CH2M HILL, Inc.
+'
+'
+'	Definition file for laterals, lateral tables and
+'	lateral related functions.
+'
+'	NOTE:  The lateral type contains some fields that exist only in the master.
+'		in a model context they will be empty / undefined.
+'
+type Lateral
+	LateralObj as object
+	LateralID as integer
+	MLateralID as integer
+	LinkID as integer
+	MLinkID as integer
+	ParcelID as integer
+	DivideID as integer
+  LinkType as string
+	PipeFlowType as string
+	Created as date
+	USFloodRefElev as float
+	DSSewerIE as float
+	SewerDiameter as float
+	Frac2SwrBeg as float
+	Pumped as string
+	SwrQCFlag as String
+	DSCQCFlag as String
+	LatQCFlag as String
+	QCDate as date
+	LatPickedFlag as string
+	LatSourceFlag as string
+	TraceVisit as string
+	TimeFrame as string
+end type
+
+declare Function ConstructLateralEndPoint(
+	tblEndPts as string, 
+	TheLateral as Lateral
+	) as logical
+declare Function ConstructAllLateralEndPoints(
+	DelFirst as logical, 
+	ShowPBar as logical, 
+	SelectionSet as string, 
+	tblEndPts as string
+	) as logical
+declare sub ShowLatEndDialog()
+Declare Function SnapLatToDSC(
+	tblDSC as string, 
+	tblMastDSC as string, 
+	tblMastTax as string, 
+	tblLatEnds as string, 
+	DSCTrace as logical, 
+	TheLateral as Lateral, 
+	ObjectChanged as logical
+	) as logical
+declare Function SnapAllLatsToSewers(
+	ShowPBar as logical, 
+	SelectionSet as string, 
+	tblSewers as string, 
+	tblEndPts as string, 
+	tblDSC as string, 
+	tblMastDSC as string, 
+	tblMastTax as string
+	) as logical
+declare Sub ShowLatSnapDialog()
+
+declare sub ShowLatImportDialog()
+declare 	Function ImportLateral(
+		MyLat as lateral, 
+		tblLaterals as string, 
+		tblLatEndPts as string,
+		tblDSC as string,
+		tblMastDSC as string,
+		tblMastTax as string,
+		tblSewers as string
+		) as logical
+declare sub ShowLatComputeDialog()
+declare 	Function ComputeLateral(
+		MyLat as lateral, 
+		tblLaterals as string, 
+		tblLatEndPts as string,
+		tblDSC as string,
+		tblMastDSC as string,
+		tblMastTax as string,
+		tblSewers as string
+		) as logical
+Declare Sub ImportTempLats()
+Declare Sub	NewLatsTable()				' for testing...
+Declare Sub	TraceLaterals()
+Declare Sub TraceDSCs()
+Declare Sub	DeleteUnpickedLatsFromMaster()
+Declare Sub ReadLateralINIParams()
+Declare Sub ReSnapModelLaterals()		' fix any broken or new laterals in model
+
+Global gstrLateralContext as string		' indicates whether lateral processing is in MODEL or MASTER
+Global gstrLateralLinkSnap as string		' indicates whether snap to link called during trace

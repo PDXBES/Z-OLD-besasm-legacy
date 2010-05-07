@@ -1,0 +1,453 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<namespace name="uConfigFiles">
+  <interface name="IConfigFile">
+    <procedure name="DeleteItem" visibility="public" procflags="abstract virtual">
+      <parameters>
+        <parameter name="SectionName" type="string" paramflags="const" />
+        <parameter name="Item" type="string" paramflags="const" />
+      </parameters>
+    </procedure>
+    <procedure name="EraseSection" visibility="public" procflags="abstract virtual">
+      <parameters>
+        <parameter name="SectionName" type="string" paramflags="const" />
+      </parameters>
+    </procedure>
+    <procedure name="ReadSection" visibility="public" procflags="abstract virtual">
+      <parameters>
+        <parameter name="SectionName" type="string" paramflags="const" />
+        <parameter name="List" type="TStringList" />
+      </parameters>
+    </procedure>
+    <procedure name="ReadSections" visibility="public" procflags="abstract virtual">
+      <parameters>
+        <parameter name="List" type="TStringList" />
+      </parameters>
+    </procedure>
+    <procedure name="ReadSectionItems" visibility="public" procflags="abstract virtual">
+      <parameters>
+        <parameter name="SectionName" type="string" paramflags="const" />
+        <parameter name="List" type="TStringList" />
+      </parameters>
+    </procedure>
+    <procedure name="CopySectionToConfig" visibility="public" procflags="abstract virtual">
+      <parameters>
+        <parameter name="SectionName" type="string" paramflags="const" />
+        <parameter name="AConfigFile" type="IConfigFile" />
+      </parameters>
+    </procedure>
+    <procedure name="UpdateFromTemplateConfig" visibility="public" procflags="abstract virtual">
+      <parameters>
+        <parameter name="AConfig" type="IConfigFile" />
+      </parameters>
+    </procedure>
+    <procedure name="UpdateFile" visibility="public" procflags="abstract virtual">
+    </procedure>
+    <procedure name="RevertFile" visibility="public" procflags="abstract virtual">
+    </procedure>
+    <function name="ReadString" visibility="public" procflags="abstract virtual">
+      <parameters>
+        <parameter name="SectionName" type="string" paramflags="const" />
+        <parameter name="ItemName" type="string" paramflags="const" />
+        <parameter name="Default" type="string">
+          <value>
+            
+          </value>
+        </parameter>
+        <retval type="string" />
+      </parameters>
+    </function>
+    <procedure name="WriteString" visibility="public" procflags="abstract virtual">
+      <parameters>
+        <parameter name="SectionName" type="string" paramflags="const" />
+        <parameter name="ItemName" type="string" paramflags="const" />
+        <parameter name="Value" type="string" />
+      </parameters>
+    </procedure>
+    <function name="ReadBool" visibility="public" procflags="abstract virtual">
+      <parameters>
+        <parameter name="SectionName" type="string" paramflags="const" />
+        <parameter name="ItemName" type="string" paramflags="const" />
+        <parameter name="Default" type="Boolean">
+          <value>
+            False
+          </value>
+        </parameter>
+        <retval type="Boolean" />
+      </parameters>
+    </function>
+    <procedure name="WriteBool" visibility="public" procflags="abstract virtual">
+      <parameters>
+        <parameter name="SectionName" type="string" paramflags="const" />
+        <parameter name="ItemName" type="string" paramflags="const" />
+        <parameter name="Value" type="Boolean" />
+      </parameters>
+    </procedure>
+    <function name="ReadDate" visibility="public" procflags="abstract virtual">
+      <parameters>
+        <parameter name="SectionName" type="string" paramflags="const" />
+        <parameter name="ItemName" type="string" paramflags="const" />
+        <parameter name="Default" type="TDateTime">
+          <value>
+            0
+          </value>
+        </parameter>
+        <retval type="TDateTime" />
+      </parameters>
+    </function>
+    <procedure name="WriteDate" visibility="public" procflags="abstract virtual">
+      <parameters>
+        <parameter name="SectionName" type="string" paramflags="const" />
+        <parameter name="ItemName" type="string" paramflags="const" />
+        <parameter name="Value" type="TDateTime" />
+      </parameters>
+    </procedure>
+    <function name="ReadDateTime" visibility="public" procflags="abstract virtual">
+      <parameters>
+        <parameter name="SectionName" type="string" paramflags="const" />
+        <parameter name="ItemName" type="string" paramflags="const" />
+        <parameter name="Default" type="TDateTime">
+          <value>
+            0
+          </value>
+        </parameter>
+        <retval type="TDateTime" />
+      </parameters>
+    </function>
+    <procedure name="WriteDateTime" visibility="public" procflags="abstract virtual">
+      <parameters>
+        <parameter name="SectionName" type="string" paramflags="const" />
+        <parameter name="ItemName" type="string" paramflags="const" />
+        <parameter name="Value" type="TDateTime" />
+      </parameters>
+    </procedure>
+    <function name="ReadTime" visibility="public" procflags="abstract virtual">
+      <parameters>
+        <parameter name="SectionName" type="string" paramflags="const" />
+        <parameter name="ItemName" type="string" paramflags="const" />
+        <parameter name="Default" type="TDateTime">
+          <value>
+            0
+          </value>
+        </parameter>
+        <retval type="TDateTime" />
+      </parameters>
+    </function>
+    <procedure name="WriteTime" visibility="public" procflags="abstract virtual">
+      <parameters>
+        <parameter name="SectionName" type="string" paramflags="const" />
+        <parameter name="ItemName" type="string" paramflags="const" />
+        <parameter name="Value" type="TDateTime" />
+      </parameters>
+    </procedure>
+    <function name="ReadFloat" visibility="public" procflags="abstract virtual">
+      <parameters>
+        <parameter name="SectionName" type="string" paramflags="const" />
+        <parameter name="ItemName" type="string" paramflags="const" />
+        <parameter name="Default" type="Double">
+          <value>
+            0
+          </value>
+        </parameter>
+        <retval type="Double" />
+      </parameters>
+    </function>
+    <procedure name="WriteFloat" visibility="public" procflags="abstract virtual">
+      <parameters>
+        <parameter name="SectionName" type="string" paramflags="const" />
+        <parameter name="ItemName" type="string" paramflags="const" />
+        <parameter name="Value" type="Double" />
+      </parameters>
+    </procedure>
+    <function name="ReadInteger" visibility="public" procflags="abstract virtual">
+      <parameters>
+        <parameter name="SectionName" type="string" paramflags="const" />
+        <parameter name="ItemName" type="string" paramflags="const" />
+        <parameter name="Default" type="Integer">
+          <value>
+            $0
+          </value>
+        </parameter>
+        <retval type="Integer" />
+      </parameters>
+    </function>
+    <procedure name="WriteInteger" visibility="public" procflags="abstract virtual">
+      <parameters>
+        <parameter name="SectionName" type="string" paramflags="const" />
+        <parameter name="ItemName" type="string" paramflags="const" />
+        <parameter name="Value" type="Integer" />
+      </parameters>
+    </procedure>
+    <function name="GetFileName" visibility="public" procflags="abstract virtual">
+      <parameters>
+        <retval type="TFileName" />
+      </parameters>
+    </function>
+    <property name="FileName" visibility="public" read="GetFileName" type="TFileName" />
+  </interface>
+  <class name="TIniConfigFile">
+    <ancestor name="TInterfacedObject" namespace="System">
+      <methodref name="QueryInterface" visibility="protected">
+      </methodref>
+      <methodref name="_AddRef" visibility="protected">
+      </methodref>
+      <methodref name="_Release" visibility="protected">
+      </methodref>
+      <methodref name="AfterConstruction" visibility="public">
+      </methodref>
+      <methodref name="BeforeDestruction" visibility="public">
+      </methodref>
+      <methodref name="NewInstance" visibility="public">
+      </methodref>
+      <propertyref name="RefCount" visibility="public">
+      </propertyref>
+      <ancestor name="TObject" namespace="System">
+        <methodref name="Create" visibility="public">
+        </methodref>
+        <methodref name="Free" visibility="public">
+        </methodref>
+        <methodref name="InitInstance" visibility="public">
+        </methodref>
+        <methodref name="CleanupInstance" visibility="public">
+        </methodref>
+        <methodref name="ClassType" visibility="public">
+        </methodref>
+        <methodref name="ClassName" visibility="public">
+        </methodref>
+        <methodref name="ClassNameIs" visibility="public">
+        </methodref>
+        <methodref name="ClassParent" visibility="public">
+        </methodref>
+        <methodref name="ClassInfo" visibility="public">
+        </methodref>
+        <methodref name="InstanceSize" visibility="public">
+        </methodref>
+        <methodref name="InheritsFrom" visibility="public">
+        </methodref>
+        <methodref name="MethodAddress" visibility="public">
+        </methodref>
+        <methodref name="MethodName" visibility="public">
+        </methodref>
+        <methodref name="FieldAddress" visibility="public">
+        </methodref>
+        <methodref name="GetInterface" visibility="public">
+        </methodref>
+        <methodref name="GetInterfaceEntry" visibility="public">
+        </methodref>
+        <methodref name="GetInterfaceTable" visibility="public">
+        </methodref>
+        <methodref name="SafeCallException" visibility="public">
+        </methodref>
+        <methodref name="AfterConstruction" visibility="public">
+        </methodref>
+        <methodref name="BeforeDestruction" visibility="public">
+        </methodref>
+        <methodref name="Dispatch" visibility="public">
+        </methodref>
+        <methodref name="DefaultHandler" visibility="public">
+        </methodref>
+        <methodref name="NewInstance" visibility="public">
+        </methodref>
+        <methodref name="FreeInstance" visibility="public">
+        </methodref>
+        <methodref name="Destroy" visibility="public">
+        </methodref>
+      </ancestor>
+    </ancestor>
+    <interfaces>
+      <implements name="IConfigFile" />
+    </interfaces>
+    <members>
+      <field name="fIniFile" type="TMemIniFile" visibility="private" />
+      <constructor name="Create" visibility="public">
+        <parameters>
+          <parameter name="AFileName" type="TFileName" />
+        </parameters>
+      </constructor>
+      <destructor name="Destroy" visibility="public">
+        <parameters>
+        </parameters>
+      </destructor>
+      <procedure name="DeleteItem" visibility="public">
+        <parameters>
+          <parameter name="SectionName" type="string" paramflags="const" />
+          <parameter name="Item" type="string" paramflags="const" />
+        </parameters>
+      </procedure>
+      <procedure name="EraseSection" visibility="public">
+        <parameters>
+          <parameter name="SectionName" type="string" paramflags="const" />
+        </parameters>
+      </procedure>
+      <function name="ReadBool" visibility="public">
+        <parameters>
+          <parameter name="SectionName" type="string" paramflags="const" />
+          <parameter name="ItemName" type="string" paramflags="const" />
+          <parameter name="Default" type="Boolean">
+            <value>
+              False
+            </value>
+          </parameter>
+          <retval type="Boolean" />
+        </parameters>
+      </function>
+      <function name="ReadDate" visibility="public">
+        <parameters>
+          <parameter name="SectionName" type="string" paramflags="const" />
+          <parameter name="ItemName" type="string" paramflags="const" />
+          <parameter name="Default" type="TDateTime">
+            <value>
+              0
+            </value>
+          </parameter>
+          <retval type="TDateTime" />
+        </parameters>
+      </function>
+      <function name="ReadDateTime" visibility="public">
+        <parameters>
+          <parameter name="SectionName" type="string" paramflags="const" />
+          <parameter name="ItemName" type="string" paramflags="const" />
+          <parameter name="Default" type="TDateTime">
+            <value>
+              0
+            </value>
+          </parameter>
+          <retval type="TDateTime" />
+        </parameters>
+      </function>
+      <function name="ReadFloat" visibility="public">
+        <parameters>
+          <parameter name="SectionName" type="string" paramflags="const" />
+          <parameter name="ItemName" type="string" paramflags="const" />
+          <parameter name="Default" type="Double">
+            <value>
+              0
+            </value>
+          </parameter>
+          <retval type="Double" />
+        </parameters>
+      </function>
+      <function name="ReadInteger" visibility="public">
+        <parameters>
+          <parameter name="SectionName" type="string" paramflags="const" />
+          <parameter name="ItemName" type="string" paramflags="const" />
+          <parameter name="Default" type="Integer">
+            <value>
+              $0
+            </value>
+          </parameter>
+          <retval type="Integer" />
+        </parameters>
+      </function>
+      <procedure name="ReadSection" visibility="public">
+        <parameters>
+          <parameter name="SectionName" type="string" paramflags="const" />
+          <parameter name="List" type="TStringList" />
+        </parameters>
+      </procedure>
+      <procedure name="ReadSectionItems" visibility="public">
+        <parameters>
+          <parameter name="SectionName" type="string" paramflags="const" />
+          <parameter name="List" type="TStringList" />
+        </parameters>
+      </procedure>
+      <procedure name="ReadSections" visibility="public">
+        <parameters>
+          <parameter name="List" type="TStringList" />
+        </parameters>
+      </procedure>
+      <procedure name="CopySectionToConfig" visibility="public">
+        <parameters>
+          <parameter name="SectionName" type="string" paramflags="const" />
+          <parameter name="AConfigFile" type="IConfigFile" />
+        </parameters>
+      </procedure>
+      <function name="ReadString" visibility="public">
+        <parameters>
+          <parameter name="SectionName" type="string" paramflags="const" />
+          <parameter name="ItemName" type="string" paramflags="const" />
+          <parameter name="Default" type="string">
+            <value>
+              
+            </value>
+          </parameter>
+          <retval type="string" />
+        </parameters>
+      </function>
+      <function name="ReadTime" visibility="public">
+        <parameters>
+          <parameter name="SectionName" type="string" paramflags="const" />
+          <parameter name="ItemName" type="string" paramflags="const" />
+          <parameter name="Default" type="TDateTime">
+            <value>
+              0
+            </value>
+          </parameter>
+          <retval type="TDateTime" />
+        </parameters>
+      </function>
+      <procedure name="UpdateFile" visibility="public">
+      </procedure>
+      <procedure name="RevertFile" visibility="public">
+      </procedure>
+      <procedure name="WriteBool" visibility="public">
+        <parameters>
+          <parameter name="SectionName" type="string" paramflags="const" />
+          <parameter name="ItemName" type="string" paramflags="const" />
+          <parameter name="Value" type="Boolean" />
+        </parameters>
+      </procedure>
+      <procedure name="WriteDate" visibility="public">
+        <parameters>
+          <parameter name="SectionName" type="string" paramflags="const" />
+          <parameter name="ItemName" type="string" paramflags="const" />
+          <parameter name="Value" type="TDateTime" />
+        </parameters>
+      </procedure>
+      <procedure name="WriteDateTime" visibility="public">
+        <parameters>
+          <parameter name="SectionName" type="string" paramflags="const" />
+          <parameter name="ItemName" type="string" paramflags="const" />
+          <parameter name="Value" type="TDateTime" />
+        </parameters>
+      </procedure>
+      <procedure name="WriteFloat" visibility="public">
+        <parameters>
+          <parameter name="SectionName" type="string" paramflags="const" />
+          <parameter name="ItemName" type="string" paramflags="const" />
+          <parameter name="Value" type="Double" />
+        </parameters>
+      </procedure>
+      <procedure name="WriteInteger" visibility="public">
+        <parameters>
+          <parameter name="SectionName" type="string" paramflags="const" />
+          <parameter name="ItemName" type="string" paramflags="const" />
+          <parameter name="Value" type="Integer" />
+        </parameters>
+      </procedure>
+      <procedure name="WriteString" visibility="public">
+        <parameters>
+          <parameter name="SectionName" type="string" paramflags="const" />
+          <parameter name="ItemName" type="string" paramflags="const" />
+          <parameter name="Value" type="string" />
+        </parameters>
+      </procedure>
+      <procedure name="WriteTime" visibility="public">
+        <parameters>
+          <parameter name="SectionName" type="string" paramflags="const" />
+          <parameter name="ItemName" type="string" paramflags="const" />
+          <parameter name="Value" type="TDateTime" />
+        </parameters>
+      </procedure>
+      <function name="GetFileName" visibility="public">
+        <parameters>
+          <retval type="TFileName" />
+        </parameters>
+      </function>
+      <procedure name="UpdateFromTemplateConfig" visibility="public">
+        <parameters>
+          <parameter name="AConfig" type="IConfigFile" />
+        </parameters>
+      </procedure>
+    </members>
+  </class>
+</namespace>

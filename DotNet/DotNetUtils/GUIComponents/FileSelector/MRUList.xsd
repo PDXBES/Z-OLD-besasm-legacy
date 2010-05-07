@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="MRUList" targetNamespace="SystemsAnalysis.Utils.FileSelector" xmlns:mstns="SystemsAnalysis.Utils.FileSelector" xmlns="SystemsAnalysis.Utils.FileSelector" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" GeneratorFunctionsComponentClassName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" UserFunctionsComponentName="QueriesTableAdapter" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+        </Connections>
+        <Tables>
+        </Tables>
+        <Sources>
+        </Sources>
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="MRUList" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="MRUList" msprop:Generator_DataSetName="MRUList">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="MRUFiles" msprop:Generator_UserTableName="MRUFiles" msprop:Generator_RowDeletedName="MRUFilesRowDeleted" msprop:Generator_RowChangedName="MRUFilesRowChanged" msprop:Generator_RowClassName="MRUFilesRow" msprop:Generator_RowChangingName="MRUFilesRowChanging" msprop:Generator_RowEvArgName="MRUFilesRowChangeEvent" msprop:Generator_RowEvHandlerName="MRUFilesRowChangeEventHandler" msprop:Generator_TableClassName="MRUFilesDataTable" msprop:Generator_TableVarName="tableMRUFiles" msprop:Generator_RowDeletingName="MRUFilesRowDeleting" msprop:Generator_TablePropName="MRUFiles">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="SectionID" msprop:Generator_UserColumnName="SectionID" msprop:Generator_ColumnPropNameInRow="SectionID" msprop:Generator_ColumnVarNameInTable="columnSectionID" msprop:Generator_ColumnPropNameInTable="SectionIDColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="File" msprop:Generator_UserColumnName="File" msprop:Generator_ColumnPropNameInRow="File" msprop:Generator_ColumnVarNameInTable="columnFile" msprop:Generator_ColumnPropNameInTable="FileColumn" type="xs:string" />
+              <xs:element name="Date" msprop:Generator_UserColumnName="Date" msprop:Generator_ColumnPropNameInRow="Date" msprop:Generator_ColumnVarNameInTable="columnDate" msprop:Generator_ColumnPropNameInTable="DateColumn" type="xs:string" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="MRUSection" msprop:Generator_UserTableName="MRUSection" msprop:Generator_RowDeletedName="MRUSectionRowDeleted" msprop:Generator_RowChangedName="MRUSectionRowChanged" msprop:Generator_RowClassName="MRUSectionRow" msprop:Generator_RowChangingName="MRUSectionRowChanging" msprop:Generator_RowEvArgName="MRUSectionRowChangeEvent" msprop:Generator_RowEvHandlerName="MRUSectionRowChangeEventHandler" msprop:Generator_TableClassName="MRUSectionDataTable" msprop:Generator_TableVarName="tableMRUSection" msprop:Generator_RowDeletingName="MRUSectionRowDeleting" msprop:Generator_TablePropName="MRUSection">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="SectionName" msprop:Generator_UserColumnName="SectionName" msprop:Generator_ColumnPropNameInRow="SectionName" msprop:Generator_ColumnVarNameInTable="columnSectionName" msprop:Generator_ColumnPropNameInTable="SectionNameColumn" type="xs:string" />
+              <xs:element name="SectionID" msdata:AutoIncrement="true" msprop:Generator_UserColumnName="SectionID" msprop:Generator_ColumnPropNameInRow="SectionID" msprop:Generator_ColumnVarNameInTable="columnSectionID" msprop:Generator_ColumnPropNameInTable="SectionIDColumn" type="xs:int" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:MRUSection" />
+      <xs:field xpath="mstns:SectionName" />
+    </xs:unique>
+  </xs:element>
+  <xs:annotation>
+    <xs:appinfo>
+      <msdata:Relationship name="MRUSection_MRUList" msdata:parent="MRUSection" msdata:child="MRUFiles" msdata:parentkey="SectionID" msdata:childkey="SectionID" msprop:Generator_UserRelationName="MRUSection_MRUList" msprop:Generator_RelationVarName="relationMRUSection_MRUList" msprop:Generator_UserChildTable="MRUFiles" msprop:Generator_UserParentTable="MRUSection" msprop:Generator_ParentPropName="MRUSectionRow" msprop:Generator_ChildPropName="GetMRUFilesRows" />
+    </xs:appinfo>
+  </xs:annotation>
+</xs:schema>

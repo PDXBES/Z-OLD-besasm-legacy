@@ -1,0 +1,14 @@
+[Link] 
+Application=..\exe\LinkProcessor.mbx 
+Module=LinkProcessor.mbo
+Module=EMGAATSLinkAppendTool.mbo
+Module=\\Cassio\modeling\Model_Programs\Emgaats\CodeV2.2\Common\source\EMGOpenUtils.mbo
+Module=\\Cassio\modeling\Model_Programs\Emgaats\CodeV2.2\Common\source\INIUtils.MBO
+Module=\\Cassio\modeling\Model_Programs\Emgaats\CodeV2.2\Common\source\EMGLogger.MBO
+Module=\\Cassio\modeling\Model_Programs\Emgaats\CodeV2.2\Common\source\EMGMTabUtil.mbo
+Module=\\Cassio\modeling\Model_Programs\Emgaats\CodeV2.2\Workbench\source\EMGInit.MBO
+Module=\\Cassio\modeling\Model_Programs\Emgaats\CodeV2.2\Common\source\EMGLineGeo.MBO
+Module=\\Cassio\modeling\Model_Programs\Emgaats\CodeV2.2\LinkTool\source\EMGLinkCheck.MBO
+Module=\\Cassio\modeling\Model_Programs\Emgaats\CodeV2.2\LinkTool\source\EMGLinkColData.MBO
+Module=\\Cassio\modeling\Model_Programs\Emgaats\CodeV2.2\Common\source\EMGCircleGeo.MBO
+Module=\\Cassio\modeling\Model_Programs\Emgaats\CodeV2.2\Common\source\EMGCoordSys.MBO
