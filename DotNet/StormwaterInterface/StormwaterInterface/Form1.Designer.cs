@@ -92,6 +92,8 @@
             this.view_CulvertsDitchesTableAdapter = new StormwaterInterface.FieldWorkDBDataSetTableAdapters.View_CulvertsDitchesTableAdapter();
             this.ditchesCulvertsTableAdapter = new StormwaterInterface.FieldWorkDBDataSetTableAdapters.DitchesCulvertsTableAdapter();
             this.evaluatorPageTableAdapter = new StormwaterInterface.FieldWorkDBDataSetTableAdapters.EvaluatorPageTableAdapter();
+            this.buttonSearchByNodeNo = new System.Windows.Forms.Button();
+            this.textBoxSearchByNodeNo = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.evaluatorPageBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fieldWorkDBDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -105,7 +107,7 @@
             // textBoxWatershed
             // 
             this.textBoxWatershed.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.evaluatorPageBindingSource, "Watershed", true));
-            this.textBoxWatershed.Location = new System.Drawing.Point(93, 45);
+            this.textBoxWatershed.Location = new System.Drawing.Point(93, 35);
             this.textBoxWatershed.Name = "textBoxWatershed";
             this.textBoxWatershed.Size = new System.Drawing.Size(245, 20);
             this.textBoxWatershed.TabIndex = 1;
@@ -123,7 +125,7 @@
             // labelWatershed
             // 
             this.labelWatershed.AutoSize = true;
-            this.labelWatershed.Location = new System.Drawing.Point(12, 46);
+            this.labelWatershed.Location = new System.Drawing.Point(12, 36);
             this.labelWatershed.Name = "labelWatershed";
             this.labelWatershed.Size = new System.Drawing.Size(62, 13);
             this.labelWatershed.TabIndex = 1;
@@ -132,7 +134,7 @@
             // labelSubWatershed
             // 
             this.labelSubWatershed.AutoSize = true;
-            this.labelSubWatershed.Location = new System.Drawing.Point(365, 45);
+            this.labelSubWatershed.Location = new System.Drawing.Point(365, 35);
             this.labelSubWatershed.Name = "labelSubWatershed";
             this.labelSubWatershed.Size = new System.Drawing.Size(78, 13);
             this.labelSubWatershed.TabIndex = 3;
@@ -141,7 +143,7 @@
             // textBoxSubWatershed
             // 
             this.textBoxSubWatershed.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.evaluatorPageBindingSource, "Subwatershed", true));
-            this.textBoxSubWatershed.Location = new System.Drawing.Point(446, 44);
+            this.textBoxSubWatershed.Location = new System.Drawing.Point(446, 34);
             this.textBoxSubWatershed.Name = "textBoxSubWatershed";
             this.textBoxSubWatershed.Size = new System.Drawing.Size(245, 20);
             this.textBoxSubWatershed.TabIndex = 2;
@@ -149,7 +151,7 @@
             // labelDate
             // 
             this.labelDate.AutoSize = true;
-            this.labelDate.Location = new System.Drawing.Point(12, 72);
+            this.labelDate.Location = new System.Drawing.Point(12, 62);
             this.labelDate.Name = "labelDate";
             this.labelDate.Size = new System.Drawing.Size(33, 13);
             this.labelDate.TabIndex = 5;
@@ -158,7 +160,7 @@
             // textBoxDate
             // 
             this.textBoxDate.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.evaluatorPageBindingSource, "Date", true));
-            this.textBoxDate.Location = new System.Drawing.Point(93, 71);
+            this.textBoxDate.Location = new System.Drawing.Point(93, 61);
             this.textBoxDate.Name = "textBoxDate";
             this.textBoxDate.Size = new System.Drawing.Size(157, 20);
             this.textBoxDate.TabIndex = 4;
@@ -166,7 +168,7 @@
             // labelEvaluator
             // 
             this.labelEvaluator.AutoSize = true;
-            this.labelEvaluator.Location = new System.Drawing.Point(275, 73);
+            this.labelEvaluator.Location = new System.Drawing.Point(275, 63);
             this.labelEvaluator.Name = "labelEvaluator";
             this.labelEvaluator.Size = new System.Drawing.Size(55, 13);
             this.labelEvaluator.TabIndex = 7;
@@ -175,7 +177,7 @@
             // textBoxEvaluator
             // 
             this.textBoxEvaluator.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.evaluatorPageBindingSource, "Evaluator", true));
-            this.textBoxEvaluator.Location = new System.Drawing.Point(356, 72);
+            this.textBoxEvaluator.Location = new System.Drawing.Point(356, 62);
             this.textBoxEvaluator.Name = "textBoxEvaluator";
             this.textBoxEvaluator.Size = new System.Drawing.Size(154, 20);
             this.textBoxEvaluator.TabIndex = 5;
@@ -183,7 +185,7 @@
             // labelMapNo
             // 
             this.labelMapNo.AutoSize = true;
-            this.labelMapNo.Location = new System.Drawing.Point(562, 74);
+            this.labelMapNo.Location = new System.Drawing.Point(562, 64);
             this.labelMapNo.Name = "labelMapNo";
             this.labelMapNo.Size = new System.Drawing.Size(48, 13);
             this.labelMapNo.TabIndex = 9;
@@ -192,7 +194,7 @@
             // textBoxMapNo
             // 
             this.textBoxMapNo.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.evaluatorPageBindingSource, "MapNo", true));
-            this.textBoxMapNo.Location = new System.Drawing.Point(643, 73);
+            this.textBoxMapNo.Location = new System.Drawing.Point(643, 63);
             this.textBoxMapNo.Name = "textBoxMapNo";
             this.textBoxMapNo.Size = new System.Drawing.Size(154, 20);
             this.textBoxMapNo.TabIndex = 6;
@@ -200,7 +202,7 @@
             // labelGPS
             // 
             this.labelGPS.AutoSize = true;
-            this.labelGPS.Location = new System.Drawing.Point(12, 98);
+            this.labelGPS.Location = new System.Drawing.Point(12, 88);
             this.labelGPS.Name = "labelGPS";
             this.labelGPS.Size = new System.Drawing.Size(32, 13);
             this.labelGPS.TabIndex = 11;
@@ -209,7 +211,7 @@
             // textBoxGPS
             // 
             this.textBoxGPS.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.evaluatorPageBindingSource, "GPS", true));
-            this.textBoxGPS.Location = new System.Drawing.Point(93, 97);
+            this.textBoxGPS.Location = new System.Drawing.Point(93, 87);
             this.textBoxGPS.Name = "textBoxGPS";
             this.textBoxGPS.Size = new System.Drawing.Size(157, 20);
             this.textBoxGPS.TabIndex = 7;
@@ -217,7 +219,7 @@
             // labelWeather
             // 
             this.labelWeather.AutoSize = true;
-            this.labelWeather.Location = new System.Drawing.Point(12, 124);
+            this.labelWeather.Location = new System.Drawing.Point(12, 114);
             this.labelWeather.Name = "labelWeather";
             this.labelWeather.Size = new System.Drawing.Size(51, 13);
             this.labelWeather.TabIndex = 13;
@@ -226,7 +228,7 @@
             // textBox1
             // 
             this.textBox1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.evaluatorPageBindingSource, "Weather", true));
-            this.textBox1.Location = new System.Drawing.Point(93, 123);
+            this.textBox1.Location = new System.Drawing.Point(93, 113);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(157, 20);
             this.textBox1.TabIndex = 8;
@@ -234,7 +236,7 @@
             // labelCulvertsAndDitchesInformation
             // 
             this.labelCulvertsAndDitchesInformation.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.labelCulvertsAndDitchesInformation.Location = new System.Drawing.Point(56, 149);
+            this.labelCulvertsAndDitchesInformation.Location = new System.Drawing.Point(56, 139);
             this.labelCulvertsAndDitchesInformation.Name = "labelCulvertsAndDitchesInformation";
             this.labelCulvertsAndDitchesInformation.Size = new System.Drawing.Size(805, 26);
             this.labelCulvertsAndDitchesInformation.TabIndex = 14;
@@ -244,7 +246,7 @@
             // labelLocation
             // 
             this.labelLocation.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.labelLocation.Location = new System.Drawing.Point(56, 162);
+            this.labelLocation.Location = new System.Drawing.Point(56, 152);
             this.labelLocation.Name = "labelLocation";
             this.labelLocation.Size = new System.Drawing.Size(126, 24);
             this.labelLocation.TabIndex = 15;
@@ -253,7 +255,7 @@
             // labelDitches
             // 
             this.labelDitches.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.labelDitches.Location = new System.Drawing.Point(556, 162);
+            this.labelDitches.Location = new System.Drawing.Point(556, 152);
             this.labelDitches.Name = "labelDitches";
             this.labelDitches.Size = new System.Drawing.Size(305, 24);
             this.labelDitches.TabIndex = 18;
@@ -262,7 +264,7 @@
             // labelComments
             // 
             this.labelComments.AutoSize = true;
-            this.labelComments.Location = new System.Drawing.Point(12, 411);
+            this.labelComments.Location = new System.Drawing.Point(12, 401);
             this.labelComments.Name = "labelComments";
             this.labelComments.Size = new System.Drawing.Size(59, 13);
             this.labelComments.TabIndex = 34;
@@ -271,7 +273,7 @@
             // labelInfo
             // 
             this.labelInfo.AutoSize = true;
-            this.labelInfo.Location = new System.Drawing.Point(21, 392);
+            this.labelInfo.Location = new System.Drawing.Point(21, 382);
             this.labelInfo.Name = "labelInfo";
             this.labelInfo.Size = new System.Drawing.Size(243, 13);
             this.labelInfo.TabIndex = 35;
@@ -297,7 +299,7 @@
             this.ditchMaterialDataGridViewTextBoxColumn,
             this.ditchPhotoIDDataGridViewTextBoxColumn});
             this.dataGridView1.DataSource = this.ditchesCulvertsBindingSource;
-            this.dataGridView1.Location = new System.Drawing.Point(15, 178);
+            this.dataGridView1.Location = new System.Drawing.Point(15, 168);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(846, 211);
             this.dataGridView1.TabIndex = 36;
@@ -408,7 +410,7 @@
             // labelCulverts
             // 
             this.labelCulverts.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.labelCulverts.Location = new System.Drawing.Point(181, 162);
+            this.labelCulverts.Location = new System.Drawing.Point(181, 152);
             this.labelCulverts.Name = "labelCulverts";
             this.labelCulverts.Size = new System.Drawing.Size(376, 24);
             this.labelCulverts.TabIndex = 37;
@@ -417,7 +419,7 @@
             // textBox2
             // 
             this.textBox2.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.evaluatorPageBindingSource, "Comments", true));
-            this.textBox2.Location = new System.Drawing.Point(15, 427);
+            this.textBox2.Location = new System.Drawing.Point(15, 417);
             this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(846, 36);
@@ -425,7 +427,7 @@
             // 
             // buttonUpdateDatabase
             // 
-            this.buttonUpdateDatabase.Location = new System.Drawing.Point(730, 469);
+            this.buttonUpdateDatabase.Location = new System.Drawing.Point(730, 459);
             this.buttonUpdateDatabase.Name = "buttonUpdateDatabase";
             this.buttonUpdateDatabase.Size = new System.Drawing.Size(131, 22);
             this.buttonUpdateDatabase.TabIndex = 39;
@@ -557,7 +559,7 @@
             this.labelPageID.AutoSize = true;
             this.labelPageID.Enabled = false;
             this.labelPageID.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.labelPageID.Location = new System.Drawing.Point(562, 105);
+            this.labelPageID.Location = new System.Drawing.Point(562, 95);
             this.labelPageID.Name = "labelPageID";
             this.labelPageID.Size = new System.Drawing.Size(46, 13);
             this.labelPageID.TabIndex = 41;
@@ -568,14 +570,14 @@
             // 
             this.textBoxPageID.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.evaluatorPageBindingSource, "EvaluatorPageID", true));
             this.textBoxPageID.Enabled = false;
-            this.textBoxPageID.Location = new System.Drawing.Point(643, 102);
+            this.textBoxPageID.Location = new System.Drawing.Point(643, 92);
             this.textBoxPageID.Name = "textBoxPageID";
             this.textBoxPageID.Size = new System.Drawing.Size(0, 20);
             this.textBoxPageID.TabIndex = 42;
             // 
             // buttonAddANode
             // 
-            this.buttonAddANode.Location = new System.Drawing.Point(728, 393);
+            this.buttonAddANode.Location = new System.Drawing.Point(728, 383);
             this.buttonAddANode.Name = "buttonAddANode";
             this.buttonAddANode.Size = new System.Drawing.Size(133, 30);
             this.buttonAddANode.TabIndex = 43;
@@ -585,7 +587,7 @@
             // 
             // buttonDeleteSelectedNode
             // 
-            this.buttonDeleteSelectedNode.Location = new System.Drawing.Point(544, 393);
+            this.buttonDeleteSelectedNode.Location = new System.Drawing.Point(544, 383);
             this.buttonDeleteSelectedNode.Name = "buttonDeleteSelectedNode";
             this.buttonDeleteSelectedNode.Size = new System.Drawing.Size(124, 30);
             this.buttonDeleteSelectedNode.TabIndex = 44;
@@ -596,7 +598,7 @@
             // labelPage
             // 
             this.labelPage.AutoSize = true;
-            this.labelPage.Location = new System.Drawing.Point(707, 43);
+            this.labelPage.Location = new System.Drawing.Point(707, 33);
             this.labelPage.Name = "labelPage";
             this.labelPage.Size = new System.Drawing.Size(35, 13);
             this.labelPage.TabIndex = 45;
@@ -605,7 +607,7 @@
             // textBoxPage
             // 
             this.textBoxPage.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.evaluatorPageBindingSource, "MapPage", true));
-            this.textBoxPage.Location = new System.Drawing.Point(747, 42);
+            this.textBoxPage.Location = new System.Drawing.Point(747, 32);
             this.textBoxPage.Name = "textBoxPage";
             this.textBoxPage.Size = new System.Drawing.Size(49, 20);
             this.textBoxPage.TabIndex = 3;
@@ -632,11 +634,30 @@
             // 
             this.evaluatorPageTableAdapter.ClearBeforeFill = true;
             // 
+            // buttonSearchByNodeNo
+            // 
+            this.buttonSearchByNodeNo.Location = new System.Drawing.Point(325, -1);
+            this.buttonSearchByNodeNo.Name = "buttonSearchByNodeNo";
+            this.buttonSearchByNodeNo.Size = new System.Drawing.Size(118, 24);
+            this.buttonSearchByNodeNo.TabIndex = 46;
+            this.buttonSearchByNodeNo.Text = "Search By Node No.";
+            this.buttonSearchByNodeNo.UseVisualStyleBackColor = true;
+            this.buttonSearchByNodeNo.Click += new System.EventHandler(this.buttonSearchByNodeNo_Click);
+            // 
+            // textBoxSearchByNodeNo
+            // 
+            this.textBoxSearchByNodeNo.Location = new System.Drawing.Point(449, 3);
+            this.textBoxSearchByNodeNo.Name = "textBoxSearchByNodeNo";
+            this.textBoxSearchByNodeNo.Size = new System.Drawing.Size(96, 20);
+            this.textBoxSearchByNodeNo.TabIndex = 47;
+            // 
             // FormStormwaterInterface
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(873, 499);
+            this.ClientSize = new System.Drawing.Size(873, 488);
+            this.Controls.Add(this.textBoxSearchByNodeNo);
+            this.Controls.Add(this.buttonSearchByNodeNo);
             this.Controls.Add(this.textBoxPage);
             this.Controls.Add(this.labelPage);
             this.Controls.Add(this.buttonDeleteSelectedNode);
@@ -748,6 +769,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ditchPhotoIDDataGridViewTextBoxColumn;
         private System.Windows.Forms.Label labelPage;
         private System.Windows.Forms.TextBox textBoxPage;
+        private System.Windows.Forms.Button buttonSearchByNodeNo;
+        private System.Windows.Forms.TextBox textBoxSearchByNodeNo;
     }
 }
 
