@@ -138,5 +138,28 @@ namespace StormwaterInterface
             //this.BindingContext[this.fieldWorkDBDataSet.EvaluatorPage, ""].EndCurrentEdit();
             this.ditchesCulvertsTableAdapter.FillByPageID(this.fieldWorkDBDataSet.DitchesCulverts, Int32.Parse(textBoxPageID.Text));
         }
+
+        private void buttonSearchByNodeNo_Click(object sender, EventArgs e)
+        {
+            int place = Int32.Parse(bindingNavigator1.PositionItem.Text) - 1;
+            try
+            {
+                bindingNavigator1.BindingSource.MoveFirst();
+                this.BindingContext[this.fieldWorkDBDataSet.EvaluatorPage].EndCurrentEdit();
+                this.evaluatorPageTableAdapter.Update(this.fieldWorkDBDataSet.EvaluatorPage);
+                this.ditchesCulvertsTableAdapter.Update(this.fieldWorkDBDataSet.DitchesCulverts);
+                bindingNavigator1.BindingSource.Position = (int)this.ditchesCulvertsTableAdapter.ScalarQuery(textBoxSearchByNodeNo.Text);
+                bindingNavigator1.Refresh();
+
+                this.ditchesCulvertsTableAdapter.FillByNodeNo(this.fieldWorkDBDataSet.DitchesCulverts, textBoxSearchByNodeNo.Text);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("\nNode not found!  Errors as follows: \n\n\n" + ex.ToString());
+                bindingNavigator1.BindingSource.Position = place;
+                bindingNavigator1.Refresh();
+                this.ditchesCulvertsTableAdapter.FillByPageID(this.fieldWorkDBDataSet.DitchesCulverts, Int32.Parse(textBoxPageID.Text));
+            }
+        }
     }
 }

@@ -2972,7 +2972,7 @@ namespace StormwaterInterface.FieldWorkDBDataSetTableAdapters {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[4];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT        PrimaryKey, Position, Node_No, LPO, Shape, Pipe_D, CulvDepth, CulvM" +
@@ -2981,12 +2981,31 @@ namespace StormwaterInterface.FieldWorkDBDataSetTableAdapters {
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[1].Connection = this.Connection;
-            this._commandCollection[1].CommandText = "SELECT CulvDepth, CulvMaterial, CulvPhoto_ID, DitchDepth, DitchMaterial, DitchPho" +
+            this._commandCollection[1].CommandText = @"
+SELECT CulvDepth, CulvMaterial, CulvPhoto_ID, DitchDepth, DitchMaterial, DitchPhoto_ID, EvaluatorPageID, LPO, Node_No, Pipe_D, Position, PrimaryKey, Shape, WidthBottom, WidthTop 
+FROM DitchesCulverts 
+WHERE EvaluatorPageID in (
+
+SELECT TOP 1 EvaluatorPageID
+FROM DitchesCulverts
+WHERE Node_No like @Node_No ORDER BY EvaluatorPageID)
+";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Node_No", global::System.Data.SqlDbType.NChar, 10, global::System.Data.ParameterDirection.Input, 0, 0, "Node_No", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[2] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[2].Connection = this.Connection;
+            this._commandCollection[2].CommandText = "SELECT CulvDepth, CulvMaterial, CulvPhoto_ID, DitchDepth, DitchMaterial, DitchPho" +
                 "to_ID, EvaluatorPageID, LPO, Node_No, Pipe_D, Position, PrimaryKey, Shape, Width" +
                 "Bottom, WidthTop FROM DitchesCulverts WHERE (EvaluatorPageID = @EvaluatorPageID)" +
                 "";
-            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
-            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@EvaluatorPageID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "EvaluatorPageID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@EvaluatorPageID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "EvaluatorPageID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[3] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[3].Connection = this.Connection;
+            this._commandCollection[3].CommandText = "SELECT TOP 1 EvaluatorPageID\r\nFROM DitchesCulverts\r\nWHERE Node_No like @Node_No\r\n" +
+                "ORDER BY EvaluatorPageID";
+            this._commandCollection[3].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Node_No", global::System.Data.SqlDbType.NChar, 10, global::System.Data.ParameterDirection.Input, 0, 0, "Node_No", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3014,8 +3033,42 @@ namespace StormwaterInterface.FieldWorkDBDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
-        public virtual int FillByPageID(FieldWorkDBDataSet.DitchesCulvertsDataTable dataTable, global::System.Nullable<int> EvaluatorPageID) {
+        public virtual int FillByNodeNo(FieldWorkDBDataSet.DitchesCulvertsDataTable dataTable, string Node_No) {
             this.Adapter.SelectCommand = this.CommandCollection[1];
+            if ((Node_No == null)) {
+                this.Adapter.SelectCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[0].Value = ((string)(Node_No));
+            }
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
+        public virtual FieldWorkDBDataSet.DitchesCulvertsDataTable GetDataByNodeNo(string Node_No) {
+            this.Adapter.SelectCommand = this.CommandCollection[1];
+            if ((Node_No == null)) {
+                this.Adapter.SelectCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[0].Value = ((string)(Node_No));
+            }
+            FieldWorkDBDataSet.DitchesCulvertsDataTable dataTable = new FieldWorkDBDataSet.DitchesCulvertsDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
+        public virtual int FillByPageID(FieldWorkDBDataSet.DitchesCulvertsDataTable dataTable, global::System.Nullable<int> EvaluatorPageID) {
+            this.Adapter.SelectCommand = this.CommandCollection[2];
             if ((EvaluatorPageID.HasValue == true)) {
                 this.Adapter.SelectCommand.Parameters[0].Value = ((int)(EvaluatorPageID.Value));
             }
@@ -3033,7 +3086,7 @@ namespace StormwaterInterface.FieldWorkDBDataSetTableAdapters {
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
         public virtual FieldWorkDBDataSet.DitchesCulvertsDataTable GetDataByPageID(global::System.Nullable<int> EvaluatorPageID) {
-            this.Adapter.SelectCommand = this.CommandCollection[1];
+            this.Adapter.SelectCommand = this.CommandCollection[2];
             if ((EvaluatorPageID.HasValue == true)) {
                 this.Adapter.SelectCommand.Parameters[0].Value = ((int)(EvaluatorPageID.Value));
             }
@@ -3550,6 +3603,39 @@ namespace StormwaterInterface.FieldWorkDBDataSetTableAdapters {
                 if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
                     this.Adapter.UpdateCommand.Connection.Close();
                 }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual object ScalarQuery(string Node_No) {
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[3];
+            if ((Node_No == null)) {
+                command.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[0].Value = ((string)(Node_No));
+            }
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            object returnValue;
+            try {
+                returnValue = command.ExecuteScalar();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            if (((returnValue == null) 
+                        || (returnValue.GetType() == typeof(global::System.DBNull)))) {
+                return null;
+            }
+            else {
+                return ((object)(returnValue));
             }
         }
     }
