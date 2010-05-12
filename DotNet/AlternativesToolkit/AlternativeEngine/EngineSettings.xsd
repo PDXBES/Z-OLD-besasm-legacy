@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="AltEngineConfiguration" targetNamespace="SystemsAnalysis.ModelConstruction.AlternativesToolkit.EngineConfiguration" xmlns:mstns="SystemsAnalysis.ModelConstruction.AlternativesToolkit.EngineConfiguration" xmlns="SystemsAnalysis.ModelConstruction.AlternativesToolkit.EngineConfiguration" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="AltEngineConfiguration" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="AltEngineConfiguration" msprop:Generator_DataSetName="AltEngineConfiguration">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="ProgramSettings" msprop:Generator_UserTableName="ProgramSettings" msprop:Generator_RowDeletedName="ProgramSettingsRowDeleted" msprop:Generator_RowChangedName="ProgramSettingsRowChanged" msprop:Generator_RowClassName="ProgramSettingsRow" msprop:Generator_RowChangingName="ProgramSettingsRowChanging" msprop:Generator_RowEvArgName="ProgramSettingsRowChangeEvent" msprop:Generator_RowEvHandlerName="ProgramSettingsRowChangeEventHandler" msprop:Generator_TableClassName="ProgramSettingsDataTable" msprop:Generator_TableVarName="tableProgramSettings" msprop:Generator_RowDeletingName="ProgramSettingsRowDeleting" msprop:Generator_TablePropName="ProgramSettings">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="AlternativeTemplate" msprop:Generator_UserColumnName="AlternativeTemplate" msprop:Generator_ColumnPropNameInRow="AlternativeTemplate" msprop:Generator_ColumnVarNameInTable="columnAlternativeTemplate" msprop:Generator_ColumnPropNameInTable="AlternativeTemplateColumn" type="xs:string" />
+              <xs:element name="UpdateVersionPatchMBX" msprop:Generator_UserColumnName="UpdateVersionPatchMBX" msprop:Generator_ColumnVarNameInTable="columnUpdateVersionPatchMBX" msprop:Generator_ColumnPropNameInRow="UpdateVersionPatchMBX" msprop:Generator_ColumnPropNameInTable="UpdateVersionPatchMBXColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="FocusAreasTable" msprop:Generator_UserColumnName="FocusAreasTable" msprop:Generator_ColumnPropNameInRow="FocusAreasTable" msprop:Generator_ColumnVarNameInTable="columnFocusAreasTable" msprop:Generator_ColumnPropNameInTable="FocusAreasTableColumn" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="BaseModelComponents" msprop:Generator_UserTableName="BaseModelComponents" msprop:Generator_RowDeletedName="BaseModelComponentsRowDeleted" msprop:Generator_RowChangedName="BaseModelComponentsRowChanged" msprop:Generator_RowClassName="BaseModelComponentsRow" msprop:Generator_RowChangingName="BaseModelComponentsRowChanging" msprop:Generator_RowEvArgName="BaseModelComponentsRowChangeEvent" msprop:Generator_RowEvHandlerName="BaseModelComponentsRowChangeEventHandler" msprop:Generator_TableClassName="BaseModelComponentsDataTable" msprop:Generator_TableVarName="tableBaseModelComponents" msprop:Generator_RowDeletingName="BaseModelComponentsRowDeleting" msprop:Generator_TablePropName="BaseModelComponents" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="BaseFile" msprop:Generator_UserTableName="BaseFile" msprop:Generator_RowDeletedName="BaseFileRowDeleted" msprop:Generator_RowChangedName="BaseFileRowChanged" msprop:Generator_RowClassName="BaseFileRow" msprop:Generator_RowChangingName="BaseFileRowChanging" msprop:Generator_RowEvArgName="BaseFileRowChangeEvent" msprop:Generator_RowEvHandlerName="BaseFileRowChangeEventHandler" msprop:Generator_TableClassName="BaseFileDataTable" msprop:Generator_TableVarName="tableBaseFile" msprop:Generator_RowDeletingName="BaseFileRowDeleting" msprop:Generator_TablePropName="BaseFile" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:simpleContent msprop:Generator_UserColumnName="BaseFile_text" msprop:Generator_ColumnPropNameInRow="BaseFile_text" msprop:Generator_ColumnVarNameInTable="columnBaseFile_text" msprop:Generator_ColumnPropNameInTable="BaseFile_textColumn" msdata:ColumnName="BaseFile_text" msdata:Ordinal="0">
+                    <xs:extension base="xs:string">
+                      <xs:attribute name="BaseModelComponents_Id" msprop:Generator_UserColumnName="BaseModelComponents_Id" msprop:Generator_ColumnPropNameInRow="BaseModelComponents_Id" msprop:Generator_ColumnVarNameInTable="columnBaseModelComponents_Id" msprop:Generator_ColumnPropNameInTable="BaseModelComponents_IdColumn" type="xs:int" use="prohibited" />
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="BaseDirectory" msprop:Generator_UserTableName="BaseDirectory" msprop:Generator_RowDeletedName="BaseDirectoryRowDeleted" msprop:Generator_RowChangedName="BaseDirectoryRowChanged" msprop:Generator_RowClassName="BaseDirectoryRow" msprop:Generator_RowChangingName="BaseDirectoryRowChanging" msprop:Generator_RowEvArgName="BaseDirectoryRowChangeEvent" msprop:Generator_RowEvHandlerName="BaseDirectoryRowChangeEventHandler" msprop:Generator_TableClassName="BaseDirectoryDataTable" msprop:Generator_TableVarName="tableBaseDirectory" msprop:Generator_RowDeletingName="BaseDirectoryRowDeleting" msprop:Generator_TablePropName="BaseDirectory" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:simpleContent msprop:Generator_UserColumnName="BaseDirectory_text" msprop:Generator_ColumnPropNameInRow="BaseDirectory_text" msprop:Generator_ColumnVarNameInTable="columnBaseDirectory_text" msprop:Generator_ColumnPropNameInTable="BaseDirectory_textColumn" msdata:ColumnName="BaseDirectory_text" msdata:Ordinal="2">
+                    <xs:extension base="xs:string">
+                      <xs:attribute name="IncludeFiles" form="unqualified" msprop:Generator_UserColumnName="IncludeFiles" msprop:Generator_ColumnPropNameInRow="IncludeFiles" msprop:Generator_ColumnVarNameInTable="columnIncludeFiles" msprop:Generator_ColumnPropNameInTable="IncludeFilesColumn" type="xs:boolean" default="true" />
+                      <xs:attribute name="Recurse" form="unqualified" msprop:Generator_UserColumnName="Recurse" msprop:Generator_ColumnPropNameInRow="Recurse" msprop:Generator_ColumnVarNameInTable="columnRecurse" msprop:Generator_ColumnPropNameInTable="RecurseColumn" type="xs:boolean" default="false" />
+                      <xs:attribute name="BaseModelComponents_Id" msprop:Generator_UserColumnName="BaseModelComponents_Id" msprop:Generator_ColumnPropNameInRow="BaseModelComponents_Id" msprop:Generator_ColumnVarNameInTable="columnBaseModelComponents_Id" msprop:Generator_ColumnPropNameInTable="BaseModelComponents_IdColumn" type="xs:int" use="prohibited" />
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute name="BaseModelComponents_Id" msdata:AutoIncrement="true" msprop:Generator_UserColumnName="BaseModelComponents_Id" msprop:Generator_ColumnPropNameInRow="BaseModelComponents_Id" msprop:Generator_ColumnVarNameInTable="columnBaseModelComponents_Id" msprop:Generator_ColumnPropNameInTable="BaseModelComponents_IdColumn" type="xs:int" msdata:AllowDBNull="false" use="prohibited" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="FileHistory" msprop:Generator_UserTableName="FileHistory" msprop:Generator_RowDeletedName="FileHistoryRowDeleted" msprop:Generator_RowChangedName="FileHistoryRowChanged" msprop:Generator_RowClassName="FileHistoryRow" msprop:Generator_RowChangingName="FileHistoryRowChanging" msprop:Generator_RowEvArgName="FileHistoryRowChangeEvent" msprop:Generator_RowEvHandlerName="FileHistoryRowChangeEventHandler" msprop:Generator_TableClassName="FileHistoryDataTable" msprop:Generator_TableVarName="tableFileHistory" msprop:Generator_RowDeletingName="FileHistoryRowDeleting" msprop:Generator_TablePropName="FileHistory" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="OutputModel" msprop:Generator_UserTableName="OutputModel" msprop:Generator_RowDeletedName="OutputModelRowDeleted" msprop:Generator_RowChangedName="OutputModelRowChanged" msprop:Generator_RowClassName="OutputModelRow" msprop:Generator_RowChangingName="OutputModelRowChanging" msprop:Generator_RowEvArgName="OutputModelRowChangeEvent" msprop:Generator_RowEvHandlerName="OutputModelRowChangeEventHandler" msprop:Generator_TableClassName="OutputModelDataTable" msprop:Generator_TableVarName="tableOutputModel" msprop:Generator_RowDeletingName="OutputModelRowDeleting" msprop:Generator_TablePropName="OutputModel" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:simpleContent msprop:Generator_UserColumnName="OutputModel_text" msprop:Generator_ColumnPropNameInRow="OutputModel_text" msprop:Generator_ColumnVarNameInTable="columnOutputModel_text" msprop:Generator_ColumnPropNameInTable="OutputModel_textColumn" msdata:ColumnName="OutputModel_text" msdata:Ordinal="1">
+                    <xs:extension base="xs:string">
+                      <xs:attribute name="Date" form="unqualified" msprop:Generator_UserColumnName="Date" msprop:nullValue="_empty" msprop:Generator_ColumnVarNameInTable="columnDate" msprop:Generator_ColumnPropNameInTable="DateColumn" msprop:Generator_ColumnPropNameInRow="Date" type="xs:string" />
+                      <xs:attribute name="FileHistory_Id" msprop:Generator_UserColumnName="FileHistory_Id" msprop:Generator_ColumnPropNameInRow="FileHistory_Id" msprop:Generator_ColumnVarNameInTable="columnFileHistory_Id" msprop:Generator_ColumnPropNameInTable="FileHistory_IdColumn" type="xs:int" use="prohibited" />
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="BaseModel" nillable="true" msprop:Generator_UserTableName="BaseModel" msprop:Generator_RowDeletedName="BaseModelRowDeleted" msprop:Generator_RowChangedName="BaseModelRowChanged" msprop:Generator_RowClassName="BaseModelRow" msprop:Generator_RowChangingName="BaseModelRowChanging" msprop:Generator_RowEvArgName="BaseModelRowChangeEvent" msprop:Generator_RowEvHandlerName="BaseModelRowChangeEventHandler" msprop:Generator_TableClassName="BaseModelDataTable" msprop:Generator_TableVarName="tableBaseModel" msprop:Generator_RowDeletingName="BaseModelRowDeleting" msprop:Generator_TablePropName="BaseModel" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:simpleContent msprop:Generator_UserColumnName="BaseModel_text" msprop:Generator_ColumnPropNameInRow="BaseModel_text" msprop:Generator_ColumnVarNameInTable="columnBaseModel_text" msprop:Generator_ColumnPropNameInTable="BaseModel_textColumn" msdata:ColumnName="BaseModel_text" msdata:Ordinal="1">
+                    <xs:extension base="xs:string">
+                      <xs:attribute name="Date" form="unqualified" msprop:Generator_UserColumnName="Date" msprop:nullValue="_empty" msprop:Generator_ColumnVarNameInTable="columnDate" msprop:Generator_ColumnPropNameInTable="DateColumn" msprop:Generator_ColumnPropNameInRow="Date" type="xs:string" />
+                      <xs:attribute name="FileHistory_Id" msprop:Generator_UserColumnName="FileHistory_Id" msprop:Generator_ColumnPropNameInRow="FileHistory_Id" msprop:Generator_ColumnVarNameInTable="columnFileHistory_Id" msprop:Generator_ColumnPropNameInTable="FileHistory_IdColumn" type="xs:int" use="prohibited" />
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute name="HistoryCount" form="unqualified" msprop:Generator_UserColumnName="HistoryCount" msprop:nullValue="4" msprop:Generator_ColumnVarNameInTable="columnHistoryCount" msprop:Generator_ColumnPropNameInTable="HistoryCountColumn" msprop:Generator_ColumnPropNameInRow="HistoryCount" type="xs:int" default="4" />
+            <xs:attribute name="FileHistory_Id" msdata:AutoIncrement="true" msprop:Generator_UserColumnName="FileHistory_Id" msprop:Generator_ColumnPropNameInRow="FileHistory_Id" msprop:Generator_ColumnVarNameInTable="columnFileHistory_Id" msprop:Generator_ColumnPropNameInTable="FileHistory_IdColumn" type="xs:int" msdata:AllowDBNull="false" use="prohibited" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="MapBasicFramework" msprop:Generator_UserTableName="MapBasicFramework" msprop:Generator_RowDeletedName="MapBasicFrameworkRowDeleted" msprop:Generator_RowChangedName="MapBasicFrameworkRowChanged" msprop:Generator_RowClassName="MapBasicFrameworkRow" msprop:Generator_RowChangingName="MapBasicFrameworkRowChanging" msprop:Generator_RowEvArgName="MapBasicFrameworkRowChangeEvent" msprop:Generator_RowEvHandlerName="MapBasicFrameworkRowChangeEventHandler" msprop:Generator_TableClassName="MapBasicFrameworkDataTable" msprop:Generator_TableVarName="tableMapBasicFramework" msprop:Generator_RowDeletingName="MapBasicFrameworkRowDeleting" msprop:Generator_TablePropName="MapBasicFramework">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Library" msprop:Generator_UserTableName="Library" msprop:Generator_RowDeletedName="LibraryRowDeleted" msprop:Generator_RowChangedName="LibraryRowChanged" msprop:Generator_RowClassName="LibraryRow" msprop:Generator_RowChangingName="LibraryRowChanging" msprop:Generator_RowEvArgName="LibraryRowChangeEvent" msprop:Generator_RowEvHandlerName="LibraryRowChangeEventHandler" msprop:Generator_TableClassName="LibraryDataTable" msprop:Generator_TableVarName="tableLibrary" msprop:Generator_RowDeletingName="LibraryRowDeleting" msprop:Generator_TablePropName="Library" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="LibraryName" msprop:Generator_UserColumnName="LibraryName" msprop:Generator_ColumnPropNameInRow="LibraryName" msprop:Generator_ColumnVarNameInTable="columnLibraryName" msprop:Generator_ColumnPropNameInTable="LibraryNameColumn" type="xs:string" />
+                    <xs:element name="Location" msprop:Generator_UserColumnName="Location" msprop:Generator_ColumnPropNameInRow="Location" msprop:Generator_ColumnVarNameInTable="columnLocation" msprop:Generator_ColumnPropNameInTable="LocationColumn" type="xs:string" />
+                    <xs:element name="ExecGroup" msprop:Generator_UserColumnName="ExecGroup" msprop:Generator_ColumnPropNameInRow="ExecGroup" msprop:Generator_ColumnVarNameInTable="columnExecGroup" msprop:Generator_ColumnPropNameInTable="ExecGroupColumn">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string" />
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="GlobalVariable" msprop:Generator_UserTableName="GlobalVariable" msprop:Generator_RowDeletedName="GlobalVariableRowDeleted" msprop:Generator_RowChangedName="GlobalVariableRowChanged" msprop:Generator_RowClassName="GlobalVariableRow" msprop:Generator_RowChangingName="GlobalVariableRowChanging" msprop:Generator_RowEvArgName="GlobalVariableRowChangeEvent" msprop:Generator_RowEvHandlerName="GlobalVariableRowChangeEventHandler" msprop:Generator_TableClassName="GlobalVariableDataTable" msprop:Generator_TableVarName="tableGlobalVariable" msprop:Generator_RowDeletingName="GlobalVariableRowDeleting" msprop:Generator_TablePropName="GlobalVariable" minOccurs="0" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:attribute name="Name" form="unqualified" msprop:Generator_UserColumnName="Name" msprop:Generator_ColumnPropNameInRow="Name" msprop:Generator_ColumnVarNameInTable="columnName" msprop:Generator_ColumnPropNameInTable="NameColumn" type="xs:string" />
+                        <xs:attribute name="Value" form="unqualified" msprop:Generator_UserColumnName="Value" msprop:Generator_ColumnPropNameInRow="Value" msprop:Generator_ColumnVarNameInTable="columnValue" msprop:Generator_ColumnPropNameInTable="ValueColumn" type="xs:string" />
+                        <xs:attribute name="RelativeTo" form="unqualified" msprop:Generator_UserColumnName="RelativeTo" msprop:nullValue="_empty" msprop:Generator_ColumnVarNameInTable="columnRelativeTo" msprop:Generator_ColumnPropNameInTable="RelativeToColumn" msprop:Generator_ColumnPropNameInRow="RelativeTo">
+                          <xs:simpleType>
+                            <xs:restriction base="xs:string" />
+                          </xs:simpleType>
+                        </xs:attribute>
+                        <xs:attribute name="LibraryName" msprop:Generator_UserColumnName="LibraryName" msprop:Generator_ColumnPropNameInRow="LibraryName" msprop:Generator_ColumnVarNameInTable="columnLibraryName" msprop:Generator_ColumnPropNameInTable="LibraryNameColumn" type="xs:string" use="prohibited" />
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="Function" msprop:Generator_UserTableName="Function" msprop:Generator_RowDeletedName="FunctionRowDeleted" msprop:Generator_RowChangedName="FunctionRowChanged" msprop:Generator_RowClassName="FunctionRow" msprop:Generator_RowChangingName="FunctionRowChanging" msprop:Generator_RowEvArgName="FunctionRowChangeEvent" msprop:Generator_RowEvHandlerName="FunctionRowChangeEventHandler" msprop:Generator_TableClassName="FunctionDataTable" msprop:Generator_TableVarName="tableFunction" msprop:Generator_RowDeletingName="FunctionRowDeleting" msprop:Generator_TablePropName="Function" minOccurs="0" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="Name" msprop:Generator_UserColumnName="Name" msprop:Generator_ColumnPropNameInRow="Name" msprop:Generator_ColumnVarNameInTable="columnName" msprop:Generator_ColumnPropNameInTable="NameColumn" type="xs:string" msdata:Ordinal="0" />
+                          <xs:element name="CommandID" msprop:Generator_UserColumnName="CommandID" msprop:Generator_ColumnPropNameInRow="CommandID" msprop:Generator_ColumnVarNameInTable="columnCommandID" msprop:Generator_ColumnPropNameInTable="CommandIDColumn" type="xs:string" msdata:Ordinal="1" />
+                        </xs:sequence>
+                        <xs:attribute name="LibraryName" msprop:Generator_UserColumnName="LibraryName" msprop:Generator_ColumnPropNameInRow="LibraryName" msprop:Generator_ColumnVarNameInTable="columnLibraryName" msprop:Generator_ColumnPropNameInTable="LibraryNameColumn" type="xs:string" use="prohibited" />
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                  <xs:attribute name="MapBasicFramework_Id" msprop:Generator_UserColumnName="MapBasicFramework_Id" msprop:Generator_ColumnPropNameInRow="MapBasicFramework_Id" msprop:Generator_ColumnVarNameInTable="columnMapBasicFramework_Id" msprop:Generator_ColumnPropNameInTable="MapBasicFramework_IdColumn" type="xs:int" use="prohibited" />
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute name="MapBasicFramework_Id" msdata:AutoIncrement="true" msprop:Generator_UserColumnName="MapBasicFramework_Id" msprop:Generator_ColumnPropNameInRow="MapBasicFramework_Id" msprop:Generator_ColumnVarNameInTable="columnMapBasicFramework_Id" msprop:Generator_ColumnPropNameInTable="MapBasicFramework_IdColumn" type="xs:int" msdata:AllowDBNull="false" use="prohibited" />
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:BaseModelComponents" />
+      <xs:field xpath="@mstns:BaseModelComponents_Id" />
+    </xs:unique>
+    <xs:unique name="FileHistory_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:FileHistory" />
+      <xs:field xpath="@mstns:FileHistory_Id" />
+    </xs:unique>
+    <xs:unique name="AltEngineConfigurationKey1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:Library" />
+      <xs:field xpath="mstns:LibraryName" />
+    </xs:unique>
+    <xs:unique name="MapBasicFramework_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:MapBasicFramework" />
+      <xs:field xpath="@mstns:MapBasicFramework_Id" />
+    </xs:unique>
+    <xs:keyref name="MapBasicFramework_Library" refer="MapBasicFramework_Constraint1" msdata:IsNested="true" msprop:rel_Generator_UserRelationName="MapBasicFramework_Library" msprop:rel_Generator_RelationVarName="relationMapBasicFramework_Library" msprop:rel_Generator_UserChildTable="Library" msprop:rel_Generator_UserParentTable="MapBasicFramework" msprop:rel_Generator_ParentPropName="MapBasicFrameworkRow" msprop:rel_Generator_ChildPropName="GetLibraryRows">
+      <xs:selector xpath=".//mstns:Library" />
+      <xs:field xpath="@mstns:MapBasicFramework_Id" />
+    </xs:keyref>
+    <xs:keyref name="Library_Function" refer="AltEngineConfigurationKey1" msdata:IsNested="true" msprop:rel_Generator_UserRelationName="Library_Function" msprop:rel_Generator_RelationVarName="relationLibrary_Function" msprop:rel_Generator_UserChildTable="Function" msprop:rel_Generator_UserParentTable="Library" msprop:rel_Generator_ParentPropName="LibraryRow" msprop:rel_Generator_ChildPropName="GetFunctionRows">
+      <xs:selector xpath=".//mstns:Function" />
+      <xs:field xpath="@mstns:LibraryName" />
+    </xs:keyref>
+    <xs:keyref name="Library_GlobalVariable" refer="AltEngineConfigurationKey1" msdata:IsNested="true" msprop:rel_Generator_UserRelationName="Library_GlobalVariable" msprop:rel_Generator_RelationVarName="relationLibrary_GlobalVariable" msprop:rel_Generator_UserChildTable="GlobalVariable" msprop:rel_Generator_UserParentTable="Library" msprop:rel_Generator_ParentPropName="LibraryRow" msprop:rel_Generator_ChildPropName="GetGlobalVariableRows">
+      <xs:selector xpath=".//mstns:GlobalVariable" />
+      <xs:field xpath="@mstns:LibraryName" />
+    </xs:keyref>
+    <xs:keyref name="FileHistory_BaseModel" refer="FileHistory_Constraint1" msdata:IsNested="true" msprop:rel_Generator_UserRelationName="FileHistory_BaseModel" msprop:rel_Generator_RelationVarName="relationFileHistory_BaseModel" msprop:rel_Generator_UserChildTable="BaseModel" msprop:rel_Generator_UserParentTable="FileHistory" msprop:rel_Generator_ParentPropName="FileHistoryRow" msprop:rel_Generator_ChildPropName="GetBaseModelRows">
+      <xs:selector xpath=".//mstns:BaseModel" />
+      <xs:field xpath="@mstns:FileHistory_Id" />
+    </xs:keyref>
+    <xs:keyref name="FileHistory_OutputModel" refer="FileHistory_Constraint1" msdata:IsNested="true" msprop:rel_Generator_UserRelationName="FileHistory_OutputModel" msprop:rel_Generator_RelationVarName="relationFileHistory_OutputModel" msprop:rel_Generator_UserChildTable="OutputModel" msprop:rel_Generator_UserParentTable="FileHistory" msprop:rel_Generator_ParentPropName="FileHistoryRow" msprop:rel_Generator_ChildPropName="GetOutputModelRows">
+      <xs:selector xpath=".//mstns:OutputModel" />
+      <xs:field xpath="@mstns:FileHistory_Id" />
+    </xs:keyref>
+    <xs:keyref name="BaseModelComponents_BaseDirectory" refer="Constraint1" msdata:IsNested="true" msprop:rel_Generator_UserRelationName="BaseModelComponents_BaseDirectory" msprop:rel_Generator_RelationVarName="relationBaseModelComponents_BaseDirectory" msprop:rel_Generator_UserChildTable="BaseDirectory" msprop:rel_Generator_UserParentTable="BaseModelComponents" msprop:rel_Generator_ParentPropName="BaseModelComponentsRow" msprop:rel_Generator_ChildPropName="GetBaseDirectoryRows">
+      <xs:selector xpath=".//mstns:BaseDirectory" />
+      <xs:field xpath="@mstns:BaseModelComponents_Id" />
+    </xs:keyref>
+    <xs:keyref name="BaseModelComponents_BaseFile" refer="Constraint1" msdata:IsNested="true" msprop:rel_Generator_UserRelationName="BaseModelComponents_BaseFile" msprop:rel_Generator_RelationVarName="relationBaseModelComponents_BaseFile" msprop:rel_Generator_UserChildTable="BaseFile" msprop:rel_Generator_UserParentTable="BaseModelComponents" msprop:rel_Generator_ParentPropName="BaseModelComponentsRow" msprop:rel_Generator_ChildPropName="GetBaseFileRows">
+      <xs:selector xpath=".//mstns:BaseFile" />
+      <xs:field xpath="@mstns:BaseModelComponents_Id" />
+    </xs:keyref>
+  </xs:element>
+</xs:schema>

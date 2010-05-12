@@ -1,0 +1,28 @@
+﻿<DirectConstructionItems>
+  <ItemList>
+    <Item>Traffic Control</Item>
+    <Item>Rock Excavation</Item>
+    <Item>Concrete Excavation</Item>
+    <Item>Foundation Stabilization</Item>
+    <Item>CDF Backfill</Item>
+    <Item>Trench Dewatering</Item>
+    <Item>Erosion Control</Item>
+    <Item>Concrete Streets</Item>
+    <Item>Tunneling/Boring/Jacking</Item>
+    <Item>Land Acquisition</Item>
+    <Item>Flow Diversion</Item>
+    <Item>Contaminated Media</Item>
+    <Item>Public Involvement</Item>
+    <Item>Right-of-Way Acquisition</Item>
+    <Item>Noise Abatement</Item>
+    <Item>Public Art Allowance</Item>
+    <Item>Special Permits</Item>
+    <Item>Utility Relocations</Item>
+    <Item>Potholing</Item>
+    <Item>Abandon Sewer</Item>
+    <Item>Replace Inlets</Item>
+    <Item>Stormwater Management/Control</Item>
+    <Item>Interagency Costs</Item>
+    <Item>Additional AC Paving (Req'd beyond std trench width)</Item>
+  </ItemList>
+</DirectConstructionItems>

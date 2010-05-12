@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Settings xmlns="SystemsAnalysis.Characterization.Settings.xsd">
+	<Files>
+		<CharTemplate>\\Cassio\Modeling\Model_Programs\ResultsWarehouse\CharacterizationQueriesManager\xml\CharacterizationTable.xml</CharTemplate>
+		<OutputDir>\\Cassio\Modeling\Model_Programs\ResultsWarehouse\CharacterizationQueriesManager\xml\</OutputDir>
+		<PumpStationDB>\\cassio\modeling\AGMaster21\Pumps\PumpStationDB.mdb</PumpStationDB>						
+		<AGMasterDB>\\Cassio\Modeling\AGMaster21\AgMaster21.mdb</AGMasterDB>								
+		<ResultsWarehouseDB>\\Cassio\systems_planning\SPCommon\Char\Hydraulics\ModelResultsWarehouse.mdb</ResultsWarehouseDB>
+	</Files>
+	<FeatureClasses>
+		<MstLinks>\\Cassio\Modeling\Model_Programs\ResultsWarehouse\CharacterizationQueriesManager\mst_links.lyr</MstLinks>
+		<MstSSC>\\Cassio\Modeling\Model_Programs\ResultsWarehouse\CharacterizationQueriesManager\mst_surfsc.lyr</MstSSC>
+		<UICDB>\\Cassio\Modeling\Model_Programs\ResultsWarehouse\CharacterizationQueriesManager\BESUICs.lyr</UICDB>
+	</FeatureClasses>
+</Settings>

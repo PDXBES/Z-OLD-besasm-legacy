@@ -1,0 +1,278 @@
+'*************************************************
+'                                                 
+'	Application name:  DETANG.mbx
+'	Model pipe editing tool
+'	Created By Mark A. Liebe, P.E., Ph.D.
+'	Date Modified:  03/27/2002
+'
+'*************************************************
+'includes
+include "mapbasic.def"
+include "menu.def"
+include "icons.def"
+include "C:\mapinfo\MI_TOOLS\LIEBE\LIB\mistdlib.def"	'library of 
+include "C:\mapinfo\MI_TOOLS\LIEBE\LIB\str_lib.def"	'library of string handling commands
+
+'function/sub declares
+declare sub main
+declare sub button_make_buffer
+declare sub button_clear_cosmetic
+declare function Init_vars() as logical
+declare function check_base_tables() as logical
+declare function geocode_address (byval address_string as string, mapwindow as integer, x as float, y as float) as logical
+declare function clean_address (byval add_num as string, byval add_prefix as string, byval add_name as string, byval add_suffix as string) as string
+
+'constant definition
+define ini_filename "detang.ini"
+'define synthtablename "all_synth_data_go"
+'define synthlengthname "pipelen"
+'define base_tables "all_synth_data_go;synth_transaction;	Mdl_Sewers;STREETS;all_s"
+'define street_fields "STNO;PREDIR;STNAME;SUFFIX"
+define num_street_fields 4
+
+'dim variables
+dim street_field_index(num_street_fields) as integer
+dim street_search_field, base_tables, streettablename, street_fields, synthlengthname, synthtablename as string
+
+
+sub main
+if not init_vars() then
+	note "Could not fine detang.ini file."
+	exit sub
+end if
+if not check_base_tables() then
+	exit sub
+end if
+set distance units "ft"
+Set coordsys earth projection 3, 74, 3, -120.5, 43.6666666667, 44.3333333333, 46, 8202099.738, 0
+Create ButtonPad "DETANGLER" As 
+  PushButton  
+    HelpMsg "Choose this button to create location indicators DS\nClues DS" 
+    Calling button_make_buffer
+    Icon  MI_ICON_ARROW_12
+  PushButton  
+    HelpMsg "Choose this button to clear cosmetic layer\nClear Cosmetic" 
+    Calling button_clear_cosmetic
+    Icon  MI_ICON_MB_6
+  Title "DETANGLER" 
+  Width 4
+  Show  
+end sub
+
+sub button_make_buffer
+	dim num_segs, i, map_win_id, num_poly as integer
+	dim cosmetic_layer, do_str as string
+	dim x1, x2, y1, y2 as float
+	'get window ID             
+	map_win_id = FrontWindow()
+	if WindowInfo(map_win_id, WIN_INFO_TYPE) <> WIN_MAPPER then
+		Note "A map window needs to have the focus to use this button."
+	  exit sub
+	end if
+	cosmetic_layer = WindowInfo(map_win_id, WIN_INFO_TABLE)
+	if selectioninfo(SEL_INFO_NROWS) = 1 and selectioninfo(SEL_INFO_TABLENAME) = SYNTHTABLENAME then
+		'if ask("Buffer upstream or downstream end of segment?","DOWNSTRM","UPSTRM") then
+			'downstream
+			select * from selection where str$(obj) = "line" or str$(obj) = "polyline" into pipestobuffer
+			call button_clear_cosmetic
+			fetch first from pipestobuffer
+		 	'do 
+		 			num_poly = objectinfo(pipestobuffer.obj,OBJ_INFO_NPOLYGONS)
+		 			x1 = objectnodex(pipestobuffer.obj,num_poly,objectinfo(pipestobuffer.obj,OBJ_INFO_NPOLYGONS+num_poly))
+		 			y1 = objectnodey(pipestobuffer.obj,num_poly,objectinfo(pipestobuffer.obj,OBJ_INFO_NPOLYGONS+num_poly)) 
+		 			if pipestobuffer.pipelen > 0 then ' use Hansen pipe length
+						set style brush makebrush(1, RED, RED)
+						set style pen makepen(2, 2, MAGENTA)
+						do_str = "insert into " & cosmetic_layer & " (obj) values( createcircle(" & x1 & " ," & y1 & ", " & pipestobuffer.pipelen & "))"
+					else 'use map length
+						set style brush makebrush(1, RED, RED)
+						set style pen makepen(2, 12, MAGENTA)
+						do_str = "insert into " & cosmetic_layer & " (obj) values( createcircle(" & x1 & " ," & y1 & ", " & objectlen(pipestobuffer.obj, "ft") & "))"
+					end if						
+					run command do_str
+					'fetch next from pipestobuffer
+			'loop while not eot(pipestobuffer) 
+			do_str =  clean_address(pipestobuffer.col(street_field_index(1)), pipestobuffer.col(street_field_index(2)), pipestobuffer.col(street_field_index(3)), pipestobuffer.col(street_field_index(4)))
+			if len(do_str) > 0 then 'go geocode
+				if not geocode_address (do_str, map_win_id, x2, y2) then
+					note "Could not geocode upstream address" 
+				else
+						set style pen makepen(4, 54, MAGENTA)
+						do_str = "insert into " & cosmetic_layer & " (obj) values( createline(" & x2 & " ," & y2 & ", " & x1 & " ," & y1 & "))"
+						run command do_str
+				end if
+			end if
+		'else
+			'upstream 
+			'select * from selection where str$(obj) = "line" or str$(obj) = "polyline" into pipestobuffer
+			'fetch first from pipestobuffer
+		 '	do 
+     	'		x1 = objectnodex(pipestobuffer.obj,1,1)
+	'				y1 = objectnodey(pipestobuffer.obj,1,1)
+'					do_str = "insert into " & cosmetic_layer & " (obj) values( createcircle(" & x1 & " ," & y1 & ", " & pipestobuffer.pipelen & "))"
+		'			run command do_str
+		'			fetch next from pipestobuffer
+		'	loop while not eot(pipestobuffer)
+		'end if
+	else
+		note "Tool currently operates on single segments selected from the table " & SYNTHTABLENAME
+	end if
+end sub
+
+sub button_clear_cosmetic
+'clears cosmetic layer
+	dim num_segs, i, map_win_id as integer
+	dim cosmetic_layer, do_str as string
+	'get window ID             
+	map_win_id = FrontWindow()
+	if WindowInfo(map_win_id, WIN_INFO_TYPE) <> WIN_MAPPER then
+		Note "A map window needs to have the focus to use this button."
+	  exit sub
+	end if
+	cosmetic_layer = WindowInfo(map_win_id, WIN_INFO_TABLE)
+	do_str = "select * from " & cosmetic_layer & " into junk"
+	Run command do_str
+	delete from junk
+	'Run Menu Command M_MAP_CLEAR_COSMETIC
+end sub  
+
+function check_base_tables() as logical
+	dim err_msg, test_tab as string
+	dim i as integer
+	dim l_dum as logical
+	err_msg = "These tables are NOT open and need to be:"
+	l_dum = true
+	for i = 1 to count_items(base_tables) 
+		if not IsTableOpen(sExtract(i, base_tables)) then
+			err_msg = err_msg & chr$(10) &  sExtract(i, base_tables)
+			l_dum = false
+		end if
+  next 'i
+	if not l_dum then
+	  note err_msg
+	end if
+	synthtablename = GetListString$(base_tables,1)
+	test_tab = makecollist$(GetListString$(base_tables,1))
+	for i = 1 to num_street_fields 
+		street_field_index(i) = Get_Index(GetListString$(street_fields,i), test_tab)
+	next 'i
+	streettablename = GetListString$(base_tables,2)
+	print synthtablename + " : " + streettablename
+	check_base_tables = l_dum
+end function
+
+function geocode_address (byval address_string as string, mapwindow as integer, x as float, y as float) as logical
+	'dim x, y as float
+	dim dum_str as string
+	dum_str = "find using " + streettablename + "(" + street_search_field + ")"
+	run command dum_str
+	find address_string
+	If CommandInfo(CMD_INFO_FIND_RC) >= 1 Then
+  x = CommandInfo(CMD_INFO_X)
+  y = CommandInfo(CMD_INFO_Y)                          
+'  Set Map
+'     Window mapwindow 
+'     Center (x, y)
+  ' Now create a symbol at the location we found. 
+  ' Create the object in the Cosmetic layer. 
+  Set Style Symbol MakeSymbol( 34, RED, 12)
+  Insert Into 
+    WindowInfo( mapwindow, WIN_INFO_TABLE)  (Object) 
+    Values ( CreatePoint(x, y) ) 
+    geocode_address = True
+Else
+      geocode_address = False
+End If 
+end function
+
+function clean_address (byval add_num as string, byval add_prefix as string, byval add_name as string, byval add_suffix as string) as string
+	add_num = trim$(add_num)
+	add_prefix = trim$(add_prefix)
+	add_name = trim$(add_name)
+	add_suffix = trim$(add_suffix)		
+  clean_address = ""
+  if len(add_num) = 0 then
+  	exit function
+  end if
+  if len(add_name) = 0 then
+  	exit function
+  end if
+  if len(add_suffix) = 0 then
+  	exit function
+  end if
+  if len(add_prefix) > 0 then
+	  clean_address = add_num & " " & add_prefix & " " & add_name & " " & add_suffix
+  else
+	  clean_address = add_num & " " & add_name & " " & add_suffix
+	end if  
+end function
+
+function Init_vars() as logical
+	dim dum_str as string
+	dim i as integer
+	init_vars = false
+	print "init variables"
+	print "Getting stuff: " + ApplicationDirectory$() + ini_filename
+	if fileexists(ApplicationDirectory$() + ini_filename) then
+		print "opening table"
+ 		open file ApplicationDirectory$() + ini_filename for input as #1
+		line input #1, dum_str
+		if not EOF(1) then
+			if dum_str = "[SYNTH_TAB]" then
+				line input #1, dum_str
+				base_tables = dum_str
+			end if
+		else
+			Note "BAD ini file - SYNTH_TAB"
+			exit function
+		end if
+		line input #1, dum_str
+		if not EOF(1) then
+			street_fields = ""
+			if dum_str = "[SYNTH_STREET_FIELDS]" then
+				line input #1, dum_str	' STNO
+				street_fields = street_fields + dum_str + ";"
+				line input #1, dum_str	' PREDIR
+				street_fields = street_fields + dum_str + ";"
+				line input #1, dum_str	' STNAME
+				street_fields = street_fields + dum_str + ";"
+				line input #1, dum_str	' SUFFIX
+				street_fields = street_fields + dum_str
+			end if
+		else
+			Note "BAD ini file - SYNTH_STREET_FIELDS"
+			exit function
+		end if
+		line input #1, dum_str
+		if not EOF(1) then
+			if dum_str = "[SYNTH_PIPE_LENGTH]" then
+				line input #1, synthlengthname
+			end if
+		else
+			Note "BAD ini file - SYNTH_PIPELEN"
+			exit function
+		end if
+		line input #1, dum_str
+		if not EOF(1) then
+			if dum_str = "[STREET_TAB]" then
+				line input #1, dum_str
+				base_tables = base_tables + ";" + dum_str
+			end if
+		else
+			Note "BAD ini file - STREETS_TAB"
+			exit function				
+		end if
+		line input #1, dum_str
+		if not EOF(1) then
+			if dum_str = "[STREET_FIELD]" then
+				line input #1, street_search_field 
+			end if
+		else
+			Note "BAD ini file - STREET_FIELD"
+			exit function				
+		end if
+ 	end if	
+	init_vars = true	
+	print "base_tables: " + base_tables
+	print "street_fields: " + street_fields
+end function

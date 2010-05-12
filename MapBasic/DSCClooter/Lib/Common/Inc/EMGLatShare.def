@@ -1,0 +1,28 @@
+'
+'	shared data between EMGLaterals and EMGLatSnap.
+'
+dim mSelectionSetName as string
+dim mLatPtsName as string
+dim mSewerName as string
+dim		mDSCName as string
+Dim		mMastDSCName as string
+Dim		mMastTaxName as string
+
+dim mRecordCount as integer
+dim mNextLateralEndID as integer
+Dim		mNextMDLLateralID as integer
+Dim		mNextMSTLateralID as integer
+
+DEFINE BEGSYM 34
+DEFINE ENDSYM 34
+DEFINE BEGSYMSIZE 6
+DEFINE ENDSYMSIZE 6
+DEFINE BEGFONT "Mapinfo Cartographic"
+DEFINE ENDFONT "Mapinfo Cartographic"
+DEFINE BEGSTYLE 0
+DEFINE ENDSTYLE 0
+
+Global SNAP_TOLERANCE as float ' .5					' thats one half foot
+Global SEARCH_STEP as integer		' 5
+Global SEARCH_MAX as integer		' 100
+Global LINE_EXTEND_RATIO as float ' 3.0
