@@ -213,51 +213,25 @@
             <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
           </Function>
         </Cell>
-        <Cell cellType="FUNCTION">
-          <Function functionName="CapitalCost" library="RecommendedPlanReport" format="N0">
-            <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
-          </Function>
-        </Cell>
+        <Cell cellType="CONST" data="Manual Entry" />
         <Cell cellType="FUNCTION">
           <Function functionName="CreditRemovingVolumeTunnel" library="RecommendedPlanReport" format="$#,##0.00">
             <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
           </Function>
         </Cell>
-        <Cell cellType="FUNCTION">
-          <Function functionName="AnnualOperationMaintenceCost" library="RecommendedPlanReport" format="N0">
-            <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
-          </Function>
-        </Cell>
-        <Cell cellType="FUNCTION">
-          <Function functionName="PresentWorthCost" library="RecommendedPlanReport" format="N0">
-            <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
-          </Function>
-        </Cell>
-        <Cell cellType="FUNCTION">
-          <Function functionName="BSBREliminated" library="RecommendedPlanReport" format="N0">
-            <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
-          </Function>
-       </Cell>
+        <Cell cellType="CONST" data="Manual Entry" />
+        <Cell cellType="CONST" data="Manual Entry" />
+        <Cell cellType="CONST" data="Manual Entry" />
       </Row>
       <Row rowType="TOTALROW">
         <Cell cellType="CONST" data="Total" />
-        <Cell cellType="FUNCTION">
-          <Function functionName="CapitalCost" library="RecommendedPlanReport" format="N0">          
-          </Function>
-        </Cell>
+        <Cell cellType="CONST" data="Manual Entry" />
         <Cell cellType="FUNCTION">
           <Function functionName="CreditRemovingVolumeTunnel" library="RecommendedPlanReport" format="$#,##0.00">
           </Function>
         </Cell>
-        <Cell cellType="FUNCTION">
-          <Function functionName="AnnualOperationMaintenceCost" library="RecommendedPlanReport" format="N0">
-            <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
-          </Function>
-        </Cell>
-        <Cell cellType="FUNCTION">
-          <Function functionName="PresentWorthCost" library="RecommendedPlanReport" format="N0">          
-          </Function>
-        </Cell>
+        <Cell cellType="CONST" data="Manual Entry" />
+        <Cell cellType="CONST" data="Manual Entry" />
         <Cell cellType="FUNCTION">
           <Function functionName="BSBREliminated" library="RecommendedPlanReport" format="N0">            
           </Function>
@@ -369,63 +343,21 @@
             <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
           </Function>
         </Cell>
-        <Cell cellType="FUNCTION">
-          <Function functionName="MortalityRisk" library="RecommendedPlanReport" format="N0">
-            <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
-          </Function>
-        </Cell>
-        <Cell cellType="FUNCTION">
-          <Function functionName="CapacityRisk" library="RecommendedPlanReport" format="N0">
-            <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
-          </Function>
-        </Cell>
-        <Cell cellType="FUNCTION">
-          <Function functionName="BaseRisk" library="RecommendedPlanReport" format="N0">
-            <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
-          </Function>
-        </Cell>
-        <Cell cellType="FUNCTION">
-          <Function functionName="ProjectPresentWorth" library="RecommendedPlanReport" format="N0">
-            <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
-          </Function>
-        </Cell>
-        <Cell cellType="FUNCTION">
-          <Function functionName="ProjectCapitalCost" library="RecommendedPlanReport" format="N0">
-            <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
-          </Function>
-        </Cell>
-        <Cell cellType="FUNCTION">
-          <Function functionName="CostBenefitRatio" library="RecommendedPlanReport" format="N0">
-            <Parameter parameterName="FocusArea" parameterValue="@RPFocusArea"></Parameter>
-          </Function>
-        </Cell>
+        <Cell cellType="CONST" data="Manual Entry" />
+        <Cell cellType="CONST" data="Manual Entry" />
+        <Cell cellType="CONST" data="Manual Entry" />
+       <Cell cellType="CONST" data="Manual Entry" />
+		<Cell cellType="CONST" data="Manual Entry" />
+        <Cell cellType="CONST" data="Manual Entry" />
       </Row>
       <Row rowType="TOTALROW">
         <Cell cellType="CONST" data="Total" />
-        <Cell cellType="FUNCTION">
-          <Function functionName="MortalityRisk" library="RecommendedPlanReport" format="N0">            
-          </Function>
-        </Cell>
-        <Cell cellType="FUNCTION">
-          <Function functionName="CapacityRisk" library="RecommendedPlanReport" format="N0">            
-          </Function>
-        </Cell>
-        <Cell cellType="FUNCTION">
-          <Function functionName="BaseRisk" library="RecommendedPlanReport" format="N0">            
-          </Function>
-        </Cell>
-        <Cell cellType="FUNCTION">
-          <Function functionName="ProjectPresentWorth" library="RecommendedPlanReport" format="N0">            
-          </Function>
-        </Cell>
-        <Cell cellType="FUNCTION">
-          <Function functionName="ProjectCapitalCost" library="RecommendedPlanReport" format="N0">            
-          </Function>
-        </Cell>
-        <Cell cellType="FUNCTION">
-          <Function functionName="CostBenefitRatio" library="RecommendedPlanReport" format="N0">            
-          </Function>
-        </Cell>
+        <Cell cellType="CONST" data="Manual Entry" />
+        <Cell cellType="CONST" data="Manual Entry" />
+        <Cell cellType="CONST" data="Manual Entry" />
+        <Cell cellType="CONST" data="Manual Entry" />
+        <Cell cellType="CONST" data="Manual Entry" />
+		<Cell cellType="CONST" data="Manual Entry" />
       </Row>
       <Footer footerID="^" footerText="From Task 3 (Collection System Rehabilitation Plan)" />
   </CharacterizationTable>
