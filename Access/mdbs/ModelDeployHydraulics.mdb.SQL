@@ -22,7 +22,7 @@ FROM _getSpecialLinkKeys;
 
 _BaseFlowComponents
 ----------
-SELECT mdl_DirSC_ac.NGTOSan, Sum(CLng([baseflow]*10000000)/10000000) AS avesanflow, Sum(CLng(([AreaFT]/43560)*10000000)/10000000) AS IIArea, Sum(CLng(([AreaFT]/43560)*0.00000155*[iigpad]*10000000)/10000000) AS DMII
+SELECT mdl_DirSC_ac.NGTOSan, Round(Sum(CLng([baseflow]*10000000)/10000000),6) AS avesanflow, Round(Sum(CLng(([AreaFT]/43560)*10000000)/10000000),6) AS IIArea, Round(Sum(CLng(([AreaFT]/43560)*0.00000155*[iigpad]*10000000)/10000000),6) AS DMII
 FROM mdl_DirSC_ac, _Globals
 WHERE (((mdl_DirSC_ac.PipeFlowTypeSan)="C" Or (mdl_DirSC_ac.PipeFlowTypeSan)="S"))
 GROUP BY mdl_DirSC_ac.NGTOSan
@@ -43,12 +43,11 @@ SELECT 3 AS LTYPE, [_BaseFlowComponents].NGTOSan AS DLOCATION, 1 AS PART_ID, 1 A
 FROM _BaseFlowComponents;
 
 
-***_dhi_append_links
+_dhi_append_links
 ----------
 INSERT INTO DHILinks ( LinkID, FromNode, ToNode, TypeNo, CRSID, ScalingTYPENO, [Diameter/Width], ScaleOrWidth, Height, MaterialNo, UpLevel, DwLevel, Infiltration, SpecifiedLength, RMapproachNO )
-SELECT IIf(IsNull([mlinkid]) Or [mlinkid]=0,"L" & CStr([linkid]),"M" & CStr([mlinkid])) AS simlink, mdl_Links_ac.USNode, mdl_Links_ac.DSNode, IIf(IsNull([DHITypeNO]),0,[DHITypeNO]) AS xTypeNo, IIf(IsNull([_pipeShapes].[shape]),"ERR",IIf([DHITYPENO]=2,[_pipeshapes].[shape]+"_"+Format$([Diamwidth],"0")+"_"+Format$([height],"0"),Null)) AS xDHICRSID, 1 AS STno, CLng(1000*[DiamWidth]/12)/1000 AS DW, IIf(IsNull([DHITypeNO]),1,IIf([DHITypeNO]>2,CLng(1000*[diamwidth]/12)/1000,1)) AS SoeW, CLng(1000*[Height]/12)/1000 AS HGT, IIf(IsNull([DHITypeno]),3,IIf([DHITypeno]=1,2,3)) AS MatNo, mdl_Links_ac.USIE, mdl_Links_ac.DSIE, 0 AS infl, CLng([Length]) AS xlen, IIf([PipeFlowType]="F",2,1) AS GorF
-FROM mdl_Links_ac LEFT JOIN _PipeShapes ON mdl_Links_ac.PipeShape = [_PipeShapes].Shape
-WHERE (((mdl_Links_ac.IsSpecLink)=False));
+SELECT xlinks.explink AS simlink, IIf(IsNull([_tXPSpecialLinks].[toLinkID]),[xlinks].[usnode],[_tXPSpecialLinks].[DSnode]) AS USNODE, xlinks.DSNode, IIf(IsNull([DHITypeNO]),0,[DHITypeNO]) AS xTypeNo, IIf(IsNull([_pipeShapes].[shape]),"ERR",IIf([DHITYPENO]=2,[_pipeshapes].[shape]+"_"+Format$([Diamwidth],"0")+"_"+Format$([height],"0"),Null)) AS xDHICRSID, 1 AS STno, CLng(1000*[DiamWidth]/12)/1000 AS DW, IIf(IsNull([DHITypeNO]),1,IIf([DHITypeNO]>2,CLng(1000*[Height]/12)/1000,1)) AS SoeW, CLng(1000*[Height]/12)/1000 AS HGT, IIf(IsNull([DHITypeno]),3,IIf([DHITypeno]=1,2,3)) AS MatNo, xlinks.USIE, xlinks.DSIE, 0 AS infl, CLng([Length]) AS xlen, IIf([PipeFlowType]="F",2,1) AS GorF
+FROM (xlinks LEFT JOIN _PipeShapes ON xlinks.PipeShape = [_PipeShapes].Shape) LEFT JOIN _tXPSpecialLinks ON xlinks.LinkID = [_tXPSpecialLinks].toLinkID;
 
 
 _dhi_append_metadata
@@ -61,8 +60,8 @@ FROM _Globals;
 _dhi_append_nodes
 ----------
 INSERT INTO DHINodes ( NodeID, TypeNo, X, Y, Diameter, InvertLevel, GroundLevel, WaterLevel, OutletShapeNo, DatasetID, RMNodeTypeNo, TOPTypeNo, BufferPressureLevel, RELWeirCoeff, SMFlag )
-SELECT mdl_nodes_ac.Node, IIf(IsNull([_uniqueUSnode].[usnode]),3,1) AS xtype, mdl_nodes_ac.XCoord, mdl_nodes_ac.YCoord, 4 AS defadia, IIf(IsNull([MinOfZ]),-99,Format$([minofZ],"0.00")) AS NodeIE, CLng([GrndElev]*100)/100 AS xgrelev, IIf(IsNull([_uniqueUSnode].[usnode]),IIf(IsNull([MinOfZ]),-99,Format$([minofZ],"0.00")),0) AS WaterLevel, 4 AS OSN, "N/A" AS DSID, IIf(IsNull([_getPressureNodes].[node]),0,IIf([_getPressureNodes].[Outlink]>0,1,2)) AS RMNodeTypeNo, IIf(IsNull([_getPressureNodes].[node]),1,IIf([_getPressureNodes].[Outlink]>0,2,1)) AS TOPtypeNo, 0 AS BufferPressureLevel, 1 AS RELWeirCoeff, 0 AS SMFlag
-FROM ((mdl_nodes_ac LEFT JOIN _uniqueUSnode ON mdl_nodes_ac.Node = [_uniqueUSnode].USNode) LEFT JOIN _getPressureNodes ON mdl_nodes_ac.Node = [_getPressureNodes].Node) LEFT JOIN _dhi_minNodeIEfromLink ON mdl_nodes_ac.Node = [_dhi_minNodeIEfromLink].Node;
+SELECT XPNodes.Node, IIf(IsNull([_Outfalls].[Node]),1,3) AS xtype, XPNodes.XCoord, XPNodes.YCoord, 4 AS defadia, Format$([NodeIE],"Fixed") AS IE, CLng([GrndElev]*100)/100 AS xgrelev, Format$([NodeiE],"Fixed") AS WaterLevel, 4 AS OSN, "N/A" AS DSID, IIf(IsNull([_getPressureNodes].[node]),0,IIf([_getPressureNodes].[Outlink]>0,1,2)) AS RMNodeTypeNo, IIf(IsNull([_getPressureNodes].[node]),1,IIf([_getPressureNodes].[Outlink]>0,2,1)) AS TOPtypeNo, 0 AS BufferPressureLevel, 1 AS RELWeirCoeff, 0 AS SMFlag
+FROM (XPNodes LEFT JOIN _getPressureNodes ON XPNodes.Node = [_getPressureNodes].Node) LEFT JOIN _Outfalls ON XPNodes.Node = [_Outfalls].Node;
 
 
 _dhi_append_Orifi
@@ -72,7 +71,7 @@ SELECT [_dhi_Orifi_AllData].OrificeName, [_dhi_Orifi_AllData].FromNode, [_dhi_Or
 FROM _dhi_Orifi_AllData;
 
 
-_dhi_append_Orifi_dhQLinks
+_dhi_append_Orifi_dhQLinks_DELETE
 ----------
 INSERT INTO DHITabularDataLinks ( LinkID, TYPE, DataSetID )
 SELECT [_dhi_Orifi_dummypipes].OrificeName, 0 AS Expr1, [_dhi_Orifi_dummypipes].OrificeName
@@ -82,8 +81,8 @@ FROM _dhi_Orifi_dummypipes;
 _dhi_append_Orifi_dhQLinksRegulators
 ----------
 INSERT INTO DHIRegulators ( LinkID, TypeNo, ControlNodeA, ControlNodeB, DataSetID )
-SELECT [_dhi_Orifi_dummypipes].OrificeName, 4 AS TypeNo, [_dhi_Orifi_dummypipes].USNode AS ControlNodeA, [_dhi_Orifi_dummypipes].DSNode AS ControlNodeB, [_dhi_Orifi_dummypipes].OrificeName AS DataSetID
-FROM _dhi_Orifi_dummypipes;
+SELECT [_dhi_Orifi_AllData].OrificeName, 4 AS TypeNo, [_dhi_Orifi_AllData].FromNode AS ControlNodeA, [_dhi_Orifi_AllData].TONode AS ControlNodeB, [_dhi_Orifi_AllData].OrificeName AS DataSetID
+FROM _dhi_Orifi_AllData;
 
 
 _dhi_append_Orifi_dhQNames
@@ -93,18 +92,18 @@ SELECT [_dhi_Orifi_AllData].OrificeName, 5 AS QdhType
 FROM _dhi_Orifi_AllData;
 
 
-_dhi_append_orifi_dhQValues
+_dhi_append_Orifi_dhQValues
 ----------
 INSERT INTO DHITabularDataValues ( DataSetID, X, Y )
 SELECT [_dhi_Orifi_dhQmax].OrificeName, [_dhi_Orifi_dhQmax].dh, [_dhi_Orifi_dhQmax].Qmax
 FROM _dhi_Orifi_dhQmax;
 
 
-_dhi_append_orifi_pipes
+_dhi_append_Orifi_pipes
 ----------
 INSERT INTO DHILinks ( LinkID, FromNode, ToNode, TypeNo, CRSID, ScalingTYPENO, [Diameter/Width], ScaleOrWidth, Height, MaterialNo, UpLevel, DwLevel, Infiltration, SpecifiedLength, RMapproachNO )
-SELECT [_dhi_Orifi_dummypipes].OrificeName, [_dhi_Orifi_dummypipes].USNode, [_dhi_Orifi_dummypipes].DSNode, [_dhi_Orifi_dummypipes].xTypeNo, [_dhi_Orifi_dummypipes].CRSID, [_dhi_Orifi_dummypipes].STno, [_dhi_Orifi_dummypipes].OrificeDiameter, [_dhi_Orifi_dummypipes].SoeW, [_dhi_Orifi_dummypipes].HGT, [_dhi_Orifi_dummypipes].MatNo, [_dhi_Orifi_dummypipes].InvertLevel AS USIE, [_dhi_Orifi_dummypipes].InvertLevel, [_dhi_Orifi_dummypipes].infl, [_dhi_Orifi_dummypipes].xlen, [_dhi_Orifi_dummypipes].GorF
-FROM _dhi_Orifi_dummypipes;
+SELECT [_dhi_Orifi_AllData].OrificeName, [_dhi_Orifi_AllData].FromNode, [_dhi_Orifi_AllData].TONode, 1 AS xTypeNo, [_dhi_Orifi_AllData].CRSID, [_dhi_Orifi_AllData].ScalingTypeNo, [_dhi_Orifi_AllData].OrificeDiameter, [_dhi_Orifi_AllData].ScaleorWidth, [_dhi_Orifi_AllData].Height, 1 AS MatNo, [_dhi_Orifi_AllData].InvertLevel AS USIE, [_dhi_Orifi_AllData].InvertLevel, 0 AS infl, 10 AS xlen, 1 AS GorF
+FROM _dhi_Orifi_AllData;
 
 
 _dhi_append_pumpcurveData
@@ -129,17 +128,17 @@ SELECT [_dhi_Pump_AllData].PumpID, [_dhi_Pump_AllData].Location, [_dhi_Pump_AllD
 FROM _dhi_Pump_AllData;
 
 
-***_dhi_append_shapegeom
+_dhi_append_shapegeom
 ----------
 INSERT INTO DHIShapeGeometry ( CRSID, Hx, Wz )
-SELECT IIf([DHITYPENO]=2,[mdl_links_ac].[shape]+"_"+Format$([Diamwidth],"0")+"_"+Format$([mdl_links_ac].[height],"0"),"N/A") AS Expr1, [_UserDefinedGeometry].Depth, [_UserDefinedGeometry].Surface
-FROM (mdl_Links_ac INNER JOIN _UserDefinedGeometry ON (mdl_Links_ac.PipeShape = [_UserDefinedGeometry].Shape) AND (mdl_Links_ac.DiamWidth = [_UserDefinedGeometry].Width) AND (mdl_Links_ac.Height = [_UserDefinedGeometry].Height)) INNER JOIN _PipeShapes ON mdl_Links_ac.PipeShape = [_PipeShapes].Shape
+SELECT IIf([DHITYPENO]=2,[mdl_links_ac].[pipeshape]+"_"+Format$([Diamwidth],"0")+"_"+Format$([mdl_links_ac].[height],"0"),"N/A") AS Expr1, [_UserDefinedGeometry].Depth, [_UserDefinedGeometry].Surface
+FROM (mdl_Links_ac INNER JOIN _UserDefinedGeometry ON (mdl_Links_ac.Height = [_UserDefinedGeometry].Height) AND (mdl_Links_ac.DiamWidth = [_UserDefinedGeometry].Width) AND (mdl_Links_ac.PipeShape = [_UserDefinedGeometry].Shape)) INNER JOIN _PipeShapes ON mdl_Links_ac.PipeShape = [_PipeShapes].Shape
 WHERE ((([_PipeShapes].DHITypeNO)=2))
-GROUP BY IIf([DHITYPENO]=2,[mdl_links_ac].[PipeShape]+"_"+Format$([Diamwidth],"0")+"_"+Format$([mdl_links_ac].[height],"0"),"N/A"), [_UserDefinedGeometry].Depth, [_UserDefinedGeometry].Surface, mdl_Links_ac.PipeShape, mdl_Links_ac.DiamWidth, mdl_Links_ac.Height, [_UserDefinedGeometry].Index
+GROUP BY [_UserDefinedGeometry].Depth, [_UserDefinedGeometry].Surface, IIf([DHITYPENO]=2,[mdl_links_ac].[PipeShape]+"_"+Format$([Diamwidth],"0")+"_"+Format$([mdl_links_ac].[height],"0"),"N/A"), mdl_Links_ac.PipeShape, mdl_Links_ac.DiamWidth, mdl_Links_ac.Height, [_UserDefinedGeometry].Index
 ORDER BY mdl_Links_ac.PipeShape, [_UserDefinedGeometry].Depth;
 
 
-***_dhi_append_shapenames
+_dhi_append_shapenames
 ----------
 INSERT INTO DHIShapeNames ( CRSID, TypeNo )
 SELECT IIf(IsNull([_pipeShapes].[shape]),"ERR",IIf([DHITYPENO]=2,[_pipeshapes].[shape]+"_"+Format$([Diamwidth],"0")+"_"+Format$([height],"0"),"N/A")) AS Expr1, 1 AS Expr2
@@ -188,9 +187,9 @@ GROUP BY [_dhi_ALLNodeIEFromLink].Node;
 
 _dhi_Orifi
 ----------
-SELECT mdl_speclinkdata_ac.TValue AS OrificeName, mdl_speclinks_ac.Node, mdl_speclinks_ac.ToLinkID, mdl_speclinks_ac.ToLinkNDX, mdl_links_ac.USNode AS TONode, mdl_speclinks_ac.SpecLinkType
+SELECT mdl_speclinkdata_ac.TValue AS OrificeName, mdl_speclinks_ac.Node, mdl_speclinks_ac.ToLinkID, mdl_speclinks_ac.ToLinkNDX, mdl_speclinks_ac.SLNode AS TONode, mdl_speclinks_ac.SpecLinkType
 FROM (mdl_speclinks_ac INNER JOIN mdl_links_ac ON mdl_speclinks_ac.ToLinkID = mdl_links_ac.LinkID) INNER JOIN mdl_speclinkdata_ac ON (mdl_speclinks_ac.Node = mdl_speclinkdata_ac.Node) AND (mdl_speclinks_ac.ToLinkNDX = mdl_speclinkdata_ac.ToLinkNDX) AND (mdl_speclinks_ac.ToLinkID = mdl_speclinkdata_ac.ToLinkID)
-GROUP BY mdl_speclinkdata_ac.TValue, mdl_speclinks_ac.Node, mdl_speclinks_ac.ToLinkID, mdl_speclinks_ac.ToLinkNDX, mdl_links_ac.USNode, mdl_speclinks_ac.SpecLinkType, mdl_speclinkdata_ac.Tag
+GROUP BY mdl_speclinkdata_ac.TValue, mdl_speclinks_ac.Node, mdl_speclinks_ac.ToLinkID, mdl_speclinks_ac.ToLinkNDX, mdl_speclinks_ac.SLNode, mdl_speclinks_ac.SpecLinkType, mdl_speclinkdata_ac.Tag
 HAVING (((mdl_speclinks_ac.SpecLinkType)="OB" Or (mdl_speclinks_ac.SpecLinkType)="OS") AND ((mdl_speclinkdata_ac.Tag)="ORIFNAME"));
 
 
@@ -209,6 +208,14 @@ WHERE (((mdl_speclinkdata_ac.Tag)="CORIF"));
 
 
 _dhi_Orifi_dhQmax
+----------
+SELECT [_dhi_Orifi_AllData].OrificeName, [_orifice_depths].Depth AS dh, Max(IIf([depth]<0,-CLng(((64.4*-[depth])^0.5*CDbl([tvalue])*3.14*[orificediameter]^2/4)*100)/100,CLng(((64.4*[depth])^0.5*CDbl([tvalue])*3.14*[orificediameter]^2/4)*100)/100)) AS Qmax
+FROM _orifice_depths, _dhi_Orifi_AllData INNER JOIN _dhi_Orifi_Coefficient ON [_dhi_Orifi_AllData].OrificeName = [_dhi_Orifi_Coefficient].OrificeName
+GROUP BY [_dhi_Orifi_AllData].OrificeName, [_orifice_depths].Depth
+ORDER BY [_dhi_Orifi_AllData].OrificeName, [_orifice_depths].Depth;
+
+
+_dhi_Orifi_dhQmax_old
 ----------
 SELECT [_dhi_Orifi_dummypipes].OrificeName, [_orifice_depths].Depth AS dh, Max(IIf([depth]<0,-CLng(((64.4*-[depth])^0.5*CDbl([tvalue])*3.14*[orificediameter]^2/4)*100)/100,CLng(((64.4*[depth])^0.5*CDbl([tvalue])*3.14*[orificediameter]^2/4)*100)/100)) AS Qmax
 FROM _orifice_depths, _dhi_Orifi_dummypipes INNER JOIN _dhi_Orifi_Coefficient ON [_dhi_Orifi_dummypipes].OrificeName = [_dhi_Orifi_Coefficient].OrificeName
@@ -252,9 +259,9 @@ FROM ((_dhi_Pumps LEFT JOIN _dhi_Pumps_Poff ON ([_dhi_Pumps].ToLinkNDX = [_dhi_P
 
 _dhi_Pumps
 ----------
-SELECT mdl_speclinkdata_ac.TValue AS PumpName, mdl_speclinks_ac.Node, mdl_speclinks_ac.ToLinkID, mdl_speclinks_ac.ToLinkNDX, mdl_links_ac.USNode AS TONode, mdl_speclinks_ac.SpecLinkType
+SELECT mdl_speclinkdata_ac.TValue AS PumpName, mdl_speclinks_ac.Node, mdl_speclinks_ac.ToLinkID, mdl_speclinks_ac.ToLinkNDX, mdl_speclinks_ac.SLNode AS TONode, mdl_speclinks_ac.SpecLinkType
 FROM (mdl_speclinks_ac INNER JOIN mdl_links_ac ON mdl_speclinks_ac.ToLinkID = mdl_links_ac.LinkID) INNER JOIN mdl_speclinkdata_ac ON (mdl_speclinks_ac.Node = mdl_speclinkdata_ac.Node) AND (mdl_speclinks_ac.ToLinkNDX = mdl_speclinkdata_ac.ToLinkNDX) AND (mdl_speclinks_ac.ToLinkID = mdl_speclinkdata_ac.ToLinkID)
-GROUP BY mdl_speclinkdata_ac.TValue, mdl_speclinks_ac.Node, mdl_speclinks_ac.ToLinkID, mdl_speclinks_ac.ToLinkNDX, mdl_links_ac.USNode, mdl_speclinks_ac.SpecLinkType, mdl_speclinkdata_ac.Tag
+GROUP BY mdl_speclinkdata_ac.TValue, mdl_speclinks_ac.Node, mdl_speclinks_ac.ToLinkID, mdl_speclinks_ac.ToLinkNDX, mdl_speclinks_ac.SLNode, mdl_speclinks_ac.SpecLinkType, mdl_speclinkdata_ac.Tag
 HAVING (((mdl_speclinks_ac.SpecLinkType)="PS") AND ((mdl_speclinkdata_ac.Tag)="PNAME"));
 
 
@@ -315,9 +322,9 @@ WHERE (((mdl_speclinkdata_ac.Tag)="Ytop"));
 
 _dhi_Weirs
 ----------
-SELECT mdl_speclinkdata_ac.TValue, mdl_speclinks_ac.Node, mdl_speclinks_ac.ToLinkID, mdl_speclinks_ac.ToLinkNDX, mdl_links_ac.USNode, mdl_speclinks_ac.SpecLinkType
+SELECT mdl_speclinkdata_ac.TValue, mdl_speclinks_ac.Node, mdl_speclinks_ac.ToLinkID, mdl_speclinks_ac.ToLinkNDX, mdl_speclinks_ac.SLNode AS USNode, mdl_speclinks_ac.SpecLinkType
 FROM (mdl_speclinks_ac INNER JOIN mdl_links_ac ON mdl_speclinks_ac.ToLinkID = mdl_links_ac.LinkID) INNER JOIN mdl_speclinkdata_ac ON (mdl_speclinks_ac.Node = mdl_speclinkdata_ac.Node) AND (mdl_speclinks_ac.ToLinkNDX = mdl_speclinkdata_ac.ToLinkNDX) AND (mdl_speclinks_ac.ToLinkID = mdl_speclinkdata_ac.ToLinkID)
-GROUP BY mdl_speclinkdata_ac.TValue, mdl_speclinks_ac.Node, mdl_speclinks_ac.ToLinkID, mdl_speclinks_ac.ToLinkNDX, mdl_links_ac.USNode, mdl_speclinks_ac.SpecLinkType, mdl_speclinkdata_ac.Tag
+GROUP BY mdl_speclinkdata_ac.TValue, mdl_speclinks_ac.Node, mdl_speclinks_ac.ToLinkID, mdl_speclinks_ac.ToLinkNDX, mdl_speclinks_ac.SLNode, mdl_speclinks_ac.SpecLinkType, mdl_speclinkdata_ac.Tag
 HAVING (((mdl_speclinks_ac.SpecLinkType)="WT" Or (mdl_speclinks_ac.SpecLinkType)="WS") AND ((mdl_speclinkdata_ac.Tag)="WEIRNAME"));
 
 
@@ -326,6 +333,22 @@ _dhi_Weirs_AllData
 SELECT [_dhi_Weirs].TValue AS WeirID, First([_dhi_Weirs].Node) AS Location, First([_dhi_Weirs].USNode) AS FlowTO, First([_dhi_Weir_CrestLevel].YCrest) AS Crestlevel, First(2) AS MethodNo, "N/A" AS DatasetID, 1 AS CrestTypeNo, [_dhi_Weir_CrestWidth].CrestWidth AS CrestWidth, [_dhi_Weir_FlowAngle].FlowAngle AS WeirFlowAngle, [_dhi_Weir_Coefficient].Coefficient, 1 AS ControlTypeNo
 FROM (((_dhi_Weirs LEFT JOIN _dhi_Weir_CrestLevel ON ([_dhi_Weirs].ToLinkNDX = [_dhi_Weir_CrestLevel].ToLinkNDX) AND ([_dhi_Weirs].ToLinkID = [_dhi_Weir_CrestLevel].ToLinkID) AND ([_dhi_Weirs].Node = [_dhi_Weir_CrestLevel].Node)) LEFT JOIN _dhi_Weir_CrestWidth ON ([_dhi_Weirs].ToLinkNDX = [_dhi_Weir_CrestWidth].ToLinkNDX) AND ([_dhi_Weirs].ToLinkID = [_dhi_Weir_CrestWidth].ToLinkID) AND ([_dhi_Weirs].Node = [_dhi_Weir_CrestWidth].Node)) LEFT JOIN _dhi_Weir_Coefficient ON ([_dhi_Weirs].ToLinkNDX = [_dhi_Weir_Coefficient].ToLinkNDX) AND ([_dhi_Weirs].ToLinkID = [_dhi_Weir_Coefficient].ToLinkID) AND ([_dhi_Weirs].Node = [_dhi_Weir_Coefficient].Node)) LEFT JOIN _dhi_Weir_FlowAngle ON ([_dhi_Weirs].ToLinkNDX = [_dhi_Weir_FlowAngle].ToLinkNDX) AND ([_dhi_Weirs].ToLinkID = [_dhi_Weir_FlowAngle].ToLinkID) AND ([_dhi_Weirs].Node = [_dhi_Weir_FlowAngle].Node)
 GROUP BY [_dhi_Weirs].TValue, "N/A", 1, [_dhi_Weir_CrestWidth].CrestWidth, [_dhi_Weir_FlowAngle].FlowAngle, [_dhi_Weir_Coefficient].Coefficient, 1;
+
+
+_false_parallel_links
+----------
+SELECT xlinks.LinkID, [_tXPSpecialLinks.DSNode] AS USNode, [_parallel_links].DsNode
+FROM (_tXPSpecialLinks INNER JOIN xlinks ON [_tXPSpecialLinks].toLinkID = xlinks.LinkID) INNER JOIN _parallel_links ON xlinks.LinkID = [_parallel_links].LinkID
+
+UNION SELECT xlinks.LinkID, [_false_parallel_links_without_speciallink].USNode, [_false_parallel_links_without_speciallink].DsNode
+FROM (xlinks INNER JOIN _false_parallel_links_without_speciallink ON xlinks.LinkID = [_false_parallel_links_without_speciallink].LinkID) INNER JOIN (_tXPSpecialLinks INNER JOIN xlinks AS xlinks_1 ON [_tXPSpecialLinks].toLinkID = xlinks_1.LinkID) ON ([_false_parallel_links_without_speciallink].DsNode = xlinks_1.DSNode) AND ([_false_parallel_links_without_speciallink].USNode = xlinks_1.USNode);
+
+
+_false_parallel_links_without_speciallink
+----------
+SELECT [_parallel_links].*
+FROM _parallel_links LEFT JOIN _tXPSpecialLinks ON [_parallel_links].LinkID = [_tXPSpecialLinks].toLinkID
+WHERE ((([_tXPSpecialLinks].toLinkID) Is Null));
 
 
 _getmaxdianodedn
@@ -457,6 +480,13 @@ SELECT Sum(XPXDataBF_QINST.DMII) AS SumOfDMII, Sum(XPXDataBF_SEWAGE.flow) AS Sum
 FROM XPXDataBF_QINST INNER JOIN XPXDataBF_SEWAGE ON XPXDataBF_QINST.Node = XPXDataBF_SEWAGE.Node;
 
 
+Query1
+----------
+SELECT [_tXPSpecialLinks].DSNode, xlinks.LinkID, xlinks.USIE, xlinks.USNode, xlinks.DSNode
+FROM _tXPSpecialLinks INNER JOIN xlinks ON [_tXPSpecialLinks].toLinkID = xlinks.LinkID
+WHERE ((([_tXPSpecialLinks].DSNode)="011SPL"));
+
+
 xlinks
 ----------
 SELECT IIf([isspeclink],"S"+CStr([linkid]),IIf([mlinkid]=0,"F"+CStr([linkid]),"M"+CStr([mlinkid]))) AS explink, mdl_Links_ac.LinkID, mdl_Links_ac.MLinkID, mdl_Links_ac.CompKey AS HLinkID, mdl_Links_ac.USNode, mdl_Links_ac.DSNode, mdl_Links_ac.PipeShape, mdl_Links_ac.USIE, mdl_Links_ac.DSIE, mdl_Links_ac.Length, mdl_Links_ac.Height, mdl_Links_ac.DiamWidth, Format$(IIf([length]=0,-99,(([usie]-[dsie])/[length])),"0.00000") AS xSlope, mdl_Links_ac.Material, mdl_Links_ac.AsBuilt, IIf(IsNull([_pipeshapes].[shape]),0.014,[_pipeshapes].[roughness]) AS Roughness, mdl_Links_ac.LinkType, mdl_Links_ac.LinkReach, mdl_Links_ac.ReachElement, mdl_Links_ac.IsSpecLink, mdl_Links_ac.PipeFlowType
@@ -471,8 +501,8 @@ FROM mdl_nodes_ac;
 
 XPLinks
 ----------
-SELECT IIf(IsNull([_parallel_links].[linkID]),[explink],[PlinkID]) AS xplink, IIf(IsNull([_parallel_links].[linkID]),0,[Plinkndx]) AS instance, IIf(IsNull([_tXPSpecialLinks].[toLinkID]),[xlinks].[usnode],[_tXPSpecialLinks].[DSnode]) AS USNODE, xLinks.DSNode, xLinks.PipeShape, IIf(IsNull([XPNKLASS]),100,[XPNKLASS]) AS xNKLass, xLinks.USIE, xLinks.DSIE, xLinks.Length, IIf(IsNull([_pipeshapes].[xpnklass]),86,IIf([_pipeshapes].[xpnklass]=1,[diamwidth],[xlinks].[height])) AS xHeight, IIf(IsNull([_pipeshapes].[xpnklass]),86,IIf([_pipeshapes].[xpnklass]=1,0,[xlinks].[diamwidth])) AS xWidth, xLinks.xSlope, [_PipeShapes].Roughness, xLinks.Material, IIf(IsNull([_parallel_links].[linkID]),"F","T") AS isparallel, xLinks.PipeFlowType
-FROM ((xLinks LEFT JOIN _parallel_links ON xLinks.LinkID = [_parallel_links].LinkID) LEFT JOIN _PipeShapes ON xLinks.PipeShape = [_PipeShapes].Shape) LEFT JOIN _tXPSpecialLinks ON xLinks.LinkID = [_tXPSpecialLinks].toLinkID;
+SELECT IIf(IsNull([_parallel_links].[linkID]),[explink],IIf(IsNull([_false_parallel_links].[linkID]),[PlinkID],[explink])) AS xplink, IIf(IsNull([_parallel_links].[linkID]),0,IIf(IsNull([_false_parallel_links].[linkID]),[Plinkndx],0)) AS instance, IIf(IsNull([_tXPSpecialLinks].[toLinkID]),[xlinks].[usnode],[_tXPSpecialLinks].[DSnode]) AS USNODE, xLinks.DSNode, xLinks.PipeShape, IIf(IsNull([XPNKLASS]),100,[XPNKLASS]) AS xNKLass, xLinks.USIE, xLinks.DSIE, xLinks.Length, IIf(IsNull([_pipeshapes].[xpnklass]),86,IIf([_pipeshapes].[xpnklass]=1,[diamwidth],[xlinks].[height])) AS xHeight, IIf(IsNull([_pipeshapes].[xpnklass]),86,IIf([_pipeshapes].[xpnklass]=1,0,[xlinks].[diamwidth])) AS xWidth, xLinks.xSlope, [_PipeShapes].Roughness, xLinks.Material, IIf(IsNull([_parallel_links].[linkID]),"F",IIf(IsNull([_false_parallel_links].[LinkID]),"T","F")) AS isparallel, xLinks.PipeFlowType
+FROM (((xLinks LEFT JOIN _parallel_links ON xLinks.LinkID = [_parallel_links].LinkID) LEFT JOIN _PipeShapes ON xLinks.PipeShape = [_PipeShapes].Shape) LEFT JOIN _tXPSpecialLinks ON xLinks.LinkID = [_tXPSpecialLinks].toLinkID) LEFT JOIN _false_parallel_links ON xLinks.LinkID = [_false_parallel_links].LinkID;
 
 
 XPNodes
@@ -616,7 +646,8 @@ FROM mdl_nodes_ac;
 XPXDataCName
 ----------
 SELECT DISTINCTROW "DATA CNAME" & [Plinkndx] AS EXPR1, Chr(34) & CStr([PlinkID]) & Chr(34) AS EXPR2, "0 1" AS EXPR3, Chr(34) & CStr([MlinkID]) & Chr(34) AS EXPR4
-FROM _parallel_links;
+FROM _parallel_links LEFT JOIN _false_parallel_links ON [_parallel_links].LinkID = [_false_parallel_links].LinkID
+WHERE ((([_false_parallel_links].LinkID) Is Null));
 
 
 XPXDataCNTLS
@@ -664,6 +695,14 @@ SELECT DISTINCTROW "DATA DEEP" AS EXPR1, Chr(34) & Trim([conduit_name]) & Chr(34
 FROM tblConduitData
 WHERE (((tblConduitData.Link_Type)="6" Or (tblConduitData.Link_Type)="2"))
 ORDER BY Chr(34) & Trim([conduit_name]) & Chr(34);
+
+
+XPXDataDORIF
+----------
+SELECT DISTINCTROW "DATA DORIF" AS Expr1, Chr(34) & [speclinkID] & Chr(34) AS EXPR2, [ToLinkNDX] & " 1" AS Expr4, [_XPSpecialLinkData].TValue
+FROM _XPSpecialLinkData
+WHERE ((([_XPSpecialLinkData].Tag)="DORIF"))
+ORDER BY Chr(34) & [speclinkID] & Chr(34);
 
 
 XPXDataFLGOUTF
@@ -760,8 +799,8 @@ ORDER BY Chr(34) & Trim([xplink]) & Chr(34);
 XPXDataNKCTL
 ----------
 SELECT DISTINCTROW "DATA NKCTL" AS EXPR1, Chr(34) & [xplink] & Chr(34) AS EXPR2, [instance] & " 1" AS Expr3, [_PipeShapes].XLNKCTL AS Expr4, "/* " & [xplinks].[PipeShape] & "*/" AS comment
-FROM xpLinks, _PipeShapes
-WHERE ((([_PipeShapes].[XLNKCTL]) Is Not Null And ([_PipeShapes].[XLNKCTL])<>0));
+FROM xpLinks INNER JOIN _PipeShapes ON xpLinks.PipeShape = [_PipeShapes].Shape
+WHERE ((([_PipeShapes].XLNKCTL) Is Not Null And ([_PipeShapes].XLNKCTL)<>0));
 
 
 XPXDataNKLass
@@ -769,13 +808,6 @@ XPXDataNKLass
 SELECT DISTINCTROW "DATA NKLASS" AS expr1, Chr(34) & Trim([xplink]) & Chr(34) AS EXPR2, [instance] & " 1" AS Expr3, xpLinks.xNKLass AS Expr4, "/* " & [PipeShape] & "*/" AS Expr5
 FROM xpLinks
 ORDER BY Chr(34) & Trim([xplink]) & Chr(34);
-
-
-XPXDataNKLassC
-----------
-SELECT DISTINCTROW "DATA NKLASSc" AS EXPR1, Chr(34) & [conduit_name] & Chr(34) AS EXPR2, (IIf([tblConduitData]![Multi_or_Single]="138",[INSTANCE],"0")) & " 1" AS EXPR3, tblConduitData.Flapgate AS Expr4
-FROM tblConduitData, _Outfalls
-WHERE ((([tblConduitData].[Flapgate]) Is Not Null And ([tblConduitData].[Flapgate])<>0));
 
 
 XPXDataNKLassNEW
@@ -1155,9 +1187,9 @@ SELECT DISTINCTROW "LINK 138" AS expr1, Chr(34) & Trim([SpeclinkID]) & Chr(34) A
 FROM _XPSpecialLinks
 ORDER BY Chr(34) & Trim([SpeclinkID]) & Chr(34);
 
-UNION SELECT "LINK 138" AS expr1,  Chr(34) & Trim([PLinkID]) & chr(34) as expr2, chr(34) & Trim([USNode]) & chr(34) as expr3, 
-Chr(34) & trim$([dsNode]) & chr(34) as expr4
-FROM _XPParallelLinks;
+UNION SELECT "LINK 138" AS expr1, Chr(34) & Trim([_XPParallelLinks].[PLinkID]) & Chr(34) AS expr2, Chr(34) & Trim([_XPParallelLinks].[USNode]) & Chr(34) AS expr3, Chr(34) & Trim$([_XPParallelLinks].[dsNode]) & Chr(34) AS expr4
+FROM _false_parallel_links RIGHT JOIN (_XPParallelLinks INNER JOIN _parallel_links ON [_XPParallelLinks].PLinkID = [_parallel_links].PLinkID) ON [_false_parallel_links].LinkID = [_parallel_links].LinkID
+WHERE ((([_false_parallel_links].LinkID) Is Null));
 
 
 XPXNode
