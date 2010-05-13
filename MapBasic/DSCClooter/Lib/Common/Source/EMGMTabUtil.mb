@@ -1,0 +1,286 @@
+'
+'	Module to deal with column checks and related table manipulations
+'
+include "MapBasic.def"
+include "..\inc\EMGMTabUtil.def"
+include "..\inc\EMGLogger.def"
+
+
+Define BIF_RETURNONLYFSDIRS 1 
+Define BIF_DONTGOBELOWDOMAIN 2 
+Define MAX_PATH 260 
+
+Type BrowseInfo 
+	hWndOwner As Integer 
+	pIDLRoot As Integer 
+	pszDisplayName As integer 
+	lpszTitle As String 
+	ulFlags As Integer 
+	lpfnCallBack As Integer 
+	lParam As Integer 
+	iImage As Integer 
+End Type 
+
+Declare Function SHBrowseForFolder Lib "shell32" ( 
+	lpbi As BrowseInfo) 
+As Integer 
+Declare Function SHGetPathFromIDList Lib "shell32" 
+	Alias "SHGetPathFromIDList" ( 
+	byval pidList As Integer, 
+	lpBuffer As String) 
+As Integer 
+
+
+Function APIBrowseFolders(ByVal szTitle as string) as string
+
+Dim lpIDList, retVal As Integer 
+Dim sBuffer As String 
+Dim tBrowseInfo As BrowseInfo 
+
+tBrowseInfo.hWndOwner = SystemInfo(SYS_INFO_MAPINFOWND) 
+tBrowseInfo.lpszTitle = szTitle 
+tBrowseInfo.ulFlags = BIF_RETURNONLYFSDIRS + BIF_DONTGOBELOWDOMAIN 
+
+lpIDList = SHBrowseForFolder(tBrowseInfo) 
+
+If (lpIDList) Then 
+	sBuffer = space$(MAX_PATH) 
+	retVal = SHGetPathFromIDList(lpIDList, sBuffer) 
+	APIBrowseFolders = sBuffer 
+	print "Browse Folder Result: " & sBuffer
+End If 
+
+End Function
+
+
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+'
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+Function		TabHasReqColumns(ByVal TName as string, ColErrs as string) as logical
+Dim NumCols as Integer
+Dim LoopCount as Integer
+Dim ColQuery as String
+Dim ColName as String
+Dim		ColCount as integer
+Dim		ColLoop as integer
+Dim		ColFound as logical
+Dim		ColType as smallint
+Dim		ColWidth as smallint
+
+	call Loggit( "Checking for required columns")
+	TabHasReqColumns = FALSE
+	NumCols = TableInfo (TName, TAB_INFO_NCOLS)
+	'ColCount = ubound(gReqCols)
+	ColCount = gReqColCount
+	ColErrs = ""
+
+	call loggit ( "   There are " & str$(ColCount) & " required columns.")
+
+	For ColLoop = 1 to ColCount
+	'	See if the column name exists...
+
+		ColFOund = FALSE
+		For LoopCount = 1 to NumCols
+			ColQuery = "Col" + LTrim$(str$(LoopCount))
+			ColName = ColumnInfo(TName, ColQuery, COL_INFO_NAME)
+			If ColName = gReqCols(ColLoop).Name then
+				ColFound = TRUE
+				Exit For
+			End IF			
+
+		Next
+		if not ColFound then
+			ColErrs = ColErrs & " Column '" & greqCols(ColLoop).Name & "' not found."
+
+		else			' Column is there make the other checks
+			ColType = ColumnInfo(TName, ColQuery, COL_INFO_TYPE)
+			ColWidth = ColumnInfo(TName, ColQuery, COL_INFO_WIDTH)
+
+			If ColType <> gReqCols(ColLoop).Type then
+				ColErrs = ColErrs & " Column " & greqCols(ColLoop).Name & " type " & ColType &
+							" wanted " & str$(gReqCols(ColLoop).Type) 
+			else		' col has correct type, check width if needed.
+				if ColType = COL_TYPE_CHAR or ColType = COL_TYPE_DECIMAL then
+					If ColWidth > gReqCols(ColLoop).Width then
+						ColErrs = ColErrs & " Column " & greqCols(ColLoop).Name & " Width " & ColWidth &
+							" wanted " & str$(gReqCols(ColLoop).Width) 
+					end if
+				end if
+			end if
+			
+		end if
+
+	Next
+	If ColErrs = "" then
+		TabHasReqColumns = TRUE
+	end if
+End Function
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+'
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+Sub		CheckOrCreateAuditColumns(ByVal TableName as string, ByVal AddOrDel as string)
+Dim		LoopCount as integer
+Dim		LoopMax as integer
+Dim		lResult as logical
+
+	print "Add '" & AddOrDel & "' to table " & TableName
+	do case ucase$(AddOrDel)
+		case "ADD"
+			LoopMax = ubound(gAuditColAdd)
+			For LoopCount = 1 to LoopMax
+				lResult = CheckOrCreateColumn(TableName, gAuditColAdd(LoopCount).Name, gAuditColAdd(LoopCount).Type)
+
+			Next
+		case "DEL"
+			LoopMax = ubound(gAuditColDel)
+			For LoopCount = 1 to LoopMax
+				lResult = CheckOrCreateColumn(TableName, gAuditColDel(LoopCount).Name, gAuditColDel(LoopCount).Type)
+			Next
+
+		case else
+			gstrReturnStatus = "ERROR"
+			gstrCurrentMessage = "Unexpected parameter to CheckOrCreateAuditColumns: " & AddOrDel
+			call loggit(gstrCurrentMessage)
+	end case
+End Sub
+' ======================================================================
+'
+'
+' ======================================================================
+Function IsColumnThere(ByVal sTabName as String, sColName as String) as Logical
+Dim NumCols as Integer
+Dim LoopCount as Integer
+Dim ColQuery as String
+Dim ColName as String
+
+	IsColumnThere = FALSE
+	'	See if the column name exists...
+	NumCols = TableInfo (sTabName, TAB_INFO_NCOLS)
+
+	For LoopCount = 1 to NumCols
+		ColQuery = "Col" + LTrim$(str$(LoopCount))
+		ColName = ColumnInfo(sTabname, ColQuery, COL_INFO_NAME)
+		If ColName = sColName then
+			IsColumnThere = TRUE
+			Exit Function
+		End IF			
+
+	Next
+
+End Function
+' ======================================================================
+'	CheckOrCreateColumn
+'		TableName		The alias of the table containing the column
+'		ColName		The name of the column to check for
+'		ColType		The data type if the column needs to be created.
+'
+'	Assumes the table is open...
+'	Further, does not check to see that the data type matches if the column
+'		already exists.
+'
+' ======================================================================
+Function CheckOrCreateColumn( 
+	ByVal sTabName as string, 
+	ByVal sColname as string, 
+	ByVal SColType as String 
+	) as Logical
+Dim 	AlterTableText as String
+
+	If NOT IsColumnThere (sTabName, sColname) Then
+	'	The column name does not exist.
+		Commit Table sTabName
+		AlterTableText = "Alter Table " + sTabname + " (Add " + sColname + " " + sColType + ")"
+		Run Command AlterTableText
+	End If
+	CheckorCreateColumn = TRUE
+End Function
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+'
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+Function IsTableOpen(Byval TName as string) as logical
+Dim		l as Logical
+Dim		TabCount as integer
+Dim		LoopCount as integer
+
+	TabCount = Numtables()
+	IsTableOpen = False
+	For LoopCount = 1 to TabCount
+		If TName = TableInfo(LoopCount, TAB_INFO_NAME) then
+			IsTableOpen = TRUE
+			Exit function
+		end if
+	Next	
+
+
+End Function
+' ======================================================================
+'	OpenTable
+'		Path			The file path, not including table name
+'					of the physical location of the table in case
+'					it needs to be opened.  If the table is already
+'					open there is no promise that it came from this
+'					location.
+'		Name			The name of the *.TAB file.
+'		Alias			The Alias used to open the file.
+'		Gentle		If true, then don't ask for table name/location, just
+'					fail nicely.
+'
+' ======================================================================
+Function OpenTable(sPathName As String,  ByVal sTabName as String, ByVal sAlias as String, ByVal Gentle as logical) As Logical
+Dim	Username as String
+  
+  OnError Goto NotOpen
+  Dim l As Logical
+
+	'print "Request is: " + sPathName + sTabname + " as " + sAlias
+  l = TableInfo(sAlias, TAB_INFO_READONLY)
+
+  OpenTable = TRUE
+  Exit Function
+IsOpenTable:
+  OnError goto NoTable
+  If Right$(sPathName, 1) <> "\" then
+	sPathName = sPathName + "\"
+  End If
+  UserName = sPathName + sTabName
+DlgName:
+'	print "Trying to open " + Username + " as " + sAlias
+  Open Table Username as sAlias
+  OnError goto 0
+  sPathName = PathToDirectory$(UserName)
+  OpenTable = TRUE
+  Exit Function	
+NotOpen:
+'	print "Not open..."
+  OpenTable = FALSE
+  Resume IsOpenTable
+NoTable:
+	if Gentle then
+		OpenTable = FALSE
+		Exit Function
+	end if
+'	print "Unable to open..."
+  UserName = FileOpenDLG(sPathName, sTabName, "TAB", "Please locate table: " + sAlias + " (" + sPathName + sTabname + ")" )
+	
+  If Username = "" Then
+  	OpenTable = FALSE
+  	Exit Function
+  Else
+  	Resume DlgName
+  End If
+End Function
+
+' ======================================================================
+
+'	make sure there is a closing slash on a folder name
+' ======================================================================
+Function FixFolderSlash(ByVal FolderName as string) as string
+	if right$(FolderName,1) <> "\" then
+		FixFolderSlash = FolderName & "\"
+	else
+		FixFolderSlash = FolderName
+	end if
+End Function
+

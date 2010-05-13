@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<namespace name="uXPResultsProcessor">
+  <class name="TXPResultsProcessor">
+    <ancestor name="TObject" namespace="System">
+      <methodref name="Create" visibility="public">
+      </methodref>
+      <methodref name="Free" visibility="public">
+      </methodref>
+      <methodref name="InitInstance" visibility="public">
+      </methodref>
+      <methodref name="CleanupInstance" visibility="public">
+      </methodref>
+      <methodref name="ClassType" visibility="public">
+      </methodref>
+      <methodref name="ClassName" visibility="public">
+      </methodref>
+      <methodref name="ClassNameIs" visibility="public">
+      </methodref>
+      <methodref name="ClassParent" visibility="public">
+      </methodref>
+      <methodref name="ClassInfo" visibility="public">
+      </methodref>
+      <methodref name="InstanceSize" visibility="public">
+      </methodref>
+      <methodref name="InheritsFrom" visibility="public">
+      </methodref>
+      <methodref name="MethodAddress" visibility="public">
+      </methodref>
+      <methodref name="MethodName" visibility="public">
+      </methodref>
+      <methodref name="FieldAddress" visibility="public">
+      </methodref>
+      <methodref name="GetInterface" visibility="public">
+      </methodref>
+      <methodref name="GetInterfaceEntry" visibility="public">
+      </methodref>
+      <methodref name="GetInterfaceTable" visibility="public">
+      </methodref>
+      <methodref name="SafeCallException" visibility="public">
+      </methodref>
+      <methodref name="AfterConstruction" visibility="public">
+      </methodref>
+      <methodref name="BeforeDestruction" visibility="public">
+      </methodref>
+      <methodref name="Dispatch" visibility="public">
+      </methodref>
+      <methodref name="DefaultHandler" visibility="public">
+      </methodref>
+      <methodref name="NewInstance" visibility="public">
+      </methodref>
+      <methodref name="FreeInstance" visibility="public">
+      </methodref>
+      <methodref name="Destroy" visibility="public">
+      </methodref>
+    </ancestor>
+    <members>
+      <field name="dmodXPExport" type="TdmodXPExport" visibility="private" />
+      <field name="fResultsStorePath" type="TFileName" visibility="private" />
+      <field name="fResultsPath" type="TFileName" visibility="private" />
+      <field name="InStream" type="TFileStream" visibility="private" />
+      <field name="InTextStream" type="TStAnsiTextStream" visibility="private" />
+      <field name="CurrentLine" type="string" visibility="private" />
+      <field name="fBeginTime" type="TDateTime" visibility="private" />
+      <field name="fVersionNum" type="Double" visibility="private" />
+      <function name="GetResultsPath" visibility="private">
+        <parameters>
+          <retval type="TFileName" />
+        </parameters>
+      </function>
+      <function name="GetResultsStorePath" visibility="private">
+        <parameters>
+          <retval type="TFileName" />
+        </parameters>
+      </function>
+      <function name="GetResultsStoreConnectionString" visibility="private">
+        <parameters>
+          <retval type="string" />
+        </parameters>
+      </function>
+      <procedure name="ConnectResultsStore" visibility="private">
+      </procedure>
+      <procedure name="CreateResultsStore" visibility="private">
+        <devnotes>
+          <summary>
+            Build tables for the results store
+          </summary>
+        </devnotes>
+      </procedure>
+      <procedure name="LoadResultsStore" visibility="private">
+        <devnotes>
+          <summary>
+            Load an existing results store
+          </summary>
+        </devnotes>
+      </procedure>
+      <procedure name="ClearResultsStore" visibility="private">
+        <devnotes>
+          <summary>
+            Drop tables from the results store if they already exist
+          </summary>
+        </devnotes>
+      </procedure>
+      <procedure name="BuildResultsTables" visibility="private">
+      </procedure>
+      <procedure name="PrepareReading" visibility="private">
+      </procedure>
+      <procedure name="ReadVersion" visibility="private">
+      </procedure>
+      <procedure name="ReadBeginTime" visibility="private">
+      </procedure>
+      <procedure name="ReadJunctionSummary" visibility="private">
+      </procedure>
+      <procedure name="ReadConduitSummary" visibility="private">
+      </procedure>
+      <procedure name="ReadJunctionFloodingAndVolume" visibility="private">
+      </procedure>
+      <procedure name="CreateHGLTable" visibility="private">
+      </procedure>
+      <procedure name="FinalizeReading" visibility="private">
+      </procedure>
+      <constructor name="Create" visibility="public">
+        <parameters>
+        </parameters>
+      </constructor>
+      <destructor name="Destroy" visibility="public">
+        <parameters>
+        </parameters>
+      </destructor>
+      <procedure name="ProcessResults" visibility="public">
+        <parameters>
+          <parameter name="ResultsFile" type="TFileName" />
+          <parameter name="ResultsStore" type="TFileName" />
+        </parameters>
+      </procedure>
+      <property name="VersionNum" visibility="public" read="fVersionNum" type="Double" />
+      <property name="BeginTime" visibility="public" read="fBeginTime" type="TDateTime" />
+      <property name="ResultsStorePath" visibility="public" read="GetResultsStorePath" write="fResultsStorePath" type="TFileName" />
+      <property name="ResultsStoreConnectionString" visibility="public" read="GetResultsStoreConnectionString" type="string" />
+      <property name="ResultsPath" visibility="public" read="GetResultsPath" write="fResultsPath" type="TFileName" />
+    </members>
+  </class>
+</namespace>

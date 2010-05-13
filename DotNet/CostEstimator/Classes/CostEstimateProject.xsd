@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="XMLSchema1" targetNamespace="http://tempuri.org/XMLSchema1.xsd" elementFormDefault="qualified" xmlns="http://tempuri.org/XMLSchema1.xsd" xmlns:mstns="http://tempuri.org/XMLSchema1.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="CostEstimatorProject">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Factors" type="CostFactor">
+        </xs:element>
+        <xs:element name="CostItems" type="CostItem">
+        </xs:element>
+        <xs:element name="CostItemFactors" type="CostItemFactor" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="CostItemFactor">
+    <xs:sequence>
+      <xs:element name="name" type="xs:string" />
+      <xs:element name="description" type="xs:string" />
+      <xs:element name="quantity" type="xs:double" />
+      <xs:element name="childCostItemFactors" type="CostItemFactor" maxOccurs="unbounded" minOccurs="0" />
+      <xs:element name="costItem" type="CostItem" />
+      <xs:element name="costFactors" type="CostFactor" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CostItem">
+    <xs:sequence>
+      <xs:element name="name" type="xs:string" />
+      <xs:element name="quantity" type="xs:double" />
+      <xs:element name="unitCost" type="xs:decimal" />
+      <xs:element name="unitName" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CostFactor">
+    <xs:sequence>
+      <xs:element name="name" type="xs:string" />
+      <xs:element name="factorType" type="xs:string" />
+      <xs:element name="factorValue" type="xs:double" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="excel_char.xsl" ?>
+<ReportGenerator reportName="SSSP Characterization Report" studyArea="" >
+	<CharacterizationTable tableNumber="1" tableTitle="Overview of Collection System Performance" columnCount="5">
+		<Header>
+			<Cell data="Criteria" cellType="COLUMNNAME" footerID=""></Cell>
+			<Cell data="2-Year Storm Existing Conditions" cellType="COLUMNNAME"></Cell>
+			<Cell data="5-Year Storm Existing Conditions" cellType="COLUMNNAME"></Cell>
+			<Cell data="25-Year Storm Existing Conditions" cellType="COLUMNNAME"></Cell>
+			<Cell data="25-Year Storm Future Conditions" cellType="COLUMNNAME"></Cell>
+		</Header>
+		<Row>
+			<Cell data="Pipe Surcharge: Percent of study area where the hydraulic grade line is &gt; 4 feet above the pipe crown"
+				cellType="ROWNAME" footerID="a"></Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeSurchargeCount">
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="ScenarioID" parameterValue="1"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="3.99999"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeSurchargeCount">
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="ScenarioID" parameterValue="2"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="3.99999"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeSurchargeCount">
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="ScenarioID" parameterValue="3"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="3.99999"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeSurchargeCount">
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="ScenarioID" parameterValue="4"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="3.99999"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+		</Row>
+		<Row>
+			<Cell data="Deficient Pipe Capacity: Percent of the study area with peak flow to design flow ratio &gt; 1.2" cellType="ROWNAME"
+				footerID="a"></Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatio">
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="ScenarioID" parameterValue="1"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="1.19999"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatio">
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="ScenarioID" parameterValue="2"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="1.19999"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatio">
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="ScenarioID" parameterValue="3"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="1.19999"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatio">
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="ScenarioID" parameterValue="4"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="1.19999"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+		</Row>
+		<Row>
+			<Cell data="Basement Sewer Backup Risk: Percent of study are where hydraulic grade line is within 0 to 8 feet of finished floor."
+				cellType="ROWNAME" footerID="b"></Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="SewerBackupRisk">
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="ScenarioID" parameterValue="1"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="8"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="SewerBackupRisk">
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="ScenarioID" parameterValue="2"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="8"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="SewerBackupRisk">
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="ScenarioID" parameterValue="3"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="8"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="SewerBackupRisk">
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="ScenarioID" parameterValue="4"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="8"></Parameter>
+				</Function>
+			</Cell>
+		</Row>
+		<Footer footerID="a" footerText="Based on number of pipe segments."></Footer>
+		<Footer footerID="b" footerText="Based on number of direct subcatchments as defined in EMD-074, provided in Appendix A of the Combined Sewer System Plan Characterization Summary Report."></Footer>
+	</CharacterizationTable>	
+</ReportGenerator>

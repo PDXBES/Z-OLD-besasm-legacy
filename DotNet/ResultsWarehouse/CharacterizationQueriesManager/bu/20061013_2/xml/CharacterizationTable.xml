@@ -1,0 +1,2215 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="excel_char.xsl" ?>
+<StudyArea studyArea="" >
+	<CharacterizationTable tableNumber="1" tableTitle="Overview of Collection System Performance" columnCount="5">
+		<Header>
+			<Cell data="Criteria" cellType="COLUMNNAME" footerID=""></Cell>
+			<Cell data="2-Year Storm Existing Conditions" cellType="COLUMNNAME"></Cell>
+			<Cell data="5-Year Storm Existing Conditions" cellType="COLUMNNAME"></Cell>
+			<Cell data="25-Year Storm Existing Conditions" cellType="COLUMNNAME"></Cell>
+			<Cell data="25-Year Storm Future Conditions" cellType="COLUMNNAME"></Cell>
+		</Header>
+		<Row>
+			<Cell data="Pipe Surcharge: Percent of study area where the hydraulic grade line is &gt; 4 feet above the pipe crown"
+				cellType="ROWNAME" footerID="a"></Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeSurchargeCount">
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="ScenarioID" parameterValue="1"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="3.99999"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeSurchargeCount">
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="ScenarioID" parameterValue="2"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="3.99999"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeSurchargeCount">
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="ScenarioID" parameterValue="3"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="3.99999"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeSurchargeCount">
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="ScenarioID" parameterValue="4"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="3.99999"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+		</Row>
+		<Row>
+			<Cell data="Deficient Pipe Capacity: Percent of the study area with peak flow to design flow ratio &gt; 1.2" cellType="ROWNAME"
+				footerID="a"></Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatio">
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="ScenarioID" parameterValue="1"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="1.19999"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatio">
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="ScenarioID" parameterValue="2"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="1.19999"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatio">
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="ScenarioID" parameterValue="3"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="1.19999"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatio">
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="ScenarioID" parameterValue="4"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="1.19999"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+		</Row>
+		<Row>
+			<Cell data="Basement Sewer Backup Risk: Percent of study are where hydraulic grade line is within 0 to 8 feet of finished floor."
+				cellType="ROWNAME" footerID="b"></Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="SewerBackupRisk">
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="ScenarioID" parameterValue="1"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="8"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="SewerBackupRisk">
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="ScenarioID" parameterValue="2"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="8"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="SewerBackupRisk">
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="ScenarioID" parameterValue="3"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="8"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="SewerBackupRisk">
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="ScenarioID" parameterValue="4"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="8"></Parameter>
+				</Function>
+			</Cell>
+		</Row>
+		<Footer footerID="a" footerText="Based on number of pipe segments."></Footer>
+		<Footer footerID="b" footerText="Based on number of direct subcatchments as defined in EMD-074, provided in Appendix A of the Combined Sewer System Plan Characterization Summary Report."></Footer>
+	</CharacterizationTable>
+	<CharacterizationTable tableNumber="2" tableTitle="Zoning and Effective Impervious Area" columnCount="9">
+		<Header>
+			<Cell data="" cellType="COLUMNNAME"></Cell>
+			<Cell data="Total Area (acres)" cellType="COLUMNNAME" footerID=""></Cell>
+			<Cell data="Single Family Residential (acres)" cellType="COLUMNNAME" footerID=""></Cell>
+			<Cell data="Mutli-Family Residential (acres)" cellType="COLUMNNAME" footerID=""></Cell>
+			<Cell data="Industrial (acres)" cellType="COLUMNNAME" footerID=""></Cell>
+			<Cell data="Commercial (acres)" cellType="COLUMNNAME" footerID=""></Cell>
+			<Cell data="Parks and Open Spaces (acres)" cellType="COLUMNNAME" footerID=""></Cell>
+			<Cell data="Other (acres)" cellType="COLUMNNAME" footerID=""></Cell>
+			<Cell data="Effective Impervious Area (acres)" cellType="COLUMNNAME" footerID="*"></Cell>
+		</Header>
+		<Row>
+			<Cell data="Existing (2006)" cellType="ROWNAME"></Cell>
+			<Cell cellType="CONST" data="Manual Entry"></Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="AreaByLanduse">
+					<Parameter parameterName="IsFraction" parameterValue="false"></Parameter>
+					<Parameter parameterName="TimeFrame" parameterValue="EX"></Parameter>
+					<Parameter parameterName="LandUse" parameterValue="SFR"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="AreaByLanduse">
+					<Parameter parameterName="IsFraction" parameterValue="false"></Parameter>
+					<Parameter parameterName="TimeFrame" parameterValue="EX"></Parameter>
+					<Parameter parameterName="LandUse" parameterValue="MFR"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="AreaByLanduse">
+					<Parameter parameterName="IsFraction" parameterValue="false"></Parameter>
+					<Parameter parameterName="TimeFrame" parameterValue="EX"></Parameter>
+					<Parameter parameterName="LandUse" parameterValue="IND"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="AreaByLanduse">
+					<Parameter parameterName="IsFraction" parameterValue="false"></Parameter>
+					<Parameter parameterName="TimeFrame" parameterValue="EX"></Parameter>
+					<Parameter parameterName="LandUse" parameterValue="COM"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="AreaByLanduse">
+					<Parameter parameterName="IsFraction" parameterValue="false"></Parameter>
+					<Parameter parameterName="TimeFrame" parameterValue="EX"></Parameter>
+					<Parameter parameterName="LandUse" parameterValue="POS"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="CONST" data="Manual Entry"></Cell>
+			<Cell cellType="CONST" data="Manual Entry"></Cell>
+		</Row>
+		<Row>
+			<Cell data="Future (2040)" cellType="ROWNAME"></Cell>
+			<Cell cellType="CONST" data="Manual Entry"></Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="AreaByLanduse">
+					<Parameter parameterName="IsFraction" parameterValue="false"></Parameter>
+					<Parameter parameterName="TimeFrame" parameterValue="FU"></Parameter>
+					<Parameter parameterName="LandUse" parameterValue="SFR"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="AreaByLanduse">
+					<Parameter parameterName="IsFraction" parameterValue="false"></Parameter>
+					<Parameter parameterName="TimeFrame" parameterValue="FU"></Parameter>
+					<Parameter parameterName="LandUse" parameterValue="MFR"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="AreaByLanduse">
+					<Parameter parameterName="IsFraction" parameterValue="false"></Parameter>
+					<Parameter parameterName="TimeFrame" parameterValue="FU"></Parameter>
+					<Parameter parameterName="LandUse" parameterValue="IND"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="AreaByLanduse">
+					<Parameter parameterName="IsFraction" parameterValue="false"></Parameter>
+					<Parameter parameterName="TimeFrame" parameterValue="FU"></Parameter>
+					<Parameter parameterName="LandUse" parameterValue="COM"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="AreaByLanduse">
+					<Parameter parameterName="IsFraction" parameterValue="false"></Parameter>
+					<Parameter parameterName="TimeFrame" parameterValue="FU"></Parameter>
+					<Parameter parameterName="LandUse" parameterValue="POS"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="CONST" data="Manual Entry"></Cell>
+			<Cell cellType="CONST" data="Manual Entry"></Cell>
+		</Row>
+		<Footer footerID="*" footerText="For information about how effective impervious area is calculated, refer to EMD-074, provided in Appendix A of the Summary Report."></Footer>
+	</CharacterizationTable>
+	<CharacterizationTable tableNumber="3" tableTitle="Collection System Features" columnCount="4">
+		<Header>
+			<Cell data="Feature" cellType="COLUMNNAME"></Cell>
+			<Cell data="No. of Segments" cellType="COLUMNNAME"></Cell>
+			<Cell data="Length (miles)" cellType="COLUMNNAME"></Cell>
+			<Cell data="Maximum Diameter" cellType="COLUMNNAME"></Cell>			
+		</Header>
+		<Row>
+			<Cell data="Combined sewer" cellType="ROWNAME"></Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeSegmentCount">
+					<Parameter parameterName="IsFraction" parameterValue="false"></Parameter>
+					<Parameter parameterName="LinkType" parameterValue="C"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeSegmentLength">
+					<Parameter parameterName="IsFraction" parameterValue="false"></Parameter>
+					<Parameter parameterName="LinkType" parameterValue="C"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="MaxPipeDiameter">
+					<Parameter parameterName="IsFraction" parameterValue="false"></Parameter>
+					<Parameter parameterName="LinkType" parameterValue="C"></Parameter>
+				</Function>
+			</Cell>			
+		</Row>
+		<Row>
+			<Cell data="Stormwater" cellType="ROWNAME"></Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeSegmentCount">
+					<Parameter parameterName="IsFraction" parameterValue="false"></Parameter>
+					<Parameter parameterName="LinkType" parameterValue="D"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeSegmentLength">
+					<Parameter parameterName="IsFraction" parameterValue="false"></Parameter>
+					<Parameter parameterName="LinkType" parameterValue="D"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="MaxPipeDiameter">
+					<Parameter parameterName="IsFraction" parameterValue="false"></Parameter>
+					<Parameter parameterName="LinkType" parameterValue="D"></Parameter>
+				</Function>
+			</Cell>			
+		</Row>
+		<Row>
+			<Cell data="Sanitary sewer" cellType="ROWNAME"></Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeSegmentCount">
+					<Parameter parameterName="IsFraction" parameterValue="false"></Parameter>
+					<Parameter parameterName="LinkType" parameterValue="S"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeSegmentLength">
+					<Parameter parameterName="IsFraction" parameterValue="false"></Parameter>
+					<Parameter parameterName="LinkType" parameterValue="S"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="MaxPipeDiameter">
+					<Parameter parameterName="IsFraction" parameterValue="false"></Parameter>
+					<Parameter parameterName="LinkType" parameterValue="S"></Parameter>
+				</Function>
+			</Cell>			
+		</Row>
+		<Row>
+			<Cell data="Interceptor" cellType="COLUMNNAME"></Cell>			
+			<Cell data="Length (miles)" cellType="COLUMNNAME"></Cell>
+			<Cell data="Notes" cellType="COLUMNNAME" colSpan="2"></Cell>			
+		</Row>
+		<Row>
+			<Cell cellType="CONST" data="Manual Entry"></Cell>			
+			<Cell cellType="CONST" data="..."></Cell>
+			<Cell cellType="CONST" data="..." colSpan="2"></Cell>			
+		</Row>
+	</CharacterizationTable>
+	<CharacterizationTable tableNumber="4" tableTitle="Diversion Locations and Locations of Future Connections to Tunnel System"
+		columnCount="6">
+		<Header>
+			<Cell data="Location" cellType="COLUMNNAME"></Cell>
+			<Cell data="Node ID" cellType="COLUMNNAME"></Cell>
+			<Cell data="Diversion ID" cellType="COLUMNNAME"></Cell>
+			<Cell data="Node Type" cellType="COLUMNNAME"></Cell>
+			<Cell data="Status" cellType="COLUMNNAME"></Cell>
+			<Cell data="Outfall ID" cellType="COLUMNNAME"></Cell>
+		</Header>
+		<Row isMultiRow="true" multiRowKey="DivNodeList">
+			<Cell cellType="FUNCTION">
+				<Function functionName="DivLocation" />
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="DivNodeID" />
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="DivID" />
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="DivNodeType" />
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="DivStatus" />
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="DivOutfallID" />
+			</Cell>
+		</Row>
+	</CharacterizationTable>
+	<CharacterizationTable tableNumber="5" tableTitle="Pump Station and Force Main" columnCount="5" isMultiTable="true"
+		multiTableKey="PumpStationList">
+		<Row>
+			<Cell cellType="SUBCOLUMN" data="Name" colSpan="2"></Cell>
+			<Cell cellType="SUBCOLUMN" data="Flow Type"></Cell>
+			<Cell cellType="SUBCOLUMN" data="Firm Capacity"></Cell>
+			<Cell cellType="SUBCOLUMN" data="Full Capacity"></Cell>
+		</Row>
+		<Row>
+			<Cell cellType="FUNCTION" colSpan="2">
+				<Function functionName="PSName"></Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PSType"></Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PSFirmCapacity"></Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PSFullCapacity"></Function>
+			</Cell>
+		</Row>
+		<Row>
+			<Cell cellType="EMPHASIS" data="Location:"></Cell>
+			<Cell cellType="FUNCTION" colSpan="2">
+				<Function functionName="PSLocation"></Function>
+			</Cell>
+			<Cell cellType="BLANK"></Cell>
+			<Cell cellType="BLANK"></Cell>
+		</Row>
+		<Row>
+			<Cell cellType="SUBCOLUMN"></Cell>
+			<Cell cellType="SUBCOLUMN" data="Wet Well:"></Cell>
+			<Cell cellType="SUBCOLUMN" data="Dimensions"></Cell>
+			<Cell cellType="SUBCOLUMN" data="Volume"></Cell>
+			<Cell cellType="SUBCOLUMN" data="Bypass"></Cell>
+		</Row>
+		<Row isMultiRow="true" multiRowKey="PSWetWellList">
+			<Cell cellType="BLANK"></Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PSWetWellNum"></Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PSWetWellDimensions"></Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PSWetWellVolume"></Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PSWetWellBypass"></Function>
+			</Cell>
+		</Row>
+		<Row>
+			<Cell cellType="BLANK"></Cell>
+			<Cell cellType="SUBCOLUMN" data="Force Main:"></Cell>
+			<Cell cellType="SUBCOLUMN" data="Diameter"></Cell>
+			<Cell cellType="SUBCOLUMN" data="Length"></Cell>
+			<Cell cellType="SUBCOLUMN" data="Static Head"></Cell>
+		</Row>
+		<Row isMultiRow="true" multiRowKey="PSForceMainList">
+			<Cell cellType="BLANK"></Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PSForceMainID"></Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PSForceMainDiameter"></Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PSForceMainLength"></Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PSForceMainHead"></Function>
+			</Cell>
+		</Row>
+		<Row>
+			<Cell cellType="BLANK"></Cell>
+			<Cell cellType="SUBCOLUMN" data="Pump Data:"></Cell>
+			<Cell cellType="SUBCOLUMN" data="Motor Speed"></Cell>
+			<Cell cellType="SUBCOLUMN" data="Horsepower"></Cell>
+			<Cell cellType="SUBCOLUMN" data="Capacity"></Cell>
+		</Row>
+		<Row isMultiRow="true" multiRowKey="PSPumpList">
+			<Cell cellType="BLANK"></Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PSPumpNumber"></Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PSPumpMotorSpeed"></Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PSPumpHP"></Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PSPumpCapacity"></Function>
+			</Cell>
+		</Row>
+	</CharacterizationTable>
+	<CharacterizationTable tableNumber="6" tableTitle="Roof and Parking Area Direct Connections and Underground Injection Controls (Existing Conditions)"
+		columnCount="3">
+		<Header>
+			<Cell cellType="COLUMNNAME" data="Direct Subcatchment Connection Rate" footerID="*"></Cell>
+			<Cell cellType="COLUMNNAME" data="Number"></Cell>
+			<Cell cellType="COLUMNNAME" data="Percent of Total"></Cell>
+		</Header>
+		<Row>
+			<Cell cellType="ROWNAME" data="&gt; 99% connected"></Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="RoofDiscoCount">
+					<Parameter parameterName="IsFraction" parameterValue="false"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue=".99001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="RoofDiscoCount">
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue=".99001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+		</Row>
+		<Row>
+			<Cell cellType="ROWNAME" data="75% to 99% connected"></Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="RoofDiscoCount">
+					<Parameter parameterName="IsFraction" parameterValue="false"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue=".75"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue=".99"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="RoofDiscoCount">
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue=".75"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue=".99"></Parameter>
+				</Function>
+			</Cell>
+		</Row>
+		<Row>
+			<Cell cellType="ROWNAME" data="50% to 75% connected"></Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="RoofDiscoCount">
+					<Parameter parameterName="IsFraction" parameterValue="false"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue=".50"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue=".75"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="RoofDiscoCount">
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue=".50"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue=".75"></Parameter>
+				</Function>
+			</Cell>
+		</Row>
+		<Row>
+			<Cell cellType="ROWNAME" data="25% to 50% connected"></Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="RoofDiscoCount">
+					<Parameter parameterName="IsFraction" parameterValue="false"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue=".25"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue=".50"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="RoofDiscoCount">
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue=".25"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue=".50"></Parameter>
+				</Function>
+			</Cell>
+		</Row>
+		<Row>
+			<Cell cellType="ROWNAME" data="&lt; 25% connected"></Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="RoofDiscoCount">
+					<Parameter parameterName="IsFraction" parameterValue="false"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue=".24999"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="RoofDiscoCount">
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue=".24999"></Parameter>
+				</Function>
+			</Cell>
+		</Row>
+		<Row>
+			<Cell cellType="ROWNAME" data="Sanitary-only connection"></Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="CountByDiscoClass">
+					<Parameter parameterName="DiscoClass" parameterValue="S"></Parameter>
+					<Parameter parameterName="IsFraction" parameterValue="false"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="CountByDiscoClass">
+					<Parameter parameterName="DiscoClass" parameterValue="S"></Parameter>
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+				</Function>
+			</Cell>
+		</Row>
+		<Row>
+			<Cell cellType="ROWNAME" data="Total"></Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="DSCCount"></Function>
+			</Cell>
+			<Cell cellType="CONST" data="100%"></Cell>
+		</Row>
+		<Row>
+			<Cell cellType="COLUMNNAME" data="Underground Injection Controls"></Cell>			
+			<Cell cellType="COLUMNNAME" data="Number"></Cell>
+			<Cell cellType="COLUMNNAME" data="Percent of Total"></Cell>			
+		</Row>		
+		<Row>
+			<Cell cellType="ROWNAME" data="UICs identified for review"></Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="UICForReviewCount">
+					<Parameter parameterName="IsFraction" parameterValue="false"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="UICForReviewCount">
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+				</Function>
+			</Cell>
+		</Row>
+		<Row>
+			<Cell cellType="ROWNAME" data="Total UICs"></Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="UICCount"></Function>
+			</Cell>
+			<Cell cellType="CONST" data="100%"></Cell>
+		</Row>
+		<Footer footerID="*" footerText="For definition of direct subcatchments, refer to EMD-074, provided in Appendix A of the Summary Report."></Footer>
+	</CharacterizationTable>
+	<CharacterizationTable tableNumber="7" tableTitle="Roof Disconnections by Zoning" columnCount="3">
+		<Header>
+			<Cell cellType="COLUMNNAME" data="Zoning Category"></Cell>
+			<Cell cellType="COLUMNNAME" data="Existing&#x00A0;Condition Percent&#x00A0;of&#x00A0;Tax&#x00A0;Lots&#x00A0;with Roof&#x00A0;Disconnections"></Cell>
+			<Cell cellType="COLUMNNAME" data="Assumed&#x00A0;Future Condition Percent&#x00A0;of&#x00A0;Tax&#x00A0;Lots&#x00A0;with Roof&#x00A0;Disconnections"></Cell>
+		</Header>
+		<Row>
+			<Cell cellType="ROWNAME" data="Commercial"></Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="RoofDiscoCountByLanduse">
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="LandUse" parameterValue="COM" />
+					<Parameter parameterName="TimeFrame" parameterValue="EX" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="RoofDiscoCountByLanduse">
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="LandUse" parameterValue="COM" />
+					<Parameter parameterName="TimeFrame" parameterValue="FU" />
+				</Function>
+			</Cell>
+		</Row>
+		<Row>
+			<Cell cellType="ROWNAME" data="Industrial"></Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="RoofDiscoCountByLanduse">
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="LandUse" parameterValue="IND" />
+					<Parameter parameterName="TimeFrame" parameterValue="EX" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="RoofDiscoCountByLanduse">
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="LandUse" parameterValue="IND" />
+					<Parameter parameterName="TimeFrame" parameterValue="FU" />
+				</Function>
+			</Cell>
+		</Row>
+		<Row>
+			<Cell cellType="ROWNAME" data="Multifamily Residential"></Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="RoofDiscoCountByLanduse">
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="LandUse" parameterValue="MFR" />
+					<Parameter parameterName="TimeFrame" parameterValue="EX" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="RoofDiscoCountByLanduse">
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="LandUse" parameterValue="MFR" />
+					<Parameter parameterName="TimeFrame" parameterValue="FU" />
+				</Function>
+			</Cell>
+		</Row>
+		<Row>
+			<Cell cellType="ROWNAME" data="Single Family Residential"></Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="RoofDiscoCountByLanduse">
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="LandUse" parameterValue="SFR" />
+					<Parameter parameterName="TimeFrame" parameterValue="EX" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="RoofDiscoCountByLanduse">
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="LandUse" parameterValue="SFR" />
+					<Parameter parameterName="TimeFrame" parameterValue="FU" />
+				</Function>
+			</Cell>
+		</Row>
+		<Row>
+			<Cell cellType="ROWNAME" data="Parks and Open Spaces"></Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="RoofDiscoCountByLanduse">
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="LandUse" parameterValue="POS" />
+					<Parameter parameterName="TimeFrame" parameterValue="EX" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="RoofDiscoCountByLanduse">
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="LandUse" parameterValue="POS" />
+					<Parameter parameterName="TimeFrame" parameterValue="FU" />
+				</Function>
+			</Cell>
+		</Row>
+		<Row>
+			<Cell cellType="ROWNAME" data="Other"></Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="RoofDiscoCountByLanduse">
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="LandUse" parameterValue="OTH" />
+					<Parameter parameterName="TimeFrame" parameterValue="EX" />
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="RoofDiscoCountByLanduse">
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="LandUse" parameterValue="OTH" />
+					<Parameter parameterName="TimeFrame" parameterValue="FU" />
+				</Function>
+			</Cell>
+		</Row>
+	</CharacterizationTable>
+	<CharacterizationTable tableNumber="8" tableTitle="Pipe Surcharge" columnCount="9">
+		<Header>
+			<Cell cellType="COLUMNNAME" data="Pipe Surcharge" footerID="a" rowSpan="2"></Cell>
+			<Cell cellType="COLUMNNAME" data="2-Year Storm, Existing Conditions" colSpan="2"></Cell>
+			<Cell cellType="COLUMNNAME" data="5-Year Storm, Existing Conditions" colSpan="2"></Cell>
+			<Cell cellType="COLUMNNAME" data="25-Year Storm, Existing Conditions" colSpan="2"></Cell>
+			<Cell cellType="COLUMNNAME" data="25-Year Storm, Future Conditions" colSpan="2"></Cell>
+		</Header>
+		<Header>
+			<Cell cellType="COLUMNNAME" data="Length (Number)"></Cell>
+			<Cell cellType="COLUMNNAME" data="Percent of Length"></Cell>
+			<Cell cellType="COLUMNNAME" data="Length (Number)"></Cell>
+			<Cell cellType="COLUMNNAME" data="Percent of Length"></Cell>
+			<Cell cellType="COLUMNNAME" data="Length (Number)"></Cell>
+			<Cell cellType="COLUMNNAME" data="Percent of Length"></Cell>
+			<Cell cellType="COLUMNNAME" data="Length (Number)"></Cell>
+			<Cell cellType="COLUMNNAME" data="Percent of Length"></Cell>
+		</Header>
+		<Row>
+			<Cell cellType="ROWNAME" data="&#x2264; 4 feet"></Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeSurchargeSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="1"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="4"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeSurchargeLength">
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="ScenarioID" parameterValue="1"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="4"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeSurchargeSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="2"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="4"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeSurchargeLength">
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="ScenarioID" parameterValue="2"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="4"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeSurchargeSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="3"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="4"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeSurchargeLength">
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="ScenarioID" parameterValue="3"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="4"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeSurchargeSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="4"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="4"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeSurchargeLength">
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="ScenarioID" parameterValue="4"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="4"></Parameter>
+				</Function>
+			</Cell>
+		</Row>
+		<Row>
+			<Cell cellType="ROWNAME" data="&gt; 4 feet"></Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeSurchargeSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="1"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="4.00001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeSurchargeLength">
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="ScenarioID" parameterValue="1"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="4.00001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeSurchargeSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="2"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="4.00001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeSurchargeLength">
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="ScenarioID" parameterValue="2"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="4.00001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeSurchargeSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="3"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="4.00001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeSurchargeLength">		
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>			
+					<Parameter parameterName="ScenarioID" parameterValue="3"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="4.00001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeSurchargeSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="4"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="4.00001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeSurchargeLength">		
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>			
+					<Parameter parameterName="ScenarioID" parameterValue="4"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="4.00001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+		</Row>
+		<Row>
+			<Cell cellType="ROWNAME" data="Total"></Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeSurchargeSummary">					
+					<Parameter parameterName="ScenarioID" parameterValue="1"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="CONST" data="100%"></Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeSurchargeSummary">					
+					<Parameter parameterName="ScenarioID" parameterValue="2"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="CONST" data="100%"></Cell>
+						<Cell cellType="FUNCTION">
+				<Function functionName="PipeSurchargeSummary">
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="ScenarioID" parameterValue="3"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="CONST" data="100%"></Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeSurchargeSummary">
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="ScenarioID" parameterValue="4"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="CONST" data="100%"></Cell>
+		</Row>
+		<Row>
+			<Cell cellType="ROWNAME" data="&gt; 30 minutes" footerID="b"></Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeSurchargeTimeSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="1"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="30"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeSurchargeTimeLength">
+					<Parameter parameterName="ScenarioID" parameterValue="1"></Parameter>
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="30"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeSurchargeTimeSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="1"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="30"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeSurchargeTimeLength">
+					<Parameter parameterName="ScenarioID" parameterValue="2"></Parameter>
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="30"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeSurchargeTimeSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="3"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="30"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeSurchargeTimeLength">
+					<Parameter parameterName="ScenarioID" parameterValue="3"></Parameter>
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="30"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeSurchargeTimeSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="4"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="30"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeSurchargeTimeLength">
+					<Parameter parameterName="ScenarioID" parameterValue="4"></Parameter>
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="30"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+		</Row>
+		<Footer footerID="a" footerText="Length units are in miles; &quot;number&quot; refers to number of pipe segments."></Footer>
+		<Footer footerID="b" footerText="Refers to greater measured surcharge at either the upstream or downstream manhole, relative to the highest crown elevation of all pipes at that manhole."></Footer>
+	</CharacterizationTable>
+	<CharacterizationTable tableNumber="9" tableTitle="Basement Sewer Backup Risk for 2-Year and 5-Year Storms under Existing Conditions"
+		columnCount="5">
+		<Header>
+			<Cell cellType="COLUMNNAME" data="Flooding Risk as Distance from Finished Floor"
+				rowSpan="2"></Cell>
+			<Cell cellType="COLUMNNAME" data="2-Year Storm, Existing Conditions" colSpan="2"></Cell>
+			<Cell cellType="COLUMNNAME" data="5-Year Storm, Existing Conditions" colSpan="2"></Cell>
+		</Header>
+		<Header>
+			<Cell cellType="COLUMNNAME" data="Number"></Cell>
+			<Cell cellType="COLUMNNAME" data="Percent"></Cell>
+			<Cell cellType="COLUMNNAME" data="Number"></Cell>
+			<Cell cellType="COLUMNNAME" data="Percent"></Cell>
+		</Header>
+		<Row>
+			<Cell cellType="ROWNAME" data="&#x2264; 6 feet"></Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="SewerBackupRisk">
+					<Parameter parameterName="IsFraction" parameterValue="false"></Parameter>
+					<Parameter parameterName="ScenarioID" parameterValue="1"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="6"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="SewerBackupRisk">
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="ScenarioID" parameterValue="1"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="6"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="SewerBackupRisk">
+					<Parameter parameterName="IsFraction" parameterValue="false"></Parameter>
+					<Parameter parameterName="ScenarioID" parameterValue="2"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="6"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="SewerBackupRisk">
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="ScenarioID" parameterValue="2"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="6"></Parameter>
+				</Function>
+			</Cell>
+		</Row>
+		<Row>
+			<Cell cellType="ROWNAME" data="&gt; 6 to 8 feet"></Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="SewerBackupRisk">
+					<Parameter parameterName="IsFraction" parameterValue="false"></Parameter>
+					<Parameter parameterName="ScenarioID" parameterValue="1"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="6.00001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="8"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="SewerBackupRisk">
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="ScenarioID" parameterValue="1"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="6.00001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="8"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="SewerBackupRisk">
+					<Parameter parameterName="IsFraction" parameterValue="false"></Parameter>
+					<Parameter parameterName="ScenarioID" parameterValue="2"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="6.00001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="8"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="SewerBackupRisk">
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="ScenarioID" parameterValue="2"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="6.00001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="8"></Parameter>
+				</Function>
+			</Cell>
+		</Row>
+		<Row>
+			<Cell cellType="ROWNAME" data="&gt; 8 to 10 feet"></Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="SewerBackupRisk">
+					<Parameter parameterName="IsFraction" parameterValue="false"></Parameter>
+					<Parameter parameterName="ScenarioID" parameterValue="1"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="8.00001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="10"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="SewerBackupRisk">
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="ScenarioID" parameterValue="1"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="8.00001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="10"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="SewerBackupRisk">
+					<Parameter parameterName="IsFraction" parameterValue="false"></Parameter>
+					<Parameter parameterName="ScenarioID" parameterValue="2"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="8.00001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="10"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="SewerBackupRisk">
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="ScenarioID" parameterValue="2"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="8.00001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="10"></Parameter>
+				</Function>
+			</Cell>
+		</Row>
+		<Row>
+			<Cell cellType="ROWNAME" data="&gt; 10 feet"></Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="SewerBackupRisk">
+					<Parameter parameterName="IsFraction" parameterValue="false"></Parameter>
+					<Parameter parameterName="ScenarioID" parameterValue="1"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="10.00001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="SewerBackupRisk">
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="ScenarioID" parameterValue="1"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="10.00001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="SewerBackupRisk">
+					<Parameter parameterName="IsFraction" parameterValue="false"></Parameter>
+					<Parameter parameterName="ScenarioID" parameterValue="2"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="10.00001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="SewerBackupRisk">
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="ScenarioID" parameterValue="2"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="10.00001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+		</Row>
+		<Row>
+			<Cell cellType="ROWNAME" data="Sewer pipe crown &#x2265; estimated basement elevation"></Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="FalseBFRiskCount">
+					<Parameter parameterName="IsFraction" parameterValue="false"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="FalseBFRiskCount">
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="FalseBFRiskCount">
+					<Parameter parameterName="IsFraction" parameterValue="false"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="FalseBFRiskCount">
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+				</Function>
+			</Cell>
+		</Row>
+		<Row>
+			<Cell cellType="ROWNAME" data="Total Direct Subcatchments" footerID="*"></Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="DSCCount">
+					<Parameter parameterName="IsFraction" parameterValue="false"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="CONST" data="100%"></Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="DSCCount">
+					<Parameter parameterName="IsFraction" parameterValue="false"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="CONST" data="100%"></Cell>
+		</Row>
+		<Footer footerID="*" footerText="For definition of direct subcatchments, refer to EMD-074, provided in Appendix A of the Summary Report."></Footer>
+	</CharacterizationTable>
+	<CharacterizationTable tableNumber="10" tableTitle="Basement Sewer Backup Risk for 25-Year Storm under Existing and Future Conditions"
+		columnCount="5">
+		<Header>
+			<Cell cellType="COLUMNNAME" data="Flooding Risk as Distance from Finished Floor"
+				rowSpan="2"></Cell>
+			<Cell cellType="COLUMNNAME" data="Existing" colSpan="2"></Cell>
+			<Cell cellType="COLUMNNAME" data="Future" colSpan="2"></Cell>
+		</Header>
+		<Header>
+			<Cell cellType="COLUMNNAME" data="Number"></Cell>
+			<Cell cellType="COLUMNNAME" data="Percent"></Cell>
+			<Cell cellType="COLUMNNAME" data="Number"></Cell>
+			<Cell cellType="COLUMNNAME" data="Percent"></Cell>
+		</Header>
+		<Row>
+			<Cell cellType="ROWNAME" data="&#x2264; 6 feet"></Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="SewerBackupRisk">
+					<Parameter parameterName="IsFraction" parameterValue="false"></Parameter>
+					<Parameter parameterName="ScenarioID" parameterValue="3"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="6"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="SewerBackupRisk">
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="ScenarioID" parameterValue="3"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="6"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="SewerBackupRisk">
+					<Parameter parameterName="IsFraction" parameterValue="false"></Parameter>
+					<Parameter parameterName="ScenarioID" parameterValue="4"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="6"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="SewerBackupRisk">
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="ScenarioID" parameterValue="4"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="6"></Parameter>
+				</Function>
+			</Cell>
+		</Row>
+		<Row>
+			<Cell cellType="ROWNAME" data="&gt; 6 to 8 feet"></Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="SewerBackupRisk">
+					<Parameter parameterName="IsFraction" parameterValue="false"></Parameter>
+					<Parameter parameterName="ScenarioID" parameterValue="3"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="6.00001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="8"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="SewerBackupRisk">
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="ScenarioID" parameterValue="3"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="6.00001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="8"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="SewerBackupRisk">
+					<Parameter parameterName="IsFraction" parameterValue="false"></Parameter>
+					<Parameter parameterName="ScenarioID" parameterValue="4"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="6.00001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="8"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="SewerBackupRisk">
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="ScenarioID" parameterValue="4"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="6.00001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="8"></Parameter>
+				</Function>
+			</Cell>
+		</Row>
+		<Row>
+			<Cell cellType="ROWNAME" data="&gt; 8 to 10 feet"></Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="SewerBackupRisk">
+					<Parameter parameterName="IsFraction" parameterValue="false"></Parameter>
+					<Parameter parameterName="ScenarioID" parameterValue="3"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="8.00001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="10"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="SewerBackupRisk">
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="ScenarioID" parameterValue="3"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="8.00001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="10"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="SewerBackupRisk">
+					<Parameter parameterName="IsFraction" parameterValue="false"></Parameter>
+					<Parameter parameterName="ScenarioID" parameterValue="4"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="8.00001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="10"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="SewerBackupRisk">
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="ScenarioID" parameterValue="4"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="8.00001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="10"></Parameter>
+				</Function>
+			</Cell>
+		</Row>
+		<Row>
+			<Cell cellType="ROWNAME" data="&gt; 10 feet"></Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="SewerBackupRisk">
+					<Parameter parameterName="IsFraction" parameterValue="false"></Parameter>
+					<Parameter parameterName="ScenarioID" parameterValue="3"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="10.00001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="SewerBackupRisk">
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="ScenarioID" parameterValue="3"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="10.00001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="SewerBackupRisk">
+					<Parameter parameterName="IsFraction" parameterValue="false"></Parameter>
+					<Parameter parameterName="ScenarioID" parameterValue="4"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="10.00001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="SewerBackupRisk">
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="ScenarioID" parameterValue="4"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="10.00001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+		</Row>
+		<Row>
+			<Cell cellType="ROWNAME" data="Sewer pipe crown &#x2265; estimated basement elevation"></Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="FalseBFRiskCount">
+					<Parameter parameterName="IsFraction" parameterValue="false"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="FalseBFRiskCount">
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="FalseBFRiskCount">
+					<Parameter parameterName="IsFraction" parameterValue="false"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="FalseBFRiskCount">
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+				</Function>
+			</Cell>
+		</Row>
+		<Row>
+			<Cell cellType="ROWNAME" data="Total Direct Subcatchments" footerID="*"></Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="DSCCount">
+					<Parameter parameterName="IsFraction" parameterValue="false"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="CONST" data="100%"></Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="DSCCount">
+					<Parameter parameterName="IsFraction" parameterValue="false"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="CONST" data="100%"></Cell>
+		</Row>
+		<Footer footerID="*" footerText="For definition of direct subcatchments, refer to EMD-074, provided in Appendix A of the Summary Report."></Footer>
+	</CharacterizationTable>
+	<CharacterizationTable tableNumber="11" tableTitle="Pipe Capacity for 2-Year and 5-Year Storms under Existing Conditions"
+		columnCount="9">
+		<Header>
+			<Cell cellType="COLUMNNAME" data="Peak Flow to Design Flow Ratio" rowSpan="3"></Cell>
+			<Cell cellType="COLUMNNAME" data="2-Year Storm, Existing Conditions" colSpan="4"></Cell>
+			<Cell cellType="COLUMNNAME" data="5-Year Storm, Existing Conditions" colSpan="4"></Cell>
+		</Header>
+		<Header>
+			<Cell cellType="COLUMNNAME" data="Length (Number) within Range of Pipe Diameter"
+				colSpan="3" footerID="*"></Cell>
+			<Cell cellType="COLUMNNAME" data="Percent" rowSpan="2"></Cell>
+			<Cell cellType="COLUMNNAME" data="Length (Number) within Range of Pipe Diameter"
+				colSpan="3" footerID="*"></Cell>
+			<Cell cellType="COLUMNNAME" data="Percent" rowSpan="2"></Cell>
+		</Header>
+		<Header>
+			<Cell cellType="COLUMNNAME" data="&#x2264;18&quot;"></Cell>
+			<Cell cellType="COLUMNNAME" data="&gt;&#x00A0;18&quot; and  &#x2264;&#x00A0;36&quot;"></Cell>
+			<Cell cellType="COLUMNNAME" data="&gt;&#x00A0;36&quot;"></Cell>
+			<Cell cellType="COLUMNNAME" data="&#x2264; 18&quot;"></Cell>
+			<Cell cellType="COLUMNNAME" data="&gt;&#x00A0;18&quot; and &#x2264;&#x00A0;36&quot;"></Cell>
+			<Cell cellType="COLUMNNAME" data="&gt;&#x00A0;36&quot;"></Cell>
+		</Header>
+		<Row>
+			<Cell cellType="ROWNAME" data="&gt; 1.5"></Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="1"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="1.50001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+					<Parameter parameterName="MinPipeSize" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxPipeSize" parameterValue="18"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="1"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="1.50001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+					<Parameter parameterName="MinPipeSize" parameterValue="18.00001"></Parameter>
+					<Parameter parameterName="MaxPipeSize" parameterValue="36"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="1"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="1.50001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+					<Parameter parameterName="MinPipeSize" parameterValue="36.00001"></Parameter>
+					<Parameter parameterName="MaxPipeSize" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatio">
+					<Parameter parameterName="ScenarioID" parameterValue="1"></Parameter>
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="1.50001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="2"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="1.50001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+					<Parameter parameterName="MinPipeSize" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxPipeSize" parameterValue="18"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="2"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="1.50001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+					<Parameter parameterName="MinPipeSize" parameterValue="18.00001"></Parameter>
+					<Parameter parameterName="MaxPipeSize" parameterValue="36"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="2"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="1.50001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+					<Parameter parameterName="MinPipeSize" parameterValue="36.00001"></Parameter>
+					<Parameter parameterName="MaxPipeSize" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatio">
+					<Parameter parameterName="ScenarioID" parameterValue="2"></Parameter>
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="1.50001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+		</Row>
+		<Row>
+			<Cell cellType="ROWNAME" data="&gt; 1.2 to 1.5"></Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="1"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="1.20001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="1.5"></Parameter>
+					<Parameter parameterName="MinPipeSize" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxPipeSize" parameterValue="18"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="1"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="1.20001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="1.5"></Parameter>
+					<Parameter parameterName="MinPipeSize" parameterValue="18.00001"></Parameter>
+					<Parameter parameterName="MaxPipeSize" parameterValue="36"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="1"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="1.20001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="1.5"></Parameter>
+					<Parameter parameterName="MinPipeSize" parameterValue="36.00001"></Parameter>
+					<Parameter parameterName="MaxPipeSize" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatio">
+					<Parameter parameterName="ScenarioID" parameterValue="1"></Parameter>
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="1.20001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="1.5"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="2"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="1.20001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="1.5"></Parameter>
+					<Parameter parameterName="MinPipeSize" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxPipeSize" parameterValue="18"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="2"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="1.20001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="1.5"></Parameter>
+					<Parameter parameterName="MinPipeSize" parameterValue="18.00001"></Parameter>
+					<Parameter parameterName="MaxPipeSize" parameterValue="36"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="2"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="1.20001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="1.5"></Parameter>
+					<Parameter parameterName="MinPipeSize" parameterValue="36.00001"></Parameter>
+					<Parameter parameterName="MaxPipeSize" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatio">
+					<Parameter parameterName="ScenarioID" parameterValue="2"></Parameter>
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="1.20001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="1.5"></Parameter>
+				</Function>
+			</Cell>
+		</Row>
+		<Row>
+			<Cell cellType="ROWNAME" data="&gt; 0.7 to 1.2"></Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="1"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="0.70001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="1.2"></Parameter>
+					<Parameter parameterName="MinPipeSize" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxPipeSize" parameterValue="18"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="1"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="0.70001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="1.2"></Parameter>
+					<Parameter parameterName="MinPipeSize" parameterValue="18.00001"></Parameter>
+					<Parameter parameterName="MaxPipeSize" parameterValue="36"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="1"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="0.70001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="1.2"></Parameter>
+					<Parameter parameterName="MinPipeSize" parameterValue="36.00001"></Parameter>
+					<Parameter parameterName="MaxPipeSize" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatio">
+					<Parameter parameterName="ScenarioID" parameterValue="1"></Parameter>
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="0.70001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="1.2"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="2"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="0.70001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="1.2"></Parameter>
+					<Parameter parameterName="MinPipeSize" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxPipeSize" parameterValue="18"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="2"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="0.70001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="1.2"></Parameter>
+					<Parameter parameterName="MinPipeSize" parameterValue="18.00001"></Parameter>
+					<Parameter parameterName="MaxPipeSize" parameterValue="36"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="2"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="0.70001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="1.2"></Parameter>
+					<Parameter parameterName="MinPipeSize" parameterValue="36.00001"></Parameter>
+					<Parameter parameterName="MaxPipeSize" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatio">
+					<Parameter parameterName="ScenarioID" parameterValue="2"></Parameter>
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="0.70001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="1.2"></Parameter>
+				</Function>
+			</Cell>
+		</Row>
+		<Row>
+			<Cell cellType="ROWNAME" data="&gt; 0 to 0.7"></Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="1"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue=".00001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="0.7"></Parameter>
+					<Parameter parameterName="MinPipeSize" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxPipeSize" parameterValue="18"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="1"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue=".00001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="0.7"></Parameter>
+					<Parameter parameterName="MinPipeSize" parameterValue="18.00001"></Parameter>
+					<Parameter parameterName="MaxPipeSize" parameterValue="36"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="1"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue=".00001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="0.7"></Parameter>
+					<Parameter parameterName="MinPipeSize" parameterValue="36.00001"></Parameter>
+					<Parameter parameterName="MaxPipeSize" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatio">
+					<Parameter parameterName="ScenarioID" parameterValue="1"></Parameter>
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue=".00001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="0.7"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="2"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue=".00001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="0.7"></Parameter>
+					<Parameter parameterName="MinPipeSize" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxPipeSize" parameterValue="18"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="2"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue=".00001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="0.7"></Parameter>
+					<Parameter parameterName="MinPipeSize" parameterValue="18.00001"></Parameter>
+					<Parameter parameterName="MaxPipeSize" parameterValue="36"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="2"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue=".00001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="0.7"></Parameter>
+					<Parameter parameterName="MinPipeSize" parameterValue="36.00001"></Parameter>
+					<Parameter parameterName="MaxPipeSize" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatio">
+					<Parameter parameterName="ScenarioID" parameterValue="2"></Parameter>
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue=".00001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="0.7"></Parameter>
+				</Function>
+			</Cell>
+		</Row>
+		<Row>
+			<Cell cellType="ROWNAME" data="&#x2264; 0"></Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="1"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="0"></Parameter>
+					<Parameter parameterName="MinPipeSize" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxPipeSize" parameterValue="18"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="1"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="0"></Parameter>
+					<Parameter parameterName="MinPipeSize" parameterValue="18.00001"></Parameter>
+					<Parameter parameterName="MaxPipeSize" parameterValue="36"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="1"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="0"></Parameter>
+					<Parameter parameterName="MinPipeSize" parameterValue="36.00001"></Parameter>
+					<Parameter parameterName="MaxPipeSize" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatio">
+					<Parameter parameterName="ScenarioID" parameterValue="1"></Parameter>
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="0"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="2"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="0"></Parameter>
+					<Parameter parameterName="MinPipeSize" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxPipeSize" parameterValue="18"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="2"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="0"></Parameter>
+					<Parameter parameterName="MinPipeSize" parameterValue="18.00001"></Parameter>
+					<Parameter parameterName="MaxPipeSize" parameterValue="36"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="2"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="0"></Parameter>
+					<Parameter parameterName="MinPipeSize" parameterValue="36.00001"></Parameter>
+					<Parameter parameterName="MaxPipeSize" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatio">
+					<Parameter parameterName="ScenarioID" parameterValue="2"></Parameter>
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="0"></Parameter>
+				</Function>
+			</Cell>
+		</Row>
+		<Row>
+			<Cell cellType="ROWNAME" data="Total"></Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="1"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+					<Parameter parameterName="MinPipeSize" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxPipeSize" parameterValue="18"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="1"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+					<Parameter parameterName="MinPipeSize" parameterValue="18.00001"></Parameter>
+					<Parameter parameterName="MaxPipeSize" parameterValue="36"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="1"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+					<Parameter parameterName="MinPipeSize" parameterValue="36.00001"></Parameter>
+					<Parameter parameterName="MaxPipeSize" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="CONST" data="100%">				
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="2"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+					<Parameter parameterName="MinPipeSize" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxPipeSize" parameterValue="18"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="2"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+					<Parameter parameterName="MinPipeSize" parameterValue="18.00001"></Parameter>
+					<Parameter parameterName="MaxPipeSize" parameterValue="36"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="2"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+					<Parameter parameterName="MinPipeSize" parameterValue="36.00001"></Parameter>
+					<Parameter parameterName="MaxPipeSize" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="CONST" data="100%">				
+			</Cell>
+		</Row>
+		<Footer footerID="*" footerText="Length units are in miles; &quot;number&quot; refers to number of pipe segments."></Footer>
+	</CharacterizationTable>
+	<CharacterizationTable tableNumber="12" tableTitle="Pipe Capacity for 25-Year Storm under Existing and Future Conditions"
+		columnCount="9">
+		<Header>
+			<Cell cellType="COLUMNNAME" data="Peak Flow to Design Flow Ratio" footerID="*" rowSpan="3"></Cell>
+			<Cell cellType="COLUMNNAME" data="Existing" colSpan="4"></Cell>
+			<Cell cellType="COLUMNNAME" data="Future" colSpan="4"></Cell>
+		</Header>
+		<Header>
+			<Cell cellType="COLUMNNAME" data="Length (Number) within Range of Pipe Diameter"
+				colSpan="3" footerID="*"></Cell>
+			<Cell cellType="COLUMNNAME" data="Percent" rowSpan="2"></Cell>
+			<Cell cellType="COLUMNNAME" data="Length (Number) within Range of Pipe Diameter"
+				colSpan="3" footerID="*"></Cell>
+			<Cell cellType="COLUMNNAME" data="Percent" rowSpan="2"></Cell>
+		</Header>
+		<Header>
+			<Cell cellType="COLUMNNAME" data="&#x2264;18&quot;"></Cell>
+			<Cell cellType="COLUMNNAME" data="&gt;&#x00A0;18&quot; and  &#x2264;&#x00A0;36&quot;"></Cell>
+			<Cell cellType="COLUMNNAME" data="&gt;&#x00A0;36&quot;"></Cell>
+			<Cell cellType="COLUMNNAME" data="&#x2264; 18&quot;"></Cell>
+			<Cell cellType="COLUMNNAME" data="&gt;&#x00A0;18&quot; and &#x2264;&#x00A0;36&quot;"></Cell>
+			<Cell cellType="COLUMNNAME" data="&gt;&#x00A0;36&quot;"></Cell>
+		</Header>
+		<Row>
+			<Cell cellType="ROWNAME" data="&gt; 1.5"></Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="3"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="1.50001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+					<Parameter parameterName="MinPipeSize" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxPipeSize" parameterValue="18"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="3"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="1.50001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+					<Parameter parameterName="MinPipeSize" parameterValue="18.00001"></Parameter>
+					<Parameter parameterName="MaxPipeSize" parameterValue="36"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="3"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="1.50001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+					<Parameter parameterName="MinPipeSize" parameterValue="36.00001"></Parameter>
+					<Parameter parameterName="MaxPipeSize" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatio">
+					<Parameter parameterName="ScenarioID" parameterValue="3"></Parameter>
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="1.50001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="4"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="1.50001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+					<Parameter parameterName="MinPipeSize" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxPipeSize" parameterValue="18"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="4"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="1.50001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+					<Parameter parameterName="MinPipeSize" parameterValue="18.00001"></Parameter>
+					<Parameter parameterName="MaxPipeSize" parameterValue="36"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="4"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="1.50001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+					<Parameter parameterName="MinPipeSize" parameterValue="36.00001"></Parameter>
+					<Parameter parameterName="MaxPipeSize" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatio">
+					<Parameter parameterName="ScenarioID" parameterValue="4"></Parameter>
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="1.50001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+		</Row>
+		<Row>
+			<Cell cellType="ROWNAME" data="&gt; 1.2 to 1.5"></Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="3"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="1.20001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="1.5"></Parameter>
+					<Parameter parameterName="MinPipeSize" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxPipeSize" parameterValue="18"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="3"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="1.20001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="1.5"></Parameter>
+					<Parameter parameterName="MinPipeSize" parameterValue="18.00001"></Parameter>
+					<Parameter parameterName="MaxPipeSize" parameterValue="36"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="3"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="1.20001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="1.5"></Parameter>
+					<Parameter parameterName="MinPipeSize" parameterValue="36.00001"></Parameter>
+					<Parameter parameterName="MaxPipeSize" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatio">
+					<Parameter parameterName="ScenarioID" parameterValue="3"></Parameter>
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="1.20001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="1.5"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="4"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="1.20001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="1.5"></Parameter>
+					<Parameter parameterName="MinPipeSize" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxPipeSize" parameterValue="18"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="4"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="1.20001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="1.5"></Parameter>
+					<Parameter parameterName="MinPipeSize" parameterValue="18.00001"></Parameter>
+					<Parameter parameterName="MaxPipeSize" parameterValue="36"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="4"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="1.20001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="1.5"></Parameter>
+					<Parameter parameterName="MinPipeSize" parameterValue="36.00001"></Parameter>
+					<Parameter parameterName="MaxPipeSize" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatio">
+					<Parameter parameterName="ScenarioID" parameterValue="4"></Parameter>
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="1.20001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="1.5"></Parameter>
+				</Function>
+			</Cell>
+		</Row>
+		<Row>
+			<Cell cellType="ROWNAME" data="&gt; 0.7 to 1.2"></Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="3"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="0.70001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="1.2"></Parameter>
+					<Parameter parameterName="MinPipeSize" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxPipeSize" parameterValue="18"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="3"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="0.70001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="1.2"></Parameter>
+					<Parameter parameterName="MinPipeSize" parameterValue="18.00001"></Parameter>
+					<Parameter parameterName="MaxPipeSize" parameterValue="36"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="3"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="0.70001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="1.2"></Parameter>
+					<Parameter parameterName="MinPipeSize" parameterValue="36.00001"></Parameter>
+					<Parameter parameterName="MaxPipeSize" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatio">
+					<Parameter parameterName="ScenarioID" parameterValue="3"></Parameter>
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="0.70001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="1.2"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="4"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="0.70001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="1.2"></Parameter>
+					<Parameter parameterName="MinPipeSize" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxPipeSize" parameterValue="18"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="4"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="0.70001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="1.2"></Parameter>
+					<Parameter parameterName="MinPipeSize" parameterValue="18.00001"></Parameter>
+					<Parameter parameterName="MaxPipeSize" parameterValue="36"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="4"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="0.70001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="1.2"></Parameter>
+					<Parameter parameterName="MinPipeSize" parameterValue="36.00001"></Parameter>
+					<Parameter parameterName="MaxPipeSize" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatio">
+					<Parameter parameterName="ScenarioID" parameterValue="4"></Parameter>
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="0.70001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="1.2"></Parameter>
+				</Function>
+			</Cell>
+		</Row>
+		<Row>
+			<Cell cellType="ROWNAME" data="&gt; 0 to 0.7"></Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="3"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue=".00001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="0.7"></Parameter>
+					<Parameter parameterName="MinPipeSize" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxPipeSize" parameterValue="18"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="3"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue=".00001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="0.7"></Parameter>
+					<Parameter parameterName="MinPipeSize" parameterValue="18.00001"></Parameter>
+					<Parameter parameterName="MaxPipeSize" parameterValue="36"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="3"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue=".00001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="0.7"></Parameter>
+					<Parameter parameterName="MinPipeSize" parameterValue="36.00001"></Parameter>
+					<Parameter parameterName="MaxPipeSize" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatio">
+					<Parameter parameterName="ScenarioID" parameterValue="3"></Parameter>
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue=".00001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="0.7"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="4"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue=".00001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="0.7"></Parameter>
+					<Parameter parameterName="MinPipeSize" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxPipeSize" parameterValue="18"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="4"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue=".00001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="0.7"></Parameter>
+					<Parameter parameterName="MinPipeSize" parameterValue="18.00001"></Parameter>
+					<Parameter parameterName="MaxPipeSize" parameterValue="36"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="4"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue=".00001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="0.7"></Parameter>
+					<Parameter parameterName="MinPipeSize" parameterValue="36.00001"></Parameter>
+					<Parameter parameterName="MaxPipeSize" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatio">
+					<Parameter parameterName="ScenarioID" parameterValue="4"></Parameter>
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue=".00001"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="0.7"></Parameter>
+				</Function>
+			</Cell>
+		</Row>
+		<Row>
+			<Cell cellType="ROWNAME" data="&#x2264; 0"></Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="3"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="0"></Parameter>
+					<Parameter parameterName="MinPipeSize" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxPipeSize" parameterValue="18"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="3"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="0"></Parameter>
+					<Parameter parameterName="MinPipeSize" parameterValue="18.00001"></Parameter>
+					<Parameter parameterName="MaxPipeSize" parameterValue="36"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="3"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="0"></Parameter>
+					<Parameter parameterName="MinPipeSize" parameterValue="36.00001"></Parameter>
+					<Parameter parameterName="MaxPipeSize" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatio">
+					<Parameter parameterName="ScenarioID" parameterValue="3"></Parameter>
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="0"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="4"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="0"></Parameter>
+					<Parameter parameterName="MinPipeSize" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxPipeSize" parameterValue="18"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="4"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="0"></Parameter>
+					<Parameter parameterName="MinPipeSize" parameterValue="18.00001"></Parameter>
+					<Parameter parameterName="MaxPipeSize" parameterValue="36"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="4"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="0"></Parameter>
+					<Parameter parameterName="MinPipeSize" parameterValue="36.00001"></Parameter>
+					<Parameter parameterName="MaxPipeSize" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatio">
+					<Parameter parameterName="ScenarioID" parameterValue="4"></Parameter>
+					<Parameter parameterName="IsFraction" parameterValue="true"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="0"></Parameter>
+				</Function>
+			</Cell>
+		</Row>
+		<Row>
+			<Cell cellType="ROWNAME" data="Total"></Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="3"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+					<Parameter parameterName="MinPipeSize" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxPipeSize" parameterValue="18"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="3"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+					<Parameter parameterName="MinPipeSize" parameterValue="18.00001"></Parameter>
+					<Parameter parameterName="MaxPipeSize" parameterValue="36"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="3"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+					<Parameter parameterName="MinPipeSize" parameterValue="36.00001"></Parameter>
+					<Parameter parameterName="MaxPipeSize" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="CONST" data="100%">				
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="4"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+					<Parameter parameterName="MinPipeSize" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxPipeSize" parameterValue="18"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="4"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+					<Parameter parameterName="MinPipeSize" parameterValue="18.00001"></Parameter>
+					<Parameter parameterName="MaxPipeSize" parameterValue="36"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="QQRatioSummary">
+					<Parameter parameterName="ScenarioID" parameterValue="4"></Parameter>
+					<Parameter parameterName="MinValue" parameterValue="MIN"></Parameter>
+					<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+					<Parameter parameterName="MinPipeSize" parameterValue="36.00001"></Parameter>
+					<Parameter parameterName="MaxPipeSize" parameterValue="MAX"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="CONST" data="100%">				
+			</Cell>
+		</Row>
+		<Footer footerID="*" footerText="Length units are in miles; &quot;number&quot; refers to number of pipe segments."></Footer>
+	</CharacterizationTable>
+</StudyArea>
