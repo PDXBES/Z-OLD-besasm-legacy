@@ -22,14 +22,14 @@ namespace DataAccessTestBench
     {
       InitializeComponent();
 
-      string testModelPath = @"C:\Data\Projects\41800023-1_BES_DataManagement\Beech_Essex\BEE_RP\";
-      //string testModelPath = @"\\Cassio\systems_planning\8063_CombinedFacPlan\Models\RP\Beech_Essex\BEE_RP\";
+      //string testModelPath = @"C:\Data\Projects\41800023-1_BES_DataManagement\Beech_Essex\BEE_RP\";
+      string testModelPath = @"\\Cassio\systems_planning\8063_CombinedFacPlan\Models\RP\Beech_Essex\BEE_RP\";
 
-      string testAlternativePath = @"C:\Data\Projects\41800023-1_BES_DataManagement\Beech_Essex\BEE_FU\alternatives\BEE_RP\";
-      //string testAlternativePath = @"\\Cassio\systems_planning\8063_CombinedFacPlan\Models\RP\Beech_Essex\BEE_FU\alternatives\BEE_RP";
+      //string testAlternativePath = @"C:\Data\Projects\41800023-1_BES_DataManagement\Beech_Essex\BEE_FU\alternatives\BEE_RP\";
+      string testAlternativePath = @"\\Cassio\systems_planning\8063_CombinedFacPlan\Models\RP\Beech_Essex\BEE_FU\alternatives\BEE_RP";
 
-      string testSwmmOutput = @"C:\Data\Projects\41800023-1_BES_DataManagement\Beech_Essex\BEE_RP\sim\4S6\BEE_RP_4S6.out";
-      //string testSwmmOutput = @"\\Cassio\systems_planning\8063_CombinedFacPlan\Models\RP\Beech_Essex\BEE_RP\sim\4S6\BEE_RP_4S6.out";
+      //string testSwmmOutput = @"C:\Data\Projects\41800023-1_BES_DataManagement\Beech_Essex\BEE_RP\sim\4S6\BEE_RP_4S6.out";
+      string testSwmmOutput = @"\\Cassio\systems_planning\8063_CombinedFacPlan\Models\RP\Beech_Essex\BEE_RP\sim\4S6\BEE_RP_4S6.out";
 
       rpReport = new RecommendedPlanReport();
       Dictionary<string, ReportBase.Parameter> parameters = new Dictionary<string, ReportBase.Parameter>();
@@ -37,6 +37,11 @@ namespace DataAccessTestBench
       parameters.Add("AlternativePath", new ReportBase.Parameter("AlternativePath", testAlternativePath));
       parameters.Add("SwmmOutputFile", new ReportBase.Parameter("SwmmOutputFile", testSwmmOutput));
       rpReport.LoadAuxilaryData(parameters);
+
+    }
+
+    private void Form1_Load(object sender, EventArgs e)
+    {
 
     }
 
@@ -87,11 +92,6 @@ namespace DataAccessTestBench
       {
         textBox1.AppendText("Focus Area " + row.FocusArea + ": " + row.FacilityVolume + "\n");
       }
-    }
-
-    private void Form1_Load(object sender, EventArgs e)
-    {
-
     }
 
     private void button2_Click(object sender, EventArgs e)
@@ -210,11 +210,57 @@ namespace DataAccessTestBench
     {
       textBox1.Clear();
 
-      textBox1.AppendText("BSBR Count\n");
-      textBox1.AppendText("------------------------------------\n");
+      #region BSBRCount2yrEX
+      textBox1.AppendText("BSBR Count (2-yr EX)\r\n");
+      textBox1.AppendText("------------------------------------\r\n");
 
       Dictionary<string, ReportBase.Parameter> parameters;
       int bsbrCount = 0;
+      foreach (string focusArea in rpReport.FocusAreaList())
+      {
+        parameters = new Dictionary<string, ReportBase.Parameter>();
+        parameters.Add("StormEvent", new ReportBase.Parameter("StormEvent", "2"));
+        parameters.Add("UseFlag", new ReportBase.Parameter("UseFlag", "14"));
+        parameters.Add("FocusArea", new ReportBase.Parameter("FocusArea", focusArea));
+        bsbrCount = rpReport.BSBRCount(parameters);
+
+        textBox1.AppendText(focusArea + " BSBR Count: " + bsbrCount.ToString() + "\r\n");
+      }
+      parameters = new Dictionary<string, ReportBase.Parameter>();
+
+      parameters.Add("UseFlag", new ReportBase.Parameter("UseFlag", "14"));
+      parameters.Add("StormEvent", new ReportBase.Parameter("StormEvent", "2"));
+      bsbrCount = rpReport.BSBRCount(parameters);
+      #endregion
+
+      #region BSBRCount5yrEX
+
+      textBox1.AppendText("BSBR Count (5-yr EX)\r\n");
+      textBox1.AppendText("------------------------------------\r\n");
+
+      foreach (string focusArea in rpReport.FocusAreaList())
+      {
+        parameters = new Dictionary<string, ReportBase.Parameter>();
+        parameters.Add("StormEvent", new ReportBase.Parameter("StormEvent", "5"));
+        parameters.Add("UseFlag", new ReportBase.Parameter("UseFlag", "14"));
+        parameters.Add("FocusArea", new ReportBase.Parameter("FocusArea", focusArea));
+        bsbrCount = rpReport.BSBRCount(parameters);
+
+        textBox1.AppendText(focusArea + " BSBR Count: " + bsbrCount.ToString() + "\r\n");
+      }
+      parameters = new Dictionary<string, ReportBase.Parameter>();
+
+      parameters.Add("UseFlag", new ReportBase.Parameter("UseFlag", "14"));
+      parameters.Add("StormEvent", new ReportBase.Parameter("StormEvent", "5"));
+      bsbrCount = rpReport.BSBRCount(parameters);
+
+      #endregion
+
+      #region BSBRCount25yrEX
+
+      textBox1.AppendText("BSBR Count (25-yr EX)\r\n");
+      textBox1.AppendText("------------------------------------\r\n");
+
       foreach (string focusArea in rpReport.FocusAreaList())
       {
         parameters = new Dictionary<string, ReportBase.Parameter>();
@@ -223,17 +269,67 @@ namespace DataAccessTestBench
         parameters.Add("FocusArea", new ReportBase.Parameter("FocusArea", focusArea));
         bsbrCount = rpReport.BSBRCount(parameters);
 
-        textBox1.AppendText(focusArea + "BSBR Count: " + bsbrCount.ToString() + "\n");
+        textBox1.AppendText(focusArea + " BSBR Count: " + bsbrCount.ToString() + "\r\n");
       }
       parameters = new Dictionary<string, ReportBase.Parameter>();
-      
+
       parameters.Add("UseFlag", new ReportBase.Parameter("UseFlag", "14"));
-      parameters.Add("StormEvent", new ReportBase.Parameter("StormEvent", "25"));      
+      parameters.Add("StormEvent", new ReportBase.Parameter("StormEvent", "25"));
       bsbrCount = rpReport.BSBRCount(parameters);
 
-      textBox1.AppendText("\n");
-      textBox1.AppendText("BSBR Delta\n");
-      textBox1.AppendText("------------------------------------\n");
+      #endregion
+
+      #region BSBRCount25yrFU
+
+      textBox1.AppendText("BSBR Count (25-yr FU)\r\n");
+      textBox1.AppendText("------------------------------------\r\n");
+
+      foreach (string focusArea in rpReport.FocusAreaList())
+      {
+        parameters = new Dictionary<string, ReportBase.Parameter>();
+        parameters.Add("StormEvent", new ReportBase.Parameter("StormEvent", "25"));
+        parameters.Add("UseFlag", new ReportBase.Parameter("UseFlag", "15"));
+        parameters.Add("FocusArea", new ReportBase.Parameter("FocusArea", focusArea));
+        bsbrCount = rpReport.BSBRCount(parameters);
+
+        textBox1.AppendText(focusArea + " BSBR Count: " + bsbrCount.ToString() + "\r\n");
+      }
+      parameters = new Dictionary<string, ReportBase.Parameter>();
+
+      parameters.Add("UseFlag", new ReportBase.Parameter("UseFlag", "15"));
+      parameters.Add("StormEvent", new ReportBase.Parameter("StormEvent", "25"));
+      bsbrCount = rpReport.BSBRCount(parameters);
+
+      #endregion
+
+      #region BSBRCount25yrRP
+
+      textBox1.AppendText("BSBR Count (25-yr FU RP)\r\n");
+      textBox1.AppendText("------------------------------------\r\n");
+
+      foreach (string focusArea in rpReport.FocusAreaList())
+      {
+        parameters = new Dictionary<string, ReportBase.Parameter>();
+        parameters.Add("StormEvent", new ReportBase.Parameter("StormEvent", "25"));
+        parameters.Add("UseFlag", new ReportBase.Parameter("UseFlag", "13"));
+        parameters.Add("FocusArea", new ReportBase.Parameter("FocusArea", focusArea));
+        bsbrCount = rpReport.BSBRCount(parameters);
+
+        textBox1.AppendText(focusArea + " BSBR Count: " + bsbrCount.ToString() + "\r\n");
+      }
+      parameters = new Dictionary<string, ReportBase.Parameter>();
+
+      parameters.Add("UseFlag", new ReportBase.Parameter("UseFlag", "13"));
+      parameters.Add("StormEvent", new ReportBase.Parameter("StormEvent", "25"));
+      bsbrCount = rpReport.BSBRCount(parameters);
+
+      #endregion
+
+      #region BSBRDelta
+
+      textBox1.AppendText("\r\n");
+      textBox1.AppendText("BSBR Delta\r\n");
+      textBox1.AppendText("------------------------------------\r\n");
       
       int bsbrDelta = 0;
       foreach (string focusArea in rpReport.FocusAreaList())
@@ -246,11 +342,13 @@ namespace DataAccessTestBench
         parameters.Add("FocusArea", new ReportBase.Parameter("FocusArea", focusArea));
         bsbrDelta = rpReport.BSBRDelta(parameters);
 
-        textBox1.AppendText(focusArea + "BSBR Delta: " + bsbrDelta.ToString() + "\n");
+        textBox1.AppendText(focusArea + "BSBR Delta: " + bsbrDelta.ToString() + "\r\n");
       }
       parameters.Remove("FocusArea");
       bsbrDelta = rpReport.BSBRDelta(parameters);
-      textBox1.AppendText("Total BSBR Delta: " + bsbrDelta.ToString() + "\n");
+      textBox1.AppendText("Total BSBR Delta: " + bsbrDelta.ToString() + "\r\n");
+
+      #endregion
     }
   }
 }
