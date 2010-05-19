@@ -25,11 +25,31 @@ namespace StormwaterInterface {
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")]
     public partial class FieldWorkDBDataSet : global::System.Data.DataSet {
         
-        private View_CulvertsDitchesDataTable tableView_CulvertsDitches;
-        
         private DitchesCulvertsDataTable tableDitchesCulverts;
         
         private EvaluatorPageDataTable tableEvaluatorPage;
+        
+        private _VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6DataTable table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6;
+        
+        private _VSI_ComparableMstLinkCulvertsNewDiameterNotStandardDataTable table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard;
+        
+        private _VSI_ComparableMStLinkCulvertsTransferableDataTable table_VSI_ComparableMStLinkCulvertsTransferable;
+        
+        private _VSI_ComparableMstLinkDitchesDataTable table_VSI_ComparableMstLinkDitches;
+        
+        private _VSI_ComparableMstLinkDitchesNewDepthLT1DataTable table_VSI_ComparableMstLinkDitchesNewDepthLT1;
+        
+        private _VSI_ComparableMstLinkDItchesNoDSNodeDataTable table_VSI_ComparableMstLinkDItchesNoDSNode;
+        
+        private _VSI_ComparableMstLinkDitchesNoUSNodeDataTable table_VSI_ComparableMstLinkDitchesNoUSNode;
+        
+        private _VSI_ComparableMstLinkDitchesTransferableDataTable table_VSI_ComparableMstLinkDitchesTransferable;
+        
+        private _VSI_ComparableMstLinkDitchesWidthTopLTBottomDataTable table_VSI_ComparableMstLinkDitchesWidthTopLTBottom;
+        
+        private _VSI_DifficultCulvertsDataTable table_VSI_DifficultCulverts;
+        
+        private _VSI_DifficultDitchesDataTable table_VSI_DifficultDitches;
         
         private global::System.Data.DataRelation relationEvaluatorPage_DitchesCulverts;
         
@@ -59,14 +79,44 @@ namespace StormwaterInterface {
             if ((this.DetermineSchemaSerializationMode(info, context) == global::System.Data.SchemaSerializationMode.IncludeSchema)) {
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXmlSchema(new global::System.Xml.XmlTextReader(new global::System.IO.StringReader(strSchema)));
-                if ((ds.Tables["View_CulvertsDitches"] != null)) {
-                    base.Tables.Add(new View_CulvertsDitchesDataTable(ds.Tables["View_CulvertsDitches"]));
-                }
                 if ((ds.Tables["DitchesCulverts"] != null)) {
                     base.Tables.Add(new DitchesCulvertsDataTable(ds.Tables["DitchesCulverts"]));
                 }
                 if ((ds.Tables["EvaluatorPage"] != null)) {
                     base.Tables.Add(new EvaluatorPageDataTable(ds.Tables["EvaluatorPage"]));
+                }
+                if ((ds.Tables["_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6"] != null)) {
+                    base.Tables.Add(new _VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6DataTable(ds.Tables["_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6"]));
+                }
+                if ((ds.Tables["_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard"] != null)) {
+                    base.Tables.Add(new _VSI_ComparableMstLinkCulvertsNewDiameterNotStandardDataTable(ds.Tables["_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard"]));
+                }
+                if ((ds.Tables["_VSI_ComparableMStLinkCulvertsTransferable"] != null)) {
+                    base.Tables.Add(new _VSI_ComparableMStLinkCulvertsTransferableDataTable(ds.Tables["_VSI_ComparableMStLinkCulvertsTransferable"]));
+                }
+                if ((ds.Tables["_VSI_ComparableMstLinkDitches"] != null)) {
+                    base.Tables.Add(new _VSI_ComparableMstLinkDitchesDataTable(ds.Tables["_VSI_ComparableMstLinkDitches"]));
+                }
+                if ((ds.Tables["_VSI_ComparableMstLinkDitchesNewDepthLT1"] != null)) {
+                    base.Tables.Add(new _VSI_ComparableMstLinkDitchesNewDepthLT1DataTable(ds.Tables["_VSI_ComparableMstLinkDitchesNewDepthLT1"]));
+                }
+                if ((ds.Tables["_VSI_ComparableMstLinkDItchesNoDSNode"] != null)) {
+                    base.Tables.Add(new _VSI_ComparableMstLinkDItchesNoDSNodeDataTable(ds.Tables["_VSI_ComparableMstLinkDItchesNoDSNode"]));
+                }
+                if ((ds.Tables["_VSI_ComparableMstLinkDitchesNoUSNode"] != null)) {
+                    base.Tables.Add(new _VSI_ComparableMstLinkDitchesNoUSNodeDataTable(ds.Tables["_VSI_ComparableMstLinkDitchesNoUSNode"]));
+                }
+                if ((ds.Tables["_VSI_ComparableMstLinkDitchesTransferable"] != null)) {
+                    base.Tables.Add(new _VSI_ComparableMstLinkDitchesTransferableDataTable(ds.Tables["_VSI_ComparableMstLinkDitchesTransferable"]));
+                }
+                if ((ds.Tables["_VSI_ComparableMstLinkDitchesWidthTopLTBottom"] != null)) {
+                    base.Tables.Add(new _VSI_ComparableMstLinkDitchesWidthTopLTBottomDataTable(ds.Tables["_VSI_ComparableMstLinkDitchesWidthTopLTBottom"]));
+                }
+                if ((ds.Tables["_VSI_DifficultCulverts"] != null)) {
+                    base.Tables.Add(new _VSI_DifficultCulvertsDataTable(ds.Tables["_VSI_DifficultCulverts"]));
+                }
+                if ((ds.Tables["_VSI_DifficultDitches"] != null)) {
+                    base.Tables.Add(new _VSI_DifficultDitchesDataTable(ds.Tables["_VSI_DifficultDitches"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -89,15 +139,6 @@ namespace StormwaterInterface {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public View_CulvertsDitchesDataTable View_CulvertsDitches {
-            get {
-                return this.tableView_CulvertsDitches;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Browsable(false)]
-        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
         public DitchesCulvertsDataTable DitchesCulverts {
             get {
                 return this.tableDitchesCulverts;
@@ -110,6 +151,105 @@ namespace StormwaterInterface {
         public EvaluatorPageDataTable EvaluatorPage {
             get {
                 return this.tableEvaluatorPage;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public _VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6DataTable _VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6 {
+            get {
+                return this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public _VSI_ComparableMstLinkCulvertsNewDiameterNotStandardDataTable _VSI_ComparableMstLinkCulvertsNewDiameterNotStandard {
+            get {
+                return this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public _VSI_ComparableMStLinkCulvertsTransferableDataTable _VSI_ComparableMStLinkCulvertsTransferable {
+            get {
+                return this.table_VSI_ComparableMStLinkCulvertsTransferable;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public _VSI_ComparableMstLinkDitchesDataTable _VSI_ComparableMstLinkDitches {
+            get {
+                return this.table_VSI_ComparableMstLinkDitches;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public _VSI_ComparableMstLinkDitchesNewDepthLT1DataTable _VSI_ComparableMstLinkDitchesNewDepthLT1 {
+            get {
+                return this.table_VSI_ComparableMstLinkDitchesNewDepthLT1;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public _VSI_ComparableMstLinkDItchesNoDSNodeDataTable _VSI_ComparableMstLinkDItchesNoDSNode {
+            get {
+                return this.table_VSI_ComparableMstLinkDItchesNoDSNode;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public _VSI_ComparableMstLinkDitchesNoUSNodeDataTable _VSI_ComparableMstLinkDitchesNoUSNode {
+            get {
+                return this.table_VSI_ComparableMstLinkDitchesNoUSNode;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public _VSI_ComparableMstLinkDitchesTransferableDataTable _VSI_ComparableMstLinkDitchesTransferable {
+            get {
+                return this.table_VSI_ComparableMstLinkDitchesTransferable;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public _VSI_ComparableMstLinkDitchesWidthTopLTBottomDataTable _VSI_ComparableMstLinkDitchesWidthTopLTBottom {
+            get {
+                return this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public _VSI_DifficultCulvertsDataTable _VSI_DifficultCulverts {
+            get {
+                return this.table_VSI_DifficultCulverts;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public _VSI_DifficultDitchesDataTable _VSI_DifficultDitches {
+            get {
+                return this.table_VSI_DifficultDitches;
             }
         }
         
@@ -172,14 +312,44 @@ namespace StormwaterInterface {
                 this.Reset();
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXml(reader);
-                if ((ds.Tables["View_CulvertsDitches"] != null)) {
-                    base.Tables.Add(new View_CulvertsDitchesDataTable(ds.Tables["View_CulvertsDitches"]));
-                }
                 if ((ds.Tables["DitchesCulverts"] != null)) {
                     base.Tables.Add(new DitchesCulvertsDataTable(ds.Tables["DitchesCulverts"]));
                 }
                 if ((ds.Tables["EvaluatorPage"] != null)) {
                     base.Tables.Add(new EvaluatorPageDataTable(ds.Tables["EvaluatorPage"]));
+                }
+                if ((ds.Tables["_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6"] != null)) {
+                    base.Tables.Add(new _VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6DataTable(ds.Tables["_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6"]));
+                }
+                if ((ds.Tables["_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard"] != null)) {
+                    base.Tables.Add(new _VSI_ComparableMstLinkCulvertsNewDiameterNotStandardDataTable(ds.Tables["_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard"]));
+                }
+                if ((ds.Tables["_VSI_ComparableMStLinkCulvertsTransferable"] != null)) {
+                    base.Tables.Add(new _VSI_ComparableMStLinkCulvertsTransferableDataTable(ds.Tables["_VSI_ComparableMStLinkCulvertsTransferable"]));
+                }
+                if ((ds.Tables["_VSI_ComparableMstLinkDitches"] != null)) {
+                    base.Tables.Add(new _VSI_ComparableMstLinkDitchesDataTable(ds.Tables["_VSI_ComparableMstLinkDitches"]));
+                }
+                if ((ds.Tables["_VSI_ComparableMstLinkDitchesNewDepthLT1"] != null)) {
+                    base.Tables.Add(new _VSI_ComparableMstLinkDitchesNewDepthLT1DataTable(ds.Tables["_VSI_ComparableMstLinkDitchesNewDepthLT1"]));
+                }
+                if ((ds.Tables["_VSI_ComparableMstLinkDItchesNoDSNode"] != null)) {
+                    base.Tables.Add(new _VSI_ComparableMstLinkDItchesNoDSNodeDataTable(ds.Tables["_VSI_ComparableMstLinkDItchesNoDSNode"]));
+                }
+                if ((ds.Tables["_VSI_ComparableMstLinkDitchesNoUSNode"] != null)) {
+                    base.Tables.Add(new _VSI_ComparableMstLinkDitchesNoUSNodeDataTable(ds.Tables["_VSI_ComparableMstLinkDitchesNoUSNode"]));
+                }
+                if ((ds.Tables["_VSI_ComparableMstLinkDitchesTransferable"] != null)) {
+                    base.Tables.Add(new _VSI_ComparableMstLinkDitchesTransferableDataTable(ds.Tables["_VSI_ComparableMstLinkDitchesTransferable"]));
+                }
+                if ((ds.Tables["_VSI_ComparableMstLinkDitchesWidthTopLTBottom"] != null)) {
+                    base.Tables.Add(new _VSI_ComparableMstLinkDitchesWidthTopLTBottomDataTable(ds.Tables["_VSI_ComparableMstLinkDitchesWidthTopLTBottom"]));
+                }
+                if ((ds.Tables["_VSI_DifficultCulverts"] != null)) {
+                    base.Tables.Add(new _VSI_DifficultCulvertsDataTable(ds.Tables["_VSI_DifficultCulverts"]));
+                }
+                if ((ds.Tables["_VSI_DifficultDitches"] != null)) {
+                    base.Tables.Add(new _VSI_DifficultDitchesDataTable(ds.Tables["_VSI_DifficultDitches"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -211,12 +381,6 @@ namespace StormwaterInterface {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         internal void InitVars(bool initTable) {
-            this.tableView_CulvertsDitches = ((View_CulvertsDitchesDataTable)(base.Tables["View_CulvertsDitches"]));
-            if ((initTable == true)) {
-                if ((this.tableView_CulvertsDitches != null)) {
-                    this.tableView_CulvertsDitches.InitVars();
-                }
-            }
             this.tableDitchesCulverts = ((DitchesCulvertsDataTable)(base.Tables["DitchesCulverts"]));
             if ((initTable == true)) {
                 if ((this.tableDitchesCulverts != null)) {
@@ -229,6 +393,72 @@ namespace StormwaterInterface {
                     this.tableEvaluatorPage.InitVars();
                 }
             }
+            this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6 = ((_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6DataTable)(base.Tables["_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6"]));
+            if ((initTable == true)) {
+                if ((this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6 != null)) {
+                    this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6.InitVars();
+                }
+            }
+            this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard = ((_VSI_ComparableMstLinkCulvertsNewDiameterNotStandardDataTable)(base.Tables["_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard"]));
+            if ((initTable == true)) {
+                if ((this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard != null)) {
+                    this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard.InitVars();
+                }
+            }
+            this.table_VSI_ComparableMStLinkCulvertsTransferable = ((_VSI_ComparableMStLinkCulvertsTransferableDataTable)(base.Tables["_VSI_ComparableMStLinkCulvertsTransferable"]));
+            if ((initTable == true)) {
+                if ((this.table_VSI_ComparableMStLinkCulvertsTransferable != null)) {
+                    this.table_VSI_ComparableMStLinkCulvertsTransferable.InitVars();
+                }
+            }
+            this.table_VSI_ComparableMstLinkDitches = ((_VSI_ComparableMstLinkDitchesDataTable)(base.Tables["_VSI_ComparableMstLinkDitches"]));
+            if ((initTable == true)) {
+                if ((this.table_VSI_ComparableMstLinkDitches != null)) {
+                    this.table_VSI_ComparableMstLinkDitches.InitVars();
+                }
+            }
+            this.table_VSI_ComparableMstLinkDitchesNewDepthLT1 = ((_VSI_ComparableMstLinkDitchesNewDepthLT1DataTable)(base.Tables["_VSI_ComparableMstLinkDitchesNewDepthLT1"]));
+            if ((initTable == true)) {
+                if ((this.table_VSI_ComparableMstLinkDitchesNewDepthLT1 != null)) {
+                    this.table_VSI_ComparableMstLinkDitchesNewDepthLT1.InitVars();
+                }
+            }
+            this.table_VSI_ComparableMstLinkDItchesNoDSNode = ((_VSI_ComparableMstLinkDItchesNoDSNodeDataTable)(base.Tables["_VSI_ComparableMstLinkDItchesNoDSNode"]));
+            if ((initTable == true)) {
+                if ((this.table_VSI_ComparableMstLinkDItchesNoDSNode != null)) {
+                    this.table_VSI_ComparableMstLinkDItchesNoDSNode.InitVars();
+                }
+            }
+            this.table_VSI_ComparableMstLinkDitchesNoUSNode = ((_VSI_ComparableMstLinkDitchesNoUSNodeDataTable)(base.Tables["_VSI_ComparableMstLinkDitchesNoUSNode"]));
+            if ((initTable == true)) {
+                if ((this.table_VSI_ComparableMstLinkDitchesNoUSNode != null)) {
+                    this.table_VSI_ComparableMstLinkDitchesNoUSNode.InitVars();
+                }
+            }
+            this.table_VSI_ComparableMstLinkDitchesTransferable = ((_VSI_ComparableMstLinkDitchesTransferableDataTable)(base.Tables["_VSI_ComparableMstLinkDitchesTransferable"]));
+            if ((initTable == true)) {
+                if ((this.table_VSI_ComparableMstLinkDitchesTransferable != null)) {
+                    this.table_VSI_ComparableMstLinkDitchesTransferable.InitVars();
+                }
+            }
+            this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom = ((_VSI_ComparableMstLinkDitchesWidthTopLTBottomDataTable)(base.Tables["_VSI_ComparableMstLinkDitchesWidthTopLTBottom"]));
+            if ((initTable == true)) {
+                if ((this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom != null)) {
+                    this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom.InitVars();
+                }
+            }
+            this.table_VSI_DifficultCulverts = ((_VSI_DifficultCulvertsDataTable)(base.Tables["_VSI_DifficultCulverts"]));
+            if ((initTable == true)) {
+                if ((this.table_VSI_DifficultCulverts != null)) {
+                    this.table_VSI_DifficultCulverts.InitVars();
+                }
+            }
+            this.table_VSI_DifficultDitches = ((_VSI_DifficultDitchesDataTable)(base.Tables["_VSI_DifficultDitches"]));
+            if ((initTable == true)) {
+                if ((this.table_VSI_DifficultDitches != null)) {
+                    this.table_VSI_DifficultDitches.InitVars();
+                }
+            }
             this.relationEvaluatorPage_DitchesCulverts = this.Relations["EvaluatorPage_DitchesCulverts"];
         }
         
@@ -239,21 +469,36 @@ namespace StormwaterInterface {
             this.Namespace = "http://tempuri.org/FieldWorkDBDataSet.xsd";
             this.EnforceConstraints = true;
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
-            this.tableView_CulvertsDitches = new View_CulvertsDitchesDataTable();
-            base.Tables.Add(this.tableView_CulvertsDitches);
             this.tableDitchesCulverts = new DitchesCulvertsDataTable();
             base.Tables.Add(this.tableDitchesCulverts);
             this.tableEvaluatorPage = new EvaluatorPageDataTable();
             base.Tables.Add(this.tableEvaluatorPage);
+            this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6 = new _VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6DataTable();
+            base.Tables.Add(this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6);
+            this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard = new _VSI_ComparableMstLinkCulvertsNewDiameterNotStandardDataTable();
+            base.Tables.Add(this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard);
+            this.table_VSI_ComparableMStLinkCulvertsTransferable = new _VSI_ComparableMStLinkCulvertsTransferableDataTable();
+            base.Tables.Add(this.table_VSI_ComparableMStLinkCulvertsTransferable);
+            this.table_VSI_ComparableMstLinkDitches = new _VSI_ComparableMstLinkDitchesDataTable();
+            base.Tables.Add(this.table_VSI_ComparableMstLinkDitches);
+            this.table_VSI_ComparableMstLinkDitchesNewDepthLT1 = new _VSI_ComparableMstLinkDitchesNewDepthLT1DataTable();
+            base.Tables.Add(this.table_VSI_ComparableMstLinkDitchesNewDepthLT1);
+            this.table_VSI_ComparableMstLinkDItchesNoDSNode = new _VSI_ComparableMstLinkDItchesNoDSNodeDataTable();
+            base.Tables.Add(this.table_VSI_ComparableMstLinkDItchesNoDSNode);
+            this.table_VSI_ComparableMstLinkDitchesNoUSNode = new _VSI_ComparableMstLinkDitchesNoUSNodeDataTable();
+            base.Tables.Add(this.table_VSI_ComparableMstLinkDitchesNoUSNode);
+            this.table_VSI_ComparableMstLinkDitchesTransferable = new _VSI_ComparableMstLinkDitchesTransferableDataTable();
+            base.Tables.Add(this.table_VSI_ComparableMstLinkDitchesTransferable);
+            this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom = new _VSI_ComparableMstLinkDitchesWidthTopLTBottomDataTable();
+            base.Tables.Add(this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom);
+            this.table_VSI_DifficultCulverts = new _VSI_DifficultCulvertsDataTable();
+            base.Tables.Add(this.table_VSI_DifficultCulverts);
+            this.table_VSI_DifficultDitches = new _VSI_DifficultDitchesDataTable();
+            base.Tables.Add(this.table_VSI_DifficultDitches);
             this.relationEvaluatorPage_DitchesCulverts = new global::System.Data.DataRelation("EvaluatorPage_DitchesCulverts", new global::System.Data.DataColumn[] {
                         this.tableEvaluatorPage.EvaluatorPageIDColumn}, new global::System.Data.DataColumn[] {
                         this.tableDitchesCulverts.EvaluatorPageIDColumn}, false);
             this.Relations.Add(this.relationEvaluatorPage_DitchesCulverts);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializeView_CulvertsDitches() {
-            return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -263,6 +508,61 @@ namespace StormwaterInterface {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private bool ShouldSerializeEvaluatorPage() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private bool ShouldSerialize_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private bool ShouldSerialize_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private bool ShouldSerialize_VSI_ComparableMStLinkCulvertsTransferable() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private bool ShouldSerialize_VSI_ComparableMstLinkDitches() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private bool ShouldSerialize_VSI_ComparableMstLinkDitchesNewDepthLT1() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private bool ShouldSerialize_VSI_ComparableMstLinkDItchesNoDSNode() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private bool ShouldSerialize_VSI_ComparableMstLinkDitchesNoUSNode() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private bool ShouldSerialize_VSI_ComparableMstLinkDitchesTransferable() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private bool ShouldSerialize_VSI_ComparableMstLinkDitchesWidthTopLTBottom() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private bool ShouldSerialize_VSI_DifficultCulverts() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private bool ShouldSerialize_VSI_DifficultDitches() {
             return false;
         }
         
@@ -319,384 +619,31 @@ namespace StormwaterInterface {
             return type;
         }
         
-        public delegate void View_CulvertsDitchesRowChangeEventHandler(object sender, View_CulvertsDitchesRowChangeEvent e);
-        
         public delegate void DitchesCulvertsRowChangeEventHandler(object sender, DitchesCulvertsRowChangeEvent e);
         
         public delegate void EvaluatorPageRowChangeEventHandler(object sender, EvaluatorPageRowChangeEvent e);
         
-        /// <summary>
-        ///Represents the strongly named DataTable class.
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        [global::System.Serializable()]
-        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class View_CulvertsDitchesDataTable : global::System.Data.TypedTableBase<View_CulvertsDitchesRow> {
-            
-            private global::System.Data.DataColumn columnNode_No;
-            
-            private global::System.Data.DataColumn columnLPO;
-            
-            private global::System.Data.DataColumn columnShape;
-            
-            private global::System.Data.DataColumn columnPipe_D;
-            
-            private global::System.Data.DataColumn columnCulvDepth;
-            
-            private global::System.Data.DataColumn columnCulvMaterial;
-            
-            private global::System.Data.DataColumn columnCulvPhoto_ID;
-            
-            private global::System.Data.DataColumn columnDitchDepth;
-            
-            private global::System.Data.DataColumn columnWidthTop;
-            
-            private global::System.Data.DataColumn columnWidthBottom;
-            
-            private global::System.Data.DataColumn columnDitchMaterial;
-            
-            private global::System.Data.DataColumn columnDitchPhoto_ID;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public View_CulvertsDitchesDataTable() {
-                this.TableName = "View_CulvertsDitches";
-                this.BeginInit();
-                this.InitClass();
-                this.EndInit();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal View_CulvertsDitchesDataTable(global::System.Data.DataTable table) {
-                this.TableName = table.TableName;
-                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
-                    this.CaseSensitive = table.CaseSensitive;
-                }
-                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
-                    this.Locale = table.Locale;
-                }
-                if ((table.Namespace != table.DataSet.Namespace)) {
-                    this.Namespace = table.Namespace;
-                }
-                this.Prefix = table.Prefix;
-                this.MinimumCapacity = table.MinimumCapacity;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected View_CulvertsDitchesDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
-                    base(info, context) {
-                this.InitVars();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn Node_NoColumn {
-                get {
-                    return this.columnNode_No;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn LPOColumn {
-                get {
-                    return this.columnLPO;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn ShapeColumn {
-                get {
-                    return this.columnShape;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn Pipe_DColumn {
-                get {
-                    return this.columnPipe_D;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn CulvDepthColumn {
-                get {
-                    return this.columnCulvDepth;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn CulvMaterialColumn {
-                get {
-                    return this.columnCulvMaterial;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn CulvPhoto_IDColumn {
-                get {
-                    return this.columnCulvPhoto_ID;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn DitchDepthColumn {
-                get {
-                    return this.columnDitchDepth;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn WidthTopColumn {
-                get {
-                    return this.columnWidthTop;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn WidthBottomColumn {
-                get {
-                    return this.columnWidthBottom;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn DitchMaterialColumn {
-                get {
-                    return this.columnDitchMaterial;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn DitchPhoto_IDColumn {
-                get {
-                    return this.columnDitchPhoto_ID;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.ComponentModel.Browsable(false)]
-            public int Count {
-                get {
-                    return this.Rows.Count;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public View_CulvertsDitchesRow this[int index] {
-                get {
-                    return ((View_CulvertsDitchesRow)(this.Rows[index]));
-                }
-            }
-            
-            public event View_CulvertsDitchesRowChangeEventHandler View_CulvertsDitchesRowChanging;
-            
-            public event View_CulvertsDitchesRowChangeEventHandler View_CulvertsDitchesRowChanged;
-            
-            public event View_CulvertsDitchesRowChangeEventHandler View_CulvertsDitchesRowDeleting;
-            
-            public event View_CulvertsDitchesRowChangeEventHandler View_CulvertsDitchesRowDeleted;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void AddView_CulvertsDitchesRow(View_CulvertsDitchesRow row) {
-                this.Rows.Add(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public View_CulvertsDitchesRow AddView_CulvertsDitchesRow(string Node_No, string LPO, string Shape, double Pipe_D, double CulvDepth, string CulvMaterial, string CulvPhoto_ID, double DitchDepth, double WidthTop, double WidthBottom, string DitchMaterial, string DitchPhoto_ID) {
-                View_CulvertsDitchesRow rowView_CulvertsDitchesRow = ((View_CulvertsDitchesRow)(this.NewRow()));
-                object[] columnValuesArray = new object[] {
-                        Node_No,
-                        LPO,
-                        Shape,
-                        Pipe_D,
-                        CulvDepth,
-                        CulvMaterial,
-                        CulvPhoto_ID,
-                        DitchDepth,
-                        WidthTop,
-                        WidthBottom,
-                        DitchMaterial,
-                        DitchPhoto_ID};
-                rowView_CulvertsDitchesRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowView_CulvertsDitchesRow);
-                return rowView_CulvertsDitchesRow;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public override global::System.Data.DataTable Clone() {
-                View_CulvertsDitchesDataTable cln = ((View_CulvertsDitchesDataTable)(base.Clone()));
-                cln.InitVars();
-                return cln;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Data.DataTable CreateInstance() {
-                return new View_CulvertsDitchesDataTable();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal void InitVars() {
-                this.columnNode_No = base.Columns["Node_No"];
-                this.columnLPO = base.Columns["LPO"];
-                this.columnShape = base.Columns["Shape"];
-                this.columnPipe_D = base.Columns["Pipe_D"];
-                this.columnCulvDepth = base.Columns["CulvDepth"];
-                this.columnCulvMaterial = base.Columns["CulvMaterial"];
-                this.columnCulvPhoto_ID = base.Columns["CulvPhoto_ID"];
-                this.columnDitchDepth = base.Columns["DitchDepth"];
-                this.columnWidthTop = base.Columns["WidthTop"];
-                this.columnWidthBottom = base.Columns["WidthBottom"];
-                this.columnDitchMaterial = base.Columns["DitchMaterial"];
-                this.columnDitchPhoto_ID = base.Columns["DitchPhoto_ID"];
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            private void InitClass() {
-                this.columnNode_No = new global::System.Data.DataColumn("Node_No", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnNode_No);
-                this.columnLPO = new global::System.Data.DataColumn("LPO", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnLPO);
-                this.columnShape = new global::System.Data.DataColumn("Shape", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnShape);
-                this.columnPipe_D = new global::System.Data.DataColumn("Pipe_D", typeof(double), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnPipe_D);
-                this.columnCulvDepth = new global::System.Data.DataColumn("CulvDepth", typeof(double), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCulvDepth);
-                this.columnCulvMaterial = new global::System.Data.DataColumn("CulvMaterial", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCulvMaterial);
-                this.columnCulvPhoto_ID = new global::System.Data.DataColumn("CulvPhoto_ID", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCulvPhoto_ID);
-                this.columnDitchDepth = new global::System.Data.DataColumn("DitchDepth", typeof(double), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnDitchDepth);
-                this.columnWidthTop = new global::System.Data.DataColumn("WidthTop", typeof(double), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnWidthTop);
-                this.columnWidthBottom = new global::System.Data.DataColumn("WidthBottom", typeof(double), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnWidthBottom);
-                this.columnDitchMaterial = new global::System.Data.DataColumn("DitchMaterial", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnDitchMaterial);
-                this.columnDitchPhoto_ID = new global::System.Data.DataColumn("DitchPhoto_ID", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnDitchPhoto_ID);
-                this.columnNode_No.MaxLength = 10;
-                this.columnLPO.MaxLength = 1;
-                this.columnShape.MaxLength = 10;
-                this.columnCulvMaterial.MaxLength = 10;
-                this.columnCulvPhoto_ID.MaxLength = 256;
-                this.columnDitchMaterial.MaxLength = 10;
-                this.columnDitchPhoto_ID.MaxLength = 256;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public View_CulvertsDitchesRow NewView_CulvertsDitchesRow() {
-                return ((View_CulvertsDitchesRow)(this.NewRow()));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new View_CulvertsDitchesRow(builder);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Type GetRowType() {
-                return typeof(View_CulvertsDitchesRow);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanged(e);
-                if ((this.View_CulvertsDitchesRowChanged != null)) {
-                    this.View_CulvertsDitchesRowChanged(this, new View_CulvertsDitchesRowChangeEvent(((View_CulvertsDitchesRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanging(e);
-                if ((this.View_CulvertsDitchesRowChanging != null)) {
-                    this.View_CulvertsDitchesRowChanging(this, new View_CulvertsDitchesRowChangeEvent(((View_CulvertsDitchesRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleted(e);
-                if ((this.View_CulvertsDitchesRowDeleted != null)) {
-                    this.View_CulvertsDitchesRowDeleted(this, new View_CulvertsDitchesRowChangeEvent(((View_CulvertsDitchesRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleting(e);
-                if ((this.View_CulvertsDitchesRowDeleting != null)) {
-                    this.View_CulvertsDitchesRowDeleting(this, new View_CulvertsDitchesRowChangeEvent(((View_CulvertsDitchesRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void RemoveView_CulvertsDitchesRow(View_CulvertsDitchesRow row) {
-                this.Rows.Remove(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
-                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                FieldWorkDBDataSet ds = new FieldWorkDBDataSet();
-                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
-                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
-                any1.MinOccurs = new decimal(0);
-                any1.MaxOccurs = decimal.MaxValue;
-                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any1);
-                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
-                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
-                any2.MinOccurs = new decimal(1);
-                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any2);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute1.Name = "namespace";
-                attribute1.FixedValue = ds.Namespace;
-                type.Attributes.Add(attribute1);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "View_CulvertsDitchesDataTable";
-                type.Attributes.Add(attribute2);
-                type.Particle = sequence;
-                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-                if (xs.Contains(dsSchema.TargetNamespace)) {
-                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
-                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-                    try {
-                        global::System.Xml.Schema.XmlSchema schema = null;
-                        dsSchema.Write(s1);
-                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
-                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
-                            s2.SetLength(0);
-                            schema.Write(s2);
-                            if ((s1.Length == s2.Length)) {
-                                s1.Position = 0;
-                                s2.Position = 0;
-                                for (; ((s1.Position != s1.Length) 
-                                            && (s1.ReadByte() == s2.ReadByte())); ) {
-                                    ;
-                                }
-                                if ((s1.Position == s1.Length)) {
-                                    return type;
-                                }
-                            }
-                        }
-                    }
-                    finally {
-                        if ((s1 != null)) {
-                            s1.Close();
-                        }
-                        if ((s2 != null)) {
-                            s2.Close();
-                        }
-                    }
-                }
-                xs.Add(dsSchema);
-                return type;
-            }
-        }
+        public delegate void _VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6RowChangeEventHandler(object sender, _VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6RowChangeEvent e);
+        
+        public delegate void _VSI_ComparableMstLinkCulvertsNewDiameterNotStandardRowChangeEventHandler(object sender, _VSI_ComparableMstLinkCulvertsNewDiameterNotStandardRowChangeEvent e);
+        
+        public delegate void _VSI_ComparableMStLinkCulvertsTransferableRowChangeEventHandler(object sender, _VSI_ComparableMStLinkCulvertsTransferableRowChangeEvent e);
+        
+        public delegate void _VSI_ComparableMstLinkDitchesRowChangeEventHandler(object sender, _VSI_ComparableMstLinkDitchesRowChangeEvent e);
+        
+        public delegate void _VSI_ComparableMstLinkDitchesNewDepthLT1RowChangeEventHandler(object sender, _VSI_ComparableMstLinkDitchesNewDepthLT1RowChangeEvent e);
+        
+        public delegate void _VSI_ComparableMstLinkDItchesNoDSNodeRowChangeEventHandler(object sender, _VSI_ComparableMstLinkDItchesNoDSNodeRowChangeEvent e);
+        
+        public delegate void _VSI_ComparableMstLinkDitchesNoUSNodeRowChangeEventHandler(object sender, _VSI_ComparableMstLinkDitchesNoUSNodeRowChangeEvent e);
+        
+        public delegate void _VSI_ComparableMstLinkDitchesTransferableRowChangeEventHandler(object sender, _VSI_ComparableMstLinkDitchesTransferableRowChangeEvent e);
+        
+        public delegate void _VSI_ComparableMstLinkDitchesWidthTopLTBottomRowChangeEventHandler(object sender, _VSI_ComparableMstLinkDitchesWidthTopLTBottomRowChangeEvent e);
+        
+        public delegate void _VSI_DifficultCulvertsRowChangeEventHandler(object sender, _VSI_DifficultCulvertsRowChangeEvent e);
+        
+        public delegate void _VSI_DifficultDitchesRowChangeEventHandler(object sender, _VSI_DifficultDitchesRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -1485,317 +1432,5158 @@ namespace StormwaterInterface {
         }
         
         /// <summary>
-        ///Represents strongly named DataRow class.
+        ///Represents the strongly named DataTable class.
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        public partial class View_CulvertsDitchesRow : global::System.Data.DataRow {
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class _VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6DataTable : global::System.Data.TypedTableBase<_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6Row> {
             
-            private View_CulvertsDitchesDataTable tableView_CulvertsDitches;
+            private global::System.Data.DataColumn columnMLinkID;
+            
+            private global::System.Data.DataColumn columnCompKey;
+            
+            private global::System.Data.DataColumn columnNode_No;
+            
+            private global::System.Data.DataColumn columnOldShape;
+            
+            private global::System.Data.DataColumn columnNewShape;
+            
+            private global::System.Data.DataColumn columnOldDiameter;
+            
+            private global::System.Data.DataColumn columnNewDiameter;
+            
+            private global::System.Data.DataColumn columnUnobstructedHeight;
+            
+            private global::System.Data.DataColumn columnOldMaterial;
+            
+            private global::System.Data.DataColumn columnNewMaterial;
+            
+            private global::System.Data.DataColumn columnEvaluatorPageID;
+            
+            private global::System.Data.DataColumn columnWatershed;
+            
+            private global::System.Data.DataColumn columnSubwatershed;
+            
+            private global::System.Data.DataColumn columnDate;
+            
+            private global::System.Data.DataColumn columnEvaluator;
+            
+            private global::System.Data.DataColumn columnMapNo;
+            
+            private global::System.Data.DataColumn columnMapPage;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal View_CulvertsDitchesRow(global::System.Data.DataRowBuilder rb) : 
-                    base(rb) {
-                this.tableView_CulvertsDitches = ((View_CulvertsDitchesDataTable)(this.Table));
+            public _VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6DataTable() {
+                this.TableName = "_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string Node_No {
+            internal _VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6DataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected _VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6DataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn MLinkIDColumn {
                 get {
-                    try {
-                        return ((string)(this[this.tableView_CulvertsDitches.Node_NoColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Node_No\' in table \'View_CulvertsDitches\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableView_CulvertsDitches.Node_NoColumn] = value;
+                    return this.columnMLinkID;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string LPO {
+            public global::System.Data.DataColumn CompKeyColumn {
                 get {
-                    try {
-                        return ((string)(this[this.tableView_CulvertsDitches.LPOColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'LPO\' in table \'View_CulvertsDitches\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableView_CulvertsDitches.LPOColumn] = value;
+                    return this.columnCompKey;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string Shape {
+            public global::System.Data.DataColumn Node_NoColumn {
                 get {
-                    try {
-                        return ((string)(this[this.tableView_CulvertsDitches.ShapeColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Shape\' in table \'View_CulvertsDitches\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableView_CulvertsDitches.ShapeColumn] = value;
+                    return this.columnNode_No;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public double Pipe_D {
+            public global::System.Data.DataColumn OldShapeColumn {
                 get {
-                    try {
-                        return ((double)(this[this.tableView_CulvertsDitches.Pipe_DColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Pipe_D\' in table \'View_CulvertsDitches\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableView_CulvertsDitches.Pipe_DColumn] = value;
+                    return this.columnOldShape;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public double CulvDepth {
+            public global::System.Data.DataColumn NewShapeColumn {
                 get {
-                    try {
-                        return ((double)(this[this.tableView_CulvertsDitches.CulvDepthColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'CulvDepth\' in table \'View_CulvertsDitches\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableView_CulvertsDitches.CulvDepthColumn] = value;
+                    return this.columnNewShape;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string CulvMaterial {
+            public global::System.Data.DataColumn OldDiameterColumn {
                 get {
-                    try {
-                        return ((string)(this[this.tableView_CulvertsDitches.CulvMaterialColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'CulvMaterial\' in table \'View_CulvertsDitches\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableView_CulvertsDitches.CulvMaterialColumn] = value;
+                    return this.columnOldDiameter;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string CulvPhoto_ID {
+            public global::System.Data.DataColumn NewDiameterColumn {
                 get {
-                    try {
-                        return ((string)(this[this.tableView_CulvertsDitches.CulvPhoto_IDColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'CulvPhoto_ID\' in table \'View_CulvertsDitches\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableView_CulvertsDitches.CulvPhoto_IDColumn] = value;
+                    return this.columnNewDiameter;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public double DitchDepth {
+            public global::System.Data.DataColumn UnobstructedHeightColumn {
                 get {
-                    try {
-                        return ((double)(this[this.tableView_CulvertsDitches.DitchDepthColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'DitchDepth\' in table \'View_CulvertsDitches\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableView_CulvertsDitches.DitchDepthColumn] = value;
+                    return this.columnUnobstructedHeight;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public double WidthTop {
+            public global::System.Data.DataColumn OldMaterialColumn {
                 get {
-                    try {
-                        return ((double)(this[this.tableView_CulvertsDitches.WidthTopColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'WidthTop\' in table \'View_CulvertsDitches\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableView_CulvertsDitches.WidthTopColumn] = value;
+                    return this.columnOldMaterial;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public double WidthBottom {
+            public global::System.Data.DataColumn NewMaterialColumn {
                 get {
-                    try {
-                        return ((double)(this[this.tableView_CulvertsDitches.WidthBottomColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'WidthBottom\' in table \'View_CulvertsDitches\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableView_CulvertsDitches.WidthBottomColumn] = value;
+                    return this.columnNewMaterial;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string DitchMaterial {
+            public global::System.Data.DataColumn EvaluatorPageIDColumn {
                 get {
-                    try {
-                        return ((string)(this[this.tableView_CulvertsDitches.DitchMaterialColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'DitchMaterial\' in table \'View_CulvertsDitches\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableView_CulvertsDitches.DitchMaterialColumn] = value;
+                    return this.columnEvaluatorPageID;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string DitchPhoto_ID {
+            public global::System.Data.DataColumn WatershedColumn {
                 get {
+                    return this.columnWatershed;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn SubwatershedColumn {
+                get {
+                    return this.columnSubwatershed;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn DateColumn {
+                get {
+                    return this.columnDate;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn EvaluatorColumn {
+                get {
+                    return this.columnEvaluator;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn MapNoColumn {
+                get {
+                    return this.columnMapNo;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn MapPageColumn {
+                get {
+                    return this.columnMapPage;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public _VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6Row this[int index] {
+                get {
+                    return ((_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6Row)(this.Rows[index]));
+                }
+            }
+            
+            public event _VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6RowChangeEventHandler _VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6RowChanging;
+            
+            public event _VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6RowChangeEventHandler _VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6RowChanged;
+            
+            public event _VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6RowChangeEventHandler _VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6RowDeleting;
+            
+            public event _VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6RowChangeEventHandler _VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6RowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void Add_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6Row(_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6Row row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public _VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6Row Add_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6Row(
+                        int MLinkID, 
+                        int CompKey, 
+                        string Node_No, 
+                        string OldShape, 
+                        string NewShape, 
+                        decimal OldDiameter, 
+                        double NewDiameter, 
+                        double UnobstructedHeight, 
+                        string OldMaterial, 
+                        string NewMaterial, 
+                        int EvaluatorPageID, 
+                        string Watershed, 
+                        string Subwatershed, 
+                        System.DateTime Date, 
+                        string Evaluator, 
+                        int MapNo, 
+                        int MapPage) {
+                _VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6Row row_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6Row = ((_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6Row)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        MLinkID,
+                        CompKey,
+                        Node_No,
+                        OldShape,
+                        NewShape,
+                        OldDiameter,
+                        NewDiameter,
+                        UnobstructedHeight,
+                        OldMaterial,
+                        NewMaterial,
+                        EvaluatorPageID,
+                        Watershed,
+                        Subwatershed,
+                        Date,
+                        Evaluator,
+                        MapNo,
+                        MapPage};
+                row_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6Row.ItemArray = columnValuesArray;
+                this.Rows.Add(row_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6Row);
+                return row_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6Row;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public override global::System.Data.DataTable Clone() {
+                _VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6DataTable cln = ((_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6DataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new _VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6DataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal void InitVars() {
+                this.columnMLinkID = base.Columns["MLinkID"];
+                this.columnCompKey = base.Columns["CompKey"];
+                this.columnNode_No = base.Columns["Node_No"];
+                this.columnOldShape = base.Columns["OldShape"];
+                this.columnNewShape = base.Columns["NewShape"];
+                this.columnOldDiameter = base.Columns["OldDiameter"];
+                this.columnNewDiameter = base.Columns["NewDiameter"];
+                this.columnUnobstructedHeight = base.Columns["UnobstructedHeight"];
+                this.columnOldMaterial = base.Columns["OldMaterial"];
+                this.columnNewMaterial = base.Columns["NewMaterial"];
+                this.columnEvaluatorPageID = base.Columns["EvaluatorPageID"];
+                this.columnWatershed = base.Columns["Watershed"];
+                this.columnSubwatershed = base.Columns["Subwatershed"];
+                this.columnDate = base.Columns["Date"];
+                this.columnEvaluator = base.Columns["Evaluator"];
+                this.columnMapNo = base.Columns["MapNo"];
+                this.columnMapPage = base.Columns["MapPage"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            private void InitClass() {
+                this.columnMLinkID = new global::System.Data.DataColumn("MLinkID", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMLinkID);
+                this.columnCompKey = new global::System.Data.DataColumn("CompKey", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCompKey);
+                this.columnNode_No = new global::System.Data.DataColumn("Node_No", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNode_No);
+                this.columnOldShape = new global::System.Data.DataColumn("OldShape", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnOldShape);
+                this.columnNewShape = new global::System.Data.DataColumn("NewShape", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNewShape);
+                this.columnOldDiameter = new global::System.Data.DataColumn("OldDiameter", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnOldDiameter);
+                this.columnNewDiameter = new global::System.Data.DataColumn("NewDiameter", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNewDiameter);
+                this.columnUnobstructedHeight = new global::System.Data.DataColumn("UnobstructedHeight", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnUnobstructedHeight);
+                this.columnOldMaterial = new global::System.Data.DataColumn("OldMaterial", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnOldMaterial);
+                this.columnNewMaterial = new global::System.Data.DataColumn("NewMaterial", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNewMaterial);
+                this.columnEvaluatorPageID = new global::System.Data.DataColumn("EvaluatorPageID", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEvaluatorPageID);
+                this.columnWatershed = new global::System.Data.DataColumn("Watershed", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnWatershed);
+                this.columnSubwatershed = new global::System.Data.DataColumn("Subwatershed", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSubwatershed);
+                this.columnDate = new global::System.Data.DataColumn("Date", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDate);
+                this.columnEvaluator = new global::System.Data.DataColumn("Evaluator", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEvaluator);
+                this.columnMapNo = new global::System.Data.DataColumn("MapNo", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMapNo);
+                this.columnMapPage = new global::System.Data.DataColumn("MapPage", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMapPage);
+                this.columnNode_No.MaxLength = 10;
+                this.columnOldShape.MaxLength = 4;
+                this.columnNewShape.MaxLength = 10;
+                this.columnOldMaterial.MaxLength = 6;
+                this.columnNewMaterial.MaxLength = 10;
+                this.columnWatershed.MaxLength = 50;
+                this.columnSubwatershed.MaxLength = 50;
+                this.columnEvaluator.MaxLength = 50;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public _VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6Row New_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6Row() {
+                return ((_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6Row)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new _VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6Row(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Type GetRowType() {
+                return typeof(_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6Row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this._VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6RowChanged != null)) {
+                    this._VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6RowChanged(this, new _VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6RowChangeEvent(((_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6Row)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this._VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6RowChanging != null)) {
+                    this._VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6RowChanging(this, new _VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6RowChangeEvent(((_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6Row)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this._VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6RowDeleted != null)) {
+                    this._VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6RowDeleted(this, new _VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6RowChangeEvent(((_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6Row)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this._VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6RowDeleting != null)) {
+                    this._VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6RowDeleting(this, new _VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6RowChangeEvent(((_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6Row)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void Remove_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6Row(_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6Row row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                FieldWorkDBDataSet ds = new FieldWorkDBDataSet();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6DataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
                     try {
-                        return ((string)(this[this.tableView_CulvertsDitches.DitchPhoto_IDColumn]));
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'DitchPhoto_ID\' in table \'View_CulvertsDitches\' is DBNull.", e);
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
                     }
                 }
-                set {
-                    this[this.tableView_CulvertsDitches.DitchPhoto_IDColumn] = value;
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class _VSI_ComparableMstLinkCulvertsNewDiameterNotStandardDataTable : global::System.Data.TypedTableBase<_VSI_ComparableMstLinkCulvertsNewDiameterNotStandardRow> {
+            
+            private global::System.Data.DataColumn columnMLinkID;
+            
+            private global::System.Data.DataColumn columnCompKey;
+            
+            private global::System.Data.DataColumn columnNode_No;
+            
+            private global::System.Data.DataColumn columnOldShape;
+            
+            private global::System.Data.DataColumn columnNewShape;
+            
+            private global::System.Data.DataColumn columnOldDiameter;
+            
+            private global::System.Data.DataColumn columnNewDiameter;
+            
+            private global::System.Data.DataColumn columnUnobstructedHeight;
+            
+            private global::System.Data.DataColumn columnOldMaterial;
+            
+            private global::System.Data.DataColumn columnNewMaterial;
+            
+            private global::System.Data.DataColumn columnEvaluatorPageID;
+            
+            private global::System.Data.DataColumn columnWatershed;
+            
+            private global::System.Data.DataColumn columnSubwatershed;
+            
+            private global::System.Data.DataColumn columnDate;
+            
+            private global::System.Data.DataColumn columnEvaluator;
+            
+            private global::System.Data.DataColumn columnMapNo;
+            
+            private global::System.Data.DataColumn columnMapPage;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public _VSI_ComparableMstLinkCulvertsNewDiameterNotStandardDataTable() {
+                this.TableName = "_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal _VSI_ComparableMstLinkCulvertsNewDiameterNotStandardDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected _VSI_ComparableMstLinkCulvertsNewDiameterNotStandardDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn MLinkIDColumn {
+                get {
+                    return this.columnMLinkID;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsNode_NoNull() {
-                return this.IsNull(this.tableView_CulvertsDitches.Node_NoColumn);
+            public global::System.Data.DataColumn CompKeyColumn {
+                get {
+                    return this.columnCompKey;
+                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetNode_NoNull() {
-                this[this.tableView_CulvertsDitches.Node_NoColumn] = global::System.Convert.DBNull;
+            public global::System.Data.DataColumn Node_NoColumn {
+                get {
+                    return this.columnNode_No;
+                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsLPONull() {
-                return this.IsNull(this.tableView_CulvertsDitches.LPOColumn);
+            public global::System.Data.DataColumn OldShapeColumn {
+                get {
+                    return this.columnOldShape;
+                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetLPONull() {
-                this[this.tableView_CulvertsDitches.LPOColumn] = global::System.Convert.DBNull;
+            public global::System.Data.DataColumn NewShapeColumn {
+                get {
+                    return this.columnNewShape;
+                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsShapeNull() {
-                return this.IsNull(this.tableView_CulvertsDitches.ShapeColumn);
+            public global::System.Data.DataColumn OldDiameterColumn {
+                get {
+                    return this.columnOldDiameter;
+                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetShapeNull() {
-                this[this.tableView_CulvertsDitches.ShapeColumn] = global::System.Convert.DBNull;
+            public global::System.Data.DataColumn NewDiameterColumn {
+                get {
+                    return this.columnNewDiameter;
+                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsPipe_DNull() {
-                return this.IsNull(this.tableView_CulvertsDitches.Pipe_DColumn);
+            public global::System.Data.DataColumn UnobstructedHeightColumn {
+                get {
+                    return this.columnUnobstructedHeight;
+                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetPipe_DNull() {
-                this[this.tableView_CulvertsDitches.Pipe_DColumn] = global::System.Convert.DBNull;
+            public global::System.Data.DataColumn OldMaterialColumn {
+                get {
+                    return this.columnOldMaterial;
+                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsCulvDepthNull() {
-                return this.IsNull(this.tableView_CulvertsDitches.CulvDepthColumn);
+            public global::System.Data.DataColumn NewMaterialColumn {
+                get {
+                    return this.columnNewMaterial;
+                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetCulvDepthNull() {
-                this[this.tableView_CulvertsDitches.CulvDepthColumn] = global::System.Convert.DBNull;
+            public global::System.Data.DataColumn EvaluatorPageIDColumn {
+                get {
+                    return this.columnEvaluatorPageID;
+                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsCulvMaterialNull() {
-                return this.IsNull(this.tableView_CulvertsDitches.CulvMaterialColumn);
+            public global::System.Data.DataColumn WatershedColumn {
+                get {
+                    return this.columnWatershed;
+                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetCulvMaterialNull() {
-                this[this.tableView_CulvertsDitches.CulvMaterialColumn] = global::System.Convert.DBNull;
+            public global::System.Data.DataColumn SubwatershedColumn {
+                get {
+                    return this.columnSubwatershed;
+                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsCulvPhoto_IDNull() {
-                return this.IsNull(this.tableView_CulvertsDitches.CulvPhoto_IDColumn);
+            public global::System.Data.DataColumn DateColumn {
+                get {
+                    return this.columnDate;
+                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetCulvPhoto_IDNull() {
-                this[this.tableView_CulvertsDitches.CulvPhoto_IDColumn] = global::System.Convert.DBNull;
+            public global::System.Data.DataColumn EvaluatorColumn {
+                get {
+                    return this.columnEvaluator;
+                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsDitchDepthNull() {
-                return this.IsNull(this.tableView_CulvertsDitches.DitchDepthColumn);
+            public global::System.Data.DataColumn MapNoColumn {
+                get {
+                    return this.columnMapNo;
+                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetDitchDepthNull() {
-                this[this.tableView_CulvertsDitches.DitchDepthColumn] = global::System.Convert.DBNull;
+            public global::System.Data.DataColumn MapPageColumn {
+                get {
+                    return this.columnMapPage;
+                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsWidthTopNull() {
-                return this.IsNull(this.tableView_CulvertsDitches.WidthTopColumn);
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetWidthTopNull() {
-                this[this.tableView_CulvertsDitches.WidthTopColumn] = global::System.Convert.DBNull;
+            public _VSI_ComparableMstLinkCulvertsNewDiameterNotStandardRow this[int index] {
+                get {
+                    return ((_VSI_ComparableMstLinkCulvertsNewDiameterNotStandardRow)(this.Rows[index]));
+                }
+            }
+            
+            public event _VSI_ComparableMstLinkCulvertsNewDiameterNotStandardRowChangeEventHandler _VSI_ComparableMstLinkCulvertsNewDiameterNotStandardRowChanging;
+            
+            public event _VSI_ComparableMstLinkCulvertsNewDiameterNotStandardRowChangeEventHandler _VSI_ComparableMstLinkCulvertsNewDiameterNotStandardRowChanged;
+            
+            public event _VSI_ComparableMstLinkCulvertsNewDiameterNotStandardRowChangeEventHandler _VSI_ComparableMstLinkCulvertsNewDiameterNotStandardRowDeleting;
+            
+            public event _VSI_ComparableMstLinkCulvertsNewDiameterNotStandardRowChangeEventHandler _VSI_ComparableMstLinkCulvertsNewDiameterNotStandardRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void Add_VSI_ComparableMstLinkCulvertsNewDiameterNotStandardRow(_VSI_ComparableMstLinkCulvertsNewDiameterNotStandardRow row) {
+                this.Rows.Add(row);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsWidthBottomNull() {
-                return this.IsNull(this.tableView_CulvertsDitches.WidthBottomColumn);
+            public _VSI_ComparableMstLinkCulvertsNewDiameterNotStandardRow Add_VSI_ComparableMstLinkCulvertsNewDiameterNotStandardRow(
+                        int MLinkID, 
+                        int CompKey, 
+                        string Node_No, 
+                        string OldShape, 
+                        string NewShape, 
+                        decimal OldDiameter, 
+                        double NewDiameter, 
+                        double UnobstructedHeight, 
+                        string OldMaterial, 
+                        string NewMaterial, 
+                        int EvaluatorPageID, 
+                        string Watershed, 
+                        string Subwatershed, 
+                        System.DateTime Date, 
+                        string Evaluator, 
+                        int MapNo, 
+                        int MapPage) {
+                _VSI_ComparableMstLinkCulvertsNewDiameterNotStandardRow row_VSI_ComparableMstLinkCulvertsNewDiameterNotStandardRow = ((_VSI_ComparableMstLinkCulvertsNewDiameterNotStandardRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        MLinkID,
+                        CompKey,
+                        Node_No,
+                        OldShape,
+                        NewShape,
+                        OldDiameter,
+                        NewDiameter,
+                        UnobstructedHeight,
+                        OldMaterial,
+                        NewMaterial,
+                        EvaluatorPageID,
+                        Watershed,
+                        Subwatershed,
+                        Date,
+                        Evaluator,
+                        MapNo,
+                        MapPage};
+                row_VSI_ComparableMstLinkCulvertsNewDiameterNotStandardRow.ItemArray = columnValuesArray;
+                this.Rows.Add(row_VSI_ComparableMstLinkCulvertsNewDiameterNotStandardRow);
+                return row_VSI_ComparableMstLinkCulvertsNewDiameterNotStandardRow;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetWidthBottomNull() {
-                this[this.tableView_CulvertsDitches.WidthBottomColumn] = global::System.Convert.DBNull;
+            public override global::System.Data.DataTable Clone() {
+                _VSI_ComparableMstLinkCulvertsNewDiameterNotStandardDataTable cln = ((_VSI_ComparableMstLinkCulvertsNewDiameterNotStandardDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsDitchMaterialNull() {
-                return this.IsNull(this.tableView_CulvertsDitches.DitchMaterialColumn);
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new _VSI_ComparableMstLinkCulvertsNewDiameterNotStandardDataTable();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetDitchMaterialNull() {
-                this[this.tableView_CulvertsDitches.DitchMaterialColumn] = global::System.Convert.DBNull;
+            internal void InitVars() {
+                this.columnMLinkID = base.Columns["MLinkID"];
+                this.columnCompKey = base.Columns["CompKey"];
+                this.columnNode_No = base.Columns["Node_No"];
+                this.columnOldShape = base.Columns["OldShape"];
+                this.columnNewShape = base.Columns["NewShape"];
+                this.columnOldDiameter = base.Columns["OldDiameter"];
+                this.columnNewDiameter = base.Columns["NewDiameter"];
+                this.columnUnobstructedHeight = base.Columns["UnobstructedHeight"];
+                this.columnOldMaterial = base.Columns["OldMaterial"];
+                this.columnNewMaterial = base.Columns["NewMaterial"];
+                this.columnEvaluatorPageID = base.Columns["EvaluatorPageID"];
+                this.columnWatershed = base.Columns["Watershed"];
+                this.columnSubwatershed = base.Columns["Subwatershed"];
+                this.columnDate = base.Columns["Date"];
+                this.columnEvaluator = base.Columns["Evaluator"];
+                this.columnMapNo = base.Columns["MapNo"];
+                this.columnMapPage = base.Columns["MapPage"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsDitchPhoto_IDNull() {
-                return this.IsNull(this.tableView_CulvertsDitches.DitchPhoto_IDColumn);
+            private void InitClass() {
+                this.columnMLinkID = new global::System.Data.DataColumn("MLinkID", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMLinkID);
+                this.columnCompKey = new global::System.Data.DataColumn("CompKey", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCompKey);
+                this.columnNode_No = new global::System.Data.DataColumn("Node_No", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNode_No);
+                this.columnOldShape = new global::System.Data.DataColumn("OldShape", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnOldShape);
+                this.columnNewShape = new global::System.Data.DataColumn("NewShape", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNewShape);
+                this.columnOldDiameter = new global::System.Data.DataColumn("OldDiameter", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnOldDiameter);
+                this.columnNewDiameter = new global::System.Data.DataColumn("NewDiameter", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNewDiameter);
+                this.columnUnobstructedHeight = new global::System.Data.DataColumn("UnobstructedHeight", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnUnobstructedHeight);
+                this.columnOldMaterial = new global::System.Data.DataColumn("OldMaterial", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnOldMaterial);
+                this.columnNewMaterial = new global::System.Data.DataColumn("NewMaterial", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNewMaterial);
+                this.columnEvaluatorPageID = new global::System.Data.DataColumn("EvaluatorPageID", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEvaluatorPageID);
+                this.columnWatershed = new global::System.Data.DataColumn("Watershed", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnWatershed);
+                this.columnSubwatershed = new global::System.Data.DataColumn("Subwatershed", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSubwatershed);
+                this.columnDate = new global::System.Data.DataColumn("Date", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDate);
+                this.columnEvaluator = new global::System.Data.DataColumn("Evaluator", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEvaluator);
+                this.columnMapNo = new global::System.Data.DataColumn("MapNo", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMapNo);
+                this.columnMapPage = new global::System.Data.DataColumn("MapPage", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMapPage);
+                this.columnNode_No.MaxLength = 10;
+                this.columnOldShape.MaxLength = 4;
+                this.columnNewShape.MaxLength = 10;
+                this.columnOldMaterial.MaxLength = 6;
+                this.columnNewMaterial.MaxLength = 10;
+                this.columnWatershed.MaxLength = 50;
+                this.columnSubwatershed.MaxLength = 50;
+                this.columnEvaluator.MaxLength = 50;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetDitchPhoto_IDNull() {
-                this[this.tableView_CulvertsDitches.DitchPhoto_IDColumn] = global::System.Convert.DBNull;
+            public _VSI_ComparableMstLinkCulvertsNewDiameterNotStandardRow New_VSI_ComparableMstLinkCulvertsNewDiameterNotStandardRow() {
+                return ((_VSI_ComparableMstLinkCulvertsNewDiameterNotStandardRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new _VSI_ComparableMstLinkCulvertsNewDiameterNotStandardRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Type GetRowType() {
+                return typeof(_VSI_ComparableMstLinkCulvertsNewDiameterNotStandardRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this._VSI_ComparableMstLinkCulvertsNewDiameterNotStandardRowChanged != null)) {
+                    this._VSI_ComparableMstLinkCulvertsNewDiameterNotStandardRowChanged(this, new _VSI_ComparableMstLinkCulvertsNewDiameterNotStandardRowChangeEvent(((_VSI_ComparableMstLinkCulvertsNewDiameterNotStandardRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this._VSI_ComparableMstLinkCulvertsNewDiameterNotStandardRowChanging != null)) {
+                    this._VSI_ComparableMstLinkCulvertsNewDiameterNotStandardRowChanging(this, new _VSI_ComparableMstLinkCulvertsNewDiameterNotStandardRowChangeEvent(((_VSI_ComparableMstLinkCulvertsNewDiameterNotStandardRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this._VSI_ComparableMstLinkCulvertsNewDiameterNotStandardRowDeleted != null)) {
+                    this._VSI_ComparableMstLinkCulvertsNewDiameterNotStandardRowDeleted(this, new _VSI_ComparableMstLinkCulvertsNewDiameterNotStandardRowChangeEvent(((_VSI_ComparableMstLinkCulvertsNewDiameterNotStandardRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this._VSI_ComparableMstLinkCulvertsNewDiameterNotStandardRowDeleting != null)) {
+                    this._VSI_ComparableMstLinkCulvertsNewDiameterNotStandardRowDeleting(this, new _VSI_ComparableMstLinkCulvertsNewDiameterNotStandardRowChangeEvent(((_VSI_ComparableMstLinkCulvertsNewDiameterNotStandardRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void Remove_VSI_ComparableMstLinkCulvertsNewDiameterNotStandardRow(_VSI_ComparableMstLinkCulvertsNewDiameterNotStandardRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                FieldWorkDBDataSet ds = new FieldWorkDBDataSet();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "_VSI_ComparableMstLinkCulvertsNewDiameterNotStandardDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class _VSI_ComparableMStLinkCulvertsTransferableDataTable : global::System.Data.TypedTableBase<_VSI_ComparableMStLinkCulvertsTransferableRow> {
+            
+            private global::System.Data.DataColumn columnMLinkID;
+            
+            private global::System.Data.DataColumn columnCompKey;
+            
+            private global::System.Data.DataColumn columnNode_No;
+            
+            private global::System.Data.DataColumn columnOldShape;
+            
+            private global::System.Data.DataColumn columnNewShape;
+            
+            private global::System.Data.DataColumn columnOldDiameter;
+            
+            private global::System.Data.DataColumn columnNewDiameter;
+            
+            private global::System.Data.DataColumn columnUnobstructedHeight;
+            
+            private global::System.Data.DataColumn columnOldMaterial;
+            
+            private global::System.Data.DataColumn columnNewMaterial;
+            
+            private global::System.Data.DataColumn columnEvaluatorPageID;
+            
+            private global::System.Data.DataColumn columnWatershed;
+            
+            private global::System.Data.DataColumn columnSubwatershed;
+            
+            private global::System.Data.DataColumn columnDate;
+            
+            private global::System.Data.DataColumn columnEvaluator;
+            
+            private global::System.Data.DataColumn columnMapNo;
+            
+            private global::System.Data.DataColumn columnMapPage;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public _VSI_ComparableMStLinkCulvertsTransferableDataTable() {
+                this.TableName = "_VSI_ComparableMStLinkCulvertsTransferable";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal _VSI_ComparableMStLinkCulvertsTransferableDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected _VSI_ComparableMStLinkCulvertsTransferableDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn MLinkIDColumn {
+                get {
+                    return this.columnMLinkID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn CompKeyColumn {
+                get {
+                    return this.columnCompKey;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn Node_NoColumn {
+                get {
+                    return this.columnNode_No;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn OldShapeColumn {
+                get {
+                    return this.columnOldShape;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn NewShapeColumn {
+                get {
+                    return this.columnNewShape;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn OldDiameterColumn {
+                get {
+                    return this.columnOldDiameter;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn NewDiameterColumn {
+                get {
+                    return this.columnNewDiameter;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn UnobstructedHeightColumn {
+                get {
+                    return this.columnUnobstructedHeight;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn OldMaterialColumn {
+                get {
+                    return this.columnOldMaterial;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn NewMaterialColumn {
+                get {
+                    return this.columnNewMaterial;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn EvaluatorPageIDColumn {
+                get {
+                    return this.columnEvaluatorPageID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn WatershedColumn {
+                get {
+                    return this.columnWatershed;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn SubwatershedColumn {
+                get {
+                    return this.columnSubwatershed;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn DateColumn {
+                get {
+                    return this.columnDate;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn EvaluatorColumn {
+                get {
+                    return this.columnEvaluator;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn MapNoColumn {
+                get {
+                    return this.columnMapNo;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn MapPageColumn {
+                get {
+                    return this.columnMapPage;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public _VSI_ComparableMStLinkCulvertsTransferableRow this[int index] {
+                get {
+                    return ((_VSI_ComparableMStLinkCulvertsTransferableRow)(this.Rows[index]));
+                }
+            }
+            
+            public event _VSI_ComparableMStLinkCulvertsTransferableRowChangeEventHandler _VSI_ComparableMStLinkCulvertsTransferableRowChanging;
+            
+            public event _VSI_ComparableMStLinkCulvertsTransferableRowChangeEventHandler _VSI_ComparableMStLinkCulvertsTransferableRowChanged;
+            
+            public event _VSI_ComparableMStLinkCulvertsTransferableRowChangeEventHandler _VSI_ComparableMStLinkCulvertsTransferableRowDeleting;
+            
+            public event _VSI_ComparableMStLinkCulvertsTransferableRowChangeEventHandler _VSI_ComparableMStLinkCulvertsTransferableRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void Add_VSI_ComparableMStLinkCulvertsTransferableRow(_VSI_ComparableMStLinkCulvertsTransferableRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public _VSI_ComparableMStLinkCulvertsTransferableRow Add_VSI_ComparableMStLinkCulvertsTransferableRow(
+                        int MLinkID, 
+                        int CompKey, 
+                        string Node_No, 
+                        string OldShape, 
+                        string NewShape, 
+                        decimal OldDiameter, 
+                        double NewDiameter, 
+                        double UnobstructedHeight, 
+                        string OldMaterial, 
+                        string NewMaterial, 
+                        int EvaluatorPageID, 
+                        string Watershed, 
+                        string Subwatershed, 
+                        System.DateTime Date, 
+                        string Evaluator, 
+                        int MapNo, 
+                        int MapPage) {
+                _VSI_ComparableMStLinkCulvertsTransferableRow row_VSI_ComparableMStLinkCulvertsTransferableRow = ((_VSI_ComparableMStLinkCulvertsTransferableRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        MLinkID,
+                        CompKey,
+                        Node_No,
+                        OldShape,
+                        NewShape,
+                        OldDiameter,
+                        NewDiameter,
+                        UnobstructedHeight,
+                        OldMaterial,
+                        NewMaterial,
+                        EvaluatorPageID,
+                        Watershed,
+                        Subwatershed,
+                        Date,
+                        Evaluator,
+                        MapNo,
+                        MapPage};
+                row_VSI_ComparableMStLinkCulvertsTransferableRow.ItemArray = columnValuesArray;
+                this.Rows.Add(row_VSI_ComparableMStLinkCulvertsTransferableRow);
+                return row_VSI_ComparableMStLinkCulvertsTransferableRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public override global::System.Data.DataTable Clone() {
+                _VSI_ComparableMStLinkCulvertsTransferableDataTable cln = ((_VSI_ComparableMStLinkCulvertsTransferableDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new _VSI_ComparableMStLinkCulvertsTransferableDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal void InitVars() {
+                this.columnMLinkID = base.Columns["MLinkID"];
+                this.columnCompKey = base.Columns["CompKey"];
+                this.columnNode_No = base.Columns["Node_No"];
+                this.columnOldShape = base.Columns["OldShape"];
+                this.columnNewShape = base.Columns["NewShape"];
+                this.columnOldDiameter = base.Columns["OldDiameter"];
+                this.columnNewDiameter = base.Columns["NewDiameter"];
+                this.columnUnobstructedHeight = base.Columns["UnobstructedHeight"];
+                this.columnOldMaterial = base.Columns["OldMaterial"];
+                this.columnNewMaterial = base.Columns["NewMaterial"];
+                this.columnEvaluatorPageID = base.Columns["EvaluatorPageID"];
+                this.columnWatershed = base.Columns["Watershed"];
+                this.columnSubwatershed = base.Columns["Subwatershed"];
+                this.columnDate = base.Columns["Date"];
+                this.columnEvaluator = base.Columns["Evaluator"];
+                this.columnMapNo = base.Columns["MapNo"];
+                this.columnMapPage = base.Columns["MapPage"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            private void InitClass() {
+                this.columnMLinkID = new global::System.Data.DataColumn("MLinkID", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMLinkID);
+                this.columnCompKey = new global::System.Data.DataColumn("CompKey", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCompKey);
+                this.columnNode_No = new global::System.Data.DataColumn("Node_No", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNode_No);
+                this.columnOldShape = new global::System.Data.DataColumn("OldShape", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnOldShape);
+                this.columnNewShape = new global::System.Data.DataColumn("NewShape", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNewShape);
+                this.columnOldDiameter = new global::System.Data.DataColumn("OldDiameter", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnOldDiameter);
+                this.columnNewDiameter = new global::System.Data.DataColumn("NewDiameter", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNewDiameter);
+                this.columnUnobstructedHeight = new global::System.Data.DataColumn("UnobstructedHeight", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnUnobstructedHeight);
+                this.columnOldMaterial = new global::System.Data.DataColumn("OldMaterial", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnOldMaterial);
+                this.columnNewMaterial = new global::System.Data.DataColumn("NewMaterial", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNewMaterial);
+                this.columnEvaluatorPageID = new global::System.Data.DataColumn("EvaluatorPageID", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEvaluatorPageID);
+                this.columnWatershed = new global::System.Data.DataColumn("Watershed", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnWatershed);
+                this.columnSubwatershed = new global::System.Data.DataColumn("Subwatershed", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSubwatershed);
+                this.columnDate = new global::System.Data.DataColumn("Date", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDate);
+                this.columnEvaluator = new global::System.Data.DataColumn("Evaluator", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEvaluator);
+                this.columnMapNo = new global::System.Data.DataColumn("MapNo", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMapNo);
+                this.columnMapPage = new global::System.Data.DataColumn("MapPage", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMapPage);
+                this.columnNode_No.MaxLength = 10;
+                this.columnOldShape.MaxLength = 4;
+                this.columnNewShape.MaxLength = 10;
+                this.columnOldMaterial.MaxLength = 6;
+                this.columnNewMaterial.MaxLength = 10;
+                this.columnWatershed.MaxLength = 50;
+                this.columnSubwatershed.MaxLength = 50;
+                this.columnEvaluator.MaxLength = 50;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public _VSI_ComparableMStLinkCulvertsTransferableRow New_VSI_ComparableMStLinkCulvertsTransferableRow() {
+                return ((_VSI_ComparableMStLinkCulvertsTransferableRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new _VSI_ComparableMStLinkCulvertsTransferableRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Type GetRowType() {
+                return typeof(_VSI_ComparableMStLinkCulvertsTransferableRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this._VSI_ComparableMStLinkCulvertsTransferableRowChanged != null)) {
+                    this._VSI_ComparableMStLinkCulvertsTransferableRowChanged(this, new _VSI_ComparableMStLinkCulvertsTransferableRowChangeEvent(((_VSI_ComparableMStLinkCulvertsTransferableRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this._VSI_ComparableMStLinkCulvertsTransferableRowChanging != null)) {
+                    this._VSI_ComparableMStLinkCulvertsTransferableRowChanging(this, new _VSI_ComparableMStLinkCulvertsTransferableRowChangeEvent(((_VSI_ComparableMStLinkCulvertsTransferableRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this._VSI_ComparableMStLinkCulvertsTransferableRowDeleted != null)) {
+                    this._VSI_ComparableMStLinkCulvertsTransferableRowDeleted(this, new _VSI_ComparableMStLinkCulvertsTransferableRowChangeEvent(((_VSI_ComparableMStLinkCulvertsTransferableRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this._VSI_ComparableMStLinkCulvertsTransferableRowDeleting != null)) {
+                    this._VSI_ComparableMStLinkCulvertsTransferableRowDeleting(this, new _VSI_ComparableMStLinkCulvertsTransferableRowChangeEvent(((_VSI_ComparableMStLinkCulvertsTransferableRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void Remove_VSI_ComparableMStLinkCulvertsTransferableRow(_VSI_ComparableMStLinkCulvertsTransferableRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                FieldWorkDBDataSet ds = new FieldWorkDBDataSet();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "_VSI_ComparableMStLinkCulvertsTransferableDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class _VSI_ComparableMstLinkDitchesDataTable : global::System.Data.TypedTableBase<_VSI_ComparableMstLinkDitchesRow> {
+            
+            private global::System.Data.DataColumn columnMLinkID;
+            
+            private global::System.Data.DataColumn columnCompKey;
+            
+            private global::System.Data.DataColumn columnNode_No;
+            
+            private global::System.Data.DataColumn columnOldShape;
+            
+            private global::System.Data.DataColumn columnOldHeight;
+            
+            private global::System.Data.DataColumn columnOldWidth;
+            
+            private global::System.Data.DataColumn columnNewDepth;
+            
+            private global::System.Data.DataColumn columnNewTopWidth;
+            
+            private global::System.Data.DataColumn columnNewBottomWidth;
+            
+            private global::System.Data.DataColumn columnOldMaterial;
+            
+            private global::System.Data.DataColumn columnNewMaterial;
+            
+            private global::System.Data.DataColumn columnEvaluatorPageID;
+            
+            private global::System.Data.DataColumn columnWatershed;
+            
+            private global::System.Data.DataColumn columnSubwatershed;
+            
+            private global::System.Data.DataColumn columnDate;
+            
+            private global::System.Data.DataColumn columnEvaluator;
+            
+            private global::System.Data.DataColumn columnMapNo;
+            
+            private global::System.Data.DataColumn columnMapPage;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public _VSI_ComparableMstLinkDitchesDataTable() {
+                this.TableName = "_VSI_ComparableMstLinkDitches";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal _VSI_ComparableMstLinkDitchesDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected _VSI_ComparableMstLinkDitchesDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn MLinkIDColumn {
+                get {
+                    return this.columnMLinkID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn CompKeyColumn {
+                get {
+                    return this.columnCompKey;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn Node_NoColumn {
+                get {
+                    return this.columnNode_No;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn OldShapeColumn {
+                get {
+                    return this.columnOldShape;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn OldHeightColumn {
+                get {
+                    return this.columnOldHeight;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn OldWidthColumn {
+                get {
+                    return this.columnOldWidth;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn NewDepthColumn {
+                get {
+                    return this.columnNewDepth;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn NewTopWidthColumn {
+                get {
+                    return this.columnNewTopWidth;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn NewBottomWidthColumn {
+                get {
+                    return this.columnNewBottomWidth;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn OldMaterialColumn {
+                get {
+                    return this.columnOldMaterial;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn NewMaterialColumn {
+                get {
+                    return this.columnNewMaterial;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn EvaluatorPageIDColumn {
+                get {
+                    return this.columnEvaluatorPageID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn WatershedColumn {
+                get {
+                    return this.columnWatershed;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn SubwatershedColumn {
+                get {
+                    return this.columnSubwatershed;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn DateColumn {
+                get {
+                    return this.columnDate;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn EvaluatorColumn {
+                get {
+                    return this.columnEvaluator;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn MapNoColumn {
+                get {
+                    return this.columnMapNo;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn MapPageColumn {
+                get {
+                    return this.columnMapPage;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public _VSI_ComparableMstLinkDitchesRow this[int index] {
+                get {
+                    return ((_VSI_ComparableMstLinkDitchesRow)(this.Rows[index]));
+                }
+            }
+            
+            public event _VSI_ComparableMstLinkDitchesRowChangeEventHandler _VSI_ComparableMstLinkDitchesRowChanging;
+            
+            public event _VSI_ComparableMstLinkDitchesRowChangeEventHandler _VSI_ComparableMstLinkDitchesRowChanged;
+            
+            public event _VSI_ComparableMstLinkDitchesRowChangeEventHandler _VSI_ComparableMstLinkDitchesRowDeleting;
+            
+            public event _VSI_ComparableMstLinkDitchesRowChangeEventHandler _VSI_ComparableMstLinkDitchesRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void Add_VSI_ComparableMstLinkDitchesRow(_VSI_ComparableMstLinkDitchesRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public _VSI_ComparableMstLinkDitchesRow Add_VSI_ComparableMstLinkDitchesRow(
+                        int MLinkID, 
+                        int CompKey, 
+                        string Node_No, 
+                        string OldShape, 
+                        decimal OldHeight, 
+                        decimal OldWidth, 
+                        double NewDepth, 
+                        double NewTopWidth, 
+                        double NewBottomWidth, 
+                        string OldMaterial, 
+                        string NewMaterial, 
+                        int EvaluatorPageID, 
+                        string Watershed, 
+                        string Subwatershed, 
+                        System.DateTime Date, 
+                        string Evaluator, 
+                        int MapNo, 
+                        int MapPage) {
+                _VSI_ComparableMstLinkDitchesRow row_VSI_ComparableMstLinkDitchesRow = ((_VSI_ComparableMstLinkDitchesRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        MLinkID,
+                        CompKey,
+                        Node_No,
+                        OldShape,
+                        OldHeight,
+                        OldWidth,
+                        NewDepth,
+                        NewTopWidth,
+                        NewBottomWidth,
+                        OldMaterial,
+                        NewMaterial,
+                        EvaluatorPageID,
+                        Watershed,
+                        Subwatershed,
+                        Date,
+                        Evaluator,
+                        MapNo,
+                        MapPage};
+                row_VSI_ComparableMstLinkDitchesRow.ItemArray = columnValuesArray;
+                this.Rows.Add(row_VSI_ComparableMstLinkDitchesRow);
+                return row_VSI_ComparableMstLinkDitchesRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public override global::System.Data.DataTable Clone() {
+                _VSI_ComparableMstLinkDitchesDataTable cln = ((_VSI_ComparableMstLinkDitchesDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new _VSI_ComparableMstLinkDitchesDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal void InitVars() {
+                this.columnMLinkID = base.Columns["MLinkID"];
+                this.columnCompKey = base.Columns["CompKey"];
+                this.columnNode_No = base.Columns["Node_No"];
+                this.columnOldShape = base.Columns["OldShape"];
+                this.columnOldHeight = base.Columns["OldHeight"];
+                this.columnOldWidth = base.Columns["OldWidth"];
+                this.columnNewDepth = base.Columns["NewDepth"];
+                this.columnNewTopWidth = base.Columns["NewTopWidth"];
+                this.columnNewBottomWidth = base.Columns["NewBottomWidth"];
+                this.columnOldMaterial = base.Columns["OldMaterial"];
+                this.columnNewMaterial = base.Columns["NewMaterial"];
+                this.columnEvaluatorPageID = base.Columns["EvaluatorPageID"];
+                this.columnWatershed = base.Columns["Watershed"];
+                this.columnSubwatershed = base.Columns["Subwatershed"];
+                this.columnDate = base.Columns["Date"];
+                this.columnEvaluator = base.Columns["Evaluator"];
+                this.columnMapNo = base.Columns["MapNo"];
+                this.columnMapPage = base.Columns["MapPage"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            private void InitClass() {
+                this.columnMLinkID = new global::System.Data.DataColumn("MLinkID", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMLinkID);
+                this.columnCompKey = new global::System.Data.DataColumn("CompKey", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCompKey);
+                this.columnNode_No = new global::System.Data.DataColumn("Node_No", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNode_No);
+                this.columnOldShape = new global::System.Data.DataColumn("OldShape", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnOldShape);
+                this.columnOldHeight = new global::System.Data.DataColumn("OldHeight", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnOldHeight);
+                this.columnOldWidth = new global::System.Data.DataColumn("OldWidth", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnOldWidth);
+                this.columnNewDepth = new global::System.Data.DataColumn("NewDepth", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNewDepth);
+                this.columnNewTopWidth = new global::System.Data.DataColumn("NewTopWidth", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNewTopWidth);
+                this.columnNewBottomWidth = new global::System.Data.DataColumn("NewBottomWidth", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNewBottomWidth);
+                this.columnOldMaterial = new global::System.Data.DataColumn("OldMaterial", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnOldMaterial);
+                this.columnNewMaterial = new global::System.Data.DataColumn("NewMaterial", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNewMaterial);
+                this.columnEvaluatorPageID = new global::System.Data.DataColumn("EvaluatorPageID", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEvaluatorPageID);
+                this.columnWatershed = new global::System.Data.DataColumn("Watershed", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnWatershed);
+                this.columnSubwatershed = new global::System.Data.DataColumn("Subwatershed", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSubwatershed);
+                this.columnDate = new global::System.Data.DataColumn("Date", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDate);
+                this.columnEvaluator = new global::System.Data.DataColumn("Evaluator", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEvaluator);
+                this.columnMapNo = new global::System.Data.DataColumn("MapNo", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMapNo);
+                this.columnMapPage = new global::System.Data.DataColumn("MapPage", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMapPage);
+                this.columnNode_No.MaxLength = 10;
+                this.columnOldShape.MaxLength = 4;
+                this.columnOldMaterial.MaxLength = 6;
+                this.columnNewMaterial.MaxLength = 10;
+                this.columnWatershed.MaxLength = 50;
+                this.columnSubwatershed.MaxLength = 50;
+                this.columnEvaluator.MaxLength = 50;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public _VSI_ComparableMstLinkDitchesRow New_VSI_ComparableMstLinkDitchesRow() {
+                return ((_VSI_ComparableMstLinkDitchesRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new _VSI_ComparableMstLinkDitchesRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Type GetRowType() {
+                return typeof(_VSI_ComparableMstLinkDitchesRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this._VSI_ComparableMstLinkDitchesRowChanged != null)) {
+                    this._VSI_ComparableMstLinkDitchesRowChanged(this, new _VSI_ComparableMstLinkDitchesRowChangeEvent(((_VSI_ComparableMstLinkDitchesRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this._VSI_ComparableMstLinkDitchesRowChanging != null)) {
+                    this._VSI_ComparableMstLinkDitchesRowChanging(this, new _VSI_ComparableMstLinkDitchesRowChangeEvent(((_VSI_ComparableMstLinkDitchesRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this._VSI_ComparableMstLinkDitchesRowDeleted != null)) {
+                    this._VSI_ComparableMstLinkDitchesRowDeleted(this, new _VSI_ComparableMstLinkDitchesRowChangeEvent(((_VSI_ComparableMstLinkDitchesRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this._VSI_ComparableMstLinkDitchesRowDeleting != null)) {
+                    this._VSI_ComparableMstLinkDitchesRowDeleting(this, new _VSI_ComparableMstLinkDitchesRowChangeEvent(((_VSI_ComparableMstLinkDitchesRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void Remove_VSI_ComparableMstLinkDitchesRow(_VSI_ComparableMstLinkDitchesRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                FieldWorkDBDataSet ds = new FieldWorkDBDataSet();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "_VSI_ComparableMstLinkDitchesDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class _VSI_ComparableMstLinkDitchesNewDepthLT1DataTable : global::System.Data.TypedTableBase<_VSI_ComparableMstLinkDitchesNewDepthLT1Row> {
+            
+            private global::System.Data.DataColumn columnMLinkID;
+            
+            private global::System.Data.DataColumn columnCompKey;
+            
+            private global::System.Data.DataColumn columnNode_No;
+            
+            private global::System.Data.DataColumn columnOldShape;
+            
+            private global::System.Data.DataColumn columnOldWidth;
+            
+            private global::System.Data.DataColumn columnNewDepth;
+            
+            private global::System.Data.DataColumn columnNewTopWidth;
+            
+            private global::System.Data.DataColumn columnNewBottomWidth;
+            
+            private global::System.Data.DataColumn columnOldMaterial;
+            
+            private global::System.Data.DataColumn columnNewMaterial;
+            
+            private global::System.Data.DataColumn columnEvaluatorPageID;
+            
+            private global::System.Data.DataColumn columnWatershed;
+            
+            private global::System.Data.DataColumn columnSubwatershed;
+            
+            private global::System.Data.DataColumn columnDate;
+            
+            private global::System.Data.DataColumn columnEvaluator;
+            
+            private global::System.Data.DataColumn columnMapNo;
+            
+            private global::System.Data.DataColumn columnMapPage;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public _VSI_ComparableMstLinkDitchesNewDepthLT1DataTable() {
+                this.TableName = "_VSI_ComparableMstLinkDitchesNewDepthLT1";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal _VSI_ComparableMstLinkDitchesNewDepthLT1DataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected _VSI_ComparableMstLinkDitchesNewDepthLT1DataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn MLinkIDColumn {
+                get {
+                    return this.columnMLinkID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn CompKeyColumn {
+                get {
+                    return this.columnCompKey;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn Node_NoColumn {
+                get {
+                    return this.columnNode_No;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn OldShapeColumn {
+                get {
+                    return this.columnOldShape;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn OldWidthColumn {
+                get {
+                    return this.columnOldWidth;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn NewDepthColumn {
+                get {
+                    return this.columnNewDepth;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn NewTopWidthColumn {
+                get {
+                    return this.columnNewTopWidth;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn NewBottomWidthColumn {
+                get {
+                    return this.columnNewBottomWidth;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn OldMaterialColumn {
+                get {
+                    return this.columnOldMaterial;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn NewMaterialColumn {
+                get {
+                    return this.columnNewMaterial;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn EvaluatorPageIDColumn {
+                get {
+                    return this.columnEvaluatorPageID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn WatershedColumn {
+                get {
+                    return this.columnWatershed;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn SubwatershedColumn {
+                get {
+                    return this.columnSubwatershed;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn DateColumn {
+                get {
+                    return this.columnDate;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn EvaluatorColumn {
+                get {
+                    return this.columnEvaluator;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn MapNoColumn {
+                get {
+                    return this.columnMapNo;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn MapPageColumn {
+                get {
+                    return this.columnMapPage;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public _VSI_ComparableMstLinkDitchesNewDepthLT1Row this[int index] {
+                get {
+                    return ((_VSI_ComparableMstLinkDitchesNewDepthLT1Row)(this.Rows[index]));
+                }
+            }
+            
+            public event _VSI_ComparableMstLinkDitchesNewDepthLT1RowChangeEventHandler _VSI_ComparableMstLinkDitchesNewDepthLT1RowChanging;
+            
+            public event _VSI_ComparableMstLinkDitchesNewDepthLT1RowChangeEventHandler _VSI_ComparableMstLinkDitchesNewDepthLT1RowChanged;
+            
+            public event _VSI_ComparableMstLinkDitchesNewDepthLT1RowChangeEventHandler _VSI_ComparableMstLinkDitchesNewDepthLT1RowDeleting;
+            
+            public event _VSI_ComparableMstLinkDitchesNewDepthLT1RowChangeEventHandler _VSI_ComparableMstLinkDitchesNewDepthLT1RowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void Add_VSI_ComparableMstLinkDitchesNewDepthLT1Row(_VSI_ComparableMstLinkDitchesNewDepthLT1Row row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public _VSI_ComparableMstLinkDitchesNewDepthLT1Row Add_VSI_ComparableMstLinkDitchesNewDepthLT1Row(
+                        int MLinkID, 
+                        int CompKey, 
+                        string Node_No, 
+                        string OldShape, 
+                        decimal OldWidth, 
+                        double NewDepth, 
+                        double NewTopWidth, 
+                        double NewBottomWidth, 
+                        string OldMaterial, 
+                        string NewMaterial, 
+                        int EvaluatorPageID, 
+                        string Watershed, 
+                        string Subwatershed, 
+                        System.DateTime Date, 
+                        string Evaluator, 
+                        int MapNo, 
+                        int MapPage) {
+                _VSI_ComparableMstLinkDitchesNewDepthLT1Row row_VSI_ComparableMstLinkDitchesNewDepthLT1Row = ((_VSI_ComparableMstLinkDitchesNewDepthLT1Row)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        MLinkID,
+                        CompKey,
+                        Node_No,
+                        OldShape,
+                        OldWidth,
+                        NewDepth,
+                        NewTopWidth,
+                        NewBottomWidth,
+                        OldMaterial,
+                        NewMaterial,
+                        EvaluatorPageID,
+                        Watershed,
+                        Subwatershed,
+                        Date,
+                        Evaluator,
+                        MapNo,
+                        MapPage};
+                row_VSI_ComparableMstLinkDitchesNewDepthLT1Row.ItemArray = columnValuesArray;
+                this.Rows.Add(row_VSI_ComparableMstLinkDitchesNewDepthLT1Row);
+                return row_VSI_ComparableMstLinkDitchesNewDepthLT1Row;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public override global::System.Data.DataTable Clone() {
+                _VSI_ComparableMstLinkDitchesNewDepthLT1DataTable cln = ((_VSI_ComparableMstLinkDitchesNewDepthLT1DataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new _VSI_ComparableMstLinkDitchesNewDepthLT1DataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal void InitVars() {
+                this.columnMLinkID = base.Columns["MLinkID"];
+                this.columnCompKey = base.Columns["CompKey"];
+                this.columnNode_No = base.Columns["Node_No"];
+                this.columnOldShape = base.Columns["OldShape"];
+                this.columnOldWidth = base.Columns["OldWidth"];
+                this.columnNewDepth = base.Columns["NewDepth"];
+                this.columnNewTopWidth = base.Columns["NewTopWidth"];
+                this.columnNewBottomWidth = base.Columns["NewBottomWidth"];
+                this.columnOldMaterial = base.Columns["OldMaterial"];
+                this.columnNewMaterial = base.Columns["NewMaterial"];
+                this.columnEvaluatorPageID = base.Columns["EvaluatorPageID"];
+                this.columnWatershed = base.Columns["Watershed"];
+                this.columnSubwatershed = base.Columns["Subwatershed"];
+                this.columnDate = base.Columns["Date"];
+                this.columnEvaluator = base.Columns["Evaluator"];
+                this.columnMapNo = base.Columns["MapNo"];
+                this.columnMapPage = base.Columns["MapPage"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            private void InitClass() {
+                this.columnMLinkID = new global::System.Data.DataColumn("MLinkID", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMLinkID);
+                this.columnCompKey = new global::System.Data.DataColumn("CompKey", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCompKey);
+                this.columnNode_No = new global::System.Data.DataColumn("Node_No", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNode_No);
+                this.columnOldShape = new global::System.Data.DataColumn("OldShape", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnOldShape);
+                this.columnOldWidth = new global::System.Data.DataColumn("OldWidth", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnOldWidth);
+                this.columnNewDepth = new global::System.Data.DataColumn("NewDepth", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNewDepth);
+                this.columnNewTopWidth = new global::System.Data.DataColumn("NewTopWidth", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNewTopWidth);
+                this.columnNewBottomWidth = new global::System.Data.DataColumn("NewBottomWidth", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNewBottomWidth);
+                this.columnOldMaterial = new global::System.Data.DataColumn("OldMaterial", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnOldMaterial);
+                this.columnNewMaterial = new global::System.Data.DataColumn("NewMaterial", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNewMaterial);
+                this.columnEvaluatorPageID = new global::System.Data.DataColumn("EvaluatorPageID", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEvaluatorPageID);
+                this.columnWatershed = new global::System.Data.DataColumn("Watershed", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnWatershed);
+                this.columnSubwatershed = new global::System.Data.DataColumn("Subwatershed", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSubwatershed);
+                this.columnDate = new global::System.Data.DataColumn("Date", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDate);
+                this.columnEvaluator = new global::System.Data.DataColumn("Evaluator", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEvaluator);
+                this.columnMapNo = new global::System.Data.DataColumn("MapNo", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMapNo);
+                this.columnMapPage = new global::System.Data.DataColumn("MapPage", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMapPage);
+                this.columnNode_No.MaxLength = 10;
+                this.columnOldShape.MaxLength = 4;
+                this.columnOldMaterial.MaxLength = 6;
+                this.columnNewMaterial.MaxLength = 10;
+                this.columnWatershed.MaxLength = 50;
+                this.columnSubwatershed.MaxLength = 50;
+                this.columnEvaluator.MaxLength = 50;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public _VSI_ComparableMstLinkDitchesNewDepthLT1Row New_VSI_ComparableMstLinkDitchesNewDepthLT1Row() {
+                return ((_VSI_ComparableMstLinkDitchesNewDepthLT1Row)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new _VSI_ComparableMstLinkDitchesNewDepthLT1Row(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Type GetRowType() {
+                return typeof(_VSI_ComparableMstLinkDitchesNewDepthLT1Row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this._VSI_ComparableMstLinkDitchesNewDepthLT1RowChanged != null)) {
+                    this._VSI_ComparableMstLinkDitchesNewDepthLT1RowChanged(this, new _VSI_ComparableMstLinkDitchesNewDepthLT1RowChangeEvent(((_VSI_ComparableMstLinkDitchesNewDepthLT1Row)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this._VSI_ComparableMstLinkDitchesNewDepthLT1RowChanging != null)) {
+                    this._VSI_ComparableMstLinkDitchesNewDepthLT1RowChanging(this, new _VSI_ComparableMstLinkDitchesNewDepthLT1RowChangeEvent(((_VSI_ComparableMstLinkDitchesNewDepthLT1Row)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this._VSI_ComparableMstLinkDitchesNewDepthLT1RowDeleted != null)) {
+                    this._VSI_ComparableMstLinkDitchesNewDepthLT1RowDeleted(this, new _VSI_ComparableMstLinkDitchesNewDepthLT1RowChangeEvent(((_VSI_ComparableMstLinkDitchesNewDepthLT1Row)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this._VSI_ComparableMstLinkDitchesNewDepthLT1RowDeleting != null)) {
+                    this._VSI_ComparableMstLinkDitchesNewDepthLT1RowDeleting(this, new _VSI_ComparableMstLinkDitchesNewDepthLT1RowChangeEvent(((_VSI_ComparableMstLinkDitchesNewDepthLT1Row)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void Remove_VSI_ComparableMstLinkDitchesNewDepthLT1Row(_VSI_ComparableMstLinkDitchesNewDepthLT1Row row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                FieldWorkDBDataSet ds = new FieldWorkDBDataSet();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "_VSI_ComparableMstLinkDitchesNewDepthLT1DataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class _VSI_ComparableMstLinkDItchesNoDSNodeDataTable : global::System.Data.TypedTableBase<_VSI_ComparableMstLinkDItchesNoDSNodeRow> {
+            
+            private global::System.Data.DataColumn columnMLinkID;
+            
+            private global::System.Data.DataColumn columnCompKey;
+            
+            private global::System.Data.DataColumn columnNode_No;
+            
+            private global::System.Data.DataColumn columnOldShape;
+            
+            private global::System.Data.DataColumn columnOldWidth;
+            
+            private global::System.Data.DataColumn columnNewDepth;
+            
+            private global::System.Data.DataColumn columnNewTopWidth;
+            
+            private global::System.Data.DataColumn columnNewBottomWidth;
+            
+            private global::System.Data.DataColumn columnOldMaterial;
+            
+            private global::System.Data.DataColumn columnNewMaterial;
+            
+            private global::System.Data.DataColumn columnEvaluatorPageID;
+            
+            private global::System.Data.DataColumn columnWatershed;
+            
+            private global::System.Data.DataColumn columnSubwatershed;
+            
+            private global::System.Data.DataColumn columnDate;
+            
+            private global::System.Data.DataColumn columnEvaluator;
+            
+            private global::System.Data.DataColumn columnMapNo;
+            
+            private global::System.Data.DataColumn columnMapPage;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public _VSI_ComparableMstLinkDItchesNoDSNodeDataTable() {
+                this.TableName = "_VSI_ComparableMstLinkDItchesNoDSNode";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal _VSI_ComparableMstLinkDItchesNoDSNodeDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected _VSI_ComparableMstLinkDItchesNoDSNodeDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn MLinkIDColumn {
+                get {
+                    return this.columnMLinkID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn CompKeyColumn {
+                get {
+                    return this.columnCompKey;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn Node_NoColumn {
+                get {
+                    return this.columnNode_No;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn OldShapeColumn {
+                get {
+                    return this.columnOldShape;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn OldWidthColumn {
+                get {
+                    return this.columnOldWidth;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn NewDepthColumn {
+                get {
+                    return this.columnNewDepth;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn NewTopWidthColumn {
+                get {
+                    return this.columnNewTopWidth;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn NewBottomWidthColumn {
+                get {
+                    return this.columnNewBottomWidth;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn OldMaterialColumn {
+                get {
+                    return this.columnOldMaterial;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn NewMaterialColumn {
+                get {
+                    return this.columnNewMaterial;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn EvaluatorPageIDColumn {
+                get {
+                    return this.columnEvaluatorPageID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn WatershedColumn {
+                get {
+                    return this.columnWatershed;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn SubwatershedColumn {
+                get {
+                    return this.columnSubwatershed;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn DateColumn {
+                get {
+                    return this.columnDate;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn EvaluatorColumn {
+                get {
+                    return this.columnEvaluator;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn MapNoColumn {
+                get {
+                    return this.columnMapNo;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn MapPageColumn {
+                get {
+                    return this.columnMapPage;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public _VSI_ComparableMstLinkDItchesNoDSNodeRow this[int index] {
+                get {
+                    return ((_VSI_ComparableMstLinkDItchesNoDSNodeRow)(this.Rows[index]));
+                }
+            }
+            
+            public event _VSI_ComparableMstLinkDItchesNoDSNodeRowChangeEventHandler _VSI_ComparableMstLinkDItchesNoDSNodeRowChanging;
+            
+            public event _VSI_ComparableMstLinkDItchesNoDSNodeRowChangeEventHandler _VSI_ComparableMstLinkDItchesNoDSNodeRowChanged;
+            
+            public event _VSI_ComparableMstLinkDItchesNoDSNodeRowChangeEventHandler _VSI_ComparableMstLinkDItchesNoDSNodeRowDeleting;
+            
+            public event _VSI_ComparableMstLinkDItchesNoDSNodeRowChangeEventHandler _VSI_ComparableMstLinkDItchesNoDSNodeRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void Add_VSI_ComparableMstLinkDItchesNoDSNodeRow(_VSI_ComparableMstLinkDItchesNoDSNodeRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public _VSI_ComparableMstLinkDItchesNoDSNodeRow Add_VSI_ComparableMstLinkDItchesNoDSNodeRow(
+                        int MLinkID, 
+                        int CompKey, 
+                        string Node_No, 
+                        string OldShape, 
+                        decimal OldWidth, 
+                        double NewDepth, 
+                        double NewTopWidth, 
+                        double NewBottomWidth, 
+                        string OldMaterial, 
+                        string NewMaterial, 
+                        int EvaluatorPageID, 
+                        string Watershed, 
+                        string Subwatershed, 
+                        System.DateTime Date, 
+                        string Evaluator, 
+                        int MapNo, 
+                        int MapPage) {
+                _VSI_ComparableMstLinkDItchesNoDSNodeRow row_VSI_ComparableMstLinkDItchesNoDSNodeRow = ((_VSI_ComparableMstLinkDItchesNoDSNodeRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        MLinkID,
+                        CompKey,
+                        Node_No,
+                        OldShape,
+                        OldWidth,
+                        NewDepth,
+                        NewTopWidth,
+                        NewBottomWidth,
+                        OldMaterial,
+                        NewMaterial,
+                        EvaluatorPageID,
+                        Watershed,
+                        Subwatershed,
+                        Date,
+                        Evaluator,
+                        MapNo,
+                        MapPage};
+                row_VSI_ComparableMstLinkDItchesNoDSNodeRow.ItemArray = columnValuesArray;
+                this.Rows.Add(row_VSI_ComparableMstLinkDItchesNoDSNodeRow);
+                return row_VSI_ComparableMstLinkDItchesNoDSNodeRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public override global::System.Data.DataTable Clone() {
+                _VSI_ComparableMstLinkDItchesNoDSNodeDataTable cln = ((_VSI_ComparableMstLinkDItchesNoDSNodeDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new _VSI_ComparableMstLinkDItchesNoDSNodeDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal void InitVars() {
+                this.columnMLinkID = base.Columns["MLinkID"];
+                this.columnCompKey = base.Columns["CompKey"];
+                this.columnNode_No = base.Columns["Node_No"];
+                this.columnOldShape = base.Columns["OldShape"];
+                this.columnOldWidth = base.Columns["OldWidth"];
+                this.columnNewDepth = base.Columns["NewDepth"];
+                this.columnNewTopWidth = base.Columns["NewTopWidth"];
+                this.columnNewBottomWidth = base.Columns["NewBottomWidth"];
+                this.columnOldMaterial = base.Columns["OldMaterial"];
+                this.columnNewMaterial = base.Columns["NewMaterial"];
+                this.columnEvaluatorPageID = base.Columns["EvaluatorPageID"];
+                this.columnWatershed = base.Columns["Watershed"];
+                this.columnSubwatershed = base.Columns["Subwatershed"];
+                this.columnDate = base.Columns["Date"];
+                this.columnEvaluator = base.Columns["Evaluator"];
+                this.columnMapNo = base.Columns["MapNo"];
+                this.columnMapPage = base.Columns["MapPage"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            private void InitClass() {
+                this.columnMLinkID = new global::System.Data.DataColumn("MLinkID", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMLinkID);
+                this.columnCompKey = new global::System.Data.DataColumn("CompKey", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCompKey);
+                this.columnNode_No = new global::System.Data.DataColumn("Node_No", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNode_No);
+                this.columnOldShape = new global::System.Data.DataColumn("OldShape", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnOldShape);
+                this.columnOldWidth = new global::System.Data.DataColumn("OldWidth", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnOldWidth);
+                this.columnNewDepth = new global::System.Data.DataColumn("NewDepth", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNewDepth);
+                this.columnNewTopWidth = new global::System.Data.DataColumn("NewTopWidth", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNewTopWidth);
+                this.columnNewBottomWidth = new global::System.Data.DataColumn("NewBottomWidth", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNewBottomWidth);
+                this.columnOldMaterial = new global::System.Data.DataColumn("OldMaterial", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnOldMaterial);
+                this.columnNewMaterial = new global::System.Data.DataColumn("NewMaterial", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNewMaterial);
+                this.columnEvaluatorPageID = new global::System.Data.DataColumn("EvaluatorPageID", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEvaluatorPageID);
+                this.columnWatershed = new global::System.Data.DataColumn("Watershed", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnWatershed);
+                this.columnSubwatershed = new global::System.Data.DataColumn("Subwatershed", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSubwatershed);
+                this.columnDate = new global::System.Data.DataColumn("Date", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDate);
+                this.columnEvaluator = new global::System.Data.DataColumn("Evaluator", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEvaluator);
+                this.columnMapNo = new global::System.Data.DataColumn("MapNo", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMapNo);
+                this.columnMapPage = new global::System.Data.DataColumn("MapPage", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMapPage);
+                this.columnNode_No.MaxLength = 10;
+                this.columnOldShape.MaxLength = 4;
+                this.columnOldMaterial.MaxLength = 6;
+                this.columnNewMaterial.MaxLength = 10;
+                this.columnWatershed.MaxLength = 50;
+                this.columnSubwatershed.MaxLength = 50;
+                this.columnEvaluator.MaxLength = 50;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public _VSI_ComparableMstLinkDItchesNoDSNodeRow New_VSI_ComparableMstLinkDItchesNoDSNodeRow() {
+                return ((_VSI_ComparableMstLinkDItchesNoDSNodeRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new _VSI_ComparableMstLinkDItchesNoDSNodeRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Type GetRowType() {
+                return typeof(_VSI_ComparableMstLinkDItchesNoDSNodeRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this._VSI_ComparableMstLinkDItchesNoDSNodeRowChanged != null)) {
+                    this._VSI_ComparableMstLinkDItchesNoDSNodeRowChanged(this, new _VSI_ComparableMstLinkDItchesNoDSNodeRowChangeEvent(((_VSI_ComparableMstLinkDItchesNoDSNodeRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this._VSI_ComparableMstLinkDItchesNoDSNodeRowChanging != null)) {
+                    this._VSI_ComparableMstLinkDItchesNoDSNodeRowChanging(this, new _VSI_ComparableMstLinkDItchesNoDSNodeRowChangeEvent(((_VSI_ComparableMstLinkDItchesNoDSNodeRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this._VSI_ComparableMstLinkDItchesNoDSNodeRowDeleted != null)) {
+                    this._VSI_ComparableMstLinkDItchesNoDSNodeRowDeleted(this, new _VSI_ComparableMstLinkDItchesNoDSNodeRowChangeEvent(((_VSI_ComparableMstLinkDItchesNoDSNodeRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this._VSI_ComparableMstLinkDItchesNoDSNodeRowDeleting != null)) {
+                    this._VSI_ComparableMstLinkDItchesNoDSNodeRowDeleting(this, new _VSI_ComparableMstLinkDItchesNoDSNodeRowChangeEvent(((_VSI_ComparableMstLinkDItchesNoDSNodeRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void Remove_VSI_ComparableMstLinkDItchesNoDSNodeRow(_VSI_ComparableMstLinkDItchesNoDSNodeRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                FieldWorkDBDataSet ds = new FieldWorkDBDataSet();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "_VSI_ComparableMstLinkDItchesNoDSNodeDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class _VSI_ComparableMstLinkDitchesNoUSNodeDataTable : global::System.Data.TypedTableBase<_VSI_ComparableMstLinkDitchesNoUSNodeRow> {
+            
+            private global::System.Data.DataColumn columnMLinkID;
+            
+            private global::System.Data.DataColumn columnCompKey;
+            
+            private global::System.Data.DataColumn columnNode_No;
+            
+            private global::System.Data.DataColumn columnOldShape;
+            
+            private global::System.Data.DataColumn columnOldWidth;
+            
+            private global::System.Data.DataColumn columnNewDepth;
+            
+            private global::System.Data.DataColumn columnNewTopWidth;
+            
+            private global::System.Data.DataColumn columnNewBottomWidth;
+            
+            private global::System.Data.DataColumn columnOldMaterial;
+            
+            private global::System.Data.DataColumn columnNewMaterial;
+            
+            private global::System.Data.DataColumn columnEvaluatorPageID;
+            
+            private global::System.Data.DataColumn columnWatershed;
+            
+            private global::System.Data.DataColumn columnSubwatershed;
+            
+            private global::System.Data.DataColumn columnDate;
+            
+            private global::System.Data.DataColumn columnEvaluator;
+            
+            private global::System.Data.DataColumn columnMapNo;
+            
+            private global::System.Data.DataColumn columnMapPage;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public _VSI_ComparableMstLinkDitchesNoUSNodeDataTable() {
+                this.TableName = "_VSI_ComparableMstLinkDitchesNoUSNode";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal _VSI_ComparableMstLinkDitchesNoUSNodeDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected _VSI_ComparableMstLinkDitchesNoUSNodeDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn MLinkIDColumn {
+                get {
+                    return this.columnMLinkID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn CompKeyColumn {
+                get {
+                    return this.columnCompKey;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn Node_NoColumn {
+                get {
+                    return this.columnNode_No;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn OldShapeColumn {
+                get {
+                    return this.columnOldShape;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn OldWidthColumn {
+                get {
+                    return this.columnOldWidth;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn NewDepthColumn {
+                get {
+                    return this.columnNewDepth;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn NewTopWidthColumn {
+                get {
+                    return this.columnNewTopWidth;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn NewBottomWidthColumn {
+                get {
+                    return this.columnNewBottomWidth;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn OldMaterialColumn {
+                get {
+                    return this.columnOldMaterial;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn NewMaterialColumn {
+                get {
+                    return this.columnNewMaterial;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn EvaluatorPageIDColumn {
+                get {
+                    return this.columnEvaluatorPageID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn WatershedColumn {
+                get {
+                    return this.columnWatershed;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn SubwatershedColumn {
+                get {
+                    return this.columnSubwatershed;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn DateColumn {
+                get {
+                    return this.columnDate;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn EvaluatorColumn {
+                get {
+                    return this.columnEvaluator;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn MapNoColumn {
+                get {
+                    return this.columnMapNo;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn MapPageColumn {
+                get {
+                    return this.columnMapPage;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public _VSI_ComparableMstLinkDitchesNoUSNodeRow this[int index] {
+                get {
+                    return ((_VSI_ComparableMstLinkDitchesNoUSNodeRow)(this.Rows[index]));
+                }
+            }
+            
+            public event _VSI_ComparableMstLinkDitchesNoUSNodeRowChangeEventHandler _VSI_ComparableMstLinkDitchesNoUSNodeRowChanging;
+            
+            public event _VSI_ComparableMstLinkDitchesNoUSNodeRowChangeEventHandler _VSI_ComparableMstLinkDitchesNoUSNodeRowChanged;
+            
+            public event _VSI_ComparableMstLinkDitchesNoUSNodeRowChangeEventHandler _VSI_ComparableMstLinkDitchesNoUSNodeRowDeleting;
+            
+            public event _VSI_ComparableMstLinkDitchesNoUSNodeRowChangeEventHandler _VSI_ComparableMstLinkDitchesNoUSNodeRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void Add_VSI_ComparableMstLinkDitchesNoUSNodeRow(_VSI_ComparableMstLinkDitchesNoUSNodeRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public _VSI_ComparableMstLinkDitchesNoUSNodeRow Add_VSI_ComparableMstLinkDitchesNoUSNodeRow(
+                        int MLinkID, 
+                        int CompKey, 
+                        string Node_No, 
+                        string OldShape, 
+                        decimal OldWidth, 
+                        double NewDepth, 
+                        double NewTopWidth, 
+                        double NewBottomWidth, 
+                        string OldMaterial, 
+                        string NewMaterial, 
+                        int EvaluatorPageID, 
+                        string Watershed, 
+                        string Subwatershed, 
+                        System.DateTime Date, 
+                        string Evaluator, 
+                        int MapNo, 
+                        int MapPage) {
+                _VSI_ComparableMstLinkDitchesNoUSNodeRow row_VSI_ComparableMstLinkDitchesNoUSNodeRow = ((_VSI_ComparableMstLinkDitchesNoUSNodeRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        MLinkID,
+                        CompKey,
+                        Node_No,
+                        OldShape,
+                        OldWidth,
+                        NewDepth,
+                        NewTopWidth,
+                        NewBottomWidth,
+                        OldMaterial,
+                        NewMaterial,
+                        EvaluatorPageID,
+                        Watershed,
+                        Subwatershed,
+                        Date,
+                        Evaluator,
+                        MapNo,
+                        MapPage};
+                row_VSI_ComparableMstLinkDitchesNoUSNodeRow.ItemArray = columnValuesArray;
+                this.Rows.Add(row_VSI_ComparableMstLinkDitchesNoUSNodeRow);
+                return row_VSI_ComparableMstLinkDitchesNoUSNodeRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public override global::System.Data.DataTable Clone() {
+                _VSI_ComparableMstLinkDitchesNoUSNodeDataTable cln = ((_VSI_ComparableMstLinkDitchesNoUSNodeDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new _VSI_ComparableMstLinkDitchesNoUSNodeDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal void InitVars() {
+                this.columnMLinkID = base.Columns["MLinkID"];
+                this.columnCompKey = base.Columns["CompKey"];
+                this.columnNode_No = base.Columns["Node_No"];
+                this.columnOldShape = base.Columns["OldShape"];
+                this.columnOldWidth = base.Columns["OldWidth"];
+                this.columnNewDepth = base.Columns["NewDepth"];
+                this.columnNewTopWidth = base.Columns["NewTopWidth"];
+                this.columnNewBottomWidth = base.Columns["NewBottomWidth"];
+                this.columnOldMaterial = base.Columns["OldMaterial"];
+                this.columnNewMaterial = base.Columns["NewMaterial"];
+                this.columnEvaluatorPageID = base.Columns["EvaluatorPageID"];
+                this.columnWatershed = base.Columns["Watershed"];
+                this.columnSubwatershed = base.Columns["Subwatershed"];
+                this.columnDate = base.Columns["Date"];
+                this.columnEvaluator = base.Columns["Evaluator"];
+                this.columnMapNo = base.Columns["MapNo"];
+                this.columnMapPage = base.Columns["MapPage"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            private void InitClass() {
+                this.columnMLinkID = new global::System.Data.DataColumn("MLinkID", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMLinkID);
+                this.columnCompKey = new global::System.Data.DataColumn("CompKey", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCompKey);
+                this.columnNode_No = new global::System.Data.DataColumn("Node_No", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNode_No);
+                this.columnOldShape = new global::System.Data.DataColumn("OldShape", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnOldShape);
+                this.columnOldWidth = new global::System.Data.DataColumn("OldWidth", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnOldWidth);
+                this.columnNewDepth = new global::System.Data.DataColumn("NewDepth", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNewDepth);
+                this.columnNewTopWidth = new global::System.Data.DataColumn("NewTopWidth", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNewTopWidth);
+                this.columnNewBottomWidth = new global::System.Data.DataColumn("NewBottomWidth", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNewBottomWidth);
+                this.columnOldMaterial = new global::System.Data.DataColumn("OldMaterial", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnOldMaterial);
+                this.columnNewMaterial = new global::System.Data.DataColumn("NewMaterial", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNewMaterial);
+                this.columnEvaluatorPageID = new global::System.Data.DataColumn("EvaluatorPageID", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEvaluatorPageID);
+                this.columnWatershed = new global::System.Data.DataColumn("Watershed", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnWatershed);
+                this.columnSubwatershed = new global::System.Data.DataColumn("Subwatershed", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSubwatershed);
+                this.columnDate = new global::System.Data.DataColumn("Date", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDate);
+                this.columnEvaluator = new global::System.Data.DataColumn("Evaluator", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEvaluator);
+                this.columnMapNo = new global::System.Data.DataColumn("MapNo", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMapNo);
+                this.columnMapPage = new global::System.Data.DataColumn("MapPage", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMapPage);
+                this.columnNode_No.MaxLength = 10;
+                this.columnOldShape.MaxLength = 4;
+                this.columnOldMaterial.MaxLength = 6;
+                this.columnNewMaterial.MaxLength = 10;
+                this.columnWatershed.MaxLength = 50;
+                this.columnSubwatershed.MaxLength = 50;
+                this.columnEvaluator.MaxLength = 50;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public _VSI_ComparableMstLinkDitchesNoUSNodeRow New_VSI_ComparableMstLinkDitchesNoUSNodeRow() {
+                return ((_VSI_ComparableMstLinkDitchesNoUSNodeRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new _VSI_ComparableMstLinkDitchesNoUSNodeRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Type GetRowType() {
+                return typeof(_VSI_ComparableMstLinkDitchesNoUSNodeRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this._VSI_ComparableMstLinkDitchesNoUSNodeRowChanged != null)) {
+                    this._VSI_ComparableMstLinkDitchesNoUSNodeRowChanged(this, new _VSI_ComparableMstLinkDitchesNoUSNodeRowChangeEvent(((_VSI_ComparableMstLinkDitchesNoUSNodeRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this._VSI_ComparableMstLinkDitchesNoUSNodeRowChanging != null)) {
+                    this._VSI_ComparableMstLinkDitchesNoUSNodeRowChanging(this, new _VSI_ComparableMstLinkDitchesNoUSNodeRowChangeEvent(((_VSI_ComparableMstLinkDitchesNoUSNodeRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this._VSI_ComparableMstLinkDitchesNoUSNodeRowDeleted != null)) {
+                    this._VSI_ComparableMstLinkDitchesNoUSNodeRowDeleted(this, new _VSI_ComparableMstLinkDitchesNoUSNodeRowChangeEvent(((_VSI_ComparableMstLinkDitchesNoUSNodeRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this._VSI_ComparableMstLinkDitchesNoUSNodeRowDeleting != null)) {
+                    this._VSI_ComparableMstLinkDitchesNoUSNodeRowDeleting(this, new _VSI_ComparableMstLinkDitchesNoUSNodeRowChangeEvent(((_VSI_ComparableMstLinkDitchesNoUSNodeRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void Remove_VSI_ComparableMstLinkDitchesNoUSNodeRow(_VSI_ComparableMstLinkDitchesNoUSNodeRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                FieldWorkDBDataSet ds = new FieldWorkDBDataSet();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "_VSI_ComparableMstLinkDitchesNoUSNodeDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class _VSI_ComparableMstLinkDitchesTransferableDataTable : global::System.Data.TypedTableBase<_VSI_ComparableMstLinkDitchesTransferableRow> {
+            
+            private global::System.Data.DataColumn columnMLinkID;
+            
+            private global::System.Data.DataColumn columnCompKey;
+            
+            private global::System.Data.DataColumn columnNode_No;
+            
+            private global::System.Data.DataColumn columnOldShape;
+            
+            private global::System.Data.DataColumn columnOldHeight;
+            
+            private global::System.Data.DataColumn columnOldWidth;
+            
+            private global::System.Data.DataColumn columnNewDepth;
+            
+            private global::System.Data.DataColumn columnNewTopWidth;
+            
+            private global::System.Data.DataColumn columnNewBottomWidth;
+            
+            private global::System.Data.DataColumn columnOldMaterial;
+            
+            private global::System.Data.DataColumn columnNewMaterial;
+            
+            private global::System.Data.DataColumn columnEvaluatorPageID;
+            
+            private global::System.Data.DataColumn columnWatershed;
+            
+            private global::System.Data.DataColumn columnSubwatershed;
+            
+            private global::System.Data.DataColumn columnDate;
+            
+            private global::System.Data.DataColumn columnEvaluator;
+            
+            private global::System.Data.DataColumn columnMapNo;
+            
+            private global::System.Data.DataColumn columnMapPage;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public _VSI_ComparableMstLinkDitchesTransferableDataTable() {
+                this.TableName = "_VSI_ComparableMstLinkDitchesTransferable";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal _VSI_ComparableMstLinkDitchesTransferableDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected _VSI_ComparableMstLinkDitchesTransferableDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn MLinkIDColumn {
+                get {
+                    return this.columnMLinkID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn CompKeyColumn {
+                get {
+                    return this.columnCompKey;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn Node_NoColumn {
+                get {
+                    return this.columnNode_No;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn OldShapeColumn {
+                get {
+                    return this.columnOldShape;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn OldHeightColumn {
+                get {
+                    return this.columnOldHeight;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn OldWidthColumn {
+                get {
+                    return this.columnOldWidth;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn NewDepthColumn {
+                get {
+                    return this.columnNewDepth;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn NewTopWidthColumn {
+                get {
+                    return this.columnNewTopWidth;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn NewBottomWidthColumn {
+                get {
+                    return this.columnNewBottomWidth;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn OldMaterialColumn {
+                get {
+                    return this.columnOldMaterial;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn NewMaterialColumn {
+                get {
+                    return this.columnNewMaterial;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn EvaluatorPageIDColumn {
+                get {
+                    return this.columnEvaluatorPageID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn WatershedColumn {
+                get {
+                    return this.columnWatershed;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn SubwatershedColumn {
+                get {
+                    return this.columnSubwatershed;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn DateColumn {
+                get {
+                    return this.columnDate;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn EvaluatorColumn {
+                get {
+                    return this.columnEvaluator;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn MapNoColumn {
+                get {
+                    return this.columnMapNo;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn MapPageColumn {
+                get {
+                    return this.columnMapPage;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public _VSI_ComparableMstLinkDitchesTransferableRow this[int index] {
+                get {
+                    return ((_VSI_ComparableMstLinkDitchesTransferableRow)(this.Rows[index]));
+                }
+            }
+            
+            public event _VSI_ComparableMstLinkDitchesTransferableRowChangeEventHandler _VSI_ComparableMstLinkDitchesTransferableRowChanging;
+            
+            public event _VSI_ComparableMstLinkDitchesTransferableRowChangeEventHandler _VSI_ComparableMstLinkDitchesTransferableRowChanged;
+            
+            public event _VSI_ComparableMstLinkDitchesTransferableRowChangeEventHandler _VSI_ComparableMstLinkDitchesTransferableRowDeleting;
+            
+            public event _VSI_ComparableMstLinkDitchesTransferableRowChangeEventHandler _VSI_ComparableMstLinkDitchesTransferableRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void Add_VSI_ComparableMstLinkDitchesTransferableRow(_VSI_ComparableMstLinkDitchesTransferableRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public _VSI_ComparableMstLinkDitchesTransferableRow Add_VSI_ComparableMstLinkDitchesTransferableRow(
+                        int MLinkID, 
+                        int CompKey, 
+                        string Node_No, 
+                        string OldShape, 
+                        decimal OldHeight, 
+                        decimal OldWidth, 
+                        double NewDepth, 
+                        double NewTopWidth, 
+                        double NewBottomWidth, 
+                        string OldMaterial, 
+                        string NewMaterial, 
+                        int EvaluatorPageID, 
+                        string Watershed, 
+                        string Subwatershed, 
+                        System.DateTime Date, 
+                        string Evaluator, 
+                        int MapNo, 
+                        int MapPage) {
+                _VSI_ComparableMstLinkDitchesTransferableRow row_VSI_ComparableMstLinkDitchesTransferableRow = ((_VSI_ComparableMstLinkDitchesTransferableRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        MLinkID,
+                        CompKey,
+                        Node_No,
+                        OldShape,
+                        OldHeight,
+                        OldWidth,
+                        NewDepth,
+                        NewTopWidth,
+                        NewBottomWidth,
+                        OldMaterial,
+                        NewMaterial,
+                        EvaluatorPageID,
+                        Watershed,
+                        Subwatershed,
+                        Date,
+                        Evaluator,
+                        MapNo,
+                        MapPage};
+                row_VSI_ComparableMstLinkDitchesTransferableRow.ItemArray = columnValuesArray;
+                this.Rows.Add(row_VSI_ComparableMstLinkDitchesTransferableRow);
+                return row_VSI_ComparableMstLinkDitchesTransferableRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public override global::System.Data.DataTable Clone() {
+                _VSI_ComparableMstLinkDitchesTransferableDataTable cln = ((_VSI_ComparableMstLinkDitchesTransferableDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new _VSI_ComparableMstLinkDitchesTransferableDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal void InitVars() {
+                this.columnMLinkID = base.Columns["MLinkID"];
+                this.columnCompKey = base.Columns["CompKey"];
+                this.columnNode_No = base.Columns["Node_No"];
+                this.columnOldShape = base.Columns["OldShape"];
+                this.columnOldHeight = base.Columns["OldHeight"];
+                this.columnOldWidth = base.Columns["OldWidth"];
+                this.columnNewDepth = base.Columns["NewDepth"];
+                this.columnNewTopWidth = base.Columns["NewTopWidth"];
+                this.columnNewBottomWidth = base.Columns["NewBottomWidth"];
+                this.columnOldMaterial = base.Columns["OldMaterial"];
+                this.columnNewMaterial = base.Columns["NewMaterial"];
+                this.columnEvaluatorPageID = base.Columns["EvaluatorPageID"];
+                this.columnWatershed = base.Columns["Watershed"];
+                this.columnSubwatershed = base.Columns["Subwatershed"];
+                this.columnDate = base.Columns["Date"];
+                this.columnEvaluator = base.Columns["Evaluator"];
+                this.columnMapNo = base.Columns["MapNo"];
+                this.columnMapPage = base.Columns["MapPage"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            private void InitClass() {
+                this.columnMLinkID = new global::System.Data.DataColumn("MLinkID", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMLinkID);
+                this.columnCompKey = new global::System.Data.DataColumn("CompKey", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCompKey);
+                this.columnNode_No = new global::System.Data.DataColumn("Node_No", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNode_No);
+                this.columnOldShape = new global::System.Data.DataColumn("OldShape", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnOldShape);
+                this.columnOldHeight = new global::System.Data.DataColumn("OldHeight", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnOldHeight);
+                this.columnOldWidth = new global::System.Data.DataColumn("OldWidth", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnOldWidth);
+                this.columnNewDepth = new global::System.Data.DataColumn("NewDepth", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNewDepth);
+                this.columnNewTopWidth = new global::System.Data.DataColumn("NewTopWidth", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNewTopWidth);
+                this.columnNewBottomWidth = new global::System.Data.DataColumn("NewBottomWidth", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNewBottomWidth);
+                this.columnOldMaterial = new global::System.Data.DataColumn("OldMaterial", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnOldMaterial);
+                this.columnNewMaterial = new global::System.Data.DataColumn("NewMaterial", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNewMaterial);
+                this.columnEvaluatorPageID = new global::System.Data.DataColumn("EvaluatorPageID", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEvaluatorPageID);
+                this.columnWatershed = new global::System.Data.DataColumn("Watershed", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnWatershed);
+                this.columnSubwatershed = new global::System.Data.DataColumn("Subwatershed", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSubwatershed);
+                this.columnDate = new global::System.Data.DataColumn("Date", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDate);
+                this.columnEvaluator = new global::System.Data.DataColumn("Evaluator", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEvaluator);
+                this.columnMapNo = new global::System.Data.DataColumn("MapNo", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMapNo);
+                this.columnMapPage = new global::System.Data.DataColumn("MapPage", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMapPage);
+                this.columnNode_No.MaxLength = 10;
+                this.columnOldShape.MaxLength = 4;
+                this.columnOldMaterial.MaxLength = 6;
+                this.columnNewMaterial.MaxLength = 10;
+                this.columnWatershed.MaxLength = 50;
+                this.columnSubwatershed.MaxLength = 50;
+                this.columnEvaluator.MaxLength = 50;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public _VSI_ComparableMstLinkDitchesTransferableRow New_VSI_ComparableMstLinkDitchesTransferableRow() {
+                return ((_VSI_ComparableMstLinkDitchesTransferableRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new _VSI_ComparableMstLinkDitchesTransferableRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Type GetRowType() {
+                return typeof(_VSI_ComparableMstLinkDitchesTransferableRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this._VSI_ComparableMstLinkDitchesTransferableRowChanged != null)) {
+                    this._VSI_ComparableMstLinkDitchesTransferableRowChanged(this, new _VSI_ComparableMstLinkDitchesTransferableRowChangeEvent(((_VSI_ComparableMstLinkDitchesTransferableRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this._VSI_ComparableMstLinkDitchesTransferableRowChanging != null)) {
+                    this._VSI_ComparableMstLinkDitchesTransferableRowChanging(this, new _VSI_ComparableMstLinkDitchesTransferableRowChangeEvent(((_VSI_ComparableMstLinkDitchesTransferableRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this._VSI_ComparableMstLinkDitchesTransferableRowDeleted != null)) {
+                    this._VSI_ComparableMstLinkDitchesTransferableRowDeleted(this, new _VSI_ComparableMstLinkDitchesTransferableRowChangeEvent(((_VSI_ComparableMstLinkDitchesTransferableRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this._VSI_ComparableMstLinkDitchesTransferableRowDeleting != null)) {
+                    this._VSI_ComparableMstLinkDitchesTransferableRowDeleting(this, new _VSI_ComparableMstLinkDitchesTransferableRowChangeEvent(((_VSI_ComparableMstLinkDitchesTransferableRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void Remove_VSI_ComparableMstLinkDitchesTransferableRow(_VSI_ComparableMstLinkDitchesTransferableRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                FieldWorkDBDataSet ds = new FieldWorkDBDataSet();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "_VSI_ComparableMstLinkDitchesTransferableDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class _VSI_ComparableMstLinkDitchesWidthTopLTBottomDataTable : global::System.Data.TypedTableBase<_VSI_ComparableMstLinkDitchesWidthTopLTBottomRow> {
+            
+            private global::System.Data.DataColumn columnMLinkID;
+            
+            private global::System.Data.DataColumn columnCompKey;
+            
+            private global::System.Data.DataColumn columnNode_No;
+            
+            private global::System.Data.DataColumn columnOldShape;
+            
+            private global::System.Data.DataColumn columnOldWidth;
+            
+            private global::System.Data.DataColumn columnNewDepth;
+            
+            private global::System.Data.DataColumn columnNewTopWidth;
+            
+            private global::System.Data.DataColumn columnNewBottomWidth;
+            
+            private global::System.Data.DataColumn columnOldMaterial;
+            
+            private global::System.Data.DataColumn columnNewMaterial;
+            
+            private global::System.Data.DataColumn columnEvaluatorPageID;
+            
+            private global::System.Data.DataColumn columnWatershed;
+            
+            private global::System.Data.DataColumn columnSubwatershed;
+            
+            private global::System.Data.DataColumn columnDate;
+            
+            private global::System.Data.DataColumn columnEvaluator;
+            
+            private global::System.Data.DataColumn columnMapNo;
+            
+            private global::System.Data.DataColumn columnMapPage;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public _VSI_ComparableMstLinkDitchesWidthTopLTBottomDataTable() {
+                this.TableName = "_VSI_ComparableMstLinkDitchesWidthTopLTBottom";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal _VSI_ComparableMstLinkDitchesWidthTopLTBottomDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected _VSI_ComparableMstLinkDitchesWidthTopLTBottomDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn MLinkIDColumn {
+                get {
+                    return this.columnMLinkID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn CompKeyColumn {
+                get {
+                    return this.columnCompKey;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn Node_NoColumn {
+                get {
+                    return this.columnNode_No;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn OldShapeColumn {
+                get {
+                    return this.columnOldShape;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn OldWidthColumn {
+                get {
+                    return this.columnOldWidth;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn NewDepthColumn {
+                get {
+                    return this.columnNewDepth;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn NewTopWidthColumn {
+                get {
+                    return this.columnNewTopWidth;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn NewBottomWidthColumn {
+                get {
+                    return this.columnNewBottomWidth;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn OldMaterialColumn {
+                get {
+                    return this.columnOldMaterial;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn NewMaterialColumn {
+                get {
+                    return this.columnNewMaterial;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn EvaluatorPageIDColumn {
+                get {
+                    return this.columnEvaluatorPageID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn WatershedColumn {
+                get {
+                    return this.columnWatershed;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn SubwatershedColumn {
+                get {
+                    return this.columnSubwatershed;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn DateColumn {
+                get {
+                    return this.columnDate;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn EvaluatorColumn {
+                get {
+                    return this.columnEvaluator;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn MapNoColumn {
+                get {
+                    return this.columnMapNo;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn MapPageColumn {
+                get {
+                    return this.columnMapPage;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public _VSI_ComparableMstLinkDitchesWidthTopLTBottomRow this[int index] {
+                get {
+                    return ((_VSI_ComparableMstLinkDitchesWidthTopLTBottomRow)(this.Rows[index]));
+                }
+            }
+            
+            public event _VSI_ComparableMstLinkDitchesWidthTopLTBottomRowChangeEventHandler _VSI_ComparableMstLinkDitchesWidthTopLTBottomRowChanging;
+            
+            public event _VSI_ComparableMstLinkDitchesWidthTopLTBottomRowChangeEventHandler _VSI_ComparableMstLinkDitchesWidthTopLTBottomRowChanged;
+            
+            public event _VSI_ComparableMstLinkDitchesWidthTopLTBottomRowChangeEventHandler _VSI_ComparableMstLinkDitchesWidthTopLTBottomRowDeleting;
+            
+            public event _VSI_ComparableMstLinkDitchesWidthTopLTBottomRowChangeEventHandler _VSI_ComparableMstLinkDitchesWidthTopLTBottomRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void Add_VSI_ComparableMstLinkDitchesWidthTopLTBottomRow(_VSI_ComparableMstLinkDitchesWidthTopLTBottomRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public _VSI_ComparableMstLinkDitchesWidthTopLTBottomRow Add_VSI_ComparableMstLinkDitchesWidthTopLTBottomRow(
+                        int MLinkID, 
+                        int CompKey, 
+                        string Node_No, 
+                        string OldShape, 
+                        decimal OldWidth, 
+                        double NewDepth, 
+                        double NewTopWidth, 
+                        double NewBottomWidth, 
+                        string OldMaterial, 
+                        string NewMaterial, 
+                        int EvaluatorPageID, 
+                        string Watershed, 
+                        string Subwatershed, 
+                        System.DateTime Date, 
+                        string Evaluator, 
+                        int MapNo, 
+                        int MapPage) {
+                _VSI_ComparableMstLinkDitchesWidthTopLTBottomRow row_VSI_ComparableMstLinkDitchesWidthTopLTBottomRow = ((_VSI_ComparableMstLinkDitchesWidthTopLTBottomRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        MLinkID,
+                        CompKey,
+                        Node_No,
+                        OldShape,
+                        OldWidth,
+                        NewDepth,
+                        NewTopWidth,
+                        NewBottomWidth,
+                        OldMaterial,
+                        NewMaterial,
+                        EvaluatorPageID,
+                        Watershed,
+                        Subwatershed,
+                        Date,
+                        Evaluator,
+                        MapNo,
+                        MapPage};
+                row_VSI_ComparableMstLinkDitchesWidthTopLTBottomRow.ItemArray = columnValuesArray;
+                this.Rows.Add(row_VSI_ComparableMstLinkDitchesWidthTopLTBottomRow);
+                return row_VSI_ComparableMstLinkDitchesWidthTopLTBottomRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public override global::System.Data.DataTable Clone() {
+                _VSI_ComparableMstLinkDitchesWidthTopLTBottomDataTable cln = ((_VSI_ComparableMstLinkDitchesWidthTopLTBottomDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new _VSI_ComparableMstLinkDitchesWidthTopLTBottomDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal void InitVars() {
+                this.columnMLinkID = base.Columns["MLinkID"];
+                this.columnCompKey = base.Columns["CompKey"];
+                this.columnNode_No = base.Columns["Node_No"];
+                this.columnOldShape = base.Columns["OldShape"];
+                this.columnOldWidth = base.Columns["OldWidth"];
+                this.columnNewDepth = base.Columns["NewDepth"];
+                this.columnNewTopWidth = base.Columns["NewTopWidth"];
+                this.columnNewBottomWidth = base.Columns["NewBottomWidth"];
+                this.columnOldMaterial = base.Columns["OldMaterial"];
+                this.columnNewMaterial = base.Columns["NewMaterial"];
+                this.columnEvaluatorPageID = base.Columns["EvaluatorPageID"];
+                this.columnWatershed = base.Columns["Watershed"];
+                this.columnSubwatershed = base.Columns["Subwatershed"];
+                this.columnDate = base.Columns["Date"];
+                this.columnEvaluator = base.Columns["Evaluator"];
+                this.columnMapNo = base.Columns["MapNo"];
+                this.columnMapPage = base.Columns["MapPage"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            private void InitClass() {
+                this.columnMLinkID = new global::System.Data.DataColumn("MLinkID", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMLinkID);
+                this.columnCompKey = new global::System.Data.DataColumn("CompKey", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCompKey);
+                this.columnNode_No = new global::System.Data.DataColumn("Node_No", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNode_No);
+                this.columnOldShape = new global::System.Data.DataColumn("OldShape", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnOldShape);
+                this.columnOldWidth = new global::System.Data.DataColumn("OldWidth", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnOldWidth);
+                this.columnNewDepth = new global::System.Data.DataColumn("NewDepth", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNewDepth);
+                this.columnNewTopWidth = new global::System.Data.DataColumn("NewTopWidth", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNewTopWidth);
+                this.columnNewBottomWidth = new global::System.Data.DataColumn("NewBottomWidth", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNewBottomWidth);
+                this.columnOldMaterial = new global::System.Data.DataColumn("OldMaterial", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnOldMaterial);
+                this.columnNewMaterial = new global::System.Data.DataColumn("NewMaterial", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNewMaterial);
+                this.columnEvaluatorPageID = new global::System.Data.DataColumn("EvaluatorPageID", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEvaluatorPageID);
+                this.columnWatershed = new global::System.Data.DataColumn("Watershed", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnWatershed);
+                this.columnSubwatershed = new global::System.Data.DataColumn("Subwatershed", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSubwatershed);
+                this.columnDate = new global::System.Data.DataColumn("Date", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDate);
+                this.columnEvaluator = new global::System.Data.DataColumn("Evaluator", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEvaluator);
+                this.columnMapNo = new global::System.Data.DataColumn("MapNo", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMapNo);
+                this.columnMapPage = new global::System.Data.DataColumn("MapPage", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMapPage);
+                this.columnNode_No.MaxLength = 10;
+                this.columnOldShape.MaxLength = 4;
+                this.columnOldMaterial.MaxLength = 6;
+                this.columnNewMaterial.MaxLength = 10;
+                this.columnWatershed.MaxLength = 50;
+                this.columnSubwatershed.MaxLength = 50;
+                this.columnEvaluator.MaxLength = 50;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public _VSI_ComparableMstLinkDitchesWidthTopLTBottomRow New_VSI_ComparableMstLinkDitchesWidthTopLTBottomRow() {
+                return ((_VSI_ComparableMstLinkDitchesWidthTopLTBottomRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new _VSI_ComparableMstLinkDitchesWidthTopLTBottomRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Type GetRowType() {
+                return typeof(_VSI_ComparableMstLinkDitchesWidthTopLTBottomRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this._VSI_ComparableMstLinkDitchesWidthTopLTBottomRowChanged != null)) {
+                    this._VSI_ComparableMstLinkDitchesWidthTopLTBottomRowChanged(this, new _VSI_ComparableMstLinkDitchesWidthTopLTBottomRowChangeEvent(((_VSI_ComparableMstLinkDitchesWidthTopLTBottomRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this._VSI_ComparableMstLinkDitchesWidthTopLTBottomRowChanging != null)) {
+                    this._VSI_ComparableMstLinkDitchesWidthTopLTBottomRowChanging(this, new _VSI_ComparableMstLinkDitchesWidthTopLTBottomRowChangeEvent(((_VSI_ComparableMstLinkDitchesWidthTopLTBottomRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this._VSI_ComparableMstLinkDitchesWidthTopLTBottomRowDeleted != null)) {
+                    this._VSI_ComparableMstLinkDitchesWidthTopLTBottomRowDeleted(this, new _VSI_ComparableMstLinkDitchesWidthTopLTBottomRowChangeEvent(((_VSI_ComparableMstLinkDitchesWidthTopLTBottomRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this._VSI_ComparableMstLinkDitchesWidthTopLTBottomRowDeleting != null)) {
+                    this._VSI_ComparableMstLinkDitchesWidthTopLTBottomRowDeleting(this, new _VSI_ComparableMstLinkDitchesWidthTopLTBottomRowChangeEvent(((_VSI_ComparableMstLinkDitchesWidthTopLTBottomRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void Remove_VSI_ComparableMstLinkDitchesWidthTopLTBottomRow(_VSI_ComparableMstLinkDitchesWidthTopLTBottomRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                FieldWorkDBDataSet ds = new FieldWorkDBDataSet();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "_VSI_ComparableMstLinkDitchesWidthTopLTBottomDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class _VSI_DifficultCulvertsDataTable : global::System.Data.TypedTableBase<_VSI_DifficultCulvertsRow> {
+            
+            private global::System.Data.DataColumn columnPrimaryKey;
+            
+            private global::System.Data.DataColumn columnPosition;
+            
+            private global::System.Data.DataColumn columnNode_No;
+            
+            private global::System.Data.DataColumn columnLPO;
+            
+            private global::System.Data.DataColumn columnShape;
+            
+            private global::System.Data.DataColumn columnPipe_D;
+            
+            private global::System.Data.DataColumn columnCulvDepth;
+            
+            private global::System.Data.DataColumn columnCulvMaterial;
+            
+            private global::System.Data.DataColumn columnCulvPhoto_ID;
+            
+            private global::System.Data.DataColumn columnDitchDepth;
+            
+            private global::System.Data.DataColumn columnWidthTop;
+            
+            private global::System.Data.DataColumn columnWidthBottom;
+            
+            private global::System.Data.DataColumn columnDitchMaterial;
+            
+            private global::System.Data.DataColumn columnDitchPhoto_ID;
+            
+            private global::System.Data.DataColumn columnEvaluatorPageID;
+            
+            private global::System.Data.DataColumn columnWatershed;
+            
+            private global::System.Data.DataColumn columnSubwatershed;
+            
+            private global::System.Data.DataColumn columnDate;
+            
+            private global::System.Data.DataColumn columnEvaluator;
+            
+            private global::System.Data.DataColumn columnMapNo;
+            
+            private global::System.Data.DataColumn columnMapPage;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public _VSI_DifficultCulvertsDataTable() {
+                this.TableName = "_VSI_DifficultCulverts";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal _VSI_DifficultCulvertsDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected _VSI_DifficultCulvertsDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn PrimaryKeyColumn {
+                get {
+                    return this.columnPrimaryKey;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn PositionColumn {
+                get {
+                    return this.columnPosition;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn Node_NoColumn {
+                get {
+                    return this.columnNode_No;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn LPOColumn {
+                get {
+                    return this.columnLPO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn ShapeColumn {
+                get {
+                    return this.columnShape;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn Pipe_DColumn {
+                get {
+                    return this.columnPipe_D;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn CulvDepthColumn {
+                get {
+                    return this.columnCulvDepth;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn CulvMaterialColumn {
+                get {
+                    return this.columnCulvMaterial;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn CulvPhoto_IDColumn {
+                get {
+                    return this.columnCulvPhoto_ID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn DitchDepthColumn {
+                get {
+                    return this.columnDitchDepth;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn WidthTopColumn {
+                get {
+                    return this.columnWidthTop;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn WidthBottomColumn {
+                get {
+                    return this.columnWidthBottom;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn DitchMaterialColumn {
+                get {
+                    return this.columnDitchMaterial;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn DitchPhoto_IDColumn {
+                get {
+                    return this.columnDitchPhoto_ID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn EvaluatorPageIDColumn {
+                get {
+                    return this.columnEvaluatorPageID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn WatershedColumn {
+                get {
+                    return this.columnWatershed;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn SubwatershedColumn {
+                get {
+                    return this.columnSubwatershed;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn DateColumn {
+                get {
+                    return this.columnDate;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn EvaluatorColumn {
+                get {
+                    return this.columnEvaluator;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn MapNoColumn {
+                get {
+                    return this.columnMapNo;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn MapPageColumn {
+                get {
+                    return this.columnMapPage;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public _VSI_DifficultCulvertsRow this[int index] {
+                get {
+                    return ((_VSI_DifficultCulvertsRow)(this.Rows[index]));
+                }
+            }
+            
+            public event _VSI_DifficultCulvertsRowChangeEventHandler _VSI_DifficultCulvertsRowChanging;
+            
+            public event _VSI_DifficultCulvertsRowChangeEventHandler _VSI_DifficultCulvertsRowChanged;
+            
+            public event _VSI_DifficultCulvertsRowChangeEventHandler _VSI_DifficultCulvertsRowDeleting;
+            
+            public event _VSI_DifficultCulvertsRowChangeEventHandler _VSI_DifficultCulvertsRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void Add_VSI_DifficultCulvertsRow(_VSI_DifficultCulvertsRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public _VSI_DifficultCulvertsRow Add_VSI_DifficultCulvertsRow(
+                        int PrimaryKey, 
+                        string Position, 
+                        string Node_No, 
+                        string LPO, 
+                        string Shape, 
+                        double Pipe_D, 
+                        double CulvDepth, 
+                        string CulvMaterial, 
+                        string CulvPhoto_ID, 
+                        double DitchDepth, 
+                        double WidthTop, 
+                        double WidthBottom, 
+                        string DitchMaterial, 
+                        string DitchPhoto_ID, 
+                        int EvaluatorPageID, 
+                        string Watershed, 
+                        string Subwatershed, 
+                        System.DateTime Date, 
+                        string Evaluator, 
+                        int MapNo, 
+                        int MapPage) {
+                _VSI_DifficultCulvertsRow row_VSI_DifficultCulvertsRow = ((_VSI_DifficultCulvertsRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        PrimaryKey,
+                        Position,
+                        Node_No,
+                        LPO,
+                        Shape,
+                        Pipe_D,
+                        CulvDepth,
+                        CulvMaterial,
+                        CulvPhoto_ID,
+                        DitchDepth,
+                        WidthTop,
+                        WidthBottom,
+                        DitchMaterial,
+                        DitchPhoto_ID,
+                        EvaluatorPageID,
+                        Watershed,
+                        Subwatershed,
+                        Date,
+                        Evaluator,
+                        MapNo,
+                        MapPage};
+                row_VSI_DifficultCulvertsRow.ItemArray = columnValuesArray;
+                this.Rows.Add(row_VSI_DifficultCulvertsRow);
+                return row_VSI_DifficultCulvertsRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public override global::System.Data.DataTable Clone() {
+                _VSI_DifficultCulvertsDataTable cln = ((_VSI_DifficultCulvertsDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new _VSI_DifficultCulvertsDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal void InitVars() {
+                this.columnPrimaryKey = base.Columns["PrimaryKey"];
+                this.columnPosition = base.Columns["Position"];
+                this.columnNode_No = base.Columns["Node_No"];
+                this.columnLPO = base.Columns["LPO"];
+                this.columnShape = base.Columns["Shape"];
+                this.columnPipe_D = base.Columns["Pipe_D"];
+                this.columnCulvDepth = base.Columns["CulvDepth"];
+                this.columnCulvMaterial = base.Columns["CulvMaterial"];
+                this.columnCulvPhoto_ID = base.Columns["CulvPhoto_ID"];
+                this.columnDitchDepth = base.Columns["DitchDepth"];
+                this.columnWidthTop = base.Columns["WidthTop"];
+                this.columnWidthBottom = base.Columns["WidthBottom"];
+                this.columnDitchMaterial = base.Columns["DitchMaterial"];
+                this.columnDitchPhoto_ID = base.Columns["DitchPhoto_ID"];
+                this.columnEvaluatorPageID = base.Columns["EvaluatorPageID"];
+                this.columnWatershed = base.Columns["Watershed"];
+                this.columnSubwatershed = base.Columns["Subwatershed"];
+                this.columnDate = base.Columns["Date"];
+                this.columnEvaluator = base.Columns["Evaluator"];
+                this.columnMapNo = base.Columns["MapNo"];
+                this.columnMapPage = base.Columns["MapPage"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            private void InitClass() {
+                this.columnPrimaryKey = new global::System.Data.DataColumn("PrimaryKey", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPrimaryKey);
+                this.columnPosition = new global::System.Data.DataColumn("Position", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPosition);
+                this.columnNode_No = new global::System.Data.DataColumn("Node_No", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNode_No);
+                this.columnLPO = new global::System.Data.DataColumn("LPO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnLPO);
+                this.columnShape = new global::System.Data.DataColumn("Shape", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnShape);
+                this.columnPipe_D = new global::System.Data.DataColumn("Pipe_D", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPipe_D);
+                this.columnCulvDepth = new global::System.Data.DataColumn("CulvDepth", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCulvDepth);
+                this.columnCulvMaterial = new global::System.Data.DataColumn("CulvMaterial", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCulvMaterial);
+                this.columnCulvPhoto_ID = new global::System.Data.DataColumn("CulvPhoto_ID", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCulvPhoto_ID);
+                this.columnDitchDepth = new global::System.Data.DataColumn("DitchDepth", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDitchDepth);
+                this.columnWidthTop = new global::System.Data.DataColumn("WidthTop", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnWidthTop);
+                this.columnWidthBottom = new global::System.Data.DataColumn("WidthBottom", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnWidthBottom);
+                this.columnDitchMaterial = new global::System.Data.DataColumn("DitchMaterial", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDitchMaterial);
+                this.columnDitchPhoto_ID = new global::System.Data.DataColumn("DitchPhoto_ID", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDitchPhoto_ID);
+                this.columnEvaluatorPageID = new global::System.Data.DataColumn("EvaluatorPageID", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEvaluatorPageID);
+                this.columnWatershed = new global::System.Data.DataColumn("Watershed", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnWatershed);
+                this.columnSubwatershed = new global::System.Data.DataColumn("Subwatershed", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSubwatershed);
+                this.columnDate = new global::System.Data.DataColumn("Date", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDate);
+                this.columnEvaluator = new global::System.Data.DataColumn("Evaluator", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEvaluator);
+                this.columnMapNo = new global::System.Data.DataColumn("MapNo", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMapNo);
+                this.columnMapPage = new global::System.Data.DataColumn("MapPage", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMapPage);
+                this.columnPosition.MaxLength = 10;
+                this.columnNode_No.MaxLength = 10;
+                this.columnLPO.MaxLength = 1;
+                this.columnShape.MaxLength = 10;
+                this.columnCulvMaterial.MaxLength = 10;
+                this.columnCulvPhoto_ID.MaxLength = 256;
+                this.columnDitchMaterial.MaxLength = 10;
+                this.columnDitchPhoto_ID.MaxLength = 256;
+                this.columnWatershed.MaxLength = 50;
+                this.columnSubwatershed.MaxLength = 50;
+                this.columnEvaluator.MaxLength = 50;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public _VSI_DifficultCulvertsRow New_VSI_DifficultCulvertsRow() {
+                return ((_VSI_DifficultCulvertsRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new _VSI_DifficultCulvertsRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Type GetRowType() {
+                return typeof(_VSI_DifficultCulvertsRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this._VSI_DifficultCulvertsRowChanged != null)) {
+                    this._VSI_DifficultCulvertsRowChanged(this, new _VSI_DifficultCulvertsRowChangeEvent(((_VSI_DifficultCulvertsRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this._VSI_DifficultCulvertsRowChanging != null)) {
+                    this._VSI_DifficultCulvertsRowChanging(this, new _VSI_DifficultCulvertsRowChangeEvent(((_VSI_DifficultCulvertsRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this._VSI_DifficultCulvertsRowDeleted != null)) {
+                    this._VSI_DifficultCulvertsRowDeleted(this, new _VSI_DifficultCulvertsRowChangeEvent(((_VSI_DifficultCulvertsRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this._VSI_DifficultCulvertsRowDeleting != null)) {
+                    this._VSI_DifficultCulvertsRowDeleting(this, new _VSI_DifficultCulvertsRowChangeEvent(((_VSI_DifficultCulvertsRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void Remove_VSI_DifficultCulvertsRow(_VSI_DifficultCulvertsRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                FieldWorkDBDataSet ds = new FieldWorkDBDataSet();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "_VSI_DifficultCulvertsDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class _VSI_DifficultDitchesDataTable : global::System.Data.TypedTableBase<_VSI_DifficultDitchesRow> {
+            
+            private global::System.Data.DataColumn columnPrimaryKey;
+            
+            private global::System.Data.DataColumn columnPosition;
+            
+            private global::System.Data.DataColumn columnNode_No;
+            
+            private global::System.Data.DataColumn columnLPO;
+            
+            private global::System.Data.DataColumn columnShape;
+            
+            private global::System.Data.DataColumn columnPipe_D;
+            
+            private global::System.Data.DataColumn columnCulvDepth;
+            
+            private global::System.Data.DataColumn columnCulvMaterial;
+            
+            private global::System.Data.DataColumn columnCulvPhoto_ID;
+            
+            private global::System.Data.DataColumn columnDitchDepth;
+            
+            private global::System.Data.DataColumn columnWidthTop;
+            
+            private global::System.Data.DataColumn columnWidthBottom;
+            
+            private global::System.Data.DataColumn columnDitchMaterial;
+            
+            private global::System.Data.DataColumn columnDitchPhoto_ID;
+            
+            private global::System.Data.DataColumn columnEvaluatorPageID;
+            
+            private global::System.Data.DataColumn columnWatershed;
+            
+            private global::System.Data.DataColumn columnSubwatershed;
+            
+            private global::System.Data.DataColumn columnDate;
+            
+            private global::System.Data.DataColumn columnEvaluator;
+            
+            private global::System.Data.DataColumn columnMapNo;
+            
+            private global::System.Data.DataColumn columnMapPage;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public _VSI_DifficultDitchesDataTable() {
+                this.TableName = "_VSI_DifficultDitches";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal _VSI_DifficultDitchesDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected _VSI_DifficultDitchesDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn PrimaryKeyColumn {
+                get {
+                    return this.columnPrimaryKey;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn PositionColumn {
+                get {
+                    return this.columnPosition;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn Node_NoColumn {
+                get {
+                    return this.columnNode_No;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn LPOColumn {
+                get {
+                    return this.columnLPO;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn ShapeColumn {
+                get {
+                    return this.columnShape;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn Pipe_DColumn {
+                get {
+                    return this.columnPipe_D;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn CulvDepthColumn {
+                get {
+                    return this.columnCulvDepth;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn CulvMaterialColumn {
+                get {
+                    return this.columnCulvMaterial;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn CulvPhoto_IDColumn {
+                get {
+                    return this.columnCulvPhoto_ID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn DitchDepthColumn {
+                get {
+                    return this.columnDitchDepth;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn WidthTopColumn {
+                get {
+                    return this.columnWidthTop;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn WidthBottomColumn {
+                get {
+                    return this.columnWidthBottom;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn DitchMaterialColumn {
+                get {
+                    return this.columnDitchMaterial;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn DitchPhoto_IDColumn {
+                get {
+                    return this.columnDitchPhoto_ID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn EvaluatorPageIDColumn {
+                get {
+                    return this.columnEvaluatorPageID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn WatershedColumn {
+                get {
+                    return this.columnWatershed;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn SubwatershedColumn {
+                get {
+                    return this.columnSubwatershed;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn DateColumn {
+                get {
+                    return this.columnDate;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn EvaluatorColumn {
+                get {
+                    return this.columnEvaluator;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn MapNoColumn {
+                get {
+                    return this.columnMapNo;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn MapPageColumn {
+                get {
+                    return this.columnMapPage;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public _VSI_DifficultDitchesRow this[int index] {
+                get {
+                    return ((_VSI_DifficultDitchesRow)(this.Rows[index]));
+                }
+            }
+            
+            public event _VSI_DifficultDitchesRowChangeEventHandler _VSI_DifficultDitchesRowChanging;
+            
+            public event _VSI_DifficultDitchesRowChangeEventHandler _VSI_DifficultDitchesRowChanged;
+            
+            public event _VSI_DifficultDitchesRowChangeEventHandler _VSI_DifficultDitchesRowDeleting;
+            
+            public event _VSI_DifficultDitchesRowChangeEventHandler _VSI_DifficultDitchesRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void Add_VSI_DifficultDitchesRow(_VSI_DifficultDitchesRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public _VSI_DifficultDitchesRow Add_VSI_DifficultDitchesRow(
+                        int PrimaryKey, 
+                        string Position, 
+                        string Node_No, 
+                        string LPO, 
+                        string Shape, 
+                        double Pipe_D, 
+                        double CulvDepth, 
+                        string CulvMaterial, 
+                        string CulvPhoto_ID, 
+                        double DitchDepth, 
+                        double WidthTop, 
+                        double WidthBottom, 
+                        string DitchMaterial, 
+                        string DitchPhoto_ID, 
+                        int EvaluatorPageID, 
+                        string Watershed, 
+                        string Subwatershed, 
+                        System.DateTime Date, 
+                        string Evaluator, 
+                        int MapNo, 
+                        int MapPage) {
+                _VSI_DifficultDitchesRow row_VSI_DifficultDitchesRow = ((_VSI_DifficultDitchesRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        PrimaryKey,
+                        Position,
+                        Node_No,
+                        LPO,
+                        Shape,
+                        Pipe_D,
+                        CulvDepth,
+                        CulvMaterial,
+                        CulvPhoto_ID,
+                        DitchDepth,
+                        WidthTop,
+                        WidthBottom,
+                        DitchMaterial,
+                        DitchPhoto_ID,
+                        EvaluatorPageID,
+                        Watershed,
+                        Subwatershed,
+                        Date,
+                        Evaluator,
+                        MapNo,
+                        MapPage};
+                row_VSI_DifficultDitchesRow.ItemArray = columnValuesArray;
+                this.Rows.Add(row_VSI_DifficultDitchesRow);
+                return row_VSI_DifficultDitchesRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public override global::System.Data.DataTable Clone() {
+                _VSI_DifficultDitchesDataTable cln = ((_VSI_DifficultDitchesDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new _VSI_DifficultDitchesDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal void InitVars() {
+                this.columnPrimaryKey = base.Columns["PrimaryKey"];
+                this.columnPosition = base.Columns["Position"];
+                this.columnNode_No = base.Columns["Node_No"];
+                this.columnLPO = base.Columns["LPO"];
+                this.columnShape = base.Columns["Shape"];
+                this.columnPipe_D = base.Columns["Pipe_D"];
+                this.columnCulvDepth = base.Columns["CulvDepth"];
+                this.columnCulvMaterial = base.Columns["CulvMaterial"];
+                this.columnCulvPhoto_ID = base.Columns["CulvPhoto_ID"];
+                this.columnDitchDepth = base.Columns["DitchDepth"];
+                this.columnWidthTop = base.Columns["WidthTop"];
+                this.columnWidthBottom = base.Columns["WidthBottom"];
+                this.columnDitchMaterial = base.Columns["DitchMaterial"];
+                this.columnDitchPhoto_ID = base.Columns["DitchPhoto_ID"];
+                this.columnEvaluatorPageID = base.Columns["EvaluatorPageID"];
+                this.columnWatershed = base.Columns["Watershed"];
+                this.columnSubwatershed = base.Columns["Subwatershed"];
+                this.columnDate = base.Columns["Date"];
+                this.columnEvaluator = base.Columns["Evaluator"];
+                this.columnMapNo = base.Columns["MapNo"];
+                this.columnMapPage = base.Columns["MapPage"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            private void InitClass() {
+                this.columnPrimaryKey = new global::System.Data.DataColumn("PrimaryKey", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPrimaryKey);
+                this.columnPosition = new global::System.Data.DataColumn("Position", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPosition);
+                this.columnNode_No = new global::System.Data.DataColumn("Node_No", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNode_No);
+                this.columnLPO = new global::System.Data.DataColumn("LPO", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnLPO);
+                this.columnShape = new global::System.Data.DataColumn("Shape", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnShape);
+                this.columnPipe_D = new global::System.Data.DataColumn("Pipe_D", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnPipe_D);
+                this.columnCulvDepth = new global::System.Data.DataColumn("CulvDepth", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCulvDepth);
+                this.columnCulvMaterial = new global::System.Data.DataColumn("CulvMaterial", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCulvMaterial);
+                this.columnCulvPhoto_ID = new global::System.Data.DataColumn("CulvPhoto_ID", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCulvPhoto_ID);
+                this.columnDitchDepth = new global::System.Data.DataColumn("DitchDepth", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDitchDepth);
+                this.columnWidthTop = new global::System.Data.DataColumn("WidthTop", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnWidthTop);
+                this.columnWidthBottom = new global::System.Data.DataColumn("WidthBottom", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnWidthBottom);
+                this.columnDitchMaterial = new global::System.Data.DataColumn("DitchMaterial", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDitchMaterial);
+                this.columnDitchPhoto_ID = new global::System.Data.DataColumn("DitchPhoto_ID", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDitchPhoto_ID);
+                this.columnEvaluatorPageID = new global::System.Data.DataColumn("EvaluatorPageID", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEvaluatorPageID);
+                this.columnWatershed = new global::System.Data.DataColumn("Watershed", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnWatershed);
+                this.columnSubwatershed = new global::System.Data.DataColumn("Subwatershed", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSubwatershed);
+                this.columnDate = new global::System.Data.DataColumn("Date", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDate);
+                this.columnEvaluator = new global::System.Data.DataColumn("Evaluator", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEvaluator);
+                this.columnMapNo = new global::System.Data.DataColumn("MapNo", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMapNo);
+                this.columnMapPage = new global::System.Data.DataColumn("MapPage", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMapPage);
+                this.columnPosition.MaxLength = 10;
+                this.columnNode_No.MaxLength = 10;
+                this.columnLPO.MaxLength = 1;
+                this.columnShape.MaxLength = 10;
+                this.columnCulvMaterial.MaxLength = 10;
+                this.columnCulvPhoto_ID.MaxLength = 256;
+                this.columnDitchMaterial.MaxLength = 10;
+                this.columnDitchPhoto_ID.MaxLength = 256;
+                this.columnWatershed.MaxLength = 50;
+                this.columnSubwatershed.MaxLength = 50;
+                this.columnEvaluator.MaxLength = 50;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public _VSI_DifficultDitchesRow New_VSI_DifficultDitchesRow() {
+                return ((_VSI_DifficultDitchesRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new _VSI_DifficultDitchesRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Type GetRowType() {
+                return typeof(_VSI_DifficultDitchesRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this._VSI_DifficultDitchesRowChanged != null)) {
+                    this._VSI_DifficultDitchesRowChanged(this, new _VSI_DifficultDitchesRowChangeEvent(((_VSI_DifficultDitchesRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this._VSI_DifficultDitchesRowChanging != null)) {
+                    this._VSI_DifficultDitchesRowChanging(this, new _VSI_DifficultDitchesRowChangeEvent(((_VSI_DifficultDitchesRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this._VSI_DifficultDitchesRowDeleted != null)) {
+                    this._VSI_DifficultDitchesRowDeleted(this, new _VSI_DifficultDitchesRowChangeEvent(((_VSI_DifficultDitchesRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this._VSI_DifficultDitchesRowDeleting != null)) {
+                    this._VSI_DifficultDitchesRowDeleting(this, new _VSI_DifficultDitchesRowChangeEvent(((_VSI_DifficultDitchesRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void Remove_VSI_DifficultDitchesRow(_VSI_DifficultDitchesRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                FieldWorkDBDataSet ds = new FieldWorkDBDataSet();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "_VSI_DifficultDitchesDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
             }
         }
         
@@ -2445,33 +7233,5249 @@ namespace StormwaterInterface {
         }
         
         /// <summary>
-        ///Row event argument class
+        ///Represents strongly named DataRow class.
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        public class View_CulvertsDitchesRowChangeEvent : global::System.EventArgs {
+        public partial class _VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6Row : global::System.Data.DataRow {
             
-            private View_CulvertsDitchesRow eventRow;
-            
-            private global::System.Data.DataRowAction eventAction;
+            private _VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6DataTable table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public View_CulvertsDitchesRowChangeEvent(View_CulvertsDitchesRow row, global::System.Data.DataRowAction action) {
-                this.eventRow = row;
-                this.eventAction = action;
+            internal _VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6Row(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6 = ((_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6DataTable)(this.Table));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public View_CulvertsDitchesRow Row {
+            public int MLinkID {
                 get {
-                    return this.eventRow;
+                    try {
+                        return ((int)(this[this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6.MLinkIDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'MLinkID\' in table \'_VSI_ComparableMstLinkCulvertsNewDepthDe" +
+                                "ltaOldDepthGT6\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6.MLinkIDColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataRowAction Action {
+            public int CompKey {
                 get {
-                    return this.eventAction;
+                    try {
+                        return ((int)(this[this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6.CompKeyColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CompKey\' in table \'_VSI_ComparableMstLinkCulvertsNewDepthDe" +
+                                "ltaOldDepthGT6\' is DBNull.", e);
+                    }
                 }
+                set {
+                    this[this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6.CompKeyColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string Node_No {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6.Node_NoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Node_No\' in table \'_VSI_ComparableMstLinkCulvertsNewDepthDe" +
+                                "ltaOldDepthGT6\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6.Node_NoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string OldShape {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6.OldShapeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'OldShape\' in table \'_VSI_ComparableMstLinkCulvertsNewDepthD" +
+                                "eltaOldDepthGT6\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6.OldShapeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string NewShape {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6.NewShapeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'NewShape\' in table \'_VSI_ComparableMstLinkCulvertsNewDepthD" +
+                                "eltaOldDepthGT6\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6.NewShapeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal OldDiameter {
+                get {
+                    try {
+                        return ((decimal)(this[this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6.OldDiameterColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'OldDiameter\' in table \'_VSI_ComparableMstLinkCulvertsNewDep" +
+                                "thDeltaOldDepthGT6\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6.OldDiameterColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public double NewDiameter {
+                get {
+                    try {
+                        return ((double)(this[this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6.NewDiameterColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'NewDiameter\' in table \'_VSI_ComparableMstLinkCulvertsNewDep" +
+                                "thDeltaOldDepthGT6\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6.NewDiameterColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public double UnobstructedHeight {
+                get {
+                    try {
+                        return ((double)(this[this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6.UnobstructedHeightColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'UnobstructedHeight\' in table \'_VSI_ComparableMstLinkCulvert" +
+                                "sNewDepthDeltaOldDepthGT6\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6.UnobstructedHeightColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string OldMaterial {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6.OldMaterialColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'OldMaterial\' in table \'_VSI_ComparableMstLinkCulvertsNewDep" +
+                                "thDeltaOldDepthGT6\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6.OldMaterialColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string NewMaterial {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6.NewMaterialColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'NewMaterial\' in table \'_VSI_ComparableMstLinkCulvertsNewDep" +
+                                "thDeltaOldDepthGT6\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6.NewMaterialColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int EvaluatorPageID {
+                get {
+                    try {
+                        return ((int)(this[this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6.EvaluatorPageIDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'EvaluatorPageID\' in table \'_VSI_ComparableMstLinkCulvertsNe" +
+                                "wDepthDeltaOldDepthGT6\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6.EvaluatorPageIDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string Watershed {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6.WatershedColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Watershed\' in table \'_VSI_ComparableMstLinkCulvertsNewDepth" +
+                                "DeltaOldDepthGT6\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6.WatershedColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string Subwatershed {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6.SubwatershedColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Subwatershed\' in table \'_VSI_ComparableMstLinkCulvertsNewDe" +
+                                "pthDeltaOldDepthGT6\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6.SubwatershedColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public System.DateTime Date {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6.DateColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Date\' in table \'_VSI_ComparableMstLinkCulvertsNewDepthDelta" +
+                                "OldDepthGT6\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6.DateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string Evaluator {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6.EvaluatorColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Evaluator\' in table \'_VSI_ComparableMstLinkCulvertsNewDepth" +
+                                "DeltaOldDepthGT6\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6.EvaluatorColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int MapNo {
+                get {
+                    try {
+                        return ((int)(this[this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6.MapNoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'MapNo\' in table \'_VSI_ComparableMstLinkCulvertsNewDepthDelt" +
+                                "aOldDepthGT6\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6.MapNoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int MapPage {
+                get {
+                    try {
+                        return ((int)(this[this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6.MapPageColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'MapPage\' in table \'_VSI_ComparableMstLinkCulvertsNewDepthDe" +
+                                "ltaOldDepthGT6\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6.MapPageColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsMLinkIDNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6.MLinkIDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetMLinkIDNull() {
+                this[this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6.MLinkIDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsCompKeyNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6.CompKeyColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetCompKeyNull() {
+                this[this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6.CompKeyColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsNode_NoNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6.Node_NoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetNode_NoNull() {
+                this[this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6.Node_NoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsOldShapeNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6.OldShapeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetOldShapeNull() {
+                this[this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6.OldShapeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsNewShapeNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6.NewShapeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetNewShapeNull() {
+                this[this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6.NewShapeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsOldDiameterNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6.OldDiameterColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetOldDiameterNull() {
+                this[this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6.OldDiameterColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsNewDiameterNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6.NewDiameterColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetNewDiameterNull() {
+                this[this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6.NewDiameterColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsUnobstructedHeightNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6.UnobstructedHeightColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetUnobstructedHeightNull() {
+                this[this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6.UnobstructedHeightColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsOldMaterialNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6.OldMaterialColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetOldMaterialNull() {
+                this[this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6.OldMaterialColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsNewMaterialNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6.NewMaterialColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetNewMaterialNull() {
+                this[this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6.NewMaterialColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsEvaluatorPageIDNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6.EvaluatorPageIDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetEvaluatorPageIDNull() {
+                this[this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6.EvaluatorPageIDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsWatershedNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6.WatershedColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetWatershedNull() {
+                this[this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6.WatershedColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsSubwatershedNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6.SubwatershedColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetSubwatershedNull() {
+                this[this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6.SubwatershedColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsDateNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6.DateColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetDateNull() {
+                this[this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6.DateColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsEvaluatorNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6.EvaluatorColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetEvaluatorNull() {
+                this[this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6.EvaluatorColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsMapNoNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6.MapNoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetMapNoNull() {
+                this[this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6.MapNoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsMapPageNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6.MapPageColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetMapPageNull() {
+                this[this.table_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6.MapPageColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public partial class _VSI_ComparableMstLinkCulvertsNewDiameterNotStandardRow : global::System.Data.DataRow {
+            
+            private _VSI_ComparableMstLinkCulvertsNewDiameterNotStandardDataTable table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal _VSI_ComparableMstLinkCulvertsNewDiameterNotStandardRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard = ((_VSI_ComparableMstLinkCulvertsNewDiameterNotStandardDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int MLinkID {
+                get {
+                    try {
+                        return ((int)(this[this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard.MLinkIDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'MLinkID\' in table \'_VSI_ComparableMstLinkCulvertsNewDiamete" +
+                                "rNotStandard\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard.MLinkIDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int CompKey {
+                get {
+                    try {
+                        return ((int)(this[this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard.CompKeyColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CompKey\' in table \'_VSI_ComparableMstLinkCulvertsNewDiamete" +
+                                "rNotStandard\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard.CompKeyColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string Node_No {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard.Node_NoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Node_No\' in table \'_VSI_ComparableMstLinkCulvertsNewDiamete" +
+                                "rNotStandard\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard.Node_NoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string OldShape {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard.OldShapeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'OldShape\' in table \'_VSI_ComparableMstLinkCulvertsNewDiamet" +
+                                "erNotStandard\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard.OldShapeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string NewShape {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard.NewShapeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'NewShape\' in table \'_VSI_ComparableMstLinkCulvertsNewDiamet" +
+                                "erNotStandard\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard.NewShapeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal OldDiameter {
+                get {
+                    try {
+                        return ((decimal)(this[this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard.OldDiameterColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'OldDiameter\' in table \'_VSI_ComparableMstLinkCulvertsNewDia" +
+                                "meterNotStandard\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard.OldDiameterColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public double NewDiameter {
+                get {
+                    try {
+                        return ((double)(this[this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard.NewDiameterColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'NewDiameter\' in table \'_VSI_ComparableMstLinkCulvertsNewDia" +
+                                "meterNotStandard\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard.NewDiameterColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public double UnobstructedHeight {
+                get {
+                    try {
+                        return ((double)(this[this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard.UnobstructedHeightColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'UnobstructedHeight\' in table \'_VSI_ComparableMstLinkCulvert" +
+                                "sNewDiameterNotStandard\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard.UnobstructedHeightColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string OldMaterial {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard.OldMaterialColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'OldMaterial\' in table \'_VSI_ComparableMstLinkCulvertsNewDia" +
+                                "meterNotStandard\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard.OldMaterialColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string NewMaterial {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard.NewMaterialColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'NewMaterial\' in table \'_VSI_ComparableMstLinkCulvertsNewDia" +
+                                "meterNotStandard\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard.NewMaterialColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int EvaluatorPageID {
+                get {
+                    try {
+                        return ((int)(this[this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard.EvaluatorPageIDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'EvaluatorPageID\' in table \'_VSI_ComparableMstLinkCulvertsNe" +
+                                "wDiameterNotStandard\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard.EvaluatorPageIDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string Watershed {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard.WatershedColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Watershed\' in table \'_VSI_ComparableMstLinkCulvertsNewDiame" +
+                                "terNotStandard\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard.WatershedColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string Subwatershed {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard.SubwatershedColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Subwatershed\' in table \'_VSI_ComparableMstLinkCulvertsNewDi" +
+                                "ameterNotStandard\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard.SubwatershedColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public System.DateTime Date {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard.DateColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Date\' in table \'_VSI_ComparableMstLinkCulvertsNewDiameterNo" +
+                                "tStandard\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard.DateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string Evaluator {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard.EvaluatorColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Evaluator\' in table \'_VSI_ComparableMstLinkCulvertsNewDiame" +
+                                "terNotStandard\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard.EvaluatorColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int MapNo {
+                get {
+                    try {
+                        return ((int)(this[this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard.MapNoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'MapNo\' in table \'_VSI_ComparableMstLinkCulvertsNewDiameterN" +
+                                "otStandard\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard.MapNoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int MapPage {
+                get {
+                    try {
+                        return ((int)(this[this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard.MapPageColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'MapPage\' in table \'_VSI_ComparableMstLinkCulvertsNewDiamete" +
+                                "rNotStandard\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard.MapPageColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsMLinkIDNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard.MLinkIDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetMLinkIDNull() {
+                this[this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard.MLinkIDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsCompKeyNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard.CompKeyColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetCompKeyNull() {
+                this[this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard.CompKeyColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsNode_NoNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard.Node_NoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetNode_NoNull() {
+                this[this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard.Node_NoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsOldShapeNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard.OldShapeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetOldShapeNull() {
+                this[this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard.OldShapeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsNewShapeNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard.NewShapeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetNewShapeNull() {
+                this[this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard.NewShapeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsOldDiameterNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard.OldDiameterColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetOldDiameterNull() {
+                this[this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard.OldDiameterColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsNewDiameterNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard.NewDiameterColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetNewDiameterNull() {
+                this[this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard.NewDiameterColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsUnobstructedHeightNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard.UnobstructedHeightColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetUnobstructedHeightNull() {
+                this[this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard.UnobstructedHeightColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsOldMaterialNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard.OldMaterialColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetOldMaterialNull() {
+                this[this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard.OldMaterialColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsNewMaterialNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard.NewMaterialColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetNewMaterialNull() {
+                this[this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard.NewMaterialColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsEvaluatorPageIDNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard.EvaluatorPageIDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetEvaluatorPageIDNull() {
+                this[this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard.EvaluatorPageIDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsWatershedNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard.WatershedColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetWatershedNull() {
+                this[this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard.WatershedColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsSubwatershedNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard.SubwatershedColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetSubwatershedNull() {
+                this[this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard.SubwatershedColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsDateNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard.DateColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetDateNull() {
+                this[this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard.DateColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsEvaluatorNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard.EvaluatorColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetEvaluatorNull() {
+                this[this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard.EvaluatorColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsMapNoNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard.MapNoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetMapNoNull() {
+                this[this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard.MapNoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsMapPageNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard.MapPageColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetMapPageNull() {
+                this[this.table_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard.MapPageColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public partial class _VSI_ComparableMStLinkCulvertsTransferableRow : global::System.Data.DataRow {
+            
+            private _VSI_ComparableMStLinkCulvertsTransferableDataTable table_VSI_ComparableMStLinkCulvertsTransferable;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal _VSI_ComparableMStLinkCulvertsTransferableRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.table_VSI_ComparableMStLinkCulvertsTransferable = ((_VSI_ComparableMStLinkCulvertsTransferableDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int MLinkID {
+                get {
+                    try {
+                        return ((int)(this[this.table_VSI_ComparableMStLinkCulvertsTransferable.MLinkIDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'MLinkID\' in table \'_VSI_ComparableMStLinkCulvertsTransferab" +
+                                "le\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMStLinkCulvertsTransferable.MLinkIDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int CompKey {
+                get {
+                    try {
+                        return ((int)(this[this.table_VSI_ComparableMStLinkCulvertsTransferable.CompKeyColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CompKey\' in table \'_VSI_ComparableMStLinkCulvertsTransferab" +
+                                "le\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMStLinkCulvertsTransferable.CompKeyColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string Node_No {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_ComparableMStLinkCulvertsTransferable.Node_NoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Node_No\' in table \'_VSI_ComparableMStLinkCulvertsTransferab" +
+                                "le\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMStLinkCulvertsTransferable.Node_NoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string OldShape {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_ComparableMStLinkCulvertsTransferable.OldShapeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'OldShape\' in table \'_VSI_ComparableMStLinkCulvertsTransfera" +
+                                "ble\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMStLinkCulvertsTransferable.OldShapeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string NewShape {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_ComparableMStLinkCulvertsTransferable.NewShapeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'NewShape\' in table \'_VSI_ComparableMStLinkCulvertsTransfera" +
+                                "ble\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMStLinkCulvertsTransferable.NewShapeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal OldDiameter {
+                get {
+                    try {
+                        return ((decimal)(this[this.table_VSI_ComparableMStLinkCulvertsTransferable.OldDiameterColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'OldDiameter\' in table \'_VSI_ComparableMStLinkCulvertsTransf" +
+                                "erable\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMStLinkCulvertsTransferable.OldDiameterColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public double NewDiameter {
+                get {
+                    try {
+                        return ((double)(this[this.table_VSI_ComparableMStLinkCulvertsTransferable.NewDiameterColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'NewDiameter\' in table \'_VSI_ComparableMStLinkCulvertsTransf" +
+                                "erable\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMStLinkCulvertsTransferable.NewDiameterColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public double UnobstructedHeight {
+                get {
+                    try {
+                        return ((double)(this[this.table_VSI_ComparableMStLinkCulvertsTransferable.UnobstructedHeightColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'UnobstructedHeight\' in table \'_VSI_ComparableMStLinkCulvert" +
+                                "sTransferable\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMStLinkCulvertsTransferable.UnobstructedHeightColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string OldMaterial {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_ComparableMStLinkCulvertsTransferable.OldMaterialColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'OldMaterial\' in table \'_VSI_ComparableMStLinkCulvertsTransf" +
+                                "erable\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMStLinkCulvertsTransferable.OldMaterialColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string NewMaterial {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_ComparableMStLinkCulvertsTransferable.NewMaterialColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'NewMaterial\' in table \'_VSI_ComparableMStLinkCulvertsTransf" +
+                                "erable\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMStLinkCulvertsTransferable.NewMaterialColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int EvaluatorPageID {
+                get {
+                    try {
+                        return ((int)(this[this.table_VSI_ComparableMStLinkCulvertsTransferable.EvaluatorPageIDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'EvaluatorPageID\' in table \'_VSI_ComparableMStLinkCulvertsTr" +
+                                "ansferable\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMStLinkCulvertsTransferable.EvaluatorPageIDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string Watershed {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_ComparableMStLinkCulvertsTransferable.WatershedColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Watershed\' in table \'_VSI_ComparableMStLinkCulvertsTransfer" +
+                                "able\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMStLinkCulvertsTransferable.WatershedColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string Subwatershed {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_ComparableMStLinkCulvertsTransferable.SubwatershedColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Subwatershed\' in table \'_VSI_ComparableMStLinkCulvertsTrans" +
+                                "ferable\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMStLinkCulvertsTransferable.SubwatershedColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public System.DateTime Date {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.table_VSI_ComparableMStLinkCulvertsTransferable.DateColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Date\' in table \'_VSI_ComparableMStLinkCulvertsTransferable\'" +
+                                " is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMStLinkCulvertsTransferable.DateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string Evaluator {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_ComparableMStLinkCulvertsTransferable.EvaluatorColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Evaluator\' in table \'_VSI_ComparableMStLinkCulvertsTransfer" +
+                                "able\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMStLinkCulvertsTransferable.EvaluatorColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int MapNo {
+                get {
+                    try {
+                        return ((int)(this[this.table_VSI_ComparableMStLinkCulvertsTransferable.MapNoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'MapNo\' in table \'_VSI_ComparableMStLinkCulvertsTransferable" +
+                                "\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMStLinkCulvertsTransferable.MapNoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int MapPage {
+                get {
+                    try {
+                        return ((int)(this[this.table_VSI_ComparableMStLinkCulvertsTransferable.MapPageColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'MapPage\' in table \'_VSI_ComparableMStLinkCulvertsTransferab" +
+                                "le\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMStLinkCulvertsTransferable.MapPageColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsMLinkIDNull() {
+                return this.IsNull(this.table_VSI_ComparableMStLinkCulvertsTransferable.MLinkIDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetMLinkIDNull() {
+                this[this.table_VSI_ComparableMStLinkCulvertsTransferable.MLinkIDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsCompKeyNull() {
+                return this.IsNull(this.table_VSI_ComparableMStLinkCulvertsTransferable.CompKeyColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetCompKeyNull() {
+                this[this.table_VSI_ComparableMStLinkCulvertsTransferable.CompKeyColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsNode_NoNull() {
+                return this.IsNull(this.table_VSI_ComparableMStLinkCulvertsTransferable.Node_NoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetNode_NoNull() {
+                this[this.table_VSI_ComparableMStLinkCulvertsTransferable.Node_NoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsOldShapeNull() {
+                return this.IsNull(this.table_VSI_ComparableMStLinkCulvertsTransferable.OldShapeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetOldShapeNull() {
+                this[this.table_VSI_ComparableMStLinkCulvertsTransferable.OldShapeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsNewShapeNull() {
+                return this.IsNull(this.table_VSI_ComparableMStLinkCulvertsTransferable.NewShapeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetNewShapeNull() {
+                this[this.table_VSI_ComparableMStLinkCulvertsTransferable.NewShapeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsOldDiameterNull() {
+                return this.IsNull(this.table_VSI_ComparableMStLinkCulvertsTransferable.OldDiameterColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetOldDiameterNull() {
+                this[this.table_VSI_ComparableMStLinkCulvertsTransferable.OldDiameterColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsNewDiameterNull() {
+                return this.IsNull(this.table_VSI_ComparableMStLinkCulvertsTransferable.NewDiameterColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetNewDiameterNull() {
+                this[this.table_VSI_ComparableMStLinkCulvertsTransferable.NewDiameterColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsUnobstructedHeightNull() {
+                return this.IsNull(this.table_VSI_ComparableMStLinkCulvertsTransferable.UnobstructedHeightColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetUnobstructedHeightNull() {
+                this[this.table_VSI_ComparableMStLinkCulvertsTransferable.UnobstructedHeightColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsOldMaterialNull() {
+                return this.IsNull(this.table_VSI_ComparableMStLinkCulvertsTransferable.OldMaterialColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetOldMaterialNull() {
+                this[this.table_VSI_ComparableMStLinkCulvertsTransferable.OldMaterialColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsNewMaterialNull() {
+                return this.IsNull(this.table_VSI_ComparableMStLinkCulvertsTransferable.NewMaterialColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetNewMaterialNull() {
+                this[this.table_VSI_ComparableMStLinkCulvertsTransferable.NewMaterialColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsEvaluatorPageIDNull() {
+                return this.IsNull(this.table_VSI_ComparableMStLinkCulvertsTransferable.EvaluatorPageIDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetEvaluatorPageIDNull() {
+                this[this.table_VSI_ComparableMStLinkCulvertsTransferable.EvaluatorPageIDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsWatershedNull() {
+                return this.IsNull(this.table_VSI_ComparableMStLinkCulvertsTransferable.WatershedColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetWatershedNull() {
+                this[this.table_VSI_ComparableMStLinkCulvertsTransferable.WatershedColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsSubwatershedNull() {
+                return this.IsNull(this.table_VSI_ComparableMStLinkCulvertsTransferable.SubwatershedColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetSubwatershedNull() {
+                this[this.table_VSI_ComparableMStLinkCulvertsTransferable.SubwatershedColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsDateNull() {
+                return this.IsNull(this.table_VSI_ComparableMStLinkCulvertsTransferable.DateColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetDateNull() {
+                this[this.table_VSI_ComparableMStLinkCulvertsTransferable.DateColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsEvaluatorNull() {
+                return this.IsNull(this.table_VSI_ComparableMStLinkCulvertsTransferable.EvaluatorColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetEvaluatorNull() {
+                this[this.table_VSI_ComparableMStLinkCulvertsTransferable.EvaluatorColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsMapNoNull() {
+                return this.IsNull(this.table_VSI_ComparableMStLinkCulvertsTransferable.MapNoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetMapNoNull() {
+                this[this.table_VSI_ComparableMStLinkCulvertsTransferable.MapNoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsMapPageNull() {
+                return this.IsNull(this.table_VSI_ComparableMStLinkCulvertsTransferable.MapPageColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetMapPageNull() {
+                this[this.table_VSI_ComparableMStLinkCulvertsTransferable.MapPageColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public partial class _VSI_ComparableMstLinkDitchesRow : global::System.Data.DataRow {
+            
+            private _VSI_ComparableMstLinkDitchesDataTable table_VSI_ComparableMstLinkDitches;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal _VSI_ComparableMstLinkDitchesRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.table_VSI_ComparableMstLinkDitches = ((_VSI_ComparableMstLinkDitchesDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int MLinkID {
+                get {
+                    try {
+                        return ((int)(this[this.table_VSI_ComparableMstLinkDitches.MLinkIDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'MLinkID\' in table \'_VSI_ComparableMstLinkDitches\' is DBNull" +
+                                ".", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitches.MLinkIDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int CompKey {
+                get {
+                    try {
+                        return ((int)(this[this.table_VSI_ComparableMstLinkDitches.CompKeyColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CompKey\' in table \'_VSI_ComparableMstLinkDitches\' is DBNull" +
+                                ".", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitches.CompKeyColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string Node_No {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_ComparableMstLinkDitches.Node_NoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Node_No\' in table \'_VSI_ComparableMstLinkDitches\' is DBNull" +
+                                ".", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitches.Node_NoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string OldShape {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_ComparableMstLinkDitches.OldShapeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'OldShape\' in table \'_VSI_ComparableMstLinkDitches\' is DBNul" +
+                                "l.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitches.OldShapeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal OldHeight {
+                get {
+                    try {
+                        return ((decimal)(this[this.table_VSI_ComparableMstLinkDitches.OldHeightColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'OldHeight\' in table \'_VSI_ComparableMstLinkDitches\' is DBNu" +
+                                "ll.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitches.OldHeightColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal OldWidth {
+                get {
+                    try {
+                        return ((decimal)(this[this.table_VSI_ComparableMstLinkDitches.OldWidthColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'OldWidth\' in table \'_VSI_ComparableMstLinkDitches\' is DBNul" +
+                                "l.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitches.OldWidthColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public double NewDepth {
+                get {
+                    try {
+                        return ((double)(this[this.table_VSI_ComparableMstLinkDitches.NewDepthColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'NewDepth\' in table \'_VSI_ComparableMstLinkDitches\' is DBNul" +
+                                "l.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitches.NewDepthColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public double NewTopWidth {
+                get {
+                    try {
+                        return ((double)(this[this.table_VSI_ComparableMstLinkDitches.NewTopWidthColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'NewTopWidth\' in table \'_VSI_ComparableMstLinkDitches\' is DB" +
+                                "Null.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitches.NewTopWidthColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public double NewBottomWidth {
+                get {
+                    try {
+                        return ((double)(this[this.table_VSI_ComparableMstLinkDitches.NewBottomWidthColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'NewBottomWidth\' in table \'_VSI_ComparableMstLinkDitches\' is" +
+                                " DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitches.NewBottomWidthColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string OldMaterial {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_ComparableMstLinkDitches.OldMaterialColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'OldMaterial\' in table \'_VSI_ComparableMstLinkDitches\' is DB" +
+                                "Null.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitches.OldMaterialColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string NewMaterial {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_ComparableMstLinkDitches.NewMaterialColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'NewMaterial\' in table \'_VSI_ComparableMstLinkDitches\' is DB" +
+                                "Null.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitches.NewMaterialColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int EvaluatorPageID {
+                get {
+                    try {
+                        return ((int)(this[this.table_VSI_ComparableMstLinkDitches.EvaluatorPageIDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'EvaluatorPageID\' in table \'_VSI_ComparableMstLinkDitches\' i" +
+                                "s DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitches.EvaluatorPageIDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string Watershed {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_ComparableMstLinkDitches.WatershedColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Watershed\' in table \'_VSI_ComparableMstLinkDitches\' is DBNu" +
+                                "ll.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitches.WatershedColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string Subwatershed {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_ComparableMstLinkDitches.SubwatershedColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Subwatershed\' in table \'_VSI_ComparableMstLinkDitches\' is D" +
+                                "BNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitches.SubwatershedColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public System.DateTime Date {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.table_VSI_ComparableMstLinkDitches.DateColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Date\' in table \'_VSI_ComparableMstLinkDitches\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitches.DateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string Evaluator {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_ComparableMstLinkDitches.EvaluatorColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Evaluator\' in table \'_VSI_ComparableMstLinkDitches\' is DBNu" +
+                                "ll.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitches.EvaluatorColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int MapNo {
+                get {
+                    try {
+                        return ((int)(this[this.table_VSI_ComparableMstLinkDitches.MapNoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'MapNo\' in table \'_VSI_ComparableMstLinkDitches\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitches.MapNoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int MapPage {
+                get {
+                    try {
+                        return ((int)(this[this.table_VSI_ComparableMstLinkDitches.MapPageColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'MapPage\' in table \'_VSI_ComparableMstLinkDitches\' is DBNull" +
+                                ".", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitches.MapPageColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsMLinkIDNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitches.MLinkIDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetMLinkIDNull() {
+                this[this.table_VSI_ComparableMstLinkDitches.MLinkIDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsCompKeyNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitches.CompKeyColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetCompKeyNull() {
+                this[this.table_VSI_ComparableMstLinkDitches.CompKeyColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsNode_NoNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitches.Node_NoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetNode_NoNull() {
+                this[this.table_VSI_ComparableMstLinkDitches.Node_NoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsOldShapeNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitches.OldShapeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetOldShapeNull() {
+                this[this.table_VSI_ComparableMstLinkDitches.OldShapeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsOldHeightNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitches.OldHeightColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetOldHeightNull() {
+                this[this.table_VSI_ComparableMstLinkDitches.OldHeightColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsOldWidthNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitches.OldWidthColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetOldWidthNull() {
+                this[this.table_VSI_ComparableMstLinkDitches.OldWidthColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsNewDepthNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitches.NewDepthColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetNewDepthNull() {
+                this[this.table_VSI_ComparableMstLinkDitches.NewDepthColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsNewTopWidthNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitches.NewTopWidthColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetNewTopWidthNull() {
+                this[this.table_VSI_ComparableMstLinkDitches.NewTopWidthColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsNewBottomWidthNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitches.NewBottomWidthColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetNewBottomWidthNull() {
+                this[this.table_VSI_ComparableMstLinkDitches.NewBottomWidthColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsOldMaterialNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitches.OldMaterialColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetOldMaterialNull() {
+                this[this.table_VSI_ComparableMstLinkDitches.OldMaterialColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsNewMaterialNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitches.NewMaterialColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetNewMaterialNull() {
+                this[this.table_VSI_ComparableMstLinkDitches.NewMaterialColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsEvaluatorPageIDNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitches.EvaluatorPageIDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetEvaluatorPageIDNull() {
+                this[this.table_VSI_ComparableMstLinkDitches.EvaluatorPageIDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsWatershedNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitches.WatershedColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetWatershedNull() {
+                this[this.table_VSI_ComparableMstLinkDitches.WatershedColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsSubwatershedNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitches.SubwatershedColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetSubwatershedNull() {
+                this[this.table_VSI_ComparableMstLinkDitches.SubwatershedColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsDateNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitches.DateColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetDateNull() {
+                this[this.table_VSI_ComparableMstLinkDitches.DateColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsEvaluatorNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitches.EvaluatorColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetEvaluatorNull() {
+                this[this.table_VSI_ComparableMstLinkDitches.EvaluatorColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsMapNoNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitches.MapNoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetMapNoNull() {
+                this[this.table_VSI_ComparableMstLinkDitches.MapNoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsMapPageNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitches.MapPageColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetMapPageNull() {
+                this[this.table_VSI_ComparableMstLinkDitches.MapPageColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public partial class _VSI_ComparableMstLinkDitchesNewDepthLT1Row : global::System.Data.DataRow {
+            
+            private _VSI_ComparableMstLinkDitchesNewDepthLT1DataTable table_VSI_ComparableMstLinkDitchesNewDepthLT1;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal _VSI_ComparableMstLinkDitchesNewDepthLT1Row(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.table_VSI_ComparableMstLinkDitchesNewDepthLT1 = ((_VSI_ComparableMstLinkDitchesNewDepthLT1DataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int MLinkID {
+                get {
+                    try {
+                        return ((int)(this[this.table_VSI_ComparableMstLinkDitchesNewDepthLT1.MLinkIDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'MLinkID\' in table \'_VSI_ComparableMstLinkDitchesNewDepthLT1" +
+                                "\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitchesNewDepthLT1.MLinkIDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int CompKey {
+                get {
+                    try {
+                        return ((int)(this[this.table_VSI_ComparableMstLinkDitchesNewDepthLT1.CompKeyColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CompKey\' in table \'_VSI_ComparableMstLinkDitchesNewDepthLT1" +
+                                "\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitchesNewDepthLT1.CompKeyColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string Node_No {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_ComparableMstLinkDitchesNewDepthLT1.Node_NoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Node_No\' in table \'_VSI_ComparableMstLinkDitchesNewDepthLT1" +
+                                "\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitchesNewDepthLT1.Node_NoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string OldShape {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_ComparableMstLinkDitchesNewDepthLT1.OldShapeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'OldShape\' in table \'_VSI_ComparableMstLinkDitchesNewDepthLT" +
+                                "1\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitchesNewDepthLT1.OldShapeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal OldWidth {
+                get {
+                    try {
+                        return ((decimal)(this[this.table_VSI_ComparableMstLinkDitchesNewDepthLT1.OldWidthColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'OldWidth\' in table \'_VSI_ComparableMstLinkDitchesNewDepthLT" +
+                                "1\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitchesNewDepthLT1.OldWidthColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public double NewDepth {
+                get {
+                    try {
+                        return ((double)(this[this.table_VSI_ComparableMstLinkDitchesNewDepthLT1.NewDepthColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'NewDepth\' in table \'_VSI_ComparableMstLinkDitchesNewDepthLT" +
+                                "1\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitchesNewDepthLT1.NewDepthColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public double NewTopWidth {
+                get {
+                    try {
+                        return ((double)(this[this.table_VSI_ComparableMstLinkDitchesNewDepthLT1.NewTopWidthColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'NewTopWidth\' in table \'_VSI_ComparableMstLinkDitchesNewDept" +
+                                "hLT1\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitchesNewDepthLT1.NewTopWidthColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public double NewBottomWidth {
+                get {
+                    try {
+                        return ((double)(this[this.table_VSI_ComparableMstLinkDitchesNewDepthLT1.NewBottomWidthColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'NewBottomWidth\' in table \'_VSI_ComparableMstLinkDitchesNewD" +
+                                "epthLT1\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitchesNewDepthLT1.NewBottomWidthColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string OldMaterial {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_ComparableMstLinkDitchesNewDepthLT1.OldMaterialColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'OldMaterial\' in table \'_VSI_ComparableMstLinkDitchesNewDept" +
+                                "hLT1\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitchesNewDepthLT1.OldMaterialColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string NewMaterial {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_ComparableMstLinkDitchesNewDepthLT1.NewMaterialColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'NewMaterial\' in table \'_VSI_ComparableMstLinkDitchesNewDept" +
+                                "hLT1\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitchesNewDepthLT1.NewMaterialColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int EvaluatorPageID {
+                get {
+                    try {
+                        return ((int)(this[this.table_VSI_ComparableMstLinkDitchesNewDepthLT1.EvaluatorPageIDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'EvaluatorPageID\' in table \'_VSI_ComparableMstLinkDitchesNew" +
+                                "DepthLT1\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitchesNewDepthLT1.EvaluatorPageIDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string Watershed {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_ComparableMstLinkDitchesNewDepthLT1.WatershedColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Watershed\' in table \'_VSI_ComparableMstLinkDitchesNewDepthL" +
+                                "T1\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitchesNewDepthLT1.WatershedColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string Subwatershed {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_ComparableMstLinkDitchesNewDepthLT1.SubwatershedColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Subwatershed\' in table \'_VSI_ComparableMstLinkDitchesNewDep" +
+                                "thLT1\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitchesNewDepthLT1.SubwatershedColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public System.DateTime Date {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.table_VSI_ComparableMstLinkDitchesNewDepthLT1.DateColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Date\' in table \'_VSI_ComparableMstLinkDitchesNewDepthLT1\' i" +
+                                "s DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitchesNewDepthLT1.DateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string Evaluator {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_ComparableMstLinkDitchesNewDepthLT1.EvaluatorColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Evaluator\' in table \'_VSI_ComparableMstLinkDitchesNewDepthL" +
+                                "T1\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitchesNewDepthLT1.EvaluatorColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int MapNo {
+                get {
+                    try {
+                        return ((int)(this[this.table_VSI_ComparableMstLinkDitchesNewDepthLT1.MapNoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'MapNo\' in table \'_VSI_ComparableMstLinkDitchesNewDepthLT1\' " +
+                                "is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitchesNewDepthLT1.MapNoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int MapPage {
+                get {
+                    try {
+                        return ((int)(this[this.table_VSI_ComparableMstLinkDitchesNewDepthLT1.MapPageColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'MapPage\' in table \'_VSI_ComparableMstLinkDitchesNewDepthLT1" +
+                                "\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitchesNewDepthLT1.MapPageColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsMLinkIDNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitchesNewDepthLT1.MLinkIDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetMLinkIDNull() {
+                this[this.table_VSI_ComparableMstLinkDitchesNewDepthLT1.MLinkIDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsCompKeyNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitchesNewDepthLT1.CompKeyColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetCompKeyNull() {
+                this[this.table_VSI_ComparableMstLinkDitchesNewDepthLT1.CompKeyColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsNode_NoNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitchesNewDepthLT1.Node_NoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetNode_NoNull() {
+                this[this.table_VSI_ComparableMstLinkDitchesNewDepthLT1.Node_NoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsOldShapeNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitchesNewDepthLT1.OldShapeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetOldShapeNull() {
+                this[this.table_VSI_ComparableMstLinkDitchesNewDepthLT1.OldShapeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsOldWidthNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitchesNewDepthLT1.OldWidthColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetOldWidthNull() {
+                this[this.table_VSI_ComparableMstLinkDitchesNewDepthLT1.OldWidthColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsNewDepthNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitchesNewDepthLT1.NewDepthColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetNewDepthNull() {
+                this[this.table_VSI_ComparableMstLinkDitchesNewDepthLT1.NewDepthColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsNewTopWidthNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitchesNewDepthLT1.NewTopWidthColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetNewTopWidthNull() {
+                this[this.table_VSI_ComparableMstLinkDitchesNewDepthLT1.NewTopWidthColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsNewBottomWidthNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitchesNewDepthLT1.NewBottomWidthColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetNewBottomWidthNull() {
+                this[this.table_VSI_ComparableMstLinkDitchesNewDepthLT1.NewBottomWidthColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsOldMaterialNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitchesNewDepthLT1.OldMaterialColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetOldMaterialNull() {
+                this[this.table_VSI_ComparableMstLinkDitchesNewDepthLT1.OldMaterialColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsNewMaterialNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitchesNewDepthLT1.NewMaterialColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetNewMaterialNull() {
+                this[this.table_VSI_ComparableMstLinkDitchesNewDepthLT1.NewMaterialColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsEvaluatorPageIDNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitchesNewDepthLT1.EvaluatorPageIDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetEvaluatorPageIDNull() {
+                this[this.table_VSI_ComparableMstLinkDitchesNewDepthLT1.EvaluatorPageIDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsWatershedNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitchesNewDepthLT1.WatershedColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetWatershedNull() {
+                this[this.table_VSI_ComparableMstLinkDitchesNewDepthLT1.WatershedColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsSubwatershedNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitchesNewDepthLT1.SubwatershedColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetSubwatershedNull() {
+                this[this.table_VSI_ComparableMstLinkDitchesNewDepthLT1.SubwatershedColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsDateNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitchesNewDepthLT1.DateColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetDateNull() {
+                this[this.table_VSI_ComparableMstLinkDitchesNewDepthLT1.DateColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsEvaluatorNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitchesNewDepthLT1.EvaluatorColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetEvaluatorNull() {
+                this[this.table_VSI_ComparableMstLinkDitchesNewDepthLT1.EvaluatorColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsMapNoNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitchesNewDepthLT1.MapNoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetMapNoNull() {
+                this[this.table_VSI_ComparableMstLinkDitchesNewDepthLT1.MapNoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsMapPageNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitchesNewDepthLT1.MapPageColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetMapPageNull() {
+                this[this.table_VSI_ComparableMstLinkDitchesNewDepthLT1.MapPageColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public partial class _VSI_ComparableMstLinkDItchesNoDSNodeRow : global::System.Data.DataRow {
+            
+            private _VSI_ComparableMstLinkDItchesNoDSNodeDataTable table_VSI_ComparableMstLinkDItchesNoDSNode;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal _VSI_ComparableMstLinkDItchesNoDSNodeRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.table_VSI_ComparableMstLinkDItchesNoDSNode = ((_VSI_ComparableMstLinkDItchesNoDSNodeDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int MLinkID {
+                get {
+                    try {
+                        return ((int)(this[this.table_VSI_ComparableMstLinkDItchesNoDSNode.MLinkIDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'MLinkID\' in table \'_VSI_ComparableMstLinkDItchesNoDSNode\' i" +
+                                "s DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDItchesNoDSNode.MLinkIDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int CompKey {
+                get {
+                    try {
+                        return ((int)(this[this.table_VSI_ComparableMstLinkDItchesNoDSNode.CompKeyColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CompKey\' in table \'_VSI_ComparableMstLinkDItchesNoDSNode\' i" +
+                                "s DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDItchesNoDSNode.CompKeyColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string Node_No {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_ComparableMstLinkDItchesNoDSNode.Node_NoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Node_No\' in table \'_VSI_ComparableMstLinkDItchesNoDSNode\' i" +
+                                "s DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDItchesNoDSNode.Node_NoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string OldShape {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_ComparableMstLinkDItchesNoDSNode.OldShapeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'OldShape\' in table \'_VSI_ComparableMstLinkDItchesNoDSNode\' " +
+                                "is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDItchesNoDSNode.OldShapeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal OldWidth {
+                get {
+                    try {
+                        return ((decimal)(this[this.table_VSI_ComparableMstLinkDItchesNoDSNode.OldWidthColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'OldWidth\' in table \'_VSI_ComparableMstLinkDItchesNoDSNode\' " +
+                                "is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDItchesNoDSNode.OldWidthColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public double NewDepth {
+                get {
+                    try {
+                        return ((double)(this[this.table_VSI_ComparableMstLinkDItchesNoDSNode.NewDepthColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'NewDepth\' in table \'_VSI_ComparableMstLinkDItchesNoDSNode\' " +
+                                "is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDItchesNoDSNode.NewDepthColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public double NewTopWidth {
+                get {
+                    try {
+                        return ((double)(this[this.table_VSI_ComparableMstLinkDItchesNoDSNode.NewTopWidthColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'NewTopWidth\' in table \'_VSI_ComparableMstLinkDItchesNoDSNod" +
+                                "e\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDItchesNoDSNode.NewTopWidthColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public double NewBottomWidth {
+                get {
+                    try {
+                        return ((double)(this[this.table_VSI_ComparableMstLinkDItchesNoDSNode.NewBottomWidthColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'NewBottomWidth\' in table \'_VSI_ComparableMstLinkDItchesNoDS" +
+                                "Node\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDItchesNoDSNode.NewBottomWidthColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string OldMaterial {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_ComparableMstLinkDItchesNoDSNode.OldMaterialColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'OldMaterial\' in table \'_VSI_ComparableMstLinkDItchesNoDSNod" +
+                                "e\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDItchesNoDSNode.OldMaterialColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string NewMaterial {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_ComparableMstLinkDItchesNoDSNode.NewMaterialColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'NewMaterial\' in table \'_VSI_ComparableMstLinkDItchesNoDSNod" +
+                                "e\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDItchesNoDSNode.NewMaterialColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int EvaluatorPageID {
+                get {
+                    try {
+                        return ((int)(this[this.table_VSI_ComparableMstLinkDItchesNoDSNode.EvaluatorPageIDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'EvaluatorPageID\' in table \'_VSI_ComparableMstLinkDItchesNoD" +
+                                "SNode\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDItchesNoDSNode.EvaluatorPageIDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string Watershed {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_ComparableMstLinkDItchesNoDSNode.WatershedColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Watershed\' in table \'_VSI_ComparableMstLinkDItchesNoDSNode\'" +
+                                " is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDItchesNoDSNode.WatershedColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string Subwatershed {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_ComparableMstLinkDItchesNoDSNode.SubwatershedColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Subwatershed\' in table \'_VSI_ComparableMstLinkDItchesNoDSNo" +
+                                "de\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDItchesNoDSNode.SubwatershedColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public System.DateTime Date {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.table_VSI_ComparableMstLinkDItchesNoDSNode.DateColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Date\' in table \'_VSI_ComparableMstLinkDItchesNoDSNode\' is D" +
+                                "BNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDItchesNoDSNode.DateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string Evaluator {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_ComparableMstLinkDItchesNoDSNode.EvaluatorColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Evaluator\' in table \'_VSI_ComparableMstLinkDItchesNoDSNode\'" +
+                                " is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDItchesNoDSNode.EvaluatorColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int MapNo {
+                get {
+                    try {
+                        return ((int)(this[this.table_VSI_ComparableMstLinkDItchesNoDSNode.MapNoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'MapNo\' in table \'_VSI_ComparableMstLinkDItchesNoDSNode\' is " +
+                                "DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDItchesNoDSNode.MapNoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int MapPage {
+                get {
+                    try {
+                        return ((int)(this[this.table_VSI_ComparableMstLinkDItchesNoDSNode.MapPageColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'MapPage\' in table \'_VSI_ComparableMstLinkDItchesNoDSNode\' i" +
+                                "s DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDItchesNoDSNode.MapPageColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsMLinkIDNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDItchesNoDSNode.MLinkIDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetMLinkIDNull() {
+                this[this.table_VSI_ComparableMstLinkDItchesNoDSNode.MLinkIDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsCompKeyNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDItchesNoDSNode.CompKeyColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetCompKeyNull() {
+                this[this.table_VSI_ComparableMstLinkDItchesNoDSNode.CompKeyColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsNode_NoNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDItchesNoDSNode.Node_NoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetNode_NoNull() {
+                this[this.table_VSI_ComparableMstLinkDItchesNoDSNode.Node_NoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsOldShapeNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDItchesNoDSNode.OldShapeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetOldShapeNull() {
+                this[this.table_VSI_ComparableMstLinkDItchesNoDSNode.OldShapeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsOldWidthNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDItchesNoDSNode.OldWidthColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetOldWidthNull() {
+                this[this.table_VSI_ComparableMstLinkDItchesNoDSNode.OldWidthColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsNewDepthNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDItchesNoDSNode.NewDepthColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetNewDepthNull() {
+                this[this.table_VSI_ComparableMstLinkDItchesNoDSNode.NewDepthColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsNewTopWidthNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDItchesNoDSNode.NewTopWidthColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetNewTopWidthNull() {
+                this[this.table_VSI_ComparableMstLinkDItchesNoDSNode.NewTopWidthColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsNewBottomWidthNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDItchesNoDSNode.NewBottomWidthColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetNewBottomWidthNull() {
+                this[this.table_VSI_ComparableMstLinkDItchesNoDSNode.NewBottomWidthColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsOldMaterialNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDItchesNoDSNode.OldMaterialColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetOldMaterialNull() {
+                this[this.table_VSI_ComparableMstLinkDItchesNoDSNode.OldMaterialColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsNewMaterialNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDItchesNoDSNode.NewMaterialColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetNewMaterialNull() {
+                this[this.table_VSI_ComparableMstLinkDItchesNoDSNode.NewMaterialColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsEvaluatorPageIDNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDItchesNoDSNode.EvaluatorPageIDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetEvaluatorPageIDNull() {
+                this[this.table_VSI_ComparableMstLinkDItchesNoDSNode.EvaluatorPageIDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsWatershedNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDItchesNoDSNode.WatershedColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetWatershedNull() {
+                this[this.table_VSI_ComparableMstLinkDItchesNoDSNode.WatershedColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsSubwatershedNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDItchesNoDSNode.SubwatershedColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetSubwatershedNull() {
+                this[this.table_VSI_ComparableMstLinkDItchesNoDSNode.SubwatershedColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsDateNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDItchesNoDSNode.DateColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetDateNull() {
+                this[this.table_VSI_ComparableMstLinkDItchesNoDSNode.DateColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsEvaluatorNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDItchesNoDSNode.EvaluatorColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetEvaluatorNull() {
+                this[this.table_VSI_ComparableMstLinkDItchesNoDSNode.EvaluatorColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsMapNoNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDItchesNoDSNode.MapNoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetMapNoNull() {
+                this[this.table_VSI_ComparableMstLinkDItchesNoDSNode.MapNoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsMapPageNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDItchesNoDSNode.MapPageColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetMapPageNull() {
+                this[this.table_VSI_ComparableMstLinkDItchesNoDSNode.MapPageColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public partial class _VSI_ComparableMstLinkDitchesNoUSNodeRow : global::System.Data.DataRow {
+            
+            private _VSI_ComparableMstLinkDitchesNoUSNodeDataTable table_VSI_ComparableMstLinkDitchesNoUSNode;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal _VSI_ComparableMstLinkDitchesNoUSNodeRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.table_VSI_ComparableMstLinkDitchesNoUSNode = ((_VSI_ComparableMstLinkDitchesNoUSNodeDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int MLinkID {
+                get {
+                    try {
+                        return ((int)(this[this.table_VSI_ComparableMstLinkDitchesNoUSNode.MLinkIDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'MLinkID\' in table \'_VSI_ComparableMstLinkDitchesNoUSNode\' i" +
+                                "s DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitchesNoUSNode.MLinkIDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int CompKey {
+                get {
+                    try {
+                        return ((int)(this[this.table_VSI_ComparableMstLinkDitchesNoUSNode.CompKeyColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CompKey\' in table \'_VSI_ComparableMstLinkDitchesNoUSNode\' i" +
+                                "s DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitchesNoUSNode.CompKeyColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string Node_No {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_ComparableMstLinkDitchesNoUSNode.Node_NoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Node_No\' in table \'_VSI_ComparableMstLinkDitchesNoUSNode\' i" +
+                                "s DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitchesNoUSNode.Node_NoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string OldShape {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_ComparableMstLinkDitchesNoUSNode.OldShapeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'OldShape\' in table \'_VSI_ComparableMstLinkDitchesNoUSNode\' " +
+                                "is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitchesNoUSNode.OldShapeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal OldWidth {
+                get {
+                    try {
+                        return ((decimal)(this[this.table_VSI_ComparableMstLinkDitchesNoUSNode.OldWidthColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'OldWidth\' in table \'_VSI_ComparableMstLinkDitchesNoUSNode\' " +
+                                "is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitchesNoUSNode.OldWidthColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public double NewDepth {
+                get {
+                    try {
+                        return ((double)(this[this.table_VSI_ComparableMstLinkDitchesNoUSNode.NewDepthColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'NewDepth\' in table \'_VSI_ComparableMstLinkDitchesNoUSNode\' " +
+                                "is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitchesNoUSNode.NewDepthColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public double NewTopWidth {
+                get {
+                    try {
+                        return ((double)(this[this.table_VSI_ComparableMstLinkDitchesNoUSNode.NewTopWidthColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'NewTopWidth\' in table \'_VSI_ComparableMstLinkDitchesNoUSNod" +
+                                "e\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitchesNoUSNode.NewTopWidthColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public double NewBottomWidth {
+                get {
+                    try {
+                        return ((double)(this[this.table_VSI_ComparableMstLinkDitchesNoUSNode.NewBottomWidthColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'NewBottomWidth\' in table \'_VSI_ComparableMstLinkDitchesNoUS" +
+                                "Node\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitchesNoUSNode.NewBottomWidthColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string OldMaterial {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_ComparableMstLinkDitchesNoUSNode.OldMaterialColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'OldMaterial\' in table \'_VSI_ComparableMstLinkDitchesNoUSNod" +
+                                "e\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitchesNoUSNode.OldMaterialColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string NewMaterial {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_ComparableMstLinkDitchesNoUSNode.NewMaterialColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'NewMaterial\' in table \'_VSI_ComparableMstLinkDitchesNoUSNod" +
+                                "e\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitchesNoUSNode.NewMaterialColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int EvaluatorPageID {
+                get {
+                    try {
+                        return ((int)(this[this.table_VSI_ComparableMstLinkDitchesNoUSNode.EvaluatorPageIDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'EvaluatorPageID\' in table \'_VSI_ComparableMstLinkDitchesNoU" +
+                                "SNode\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitchesNoUSNode.EvaluatorPageIDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string Watershed {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_ComparableMstLinkDitchesNoUSNode.WatershedColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Watershed\' in table \'_VSI_ComparableMstLinkDitchesNoUSNode\'" +
+                                " is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitchesNoUSNode.WatershedColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string Subwatershed {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_ComparableMstLinkDitchesNoUSNode.SubwatershedColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Subwatershed\' in table \'_VSI_ComparableMstLinkDitchesNoUSNo" +
+                                "de\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitchesNoUSNode.SubwatershedColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public System.DateTime Date {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.table_VSI_ComparableMstLinkDitchesNoUSNode.DateColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Date\' in table \'_VSI_ComparableMstLinkDitchesNoUSNode\' is D" +
+                                "BNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitchesNoUSNode.DateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string Evaluator {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_ComparableMstLinkDitchesNoUSNode.EvaluatorColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Evaluator\' in table \'_VSI_ComparableMstLinkDitchesNoUSNode\'" +
+                                " is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitchesNoUSNode.EvaluatorColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int MapNo {
+                get {
+                    try {
+                        return ((int)(this[this.table_VSI_ComparableMstLinkDitchesNoUSNode.MapNoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'MapNo\' in table \'_VSI_ComparableMstLinkDitchesNoUSNode\' is " +
+                                "DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitchesNoUSNode.MapNoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int MapPage {
+                get {
+                    try {
+                        return ((int)(this[this.table_VSI_ComparableMstLinkDitchesNoUSNode.MapPageColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'MapPage\' in table \'_VSI_ComparableMstLinkDitchesNoUSNode\' i" +
+                                "s DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitchesNoUSNode.MapPageColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsMLinkIDNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitchesNoUSNode.MLinkIDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetMLinkIDNull() {
+                this[this.table_VSI_ComparableMstLinkDitchesNoUSNode.MLinkIDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsCompKeyNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitchesNoUSNode.CompKeyColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetCompKeyNull() {
+                this[this.table_VSI_ComparableMstLinkDitchesNoUSNode.CompKeyColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsNode_NoNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitchesNoUSNode.Node_NoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetNode_NoNull() {
+                this[this.table_VSI_ComparableMstLinkDitchesNoUSNode.Node_NoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsOldShapeNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitchesNoUSNode.OldShapeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetOldShapeNull() {
+                this[this.table_VSI_ComparableMstLinkDitchesNoUSNode.OldShapeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsOldWidthNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitchesNoUSNode.OldWidthColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetOldWidthNull() {
+                this[this.table_VSI_ComparableMstLinkDitchesNoUSNode.OldWidthColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsNewDepthNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitchesNoUSNode.NewDepthColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetNewDepthNull() {
+                this[this.table_VSI_ComparableMstLinkDitchesNoUSNode.NewDepthColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsNewTopWidthNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitchesNoUSNode.NewTopWidthColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetNewTopWidthNull() {
+                this[this.table_VSI_ComparableMstLinkDitchesNoUSNode.NewTopWidthColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsNewBottomWidthNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitchesNoUSNode.NewBottomWidthColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetNewBottomWidthNull() {
+                this[this.table_VSI_ComparableMstLinkDitchesNoUSNode.NewBottomWidthColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsOldMaterialNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitchesNoUSNode.OldMaterialColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetOldMaterialNull() {
+                this[this.table_VSI_ComparableMstLinkDitchesNoUSNode.OldMaterialColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsNewMaterialNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitchesNoUSNode.NewMaterialColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetNewMaterialNull() {
+                this[this.table_VSI_ComparableMstLinkDitchesNoUSNode.NewMaterialColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsEvaluatorPageIDNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitchesNoUSNode.EvaluatorPageIDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetEvaluatorPageIDNull() {
+                this[this.table_VSI_ComparableMstLinkDitchesNoUSNode.EvaluatorPageIDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsWatershedNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitchesNoUSNode.WatershedColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetWatershedNull() {
+                this[this.table_VSI_ComparableMstLinkDitchesNoUSNode.WatershedColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsSubwatershedNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitchesNoUSNode.SubwatershedColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetSubwatershedNull() {
+                this[this.table_VSI_ComparableMstLinkDitchesNoUSNode.SubwatershedColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsDateNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitchesNoUSNode.DateColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetDateNull() {
+                this[this.table_VSI_ComparableMstLinkDitchesNoUSNode.DateColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsEvaluatorNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitchesNoUSNode.EvaluatorColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetEvaluatorNull() {
+                this[this.table_VSI_ComparableMstLinkDitchesNoUSNode.EvaluatorColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsMapNoNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitchesNoUSNode.MapNoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetMapNoNull() {
+                this[this.table_VSI_ComparableMstLinkDitchesNoUSNode.MapNoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsMapPageNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitchesNoUSNode.MapPageColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetMapPageNull() {
+                this[this.table_VSI_ComparableMstLinkDitchesNoUSNode.MapPageColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public partial class _VSI_ComparableMstLinkDitchesTransferableRow : global::System.Data.DataRow {
+            
+            private _VSI_ComparableMstLinkDitchesTransferableDataTable table_VSI_ComparableMstLinkDitchesTransferable;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal _VSI_ComparableMstLinkDitchesTransferableRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.table_VSI_ComparableMstLinkDitchesTransferable = ((_VSI_ComparableMstLinkDitchesTransferableDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int MLinkID {
+                get {
+                    try {
+                        return ((int)(this[this.table_VSI_ComparableMstLinkDitchesTransferable.MLinkIDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'MLinkID\' in table \'_VSI_ComparableMstLinkDitchesTransferabl" +
+                                "e\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitchesTransferable.MLinkIDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int CompKey {
+                get {
+                    try {
+                        return ((int)(this[this.table_VSI_ComparableMstLinkDitchesTransferable.CompKeyColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CompKey\' in table \'_VSI_ComparableMstLinkDitchesTransferabl" +
+                                "e\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitchesTransferable.CompKeyColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string Node_No {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_ComparableMstLinkDitchesTransferable.Node_NoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Node_No\' in table \'_VSI_ComparableMstLinkDitchesTransferabl" +
+                                "e\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitchesTransferable.Node_NoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string OldShape {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_ComparableMstLinkDitchesTransferable.OldShapeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'OldShape\' in table \'_VSI_ComparableMstLinkDitchesTransferab" +
+                                "le\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitchesTransferable.OldShapeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal OldHeight {
+                get {
+                    try {
+                        return ((decimal)(this[this.table_VSI_ComparableMstLinkDitchesTransferable.OldHeightColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'OldHeight\' in table \'_VSI_ComparableMstLinkDitchesTransfera" +
+                                "ble\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitchesTransferable.OldHeightColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal OldWidth {
+                get {
+                    try {
+                        return ((decimal)(this[this.table_VSI_ComparableMstLinkDitchesTransferable.OldWidthColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'OldWidth\' in table \'_VSI_ComparableMstLinkDitchesTransferab" +
+                                "le\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitchesTransferable.OldWidthColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public double NewDepth {
+                get {
+                    try {
+                        return ((double)(this[this.table_VSI_ComparableMstLinkDitchesTransferable.NewDepthColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'NewDepth\' in table \'_VSI_ComparableMstLinkDitchesTransferab" +
+                                "le\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitchesTransferable.NewDepthColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public double NewTopWidth {
+                get {
+                    try {
+                        return ((double)(this[this.table_VSI_ComparableMstLinkDitchesTransferable.NewTopWidthColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'NewTopWidth\' in table \'_VSI_ComparableMstLinkDitchesTransfe" +
+                                "rable\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitchesTransferable.NewTopWidthColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public double NewBottomWidth {
+                get {
+                    try {
+                        return ((double)(this[this.table_VSI_ComparableMstLinkDitchesTransferable.NewBottomWidthColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'NewBottomWidth\' in table \'_VSI_ComparableMstLinkDitchesTran" +
+                                "sferable\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitchesTransferable.NewBottomWidthColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string OldMaterial {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_ComparableMstLinkDitchesTransferable.OldMaterialColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'OldMaterial\' in table \'_VSI_ComparableMstLinkDitchesTransfe" +
+                                "rable\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitchesTransferable.OldMaterialColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string NewMaterial {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_ComparableMstLinkDitchesTransferable.NewMaterialColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'NewMaterial\' in table \'_VSI_ComparableMstLinkDitchesTransfe" +
+                                "rable\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitchesTransferable.NewMaterialColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int EvaluatorPageID {
+                get {
+                    try {
+                        return ((int)(this[this.table_VSI_ComparableMstLinkDitchesTransferable.EvaluatorPageIDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'EvaluatorPageID\' in table \'_VSI_ComparableMstLinkDitchesTra" +
+                                "nsferable\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitchesTransferable.EvaluatorPageIDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string Watershed {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_ComparableMstLinkDitchesTransferable.WatershedColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Watershed\' in table \'_VSI_ComparableMstLinkDitchesTransfera" +
+                                "ble\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitchesTransferable.WatershedColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string Subwatershed {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_ComparableMstLinkDitchesTransferable.SubwatershedColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Subwatershed\' in table \'_VSI_ComparableMstLinkDitchesTransf" +
+                                "erable\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitchesTransferable.SubwatershedColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public System.DateTime Date {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.table_VSI_ComparableMstLinkDitchesTransferable.DateColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Date\' in table \'_VSI_ComparableMstLinkDitchesTransferable\' " +
+                                "is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitchesTransferable.DateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string Evaluator {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_ComparableMstLinkDitchesTransferable.EvaluatorColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Evaluator\' in table \'_VSI_ComparableMstLinkDitchesTransfera" +
+                                "ble\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitchesTransferable.EvaluatorColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int MapNo {
+                get {
+                    try {
+                        return ((int)(this[this.table_VSI_ComparableMstLinkDitchesTransferable.MapNoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'MapNo\' in table \'_VSI_ComparableMstLinkDitchesTransferable\'" +
+                                " is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitchesTransferable.MapNoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int MapPage {
+                get {
+                    try {
+                        return ((int)(this[this.table_VSI_ComparableMstLinkDitchesTransferable.MapPageColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'MapPage\' in table \'_VSI_ComparableMstLinkDitchesTransferabl" +
+                                "e\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitchesTransferable.MapPageColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsMLinkIDNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitchesTransferable.MLinkIDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetMLinkIDNull() {
+                this[this.table_VSI_ComparableMstLinkDitchesTransferable.MLinkIDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsCompKeyNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitchesTransferable.CompKeyColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetCompKeyNull() {
+                this[this.table_VSI_ComparableMstLinkDitchesTransferable.CompKeyColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsNode_NoNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitchesTransferable.Node_NoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetNode_NoNull() {
+                this[this.table_VSI_ComparableMstLinkDitchesTransferable.Node_NoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsOldShapeNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitchesTransferable.OldShapeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetOldShapeNull() {
+                this[this.table_VSI_ComparableMstLinkDitchesTransferable.OldShapeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsOldHeightNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitchesTransferable.OldHeightColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetOldHeightNull() {
+                this[this.table_VSI_ComparableMstLinkDitchesTransferable.OldHeightColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsOldWidthNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitchesTransferable.OldWidthColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetOldWidthNull() {
+                this[this.table_VSI_ComparableMstLinkDitchesTransferable.OldWidthColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsNewDepthNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitchesTransferable.NewDepthColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetNewDepthNull() {
+                this[this.table_VSI_ComparableMstLinkDitchesTransferable.NewDepthColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsNewTopWidthNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitchesTransferable.NewTopWidthColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetNewTopWidthNull() {
+                this[this.table_VSI_ComparableMstLinkDitchesTransferable.NewTopWidthColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsNewBottomWidthNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitchesTransferable.NewBottomWidthColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetNewBottomWidthNull() {
+                this[this.table_VSI_ComparableMstLinkDitchesTransferable.NewBottomWidthColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsOldMaterialNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitchesTransferable.OldMaterialColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetOldMaterialNull() {
+                this[this.table_VSI_ComparableMstLinkDitchesTransferable.OldMaterialColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsNewMaterialNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitchesTransferable.NewMaterialColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetNewMaterialNull() {
+                this[this.table_VSI_ComparableMstLinkDitchesTransferable.NewMaterialColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsEvaluatorPageIDNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitchesTransferable.EvaluatorPageIDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetEvaluatorPageIDNull() {
+                this[this.table_VSI_ComparableMstLinkDitchesTransferable.EvaluatorPageIDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsWatershedNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitchesTransferable.WatershedColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetWatershedNull() {
+                this[this.table_VSI_ComparableMstLinkDitchesTransferable.WatershedColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsSubwatershedNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitchesTransferable.SubwatershedColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetSubwatershedNull() {
+                this[this.table_VSI_ComparableMstLinkDitchesTransferable.SubwatershedColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsDateNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitchesTransferable.DateColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetDateNull() {
+                this[this.table_VSI_ComparableMstLinkDitchesTransferable.DateColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsEvaluatorNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitchesTransferable.EvaluatorColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetEvaluatorNull() {
+                this[this.table_VSI_ComparableMstLinkDitchesTransferable.EvaluatorColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsMapNoNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitchesTransferable.MapNoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetMapNoNull() {
+                this[this.table_VSI_ComparableMstLinkDitchesTransferable.MapNoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsMapPageNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitchesTransferable.MapPageColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetMapPageNull() {
+                this[this.table_VSI_ComparableMstLinkDitchesTransferable.MapPageColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public partial class _VSI_ComparableMstLinkDitchesWidthTopLTBottomRow : global::System.Data.DataRow {
+            
+            private _VSI_ComparableMstLinkDitchesWidthTopLTBottomDataTable table_VSI_ComparableMstLinkDitchesWidthTopLTBottom;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal _VSI_ComparableMstLinkDitchesWidthTopLTBottomRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom = ((_VSI_ComparableMstLinkDitchesWidthTopLTBottomDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int MLinkID {
+                get {
+                    try {
+                        return ((int)(this[this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom.MLinkIDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'MLinkID\' in table \'_VSI_ComparableMstLinkDitchesWidthTopLTB" +
+                                "ottom\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom.MLinkIDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int CompKey {
+                get {
+                    try {
+                        return ((int)(this[this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom.CompKeyColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CompKey\' in table \'_VSI_ComparableMstLinkDitchesWidthTopLTB" +
+                                "ottom\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom.CompKeyColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string Node_No {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom.Node_NoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Node_No\' in table \'_VSI_ComparableMstLinkDitchesWidthTopLTB" +
+                                "ottom\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom.Node_NoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string OldShape {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom.OldShapeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'OldShape\' in table \'_VSI_ComparableMstLinkDitchesWidthTopLT" +
+                                "Bottom\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom.OldShapeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal OldWidth {
+                get {
+                    try {
+                        return ((decimal)(this[this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom.OldWidthColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'OldWidth\' in table \'_VSI_ComparableMstLinkDitchesWidthTopLT" +
+                                "Bottom\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom.OldWidthColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public double NewDepth {
+                get {
+                    try {
+                        return ((double)(this[this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom.NewDepthColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'NewDepth\' in table \'_VSI_ComparableMstLinkDitchesWidthTopLT" +
+                                "Bottom\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom.NewDepthColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public double NewTopWidth {
+                get {
+                    try {
+                        return ((double)(this[this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom.NewTopWidthColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'NewTopWidth\' in table \'_VSI_ComparableMstLinkDitchesWidthTo" +
+                                "pLTBottom\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom.NewTopWidthColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public double NewBottomWidth {
+                get {
+                    try {
+                        return ((double)(this[this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom.NewBottomWidthColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'NewBottomWidth\' in table \'_VSI_ComparableMstLinkDitchesWidt" +
+                                "hTopLTBottom\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom.NewBottomWidthColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string OldMaterial {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom.OldMaterialColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'OldMaterial\' in table \'_VSI_ComparableMstLinkDitchesWidthTo" +
+                                "pLTBottom\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom.OldMaterialColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string NewMaterial {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom.NewMaterialColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'NewMaterial\' in table \'_VSI_ComparableMstLinkDitchesWidthTo" +
+                                "pLTBottom\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom.NewMaterialColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int EvaluatorPageID {
+                get {
+                    try {
+                        return ((int)(this[this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom.EvaluatorPageIDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'EvaluatorPageID\' in table \'_VSI_ComparableMstLinkDitchesWid" +
+                                "thTopLTBottom\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom.EvaluatorPageIDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string Watershed {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom.WatershedColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Watershed\' in table \'_VSI_ComparableMstLinkDitchesWidthTopL" +
+                                "TBottom\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom.WatershedColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string Subwatershed {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom.SubwatershedColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Subwatershed\' in table \'_VSI_ComparableMstLinkDitchesWidthT" +
+                                "opLTBottom\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom.SubwatershedColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public System.DateTime Date {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom.DateColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Date\' in table \'_VSI_ComparableMstLinkDitchesWidthTopLTBott" +
+                                "om\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom.DateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string Evaluator {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom.EvaluatorColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Evaluator\' in table \'_VSI_ComparableMstLinkDitchesWidthTopL" +
+                                "TBottom\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom.EvaluatorColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int MapNo {
+                get {
+                    try {
+                        return ((int)(this[this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom.MapNoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'MapNo\' in table \'_VSI_ComparableMstLinkDitchesWidthTopLTBot" +
+                                "tom\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom.MapNoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int MapPage {
+                get {
+                    try {
+                        return ((int)(this[this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom.MapPageColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'MapPage\' in table \'_VSI_ComparableMstLinkDitchesWidthTopLTB" +
+                                "ottom\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom.MapPageColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsMLinkIDNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom.MLinkIDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetMLinkIDNull() {
+                this[this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom.MLinkIDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsCompKeyNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom.CompKeyColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetCompKeyNull() {
+                this[this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom.CompKeyColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsNode_NoNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom.Node_NoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetNode_NoNull() {
+                this[this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom.Node_NoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsOldShapeNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom.OldShapeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetOldShapeNull() {
+                this[this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom.OldShapeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsOldWidthNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom.OldWidthColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetOldWidthNull() {
+                this[this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom.OldWidthColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsNewDepthNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom.NewDepthColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetNewDepthNull() {
+                this[this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom.NewDepthColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsNewTopWidthNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom.NewTopWidthColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetNewTopWidthNull() {
+                this[this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom.NewTopWidthColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsNewBottomWidthNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom.NewBottomWidthColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetNewBottomWidthNull() {
+                this[this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom.NewBottomWidthColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsOldMaterialNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom.OldMaterialColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetOldMaterialNull() {
+                this[this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom.OldMaterialColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsNewMaterialNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom.NewMaterialColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetNewMaterialNull() {
+                this[this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom.NewMaterialColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsEvaluatorPageIDNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom.EvaluatorPageIDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetEvaluatorPageIDNull() {
+                this[this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom.EvaluatorPageIDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsWatershedNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom.WatershedColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetWatershedNull() {
+                this[this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom.WatershedColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsSubwatershedNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom.SubwatershedColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetSubwatershedNull() {
+                this[this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom.SubwatershedColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsDateNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom.DateColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetDateNull() {
+                this[this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom.DateColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsEvaluatorNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom.EvaluatorColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetEvaluatorNull() {
+                this[this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom.EvaluatorColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsMapNoNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom.MapNoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetMapNoNull() {
+                this[this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom.MapNoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsMapPageNull() {
+                return this.IsNull(this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom.MapPageColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetMapPageNull() {
+                this[this.table_VSI_ComparableMstLinkDitchesWidthTopLTBottom.MapPageColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public partial class _VSI_DifficultCulvertsRow : global::System.Data.DataRow {
+            
+            private _VSI_DifficultCulvertsDataTable table_VSI_DifficultCulverts;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal _VSI_DifficultCulvertsRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.table_VSI_DifficultCulverts = ((_VSI_DifficultCulvertsDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int PrimaryKey {
+                get {
+                    try {
+                        return ((int)(this[this.table_VSI_DifficultCulverts.PrimaryKeyColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'PrimaryKey\' in table \'_VSI_DifficultCulverts\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_DifficultCulverts.PrimaryKeyColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string Position {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_DifficultCulverts.PositionColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Position\' in table \'_VSI_DifficultCulverts\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_DifficultCulverts.PositionColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string Node_No {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_DifficultCulverts.Node_NoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Node_No\' in table \'_VSI_DifficultCulverts\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_DifficultCulverts.Node_NoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string LPO {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_DifficultCulverts.LPOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'LPO\' in table \'_VSI_DifficultCulverts\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_DifficultCulverts.LPOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string Shape {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_DifficultCulverts.ShapeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Shape\' in table \'_VSI_DifficultCulverts\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_DifficultCulverts.ShapeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public double Pipe_D {
+                get {
+                    try {
+                        return ((double)(this[this.table_VSI_DifficultCulverts.Pipe_DColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Pipe_D\' in table \'_VSI_DifficultCulverts\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_DifficultCulverts.Pipe_DColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public double CulvDepth {
+                get {
+                    try {
+                        return ((double)(this[this.table_VSI_DifficultCulverts.CulvDepthColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CulvDepth\' in table \'_VSI_DifficultCulverts\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_DifficultCulverts.CulvDepthColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string CulvMaterial {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_DifficultCulverts.CulvMaterialColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CulvMaterial\' in table \'_VSI_DifficultCulverts\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_DifficultCulverts.CulvMaterialColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string CulvPhoto_ID {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_DifficultCulverts.CulvPhoto_IDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CulvPhoto_ID\' in table \'_VSI_DifficultCulverts\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_DifficultCulverts.CulvPhoto_IDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public double DitchDepth {
+                get {
+                    try {
+                        return ((double)(this[this.table_VSI_DifficultCulverts.DitchDepthColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DitchDepth\' in table \'_VSI_DifficultCulverts\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_DifficultCulverts.DitchDepthColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public double WidthTop {
+                get {
+                    try {
+                        return ((double)(this[this.table_VSI_DifficultCulverts.WidthTopColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'WidthTop\' in table \'_VSI_DifficultCulverts\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_DifficultCulverts.WidthTopColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public double WidthBottom {
+                get {
+                    try {
+                        return ((double)(this[this.table_VSI_DifficultCulverts.WidthBottomColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'WidthBottom\' in table \'_VSI_DifficultCulverts\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_DifficultCulverts.WidthBottomColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string DitchMaterial {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_DifficultCulverts.DitchMaterialColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DitchMaterial\' in table \'_VSI_DifficultCulverts\' is DBNull." +
+                                "", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_DifficultCulverts.DitchMaterialColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string DitchPhoto_ID {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_DifficultCulverts.DitchPhoto_IDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DitchPhoto_ID\' in table \'_VSI_DifficultCulverts\' is DBNull." +
+                                "", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_DifficultCulverts.DitchPhoto_IDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int EvaluatorPageID {
+                get {
+                    try {
+                        return ((int)(this[this.table_VSI_DifficultCulverts.EvaluatorPageIDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'EvaluatorPageID\' in table \'_VSI_DifficultCulverts\' is DBNul" +
+                                "l.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_DifficultCulverts.EvaluatorPageIDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string Watershed {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_DifficultCulverts.WatershedColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Watershed\' in table \'_VSI_DifficultCulverts\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_DifficultCulverts.WatershedColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string Subwatershed {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_DifficultCulverts.SubwatershedColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Subwatershed\' in table \'_VSI_DifficultCulverts\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_DifficultCulverts.SubwatershedColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public System.DateTime Date {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.table_VSI_DifficultCulverts.DateColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Date\' in table \'_VSI_DifficultCulverts\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_DifficultCulverts.DateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string Evaluator {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_DifficultCulverts.EvaluatorColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Evaluator\' in table \'_VSI_DifficultCulverts\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_DifficultCulverts.EvaluatorColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int MapNo {
+                get {
+                    try {
+                        return ((int)(this[this.table_VSI_DifficultCulverts.MapNoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'MapNo\' in table \'_VSI_DifficultCulverts\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_DifficultCulverts.MapNoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int MapPage {
+                get {
+                    try {
+                        return ((int)(this[this.table_VSI_DifficultCulverts.MapPageColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'MapPage\' in table \'_VSI_DifficultCulverts\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_DifficultCulverts.MapPageColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsPrimaryKeyNull() {
+                return this.IsNull(this.table_VSI_DifficultCulverts.PrimaryKeyColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetPrimaryKeyNull() {
+                this[this.table_VSI_DifficultCulverts.PrimaryKeyColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsPositionNull() {
+                return this.IsNull(this.table_VSI_DifficultCulverts.PositionColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetPositionNull() {
+                this[this.table_VSI_DifficultCulverts.PositionColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsNode_NoNull() {
+                return this.IsNull(this.table_VSI_DifficultCulverts.Node_NoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetNode_NoNull() {
+                this[this.table_VSI_DifficultCulverts.Node_NoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsLPONull() {
+                return this.IsNull(this.table_VSI_DifficultCulverts.LPOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetLPONull() {
+                this[this.table_VSI_DifficultCulverts.LPOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsShapeNull() {
+                return this.IsNull(this.table_VSI_DifficultCulverts.ShapeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetShapeNull() {
+                this[this.table_VSI_DifficultCulverts.ShapeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsPipe_DNull() {
+                return this.IsNull(this.table_VSI_DifficultCulverts.Pipe_DColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetPipe_DNull() {
+                this[this.table_VSI_DifficultCulverts.Pipe_DColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsCulvDepthNull() {
+                return this.IsNull(this.table_VSI_DifficultCulverts.CulvDepthColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetCulvDepthNull() {
+                this[this.table_VSI_DifficultCulverts.CulvDepthColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsCulvMaterialNull() {
+                return this.IsNull(this.table_VSI_DifficultCulverts.CulvMaterialColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetCulvMaterialNull() {
+                this[this.table_VSI_DifficultCulverts.CulvMaterialColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsCulvPhoto_IDNull() {
+                return this.IsNull(this.table_VSI_DifficultCulverts.CulvPhoto_IDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetCulvPhoto_IDNull() {
+                this[this.table_VSI_DifficultCulverts.CulvPhoto_IDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsDitchDepthNull() {
+                return this.IsNull(this.table_VSI_DifficultCulverts.DitchDepthColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetDitchDepthNull() {
+                this[this.table_VSI_DifficultCulverts.DitchDepthColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsWidthTopNull() {
+                return this.IsNull(this.table_VSI_DifficultCulverts.WidthTopColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetWidthTopNull() {
+                this[this.table_VSI_DifficultCulverts.WidthTopColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsWidthBottomNull() {
+                return this.IsNull(this.table_VSI_DifficultCulverts.WidthBottomColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetWidthBottomNull() {
+                this[this.table_VSI_DifficultCulverts.WidthBottomColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsDitchMaterialNull() {
+                return this.IsNull(this.table_VSI_DifficultCulverts.DitchMaterialColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetDitchMaterialNull() {
+                this[this.table_VSI_DifficultCulverts.DitchMaterialColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsDitchPhoto_IDNull() {
+                return this.IsNull(this.table_VSI_DifficultCulverts.DitchPhoto_IDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetDitchPhoto_IDNull() {
+                this[this.table_VSI_DifficultCulverts.DitchPhoto_IDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsEvaluatorPageIDNull() {
+                return this.IsNull(this.table_VSI_DifficultCulverts.EvaluatorPageIDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetEvaluatorPageIDNull() {
+                this[this.table_VSI_DifficultCulverts.EvaluatorPageIDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsWatershedNull() {
+                return this.IsNull(this.table_VSI_DifficultCulverts.WatershedColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetWatershedNull() {
+                this[this.table_VSI_DifficultCulverts.WatershedColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsSubwatershedNull() {
+                return this.IsNull(this.table_VSI_DifficultCulverts.SubwatershedColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetSubwatershedNull() {
+                this[this.table_VSI_DifficultCulverts.SubwatershedColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsDateNull() {
+                return this.IsNull(this.table_VSI_DifficultCulverts.DateColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetDateNull() {
+                this[this.table_VSI_DifficultCulverts.DateColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsEvaluatorNull() {
+                return this.IsNull(this.table_VSI_DifficultCulverts.EvaluatorColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetEvaluatorNull() {
+                this[this.table_VSI_DifficultCulverts.EvaluatorColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsMapNoNull() {
+                return this.IsNull(this.table_VSI_DifficultCulverts.MapNoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetMapNoNull() {
+                this[this.table_VSI_DifficultCulverts.MapNoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsMapPageNull() {
+                return this.IsNull(this.table_VSI_DifficultCulverts.MapPageColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetMapPageNull() {
+                this[this.table_VSI_DifficultCulverts.MapPageColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public partial class _VSI_DifficultDitchesRow : global::System.Data.DataRow {
+            
+            private _VSI_DifficultDitchesDataTable table_VSI_DifficultDitches;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal _VSI_DifficultDitchesRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.table_VSI_DifficultDitches = ((_VSI_DifficultDitchesDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int PrimaryKey {
+                get {
+                    try {
+                        return ((int)(this[this.table_VSI_DifficultDitches.PrimaryKeyColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'PrimaryKey\' in table \'_VSI_DifficultDitches\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_DifficultDitches.PrimaryKeyColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string Position {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_DifficultDitches.PositionColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Position\' in table \'_VSI_DifficultDitches\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_DifficultDitches.PositionColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string Node_No {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_DifficultDitches.Node_NoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Node_No\' in table \'_VSI_DifficultDitches\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_DifficultDitches.Node_NoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string LPO {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_DifficultDitches.LPOColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'LPO\' in table \'_VSI_DifficultDitches\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_DifficultDitches.LPOColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string Shape {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_DifficultDitches.ShapeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Shape\' in table \'_VSI_DifficultDitches\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_DifficultDitches.ShapeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public double Pipe_D {
+                get {
+                    try {
+                        return ((double)(this[this.table_VSI_DifficultDitches.Pipe_DColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Pipe_D\' in table \'_VSI_DifficultDitches\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_DifficultDitches.Pipe_DColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public double CulvDepth {
+                get {
+                    try {
+                        return ((double)(this[this.table_VSI_DifficultDitches.CulvDepthColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CulvDepth\' in table \'_VSI_DifficultDitches\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_DifficultDitches.CulvDepthColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string CulvMaterial {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_DifficultDitches.CulvMaterialColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CulvMaterial\' in table \'_VSI_DifficultDitches\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_DifficultDitches.CulvMaterialColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string CulvPhoto_ID {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_DifficultDitches.CulvPhoto_IDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CulvPhoto_ID\' in table \'_VSI_DifficultDitches\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_DifficultDitches.CulvPhoto_IDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public double DitchDepth {
+                get {
+                    try {
+                        return ((double)(this[this.table_VSI_DifficultDitches.DitchDepthColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DitchDepth\' in table \'_VSI_DifficultDitches\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_DifficultDitches.DitchDepthColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public double WidthTop {
+                get {
+                    try {
+                        return ((double)(this[this.table_VSI_DifficultDitches.WidthTopColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'WidthTop\' in table \'_VSI_DifficultDitches\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_DifficultDitches.WidthTopColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public double WidthBottom {
+                get {
+                    try {
+                        return ((double)(this[this.table_VSI_DifficultDitches.WidthBottomColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'WidthBottom\' in table \'_VSI_DifficultDitches\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_DifficultDitches.WidthBottomColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string DitchMaterial {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_DifficultDitches.DitchMaterialColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DitchMaterial\' in table \'_VSI_DifficultDitches\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_DifficultDitches.DitchMaterialColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string DitchPhoto_ID {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_DifficultDitches.DitchPhoto_IDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DitchPhoto_ID\' in table \'_VSI_DifficultDitches\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_DifficultDitches.DitchPhoto_IDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int EvaluatorPageID {
+                get {
+                    try {
+                        return ((int)(this[this.table_VSI_DifficultDitches.EvaluatorPageIDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'EvaluatorPageID\' in table \'_VSI_DifficultDitches\' is DBNull" +
+                                ".", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_DifficultDitches.EvaluatorPageIDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string Watershed {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_DifficultDitches.WatershedColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Watershed\' in table \'_VSI_DifficultDitches\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_DifficultDitches.WatershedColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string Subwatershed {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_DifficultDitches.SubwatershedColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Subwatershed\' in table \'_VSI_DifficultDitches\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_DifficultDitches.SubwatershedColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public System.DateTime Date {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.table_VSI_DifficultDitches.DateColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Date\' in table \'_VSI_DifficultDitches\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_DifficultDitches.DateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string Evaluator {
+                get {
+                    try {
+                        return ((string)(this[this.table_VSI_DifficultDitches.EvaluatorColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Evaluator\' in table \'_VSI_DifficultDitches\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_DifficultDitches.EvaluatorColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int MapNo {
+                get {
+                    try {
+                        return ((int)(this[this.table_VSI_DifficultDitches.MapNoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'MapNo\' in table \'_VSI_DifficultDitches\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_DifficultDitches.MapNoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int MapPage {
+                get {
+                    try {
+                        return ((int)(this[this.table_VSI_DifficultDitches.MapPageColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'MapPage\' in table \'_VSI_DifficultDitches\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.table_VSI_DifficultDitches.MapPageColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsPrimaryKeyNull() {
+                return this.IsNull(this.table_VSI_DifficultDitches.PrimaryKeyColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetPrimaryKeyNull() {
+                this[this.table_VSI_DifficultDitches.PrimaryKeyColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsPositionNull() {
+                return this.IsNull(this.table_VSI_DifficultDitches.PositionColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetPositionNull() {
+                this[this.table_VSI_DifficultDitches.PositionColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsNode_NoNull() {
+                return this.IsNull(this.table_VSI_DifficultDitches.Node_NoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetNode_NoNull() {
+                this[this.table_VSI_DifficultDitches.Node_NoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsLPONull() {
+                return this.IsNull(this.table_VSI_DifficultDitches.LPOColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetLPONull() {
+                this[this.table_VSI_DifficultDitches.LPOColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsShapeNull() {
+                return this.IsNull(this.table_VSI_DifficultDitches.ShapeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetShapeNull() {
+                this[this.table_VSI_DifficultDitches.ShapeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsPipe_DNull() {
+                return this.IsNull(this.table_VSI_DifficultDitches.Pipe_DColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetPipe_DNull() {
+                this[this.table_VSI_DifficultDitches.Pipe_DColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsCulvDepthNull() {
+                return this.IsNull(this.table_VSI_DifficultDitches.CulvDepthColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetCulvDepthNull() {
+                this[this.table_VSI_DifficultDitches.CulvDepthColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsCulvMaterialNull() {
+                return this.IsNull(this.table_VSI_DifficultDitches.CulvMaterialColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetCulvMaterialNull() {
+                this[this.table_VSI_DifficultDitches.CulvMaterialColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsCulvPhoto_IDNull() {
+                return this.IsNull(this.table_VSI_DifficultDitches.CulvPhoto_IDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetCulvPhoto_IDNull() {
+                this[this.table_VSI_DifficultDitches.CulvPhoto_IDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsDitchDepthNull() {
+                return this.IsNull(this.table_VSI_DifficultDitches.DitchDepthColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetDitchDepthNull() {
+                this[this.table_VSI_DifficultDitches.DitchDepthColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsWidthTopNull() {
+                return this.IsNull(this.table_VSI_DifficultDitches.WidthTopColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetWidthTopNull() {
+                this[this.table_VSI_DifficultDitches.WidthTopColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsWidthBottomNull() {
+                return this.IsNull(this.table_VSI_DifficultDitches.WidthBottomColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetWidthBottomNull() {
+                this[this.table_VSI_DifficultDitches.WidthBottomColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsDitchMaterialNull() {
+                return this.IsNull(this.table_VSI_DifficultDitches.DitchMaterialColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetDitchMaterialNull() {
+                this[this.table_VSI_DifficultDitches.DitchMaterialColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsDitchPhoto_IDNull() {
+                return this.IsNull(this.table_VSI_DifficultDitches.DitchPhoto_IDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetDitchPhoto_IDNull() {
+                this[this.table_VSI_DifficultDitches.DitchPhoto_IDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsEvaluatorPageIDNull() {
+                return this.IsNull(this.table_VSI_DifficultDitches.EvaluatorPageIDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetEvaluatorPageIDNull() {
+                this[this.table_VSI_DifficultDitches.EvaluatorPageIDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsWatershedNull() {
+                return this.IsNull(this.table_VSI_DifficultDitches.WatershedColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetWatershedNull() {
+                this[this.table_VSI_DifficultDitches.WatershedColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsSubwatershedNull() {
+                return this.IsNull(this.table_VSI_DifficultDitches.SubwatershedColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetSubwatershedNull() {
+                this[this.table_VSI_DifficultDitches.SubwatershedColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsDateNull() {
+                return this.IsNull(this.table_VSI_DifficultDitches.DateColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetDateNull() {
+                this[this.table_VSI_DifficultDitches.DateColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsEvaluatorNull() {
+                return this.IsNull(this.table_VSI_DifficultDitches.EvaluatorColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetEvaluatorNull() {
+                this[this.table_VSI_DifficultDitches.EvaluatorColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsMapNoNull() {
+                return this.IsNull(this.table_VSI_DifficultDitches.MapNoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetMapNoNull() {
+                this[this.table_VSI_DifficultDitches.MapNoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsMapPageNull() {
+                return this.IsNull(this.table_VSI_DifficultDitches.MapPageColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetMapPageNull() {
+                this[this.table_VSI_DifficultDitches.MapPageColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -2536,180 +12540,351 @@ namespace StormwaterInterface {
                 }
             }
         }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public class _VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6RowChangeEvent : global::System.EventArgs {
+            
+            private _VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6Row eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public _VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6RowChangeEvent(_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6Row row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public _VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6Row Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public class _VSI_ComparableMstLinkCulvertsNewDiameterNotStandardRowChangeEvent : global::System.EventArgs {
+            
+            private _VSI_ComparableMstLinkCulvertsNewDiameterNotStandardRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public _VSI_ComparableMstLinkCulvertsNewDiameterNotStandardRowChangeEvent(_VSI_ComparableMstLinkCulvertsNewDiameterNotStandardRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public _VSI_ComparableMstLinkCulvertsNewDiameterNotStandardRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public class _VSI_ComparableMStLinkCulvertsTransferableRowChangeEvent : global::System.EventArgs {
+            
+            private _VSI_ComparableMStLinkCulvertsTransferableRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public _VSI_ComparableMStLinkCulvertsTransferableRowChangeEvent(_VSI_ComparableMStLinkCulvertsTransferableRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public _VSI_ComparableMStLinkCulvertsTransferableRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public class _VSI_ComparableMstLinkDitchesRowChangeEvent : global::System.EventArgs {
+            
+            private _VSI_ComparableMstLinkDitchesRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public _VSI_ComparableMstLinkDitchesRowChangeEvent(_VSI_ComparableMstLinkDitchesRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public _VSI_ComparableMstLinkDitchesRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public class _VSI_ComparableMstLinkDitchesNewDepthLT1RowChangeEvent : global::System.EventArgs {
+            
+            private _VSI_ComparableMstLinkDitchesNewDepthLT1Row eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public _VSI_ComparableMstLinkDitchesNewDepthLT1RowChangeEvent(_VSI_ComparableMstLinkDitchesNewDepthLT1Row row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public _VSI_ComparableMstLinkDitchesNewDepthLT1Row Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public class _VSI_ComparableMstLinkDItchesNoDSNodeRowChangeEvent : global::System.EventArgs {
+            
+            private _VSI_ComparableMstLinkDItchesNoDSNodeRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public _VSI_ComparableMstLinkDItchesNoDSNodeRowChangeEvent(_VSI_ComparableMstLinkDItchesNoDSNodeRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public _VSI_ComparableMstLinkDItchesNoDSNodeRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public class _VSI_ComparableMstLinkDitchesNoUSNodeRowChangeEvent : global::System.EventArgs {
+            
+            private _VSI_ComparableMstLinkDitchesNoUSNodeRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public _VSI_ComparableMstLinkDitchesNoUSNodeRowChangeEvent(_VSI_ComparableMstLinkDitchesNoUSNodeRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public _VSI_ComparableMstLinkDitchesNoUSNodeRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public class _VSI_ComparableMstLinkDitchesTransferableRowChangeEvent : global::System.EventArgs {
+            
+            private _VSI_ComparableMstLinkDitchesTransferableRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public _VSI_ComparableMstLinkDitchesTransferableRowChangeEvent(_VSI_ComparableMstLinkDitchesTransferableRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public _VSI_ComparableMstLinkDitchesTransferableRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public class _VSI_ComparableMstLinkDitchesWidthTopLTBottomRowChangeEvent : global::System.EventArgs {
+            
+            private _VSI_ComparableMstLinkDitchesWidthTopLTBottomRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public _VSI_ComparableMstLinkDitchesWidthTopLTBottomRowChangeEvent(_VSI_ComparableMstLinkDitchesWidthTopLTBottomRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public _VSI_ComparableMstLinkDitchesWidthTopLTBottomRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public class _VSI_DifficultCulvertsRowChangeEvent : global::System.EventArgs {
+            
+            private _VSI_DifficultCulvertsRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public _VSI_DifficultCulvertsRowChangeEvent(_VSI_DifficultCulvertsRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public _VSI_DifficultCulvertsRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public class _VSI_DifficultDitchesRowChangeEvent : global::System.EventArgs {
+            
+            private _VSI_DifficultDitchesRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public _VSI_DifficultDitchesRowChangeEvent(_VSI_DifficultDitchesRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public _VSI_DifficultDitchesRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
     }
 }
 namespace StormwaterInterface.FieldWorkDBDataSetTableAdapters {
     
-    
-    /// <summary>
-    ///Represents the connection and commands used to retrieve and save data.
-    ///</summary>
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
-    [global::System.ComponentModel.ToolboxItem(true)]
-    [global::System.ComponentModel.DataObjectAttribute(true)]
-    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
-        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
-    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-    public partial class View_CulvertsDitchesTableAdapter : global::System.ComponentModel.Component {
-        
-        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
-        
-        private global::System.Data.SqlClient.SqlConnection _connection;
-        
-        private global::System.Data.SqlClient.SqlTransaction _transaction;
-        
-        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
-        
-        private bool _clearBeforeFill;
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public View_CulvertsDitchesTableAdapter() {
-            this.ClearBeforeFill = true;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
-            get {
-                if ((this._adapter == null)) {
-                    this.InitAdapter();
-                }
-                return this._adapter;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.SqlClient.SqlConnection Connection {
-            get {
-                if ((this._connection == null)) {
-                    this.InitConnection();
-                }
-                return this._connection;
-            }
-            set {
-                this._connection = value;
-                if ((this.Adapter.InsertCommand != null)) {
-                    this.Adapter.InsertCommand.Connection = value;
-                }
-                if ((this.Adapter.DeleteCommand != null)) {
-                    this.Adapter.DeleteCommand.Connection = value;
-                }
-                if ((this.Adapter.UpdateCommand != null)) {
-                    this.Adapter.UpdateCommand.Connection = value;
-                }
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    if ((this.CommandCollection[i] != null)) {
-                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
-                    }
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.SqlClient.SqlTransaction Transaction {
-            get {
-                return this._transaction;
-            }
-            set {
-                this._transaction = value;
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    this.CommandCollection[i].Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.DeleteCommand != null))) {
-                    this.Adapter.DeleteCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.InsertCommand != null))) {
-                    this.Adapter.InsertCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.UpdateCommand != null))) {
-                    this.Adapter.UpdateCommand.Transaction = this._transaction;
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
-            get {
-                if ((this._commandCollection == null)) {
-                    this.InitCommandCollection();
-                }
-                return this._commandCollection;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public bool ClearBeforeFill {
-            get {
-                return this._clearBeforeFill;
-            }
-            set {
-                this._clearBeforeFill = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitAdapter() {
-            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
-            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
-            tableMapping.SourceTable = "Table";
-            tableMapping.DataSetTable = "View_CulvertsDitches";
-            tableMapping.ColumnMappings.Add("Node_No", "Node_No");
-            tableMapping.ColumnMappings.Add("LPO", "LPO");
-            tableMapping.ColumnMappings.Add("Shape", "Shape");
-            tableMapping.ColumnMappings.Add("Pipe_D", "Pipe_D");
-            tableMapping.ColumnMappings.Add("CulvDepth", "CulvDepth");
-            tableMapping.ColumnMappings.Add("CulvMaterial", "CulvMaterial");
-            tableMapping.ColumnMappings.Add("CulvPhoto_ID", "CulvPhoto_ID");
-            tableMapping.ColumnMappings.Add("DitchDepth", "DitchDepth");
-            tableMapping.ColumnMappings.Add("WidthTop", "WidthTop");
-            tableMapping.ColumnMappings.Add("WidthBottom", "WidthBottom");
-            tableMapping.ColumnMappings.Add("DitchMaterial", "DitchMaterial");
-            tableMapping.ColumnMappings.Add("DitchPhoto_ID", "DitchPhoto_ID");
-            this._adapter.TableMappings.Add(tableMapping);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitConnection() {
-            this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::StormwaterInterface.Properties.Settings.Default.FieldWorkDBConnectionString;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
-            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
-            this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT Node_No, LPO, Shape, Pipe_D, CulvDepth, CulvMaterial, CulvPhoto_ID, DitchD" +
-                "epth, WidthTop, WidthBottom, DitchMaterial, DitchPhoto_ID FROM dbo.View_Culverts" +
-                "Ditches";
-            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(FieldWorkDBDataSet.View_CulvertsDitchesDataTable dataTable) {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            if ((this.ClearBeforeFill == true)) {
-                dataTable.Clear();
-            }
-            int returnValue = this.Adapter.Fill(dataTable);
-            return returnValue;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual FieldWorkDBDataSet.View_CulvertsDitchesDataTable GetData() {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            FieldWorkDBDataSet.View_CulvertsDitchesDataTable dataTable = new FieldWorkDBDataSet.View_CulvertsDitchesDataTable();
-            this.Adapter.Fill(dataTable);
-            return dataTable;
-        }
-    }
     
     /// <summary>
     ///Represents the connection and commands used to retrieve and save data.
@@ -3804,34 +13979,21 @@ WHERE Node_No like @Node_No ORDER BY EvaluatorPageID)
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MapPage", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MapPage", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [EvaluatorPage] SET [Watershed] = @Watershed, [Subwatershed] = @Subwatershed, [Date] = @Date, [Evaluator] = @Evaluator, [MapNo] = @MapNo, [GPS] = @GPS, [Weather] = @Weather, [Comments] = @Comments, [MapPage] = @MapPage WHERE (([EvaluatorPageID] = @Original_EvaluatorPageID) AND ((@IsNull_Watershed = 1 AND [Watershed] IS NULL) OR ([Watershed] = @Original_Watershed)) AND ((@IsNull_Subwatershed = 1 AND [Subwatershed] IS NULL) OR ([Subwatershed] = @Original_Subwatershed)) AND ((@IsNull_Date = 1 AND [Date] IS NULL) OR ([Date] = @Original_Date)) AND ((@IsNull_Evaluator = 1 AND [Evaluator] IS NULL) OR ([Evaluator] = @Original_Evaluator)) AND ((@IsNull_MapNo = 1 AND [MapNo] IS NULL) OR ([MapNo] = @Original_MapNo)) AND ((@IsNull_GPS = 1 AND [GPS] IS NULL) OR ([GPS] = @Original_GPS)) AND ((@IsNull_Weather = 1 AND [Weather] IS NULL) OR ([Weather] = @Original_Weather)) AND ((@IsNull_MapPage = 1 AND [MapPage] IS NULL) OR ([MapPage] = @Original_MapPage)))";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE       EvaluatorPage
+SET                Watershed = @Watershed, Subwatershed = @Subwatershed, Date = @Date, Evaluator = @Evaluator, MapNo = @MapNo, GPS = @GPS, Weather = @Weather, Comments = @Comments, 
+                         MapPage = @MapPage
+WHERE        (EvaluatorPageID = @Original_EvaluatorPageID)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Watershed", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Watershed", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Subwatershed", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Subwatershed", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Date", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Date", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Evaluator", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Evaluator", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MapNo", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MapNo", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@GPS", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "GPS", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Weather", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Weather", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Comments", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Comments", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MapPage", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MapPage", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_EvaluatorPageID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "EvaluatorPageID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Watershed", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Watershed", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Watershed", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Watershed", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Subwatershed", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Subwatershed", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Subwatershed", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Subwatershed", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Date", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Date", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Date", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Date", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Evaluator", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Evaluator", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Evaluator", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Evaluator", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_MapNo", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MapNo", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MapNo", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MapNo", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_GPS", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "GPS", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_GPS", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "GPS", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Weather", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Weather", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Weather", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Weather", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_MapPage", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MapPage", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_MapPage", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "MapPage", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Watershed", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "Watershed", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Subwatershed", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "Subwatershed", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Date", global::System.Data.SqlDbType.DateTime, 8, global::System.Data.ParameterDirection.Input, 0, 0, "Date", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Evaluator", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "Evaluator", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MapNo", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "MapNo", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@GPS", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "GPS", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Weather", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "Weather", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Comments", global::System.Data.SqlDbType.NVarChar, 2147483647, global::System.Data.ParameterDirection.Input, 0, 0, "Comments", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@MapPage", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "MapPage", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_EvaluatorPageID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "EvaluatorPageID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4060,25 +14222,7 @@ WHERE Node_No like @Node_No ORDER BY EvaluatorPageID)
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(
-                    string Watershed, 
-                    string Subwatershed, 
-                    global::System.Nullable<global::System.DateTime> Date, 
-                    string Evaluator, 
-                    global::System.Nullable<int> MapNo, 
-                    string GPS, 
-                    string Weather, 
-                    string Comments, 
-                    global::System.Nullable<int> MapPage, 
-                    int Original_EvaluatorPageID, 
-                    string Original_Watershed, 
-                    string Original_Subwatershed, 
-                    global::System.Nullable<global::System.DateTime> Original_Date, 
-                    string Original_Evaluator, 
-                    global::System.Nullable<int> Original_MapNo, 
-                    string Original_GPS, 
-                    string Original_Weather, 
-                    global::System.Nullable<int> Original_MapPage) {
+        public virtual int Update(string Watershed, string Subwatershed, global::System.Nullable<global::System.DateTime> Date, string Evaluator, global::System.Nullable<int> MapNo, string GPS, string Weather, string Comments, global::System.Nullable<int> MapPage, int Original_EvaluatorPageID) {
             if ((Watershed == null)) {
                 this.Adapter.UpdateCommand.Parameters[0].Value = global::System.DBNull.Value;
             }
@@ -4134,70 +14278,6 @@ WHERE Node_No like @Node_No ORDER BY EvaluatorPageID)
                 this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
             }
             this.Adapter.UpdateCommand.Parameters[9].Value = ((int)(Original_EvaluatorPageID));
-            if ((Original_Watershed == null)) {
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[11].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[11].Value = ((string)(Original_Watershed));
-            }
-            if ((Original_Subwatershed == null)) {
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[13].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[13].Value = ((string)(Original_Subwatershed));
-            }
-            if ((Original_Date.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[15].Value = ((System.DateTime)(Original_Date.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[15].Value = global::System.DBNull.Value;
-            }
-            if ((Original_Evaluator == null)) {
-                this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[17].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[17].Value = ((string)(Original_Evaluator));
-            }
-            if ((Original_MapNo.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[18].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[19].Value = ((int)(Original_MapNo.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[18].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[19].Value = global::System.DBNull.Value;
-            }
-            if ((Original_GPS == null)) {
-                this.Adapter.UpdateCommand.Parameters[20].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[21].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[20].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[21].Value = ((string)(Original_GPS));
-            }
-            if ((Original_Weather == null)) {
-                this.Adapter.UpdateCommand.Parameters[22].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[23].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[22].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[23].Value = ((string)(Original_Weather));
-            }
-            if ((Original_MapPage.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[24].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[25].Value = ((int)(Original_MapPage.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[24].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[25].Value = global::System.DBNull.Value;
-            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -4212,6 +14292,1931 @@ WHERE Node_No like @Node_No ORDER BY EvaluatorPageID)
                     this.Adapter.UpdateCommand.Connection.Close();
                 }
             }
+        }
+    }
+    
+    /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class _VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6TableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::System.Data.SqlClient.SqlConnection _connection;
+        
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public _VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6TableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6";
+            tableMapping.ColumnMappings.Add("MLinkID", "MLinkID");
+            tableMapping.ColumnMappings.Add("CompKey", "CompKey");
+            tableMapping.ColumnMappings.Add("Node_No", "Node_No");
+            tableMapping.ColumnMappings.Add("OldShape", "OldShape");
+            tableMapping.ColumnMappings.Add("NewShape", "NewShape");
+            tableMapping.ColumnMappings.Add("OldDiameter", "OldDiameter");
+            tableMapping.ColumnMappings.Add("NewDiameter", "NewDiameter");
+            tableMapping.ColumnMappings.Add("UnobstructedHeight", "UnobstructedHeight");
+            tableMapping.ColumnMappings.Add("OldMaterial", "OldMaterial");
+            tableMapping.ColumnMappings.Add("NewMaterial", "NewMaterial");
+            tableMapping.ColumnMappings.Add("EvaluatorPageID", "EvaluatorPageID");
+            tableMapping.ColumnMappings.Add("Watershed", "Watershed");
+            tableMapping.ColumnMappings.Add("Subwatershed", "Subwatershed");
+            tableMapping.ColumnMappings.Add("Date", "Date");
+            tableMapping.ColumnMappings.Add("Evaluator", "Evaluator");
+            tableMapping.ColumnMappings.Add("MapNo", "MapNo");
+            tableMapping.ColumnMappings.Add("MapPage", "MapPage");
+            this._adapter.TableMappings.Add(tableMapping);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = global::StormwaterInterface.Properties.Settings.Default.FieldWorkDBConnectionString;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = @"SELECT MLinkID, CompKey, Node_No, OldShape, NewShape, OldDiameter, NewDiameter, UnobstructedHeight, OldMaterial, NewMaterial, EvaluatorPageID, Watershed, Subwatershed, Date, Evaluator, MapNo, MapPage FROM ModelAdmin.[_VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6]";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(FieldWorkDBDataSet._VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6DataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual FieldWorkDBDataSet._VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6DataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            FieldWorkDBDataSet._VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6DataTable dataTable = new FieldWorkDBDataSet._VSI_ComparableMstLinkCulvertsNewDepthDeltaOldDepthGT6DataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+    }
+    
+    /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class _VSI_ComparableMstLinkCulvertsNewDiameterNotStandardTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::System.Data.SqlClient.SqlConnection _connection;
+        
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public _VSI_ComparableMstLinkCulvertsNewDiameterNotStandardTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard";
+            tableMapping.ColumnMappings.Add("MLinkID", "MLinkID");
+            tableMapping.ColumnMappings.Add("CompKey", "CompKey");
+            tableMapping.ColumnMappings.Add("Node_No", "Node_No");
+            tableMapping.ColumnMappings.Add("OldShape", "OldShape");
+            tableMapping.ColumnMappings.Add("NewShape", "NewShape");
+            tableMapping.ColumnMappings.Add("OldDiameter", "OldDiameter");
+            tableMapping.ColumnMappings.Add("NewDiameter", "NewDiameter");
+            tableMapping.ColumnMappings.Add("UnobstructedHeight", "UnobstructedHeight");
+            tableMapping.ColumnMappings.Add("OldMaterial", "OldMaterial");
+            tableMapping.ColumnMappings.Add("NewMaterial", "NewMaterial");
+            tableMapping.ColumnMappings.Add("EvaluatorPageID", "EvaluatorPageID");
+            tableMapping.ColumnMappings.Add("Watershed", "Watershed");
+            tableMapping.ColumnMappings.Add("Subwatershed", "Subwatershed");
+            tableMapping.ColumnMappings.Add("Date", "Date");
+            tableMapping.ColumnMappings.Add("Evaluator", "Evaluator");
+            tableMapping.ColumnMappings.Add("MapNo", "MapNo");
+            tableMapping.ColumnMappings.Add("MapPage", "MapPage");
+            this._adapter.TableMappings.Add(tableMapping);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = global::StormwaterInterface.Properties.Settings.Default.FieldWorkDBConnectionString;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = @"SELECT MLinkID, CompKey, Node_No, OldShape, NewShape, OldDiameter, NewDiameter, UnobstructedHeight, OldMaterial, NewMaterial, EvaluatorPageID, Watershed, Subwatershed, Date, Evaluator, MapNo, MapPage FROM ModelAdmin.[_VSI_ComparableMstLinkCulvertsNewDiameterNotStandard]";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(FieldWorkDBDataSet._VSI_ComparableMstLinkCulvertsNewDiameterNotStandardDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual FieldWorkDBDataSet._VSI_ComparableMstLinkCulvertsNewDiameterNotStandardDataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            FieldWorkDBDataSet._VSI_ComparableMstLinkCulvertsNewDiameterNotStandardDataTable dataTable = new FieldWorkDBDataSet._VSI_ComparableMstLinkCulvertsNewDiameterNotStandardDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+    }
+    
+    /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class _VSI_ComparableMStLinkCulvertsTransferableTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::System.Data.SqlClient.SqlConnection _connection;
+        
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public _VSI_ComparableMStLinkCulvertsTransferableTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "_VSI_ComparableMStLinkCulvertsTransferable";
+            tableMapping.ColumnMappings.Add("MLinkID", "MLinkID");
+            tableMapping.ColumnMappings.Add("CompKey", "CompKey");
+            tableMapping.ColumnMappings.Add("Node_No", "Node_No");
+            tableMapping.ColumnMappings.Add("OldShape", "OldShape");
+            tableMapping.ColumnMappings.Add("NewShape", "NewShape");
+            tableMapping.ColumnMappings.Add("OldDiameter", "OldDiameter");
+            tableMapping.ColumnMappings.Add("NewDiameter", "NewDiameter");
+            tableMapping.ColumnMappings.Add("UnobstructedHeight", "UnobstructedHeight");
+            tableMapping.ColumnMappings.Add("OldMaterial", "OldMaterial");
+            tableMapping.ColumnMappings.Add("NewMaterial", "NewMaterial");
+            tableMapping.ColumnMappings.Add("EvaluatorPageID", "EvaluatorPageID");
+            tableMapping.ColumnMappings.Add("Watershed", "Watershed");
+            tableMapping.ColumnMappings.Add("Subwatershed", "Subwatershed");
+            tableMapping.ColumnMappings.Add("Date", "Date");
+            tableMapping.ColumnMappings.Add("Evaluator", "Evaluator");
+            tableMapping.ColumnMappings.Add("MapNo", "MapNo");
+            tableMapping.ColumnMappings.Add("MapPage", "MapPage");
+            this._adapter.TableMappings.Add(tableMapping);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = global::StormwaterInterface.Properties.Settings.Default.FieldWorkDBConnectionString;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = @"SELECT MLinkID, CompKey, Node_No, OldShape, NewShape, OldDiameter, NewDiameter, UnobstructedHeight, OldMaterial, NewMaterial, EvaluatorPageID, Watershed, Subwatershed, Date, Evaluator, MapNo, MapPage FROM ModelAdmin.[_VSI_ComparableMStLinkCulvertsTransferable]";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(FieldWorkDBDataSet._VSI_ComparableMStLinkCulvertsTransferableDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual FieldWorkDBDataSet._VSI_ComparableMStLinkCulvertsTransferableDataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            FieldWorkDBDataSet._VSI_ComparableMStLinkCulvertsTransferableDataTable dataTable = new FieldWorkDBDataSet._VSI_ComparableMStLinkCulvertsTransferableDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+    }
+    
+    /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class _VSI_ComparableMstLinkDitchesTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::System.Data.SqlClient.SqlConnection _connection;
+        
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public _VSI_ComparableMstLinkDitchesTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "_VSI_ComparableMstLinkDitches";
+            tableMapping.ColumnMappings.Add("MLinkID", "MLinkID");
+            tableMapping.ColumnMappings.Add("CompKey", "CompKey");
+            tableMapping.ColumnMappings.Add("Node_No", "Node_No");
+            tableMapping.ColumnMappings.Add("OldShape", "OldShape");
+            tableMapping.ColumnMappings.Add("OldHeight", "OldHeight");
+            tableMapping.ColumnMappings.Add("OldWidth", "OldWidth");
+            tableMapping.ColumnMappings.Add("NewDepth", "NewDepth");
+            tableMapping.ColumnMappings.Add("NewTopWidth", "NewTopWidth");
+            tableMapping.ColumnMappings.Add("NewBottomWidth", "NewBottomWidth");
+            tableMapping.ColumnMappings.Add("OldMaterial", "OldMaterial");
+            tableMapping.ColumnMappings.Add("NewMaterial", "NewMaterial");
+            tableMapping.ColumnMappings.Add("EvaluatorPageID", "EvaluatorPageID");
+            tableMapping.ColumnMappings.Add("Watershed", "Watershed");
+            tableMapping.ColumnMappings.Add("Subwatershed", "Subwatershed");
+            tableMapping.ColumnMappings.Add("Date", "Date");
+            tableMapping.ColumnMappings.Add("Evaluator", "Evaluator");
+            tableMapping.ColumnMappings.Add("MapNo", "MapNo");
+            tableMapping.ColumnMappings.Add("MapPage", "MapPage");
+            this._adapter.TableMappings.Add(tableMapping);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = global::StormwaterInterface.Properties.Settings.Default.FieldWorkDBConnectionString;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = "SELECT MLinkID, CompKey, Node_No, OldShape, OldHeight, OldWidth, NewDepth, NewTop" +
+                "Width, NewBottomWidth, OldMaterial, NewMaterial, EvaluatorPageID, Watershed, Sub" +
+                "watershed, Date, Evaluator, MapNo, MapPage FROM ModelAdmin.[_VSI_ComparableMstLi" +
+                "nkDitches]";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(FieldWorkDBDataSet._VSI_ComparableMstLinkDitchesDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual FieldWorkDBDataSet._VSI_ComparableMstLinkDitchesDataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            FieldWorkDBDataSet._VSI_ComparableMstLinkDitchesDataTable dataTable = new FieldWorkDBDataSet._VSI_ComparableMstLinkDitchesDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+    }
+    
+    /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class _VSI_ComparableMstLinkDitchesNewDepthLT1TableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::System.Data.SqlClient.SqlConnection _connection;
+        
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public _VSI_ComparableMstLinkDitchesNewDepthLT1TableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "_VSI_ComparableMstLinkDitchesNewDepthLT1";
+            tableMapping.ColumnMappings.Add("MLinkID", "MLinkID");
+            tableMapping.ColumnMappings.Add("CompKey", "CompKey");
+            tableMapping.ColumnMappings.Add("Node_No", "Node_No");
+            tableMapping.ColumnMappings.Add("OldShape", "OldShape");
+            tableMapping.ColumnMappings.Add("OldWidth", "OldWidth");
+            tableMapping.ColumnMappings.Add("NewDepth", "NewDepth");
+            tableMapping.ColumnMappings.Add("NewTopWidth", "NewTopWidth");
+            tableMapping.ColumnMappings.Add("NewBottomWidth", "NewBottomWidth");
+            tableMapping.ColumnMappings.Add("OldMaterial", "OldMaterial");
+            tableMapping.ColumnMappings.Add("NewMaterial", "NewMaterial");
+            tableMapping.ColumnMappings.Add("EvaluatorPageID", "EvaluatorPageID");
+            tableMapping.ColumnMappings.Add("Watershed", "Watershed");
+            tableMapping.ColumnMappings.Add("Subwatershed", "Subwatershed");
+            tableMapping.ColumnMappings.Add("Date", "Date");
+            tableMapping.ColumnMappings.Add("Evaluator", "Evaluator");
+            tableMapping.ColumnMappings.Add("MapNo", "MapNo");
+            tableMapping.ColumnMappings.Add("MapPage", "MapPage");
+            this._adapter.TableMappings.Add(tableMapping);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = global::StormwaterInterface.Properties.Settings.Default.FieldWorkDBConnectionString;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = "SELECT MLinkID, CompKey, Node_No, OldShape, OldWidth, NewDepth, NewTopWidth, NewB" +
+                "ottomWidth, OldMaterial, NewMaterial, EvaluatorPageID, Watershed, Subwatershed, " +
+                "Date, Evaluator, MapNo, MapPage FROM ModelAdmin.[_VSI_ComparableMstLinkDitchesNe" +
+                "wDepthLT1]";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(FieldWorkDBDataSet._VSI_ComparableMstLinkDitchesNewDepthLT1DataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual FieldWorkDBDataSet._VSI_ComparableMstLinkDitchesNewDepthLT1DataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            FieldWorkDBDataSet._VSI_ComparableMstLinkDitchesNewDepthLT1DataTable dataTable = new FieldWorkDBDataSet._VSI_ComparableMstLinkDitchesNewDepthLT1DataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+    }
+    
+    /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class _VSI_ComparableMstLinkDItchesNoDSNodeTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::System.Data.SqlClient.SqlConnection _connection;
+        
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public _VSI_ComparableMstLinkDItchesNoDSNodeTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "_VSI_ComparableMstLinkDItchesNoDSNode";
+            tableMapping.ColumnMappings.Add("MLinkID", "MLinkID");
+            tableMapping.ColumnMappings.Add("CompKey", "CompKey");
+            tableMapping.ColumnMappings.Add("Node_No", "Node_No");
+            tableMapping.ColumnMappings.Add("OldShape", "OldShape");
+            tableMapping.ColumnMappings.Add("OldWidth", "OldWidth");
+            tableMapping.ColumnMappings.Add("NewDepth", "NewDepth");
+            tableMapping.ColumnMappings.Add("NewTopWidth", "NewTopWidth");
+            tableMapping.ColumnMappings.Add("NewBottomWidth", "NewBottomWidth");
+            tableMapping.ColumnMappings.Add("OldMaterial", "OldMaterial");
+            tableMapping.ColumnMappings.Add("NewMaterial", "NewMaterial");
+            tableMapping.ColumnMappings.Add("EvaluatorPageID", "EvaluatorPageID");
+            tableMapping.ColumnMappings.Add("Watershed", "Watershed");
+            tableMapping.ColumnMappings.Add("Subwatershed", "Subwatershed");
+            tableMapping.ColumnMappings.Add("Date", "Date");
+            tableMapping.ColumnMappings.Add("Evaluator", "Evaluator");
+            tableMapping.ColumnMappings.Add("MapNo", "MapNo");
+            tableMapping.ColumnMappings.Add("MapPage", "MapPage");
+            this._adapter.TableMappings.Add(tableMapping);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = global::StormwaterInterface.Properties.Settings.Default.FieldWorkDBConnectionString;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = "SELECT MLinkID, CompKey, Node_No, OldShape, OldWidth, NewDepth, NewTopWidth, NewB" +
+                "ottomWidth, OldMaterial, NewMaterial, EvaluatorPageID, Watershed, Subwatershed, " +
+                "Date, Evaluator, MapNo, MapPage FROM ModelAdmin.[_VSI_ComparableMstLinkDItchesNo" +
+                "DSNode]";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(FieldWorkDBDataSet._VSI_ComparableMstLinkDItchesNoDSNodeDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual FieldWorkDBDataSet._VSI_ComparableMstLinkDItchesNoDSNodeDataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            FieldWorkDBDataSet._VSI_ComparableMstLinkDItchesNoDSNodeDataTable dataTable = new FieldWorkDBDataSet._VSI_ComparableMstLinkDItchesNoDSNodeDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+    }
+    
+    /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class _VSI_ComparableMstLinkDitchesNoUSNodeTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::System.Data.SqlClient.SqlConnection _connection;
+        
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public _VSI_ComparableMstLinkDitchesNoUSNodeTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "_VSI_ComparableMstLinkDitchesNoUSNode";
+            tableMapping.ColumnMappings.Add("MLinkID", "MLinkID");
+            tableMapping.ColumnMappings.Add("CompKey", "CompKey");
+            tableMapping.ColumnMappings.Add("Node_No", "Node_No");
+            tableMapping.ColumnMappings.Add("OldShape", "OldShape");
+            tableMapping.ColumnMappings.Add("OldWidth", "OldWidth");
+            tableMapping.ColumnMappings.Add("NewDepth", "NewDepth");
+            tableMapping.ColumnMappings.Add("NewTopWidth", "NewTopWidth");
+            tableMapping.ColumnMappings.Add("NewBottomWidth", "NewBottomWidth");
+            tableMapping.ColumnMappings.Add("OldMaterial", "OldMaterial");
+            tableMapping.ColumnMappings.Add("NewMaterial", "NewMaterial");
+            tableMapping.ColumnMappings.Add("EvaluatorPageID", "EvaluatorPageID");
+            tableMapping.ColumnMappings.Add("Watershed", "Watershed");
+            tableMapping.ColumnMappings.Add("Subwatershed", "Subwatershed");
+            tableMapping.ColumnMappings.Add("Date", "Date");
+            tableMapping.ColumnMappings.Add("Evaluator", "Evaluator");
+            tableMapping.ColumnMappings.Add("MapNo", "MapNo");
+            tableMapping.ColumnMappings.Add("MapPage", "MapPage");
+            this._adapter.TableMappings.Add(tableMapping);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = global::StormwaterInterface.Properties.Settings.Default.FieldWorkDBConnectionString;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = "SELECT MLinkID, CompKey, Node_No, OldShape, OldWidth, NewDepth, NewTopWidth, NewB" +
+                "ottomWidth, OldMaterial, NewMaterial, EvaluatorPageID, Watershed, Subwatershed, " +
+                "Date, Evaluator, MapNo, MapPage FROM ModelAdmin.[_VSI_ComparableMstLinkDitchesNo" +
+                "USNode]";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(FieldWorkDBDataSet._VSI_ComparableMstLinkDitchesNoUSNodeDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual FieldWorkDBDataSet._VSI_ComparableMstLinkDitchesNoUSNodeDataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            FieldWorkDBDataSet._VSI_ComparableMstLinkDitchesNoUSNodeDataTable dataTable = new FieldWorkDBDataSet._VSI_ComparableMstLinkDitchesNoUSNodeDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+    }
+    
+    /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class _VSI_ComparableMstLinkDitchesTransferableTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::System.Data.SqlClient.SqlConnection _connection;
+        
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public _VSI_ComparableMstLinkDitchesTransferableTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "_VSI_ComparableMstLinkDitchesTransferable";
+            tableMapping.ColumnMappings.Add("MLinkID", "MLinkID");
+            tableMapping.ColumnMappings.Add("CompKey", "CompKey");
+            tableMapping.ColumnMappings.Add("Node_No", "Node_No");
+            tableMapping.ColumnMappings.Add("OldShape", "OldShape");
+            tableMapping.ColumnMappings.Add("OldHeight", "OldHeight");
+            tableMapping.ColumnMappings.Add("OldWidth", "OldWidth");
+            tableMapping.ColumnMappings.Add("NewDepth", "NewDepth");
+            tableMapping.ColumnMappings.Add("NewTopWidth", "NewTopWidth");
+            tableMapping.ColumnMappings.Add("NewBottomWidth", "NewBottomWidth");
+            tableMapping.ColumnMappings.Add("OldMaterial", "OldMaterial");
+            tableMapping.ColumnMappings.Add("NewMaterial", "NewMaterial");
+            tableMapping.ColumnMappings.Add("EvaluatorPageID", "EvaluatorPageID");
+            tableMapping.ColumnMappings.Add("Watershed", "Watershed");
+            tableMapping.ColumnMappings.Add("Subwatershed", "Subwatershed");
+            tableMapping.ColumnMappings.Add("Date", "Date");
+            tableMapping.ColumnMappings.Add("Evaluator", "Evaluator");
+            tableMapping.ColumnMappings.Add("MapNo", "MapNo");
+            tableMapping.ColumnMappings.Add("MapPage", "MapPage");
+            this._adapter.TableMappings.Add(tableMapping);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = global::StormwaterInterface.Properties.Settings.Default.FieldWorkDBConnectionString;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = @"SELECT MLinkID, CompKey, Node_No, OldShape, OldHeight, OldWidth, NewDepth, NewTopWidth, NewBottomWidth, OldMaterial, NewMaterial, EvaluatorPageID, Watershed, Subwatershed, Date, Evaluator, MapNo, MapPage FROM ModelAdmin.[_VSI_ComparableMstLinkDitchesTransferable]";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(FieldWorkDBDataSet._VSI_ComparableMstLinkDitchesTransferableDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual FieldWorkDBDataSet._VSI_ComparableMstLinkDitchesTransferableDataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            FieldWorkDBDataSet._VSI_ComparableMstLinkDitchesTransferableDataTable dataTable = new FieldWorkDBDataSet._VSI_ComparableMstLinkDitchesTransferableDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+    }
+    
+    /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class _VSI_ComparableMstLinkDitchesWidthTopLTBottomTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::System.Data.SqlClient.SqlConnection _connection;
+        
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public _VSI_ComparableMstLinkDitchesWidthTopLTBottomTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "_VSI_ComparableMstLinkDitchesWidthTopLTBottom";
+            tableMapping.ColumnMappings.Add("MLinkID", "MLinkID");
+            tableMapping.ColumnMappings.Add("CompKey", "CompKey");
+            tableMapping.ColumnMappings.Add("Node_No", "Node_No");
+            tableMapping.ColumnMappings.Add("OldShape", "OldShape");
+            tableMapping.ColumnMappings.Add("OldWidth", "OldWidth");
+            tableMapping.ColumnMappings.Add("NewDepth", "NewDepth");
+            tableMapping.ColumnMappings.Add("NewTopWidth", "NewTopWidth");
+            tableMapping.ColumnMappings.Add("NewBottomWidth", "NewBottomWidth");
+            tableMapping.ColumnMappings.Add("OldMaterial", "OldMaterial");
+            tableMapping.ColumnMappings.Add("NewMaterial", "NewMaterial");
+            tableMapping.ColumnMappings.Add("EvaluatorPageID", "EvaluatorPageID");
+            tableMapping.ColumnMappings.Add("Watershed", "Watershed");
+            tableMapping.ColumnMappings.Add("Subwatershed", "Subwatershed");
+            tableMapping.ColumnMappings.Add("Date", "Date");
+            tableMapping.ColumnMappings.Add("Evaluator", "Evaluator");
+            tableMapping.ColumnMappings.Add("MapNo", "MapNo");
+            tableMapping.ColumnMappings.Add("MapPage", "MapPage");
+            this._adapter.TableMappings.Add(tableMapping);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = global::StormwaterInterface.Properties.Settings.Default.FieldWorkDBConnectionString;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = @"SELECT MLinkID, CompKey, Node_No, OldShape, OldWidth, NewDepth, NewTopWidth, NewBottomWidth, OldMaterial, NewMaterial, EvaluatorPageID, Watershed, Subwatershed, Date, Evaluator, MapNo, MapPage FROM ModelAdmin.[_VSI_ComparableMstLinkDitchesWidthTopLTBottom]";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(FieldWorkDBDataSet._VSI_ComparableMstLinkDitchesWidthTopLTBottomDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual FieldWorkDBDataSet._VSI_ComparableMstLinkDitchesWidthTopLTBottomDataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            FieldWorkDBDataSet._VSI_ComparableMstLinkDitchesWidthTopLTBottomDataTable dataTable = new FieldWorkDBDataSet._VSI_ComparableMstLinkDitchesWidthTopLTBottomDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+    }
+    
+    /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class _VSI_DifficultCulvertsTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::System.Data.SqlClient.SqlConnection _connection;
+        
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public _VSI_DifficultCulvertsTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "_VSI_DifficultCulverts";
+            tableMapping.ColumnMappings.Add("PrimaryKey", "PrimaryKey");
+            tableMapping.ColumnMappings.Add("Position", "Position");
+            tableMapping.ColumnMappings.Add("Node_No", "Node_No");
+            tableMapping.ColumnMappings.Add("LPO", "LPO");
+            tableMapping.ColumnMappings.Add("Shape", "Shape");
+            tableMapping.ColumnMappings.Add("Pipe_D", "Pipe_D");
+            tableMapping.ColumnMappings.Add("CulvDepth", "CulvDepth");
+            tableMapping.ColumnMappings.Add("CulvMaterial", "CulvMaterial");
+            tableMapping.ColumnMappings.Add("CulvPhoto_ID", "CulvPhoto_ID");
+            tableMapping.ColumnMappings.Add("DitchDepth", "DitchDepth");
+            tableMapping.ColumnMappings.Add("WidthTop", "WidthTop");
+            tableMapping.ColumnMappings.Add("WidthBottom", "WidthBottom");
+            tableMapping.ColumnMappings.Add("DitchMaterial", "DitchMaterial");
+            tableMapping.ColumnMappings.Add("DitchPhoto_ID", "DitchPhoto_ID");
+            tableMapping.ColumnMappings.Add("EvaluatorPageID", "EvaluatorPageID");
+            tableMapping.ColumnMappings.Add("Watershed", "Watershed");
+            tableMapping.ColumnMappings.Add("Subwatershed", "Subwatershed");
+            tableMapping.ColumnMappings.Add("Date", "Date");
+            tableMapping.ColumnMappings.Add("Evaluator", "Evaluator");
+            tableMapping.ColumnMappings.Add("MapNo", "MapNo");
+            tableMapping.ColumnMappings.Add("MapPage", "MapPage");
+            this._adapter.TableMappings.Add(tableMapping);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = global::StormwaterInterface.Properties.Settings.Default.FieldWorkDBConnectionString;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = @"SELECT PrimaryKey, Position, Node_No, LPO, Shape, Pipe_D, CulvDepth, CulvMaterial, CulvPhoto_ID, DitchDepth, WidthTop, WidthBottom, DitchMaterial, DitchPhoto_ID, EvaluatorPageID, Watershed, Subwatershed, Date, Evaluator, MapNo, MapPage FROM ModelAdmin.[_VSI_DifficultCulverts]";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(FieldWorkDBDataSet._VSI_DifficultCulvertsDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual FieldWorkDBDataSet._VSI_DifficultCulvertsDataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            FieldWorkDBDataSet._VSI_DifficultCulvertsDataTable dataTable = new FieldWorkDBDataSet._VSI_DifficultCulvertsDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+    }
+    
+    /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class _VSI_DifficultDitchesTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::System.Data.SqlClient.SqlConnection _connection;
+        
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public _VSI_DifficultDitchesTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "_VSI_DifficultDitches";
+            tableMapping.ColumnMappings.Add("PrimaryKey", "PrimaryKey");
+            tableMapping.ColumnMappings.Add("Position", "Position");
+            tableMapping.ColumnMappings.Add("Node_No", "Node_No");
+            tableMapping.ColumnMappings.Add("LPO", "LPO");
+            tableMapping.ColumnMappings.Add("Shape", "Shape");
+            tableMapping.ColumnMappings.Add("Pipe_D", "Pipe_D");
+            tableMapping.ColumnMappings.Add("CulvDepth", "CulvDepth");
+            tableMapping.ColumnMappings.Add("CulvMaterial", "CulvMaterial");
+            tableMapping.ColumnMappings.Add("CulvPhoto_ID", "CulvPhoto_ID");
+            tableMapping.ColumnMappings.Add("DitchDepth", "DitchDepth");
+            tableMapping.ColumnMappings.Add("WidthTop", "WidthTop");
+            tableMapping.ColumnMappings.Add("WidthBottom", "WidthBottom");
+            tableMapping.ColumnMappings.Add("DitchMaterial", "DitchMaterial");
+            tableMapping.ColumnMappings.Add("DitchPhoto_ID", "DitchPhoto_ID");
+            tableMapping.ColumnMappings.Add("EvaluatorPageID", "EvaluatorPageID");
+            tableMapping.ColumnMappings.Add("Watershed", "Watershed");
+            tableMapping.ColumnMappings.Add("Subwatershed", "Subwatershed");
+            tableMapping.ColumnMappings.Add("Date", "Date");
+            tableMapping.ColumnMappings.Add("Evaluator", "Evaluator");
+            tableMapping.ColumnMappings.Add("MapNo", "MapNo");
+            tableMapping.ColumnMappings.Add("MapPage", "MapPage");
+            this._adapter.TableMappings.Add(tableMapping);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = global::StormwaterInterface.Properties.Settings.Default.FieldWorkDBConnectionString;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = @"SELECT PrimaryKey, Position, Node_No, LPO, Shape, Pipe_D, CulvDepth, CulvMaterial, CulvPhoto_ID, DitchDepth, WidthTop, WidthBottom, DitchMaterial, DitchPhoto_ID, EvaluatorPageID, Watershed, Subwatershed, Date, Evaluator, MapNo, MapPage FROM ModelAdmin.[_VSI_DifficultDitches]";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(FieldWorkDBDataSet._VSI_DifficultDitchesDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual FieldWorkDBDataSet._VSI_DifficultDitchesDataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            FieldWorkDBDataSet._VSI_DifficultDitchesDataTable dataTable = new FieldWorkDBDataSet._VSI_DifficultDitchesDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
         }
     }
     
