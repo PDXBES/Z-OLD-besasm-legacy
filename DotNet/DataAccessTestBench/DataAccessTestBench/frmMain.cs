@@ -12,13 +12,13 @@ using SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor;
 
 namespace DataAccessTestBench
 {
-  public partial class Form1 : Form
+  public partial class frmMain : Form
   {
     private SystemsAnalysis.DataAccess.StormwaterControlsDataSet scDS;
 
     private RecommendedPlanReport rpReport;
 
-    public Form1()
+    public frmMain()
     {
       InitializeComponent();
 
