@@ -88,10 +88,13 @@
             this.labelPage = new System.Windows.Forms.Label();
             this.textBoxPage = new System.Windows.Forms.TextBox();
             this.ditchesCulvertsBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.viewCulvertsDitchesBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.view_CulvertsDitchesTableAdapter = new StormwaterInterface.FieldWorkDBDataSetTableAdapters.View_CulvertsDitchesTableAdapter();
             this.ditchesCulvertsTableAdapter = new StormwaterInterface.FieldWorkDBDataSetTableAdapters.DitchesCulvertsTableAdapter();
             this.evaluatorPageTableAdapter = new StormwaterInterface.FieldWorkDBDataSetTableAdapters.EvaluatorPageTableAdapter();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.ToolStripMenuItemFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItemExportComparativeList = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItemTools = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItemSearchByNodeNo = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.evaluatorPageBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fieldWorkDBDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -99,13 +102,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
             this.bindingNavigator1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ditchesCulvertsBindingSource1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.viewCulvertsDitchesBindingSource)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // textBoxWatershed
             // 
             this.textBoxWatershed.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.evaluatorPageBindingSource, "Watershed", true));
-            this.textBoxWatershed.Location = new System.Drawing.Point(93, 45);
+            this.textBoxWatershed.Location = new System.Drawing.Point(93, 33);
             this.textBoxWatershed.Name = "textBoxWatershed";
             this.textBoxWatershed.Size = new System.Drawing.Size(245, 20);
             this.textBoxWatershed.TabIndex = 1;
@@ -123,7 +126,7 @@
             // labelWatershed
             // 
             this.labelWatershed.AutoSize = true;
-            this.labelWatershed.Location = new System.Drawing.Point(12, 46);
+            this.labelWatershed.Location = new System.Drawing.Point(12, 34);
             this.labelWatershed.Name = "labelWatershed";
             this.labelWatershed.Size = new System.Drawing.Size(62, 13);
             this.labelWatershed.TabIndex = 1;
@@ -132,7 +135,7 @@
             // labelSubWatershed
             // 
             this.labelSubWatershed.AutoSize = true;
-            this.labelSubWatershed.Location = new System.Drawing.Point(365, 45);
+            this.labelSubWatershed.Location = new System.Drawing.Point(365, 33);
             this.labelSubWatershed.Name = "labelSubWatershed";
             this.labelSubWatershed.Size = new System.Drawing.Size(78, 13);
             this.labelSubWatershed.TabIndex = 3;
@@ -141,7 +144,7 @@
             // textBoxSubWatershed
             // 
             this.textBoxSubWatershed.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.evaluatorPageBindingSource, "Subwatershed", true));
-            this.textBoxSubWatershed.Location = new System.Drawing.Point(446, 44);
+            this.textBoxSubWatershed.Location = new System.Drawing.Point(446, 32);
             this.textBoxSubWatershed.Name = "textBoxSubWatershed";
             this.textBoxSubWatershed.Size = new System.Drawing.Size(245, 20);
             this.textBoxSubWatershed.TabIndex = 2;
@@ -149,7 +152,7 @@
             // labelDate
             // 
             this.labelDate.AutoSize = true;
-            this.labelDate.Location = new System.Drawing.Point(12, 72);
+            this.labelDate.Location = new System.Drawing.Point(12, 60);
             this.labelDate.Name = "labelDate";
             this.labelDate.Size = new System.Drawing.Size(33, 13);
             this.labelDate.TabIndex = 5;
@@ -158,7 +161,7 @@
             // textBoxDate
             // 
             this.textBoxDate.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.evaluatorPageBindingSource, "Date", true));
-            this.textBoxDate.Location = new System.Drawing.Point(93, 71);
+            this.textBoxDate.Location = new System.Drawing.Point(93, 59);
             this.textBoxDate.Name = "textBoxDate";
             this.textBoxDate.Size = new System.Drawing.Size(157, 20);
             this.textBoxDate.TabIndex = 4;
@@ -166,7 +169,7 @@
             // labelEvaluator
             // 
             this.labelEvaluator.AutoSize = true;
-            this.labelEvaluator.Location = new System.Drawing.Point(275, 73);
+            this.labelEvaluator.Location = new System.Drawing.Point(275, 61);
             this.labelEvaluator.Name = "labelEvaluator";
             this.labelEvaluator.Size = new System.Drawing.Size(55, 13);
             this.labelEvaluator.TabIndex = 7;
@@ -175,7 +178,7 @@
             // textBoxEvaluator
             // 
             this.textBoxEvaluator.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.evaluatorPageBindingSource, "Evaluator", true));
-            this.textBoxEvaluator.Location = new System.Drawing.Point(356, 72);
+            this.textBoxEvaluator.Location = new System.Drawing.Point(356, 60);
             this.textBoxEvaluator.Name = "textBoxEvaluator";
             this.textBoxEvaluator.Size = new System.Drawing.Size(154, 20);
             this.textBoxEvaluator.TabIndex = 5;
@@ -183,7 +186,7 @@
             // labelMapNo
             // 
             this.labelMapNo.AutoSize = true;
-            this.labelMapNo.Location = new System.Drawing.Point(562, 74);
+            this.labelMapNo.Location = new System.Drawing.Point(562, 62);
             this.labelMapNo.Name = "labelMapNo";
             this.labelMapNo.Size = new System.Drawing.Size(48, 13);
             this.labelMapNo.TabIndex = 9;
@@ -192,7 +195,7 @@
             // textBoxMapNo
             // 
             this.textBoxMapNo.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.evaluatorPageBindingSource, "MapNo", true));
-            this.textBoxMapNo.Location = new System.Drawing.Point(643, 73);
+            this.textBoxMapNo.Location = new System.Drawing.Point(643, 61);
             this.textBoxMapNo.Name = "textBoxMapNo";
             this.textBoxMapNo.Size = new System.Drawing.Size(154, 20);
             this.textBoxMapNo.TabIndex = 6;
@@ -200,7 +203,7 @@
             // labelGPS
             // 
             this.labelGPS.AutoSize = true;
-            this.labelGPS.Location = new System.Drawing.Point(12, 98);
+            this.labelGPS.Location = new System.Drawing.Point(12, 86);
             this.labelGPS.Name = "labelGPS";
             this.labelGPS.Size = new System.Drawing.Size(32, 13);
             this.labelGPS.TabIndex = 11;
@@ -209,7 +212,7 @@
             // textBoxGPS
             // 
             this.textBoxGPS.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.evaluatorPageBindingSource, "GPS", true));
-            this.textBoxGPS.Location = new System.Drawing.Point(93, 97);
+            this.textBoxGPS.Location = new System.Drawing.Point(93, 85);
             this.textBoxGPS.Name = "textBoxGPS";
             this.textBoxGPS.Size = new System.Drawing.Size(157, 20);
             this.textBoxGPS.TabIndex = 7;
@@ -217,7 +220,7 @@
             // labelWeather
             // 
             this.labelWeather.AutoSize = true;
-            this.labelWeather.Location = new System.Drawing.Point(12, 124);
+            this.labelWeather.Location = new System.Drawing.Point(12, 112);
             this.labelWeather.Name = "labelWeather";
             this.labelWeather.Size = new System.Drawing.Size(51, 13);
             this.labelWeather.TabIndex = 13;
@@ -226,7 +229,7 @@
             // textBox1
             // 
             this.textBox1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.evaluatorPageBindingSource, "Weather", true));
-            this.textBox1.Location = new System.Drawing.Point(93, 123);
+            this.textBox1.Location = new System.Drawing.Point(93, 111);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(157, 20);
             this.textBox1.TabIndex = 8;
@@ -234,7 +237,7 @@
             // labelCulvertsAndDitchesInformation
             // 
             this.labelCulvertsAndDitchesInformation.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.labelCulvertsAndDitchesInformation.Location = new System.Drawing.Point(56, 149);
+            this.labelCulvertsAndDitchesInformation.Location = new System.Drawing.Point(56, 137);
             this.labelCulvertsAndDitchesInformation.Name = "labelCulvertsAndDitchesInformation";
             this.labelCulvertsAndDitchesInformation.Size = new System.Drawing.Size(805, 26);
             this.labelCulvertsAndDitchesInformation.TabIndex = 14;
@@ -244,7 +247,7 @@
             // labelLocation
             // 
             this.labelLocation.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.labelLocation.Location = new System.Drawing.Point(56, 162);
+            this.labelLocation.Location = new System.Drawing.Point(56, 150);
             this.labelLocation.Name = "labelLocation";
             this.labelLocation.Size = new System.Drawing.Size(126, 24);
             this.labelLocation.TabIndex = 15;
@@ -253,7 +256,7 @@
             // labelDitches
             // 
             this.labelDitches.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.labelDitches.Location = new System.Drawing.Point(556, 162);
+            this.labelDitches.Location = new System.Drawing.Point(556, 150);
             this.labelDitches.Name = "labelDitches";
             this.labelDitches.Size = new System.Drawing.Size(305, 24);
             this.labelDitches.TabIndex = 18;
@@ -262,7 +265,7 @@
             // labelComments
             // 
             this.labelComments.AutoSize = true;
-            this.labelComments.Location = new System.Drawing.Point(12, 411);
+            this.labelComments.Location = new System.Drawing.Point(12, 399);
             this.labelComments.Name = "labelComments";
             this.labelComments.Size = new System.Drawing.Size(59, 13);
             this.labelComments.TabIndex = 34;
@@ -271,7 +274,7 @@
             // labelInfo
             // 
             this.labelInfo.AutoSize = true;
-            this.labelInfo.Location = new System.Drawing.Point(21, 392);
+            this.labelInfo.Location = new System.Drawing.Point(21, 380);
             this.labelInfo.Name = "labelInfo";
             this.labelInfo.Size = new System.Drawing.Size(243, 13);
             this.labelInfo.TabIndex = 35;
@@ -297,7 +300,7 @@
             this.ditchMaterialDataGridViewTextBoxColumn,
             this.ditchPhotoIDDataGridViewTextBoxColumn});
             this.dataGridView1.DataSource = this.ditchesCulvertsBindingSource;
-            this.dataGridView1.Location = new System.Drawing.Point(15, 178);
+            this.dataGridView1.Location = new System.Drawing.Point(15, 166);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(846, 211);
             this.dataGridView1.TabIndex = 36;
@@ -408,7 +411,7 @@
             // labelCulverts
             // 
             this.labelCulverts.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.labelCulverts.Location = new System.Drawing.Point(181, 162);
+            this.labelCulverts.Location = new System.Drawing.Point(181, 150);
             this.labelCulverts.Name = "labelCulverts";
             this.labelCulverts.Size = new System.Drawing.Size(376, 24);
             this.labelCulverts.TabIndex = 37;
@@ -417,7 +420,7 @@
             // textBox2
             // 
             this.textBox2.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.evaluatorPageBindingSource, "Comments", true));
-            this.textBox2.Location = new System.Drawing.Point(15, 427);
+            this.textBox2.Location = new System.Drawing.Point(15, 415);
             this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(846, 36);
@@ -425,7 +428,7 @@
             // 
             // buttonUpdateDatabase
             // 
-            this.buttonUpdateDatabase.Location = new System.Drawing.Point(730, 469);
+            this.buttonUpdateDatabase.Location = new System.Drawing.Point(730, 457);
             this.buttonUpdateDatabase.Name = "buttonUpdateDatabase";
             this.buttonUpdateDatabase.Size = new System.Drawing.Size(131, 22);
             this.buttonUpdateDatabase.TabIndex = 39;
@@ -439,6 +442,7 @@
             this.bindingNavigator1.BindingSource = this.evaluatorPageBindingSource;
             this.bindingNavigator1.CountItem = this.bindingNavigatorCountItem;
             this.bindingNavigator1.DeleteItem = null;
+            this.bindingNavigator1.Dock = System.Windows.Forms.DockStyle.None;
             this.bindingNavigator1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.bindingNavigator1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.bindingNavigatorMoveFirstItem,
@@ -452,7 +456,7 @@
             this.bindingNavigatorSeparator2,
             this.bindingNavigatorAddNewItem,
             this.bindingNavigatorDeleteItem});
-            this.bindingNavigator1.Location = new System.Drawing.Point(0, 0);
+            this.bindingNavigator1.Location = new System.Drawing.Point(15, 452);
             this.bindingNavigator1.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
             this.bindingNavigator1.MoveLastItem = this.bindingNavigatorMoveLastItem;
             this.bindingNavigator1.MoveNextItem = this.bindingNavigatorMoveNextItem;
@@ -460,7 +464,7 @@
             this.bindingNavigator1.Name = "bindingNavigator1";
             this.bindingNavigator1.PositionItem = this.bindingNavigatorPositionItem;
             this.bindingNavigator1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.bindingNavigator1.Size = new System.Drawing.Size(873, 25);
+            this.bindingNavigator1.Size = new System.Drawing.Size(295, 25);
             this.bindingNavigator1.TabIndex = 40;
             this.bindingNavigator1.Text = "bindingNavigator1";
             // 
@@ -501,6 +505,7 @@
             this.bindingNavigatorPositionItem.Name = "bindingNavigatorPositionItem";
             this.bindingNavigatorPositionItem.Size = new System.Drawing.Size(100, 25);
             this.bindingNavigatorPositionItem.Text = "0";
+            this.bindingNavigatorPositionItem.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.bindingNavigatorPositionItem_KeyPress);
             // 
             // bindingNavigatorSeparator1
             // 
@@ -555,9 +560,8 @@
             // labelPageID
             // 
             this.labelPageID.AutoSize = true;
-            this.labelPageID.Enabled = false;
             this.labelPageID.ForeColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.labelPageID.Location = new System.Drawing.Point(562, 105);
+            this.labelPageID.Location = new System.Drawing.Point(562, 93);
             this.labelPageID.Name = "labelPageID";
             this.labelPageID.Size = new System.Drawing.Size(46, 13);
             this.labelPageID.TabIndex = 41;
@@ -567,15 +571,14 @@
             // textBoxPageID
             // 
             this.textBoxPageID.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.evaluatorPageBindingSource, "EvaluatorPageID", true));
-            this.textBoxPageID.Enabled = false;
-            this.textBoxPageID.Location = new System.Drawing.Point(643, 102);
+            this.textBoxPageID.Location = new System.Drawing.Point(643, 90);
             this.textBoxPageID.Name = "textBoxPageID";
             this.textBoxPageID.Size = new System.Drawing.Size(0, 20);
             this.textBoxPageID.TabIndex = 42;
             // 
             // buttonAddANode
             // 
-            this.buttonAddANode.Location = new System.Drawing.Point(728, 393);
+            this.buttonAddANode.Location = new System.Drawing.Point(728, 381);
             this.buttonAddANode.Name = "buttonAddANode";
             this.buttonAddANode.Size = new System.Drawing.Size(133, 30);
             this.buttonAddANode.TabIndex = 43;
@@ -585,9 +588,9 @@
             // 
             // buttonDeleteSelectedNode
             // 
-            this.buttonDeleteSelectedNode.Location = new System.Drawing.Point(544, 393);
+            this.buttonDeleteSelectedNode.Location = new System.Drawing.Point(534, 381);
             this.buttonDeleteSelectedNode.Name = "buttonDeleteSelectedNode";
-            this.buttonDeleteSelectedNode.Size = new System.Drawing.Size(124, 30);
+            this.buttonDeleteSelectedNode.Size = new System.Drawing.Size(134, 30);
             this.buttonDeleteSelectedNode.TabIndex = 44;
             this.buttonDeleteSelectedNode.Text = "Delete Selected Node";
             this.buttonDeleteSelectedNode.UseVisualStyleBackColor = true;
@@ -596,7 +599,7 @@
             // labelPage
             // 
             this.labelPage.AutoSize = true;
-            this.labelPage.Location = new System.Drawing.Point(707, 43);
+            this.labelPage.Location = new System.Drawing.Point(707, 31);
             this.labelPage.Name = "labelPage";
             this.labelPage.Size = new System.Drawing.Size(35, 13);
             this.labelPage.TabIndex = 45;
@@ -605,7 +608,7 @@
             // textBoxPage
             // 
             this.textBoxPage.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.evaluatorPageBindingSource, "MapPage", true));
-            this.textBoxPage.Location = new System.Drawing.Point(747, 42);
+            this.textBoxPage.Location = new System.Drawing.Point(747, 30);
             this.textBoxPage.Name = "textBoxPage";
             this.textBoxPage.Size = new System.Drawing.Size(49, 20);
             this.textBoxPage.TabIndex = 3;
@@ -615,15 +618,6 @@
             this.ditchesCulvertsBindingSource1.DataMember = "DitchesCulverts";
             this.ditchesCulvertsBindingSource1.DataSource = this.fieldWorkDBDataSet;
             // 
-            // viewCulvertsDitchesBindingSource
-            // 
-            this.viewCulvertsDitchesBindingSource.DataMember = "View_CulvertsDitches";
-            this.viewCulvertsDitchesBindingSource.DataSource = this.fieldWorkDBDataSet;
-            // 
-            // view_CulvertsDitchesTableAdapter
-            // 
-            this.view_CulvertsDitchesTableAdapter.ClearBeforeFill = true;
-            // 
             // ditchesCulvertsTableAdapter
             // 
             this.ditchesCulvertsTableAdapter.ClearBeforeFill = true;
@@ -632,16 +626,59 @@
             // 
             this.evaluatorPageTableAdapter.ClearBeforeFill = true;
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ToolStripMenuItemFile,
+            this.ToolStripMenuItemTools});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(873, 24);
+            this.menuStrip1.TabIndex = 49;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // ToolStripMenuItemFile
+            // 
+            this.ToolStripMenuItemFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ToolStripMenuItemExportComparativeList});
+            this.ToolStripMenuItemFile.Name = "ToolStripMenuItemFile";
+            this.ToolStripMenuItemFile.Size = new System.Drawing.Size(35, 20);
+            this.ToolStripMenuItemFile.Text = "File";
+            // 
+            // ToolStripMenuItemExportComparativeList
+            // 
+            this.ToolStripMenuItemExportComparativeList.Name = "ToolStripMenuItemExportComparativeList";
+            this.ToolStripMenuItemExportComparativeList.Size = new System.Drawing.Size(196, 22);
+            this.ToolStripMenuItemExportComparativeList.Text = "Export Comparative List";
+            this.ToolStripMenuItemExportComparativeList.Click += new System.EventHandler(this.ToolStripMenuItemExportComparativeList_Click);
+            // 
+            // ToolStripMenuItemTools
+            // 
+            this.ToolStripMenuItemTools.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ToolStripMenuItemSearchByNodeNo});
+            this.ToolStripMenuItemTools.Name = "ToolStripMenuItemTools";
+            this.ToolStripMenuItemTools.Size = new System.Drawing.Size(45, 20);
+            this.ToolStripMenuItemTools.Text = "Tools";
+            // 
+            // ToolStripMenuItemSearchByNodeNo
+            // 
+            this.ToolStripMenuItemSearchByNodeNo.Name = "ToolStripMenuItemSearchByNodeNo";
+            this.ToolStripMenuItemSearchByNodeNo.Size = new System.Drawing.Size(176, 22);
+            this.ToolStripMenuItemSearchByNodeNo.Text = "Search by Node No";
+            this.ToolStripMenuItemSearchByNodeNo.Click += new System.EventHandler(this.ToolStripMenuItemSearchByNodeNo_Click);
+            // 
             // FormStormwaterInterface
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(873, 499);
+            this.BackColor = System.Drawing.SystemColors.Control;
+            this.ClientSize = new System.Drawing.Size(873, 480);
             this.Controls.Add(this.textBoxPage);
             this.Controls.Add(this.labelPage);
             this.Controls.Add(this.buttonDeleteSelectedNode);
             this.Controls.Add(this.buttonAddANode);
             this.Controls.Add(this.bindingNavigator1);
+            this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.buttonUpdateDatabase);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.dataGridView1);
@@ -667,6 +704,7 @@
             this.Controls.Add(this.labelCulvertsAndDitchesInformation);
             this.Controls.Add(this.textBoxPageID);
             this.Controls.Add(this.labelPageID);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "FormStormwaterInterface";
             this.Text = "Stormwater Interface";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -678,7 +716,8 @@
             this.bindingNavigator1.ResumeLayout(false);
             this.bindingNavigator1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ditchesCulvertsBindingSource1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.viewCulvertsDitchesBindingSource)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -707,8 +746,6 @@
         private System.Windows.Forms.Label labelInfo;
         private System.Windows.Forms.DataGridView dataGridView1;
         private FieldWorkDBDataSet fieldWorkDBDataSet;
-        private System.Windows.Forms.BindingSource viewCulvertsDitchesBindingSource;
-        private StormwaterInterface.FieldWorkDBDataSetTableAdapters.View_CulvertsDitchesTableAdapter view_CulvertsDitchesTableAdapter;
         private System.Windows.Forms.Label labelCulverts;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.BindingSource ditchesCulvertsBindingSource;
@@ -748,6 +785,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ditchPhotoIDDataGridViewTextBoxColumn;
         private System.Windows.Forms.Label labelPage;
         private System.Windows.Forms.TextBox textBoxPage;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemFile;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemTools;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemSearchByNodeNo;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemExportComparativeList;
     }
 }
 
