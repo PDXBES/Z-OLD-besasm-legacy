@@ -1,0 +1,8 @@
+Fatal: linkdbsrc variable in Ìþ section not specified
+Fatal: linktblsrc variable in Ìþ section not specified
+Fatal: tracefile variable in Ìþ section not specified
+Fatal: Link variable in Ìþ section not specified
+Fatal: USNode variable in Ìþ section not specified
+Fatal: DSNode variable in Ìþ section not specified
+Fatal: Reach variable in Ìþ section not specified
+Fatal: Element variable in Ìþ section not specified

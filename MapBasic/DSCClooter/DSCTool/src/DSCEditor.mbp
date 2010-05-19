@@ -1,0 +1,16 @@
+[Link]
+Application=DSCCleaver.mbx
+Module=DSCCleaver.mbo
+Module=MaintParcelDivides.mbo
+Module=DSCEditor.mbo
+Module=..\..\Lib\Common\Source\EMGCoordSys.mbo
+Module=..\..\Lib\Common\Source\EMGOpenUtils.mbo
+Module=..\..\Lib\Common\Source\INIUtils.MBO
+Module=..\..\Lib\Common\Source\EMGLogger.MBO
+Module=..\..\Lib\Common\Source\EMGMTabUtil.mbo
+Module=..\..\Lib\Common\Source\EMGLineGeo.MBO
+Module=..\..\Lib\LinkTool\Source\EMGLinkCheck.MBO
+Module=..\..\Lib\Common\Source\EMGCircleGeo.MBO
+Module=..\..\Lib\NodeTool\src\NodeGroundElevations.MBO
+Module=..\..\Lib\Workbench\Source\EMGInit.MBO
+

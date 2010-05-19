@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="PipeCostReference" targetNamespace="http://tempuri.org/PipeCostReference.xsd" elementFormDefault="qualified" xmlns="http://tempuri.org/PipeCostReference.xsd" xmlns:mstns="http://tempuri.org/PipeCostReference.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="PipeCostOptions">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="TrenchedConstants" maxOccurs="1" minOccurs="1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="sawCuttingACPavementPerSqFt" type="xs:decimal" />
+              <xs:element name="asphaltRemovalPerSqYd" type="xs:decimal" />
+              <xs:element name="trenchExcavationPerCuYd" type="xs:decimal" />
+              <xs:element name="truckHaulExcavationSpoilsPerCuYd" type="xs:decimal" />
+              <xs:element name="trenchShoringPerSqFt" type="xs:decimal" />
+              <xs:element name="asphaltTrenchPatchBaseCoursePerCuYd" type="xs:decimal" />
+              <xs:element name="asphaltTrenchPatchPerSqYd" type="xs:decimal" />
+              <xs:element name="pipeZoneBackfillLessThanEqualTo12InDiamPerCuYd" type="xs:decimal" />
+              <xs:element name="pipeZoneBackfillGreaterThan12InDiamPerCuYd" type="xs:decimal" />
+              <xs:element name="fillAbovePipeZoneLessThanEqualTo12InDiamPerCuYd" type="xs:decimal" />
+              <xs:element name="fillAbovePipeZoneGreaterThan12InDiamPerCuYd" type="xs:decimal" />
+              <xs:element name="spoilsFactor" type="xs:double" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="InsideDiameterToOutsideDiameterTable" maxOccurs="1" minOccurs="1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="InsideDiameterToOutsideDiameterRecord" maxOccurs="unbounded" minOccurs="1">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="insideDiameterIn" type="xs:double" />
+                    <xs:element name="material" type="xs:string" />
+                    <xs:element name="outsideDiameterIn" type="xs:double" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="InsideDiameterToManholeDiameterTable" maxOccurs="1" minOccurs="1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="InsideDiameterToManholeDiameterRecord" minOccurs="1" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="insideDiameterIn" type="xs:double" />
+                    <xs:element name="manholeDiameterIn" type="xs:double" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="TrenchBaseWidthTable" maxOccurs="1" minOccurs="1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="TrenchBaseWidthRecord" minOccurs="1" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="outsideDiameterIn" type="xs:double" />
+                    <xs:element name="widthFt" type="xs:double" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="PipeCostTable" maxOccurs="1" minOccurs="1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="PipeCostRecord" minOccurs="1" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="diameterIn" type="xs:double" />
+                    <xs:element name="material" type="xs:string" />
+                    <xs:element name="costPerFt" type="xs:decimal" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="LateralCostTable" maxOccurs="1" minOccurs="1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="LateralCostRecord" minOccurs="1" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="insideDiameterIn" type="xs:double" />
+                    <xs:element name="depthFt" type="xs:double" />
+                    <xs:element name="costPerFt" type="xs:decimal" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="ManholeCostTable" maxOccurs="1" minOccurs="1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ManholeCostRecord" maxOccurs="unbounded" minOccurs="1">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="manholeDiameterIn" type="xs:double" />
+                    <xs:element name="baseCost" type="xs:decimal" />
+                    <xs:element name="costPerFtDepthAbove8Ft" type="xs:decimal" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="TrenchlessCIPPConstants" maxOccurs="1" minOccurs="1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="lateralLessThanEqualTo24InDiamCost" type="xs:decimal" />
+              <xs:element name="lateralGreaterThan24InDiamCost" type="xs:decimal" />
+              <xs:element name="tvCleanLessThanEqualTo24InDiamCost" type="xs:decimal" />
+              <xs:element name="tvCleanGreaterThan24InDiamCost" type="xs:decimal" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="TrenchlessPipeburstConstants" maxOccurs="1" minOccurs="1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="lateralCost" type="xs:decimal" />
+              <xs:element name="tvCleanLessThanEqualTo24InDiamCost" type="xs:decimal" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="TrenchlessFlowDiversionCostTable" maxOccurs="1" minOccurs="1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="TrenchlessFlowDiversionCostRecord" maxOccurs="unbounded" minOccurs="1">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="insideDiameterIn" type="xs:double" />
+                    <xs:element name="costPerFt" type="xs:decimal" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="TrenchlessCIPPCostTable" maxOccurs="1" minOccurs="1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="TrenchlessCIPPCostRecord" maxOccurs="unbounded" minOccurs="1">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="insideDiameterIn" type="xs:double" />
+                    <xs:element name="costPerFt" type="xs:decimal" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="TrenchlessPipeburstCostTable" maxOccurs="1" minOccurs="1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="TrenchlessPipeburstCostRecord" maxOccurs="unbounded" minOccurs="1">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="insideDiameterIn" type="xs:double" />
+                    <xs:element name="costPerFt" type="xs:decimal" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="BaseENR" type="xs:integer" />
+        <xs:element name="CurrentENR" type="xs:integer" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

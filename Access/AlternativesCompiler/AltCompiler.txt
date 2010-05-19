@@ -1,0 +1,287 @@
+1.1	Table: ALP_COMP	Type: Native	Fields: 11	Records: 2445
+		Description: 
+	1.1.1        Fields	Field Name	Field Type	Description
+	1.1.1.1	NGTO_Direct	Character (7)	 
+	1.1.1.2	NGTO_Surface	Character (7)	 
+	1.1.1.3	NGTOParking	Character (7)	 
+	1.1.1.4	NGTO	Character (7)	 
+	1.1.1.5	BuildModelIC	Yes/No (1)	 
+	1.1.1.6	ICID	Long (4)	 
+	1.1.1.7	Constructed	Long (4)	 
+	1.1.1.8	AltICID	Long (4)	 
+	1.1.1.9	Difficulty	Integer (2)	 
+	1.1.1.10	BASIN	Character (4)	 
+	1.1.1.11	USEFLAG	Integer (2)	 
+1.2	Table: ALR_COMP	Type: Native	Fields: 8	Records: 2804
+		Description: 
+	1.2.1        Fields	Field Name	Field Type	Description
+	1.2.1.1	NGTORoof	Character (6)	 
+	1.2.1.2	BuildModelIC	Yes/No (1)	 
+	1.2.1.3	ICID	Long (4)	 
+	1.2.1.4	Constructed	Long (4)	 
+	1.2.1.5	AltICID	Long (4)	 
+	1.2.1.6	Difficulty	Integer (2)	 
+	1.2.1.7	BASIN	Character (4)	 
+	1.2.1.8	USEFLAG	Integer (2)	 
+1.3	Table: ALS_COMP	Type: Native	Fields: 8	Records: 3693
+		Description: 
+	1.3.1        Fields	Field Name	Field Type	Description
+	1.3.1.1	NGTOStreet	Character (7)	 
+	1.3.1.2	BuildModelIC	Yes/No (1)	 
+	1.3.1.3	ICID	Long (4)	 
+	1.3.1.4	Constructed	Long (4)	 
+	1.3.1.5	AltICID	Long (4)	 
+	1.3.1.6	Evaluation	Character (1)	 
+	1.3.1.7	BASIN	Character (4)	 
+	1.3.1.8	USEFLAG	Integer (2)	 
+1.4	Table: alt_links_ac	Type: Native	Fields: 16	
+		Source: alt_links_ac	Connect: ;DATABASE=\\CASSIO\Systems_Planning\8063_CombinedFacPlan\Models\Alts\Taggart_A\TGA_NP_Base\alternatives\TGA_Stor_All\alternative_package.mdb
+		Description: 
+	1.4.1        Fields	Field Name	Field Type	Description
+	1.4.1.1	MAPINFO_ID	Counter (4)	 
+	1.4.1.2	AltLinkID	Long (4)	 
+	1.4.1.3	MdlLinkID	Long (4)	 
+	1.4.1.4	USNode	Character (6)	 
+	1.4.1.5	DSNode	Character (6)	 
+	1.4.1.6	Operation	Character (3)	 
+	1.4.1.7	LinkType	Character (2)	 
+	1.4.1.8	DiamWidth	Double (8)	 
+	1.4.1.9	Height	Double (8)	 
+	1.4.1.10	USIE	Double (8)	 
+	1.4.1.11	DSIE	Double (8)	 
+	1.4.1.12	PipeShape	Character (4)	 
+	1.4.1.13	Material	Character (6)	 
+	1.4.1.14	Length	Double (8)	 
+	1.4.1.15	IsSpecLink	Yes/No (1)	 
+	1.4.1.16	FocusArea	Character (10)	 
+	1.4.2        Indexes	Index Name	Fields	Properties
+	1.4.2.1	MI_INDEX_FIELD	1	Primary, Unique, Required
+1.5	Table: DSCHGLs_FAV_1_25	Type: Native	Fields: 9	Records: 4524
+		Description: 
+	1.5.1        Fields	Field Name	Field Type	Description
+	1.5.1.1	DSCID	Long (4)	 
+	1.5.1.2	ParcelID	Long (4)	 
+	1.5.1.3	DivideID	Long (4)	 
+	1.5.1.4	USJelev	Double (8)	 
+	1.5.1.5	DSJelev	Double (8)	 
+	1.5.1.6	Frac2SwrBeg	Double (8)	 
+	1.5.1.7	CalculatedHGL	Double (8)	 
+	1.5.1.8	CalculatedDHGL	Double (8)	 
+	1.5.1.9	MAPINFO_ID	Counter (4)	 
+	1.5.2        Indexes	Index Name	Fields	Properties
+	1.5.2.1	MI_INDEX_FIELD	1	Unique, Required
+1.6	Table: DSCHGLs_FAV_2_25	Type: Native	Fields: 9	Records: 4524
+		Description: 
+	1.6.1        Fields	Field Name	Field Type	Description
+	1.6.1.1	DSCID	Long (4)	 
+	1.6.1.2	ParcelID	Long (4)	 
+	1.6.1.3	DivideID	Long (4)	 
+	1.6.1.4	USJelev	Double (8)	 
+	1.6.1.5	DSJelev	Double (8)	 
+	1.6.1.6	Frac2SwrBeg	Double (8)	 
+	1.6.1.7	CalculatedHGL	Double (8)	 
+	1.6.1.8	CalculatedDHGL	Double (8)	 
+	1.6.1.9	MAPINFO_ID	Counter (4)	 
+	1.6.2        Indexes	Index Name	Fields	Properties
+	1.6.2.1	MI_INDEX_FIELD	1	Unique, Required
+1.7	Table: DSCHGLs_TEST_1	Type: Native	Fields: 9	Records: 4165
+		Description: 
+	1.7.1        Fields	Field Name	Field Type	Description
+	1.7.1.1	DSCID	Long (4)	 
+	1.7.1.2	ParcelID	Long (4)	 
+	1.7.1.3	DivideID	Long (4)	 
+	1.7.1.4	USJelev	Double (8)	 
+	1.7.1.5	DSJelev	Double (8)	 
+	1.7.1.6	Frac2SwrBeg	Double (8)	 
+	1.7.1.7	CalculatedHGL	Double (8)	 
+	1.7.1.8	CalculatedDHGL	Double (8)	 
+	1.7.1.9	MAPINFO_ID	Counter (4)	 
+	1.7.2        Indexes	Index Name	Fields	Properties
+	1.7.2.1	MI_INDEX_FIELD	1	Unique, Required
+1.8	Table: HGL_COMP	Type: Native	Fields: 12	Records: 514915
+		Description:SP_ALT_DSC_ALL - base table name DSC_COMP
+	1.8.1        Fields	Field Name	Field Type	Description
+	1.8.1.1	DSCID	Long (4)	 
+	1.8.1.2	ParcelID	Long (4)	 
+	1.8.1.3	DivideID	Long (4)	 
+	1.8.1.4	USJelev	Double (8)	 
+	1.8.1.5	DSJelev	Double (8)	 
+	1.8.1.6	Frac2SwrBeg	Double (8)	 
+	1.8.1.7	CalculatedHGL	Double (8)	 
+	1.8.1.8	CalculatedDHGL	Double (8)	 
+	1.8.1.9	Surcharge	Double (8)	 
+	1.8.1.10	STORM	Character (255)	 
+	1.8.1.11	BASIN	Character (255)	 
+	1.8.1.12	USEFLAG	Integer (2)	 
+1.9	Table: modelresults	Type: Native	Fields: 8	
+		Source: modelresults	Connect: Excel 5.0;HDR=YES;IMEX=2;DATABASE=\\Cassio\systems_planning\System_Plan_Figs\Combined\Alternatives\Data\alt_mapping_compilations3.xls
+		Description:Excel 5.0;HDR=YES;IMEX=2;DATABASE=\\cassio\systemsPlanning\System_Plan_Figs\Combined\Alternatives\Data\alt_mapping_compilations2.xls;TABLE=modelresults
+	1.9.1        Fields	Field Name	Field Type	Description
+	1.9.1.1	Path	Character (255)	 
+	1.9.1.2	Database	Character (255)	 
+	1.9.1.3	Description	Character (255)	 
+	1.9.1.4	BASINCODE	Character (255)	 
+	1.9.1.5	USEFLAG	Double (8)	 
+	1.9.1.6	TABLENAME	Character (255)	 
+	1.9.1.7	DATEAPPEND	Character (255)	 
+	1.9.1.8	STORM	Character (255)	 
+1.10	Table: mst_DSC_ac	Type: Native	Fields: 60	
+		Source: mst_DSC_ac	Connect: ;DATABASE=\\Cassio\modeling\SAMaster_22\Parcels_Divides\mst_DSC_ac.mdb
+		Description: 
+	1.10.1        Fields	Field Name	Field Type	Description
+	1.10.1.1	MAPINFO_ID	Counter (4)	 
+	1.10.1.2	ParcelID	Long (4)	 
+	1.10.1.3	DivideID	Long (4)	 
+	1.10.1.4	DSCID	Long (4)	 
+	1.10.1.5	discoSiteID	Long (4)	 
+	1.10.1.6	DiscoClass	Character (1)	 
+	1.10.1.7	ToMLinkSan	Long (4)	 
+	1.10.1.8	ToMLinkStorm	Long (4)	 
+	1.10.1.9	PipeFlowTypeSan	Character (1)	 
+	1.10.1.10	PipeFlowTypeStorm	Character (1)	 
+	1.10.1.11	SanSwrCrown	Double (8)	 
+	1.10.1.12	Frac2SwrBeg	Double (8)	 
+	1.10.1.13	FloodRefElev	Double (8)	 
+	1.10.1.14	FalseBFRisk	Yes/No (1)	 
+	1.10.1.15	RNO	Character (35)	 
+	1.10.1.16	OWNER1	Character (35)	 
+	1.10.1.17	OWNER2	Character (35)	 
+	1.10.1.18	OWNER3	Character (35)	 
+	1.10.1.19	OWNERADDR	Character (35)	 
+	1.10.1.20	OWNERCITY	Character (28)	 
+	1.10.1.21	OWNERSTATE	Character (2)	 
+	1.10.1.22	OWNERZIP	Character (10)	 
+	1.10.1.23	SITEADDR	Character (37)	 
+	1.10.1.24	SITECITY	Character (30)	 
+	1.10.1.25	SITE_STATE	Character (6)	 
+	1.10.1.26	SITEZIP	Character (8)	 
+	1.10.1.27	FloodRefElev_2	Double (8)	 
+	1.10.1.28	isVacant	Yes/No (1)	 
+	1.10.1.29	ZoneEX	Character (5)	 
+	1.10.1.30	ZoneCP	Character (5)	 
+	1.10.1.31	GenEX	Character (3)	 
+	1.10.1.32	GenCP	Character (3)	 
+	1.10.1.33	PZsqft	Long (4)	 
+	1.10.1.34	ImpFractEX	Double (8)	 
+	1.10.1.35	ImpFractCP	Double (8)	 
+	1.10.1.36	ImpFractFB	Double (8)	 
+	1.10.1.37	AreaFt	Long (4)	 
+	1.10.1.38	RfAreaFtEX	Long (4)	 
+	1.10.1.39	RfAreaFtFB	Long (4)	 
+	1.10.1.40	PkAreaFtEX	Long (4)	 
+	1.10.1.41	PkAreaFtFB	Long (4)	 
+	1.10.1.42	BaseflowEXcfs	Double (8)	 
+	1.10.1.43	BaseflowFBcfs	Double (8)	 
+	1.10.1.44	BaseflowDMcfs	Double (8)	 
+	1.10.1.45	GrowthState	Long (4)	 
+	1.10.1.46	IncIA4FB	Yes/No (1)	 
+	1.10.1.47	gisBasin	Character (6)	 
+	1.10.1.48	ICFtRoofEX	Long (4)	 
+	1.10.1.49	ICFtRoofFB	Long (4)	 
+	1.10.1.50	ICFtParkEX	Long (4)	 
+	1.10.1.51	ICFtParkFB	Long (4)	 
+	1.10.1.52	EICFtRoofEX	Double (8)	 
+	1.10.1.53	EICFtParkEX	Double (8)	 
+	1.10.1.54	EICFtRoofFB	Double (8)	 
+	1.10.1.55	EICFtParkFB	Double (8)	 
+	1.10.1.56	Sewerable	Long (4)	 
+	1.10.1.57	SourceQuality	Character (1)	 
+	1.10.1.58	Septic	Yes/No (1)	 
+	1.10.1.59	PZone	Yes/No (1)	 
+	1.10.1.60	HasBasement	Long (4)	 
+	1.10.2        Indexes	Index Name	Fields	Properties
+	1.10.2.1	MI_INDEX_FIELD	1	Primary, Unique, Required
+1.11	Table: mst_links_ac	Type: Native	Fields: 37	
+		Source: mst_links_ac	Connect: ;DATABASE=\\Cassio\modeling\SAMaster_22\Links\mst_links_ac.mdb
+		Description: 
+	1.11.1        Fields	Field Name	Field Type	Description
+	1.11.1.1	MAPINFO_ID	Counter (4)	 
+	1.11.1.2	MLinkID	Long (4)	 
+	1.11.1.3	CompKey	Long (4)	 
+	1.11.1.4	USNode	Character (6)	 
+	1.11.1.5	DSNode	Character (6)	 
+	1.11.1.6	PipeShape	Character (4)	 
+	1.11.1.7	LinkType	Character (2)	 
+	1.11.1.8	PipeFlowType	Character (1)	 
+	1.11.1.9	Length	Double (8)	 
+	1.11.1.10	DiamWidth	Double (8)	 
+	1.11.1.11	Height	Double (8)	 
+	1.11.1.12	Material	Character (6)	 
+	1.11.1.13	upsdpth	Double (8)	 
+	1.11.1.14	dwndpth	Double (8)	 
+	1.11.1.15	USIE	Double (8)	 
+	1.11.1.16	DSIE	Double (8)	 
+	1.11.1.17	AsBuilt	Character (14)	 
+	1.11.1.18	Instdate	Date/Time (8)	 
+	1.11.1.19	FromX	Double (8)	 
+	1.11.1.20	FromY	Double (8)	 
+	1.11.1.21	ToX	Double (8)	 
+	1.11.1.22	ToY	Double (8)	 
+	1.11.1.23	Roughness	Double (8)	 
+	1.11.1.24	TimeFrame	Character (2)	 
+	1.11.1.25	DataFlagSynth	Long (4)	 
+	1.11.1.26	DataQual	Character (15)	 
+	1.11.1.27	Hservstat	Character (4)	 
+	1.11.1.28	ValidFromDate	Character (8)	 
+	1.11.1.29	ValidToDate	Character (8)	 
+	1.11.1.30	CADKey	Character (14)	 
+	1.11.1.31	AuditNodeID	Character (20)	 
+	1.11.1.32	AuditDups	Character (30)	 
+	1.11.1.33	AuditSpatial	Character (30)	 
+	1.11.1.34	AuditOK2Go	Yes/No (1)	 
+	1.11.1.35	AuditProcTimestamp	Character (30)	 
+	1.11.1.36	Qdes	Double (8)	 
+	1.11.1.37	DME_GlobalID	Long (4)	 
+	1.11.2        Indexes	Index Name	Fields	Properties
+	1.11.2.1	MI_INDEX_FIELD	1	Primary, Unique, Required
+1.12	Table: Paste Errors	Type: Native	Fields: 1	Records: 174
+		Description: 
+	1.12.1        Fields	Field Name	Field Type	Description
+	1.12.1.1	Field0	Memo	 
+1.13	Table: PIP_COMP	Type: Native	Fields: 18	Records: 12650
+		Description: 
+	1.13.1        Fields	Field Name	Field Type	Description
+	1.13.1.1	MAPINFO_ID	Counter (4)	 
+	1.13.1.2	AltLinkID	Long (4)	 
+	1.13.1.3	MdlLinkID	Long (4)	 
+	1.13.1.4	USNode	Character (6)	 
+	1.13.1.5	DSNode	Character (6)	 
+	1.13.1.6	Operation	Character (3)	 
+	1.13.1.7	LinkType	Character (2)	 
+	1.13.1.8	DiamWidth	Double (8)	 
+	1.13.1.9	Height	Double (8)	 
+	1.13.1.10	USIE	Double (8)	 
+	1.13.1.11	DSIE	Double (8)	 
+	1.13.1.12	PipeShape	Character (4)	 
+	1.13.1.13	Material	Character (6)	 
+	1.13.1.14	Length	Double (8)	 
+	1.13.1.15	IsSpecLink	Yes/No (1)	 
+	1.13.1.16	FocusArea	Character (10)	 
+	1.13.1.17	BASIN	Character (4)	 
+	1.13.1.18	USEFLAG	Long (4)	 
+	1.13.2        Indexes	Index Name	Fields	Properties
+	1.13.2.1	MI_INDEX_FIELD	1	Primary, Unique, Required
+1.14	Table: PIP_COMP_TABULAR	Type: Native	Fields: 17	Records: 6116
+		Description: 
+	1.14.1        Fields	Field Name	Field Type	Description
+	1.14.1.1	AltLinkID	Long (4)	 
+	1.14.1.2	MdlLinkID	Long (4)	 
+	1.14.1.3	USNode	Character (6)	 
+	1.14.1.4	DSNode	Character (6)	 
+	1.14.1.5	Operation	Character (3)	 
+	1.14.1.6	LinkType	Character (2)	 
+	1.14.1.7	DiamWidth	Double (8)	 
+	1.14.1.8	Height	Double (8)	 
+	1.14.1.9	USIE	Double (8)	 
+	1.14.1.10	DSIE	Double (8)	 
+	1.14.1.11	PipeShape	Character (4)	 
+	1.14.1.12	Material	Character (6)	 
+	1.14.1.13	Length	Double (8)	 
+	1.14.1.14	IsSpecLink	Yes/No (1)	 
+	1.14.1.15	FocusArea	Character (10)	 
+	1.14.1.16	BASIN	Character (4)	 
+	1.14.1.17	USEFLAG	Integer (2)	 
+1.15	Table: temp	Type: Native	Fields: 1	Records: 174
+		Description: 
+	1.15.1        Fields	Field Name	Field Type	Description
+	1.15.1.1	Field1	Memo	 
