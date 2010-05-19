@@ -230,7 +230,11 @@ namespace DataAccessTestBench
 
       parameters.Add("UseFlag", new ReportBase.Parameter("UseFlag", "14"));
       parameters.Add("StormEvent", new ReportBase.Parameter("StormEvent", "2"));
+      parameters.Remove("FocusArea");
       bsbrCount = rpReport.BSBRCount(parameters);
+      textBox1.AppendText("Total BSBR 2-yr EX: " + bsbrCount.ToString() + "\r\n");
+      textBox1.AppendText("------------------------------------\r\n");
+
       #endregion
 
       #region BSBRCount5yrEX
@@ -252,7 +256,10 @@ namespace DataAccessTestBench
 
       parameters.Add("UseFlag", new ReportBase.Parameter("UseFlag", "14"));
       parameters.Add("StormEvent", new ReportBase.Parameter("StormEvent", "5"));
+      parameters.Remove("FocusArea");
       bsbrCount = rpReport.BSBRCount(parameters);
+      textBox1.AppendText("Total BSBR 5-yr EX: " + bsbrCount.ToString() + "\r\n");
+      textBox1.AppendText("------------------------------------\r\n");
 
       #endregion
 
@@ -275,7 +282,10 @@ namespace DataAccessTestBench
 
       parameters.Add("UseFlag", new ReportBase.Parameter("UseFlag", "14"));
       parameters.Add("StormEvent", new ReportBase.Parameter("StormEvent", "25"));
+      parameters.Remove("FocusArea");
       bsbrCount = rpReport.BSBRCount(parameters);
+      textBox1.AppendText("Total BSBR 25-yr EX: " + bsbrCount.ToString() + "\r\n");
+      textBox1.AppendText("------------------------------------\r\n");
 
       #endregion
 
@@ -298,7 +308,10 @@ namespace DataAccessTestBench
 
       parameters.Add("UseFlag", new ReportBase.Parameter("UseFlag", "15"));
       parameters.Add("StormEvent", new ReportBase.Parameter("StormEvent", "25"));
+      parameters.Remove("FocusArea");
       bsbrCount = rpReport.BSBRCount(parameters);
+      textBox1.AppendText("Total BSBR 25-yr FU: " + bsbrCount.ToString() + "\r\n");
+      textBox1.AppendText("------------------------------------\r\n");
 
       #endregion
 
@@ -321,7 +334,10 @@ namespace DataAccessTestBench
 
       parameters.Add("UseFlag", new ReportBase.Parameter("UseFlag", "13"));
       parameters.Add("StormEvent", new ReportBase.Parameter("StormEvent", "25"));
+      parameters.Remove("FocusArea");
       bsbrCount = rpReport.BSBRCount(parameters);
+      textBox1.AppendText("Total BSBR 25-yr FU RP: " + bsbrCount.ToString() + "\r\n");
+      textBox1.AppendText("------------------------------------\r\n");
 
       #endregion
 
@@ -347,6 +363,7 @@ namespace DataAccessTestBench
       parameters.Remove("FocusArea");
       bsbrDelta = rpReport.BSBRDelta(parameters);
       textBox1.AppendText("Total BSBR Delta: " + bsbrDelta.ToString() + "\r\n");
+      textBox1.AppendText("------------------------------------\r\n");
 
       #endregion
     }
