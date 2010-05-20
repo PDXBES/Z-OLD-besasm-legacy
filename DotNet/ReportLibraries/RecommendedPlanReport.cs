@@ -35,7 +35,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
       }
       catch (Exception ex)
       {
-        Console.WriteLine("Exception thrown initializing AltCompilerDataSet: " + ex);
+        throw new Exception("Exception thrown initializing AltCompilerDataSet: " + ex.Message, ex);
       }
       
     }
