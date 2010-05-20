@@ -19,7 +19,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
     const double GAL_PER_FT_3 = 7.48;
     const double CREDIT_PER_GALLON_STORMWATER_REMOVAL = 3;
 
-    private StormwaterControlsDataSet scDS;
+    public StormwaterControlsDataSet scDS;
     public AltCompilerDataSet altCompilerDS;
     private string modelPath;
     private string alternativePath;
@@ -125,6 +125,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
       }
     }
 
+    #region BSBR Queries
     public int BSBRCount(IDictionary<string, Parameter> parameters)
     {
       string focusArea;
@@ -141,8 +142,6 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
       string stormEvent;
       useFlag = parameters["UseFlag"].ValueAsInt;
       stormEvent = parameters["StormEvent"].Value;
-
-      //TO-DO: continue implementation of BsbrCount Linq queries
 
       var qryCountBsbr =
         from tableSpRpBsbr in altCompilerDS.SP_RP_BSBR
@@ -197,8 +196,9 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
 
       return bsbrCount1 - bsbrCount2;
     }
+    #endregion
 
-
+    #region Street IC Volume Removal Queries
     public double StormwaterRemovalVolStreetStorage(IDictionary<string, Parameter> parameters)
     {
       string focusArea;
@@ -269,7 +269,9 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
 
       return query.Sum(p => p.InfiltrationVolume);
     }
+    #endregion
 
+    #region Roof IC Volume Removal Queries
     public double RoofPlanterStorageVolume(IDictionary<string, Parameter> parameters)
     {
       string focusArea;
@@ -495,7 +497,9 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
 
       return roofTargetsBio;
     }
+    #endregion
 
+    #region Park IC Volume Removal Queries
     public double ParkBioStorageVolume(IDictionary<string, Parameter> parameters)
     {
       string focusArea;
@@ -592,6 +596,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
 
       return parkTargetsBio;
     }
+    #endregion
 
     public double StormwaterRemovalVol(IDictionary<string, Parameter> parameters)
     {
