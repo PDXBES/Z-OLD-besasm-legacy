@@ -40,12 +40,12 @@ namespace DataAccessTestBench
 
     }
 
-    private void Form1_Load(object sender, EventArgs e)
+    private void frmMain_Load(object sender, EventArgs e)
     {
 
     }
 
-    private void button1_Click(object sender, EventArgs e)
+    private void btnExecuteQueriesDirect_Click(object sender, EventArgs e)
     {
       var query =
         from icNode in scDS.ICNode
@@ -94,7 +94,7 @@ namespace DataAccessTestBench
       }
     }
 
-    private void button2_Click(object sender, EventArgs e)
+    private void btnUseReportLibrary_Click(object sender, EventArgs e)
     {
       textBox1.Clear();
 
@@ -206,11 +206,12 @@ namespace DataAccessTestBench
 
     }
 
-    private void button3_Click(object sender, EventArgs e)
+    private void btnBSBRTest_Click(object sender, EventArgs e)
     {
       textBox1.Clear();
 
       #region BSBRCount2yrEX
+
       textBox1.AppendText("BSBR Count (2-yr EX)\r\n");
       textBox1.AppendText("------------------------------------\r\n");
 
@@ -358,7 +359,7 @@ namespace DataAccessTestBench
         parameters.Add("FocusArea", new ReportBase.Parameter("FocusArea", focusArea));
         bsbrDelta = rpReport.BSBRDelta(parameters);
 
-        textBox1.AppendText(focusArea + "BSBR Delta: " + bsbrDelta.ToString() + "\r\n");
+        textBox1.AppendText(focusArea + " BSBR Delta: " + bsbrDelta.ToString() + "\r\n");
       }
       parameters.Remove("FocusArea");
       bsbrDelta = rpReport.BSBRDelta(parameters);
@@ -367,5 +368,11 @@ namespace DataAccessTestBench
 
       #endregion
     }
+
+    private void btnCloseApplication_Click(object sender, EventArgs e)
+    {
+      Application.Exit();
+    }
+
   }
 }
