@@ -35,7 +35,9 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
       }
       catch (Exception ex)
       {
+        Console.WriteLine("Exception thrown initializing AltCompilerDataSet: " + ex);
       }
+      
     }
 
     public new class ReportInfo : ReportBase.ReportInfo

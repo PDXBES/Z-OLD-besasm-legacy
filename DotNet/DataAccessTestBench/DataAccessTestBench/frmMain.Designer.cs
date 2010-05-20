@@ -30,9 +30,9 @@
     {
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
       this.textBox1 = new System.Windows.Forms.TextBox();
-      this.button1 = new System.Windows.Forms.Button();
-      this.button2 = new System.Windows.Forms.Button();
-      this.button3 = new System.Windows.Forms.Button();
+      this.btnExecuteQueriesDirect = new System.Windows.Forms.Button();
+      this.btnUseReportLibrary = new System.Windows.Forms.Button();
+      this.btnBSBRTest = new System.Windows.Forms.Button();
       this.btnCloseApplication = new Infragistics.Win.Misc.UltraButton();
       this.SuspendLayout();
       // 
@@ -45,35 +45,35 @@
       this.textBox1.Size = new System.Drawing.Size(312, 315);
       this.textBox1.TabIndex = 0;
       // 
-      // button1
+      // btnExecuteQueriesDirect
       // 
-      this.button1.Location = new System.Drawing.Point(330, 12);
-      this.button1.Name = "button1";
-      this.button1.Size = new System.Drawing.Size(164, 23);
-      this.button1.TabIndex = 1;
-      this.button1.Text = "Execute queries directly";
-      this.button1.UseVisualStyleBackColor = true;
-      this.button1.Click += new System.EventHandler(this.button1_Click);
+      this.btnExecuteQueriesDirect.Location = new System.Drawing.Point(330, 12);
+      this.btnExecuteQueriesDirect.Name = "btnExecuteQueriesDirect";
+      this.btnExecuteQueriesDirect.Size = new System.Drawing.Size(164, 23);
+      this.btnExecuteQueriesDirect.TabIndex = 1;
+      this.btnExecuteQueriesDirect.Text = "Execute queries directly";
+      this.btnExecuteQueriesDirect.UseVisualStyleBackColor = true;
+      this.btnExecuteQueriesDirect.Click += new System.EventHandler(this.btnExecuteQueriesDirect_Click);
       // 
-      // button2
+      // btnUseReportLibrary
       // 
-      this.button2.Location = new System.Drawing.Point(330, 41);
-      this.button2.Name = "button2";
-      this.button2.Size = new System.Drawing.Size(164, 23);
-      this.button2.TabIndex = 2;
-      this.button2.Text = "Use Report Library";
-      this.button2.UseVisualStyleBackColor = true;
-      this.button2.Click += new System.EventHandler(this.button2_Click);
+      this.btnUseReportLibrary.Location = new System.Drawing.Point(330, 41);
+      this.btnUseReportLibrary.Name = "btnUseReportLibrary";
+      this.btnUseReportLibrary.Size = new System.Drawing.Size(164, 23);
+      this.btnUseReportLibrary.TabIndex = 2;
+      this.btnUseReportLibrary.Text = "Use Report Library";
+      this.btnUseReportLibrary.UseVisualStyleBackColor = true;
+      this.btnUseReportLibrary.Click += new System.EventHandler(this.btnUseReportLibrary_Click);
       // 
-      // button3
+      // btnBSBRTest
       // 
-      this.button3.Location = new System.Drawing.Point(330, 70);
-      this.button3.Name = "button3";
-      this.button3.Size = new System.Drawing.Size(164, 23);
-      this.button3.TabIndex = 3;
-      this.button3.Text = "BSBR Test";
-      this.button3.UseVisualStyleBackColor = true;
-      this.button3.Click += new System.EventHandler(this.button3_Click);
+      this.btnBSBRTest.Location = new System.Drawing.Point(330, 70);
+      this.btnBSBRTest.Name = "btnBSBRTest";
+      this.btnBSBRTest.Size = new System.Drawing.Size(164, 23);
+      this.btnBSBRTest.TabIndex = 3;
+      this.btnBSBRTest.Text = "BSBR Test";
+      this.btnBSBRTest.UseVisualStyleBackColor = true;
+      this.btnBSBRTest.Click += new System.EventHandler(this.btnBSBRTest_Click);
       // 
       // btnCloseApplication
       // 
@@ -83,6 +83,7 @@
       this.btnCloseApplication.Size = new System.Drawing.Size(75, 23);
       this.btnCloseApplication.TabIndex = 4;
       this.btnCloseApplication.Text = "Close";
+      this.btnCloseApplication.Click += new System.EventHandler(this.btnCloseApplication_Click);
       // 
       // frmMain
       // 
@@ -90,14 +91,14 @@
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(538, 339);
       this.Controls.Add(this.btnCloseApplication);
-      this.Controls.Add(this.button3);
-      this.Controls.Add(this.button2);
-      this.Controls.Add(this.button1);
+      this.Controls.Add(this.btnBSBRTest);
+      this.Controls.Add(this.btnUseReportLibrary);
+      this.Controls.Add(this.btnExecuteQueriesDirect);
       this.Controls.Add(this.textBox1);
       this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
       this.Name = "frmMain";
       this.Text = "Data Access Test Bench";
-      this.Load += new System.EventHandler(this.Form1_Load);
+      this.Load += new System.EventHandler(this.frmMain_Load);
       this.ResumeLayout(false);
       this.PerformLayout();
 
@@ -106,9 +107,9 @@
     #endregion
 
     private System.Windows.Forms.TextBox textBox1;
-    private System.Windows.Forms.Button button1;
-    private System.Windows.Forms.Button button2;
-    private System.Windows.Forms.Button button3;
+    private System.Windows.Forms.Button btnExecuteQueriesDirect;
+    private System.Windows.Forms.Button btnUseReportLibrary;
+    private System.Windows.Forms.Button btnBSBRTest;
     private Infragistics.Win.Misc.UltraButton btnCloseApplication;
 
   }

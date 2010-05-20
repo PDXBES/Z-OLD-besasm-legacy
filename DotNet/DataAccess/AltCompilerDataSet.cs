@@ -16,5 +16,6 @@ namespace SystemsAnalysis.DataAccess.AltCompilerDataSetTableAdapters {
     
     public partial class SP_ALT_BSBRTableAdapter 
     {
+
     }
 }
