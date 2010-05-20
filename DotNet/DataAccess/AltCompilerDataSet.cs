@@ -3,6 +3,10 @@
       
     public partial class AltCompilerDataSet 
     {
+      partial class SP_RP_BSBRDataTable
+      {
+      }
+    
       public void InitAltCompilerDataSet()
       {
         AltCompilerDataSetTableAdapters.SP_RP_BSBRTableAdapter rpBsbrTA;
