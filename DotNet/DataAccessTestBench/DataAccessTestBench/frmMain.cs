@@ -98,6 +98,7 @@ namespace DataAccessTestBench
     {
       textBox1.Clear();
 
+      #region InfiltrateStormwaterArea
       textBox1.AppendText("Infiltrate Stormwater Area\r\n");
       textBox1.AppendText("------------------------------------\r\n");
 
@@ -118,7 +119,9 @@ namespace DataAccessTestBench
 
         textBox1.AppendText("Focus Area: " + row.FocusArea + "; Infiltrated Area = " + infiltratedArea + "\r\n");
       }
+      #endregion
 
+      #region ProtectImproveHabitat
       textBox1.AppendText("\r\n");
       textBox1.AppendText("Protect and Improve Terrestrial Habitat Area\r\n");
       textBox1.AppendText("------------------------------------\r\n");
@@ -130,7 +133,9 @@ namespace DataAccessTestBench
 
         textBox1.AppendText("Focus Area: " + row.FocusArea + "; Habitat Area = " + infiltratedArea + "\r\n");
       }
+      #endregion
 
+      #region RoofPlanterStorageVolume
       textBox1.AppendText("\r\n");
       textBox1.AppendText("Roof Planter Storage Volume\r\n");
       textBox1.AppendText("------------------------------------\r\n");
@@ -142,7 +147,9 @@ namespace DataAccessTestBench
 
         textBox1.AppendText("Focus Area: " + row.FocusArea + "; Vol Remove: = " + stormwaterRemovalVol + "\r\n");
       }
+      #endregion
 
+      #region RoofPlanterInfiltrationVolume
       textBox1.AppendText("\r\n");
       textBox1.AppendText("Roof Planter Infiltration Volume\r\n");
       textBox1.AppendText("------------------------------------\r\n");
@@ -166,7 +173,9 @@ namespace DataAccessTestBench
 
         textBox1.AppendText("Focus Area: " + row.FocusArea + "; Vol Remove: = " + stormwaterRemovalVol + "\r\n");
       }
+      #endregion
 
+      #region RoofBioInfiltrationVolume
       textBox1.AppendText("\r\n");
       textBox1.AppendText("Roof Bio Infiltration Volume\r\n");
       textBox1.AppendText("------------------------------------\r\n");
@@ -178,7 +187,9 @@ namespace DataAccessTestBench
 
         textBox1.AppendText("Focus Area: " + row.FocusArea + "; Vol Remove: = " + stormwaterRemovalVol + "\r\n");
       }
+      #endregion
 
+      #region ParkBioStorageVolume
       textBox1.AppendText("\r\n");
       textBox1.AppendText("Park Bio Storage Volume\r\n");
       textBox1.AppendText("------------------------------------\r\n");
@@ -190,7 +201,9 @@ namespace DataAccessTestBench
 
         textBox1.AppendText("Focus Area: " + row.FocusArea + "; Vol Remove: = " + stormwaterRemovalVol + "\r\n");
       }
+      #endregion
 
+      #region ParkBioInfiltrationVolume
       textBox1.AppendText("\r\n");
       textBox1.AppendText("Park Bio Infiltration Volume\r\n");
       textBox1.AppendText("------------------------------------\r\n");
@@ -202,6 +215,7 @@ namespace DataAccessTestBench
 
         textBox1.AppendText("Focus Area: " + row.FocusArea + "; Vol Remove: = " + stormwaterRemovalVol + "\r\n");
       }
+      #endregion
     }
 
     private void btnBSBRTest_Click(object sender, EventArgs e)
@@ -370,6 +384,16 @@ namespace DataAccessTestBench
     private void btnCloseApplication_Click(object sender, EventArgs e)
     {
       Application.Exit();
+    }
+
+    private void btnLoadE18Data_Click(object sender, EventArgs e)
+    {
+      dgvTableE18.DataSource = rpReport.scDS.TableE18;
+    }
+
+    private void btnLoadE19Data_Click(object sender, EventArgs e)
+    {
+      dgvTableE19.DataSource = rpReport.scDS.TableE19;
     }
 
   }
