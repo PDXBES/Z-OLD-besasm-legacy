@@ -272,6 +272,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
     #endregion
 
     #region Roof IC Volume Removal Queries
+    
     public double RoofPlanterStorageVolume(IDictionary<string, Parameter> parameters)
     {
       string focusArea;
@@ -497,9 +498,11 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
 
       return roofTargetsBio;
     }
+    
     #endregion
 
     #region Park IC Volume Removal Queries
+
     public double ParkBioStorageVolume(IDictionary<string, Parameter> parameters)
     {
       string focusArea;
@@ -596,6 +599,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
 
       return parkTargetsBio;
     }
+    
     #endregion
 
     public double StormwaterRemovalVol(IDictionary<string, Parameter> parameters)
@@ -818,6 +822,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
 
       return streetArea + roofArea + parkArea;
     }
+    
     public double ProtectImproveAquaticHabitatArea(IDictionary<string, Parameter> parameters)
     {
       return 0;
