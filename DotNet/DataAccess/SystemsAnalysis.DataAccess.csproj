@@ -189,6 +189,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="RetrofitsDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RetrofitsDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="SAMasterDataSet.cs">
       <DependentUpon>SAMasterDataSet.xsd</DependentUpon>
       <SubType>Component</SubType>
@@ -300,6 +305,17 @@
     </None>
     <None Include="PumpStationDataSet.xss">
       <DependentUpon>PumpStationDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="RetrofitsDataSet.xsc">
+      <DependentUpon>RetrofitsDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="RetrofitsDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>RetrofitsDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="RetrofitsDataSet.xss">
+      <DependentUpon>RetrofitsDataSet.xsd</DependentUpon>
     </None>
     <None Include="SAMasterDataSet.xsc">
       <DependentUpon>SAMasterDataSet.xsd</DependentUpon>

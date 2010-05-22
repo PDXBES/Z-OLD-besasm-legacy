@@ -7,6 +7,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "DSCUpdaterSetup", "DSCUpdaterSetup\DSCUpdaterSetup.vdproj", "{F4BA0D02-DFA2-471E-9BF0-2413BF0C08D2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemsAnalysis.DataAccess", "..\DataAccess\SystemsAnalysis.DataAccess.csproj", "{D81499E0-ED3E-4C85-9F8E-72C263AA24C4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{4DBB7D3D-F7A2-4673-83A1-AC51C821C4C1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F4BA0D02-DFA2-471E-9BF0-2413BF0C08D2}.Debug|Any CPU.ActiveCfg = Debug
 		{F4BA0D02-DFA2-471E-9BF0-2413BF0C08D2}.Release|Any CPU.ActiveCfg = Release
+		{D81499E0-ED3E-4C85-9F8E-72C263AA24C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D81499E0-ED3E-4C85-9F8E-72C263AA24C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D81499E0-ED3E-4C85-9F8E-72C263AA24C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D81499E0-ED3E-4C85-9F8E-72C263AA24C4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
