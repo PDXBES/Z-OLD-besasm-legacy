@@ -1,0 +1,254 @@
+using System;
+using System.Drawing;
+using System.Collections;
+using System.ComponentModel;
+using System.Windows.Forms;
+using System.Data;
+using SystemsAnalysis.Utilities.StatusTextBox;
+using SystemsAnalysis.ModelConstruction.AlternativesBuilder;
+
+namespace SystemsAnalysis.ModelConstruction.AlternativesBuilder
+{
+	/// <summary>
+	/// Summary description for Form1.
+	/// </summary>
+	public class AlternativeEngineForm : System.Windows.Forms.Form
+	{
+		private System.Windows.Forms.Panel panel1;
+		private Infragistics.Win.UltraWinProgressBar.UltraProgressBar ultraProgressBar1;
+		private Infragistics.Win.Misc.UltraButton btnExit;
+
+		private string baseModel;
+		private string outputModel;
+		private string alternativeName;
+		private string templateDirectory;
+		private string mbFramework;
+		private NewAlternativeForm newAltForm;
+
+		private SystemsAnalysis.Utilities.StatusTextBox.StatusTextBox engineOutput;
+		private Infragistics.Win.Misc.UltraButton btnNewAlternative;
+		private Infragistics.Win.Misc.UltraButton btnProcessAlternative;
+		/// <summary>
+		/// Required designer variable.
+		/// </summary>
+		private System.ComponentModel.Container components = null;
+
+		public AlternativeEngineForm()
+		{
+			//
+			// Required for Windows Form Designer support
+			//
+			InitializeComponent();
+
+			this.engineOutput.AddStatus("Entering AlternativeEngine... Reading Default Settings.", SeverityLevel.Info);
+			try
+			{
+				System.IO.Stream configFile = GetType().Assembly.GetManifestResourceStream("SystemsAnalysis.ModelConstruction.AlternativesBuilder.Default_Settings.xml");				
+				AltEngineConfiguration config = new AltEngineConfiguration();
+				
+				config.ReadXml(configFile);
+				this.templateDirectory = config.ProgramSettings[0].AlternativeTemplate;
+				this.engineOutput.AddStatus("Alternative Template located at: " + this.templateDirectory);
+				this.mbFramework = config.ProgramSettings[0].MBFramework;
+				this.engineOutput.AddStatus("MapBasic Framework located at: " + this.mbFramework);
+			}
+			catch (Exception ex)
+			{
+				this.engineOutput.AddStatus("Error during initialization: " + ex.ToString(), SeverityLevel.Error);
+			}
+									
+			this.newAltForm = new NewAlternativeForm();
+		}
+
+		/// <summary>
+		/// Clean up any resources being used.
+		/// </summary>
+		protected override void Dispose( bool disposing )
+		{
+			if( disposing )
+			{
+				if (components != null) 
+				{
+					components.Dispose();
+				}
+			}
+			base.Dispose( disposing );
+		}
+
+		#region Windows Form Designer generated code
+		/// <summary>
+		/// Required method for Designer support - do not modify
+		/// the contents of this method with the code editor.
+		/// </summary>
+		private void InitializeComponent()
+		{
+			this.btnNewAlternative = new Infragistics.Win.Misc.UltraButton();
+			this.panel1 = new System.Windows.Forms.Panel();
+			this.btnExit = new Infragistics.Win.Misc.UltraButton();
+			this.btnProcessAlternative = new Infragistics.Win.Misc.UltraButton();
+			this.ultraProgressBar1 = new Infragistics.Win.UltraWinProgressBar.UltraProgressBar();
+			this.engineOutput = new SystemsAnalysis.Utilities.StatusTextBox.StatusTextBox();
+			this.panel1.SuspendLayout();
+			this.SuspendLayout();
+			// 
+			// btnNewAlternative
+			// 
+			this.btnNewAlternative.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.btnNewAlternative.Location = new System.Drawing.Point(16, 8);
+			this.btnNewAlternative.Name = "btnNewAlternative";
+			this.btnNewAlternative.Size = new System.Drawing.Size(88, 32);
+			this.btnNewAlternative.TabIndex = 4;
+			this.btnNewAlternative.Text = "Create New Alternative";
+			this.btnNewAlternative.Click += new System.EventHandler(this.btnNewAlternative_Click);
+			// 
+			// panel1
+			// 
+			this.panel1.Controls.Add(this.btnExit);
+			this.panel1.Controls.Add(this.btnProcessAlternative);
+			this.panel1.Controls.Add(this.btnNewAlternative);
+			this.panel1.Controls.Add(this.ultraProgressBar1);
+			this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+			this.panel1.Location = new System.Drawing.Point(0, 285);
+			this.panel1.Name = "panel1";
+			this.panel1.Size = new System.Drawing.Size(432, 72);
+			this.panel1.TabIndex = 5;
+			// 
+			// btnExit
+			// 
+			this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.btnExit.Location = new System.Drawing.Point(328, 8);
+			this.btnExit.Name = "btnExit";
+			this.btnExit.Size = new System.Drawing.Size(88, 32);
+			this.btnExit.TabIndex = 14;
+			this.btnExit.Text = "Exit";
+			this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+			// 
+			// btnProcessAlternative
+			// 
+			this.btnProcessAlternative.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.btnProcessAlternative.Location = new System.Drawing.Point(120, 8);
+			this.btnProcessAlternative.Name = "btnProcessAlternative";
+			this.btnProcessAlternative.Size = new System.Drawing.Size(88, 32);
+			this.btnProcessAlternative.TabIndex = 5;
+			this.btnProcessAlternative.Text = "Process Alternative";
+			this.btnProcessAlternative.Click += new System.EventHandler(this.btnProcessAlternative_Click);
+			// 
+			// ultraProgressBar1
+			// 
+			this.ultraProgressBar1.Dock = System.Windows.Forms.DockStyle.Bottom;
+			this.ultraProgressBar1.Location = new System.Drawing.Point(0, 49);
+			this.ultraProgressBar1.Name = "ultraProgressBar1";
+			this.ultraProgressBar1.Size = new System.Drawing.Size(432, 23);
+			this.ultraProgressBar1.TabIndex = 7;
+			this.ultraProgressBar1.Text = "[Formatted]";
+			// 
+			// engineOutput
+			// 
+			this.engineOutput.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.engineOutput.Location = new System.Drawing.Point(0, 0);
+			this.engineOutput.Name = "engineOutput";
+			this.engineOutput.Size = new System.Drawing.Size(432, 285);
+			this.engineOutput.TabIndex = 7;
+			this.engineOutput.Text = "";
+			// 
+			// AlternativeEngineForm
+			// 
+			this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
+			this.ClientSize = new System.Drawing.Size(432, 357);
+			this.Controls.Add(this.engineOutput);
+			this.Controls.Add(this.panel1);
+			this.Name = "AlternativeEngineForm";
+			this.Text = "Alternative Engine";
+			this.panel1.ResumeLayout(false);
+			this.ResumeLayout(false);
+
+		}
+		#endregion
+
+		/// <summary>
+		/// The main entry point for the application.
+		/// </summary>
+		[STAThread]
+		static void Main() 
+		{
+			Application.Run(new AlternativeEngineForm());
+		}
+				
+		private void btnNewAlternative_Click(object sender, System.EventArgs e)
+		{
+			try
+			{
+				if (this.newAltForm.ShowDialog() == DialogResult.OK)
+				{
+					this.baseModel = this.newAltForm.BaseModel;
+					this.alternativeName = this.newAltForm.AlternativeName;
+					this.engineOutput.AddStatus("Attempting to create new alternative...");
+					this.engineOutput.AddStatus("Base Model: '" + this.baseModel + "'");
+					this.engineOutput.AddStatus("Alternative Name: '" + this.alternativeName + "'");		
+
+					string alternative = this.baseModel + 
+						"alternatives\\" + this.alternativeName + "\\";
+
+
+					this.CopyDirectory(this.templateDirectory, alternative);
+
+					
+					AltConfigFile altConfig = new AltConfigFile();
+					altConfig.AlternativeConfiguration[0].BaseModel = this.baseModel;
+					altConfig.AlternativeConfiguration[0].Name = this.alternativeName;
+					altConfig.History.AddHistoryRow(
+						System.DateTime.Now, 
+						System.Environment.UserName, 
+						"CREATED", 
+						altConfig.AlternativeConfiguration[0]);
+					altConfig.WriteXml(alternative + "alternative_configuration.xml");
+									
+				}
+			}
+			catch (Exception ex)
+			{
+				this.engineOutput.AddStatus("Error creating new alternative: " +
+					ex.ToString(), SeverityLevel.Error);
+			}
+		
+		}
+
+		private void btnProcessAlternative_Click(object sender, System.EventArgs e)
+		{
+		
+		}
+		private void btnExit_Click(object sender, System.EventArgs e)
+		{
+			this.Close();
+		}
+
+		private void CopyDirectory(string src, string dst)
+		{
+			string[] files;
+			if (!dst.EndsWith(System.IO.Path.DirectorySeparatorChar.ToString()))
+			{
+				dst += System.IO.Path.DirectorySeparatorChar;
+			}
+			if (!System.IO.Directory.Exists(dst))
+			{
+				System.IO.Directory.CreateDirectory(dst);
+			}
+			files = System.IO.Directory.GetFileSystemEntries(src);
+			foreach (string s in files)
+			{
+				if (System.IO.Directory.Exists(s))
+				{
+					CopyDirectory(s, dst + System.IO.Path.GetFileName(s));
+				}
+				else
+				{
+					System.IO.File.Copy(s, dst + System.IO.Path.GetFileName(s), true);
+				}
+			}
+			return;
+		}
+
+		
+
+	}
+}

@@ -1,0 +1,1496 @@
+'mapbasic fillename = AddSpecials.def
+
+DECLARE SUB AddWeir
+DECLARE SUB AddPump
+DECLARE SUB AddOrifice
+DECLARE SUB DeleteWeir
+DECLARE SUB DeletePump
+DECLARE SUB DeleteOrifice
+DECLARE SUB ModifyWeir
+DECLARE SUB ModifyPump
+DECLARE SUB ModifyOrifice
+
+DECLARE SUB MakeSpecLink
+DECLARE SUB MakeSpecLinksVisible
+DECLARE SUB GetSpecLinkData
+DECLARE SUB FindCurrSpecLink
+DECLARE SUB DeleteSpecLink
+DECLARE SUB SplUpdt
+DECLARE SUB AddAnotherSchedule
+DECLARE SUB VisiblePointLocation
+DECLARE SUB GetIndex
+DECLARE SUB CheckAltModel
+DECLARE SUB InspectAlt
+DECLARE SUB InspectMdl
+DECLARE SUB InspectSpecials
+DECLARE SUB InspectOrifice
+DECLARE SUB InspectWeir
+DECLARE SUB InspectPump
+DECLARE SUB ModifyAddedPump
+DECLARE SUB ModifyAddedWeir
+DECLARE SUB ModifyAddedOrifice
+DECLARE SUB StopAddingSchedules
+DECLARE Sub ExtractAltLinkID
+DECLARE SUB MakeAltSpecLinksVisible
+DECLARE SUB DeleteInvalidSpecLinks
+DECLARE SUB DeleteInvalidSpecLinkData
+
+
+DECLARE FUNCTION maxAltSpecLinkID() AS Integer
+DECLARE FUNCTION maxAltSpecLinkDataID() AS Integer
+DECLARE FUNCTION maxAltSLNode() AS String
+DECLARE FUNCTION GetNextThreeLetterSeries(byVal theHighestAlpha AS String) AS String
+DECLARE FUNCTION IsItModified() AS Integer
+DECLARE FUNCTION CanWeGiveItANewName() AS String
+DECLARE FUNCTION DeleteAltLinkPump() AS Integer
+DECLARE FUNCTION DeleteAltLinkOrifice() AS Integer
+DECLARE FUNCTION DeleteAltLinkWeir() AS Integer
+DECLARE FUNCTION DeleteCheck(BYVAL sSpecialObject AS String) AS Logical
+DECLARE FUNCTION DeleteFromAltSpecialTables(BYVAL SLID AS Integer) AS Integer
+DECLARE FUNCTION ModifiedSelectionDialog() AS Integer
+DECLARE FUNCTION DeleteModelLinkObject(BYVAL lIsItModified AS Integer, BYVAL sObjectType AS String) AS Integer
+
+'DIM 	all the globals
+DIM specialObj AS object
+DIM sx1,sx2,sy1,sy2 AS float
+DIM iAddAnotherSchedule AS Integer
+DIM sUSID, sDSID AS string
+DIM dist AS float
+DIM iSLIndex AS Integer
+DIM lWeAlreadyHaveAWetwell AS Logical
+DIM UselessReturnValue AS Integer
+
+'--------------------------------------------------------
+SUB InspectSpecials
+	ONERROR GOTO skipInspectSpecials
+	'User wants to modify an alternate special
+	'User clicks on a mdl_link% or an alt_link%
+	SET COORDSYS EARTH PROJECTION 3, 33, "ft", -120.5, 43.6666666667, 44.3333333333, 46, 8202099.7379999999, 0
+	
+	IF NOT selectioninfo(1) THEN
+		NOTE "Please select a segment to inspect!"
+		EXIT SUB
+	END IF
+	
+	IF selectioninfo(1)NOT LIKE "%alt_links%" AND selectioninfo(1)NOT LIKE "%mdl_links%" THEN
+		NOTE "Inspection only available to alt links and model links!"
+		EXIT SUB
+	END IF
+	
+	SELECT * FROM selection INTO qyTarget
+	
+	IF	Tableinfo(qyTarget,TAB_INFO_NROWS)<>1 THEN
+		NOTE "Inpsection only available to one object at a time!"
+		EXIT SUB
+		CLOSE TABLE qyTarget
+	END IF
+	CLOSE TABLE qyTarget
+	
+	IF selectioninfo(1) LIKE "%alt_links%" THEN
+		CALL InspectAlt
+	ELSEIF selectioninfo(1) LIKE "%mdl_links%" THEN
+		CALL InspectMdl
+	END IF
+	
+	EXIT SUB
+skipInspectSpecials:	
+	CALL DebugNote("InspectSpecial Crashed - Error: " & Err() & " " & Error$() )
+	RESUME NEXT
+END SUB
+'--------------------------------------------------------
+SUB InspectAlt
+	'We know we are inspecting a special on an alt link, so we
+	'will look through the alt_special tables for adds,
+	'then give the user the chance to select the add
+	'associated with the table
+	DIM iAltLinkID AS Integer
+	DIM iChoice AS Integer
+	DIM numResults AS Integer
+	ONERROR GOTO skipInspectAlt
+	
+	SELECT * FROM selection INTO qyTarget
+	iAltLinkID = qyTarget.AltLinkID
+	SELECT * FROM alt_speclinks WHERE AltLinkID = iAltLinkID  AND Operation = "ADD" INTO theList
+	CLOSE TABLE qyTarget
+	numResults = Tableinfo(theList,TAB_INFO_NROWS)
+	
+	IF	numResults>1 THEN
+		DIM I AS Integer
+		DIM sChoices AS String
+		
+		'Create the string for the user to select from in the Listbox
+		FOR I = 1 TO numResults - 1
+			FETCH REC I FROM theList
+			sChoices = sChoices + theList.AltSpecLinkID + ";"
+		NEXT
+		
+		FETCH REC numResults FROM theList
+		sChoices = sChoices + theList.AltSpecLinkID
+		
+		DIALOG   
+		TITLE "Select which special link you want to operate on:" POSITION 250,100 
+		CONTROL STATICTEXT		ID 8500	POSITION 10,7			WIDTH 200		TITLE "SPECIAL LINK SELECTION FORM"    
+		CONTROL STATICTEXT		ID 8480	POSITION 10,30		WIDTH 140		TITLE "AltSpecLinkID:" 
+		CONTROL LISTBOX TITLE sChoices ID 8470 POSITION 155,30		WIDTH 60 HEIGHT 30 VALUE 1 INTO iChoice
+		CONTROL OKBUTTON		ID 8340	POSITION 10,135		WIDTH 45		TITLE "OK"			CALLING SplUpdt 
+		
+		FETCH REC iChoice FROM theList
+	END IF
+	
+	IF	numResults = 0 THEN
+		NOTE "No special links associated with this pipe"
+		CLOSE TABLE theList
+	END IF
+	
+	IF theList.SpecLinkType LIKE "P%" THEN
+		CALL ModifyAddedPump
+	ELSEIF theList.SpecLinkType LIKE "W%" THEN
+		CALL ModifyAddedWeir
+	ELSEIF theList.SpecLinkType LIKE "O%" THEN
+		CALL ModifyAddedOrifice
+	END IF
+	
+	EXIT SUB
+skipInspectAlt:	
+	CALL DebugNote("InspectAlt Crashed - Error: " & Err() & " " & Error$() )
+	RESUME NEXT
+END SUB
+'--------------------------------------------------------
+SUB InspectMdl
+	'We know we are inspecting a special on a alt link, so we
+	'will look through the alt_special tables for adds,
+	'then give the user the chance to select the add
+	'associated with the table
+	DIM iLinkID AS Integer
+	DIM iChoice AS Integer
+	DIM numResults AS Integer
+	DIM iSLID AS Integer
+	ONERROR GOTO skipInspectMdl
+	
+	SELECT * FROM selection INTO qyTarget
+	iLinkID = qyTarget.LinkID
+	SELECT * FROM mdl_speclinks WHERE ToLinkID = iLinkID INTO theList
+	iSLID = theList.SLID
+	CLOSE TABLE theList
+	SELECT * FROM alt_speclinks WHERE MdlSpecLinkID = iSLID  AND Operation = "UPD" INTO theList
+	CLOSE TABLE qyTarget
+	numResults = Tableinfo(theList,TAB_INFO_NROWS)
+	
+	IF	numResults>1 THEN
+		DIM I AS Integer
+		DIM sChoices AS String
+		
+		'Create the string for the user to select from in the Listbox
+		FOR I = 1 TO numResults - 1
+			FETCH REC I FROM theList
+			sChoices = sChoices + theList.AltSpecLinkID + ";"
+		NEXT
+		
+		FETCH REC numResults FROM theList
+		sChoices = sChoices + theList.AltSpecLinkID
+		
+		DIALOG   
+		TITLE "Select which special link you want to operate on:" POSITION 250,100 
+		CONTROL STATICTEXT		ID 8500	POSITION 10,7			WIDTH 200		TITLE "SPECIAL LINK SELECTION FORM"    
+		CONTROL STATICTEXT		ID 8480	POSITION 10,30		WIDTH 140		TITLE "AltSpecLinkID:" 
+		CONTROL LISTBOX TITLE sChoices ID 8470 POSITION 155,30		WIDTH 60 HEIGHT 30 VALUE 1 INTO iChoice
+		CONTROL OKBUTTON		ID 8340	POSITION 10,135		WIDTH 45		TITLE "OK"			CALLING SplUpdt 
+		
+		FETCH REC iChoice FROM theList
+	END IF
+	
+	IF	numResults = 0 THEN
+		NOTE "No special links associated with this pipe"
+		CLOSE TABLE theList
+	END IF
+	
+	IF theList.SpecLinkType LIKE "P%" THEN
+		CALL ModifyAddedPump
+	ELSEIF theList.SpecLinkType LIKE "W%" THEN
+		CALL ModifyAddedWeir
+	ELSEIF theList.SpecLinkType LIKE "O%" THEN
+		CALL ModifyAddedOrifice
+	END IF
+	
+	EXIT SUB
+skipInspectMdl:	
+	CALL DebugNote("InspectMdl Crashed - Error: " & Err() & " " & Error$() )
+	RESUME NEXT
+END SUB
+'--------------------------------------------------------
+SUB ModifyAddedOrifice
+'Order of events:
+'Get the data from the orifice the user selected
+'Show the data to the user
+'Replace the data previously in the table with the data the user entered
+	DIM iONKLASS AS Integer
+	DIM iISqRnd AS Integer
+	DIM fCOrif AS Float
+	DIM fZP AS Float
+	DIM sOrifName AS String
+	DIM fAOrif AS Float
+	DIM sSLNode AS String
+	DIM iMdlSpecLinkID AS Integer
+	DIM iSLtyp AS Integer
+	DIM sSLtyp AS String
+	DIM SLID AS Integer
+	DIM iAltSpecLinkID AS Integer
+	DIM iAltSpecLinkDataID AS Integer
+	DIM iAltLinkID AS Integer
+	DIM iSpecLinkIndex AS Integer
+	DIM sOperation AS String
+	DIM fDiamHeightOrif AS Float
+	DIM fWidthOrif AS Float
+	ONERROR GOTO skipModifyAddedOrifice
+
+	iAltSpecLinkID = theList.AltSpecLinkID
+	iAltLinkID = theList.AltLinkID
+	iSpecLinkIndex = theList.SpecLinkIndex
+	sSLNode = theList.SLNode
+	sOperation = theList.Operation
+	iMdlSpecLinkID = theList.MdlSpecLinkID
+	
+	'CLOSE TABLE qyTarget
+	IF iMdlSpecLinkID = 0 THEN
+		SELECT * FROM alt_links WHERE AltLinkID = iAltLinkID into qyTarget
+	ELSE
+		SELECT * FROM mdl_speclinks WHERE SLID = iMdlSpecLinkID into qyTargetX
+		DIM iToLinkID AS Integer
+		iToLinkID = qyTargetX.ToLinkID
+		SELECT * FROM mdl_links_applied WHERE LinkID = iToLinkID into qyTarget
+		CLOSE TABLE qyTargetX
+	END IF
+	CALL VisiblePointLocation
+	
+
+		SELECT * FROM alt_SpecLinkData WHERE Tag = "ONKLASS" and AltSpecLinkID = iAltSpecLinkID INTO qyPumpData
+		iONKLASS = Val(qyPumpData.value)
+		CLOSE TABLE qyPumpData
+		SELECT * FROM alt_SpecLinkData WHERE Tag = "ISQRND" and AltSpecLinkID = iAltSpecLinkID INTO qyPumpData
+		iISqRnd = Val(qyPumpData.value) + 1
+		CLOSE TABLE qyPumpData
+		SELECT * FROM alt_SpecLinkData WHERE Tag = "CORIF" and AltSpecLinkID = iAltSpecLinkID INTO qyPumpData
+		fCOrif = Val(qyPumpData.value)
+		CLOSE TABLE qyPumpData
+		SELECT * FROM alt_SpecLinkData WHERE Tag = "ZP" and AltSpecLinkID = iAltSpecLinkID INTO qyPumpData
+		fZP = qyPumpData.value
+		CLOSE TABLE qyPumpData
+		SELECT * FROM alt_SpecLinkData WHERE Tag = "ORIFNAME" and AltSpecLinkID = iAltSpecLinkID INTO qyPumpData
+		sOrifName = qyPumpData.value
+		CLOSE TABLE qyPumpData
+		SELECT * FROM alt_SpecLinkData WHERE Tag = "AORIF" and AltSpecLinkID = iAltSpecLinkID INTO qyPumpData
+		fAOrif = Val(qyPumpData.value)
+		CLOSE TABLE qyPumpData
+		SELECT * FROM alt_SpecLinks WHERE AltSpecLinkID = iAltSpecLinkID INTO qyPumpData
+		sSLtyp = qyPumpData.SpecLinkType
+		CLOSE TABLE qyPumpData
+		SELECT * FROM alt_SpecLinkData WHERE Tag = "DORIF" and AltSpecLinkID = iAltSpecLinkID INTO qyPumpData
+			IF (Tableinfo(qyPumpData,TAB_INFO_NROWS) <> 0)
+				THEN
+				fWidthOrif = qyPumpData.value
+			END IF
+		CLOSE TABLE qyPumpData
+		
+		IF sSLtyp = "OS" THEN
+			iSLtyp = 1
+		ELSE
+			iSLtyp = 2
+		END IF
+		
+		IF iISqRnd = 1 THEN 'Round orifice
+			fDiamHeightOrif = SQR(fAOrif*4/3.14159)
+			fWidthOrif = 0
+		ELSE 'square orifice
+			IF fWidthOrif <> 0 THEN
+				fDiamHeightOrif = fAOrif/fWidthOrif
+				fWidthOrif = fWidthOrif
+			ELSE
+				fDiamHeightOrif = SQR(fAOrif)
+				fWidthOrif = SQR(fAOrif)
+			END IF
+		END IF
+		
+		'sSLNode = qySpecLinks.SLNode
+		'iSLIndex = qySpecLinks.ToLinkNDX
+		
+		DIALOG   
+			TITLE "Update Orifice Attributes" POSITION 250,100 
+			CONTROL STATICTEXT		ID 8500	POSITION 10,7			WIDTH 200		TITLE "SPECIAL LINK ENTRY FORM"    
+			CONTROL STATICTEXT		ID 8480	POSITION 10,30		WIDTH 140		TITLE "SPECIAL LINK TYPE:" 
+			CONTROL LISTBOX TITLE "OS;OB" ID 8470 POSITION 155,30		WIDTH 60 HEIGHT 11 VALUE iSLtyp INTO iSLtyp
+			CONTROL STATICTEXT		ID 8462	POSITION 10,40		WIDTH 140		TITLE "COEFFICIENT:"    
+			CONTROL EDITTEXT		ID 8452	POSITION 155,40		WIDTH 60		VALUE fCOrif	INTO fCOrif
+			CONTROL STATICTEXT		ID 8463	POSITION 10,50		WIDTH 140		TITLE "SIDE ORIFICE ELEVATION (ft):"    
+			CONTROL EDITTEXT		ID 8453	POSITION 155,50		WIDTH 60		VALUE fZP	INTO fZP
+			CONTROL STATICTEXT		ID 8465	POSITION 10,60		WIDTH 140		TITLE "ORIFICE SHAPE:"    
+			CONTROL LISTBOX TITLE "ROUND;SQUARE" ID 8455 POSITION 155,60		WIDTH 60 HEIGHT 11 VALUE iISqRnd INTO iISqRnd
+			CONTROL STATICTEXT		ID 8464	POSITION 10,70		WIDTH 140		TITLE "Diameter/Height (ft):"    
+			CONTROL EDITTEXT		ID 8454	POSITION 155,70		WIDTH 60		VALUE fDiamHeightOrif	INTO fDiamHeightOrif
+			CONTROL STATICTEXT		ID 8466	POSITION 10,80		WIDTH 140		TITLE "Width (0 for circular)(ft):"    
+			CONTROL EDITTEXT		ID 8457	POSITION 155,80		WIDTH 60		VALUE fWidthOrif	INTO fWidthOrif
+			CONTROL OKBUTTON		ID 8340	POSITION 10,135		WIDTH 45		TITLE "OK"			CALLING SplUpdt 
+			CONTROL CANCELBUTTON		ID 8341	POSITION 155,135		WIDTH 45		TITLE "CANCEL"			CALLING SplUpdt
+		
+		IF CommandInfo(CMD_INFO_DLG_OK) THEN
+			
+			SLID = iAltSpecLinkID
+			
+			SELECT * FROM alt_speclinks WHERE AltSpecLinkID = SLID INTO Lame
+			DELETE FROM Lame
+			CLOSE TABLE Lame
+			
+			SELECT* FROM alt_speclinkdata WHERE AltSpecLinkID = SLID INTO Lame
+			DELETE FROM Lame
+			CLOSE TABLE Lame
+			
+			SELECT* FROM VisibleSpecials WHERE AltSpecLinkID = SLID INTO Lame
+			DELETE FROM Lame
+			CLOSE TABLE Lame
+			
+			IF iSLtyp =  1 THEN
+				sSLtyp = "OS"
+			ELSE
+				sSLtyp = "OB"
+			END IF
+			
+			IF iISqRnd = 1 THEN 'Round orifice
+				fAOrif = (fDiamHeightOrif*fDiamHeightOrif)*3.14159/4
+			ELSE 'square orifice
+				fAOrif = fDiamHeightOrif*fWidthOrif
+			END IF
+		
+			'Get the current symbol style and save it, then
+			'place the graphic object into the alt_special links table
+			'then reset to the old symbol style
+			DIM sym_user_symbol AS Symbol
+			sym_user_symbol = CurrentSymbol( )
+			SET STYLE Symbol ( 70,BLUE,18, "MapInfo Cartographic", 0, 45 )
+			INSERT INTO VisibleSpecials(OBJ, AltSpecLinkID, MdlSpecLinkID, AltLinkID, Operation, SpecLinkIndex, SpecLinkType, SLNode)
+				VALUES( CreatePoint( sx2, sy2), iAltSpecLinkID, iMdlSpecLinkID, iAltLinkID, sOperation, iSLIndex, sSLtyp, sSLNode)
+			SET STYLE Symbol sym_user_symbol	
+			
+			
+			INSERT INTO alt_speclinks(AltSpecLinkID, MdlSpecLinkID, AltLinkID, Operation, SpecLinkIndex, SpecLinkType, SLNode)
+				VALUES(iAltSpecLinkID, iMdlSpecLinkID, iAltLinkID, sOperation, iSLIndex, sSLtyp, sSLNode)
+				
+			iAltSpecLinkDataID = maxAltSpecLinkDataID()
+			
+			INSERT INTO alt_speclinkdata(AltSpecLinkDataID, AltSpecLinkID, Tag, VALUE)
+				VALUES(iAltSpecLinkDataID, iAltSpecLinkID, "ONKLASS", iONKLASS)
+			INSERT INTO alt_speclinkdata(AltSpecLinkDataID, AltSpecLinkID, Tag, VALUE)
+
+				VALUES(iAltSpecLinkDataID+1, iAltSpecLinkID, "ORIF1", 1)
+			INSERT INTO alt_speclinkdata(AltSpecLinkDataID, AltSpecLinkID, Tag, VALUE)
+				VALUES(iAltSpecLinkDataID+2, iAltSpecLinkID, "CORIF", fCOrif)
+			INSERT INTO alt_speclinkdata(AltSpecLinkDataID, AltSpecLinkID, Tag, VALUE)
+				VALUES(iAltSpecLinkDataID+3, iAltSpecLinkID, "ZP", fZP)
+			INSERT INTO alt_speclinkdata(AltSpecLinkDataID, AltSpecLinkID, Tag, VALUE)
+				VALUES(iAltSpecLinkDataID+4, iAltSpecLinkID, "ORIFNAME", sOrifName)
+			INSERT INTO alt_speclinkdata(AltSpecLinkDataID, AltSpecLinkID, Tag, VALUE)
+				VALUES(iAltSpecLinkDataID+5, iAltSpecLinkID, "AORIF", fAOrif)
+			INSERT INTO alt_speclinkdata(AltSpecLinkDataID, AltSpecLinkID, Tag, VALUE)
+				VALUES(iAltSpecLinkDataID+6, iAltSpecLinkID, "ISQRND", iISqRnd - 1)
+			IF fWidthOrif <> 0 THEN
+				INSERT INTO alt_speclinkdata(AltSpecLinkDataID, AltSpecLinkID, Tag, VALUE)
+					VALUES(iAltSpecLinkDataID+7, iAltSpecLinkID, "DORIF", fWidthOrif)
+			END IF
+		END IF
+		
+		CLOSE TABLE theList
+
+EXIT SUB
+skipModifyAddedOrifice:	
+	CALL DebugNote("ModifyAddedWeir Crashed - Error: " & Err() & " " & Error$() )
+	RESUME NEXT
+END SUB
+'--------------------------------------------------------
+SUB ModifyAddedWeir
+'Order of events:
+'Get the data from the orifice the user selected
+'Show the data to the user
+'Replace the data previously in the table with the data the user entered
+	DIM fWLen AS Float
+	DIM iKWeir AS Integer
+	DIM fYCrest AS Float
+	DIM sWeirName AS String
+	DIM fCoeff AS Integer
+	DIM fYTop AS Float
+	DIM sSLNode AS String
+	DIM iMdlSpecLinkID AS Integer
+	DIM iSLtyp AS Integer
+	DIM sSLtyp AS String
+	DIM iAltSpecLinkID AS Integer
+	DIM iAltLinkID AS Integer
+	DIM iSpecLinkIndex AS Integer
+	DIM SLID AS Integer
+	DIM iAltSpecLinkDataID AS Integer
+	DIM sOperation AS String
+	ONERROR GOTO skipModifyAddedWeir
+
+	iAltSpecLinkID = theList.AltSpecLinkID
+	iAltLinkID = theList.AltLinkID
+	iSpecLinkIndex = theList.SpecLinkIndex
+	sSLNode = theList.SLNode
+	sOperation = theList.Operation
+	iMdlSpecLinkID = theList.MdlSpecLinkID
+	
+	'CLOSE TABLE qyTarget
+	IF iMdlSpecLinkID = 0 THEN
+		SELECT * FROM alt_links WHERE AltLinkID = iAltLinkID into qyTarget
+	ELSE
+		SELECT * FROM mdl_speclinks WHERE SLID = iMdlSpecLinkID into qyTargetX
+		DIM iToLinkID AS Integer
+		iToLinkID = qyTargetX.ToLinkID
+		SELECT * FROM mdl_links_applied WHERE LinkID = iToLinkID into qyTarget
+		CLOSE TABLE qyTargetX
+	END IF
+	CALL VisiblePointLocation
+	
+
+		SELECT * FROM alt_SpecLinkData WHERE Tag = "WLEN" and AltSpecLinkID = iAltSpecLinkID INTO qyPumpData
+		fWLen = Val(qyPumpData.value)
+		CLOSE TABLE qyPumpData
+		SELECT * FROM alt_SpecLinkData WHERE Tag = "KWEIR" and AltSpecLinkID = iAltSpecLinkID INTO qyPumpData
+		iKWeir = Val(qyPumpData.value)
+		CLOSE TABLE qyPumpData
+		SELECT * FROM alt_SpecLinkData WHERE Tag = "YCREST" and AltSpecLinkID = iAltSpecLinkID INTO qyPumpData
+		fYCrest = Val(qyPumpData.value)
+		CLOSE TABLE qyPumpData
+		SELECT * FROM alt_SpecLinkData WHERE Tag = "WEIRNAME" and AltSpecLinkID = iAltSpecLinkID INTO qyPumpData
+		sWeirName = qyPumpData.value
+		CLOSE TABLE qyPumpData
+		SELECT * FROM alt_SpecLinkData WHERE Tag = "COEFF" and AltSpecLinkID = iAltSpecLinkID INTO qyPumpData
+		fCoeff = Val(qyPumpData.value)
+		CLOSE TABLE qyPumpData
+		SELECT * FROM alt_SpecLinkData WHERE Tag = "YTOP" and AltSpecLinkID = iAltSpecLinkID INTO qyPumpData
+		fYTop = Val(qyPumpData.value)
+		CLOSE TABLE qyPumpData
+		SELECT * FROM alt_SpecLinks WHERE AltSpecLinkID = iAltSpecLinkID INTO qyPumpData
+		sSLtyp = qyPumpData.SpecLinkType
+		CLOSE TABLE qyPumpData
+		
+		IF sSLtyp = "WS" THEN
+			iSLtyp = 1
+		ELSE
+			iSLtyp = 2
+		END IF
+		
+		DIALOG   
+		TITLE "Update Weir Attributes" POSITION 250,100 
+		CONTROL STATICTEXT		ID 8500	POSITION 10,7			WIDTH 200		TITLE "SPECIAL LINK ENTRY FORM"    
+		CONTROL STATICTEXT		ID 8480	POSITION 10,30		WIDTH 140		TITLE "SPECIAL LINK TYPE:" 
+		CONTROL LISTBOX TITLE "WS;WT" ID 8470 POSITION 155,30		WIDTH 60 HEIGHT 11 VALUE iSLtyp INTO iSLtyp
+		CONTROL STATICTEXT		ID 8460	POSITION 10,40		WIDTH 140		TITLE "WEIR LENGTH (ft):"    
+		CONTROL EDITTEXT		ID 8450	POSITION 155,40		WIDTH 60		VALUE fWLen	INTO fWLen
+		CONTROL STATICTEXT		ID 8461	POSITION 10,50		WIDTH 140		TITLE "WEIR TYPE:"    
+		CONTROL LISTBOX TITLE "TRANSVERSE WEIR;TIDE GATE;SIDE WEIR;TIDE/SIDE"		ID 8451	POSITION 155,50	HEIGHT 11	WIDTH 60		VALUE iKWeir	INTO iKWeir
+		CONTROL STATICTEXT		ID 8462	POSITION 10,60		WIDTH 140		TITLE "TOP OF WEIR, IE (ft):"    
+		CONTROL EDITTEXT		ID 8452	POSITION 155,60		WIDTH 60		VALUE fYCrest	INTO fYCrest
+		CONTROL STATICTEXT		ID 8463	POSITION 10,70		WIDTH 140		TITLE "COEFFICIENT:"    
+		CONTROL EDITTEXT		ID 8453	POSITION 155,70		WIDTH 60		VALUE 3	INTO fCoeff
+		CONTROL STATICTEXT		ID 8464	POSITION 10,80		WIDTH 140		TITLE "ROOF OF STRUCTURE (ft):"    
+		CONTROL EDITTEXT		ID 8454	POSITION 155,80		WIDTH 60		VALUE fYTop	INTO fYTop
+		CONTROL OKBUTTON		ID 8340	POSITION 10,135		WIDTH 45		TITLE "OK"			CALLING SplUpdt 
+		CONTROL CANCELBUTTON		ID 8341	POSITION 155,135		WIDTH 45		TITLE "CANCEL"			CALLING SplUpdt
+
+		IF CommandInfo(CMD_INFO_DLG_OK) THEN
+			IF fYCrest > fYTop THEN
+				Note "You cannot have the crest higher than the roof of the structure"
+				EXIT SUB
+			END IF
+			
+			IF iSLtyp = 1 THEN
+				sSLtyp = "WS"
+			ELSE
+				sSLtyp = "WT"
+			END IF
+			
+			SLID = iAltSpecLinkID
+			
+			UselessReturnValue = DeleteFromAltSpecialTables(SLID)
+		
+			'Get the current symbol style and save it, then
+			'place the graphic object into the alt_special links table
+			'then reset to the old symbol style
+			DIM sym_user_symbol AS Symbol
+			sym_user_symbol = CurrentSymbol( )
+			SET STYLE Symbol MakeSymbol(56,BLUE,18)
+			INSERT INTO VisibleSpecials(OBJ, AltSpecLinkID, MdlSpecLinkID, AltLinkID, Operation, SpecLinkIndex, SpecLinkType, SLNode)
+				VALUES( CreatePoint( sx2, sy2), iAltSpecLinkID, iMdlSpecLinkID, iAltLinkID, sOperation, iSLIndex, sSLtyp, sSLNode)
+			SET STYLE Symbol sym_user_symbol	
+
+			INSERT INTO alt_speclinks(AltSpecLinkID, MdlSpecLinkID, AltLinkID, Operation, SpecLinkIndex, SpecLinkType, SLNode)
+				VALUES(iAltSpecLinkID, iMdlSpecLinkID, iAltLinkID, sOperation, iSLIndex, sSLtyp, sSLNode)
+				
+			iAltSpecLinkDataID = maxAltSpecLinkDataID()
+			
+			INSERT INTO alt_speclinkdata(AltSpecLinkDataID, AltSpecLinkID, Tag, VALUE)
+				VALUES(iAltSpecLinkDataID, iAltSpecLinkID, "WLEN", fWLen)
+	
+			INSERT INTO alt_speclinkdata(AltSpecLinkDataID, AltSpecLinkID, Tag, VALUE)
+				VALUES(iAltSpecLinkDataID+1, iAltSpecLinkID, "KWEIR", iKWeir)
+			INSERT INTO alt_speclinkdata(AltSpecLinkDataID, AltSpecLinkID, Tag, VALUE)
+				VALUES(iAltSpecLinkDataID+2, iAltSpecLinkID, "YCREST", fYCrest)
+			INSERT INTO alt_speclinkdata(AltSpecLinkDataID, AltSpecLinkID, Tag, VALUE)
+				VALUES(iAltSpecLinkDataID+3, iAltSpecLinkID, "WEIRNAME", sWeirName)
+			INSERT INTO alt_speclinkdata(AltSpecLinkDataID, AltSpecLinkID, Tag, VALUE)
+				VALUES(iAltSpecLinkDataID+4, iAltSpecLinkID, "COEFF", fCoeff)
+			INSERT INTO alt_speclinkdata(AltSpecLinkDataID, AltSpecLinkID, Tag, VALUE)
+				VALUES(iAltSpecLinkDataID+5, iAltSpecLinkID, "YTOP", fYTop)
+			INSERT INTO alt_speclinkdata(AltSpecLinkDataID, AltSpecLinkID, Tag, VALUE)
+				VALUES(iAltSpecLinkDataID+6, iAltSpecLinkID, "WEIR1", 1)
+		END IF
+		
+		CLOSE TABLE theList
+
+EXIT SUB
+skipModifyAddedWeir:	
+	CALL DebugNote("ModifyAddedWeir Crashed - Error: " & Err() & " " & Error$() )
+	RESUME NEXT
+END SUB
+'--------------------------------------------------------
+SUB ModifyAddedPump
+'This will just show a dialog of the pump that the user wants to
+'modify and allow the user to make changes.
+'Things to keep in mind: whether the special node can be renamed
+', if the pump had a wetwell, 
+	DIM iAltSpecLinkID AS Integer
+	DIM sPName AS String
+	DIM fPOn AS Float
+	DIM fPOff AS Float
+	DIM fAStore AS Float
+	DIM lWetwellPresent AS Logical
+	DIM fRating(1) AS Float
+	DIM fFlow(1) AS Float
+	DIM iEverythingsOK AS Integer
+	DIM iCurrentSchedule AS Integer
+	DIM iAltLinkID AS Integer
+	DIM iSpecLinkIndex AS Integer
+	DIM sSLNode AS String
+	DIM numResults AS Integer
+	DIM iMdlSpecLinkID AS Integer
+	DIM nRecsAlt AS Integer
+	DIM lIsNewSpcNodeName AS Logical
+	DIM SLID AS Integer
+	DIM PT AS String
+	DIM iAltSpecLinkDataID AS Integer
+	DIM sOperation AS String
+	ONERROR GOTO skipModifyAddedPump
+	
+	iAltSpecLinkID = theList.AltSpecLinkID
+	iAltLinkID = theList.AltLinkID
+	iSpecLinkIndex = theList.SpecLinkIndex
+	sSLNode = theList.SLNode
+	sOperation = theList.Operation
+	iMdlSpecLinkID = theList.MdlSpecLinkID
+	
+	'CLOSE TABLE qyTarget
+	IF iMdlSpecLinkID = 0 THEN
+		SELECT * FROM alt_links WHERE AltLinkID = iAltLinkID into qyTarget
+	ELSE
+		SELECT * FROM mdl_speclinks WHERE SLID = iMdlSpecLinkID into qyTargetX
+		DIM iToLinkID AS Integer
+		iToLinkID = qyTargetX.ToLinkID
+		SELECT * FROM mdl_links_applied WHERE LinkID = iToLinkID into qyTarget
+		CLOSE TABLE qyTargetX
+	END IF
+	CALL VisiblePointLocation
+	
+	DO
+		SELECT * FROM alt_SpecLinkData WHERE Tag LIKE "PNAME" and AltSpecLinkID = iAltSpecLinkID INTO qyPumpData
+		sPName = qyPumpData.value
+		CLOSE TABLE qyPumpData
+		SELECT * FROM alt_SpecLinkData WHERE Tag = "PON" and AltSpecLinkID = iAltSpecLinkID INTO qyPumpData
+		fPOn = Val(qyPumpData.value)
+		CLOSE TABLE qyPumpData
+		SELECT * FROM alt_SpecLinkData WHERE Tag = "POFF" and AltSpecLinkID = iAltSpecLinkID INTO qyPumpData
+		fPOff = Val(qyPumpData.value)
+		CLOSE TABLE qyPumpData
+		SELECT * FROM alt_SpecLinkData WHERE Tag = "ASTORE" and AltSpecLinkID = iAltSpecLinkID INTO qyPumpData
+		numResults = Tableinfo(qyPumpData,TAB_INFO_NROWS)
+		IF numResults = 0 THEN
+			lWetwellPresent = false
+		ELSE
+			lWetwellPresent = true
+			fAStore = Val(qyPumpData.value)
+		END IF
+		CLOSE TABLE qyPumpData
+		
+		iSLIndex = iSpecLinkIndex
+		
+		IF lWetwellPresent = true THEN
+			PRINT "Showing update dialog for old pump at " + sUSID
+			DIALOG   
+			TITLE "Update Pump Attributes" POSITION 250,100 
+			CONTROL STATICTEXT		ID 8500	POSITION 10,7			WIDTH 200		TITLE "SPECIAL LINK ENTRY FORM"    
+			CONTROL STATICTEXT		ID 8460	POSITION 10,40		WIDTH 140		TITLE "PUMP NAME:"    
+			CONTROL EDITTEXT		ID 8450	POSITION 155,40		WIDTH 60		VALUE sPName	INTO sPName
+			CONTROL STATICTEXT		ID 8461	POSITION 10,50		WIDTH 140		TITLE "PUMP ON ELEVATION (ft):"    
+			CONTROL EDITTEXT		ID 8451	POSITION 155,50		WIDTH 60		VALUE fPOn	INTO fPOn
+			CONTROL STATICTEXT		ID 8462	POSITION 10,60		WIDTH 140		TITLE "PUMP OFF ELEVATION (ft):"    
+			CONTROL EDITTEXT		ID 8452	POSITION 155,60		WIDTH 60		VALUE fPOff	INTO fPOff		
+			CONTROL STATICTEXT		ID 8463	POSITION 10,70		WIDTH 140		TITLE "WET WELL STORAGE (ft^3/ft):"    
+			CONTROL EDITTEXT		ID 8453	POSITION 155,70		WIDTH 60		VALUE fAStore	INTO fAStore
+			CONTROL OKBUTTON		ID 8340	POSITION 10,100		WIDTH 45		TITLE "OK"			CALLING SplUpdt 
+			CONTROL CANCELBUTTON		ID 8341	POSITION 155,100		WIDTH 45		TITLE "CANCEL"			CALLING SplUpdt
+		ELSE
+			PRINT "Showing update dialog for old pump at " + sUSID
+			DIALOG   
+			TITLE "Update Pump Attributes" POSITION 250,100 
+			CONTROL STATICTEXT		ID 8500	POSITION 10,7			WIDTH 200		TITLE "SPECIAL LINK ENTRY FORM"    
+			CONTROL STATICTEXT		ID 8460	POSITION 10,40		WIDTH 140		TITLE "PUMP NAME:"    
+			CONTROL EDITTEXT		ID 8450	POSITION 155,40		WIDTH 60		VALUE sPName	INTO sPName
+			CONTROL STATICTEXT		ID 8461	POSITION 10,50		WIDTH 140		TITLE "PUMP ON ELEVATION (ft):"    
+			CONTROL EDITTEXT		ID 8451	POSITION 155,50		WIDTH 60		VALUE fPOn	INTO fPOn
+			CONTROL STATICTEXT		ID 8462	POSITION 10,60		WIDTH 140		TITLE "PUMP OFF ELEVATION (ft):"    
+			CONTROL EDITTEXT		ID 8452	POSITION 155,60		WIDTH 60		VALUE fPOff	INTO fPOff		
+			CONTROL OKBUTTON		ID 8340	POSITION 10,100		WIDTH 45		TITLE "OK"			CALLING SplUpdt 
+			CONTROL CANCELBUTTON		ID 8341	POSITION 155,100		WIDTH 45		TITLE "CANCEL"			CALLING SplUpdt
+		END IF
+		IF CommandInfo(CMD_INFO_DLG_OK) THEN
+			iEverythingsOK = 1
+		ELSE
+			iEverythingsOK = 0
+		END IF
+		SELECT alt_speclinkdata.Value FROM alt_speclinkdata WHERE alt_speclinkdata.Value = sPName INTO NameCheck
+		SELECT mdl_speclinkdata.TValue FROM mdl_speclinkdata WHERE mdl_speclinkdata.TValue = sPName INTO NameCheck
+		IF  tableinfo(NameCheck,TAB_INFO_NROWS) > 0 THEN
+			NOTE "There is already a pump named: " & sPName
+			CLOSE TABLE NameCheck
+			EXIT SUB
+		END IF
+		
+		IF fPOn < fPOff THEN
+			NOTE "Pump on level higher than pump off level."
+			EXIT SUB
+		END IF
+		
+		CLOSE TABLE NameCheck
+
+		IF iEverythingsOK = 1 THEN
+			iEverythingsOK = 1
+			iCurrentSchedule = 0
+			iAddAnotherSchedule = 1
+			DO WHILE iAddAnotherSchedule = 1
+				iCurrentSchedule = iCurrentSchedule + 1
+				iAddAnotherSchedule = 0
+				
+				REDIM fRating(iCurrentSchedule)
+				REDIM fFlow(iCurrentSchedule)
+				PRINT "Showing update dialog for pump schedule at " + sUSID
+				DIALOG 
+				TITLE "Update Pump Schedule" POSITION 250,100 
+				CONTROL STATICTEXT		ID 8500	POSITION 10,7			WIDTH 200		TITLE "PUMP SCHEDULE ENTRY FORM, PUMP " + iCurrentSchedule    
+				CONTROL STATICTEXT		ID 8460	POSITION 10,40		WIDTH 140		TITLE "RATING (ft from wetwell floor):"    
+				CONTROL EDITTEXT		ID 8450	POSITION 155,40		WIDTH 60		VALUE fRating(iCurrentSchedule)	INTO fRating(iCurrentSchedule)
+				CONTROL STATICTEXT		ID 8461	POSITION 10,50		WIDTH 140		TITLE "FLOW (cfs):"    
+				CONTROL EDITTEXT		ID 8451	POSITION 155,50		WIDTH 60		VALUE fFlow(iCurrentSchedule)	INTO fFlow(iCurrentSchedule)	
+				CONTROL OKBUTTON		ID 8340	POSITION 10,100		WIDTH 70		TITLE "ADD THIS CHANGE"			CALLING AddAnotherSchedule 
+				CONTROL CANCELBUTTON		ID 8341	POSITION 155,100		WIDTH 45		TITLE "FINISHED."			CALLING SplUpdt
+			LOOP
+		ELSE
+			iEverythingsOK = 0
+		END IF
+		
+		iCurrentSchedule = iCurrentSchedule - 1
+		nRecsAlt = tableinfo(alt_speclinks,TAB_INFO_NROWS)
+		lIsNewSpcNodeName = true
+		
+		IF iEverythingsOK = 1 THEN
+			DIM iCounter AS Integer
+			'Delete all of the records related to this object from alt_speclinks and alt_speclinkdata
+			'and visiblespecials and pumpcurves
+			SLID = iAltSpecLinkID
+	
+			SELECT * FROM alt_speclinkdata WHERE AltSpecLinkID = SLID INTO Lame
+			SELECT * FROM Lame WHERE Tag = "PNAME" INTO Lame2
+			PT = Lame2.Value
+			SELECT * FROM alt_pumpcurves WHERE PumpType = PT INTO Lame3
+			DELETE FROM Lame3
+			CLOSE TABLE Lame
+			CLOSE TABLE Lame2
+			CLOSE TABLE Lame3
+			
+			UselessReturnValue = DeleteFromAltSpecialTables(SLID)
+			
+			iCounter = 0
+			iAltSpecLinkID = maxAltSpecLinkID()
+		
+			'Get the current symbol style and save it, then
+			'place the graphic object into the alt_special links table
+			'then reset to the old symbol style
+			DIM sym_user_symbol AS Symbol
+			sym_user_symbol = CurrentSymbol( )
+			SET STYLE Symbol MakeSymbol( 34,BLUE,18 )
+			INSERT INTO VisibleSpecials(OBJ, AltSpecLinkID, MdlSpecLinkID, AltLinkID, Operation, SpecLinkIndex, SpecLinkType, SLNode)
+				VALUES( CreatePoint( sx2, sy2), iAltSpecLinkID, iMdlSpecLinkID, iAltLinkID, sOperation, iSLIndex, "PS", sSLNode)
+			SET STYLE Symbol sym_user_symbol	
+			
+			
+			INSERT INTO alt_speclinks(AltSpecLinkID, MdlSpecLinkID, AltLinkID, Operation, SpecLinkIndex, SpecLinkType, SLNode)
+				VALUES(iAltSpecLinkID, iMdlSpecLinkID, iAltLinkID, sOperation, iSLIndex, "PS", sSLNode)
+				
+			iAltSpecLinkDataID = maxAltSpecLinkDataID()
+			
+			INSERT INTO alt_speclinkdata(AltSpecLinkDataID, AltSpecLinkID, Tag, VALUE)
+				VALUES(iAltSpecLinkDataID, iAltSpecLinkID, "PNAME", sPName)
+	
+			INSERT INTO alt_speclinkdata(AltSpecLinkDataID, AltSpecLinkID, Tag, VALUE)
+				VALUES(iAltSpecLinkDataID+1, iAltSpecLinkID, "PSEL", sPName)
+			INSERT INTO alt_speclinkdata(AltSpecLinkDataID, AltSpecLinkID, Tag, VALUE)
+				VALUES(iAltSpecLinkDataID+2, iAltSpecLinkID, "PUMP1", 1)
+			INSERT INTO alt_speclinkdata(AltSpecLinkDataID, AltSpecLinkID, Tag, VALUE)
+				VALUES(iAltSpecLinkDataID+3, iAltSpecLinkID, "IPTYP", 4)
+			INSERT INTO alt_speclinkdata(AltSpecLinkDataID, AltSpecLinkID, Tag, VALUE)
+				VALUES(iAltSpecLinkDataID+4, iAltSpecLinkID, "DHI_Pcurve", sPName)
+			INSERT INTO alt_speclinkdata(AltSpecLinkDataID, AltSpecLinkID, Tag, VALUE)
+				VALUES(iAltSpecLinkDataID+5, iAltSpecLinkID, "PON", fPOn)
+			INSERT INTO alt_speclinkdata(AltSpecLinkDataID, AltSpecLinkID, Tag, VALUE)
+				VALUES(iAltSpecLinkDataID+6, iAltSpecLinkID, "POFF", fPOff)
+			IF lWetwellPresent = true THEN
+				INSERT INTO alt_speclinkdata(AltSpecLinkDataID, AltSpecLinkID, Tag, VALUE)
+					VALUES(iAltSpecLinkDataID+7, iAltSpecLinkID, "ASTORE", fAStore)
+				INSERT INTO alt_speclinkdata(AltSpecLinkDataID, AltSpecLinkID, Tag, VALUE)
+					VALUES(iAltSpecLinkDataID+8, iAltSpecLinkID, "NODST", 1)
+				INSERT INTO alt_speclinkdata(AltSpecLinkDataID, AltSpecLinkID, Tag, VALUE)
+					VALUES(iAltSpecLinkDataID+9, iAltSpecLinkID, "CNTLS", 1)
+			END IF
+			
+			DO
+				iCounter = iCounter + 1
+				INSERT INTO alt_pumpcurves(PumpType, Index, Rating, Flow)
+					VALUES(sPName, iCounter, fRating(iCounter), fFlow(iCounter))
+			LOOP WHILE iCounter < iCurrentSchedule
+		END IF
+	  
+	LOOP WHILE lIsNewSpcNodeName = false
+	
+	CLOSE TABLE theList
+
+EXIT SUB
+skipModifyAddedPump:	
+	CALL DebugNote("ModifyAddedPump Crashed - Error: " & Err() & " " & Error$() )
+	RESUME NEXT
+END SUB
+'--------------------------------------------------------
+SUB AddWeir
+	'Upon calling this sub, we should already have a table which is capable of visually representing
+	'the NEW special nodes.  I say NEW because so far we have not approached the special nodes in 
+	'a visual representation format.  Perhaps parsing the special links table and creating a new
+	'table with the objects would be a good idea.
+	DIM lIsNewSpcNodeName AS Logical
+	DIM nRecsAlt AS Integer
+	DIM sCanWeGiveItANewName AS String
+
+	'variables for table update	
+	DIM sSLtyp AS String
+	DIM iSLtyp AS Integer
+	DIM sSLNode AS String
+	DIM iAltSpecLinkID AS Integer
+	DIM iAltSpecLinkDataID AS Integer
+	DIM iAltLinkID AS Integer
+	
+	'variables for weir data
+	DIM fWLen AS Float
+	DIM iKWeir AS Integer
+	DIM fYCrest AS Float
+	DIM sWeirName AS String
+	DIM fCoeff AS Float
+	DIM fYTop AS Float
+
+	ONERROR GOTO skipAddWeir
+	
+	SET COORDSYS EARTH PROJECTION 3, 33, "ft", -120.5, 43.6666666667, 44.3333333333, 46, 8202099.7379999999, 0
+	
+	IF NOT selectioninfo(1) THEN
+		NOTE "Please select a segment to add a weir to!"
+		EXIT SUB
+	END IF
+	
+	IF selectioninfo(1) LIKE "%speclinks%" THEN
+		NOTE "Cannot add a special link to a special link!"
+		EXIT SUB
+	END IF
+	
+	IF selectioninfo(1)NOT LIKE "%alt_links%" THEN
+		NOTE "Add weir operation applicable to alternate links tables only !"
+		EXIT SUB
+	END IF
+	
+	SELECT * FROM selection INTO qyTarget
+	
+	IF	Tableinfo(qyTarget,TAB_INFO_NROWS)<>1 THEN
+		NOTE "Add weir operation available to one object at a time!"
+		EXIT SUB
+	END IF
+	
+	CALL VisiblePointLocation
+	
+	fWLen = qyTarget.DiamWidth/12
+	
+	'Check to see if we can give this special link a new SPNode name
+	sCanWeGiveItANewName = CanWeGiveItANewName()
+	IF sCanWeGiveItANewName = "XXXXXX" THEN
+		'Get an unused default name for the Special Link Node
+		sSLNode = maxAltSLNode()
+		iSLIndex = 1
+	ELSE
+		sSLNode = sCanWeGiveItANewName
+		CALL GetIndex
+	END IF
+
+	iAltLinkID = qyTarget.AltLinkID
+	
+	'get the upstream crown of the pipe
+	IF qyTarget.Height = 0 THEN
+		fYCrest = (qyTarget.DiamWidth)/12 + qyTarget.USIE
+	ELSE
+		fYCrest = (qyTarget.Height)/12 + qyTarget.USIE
+	END IF
+	
+	sUSID = qyTarget.USNode
+	'Find out if the upstream node is an alt node or a model node
+	IF Asc(qyTarget.USNode) > 47 THEN
+		IF Asc(qyTarget.USNode) <58 THEN
+			SELECT * FROM alt_nodes WHERE Node = sUSID INTO qyTheRoof
+			fYTop = qyTheRoof.GrndElev - 1
+			Close Table qyTheRoof
+		ELSE
+			SELECT * FROM mdl_nodes WHERE Node = sUSID INTO qyTheRoof
+			fYTop = qyTheRoof.GrndElev - 1
+			Close Table qyTheRoof
+		END IF
+	ELSE
+		SELECT * FROM mdl_nodes WHERE Node = sUSID INTO qyTheRoof
+		fYTop = qyTheRoof.GrndElev - 1
+		Close Table qyTheRoof
+	END IF
+		
+	
+	DO
+		PRINT "Showing update dialog for new weir at " + sUSID
+		
+		IF sCanWeGiveItANewName = "XXXXXX" THEN
+			DIALOG   
+			TITLE "Update Weir Attributes" POSITION 250,100 
+			CONTROL STATICTEXT		ID 8500	POSITION 10,7			WIDTH 200		TITLE "SPECIAL LINK ENTRY FORM"    
+			CONTROL STATICTEXT		ID 8480	POSITION 10,30		WIDTH 140		TITLE "SPECIAL LINK TYPE:" 
+			CONTROL LISTBOX TITLE "WS;WT" ID 8470 POSITION 155,30		WIDTH 60 HEIGHT 11 VALUE 1 INTO iSLtyp
+			CONTROL STATICTEXT		ID 8460	POSITION 10,40		WIDTH 140		TITLE "WEIR LENGTH (ft):"    
+			CONTROL EDITTEXT		ID 8450	POSITION 155,40		WIDTH 60		VALUE fWLen	INTO fWLen
+			CONTROL STATICTEXT		ID 8461	POSITION 10,50		WIDTH 140		TITLE "WEIR TYPE:"    
+			CONTROL LISTBOX TITLE "TRANSVERSE WEIR;TIDE GATE;SIDE WEIR;TIDE/SIDE"		ID 8451	POSITION 155,50	HEIGHT 11	WIDTH 60		VALUE 1	INTO iKWeir
+			CONTROL STATICTEXT		ID 8462	POSITION 10,60		WIDTH 140		TITLE "TOP OF WEIR, IE (ft):"    
+			CONTROL EDITTEXT		ID 8452	POSITION 155,60		WIDTH 60		VALUE fYCrest	INTO fYCrest
+			CONTROL STATICTEXT		ID 8463	POSITION 10,70		WIDTH 140		TITLE "COEFFICIENT:"    
+			CONTROL EDITTEXT		ID 8453	POSITION 155,70		WIDTH 60		VALUE 3	INTO fCoeff
+			CONTROL STATICTEXT		ID 8464	POSITION 10,80		WIDTH 140		TITLE "ROOF OF STRUCTURE (ft):"    
+			CONTROL EDITTEXT		ID 8454	POSITION 155,80		WIDTH 60		VALUE fYTop	INTO fYTop
+			CONTROL STATICTEXT		ID 8440	POSITION 10,100		WIDTH 140		TITLE "SL NODE:"    
+			CONTROL EDITTEXT		ID 8430	POSITION 155,100		WIDTH 60		VALUE sSLNode		INTO sSLNode 
+			CONTROL OKBUTTON		ID 8340	POSITION 10,135		WIDTH 45		TITLE "OK"			CALLING SplUpdt 
+			CONTROL CANCELBUTTON		ID 8341	POSITION 155,135		WIDTH 45		TITLE "CANCEL"			CALLING SplUpdt
+		ELSE
+			DIALOG   
+			TITLE "Update Weir Attributes" POSITION 250,100 
+			CONTROL STATICTEXT		ID 8500	POSITION 10,7			WIDTH 200		TITLE "SPECIAL LINK ENTRY FORM"    
+			CONTROL STATICTEXT		ID 8480	POSITION 10,30		WIDTH 140		TITLE "SPECIAL LINK TYPE:" 
+			CONTROL LISTBOX TITLE "WS;WT" ID 8470 POSITION 155,30		WIDTH 60 HEIGHT 11 VALUE 1 INTO iSLtyp
+			CONTROL STATICTEXT		ID 8460	POSITION 10,40		WIDTH 140		TITLE "WEIR LENGTH (ft):"    
+			CONTROL EDITTEXT		ID 8450	POSITION 155,40		WIDTH 60		VALUE fWLen	INTO fWLen
+			CONTROL STATICTEXT		ID 8461	POSITION 10,50		WIDTH 140		TITLE "WEIR TYPE:"    
+			CONTROL LISTBOX TITLE "TRANSVERSE WEIR;TIDE GATE;SIDE WEIR;TIDE/SIDE"		ID 8451	POSITION 155,50	HEIGHT 11	WIDTH 60		VALUE 1	INTO iKWeir
+			CONTROL STATICTEXT		ID 8462	POSITION 10,60		WIDTH 140		TITLE "TOP OF WEIR, IE (ft):"    
+			CONTROL EDITTEXT		ID 8452	POSITION 155,60		WIDTH 60		VALUE fYCrest	INTO fYCrest
+			CONTROL STATICTEXT		ID 8463	POSITION 10,70		WIDTH 140		TITLE "COEFFICIENT:"    
+			CONTROL EDITTEXT		ID 8453	POSITION 155,70		WIDTH 60		VALUE 3	INTO fCoeff
+			CONTROL STATICTEXT		ID 8464	POSITION 10,80		WIDTH 140		TITLE "ROOF OF STRUCTURE (ft):"    
+			CONTROL EDITTEXT		ID 8454	POSITION 155,80		WIDTH 60		VALUE fYTop	INTO fYTop
+			CONTROL OKBUTTON		ID 8340	POSITION 10,135		WIDTH 45		TITLE "OK"			CALLING SplUpdt 
+			CONTROL CANCELBUTTON		ID 8341	POSITION 155,135		WIDTH 45		TITLE "CANCEL"			CALLING SplUpdt
+		END IF
+		
+		IF fYCrest > fYTop THEN
+			NOTE "The top of the weir cannot be higher than the roof of the structure."
+			EXIT SUB
+		END IF
+		
+		IF sCanWeGiveItANewName = "XXXXXX" THEN
+			SELECT SLNode FROM alt_speclinks WHERE SLNode = sSLNode INTO qyNodeName NOSELECT
+			SELECT mdl_Nodes.Node FROM mdl_Nodes WHERE mdl_Nodes.Node = sSLNode INTO qyNodeName NOSELECT
+			SELECT alt_Nodes.Node FROM alt_Nodes WHERE alt_Nodes.Node = sSLNode INTO qyNodeName NOSELECT
+			nRecsAlt = tableinfo(qyNodeName,TAB_INFO_NROWS)
+			IF nRecsAlt = 0 THEN
+				lIsNewSpcNodeName = true
+			ELSE
+				lIsNewSpcNodeName = false
+				NOTE "Your SL NODE value must be unique from any other node value!"
+			END IF
+			CLOSE TABLE qyNodeName
+		ELSE
+			lIsNewSpcNodeName = true
+		END IF
+	  
+	LOOP WHILE lIsNewSpcNodeName = false
+
+	IF CommandInfo(CMD_INFO_DLG_OK) THEN
+		'Decipher the code returned by the Special Link type list box
+		iAltSpecLinkID = maxAltSpecLinkID()
+		IF iSLtyp = 1 THEN
+			sSLtyp = "WS"
+		ELSEIF iSLtyp = 2 THEN
+			sSLtyp = "WT"
+		END IF	
+		
+		'Get the current symbol style and save it, then
+		'place the graphic object into the alt_special links table
+		'then reset to the old symbol style
+		DIM sym_user_symbol AS Symbol
+		sym_user_symbol = CurrentSymbol( )
+		SET STYLE Symbol MakeSymbol( 56,GREEN,18 )
+		INSERT INTO VisibleSpecials(OBJ, AltSpecLinkID, MdlSpecLinkID, AltLinkID, Operation, SpecLinkIndex, SpecLinkType, SLNode)
+			VALUES( CreatePoint( sx2, sy2), iAltSpecLinkID, 0, iAltLinkID, "ADD", iSLIndex, sSLtyp, sSLNode)
+		SET STYLE Symbol sym_user_symbol
+			
+		INSERT INTO alt_speclinks(AltSpecLinkID, MdlSpecLinkID, AltLinkID, Operation, SpecLinkIndex, SpecLinkType, SLNode)
+			VALUES(iAltSpecLinkID, 0, iAltLinkID, "ADD", iSLIndex, sSLtyp, sSLNode)
+			
+		iAltSpecLinkDataID = maxAltSpecLinkDataID()
+		sWeirName = "" & iAltLinkID & "_O"
+		
+
+		INSERT INTO alt_speclinkdata(AltSpecLinkDataID, AltSpecLinkID, Tag, VALUE)
+			VALUES(iAltSpecLinkDataID, iAltSpecLinkID, "WLEN", fWLen)
+		INSERT INTO alt_speclinkdata(AltSpecLinkDataID, AltSpecLinkID, Tag, VALUE)
+			VALUES(iAltSpecLinkDataID+1, iAltSpecLinkID, "KWEIR", iKWeir)
+		INSERT INTO alt_speclinkdata(AltSpecLinkDataID, AltSpecLinkID, Tag, VALUE)
+			VALUES(iAltSpecLinkDataID+2, iAltSpecLinkID, "YCREST", fYCrest)
+		INSERT INTO alt_speclinkdata(AltSpecLinkDataID, AltSpecLinkID, Tag, VALUE)
+			VALUES(iAltSpecLinkDataID+3, iAltSpecLinkID, "WEIRNAME", sWeirName)
+		INSERT INTO alt_speclinkdata(AltSpecLinkDataID, AltSpecLinkID, Tag, VALUE)
+			VALUES(iAltSpecLinkDataID+4, iAltSpecLinkID, "COEFF", fCoeff)
+		INSERT INTO alt_speclinkdata(AltSpecLinkDataID, AltSpecLinkID, Tag, VALUE)
+			VALUES(iAltSpecLinkDataID+5, iAltSpecLinkID, "YTOP", fYTop)
+		INSERT INTO alt_speclinkdata(AltSpecLinkDataID, AltSpecLinkID, Tag, VALUE)
+			VALUES(iAltSpecLinkDataID+6, iAltSpecLinkID, "WEIR1", 1)
+	END IF
+
+EXIT SUB
+skipAddWeir:	
+	CALL DebugNote("Add Weir Crashed - Error: " & Err() & " " & Error$() )
+	RESUME NEXT
+END SUB
+'--------------------------------------------------------
+SUB AddOrifice
+	DIM lIsNewSpcNodeName AS Logical
+	DIM nRecsAlt AS Integer
+	DIM sCanWeGiveItANewName AS String
+
+	'variables for table update	
+	DIM sSLtyp AS String
+	DIM iSLtyp AS Integer
+	DIM sSLNode AS String
+	DIM iAltSpecLinkID AS Integer
+	DIM iAltSpecLinkDataID AS Integer
+	DIM iAltLinkID AS Integer
+	DIM fDiamHeightOrif AS Float
+	DIM fWidthOrif AS Float
+	
+	'variables for orifice data
+	DIM fCOrif AS Float
+	DIM fZP AS Float
+	DIM sOrificeName AS String
+	DIM fAOrif AS Float
+	DIM iISqRnd AS Integer
+	
+	ONERROR GOTO skipAddOrifice
+	
+	SET COORDSYS EARTH PROJECTION 3, 33, "ft", -120.5, 43.6666666667, 44.3333333333, 46, 8202099.7379999999, 0
+	
+	IF NOT selectioninfo(1) THEN
+		NOTE "Please select a segment to add an orifice to!"
+		EXIT SUB
+	END IF
+	
+	IF selectioninfo(1) LIKE "%speclinks%" THEN
+		NOTE "Cannot add a special link to a special link!"
+		EXIT SUB
+	END IF
+	
+	IF selectioninfo(1)NOT LIKE "%alt_links%" THEN
+		NOTE "Add orifice operation applicable to alternate links tables only!"
+		EXIT SUB
+	END IF
+	
+	SELECT * FROM selection INTO qyTarget
+	
+	IF	Tableinfo(qyTarget,TAB_INFO_NROWS)<>1 THEN
+		NOTE "Add orifice operation available to one object at a time!"
+		EXIT SUB
+	END IF
+	
+	CALL VisiblePointLocation
+	
+	'Check to see if we can give this special link a new SPNode name
+	sCanWeGiveItANewName = CanWeGiveItANewName()
+	IF sCanWeGiveItANewName = "XXXXXX" THEN
+		'Get an unused default name for the Special Link Node
+		sSLNode = maxAltSLNode()
+		iSLIndex = 1
+	ELSE
+		sSLNode = sCanWeGiveItANewName
+		CALL GetIndex
+	END IF
+			
+	iAltLinkID = qyTarget.AltLinkID
+	
+	DO
+		PRINT "Showing update dialog for new orifice at " + sUSID
+		
+		IF sCanWeGiveItANewName = "XXXXXX" THEN
+			DIALOG   
+			TITLE "Update Orifice Attributes" POSITION 250,100 
+			CONTROL STATICTEXT		ID 8500	POSITION 10,7			WIDTH 200		TITLE "SPECIAL LINK ENTRY FORM"    
+			CONTROL STATICTEXT		ID 8480	POSITION 10,30		WIDTH 140		TITLE "SPECIAL LINK TYPE:" 
+			CONTROL LISTBOX TITLE "OS;OB" ID 8470 POSITION 155,30		WIDTH 60 HEIGHT 11 VALUE 1 INTO iSLtyp
+			CONTROL STATICTEXT		ID 8462	POSITION 10,40		WIDTH 140		TITLE "COEFFICIENT:"    
+			CONTROL EDITTEXT		ID 8452	POSITION 155,40		WIDTH 60		VALUE 0.35	INTO fCOrif
+			CONTROL STATICTEXT		ID 8463	POSITION 10,50		WIDTH 140		TITLE "SIDE ORIFICE ELEVATION (ft):"    
+			CONTROL EDITTEXT		ID 8453	POSITION 155,50		WIDTH 60		VALUE qyTarget.USIE	INTO fZP
+			CONTROL STATICTEXT		ID 8465	POSITION 10,60		WIDTH 140		TITLE "ORIFICE SHAPE:"    
+			CONTROL LISTBOX TITLE "ROUND;SQUARE" ID 8455 POSITION 155,60		WIDTH 60 HEIGHT 11 VALUE 1 INTO iISqRnd
+			CONTROL STATICTEXT		ID 8464	POSITION 10,70		WIDTH 140		TITLE "Diameter/Height (ft):"    
+			CONTROL EDITTEXT		ID 8454	POSITION 155,70		WIDTH 60		VALUE fDiamHeightOrif	INTO fDiamHeightOrif
+			CONTROL STATICTEXT		ID 8466	POSITION 10,80		WIDTH 140		TITLE "Width (0 for circular)(ft):"    
+			CONTROL EDITTEXT		ID 8457	POSITION 155,80		WIDTH 60		VALUE fWidthOrif	INTO fWidthOrif
+			CONTROL STATICTEXT		ID 8440	POSITION 10,90		WIDTH 140		TITLE "SL NODE:"    
+			CONTROL EDITTEXT		ID 8430	POSITION 155,90		WIDTH 60		VALUE sSLNode		INTO sSLNode 
+			CONTROL OKBUTTON		ID 8340	POSITION 10,135		WIDTH 45		TITLE "OK"			CALLING SplUpdt 
+			CONTROL CANCELBUTTON		ID 8341	POSITION 155,135		WIDTH 45		TITLE "CANCEL"			CALLING SplUpdt
+		ELSE
+			DIALOG   
+			TITLE "Update Orifice Attributes" POSITION 250,100 
+			CONTROL STATICTEXT		ID 8500	POSITION 10,7			WIDTH 200		TITLE "SPECIAL LINK ENTRY FORM"    
+			CONTROL STATICTEXT		ID 8480	POSITION 10,30		WIDTH 140		TITLE "SPECIAL LINK TYPE:" 
+			CONTROL LISTBOX TITLE "OS;OB" ID 8470 POSITION 155,30		WIDTH 60 HEIGHT 11 VALUE 1 INTO iSLtyp
+			CONTROL STATICTEXT		ID 8462	POSITION 10,40		WIDTH 140		TITLE "COEFFICIENT:"    
+			CONTROL EDITTEXT		ID 8452	POSITION 155,40		WIDTH 60		VALUE 0.35	INTO fCOrif
+			CONTROL STATICTEXT		ID 8463	POSITION 10,50		WIDTH 140		TITLE "SIDE ORIFICE ELEVATION (ft):"    
+			CONTROL EDITTEXT		ID 8453	POSITION 155,50		WIDTH 60		VALUE fZP	INTO fZP
+			CONTROL STATICTEXT		ID 8465	POSITION 10,60		WIDTH 140		TITLE "ORIFICE SHAPE:"    
+			CONTROL LISTBOX TITLE "ROUND;SQUARE" ID 8455 POSITION 155,60		WIDTH 60 HEIGHT 11 VALUE 1 INTO iISqRnd
+			CONTROL STATICTEXT		ID 8464	POSITION 10,70		WIDTH 140		TITLE "Diameter/Height (ft):"    
+			CONTROL EDITTEXT		ID 8454	POSITION 155,70		WIDTH 60		VALUE fDiamHeightOrif	INTO fDiamHeightOrif
+			CONTROL STATICTEXT		ID 8466	POSITION 10,80		WIDTH 140		TITLE "Width (0 for circular)(ft):"
+			CONTROL EDITTEXT		ID 8457	POSITION 155,80		WIDTH 60		VALUE fWidthOrif	INTO fWidthOrif
+			CONTROL OKBUTTON		ID 8340	POSITION 10,135		WIDTH 45		TITLE "OK"			CALLING SplUpdt
+			CONTROL CANCELBUTTON		ID 8341	POSITION 155,135		WIDTH 45		TITLE "CANCEL"			CALLING SplUpdt
+		END IF
+
+		IF sCanWeGiveItANewName = "XXXXXX" THEN
+			SELECT SLNode FROM alt_speclinks WHERE SLNode = sSLNode INTO qyNodeName NOSELECT
+			SELECT mdl_Nodes.Node FROM mdl_Nodes WHERE mdl_Nodes.Node = sSLNode INTO qyNodeName NOSELECT
+			SELECT alt_Nodes.Node FROM alt_Nodes WHERE alt_Nodes.Node = sSLNode INTO qyNodeName NOSELECT
+			nRecsAlt = tableinfo(qyNodeName,TAB_INFO_NROWS)
+			IF nRecsAlt = 0 THEN
+				lIsNewSpcNodeName = true
+			ELSE
+				lIsNewSpcNodeName = false
+				NOTE "Your SL NODE value must be unique from any other node value!"
+			END IF
+			CLOSE TABLE qyNodeName
+		ELSE
+			lIsNewSpcNodeName = true
+		END IF
+
+	LOOP WHILE lIsNewSpcNodeName = false
+
+
+	IF CommandInfo(CMD_INFO_DLG_OK) THEN
+		'Decipher the code returned by the Special Link type list box
+		iAltSpecLinkID = maxAltSpecLinkID()
+		IF iSLtyp = 1 THEN
+
+			sSLtyp = "OS"
+		ELSEIF iSLtyp = 2 THEN
+
+			sSLtyp = "OB"
+		END IF
+		
+		IF iISqRnd = 1 THEN 'Round orifice
+			fAOrif = (fDiamHeightOrif*fDiamHeightOrif)*3.14159/4
+		ELSE 'square orifice
+			fAOrif = fDiamHeightOrif*fWidthOrif
+		END IF
+
+		'Get the current symbol style and save it, then
+		'place the graphic object into the alt_special links table
+		'then reset to the old symbol style
+		DIM sym_user_symbol AS Symbol
+		sym_user_symbol = CurrentSymbol( )
+		SET STYLE Symbol ( 70,GREEN,18, "MapInfo Cartographic", 0, 45 )
+
+		INSERT INTO VisibleSpecials(OBJ, AltSpecLinkID, MdlSpecLinkID, AltLinkID, Operation, SpecLinkIndex, SpecLinkType, SLNode)
+			VALUES( CreatePoint( sx2, sy2), iAltSpecLinkID, 0, iAltLinkID, "ADD", iSLIndex, sSLtyp, sSLNode)
+		SET STYLE Symbol sym_user_symbol
+		
+		INSERT INTO alt_speclinks(AltSpecLinkID, MdlSpecLinkID, AltLinkID, Operation, SpecLinkIndex, SpecLinkType, SLNode)
+			VALUES(iAltSpecLinkID, 0, iAltLinkID, "ADD", iSLIndex, sSLtyp, sSLNode)
+			
+		iAltSpecLinkDataID = maxAltSpecLinkDataID()
+		sOrificeName = "" & iAltLinkID & "_U"
+		
+		INSERT INTO alt_speclinkdata(AltSpecLinkDataID, AltSpecLinkID, Tag, VALUE)
+			VALUES(iAltSpecLinkDataID, iAltSpecLinkID, "ONKLASS", iSLtyp)
+		INSERT INTO alt_speclinkdata(AltSpecLinkDataID, AltSpecLinkID, Tag, VALUE)
+			VALUES(iAltSpecLinkDataID+1, iAltSpecLinkID, "ORIF1", 1)
+		INSERT INTO alt_speclinkdata(AltSpecLinkDataID, AltSpecLinkID, Tag, VALUE)
+			VALUES(iAltSpecLinkDataID+2, iAltSpecLinkID, "CORIF", fCOrif)
+		INSERT INTO alt_speclinkdata(AltSpecLinkDataID, AltSpecLinkID, Tag, VALUE)
+			VALUES(iAltSpecLinkDataID+3, iAltSpecLinkID, "ZP", fZP)
+		INSERT INTO alt_speclinkdata(AltSpecLinkDataID, AltSpecLinkID, Tag, VALUE)
+			VALUES(iAltSpecLinkDataID+4, iAltSpecLinkID, "ORIFNAME", sOrificeName)
+		INSERT INTO alt_speclinkdata(AltSpecLinkDataID, AltSpecLinkID, Tag, VALUE)
+			VALUES(iAltSpecLinkDataID+5, iAltSpecLinkID, "AORIF", fAOrif)
+		INSERT INTO alt_speclinkdata(AltSpecLinkDataID, AltSpecLinkID, Tag, VALUE)
+			VALUES(iAltSpecLinkDataID+6, iAltSpecLinkID, "ISQRND", iISqRnd - 1)
+		INSERT INTO alt_speclinkdata(AltSpecLinkDataID, AltSpecLinkID, Tag, VALUE)
+			VALUES(iAltSpecLinkDataID+7, iAltSpecLinkID, "DORIF", fWidthOrif)
+	END IF
+	
+EXIT SUB
+skipAddOrifice:	
+	CALL DebugNote("Add Orifice Crashed - Error: " & Err() & " " & Error$() )
+	RESUME NEXT
+END SUB
+'--------------------------------------------------------
+SUB AddPump
+	'It is illegal to add a new pump that has the same Tag=PNAME as any previously
+	'existing pumps.  This includes pumps that have been deleted.  This rule extends
+	'to all pumps outside of the trace that exist within the pumpcurves table.
+	DIM lIsNewSpcNodeName AS Logical
+	DIM nRecsAlt AS Integer
+	DIM iEverythingsOK AS Integer
+	DIM sCanWeGiveItANewName AS String
+
+	'variables for table update	
+	DIM sSLNode AS String
+	DIM iAltSpecLinkID AS Integer
+	DIM iAltSpecLinkDataID AS Integer
+	DIM iMdlSpecLinkID AS Integer
+	DIM iAltLinkID AS Integer
+	
+	'varaibles for pump data
+	DIM sPName AS String
+	DIM fPOn AS Float
+	DIM fPOff AS Float
+	DIM fAStore AS Float
+	
+	'variables for pump properties
+	DIM fRating(1) AS Float
+	DIM fFlow(1) AS Float
+	DIM iCurrentSchedule AS Integer
+	
+	ONERROR GOTO skipAddPump
+	
+	SET COORDSYS EARTH PROJECTION 3, 33, "ft", -120.5, 43.6666666667, 44.3333333333, 46, 8202099.7379999999, 0
+	
+	SELECT * FROM selection INTO qyTarget
+	
+	IF NOT selectioninfo(1) THEN
+		NOTE "Please select a segment to add a pump to!"
+		EXIT SUB
+	END IF
+	
+	IF selectioninfo(1) LIKE "%speclinks%" THEN
+		NOTE "Cannot add a special link to a special link!"
+		EXIT SUB
+	END IF
+	
+	IF selectioninfo(1)NOT LIKE "%alt_links%" THEN
+		NOTE "Add pump operation applicable to alternate links tables only!"
+		EXIT SUB
+	END IF
+	
+	IF	Tableinfo(qyTarget,TAB_INFO_NROWS)<>1 THEN
+		NOTE "Add pump operation available to one object at a time!"
+		EXIT SUB
+	END IF
+	
+	CALL VisiblePointLocation
+	
+	'Check to see if we can give this special link a new SPNode name
+	sCanWeGiveItANewName = CanWeGiveItANewName()
+	
+	IF sCanWeGiveItANewName = "XXXXXX" THEN
+		'Get an unused default name for the Special Link Node
+		sSLNode = maxAltSLNode()
+		iSLIndex = 1
+	ELSE
+		sSLNode = sCanWeGiveItANewName
+		CALL GetIndex
+	END IF	
+
+	iAltLinkID = qyTarget.AltLinkID
+	
+	lWeAlreadyHaveAWetwell = false
+	'ensure that all the tables we are making here have rows before we query them.
+	IF  tableinfo(mdl_speclinkdata,TAB_INFO_NROWS) > 0 THEN
+		SELECT SLID FROM mdl_speclinkdata WHERE Tag LIKE "%ASTORE%" AND mdl_speclinkdata.Node LIKE sUSID INTO qyWetwells1
+		'Check for wetwells in the base model
+		IF  tableinfo(qyWetwells1,TAB_INFO_NROWS) > 0 THEN	
+			'IF YES:	Check to see if the special link has been deleted in alt spec links
+			SELECT MdlSpecLinkID FROM alt_speclinks WHERE MdlSpecLinkID = ANY(SELECT * FROM qyWetwells1) AND Operation = "DEL" INTO qyWetwells2
+			'IF YES: GOTO CHECK ALT MODEL
+			IF  tableinfo(qyWetwells2,TAB_INFO_NROWS) > 0 THEN
+				CALL CheckAltModel
+				CLOSE TABLE qyWetwells2
+			'IF NO : Check to see if the model link relating to the wetwell has been deleted or split in alt links
+			ELSE
+				CLOSE TABLE qyWetwells2
+				SELECT ToLinkID FROM mdl_SpecLinks WHERE SLID = ANY(SELECT * FROM qyWetwells1) INTO qyWetwells3
+				SELECT USNode FROM alt_links WHERE MdlLinkID = ANY(SELECT * FROM qyWetwells3) AND (Operation = "SPL" OR Operation = "DEL") INTO qyWetwells4
+				CLOSE TABLE qyWetwells3
+				IF  tableinfo(qyWetwells4,TAB_INFO_NROWS) > 0 THEN
+					CALL CheckAltModel
+					CLOSE TABLE qyWetwells4
+				ELSE
+				 'IF NO : We do not need a new wetwell
+				 lWeAlreadyHaveAWetwell = true
+				 CLOSE TABLE qyWetwells4
+				END IF
+			END IF
+		ELSE
+			CALL CheckAltModel
+		END IF
+	ELSE
+		CALL CheckAltModel
+	END IF
+	
+	DO
+		'If you can give a pump a new sl node name, that does not mean that you can give the pump
+		'a wetwell
+		PRINT "Showing update dialog for new pump at " + sUSID
+		IF sCanWeGiveItANewName = "XXXXXX" AND lWeAlreadyHaveAWetwell = false THEN	
+			DIALOG   
+			TITLE "Update Pump Attributes" POSITION 250,100 
+			CONTROL STATICTEXT		ID 8500	POSITION 10,7			WIDTH 200		TITLE "SPECIAL LINK ENTRY FORM"    
+			CONTROL STATICTEXT		ID 8460	POSITION 10,40		WIDTH 140		TITLE "PUMP NAME:"    
+			CONTROL EDITTEXT		ID 8450	POSITION 155,40		WIDTH 60		VALUE sPName	INTO sPName
+			CONTROL STATICTEXT		ID 8461	POSITION 10,50		WIDTH 140		TITLE "PUMP ON ELEVATION (ft):"    
+			CONTROL EDITTEXT		ID 8451	POSITION 155,50		WIDTH 60		VALUE fPOn	INTO fPOn
+			CONTROL STATICTEXT		ID 8462	POSITION 10,60		WIDTH 140		TITLE "PUMP OFF ELEVATION (ft):"    
+			CONTROL EDITTEXT		ID 8452	POSITION 155,60		WIDTH 60		VALUE fPOff	INTO fPOff		
+			CONTROL STATICTEXT		ID 8463	POSITION 10,70		WIDTH 140		TITLE "WET WELL STORAGE (ft^3/ft):"    
+			CONTROL EDITTEXT		ID 8453	POSITION 155,70		WIDTH 60		VALUE fAStore	INTO fAStore
+			CONTROL STATICTEXT		ID 8440	POSITION 10,80		WIDTH 140		TITLE "SL NODE:"    
+			CONTROL EDITTEXT		ID 8430	POSITION 155,80		WIDTH 60		VALUE sSLNode		INTO sSLNode 
+			CONTROL OKBUTTON		ID 8340	POSITION 10,100		WIDTH 45		TITLE "OK"			CALLING SplUpdt 
+			CONTROL CANCELBUTTON		ID 8341	POSITION 155,100		WIDTH 45		TITLE "CANCEL"			CALLING SplUpdt
+		ELSEIF sCanWeGiveItANewName <> "XXXXXX" AND lWeAlreadyHaveAWetwell = false THEN
+			DIALOG   
+			TITLE "Update Pump Attributes" POSITION 250,100 
+			CONTROL STATICTEXT		ID 8500	POSITION 10,7			WIDTH 200		TITLE "SPECIAL LINK ENTRY FORM"    
+			CONTROL STATICTEXT		ID 8460	POSITION 10,40		WIDTH 140		TITLE "PUMP NAME:"    
+			CONTROL EDITTEXT		ID 8450	POSITION 155,40		WIDTH 60		VALUE sPName	INTO sPName
+			CONTROL STATICTEXT		ID 8461	POSITION 10,50		WIDTH 140		TITLE "PUMP ON ELEVATION (ft):"    
+			CONTROL EDITTEXT		ID 8451	POSITION 155,50		WIDTH 60		VALUE fPOn	INTO fPOn
+			CONTROL STATICTEXT		ID 8462	POSITION 10,60		WIDTH 140		TITLE "PUMP OFF ELEVATION (ft):"    
+			CONTROL EDITTEXT		ID 8452	POSITION 155,60		WIDTH 60		VALUE fPOff	INTO fPOff		
+			CONTROL STATICTEXT		ID 8463	POSITION 10,70		WIDTH 140		TITLE "WET WELL STORAGE (ft^3/ft):"    
+			CONTROL EDITTEXT		ID 8453	POSITION 155,70		WIDTH 60		VALUE fAStore	INTO fAStore
+			CONTROL OKBUTTON		ID 8340	POSITION 10,100		WIDTH 45		TITLE "OK"			CALLING SplUpdt 
+			CONTROL CANCELBUTTON		ID 8341	POSITION 155,100		WIDTH 45		TITLE "CANCEL"			CALLING SplUpdt
+		ELSEIF sCanWeGiveItANewName = "XXXXXX" AND lWeAlreadyHaveAWetwell = true THEN
+			DIALOG   
+			TITLE "Update Pump Attributes" POSITION 250,100 
+			CONTROL STATICTEXT		ID 8500	POSITION 10,7			WIDTH 200		TITLE "SPECIAL LINK ENTRY FORM"    
+			CONTROL STATICTEXT		ID 8460	POSITION 10,40		WIDTH 140		TITLE "PUMP NAME:"    
+			CONTROL EDITTEXT		ID 8450	POSITION 155,40		WIDTH 60		VALUE sPName	INTO sPName
+			CONTROL STATICTEXT		ID 8461	POSITION 10,50		WIDTH 140		TITLE "PUMP ON ELEVATION (ft):"    
+			CONTROL EDITTEXT		ID 8451	POSITION 155,50		WIDTH 60		VALUE fPOn	INTO fPOn
+			CONTROL STATICTEXT		ID 8462	POSITION 10,60		WIDTH 140		TITLE "PUMP OFF ELEVATION (ft):"    
+			CONTROL EDITTEXT		ID 8452	POSITION 155,60		WIDTH 60		VALUE fPOff	INTO fPOff	
+			CONTROL STATICTEXT		ID 8440	POSITION 10,80		WIDTH 140		TITLE "SL NODE:"    
+			CONTROL EDITTEXT		ID 8430	POSITION 155,80		WIDTH 60		VALUE sSLNode		INTO sSLNode 	
+			CONTROL OKBUTTON		ID 8340	POSITION 10,100		WIDTH 45		TITLE "OK"			CALLING SplUpdt 
+			CONTROL CANCELBUTTON		ID 8341	POSITION 155,100		WIDTH 45		TITLE "CANCEL"			CALLING SplUpdt
+		ELSE 
+			DIALOG   
+			TITLE "Update Pump Attributes" POSITION 250,100 
+			CONTROL STATICTEXT		ID 8500	POSITION 10,7			WIDTH 200		TITLE "SPECIAL LINK ENTRY FORM"    
+			CONTROL STATICTEXT		ID 8460	POSITION 10,40		WIDTH 140		TITLE "PUMP NAME:"    
+			CONTROL EDITTEXT		ID 8450	POSITION 155,40		WIDTH 60		VALUE sPName	INTO sPName
+			CONTROL STATICTEXT		ID 8461	POSITION 10,50		WIDTH 140		TITLE "PUMP ON ELEVATION (ft):"    
+			CONTROL EDITTEXT		ID 8451	POSITION 155,50		WIDTH 60		VALUE fPOn	INTO fPOn
+			CONTROL STATICTEXT		ID 8462	POSITION 10,60		WIDTH 140		TITLE "PUMP OFF ELEVATION (ft):"    
+			CONTROL EDITTEXT		ID 8452	POSITION 155,60		WIDTH 60		VALUE fPOff	INTO fPOff
+			CONTROL OKBUTTON		ID 8340	POSITION 10,100		WIDTH 45		TITLE "OK"			CALLING SplUpdt 
+			CONTROL CANCELBUTTON		ID 8341	POSITION 155,100		WIDTH 45		TITLE "CANCEL"			CALLING SplUpdt
+		END IF
+
+		iEverythingsOK = 0
+		IF CommandInfo(CMD_INFO_DLG_OK) THEN
+			iEverythingsOK = 1
+		END IF
+		SELECT alt_speclinkdata.Value FROM alt_speclinkdata WHERE alt_speclinkdata.Value = sPName INTO NameCheck
+		SELECT mdl_speclinkdata.TValue FROM mdl_speclinkdata WHERE mdl_speclinkdata.TValue = sPName INTO NameCheck
+		IF  tableinfo(NameCheck,TAB_INFO_NROWS) > 0 THEN
+			NOTE "There is already a pump named: " & sPName
+			CLOSE TABLE NameCheck
+			EXIT SUB
+		END IF
+		
+		CLOSE TABLE NameCheck
+		
+		IF fPOn < fPOff THEN
+			NOTE "Pump on level higher than pump off level."
+			EXIT SUB
+		END IF
+		
+		IF iEverythingsOK = 1 THEN
+			iCurrentSchedule = 0
+			iAddAnotherSchedule = 1
+			DO WHILE iAddAnotherSchedule = 1
+				iCurrentSchedule = iCurrentSchedule + 1
+				iAddAnotherSchedule = 0
+				
+				REDIM fRating(iCurrentSchedule)
+				REDIM fFlow(iCurrentSchedule)
+				PRINT "Showing update dialog for pump schedule at " + sUSID
+				PRINT "iAddAnotherSchedule: " + iAddAnotherSchedule
+				DIALOG   
+				TITLE "Update Pump Schedule" POSITION 250,100 
+				CONTROL STATICTEXT		ID 8500	POSITION 10,7			WIDTH 200		TITLE "PUMP SCHEDULE ENTRY FORM, PUMP " + iCurrentSchedule    
+				CONTROL STATICTEXT		ID 8460	POSITION 10,40		WIDTH 140		TITLE "RATING (ft from wetwell floor):"    
+				CONTROL EDITTEXT		ID 8450	POSITION 155,40		WIDTH 60		VALUE fRating(iCurrentSchedule)	INTO fRating(iCurrentSchedule)
+				CONTROL STATICTEXT		ID 8461	POSITION 10,50		WIDTH 140		TITLE "FLOW (cfs):"    
+				CONTROL EDITTEXT		ID 8451	POSITION 155,50		WIDTH 60		VALUE fFlow(iCurrentSchedule)	INTO fFlow(iCurrentSchedule)	
+				CONTROL OKBUTTON		ID 8340	POSITION 10,100		WIDTH 70		TITLE "ADD THIS CHANGE"			CALLING AddAnotherSchedule 
+				CONTROL CANCELBUTTON		ID 8341	POSITION 155,100		WIDTH 45		TITLE "FINISHED"			CALLING SplUpdt
+				PRINT "rating:" + fRating(iCurrentSchedule)
+				PRINT "flow:  " + fFlow(iCurrentSchedule)
+			LOOP
+		ELSE
+			iEverythingsOK = 0
+		END IF
+		
+		iCurrentSchedule = iCurrentSchedule - 1
+		IF sCanWeGiveItANewName = "XXXXXX" THEN
+			SELECT SLNode FROM alt_speclinks WHERE SLNode = sSLNode INTO qyNodeName NOSELECT
+			SELECT mdl_Nodes.Node FROM mdl_Nodes WHERE mdl_Nodes.Node = sSLNode INTO qyNodeName NOSELECT
+			SELECT alt_Nodes.Node FROM alt_Nodes WHERE alt_Nodes.Node = sSLNode INTO qyNodeName NOSELECT
+			nRecsAlt = tableinfo(qyNodeName,TAB_INFO_NROWS)
+			IF nRecsAlt = 0 THEN
+				lIsNewSpcNodeName = true
+			ELSE
+				lIsNewSpcNodeName = false
+				NOTE "Your SL NODE value must be unique from any other node value!"
+			END IF
+			CLOSE TABLE qyNodeName
+		ELSE
+			lIsNewSpcNodeName = true
+		END IF
+		
+	LOOP WHILE lIsNewSpcNodeName = false
+	
+	
+	IF iEverythingsOK = 1 THEN
+		DIM iCounter AS Integer
+		
+		iCounter = 0
+		iAltSpecLinkID = maxAltSpecLinkID()
+	
+		'Get the current symbol style and save it, then
+		'place the graphic object into the alt_special links table
+		'then reset to the old symbol style
+		DIM sym_user_symbol AS Symbol
+		sym_user_symbol = CurrentSymbol( )
+		SET STYLE Symbol MakeSymbol( 34,BLUE,18 )
+		INSERT INTO VisibleSpecials(OBJ, AltSpecLinkID, MdlSpecLinkID, AltLinkID, Operation, SpecLinkIndex, SpecLinkType, SLNode)
+			VALUES( CreatePoint( sx2, sy2), iAltSpecLinkID, iMdlSpecLinkID, iAltLinkID, "ADD", iSLIndex, "PS", sSLNode)
+		SET STYLE Symbol sym_user_symbol	
+		
+		
+		INSERT INTO alt_speclinks(AltSpecLinkID, MdlSpecLinkID, AltLinkID, Operation, SpecLinkIndex, SpecLinkType, SLNode)
+			VALUES(iAltSpecLinkID, iMdlSpecLinkID, iAltLinkID, "ADD", iSLIndex, "PS", sSLNode)
+			
+		iAltSpecLinkDataID = maxAltSpecLinkDataID()
+		
+		INSERT INTO alt_speclinkdata(AltSpecLinkDataID, AltSpecLinkID, Tag, VALUE)
+			VALUES(iAltSpecLinkDataID, iAltSpecLinkID, "PNAME", sPName)
+
+		INSERT INTO alt_speclinkdata(AltSpecLinkDataID, AltSpecLinkID, Tag, VALUE)
+			VALUES(iAltSpecLinkDataID+1, iAltSpecLinkID, "PSEL", sPName)
+		INSERT INTO alt_speclinkdata(AltSpecLinkDataID, AltSpecLinkID, Tag, VALUE)
+			VALUES(iAltSpecLinkDataID+2, iAltSpecLinkID, "PUMP1", 1)
+		INSERT INTO alt_speclinkdata(AltSpecLinkDataID, AltSpecLinkID, Tag, VALUE)
+			VALUES(iAltSpecLinkDataID+3, iAltSpecLinkID, "IPTYP", 4)
+		INSERT INTO alt_speclinkdata(AltSpecLinkDataID, AltSpecLinkID, Tag, VALUE)
+			VALUES(iAltSpecLinkDataID+4, iAltSpecLinkID, "DHI_Pcurve", sPName)
+		INSERT INTO alt_speclinkdata(AltSpecLinkDataID, AltSpecLinkID, Tag, VALUE)
+			VALUES(iAltSpecLinkDataID+5, iAltSpecLinkID, "PON", fPOn)
+		INSERT INTO alt_speclinkdata(AltSpecLinkDataID, AltSpecLinkID, Tag, VALUE)
+			VALUES(iAltSpecLinkDataID+6, iAltSpecLinkID, "POFF", fPOff)
+		IF lWeAlreadyHaveAWetwell = false THEN
+			INSERT INTO alt_speclinkdata(AltSpecLinkDataID, AltSpecLinkID, Tag, VALUE)
+				VALUES(iAltSpecLinkDataID+7, iAltSpecLinkID, "ASTORE", fAStore)
+			INSERT INTO alt_speclinkdata(AltSpecLinkDataID, AltSpecLinkID, Tag, VALUE)
+				VALUES(iAltSpecLinkDataID+8, iAltSpecLinkID, "NODST", 1)
+			INSERT INTO alt_speclinkdata(AltSpecLinkDataID, AltSpecLinkID, Tag, VALUE)
+				VALUES(iAltSpecLinkDataID+9, iAltSpecLinkID, "CNTLS", 1)
+		END IF
+		
+		DO
+			iCounter = iCounter + 1
+			INSERT INTO alt_pumpcurves(PumpType, Index, Rating, Flow)
+				VALUES(sPName, iCounter, fRating(iCounter), fFlow(iCounter))
+		LOOP WHILE iCounter < iCurrentSchedule
+	END IF
+	
+EXIT SUB
+skipAddPump:	
+	CALL DebugNote("Add Pump Crashed - Error: " & Err() & " " & Error$() )
+	RESUME NEXT
+END SUB
+'--------------------------------------------------------
+SUB DeleteInvalidSpecLinks
+
+	SELECT AltLinkID FROM alt_links_applied INTO Invalid0
+	INSERT INTO Invalid0(AltLinkID)
+				VALUES(0)
+
+	SELECT * FROM alt_speclinks WHERE AltLinkID NOT IN (SELECT * FROM Invalid0) INTO Invalid
+	
+	DELETE FROM Invalid
+	
+	COMMIT TABLE alt_speclinks
+	
+	CLOSE TABLE Invalid
+	CLOSE TABLE Invalid0
+	
+	Rollback Table alt_links_applied
+
+ONERROR GOTO skipDeleteInvalidSpecLinks
+
+EXIT SUB
+skipDeleteInvalidSpecLinks:	
+	CALL DebugNote("DeleteInvalidSpecLinks Crashed - Error: " & Err() & " " & Error$() )
+END SUB
+'--------------------------------------------------------
+SUB DeleteInvalidSpecLinkData
+				
+	ONERROR GOTO skipDeleteInvalidSpecLinkData	
+
+	SELECT * FROM alt_speclinkdata WHERE AltSpecLinkID NOT IN (SELECT AltSpecLinkID FROM alt_speclinks) INTO Invalid
+	
+	DELETE FROM Invalid
+	
+	COMMIT TABLE alt_speclinkdata
+	
+	CLOSE TABLE Invalid
+	
+EXIT SUB
+skipDeleteInvalidSpecLinkData:	
+	CALL DebugNote("DeleteInvalidSpecLinkData Crashed - Error: " & Err() & " " & Error$() )
+END SUB
