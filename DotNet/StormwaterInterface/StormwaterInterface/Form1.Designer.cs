@@ -52,19 +52,6 @@
             this.labelComments = new System.Windows.Forms.Label();
             this.labelInfo = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.Position = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nodeNoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lPODataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.shapeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pipeDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.culvDepthDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.culvMaterialDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.culvPhotoIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ditchDepthDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.widthTopDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.widthBottomDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ditchMaterialDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ditchPhotoIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ditchesCulvertsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.labelCulverts = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
@@ -95,6 +82,19 @@
             this.ToolStripMenuItemExportComparativeList = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItemTools = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItemSearchByNodeNo = new System.Windows.Forms.ToolStripMenuItem();
+            this.Position = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nodeNoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lPODataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.shapeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pipeDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.culvDepthDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.culvMaterialDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.culvPhotoIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ditchDepthDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.widthTopDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.widthBottomDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ditchMaterialDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ditchPhotoIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.evaluatorPageBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fieldWorkDBDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -305,102 +305,6 @@
             this.dataGridView1.Size = new System.Drawing.Size(846, 211);
             this.dataGridView1.TabIndex = 36;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
-            // 
-            // Position
-            // 
-            this.Position.DataPropertyName = "Position";
-            this.Position.HeaderText = "US/DS";
-            this.Position.Name = "Position";
-            this.Position.Width = 50;
-            // 
-            // nodeNoDataGridViewTextBoxColumn
-            // 
-            this.nodeNoDataGridViewTextBoxColumn.DataPropertyName = "Node_No";
-            this.nodeNoDataGridViewTextBoxColumn.HeaderText = "Node No.";
-            this.nodeNoDataGridViewTextBoxColumn.Name = "nodeNoDataGridViewTextBoxColumn";
-            this.nodeNoDataGridViewTextBoxColumn.Width = 75;
-            // 
-            // lPODataGridViewTextBoxColumn
-            // 
-            this.lPODataGridViewTextBoxColumn.DataPropertyName = "LPO";
-            this.lPODataGridViewTextBoxColumn.HeaderText = "L, P, O*";
-            this.lPODataGridViewTextBoxColumn.Name = "lPODataGridViewTextBoxColumn";
-            this.lPODataGridViewTextBoxColumn.Width = 25;
-            // 
-            // shapeDataGridViewTextBoxColumn
-            // 
-            this.shapeDataGridViewTextBoxColumn.DataPropertyName = "Shape";
-            this.shapeDataGridViewTextBoxColumn.HeaderText = "Shape";
-            this.shapeDataGridViewTextBoxColumn.Name = "shapeDataGridViewTextBoxColumn";
-            this.shapeDataGridViewTextBoxColumn.Width = 60;
-            // 
-            // pipeDDataGridViewTextBoxColumn
-            // 
-            this.pipeDDataGridViewTextBoxColumn.DataPropertyName = "Pipe_D";
-            this.pipeDDataGridViewTextBoxColumn.HeaderText = "Full Diameter";
-            this.pipeDDataGridViewTextBoxColumn.Name = "pipeDDataGridViewTextBoxColumn";
-            this.pipeDDataGridViewTextBoxColumn.ToolTipText = "(inches)";
-            this.pipeDDataGridViewTextBoxColumn.Width = 70;
-            // 
-            // culvDepthDataGridViewTextBoxColumn
-            // 
-            this.culvDepthDataGridViewTextBoxColumn.DataPropertyName = "CulvDepth";
-            this.culvDepthDataGridViewTextBoxColumn.HeaderText = "Opening Diameter";
-            this.culvDepthDataGridViewTextBoxColumn.Name = "culvDepthDataGridViewTextBoxColumn";
-            this.culvDepthDataGridViewTextBoxColumn.ToolTipText = "(inches)";
-            this.culvDepthDataGridViewTextBoxColumn.Width = 70;
-            // 
-            // culvMaterialDataGridViewTextBoxColumn
-            // 
-            this.culvMaterialDataGridViewTextBoxColumn.DataPropertyName = "CulvMaterial";
-            this.culvMaterialDataGridViewTextBoxColumn.HeaderText = "Material";
-            this.culvMaterialDataGridViewTextBoxColumn.Name = "culvMaterialDataGridViewTextBoxColumn";
-            this.culvMaterialDataGridViewTextBoxColumn.Width = 75;
-            // 
-            // culvPhotoIDDataGridViewTextBoxColumn
-            // 
-            this.culvPhotoIDDataGridViewTextBoxColumn.DataPropertyName = "CulvPhoto_ID";
-            this.culvPhotoIDDataGridViewTextBoxColumn.HeaderText = "Photo ID";
-            this.culvPhotoIDDataGridViewTextBoxColumn.Name = "culvPhotoIDDataGridViewTextBoxColumn";
-            this.culvPhotoIDDataGridViewTextBoxColumn.Width = 75;
-            // 
-            // ditchDepthDataGridViewTextBoxColumn
-            // 
-            this.ditchDepthDataGridViewTextBoxColumn.DataPropertyName = "DitchDepth";
-            this.ditchDepthDataGridViewTextBoxColumn.HeaderText = "Depth (ft)";
-            this.ditchDepthDataGridViewTextBoxColumn.Name = "ditchDepthDataGridViewTextBoxColumn";
-            this.ditchDepthDataGridViewTextBoxColumn.ToolTipText = "5\' from CVT";
-            this.ditchDepthDataGridViewTextBoxColumn.Width = 50;
-            // 
-            // widthTopDataGridViewTextBoxColumn
-            // 
-            this.widthTopDataGridViewTextBoxColumn.DataPropertyName = "WidthTop";
-            this.widthTopDataGridViewTextBoxColumn.HeaderText = "Width Top";
-            this.widthTopDataGridViewTextBoxColumn.Name = "widthTopDataGridViewTextBoxColumn";
-            this.widthTopDataGridViewTextBoxColumn.ToolTipText = "(ft)";
-            this.widthTopDataGridViewTextBoxColumn.Width = 50;
-            // 
-            // widthBottomDataGridViewTextBoxColumn
-            // 
-            this.widthBottomDataGridViewTextBoxColumn.DataPropertyName = "WidthBottom";
-            this.widthBottomDataGridViewTextBoxColumn.HeaderText = "Width Bottom";
-            this.widthBottomDataGridViewTextBoxColumn.Name = "widthBottomDataGridViewTextBoxColumn";
-            this.widthBottomDataGridViewTextBoxColumn.ToolTipText = "(ft)";
-            this.widthBottomDataGridViewTextBoxColumn.Width = 50;
-            // 
-            // ditchMaterialDataGridViewTextBoxColumn
-            // 
-            this.ditchMaterialDataGridViewTextBoxColumn.DataPropertyName = "DitchMaterial";
-            this.ditchMaterialDataGridViewTextBoxColumn.HeaderText = "Material";
-            this.ditchMaterialDataGridViewTextBoxColumn.Name = "ditchMaterialDataGridViewTextBoxColumn";
-            this.ditchMaterialDataGridViewTextBoxColumn.Width = 75;
-            // 
-            // ditchPhotoIDDataGridViewTextBoxColumn
-            // 
-            this.ditchPhotoIDDataGridViewTextBoxColumn.DataPropertyName = "DitchPhoto_ID";
-            this.ditchPhotoIDDataGridViewTextBoxColumn.HeaderText = "Photo ID";
-            this.ditchPhotoIDDataGridViewTextBoxColumn.Name = "ditchPhotoIDDataGridViewTextBoxColumn";
-            this.ditchPhotoIDDataGridViewTextBoxColumn.Width = 75;
             // 
             // ditchesCulvertsBindingSource
             // 
@@ -667,6 +571,102 @@
             this.ToolStripMenuItemSearchByNodeNo.Text = "Search by Node No";
             this.ToolStripMenuItemSearchByNodeNo.Click += new System.EventHandler(this.ToolStripMenuItemSearchByNodeNo_Click);
             // 
+            // Position
+            // 
+            this.Position.DataPropertyName = "Position";
+            this.Position.HeaderText = "US/DS";
+            this.Position.Name = "Position";
+            this.Position.Width = 50;
+            // 
+            // nodeNoDataGridViewTextBoxColumn
+            // 
+            this.nodeNoDataGridViewTextBoxColumn.DataPropertyName = "Node_No";
+            this.nodeNoDataGridViewTextBoxColumn.HeaderText = "Node No.";
+            this.nodeNoDataGridViewTextBoxColumn.Name = "nodeNoDataGridViewTextBoxColumn";
+            this.nodeNoDataGridViewTextBoxColumn.Width = 75;
+            // 
+            // lPODataGridViewTextBoxColumn
+            // 
+            this.lPODataGridViewTextBoxColumn.DataPropertyName = "LPO";
+            this.lPODataGridViewTextBoxColumn.HeaderText = "L, P, O*";
+            this.lPODataGridViewTextBoxColumn.Name = "lPODataGridViewTextBoxColumn";
+            this.lPODataGridViewTextBoxColumn.Width = 25;
+            // 
+            // shapeDataGridViewTextBoxColumn
+            // 
+            this.shapeDataGridViewTextBoxColumn.DataPropertyName = "Shape";
+            this.shapeDataGridViewTextBoxColumn.HeaderText = "Shape";
+            this.shapeDataGridViewTextBoxColumn.Name = "shapeDataGridViewTextBoxColumn";
+            this.shapeDataGridViewTextBoxColumn.Width = 60;
+            // 
+            // pipeDDataGridViewTextBoxColumn
+            // 
+            this.pipeDDataGridViewTextBoxColumn.DataPropertyName = "Pipe_D";
+            this.pipeDDataGridViewTextBoxColumn.HeaderText = "Full Diameter";
+            this.pipeDDataGridViewTextBoxColumn.Name = "pipeDDataGridViewTextBoxColumn";
+            this.pipeDDataGridViewTextBoxColumn.ToolTipText = "(inches)";
+            this.pipeDDataGridViewTextBoxColumn.Width = 70;
+            // 
+            // culvDepthDataGridViewTextBoxColumn
+            // 
+            this.culvDepthDataGridViewTextBoxColumn.DataPropertyName = "CulvDepth";
+            this.culvDepthDataGridViewTextBoxColumn.HeaderText = "Opening Diameter";
+            this.culvDepthDataGridViewTextBoxColumn.Name = "culvDepthDataGridViewTextBoxColumn";
+            this.culvDepthDataGridViewTextBoxColumn.ToolTipText = "(inches)";
+            this.culvDepthDataGridViewTextBoxColumn.Width = 70;
+            // 
+            // culvMaterialDataGridViewTextBoxColumn
+            // 
+            this.culvMaterialDataGridViewTextBoxColumn.DataPropertyName = "CulvMaterial";
+            this.culvMaterialDataGridViewTextBoxColumn.HeaderText = "Material";
+            this.culvMaterialDataGridViewTextBoxColumn.Name = "culvMaterialDataGridViewTextBoxColumn";
+            this.culvMaterialDataGridViewTextBoxColumn.Width = 75;
+            // 
+            // culvPhotoIDDataGridViewTextBoxColumn
+            // 
+            this.culvPhotoIDDataGridViewTextBoxColumn.DataPropertyName = "CulvPhoto_ID";
+            this.culvPhotoIDDataGridViewTextBoxColumn.HeaderText = "Photo ID";
+            this.culvPhotoIDDataGridViewTextBoxColumn.Name = "culvPhotoIDDataGridViewTextBoxColumn";
+            this.culvPhotoIDDataGridViewTextBoxColumn.Width = 75;
+            // 
+            // ditchDepthDataGridViewTextBoxColumn
+            // 
+            this.ditchDepthDataGridViewTextBoxColumn.DataPropertyName = "DitchDepth";
+            this.ditchDepthDataGridViewTextBoxColumn.HeaderText = "Depth (in)";
+            this.ditchDepthDataGridViewTextBoxColumn.Name = "ditchDepthDataGridViewTextBoxColumn";
+            this.ditchDepthDataGridViewTextBoxColumn.ToolTipText = "5\' from CVT";
+            this.ditchDepthDataGridViewTextBoxColumn.Width = 50;
+            // 
+            // widthTopDataGridViewTextBoxColumn
+            // 
+            this.widthTopDataGridViewTextBoxColumn.DataPropertyName = "WidthTop";
+            this.widthTopDataGridViewTextBoxColumn.HeaderText = "Width Top";
+            this.widthTopDataGridViewTextBoxColumn.Name = "widthTopDataGridViewTextBoxColumn";
+            this.widthTopDataGridViewTextBoxColumn.ToolTipText = "(ft)";
+            this.widthTopDataGridViewTextBoxColumn.Width = 50;
+            // 
+            // widthBottomDataGridViewTextBoxColumn
+            // 
+            this.widthBottomDataGridViewTextBoxColumn.DataPropertyName = "WidthBottom";
+            this.widthBottomDataGridViewTextBoxColumn.HeaderText = "Width Bottom";
+            this.widthBottomDataGridViewTextBoxColumn.Name = "widthBottomDataGridViewTextBoxColumn";
+            this.widthBottomDataGridViewTextBoxColumn.ToolTipText = "(ft)";
+            this.widthBottomDataGridViewTextBoxColumn.Width = 50;
+            // 
+            // ditchMaterialDataGridViewTextBoxColumn
+            // 
+            this.ditchMaterialDataGridViewTextBoxColumn.DataPropertyName = "DitchMaterial";
+            this.ditchMaterialDataGridViewTextBoxColumn.HeaderText = "Material";
+            this.ditchMaterialDataGridViewTextBoxColumn.Name = "ditchMaterialDataGridViewTextBoxColumn";
+            this.ditchMaterialDataGridViewTextBoxColumn.Width = 75;
+            // 
+            // ditchPhotoIDDataGridViewTextBoxColumn
+            // 
+            this.ditchPhotoIDDataGridViewTextBoxColumn.DataPropertyName = "DitchPhoto_ID";
+            this.ditchPhotoIDDataGridViewTextBoxColumn.HeaderText = "Photo ID";
+            this.ditchPhotoIDDataGridViewTextBoxColumn.Name = "ditchPhotoIDDataGridViewTextBoxColumn";
+            this.ditchPhotoIDDataGridViewTextBoxColumn.Width = 75;
+            // 
             // FormStormwaterInterface
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -770,6 +770,13 @@
         private System.Windows.Forms.TextBox textBoxPageID;
         private System.Windows.Forms.Button buttonAddANode;
         private System.Windows.Forms.Button buttonDeleteSelectedNode;
+        private System.Windows.Forms.Label labelPage;
+        private System.Windows.Forms.TextBox textBoxPage;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemFile;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemTools;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemSearchByNodeNo;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemExportComparativeList;
         private System.Windows.Forms.DataGridViewTextBoxColumn Position;
         private System.Windows.Forms.DataGridViewTextBoxColumn nodeNoDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn lPODataGridViewTextBoxColumn;
@@ -783,13 +790,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn widthBottomDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn ditchMaterialDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn ditchPhotoIDDataGridViewTextBoxColumn;
-        private System.Windows.Forms.Label labelPage;
-        private System.Windows.Forms.TextBox textBoxPage;
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemFile;
-        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemTools;
-        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemSearchByNodeNo;
-        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemExportComparativeList;
     }
 }
 
