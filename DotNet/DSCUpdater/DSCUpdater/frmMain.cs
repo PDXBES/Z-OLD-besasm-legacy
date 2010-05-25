@@ -1180,6 +1180,21 @@ namespace DSCUpdater
             sqlCmd.ExecuteNonQuery();
         }
 
+        private static void BatchCheckNewRetroSiteAssessments(SqlCommand sqlCmd)
+        {
+          
+        }
+
+        private static void BatchCheckNewRetroIcTargets(SqlCommand sqlCmd)
+        {
+
+        }
+
+        private static void BatchCheckNewContructedRetroFacs(SqlCommand sqlCmd)
+        {
+
+        }
+      
         private static void SendImpAEmail()
         {
             string toValue = "jrubengb@gmail.com";
@@ -1484,6 +1499,12 @@ namespace DSCUpdater
                     case "ApplyUpdates":
                         ApplyUpdates();
                         break;
+                    case "CheckRetroUpdates":
+                        CheckRetroUpdates();
+                        break;
+                    case "ApplyRetroUpdates":
+                        ApplyRetroUpdates();
+                        break;
                     case "LoadUpdaterHistory":
                         LoadUpdaterHistory();
                         break;
@@ -1540,6 +1561,47 @@ namespace DSCUpdater
             //MessageBox.Show("ApplyUpdates");
         }
 
+        private void CheckRetroUpdates()
+        {
+          tabControlMain.TabPages.Remove(tabMain);
+          tabControlMain.TabPages.Remove(tabDownloadTemplate);
+          tabControlMain.TabPages.Remove(tabLoadedUpdateReview);
+          tabControlMain.TabPages.Remove(tabUpdaterHistory);
+          tabControlMain.TabPages.Remove(tabUpdaterEditor);
+          tabControlMain.TabPages.Remove(tabMissingDSC);
+          tabControlMain.TabPages.Remove(tabIncorrectParkICArea);
+          tabControlMain.TabPages.Remove(tabIncorrectRoofICArea);
+          tabControlMain.TabPages.Remove(tabPendingImpAChanges);
+          tabControlMain.TabPages.Remove(tabDBConnOptions);
+          tabControlMain.TabPages.Remove(tabDownloadTemplate);
+          tabControlMain.TabPages.Remove(tabApplyRetroUpdates);
+          tabControlMain.TabPages.Remove(tabCheckRetroUpdates);
+          tabControlMain.TabPages.Add(tabCheckRetroUpdates);
+          tabControlMain.SelectedTab = tabCheckRetroUpdates;
+          tabControlMain.Visible = true;
+          //TO-DO: Implement RunIncomingRetroChangesReport();
+        }
+
+        private void ApplyRetroUpdates()
+        {
+          tabControlMain.TabPages.Remove(tabMain);
+          tabControlMain.TabPages.Remove(tabDownloadTemplate);
+          tabControlMain.TabPages.Remove(tabLoadedUpdateReview);
+          tabControlMain.TabPages.Remove(tabUpdaterHistory);
+          tabControlMain.TabPages.Remove(tabUpdaterEditor);
+          tabControlMain.TabPages.Remove(tabMissingDSC);
+          tabControlMain.TabPages.Remove(tabIncorrectParkICArea);
+          tabControlMain.TabPages.Remove(tabIncorrectRoofICArea);
+          tabControlMain.TabPages.Remove(tabPendingImpAChanges);
+          tabControlMain.TabPages.Remove(tabDBConnOptions);
+          tabControlMain.TabPages.Remove(tabDownloadTemplate);
+          tabControlMain.TabPages.Remove(tabCheckRetroUpdates);
+          tabControlMain.TabPages.Remove(tabApplyRetroUpdates);
+          tabControlMain.TabPages.Add(tabApplyRetroUpdates);
+          tabControlMain.SelectedTab = tabApplyRetroUpdates;
+          tabControlMain.Visible = true;
+        }
+      
         private void LoadUpdaterHistory()
         {
             tabControlMain.TabPages.Remove(tabUpdaterHistory);
@@ -2580,6 +2642,16 @@ namespace DSCUpdater
             tabControlMain.TabPages.Remove(tabUpdaterEditor);
             tabControlMain.TabPages.Remove(tabUpdaterHistory);
             tabControlMain.Visible = false;
+        }
+
+        private void checkRETROUpdatesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+          CheckRetroUpdates();
+        }
+
+        private void applyRETROUpdatesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+          ApplyRetroUpdates();
         }
     }
 }

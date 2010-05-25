@@ -267,9 +267,12 @@
   <ItemGroup>
     <None Include="Calendar.png" />
     <None Include="DocumentRevert.png" />
+    <None Include="AdjustableWrench.png" />
     <Content Include="DSCUpdaterConfig.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="WormGear.png" />
+    <None Include="WrenchGears.jpg" />
     <None Include="Server.png" />
     <None Include="UploadFile.png" />
     <None Include="Spreadsheet.png" />
