@@ -93,6 +93,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TableE18DataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="TableE19DataSet.cs">
+      <DependentUpon>TableE19DataSet.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="TableE19DataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

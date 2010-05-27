@@ -90,8 +90,9 @@ namespace SystemsAnalysis.DataAccess.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\\Data\\Dev\\BESASM\\legacy\\DotNet\\Mod" +
-            "elingUtils\\ResultsExtractor\\XPSWMMResults.mdb")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=\"C:\\Documents and Settings\\rgonzalez" +
+            "\\My Documents\\besasm-legacy\\DotNet\\ModelingUtils\\ResultsExtractor\\XPSWMMResults." +
+            "mdb\"")]
         public string XPSWMMResultsConnectionString {
             get {
                 return ((string)(this["XPSWMMResultsConnectionString"]));

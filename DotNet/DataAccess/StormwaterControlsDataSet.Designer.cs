@@ -7568,6 +7568,8 @@ namespace SystemsAnalysis.DataAccess {
             
             private global::System.Data.DataColumn columnNodeName;
             
+            private global::System.Data.DataColumn columnInterfaceInflowCuFt;
+            
             private global::System.Data.DataColumn columnInfiltrationVolumeCuFt;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -7608,6 +7610,13 @@ namespace SystemsAnalysis.DataAccess {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn InterfaceInflowCuFtColumn {
+                get {
+                    return this.columnInterfaceInflowCuFt;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public global::System.Data.DataColumn InfiltrationVolumeCuFtColumn {
                 get {
                     return this.columnInfiltrationVolumeCuFt;
@@ -7643,10 +7652,11 @@ namespace SystemsAnalysis.DataAccess {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public TableE19Row AddTableE19Row(string NodeName, double InfiltrationVolumeCuFt) {
+            public TableE19Row AddTableE19Row(string NodeName, double InterfaceInflowCuFt, double InfiltrationVolumeCuFt) {
                 TableE19Row rowTableE19Row = ((TableE19Row)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         NodeName,
+                        InterfaceInflowCuFt,
                         InfiltrationVolumeCuFt};
                 rowTableE19Row.ItemArray = columnValuesArray;
                 this.Rows.Add(rowTableE19Row);
@@ -7674,6 +7684,7 @@ namespace SystemsAnalysis.DataAccess {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             internal void InitVars() {
                 this.columnNodeName = base.Columns["NodeName"];
+                this.columnInterfaceInflowCuFt = base.Columns["InterfaceInflowCuFt"];
                 this.columnInfiltrationVolumeCuFt = base.Columns["InfiltrationVolumeCuFt"];
             }
             
@@ -7681,6 +7692,8 @@ namespace SystemsAnalysis.DataAccess {
             private void InitClass() {
                 this.columnNodeName = new global::System.Data.DataColumn("NodeName", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnNodeName);
+                this.columnInterfaceInflowCuFt = new global::System.Data.DataColumn("InterfaceInflowCuFt", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnInterfaceInflowCuFt);
                 this.columnInfiltrationVolumeCuFt = new global::System.Data.DataColumn("InfiltrationVolumeCuFt", typeof(double), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnInfiltrationVolumeCuFt);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
@@ -15401,6 +15414,21 @@ namespace SystemsAnalysis.DataAccess {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public double InterfaceInflowCuFt {
+                get {
+                    try {
+                        return ((double)(this[this.tableTableE19.InterfaceInflowCuFtColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'InterfaceInflowCuFt\' in table \'TableE19\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableTableE19.InterfaceInflowCuFtColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public double InfiltrationVolumeCuFt {
                 get {
                     try {
@@ -15413,6 +15441,16 @@ namespace SystemsAnalysis.DataAccess {
                 set {
                     this[this.tableTableE19.InfiltrationVolumeCuFtColumn] = value;
                 }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsInterfaceInflowCuFtNull() {
+                return this.IsNull(this.tableTableE19.InterfaceInflowCuFtColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetInterfaceInflowCuFtNull() {
+                this[this.tableTableE19.InterfaceInflowCuFtColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -27404,6 +27442,7 @@ namespace SystemsAnalysis.DataAccess.StormwaterControlsDataSetTableAdapters {
             tableMapping.SourceTable = "Table";
             tableMapping.DataSetTable = "TableE19";
             tableMapping.ColumnMappings.Add("nodeName", "NodeName");
+            tableMapping.ColumnMappings.Add("interfaceInflowCuFt", "InterfaceInflowCuFt");
             tableMapping.ColumnMappings.Add("infiltrationVolumeCuFt", "InfiltrationVolumeCuFt");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.OleDb.OleDbCommand();
