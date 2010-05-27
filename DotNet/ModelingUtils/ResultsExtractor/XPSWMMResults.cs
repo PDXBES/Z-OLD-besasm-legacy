@@ -450,7 +450,9 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor
       string currentLine = "";
       string[] tokens;
       string nodeName;
+      string interfaceVolString;
       string infilVolString;
+      double interfaceInflowCuFt;
       double infiltrationVolumeCuFt;
 
       do
@@ -474,10 +476,12 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor
         {
           tokens = currentLine.Split(new Char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
           nodeName = tokens[0];
+          interfaceVolString = tokens[3];
           infilVolString = tokens[7];
+          interfaceInflowCuFt = Double.Parse(interfaceVolString, NumberStyles.Any, CultureInfo.InvariantCulture);
           infiltrationVolumeCuFt = Double.Parse(infilVolString, NumberStyles.Any,CultureInfo.InvariantCulture);
 
-          tableE19.AddTableE19Row(nodeName, infiltrationVolumeCuFt);
+          tableE19.AddTableE19Row(nodeName,interfaceInflowCuFt, infiltrationVolumeCuFt);
           currentLine = outputReader.ReadLine();
         }
       }

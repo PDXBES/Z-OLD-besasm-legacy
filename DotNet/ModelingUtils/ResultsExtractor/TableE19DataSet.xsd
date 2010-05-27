@@ -53,6 +53,7 @@ FROM         TableE19</CommandText>
             <Mappings>
               <Mapping SourceColumn="nodeName" DataSetColumn="NodeName" />
               <Mapping SourceColumn="infiltrationVolumeCuFt" DataSetColumn="InfiltrationVolumeCuFt" />
+              <Mapping SourceColumn="interfaceInflowCuFt" DataSetColumn="InterfaceInflowCuFt" />
             </Mappings>
             <Sources />
           </TableAdapter>
@@ -74,7 +75,8 @@ FROM         TableE19</CommandText>
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="InfiltrationVolumeCuFt" msprop:Generator_UserColumnName="InfiltrationVolumeCuFt" msprop:Generator_ColumnPropNameInRow="InfiltrationVolumeCuFt" msprop:Generator_ColumnVarNameInTable="columnInfiltrationVolumeCuFt" msprop:Generator_ColumnPropNameInTable="InfiltrationVolumeCuFtColumn" type="xs:double" minOccurs="0" />
+              <xs:element name="InterfaceInflowCuFt" msprop:Generator_UserColumnName="InterfaceInflowCuFt" msprop:Generator_ColumnPropNameInRow="InterfaceInflowCuFt" msprop:Generator_ColumnVarNameInTable="columnInterfaceInflowCuFt" msprop:Generator_ColumnPropNameInTable="InterfaceInflowCuFtColumn" type="xs:double" minOccurs="0" />
+              <xs:element name="InfiltrationVolumeCuFt" msprop:Generator_UserColumnName="InfiltrationVolumeCuFt" msprop:Generator_ColumnVarNameInTable="columnInfiltrationVolumeCuFt" msprop:Generator_ColumnPropNameInRow="InfiltrationVolumeCuFt" msprop:Generator_ColumnPropNameInTable="InfiltrationVolumeCuFtColumn" type="xs:double" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

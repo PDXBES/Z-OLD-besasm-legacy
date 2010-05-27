@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.IO;
 using System.Windows.Forms;
 using SystemsAnalysis.DataAccess;
 using SystemsAnalysis.Reporting.ReportLibraries;
@@ -23,26 +24,44 @@ namespace DataAccessTestBench
       InitializeComponent();
 
       //string testModelPath = @"C:\Data\Projects\41800023-1_BES_DataManagement\Beech_Essex\BEE_RP\";
-      string testModelPath = @"\\Cassio\systems_planning\8063_CombinedFacPlan\Models\RP\Beech_Essex\BEE_RP\";
-
       //string testAlternativePath = @"C:\Data\Projects\41800023-1_BES_DataManagement\Beech_Essex\BEE_FU\alternatives\BEE_RP\";
-      string testAlternativePath = @"\\Cassio\systems_planning\8063_CombinedFacPlan\Models\RP\Beech_Essex\BEE_FU\alternatives\BEE_RP";
-
       //string testSwmmOutput = @"C:\Data\Projects\41800023-1_BES_DataManagement\Beech_Essex\BEE_RP\sim\4S6\BEE_RP_4S6.out";
-      string testSwmmOutput = @"\\Cassio\systems_planning\8063_CombinedFacPlan\Models\RP\Beech_Essex\BEE_RP\sim\4S6\BEE_RP_4S6.out";
 
+      //string testModelPath="";
+      //string testAlternativePath="";
+      //string testSwmmOutput="";
+
+      //string testModelPath = @"\\Cassio\systems_planning\8063_CombinedFacPlan\Models\RP\TaggartD\TGD_RP\";
+      //string testAlternativePath = @"\\Cassio\systems_planning\8063_CombinedFacPlan\Models\RP\TaggartD\TGD_FU_2011\alternatives\TGD_RP\";
+      //string testSwmmOutput = @"\\Cassio\systems_planning\8063_CombinedFacPlan\Models\RP\TaggartD\TGD_RP\sim\4S6\TGD_RP_4S6.out";
+
+      //string testModelPath = @"\\Cassio\systems_planning\8063_CombinedFacPlan\Models\RP\Lents\LE2_RP\";
+      //string testAlternativePath = @"\\Cassio\systems_planning\8063_CombinedFacPlan\Models\RP\Lents\LE2_FU\alternatives\LE2_RP\";
+      //string testSwmmOutput = @"\\Cassio\systems_planning\8063_CombinedFacPlan\Models\RP\Lents\LE2_RP\sim\4S6\LE2_RP_4S6.out";
+
+      //string testModelPath = @"\\Cassio\systems_planning\8063_CombinedFacPlan\Models\RP\Alder\ALD_RP\";
+      //string testAlternativePath = @"\\Cassio\systems_planning\8063_CombinedFacPlan\Models\RP\Alder\ALD_FU\alternatives\ALD_RP\";
+      //string testSwmmOutput = @"\\Cassio\systems_planning\8063_CombinedFacPlan\Models\RP\Alder\ALD_RP\sim\4S6\ALD_RP_4S6.out";
+    }
+
+    private void LoadRPReport()
+    {
+      string testModelPath = txtTestModelPath.Text;
+      string testAlternativePath = txtTestAltPath.Text;
+      string testSwmmOutput = txtSwmmOutputPath.Text;
       rpReport = new RecommendedPlanReport();
       Dictionary<string, ReportBase.Parameter> parameters = new Dictionary<string, ReportBase.Parameter>();
       parameters.Add("ModelPath", new ReportBase.Parameter("ModelPath", testModelPath));
       parameters.Add("AlternativePath", new ReportBase.Parameter("AlternativePath", testAlternativePath));
       parameters.Add("SwmmOutputFile", new ReportBase.Parameter("SwmmOutputFile", testSwmmOutput));
       rpReport.LoadAuxilaryData(parameters);
-
     }
 
     private void frmMain_Load(object sender, EventArgs e)
     {
-
+      txtTestModelPath.Text = @"\\Cassio\systems_planning\8063_CombinedFacPlan\Models\RP\Beech_Essex\BEE_RP\";
+      txtTestAltPath.Text = @"\\Cassio\systems_planning\8063_CombinedFacPlan\Models\RP\Beech_Essex\BEE_FU\alternatives\BEE_RP\";
+      txtSwmmOutputPath.Text = @"\\Cassio\systems_planning\8063_CombinedFacPlan\Models\RP\Beech_Essex\BEE_RP\sim\4S6\BEE_RP_4S6.out";
     }
 
     private void btnExecuteQueriesDirect_Click(object sender, EventArgs e)
@@ -488,6 +507,41 @@ namespace DataAccessTestBench
     private void btnLoadE19Data_Click(object sender, EventArgs e)
     {
       dgvTableE19.DataSource = rpReport.scDS.TableE19;
+    }
+
+    private void btnChooseTestModelPath_Click(object sender, EventArgs e)
+    {
+      if (ofdModelDataSource.ShowDialog() == DialogResult.OK)
+      {
+        string fullModelPath = ofdModelDataSource.FileName;
+        txtTestModelPath.Text = Path.GetDirectoryName(fullModelPath) + "\\";
+        string testModelPath = txtTestModelPath.Text;
+      }
+    }
+
+    private void btnChooseTestAltPath_Click(object sender, EventArgs e)
+    {
+      if (ofdModelDataSource.ShowDialog() == DialogResult.OK)
+      {
+        string fullAltPath = ofdModelDataSource.FileName;
+        txtTestAltPath.Text = Path.GetDirectoryName(fullAltPath) + "\\";
+        string testAlternativePath = txtTestAltPath.Text;  
+      } 
+    }
+
+    private void btnChooseTestSwmmOutput_Click(object sender, EventArgs e)
+    {
+      if (ofdModelDataSource.ShowDialog() == DialogResult.OK)
+      {
+        string fullOutputPath = ofdModelDataSource.FileName;
+        txtSwmmOutputPath.Text = fullOutputPath;
+        string testSwmmOutput = fullOutputPath;
+      }
+    }
+
+    private void btnLoadRpReport_Click(object sender, EventArgs e)
+    {
+      LoadRPReport();
     }
 
   }
