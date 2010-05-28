@@ -45,6 +45,8 @@ namespace SWI_2
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            // TODO: This line of code loads data into the 'sANDBOXDataSet.SWSP_GLOBAL_ID' table. You can move, or remove it, as needed.
+            this.sWSP_GLOBAL_IDTableAdapter.Fill(this.sANDBOXDataSet.SWSP_GLOBAL_ID);
             // TODO: This line of code loads data into the 'sANDBOXDataSet.SWSP_PIPE' table. You can move, or remove it, as needed.
             this.sWSP_PIPETableAdapter.Fill(this.sANDBOXDataSet.SWSP_PIPE);
             // TODO: This line of code loads data into the 'sANDBOXDataSet.SWSP_SHAPE_TYPE' table. You can move, or remove it, as needed.
@@ -74,32 +76,8 @@ namespace SWI_2
             // TODO: This line of code loads data into the 'sANDBOXDataSet.SWSP_WATERSHED' table. You can move, or remove it, as needed.
             this.sWSP_WATERSHEDTableAdapter.Fill(this.sANDBOXDataSet.SWSP_WATERSHED);
 
+            dataGridView2.Rows[0].Selected = true;
         }
-
-        /*private void CheckEveryOther_Click(object sender, System.EventArgs e)
-        {
-            // Cycle through every item and check every other.
-
-            // Set flag to true to know when this code is being executed. Used in the ItemCheck
-            // event handler.
-            insideCheckEveryOther = true;
-
-            for (int i = 0; i < checkedListBox1.Items.Count; i++)
-            {
-                // For every other item in the list, set as checked.
-                if ((i % 2) == 0)
-                {
-                    // But for each other item that is to be checked, set as being in an
-                    // indeterminate checked state.
-                    if ((i % 4) == 0)
-                        checkedListBox1.SetItemCheckState(i, CheckState.Indeterminate);
-                    else
-                        checkedListBox1.SetItemChecked(i, true);
-                }
-            }
-
-            insideCheckEveryOther = false;
-        }*/
 
         private void CheckEvaluatorsAssociatedWithThisSurveyPage(object sender, System.EventArgs e)
         {
@@ -181,14 +159,238 @@ namespace SWI_2
             }*/
         }
 
-        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void tabPage1_Entered(object sender, EventArgs e)
         {
-
+            try
+            {
+                foreach (object rowObject in dataGridView2.Rows)
+                {
+                    ((DataGridViewRow)rowObject).Selected = false;
+                }
+                dataGridView2.Rows[0].Selected = true;
+                fKDITCHSURVEYPAGEBindingSource.MoveFirst();
+                dataGridView2.Refresh();
+                this.sWSP_PHOTOTableAdapter.FillByGlobalID((SANDBOXDataSet.SWSP_PHOTODataTable)((SANDBOXDataSet)this.sWSPPHOTOBindingSource.DataSource).SWSP_PHOTO, (int)((System.Data.DataRowView)fKDITCHSURVEYPAGEBindingSource.Current)["global_id"]);
+            }
+            catch (Exception ex)
+            {
+                //MessageBox.Show(ex.ToString());
+                this.sWSP_PHOTOTableAdapter.FillByGlobalID((SANDBOXDataSet.SWSP_PHOTODataTable)((SANDBOXDataSet)this.sWSPPHOTOBindingSource.DataSource).SWSP_PHOTO, 0);
+            }
         }
 
-        private void dataGridView2_SelectionChanged(object sender, EventArgs e)
+        private void tabPageCulverts_Enter(object sender, EventArgs e)
         {
-            this.sWSP_PHOTOTableAdapter.GetDataByGlobalID((int)((System.Data.DataRowView)fKDITCHSURVEYPAGEBindingSource.Current)["global_id"]);
+            try
+            {
+            foreach (object rowObject in dataGridView1.Rows)
+            {
+                ((DataGridViewRow)rowObject).Selected = false;
+            }
+            dataGridView1.Rows[0].Selected = true;
+            fKCULVERTSURVEYPAGEBindingSource.MoveFirst();
+            dataGridView1.Refresh();
+
+
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+
+        private void tabPage3_Enter(object sender, EventArgs e)
+        {
+            try
+            {
+            foreach (object rowObject in dataGridView3.Rows)
+            {
+                ((DataGridViewRow)rowObject).Selected = false;
+            }
+            dataGridView3.Rows[0].Selected = true;
+            fKPIPESURVEYPAGEBindingSource.MoveFirst();
+            dataGridView3.Refresh();
+}
+            catch (Exception ex)
+            {
+             }
+        }
+
+        private void buttonDitchesDelete_Click(object sender, EventArgs e)
+        {
+            this.sWSP_DITCHTableAdapter.DeleteQuery(((int)((System.Data.DataRowView)fKDITCHSURVEYPAGEBindingSource.Current)["ditch_id"]));
+            this.sWSP_DITCHTableAdapter.Update(sANDBOXDataSet);
+            this.sWSP_DITCHTableAdapter.Fill((SANDBOXDataSet.SWSP_DITCHDataTable)((SANDBOXDataSet)this.sWSPDITCHBindingSource.DataSource).SWSP_DITCH);
+            dataGridView2.Refresh();
+        }
+
+        private void buttonDitchesAdd_Click(object sender, EventArgs e)
+        {
+            int globalID = 0;
+            //adding a ditch means:
+            //placing a new entry in the globalID table,
+            //taking that value and using it to create a new ditch
+            this.sWSP_GLOBAL_IDTableAdapter.Insert("");
+            //what was the global ID that was just inserted?  The highest value in the GlobalID table.  Since we just inserted to it, there is no chance that it could be null
+            globalID = (int)this.sWSP_GLOBAL_IDTableAdapter.ScalarQuery();
+            this.sWSP_DITCHTableAdapter.Insert(globalID,
+                                                ((int)((System.Data.DataRowView)fKDITCHSURVEYPAGEBindingSource.Current)["survey_page_id"]),
+                                                "NewNode",
+                                                1,
+                                                1,
+                                                1,
+                                                1,
+                                                1,
+                                                "");
+            this.sWSP_DITCHTableAdapter.Fill((SANDBOXDataSet.SWSP_DITCHDataTable)((SANDBOXDataSet)this.sWSPDITCHBindingSource.DataSource).SWSP_DITCH);
+            //this.sWSP_PHOTOTableAdapter.InsertQuery(_GlobalID, "", "");
+            //this.sWSP_PHOTOTableAdapter.FillByGlobalID((SANDBOXDataSet.SWSP_PHOTODataTable)((SANDBOXDataSet)this.sWSPPHOTOBindingSource.DataSource).SWSP_PHOTO, _GlobalID);
+        }
+
+        private void buttonPipesViewAddPhotos_Click(object sender, EventArgs e)
+        {
+            FormPhotos child = new FormPhotos();
+
+            child.GlobalID = (int)((System.Data.DataRowView)fKPIPESURVEYPAGEBindingSource.Current)["global_id"];
+            this.Enabled = false;
+            child.ShowDialog();
+            this.Enabled = true;
+        }
+
+        private void buttonCulvertsViewAddPhotos_Click(object sender, EventArgs e)
+        {
+            FormPhotos child = new FormPhotos();
+
+            child.GlobalID = (int)((System.Data.DataRowView)fKCULVERTSURVEYPAGEBindingSource.Current)["global_id"];
+            this.Enabled = false;
+            child.ShowDialog();
+            this.Enabled = true;
+        }
+
+        private void buttonDitchesViewAddPhotos_Click(object sender, EventArgs e)
+        {
+            FormPhotos child = new FormPhotos();
+
+            child.GlobalID = (int)((System.Data.DataRowView)fKDITCHSURVEYPAGEBindingSource.Current)["global_id"];
+            this.Enabled = false;
+            child.ShowDialog();
+            this.Enabled = true;
+        }
+
+        private void buttonUpdateDitch_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                foreach (object rowObject in dataGridView2.Rows)
+                {
+                    ((DataGridViewRow)rowObject).Selected = false;
+                }
+                dataGridView2.Rows[0].Selected = true;
+                fKDITCHSURVEYPAGEBindingSource.MoveFirst();
+                dataGridView2.Refresh();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            this.sWSP_DITCHTableAdapter.Update(sANDBOXDataSet);
+        }
+
+        private void buttonCulvertsAdd_Click(object sender, EventArgs e)
+        {
+            int globalID = 0;
+            //adding a ditch means:
+            //placing a new entry in the globalID table,
+            //taking that value and using it to create a new ditch
+            this.sWSP_GLOBAL_IDTableAdapter.Insert("");
+            //what was the global ID that was just inserted?  The highest value in the GlobalID table.  Since we just inserted to it, there is no chance that it could be null
+            globalID = (int)this.sWSP_GLOBAL_IDTableAdapter.ScalarQuery();
+            this.sWSP_CULVERTTableAdapter.Insert(globalID,
+                                                ((int)((System.Data.DataRowView)fKDITCHSURVEYPAGEBindingSource.Current)["survey_page_id"]),
+                                                "NewNode",
+                                                1,
+                                                1,
+                                                1,
+                                                1,
+                                                1,
+                                                1,
+                                                "");
+            this.sWSP_CULVERTTableAdapter.Fill((SANDBOXDataSet.SWSP_CULVERTDataTable)((SANDBOXDataSet)this.sWSPCULVERTBindingSource.DataSource).SWSP_CULVERT);
+        }
+
+        private void buttonCulvertsDelete_Click(object sender, EventArgs e)
+        {
+            this.sWSP_CULVERTTableAdapter.DeleteQuery(((int)((System.Data.DataRowView)fKCULVERTSURVEYPAGEBindingSource.Current)["culvert_id"]));
+            this.sWSP_CULVERTTableAdapter.Update(sANDBOXDataSet);
+            this.sWSP_CULVERTTableAdapter.Fill((SANDBOXDataSet.SWSP_CULVERTDataTable)((SANDBOXDataSet)this.sWSPCULVERTBindingSource.DataSource).SWSP_CULVERT);
+            dataGridView1.Refresh();
+        }
+
+        private void buttonUpdateCulvert_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                foreach (object rowObject in dataGridView1.Rows)
+                {
+                    ((DataGridViewRow)rowObject).Selected = false;
+                }
+                dataGridView1.Rows[0].Selected = true;
+                fKCULVERTSURVEYPAGEBindingSource.MoveFirst();
+                dataGridView1.Refresh();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            this.sWSP_CULVERTTableAdapter.Update(sANDBOXDataSet);
+        }
+
+        private void buttonPipesAdd_Click(object sender, EventArgs e)
+        {
+            int globalID = 0;
+            //adding a ditch means:
+            //placing a new entry in the globalID table,
+            //taking that value and using it to create a new ditch
+            this.sWSP_GLOBAL_IDTableAdapter.Insert("");
+            //what was the global ID that was just inserted?  The highest value in the GlobalID table.  Since we just inserted to it, there is no chance that it could be null
+            globalID = (int)this.sWSP_GLOBAL_IDTableAdapter.ScalarQuery();
+            this.sWSP_PIPETableAdapter.Insert(globalID,
+                                                ((int)((System.Data.DataRowView)fKPIPESURVEYPAGEBindingSource.Current)["survey_page_id"]),
+                                                "NewNode1",
+                                                "NewNode2",
+                                                1,
+                                                1,
+                                                1,
+                                                1,
+                                                1,
+                                                "");
+            this.sWSP_PIPETableAdapter.Fill((SANDBOXDataSet.SWSP_PIPEDataTable)((SANDBOXDataSet)this.sWSPPIPEBindingSource.DataSource).SWSP_PIPE);
+        }
+
+        private void buttonPipesDelete_Click(object sender, EventArgs e)
+        {
+            this.sWSP_PIPETableAdapter.DeleteQuery(((int)((System.Data.DataRowView)fKPIPESURVEYPAGEBindingSource.Current)["pipe_id"]));
+            this.sWSP_PIPETableAdapter.Update(sANDBOXDataSet);
+            this.sWSP_PIPETableAdapter.Fill((SANDBOXDataSet.SWSP_PIPEDataTable)((SANDBOXDataSet)this.sWSPPIPEBindingSource.DataSource).SWSP_PIPE);
+            dataGridView3.Refresh();
+        }
+
+        private void buttonUpdatePipe_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                foreach (object rowObject in dataGridView3.Rows)
+                {
+                    ((DataGridViewRow)rowObject).Selected = false;
+                }
+                dataGridView3.Rows[0].Selected = true;
+                fKPIPESURVEYPAGEBindingSource.MoveFirst();
+                dataGridView3.Refresh();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            this.sWSP_PIPETableAdapter.Update(sANDBOXDataSet);
         }
     }
 }
