@@ -18,7 +18,19 @@ namespace SWI_2
 
         private void buttonOK_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                SWI_2.SANDBOXDataSetTableAdapters.SWSP_VIEWTableAdapter taV = new SWI_2.SANDBOXDataSetTableAdapters.SWSP_VIEWTableAdapter();
+                taV.Insert((int)comboBoxSubwatershed.SelectedValue, (int)numericUpDownAddView.Value, "");
+                
+                SWI_2.SANDBOXDataSetTableAdapters.SWSP_SURVEY_PAGETableAdapter taS = new SWI_2.SANDBOXDataSetTableAdapters.SWSP_SURVEY_PAGETableAdapter();
+                taS.Insert(taV.ScalarQuery(), (int)numericUpDownAddFirstSurveyPage.Value, System.DateTime.Today, "", "");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("View already exists!");
+            }
+            this.Close();
         }
 
         private void FormAddView_Load(object sender, EventArgs e)
@@ -27,7 +39,11 @@ namespace SWI_2
             this.sWSP_SUBWATERSHEDTableAdapter.Fill(this.sANDBOXDataSet.SWSP_SUBWATERSHED);
             // TODO: This line of code loads data into the 'sANDBOXDataSet.SWSP_WATERSHED' table. You can move, or remove it, as needed.
             this.sWSP_WATERSHEDTableAdapter.Fill(this.sANDBOXDataSet.SWSP_WATERSHED);
+        }
 
+        private void buttonCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

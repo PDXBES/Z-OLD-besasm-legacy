@@ -38,16 +38,16 @@
             this.labelSubwatershed = new System.Windows.Forms.Label();
             this.labelWatershed = new System.Windows.Forms.Label();
             this.comboBoxWatershed = new System.Windows.Forms.ComboBox();
-            this.comboBoxSubwatershed = new System.Windows.Forms.ComboBox();
-            this.sANDBOXDataSet = new SWI_2.SANDBOXDataSet();
             this.sWSPWATERSHEDBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.sWSP_WATERSHEDTableAdapter = new SWI_2.SANDBOXDataSetTableAdapters.SWSP_WATERSHEDTableAdapter();
+            this.sANDBOXDataSet = new SWI_2.SANDBOXDataSet();
+            this.comboBoxSubwatershed = new System.Windows.Forms.ComboBox();
             this.fKSUBWATERSHEDWATERSHEDBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.sWSP_WATERSHEDTableAdapter = new SWI_2.SANDBOXDataSetTableAdapters.SWSP_WATERSHEDTableAdapter();
             this.sWSP_SUBWATERSHEDTableAdapter = new SWI_2.SANDBOXDataSetTableAdapters.SWSP_SUBWATERSHEDTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownAddFirstSurveyPage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownAddView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sANDBOXDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sWSPWATERSHEDBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sANDBOXDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fKSUBWATERSHEDWATERSHEDBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -59,6 +59,7 @@
             this.buttonCancel.TabIndex = 19;
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
+            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // buttonOK
             // 
@@ -131,6 +132,16 @@
             this.comboBoxWatershed.TabIndex = 20;
             this.comboBoxWatershed.ValueMember = "watershed_id";
             // 
+            // sWSPWATERSHEDBindingSource
+            // 
+            this.sWSPWATERSHEDBindingSource.DataMember = "SWSP_WATERSHED";
+            this.sWSPWATERSHEDBindingSource.DataSource = this.sANDBOXDataSet;
+            // 
+            // sANDBOXDataSet
+            // 
+            this.sANDBOXDataSet.DataSetName = "SANDBOXDataSet";
+            this.sANDBOXDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
             // comboBoxSubwatershed
             // 
             this.comboBoxSubwatershed.DataSource = this.fKSUBWATERSHEDWATERSHEDBindingSource;
@@ -142,24 +153,14 @@
             this.comboBoxSubwatershed.TabIndex = 21;
             this.comboBoxSubwatershed.ValueMember = "subwatershed_id";
             // 
-            // sANDBOXDataSet
-            // 
-            this.sANDBOXDataSet.DataSetName = "SANDBOXDataSet";
-            this.sANDBOXDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // sWSPWATERSHEDBindingSource
-            // 
-            this.sWSPWATERSHEDBindingSource.DataMember = "SWSP_WATERSHED";
-            this.sWSPWATERSHEDBindingSource.DataSource = this.sANDBOXDataSet;
-            // 
-            // sWSP_WATERSHEDTableAdapter
-            // 
-            this.sWSP_WATERSHEDTableAdapter.ClearBeforeFill = true;
-            // 
             // fKSUBWATERSHEDWATERSHEDBindingSource
             // 
             this.fKSUBWATERSHEDWATERSHEDBindingSource.DataMember = "FK_SUBWATERSHED_WATERSHED";
             this.fKSUBWATERSHEDWATERSHEDBindingSource.DataSource = this.sWSPWATERSHEDBindingSource;
+            // 
+            // sWSP_WATERSHEDTableAdapter
+            // 
+            this.sWSP_WATERSHEDTableAdapter.ClearBeforeFill = true;
             // 
             // sWSP_SUBWATERSHEDTableAdapter
             // 
@@ -185,8 +186,8 @@
             this.Load += new System.EventHandler(this.FormAddView_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownAddFirstSurveyPage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownAddView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sANDBOXDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sWSPWATERSHEDBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sANDBOXDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fKSUBWATERSHEDWATERSHEDBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

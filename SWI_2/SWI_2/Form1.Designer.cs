@@ -32,18 +32,17 @@
             this.buttonAddView = new System.Windows.Forms.Button();
             this.buttonAddSurveyPage = new System.Windows.Forms.Button();
             this.dateTimePickerSurveyDate = new System.Windows.Forms.DateTimePicker();
-            this.listBoxWeather = new System.Windows.Forms.ListBox();
+            this.fKSURVEYPAGEVIEWBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.fKVIEWSUBWATERSHEDBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.fKSUBWATERSHEDWATERSHEDBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.sWSPWATERSHEDBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.sANDBOXDataSet = new SWI_2.SANDBOXDataSet();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.buttonUpdateDitch = new System.Windows.Forms.Button();
             this.buttonDitchesViewAddPhotos = new System.Windows.Forms.Button();
             this.comboBoxDitchesFacingDirection = new System.Windows.Forms.ComboBox();
             this.fKDITCHSURVEYPAGEBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.fKSURVEYPAGEVIEWBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.fKVIEWSUBWATERSHEDBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.fKSUBWATERSHEDWATERSHEDBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.sWSPWATERSHEDBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.sANDBOXDataSet = new SWI_2.SANDBOXDataSet();
             this.sWSPFACINGTYPEBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.comboBoxDitchesMaterial = new System.Windows.Forms.ComboBox();
             this.sWSPMATERIALTYPEBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -159,14 +158,15 @@
             this.sWSPCULVERTBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.sWSP_GLOBAL_IDBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.sWSP_GLOBAL_IDTableAdapter = new SWI_2.SANDBOXDataSetTableAdapters.SWSP_GLOBAL_IDTableAdapter();
-            this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.fKDITCHSURVEYPAGEBindingSource)).BeginInit();
+            this.textBoxWeather = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.fKSURVEYPAGEVIEWBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fKVIEWSUBWATERSHEDBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fKSUBWATERSHEDWATERSHEDBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sWSPWATERSHEDBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sANDBOXDataSet)).BeginInit();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fKDITCHSURVEYPAGEBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sWSPFACINGTYPEBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sWSPMATERIALTYPEBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDitchesTopWidth)).BeginInit();
@@ -224,95 +224,11 @@
             // 
             // dateTimePickerSurveyDate
             // 
+            this.dateTimePickerSurveyDate.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.fKSURVEYPAGEVIEWBindingSource, "date", true));
             this.dateTimePickerSurveyDate.Location = new System.Drawing.Point(12, 97);
             this.dateTimePickerSurveyDate.Name = "dateTimePickerSurveyDate";
             this.dateTimePickerSurveyDate.Size = new System.Drawing.Size(141, 20);
             this.dateTimePickerSurveyDate.TabIndex = 6;
-            // 
-            // listBoxWeather
-            // 
-            this.listBoxWeather.FormattingEnabled = true;
-            this.listBoxWeather.Location = new System.Drawing.Point(171, 100);
-            this.listBoxWeather.Name = "listBoxWeather";
-            this.listBoxWeather.Size = new System.Drawing.Size(66, 17);
-            this.listBoxWeather.TabIndex = 7;
-            // 
-            // tabControl1
-            // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPageCulverts);
-            this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Location = new System.Drawing.Point(8, 132);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(804, 241);
-            this.tabControl1.TabIndex = 9;
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Controls.Add(this.buttonUpdateDitch);
-            this.tabPage1.Controls.Add(this.buttonDitchesViewAddPhotos);
-            this.tabPage1.Controls.Add(this.comboBoxDitchesFacingDirection);
-            this.tabPage1.Controls.Add(this.comboBoxDitchesMaterial);
-            this.tabPage1.Controls.Add(this.numericUpDownDitchesTopWidth);
-            this.tabPage1.Controls.Add(this.numericUpDownDitchesDepth);
-            this.tabPage1.Controls.Add(this.textBoxDitchesNode);
-            this.tabPage1.Controls.Add(this.labelDitchesNode);
-            this.tabPage1.Controls.Add(this.labelDitchesFacingDirection);
-            this.tabPage1.Controls.Add(this.labelDitchesMaterial);
-            this.tabPage1.Controls.Add(this.labelDitchesBottomWidth);
-            this.tabPage1.Controls.Add(this.labelDitchesTopWidth);
-            this.tabPage1.Controls.Add(this.labelDitchesDepth);
-            this.tabPage1.Controls.Add(this.buttonDitchesAdd);
-            this.tabPage1.Controls.Add(this.numericUpDownDitchesBottomWidth);
-            this.tabPage1.Controls.Add(this.buttonDitchesDelete);
-            this.tabPage1.Controls.Add(this.dataGridView2);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(796, 215);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Ditches";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            this.tabPage1.Enter += new System.EventHandler(this.tabPage1_Entered);
-            // 
-            // buttonUpdateDitch
-            // 
-            this.buttonUpdateDitch.Location = new System.Drawing.Point(690, 177);
-            this.buttonUpdateDitch.Name = "buttonUpdateDitch";
-            this.buttonUpdateDitch.Size = new System.Drawing.Size(97, 31);
-            this.buttonUpdateDitch.TabIndex = 65;
-            this.buttonUpdateDitch.Text = "Update Ditch";
-            this.buttonUpdateDitch.UseVisualStyleBackColor = true;
-            this.buttonUpdateDitch.Click += new System.EventHandler(this.buttonUpdateDitch_Click);
-            // 
-            // buttonDitchesViewAddPhotos
-            // 
-            this.buttonDitchesViewAddPhotos.Location = new System.Drawing.Point(351, 177);
-            this.buttonDitchesViewAddPhotos.Name = "buttonDitchesViewAddPhotos";
-            this.buttonDitchesViewAddPhotos.Size = new System.Drawing.Size(220, 32);
-            this.buttonDitchesViewAddPhotos.TabIndex = 64;
-            this.buttonDitchesViewAddPhotos.Text = "View/Add Photos";
-            this.buttonDitchesViewAddPhotos.UseVisualStyleBackColor = true;
-            this.buttonDitchesViewAddPhotos.Click += new System.EventHandler(this.buttonDitchesViewAddPhotos_Click);
-            // 
-            // comboBoxDitchesFacingDirection
-            // 
-            this.comboBoxDitchesFacingDirection.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.fKDITCHSURVEYPAGEBindingSource, "facing", true));
-            this.comboBoxDitchesFacingDirection.DataSource = this.sWSPFACINGTYPEBindingSource;
-            this.comboBoxDitchesFacingDirection.DisplayMember = "facing";
-            this.comboBoxDitchesFacingDirection.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxDitchesFacingDirection.FormattingEnabled = true;
-            this.comboBoxDitchesFacingDirection.Location = new System.Drawing.Point(418, 30);
-            this.comboBoxDitchesFacingDirection.Name = "comboBoxDitchesFacingDirection";
-            this.comboBoxDitchesFacingDirection.Size = new System.Drawing.Size(79, 21);
-            this.comboBoxDitchesFacingDirection.TabIndex = 62;
-            this.comboBoxDitchesFacingDirection.ValueMember = "facing_type_id";
-            // 
-            // fKDITCHSURVEYPAGEBindingSource
-            // 
-            this.fKDITCHSURVEYPAGEBindingSource.DataMember = "FK_DITCH_SURVEY_PAGE";
-            this.fKDITCHSURVEYPAGEBindingSource.DataSource = this.fKSURVEYPAGEVIEWBindingSource;
             // 
             // fKSURVEYPAGEVIEWBindingSource
             // 
@@ -339,6 +255,83 @@
             this.sANDBOXDataSet.DataSetName = "SANDBOXDataSet";
             this.sANDBOXDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPageCulverts);
+            this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Location = new System.Drawing.Point(8, 132);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(804, 256);
+            this.tabControl1.TabIndex = 9;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.buttonUpdateDitch);
+            this.tabPage1.Controls.Add(this.buttonDitchesViewAddPhotos);
+            this.tabPage1.Controls.Add(this.comboBoxDitchesFacingDirection);
+            this.tabPage1.Controls.Add(this.comboBoxDitchesMaterial);
+            this.tabPage1.Controls.Add(this.numericUpDownDitchesTopWidth);
+            this.tabPage1.Controls.Add(this.numericUpDownDitchesDepth);
+            this.tabPage1.Controls.Add(this.textBoxDitchesNode);
+            this.tabPage1.Controls.Add(this.labelDitchesNode);
+            this.tabPage1.Controls.Add(this.labelDitchesFacingDirection);
+            this.tabPage1.Controls.Add(this.labelDitchesMaterial);
+            this.tabPage1.Controls.Add(this.labelDitchesBottomWidth);
+            this.tabPage1.Controls.Add(this.labelDitchesTopWidth);
+            this.tabPage1.Controls.Add(this.labelDitchesDepth);
+            this.tabPage1.Controls.Add(this.buttonDitchesAdd);
+            this.tabPage1.Controls.Add(this.numericUpDownDitchesBottomWidth);
+            this.tabPage1.Controls.Add(this.buttonDitchesDelete);
+            this.tabPage1.Controls.Add(this.dataGridView2);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(796, 230);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Ditches";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            this.tabPage1.Enter += new System.EventHandler(this.tabPage1_Entered);
+            // 
+            // buttonUpdateDitch
+            // 
+            this.buttonUpdateDitch.Location = new System.Drawing.Point(698, 199);
+            this.buttonUpdateDitch.Name = "buttonUpdateDitch";
+            this.buttonUpdateDitch.Size = new System.Drawing.Size(97, 31);
+            this.buttonUpdateDitch.TabIndex = 65;
+            this.buttonUpdateDitch.Text = "Update Ditch";
+            this.buttonUpdateDitch.UseVisualStyleBackColor = true;
+            this.buttonUpdateDitch.Click += new System.EventHandler(this.buttonUpdateDitch_Click);
+            // 
+            // buttonDitchesViewAddPhotos
+            // 
+            this.buttonDitchesViewAddPhotos.Location = new System.Drawing.Point(405, 194);
+            this.buttonDitchesViewAddPhotos.Name = "buttonDitchesViewAddPhotos";
+            this.buttonDitchesViewAddPhotos.Size = new System.Drawing.Size(220, 32);
+            this.buttonDitchesViewAddPhotos.TabIndex = 64;
+            this.buttonDitchesViewAddPhotos.Text = "View/Add Photos";
+            this.buttonDitchesViewAddPhotos.UseVisualStyleBackColor = true;
+            this.buttonDitchesViewAddPhotos.Click += new System.EventHandler(this.buttonDitchesViewAddPhotos_Click);
+            // 
+            // comboBoxDitchesFacingDirection
+            // 
+            this.comboBoxDitchesFacingDirection.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.fKDITCHSURVEYPAGEBindingSource, "facing", true));
+            this.comboBoxDitchesFacingDirection.DataSource = this.sWSPFACINGTYPEBindingSource;
+            this.comboBoxDitchesFacingDirection.DisplayMember = "facing";
+            this.comboBoxDitchesFacingDirection.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxDitchesFacingDirection.FormattingEnabled = true;
+            this.comboBoxDitchesFacingDirection.Location = new System.Drawing.Point(469, 27);
+            this.comboBoxDitchesFacingDirection.Name = "comboBoxDitchesFacingDirection";
+            this.comboBoxDitchesFacingDirection.Size = new System.Drawing.Size(107, 21);
+            this.comboBoxDitchesFacingDirection.TabIndex = 62;
+            this.comboBoxDitchesFacingDirection.ValueMember = "facing_type_id";
+            // 
+            // fKDITCHSURVEYPAGEBindingSource
+            // 
+            this.fKDITCHSURVEYPAGEBindingSource.DataMember = "FK_DITCH_SURVEY_PAGE";
+            this.fKDITCHSURVEYPAGEBindingSource.DataSource = this.fKSURVEYPAGEVIEWBindingSource;
+            // 
             // sWSPFACINGTYPEBindingSource
             // 
             this.sWSPFACINGTYPEBindingSource.DataMember = "SWSP_FACING_TYPE";
@@ -351,9 +344,9 @@
             this.comboBoxDitchesMaterial.DisplayMember = "material";
             this.comboBoxDitchesMaterial.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxDitchesMaterial.FormattingEnabled = true;
-            this.comboBoxDitchesMaterial.Location = new System.Drawing.Point(698, 93);
+            this.comboBoxDitchesMaterial.Location = new System.Drawing.Point(469, 136);
             this.comboBoxDitchesMaterial.Name = "comboBoxDitchesMaterial";
-            this.comboBoxDitchesMaterial.Size = new System.Drawing.Size(90, 21);
+            this.comboBoxDitchesMaterial.Size = new System.Drawing.Size(107, 21);
             this.comboBoxDitchesMaterial.TabIndex = 61;
             this.comboBoxDitchesMaterial.ValueMember = "material_type_id";
             // 
@@ -365,41 +358,41 @@
             // numericUpDownDitchesTopWidth
             // 
             this.numericUpDownDitchesTopWidth.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.fKDITCHSURVEYPAGEBindingSource, "top_width_in", true));
-            this.numericUpDownDitchesTopWidth.Location = new System.Drawing.Point(528, 93);
+            this.numericUpDownDitchesTopWidth.Location = new System.Drawing.Point(469, 81);
             this.numericUpDownDitchesTopWidth.Maximum = new decimal(new int[] {
             5000,
             0,
             0,
             0});
             this.numericUpDownDitchesTopWidth.Name = "numericUpDownDitchesTopWidth";
-            this.numericUpDownDitchesTopWidth.Size = new System.Drawing.Size(68, 20);
+            this.numericUpDownDitchesTopWidth.Size = new System.Drawing.Size(107, 20);
             this.numericUpDownDitchesTopWidth.TabIndex = 60;
             // 
             // numericUpDownDitchesDepth
             // 
             this.numericUpDownDitchesDepth.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.fKDITCHSURVEYPAGEBindingSource, "depth_in", true));
-            this.numericUpDownDitchesDepth.Location = new System.Drawing.Point(458, 92);
+            this.numericUpDownDitchesDepth.Location = new System.Drawing.Point(469, 54);
             this.numericUpDownDitchesDepth.Maximum = new decimal(new int[] {
             5000,
             0,
             0,
             0});
             this.numericUpDownDitchesDepth.Name = "numericUpDownDitchesDepth";
-            this.numericUpDownDitchesDepth.Size = new System.Drawing.Size(64, 20);
+            this.numericUpDownDitchesDepth.Size = new System.Drawing.Size(107, 20);
             this.numericUpDownDitchesDepth.TabIndex = 59;
             // 
             // textBoxDitchesNode
             // 
             this.textBoxDitchesNode.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.fKDITCHSURVEYPAGEBindingSource, "node", true));
-            this.textBoxDitchesNode.Location = new System.Drawing.Point(351, 29);
+            this.textBoxDitchesNode.Location = new System.Drawing.Point(469, 3);
             this.textBoxDitchesNode.Name = "textBoxDitchesNode";
-            this.textBoxDitchesNode.Size = new System.Drawing.Size(56, 20);
+            this.textBoxDitchesNode.Size = new System.Drawing.Size(107, 20);
             this.textBoxDitchesNode.TabIndex = 58;
             // 
             // labelDitchesNode
             // 
             this.labelDitchesNode.AutoSize = true;
-            this.labelDitchesNode.Location = new System.Drawing.Point(348, 10);
+            this.labelDitchesNode.Location = new System.Drawing.Point(432, 6);
             this.labelDitchesNode.Name = "labelDitchesNode";
             this.labelDitchesNode.Size = new System.Drawing.Size(33, 13);
             this.labelDitchesNode.TabIndex = 56;
@@ -408,7 +401,7 @@
             // labelDitchesFacingDirection
             // 
             this.labelDitchesFacingDirection.AutoSize = true;
-            this.labelDitchesFacingDirection.Location = new System.Drawing.Point(415, 10);
+            this.labelDitchesFacingDirection.Location = new System.Drawing.Point(379, 34);
             this.labelDitchesFacingDirection.Name = "labelDitchesFacingDirection";
             this.labelDitchesFacingDirection.Size = new System.Drawing.Size(84, 13);
             this.labelDitchesFacingDirection.TabIndex = 55;
@@ -417,7 +410,7 @@
             // labelDitchesMaterial
             // 
             this.labelDitchesMaterial.AutoSize = true;
-            this.labelDitchesMaterial.Location = new System.Drawing.Point(692, 73);
+            this.labelDitchesMaterial.Location = new System.Drawing.Point(419, 141);
             this.labelDitchesMaterial.Name = "labelDitchesMaterial";
             this.labelDitchesMaterial.Size = new System.Drawing.Size(44, 13);
             this.labelDitchesMaterial.TabIndex = 53;
@@ -426,7 +419,7 @@
             // labelDitchesBottomWidth
             // 
             this.labelDitchesBottomWidth.AutoSize = true;
-            this.labelDitchesBottomWidth.Location = new System.Drawing.Point(601, 73);
+            this.labelDitchesBottomWidth.Location = new System.Drawing.Point(378, 112);
             this.labelDitchesBottomWidth.Name = "labelDitchesBottomWidth";
             this.labelDitchesBottomWidth.Size = new System.Drawing.Size(85, 13);
             this.labelDitchesBottomWidth.TabIndex = 51;
@@ -435,7 +428,7 @@
             // labelDitchesTopWidth
             // 
             this.labelDitchesTopWidth.AutoSize = true;
-            this.labelDitchesTopWidth.Location = new System.Drawing.Point(525, 73);
+            this.labelDitchesTopWidth.Location = new System.Drawing.Point(392, 83);
             this.labelDitchesTopWidth.Name = "labelDitchesTopWidth";
             this.labelDitchesTopWidth.Size = new System.Drawing.Size(71, 13);
             this.labelDitchesTopWidth.TabIndex = 50;
@@ -444,7 +437,7 @@
             // labelDitchesDepth
             // 
             this.labelDitchesDepth.AutoSize = true;
-            this.labelDitchesDepth.Location = new System.Drawing.Point(455, 73);
+            this.labelDitchesDepth.Location = new System.Drawing.Point(410, 56);
             this.labelDitchesDepth.Name = "labelDitchesDepth";
             this.labelDitchesDepth.Size = new System.Drawing.Size(53, 13);
             this.labelDitchesDepth.TabIndex = 49;
@@ -452,7 +445,7 @@
             // 
             // buttonDitchesAdd
             // 
-            this.buttonDitchesAdd.Location = new System.Drawing.Point(257, 184);
+            this.buttonDitchesAdd.Location = new System.Drawing.Point(257, 199);
             this.buttonDitchesAdd.Name = "buttonDitchesAdd";
             this.buttonDitchesAdd.Size = new System.Drawing.Size(65, 28);
             this.buttonDitchesAdd.TabIndex = 48;
@@ -463,14 +456,14 @@
             // numericUpDownDitchesBottomWidth
             // 
             this.numericUpDownDitchesBottomWidth.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.fKDITCHSURVEYPAGEBindingSource, "bottom_width_in", true));
-            this.numericUpDownDitchesBottomWidth.Location = new System.Drawing.Point(604, 93);
+            this.numericUpDownDitchesBottomWidth.Location = new System.Drawing.Point(469, 110);
             this.numericUpDownDitchesBottomWidth.Maximum = new decimal(new int[] {
             5000,
             0,
             0,
             0});
             this.numericUpDownDitchesBottomWidth.Name = "numericUpDownDitchesBottomWidth";
-            this.numericUpDownDitchesBottomWidth.Size = new System.Drawing.Size(82, 20);
+            this.numericUpDownDitchesBottomWidth.Size = new System.Drawing.Size(107, 20);
             this.numericUpDownDitchesBottomWidth.TabIndex = 44;
             // 
             // buttonDitchesDelete
@@ -496,7 +489,7 @@
             this.dataGridView2.Location = new System.Drawing.Point(3, 8);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.ReadOnly = true;
-            this.dataGridView2.Size = new System.Drawing.Size(248, 204);
+            this.dataGridView2.Size = new System.Drawing.Size(248, 219);
             this.dataGridView2.TabIndex = 40;
             // 
             // nodeDataGridViewTextBoxColumn
@@ -539,7 +532,7 @@
             this.tabPageCulverts.Location = new System.Drawing.Point(4, 22);
             this.tabPageCulverts.Name = "tabPageCulverts";
             this.tabPageCulverts.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageCulverts.Size = new System.Drawing.Size(796, 215);
+            this.tabPageCulverts.Size = new System.Drawing.Size(796, 230);
             this.tabPageCulverts.TabIndex = 1;
             this.tabPageCulverts.Text = "Culverts";
             this.tabPageCulverts.UseVisualStyleBackColor = true;
@@ -547,7 +540,7 @@
             // 
             // buttonUpdateCulvert
             // 
-            this.buttonUpdateCulvert.Location = new System.Drawing.Point(693, 177);
+            this.buttonUpdateCulvert.Location = new System.Drawing.Point(698, 199);
             this.buttonUpdateCulvert.Name = "buttonUpdateCulvert";
             this.buttonUpdateCulvert.Size = new System.Drawing.Size(97, 31);
             this.buttonUpdateCulvert.TabIndex = 66;
@@ -557,7 +550,7 @@
             // 
             // buttonCulvertsViewAddPhotos
             // 
-            this.buttonCulvertsViewAddPhotos.Location = new System.Drawing.Point(333, 177);
+            this.buttonCulvertsViewAddPhotos.Location = new System.Drawing.Point(402, 195);
             this.buttonCulvertsViewAddPhotos.Name = "buttonCulvertsViewAddPhotos";
             this.buttonCulvertsViewAddPhotos.Size = new System.Drawing.Size(220, 32);
             this.buttonCulvertsViewAddPhotos.TabIndex = 65;
@@ -571,9 +564,9 @@
             this.comboBoxCulvertsShape.DisplayMember = "shape";
             this.comboBoxCulvertsShape.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxCulvertsShape.FormattingEnabled = true;
-            this.comboBoxCulvertsShape.Location = new System.Drawing.Point(553, 26);
+            this.comboBoxCulvertsShape.Location = new System.Drawing.Point(478, 80);
             this.comboBoxCulvertsShape.Name = "comboBoxCulvertsShape";
-            this.comboBoxCulvertsShape.Size = new System.Drawing.Size(44, 21);
+            this.comboBoxCulvertsShape.Size = new System.Drawing.Size(107, 21);
             this.comboBoxCulvertsShape.TabIndex = 48;
             // 
             // sWSPSHAPETYPEBindingSource
@@ -587,9 +580,9 @@
             this.comboBoxCulvertsType.DisplayMember = "culvert_opening";
             this.comboBoxCulvertsType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxCulvertsType.FormattingEnabled = true;
-            this.comboBoxCulvertsType.Location = new System.Drawing.Point(482, 24);
+            this.comboBoxCulvertsType.Location = new System.Drawing.Point(478, 53);
             this.comboBoxCulvertsType.Name = "comboBoxCulvertsType";
-            this.comboBoxCulvertsType.Size = new System.Drawing.Size(52, 21);
+            this.comboBoxCulvertsType.Size = new System.Drawing.Size(107, 21);
             this.comboBoxCulvertsType.TabIndex = 47;
             // 
             // sWSPCULVERTOPENINGTYPEBindingSource
@@ -604,9 +597,9 @@
             this.comboBoxCulvertsMaterial.DisplayMember = "material";
             this.comboBoxCulvertsMaterial.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxCulvertsMaterial.FormattingEnabled = true;
-            this.comboBoxCulvertsMaterial.Location = new System.Drawing.Point(701, 80);
+            this.comboBoxCulvertsMaterial.Location = new System.Drawing.Point(478, 159);
             this.comboBoxCulvertsMaterial.Name = "comboBoxCulvertsMaterial";
-            this.comboBoxCulvertsMaterial.Size = new System.Drawing.Size(89, 21);
+            this.comboBoxCulvertsMaterial.Size = new System.Drawing.Size(107, 21);
             this.comboBoxCulvertsMaterial.TabIndex = 45;
             this.comboBoxCulvertsMaterial.ValueMember = "material_type_id";
             // 
@@ -622,24 +615,24 @@
             this.comboBoxCulvertsFacingDirection.DisplayMember = "facing";
             this.comboBoxCulvertsFacingDirection.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxCulvertsFacingDirection.FormattingEnabled = true;
-            this.comboBoxCulvertsFacingDirection.Location = new System.Drawing.Point(397, 24);
+            this.comboBoxCulvertsFacingDirection.Location = new System.Drawing.Point(478, 26);
             this.comboBoxCulvertsFacingDirection.Name = "comboBoxCulvertsFacingDirection";
-            this.comboBoxCulvertsFacingDirection.Size = new System.Drawing.Size(72, 21);
+            this.comboBoxCulvertsFacingDirection.Size = new System.Drawing.Size(107, 21);
             this.comboBoxCulvertsFacingDirection.TabIndex = 44;
             this.comboBoxCulvertsFacingDirection.ValueMember = "facing_type_id";
             // 
             // textBoxCulvertsNode
             // 
             this.textBoxCulvertsNode.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.fKCULVERTSURVEYPAGEBindingSource1, "node", true));
-            this.textBoxCulvertsNode.Location = new System.Drawing.Point(333, 25);
+            this.textBoxCulvertsNode.Location = new System.Drawing.Point(478, 3);
             this.textBoxCulvertsNode.Name = "textBoxCulvertsNode";
-            this.textBoxCulvertsNode.Size = new System.Drawing.Size(56, 20);
+            this.textBoxCulvertsNode.Size = new System.Drawing.Size(107, 20);
             this.textBoxCulvertsNode.TabIndex = 43;
             // 
             // labelCulvertsNode
             // 
             this.labelCulvertsNode.AutoSize = true;
-            this.labelCulvertsNode.Location = new System.Drawing.Point(330, 6);
+            this.labelCulvertsNode.Location = new System.Drawing.Point(430, 6);
             this.labelCulvertsNode.Name = "labelCulvertsNode";
             this.labelCulvertsNode.Size = new System.Drawing.Size(33, 13);
             this.labelCulvertsNode.TabIndex = 41;
@@ -648,7 +641,7 @@
             // labelCulvertsFacingDirection
             // 
             this.labelCulvertsFacingDirection.AutoSize = true;
-            this.labelCulvertsFacingDirection.Location = new System.Drawing.Point(386, 7);
+            this.labelCulvertsFacingDirection.Location = new System.Drawing.Point(379, 34);
             this.labelCulvertsFacingDirection.Name = "labelCulvertsFacingDirection";
             this.labelCulvertsFacingDirection.Size = new System.Drawing.Size(84, 13);
             this.labelCulvertsFacingDirection.TabIndex = 40;
@@ -657,7 +650,7 @@
             // labelCulvertsMaterial
             // 
             this.labelCulvertsMaterial.AutoSize = true;
-            this.labelCulvertsMaterial.Location = new System.Drawing.Point(746, 60);
+            this.labelCulvertsMaterial.Location = new System.Drawing.Point(419, 162);
             this.labelCulvertsMaterial.Name = "labelCulvertsMaterial";
             this.labelCulvertsMaterial.Size = new System.Drawing.Size(44, 13);
             this.labelCulvertsMaterial.TabIndex = 38;
@@ -666,7 +659,7 @@
             // labelCulvertsUnobstructedHeight
             // 
             this.labelCulvertsUnobstructedHeight.AutoSize = true;
-            this.labelCulvertsUnobstructedHeight.Location = new System.Drawing.Point(575, 60);
+            this.labelCulvertsUnobstructedHeight.Location = new System.Drawing.Point(343, 135);
             this.labelCulvertsUnobstructedHeight.Name = "labelCulvertsUnobstructedHeight";
             this.labelCulvertsUnobstructedHeight.Size = new System.Drawing.Size(120, 13);
             this.labelCulvertsUnobstructedHeight.TabIndex = 37;
@@ -675,7 +668,7 @@
             // labelCulvertsFullDepth
             // 
             this.labelCulvertsFullDepth.AutoSize = true;
-            this.labelCulvertsFullDepth.Location = new System.Drawing.Point(503, 60);
+            this.labelCulvertsFullDepth.Location = new System.Drawing.Point(393, 111);
             this.labelCulvertsFullDepth.Name = "labelCulvertsFullDepth";
             this.labelCulvertsFullDepth.Size = new System.Drawing.Size(70, 13);
             this.labelCulvertsFullDepth.TabIndex = 36;
@@ -684,7 +677,7 @@
             // labelCulvertsShape
             // 
             this.labelCulvertsShape.AutoSize = true;
-            this.labelCulvertsShape.Location = new System.Drawing.Point(560, 6);
+            this.labelCulvertsShape.Location = new System.Drawing.Point(425, 83);
             this.labelCulvertsShape.Name = "labelCulvertsShape";
             this.labelCulvertsShape.Size = new System.Drawing.Size(38, 13);
             this.labelCulvertsShape.TabIndex = 35;
@@ -693,7 +686,7 @@
             // labelCulvertsType
             // 
             this.labelCulvertsType.AutoSize = true;
-            this.labelCulvertsType.Location = new System.Drawing.Point(503, 7);
+            this.labelCulvertsType.Location = new System.Drawing.Point(432, 56);
             this.labelCulvertsType.Name = "labelCulvertsType";
             this.labelCulvertsType.Size = new System.Drawing.Size(31, 13);
             this.labelCulvertsType.TabIndex = 34;
@@ -701,7 +694,7 @@
             // 
             // buttonCulvertsAdd
             // 
-            this.buttonCulvertsAdd.Location = new System.Drawing.Point(257, 184);
+            this.buttonCulvertsAdd.Location = new System.Drawing.Point(257, 199);
             this.buttonCulvertsAdd.Name = "buttonCulvertsAdd";
             this.buttonCulvertsAdd.Size = new System.Drawing.Size(65, 28);
             this.buttonCulvertsAdd.TabIndex = 30;
@@ -712,27 +705,27 @@
             // numericUpDownCulvertsUnobstructedHeight
             // 
             this.numericUpDownCulvertsUnobstructedHeight.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.fKCULVERTSURVEYPAGEBindingSource1, "unobstructed_height_in", true));
-            this.numericUpDownCulvertsUnobstructedHeight.Location = new System.Drawing.Point(648, 80);
+            this.numericUpDownCulvertsUnobstructedHeight.Location = new System.Drawing.Point(478, 133);
             this.numericUpDownCulvertsUnobstructedHeight.Maximum = new decimal(new int[] {
             5000,
             0,
             0,
             0});
             this.numericUpDownCulvertsUnobstructedHeight.Name = "numericUpDownCulvertsUnobstructedHeight";
-            this.numericUpDownCulvertsUnobstructedHeight.Size = new System.Drawing.Size(47, 20);
+            this.numericUpDownCulvertsUnobstructedHeight.Size = new System.Drawing.Size(107, 20);
             this.numericUpDownCulvertsUnobstructedHeight.TabIndex = 26;
             // 
             // numericUpDownCulvertsFullDepth
             // 
             this.numericUpDownCulvertsFullDepth.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.fKCULVERTSURVEYPAGEBindingSource1, "full_diam_in", true));
-            this.numericUpDownCulvertsFullDepth.Location = new System.Drawing.Point(528, 80);
+            this.numericUpDownCulvertsFullDepth.Location = new System.Drawing.Point(478, 109);
             this.numericUpDownCulvertsFullDepth.Maximum = new decimal(new int[] {
             5000,
             0,
             0,
             0});
             this.numericUpDownCulvertsFullDepth.Name = "numericUpDownCulvertsFullDepth";
-            this.numericUpDownCulvertsFullDepth.Size = new System.Drawing.Size(45, 20);
+            this.numericUpDownCulvertsFullDepth.Size = new System.Drawing.Size(107, 20);
             this.numericUpDownCulvertsFullDepth.TabIndex = 25;
             // 
             // buttonCulvertsDelete
@@ -758,7 +751,7 @@
             this.dataGridView1.Location = new System.Drawing.Point(3, 8);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(248, 204);
+            this.dataGridView1.Size = new System.Drawing.Size(248, 219);
             this.dataGridView1.TabIndex = 21;
             // 
             // nodeDataGridViewTextBoxColumn1
@@ -798,7 +791,7 @@
             this.tabPage3.Controls.Add(this.dataGridView3);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(796, 215);
+            this.tabPage3.Size = new System.Drawing.Size(796, 230);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Pipes";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -806,7 +799,7 @@
             // 
             // buttonUpdatePipe
             // 
-            this.buttonUpdatePipe.Location = new System.Drawing.Point(696, 180);
+            this.buttonUpdatePipe.Location = new System.Drawing.Point(699, 199);
             this.buttonUpdatePipe.Name = "buttonUpdatePipe";
             this.buttonUpdatePipe.Size = new System.Drawing.Size(97, 31);
             this.buttonUpdatePipe.TabIndex = 72;
@@ -816,7 +809,7 @@
             // 
             // buttonPipesViewAddPhotos
             // 
-            this.buttonPipesViewAddPhotos.Location = new System.Drawing.Point(334, 180);
+            this.buttonPipesViewAddPhotos.Location = new System.Drawing.Point(398, 197);
             this.buttonPipesViewAddPhotos.Name = "buttonPipesViewAddPhotos";
             this.buttonPipesViewAddPhotos.Size = new System.Drawing.Size(220, 32);
             this.buttonPipesViewAddPhotos.TabIndex = 71;
@@ -831,9 +824,9 @@
             this.comboBoxPipesShape.DisplayMember = "shape";
             this.comboBoxPipesShape.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxPipesShape.FormattingEnabled = true;
-            this.comboBoxPipesShape.Location = new System.Drawing.Point(668, 78);
+            this.comboBoxPipesShape.Location = new System.Drawing.Point(474, 157);
             this.comboBoxPipesShape.Name = "comboBoxPipesShape";
-            this.comboBoxPipesShape.Size = new System.Drawing.Size(80, 21);
+            this.comboBoxPipesShape.Size = new System.Drawing.Size(107, 21);
             this.comboBoxPipesShape.TabIndex = 70;
             this.comboBoxPipesShape.ValueMember = "shape_type_id";
             // 
@@ -849,16 +842,16 @@
             this.comboBoxPipesMaterial.DisplayMember = "material";
             this.comboBoxPipesMaterial.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxPipesMaterial.FormattingEnabled = true;
-            this.comboBoxPipesMaterial.Location = new System.Drawing.Point(582, 78);
+            this.comboBoxPipesMaterial.Location = new System.Drawing.Point(474, 130);
             this.comboBoxPipesMaterial.Name = "comboBoxPipesMaterial";
-            this.comboBoxPipesMaterial.Size = new System.Drawing.Size(74, 21);
+            this.comboBoxPipesMaterial.Size = new System.Drawing.Size(107, 21);
             this.comboBoxPipesMaterial.TabIndex = 69;
             this.comboBoxPipesMaterial.ValueMember = "material_type_id";
             // 
             // labelPipesShape
             // 
             this.labelPipesShape.AutoSize = true;
-            this.labelPipesShape.Location = new System.Drawing.Point(669, 57);
+            this.labelPipesShape.Location = new System.Drawing.Point(430, 160);
             this.labelPipesShape.Name = "labelPipesShape";
             this.labelPipesShape.Size = new System.Drawing.Size(38, 13);
             this.labelPipesShape.TabIndex = 66;
@@ -867,7 +860,7 @@
             // labelPipesInnerDiameter
             // 
             this.labelPipesInnerDiameter.AutoSize = true;
-            this.labelPipesInnerDiameter.Location = new System.Drawing.Point(482, 57);
+            this.labelPipesInnerDiameter.Location = new System.Drawing.Point(375, 106);
             this.labelPipesInnerDiameter.Name = "labelPipesInnerDiameter";
             this.labelPipesInnerDiameter.Size = new System.Drawing.Size(93, 13);
             this.labelPipesInnerDiameter.TabIndex = 65;
@@ -876,36 +869,36 @@
             // numericUpDownPipesInnerDiameter
             // 
             this.numericUpDownPipesInnerDiameter.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.fKPIPESURVEYPAGEBindingSource, "inside_diam_in", true));
-            this.numericUpDownPipesInnerDiameter.Location = new System.Drawing.Point(485, 76);
+            this.numericUpDownPipesInnerDiameter.Location = new System.Drawing.Point(474, 104);
             this.numericUpDownPipesInnerDiameter.Maximum = new decimal(new int[] {
             5000,
             0,
             0,
             0});
             this.numericUpDownPipesInnerDiameter.Name = "numericUpDownPipesInnerDiameter";
-            this.numericUpDownPipesInnerDiameter.Size = new System.Drawing.Size(47, 20);
+            this.numericUpDownPipesInnerDiameter.Size = new System.Drawing.Size(107, 20);
             this.numericUpDownPipesInnerDiameter.TabIndex = 64;
             // 
             // textBoxPipesDSNode
             // 
             this.textBoxPipesDSNode.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.fKPIPESURVEYPAGEBindingSource, "ds_node", true));
-            this.textBoxPipesDSNode.Location = new System.Drawing.Point(401, 28);
+            this.textBoxPipesDSNode.Location = new System.Drawing.Point(474, 29);
             this.textBoxPipesDSNode.Name = "textBoxPipesDSNode";
-            this.textBoxPipesDSNode.Size = new System.Drawing.Size(64, 20);
+            this.textBoxPipesDSNode.Size = new System.Drawing.Size(107, 20);
             this.textBoxPipesDSNode.TabIndex = 63;
             // 
             // textBoxPipesUSNode
             // 
             this.textBoxPipesUSNode.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.fKPIPESURVEYPAGEBindingSource, "us_node", true));
-            this.textBoxPipesUSNode.Location = new System.Drawing.Point(333, 28);
+            this.textBoxPipesUSNode.Location = new System.Drawing.Point(474, 5);
             this.textBoxPipesUSNode.Name = "textBoxPipesUSNode";
-            this.textBoxPipesUSNode.Size = new System.Drawing.Size(56, 20);
+            this.textBoxPipesUSNode.Size = new System.Drawing.Size(107, 20);
             this.textBoxPipesUSNode.TabIndex = 62;
             // 
             // labelPipesUSNode
             // 
             this.labelPipesUSNode.AutoSize = true;
-            this.labelPipesUSNode.Location = new System.Drawing.Point(330, 12);
+            this.labelPipesUSNode.Location = new System.Drawing.Point(417, 8);
             this.labelPipesUSNode.Name = "labelPipesUSNode";
             this.labelPipesUSNode.Size = new System.Drawing.Size(51, 13);
             this.labelPipesUSNode.TabIndex = 60;
@@ -914,7 +907,7 @@
             // labelPipesDSNode
             // 
             this.labelPipesDSNode.AutoSize = true;
-            this.labelPipesDSNode.Location = new System.Drawing.Point(398, 12);
+            this.labelPipesDSNode.Location = new System.Drawing.Point(417, 32);
             this.labelPipesDSNode.Name = "labelPipesDSNode";
             this.labelPipesDSNode.Size = new System.Drawing.Size(51, 13);
             this.labelPipesDSNode.TabIndex = 59;
@@ -923,7 +916,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(581, 57);
+            this.label4.Location = new System.Drawing.Point(424, 133);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(44, 13);
             this.label4.TabIndex = 57;
@@ -932,7 +925,7 @@
             // labelPipesDSDepth
             // 
             this.labelPipesDSDepth.AutoSize = true;
-            this.labelPipesDSDepth.Location = new System.Drawing.Point(405, 57);
+            this.labelPipesDSDepth.Location = new System.Drawing.Point(389, 80);
             this.labelPipesDSDepth.Name = "labelPipesDSDepth";
             this.labelPipesDSDepth.Size = new System.Drawing.Size(71, 13);
             this.labelPipesDSDepth.TabIndex = 56;
@@ -941,7 +934,7 @@
             // labelPipesUSDepth
             // 
             this.labelPipesUSDepth.AutoSize = true;
-            this.labelPipesUSDepth.Location = new System.Drawing.Point(331, 56);
+            this.labelPipesUSDepth.Location = new System.Drawing.Point(389, 54);
             this.labelPipesUSDepth.Name = "labelPipesUSDepth";
             this.labelPipesUSDepth.Size = new System.Drawing.Size(69, 13);
             this.labelPipesUSDepth.TabIndex = 55;
@@ -949,7 +942,7 @@
             // 
             // buttonPipesAdd
             // 
-            this.buttonPipesAdd.Location = new System.Drawing.Point(257, 184);
+            this.buttonPipesAdd.Location = new System.Drawing.Point(257, 199);
             this.buttonPipesAdd.Name = "buttonPipesAdd";
             this.buttonPipesAdd.Size = new System.Drawing.Size(65, 28);
             this.buttonPipesAdd.TabIndex = 52;
@@ -960,27 +953,27 @@
             // numericUpDownPipesDSDepth
             // 
             this.numericUpDownPipesDSDepth.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.fKPIPESURVEYPAGEBindingSource, "ds_depth_in", true));
-            this.numericUpDownPipesDSDepth.Location = new System.Drawing.Point(408, 76);
+            this.numericUpDownPipesDSDepth.Location = new System.Drawing.Point(474, 78);
             this.numericUpDownPipesDSDepth.Maximum = new decimal(new int[] {
             5000,
             0,
             0,
             0});
             this.numericUpDownPipesDSDepth.Name = "numericUpDownPipesDSDepth";
-            this.numericUpDownPipesDSDepth.Size = new System.Drawing.Size(47, 20);
+            this.numericUpDownPipesDSDepth.Size = new System.Drawing.Size(107, 20);
             this.numericUpDownPipesDSDepth.TabIndex = 49;
             // 
             // numericUpDownPipesUSDepth
             // 
             this.numericUpDownPipesUSDepth.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.fKPIPESURVEYPAGEBindingSource, "us_depth_in", true));
-            this.numericUpDownPipesUSDepth.Location = new System.Drawing.Point(356, 76);
+            this.numericUpDownPipesUSDepth.Location = new System.Drawing.Point(474, 52);
             this.numericUpDownPipesUSDepth.Maximum = new decimal(new int[] {
             5000,
             0,
             0,
             0});
             this.numericUpDownPipesUSDepth.Name = "numericUpDownPipesUSDepth";
-            this.numericUpDownPipesUSDepth.Size = new System.Drawing.Size(45, 20);
+            this.numericUpDownPipesUSDepth.Size = new System.Drawing.Size(107, 20);
             this.numericUpDownPipesUSDepth.TabIndex = 48;
             // 
             // buttonPipesDelete
@@ -1006,7 +999,7 @@
             this.dataGridView3.Location = new System.Drawing.Point(3, 8);
             this.dataGridView3.Name = "dataGridView3";
             this.dataGridView3.ReadOnly = true;
-            this.dataGridView3.Size = new System.Drawing.Size(248, 204);
+            this.dataGridView3.Size = new System.Drawing.Size(248, 219);
             this.dataGridView3.TabIndex = 44;
             // 
             // usnodeDataGridViewTextBoxColumn
@@ -1146,7 +1139,7 @@
             // labelComments
             // 
             this.labelComments.AutoSize = true;
-            this.labelComments.Location = new System.Drawing.Point(13, 376);
+            this.labelComments.Location = new System.Drawing.Point(13, 391);
             this.labelComments.Name = "labelComments";
             this.labelComments.Size = new System.Drawing.Size(56, 13);
             this.labelComments.TabIndex = 40;
@@ -1170,9 +1163,9 @@
             // 
             // buttonUpdateDatabase
             // 
-            this.buttonUpdateDatabase.Location = new System.Drawing.Point(680, 461);
+            this.buttonUpdateDatabase.Location = new System.Drawing.Point(680, 469);
             this.buttonUpdateDatabase.Name = "buttonUpdateDatabase";
-            this.buttonUpdateDatabase.Size = new System.Drawing.Size(133, 34);
+            this.buttonUpdateDatabase.Size = new System.Drawing.Size(133, 26);
             this.buttonUpdateDatabase.TabIndex = 31;
             this.buttonUpdateDatabase.Text = "Update Database";
             this.buttonUpdateDatabase.UseVisualStyleBackColor = true;
@@ -1180,10 +1173,11 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(15, 392);
+            this.textBox1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.fKSURVEYPAGEVIEWBindingSource, "Comment", true));
+            this.textBox1.Location = new System.Drawing.Point(15, 407);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(797, 63);
+            this.textBox1.Size = new System.Drawing.Size(797, 56);
             this.textBox1.TabIndex = 42;
             // 
             // sWSPEVALUATORBindingSource
@@ -1343,11 +1337,20 @@
             // 
             this.sWSP_GLOBAL_IDTableAdapter.ClearBeforeFill = true;
             // 
+            // textBoxWeather
+            // 
+            this.textBoxWeather.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.fKSURVEYPAGEVIEWBindingSource, "weather", true));
+            this.textBoxWeather.Location = new System.Drawing.Point(170, 99);
+            this.textBoxWeather.Name = "textBoxWeather";
+            this.textBoxWeather.Size = new System.Drawing.Size(72, 20);
+            this.textBoxWeather.TabIndex = 49;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(822, 498);
+            this.Controls.Add(this.textBoxWeather);
             this.Controls.Add(this.checkedListBox1);
             this.Controls.Add(this.comboBoxSurveyPage);
             this.Controls.Add(this.comboBoxView);
@@ -1366,7 +1369,6 @@
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.buttonFindNode);
             this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.listBoxWeather);
             this.Controls.Add(this.buttonUpdateDatabase);
             this.Controls.Add(this.dateTimePickerSurveyDate);
             this.Controls.Add(this.buttonAddSurveyPage);
@@ -1376,15 +1378,15 @@
             this.Name = "Form1";
             this.Text = "Stormwater Interface";
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.fKDITCHSURVEYPAGEBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fKSURVEYPAGEVIEWBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fKVIEWSUBWATERSHEDBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fKSUBWATERSHEDWATERSHEDBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sWSPWATERSHEDBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sANDBOXDataSet)).EndInit();
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fKDITCHSURVEYPAGEBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sWSPFACINGTYPEBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sWSPMATERIALTYPEBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDitchesTopWidth)).EndInit();
@@ -1431,7 +1433,6 @@
         private System.Windows.Forms.Button buttonAddView;
         private System.Windows.Forms.Button buttonAddSurveyPage;
         private System.Windows.Forms.DateTimePicker dateTimePickerSurveyDate;
-        private System.Windows.Forms.ListBox listBoxWeather;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPageCulverts;
@@ -1558,6 +1559,7 @@
         private System.Windows.Forms.Button buttonUpdateDitch;
         private System.Windows.Forms.Button buttonUpdateCulvert;
         private System.Windows.Forms.Button buttonUpdatePipe;
+        private System.Windows.Forms.TextBox textBoxWeather;
     }
 }
 

@@ -4173,6 +4173,12 @@ namespace SWI_2 {
             
             private global::System.Data.DataColumn columnpage_number;
             
+            private global::System.Data.DataColumn columndate;
+            
+            private global::System.Data.DataColumn columnweather;
+            
+            private global::System.Data.DataColumn columnComment;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public SWSP_SURVEY_PAGEDataTable() {
                 this.TableName = "SWSP_SURVEY_PAGE";
@@ -4225,6 +4231,27 @@ namespace SWI_2 {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn dateColumn {
+                get {
+                    return this.columndate;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn weatherColumn {
+                get {
+                    return this.columnweather;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn CommentColumn {
+                get {
+                    return this.columnComment;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -4253,12 +4280,15 @@ namespace SWI_2 {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public SWSP_SURVEY_PAGERow AddSWSP_SURVEY_PAGERow(SWSP_VIEWRow parentSWSP_VIEWRowByFK_SURVEY_PAGE_VIEW, int page_number) {
+            public SWSP_SURVEY_PAGERow AddSWSP_SURVEY_PAGERow(SWSP_VIEWRow parentSWSP_VIEWRowByFK_SURVEY_PAGE_VIEW, int page_number, System.DateTime date, string weather, string Comment) {
                 SWSP_SURVEY_PAGERow rowSWSP_SURVEY_PAGERow = ((SWSP_SURVEY_PAGERow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
                         null,
-                        page_number};
+                        page_number,
+                        date,
+                        weather,
+                        Comment};
                 if ((parentSWSP_VIEWRowByFK_SURVEY_PAGE_VIEW != null)) {
                     columnValuesArray[1] = parentSWSP_VIEWRowByFK_SURVEY_PAGE_VIEW[0];
                 }
@@ -4290,6 +4320,9 @@ namespace SWI_2 {
                 this.columnsurvey_page_id = base.Columns["survey_page_id"];
                 this.columnview_id = base.Columns["view_id"];
                 this.columnpage_number = base.Columns["page_number"];
+                this.columndate = base.Columns["date"];
+                this.columnweather = base.Columns["weather"];
+                this.columnComment = base.Columns["Comment"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4300,6 +4333,12 @@ namespace SWI_2 {
                 base.Columns.Add(this.columnview_id);
                 this.columnpage_number = new global::System.Data.DataColumn("page_number", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnpage_number);
+                this.columndate = new global::System.Data.DataColumn("date", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columndate);
+                this.columnweather = new global::System.Data.DataColumn("weather", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnweather);
+                this.columnComment = new global::System.Data.DataColumn("Comment", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnComment);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnsurvey_page_id}, true));
                 this.columnsurvey_page_id.AutoIncrement = true;
@@ -4308,6 +4347,8 @@ namespace SWI_2 {
                 this.columnsurvey_page_id.AllowDBNull = false;
                 this.columnsurvey_page_id.ReadOnly = true;
                 this.columnsurvey_page_id.Unique = true;
+                this.columnweather.MaxLength = 50;
+                this.columnComment.MaxLength = 2147483647;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -6863,6 +6904,51 @@ namespace SWI_2 {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public System.DateTime date {
+                get {
+                    try {
+                        return ((global::System.DateTime)(this[this.tableSWSP_SURVEY_PAGE.dateColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'date\' in table \'SWSP_SURVEY_PAGE\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSWSP_SURVEY_PAGE.dateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string weather {
+                get {
+                    try {
+                        return ((string)(this[this.tableSWSP_SURVEY_PAGE.weatherColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'weather\' in table \'SWSP_SURVEY_PAGE\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSWSP_SURVEY_PAGE.weatherColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string Comment {
+                get {
+                    try {
+                        return ((string)(this[this.tableSWSP_SURVEY_PAGE.CommentColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Comment\' in table \'SWSP_SURVEY_PAGE\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSWSP_SURVEY_PAGE.CommentColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public SWSP_VIEWRow SWSP_VIEWRow {
                 get {
                     return ((SWSP_VIEWRow)(this.GetParentRow(this.Table.ParentRelations["FK_SURVEY_PAGE_VIEW"])));
@@ -6890,6 +6976,36 @@ namespace SWI_2 {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public void Setpage_numberNull() {
                 this[this.tableSWSP_SURVEY_PAGE.page_numberColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsdateNull() {
+                return this.IsNull(this.tableSWSP_SURVEY_PAGE.dateColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetdateNull() {
+                this[this.tableSWSP_SURVEY_PAGE.dateColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsweatherNull() {
+                return this.IsNull(this.tableSWSP_SURVEY_PAGE.weatherColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetweatherNull() {
+                this[this.tableSWSP_SURVEY_PAGE.weatherColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsCommentNull() {
+                return this.IsNull(this.tableSWSP_SURVEY_PAGE.CommentColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetCommentNull() {
+                this[this.tableSWSP_SURVEY_PAGE.CommentColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -12394,36 +12510,52 @@ SELECT subwatershed_id, watershed_id, subwatershed, description FROM SWSP_SUBWAT
             tableMapping.ColumnMappings.Add("survey_page_id", "survey_page_id");
             tableMapping.ColumnMappings.Add("view_id", "view_id");
             tableMapping.ColumnMappings.Add("page_number", "page_number");
+            tableMapping.ColumnMappings.Add("date", "date");
+            tableMapping.ColumnMappings.Add("weather", "weather");
+            tableMapping.ColumnMappings.Add("Comment", "Comment");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [GIS].[SWSP_SURVEY_PAGE] WHERE (([survey_page_id] = @Original_survey_page_id) AND ((@IsNull_view_id = 1 AND [view_id] IS NULL) OR ([view_id] = @Original_view_id)) AND ((@IsNull_page_number = 1 AND [page_number] IS NULL) OR ([page_number] = @Original_page_number)))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [SWSP_SURVEY_PAGE] WHERE (([survey_page_id] = @Original_survey_page_id) AND ((@IsNull_view_id = 1 AND [view_id] IS NULL) OR ([view_id] = @Original_view_id)) AND ((@IsNull_page_number = 1 AND [page_number] IS NULL) OR ([page_number] = @Original_page_number)) AND ((@IsNull_date = 1 AND [date] IS NULL) OR ([date] = @Original_date)) AND ((@IsNull_weather = 1 AND [weather] IS NULL) OR ([weather] = @Original_weather)))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_survey_page_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "survey_page_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_view_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "view_id", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_view_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "view_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_page_number", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "page_number", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_page_number", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "page_number", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_date", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_date", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_weather", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "weather", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_weather", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "weather", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [GIS].[SWSP_SURVEY_PAGE] ([view_id], [page_number]) VALUES (@view_id," +
-                " @page_number);\r\nSELECT survey_page_id, view_id, page_number FROM SWSP_SURVEY_PA" +
-                "GE WHERE (survey_page_id = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [SWSP_SURVEY_PAGE] ([view_id], [page_number], [date], [weather], [Comment]) VALUES (@view_id, @page_number, @date, @weather, @Comment);
+SELECT survey_page_id, view_id, page_number, date, weather, Comment FROM SWSP_SURVEY_PAGE WHERE (survey_page_id = SCOPE_IDENTITY())";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@view_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "view_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@page_number", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "page_number", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@date", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@weather", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "weather", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Comment", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Comment", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [GIS].[SWSP_SURVEY_PAGE] SET [view_id] = @view_id, [page_number] = @page_number WHERE (([survey_page_id] = @Original_survey_page_id) AND ((@IsNull_view_id = 1 AND [view_id] IS NULL) OR ([view_id] = @Original_view_id)) AND ((@IsNull_page_number = 1 AND [page_number] IS NULL) OR ([page_number] = @Original_page_number)));
-SELECT survey_page_id, view_id, page_number FROM SWSP_SURVEY_PAGE WHERE (survey_page_id = @survey_page_id)";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [SWSP_SURVEY_PAGE] SET [view_id] = @view_id, [page_number] = @page_number, [date] = @date, [weather] = @weather, [Comment] = @Comment WHERE (([survey_page_id] = @Original_survey_page_id) AND ((@IsNull_view_id = 1 AND [view_id] IS NULL) OR ([view_id] = @Original_view_id)) AND ((@IsNull_page_number = 1 AND [page_number] IS NULL) OR ([page_number] = @Original_page_number)) AND ((@IsNull_date = 1 AND [date] IS NULL) OR ([date] = @Original_date)) AND ((@IsNull_weather = 1 AND [weather] IS NULL) OR ([weather] = @Original_weather)));
+SELECT survey_page_id, view_id, page_number, date, weather, Comment FROM SWSP_SURVEY_PAGE WHERE (survey_page_id = @survey_page_id)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@view_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "view_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@page_number", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "page_number", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@date", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@weather", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "weather", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Comment", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Comment", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_survey_page_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "survey_page_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_view_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "view_id", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_view_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "view_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_page_number", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "page_number", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_page_number", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "page_number", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_date", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_date", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "date", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_weather", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "weather", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_weather", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "weather", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@survey_page_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "survey_page_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
@@ -12438,7 +12570,8 @@ SELECT survey_page_id, view_id, page_number FROM SWSP_SURVEY_PAGE WHERE (survey_
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT survey_page_id, view_id, page_number FROM GIS.SWSP_SURVEY_PAGE";
+            this._commandCollection[0].CommandText = "SELECT survey_page_id, view_id, page_number, date, weather, Comment FROM SWSP_SUR" +
+                "VEY_PAGE";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -12492,7 +12625,7 @@ SELECT survey_page_id, view_id, page_number FROM SWSP_SURVEY_PAGE WHERE (survey_
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_survey_page_id, global::System.Nullable<int> Original_view_id, global::System.Nullable<int> Original_page_number) {
+        public virtual int Delete(int Original_survey_page_id, global::System.Nullable<int> Original_view_id, global::System.Nullable<int> Original_page_number, global::System.Nullable<global::System.DateTime> Original_date, string Original_weather) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_survey_page_id));
             if ((Original_view_id.HasValue == true)) {
                 this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
@@ -12509,6 +12642,22 @@ SELECT survey_page_id, view_id, page_number FROM SWSP_SURVEY_PAGE WHERE (survey_
             else {
                 this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            if ((Original_date.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[6].Value = ((System.DateTime)(Original_date.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            if ((Original_weather == null)) {
+                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[8].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[8].Value = ((string)(Original_weather));
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -12529,7 +12678,7 @@ SELECT survey_page_id, view_id, page_number FROM SWSP_SURVEY_PAGE WHERE (survey_
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(global::System.Nullable<int> view_id, global::System.Nullable<int> page_number) {
+        public virtual int Insert(global::System.Nullable<int> view_id, global::System.Nullable<int> page_number, global::System.Nullable<global::System.DateTime> date, string weather, string Comment) {
             if ((view_id.HasValue == true)) {
                 this.Adapter.InsertCommand.Parameters[0].Value = ((int)(view_id.Value));
             }
@@ -12541,6 +12690,24 @@ SELECT survey_page_id, view_id, page_number FROM SWSP_SURVEY_PAGE WHERE (survey_
             }
             else {
                 this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            if ((date.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[2].Value = ((System.DateTime)(date.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            if ((weather == null)) {
+                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[3].Value = ((string)(weather));
+            }
+            if ((Comment == null)) {
+                this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[4].Value = ((string)(Comment));
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -12561,7 +12728,7 @@ SELECT survey_page_id, view_id, page_number FROM SWSP_SURVEY_PAGE WHERE (survey_
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(global::System.Nullable<int> view_id, global::System.Nullable<int> page_number, int Original_survey_page_id, global::System.Nullable<int> Original_view_id, global::System.Nullable<int> Original_page_number, int survey_page_id) {
+        public virtual int Update(global::System.Nullable<int> view_id, global::System.Nullable<int> page_number, global::System.Nullable<global::System.DateTime> date, string weather, string Comment, int Original_survey_page_id, global::System.Nullable<int> Original_view_id, global::System.Nullable<int> Original_page_number, global::System.Nullable<global::System.DateTime> Original_date, string Original_weather, int survey_page_id) {
             if ((view_id.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(view_id.Value));
             }
@@ -12574,24 +12741,58 @@ SELECT survey_page_id, view_id, page_number FROM SWSP_SURVEY_PAGE WHERE (survey_
             else {
                 this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(Original_survey_page_id));
-            if ((Original_view_id.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[3].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(Original_view_id.Value));
+            if ((date.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[2].Value = ((System.DateTime)(date.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[3].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            if ((weather == null)) {
+                this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[3].Value = ((string)(weather));
+            }
+            if ((Comment == null)) {
                 this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
             }
-            if ((Original_page_number.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((int)(Original_page_number.Value));
+            else {
+                this.Adapter.UpdateCommand.Parameters[4].Value = ((string)(Comment));
+            }
+            this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(Original_survey_page_id));
+            if ((Original_view_id.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((int)(Original_view_id.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[7].Value = ((int)(survey_page_id));
+            if ((Original_page_number.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((int)(Original_page_number.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[9].Value = global::System.DBNull.Value;
+            }
+            if ((Original_date.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[11].Value = ((System.DateTime)(Original_date.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[11].Value = global::System.DBNull.Value;
+            }
+            if ((Original_weather == null)) {
+                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[13].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[13].Value = ((string)(Original_weather));
+            }
+            this.Adapter.UpdateCommand.Parameters[14].Value = ((int)(survey_page_id));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -12611,8 +12812,8 @@ SELECT survey_page_id, view_id, page_number FROM SWSP_SURVEY_PAGE WHERE (survey_
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(global::System.Nullable<int> view_id, global::System.Nullable<int> page_number, int Original_survey_page_id, global::System.Nullable<int> Original_view_id, global::System.Nullable<int> Original_page_number) {
-            return this.Update(view_id, page_number, Original_survey_page_id, Original_view_id, Original_page_number, Original_survey_page_id);
+        public virtual int Update(global::System.Nullable<int> view_id, global::System.Nullable<int> page_number, global::System.Nullable<global::System.DateTime> date, string weather, string Comment, int Original_survey_page_id, global::System.Nullable<int> Original_view_id, global::System.Nullable<int> Original_page_number, global::System.Nullable<global::System.DateTime> Original_date, string Original_weather) {
+            return this.Update(view_id, page_number, date, weather, Comment, Original_survey_page_id, Original_view_id, Original_page_number, Original_date, Original_weather, Original_survey_page_id);
         }
     }
     
@@ -13156,11 +13357,20 @@ SELECT view_id, subwatershed_id, view_number, description FROM SWSP_VIEW WHERE (
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[3];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT view_id, subwatershed_id, view_number, description FROM GIS.SWSP_VIEW";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[1].Connection = this.Connection;
+            this._commandCollection[1].CommandText = "SELECT MAX(view_id) FROM SWSP_VIEW";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[2] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[2].Connection = this.Connection;
+            this._commandCollection[2].CommandText = "SELECT  view_id FROM SWSP_VIEW\r\nWHERE view_number = @view_number";
+            this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@view_number", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "view_number", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -13314,6 +13524,61 @@ SELECT view_id, subwatershed_id, view_number, description FROM SWSP_VIEW WHERE (
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
         public virtual int Update(int subwatershed_id, int view_number, string description, int Original_view_id, int Original_subwatershed_id, int Original_view_number, string Original_description) {
             return this.Update(subwatershed_id, view_number, description, Original_view_id, Original_subwatershed_id, Original_view_number, Original_description, Original_view_id);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual global::System.Nullable<int> ScalarQuery() {
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[1];
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            object returnValue;
+            try {
+                returnValue = command.ExecuteScalar();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            if (((returnValue == null) 
+                        || (returnValue.GetType() == typeof(global::System.DBNull)))) {
+                return new global::System.Nullable<int>();
+            }
+            else {
+                return new global::System.Nullable<int>(((int)(returnValue)));
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual global::System.Nullable<int> ScalarQueryViewIDByViewNumber(int view_number) {
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[2];
+            command.Parameters[0].Value = ((int)(view_number));
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            object returnValue;
+            try {
+                returnValue = command.ExecuteScalar();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            if (((returnValue == null) 
+                        || (returnValue.GetType() == typeof(global::System.DBNull)))) {
+                return new global::System.Nullable<int>();
+            }
+            else {
+                return new global::System.Nullable<int>(((int)(returnValue)));
+            }
         }
     }
     

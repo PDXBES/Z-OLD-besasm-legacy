@@ -18,11 +18,8 @@ namespace SWI_2
 
         private void buttonUpdateDatabase_Click(object sender, EventArgs e)
         {
-            FormSWSPFieldDataAdministration child = new FormSWSPFieldDataAdministration();
-
-            this.Enabled = false;
-            child.ShowDialog();
-            this.Enabled = true;
+            this.fKSURVEYPAGEVIEWBindingSource.EndEdit();
+            this.sWSP_SURVEY_PAGETableAdapter.Update(sANDBOXDataSet);
         }
 
         private void buttonAddView_Click(object sender, EventArgs e)
@@ -31,6 +28,10 @@ namespace SWI_2
 
             this.Enabled = false;
             child.ShowDialog();
+            // TODO: This line of code loads data into the 'sANDBOXDataSet.SWSP_VIEW' table. You can move, or remove it, as needed.
+            this.sWSP_VIEWTableAdapter.Fill(this.sANDBOXDataSet.SWSP_VIEW);
+            // TODO: This line of code loads data into the 'sANDBOXDataSet.SWSP_SURVEY_PAGE' table. You can move, or remove it, as needed.
+            this.sWSP_SURVEY_PAGETableAdapter.Fill(this.sANDBOXDataSet.SWSP_SURVEY_PAGE);
             this.Enabled = true;
         }
 
@@ -40,6 +41,8 @@ namespace SWI_2
 
             this.Enabled = false;
             child.ShowDialog();
+            // TODO: This line of code loads data into the 'sANDBOXDataSet.SWSP_SURVEY_PAGE' table. You can move, or remove it, as needed.
+            this.sWSP_SURVEY_PAGETableAdapter.Fill(this.sANDBOXDataSet.SWSP_SURVEY_PAGE);
             this.Enabled = true;
         }
 
@@ -233,7 +236,7 @@ namespace SWI_2
             //what was the global ID that was just inserted?  The highest value in the GlobalID table.  Since we just inserted to it, there is no chance that it could be null
             globalID = (int)this.sWSP_GLOBAL_IDTableAdapter.ScalarQuery();
             this.sWSP_DITCHTableAdapter.Insert(globalID,
-                                                ((int)((System.Data.DataRowView)fKDITCHSURVEYPAGEBindingSource.Current)["survey_page_id"]),
+                                                ((int)((System.Data.DataRowView)fKSURVEYPAGEVIEWBindingSource.Current)["survey_page_id"]),
                                                 "NewNode",
                                                 1,
                                                 1,
@@ -305,7 +308,7 @@ namespace SWI_2
             //what was the global ID that was just inserted?  The highest value in the GlobalID table.  Since we just inserted to it, there is no chance that it could be null
             globalID = (int)this.sWSP_GLOBAL_IDTableAdapter.ScalarQuery();
             this.sWSP_CULVERTTableAdapter.Insert(globalID,
-                                                ((int)((System.Data.DataRowView)fKDITCHSURVEYPAGEBindingSource.Current)["survey_page_id"]),
+                                                ((int)((System.Data.DataRowView)fKSURVEYPAGEVIEWBindingSource.Current)["survey_page_id"]),
                                                 "NewNode",
                                                 1,
                                                 1,
@@ -354,7 +357,7 @@ namespace SWI_2
             //what was the global ID that was just inserted?  The highest value in the GlobalID table.  Since we just inserted to it, there is no chance that it could be null
             globalID = (int)this.sWSP_GLOBAL_IDTableAdapter.ScalarQuery();
             this.sWSP_PIPETableAdapter.Insert(globalID,
-                                                ((int)((System.Data.DataRowView)fKPIPESURVEYPAGEBindingSource.Current)["survey_page_id"]),
+                                                ((int)((System.Data.DataRowView)fKSURVEYPAGEVIEWBindingSource.Current)["survey_page_id"]),
                                                 "NewNode1",
                                                 "NewNode2",
                                                 1,
