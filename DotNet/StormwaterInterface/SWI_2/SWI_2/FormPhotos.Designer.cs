@@ -30,17 +30,17 @@
         {
             this.components = new System.ComponentModel.Container();
             this.dataGridViewPhotos = new System.Windows.Forms.DataGridView();
-            this.buttonDone = new System.Windows.Forms.Button();
-            this.labelGlobalIDInfo = new System.Windows.Forms.Label();
-            this.buttonUpdatePhoto = new System.Windows.Forms.Button();
-            this.buttonDeletePhoto = new System.Windows.Forms.Button();
-            this.buttonAddRow = new System.Windows.Forms.Button();
             this.photoidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.globalidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.locationDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.commentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sWSPPHOTOBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.sANDBOXDataSet = new SWI_2.SANDBOXDataSet();
+            this.buttonDone = new System.Windows.Forms.Button();
+            this.labelGlobalIDInfo = new System.Windows.Forms.Label();
+            this.buttonUpdatePhoto = new System.Windows.Forms.Button();
+            this.buttonDeletePhoto = new System.Windows.Forms.Button();
+            this.buttonAddRow = new System.Windows.Forms.Button();
             this.sWSP_PHOTOTableAdapter = new SWI_2.SANDBOXDataSetTableAdapters.SWSP_PHOTOTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPhotos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sWSPPHOTOBindingSource)).BeginInit();
@@ -51,6 +51,8 @@
             // 
             this.dataGridViewPhotos.AllowUserToAddRows = false;
             this.dataGridViewPhotos.AllowUserToDeleteRows = false;
+            this.dataGridViewPhotos.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridViewPhotos.AutoGenerateColumns = false;
             this.dataGridViewPhotos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewPhotos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -63,55 +65,6 @@
             this.dataGridViewPhotos.Name = "dataGridViewPhotos";
             this.dataGridViewPhotos.Size = new System.Drawing.Size(656, 230);
             this.dataGridViewPhotos.TabIndex = 0;
-            // 
-            // buttonDone
-            // 
-            this.buttonDone.Location = new System.Drawing.Point(674, 230);
-            this.buttonDone.Name = "buttonDone";
-            this.buttonDone.Size = new System.Drawing.Size(162, 36);
-            this.buttonDone.TabIndex = 1;
-            this.buttonDone.Text = "Done";
-            this.buttonDone.UseVisualStyleBackColor = true;
-            this.buttonDone.Click += new System.EventHandler(this.buttonDone_Click);
-            // 
-            // labelGlobalIDInfo
-            // 
-            this.labelGlobalIDInfo.AutoSize = true;
-            this.labelGlobalIDInfo.Location = new System.Drawing.Point(13, 9);
-            this.labelGlobalIDInfo.Name = "labelGlobalIDInfo";
-            this.labelGlobalIDInfo.Size = new System.Drawing.Size(72, 13);
-            this.labelGlobalIDInfo.TabIndex = 2;
-            this.labelGlobalIDInfo.Text = "Global ID Info";
-            // 
-            // buttonUpdatePhoto
-            // 
-            this.buttonUpdatePhoto.Location = new System.Drawing.Point(674, 188);
-            this.buttonUpdatePhoto.Name = "buttonUpdatePhoto";
-            this.buttonUpdatePhoto.Size = new System.Drawing.Size(162, 36);
-            this.buttonUpdatePhoto.TabIndex = 3;
-            this.buttonUpdatePhoto.Text = "Update Photo";
-            this.buttonUpdatePhoto.UseVisualStyleBackColor = true;
-            this.buttonUpdatePhoto.Click += new System.EventHandler(this.buttonUpdatePhoto_Click);
-            // 
-            // buttonDeletePhoto
-            // 
-            this.buttonDeletePhoto.Location = new System.Drawing.Point(674, 146);
-            this.buttonDeletePhoto.Name = "buttonDeletePhoto";
-            this.buttonDeletePhoto.Size = new System.Drawing.Size(162, 36);
-            this.buttonDeletePhoto.TabIndex = 4;
-            this.buttonDeletePhoto.Text = "Delete Photo";
-            this.buttonDeletePhoto.UseVisualStyleBackColor = true;
-            this.buttonDeletePhoto.Click += new System.EventHandler(this.buttonDeletePhoto_Click);
-            // 
-            // buttonAddRow
-            // 
-            this.buttonAddRow.Location = new System.Drawing.Point(674, 104);
-            this.buttonAddRow.Name = "buttonAddRow";
-            this.buttonAddRow.Size = new System.Drawing.Size(162, 36);
-            this.buttonAddRow.TabIndex = 5;
-            this.buttonAddRow.Text = "Add Photo";
-            this.buttonAddRow.UseVisualStyleBackColor = true;
-            this.buttonAddRow.Click += new System.EventHandler(this.buttonAddRow_Click);
             // 
             // photoidDataGridViewTextBoxColumn
             // 
@@ -151,6 +104,59 @@
             // 
             this.sANDBOXDataSet.DataSetName = "SANDBOXDataSet";
             this.sANDBOXDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // buttonDone
+            // 
+            this.buttonDone.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonDone.Location = new System.Drawing.Point(674, 230);
+            this.buttonDone.Name = "buttonDone";
+            this.buttonDone.Size = new System.Drawing.Size(162, 36);
+            this.buttonDone.TabIndex = 1;
+            this.buttonDone.Text = "Done";
+            this.buttonDone.UseVisualStyleBackColor = true;
+            this.buttonDone.Click += new System.EventHandler(this.buttonDone_Click);
+            // 
+            // labelGlobalIDInfo
+            // 
+            this.labelGlobalIDInfo.AutoSize = true;
+            this.labelGlobalIDInfo.Location = new System.Drawing.Point(13, 9);
+            this.labelGlobalIDInfo.Name = "labelGlobalIDInfo";
+            this.labelGlobalIDInfo.Size = new System.Drawing.Size(72, 13);
+            this.labelGlobalIDInfo.TabIndex = 2;
+            this.labelGlobalIDInfo.Text = "Global ID Info";
+            // 
+            // buttonUpdatePhoto
+            // 
+            this.buttonUpdatePhoto.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonUpdatePhoto.Location = new System.Drawing.Point(674, 188);
+            this.buttonUpdatePhoto.Name = "buttonUpdatePhoto";
+            this.buttonUpdatePhoto.Size = new System.Drawing.Size(162, 36);
+            this.buttonUpdatePhoto.TabIndex = 3;
+            this.buttonUpdatePhoto.Text = "Update Photo";
+            this.buttonUpdatePhoto.UseVisualStyleBackColor = true;
+            this.buttonUpdatePhoto.Click += new System.EventHandler(this.buttonUpdatePhoto_Click);
+            // 
+            // buttonDeletePhoto
+            // 
+            this.buttonDeletePhoto.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonDeletePhoto.Location = new System.Drawing.Point(674, 146);
+            this.buttonDeletePhoto.Name = "buttonDeletePhoto";
+            this.buttonDeletePhoto.Size = new System.Drawing.Size(162, 36);
+            this.buttonDeletePhoto.TabIndex = 4;
+            this.buttonDeletePhoto.Text = "Delete Photo";
+            this.buttonDeletePhoto.UseVisualStyleBackColor = true;
+            this.buttonDeletePhoto.Click += new System.EventHandler(this.buttonDeletePhoto_Click);
+            // 
+            // buttonAddRow
+            // 
+            this.buttonAddRow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonAddRow.Location = new System.Drawing.Point(674, 104);
+            this.buttonAddRow.Name = "buttonAddRow";
+            this.buttonAddRow.Size = new System.Drawing.Size(162, 36);
+            this.buttonAddRow.TabIndex = 5;
+            this.buttonAddRow.Text = "Add Photo";
+            this.buttonAddRow.UseVisualStyleBackColor = true;
+            this.buttonAddRow.Click += new System.EventHandler(this.buttonAddRow_Click);
             // 
             // sWSP_PHOTOTableAdapter
             // 

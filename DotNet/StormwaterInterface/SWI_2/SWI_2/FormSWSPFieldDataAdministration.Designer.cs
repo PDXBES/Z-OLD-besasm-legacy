@@ -31,12 +31,21 @@
             this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageWatersheds = new System.Windows.Forms.TabPage();
+            this.buttonSubwatershedsUpdate = new System.Windows.Forms.Button();
+            this.buttonWatershedsUpdate = new System.Windows.Forms.Button();
             this.buttonSubwatershedsDelete = new System.Windows.Forms.Button();
             this.buttonSubwatershedsAdd = new System.Windows.Forms.Button();
             this.buttonWatershedsDelete = new System.Windows.Forms.Button();
             this.buttonWatershedsAdd = new System.Windows.Forms.Button();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.subwatershed = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.descriptionDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fKSUBWATERSHEDWATERSHEDBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.sWSPWATERSHEDBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.sANDBOXDataSet = new SWI_2.SANDBOXDataSet();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.watershedDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.descriptionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.labelSubwatersheds = new System.Windows.Forms.Label();
             this.labelWatersheds = new System.Windows.Forms.Label();
             this.tabPageEvaluators = new System.Windows.Forms.TabPage();
@@ -62,6 +71,9 @@
             this.labelFacings = new System.Windows.Forms.Label();
             this.labelCulvertOpenings = new System.Windows.Forms.Label();
             this.tabPageViewsAndSurveys = new System.Windows.Forms.TabPage();
+            this.comboBoxSubwatershed = new System.Windows.Forms.ComboBox();
+            this.fKSUBWATERSHEDWATERSHEDBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.comboBoxWatershed = new System.Windows.Forms.ComboBox();
             this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonAddSurveyPage = new System.Windows.Forms.Button();
             this.buttonAddView = new System.Windows.Forms.Button();
@@ -69,18 +81,17 @@
             this.labelSubwatershed = new System.Windows.Forms.Label();
             this.labelWatershed = new System.Windows.Forms.Label();
             this.labelViews = new System.Windows.Forms.Label();
-            this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonOK = new System.Windows.Forms.Button();
-            this.comboBoxWatershed = new System.Windows.Forms.ComboBox();
-            this.comboBoxSubwatershed = new System.Windows.Forms.ComboBox();
-            this.sANDBOXDataSet = new SWI_2.SANDBOXDataSet();
-            this.sWSPWATERSHEDBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.sWSP_WATERSHEDTableAdapter = new SWI_2.SANDBOXDataSetTableAdapters.SWSP_WATERSHEDTableAdapter();
-            this.fKSUBWATERSHEDWATERSHEDBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.sWSP_SUBWATERSHEDTableAdapter = new SWI_2.SANDBOXDataSetTableAdapters.SWSP_SUBWATERSHEDTableAdapter();
+            this.fKVIEWSUBWATERSHEDBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.sWSP_VIEWTableAdapter = new SWI_2.SANDBOXDataSetTableAdapters.SWSP_VIEWTableAdapter();
             this.tabControl1.SuspendLayout();
             this.tabPageWatersheds.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fKSUBWATERSHEDWATERSHEDBindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sWSPWATERSHEDBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sANDBOXDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabPageEvaluators.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
@@ -90,10 +101,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
             this.tabPageViewsAndSurveys.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView8)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sANDBOXDataSet)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sWSPWATERSHEDBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fKSUBWATERSHEDWATERSHEDBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fKVIEWSUBWATERSHEDBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -110,13 +120,15 @@
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(652, 385);
+            this.tabControl1.Size = new System.Drawing.Size(703, 385);
             this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabControl1.TabIndex = 0;
             this.tabControl1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tabControl1_DrawItem);
             // 
             // tabPageWatersheds
             // 
+            this.tabPageWatersheds.Controls.Add(this.buttonSubwatershedsUpdate);
+            this.tabPageWatersheds.Controls.Add(this.buttonWatershedsUpdate);
             this.tabPageWatersheds.Controls.Add(this.buttonSubwatershedsDelete);
             this.tabPageWatersheds.Controls.Add(this.buttonSubwatershedsAdd);
             this.tabPageWatersheds.Controls.Add(this.buttonWatershedsDelete);
@@ -128,14 +140,34 @@
             this.tabPageWatersheds.Location = new System.Drawing.Point(104, 4);
             this.tabPageWatersheds.Name = "tabPageWatersheds";
             this.tabPageWatersheds.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageWatersheds.Size = new System.Drawing.Size(544, 377);
+            this.tabPageWatersheds.Size = new System.Drawing.Size(595, 377);
             this.tabPageWatersheds.TabIndex = 0;
             this.tabPageWatersheds.Text = "Watersheds";
             this.tabPageWatersheds.UseVisualStyleBackColor = true;
             // 
+            // buttonSubwatershedsUpdate
+            // 
+            this.buttonSubwatershedsUpdate.Location = new System.Drawing.Point(390, 330);
+            this.buttonSubwatershedsUpdate.Name = "buttonSubwatershedsUpdate";
+            this.buttonSubwatershedsUpdate.Size = new System.Drawing.Size(70, 24);
+            this.buttonSubwatershedsUpdate.TabIndex = 9;
+            this.buttonSubwatershedsUpdate.Text = "Update";
+            this.buttonSubwatershedsUpdate.UseVisualStyleBackColor = true;
+            this.buttonSubwatershedsUpdate.Click += new System.EventHandler(this.buttonSubwatershedsUpdate_Click);
+            // 
+            // buttonWatershedsUpdate
+            // 
+            this.buttonWatershedsUpdate.Location = new System.Drawing.Point(119, 330);
+            this.buttonWatershedsUpdate.Name = "buttonWatershedsUpdate";
+            this.buttonWatershedsUpdate.Size = new System.Drawing.Size(70, 24);
+            this.buttonWatershedsUpdate.TabIndex = 8;
+            this.buttonWatershedsUpdate.Text = "Update";
+            this.buttonWatershedsUpdate.UseVisualStyleBackColor = true;
+            this.buttonWatershedsUpdate.Click += new System.EventHandler(this.buttonWatershedsUpdate_Click);
+            // 
             // buttonSubwatershedsDelete
             // 
-            this.buttonSubwatershedsDelete.Location = new System.Drawing.Point(354, 330);
+            this.buttonSubwatershedsDelete.Location = new System.Drawing.Point(466, 330);
             this.buttonSubwatershedsDelete.Name = "buttonSubwatershedsDelete";
             this.buttonSubwatershedsDelete.Size = new System.Drawing.Size(70, 24);
             this.buttonSubwatershedsDelete.TabIndex = 7;
@@ -144,51 +176,107 @@
             // 
             // buttonSubwatershedsAdd
             // 
-            this.buttonSubwatershedsAdd.Location = new System.Drawing.Point(221, 330);
+            this.buttonSubwatershedsAdd.Location = new System.Drawing.Point(314, 330);
             this.buttonSubwatershedsAdd.Name = "buttonSubwatershedsAdd";
             this.buttonSubwatershedsAdd.Size = new System.Drawing.Size(70, 24);
             this.buttonSubwatershedsAdd.TabIndex = 6;
             this.buttonSubwatershedsAdd.Text = "Add";
             this.buttonSubwatershedsAdd.UseVisualStyleBackColor = true;
+            this.buttonSubwatershedsAdd.Click += new System.EventHandler(this.buttonSubwatershedsAdd_Click);
             // 
             // buttonWatershedsDelete
             // 
-            this.buttonWatershedsDelete.Location = new System.Drawing.Point(121, 330);
+            this.buttonWatershedsDelete.Location = new System.Drawing.Point(195, 330);
             this.buttonWatershedsDelete.Name = "buttonWatershedsDelete";
             this.buttonWatershedsDelete.Size = new System.Drawing.Size(70, 24);
             this.buttonWatershedsDelete.TabIndex = 5;
             this.buttonWatershedsDelete.Text = "Delete";
             this.buttonWatershedsDelete.UseVisualStyleBackColor = true;
+            this.buttonWatershedsDelete.Click += new System.EventHandler(this.buttonWatershedsDelete_Click);
             // 
             // buttonWatershedsAdd
             // 
-            this.buttonWatershedsAdd.Location = new System.Drawing.Point(24, 330);
+            this.buttonWatershedsAdd.Location = new System.Drawing.Point(43, 330);
             this.buttonWatershedsAdd.Name = "buttonWatershedsAdd";
             this.buttonWatershedsAdd.Size = new System.Drawing.Size(70, 24);
             this.buttonWatershedsAdd.TabIndex = 4;
             this.buttonWatershedsAdd.Text = "Add";
             this.buttonWatershedsAdd.UseVisualStyleBackColor = true;
+            this.buttonWatershedsAdd.Click += new System.EventHandler(this.buttonWatershedsAdd_Click);
             // 
             // dataGridView2
             // 
+            this.dataGridView2.AllowUserToAddRows = false;
+            this.dataGridView2.AllowUserToDeleteRows = false;
+            this.dataGridView2.AutoGenerateColumns = false;
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(221, 40);
+            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.subwatershed,
+            this.descriptionDataGridViewTextBoxColumn1});
+            this.dataGridView2.DataSource = this.fKSUBWATERSHEDWATERSHEDBindingSource1;
+            this.dataGridView2.Location = new System.Drawing.Point(288, 40);
             this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(203, 284);
+            this.dataGridView2.Size = new System.Drawing.Size(269, 284);
             this.dataGridView2.TabIndex = 3;
+            // 
+            // subwatershed
+            // 
+            this.subwatershed.DataPropertyName = "subwatershed";
+            this.subwatershed.HeaderText = "subwatershed";
+            this.subwatershed.Name = "subwatershed";
+            // 
+            // descriptionDataGridViewTextBoxColumn1
+            // 
+            this.descriptionDataGridViewTextBoxColumn1.DataPropertyName = "description";
+            this.descriptionDataGridViewTextBoxColumn1.HeaderText = "description";
+            this.descriptionDataGridViewTextBoxColumn1.Name = "descriptionDataGridViewTextBoxColumn1";
+            // 
+            // fKSUBWATERSHEDWATERSHEDBindingSource1
+            // 
+            this.fKSUBWATERSHEDWATERSHEDBindingSource1.DataMember = "FK_SUBWATERSHED_WATERSHED";
+            this.fKSUBWATERSHEDWATERSHEDBindingSource1.DataSource = this.sWSPWATERSHEDBindingSource;
+            // 
+            // sWSPWATERSHEDBindingSource
+            // 
+            this.sWSPWATERSHEDBindingSource.DataMember = "SWSP_WATERSHED";
+            this.sWSPWATERSHEDBindingSource.DataSource = this.sANDBOXDataSet;
+            // 
+            // sANDBOXDataSet
+            // 
+            this.sANDBOXDataSet.DataSetName = "SANDBOXDataSet";
+            this.sANDBOXDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.watershedDataGridViewTextBoxColumn,
+            this.descriptionDataGridViewTextBoxColumn});
+            this.dataGridView1.DataSource = this.sWSPWATERSHEDBindingSource;
             this.dataGridView1.Location = new System.Drawing.Point(22, 40);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(169, 284);
+            this.dataGridView1.Size = new System.Drawing.Size(260, 284);
             this.dataGridView1.TabIndex = 2;
+            // 
+            // watershedDataGridViewTextBoxColumn
+            // 
+            this.watershedDataGridViewTextBoxColumn.DataPropertyName = "watershed";
+            this.watershedDataGridViewTextBoxColumn.HeaderText = "watershed";
+            this.watershedDataGridViewTextBoxColumn.Name = "watershedDataGridViewTextBoxColumn";
+            // 
+            // descriptionDataGridViewTextBoxColumn
+            // 
+            this.descriptionDataGridViewTextBoxColumn.DataPropertyName = "description";
+            this.descriptionDataGridViewTextBoxColumn.HeaderText = "description";
+            this.descriptionDataGridViewTextBoxColumn.Name = "descriptionDataGridViewTextBoxColumn";
             // 
             // labelSubwatersheds
             // 
             this.labelSubwatersheds.AutoSize = true;
-            this.labelSubwatersheds.Location = new System.Drawing.Point(225, 12);
+            this.labelSubwatersheds.Location = new System.Drawing.Point(327, 12);
             this.labelSubwatersheds.Name = "labelSubwatersheds";
             this.labelSubwatersheds.Size = new System.Drawing.Size(80, 13);
             this.labelSubwatersheds.TabIndex = 1;
@@ -212,7 +300,7 @@
             this.tabPageEvaluators.Location = new System.Drawing.Point(104, 4);
             this.tabPageEvaluators.Name = "tabPageEvaluators";
             this.tabPageEvaluators.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageEvaluators.Size = new System.Drawing.Size(544, 377);
+            this.tabPageEvaluators.Size = new System.Drawing.Size(595, 377);
             this.tabPageEvaluators.TabIndex = 1;
             this.tabPageEvaluators.Text = "Evaluators";
             this.tabPageEvaluators.UseVisualStyleBackColor = true;
@@ -272,7 +360,7 @@
             this.tabPageTypes.Controls.Add(this.labelCulvertOpenings);
             this.tabPageTypes.Location = new System.Drawing.Point(104, 4);
             this.tabPageTypes.Name = "tabPageTypes";
-            this.tabPageTypes.Size = new System.Drawing.Size(544, 377);
+            this.tabPageTypes.Size = new System.Drawing.Size(595, 377);
             this.tabPageTypes.TabIndex = 2;
             this.tabPageTypes.Text = "Types";
             this.tabPageTypes.UseVisualStyleBackColor = true;
@@ -430,10 +518,37 @@
             this.tabPageViewsAndSurveys.Controls.Add(this.labelViews);
             this.tabPageViewsAndSurveys.Location = new System.Drawing.Point(104, 4);
             this.tabPageViewsAndSurveys.Name = "tabPageViewsAndSurveys";
-            this.tabPageViewsAndSurveys.Size = new System.Drawing.Size(544, 377);
+            this.tabPageViewsAndSurveys.Size = new System.Drawing.Size(595, 377);
             this.tabPageViewsAndSurveys.TabIndex = 3;
             this.tabPageViewsAndSurveys.Text = "Views and Surveys";
             this.tabPageViewsAndSurveys.UseVisualStyleBackColor = true;
+            // 
+            // comboBoxSubwatershed
+            // 
+            this.comboBoxSubwatershed.DataSource = this.fKSUBWATERSHEDWATERSHEDBindingSource;
+            this.comboBoxSubwatershed.DisplayMember = "subwatershed";
+            this.comboBoxSubwatershed.FormattingEnabled = true;
+            this.comboBoxSubwatershed.Location = new System.Drawing.Point(332, 30);
+            this.comboBoxSubwatershed.Name = "comboBoxSubwatershed";
+            this.comboBoxSubwatershed.Size = new System.Drawing.Size(138, 21);
+            this.comboBoxSubwatershed.TabIndex = 10;
+            this.comboBoxSubwatershed.ValueMember = "subwatershed_id";
+            // 
+            // fKSUBWATERSHEDWATERSHEDBindingSource
+            // 
+            this.fKSUBWATERSHEDWATERSHEDBindingSource.DataMember = "FK_SUBWATERSHED_WATERSHED";
+            this.fKSUBWATERSHEDWATERSHEDBindingSource.DataSource = this.sWSPWATERSHEDBindingSource;
+            // 
+            // comboBoxWatershed
+            // 
+            this.comboBoxWatershed.DataSource = this.sWSPWATERSHEDBindingSource;
+            this.comboBoxWatershed.DisplayMember = "watershed";
+            this.comboBoxWatershed.FormattingEnabled = true;
+            this.comboBoxWatershed.Location = new System.Drawing.Point(82, 31);
+            this.comboBoxWatershed.Name = "comboBoxWatershed";
+            this.comboBoxWatershed.Size = new System.Drawing.Size(100, 21);
+            this.comboBoxWatershed.TabIndex = 9;
+            this.comboBoxWatershed.ValueMember = "watershed_id";
             // 
             // buttonDelete
             // 
@@ -499,76 +614,39 @@
             this.labelViews.TabIndex = 0;
             this.labelViews.Text = "Views";
             // 
-            // buttonCancel
-            // 
-            this.buttonCancel.Location = new System.Drawing.Point(559, 403);
-            this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(105, 33);
-            this.buttonCancel.TabIndex = 1;
-            this.buttonCancel.Text = "Cancel";
-            this.buttonCancel.UseVisualStyleBackColor = true;
-            // 
             // buttonOK
             // 
-            this.buttonOK.Location = new System.Drawing.Point(448, 403);
+            this.buttonOK.Location = new System.Drawing.Point(610, 403);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(105, 33);
             this.buttonOK.TabIndex = 2;
             this.buttonOK.Text = "OK";
             this.buttonOK.UseVisualStyleBackColor = true;
-            // 
-            // comboBoxWatershed
-            // 
-            this.comboBoxWatershed.DataSource = this.sWSPWATERSHEDBindingSource;
-            this.comboBoxWatershed.DisplayMember = "watershed";
-            this.comboBoxWatershed.FormattingEnabled = true;
-            this.comboBoxWatershed.Location = new System.Drawing.Point(82, 31);
-            this.comboBoxWatershed.Name = "comboBoxWatershed";
-            this.comboBoxWatershed.Size = new System.Drawing.Size(100, 21);
-            this.comboBoxWatershed.TabIndex = 9;
-            this.comboBoxWatershed.ValueMember = "watershed_id";
-            // 
-            // comboBoxSubwatershed
-            // 
-            this.comboBoxSubwatershed.DataSource = this.fKSUBWATERSHEDWATERSHEDBindingSource;
-            this.comboBoxSubwatershed.DisplayMember = "subwatershed";
-            this.comboBoxSubwatershed.FormattingEnabled = true;
-            this.comboBoxSubwatershed.Location = new System.Drawing.Point(332, 30);
-            this.comboBoxSubwatershed.Name = "comboBoxSubwatershed";
-            this.comboBoxSubwatershed.Size = new System.Drawing.Size(138, 21);
-            this.comboBoxSubwatershed.TabIndex = 10;
-            this.comboBoxSubwatershed.ValueMember = "subwatershed_id";
-            // 
-            // sANDBOXDataSet
-            // 
-            this.sANDBOXDataSet.DataSetName = "SANDBOXDataSet";
-            this.sANDBOXDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // sWSPWATERSHEDBindingSource
-            // 
-            this.sWSPWATERSHEDBindingSource.DataMember = "SWSP_WATERSHED";
-            this.sWSPWATERSHEDBindingSource.DataSource = this.sANDBOXDataSet;
+            this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             // 
             // sWSP_WATERSHEDTableAdapter
             // 
             this.sWSP_WATERSHEDTableAdapter.ClearBeforeFill = true;
             // 
-            // fKSUBWATERSHEDWATERSHEDBindingSource
-            // 
-            this.fKSUBWATERSHEDWATERSHEDBindingSource.DataMember = "FK_SUBWATERSHED_WATERSHED";
-            this.fKSUBWATERSHEDWATERSHEDBindingSource.DataSource = this.sWSPWATERSHEDBindingSource;
-            // 
             // sWSP_SUBWATERSHEDTableAdapter
             // 
             this.sWSP_SUBWATERSHEDTableAdapter.ClearBeforeFill = true;
+            // 
+            // fKVIEWSUBWATERSHEDBindingSource
+            // 
+            this.fKVIEWSUBWATERSHEDBindingSource.DataMember = "FK_VIEW_SUBWATERSHED";
+            this.fKVIEWSUBWATERSHEDBindingSource.DataSource = this.fKSUBWATERSHEDWATERSHEDBindingSource;
+            // 
+            // sWSP_VIEWTableAdapter
+            // 
+            this.sWSP_VIEWTableAdapter.ClearBeforeFill = true;
             // 
             // FormSWSPFieldDataAdministration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(676, 444);
+            this.ClientSize = new System.Drawing.Size(727, 444);
             this.Controls.Add(this.buttonOK);
-            this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.tabControl1);
             this.Name = "FormSWSPFieldDataAdministration";
             this.Text = "FormSWSPFieldDataAdministration";
@@ -577,6 +655,9 @@
             this.tabPageWatersheds.ResumeLayout(false);
             this.tabPageWatersheds.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fKSUBWATERSHEDWATERSHEDBindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sWSPWATERSHEDBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sANDBOXDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tabPageEvaluators.ResumeLayout(false);
             this.tabPageEvaluators.PerformLayout();
@@ -589,10 +670,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
             this.tabPageViewsAndSurveys.ResumeLayout(false);
             this.tabPageViewsAndSurveys.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView8)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sANDBOXDataSet)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sWSPWATERSHEDBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fKSUBWATERSHEDWATERSHEDBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fKVIEWSUBWATERSHEDBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -607,7 +687,6 @@
         private System.Windows.Forms.TabPage tabPageTypes;
         private System.Windows.Forms.TabPage tabPageViewsAndSurveys;
         private System.Windows.Forms.Label labelWatersheds;
-        private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.Button buttonOK;
         private System.Windows.Forms.Label labelSubwatersheds;
         private System.Windows.Forms.Button buttonSubwatershedsDelete;
@@ -650,5 +729,14 @@
         private SWI_2.SANDBOXDataSetTableAdapters.SWSP_WATERSHEDTableAdapter sWSP_WATERSHEDTableAdapter;
         private System.Windows.Forms.BindingSource fKSUBWATERSHEDWATERSHEDBindingSource;
         private SWI_2.SANDBOXDataSetTableAdapters.SWSP_SUBWATERSHEDTableAdapter sWSP_SUBWATERSHEDTableAdapter;
+        private System.Windows.Forms.DataGridViewTextBoxColumn watershedDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn descriptionDataGridViewTextBoxColumn;
+        private System.Windows.Forms.BindingSource fKVIEWSUBWATERSHEDBindingSource;
+        private SWI_2.SANDBOXDataSetTableAdapters.SWSP_VIEWTableAdapter sWSP_VIEWTableAdapter;
+        private System.Windows.Forms.DataGridViewTextBoxColumn subwatershed;
+        private System.Windows.Forms.DataGridViewTextBoxColumn descriptionDataGridViewTextBoxColumn1;
+        private System.Windows.Forms.BindingSource fKSUBWATERSHEDWATERSHEDBindingSource1;
+        private System.Windows.Forms.Button buttonSubwatershedsUpdate;
+        private System.Windows.Forms.Button buttonWatershedsUpdate;
     }
 }
