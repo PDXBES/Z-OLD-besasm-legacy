@@ -80,11 +80,54 @@ namespace SWI_2
 
         private void FormSWSPFieldDataAdministration_Load(object sender, EventArgs e)
         {
+            // TODO: This line of code loads data into the 'sANDBOXDataSet.SWSP_VIEW' table. You can move, or remove it, as needed.
+            this.sWSP_VIEWTableAdapter.Fill(this.sANDBOXDataSet.SWSP_VIEW);
             // TODO: This line of code loads data into the 'sANDBOXDataSet.SWSP_SUBWATERSHED' table. You can move, or remove it, as needed.
             this.sWSP_SUBWATERSHEDTableAdapter.Fill(this.sANDBOXDataSet.SWSP_SUBWATERSHED);
             // TODO: This line of code loads data into the 'sANDBOXDataSet.SWSP_WATERSHED' table. You can move, or remove it, as needed.
             this.sWSP_WATERSHEDTableAdapter.Fill(this.sANDBOXDataSet.SWSP_WATERSHED);
 
+        }
+
+        private void buttonOK_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void buttonWatershedsAdd_Click(object sender, EventArgs e)
+        {
+            this.sWSP_WATERSHEDTableAdapter.Insert("New Watershed", "");
+            this.sWSP_WATERSHEDTableAdapter.Fill((SANDBOXDataSet.SWSP_WATERSHEDDataTable)((SANDBOXDataSet)this.sWSPWATERSHEDBindingSource.DataSource).SWSP_WATERSHED);
+        }
+
+        private void buttonWatershedsUpdate_Click(object sender, EventArgs e)
+        {
+            this.sWSPWATERSHEDBindingSource.EndEdit();
+            this.sWSP_WATERSHEDTableAdapter.Update(sANDBOXDataSet);
+            this.sWSP_WATERSHEDTableAdapter.Fill((SANDBOXDataSet.SWSP_WATERSHEDDataTable)((SANDBOXDataSet)this.sWSPWATERSHEDBindingSource.DataSource).SWSP_WATERSHED);
+            dataGridView1.Refresh();
+        }
+
+        private void buttonWatershedsDelete_Click(object sender, EventArgs e)
+        {
+            this.sWSP_WATERSHEDTableAdapter.DeleteQuery((int)(((System.Data.DataRowView)sWSPWATERSHEDBindingSource.Current)["watershed_id"]));
+            this.sWSP_WATERSHEDTableAdapter.Update(sANDBOXDataSet);
+            this.sWSP_WATERSHEDTableAdapter.Fill((SANDBOXDataSet.SWSP_WATERSHEDDataTable)((SANDBOXDataSet)this.sWSPWATERSHEDBindingSource.DataSource).SWSP_WATERSHED);
+            dataGridView1.Refresh();
+        }
+
+        private void buttonSubwatershedsAdd_Click(object sender, EventArgs e)
+        {
+            this.sWSP_SUBWATERSHEDTableAdapter.Insert((int)(((System.Data.DataRowView)sWSPWATERSHEDBindingSource.Current)["watershed_id"]), "New Subwatershed", "");
+            this.sWSP_SUBWATERSHEDTableAdapter.Fill((SANDBOXDataSet.SWSP_SUBWATERSHEDDataTable)((SANDBOXDataSet)this.fKSUBWATERSHEDWATERSHEDBindingSource.DataSource).SWSP_SUBWATERSHED);
+        }
+
+        private void buttonSubwatershedsUpdate_Click(object sender, EventArgs e)
+        {
+            this.fKSUBWATERSHEDWATERSHEDBindingSource.EndEdit();
+            this.sWSP_SUBWATERSHEDTableAdapter.Update(sANDBOXDataSet);
+            this.sWSP_SUBWATERSHEDTableAdapter.Fill((SANDBOXDataSet.SWSP_SUBWATERSHEDDataTable)((SANDBOXDataSet)this.fKSUBWATERSHEDWATERSHEDBindingSource.DataSource).SWSP_SUBWATERSHED);
+            dataGridView2.Refresh();
         }
     }
 }

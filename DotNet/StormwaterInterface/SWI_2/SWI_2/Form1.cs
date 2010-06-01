@@ -281,7 +281,7 @@ namespace SWI_2
 
         private void buttonUpdateDitch_Click(object sender, EventArgs e)
         {
-            try
+            /*try
             {
                 foreach (object rowObject in dataGridView2.Rows)
                 {
@@ -294,8 +294,12 @@ namespace SWI_2
             catch (Exception ex)
             {
 
-            }
+            }*/
+            this.sWSPDITCHBindingSource.EndEdit();
             this.sWSP_DITCHTableAdapter.Update(sANDBOXDataSet);
+            this.sWSP_DITCHTableAdapter.Fill((SANDBOXDataSet.SWSP_DITCHDataTable)((SANDBOXDataSet)this.sWSPDITCHBindingSource.DataSource).SWSP_DITCH);
+            dataGridView2.Refresh();
+            //this.sWSP_DITCHTableAdapter.Update(sANDBOXDataSet);
         }
 
         private void buttonCulvertsAdd_Click(object sender, EventArgs e)
@@ -330,7 +334,7 @@ namespace SWI_2
 
         private void buttonUpdateCulvert_Click(object sender, EventArgs e)
         {
-            try
+            /*try
             {
                 foreach (object rowObject in dataGridView1.Rows)
                 {
@@ -343,8 +347,11 @@ namespace SWI_2
             catch (Exception ex)
             {
 
-            }
+            }*/
+            this.sWSPCULVERTBindingSource1.EndEdit();
             this.sWSP_CULVERTTableAdapter.Update(sANDBOXDataSet);
+            this.sWSP_CULVERTTableAdapter.Fill((SANDBOXDataSet.SWSP_CULVERTDataTable)((SANDBOXDataSet)this.sWSPCULVERTBindingSource.DataSource).SWSP_CULVERT);
+            dataGridView1.Refresh();
         }
 
         private void buttonPipesAdd_Click(object sender, EventArgs e)
@@ -379,7 +386,7 @@ namespace SWI_2
 
         private void buttonUpdatePipe_Click(object sender, EventArgs e)
         {
-            try
+            /*try
             {
                 foreach (object rowObject in dataGridView3.Rows)
                 {
@@ -393,7 +400,21 @@ namespace SWI_2
             {
 
             }
+            this.sWSP_PIPETableAdapter.Update(sANDBOXDataSet);*/
+            this.sWSPPIPEBindingSource.EndEdit();
             this.sWSP_PIPETableAdapter.Update(sANDBOXDataSet);
+            this.sWSP_PIPETableAdapter.Fill((SANDBOXDataSet.SWSP_PIPEDataTable)((SANDBOXDataSet)this.sWSPPIPEBindingSource.DataSource).SWSP_PIPE);
+            dataGridView3.Refresh();
+        }
+
+        private void dataAdministratorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormSWSPFieldDataAdministration child = new FormSWSPFieldDataAdministration();
+
+            //child.GlobalID = (int)((System.Data.DataRowView)fKPIPESURVEYPAGEBindingSource.Current)["global_id"];
+            this.Enabled = false;
+            child.ShowDialog();
+            this.Enabled = true;
         }
     }
 }
