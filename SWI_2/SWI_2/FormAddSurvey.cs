@@ -26,5 +26,26 @@ namespace SWI_2
             this.sWSP_WATERSHEDTableAdapter.Fill(this.sANDBOXDataSet.SWSP_WATERSHED);
 
         }
+
+        private void buttonOK_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                SWI_2.SANDBOXDataSetTableAdapters.SWSP_VIEWTableAdapter taV = new SWI_2.SANDBOXDataSetTableAdapters.SWSP_VIEWTableAdapter();
+
+                SWI_2.SANDBOXDataSetTableAdapters.SWSP_SURVEY_PAGETableAdapter taS = new SWI_2.SANDBOXDataSetTableAdapters.SWSP_SURVEY_PAGETableAdapter();
+                taS.Insert(taV.ScalarQueryViewIDByViewNumber((int)numericUpDownView.Value), (int)numericUpDownAddPage.Value, System.DateTime.Today, "", "");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Suvey page already exists!");
+            }
+            this.Close();
+        }
+
+        private void buttonCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
