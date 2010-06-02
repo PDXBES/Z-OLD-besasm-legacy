@@ -1,0 +1,30 @@
+<mockup version="1.0" skin="sketch" measuredW="630" measuredH="462">
+  <controls>
+    <control controlID="16" controlTypeID="com.balsamiq.mockups::Button" x="535" y="379" w="-1" h="-1" measuredW="77" measuredH="28" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>btnClose</text>
+      </controlProperties>
+    </control>
+    <control controlID="17" controlTypeID="com.balsamiq.mockups::Button" x="459" y="351" w="-1" h="-1" measuredW="153" measuredH="28" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>btnOpenHistoryForm</text>
+      </controlProperties>
+    </control>
+    <control controlID="13" controlTypeID="com.balsamiq.mockups::TitleWindow" x="46" y="52" w="574" h="400" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <topheight>26</topheight>
+        <text>DSCEditor%3A%20Main</text>
+      </controlProperties>
+    </control>
+    <control controlID="14" controlTypeID="com.balsamiq.mockups::TextInput" x="61" y="160" w="401" h="-1" measuredW="112" measuredH="29" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>txtLoadFilePath</text>
+      </controlProperties>
+    </control>
+    <control controlID="15" controlTypeID="com.balsamiq.mockups::Button" x="477" y="160" w="-1" h="-1" measuredW="135" measuredH="28" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>btnOpenFileDialog</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>

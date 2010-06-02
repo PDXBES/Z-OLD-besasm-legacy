@@ -1,0 +1,6 @@
+[LINK]
+Application=DETANG.MBX
+Module=c:\mapinfo\mi_tools\liebe\lib\str_lib.mbo
+Module=c:\mapinfo\mi_tools\liebe\lib\MiStdlib.mbo
+Module=detang.mbo
+'Module=more modules *.MBO

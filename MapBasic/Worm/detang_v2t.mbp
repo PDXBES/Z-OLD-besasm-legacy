@@ -1,0 +1,6 @@
+[LINK]
+Application=DETANG_v2t.MBX
+Module=d:\mi_tools\liebe\lib\str_lib.mbo
+Module=d:\mi_tools\liebe\lib\MiStdlib.mbo
+Module=detang_v2t.mbo
+'Module=more modules *.MBO

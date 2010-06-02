@@ -1,0 +1,359 @@
+!Workspace
+!Version 550
+!Charset WindowsLatin1
+Select *  from mdl_DirSC_ac where (FloodRefElev-8) <= SanSwrCrown  into Qy_FalsePositive noselect
+Select *  from mdl_DirSC_ac , DSCHGLs  where ( ( FloodRefElev - 8 ) > SanSwrCrown ) and ( mdl_DirSC_ac . DSCID = DSCHGLs . DSCID  and (surcharge>0 and calculatedDHGL < 10))  into Qy_TruePositive noselect  
+Select *  from mdl_DirSC_ac, DSCHGLs
+  where ((FloodRefElev-8) > SanSwrCrown) and (mdl_DirSC_ac.DSCID = DSCHGLs.DSCID) and (surcharge=0 or calculatedDHGL >= 10)
+  into Qy_TrueNegative noselect
+' AMM Following is now performed in Delphi via MapInfo object
+'Select *  from BFLinksE10  where Shape <> "CIRC" and DesignQ = 0  into SpecialPipesZero_Qry noselect
+'Run Application "\\Oberon\Grp117\_ATtemp\_MITools\MdlMap\wors\MpBody\SpecialPipesChk.mbx"
+Select *  from BFLinksE10  where DesignQ <> 0  into DsgnQnotZero_Qry noselect  
+Set Window MapBasic
+  Position (0.125,2.9375) Units "in"
+  Width 8 Units "in" Height 1.375 Units "in" Min
+Open Window MapBasic
+Map From Qy_FalsePositive,QyInflowNodes,Qy2ExternalMdl,Flood_parcel_hits_102001,mdl_links_ac,BFNodesE09,
+  PDX_Cad_Str_Lbl,SpecialPipesZero_qry,DsgnQnotZero_Qry,mdl_links_ac,mdl_surfsc_ac,QyOutfalls,
+  Qy_TruePositive,Qy_TrueNegative,PDX_Bridges,Tric_row,ProjMask,ProjArea,Waternew_rev0922 
+  Position (0.0916667,0.0916667) Units "in"
+  Width 7.09167 Units "in" Height 5.44167 Units "in" Min
+Set Window FrontWindow() ScrollBars Off Autoscroll On
+Set Map
+  CoordSys Earth Projection 3, 33, "ft", -120.5, 43.6666666667, 44.3333333333, 46, 8202099.7379999999, 0
+  Center (7628864.978,709380.2064)
+  Zoom 9191 Units "ft"
+  Preserve Zoom Display Zoom
+  Distance Units "ft" Area Units "sq mi" XY Units "ft"
+  Distance Type Cartesian
+shade 13 with CalculatedDHGL ranges apply all use all Brush (2,14737632,16777215) 
+  -500: 6 Brush (2,16711680,16777215) Pen (1,2,0) ,
+  6: 8 Brush (2,16767072,16777215) Pen (1,2,0) ,
+  8: 10 Brush (2,6356832,16777215) Pen (1,2,0)   
+  default Brush (2,16777215,16777215) Pen (1,2,0) 
+  # use 1 round 1 inflect off Brush (0,0,0) at 0 by 0 color 1 # 
+shade 9 with QqRatio ranges apply all use all Line (3,2,12632256) 
+  -20: 0 Line (3,2,12632256) ,
+  0: 0.7 Line (3,2,44031) ,
+  0.7: 1 Line (3,2,5308240) ,
+  1: 1.2 Line (3,2,16776960) ,
+  1.2: 1.5 Line (3,2,16744448) ,
+  1.5: 100 Line (3,2,16711680) 
+  default Line (1,1,16777215) 
+  # use 0 round 0.1 inflect off Line (1,2,0) at 0 by 0 color 1 # 
+shade 6 with Freeboard ranges apply all use all Symbol (41,0,8,"MapInfo Cartographic",0,0) 
+  0: 0.01 Symbol (36,16711680,10) ,
+  0.01: 2 Symbol (34,16711680,8) ,
+  2: 6 Symbol (34,16755200,8) ,
+  6: 8 Symbol (34,16776960,8) ,
+  8: 10 Symbol (34,11206570,8) ,
+  10: 120 Symbol (34,16777215,8) 
+  default Symbol (34,16768208,8) 
+  # use 1 round 1 inflect off Symbol (0,0,0) at 0 by 0 color 1 # 
+shade 5 with LinkType values 
+  "C" Line (1,1,16711680) ,
+  "D" Line (1,1,65280) ,
+  "IC" Line (1,1,255) ,
+  "IS" Line (1,1,16711935) ,
+  "PC" Line (25,46,16711935) ,
+  "PD" Line (25,46,32768) ,
+  "PS" Line (25,46,8388608) ,
+  "S" Line (1,1,32768) 
+  default   # color 1 # 
+Set Map
+  Layer 1
+    Display Global
+    Global Pen (1,2,65535)  Brush (8,65535,14737632)  Symbol (35,0,12)  Line (1,2,16754768)  Font ("Arial Narrow",1,9,0)
+    Label Line None Position Center Font ("Arial",0,9,0) Pen (1,2,0) 
+      With NGTOSan
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+  Layer 2
+    Display Global
+    Global   Symbol (68,8388608,18,"MapInfo Cartographic",289,270)   
+    Label Line None Position Below Right Font ("Arial Narrow",259,7,8388608,16777215) Pen (1,2,0) 
+      With "External Model"+Chr$(10)+"   Inflow"
+      Parallel On Auto On Overlap On Duplicates On PartialSegments On Offset 5
+      Visibility On
+  Layer 3
+    Display Global
+    Global   Symbol (68,8388608,18,"MapInfo Cartographic",289,0)   
+    Label Line Arrow Position Above Right Font ("Arial Narrow",259,7,8388608,16777215) Pen (1,2,0) 
+      With "To External"+Chr$(10)+"   Model"
+      Parallel On Auto On Overlap On Duplicates On Offset 5
+      Visibility On
+  Layer 4
+    Display Global
+    Global   Symbol (72,0,8,"MapInfo Cartographic",0,0)   
+    Label Line Arrow Position Right Font ("Arial",0,9,0) Pen (1,2,0) 
+      With ""
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+  Layer 5
+    Display Value
+    Global   Symbol (35,0,12)   
+    Selectable Off
+  Layer 6
+    Display Graphic
+    Global   Symbol (35,0,12)   
+    Label Line Arrow Position Above Font ("Arial",0,9,0) Pen (1,2,0) 
+      With USNode
+      Parallel On Auto Off Overlap Off Duplicates Off Offset 2
+      Visibility On
+  Layer 7
+    Display Value
+    Global   Symbol (35,0,12)   
+    Selectable Off
+  Layer 8
+    Display Graphic
+    Global   Symbol (35,0,12)   
+    Label Line Arrow Position Right Font ("Arial",0,9,0) Pen (1,2,0) 
+      With ""
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+  Layer 9
+    Display Global
+    Global   Symbol (35,0,12)   Font ("Arial Narrow",0,9,49344)
+    Label Line Arrow Position Right Font ("Arial",0,9,0) Pen (1,2,0) 
+      With ""
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+  Layer 10
+    Display Global
+    Global   Symbol (35,0,12)  Line (1,92,255)  
+    Label Line Arrow Position Above Font ("Arial",0,9,0) Pen (1,2,0) 
+      With ""
+      Parallel On Auto Off Overlap Off Duplicates Off Offset 2
+      Visibility On
+  Layer 11
+    Display Value
+    Global   Symbol (35,0,12)   
+    Selectable Off
+  Layer 12
+    Display Off
+    Global   Symbol (35,0,12)   
+    Label Line Arrow Position Above Font ("Arial",0,9,0) Pen (1,2,0) 
+      With USNode
+      Parallel On Auto Off Overlap Off Duplicates Off Offset 2
+      Visibility On
+  Layer 13
+    Display Global
+    Global   Symbol (35,0,12)  Line (12,1,0)  
+    Arrows On
+    Label Line Arrow Position Above Font ("Arial",0,9,0) Pen (1,2,0) 
+      With ""
+      Parallel On Auto Off Overlap Off Duplicates Off Offset 2
+      Visibility On	
+  Layer 14
+    Display Global
+    Global Pen (30,2,10526880)  Brush (1,16777215,16777215)  Symbol (35,0,12)   
+    Label Line None Position Center Font ("Arial",0,9,0) Pen (1,2,0) 
+      With ""
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+  Layer 15
+    Display Global
+    Global   Symbol (46,32768,18,"MapInfo Cartographic",256,0)   
+    Label Line None Position Right Font ("Arial",0,9,0) Pen (1,2,0) 
+      With ""
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+  Layer 16
+    Display Value
+    Global Pen (1,2,16777215)  Brush (1,16777072)  Symbol (35,0,12)   
+    Selectable Off
+  Layer 17
+    Display Global
+    Global Pen (1,2,16777215)  Brush (1,16777072)  Symbol (35,0,12)   
+    Label Line None Position Center Font ("Arial",0,9,0) Pen (1,2,0) 
+      With ""
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+	Layer 18
+    Display Global
+    Global Pen (1,2,0)  Brush (1,16777072)  Symbol (35,0,12)   
+    Label Line None Position Center Font ("Arial",0,9,0) Pen (1,2,0) 
+      With ""
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+  Layer 19
+    Display Global
+    Global Pen (1,2,6343679)  Brush (1,16777215,16777215)  Symbol (35,0,12)   
+    Label Line None Position Center Font ("Arial",0,9,0) Pen (1,2,0) 
+      With ""
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+  Layer 20
+    Display Global
+    Global Pen (1,2,44031)  Brush (1,16777215,16777215)  Symbol (35,0,12)   
+    Label Line None Position Center Font ("Arial",0,9,0) Pen (1,2,0) 
+      With ""
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+  Layer 21
+    Display Global
+    Global Pen (1,2,16777215)  Brush (15,14737632)  Symbol (35,0,12)   
+    Label Line None Position Center Font ("Arial",0,9,0) Pen (1,2,0) 
+      With ID
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+  Layer 22
+    Display Global
+    Global Pen (90,2,11559167)  Brush (1,16777215,16777215)  Symbol (35,0,12)   
+    Label Line None Position Center Font ("Arial",0,9,0) Pen (1,2,0) 
+      With ""
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+  Layer 23
+    Display Global
+    Global Pen (1,24,255)  Brush (2,12632319,16777215)  Symbol (46,40960,18,"MapInfo Cartographic",256,0)   Font ("Arial",0,9,16777215)
+    Label Line Arrow Position Right Font ("Arial",0,9,0) Pen (1,2,0) 
+      With ""
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+set legend 
+  layer 5 
+    display on 
+    shades off 
+    symbols off 
+    lines on 
+    count off 
+    title "Forcemains by LinkType" Font ("Arial Narrow",5,9,0)
+    subtitle auto Font ("Arial",0,8,0)
+    ascending on 
+    ranges Font ("Arial Narrow",1,8,0)
+      auto display off ,
+      auto display off ,
+      auto display off ,
+      auto display off ,
+      auto display off ,
+      "Pumped CSO (PC)" display on ,
+      "Pumped Storm (PD)" display on ,
+      "Pumped sanitary (PS)" display on ,
+      auto display off  
+set legend 
+  layer 7 
+    display on 
+    shades off 
+    symbols on 
+    lines off 
+    count on 
+    title "Manhole Freeboard (Ft.)" Font ("Arial Narrow",5,9,0)
+    subtitle "(Rim Elevation - HGL)" Font ("Arial Narrow",0,7,0)
+    ascending off 
+    ranges Font ("Arial Narrow",1,8,0)
+      auto display off ,
+      "FLOODED" display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on  
+set legend 
+  layer 11 
+    display on 
+    shades off 
+    symbols off 
+    lines on 
+    count on 
+    title "Pipe Surcharge Ratio" Font ("Arial Narrow",5,9,0)
+    subtitle "(Peak Flow / Design Flow  : DesignQ<>0)" Font ("Arial Narrow",0,7,7368816)
+    ascending off 
+    ranges Font ("Arial Narrow",1,8,0)
+      auto display off ,
+      "Below Zero" display on ,
+      "0.001 to 0.7" display on ,
+      "0.7 to 1.0" display on ,
+      "1.0 to 1.2" display on ,
+      "1.2 to 1.5" display on ,
+      "Higher than 1.5" display on  
+set legend 
+  layer 16 
+    display on 
+    shades on 
+    symbols off 
+    lines off 
+    count on 
+    title "Estimated Floor - Estimated HGL" Font ("Arial Narrow",5,9,0)
+    subtitle "(mdl_DirSC_ac by DeltaHGL)" Font ("Arial",0,7,0)
+    ascending on 
+    ranges Font ("Arial Narrow",1,8,0)
+      auto display off ,
+      "0 to 6" display on ,
+      auto display on ,
+      auto display on     
+Set Window FrontWindow() Title "Main Map"
+Set Map Window  windowinfo(Frontwindow(),13) Zoom Entire Layer "ProjArea"
+Create Cartographic Legend
+  Position (7.28333,0.075) Units "in"
+  Width 3.575 Units "in" Height 4.26667 Units "in" 
+  Window Title "Legend of Main Map"
+  Scrollbars Off
+  Custom
+  Default Frame Style "# Legend" Font ("Arial Narrow",1,8,0)
+  Frame From Layer 14
+    Position (10.0521,90.1355) Units "in"
+    Border Pen (0,1,0) 
+    Using Column object 
+    Style Font ("Arial Narrow",1,8,0)
+      Text "Surface Subcatchment" Region Pen (30,2,10526880)  Brush (1,0,16777215) 
+  Frame From Layer 15
+    Position (10.0625,89.6249) Units "in"
+    Border Pen (0,1,0) 
+    Using Column object 
+    Style Font ("Arial Narrow",1,8,0)
+      Text "Outfall Locations" Symbol (46,32768,18,"MapInfo Cartographic",256,0) 
+  Frame From Layer 7
+    Position (10.1874,88.177) Units "in"
+    Border Pen (1,1,0) 
+  Frame From Layer 4
+    Position (10.0417,89.375) Units "in"
+    Border Pen (0,1,0) 
+    Using Column object 
+    Style Font ("Arial Narrow",1,8,0)
+      Text "Basement Flooding \n       Reports" Symbol (72,0,8,"MapInfo Cartographic",0,0) 
+  Frame From Layer 22
+    Position (10.0521,89.8958) Units "in"
+    Border Pen (0,1,0) 
+    Using Column object 
+    Style Font ("Arial Narrow",1,8,0)
+      Text "Project Area" Region Pen (90,2,11559167)  Brush (1,0,16777215) 
+  Frame From Layer 16
+    Position (11.6458,87.7604) Units "in"
+    Border Pen (0,1,0) 
+  Frame From Layer 18
+    Position (11.6458,86.9) Units "in"
+    Border Pen (0,1,0) 
+    Style Font ("Arial Narrow",1,8,0)
+      Text "Surcharge = 0 OR\nDeltaHGL > 10" Region Pen (1,2,0)  Brush (0,0,0) 
+  Frame From Layer 2
+    Position (10.0209,88.625) Units "in"
+    Border Pen (0,1,0) 
+    Using Column object 
+    Style Font ("Arial Narrow",1,8,0)
+      Text "Inflow from\nExternal Model" Symbol (68,8388608,18,"MapInfo Cartographic",289,270) 
+  Frame From Layer 3
+    Position (10.0312,89.0105) Units "in"
+    Border Pen (0,1,0) 
+    Using Column object 
+    Style Font ("Arial Narrow",1,8,0)
+      Text "Transfer Point \nTo External Model" Symbol (68,8388608,18,"MapInfo Cartographic",289,0) 
+  Frame From Layer 5
+    Position (11.5823,88.5292) Units "in"
+    Border Pen (0,1,0) 
+  Frame From Layer 1
+    Position (11.8011,86.5447) Units "in"
+    Border Pen (0,1,0) 
+    Using Column object 
+    Style Font ("Arial Narrow",1,8,0)
+      Text "Sewer Crown > =\nBasement Elev." Region Pen (1,2,65535)  Brush (8,65535,14737632) 
+  Frame From Layer 10
+    Position (11.7594,88.873) Units "in"
+    Border Pen (0,1,0) 
+    Using Column object 
+    Style Font ("Arial Narrow",1,8,0)
+      Text "Special Shaped Pipes\n  (DesignQ = 0)" Line Pen (1,92,255) 
+  Frame From Layer 11
+    Position (11.6448,90.2584) Units "in"
+    Border Pen (1,1,0) 
