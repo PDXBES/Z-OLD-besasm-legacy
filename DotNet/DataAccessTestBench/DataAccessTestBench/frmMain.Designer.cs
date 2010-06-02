@@ -43,6 +43,7 @@
       this.btnLoadE19Data = new Infragistics.Win.Misc.UltraButton();
       this.dgvTableE19 = new System.Windows.Forms.DataGridView();
       this.tabSetDataSources = new System.Windows.Forms.TabPage();
+      this.btnLoadRpReport = new Infragistics.Win.Misc.UltraButton();
       this.btnChooseTestSwmmOutput = new Infragistics.Win.Misc.UltraButton();
       this.btnChooseTestAltPath = new Infragistics.Win.Misc.UltraButton();
       this.btnChooseTestModelPath = new Infragistics.Win.Misc.UltraButton();
@@ -50,7 +51,9 @@
       this.txtTestAltPath = new System.Windows.Forms.TextBox();
       this.txtTestModelPath = new System.Windows.Forms.TextBox();
       this.ofdModelDataSource = new System.Windows.Forms.OpenFileDialog();
-      this.btnLoadRpReport = new Infragistics.Win.Misc.UltraButton();
+      this.lblBaseModelPath = new Infragistics.Win.Misc.UltraLabel();
+      this.lblAlternativePath = new Infragistics.Win.Misc.UltraLabel();
+      this.lblModelOutputPath = new Infragistics.Win.Misc.UltraLabel();
       this.tabControl1.SuspendLayout();
       this.tabExecuteTestQueries.SuspendLayout();
       this.tabE18TableData.SuspendLayout();
@@ -197,6 +200,9 @@
       // 
       // tabSetDataSources
       // 
+      this.tabSetDataSources.Controls.Add(this.lblModelOutputPath);
+      this.tabSetDataSources.Controls.Add(this.lblAlternativePath);
+      this.tabSetDataSources.Controls.Add(this.lblBaseModelPath);
       this.tabSetDataSources.Controls.Add(this.btnLoadRpReport);
       this.tabSetDataSources.Controls.Add(this.btnChooseTestSwmmOutput);
       this.tabSetDataSources.Controls.Add(this.btnChooseTestAltPath);
@@ -212,57 +218,6 @@
       this.tabSetDataSources.Text = "Load RP Report";
       this.tabSetDataSources.UseVisualStyleBackColor = true;
       // 
-      // btnChooseTestSwmmOutput
-      // 
-      this.btnChooseTestSwmmOutput.ButtonStyle = Infragistics.Win.UIElementButtonStyle.VisualStudio2005Button;
-      this.btnChooseTestSwmmOutput.Location = new System.Drawing.Point(386, 90);
-      this.btnChooseTestSwmmOutput.Name = "btnChooseTestSwmmOutput";
-      this.btnChooseTestSwmmOutput.Size = new System.Drawing.Size(75, 20);
-      this.btnChooseTestSwmmOutput.TabIndex = 5;
-      this.btnChooseTestSwmmOutput.Text = "Browse";
-      this.btnChooseTestSwmmOutput.Click += new System.EventHandler(this.btnChooseTestSwmmOutput_Click);
-      // 
-      // btnChooseTestAltPath
-      // 
-      this.btnChooseTestAltPath.ButtonStyle = Infragistics.Win.UIElementButtonStyle.VisualStudio2005Button;
-      this.btnChooseTestAltPath.Location = new System.Drawing.Point(386, 64);
-      this.btnChooseTestAltPath.Name = "btnChooseTestAltPath";
-      this.btnChooseTestAltPath.Size = new System.Drawing.Size(75, 20);
-      this.btnChooseTestAltPath.TabIndex = 4;
-      this.btnChooseTestAltPath.Text = "Browse";
-      this.btnChooseTestAltPath.Click += new System.EventHandler(this.btnChooseTestAltPath_Click);
-      // 
-      // btnChooseTestModelPath
-      // 
-      this.btnChooseTestModelPath.ButtonStyle = Infragistics.Win.UIElementButtonStyle.VisualStudio2005Button;
-      this.btnChooseTestModelPath.Location = new System.Drawing.Point(386, 38);
-      this.btnChooseTestModelPath.Name = "btnChooseTestModelPath";
-      this.btnChooseTestModelPath.Size = new System.Drawing.Size(75, 20);
-      this.btnChooseTestModelPath.TabIndex = 3;
-      this.btnChooseTestModelPath.Text = "Browse";
-      this.btnChooseTestModelPath.Click += new System.EventHandler(this.btnChooseTestModelPath_Click);
-      // 
-      // txtSwmmOutputPath
-      // 
-      this.txtSwmmOutputPath.Location = new System.Drawing.Point(6, 90);
-      this.txtSwmmOutputPath.Name = "txtSwmmOutputPath";
-      this.txtSwmmOutputPath.Size = new System.Drawing.Size(373, 20);
-      this.txtSwmmOutputPath.TabIndex = 2;
-      // 
-      // txtTestAltPath
-      // 
-      this.txtTestAltPath.Location = new System.Drawing.Point(6, 64);
-      this.txtTestAltPath.Name = "txtTestAltPath";
-      this.txtTestAltPath.Size = new System.Drawing.Size(374, 20);
-      this.txtTestAltPath.TabIndex = 1;
-      // 
-      // txtTestModelPath
-      // 
-      this.txtTestModelPath.Location = new System.Drawing.Point(6, 38);
-      this.txtTestModelPath.Name = "txtTestModelPath";
-      this.txtTestModelPath.Size = new System.Drawing.Size(373, 20);
-      this.txtTestModelPath.TabIndex = 0;
-      // 
       // btnLoadRpReport
       // 
       this.btnLoadRpReport.ButtonStyle = Infragistics.Win.UIElementButtonStyle.VisualStudio2005Button;
@@ -272,6 +227,84 @@
       this.btnLoadRpReport.TabIndex = 6;
       this.btnLoadRpReport.Text = "Load RP Report";
       this.btnLoadRpReport.Click += new System.EventHandler(this.btnLoadRpReport_Click);
+      // 
+      // btnChooseTestSwmmOutput
+      // 
+      this.btnChooseTestSwmmOutput.ButtonStyle = Infragistics.Win.UIElementButtonStyle.VisualStudio2005Button;
+      this.btnChooseTestSwmmOutput.Location = new System.Drawing.Point(386, 138);
+      this.btnChooseTestSwmmOutput.Name = "btnChooseTestSwmmOutput";
+      this.btnChooseTestSwmmOutput.Size = new System.Drawing.Size(75, 20);
+      this.btnChooseTestSwmmOutput.TabIndex = 5;
+      this.btnChooseTestSwmmOutput.Text = "Browse";
+      this.btnChooseTestSwmmOutput.Click += new System.EventHandler(this.btnChooseTestSwmmOutput_Click);
+      // 
+      // btnChooseTestAltPath
+      // 
+      this.btnChooseTestAltPath.ButtonStyle = Infragistics.Win.UIElementButtonStyle.VisualStudio2005Button;
+      this.btnChooseTestAltPath.Location = new System.Drawing.Point(386, 92);
+      this.btnChooseTestAltPath.Name = "btnChooseTestAltPath";
+      this.btnChooseTestAltPath.Size = new System.Drawing.Size(75, 20);
+      this.btnChooseTestAltPath.TabIndex = 4;
+      this.btnChooseTestAltPath.Text = "Browse";
+      this.btnChooseTestAltPath.Click += new System.EventHandler(this.btnChooseTestAltPath_Click);
+      // 
+      // btnChooseTestModelPath
+      // 
+      this.btnChooseTestModelPath.ButtonStyle = Infragistics.Win.UIElementButtonStyle.VisualStudio2005Button;
+      this.btnChooseTestModelPath.Location = new System.Drawing.Point(386, 45);
+      this.btnChooseTestModelPath.Name = "btnChooseTestModelPath";
+      this.btnChooseTestModelPath.Size = new System.Drawing.Size(75, 20);
+      this.btnChooseTestModelPath.TabIndex = 3;
+      this.btnChooseTestModelPath.Text = "Browse";
+      this.btnChooseTestModelPath.Click += new System.EventHandler(this.btnChooseTestModelPath_Click);
+      // 
+      // txtSwmmOutputPath
+      // 
+      this.txtSwmmOutputPath.Location = new System.Drawing.Point(5, 138);
+      this.txtSwmmOutputPath.Name = "txtSwmmOutputPath";
+      this.txtSwmmOutputPath.Size = new System.Drawing.Size(373, 20);
+      this.txtSwmmOutputPath.TabIndex = 2;
+      // 
+      // txtTestAltPath
+      // 
+      this.txtTestAltPath.Location = new System.Drawing.Point(5, 92);
+      this.txtTestAltPath.Name = "txtTestAltPath";
+      this.txtTestAltPath.Size = new System.Drawing.Size(374, 20);
+      this.txtTestAltPath.TabIndex = 1;
+      // 
+      // txtTestModelPath
+      // 
+      this.txtTestModelPath.Location = new System.Drawing.Point(6, 45);
+      this.txtTestModelPath.Name = "txtTestModelPath";
+      this.txtTestModelPath.Size = new System.Drawing.Size(373, 20);
+      this.txtTestModelPath.TabIndex = 0;
+      // 
+      // lblBaseModelPath
+      // 
+      this.lblBaseModelPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+      this.lblBaseModelPath.Location = new System.Drawing.Point(6, 25);
+      this.lblBaseModelPath.Name = "lblBaseModelPath";
+      this.lblBaseModelPath.Size = new System.Drawing.Size(123, 14);
+      this.lblBaseModelPath.TabIndex = 7;
+      this.lblBaseModelPath.Text = "Load Base Model Path";
+      // 
+      // lblAlternativePath
+      // 
+      this.lblAlternativePath.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+      this.lblAlternativePath.Location = new System.Drawing.Point(5, 71);
+      this.lblAlternativePath.Name = "lblAlternativePath";
+      this.lblAlternativePath.Size = new System.Drawing.Size(139, 15);
+      this.lblAlternativePath.TabIndex = 8;
+      this.lblAlternativePath.Text = "Load Alternative Path";
+      // 
+      // lblModelOutputPath
+      // 
+      this.lblModelOutputPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+      this.lblModelOutputPath.Location = new System.Drawing.Point(6, 118);
+      this.lblModelOutputPath.Name = "lblModelOutputPath";
+      this.lblModelOutputPath.Size = new System.Drawing.Size(121, 14);
+      this.lblModelOutputPath.TabIndex = 9;
+      this.lblModelOutputPath.Text = "Load Model Results";
       // 
       // frmMain
       // 
@@ -321,6 +354,9 @@
     private System.Windows.Forms.TextBox txtTestModelPath;
     private System.Windows.Forms.OpenFileDialog ofdModelDataSource;
     private Infragistics.Win.Misc.UltraButton btnLoadRpReport;
+    private Infragistics.Win.Misc.UltraLabel lblModelOutputPath;
+    private Infragistics.Win.Misc.UltraLabel lblAlternativePath;
+    private Infragistics.Win.Misc.UltraLabel lblBaseModelPath;
 
   }
 }
