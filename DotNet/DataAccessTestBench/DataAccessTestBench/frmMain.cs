@@ -54,7 +54,14 @@ namespace DataAccessTestBench
       parameters.Add("ModelPath", new ReportBase.Parameter("ModelPath", testModelPath));
       parameters.Add("AlternativePath", new ReportBase.Parameter("AlternativePath", testAlternativePath));
       parameters.Add("SwmmOutputFile", new ReportBase.Parameter("SwmmOutputFile", testSwmmOutput));
-      rpReport.LoadAuxilaryData(parameters);
+      try
+      {
+        rpReport.LoadAuxilaryData(parameters);
+      }
+      catch (Exception e)
+      {
+        MessageBox.Show(e.Message);
+      }
     }
 
     private void frmMain_Load(object sender, EventArgs e)

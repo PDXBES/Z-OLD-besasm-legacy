@@ -12112,11 +12112,11 @@ namespace SystemsAnalysis.DataAccess {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string FocusArea {
                 get {
-                    try {
-                        return ((string)(this[this.tableAltStreetTargets.FocusAreaColumn]));
+                    if (this.IsFocusAreaNull()) {
+                        return string.Empty;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'FocusArea\' in table \'AltStreetTargets\' is DBNull.", e);
+                    else {
+                        return ((string)(this[this.tableAltStreetTargets.FocusAreaColumn]));
                     }
                 }
                 set {

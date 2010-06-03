@@ -93,13 +93,17 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
         modelPath = Path.GetDirectoryName(modelPath);
       }
 
-      ModelConfigurationDataSet modelConfigDS = new ModelConfigurationDataSet(Path.GetFullPath(modelPath));
-      ModelConfigurationDataSet.AlternativeRow[] altRow = modelConfigDS.GetIncludedAlternatives();
-      alternativePath = altRow[0].BaseModel + "alternatives\\" + altRow[0].Name;
-
+      //Passing the AlternativePath is optional. If it is not passed, then read it from the Output Model's Model.xml file
       if (!AuxilaryData.ContainsKey("AlternativePath"))
       {
+        ModelConfigurationDataSet modelConfigDS = new ModelConfigurationDataSet(Path.GetFullPath(modelPath));
+        ModelConfigurationDataSet.AlternativeRow[] altRow = modelConfigDS.GetIncludedAlternatives();
+        alternativePath = altRow[altRow.Length - 1].BaseModel + "alternatives\\" + altRow[altRow.Length - 1].Name;
         AuxilaryData.Add("AlternativePath", new Parameter("AlternativePath", alternativePath));
+      }
+      else
+      {
+        alternativePath = AuxilaryData["AlternativePath"].Value;
       }
       base.LoadAuxilaryData(AuxilaryData);
       //alternativePath = AuxilaryData["AlternativePath"].Value;

@@ -64,6 +64,19 @@ namespace SystemsAnalysis.Modeling.Alternatives
         this.altNodes = new AltNodes(alternativePath);
         this.altDscs = new AltDscs(alternativePath);
         LoadAltParkingTargets(alternativePath);
+
+        List<int> missingAltRoofTargets;
+        missingAltRoofTargets = ValidateAltRoofTargets(alternativePath);
+        if (missingAltRoofTargets.Count != 0)
+        {
+          string badICs = "Found ICs that are not contained in the base model: ";
+          foreach (int i in missingAltRoofTargets)
+          {
+            badICs += i + " ";
+          }
+          throw new Exception(badICs);
+        }
+
         LoadAltRoofTargets(alternativePath);
         LoadAltStreetTargets(alternativePath);
         LoadFocusAreaList();
@@ -313,6 +326,26 @@ namespace SystemsAnalysis.Modeling.Alternatives
       }
     }
 
+    public List<int> ValidateAltRoofTargets(string alternativePath)
+    {
+      List<int> missingAltRoofTargets = new List<int>();
+      DataAccess.AlternativeDataSetTableAdapters.AltRoofTargetsTableAdapter altRoofTargetsAdapter =
+          new SystemsAnalysis.DataAccess.AlternativeDataSetTableAdapters.AltRoofTargetsTableAdapter(alternativePath);
+        DataAccess.AlternativeDataSet.AltRoofTargetsDataTable altRoofTargetsTable =
+          new SystemsAnalysis.DataAccess.AlternativeDataSet.AltRoofTargetsDataTable();
+
+        altRoofTargetsAdapter.Fill(altRoofTargetsTable);
+
+        altRoofTargets = new Dictionary<int, RoofTarget>();
+        foreach (DataAccess.AlternativeDataSet.AltRoofTargetsRow row in altRoofTargetsTable)
+        {
+          if (!baseModel.ModelRoofTargets.ContainsKey(row.ICID))
+          {
+            missingAltRoofTargets.Add(row.ICID);
+          }          
+        }
+        return missingAltRoofTargets;
+    }
     void LoadAltRoofTargets(string alternativePath)
     {
       try
@@ -327,6 +360,10 @@ namespace SystemsAnalysis.Modeling.Alternatives
         altRoofTargets = new Dictionary<int, RoofTarget>();
         foreach (DataAccess.AlternativeDataSet.AltRoofTargetsRow row in altRoofTargetsTable)
         {
+          if (!baseModel.ModelRoofTargets.ContainsKey(row.ICID))
+          {
+            throw new Exception("AltRoofTarget with ICID '" + row.ICID + "' not found in Base Model.");       
+          }
           altRoofTargets.Add(row.ICID, new RoofTarget(baseModel.ModelRoofTargets[row.ICID], row.IsFocusAreaNull() ? "" : row.FocusArea));
           altRoofTargets[row.ICID].ToBeBuilt = row.BuildModelIC;
           altRoofTargets[row.ICID].Constructed = row.Constructed;
