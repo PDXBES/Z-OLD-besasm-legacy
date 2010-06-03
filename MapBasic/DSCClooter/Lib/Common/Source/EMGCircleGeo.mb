@@ -1,0 +1,20 @@
+'
+'	Circle Geometry
+'
+include "MapBasic.def"
+include "..\inc\EMGCircleGeo.def"
+
+function MakeCircle(x as float, y as float, Radius as float) as object
+dim NewCircle as object
+dim MBRX1, MBRY1, MBRX2, MBRY2 as float
+
+	MBRX1 = x - radius
+	MBRX2 = x + radius
+	MBRY1 = y - radius
+	MBRY2 = y + radius
+
+	
+	Create Ellipse into variable NewCircle (MBRX1, MBRY1)(MBRX2, MBRY2)
+	MakeCircle = NewCircle
+
+End Function
