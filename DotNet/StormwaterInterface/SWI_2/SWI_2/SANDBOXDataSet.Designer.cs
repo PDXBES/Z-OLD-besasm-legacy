@@ -9426,7 +9426,8 @@ SELECT ditch_id, global_id, survey_page_id, node, facing, depth_in, top_width_in
             this._adapter.InsertCommand.Connection = this.Connection;
             this._adapter.InsertCommand.CommandText = "INSERT INTO [GIS].[SWSP_EVALUATOR] ([initials], [last_name], [first_name]) VALUES" +
                 " (@initials, @last_name, @first_name);\r\nSELECT evaluator_id, initials, last_name" +
-                ", first_name FROM SWSP_EVALUATOR WHERE (evaluator_id = SCOPE_IDENTITY())";
+                ", first_name FROM SWSP_EVALUATOR WHERE (evaluator_id = SCOPE_IDENTITY()) ORDER B" +
+                "Y initials";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@initials", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "initials", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@last_name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "last_name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -9434,7 +9435,7 @@ SELECT ditch_id, global_id, survey_page_id, node, facing, depth_in, top_width_in
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
             this._adapter.UpdateCommand.CommandText = @"UPDATE [GIS].[SWSP_EVALUATOR] SET [initials] = @initials, [last_name] = @last_name, [first_name] = @first_name WHERE (([evaluator_id] = @Original_evaluator_id) AND ([initials] = @Original_initials) AND ((@IsNull_last_name = 1 AND [last_name] IS NULL) OR ([last_name] = @Original_last_name)) AND ((@IsNull_first_name = 1 AND [first_name] IS NULL) OR ([first_name] = @Original_first_name)));
-SELECT evaluator_id, initials, last_name, first_name FROM SWSP_EVALUATOR WHERE (evaluator_id = @evaluator_id)";
+SELECT evaluator_id, initials, last_name, first_name FROM SWSP_EVALUATOR WHERE (evaluator_id = @evaluator_id) ORDER BY initials";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@initials", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "initials", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@last_name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "last_name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -9459,7 +9460,8 @@ SELECT evaluator_id, initials, last_name, first_name FROM SWSP_EVALUATOR WHERE (
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT evaluator_id, initials, last_name, first_name FROM GIS.SWSP_EVALUATOR";
+            this._commandCollection[0].CommandText = "SELECT evaluator_id, initials, last_name, first_name FROM GIS.SWSP_EVALUATOR ORDE" +
+                "R BY initials";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[1].Connection = this.Connection;
@@ -10526,14 +10528,14 @@ SELECT global_id, description FROM SWSP_GLOBAL_ID WHERE (global_id = @global_id)
             this._adapter.InsertCommand.Connection = this.Connection;
             this._adapter.InsertCommand.CommandText = "INSERT INTO [GIS].[SWSP_MATERIAL_TYPE] ([material], [description]) VALUES (@mater" +
                 "ial, @description);\r\nSELECT material_type_id, material, description FROM SWSP_MA" +
-                "TERIAL_TYPE WHERE (material_type_id = SCOPE_IDENTITY())";
+                "TERIAL_TYPE WHERE (material_type_id = SCOPE_IDENTITY()) ORDER BY material";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@material", global::System.Data.SqlDbType.Char, 0, global::System.Data.ParameterDirection.Input, 0, 0, "material", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@description", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "description", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
             this._adapter.UpdateCommand.CommandText = @"UPDATE [GIS].[SWSP_MATERIAL_TYPE] SET [material] = @material, [description] = @description WHERE (([material_type_id] = @Original_material_type_id) AND ([material] = @Original_material) AND ((@IsNull_description = 1 AND [description] IS NULL) OR ([description] = @Original_description)));
-SELECT material_type_id, material, description FROM SWSP_MATERIAL_TYPE WHERE (material_type_id = @material_type_id)";
+SELECT material_type_id, material, description FROM SWSP_MATERIAL_TYPE WHERE (material_type_id = @material_type_id) ORDER BY material";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@material", global::System.Data.SqlDbType.Char, 0, global::System.Data.ParameterDirection.Input, 0, 0, "material", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@description", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "description", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -10555,7 +10557,8 @@ SELECT material_type_id, material, description FROM SWSP_MATERIAL_TYPE WHERE (ma
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT material_type_id, material, description FROM GIS.SWSP_MATERIAL_TYPE";
+            this._commandCollection[0].CommandText = "SELECT material_type_id, material, description FROM GIS.SWSP_MATERIAL_TYPE ORDER " +
+                "BY material";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[1].Connection = this.Connection;
@@ -11962,14 +11965,14 @@ SELECT pipe_id, global_id, survey_page_id, us_node, ds_node, us_depth_in, ds_dep
             this._adapter.InsertCommand.Connection = this.Connection;
             this._adapter.InsertCommand.CommandText = "INSERT INTO [GIS].[SWSP_SHAPE_TYPE] ([shape], [description]) VALUES (@shape, @des" +
                 "cription);\r\nSELECT shape_type_id, shape, description FROM SWSP_SHAPE_TYPE WHERE " +
-                "(shape_type_id = SCOPE_IDENTITY())";
+                "(shape_type_id = SCOPE_IDENTITY()) ORDER BY shape";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@shape", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "shape", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@description", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "description", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
             this._adapter.UpdateCommand.CommandText = @"UPDATE [GIS].[SWSP_SHAPE_TYPE] SET [shape] = @shape, [description] = @description WHERE (([shape_type_id] = @Original_shape_type_id) AND ([shape] = @Original_shape) AND ((@IsNull_description = 1 AND [description] IS NULL) OR ([description] = @Original_description)));
-SELECT shape_type_id, shape, description FROM SWSP_SHAPE_TYPE WHERE (shape_type_id = @shape_type_id)";
+SELECT shape_type_id, shape, description FROM SWSP_SHAPE_TYPE WHERE (shape_type_id = @shape_type_id) ORDER BY shape";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@shape", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "shape", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@description", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "description", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -11991,7 +11994,7 @@ SELECT shape_type_id, shape, description FROM SWSP_SHAPE_TYPE WHERE (shape_type_
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT shape_type_id, shape, description FROM GIS.SWSP_SHAPE_TYPE";
+            this._commandCollection[0].CommandText = "SELECT shape_type_id, shape, description FROM GIS.SWSP_SHAPE_TYPE ORDER BY shape";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[1].Connection = this.Connection;
@@ -12704,7 +12707,7 @@ SELECT subwatershed_id, watershed_id, subwatershed, description FROM SWSP_SUBWAT
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
             this._adapter.InsertCommand.CommandText = @"INSERT INTO [SWSP_SURVEY_PAGE] ([view_id], [page_number], [date], [weather], [Comment]) VALUES (@view_id, @page_number, @date, @weather, @Comment);
-SELECT survey_page_id, view_id, page_number, date, weather, Comment FROM SWSP_SURVEY_PAGE WHERE (survey_page_id = SCOPE_IDENTITY())";
+SELECT survey_page_id, view_id, page_number, date, weather, Comment FROM SWSP_SURVEY_PAGE WHERE (survey_page_id = SCOPE_IDENTITY()) ORDER BY view_id, page_number";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@view_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "view_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@page_number", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "page_number", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -12714,7 +12717,7 @@ SELECT survey_page_id, view_id, page_number, date, weather, Comment FROM SWSP_SU
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
             this._adapter.UpdateCommand.CommandText = @"UPDATE [SWSP_SURVEY_PAGE] SET [view_id] = @view_id, [page_number] = @page_number, [date] = @date, [weather] = @weather, [Comment] = @Comment WHERE (([survey_page_id] = @Original_survey_page_id) AND ((@IsNull_view_id = 1 AND [view_id] IS NULL) OR ([view_id] = @Original_view_id)) AND ((@IsNull_page_number = 1 AND [page_number] IS NULL) OR ([page_number] = @Original_page_number)) AND ((@IsNull_date = 1 AND [date] IS NULL) OR ([date] = @Original_date)) AND ((@IsNull_weather = 1 AND [weather] IS NULL) OR ([weather] = @Original_weather)));
-SELECT survey_page_id, view_id, page_number, date, weather, Comment FROM SWSP_SURVEY_PAGE WHERE (survey_page_id = @survey_page_id)";
+SELECT survey_page_id, view_id, page_number, date, weather, Comment FROM SWSP_SURVEY_PAGE WHERE (survey_page_id = @survey_page_id) ORDER BY view_id, page_number";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@view_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "view_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@page_number", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "page_number", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -12741,12 +12744,18 @@ SELECT survey_page_id, view_id, page_number, date, weather, Comment FROM SWSP_SU
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT survey_page_id, view_id, page_number, date, weather, Comment FROM SWSP_SUR" +
-                "VEY_PAGE";
+                "VEY_PAGE ORDER BY view_id, page_number";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[1].Connection = this.Connection;
+            this._commandCollection[1].CommandText = "DELETE FROM [SWSP_SURVEY_PAGE] WHERE ([survey_page_id] = @Original_survey_page_id" +
+                ") ";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_survey_page_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "survey_page_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -12988,6 +12997,29 @@ SELECT survey_page_id, view_id, page_number, date, weather, Comment FROM SWSP_SU
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
         public virtual int Update(global::System.Nullable<int> view_id, global::System.Nullable<int> page_number, global::System.Nullable<global::System.DateTime> date, string weather, string Comment, int Original_survey_page_id, global::System.Nullable<int> Original_view_id, global::System.Nullable<int> Original_page_number, global::System.Nullable<global::System.DateTime> Original_date, string Original_weather) {
             return this.Update(view_id, page_number, date, weather, Comment, Original_survey_page_id, Original_view_id, Original_page_number, Original_date, Original_weather, Original_survey_page_id);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, false)]
+        public virtual int DeleteQuery(int Original_survey_page_id) {
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[1];
+            command.Parameters[0].Value = ((int)(Original_survey_page_id));
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            int returnValue;
+            try {
+                returnValue = command.ExecuteNonQuery();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            return returnValue;
         }
     }
     
@@ -13499,10 +13531,8 @@ SELECT survey_page_id, evaluator_id FROM SWSP_SURVEY_PAGE_EVALUATOR WHERE (evalu
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_description", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "description", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [GIS].[SWSP_VIEW] ([subwatershed_id], [view_number], [description]) V" +
-                "ALUES (@subwatershed_id, @view_number, @description);\r\nSELECT view_id, subwaters" +
-                "hed_id, view_number, description FROM SWSP_VIEW WHERE (view_id = SCOPE_IDENTITY(" +
-                "))";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [GIS].[SWSP_VIEW] ([subwatershed_id], [view_number], [description]) VALUES (@subwatershed_id, @view_number, @description);
+SELECT view_id, subwatershed_id, view_number, description FROM SWSP_VIEW WHERE (view_id = SCOPE_IDENTITY()) ORDER BY view_number";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@subwatershed_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "subwatershed_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@view_number", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "view_number", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -13510,7 +13540,7 @@ SELECT survey_page_id, evaluator_id FROM SWSP_SURVEY_PAGE_EVALUATOR WHERE (evalu
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
             this._adapter.UpdateCommand.CommandText = @"UPDATE [GIS].[SWSP_VIEW] SET [subwatershed_id] = @subwatershed_id, [view_number] = @view_number, [description] = @description WHERE (([view_id] = @Original_view_id) AND ([subwatershed_id] = @Original_subwatershed_id) AND ([view_number] = @Original_view_number) AND ((@IsNull_description = 1 AND [description] IS NULL) OR ([description] = @Original_description)));
-SELECT view_id, subwatershed_id, view_number, description FROM SWSP_VIEW WHERE (view_id = @view_id)";
+SELECT view_id, subwatershed_id, view_number, description FROM SWSP_VIEW WHERE (view_id = @view_id) ORDER BY view_number";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@subwatershed_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "subwatershed_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@view_number", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "view_number", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -13534,7 +13564,8 @@ SELECT view_id, subwatershed_id, view_number, description FROM SWSP_VIEW WHERE (
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[3];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT view_id, subwatershed_id, view_number, description FROM GIS.SWSP_VIEW";
+            this._commandCollection[0].CommandText = "SELECT view_id, subwatershed_id, view_number, description FROM GIS.SWSP_VIEW ORDE" +
+                "R BY view_number";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[1].Connection = this.Connection;
