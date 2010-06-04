@@ -11,9 +11,17 @@ namespace SWI_2
 {
     public partial class FormAddView : Form
     {
+        private int _MapNo;
+
         public FormAddView()
         {
             InitializeComponent();
+        }
+
+        public int MapNo
+        {
+            get { return _MapNo; }
+            set { _MapNo = value; }
         }
 
         private void buttonOK_Click(object sender, EventArgs e)
