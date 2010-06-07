@@ -7,6 +7,10 @@ namespace SystemsAnalysis.DataAccess
 {
   public partial class StormwaterControlsDataSet
   {
+    partial class AltRoofTargetsDataTable
+    {
+    }
+  
     public void InitStormwaterControlDataSet(string modelPath)
     {      
       StormwaterControlsDataSetTableAdapters.mdl_dirsc_acTableAdapter mdlDscTA;
