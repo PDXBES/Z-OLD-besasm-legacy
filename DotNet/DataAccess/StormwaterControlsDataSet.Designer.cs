@@ -11637,11 +11637,11 @@ namespace SystemsAnalysis.DataAccess {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string FocusArea {
                 get {
-                    try {
-                        return ((string)(this[this.tableAltRoofTargets.FocusAreaColumn]));
+                    if (this.IsFocusAreaNull()) {
+                        return string.Empty;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'FocusArea\' in table \'AltRoofTargets\' is DBNull.", e);
+                    else {
+                        return ((string)(this[this.tableAltRoofTargets.FocusAreaColumn]));
                     }
                 }
                 set {
@@ -11882,11 +11882,11 @@ namespace SystemsAnalysis.DataAccess {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string FocusArea {
                 get {
-                    try {
-                        return ((string)(this[this.tableAltParkingTargets.FocusAreaColumn]));
+                    if (this.IsFocusAreaNull()) {
+                        return string.Empty;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'FocusArea\' in table \'AltParkingTargets\' is DBNull.", e);
+                    else {
+                        return ((string)(this[this.tableAltParkingTargets.FocusAreaColumn]));
                     }
                 }
                 set {
