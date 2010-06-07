@@ -23,10 +23,10 @@ namespace SWI_2
             Brush _FillBrush;
 
             // Get the item from the collection.
-            TabPage _TabPage = tabControl1.TabPages[e.Index];
+            TabPage _TabPage = tabControlFormSWSPFieldDataAdministration.TabPages[e.Index];
 
             // Get the real bounds for the tab rectangle.
-            Rectangle _TabBounds = tabControl1.GetTabRect(e.Index);
+            Rectangle _TabBounds = tabControlFormSWSPFieldDataAdministration.GetTabRect(e.Index);
 
             if (e.State == DrawItemState.Selected)
             {
@@ -117,7 +117,7 @@ namespace SWI_2
             this.sWSPWATERSHEDBindingSource.EndEdit();
             this.sWSP_WATERSHEDTableAdapter.Update(sANDBOXDataSet);
             this.sWSP_WATERSHEDTableAdapter.Fill((SANDBOXDataSet.SWSP_WATERSHEDDataTable)((SANDBOXDataSet)this.sWSPWATERSHEDBindingSource.DataSource).SWSP_WATERSHED);
-            dataGridView1.Refresh();
+            dataGridViewWatersheds.Refresh();
         }
 
         private void buttonWatershedsDelete_Click(object sender, EventArgs e)
@@ -125,7 +125,7 @@ namespace SWI_2
             this.sWSP_WATERSHEDTableAdapter.DeleteQuery((int)(((System.Data.DataRowView)sWSPWATERSHEDBindingSource.Current)["watershed_id"]));
             this.sWSP_WATERSHEDTableAdapter.Update(sANDBOXDataSet);
             this.sWSP_WATERSHEDTableAdapter.Fill((SANDBOXDataSet.SWSP_WATERSHEDDataTable)((SANDBOXDataSet)this.sWSPWATERSHEDBindingSource.DataSource).SWSP_WATERSHED);
-            dataGridView1.Refresh();
+            dataGridViewWatersheds.Refresh();
         }
 
         private void buttonSubwatershedsAdd_Click(object sender, EventArgs e)
@@ -139,7 +139,7 @@ namespace SWI_2
             this.fKSUBWATERSHEDWATERSHEDBindingSource.EndEdit();
             this.sWSP_SUBWATERSHEDTableAdapter.Update(sANDBOXDataSet);
             this.sWSP_SUBWATERSHEDTableAdapter.Fill((SANDBOXDataSet.SWSP_SUBWATERSHEDDataTable)((SANDBOXDataSet)this.sWSPWATERSHEDBindingSource.DataSource).SWSP_SUBWATERSHED);
-            dataGridView2.Refresh();
+            dataGridViewSubwatersheds.Refresh();
         }
 
         private void buttonSubwatershedsDelete_Click(object sender, EventArgs e)
@@ -147,7 +147,7 @@ namespace SWI_2
             this.sWSP_SUBWATERSHEDTableAdapter.DeleteQuery((int)(((System.Data.DataRowView)fKSUBWATERSHEDWATERSHEDBindingSource.Current)["subwatershed_id"]));
             this.sWSP_SUBWATERSHEDTableAdapter.Update(sANDBOXDataSet);
             this.sWSP_SUBWATERSHEDTableAdapter.Fill((SANDBOXDataSet.SWSP_SUBWATERSHEDDataTable)((SANDBOXDataSet)this.sWSPWATERSHEDBindingSource.DataSource).SWSP_SUBWATERSHED);
-            dataGridView1.Refresh();
+            dataGridViewWatersheds.Refresh();
         }
 
         private void buttonEvaluatorsAdd_Click(object sender, EventArgs e)
@@ -161,7 +161,7 @@ namespace SWI_2
             this.sWSPEVALUATORBindingSource.EndEdit();
             this.sWSP_EVALUATORTableAdapter.Update(sANDBOXDataSet);
             this.sWSP_EVALUATORTableAdapter.Fill((SANDBOXDataSet.SWSP_EVALUATORDataTable)((SANDBOXDataSet)this.sWSPEVALUATORBindingSource.DataSource).SWSP_EVALUATOR);
-            dataGridView3.Refresh();
+            dataGridViewEvaluators.Refresh();
         }
 
         private void buttonEvaluatorsDelete_Click(object sender, EventArgs e)
@@ -169,7 +169,7 @@ namespace SWI_2
             this.sWSP_EVALUATORTableAdapter.DeleteQuery((int)(((System.Data.DataRowView)sWSPEVALUATORBindingSource.Current)["evaluator_id"]));
             this.sWSP_EVALUATORTableAdapter.Update(sANDBOXDataSet);
             this.sWSP_EVALUATORTableAdapter.Fill((SANDBOXDataSet.SWSP_EVALUATORDataTable)((SANDBOXDataSet)this.sWSPEVALUATORBindingSource.DataSource).SWSP_EVALUATOR);
-            dataGridView3.Refresh();
+            dataGridViewEvaluators.Refresh();
         }
 
         private void buttonCulvertOpeningsAdd_Click(object sender, EventArgs e)
@@ -183,7 +183,7 @@ namespace SWI_2
             this.sWSPCULVERTOPENINGTYPEBindingSource.EndEdit();
             this.sWSP_CULVERT_OPENING_TYPETableAdapter.Update(sANDBOXDataSet);
             this.sWSP_CULVERT_OPENING_TYPETableAdapter.Fill((SANDBOXDataSet.SWSP_CULVERT_OPENING_TYPEDataTable)((SANDBOXDataSet)this.sWSPCULVERTOPENINGTYPEBindingSource.DataSource).SWSP_CULVERT_OPENING_TYPE);
-            dataGridView4.Refresh();
+            dataGridViewCulvertOpenings.Refresh();
         }
 
         private void buttonCulvertOpeningsDelete_Click(object sender, EventArgs e)
@@ -191,7 +191,7 @@ namespace SWI_2
             this.sWSP_CULVERT_OPENING_TYPETableAdapter.DeleteQuery((int)((System.Data.DataRowView)sWSPCULVERTOPENINGTYPEBindingSource.Current)["culvert_opening_type_id"]);
             this.sWSP_CULVERT_OPENING_TYPETableAdapter.Update(sANDBOXDataSet);
             this.sWSP_CULVERT_OPENING_TYPETableAdapter.Fill((SANDBOXDataSet.SWSP_CULVERT_OPENING_TYPEDataTable)((SANDBOXDataSet)this.sWSPCULVERTOPENINGTYPEBindingSource.DataSource).SWSP_CULVERT_OPENING_TYPE);
-            dataGridView4.Refresh();
+            dataGridViewCulvertOpenings.Refresh();
         }
 
         private void buttonFacingsAdd_Click(object sender, EventArgs e)
@@ -205,7 +205,7 @@ namespace SWI_2
             this.sWSPFACINGTYPEBindingSource.EndEdit();
             this.sWSP_FACING_TYPETableAdapter.Update(sANDBOXDataSet);
             this.sWSP_FACING_TYPETableAdapter.Fill((SANDBOXDataSet.SWSP_FACING_TYPEDataTable)((SANDBOXDataSet)this.sWSPFACINGTYPEBindingSource.DataSource).SWSP_FACING_TYPE);
-            dataGridView5.Refresh();
+            dataGridViewFacings.Refresh();
         }
 
         private void buttonFacingsDelete_Click(object sender, EventArgs e)
@@ -213,12 +213,12 @@ namespace SWI_2
             this.sWSP_FACING_TYPETableAdapter.DeleteQuery((int)((System.Data.DataRowView)sWSPFACINGTYPEBindingSource.Current)["facing_type_id"]);
             this.sWSP_FACING_TYPETableAdapter.Update(sANDBOXDataSet);
             this.sWSP_FACING_TYPETableAdapter.Fill((SANDBOXDataSet.SWSP_FACING_TYPEDataTable)((SANDBOXDataSet)this.sWSPFACINGTYPEBindingSource.DataSource).SWSP_FACING_TYPE);
-            dataGridView5.Refresh();
+            dataGridViewFacings.Refresh();
         }
 
         private void buttonShapesAdd_Click(object sender, EventArgs e)
         {
-            this.sWSP_SHAPE_TYPETableAdapter.Insert("New Shape", "New Shape Description");
+            this.sWSP_SHAPE_TYPETableAdapter.Insert("NewShp", "New Shape Description");
             this.sWSP_SHAPE_TYPETableAdapter.Fill((SANDBOXDataSet.SWSP_SHAPE_TYPEDataTable)((SANDBOXDataSet)this.sWSPSHAPETYPEBindingSource.DataSource).SWSP_SHAPE_TYPE);
         }
 
@@ -227,7 +227,7 @@ namespace SWI_2
             this.sWSPSHAPETYPEBindingSource.EndEdit();
             this.sWSP_SHAPE_TYPETableAdapter.Update(sANDBOXDataSet);
             this.sWSP_SHAPE_TYPETableAdapter.Fill((SANDBOXDataSet.SWSP_SHAPE_TYPEDataTable)((SANDBOXDataSet)this.sWSPSHAPETYPEBindingSource.DataSource).SWSP_SHAPE_TYPE);
-            dataGridView6.Refresh();
+            dataGridViewShapes.Refresh();
         }
 
         private void buttonShapesDelete_Click(object sender, EventArgs e)
@@ -235,12 +235,12 @@ namespace SWI_2
             this.sWSP_SHAPE_TYPETableAdapter.DeleteQuery((int)((System.Data.DataRowView)sWSPSHAPETYPEBindingSource.Current)["shape_type_id"]);
             this.sWSP_SHAPE_TYPETableAdapter.Update(sANDBOXDataSet);
             this.sWSP_SHAPE_TYPETableAdapter.Fill((SANDBOXDataSet.SWSP_SHAPE_TYPEDataTable)((SANDBOXDataSet)this.sWSPSHAPETYPEBindingSource.DataSource).SWSP_SHAPE_TYPE);
-            dataGridView6.Refresh();
+            dataGridViewShapes.Refresh();
         }
 
         private void buttonMaterialsAdd_Click(object sender, EventArgs e)
         {
-            this.sWSP_MATERIAL_TYPETableAdapter.Insert("New Material", "New material description");
+            this.sWSP_MATERIAL_TYPETableAdapter.Insert("NewMat", "New material description");
             this.sWSP_MATERIAL_TYPETableAdapter.Fill((SANDBOXDataSet.SWSP_MATERIAL_TYPEDataTable)((SANDBOXDataSet)this.sWSPMATERIALTYPEBindingSource.DataSource).SWSP_MATERIAL_TYPE);
         }
 
@@ -249,7 +249,7 @@ namespace SWI_2
             this.sWSPMATERIALTYPEBindingSource.EndEdit();
             this.sWSP_MATERIAL_TYPETableAdapter.Update(sANDBOXDataSet);
             this.sWSP_MATERIAL_TYPETableAdapter.Fill((SANDBOXDataSet.SWSP_MATERIAL_TYPEDataTable)((SANDBOXDataSet)this.sWSPMATERIALTYPEBindingSource.DataSource).SWSP_MATERIAL_TYPE);
-            dataGridView7.Refresh();
+            dataGridViewMaterials.Refresh();
         }
 
         private void buttonMaterialsDelete_Click(object sender, EventArgs e)
@@ -257,7 +257,15 @@ namespace SWI_2
             this.sWSP_MATERIAL_TYPETableAdapter.DeleteQuery((int)((System.Data.DataRowView)sWSPMATERIALTYPEBindingSource.Current)["material_type_id"]);
             this.sWSP_MATERIAL_TYPETableAdapter.Update(sANDBOXDataSet);
             this.sWSP_MATERIAL_TYPETableAdapter.Fill((SANDBOXDataSet.SWSP_MATERIAL_TYPEDataTable)((SANDBOXDataSet)this.sWSPMATERIALTYPEBindingSource.DataSource).SWSP_MATERIAL_TYPE);
-            dataGridView7.Refresh();
+            dataGridViewMaterials.Refresh();
+        }
+
+        private void buttonDelete_Click(object sender, EventArgs e)
+        {
+            this.sWSP_SURVEY_PAGETableAdapter.DeleteQuery((int)((System.Data.DataRowView)sWSPSURVEYPAGEBindingSource.Current)["survey_page_id"]);
+            this.sWSP_SURVEY_PAGETableAdapter.Update(sANDBOXDataSet);
+            this.sWSP_SURVEY_PAGETableAdapter.Fill((SANDBOXDataSet.SWSP_SURVEY_PAGEDataTable)((SANDBOXDataSet)this.sWSPSURVEYPAGEBindingSource.DataSource).SWSP_SURVEY_PAGE);
+            dataGridViewViewsAndSurveys.Refresh();
         }
 
 

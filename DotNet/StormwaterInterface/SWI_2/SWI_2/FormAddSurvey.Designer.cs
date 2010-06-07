@@ -77,9 +77,9 @@
             this.labelView.AutoSize = true;
             this.labelView.Location = new System.Drawing.Point(12, 79);
             this.labelView.Name = "labelView";
-            this.labelView.Size = new System.Drawing.Size(30, 13);
+            this.labelView.Size = new System.Drawing.Size(28, 13);
             this.labelView.TabIndex = 2;
-            this.labelView.Text = "View";
+            this.labelView.Text = "Map";
             // 
             // labelAddPage
             // 
@@ -108,16 +108,36 @@
             // numericUpDownView
             // 
             this.numericUpDownView.Location = new System.Drawing.Point(128, 77);
+            this.numericUpDownView.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.numericUpDownView.Name = "numericUpDownView";
             this.numericUpDownView.Size = new System.Drawing.Size(55, 20);
             this.numericUpDownView.TabIndex = 6;
+            this.numericUpDownView.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // numericUpDownAddPage
             // 
             this.numericUpDownAddPage.Location = new System.Drawing.Point(127, 114);
+            this.numericUpDownAddPage.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.numericUpDownAddPage.Name = "numericUpDownAddPage";
             this.numericUpDownAddPage.Size = new System.Drawing.Size(54, 20);
             this.numericUpDownAddPage.TabIndex = 7;
+            this.numericUpDownAddPage.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // buttonOK
             // 

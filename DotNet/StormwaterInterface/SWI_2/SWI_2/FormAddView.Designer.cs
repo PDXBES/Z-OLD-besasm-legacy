@@ -74,16 +74,36 @@
             // numericUpDownAddFirstSurveyPage
             // 
             this.numericUpDownAddFirstSurveyPage.Location = new System.Drawing.Point(138, 112);
+            this.numericUpDownAddFirstSurveyPage.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.numericUpDownAddFirstSurveyPage.Name = "numericUpDownAddFirstSurveyPage";
             this.numericUpDownAddFirstSurveyPage.Size = new System.Drawing.Size(54, 20);
             this.numericUpDownAddFirstSurveyPage.TabIndex = 17;
+            this.numericUpDownAddFirstSurveyPage.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // numericUpDownAddView
             // 
             this.numericUpDownAddView.Location = new System.Drawing.Point(139, 75);
+            this.numericUpDownAddView.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.numericUpDownAddView.Name = "numericUpDownAddView";
             this.numericUpDownAddView.Size = new System.Drawing.Size(55, 20);
             this.numericUpDownAddView.TabIndex = 16;
+            this.numericUpDownAddView.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // labelAddFirstSurveyPage
             // 
@@ -99,9 +119,9 @@
             this.labelAddView.AutoSize = true;
             this.labelAddView.Location = new System.Drawing.Point(23, 77);
             this.labelAddView.Name = "labelAddView";
-            this.labelAddView.Size = new System.Drawing.Size(51, 13);
+            this.labelAddView.Size = new System.Drawing.Size(49, 13);
             this.labelAddView.TabIndex = 12;
-            this.labelAddView.Text = "Add view";
+            this.labelAddView.Text = "Add map";
             // 
             // labelSubwatershed
             // 

@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabControlFormSWSPFieldDataAdministration = new System.Windows.Forms.TabControl();
             this.tabPageWatersheds = new System.Windows.Forms.TabPage();
             this.buttonSubwatershedsUpdate = new System.Windows.Forms.Button();
             this.buttonWatershedsUpdate = new System.Windows.Forms.Button();
@@ -37,13 +37,13 @@
             this.buttonSubwatershedsAdd = new System.Windows.Forms.Button();
             this.buttonWatershedsDelete = new System.Windows.Forms.Button();
             this.buttonWatershedsAdd = new System.Windows.Forms.Button();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.dataGridViewSubwatersheds = new System.Windows.Forms.DataGridView();
             this.subwatershed = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.descriptionDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fKSUBWATERSHEDWATERSHEDBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.sWSPWATERSHEDBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.sANDBOXDataSet = new SWI_2.SANDBOXDataSet();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dataGridViewWatersheds = new System.Windows.Forms.DataGridView();
             this.watershedDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.descriptionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.labelSubwatersheds = new System.Windows.Forms.Label();
@@ -52,7 +52,10 @@
             this.buttonEvaluatorsUpdate = new System.Windows.Forms.Button();
             this.buttonEvaluatorsDelete = new System.Windows.Forms.Button();
             this.buttonEvaluatorsAdd = new System.Windows.Forms.Button();
-            this.dataGridView3 = new System.Windows.Forms.DataGridView();
+            this.dataGridViewEvaluators = new System.Windows.Forms.DataGridView();
+            this.initialsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lastnameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.firstnameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sWSPEVALUATORBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.labelEvaluators = new System.Windows.Forms.Label();
             this.tabPageTypes = new System.Windows.Forms.TabPage();
@@ -70,13 +73,21 @@
             this.buttonCulvertOpeningsAdd = new System.Windows.Forms.Button();
             this.labelMaterials = new System.Windows.Forms.Label();
             this.labelShapes = new System.Windows.Forms.Label();
-            this.dataGridView7 = new System.Windows.Forms.DataGridView();
+            this.dataGridViewMaterials = new System.Windows.Forms.DataGridView();
+            this.materialDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.descriptionDataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sWSPMATERIALTYPEBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.dataGridView6 = new System.Windows.Forms.DataGridView();
+            this.dataGridViewShapes = new System.Windows.Forms.DataGridView();
+            this.shapeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.descriptionDataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sWSPSHAPETYPEBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.dataGridView5 = new System.Windows.Forms.DataGridView();
+            this.dataGridViewFacings = new System.Windows.Forms.DataGridView();
+            this.facingDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.descriptionDataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sWSPFACINGTYPEBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.dataGridView4 = new System.Windows.Forms.DataGridView();
+            this.dataGridViewCulvertOpenings = new System.Windows.Forms.DataGridView();
+            this.culvertopeningDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.descriptionDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sWSPCULVERTOPENINGTYPEBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.labelFacings = new System.Windows.Forms.Label();
             this.labelCulvertOpenings = new System.Windows.Forms.Label();
@@ -87,7 +98,14 @@
             this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonAddSurveyPage = new System.Windows.Forms.Button();
             this.buttonAddView = new System.Windows.Forms.Button();
-            this.dataGridView8 = new System.Windows.Forms.DataGridView();
+            this.dataGridViewViewsAndSurveys = new System.Windows.Forms.DataGridView();
+            this.view_number = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.sWSPVIEWBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.pagenumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.weatherDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.commentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sWSPSURVEYPAGEBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.labelSubwatershed = new System.Windows.Forms.Label();
             this.labelWatershed = new System.Windows.Forms.Label();
             this.labelViews = new System.Windows.Forms.Label();
@@ -101,70 +119,52 @@
             this.sWSP_FACING_TYPETableAdapter = new SWI_2.SANDBOXDataSetTableAdapters.SWSP_FACING_TYPETableAdapter();
             this.sWSP_SHAPE_TYPETableAdapter = new SWI_2.SANDBOXDataSetTableAdapters.SWSP_SHAPE_TYPETableAdapter();
             this.sWSP_MATERIAL_TYPETableAdapter = new SWI_2.SANDBOXDataSetTableAdapters.SWSP_MATERIAL_TYPETableAdapter();
-            this.sWSPSURVEYPAGEBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.sWSP_SURVEY_PAGETableAdapter = new SWI_2.SANDBOXDataSetTableAdapters.SWSP_SURVEY_PAGETableAdapter();
-            this.sWSPVIEWBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.initialsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lastnameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.firstnameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.culvertopeningDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.descriptionDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.shapeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.descriptionDataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.facingDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.descriptionDataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.materialDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.descriptionDataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.view_number = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.pagenumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.weatherDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.commentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tabControl1.SuspendLayout();
+            this.tabControlFormSWSPFieldDataAdministration.SuspendLayout();
             this.tabPageWatersheds.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSubwatersheds)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fKSUBWATERSHEDWATERSHEDBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sWSPWATERSHEDBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sANDBOXDataSet)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewWatersheds)).BeginInit();
             this.tabPageEvaluators.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEvaluators)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sWSPEVALUATORBindingSource)).BeginInit();
             this.tabPageTypes.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMaterials)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sWSPMATERIALTYPEBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewShapes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sWSPSHAPETYPEBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFacings)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sWSPFACINGTYPEBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCulvertOpenings)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sWSPCULVERTOPENINGTYPEBindingSource)).BeginInit();
             this.tabPageViewsAndSurveys.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fKSUBWATERSHEDWATERSHEDBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView8)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fKVIEWSUBWATERSHEDBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sWSPSURVEYPAGEBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewViewsAndSurveys)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sWSPVIEWBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sWSPSURVEYPAGEBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fKVIEWSUBWATERSHEDBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
-            // tabControl1
+            // tabControlFormSWSPFieldDataAdministration
             // 
-            this.tabControl1.Alignment = System.Windows.Forms.TabAlignment.Left;
-            this.tabControl1.Controls.Add(this.tabPageWatersheds);
-            this.tabControl1.Controls.Add(this.tabPageEvaluators);
-            this.tabControl1.Controls.Add(this.tabPageTypes);
-            this.tabControl1.Controls.Add(this.tabPageViewsAndSurveys);
-            this.tabControl1.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
-            this.tabControl1.ItemSize = new System.Drawing.Size(25, 100);
-            this.tabControl1.Location = new System.Drawing.Point(12, 12);
-            this.tabControl1.Multiline = true;
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(703, 385);
-            this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
-            this.tabControl1.TabIndex = 0;
-            this.tabControl1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tabControl1_DrawItem);
+            this.tabControlFormSWSPFieldDataAdministration.Alignment = System.Windows.Forms.TabAlignment.Left;
+            this.tabControlFormSWSPFieldDataAdministration.Controls.Add(this.tabPageWatersheds);
+            this.tabControlFormSWSPFieldDataAdministration.Controls.Add(this.tabPageEvaluators);
+            this.tabControlFormSWSPFieldDataAdministration.Controls.Add(this.tabPageTypes);
+            this.tabControlFormSWSPFieldDataAdministration.Controls.Add(this.tabPageViewsAndSurveys);
+            this.tabControlFormSWSPFieldDataAdministration.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
+            this.tabControlFormSWSPFieldDataAdministration.ItemSize = new System.Drawing.Size(25, 100);
+            this.tabControlFormSWSPFieldDataAdministration.Location = new System.Drawing.Point(12, 12);
+            this.tabControlFormSWSPFieldDataAdministration.Multiline = true;
+            this.tabControlFormSWSPFieldDataAdministration.Name = "tabControlFormSWSPFieldDataAdministration";
+            this.tabControlFormSWSPFieldDataAdministration.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.tabControlFormSWSPFieldDataAdministration.SelectedIndex = 0;
+            this.tabControlFormSWSPFieldDataAdministration.Size = new System.Drawing.Size(703, 385);
+            this.tabControlFormSWSPFieldDataAdministration.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
+            this.tabControlFormSWSPFieldDataAdministration.TabIndex = 0;
+            this.tabControlFormSWSPFieldDataAdministration.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tabControl1_DrawItem);
             // 
             // tabPageWatersheds
             // 
@@ -174,8 +174,8 @@
             this.tabPageWatersheds.Controls.Add(this.buttonSubwatershedsAdd);
             this.tabPageWatersheds.Controls.Add(this.buttonWatershedsDelete);
             this.tabPageWatersheds.Controls.Add(this.buttonWatershedsAdd);
-            this.tabPageWatersheds.Controls.Add(this.dataGridView2);
-            this.tabPageWatersheds.Controls.Add(this.dataGridView1);
+            this.tabPageWatersheds.Controls.Add(this.dataGridViewSubwatersheds);
+            this.tabPageWatersheds.Controls.Add(this.dataGridViewWatersheds);
             this.tabPageWatersheds.Controls.Add(this.labelSubwatersheds);
             this.tabPageWatersheds.Controls.Add(this.labelWatersheds);
             this.tabPageWatersheds.Location = new System.Drawing.Point(104, 4);
@@ -246,20 +246,20 @@
             this.buttonWatershedsAdd.UseVisualStyleBackColor = true;
             this.buttonWatershedsAdd.Click += new System.EventHandler(this.buttonWatershedsAdd_Click);
             // 
-            // dataGridView2
+            // dataGridViewSubwatersheds
             // 
-            this.dataGridView2.AllowUserToAddRows = false;
-            this.dataGridView2.AllowUserToDeleteRows = false;
-            this.dataGridView2.AutoGenerateColumns = false;
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewSubwatersheds.AllowUserToAddRows = false;
+            this.dataGridViewSubwatersheds.AllowUserToDeleteRows = false;
+            this.dataGridViewSubwatersheds.AutoGenerateColumns = false;
+            this.dataGridViewSubwatersheds.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewSubwatersheds.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.subwatershed,
             this.descriptionDataGridViewTextBoxColumn1});
-            this.dataGridView2.DataSource = this.fKSUBWATERSHEDWATERSHEDBindingSource1;
-            this.dataGridView2.Location = new System.Drawing.Point(288, 40);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(269, 284);
-            this.dataGridView2.TabIndex = 3;
+            this.dataGridViewSubwatersheds.DataSource = this.fKSUBWATERSHEDWATERSHEDBindingSource1;
+            this.dataGridViewSubwatersheds.Location = new System.Drawing.Point(288, 40);
+            this.dataGridViewSubwatersheds.Name = "dataGridViewSubwatersheds";
+            this.dataGridViewSubwatersheds.Size = new System.Drawing.Size(269, 284);
+            this.dataGridViewSubwatersheds.TabIndex = 3;
             // 
             // subwatershed
             // 
@@ -288,20 +288,20 @@
             this.sANDBOXDataSet.DataSetName = "SANDBOXDataSet";
             this.sANDBOXDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
-            // dataGridView1
+            // dataGridViewWatersheds
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.AutoGenerateColumns = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewWatersheds.AllowUserToAddRows = false;
+            this.dataGridViewWatersheds.AllowUserToDeleteRows = false;
+            this.dataGridViewWatersheds.AutoGenerateColumns = false;
+            this.dataGridViewWatersheds.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewWatersheds.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.watershedDataGridViewTextBoxColumn,
             this.descriptionDataGridViewTextBoxColumn});
-            this.dataGridView1.DataSource = this.sWSPWATERSHEDBindingSource;
-            this.dataGridView1.Location = new System.Drawing.Point(22, 40);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(260, 284);
-            this.dataGridView1.TabIndex = 2;
+            this.dataGridViewWatersheds.DataSource = this.sWSPWATERSHEDBindingSource;
+            this.dataGridViewWatersheds.Location = new System.Drawing.Point(22, 40);
+            this.dataGridViewWatersheds.Name = "dataGridViewWatersheds";
+            this.dataGridViewWatersheds.Size = new System.Drawing.Size(260, 284);
+            this.dataGridViewWatersheds.TabIndex = 2;
             // 
             // watershedDataGridViewTextBoxColumn
             // 
@@ -338,7 +338,7 @@
             this.tabPageEvaluators.Controls.Add(this.buttonEvaluatorsUpdate);
             this.tabPageEvaluators.Controls.Add(this.buttonEvaluatorsDelete);
             this.tabPageEvaluators.Controls.Add(this.buttonEvaluatorsAdd);
-            this.tabPageEvaluators.Controls.Add(this.dataGridView3);
+            this.tabPageEvaluators.Controls.Add(this.dataGridViewEvaluators);
             this.tabPageEvaluators.Controls.Add(this.labelEvaluators);
             this.tabPageEvaluators.Location = new System.Drawing.Point(104, 4);
             this.tabPageEvaluators.Name = "tabPageEvaluators";
@@ -378,21 +378,39 @@
             this.buttonEvaluatorsAdd.UseVisualStyleBackColor = true;
             this.buttonEvaluatorsAdd.Click += new System.EventHandler(this.buttonEvaluatorsAdd_Click);
             // 
-            // dataGridView3
+            // dataGridViewEvaluators
             // 
-            this.dataGridView3.AllowUserToAddRows = false;
-            this.dataGridView3.AllowUserToDeleteRows = false;
-            this.dataGridView3.AutoGenerateColumns = false;
-            this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView3.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewEvaluators.AllowUserToAddRows = false;
+            this.dataGridViewEvaluators.AllowUserToDeleteRows = false;
+            this.dataGridViewEvaluators.AutoGenerateColumns = false;
+            this.dataGridViewEvaluators.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewEvaluators.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.initialsDataGridViewTextBoxColumn,
             this.lastnameDataGridViewTextBoxColumn,
             this.firstnameDataGridViewTextBoxColumn});
-            this.dataGridView3.DataSource = this.sWSPEVALUATORBindingSource;
-            this.dataGridView3.Location = new System.Drawing.Point(14, 39);
-            this.dataGridView3.Name = "dataGridView3";
-            this.dataGridView3.Size = new System.Drawing.Size(516, 302);
-            this.dataGridView3.TabIndex = 1;
+            this.dataGridViewEvaluators.DataSource = this.sWSPEVALUATORBindingSource;
+            this.dataGridViewEvaluators.Location = new System.Drawing.Point(14, 39);
+            this.dataGridViewEvaluators.Name = "dataGridViewEvaluators";
+            this.dataGridViewEvaluators.Size = new System.Drawing.Size(516, 302);
+            this.dataGridViewEvaluators.TabIndex = 1;
+            // 
+            // initialsDataGridViewTextBoxColumn
+            // 
+            this.initialsDataGridViewTextBoxColumn.DataPropertyName = "initials";
+            this.initialsDataGridViewTextBoxColumn.HeaderText = "initials";
+            this.initialsDataGridViewTextBoxColumn.Name = "initialsDataGridViewTextBoxColumn";
+            // 
+            // lastnameDataGridViewTextBoxColumn
+            // 
+            this.lastnameDataGridViewTextBoxColumn.DataPropertyName = "last_name";
+            this.lastnameDataGridViewTextBoxColumn.HeaderText = "last_name";
+            this.lastnameDataGridViewTextBoxColumn.Name = "lastnameDataGridViewTextBoxColumn";
+            // 
+            // firstnameDataGridViewTextBoxColumn
+            // 
+            this.firstnameDataGridViewTextBoxColumn.DataPropertyName = "first_name";
+            this.firstnameDataGridViewTextBoxColumn.HeaderText = "first_name";
+            this.firstnameDataGridViewTextBoxColumn.Name = "firstnameDataGridViewTextBoxColumn";
             // 
             // sWSPEVALUATORBindingSource
             // 
@@ -424,10 +442,10 @@
             this.tabPageTypes.Controls.Add(this.buttonCulvertOpeningsAdd);
             this.tabPageTypes.Controls.Add(this.labelMaterials);
             this.tabPageTypes.Controls.Add(this.labelShapes);
-            this.tabPageTypes.Controls.Add(this.dataGridView7);
-            this.tabPageTypes.Controls.Add(this.dataGridView6);
-            this.tabPageTypes.Controls.Add(this.dataGridView5);
-            this.tabPageTypes.Controls.Add(this.dataGridView4);
+            this.tabPageTypes.Controls.Add(this.dataGridViewMaterials);
+            this.tabPageTypes.Controls.Add(this.dataGridViewShapes);
+            this.tabPageTypes.Controls.Add(this.dataGridViewFacings);
+            this.tabPageTypes.Controls.Add(this.dataGridViewCulvertOpenings);
             this.tabPageTypes.Controls.Add(this.labelFacings);
             this.tabPageTypes.Controls.Add(this.labelCulvertOpenings);
             this.tabPageTypes.Location = new System.Drawing.Point(104, 4);
@@ -575,80 +593,130 @@
             this.labelShapes.TabIndex = 6;
             this.labelShapes.Text = "Shapes";
             // 
-            // dataGridView7
+            // dataGridViewMaterials
             // 
-            this.dataGridView7.AllowUserToAddRows = false;
-            this.dataGridView7.AllowUserToDeleteRows = false;
-            this.dataGridView7.AutoGenerateColumns = false;
-            this.dataGridView7.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView7.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewMaterials.AllowUserToAddRows = false;
+            this.dataGridViewMaterials.AllowUserToDeleteRows = false;
+            this.dataGridViewMaterials.AutoGenerateColumns = false;
+            this.dataGridViewMaterials.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewMaterials.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.materialDataGridViewTextBoxColumn,
             this.descriptionDataGridViewTextBoxColumn5});
-            this.dataGridView7.DataSource = this.sWSPMATERIALTYPEBindingSource;
-            this.dataGridView7.Location = new System.Drawing.Point(316, 223);
-            this.dataGridView7.Name = "dataGridView7";
-            this.dataGridView7.Size = new System.Drawing.Size(276, 120);
-            this.dataGridView7.TabIndex = 5;
+            this.dataGridViewMaterials.DataSource = this.sWSPMATERIALTYPEBindingSource;
+            this.dataGridViewMaterials.Location = new System.Drawing.Point(316, 223);
+            this.dataGridViewMaterials.Name = "dataGridViewMaterials";
+            this.dataGridViewMaterials.Size = new System.Drawing.Size(276, 120);
+            this.dataGridViewMaterials.TabIndex = 5;
+            // 
+            // materialDataGridViewTextBoxColumn
+            // 
+            this.materialDataGridViewTextBoxColumn.DataPropertyName = "material";
+            this.materialDataGridViewTextBoxColumn.HeaderText = "Material";
+            this.materialDataGridViewTextBoxColumn.Name = "materialDataGridViewTextBoxColumn";
+            // 
+            // descriptionDataGridViewTextBoxColumn5
+            // 
+            this.descriptionDataGridViewTextBoxColumn5.DataPropertyName = "description";
+            this.descriptionDataGridViewTextBoxColumn5.HeaderText = "Description";
+            this.descriptionDataGridViewTextBoxColumn5.Name = "descriptionDataGridViewTextBoxColumn5";
             // 
             // sWSPMATERIALTYPEBindingSource
             // 
             this.sWSPMATERIALTYPEBindingSource.DataMember = "SWSP_MATERIAL_TYPE";
             this.sWSPMATERIALTYPEBindingSource.DataSource = this.sANDBOXDataSet;
             // 
-            // dataGridView6
+            // dataGridViewShapes
             // 
-            this.dataGridView6.AllowUserToAddRows = false;
-            this.dataGridView6.AllowUserToDeleteRows = false;
-            this.dataGridView6.AutoGenerateColumns = false;
-            this.dataGridView6.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView6.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewShapes.AllowUserToAddRows = false;
+            this.dataGridViewShapes.AllowUserToDeleteRows = false;
+            this.dataGridViewShapes.AutoGenerateColumns = false;
+            this.dataGridViewShapes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewShapes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.shapeDataGridViewTextBoxColumn,
             this.descriptionDataGridViewTextBoxColumn4});
-            this.dataGridView6.DataSource = this.sWSPSHAPETYPEBindingSource;
-            this.dataGridView6.Location = new System.Drawing.Point(18, 225);
-            this.dataGridView6.Name = "dataGridView6";
-            this.dataGridView6.Size = new System.Drawing.Size(292, 119);
-            this.dataGridView6.TabIndex = 4;
+            this.dataGridViewShapes.DataSource = this.sWSPSHAPETYPEBindingSource;
+            this.dataGridViewShapes.Location = new System.Drawing.Point(18, 225);
+            this.dataGridViewShapes.Name = "dataGridViewShapes";
+            this.dataGridViewShapes.Size = new System.Drawing.Size(292, 119);
+            this.dataGridViewShapes.TabIndex = 4;
+            // 
+            // shapeDataGridViewTextBoxColumn
+            // 
+            this.shapeDataGridViewTextBoxColumn.DataPropertyName = "shape";
+            this.shapeDataGridViewTextBoxColumn.HeaderText = "Shape";
+            this.shapeDataGridViewTextBoxColumn.Name = "shapeDataGridViewTextBoxColumn";
+            // 
+            // descriptionDataGridViewTextBoxColumn4
+            // 
+            this.descriptionDataGridViewTextBoxColumn4.DataPropertyName = "description";
+            this.descriptionDataGridViewTextBoxColumn4.HeaderText = "Description";
+            this.descriptionDataGridViewTextBoxColumn4.Name = "descriptionDataGridViewTextBoxColumn4";
             // 
             // sWSPSHAPETYPEBindingSource
             // 
             this.sWSPSHAPETYPEBindingSource.DataMember = "SWSP_SHAPE_TYPE";
             this.sWSPSHAPETYPEBindingSource.DataSource = this.sANDBOXDataSet;
             // 
-            // dataGridView5
+            // dataGridViewFacings
             // 
-            this.dataGridView5.AllowUserToAddRows = false;
-            this.dataGridView5.AllowUserToDeleteRows = false;
-            this.dataGridView5.AutoGenerateColumns = false;
-            this.dataGridView5.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView5.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewFacings.AllowUserToAddRows = false;
+            this.dataGridViewFacings.AllowUserToDeleteRows = false;
+            this.dataGridViewFacings.AutoGenerateColumns = false;
+            this.dataGridViewFacings.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewFacings.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.facingDataGridViewTextBoxColumn,
             this.descriptionDataGridViewTextBoxColumn3});
-            this.dataGridView5.DataSource = this.sWSPFACINGTYPEBindingSource;
-            this.dataGridView5.Location = new System.Drawing.Point(316, 32);
-            this.dataGridView5.Name = "dataGridView5";
-            this.dataGridView5.Size = new System.Drawing.Size(276, 106);
-            this.dataGridView5.TabIndex = 3;
+            this.dataGridViewFacings.DataSource = this.sWSPFACINGTYPEBindingSource;
+            this.dataGridViewFacings.Location = new System.Drawing.Point(316, 32);
+            this.dataGridViewFacings.Name = "dataGridViewFacings";
+            this.dataGridViewFacings.Size = new System.Drawing.Size(276, 106);
+            this.dataGridViewFacings.TabIndex = 3;
+            // 
+            // facingDataGridViewTextBoxColumn
+            // 
+            this.facingDataGridViewTextBoxColumn.DataPropertyName = "facing";
+            this.facingDataGridViewTextBoxColumn.HeaderText = "Facing Type";
+            this.facingDataGridViewTextBoxColumn.Name = "facingDataGridViewTextBoxColumn";
+            this.facingDataGridViewTextBoxColumn.Width = 90;
+            // 
+            // descriptionDataGridViewTextBoxColumn3
+            // 
+            this.descriptionDataGridViewTextBoxColumn3.DataPropertyName = "description";
+            this.descriptionDataGridViewTextBoxColumn3.HeaderText = "Description";
+            this.descriptionDataGridViewTextBoxColumn3.Name = "descriptionDataGridViewTextBoxColumn3";
+            this.descriptionDataGridViewTextBoxColumn3.Width = 90;
             // 
             // sWSPFACINGTYPEBindingSource
             // 
             this.sWSPFACINGTYPEBindingSource.DataMember = "SWSP_FACING_TYPE";
             this.sWSPFACINGTYPEBindingSource.DataSource = this.sANDBOXDataSet;
             // 
-            // dataGridView4
+            // dataGridViewCulvertOpenings
             // 
-            this.dataGridView4.AllowUserToAddRows = false;
-            this.dataGridView4.AllowUserToDeleteRows = false;
-            this.dataGridView4.AutoGenerateColumns = false;
-            this.dataGridView4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView4.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewCulvertOpenings.AllowUserToAddRows = false;
+            this.dataGridViewCulvertOpenings.AllowUserToDeleteRows = false;
+            this.dataGridViewCulvertOpenings.AutoGenerateColumns = false;
+            this.dataGridViewCulvertOpenings.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewCulvertOpenings.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.culvertopeningDataGridViewTextBoxColumn,
             this.descriptionDataGridViewTextBoxColumn2});
-            this.dataGridView4.DataSource = this.sWSPCULVERTOPENINGTYPEBindingSource;
-            this.dataGridView4.Location = new System.Drawing.Point(18, 32);
-            this.dataGridView4.Name = "dataGridView4";
-            this.dataGridView4.Size = new System.Drawing.Size(292, 107);
-            this.dataGridView4.TabIndex = 2;
+            this.dataGridViewCulvertOpenings.DataSource = this.sWSPCULVERTOPENINGTYPEBindingSource;
+            this.dataGridViewCulvertOpenings.Location = new System.Drawing.Point(18, 32);
+            this.dataGridViewCulvertOpenings.Name = "dataGridViewCulvertOpenings";
+            this.dataGridViewCulvertOpenings.Size = new System.Drawing.Size(292, 107);
+            this.dataGridViewCulvertOpenings.TabIndex = 2;
+            // 
+            // culvertopeningDataGridViewTextBoxColumn
+            // 
+            this.culvertopeningDataGridViewTextBoxColumn.DataPropertyName = "culvert_opening";
+            this.culvertopeningDataGridViewTextBoxColumn.HeaderText = "Opening Type";
+            this.culvertopeningDataGridViewTextBoxColumn.Name = "culvertopeningDataGridViewTextBoxColumn";
+            // 
+            // descriptionDataGridViewTextBoxColumn2
+            // 
+            this.descriptionDataGridViewTextBoxColumn2.DataPropertyName = "description";
+            this.descriptionDataGridViewTextBoxColumn2.HeaderText = "Description";
+            this.descriptionDataGridViewTextBoxColumn2.Name = "descriptionDataGridViewTextBoxColumn2";
             // 
             // sWSPCULVERTOPENINGTYPEBindingSource
             // 
@@ -680,7 +748,7 @@
             this.tabPageViewsAndSurveys.Controls.Add(this.buttonDelete);
             this.tabPageViewsAndSurveys.Controls.Add(this.buttonAddSurveyPage);
             this.tabPageViewsAndSurveys.Controls.Add(this.buttonAddView);
-            this.tabPageViewsAndSurveys.Controls.Add(this.dataGridView8);
+            this.tabPageViewsAndSurveys.Controls.Add(this.dataGridViewViewsAndSurveys);
             this.tabPageViewsAndSurveys.Controls.Add(this.labelSubwatershed);
             this.tabPageViewsAndSurveys.Controls.Add(this.labelWatershed);
             this.tabPageViewsAndSurveys.Controls.Add(this.labelViews);
@@ -726,6 +794,7 @@
             this.buttonDelete.TabIndex = 8;
             this.buttonDelete.Text = "Delete";
             this.buttonDelete.UseVisualStyleBackColor = true;
+            this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
             // 
             // buttonAddSurveyPage
             // 
@@ -747,23 +816,71 @@
             this.buttonAddView.UseVisualStyleBackColor = true;
             this.buttonAddView.Click += new System.EventHandler(this.buttonAddView_Click);
             // 
-            // dataGridView8
+            // dataGridViewViewsAndSurveys
             // 
-            this.dataGridView8.AllowUserToAddRows = false;
-            this.dataGridView8.AllowUserToDeleteRows = false;
-            this.dataGridView8.AutoGenerateColumns = false;
-            this.dataGridView8.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView8.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewViewsAndSurveys.AllowUserToAddRows = false;
+            this.dataGridViewViewsAndSurveys.AllowUserToDeleteRows = false;
+            this.dataGridViewViewsAndSurveys.AutoGenerateColumns = false;
+            this.dataGridViewViewsAndSurveys.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewViewsAndSurveys.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.view_number,
             this.pagenumberDataGridViewTextBoxColumn,
             this.dateDataGridViewTextBoxColumn,
             this.weatherDataGridViewTextBoxColumn,
             this.commentDataGridViewTextBoxColumn});
-            this.dataGridView8.DataSource = this.sWSPSURVEYPAGEBindingSource;
-            this.dataGridView8.Location = new System.Drawing.Point(14, 89);
-            this.dataGridView8.Name = "dataGridView8";
-            this.dataGridView8.Size = new System.Drawing.Size(562, 236);
-            this.dataGridView8.TabIndex = 5;
+            this.dataGridViewViewsAndSurveys.DataSource = this.sWSPSURVEYPAGEBindingSource;
+            this.dataGridViewViewsAndSurveys.Location = new System.Drawing.Point(14, 89);
+            this.dataGridViewViewsAndSurveys.Name = "dataGridViewViewsAndSurveys";
+            this.dataGridViewViewsAndSurveys.Size = new System.Drawing.Size(562, 236);
+            this.dataGridViewViewsAndSurveys.TabIndex = 5;
+            // 
+            // view_number
+            // 
+            this.view_number.DataPropertyName = "view_id";
+            this.view_number.DataSource = this.sWSPVIEWBindingSource;
+            this.view_number.DisplayMember = "view_number";
+            this.view_number.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.Nothing;
+            this.view_number.HeaderText = "View #";
+            this.view_number.Name = "view_number";
+            this.view_number.ValueMember = "view_id";
+            this.view_number.Width = 50;
+            // 
+            // sWSPVIEWBindingSource
+            // 
+            this.sWSPVIEWBindingSource.DataMember = "SWSP_VIEW";
+            this.sWSPVIEWBindingSource.DataSource = this.sANDBOXDataSet;
+            // 
+            // pagenumberDataGridViewTextBoxColumn
+            // 
+            this.pagenumberDataGridViewTextBoxColumn.DataPropertyName = "page_number";
+            this.pagenumberDataGridViewTextBoxColumn.HeaderText = "Page #";
+            this.pagenumberDataGridViewTextBoxColumn.Name = "pagenumberDataGridViewTextBoxColumn";
+            this.pagenumberDataGridViewTextBoxColumn.Width = 50;
+            // 
+            // dateDataGridViewTextBoxColumn
+            // 
+            this.dateDataGridViewTextBoxColumn.DataPropertyName = "date";
+            this.dateDataGridViewTextBoxColumn.HeaderText = "Date";
+            this.dateDataGridViewTextBoxColumn.Name = "dateDataGridViewTextBoxColumn";
+            // 
+            // weatherDataGridViewTextBoxColumn
+            // 
+            this.weatherDataGridViewTextBoxColumn.DataPropertyName = "weather";
+            this.weatherDataGridViewTextBoxColumn.HeaderText = "Weather";
+            this.weatherDataGridViewTextBoxColumn.Name = "weatherDataGridViewTextBoxColumn";
+            this.weatherDataGridViewTextBoxColumn.Width = 80;
+            // 
+            // commentDataGridViewTextBoxColumn
+            // 
+            this.commentDataGridViewTextBoxColumn.DataPropertyName = "Comment";
+            this.commentDataGridViewTextBoxColumn.HeaderText = "Comment";
+            this.commentDataGridViewTextBoxColumn.Name = "commentDataGridViewTextBoxColumn";
+            this.commentDataGridViewTextBoxColumn.Width = 170;
+            // 
+            // sWSPSURVEYPAGEBindingSource
+            // 
+            this.sWSPSURVEYPAGEBindingSource.DataMember = "SWSP_SURVEY_PAGE";
+            this.sWSPSURVEYPAGEBindingSource.DataSource = this.sANDBOXDataSet;
             // 
             // labelSubwatershed
             // 
@@ -839,125 +956,9 @@
             // 
             this.sWSP_MATERIAL_TYPETableAdapter.ClearBeforeFill = true;
             // 
-            // sWSPSURVEYPAGEBindingSource
-            // 
-            this.sWSPSURVEYPAGEBindingSource.DataMember = "SWSP_SURVEY_PAGE";
-            this.sWSPSURVEYPAGEBindingSource.DataSource = this.sANDBOXDataSet;
-            // 
             // sWSP_SURVEY_PAGETableAdapter
             // 
             this.sWSP_SURVEY_PAGETableAdapter.ClearBeforeFill = true;
-            // 
-            // sWSPVIEWBindingSource
-            // 
-            this.sWSPVIEWBindingSource.DataMember = "SWSP_VIEW";
-            this.sWSPVIEWBindingSource.DataSource = this.sANDBOXDataSet;
-            // 
-            // initialsDataGridViewTextBoxColumn
-            // 
-            this.initialsDataGridViewTextBoxColumn.DataPropertyName = "initials";
-            this.initialsDataGridViewTextBoxColumn.HeaderText = "initials";
-            this.initialsDataGridViewTextBoxColumn.Name = "initialsDataGridViewTextBoxColumn";
-            // 
-            // lastnameDataGridViewTextBoxColumn
-            // 
-            this.lastnameDataGridViewTextBoxColumn.DataPropertyName = "last_name";
-            this.lastnameDataGridViewTextBoxColumn.HeaderText = "last_name";
-            this.lastnameDataGridViewTextBoxColumn.Name = "lastnameDataGridViewTextBoxColumn";
-            // 
-            // firstnameDataGridViewTextBoxColumn
-            // 
-            this.firstnameDataGridViewTextBoxColumn.DataPropertyName = "first_name";
-            this.firstnameDataGridViewTextBoxColumn.HeaderText = "first_name";
-            this.firstnameDataGridViewTextBoxColumn.Name = "firstnameDataGridViewTextBoxColumn";
-            // 
-            // culvertopeningDataGridViewTextBoxColumn
-            // 
-            this.culvertopeningDataGridViewTextBoxColumn.DataPropertyName = "culvert_opening";
-            this.culvertopeningDataGridViewTextBoxColumn.HeaderText = "Opening Type";
-            this.culvertopeningDataGridViewTextBoxColumn.Name = "culvertopeningDataGridViewTextBoxColumn";
-            // 
-            // descriptionDataGridViewTextBoxColumn2
-            // 
-            this.descriptionDataGridViewTextBoxColumn2.DataPropertyName = "description";
-            this.descriptionDataGridViewTextBoxColumn2.HeaderText = "Description";
-            this.descriptionDataGridViewTextBoxColumn2.Name = "descriptionDataGridViewTextBoxColumn2";
-            // 
-            // shapeDataGridViewTextBoxColumn
-            // 
-            this.shapeDataGridViewTextBoxColumn.DataPropertyName = "shape";
-            this.shapeDataGridViewTextBoxColumn.HeaderText = "Shape";
-            this.shapeDataGridViewTextBoxColumn.Name = "shapeDataGridViewTextBoxColumn";
-            // 
-            // descriptionDataGridViewTextBoxColumn4
-            // 
-            this.descriptionDataGridViewTextBoxColumn4.DataPropertyName = "description";
-            this.descriptionDataGridViewTextBoxColumn4.HeaderText = "Description";
-            this.descriptionDataGridViewTextBoxColumn4.Name = "descriptionDataGridViewTextBoxColumn4";
-            // 
-            // facingDataGridViewTextBoxColumn
-            // 
-            this.facingDataGridViewTextBoxColumn.DataPropertyName = "facing";
-            this.facingDataGridViewTextBoxColumn.HeaderText = "Facing Type";
-            this.facingDataGridViewTextBoxColumn.Name = "facingDataGridViewTextBoxColumn";
-            this.facingDataGridViewTextBoxColumn.Width = 90;
-            // 
-            // descriptionDataGridViewTextBoxColumn3
-            // 
-            this.descriptionDataGridViewTextBoxColumn3.DataPropertyName = "description";
-            this.descriptionDataGridViewTextBoxColumn3.HeaderText = "Description";
-            this.descriptionDataGridViewTextBoxColumn3.Name = "descriptionDataGridViewTextBoxColumn3";
-            this.descriptionDataGridViewTextBoxColumn3.Width = 90;
-            // 
-            // materialDataGridViewTextBoxColumn
-            // 
-            this.materialDataGridViewTextBoxColumn.DataPropertyName = "material";
-            this.materialDataGridViewTextBoxColumn.HeaderText = "Material";
-            this.materialDataGridViewTextBoxColumn.Name = "materialDataGridViewTextBoxColumn";
-            // 
-            // descriptionDataGridViewTextBoxColumn5
-            // 
-            this.descriptionDataGridViewTextBoxColumn5.DataPropertyName = "description";
-            this.descriptionDataGridViewTextBoxColumn5.HeaderText = "Description";
-            this.descriptionDataGridViewTextBoxColumn5.Name = "descriptionDataGridViewTextBoxColumn5";
-            // 
-            // view_number
-            // 
-            this.view_number.DataPropertyName = "view_id";
-            this.view_number.DataSource = this.sWSPVIEWBindingSource;
-            this.view_number.DisplayMember = "view_number";
-            this.view_number.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.Nothing;
-            this.view_number.HeaderText = "View #";
-            this.view_number.Name = "view_number";
-            this.view_number.ValueMember = "view_id";
-            this.view_number.Width = 50;
-            // 
-            // pagenumberDataGridViewTextBoxColumn
-            // 
-            this.pagenumberDataGridViewTextBoxColumn.DataPropertyName = "page_number";
-            this.pagenumberDataGridViewTextBoxColumn.HeaderText = "Page #";
-            this.pagenumberDataGridViewTextBoxColumn.Name = "pagenumberDataGridViewTextBoxColumn";
-            this.pagenumberDataGridViewTextBoxColumn.Width = 50;
-            // 
-            // dateDataGridViewTextBoxColumn
-            // 
-            this.dateDataGridViewTextBoxColumn.DataPropertyName = "date";
-            this.dateDataGridViewTextBoxColumn.HeaderText = "Date";
-            this.dateDataGridViewTextBoxColumn.Name = "dateDataGridViewTextBoxColumn";
-            // 
-            // weatherDataGridViewTextBoxColumn
-            // 
-            this.weatherDataGridViewTextBoxColumn.DataPropertyName = "weather";
-            this.weatherDataGridViewTextBoxColumn.HeaderText = "Weather";
-            this.weatherDataGridViewTextBoxColumn.Name = "weatherDataGridViewTextBoxColumn";
-            this.weatherDataGridViewTextBoxColumn.Width = 80;
-            // 
-            // commentDataGridViewTextBoxColumn
-            // 
-            this.commentDataGridViewTextBoxColumn.DataPropertyName = "Comment";
-            this.commentDataGridViewTextBoxColumn.HeaderText = "Comment";
-            this.commentDataGridViewTextBoxColumn.Name = "commentDataGridViewTextBoxColumn";
-            this.commentDataGridViewTextBoxColumn.Width = 170;
             // 
             // FormSWSPFieldDataAdministration
             // 
@@ -965,39 +966,39 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(727, 444);
             this.Controls.Add(this.buttonOK);
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.tabControlFormSWSPFieldDataAdministration);
             this.Name = "FormSWSPFieldDataAdministration";
             this.Text = "FormSWSPFieldDataAdministration";
             this.Load += new System.EventHandler(this.FormSWSPFieldDataAdministration_Load);
-            this.tabControl1.ResumeLayout(false);
+            this.tabControlFormSWSPFieldDataAdministration.ResumeLayout(false);
             this.tabPageWatersheds.ResumeLayout(false);
             this.tabPageWatersheds.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSubwatersheds)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fKSUBWATERSHEDWATERSHEDBindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sWSPWATERSHEDBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sANDBOXDataSet)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewWatersheds)).EndInit();
             this.tabPageEvaluators.ResumeLayout(false);
             this.tabPageEvaluators.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEvaluators)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sWSPEVALUATORBindingSource)).EndInit();
             this.tabPageTypes.ResumeLayout(false);
             this.tabPageTypes.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMaterials)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sWSPMATERIALTYPEBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewShapes)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sWSPSHAPETYPEBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFacings)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sWSPFACINGTYPEBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCulvertOpenings)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sWSPCULVERTOPENINGTYPEBindingSource)).EndInit();
             this.tabPageViewsAndSurveys.ResumeLayout(false);
             this.tabPageViewsAndSurveys.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fKSUBWATERSHEDWATERSHEDBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView8)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fKVIEWSUBWATERSHEDBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sWSPSURVEYPAGEBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewViewsAndSurveys)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sWSPVIEWBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sWSPSURVEYPAGEBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fKVIEWSUBWATERSHEDBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1006,7 +1007,7 @@
 
         #endregion
 
-        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabControl tabControlFormSWSPFieldDataAdministration;
         private System.Windows.Forms.TabPage tabPageWatersheds;
         private System.Windows.Forms.TabPage tabPageEvaluators;
         private System.Windows.Forms.TabPage tabPageTypes;
@@ -1018,11 +1019,11 @@
         private System.Windows.Forms.Button buttonSubwatershedsAdd;
         private System.Windows.Forms.Button buttonWatershedsDelete;
         private System.Windows.Forms.Button buttonWatershedsAdd;
-        private System.Windows.Forms.DataGridView dataGridView2;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dataGridViewSubwatersheds;
+        private System.Windows.Forms.DataGridView dataGridViewWatersheds;
         private System.Windows.Forms.Button buttonEvaluatorsDelete;
         private System.Windows.Forms.Button buttonEvaluatorsAdd;
-        private System.Windows.Forms.DataGridView dataGridView3;
+        private System.Windows.Forms.DataGridView dataGridViewEvaluators;
         private System.Windows.Forms.Label labelEvaluators;
         private System.Windows.Forms.Button buttonMaterialsDelete;
         private System.Windows.Forms.Button buttonMaterialsAdd;
@@ -1034,10 +1035,10 @@
         private System.Windows.Forms.Button buttonCulvertOpeningsAdd;
         private System.Windows.Forms.Label labelMaterials;
         private System.Windows.Forms.Label labelShapes;
-        private System.Windows.Forms.DataGridView dataGridView7;
-        private System.Windows.Forms.DataGridView dataGridView6;
-        private System.Windows.Forms.DataGridView dataGridView5;
-        private System.Windows.Forms.DataGridView dataGridView4;
+        private System.Windows.Forms.DataGridView dataGridViewMaterials;
+        private System.Windows.Forms.DataGridView dataGridViewShapes;
+        private System.Windows.Forms.DataGridView dataGridViewFacings;
+        private System.Windows.Forms.DataGridView dataGridViewCulvertOpenings;
         private System.Windows.Forms.Label labelFacings;
         private System.Windows.Forms.Label labelCulvertOpenings;
         private System.Windows.Forms.Label labelSubwatershed;
@@ -1046,7 +1047,7 @@
         private System.Windows.Forms.Button buttonDelete;
         private System.Windows.Forms.Button buttonAddSurveyPage;
         private System.Windows.Forms.Button buttonAddView;
-        private System.Windows.Forms.DataGridView dataGridView8;
+        private System.Windows.Forms.DataGridView dataGridViewViewsAndSurveys;
         private System.Windows.Forms.ComboBox comboBoxSubwatershed;
         private System.Windows.Forms.ComboBox comboBoxWatershed;
         private SANDBOXDataSet sANDBOXDataSet;
