@@ -11,9 +11,31 @@ namespace SWI_2
 {
     public partial class FormAddView : Form
     {
+        private int _MapNo;
+        private int _SurveyPage;
+        private FormMain _MyParentForm;
+
         public FormAddView()
         {
             InitializeComponent();
+        }
+
+        public int SurveyPage
+        {
+            get { return _SurveyPage; }
+            set { _SurveyPage = value; }
+        }
+
+        public int MapNo
+        {
+            get { return _MapNo; }
+            set { _MapNo = value; }
+        }
+
+        public FormMain MyParentForm
+        {
+            get { return _MyParentForm; }
+            set { _MyParentForm = value; }
         }
 
         private void buttonOK_Click(object sender, EventArgs e)
@@ -25,6 +47,8 @@ namespace SWI_2
                 
                 SWI_2.SANDBOXDataSetTableAdapters.SWSP_SURVEY_PAGETableAdapter taS = new SWI_2.SANDBOXDataSetTableAdapters.SWSP_SURVEY_PAGETableAdapter();
                 taS.Insert(taV.ScalarQuery(), (int)numericUpDownAddFirstSurveyPage.Value, System.DateTime.Today, "", "");
+                _MyParentForm.CurrentView = (int)numericUpDownAddView.Value;
+                _MyParentForm.CurrentSurveyPage = (int)numericUpDownAddFirstSurveyPage.Value;
             }
             catch (Exception ex)
             {
