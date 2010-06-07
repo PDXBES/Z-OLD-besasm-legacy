@@ -11,9 +11,27 @@ namespace SWI_2
 {
     public partial class FormMain : Form
     {
+        private int _CurrentSurveyPage;
+        private int _CurrentView;
+        private int _lastGlobalID;
+        private enum _lastSearchVar { ditch, culvert, pipe };
+        private _lastSearchVar _lastSearch; 
+
         public FormMain()
         {
             InitializeComponent();
+        }
+
+        public int CurrentSurveyPage
+        {
+            get { return _CurrentSurveyPage; }
+            set { _CurrentSurveyPage = value; }
+        }
+
+        public int CurrentView
+        {
+            get { return _CurrentView; }
+            set { _CurrentView = value; }
         }
 
         private void buttonUpdateDatabase_Click(object sender, EventArgs e)
@@ -24,9 +42,11 @@ namespace SWI_2
 
         private void buttonAddView_Click(object sender, EventArgs e)
         {
-            FormAddView child = new FormAddView();
+            CurrentView = (int)((System.Data.DataRowView)fKVIEWSUBWATERSHEDBindingSource.Current)["view_number"];
+            CurrentSurveyPage = (int)((System.Data.DataRowView)fKSURVEYPAGEVIEWBindingSource.Current)["page_number"];
 
-            
+            FormAddView child = new FormAddView();
+            child.MyParentForm = this;
             this.Enabled = false;
             child.ShowDialog();
             // TODO: This line of code loads data into the 'sANDBOXDataSet.SWSP_VIEW' table. You can move, or remove it, as needed.
@@ -34,17 +54,38 @@ namespace SWI_2
             // TODO: This line of code loads data into the 'sANDBOXDataSet.SWSP_SURVEY_PAGE' table. You can move, or remove it, as needed.
             this.sWSP_SURVEY_PAGETableAdapter.Fill(this.sANDBOXDataSet.SWSP_SURVEY_PAGE);
             this.Enabled = true;
+            while (this.CurrentView       != (int)((System.Data.DataRowView)fKVIEWSUBWATERSHEDBindingSource.Current)["view_number"])
+            {
+                fKVIEWSUBWATERSHEDBindingSource.MoveNext();
+            }
+            while (this.CurrentSurveyPage != (int)((System.Data.DataRowView)fKSURVEYPAGEVIEWBindingSource.Current)["page_number"])
+            {
+                fKSURVEYPAGEVIEWBindingSource.MoveNext();
+            }
         }
 
         private void buttonAddSurveyPage_Click(object sender, EventArgs e)
         {
+            CurrentView = (int)((System.Data.DataRowView)fKVIEWSUBWATERSHEDBindingSource.Current)["view_number"];
+            CurrentSurveyPage = (int)((System.Data.DataRowView)fKSURVEYPAGEVIEWBindingSource.Current)["page_number"];
+
             FormAddSurvey child = new FormAddSurvey();
-            child.MapNo = (int)comboBoxView.SelectedValue;
+            child.MapNo = (int)((System.Data.DataRowView)comboBoxView.SelectedItem)["view_number"];
+            child.SurveyPage = (int)((System.Data.DataRowView)comboBoxSurveyPage.SelectedItem)["page_number"];
+            child.MyParentForm = this;
             this.Enabled = false;
             child.ShowDialog();
             // TODO: This line of code loads data into the 'sANDBOXDataSet.SWSP_SURVEY_PAGE' table. You can move, or remove it, as needed.
             this.sWSP_SURVEY_PAGETableAdapter.Fill(this.sANDBOXDataSet.SWSP_SURVEY_PAGE);
             this.Enabled = true;
+            while (this.CurrentView != (int)((System.Data.DataRowView)fKVIEWSUBWATERSHEDBindingSource.Current)["view_number"])
+            {
+                fKVIEWSUBWATERSHEDBindingSource.MoveNext();
+            }
+            while (this.CurrentSurveyPage != (int)((System.Data.DataRowView)fKSURVEYPAGEVIEWBindingSource.Current)["page_number"])
+            {
+                fKSURVEYPAGEVIEWBindingSource.MoveNext();
+            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -79,6 +120,9 @@ namespace SWI_2
             this.sWSP_SUBWATERSHEDTableAdapter.Fill(this.sANDBOXDataSet.SWSP_SUBWATERSHED);
             // TODO: This line of code loads data into the 'sANDBOXDataSet.SWSP_WATERSHED' table. You can move, or remove it, as needed.
             this.sWSP_WATERSHEDTableAdapter.Fill(this.sANDBOXDataSet.SWSP_WATERSHED);
+
+            _lastGlobalID = 0;
+            _lastSearch = _lastSearchVar.culvert; 
 
             try
             {
@@ -173,7 +217,7 @@ namespace SWI_2
             }*/
         }
 
-        private void tabPage1_Entered(object sender, EventArgs e)
+        private void tabPageDitches_Entered(object sender, EventArgs e)
         {
             try
             {
@@ -212,7 +256,7 @@ namespace SWI_2
             }
         }
 
-        private void tabPage3_Enter(object sender, EventArgs e)
+        private void tabPagePipes_Enter(object sender, EventArgs e)
         {
             try
             {
@@ -299,7 +343,7 @@ namespace SWI_2
             this.sWSP_DITCHTableAdapter.Fill((SANDBOXDataSet.SWSP_DITCHDataTable)((SANDBOXDataSet)this.sWSPDITCHBindingSource.DataSource).SWSP_DITCH);
             while (currentSelected != (int)((System.Data.DataRowView)fKDITCHSURVEYPAGEBindingSource.Current)["global_id"])
             {
-                fKPIPESURVEYPAGEBindingSource.MoveNext();
+                fKDITCHSURVEYPAGEBindingSource.MoveNext();
             }
             dataGridViewDitches.Refresh();
         }
@@ -404,6 +448,47 @@ namespace SWI_2
             this.Enabled = false;
             child.ShowDialog();
             this.Enabled = true;
+        }
+
+        private void buttonFindNode_Click(object sender, EventArgs e)
+        {
+            //Depending on the last search, we look for the next match for the string in the textboxFindNode text string.
+            //order the last searched table(pipes, culverts or ditches) by global_id, exclude global ids that are
+            //smaller than the last searched global id, and select the one with the lowest global_id.
+            //if there is a match, set the _lastGlobalID variable to the matched globalID value and
+            //keep the _lastSearch variable constant as well.
+            //if there are no matches, then reset the _lastGlobalID variable to 0 and set _lastSearch to _lastSearch+1
+            //search the new table, repeat.
+
+            //if the currently selected record does not match the search node string, then there is no effective last search
+            //if the currently selected record does match the search node string, then record the globalID and the table that
+            //we are in.
+
+            //if there is no effective last search, then that means that there is a possibility of no match.
+            //In this case, just search through all the tables in the order of ditch, culvert, pipe.
+            //if there is no match at all, then just output a message box saying there is no match.
+            int lastGlobalIDSaver = _lastGlobalID;
+            _lastSearchVar lastSearchSaver = _lastSearch;
+
+            //first check to see if there is an effective last search:
+            //the tab being viewed will determine what selected record and table needs to be looked at:
+            if (tabControlDitchesCulvertsPipes.SelectedTab == tabControlDitchesCulvertsPipes.TabPages["tabpageDitches"])
+            {
+                MessageBox.Show("Ditches");
+            }
+            else if (tabControlDitchesCulvertsPipes.SelectedTab == tabControlDitchesCulvertsPipes.TabPages["tabpageCulverts"])
+            {
+                MessageBox.Show("Culverts");
+            }
+            else if (tabControlDitchesCulvertsPipes.SelectedTab == tabControlDitchesCulvertsPipes.TabPages["tabpagePipes"])
+            {
+                MessageBox.Show("Pipes");
+            }
+
+            
+            //SELECT TOP 1 FROM DITCH   WHERE global_id > _lastGlobalID AND node like textboxFindNode.text ORDER BY global_id
+            //SELECT TOP 1 FROM CULVERT WHERE global_id > _lastGlobalID AND node like textboxFindNode.text ORDER BY global_id
+            //SELECT TOP 1 FROM PIPE    WHERE global_id > _lastGlobalID AND (us_node like textboxFindNode.text OR ds_node like textboxFindNode.text) ORDER BY global_id
         }
     }
 }

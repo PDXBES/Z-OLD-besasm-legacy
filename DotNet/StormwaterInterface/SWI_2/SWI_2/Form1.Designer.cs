@@ -224,7 +224,7 @@
             this.buttonAddSurveyPage.Location = new System.Drawing.Point(242, 44);
             this.buttonAddSurveyPage.Name = "buttonAddSurveyPage";
             this.buttonAddSurveyPage.Size = new System.Drawing.Size(119, 22);
-            this.buttonAddSurveyPage.TabIndex = 3;
+            this.buttonAddSurveyPage.TabIndex = 100;
             this.buttonAddSurveyPage.Text = "Add survey page...";
             this.buttonAddSurveyPage.UseVisualStyleBackColor = true;
             this.buttonAddSurveyPage.Click += new System.EventHandler(this.buttonAddSurveyPage_Click);
@@ -236,7 +236,7 @@
             this.dateTimePickerSurveyDate.Location = new System.Drawing.Point(12, 97);
             this.dateTimePickerSurveyDate.Name = "dateTimePickerSurveyDate";
             this.dateTimePickerSurveyDate.Size = new System.Drawing.Size(141, 20);
-            this.dateTimePickerSurveyDate.TabIndex = 6;
+            this.dateTimePickerSurveyDate.TabIndex = 3;
             // 
             // fKSURVEYPAGEVIEWBindingSource
             // 
@@ -303,7 +303,7 @@
             this.tabPageDitches.TabIndex = 0;
             this.tabPageDitches.Text = "Ditches";
             this.tabPageDitches.UseVisualStyleBackColor = true;
-            this.tabPageDitches.Enter += new System.EventHandler(this.tabPage1_Entered);
+            this.tabPageDitches.Enter += new System.EventHandler(this.tabPageDitches_Entered);
             // 
             // buttonUpdateDitch
             // 
@@ -337,7 +337,7 @@
             this.comboBoxDitchesFacingDirection.Location = new System.Drawing.Point(469, 27);
             this.comboBoxDitchesFacingDirection.Name = "comboBoxDitchesFacingDirection";
             this.comboBoxDitchesFacingDirection.Size = new System.Drawing.Size(107, 21);
-            this.comboBoxDitchesFacingDirection.TabIndex = 62;
+            this.comboBoxDitchesFacingDirection.TabIndex = 59;
             this.comboBoxDitchesFacingDirection.ValueMember = "facing_type_id";
             // 
             // fKDITCHSURVEYPAGEBindingSource
@@ -360,7 +360,7 @@
             this.comboBoxDitchesMaterial.Location = new System.Drawing.Point(469, 136);
             this.comboBoxDitchesMaterial.Name = "comboBoxDitchesMaterial";
             this.comboBoxDitchesMaterial.Size = new System.Drawing.Size(107, 21);
-            this.comboBoxDitchesMaterial.TabIndex = 61;
+            this.comboBoxDitchesMaterial.TabIndex = 63;
             this.comboBoxDitchesMaterial.ValueMember = "material_type_id";
             // 
             // sWSPMATERIALTYPEBindingSource
@@ -380,7 +380,7 @@
             0});
             this.numericUpDownDitchesTopWidth.Name = "numericUpDownDitchesTopWidth";
             this.numericUpDownDitchesTopWidth.Size = new System.Drawing.Size(107, 20);
-            this.numericUpDownDitchesTopWidth.TabIndex = 60;
+            this.numericUpDownDitchesTopWidth.TabIndex = 61;
             // 
             // numericUpDownDitchesDepth
             // 
@@ -394,7 +394,7 @@
             0});
             this.numericUpDownDitchesDepth.Name = "numericUpDownDitchesDepth";
             this.numericUpDownDitchesDepth.Size = new System.Drawing.Size(107, 20);
-            this.numericUpDownDitchesDepth.TabIndex = 59;
+            this.numericUpDownDitchesDepth.TabIndex = 60;
             // 
             // textBoxDitchesNode
             // 
@@ -481,7 +481,7 @@
             0});
             this.numericUpDownDitchesBottomWidth.Name = "numericUpDownDitchesBottomWidth";
             this.numericUpDownDitchesBottomWidth.Size = new System.Drawing.Size(107, 20);
-            this.numericUpDownDitchesBottomWidth.TabIndex = 44;
+            this.numericUpDownDitchesBottomWidth.TabIndex = 62;
             // 
             // buttonDitchesDelete
             // 
@@ -608,7 +608,7 @@
             this.comboBoxCulvertsShape.Location = new System.Drawing.Point(478, 80);
             this.comboBoxCulvertsShape.Name = "comboBoxCulvertsShape";
             this.comboBoxCulvertsShape.Size = new System.Drawing.Size(107, 21);
-            this.comboBoxCulvertsShape.TabIndex = 48;
+            this.comboBoxCulvertsShape.TabIndex = 46;
             // 
             // sWSPSHAPETYPEBindingSource
             // 
@@ -624,7 +624,7 @@
             this.comboBoxCulvertsType.Location = new System.Drawing.Point(478, 53);
             this.comboBoxCulvertsType.Name = "comboBoxCulvertsType";
             this.comboBoxCulvertsType.Size = new System.Drawing.Size(107, 21);
-            this.comboBoxCulvertsType.TabIndex = 47;
+            this.comboBoxCulvertsType.TabIndex = 45;
             // 
             // sWSPCULVERTOPENINGTYPEBindingSource
             // 
@@ -641,7 +641,7 @@
             this.comboBoxCulvertsMaterial.Location = new System.Drawing.Point(478, 159);
             this.comboBoxCulvertsMaterial.Name = "comboBoxCulvertsMaterial";
             this.comboBoxCulvertsMaterial.Size = new System.Drawing.Size(107, 21);
-            this.comboBoxCulvertsMaterial.TabIndex = 45;
+            this.comboBoxCulvertsMaterial.TabIndex = 49;
             this.comboBoxCulvertsMaterial.ValueMember = "material_type_id";
             // 
             // fKCULVERTSURVEYPAGEBindingSource1
@@ -756,7 +756,7 @@
             0});
             this.numericUpDownCulvertsUnobstructedHeight.Name = "numericUpDownCulvertsUnobstructedHeight";
             this.numericUpDownCulvertsUnobstructedHeight.Size = new System.Drawing.Size(107, 20);
-            this.numericUpDownCulvertsUnobstructedHeight.TabIndex = 26;
+            this.numericUpDownCulvertsUnobstructedHeight.TabIndex = 48;
             // 
             // numericUpDownCulvertsFullDepth
             // 
@@ -770,7 +770,7 @@
             0});
             this.numericUpDownCulvertsFullDepth.Name = "numericUpDownCulvertsFullDepth";
             this.numericUpDownCulvertsFullDepth.Size = new System.Drawing.Size(107, 20);
-            this.numericUpDownCulvertsFullDepth.TabIndex = 25;
+            this.numericUpDownCulvertsFullDepth.TabIndex = 47;
             // 
             // buttonCulvertsDelete
             // 
@@ -854,7 +854,7 @@
             this.tabPagePipes.TabIndex = 2;
             this.tabPagePipes.Text = "Pipes";
             this.tabPagePipes.UseVisualStyleBackColor = true;
-            this.tabPagePipes.Enter += new System.EventHandler(this.tabPage3_Enter);
+            this.tabPagePipes.Enter += new System.EventHandler(this.tabPagePipes_Enter);
             // 
             // buttonUpdatePipe
             // 
@@ -888,7 +888,7 @@
             this.comboBoxPipesShape.Location = new System.Drawing.Point(474, 157);
             this.comboBoxPipesShape.Name = "comboBoxPipesShape";
             this.comboBoxPipesShape.Size = new System.Drawing.Size(107, 21);
-            this.comboBoxPipesShape.TabIndex = 70;
+            this.comboBoxPipesShape.TabIndex = 68;
             this.comboBoxPipesShape.ValueMember = "shape_type_id";
             // 
             // fKPIPESURVEYPAGEBindingSource
@@ -906,7 +906,7 @@
             this.comboBoxPipesMaterial.Location = new System.Drawing.Point(474, 130);
             this.comboBoxPipesMaterial.Name = "comboBoxPipesMaterial";
             this.comboBoxPipesMaterial.Size = new System.Drawing.Size(107, 21);
-            this.comboBoxPipesMaterial.TabIndex = 69;
+            this.comboBoxPipesMaterial.TabIndex = 67;
             this.comboBoxPipesMaterial.ValueMember = "material_type_id";
             // 
             // labelPipesShape
@@ -939,7 +939,7 @@
             0});
             this.numericUpDownPipesInnerDiameter.Name = "numericUpDownPipesInnerDiameter";
             this.numericUpDownPipesInnerDiameter.Size = new System.Drawing.Size(107, 20);
-            this.numericUpDownPipesInnerDiameter.TabIndex = 64;
+            this.numericUpDownPipesInnerDiameter.TabIndex = 66;
             // 
             // textBoxPipesDSNode
             // 
@@ -1025,7 +1025,7 @@
             0});
             this.numericUpDownPipesDSDepth.Name = "numericUpDownPipesDSDepth";
             this.numericUpDownPipesDSDepth.Size = new System.Drawing.Size(107, 20);
-            this.numericUpDownPipesDSDepth.TabIndex = 49;
+            this.numericUpDownPipesDSDepth.TabIndex = 65;
             // 
             // numericUpDownPipesUSDepth
             // 
@@ -1039,7 +1039,7 @@
             0});
             this.numericUpDownPipesUSDepth.Name = "numericUpDownPipesUSDepth";
             this.numericUpDownPipesUSDepth.Size = new System.Drawing.Size(107, 20);
-            this.numericUpDownPipesUSDepth.TabIndex = 48;
+            this.numericUpDownPipesUSDepth.TabIndex = 64;
             // 
             // buttonPipesDelete
             // 
@@ -1234,6 +1234,7 @@
             this.buttonFindNode.TabIndex = 33;
             this.buttonFindNode.Text = "Find";
             this.buttonFindNode.UseVisualStyleBackColor = true;
+            this.buttonFindNode.Click += new System.EventHandler(this.buttonFindNode_Click);
             // 
             // textBoxFindNode
             // 
@@ -1264,7 +1265,7 @@
             this.textBoxComments.Name = "textBoxComments";
             this.textBoxComments.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBoxComments.Size = new System.Drawing.Size(797, 56);
-            this.textBoxComments.TabIndex = 42;
+            this.textBoxComments.TabIndex = 6;
             // 
             // sWSPEVALUATORBindingSource
             // 
@@ -1280,7 +1281,7 @@
             this.comboBoxWatershed.Location = new System.Drawing.Point(540, 47);
             this.comboBoxWatershed.Name = "comboBoxWatershed";
             this.comboBoxWatershed.Size = new System.Drawing.Size(109, 21);
-            this.comboBoxWatershed.TabIndex = 44;
+            this.comboBoxWatershed.TabIndex = 101;
             this.comboBoxWatershed.ValueMember = "watershed_id";
             // 
             // comboBoxSubwatershed
@@ -1292,7 +1293,7 @@
             this.comboBoxSubwatershed.Location = new System.Drawing.Point(687, 46);
             this.comboBoxSubwatershed.Name = "comboBoxSubwatershed";
             this.comboBoxSubwatershed.Size = new System.Drawing.Size(120, 21);
-            this.comboBoxSubwatershed.TabIndex = 45;
+            this.comboBoxSubwatershed.TabIndex = 102;
             this.comboBoxSubwatershed.ValueMember = "subwatershed_id";
             // 
             // sWSP_WATERSHEDTableAdapter
@@ -1320,7 +1321,7 @@
             this.comboBoxView.Location = new System.Drawing.Point(11, 49);
             this.comboBoxView.Name = "comboBoxView";
             this.comboBoxView.Size = new System.Drawing.Size(43, 21);
-            this.comboBoxView.TabIndex = 46;
+            this.comboBoxView.TabIndex = 1;
             this.comboBoxView.ValueMember = "view_id";
             // 
             // comboBoxSurveyPage
@@ -1331,7 +1332,7 @@
             this.comboBoxSurveyPage.Location = new System.Drawing.Point(67, 49);
             this.comboBoxSurveyPage.Name = "comboBoxSurveyPage";
             this.comboBoxSurveyPage.Size = new System.Drawing.Size(62, 21);
-            this.comboBoxSurveyPage.TabIndex = 47;
+            this.comboBoxSurveyPage.TabIndex = 2;
             this.comboBoxSurveyPage.ValueMember = "survey_page_id";
             this.comboBoxSurveyPage.SelectedValueChanged += new System.EventHandler(this.CheckEvaluatorsAssociatedWithThisSurveyPage);
             // 
@@ -1370,7 +1371,7 @@
             this.checkedListBoxEvaluators.Location = new System.Drawing.Point(264, 99);
             this.checkedListBoxEvaluators.Name = "checkedListBoxEvaluators";
             this.checkedListBoxEvaluators.Size = new System.Drawing.Size(96, 49);
-            this.checkedListBoxEvaluators.TabIndex = 48;
+            this.checkedListBoxEvaluators.TabIndex = 5;
             this.checkedListBoxEvaluators.ValueMember = "evaluator_id";
             this.checkedListBoxEvaluators.SelectedIndexChanged += new System.EventHandler(this.checkedListBoxEvaluators_SelectedIndexChanged);
             // 
@@ -1431,7 +1432,7 @@
             this.textBoxWeather.Location = new System.Drawing.Point(170, 99);
             this.textBoxWeather.Name = "textBoxWeather";
             this.textBoxWeather.Size = new System.Drawing.Size(72, 20);
-            this.textBoxWeather.TabIndex = 49;
+            this.textBoxWeather.TabIndex = 4;
             // 
             // fKCULVERTFACINGTYPEBindingSource1
             // 
