@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemsAnalysis.Reporting.R
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor", "..\ModelingUtils\ResultsExtractor\SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor.csproj", "{AA8663B3-4B31-4F11-BD73-9CC3EF99101F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemsAnalysis.Modeling.Alternatives", "..\Alternatives\SystemsAnalysis.Modeling.Alternatives.csproj", "{D5E4B31B-D773-4877-9008-80F74475DE93}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemsAnalysis.Modeling", "..\Modeling\SystemsAnalysis.Modeling.csproj", "{54555B74-906E-4D29-9BC3-7653805B6AD0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +41,14 @@ Global
 		{AA8663B3-4B31-4F11-BD73-9CC3EF99101F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AA8663B3-4B31-4F11-BD73-9CC3EF99101F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AA8663B3-4B31-4F11-BD73-9CC3EF99101F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5E4B31B-D773-4877-9008-80F74475DE93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5E4B31B-D773-4877-9008-80F74475DE93}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5E4B31B-D773-4877-9008-80F74475DE93}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5E4B31B-D773-4877-9008-80F74475DE93}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54555B74-906E-4D29-9BC3-7653805B6AD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54555B74-906E-4D29-9BC3-7653805B6AD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54555B74-906E-4D29-9BC3-7653805B6AD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54555B74-906E-4D29-9BC3-7653805B6AD0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

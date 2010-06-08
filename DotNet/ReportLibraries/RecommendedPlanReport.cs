@@ -24,7 +24,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
     private string modelPath;
     private string alternativePath;
     private string swmmOutputFile;
-    private AlternativeReport alternativeReport;
+    public AlternativeReport alternativeReport;
 
     public RecommendedPlanReport()
     {
@@ -65,6 +65,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
         //auxilaryDataDescription.Add("AlternativePath", "Alternative Package (alternative_package.mdb)");
         auxilaryDataDescription.Add("SwmmOutputFile", "Swmm Output File (.out)");
       }
+      
       public override bool RequiresAuxilaryData
       {
         get
@@ -72,6 +73,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
           return true;
         }
       }
+      
       public override Dictionary<string, Parameter> AuxilaryData
       {
         get
@@ -93,13 +95,17 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
         modelPath = Path.GetDirectoryName(modelPath);
       }
 
-      ModelConfigurationDataSet modelConfigDS = new ModelConfigurationDataSet(Path.GetFullPath(modelPath));
-      ModelConfigurationDataSet.AlternativeRow[] altRow = modelConfigDS.GetIncludedAlternatives();
-      alternativePath = altRow[0].BaseModel + "alternatives\\" + altRow[0].Name;
-
+      //Passing the AlternativePath is optional. If it is not passed, then read it from the Output Model's Model.xml file
       if (!AuxilaryData.ContainsKey("AlternativePath"))
       {
+        ModelConfigurationDataSet modelConfigDS = new ModelConfigurationDataSet(Path.GetFullPath(modelPath));
+        ModelConfigurationDataSet.AlternativeRow[] altRow = modelConfigDS.GetIncludedAlternatives();
+        alternativePath = altRow[altRow.Length - 1].BaseModel + "alternatives\\" + altRow[altRow.Length - 1].Name;
         AuxilaryData.Add("AlternativePath", new Parameter("AlternativePath", alternativePath));
+      }
+      else
+      {
+        alternativePath = AuxilaryData["AlternativePath"].Value;
       }
       base.LoadAuxilaryData(AuxilaryData);
       //alternativePath = AuxilaryData["AlternativePath"].Value;
@@ -525,7 +531,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
           NodeName = grpNodeName.Key.NodeName
         };
 
-      //Roof Bioinfiltration Storage - Filtered and grouped by Focus Area
+      //Parking Bioinfiltration Storage - Filtered and grouped by Focus Area
       var qryParkTargetsBio =
         from query1 in qryParkTargetsBioGroupByFacNodeName
         join tableE18 in scDS.TableE18
@@ -573,7 +579,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
           NodeName = grpNodeName.Key.NodeName
         };
 
-      //Roof Bioinfiltration Storage - Filtered and grouped by Focus Area
+      //Parking Bioinfiltration Storage - Filtered and grouped by Focus Area
       var qryParkTargetsBio =
         from query1 in qryParkTargetsBioGroupByFacNodeName
         join tableE19 in scDS.TableE19

@@ -43,6 +43,9 @@
       this.btnLoadE19Data = new Infragistics.Win.Misc.UltraButton();
       this.dgvTableE19 = new System.Windows.Forms.DataGridView();
       this.tabSetDataSources = new System.Windows.Forms.TabPage();
+      this.lblModelOutputPath = new Infragistics.Win.Misc.UltraLabel();
+      this.lblAlternativePath = new Infragistics.Win.Misc.UltraLabel();
+      this.lblBaseModelPath = new Infragistics.Win.Misc.UltraLabel();
       this.btnLoadRpReport = new Infragistics.Win.Misc.UltraButton();
       this.btnChooseTestSwmmOutput = new Infragistics.Win.Misc.UltraButton();
       this.btnChooseTestAltPath = new Infragistics.Win.Misc.UltraButton();
@@ -51,9 +54,7 @@
       this.txtTestAltPath = new System.Windows.Forms.TextBox();
       this.txtTestModelPath = new System.Windows.Forms.TextBox();
       this.ofdModelDataSource = new System.Windows.Forms.OpenFileDialog();
-      this.lblBaseModelPath = new Infragistics.Win.Misc.UltraLabel();
-      this.lblAlternativePath = new Infragistics.Win.Misc.UltraLabel();
-      this.lblModelOutputPath = new Infragistics.Win.Misc.UltraLabel();
+      this.btnClearTextBox = new Infragistics.Win.Misc.UltraButton();
       this.tabControl1.SuspendLayout();
       this.tabExecuteTestQueries.SuspendLayout();
       this.tabE18TableData.SuspendLayout();
@@ -126,6 +127,7 @@
       // 
       // tabExecuteTestQueries
       // 
+      this.tabExecuteTestQueries.Controls.Add(this.btnClearTextBox);
       this.tabExecuteTestQueries.Controls.Add(this.textBox1);
       this.tabExecuteTestQueries.Controls.Add(this.btnExecuteQueriesDirect);
       this.tabExecuteTestQueries.Controls.Add(this.btnUseReportLibrary);
@@ -218,6 +220,33 @@
       this.tabSetDataSources.Text = "Load RP Report";
       this.tabSetDataSources.UseVisualStyleBackColor = true;
       // 
+      // lblModelOutputPath
+      // 
+      this.lblModelOutputPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+      this.lblModelOutputPath.Location = new System.Drawing.Point(6, 118);
+      this.lblModelOutputPath.Name = "lblModelOutputPath";
+      this.lblModelOutputPath.Size = new System.Drawing.Size(121, 14);
+      this.lblModelOutputPath.TabIndex = 9;
+      this.lblModelOutputPath.Text = "Load Model Results";
+      // 
+      // lblAlternativePath
+      // 
+      this.lblAlternativePath.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+      this.lblAlternativePath.Location = new System.Drawing.Point(5, 71);
+      this.lblAlternativePath.Name = "lblAlternativePath";
+      this.lblAlternativePath.Size = new System.Drawing.Size(139, 15);
+      this.lblAlternativePath.TabIndex = 8;
+      this.lblAlternativePath.Text = "Load Alternative Path";
+      // 
+      // lblBaseModelPath
+      // 
+      this.lblBaseModelPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+      this.lblBaseModelPath.Location = new System.Drawing.Point(6, 25);
+      this.lblBaseModelPath.Name = "lblBaseModelPath";
+      this.lblBaseModelPath.Size = new System.Drawing.Size(123, 14);
+      this.lblBaseModelPath.TabIndex = 7;
+      this.lblBaseModelPath.Text = "Load Base Model Path";
+      // 
       // btnLoadRpReport
       // 
       this.btnLoadRpReport.ButtonStyle = Infragistics.Win.UIElementButtonStyle.VisualStudio2005Button;
@@ -279,32 +308,15 @@
       this.txtTestModelPath.Size = new System.Drawing.Size(373, 20);
       this.txtTestModelPath.TabIndex = 0;
       // 
-      // lblBaseModelPath
+      // btnClearTextBox
       // 
-      this.lblBaseModelPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-      this.lblBaseModelPath.Location = new System.Drawing.Point(6, 25);
-      this.lblBaseModelPath.Name = "lblBaseModelPath";
-      this.lblBaseModelPath.Size = new System.Drawing.Size(123, 14);
-      this.lblBaseModelPath.TabIndex = 7;
-      this.lblBaseModelPath.Text = "Load Base Model Path";
-      // 
-      // lblAlternativePath
-      // 
-      this.lblAlternativePath.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-      this.lblAlternativePath.Location = new System.Drawing.Point(5, 71);
-      this.lblAlternativePath.Name = "lblAlternativePath";
-      this.lblAlternativePath.Size = new System.Drawing.Size(139, 15);
-      this.lblAlternativePath.TabIndex = 8;
-      this.lblAlternativePath.Text = "Load Alternative Path";
-      // 
-      // lblModelOutputPath
-      // 
-      this.lblModelOutputPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-      this.lblModelOutputPath.Location = new System.Drawing.Point(6, 118);
-      this.lblModelOutputPath.Name = "lblModelOutputPath";
-      this.lblModelOutputPath.Size = new System.Drawing.Size(121, 14);
-      this.lblModelOutputPath.TabIndex = 9;
-      this.lblModelOutputPath.Text = "Load Model Results";
+      this.btnClearTextBox.ButtonStyle = Infragistics.Win.UIElementButtonStyle.VisualStudio2005Button;
+      this.btnClearTextBox.Location = new System.Drawing.Point(336, 260);
+      this.btnClearTextBox.Name = "btnClearTextBox";
+      this.btnClearTextBox.Size = new System.Drawing.Size(73, 23);
+      this.btnClearTextBox.TabIndex = 4;
+      this.btnClearTextBox.Text = "Clear Text";
+      this.btnClearTextBox.Click += new System.EventHandler(this.btnClearTextBox_Click);
       // 
       // frmMain
       // 
@@ -357,6 +369,7 @@
     private Infragistics.Win.Misc.UltraLabel lblModelOutputPath;
     private Infragistics.Win.Misc.UltraLabel lblAlternativePath;
     private Infragistics.Win.Misc.UltraLabel lblBaseModelPath;
+    private Infragistics.Win.Misc.UltraButton btnClearTextBox;
 
   }
 }

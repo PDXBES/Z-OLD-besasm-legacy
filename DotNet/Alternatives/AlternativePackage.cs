@@ -14,6 +14,7 @@ using System.Text;
 using SystemsAnalysis.Modeling;
 using SystemsAnalysis.Modeling.Alternatives;
 using SystemsAnalysis.Types;
+using System.Linq;
 #endregion
 
 namespace SystemsAnalysis.Modeling.Alternatives
@@ -64,6 +65,19 @@ namespace SystemsAnalysis.Modeling.Alternatives
         this.altNodes = new AltNodes(alternativePath);
         this.altDscs = new AltDscs(alternativePath);
         LoadAltParkingTargets(alternativePath);
+
+        List<int> missingAltRoofTargets;
+        missingAltRoofTargets = ValidateAltRoofTargets(alternativePath);
+        if (missingAltRoofTargets.Count != 0)
+        {
+          string badICs = "Found ICs that are not contained in the base model: ";
+          foreach (int i in missingAltRoofTargets)
+          {
+            badICs += i + " ";
+          }
+          throw new Exception(badICs);
+        }
+
         LoadAltRoofTargets(alternativePath);
         LoadAltStreetTargets(alternativePath);
         LoadFocusAreaList();
@@ -99,8 +113,28 @@ namespace SystemsAnalysis.Modeling.Alternatives
       get { return focusAreaList; }
     }
     private void LoadFocusAreaList()
-    {
-      focusAreaList = new List<string>();
+    {           
+      var query = 
+        (
+          from altStreetTargets in ModelAltStreetTargets.Values
+          select altStreetTargets.FocusArea
+        ).Union
+        (
+          from altRoofTargets in ModelAltRoofTargets.Values
+          select altRoofTargets.FocusArea
+        ).Union
+        (
+          from altParkingTargets in ModelAltParkingTargets.Values
+          select altParkingTargets.FocusArea
+        ).Union
+        (
+          from AltLink altLinks in ModelAltLinks.Values
+          select altLinks.FocusArea
+        ).OrderBy(s => s);
+
+      focusAreaList = new List<string>(query);// (List<string>)query.AsEnumerable<string>();
+      
+      /*focusAreaList = new List<string>();
       foreach (AltLink altLink in ModelAltLinks.Values)
       {
         if (!focusAreaList.Contains(altLink.FocusArea))
@@ -129,7 +163,7 @@ namespace SystemsAnalysis.Modeling.Alternatives
           focusAreaList.Add(pt.FocusArea);
         }
       }
-      focusAreaList.Sort();
+      focusAreaList.Sort();*/
     }
 
     public AltLinks ModelAltLinks
@@ -313,6 +347,26 @@ namespace SystemsAnalysis.Modeling.Alternatives
       }
     }
 
+    public List<int> ValidateAltRoofTargets(string alternativePath)
+    {
+      List<int> missingAltRoofTargets = new List<int>();
+      DataAccess.AlternativeDataSetTableAdapters.AltRoofTargetsTableAdapter altRoofTargetsAdapter =
+          new SystemsAnalysis.DataAccess.AlternativeDataSetTableAdapters.AltRoofTargetsTableAdapter(alternativePath);
+        DataAccess.AlternativeDataSet.AltRoofTargetsDataTable altRoofTargetsTable =
+          new SystemsAnalysis.DataAccess.AlternativeDataSet.AltRoofTargetsDataTable();
+
+        altRoofTargetsAdapter.Fill(altRoofTargetsTable);
+
+        altRoofTargets = new Dictionary<int, RoofTarget>();
+        foreach (DataAccess.AlternativeDataSet.AltRoofTargetsRow row in altRoofTargetsTable)
+        {
+          if (!baseModel.ModelRoofTargets.ContainsKey(row.ICID))
+          {
+            missingAltRoofTargets.Add(row.ICID);
+          }          
+        }
+        return missingAltRoofTargets;
+    }
     void LoadAltRoofTargets(string alternativePath)
     {
       try
@@ -327,6 +381,10 @@ namespace SystemsAnalysis.Modeling.Alternatives
         altRoofTargets = new Dictionary<int, RoofTarget>();
         foreach (DataAccess.AlternativeDataSet.AltRoofTargetsRow row in altRoofTargetsTable)
         {
+          if (!baseModel.ModelRoofTargets.ContainsKey(row.ICID))
+          {
+            throw new Exception("AltRoofTarget with ICID '" + row.ICID + "' not found in Base Model.");       
+          }
           altRoofTargets.Add(row.ICID, new RoofTarget(baseModel.ModelRoofTargets[row.ICID], row.IsFocusAreaNull() ? "" : row.FocusArea));
           altRoofTargets[row.ICID].ToBeBuilt = row.BuildModelIC;
           altRoofTargets[row.ICID].Constructed = row.Constructed;
@@ -353,6 +411,10 @@ namespace SystemsAnalysis.Modeling.Alternatives
         altStreetTargets = new Dictionary<int, StreetTarget>();
         foreach (DataAccess.AlternativeDataSet.AltStreetTargetsRow row in altStreetTargetsTable)
         {
+          if(altStreetTargets.ContainsKey(row.ICID))
+          {
+            throw new Exception(("AltStreetTarget with ICID '" + row.ICID + "' has a duplicate ICID in the Base Model."));       
+          }       
           altStreetTargets.Add(row.ICID, new StreetTarget(baseModel.ModelStreetTargets[row.ICID], row.IsFocusAreaNull() ? "" : row.FocusArea));
           altStreetTargets[row.ICID].ToBeBuilt = row.BuildModelIC;
           altStreetTargets[row.ICID].Constructed = row.Constructed;
