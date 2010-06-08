@@ -55,6 +55,8 @@ namespace SWI_2 {
         
         private SWSP_WATERSHEDDataTable tableSWSP_WATERSHED;
         
+        private RelationalIDsDataTable tableRelationalIDs;
+        
         private global::System.Data.DataRelation relationFK_CULVERT_CULVERT_OPENING_TYPE;
         
         private global::System.Data.DataRelation relationFK_CULVERT_FACING_TYPE;
@@ -169,6 +171,9 @@ namespace SWI_2 {
                 }
                 if ((ds.Tables["SWSP_WATERSHED"] != null)) {
                     base.Tables.Add(new SWSP_WATERSHEDDataTable(ds.Tables["SWSP_WATERSHED"]));
+                }
+                if ((ds.Tables["RelationalIDs"] != null)) {
+                    base.Tables.Add(new RelationalIDsDataTable(ds.Tables["RelationalIDs"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -324,6 +329,15 @@ namespace SWI_2 {
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public RelationalIDsDataTable RelationalIDs {
+            get {
+                return this.tableRelationalIDs;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.BrowsableAttribute(true)]
         [global::System.ComponentModel.DesignerSerializationVisibilityAttribute(global::System.ComponentModel.DesignerSerializationVisibility.Visible)]
         public override global::System.Data.SchemaSerializationMode SchemaSerializationMode {
@@ -426,6 +440,9 @@ namespace SWI_2 {
                 }
                 if ((ds.Tables["SWSP_WATERSHED"] != null)) {
                     base.Tables.Add(new SWSP_WATERSHEDDataTable(ds.Tables["SWSP_WATERSHED"]));
+                }
+                if ((ds.Tables["RelationalIDs"] != null)) {
+                    base.Tables.Add(new RelationalIDsDataTable(ds.Tables["RelationalIDs"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -547,6 +564,12 @@ namespace SWI_2 {
                     this.tableSWSP_WATERSHED.InitVars();
                 }
             }
+            this.tableRelationalIDs = ((RelationalIDsDataTable)(base.Tables["RelationalIDs"]));
+            if ((initTable == true)) {
+                if ((this.tableRelationalIDs != null)) {
+                    this.tableRelationalIDs.InitVars();
+                }
+            }
             this.relationFK_CULVERT_CULVERT_OPENING_TYPE = this.Relations["FK_CULVERT_CULVERT_OPENING_TYPE"];
             this.relationFK_CULVERT_FACING_TYPE = this.Relations["FK_CULVERT_FACING_TYPE"];
             this.relationFK_CULVERT_MATERIAL_TYPE = this.Relations["FK_CULVERT_MATERIAL_TYPE"];
@@ -608,6 +631,8 @@ namespace SWI_2 {
             base.Tables.Add(this.tableSWSP_VIEW);
             this.tableSWSP_WATERSHED = new SWSP_WATERSHEDDataTable();
             base.Tables.Add(this.tableSWSP_WATERSHED);
+            this.tableRelationalIDs = new RelationalIDsDataTable();
+            base.Tables.Add(this.tableRelationalIDs);
             this.relationFK_CULVERT_CULVERT_OPENING_TYPE = new global::System.Data.DataRelation("FK_CULVERT_CULVERT_OPENING_TYPE", new global::System.Data.DataColumn[] {
                         this.tableSWSP_CULVERT_OPENING_TYPE.culvert_opening_type_idColumn}, new global::System.Data.DataColumn[] {
                         this.tableSWSP_CULVERT.culvert_openingColumn}, false);
@@ -774,6 +799,11 @@ namespace SWI_2 {
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private bool ShouldSerializeRelationalIDs() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void SchemaChanged(object sender, global::System.ComponentModel.CollectionChangeEventArgs e) {
             if ((e.Action == global::System.ComponentModel.CollectionChangeAction.Remove)) {
                 this.InitVars();
@@ -855,6 +885,8 @@ namespace SWI_2 {
         public delegate void SWSP_VIEWRowChangeEventHandler(object sender, SWSP_VIEWRowChangeEvent e);
         
         public delegate void SWSP_WATERSHEDRowChangeEventHandler(object sender, SWSP_WATERSHEDRowChangeEvent e);
+        
+        public delegate void RelationalIDsRowChangeEventHandler(object sender, RelationalIDsRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -5269,6 +5301,271 @@ namespace SWI_2 {
         }
         
         /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class RelationalIDsDataTable : global::System.Data.TypedTableBase<RelationalIDsRow> {
+            
+            private global::System.Data.DataColumn columnsurvey_page_id;
+            
+            private global::System.Data.DataColumn columnview_id;
+            
+            private global::System.Data.DataColumn columnsubwatershed_id;
+            
+            private global::System.Data.DataColumn columnwatershed_id;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public RelationalIDsDataTable() {
+                this.TableName = "RelationalIDs";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal RelationalIDsDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected RelationalIDsDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn survey_page_idColumn {
+                get {
+                    return this.columnsurvey_page_id;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn view_idColumn {
+                get {
+                    return this.columnview_id;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn subwatershed_idColumn {
+                get {
+                    return this.columnsubwatershed_id;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn watershed_idColumn {
+                get {
+                    return this.columnwatershed_id;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public RelationalIDsRow this[int index] {
+                get {
+                    return ((RelationalIDsRow)(this.Rows[index]));
+                }
+            }
+            
+            public event RelationalIDsRowChangeEventHandler RelationalIDsRowChanging;
+            
+            public event RelationalIDsRowChangeEventHandler RelationalIDsRowChanged;
+            
+            public event RelationalIDsRowChangeEventHandler RelationalIDsRowDeleting;
+            
+            public event RelationalIDsRowChangeEventHandler RelationalIDsRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void AddRelationalIDsRow(RelationalIDsRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public RelationalIDsRow AddRelationalIDsRow(int survey_page_id, int view_id, int subwatershed_id, int watershed_id) {
+                RelationalIDsRow rowRelationalIDsRow = ((RelationalIDsRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        survey_page_id,
+                        view_id,
+                        subwatershed_id,
+                        watershed_id};
+                rowRelationalIDsRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowRelationalIDsRow);
+                return rowRelationalIDsRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public override global::System.Data.DataTable Clone() {
+                RelationalIDsDataTable cln = ((RelationalIDsDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new RelationalIDsDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal void InitVars() {
+                this.columnsurvey_page_id = base.Columns["survey_page_id"];
+                this.columnview_id = base.Columns["view_id"];
+                this.columnsubwatershed_id = base.Columns["subwatershed_id"];
+                this.columnwatershed_id = base.Columns["watershed_id"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            private void InitClass() {
+                this.columnsurvey_page_id = new global::System.Data.DataColumn("survey_page_id", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnsurvey_page_id);
+                this.columnview_id = new global::System.Data.DataColumn("view_id", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnview_id);
+                this.columnsubwatershed_id = new global::System.Data.DataColumn("subwatershed_id", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnsubwatershed_id);
+                this.columnwatershed_id = new global::System.Data.DataColumn("watershed_id", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnwatershed_id);
+                this.columnsurvey_page_id.AllowDBNull = false;
+                this.columnsubwatershed_id.AllowDBNull = false;
+                this.columnwatershed_id.AllowDBNull = false;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public RelationalIDsRow NewRelationalIDsRow() {
+                return ((RelationalIDsRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new RelationalIDsRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Type GetRowType() {
+                return typeof(RelationalIDsRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.RelationalIDsRowChanged != null)) {
+                    this.RelationalIDsRowChanged(this, new RelationalIDsRowChangeEvent(((RelationalIDsRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.RelationalIDsRowChanging != null)) {
+                    this.RelationalIDsRowChanging(this, new RelationalIDsRowChangeEvent(((RelationalIDsRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.RelationalIDsRowDeleted != null)) {
+                    this.RelationalIDsRowDeleted(this, new RelationalIDsRowChangeEvent(((RelationalIDsRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.RelationalIDsRowDeleting != null)) {
+                    this.RelationalIDsRowDeleting(this, new RelationalIDsRowChangeEvent(((RelationalIDsRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void RemoveRelationalIDsRow(RelationalIDsRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                SANDBOXDataSet ds = new SANDBOXDataSet();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "RelationalIDsDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
@@ -7265,6 +7562,76 @@ namespace SWI_2 {
         }
         
         /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public partial class RelationalIDsRow : global::System.Data.DataRow {
+            
+            private RelationalIDsDataTable tableRelationalIDs;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal RelationalIDsRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableRelationalIDs = ((RelationalIDsDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int survey_page_id {
+                get {
+                    return ((int)(this[this.tableRelationalIDs.survey_page_idColumn]));
+                }
+                set {
+                    this[this.tableRelationalIDs.survey_page_idColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int view_id {
+                get {
+                    try {
+                        return ((int)(this[this.tableRelationalIDs.view_idColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'view_id\' in table \'RelationalIDs\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableRelationalIDs.view_idColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int subwatershed_id {
+                get {
+                    return ((int)(this[this.tableRelationalIDs.subwatershed_idColumn]));
+                }
+                set {
+                    this[this.tableRelationalIDs.subwatershed_idColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int watershed_id {
+                get {
+                    return ((int)(this[this.tableRelationalIDs.watershed_idColumn]));
+                }
+                set {
+                    this[this.tableRelationalIDs.watershed_idColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool Isview_idNull() {
+                return this.IsNull(this.tableRelationalIDs.view_idColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void Setview_idNull() {
+                this[this.tableRelationalIDs.view_idColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
@@ -7728,6 +8095,37 @@ namespace SWI_2 {
                 }
             }
         }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public class RelationalIDsRowChangeEvent : global::System.EventArgs {
+            
+            private RelationalIDsRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public RelationalIDsRowChangeEvent(RelationalIDsRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public RelationalIDsRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
     }
 }
 namespace SWI_2.SANDBOXDataSetTableAdapters {
@@ -7939,7 +8337,7 @@ SELECT culvert_id, global_id, survey_page_id, node, facing, culvert_opening, sha
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[4];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT culvert_id, global_id, survey_page_id, node, facing, culvert_opening, shap" +
@@ -7951,6 +8349,19 @@ SELECT culvert_id, global_id, survey_page_id, node, facing, culvert_opening, sha
             this._commandCollection[1].CommandText = "DELETE FROM [GIS].[SWSP_CULVERT] WHERE ([culvert_id] = @Original_culvert_id)";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_culvert_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "culvert_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._commandCollection[2] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[2].Connection = this.Connection;
+            this._commandCollection[2].CommandText = "SELECT TOP 1 global_id FROM  SWSP_CULVERT WHERE node like @findNode ORDER BY glob" +
+                "al_id\r\n";
+            this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@findNode", global::System.Data.SqlDbType.Char, 10, global::System.Data.ParameterDirection.Input, 0, 0, "node", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[3] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[3].Connection = this.Connection;
+            this._commandCollection[3].CommandText = "SELECT TOP 1 global_id FROM SWSP_CULVERT WHERE global_id > @_lastGlobalID and nod" +
+                "e like @findNode ORDER BY global_id ";
+            this._commandCollection[3].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@_lastGlobalID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "global_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@findNode", global::System.Data.SqlDbType.Char, 10, global::System.Data.ParameterDirection.Input, 0, 0, "node", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -8348,6 +8759,73 @@ SELECT culvert_id, global_id, survey_page_id, node, facing, culvert_opening, sha
                 }
             }
             return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual global::System.Nullable<int> FindFirstGlobalID(string findNode) {
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[2];
+            if ((findNode == null)) {
+                command.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[0].Value = ((string)(findNode));
+            }
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            object returnValue;
+            try {
+                returnValue = command.ExecuteScalar();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            if (((returnValue == null) 
+                        || (returnValue.GetType() == typeof(global::System.DBNull)))) {
+                return new global::System.Nullable<int>();
+            }
+            else {
+                return new global::System.Nullable<int>(((int)(returnValue)));
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual global::System.Nullable<int> FindNextGlobalID(int _lastGlobalID, string findNode) {
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[3];
+            command.Parameters[0].Value = ((int)(_lastGlobalID));
+            if ((findNode == null)) {
+                command.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[1].Value = ((string)(findNode));
+            }
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            object returnValue;
+            try {
+                returnValue = command.ExecuteScalar();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            if (((returnValue == null) 
+                        || (returnValue.GetType() == typeof(global::System.DBNull)))) {
+                return new global::System.Nullable<int>();
+            }
+            else {
+                return new global::System.Nullable<int>(((int)(returnValue)));
+            }
         }
     }
     
@@ -8913,7 +9391,7 @@ SELECT ditch_id, global_id, survey_page_id, node, facing, depth_in, top_width_in
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[5];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT ditch_id, global_id, survey_page_id, node, facing, depth_in, top_width_in," +
@@ -8924,6 +9402,28 @@ SELECT ditch_id, global_id, survey_page_id, node, facing, depth_in, top_width_in
             this._commandCollection[1].CommandText = "DELETE FROM [GIS].[SWSP_DITCH] WHERE [ditch_id] = @Original_ditch_id ";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ditch_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "ditch_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._commandCollection[2] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[2].Connection = this.Connection;
+            this._commandCollection[2].CommandText = @"SELECT GIS.SWSP_ditch.survey_page_id, GIS.SWSP_survey_page.view_id, GIS.SWSP_view.subwatershed_id, GIS.SWSP_subwatershed.watershed_id
+                        FROM ((((GIS.SWSP_ditch INNER JOIN GIS.SWSP_survey_page on GIS.SWSP_ditch.survey_page_id = GIS.SWSP_survey_page.survey_page_id AND GIS.SWSP_ditch.global_id = @_lastGlobalID)
+                        INNER JOIN GIS.SWSP_view ON GIS.SWSP_survey_page.view_id = GIS.SWSP_view.view_id)
+                        INNER JOIN GIS.SWSP_subwatershed on GIS.SWSP_view.subwatershed_id = GIS.SWSP_subwatershed.subwatershed_id)
+                        INNER JOIN GIS.SWSP_watershed on GIS.SWSP_subwatershed.watershed_id = GIS.SWSP_watershed.watershed_id)";
+            this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@_lastGlobalID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "global_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[3] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[3].Connection = this.Connection;
+            this._commandCollection[3].CommandText = "SELECT TOP 1 global_id FROM SWSP_DITCH WHERE node like @findNode ORDER BY global_" +
+                "id";
+            this._commandCollection[3].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@findNode", global::System.Data.SqlDbType.Char, 10, global::System.Data.ParameterDirection.Input, 0, 0, "node", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[4] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[4].Connection = this.Connection;
+            this._commandCollection[4].CommandText = "SELECT TOP 1 global_id FROM SWSP_DITCH WHERE global_id > @_lastGlobalID and node " +
+                "like @findNode ORDER BY global_id";
+            this._commandCollection[4].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[4].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@_lastGlobalID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "global_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[4].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@findNode", global::System.Data.SqlDbType.Char, 10, global::System.Data.ParameterDirection.Input, 0, 0, "node", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -8943,6 +9443,30 @@ SELECT ditch_id, global_id, survey_page_id, node, facing, depth_in, top_width_in
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
         public virtual SANDBOXDataSet.SWSP_DITCHDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
+            SANDBOXDataSet.SWSP_DITCHDataTable dataTable = new SANDBOXDataSet.SWSP_DITCHDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
+        public virtual int FillByRelatedIDs(SANDBOXDataSet.SWSP_DITCHDataTable dataTable, int _lastGlobalID) {
+            this.Adapter.SelectCommand = this.CommandCollection[2];
+            this.Adapter.SelectCommand.Parameters[0].Value = ((int)(_lastGlobalID));
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
+        public virtual SANDBOXDataSet.SWSP_DITCHDataTable GetDataByRelatedIDs(int _lastGlobalID) {
+            this.Adapter.SelectCommand = this.CommandCollection[2];
+            this.Adapter.SelectCommand.Parameters[0].Value = ((int)(_lastGlobalID));
             SANDBOXDataSet.SWSP_DITCHDataTable dataTable = new SANDBOXDataSet.SWSP_DITCHDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
@@ -9289,6 +9813,73 @@ SELECT ditch_id, global_id, survey_page_id, node, facing, depth_in, top_width_in
                 }
             }
             return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual global::System.Nullable<int> FindFirstGlobalID(string findNode) {
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[3];
+            if ((findNode == null)) {
+                command.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[0].Value = ((string)(findNode));
+            }
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            object returnValue;
+            try {
+                returnValue = command.ExecuteScalar();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            if (((returnValue == null) 
+                        || (returnValue.GetType() == typeof(global::System.DBNull)))) {
+                return new global::System.Nullable<int>();
+            }
+            else {
+                return new global::System.Nullable<int>(((int)(returnValue)));
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual global::System.Nullable<int> FindNextGlobalID(int _lastGlobalID, string findNode) {
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[4];
+            command.Parameters[0].Value = ((int)(_lastGlobalID));
+            if ((findNode == null)) {
+                command.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[1].Value = ((string)(findNode));
+            }
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            object returnValue;
+            try {
+                returnValue = command.ExecuteScalar();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            if (((returnValue == null) 
+                        || (returnValue.GetType() == typeof(global::System.DBNull)))) {
+                return new global::System.Nullable<int>();
+            }
+            else {
+                return new global::System.Nullable<int>(((int)(returnValue)));
+            }
         }
     }
     
@@ -11421,7 +12012,7 @@ SELECT pipe_id, global_id, survey_page_id, us_node, ds_node, us_depth_in, ds_dep
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[4];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT pipe_id, global_id, survey_page_id, us_node, ds_node, us_depth_in, ds_dept" +
@@ -11432,6 +12023,19 @@ SELECT pipe_id, global_id, survey_page_id, us_node, ds_node, us_depth_in, ds_dep
             this._commandCollection[1].CommandText = "DELETE FROM [GIS].[SWSP_PIPE] WHERE ([pipe_id] = @Original_pipe_id) ";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_pipe_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "pipe_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._commandCollection[2] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[2].Connection = this.Connection;
+            this._commandCollection[2].CommandText = "SELECT TOP 1 global_id FROM   GIS.SWSP_PIPE  WHERE us_node like @findNode OR ds_n" +
+                "ode like @findNode ORDER BY global_id";
+            this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@findNode", global::System.Data.SqlDbType.Char, 10, global::System.Data.ParameterDirection.Input, 0, 0, "us_node", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[3] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[3].Connection = this.Connection;
+            this._commandCollection[3].CommandText = "SELECT TOP 1 global_id FROM SWSP_PIPE WHERE global_id > @_lastGlobalID and us_nod" +
+                "e like @findNode or ds_node like @findNode ORDER BY global_id ";
+            this._commandCollection[3].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@_lastGlobalID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "global_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@findNode", global::System.Data.SqlDbType.Char, 10, global::System.Data.ParameterDirection.Input, 0, 0, "us_node", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -11829,6 +12433,73 @@ SELECT pipe_id, global_id, survey_page_id, us_node, ds_node, us_depth_in, ds_dep
                 }
             }
             return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual global::System.Nullable<int> FindFirstGlobalID(string findNode) {
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[2];
+            if ((findNode == null)) {
+                command.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[0].Value = ((string)(findNode));
+            }
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            object returnValue;
+            try {
+                returnValue = command.ExecuteScalar();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            if (((returnValue == null) 
+                        || (returnValue.GetType() == typeof(global::System.DBNull)))) {
+                return new global::System.Nullable<int>();
+            }
+            else {
+                return new global::System.Nullable<int>(((int)(returnValue)));
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual global::System.Nullable<int> FindNextGlobalID(int _lastGlobalID, string findNode) {
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[3];
+            command.Parameters[0].Value = ((int)(_lastGlobalID));
+            if ((findNode == null)) {
+                command.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[1].Value = ((string)(findNode));
+            }
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            object returnValue;
+            try {
+                returnValue = command.ExecuteScalar();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            if (((returnValue == null) 
+                        || (returnValue.GetType() == typeof(global::System.DBNull)))) {
+                return new global::System.Nullable<int>();
+            }
+            else {
+                return new global::System.Nullable<int>(((int)(returnValue)));
+            }
         }
     }
     
@@ -14153,6 +14824,239 @@ SELECT watershed_id, watershed, description FROM SWSP_WATERSHED WHERE (watershed
     }
     
     /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class RelationalIDsTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::System.Data.SqlClient.SqlConnection _connection;
+        
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public RelationalIDsTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "RelationalIDs";
+            tableMapping.ColumnMappings.Add("survey_page_id", "survey_page_id");
+            tableMapping.ColumnMappings.Add("view_id", "view_id");
+            tableMapping.ColumnMappings.Add("subwatershed_id", "subwatershed_id");
+            tableMapping.ColumnMappings.Add("watershed_id", "watershed_id");
+            this._adapter.TableMappings.Add(tableMapping);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = global::SWI_2.Properties.Settings.Default.SANDBOXConnectionString;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[3];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = @"SELECT GIS.SWSP_ditch.survey_page_id, GIS.SWSP_survey_page.view_id, GIS.SWSP_view.subwatershed_id, GIS.SWSP_subwatershed.watershed_id
+                        FROM ((((GIS.SWSP_ditch INNER JOIN GIS.SWSP_survey_page on GIS.SWSP_ditch.survey_page_id = GIS.SWSP_survey_page.survey_page_id AND GIS.SWSP_ditch.global_id = @_lastGlobalID)
+                        INNER JOIN GIS.SWSP_view ON GIS.SWSP_survey_page.view_id = GIS.SWSP_view.view_id)
+                        INNER JOIN GIS.SWSP_subwatershed on GIS.SWSP_view.subwatershed_id = GIS.SWSP_subwatershed.subwatershed_id)
+                        INNER JOIN GIS.SWSP_watershed on GIS.SWSP_subwatershed.watershed_id = GIS.SWSP_watershed.watershed_id)";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@_lastGlobalID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "global_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[1].Connection = this.Connection;
+            this._commandCollection[1].CommandText = @"SELECT GIS.SWSP_culvert.survey_page_id, GIS.SWSP_survey_page.view_id, GIS.SWSP_view.subwatershed_id, GIS.SWSP_subwatershed.watershed_id
+                        FROM ((((GIS.SWSP_culvert INNER JOIN GIS.SWSP_survey_page on GIS.SWSP_culvert.survey_page_id = GIS.SWSP_survey_page.survey_page_id AND GIS.SWSP_culvert.global_id = @_lastGlobalID)
+                        INNER JOIN GIS.SWSP_view ON GIS.SWSP_survey_page.view_id = GIS.SWSP_view.view_id)
+                        INNER JOIN GIS.SWSP_subwatershed on GIS.SWSP_view.subwatershed_id = GIS.SWSP_subwatershed.subwatershed_id)
+                        INNER JOIN GIS.SWSP_watershed on GIS.SWSP_subwatershed.watershed_id = GIS.SWSP_watershed.watershed_id)";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@_lastGlobalID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "global_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[2] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[2].Connection = this.Connection;
+            this._commandCollection[2].CommandText = @"SELECT GIS.SWSP_pipe.survey_page_id, GIS.SWSP_survey_page.view_id, GIS.SWSP_view.subwatershed_id, GIS.SWSP_subwatershed.watershed_id
+                        FROM ((((GIS.SWSP_pipe INNER JOIN GIS.SWSP_survey_page on GIS.SWSP_pipe.survey_page_id = GIS.SWSP_survey_page.survey_page_id AND GIS.SWSP_pipe.global_id = @_lastGlobalID)
+                        INNER JOIN GIS.SWSP_view ON GIS.SWSP_survey_page.view_id = GIS.SWSP_view.view_id)
+                        INNER JOIN GIS.SWSP_subwatershed on GIS.SWSP_view.subwatershed_id = GIS.SWSP_subwatershed.subwatershed_id)
+                        INNER JOIN GIS.SWSP_watershed on GIS.SWSP_subwatershed.watershed_id = GIS.SWSP_watershed.watershed_id)";
+            this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@_lastGlobalID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "global_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int FillByDitchID(SANDBOXDataSet.RelationalIDsDataTable dataTable, int _lastGlobalID) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            this.Adapter.SelectCommand.Parameters[0].Value = ((int)(_lastGlobalID));
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual SANDBOXDataSet.RelationalIDsDataTable GetDataByDitchID(int _lastGlobalID) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            this.Adapter.SelectCommand.Parameters[0].Value = ((int)(_lastGlobalID));
+            SANDBOXDataSet.RelationalIDsDataTable dataTable = new SANDBOXDataSet.RelationalIDsDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
+        public virtual int FillByCulvertID(SANDBOXDataSet.RelationalIDsDataTable dataTable, int _lastGlobalID) {
+            this.Adapter.SelectCommand = this.CommandCollection[1];
+            this.Adapter.SelectCommand.Parameters[0].Value = ((int)(_lastGlobalID));
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
+        public virtual SANDBOXDataSet.RelationalIDsDataTable GetDataByCulvertID(int _lastGlobalID) {
+            this.Adapter.SelectCommand = this.CommandCollection[1];
+            this.Adapter.SelectCommand.Parameters[0].Value = ((int)(_lastGlobalID));
+            SANDBOXDataSet.RelationalIDsDataTable dataTable = new SANDBOXDataSet.RelationalIDsDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
+        public virtual int FillByPipeID(SANDBOXDataSet.RelationalIDsDataTable dataTable, int _lastGlobalID) {
+            this.Adapter.SelectCommand = this.CommandCollection[2];
+            this.Adapter.SelectCommand.Parameters[0].Value = ((int)(_lastGlobalID));
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
+        public virtual SANDBOXDataSet.RelationalIDsDataTable GetDataByPipeID(int _lastGlobalID) {
+            this.Adapter.SelectCommand = this.CommandCollection[2];
+            this.Adapter.SelectCommand.Parameters[0].Value = ((int)(_lastGlobalID));
+            SANDBOXDataSet.RelationalIDsDataTable dataTable = new SANDBOXDataSet.RelationalIDsDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+    }
+    
+    /// <summary>
     ///TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
     ///</summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
@@ -14593,24 +15497,6 @@ SELECT watershed_id, watershed, description FROM SWSP_WATERSHED WHERE (watershed
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._sWSP_GLOBAL_IDTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.SWSP_GLOBAL_ID.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._sWSP_GLOBAL_IDTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
-            if ((this._sWSP_CULVERT_OPENING_TYPETableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.SWSP_CULVERT_OPENING_TYPE.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._sWSP_CULVERT_OPENING_TYPETableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
             if ((this._sWSP_SURVEY_PAGETableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.SWSP_SURVEY_PAGE.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
@@ -14629,12 +15515,21 @@ SELECT watershed_id, watershed, description FROM SWSP_WATERSHED WHERE (watershed
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._sWSP_EVALUATORTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.SWSP_EVALUATOR.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+            if ((this._sWSP_CULVERT_OPENING_TYPETableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.SWSP_CULVERT_OPENING_TYPE.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
-                    result = (result + this._sWSP_EVALUATORTableAdapter.Update(updatedRows));
+                    result = (result + this._sWSP_CULVERT_OPENING_TYPETableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._sWSP_GLOBAL_IDTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.SWSP_GLOBAL_ID.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._sWSP_GLOBAL_IDTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -14647,6 +15542,15 @@ SELECT watershed_id, watershed, description FROM SWSP_WATERSHED WHERE (watershed
                     allChangedRows.AddRange(updatedRows);
                 }
             }
+            if ((this._sWSP_CULVERTTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.SWSP_CULVERT.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._sWSP_CULVERTTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
             if ((this._sWSP_PIPETableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.SWSP_PIPE.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
@@ -14656,12 +15560,12 @@ SELECT watershed_id, watershed, description FROM SWSP_WATERSHED WHERE (watershed
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._sWSP_CULVERTTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.SWSP_CULVERT.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+            if ((this._sWSP_EVALUATORTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.SWSP_EVALUATOR.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
-                    result = (result + this._sWSP_CULVERTTableAdapter.Update(updatedRows));
+                    result = (result + this._sWSP_EVALUATORTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -14732,22 +15636,6 @@ SELECT watershed_id, watershed, description FROM SWSP_WATERSHED WHERE (watershed
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._sWSP_GLOBAL_IDTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.SWSP_GLOBAL_ID.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._sWSP_GLOBAL_IDTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
-            if ((this._sWSP_CULVERT_OPENING_TYPETableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.SWSP_CULVERT_OPENING_TYPE.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._sWSP_CULVERT_OPENING_TYPETableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
             if ((this._sWSP_SURVEY_PAGETableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.SWSP_SURVEY_PAGE.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
@@ -14764,11 +15652,19 @@ SELECT watershed_id, watershed, description FROM SWSP_WATERSHED WHERE (watershed
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._sWSP_EVALUATORTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.SWSP_EVALUATOR.Select(null, null, global::System.Data.DataViewRowState.Added);
+            if ((this._sWSP_CULVERT_OPENING_TYPETableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.SWSP_CULVERT_OPENING_TYPE.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
-                    result = (result + this._sWSP_EVALUATORTableAdapter.Update(addedRows));
+                    result = (result + this._sWSP_CULVERT_OPENING_TYPETableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._sWSP_GLOBAL_IDTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.SWSP_GLOBAL_ID.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._sWSP_GLOBAL_IDTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -14780,6 +15676,14 @@ SELECT watershed_id, watershed, description FROM SWSP_WATERSHED WHERE (watershed
                     allAddedRows.AddRange(addedRows);
                 }
             }
+            if ((this._sWSP_CULVERTTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.SWSP_CULVERT.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._sWSP_CULVERTTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
             if ((this._sWSP_PIPETableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.SWSP_PIPE.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
@@ -14788,11 +15692,11 @@ SELECT watershed_id, watershed, description FROM SWSP_WATERSHED WHERE (watershed
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._sWSP_CULVERTTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.SWSP_CULVERT.Select(null, null, global::System.Data.DataViewRowState.Added);
+            if ((this._sWSP_EVALUATORTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.SWSP_EVALUATOR.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
-                    result = (result + this._sWSP_CULVERTTableAdapter.Update(addedRows));
+                    result = (result + this._sWSP_EVALUATORTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -14837,11 +15741,11 @@ SELECT watershed_id, watershed, description FROM SWSP_WATERSHED WHERE (watershed
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._sWSP_CULVERTTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.SWSP_CULVERT.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+            if ((this._sWSP_EVALUATORTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.SWSP_EVALUATOR.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    result = (result + this._sWSP_CULVERTTableAdapter.Update(deletedRows));
+                    result = (result + this._sWSP_EVALUATORTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -14853,6 +15757,14 @@ SELECT watershed_id, watershed, description FROM SWSP_WATERSHED WHERE (watershed
                     allChangedRows.AddRange(deletedRows);
                 }
             }
+            if ((this._sWSP_CULVERTTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.SWSP_CULVERT.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._sWSP_CULVERTTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
             if ((this._sWSP_DITCHTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.SWSP_DITCH.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
@@ -14861,11 +15773,19 @@ SELECT watershed_id, watershed, description FROM SWSP_WATERSHED WHERE (watershed
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._sWSP_EVALUATORTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.SWSP_EVALUATOR.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+            if ((this._sWSP_GLOBAL_IDTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.SWSP_GLOBAL_ID.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    result = (result + this._sWSP_EVALUATORTableAdapter.Update(deletedRows));
+                    result = (result + this._sWSP_GLOBAL_IDTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._sWSP_CULVERT_OPENING_TYPETableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.SWSP_CULVERT_OPENING_TYPE.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._sWSP_CULVERT_OPENING_TYPETableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -14882,22 +15802,6 @@ SELECT watershed_id, watershed, description FROM SWSP_WATERSHED WHERE (watershed
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._sWSP_SURVEY_PAGETableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
-            if ((this._sWSP_CULVERT_OPENING_TYPETableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.SWSP_CULVERT_OPENING_TYPE.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._sWSP_CULVERT_OPENING_TYPETableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
-            if ((this._sWSP_GLOBAL_IDTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.SWSP_GLOBAL_ID.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._sWSP_GLOBAL_IDTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }

@@ -246,7 +246,7 @@ namespace SWI_2
                 ((DataGridViewRow)rowObject).Selected = false;
             }
             dataGridViewCulverts.Rows[0].Selected = true;
-            fKCULVERTSURVEYPAGEBindingSource.MoveFirst();
+            fKCULVERTSURVEYPAGEBindingSource1.MoveFirst();
             dataGridViewCulverts.Refresh();
 
 
@@ -469,24 +469,872 @@ namespace SWI_2
             //if there is no match at all, then just output a message box saying there is no match.
             int lastGlobalIDSaver = _lastGlobalID;
             _lastSearchVar lastSearchSaver = _lastSearch;
+            string currentSelected = "";
+            string currentSelected1 = "";
+            string currentSelected2 = "";
 
             //first check to see if there is an effective last search:
             //the tab being viewed will determine what selected record and table needs to be looked at:
             if (tabControlDitchesCulvertsPipes.SelectedTab == tabControlDitchesCulvertsPipes.TabPages["tabpageDitches"])
             {
-                MessageBox.Show("Ditches");
+                //Get the selected row from the ditches table.  Don't worry if the user has selected more than one row,
+                //because that situation would mean that at least something was messed with since the last search.
+                try
+                {
+                    currentSelected = ((string)((System.Data.DataRowView)fKDITCHSURVEYPAGEBindingSource.Current)["node"]).Trim();
+                    _lastGlobalID = (int)((System.Data.DataRowView)fKDITCHSURVEYPAGEBindingSource.Current)["global_id"];
+                }
+                catch (Exception ex)
+                {
+                    //there was no currently selected datarow object.
+                }
+
+                if (string.Compare(currentSelected, textBoxFindNode.Text) == 0)
+                {
+                    //we have already searched for this node and found a match.  This means we must
+                    //try to find a new match, or at least return to the current match
+                    //first, search the rest of the ditches table
+                    //SELECT TOP 1 FROM DITCH  WHERE global_id > _lastGlobalID AND node like textboxFindNode.text ORDER BY global_id
+                    if((this.sWSP_DITCHTableAdapter.FindNextGlobalID(_lastGlobalID, currentSelected)).HasValue)
+                    {
+                        tabControlDitchesCulvertsPipes.SelectTab("tabPageDitches");
+                        //we have found a match and we don't need to look anywhere else
+                        _lastGlobalID = (int)this.sWSP_DITCHTableAdapter.FindNextGlobalID(_lastGlobalID, currentSelected);
+                        sWSPWATERSHEDBindingSource.MoveFirst();
+                        while((int)(this.relationalIDsTableAdapter.GetDataByDitchID(_lastGlobalID)[0])["watershed_id"] != (int)((System.Data.DataRowView)sWSPWATERSHEDBindingSource.Current)["watershed_id"])
+                        {
+                            sWSPWATERSHEDBindingSource.MoveNext();
+                        }
+                        fKSUBWATERSHEDWATERSHEDBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByDitchID(_lastGlobalID))[0]["subwatershed_id"] != (int)((System.Data.DataRowView)fKSUBWATERSHEDWATERSHEDBindingSource.Current)["subwatershed_id"])
+                        {
+                            fKSUBWATERSHEDWATERSHEDBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+                        fKVIEWSUBWATERSHEDBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByDitchID(_lastGlobalID))[0]["view_id"] != (int)((System.Data.DataRowView)fKVIEWSUBWATERSHEDBindingSource.Current)["view_id"])
+                        {
+                            fKVIEWSUBWATERSHEDBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+                        fKSURVEYPAGEVIEWBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByDitchID(_lastGlobalID))[0]["survey_page_id"] != (int)((System.Data.DataRowView)fKSURVEYPAGEVIEWBindingSource.Current)["survey_page_id"])
+                        {
+                            fKSURVEYPAGEVIEWBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+                        fKDITCHSURVEYPAGEBindingSource.MoveFirst();
+                        while (_lastGlobalID!= (int)((System.Data.DataRowView)fKDITCHSURVEYPAGEBindingSource.Current)["global_id"])
+                        {
+                            fKDITCHSURVEYPAGEBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+                        
+                    }
+                    //second search the culverts table
+                    else if((this.sWSP_CULVERTTableAdapter.FindFirstGlobalID(currentSelected)).HasValue)
+                    {
+                        tabControlDitchesCulvertsPipes.SelectTab("tabPageCulverts");
+                        //we have found a match and we don't need to look anywhere else
+                        _lastGlobalID = (int)this.sWSP_CULVERTTableAdapter.FindFirstGlobalID(currentSelected);
+                        sWSPWATERSHEDBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByCulvertID(_lastGlobalID)[0])["watershed_id"] != (int)((System.Data.DataRowView)sWSPWATERSHEDBindingSource.Current)["watershed_id"])
+                        {
+                            sWSPWATERSHEDBindingSource.MoveNext();
+                        }
+                        fKSUBWATERSHEDWATERSHEDBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByCulvertID(_lastGlobalID))[0]["subwatershed_id"] != (int)((System.Data.DataRowView)fKSUBWATERSHEDWATERSHEDBindingSource.Current)["subwatershed_id"])
+                        {
+                            fKSUBWATERSHEDWATERSHEDBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+                        fKVIEWSUBWATERSHEDBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByCulvertID(_lastGlobalID))[0]["view_id"] != (int)((System.Data.DataRowView)fKVIEWSUBWATERSHEDBindingSource.Current)["view_id"])
+                        {
+                            fKVIEWSUBWATERSHEDBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+                        fKSURVEYPAGEVIEWBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByCulvertID(_lastGlobalID))[0]["survey_page_id"] != (int)((System.Data.DataRowView)fKSURVEYPAGEVIEWBindingSource.Current)["survey_page_id"])
+                        {
+                            fKSURVEYPAGEVIEWBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+                        fKCULVERTSURVEYPAGEBindingSource1.MoveFirst();
+                        while (_lastGlobalID != (int)((System.Data.DataRowView)fKCULVERTSURVEYPAGEBindingSource1.Current)["global_id"])
+                        {
+                            fKCULVERTSURVEYPAGEBindingSource1.MoveNext();
+                        }
+                        this.Refresh();
+                    }
+
+                    //third search the pipes table
+                    else if((this.sWSP_PIPETableAdapter.FindFirstGlobalID(currentSelected)).HasValue)
+                    {
+                        tabControlDitchesCulvertsPipes.SelectTab("tabPagePipes");
+                        //we have found a match and we don't need to look anywhere else
+                        _lastGlobalID = (int)this.sWSP_PIPETableAdapter.FindFirstGlobalID(currentSelected);
+                        sWSPWATERSHEDBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByPipeID(_lastGlobalID)[0])["watershed_id"] != (int)((System.Data.DataRowView)sWSPWATERSHEDBindingSource.Current)["watershed_id"])
+                        {
+                            sWSPWATERSHEDBindingSource.MoveNext();
+                        }
+                        fKSUBWATERSHEDWATERSHEDBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByPipeID(_lastGlobalID))[0]["subwatershed_id"] != (int)((System.Data.DataRowView)fKSUBWATERSHEDWATERSHEDBindingSource.Current)["subwatershed_id"])
+                        {
+                            fKSUBWATERSHEDWATERSHEDBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+                        fKVIEWSUBWATERSHEDBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByPipeID(_lastGlobalID))[0]["view_id"] != (int)((System.Data.DataRowView)fKVIEWSUBWATERSHEDBindingSource.Current)["view_id"])
+                        {
+                            fKVIEWSUBWATERSHEDBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+                        fKSURVEYPAGEVIEWBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByPipeID(_lastGlobalID))[0]["survey_page_id"] != (int)((System.Data.DataRowView)fKSURVEYPAGEVIEWBindingSource.Current)["survey_page_id"])
+                        {
+                            fKSURVEYPAGEVIEWBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+                        fKPIPESURVEYPAGEBindingSource.MoveFirst();
+                        while (_lastGlobalID != (int)((System.Data.DataRowView)fKPIPESURVEYPAGEBindingSource.Current)["global_id"])
+                        {
+                            fKPIPESURVEYPAGEBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+                    }
+
+                    //fourth search all of the ditches table (if there is only one match we will end up right back where we started).
+                    else if ((this.sWSP_DITCHTableAdapter.FindFirstGlobalID(currentSelected)).HasValue)
+                    {
+                        tabControlDitchesCulvertsPipes.SelectTab("tabPageDitches");
+                        //we have found a match and we don't need to look anywhere else
+                        _lastGlobalID = (int)this.sWSP_DITCHTableAdapter.FindFirstGlobalID(currentSelected);
+                        sWSPWATERSHEDBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByDitchID(_lastGlobalID)[0])["watershed_id"] != (int)((System.Data.DataRowView)sWSPWATERSHEDBindingSource.Current)["watershed_id"])
+                        {
+                            sWSPWATERSHEDBindingSource.MoveNext();
+                        }
+                        fKSUBWATERSHEDWATERSHEDBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByDitchID(_lastGlobalID))[0]["subwatershed_id"] != (int)((System.Data.DataRowView)fKSUBWATERSHEDWATERSHEDBindingSource.Current)["subwatershed_id"])
+                        {
+                            fKSUBWATERSHEDWATERSHEDBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+                        fKVIEWSUBWATERSHEDBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByDitchID(_lastGlobalID))[0]["view_id"] != (int)((System.Data.DataRowView)fKVIEWSUBWATERSHEDBindingSource.Current)["view_id"])
+                        {
+                            fKVIEWSUBWATERSHEDBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+                        fKSURVEYPAGEVIEWBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByDitchID(_lastGlobalID))[0]["survey_page_id"] != (int)((System.Data.DataRowView)fKSURVEYPAGEVIEWBindingSource.Current)["survey_page_id"])
+                        {
+                            fKSURVEYPAGEVIEWBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+                        fKDITCHSURVEYPAGEBindingSource.MoveFirst();
+                        while (_lastGlobalID != (int)((System.Data.DataRowView)fKDITCHSURVEYPAGEBindingSource.Current)["global_id"])
+                        {
+                            fKDITCHSURVEYPAGEBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+
+                    }
+                }
+                else
+                {
+                    //since the strings didn't match, we can't assume that there will ever be a match, so just search all the tables starting with the lowest global_id in ditches
+                    //stop after we have looked at them all, and just return nothing (MessageBox.Show("No matches found");)
+                    if ((this.sWSP_DITCHTableAdapter.FindFirstGlobalID(textBoxFindNode.Text)).HasValue)
+                    {
+                        tabControlDitchesCulvertsPipes.SelectTab("tabPageDitches");
+                        //we have found a match and we don't need to look anywhere else
+                        _lastGlobalID = (int)this.sWSP_DITCHTableAdapter.FindFirstGlobalID(textBoxFindNode.Text);
+                        sWSPWATERSHEDBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByDitchID(_lastGlobalID)[0])["watershed_id"] != (int)((System.Data.DataRowView)sWSPWATERSHEDBindingSource.Current)["watershed_id"])
+                        {
+                            sWSPWATERSHEDBindingSource.MoveNext();
+                        }
+                        fKSUBWATERSHEDWATERSHEDBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByDitchID(_lastGlobalID))[0]["subwatershed_id"] != (int)((System.Data.DataRowView)fKSUBWATERSHEDWATERSHEDBindingSource.Current)["subwatershed_id"])
+                        {
+                            fKSUBWATERSHEDWATERSHEDBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+                        fKVIEWSUBWATERSHEDBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByDitchID(_lastGlobalID))[0]["view_id"] != (int)((System.Data.DataRowView)fKVIEWSUBWATERSHEDBindingSource.Current)["view_id"])
+                        {
+                            fKVIEWSUBWATERSHEDBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+                        fKSURVEYPAGEVIEWBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByDitchID(_lastGlobalID))[0]["survey_page_id"] != (int)((System.Data.DataRowView)fKSURVEYPAGEVIEWBindingSource.Current)["survey_page_id"])
+                        {
+                            fKSURVEYPAGEVIEWBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+                        fKDITCHSURVEYPAGEBindingSource.MoveFirst();
+                        while (_lastGlobalID != (int)((System.Data.DataRowView)fKDITCHSURVEYPAGEBindingSource.Current)["global_id"])
+                        {
+                            fKDITCHSURVEYPAGEBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+                    }
+                    //second search the culverts table
+                    else if ((this.sWSP_CULVERTTableAdapter.FindFirstGlobalID(textBoxFindNode.Text)).HasValue)
+                    {
+                        tabControlDitchesCulvertsPipes.SelectTab("tabPageCulverts");
+                        //we have found a match and we don't need to look anywhere else
+                        _lastGlobalID = (int)this.sWSP_CULVERTTableAdapter.FindFirstGlobalID(textBoxFindNode.Text);
+                        sWSPWATERSHEDBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByCulvertID(_lastGlobalID)[0])["watershed_id"] != (int)((System.Data.DataRowView)sWSPWATERSHEDBindingSource.Current)["watershed_id"])
+                        {
+                            sWSPWATERSHEDBindingSource.MoveNext();
+                        }
+                        fKSUBWATERSHEDWATERSHEDBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByCulvertID(_lastGlobalID))[0]["subwatershed_id"] != (int)((System.Data.DataRowView)fKSUBWATERSHEDWATERSHEDBindingSource.Current)["subwatershed_id"])
+                        {
+                            fKSUBWATERSHEDWATERSHEDBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+                        fKVIEWSUBWATERSHEDBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByCulvertID(_lastGlobalID))[0]["view_id"] != (int)((System.Data.DataRowView)fKVIEWSUBWATERSHEDBindingSource.Current)["view_id"])
+                        {
+                            fKVIEWSUBWATERSHEDBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+                        fKSURVEYPAGEVIEWBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByCulvertID(_lastGlobalID))[0]["survey_page_id"] != (int)((System.Data.DataRowView)fKSURVEYPAGEVIEWBindingSource.Current)["survey_page_id"])
+                        {
+                            fKSURVEYPAGEVIEWBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+                        fKCULVERTSURVEYPAGEBindingSource1.MoveFirst();
+                        while (_lastGlobalID != (int)((System.Data.DataRowView)fKCULVERTSURVEYPAGEBindingSource1.Current)["global_id"])
+                        {
+                            fKCULVERTSURVEYPAGEBindingSource1.MoveNext();
+                        }
+                        this.Refresh();
+                    }
+                    //third search the pipes table
+                    else if ((this.sWSP_PIPETableAdapter.FindFirstGlobalID(textBoxFindNode.Text)).HasValue)
+                    {
+                        tabControlDitchesCulvertsPipes.SelectTab("tabPagePipes");
+                        //we have found a match and we don't need to look anywhere else
+                        _lastGlobalID = (int)this.sWSP_PIPETableAdapter.FindFirstGlobalID(textBoxFindNode.Text);
+                        sWSPWATERSHEDBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByPipeID(_lastGlobalID)[0])["watershed_id"] != (int)((System.Data.DataRowView)sWSPWATERSHEDBindingSource.Current)["watershed_id"])
+                        {
+                            sWSPWATERSHEDBindingSource.MoveNext();
+                        }
+                        fKSUBWATERSHEDWATERSHEDBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByPipeID(_lastGlobalID))[0]["subwatershed_id"] != (int)((System.Data.DataRowView)fKSUBWATERSHEDWATERSHEDBindingSource.Current)["subwatershed_id"])
+                        {
+                            fKSUBWATERSHEDWATERSHEDBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+                        fKVIEWSUBWATERSHEDBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByPipeID(_lastGlobalID))[0]["view_id"] != (int)((System.Data.DataRowView)fKVIEWSUBWATERSHEDBindingSource.Current)["view_id"])
+                        {
+                            fKVIEWSUBWATERSHEDBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+                        fKSURVEYPAGEVIEWBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByPipeID(_lastGlobalID))[0]["survey_page_id"] != (int)((System.Data.DataRowView)fKSURVEYPAGEVIEWBindingSource.Current)["survey_page_id"])
+                        {
+                            fKSURVEYPAGEVIEWBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+                        fKPIPESURVEYPAGEBindingSource.MoveFirst();
+                        while (_lastGlobalID != (int)((System.Data.DataRowView)fKPIPESURVEYPAGEBindingSource.Current)["global_id"])
+                        {
+                            fKPIPESURVEYPAGEBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+                    }
+                    else
+                    {
+                        MessageBox.Show("No match found");
+                    }
+                }
             }
             else if (tabControlDitchesCulvertsPipes.SelectedTab == tabControlDitchesCulvertsPipes.TabPages["tabpageCulverts"])
             {
-                MessageBox.Show("Culverts");
+                //Get the selected row from the ditches table.  Don't worry if the user has selected more than one row,
+                //because that situation would mean that at least something was messed with since the last search.
+                try
+                {
+                    currentSelected = ((string)((System.Data.DataRowView)fKCULVERTSURVEYPAGEBindingSource1.Current)["node"]).Trim();
+                    _lastGlobalID = (int)((System.Data.DataRowView)fKCULVERTSURVEYPAGEBindingSource1.Current)["global_id"];
+                }
+                catch (Exception ex)
+                {
+                    //there was no currently selected datarow object.
+                }
+
+                if (string.Compare(currentSelected, textBoxFindNode.Text) == 0)
+                {
+                    //we have already searched for this node and found a match.  This means we must
+                    //try to find a new match, or at least return to the current match
+                    //first, search the rest of the ditches table
+                    //SELECT TOP 1 FROM DITCH  WHERE global_id > _lastGlobalID AND node like textboxFindNode.text ORDER BY global_id
+                    if ((this.sWSP_CULVERTTableAdapter.FindNextGlobalID(_lastGlobalID, currentSelected)).HasValue)
+                    {
+                        tabControlDitchesCulvertsPipes.SelectTab("tabPageCulverts");
+                        //we have found a match and we don't need to look anywhere else
+                        _lastGlobalID = (int)this.sWSP_CULVERTTableAdapter.FindNextGlobalID(_lastGlobalID, currentSelected);
+                        sWSPWATERSHEDBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByCulvertID(_lastGlobalID)[0])["watershed_id"] != (int)((System.Data.DataRowView)sWSPWATERSHEDBindingSource.Current)["watershed_id"])
+                        {
+                            sWSPWATERSHEDBindingSource.MoveNext();
+                        }
+                        fKSUBWATERSHEDWATERSHEDBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByCulvertID(_lastGlobalID))[0]["subwatershed_id"] != (int)((System.Data.DataRowView)fKSUBWATERSHEDWATERSHEDBindingSource.Current)["subwatershed_id"])
+                        {
+                            fKSUBWATERSHEDWATERSHEDBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+                        fKVIEWSUBWATERSHEDBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByCulvertID(_lastGlobalID))[0]["view_id"] != (int)((System.Data.DataRowView)fKVIEWSUBWATERSHEDBindingSource.Current)["view_id"])
+                        {
+                            fKVIEWSUBWATERSHEDBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+                        fKSURVEYPAGEVIEWBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByCulvertID(_lastGlobalID))[0]["survey_page_id"] != (int)((System.Data.DataRowView)fKSURVEYPAGEVIEWBindingSource.Current)["survey_page_id"])
+                        {
+                            fKSURVEYPAGEVIEWBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+                        fKCULVERTSURVEYPAGEBindingSource1.MoveFirst();
+                        while (_lastGlobalID != (int)((System.Data.DataRowView)fKCULVERTSURVEYPAGEBindingSource1.Current)["global_id"])
+                        {
+                            fKCULVERTSURVEYPAGEBindingSource1.MoveNext();
+                        }
+                        this.Refresh();
+
+                    }
+
+                    //second search the pipes table
+                    else if ((this.sWSP_PIPETableAdapter.FindFirstGlobalID(currentSelected)).HasValue)
+                    {
+                        tabControlDitchesCulvertsPipes.SelectTab("tabPagePipes");
+                        //we have found a match and we don't need to look anywhere else
+                        _lastGlobalID = (int)this.sWSP_PIPETableAdapter.FindFirstGlobalID(currentSelected);
+                        sWSPWATERSHEDBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByPipeID(_lastGlobalID)[0])["watershed_id"] != (int)((System.Data.DataRowView)sWSPWATERSHEDBindingSource.Current)["watershed_id"])
+                        {
+                            sWSPWATERSHEDBindingSource.MoveNext();
+                        }
+                        fKSUBWATERSHEDWATERSHEDBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByPipeID(_lastGlobalID))[0]["subwatershed_id"] != (int)((System.Data.DataRowView)fKSUBWATERSHEDWATERSHEDBindingSource.Current)["subwatershed_id"])
+                        {
+                            fKSUBWATERSHEDWATERSHEDBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+                        fKVIEWSUBWATERSHEDBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByPipeID(_lastGlobalID))[0]["view_id"] != (int)((System.Data.DataRowView)fKVIEWSUBWATERSHEDBindingSource.Current)["view_id"])
+                        {
+                            fKVIEWSUBWATERSHEDBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+                        fKSURVEYPAGEVIEWBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByPipeID(_lastGlobalID))[0]["survey_page_id"] != (int)((System.Data.DataRowView)fKSURVEYPAGEVIEWBindingSource.Current)["survey_page_id"])
+                        {
+                            fKSURVEYPAGEVIEWBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+                        fKPIPESURVEYPAGEBindingSource.MoveFirst();
+                        while (_lastGlobalID != (int)((System.Data.DataRowView)fKPIPESURVEYPAGEBindingSource.Current)["global_id"])
+                        {
+                            fKPIPESURVEYPAGEBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+                    }
+
+                    //third search all of the ditches table (if there is only one match we will end up right back where we started).
+                    else if ((this.sWSP_DITCHTableAdapter.FindFirstGlobalID(currentSelected)).HasValue)
+                    {
+                        tabControlDitchesCulvertsPipes.SelectTab("tabPageDitches");
+                        //we have found a match and we don't need to look anywhere else
+                        _lastGlobalID = (int)this.sWSP_DITCHTableAdapter.FindFirstGlobalID(currentSelected);
+                        sWSPWATERSHEDBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByDitchID(_lastGlobalID)[0])["watershed_id"] != (int)((System.Data.DataRowView)sWSPWATERSHEDBindingSource.Current)["watershed_id"])
+                        {
+                            sWSPWATERSHEDBindingSource.MoveNext();
+                        }
+                        fKSUBWATERSHEDWATERSHEDBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByDitchID(_lastGlobalID))[0]["subwatershed_id"] != (int)((System.Data.DataRowView)fKSUBWATERSHEDWATERSHEDBindingSource.Current)["subwatershed_id"])
+                        {
+                            fKSUBWATERSHEDWATERSHEDBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+                        fKVIEWSUBWATERSHEDBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByDitchID(_lastGlobalID))[0]["view_id"] != (int)((System.Data.DataRowView)fKVIEWSUBWATERSHEDBindingSource.Current)["view_id"])
+                        {
+                            fKVIEWSUBWATERSHEDBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+                        fKSURVEYPAGEVIEWBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByDitchID(_lastGlobalID))[0]["survey_page_id"] != (int)((System.Data.DataRowView)fKSURVEYPAGEVIEWBindingSource.Current)["survey_page_id"])
+                        {
+                            fKSURVEYPAGEVIEWBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+                        fKDITCHSURVEYPAGEBindingSource.MoveFirst();
+                        while (_lastGlobalID != (int)((System.Data.DataRowView)fKDITCHSURVEYPAGEBindingSource.Current)["global_id"])
+                        {
+                            fKDITCHSURVEYPAGEBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+
+                    }
+                    //fourth search the culverts table
+                    else if ((this.sWSP_CULVERTTableAdapter.FindFirstGlobalID(currentSelected)).HasValue)
+                    {
+                        tabControlDitchesCulvertsPipes.SelectTab("tabPageCulverts");
+                        //we have found a match and we don't need to look anywhere else
+                        _lastGlobalID = (int)this.sWSP_CULVERTTableAdapter.FindFirstGlobalID(currentSelected);
+                        sWSPWATERSHEDBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByCulvertID(_lastGlobalID)[0])["watershed_id"] != (int)((System.Data.DataRowView)sWSPWATERSHEDBindingSource.Current)["watershed_id"])
+                        {
+                            sWSPWATERSHEDBindingSource.MoveNext();
+                        }
+                        fKSUBWATERSHEDWATERSHEDBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByCulvertID(_lastGlobalID))[0]["subwatershed_id"] != (int)((System.Data.DataRowView)fKSUBWATERSHEDWATERSHEDBindingSource.Current)["subwatershed_id"])
+                        {
+                            fKSUBWATERSHEDWATERSHEDBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+                        fKVIEWSUBWATERSHEDBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByCulvertID(_lastGlobalID))[0]["view_id"] != (int)((System.Data.DataRowView)fKVIEWSUBWATERSHEDBindingSource.Current)["view_id"])
+                        {
+                            fKVIEWSUBWATERSHEDBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+                        fKSURVEYPAGEVIEWBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByCulvertID(_lastGlobalID))[0]["survey_page_id"] != (int)((System.Data.DataRowView)fKSURVEYPAGEVIEWBindingSource.Current)["survey_page_id"])
+                        {
+                            fKSURVEYPAGEVIEWBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+                        fKCULVERTSURVEYPAGEBindingSource1.MoveFirst();
+                        while (_lastGlobalID != (int)((System.Data.DataRowView)fKCULVERTSURVEYPAGEBindingSource1.Current)["global_id"])
+                        {
+                            fKCULVERTSURVEYPAGEBindingSource1.MoveNext();
+                        }
+                        this.Refresh();
+                    }
+                }
+                else
+                {
+                    //since the strings didn't match, we can't assume that there will ever be a match, so just search all the tables starting with the lowest global_id in ditches
+                    //stop after we have looked at them all, and just return nothing (MessageBox.Show("No matches found");)
+                    if ((this.sWSP_DITCHTableAdapter.FindFirstGlobalID(textBoxFindNode.Text)).HasValue)
+                    {
+                        tabControlDitchesCulvertsPipes.SelectTab("tabPageDitches");
+                        //we have found a match and we don't need to look anywhere else
+                        _lastGlobalID = (int)this.sWSP_DITCHTableAdapter.FindFirstGlobalID(textBoxFindNode.Text);
+                        sWSPWATERSHEDBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByDitchID(_lastGlobalID)[0])["watershed_id"] != (int)((System.Data.DataRowView)sWSPWATERSHEDBindingSource.Current)["watershed_id"])
+                        {
+                            sWSPWATERSHEDBindingSource.MoveNext();
+                        }
+                        fKSUBWATERSHEDWATERSHEDBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByDitchID(_lastGlobalID))[0]["subwatershed_id"] != (int)((System.Data.DataRowView)fKSUBWATERSHEDWATERSHEDBindingSource.Current)["subwatershed_id"])
+                        {
+                            fKSUBWATERSHEDWATERSHEDBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+                        fKVIEWSUBWATERSHEDBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByDitchID(_lastGlobalID))[0]["view_id"] != (int)((System.Data.DataRowView)fKVIEWSUBWATERSHEDBindingSource.Current)["view_id"])
+                        {
+                            fKVIEWSUBWATERSHEDBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+                        fKSURVEYPAGEVIEWBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByDitchID(_lastGlobalID))[0]["survey_page_id"] != (int)((System.Data.DataRowView)fKSURVEYPAGEVIEWBindingSource.Current)["survey_page_id"])
+                        {
+                            fKSURVEYPAGEVIEWBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+                        fKDITCHSURVEYPAGEBindingSource.MoveFirst();
+                        while (_lastGlobalID != (int)((System.Data.DataRowView)fKDITCHSURVEYPAGEBindingSource.Current)["global_id"])
+                        {
+                            fKDITCHSURVEYPAGEBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+                    }
+                    //second search the culverts table
+                    else if ((this.sWSP_CULVERTTableAdapter.FindFirstGlobalID(textBoxFindNode.Text)).HasValue)
+                    {
+                        tabControlDitchesCulvertsPipes.SelectTab("tabPageCulverts");
+                        //we have found a match and we don't need to look anywhere else
+                        _lastGlobalID = (int)this.sWSP_CULVERTTableAdapter.FindFirstGlobalID(textBoxFindNode.Text);
+                        sWSPWATERSHEDBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByCulvertID(_lastGlobalID)[0])["watershed_id"] != (int)((System.Data.DataRowView)sWSPWATERSHEDBindingSource.Current)["watershed_id"])
+                        {
+                            sWSPWATERSHEDBindingSource.MoveNext();
+                        }
+                        fKSUBWATERSHEDWATERSHEDBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByCulvertID(_lastGlobalID))[0]["subwatershed_id"] != (int)((System.Data.DataRowView)fKSUBWATERSHEDWATERSHEDBindingSource.Current)["subwatershed_id"])
+                        {
+                            fKSUBWATERSHEDWATERSHEDBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+                        fKVIEWSUBWATERSHEDBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByCulvertID(_lastGlobalID))[0]["view_id"] != (int)((System.Data.DataRowView)fKVIEWSUBWATERSHEDBindingSource.Current)["view_id"])
+                        {
+                            fKVIEWSUBWATERSHEDBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+                        fKSURVEYPAGEVIEWBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByCulvertID(_lastGlobalID))[0]["survey_page_id"] != (int)((System.Data.DataRowView)fKSURVEYPAGEVIEWBindingSource.Current)["survey_page_id"])
+                        {
+                            fKSURVEYPAGEVIEWBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+                        fKCULVERTSURVEYPAGEBindingSource1.MoveFirst();
+                        while (_lastGlobalID != (int)((System.Data.DataRowView)fKCULVERTSURVEYPAGEBindingSource1.Current)["global_id"])
+                        {
+                            fKCULVERTSURVEYPAGEBindingSource1.MoveNext();
+                        }
+                        this.Refresh();
+                    }
+                    //third search the pipes table
+                    else if ((this.sWSP_PIPETableAdapter.FindFirstGlobalID(textBoxFindNode.Text)).HasValue)
+                    {
+                        tabControlDitchesCulvertsPipes.SelectTab("tabPagePipes");
+                        //we have found a match and we don't need to look anywhere else
+                        _lastGlobalID = (int)this.sWSP_PIPETableAdapter.FindFirstGlobalID(textBoxFindNode.Text);
+                        sWSPWATERSHEDBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByPipeID(_lastGlobalID)[0])["watershed_id"] != (int)((System.Data.DataRowView)sWSPWATERSHEDBindingSource.Current)["watershed_id"])
+                        {
+                            sWSPWATERSHEDBindingSource.MoveNext();
+                        }
+                        fKSUBWATERSHEDWATERSHEDBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByPipeID(_lastGlobalID))[0]["subwatershed_id"] != (int)((System.Data.DataRowView)fKSUBWATERSHEDWATERSHEDBindingSource.Current)["subwatershed_id"])
+                        {
+                            fKSUBWATERSHEDWATERSHEDBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+                        fKVIEWSUBWATERSHEDBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByPipeID(_lastGlobalID))[0]["view_id"] != (int)((System.Data.DataRowView)fKVIEWSUBWATERSHEDBindingSource.Current)["view_id"])
+                        {
+                            fKVIEWSUBWATERSHEDBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+                        fKSURVEYPAGEVIEWBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByPipeID(_lastGlobalID))[0]["survey_page_id"] != (int)((System.Data.DataRowView)fKSURVEYPAGEVIEWBindingSource.Current)["survey_page_id"])
+                        {
+                            fKSURVEYPAGEVIEWBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+                        fKPIPESURVEYPAGEBindingSource.MoveFirst();
+                        while (_lastGlobalID != (int)((System.Data.DataRowView)fKPIPESURVEYPAGEBindingSource.Current)["global_id"])
+                        {
+                            fKPIPESURVEYPAGEBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+                    }
+                    else
+                    {
+                        MessageBox.Show("No match found");
+                    }
+                }
             }
             else if (tabControlDitchesCulvertsPipes.SelectedTab == tabControlDitchesCulvertsPipes.TabPages["tabpagePipes"])
             {
-                MessageBox.Show("Pipes");
+                //Get the selected row from the ditches table.  Don't worry if the user has selected more than one row,
+                //because that situation would mean that at least something was messed with since the last search.
+                try
+                {
+                    currentSelected1 = ((string)((System.Data.DataRowView)fKPIPESURVEYPAGEBindingSource.Current)["us_node"]).Trim();
+                    currentSelected2 = ((string)((System.Data.DataRowView)fKPIPESURVEYPAGEBindingSource.Current)["ds_node"]).Trim();
+                    _lastGlobalID = (int)((System.Data.DataRowView)fKPIPESURVEYPAGEBindingSource.Current)["global_id"];
+                }
+                catch (Exception ex)
+                {
+                    //there was no currently selected datarow object.
+                }
+
+                if (string.Compare(currentSelected1, textBoxFindNode.Text) == 0 || string.Compare(currentSelected2, textBoxFindNode.Text) == 0)
+                {
+                    //we have already searched for this node and found a match.  This means we must
+                    //try to find a new match, or at least return to the current match
+                    //first, search the rest of the ditches table
+                    //SELECT TOP 1 FROM DITCH  WHERE global_id > _lastGlobalID AND node like textboxFindNode.text ORDER BY global_id
+                    if ((this.sWSP_PIPETableAdapter.FindNextGlobalID(_lastGlobalID, textBoxFindNode.Text)).HasValue)
+                    {
+                        tabControlDitchesCulvertsPipes.SelectTab("tabPagePipes");
+                        //we have found a match and we don't need to look anywhere else
+                        _lastGlobalID = (int)this.sWSP_PIPETableAdapter.FindNextGlobalID(_lastGlobalID, textBoxFindNode.Text);
+                        sWSPWATERSHEDBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByPipeID(_lastGlobalID)[0])["watershed_id"] != (int)((System.Data.DataRowView)sWSPWATERSHEDBindingSource.Current)["watershed_id"])
+                        {
+                            sWSPWATERSHEDBindingSource.MoveNext();
+                        }
+                        fKSUBWATERSHEDWATERSHEDBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByPipeID(_lastGlobalID))[0]["subwatershed_id"] != (int)((System.Data.DataRowView)fKSUBWATERSHEDWATERSHEDBindingSource.Current)["subwatershed_id"])
+                        {
+                            fKSUBWATERSHEDWATERSHEDBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+                        fKVIEWSUBWATERSHEDBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByPipeID(_lastGlobalID))[0]["view_id"] != (int)((System.Data.DataRowView)fKVIEWSUBWATERSHEDBindingSource.Current)["view_id"])
+                        {
+                            fKVIEWSUBWATERSHEDBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+                        fKSURVEYPAGEVIEWBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByPipeID(_lastGlobalID))[0]["survey_page_id"] != (int)((System.Data.DataRowView)fKSURVEYPAGEVIEWBindingSource.Current)["survey_page_id"])
+                        {
+                            fKSURVEYPAGEVIEWBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+                        fKPIPESURVEYPAGEBindingSource.MoveFirst();
+                        while (_lastGlobalID != (int)((System.Data.DataRowView)fKPIPESURVEYPAGEBindingSource.Current)["global_id"])
+                        {
+                            fKPIPESURVEYPAGEBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+
+                    }
+                    //second search all of the ditches table (if there is only one match we will end up right back where we started).
+                    else if ((this.sWSP_DITCHTableAdapter.FindFirstGlobalID(textBoxFindNode.Text)).HasValue)
+                    {
+                        tabControlDitchesCulvertsPipes.SelectTab("tabPageDitches");
+                        //we have found a match and we don't need to look anywhere else
+                        _lastGlobalID = (int)this.sWSP_DITCHTableAdapter.FindFirstGlobalID(textBoxFindNode.Text);
+                        sWSPWATERSHEDBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByDitchID(_lastGlobalID)[0])["watershed_id"] != (int)((System.Data.DataRowView)sWSPWATERSHEDBindingSource.Current)["watershed_id"])
+                        {
+                            sWSPWATERSHEDBindingSource.MoveNext();
+                        }
+                        fKSUBWATERSHEDWATERSHEDBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByDitchID(_lastGlobalID))[0]["subwatershed_id"] != (int)((System.Data.DataRowView)fKSUBWATERSHEDWATERSHEDBindingSource.Current)["subwatershed_id"])
+                        {
+                            fKSUBWATERSHEDWATERSHEDBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+                        fKVIEWSUBWATERSHEDBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByDitchID(_lastGlobalID))[0]["view_id"] != (int)((System.Data.DataRowView)fKVIEWSUBWATERSHEDBindingSource.Current)["view_id"])
+                        {
+                            fKVIEWSUBWATERSHEDBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+                        fKSURVEYPAGEVIEWBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByDitchID(_lastGlobalID))[0]["survey_page_id"] != (int)((System.Data.DataRowView)fKSURVEYPAGEVIEWBindingSource.Current)["survey_page_id"])
+                        {
+                            fKSURVEYPAGEVIEWBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+                        fKDITCHSURVEYPAGEBindingSource.MoveFirst();
+                        while (_lastGlobalID != (int)((System.Data.DataRowView)fKDITCHSURVEYPAGEBindingSource.Current)["global_id"])
+                        {
+                            fKDITCHSURVEYPAGEBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+
+                    }
+                    //third search the culverts table
+                    else if ((this.sWSP_CULVERTTableAdapter.FindFirstGlobalID(textBoxFindNode.Text)).HasValue)
+                    {
+                        tabControlDitchesCulvertsPipes.SelectTab("tabPageCulverts");
+                        //we have found a match and we don't need to look anywhere else
+                        _lastGlobalID = (int)this.sWSP_CULVERTTableAdapter.FindFirstGlobalID(textBoxFindNode.Text);
+                        sWSPWATERSHEDBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByCulvertID(_lastGlobalID)[0])["watershed_id"] != (int)((System.Data.DataRowView)sWSPWATERSHEDBindingSource.Current)["watershed_id"])
+                        {
+                            sWSPWATERSHEDBindingSource.MoveNext();
+                        }
+                        fKSUBWATERSHEDWATERSHEDBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByCulvertID(_lastGlobalID))[0]["subwatershed_id"] != (int)((System.Data.DataRowView)fKSUBWATERSHEDWATERSHEDBindingSource.Current)["subwatershed_id"])
+                        {
+                            fKSUBWATERSHEDWATERSHEDBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+                        fKVIEWSUBWATERSHEDBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByCulvertID(_lastGlobalID))[0]["view_id"] != (int)((System.Data.DataRowView)fKVIEWSUBWATERSHEDBindingSource.Current)["view_id"])
+                        {
+                            fKVIEWSUBWATERSHEDBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+                        fKSURVEYPAGEVIEWBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByCulvertID(_lastGlobalID))[0]["survey_page_id"] != (int)((System.Data.DataRowView)fKSURVEYPAGEVIEWBindingSource.Current)["survey_page_id"])
+                        {
+                            fKSURVEYPAGEVIEWBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+                        fKCULVERTSURVEYPAGEBindingSource1.MoveFirst();
+                        while (_lastGlobalID != (int)((System.Data.DataRowView)fKCULVERTSURVEYPAGEBindingSource1.Current)["global_id"])
+                        {
+                            fKCULVERTSURVEYPAGEBindingSource1.MoveNext();
+                        }
+                        this.Refresh();
+                    }
+
+                    //fourth search the pipes table
+                    else if ((this.sWSP_PIPETableAdapter.FindFirstGlobalID(textBoxFindNode.Text)).HasValue)
+                    {
+                        tabControlDitchesCulvertsPipes.SelectTab("tabPagePipes");
+                        //we have found a match and we don't need to look anywhere else
+                        _lastGlobalID = (int)this.sWSP_PIPETableAdapter.FindFirstGlobalID(textBoxFindNode.Text);
+                        sWSPWATERSHEDBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByPipeID(_lastGlobalID)[0])["watershed_id"] != (int)((System.Data.DataRowView)sWSPWATERSHEDBindingSource.Current)["watershed_id"])
+                        {
+                            sWSPWATERSHEDBindingSource.MoveNext();
+                        }
+                        fKSUBWATERSHEDWATERSHEDBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByPipeID(_lastGlobalID))[0]["subwatershed_id"] != (int)((System.Data.DataRowView)fKSUBWATERSHEDWATERSHEDBindingSource.Current)["subwatershed_id"])
+                        {
+                            fKSUBWATERSHEDWATERSHEDBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+                        fKVIEWSUBWATERSHEDBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByPipeID(_lastGlobalID))[0]["view_id"] != (int)((System.Data.DataRowView)fKVIEWSUBWATERSHEDBindingSource.Current)["view_id"])
+                        {
+                            fKVIEWSUBWATERSHEDBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+                        fKSURVEYPAGEVIEWBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByPipeID(_lastGlobalID))[0]["survey_page_id"] != (int)((System.Data.DataRowView)fKSURVEYPAGEVIEWBindingSource.Current)["survey_page_id"])
+                        {
+                            fKSURVEYPAGEVIEWBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+                        fKPIPESURVEYPAGEBindingSource.MoveFirst();
+                        while (_lastGlobalID != (int)((System.Data.DataRowView)fKPIPESURVEYPAGEBindingSource.Current)["global_id"])
+                        {
+                            fKPIPESURVEYPAGEBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+                    }
+
+                    
+                }
+                else
+                {
+                    //since the strings didn't match, we can't assume that there will ever be a match, so just search all the tables starting with the lowest global_id in ditches
+                    //stop after we have looked at them all, and just return nothing (MessageBox.Show("No matches found");)
+                    if ((this.sWSP_DITCHTableAdapter.FindFirstGlobalID(textBoxFindNode.Text)).HasValue)
+                    {
+                        tabControlDitchesCulvertsPipes.SelectTab("tabPageDitches");
+                        //we have found a match and we don't need to look anywhere else
+                        _lastGlobalID = (int)this.sWSP_DITCHTableAdapter.FindFirstGlobalID(textBoxFindNode.Text);
+                        sWSPWATERSHEDBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByDitchID(_lastGlobalID)[0])["watershed_id"] != (int)((System.Data.DataRowView)sWSPWATERSHEDBindingSource.Current)["watershed_id"])
+                        {
+                            sWSPWATERSHEDBindingSource.MoveNext();
+                        }
+                        fKSUBWATERSHEDWATERSHEDBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByDitchID(_lastGlobalID))[0]["subwatershed_id"] != (int)((System.Data.DataRowView)fKSUBWATERSHEDWATERSHEDBindingSource.Current)["subwatershed_id"])
+                        {
+                            fKSUBWATERSHEDWATERSHEDBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+                        fKVIEWSUBWATERSHEDBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByDitchID(_lastGlobalID))[0]["view_id"] != (int)((System.Data.DataRowView)fKVIEWSUBWATERSHEDBindingSource.Current)["view_id"])
+                        {
+                            fKVIEWSUBWATERSHEDBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+                        fKSURVEYPAGEVIEWBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByDitchID(_lastGlobalID))[0]["survey_page_id"] != (int)((System.Data.DataRowView)fKSURVEYPAGEVIEWBindingSource.Current)["survey_page_id"])
+                        {
+                            fKSURVEYPAGEVIEWBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+                        fKDITCHSURVEYPAGEBindingSource.MoveFirst();
+                        while (_lastGlobalID != (int)((System.Data.DataRowView)fKDITCHSURVEYPAGEBindingSource.Current)["global_id"])
+                        {
+                            fKDITCHSURVEYPAGEBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+                    }
+                    //second search the culverts table
+                    else if ((this.sWSP_CULVERTTableAdapter.FindFirstGlobalID(textBoxFindNode.Text)).HasValue)
+                    {
+                        tabControlDitchesCulvertsPipes.SelectTab("tabPageCulverts");
+                        //we have found a match and we don't need to look anywhere else
+                        _lastGlobalID = (int)this.sWSP_CULVERTTableAdapter.FindFirstGlobalID(textBoxFindNode.Text);
+                        sWSPWATERSHEDBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByCulvertID(_lastGlobalID)[0])["watershed_id"] != (int)((System.Data.DataRowView)sWSPWATERSHEDBindingSource.Current)["watershed_id"])
+                        {
+                            sWSPWATERSHEDBindingSource.MoveNext();
+                        }
+                        fKSUBWATERSHEDWATERSHEDBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByCulvertID(_lastGlobalID))[0]["subwatershed_id"] != (int)((System.Data.DataRowView)fKSUBWATERSHEDWATERSHEDBindingSource.Current)["subwatershed_id"])
+                        {
+                            fKSUBWATERSHEDWATERSHEDBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+                        fKVIEWSUBWATERSHEDBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByCulvertID(_lastGlobalID))[0]["view_id"] != (int)((System.Data.DataRowView)fKVIEWSUBWATERSHEDBindingSource.Current)["view_id"])
+                        {
+                            fKVIEWSUBWATERSHEDBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+                        fKSURVEYPAGEVIEWBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByCulvertID(_lastGlobalID))[0]["survey_page_id"] != (int)((System.Data.DataRowView)fKSURVEYPAGEVIEWBindingSource.Current)["survey_page_id"])
+                        {
+                            fKSURVEYPAGEVIEWBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+                        fKCULVERTSURVEYPAGEBindingSource1.MoveFirst();
+                        while (_lastGlobalID != (int)((System.Data.DataRowView)fKCULVERTSURVEYPAGEBindingSource1.Current)["global_id"])
+                        {
+                            fKCULVERTSURVEYPAGEBindingSource1.MoveNext();
+                        }
+                        this.Refresh();
+                    }
+                    //third search the pipes table
+                    else if ((this.sWSP_PIPETableAdapter.FindFirstGlobalID(textBoxFindNode.Text)).HasValue)
+                    {
+                        tabControlDitchesCulvertsPipes.SelectTab("tabPagePipes");
+                        //we have found a match and we don't need to look anywhere else
+                        _lastGlobalID = (int)this.sWSP_PIPETableAdapter.FindFirstGlobalID(textBoxFindNode.Text);
+                        sWSPWATERSHEDBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByPipeID(_lastGlobalID)[0])["watershed_id"] != (int)((System.Data.DataRowView)sWSPWATERSHEDBindingSource.Current)["watershed_id"])
+                        {
+                            sWSPWATERSHEDBindingSource.MoveNext();
+                        }
+                        fKSUBWATERSHEDWATERSHEDBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByPipeID(_lastGlobalID))[0]["subwatershed_id"] != (int)((System.Data.DataRowView)fKSUBWATERSHEDWATERSHEDBindingSource.Current)["subwatershed_id"])
+                        {
+                            fKSUBWATERSHEDWATERSHEDBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+                        fKVIEWSUBWATERSHEDBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByPipeID(_lastGlobalID))[0]["view_id"] != (int)((System.Data.DataRowView)fKVIEWSUBWATERSHEDBindingSource.Current)["view_id"])
+                        {
+                            fKVIEWSUBWATERSHEDBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+                        fKSURVEYPAGEVIEWBindingSource.MoveFirst();
+                        while ((int)(this.relationalIDsTableAdapter.GetDataByPipeID(_lastGlobalID))[0]["survey_page_id"] != (int)((System.Data.DataRowView)fKSURVEYPAGEVIEWBindingSource.Current)["survey_page_id"])
+                        {
+                            fKSURVEYPAGEVIEWBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+                        fKPIPESURVEYPAGEBindingSource.MoveFirst();
+                        while (_lastGlobalID != (int)((System.Data.DataRowView)fKPIPESURVEYPAGEBindingSource.Current)["global_id"])
+                        {
+                            fKPIPESURVEYPAGEBindingSource.MoveNext();
+                        }
+                        this.Refresh();
+                    }
+                    else
+                    {
+                        MessageBox.Show("No match found");
+                    }
+                }
             }
 
             
-            //SELECT TOP 1 FROM DITCH   WHERE global_id > _lastGlobalID AND node like textboxFindNode.text ORDER BY global_id
+            
             //SELECT TOP 1 FROM CULVERT WHERE global_id > _lastGlobalID AND node like textboxFindNode.text ORDER BY global_id
             //SELECT TOP 1 FROM PIPE    WHERE global_id > _lastGlobalID AND (us_node like textboxFindNode.text OR ds_node like textboxFindNode.text) ORDER BY global_id
         }
