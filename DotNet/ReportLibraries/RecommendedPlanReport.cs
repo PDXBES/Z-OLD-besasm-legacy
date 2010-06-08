@@ -65,6 +65,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
         //auxilaryDataDescription.Add("AlternativePath", "Alternative Package (alternative_package.mdb)");
         auxilaryDataDescription.Add("SwmmOutputFile", "Swmm Output File (.out)");
       }
+      
       public override bool RequiresAuxilaryData
       {
         get
@@ -72,6 +73,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
           return true;
         }
       }
+      
       public override Dictionary<string, Parameter> AuxilaryData
       {
         get
@@ -529,7 +531,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
           NodeName = grpNodeName.Key.NodeName
         };
 
-      //Roof Bioinfiltration Storage - Filtered and grouped by Focus Area
+      //Parking Bioinfiltration Storage - Filtered and grouped by Focus Area
       var qryParkTargetsBio =
         from query1 in qryParkTargetsBioGroupByFacNodeName
         join tableE18 in scDS.TableE18
@@ -577,7 +579,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
           NodeName = grpNodeName.Key.NodeName
         };
 
-      //Roof Bioinfiltration Storage - Filtered and grouped by Focus Area
+      //Parking Bioinfiltration Storage - Filtered and grouped by Focus Area
       var qryParkTargetsBio =
         from query1 in qryParkTargetsBioGroupByFacNodeName
         join tableE19 in scDS.TableE19

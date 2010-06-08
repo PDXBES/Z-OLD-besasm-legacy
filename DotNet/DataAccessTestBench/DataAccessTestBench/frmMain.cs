@@ -557,5 +557,10 @@ namespace DataAccessTestBench
       LoadRPReport();
     }
 
+    private void btnClearTextBox_Click(object sender, EventArgs e)
+    {
+      textBox1.Clear();
+    }
+
   }
 }
