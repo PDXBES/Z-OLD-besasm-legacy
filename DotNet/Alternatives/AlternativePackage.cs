@@ -390,6 +390,10 @@ namespace SystemsAnalysis.Modeling.Alternatives
         altStreetTargets = new Dictionary<int, StreetTarget>();
         foreach (DataAccess.AlternativeDataSet.AltStreetTargetsRow row in altStreetTargetsTable)
         {
+          if(altStreetTargets.ContainsKey(row.ICID))
+          {
+            throw new Exception(("AltStreetTarget with ICID '" + row.ICID + "' has a duplicate ICID in the Base Model."));       
+          }       
           altStreetTargets.Add(row.ICID, new StreetTarget(baseModel.ModelStreetTargets[row.ICID], row.IsFocusAreaNull() ? "" : row.FocusArea));
           altStreetTargets[row.ICID].ToBeBuilt = row.BuildModelIC;
           altStreetTargets[row.ICID].Constructed = row.Constructed;
