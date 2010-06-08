@@ -14,6 +14,7 @@ using System.Text;
 using SystemsAnalysis.Modeling;
 using SystemsAnalysis.Modeling.Alternatives;
 using SystemsAnalysis.Types;
+using System.Linq;
 #endregion
 
 namespace SystemsAnalysis.Modeling.Alternatives
@@ -112,8 +113,28 @@ namespace SystemsAnalysis.Modeling.Alternatives
       get { return focusAreaList; }
     }
     private void LoadFocusAreaList()
-    {
-      focusAreaList = new List<string>();
+    {           
+      var query = 
+        (
+          from altStreetTargets in ModelAltStreetTargets.Values
+          select altStreetTargets.FocusArea
+        ).Union
+        (
+          from altRoofTargets in ModelAltRoofTargets.Values
+          select altRoofTargets.FocusArea
+        ).Union
+        (
+          from altParkingTargets in ModelAltParkingTargets.Values
+          select altParkingTargets.FocusArea
+        ).Union
+        (
+          from AltLink altLinks in ModelAltLinks.Values
+          select altLinks.FocusArea
+        ).OrderBy(s => s);
+
+      focusAreaList = new List<string>(query);// (List<string>)query.AsEnumerable<string>();
+      
+      /*focusAreaList = new List<string>();
       foreach (AltLink altLink in ModelAltLinks.Values)
       {
         if (!focusAreaList.Contains(altLink.FocusArea))
@@ -142,7 +163,7 @@ namespace SystemsAnalysis.Modeling.Alternatives
           focusAreaList.Add(pt.FocusArea);
         }
       }
-      focusAreaList.Sort();
+      focusAreaList.Sort();*/
     }
 
     public AltLinks ModelAltLinks
