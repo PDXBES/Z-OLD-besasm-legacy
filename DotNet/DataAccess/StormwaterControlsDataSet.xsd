@@ -2523,7 +2523,7 @@ FROM         TableE19</CommandText>
               <xs:element name="Constructed" msprop:Generator_UserColumnName="Constructed" msprop:Generator_ColumnVarNameInTable="columnConstructed" msprop:Generator_ColumnPropNameInRow="Constructed" msprop:Generator_ColumnPropNameInTable="ConstructedColumn" type="xs:int" minOccurs="0" />
               <xs:element name="AltICID" msprop:Generator_UserColumnName="AltICID" msprop:Generator_ColumnVarNameInTable="columnAltICID" msprop:Generator_ColumnPropNameInRow="AltICID" msprop:Generator_ColumnPropNameInTable="AltICIDColumn" type="xs:int" minOccurs="0" />
               <xs:element name="Difficulty" msprop:Generator_UserColumnName="Difficulty" msprop:Generator_ColumnVarNameInTable="columnDifficulty" msprop:Generator_ColumnPropNameInRow="Difficulty" msprop:Generator_ColumnPropNameInTable="DifficultyColumn" type="xs:short" minOccurs="0" />
-              <xs:element name="FocusArea" msprop:Generator_UserColumnName="FocusArea" msprop:Generator_ColumnVarNameInTable="columnFocusArea" msprop:Generator_ColumnPropNameInRow="FocusArea" msprop:Generator_ColumnPropNameInTable="FocusAreaColumn" minOccurs="0">
+              <xs:element name="FocusArea" msprop:Generator_UserColumnName="FocusArea" msprop:Generator_ColumnVarNameInTable="columnFocusArea" msprop:nullValue="_empty" msprop:Generator_ColumnPropNameInRow="FocusArea" msprop:Generator_ColumnPropNameInTable="FocusAreaColumn" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="10" />
@@ -2570,7 +2570,7 @@ FROM         TableE19</CommandText>
               <xs:element name="Constructed" msprop:Generator_UserColumnName="Constructed" msprop:Generator_ColumnVarNameInTable="columnConstructed" msprop:Generator_ColumnPropNameInRow="Constructed" msprop:Generator_ColumnPropNameInTable="ConstructedColumn" type="xs:int" minOccurs="0" />
               <xs:element name="AltICID" msprop:Generator_UserColumnName="AltICID" msprop:Generator_ColumnVarNameInTable="columnAltICID" msprop:Generator_ColumnPropNameInRow="AltICID" msprop:Generator_ColumnPropNameInTable="AltICIDColumn" type="xs:int" minOccurs="0" />
               <xs:element name="Difficulty" msprop:Generator_UserColumnName="Difficulty" msprop:Generator_ColumnVarNameInTable="columnDifficulty" msprop:Generator_ColumnPropNameInRow="Difficulty" msprop:Generator_ColumnPropNameInTable="DifficultyColumn" type="xs:short" minOccurs="0" />
-              <xs:element name="FocusArea" msprop:Generator_UserColumnName="FocusArea" msprop:Generator_ColumnVarNameInTable="columnFocusArea" msprop:Generator_ColumnPropNameInRow="FocusArea" msprop:Generator_ColumnPropNameInTable="FocusAreaColumn" minOccurs="0">
+              <xs:element name="FocusArea" msprop:Generator_UserColumnName="FocusArea" msprop:Generator_ColumnVarNameInTable="columnFocusArea" msprop:nullValue="_empty" msprop:Generator_ColumnPropNameInRow="FocusArea" msprop:Generator_ColumnPropNameInTable="FocusAreaColumn" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="10" />
@@ -2602,7 +2602,7 @@ FROM         TableE19</CommandText>
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="FocusArea" msprop:Generator_UserColumnName="FocusArea" msprop:Generator_ColumnVarNameInTable="columnFocusArea" msprop:Generator_ColumnPropNameInRow="FocusArea" msprop:Generator_ColumnPropNameInTable="FocusAreaColumn" minOccurs="0">
+              <xs:element name="FocusArea" msprop:Generator_UserColumnName="FocusArea" msprop:nullValue="_empty" msprop:Generator_ColumnPropNameInRow="FocusArea" msprop:Generator_ColumnPropNameInTable="FocusAreaColumn" msprop:Generator_ColumnVarNameInTable="columnFocusArea" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="10" />

@@ -452,6 +452,10 @@ namespace SystemsAnalysis.Modeling
         modelStreetTargets = new Dictionary<int, StreetTarget>();
         foreach (DataAccess.ModelDataSet.MdlStreetTargetsRow row in modelDS.MdlStreetTargets)
         {
+          if (modelStreetTargets.ContainsKey(row.ICID))
+          {
+            throw new Exception(("ModelStreetTarget with ICID '" + row.ICID + "' has a duplicate ICID in the model."));
+          }    
           modelStreetTargets.Add(row.ICID, new StreetTarget(row));
         }
       }
