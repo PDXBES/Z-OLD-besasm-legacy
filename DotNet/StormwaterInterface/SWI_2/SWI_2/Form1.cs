@@ -292,12 +292,12 @@ namespace SWI_2
             globalID = (int)this.sWSP_GLOBAL_IDTableAdapter.ScalarQuery();
             this.sWSP_DITCHTableAdapter.Insert(globalID,
                                                 ((int)((System.Data.DataRowView)fKSURVEYPAGEVIEWBindingSource.Current)["survey_page_id"]),
-                                                "NewNode",
-                                                1,
-                                                1,
-                                                1,
-                                                1,
-                                                1,
+                                                "",
+                                                3,
+                                                null,
+                                                null,
+                                                null,
+                                                10,
                                                 "");
             this.sWSP_DITCHTableAdapter.Fill((SANDBOXDataSet.SWSP_DITCHDataTable)((SANDBOXDataSet)this.sWSPDITCHBindingSource.DataSource).SWSP_DITCH);
 
@@ -359,13 +359,13 @@ namespace SWI_2
             globalID = (int)this.sWSP_GLOBAL_IDTableAdapter.ScalarQuery();
             this.sWSP_CULVERTTableAdapter.Insert(globalID,
                                                 ((int)((System.Data.DataRowView)fKSURVEYPAGEVIEWBindingSource.Current)["survey_page_id"]),
-                                                "NewNode",
-                                                1,
-                                                1,
-                                                1,
-                                                1,
-                                                1,
-                                                1,
+                                                "",
+                                                3,
+                                                4,
+                                                4,
+                                                null,
+                                                null,
+                                                10,
                                                 "");
             this.sWSP_CULVERTTableAdapter.Fill((SANDBOXDataSet.SWSP_CULVERTDataTable)((SANDBOXDataSet)this.sWSPCULVERTBindingSource.DataSource).SWSP_CULVERT);
 
@@ -405,13 +405,13 @@ namespace SWI_2
             globalID = (int)this.sWSP_GLOBAL_IDTableAdapter.ScalarQuery();
             this.sWSP_PIPETableAdapter.Insert(globalID,
                                                 ((int)((System.Data.DataRowView)fKSURVEYPAGEVIEWBindingSource.Current)["survey_page_id"]),
-                                                "NewNode1",
-                                                "NewNode2",
-                                                1,
-                                                1,
-                                                1,
-                                                1,
-                                                1,
+                                                "",
+                                                "",
+                                                null,
+                                                null,
+                                                null,
+                                                10,
+                                                4,
                                                 "");
             this.sWSP_PIPETableAdapter.Fill((SANDBOXDataSet.SWSP_PIPEDataTable)((SANDBOXDataSet)this.sWSPPIPEBindingSource.DataSource).SWSP_PIPE);
 
@@ -640,7 +640,6 @@ namespace SWI_2
                             fKDITCHSURVEYPAGEBindingSource.MoveNext();
                         }
                         this.Refresh();
-
                     }
                 }
                 else
