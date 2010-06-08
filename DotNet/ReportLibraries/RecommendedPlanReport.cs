@@ -24,7 +24,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
     private string modelPath;
     private string alternativePath;
     private string swmmOutputFile;
-    private AlternativeReport alternativeReport;
+    public AlternativeReport alternativeReport;
 
     public RecommendedPlanReport()
     {
