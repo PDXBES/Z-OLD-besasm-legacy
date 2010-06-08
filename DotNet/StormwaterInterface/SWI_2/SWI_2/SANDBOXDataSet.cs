@@ -2,6 +2,9 @@
     
     
     public partial class SANDBOXDataSet {
+        partial class SWSP_DITCHDataTable
+        {
+        }
     }
 }
 
