@@ -53,6 +53,5 @@ namespace SWI_2
         {
             this.Close();
         }
-
     }
 }

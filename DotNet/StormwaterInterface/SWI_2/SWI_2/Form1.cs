@@ -188,35 +188,6 @@ namespace SWI_2
             }
         }
 
-        private void checkFacingDirectionAssociatedWithThisDitch(object sender, System.EventArgs e)
-        {
-            //MessageBox.Show(((int)((System.Data.DataRowView)fKDITCHSURVEYPAGEBindingSource.Current)["facing"]).ToString());
-            try
-            {
-                
-                //comboBoxDitchesFacingDirection.SelectedValue = (int)((System.Data.DataRowView)fKDITCHSURVEYPAGEBindingSource.Current)["facing"];
-                
-                //comboBoxDitchesFacingDirection.SelectedIndex = comboBoxDitchesFacingDirection.Items.IndexOf(((System.Data.DataRowView)fKDITCHSURVEYPAGEBindingSource.Current)["facing"]); 
-            }
-            catch (Exception ex)
-            {
-            }
-        }
-
-        private void comboBoxDitchesFacingDirection_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            /*System.Data.DataRowView item;
-            //refill the evaulator/page associations
-            MessageBox.Show(((int)((System.Data.DataRowView)fKDITCHSURVEYPAGEBindingSource.Current)["facing"]).ToString());
-            try
-            {
-                comboBoxDitchesFacingDirection.SelectedValue = (int)((System.Data.DataRowView)fKDITCHSURVEYPAGEBindingSource.Current)["facing"];
-            }
-            catch (Exception ex)
-            {
-            }*/
-        }
-
         private void tabPageDitches_Entered(object sender, EventArgs e)
         {
             try
@@ -229,6 +200,7 @@ namespace SWI_2
                 fKDITCHSURVEYPAGEBindingSource.MoveFirst();
                 dataGridViewDitches.Refresh();
                 this.sWSP_PHOTOTableAdapter.FillByGlobalID((SANDBOXDataSet.SWSP_PHOTODataTable)((SANDBOXDataSet)this.sWSPPHOTOBindingSource.DataSource).SWSP_PHOTO, (int)((System.Data.DataRowView)fKDITCHSURVEYPAGEBindingSource.Current)["global_id"]);
+
             }
             catch (Exception ex)
             {
@@ -248,8 +220,6 @@ namespace SWI_2
             dataGridViewCulverts.Rows[0].Selected = true;
             fKCULVERTSURVEYPAGEBindingSource1.MoveFirst();
             dataGridViewCulverts.Refresh();
-
-
             }
             catch (Exception ex)
             {
@@ -267,10 +237,10 @@ namespace SWI_2
             dataGridViewPipes.Rows[0].Selected = true;
             fKPIPESURVEYPAGEBindingSource.MoveFirst();
             dataGridViewPipes.Refresh();
-}
+            }
             catch (Exception ex)
             {
-             }
+            }
         }
 
         private void buttonDitchesDelete_Click(object sender, EventArgs e)
@@ -452,14 +422,6 @@ namespace SWI_2
 
         private void buttonFindNode_Click(object sender, EventArgs e)
         {
-            //Depending on the last search, we look for the next match for the string in the textboxFindNode text string.
-            //order the last searched table(pipes, culverts or ditches) by global_id, exclude global ids that are
-            //smaller than the last searched global id, and select the one with the lowest global_id.
-            //if there is a match, set the _lastGlobalID variable to the matched globalID value and
-            //keep the _lastSearch variable constant as well.
-            //if there are no matches, then reset the _lastGlobalID variable to 0 and set _lastSearch to _lastSearch+1
-            //search the new table, repeat.
-
             //if the currently selected record does not match the search node string, then there is no effective last search
             //if the currently selected record does match the search node string, then record the globalID and the table that
             //we are in.
@@ -1331,11 +1293,117 @@ namespace SWI_2
                     }
                 }
             }
+        }
 
-            
-            
-            //SELECT TOP 1 FROM CULVERT WHERE global_id > _lastGlobalID AND node like textboxFindNode.text ORDER BY global_id
-            //SELECT TOP 1 FROM PIPE    WHERE global_id > _lastGlobalID AND (us_node like textboxFindNode.text OR ds_node like textboxFindNode.text) ORDER BY global_id
+        private void textBoxDitchesNode_TextChanged(object sender, EventArgs e)
+        {
+            if (textBoxDitchesNode.Text.Length > 10)
+            {
+                textBoxDitchesNode.Text = textBoxDitchesNode.Text.Substring(0, 10);
+            }
+            textBoxDitchesNode.Text = textBoxDitchesNode.Text.Trim();
+        }
+
+        private void textBoxDitchesNode_Enter(object sender, EventArgs e)
+        {
+            textBoxDitchesNode.Text = textBoxDitchesNode.Text.Trim();
+        }
+
+        private void textBoxCulvertsNode_TextChanged(object sender, EventArgs e)
+        {
+            if (textBoxCulvertsNode.Text.Length > 10)
+            {
+                textBoxCulvertsNode.Text = textBoxCulvertsNode.Text.Substring(0, 10);
+            }
+            textBoxCulvertsNode.Text = textBoxCulvertsNode.Text.Trim();
+        }
+
+        private void textBoxCulvertsNode_Enter(object sender, EventArgs e)
+        {
+            textBoxCulvertsNode.Text = textBoxCulvertsNode.Text.Trim();
+        }
+
+        private void textBoxPipesDSNode_TextChanged(object sender, EventArgs e)
+        {
+            if (textBoxPipesDSNode.Text.Length > 10)
+            {
+                textBoxPipesDSNode.Text = textBoxPipesDSNode.Text.Substring(0, 10);
+            }
+            textBoxPipesDSNode.Text = textBoxPipesDSNode.Text.Trim();
+        }
+
+        private void textBoxPipesUSNode_TextChanged(object sender, EventArgs e)
+        {
+            if (textBoxPipesUSNode.Text.Length > 10)
+            {
+                textBoxPipesUSNode.Text = textBoxPipesUSNode.Text.Substring(0, 10);
+            }
+            textBoxPipesUSNode.Text = textBoxPipesUSNode.Text.Trim();
+        }
+
+        private void textBoxPipesDSNode_Enter(object sender, EventArgs e)
+        {
+            textBoxPipesDSNode.Text = textBoxPipesDSNode.Text.Trim();
+        }
+
+        private void textBoxPipesUSNode_Enter(object sender, EventArgs e)
+        {
+            textBoxPipesUSNode.Text = textBoxPipesUSNode.Text.Trim();
+        }
+
+        private void comboBoxCulvertsShape_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            comboBoxCulvertsShape.Refresh();
+        }
+
+        private void comboBoxCulvertsMaterial_SelectedIndexChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void comboBoxDitchesMaterial_SelectedIndexChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void tabPageCulverts_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void tabPageDitches_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void tabControlDitchesCulvertsPipes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int lastGlobalIDSaver = _lastGlobalID;
+            _lastSearchVar lastSearchSaver = _lastSearch;
+            string currentSelected = "";
+            string currentSelected1 = "";
+            string currentSelected2 = "";
+
+            if (tabControlDitchesCulvertsPipes.SelectedTab == tabControlDitchesCulvertsPipes.TabPages["tabpageDitches"])
+            {
+                //Get the selected row from the ditches table.  Don't worry if the user has selected more than one row,
+                //because that situation would mean that at least something was messed with since the last search.
+                try
+                {
+                    currentSelected = ((string)((System.Data.DataRowView)fKDITCHSURVEYPAGEBindingSource.Current)["node"]).Trim();
+                    _lastGlobalID = (int)((System.Data.DataRowView)fKDITCHSURVEYPAGEBindingSource.Current)["global_id"];
+
+                    fKDITCHSURVEYPAGEBindingSource.MoveFirst();
+                    while (_lastGlobalID != (int)((System.Data.DataRowView)fKDITCHSURVEYPAGEBindingSource.Current)["global_id"])
+                    {
+                        fKDITCHSURVEYPAGEBindingSource.MoveNext();
+                    }
+                    this.Refresh();
+
+                    
+                }
+                catch (Exception ex)
+                {
+                    //there was no currently selected datarow object.
+                }
+
+            }
         }
     }
 }
