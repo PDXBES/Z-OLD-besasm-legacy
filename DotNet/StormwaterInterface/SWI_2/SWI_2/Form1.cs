@@ -1352,9 +1352,7 @@ namespace SWI_2
         }
 
         private void comboBoxCulvertsShape_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            comboBoxCulvertsShape.Refresh();
-        }
+        {}
 
         private void comboBoxCulvertsMaterial_SelectedIndexChanged(object sender, EventArgs e)
         {
