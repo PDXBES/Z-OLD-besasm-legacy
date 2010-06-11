@@ -122,10 +122,17 @@ namespace SWI_2
 
         private void buttonWatershedsDelete_Click(object sender, EventArgs e)
         {
-            this.sWSP_WATERSHEDTableAdapter.DeleteQuery((int)(((System.Data.DataRowView)sWSPWATERSHEDBindingSource.Current)["watershed_id"]));
-            this.sWSP_WATERSHEDTableAdapter.Update(sANDBOXDataSet);
-            this.sWSP_WATERSHEDTableAdapter.Fill((SANDBOXDataSet.SWSP_WATERSHEDDataTable)((SANDBOXDataSet)this.sWSPWATERSHEDBindingSource.DataSource).SWSP_WATERSHED);
-            dataGridViewWatersheds.Refresh();
+            try
+            {
+                this.sWSP_WATERSHEDTableAdapter.DeleteQuery((int)(((System.Data.DataRowView)sWSPWATERSHEDBindingSource.Current)["watershed_id"]));
+                this.sWSP_WATERSHEDTableAdapter.Update(sANDBOXDataSet);
+                this.sWSP_WATERSHEDTableAdapter.Fill((SANDBOXDataSet.SWSP_WATERSHEDDataTable)((SANDBOXDataSet)this.sWSPWATERSHEDBindingSource.DataSource).SWSP_WATERSHED);
+                dataGridViewWatersheds.Refresh();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("You cannot delete that watershed at this time.  Try deleting associated subwatersheds.");
+            }
         }
 
         private void buttonSubwatershedsAdd_Click(object sender, EventArgs e)
@@ -144,10 +151,17 @@ namespace SWI_2
 
         private void buttonSubwatershedsDelete_Click(object sender, EventArgs e)
         {
-            this.sWSP_SUBWATERSHEDTableAdapter.DeleteQuery((int)(((System.Data.DataRowView)fKSUBWATERSHEDWATERSHEDBindingSource.Current)["subwatershed_id"]));
-            this.sWSP_SUBWATERSHEDTableAdapter.Update(sANDBOXDataSet);
-            this.sWSP_SUBWATERSHEDTableAdapter.Fill((SANDBOXDataSet.SWSP_SUBWATERSHEDDataTable)((SANDBOXDataSet)this.sWSPWATERSHEDBindingSource.DataSource).SWSP_SUBWATERSHED);
-            dataGridViewWatersheds.Refresh();
+            try
+            {
+                this.sWSP_SUBWATERSHEDTableAdapter.DeleteQuery((int)(((System.Data.DataRowView)fKSUBWATERSHEDWATERSHEDBindingSource.Current)["subwatershed_id"]));
+                this.sWSP_SUBWATERSHEDTableAdapter.Update(sANDBOXDataSet);
+                this.sWSP_SUBWATERSHEDTableAdapter.Fill((SANDBOXDataSet.SWSP_SUBWATERSHEDDataTable)((SANDBOXDataSet)this.sWSPWATERSHEDBindingSource.DataSource).SWSP_SUBWATERSHED);
+                dataGridViewWatersheds.Refresh();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("You cannot delete that subwatershed at this time.  Try deleting associated maps.");
+            }
         }
 
         private void buttonEvaluatorsAdd_Click(object sender, EventArgs e)
@@ -188,10 +202,16 @@ namespace SWI_2
 
         private void buttonCulvertOpeningsDelete_Click(object sender, EventArgs e)
         {
-            this.sWSP_CULVERT_OPENING_TYPETableAdapter.DeleteQuery((int)((System.Data.DataRowView)sWSPCULVERTOPENINGTYPEBindingSource.Current)["culvert_opening_type_id"]);
-            this.sWSP_CULVERT_OPENING_TYPETableAdapter.Update(sANDBOXDataSet);
-            this.sWSP_CULVERT_OPENING_TYPETableAdapter.Fill((SANDBOXDataSet.SWSP_CULVERT_OPENING_TYPEDataTable)((SANDBOXDataSet)this.sWSPCULVERTOPENINGTYPEBindingSource.DataSource).SWSP_CULVERT_OPENING_TYPE);
-            dataGridViewCulvertOpenings.Refresh();
+                try
+                {
+                    this.sWSP_CULVERT_OPENING_TYPETableAdapter.DeleteQuery((int)((System.Data.DataRowView)sWSPCULVERTOPENINGTYPEBindingSource.Current)["culvert_opening_type_id"]);
+                    this.sWSP_CULVERT_OPENING_TYPETableAdapter.Update(sANDBOXDataSet);
+                    this.sWSP_CULVERT_OPENING_TYPETableAdapter.Fill((SANDBOXDataSet.SWSP_CULVERT_OPENING_TYPEDataTable)((SANDBOXDataSet)this.sWSPCULVERTOPENINGTYPEBindingSource.DataSource).SWSP_CULVERT_OPENING_TYPE);
+                    dataGridViewCulvertOpenings.Refresh();
+                }
+                catch (Exception ex)
+                {
+                }
         }
 
         private void buttonFacingsAdd_Click(object sender, EventArgs e)
@@ -210,10 +230,17 @@ namespace SWI_2
 
         private void buttonFacingsDelete_Click(object sender, EventArgs e)
         {
-            this.sWSP_FACING_TYPETableAdapter.DeleteQuery((int)((System.Data.DataRowView)sWSPFACINGTYPEBindingSource.Current)["facing_type_id"]);
-            this.sWSP_FACING_TYPETableAdapter.Update(sANDBOXDataSet);
-            this.sWSP_FACING_TYPETableAdapter.Fill((SANDBOXDataSet.SWSP_FACING_TYPEDataTable)((SANDBOXDataSet)this.sWSPFACINGTYPEBindingSource.DataSource).SWSP_FACING_TYPE);
-            dataGridViewFacings.Refresh();
+                try
+                {
+                    this.sWSP_FACING_TYPETableAdapter.DeleteQuery((int)((System.Data.DataRowView)sWSPFACINGTYPEBindingSource.Current)["facing_type_id"]);
+                    this.sWSP_FACING_TYPETableAdapter.Update(sANDBOXDataSet);
+                    this.sWSP_FACING_TYPETableAdapter.Fill((SANDBOXDataSet.SWSP_FACING_TYPEDataTable)((SANDBOXDataSet)this.sWSPFACINGTYPEBindingSource.DataSource).SWSP_FACING_TYPE);
+                    dataGridViewFacings.Refresh();
+                }
+                catch (Exception ex)
+                {
+
+                }
         }
 
         private void buttonShapesAdd_Click(object sender, EventArgs e)
