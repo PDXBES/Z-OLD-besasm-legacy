@@ -406,12 +406,12 @@ namespace SystemsAnalysis.Reporting
       foreach (ReportBase.ReportInfo ri in charEngine.ReportInfos.Values)
       {
         metaData += "<ReportLibrary>";
-        metaData += @"<ReportName>" + ri.ReportName + "</ReportName>";
+        metaData += @"<ReportName>" + encodeXmlValue(ri.ReportName) + "</ReportName>";
         foreach (ReportBase.Parameter parameter in ri.AuxilaryData.Values)
         {
           metaData += "<Parameter>";
-          metaData += "<ParameterName>" + parameter.Name + "</ParameterName>";
-          metaData += "<ParameterValue>" + parameter.Value + "</ParameterValue>";
+          metaData += "<ParameterName>" + encodeXmlValue(parameter.Name) + "</ParameterName>";
+          metaData += "<ParameterValue>" + encodeXmlValue(parameter.Value) + "</ParameterValue>";
           metaData += "</Parameter>";
         }        
         metaData += "</ReportLibrary>";
@@ -430,6 +430,10 @@ namespace SystemsAnalysis.Reporting
       
     }
 
+    private string encodeXmlValue(string xmlValue)
+    {
+      return xmlValue.Replace("&", "&amp;").Replace("<", "&lt;").Replace(">", "&gt;");
+    }
     private void btnPreviewTrace_Click(object sender, System.EventArgs e)
     {
       TraceNetwork();
