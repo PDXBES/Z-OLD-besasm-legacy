@@ -14244,9 +14244,11 @@ SELECT view_id, subwatershed_id, view_number, description FROM SWSP_VIEW WHERE (
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[2] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[2].Connection = this.Connection;
-            this._commandCollection[2].CommandText = "SELECT  view_id FROM SWSP_VIEW\r\nWHERE view_number = @view_number";
+            this._commandCollection[2].CommandText = "SELECT  view_id FROM SWSP_VIEW\r\nWHERE view_number = @view_number AND subwatershed" +
+                "_id = @subwatershed_id";
             this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@view_number", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "view_number", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@subwatershed_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "subwatershed_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -14431,9 +14433,10 @@ SELECT view_id, subwatershed_id, view_number, description FROM SWSP_VIEW WHERE (
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual global::System.Nullable<int> ScalarQueryViewIDByViewNumber(int view_number) {
+        public virtual object ScalarQueryViewIDByViewNumber(int view_number, int subwatershed_id) {
             global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[2];
             command.Parameters[0].Value = ((int)(view_number));
+            command.Parameters[1].Value = ((int)(subwatershed_id));
             global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
             if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -14450,10 +14453,10 @@ SELECT view_id, subwatershed_id, view_number, description FROM SWSP_VIEW WHERE (
             }
             if (((returnValue == null) 
                         || (returnValue.GetType() == typeof(global::System.DBNull)))) {
-                return new global::System.Nullable<int>();
+                return null;
             }
             else {
-                return new global::System.Nullable<int>(((int)(returnValue)));
+                return ((object)(returnValue));
             }
         }
     }

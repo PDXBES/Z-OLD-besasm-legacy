@@ -92,27 +92,23 @@
             this.labelFacings = new System.Windows.Forms.Label();
             this.labelCulvertOpenings = new System.Windows.Forms.Label();
             this.tabPageViewsAndSurveys = new System.Windows.Forms.TabPage();
-            this.comboBoxSubwatershed = new System.Windows.Forms.ComboBox();
+            this.fKSURVEYPAGEVIEWBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.fKVIEWSUBWATERSHEDBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.fKSUBWATERSHEDWATERSHEDBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.labelView = new System.Windows.Forms.Label();
+            this.comboBoxSubwatershed = new System.Windows.Forms.ComboBox();
             this.comboBoxWatershed = new System.Windows.Forms.ComboBox();
             this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonAddSurveyPage = new System.Windows.Forms.Button();
             this.buttonAddView = new System.Windows.Forms.Button();
-            this.dataGridViewViewsAndSurveys = new System.Windows.Forms.DataGridView();
-            this.view_number = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.sWSPVIEWBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.pagenumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.weatherDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.commentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sWSPSURVEYPAGEBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.labelSubwatershed = new System.Windows.Forms.Label();
             this.labelWatershed = new System.Windows.Forms.Label();
             this.labelViews = new System.Windows.Forms.Label();
+            this.sWSPVIEWBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.sWSPSURVEYPAGEBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.buttonOK = new System.Windows.Forms.Button();
             this.sWSP_WATERSHEDTableAdapter = new SWI_2.SANDBOXDataSetTableAdapters.SWSP_WATERSHEDTableAdapter();
             this.sWSP_SUBWATERSHEDTableAdapter = new SWI_2.SANDBOXDataSetTableAdapters.SWSP_SUBWATERSHEDTableAdapter();
-            this.fKVIEWSUBWATERSHEDBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.sWSP_VIEWTableAdapter = new SWI_2.SANDBOXDataSetTableAdapters.SWSP_VIEWTableAdapter();
             this.sWSP_EVALUATORTableAdapter = new SWI_2.SANDBOXDataSetTableAdapters.SWSP_EVALUATORTableAdapter();
             this.sWSP_CULVERT_OPENING_TYPETableAdapter = new SWI_2.SANDBOXDataSetTableAdapters.SWSP_CULVERT_OPENING_TYPETableAdapter();
@@ -120,6 +116,19 @@
             this.sWSP_SHAPE_TYPETableAdapter = new SWI_2.SANDBOXDataSetTableAdapters.SWSP_SHAPE_TYPETableAdapter();
             this.sWSP_MATERIAL_TYPETableAdapter = new SWI_2.SANDBOXDataSetTableAdapters.SWSP_MATERIAL_TYPETableAdapter();
             this.sWSP_SURVEY_PAGETableAdapter = new SWI_2.SANDBOXDataSetTableAdapters.SWSP_SURVEY_PAGETableAdapter();
+            this.fKSURVEYPAGEVIEWBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.fKSURVEYPAGEVIEWBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.fKVIEWSUBWATERSHEDBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.fKSURVEYPAGEVIEWBindingSource3 = new System.Windows.Forms.BindingSource(this.components);
+            this.surveypageidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.viewidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pagenumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.weatherDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.commentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fKSURVEYPAGEVIEWBindingSource4 = new System.Windows.Forms.BindingSource(this.components);
             this.tabControlFormSWSPFieldDataAdministration.SuspendLayout();
             this.tabPageWatersheds.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSubwatersheds)).BeginInit();
@@ -140,11 +149,17 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCulvertOpenings)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sWSPCULVERTOPENINGTYPEBindingSource)).BeginInit();
             this.tabPageViewsAndSurveys.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fKSURVEYPAGEVIEWBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fKVIEWSUBWATERSHEDBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fKSUBWATERSHEDWATERSHEDBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewViewsAndSurveys)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sWSPVIEWBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sWSPSURVEYPAGEBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fKVIEWSUBWATERSHEDBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fKSURVEYPAGEVIEWBindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fKSURVEYPAGEVIEWBindingSource2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fKVIEWSUBWATERSHEDBindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fKSURVEYPAGEVIEWBindingSource3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fKSURVEYPAGEVIEWBindingSource4)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControlFormSWSPFieldDataAdministration
@@ -743,12 +758,14 @@
             // 
             // tabPageViewsAndSurveys
             // 
+            this.tabPageViewsAndSurveys.Controls.Add(this.dataGridView1);
+            this.tabPageViewsAndSurveys.Controls.Add(this.comboBox1);
+            this.tabPageViewsAndSurveys.Controls.Add(this.labelView);
             this.tabPageViewsAndSurveys.Controls.Add(this.comboBoxSubwatershed);
             this.tabPageViewsAndSurveys.Controls.Add(this.comboBoxWatershed);
             this.tabPageViewsAndSurveys.Controls.Add(this.buttonDelete);
             this.tabPageViewsAndSurveys.Controls.Add(this.buttonAddSurveyPage);
             this.tabPageViewsAndSurveys.Controls.Add(this.buttonAddView);
-            this.tabPageViewsAndSurveys.Controls.Add(this.dataGridViewViewsAndSurveys);
             this.tabPageViewsAndSurveys.Controls.Add(this.labelSubwatershed);
             this.tabPageViewsAndSurveys.Controls.Add(this.labelWatershed);
             this.tabPageViewsAndSurveys.Controls.Add(this.labelViews);
@@ -758,6 +775,30 @@
             this.tabPageViewsAndSurveys.TabIndex = 3;
             this.tabPageViewsAndSurveys.Text = "Views and Surveys";
             this.tabPageViewsAndSurveys.UseVisualStyleBackColor = true;
+            // 
+            // fKSURVEYPAGEVIEWBindingSource
+            // 
+            this.fKSURVEYPAGEVIEWBindingSource.DataMember = "FK_SURVEY_PAGE_VIEW";
+            this.fKSURVEYPAGEVIEWBindingSource.DataSource = this.fKVIEWSUBWATERSHEDBindingSource;
+            // 
+            // fKVIEWSUBWATERSHEDBindingSource
+            // 
+            this.fKVIEWSUBWATERSHEDBindingSource.DataMember = "FK_VIEW_SUBWATERSHED";
+            this.fKVIEWSUBWATERSHEDBindingSource.DataSource = this.fKSUBWATERSHEDWATERSHEDBindingSource;
+            // 
+            // fKSUBWATERSHEDWATERSHEDBindingSource
+            // 
+            this.fKSUBWATERSHEDWATERSHEDBindingSource.DataMember = "FK_SUBWATERSHED_WATERSHED";
+            this.fKSUBWATERSHEDWATERSHEDBindingSource.DataSource = this.sWSPWATERSHEDBindingSource;
+            // 
+            // labelView
+            // 
+            this.labelView.AutoSize = true;
+            this.labelView.Location = new System.Drawing.Point(38, 63);
+            this.labelView.Name = "labelView";
+            this.labelView.Size = new System.Drawing.Size(30, 13);
+            this.labelView.TabIndex = 11;
+            this.labelView.Text = "View";
             // 
             // comboBoxSubwatershed
             // 
@@ -769,11 +810,6 @@
             this.comboBoxSubwatershed.Size = new System.Drawing.Size(138, 21);
             this.comboBoxSubwatershed.TabIndex = 10;
             this.comboBoxSubwatershed.ValueMember = "subwatershed_id";
-            // 
-            // fKSUBWATERSHEDWATERSHEDBindingSource
-            // 
-            this.fKSUBWATERSHEDWATERSHEDBindingSource.DataMember = "FK_SUBWATERSHED_WATERSHED";
-            this.fKSUBWATERSHEDWATERSHEDBindingSource.DataSource = this.sWSPWATERSHEDBindingSource;
             // 
             // comboBoxWatershed
             // 
@@ -816,72 +852,6 @@
             this.buttonAddView.UseVisualStyleBackColor = true;
             this.buttonAddView.Click += new System.EventHandler(this.buttonAddView_Click);
             // 
-            // dataGridViewViewsAndSurveys
-            // 
-            this.dataGridViewViewsAndSurveys.AllowUserToAddRows = false;
-            this.dataGridViewViewsAndSurveys.AllowUserToDeleteRows = false;
-            this.dataGridViewViewsAndSurveys.AutoGenerateColumns = false;
-            this.dataGridViewViewsAndSurveys.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewViewsAndSurveys.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.view_number,
-            this.pagenumberDataGridViewTextBoxColumn,
-            this.dateDataGridViewTextBoxColumn,
-            this.weatherDataGridViewTextBoxColumn,
-            this.commentDataGridViewTextBoxColumn});
-            this.dataGridViewViewsAndSurveys.DataSource = this.sWSPSURVEYPAGEBindingSource;
-            this.dataGridViewViewsAndSurveys.Location = new System.Drawing.Point(14, 89);
-            this.dataGridViewViewsAndSurveys.Name = "dataGridViewViewsAndSurveys";
-            this.dataGridViewViewsAndSurveys.Size = new System.Drawing.Size(562, 236);
-            this.dataGridViewViewsAndSurveys.TabIndex = 5;
-            // 
-            // view_number
-            // 
-            this.view_number.DataPropertyName = "view_id";
-            this.view_number.DataSource = this.sWSPVIEWBindingSource;
-            this.view_number.DisplayMember = "view_number";
-            this.view_number.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.Nothing;
-            this.view_number.HeaderText = "View #";
-            this.view_number.Name = "view_number";
-            this.view_number.ValueMember = "view_id";
-            this.view_number.Width = 50;
-            // 
-            // sWSPVIEWBindingSource
-            // 
-            this.sWSPVIEWBindingSource.DataMember = "SWSP_VIEW";
-            this.sWSPVIEWBindingSource.DataSource = this.sANDBOXDataSet;
-            // 
-            // pagenumberDataGridViewTextBoxColumn
-            // 
-            this.pagenumberDataGridViewTextBoxColumn.DataPropertyName = "page_number";
-            this.pagenumberDataGridViewTextBoxColumn.HeaderText = "Page #";
-            this.pagenumberDataGridViewTextBoxColumn.Name = "pagenumberDataGridViewTextBoxColumn";
-            this.pagenumberDataGridViewTextBoxColumn.Width = 50;
-            // 
-            // dateDataGridViewTextBoxColumn
-            // 
-            this.dateDataGridViewTextBoxColumn.DataPropertyName = "date";
-            this.dateDataGridViewTextBoxColumn.HeaderText = "Date";
-            this.dateDataGridViewTextBoxColumn.Name = "dateDataGridViewTextBoxColumn";
-            // 
-            // weatherDataGridViewTextBoxColumn
-            // 
-            this.weatherDataGridViewTextBoxColumn.DataPropertyName = "weather";
-            this.weatherDataGridViewTextBoxColumn.HeaderText = "Weather";
-            this.weatherDataGridViewTextBoxColumn.Name = "weatherDataGridViewTextBoxColumn";
-            this.weatherDataGridViewTextBoxColumn.Width = 80;
-            // 
-            // commentDataGridViewTextBoxColumn
-            // 
-            this.commentDataGridViewTextBoxColumn.DataPropertyName = "Comment";
-            this.commentDataGridViewTextBoxColumn.HeaderText = "Comment";
-            this.commentDataGridViewTextBoxColumn.Name = "commentDataGridViewTextBoxColumn";
-            this.commentDataGridViewTextBoxColumn.Width = 170;
-            // 
-            // sWSPSURVEYPAGEBindingSource
-            // 
-            this.sWSPSURVEYPAGEBindingSource.DataMember = "SWSP_SURVEY_PAGE";
-            this.sWSPSURVEYPAGEBindingSource.DataSource = this.sANDBOXDataSet;
-            // 
             // labelSubwatershed
             // 
             this.labelSubwatershed.AutoSize = true;
@@ -909,6 +879,16 @@
             this.labelViews.TabIndex = 0;
             this.labelViews.Text = "Views";
             // 
+            // sWSPVIEWBindingSource
+            // 
+            this.sWSPVIEWBindingSource.DataMember = "SWSP_VIEW";
+            this.sWSPVIEWBindingSource.DataSource = this.sANDBOXDataSet;
+            // 
+            // sWSPSURVEYPAGEBindingSource
+            // 
+            this.sWSPSURVEYPAGEBindingSource.DataMember = "SWSP_SURVEY_PAGE";
+            this.sWSPSURVEYPAGEBindingSource.DataSource = this.sANDBOXDataSet;
+            // 
             // buttonOK
             // 
             this.buttonOK.Location = new System.Drawing.Point(610, 403);
@@ -926,11 +906,6 @@
             // sWSP_SUBWATERSHEDTableAdapter
             // 
             this.sWSP_SUBWATERSHEDTableAdapter.ClearBeforeFill = true;
-            // 
-            // fKVIEWSUBWATERSHEDBindingSource
-            // 
-            this.fKVIEWSUBWATERSHEDBindingSource.DataMember = "FK_VIEW_SUBWATERSHED";
-            this.fKVIEWSUBWATERSHEDBindingSource.DataSource = this.fKSUBWATERSHEDWATERSHEDBindingSource;
             // 
             // sWSP_VIEWTableAdapter
             // 
@@ -959,6 +934,96 @@
             // sWSP_SURVEY_PAGETableAdapter
             // 
             this.sWSP_SURVEY_PAGETableAdapter.ClearBeforeFill = true;
+            // 
+            // fKSURVEYPAGEVIEWBindingSource1
+            // 
+            this.fKSURVEYPAGEVIEWBindingSource1.DataMember = "FK_SURVEY_PAGE_VIEW";
+            this.fKSURVEYPAGEVIEWBindingSource1.DataSource = this.fKVIEWSUBWATERSHEDBindingSource;
+            // 
+            // fKSURVEYPAGEVIEWBindingSource2
+            // 
+            this.fKSURVEYPAGEVIEWBindingSource2.DataMember = "FK_SURVEY_PAGE_VIEW";
+            this.fKSURVEYPAGEVIEWBindingSource2.DataSource = this.fKVIEWSUBWATERSHEDBindingSource;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.DataSource = this.fKVIEWSUBWATERSHEDBindingSource1;
+            this.comboBox1.DisplayMember = "view_number";
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(84, 59);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(97, 21);
+            this.comboBox1.TabIndex = 14;
+            this.comboBox1.ValueMember = "view_id";
+            // 
+            // fKVIEWSUBWATERSHEDBindingSource1
+            // 
+            this.fKVIEWSUBWATERSHEDBindingSource1.DataMember = "FK_VIEW_SUBWATERSHED";
+            this.fKVIEWSUBWATERSHEDBindingSource1.DataSource = this.fKSUBWATERSHEDWATERSHEDBindingSource;
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AutoGenerateColumns = false;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.surveypageidDataGridViewTextBoxColumn,
+            this.viewidDataGridViewTextBoxColumn,
+            this.pagenumberDataGridViewTextBoxColumn,
+            this.dateDataGridViewTextBoxColumn,
+            this.weatherDataGridViewTextBoxColumn,
+            this.commentDataGridViewTextBoxColumn});
+            this.dataGridView1.DataSource = this.fKSURVEYPAGEVIEWBindingSource4;
+            this.dataGridView1.Location = new System.Drawing.Point(10, 96);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(584, 230);
+            this.dataGridView1.TabIndex = 15;
+            // 
+            // fKSURVEYPAGEVIEWBindingSource3
+            // 
+            this.fKSURVEYPAGEVIEWBindingSource3.DataMember = "FK_SURVEY_PAGE_VIEW";
+            this.fKSURVEYPAGEVIEWBindingSource3.DataSource = this.fKVIEWSUBWATERSHEDBindingSource;
+            // 
+            // surveypageidDataGridViewTextBoxColumn
+            // 
+            this.surveypageidDataGridViewTextBoxColumn.DataPropertyName = "survey_page_id";
+            this.surveypageidDataGridViewTextBoxColumn.HeaderText = "survey_page_id";
+            this.surveypageidDataGridViewTextBoxColumn.Name = "surveypageidDataGridViewTextBoxColumn";
+            this.surveypageidDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // viewidDataGridViewTextBoxColumn
+            // 
+            this.viewidDataGridViewTextBoxColumn.DataPropertyName = "view_id";
+            this.viewidDataGridViewTextBoxColumn.HeaderText = "view_id";
+            this.viewidDataGridViewTextBoxColumn.Name = "viewidDataGridViewTextBoxColumn";
+            // 
+            // pagenumberDataGridViewTextBoxColumn
+            // 
+            this.pagenumberDataGridViewTextBoxColumn.DataPropertyName = "page_number";
+            this.pagenumberDataGridViewTextBoxColumn.HeaderText = "page_number";
+            this.pagenumberDataGridViewTextBoxColumn.Name = "pagenumberDataGridViewTextBoxColumn";
+            // 
+            // dateDataGridViewTextBoxColumn
+            // 
+            this.dateDataGridViewTextBoxColumn.DataPropertyName = "date";
+            this.dateDataGridViewTextBoxColumn.HeaderText = "date";
+            this.dateDataGridViewTextBoxColumn.Name = "dateDataGridViewTextBoxColumn";
+            // 
+            // weatherDataGridViewTextBoxColumn
+            // 
+            this.weatherDataGridViewTextBoxColumn.DataPropertyName = "weather";
+            this.weatherDataGridViewTextBoxColumn.HeaderText = "weather";
+            this.weatherDataGridViewTextBoxColumn.Name = "weatherDataGridViewTextBoxColumn";
+            // 
+            // commentDataGridViewTextBoxColumn
+            // 
+            this.commentDataGridViewTextBoxColumn.DataPropertyName = "Comment";
+            this.commentDataGridViewTextBoxColumn.HeaderText = "Comment";
+            this.commentDataGridViewTextBoxColumn.Name = "commentDataGridViewTextBoxColumn";
+            // 
+            // fKSURVEYPAGEVIEWBindingSource4
+            // 
+            this.fKSURVEYPAGEVIEWBindingSource4.DataMember = "FK_SURVEY_PAGE_VIEW";
+            this.fKSURVEYPAGEVIEWBindingSource4.DataSource = this.fKVIEWSUBWATERSHEDBindingSource1;
             // 
             // FormSWSPFieldDataAdministration
             // 
@@ -994,11 +1059,17 @@
             ((System.ComponentModel.ISupportInitialize)(this.sWSPCULVERTOPENINGTYPEBindingSource)).EndInit();
             this.tabPageViewsAndSurveys.ResumeLayout(false);
             this.tabPageViewsAndSurveys.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fKSURVEYPAGEVIEWBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fKVIEWSUBWATERSHEDBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fKSUBWATERSHEDWATERSHEDBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewViewsAndSurveys)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sWSPVIEWBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sWSPSURVEYPAGEBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fKVIEWSUBWATERSHEDBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fKSURVEYPAGEVIEWBindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fKSURVEYPAGEVIEWBindingSource2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fKVIEWSUBWATERSHEDBindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fKSURVEYPAGEVIEWBindingSource3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fKSURVEYPAGEVIEWBindingSource4)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1047,7 +1118,6 @@
         private System.Windows.Forms.Button buttonDelete;
         private System.Windows.Forms.Button buttonAddSurveyPage;
         private System.Windows.Forms.Button buttonAddView;
-        private System.Windows.Forms.DataGridView dataGridViewViewsAndSurveys;
         private System.Windows.Forms.ComboBox comboBoxSubwatershed;
         private System.Windows.Forms.ComboBox comboBoxWatershed;
         private SANDBOXDataSet sANDBOXDataSet;
@@ -1093,10 +1163,20 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn descriptionDataGridViewTextBoxColumn3;
         private System.Windows.Forms.DataGridViewTextBoxColumn culvertopeningDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn descriptionDataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewComboBoxColumn view_number;
+        private System.Windows.Forms.BindingSource fKSURVEYPAGEVIEWBindingSource;
+        private System.Windows.Forms.Label labelView;
+        private System.Windows.Forms.BindingSource fKSURVEYPAGEVIEWBindingSource1;
+        private System.Windows.Forms.BindingSource fKSURVEYPAGEVIEWBindingSource2;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.BindingSource fKVIEWSUBWATERSHEDBindingSource1;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn surveypageidDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn viewidDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn pagenumberDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn dateDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn weatherDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn commentDataGridViewTextBoxColumn;
+        private System.Windows.Forms.BindingSource fKSURVEYPAGEVIEWBindingSource3;
+        private System.Windows.Forms.BindingSource fKSURVEYPAGEVIEWBindingSource4;
     }
 }

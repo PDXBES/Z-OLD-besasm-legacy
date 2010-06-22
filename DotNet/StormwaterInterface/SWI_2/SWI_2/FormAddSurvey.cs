@@ -13,6 +13,8 @@ namespace SWI_2
     {
         private int _MapNo;
         private int _SurveyPage;
+        private int _Watershed;
+        private int _Subwatershed;
         private FormMain _MyParentForm;
 
         public FormAddSurvey()
@@ -38,17 +40,19 @@ namespace SWI_2
             set { _SurveyPage = value; }
         }
 
-        private void FormAddSurvey_Load(object sender, EventArgs e)
+        public int Watershed
         {
-            // TODO: This line of code loads data into the 'sANDBOXDataSet.SWSP_VIEW' table. You can move, or remove it, as needed.
-            this.sWSP_VIEWTableAdapter.Fill(this.sANDBOXDataSet.SWSP_VIEW);
-            // TODO: This line of code loads data into the 'sANDBOXDataSet.SWSP_SUBWATERSHED' table. You can move, or remove it, as needed.
-            this.sWSP_SUBWATERSHEDTableAdapter.Fill(this.sANDBOXDataSet.SWSP_SUBWATERSHED);
-            // TODO: This line of code loads data into the 'sANDBOXDataSet.SWSP_WATERSHED' table. You can move, or remove it, as needed.
-            this.sWSP_WATERSHEDTableAdapter.Fill(this.sANDBOXDataSet.SWSP_WATERSHED);
-            numericUpDownView.Value = MapNo;
-            numericUpDownAddPage.Value = SurveyPage;
+            get { return _Watershed; }
+            set { _Watershed = value; }
         }
+
+        public int Subwatershed
+        {
+            get { return _Subwatershed; }
+            set { _Subwatershed = value; }
+        }
+
+        
 
         private void buttonOK_Click(object sender, EventArgs e)
         {
@@ -57,10 +61,12 @@ namespace SWI_2
                 SWI_2.SANDBOXDataSetTableAdapters.SWSP_VIEWTableAdapter taV = new SWI_2.SANDBOXDataSetTableAdapters.SWSP_VIEWTableAdapter();
 
                 SWI_2.SANDBOXDataSetTableAdapters.SWSP_SURVEY_PAGETableAdapter taS = new SWI_2.SANDBOXDataSetTableAdapters.SWSP_SURVEY_PAGETableAdapter();
-                taS.Insert(taV.ScalarQueryViewIDByViewNumber((int)numericUpDownView.Value), (int)numericUpDownAddPage.Value, System.DateTime.Today, "", "");
+                taS.Insert((int)taV.ScalarQueryViewIDByViewNumber((int)numericUpDownView.Value, (int)comboBoxSubwatershed.SelectedValue), (int)numericUpDownAddPage.Value, System.DateTime.Today, "", "");
 
                 _MyParentForm.CurrentView = (int)numericUpDownView.Value;
                 _MyParentForm.CurrentSurveyPage = (int)numericUpDownAddPage.Value;
+                _MyParentForm.CurrentWatershed = (int)comboBoxWatershed.SelectedValue;
+                _MyParentForm.CurrentSubwatershed = (int)comboBoxSubwatershed.SelectedValue;
             }
             catch (Exception ex)
             {
@@ -68,6 +74,26 @@ namespace SWI_2
             }
             
             this.Close();
+        }
+
+        private void FormAddSurvey_Load(object sender, EventArgs e)
+        {
+            // TODO: This line of code loads data into the 'sANDBOXDataSet.SWSP_VIEW' table. You can move, or remove it, as needed.
+            this.sWSP_VIEWTableAdapter.Fill(this.sANDBOXDataSet.SWSP_VIEW);
+            // TODO: This line of code loads data into the 'sANDBOXDataSet.SWSP_SUBWATERSHED' table. You can move, or remove it, as needed.
+            this.sWSP_SUBWATERSHEDTableAdapter.Fill(this.sANDBOXDataSet.SWSP_SUBWATERSHED);
+            // TODO: This line of code loads data into the 'sANDBOXDataSet.SWSP_WATERSHED' table. You can move, or remove it, as needed.
+            this.sWSP_WATERSHEDTableAdapter.Fill(this.sANDBOXDataSet.SWSP_WATERSHED);
+            while (_MyParentForm.CurrentWatershed != (int)((System.Data.DataRowView)sWSPWATERSHEDBindingSource.Current)["watershed_id"])
+            {
+                sWSPWATERSHEDBindingSource.MoveNext();
+            }
+            while (_MyParentForm.CurrentSubwatershed != (int)((System.Data.DataRowView)fKSUBWATERSHEDWATERSHEDBindingSource.Current)["subwatershed_id"])
+            {
+                fKSUBWATERSHEDWATERSHEDBindingSource.MoveNext();
+            }
+            numericUpDownView.Value = MapNo;
+            numericUpDownAddPage.Value = SurveyPage;
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)

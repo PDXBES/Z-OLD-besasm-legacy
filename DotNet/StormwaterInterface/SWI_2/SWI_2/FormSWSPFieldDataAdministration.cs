@@ -166,7 +166,7 @@ namespace SWI_2
 
         private void buttonEvaluatorsAdd_Click(object sender, EventArgs e)
         {
-            this.sWSP_EVALUATORTableAdapter.Insert("", "FirstName", "LastName");
+            this.sWSP_EVALUATORTableAdapter.Insert("", "LastName", "FirstName");
             this.sWSP_EVALUATORTableAdapter.Fill((SANDBOXDataSet.SWSP_EVALUATORDataTable)((SANDBOXDataSet)this.sWSPEVALUATORBindingSource.DataSource).SWSP_EVALUATOR);
         }
 
@@ -289,10 +289,10 @@ namespace SWI_2
 
         private void buttonDelete_Click(object sender, EventArgs e)
         {
-            this.sWSP_SURVEY_PAGETableAdapter.DeleteQuery((int)((System.Data.DataRowView)sWSPSURVEYPAGEBindingSource.Current)["survey_page_id"]);
+            this.sWSP_SURVEY_PAGETableAdapter.DeleteQuery((int)((System.Data.DataRowView)fKSURVEYPAGEVIEWBindingSource4.Current)["survey_page_id"]);
             this.sWSP_SURVEY_PAGETableAdapter.Update(sANDBOXDataSet);
             this.sWSP_SURVEY_PAGETableAdapter.Fill((SANDBOXDataSet.SWSP_SURVEY_PAGEDataTable)((SANDBOXDataSet)this.sWSPSURVEYPAGEBindingSource.DataSource).SWSP_SURVEY_PAGE);
-            dataGridViewViewsAndSurveys.Refresh();
+            dataGridView1.Refresh();
         }
 
 
