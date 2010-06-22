@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<namespace name="uEMGAATSTypes">
+  <const name="tfExisting" type="TTimeFrame">
+    <value>
+      tfExisting
+    </value>
+  </const>
+  <const name="tfFuture" type="TTimeFrame">
+    <value>
+      tfFuture
+    </value>
+  </const>
+  <enum name="TTimeFrame">
+    <element name="tfExisting" />
+    <element name="tfFuture" />
+  </enum>
+  <const name="eetRunCommand" type="TEMGAATSErrorType">
+    <value>
+      eetRunCommand
+    </value>
+  </const>
+  <const name="eetToDo" type="TEMGAATSErrorType">
+    <value>
+      eetToDo
+    </value>
+  </const>
+  <const name="eetStats" type="TEMGAATSErrorType">
+    <value>
+      eetStats
+    </value>
+  </const>
+  <const name="eetInfo" type="TEMGAATSErrorType">
+    <value>
+      eetInfo
+    </value>
+  </const>
+  <const name="eetHint" type="TEMGAATSErrorType">
+    <value>
+      eetHint
+    </value>
+  </const>
+  <const name="eetWarning" type="TEMGAATSErrorType">
+    <value>
+      eetWarning
+    </value>
+  </const>
+  <const name="eetError" type="TEMGAATSErrorType">
+    <value>
+      eetError
+    </value>
+  </const>
+  <enum name="TEMGAATSErrorType">
+    <element name="eetRunCommand" />
+    <element name="eetToDo" />
+    <element name="eetStats" />
+    <element name="eetInfo" />
+    <element name="eetHint" />
+    <element name="eetWarning" />
+    <element name="eetError" />
+  </enum>
+  <class name="TEMGAATSError">
+    <ancestor name="TObject" namespace="System">
+      <methodref name="Create" visibility="public">
+      </methodref>
+      <methodref name="Free" visibility="public">
+      </methodref>
+      <methodref name="InitInstance" visibility="public">
+      </methodref>
+      <methodref name="CleanupInstance" visibility="public">
+      </methodref>
+      <methodref name="ClassType" visibility="public">
+      </methodref>
+      <methodref name="ClassName" visibility="public">
+      </methodref>
+      <methodref name="ClassNameIs" visibility="public">
+      </methodref>
+      <methodref name="ClassParent" visibility="public">
+      </methodref>
+      <methodref name="ClassInfo" visibility="public">
+      </methodref>
+      <methodref name="InstanceSize" visibility="public">
+      </methodref>
+      <methodref name="InheritsFrom" visibility="public">
+      </methodref>
+      <methodref name="MethodAddress" visibility="public">
+      </methodref>
+      <methodref name="MethodName" visibility="public">
+      </methodref>
+      <methodref name="FieldAddress" visibility="public">
+      </methodref>
+      <methodref name="GetInterface" visibility="public">
+      </methodref>
+      <methodref name="GetInterfaceEntry" visibility="public">
+      </methodref>
+      <methodref name="GetInterfaceTable" visibility="public">
+      </methodref>
+      <methodref name="SafeCallException" visibility="public">
+      </methodref>
+      <methodref name="AfterConstruction" visibility="public">
+      </methodref>
+      <methodref name="BeforeDestruction" visibility="public">
+      </methodref>
+      <methodref name="Dispatch" visibility="public">
+      </methodref>
+      <methodref name="DefaultHandler" visibility="public">
+      </methodref>
+      <methodref name="NewInstance" visibility="public">
+      </methodref>
+      <methodref name="FreeInstance" visibility="public">
+      </methodref>
+      <methodref name="Destroy" visibility="public">
+      </methodref>
+    </ancestor>
+    <members>
+      <field name="ErrorType" type="TEMGAATSErrorType" visibility="public" />
+      <field name="Msg" type="string" visibility="public" />
+      <field name="LogTime" type="TDateTime" visibility="public" />
+      <constructor name="Create" visibility="public">
+        <parameters>
+          <parameter name="AMessage" type="string" />
+          <parameter name="AErrorType" type="TEMGAATSErrorType" />
+        </parameters>
+      </constructor>
+    </members>
+  </class>
+  <const name="EMG_UPDATE_STATS" type="Integer">
+    <value>
+      $83E8
+    </value>
+  </const>
+</namespace>

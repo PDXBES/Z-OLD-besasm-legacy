@@ -1,0 +1,38 @@
+'
+'	============ EMGAATS Workbench =================
+'
+'	Copyright (c) 2001, 2003  City of Portland, OR Bureau of Environmental Services and CH2M HILL, Inc.
+'
+'	22Mar2004 Collins added call to InitOpenUtilGlobals so that EMGOpenUtils can be used here
+'
+'
+include "MapBasic.def"
+include "..\inc\EMGInit.def"
+include "..\inc\EMGMenus.def"
+include "..\..\common\inc\EMGGlobal.def"
+include "..\..\common\inc\EMGLogger.def"
+include "..\..\common\inc\EMGOpenUtils.def"
+
+
+declare sub Main()
+declare sub EndHandler
+
+Sub Main()
+dim RunMe as string
+
+	Call SetLogOptions (TRUE, TRUE, TRUE, TRUE)
+	
+  call 	InitHousekeeping		' have to init some globals before we can say hello
+  call InitOpenUtilGlobals  ' this sets up table names for the EMGOpenUtils functions
+	call	SayHello
+	call	BuildMenus
+	call	BuildButtonBars
+	'call	OpenTables			' don't force opening of tables at first shot.
+  
+  call loggit("in main")
+	
+	'run menu command 2002
+
+end Sub
+Sub EndHandler  	call StopLogger()
+End Sub 

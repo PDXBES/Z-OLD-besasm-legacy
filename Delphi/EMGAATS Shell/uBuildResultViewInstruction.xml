@@ -1,0 +1,2039 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<namespace name="uBuildResultViewInstruction">
+  <const name="rvmoLandscape" type="TResultViewMapOrientation">
+    <value>
+      rvmoLandscape
+    </value>
+  </const>
+  <const name="rvmoPortrait" type="TResultViewMapOrientation">
+    <value>
+      rvmoPortrait
+    </value>
+  </const>
+  <enum name="TResultViewMapOrientation">
+    <element name="rvmoLandscape" />
+    <element name="rvmoPortrait" />
+  </enum>
+  <const name="rvloLandscape" type="TResultViewLegendOrientation">
+    <value>
+      rvloLandscape
+    </value>
+  </const>
+  <const name="rvloPortrait" type="TResultViewLegendOrientation">
+    <value>
+      rvloPortrait
+    </value>
+  </const>
+  <enum name="TResultViewLegendOrientation">
+    <element name="rvloLandscape" />
+    <element name="rvloPortrait" />
+  </enum>
+  <const name="rvpsA" type="TResultViewPaperSize">
+    <value>
+      rvpsA
+    </value>
+  </const>
+  <const name="rvpsB" type="TResultViewPaperSize">
+    <value>
+      rvpsB
+    </value>
+  </const>
+  <const name="rvpsC" type="TResultViewPaperSize">
+    <value>
+      rvpsC
+    </value>
+  </const>
+  <const name="rvpsD" type="TResultViewPaperSize">
+    <value>
+      rvpsD
+    </value>
+  </const>
+  <const name="rvpsE" type="TResultViewPaperSize">
+    <value>
+      rvpsE
+    </value>
+  </const>
+  <enum name="TResultViewPaperSize">
+    <element name="rvpsA" />
+    <element name="rvpsB" />
+    <element name="rvpsC" />
+    <element name="rvpsD" />
+    <element name="rvpsE" />
+  </enum>
+  <interface name="IResultViewElementsSetup">
+    <devnotes>
+      <summary>
+        Interface for strategy to set up the decorative elements of a workspace,
+        depending on layout
+      </summary>
+    </devnotes>
+    <procedure name="SetupElements" visibility="public" procflags="abstract virtual">
+    </procedure>
+  </interface>
+  <class name="TBaseSetupStrategy">
+    <ancestor name="TInterfacedObject" namespace="System">
+      <methodref name="QueryInterface" visibility="protected">
+      </methodref>
+      <methodref name="_AddRef" visibility="protected">
+      </methodref>
+      <methodref name="_Release" visibility="protected">
+      </methodref>
+      <methodref name="AfterConstruction" visibility="public">
+      </methodref>
+      <methodref name="BeforeDestruction" visibility="public">
+      </methodref>
+      <methodref name="NewInstance" visibility="public">
+      </methodref>
+      <propertyref name="RefCount" visibility="public">
+      </propertyref>
+      <ancestor name="TObject" namespace="System">
+        <methodref name="Create" visibility="public">
+        </methodref>
+        <methodref name="Free" visibility="public">
+        </methodref>
+        <methodref name="InitInstance" visibility="public">
+        </methodref>
+        <methodref name="CleanupInstance" visibility="public">
+        </methodref>
+        <methodref name="ClassType" visibility="public">
+        </methodref>
+        <methodref name="ClassName" visibility="public">
+        </methodref>
+        <methodref name="ClassNameIs" visibility="public">
+        </methodref>
+        <methodref name="ClassParent" visibility="public">
+        </methodref>
+        <methodref name="ClassInfo" visibility="public">
+        </methodref>
+        <methodref name="InstanceSize" visibility="public">
+        </methodref>
+        <methodref name="InheritsFrom" visibility="public">
+        </methodref>
+        <methodref name="MethodAddress" visibility="public">
+        </methodref>
+        <methodref name="MethodName" visibility="public">
+        </methodref>
+        <methodref name="FieldAddress" visibility="public">
+        </methodref>
+        <methodref name="GetInterface" visibility="public">
+        </methodref>
+        <methodref name="GetInterfaceEntry" visibility="public">
+        </methodref>
+        <methodref name="GetInterfaceTable" visibility="public">
+        </methodref>
+        <methodref name="SafeCallException" visibility="public">
+        </methodref>
+        <methodref name="AfterConstruction" visibility="public">
+        </methodref>
+        <methodref name="BeforeDestruction" visibility="public">
+        </methodref>
+        <methodref name="Dispatch" visibility="public">
+        </methodref>
+        <methodref name="DefaultHandler" visibility="public">
+        </methodref>
+        <methodref name="NewInstance" visibility="public">
+        </methodref>
+        <methodref name="FreeInstance" visibility="public">
+        </methodref>
+        <methodref name="Destroy" visibility="public">
+        </methodref>
+      </ancestor>
+    </ancestor>
+    <members>
+      <field name="fMapInfoManager" type="TMapInfoDisplayManager" visibility="private" />
+      <field name="fInstruction" type="TBuildResultViewInstruction" visibility="private" />
+      <constructor name="Create" visibility="public">
+        <parameters>
+          <parameter name="AMapInfoManager" type="TMapInfoDisplayManager" />
+          <parameter name="AInstruction" type="TBuildResultViewInstruction" />
+        </parameters>
+      </constructor>
+    </members>
+  </class>
+  <class name="TSetupMapLandscape_LegendPortrait">
+    <ancestor name="TBaseSetupStrategy" namespace="uBuildResultViewInstruction">
+      <methodref name="Create" visibility="public" />
+      <ancestor name="TInterfacedObject" namespace="System">
+        <methodref name="QueryInterface" visibility="protected">
+        </methodref>
+        <methodref name="_AddRef" visibility="protected">
+        </methodref>
+        <methodref name="_Release" visibility="protected">
+        </methodref>
+        <methodref name="AfterConstruction" visibility="public">
+        </methodref>
+        <methodref name="BeforeDestruction" visibility="public">
+        </methodref>
+        <methodref name="NewInstance" visibility="public">
+        </methodref>
+        <propertyref name="RefCount" visibility="public">
+        </propertyref>
+        <ancestor name="TObject" namespace="System">
+          <methodref name="Create" visibility="public">
+          </methodref>
+          <methodref name="Free" visibility="public">
+          </methodref>
+          <methodref name="InitInstance" visibility="public">
+          </methodref>
+          <methodref name="CleanupInstance" visibility="public">
+          </methodref>
+          <methodref name="ClassType" visibility="public">
+          </methodref>
+          <methodref name="ClassName" visibility="public">
+          </methodref>
+          <methodref name="ClassNameIs" visibility="public">
+          </methodref>
+          <methodref name="ClassParent" visibility="public">
+          </methodref>
+          <methodref name="ClassInfo" visibility="public">
+          </methodref>
+          <methodref name="InstanceSize" visibility="public">
+          </methodref>
+          <methodref name="InheritsFrom" visibility="public">
+          </methodref>
+          <methodref name="MethodAddress" visibility="public">
+          </methodref>
+          <methodref name="MethodName" visibility="public">
+          </methodref>
+          <methodref name="FieldAddress" visibility="public">
+          </methodref>
+          <methodref name="GetInterface" visibility="public">
+          </methodref>
+          <methodref name="GetInterfaceEntry" visibility="public">
+          </methodref>
+          <methodref name="GetInterfaceTable" visibility="public">
+          </methodref>
+          <methodref name="SafeCallException" visibility="public">
+          </methodref>
+          <methodref name="AfterConstruction" visibility="public">
+          </methodref>
+          <methodref name="BeforeDestruction" visibility="public">
+          </methodref>
+          <methodref name="Dispatch" visibility="public">
+          </methodref>
+          <methodref name="DefaultHandler" visibility="public">
+          </methodref>
+          <methodref name="NewInstance" visibility="public">
+          </methodref>
+          <methodref name="FreeInstance" visibility="public">
+          </methodref>
+          <methodref name="Destroy" visibility="public">
+          </methodref>
+        </ancestor>
+      </ancestor>
+    </ancestor>
+    <interfaces>
+      <implements name="IResultViewElementsSetup" />
+    </interfaces>
+    <members>
+      <constructor name="Create" visibility="public">
+        <parameters>
+          <parameter name="AMapInfoManager" type="TMapInfoDisplayManager" />
+          <parameter name="AInstruction" type="TBuildResultViewInstruction" />
+        </parameters>
+      </constructor>
+      <procedure name="SetupElements" visibility="public">
+      </procedure>
+    </members>
+  </class>
+  <class name="TSetupMapLandscape_LegendLandscape">
+    <ancestor name="TBaseSetupStrategy" namespace="uBuildResultViewInstruction">
+      <methodref name="Create" visibility="public" />
+      <ancestor name="TInterfacedObject" namespace="System">
+        <methodref name="QueryInterface" visibility="protected">
+        </methodref>
+        <methodref name="_AddRef" visibility="protected">
+        </methodref>
+        <methodref name="_Release" visibility="protected">
+        </methodref>
+        <methodref name="AfterConstruction" visibility="public">
+        </methodref>
+        <methodref name="BeforeDestruction" visibility="public">
+        </methodref>
+        <methodref name="NewInstance" visibility="public">
+        </methodref>
+        <propertyref name="RefCount" visibility="public">
+        </propertyref>
+        <ancestor name="TObject" namespace="System">
+          <methodref name="Create" visibility="public">
+          </methodref>
+          <methodref name="Free" visibility="public">
+          </methodref>
+          <methodref name="InitInstance" visibility="public">
+          </methodref>
+          <methodref name="CleanupInstance" visibility="public">
+          </methodref>
+          <methodref name="ClassType" visibility="public">
+          </methodref>
+          <methodref name="ClassName" visibility="public">
+          </methodref>
+          <methodref name="ClassNameIs" visibility="public">
+          </methodref>
+          <methodref name="ClassParent" visibility="public">
+          </methodref>
+          <methodref name="ClassInfo" visibility="public">
+          </methodref>
+          <methodref name="InstanceSize" visibility="public">
+          </methodref>
+          <methodref name="InheritsFrom" visibility="public">
+          </methodref>
+          <methodref name="MethodAddress" visibility="public">
+          </methodref>
+          <methodref name="MethodName" visibility="public">
+          </methodref>
+          <methodref name="FieldAddress" visibility="public">
+          </methodref>
+          <methodref name="GetInterface" visibility="public">
+          </methodref>
+          <methodref name="GetInterfaceEntry" visibility="public">
+          </methodref>
+          <methodref name="GetInterfaceTable" visibility="public">
+          </methodref>
+          <methodref name="SafeCallException" visibility="public">
+          </methodref>
+          <methodref name="AfterConstruction" visibility="public">
+          </methodref>
+          <methodref name="BeforeDestruction" visibility="public">
+          </methodref>
+          <methodref name="Dispatch" visibility="public">
+          </methodref>
+          <methodref name="DefaultHandler" visibility="public">
+          </methodref>
+          <methodref name="NewInstance" visibility="public">
+          </methodref>
+          <methodref name="FreeInstance" visibility="public">
+          </methodref>
+          <methodref name="Destroy" visibility="public">
+          </methodref>
+        </ancestor>
+      </ancestor>
+    </ancestor>
+    <interfaces>
+      <implements name="IResultViewElementsSetup" />
+    </interfaces>
+    <members>
+      <constructor name="Create" visibility="public">
+        <parameters>
+          <parameter name="AMapInfoManager" type="TMapInfoDisplayManager" />
+          <parameter name="AInstruction" type="TBuildResultViewInstruction" />
+        </parameters>
+      </constructor>
+      <procedure name="SetupElements" visibility="public">
+      </procedure>
+    </members>
+  </class>
+  <class name="TSetupMapPortrait_LegendPortrait">
+    <ancestor name="TBaseSetupStrategy" namespace="uBuildResultViewInstruction">
+      <methodref name="Create" visibility="public" />
+      <ancestor name="TInterfacedObject" namespace="System">
+        <methodref name="QueryInterface" visibility="protected">
+        </methodref>
+        <methodref name="_AddRef" visibility="protected">
+        </methodref>
+        <methodref name="_Release" visibility="protected">
+        </methodref>
+        <methodref name="AfterConstruction" visibility="public">
+        </methodref>
+        <methodref name="BeforeDestruction" visibility="public">
+        </methodref>
+        <methodref name="NewInstance" visibility="public">
+        </methodref>
+        <propertyref name="RefCount" visibility="public">
+        </propertyref>
+        <ancestor name="TObject" namespace="System">
+          <methodref name="Create" visibility="public">
+          </methodref>
+          <methodref name="Free" visibility="public">
+          </methodref>
+          <methodref name="InitInstance" visibility="public">
+          </methodref>
+          <methodref name="CleanupInstance" visibility="public">
+          </methodref>
+          <methodref name="ClassType" visibility="public">
+          </methodref>
+          <methodref name="ClassName" visibility="public">
+          </methodref>
+          <methodref name="ClassNameIs" visibility="public">
+          </methodref>
+          <methodref name="ClassParent" visibility="public">
+          </methodref>
+          <methodref name="ClassInfo" visibility="public">
+          </methodref>
+          <methodref name="InstanceSize" visibility="public">
+          </methodref>
+          <methodref name="InheritsFrom" visibility="public">
+          </methodref>
+          <methodref name="MethodAddress" visibility="public">
+          </methodref>
+          <methodref name="MethodName" visibility="public">
+          </methodref>
+          <methodref name="FieldAddress" visibility="public">
+          </methodref>
+          <methodref name="GetInterface" visibility="public">
+          </methodref>
+          <methodref name="GetInterfaceEntry" visibility="public">
+          </methodref>
+          <methodref name="GetInterfaceTable" visibility="public">
+          </methodref>
+          <methodref name="SafeCallException" visibility="public">
+          </methodref>
+          <methodref name="AfterConstruction" visibility="public">
+          </methodref>
+          <methodref name="BeforeDestruction" visibility="public">
+          </methodref>
+          <methodref name="Dispatch" visibility="public">
+          </methodref>
+          <methodref name="DefaultHandler" visibility="public">
+          </methodref>
+          <methodref name="NewInstance" visibility="public">
+          </methodref>
+          <methodref name="FreeInstance" visibility="public">
+          </methodref>
+          <methodref name="Destroy" visibility="public">
+          </methodref>
+        </ancestor>
+      </ancestor>
+    </ancestor>
+    <interfaces>
+      <implements name="IResultViewElementsSetup" />
+    </interfaces>
+    <members>
+      <constructor name="Create" visibility="public">
+        <parameters>
+          <parameter name="AMapInfoManager" type="TMapInfoDisplayManager" />
+          <parameter name="AInstruction" type="TBuildResultViewInstruction" />
+        </parameters>
+      </constructor>
+      <procedure name="SetupElements" visibility="public">
+      </procedure>
+    </members>
+  </class>
+  <class name="TSetupMapPortrait_LegendLandscape">
+    <ancestor name="TBaseSetupStrategy" namespace="uBuildResultViewInstruction">
+      <methodref name="Create" visibility="public" />
+      <ancestor name="TInterfacedObject" namespace="System">
+        <methodref name="QueryInterface" visibility="protected">
+        </methodref>
+        <methodref name="_AddRef" visibility="protected">
+        </methodref>
+        <methodref name="_Release" visibility="protected">
+        </methodref>
+        <methodref name="AfterConstruction" visibility="public">
+        </methodref>
+        <methodref name="BeforeDestruction" visibility="public">
+        </methodref>
+        <methodref name="NewInstance" visibility="public">
+        </methodref>
+        <propertyref name="RefCount" visibility="public">
+        </propertyref>
+        <ancestor name="TObject" namespace="System">
+          <methodref name="Create" visibility="public">
+          </methodref>
+          <methodref name="Free" visibility="public">
+          </methodref>
+          <methodref name="InitInstance" visibility="public">
+          </methodref>
+          <methodref name="CleanupInstance" visibility="public">
+          </methodref>
+          <methodref name="ClassType" visibility="public">
+          </methodref>
+          <methodref name="ClassName" visibility="public">
+          </methodref>
+          <methodref name="ClassNameIs" visibility="public">
+          </methodref>
+          <methodref name="ClassParent" visibility="public">
+          </methodref>
+          <methodref name="ClassInfo" visibility="public">
+          </methodref>
+          <methodref name="InstanceSize" visibility="public">
+          </methodref>
+          <methodref name="InheritsFrom" visibility="public">
+          </methodref>
+          <methodref name="MethodAddress" visibility="public">
+          </methodref>
+          <methodref name="MethodName" visibility="public">
+          </methodref>
+          <methodref name="FieldAddress" visibility="public">
+          </methodref>
+          <methodref name="GetInterface" visibility="public">
+          </methodref>
+          <methodref name="GetInterfaceEntry" visibility="public">
+          </methodref>
+          <methodref name="GetInterfaceTable" visibility="public">
+          </methodref>
+          <methodref name="SafeCallException" visibility="public">
+          </methodref>
+          <methodref name="AfterConstruction" visibility="public">
+          </methodref>
+          <methodref name="BeforeDestruction" visibility="public">
+          </methodref>
+          <methodref name="Dispatch" visibility="public">
+          </methodref>
+          <methodref name="DefaultHandler" visibility="public">
+          </methodref>
+          <methodref name="NewInstance" visibility="public">
+          </methodref>
+          <methodref name="FreeInstance" visibility="public">
+          </methodref>
+          <methodref name="Destroy" visibility="public">
+          </methodref>
+        </ancestor>
+      </ancestor>
+    </ancestor>
+    <interfaces>
+      <implements name="IResultViewElementsSetup" />
+    </interfaces>
+    <members>
+      <constructor name="Create" visibility="public">
+        <parameters>
+          <parameter name="AMapInfoManager" type="TMapInfoDisplayManager" />
+          <parameter name="AInstruction" type="TBuildResultViewInstruction" />
+        </parameters>
+      </constructor>
+      <procedure name="SetupElements" visibility="public">
+      </procedure>
+    </members>
+  </class>
+  <interface name="IResultViewWorkspaceSetup">
+    <devnotes>
+      <summary>
+        Interface for strategy to set up the main workspace
+      </summary>
+    </devnotes>
+    <function name="Title" visibility="public" procflags="abstract virtual">
+      <parameters>
+        <retval type="string" />
+      </parameters>
+    </function>
+    <function name="ShortName" visibility="public" procflags="abstract virtual">
+      <parameters>
+        <retval type="string" />
+      </parameters>
+    </function>
+    <procedure name="SetupWorkspace" visibility="public" procflags="abstract virtual">
+    </procedure>
+    <function name="GetInstruction" visibility="public" procflags="abstract virtual">
+      <parameters>
+        <retval type="TBuildResultViewInstruction">
+          <devnotes>
+            <summary>
+              A package specifying the workspace orientation, legend orientation, and
+              paper size for creating a result view
+            </summary>
+          </devnotes>
+        </retval>
+      </parameters>
+    </function>
+    <procedure name="SetInstruction" visibility="public" procflags="abstract virtual">
+      <parameters>
+        <parameter name="Value" type="TBuildResultViewInstruction" />
+      </parameters>
+    </procedure>
+    <function name="GetMapInfoManager" visibility="public" procflags="abstract virtual">
+      <parameters>
+        <retval type="TMapInfoDisplayManager" />
+      </parameters>
+    </function>
+    <procedure name="SetMapInfoManager" visibility="public" procflags="abstract virtual">
+      <parameters>
+        <parameter name="Value" type="TMapInfoDisplayManager" />
+      </parameters>
+    </procedure>
+    <property name="Instruction" visibility="public" read="GetInstruction" write="SetInstruction" type="TBuildResultViewInstruction" />
+    <property name="MapInfoManager" visibility="public" read="GetMapInfoManager" write="SetMapInfoManager" type="TMapInfoDisplayManager" />
+  </interface>
+  <class name="TBaseWorkspaceStrategy">
+    <ancestor name="TInterfacedObject" namespace="System">
+      <methodref name="QueryInterface" visibility="protected">
+      </methodref>
+      <methodref name="_AddRef" visibility="protected">
+      </methodref>
+      <methodref name="_Release" visibility="protected">
+      </methodref>
+      <methodref name="AfterConstruction" visibility="public">
+      </methodref>
+      <methodref name="BeforeDestruction" visibility="public">
+      </methodref>
+      <methodref name="NewInstance" visibility="public">
+      </methodref>
+      <propertyref name="RefCount" visibility="public">
+      </propertyref>
+      <ancestor name="TObject" namespace="System">
+        <methodref name="Create" visibility="public">
+        </methodref>
+        <methodref name="Free" visibility="public">
+        </methodref>
+        <methodref name="InitInstance" visibility="public">
+        </methodref>
+        <methodref name="CleanupInstance" visibility="public">
+        </methodref>
+        <methodref name="ClassType" visibility="public">
+        </methodref>
+        <methodref name="ClassName" visibility="public">
+        </methodref>
+        <methodref name="ClassNameIs" visibility="public">
+        </methodref>
+        <methodref name="ClassParent" visibility="public">
+        </methodref>
+        <methodref name="ClassInfo" visibility="public">
+        </methodref>
+        <methodref name="InstanceSize" visibility="public">
+        </methodref>
+        <methodref name="InheritsFrom" visibility="public">
+        </methodref>
+        <methodref name="MethodAddress" visibility="public">
+        </methodref>
+        <methodref name="MethodName" visibility="public">
+        </methodref>
+        <methodref name="FieldAddress" visibility="public">
+        </methodref>
+        <methodref name="GetInterface" visibility="public">
+        </methodref>
+        <methodref name="GetInterfaceEntry" visibility="public">
+        </methodref>
+        <methodref name="GetInterfaceTable" visibility="public">
+        </methodref>
+        <methodref name="SafeCallException" visibility="public">
+        </methodref>
+        <methodref name="AfterConstruction" visibility="public">
+        </methodref>
+        <methodref name="BeforeDestruction" visibility="public">
+        </methodref>
+        <methodref name="Dispatch" visibility="public">
+        </methodref>
+        <methodref name="DefaultHandler" visibility="public">
+        </methodref>
+        <methodref name="NewInstance" visibility="public">
+        </methodref>
+        <methodref name="FreeInstance" visibility="public">
+        </methodref>
+        <methodref name="Destroy" visibility="public">
+        </methodref>
+      </ancestor>
+    </ancestor>
+    <interfaces>
+      <implements name="IResultViewWorkspaceSetup" />
+    </interfaces>
+    <members>
+      <field name="fMapInfoManager" type="TMapInfoDisplayManager" visibility="private" />
+      <field name="fInstruction" type="TBuildResultViewInstruction" visibility="private" />
+      <function name="GetInstruction" visibility="private">
+        <parameters>
+          <retval type="TBuildResultViewInstruction">
+            <devnotes>
+              <summary>
+                A package specifying the workspace orientation, legend orientation, and
+                paper size for creating a result view
+              </summary>
+            </devnotes>
+          </retval>
+        </parameters>
+      </function>
+      <procedure name="SetInstruction" visibility="private">
+        <parameters>
+          <parameter name="Value" type="TBuildResultViewInstruction" />
+        </parameters>
+      </procedure>
+      <function name="GetMapInfoManager" visibility="private">
+        <parameters>
+          <retval type="TMapInfoDisplayManager" />
+        </parameters>
+      </function>
+      <procedure name="SetMapInfoManager" visibility="private">
+        <parameters>
+          <parameter name="Value" type="TMapInfoDisplayManager" />
+        </parameters>
+      </procedure>
+      <constructor name="Create" visibility="public">
+        <parameters>
+          <parameter name="AMapInfoManager" type="TMapInfoDisplayManager" />
+          <parameter name="AInstruction" type="TBuildResultViewInstruction" />
+        </parameters>
+      </constructor>
+      <procedure name="SetupWorkspace" visibility="public" procflags="virtual">
+      </procedure>
+      <property name="Instruction" visibility="public" read="GetInstruction" write="SetInstruction" type="TBuildResultViewInstruction" />
+      <property name="MapInfoManager" visibility="public" read="GetMapInfoManager" write="SetMapInfoManager" type="TMapInfoDisplayManager" />
+      <function name="Title" visibility="public" procflags="virtual">
+        <parameters>
+          <retval type="string" />
+        </parameters>
+      </function>
+      <function name="ShortName" visibility="public" procflags="virtual">
+        <parameters>
+          <retval type="string" />
+        </parameters>
+      </function>
+    </members>
+  </class>
+  <class name="TSystemWorkspace">
+    <ancestor name="TBaseWorkspaceStrategy" namespace="uBuildResultViewInstruction">
+      <methodref name="GetInstruction" visibility="private" />
+      <methodref name="SetInstruction" visibility="private" />
+      <methodref name="GetMapInfoManager" visibility="private" />
+      <methodref name="SetMapInfoManager" visibility="private" />
+      <methodref name="Create" visibility="public" />
+      <methodref name="SetupWorkspace" visibility="public" />
+      <propertyref name="Instruction" visibility="public" />
+      <propertyref name="MapInfoManager" visibility="public" />
+      <methodref name="Title" visibility="public" />
+      <methodref name="ShortName" visibility="public" />
+      <ancestor name="TInterfacedObject" namespace="System">
+        <methodref name="QueryInterface" visibility="protected">
+        </methodref>
+        <methodref name="_AddRef" visibility="protected">
+        </methodref>
+        <methodref name="_Release" visibility="protected">
+        </methodref>
+        <methodref name="AfterConstruction" visibility="public">
+        </methodref>
+        <methodref name="BeforeDestruction" visibility="public">
+        </methodref>
+        <methodref name="NewInstance" visibility="public">
+        </methodref>
+        <propertyref name="RefCount" visibility="public">
+        </propertyref>
+        <ancestor name="TObject" namespace="System">
+          <methodref name="Create" visibility="public">
+          </methodref>
+          <methodref name="Free" visibility="public">
+          </methodref>
+          <methodref name="InitInstance" visibility="public">
+          </methodref>
+          <methodref name="CleanupInstance" visibility="public">
+          </methodref>
+          <methodref name="ClassType" visibility="public">
+          </methodref>
+          <methodref name="ClassName" visibility="public">
+          </methodref>
+          <methodref name="ClassNameIs" visibility="public">
+          </methodref>
+          <methodref name="ClassParent" visibility="public">
+          </methodref>
+          <methodref name="ClassInfo" visibility="public">
+          </methodref>
+          <methodref name="InstanceSize" visibility="public">
+          </methodref>
+          <methodref name="InheritsFrom" visibility="public">
+          </methodref>
+          <methodref name="MethodAddress" visibility="public">
+          </methodref>
+          <methodref name="MethodName" visibility="public">
+          </methodref>
+          <methodref name="FieldAddress" visibility="public">
+          </methodref>
+          <methodref name="GetInterface" visibility="public">
+          </methodref>
+          <methodref name="GetInterfaceEntry" visibility="public">
+          </methodref>
+          <methodref name="GetInterfaceTable" visibility="public">
+          </methodref>
+          <methodref name="SafeCallException" visibility="public">
+          </methodref>
+          <methodref name="AfterConstruction" visibility="public">
+          </methodref>
+          <methodref name="BeforeDestruction" visibility="public">
+          </methodref>
+          <methodref name="Dispatch" visibility="public">
+          </methodref>
+          <methodref name="DefaultHandler" visibility="public">
+          </methodref>
+          <methodref name="NewInstance" visibility="public">
+          </methodref>
+          <methodref name="FreeInstance" visibility="public">
+          </methodref>
+          <methodref name="Destroy" visibility="public">
+          </methodref>
+        </ancestor>
+      </ancestor>
+    </ancestor>
+    <members>
+      <constructor name="Create" visibility="public">
+        <parameters>
+          <parameter name="AMapInfoManager" type="TMapInfoDisplayManager" />
+          <parameter name="AInstruction" type="TBuildResultViewInstruction" />
+        </parameters>
+      </constructor>
+      <function name="Title" visibility="public" procflags="override">
+        <parameters>
+          <retval type="string" />
+        </parameters>
+      </function>
+      <procedure name="SetupWorkspace" visibility="public" procflags="override">
+      </procedure>
+      <function name="ShortName" visibility="public" procflags="override">
+        <parameters>
+          <retval type="string" />
+        </parameters>
+      </function>
+    </members>
+  </class>
+  <class name="TBasementSewerBackupRiskWorkspace">
+    <ancestor name="TBaseWorkspaceStrategy" namespace="uBuildResultViewInstruction">
+      <methodref name="GetInstruction" visibility="private" />
+      <methodref name="SetInstruction" visibility="private" />
+      <methodref name="GetMapInfoManager" visibility="private" />
+      <methodref name="SetMapInfoManager" visibility="private" />
+      <methodref name="Create" visibility="public" />
+      <methodref name="SetupWorkspace" visibility="public" />
+      <propertyref name="Instruction" visibility="public" />
+      <propertyref name="MapInfoManager" visibility="public" />
+      <methodref name="Title" visibility="public" />
+      <methodref name="ShortName" visibility="public" />
+      <ancestor name="TInterfacedObject" namespace="System">
+        <methodref name="QueryInterface" visibility="protected">
+        </methodref>
+        <methodref name="_AddRef" visibility="protected">
+        </methodref>
+        <methodref name="_Release" visibility="protected">
+        </methodref>
+        <methodref name="AfterConstruction" visibility="public">
+        </methodref>
+        <methodref name="BeforeDestruction" visibility="public">
+        </methodref>
+        <methodref name="NewInstance" visibility="public">
+        </methodref>
+        <propertyref name="RefCount" visibility="public">
+        </propertyref>
+        <ancestor name="TObject" namespace="System">
+          <methodref name="Create" visibility="public">
+          </methodref>
+          <methodref name="Free" visibility="public">
+          </methodref>
+          <methodref name="InitInstance" visibility="public">
+          </methodref>
+          <methodref name="CleanupInstance" visibility="public">
+          </methodref>
+          <methodref name="ClassType" visibility="public">
+          </methodref>
+          <methodref name="ClassName" visibility="public">
+          </methodref>
+          <methodref name="ClassNameIs" visibility="public">
+          </methodref>
+          <methodref name="ClassParent" visibility="public">
+          </methodref>
+          <methodref name="ClassInfo" visibility="public">
+          </methodref>
+          <methodref name="InstanceSize" visibility="public">
+          </methodref>
+          <methodref name="InheritsFrom" visibility="public">
+          </methodref>
+          <methodref name="MethodAddress" visibility="public">
+          </methodref>
+          <methodref name="MethodName" visibility="public">
+          </methodref>
+          <methodref name="FieldAddress" visibility="public">
+          </methodref>
+          <methodref name="GetInterface" visibility="public">
+          </methodref>
+          <methodref name="GetInterfaceEntry" visibility="public">
+          </methodref>
+          <methodref name="GetInterfaceTable" visibility="public">
+          </methodref>
+          <methodref name="SafeCallException" visibility="public">
+          </methodref>
+          <methodref name="AfterConstruction" visibility="public">
+          </methodref>
+          <methodref name="BeforeDestruction" visibility="public">
+          </methodref>
+          <methodref name="Dispatch" visibility="public">
+          </methodref>
+          <methodref name="DefaultHandler" visibility="public">
+          </methodref>
+          <methodref name="NewInstance" visibility="public">
+          </methodref>
+          <methodref name="FreeInstance" visibility="public">
+          </methodref>
+          <methodref name="Destroy" visibility="public">
+          </methodref>
+        </ancestor>
+      </ancestor>
+    </ancestor>
+    <members>
+      <constructor name="Create" visibility="public">
+        <parameters>
+          <parameter name="AMapInfoManager" type="TMapInfoDisplayManager" />
+          <parameter name="AInstruction" type="TBuildResultViewInstruction" />
+        </parameters>
+      </constructor>
+      <function name="Title" visibility="public" procflags="override">
+        <parameters>
+          <retval type="string" />
+        </parameters>
+      </function>
+      <procedure name="SetupWorkspace" visibility="public" procflags="override">
+      </procedure>
+      <function name="ShortName" visibility="public" procflags="override">
+        <parameters>
+          <retval type="string" />
+        </parameters>
+      </function>
+    </members>
+  </class>
+  <class name="TTopographyWorkspace">
+    <ancestor name="TBaseWorkspaceStrategy" namespace="uBuildResultViewInstruction">
+      <methodref name="GetInstruction" visibility="private" />
+      <methodref name="SetInstruction" visibility="private" />
+      <methodref name="GetMapInfoManager" visibility="private" />
+      <methodref name="SetMapInfoManager" visibility="private" />
+      <methodref name="Create" visibility="public" />
+      <methodref name="SetupWorkspace" visibility="public" />
+      <propertyref name="Instruction" visibility="public" />
+      <propertyref name="MapInfoManager" visibility="public" />
+      <methodref name="Title" visibility="public" />
+      <methodref name="ShortName" visibility="public" />
+      <ancestor name="TInterfacedObject" namespace="System">
+        <methodref name="QueryInterface" visibility="protected">
+        </methodref>
+        <methodref name="_AddRef" visibility="protected">
+        </methodref>
+        <methodref name="_Release" visibility="protected">
+        </methodref>
+        <methodref name="AfterConstruction" visibility="public">
+        </methodref>
+        <methodref name="BeforeDestruction" visibility="public">
+        </methodref>
+        <methodref name="NewInstance" visibility="public">
+        </methodref>
+        <propertyref name="RefCount" visibility="public">
+        </propertyref>
+        <ancestor name="TObject" namespace="System">
+          <methodref name="Create" visibility="public">
+          </methodref>
+          <methodref name="Free" visibility="public">
+          </methodref>
+          <methodref name="InitInstance" visibility="public">
+          </methodref>
+          <methodref name="CleanupInstance" visibility="public">
+          </methodref>
+          <methodref name="ClassType" visibility="public">
+          </methodref>
+          <methodref name="ClassName" visibility="public">
+          </methodref>
+          <methodref name="ClassNameIs" visibility="public">
+          </methodref>
+          <methodref name="ClassParent" visibility="public">
+          </methodref>
+          <methodref name="ClassInfo" visibility="public">
+          </methodref>
+          <methodref name="InstanceSize" visibility="public">
+          </methodref>
+          <methodref name="InheritsFrom" visibility="public">
+          </methodref>
+          <methodref name="MethodAddress" visibility="public">
+          </methodref>
+          <methodref name="MethodName" visibility="public">
+          </methodref>
+          <methodref name="FieldAddress" visibility="public">
+          </methodref>
+          <methodref name="GetInterface" visibility="public">
+          </methodref>
+          <methodref name="GetInterfaceEntry" visibility="public">
+          </methodref>
+          <methodref name="GetInterfaceTable" visibility="public">
+          </methodref>
+          <methodref name="SafeCallException" visibility="public">
+          </methodref>
+          <methodref name="AfterConstruction" visibility="public">
+          </methodref>
+          <methodref name="BeforeDestruction" visibility="public">
+          </methodref>
+          <methodref name="Dispatch" visibility="public">
+          </methodref>
+          <methodref name="DefaultHandler" visibility="public">
+          </methodref>
+          <methodref name="NewInstance" visibility="public">
+          </methodref>
+          <methodref name="FreeInstance" visibility="public">
+          </methodref>
+          <methodref name="Destroy" visibility="public">
+          </methodref>
+        </ancestor>
+      </ancestor>
+    </ancestor>
+    <members>
+      <constructor name="Create" visibility="public">
+        <parameters>
+          <parameter name="AMapInfoManager" type="TMapInfoDisplayManager" />
+          <parameter name="AInstruction" type="TBuildResultViewInstruction" />
+        </parameters>
+      </constructor>
+      <function name="Title" visibility="public" procflags="override">
+        <parameters>
+          <retval type="string" />
+        </parameters>
+      </function>
+      <procedure name="SetupWorkspace" visibility="public" procflags="override">
+      </procedure>
+      <function name="ShortName" visibility="public" procflags="override">
+        <parameters>
+          <retval type="string" />
+        </parameters>
+      </function>
+    </members>
+  </class>
+  <class name="TLargeUtilitiesTrafficWorkspace">
+    <ancestor name="TBaseWorkspaceStrategy" namespace="uBuildResultViewInstruction">
+      <methodref name="GetInstruction" visibility="private" />
+      <methodref name="SetInstruction" visibility="private" />
+      <methodref name="GetMapInfoManager" visibility="private" />
+      <methodref name="SetMapInfoManager" visibility="private" />
+      <methodref name="Create" visibility="public" />
+      <methodref name="SetupWorkspace" visibility="public" />
+      <propertyref name="Instruction" visibility="public" />
+      <propertyref name="MapInfoManager" visibility="public" />
+      <methodref name="Title" visibility="public" />
+      <methodref name="ShortName" visibility="public" />
+      <ancestor name="TInterfacedObject" namespace="System">
+        <methodref name="QueryInterface" visibility="protected">
+        </methodref>
+        <methodref name="_AddRef" visibility="protected">
+        </methodref>
+        <methodref name="_Release" visibility="protected">
+        </methodref>
+        <methodref name="AfterConstruction" visibility="public">
+        </methodref>
+        <methodref name="BeforeDestruction" visibility="public">
+        </methodref>
+        <methodref name="NewInstance" visibility="public">
+        </methodref>
+        <propertyref name="RefCount" visibility="public">
+        </propertyref>
+        <ancestor name="TObject" namespace="System">
+          <methodref name="Create" visibility="public">
+          </methodref>
+          <methodref name="Free" visibility="public">
+          </methodref>
+          <methodref name="InitInstance" visibility="public">
+          </methodref>
+          <methodref name="CleanupInstance" visibility="public">
+          </methodref>
+          <methodref name="ClassType" visibility="public">
+          </methodref>
+          <methodref name="ClassName" visibility="public">
+          </methodref>
+          <methodref name="ClassNameIs" visibility="public">
+          </methodref>
+          <methodref name="ClassParent" visibility="public">
+          </methodref>
+          <methodref name="ClassInfo" visibility="public">
+          </methodref>
+          <methodref name="InstanceSize" visibility="public">
+          </methodref>
+          <methodref name="InheritsFrom" visibility="public">
+          </methodref>
+          <methodref name="MethodAddress" visibility="public">
+          </methodref>
+          <methodref name="MethodName" visibility="public">
+          </methodref>
+          <methodref name="FieldAddress" visibility="public">
+          </methodref>
+          <methodref name="GetInterface" visibility="public">
+          </methodref>
+          <methodref name="GetInterfaceEntry" visibility="public">
+          </methodref>
+          <methodref name="GetInterfaceTable" visibility="public">
+          </methodref>
+          <methodref name="SafeCallException" visibility="public">
+          </methodref>
+          <methodref name="AfterConstruction" visibility="public">
+          </methodref>
+          <methodref name="BeforeDestruction" visibility="public">
+          </methodref>
+          <methodref name="Dispatch" visibility="public">
+          </methodref>
+          <methodref name="DefaultHandler" visibility="public">
+          </methodref>
+          <methodref name="NewInstance" visibility="public">
+          </methodref>
+          <methodref name="FreeInstance" visibility="public">
+          </methodref>
+          <methodref name="Destroy" visibility="public">
+          </methodref>
+        </ancestor>
+      </ancestor>
+    </ancestor>
+    <members>
+      <constructor name="Create" visibility="public">
+        <parameters>
+          <parameter name="AMapInfoManager" type="TMapInfoDisplayManager" />
+          <parameter name="AInstruction" type="TBuildResultViewInstruction" />
+        </parameters>
+      </constructor>
+      <function name="Title" visibility="public" procflags="override">
+        <parameters>
+          <retval type="string" />
+        </parameters>
+      </function>
+      <procedure name="SetupWorkspace" visibility="public" procflags="override">
+      </procedure>
+      <function name="ShortName" visibility="public" procflags="override">
+        <parameters>
+          <retval type="string" />
+        </parameters>
+      </function>
+    </members>
+  </class>
+  <class name="TAreaExistingLandUseWorkspace">
+    <ancestor name="TBaseWorkspaceStrategy" namespace="uBuildResultViewInstruction">
+      <methodref name="GetInstruction" visibility="private" />
+      <methodref name="SetInstruction" visibility="private" />
+      <methodref name="GetMapInfoManager" visibility="private" />
+      <methodref name="SetMapInfoManager" visibility="private" />
+      <methodref name="Create" visibility="public" />
+      <methodref name="SetupWorkspace" visibility="public" />
+      <propertyref name="Instruction" visibility="public" />
+      <propertyref name="MapInfoManager" visibility="public" />
+      <methodref name="Title" visibility="public" />
+      <methodref name="ShortName" visibility="public" />
+      <ancestor name="TInterfacedObject" namespace="System">
+        <methodref name="QueryInterface" visibility="protected">
+        </methodref>
+        <methodref name="_AddRef" visibility="protected">
+        </methodref>
+        <methodref name="_Release" visibility="protected">
+        </methodref>
+        <methodref name="AfterConstruction" visibility="public">
+        </methodref>
+        <methodref name="BeforeDestruction" visibility="public">
+        </methodref>
+        <methodref name="NewInstance" visibility="public">
+        </methodref>
+        <propertyref name="RefCount" visibility="public">
+        </propertyref>
+        <ancestor name="TObject" namespace="System">
+          <methodref name="Create" visibility="public">
+          </methodref>
+          <methodref name="Free" visibility="public">
+          </methodref>
+          <methodref name="InitInstance" visibility="public">
+          </methodref>
+          <methodref name="CleanupInstance" visibility="public">
+          </methodref>
+          <methodref name="ClassType" visibility="public">
+          </methodref>
+          <methodref name="ClassName" visibility="public">
+          </methodref>
+          <methodref name="ClassNameIs" visibility="public">
+          </methodref>
+          <methodref name="ClassParent" visibility="public">
+          </methodref>
+          <methodref name="ClassInfo" visibility="public">
+          </methodref>
+          <methodref name="InstanceSize" visibility="public">
+          </methodref>
+          <methodref name="InheritsFrom" visibility="public">
+          </methodref>
+          <methodref name="MethodAddress" visibility="public">
+          </methodref>
+          <methodref name="MethodName" visibility="public">
+          </methodref>
+          <methodref name="FieldAddress" visibility="public">
+          </methodref>
+          <methodref name="GetInterface" visibility="public">
+          </methodref>
+          <methodref name="GetInterfaceEntry" visibility="public">
+          </methodref>
+          <methodref name="GetInterfaceTable" visibility="public">
+          </methodref>
+          <methodref name="SafeCallException" visibility="public">
+          </methodref>
+          <methodref name="AfterConstruction" visibility="public">
+          </methodref>
+          <methodref name="BeforeDestruction" visibility="public">
+          </methodref>
+          <methodref name="Dispatch" visibility="public">
+          </methodref>
+          <methodref name="DefaultHandler" visibility="public">
+          </methodref>
+          <methodref name="NewInstance" visibility="public">
+          </methodref>
+          <methodref name="FreeInstance" visibility="public">
+          </methodref>
+          <methodref name="Destroy" visibility="public">
+          </methodref>
+        </ancestor>
+      </ancestor>
+    </ancestor>
+    <members>
+      <constructor name="Create" visibility="public">
+        <parameters>
+          <parameter name="AMapInfoManager" type="TMapInfoDisplayManager" />
+          <parameter name="AInstruction" type="TBuildResultViewInstruction" />
+        </parameters>
+      </constructor>
+      <function name="Title" visibility="public" procflags="override">
+        <parameters>
+          <retval type="string" />
+        </parameters>
+      </function>
+      <procedure name="SetupWorkspace" visibility="public" procflags="override">
+      </procedure>
+      <function name="ShortName" visibility="public" procflags="override">
+        <parameters>
+          <retval type="string" />
+        </parameters>
+      </function>
+    </members>
+  </class>
+  <class name="TComprehensivePlanWorkspace">
+    <ancestor name="TBaseWorkspaceStrategy" namespace="uBuildResultViewInstruction">
+      <methodref name="GetInstruction" visibility="private" />
+      <methodref name="SetInstruction" visibility="private" />
+      <methodref name="GetMapInfoManager" visibility="private" />
+      <methodref name="SetMapInfoManager" visibility="private" />
+      <methodref name="Create" visibility="public" />
+      <methodref name="SetupWorkspace" visibility="public" />
+      <propertyref name="Instruction" visibility="public" />
+      <propertyref name="MapInfoManager" visibility="public" />
+      <methodref name="Title" visibility="public" />
+      <methodref name="ShortName" visibility="public" />
+      <ancestor name="TInterfacedObject" namespace="System">
+        <methodref name="QueryInterface" visibility="protected">
+        </methodref>
+        <methodref name="_AddRef" visibility="protected">
+        </methodref>
+        <methodref name="_Release" visibility="protected">
+        </methodref>
+        <methodref name="AfterConstruction" visibility="public">
+        </methodref>
+        <methodref name="BeforeDestruction" visibility="public">
+        </methodref>
+        <methodref name="NewInstance" visibility="public">
+        </methodref>
+        <propertyref name="RefCount" visibility="public">
+        </propertyref>
+        <ancestor name="TObject" namespace="System">
+          <methodref name="Create" visibility="public">
+          </methodref>
+          <methodref name="Free" visibility="public">
+          </methodref>
+          <methodref name="InitInstance" visibility="public">
+          </methodref>
+          <methodref name="CleanupInstance" visibility="public">
+          </methodref>
+          <methodref name="ClassType" visibility="public">
+          </methodref>
+          <methodref name="ClassName" visibility="public">
+          </methodref>
+          <methodref name="ClassNameIs" visibility="public">
+          </methodref>
+          <methodref name="ClassParent" visibility="public">
+          </methodref>
+          <methodref name="ClassInfo" visibility="public">
+          </methodref>
+          <methodref name="InstanceSize" visibility="public">
+          </methodref>
+          <methodref name="InheritsFrom" visibility="public">
+          </methodref>
+          <methodref name="MethodAddress" visibility="public">
+          </methodref>
+          <methodref name="MethodName" visibility="public">
+          </methodref>
+          <methodref name="FieldAddress" visibility="public">
+          </methodref>
+          <methodref name="GetInterface" visibility="public">
+          </methodref>
+          <methodref name="GetInterfaceEntry" visibility="public">
+          </methodref>
+          <methodref name="GetInterfaceTable" visibility="public">
+          </methodref>
+          <methodref name="SafeCallException" visibility="public">
+          </methodref>
+          <methodref name="AfterConstruction" visibility="public">
+          </methodref>
+          <methodref name="BeforeDestruction" visibility="public">
+          </methodref>
+          <methodref name="Dispatch" visibility="public">
+          </methodref>
+          <methodref name="DefaultHandler" visibility="public">
+          </methodref>
+          <methodref name="NewInstance" visibility="public">
+          </methodref>
+          <methodref name="FreeInstance" visibility="public">
+          </methodref>
+          <methodref name="Destroy" visibility="public">
+          </methodref>
+        </ancestor>
+      </ancestor>
+    </ancestor>
+    <members>
+      <constructor name="Create" visibility="public">
+        <parameters>
+          <parameter name="AMapInfoManager" type="TMapInfoDisplayManager" />
+          <parameter name="AInstruction" type="TBuildResultViewInstruction" />
+        </parameters>
+      </constructor>
+      <function name="Title" visibility="public" procflags="override">
+        <parameters>
+          <retval type="string" />
+        </parameters>
+      </function>
+      <procedure name="SetupWorkspace" visibility="public" procflags="override">
+      </procedure>
+      <function name="ShortName" visibility="public" procflags="override">
+        <parameters>
+          <retval type="string" />
+        </parameters>
+      </function>
+    </members>
+  </class>
+  <class name="TEnvironmentalConsiderationsWorkspace">
+    <ancestor name="TBaseWorkspaceStrategy" namespace="uBuildResultViewInstruction">
+      <methodref name="GetInstruction" visibility="private" />
+      <methodref name="SetInstruction" visibility="private" />
+      <methodref name="GetMapInfoManager" visibility="private" />
+      <methodref name="SetMapInfoManager" visibility="private" />
+      <methodref name="Create" visibility="public" />
+      <methodref name="SetupWorkspace" visibility="public" />
+      <propertyref name="Instruction" visibility="public" />
+      <propertyref name="MapInfoManager" visibility="public" />
+      <methodref name="Title" visibility="public" />
+      <methodref name="ShortName" visibility="public" />
+      <ancestor name="TInterfacedObject" namespace="System">
+        <methodref name="QueryInterface" visibility="protected">
+        </methodref>
+        <methodref name="_AddRef" visibility="protected">
+        </methodref>
+        <methodref name="_Release" visibility="protected">
+        </methodref>
+        <methodref name="AfterConstruction" visibility="public">
+        </methodref>
+        <methodref name="BeforeDestruction" visibility="public">
+        </methodref>
+        <methodref name="NewInstance" visibility="public">
+        </methodref>
+        <propertyref name="RefCount" visibility="public">
+        </propertyref>
+        <ancestor name="TObject" namespace="System">
+          <methodref name="Create" visibility="public">
+          </methodref>
+          <methodref name="Free" visibility="public">
+          </methodref>
+          <methodref name="InitInstance" visibility="public">
+          </methodref>
+          <methodref name="CleanupInstance" visibility="public">
+          </methodref>
+          <methodref name="ClassType" visibility="public">
+          </methodref>
+          <methodref name="ClassName" visibility="public">
+          </methodref>
+          <methodref name="ClassNameIs" visibility="public">
+          </methodref>
+          <methodref name="ClassParent" visibility="public">
+          </methodref>
+          <methodref name="ClassInfo" visibility="public">
+          </methodref>
+          <methodref name="InstanceSize" visibility="public">
+          </methodref>
+          <methodref name="InheritsFrom" visibility="public">
+          </methodref>
+          <methodref name="MethodAddress" visibility="public">
+          </methodref>
+          <methodref name="MethodName" visibility="public">
+          </methodref>
+          <methodref name="FieldAddress" visibility="public">
+          </methodref>
+          <methodref name="GetInterface" visibility="public">
+          </methodref>
+          <methodref name="GetInterfaceEntry" visibility="public">
+          </methodref>
+          <methodref name="GetInterfaceTable" visibility="public">
+          </methodref>
+          <methodref name="SafeCallException" visibility="public">
+          </methodref>
+          <methodref name="AfterConstruction" visibility="public">
+          </methodref>
+          <methodref name="BeforeDestruction" visibility="public">
+          </methodref>
+          <methodref name="Dispatch" visibility="public">
+          </methodref>
+          <methodref name="DefaultHandler" visibility="public">
+          </methodref>
+          <methodref name="NewInstance" visibility="public">
+          </methodref>
+          <methodref name="FreeInstance" visibility="public">
+          </methodref>
+          <methodref name="Destroy" visibility="public">
+          </methodref>
+        </ancestor>
+      </ancestor>
+    </ancestor>
+    <members>
+      <constructor name="Create" visibility="public">
+        <parameters>
+          <parameter name="AMapInfoManager" type="TMapInfoDisplayManager" />
+          <parameter name="AInstruction" type="TBuildResultViewInstruction" />
+        </parameters>
+      </constructor>
+      <function name="Title" visibility="public" procflags="override">
+        <parameters>
+          <retval type="string" />
+        </parameters>
+      </function>
+      <procedure name="SetupWorkspace" visibility="public" procflags="override">
+      </procedure>
+      <function name="ShortName" visibility="public" procflags="override">
+        <parameters>
+          <retval type="string" />
+        </parameters>
+      </function>
+    </members>
+  </class>
+  <class name="TSewerSurchargeRiskWorkspace">
+    <ancestor name="TBaseWorkspaceStrategy" namespace="uBuildResultViewInstruction">
+      <methodref name="GetInstruction" visibility="private" />
+      <methodref name="SetInstruction" visibility="private" />
+      <methodref name="GetMapInfoManager" visibility="private" />
+      <methodref name="SetMapInfoManager" visibility="private" />
+      <methodref name="Create" visibility="public" />
+      <methodref name="SetupWorkspace" visibility="public" />
+      <propertyref name="Instruction" visibility="public" />
+      <propertyref name="MapInfoManager" visibility="public" />
+      <methodref name="Title" visibility="public" />
+      <methodref name="ShortName" visibility="public" />
+      <ancestor name="TInterfacedObject" namespace="System">
+        <methodref name="QueryInterface" visibility="protected">
+        </methodref>
+        <methodref name="_AddRef" visibility="protected">
+        </methodref>
+        <methodref name="_Release" visibility="protected">
+        </methodref>
+        <methodref name="AfterConstruction" visibility="public">
+        </methodref>
+        <methodref name="BeforeDestruction" visibility="public">
+        </methodref>
+        <methodref name="NewInstance" visibility="public">
+        </methodref>
+        <propertyref name="RefCount" visibility="public">
+        </propertyref>
+        <ancestor name="TObject" namespace="System">
+          <methodref name="Create" visibility="public">
+          </methodref>
+          <methodref name="Free" visibility="public">
+          </methodref>
+          <methodref name="InitInstance" visibility="public">
+          </methodref>
+          <methodref name="CleanupInstance" visibility="public">
+          </methodref>
+          <methodref name="ClassType" visibility="public">
+          </methodref>
+          <methodref name="ClassName" visibility="public">
+          </methodref>
+          <methodref name="ClassNameIs" visibility="public">
+          </methodref>
+          <methodref name="ClassParent" visibility="public">
+          </methodref>
+          <methodref name="ClassInfo" visibility="public">
+          </methodref>
+          <methodref name="InstanceSize" visibility="public">
+          </methodref>
+          <methodref name="InheritsFrom" visibility="public">
+          </methodref>
+          <methodref name="MethodAddress" visibility="public">
+          </methodref>
+          <methodref name="MethodName" visibility="public">
+          </methodref>
+          <methodref name="FieldAddress" visibility="public">
+          </methodref>
+          <methodref name="GetInterface" visibility="public">
+          </methodref>
+          <methodref name="GetInterfaceEntry" visibility="public">
+          </methodref>
+          <methodref name="GetInterfaceTable" visibility="public">
+          </methodref>
+          <methodref name="SafeCallException" visibility="public">
+          </methodref>
+          <methodref name="AfterConstruction" visibility="public">
+          </methodref>
+          <methodref name="BeforeDestruction" visibility="public">
+          </methodref>
+          <methodref name="Dispatch" visibility="public">
+          </methodref>
+          <methodref name="DefaultHandler" visibility="public">
+          </methodref>
+          <methodref name="NewInstance" visibility="public">
+          </methodref>
+          <methodref name="FreeInstance" visibility="public">
+          </methodref>
+          <methodref name="Destroy" visibility="public">
+          </methodref>
+        </ancestor>
+      </ancestor>
+    </ancestor>
+    <members>
+      <constructor name="Create" visibility="public">
+        <parameters>
+          <parameter name="AMapInfoManager" type="TMapInfoDisplayManager" />
+          <parameter name="AInstruction" type="TBuildResultViewInstruction" />
+        </parameters>
+      </constructor>
+      <function name="Title" visibility="public" procflags="override">
+        <parameters>
+          <retval type="string" />
+        </parameters>
+      </function>
+      <procedure name="SetupWorkspace" visibility="public" procflags="override">
+      </procedure>
+      <function name="ShortName" visibility="public" procflags="override">
+        <parameters>
+          <retval type="string" />
+        </parameters>
+      </function>
+    </members>
+  </class>
+  <class name="TImpPctIncreaseWorkspace">
+    <ancestor name="TBaseWorkspaceStrategy" namespace="uBuildResultViewInstruction">
+      <methodref name="GetInstruction" visibility="private" />
+      <methodref name="SetInstruction" visibility="private" />
+      <methodref name="GetMapInfoManager" visibility="private" />
+      <methodref name="SetMapInfoManager" visibility="private" />
+      <methodref name="Create" visibility="public" />
+      <methodref name="SetupWorkspace" visibility="public" />
+      <propertyref name="Instruction" visibility="public" />
+      <propertyref name="MapInfoManager" visibility="public" />
+      <methodref name="Title" visibility="public" />
+      <methodref name="ShortName" visibility="public" />
+      <ancestor name="TInterfacedObject" namespace="System">
+        <methodref name="QueryInterface" visibility="protected">
+        </methodref>
+        <methodref name="_AddRef" visibility="protected">
+        </methodref>
+        <methodref name="_Release" visibility="protected">
+        </methodref>
+        <methodref name="AfterConstruction" visibility="public">
+        </methodref>
+        <methodref name="BeforeDestruction" visibility="public">
+        </methodref>
+        <methodref name="NewInstance" visibility="public">
+        </methodref>
+        <propertyref name="RefCount" visibility="public">
+        </propertyref>
+        <ancestor name="TObject" namespace="System">
+          <methodref name="Create" visibility="public">
+          </methodref>
+          <methodref name="Free" visibility="public">
+          </methodref>
+          <methodref name="InitInstance" visibility="public">
+          </methodref>
+          <methodref name="CleanupInstance" visibility="public">
+          </methodref>
+          <methodref name="ClassType" visibility="public">
+          </methodref>
+          <methodref name="ClassName" visibility="public">
+          </methodref>
+          <methodref name="ClassNameIs" visibility="public">
+          </methodref>
+          <methodref name="ClassParent" visibility="public">
+          </methodref>
+          <methodref name="ClassInfo" visibility="public">
+          </methodref>
+          <methodref name="InstanceSize" visibility="public">
+          </methodref>
+          <methodref name="InheritsFrom" visibility="public">
+          </methodref>
+          <methodref name="MethodAddress" visibility="public">
+          </methodref>
+          <methodref name="MethodName" visibility="public">
+          </methodref>
+          <methodref name="FieldAddress" visibility="public">
+          </methodref>
+          <methodref name="GetInterface" visibility="public">
+          </methodref>
+          <methodref name="GetInterfaceEntry" visibility="public">
+          </methodref>
+          <methodref name="GetInterfaceTable" visibility="public">
+          </methodref>
+          <methodref name="SafeCallException" visibility="public">
+          </methodref>
+          <methodref name="AfterConstruction" visibility="public">
+          </methodref>
+          <methodref name="BeforeDestruction" visibility="public">
+          </methodref>
+          <methodref name="Dispatch" visibility="public">
+          </methodref>
+          <methodref name="DefaultHandler" visibility="public">
+          </methodref>
+          <methodref name="NewInstance" visibility="public">
+          </methodref>
+          <methodref name="FreeInstance" visibility="public">
+          </methodref>
+          <methodref name="Destroy" visibility="public">
+          </methodref>
+        </ancestor>
+      </ancestor>
+    </ancestor>
+    <members>
+      <constructor name="Create" visibility="public">
+        <parameters>
+          <parameter name="AMapInfoManager" type="TMapInfoDisplayManager" />
+          <parameter name="AInstruction" type="TBuildResultViewInstruction" />
+        </parameters>
+      </constructor>
+      <function name="Title" visibility="public" procflags="override">
+        <parameters>
+          <retval type="string" />
+        </parameters>
+      </function>
+      <procedure name="SetupWorkspace" visibility="public" procflags="override">
+      </procedure>
+      <function name="ShortName" visibility="public" procflags="override">
+        <parameters>
+          <retval type="string" />
+        </parameters>
+      </function>
+    </members>
+  </class>
+  <class name="TExistingLandUseDSCWorkspace">
+    <ancestor name="TBaseWorkspaceStrategy" namespace="uBuildResultViewInstruction">
+      <methodref name="GetInstruction" visibility="private" />
+      <methodref name="SetInstruction" visibility="private" />
+      <methodref name="GetMapInfoManager" visibility="private" />
+      <methodref name="SetMapInfoManager" visibility="private" />
+      <methodref name="Create" visibility="public" />
+      <methodref name="SetupWorkspace" visibility="public" />
+      <propertyref name="Instruction" visibility="public" />
+      <propertyref name="MapInfoManager" visibility="public" />
+      <methodref name="Title" visibility="public" />
+      <methodref name="ShortName" visibility="public" />
+      <ancestor name="TInterfacedObject" namespace="System">
+        <methodref name="QueryInterface" visibility="protected">
+        </methodref>
+        <methodref name="_AddRef" visibility="protected">
+        </methodref>
+        <methodref name="_Release" visibility="protected">
+        </methodref>
+        <methodref name="AfterConstruction" visibility="public">
+        </methodref>
+        <methodref name="BeforeDestruction" visibility="public">
+        </methodref>
+        <methodref name="NewInstance" visibility="public">
+        </methodref>
+        <propertyref name="RefCount" visibility="public">
+        </propertyref>
+        <ancestor name="TObject" namespace="System">
+          <methodref name="Create" visibility="public">
+          </methodref>
+          <methodref name="Free" visibility="public">
+          </methodref>
+          <methodref name="InitInstance" visibility="public">
+          </methodref>
+          <methodref name="CleanupInstance" visibility="public">
+          </methodref>
+          <methodref name="ClassType" visibility="public">
+          </methodref>
+          <methodref name="ClassName" visibility="public">
+          </methodref>
+          <methodref name="ClassNameIs" visibility="public">
+          </methodref>
+          <methodref name="ClassParent" visibility="public">
+          </methodref>
+          <methodref name="ClassInfo" visibility="public">
+          </methodref>
+          <methodref name="InstanceSize" visibility="public">
+          </methodref>
+          <methodref name="InheritsFrom" visibility="public">
+          </methodref>
+          <methodref name="MethodAddress" visibility="public">
+          </methodref>
+          <methodref name="MethodName" visibility="public">
+          </methodref>
+          <methodref name="FieldAddress" visibility="public">
+          </methodref>
+          <methodref name="GetInterface" visibility="public">
+          </methodref>
+          <methodref name="GetInterfaceEntry" visibility="public">
+          </methodref>
+          <methodref name="GetInterfaceTable" visibility="public">
+          </methodref>
+          <methodref name="SafeCallException" visibility="public">
+          </methodref>
+          <methodref name="AfterConstruction" visibility="public">
+          </methodref>
+          <methodref name="BeforeDestruction" visibility="public">
+          </methodref>
+          <methodref name="Dispatch" visibility="public">
+          </methodref>
+          <methodref name="DefaultHandler" visibility="public">
+          </methodref>
+          <methodref name="NewInstance" visibility="public">
+          </methodref>
+          <methodref name="FreeInstance" visibility="public">
+          </methodref>
+          <methodref name="Destroy" visibility="public">
+          </methodref>
+        </ancestor>
+      </ancestor>
+    </ancestor>
+    <members>
+      <constructor name="Create" visibility="public">
+        <parameters>
+          <parameter name="AMapInfoManager" type="TMapInfoDisplayManager" />
+          <parameter name="AInstruction" type="TBuildResultViewInstruction" />
+        </parameters>
+      </constructor>
+      <function name="Title" visibility="public" procflags="override">
+        <parameters>
+          <retval type="string" />
+        </parameters>
+      </function>
+      <procedure name="SetupWorkspace" visibility="public" procflags="override">
+      </procedure>
+      <function name="ShortName" visibility="public" procflags="override">
+        <parameters>
+          <retval type="string" />
+        </parameters>
+      </function>
+    </members>
+  </class>
+  <class name="TComprehensivePlanDSCWorkspace">
+    <ancestor name="TBaseWorkspaceStrategy" namespace="uBuildResultViewInstruction">
+      <methodref name="GetInstruction" visibility="private" />
+      <methodref name="SetInstruction" visibility="private" />
+      <methodref name="GetMapInfoManager" visibility="private" />
+      <methodref name="SetMapInfoManager" visibility="private" />
+      <methodref name="Create" visibility="public" />
+      <methodref name="SetupWorkspace" visibility="public" />
+      <propertyref name="Instruction" visibility="public" />
+      <propertyref name="MapInfoManager" visibility="public" />
+      <methodref name="Title" visibility="public" />
+      <methodref name="ShortName" visibility="public" />
+      <ancestor name="TInterfacedObject" namespace="System">
+        <methodref name="QueryInterface" visibility="protected">
+        </methodref>
+        <methodref name="_AddRef" visibility="protected">
+        </methodref>
+        <methodref name="_Release" visibility="protected">
+        </methodref>
+        <methodref name="AfterConstruction" visibility="public">
+        </methodref>
+        <methodref name="BeforeDestruction" visibility="public">
+        </methodref>
+        <methodref name="NewInstance" visibility="public">
+        </methodref>
+        <propertyref name="RefCount" visibility="public">
+        </propertyref>
+        <ancestor name="TObject" namespace="System">
+          <methodref name="Create" visibility="public">
+          </methodref>
+          <methodref name="Free" visibility="public">
+          </methodref>
+          <methodref name="InitInstance" visibility="public">
+          </methodref>
+          <methodref name="CleanupInstance" visibility="public">
+          </methodref>
+          <methodref name="ClassType" visibility="public">
+          </methodref>
+          <methodref name="ClassName" visibility="public">
+          </methodref>
+          <methodref name="ClassNameIs" visibility="public">
+          </methodref>
+          <methodref name="ClassParent" visibility="public">
+          </methodref>
+          <methodref name="ClassInfo" visibility="public">
+          </methodref>
+          <methodref name="InstanceSize" visibility="public">
+          </methodref>
+          <methodref name="InheritsFrom" visibility="public">
+          </methodref>
+          <methodref name="MethodAddress" visibility="public">
+          </methodref>
+          <methodref name="MethodName" visibility="public">
+          </methodref>
+          <methodref name="FieldAddress" visibility="public">
+          </methodref>
+          <methodref name="GetInterface" visibility="public">
+          </methodref>
+          <methodref name="GetInterfaceEntry" visibility="public">
+          </methodref>
+          <methodref name="GetInterfaceTable" visibility="public">
+          </methodref>
+          <methodref name="SafeCallException" visibility="public">
+          </methodref>
+          <methodref name="AfterConstruction" visibility="public">
+          </methodref>
+          <methodref name="BeforeDestruction" visibility="public">
+          </methodref>
+          <methodref name="Dispatch" visibility="public">
+          </methodref>
+          <methodref name="DefaultHandler" visibility="public">
+          </methodref>
+          <methodref name="NewInstance" visibility="public">
+          </methodref>
+          <methodref name="FreeInstance" visibility="public">
+          </methodref>
+          <methodref name="Destroy" visibility="public">
+          </methodref>
+        </ancestor>
+      </ancestor>
+    </ancestor>
+    <members>
+      <constructor name="Create" visibility="public">
+        <parameters>
+          <parameter name="AMapInfoManager" type="TMapInfoDisplayManager" />
+          <parameter name="AInstruction" type="TBuildResultViewInstruction" />
+        </parameters>
+      </constructor>
+      <function name="Title" visibility="public" procflags="override">
+        <parameters>
+          <retval type="string" />
+        </parameters>
+      </function>
+      <procedure name="SetupWorkspace" visibility="public" procflags="override">
+      </procedure>
+      <function name="ShortName" visibility="public" procflags="override">
+        <parameters>
+          <retval type="string" />
+        </parameters>
+      </function>
+    </members>
+  </class>
+  <class name="TSystemQAQCWorkspace">
+    <ancestor name="TBaseWorkspaceStrategy" namespace="uBuildResultViewInstruction">
+      <methodref name="GetInstruction" visibility="private" />
+      <methodref name="SetInstruction" visibility="private" />
+      <methodref name="GetMapInfoManager" visibility="private" />
+      <methodref name="SetMapInfoManager" visibility="private" />
+      <methodref name="Create" visibility="public" />
+      <methodref name="SetupWorkspace" visibility="public" />
+      <propertyref name="Instruction" visibility="public" />
+      <propertyref name="MapInfoManager" visibility="public" />
+      <methodref name="Title" visibility="public" />
+      <methodref name="ShortName" visibility="public" />
+      <ancestor name="TInterfacedObject" namespace="System">
+        <methodref name="QueryInterface" visibility="protected">
+        </methodref>
+        <methodref name="_AddRef" visibility="protected">
+        </methodref>
+        <methodref name="_Release" visibility="protected">
+        </methodref>
+        <methodref name="AfterConstruction" visibility="public">
+        </methodref>
+        <methodref name="BeforeDestruction" visibility="public">
+        </methodref>
+        <methodref name="NewInstance" visibility="public">
+        </methodref>
+        <propertyref name="RefCount" visibility="public">
+        </propertyref>
+        <ancestor name="TObject" namespace="System">
+          <methodref name="Create" visibility="public">
+          </methodref>
+          <methodref name="Free" visibility="public">
+          </methodref>
+          <methodref name="InitInstance" visibility="public">
+          </methodref>
+          <methodref name="CleanupInstance" visibility="public">
+          </methodref>
+          <methodref name="ClassType" visibility="public">
+          </methodref>
+          <methodref name="ClassName" visibility="public">
+          </methodref>
+          <methodref name="ClassNameIs" visibility="public">
+          </methodref>
+          <methodref name="ClassParent" visibility="public">
+          </methodref>
+          <methodref name="ClassInfo" visibility="public">
+          </methodref>
+          <methodref name="InstanceSize" visibility="public">
+          </methodref>
+          <methodref name="InheritsFrom" visibility="public">
+          </methodref>
+          <methodref name="MethodAddress" visibility="public">
+          </methodref>
+          <methodref name="MethodName" visibility="public">
+          </methodref>
+          <methodref name="FieldAddress" visibility="public">
+          </methodref>
+          <methodref name="GetInterface" visibility="public">
+          </methodref>
+          <methodref name="GetInterfaceEntry" visibility="public">
+          </methodref>
+          <methodref name="GetInterfaceTable" visibility="public">
+          </methodref>
+          <methodref name="SafeCallException" visibility="public">
+          </methodref>
+          <methodref name="AfterConstruction" visibility="public">
+          </methodref>
+          <methodref name="BeforeDestruction" visibility="public">
+          </methodref>
+          <methodref name="Dispatch" visibility="public">
+          </methodref>
+          <methodref name="DefaultHandler" visibility="public">
+          </methodref>
+          <methodref name="NewInstance" visibility="public">
+          </methodref>
+          <methodref name="FreeInstance" visibility="public">
+          </methodref>
+          <methodref name="Destroy" visibility="public">
+          </methodref>
+        </ancestor>
+      </ancestor>
+    </ancestor>
+    <members>
+      <constructor name="Create" visibility="public">
+        <parameters>
+          <parameter name="AMapInfoManager" type="TMapInfoDisplayManager" />
+          <parameter name="AInstruction" type="TBuildResultViewInstruction" />
+        </parameters>
+      </constructor>
+      <function name="Title" visibility="public" procflags="override">
+        <parameters>
+          <retval type="string" />
+        </parameters>
+      </function>
+      <procedure name="SetupWorkspace" visibility="public" procflags="override">
+      </procedure>
+      <function name="ShortName" visibility="public" procflags="override">
+        <parameters>
+          <retval type="string" />
+        </parameters>
+      </function>
+    </members>
+  </class>
+  <class name="TBuildResultViewInstruction">
+    <devnotes>
+      <summary>
+        A package specifying the workspace orientation, legend orientation, and
+        paper size for creating a result view
+      </summary>
+    </devnotes>
+    <ancestor name="TObject" namespace="System">
+      <methodref name="Create" visibility="public">
+      </methodref>
+      <methodref name="Free" visibility="public">
+      </methodref>
+      <methodref name="InitInstance" visibility="public">
+      </methodref>
+      <methodref name="CleanupInstance" visibility="public">
+      </methodref>
+      <methodref name="ClassType" visibility="public">
+      </methodref>
+      <methodref name="ClassName" visibility="public">
+      </methodref>
+      <methodref name="ClassNameIs" visibility="public">
+      </methodref>
+      <methodref name="ClassParent" visibility="public">
+      </methodref>
+      <methodref name="ClassInfo" visibility="public">
+      </methodref>
+      <methodref name="InstanceSize" visibility="public">
+      </methodref>
+      <methodref name="InheritsFrom" visibility="public">
+      </methodref>
+      <methodref name="MethodAddress" visibility="public">
+      </methodref>
+      <methodref name="MethodName" visibility="public">
+      </methodref>
+      <methodref name="FieldAddress" visibility="public">
+      </methodref>
+      <methodref name="GetInterface" visibility="public">
+      </methodref>
+      <methodref name="GetInterfaceEntry" visibility="public">
+      </methodref>
+      <methodref name="GetInterfaceTable" visibility="public">
+      </methodref>
+      <methodref name="SafeCallException" visibility="public">
+      </methodref>
+      <methodref name="AfterConstruction" visibility="public">
+      </methodref>
+      <methodref name="BeforeDestruction" visibility="public">
+      </methodref>
+      <methodref name="Dispatch" visibility="public">
+      </methodref>
+      <methodref name="DefaultHandler" visibility="public">
+      </methodref>
+      <methodref name="NewInstance" visibility="public">
+      </methodref>
+      <methodref name="FreeInstance" visibility="public">
+      </methodref>
+      <methodref name="Destroy" visibility="public">
+      </methodref>
+    </ancestor>
+    <members>
+      <field name="fResultDatabase" type="TFileName" visibility="private" />
+      <field name="fMapInfoManager" type="TMapInfoDisplayManager" visibility="private" />
+      <field name="fMapOrientation" type="TResultViewMapOrientation" visibility="private" />
+      <field name="fResultViewElementsSetupStrategy" type="IResultViewElementsSetup" visibility="private" />
+      <field name="fResultViewWorkspaceSetupStrategy" type="IResultViewWorkspaceSetup" visibility="private" />
+      <field name="fLegendOrientation" type="TResultViewLegendOrientation" visibility="private" />
+      <field name="fPaperSize" type="TResultViewPaperSize" visibility="private" />
+      <field name="fFontFactor" type="Double" visibility="private" />
+      <field name="fXFactor" type="Double" visibility="private" />
+      <field name="fYFactor" type="Double" visibility="private" />
+      <field name="fFileName" type="string" visibility="private" />
+      <field name="fProjectNumber" type="string" visibility="private" />
+      <field name="fProjectDesc" type="string" visibility="private" />
+      <field name="fStudyArea" type="string" visibility="private" />
+      <field name="fTitle" type="string" visibility="private" />
+      <procedure name="SetupBaseMaps" visibility="private">
+      </procedure>
+      <procedure name="MakeAuxiliaryTables" visibility="private">
+      </procedure>
+      <procedure name="MakeOutfallTable" visibility="private">
+      </procedure>
+      <procedure name="MakeSumpedSurfSCtable" visibility="private">
+      </procedure>
+      <procedure name="MakeTransfersToExternalModelsTable" visibility="private">
+      </procedure>
+      <procedure name="MakeInflowsFromExternalModelsTable" visibility="private">
+      </procedure>
+      <constructor name="Create" visibility="public">
+        <parameters>
+          <parameter name="AResultDatabase" type="TFileName" />
+          <parameter name="AMapOrientation" type="TResultViewMapOrientation" />
+          <parameter name="ALegendOrientation" type="TResultViewLegendOrientation" />
+          <parameter name="APaperSize" type="TResultViewPaperSize" />
+          <parameter name="AResultViewWorkspaceStrategy" type="IResultViewWorkspaceSetup" />
+        </parameters>
+      </constructor>
+      <destructor name="Destroy" visibility="public">
+        <parameters>
+        </parameters>
+      </destructor>
+      <procedure name="Build" visibility="public">
+        <devnotes>
+          <summary>
+            Build the result view workspace
+          </summary>
+        </devnotes>
+      </procedure>
+      <procedure name="MakeWorkspace" visibility="public">
+        <devnotes>
+          <summary>
+            Build the MapInfo workspace file
+          </summary>
+        </devnotes>
+      </procedure>
+      <procedure name="SetPageElements" visibility="public">
+        <devnotes>
+          <summary>
+            Build the labels and regalia for the MapInfo workspace file
+          </summary>
+        </devnotes>
+      </procedure>
+      <procedure name="SetResults" visibility="public">
+        <devnotes>
+          <summary>
+            Open the workspace and do other work for completing the workspace file
+          </summary>
+        </devnotes>
+      </procedure>
+      <procedure name="SaveWorkspace" visibility="public">
+        <devnotes>
+          <summary>
+            Save the workspace file
+          </summary>
+        </devnotes>
+      </procedure>
+      <property name="XFactor" visibility="public" read="fXFactor" type="Double" />
+      <property name="YFactor" visibility="public" read="fYFactor" type="Double" />
+      <property name="FontFactor" visibility="public" read="fFontFactor" type="Double" />
+      <property name="FileName" visibility="public" read="fFileName" write="fFileName" type="string" />
+      <property name="ProjectNumber" visibility="public" read="fProjectNumber" write="fProjectNumber" type="string" />
+      <property name="ProjectDesc" visibility="public" read="fProjectDesc" write="fProjectDesc" type="string" />
+      <property name="StudyArea" visibility="public" read="fStudyArea" write="fStudyArea" type="string" />
+      <property name="Title" visibility="public" read="fTitle" write="fTitle" type="string" />
+      <property name="ResultDatabase" visibility="public" read="fResultDatabase" type="TFileName" />
+    </members>
+  </class>
+</namespace>
