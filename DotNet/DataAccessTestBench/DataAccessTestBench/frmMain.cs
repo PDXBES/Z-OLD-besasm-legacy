@@ -336,6 +336,11 @@ namespace DataAccessTestBench
 
       Dictionary<string, ReportBase.Parameter> parameters;
       int bsbrCount = 0;
+      if (rpReport == null)
+      {
+        MessageBox.Show("Error: Load RPReport before executing BSBR queries");
+        return;
+      }
       foreach (string focusArea in rpReport.FocusAreaList())
       {
         parameters = new Dictionary<string, ReportBase.Parameter>();
