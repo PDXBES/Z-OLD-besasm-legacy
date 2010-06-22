@@ -139,7 +139,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
       IList<string> focusAreaList = (IList<string>)FocusAreaList();
       filteredByFocusArea = parameters.Keys.Contains("FocusArea");
       focusArea = filteredByFocusArea ? parameters["FocusArea"].Value : "";
-      if (!focusAreaList.Contains(focusArea))
+      if (filteredByFocusArea && !focusAreaList.Contains(focusArea))
       {
         return 0;
       }
@@ -153,8 +153,10 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
         from tableSpRpBsbr in altCompilerDS.SP_RP_BSBR
         join faList in focusAreaList
         on tableSpRpBsbr.focus_area equals faList
+        join mdlDsc in scDS.mdl_dirsc_ac
+        on tableSpRpBsbr.dsc_id equals mdlDsc.DSCID
         where (tableSpRpBsbr.useflag == useFlag)
-          && (tableSpRpBsbr.storm == stormEvent)          
+          && (tableSpRpBsbr.storm == stormEvent)         
         group tableSpRpBsbr by tableSpRpBsbr.focus_area into gFocusArea
         orderby gFocusArea.Key
         select new

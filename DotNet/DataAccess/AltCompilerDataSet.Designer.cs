@@ -294,6 +294,24 @@ namespace SystemsAnalysis.DataAccess {
             
             private global::System.Data.DataColumn columnfocus_area;
             
+            private global::System.Data.DataColumn columnus_jelev_ft1;
+            
+            private global::System.Data.DataColumn columnds_jelev_ft1;
+            
+            private global::System.Data.DataColumn columnfrac_2swr_beg1;
+            
+            private global::System.Data.DataColumn columncalculated_hgl_ft1;
+            
+            private global::System.Data.DataColumn columncalculated_dhgl_ft1;
+            
+            private global::System.Data.DataColumn columnsurchage_ft;
+            
+            private global::System.Data.DataColumn columnflood_ref_elev_ft1;
+            
+            private global::System.Data.DataColumn columnsan_swr_crown_ft1;
+            
+            private global::System.Data.DataColumn columnhgl_comp_rp_id;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public SP_RP_BSBRDataTable() {
                 this.TableName = "SP_RP_BSBR";
@@ -437,6 +455,69 @@ namespace SystemsAnalysis.DataAccess {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn us_jelev_ft1Column {
+                get {
+                    return this.columnus_jelev_ft1;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn ds_jelev_ft1Column {
+                get {
+                    return this.columnds_jelev_ft1;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn frac_2swr_beg1Column {
+                get {
+                    return this.columnfrac_2swr_beg1;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn calculated_hgl_ft1Column {
+                get {
+                    return this.columncalculated_hgl_ft1;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn calculated_dhgl_ft1Column {
+                get {
+                    return this.columncalculated_dhgl_ft1;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn surchage_ftColumn {
+                get {
+                    return this.columnsurchage_ft;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn flood_ref_elev_ft1Column {
+                get {
+                    return this.columnflood_ref_elev_ft1;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn san_swr_crown_ft1Column {
+                get {
+                    return this.columnsan_swr_crown_ft1;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn hgl_comp_rp_idColumn {
+                get {
+                    return this.columnhgl_comp_rp_id;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -465,7 +546,31 @@ namespace SystemsAnalysis.DataAccess {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public SP_RP_BSBRRow AddSP_RP_BSBRRow(int dsc_id, int parcel_id, int divide_id, double us_jelev_ft, double ds_jelev_ft, double frac_2swr_beg, double san_swr_crown_ft, double flood_ref_elev_ft, double calculated_hgl_ft, double calculated_dhgl_ft, double surcharge_ft, string storm, short useflag, string basin, string focus_area) {
+            public SP_RP_BSBRRow AddSP_RP_BSBRRow(
+                        int dsc_id, 
+                        int parcel_id, 
+                        int divide_id, 
+                        double us_jelev_ft, 
+                        double ds_jelev_ft, 
+                        double frac_2swr_beg, 
+                        double san_swr_crown_ft, 
+                        double flood_ref_elev_ft, 
+                        double calculated_hgl_ft, 
+                        double calculated_dhgl_ft, 
+                        double surcharge_ft, 
+                        string storm, 
+                        short useflag, 
+                        string basin, 
+                        string focus_area, 
+                        decimal us_jelev_ft1, 
+                        decimal ds_jelev_ft1, 
+                        decimal frac_2swr_beg1, 
+                        decimal calculated_hgl_ft1, 
+                        decimal calculated_dhgl_ft1, 
+                        decimal surchage_ft, 
+                        decimal flood_ref_elev_ft1, 
+                        decimal san_swr_crown_ft1, 
+                        int hgl_comp_rp_id) {
                 SP_RP_BSBRRow rowSP_RP_BSBRRow = ((SP_RP_BSBRRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -483,7 +588,16 @@ namespace SystemsAnalysis.DataAccess {
                         storm,
                         useflag,
                         basin,
-                        focus_area};
+                        focus_area,
+                        us_jelev_ft1,
+                        ds_jelev_ft1,
+                        frac_2swr_beg1,
+                        calculated_hgl_ft1,
+                        calculated_dhgl_ft1,
+                        surchage_ft,
+                        flood_ref_elev_ft1,
+                        san_swr_crown_ft1,
+                        hgl_comp_rp_id};
                 rowSP_RP_BSBRRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowSP_RP_BSBRRow);
                 return rowSP_RP_BSBRRow;
@@ -525,6 +639,15 @@ namespace SystemsAnalysis.DataAccess {
                 this.columnuseflag = base.Columns["useflag"];
                 this.columnbasin = base.Columns["basin"];
                 this.columnfocus_area = base.Columns["focus_area"];
+                this.columnus_jelev_ft1 = base.Columns["us_jelev_ft1"];
+                this.columnds_jelev_ft1 = base.Columns["ds_jelev_ft1"];
+                this.columnfrac_2swr_beg1 = base.Columns["frac_2swr_beg1"];
+                this.columncalculated_hgl_ft1 = base.Columns["calculated_hgl_ft1"];
+                this.columncalculated_dhgl_ft1 = base.Columns["calculated_dhgl_ft1"];
+                this.columnsurchage_ft = base.Columns["surchage_ft"];
+                this.columnflood_ref_elev_ft1 = base.Columns["flood_ref_elev_ft1"];
+                this.columnsan_swr_crown_ft1 = base.Columns["san_swr_crown_ft1"];
+                this.columnhgl_comp_rp_id = base.Columns["hgl_comp_rp_id"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -561,6 +684,24 @@ namespace SystemsAnalysis.DataAccess {
                 base.Columns.Add(this.columnbasin);
                 this.columnfocus_area = new global::System.Data.DataColumn("focus_area", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnfocus_area);
+                this.columnus_jelev_ft1 = new global::System.Data.DataColumn("us_jelev_ft1", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnus_jelev_ft1);
+                this.columnds_jelev_ft1 = new global::System.Data.DataColumn("ds_jelev_ft1", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnds_jelev_ft1);
+                this.columnfrac_2swr_beg1 = new global::System.Data.DataColumn("frac_2swr_beg1", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnfrac_2swr_beg1);
+                this.columncalculated_hgl_ft1 = new global::System.Data.DataColumn("calculated_hgl_ft1", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncalculated_hgl_ft1);
+                this.columncalculated_dhgl_ft1 = new global::System.Data.DataColumn("calculated_dhgl_ft1", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncalculated_dhgl_ft1);
+                this.columnsurchage_ft = new global::System.Data.DataColumn("surchage_ft", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnsurchage_ft);
+                this.columnflood_ref_elev_ft1 = new global::System.Data.DataColumn("flood_ref_elev_ft1", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnflood_ref_elev_ft1);
+                this.columnsan_swr_crown_ft1 = new global::System.Data.DataColumn("san_swr_crown_ft1", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnsan_swr_crown_ft1);
+                this.columnhgl_comp_rp_id = new global::System.Data.DataColumn("hgl_comp_rp_id", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnhgl_comp_rp_id);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("SP_RP_BSBR_PrimaryKey", new global::System.Data.DataColumn[] {
                                 this.columnOBJECTID}, true));
                 this.columnOBJECTID.AutoIncrement = true;
@@ -569,9 +710,18 @@ namespace SystemsAnalysis.DataAccess {
                 this.columnOBJECTID.AllowDBNull = false;
                 this.columnOBJECTID.ReadOnly = true;
                 this.columnOBJECTID.Unique = true;
+                this.columndsc_id.AllowDBNull = false;
                 this.columnstorm.MaxLength = 100;
                 this.columnbasin.MaxLength = 100;
                 this.columnfocus_area.MaxLength = 50;
+                this.columnus_jelev_ft1.Caption = "us_jelev_ft";
+                this.columnds_jelev_ft1.Caption = "ds_jelev_ft";
+                this.columnfrac_2swr_beg1.Caption = "frac_2swr_beg";
+                this.columncalculated_hgl_ft1.Caption = "calculated_hgl_ft";
+                this.columncalculated_dhgl_ft1.Caption = "calculated_dhgl_ft";
+                this.columnflood_ref_elev_ft1.Caption = "flood_ref_elev_ft";
+                this.columnsan_swr_crown_ft1.Caption = "san_swr_crown_ft";
+                this.columnhgl_comp_rp_id.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -716,12 +866,7 @@ namespace SystemsAnalysis.DataAccess {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public int dsc_id {
                 get {
-                    try {
-                        return ((int)(this[this.tableSP_RP_BSBR.dsc_idColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'dsc_id\' in table \'SP_RP_BSBR\' is DBNull.", e);
-                    }
+                    return ((int)(this[this.tableSP_RP_BSBR.dsc_idColumn]));
                 }
                 set {
                     this[this.tableSP_RP_BSBR.dsc_idColumn] = value;
@@ -926,11 +1071,11 @@ namespace SystemsAnalysis.DataAccess {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string focus_area {
                 get {
-                    try {
-                        return ((string)(this[this.tableSP_RP_BSBR.focus_areaColumn]));
+                    if (this.Isfocus_areaNull()) {
+                        return string.Empty;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'focus_area\' in table \'SP_RP_BSBR\' is DBNull.", e);
+                    else {
+                        return ((string)(this[this.tableSP_RP_BSBR.focus_areaColumn]));
                     }
                 }
                 set {
@@ -939,13 +1084,133 @@ namespace SystemsAnalysis.DataAccess {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool Isdsc_idNull() {
-                return this.IsNull(this.tableSP_RP_BSBR.dsc_idColumn);
+            public decimal us_jelev_ft1 {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableSP_RP_BSBR.us_jelev_ft1Column]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'us_jelev_ft1\' in table \'SP_RP_BSBR\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSP_RP_BSBR.us_jelev_ft1Column] = value;
+                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void Setdsc_idNull() {
-                this[this.tableSP_RP_BSBR.dsc_idColumn] = global::System.Convert.DBNull;
+            public decimal ds_jelev_ft1 {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableSP_RP_BSBR.ds_jelev_ft1Column]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ds_jelev_ft1\' in table \'SP_RP_BSBR\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSP_RP_BSBR.ds_jelev_ft1Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal frac_2swr_beg1 {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableSP_RP_BSBR.frac_2swr_beg1Column]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'frac_2swr_beg1\' in table \'SP_RP_BSBR\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSP_RP_BSBR.frac_2swr_beg1Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal calculated_hgl_ft1 {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableSP_RP_BSBR.calculated_hgl_ft1Column]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'calculated_hgl_ft1\' in table \'SP_RP_BSBR\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSP_RP_BSBR.calculated_hgl_ft1Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal calculated_dhgl_ft1 {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableSP_RP_BSBR.calculated_dhgl_ft1Column]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'calculated_dhgl_ft1\' in table \'SP_RP_BSBR\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSP_RP_BSBR.calculated_dhgl_ft1Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal surchage_ft {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableSP_RP_BSBR.surchage_ftColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'surchage_ft\' in table \'SP_RP_BSBR\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSP_RP_BSBR.surchage_ftColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal flood_ref_elev_ft1 {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableSP_RP_BSBR.flood_ref_elev_ft1Column]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'flood_ref_elev_ft1\' in table \'SP_RP_BSBR\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSP_RP_BSBR.flood_ref_elev_ft1Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public decimal san_swr_crown_ft1 {
+                get {
+                    try {
+                        return ((decimal)(this[this.tableSP_RP_BSBR.san_swr_crown_ft1Column]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'san_swr_crown_ft1\' in table \'SP_RP_BSBR\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSP_RP_BSBR.san_swr_crown_ft1Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int hgl_comp_rp_id {
+                get {
+                    return ((int)(this[this.tableSP_RP_BSBR.hgl_comp_rp_idColumn]));
+                }
+                set {
+                    this[this.tableSP_RP_BSBR.hgl_comp_rp_idColumn] = value;
+                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1086,6 +1351,86 @@ namespace SystemsAnalysis.DataAccess {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public void Setfocus_areaNull() {
                 this[this.tableSP_RP_BSBR.focus_areaColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool Isus_jelev_ft1Null() {
+                return this.IsNull(this.tableSP_RP_BSBR.us_jelev_ft1Column);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void Setus_jelev_ft1Null() {
+                this[this.tableSP_RP_BSBR.us_jelev_ft1Column] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool Isds_jelev_ft1Null() {
+                return this.IsNull(this.tableSP_RP_BSBR.ds_jelev_ft1Column);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void Setds_jelev_ft1Null() {
+                this[this.tableSP_RP_BSBR.ds_jelev_ft1Column] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool Isfrac_2swr_beg1Null() {
+                return this.IsNull(this.tableSP_RP_BSBR.frac_2swr_beg1Column);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void Setfrac_2swr_beg1Null() {
+                this[this.tableSP_RP_BSBR.frac_2swr_beg1Column] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool Iscalculated_hgl_ft1Null() {
+                return this.IsNull(this.tableSP_RP_BSBR.calculated_hgl_ft1Column);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void Setcalculated_hgl_ft1Null() {
+                this[this.tableSP_RP_BSBR.calculated_hgl_ft1Column] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool Iscalculated_dhgl_ft1Null() {
+                return this.IsNull(this.tableSP_RP_BSBR.calculated_dhgl_ft1Column);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void Setcalculated_dhgl_ft1Null() {
+                this[this.tableSP_RP_BSBR.calculated_dhgl_ft1Column] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool Issurchage_ftNull() {
+                return this.IsNull(this.tableSP_RP_BSBR.surchage_ftColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void Setsurchage_ftNull() {
+                this[this.tableSP_RP_BSBR.surchage_ftColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool Isflood_ref_elev_ft1Null() {
+                return this.IsNull(this.tableSP_RP_BSBR.flood_ref_elev_ft1Column);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void Setflood_ref_elev_ft1Null() {
+                this[this.tableSP_RP_BSBR.flood_ref_elev_ft1Column] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool Issan_swr_crown_ft1Null() {
+                return this.IsNull(this.tableSP_RP_BSBR.san_swr_crown_ft1Column);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void Setsan_swr_crown_ft1Null() {
+                this[this.tableSP_RP_BSBR.san_swr_crown_ft1Column] = global::System.Convert.DBNull;
             }
         }
         
@@ -1243,38 +1588,42 @@ namespace SystemsAnalysis.DataAccess.AltCompilerDataSetTableAdapters {
             tableMapping.ColumnMappings.Add("dsc_id", "dsc_id");
             tableMapping.ColumnMappings.Add("parcel_id", "parcel_id");
             tableMapping.ColumnMappings.Add("divide_id", "divide_id");
-            tableMapping.ColumnMappings.Add("us_jelev_ft", "us_jelev_ft");
-            tableMapping.ColumnMappings.Add("ds_jelev_ft", "ds_jelev_ft");
-            tableMapping.ColumnMappings.Add("frac_2swr_beg", "frac_2swr_beg");
-            tableMapping.ColumnMappings.Add("san_swr_crown_ft", "san_swr_crown_ft");
-            tableMapping.ColumnMappings.Add("flood_ref_elev_ft", "flood_ref_elev_ft");
-            tableMapping.ColumnMappings.Add("calculated_hgl_ft", "calculated_hgl_ft");
-            tableMapping.ColumnMappings.Add("calculated_dhgl_ft", "calculated_dhgl_ft");
             tableMapping.ColumnMappings.Add("surcharge_ft", "surcharge_ft");
             tableMapping.ColumnMappings.Add("storm", "storm");
             tableMapping.ColumnMappings.Add("useflag", "useflag");
             tableMapping.ColumnMappings.Add("basin", "basin");
             tableMapping.ColumnMappings.Add("focus_area", "focus_area");
+            tableMapping.ColumnMappings.Add("us_jelev_ft", "us_jelev_ft1");
+            tableMapping.ColumnMappings.Add("ds_jelev_ft", "ds_jelev_ft1");
+            tableMapping.ColumnMappings.Add("frac_2swr_beg", "frac_2swr_beg1");
+            tableMapping.ColumnMappings.Add("calculated_hgl_ft", "calculated_hgl_ft1");
+            tableMapping.ColumnMappings.Add("calculated_dhgl_ft", "calculated_dhgl_ft1");
+            tableMapping.ColumnMappings.Add("surchage_ft", "surchage_ft");
+            tableMapping.ColumnMappings.Add("flood_ref_elev_ft", "flood_ref_elev_ft1");
+            tableMapping.ColumnMappings.Add("san_swr_crown_ft", "san_swr_crown_ft1");
+            tableMapping.ColumnMappings.Add("hgl_comp_rp_id", "hgl_comp_rp_id");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [SP_RP_BSBR] ([dsc_id], [parcel_id], [divide_id], [us_jelev_ft], [ds_jelev_ft], [frac_2swr_beg], [san_swr_crown_ft], [flood_ref_elev_ft], [calculated_hgl_ft], [calculated_dhgl_ft], [surcharge_ft], [storm], [useflag], [basin], [focus_area]) VALUES (@dsc_id, @parcel_id, @divide_id, @us_jelev_ft, @ds_jelev_ft, @frac_2swr_beg, @san_swr_crown_ft, @flood_ref_elev_ft, @calculated_hgl_ft, @calculated_dhgl_ft, @surcharge_ft, @storm, @useflag, @basin, @focus_area)";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [SP_RP_BSBR_new] ([OBJECTID], [dsc_id], [parcel_id], [divide_id], [us_jelev_ft], [ds_jelev_ft], [frac_2swr_beg], [calculated_hgl_ft], [calculated_dhgl_ft], [surchage_ft], [flood_ref_elev_ft], [san_swr_crown_ft], [storm], [basin], [useflag], [hgl_comp_rp_id], [focus_area]) VALUES (@OBJECTID, @dsc_id, @parcel_id, @divide_id, @us_jelev_ft, @ds_jelev_ft, @frac_2swr_beg, @calculated_hgl_ft, @calculated_dhgl_ft, @surchage_ft, @flood_ref_elev_ft, @san_swr_crown_ft, @storm, @basin, @useflag, @hgl_comp_rp_id, @focus_area)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@OBJECTID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "OBJECTID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@dsc_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "dsc_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@parcel_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "parcel_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@divide_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "divide_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@us_jelev_ft", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "us_jelev_ft", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ds_jelev_ft", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ds_jelev_ft", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@frac_2swr_beg", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "frac_2swr_beg", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@san_swr_crown_ft", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "san_swr_crown_ft", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@flood_ref_elev_ft", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "flood_ref_elev_ft", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@calculated_hgl_ft", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "calculated_hgl_ft", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@calculated_dhgl_ft", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "calculated_dhgl_ft", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@surcharge_ft", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "surcharge_ft", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@storm", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "storm", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@us_jelev_ft", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 38, 8, "us_jelev_ft", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ds_jelev_ft", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 38, 8, "ds_jelev_ft", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@frac_2swr_beg", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 38, 8, "frac_2swr_beg", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@calculated_hgl_ft", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 38, 8, "calculated_hgl_ft", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@calculated_dhgl_ft", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 38, 8, "calculated_dhgl_ft", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@surchage_ft", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 38, 8, "surchage_ft", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@flood_ref_elev_ft", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 38, 8, "flood_ref_elev_ft", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@san_swr_crown_ft", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 38, 8, "san_swr_crown_ft", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@storm", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "storm", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@basin", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "basin", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@useflag", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "useflag", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@basin", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "basin", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@focus_area", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "focus_area", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@hgl_comp_rp_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "hgl_comp_rp_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@focus_area", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "focus_area", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1288,7 +1637,7 @@ namespace SystemsAnalysis.DataAccess.AltCompilerDataSetTableAdapters {
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT     SP_RP_BSBR.*\r\nFROM         SP_RP_BSBR";
+            this._commandCollection[0].CommandText = "SELECT     SP_RP_BSBR_new.*\r\nFROM         SP_RP_BSBR_new";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -1337,116 +1686,6 @@ namespace SystemsAnalysis.DataAccess.AltCompilerDataSetTableAdapters {
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         public virtual int Update(global::System.Data.DataRow[] dataRows) {
             return this.Adapter.Update(dataRows);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(global::System.Nullable<int> dsc_id, global::System.Nullable<int> parcel_id, global::System.Nullable<int> divide_id, global::System.Nullable<double> us_jelev_ft, global::System.Nullable<double> ds_jelev_ft, global::System.Nullable<double> frac_2swr_beg, global::System.Nullable<double> san_swr_crown_ft, global::System.Nullable<double> flood_ref_elev_ft, global::System.Nullable<double> calculated_hgl_ft, global::System.Nullable<double> calculated_dhgl_ft, global::System.Nullable<double> surcharge_ft, string storm, global::System.Nullable<short> useflag, string basin, string focus_area) {
-            if ((dsc_id.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[0].Value = ((int)(dsc_id.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
-            }
-            if ((parcel_id.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[1].Value = ((int)(parcel_id.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
-            if ((divide_id.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[2].Value = ((int)(divide_id.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            if ((us_jelev_ft.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[3].Value = ((double)(us_jelev_ft.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            if ((ds_jelev_ft.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[4].Value = ((double)(ds_jelev_ft.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
-            if ((frac_2swr_beg.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[5].Value = ((double)(frac_2swr_beg.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[5].Value = global::System.DBNull.Value;
-            }
-            if ((san_swr_crown_ft.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[6].Value = ((double)(san_swr_crown_ft.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            if ((flood_ref_elev_ft.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[7].Value = ((double)(flood_ref_elev_ft.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[7].Value = global::System.DBNull.Value;
-            }
-            if ((calculated_hgl_ft.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[8].Value = ((double)(calculated_hgl_ft.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[8].Value = global::System.DBNull.Value;
-            }
-            if ((calculated_dhgl_ft.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[9].Value = ((double)(calculated_dhgl_ft.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[9].Value = global::System.DBNull.Value;
-            }
-            if ((surcharge_ft.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[10].Value = ((double)(surcharge_ft.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[10].Value = global::System.DBNull.Value;
-            }
-            if ((storm == null)) {
-                this.Adapter.InsertCommand.Parameters[11].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[11].Value = ((string)(storm));
-            }
-            if ((useflag.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[12].Value = ((short)(useflag.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[12].Value = global::System.DBNull.Value;
-            }
-            if ((basin == null)) {
-                this.Adapter.InsertCommand.Parameters[13].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[13].Value = ((string)(basin));
-            }
-            if ((focus_area == null)) {
-                this.Adapter.InsertCommand.Parameters[14].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[14].Value = ((string)(focus_area));
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
-            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.InsertCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.InsertCommand.Connection.Close();
-                }
-            }
         }
     }
     
