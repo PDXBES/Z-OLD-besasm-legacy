@@ -50,6 +50,7 @@ namespace SWI_2
 
         private void buttonUpdateDatabase_Click(object sender, EventArgs e)
         {
+            CheckEvaluatorsAssociatedWithThisSurveyPage(sender, e);
             this.fKSURVEYPAGEVIEWBindingSource.EndEdit();
             this.sWSP_SURVEY_PAGETableAdapter.Update(sANDBOXDataSet);
         }
