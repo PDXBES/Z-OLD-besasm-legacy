@@ -918,6 +918,8 @@ namespace SWI_2 {
             
             private global::System.Data.DataColumn columncomment;
             
+            private global::System.Data.DataColumn columnfull_width_in;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public SWSP_CULVERTDataTable() {
                 this.TableName = "SWSP_CULVERT";
@@ -1026,6 +1028,13 @@ namespace SWI_2 {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn full_width_inColumn {
+                get {
+                    return this.columnfull_width_in;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -1054,7 +1063,7 @@ namespace SWI_2 {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public SWSP_CULVERTRow AddSWSP_CULVERTRow(SWSP_GLOBAL_IDRow parentSWSP_GLOBAL_IDRowByFK_SWSP_CULVERT_SWSP_GLOBAL_ID, SWSP_SURVEY_PAGERow parentSWSP_SURVEY_PAGERowByFK_CULVERT_SURVEY_PAGE, string node, SWSP_FACING_TYPERow parentSWSP_FACING_TYPERowByFK_CULVERT_FACING_TYPE, SWSP_CULVERT_OPENING_TYPERow parentSWSP_CULVERT_OPENING_TYPERowByFK_CULVERT_CULVERT_OPENING_TYPE, SWSP_SHAPE_TYPERow parentSWSP_SHAPE_TYPERowByFK_CULVERT_SHAPE_TYPE, double full_diam_in, double unobstructed_height_in, SWSP_MATERIAL_TYPERow parentSWSP_MATERIAL_TYPERowByFK_CULVERT_MATERIAL_TYPE, string comment) {
+            public SWSP_CULVERTRow AddSWSP_CULVERTRow(SWSP_GLOBAL_IDRow parentSWSP_GLOBAL_IDRowByFK_SWSP_CULVERT_SWSP_GLOBAL_ID, SWSP_SURVEY_PAGERow parentSWSP_SURVEY_PAGERowByFK_CULVERT_SURVEY_PAGE, string node, SWSP_FACING_TYPERow parentSWSP_FACING_TYPERowByFK_CULVERT_FACING_TYPE, SWSP_CULVERT_OPENING_TYPERow parentSWSP_CULVERT_OPENING_TYPERowByFK_CULVERT_CULVERT_OPENING_TYPE, SWSP_SHAPE_TYPERow parentSWSP_SHAPE_TYPERowByFK_CULVERT_SHAPE_TYPE, double full_diam_in, double unobstructed_height_in, SWSP_MATERIAL_TYPERow parentSWSP_MATERIAL_TYPERowByFK_CULVERT_MATERIAL_TYPE, string comment, double full_width_in) {
                 SWSP_CULVERTRow rowSWSP_CULVERTRow = ((SWSP_CULVERTRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -1067,7 +1076,8 @@ namespace SWI_2 {
                         full_diam_in,
                         unobstructed_height_in,
                         null,
-                        comment};
+                        comment,
+                        full_width_in};
                 if ((parentSWSP_GLOBAL_IDRowByFK_SWSP_CULVERT_SWSP_GLOBAL_ID != null)) {
                     columnValuesArray[1] = parentSWSP_GLOBAL_IDRowByFK_SWSP_CULVERT_SWSP_GLOBAL_ID[0];
                 }
@@ -1122,6 +1132,7 @@ namespace SWI_2 {
                 this.columnunobstructed_height_in = base.Columns["unobstructed_height_in"];
                 this.columnmaterial = base.Columns["material"];
                 this.columncomment = base.Columns["comment"];
+                this.columnfull_width_in = base.Columns["full_width_in"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1148,6 +1159,8 @@ namespace SWI_2 {
                 base.Columns.Add(this.columnmaterial);
                 this.columncomment = new global::System.Data.DataColumn("comment", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columncomment);
+                this.columnfull_width_in = new global::System.Data.DataColumn("full_width_in", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnfull_width_in);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnculvert_id}, true));
                 this.columnculvert_id.AutoIncrement = true;
@@ -3288,6 +3301,8 @@ namespace SWI_2 {
             
             private global::System.Data.DataColumn columncomment;
             
+            private global::System.Data.DataColumn columninside_width_in;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public SWSP_PIPEDataTable() {
                 this.TableName = "SWSP_PIPE";
@@ -3396,6 +3411,13 @@ namespace SWI_2 {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn inside_width_inColumn {
+                get {
+                    return this.columninside_width_in;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -3424,7 +3446,7 @@ namespace SWI_2 {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public SWSP_PIPERow AddSWSP_PIPERow(SWSP_GLOBAL_IDRow parentSWSP_GLOBAL_IDRowByFK_SWSP_PIPE_SWSP_GLOBAL_ID, SWSP_SURVEY_PAGERow parentSWSP_SURVEY_PAGERowByFK_PIPE_SURVEY_PAGE, string us_node, string ds_node, double us_depth_in, double ds_depth_in, double inside_diam_in, SWSP_MATERIAL_TYPERow parentSWSP_MATERIAL_TYPERowByFK_PIPE_MATERIAL_TYPE, SWSP_SHAPE_TYPERow parentSWSP_SHAPE_TYPERowByFK_PIPE_SHAPE_TYPE, string comment) {
+            public SWSP_PIPERow AddSWSP_PIPERow(SWSP_GLOBAL_IDRow parentSWSP_GLOBAL_IDRowByFK_SWSP_PIPE_SWSP_GLOBAL_ID, SWSP_SURVEY_PAGERow parentSWSP_SURVEY_PAGERowByFK_PIPE_SURVEY_PAGE, string us_node, string ds_node, double us_depth_in, double ds_depth_in, double inside_diam_in, SWSP_MATERIAL_TYPERow parentSWSP_MATERIAL_TYPERowByFK_PIPE_MATERIAL_TYPE, SWSP_SHAPE_TYPERow parentSWSP_SHAPE_TYPERowByFK_PIPE_SHAPE_TYPE, string comment, double inside_width_in) {
                 SWSP_PIPERow rowSWSP_PIPERow = ((SWSP_PIPERow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -3437,7 +3459,8 @@ namespace SWI_2 {
                         inside_diam_in,
                         null,
                         null,
-                        comment};
+                        comment,
+                        inside_width_in};
                 if ((parentSWSP_GLOBAL_IDRowByFK_SWSP_PIPE_SWSP_GLOBAL_ID != null)) {
                     columnValuesArray[1] = parentSWSP_GLOBAL_IDRowByFK_SWSP_PIPE_SWSP_GLOBAL_ID[0];
                 }
@@ -3486,6 +3509,7 @@ namespace SWI_2 {
                 this.columnmaterial = base.Columns["material"];
                 this.columnshape = base.Columns["shape"];
                 this.columncomment = base.Columns["comment"];
+                this.columninside_width_in = base.Columns["inside_width_in"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3512,6 +3536,8 @@ namespace SWI_2 {
                 base.Columns.Add(this.columnshape);
                 this.columncomment = new global::System.Data.DataColumn("comment", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columncomment);
+                this.columninside_width_in = new global::System.Data.DataColumn("inside_width_in", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columninside_width_in);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnpipe_id}, true));
                 this.columnpipe_id.AutoIncrement = true;
@@ -5730,6 +5756,21 @@ namespace SWI_2 {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public double full_width_in {
+                get {
+                    try {
+                        return ((double)(this[this.tableSWSP_CULVERT.full_width_inColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'full_width_in\' in table \'SWSP_CULVERT\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSWSP_CULVERT.full_width_inColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public SWSP_CULVERT_OPENING_TYPERow SWSP_CULVERT_OPENING_TYPERow {
                 get {
                     return ((SWSP_CULVERT_OPENING_TYPERow)(this.GetParentRow(this.Table.ParentRelations["FK_CULVERT_CULVERT_OPENING_TYPE"])));
@@ -5867,6 +5908,16 @@ namespace SWI_2 {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public void SetcommentNull() {
                 this[this.tableSWSP_CULVERT.commentColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool Isfull_width_inNull() {
+                return this.IsNull(this.tableSWSP_CULVERT.full_width_inColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void Setfull_width_inNull() {
+                this[this.tableSWSP_CULVERT.full_width_inColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -6846,6 +6897,21 @@ namespace SWI_2 {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public double inside_width_in {
+                get {
+                    try {
+                        return ((double)(this[this.tableSWSP_PIPE.inside_width_inColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'inside_width_in\' in table \'SWSP_PIPE\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSWSP_PIPE.inside_width_inColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public SWSP_MATERIAL_TYPERow SWSP_MATERIAL_TYPERow {
                 get {
                     return ((SWSP_MATERIAL_TYPERow)(this.GetParentRow(this.Table.ParentRelations["FK_PIPE_MATERIAL_TYPE"])));
@@ -6963,6 +7029,16 @@ namespace SWI_2 {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public void SetcommentNull() {
                 this[this.tableSWSP_PIPE.commentColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool Isinside_width_inNull() {
+                return this.IsNull(this.tableSWSP_PIPE.inside_width_inColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void Setinside_width_inNull() {
+                this[this.tableSWSP_PIPE.inside_width_inColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -8257,10 +8333,11 @@ namespace SWI_2.SANDBOXDataSetTableAdapters {
             tableMapping.ColumnMappings.Add("unobstructed_height_in", "unobstructed_height_in");
             tableMapping.ColumnMappings.Add("material", "material");
             tableMapping.ColumnMappings.Add("comment", "comment");
+            tableMapping.ColumnMappings.Add("full_width_in", "full_width_in");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [GIS].[SWSP_CULVERT] WHERE (([culvert_id] = @Original_culvert_id) AND ([global_id] = @Original_global_id) AND ([survey_page_id] = @Original_survey_page_id) AND ((@IsNull_node = 1 AND [node] IS NULL) OR ([node] = @Original_node)) AND ((@IsNull_facing = 1 AND [facing] IS NULL) OR ([facing] = @Original_facing)) AND ((@IsNull_culvert_opening = 1 AND [culvert_opening] IS NULL) OR ([culvert_opening] = @Original_culvert_opening)) AND ((@IsNull_shape = 1 AND [shape] IS NULL) OR ([shape] = @Original_shape)) AND ((@IsNull_full_diam_in = 1 AND [full_diam_in] IS NULL) OR ([full_diam_in] = @Original_full_diam_in)) AND ((@IsNull_unobstructed_height_in = 1 AND [unobstructed_height_in] IS NULL) OR ([unobstructed_height_in] = @Original_unobstructed_height_in)) AND ((@IsNull_material = 1 AND [material] IS NULL) OR ([material] = @Original_material)))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [SWSP_CULVERT] WHERE (([culvert_id] = @Original_culvert_id) AND ([global_id] = @Original_global_id) AND ([survey_page_id] = @Original_survey_page_id) AND ((@IsNull_node = 1 AND [node] IS NULL) OR ([node] = @Original_node)) AND ((@IsNull_facing = 1 AND [facing] IS NULL) OR ([facing] = @Original_facing)) AND ((@IsNull_culvert_opening = 1 AND [culvert_opening] IS NULL) OR ([culvert_opening] = @Original_culvert_opening)) AND ((@IsNull_shape = 1 AND [shape] IS NULL) OR ([shape] = @Original_shape)) AND ((@IsNull_full_diam_in = 1 AND [full_diam_in] IS NULL) OR ([full_diam_in] = @Original_full_diam_in)) AND ((@IsNull_full_width_in = 1 AND [full_width_in] IS NULL) OR ([full_width_in] = @Original_full_width_in)) AND ((@IsNull_unobstructed_height_in = 1 AND [unobstructed_height_in] IS NULL) OR ([unobstructed_height_in] = @Original_unobstructed_height_in)) AND ((@IsNull_material = 1 AND [material] IS NULL) OR ([material] = @Original_material)))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_culvert_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "culvert_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_global_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "global_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -8275,14 +8352,16 @@ namespace SWI_2.SANDBOXDataSetTableAdapters {
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_shape", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "shape", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_full_diam_in", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "full_diam_in", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_full_diam_in", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "full_diam_in", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_full_width_in", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "full_width_in", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_full_width_in", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "full_width_in", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_unobstructed_height_in", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "unobstructed_height_in", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_unobstructed_height_in", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "unobstructed_height_in", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_material", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "material", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_material", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "material", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [GIS].[SWSP_CULVERT] ([global_id], [survey_page_id], [node], [facing], [culvert_opening], [shape], [full_diam_in], [unobstructed_height_in], [material], [comment]) VALUES (@global_id, @survey_page_id, @node, @facing, @culvert_opening, @shape, @full_diam_in, @unobstructed_height_in, @material, @comment);
-SELECT culvert_id, global_id, survey_page_id, node, facing, culvert_opening, shape, full_diam_in, unobstructed_height_in, material, comment FROM SWSP_CULVERT WHERE (culvert_id = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [SWSP_CULVERT] ([global_id], [survey_page_id], [node], [facing], [culvert_opening], [shape], [full_diam_in], [full_width_in], [unobstructed_height_in], [material], [comment]) VALUES (@global_id, @survey_page_id, @node, @facing, @culvert_opening, @shape, @full_diam_in, @full_width_in, @unobstructed_height_in, @material, @comment);
+SELECT culvert_id, global_id, survey_page_id, node, facing, culvert_opening, shape, full_diam_in, full_width_in, unobstructed_height_in, material, comment FROM SWSP_CULVERT WHERE (culvert_id = SCOPE_IDENTITY())";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@global_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "global_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@survey_page_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "survey_page_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -8291,13 +8370,14 @@ SELECT culvert_id, global_id, survey_page_id, node, facing, culvert_opening, sha
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@culvert_opening", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "culvert_opening", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@shape", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "shape", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@full_diam_in", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "full_diam_in", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@full_width_in", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "full_width_in", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@unobstructed_height_in", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "unobstructed_height_in", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@material", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "material", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@comment", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "comment", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [GIS].[SWSP_CULVERT] SET [global_id] = @global_id, [survey_page_id] = @survey_page_id, [node] = @node, [facing] = @facing, [culvert_opening] = @culvert_opening, [shape] = @shape, [full_diam_in] = @full_diam_in, [unobstructed_height_in] = @unobstructed_height_in, [material] = @material, [comment] = @comment WHERE (([culvert_id] = @Original_culvert_id) AND ([global_id] = @Original_global_id) AND ([survey_page_id] = @Original_survey_page_id) AND ((@IsNull_node = 1 AND [node] IS NULL) OR ([node] = @Original_node)) AND ((@IsNull_facing = 1 AND [facing] IS NULL) OR ([facing] = @Original_facing)) AND ((@IsNull_culvert_opening = 1 AND [culvert_opening] IS NULL) OR ([culvert_opening] = @Original_culvert_opening)) AND ((@IsNull_shape = 1 AND [shape] IS NULL) OR ([shape] = @Original_shape)) AND ((@IsNull_full_diam_in = 1 AND [full_diam_in] IS NULL) OR ([full_diam_in] = @Original_full_diam_in)) AND ((@IsNull_unobstructed_height_in = 1 AND [unobstructed_height_in] IS NULL) OR ([unobstructed_height_in] = @Original_unobstructed_height_in)) AND ((@IsNull_material = 1 AND [material] IS NULL) OR ([material] = @Original_material)));
-SELECT culvert_id, global_id, survey_page_id, node, facing, culvert_opening, shape, full_diam_in, unobstructed_height_in, material, comment FROM SWSP_CULVERT WHERE (culvert_id = @culvert_id)";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [SWSP_CULVERT] SET [global_id] = @global_id, [survey_page_id] = @survey_page_id, [node] = @node, [facing] = @facing, [culvert_opening] = @culvert_opening, [shape] = @shape, [full_diam_in] = @full_diam_in, [full_width_in] = @full_width_in, [unobstructed_height_in] = @unobstructed_height_in, [material] = @material, [comment] = @comment WHERE (([culvert_id] = @Original_culvert_id) AND ([global_id] = @Original_global_id) AND ([survey_page_id] = @Original_survey_page_id) AND ((@IsNull_node = 1 AND [node] IS NULL) OR ([node] = @Original_node)) AND ((@IsNull_facing = 1 AND [facing] IS NULL) OR ([facing] = @Original_facing)) AND ((@IsNull_culvert_opening = 1 AND [culvert_opening] IS NULL) OR ([culvert_opening] = @Original_culvert_opening)) AND ((@IsNull_shape = 1 AND [shape] IS NULL) OR ([shape] = @Original_shape)) AND ((@IsNull_full_diam_in = 1 AND [full_diam_in] IS NULL) OR ([full_diam_in] = @Original_full_diam_in)) AND ((@IsNull_full_width_in = 1 AND [full_width_in] IS NULL) OR ([full_width_in] = @Original_full_width_in)) AND ((@IsNull_unobstructed_height_in = 1 AND [unobstructed_height_in] IS NULL) OR ([unobstructed_height_in] = @Original_unobstructed_height_in)) AND ((@IsNull_material = 1 AND [material] IS NULL) OR ([material] = @Original_material)));
+SELECT culvert_id, global_id, survey_page_id, node, facing, culvert_opening, shape, full_diam_in, full_width_in, unobstructed_height_in, material, comment FROM SWSP_CULVERT WHERE (culvert_id = @culvert_id)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@global_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "global_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@survey_page_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "survey_page_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -8306,6 +8386,7 @@ SELECT culvert_id, global_id, survey_page_id, node, facing, culvert_opening, sha
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@culvert_opening", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "culvert_opening", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@shape", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "shape", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@full_diam_in", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "full_diam_in", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@full_width_in", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "full_width_in", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@unobstructed_height_in", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "unobstructed_height_in", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@material", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "material", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@comment", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "comment", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -8322,6 +8403,8 @@ SELECT culvert_id, global_id, survey_page_id, node, facing, culvert_opening, sha
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_shape", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "shape", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_full_diam_in", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "full_diam_in", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_full_diam_in", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "full_diam_in", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_full_width_in", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "full_width_in", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_full_width_in", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "full_width_in", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_unobstructed_height_in", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "unobstructed_height_in", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_unobstructed_height_in", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "unobstructed_height_in", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_material", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "material", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
@@ -8340,9 +8423,9 @@ SELECT culvert_id, global_id, survey_page_id, node, facing, culvert_opening, sha
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[4];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT culvert_id, global_id, survey_page_id, node, facing, culvert_opening, shap" +
-                "e, full_diam_in, unobstructed_height_in, material, comment FROM GIS.SWSP_CULVERT" +
-                "";
+            this._commandCollection[0].CommandText = "SELECT        culvert_id, global_id, survey_page_id, node, facing, culvert_openin" +
+                "g, shape, full_diam_in, full_width_in, unobstructed_height_in, material, comment" +
+                "\r\nFROM            SWSP_CULVERT";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[1].Connection = this.Connection;
@@ -8414,7 +8497,7 @@ SELECT culvert_id, global_id, survey_page_id, node, facing, culvert_opening, sha
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_culvert_id, int Original_global_id, int Original_survey_page_id, string Original_node, global::System.Nullable<int> Original_facing, global::System.Nullable<int> Original_culvert_opening, global::System.Nullable<int> Original_shape, global::System.Nullable<double> Original_full_diam_in, global::System.Nullable<double> Original_unobstructed_height_in, global::System.Nullable<int> Original_material) {
+        public virtual int Delete(int Original_culvert_id, int Original_global_id, int Original_survey_page_id, string Original_node, global::System.Nullable<int> Original_facing, global::System.Nullable<int> Original_culvert_opening, global::System.Nullable<int> Original_shape, global::System.Nullable<double> Original_full_diam_in, global::System.Nullable<double> Original_full_width_in, global::System.Nullable<double> Original_unobstructed_height_in, global::System.Nullable<int> Original_material) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_culvert_id));
             this.Adapter.DeleteCommand.Parameters[1].Value = ((int)(Original_global_id));
             this.Adapter.DeleteCommand.Parameters[2].Value = ((int)(Original_survey_page_id));
@@ -8458,21 +8541,29 @@ SELECT culvert_id, global_id, survey_page_id, node, facing, culvert_opening, sha
                 this.Adapter.DeleteCommand.Parameters[11].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[12].Value = global::System.DBNull.Value;
             }
-            if ((Original_unobstructed_height_in.HasValue == true)) {
+            if ((Original_full_width_in.HasValue == true)) {
                 this.Adapter.DeleteCommand.Parameters[13].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[14].Value = ((double)(Original_unobstructed_height_in.Value));
+                this.Adapter.DeleteCommand.Parameters[14].Value = ((double)(Original_full_width_in.Value));
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[13].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[14].Value = global::System.DBNull.Value;
             }
-            if ((Original_material.HasValue == true)) {
+            if ((Original_unobstructed_height_in.HasValue == true)) {
                 this.Adapter.DeleteCommand.Parameters[15].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[16].Value = ((int)(Original_material.Value));
+                this.Adapter.DeleteCommand.Parameters[16].Value = ((double)(Original_unobstructed_height_in.Value));
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[15].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[16].Value = global::System.DBNull.Value;
+            }
+            if ((Original_material.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[17].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[18].Value = ((int)(Original_material.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[17].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[18].Value = global::System.DBNull.Value;
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -8493,7 +8584,7 @@ SELECT culvert_id, global_id, survey_page_id, node, facing, culvert_opening, sha
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(int global_id, int survey_page_id, string node, global::System.Nullable<int> facing, global::System.Nullable<int> culvert_opening, global::System.Nullable<int> shape, global::System.Nullable<double> full_diam_in, global::System.Nullable<double> unobstructed_height_in, global::System.Nullable<int> material, string comment) {
+        public virtual int Insert(int global_id, int survey_page_id, string node, global::System.Nullable<int> facing, global::System.Nullable<int> culvert_opening, global::System.Nullable<int> shape, global::System.Nullable<double> full_diam_in, global::System.Nullable<double> full_width_in, global::System.Nullable<double> unobstructed_height_in, global::System.Nullable<int> material, string comment) {
             this.Adapter.InsertCommand.Parameters[0].Value = ((int)(global_id));
             this.Adapter.InsertCommand.Parameters[1].Value = ((int)(survey_page_id));
             if ((node == null)) {
@@ -8526,23 +8617,29 @@ SELECT culvert_id, global_id, survey_page_id, node, facing, culvert_opening, sha
             else {
                 this.Adapter.InsertCommand.Parameters[6].Value = global::System.DBNull.Value;
             }
-            if ((unobstructed_height_in.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[7].Value = ((double)(unobstructed_height_in.Value));
+            if ((full_width_in.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[7].Value = ((double)(full_width_in.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[7].Value = global::System.DBNull.Value;
             }
-            if ((material.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[8].Value = ((int)(material.Value));
+            if ((unobstructed_height_in.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[8].Value = ((double)(unobstructed_height_in.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[8].Value = global::System.DBNull.Value;
             }
-            if ((comment == null)) {
-                this.Adapter.InsertCommand.Parameters[9].Value = global::System.DBNull.Value;
+            if ((material.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[9].Value = ((int)(material.Value));
             }
             else {
-                this.Adapter.InsertCommand.Parameters[9].Value = ((string)(comment));
+                this.Adapter.InsertCommand.Parameters[9].Value = global::System.DBNull.Value;
+            }
+            if ((comment == null)) {
+                this.Adapter.InsertCommand.Parameters[10].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[10].Value = ((string)(comment));
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -8571,6 +8668,7 @@ SELECT culvert_id, global_id, survey_page_id, node, facing, culvert_opening, sha
                     global::System.Nullable<int> culvert_opening, 
                     global::System.Nullable<int> shape, 
                     global::System.Nullable<double> full_diam_in, 
+                    global::System.Nullable<double> full_width_in, 
                     global::System.Nullable<double> unobstructed_height_in, 
                     global::System.Nullable<int> material, 
                     string comment, 
@@ -8582,6 +8680,7 @@ SELECT culvert_id, global_id, survey_page_id, node, facing, culvert_opening, sha
                     global::System.Nullable<int> Original_culvert_opening, 
                     global::System.Nullable<int> Original_shape, 
                     global::System.Nullable<double> Original_full_diam_in, 
+                    global::System.Nullable<double> Original_full_width_in, 
                     global::System.Nullable<double> Original_unobstructed_height_in, 
                     global::System.Nullable<int> Original_material, 
                     int culvert_id) {
@@ -8617,84 +8716,98 @@ SELECT culvert_id, global_id, survey_page_id, node, facing, culvert_opening, sha
             else {
                 this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
             }
-            if ((unobstructed_height_in.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((double)(unobstructed_height_in.Value));
+            if ((full_width_in.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((double)(full_width_in.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
             }
-            if ((material.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((int)(material.Value));
+            if ((unobstructed_height_in.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((double)(unobstructed_height_in.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
             }
-            if ((comment == null)) {
+            if ((material.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((int)(material.Value));
+            }
+            else {
                 this.Adapter.UpdateCommand.Parameters[9].Value = global::System.DBNull.Value;
             }
-            else {
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((string)(comment));
+            if ((comment == null)) {
+                this.Adapter.UpdateCommand.Parameters[10].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[10].Value = ((int)(Original_culvert_id));
-            this.Adapter.UpdateCommand.Parameters[11].Value = ((int)(Original_global_id));
-            this.Adapter.UpdateCommand.Parameters[12].Value = ((int)(Original_survey_page_id));
+            else {
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((string)(comment));
+            }
+            this.Adapter.UpdateCommand.Parameters[11].Value = ((int)(Original_culvert_id));
+            this.Adapter.UpdateCommand.Parameters[12].Value = ((int)(Original_global_id));
+            this.Adapter.UpdateCommand.Parameters[13].Value = ((int)(Original_survey_page_id));
             if ((Original_node == null)) {
-                this.Adapter.UpdateCommand.Parameters[13].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[14].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[15].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[13].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[14].Value = ((string)(Original_node));
+                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[15].Value = ((string)(Original_node));
             }
             if ((Original_facing.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[15].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[16].Value = ((int)(Original_facing.Value));
+                this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[17].Value = ((int)(Original_facing.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[15].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[16].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[17].Value = global::System.DBNull.Value;
             }
             if ((Original_culvert_opening.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[17].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[18].Value = ((int)(Original_culvert_opening.Value));
+                this.Adapter.UpdateCommand.Parameters[18].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[19].Value = ((int)(Original_culvert_opening.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[17].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[18].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[18].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[19].Value = global::System.DBNull.Value;
             }
             if ((Original_shape.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[19].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[20].Value = ((int)(Original_shape.Value));
+                this.Adapter.UpdateCommand.Parameters[20].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[21].Value = ((int)(Original_shape.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[19].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[20].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[20].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[21].Value = global::System.DBNull.Value;
             }
             if ((Original_full_diam_in.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[21].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[22].Value = ((double)(Original_full_diam_in.Value));
+                this.Adapter.UpdateCommand.Parameters[22].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[23].Value = ((double)(Original_full_diam_in.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[21].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[22].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[22].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[23].Value = global::System.DBNull.Value;
+            }
+            if ((Original_full_width_in.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[24].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[25].Value = ((double)(Original_full_width_in.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[24].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[25].Value = global::System.DBNull.Value;
             }
             if ((Original_unobstructed_height_in.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[23].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[24].Value = ((double)(Original_unobstructed_height_in.Value));
+                this.Adapter.UpdateCommand.Parameters[26].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[27].Value = ((double)(Original_unobstructed_height_in.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[23].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[24].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[26].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[27].Value = global::System.DBNull.Value;
             }
             if ((Original_material.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[25].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[26].Value = ((int)(Original_material.Value));
+                this.Adapter.UpdateCommand.Parameters[28].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[29].Value = ((int)(Original_material.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[25].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[26].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[28].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[29].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[27].Value = ((int)(culvert_id));
+            this.Adapter.UpdateCommand.Parameters[30].Value = ((int)(culvert_id));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -8722,6 +8835,7 @@ SELECT culvert_id, global_id, survey_page_id, node, facing, culvert_opening, sha
                     global::System.Nullable<int> culvert_opening, 
                     global::System.Nullable<int> shape, 
                     global::System.Nullable<double> full_diam_in, 
+                    global::System.Nullable<double> full_width_in, 
                     global::System.Nullable<double> unobstructed_height_in, 
                     global::System.Nullable<int> material, 
                     string comment, 
@@ -8733,9 +8847,10 @@ SELECT culvert_id, global_id, survey_page_id, node, facing, culvert_opening, sha
                     global::System.Nullable<int> Original_culvert_opening, 
                     global::System.Nullable<int> Original_shape, 
                     global::System.Nullable<double> Original_full_diam_in, 
+                    global::System.Nullable<double> Original_full_width_in, 
                     global::System.Nullable<double> Original_unobstructed_height_in, 
                     global::System.Nullable<int> Original_material) {
-            return this.Update(global_id, survey_page_id, node, facing, culvert_opening, shape, full_diam_in, unobstructed_height_in, material, comment, Original_culvert_id, Original_global_id, Original_survey_page_id, Original_node, Original_facing, Original_culvert_opening, Original_shape, Original_full_diam_in, Original_unobstructed_height_in, Original_material, Original_culvert_id);
+            return this.Update(global_id, survey_page_id, node, facing, culvert_opening, shape, full_diam_in, full_width_in, unobstructed_height_in, material, comment, Original_culvert_id, Original_global_id, Original_survey_page_id, Original_node, Original_facing, Original_culvert_opening, Original_shape, Original_full_diam_in, Original_full_width_in, Original_unobstructed_height_in, Original_material, Original_culvert_id);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -11932,10 +12047,11 @@ SELECT photo_id, global_id, location, comment FROM SWSP_PHOTO WHERE (photo_id = 
             tableMapping.ColumnMappings.Add("material", "material");
             tableMapping.ColumnMappings.Add("shape", "shape");
             tableMapping.ColumnMappings.Add("comment", "comment");
+            tableMapping.ColumnMappings.Add("inside_width_in", "inside_width_in");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [GIS].[SWSP_PIPE] WHERE (([pipe_id] = @Original_pipe_id) AND ([global_id] = @Original_global_id) AND ([survey_page_id] = @Original_survey_page_id) AND ((@IsNull_us_node = 1 AND [us_node] IS NULL) OR ([us_node] = @Original_us_node)) AND ((@IsNull_ds_node = 1 AND [ds_node] IS NULL) OR ([ds_node] = @Original_ds_node)) AND ((@IsNull_us_depth_in = 1 AND [us_depth_in] IS NULL) OR ([us_depth_in] = @Original_us_depth_in)) AND ((@IsNull_ds_depth_in = 1 AND [ds_depth_in] IS NULL) OR ([ds_depth_in] = @Original_ds_depth_in)) AND ((@IsNull_inside_diam_in = 1 AND [inside_diam_in] IS NULL) OR ([inside_diam_in] = @Original_inside_diam_in)) AND ((@IsNull_material = 1 AND [material] IS NULL) OR ([material] = @Original_material)) AND ((@IsNull_shape = 1 AND [shape] IS NULL) OR ([shape] = @Original_shape)))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [SWSP_PIPE] WHERE (([pipe_id] = @Original_pipe_id) AND ([global_id] = @Original_global_id) AND ([survey_page_id] = @Original_survey_page_id) AND ((@IsNull_us_node = 1 AND [us_node] IS NULL) OR ([us_node] = @Original_us_node)) AND ((@IsNull_ds_node = 1 AND [ds_node] IS NULL) OR ([ds_node] = @Original_ds_node)) AND ((@IsNull_us_depth_in = 1 AND [us_depth_in] IS NULL) OR ([us_depth_in] = @Original_us_depth_in)) AND ((@IsNull_ds_depth_in = 1 AND [ds_depth_in] IS NULL) OR ([ds_depth_in] = @Original_ds_depth_in)) AND ((@IsNull_inside_diam_in = 1 AND [inside_diam_in] IS NULL) OR ([inside_diam_in] = @Original_inside_diam_in)) AND ((@IsNull_inside_width_in = 1 AND [inside_width_in] IS NULL) OR ([inside_width_in] = @Original_inside_width_in)) AND ((@IsNull_material = 1 AND [material] IS NULL) OR ([material] = @Original_material)) AND ((@IsNull_shape = 1 AND [shape] IS NULL) OR ([shape] = @Original_shape)))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_pipe_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "pipe_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_global_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "global_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -11950,14 +12066,16 @@ SELECT photo_id, global_id, location, comment FROM SWSP_PHOTO WHERE (photo_id = 
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ds_depth_in", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ds_depth_in", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_inside_diam_in", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "inside_diam_in", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_inside_diam_in", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "inside_diam_in", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_inside_width_in", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "inside_width_in", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_inside_width_in", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "inside_width_in", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_material", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "material", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_material", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "material", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_shape", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "shape", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_shape", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "shape", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [GIS].[SWSP_PIPE] ([global_id], [survey_page_id], [us_node], [ds_node], [us_depth_in], [ds_depth_in], [inside_diam_in], [material], [shape], [comment]) VALUES (@global_id, @survey_page_id, @us_node, @ds_node, @us_depth_in, @ds_depth_in, @inside_diam_in, @material, @shape, @comment);
-SELECT pipe_id, global_id, survey_page_id, us_node, ds_node, us_depth_in, ds_depth_in, inside_diam_in, material, shape, comment FROM SWSP_PIPE WHERE (pipe_id = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [SWSP_PIPE] ([global_id], [survey_page_id], [us_node], [ds_node], [us_depth_in], [ds_depth_in], [inside_diam_in], [inside_width_in], [material], [shape], [comment]) VALUES (@global_id, @survey_page_id, @us_node, @ds_node, @us_depth_in, @ds_depth_in, @inside_diam_in, @inside_width_in, @material, @shape, @comment);
+SELECT pipe_id, global_id, survey_page_id, us_node, ds_node, us_depth_in, ds_depth_in, inside_diam_in, inside_width_in, material, shape, comment FROM SWSP_PIPE WHERE (pipe_id = SCOPE_IDENTITY())";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@global_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "global_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@survey_page_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "survey_page_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -11966,13 +12084,14 @@ SELECT pipe_id, global_id, survey_page_id, us_node, ds_node, us_depth_in, ds_dep
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@us_depth_in", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "us_depth_in", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ds_depth_in", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ds_depth_in", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@inside_diam_in", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "inside_diam_in", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@inside_width_in", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "inside_width_in", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@material", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "material", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@shape", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "shape", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@comment", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "comment", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [GIS].[SWSP_PIPE] SET [global_id] = @global_id, [survey_page_id] = @survey_page_id, [us_node] = @us_node, [ds_node] = @ds_node, [us_depth_in] = @us_depth_in, [ds_depth_in] = @ds_depth_in, [inside_diam_in] = @inside_diam_in, [material] = @material, [shape] = @shape, [comment] = @comment WHERE (([pipe_id] = @Original_pipe_id) AND ([global_id] = @Original_global_id) AND ([survey_page_id] = @Original_survey_page_id) AND ((@IsNull_us_node = 1 AND [us_node] IS NULL) OR ([us_node] = @Original_us_node)) AND ((@IsNull_ds_node = 1 AND [ds_node] IS NULL) OR ([ds_node] = @Original_ds_node)) AND ((@IsNull_us_depth_in = 1 AND [us_depth_in] IS NULL) OR ([us_depth_in] = @Original_us_depth_in)) AND ((@IsNull_ds_depth_in = 1 AND [ds_depth_in] IS NULL) OR ([ds_depth_in] = @Original_ds_depth_in)) AND ((@IsNull_inside_diam_in = 1 AND [inside_diam_in] IS NULL) OR ([inside_diam_in] = @Original_inside_diam_in)) AND ((@IsNull_material = 1 AND [material] IS NULL) OR ([material] = @Original_material)) AND ((@IsNull_shape = 1 AND [shape] IS NULL) OR ([shape] = @Original_shape)));
-SELECT pipe_id, global_id, survey_page_id, us_node, ds_node, us_depth_in, ds_depth_in, inside_diam_in, material, shape, comment FROM SWSP_PIPE WHERE (pipe_id = @pipe_id)";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [SWSP_PIPE] SET [global_id] = @global_id, [survey_page_id] = @survey_page_id, [us_node] = @us_node, [ds_node] = @ds_node, [us_depth_in] = @us_depth_in, [ds_depth_in] = @ds_depth_in, [inside_diam_in] = @inside_diam_in, [inside_width_in] = @inside_width_in, [material] = @material, [shape] = @shape, [comment] = @comment WHERE (([pipe_id] = @Original_pipe_id) AND ([global_id] = @Original_global_id) AND ([survey_page_id] = @Original_survey_page_id) AND ((@IsNull_us_node = 1 AND [us_node] IS NULL) OR ([us_node] = @Original_us_node)) AND ((@IsNull_ds_node = 1 AND [ds_node] IS NULL) OR ([ds_node] = @Original_ds_node)) AND ((@IsNull_us_depth_in = 1 AND [us_depth_in] IS NULL) OR ([us_depth_in] = @Original_us_depth_in)) AND ((@IsNull_ds_depth_in = 1 AND [ds_depth_in] IS NULL) OR ([ds_depth_in] = @Original_ds_depth_in)) AND ((@IsNull_inside_diam_in = 1 AND [inside_diam_in] IS NULL) OR ([inside_diam_in] = @Original_inside_diam_in)) AND ((@IsNull_inside_width_in = 1 AND [inside_width_in] IS NULL) OR ([inside_width_in] = @Original_inside_width_in)) AND ((@IsNull_material = 1 AND [material] IS NULL) OR ([material] = @Original_material)) AND ((@IsNull_shape = 1 AND [shape] IS NULL) OR ([shape] = @Original_shape)));
+SELECT pipe_id, global_id, survey_page_id, us_node, ds_node, us_depth_in, ds_depth_in, inside_diam_in, inside_width_in, material, shape, comment FROM SWSP_PIPE WHERE (pipe_id = @pipe_id)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@global_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "global_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@survey_page_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "survey_page_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -11981,6 +12100,7 @@ SELECT pipe_id, global_id, survey_page_id, us_node, ds_node, us_depth_in, ds_dep
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@us_depth_in", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "us_depth_in", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ds_depth_in", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ds_depth_in", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@inside_diam_in", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "inside_diam_in", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@inside_width_in", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "inside_width_in", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@material", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "material", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@shape", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "shape", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@comment", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "comment", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -11997,6 +12117,8 @@ SELECT pipe_id, global_id, survey_page_id, us_node, ds_node, us_depth_in, ds_dep
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ds_depth_in", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ds_depth_in", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_inside_diam_in", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "inside_diam_in", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_inside_diam_in", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "inside_diam_in", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_inside_width_in", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "inside_width_in", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_inside_width_in", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "inside_width_in", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_material", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "material", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_material", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "material", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_shape", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "shape", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
@@ -12015,8 +12137,9 @@ SELECT pipe_id, global_id, survey_page_id, us_node, ds_node, us_depth_in, ds_dep
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[4];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT pipe_id, global_id, survey_page_id, us_node, ds_node, us_depth_in, ds_dept" +
-                "h_in, inside_diam_in, material, shape, comment FROM GIS.SWSP_PIPE";
+            this._commandCollection[0].CommandText = "SELECT        pipe_id, global_id, survey_page_id, us_node, ds_node, us_depth_in, " +
+                "ds_depth_in, inside_diam_in, inside_width_in, material, shape, comment\r\nFROM    " +
+                "        SWSP_PIPE";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[1].Connection = this.Connection;
@@ -12088,7 +12211,7 @@ SELECT pipe_id, global_id, survey_page_id, us_node, ds_node, us_depth_in, ds_dep
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_pipe_id, int Original_global_id, int Original_survey_page_id, string Original_us_node, string Original_ds_node, global::System.Nullable<double> Original_us_depth_in, global::System.Nullable<double> Original_ds_depth_in, global::System.Nullable<double> Original_inside_diam_in, global::System.Nullable<int> Original_material, global::System.Nullable<int> Original_shape) {
+        public virtual int Delete(int Original_pipe_id, int Original_global_id, int Original_survey_page_id, string Original_us_node, string Original_ds_node, global::System.Nullable<double> Original_us_depth_in, global::System.Nullable<double> Original_ds_depth_in, global::System.Nullable<double> Original_inside_diam_in, global::System.Nullable<double> Original_inside_width_in, global::System.Nullable<int> Original_material, global::System.Nullable<int> Original_shape) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_pipe_id));
             this.Adapter.DeleteCommand.Parameters[1].Value = ((int)(Original_global_id));
             this.Adapter.DeleteCommand.Parameters[2].Value = ((int)(Original_survey_page_id));
@@ -12132,21 +12255,29 @@ SELECT pipe_id, global_id, survey_page_id, us_node, ds_node, us_depth_in, ds_dep
                 this.Adapter.DeleteCommand.Parameters[11].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[12].Value = global::System.DBNull.Value;
             }
-            if ((Original_material.HasValue == true)) {
+            if ((Original_inside_width_in.HasValue == true)) {
                 this.Adapter.DeleteCommand.Parameters[13].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[14].Value = ((int)(Original_material.Value));
+                this.Adapter.DeleteCommand.Parameters[14].Value = ((double)(Original_inside_width_in.Value));
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[13].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[14].Value = global::System.DBNull.Value;
             }
-            if ((Original_shape.HasValue == true)) {
+            if ((Original_material.HasValue == true)) {
                 this.Adapter.DeleteCommand.Parameters[15].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[16].Value = ((int)(Original_shape.Value));
+                this.Adapter.DeleteCommand.Parameters[16].Value = ((int)(Original_material.Value));
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[15].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[16].Value = global::System.DBNull.Value;
+            }
+            if ((Original_shape.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[17].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[18].Value = ((int)(Original_shape.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[17].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[18].Value = global::System.DBNull.Value;
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -12167,7 +12298,7 @@ SELECT pipe_id, global_id, survey_page_id, us_node, ds_node, us_depth_in, ds_dep
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(int global_id, int survey_page_id, string us_node, string ds_node, global::System.Nullable<double> us_depth_in, global::System.Nullable<double> ds_depth_in, global::System.Nullable<double> inside_diam_in, global::System.Nullable<int> material, global::System.Nullable<int> shape, string comment) {
+        public virtual int Insert(int global_id, int survey_page_id, string us_node, string ds_node, global::System.Nullable<double> us_depth_in, global::System.Nullable<double> ds_depth_in, global::System.Nullable<double> inside_diam_in, global::System.Nullable<double> inside_width_in, global::System.Nullable<int> material, global::System.Nullable<int> shape, string comment) {
             this.Adapter.InsertCommand.Parameters[0].Value = ((int)(global_id));
             this.Adapter.InsertCommand.Parameters[1].Value = ((int)(survey_page_id));
             if ((us_node == null)) {
@@ -12200,23 +12331,29 @@ SELECT pipe_id, global_id, survey_page_id, us_node, ds_node, us_depth_in, ds_dep
             else {
                 this.Adapter.InsertCommand.Parameters[6].Value = global::System.DBNull.Value;
             }
-            if ((material.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[7].Value = ((int)(material.Value));
+            if ((inside_width_in.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[7].Value = ((double)(inside_width_in.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[7].Value = global::System.DBNull.Value;
             }
-            if ((shape.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[8].Value = ((int)(shape.Value));
+            if ((material.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[8].Value = ((int)(material.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[8].Value = global::System.DBNull.Value;
             }
-            if ((comment == null)) {
-                this.Adapter.InsertCommand.Parameters[9].Value = global::System.DBNull.Value;
+            if ((shape.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[9].Value = ((int)(shape.Value));
             }
             else {
-                this.Adapter.InsertCommand.Parameters[9].Value = ((string)(comment));
+                this.Adapter.InsertCommand.Parameters[9].Value = global::System.DBNull.Value;
+            }
+            if ((comment == null)) {
+                this.Adapter.InsertCommand.Parameters[10].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[10].Value = ((string)(comment));
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -12245,6 +12382,7 @@ SELECT pipe_id, global_id, survey_page_id, us_node, ds_node, us_depth_in, ds_dep
                     global::System.Nullable<double> us_depth_in, 
                     global::System.Nullable<double> ds_depth_in, 
                     global::System.Nullable<double> inside_diam_in, 
+                    global::System.Nullable<double> inside_width_in, 
                     global::System.Nullable<int> material, 
                     global::System.Nullable<int> shape, 
                     string comment, 
@@ -12256,6 +12394,7 @@ SELECT pipe_id, global_id, survey_page_id, us_node, ds_node, us_depth_in, ds_dep
                     global::System.Nullable<double> Original_us_depth_in, 
                     global::System.Nullable<double> Original_ds_depth_in, 
                     global::System.Nullable<double> Original_inside_diam_in, 
+                    global::System.Nullable<double> Original_inside_width_in, 
                     global::System.Nullable<int> Original_material, 
                     global::System.Nullable<int> Original_shape, 
                     int pipe_id) {
@@ -12291,84 +12430,98 @@ SELECT pipe_id, global_id, survey_page_id, us_node, ds_node, us_depth_in, ds_dep
             else {
                 this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
             }
-            if ((material.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((int)(material.Value));
+            if ((inside_width_in.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((double)(inside_width_in.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
             }
-            if ((shape.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((int)(shape.Value));
+            if ((material.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((int)(material.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
             }
-            if ((comment == null)) {
+            if ((shape.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((int)(shape.Value));
+            }
+            else {
                 this.Adapter.UpdateCommand.Parameters[9].Value = global::System.DBNull.Value;
             }
-            else {
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((string)(comment));
+            if ((comment == null)) {
+                this.Adapter.UpdateCommand.Parameters[10].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[10].Value = ((int)(Original_pipe_id));
-            this.Adapter.UpdateCommand.Parameters[11].Value = ((int)(Original_global_id));
-            this.Adapter.UpdateCommand.Parameters[12].Value = ((int)(Original_survey_page_id));
+            else {
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((string)(comment));
+            }
+            this.Adapter.UpdateCommand.Parameters[11].Value = ((int)(Original_pipe_id));
+            this.Adapter.UpdateCommand.Parameters[12].Value = ((int)(Original_global_id));
+            this.Adapter.UpdateCommand.Parameters[13].Value = ((int)(Original_survey_page_id));
             if ((Original_us_node == null)) {
-                this.Adapter.UpdateCommand.Parameters[13].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[14].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[15].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[13].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[14].Value = ((string)(Original_us_node));
+                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[15].Value = ((string)(Original_us_node));
             }
             if ((Original_ds_node == null)) {
-                this.Adapter.UpdateCommand.Parameters[15].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[16].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[17].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[15].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[16].Value = ((string)(Original_ds_node));
+                this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[17].Value = ((string)(Original_ds_node));
             }
             if ((Original_us_depth_in.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[17].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[18].Value = ((double)(Original_us_depth_in.Value));
+                this.Adapter.UpdateCommand.Parameters[18].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[19].Value = ((double)(Original_us_depth_in.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[17].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[18].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[18].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[19].Value = global::System.DBNull.Value;
             }
             if ((Original_ds_depth_in.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[19].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[20].Value = ((double)(Original_ds_depth_in.Value));
+                this.Adapter.UpdateCommand.Parameters[20].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[21].Value = ((double)(Original_ds_depth_in.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[19].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[20].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[20].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[21].Value = global::System.DBNull.Value;
             }
             if ((Original_inside_diam_in.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[21].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[22].Value = ((double)(Original_inside_diam_in.Value));
+                this.Adapter.UpdateCommand.Parameters[22].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[23].Value = ((double)(Original_inside_diam_in.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[21].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[22].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[22].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[23].Value = global::System.DBNull.Value;
+            }
+            if ((Original_inside_width_in.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[24].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[25].Value = ((double)(Original_inside_width_in.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[24].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[25].Value = global::System.DBNull.Value;
             }
             if ((Original_material.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[23].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[24].Value = ((int)(Original_material.Value));
+                this.Adapter.UpdateCommand.Parameters[26].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[27].Value = ((int)(Original_material.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[23].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[24].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[26].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[27].Value = global::System.DBNull.Value;
             }
             if ((Original_shape.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[25].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[26].Value = ((int)(Original_shape.Value));
+                this.Adapter.UpdateCommand.Parameters[28].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[29].Value = ((int)(Original_shape.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[25].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[26].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[28].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[29].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[27].Value = ((int)(pipe_id));
+            this.Adapter.UpdateCommand.Parameters[30].Value = ((int)(pipe_id));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -12396,6 +12549,7 @@ SELECT pipe_id, global_id, survey_page_id, us_node, ds_node, us_depth_in, ds_dep
                     global::System.Nullable<double> us_depth_in, 
                     global::System.Nullable<double> ds_depth_in, 
                     global::System.Nullable<double> inside_diam_in, 
+                    global::System.Nullable<double> inside_width_in, 
                     global::System.Nullable<int> material, 
                     global::System.Nullable<int> shape, 
                     string comment, 
@@ -12407,9 +12561,10 @@ SELECT pipe_id, global_id, survey_page_id, us_node, ds_node, us_depth_in, ds_dep
                     global::System.Nullable<double> Original_us_depth_in, 
                     global::System.Nullable<double> Original_ds_depth_in, 
                     global::System.Nullable<double> Original_inside_diam_in, 
+                    global::System.Nullable<double> Original_inside_width_in, 
                     global::System.Nullable<int> Original_material, 
                     global::System.Nullable<int> Original_shape) {
-            return this.Update(global_id, survey_page_id, us_node, ds_node, us_depth_in, ds_depth_in, inside_diam_in, material, shape, comment, Original_pipe_id, Original_global_id, Original_survey_page_id, Original_us_node, Original_ds_node, Original_us_depth_in, Original_ds_depth_in, Original_inside_diam_in, Original_material, Original_shape, Original_pipe_id);
+            return this.Update(global_id, survey_page_id, us_node, ds_node, us_depth_in, ds_depth_in, inside_diam_in, inside_width_in, material, shape, comment, Original_pipe_id, Original_global_id, Original_survey_page_id, Original_us_node, Original_ds_node, Original_us_depth_in, Original_ds_depth_in, Original_inside_diam_in, Original_inside_width_in, Original_material, Original_shape, Original_pipe_id);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -14232,7 +14387,7 @@ SELECT view_id, subwatershed_id, view_number, description FROM SWSP_VIEW WHERE (
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[3];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[4];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT view_id, subwatershed_id, view_number, description FROM GIS.SWSP_VIEW ORDE" +
@@ -14240,15 +14395,20 @@ SELECT view_id, subwatershed_id, view_number, description FROM SWSP_VIEW WHERE (
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[1].Connection = this.Connection;
-            this._commandCollection[1].CommandText = "SELECT MAX(view_id) FROM SWSP_VIEW";
+            this._commandCollection[1].CommandText = "DELETE FROM [GIS].[SWSP_VIEW] WHERE [view_id] = @view_id";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@view_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "view_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._commandCollection[2] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[2].Connection = this.Connection;
-            this._commandCollection[2].CommandText = "SELECT  view_id FROM SWSP_VIEW\r\nWHERE view_number = @view_number AND subwatershed" +
-                "_id = @subwatershed_id";
+            this._commandCollection[2].CommandText = "SELECT MAX(view_id) FROM SWSP_VIEW";
             this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
-            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@view_number", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "view_number", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@subwatershed_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "subwatershed_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[3] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[3].Connection = this.Connection;
+            this._commandCollection[3].CommandText = "SELECT  view_id FROM SWSP_VIEW\r\nWHERE view_number = @view_number AND subwatershed" +
+                "_id = @subwatershed_id";
+            this._commandCollection[3].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@view_number", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "view_number", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@subwatershed_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "subwatershed_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -14406,8 +14566,31 @@ SELECT view_id, subwatershed_id, view_number, description FROM SWSP_VIEW WHERE (
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual global::System.Nullable<int> ScalarQuery() {
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, false)]
+        public virtual int DeleteQuery(int view_id) {
             global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[1];
+            command.Parameters[0].Value = ((int)(view_id));
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            int returnValue;
+            try {
+                returnValue = command.ExecuteNonQuery();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual global::System.Nullable<int> ScalarQuery() {
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[2];
             global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
             if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -14434,7 +14617,7 @@ SELECT view_id, subwatershed_id, view_number, description FROM SWSP_VIEW WHERE (
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         public virtual object ScalarQueryViewIDByViewNumber(int view_number, int subwatershed_id) {
-            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[2];
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[3];
             command.Parameters[0].Value = ((int)(view_number));
             command.Parameters[1].Value = ((int)(subwatershed_id));
             global::System.Data.ConnectionState previousConnectionState = command.Connection.State;

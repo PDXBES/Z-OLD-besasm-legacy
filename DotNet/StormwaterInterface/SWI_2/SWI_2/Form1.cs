@@ -50,7 +50,8 @@ namespace SWI_2
 
         private void buttonUpdateDatabase_Click(object sender, EventArgs e)
         {
-            CheckEvaluatorsAssociatedWithThisSurveyPage(sender, e);
+            //CheckEvaluatorsAssociatedWithThisSurveyPage(sender, e);
+            checkedListBoxEvaluators_SelectedIndexChanged(sender, e);
             this.fKSURVEYPAGEVIEWBindingSource.EndEdit();
             this.sWSP_SURVEY_PAGETableAdapter.Update(sANDBOXDataSet);
         }
@@ -256,7 +257,6 @@ namespace SWI_2
             object item;
             try
             {
-
                 for (int index = 0; index < checkedListBoxEvaluators.Items.Count; index++)
                 {
                     item = checkedListBoxEvaluators.Items[index];
@@ -316,7 +316,6 @@ namespace SWI_2
                 fKDITCHSURVEYPAGEBindingSource.MoveFirst();
                 dataGridViewDitches.Refresh();
                 this.sWSP_PHOTOTableAdapter.FillByGlobalID((SANDBOXDataSet.SWSP_PHOTODataTable)((SANDBOXDataSet)this.sWSPPHOTOBindingSource.DataSource).SWSP_PHOTO, (int)((System.Data.DataRowView)fKDITCHSURVEYPAGEBindingSource.Current)["global_id"]);
-
             }
             catch (Exception ex)
             {
@@ -329,13 +328,13 @@ namespace SWI_2
         {
             try
             {
-            foreach (object rowObject in dataGridViewCulverts.Rows)
-            {
-                ((DataGridViewRow)rowObject).Selected = false;
-            }
-            dataGridViewCulverts.Rows[0].Selected = true;
-            fKCULVERTSURVEYPAGEBindingSource1.MoveFirst();
-            dataGridViewCulverts.Refresh();
+                foreach (object rowObject in dataGridViewCulverts.Rows)
+                {
+                    ((DataGridViewRow)rowObject).Selected = false;
+                }
+                dataGridViewCulverts.Rows[0].Selected = true;
+                fKCULVERTSURVEYPAGEBindingSource1.MoveFirst();
+                dataGridViewCulverts.Refresh();
             }
             catch (Exception ex)
             {
@@ -346,13 +345,13 @@ namespace SWI_2
         {
             try
             {
-            foreach (object rowObject in dataGridViewPipes.Rows)
-            {
-                ((DataGridViewRow)rowObject).Selected = false;
-            }
-            dataGridViewPipes.Rows[0].Selected = true;
-            fKPIPESURVEYPAGEBindingSource.MoveFirst();
-            dataGridViewPipes.Refresh();
+                foreach (object rowObject in dataGridViewPipes.Rows)
+                {
+                    ((DataGridViewRow)rowObject).Selected = false;
+                }
+                dataGridViewPipes.Rows[0].Selected = true;
+                fKPIPESURVEYPAGEBindingSource.MoveFirst();
+                dataGridViewPipes.Refresh();
             }
             catch (Exception ex)
             {
@@ -451,6 +450,7 @@ namespace SWI_2
                                                 4,
                                                 null,
                                                 null,
+                                                null,
                                                 10,
                                                 "");
             this.sWSP_CULVERTTableAdapter.Fill((SANDBOXDataSet.SWSP_CULVERTDataTable)((SANDBOXDataSet)this.sWSPCULVERTBindingSource.DataSource).SWSP_CULVERT);
@@ -493,6 +493,7 @@ namespace SWI_2
                                                 ((int)((System.Data.DataRowView)fKSURVEYPAGEVIEWBindingSource.Current)["survey_page_id"]),
                                                 "",
                                                 "",
+                                                null,
                                                 null,
                                                 null,
                                                 null,
@@ -622,13 +623,11 @@ namespace SWI_2
                     {
                         findFirstCulvert();
                     }
-
                     //third search the pipes table
                     else if((this.sWSP_PIPETableAdapter.FindFirstGlobalID(currentSelected)).HasValue)
                     {
                         findFirstPipe();
                     }
-
                     //fourth search all of the ditches table (if there is only one match we will end up right back where we started).
                     else if ((this.sWSP_DITCHTableAdapter.FindFirstGlobalID(currentSelected)).HasValue)
                     {
@@ -693,13 +692,11 @@ namespace SWI_2
                         }
                         this.Refresh();
                     }
-
                     //second search the pipes table
                     else if ((this.sWSP_PIPETableAdapter.FindFirstGlobalID(currentSelected)).HasValue)
                     {
                         findFirstPipe();
                     }
-
                     //third search all of the ditches table (if there is only one match we will end up right back where we started).
                     else if ((this.sWSP_DITCHTableAdapter.FindFirstGlobalID(currentSelected)).HasValue)
                     {
@@ -769,27 +766,22 @@ namespace SWI_2
                             fKPIPESURVEYPAGEBindingSource.MoveNext();
                         }
                         this.Refresh();
-
                     }
                     //second search all of the ditches table (if there is only one match we will end up right back where we started).
                     else if ((this.sWSP_DITCHTableAdapter.FindFirstGlobalID(textBoxFindNode.Text)).HasValue)
                     {
                         findFirstDitch();
-
                     }
                     //third search the culverts table
                     else if ((this.sWSP_CULVERTTableAdapter.FindFirstGlobalID(textBoxFindNode.Text)).HasValue)
                     {
                         findFirstCulvert();
                     }
-
                     //fourth search the pipes table
                     else if ((this.sWSP_PIPETableAdapter.FindFirstGlobalID(textBoxFindNode.Text)).HasValue)
                     {
                         findFirstPipe();
                     }
-
-                    
                 }
                 else
                 {
