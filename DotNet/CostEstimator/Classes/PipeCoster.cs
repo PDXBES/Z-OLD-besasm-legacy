@@ -3,7 +3,7 @@
 // Path: C:\Development\CostEstimatorV2\Classes, Author: Arnel
 // Code lines: 37, Size of file: 917 Bytes
 // Creation date: 3/2/2008 8:55 PM
-// Last modified: 7/15/2008 1:42 AM
+// Last modified: 6/25/2010 1:03 PM
 
 #region Using directives
 using System;
@@ -170,7 +170,6 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 		#region Variables
 		private decimal _SawcuttingACPavementPerSqFt;
 		private decimal _AsphaltRemovalPerSqYd;
-		private decimal _TrenchExcavationPerCuYd;
 		private decimal _TruckHaulExcavationSpoilsPerCuYd;
 		private decimal _TrenchShoringPerSqFt;
 		private decimal _AsphaltTrenchPatchBaseCoursePerCuYd;
@@ -187,6 +186,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 			new SortedList<double, double>();
 		private SortedList<double, double> _OutsideDiameterToTrenchWidthTable =
 			new SortedList<double, double>();
+    private SortedList<double, decimal> _DepthToTrenchExcavationCostPerCuYd =
+      new SortedList<double, decimal>();
 		private Dictionary<PipeMaterial, SortedList<double, decimal>> _PipeCostTable =
 			new Dictionary<PipeMaterial, SortedList<double, decimal>>();
 		private decimal _DefaultLateralCostPerFt;
@@ -550,8 +551,6 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 			CosterParameters.Add(param.Name, param);
 			param = new CosterParameter("Asphalt removal per sq yd", "System.Decimal", _AsphaltRemovalPerSqYd);
 			CosterParameters.Add(param.Name, param);
-			param = new CosterParameter("Trench excavation per cu yd", "System.Decimal", _TrenchExcavationPerCuYd);
-			CosterParameters.Add(param.Name, param);
 			param = new CosterParameter("Truck haul excavation spoils per cu yd", "System.Decimal", _TruckHaulExcavationSpoilsPerCuYd);
 			CosterParameters.Add(param.Name, param);
 			param = new CosterParameter("Trench shoring per sq ft", "System.Decimal", _TrenchShoringPerSqFt);
@@ -615,9 +614,6 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 						break;
 					case "asphaltRemovalPerSqYd":
 						_AsphaltRemovalPerSqYd = (decimal)xpathIter.Current.ValueAsDouble;
-						break;
-					case "trenchExcavationPerCuYd":
-						_TrenchExcavationPerCuYd = (decimal)xpathIter.Current.ValueAsDouble;
 						break;
 					case "truckHaulExcavationSpoilsPerCuYd":
 						_TruckHaulExcavationSpoilsPerCuYd = (decimal)xpathIter.Current.ValueAsDouble;
@@ -726,6 +722,30 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 
 				_OutsideDiameterToTrenchWidthTable.Add(outsideDiameterIn, widthFt);
 			} // while
+
+      xpathQuery = "/PipeCostOptions/DepthToTrenchExcavationCostTable/*";
+      xpathIter = pipeCostRefNav.Select(xpathQuery);
+      while (xpathIter.MoveNext())
+      {
+        XPathNodeIterator childIter = xpathIter.Current.SelectChildren(XPathNodeType.Element);
+        double depthFt = 0;
+        decimal costPerCuYd = 0;
+
+        while (childIter.MoveNext())
+        {
+          switch (childIter.Current.Name)
+          {
+            case "depthFt":
+              depthFt = childIter.Current.ValueAsDouble;
+              break;
+            case "costPerCuYd":
+              costPerCuYd = (decimal)childIter.Current.ValueAsDouble;
+              break;
+          } // switch
+        } // while
+
+        _DepthToTrenchExcavationCostPerCuYd.Add(depthFt, costPerCuYd);
+      }
 
 			xpathQuery = "/PipeCostOptions/PipeCostTable/*";
 			xpathIter = pipeCostRefNav.Select(xpathQuery);
@@ -1161,12 +1181,51 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 			} // else
 		} // TrenchWidthFromOutsideDiameter(outsideDiameter, outsideTable)
 
+    /// <summary>
+    /// Trench excavation cost per cu yd from pipe depth
+    /// </summary>
+    /// <param name="depth">Depth in ft</param>
+    /// <returns>Decimal</returns>
+    public decimal TrenchExcavationCostPerCuYdFromDepth(double depth)
+    {
+      if (depth < _DepthToTrenchExcavationCostPerCuYd.Keys[0])
+      {
+        return _DepthToTrenchExcavationCostPerCuYd.Values[0];
+      } // if
+      else if (depth > _DepthToTrenchExcavationCostPerCuYd.Keys[_DepthToTrenchExcavationCostPerCuYd.Count - 1])
+      {
+        return _DepthToTrenchExcavationCostPerCuYd.Values[_DepthToTrenchExcavationCostPerCuYd.Count - 1];
+      } // if
+      else
+      {
+        int foundIndex = -1;
+        for (int i = 0; i < _DepthToTrenchExcavationCostPerCuYd.Count; i++)
+        {
+          if (_DepthToTrenchExcavationCostPerCuYd.Keys[i] >= depth)
+          {
+            foundIndex = i;
+            break;
+          } // if
+        }
+        System.Diagnostics.Debug.Assert(foundIndex != -1);
+
+        if (foundIndex > -1)
+        {
+          return _DepthToTrenchExcavationCostPerCuYd.Values[foundIndex];
+        } // if
+        else
+        {
+          return 0.0M;
+        } // else
+      } // else
+    } // TrenchExcavationPerCuYdFromDepth(diameter)
+
 		/// <summary>
 		/// Pipe cost
 		/// </summary>
 		/// <param name="material">Material</param>
-		/// <param name="diameter">Diameter</param>
-		/// <param name="outsideTable">Outside table</param>
+		/// <param name="diameter">Diameter in ft</param>
+		/// <param name="outsideTable">Returns true if the supplied material and diameter falls out of the cost table</param>
 		/// <returns>Decimal</returns>
 		public decimal PipeCost(PipeMaterial material, double diameter, out bool outsideTable)
 		{
@@ -1736,7 +1795,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 					DirectConstructionCostItems.Add(string.Format("Asphalt removal {0:F0} in inside diam", _InsideDiameter),
 						new UnitCost((decimal)((double)_AsphaltRemovalPerSqYd), "sqyd", AsphaltRemovalWidth / 9));
 					DirectConstructionCostItems.Add(string.Format("Trench excavation {0:F0} ft deep, {1:F0} in inside diam", _Depth, _InsideDiameter),
-						new UnitCost((decimal)((double)_TrenchExcavationPerCuYd), "cuyd", ExcavationVolume));
+						new UnitCost((decimal)((double)TrenchExcavationCostPerCuYdFromDepth(_Depth)), "cuyd", ExcavationVolume));
 					DirectConstructionCostItems.Add(string.Format("Truck haul excavation spoils {0:F0} ft deep, {1:F0} in inside diam", _Depth, _InsideDiameter), 
 						new UnitCost((decimal)((double)_TruckHaulExcavationSpoilsPerCuYd), "cuyd", SpoilsVolume));
 					DirectConstructionCostItems.Add(string.Format("Trench shoring {0:F0} ft deep", _Depth), 

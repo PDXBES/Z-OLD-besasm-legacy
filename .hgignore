@@ -4,3 +4,7 @@ glob:*.suo
 glob:*.dll
 glob:*.DLL
 glob:*.exe
+glob:*.dcu
+glob:__history/*
+glob:*.local
+glob:*.orig
