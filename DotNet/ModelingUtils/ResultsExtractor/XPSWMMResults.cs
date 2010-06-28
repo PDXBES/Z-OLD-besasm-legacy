@@ -22,11 +22,35 @@ namespace SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor
     private StreamReader outputReader;
 
     private TableE01DataSet.TableE01DataTable tableE01;
+    //TO-DO: implement private TableE02DataSet.TableE02DataTable tableE02;
+    //TO-DO: implement private TableE03aDataSet.TableE03aDataTable tableE03a;
+    //TO-DO: implement private TableE03bDataSet.TableE03bDataTable tableE03b;
+    //TO-DO: implement private TableE04DataSet.TableE04DataTable tableE04;
+    //TO-DO: implement private TableE04aDataSet.TableE04aDataTable tableE04a;
+    //TO-DO: implement private TableE04bDataSet.TableE04bDataTable tableE04b;
+    //TO-DO: implement private TableE05DataSet.TableE05DataTable tableE05;
+    //TO-DO: implement private TableE05aDataSet.TableE05aDataTable tableE05a;
+    //TO-DO: implement private TableE06DataSet.TableE06DataTable tableE06;
+    //TO-DO: implement private TableE07DataSet.TableE07DataTable tableE07;
+    //TO-DO: implement private TableE08DataSet.TableE08DataTable tableE08;
     private TableE09DataSet.TableE09DataTable tableE09;
     private TableE10DataSet.TableE10DataTable tableE10;
+    //TO-DO: implement private TableE11DataSet.TableE11DataTable tableE11;
+    //TO-DO: implement private TableE12DataSet.TableE12DataTable tableE12;
+    //TO-DO: implement private TableE13DataSet.TableE13DataTable tableE13;
+    //TO-DO: implement private TableE13aDataSet.TableE13aDataTable tableE13a;
+    //TO-DO: implement private TableE14DataSet.TableE14DataTable tableE14;
+    //TO-DO: implement private TableE14aDataSet.TableE14aDataTable tableE14a;
+    //TO-DO: implement private TableE14bDataSet.TableE14bDataTable tableE14b;
+    //TO-DO: implement private TableE15DataSet.TableE15DataTable tableE15;
+    //TO-DO: implement private TableE15aDataSet.TableE15aDataTable tableE15a;
+    //TO-DO: implement private TableE16DataSet.TableE16DataTable tableE16;
+    //TO-DO: implement private TableE17DataSet.TableE17DataTable tableE17;
     private TableE18DataSet.TableE18DataTable tableE18;
     private TableE19DataSet.TableE19DataTable tableE19;
     private TableE20DataSet.TableE20DataTable tableE20;
+    //TO-DO: implement private TableE21DataSet.TableE21DataTable tableE21;
+    //TO-DO: implement private TableE22DataSet.TableE22DataTable tableE22;
 
     private DateTime beginDateTime;
 

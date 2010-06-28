@@ -30,10 +30,10 @@
         {
           this.components = new System.ComponentModel.Container();
           Infragistics.Win.Appearance appearance1 = new Infragistics.Win.Appearance();
-          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
           Infragistics.Win.Appearance appearance18 = new Infragistics.Win.Appearance();
           System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
-          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
           Infragistics.Win.Appearance appearance17 = new Infragistics.Win.Appearance();
           Infragistics.Win.Appearance appearance15 = new Infragistics.Win.Appearance();
           Infragistics.Win.Appearance appearance2 = new Infragistics.Win.Appearance();
@@ -42,10 +42,10 @@
           Infragistics.Win.Appearance appearance6 = new Infragistics.Win.Appearance();
           Infragistics.Win.Appearance appearance4 = new Infragistics.Win.Appearance();
           Infragistics.Win.Appearance appearance5 = new Infragistics.Win.Appearance();
-          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
           Infragistics.Win.Appearance appearance11 = new Infragistics.Win.Appearance();
           Infragistics.Win.Appearance appearance10 = new Infragistics.Win.Appearance();
           Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarGroup ultraExplorerBarGroup1 = new Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarGroup();
@@ -190,9 +190,9 @@
           this.lblNewConstrRetroFacs = new Infragistics.Win.Misc.UltraLabel();
           this.lblNewRetroIcTargets = new Infragistics.Win.Misc.UltraLabel();
           this.lblNewRetroSiteAssessments = new Infragistics.Win.Misc.UltraLabel();
-          this.dataGridView1 = new System.Windows.Forms.DataGridView();
+          this.dgvIncomingRetroChanges = new System.Windows.Forms.DataGridView();
           this.tabApplyRetroUpdates = new System.Windows.Forms.TabPage();
-          this.dataGridView2 = new System.Windows.Forms.DataGridView();
+          this.dgvApplyRetroUpdates = new System.Windows.Forms.DataGridView();
           this.statusStrip1 = new System.Windows.Forms.StatusStrip();
           this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
           this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
@@ -204,6 +204,7 @@
           this.revertSessionChangesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
           this.checkRETROUpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
           this.applyRETROUpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+          this.viewChangeConnectionSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
           this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
           this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
           this.changeDatabaseConnectionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -217,6 +218,7 @@
           this.dbBindSourceDSCQC = new System.Windows.Forms.BindingSource(this.components);
           this.dbBindSourceParkQC = new System.Windows.Forms.BindingSource(this.components);
           this.dbBindSourceRoofQC = new System.Windows.Forms.BindingSource(this.components);
+          this.btnApplyRetroUpdates = new Infragistics.Win.Misc.UltraButton();
           ((System.ComponentModel.ISupportInitialize)(this.txtFileName)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
           this.tabControlMain.SuspendLayout();
@@ -266,9 +268,9 @@
           this.grpBoxViewRetroUpdates.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.grpBoxCheckRetroUpdates)).BeginInit();
           this.grpBoxCheckRetroUpdates.SuspendLayout();
-          ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+          ((System.ComponentModel.ISupportInitialize)(this.dgvIncomingRetroChanges)).BeginInit();
           this.tabApplyRetroUpdates.SuspendLayout();
-          ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+          ((System.ComponentModel.ISupportInitialize)(this.dgvApplyRetroUpdates)).BeginInit();
           this.statusStrip1.SuspendLayout();
           this.menStripMain.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.expBarMain)).BeginInit();
@@ -294,8 +296,8 @@
           // dgvData
           // 
           this.dgvData.AllowUserToDeleteRows = false;
-          dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-          this.dgvData.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+          dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+          this.dgvData.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
           this.dgvData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
           this.dgvData.Location = new System.Drawing.Point(6, 9);
           this.dgvData.Name = "dgvData";
@@ -579,8 +581,8 @@
           // 
           this.dgvUpdaterHistory.AllowUserToAddRows = false;
           this.dgvUpdaterHistory.AllowUserToDeleteRows = false;
-          dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-          this.dgvUpdaterHistory.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+          dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+          this.dgvUpdaterHistory.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle8;
           this.dgvUpdaterHistory.AutoGenerateColumns = false;
           this.dgvUpdaterHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
           this.dgvUpdaterHistory.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -1181,8 +1183,8 @@
           // dgvDSCQC
           // 
           this.dgvDSCQC.AllowUserToDeleteRows = false;
-          dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-          this.dgvDSCQC.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+          dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+          this.dgvDSCQC.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle9;
           this.dgvDSCQC.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
           this.dgvDSCQC.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
           this.dgvDSCQC.Location = new System.Drawing.Point(8, 6);
@@ -1226,8 +1228,8 @@
           // dgvParkQC
           // 
           this.dgvParkQC.AllowUserToDeleteRows = false;
-          dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-          this.dgvParkQC.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+          dataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+          this.dgvParkQC.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle10;
           this.dgvParkQC.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
           this.dgvParkQC.Location = new System.Drawing.Point(8, 6);
           this.dgvParkQC.Name = "dgvParkQC";
@@ -1270,8 +1272,8 @@
           // dgvRoofQC
           // 
           this.dgvRoofQC.AllowUserToDeleteRows = false;
-          dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-          this.dgvRoofQC.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+          dataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+          this.dgvRoofQC.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle11;
           this.dgvRoofQC.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
           this.dgvRoofQC.Location = new System.Drawing.Point(8, 6);
           this.dgvRoofQC.Name = "dgvRoofQC";
@@ -1313,8 +1315,8 @@
           // 
           // dgvImpAQC
           // 
-          dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-          this.dgvImpAQC.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
+          dataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+          this.dgvImpAQC.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle12;
           this.dgvImpAQC.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
           this.dgvImpAQC.Location = new System.Drawing.Point(8, 6);
           this.dgvImpAQC.Name = "dgvImpAQC";
@@ -1336,7 +1338,7 @@
           // btnCloseOptions
           // 
           this.btnCloseOptions.ButtonStyle = Infragistics.Win.UIElementButtonStyle.WindowsVistaButton;
-          this.btnCloseOptions.Location = new System.Drawing.Point(607, 308);
+          this.btnCloseOptions.Location = new System.Drawing.Point(585, 355);
           this.btnCloseOptions.Name = "btnCloseOptions";
           this.btnCloseOptions.Size = new System.Drawing.Size(103, 23);
           this.btnCloseOptions.TabIndex = 3;
@@ -1388,7 +1390,7 @@
           // 
           this.tabCheckRetroUpdates.Controls.Add(this.grpBoxViewRetroUpdates);
           this.tabCheckRetroUpdates.Controls.Add(this.grpBoxCheckRetroUpdates);
-          this.tabCheckRetroUpdates.Controls.Add(this.dataGridView1);
+          this.tabCheckRetroUpdates.Controls.Add(this.dgvIncomingRetroChanges);
           this.tabCheckRetroUpdates.Location = new System.Drawing.Point(4, 22);
           this.tabCheckRetroUpdates.Name = "tabCheckRetroUpdates";
           this.tabCheckRetroUpdates.Padding = new System.Windows.Forms.Padding(3);
@@ -1419,6 +1421,7 @@
           this.btnViewNewConstrFacs.Size = new System.Drawing.Size(186, 23);
           this.btnViewNewConstrFacs.TabIndex = 5;
           this.btnViewNewConstrFacs.Text = "View New Constructed Facilities";
+          this.btnViewNewConstrFacs.Click += new System.EventHandler(this.btnViewNewConstrFacs_Click);
           // 
           // btnViewNewIcTargets
           // 
@@ -1428,6 +1431,7 @@
           this.btnViewNewIcTargets.Size = new System.Drawing.Size(186, 23);
           this.btnViewNewIcTargets.TabIndex = 4;
           this.btnViewNewIcTargets.Text = "View New IC Targets";
+          this.btnViewNewIcTargets.Click += new System.EventHandler(this.btnViewNewIcTargets_Click);
           // 
           // btnViewNewRetroAssessments
           // 
@@ -1437,6 +1441,7 @@
           this.btnViewNewRetroAssessments.Size = new System.Drawing.Size(186, 23);
           this.btnViewNewRetroAssessments.TabIndex = 3;
           this.btnViewNewRetroAssessments.Text = "View New Site Assessments";
+          this.btnViewNewRetroAssessments.Click += new System.EventHandler(this.btnViewNewRetroAssessments_Click);
           // 
           // grpBoxCheckRetroUpdates
           // 
@@ -1476,17 +1481,18 @@
           this.lblNewRetroSiteAssessments.TabIndex = 0;
           this.lblNewRetroSiteAssessments.Text = "New Site Assessments: 0";
           // 
-          // dataGridView1
+          // dgvIncomingRetroChanges
           // 
-          this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-          this.dataGridView1.Location = new System.Drawing.Point(6, 6);
-          this.dataGridView1.Name = "dataGridView1";
-          this.dataGridView1.Size = new System.Drawing.Size(447, 372);
-          this.dataGridView1.TabIndex = 0;
+          this.dgvIncomingRetroChanges.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+          this.dgvIncomingRetroChanges.Location = new System.Drawing.Point(6, 6);
+          this.dgvIncomingRetroChanges.Name = "dgvIncomingRetroChanges";
+          this.dgvIncomingRetroChanges.Size = new System.Drawing.Size(447, 372);
+          this.dgvIncomingRetroChanges.TabIndex = 0;
           // 
           // tabApplyRetroUpdates
           // 
-          this.tabApplyRetroUpdates.Controls.Add(this.dataGridView2);
+          this.tabApplyRetroUpdates.Controls.Add(this.btnApplyRetroUpdates);
+          this.tabApplyRetroUpdates.Controls.Add(this.dgvApplyRetroUpdates);
           this.tabApplyRetroUpdates.Location = new System.Drawing.Point(4, 22);
           this.tabApplyRetroUpdates.Name = "tabApplyRetroUpdates";
           this.tabApplyRetroUpdates.Padding = new System.Windows.Forms.Padding(3);
@@ -1495,13 +1501,13 @@
           this.tabApplyRetroUpdates.Text = "Apply RETRO Updates";
           this.tabApplyRetroUpdates.UseVisualStyleBackColor = true;
           // 
-          // dataGridView2
+          // dgvApplyRetroUpdates
           // 
-          this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-          this.dataGridView2.Location = new System.Drawing.Point(6, 6);
-          this.dataGridView2.Name = "dataGridView2";
-          this.dataGridView2.Size = new System.Drawing.Size(450, 372);
-          this.dataGridView2.TabIndex = 0;
+          this.dgvApplyRetroUpdates.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+          this.dgvApplyRetroUpdates.Location = new System.Drawing.Point(6, 6);
+          this.dgvApplyRetroUpdates.Name = "dgvApplyRetroUpdates";
+          this.dgvApplyRetroUpdates.Size = new System.Drawing.Size(450, 372);
+          this.dgvApplyRetroUpdates.TabIndex = 0;
           // 
           // statusStrip1
           // 
@@ -1552,6 +1558,7 @@
             this.revertSessionChangesToolStripMenuItem,
             this.checkRETROUpdatesToolStripMenuItem,
             this.applyRETROUpdatesToolStripMenuItem,
+            this.viewChangeConnectionSettingsToolStripMenuItem,
             this.exitToolStripMenuItem});
           this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
           this.fileToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
@@ -1560,49 +1567,56 @@
           // downloadUpdateTemplateToolStripMenuItem
           // 
           this.downloadUpdateTemplateToolStripMenuItem.Name = "downloadUpdateTemplateToolStripMenuItem";
-          this.downloadUpdateTemplateToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+          this.downloadUpdateTemplateToolStripMenuItem.Size = new System.Drawing.Size(247, 22);
           this.downloadUpdateTemplateToolStripMenuItem.Text = "&Download Update Template";
           this.downloadUpdateTemplateToolStripMenuItem.Click += new System.EventHandler(this.downloadUpdateTemplateToolStripMenuItem_Click);
           // 
           // loadUpdateFileToolStripMenuItem
           // 
           this.loadUpdateFileToolStripMenuItem.Name = "loadUpdateFileToolStripMenuItem";
-          this.loadUpdateFileToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+          this.loadUpdateFileToolStripMenuItem.Size = new System.Drawing.Size(247, 22);
           this.loadUpdateFileToolStripMenuItem.Text = "&Load Update File";
           this.loadUpdateFileToolStripMenuItem.Click += new System.EventHandler(this.loadUpdateFileToolStripMenuItem_Click);
           // 
           // loadUpdaterHistoryToolStripMenuItem
           // 
           this.loadUpdaterHistoryToolStripMenuItem.Name = "loadUpdaterHistoryToolStripMenuItem";
-          this.loadUpdaterHistoryToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+          this.loadUpdaterHistoryToolStripMenuItem.Size = new System.Drawing.Size(247, 22);
           this.loadUpdaterHistoryToolStripMenuItem.Text = "Load Updater &History";
           this.loadUpdaterHistoryToolStripMenuItem.Click += new System.EventHandler(this.loadUpdaterHistoryToolStripMenuItem_Click);
           // 
           // revertSessionChangesToolStripMenuItem
           // 
           this.revertSessionChangesToolStripMenuItem.Name = "revertSessionChangesToolStripMenuItem";
-          this.revertSessionChangesToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+          this.revertSessionChangesToolStripMenuItem.Size = new System.Drawing.Size(247, 22);
           this.revertSessionChangesToolStripMenuItem.Text = "&Revert Session Changes";
           // 
           // checkRETROUpdatesToolStripMenuItem
           // 
           this.checkRETROUpdatesToolStripMenuItem.Name = "checkRETROUpdatesToolStripMenuItem";
-          this.checkRETROUpdatesToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+          this.checkRETROUpdatesToolStripMenuItem.Size = new System.Drawing.Size(247, 22);
           this.checkRETROUpdatesToolStripMenuItem.Text = "&Check RETRO Updates";
           this.checkRETROUpdatesToolStripMenuItem.Click += new System.EventHandler(this.checkRETROUpdatesToolStripMenuItem_Click);
           // 
           // applyRETROUpdatesToolStripMenuItem
           // 
           this.applyRETROUpdatesToolStripMenuItem.Name = "applyRETROUpdatesToolStripMenuItem";
-          this.applyRETROUpdatesToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+          this.applyRETROUpdatesToolStripMenuItem.Size = new System.Drawing.Size(247, 22);
           this.applyRETROUpdatesToolStripMenuItem.Text = "&Apply RETRO Updates";
           this.applyRETROUpdatesToolStripMenuItem.Click += new System.EventHandler(this.applyRETROUpdatesToolStripMenuItem_Click);
+          // 
+          // viewChangeConnectionSettingsToolStripMenuItem
+          // 
+          this.viewChangeConnectionSettingsToolStripMenuItem.Name = "viewChangeConnectionSettingsToolStripMenuItem";
+          this.viewChangeConnectionSettingsToolStripMenuItem.Size = new System.Drawing.Size(247, 22);
+          this.viewChangeConnectionSettingsToolStripMenuItem.Text = "&View/Change Connection Settings";
+          this.viewChangeConnectionSettingsToolStripMenuItem.Click += new System.EventHandler(this.viewChangeConnectionSettingsToolStripMenuItem_Click);
           // 
           // exitToolStripMenuItem
           // 
           this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
           this.exitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
-          this.exitToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+          this.exitToolStripMenuItem.Size = new System.Drawing.Size(247, 22);
           this.exitToolStripMenuItem.Text = "E&xit";
           this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
           // 
@@ -1731,6 +1745,16 @@
           this.expBarMain.ViewStyle = Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarViewStyle.VisualStudio2005;
           this.expBarMain.ItemClick += new Infragistics.Win.UltraWinExplorerBar.ItemClickEventHandler(this.expBarMain_ItemClick);
           // 
+          // btnApplyRetroUpdates
+          // 
+          this.btnApplyRetroUpdates.ButtonStyle = Infragistics.Win.UIElementButtonStyle.VisualStudio2005Button;
+          this.btnApplyRetroUpdates.Location = new System.Drawing.Point(504, 355);
+          this.btnApplyRetroUpdates.Name = "btnApplyRetroUpdates";
+          this.btnApplyRetroUpdates.Size = new System.Drawing.Size(151, 23);
+          this.btnApplyRetroUpdates.TabIndex = 1;
+          this.btnApplyRetroUpdates.Text = "Apply RETRO Updates";
+          this.btnApplyRetroUpdates.Click += new System.EventHandler(this.btnApplyRetroUpdates_Click);
+          // 
           // frmMain
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1810,9 +1834,9 @@
           this.grpBoxViewRetroUpdates.ResumeLayout(false);
           ((System.ComponentModel.ISupportInitialize)(this.grpBoxCheckRetroUpdates)).EndInit();
           this.grpBoxCheckRetroUpdates.ResumeLayout(false);
-          ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+          ((System.ComponentModel.ISupportInitialize)(this.dgvIncomingRetroChanges)).EndInit();
           this.tabApplyRetroUpdates.ResumeLayout(false);
-          ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+          ((System.ComponentModel.ISupportInitialize)(this.dgvApplyRetroUpdates)).EndInit();
           this.statusStrip1.ResumeLayout(false);
           this.statusStrip1.PerformLayout();
           this.menStripMain.ResumeLayout(false);
@@ -1964,8 +1988,8 @@
         private System.Windows.Forms.TabPage tabCheckRetroUpdates;
         private System.Windows.Forms.TabPage tabApplyRetroUpdates;
         private Infragistics.Win.Misc.UltraGroupBox grpBoxCheckRetroUpdates;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.DataGridView dgvIncomingRetroChanges;
+        private System.Windows.Forms.DataGridView dgvApplyRetroUpdates;
         private Infragistics.Win.Misc.UltraLabel lblNewRetroIcTargets;
         private Infragistics.Win.Misc.UltraLabel lblNewRetroSiteAssessments;
         private Infragistics.Win.Misc.UltraLabel lblNewConstrRetroFacs;
@@ -1976,6 +2000,8 @@
         private System.Windows.Forms.ToolStripMenuItem revertSessionChangesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem checkRETROUpdatesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem applyRETROUpdatesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem viewChangeConnectionSettingsToolStripMenuItem;
+        private Infragistics.Win.Misc.UltraButton btnApplyRetroUpdates;
     }
 }
 

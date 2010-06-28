@@ -60,7 +60,6 @@ namespace SystemsAnalysis.Utils.AccessUtils
       disposed = false;
     }
 
-
     /// <summary>
     /// Links a single table in the specified Access database. The table will first be 
     /// deleted if it already exists. The linked table will have the same name as the

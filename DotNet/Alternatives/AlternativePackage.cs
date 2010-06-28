@@ -64,13 +64,24 @@ namespace SystemsAnalysis.Modeling.Alternatives
         this.altLinks = new AltLinks(alternativePath);
         this.altNodes = new AltNodes(alternativePath);
         this.altDscs = new AltDscs(alternativePath);
-        LoadAltParkingTargets(alternativePath);
 
+        List<int> missingAltParkTargets;
+        missingAltParkTargets = ValidateAltParkTargets(alternativePath);
+        if (missingAltParkTargets.Count != 0)
+        {
+          string badICs = "Found Park ICs that are not contained in the base model: ";
+          foreach (int i in missingAltParkTargets)
+          {
+            badICs += i + " ";
+          }
+          throw new Exception(badICs);
+        }
+        
         List<int> missingAltRoofTargets;
         missingAltRoofTargets = ValidateAltRoofTargets(alternativePath);
         if (missingAltRoofTargets.Count != 0)
         {
-          string badICs = "Found ICs that are not contained in the base model: ";
+          string badICs = "Found Roof ICs that are not contained in the base model: ";
           foreach (int i in missingAltRoofTargets)
           {
             badICs += i + " ";
@@ -78,6 +89,19 @@ namespace SystemsAnalysis.Modeling.Alternatives
           throw new Exception(badICs);
         }
 
+        List<int> missingAltStreetTargets;
+        missingAltStreetTargets = ValidateAltStreetTargets(alternativePath);
+        if (missingAltStreetTargets.Count != 0)
+        {
+          string badICs = "Found Street ICs that are not contained in the base model: ";
+          foreach (int i in missingAltStreetTargets)
+          {
+            badICs += i + " ";
+          }
+          throw new Exception(badICs);
+        }
+
+        LoadAltParkingTargets(alternativePath);
         LoadAltRoofTargets(alternativePath);
         LoadAltStreetTargets(alternativePath);
         LoadFocusAreaList();
@@ -320,6 +344,24 @@ namespace SystemsAnalysis.Modeling.Alternatives
       }
     }
 
+    public List<int> ValidateAltParkTargets(string alternativePath)
+    {
+      List<int> missingAltParkTargets = new List<int>();
+      DataAccess.AlternativeDataSetTableAdapters.AltParkingTargetsTableAdapter altParkTargetsAdapter =
+        new SystemsAnalysis.DataAccess.AlternativeDataSetTableAdapters.AltParkingTargetsTableAdapter(alternativePath);
+      DataAccess.AlternativeDataSet.AltParkingTargetsDataTable altParkTargetsTable =
+        new SystemsAnalysis.DataAccess.AlternativeDataSet.AltParkingTargetsDataTable();
+      altParkTargetsAdapter.Fill(altParkTargetsTable);
+      altParkingTargets = new Dictionary<int, ParkingTarget>();
+      foreach (DataAccess.AlternativeDataSet.AltParkingTargetsRow row in altParkTargetsTable)
+      {
+        if (!baseModel.ModelParkingTargets.ContainsKey(row.ICID))
+        {
+          missingAltParkTargets.Add(row.ICID);
+        }
+      }
+      return missingAltParkTargets;
+    }  
     void LoadAltParkingTargets(string alternativePath)
     {
       try
@@ -334,8 +376,12 @@ namespace SystemsAnalysis.Modeling.Alternatives
         altParkingTargets = new Dictionary<int, ParkingTarget>();
         foreach (DataAccess.AlternativeDataSet.AltParkingTargetsRow row in altParkingTargetsTable)
         {
+          if (!baseModel.ModelParkingTargets.ContainsKey(row.ICID))
+          {
+            throw new Exception("AltParkTarget with ICID '" + row.ICID + "' not found in Base Model."); 
+          }
           altParkingTargets.Add(row.ICID, new ParkingTarget(baseModel.ModelParkingTargets[row.ICID],
-            row.IsFocusAreaNull() ? "" : row.FocusArea));
+              row.IsFocusAreaNull() ? "" : row.FocusArea));
           altParkingTargets[row.ICID].ToBeBuilt = row.BuildModelIC; //Arnel, we need to copy [BuildModelIC] from altParkingTargets_ac.tab to the ParkingTargets object
           altParkingTargets[row.ICID].Constructed = row.Constructed;
         }
@@ -397,6 +443,27 @@ namespace SystemsAnalysis.Modeling.Alternatives
       }
     }
 
+    public List<int> ValidateAltStreetTargets(string alternativePath)
+    {
+      List<int> missingAltStreetTargets = new List<int>();
+      DataAccess.AlternativeDataSetTableAdapters.AltStreetTargetsTableAdapter altStreetTargetsAdapter =
+        new SystemsAnalysis.DataAccess.AlternativeDataSetTableAdapters.AltStreetTargetsTableAdapter(alternativePath);
+      DataAccess.AlternativeDataSet.AltStreetTargetsDataTable altStreetTargetsTable =
+        new SystemsAnalysis.DataAccess.AlternativeDataSet.AltStreetTargetsDataTable();
+
+      altStreetTargetsAdapter.Fill(altStreetTargetsTable);
+
+      altStreetTargets = new Dictionary<int, StreetTarget>();
+      foreach (DataAccess.AlternativeDataSet.AltStreetTargetsRow row in altStreetTargetsTable)
+      {
+        if (!baseModel.ModelStreetTargets.ContainsKey(row.ICID))
+        {
+          missingAltStreetTargets.Add(row.ICID);
+        }
+      }
+      return missingAltStreetTargets;
+    }
+    
     void LoadAltStreetTargets(string alternativePath)
     {
       try
