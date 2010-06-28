@@ -1,0 +1,272 @@
+'Attribute VB_Name = "updowntracer"
+'Option Explicit
+
+Define goUP     1
+Define goDOWN   2
+Define LISTEND -1
+
+Type linkdata
+    USNODE As String
+    DSnode As String
+   ' LinkID As integer
+    recID As Integer
+    visited As Logical
+End Type
+
+'where we put the links
+Dim gLinks(33000) As linkdata
+Dim gLinkNdx As integer
+Dim gLinkCount As integer
+
+'the global (bad) stack
+Dim gintegerStack(10000) As integer
+Dim gStackNdx As integer
+Dim gPushCount As integer
+Dim gPopCount As integer
+Dim gdirection as integer
+
+declare Sub UPtraverse()
+declare Sub DOWNtraverse()
+declare Sub traverse(direction As Integer)
+
+  
+  
+Sub UPtraverse()
+  StatusBar Message "selecting UPstream pipes"
+	gdirection = goUP
+  call traverse (gdirection)
+End Sub
+
+ Sub DOWNtraverse()
+   StatusBar Message "selecting DOWNstream pipes"
+	gdirection = goDOWN
+  call traverse (gdirection)
+End Sub
+  
+  
+  
+Private Sub traverse(direction As Integer)
+  
+  'On Error GoTo EH
+  
+  ' the map stuff
+  Dim pMouseCursor As IMouseCursor
+  Dim pDoc As IMxDocument
+  Dim pMap As IMap
+  Dim pActiveView As IActiveView
+  
+  ' the table stuff
+  Dim pLayer As ILayer                ' generic layer
+  Dim pFeatLayer As IFeatureLayer     ' the layer of features we are interested
+  Dim pFeatSel As IFeatureSelection   ' a way to get the selected features
+  
+  'used to zoom to selected at the end
+  Dim pEnumGeom As IEnumGeometry
+  Dim pEnumGeomBind As IEnumGeometryBind
+  Dim pGeomFactory As IGeometryFactory
+  Dim pGeom As IGeometry
+
+  ' used to access records
+  Dim pFeatCursor As IFeatureCursor
+  Dim prow As IRow
+    
+  'local column indexes
+  Dim iUS As Integer
+  Dim iDS As Integer
+  Dim iREACH As Integer
+  Dim iOID As Integer
+  'Dim iLinkID As integer
+  
+  Dim thisNode As String
+  Dim myOID As integer
+  Dim i As integer
+  
+   
+  If Not (direction = goUP Or direction = goDOWN) Then
+    MsgBox "direction unknown"
+    Exit Sub
+  End If
+  gPushCount = 0
+  gPopCount = 0
+    
+  ' wait cursor
+  Set pMouseCursor = New MouseCursor
+  pMouseCursor.SetCursor 2
+  
+  Set pDoc = ThisDocument
+  Set pMap = pDoc.FocusMap
+  
+
+  ' Find the layer we need and bail if we don't
+  ' could use some other error checking here
+  For i = 0 To pMap.LayerCount - 1
+    Set pLayer = pMap.Layer(i)
+    
+    If TypeOf pLayer Is IFeatureLayer Then
+      If pLayer.name = "trace_layer" Then
+
+        Set pFeatLayer = pLayer
+        Exit For
+      End If
+      
+    End If
+  Next
+  
+  If pFeatLayer Is Nothing Then
+    MsgBox "The layer named 'trace_layer' was not found"
+    Exit Sub
+  End If
+  
+  
+  ' Get a view of the selected links using the following
+  Set pFeatSel = pFeatLayer
+  
+  ' set the cursor to the selected link(s)
+  ' allow only one - code could be added to allow a multi select but hey this is the demo
+  pFeatSel.SelectionSet.Search Nothing, True, pFeatCursor
+  i = pFeatSel.SelectionSet.count
+  If i <> 1 Then
+    MsgBox CStr(i) + " features selected" + Chr(13) + " You must select only one"
+    Exit Sub
+  End If
+      
+  ' ASSERT: all preconditions for a successful traverse should be satisfied
+  '         so now we can do the work
+  '
+  ' get the row indexes
+  iREACH = pFeatLayer.FeatureClass.FindField("LINKREACH")
+  iUS = pFeatLayer.FeatureClass.FindField("USNODE")
+  iDS = pFeatLayer.FeatureClass.FindField("DSNODE")
+  iOID = pFeatLayer.FeatureClass.FindField("OID")
+  'iLinkID = pFeatLayer.FeatureClass.FindField("LinkID")
+    
+  'get all the links and read them in - this should go in a subroutine
+  Set pFeatCursor = pFeatLayer.Search(Nothing, False)
+  gLinkCount = 1
+  Set prow = pFeatCursor.NextFeature
+  Do While Not prow Is Nothing
+    gLinks(gLinkCount).DSnode = prow.Value(iDS)
+    gLinks(gLinkCount).USNODE = prow.Value(iUS)
+    gLinks(gLinkCount).recID = prow.OID
+    'gLinks(gLinkCount).LinkID = prow.Value(iLinkID)
+    gLinks(gLinkCount).visited = False
+    Set prow = pFeatCursor.NextFeature
+    gLinkCount = gLinkCount + 1
+  Loop
+  
+  'end of the list indicator
+  gLinks(gLinkCount).recID = LISTEND
+  Debug.Print gLinkCount
+  
+  'reset the cursor to the selected link(s) - there should be only one
+  pFeatSel.SelectionSet.Search Nothing, True, pFeatCursor
+  Set prow = pFeatCursor.NextFeature
+  myOID = prow.OID
+  For gLinkNdx = 1 To gLinkCount + 1
+    If gLinks(gLinkNdx).recID = myOID Then
+      Exit For
+    End If
+  Next
+  
+  'push the first record onto the stack to initialize the traversal
+  gStackNdx = 1
+  gintegerStack(gStackNdx) = myOID
+  gPushCount = gPushCount + 1
+  'Debug.Print "L: " + CStr(gLinks(gLinkNdx).LinkID)
+  
+  
+  ' pop the stack, mark as visited then push downstream links onto the stack
+  ' the stack is empty when the stack index is 0
+  Do While gStackNdx > 0
+    If gPopCount Mod 100 = 0 Then
+      Application.StatusBar.Message(0) = "links selected:" + Str(gPopCount)
+    End If
+    
+    'pop the stack and mark link as visited
+    myOID = gintegerStack(gStackNdx)
+    For gLinkNdx = 1 To 100000
+      If gLinks(gLinkNdx).recID = myOID Then
+        gLinks(gLinkNdx).visited = True
+        Exit For
+      End If
+    Next
+    gStackNdx = gStackNdx - 1
+    gPopCount = gPopCount + 1
+    
+    ' a little error checking
+    If gLinkNdx = 100000 Then
+      MsgBox "link list overflow, call 823-7735"
+      Exit Sub
+    End If
+    
+    'Debug.Print "pop: " + CStr(gLinks(gLinkNdx).LinkID)
+    
+   'this is the new node to look for
+    If direction = goUP Then
+      thisNode = gLinks(gLinkNdx).USNODE
+    Else
+      thisNode = gLinks(gLinkNdx).DSnode
+    End If
+    
+    'seach all the links and find unvisited links that have the usnode we looking for
+    gLinkNdx = 1
+    Do While gLinks(gLinkNdx).recID > LISTEND
+      If Not gLinks(gLinkNdx).visited Then
+        If (direction = goUP And gLinks(gLinkNdx).DSnode = thisNode) Or _
+           (direction = goDOWN And gLinks(gLinkNdx).USNODE = thisNode) Then
+          
+          'push the OID onto the stack
+          'Debug.Print "push: " + CStr(gLinks(gLinkNdx).LinkID)
+          gStackNdx = gStackNdx + 1
+          gintegerStack(gStackNdx) = gLinks(gLinkNdx).recID
+          gPushCount = gPushCount + 1
+  
+        End If
+      End If
+      gLinkNdx = gLinkNdx + 1
+    Loop
+  Loop
+  
+  
+  gLinkNdx = 1
+  Do While gLinks(gLinkNdx).recID > LISTEND
+    If gLinks(gLinkNdx).visited = True Then
+      pFeatSel.SelectionSet.Add gLinks(gLinkNdx).recID
+    End If
+    gLinkNdx = gLinkNdx + 1
+  Loop
+  
+  Set pActiveView = pMap
+  pActiveView.PartialRefresh esriViewGeoSelection, Nothing, Nothing
+ 
+  'Zoom to the selected pipes
+  Set pEnumGeom = New EnumFeatureGeometry
+  Set pEnumGeomBind = pEnumGeom
+  pEnumGeomBind.BindGeometrySource Nothing, pFeatSel.SelectionSet
+
+  Set pGeomFactory = New GeometryEnvironment
+  Set pGeom = pGeomFactory.CreateGeometryFromEnumerator(pEnumGeom)
+  pDoc.ActiveView.Extent = pGeom.Envelope
+  pDoc.ActiveView.Refresh
+ 
+  MsgBox CStr(pFeatSel.SelectionSet.count) + " pipes selected"
+  
+Traverse_Exit:
+
+ Exit Sub
+  
+Traverse_EH:
+ 
+  MsgBox "Traverse Error: " + Chr(13) + _
+    "pop count: " + Str(gPopCount) + Chr(13) + _
+    "push count: " + Str(gPushCount) + Chr(13) + _
+    "gstackNDX: " + Str(gStackNdx) + Chr(13) + _
+    "gLinkCount: " + Str(gLinkCount) + Chr(13) + _
+    "gLinkNdx : " + Str(gLinkNdx) + Chr(13) + _
+    "pop count: " + Str(gPopCount) + Chr(13) + _
+    "    call 823-7735"
+    
+  Resume Traverse_Exit
+  
+End Sub
+

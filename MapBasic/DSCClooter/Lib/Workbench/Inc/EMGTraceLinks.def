@@ -1,0 +1,11 @@
+'
+'	Header / definition file for EMGTraceLinks.mb
+'
+
+declare Sub BuildMDL_Links()
+Declare	Sub SetGlobals()
+Declare	Sub GetNodes()
+Declare	Sub DiversionMagic()
+Declare	Sub DoOneDiversion(ByVal Node as string, ByVal OFlowLinkIn as integer, ByVal UFlowLinkIn as integer)
+Declare	Sub		DoAllTraceLinks()
+Declare	Sub		ReBuildTraceLinks()

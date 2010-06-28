@@ -1,0 +1,68 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BREPrototype", "BREPrototype\BREPrototype.csproj", "{FC46D184-3A17-49D8-B831-B73EDA698801}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemsAnalysis.DataAccess", "..\DataAccess\SystemsAnalysis.DataAccess.csproj", "{D81499E0-ED3E-4C85-9F8E-72C263AA24C4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemsAnalysis.Modeling", "..\Modeling\SystemsAnalysis.Modeling.csproj", "{54555B74-906E-4D29-9BC3-7653805B6AD0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemsAnalysis.Modeling.ModelResults", "..\ModelResults\SystemsAnalysis.Modeling.ModelResults.csproj", "{F1A132E6-4C70-4303-AFC2-82938D0F557A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemsAnalysis.Tracer", "..\Tracer\SystemsAnalysis.Tracer.csproj", "{C8B24858-1D99-4519-9A1D-CF129CED9ADA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemsAnalysis.Utils.ArcObjects.MapControl.MapControlHelper", "..\ArcObjectsUtils\MapControlUtils\MapControlHelper\SystemsAnalysis.Utils.ArcObjects.MapControl.MapControlHelper.csproj", "{D08971DD-9DAD-4DE1-88CA-35EE30AB6B23}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemsAnalysis.Utils.ArcObjects.MapControl.PanZoom", "..\ArcObjectsUtils\MapControlUtils\PanZoom_Commands\SystemsAnalysis.Utils.ArcObjects.MapControl.PanZoom.csproj", "{120CF791-801E-4669-8D65-174DCABF47EC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemsAnalysis.Utils.ArcObjects.MapControl.SelectCommands", "..\ArcObjectsUtils\MapControlUtils\Select_Commands\SystemsAnalysis.Utils.ArcObjects.MapControl.SelectCommands.csproj", "{63AD8943-A61C-4AC7-B6F8-DA20E063E64F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemsAnalysis.Tracer.FeatureClassTracer", "..\ArcObjectsUtils\FeatureClassTracer\TracerExtension\SystemsAnalysis.Tracer.FeatureClassTracer.csproj", "{D25581F1-959E-4E80-8F11-C393ACD9B916}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FC46D184-3A17-49D8-B831-B73EDA698801}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC46D184-3A17-49D8-B831-B73EDA698801}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC46D184-3A17-49D8-B831-B73EDA698801}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC46D184-3A17-49D8-B831-B73EDA698801}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D81499E0-ED3E-4C85-9F8E-72C263AA24C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D81499E0-ED3E-4C85-9F8E-72C263AA24C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D81499E0-ED3E-4C85-9F8E-72C263AA24C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D81499E0-ED3E-4C85-9F8E-72C263AA24C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54555B74-906E-4D29-9BC3-7653805B6AD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54555B74-906E-4D29-9BC3-7653805B6AD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54555B74-906E-4D29-9BC3-7653805B6AD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54555B74-906E-4D29-9BC3-7653805B6AD0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1A132E6-4C70-4303-AFC2-82938D0F557A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1A132E6-4C70-4303-AFC2-82938D0F557A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1A132E6-4C70-4303-AFC2-82938D0F557A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1A132E6-4C70-4303-AFC2-82938D0F557A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8B24858-1D99-4519-9A1D-CF129CED9ADA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8B24858-1D99-4519-9A1D-CF129CED9ADA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8B24858-1D99-4519-9A1D-CF129CED9ADA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8B24858-1D99-4519-9A1D-CF129CED9ADA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D08971DD-9DAD-4DE1-88CA-35EE30AB6B23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D08971DD-9DAD-4DE1-88CA-35EE30AB6B23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D08971DD-9DAD-4DE1-88CA-35EE30AB6B23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D08971DD-9DAD-4DE1-88CA-35EE30AB6B23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{120CF791-801E-4669-8D65-174DCABF47EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{120CF791-801E-4669-8D65-174DCABF47EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{120CF791-801E-4669-8D65-174DCABF47EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{120CF791-801E-4669-8D65-174DCABF47EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63AD8943-A61C-4AC7-B6F8-DA20E063E64F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63AD8943-A61C-4AC7-B6F8-DA20E063E64F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63AD8943-A61C-4AC7-B6F8-DA20E063E64F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63AD8943-A61C-4AC7-B6F8-DA20E063E64F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D25581F1-959E-4E80-8F11-C393ACD9B916}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D25581F1-959E-4E80-8F11-C393ACD9B916}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D25581F1-959E-4E80-8F11-C393ACD9B916}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D25581F1-959E-4E80-8F11-C393ACD9B916}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
