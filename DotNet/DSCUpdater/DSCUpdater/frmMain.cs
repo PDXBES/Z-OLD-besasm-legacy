@@ -35,8 +35,9 @@ namespace DSCUpdater
         public int newParkArea = 0;
         public int selectedIndex = 0;
         public int impAQCCounter = 0;
+        
         public string sqlConStr = "Data Source=WS09884\\SQLEXPRESS;Initial Catalog=DSCEDITOR;Integrated Security=True";
-
+        
         SqlDataAdapter daUpdaterEditor;
         DataTable dtUpdaterEditor;
 
@@ -110,6 +111,7 @@ namespace DSCUpdater
             catch (SqlException sqlException)
             {
                 MessageBox.Show(sqlException.Message +"\n"+"Please specify server and database connection parameters on the Database Connection Options tab.", "DSCUpdater: SQL Exception Thrown", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ViewChangeConnectionSettings();
             }             
         }
 
@@ -1209,6 +1211,7 @@ namespace DSCUpdater
         private void btnCloseApplication_Click(object sender, EventArgs e)
         {
             Application.Exit();
+          //TO-DO: change DSCUpdaterConfig.xml DB connection settings back to default
         }
         
         private void btnCancel_Click(object sender, EventArgs e)
@@ -1239,6 +1242,7 @@ namespace DSCUpdater
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
+          //TO-DO: change DSCUpdaterConfig.xml file DB connection settings back to default
         }       
 
         private void btnDSCQC_Click(object sender, EventArgs e)
@@ -1579,6 +1583,7 @@ namespace DSCUpdater
           tabControlMain.TabPages.Add(tabCheckRetroUpdates);
           tabControlMain.SelectedTab = tabCheckRetroUpdates;
           tabControlMain.Visible = true;
+          //RunIncomingRetroChangesReport();
           //TO-DO: Implement RunIncomingRetroChangesReport();
         }
 
@@ -2652,6 +2657,75 @@ namespace DSCUpdater
         private void applyRETROUpdatesToolStripMenuItem_Click(object sender, EventArgs e)
         {
           ApplyRetroUpdates();
+        }
+
+        private void viewChangeConnectionSettingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+          ViewChangeConnectionSettings();
+        }
+
+        private void btnViewNewRetroAssessments_Click(object sender, EventArgs e)
+        {
+          try
+          {
+            ((DataView)dgvIncomingRetroChanges.DataSource).Table.Clear();
+            //TO-DO: add code to populate the DataGridView showing the incoming new site assessments
+          }
+          catch (Exception ex)
+          {
+            MessageBox.Show("Could not load incoming changes: " + ex.Message, "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+          }
+          
+        }
+
+        private void btnViewNewIcTargets_Click(object sender, EventArgs e)
+        {
+          try
+          {
+            ((DataView)dgvIncomingRetroChanges.DataSource).Table.Clear();
+            //TO-DO: add code to populate the DataGridView showing incoming new IC targets
+          }
+
+          catch (Exception ex)
+          {
+            MessageBox.Show("Could not load incoming changes: " + ex.Message, "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+          }
+
+        }
+
+        private void btnViewNewConstrFacs_Click(object sender, EventArgs e)
+        {
+          try
+          {
+            ((DataView)dgvIncomingRetroChanges.DataSource).Table.Clear();
+            //TO-DO: add code to populate the DataGridView showing incoming new constructed IC facilities
+          }
+
+          catch (Exception ex)
+          {
+            MessageBox.Show("Could Not Load Incoming Changes: "+ex.Message,"Exception",MessageBoxButtons.OK,MessageBoxIcon.Error);
+          }
+        }
+
+        private void btnApplyRetroUpdates_Click(object sender, EventArgs e)
+        {
+          //TO-DO: create parameter to count the number of incoming new site assessments from RETRO DB
+          //Need to think about everything that comprises a new assessment (i.e., updated impervious area, ic area, etc.)
+          //Parameter will be passed to the message box confirming the updates will be applied
+          int countOfNewSiteAssessments = 0;
+
+          //TO-DO: create parameter to count the number of incoming new ic targets from RETRO DB
+          //Parameter will be passed to the message box confirming the updates will be applied
+          int countOfNewPotentialICs = 0;
+
+          //TO-DO: create parameter to count the number of constrcuted IC from the RETRO DB
+          //Parameter will be passed to the message box confirming the updates will be applied
+          int countOfNewCOnstructedICs = 0;
+
+          MessageBox.Show("The following updates will be applied:" + "\r\n" +
+            countOfNewSiteAssessments + " new site assessments will be applied to master modeling tables." + "\r\n" +
+            countOfNewPotentialICs + " new potential inflow controls will be added to the IC Alts GIS coverage(s)." + "\r\n" +
+            countOfNewSiteAssessments + " new constructed inflow controls will be added to the IC Alt GIS coverage(s)." + "\r\n", "Confirm Update", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation);
         }
     }
 }
