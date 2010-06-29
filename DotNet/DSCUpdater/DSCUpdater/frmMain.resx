@@ -120,14 +120,58 @@
   <metadata name="ofdMain.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>172, 17</value>
   </metadata>
-  <metadata name="bindingNavigator1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>339, 54</value>
+  <metadata name="sESSIONBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>173, 54</value>
   </metadata>
-  <metadata name="updater_editor_value_changed.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
+  <metadata name="projectDataSet.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>493, 17</value>
   </metadata>
   <metadata name="dSCEDITBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>481, 54</value>
+  </metadata>
+  <metadata name="statusStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>383, 17</value>
+  </metadata>
+  <metadata name="menStripMain.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>263, 17</value>
+  </metadata>
+  <metadata name="sfdMain.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>775, 17</value>
+  </metadata>
+  <metadata name="sESSIONTableAdapter.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 91</value>
+  </metadata>
+  <metadata name="dSCEDITTableAdapter.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>647, 54</value>
+  </metadata>
+  <metadata name="dbBindSourceDSCQC.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <metadata name="dbBindSourceParkQC.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 54</value>
+  </metadata>
+  <metadata name="dbBindSourceRoofQC.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>618, 17</value>
+  </metadata>
+  <data name="lblPendingImpAChanges.Text" xml:space="preserve">
+    <value>Notice: The records listed above matched record(s) in the Master DSC table that 
+            currently have pending changes (the impervious area updates are still in 
+            the queue to be updated).  Please review these records and change them
+            if necessary before submitting the table.  Submission of the current table
+            will negate the pending changes.</value>
+  </data>
+  <data name="lblRoofICError.Text" xml:space="preserve">
+    <value>Warning: The record(s) listed above have a DISCO and Drywell IC area that is 
+greater than the roof area reported for the parcel(s).  Please check these 
+areas and correct them in the update file before proceeding.</value>
+  </data>
+  <data name="lblParkICError.Text" xml:space="preserve">
+    <value>Warning: The record(s) listed above have a DISCO and Drywell IC area that is 
+greater than the parking area reported for the parcel(s).  Please check these 
+areas and correct them in the update file before proceeding.</value>
+  </data>
+  <metadata name="updater_editor_value_changed.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
   </metadata>
   <metadata name="bindingNavigator2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>178, 91</value>
@@ -177,9 +221,6 @@
         x8MAAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="lblDownloadTemplate.Text" xml:space="preserve">
-    <value>Using the DSCUpdater requires the use of an update template.  If you already have the updates input to the template, click on 'Apply Updates Using Template' in the menu window. Otherwise, click on the 'Download Template' button below.</value>
-  </data>
   <metadata name="bindingNavigator1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>339, 54</value>
   </metadata>
@@ -227,64 +268,11 @@
         x8MAAAAASUVORK5CYII=
 </value>
   </data>
-  <metadata name="sESSIONBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>173, 54</value>
-  </metadata>
-  <metadata name="projectDataSet.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>493, 17</value>
-  </metadata>
-  <metadata name="projectDataSet.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>493, 17</value>
-  </metadata>
-  <metadata name="updater_editor_value_changed.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="dSCEDITBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>481, 54</value>
-  </metadata>
-  <data name="lblParkICError.Text" xml:space="preserve">
-    <value>Warning: The record(s) listed above have a DISCO and Drywell IC area that is 
-greater than the parking area reported for the parcel(s).  Please check these 
-areas and correct them in the update file before proceeding.</value>
+  <data name="lblDownloadTemplate.Text" xml:space="preserve">
+    <value>Using the DSCUpdater requires the use of an update template.  If you already have the updates input to the template, click on 'Apply Updates Using Template' in the menu window. Otherwise, click on the 'Download Template' button below.</value>
   </data>
-  <data name="lblRoofICError.Text" xml:space="preserve">
-    <value>Warning: The record(s) listed above have a DISCO and Drywell IC area that is 
-greater than the roof area reported for the parcel(s).  Please check these 
-areas and correct them in the update file before proceeding.</value>
-  </data>
-  <data name="lblPendingImpAChanges.Text" xml:space="preserve">
-    <value>Notice: The records listed above matched record(s) in the Master DSC table that 
-            currently have pending changes (the impervious area updates are still in 
-            the queue to be updated).  Please review these records and change them
-            if necessary before submitting the table.  Submission of the current table
-            will negate the pending changes.</value>
-  </data>
-  <metadata name="statusStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>383, 17</value>
-  </metadata>
-  <metadata name="menStripMain.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>263, 17</value>
-  </metadata>
-  <metadata name="sfdMain.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>775, 17</value>
-  </metadata>
-  <metadata name="sESSIONTableAdapter.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 91</value>
-  </metadata>
-  <metadata name="dSCEDITTableAdapter.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>647, 54</value>
-  </metadata>
-  <metadata name="dbBindSourceDSCQC.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <metadata name="dbBindSourceParkQC.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 54</value>
-  </metadata>
-  <metadata name="dbBindSourceRoofQC.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>618, 17</value>
-  </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>63</value>
+    <value>163</value>
   </metadata>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
