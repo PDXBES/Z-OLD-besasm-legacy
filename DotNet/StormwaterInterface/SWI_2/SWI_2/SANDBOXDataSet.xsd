@@ -1370,6 +1370,265 @@ SELECT watershed_id, watershed, description FROM SWSP_WATERSHED WHERE (watershed
               </DbSource>
             </Sources>
           </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="SWSP_CULVERTSTableAdapter" GeneratorDataComponentClassName="SWSP_CULVERTSTableAdapter" Name="SWSP_CULVERTS" UserDataComponentName="SWSP_CULVERTSTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="SANDBOXConnectionString (Settings)" DbObjectName="SANDBOX.GIS.SWSP_CULVERTS" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT culvert_id, global_id, node, facing, culvert_opening, full_diam_in, full_width_in, unobstructed_height_in, shape, material, watershed, subwatershed, view_number, page_number, evaluator_list FROM GIS.SWSP_CULVERTS</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="culvert_id" DataSetColumn="culvert_id" />
+              <Mapping SourceColumn="global_id" DataSetColumn="global_id" />
+              <Mapping SourceColumn="node" DataSetColumn="node" />
+              <Mapping SourceColumn="facing" DataSetColumn="facing" />
+              <Mapping SourceColumn="culvert_opening" DataSetColumn="culvert_opening" />
+              <Mapping SourceColumn="full_diam_in" DataSetColumn="full_diam_in" />
+              <Mapping SourceColumn="full_width_in" DataSetColumn="full_width_in" />
+              <Mapping SourceColumn="unobstructed_height_in" DataSetColumn="unobstructed_height_in" />
+              <Mapping SourceColumn="shape" DataSetColumn="shape" />
+              <Mapping SourceColumn="material" DataSetColumn="material" />
+              <Mapping SourceColumn="watershed" DataSetColumn="watershed" />
+              <Mapping SourceColumn="subwatershed" DataSetColumn="subwatershed" />
+              <Mapping SourceColumn="view_number" DataSetColumn="view_number" />
+              <Mapping SourceColumn="page_number" DataSetColumn="page_number" />
+              <Mapping SourceColumn="evaluator_list" DataSetColumn="evaluator_list" />
+            </Mappings>
+            <Sources>
+              <DbSource ConnectionRef="SANDBOXConnectionString (Settings)" DbObjectName="SANDBOX.GIS.SWSP_CULVERTS_BAD_DIAMETERNOTSTANDARD" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillByBadDiameterNotStandard" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByBadDiameterNotStandard" GeneratorSourceName="FillByBadDiameterNotStandard" GetMethodModifier="Public" GetMethodName="GetDataByBadDiameterNotStandard" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByBadDiameterNotStandard" UserSourceName="FillByBadDiameterNotStandard">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT culvert_id, global_id, node, facing, culvert_opening, full_diam_in, full_width_in, unobstructed_height_in, shape, material, watershed, subwatershed, view_number, page_number, evaluator_list FROM GIS.SWSP_CULVERTS_BAD_DIAMETERNOTSTANDARD</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="SANDBOXConnectionString (Settings)" DbObjectName="SANDBOX.GIS.SWSP_CULVERTS_BAD_NO_DIMENSION" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillByBadNoDimension" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByBadNoDimension" GeneratorSourceName="FillByBadNoDimension" GetMethodModifier="Public" GetMethodName="GetDataByBadNoDimension" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByBadNoDimension" UserSourceName="FillByBadNoDimension">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT culvert_id, global_id, node, facing, culvert_opening, full_diam_in, full_width_in, unobstructed_height_in, shape, material, watershed, subwatershed, view_number, page_number, evaluator_list FROM GIS.SWSP_CULVERTS_BAD_NO_DIMENSION</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="SANDBOXConnectionString (Settings)" DbObjectName="SANDBOX.GIS.SWSP_CULVERTS_BAD_NO_DSFACINGMATCH" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillByBadNoDSFacingMatch" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByBadNoDSFacingMatch" GeneratorSourceName="FillByBadNoDSFacingMatch" GetMethodModifier="Public" GetMethodName="GetDataByBadNoDSFacingMatch" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByBadNoDSFacingMatch" UserSourceName="FillByBadNoDSFacingMatch">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT culvert_id, global_id, node, facing, culvert_opening, full_diam_in, full_width_in, unobstructed_height_in, shape, material, watershed, subwatershed, view_number, page_number, evaluator_list FROM GIS.SWSP_CULVERTS_BAD_NO_DSFACINGMATCH</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="SANDBOXConnectionString (Settings)" DbObjectName="SANDBOX.GIS.SWSP_CULVERTS_BAD_NO_FACING" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillByBadNoFacing" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByBadNoFacing" GeneratorSourceName="FillByBadNoFacing" GetMethodModifier="Public" GetMethodName="GetDataByBadNoFacing" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByBadNoFacing" UserSourceName="FillByBadNoFacing">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT culvert_id, global_id, node, facing, culvert_opening, full_diam_in, full_width_in, unobstructed_height_in, shape, material, watershed, subwatershed, view_number, page_number, evaluator_list FROM GIS.SWSP_CULVERTS_BAD_NO_FACING</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="SANDBOXConnectionString (Settings)" DbObjectName="SANDBOX.GIS.SWSP_CULVERTS_BAD_NO_NODE" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillByBadNoNode" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByBadNoNode" GeneratorSourceName="FillByBadNoNode" GetMethodModifier="Public" GetMethodName="GetDataByBadNoNode" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByBadNoNode" UserSourceName="FillByBadNoNode">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT culvert_id, global_id, node, facing, culvert_opening, full_diam_in, full_width_in, unobstructed_height_in, shape, material, watershed, subwatershed, view_number, page_number, evaluator_list FROM GIS.SWSP_CULVERTS_BAD_NO_NODE</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="SANDBOXConnectionString (Settings)" DbObjectName="SANDBOX.GIS.SWSP_CULVERTS_BAD_NO_USFACINGMATCH" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillByBadNoUSFacingMatch" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByBadNoUSFacingMatch" GeneratorSourceName="FillByBadNoUSFacingMatch" GetMethodModifier="Public" GetMethodName="GetDataByBadNoUSFacingMatch" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByBadNoUSFacingMatch" UserSourceName="FillByBadNoUSFacingMatch">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT culvert_id, global_id, node, facing, culvert_opening, full_diam_in, full_width_in, unobstructed_height_in, shape, material, watershed, subwatershed, view_number, page_number, evaluator_list FROM GIS.SWSP_CULVERTS_BAD_NO_USFACINGMATCH</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="SANDBOXConnectionString (Settings)" DbObjectName="SANDBOX.GIS.SWSP_CULVERTS_OK" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillByCulvertsOK" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByCulvertsOK" GeneratorSourceName="FillByCulvertsOK" GetMethodModifier="Public" GetMethodName="GetDataByCulvertsOK" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByCulvertsOK" UserSourceName="FillByCulvertsOK">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT culvert_id, global_id, node, facing, culvert_opening, full_diam_in, full_width_in, unobstructed_height_in, shape, material, watershed, subwatershed, view_number, page_number, evaluator_list FROM GIS.SWSP_CULVERTS_OK</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </Sources>
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="SWSP_DITCHESTableAdapter" GeneratorDataComponentClassName="SWSP_DITCHESTableAdapter" Name="SWSP_DITCHES" UserDataComponentName="SWSP_DITCHESTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="SANDBOXConnectionString (Settings)" DbObjectName="SANDBOX.GIS.SWSP_DITCHES" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT ditch_id, global_id, node, facing, top_width_in, bottom_width_in, depth_in, material, watershed, subwatershed, view_number, page_number, evaluator_list FROM GIS.SWSP_DITCHES</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="ditch_id" DataSetColumn="ditch_id" />
+              <Mapping SourceColumn="global_id" DataSetColumn="global_id" />
+              <Mapping SourceColumn="node" DataSetColumn="node" />
+              <Mapping SourceColumn="facing" DataSetColumn="facing" />
+              <Mapping SourceColumn="top_width_in" DataSetColumn="top_width_in" />
+              <Mapping SourceColumn="bottom_width_in" DataSetColumn="bottom_width_in" />
+              <Mapping SourceColumn="depth_in" DataSetColumn="depth_in" />
+              <Mapping SourceColumn="material" DataSetColumn="material" />
+              <Mapping SourceColumn="watershed" DataSetColumn="watershed" />
+              <Mapping SourceColumn="subwatershed" DataSetColumn="subwatershed" />
+              <Mapping SourceColumn="view_number" DataSetColumn="view_number" />
+              <Mapping SourceColumn="page_number" DataSetColumn="page_number" />
+              <Mapping SourceColumn="evaluator_list" DataSetColumn="evaluator_list" />
+            </Mappings>
+            <Sources>
+              <DbSource ConnectionRef="SANDBOXConnectionString (Settings)" DbObjectName="SANDBOX.GIS.SWSP_DITCHES_BAD_DEPTHLT1" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillByBadDepthLT1" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByBadDepthLT1" GeneratorSourceName="FillByBadDepthLT1" GetMethodModifier="Public" GetMethodName="GetDataByBadDepthLT1" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByBadDepthLT1" UserSourceName="FillByBadDepthLT1">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT ditch_id, global_id, node, facing, top_width_in, bottom_width_in, depth_in, material, watershed, subwatershed, view_number, page_number, evaluator_list FROM GIS.SWSP_DITCHES_BAD_DEPTHLT1</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="SANDBOXConnectionString (Settings)" DbObjectName="SANDBOX.GIS.SWSP_DITCHES_BAD_NO_DSFACINGMATCH" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillByBadNoDSFacingMatch" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByBadNoDSFacingMatch" GeneratorSourceName="FillByBadNoDSFacingMatch" GetMethodModifier="Public" GetMethodName="GetDataByBadNoDSFacingMatch" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByBadNoDSFacingMatch" UserSourceName="FillByBadNoDSFacingMatch">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT ditch_id, global_id, node, facing, top_width_in, bottom_width_in, depth_in, material, watershed, subwatershed, view_number, page_number, evaluator_list FROM GIS.SWSP_DITCHES_BAD_NO_DSFACINGMATCH</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="SANDBOXConnectionString (Settings)" DbObjectName="SANDBOX.GIS.SWSP_DITCHES_BAD_NO_FACING" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillByBadNoFacing" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByBadNoFacing" GeneratorSourceName="FillByBadNoFacing" GetMethodModifier="Public" GetMethodName="GetDataByBadNoFacing" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByBadNoFacing" UserSourceName="FillByBadNoFacing">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT ditch_id, global_id, node, facing, top_width_in, bottom_width_in, depth_in, material, watershed, subwatershed, view_number, page_number, evaluator_list FROM GIS.SWSP_DITCHES_BAD_NO_FACING</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="SANDBOXConnectionString (Settings)" DbObjectName="SANDBOX.GIS.SWSP_DITCHES_BAD_NO_NODE" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillByBadNoNode" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByBadNoNode" GeneratorSourceName="FillByBadNoNode" GetMethodModifier="Public" GetMethodName="GetDataByBadNoNode" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByBadNoNode" UserSourceName="FillByBadNoNode">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT ditch_id, global_id, node, facing, top_width_in, bottom_width_in, depth_in, material, watershed, subwatershed, view_number, page_number, evaluator_list FROM GIS.SWSP_DITCHES_BAD_NO_NODE</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="SANDBOXConnectionString (Settings)" DbObjectName="SANDBOX.GIS.SWSP_DITCHES_BAD_NO_USFACINGMATCH" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillByBadNoUSFacingMatch" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByBadNoUSFacingMatch" GeneratorSourceName="FillByBadNoUSFacingMatch" GetMethodModifier="Public" GetMethodName="GetDataByBadNoUSFacingMatch" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByBadNoUSFacingMatch" UserSourceName="FillByBadNoUSFacingMatch">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT ditch_id, global_id, node, facing, top_width_in, bottom_width_in, depth_in, material, watershed, subwatershed, view_number, page_number, evaluator_list FROM GIS.SWSP_DITCHES_BAD_NO_USFACINGMATCH</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="SANDBOXConnectionString (Settings)" DbObjectName="SANDBOX.GIS.SWSP_DITCHES_BAD_WIDTHSIMPROPER" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillByBadWidthsImproper" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByBadWidthsImproper" GeneratorSourceName="FillByBadWidthsImproper" GetMethodModifier="Public" GetMethodName="GetDataByBadWidthsImproper" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByBadWidthsImproper" UserSourceName="FillByBadWidthsImproper">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT ditch_id, global_id, node, facing, top_width_in, bottom_width_in, depth_in, material, watershed, subwatershed, view_number, page_number, evaluator_list FROM GIS.SWSP_DITCHES_BAD_WIDTHSIMPROPER</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="SANDBOXConnectionString (Settings)" DbObjectName="SANDBOX.GIS.SWSP_DITCHES_OK" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillByDitchesOK" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByDitchesOK" GeneratorSourceName="FillByDitchesOK" GetMethodModifier="Public" GetMethodName="GetDataByDitchesOK" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByDitchesOK" UserSourceName="FillByDitchesOK">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT ditch_id, global_id, node, facing, top_width_in, bottom_width_in, depth_in, material, watershed, subwatershed, view_number, page_number, evaluator_list FROM GIS.SWSP_DITCHES_OK</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </Sources>
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="SWSP_PIPESTableAdapter" GeneratorDataComponentClassName="SWSP_PIPESTableAdapter" Name="SWSP_PIPES" UserDataComponentName="SWSP_PIPESTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="SANDBOXConnectionString (Settings)" DbObjectName="SANDBOX.GIS.SWSP_PIPES" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT pipe_id, global_id, us_node, ds_node, us_depth_in, ds_depth_in, inside_diam_in, inside_width_in, shape, material, watershed, subwatershed, view_number, page_number, evaluator_list FROM GIS.SWSP_PIPES</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="pipe_id" DataSetColumn="pipe_id" />
+              <Mapping SourceColumn="global_id" DataSetColumn="global_id" />
+              <Mapping SourceColumn="us_node" DataSetColumn="us_node" />
+              <Mapping SourceColumn="ds_node" DataSetColumn="ds_node" />
+              <Mapping SourceColumn="us_depth_in" DataSetColumn="us_depth_in" />
+              <Mapping SourceColumn="ds_depth_in" DataSetColumn="ds_depth_in" />
+              <Mapping SourceColumn="inside_diam_in" DataSetColumn="inside_diam_in" />
+              <Mapping SourceColumn="inside_width_in" DataSetColumn="inside_width_in" />
+              <Mapping SourceColumn="shape" DataSetColumn="shape" />
+              <Mapping SourceColumn="material" DataSetColumn="material" />
+              <Mapping SourceColumn="watershed" DataSetColumn="watershed" />
+              <Mapping SourceColumn="subwatershed" DataSetColumn="subwatershed" />
+              <Mapping SourceColumn="view_number" DataSetColumn="view_number" />
+              <Mapping SourceColumn="page_number" DataSetColumn="page_number" />
+              <Mapping SourceColumn="evaluator_list" DataSetColumn="evaluator_list" />
+            </Mappings>
+            <Sources>
+              <DbSource ConnectionRef="SANDBOXConnectionString (Settings)" DbObjectName="SANDBOX.GIS.SWSP_PIPES_BAD_NO_DSNODE" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillByBadNoDSNode" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByBadNoDSNode" GeneratorSourceName="FillByBadNoDSNode" GetMethodModifier="Public" GetMethodName="GetDataByBadNoDSNode" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByBadNoDSNode" UserSourceName="FillByBadNoDSNode">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT* FROM GIS.SWSP_PIPES_BAD_NO_DSNODE</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="SANDBOXConnectionString (Settings)" DbObjectName="SANDBOX.GIS.SWSP_PIPES_BAD_NO_DSNODEMATCH" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillByBadNoDSNodeMatch" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByBadNoDSNodeMatch" GeneratorSourceName="FillByBadNoDSNodeMatch" GetMethodModifier="Public" GetMethodName="GetDataByBadNoDSNodeMatch" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByBadNoDSNodeMatch" UserSourceName="FillByBadNoDSNodeMatch">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT * FROM GIS.SWSP_PIPES_BAD_NO_DSNODEMATCH</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="SANDBOXConnectionString (Settings)" DbObjectName="SANDBOX.GIS.SWSP_PIPES_BAD_NO_INSIDEDIAMIN" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillByBadNoInsideDiamIn" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByBadNoInsideDiamIn" GeneratorSourceName="FillByBadNoInsideDiamIn" GetMethodModifier="Public" GetMethodName="GetDataByBadNoInsideDiamIn" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByBadNoInsideDiamIn" UserSourceName="FillByBadNoInsideDiamIn">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT * FROM GIS.SWSP_PIPES_BAD_NO_INSIDEDIAMIN</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="SANDBOXConnectionString (Settings)" DbObjectName="SANDBOX.GIS.SWSP_PIPES_BAD_NO_USDSMATCH" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillByBadNoUSDSMatch" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByBadNoUSDSMatch" GeneratorSourceName="FillByBadNoUSDSMatch" GetMethodModifier="Public" GetMethodName="GetDataByBadNoUSDSMatch" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByBadNoUSDSMatch" UserSourceName="FillByBadNoUSDSMatch">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT pipe_id, global_id, us_node, ds_node, us_depth_in, ds_depth_in, inside_diam_in, inside_width_in, shape, material, watershed, subwatershed, view_number, page_number, evaluator_list FROM GIS.SWSP_PIPES_BAD_NO_USDSMATCH</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="SANDBOXConnectionString (Settings)" DbObjectName="SANDBOX.GIS.SWSP_PIPES_BAD_NO_USNODE" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillByBadNoUSNode" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByBadNoUSNode" GeneratorSourceName="FillByBadNoUSNode" GetMethodModifier="Public" GetMethodName="GetDataByBadNoUSNode" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByBadNoUSNode" UserSourceName="FillByBadNoUSNode">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT pipe_id, global_id, us_node, ds_node, us_depth_in, ds_depth_in, inside_diam_in, inside_width_in, shape, material, watershed, subwatershed, view_number, page_number, evaluator_list FROM GIS.SWSP_PIPES_BAD_NO_USNODE</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="SANDBOXConnectionString (Settings)" DbObjectName="SANDBOX.GIS.SWSP_PIPES_BAD_NO_USNODEMATCH" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillByBadNoUSNodeMatch" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByBadNoUSNodeMatch" GeneratorSourceName="FillByBadNoUSNodeMatch" GetMethodModifier="Public" GetMethodName="GetDataByBadNoUSNodeMatch" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByBadNoUSNodeMatch" UserSourceName="FillByBadNoUSNodeMatch">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT pipe_id, global_id, us_node, ds_node, us_depth_in, ds_depth_in, inside_diam_in, inside_width_in, shape, material, watershed, subwatershed, view_number, page_number, evaluator_list FROM GIS.SWSP_PIPES_BAD_NO_USNODEMATCH</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+              <DbSource ConnectionRef="SANDBOXConnectionString (Settings)" DbObjectName="SANDBOX.GIS.SWSP_PIPES_OK" DbObjectType="View" FillMethodModifier="Public" FillMethodName="FillByPipesOK" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByPipesOK" GeneratorSourceName="FillByPipesOK" GetMethodModifier="Public" GetMethodName="GetDataByPipesOK" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByPipesOK" UserSourceName="FillByPipesOK">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT pipe_id, global_id, us_node, ds_node, us_depth_in, ds_depth_in, inside_diam_in, inside_width_in, shape, material, watershed, subwatershed, view_number, page_number, evaluator_list FROM GIS.SWSP_PIPES_OK</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </Sources>
+          </TableAdapter>
         </Tables>
         <Sources />
       </DataSource>
@@ -1721,6 +1980,193 @@ SELECT watershed_id, watershed, description FROM SWSP_WATERSHED WHERE (watershed
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="SWSP_CULVERTS" msprop:Generator_UserTableName="SWSP_CULVERTS" msprop:Generator_RowDeletedName="SWSP_CULVERTSRowDeleted" msprop:Generator_RowChangedName="SWSP_CULVERTSRowChanged" msprop:Generator_RowClassName="SWSP_CULVERTSRow" msprop:Generator_RowChangingName="SWSP_CULVERTSRowChanging" msprop:Generator_RowEvArgName="SWSP_CULVERTSRowChangeEvent" msprop:Generator_RowEvHandlerName="SWSP_CULVERTSRowChangeEventHandler" msprop:Generator_TableClassName="SWSP_CULVERTSDataTable" msprop:Generator_TableVarName="tableSWSP_CULVERTS" msprop:Generator_RowDeletingName="SWSP_CULVERTSRowDeleting" msprop:Generator_TablePropName="SWSP_CULVERTS">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="culvert_id" msprop:Generator_UserColumnName="culvert_id" msprop:Generator_ColumnVarNameInTable="columnculvert_id" msprop:Generator_ColumnPropNameInRow="culvert_id" msprop:Generator_ColumnPropNameInTable="culvert_idColumn" type="xs:int" />
+              <xs:element name="global_id" msprop:Generator_UserColumnName="global_id" msprop:Generator_ColumnVarNameInTable="columnglobal_id" msprop:Generator_ColumnPropNameInRow="global_id" msprop:Generator_ColumnPropNameInTable="global_idColumn" type="xs:int" />
+              <xs:element name="node" msprop:Generator_UserColumnName="node" msprop:Generator_ColumnVarNameInTable="columnnode" msprop:Generator_ColumnPropNameInRow="node" msprop:Generator_ColumnPropNameInTable="nodeColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="facing" msprop:Generator_UserColumnName="facing" msprop:Generator_ColumnVarNameInTable="columnfacing" msprop:Generator_ColumnPropNameInRow="facing" msprop:Generator_ColumnPropNameInTable="facingColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="culvert_opening" msprop:Generator_UserColumnName="culvert_opening" msprop:Generator_ColumnVarNameInTable="columnculvert_opening" msprop:Generator_ColumnPropNameInRow="culvert_opening" msprop:Generator_ColumnPropNameInTable="culvert_openingColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="full_diam_in" msprop:Generator_UserColumnName="full_diam_in" msprop:Generator_ColumnVarNameInTable="columnfull_diam_in" msprop:Generator_ColumnPropNameInRow="full_diam_in" msprop:Generator_ColumnPropNameInTable="full_diam_inColumn" type="xs:double" minOccurs="0" />
+              <xs:element name="full_width_in" msprop:Generator_UserColumnName="full_width_in" msprop:Generator_ColumnVarNameInTable="columnfull_width_in" msprop:Generator_ColumnPropNameInRow="full_width_in" msprop:Generator_ColumnPropNameInTable="full_width_inColumn" type="xs:double" minOccurs="0" />
+              <xs:element name="unobstructed_height_in" msprop:Generator_UserColumnName="unobstructed_height_in" msprop:Generator_ColumnVarNameInTable="columnunobstructed_height_in" msprop:Generator_ColumnPropNameInRow="unobstructed_height_in" msprop:Generator_ColumnPropNameInTable="unobstructed_height_inColumn" type="xs:double" minOccurs="0" />
+              <xs:element name="shape" msprop:Generator_UserColumnName="shape" msprop:Generator_ColumnVarNameInTable="columnshape" msprop:Generator_ColumnPropNameInRow="shape" msprop:Generator_ColumnPropNameInTable="shapeColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="6" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="material" msprop:Generator_UserColumnName="material" msprop:Generator_ColumnVarNameInTable="columnmaterial" msprop:Generator_ColumnPropNameInRow="material" msprop:Generator_ColumnPropNameInTable="materialColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="6" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="watershed" msprop:Generator_UserColumnName="watershed" msprop:Generator_ColumnVarNameInTable="columnwatershed" msprop:Generator_ColumnPropNameInRow="watershed" msprop:Generator_ColumnPropNameInTable="watershedColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="subwatershed" msprop:Generator_UserColumnName="subwatershed" msprop:Generator_ColumnVarNameInTable="columnsubwatershed" msprop:Generator_ColumnPropNameInRow="subwatershed" msprop:Generator_ColumnPropNameInTable="subwatershedColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="view_number" msprop:Generator_UserColumnName="view_number" msprop:Generator_ColumnVarNameInTable="columnview_number" msprop:Generator_ColumnPropNameInRow="view_number" msprop:Generator_ColumnPropNameInTable="view_numberColumn" type="xs:int" />
+              <xs:element name="page_number" msprop:Generator_UserColumnName="page_number" msprop:Generator_ColumnVarNameInTable="columnpage_number" msprop:Generator_ColumnPropNameInRow="page_number" msprop:Generator_ColumnPropNameInTable="page_numberColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="evaluator_list" msprop:Generator_UserColumnName="evaluator_list" msprop:Generator_ColumnVarNameInTable="columnevaluator_list" msprop:Generator_ColumnPropNameInRow="evaluator_list" msprop:Generator_ColumnPropNameInTable="evaluator_listColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="256" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="SWSP_DITCHES" msprop:Generator_UserTableName="SWSP_DITCHES" msprop:Generator_RowDeletedName="SWSP_DITCHESRowDeleted" msprop:Generator_RowChangedName="SWSP_DITCHESRowChanged" msprop:Generator_RowClassName="SWSP_DITCHESRow" msprop:Generator_RowChangingName="SWSP_DITCHESRowChanging" msprop:Generator_RowEvArgName="SWSP_DITCHESRowChangeEvent" msprop:Generator_RowEvHandlerName="SWSP_DITCHESRowChangeEventHandler" msprop:Generator_TableClassName="SWSP_DITCHESDataTable" msprop:Generator_TableVarName="tableSWSP_DITCHES" msprop:Generator_RowDeletingName="SWSP_DITCHESRowDeleting" msprop:Generator_TablePropName="SWSP_DITCHES">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ditch_id" msprop:Generator_UserColumnName="ditch_id" msprop:Generator_ColumnVarNameInTable="columnditch_id" msprop:Generator_ColumnPropNameInRow="ditch_id" msprop:Generator_ColumnPropNameInTable="ditch_idColumn" type="xs:int" />
+              <xs:element name="global_id" msprop:Generator_UserColumnName="global_id" msprop:Generator_ColumnVarNameInTable="columnglobal_id" msprop:Generator_ColumnPropNameInRow="global_id" msprop:Generator_ColumnPropNameInTable="global_idColumn" type="xs:int" />
+              <xs:element name="node" msprop:Generator_UserColumnName="node" msprop:Generator_ColumnVarNameInTable="columnnode" msprop:Generator_ColumnPropNameInRow="node" msprop:Generator_ColumnPropNameInTable="nodeColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="facing" msprop:Generator_UserColumnName="facing" msprop:Generator_ColumnVarNameInTable="columnfacing" msprop:Generator_ColumnPropNameInRow="facing" msprop:Generator_ColumnPropNameInTable="facingColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="top_width_in" msprop:Generator_UserColumnName="top_width_in" msprop:Generator_ColumnVarNameInTable="columntop_width_in" msprop:Generator_ColumnPropNameInRow="top_width_in" msprop:Generator_ColumnPropNameInTable="top_width_inColumn" type="xs:double" minOccurs="0" />
+              <xs:element name="bottom_width_in" msprop:Generator_UserColumnName="bottom_width_in" msprop:Generator_ColumnVarNameInTable="columnbottom_width_in" msprop:Generator_ColumnPropNameInRow="bottom_width_in" msprop:Generator_ColumnPropNameInTable="bottom_width_inColumn" type="xs:double" minOccurs="0" />
+              <xs:element name="depth_in" msprop:Generator_UserColumnName="depth_in" msprop:Generator_ColumnVarNameInTable="columndepth_in" msprop:Generator_ColumnPropNameInRow="depth_in" msprop:Generator_ColumnPropNameInTable="depth_inColumn" type="xs:double" minOccurs="0" />
+              <xs:element name="material" msprop:Generator_UserColumnName="material" msprop:Generator_ColumnVarNameInTable="columnmaterial" msprop:Generator_ColumnPropNameInRow="material" msprop:Generator_ColumnPropNameInTable="materialColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="6" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="watershed" msprop:Generator_UserColumnName="watershed" msprop:Generator_ColumnVarNameInTable="columnwatershed" msprop:Generator_ColumnPropNameInRow="watershed" msprop:Generator_ColumnPropNameInTable="watershedColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="subwatershed" msprop:Generator_UserColumnName="subwatershed" msprop:Generator_ColumnVarNameInTable="columnsubwatershed" msprop:Generator_ColumnPropNameInRow="subwatershed" msprop:Generator_ColumnPropNameInTable="subwatershedColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="view_number" msprop:Generator_UserColumnName="view_number" msprop:Generator_ColumnVarNameInTable="columnview_number" msprop:Generator_ColumnPropNameInRow="view_number" msprop:Generator_ColumnPropNameInTable="view_numberColumn" type="xs:int" />
+              <xs:element name="page_number" msprop:Generator_UserColumnName="page_number" msprop:Generator_ColumnVarNameInTable="columnpage_number" msprop:Generator_ColumnPropNameInRow="page_number" msprop:Generator_ColumnPropNameInTable="page_numberColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="evaluator_list" msprop:Generator_UserColumnName="evaluator_list" msprop:Generator_ColumnVarNameInTable="columnevaluator_list" msprop:Generator_ColumnPropNameInRow="evaluator_list" msprop:Generator_ColumnPropNameInTable="evaluator_listColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="256" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="SWSP_PIPES" msprop:Generator_UserTableName="SWSP_PIPES" msprop:Generator_RowDeletedName="SWSP_PIPESRowDeleted" msprop:Generator_RowChangedName="SWSP_PIPESRowChanged" msprop:Generator_RowClassName="SWSP_PIPESRow" msprop:Generator_RowChangingName="SWSP_PIPESRowChanging" msprop:Generator_RowEvArgName="SWSP_PIPESRowChangeEvent" msprop:Generator_RowEvHandlerName="SWSP_PIPESRowChangeEventHandler" msprop:Generator_TableClassName="SWSP_PIPESDataTable" msprop:Generator_TableVarName="tableSWSP_PIPES" msprop:Generator_RowDeletingName="SWSP_PIPESRowDeleting" msprop:Generator_TablePropName="SWSP_PIPES">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="pipe_id" msprop:Generator_UserColumnName="pipe_id" msprop:Generator_ColumnVarNameInTable="columnpipe_id" msprop:Generator_ColumnPropNameInRow="pipe_id" msprop:Generator_ColumnPropNameInTable="pipe_idColumn" type="xs:int" />
+              <xs:element name="global_id" msprop:Generator_UserColumnName="global_id" msprop:Generator_ColumnVarNameInTable="columnglobal_id" msprop:Generator_ColumnPropNameInRow="global_id" msprop:Generator_ColumnPropNameInTable="global_idColumn" type="xs:int" />
+              <xs:element name="us_node" msprop:Generator_UserColumnName="us_node" msprop:Generator_ColumnVarNameInTable="columnus_node" msprop:Generator_ColumnPropNameInRow="us_node" msprop:Generator_ColumnPropNameInTable="us_nodeColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ds_node" msprop:Generator_UserColumnName="ds_node" msprop:Generator_ColumnVarNameInTable="columnds_node" msprop:Generator_ColumnPropNameInRow="ds_node" msprop:Generator_ColumnPropNameInTable="ds_nodeColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="us_depth_in" msprop:Generator_UserColumnName="us_depth_in" msprop:Generator_ColumnVarNameInTable="columnus_depth_in" msprop:Generator_ColumnPropNameInRow="us_depth_in" msprop:Generator_ColumnPropNameInTable="us_depth_inColumn" type="xs:double" minOccurs="0" />
+              <xs:element name="ds_depth_in" msprop:Generator_UserColumnName="ds_depth_in" msprop:Generator_ColumnVarNameInTable="columnds_depth_in" msprop:Generator_ColumnPropNameInRow="ds_depth_in" msprop:Generator_ColumnPropNameInTable="ds_depth_inColumn" type="xs:double" minOccurs="0" />
+              <xs:element name="inside_diam_in" msprop:Generator_UserColumnName="inside_diam_in" msprop:Generator_ColumnVarNameInTable="columninside_diam_in" msprop:Generator_ColumnPropNameInRow="inside_diam_in" msprop:Generator_ColumnPropNameInTable="inside_diam_inColumn" type="xs:double" minOccurs="0" />
+              <xs:element name="inside_width_in" msprop:Generator_UserColumnName="inside_width_in" msprop:Generator_ColumnVarNameInTable="columninside_width_in" msprop:Generator_ColumnPropNameInRow="inside_width_in" msprop:Generator_ColumnPropNameInTable="inside_width_inColumn" type="xs:double" minOccurs="0" />
+              <xs:element name="shape" msprop:Generator_UserColumnName="shape" msprop:Generator_ColumnVarNameInTable="columnshape" msprop:Generator_ColumnPropNameInRow="shape" msprop:Generator_ColumnPropNameInTable="shapeColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="6" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="material" msprop:Generator_UserColumnName="material" msprop:Generator_ColumnVarNameInTable="columnmaterial" msprop:Generator_ColumnPropNameInRow="material" msprop:Generator_ColumnPropNameInTable="materialColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="6" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="watershed" msprop:Generator_UserColumnName="watershed" msprop:Generator_ColumnVarNameInTable="columnwatershed" msprop:Generator_ColumnPropNameInRow="watershed" msprop:Generator_ColumnPropNameInTable="watershedColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="subwatershed" msprop:Generator_UserColumnName="subwatershed" msprop:Generator_ColumnVarNameInTable="columnsubwatershed" msprop:Generator_ColumnPropNameInRow="subwatershed" msprop:Generator_ColumnPropNameInTable="subwatershedColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="view_number" msprop:Generator_UserColumnName="view_number" msprop:Generator_ColumnVarNameInTable="columnview_number" msprop:Generator_ColumnPropNameInRow="view_number" msprop:Generator_ColumnPropNameInTable="view_numberColumn" type="xs:int" />
+              <xs:element name="page_number" msprop:Generator_UserColumnName="page_number" msprop:Generator_ColumnVarNameInTable="columnpage_number" msprop:Generator_ColumnPropNameInRow="page_number" msprop:Generator_ColumnPropNameInTable="page_numberColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="evaluator_list" msprop:Generator_UserColumnName="evaluator_list" msprop:Generator_ColumnVarNameInTable="columnevaluator_list" msprop:Generator_ColumnPropNameInRow="evaluator_list" msprop:Generator_ColumnPropNameInTable="evaluator_listColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="256" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
       </xs:choice>
     </xs:complexType>
     <xs:unique name="Constraint1" msdata:PrimaryKey="true">
@@ -1783,6 +2229,18 @@ SELECT watershed_id, watershed, description FROM SWSP_WATERSHED WHERE (watershed
     <xs:unique name="SWSP_WATERSHED_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
       <xs:selector xpath=".//mstns:SWSP_WATERSHED" />
       <xs:field xpath="mstns:watershed_id" />
+    </xs:unique>
+    <xs:unique name="SWSP_CULVERTS_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:SWSP_CULVERTS" />
+      <xs:field xpath="mstns:culvert_id" />
+    </xs:unique>
+    <xs:unique name="SWSP_DITCHES_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:SWSP_DITCHES" />
+      <xs:field xpath="mstns:ditch_id" />
+    </xs:unique>
+    <xs:unique name="SWSP_PIPES_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:SWSP_PIPES" />
+      <xs:field xpath="mstns:pipe_id" />
     </xs:unique>
   </xs:element>
   <xs:annotation>

@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.IO;
 using System.Windows.Forms;
 
 namespace SWI_2
@@ -961,6 +962,93 @@ namespace SWI_2
                 }
 
             }
+        }
+
+        private void exportReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog DialogSave = new SaveFileDialog();
+            DialogSave.DefaultExt = "csv";
+            DialogSave.Filter = "Text file (*.csv)|*.csv|XML file (*.xml)|*.xml|All files (*.*)|*.*";
+            DialogSave.AddExtension = true;
+            DialogSave.RestoreDirectory = true;
+            DialogSave.Title = "Where do you want to save the file?";
+            DialogSave.InitialDirectory = @"C:/";
+            if (DialogSave.ShowDialog() == DialogResult.OK)
+            {
+                //All the pipes
+                SANDBOXDataSetTableAdapters.SWSP_PIPESTableAdapter thePipesTableAdapter =
+                    new SWI_2.SANDBOXDataSetTableAdapters.SWSP_PIPESTableAdapter();
+                SANDBOXDataSet.SWSP_PIPESDataTable thePipesDataTable =
+                    new SANDBOXDataSet.SWSP_PIPESDataTable();
+
+                thePipesTableAdapter.Fill(thePipesDataTable);
+                CreateCSVFile(thePipesDataTable, DialogSave.FileName, "All of the pipes in the stormwater database");
+
+                //All the ditches
+                SANDBOXDataSetTableAdapters.SWSP_DITCHESTableAdapter theDitchesTableAdapter =
+                    new SWI_2.SANDBOXDataSetTableAdapters.SWSP_DITCHESTableAdapter();
+                SANDBOXDataSet.SWSP_DITCHESDataTable theDitchesDataTable =
+                    new SANDBOXDataSet.SWSP_DITCHESDataTable();
+
+                theDitchesTableAdapter.Fill(theDitchesDataTable);
+                CreateCSVFile(theDitchesDataTable, DialogSave.FileName, "All of the ditches in the stormwater database");
+
+                //All the culverts
+                SANDBOXDataSetTableAdapters.SWSP_CULVERTSTableAdapter theCulvertsTableAdapter =
+                    new SWI_2.SANDBOXDataSetTableAdapters.SWSP_CULVERTSTableAdapter();
+                SANDBOXDataSet.SWSP_CULVERTSDataTable theCulvertsDataTable =
+                    new SANDBOXDataSet.SWSP_CULVERTSDataTable();
+
+                theCulvertsTableAdapter.Fill(theCulvertsDataTable);
+                CreateCSVFile(theCulvertsDataTable, DialogSave.FileName, "All of the culverts in the stormwater database");
+            }
+            DialogSave.Dispose();
+            DialogSave = null;
+        }
+
+        public void CreateCSVFile(DataTable dt, string strFilePath, string strTableDescription)
+        {
+
+            #region Export Grid to CSV
+            //Create the CSV file to which grid data will be exported.
+            StreamWriter sw = new StreamWriter(strFilePath, true);
+            //write the table description
+            sw.Write(strTableDescription);
+            sw.Write(sw.NewLine);
+            //write the headers.
+            int iColCount = dt.Columns.Count;
+
+            for (int i = 0; i < iColCount; i++)
+            {
+                sw.Write(dt.Columns[i]);
+                if (i < iColCount - 1)
+                {
+                    sw.Write(",");
+                }
+            }
+
+            sw.Write(sw.NewLine);
+            //Now write all the rows.
+            foreach (DataRow dr in dt.Rows)
+            {
+                for (int i = 0; i < iColCount; i++)
+                {
+                    if (!Convert.IsDBNull(dr[i]))
+                    {
+                        sw.Write(dr[i].ToString().Replace(",", "/"));
+                    }
+
+                    if (i < iColCount - 1)
+                    {
+                        sw.Write(",");
+                    }
+                }
+                sw.Write(sw.NewLine);
+            }
+            sw.Write(sw.NewLine);
+
+            sw.Close();
+            #endregion
         }
     }
 }
