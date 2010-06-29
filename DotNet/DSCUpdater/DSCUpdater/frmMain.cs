@@ -1583,6 +1583,7 @@ namespace DSCUpdater
           tabControlMain.TabPages.Add(tabCheckRetroUpdates);
           tabControlMain.SelectedTab = tabCheckRetroUpdates;
           tabControlMain.Visible = true;
+          //RunIncomingRetroChangesReport();
           //TO-DO: Implement RunIncomingRetroChangesReport();
         }
 

@@ -30,10 +30,10 @@
         {
           this.components = new System.ComponentModel.Container();
           Infragistics.Win.Appearance appearance1 = new Infragistics.Win.Appearance();
-          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
           Infragistics.Win.Appearance appearance18 = new Infragistics.Win.Appearance();
           System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
-          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
           Infragistics.Win.Appearance appearance17 = new Infragistics.Win.Appearance();
           Infragistics.Win.Appearance appearance15 = new Infragistics.Win.Appearance();
           Infragistics.Win.Appearance appearance2 = new Infragistics.Win.Appearance();
@@ -42,10 +42,10 @@
           Infragistics.Win.Appearance appearance6 = new Infragistics.Win.Appearance();
           Infragistics.Win.Appearance appearance4 = new Infragistics.Win.Appearance();
           Infragistics.Win.Appearance appearance5 = new Infragistics.Win.Appearance();
-          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
           Infragistics.Win.Appearance appearance11 = new Infragistics.Win.Appearance();
           Infragistics.Win.Appearance appearance10 = new Infragistics.Win.Appearance();
           Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarGroup ultraExplorerBarGroup1 = new Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarGroup();
@@ -192,6 +192,7 @@
           this.lblNewRetroSiteAssessments = new Infragistics.Win.Misc.UltraLabel();
           this.dgvIncomingRetroChanges = new System.Windows.Forms.DataGridView();
           this.tabApplyRetroUpdates = new System.Windows.Forms.TabPage();
+          this.btnApplyRetroUpdates = new Infragistics.Win.Misc.UltraButton();
           this.dgvApplyRetroUpdates = new System.Windows.Forms.DataGridView();
           this.statusStrip1 = new System.Windows.Forms.StatusStrip();
           this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -218,7 +219,6 @@
           this.dbBindSourceDSCQC = new System.Windows.Forms.BindingSource(this.components);
           this.dbBindSourceParkQC = new System.Windows.Forms.BindingSource(this.components);
           this.dbBindSourceRoofQC = new System.Windows.Forms.BindingSource(this.components);
-          this.btnApplyRetroUpdates = new Infragistics.Win.Misc.UltraButton();
           ((System.ComponentModel.ISupportInitialize)(this.txtFileName)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
           this.tabControlMain.SuspendLayout();
@@ -281,6 +281,9 @@
           // 
           // txtFileName
           // 
+          this.txtFileName.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                      | System.Windows.Forms.AnchorStyles.Left)
+                      | System.Windows.Forms.AnchorStyles.Right)));
           this.txtFileName.Location = new System.Drawing.Point(8, 35);
           this.txtFileName.Name = "txtFileName";
           this.txtFileName.NullText = "Click \'Load Update File\' button to select a file containing DSC updates";
@@ -296,8 +299,11 @@
           // dgvData
           // 
           this.dgvData.AllowUserToDeleteRows = false;
-          dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-          this.dgvData.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
+          dataGridViewCellStyle13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+          this.dgvData.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle13;
+          this.dgvData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                      | System.Windows.Forms.AnchorStyles.Left)
+                      | System.Windows.Forms.AnchorStyles.Right)));
           this.dgvData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
           this.dgvData.Location = new System.Drawing.Point(6, 9);
           this.dgvData.Name = "dgvData";
@@ -343,6 +349,9 @@
           // 
           // btnCancelUpdate
           // 
+          this.btnCancelUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                      | System.Windows.Forms.AnchorStyles.Left)
+                      | System.Windows.Forms.AnchorStyles.Right)));
           this.btnCancelUpdate.ButtonStyle = Infragistics.Win.UIElementButtonStyle.WindowsXPCommandButton;
           this.btnCancelUpdate.Location = new System.Drawing.Point(552, 62);
           this.btnCancelUpdate.Name = "btnCancelUpdate";
@@ -353,6 +362,9 @@
           // 
           // btnLoadUpdateFile
           // 
+          this.btnLoadUpdateFile.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                      | System.Windows.Forms.AnchorStyles.Left)
+                      | System.Windows.Forms.AnchorStyles.Right)));
           this.btnLoadUpdateFile.ButtonStyle = Infragistics.Win.UIElementButtonStyle.WindowsVistaButton;
           this.btnLoadUpdateFile.Location = new System.Drawing.Point(552, 33);
           this.btnLoadUpdateFile.Name = "btnLoadUpdateFile";
@@ -374,6 +386,9 @@
           // 
           // ultraGroupBox
           // 
+          this.ultraGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                      | System.Windows.Forms.AnchorStyles.Left)
+                      | System.Windows.Forms.AnchorStyles.Right)));
           this.ultraGroupBox.Controls.Add(this.btnCancelDownload);
           this.ultraGroupBox.Controls.Add(this.btnDownloadUpdateTemplate);
           this.ultraGroupBox.Controls.Add(this.lblDownloadTemplate);
@@ -429,6 +444,9 @@
           // 
           // btnSubmitUpdates
           // 
+          this.btnSubmitUpdates.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                      | System.Windows.Forms.AnchorStyles.Left)
+                      | System.Windows.Forms.AnchorStyles.Right)));
           this.btnSubmitUpdates.ButtonStyle = Infragistics.Win.UIElementButtonStyle.WindowsVistaButton;
           this.btnSubmitUpdates.Location = new System.Drawing.Point(591, 343);
           this.btnSubmitUpdates.Name = "btnSubmitUpdates";
@@ -464,6 +482,9 @@
           // 
           // btnCloseUpdaterHistory
           // 
+          this.btnCloseUpdaterHistory.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                      | System.Windows.Forms.AnchorStyles.Left)
+                      | System.Windows.Forms.AnchorStyles.Right)));
           this.btnCloseUpdaterHistory.ButtonStyle = Infragistics.Win.UIElementButtonStyle.WindowsXPCommandButton;
           this.btnCloseUpdaterHistory.Location = new System.Drawing.Point(433, 330);
           this.btnCloseUpdaterHistory.Name = "btnCloseUpdaterHistory";
@@ -474,6 +495,9 @@
           // 
           // btnLoadSelectedEditSession
           // 
+          this.btnLoadSelectedEditSession.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                      | System.Windows.Forms.AnchorStyles.Left)
+                      | System.Windows.Forms.AnchorStyles.Right)));
           this.btnLoadSelectedEditSession.ButtonStyle = Infragistics.Win.UIElementButtonStyle.WindowsVistaButton;
           this.btnLoadSelectedEditSession.Location = new System.Drawing.Point(433, 304);
           this.btnLoadSelectedEditSession.Name = "btnLoadSelectedEditSession";
@@ -581,8 +605,11 @@
           // 
           this.dgvUpdaterHistory.AllowUserToAddRows = false;
           this.dgvUpdaterHistory.AllowUserToDeleteRows = false;
-          dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-          this.dgvUpdaterHistory.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle8;
+          dataGridViewCellStyle14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+          this.dgvUpdaterHistory.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle14;
+          this.dgvUpdaterHistory.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                      | System.Windows.Forms.AnchorStyles.Left)
+                      | System.Windows.Forms.AnchorStyles.Right)));
           this.dgvUpdaterHistory.AutoGenerateColumns = false;
           this.dgvUpdaterHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
           this.dgvUpdaterHistory.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -660,6 +687,7 @@
           // 
           // btnUpdaterEditorCloseCancel
           // 
+          this.btnUpdaterEditorCloseCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
           this.btnUpdaterEditorCloseCancel.ButtonStyle = Infragistics.Win.UIElementButtonStyle.WindowsVistaButton;
           this.btnUpdaterEditorCloseCancel.Location = new System.Drawing.Point(567, 347);
           this.btnUpdaterEditorCloseCancel.Name = "btnUpdaterEditorCloseCancel";
@@ -670,6 +698,7 @@
           // 
           // btnSubmitUpdaterEditorChanges
           // 
+          this.btnSubmitUpdaterEditorChanges.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
           this.btnSubmitUpdaterEditorChanges.ButtonStyle = Infragistics.Win.UIElementButtonStyle.WindowsVistaButton;
           this.btnSubmitUpdaterEditorChanges.Location = new System.Drawing.Point(567, 318);
           this.btnSubmitUpdaterEditorChanges.Name = "btnSubmitUpdaterEditorChanges";
@@ -680,6 +709,7 @@
           // 
           // btnUpdaterEditorClear
           // 
+          this.btnUpdaterEditorClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
           this.btnUpdaterEditorClear.ButtonStyle = Infragistics.Win.UIElementButtonStyle.WindowsXPCommandButton;
           this.btnUpdaterEditorClear.Location = new System.Drawing.Point(373, 339);
           this.btnUpdaterEditorClear.Name = "btnUpdaterEditorClear";
@@ -690,6 +720,7 @@
           // 
           // btnUpdaterEditorEnter
           // 
+          this.btnUpdaterEditorEnter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
           this.btnUpdaterEditorEnter.ButtonStyle = Infragistics.Win.UIElementButtonStyle.WindowsXPCommandButton;
           this.btnUpdaterEditorEnter.Location = new System.Drawing.Point(292, 339);
           this.btnUpdaterEditorEnter.Name = "btnUpdaterEditorEnter";
@@ -700,6 +731,9 @@
           // 
           // pnlCurrentDSCAreas
           // 
+          this.pnlCurrentDSCAreas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                      | System.Windows.Forms.AnchorStyles.Left)
+                      | System.Windows.Forms.AnchorStyles.Right)));
           appearance17.BackColor = System.Drawing.Color.LightGray;
           this.pnlCurrentDSCAreas.Appearance = appearance17;
           this.pnlCurrentDSCAreas.BorderStyle = Infragistics.Win.UIElementBorderStyle.WindowsVista;
@@ -783,6 +817,9 @@
           // 
           // ultraGroupBox1
           // 
+          this.ultraGroupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                      | System.Windows.Forms.AnchorStyles.Left)
+                      | System.Windows.Forms.AnchorStyles.Right)));
           this.ultraGroupBox1.Controls.Add(this.lblRevertSession);
           this.ultraGroupBox1.Controls.Add(this.btnRevertSession);
           this.ultraGroupBox1.Location = new System.Drawing.Point(503, 175);
@@ -812,6 +849,9 @@
           // 
           // pnlNewDSCAreas
           // 
+          this.pnlNewDSCAreas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                      | System.Windows.Forms.AnchorStyles.Left)
+                      | System.Windows.Forms.AnchorStyles.Right)));
           appearance15.BackColor = System.Drawing.Color.DarkGray;
           this.pnlNewDSCAreas.Appearance = appearance15;
           this.pnlNewDSCAreas.BorderStyle = Infragistics.Win.UIElementBorderStyle.WindowsVista;
@@ -893,6 +933,9 @@
           // 
           this.dgvUpdaterEditor.AllowUserToAddRows = false;
           this.dgvUpdaterEditor.AllowUserToDeleteRows = false;
+          this.dgvUpdaterEditor.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                      | System.Windows.Forms.AnchorStyles.Left)
+                      | System.Windows.Forms.AnchorStyles.Right)));
           this.dgvUpdaterEditor.AutoGenerateColumns = false;
           this.dgvUpdaterEditor.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
           this.dgvUpdaterEditor.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -1044,6 +1087,7 @@
           // 
           // btnUpdaterHistoryReturn
           // 
+          this.btnUpdaterHistoryReturn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
           this.btnUpdaterHistoryReturn.ButtonStyle = Infragistics.Win.UIElementButtonStyle.WindowsVistaButton;
           this.btnUpdaterHistoryReturn.Location = new System.Drawing.Point(8, 343);
           this.btnUpdaterHistoryReturn.Name = "btnUpdaterHistoryReturn";
@@ -1055,6 +1099,9 @@
           // bindingNavigator2
           // 
           this.bindingNavigator2.AddNewItem = null;
+          this.bindingNavigator2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                      | System.Windows.Forms.AnchorStyles.Left)
+                      | System.Windows.Forms.AnchorStyles.Right)));
           this.bindingNavigator2.CountItem = this.bindingNavigatorCountItem1;
           this.bindingNavigator2.DeleteItem = null;
           this.bindingNavigator2.Dock = System.Windows.Forms.DockStyle.None;
@@ -1161,6 +1208,9 @@
           // 
           // lblMissingDSCError
           // 
+          this.lblMissingDSCError.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                      | System.Windows.Forms.AnchorStyles.Left)
+                      | System.Windows.Forms.AnchorStyles.Right)));
           this.lblMissingDSCError.AutoSize = true;
           this.lblMissingDSCError.Location = new System.Drawing.Point(8, 159);
           this.lblMissingDSCError.Name = "lblMissingDSCError";
@@ -1183,8 +1233,11 @@
           // dgvDSCQC
           // 
           this.dgvDSCQC.AllowUserToDeleteRows = false;
-          dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-          this.dgvDSCQC.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle9;
+          dataGridViewCellStyle15.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+          this.dgvDSCQC.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle15;
+          this.dgvDSCQC.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                      | System.Windows.Forms.AnchorStyles.Left)
+                      | System.Windows.Forms.AnchorStyles.Right)));
           this.dgvDSCQC.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
           this.dgvDSCQC.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
           this.dgvDSCQC.Location = new System.Drawing.Point(8, 6);
@@ -1208,6 +1261,9 @@
           // 
           // lblParkICError
           // 
+          this.lblParkICError.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                      | System.Windows.Forms.AnchorStyles.Left)
+                      | System.Windows.Forms.AnchorStyles.Right)));
           this.lblParkICError.AutoSize = true;
           this.lblParkICError.Location = new System.Drawing.Point(8, 159);
           this.lblParkICError.Name = "lblParkICError";
@@ -1228,8 +1284,11 @@
           // dgvParkQC
           // 
           this.dgvParkQC.AllowUserToDeleteRows = false;
-          dataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-          this.dgvParkQC.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle10;
+          dataGridViewCellStyle16.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+          this.dgvParkQC.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle16;
+          this.dgvParkQC.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                      | System.Windows.Forms.AnchorStyles.Left)
+                      | System.Windows.Forms.AnchorStyles.Right)));
           this.dgvParkQC.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
           this.dgvParkQC.Location = new System.Drawing.Point(8, 6);
           this.dgvParkQC.Name = "dgvParkQC";
@@ -1252,6 +1311,9 @@
           // 
           // lblRoofICError
           // 
+          this.lblRoofICError.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                      | System.Windows.Forms.AnchorStyles.Left)
+                      | System.Windows.Forms.AnchorStyles.Right)));
           this.lblRoofICError.AutoSize = true;
           this.lblRoofICError.Location = new System.Drawing.Point(8, 159);
           this.lblRoofICError.Name = "lblRoofICError";
@@ -1272,8 +1334,11 @@
           // dgvRoofQC
           // 
           this.dgvRoofQC.AllowUserToDeleteRows = false;
-          dataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-          this.dgvRoofQC.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle11;
+          dataGridViewCellStyle17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+          this.dgvRoofQC.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle17;
+          this.dgvRoofQC.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                      | System.Windows.Forms.AnchorStyles.Left)
+                      | System.Windows.Forms.AnchorStyles.Right)));
           this.dgvRoofQC.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
           this.dgvRoofQC.Location = new System.Drawing.Point(8, 6);
           this.dgvRoofQC.Name = "dgvRoofQC";
@@ -1306,6 +1371,9 @@
           // 
           // lblPendingImpAChanges
           // 
+          this.lblPendingImpAChanges.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                      | System.Windows.Forms.AnchorStyles.Left)
+                      | System.Windows.Forms.AnchorStyles.Right)));
           this.lblPendingImpAChanges.AutoSize = true;
           this.lblPendingImpAChanges.Location = new System.Drawing.Point(8, 159);
           this.lblPendingImpAChanges.Name = "lblPendingImpAChanges";
@@ -1315,8 +1383,11 @@
           // 
           // dgvImpAQC
           // 
-          dataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-          this.dgvImpAQC.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle12;
+          dataGridViewCellStyle18.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+          this.dgvImpAQC.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle18;
+          this.dgvImpAQC.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                      | System.Windows.Forms.AnchorStyles.Left)
+                      | System.Windows.Forms.AnchorStyles.Right)));
           this.dgvImpAQC.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
           this.dgvImpAQC.Location = new System.Drawing.Point(8, 6);
           this.dgvImpAQC.Name = "dgvImpAQC";
@@ -1337,6 +1408,7 @@
           // 
           // btnCloseOptions
           // 
+          this.btnCloseOptions.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
           this.btnCloseOptions.ButtonStyle = Infragistics.Win.UIElementButtonStyle.WindowsVistaButton;
           this.btnCloseOptions.Location = new System.Drawing.Point(585, 355);
           this.btnCloseOptions.Name = "btnCloseOptions";
@@ -1347,6 +1419,9 @@
           // 
           // grpBoxDbConnOptions
           // 
+          this.grpBoxDbConnOptions.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                      | System.Windows.Forms.AnchorStyles.Left)
+                      | System.Windows.Forms.AnchorStyles.Right)));
           this.grpBoxDbConnOptions.Controls.Add(this.txtNewServerCon);
           this.grpBoxDbConnOptions.Controls.Add(this.txtNewDatabaseCon);
           this.grpBoxDbConnOptions.Controls.Add(this.btnChangeDBConnOption);
@@ -1401,6 +1476,9 @@
           // 
           // grpBoxViewRetroUpdates
           // 
+          this.grpBoxViewRetroUpdates.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                      | System.Windows.Forms.AnchorStyles.Left)
+                      | System.Windows.Forms.AnchorStyles.Right)));
           this.grpBoxViewRetroUpdates.CaptionAlignment = Infragistics.Win.Misc.GroupBoxCaptionAlignment.Center;
           this.grpBoxViewRetroUpdates.Controls.Add(this.btnViewNewConstrFacs);
           this.grpBoxViewRetroUpdates.Controls.Add(this.btnViewNewIcTargets);
@@ -1445,6 +1523,9 @@
           // 
           // grpBoxCheckRetroUpdates
           // 
+          this.grpBoxCheckRetroUpdates.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                      | System.Windows.Forms.AnchorStyles.Left)
+                      | System.Windows.Forms.AnchorStyles.Right)));
           this.grpBoxCheckRetroUpdates.CaptionAlignment = Infragistics.Win.Misc.GroupBoxCaptionAlignment.Center;
           this.grpBoxCheckRetroUpdates.Controls.Add(this.lblNewConstrRetroFacs);
           this.grpBoxCheckRetroUpdates.Controls.Add(this.lblNewRetroIcTargets);
@@ -1483,6 +1564,9 @@
           // 
           // dgvIncomingRetroChanges
           // 
+          this.dgvIncomingRetroChanges.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                      | System.Windows.Forms.AnchorStyles.Left)
+                      | System.Windows.Forms.AnchorStyles.Right)));
           this.dgvIncomingRetroChanges.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
           this.dgvIncomingRetroChanges.Location = new System.Drawing.Point(6, 6);
           this.dgvIncomingRetroChanges.Name = "dgvIncomingRetroChanges";
@@ -1501,8 +1585,22 @@
           this.tabApplyRetroUpdates.Text = "Apply RETRO Updates";
           this.tabApplyRetroUpdates.UseVisualStyleBackColor = true;
           // 
+          // btnApplyRetroUpdates
+          // 
+          this.btnApplyRetroUpdates.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+          this.btnApplyRetroUpdates.ButtonStyle = Infragistics.Win.UIElementButtonStyle.VisualStudio2005Button;
+          this.btnApplyRetroUpdates.Location = new System.Drawing.Point(504, 355);
+          this.btnApplyRetroUpdates.Name = "btnApplyRetroUpdates";
+          this.btnApplyRetroUpdates.Size = new System.Drawing.Size(151, 23);
+          this.btnApplyRetroUpdates.TabIndex = 1;
+          this.btnApplyRetroUpdates.Text = "Apply RETRO Updates";
+          this.btnApplyRetroUpdates.Click += new System.EventHandler(this.btnApplyRetroUpdates_Click);
+          // 
           // dgvApplyRetroUpdates
           // 
+          this.dgvApplyRetroUpdates.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                      | System.Windows.Forms.AnchorStyles.Left)
+                      | System.Windows.Forms.AnchorStyles.Right)));
           this.dgvApplyRetroUpdates.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
           this.dgvApplyRetroUpdates.Location = new System.Drawing.Point(6, 6);
           this.dgvApplyRetroUpdates.Name = "dgvApplyRetroUpdates";
@@ -1744,16 +1842,6 @@
           this.expBarMain.UseOsThemes = Infragistics.Win.DefaultableBoolean.True;
           this.expBarMain.ViewStyle = Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarViewStyle.VisualStudio2005;
           this.expBarMain.ItemClick += new Infragistics.Win.UltraWinExplorerBar.ItemClickEventHandler(this.expBarMain_ItemClick);
-          // 
-          // btnApplyRetroUpdates
-          // 
-          this.btnApplyRetroUpdates.ButtonStyle = Infragistics.Win.UIElementButtonStyle.VisualStudio2005Button;
-          this.btnApplyRetroUpdates.Location = new System.Drawing.Point(504, 355);
-          this.btnApplyRetroUpdates.Name = "btnApplyRetroUpdates";
-          this.btnApplyRetroUpdates.Size = new System.Drawing.Size(151, 23);
-          this.btnApplyRetroUpdates.TabIndex = 1;
-          this.btnApplyRetroUpdates.Text = "Apply RETRO Updates";
-          this.btnApplyRetroUpdates.Click += new System.EventHandler(this.btnApplyRetroUpdates_Click);
           // 
           // frmMain
           // 
