@@ -11,6 +11,36 @@ namespace SWI_2
 {
     public partial class FormSWSPFieldDataAdministration : Form
     {
+        private int _CurrentSurveyPage;
+        private int _CurrentView;
+        private int _lastGlobalID;
+        private int _CurrentWatershed;
+        private int _CurrentSubwatershed;
+
+        public int CurrentSurveyPage
+        {
+            get { return _CurrentSurveyPage; }
+            set { _CurrentSurveyPage = value; }
+        }
+
+        public int CurrentView
+        {
+            get { return _CurrentView; }
+            set { _CurrentView = value; }
+        }
+
+        public int CurrentWatershed
+        {
+            get { return _CurrentWatershed; }
+            set { _CurrentWatershed = value; }
+        }
+
+        public int CurrentSubwatershed
+        {
+            get { return _CurrentSubwatershed; }
+            set { _CurrentSubwatershed = value; }
+        }
+
         public FormSWSPFieldDataAdministration()
         {
             InitializeComponent();
@@ -62,10 +92,16 @@ namespace SWI_2
 
         private void buttonAddView_Click(object sender, EventArgs e)
         {
+            //CurrentWatershed
+            //CurrentSubwatershed
             FormAddView child = new FormAddView();
 
             this.Enabled = false;
             child.ShowDialog();
+            // TODO: This line of code loads data into the 'sANDBOXDataSet.SWSP_VIEW' table. You can move, or remove it, as needed.
+            this.sWSP_VIEWTableAdapter.Fill(this.sANDBOXDataSet.SWSP_VIEW);
+            // TODO: This line of code loads data into the 'sANDBOXDataSet.SWSP_SURVEY_PAGE' table. You can move, or remove it, as needed.
+            this.sWSP_SURVEY_PAGETableAdapter.Fill(this.sANDBOXDataSet.SWSP_SURVEY_PAGE);
             this.Enabled = true;
         }
 
@@ -75,6 +111,10 @@ namespace SWI_2
 
             this.Enabled = false;
             child.ShowDialog();
+            // TODO: This line of code loads data into the 'sANDBOXDataSet.SWSP_VIEW' table. You can move, or remove it, as needed.
+            this.sWSP_VIEWTableAdapter.Fill(this.sANDBOXDataSet.SWSP_VIEW);
+            // TODO: This line of code loads data into the 'sANDBOXDataSet.SWSP_SURVEY_PAGE' table. You can move, or remove it, as needed.
+            this.sWSP_SURVEY_PAGETableAdapter.Fill(this.sANDBOXDataSet.SWSP_SURVEY_PAGE);
             this.Enabled = true;
         }
 
@@ -98,7 +138,6 @@ namespace SWI_2
             this.sWSP_SUBWATERSHEDTableAdapter.Fill(this.sANDBOXDataSet.SWSP_SUBWATERSHED);
             // TODO: This line of code loads data into the 'sANDBOXDataSet.SWSP_WATERSHED' table. You can move, or remove it, as needed.
             this.sWSP_WATERSHEDTableAdapter.Fill(this.sANDBOXDataSet.SWSP_WATERSHED);
-
         }
 
         private void buttonOK_Click(object sender, EventArgs e)
@@ -239,7 +278,6 @@ namespace SWI_2
                 }
                 catch (Exception ex)
                 {
-
                 }
         }
 
@@ -289,12 +327,32 @@ namespace SWI_2
 
         private void buttonDelete_Click(object sender, EventArgs e)
         {
-            this.sWSP_SURVEY_PAGETableAdapter.DeleteQuery((int)((System.Data.DataRowView)fKSURVEYPAGEVIEWBindingSource4.Current)["survey_page_id"]);
-            this.sWSP_SURVEY_PAGETableAdapter.Update(sANDBOXDataSet);
-            this.sWSP_SURVEY_PAGETableAdapter.Fill((SANDBOXDataSet.SWSP_SURVEY_PAGEDataTable)((SANDBOXDataSet)this.sWSPSURVEYPAGEBindingSource.DataSource).SWSP_SURVEY_PAGE);
-            dataGridView1.Refresh();
+            try
+            {
+                this.sWSP_SURVEY_PAGETableAdapter.DeleteQuery((int)((System.Data.DataRowView)fKSURVEYPAGEVIEWBindingSource5.Current)["survey_page_id"]);
+                this.sWSP_SURVEY_PAGETableAdapter.Update(sANDBOXDataSet);
+                this.sWSP_SURVEY_PAGETableAdapter.Fill((SANDBOXDataSet.SWSP_SURVEY_PAGEDataTable)((SANDBOXDataSet)this.sWSPSURVEYPAGEBindingSource.DataSource).SWSP_SURVEY_PAGE);
+                dataGridViewSurveyPages.Refresh();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Please delete all of the associated culverts, ditches or pipes before trying to delete this survey page");
+            }
         }
 
-
+        private void ultraButtonDeleteSelectedView_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.sWSP_VIEWTableAdapter.DeleteQuery((int)((System.Data.DataRowView)fKVIEWSUBWATERSHEDBindingSource3.Current)["view_id"]);
+                this.sWSP_VIEWTableAdapter.Update(sANDBOXDataSet);
+                this.sWSP_VIEWTableAdapter.Fill((SANDBOXDataSet.SWSP_VIEWDataTable)((SANDBOXDataSet)this.sWSPVIEWBindingSource.DataSource).SWSP_VIEW);
+                ultraGrid1.Refresh();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Please remove all of the associated survey pages before deleting this view");
+            }
+        }
     }
 }
