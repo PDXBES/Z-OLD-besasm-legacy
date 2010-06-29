@@ -504,6 +504,7 @@
             this.fKCULVERTFACINGTYPEBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.menuStripMainForm = new System.Windows.Forms.MenuStrip();
             this.fIleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataAdministratorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.labelView = new System.Windows.Forms.Label();
@@ -773,6 +774,7 @@
             ultraGridColumn15.Header.VisiblePosition = 9;
             ultraGridColumn16.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
             ultraGridColumn16.Header.VisiblePosition = 10;
+            ultraGridColumn17.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
             ultraGridColumn17.Header.VisiblePosition = 11;
             ultraGridColumn18.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
             ultraGridColumn18.Header.VisiblePosition = 12;
@@ -812,6 +814,7 @@
             ultraGridColumn28.Header.VisiblePosition = 9;
             ultraGridColumn29.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
             ultraGridColumn29.Header.VisiblePosition = 10;
+            ultraGridColumn30.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
             ultraGridColumn30.Header.VisiblePosition = 11;
             ultraGridColumn31.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
             ultraGridColumn31.Header.VisiblePosition = 12;
@@ -962,6 +965,7 @@
             ultraGridColumn51.Header.VisiblePosition = 9;
             ultraGridColumn52.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
             ultraGridColumn52.Header.VisiblePosition = 10;
+            ultraGridColumn53.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
             ultraGridColumn53.Header.VisiblePosition = 11;
             ultraGridColumn54.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
             ultraGridColumn54.Header.VisiblePosition = 12;
@@ -1035,6 +1039,7 @@
             ultraGridColumn75.Header.VisiblePosition = 9;
             ultraGridColumn76.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
             ultraGridColumn76.Header.VisiblePosition = 10;
+            ultraGridColumn77.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
             ultraGridColumn77.Header.VisiblePosition = 11;
             ultraGridColumn78.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
             ultraGridColumn78.Header.VisiblePosition = 12;
@@ -1385,6 +1390,7 @@
             ultraGridColumn97.Header.VisiblePosition = 9;
             ultraGridColumn98.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
             ultraGridColumn98.Header.VisiblePosition = 10;
+            ultraGridColumn99.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
             ultraGridColumn99.Header.VisiblePosition = 11;
             ultraGridColumn100.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
             ultraGridColumn100.Header.VisiblePosition = 12;
@@ -1569,6 +1575,7 @@
             ultraGridColumn131.Header.VisiblePosition = 9;
             ultraGridColumn132.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
             ultraGridColumn132.Header.VisiblePosition = 10;
+            ultraGridColumn133.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
             ultraGridColumn133.Header.VisiblePosition = 11;
             ultraGridColumn134.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
             ultraGridColumn134.Header.VisiblePosition = 12;
@@ -1642,6 +1649,7 @@
             ultraGridColumn155.Header.VisiblePosition = 9;
             ultraGridColumn156.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
             ultraGridColumn156.Header.VisiblePosition = 10;
+            ultraGridColumn157.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
             ultraGridColumn157.Header.VisiblePosition = 11;
             ultraGridColumn158.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
             ultraGridColumn158.Header.VisiblePosition = 12;
@@ -1989,6 +1997,7 @@
             ultraGridColumn177.Header.VisiblePosition = 9;
             ultraGridColumn178.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
             ultraGridColumn178.Header.VisiblePosition = 10;
+            ultraGridColumn179.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
             ultraGridColumn179.Header.VisiblePosition = 11;
             ultraGridColumn180.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
             ultraGridColumn180.Header.VisiblePosition = 12;
@@ -2028,6 +2037,7 @@
             ultraGridColumn190.Header.VisiblePosition = 9;
             ultraGridColumn191.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
             ultraGridColumn191.Header.VisiblePosition = 10;
+            ultraGridColumn192.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
             ultraGridColumn192.Header.VisiblePosition = 11;
             ultraGridColumn193.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
             ultraGridColumn193.Header.VisiblePosition = 12;
@@ -2175,6 +2185,7 @@
             ultraGridColumn212.Header.VisiblePosition = 9;
             ultraGridColumn213.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
             ultraGridColumn213.Header.VisiblePosition = 10;
+            ultraGridColumn214.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
             ultraGridColumn214.Header.VisiblePosition = 11;
             ultraGridColumn215.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
             ultraGridColumn215.Header.VisiblePosition = 12;
@@ -2354,6 +2365,7 @@
             ultraGridColumn246.Header.VisiblePosition = 9;
             ultraGridColumn247.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
             ultraGridColumn247.Header.VisiblePosition = 10;
+            ultraGridColumn248.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
             ultraGridColumn248.Header.VisiblePosition = 11;
             ultraGridColumn249.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
             ultraGridColumn249.Header.VisiblePosition = 12;
@@ -2427,6 +2439,7 @@
             ultraGridColumn270.Header.VisiblePosition = 9;
             ultraGridColumn271.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
             ultraGridColumn271.Header.VisiblePosition = 10;
+            ultraGridColumn272.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
             ultraGridColumn272.Header.VisiblePosition = 11;
             ultraGridColumn273.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
             ultraGridColumn273.Header.VisiblePosition = 12;
@@ -2711,9 +2724,18 @@
             // 
             // fIleToolStripMenuItem
             // 
+            this.fIleToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.exportReportToolStripMenuItem});
             this.fIleToolStripMenuItem.Name = "fIleToolStripMenuItem";
             this.fIleToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
             this.fIleToolStripMenuItem.Text = "FIle";
+            // 
+            // exportReportToolStripMenuItem
+            // 
+            this.exportReportToolStripMenuItem.Name = "exportReportToolStripMenuItem";
+            this.exportReportToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.exportReportToolStripMenuItem.Text = "Export Report";
+            this.exportReportToolStripMenuItem.Click += new System.EventHandler(this.exportReportToolStripMenuItem_Click);
             // 
             // toolsToolStripMenuItem
             // 
@@ -3400,6 +3422,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn nodeDataGridViewTextBoxColumn1;
         private Infragistics.Win.Misc.UltraLabel ultraLabelInnerWidth;
         private Infragistics.Win.UltraWinEditors.UltraNumericEditor ultraNumericEditorPipesInnerWidth;
+        private System.Windows.Forms.ToolStripMenuItem exportReportToolStripMenuItem;
     }
 }
 
