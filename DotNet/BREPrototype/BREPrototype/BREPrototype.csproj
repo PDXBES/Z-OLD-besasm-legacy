@@ -1,0 +1,241 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{FC46D184-3A17-49D8-B831-B73EDA698801}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BREPrototype</RootNamespace>
+    <AssemblyName>BREPrototype</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ESRI.ArcGIS.3DAnalyst, Version=9.2.0.1324, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86" />
+    <Reference Include="ESRI.ArcGIS.ADF, Version=9.2.0.1324, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.ArcMapUI, Version=9.2.0.1324, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.AxControls, Version=9.2.0.1324, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86" />
+    <Reference Include="ESRI.ArcGIS.AxPublisherControls, Version=9.2.0.1324, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86" />
+    <Reference Include="ESRI.ArcGIS.Carto, Version=9.2.0.1324, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86" />
+    <Reference Include="ESRI.ArcGIS.Controls, Version=9.2.0.1324, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86" />
+    <Reference Include="ESRI.ArcGIS.Display, Version=9.2.0.1324, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=MSIL" />
+    <Reference Include="ESRI.ArcGIS.Geodatabase, Version=9.2.0.1324, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\WINDOWS\assembly\GAC_MSIL\ESRI.ArcGIS.Geodatabase\9.2.0.1324__8fc3cc631e44ad86\ESRI.ArcGIS.Geodatabase.dll</HintPath>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.Geometry, Version=9.2.0.1324, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=MSIL" />
+    <Reference Include="ESRI.ArcGIS.GlobeCore, Version=9.2.0.1324, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86" />
+    <Reference Include="ESRI.ArcGIS.Output, Version=9.2.0.1324, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86" />
+    <Reference Include="ESRI.ArcGIS.PublisherControls, Version=9.2.0.1324, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86" />
+    <Reference Include="ESRI.ArcGIS.System, Version=9.2.0.1324, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.SystemUI, Version=9.2.0.1324, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="stdole, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization.Formatters.Soap" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Infragistics2.Shared.v7.3, Version=7.3.20073.38, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
+      <HintPath>C:\Program Files\Infragistics\NetAdvantage for .NET 2007 Vol. 3 CLR 2.0\windows forms\bin\Infragistics2.Shared.v7.3.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="Infragistics2.Win.Misc.v7.3, Version=7.3.20073.38, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
+      <HintPath>C:\Program Files\Infragistics\NetAdvantage for .NET 2007 Vol. 3 CLR 2.0\windows forms\bin\Infragistics2.Win.Misc.v7.3.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="Infragistics2.Win.UltraWinChart.v7.3, Version=7.3.20073.38, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
+      <HintPath>C:\Program Files\Infragistics\NetAdvantage for .NET 2007 Vol. 3 CLR 2.0\windows forms\bin\Infragistics2.Win.UltraWinChart.v7.3.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="Infragistics2.Win.UltraWinEditors.v7.3, Version=7.3.20073.38, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
+      <HintPath>C:\Program Files\Infragistics\NetAdvantage for .NET 2007 Vol. 3 CLR 2.0\windows forms\bin\Infragistics2.Win.UltraWinEditors.v7.3.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="Infragistics2.Win.UltraWinGrid.v7.3, Version=7.3.20073.38, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
+      <HintPath>C:\Program Files\Infragistics\NetAdvantage for .NET 2007 Vol. 3 CLR 2.0\windows forms\bin\Infragistics2.Win.UltraWinGrid.v7.3.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="Infragistics2.Win.UltraWinTabControl.v7.3, Version=7.3.20073.38, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
+      <HintPath>C:\Program Files\Infragistics\NetAdvantage for .NET 2007 Vol. 3 CLR 2.0\windows forms\bin\Infragistics2.Win.UltraWinTabControl.v7.3.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="Infragistics2.Win.v7.3, Version=7.3.20073.38, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
+      <HintPath>C:\Program Files\Infragistics\NetAdvantage for .NET 2007 Vol. 3 CLR 2.0\windows forms\bin\Infragistics2.Win.v7.3.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="ZedGraph, Version=5.1.4.31904, Culture=neutral, PublicKeyToken=02a83cbd123fcd60, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\ZedGraph.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BREDataSet.cs">
+      <DependentUpon>BREDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="BREDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BREDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InputBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InputBox.Designer.cs">
+      <DependentUpon>InputBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LicenseInitializer.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Form1.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InputBox.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>InputBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SelectPipesViaTrace.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>SelectPipesViaTrace.cs</DependentUpon>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="BREDataSet.xsc">
+      <DependentUpon>BREDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="BREDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>BREDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="BREDataSet.xss">
+      <DependentUpon>BREDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="lyr\BESUICs.lyr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="lyr\cgis_streets.lyr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="lyr\map.mxd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="lyr\mst_links.lyr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="lyr\mst_nodes.lyr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="lyr\mst_surfsc.lyr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="lyr\sewer_basins.lyr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="lyr\sp_bf_risk.lyr">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="SelectPipesViaTrace.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SelectPipesViaTrace.Designer.cs">
+      <DependentUpon>SelectPipesViaTrace.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\ArcObjectsUtils\FeatureClassTracer\TracerExtension\SystemsAnalysis.Tracer.FeatureClassTracer.csproj">
+      <Project>{D25581F1-959E-4E80-8F11-C393ACD9B916}</Project>
+      <Name>SystemsAnalysis.Tracer.FeatureClassTracer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ArcObjectsUtils\MapControlUtils\MapControlHelper\SystemsAnalysis.Utils.ArcObjects.MapControl.MapControlHelper.csproj">
+      <Project>{D08971DD-9DAD-4DE1-88CA-35EE30AB6B23}</Project>
+      <Name>SystemsAnalysis.Utils.ArcObjects.MapControl.MapControlHelper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ArcObjectsUtils\MapControlUtils\PanZoom_Commands\SystemsAnalysis.Utils.ArcObjects.MapControl.PanZoom.csproj">
+      <Project>{120CF791-801E-4669-8D65-174DCABF47EC}</Project>
+      <Name>SystemsAnalysis.Utils.ArcObjects.MapControl.PanZoom</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ArcObjectsUtils\MapControlUtils\Select_Commands\SystemsAnalysis.Utils.ArcObjects.MapControl.SelectCommands.csproj">
+      <Project>{63AD8943-A61C-4AC7-B6F8-DA20E063E64F}</Project>
+      <Name>SystemsAnalysis.Utils.ArcObjects.MapControl.SelectCommands</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DataAccess\SystemsAnalysis.DataAccess.csproj">
+      <Project>{D81499E0-ED3E-4C85-9F8E-72C263AA24C4}</Project>
+      <Name>SystemsAnalysis.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Modeling\SystemsAnalysis.Modeling.csproj">
+      <Project>{54555B74-906E-4D29-9BC3-7653805B6AD0}</Project>
+      <Name>SystemsAnalysis.Modeling</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ModelResults\SystemsAnalysis.Modeling.ModelResults.csproj">
+      <Project>{F1A132E6-4C70-4303-AFC2-82938D0F557A}</Project>
+      <Name>SystemsAnalysis.Modeling.ModelResults</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Tracer\SystemsAnalysis.Tracer.csproj">
+      <Project>{C8B24858-1D99-4519-9A1D-CF129CED9ADA}</Project>
+      <Name>SystemsAnalysis.Tracer</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

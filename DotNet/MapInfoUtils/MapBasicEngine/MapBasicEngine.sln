@@ -1,0 +1,21 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapBasicEngine", "MapBasicEngine.csproj", "{E12CE615-5246-4A44-BC31-510316BC743D}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{E12CE615-5246-4A44-BC31-510316BC743D}.Debug.ActiveCfg = Debug|.NET
+		{E12CE615-5246-4A44-BC31-510316BC743D}.Debug.Build.0 = Debug|.NET
+		{E12CE615-5246-4A44-BC31-510316BC743D}.Release.ActiveCfg = Release|.NET
+		{E12CE615-5246-4A44-BC31-510316BC743D}.Release.Build.0 = Release|.NET
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal
