@@ -975,32 +975,105 @@ namespace SWI_2
             DialogSave.InitialDirectory = @"C:/";
             if (DialogSave.ShowDialog() == DialogResult.OK)
             {
-                //All the pipes
-                SANDBOXDataSetTableAdapters.SWSP_PIPESTableAdapter thePipesTableAdapter =
-                    new SWI_2.SANDBOXDataSetTableAdapters.SWSP_PIPESTableAdapter();
-                SANDBOXDataSet.SWSP_PIPESDataTable thePipesDataTable =
-                    new SANDBOXDataSet.SWSP_PIPESDataTable();
+                this.Cursor = Cursors.WaitCursor;
+                try
+                {
+                    //All the pipes
+                    SANDBOXDataSetTableAdapters.SWSP_PIPESTableAdapter thePipesTableAdapter =
+                        new SWI_2.SANDBOXDataSetTableAdapters.SWSP_PIPESTableAdapter();
+                    SANDBOXDataSet.SWSP_PIPESDataTable thePipesDataTable =
+                        new SANDBOXDataSet.SWSP_PIPESDataTable();
 
-                thePipesTableAdapter.Fill(thePipesDataTable);
-                CreateCSVFile(thePipesDataTable, DialogSave.FileName, "All of the pipes in the stormwater database");
+                    /*thePipesTableAdapter.Fill(thePipesDataTable);
+                    CreateCSVFile(thePipesDataTable, DialogSave.FileName, "All of the pipes in the stormwater database");
+                    thePipesDataTable.Clear();*/
+                    thePipesTableAdapter.FillByBadNoDSNode(thePipesDataTable);
+                    CreateCSVFile(thePipesDataTable, DialogSave.FileName, "Pipes with no DS Node");
+                    thePipesDataTable.Clear();
+                    thePipesTableAdapter.FillByBadNoDSNodeMatch(thePipesDataTable);
+                    CreateCSVFile(thePipesDataTable, DialogSave.FileName, "Pipes with no matching pipe in mst_links with the same downstream node");
+                    thePipesDataTable.Clear();
+                    thePipesTableAdapter.FillByBadNoInsideDiamIn(thePipesDataTable);
+                    CreateCSVFile(thePipesDataTable, DialogSave.FileName, "Pipes with no inside diameter");
+                    thePipesDataTable.Clear();
+                    thePipesTableAdapter.FillByBadNoUSDSMatch(thePipesDataTable);
+                    CreateCSVFile(thePipesDataTable, DialogSave.FileName, "Pipes with no matching pipe in mst_links with the same upstream and downstream nodes");
+                    thePipesDataTable.Clear();
+                    thePipesTableAdapter.FillByBadNoUSNode(thePipesDataTable);
+                    CreateCSVFile(thePipesDataTable, DialogSave.FileName, "Pipes with no US node");
+                    thePipesDataTable.Clear();
+                    thePipesTableAdapter.FillByBadNoUSNodeMatch(thePipesDataTable);
+                    CreateCSVFile(thePipesDataTable, DialogSave.FileName, "Pipes with no matching pipe in mst_links with the same upstream node");
+                    thePipesDataTable.Clear();
+                    thePipesTableAdapter.FillByPipesOK(thePipesDataTable);
+                    CreateCSVFile(thePipesDataTable, DialogSave.FileName, "Pipes that have completely valid data");
 
-                //All the ditches
-                SANDBOXDataSetTableAdapters.SWSP_DITCHESTableAdapter theDitchesTableAdapter =
-                    new SWI_2.SANDBOXDataSetTableAdapters.SWSP_DITCHESTableAdapter();
-                SANDBOXDataSet.SWSP_DITCHESDataTable theDitchesDataTable =
-                    new SANDBOXDataSet.SWSP_DITCHESDataTable();
+                    //All the ditches
+                    SANDBOXDataSetTableAdapters.SWSP_DITCHESTableAdapter theDitchesTableAdapter =
+                        new SWI_2.SANDBOXDataSetTableAdapters.SWSP_DITCHESTableAdapter();
+                    SANDBOXDataSet.SWSP_DITCHESDataTable theDitchesDataTable =
+                        new SANDBOXDataSet.SWSP_DITCHESDataTable();
 
-                theDitchesTableAdapter.Fill(theDitchesDataTable);
-                CreateCSVFile(theDitchesDataTable, DialogSave.FileName, "All of the ditches in the stormwater database");
+                    /*theDitchesDataTable.Clear();
+                    theDitchesTableAdapter.Fill(theDitchesDataTable);
+                    CreateCSVFile(theDitchesDataTable, DialogSave.FileName, "All of the ditches in the stormwater database");*/
+                    theDitchesTableAdapter.FillByBadDepthLT1(theDitchesDataTable);
+                    CreateCSVFile(theDitchesDataTable, DialogSave.FileName, "Ditches with depth less than one inch");
+                    theDitchesDataTable.Clear();
+                    theDitchesTableAdapter.FillByBadNoDSFacingMatch(theDitchesDataTable);
+                    CreateCSVFile(theDitchesDataTable, DialogSave.FileName, "Ditches with no matching link in mst_links with the same downstream node");
+                    theDitchesDataTable.Clear();
+                    theDitchesTableAdapter.FillByBadNoFacing(theDitchesDataTable);
+                    CreateCSVFile(theDitchesDataTable, DialogSave.FileName, "Ditches without a facing");
+                    theDitchesDataTable.Clear();
+                    theDitchesTableAdapter.FillByBadNoNode(theDitchesDataTable);
+                    CreateCSVFile(theDitchesDataTable, DialogSave.FileName, "Ditches without a node");
+                    theDitchesDataTable.Clear();
+                    theDitchesTableAdapter.FillByBadNoUSFacingMatch(theDitchesDataTable);
+                    CreateCSVFile(theDitchesDataTable, DialogSave.FileName, "Ditches with no matching link in mst_links with the same upstream node");
+                    theDitchesDataTable.Clear();
+                    theDitchesTableAdapter.FillByBadWidthsImproper(theDitchesDataTable);
+                    CreateCSVFile(theDitchesDataTable, DialogSave.FileName, "Ditches with top width less than bottom width or no widths");
+                    theDitchesDataTable.Clear();
+                    theDitchesTableAdapter.FillByDitchesOK(theDitchesDataTable);
+                    CreateCSVFile(theDitchesDataTable, DialogSave.FileName, "Ditches that have completely valid data");
 
-                //All the culverts
-                SANDBOXDataSetTableAdapters.SWSP_CULVERTSTableAdapter theCulvertsTableAdapter =
-                    new SWI_2.SANDBOXDataSetTableAdapters.SWSP_CULVERTSTableAdapter();
-                SANDBOXDataSet.SWSP_CULVERTSDataTable theCulvertsDataTable =
-                    new SANDBOXDataSet.SWSP_CULVERTSDataTable();
+                    //All the culverts
+                    SANDBOXDataSetTableAdapters.SWSP_CULVERTSTableAdapter theCulvertsTableAdapter =
+                        new SWI_2.SANDBOXDataSetTableAdapters.SWSP_CULVERTSTableAdapter();
+                    SANDBOXDataSet.SWSP_CULVERTSDataTable theCulvertsDataTable =
+                        new SANDBOXDataSet.SWSP_CULVERTSDataTable();
 
-                theCulvertsTableAdapter.Fill(theCulvertsDataTable);
-                CreateCSVFile(theCulvertsDataTable, DialogSave.FileName, "All of the culverts in the stormwater database");
+                    /*theCulvertsTableAdapter.Fill(theCulvertsDataTable);
+                    CreateCSVFile(theCulvertsDataTable, DialogSave.FileName, "All of the culverts in the stormwater database");
+                    theCulvertsDataTable.Clear();*/
+                    theCulvertsTableAdapter.FillByBadDiameterNotStandard(theCulvertsDataTable);
+                    CreateCSVFile(theCulvertsDataTable, DialogSave.FileName, "Culverts with non-standard diameters");
+                    theCulvertsDataTable.Clear();
+                    theCulvertsTableAdapter.FillByBadNoDimension(theCulvertsDataTable);
+                    CreateCSVFile(theCulvertsDataTable, DialogSave.FileName, "Culverts with no valid measurments");
+                    theCulvertsDataTable.Clear();
+                    theCulvertsTableAdapter.FillByBadNoDSFacingMatch(theCulvertsDataTable);
+                    CreateCSVFile(theCulvertsDataTable, DialogSave.FileName, "Culverts with no matching link in mst_links with the same downstream node");
+                    theCulvertsDataTable.Clear();
+                    theCulvertsTableAdapter.FillByBadNoFacing(theCulvertsDataTable);
+                    CreateCSVFile(theCulvertsDataTable, DialogSave.FileName, "Culverts without a facing");
+                    theCulvertsDataTable.Clear();
+                    theCulvertsTableAdapter.FillByBadNoNode(theCulvertsDataTable);
+                    CreateCSVFile(theCulvertsDataTable, DialogSave.FileName, "Culverts without a node");
+                    theCulvertsDataTable.Clear();
+                    theCulvertsTableAdapter.FillByBadNoUSFacingMatch(theCulvertsDataTable);
+                    CreateCSVFile(theCulvertsDataTable, DialogSave.FileName, "Culverts with no matching link in mst_links with the same upstream node");
+                    theCulvertsDataTable.Clear();
+                    theCulvertsTableAdapter.FillByCulvertsOK(theCulvertsDataTable);
+                    CreateCSVFile(theCulvertsDataTable, DialogSave.FileName, "Culverts that have completely valid data");
+                }
+                catch (Exception ex)
+                {
+                    this.Cursor = Cursors.Arrow;
+                }
+ 
+                this.Cursor = Cursors.Arrow;
             }
             DialogSave.Dispose();
             DialogSave = null;
