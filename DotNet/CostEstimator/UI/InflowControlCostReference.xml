@@ -12,6 +12,9 @@
   <CurbExtensionMinCost>3700</CurbExtensionMinCost>
   <CurbExtensionCostPerCuFt>49</CurbExtensionCostPerCuFt>
   <CurbExtensionMinCuFt>75</CurbExtensionMinCuFt>
+  <CurbExtensionTrafficControl>1000</CurbExtensionTrafficControl>
+  <CurbExtensionAdaRamp>1000</CurbExtensionAdaRamp>
+  <CurbExtensionWaterLineSleeving>3150</CurbExtensionWaterLineSleeving>
   <StormwaterPlanterMinCost>5600</StormwaterPlanterMinCost>
   <StormwaterPlanterCostPerCuFt>121</StormwaterPlanterCostPerCuFt>
   <StormwaterPlanterMinCuFt>46</StormwaterPlanterMinCuFt>

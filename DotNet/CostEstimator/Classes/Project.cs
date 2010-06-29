@@ -1434,10 +1434,34 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
             newCostItem = new CostItem(_ICCoster.InflowControl.ToString(), 1,
               (decimal)((double)icCost / _ICCoster.FacilitySizeCuFt), "cuft");
             poolCostItem = AddCostItemToPool(newCostItem);
+
+            CostItem newCETrafficControlCostItem = new CostItem("Curb extension traffic control",
+              1, _ICCoster.CurbExtensionTrafficControl, "ea");
+            CostItem poolCETrafficControlCostItem = AddCostItemToPool(newCETrafficControlCostItem);
+            CostItemFactor CETrafficControlCIF = new CostItemFactor(poolCETrafficControlCostItem.Name, 
+              poolCETrafficControlCostItem, null, 1);
+
+            CostItem newCEAdaRampCostItem = new CostItem("Curb extension ADA ramp", 
+              1, _ICCoster.CurbExtensionAdaRamp, "ea");
+            CostItem poolCEAdaRampCostItem = AddCostItemToPool(newCEAdaRampCostItem);
+            CostItemFactor CEAdaRampCIF = new CostItemFactor(poolCEAdaRampCostItem.Name, 
+              poolCEAdaRampCostItem, null, 1);
+
+            CostItem newCEWaterLineSleevingCostItem = new CostItem("Curb extension water line sleeving", 
+              1, _ICCoster.CurbExtensionWaterLineSleeving, "ea");
+            CostItem poolCEWaterLineSleevingCostItem = AddCostItemToPool(newCEWaterLineSleevingCostItem);
+            CostItemFactor CEWaterLineSleevingCIF = new CostItemFactor(poolCEWaterLineSleevingCostItem.Name,
+              poolCEWaterLineSleevingCostItem, null, 1);
+
             streetTargetCostItemFactor = new CostItemFactor(itemName,
               null, null, 1);
+            streetTargetCostItemFactor.AddCostItemFactor(CETrafficControlCIF);
+            streetTargetCostItemFactor.AddCostItemFactor(CEAdaRampCIF);
+            streetTargetCostItemFactor.AddCostItemFactor(CEWaterLineSleevingCIF);
+
             baseStreetTargetCostItemFactor = new CostItemFactor(newCostItem.Name,
               poolCostItem, null, streetTarget.CurbExtensionVol);
+
             streetTargetCostItemFactor.MinCost = _ICCoster.CurbExtensionMinCost;
             break;
         } // switch

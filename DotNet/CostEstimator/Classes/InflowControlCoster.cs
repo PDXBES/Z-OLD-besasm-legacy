@@ -3,7 +3,7 @@
 // Path: C:\Development\CostEstimatorV2\Classes, Author: Arnel
 // Code lines: 30, Size of file: 412 Bytes
 // Creation date: 3/6/2008 12:09 PM
-// Last modified: 7/16/2008 2:34 PM
+// Last modified: 6/29/2010 1:29 PM
 
 #region Using directives
 using System;
@@ -46,6 +46,9 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 		private decimal _CurbExtensionMinCost;
 		private decimal _CurbExtensionCostPerCuFt;
 		private double _CurbExtensionMinCuFt;
+    private decimal _CurbExtensionTrafficControl;
+    private decimal _CurbExtensionAdaRamp;
+    private decimal _CurbExtensionWaterLineSleeving;
 		private decimal _StormwaterPlanterMinCost;
 		private decimal _StormwaterPlanterCostPerCuFt;
 		private double _StormwaterPlanterMinCuFt;
@@ -270,6 +273,42 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 			} // get
 		} // CurbExtensionMinCost
 
+    /// <summary>
+    /// Curb extension traffic control
+    /// </summary>
+    /// <returns>Decimal</returns>
+    public decimal CurbExtensionTrafficControl
+    {
+      get
+      {
+        return _CurbExtensionTrafficControl;
+      } // get
+    } // CurbExtensionTrafficControl
+
+    /// <summary>
+    /// Curb extension ada ramp
+    /// </summary>
+    /// <returns>Decimal</returns>
+    public decimal CurbExtensionAdaRamp
+    {
+      get
+      {
+        return _CurbExtensionAdaRamp;
+      } // get
+    } // CurbExtensionAdaRamp
+
+    /// <summary>
+    /// Curb extension water line sleeving
+    /// </summary>
+    /// <returns>Decimal</returns>
+    public decimal CurbExtensionWaterLineSleeving
+    {
+      get
+      {
+        return _CurbExtensionWaterLineSleeving;
+      } // get
+    } // CurbExtensionWaterLineSleeving
+
 		/// <summary>
 		/// Stormwater planter min cu ft
 		/// </summary>
@@ -329,7 +368,13 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 			CosterParameters.Add(param.Name, param);
 			param = new CosterParameter("Curb extension minimum cost equivalent cu ft", "System.Decimal", _CurbExtensionMinCuFt);
 			CosterParameters.Add(param.Name, param);
-			param = new CosterParameter("Stormwater planter minimum cost", "System.Decimal", _StormwaterPlanterMinCost);
+      param = new CosterParameter("Curb extension traffic control", "System.Decimal", _CurbExtensionTrafficControl);
+      CosterParameters.Add(param.Name, param);
+      param = new CosterParameter("Curb extension ADA ramp", "System.Decimal", _CurbExtensionAdaRamp);
+      CosterParameters.Add(param.Name, param);
+      param = new CosterParameter("Curb extension water line sleeving", "System.Decimal", _CurbExtensionWaterLineSleeving);
+      CosterParameters.Add(param.Name, param);
+      param = new CosterParameter("Stormwater planter minimum cost", "System.Decimal", _StormwaterPlanterMinCost);
 			CosterParameters.Add(param.Name, param);
 			param = new CosterParameter("Stormwater planter cost per cu ft", "System.Decimal", _StormwaterPlanterCostPerCuFt);
 			CosterParameters.Add(param.Name, param);
@@ -405,6 +450,15 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 					case "CurbExtensionMinCuFt":
 						_CurbExtensionMinCuFt = xpathIter.Current.ValueAsDouble;
 						break;
+          case "CurbExtensionTrafficControl":
+            _CurbExtensionTrafficControl = (decimal)xpathIter.Current.ValueAsDouble;
+            break;
+          case "CurbExtensionAdaRamp":
+            _CurbExtensionAdaRamp = (decimal)xpathIter.Current.ValueAsDouble;
+            break;
+          case "CurbExtensionWaterLineSleeving":
+            _CurbExtensionWaterLineSleeving = (decimal)xpathIter.Current.ValueAsDouble;
+            break;
 					case "StormwaterPlanterMinCost":
 						_StormwaterPlanterMinCost = (decimal)xpathIter.Current.ValueAsDouble;
 						break;
