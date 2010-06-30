@@ -1,16 +1,16 @@
 ﻿<PipeCostOptions>
   <TrenchedConstants>
-    <sawCuttingACPavementPerSqFt>3.94</sawCuttingACPavementPerSqFt>
-    <asphaltRemovalPerSqYd>7.60</asphaltRemovalPerSqYd>
+    <sawCuttingACPavementPerSqFt>4.21</sawCuttingACPavementPerSqFt>
+    <asphaltRemovalPerSqYd>8.12</asphaltRemovalPerSqYd>
     <trenchExcavationPerCuYd>4.58</trenchExcavationPerCuYd>
-    <truckHaulExcavationSpoilsPerCuYd>4.42</truckHaulExcavationSpoilsPerCuYd>
-    <trenchShoringPerSqFt>2.41</trenchShoringPerSqFt>
-    <asphaltTrenchPatchBaseCoursePerCuYd>123.13</asphaltTrenchPatchBaseCoursePerCuYd>
-    <asphaltTrenchPatchPerSqYd>17.50</asphaltTrenchPatchPerSqYd>
-    <pipeZoneBackfillLessThanEqualTo12InDiamPerCuYd>66.06</pipeZoneBackfillLessThanEqualTo12InDiamPerCuYd>
-    <pipeZoneBackfillGreaterThan12InDiamPerCuYd>66.06</pipeZoneBackfillGreaterThan12InDiamPerCuYd>
-    <fillAbovePipeZoneLessThanEqualTo12InDiamPerCuYd>25.56</fillAbovePipeZoneLessThanEqualTo12InDiamPerCuYd>
-    <fillAbovePipeZoneGreaterThan12InDiamPerCuYd>25.56</fillAbovePipeZoneGreaterThan12InDiamPerCuYd>
+    <truckHaulExcavationSpoilsPerCuYd>4.72</truckHaulExcavationSpoilsPerCuYd>
+    <trenchShoringPerSqFt>2.57</trenchShoringPerSqFt>
+    <asphaltTrenchPatchBaseCoursePerCuYd>131.51</asphaltTrenchPatchBaseCoursePerCuYd>
+    <asphaltTrenchPatchPerSqYd>18.69</asphaltTrenchPatchPerSqYd>
+    <pipeZoneBackfillLessThanEqualTo12InDiamPerCuYd>70.55</pipeZoneBackfillLessThanEqualTo12InDiamPerCuYd>
+    <pipeZoneBackfillGreaterThan12InDiamPerCuYd>70.55</pipeZoneBackfillGreaterThan12InDiamPerCuYd>
+    <fillAbovePipeZoneLessThanEqualTo12InDiamPerCuYd>27.30</fillAbovePipeZoneLessThanEqualTo12InDiamPerCuYd>
+    <fillAbovePipeZoneGreaterThan12InDiamPerCuYd>27.30</fillAbovePipeZoneGreaterThan12InDiamPerCuYd>
     <spoilsFactor>1.2</spoilsFactor>
   </TrenchedConstants>
   <InsideDiameterToOutsideDiameterTable>
@@ -122,27 +122,107 @@
     <InsideDiameterToOutsideDiameterRecord>
       <insideDiameterIn>6</insideDiameterIn>
       <material>PVCHDPE</material>
-      <outsideDiameterIn>6.275</outsideDiameterIn>
+      <outsideDiameterIn>8</outsideDiameterIn>
     </InsideDiameterToOutsideDiameterRecord>
     <InsideDiameterToOutsideDiameterRecord>
       <insideDiameterIn>8</insideDiameterIn>
       <material>PVCHDPE</material>
-      <outsideDiameterIn>8.4</outsideDiameterIn>
+      <outsideDiameterIn>10</outsideDiameterIn>
     </InsideDiameterToOutsideDiameterRecord>
     <InsideDiameterToOutsideDiameterRecord>
       <insideDiameterIn>10</insideDiameterIn>
       <material>PVCHDPE</material>
-      <outsideDiameterIn>10.5</outsideDiameterIn>
+      <outsideDiameterIn>12.5</outsideDiameterIn>
     </InsideDiameterToOutsideDiameterRecord>
     <InsideDiameterToOutsideDiameterRecord>
       <insideDiameterIn>12</insideDiameterIn>
       <material>PVCHDPE</material>
-      <outsideDiameterIn>12.5</outsideDiameterIn>
+      <outsideDiameterIn>16.5</outsideDiameterIn>
     </InsideDiameterToOutsideDiameterRecord>
-      <InsideDiameterToOutsideDiameterRecord>
+    <InsideDiameterToOutsideDiameterRecord>
       <insideDiameterIn>15</insideDiameterIn>
       <material>PVCHDPE</material>
-      <outsideDiameterIn>15.3</outsideDiameterIn>
+      <outsideDiameterIn>20</outsideDiameterIn>
+    </InsideDiameterToOutsideDiameterRecord>
+    <InsideDiameterToOutsideDiameterRecord>
+      <insideDiameterIn>18</insideDiameterIn>
+      <material>PVCHDPE</material>
+      <outsideDiameterIn>23</outsideDiameterIn>
+    </InsideDiameterToOutsideDiameterRecord>
+    <InsideDiameterToOutsideDiameterRecord>
+      <insideDiameterIn>21</insideDiameterIn>
+      <material>PVCHDPE</material>
+      <outsideDiameterIn>26.5</outsideDiameterIn>
+    </InsideDiameterToOutsideDiameterRecord>
+    <InsideDiameterToOutsideDiameterRecord>
+      <insideDiameterIn>24</insideDiameterIn>
+      <material>PVCHDPE</material>
+      <outsideDiameterIn>30</outsideDiameterIn>
+    </InsideDiameterToOutsideDiameterRecord>
+    <InsideDiameterToOutsideDiameterRecord>
+      <insideDiameterIn>27</insideDiameterIn>
+      <material>PVCHDPE</material>
+      <outsideDiameterIn>33.5</outsideDiameterIn>
+    </InsideDiameterToOutsideDiameterRecord>
+    <InsideDiameterToOutsideDiameterRecord>
+      <insideDiameterIn>30</insideDiameterIn>
+      <material>PVCHDPE</material>
+      <outsideDiameterIn>37</outsideDiameterIn>
+    </InsideDiameterToOutsideDiameterRecord>
+    <InsideDiameterToOutsideDiameterRecord>
+      <insideDiameterIn>36</insideDiameterIn>
+      <material>PVCHDPE</material>
+      <outsideDiameterIn>44</outsideDiameterIn>
+    </InsideDiameterToOutsideDiameterRecord>
+    <InsideDiameterToOutsideDiameterRecord>
+      <insideDiameterIn>42</insideDiameterIn>
+      <material>PVCHDPE</material>
+      <outsideDiameterIn>52</outsideDiameterIn>
+    </InsideDiameterToOutsideDiameterRecord>
+    <InsideDiameterToOutsideDiameterRecord>
+      <insideDiameterIn>48</insideDiameterIn>
+      <material>PVCHDPE</material>
+      <outsideDiameterIn>59.5</outsideDiameterIn>
+    </InsideDiameterToOutsideDiameterRecord>
+    <InsideDiameterToOutsideDiameterRecord>
+      <insideDiameterIn>54</insideDiameterIn>
+      <material>PVCHDPE</material>
+      <outsideDiameterIn>66.5</outsideDiameterIn>
+    </InsideDiameterToOutsideDiameterRecord>
+    <InsideDiameterToOutsideDiameterRecord>
+      <insideDiameterIn>60</insideDiameterIn>
+      <material>PVCHDPE</material>
+      <outsideDiameterIn>73.5</outsideDiameterIn>
+    </InsideDiameterToOutsideDiameterRecord>
+    <InsideDiameterToOutsideDiameterRecord>
+      <insideDiameterIn>72</insideDiameterIn>
+      <material>PVCHDPE</material>
+      <outsideDiameterIn>86</outsideDiameterIn>
+    </InsideDiameterToOutsideDiameterRecord>
+    <InsideDiameterToOutsideDiameterRecord>
+      <insideDiameterIn>78</insideDiameterIn>
+      <material>PVCHDPE</material>
+      <outsideDiameterIn>94.5</outsideDiameterIn>
+    </InsideDiameterToOutsideDiameterRecord>
+    <InsideDiameterToOutsideDiameterRecord>
+      <insideDiameterIn>84</insideDiameterIn>
+      <material>PVCHDPE</material>
+      <outsideDiameterIn>101.5</outsideDiameterIn>
+    </InsideDiameterToOutsideDiameterRecord>
+    <InsideDiameterToOutsideDiameterRecord>
+      <insideDiameterIn>90</insideDiameterIn>
+      <material>PVCHDPE</material>
+      <outsideDiameterIn>108.5</outsideDiameterIn>
+    </InsideDiameterToOutsideDiameterRecord>
+    <InsideDiameterToOutsideDiameterRecord>
+      <insideDiameterIn>96</insideDiameterIn>
+      <material>PVCHDPE</material>
+      <outsideDiameterIn>115.5</outsideDiameterIn>
+    </InsideDiameterToOutsideDiameterRecord>
+    <InsideDiameterToOutsideDiameterRecord>
+      <insideDiameterIn>102</insideDiameterIn>
+      <material>PVCHDPE</material>
+      <outsideDiameterIn>122.5</outsideDiameterIn>
     </InsideDiameterToOutsideDiameterRecord>
   </InsideDiameterToOutsideDiameterTable>
   <InsideDiameterToManholeDiameterTable>
@@ -242,11 +322,7 @@
     </TrenchBaseWidthRecord>
     <TrenchBaseWidthRecord>
       <outsideDiameterIn>12.5</outsideDiameterIn>
-      <widthFt>3.0</widthFt>
-    </TrenchBaseWidthRecord>
-    <TrenchBaseWidthRecord>
-      <outsideDiameterIn>15.3</outsideDiameterIn>
-      <widthFt>3.0</widthFt>
+      <widthFt>2.5</widthFt>
     </TrenchBaseWidthRecord>
     <TrenchBaseWidthRecord>
       <outsideDiameterIn>16.5</outsideDiameterIn>
@@ -254,7 +330,7 @@
     </TrenchBaseWidthRecord>
     <TrenchBaseWidthRecord>
       <outsideDiameterIn>20</outsideDiameterIn>
-      <widthFt>3.0</widthFt>
+      <widthFt>3.5</widthFt>
     </TrenchBaseWidthRecord>
     <TrenchBaseWidthRecord>
       <outsideDiameterIn>23</outsideDiameterIn>
@@ -270,7 +346,7 @@
     </TrenchBaseWidthRecord>
     <TrenchBaseWidthRecord>
       <outsideDiameterIn>33.5</outsideDiameterIn>
-      <widthFt>4.5</widthFt>
+      <widthFt>5.0</widthFt>
     </TrenchBaseWidthRecord>
     <TrenchBaseWidthRecord>
       <outsideDiameterIn>37</outsideDiameterIn>
@@ -324,39 +400,39 @@
   <DepthToTrenchExcavationCostTable>
     <DepthToTrenchExcavationCostRecord>
       <depthFt>8</depthFt>
-      <costPerCuYd>3.20</costPerCuYd>
+      <costPerCuYd>3.41</costPerCuYd>
     </DepthToTrenchExcavationCostRecord>
     <DepthToTrenchExcavationCostRecord>
       <depthFt>10</depthFt>
-      <costPerCuYd>3.20</costPerCuYd>
+      <costPerCuYd>3.41</costPerCuYd>
     </DepthToTrenchExcavationCostRecord>
     <DepthToTrenchExcavationCostRecord>
       <depthFt>12</depthFt>
-      <costPerCuYd>2.42</costPerCuYd>
+      <costPerCuYd>2.58</costPerCuYd>
     </DepthToTrenchExcavationCostRecord>
     <DepthToTrenchExcavationCostRecord>
       <depthFt>15</depthFt>
-      <costPerCuYd>3.80</costPerCuYd>
+      <costPerCuYd>4.05</costPerCuYd>
     </DepthToTrenchExcavationCostRecord>
     <DepthToTrenchExcavationCostRecord>
       <depthFt>18</depthFt>
-      <costPerCuYd>3.80</costPerCuYd>
+      <costPerCuYd>4.05</costPerCuYd>
     </DepthToTrenchExcavationCostRecord>
     <DepthToTrenchExcavationCostRecord>
       <depthFt>20</depthFt>
-      <costPerCuYd>3.36</costPerCuYd>
+      <costPerCuYd>3.59</costPerCuYd>
     </DepthToTrenchExcavationCostRecord>
     <DepthToTrenchExcavationCostRecord>
       <depthFt>24</depthFt>
-      <costPerCuYd>3.74</costPerCuYd>
+      <costPerCuYd>3.99</costPerCuYd>
     </DepthToTrenchExcavationCostRecord>
     <DepthToTrenchExcavationCostRecord>
       <depthFt>28</depthFt>
-      <costPerCuYd>3.74</costPerCuYd>
+      <costPerCuYd>3.99</costPerCuYd>
     </DepthToTrenchExcavationCostRecord>
     <DepthToTrenchExcavationCostRecord>
       <depthFt>30</depthFt>
-      <costPerCuYd>3.74</costPerCuYd>
+      <costPerCuYd>3.99</costPerCuYd>
     </DepthToTrenchExcavationCostRecord>
   </DepthToTrenchExcavationCostTable>
   <PipeCostTable>
@@ -368,17 +444,17 @@
     <PipeCostRecord>
       <diameterIn>8</diameterIn>
       <material>Concrete</material>
-      <costPerFt>16.71</costPerFt>
+      <costPerFt>19.28</costPerFt>
     </PipeCostRecord>
     <PipeCostRecord>
       <diameterIn>10</diameterIn>
       <material>Concrete</material>
-      <costPerFt>16.71</costPerFt>
+      <costPerFt>20.51</costPerFt>
     </PipeCostRecord>
     <PipeCostRecord>
       <diameterIn>12</diameterIn>
       <material>Concrete</material>
-      <costPerFt>16.71</costPerFt>
+      <costPerFt>22.96</costPerFt>
     </PipeCostRecord>
     <PipeCostRecord>
       <diameterIn>15</diameterIn>
@@ -388,17 +464,17 @@
     <PipeCostRecord>
       <diameterIn>18</diameterIn>
       <material>Concrete</material>
-      <costPerFt>26.17</costPerFt>
+      <costPerFt>32.57</costPerFt>
     </PipeCostRecord>
     <PipeCostRecord>
       <diameterIn>21</diameterIn>
       <material>Concrete</material>
-      <costPerFt>26.17</costPerFt>
+      <costPerFt>41.12</costPerFt>
     </PipeCostRecord>
     <PipeCostRecord>
       <diameterIn>24</diameterIn>
       <material>Concrete</material>
-      <costPerFt>26.17</costPerFt>
+      <costPerFt>47.53</costPerFt>
     </PipeCostRecord>
     <PipeCostRecord>
       <diameterIn>27</diameterIn>
@@ -408,17 +484,17 @@
     <PipeCostRecord>
       <diameterIn>30</diameterIn>
       <material>Concrete</material>
-      <costPerFt>82.77</costPerFt>
+      <costPerFt>84.91</costPerFt>
     </PipeCostRecord>
     <PipeCostRecord>
       <diameterIn>36</diameterIn>
       <material>Concrete</material>
-      <costPerFt>82.77</costPerFt>
+      <costPerFt>106.80</costPerFt>
     </PipeCostRecord>
     <PipeCostRecord>
       <diameterIn>42</diameterIn>
       <material>Concrete</material>
-      <costPerFt>82.77</costPerFt>
+      <costPerFt>135.64</costPerFt>
     </PipeCostRecord>
     <PipeCostRecord>
       <diameterIn>48</diameterIn>
@@ -428,17 +504,17 @@
     <PipeCostRecord>
       <diameterIn>54</diameterIn>
       <material>Concrete</material>
-      <costPerFt>177.29</costPerFt>
+      <costPerFt>232.82</costPerFt>
     </PipeCostRecord>
     <PipeCostRecord>
       <diameterIn>60</diameterIn>
       <material>Concrete</material>
-      <costPerFt>177.29</costPerFt>
+      <costPerFt>288.36</costPerFt>
     </PipeCostRecord>
     <PipeCostRecord>
       <diameterIn>72</diameterIn>
       <material>Concrete</material>
-      <costPerFt>177.29</costPerFt>
+      <costPerFt>331.08</costPerFt>
     </PipeCostRecord>
     <PipeCostRecord>
       <diameterIn>78</diameterIn>
@@ -448,22 +524,22 @@
     <PipeCostRecord>
       <diameterIn>84</diameterIn>
       <material>Concrete</material>
-      <costPerFt>429.87</costPerFt>
+      <costPerFt>528.66</costPerFt>
     </PipeCostRecord>
     <PipeCostRecord>
       <diameterIn>90</diameterIn>
       <material>Concrete</material>
-      <costPerFt>429.87</costPerFt>
+      <costPerFt>592.74</costPerFt>
     </PipeCostRecord>
     <PipeCostRecord>
       <diameterIn>96</diameterIn>
       <material>Concrete</material>
-      <costPerFt>429.87</costPerFt>
+      <costPerFt>656.82</costPerFt>
     </PipeCostRecord>
     <PipeCostRecord>
       <diameterIn>102</diameterIn>
       <material>Concrete</material>
-      <costPerFt>429.87</costPerFt>
+      <costPerFt>718.32</costPerFt>
     </PipeCostRecord>
     <PipeCostRecord>
       <diameterIn>6</diameterIn>
@@ -493,229 +569,159 @@
     <PipeCostRecord>
       <diameterIn>8</diameterIn>
       <material>CIPP</material>
-      <costPerFt>54.18</costPerFt>
+      <costPerFt>62.88</costPerFt>
     </PipeCostRecord>
     <PipeCostRecord>
       <diameterIn>10</diameterIn>
       <material>CIPP</material>
-      <costPerFt>74.34</costPerFt>
+      <costPerFt>82.28</costPerFt>
     </PipeCostRecord>
     <PipeCostRecord>
       <diameterIn>12</diameterIn>
       <material>CIPP</material>
-      <costPerFt>94.50</costPerFt>
+      <costPerFt>104.09</costPerFt>
     </PipeCostRecord>
     <PipeCostRecord>
       <diameterIn>15</diameterIn>
       <material>CIPP</material>
-      <costPerFt>128.52</costPerFt>
+      <costPerFt>140.79</costPerFt>
     </PipeCostRecord>
     <PipeCostRecord>
       <diameterIn>18</diameterIn>
       <material>CIPP</material>
-      <costPerFt>154.98</costPerFt>
+      <costPerFt>194.65</costPerFt>
     </PipeCostRecord>
     <PipeCostRecord>
       <diameterIn>21</diameterIn>
       <material>CIPP</material>
-      <costPerFt>176.40</costPerFt>
+      <costPerFt>227.74</costPerFt>
     </PipeCostRecord>
     <PipeCostRecord>
       <diameterIn>24</diameterIn>
       <material>CIPP</material>
-      <costPerFt>202.86</costPerFt>
+      <costPerFt>256.50</costPerFt>
     </PipeCostRecord>
     <PipeCostRecord>
       <diameterIn>27</diameterIn>
       <material>CIPP</material>
-      <costPerFt>229.32</costPerFt>
+      <costPerFt>285.23</costPerFt>
     </PipeCostRecord>
     <PipeCostRecord>
       <diameterIn>30</diameterIn>
       <material>CIPP</material>
-      <costPerFt>255.78</costPerFt>
+      <costPerFt>313.97</costPerFt>
     </PipeCostRecord>
     <PipeCostRecord>
       <diameterIn>36</diameterIn>
       <material>CIPP</material>
-      <costPerFt>255.78</costPerFt>
+      <costPerFt>315.02</costPerFt>
     </PipeCostRecord>
     <PipeCostRecord>
       <diameterIn>42</diameterIn>
       <material>CIPP</material>
-      <costPerFt>354.69</costPerFt>
+      <costPerFt>422.85</costPerFt>
     </PipeCostRecord>
     <PipeCostRecord>
       <diameterIn>48</diameterIn>
       <material>CIPP</material>
-      <costPerFt>453.60</costPerFt>
+      <costPerFt>569.13</costPerFt>
     </PipeCostRecord>
     <PipeCostRecord>
       <diameterIn>8</diameterIn>
       <material>Pipeburst</material>
-      <costPerFt>135.52</costPerFt>
+      <costPerFt>308.04</costPerFt>
     </PipeCostRecord>
     <PipeCostRecord>
       <diameterIn>10</diameterIn>
       <material>Pipeburst</material>
-      <costPerFt>160.16</costPerFt>
+      <costPerFt>334.35</costPerFt>
     </PipeCostRecord>
     <PipeCostRecord>
       <diameterIn>12</diameterIn>
       <material>Pipeburst</material>
-      <costPerFt>184.80</costPerFt>
+      <costPerFt>371.86</costPerFt>
     </PipeCostRecord>
     <PipeCostRecord>
       <diameterIn>15</diameterIn>
       <material>Pipeburst</material>
-      <costPerFt>221.76</costPerFt>
+      <costPerFt>411.34</costPerFt>
     </PipeCostRecord>
     <PipeCostRecord>
       <diameterIn>18</diameterIn>
       <material>Pipeburst</material>
-      <costPerFt>259.56</costPerFt>
+      <costPerFt>457.09</costPerFt>
     </PipeCostRecord>
   </PipeCostTable>
   <LateralCostTable>
-		<DefaultLateralCostPerFt>60</DefaultLateralCostPerFt>
+		<DefaultLateralCostPerFt>91.05</DefaultLateralCostPerFt>
     <LateralCostRecord>
       <insideDiameterIn>6</insideDiameterIn>
       <depthFt>8</depthFt>
-      <costPerFt>8</costPerFt>
-    </LateralCostRecord>
-    <LateralCostRecord>
-      <insideDiameterIn>6</insideDiameterIn>
-      <depthFt>10</depthFt>
-      <costPerFt>9</costPerFt>
-    </LateralCostRecord>
-    <LateralCostRecord>
-      <insideDiameterIn>6</insideDiameterIn>
-      <depthFt>12</depthFt>
-      <costPerFt>10</costPerFt>
-    </LateralCostRecord>
-    <LateralCostRecord>
-      <insideDiameterIn>6</insideDiameterIn>
-      <depthFt>15</depthFt>
-      <costPerFt>11.5</costPerFt>
-    </LateralCostRecord>
-    <LateralCostRecord>
-      <insideDiameterIn>6</insideDiameterIn>
-      <depthFt>18</depthFt>
-      <costPerFt>13</costPerFt>
-    </LateralCostRecord>
-    <LateralCostRecord>
-      <insideDiameterIn>6</insideDiameterIn>
-      <depthFt>20</depthFt>
-      <costPerFt>14</costPerFt>
-    </LateralCostRecord>
-    <LateralCostRecord>
-      <insideDiameterIn>6</insideDiameterIn>
-      <depthFt>24</depthFt>
-      <costPerFt>16</costPerFt>
-    </LateralCostRecord>
-    <LateralCostRecord>
-      <insideDiameterIn>6</insideDiameterIn>
-      <depthFt>28</depthFt>
-      <costPerFt>16</costPerFt>
+      <costPerFt>91.05</costPerFt>
     </LateralCostRecord>
     <LateralCostRecord>
       <insideDiameterIn>6</insideDiameterIn>
       <depthFt>30</depthFt>
-      <costPerFt>16</costPerFt>
+      <costPerFt>91.05</costPerFt>
     </LateralCostRecord>
     <LateralCostRecord>
       <insideDiameterIn>8</insideDiameterIn>
       <depthFt>8</depthFt>
-      <costPerFt>9</costPerFt>
-    </LateralCostRecord>
-    <LateralCostRecord>
-      <insideDiameterIn>8</insideDiameterIn>
-      <depthFt>10</depthFt>
-      <costPerFt>10</costPerFt>
-    </LateralCostRecord>
-    <LateralCostRecord>
-      <insideDiameterIn>8</insideDiameterIn>
-      <depthFt>12</depthFt>
-      <costPerFt>11</costPerFt>
-    </LateralCostRecord>
-    <LateralCostRecord>
-      <insideDiameterIn>8</insideDiameterIn>
-      <depthFt>15</depthFt>
-      <costPerFt>12.5</costPerFt>
-    </LateralCostRecord>
-    <LateralCostRecord>
-      <insideDiameterIn>8</insideDiameterIn>
-      <depthFt>18</depthFt>
-      <costPerFt>14</costPerFt>
-    </LateralCostRecord>
-    <LateralCostRecord>
-      <insideDiameterIn>8</insideDiameterIn>
-      <depthFt>20</depthFt>
-      <costPerFt>15</costPerFt>
-    </LateralCostRecord>
-    <LateralCostRecord>
-      <insideDiameterIn>8</insideDiameterIn>
-      <depthFt>24</depthFt>
-      <costPerFt>17</costPerFt>
-    </LateralCostRecord>
-    <LateralCostRecord>
-      <insideDiameterIn>8</insideDiameterIn>
-      <depthFt>28</depthFt>
-      <costPerFt>17</costPerFt>
+      <costPerFt>91.05</costPerFt>
     </LateralCostRecord>
     <LateralCostRecord>
       <insideDiameterIn>8</insideDiameterIn>
       <depthFt>30</depthFt>
-      <costPerFt>17</costPerFt>
+      <costPerFt>91.05</costPerFt>
     </LateralCostRecord>
   </LateralCostTable>
   <ManholeCostTable>
     <ManholeCostRecord>
       <manholeDiameterIn>48</manholeDiameterIn>
-      <baseCost>1525</baseCost>
-      <costPerFtDepthAbove8Ft>171</costPerFtDepthAbove8Ft>
+      <baseCost>1865</baseCost>
+      <costPerFtDepthAbove8Ft>317</costPerFtDepthAbove8Ft>
 			<rimFrameCost>340</rimFrameCost>
 		</ManholeCostRecord>
     <ManholeCostRecord>
       <manholeDiameterIn>60</manholeDiameterIn>
-      <baseCost>1675</baseCost>
-      <costPerFtDepthAbove8Ft>214</costPerFtDepthAbove8Ft>
+      <baseCost>1865</baseCost>
+      <costPerFtDepthAbove8Ft>401</costPerFtDepthAbove8Ft>
 			<rimFrameCost>340</rimFrameCost>
     </ManholeCostRecord>
     <ManholeCostRecord>
       <manholeDiameterIn>72</manholeDiameterIn>
-      <baseCost>2550</baseCost>
-      <costPerFtDepthAbove8Ft>325</costPerFtDepthAbove8Ft>
+      <baseCost>1865</baseCost>
+      <costPerFtDepthAbove8Ft>605</costPerFtDepthAbove8Ft>
 			<rimFrameCost>340</rimFrameCost>
 		</ManholeCostRecord>
     <ManholeCostRecord>
       <manholeDiameterIn>84</manholeDiameterIn>
-      <baseCost>4000</baseCost>
-      <costPerFtDepthAbove8Ft>500</costPerFtDepthAbove8Ft>
+      <baseCost>3130</baseCost>
+      <costPerFtDepthAbove8Ft>928</costPerFtDepthAbove8Ft>
 			<rimFrameCost>340</rimFrameCost>
 		</ManholeCostRecord>
     <ManholeCostRecord>
       <manholeDiameterIn>96</manholeDiameterIn>
-      <baseCost>5000</baseCost>
-      <costPerFtDepthAbove8Ft>625</costPerFtDepthAbove8Ft>
+      <baseCost>4650</baseCost>
+      <costPerFtDepthAbove8Ft>1020</costPerFtDepthAbove8Ft>
 			<rimFrameCost>340</rimFrameCost>
 		</ManholeCostRecord>
     <ManholeCostRecord>
       <manholeDiameterIn>108</manholeDiameterIn>
-      <baseCost>6000</baseCost>
-      <costPerFtDepthAbove8Ft>750</costPerFtDepthAbove8Ft>
+      <baseCost>5710</baseCost>
+      <costPerFtDepthAbove8Ft>1105</costPerFtDepthAbove8Ft>
 			<rimFrameCost>340</rimFrameCost>
 		</ManholeCostRecord>
 		<ManholeCostRecord>
 			<manholeDiameterIn>120</manholeDiameterIn>
-			<baseCost>6500</baseCost>
-			<costPerFtDepthAbove8Ft>875</costPerFtDepthAbove8Ft>
+			<baseCost>6260</baseCost>
+			<costPerFtDepthAbove8Ft>1272</costPerFtDepthAbove8Ft>
 			<rimFrameCost>340</rimFrameCost>
 		</ManholeCostRecord>
     <ManholeCostRecord>
       <manholeDiameterIn>132</manholeDiameterIn>
-      <baseCost>7000</baseCost>
-      <costPerFtDepthAbove8Ft>1000</costPerFtDepthAbove8Ft>
+      <baseCost>8440</baseCost>
+      <costPerFtDepthAbove8Ft>1150</costPerFtDepthAbove8Ft>
 			<rimFrameCost>340</rimFrameCost>
 		</ManholeCostRecord>
   </ManholeCostTable>
@@ -797,87 +803,79 @@
   <TrenchlessCIPPCostTable>
     <TrenchlessCIPPCostRecord>
       <insideDiameterIn>8</insideDiameterIn>
-      <costPerFt>52</costPerFt>
+      <costPerFt>62.88</costPerFt>
     </TrenchlessCIPPCostRecord>
     <TrenchlessCIPPCostRecord>
       <insideDiameterIn>10</insideDiameterIn>
-      <costPerFt>56</costPerFt>
+      <costPerFt>82.28</costPerFt>
     </TrenchlessCIPPCostRecord>
     <TrenchlessCIPPCostRecord>
       <insideDiameterIn>12</insideDiameterIn>
-      <costPerFt>62</costPerFt>
+      <costPerFt>104.09</costPerFt>
     </TrenchlessCIPPCostRecord>
     <TrenchlessCIPPCostRecord>
       <insideDiameterIn>15</insideDiameterIn>
-      <costPerFt>68</costPerFt>
+      <costPerFt>140.79</costPerFt>
     </TrenchlessCIPPCostRecord>
     <TrenchlessCIPPCostRecord>
       <insideDiameterIn>18</insideDiameterIn>
-      <costPerFt>101</costPerFt>
+      <costPerFt>194.65</costPerFt>
     </TrenchlessCIPPCostRecord>
     <TrenchlessCIPPCostRecord>
       <insideDiameterIn>21</insideDiameterIn>
-      <costPerFt>125</costPerFt>
+      <costPerFt>227.74</costPerFt>
     </TrenchlessCIPPCostRecord>
     <TrenchlessCIPPCostRecord>
       <insideDiameterIn>24</insideDiameterIn>
-      <costPerFt>152</costPerFt>
+      <costPerFt>256.50</costPerFt>
     </TrenchlessCIPPCostRecord>
     <TrenchlessCIPPCostRecord>
       <insideDiameterIn>27</insideDiameterIn>
-      <costPerFt>179</costPerFt>
+      <costPerFt>285.23</costPerFt>
     </TrenchlessCIPPCostRecord>
     <TrenchlessCIPPCostRecord>
       <insideDiameterIn>30</insideDiameterIn>
-      <costPerFt>205</costPerFt>
+      <costPerFt>313.97</costPerFt>
     </TrenchlessCIPPCostRecord>
     <TrenchlessCIPPCostRecord>
       <insideDiameterIn>36</insideDiameterIn>
-      <costPerFt>232</costPerFt>
+      <costPerFt>315.02</costPerFt>
     </TrenchlessCIPPCostRecord>
     <TrenchlessCIPPCostRecord>
       <insideDiameterIn>42</insideDiameterIn>
-      <costPerFt>272</costPerFt>
+      <costPerFt>422.85</costPerFt>
     </TrenchlessCIPPCostRecord>
     <TrenchlessCIPPCostRecord>
       <insideDiameterIn>48</insideDiameterIn>
-      <costPerFt>294</costPerFt>
+      <costPerFt>569.13</costPerFt>
     </TrenchlessCIPPCostRecord>
   </TrenchlessCIPPCostTable>
   <TrenchlessPipeburstCostTable>
     <TrenchlessPipeburstCostRecord>
       <insideDiameterIn>8</insideDiameterIn>
-      <costPerFt>80</costPerFt>
+      <costPerFt>308.04</costPerFt>
     </TrenchlessPipeburstCostRecord>
     <TrenchlessPipeburstCostRecord>
       <insideDiameterIn>10</insideDiameterIn>
-      <costPerFt>86</costPerFt>
+      <costPerFt>334.35</costPerFt>
     </TrenchlessPipeburstCostRecord>
     <TrenchlessPipeburstCostRecord>
       <insideDiameterIn>12</insideDiameterIn>
-      <costPerFt>92</costPerFt>
+      <costPerFt>371.86</costPerFt>
     </TrenchlessPipeburstCostRecord>
     <TrenchlessPipeburstCostRecord>
       <insideDiameterIn>15</insideDiameterIn>
-      <costPerFt>97</costPerFt>
+      <costPerFt>411.34</costPerFt>
     </TrenchlessPipeburstCostRecord>
     <TrenchlessPipeburstCostRecord>
       <insideDiameterIn>18</insideDiameterIn>
-      <costPerFt>118</costPerFt>
-    </TrenchlessPipeburstCostRecord>
-    <TrenchlessPipeburstCostRecord>
-      <insideDiameterIn>21</insideDiameterIn>
-      <costPerFt>132</costPerFt>
-    </TrenchlessPipeburstCostRecord>
-    <TrenchlessPipeburstCostRecord>
-      <insideDiameterIn>24</insideDiameterIn>
-      <costPerFt>148</costPerFt>
+      <costPerFt>457.09</costPerFt>
     </TrenchlessPipeburstCostRecord>
   </TrenchlessPipeburstCostTable>
   <BaseENR>
-		<value>6580</value>
+		<value>8090</value>
 		<month>1</month>
-		<year>2003</year>
+		<year>2008</year>
 	</BaseENR>
   <CurrentENR>
 		<value>8805</value>

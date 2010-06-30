@@ -2,9 +2,9 @@
 	<GreenStreetPlanterMinCost>0</GreenStreetPlanterMinCost>
 	<GreenStreetPlanterCostPerAcre>64600</GreenStreetPlanterCostPerAcre>
 	<InfiltrationPlanterMinCost>3500</InfiltrationPlanterMinCost>
-	<InfiltrationPlanterCostPerAcre>26070</InfiltrationPlanterCostPerAcre>
+	<InfiltrationPlanterCostPerAcre>100000</InfiltrationPlanterCostPerAcre>
 	<VegetatedInfiltrationBasinMinCost>3700</VegetatedInfiltrationBasinMinCost>
-  <VegetatedInfiltrationBasinCostPerAcre>121000</VegetatedInfiltrationBasinCostPerAcre>
+  <VegetatedInfiltrationBasinCostPerAcre>95000</VegetatedInfiltrationBasinCostPerAcre>
 	<DownspoutDisconnectionMinCost>520</DownspoutDisconnectionMinCost>
   <DownspoutDisconnectionCostPerAcre>2900</DownspoutDisconnectionCostPerAcre>
 	<EcoroofMinCost>7300</EcoroofMinCost>
