@@ -65,22 +65,19 @@ namespace DSCUpdater
       InitializeComponent();
 
       TempFileName = @"C:\Temp.csv";
-      toolStripStatusLabel1.Text = "Ready";
-      toolStripStatusLabel1.Text = "Ready";
+      this.ultraStatusBar1.Panels["status"].Text = "Ready";      
 
       //CreateTable();
-      dataset.Tables.Add(datatable);
-
-      //Progress bar settings
-      toolStripProgressBar1.Minimum = 0;
-      toolStripProgressBar1.Maximum = 1000000;
-      toolStripProgressBar1.Step = 1;
+      dataset.Tables.Add(datatable);            
     }
 
     private void frmMain_Load(object sender, EventArgs e)
     {
       try
       {
+        ultraStatusBar1.Panels["dscEditorConnection"].Text = "Dsc Editor Connection: " + ConnectionStringSummary(Properties.Settings.Default.DscEditorConnectionString);
+        ultraStatusBar1.Panels["masterDataConnection"].Text = "Master Data Connection: " + ConnectionStringSummary(Properties.Settings.Default.MasterDataConnectionString);
+
         // TODO: This line of code loads data into the 'projectDataSet.DSCEDIT' table. You can move, or remove it, as needed.
         projectDataSet.EnforceConstraints = false;
         //this.dSCEDITTableAdapter.Fill(this.projectDataSet.DSCEDIT);
@@ -88,7 +85,7 @@ namespace DSCUpdater
         this.sESSIONTableAdapter.Fill(this.projectDataSet.SESSION);
         bindingNavigator1.BindingSource = sESSIONBindingSource;
 
-        SqlConnection sqlCon = new SqlConnection(Properties.Settings.Default.DSCEDITORConnectionString);
+        SqlConnection sqlCon = new SqlConnection(Properties.Settings.Default.DscEditorConnectionString);
         sqlCon.Open();
         SqlCommand sqlCmd = new SqlCommand();
         sqlCmd.CommandText = "DELETE FROM USERUPDATE";
@@ -124,7 +121,7 @@ namespace DSCUpdater
     private void ExportIMPUPDATEToCSV()
     {
       string fileOut = "C:\\temp\\IMPUPDATE.csv";
-      SqlConnection sqlCon = new SqlConnection(Properties.Settings.Default.DSCEDITORConnectionString);
+      SqlConnection sqlCon = new SqlConnection(Properties.Settings.Default.DscEditorConnectionString);
       string sqlQuery = "SELECT * FROM IMPUPDATE";
       SqlCommand sqlCmd = new SqlCommand(sqlQuery, sqlCon);
       sqlCon.Open();
@@ -1138,9 +1135,27 @@ namespace DSCUpdater
     private void btnCancel_Click(object sender, EventArgs e)
     {
       impAQCCounter = 0;
-      toolStripStatusLabel1.Text = "Ready";
-      toolStripProgressBar1.Value = 0;
+      SetStatus("Ready");
+      SetProgress(0);
       txtFileName.Text = "";
+    }
+
+    private void SetProgress(int progress)
+    {
+      this.ultraStatusBar1.Panels["progress"].ProgressBarInfo.Value = progress;
+
+    }
+
+    private int SetAndIncrementProgress(int progress)
+    {
+      SetProgress(progress);
+      return ++this.ultraStatusBar1.Panels["progress"].ProgressBarInfo.Value;
+      
+      
+    }
+    private void SetStatus(string status)
+    {
+      this.ultraStatusBar1.Panels["status"].Text = status;
     }
 
     private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1293,42 +1308,6 @@ namespace DSCUpdater
       }
     }
 
-    private void changeDatabaseConnectionsToolStripMenuItem_Click(object sender, EventArgs e)
-    {
-
-
-    }
-
-    private void UpdateDscEditorConnection()
-    {
-      Microsoft.Data.ConnectionUI.DataConnectionDialog dataConnectionDialog = new
-      Microsoft.Data.ConnectionUI.DataConnectionDialog();
-
-      Microsoft.Data.ConnectionUI.DataSource.AddStandardDataSources(dataConnectionDialog);
-
-      string dscEditorConnectionString = Properties.Settings.Default.DSCEDITORConnectionString;
-      dataConnectionDialog.SelectedDataSource = Microsoft.Data.ConnectionUI.DataSource.SqlDataSource;
-      dataConnectionDialog.SelectedDataProvider = Microsoft.Data.ConnectionUI.DataProvider.SqlDataProvider;
-
-      dataConnectionDialog.ConnectionString = dscEditorConnectionString;
-
-      if (Microsoft.Data.ConnectionUI.DataConnectionDialog.Show(dataConnectionDialog) != DialogResult.OK)
-      {
-        return;
-      }
-
-      Properties.Settings.Default.SetDSCEDITORConnectionString = dataConnectionDialog.ConnectionString;
-      Properties.Settings.Default.Save();
-
-      //toolStripStatusLabel2.Text
-      return;
-    }
-
-    private void btnChangeDBConnOption_Click(object sender, EventArgs e)
-    {
-
-    }
-
     private void btnCloseOptions_Click(object sender, EventArgs e)
     {
 
@@ -1383,18 +1362,9 @@ namespace DSCUpdater
     private void btnSubmitUpdates_Click(object sender, EventArgs e)
     {
       Cursor.Current = Cursors.WaitCursor;
-      toolStripStatusLabel1.Text = "Submitting";
+      SetStatus("Submitting");
 
-      if (toolStripProgressBar1.Value == toolStripProgressBar1.Maximum)
-      {
-        toolStripProgressBar1.Value = toolStripProgressBar1.Minimum;
-      }
-      for (int i = toolStripProgressBar1.Minimum; i <= toolStripProgressBar1.Maximum; i++)
-      {
-        toolStripProgressBar1.PerformStep();
-      }
-
-      SqlConnection sqlCon = new SqlConnection(Properties.Settings.Default.DSCEDITORConnectionString);
+      SqlConnection sqlCon = new SqlConnection(Properties.Settings.Default.DscEditorConnectionString);
       sqlCon.Open();
       SqlCommand sqlCmd = new SqlCommand();
       sqlCmd.CommandText = "DELETE FROM USERUPDATE";
@@ -1442,7 +1412,7 @@ namespace DSCUpdater
                      "WHERE (((mst_DSC_ac.roofAreaNeedsUpdate)='True')) " +
                      "OR (((mst_DSC_ac.parkAreaNeedsUpdate)='True'))";
 
-      SqlDataAdapter sqlDAImpAQC = new SqlDataAdapter(strSQLImpAQC, Properties.Settings.Default.DSCEDITORConnectionString);
+      SqlDataAdapter sqlDAImpAQC = new SqlDataAdapter(strSQLImpAQC, Properties.Settings.Default.DscEditorConnectionString);
       SqlCommandBuilder sqlCBImpAQC = new SqlCommandBuilder(sqlDAImpAQC);
       DataTable dtImpAQC = new DataTable();
       sqlDAImpAQC.Fill(dtImpAQC);
@@ -1455,7 +1425,7 @@ namespace DSCUpdater
                "mst_DSC_ac RIGHT OUTER JOIN USERUPDATE ON " +
                "mst_DSC_ac.DSCID = USERUPDATE.dsc_id WHERE (mst_DSC_ac.DSCID IS NULL)";
 
-      SqlDataAdapter sqlDADSCQC = new SqlDataAdapter(strSQLDSCQC, Properties.Settings.Default.DSCEDITORConnectionString);
+      SqlDataAdapter sqlDADSCQC = new SqlDataAdapter(strSQLDSCQC, Properties.Settings.Default.DscEditorConnectionString);
       SqlCommandBuilder sqlCBDSCQC = new SqlCommandBuilder(sqlDADSCQC);
       DataTable dtDSCQC = new DataTable();
       sqlDADSCQC.Fill(dtDSCQC);
@@ -1468,7 +1438,7 @@ namespace DSCUpdater
                        "USERUPDATE WHERE " +
                        "((([new_park_disco_ic_area_sqft]+[new_park_drywell_ic_area_sqft])>[new_park_area_sqft]))";
 
-      SqlDataAdapter sqlDAParkQC = new SqlDataAdapter(strSQLParkQC, Properties.Settings.Default.DSCEDITORConnectionString);
+      SqlDataAdapter sqlDAParkQC = new SqlDataAdapter(strSQLParkQC, Properties.Settings.Default.DscEditorConnectionString);
       SqlCommandBuilder sqlCBParkQC = new SqlCommandBuilder(sqlDAParkQC);
       DataTable dtParkQC = new DataTable();
 
@@ -1481,7 +1451,7 @@ namespace DSCUpdater
                       "USERUPDATE.new_roof_disco_ic_area_sqft, " +
                       "USERUPDATE.new_roof_drywell_ic_area_sqft FROM USERUPDATE WHERE " +
                       "((([new_roof_disco_ic_area_sqft]+[new_roof_drywell_ic_area_sqft])>[new_roof_area_sqft]))";
-      SqlDataAdapter sqlDARoofQC = new SqlDataAdapter(strSQLRoofQC, Properties.Settings.Default.DSCEDITORConnectionString);
+      SqlDataAdapter sqlDARoofQC = new SqlDataAdapter(strSQLRoofQC, Properties.Settings.Default.DscEditorConnectionString);
       SqlCommandBuilder sqlCBRoofQC = new SqlCommandBuilder(sqlDARoofQC);
       DataTable dtRoofQC = new DataTable();
       sqlDARoofQC.Fill(dtRoofQC);
@@ -1626,8 +1596,8 @@ namespace DSCUpdater
           MessageBox.Show(ex.Message, "DSCUpdater: Exception Thrown", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
       }
-      toolStripStatusLabel1.Text = "Ready";
-      toolStripProgressBar1.Value = 0;
+      SetStatus("Ready");
+      SetProgress(0);
       Cursor.Current = Cursors.WaitCursor;
       qcCounter = 0;
     }
@@ -1646,7 +1616,7 @@ namespace DSCUpdater
       }
       else
       {
-        SqlConnection sqlCon = new SqlConnection(Properties.Settings.Default.DSCEDITORConnectionString);
+        SqlConnection sqlCon = new SqlConnection(Properties.Settings.Default.DscEditorConnectionString);
         sqlCon.Open();
         SqlCommand sqlCmd = new SqlCommand();
         AddSESSIONEditIDCommandParameter(sqlCmd);
@@ -1697,7 +1667,7 @@ namespace DSCUpdater
       /// Make each column UNSORTABLE to stop user messing with data!!!
       /// </summary>
 
-      toolStripStatusLabel1.Text = "Loading";
+      SetStatus("Loading");
 
 
       //Open file dialog handling
@@ -1733,17 +1703,7 @@ namespace DSCUpdater
 
         FileSize = FileData.Length.ToString("N");
         FileSize = FileSize.Substring(0, FileSize.IndexOf("."));
-        //toolStripStatusLabel1.Text = "Loading" + FileSize + "  bytes. Please wait a moment.";
-
-        //progress bar starts working here
-        if (toolStripProgressBar1.Value == toolStripProgressBar1.Maximum)
-        {
-          toolStripProgressBar1.Value = toolStripProgressBar1.Minimum;
-        }
-        for (int i = toolStripProgressBar1.Minimum; i <= toolStripProgressBar1.Maximum; i++)
-        {
-          toolStripProgressBar1.PerformStep();
-        }
+        //SetStatus(= "Loading" + FileSize + "  bytes. Please wait a moment.";
 
         sw.WriteLine("RNO,DSCID,New Roof Area,New Roof DISCO IC Area,New Roof Drywell IC Area, New Park Area, New Park DISCO IC Area, New Park Drywell IC Area");
         //sw.WriteLine(LineText);
@@ -1766,8 +1726,8 @@ namespace DSCUpdater
       {
 
       }
-      toolStripProgressBar1.Value = 0;
-      toolStripStatusLabel1.Text = "Ready";
+      SetProgress(0);
+      SetStatus("Ready");
     }
 
     private void btnDownloadUpdateTemplate_Click(object sender, EventArgs e)
@@ -1985,7 +1945,7 @@ namespace DSCUpdater
 
     private void btnSubmitUpdaterEditorChanges_Click(object sender, EventArgs e)
     {
-      SqlConnection sqlCon = new SqlConnection(Properties.Settings.Default.DSCEDITORConnectionString);
+      SqlConnection sqlCon = new SqlConnection(Properties.Settings.Default.DscEditorConnectionString);
       sqlCon.Open();
       SqlCommand sqlCmd = new SqlCommand();
       sqlCmd.CommandText = "DELETE FROM DSCEDITAPPEND";
@@ -2095,7 +2055,7 @@ namespace DSCUpdater
         int editorEditID = 0;
         dgvUpdaterEditor.Rows[0].Selected = true;
         editorEditID = Convert.ToInt32(dgvUpdaterEditor.SelectedCells[1].Value);
-        SqlConnection sqlCon = new SqlConnection(Properties.Settings.Default.DSCEDITORConnectionString);
+        SqlConnection sqlCon = new SqlConnection(Properties.Settings.Default.DscEditorConnectionString);
         sqlCon.Open();
         SqlCommand sqlCmd = new SqlCommand();
 
@@ -2380,11 +2340,11 @@ namespace DSCUpdater
       }
       switch (e.Tool.Key)
       {
-        case "changeDSCEditorConnection":    // ButtonTool
+        case "changeDscEditorConnection":    // ButtonTool
           UpdateDscEditorConnection();
           break;
-        case "changeMstDatabaseConnection":    // ButtonTool
-          // Place code here
+        case "changeMasterDataConnection":    // ButtonTool
+          UpdateMasterDataConnection();
           break;
         case "about":
           string fi;
@@ -2397,7 +2357,66 @@ namespace DSCUpdater
         default:
           MessageBox.Show("Tool '" + e.Tool.Key + "' not implemented");
           return;
-      }      
+      }
+    }
+
+    private void UpdateDscEditorConnection()
+    {
+      Microsoft.Data.ConnectionUI.DataConnectionDialog dataConnectionDialog = new
+      Microsoft.Data.ConnectionUI.DataConnectionDialog();
+
+      Microsoft.Data.ConnectionUI.DataSource.AddStandardDataSources(dataConnectionDialog);
+
+      string dscEditorConnectionString = Properties.Settings.Default.DscEditorConnectionString;
+      dataConnectionDialog.SelectedDataSource = Microsoft.Data.ConnectionUI.DataSource.SqlDataSource;
+      dataConnectionDialog.SelectedDataProvider = Microsoft.Data.ConnectionUI.DataProvider.SqlDataProvider;
+
+      dataConnectionDialog.ConnectionString = dscEditorConnectionString;
+
+      if (Microsoft.Data.ConnectionUI.DataConnectionDialog.Show(dataConnectionDialog) != DialogResult.OK)
+      {
+        return;
+      }
+
+      Properties.Settings.Default.SetDscEditorConnectionString = dataConnectionDialog.ConnectionString;
+      Properties.Settings.Default.Save();
+      ultraStatusBar1.Panels["dscEditorConnection"].Text = "Dsc Editor Connection: " + ConnectionStringSummary(Properties.Settings.Default.DscEditorConnectionString);      
+      return;
+    }
+
+    private void UpdateMasterDataConnection()
+    {
+      Microsoft.Data.ConnectionUI.DataConnectionDialog dataConnectionDialog = new
+      Microsoft.Data.ConnectionUI.DataConnectionDialog();
+
+      Microsoft.Data.ConnectionUI.DataSource.AddStandardDataSources(dataConnectionDialog);
+
+      //TODO: Detect whether Master Data is SQL or Access (Jet) and set SelectedDataSource accordingly
+      string masterDataConnectionString = Properties.Settings.Default.MasterDataConnectionString;
+      dataConnectionDialog.SelectedDataSource = Microsoft.Data.ConnectionUI.DataSource.AccessDataSource;
+      //dataConnectionDialog.SelectedDataProvider = Microsoft.Data.ConnectionUI.DataProvider.OdbcDataProvider;
+
+      dataConnectionDialog.ConnectionString = masterDataConnectionString;
+
+      if (Microsoft.Data.ConnectionUI.DataConnectionDialog.Show(dataConnectionDialog) != DialogResult.OK)
+      {
+        return;
+      }
+
+      Properties.Settings.Default.SetMasterDataConnectionString = dataConnectionDialog.ConnectionString;
+      Properties.Settings.Default.Save();
+      ultraStatusBar1.Panels["masterDataConnection"].Text = "Master Data Connection: " + ConnectionStringSummary(Properties.Settings.Default.MasterDataConnectionString);
+      return;
+    }
+
+    private string ConnectionStringSummary(string connectionString)
+    {      
+      System.Data.Common.DbConnectionStringBuilder csb;
+      csb = new System.Data.Common.DbConnectionStringBuilder();
+
+      csb.ConnectionString = connectionString;
+      string summary = csb["data source"].ToString();
+      return summary;
     }
 
     private void expBarMain_ItemClick(object sender, Infragistics.Win.UltraWinExplorerBar.ItemEventArgs e)
@@ -2421,6 +2440,8 @@ namespace DSCUpdater
         Cursor = Cursors.Default;
       }
     }
+
+
 
   }
 }

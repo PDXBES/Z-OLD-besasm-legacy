@@ -7806,7 +7806,7 @@ namespace DSCUpdater.projectDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitConnection() {
             this._connection = new global::System.Data.OleDb.OleDbConnection();
-            this._connection.ConnectionString = global::DSCUpdater.Properties.Settings.Default.mst_DSC_acConnectionString;
+            this._connection.ConnectionString = global::DSCUpdater.Properties.Settings.Default.MasterDataConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -9938,7 +9938,7 @@ namespace DSCUpdater.projectDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitConnection() {
             this._connection = new global::System.Data.OleDb.OleDbConnection();
-            this._connection.ConnectionString = global::DSCUpdater.Properties.Settings.Default.mst_ic_DiscoVeg_acConnectionString;
+            this._connection.ConnectionString = global::DSCUpdater.Properties.Settings.Default.MasterDataConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -10605,7 +10605,7 @@ SELECT edit_id, edit_date, edited_by FROM SESSION WHERE (edit_id = @edit_id)";
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::DSCUpdater.Properties.Settings.Default.DSCEDITORConnectionString;
+            this._connection.ConnectionString = global::DSCUpdater.Properties.Settings.Default.DscEditorConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -10986,7 +10986,7 @@ SELECT edit_id, edit_date, edited_by FROM SESSION WHERE (edit_id = @edit_id)";
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitConnection() {
             this._connection = new global::System.Data.OleDb.OleDbConnection();
-            this._connection.ConnectionString = global::DSCUpdater.Properties.Settings.Default.mst_ic_Drywell_acConnectionString;
+            this._connection.ConnectionString = global::DSCUpdater.Properties.Settings.Default.MasterDataConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -11598,7 +11598,7 @@ SELECT edit_id, edit_date, edited_by FROM SESSION WHERE (edit_id = @edit_id)";
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::DSCUpdater.Properties.Settings.Default.DSCEDITORConnectionString;
+            this._connection.ConnectionString = global::DSCUpdater.Properties.Settings.Default.DscEditorConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -11840,7 +11840,7 @@ SELECT edit_id, edit_date, edited_by FROM SESSION WHERE (edit_id = @edit_id)";
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::DSCUpdater.Properties.Settings.Default.DSCEDITORConnectionString;
+            this._connection.ConnectionString = global::DSCUpdater.Properties.Settings.Default.DscEditorConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -12356,7 +12356,7 @@ SELECT dsc_edit_id, edit_id, edit_date, edited_by, rno, dsc_id, old_roof_area_sq
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::DSCUpdater.Properties.Settings.Default.DSCEDITORConnectionString;
+            this._connection.ConnectionString = global::DSCUpdater.Properties.Settings.Default.DscEditorConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -13054,7 +13054,7 @@ SELECT dsc_edit_id, edit_id, edit_date, edited_by, rno, dsc_id, old_roof_area_sq
         private void InitCommandCollection() {
             this._commandCollection = new global::System.Data.IDbCommand[23];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
-            ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[0])).Connection = new global::System.Data.SqlClient.SqlConnection(global::DSCUpdater.Properties.Settings.Default.DSCEDITORConnectionString);
+            ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[0])).Connection = new global::System.Data.SqlClient.SqlConnection(global::DSCUpdater.Properties.Settings.Default.DscEditorConnectionString);
             ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[0])).CommandText = @"UPDATE    mst_ic_DiscoVeg_ac
 SET              SqFt = DSCEDITAppendTable.new_park_disco_ic_area_sqft
 FROM         mst_ic_DiscoVeg_ac INNER JOIN
@@ -13063,7 +13063,7 @@ WHERE     (mst_ic_DiscoVeg_ac.RoofRPark = N'P') AND (mst_ic_DiscoVeg_ac.assumeke
                       (mst_ic_DiscoVeg_ac.ApplyAreaTF = N'EX')";
             ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[0])).CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
-            ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[1])).Connection = new global::System.Data.SqlClient.SqlConnection(global::DSCUpdater.Properties.Settings.Default.DSCEDITORConnectionString);
+            ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[1])).Connection = new global::System.Data.SqlClient.SqlConnection(global::DSCUpdater.Properties.Settings.Default.DscEditorConnectionString);
             ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[1])).CommandText = @"UPDATE    mst_ic_Drywell_ac
 SET              SqFt = new_park_drywell_ic_area, TimeFrame =, ApplyAreaTF =
 FROM         mst_ic_Drywell_ac INNER JOIN
@@ -13072,7 +13072,7 @@ WHERE     (mst_ic_Drywell_ac.RoofRPark = N'P') AND (mst_ic_Drywell_ac.assumeKey 
                       (mst_ic_Drywell_ac.ApplyAreaTF = N'EX')";
             ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[1])).CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[2] = new global::System.Data.SqlClient.SqlCommand();
-            ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[2])).Connection = new global::System.Data.SqlClient.SqlConnection(global::DSCUpdater.Properties.Settings.Default.DSCEDITORConnectionString);
+            ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[2])).Connection = new global::System.Data.SqlClient.SqlConnection(global::DSCUpdater.Properties.Settings.Default.DscEditorConnectionString);
             ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[2])).CommandText = @"UPDATE    mst_ic_DiscoVeg_ac
 SET              SqFt = DSCEDITAppendTable.new_roof_disco_ic_area_sqft
 FROM         mst_ic_DiscoVeg_ac INNER JOIN
@@ -13081,7 +13081,7 @@ WHERE     (mst_ic_DiscoVeg_ac.RoofRPark = N'R') AND (mst_ic_DiscoVeg_ac.assumeke
                       (mst_ic_DiscoVeg_ac.ApplyAreaTF = N'EX')";
             ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[2])).CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[3] = new global::System.Data.SqlClient.SqlCommand();
-            ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[3])).Connection = new global::System.Data.SqlClient.SqlConnection(global::DSCUpdater.Properties.Settings.Default.DSCEDITORConnectionString);
+            ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[3])).Connection = new global::System.Data.SqlClient.SqlConnection(global::DSCUpdater.Properties.Settings.Default.DscEditorConnectionString);
             ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[3])).CommandText = @"UPDATE    mst_ic_Drywell_ac
 SET              SqFt = DSCEDITAppendTable.new_roof_drywell_ic_area_sqft, RoofRPark =, assumeKey =, TimeFrame =, ApplyAreaTF =
 FROM         mst_ic_Drywell_ac INNER JOIN
@@ -13090,7 +13090,7 @@ WHERE     (mst_ic_Drywell_ac.RoofRPark = N'R') AND (mst_ic_Drywell_ac.assumeKey 
                       (mst_ic_Drywell_ac.ApplyAreaTF = N'EX')";
             ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[3])).CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[4] = new global::System.Data.SqlClient.SqlCommand();
-            ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[4])).Connection = new global::System.Data.SqlClient.SqlConnection(global::DSCUpdater.Properties.Settings.Default.DSCEDITORConnectionString);
+            ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[4])).Connection = new global::System.Data.SqlClient.SqlConnection(global::DSCUpdater.Properties.Settings.Default.DscEditorConnectionString);
             ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[4])).CommandText = @"UPDATE    mst_DSC_ac
 SET              surveyedPkAreaSqft = DSCEDITAppendTable.new_park_area_sqft, parkAreaUpdateFlag = 1
 FROM         mst_DSC_ac INNER JOIN
@@ -13098,7 +13098,7 @@ FROM         mst_DSC_ac INNER JOIN
                       mst_DSC_ac.PkAreaFtEX <> DSCEDITAppendTable.new_park_area_sqft";
             ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[4])).CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[5] = new global::System.Data.SqlClient.SqlCommand();
-            ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[5])).Connection = new global::System.Data.SqlClient.SqlConnection(global::DSCUpdater.Properties.Settings.Default.DSCEDITORConnectionString);
+            ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[5])).Connection = new global::System.Data.SqlClient.SqlConnection(global::DSCUpdater.Properties.Settings.Default.DscEditorConnectionString);
             ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[5])).CommandText = @"UPDATE    mst_DSC_ac
 SET              surveyedRfAreaSqFt = DSCEDITAppendTable.new_roof_area_sqft, roofAreaUpdateFlag = 1
 FROM         mst_DSC_ac INNER JOIN
@@ -13106,7 +13106,7 @@ FROM         mst_DSC_ac INNER JOIN
                       mst_DSC_ac.RfAreaFtEX <> DSCEDITAppendTable.new_roof_area_sqft";
             ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[5])).CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[6] = new global::System.Data.SqlClient.SqlCommand();
-            ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[6])).Connection = new global::System.Data.SqlClient.SqlConnection(global::DSCUpdater.Properties.Settings.Default.DSCEDITORConnectionString);
+            ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[6])).Connection = new global::System.Data.SqlClient.SqlConnection(global::DSCUpdater.Properties.Settings.Default.DscEditorConnectionString);
             ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[6])).CommandText = @"UPDATE    DSCEDITAppendTable
 SET              old_park_disco_ic_area_sqft = mst_ic_DiscoVeg_ac.SqFt
 FROM         DSCEDITAppendTable INNER JOIN
@@ -13115,7 +13115,7 @@ WHERE     (mst_ic_DiscoVeg_ac.TimeFrame = N'EX') AND (mst_ic_DiscoVeg_ac.ApplyAr
                       (mst_ic_DiscoVeg_ac.assumekey = N'DDEX')";
             ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[6])).CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[7] = new global::System.Data.SqlClient.SqlCommand();
-            ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[7])).Connection = new global::System.Data.SqlClient.SqlConnection(global::DSCUpdater.Properties.Settings.Default.DSCEDITORConnectionString);
+            ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[7])).Connection = new global::System.Data.SqlClient.SqlConnection(global::DSCUpdater.Properties.Settings.Default.DscEditorConnectionString);
             ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[7])).CommandText = @"UPDATE    DSCEDITAppendTable
 SET              old_park_drywell_ic_area_sqft = mst_ic_Drywell_ac.SqFt
 FROM         DSCEDITAppendTable INNER JOIN
@@ -13124,7 +13124,7 @@ WHERE     (mst_ic_Drywell_ac.ApplyAreaTF = N'EX') AND (mst_ic_Drywell_ac.TimeFra
                       (mst_ic_Drywell_ac.RoofRPark = N'P')";
             ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[7])).CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[8] = new global::System.Data.SqlClient.SqlCommand();
-            ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[8])).Connection = new global::System.Data.SqlClient.SqlConnection(global::DSCUpdater.Properties.Settings.Default.DSCEDITORConnectionString);
+            ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[8])).Connection = new global::System.Data.SqlClient.SqlConnection(global::DSCUpdater.Properties.Settings.Default.DscEditorConnectionString);
             ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[8])).CommandText = @"UPDATE    DSCEDITAppendTable
 SET              old_roof_disco_ic_area_sqft = mst_ic_DiscoVeg_ac.SqFt
 FROM         DSCEDITAppendTable INNER JOIN
@@ -13133,7 +13133,7 @@ WHERE     (mst_ic_DiscoVeg_ac.RoofRPark = N'R') AND (mst_ic_DiscoVeg_ac.assumeke
                       (mst_ic_DiscoVeg_ac.ApplyAreaTF = N'EX')";
             ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[8])).CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[9] = new global::System.Data.SqlClient.SqlCommand();
-            ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[9])).Connection = new global::System.Data.SqlClient.SqlConnection(global::DSCUpdater.Properties.Settings.Default.DSCEDITORConnectionString);
+            ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[9])).Connection = new global::System.Data.SqlClient.SqlConnection(global::DSCUpdater.Properties.Settings.Default.DscEditorConnectionString);
             ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[9])).CommandText = @"UPDATE    DSCEDITAppendTable
 SET              old_roof_drywell_ic_area_sqft = mst_ic_Drywell_ac.SqFt
 FROM         DSCEDITAppendTable INNER JOIN
@@ -13142,7 +13142,7 @@ WHERE     (mst_ic_Drywell_ac.ApplyAreaTF = N'EX') AND (mst_ic_Drywell_ac.TimeFra
                       (mst_ic_Drywell_ac.RoofRPark = N'R')";
             ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[9])).CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[10] = new global::System.Data.SqlClient.SqlCommand();
-            ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[10])).Connection = new global::System.Data.SqlClient.SqlConnection(global::DSCUpdater.Properties.Settings.Default.DSCEDITORConnectionString);
+            ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[10])).Connection = new global::System.Data.SqlClient.SqlConnection(global::DSCUpdater.Properties.Settings.Default.DscEditorConnectionString);
             ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[10])).CommandText = @"INSERT INTO DSCEDIT
 SELECT     dsc_edit_id, edit_id, edit_date, edited_by, rno, dsc_id, old_roof_area_sqft, new_roof_area_sqft, new_roof_disco_ic_area_sqft, 
                       old_roof_disco_ic_area_sqft, old_roof_drywell_ic_area_sqft, new_roof_drywell_ic_area_sqft, old_park_area_sqft, new_park_area_sqft, 
@@ -13150,7 +13150,7 @@ SELECT     dsc_edit_id, edit_id, edit_date, edited_by, rno, dsc_id, old_roof_are
 FROM         DSCEDITAppendTable";
             ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[10])).CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[11] = new global::System.Data.SqlClient.SqlCommand();
-            ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[11])).Connection = new global::System.Data.SqlClient.SqlConnection(global::DSCUpdater.Properties.Settings.Default.DSCEDITORConnectionString);
+            ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[11])).Connection = new global::System.Data.SqlClient.SqlConnection(global::DSCUpdater.Properties.Settings.Default.DscEditorConnectionString);
             ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[11])).CommandText = @"INSERT INTO mst_ic_DiscoVeg_ac
                       (dscID)
 SELECT     DSCEDITAppendTable.dsc_id
@@ -13159,7 +13159,7 @@ FROM         DSCEDITAppendTable LEFT OUTER JOIN
 WHERE     (mst_ic_DiscoVeg_ac.dscID IS NULL) AND (DSCEDITAppendTable.new_park_disco_ic_area_sqft <> 0)";
             ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[11])).CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[12] = new global::System.Data.SqlClient.SqlCommand();
-            ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[12])).Connection = new global::System.Data.SqlClient.SqlConnection(global::DSCUpdater.Properties.Settings.Default.DSCEDITORConnectionString);
+            ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[12])).Connection = new global::System.Data.SqlClient.SqlConnection(global::DSCUpdater.Properties.Settings.Default.DscEditorConnectionString);
             ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[12])).CommandText = @"INSERT INTO mst_ic_Drywell_ac
                       (dscID)
 SELECT     DSCEDITAppendTable.dsc_id
@@ -13168,7 +13168,7 @@ FROM         DSCEDITAppendTable LEFT OUTER JOIN
 WHERE     (mst_ic_Drywell_ac.dscID IS NULL) AND (DSCEDITAppendTable.new_park_drywell_ic_area_sqft <> 0)";
             ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[12])).CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[13] = new global::System.Data.SqlClient.SqlCommand();
-            ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[13])).Connection = new global::System.Data.SqlClient.SqlConnection(global::DSCUpdater.Properties.Settings.Default.DSCEDITORConnectionString);
+            ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[13])).Connection = new global::System.Data.SqlClient.SqlConnection(global::DSCUpdater.Properties.Settings.Default.DscEditorConnectionString);
             ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[13])).CommandText = @"INSERT INTO mst_ic_Drywell_ac
                       (dscID)
 SELECT     DSCEDITAppendTable.dsc_id
@@ -13177,7 +13177,7 @@ FROM         DSCEDITAppendTable LEFT OUTER JOIN
 WHERE     (mst_ic_Drywell_ac.dscID IS NULL) AND (DSCEDITAppendTable.new_roof_drywell_ic_area_sqft <> 0)";
             ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[13])).CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[14] = new global::System.Data.SqlClient.SqlCommand();
-            ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[14])).Connection = new global::System.Data.SqlClient.SqlConnection(global::DSCUpdater.Properties.Settings.Default.DSCEDITORConnectionString);
+            ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[14])).Connection = new global::System.Data.SqlClient.SqlConnection(global::DSCUpdater.Properties.Settings.Default.DscEditorConnectionString);
             ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[14])).CommandText = @"INSERT INTO mst_ic_DiscoVeg_ac
                       (dscID)
 SELECT     DSCEDITAppendTable.dsc_id
@@ -13186,7 +13186,7 @@ FROM         DSCEDITAppendTable LEFT OUTER JOIN
 WHERE     (mst_ic_DiscoVeg_ac.dscID IS NULL) AND (DSCEDITAppendTable.new_roof_drywell_ic_area_sqft <> 0)";
             ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[14])).CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[15] = new global::System.Data.SqlClient.SqlCommand();
-            ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[15])).Connection = new global::System.Data.SqlClient.SqlConnection(global::DSCUpdater.Properties.Settings.Default.DSCEDITORConnectionString);
+            ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[15])).Connection = new global::System.Data.SqlClient.SqlConnection(global::DSCUpdater.Properties.Settings.Default.DscEditorConnectionString);
             ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[15])).CommandText = @"UPDATE    mst_ic_DiscoVeg_ac
 SET              ParcelID = LEFT(mst_ic_DiscoVeg_ac.dscID, 6), DivideID = RIGHT(mst_ic_DiscoVeg_ac.dscID, 1), RoofRPark = N'P', assumekey = N'DDEX', 
                       TimeFrame = N'EX', ApplyAreaTF = N'EX', ValidFromDate = N'1/1/1900', ValidToDate = N'1/1/1990', 
@@ -13195,7 +13195,7 @@ FROM         mst_ic_DiscoVeg_ac INNER JOIN
                       DSCEDITAppendTable ON mst_ic_DiscoVeg_ac.dscID = DSCEDITAppendTable.dsc_id";
             ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[15])).CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[16] = new global::System.Data.SqlClient.SqlCommand();
-            ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[16])).Connection = new global::System.Data.SqlClient.SqlConnection(global::DSCUpdater.Properties.Settings.Default.DSCEDITORConnectionString);
+            ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[16])).Connection = new global::System.Data.SqlClient.SqlConnection(global::DSCUpdater.Properties.Settings.Default.DscEditorConnectionString);
             ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[16])).CommandText = @"UPDATE    mst_ic_Drywell_ac
 SET              ParcelID = Left(dscID,6), DivideID = Right(dscID,1), RoofRPark = N'P', assumeKey = N'DDEX', TimeFrame = N'EX', ApplyAreaTF = N'EX', ValidFromDate = N'1/1/1900', 
                       ValidToDate = N'1/1/1900', SqFt = DSCEDITAppendTable.new_park_drywell_ic_area_sqft, Comment = N'DSCEditor', AppendDate = N'1/1/1900'
@@ -13204,7 +13204,7 @@ FROM         mst_ic_Drywell_ac INNER JOIN
 WHERE     (DSCEDITAppendTable.new_park_drywell_ic_area_sqft <> 0)";
             ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[16])).CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[17] = new global::System.Data.SqlClient.SqlCommand();
-            ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[17])).Connection = new global::System.Data.SqlClient.SqlConnection(global::DSCUpdater.Properties.Settings.Default.DSCEDITORConnectionString);
+            ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[17])).Connection = new global::System.Data.SqlClient.SqlConnection(global::DSCUpdater.Properties.Settings.Default.DscEditorConnectionString);
             ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[17])).CommandText = @"UPDATE    mst_ic_DiscoVeg_ac
 SET              ParcelID = Left(dscID,6), DivideID = Right(dscID,1), RoofRPark = N'R', assumekey = N'DDEX', TimeFrame = N'EX', ApplyAreaTF = N'EX', ValidFromDate = N'1/1/1900', 
                       ValidToDate = N'1/1/1900', SqFt = DSCEDITAppendTable.new_roof_disco_ic_area_sqft, Effectiveness = 0.7, Comment = N'DSCEditor', 
@@ -13214,7 +13214,7 @@ FROM         mst_ic_DiscoVeg_ac INNER JOIN
 WHERE     (DSCEDITAppendTable.new_roof_disco_ic_area_sqft <> 0)";
             ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[17])).CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[18] = new global::System.Data.SqlClient.SqlCommand();
-            ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[18])).Connection = new global::System.Data.SqlClient.SqlConnection(global::DSCUpdater.Properties.Settings.Default.DSCEDITORConnectionString);
+            ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[18])).Connection = new global::System.Data.SqlClient.SqlConnection(global::DSCUpdater.Properties.Settings.Default.DscEditorConnectionString);
             ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[18])).CommandText = @"UPDATE    mst_ic_Drywell_ac
 SET              ParcelID = Left(dscID,6), DivideID = Right(dscID,1), RoofRPark = N'R', assumeKey = N'DDEX', TimeFrame = N'EX', ApplyAreaTF = N'EX', ValidFromDate = N'1/1/1900', 
                       ValidToDate = N'1/1/1900', SqFt = DSCEDITAppendTable.new_roof_drywell_ic_area_sqft, Comment = N'DSCEditor', AppendDate = N'1/1/1900'
@@ -13223,22 +13223,22 @@ FROM         mst_ic_Drywell_ac INNER JOIN
 WHERE     (DSCEDITAppendTable.new_roof_drywell_ic_area_sqft <> 0)";
             ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[18])).CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[19] = new global::System.Data.SqlClient.SqlCommand();
-            ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[19])).Connection = new global::System.Data.SqlClient.SqlConnection(global::DSCUpdater.Properties.Settings.Default.DSCEDITORConnectionString);
+            ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[19])).Connection = new global::System.Data.SqlClient.SqlConnection(global::DSCUpdater.Properties.Settings.Default.DscEditorConnectionString);
             ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[19])).CommandText = "SELECT     USERUPDATE.dsc_id\r\nFROM         mst_DSC_ac RIGHT OUTER JOIN\r\n         " +
                 "             USERUPDATE ON mst_DSC_ac.DSCID = USERUPDATE.dsc_id\r\nWHERE     (mst_" +
                 "DSC_ac.DSCID IS NULL)";
             ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[19])).CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[20] = new global::System.Data.SqlClient.SqlCommand();
-            ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[20])).Connection = new global::System.Data.SqlClient.SqlConnection(global::DSCUpdater.Properties.Settings.Default.DSCEDITORConnectionString);
+            ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[20])).Connection = new global::System.Data.SqlClient.SqlConnection(global::DSCUpdater.Properties.Settings.Default.DscEditorConnectionString);
             ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[20])).CommandText = "DELETE FROM DSCEDITAppendTable";
             ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[20])).CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[21] = new global::System.Data.SqlClient.SqlCommand();
-            ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[21])).Connection = new global::System.Data.SqlClient.SqlConnection(global::DSCUpdater.Properties.Settings.Default.DSCEDITORConnectionString);
+            ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[21])).Connection = new global::System.Data.SqlClient.SqlConnection(global::DSCUpdater.Properties.Settings.Default.DscEditorConnectionString);
             ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[21])).CommandText = "dbo.SelectUpdatesNotInMasterDSC";
             ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[21])).CommandType = global::System.Data.CommandType.StoredProcedure;
             ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[21])).Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RETURN_VALUE", global::System.Data.SqlDbType.Variant, 0, global::System.Data.ParameterDirection.ReturnValue, 0, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[22] = new global::System.Data.SqlClient.SqlCommand();
-            ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[22])).Connection = new global::System.Data.SqlClient.SqlConnection(global::DSCUpdater.Properties.Settings.Default.DSCEDITORConnectionString);
+            ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[22])).Connection = new global::System.Data.SqlClient.SqlConnection(global::DSCUpdater.Properties.Settings.Default.DscEditorConnectionString);
             ((global::System.Data.SqlClient.SqlCommand)(this._commandCollection[22])).CommandText = @"INSERT INTO DSCEDITAppendTable
                       (dsc_edit_id, edit_id, edit_date, edited_by, rno, dsc_id, new_roof_area_sqft, old_roof_disco_ic_area_sqft, new_roof_disco_ic_area_sqft, 
                       old_park_area_sqft, new_park_area_sqft, old_park_disco_ic_area_sqft, new_park_disco_ic_area_sqft, old_park_drywell_ic_area_sqft, 

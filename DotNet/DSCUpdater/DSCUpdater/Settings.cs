@@ -25,11 +25,19 @@
             // Add code to handle the SettingsSaving event here.
         }
 
-        public string SetDSCEDITORConnectionString
+        public string SetDscEditorConnectionString
         {
           set
           {
-            this["DSCEditorConnectionString"] = value;
+            this["DscEditorConnectionString"] = value;
+          }
+        }
+
+        public string SetMasterDataConnectionString
+        {
+          set
+          {
+            this["MasterDataConnectionString"] = value;
           }
         }
     }

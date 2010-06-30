@@ -78,31 +78,35 @@
       Infragistics.Win.UltraWinTabControl.UltraTab tabLoadedUpdateReview = new Infragistics.Win.UltraWinTabControl.UltraTab();
       Infragistics.Win.UltraWinTabControl.UltraTab tabMain = new Infragistics.Win.UltraWinTabControl.UltraTab(true);
       Infragistics.Win.UltraWinTabControl.UltraTab tabDownloadTemplate = new Infragistics.Win.UltraWinTabControl.UltraTab();
+      Infragistics.Win.UltraWinStatusBar.UltraStatusPanel ultraStatusPanel1 = new Infragistics.Win.UltraWinStatusBar.UltraStatusPanel();
+      Infragistics.Win.UltraWinStatusBar.UltraStatusPanel ultraStatusPanel2 = new Infragistics.Win.UltraWinStatusBar.UltraStatusPanel();
+      Infragistics.Win.UltraWinStatusBar.UltraStatusPanel ultraStatusPanel3 = new Infragistics.Win.UltraWinStatusBar.UltraStatusPanel();
+      Infragistics.Win.UltraWinStatusBar.UltraStatusPanel ultraStatusPanel4 = new Infragistics.Win.UltraWinStatusBar.UltraStatusPanel();
       Infragistics.Win.UltraWinToolbars.UltraToolbar ultraToolbar1 = new Infragistics.Win.UltraWinToolbars.UltraToolbar("UltraToolbar1");
       Infragistics.Win.UltraWinToolbars.PopupMenuTool popupMenuTool1 = new Infragistics.Win.UltraWinToolbars.PopupMenuTool("file");
       Infragistics.Win.UltraWinToolbars.PopupMenuTool popupMenuTool2 = new Infragistics.Win.UltraWinToolbars.PopupMenuTool("options");
       Infragistics.Win.UltraWinToolbars.PopupMenuTool popupMenuTool3 = new Infragistics.Win.UltraWinToolbars.PopupMenuTool("help");
       Infragistics.Win.UltraWinToolbars.PopupMenuTool popupMenuTool4 = new Infragistics.Win.UltraWinToolbars.PopupMenuTool("options");
-      Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool1 = new Infragistics.Win.UltraWinToolbars.ButtonTool("changeDSCEditorConnection");
-      Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool2 = new Infragistics.Win.UltraWinToolbars.ButtonTool("changeMstDatabaseConnection");
+      Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool1 = new Infragistics.Win.UltraWinToolbars.ButtonTool("changeDscEditorConnection");
+      Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool2 = new Infragistics.Win.UltraWinToolbars.ButtonTool("changeMasterDataConnection");
       Infragistics.Win.UltraWinToolbars.PopupMenuTool popupMenuTool5 = new Infragistics.Win.UltraWinToolbars.PopupMenuTool("help");
       Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool3 = new Infragistics.Win.UltraWinToolbars.ButtonTool("about");
       Infragistics.Win.UltraWinToolbars.PopupMenuTool popupMenuTool6 = new Infragistics.Win.UltraWinToolbars.PopupMenuTool("file");
       Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool25 = new Infragistics.Win.UltraWinToolbars.ButtonTool("tabDownloadTemplate");
-      Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool4 = new Infragistics.Win.UltraWinToolbars.ButtonTool("tabLoadUpdateFile");
+      Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool4 = new Infragistics.Win.UltraWinToolbars.ButtonTool("tabMain");
       Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool21 = new Infragistics.Win.UltraWinToolbars.ButtonTool("tabCheckRetroUpdates");
       Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool22 = new Infragistics.Win.UltraWinToolbars.ButtonTool("tabApplyRetroUpdates");
-      Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool23 = new Infragistics.Win.UltraWinToolbars.ButtonTool("tabMain");
-      Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool7 = new Infragistics.Win.UltraWinToolbars.ButtonTool("tabReverSessionChanges");
+      Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool23 = new Infragistics.Win.UltraWinToolbars.ButtonTool("tabUpdaterHistory");
+      Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool7 = new Infragistics.Win.UltraWinToolbars.ButtonTool("tabRevertSessionChanges");
       Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool10 = new Infragistics.Win.UltraWinToolbars.ButtonTool("exit");
-      Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool11 = new Infragistics.Win.UltraWinToolbars.ButtonTool("changeDSCEditorConnection");
-      Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool12 = new Infragistics.Win.UltraWinToolbars.ButtonTool("changeMstDatabaseConnection");
+      Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool11 = new Infragistics.Win.UltraWinToolbars.ButtonTool("changeDscEditorConnection");
+      Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool12 = new Infragistics.Win.UltraWinToolbars.ButtonTool("changeMasterDataConnection");
       Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool13 = new Infragistics.Win.UltraWinToolbars.ButtonTool("exit");
       Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool14 = new Infragistics.Win.UltraWinToolbars.ButtonTool("about");
       Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool15 = new Infragistics.Win.UltraWinToolbars.ButtonTool("tabDownloadTemplate");
-      Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool16 = new Infragistics.Win.UltraWinToolbars.ButtonTool("tabLoadUpdateFile");
-      Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool17 = new Infragistics.Win.UltraWinToolbars.ButtonTool("tabMain");
-      Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool18 = new Infragistics.Win.UltraWinToolbars.ButtonTool("tabReverSessionChanges");
+      Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool16 = new Infragistics.Win.UltraWinToolbars.ButtonTool("tabMain");
+      Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool17 = new Infragistics.Win.UltraWinToolbars.ButtonTool("tabUpdaterHistory");
+      Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool18 = new Infragistics.Win.UltraWinToolbars.ButtonTool("tabRevertSessionChanges");
       Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool19 = new Infragistics.Win.UltraWinToolbars.ButtonTool("tabApplyRetroUpdates");
       Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool20 = new Infragistics.Win.UltraWinToolbars.ButtonTool("tabCheckRetroUpdates");
       this.tabPageControlMissingDSC = new Infragistics.Win.UltraWinTabControl.UltraTabPageControl();
@@ -227,10 +231,6 @@
       this.btnDownloadUpdateTemplate = new Infragistics.Win.Misc.UltraButton();
       this.lblDownloadTemplate = new Infragistics.Win.Misc.UltraLabel();
       this.ofdMain = new System.Windows.Forms.OpenFileDialog();
-      this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-      this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-      this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
-      this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
       this.sfdMain = new System.Windows.Forms.SaveFileDialog();
       this.sESSIONTableAdapter = new DSCUpdater.projectDataSetTableAdapters.SESSIONTableAdapter();
       this.dSCEDITTableAdapter = new DSCUpdater.projectDataSetTableAdapters.DSCEDITTableAdapter();
@@ -241,10 +241,11 @@
       this.tabControlMain = new Infragistics.Win.UltraWinTabControl.UltraTabControl();
       this.ultraTabSharedControlsPage3 = new Infragistics.Win.UltraWinTabControl.UltraTabSharedControlsPage();
       this._frmMain_Toolbars_Dock_Area_Left = new Infragistics.Win.UltraWinToolbars.UltraToolbarsDockArea();
-      this.ultraToolbarsManager1 = new Infragistics.Win.UltraWinToolbars.UltraToolbarsManager(this.components);
       this._frmMain_Toolbars_Dock_Area_Right = new Infragistics.Win.UltraWinToolbars.UltraToolbarsDockArea();
       this._frmMain_Toolbars_Dock_Area_Top = new Infragistics.Win.UltraWinToolbars.UltraToolbarsDockArea();
       this._frmMain_Toolbars_Dock_Area_Bottom = new Infragistics.Win.UltraWinToolbars.UltraToolbarsDockArea();
+      this.ultraStatusBar1 = new Infragistics.Win.UltraWinStatusBar.UltraStatusBar();
+      this.ultraToolbarsManager1 = new Infragistics.Win.UltraWinToolbars.UltraToolbarsManager(this.components);
       this.tabPageControlMissingDSC.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.dgvDSCQC)).BeginInit();
       this.tabPageControlApplyRetroUpdates.SuspendLayout();
@@ -297,7 +298,6 @@
       this.tabPageControlDownloadTemplate.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.ultraGroupBox)).BeginInit();
       this.ultraGroupBox.SuspendLayout();
-      this.statusStrip1.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.expBarMain)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.dbBindSourceDSCQC)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.dbBindSourceParkQC)).BeginInit();
@@ -315,7 +315,7 @@
       this.tabPageControlMissingDSC.Location = new System.Drawing.Point(-10000, -10000);
       this.tabPageControlMissingDSC.Name = "tabPageControlMissingDSC";
       this.tabPageControlMissingDSC.Padding = new System.Windows.Forms.Padding(3);
-      this.tabPageControlMissingDSC.Size = new System.Drawing.Size(715, 443);
+      this.tabPageControlMissingDSC.Size = new System.Drawing.Size(715, 439);
       // 
       // lblMissingDSCError
       // 
@@ -360,7 +360,7 @@
       this.tabPageControlApplyRetroUpdates.Location = new System.Drawing.Point(-10000, -10000);
       this.tabPageControlApplyRetroUpdates.Name = "tabPageControlApplyRetroUpdates";
       this.tabPageControlApplyRetroUpdates.Padding = new System.Windows.Forms.Padding(3);
-      this.tabPageControlApplyRetroUpdates.Size = new System.Drawing.Size(715, 443);
+      this.tabPageControlApplyRetroUpdates.Size = new System.Drawing.Size(715, 439);
       // 
       // btnApplyRetroUpdates
       // 
@@ -390,7 +390,7 @@
       this.tabPageControlCheckRetroUpdates.Location = new System.Drawing.Point(-10000, -10000);
       this.tabPageControlCheckRetroUpdates.Name = "tabPageControlCheckRetroUpdates";
       this.tabPageControlCheckRetroUpdates.Padding = new System.Windows.Forms.Padding(3);
-      this.tabPageControlCheckRetroUpdates.Size = new System.Drawing.Size(715, 443);
+      this.tabPageControlCheckRetroUpdates.Size = new System.Drawing.Size(715, 439);
       // 
       // ultraPanel1
       // 
@@ -403,7 +403,7 @@
       this.ultraPanel1.Dock = System.Windows.Forms.DockStyle.Right;
       this.ultraPanel1.Location = new System.Drawing.Point(512, 3);
       this.ultraPanel1.Name = "ultraPanel1";
-      this.ultraPanel1.Size = new System.Drawing.Size(200, 437);
+      this.ultraPanel1.Size = new System.Drawing.Size(200, 433);
       this.ultraPanel1.TabIndex = 8;
       // 
       // grpBoxCheckRetroUpdates
@@ -507,7 +507,7 @@
       this.dgvIncomingRetroChanges.Dock = System.Windows.Forms.DockStyle.Fill;
       this.dgvIncomingRetroChanges.Location = new System.Drawing.Point(3, 3);
       this.dgvIncomingRetroChanges.Name = "dgvIncomingRetroChanges";
-      this.dgvIncomingRetroChanges.Size = new System.Drawing.Size(709, 437);
+      this.dgvIncomingRetroChanges.Size = new System.Drawing.Size(709, 433);
       this.dgvIncomingRetroChanges.TabIndex = 0;
       // 
       // tabPageControlPendingImpAChanges
@@ -518,7 +518,7 @@
       this.tabPageControlPendingImpAChanges.Location = new System.Drawing.Point(-10000, -10000);
       this.tabPageControlPendingImpAChanges.Name = "tabPageControlPendingImpAChanges";
       this.tabPageControlPendingImpAChanges.Padding = new System.Windows.Forms.Padding(3);
-      this.tabPageControlPendingImpAChanges.Size = new System.Drawing.Size(715, 443);
+      this.tabPageControlPendingImpAChanges.Size = new System.Drawing.Size(715, 439);
       // 
       // btnImpAQC
       // 
@@ -560,7 +560,7 @@
       this.tabPageControlIncorrectRoofICArea.Location = new System.Drawing.Point(-10000, -10000);
       this.tabPageControlIncorrectRoofICArea.Name = "tabPageControlIncorrectRoofICArea";
       this.tabPageControlIncorrectRoofICArea.Padding = new System.Windows.Forms.Padding(3);
-      this.tabPageControlIncorrectRoofICArea.Size = new System.Drawing.Size(715, 443);
+      this.tabPageControlIncorrectRoofICArea.Size = new System.Drawing.Size(715, 439);
       // 
       // lblRoofICError
       // 
@@ -607,7 +607,7 @@
       this.tabPageControlIncorrectParkICArea.Location = new System.Drawing.Point(-10000, -10000);
       this.tabPageControlIncorrectParkICArea.Name = "tabPageControlIncorrectParkICArea";
       this.tabPageControlIncorrectParkICArea.Padding = new System.Windows.Forms.Padding(3);
-      this.tabPageControlIncorrectParkICArea.Size = new System.Drawing.Size(715, 443);
+      this.tabPageControlIncorrectParkICArea.Size = new System.Drawing.Size(715, 439);
       // 
       // lblParkICError
       // 
@@ -659,7 +659,7 @@
       this.tabPageControlUpdaterEditor.Location = new System.Drawing.Point(-10000, -10000);
       this.tabPageControlUpdaterEditor.Name = "tabPageControlUpdaterEditor";
       this.tabPageControlUpdaterEditor.Padding = new System.Windows.Forms.Padding(3);
-      this.tabPageControlUpdaterEditor.Size = new System.Drawing.Size(715, 443);
+      this.tabPageControlUpdaterEditor.Size = new System.Drawing.Size(715, 439);
       // 
       // btnUpdaterEditorCloseCancel
       // 
@@ -1183,7 +1183,7 @@
       this.tabPageControlUpdaterHistory.Location = new System.Drawing.Point(-10000, -10000);
       this.tabPageControlUpdaterHistory.Name = "tabPageControlUpdaterHistory";
       this.tabPageControlUpdaterHistory.Padding = new System.Windows.Forms.Padding(3);
-      this.tabPageControlUpdaterHistory.Size = new System.Drawing.Size(715, 443);
+      this.tabPageControlUpdaterHistory.Size = new System.Drawing.Size(715, 439);
       // 
       // ultraPanel2
       // 
@@ -1195,7 +1195,7 @@
       this.ultraPanel2.Dock = System.Windows.Forms.DockStyle.Right;
       this.ultraPanel2.Location = new System.Drawing.Point(512, 3);
       this.ultraPanel2.Name = "ultraPanel2";
-      this.ultraPanel2.Size = new System.Drawing.Size(200, 412);
+      this.ultraPanel2.Size = new System.Drawing.Size(200, 408);
       this.ultraPanel2.TabIndex = 6;
       // 
       // btnCloseUpdaterHistory
@@ -1244,7 +1244,7 @@
             this.bindingNavigatorMoveNextItem,
             this.bindingNavigatorMoveLastItem,
             this.bindingNavigatorSeparator2});
-      this.bindingNavigator1.Location = new System.Drawing.Point(3, 415);
+      this.bindingNavigator1.Location = new System.Drawing.Point(3, 411);
       this.bindingNavigator1.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
       this.bindingNavigator1.MoveLastItem = this.bindingNavigatorMoveLastItem;
       this.bindingNavigator1.MoveNextItem = this.bindingNavigatorMoveNextItem;
@@ -1340,7 +1340,7 @@
       this.dgvUpdaterHistory.Location = new System.Drawing.Point(3, 3);
       this.dgvUpdaterHistory.Name = "dgvUpdaterHistory";
       this.dgvUpdaterHistory.ReadOnly = true;
-      this.dgvUpdaterHistory.Size = new System.Drawing.Size(709, 437);
+      this.dgvUpdaterHistory.Size = new System.Drawing.Size(709, 433);
       this.dgvUpdaterHistory.TabIndex = 2;
       // 
       // editidDataGridViewTextBoxColumn
@@ -1377,7 +1377,7 @@
       this.tabPageControlLoadedUpdateReview.Location = new System.Drawing.Point(-10000, -10000);
       this.tabPageControlLoadedUpdateReview.Name = "tabPageControlLoadedUpdateReview";
       this.tabPageControlLoadedUpdateReview.Padding = new System.Windows.Forms.Padding(3);
-      this.tabPageControlLoadedUpdateReview.Size = new System.Drawing.Size(715, 443);
+      this.tabPageControlLoadedUpdateReview.Size = new System.Drawing.Size(715, 439);
       // 
       // ultraPanel3
       // 
@@ -1388,7 +1388,7 @@
       this.ultraPanel3.Dock = System.Windows.Forms.DockStyle.Right;
       this.ultraPanel3.Location = new System.Drawing.Point(512, 3);
       this.ultraPanel3.Name = "ultraPanel3";
-      this.ultraPanel3.Size = new System.Drawing.Size(200, 437);
+      this.ultraPanel3.Size = new System.Drawing.Size(200, 433);
       this.ultraPanel3.TabIndex = 10;
       // 
       // btnSubmitUpdates
@@ -1421,7 +1421,7 @@
       this.dgvData.Location = new System.Drawing.Point(3, 3);
       this.dgvData.Name = "dgvData";
       this.dgvData.ReadOnly = true;
-      this.dgvData.Size = new System.Drawing.Size(709, 437);
+      this.dgvData.Size = new System.Drawing.Size(709, 433);
       this.dgvData.TabIndex = 5;
       // 
       // tabPageControlMain
@@ -1432,13 +1432,13 @@
       this.tabPageControlMain.Location = new System.Drawing.Point(0, 0);
       this.tabPageControlMain.Name = "tabPageControlMain";
       this.tabPageControlMain.Padding = new System.Windows.Forms.Padding(3);
-      this.tabPageControlMain.Size = new System.Drawing.Size(715, 443);
+      this.tabPageControlMain.Size = new System.Drawing.Size(715, 439);
       // 
       // btnCancelUpdate
       // 
       this.btnCancelUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
       this.btnCancelUpdate.ButtonStyle = Infragistics.Win.UIElementButtonStyle.WindowsXPCommandButton;
-      this.btnCancelUpdate.Location = new System.Drawing.Point(572, 331);
+      this.btnCancelUpdate.Location = new System.Drawing.Point(572, 327);
       this.btnCancelUpdate.Name = "btnCancelUpdate";
       this.btnCancelUpdate.Size = new System.Drawing.Size(131, 60);
       this.btnCancelUpdate.TabIndex = 15;
@@ -1449,7 +1449,7 @@
       // 
       this.btnLoadUpdateFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
       this.btnLoadUpdateFile.ButtonStyle = Infragistics.Win.UIElementButtonStyle.WindowsVistaButton;
-      this.btnLoadUpdateFile.Location = new System.Drawing.Point(572, 267);
+      this.btnLoadUpdateFile.Location = new System.Drawing.Point(572, 263);
       this.btnLoadUpdateFile.Name = "btnLoadUpdateFile";
       this.btnLoadUpdateFile.Size = new System.Drawing.Size(131, 58);
       this.btnLoadUpdateFile.TabIndex = 14;
@@ -1472,7 +1472,7 @@
       this.tabPageControlDownloadTemplate.Location = new System.Drawing.Point(-10000, -10000);
       this.tabPageControlDownloadTemplate.Name = "tabPageControlDownloadTemplate";
       this.tabPageControlDownloadTemplate.Padding = new System.Windows.Forms.Padding(3);
-      this.tabPageControlDownloadTemplate.Size = new System.Drawing.Size(715, 443);
+      this.tabPageControlDownloadTemplate.Size = new System.Drawing.Size(715, 439);
       // 
       // ultraGroupBox
       // 
@@ -1519,42 +1519,6 @@
       // ofdMain
       // 
       this.ofdMain.FileName = "openFileDialog1";
-      // 
-      // statusStrip1
-      // 
-      this.statusStrip1.AutoSize = false;
-      this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1,
-            this.toolStripProgressBar1,
-            this.toolStripStatusLabel2});
-      this.statusStrip1.Location = new System.Drawing.Point(0, 462);
-      this.statusStrip1.Name = "statusStrip1";
-      this.statusStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-      this.statusStrip1.Size = new System.Drawing.Size(932, 19);
-      this.statusStrip1.TabIndex = 10;
-      this.statusStrip1.Text = "statusStrip1";
-      // 
-      // toolStripStatusLabel1
-      // 
-      this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-      this.toolStripStatusLabel1.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
-      this.toolStripStatusLabel1.Size = new System.Drawing.Size(109, 14);
-      this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
-      // 
-      // toolStripProgressBar1
-      // 
-      this.toolStripProgressBar1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-      this.toolStripProgressBar1.AutoSize = false;
-      this.toolStripProgressBar1.Name = "toolStripProgressBar1";
-      this.toolStripProgressBar1.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
-      this.toolStripProgressBar1.Size = new System.Drawing.Size(100, 13);
-      // 
-      // toolStripStatusLabel2
-      // 
-      this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-      this.toolStripStatusLabel2.Size = new System.Drawing.Size(108, 14);
-      this.toolStripStatusLabel2.Text = "Current Connection: ";
-      this.toolStripStatusLabel2.Click += new System.EventHandler(this.toolStripStatusLabel2_Click);
       // 
       // sESSIONTableAdapter
       // 
@@ -1625,7 +1589,7 @@
       this.expBarMain.Name = "expBarMain";
       this.expBarMain.SaveSettingsFormat = Infragistics.Win.SaveSettingsFormat.Xml;
       this.expBarMain.SettingsKey = "frmMain.expBarMain";
-      this.expBarMain.Size = new System.Drawing.Size(217, 443);
+      this.expBarMain.Size = new System.Drawing.Size(217, 439);
       this.expBarMain.Style = Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarStyle.VisualStudio2005Toolbox;
       this.expBarMain.TabIndex = 15;
       this.expBarMain.UseOsThemes = Infragistics.Win.DefaultableBoolean.True;
@@ -1650,7 +1614,7 @@
       this.tabControlMain.Location = new System.Drawing.Point(217, 19);
       this.tabControlMain.Name = "tabControlMain";
       this.tabControlMain.SharedControlsPage = this.ultraTabSharedControlsPage3;
-      this.tabControlMain.Size = new System.Drawing.Size(715, 443);
+      this.tabControlMain.Size = new System.Drawing.Size(715, 439);
       this.tabControlMain.Style = Infragistics.Win.UltraWinTabControl.UltraTabControlStyle.Wizard;
       this.tabControlMain.TabIndex = 0;
       tabMissingDSC.Key = "tabMissingDSC";
@@ -1703,7 +1667,7 @@
       // 
       this.ultraTabSharedControlsPage3.Location = new System.Drawing.Point(-10000, -10000);
       this.ultraTabSharedControlsPage3.Name = "ultraTabSharedControlsPage3";
-      this.ultraTabSharedControlsPage3.Size = new System.Drawing.Size(715, 443);
+      this.ultraTabSharedControlsPage3.Size = new System.Drawing.Size(715, 439);
       // 
       // _frmMain_Toolbars_Dock_Area_Left
       // 
@@ -1713,12 +1677,71 @@
       this._frmMain_Toolbars_Dock_Area_Left.ForeColor = System.Drawing.SystemColors.ControlText;
       this._frmMain_Toolbars_Dock_Area_Left.Location = new System.Drawing.Point(0, 19);
       this._frmMain_Toolbars_Dock_Area_Left.Name = "_frmMain_Toolbars_Dock_Area_Left";
-      this._frmMain_Toolbars_Dock_Area_Left.Size = new System.Drawing.Size(0, 443);
+      this._frmMain_Toolbars_Dock_Area_Left.Size = new System.Drawing.Size(0, 439);
       this._frmMain_Toolbars_Dock_Area_Left.ToolbarsManager = this.ultraToolbarsManager1;
+      // 
+      // _frmMain_Toolbars_Dock_Area_Right
+      // 
+      this._frmMain_Toolbars_Dock_Area_Right.AccessibleRole = System.Windows.Forms.AccessibleRole.Grouping;
+      this._frmMain_Toolbars_Dock_Area_Right.BackColor = System.Drawing.SystemColors.Control;
+      this._frmMain_Toolbars_Dock_Area_Right.DockedPosition = Infragistics.Win.UltraWinToolbars.DockedPosition.Right;
+      this._frmMain_Toolbars_Dock_Area_Right.ForeColor = System.Drawing.SystemColors.ControlText;
+      this._frmMain_Toolbars_Dock_Area_Right.Location = new System.Drawing.Point(932, 19);
+      this._frmMain_Toolbars_Dock_Area_Right.Name = "_frmMain_Toolbars_Dock_Area_Right";
+      this._frmMain_Toolbars_Dock_Area_Right.Size = new System.Drawing.Size(0, 439);
+      this._frmMain_Toolbars_Dock_Area_Right.ToolbarsManager = this.ultraToolbarsManager1;
+      // 
+      // _frmMain_Toolbars_Dock_Area_Top
+      // 
+      this._frmMain_Toolbars_Dock_Area_Top.AccessibleRole = System.Windows.Forms.AccessibleRole.Grouping;
+      this._frmMain_Toolbars_Dock_Area_Top.BackColor = System.Drawing.SystemColors.Control;
+      this._frmMain_Toolbars_Dock_Area_Top.DockedPosition = Infragistics.Win.UltraWinToolbars.DockedPosition.Top;
+      this._frmMain_Toolbars_Dock_Area_Top.ForeColor = System.Drawing.SystemColors.ControlText;
+      this._frmMain_Toolbars_Dock_Area_Top.Location = new System.Drawing.Point(0, 0);
+      this._frmMain_Toolbars_Dock_Area_Top.Name = "_frmMain_Toolbars_Dock_Area_Top";
+      this._frmMain_Toolbars_Dock_Area_Top.Size = new System.Drawing.Size(932, 19);
+      this._frmMain_Toolbars_Dock_Area_Top.ToolbarsManager = this.ultraToolbarsManager1;
+      // 
+      // _frmMain_Toolbars_Dock_Area_Bottom
+      // 
+      this._frmMain_Toolbars_Dock_Area_Bottom.AccessibleRole = System.Windows.Forms.AccessibleRole.Grouping;
+      this._frmMain_Toolbars_Dock_Area_Bottom.BackColor = System.Drawing.SystemColors.Control;
+      this._frmMain_Toolbars_Dock_Area_Bottom.DockedPosition = Infragistics.Win.UltraWinToolbars.DockedPosition.Bottom;
+      this._frmMain_Toolbars_Dock_Area_Bottom.ForeColor = System.Drawing.SystemColors.ControlText;
+      this._frmMain_Toolbars_Dock_Area_Bottom.Location = new System.Drawing.Point(0, 458);
+      this._frmMain_Toolbars_Dock_Area_Bottom.Name = "_frmMain_Toolbars_Dock_Area_Bottom";
+      this._frmMain_Toolbars_Dock_Area_Bottom.Size = new System.Drawing.Size(932, 0);
+      this._frmMain_Toolbars_Dock_Area_Bottom.ToolbarsManager = this.ultraToolbarsManager1;
+      // 
+      // ultraStatusBar1
+      // 
+      this.ultraStatusBar1.Location = new System.Drawing.Point(0, 458);
+      this.ultraStatusBar1.Name = "ultraStatusBar1";
+      ultraStatusPanel1.Key = "status";
+      ultraStatusPanel1.MinWidth = 50;
+      ultraStatusPanel1.SizingMode = Infragistics.Win.UltraWinStatusBar.PanelSizingMode.Spring;
+      ultraStatusPanel1.Style = Infragistics.Win.UltraWinStatusBar.PanelStyle.AutoStatusText;
+      ultraStatusPanel2.Key = "progressBar";
+      ultraStatusPanel2.Style = Infragistics.Win.UltraWinStatusBar.PanelStyle.Progress;
+      ultraStatusPanel3.Key = "dscEditorConnection";
+      ultraStatusPanel3.SizingMode = Infragistics.Win.UltraWinStatusBar.PanelSizingMode.Automatic;
+      ultraStatusPanel3.WrapText = Infragistics.Win.DefaultableBoolean.False;
+      ultraStatusPanel4.Key = "masterDataConnection";
+      ultraStatusPanel4.SizingMode = Infragistics.Win.UltraWinStatusBar.PanelSizingMode.Automatic;
+      ultraStatusPanel4.WrapText = Infragistics.Win.DefaultableBoolean.False;
+      this.ultraStatusBar1.Panels.AddRange(new Infragistics.Win.UltraWinStatusBar.UltraStatusPanel[] {
+            ultraStatusPanel1,
+            ultraStatusPanel2,
+            ultraStatusPanel3,
+            ultraStatusPanel4});
+      this.ultraStatusBar1.Size = new System.Drawing.Size(932, 23);
+      this.ultraStatusBar1.TabIndex = 21;
+      this.ultraStatusBar1.Text = "ultraStatusBar1";
+      this.ultraStatusBar1.ViewStyle = Infragistics.Win.UltraWinStatusBar.ViewStyle.Office2003;
       // 
       // ultraToolbarsManager1
       // 
-      this.ultraToolbarsManager1.DesignerFlags = 0;
+      this.ultraToolbarsManager1.DesignerFlags = 1;
       this.ultraToolbarsManager1.DockWithinContainer = this;
       this.ultraToolbarsManager1.DockWithinContainerBaseType = typeof(System.Windows.Forms.Form);
       this.ultraToolbarsManager1.MenuAnimationStyle = Infragistics.Win.UltraWinToolbars.MenuAnimationStyle.Slide;
@@ -1727,9 +1750,9 @@
       this.ultraToolbarsManager1.ShowFullMenusDelay = 500;
       ultraToolbar1.DockedColumn = 0;
       ultraToolbar1.DockedRow = 0;
-      ultraToolbar1.FloatingSize = new System.Drawing.Size(207, 22);
+      ultraToolbar1.FloatingLocation = new System.Drawing.Point(441, 328);
+      ultraToolbar1.FloatingSize = new System.Drawing.Size(105, 18);
       ultraToolbar1.IsMainMenuBar = true;
-      popupMenuTool1.InstanceProps.IsFirstInGroup = true;
       popupMenuTool1.InstanceProps.RecentlyUsed = false;
       ultraToolbar1.NonInheritedTools.AddRange(new Infragistics.Win.UltraWinToolbars.ToolBase[] {
             popupMenuTool1,
@@ -1760,9 +1783,7 @@
             buttonTool7,
             buttonTool10});
       buttonTool11.SharedPropsInternal.Caption = "Change &DSC Editor Database Connection...";
-      buttonTool11.SharedPropsInternal.Category = "loadTab";
-      buttonTool12.SharedPropsInternal.Caption = "Change &MST Database Connection";
-      buttonTool12.SharedPropsInternal.Category = "loadTab";
+      buttonTool12.SharedPropsInternal.Caption = "Change &Master Data Database Connection";
       buttonTool13.SharedPropsInternal.Caption = "&Exit";
       buttonTool13.SharedPropsInternal.Shortcut = System.Windows.Forms.Shortcut.AltF4;
       buttonTool14.SharedPropsInternal.Caption = "&About";
@@ -1796,39 +1817,6 @@
             buttonTool20});
       this.ultraToolbarsManager1.ToolClick += new Infragistics.Win.UltraWinToolbars.ToolClickEventHandler(this.ultraToolbarsManager1_ToolClick);
       // 
-      // _frmMain_Toolbars_Dock_Area_Right
-      // 
-      this._frmMain_Toolbars_Dock_Area_Right.AccessibleRole = System.Windows.Forms.AccessibleRole.Grouping;
-      this._frmMain_Toolbars_Dock_Area_Right.BackColor = System.Drawing.SystemColors.Control;
-      this._frmMain_Toolbars_Dock_Area_Right.DockedPosition = Infragistics.Win.UltraWinToolbars.DockedPosition.Right;
-      this._frmMain_Toolbars_Dock_Area_Right.ForeColor = System.Drawing.SystemColors.ControlText;
-      this._frmMain_Toolbars_Dock_Area_Right.Location = new System.Drawing.Point(932, 19);
-      this._frmMain_Toolbars_Dock_Area_Right.Name = "_frmMain_Toolbars_Dock_Area_Right";
-      this._frmMain_Toolbars_Dock_Area_Right.Size = new System.Drawing.Size(0, 443);
-      this._frmMain_Toolbars_Dock_Area_Right.ToolbarsManager = this.ultraToolbarsManager1;
-      // 
-      // _frmMain_Toolbars_Dock_Area_Top
-      // 
-      this._frmMain_Toolbars_Dock_Area_Top.AccessibleRole = System.Windows.Forms.AccessibleRole.Grouping;
-      this._frmMain_Toolbars_Dock_Area_Top.BackColor = System.Drawing.SystemColors.Control;
-      this._frmMain_Toolbars_Dock_Area_Top.DockedPosition = Infragistics.Win.UltraWinToolbars.DockedPosition.Top;
-      this._frmMain_Toolbars_Dock_Area_Top.ForeColor = System.Drawing.SystemColors.ControlText;
-      this._frmMain_Toolbars_Dock_Area_Top.Location = new System.Drawing.Point(0, 0);
-      this._frmMain_Toolbars_Dock_Area_Top.Name = "_frmMain_Toolbars_Dock_Area_Top";
-      this._frmMain_Toolbars_Dock_Area_Top.Size = new System.Drawing.Size(932, 19);
-      this._frmMain_Toolbars_Dock_Area_Top.ToolbarsManager = this.ultraToolbarsManager1;
-      // 
-      // _frmMain_Toolbars_Dock_Area_Bottom
-      // 
-      this._frmMain_Toolbars_Dock_Area_Bottom.AccessibleRole = System.Windows.Forms.AccessibleRole.Grouping;
-      this._frmMain_Toolbars_Dock_Area_Bottom.BackColor = System.Drawing.SystemColors.Control;
-      this._frmMain_Toolbars_Dock_Area_Bottom.DockedPosition = Infragistics.Win.UltraWinToolbars.DockedPosition.Bottom;
-      this._frmMain_Toolbars_Dock_Area_Bottom.ForeColor = System.Drawing.SystemColors.ControlText;
-      this._frmMain_Toolbars_Dock_Area_Bottom.Location = new System.Drawing.Point(0, 462);
-      this._frmMain_Toolbars_Dock_Area_Bottom.Name = "_frmMain_Toolbars_Dock_Area_Bottom";
-      this._frmMain_Toolbars_Dock_Area_Bottom.Size = new System.Drawing.Size(932, 0);
-      this._frmMain_Toolbars_Dock_Area_Bottom.ToolbarsManager = this.ultraToolbarsManager1;
-      // 
       // frmMain
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1841,7 +1829,7 @@
       this.Controls.Add(this._frmMain_Toolbars_Dock_Area_Right);
       this.Controls.Add(this._frmMain_Toolbars_Dock_Area_Top);
       this.Controls.Add(this._frmMain_Toolbars_Dock_Area_Bottom);
-      this.Controls.Add(this.statusStrip1);
+      this.Controls.Add(this.ultraStatusBar1);
       this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
       this.IsMdiContainer = true;
       this.Name = "frmMain";
@@ -1908,8 +1896,6 @@
       this.tabPageControlDownloadTemplate.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.ultraGroupBox)).EndInit();
       this.ultraGroupBox.ResumeLayout(false);
-      this.statusStrip1.ResumeLayout(false);
-      this.statusStrip1.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this.expBarMain)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.dbBindSourceDSCQC)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.dbBindSourceParkQC)).EndInit();
@@ -1924,9 +1910,6 @@
     #endregion
 
     private System.Windows.Forms.OpenFileDialog ofdMain;
-    private System.Windows.Forms.StatusStrip statusStrip1;
-    private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
-    private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar1;
     private projectDataSet projectDataSet;
     private System.Windows.Forms.BindingSource sESSIONBindingSource;
     private DSCUpdater.projectDataSetTableAdapters.SESSIONTableAdapter sESSIONTableAdapter;
@@ -2052,7 +2035,6 @@
     private Infragistics.Win.Misc.UltraButton btnLoadUpdateFile;
     private Infragistics.Win.UltraWinEditors.UltraTextEditor txtFileName;
     private Infragistics.Win.UltraWinTabControl.UltraTabControl tabControlMain;
-    private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
     private System.Windows.Forms.MonthCalendar monthCalendar1;
     private Infragistics.Win.UltraWinTabControl.UltraTabSharedControlsPage ultraTabSharedControlsPage3;
     private Infragistics.Win.Misc.UltraPanel ultraPanel1;
@@ -2063,6 +2045,7 @@
     private Infragistics.Win.UltraWinToolbars.UltraToolbarsDockArea _frmMain_Toolbars_Dock_Area_Right;
     private Infragistics.Win.UltraWinToolbars.UltraToolbarsDockArea _frmMain_Toolbars_Dock_Area_Top;
     private Infragistics.Win.UltraWinToolbars.UltraToolbarsDockArea _frmMain_Toolbars_Dock_Area_Bottom;
+    private Infragistics.Win.UltraWinStatusBar.UltraStatusBar ultraStatusBar1;
   }
 }
 
