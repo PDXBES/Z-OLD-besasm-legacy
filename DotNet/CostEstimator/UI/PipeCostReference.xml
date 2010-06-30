@@ -741,10 +741,10 @@
 		</ManholeCostDepthFactorRecord>
 	</ManholeCostDepthFactorTable>
   <TrenchlessCIPPConstants>
-    <lateralLessThanEqualTo24InDiamCost>10</lateralLessThanEqualTo24InDiamCost>
-    <lateralGreaterThan24InDiamCost>15</lateralGreaterThan24InDiamCost>
-    <tvCleanLessThanEqualTo24InDiamCost>5</tvCleanLessThanEqualTo24InDiamCost>
-    <tvCleanGreaterThan24InDiamCost>10</tvCleanGreaterThan24InDiamCost>
+    <lateralLessThanEqualTo24InDiamCost>0</lateralLessThanEqualTo24InDiamCost>
+    <lateralGreaterThan24InDiamCost>0</lateralGreaterThan24InDiamCost>
+    <tvCleanLessThanEqualTo24InDiamCost>0</tvCleanLessThanEqualTo24InDiamCost>
+    <tvCleanGreaterThan24InDiamCost>0</tvCleanGreaterThan24InDiamCost>
   </TrenchlessCIPPConstants>
   <TrenchlessPipeburstConstants>
     <lateralCost>15</lateralCost>
