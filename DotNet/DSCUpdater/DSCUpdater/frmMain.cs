@@ -20,6 +20,7 @@ using System.Data.SqlServerCe;
 using Microsoft.SqlServer.Server;
 using Microsoft.SqlServer;
 using System.Configuration.Assemblies;
+using Microsoft.Office;
 
 namespace DSCUpdater
 {
@@ -35,8 +36,7 @@ namespace DSCUpdater
         public int newParkArea = 0;
         public int selectedIndex = 0;
         public int impAQCCounter = 0;
-        public string sqlConStr = "Data Source=WS09884\\SQLEXPRESS;Initial Catalog=DSCEDITOR;Integrated Security=True";
-
+                        
         SqlDataAdapter daUpdaterEditor;
         DataTable dtUpdaterEditor;
 
@@ -83,9 +83,9 @@ namespace DSCUpdater
             tabControlMain.TabPages.Remove(tabMissingDSC);
             tabControlMain.TabPages.Remove(tabIncorrectParkICArea);
             tabControlMain.TabPages.Remove(tabIncorrectRoofICArea);
-            tabControlMain.TabPages.Remove(tabPendingImpAChanges);
-            tabControlMain.TabPages.Remove(tabDBConnOptions);
+            tabControlMain.TabPages.Remove(tabPendingImpAChanges);            
             tabControlMain.TabPages.Remove(tabDownloadTemplate);
+            
         }
 
         private void frmMain_Load(object sender, EventArgs e)
@@ -100,7 +100,7 @@ namespace DSCUpdater
                 this.sESSIONTableAdapter.Fill(this.projectDataSet.SESSION);
                 bindingNavigator1.BindingSource = sESSIONBindingSource;
 
-                SqlConnection sqlCon = new SqlConnection(sqlConStr);
+                SqlConnection sqlCon = new SqlConnection(Properties.Settings.Default.DSCEDITORConnectionString);
                 sqlCon.Open();
                 SqlCommand sqlCmd = new SqlCommand();
                 sqlCmd.CommandText = "DELETE FROM USERUPDATE";
@@ -110,6 +110,7 @@ namespace DSCUpdater
             catch (SqlException sqlException)
             {
                 MessageBox.Show(sqlException.Message +"\n"+"Please specify server and database connection parameters on the Database Connection Options tab.", "DSCUpdater: SQL Exception Thrown", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ViewChangeConnectionSettings();
             }             
         }
 
@@ -135,7 +136,7 @@ namespace DSCUpdater
         private void ExportIMPUPDATEToCSV()
         {
             string fileOut = "C:\\temp\\IMPUPDATE.csv";
-            SqlConnection sqlCon = new SqlConnection(sqlConStr);
+            SqlConnection sqlCon = new SqlConnection(Properties.Settings.Default.DSCEDITORConnectionString);
             string sqlQuery = "SELECT * FROM IMPUPDATE";
             SqlCommand sqlCmd = new SqlCommand(sqlQuery, sqlCon);
             sqlCon.Open();
@@ -1209,6 +1210,7 @@ namespace DSCUpdater
         private void btnCloseApplication_Click(object sender, EventArgs e)
         {
             Application.Exit();
+          //TO-DO: change DSCUpdaterConfig.xml DB connection settings back to default
         }
         
         private void btnCancel_Click(object sender, EventArgs e)
@@ -1239,6 +1241,7 @@ namespace DSCUpdater
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
+          //TO-DO: change DSCUpdaterConfig.xml file DB connection settings back to default
         }       
 
         private void btnDSCQC_Click(object sender, EventArgs e)
@@ -1394,88 +1397,34 @@ namespace DSCUpdater
 
         private void changeDatabaseConnectionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            TabPage currentTabPage = tabControlMain.SelectedTab;
-            HideTabPage(currentTabPage);
-            ShowTabPage(tabDBConnOptions);
+          Microsoft.Data.ConnectionUI.DataConnectionDialog dataConnectionDialog = new
+          Microsoft.Data.ConnectionUI.DataConnectionDialog();
+
+          Microsoft.Data.ConnectionUI.DataSource.AddStandardDataSources(dataConnectionDialog);
+
+          string dscEditorConnectionString = Properties.Settings.Default.DSCEDITORConnectionString;
+          dataConnectionDialog.SelectedDataSource = Microsoft.Data.ConnectionUI.DataSource.SqlDataSource;
+          dataConnectionDialog.SelectedDataProvider = Microsoft.Data.ConnectionUI.DataProvider.SqlDataProvider;
+
+          dataConnectionDialog.ConnectionString = dscEditorConnectionString;
+
+          if (Microsoft.Data.ConnectionUI.DataConnectionDialog.Show(dataConnectionDialog) != DialogResult.OK)
+          {
+            return;
+          }
+
+          Properties.Settings.Default.SetDSCEDITORConnectionString = dataConnectionDialog.ConnectionString;
+          Properties.Settings.Default.Save();
          }
 
         private void btnChangeDBConnOption_Click(object sender, EventArgs e)
         {
-            //takes user input from text fields to set new connection property
-            //where the data will be accessed and written
-            string newServerCon = txtNewServerCon.Text;
-            string newDatabaseCon = txtNewDatabaseCon.Text;
-            string newConStr = "Data Source=" + newServerCon + ";Initial Catalog=" + newDatabaseCon + ";Integrated Security=True";
-            SqlConnection newSQLCon = new SqlConnection();
-            newSQLCon.ConnectionString = newConStr;
-            if (txtNewDatabaseCon != null || txtNewServerCon != null)
-            {
-                try
-                {
-                    Cursor = Cursors.WaitCursor;
-                    newSQLCon.Open();
-                    MessageBox.Show("Connected to server = " + newServerCon + ", database = " + newDatabaseCon);
-                    
-                    #region ChangeXMLAttributeContent
-
-                    //The Path to the xml file
-                    string xmlConfigFile = "DSCUpdaterConfig.xml";
-
-                    //Create FileStream fs
-                    FileStream fs = new FileStream(xmlConfigFile, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
-
-                    //Create new XmlDocument
-                    System.Xml.XmlDocument xmlDoc = new System.Xml.XmlDocument();
-
-                    //Load the contents of the filestream into the XmlDocument (xmldoc)
-                    xmlDoc.Load(fs);
-
-                    //close the fs filestream
-                    fs.Close();
-
-                    //Change the contents of the attribute                     
-                    xmlDoc.DocumentElement.ChildNodes.Item(0).InnerText = newConStr;
-
-                    // Create the filestream for saving
-                    FileStream WRITER = new FileStream(xmlConfigFile, FileMode.Truncate, FileAccess.Write, FileShare.ReadWrite);
-
-                    // Save the xmldocument
-                    xmlDoc.Save(WRITER);
-
-                    //Close the writer filestream
-                    WRITER.Close();
-                    
-                    #endregion
-                }
-                catch (Exception ex)
-                {
-                    if (newSQLCon != null)
-                    {
-                        newSQLCon.Dispose();
-                    }
-                    string errorMessage = "A error occured while trying to connect to the server." + ex.Message;
-                    errorMessage += Environment.NewLine;
-                    errorMessage += Environment.NewLine;
-                    errorMessage += ex.Message;
-                    MessageBox.Show(this, errorMessage, "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error);              
-                    return;
-                }
-                finally
-                {
-                    newSQLCon.Close();
-                    Cursor = Cursors.Default;
-                }
-            }
-            else
-            {
-                 MessageBox.Show("Server or database not specified. Please specify a valid server and database.", "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+          
         }
 
         private void btnCloseOptions_Click(object sender, EventArgs e)
         {
-            tabControlMain.TabPages.Remove(tabMain);
-            tabControlMain.TabPages.Remove(tabDBConnOptions);
+            tabControlMain.TabPages.Remove(tabMain);            
             tabControlMain.TabPages.Remove(tabDownloadTemplate);
             tabControlMain.TabPages.Remove(tabIncorrectParkICArea);
             tabControlMain.TabPages.Remove(tabIncorrectRoofICArea);
@@ -1536,8 +1485,7 @@ namespace DSCUpdater
             tabControlMain.TabPages.Remove(tabMissingDSC);
             tabControlMain.TabPages.Remove(tabIncorrectParkICArea);
             tabControlMain.TabPages.Remove(tabIncorrectRoofICArea);
-            tabControlMain.TabPages.Remove(tabPendingImpAChanges);
-            tabControlMain.TabPages.Remove(tabDBConnOptions);    
+            tabControlMain.TabPages.Remove(tabPendingImpAChanges);            
             tabControlMain.TabPages.Add(tabDownloadTemplate);
             tabControlMain.SelectedTab = tabDownloadTemplate;
             tabControlMain.Visible = true;
@@ -1552,8 +1500,7 @@ namespace DSCUpdater
             tabControlMain.TabPages.Remove(tabMissingDSC);
             tabControlMain.TabPages.Remove(tabIncorrectParkICArea);
             tabControlMain.TabPages.Remove(tabIncorrectRoofICArea);
-            tabControlMain.TabPages.Remove(tabPendingImpAChanges);
-            tabControlMain.TabPages.Remove(tabDBConnOptions);
+            tabControlMain.TabPages.Remove(tabPendingImpAChanges);            
             tabControlMain.TabPages.Remove(tabDownloadTemplate);    
             tabControlMain.TabPages.Add(tabMain);
             tabControlMain.SelectedTab = tabMain;
@@ -1571,14 +1518,14 @@ namespace DSCUpdater
           tabControlMain.TabPages.Remove(tabMissingDSC);
           tabControlMain.TabPages.Remove(tabIncorrectParkICArea);
           tabControlMain.TabPages.Remove(tabIncorrectRoofICArea);
-          tabControlMain.TabPages.Remove(tabPendingImpAChanges);
-          tabControlMain.TabPages.Remove(tabDBConnOptions);
+          tabControlMain.TabPages.Remove(tabPendingImpAChanges);          
           tabControlMain.TabPages.Remove(tabDownloadTemplate);
           tabControlMain.TabPages.Remove(tabApplyRetroUpdates);
           tabControlMain.TabPages.Remove(tabCheckRetroUpdates);
           tabControlMain.TabPages.Add(tabCheckRetroUpdates);
           tabControlMain.SelectedTab = tabCheckRetroUpdates;
           tabControlMain.Visible = true;
+          //RunIncomingRetroChangesReport();
           //TO-DO: Implement RunIncomingRetroChangesReport();
         }
 
@@ -1592,8 +1539,7 @@ namespace DSCUpdater
           tabControlMain.TabPages.Remove(tabMissingDSC);
           tabControlMain.TabPages.Remove(tabIncorrectParkICArea);
           tabControlMain.TabPages.Remove(tabIncorrectRoofICArea);
-          tabControlMain.TabPages.Remove(tabPendingImpAChanges);
-          tabControlMain.TabPages.Remove(tabDBConnOptions);
+          tabControlMain.TabPages.Remove(tabPendingImpAChanges);          
           tabControlMain.TabPages.Remove(tabDownloadTemplate);
           tabControlMain.TabPages.Remove(tabCheckRetroUpdates);
           tabControlMain.TabPages.Remove(tabApplyRetroUpdates);
@@ -1611,8 +1557,7 @@ namespace DSCUpdater
             tabControlMain.TabPages.Remove(tabMissingDSC);
             tabControlMain.TabPages.Remove(tabIncorrectParkICArea);
             tabControlMain.TabPages.Remove(tabIncorrectRoofICArea);
-            tabControlMain.TabPages.Remove(tabPendingImpAChanges);
-            tabControlMain.TabPages.Remove(tabDBConnOptions);
+            tabControlMain.TabPages.Remove(tabPendingImpAChanges);            
             tabControlMain.TabPages.Remove(tabDownloadTemplate);
             tabControlMain.TabPages.Add(tabUpdaterHistory);
             tabControlMain.SelectedTab = tabUpdaterHistory;
@@ -1648,10 +1593,7 @@ namespace DSCUpdater
             tabControlMain.TabPages.Remove(tabIncorrectParkICArea);
             tabControlMain.TabPages.Remove(tabIncorrectRoofICArea);
             tabControlMain.TabPages.Remove(tabPendingImpAChanges);
-            tabControlMain.TabPages.Remove(tabDownloadTemplate);
-            tabControlMain.TabPages.Remove(tabDBConnOptions);
-            tabControlMain.TabPages.Add(tabDBConnOptions);
-            tabControlMain.SelectedTab=tabDBConnOptions;
+            tabControlMain.TabPages.Remove(tabDownloadTemplate);            
             tabControlMain.Visible = true;
             //MessageBox.Show("ViewChangeConnectionSettings");
             Cursor.Current = Cursors.Arrow;
@@ -1671,7 +1613,7 @@ namespace DSCUpdater
                 toolStripProgressBar1.PerformStep();
             }
 
-            SqlConnection sqlCon = new SqlConnection(sqlConStr);
+            SqlConnection sqlCon = new SqlConnection(Properties.Settings.Default.DSCEDITORConnectionString);
             sqlCon.Open();
             SqlCommand sqlCmd = new SqlCommand();
             sqlCmd.CommandText = "DELETE FROM USERUPDATE";
@@ -1719,7 +1661,7 @@ namespace DSCUpdater
                            "WHERE (((mst_DSC_ac.roofAreaNeedsUpdate)='True')) " +
                            "OR (((mst_DSC_ac.parkAreaNeedsUpdate)='True'))";
 
-            SqlDataAdapter sqlDAImpAQC = new SqlDataAdapter(strSQLImpAQC, sqlConStr);
+            SqlDataAdapter sqlDAImpAQC = new SqlDataAdapter(strSQLImpAQC, Properties.Settings.Default.DSCEDITORConnectionString);
             SqlCommandBuilder sqlCBImpAQC = new SqlCommandBuilder(sqlDAImpAQC);
             DataTable dtImpAQC = new DataTable();
             sqlDAImpAQC.Fill(dtImpAQC);
@@ -1732,7 +1674,7 @@ namespace DSCUpdater
                      "mst_DSC_ac RIGHT OUTER JOIN USERUPDATE ON " +
                      "mst_DSC_ac.DSCID = USERUPDATE.dsc_id WHERE (mst_DSC_ac.DSCID IS NULL)";
 
-            SqlDataAdapter sqlDADSCQC = new SqlDataAdapter(strSQLDSCQC, sqlConStr);
+            SqlDataAdapter sqlDADSCQC = new SqlDataAdapter(strSQLDSCQC, Properties.Settings.Default.DSCEDITORConnectionString);
             SqlCommandBuilder sqlCBDSCQC = new SqlCommandBuilder(sqlDADSCQC);
             DataTable dtDSCQC = new DataTable();
             sqlDADSCQC.Fill(dtDSCQC);
@@ -1745,7 +1687,7 @@ namespace DSCUpdater
                              "USERUPDATE WHERE " +
                              "((([new_park_disco_ic_area_sqft]+[new_park_drywell_ic_area_sqft])>[new_park_area_sqft]))";
 
-            SqlDataAdapter sqlDAParkQC = new SqlDataAdapter(strSQLParkQC, sqlConStr);
+            SqlDataAdapter sqlDAParkQC = new SqlDataAdapter(strSQLParkQC, Properties.Settings.Default.DSCEDITORConnectionString);
             SqlCommandBuilder sqlCBParkQC = new SqlCommandBuilder(sqlDAParkQC);
             DataTable dtParkQC = new DataTable();
 
@@ -1758,7 +1700,7 @@ namespace DSCUpdater
                             "USERUPDATE.new_roof_disco_ic_area_sqft, " +
                             "USERUPDATE.new_roof_drywell_ic_area_sqft FROM USERUPDATE WHERE " +
                             "((([new_roof_disco_ic_area_sqft]+[new_roof_drywell_ic_area_sqft])>[new_roof_area_sqft]))";
-            SqlDataAdapter sqlDARoofQC = new SqlDataAdapter(strSQLRoofQC, sqlConStr);
+            SqlDataAdapter sqlDARoofQC = new SqlDataAdapter(strSQLRoofQC, Properties.Settings.Default.DSCEDITORConnectionString);
             SqlCommandBuilder sqlCBRoofQC = new SqlCommandBuilder(sqlDARoofQC);
             DataTable dtRoofQC = new DataTable();
             sqlDARoofQC.Fill(dtRoofQC);
@@ -1937,7 +1879,7 @@ namespace DSCUpdater
             }
             else
             {
-                SqlConnection sqlCon = new SqlConnection(sqlConStr);
+                SqlConnection sqlCon = new SqlConnection(Properties.Settings.Default.DSCEDITORConnectionString);
                 sqlCon.Open();
                 SqlCommand sqlCmd = new SqlCommand();
                 AddSESSIONEditIDCommandParameter(sqlCmd);
@@ -2285,7 +2227,7 @@ namespace DSCUpdater
 
         private void btnSubmitUpdaterEditorChanges_Click(object sender, EventArgs e)
         {
-            SqlConnection sqlCon = new SqlConnection(sqlConStr);
+            SqlConnection sqlCon = new SqlConnection(Properties.Settings.Default.DSCEDITORConnectionString);
             sqlCon.Open();
             SqlCommand sqlCmd = new SqlCommand();
             sqlCmd.CommandText = "DELETE FROM DSCEDITAPPEND";
@@ -2395,7 +2337,7 @@ namespace DSCUpdater
                 int editorEditID = 0;
                 dgvUpdaterEditor.Rows[0].Selected = true;
                 editorEditID = Convert.ToInt32(dgvUpdaterEditor.SelectedCells[1].Value);
-                SqlConnection sqlCon = new SqlConnection(sqlConStr);
+                SqlConnection sqlCon = new SqlConnection(Properties.Settings.Default.DSCEDITORConnectionString);
                 sqlCon.Open();
                 SqlCommand sqlCmd = new SqlCommand();
 
@@ -2556,8 +2498,7 @@ namespace DSCUpdater
 
         private void btnCancelDownload_Click(object sender, EventArgs e)
         {
-            tabControlMain.TabPages.Remove(tabMain);
-            tabControlMain.TabPages.Remove(tabDBConnOptions);
+            tabControlMain.TabPages.Remove(tabMain);            
             tabControlMain.TabPages.Remove(tabDownloadTemplate);
             tabControlMain.TabPages.Remove(tabIncorrectParkICArea);
             tabControlMain.TabPages.Remove(tabIncorrectRoofICArea);
@@ -2570,8 +2511,7 @@ namespace DSCUpdater
 
         private void btnCancelUpdate_Click(object sender, EventArgs e)
         {
-            tabControlMain.TabPages.Remove(tabMain);
-            tabControlMain.TabPages.Remove(tabDBConnOptions);
+            tabControlMain.TabPages.Remove(tabMain);            
             tabControlMain.TabPages.Remove(tabDownloadTemplate);
             tabControlMain.TabPages.Remove(tabIncorrectParkICArea);
             tabControlMain.TabPages.Remove(tabIncorrectRoofICArea);
@@ -2584,8 +2524,7 @@ namespace DSCUpdater
 
         private void downloadUpdateTemplateToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            tabControlMain.TabPages.Remove(tabMain);
-            tabControlMain.TabPages.Remove(tabDBConnOptions);
+            tabControlMain.TabPages.Remove(tabMain);            
             tabControlMain.TabPages.Remove(tabDownloadTemplate);
             tabControlMain.TabPages.Remove(tabIncorrectParkICArea);
             tabControlMain.TabPages.Remove(tabIncorrectRoofICArea);
@@ -2600,8 +2539,7 @@ namespace DSCUpdater
 
         private void loadUpdateFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            tabControlMain.TabPages.Remove(tabMain);
-            tabControlMain.TabPages.Remove(tabDBConnOptions);
+            tabControlMain.TabPages.Remove(tabMain);            
             tabControlMain.TabPages.Remove(tabDownloadTemplate);
             tabControlMain.TabPages.Remove(tabIncorrectParkICArea);
             tabControlMain.TabPages.Remove(tabIncorrectRoofICArea);
@@ -2616,8 +2554,7 @@ namespace DSCUpdater
 
         private void loadUpdaterHistoryToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            tabControlMain.TabPages.Remove(tabMain);
-            tabControlMain.TabPages.Remove(tabDBConnOptions);
+            tabControlMain.TabPages.Remove(tabMain);            
             tabControlMain.TabPages.Remove(tabDownloadTemplate);
             tabControlMain.TabPages.Remove(tabIncorrectParkICArea);
             tabControlMain.TabPages.Remove(tabIncorrectRoofICArea);
@@ -2632,8 +2569,7 @@ namespace DSCUpdater
 
         private void btnCloseUpdaterHistory_Click(object sender, EventArgs e)
         {
-            tabControlMain.TabPages.Remove(tabMain);
-            tabControlMain.TabPages.Remove(tabDBConnOptions);
+            tabControlMain.TabPages.Remove(tabMain);            
             tabControlMain.TabPages.Remove(tabDownloadTemplate);
             tabControlMain.TabPages.Remove(tabIncorrectParkICArea);
             tabControlMain.TabPages.Remove(tabIncorrectRoofICArea);
@@ -2653,6 +2589,75 @@ namespace DSCUpdater
         {
           ApplyRetroUpdates();
         }
+
+        private void viewChangeConnectionSettingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+          ViewChangeConnectionSettings();
+        }
+
+        private void btnViewNewRetroAssessments_Click(object sender, EventArgs e)
+        {
+          try
+          {
+            ((DataView)dgvIncomingRetroChanges.DataSource).Table.Clear();
+            //TO-DO: add code to populate the DataGridView showing the incoming new site assessments
+          }
+          catch (Exception ex)
+          {
+            MessageBox.Show("Could not load incoming changes: " + ex.Message, "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+          }
+          
+        }
+
+        private void btnViewNewIcTargets_Click(object sender, EventArgs e)
+        {
+          try
+          {
+            ((DataView)dgvIncomingRetroChanges.DataSource).Table.Clear();
+            //TO-DO: add code to populate the DataGridView showing incoming new IC targets
+          }
+
+          catch (Exception ex)
+          {
+            MessageBox.Show("Could not load incoming changes: " + ex.Message, "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+          }
+
+        }
+
+        private void btnViewNewConstrFacs_Click(object sender, EventArgs e)
+        {
+          try
+          {
+            ((DataView)dgvIncomingRetroChanges.DataSource).Table.Clear();
+            //TO-DO: add code to populate the DataGridView showing incoming new constructed IC facilities
+          }
+
+          catch (Exception ex)
+          {
+            MessageBox.Show("Could Not Load Incoming Changes: "+ex.Message,"Exception",MessageBoxButtons.OK,MessageBoxIcon.Error);
+          }
+        }
+
+        private void btnApplyRetroUpdates_Click(object sender, EventArgs e)
+        {
+          //TO-DO: create parameter to count the number of incoming new site assessments from RETRO DB
+          //Need to think about everything that comprises a new assessment (i.e., updated impervious area, ic area, etc.)
+          //Parameter will be passed to the message box confirming the updates will be applied
+          int countOfNewSiteAssessments = 0;
+
+          //TO-DO: create parameter to count the number of incoming new ic targets from RETRO DB
+          //Parameter will be passed to the message box confirming the updates will be applied
+          int countOfNewPotentialICs = 0;
+
+          //TO-DO: create parameter to count the number of constrcuted IC from the RETRO DB
+          //Parameter will be passed to the message box confirming the updates will be applied
+          int countOfNewCOnstructedICs = 0;
+
+          MessageBox.Show("The following updates will be applied:" + "\r\n" +
+            countOfNewSiteAssessments + " new site assessments will be applied to master modeling tables." + "\r\n" +
+            countOfNewPotentialICs + " new potential inflow controls will be added to the IC Alts GIS coverage(s)." + "\r\n" +
+            countOfNewSiteAssessments + " new constructed inflow controls will be added to the IC Alt GIS coverage(s)." + "\r\n", "Confirm Update", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation);
+        }
     }
 }
 
@@ -2660,26 +2665,26 @@ namespace CSharp
 {   
     public class OutlookMail
     {
-        private Outlook.Application oApp;
-        private Outlook._NameSpace oNameSpace;
-        private Outlook.MAPIFolder oOutboxFolder;
+        private Microsoft.Office.Interop.Outlook.Application oApp;
+        private Microsoft.Office.Interop.Outlook._NameSpace oNameSpace;
+        private Microsoft.Office.Interop.Outlook.MAPIFolder oOutboxFolder;
     
         public OutlookMail()
         {
-            oApp=new Outlook.Application();
+            oApp=new Microsoft.Office.Interop.Outlook.Application();
             oNameSpace=oApp.GetNamespace("MAPI");
             oNameSpace.Logon(null,null,true,true);
-            oOutboxFolder=oNameSpace.GetDefaultFolder(Outlook.OlDefaultFolders.olFolderOutbox);
+            oOutboxFolder = oNameSpace.GetDefaultFolder(Microsoft.Office.Interop.Outlook.OlDefaultFolders.olFolderOutbox);
         }
 
         public void AddToOutbox(string toValue, string subjectValue, string bodyValue)
         {
-            Outlook._MailItem oMailItem=(Outlook._MailItem) oApp.CreateItem(Outlook.OlItemType.olMailItem);
+          Microsoft.Office.Interop.Outlook._MailItem oMailItem = (Microsoft.Office.Interop.Outlook._MailItem)oApp.CreateItem(Microsoft.Office.Interop.Outlook.OlItemType.olMailItem);
             String sSource = "C:\\temp\\IMPUPDATE.csv";
             String sDisplayName = "IMPUPDATE";
             int iPosition = 1;
-            int iAttachType = (int)Outlook.OlAttachmentType.olByValue;
-            Outlook.Attachment oAttach = oMailItem.Attachments.Add(sSource, iAttachType, iPosition, sDisplayName);
+            int iAttachType = (int)Microsoft.Office.Interop.Outlook.OlAttachmentType.olByValue;
+            Microsoft.Office.Interop.Outlook.Attachment oAttach = oMailItem.Attachments.Add(sSource, iAttachType, iPosition, sDisplayName);
             toValue="jrubengb@gmail.com";
             subjectValue="Request for Impervious Area Update";
             bodyValue="This is an auto-generated email." + "\r\n" +
