@@ -1,0 +1,284 @@
+1.10	Table: ALTSLIST20080219	Type: Native	Fields: 10	Records: 174
+		Description: 
+	1.10.1        Fields	Field Name	Field Type	Description
+	1.10.1.1	ID	Counter (4)	 
+	1.10.1.2	Path	Character (255)	 
+	1.10.1.3	Database	Character (40)	 
+	1.10.1.4	Description	Character (255)	 
+	1.10.1.5	BASINCODE	Character (4)	 
+	1.10.1.6	USEFLAG	Long (4)	 
+	1.10.1.7	TABLENAME	Character (40)	 
+	1.10.1.8	DATEAPPEND	Character (25)	 
+	1.10.1.9	STORM	Character (8)	 
+	1.10.1.10	RawPath	Memo	 
+	1.10.2        Indexes	Index Name	Fields	Properties
+	1.10.2.1	BASINCODE	1	
+	1.10.2.3	PrimaryKey	1	Primary, Unique, Required
+1.11	Table: ALTSLIST20080501	Type: Native	Fields: 10	Records: 191
+		Description: 
+	1.11.1        Fields	Field Name	Field Type	Description
+	1.11.1.1	ID	Counter (4)	 
+	1.11.1.2	Path	Character (255)	 
+	1.11.1.3	Database	Character (40)	 
+	1.11.1.4	Description	Character (255)	 
+	1.11.1.5	BASINCODE	Character (4)	 
+	1.11.1.6	USEFLAG	Long (4)	 
+	1.11.1.7	TABLENAME	Character (40)	 
+	1.11.1.8	DATEAPPEND	Character (25)	 
+	1.11.1.9	STORM	Character (8)	 
+	1.11.1.10	RawPath	Character (255)	 
+	1.11.2        Indexes	Index Name	Fields	Properties
+	1.11.2.1	ID	1	
+1.12	Table: ALTSLIST20080828	Type: Native	Fields: 8	Records: 168
+		Description: 
+	1.12.1        Fields	Field Name	Field Type	Description
+	1.12.1.1	ID	Counter (4)	 
+	1.12.1.2	Path	Character (255)	 
+	1.12.1.3	Database	Character (40)	 
+	1.12.1.4	Description	Character (255)	 
+	1.12.1.5	BASINCODE	Character (4)	 
+	1.12.1.6	USEFLAG	Long (4)	 
+	1.12.1.7	TABLENAME	Character (40)	 
+	1.12.1.8	RawPath	Character (255)	 
+1.13	Table: ALTSLIST20081204	Type: Native	Fields: 8	Records: 175
+		Description: 
+	1.13.1        Fields	Field Name	Field Type	Description
+	1.13.1.1	ID	Counter (4)	 
+	1.13.1.2	Path	Character (255)	 
+	1.13.1.3	Database	Character (40)	 
+	1.13.1.4	Description	Character (255)	 
+	1.13.1.5	BASINCODE	Character (4)	 
+	1.13.1.6	USEFLAG	Long (4)	 
+	1.13.1.7	TABLENAME	Character (40)	 
+	1.13.1.8	RawPath	Character (255)	 
+1.14	Table: DSCLIST20080502	Type: Native	Fields: 10	Records: 493
+		Description: 
+	1.14.1        Fields	Field Name	Field Type	Description
+	1.14.1.1	ID	Counter (4)	 
+	1.14.1.2	Path	Character (255)	 
+	1.14.1.3	Database	Character (125)	 
+	1.14.1.4	Description	Character (255)	 
+	1.14.1.5	BASINCODE	Character (4)	 
+	1.14.1.6	USEFLAG	Long (4)	 
+	1.14.1.7	TABLENAME	Character (40)	 
+	1.14.1.8	DATEAPPEND	Character (25)	 
+	1.14.1.9	STORM	Character (8)	 
+	1.14.1.10	RawPath	Character (255)	 
+1.15	Table: DSCLIST20080505	Type: Native	Fields: 10	Records: 493
+		Description: 
+	1.15.1        Fields	Field Name	Field Type	Description
+	1.15.1.1	ID	Counter (4)	 
+	1.15.1.2	Path	Character (255)	 
+	1.15.1.3	Database	Character (125)	 
+	1.15.1.4	Description	Character (255)	 
+	1.15.1.5	BASINCODE	Character (4)	 
+	1.15.1.6	USEFLAG	Long (4)	 
+	1.15.1.7	TABLENAME	Character (40)	 
+	1.15.1.8	DATEAPPEND	Character (25)	 
+	1.15.1.9	STORM	Character (8)	 
+	1.15.1.10	RawPath	Character (255)	 
+1.16	Table: DSCLIST20080828	Type: Native	Fields: 10	Records: 506
+		Description: 
+	1.16.1        Fields	Field Name	Field Type	Description
+	1.16.1.1	ID	Counter (4)	 
+	1.16.1.2	Path	Character (255)	 
+	1.16.1.3	Database	Character (125)	 
+	1.16.1.4	Description	Character (255)	 
+	1.16.1.5	BASINCODE	Character (4)	 
+	1.16.1.6	USEFLAG	Long (4)	 
+	1.16.1.7	TABLENAME	Character (40)	 
+	1.16.1.8	DATEAPPEND	Character (25)	 
+	1.16.1.9	STORM	Character (8)	 
+	1.16.1.10	RawPath	Character (255)	 
+1.17	Table: DSCLIST20081209	Type: Native	Fields: 10	Records: 489
+		Description: 
+	1.17.1        Fields	Field Name	Field Type	Description
+	1.17.1.1	ID	Counter (4)	 
+	1.17.1.2	Path	Character (255)	 
+	1.17.1.3	Database	Character (125)	 
+	1.17.1.4	Description	Character (255)	 
+	1.17.1.5	BASINCODE	Character (4)	 
+	1.17.1.6	USEFLAG	Long (4)	 
+	1.17.1.7	TABLENAME	Character (40)	 
+	1.17.1.8	DATEAPPEND	Character (25)	 
+	1.17.1.9	STORM	Character (8)	 
+	1.17.1.10	RawPath	Character (255)	 
+1.18	Table: HGL_COMP	Type: Native	Fields: 12	
+		Source: HGL_COMP	Connect: ;DATABASE=\\Cassio\systems_planning\System_Plan_Figs\Combined\Alternatives\Data\AltCompiler.MDB
+		Description:SP_ALT_DSC_ALL - base table name DSC_COMP
+	1.18.1        Fields	Field Name	Field Type	Description
+	1.18.1.1	DSCID	Long (4)	 
+	1.18.1.2	ParcelID	Long (4)	 
+	1.18.1.3	DivideID	Long (4)	 
+	1.18.1.4	USJelev	Double (8)	 
+	1.18.1.5	DSJelev	Double (8)	 
+	1.18.1.6	Frac2SwrBeg	Double (8)	 
+	1.18.1.7	CalculatedHGL	Double (8)	 
+	1.18.1.8	CalculatedDHGL	Double (8)	 
+	1.18.1.9	Surcharge	Double (8)	 
+	1.18.1.10	STORM	Character (255)	 
+	1.18.1.11	BASIN	Character (255)	 
+	1.18.1.12	USEFLAG	Integer (2)	 
+1.19	Table: modelresults	Type: Native	Fields: 10	Records: 489
+		Description: 
+	1.19.1        Fields	Field Name	Field Type	Description
+	1.19.1.1	ID	Counter (4)	 
+	1.19.1.2	Path	Character (255)	 
+	1.19.1.3	Database	Character (125)	 
+	1.19.1.4	Description	Character (255)	 
+	1.19.1.5	BASINCODE	Character (4)	 
+	1.19.1.6	USEFLAG	Long (4)	 
+	1.19.1.7	TABLENAME	Character (40)	 
+	1.19.1.8	DATEAPPEND	Character (25)	 
+	1.19.1.9	STORM	Character (8)	 
+	1.19.1.10	RawPath	Character (255)	 
+1.20	Table: modelresults_archive_20081209	Type: Native	Fields: 10	Records: 507
+		Description:From DSC_20080828
+	1.20.1        Fields	Field Name	Field Type	Description
+	1.20.1.1	ID	Counter (4)	 
+	1.20.1.2	Path	Character (255)	 
+	1.20.1.3	Database	Character (125)	 
+	1.20.1.4	Description	Character (255)	 
+	1.20.1.5	BASINCODE	Character (4)	 
+	1.20.1.6	USEFLAG	Long (4)	 
+	1.20.1.7	TABLENAME	Character (40)	 
+	1.20.1.8	DATEAPPEND	Character (25)	 
+	1.20.1.9	STORM	Character (8)	 
+	1.20.1.10	RawPath	Character (255)	 
+1.21	Table: PIP_COMP	Type: Native	Fields: 18	
+		Source: PIP_COMP	Connect: ;DATABASE=\\Cassio\systems_planning\System_Plan_Figs\Combined\Alternatives\Data\AltCompiler.MDB
+		Description: 
+	1.21.1        Fields	Field Name	Field Type	Description
+	1.21.1.1	MAPINFO_ID	Counter (4)	 
+	1.21.1.2	AltLinkID	Long (4)	 
+	1.21.1.3	MdlLinkID	Long (4)	 
+	1.21.1.4	USNode	Character (6)	 
+	1.21.1.5	DSNode	Character (6)	 
+	1.21.1.6	Operation	Character (3)	 
+	1.21.1.7	LinkType	Character (2)	 
+	1.21.1.8	DiamWidth	Double (8)	 
+	1.21.1.9	Height	Double (8)	 
+	1.21.1.10	USIE	Double (8)	 
+	1.21.1.11	DSIE	Double (8)	 
+	1.21.1.12	PipeShape	Character (4)	 
+	1.21.1.13	Material	Character (6)	 
+	1.21.1.14	Length	Double (8)	 
+	1.21.1.15	IsSpecLink	Yes/No (1)	 
+	1.21.1.16	FocusArea	Character (10)	 
+	1.21.1.17	BASIN	Character (4)	 
+	1.21.1.18	USEFLAG	Long (4)	 
+	1.21.2        Indexes	Index Name	Fields	Properties
+	1.21.2.1	MI_INDEX_FIELD	1	Primary, Unique, Required
+1.1	Table: ALP_COMP	Type: Native	Fields: 11	
+		Source: ALP_COMP	Connect: ;DATABASE=\\Cassio\systems_planning\System_Plan_Figs\Combined\Alternatives\Data\AltCompiler.MDB
+		Description: 
+	1.1.1        Fields	Field Name	Field Type	Description
+	1.1.1.1	NGTO_Direct	Character (7)	 
+	1.1.1.2	NGTO_Surface	Character (7)	 
+	1.1.1.3	NGTOParking	Character (7)	 
+	1.1.1.4	NGTO	Character (7)	 
+	1.1.1.5	BuildModelIC	Yes/No (1)	 
+	1.1.1.6	ICID	Long (4)	 
+	1.1.1.7	Constructed	Long (4)	 
+	1.1.1.8	AltICID	Long (4)	 
+	1.1.1.9	Difficulty	Integer (2)	 
+	1.1.1.10	BASIN	Character (4)	 
+	1.1.1.11	USEFLAG	Integer (2)	 
+1.2	Table: ALR_COMP	Type: Native	Fields: 8	
+		Source: ALR_COMP	Connect: ;DATABASE=\\Cassio\systems_planning\System_Plan_Figs\Combined\Alternatives\Data\AltCompiler.MDB
+		Description: 
+	1.2.1        Fields	Field Name	Field Type	Description
+	1.2.1.1	NGTORoof	Character (6)	 
+	1.2.1.2	BuildModelIC	Yes/No (1)	 
+	1.2.1.3	ICID	Long (4)	 
+	1.2.1.4	Constructed	Long (4)	 
+	1.2.1.5	AltICID	Long (4)	 
+	1.2.1.6	Difficulty	Integer (2)	 
+	1.2.1.7	BASIN	Character (4)	 
+	1.2.1.8	USEFLAG	Integer (2)	 
+1.3	Table: ALS_COMP	Type: Native	Fields: 8	
+		Source: ALS_COMP	Connect: ;DATABASE=\\Cassio\systems_planning\System_Plan_Figs\Combined\Alternatives\Data\AltCompiler.MDB
+		Description: 
+	1.3.1        Fields	Field Name	Field Type	Description
+	1.3.1.1	NGTOStreet	Character (7)	 
+	1.3.1.2	BuildModelIC	Yes/No (1)	 
+	1.3.1.3	ICID	Long (4)	 
+	1.3.1.4	Constructed	Long (4)	 
+	1.3.1.5	AltICID	Long (4)	 
+	1.3.1.6	Evaluation	Character (1)	 
+	1.3.1.7	BASIN	Character (4)	 
+	1.3.1.8	USEFLAG	Integer (2)	 
+1.4	Table: alt_parkingtargets_ac	Type: Native	Fields: 10	
+		Source: alt_parkingtargets_ac	Connect: ;DATABASE=\\Cassio\systems_planning\8063_CombinedFacPlan\Models\Alts\St_Johns_AB\STJ_FU\alternatives\STJ_NP_Base\alternative_package.mdb
+		Description: 
+	1.4.1        Fields	Field Name	Field Type	Description
+	1.4.1.1	MAPINFO_ID	Counter (4)	 
+	1.4.1.2	NGTO_Direct	Character (7)	 
+	1.4.1.3	NGTO_Surface	Character (7)	 
+	1.4.1.4	NGTOParking	Character (7)	 
+	1.4.1.5	NGTO	Character (7)	 
+	1.4.1.6	BuildModelIC	Yes/No (1)	 
+	1.4.1.7	ICID	Long (4)	 
+	1.4.1.8	Constructed	Long (4)	 
+	1.4.1.9	AltICID	Long (4)	 
+	1.4.1.10	Difficulty	Integer (2)	 
+	1.4.2        Indexes	Index Name	Fields	Properties
+	1.4.2.1	MI_INDEX_FIELD	1	Primary, Unique, Required
+1.5	Table: alt_pumpcurves	Type: Native	Fields: 6	
+		Source: alt_pumpcurves	Connect: ;DATABASE=\\Cassio\systems_planning\8063_CombinedFacPlan\Models\Alts\St_Johns_AB\STJ_FU\alternatives\STJ_NP_Base\alternative_package.mdb
+		Description: 
+	1.5.1        Fields	Field Name	Field Type	Description
+	1.5.1.1	MAPINFO_ID	Counter (4)	 
+	1.5.1.2	PumpType	Character (254)	 
+	1.5.1.3	Index	Long (4)	 
+	1.5.1.4	Rating	Double (8)	 
+	1.5.1.5	Flow	Double (8)	 
+	1.5.1.6	Rated_By	Long (4)	 
+	1.5.2        Indexes	Index Name	Fields	Properties
+	1.5.2.1	MI_INDEX_FIELD	1	Primary, Unique, Required
+1.6	Table: alt_rooftargets_ac	Type: Native	Fields: 7	
+		Source: alt_rooftargets_ac	Connect: ;DATABASE=\\Cassio\systems_planning\8063_CombinedFacPlan\Models\Alts\St_Johns_AB\STJ_FU\alternatives\STJ_NP_Base\alternative_package.mdb
+		Description: 
+	1.6.1        Fields	Field Name	Field Type	Description
+	1.6.1.1	MAPINFO_ID	Counter (4)	 
+	1.6.1.2	NGTORoof	Character (6)	 
+	1.6.1.3	BuildModelIC	Yes/No (1)	 
+	1.6.1.4	ICID	Long (4)	 
+	1.6.1.5	Constructed	Long (4)	 
+	1.6.1.6	AltICID	Long (4)	 
+	1.6.1.7	Difficulty	Integer (2)	 
+	1.6.2        Indexes	Index Name	Fields	Properties
+	1.6.2.1	MI_INDEX_FIELD	1	Primary, Unique, Required
+1.7	Table: ALTSLIST_pre_20081204	Type: Native	Fields: 8	Records: 169
+		Description: 
+	1.7.1        Fields	Field Name	Field Type	Description
+	1.7.1.1	ID	Counter (4)	 
+	1.7.1.2	Path	Character (255)	 
+	1.7.1.3	Database	Character (40)	 
+	1.7.1.4	Description	Character (255)	 
+	1.7.1.5	BASINCODE	Character (4)	 
+	1.7.1.6	USEFLAG	Long (4)	 
+	1.7.1.7	TABLENAME	Character (40)	 
+	1.7.1.8	RawPath	Character (255)	 
+1.8	Table: ALTSLIST_working	Type: Native	Fields: 8	Records: 175
+		Description: 
+	1.8.1        Fields	Field Name	Field Type	Description
+	1.8.1.1	ID	Counter (4)	 
+	1.8.1.2	Path	Character (255)	 
+	1.8.1.3	Database	Character (40)	 
+	1.8.1.4	Description	Character (255)	 
+	1.8.1.5	BASINCODE	Character (4)	 
+	1.8.1.6	USEFLAG	Long (4)	 
+	1.8.1.7	TABLENAME	Character (40)	 
+	1.8.1.8	RawPath	Character (255)	 
+1.9	Table: ALTSLIST_working_old	Type: Native	Fields: 8	Records: 190
+		Description:20080502
+	1.9.1        Fields	Field Name	Field Type	Description
+	1.9.1.1	ID	Counter (4)	 
+	1.9.1.2	Path	Character (255)	 
+	1.9.1.3	Database	Character (40)	 
+	1.9.1.4	Description	Character (255)	 
+	1.9.1.5	BASINCODE	Character (4)	 
+	1.9.1.6	USEFLAG	Long (4)	 
+	1.9.1.7	TABLENAME	Character (40)	 
+	1.9.1.8	RawPath	Character (255)	 

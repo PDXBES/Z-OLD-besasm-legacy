@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MXDRedirector", "MXDFixerUpper\MXDRedirector.csproj", "{FAE2D207-AB5F-4C48-A27B-1E6D4145C43E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReferenceLibrary", "..\ReferenceLibrary\ReferenceLibrary.csproj", "{BA37A262-90CF-4069-B89F-501CF646EB0A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WaitCursor", "..\WaitCursor\WaitCursor.csproj", "{E015626E-710D-4065-8D70-5E6FA61ED2AB}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "MXDRedirectorSetup", "MXDRedirectorSetup\MXDRedirectorSetup.vdproj", "{073959EE-F0FF-46DA-988E-1C4485B3B971}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FAE2D207-AB5F-4C48-A27B-1E6D4145C43E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAE2D207-AB5F-4C48-A27B-1E6D4145C43E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAE2D207-AB5F-4C48-A27B-1E6D4145C43E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAE2D207-AB5F-4C48-A27B-1E6D4145C43E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA37A262-90CF-4069-B89F-501CF646EB0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA37A262-90CF-4069-B89F-501CF646EB0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA37A262-90CF-4069-B89F-501CF646EB0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA37A262-90CF-4069-B89F-501CF646EB0A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E015626E-710D-4065-8D70-5E6FA61ED2AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E015626E-710D-4065-8D70-5E6FA61ED2AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E015626E-710D-4065-8D70-5E6FA61ED2AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E015626E-710D-4065-8D70-5E6FA61ED2AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{073959EE-F0FF-46DA-988E-1C4485B3B971}.Debug|Any CPU.ActiveCfg = Debug
+		{073959EE-F0FF-46DA-988E-1C4485B3B971}.Release|Any CPU.ActiveCfg = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
