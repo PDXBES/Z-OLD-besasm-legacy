@@ -45,11 +45,11 @@ namespace DSCUpdater
 
     Int64[] SearchList = new long[1];
 
-    string CSVDataSource;
-    string FileName;
+    string csvDataSource;
+    string fileName;
     string FileSize;
     //string LineText;
-    string TempFileName;
+    string tempFileName;
 
     // Use to populate the grid. 
     string[] DataResult1 = { "", "", "", "", "", "", "", "" };
@@ -60,23 +60,28 @@ namespace DSCUpdater
     //Create a table
     DataTable datatable = new DataTable("Temp.CSV");
 
+    private enum DscErrors
+    {
+      PendingUpdate, DscNotFound, ParkICGreaterThanParkArea, RoofICGreaterThanRoofArea
+    }
+
     public frmMain()
     {
       InitializeComponent();
 
-      TempFileName = @"C:\Temp.csv";
-      this.ultraStatusBar1.Panels["status"].Text = "Ready";      
+      tempFileName = @"C:\Temp.csv";
+      this.ultraStatusBar1.Panels["status"].Text = "Ready";
 
       //CreateTable();
-      dataset.Tables.Add(datatable);            
+      dataset.Tables.Add(datatable);
     }
 
     private void frmMain_Load(object sender, EventArgs e)
     {
       try
       {
-        ultraStatusBar1.Panels["dscEditorConnection"].Text = "Dsc Editor Connection: " + ConnectionStringSummary(Properties.Settings.Default.DscEditorConnectionString);
-        ultraStatusBar1.Panels["masterDataConnection"].Text = "Master Data Connection: " + ConnectionStringSummary(Properties.Settings.Default.MasterDataConnectionString);
+        ultraStatusBar1.Panels["dscEditorConnection"].Text = "Dsc Editor: " + ConnectionStringSummary(Properties.Settings.Default.DscEditorConnectionString);
+        ultraStatusBar1.Panels["masterDataConnection"].Text = "Master Data: " + ConnectionStringSummary(Properties.Settings.Default.MasterDataConnectionString);
 
         // TODO: This line of code loads data into the 'projectDataSet.DSCEDIT' table. You can move, or remove it, as needed.
         projectDataSet.EnforceConstraints = false;
@@ -1138,11 +1143,12 @@ namespace DSCUpdater
       SetStatus("Ready");
       SetProgress(0);
       txtFileName.Text = "";
+      NavigateTo(tabPageControlMain.Tab.Key);
     }
 
     private void SetProgress(int progress)
     {
-      this.ultraStatusBar1.Panels["progress"].ProgressBarInfo.Value = progress;
+      this.ultraStatusBar1.Panels["progressBar"].ProgressBarInfo.Value = progress;
 
     }
 
@@ -1150,8 +1156,8 @@ namespace DSCUpdater
     {
       SetProgress(progress);
       return ++this.ultraStatusBar1.Panels["progress"].ProgressBarInfo.Value;
-      
-      
+
+
     }
     private void SetStatus(string status)
     {
@@ -1213,9 +1219,9 @@ namespace DSCUpdater
 
     private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
     {
-      if (File.Exists(TempFileName))
+      if (File.Exists(tempFileName))
       {
-        File.Delete(TempFileName);
+        File.Delete(tempFileName);
       }
     }
 
@@ -1315,7 +1321,15 @@ namespace DSCUpdater
 
     private void DownloadUpdateTemplate()
     {
-      //MessageBox.Show("DownloadUpdateTemplate");
+      string templatePath = Path.GetDirectoryName(Application.ExecutablePath) + "\\Template\\UserUpdate.csv";
+      SaveFileDialog sfdMain = new SaveFileDialog();
+      sfdMain.Title = "Where do you want to save the UserUpdate file?";
+      sfdMain.InitialDirectory = @"C:\";
+      sfdMain.FileName = "UserUpdate.csv";
+      if (sfdMain.ShowDialog() == DialogResult.OK)
+      {
+        File.Copy(templatePath, sfdMain.FileName, true);
+      }
     }
 
     private void ApplyUpdates()
@@ -1399,10 +1413,92 @@ namespace DSCUpdater
       bulkcopy.Close();
       sqlCon.Close();
 
-      //create qcCOunter variable that is used to increment the number of QC checks that fail to pass
-      int qcCounter = 0;
+      
 
-      //run SelectPendingImpAreaUpdates
+      //create qcCOunter variable that is used to increment the number of QC checks that fail to pass
+      int qcCounter;
+      qcCounter = PerformDscQc();
+
+      //run SelectPendingImpAreaUpdates      
+
+      if (qcCounter > 0)
+      {
+        MessageBox.Show("One or more errors/warnings were encountered during the check of " +
+                        "the user input table.  Please review the tab(s) and correct " +
+                        "the corresponding data in the user input table.", "DSCUpdater: Input Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        return;
+      }
+
+      try
+      {
+        //the following are extracted methods that add SQL command parameters
+        AddEditDateCommandParameter(sqlCmd, sqlCon);
+        AddEditedByCommandParameter(sqlCmd, sqlCon);
+        AddNewParkAreaCommandParameter(sqlCmd, sqlCon);
+        AddNewParkAreaDrywellCommandParameter(sqlCmd, sqlCon);
+        AddNewParkDISCOAreaCommandParameter(sqlCmd, sqlCon);
+        AddNewRoofAreaCommandParameter(sqlCmd, sqlCon);
+        AddNewRoofAreaDrywellCommandParameter(sqlCmd, sqlCon);
+        AddNewRoofDISCOAreaCommandParameter(sqlCmd, sqlCon);
+        AddEditIDCommandParameter(sqlCmd);
+
+        //the following are extracted methods based on batch queries:          
+        BatchDSCEDITAPPENDQueries(sqlCmd);
+        BatchNewICRecords(sqlCmd);
+        BatchUpdateMasterICTables(sqlCmd);
+        BatchUpdateDSCAreas(sqlCmd);
+        BatchDSCEDIT(sqlCmd);
+        BatchSESSION(sqlCmd);
+
+        sqlCmd.CommandText = "INSERT INTO IMPUPDATE SELECT dsc_edit_id, dsc_id, new_roof_area_sqft, " +
+                             "old_roof_area_sqft, new_park_area_sqft, old_park_area_sqft FROM [DSCEDIT] " +
+                             "WHERE ((([DSCEDIT].[new_roof_area_sqft])<>[DSCEDIT].[old_roof_area_sqft]) " +
+                             "AND (([DSCEDIT].[edit_id])=@editID)) " +
+                             "OR ((([DSCEDIT].[new_park_area_sqft])<>[DSCEDIT].[old_park_area_sqft]) " +
+                             "AND (([DSCEDIT].[edit_id])=@editID))";
+        sqlCmd.ExecuteNonQuery();
+
+        ExportIMPUPDATEToCSV();
+
+        sqlCmd.CommandText = "DELETE FROM IMPUPDATE";
+        sqlCmd.ExecuteNonQuery();
+
+        BatchDeleteFromSQlTables(sqlCmd);
+
+        //close the SQL connection
+        sqlCon.Close();
+
+        //HACK: there must be a better way to accomlish this...
+        //btnSubmitUpdates.Visible = false;
+
+        btnCancel.Text = "Return";
+        MessageBox.Show("All updates to the modeling system have completed sucessfully.  To review changes from this edit session, return to the main page, and click on the 'Load Update History' button to load the desired edit session.", "DSCUpdater: Update Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+        try
+        {
+          SendImpAEmail();
+        }
+        catch (Exception ex)
+        {
+          MessageBox.Show("Unable to send email - Your changes have not been committed" + ex.Message);
+          return;
+        }
+
+      }
+      catch (Exception ex)
+      {
+        MessageBox.Show(ex.Message, "DSCUpdater: Exception Thrown", MessageBoxButtons.OK, MessageBoxIcon.Error);
+      }
+
+      SetStatus("Ready");
+      SetProgress(0);
+      Cursor.Current = Cursors.WaitCursor;
+      qcCounter = 0;
+    }
+
+    private int PerformDscQc()
+    {
+      int qcCount = 0;
 
       string strSQLImpAQC = "SELECT mst_DSC_ac.DSCID AS [DSC ID], " +
                      "mst_DSC_ac.surveyedRfAreaSqFt AS [Surveyed Roof Area], " +
@@ -1421,9 +1517,13 @@ namespace DSCUpdater
 
 
       //run SelectUSERUPDATENotInDSC query
-      string strSQLDSCQC = "SELECT USERUPDATE.dsc_id as 'DSC ID' FROM " +
-               "mst_DSC_ac RIGHT OUTER JOIN USERUPDATE ON " +
-               "mst_DSC_ac.DSCID = USERUPDATE.dsc_id WHERE (mst_DSC_ac.DSCID IS NULL)";
+      string strSQLDSCQC =
+        "SELECT USERUPDATE.dsc_id as 'DSC ID', " +
+        DscErrors.PendingUpdate + " as 'ErrorCode' " +
+        "null as 'ErrorDescription'" +
+        "FROM mst_DSC_ac RIGHT OUTER JOIN USERUPDATE " +
+        "ON mst_DSC_ac.DSCID = USERUPDATE.dsc_id " +
+        "WHERE (mst_DSC_ac.DSCID IS NULL)";
 
       SqlDataAdapter sqlDADSCQC = new SqlDataAdapter(strSQLDSCQC, Properties.Settings.Default.DscEditorConnectionString);
       SqlCommandBuilder sqlCBDSCQC = new SqlCommandBuilder(sqlDADSCQC);
@@ -1432,11 +1532,14 @@ namespace DSCUpdater
       dtDSCQC.Locale = System.Globalization.CultureInfo.InvariantCulture;
 
       //run SelectParkICAreaGreaterThanNewParkArea
-      string strSQLParkQC = "SELECT USERUPDATE.dsc_id, USERUPDATE.new_park_area_sqft, " +
-                       "USERUPDATE.new_park_disco_ic_area_sqft, " +
-                       "USERUPDATE.new_park_drywell_ic_area_sqft FROM " +
-                       "USERUPDATE WHERE " +
-                       "((([new_park_disco_ic_area_sqft]+[new_park_drywell_ic_area_sqft])>[new_park_area_sqft]))";
+      string strSQLParkQC =
+        "SELECT USERUPDATE.dsc_id, " +
+        DscErrors.ParkICGreaterThanParkArea + " as 'ErrorCode' " +
+        "USERUPDATE.new_park_disco_ic_area_sqft & '+' & " +
+        "USERUPDATE.new_park_drywell_ic_area_sqft & '>' & " +
+        "USERUPDATE.new_park_area_sqft as 'ErrorDescription' " +
+        "FROM USERUPDATE " +
+        "WHERE ([new_park_disco_ic_area_sqft]+[new_park_drywell_ic_area_sqft])>[new_park_area_sqft]";
 
       SqlDataAdapter sqlDAParkQC = new SqlDataAdapter(strSQLParkQC, Properties.Settings.Default.DscEditorConnectionString);
       SqlCommandBuilder sqlCBParkQC = new SqlCommandBuilder(sqlDAParkQC);
@@ -1447,159 +1550,23 @@ namespace DSCUpdater
       dtParkQC.Locale = System.Globalization.CultureInfo.InvariantCulture;
 
       //run SelectRoofICAreaGreaterThanNewRoofArea
-      string strSQLRoofQC = "SELECT USERUPDATE.dsc_id, USERUPDATE.new_roof_area_sqft, " +
-                      "USERUPDATE.new_roof_disco_ic_area_sqft, " +
-                      "USERUPDATE.new_roof_drywell_ic_area_sqft FROM USERUPDATE WHERE " +
-                      "((([new_roof_disco_ic_area_sqft]+[new_roof_drywell_ic_area_sqft])>[new_roof_area_sqft]))";
+      string strSQLRoofQC =
+        "SELECT USERUPDATE.dsc_id, " +
+        DscErrors.RoofICGreaterThanRoofArea + " as 'ErrorCode' " +
+        "USERUPDATE.new_roof_disco_ic_area_sqft & '+' &" +
+        "USERUPDATE.new_roof_drywell_ic_area_sqft & '>' &" +
+        "USERUPDATE.new_roof_area_sqft as 'ErrorDescription' " +
+        "FROM USERUPDATE WHERE " +
+        "([new_roof_disco_ic_area_sqft]+[new_roof_drywell_ic_area_sqft])>[new_roof_area_sqft]";
+
+
       SqlDataAdapter sqlDARoofQC = new SqlDataAdapter(strSQLRoofQC, Properties.Settings.Default.DscEditorConnectionString);
       SqlCommandBuilder sqlCBRoofQC = new SqlCommandBuilder(sqlDARoofQC);
       DataTable dtRoofQC = new DataTable();
       sqlDARoofQC.Fill(dtRoofQC);
       dtRoofQC.Locale = System.Globalization.CultureInfo.InvariantCulture;
 
-      if (dtImpAQC.Rows.Count > 0 && impAQCCounter == 0)
-      {
-        qcCounter = qcCounter + 1;
-        dgvImpAQC.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.ColumnHeader);
-
-        //bind the data to the grid
-        dgvImpAQC.DataSource = dtImpAQC;
-        dgvImpAQC.Update();
-
-        dgvImpAQC.ReadOnly = true;
-
-        tabPageControlPendingImpAChanges.Text = "Pending Impervious Changes";
-      }
-
-      if (dtDSCQC.Rows.Count > 0)
-      {
-        qcCounter = qcCounter + 1;
-
-        // Resize the DataGridView columns to fit the newly loaded content.     
-        dgvDSCQC.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.ColumnHeader);
-
-        //bind the data to the grid
-        dgvDSCQC.DataSource = dtDSCQC;
-        dgvDSCQC.Update();
-
-        // you can make it grid readonly.
-        dgvDSCQC.ReadOnly = true;
-      }
-
-      if (dtParkQC.Rows.Count > 0)
-      {
-        //increment qc counter
-        qcCounter = qcCounter + 1;
-
-        //MessageBox.Show("ParkQC = " + Convert.ToString(dtParkQC.Rows.Count));
-
-        //clear whatever is in the dgv
-        dgvParkQC.SelectAll();
-        dgvParkQC.ClearSelection();
-
-        //resize the DataGridView to fit the newly loaded content.   
-        dgvParkQC.AutoSize = true;
-        dgvParkQC.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.ColumnHeader);
-
-        //bind the data to the grid
-        dgvParkQC.DataSource = dtParkQC;
-        dgvParkQC.Update();
-
-        //you can make it grid readonly.
-        dgvParkQC.ReadOnly = true;
-
-        //tab to Park IC Error tab               
-        tabPageControlIncorrectParkICArea.Text = "Parking IC Error";
-      }
-
-      if (dtRoofQC.Rows.Count > 0)
-      {
-        //increment QC counter
-        qcCounter = qcCounter + 1;
-
-        //MessageBox.Show("RoofQC = " + Convert.ToString(dtRoofQC.Rows.Count));
-
-        //clear whatever is in the dgv
-        dgvRoofQC.SelectAll();
-        dgvRoofQC.ClearSelection();
-
-        // Resize the DataGridView columns to fit the newly loaded content.     
-        dgvRoofQC.AutoSize = true;
-        dgvRoofQC.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.ColumnHeader);
-
-        // finally bind the data to the grid
-        dgvRoofQC.DataSource = dtRoofQC;
-        dgvRoofQC.Update();
-
-        // you can make it grid readonly.
-        dgvRoofQC.ReadOnly = true;
-
-        //tab to Missing Records tab
-        tabPageControlIncorrectRoofICArea.Text = "Roof IC Error";
-      }
-
-      if (qcCounter > 0)
-      {
-        MessageBox.Show("One or more errors/warnings were encountered during the check of " +
-                        "the user input table.  Please review the tab(s) and correct " +
-                        "the corresponding data in the user input table.", "DSCUpdater: Input Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-      }
-
-      else if (dtDSCQC.Rows.Count == 0 || dtParkQC.Rows.Count == 0 || dtRoofQC.Rows.Count == 0)
-      {
-        try
-        {
-          //the following are extracted methods that add SQL command parameters
-          AddEditDateCommandParameter(sqlCmd, sqlCon);
-          AddEditedByCommandParameter(sqlCmd, sqlCon);
-          AddNewParkAreaCommandParameter(sqlCmd, sqlCon);
-          AddNewParkAreaDrywellCommandParameter(sqlCmd, sqlCon);
-          AddNewParkDISCOAreaCommandParameter(sqlCmd, sqlCon);
-          AddNewRoofAreaCommandParameter(sqlCmd, sqlCon);
-          AddNewRoofAreaDrywellCommandParameter(sqlCmd, sqlCon);
-          AddNewRoofDISCOAreaCommandParameter(sqlCmd, sqlCon);
-          AddEditIDCommandParameter(sqlCmd);
-
-          //the following are extracted methods based on batch queries:          
-          BatchDSCEDITAPPENDQueries(sqlCmd);
-          BatchNewICRecords(sqlCmd);
-          BatchUpdateMasterICTables(sqlCmd);
-          BatchUpdateDSCAreas(sqlCmd);
-          BatchDSCEDIT(sqlCmd);
-          BatchSESSION(sqlCmd);
-
-          sqlCmd.CommandText = "INSERT INTO IMPUPDATE SELECT dsc_edit_id, dsc_id, new_roof_area_sqft, " +
-                               "old_roof_area_sqft, new_park_area_sqft, old_park_area_sqft FROM [DSCEDIT] " +
-                               "WHERE ((([DSCEDIT].[new_roof_area_sqft])<>[DSCEDIT].[old_roof_area_sqft]) " +
-                               "AND (([DSCEDIT].[edit_id])=@editID)) " +
-                               "OR ((([DSCEDIT].[new_park_area_sqft])<>[DSCEDIT].[old_park_area_sqft]) " +
-                               "AND (([DSCEDIT].[edit_id])=@editID))";
-          sqlCmd.ExecuteNonQuery();
-
-          ExportIMPUPDATEToCSV();
-
-          sqlCmd.CommandText = "DELETE FROM IMPUPDATE";
-          sqlCmd.ExecuteNonQuery();
-
-          BatchDeleteFromSQlTables(sqlCmd);
-
-          //close the SQL connection
-          sqlCon.Close();
-          btnSubmitUpdates.Visible = false;
-          btnCancel.Text = "Return";
-          MessageBox.Show("All updates to the modeling system have completed sucessfully.  To review changes from this edit session, return to the main page, and click on the 'Load Update History' button to load the desired edit session.", "DSCUpdater: Update Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-          SendImpAEmail();
-        }
-        catch (Exception ex)
-        {
-          MessageBox.Show(ex.Message, "DSCUpdater: Exception Thrown", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-      }
-      SetStatus("Ready");
-      SetProgress(0);
-      Cursor.Current = Cursors.WaitCursor;
-      qcCounter = 0;
+      return qcCount;
     }
 
     private void btnLoadSelectedEditSession_Click(object sender, EventArgs e)
@@ -1669,7 +1636,6 @@ namespace DSCUpdater
 
       SetStatus("Loading");
 
-
       //Open file dialog handling
       ofdMain.DefaultExt = "*.csv";
       ofdMain.FileName = "*.csv";
@@ -1677,69 +1643,74 @@ namespace DSCUpdater
       DialogResult result = ofdMain.ShowDialog();
 
       //Check to make sure the OFD dialog result is "OK"
-      if (result == DialogResult.OK)
+      if (result != DialogResult.OK)
       {
-        txtFileName.Text = ofdMain.FileName;
-
-        // Clear datagrid contents
-        dgvData.SelectAll();
-        dgvData.ClearSelection();
-        // Set file name
-        FileName = txtFileName.Text;
-        CSVDataSource = FileName;
-        if (File.Exists(TempFileName))
-        {
-          File.Delete(TempFileName);
-        }
-
-        StreamReader sr = new StreamReader(FileName);
-        StreamWriter sw = new StreamWriter(TempFileName);
-
-        // Read & dump header
-        string junk = sr.ReadLine();
-
-        // Read file into string       
-        string FileData = sr.ReadToEnd();
-
-        FileSize = FileData.Length.ToString("N");
-        FileSize = FileSize.Substring(0, FileSize.IndexOf("."));
-        //SetStatus(= "Loading" + FileSize + "  bytes. Please wait a moment.";
-
-        sw.WriteLine("RNO,DSCID,New Roof Area,New Roof DISCO IC Area,New Roof Drywell IC Area, New Park Area, New Park DISCO IC Area, New Park Drywell IC Area");
-        //sw.WriteLine(LineText);
-        sw.Write(FileData);
-        sr.Close();
-        sw.Close();
-        ReadData();
-        dgvData.Update();
-        dgvData.Columns[0].HeaderText = "RNO";
-        dgvData.Columns[1].HeaderText = "DSCID";
-        dgvData.Columns[2].HeaderText = "New Roof Area";
-        dgvData.Columns[3].HeaderText = "New Roof DISCO IC Area";
-        dgvData.Columns[4].HeaderText = "New Roof Drywell IC Area";
-        dgvData.Columns[5].HeaderText = "New Park Area";
-        dgvData.Columns[6].HeaderText = "New Park DISCO IC Area";
-        dgvData.Columns[7].HeaderText = "New Park Drywell IC Area";
-
+        return;
       }
-      else
+      txtFileName.Text = ofdMain.FileName;
+
+      // Clear datagrid contents
+      dgvData.SelectAll();
+      dgvData.ClearSelection();
+      // Set file name
+      fileName = txtFileName.Text;
+      csvDataSource = fileName;
+      if (File.Exists(tempFileName))
       {
-
+        File.Delete(tempFileName);
       }
+
+      StreamReader sr = new StreamReader(fileName);
+      StreamWriter sw = new StreamWriter(tempFileName);
+
+      // Read & dump header
+      string junk = sr.ReadLine();
+
+      // Read file into string       
+      string FileData = sr.ReadToEnd();
+
+      FileSize = FileData.Length.ToString("N");
+      FileSize = FileSize.Substring(0, FileSize.IndexOf("."));
+      //SetStatus(= "Loading" + FileSize + "  bytes. Please wait a moment.";
+
+      sw.WriteLine("RNO,DSCID,New Roof Area,New Roof DISCO IC Area,New Roof Drywell IC Area, New Park Area, New Park DISCO IC Area, New Park Drywell IC Area");
+      //sw.WriteLine(LineText);
+      sw.Write(FileData);
+      sr.Close();
+      sw.Close();
+      ReadData();
+      dgvData.Update();
+      dgvData.Columns[0].HeaderText = "RNO";
+      dgvData.Columns[1].HeaderText = "DSCID";
+      dgvData.Columns[2].HeaderText = "New Roof Area";
+      dgvData.Columns[3].HeaderText = "New Roof DISCO IC Area";
+      dgvData.Columns[4].HeaderText = "New Roof Drywell IC Area";
+      dgvData.Columns[5].HeaderText = "New Park Area";
+      dgvData.Columns[6].HeaderText = "New Park DISCO IC Area";
+      dgvData.Columns[7].HeaderText = "New Park Drywell IC Area";
+
       SetProgress(0);
+
+      NavigateTo(tabPageControlLoadedUpdateReview.Tab.Key);
+
       SetStatus("Ready");
     }
 
-    private void btnDownloadUpdateTemplate_Click(object sender, EventArgs e)
+    private void NavigateTo(string tabKey)
     {
-      string templatePath = Path.GetDirectoryName(Application.ExecutablePath) + "\\Template\\UserUpdate.csv";
-      SaveFileDialog sfdMain = new SaveFileDialog();
-      sfdMain.Title = "Where do you want to save the UserUpdate file?";
-      sfdMain.InitialDirectory = @"C:\";
-      sfdMain.FileName = "UserUpdate.csv";
-      if (sfdMain.ShowDialog() == DialogResult.OK)
+      try
       {
-        File.Copy(templatePath, sfdMain.FileName, true);
+        Cursor = Cursors.WaitCursor;
+        tabControlMain.SelectedTab = tabControlMain.Tabs[tabKey];
+      }
+      catch
+      {
+        MessageBox.Show("Could not navigate to tab '" + tabKey + "'.");
+        tabControlMain.SelectedTab = tabControlMain.Tabs[0];
+      }
+      finally
+      {
+        Cursor = Cursors.Default;
       }
     }
 
@@ -2346,6 +2317,9 @@ namespace DSCUpdater
         case "changeMasterDataConnection":    // ButtonTool
           UpdateMasterDataConnection();
           break;
+        case "downloadTemplate":    // ButtonTool
+          DownloadUpdateTemplate();
+          break;
         case "about":
           string fi;
           fi = @"\\Cassio\asm_apps\Apps\DSCUpdater\DSCUpdaterPublish.htm";
@@ -2380,7 +2354,7 @@ namespace DSCUpdater
 
       Properties.Settings.Default.SetDscEditorConnectionString = dataConnectionDialog.ConnectionString;
       Properties.Settings.Default.Save();
-      ultraStatusBar1.Panels["dscEditorConnection"].Text = "Dsc Editor Connection: " + ConnectionStringSummary(Properties.Settings.Default.DscEditorConnectionString);      
+      ultraStatusBar1.Panels["dscEditorConnection"].Text = "Dsc Editor: " + ConnectionStringSummary(Properties.Settings.Default.DscEditorConnectionString);
       return;
     }
 
@@ -2405,12 +2379,12 @@ namespace DSCUpdater
 
       Properties.Settings.Default.SetMasterDataConnectionString = dataConnectionDialog.ConnectionString;
       Properties.Settings.Default.Save();
-      ultraStatusBar1.Panels["masterDataConnection"].Text = "Master Data Connection: " + ConnectionStringSummary(Properties.Settings.Default.MasterDataConnectionString);
+      ultraStatusBar1.Panels["masterDataConnection"].Text = "Master Data: " + ConnectionStringSummary(Properties.Settings.Default.MasterDataConnectionString);
       return;
     }
 
     private string ConnectionStringSummary(string connectionString)
-    {      
+    {
       System.Data.Common.DbConnectionStringBuilder csb;
       csb = new System.Data.Common.DbConnectionStringBuilder();
 
@@ -2439,6 +2413,25 @@ namespace DSCUpdater
       {
         Cursor = Cursors.Default;
       }
+    }
+
+    private void tabControlMain_SelectedTabChanged(object sender, Infragistics.Win.UltraWinTabControl.SelectedTabChangedEventArgs e)
+    {
+      this.Text = "DSC Updater";
+      if (e.Tab != null)
+      {
+        this.Text = this.Text + " - " + e.Tab.Text;
+      }
+    }
+
+    private void btnRevertSession_Click_1(object sender, EventArgs e)
+    {
+
+    }
+
+    private void btnCancel_Click(object sender, MouseEventArgs e)
+    {
+
     }
 
 
