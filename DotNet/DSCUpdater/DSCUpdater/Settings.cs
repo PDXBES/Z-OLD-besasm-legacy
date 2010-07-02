@@ -40,5 +40,17 @@
             this["MasterDataConnectionString"] = value;
           }
         }
+
+        public string DscUpdateFile
+        {
+          get
+          {
+            System.Data.Common.DbConnectionStringBuilder csb;
+            csb = new System.Data.Common.DbConnectionStringBuilder();
+
+            csb.ConnectionString = (string)this["DscUpdateConnectionString"];
+            return System.IO.Path.GetFullPath((string)csb["Data Source"]) + "\\UserUpdate.csv";            
+          }
+        }     
     }
 }

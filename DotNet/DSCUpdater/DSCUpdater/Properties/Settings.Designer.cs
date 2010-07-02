@@ -44,5 +44,16 @@ namespace DSCUpdater.Properties {
                 return ((string)(this["DscEditorConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=.\\Template;Extended Properties=\"text" +
+            ";FMT=Delimited(,);HDR=Yes\"")]
+        public string DscUpdateConnectionString {
+            get {
+                return ((string)(this["DscUpdateConnectionString"]));
+            }
+        }
     }
 }

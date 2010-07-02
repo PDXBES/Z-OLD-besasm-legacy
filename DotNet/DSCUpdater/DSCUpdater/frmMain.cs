@@ -21,6 +21,9 @@ using Microsoft.SqlServer.Server;
 using Microsoft.SqlServer;
 using System.Configuration.Assemblies;
 using Microsoft.Office;
+using System.Data.Linq;
+using System.Linq.Expressions;
+using System.Data.Linq.Mapping;
 
 namespace DSCUpdater
 {
@@ -55,12 +58,7 @@ namespace DSCUpdater
     string[] DataResult1 = { "", "", "", "", "", "", "", "" };
     string[] Titles = { "RNO", "DSCID", "New Roof Area", "New Roof DISCO IC Area", "New Roof Drywell IC Area" };
 
-    //Create a dataset  
-    DataSet dataset = new DataSet("My Dataset");
-    //Create a table
-    DataTable datatable = new DataTable("Temp.CSV");
-
-    private enum DscErrors
+    public enum DscErrors
     {
       PendingUpdate, DscNotFound, ParkICGreaterThanParkArea, RoofICGreaterThanRoofArea
     }
@@ -70,10 +68,7 @@ namespace DSCUpdater
       InitializeComponent();
 
       tempFileName = @"C:\Temp.csv";
-      this.ultraStatusBar1.Panels["status"].Text = "Ready";
-
-      //CreateTable();
-      dataset.Tables.Add(datatable);
+      SetStatus("Ready");
     }
 
     private void frmMain_Load(object sender, EventArgs e)
@@ -83,12 +78,15 @@ namespace DSCUpdater
         ultraStatusBar1.Panels["dscEditorConnection"].Text = "Dsc Editor: " + ConnectionStringSummary(Properties.Settings.Default.DscEditorConnectionString);
         ultraStatusBar1.Panels["masterDataConnection"].Text = "Master Data: " + ConnectionStringSummary(Properties.Settings.Default.MasterDataConnectionString);
 
-        // TODO: This line of code loads data into the 'projectDataSet.DSCEDIT' table. You can move, or remove it, as needed.
+        // TODO: This line of code loads data into the 'ProjectDataSet.DSCEDIT' table. You can move, or remove it, as needed.
         projectDataSet.EnforceConstraints = false;
-        //this.dSCEDITTableAdapter.Fill(this.projectDataSet.DSCEDIT);
-        // TODO: This line of code loads data into the 'projectDataSet.SESSION' table. You can move, or remove it, as needed.
+        //this.dSCEDITTableAdapter.Fill(this.ProjectDataSet.DSCEDIT);
+        // TODO: This line of code loads data into the 'ProjectDataSet.SESSION' table. You can move, or remove it, as needed.
         this.sESSIONTableAdapter.Fill(this.projectDataSet.SESSION);
         bindingNavigator1.BindingSource = sESSIONBindingSource;
+
+        ProjectDataSetTableAdapters.mstDscTableAdapter mstDscTA = new DSCUpdater.ProjectDataSetTableAdapters.mstDscTableAdapter();
+        mstDscTA.Fill(projectDataSet.mstDsc);
 
         SqlConnection sqlCon = new SqlConnection(Properties.Settings.Default.DscEditorConnectionString);
         sqlCon.Open();
@@ -166,14 +164,6 @@ namespace DSCUpdater
       // Closes the text stream and the database connenction.
       sw.Close();
       sqlCon.Close();
-    }
-
-    private void CreateTable()
-    {
-      for (int i = 0; i < 8; i++)
-      {
-        datatable.Columns.Add(Titles[i]);
-      }
     }
 
     private void ReadData()
@@ -1143,7 +1133,7 @@ namespace DSCUpdater
       SetStatus("Ready");
       SetProgress(0);
       txtFileName.Text = "";
-      NavigateTo(tabPageControlMain.Tab.Key);
+      LoadTab(tabPageControlMain.Tab.Key);
     }
 
     private void SetProgress(int progress)
@@ -1182,22 +1172,6 @@ namespace DSCUpdater
 
     private void btnDSCQC_Click(object sender, EventArgs e)
     {
-    }
-
-    private void btnParkICQC_Click(object sender, EventArgs e)
-    {
-
-    }
-
-    private void btnRoofICQC_Click(object sender, EventArgs e)
-    {
-
-    }
-
-    private void btnImpAQC_Click(object sender, EventArgs e)
-    {
-      impAQCCounter = impAQCCounter + 1;
-
     }
 
     private void btnUpdaterHistoryReturn_Click(object sender, EventArgs e)
@@ -1332,11 +1306,6 @@ namespace DSCUpdater
       }
     }
 
-    private void ApplyUpdates()
-    {
-
-    }
-
     private void CheckRetroUpdates()
     {
 
@@ -1381,53 +1350,8 @@ namespace DSCUpdater
       SqlConnection sqlCon = new SqlConnection(Properties.Settings.Default.DscEditorConnectionString);
       sqlCon.Open();
       SqlCommand sqlCmd = new SqlCommand();
-      sqlCmd.CommandText = "DELETE FROM USERUPDATE";
-      sqlCmd.Connection = sqlCon;
-      sqlCmd.ExecuteNonQuery();
-
-      string filepath = "c:\\";
-      string str = "SELECT * FROM temp.csv";
-      string strCon = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + filepath + ";" + "Extended Properties='text;FMT=Delimited(,);HDR=Yes'";
-      OleDbDataAdapter daUserUpdate = new OleDbDataAdapter(str, strCon);
-      DataTable dtUserUpdate = new DataTable();
-      daUserUpdate.Fill(dtUserUpdate);
-      SqlBulkCopy bulkcopy = new SqlBulkCopy(sqlCon);
-      bulkcopy.DestinationTableName = "USERUPDATE";
-      SqlBulkCopyColumnMapping colmap1 = new SqlBulkCopyColumnMapping(0, "rno");
-      SqlBulkCopyColumnMapping colmap2 = new SqlBulkCopyColumnMapping(1, "dsc_id");
-      SqlBulkCopyColumnMapping colmap3 = new SqlBulkCopyColumnMapping(2, "new_roof_area_sqft");
-      SqlBulkCopyColumnMapping colmap4 = new SqlBulkCopyColumnMapping(3, "new_roof_disco_ic_area_sqft");
-      SqlBulkCopyColumnMapping colmap5 = new SqlBulkCopyColumnMapping(4, "new_roof_drywell_ic_area_sqft");
-      SqlBulkCopyColumnMapping colmap6 = new SqlBulkCopyColumnMapping(5, "new_park_area_sqft");
-      SqlBulkCopyColumnMapping colmap7 = new SqlBulkCopyColumnMapping(6, "new_park_disco_ic_area_sqft");
-      SqlBulkCopyColumnMapping colmap8 = new SqlBulkCopyColumnMapping(7, "new_park_drywell_ic_area_sqft");
-      bulkcopy.ColumnMappings.Add(colmap1);
-      bulkcopy.ColumnMappings.Add(colmap2);
-      bulkcopy.ColumnMappings.Add(colmap3);
-      bulkcopy.ColumnMappings.Add(colmap4);
-      bulkcopy.ColumnMappings.Add(colmap5);
-      bulkcopy.ColumnMappings.Add(colmap6);
-      bulkcopy.ColumnMappings.Add(colmap7);
-      bulkcopy.ColumnMappings.Add(colmap8);
-      bulkcopy.WriteToServer(dtUserUpdate);
-      bulkcopy.Close();
-      sqlCon.Close();
-
-      
-
-      //create qcCOunter variable that is used to increment the number of QC checks that fail to pass
-      int qcCounter;
-      qcCounter = PerformDscQc();
 
       //run SelectPendingImpAreaUpdates      
-
-      if (qcCounter > 0)
-      {
-        MessageBox.Show("One or more errors/warnings were encountered during the check of " +
-                        "the user input table.  Please review the tab(s) and correct " +
-                        "the corresponding data in the user input table.", "DSCUpdater: Input Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-        return;
-      }
 
       try
       {
@@ -1493,13 +1417,49 @@ namespace DSCUpdater
       SetStatus("Ready");
       SetProgress(0);
       Cursor.Current = Cursors.WaitCursor;
-      qcCounter = 0;
     }
 
-    private int PerformDscQc()
+    private int PerformDscQc(string fileName)
     {
       int qcCount = 0;
 
+      // establish a query context over ADO.NET sql connection                  
+      ProjectDataSetTableAdapters.DscUpdaterTableAdapter dscUpdaterTA;
+      dscUpdaterTA = new ProjectDataSetTableAdapters.DscUpdaterTableAdapter();
+
+      dscUpdaterTA.Fill(projectDataSet.DscUpdater);
+
+
+      //Table<DscUpdater> dscUpdater = dscUpdaterContext.GetTable<DscUpdater>();
+
+      // build the query
+      var query = from m in projectDataSet.MstDsc
+                  join d in projectDataSet.DscQc
+                  on m.DSCID equals d.DscID
+                  where m.roofAreaNeedsUpdate == true ||
+                  m.parkAreaNeedsUpdate == true
+                  select new
+                  {
+                    DscID = m.DSCID,
+                    ErrorCode = DscErrors.PendingUpdate,
+                    ErrorDescription = ""
+                  };
+
+      DataTable qcDt = projectDataSet.DscQc;
+
+      foreach (var row in query)
+      {
+        qcDt.Rows.Add(row);
+      }
+
+      // execute the query
+      /*foreach (var item in query)
+        Console.WriteLine("{0} {1} {2} {3}",
+                          item.Name, item.OrderID,
+                          item.Amount, item.Age);
+      */
+
+      return 1;
       string strSQLImpAQC = "SELECT mst_DSC_ac.DSCID AS [DSC ID], " +
                      "mst_DSC_ac.surveyedRfAreaSqFt AS [Surveyed Roof Area], " +
                      "mst_DSC_ac.surveyedPkAreaSqft AS [Surveyed Park Area] " +
@@ -1514,7 +1474,6 @@ namespace DSCUpdater
       sqlDAImpAQC.Fill(dtImpAQC);
       //MessageBox.Show("ImpAQC = " + Convert.ToString(dtImpAQC.Rows.Count));
       dtImpAQC.Locale = System.Globalization.CultureInfo.InvariantCulture;
-
 
       //run SelectUSERUPDATENotInDSC query
       string strSQLDSCQC =
@@ -1567,6 +1526,22 @@ namespace DSCUpdater
       dtRoofQC.Locale = System.Globalization.CultureInfo.InvariantCulture;
 
       return qcCount;
+    }
+
+    private DataTable CsvToDataTable(string csvFile)
+    {
+      SqlConnection sqlCon = new SqlConnection(Properties.Settings.Default.DscEditorConnectionString);
+      sqlCon.Open();
+
+      string str = "SELECT * FROM " + Path.GetFileName(csvFile);
+      string strCon = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Path.GetDirectoryName(csvFile) + ";" + "Extended Properties='text;FMT=Delimited(,);HDR=Yes'";
+      OleDbDataAdapter da = new OleDbDataAdapter(str, strCon);
+      DataTable dt = new DataTable();
+      da.Fill(dt);
+
+      sqlCon.Close();
+
+      return dt;
     }
 
     private void btnLoadSelectedEditSession_Click(object sender, EventArgs e)
@@ -1634,6 +1609,7 @@ namespace DSCUpdater
       /// Make each column UNSORTABLE to stop user messing with data!!!
       /// </summary>
 
+      dgvDscQc.Visible = false;
       SetStatus("Loading");
 
       //Open file dialog handling
@@ -1647,71 +1623,41 @@ namespace DSCUpdater
       {
         return;
       }
+
+      string dscUpdateFile = Properties.Settings.Default.DscUpdateFile;
       txtFileName.Text = ofdMain.FileName;
+      if (File.Exists(dscUpdateFile))
+      {
+        File.Delete(dscUpdateFile);
+      }
+      File.Copy(ofdMain.FileName, dscUpdateFile);
+
+      btnReviewUpdate.Enabled = false;
+
 
       // Clear datagrid contents
       dgvData.SelectAll();
       dgvData.ClearSelection();
       // Set file name
-      fileName = txtFileName.Text;
-      csvDataSource = fileName;
-      if (File.Exists(tempFileName))
-      {
-        File.Delete(tempFileName);
-      }
 
-      StreamReader sr = new StreamReader(fileName);
-      StreamWriter sw = new StreamWriter(tempFileName);
-
-      // Read & dump header
-      string junk = sr.ReadLine();
-
-      // Read file into string       
-      string FileData = sr.ReadToEnd();
-
-      FileSize = FileData.Length.ToString("N");
-      FileSize = FileSize.Substring(0, FileSize.IndexOf("."));
       //SetStatus(= "Loading" + FileSize + "  bytes. Please wait a moment.";
-
-      sw.WriteLine("RNO,DSCID,New Roof Area,New Roof DISCO IC Area,New Roof Drywell IC Area, New Park Area, New Park DISCO IC Area, New Park Drywell IC Area");
-      //sw.WriteLine(LineText);
-      sw.Write(FileData);
-      sr.Close();
-      sw.Close();
-      ReadData();
-      dgvData.Update();
-      dgvData.Columns[0].HeaderText = "RNO";
-      dgvData.Columns[1].HeaderText = "DSCID";
-      dgvData.Columns[2].HeaderText = "New Roof Area";
-      dgvData.Columns[3].HeaderText = "New Roof DISCO IC Area";
-      dgvData.Columns[4].HeaderText = "New Roof Drywell IC Area";
-      dgvData.Columns[5].HeaderText = "New Park Area";
-      dgvData.Columns[6].HeaderText = "New Park DISCO IC Area";
-      dgvData.Columns[7].HeaderText = "New Park Drywell IC Area";
 
       SetProgress(0);
 
-      NavigateTo(tabPageControlLoadedUpdateReview.Tab.Key);
+      //create qcCOunter variable that is used to increment the number of QC checks that fail to pass
+      int qcCounter;
+      qcCounter = PerformDscQc(fileName);
+
+      if (qcCounter == 0)
+      {
+        btnReviewUpdate.Enabled = true;
+      }
+      else
+      {
+        dgvDscQc.Visible = true;
+      }
 
       SetStatus("Ready");
-    }
-
-    private void NavigateTo(string tabKey)
-    {
-      try
-      {
-        Cursor = Cursors.WaitCursor;
-        tabControlMain.SelectedTab = tabControlMain.Tabs[tabKey];
-      }
-      catch
-      {
-        MessageBox.Show("Could not navigate to tab '" + tabKey + "'.");
-        tabControlMain.SelectedTab = tabControlMain.Tabs[0];
-      }
-      finally
-      {
-        Cursor = Cursors.Default;
-      }
     }
 
     private void btnUpdaterEditorEnter_Click(object sender, EventArgs e)
@@ -2017,6 +1963,7 @@ namespace DSCUpdater
 
     private void btnRevertSession_Click(object sender, EventArgs e)
     {
+      //TODO: Verify that entries in dgvUpdaterEditor are only displaying a single session id. The grid must be filtered by session id to use this tool.
       int dgvRowCount = 0;
       dgvRowCount = dgvUpdaterEditor.RowCount;
       DialogResult dr = MessageBox.Show(dgvRowCount + " records will be reverted.  Do you wish to continue? (Changes can only be undone by submitting a new update file)", "Confirm Revert Operation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -2180,51 +2127,6 @@ namespace DSCUpdater
       }
     }
 
-    private void btnUpdaterEditorCloseCancel_Click(object sender, EventArgs e)
-    {
-      tabControlMain.Visible = false;
-    }
-
-    private void btnCancelDownload_Click(object sender, EventArgs e)
-    {
-
-    }
-
-    private void btnCancelUpdate_Click(object sender, EventArgs e)
-    {
-
-    }
-
-    private void downloadUpdateTemplateToolStripMenuItem_Click(object sender, EventArgs e)
-    {
-
-    }
-
-    private void loadUpdateFileToolStripMenuItem_Click(object sender, EventArgs e)
-    {
-
-    }
-
-    private void loadUpdaterHistoryToolStripMenuItem_Click(object sender, EventArgs e)
-    {
-
-    }
-
-    private void btnCloseUpdaterHistory_Click(object sender, EventArgs e)
-    {
-
-    }
-
-    private void checkRETROUpdatesToolStripMenuItem_Click(object sender, EventArgs e)
-    {
-      CheckRetroUpdates();
-    }
-
-    private void applyRETROUpdatesToolStripMenuItem_Click(object sender, EventArgs e)
-    {
-      ApplyRetroUpdates();
-    }
-
     private void btnViewNewRetroAssessments_Click(object sender, EventArgs e)
     {
       try
@@ -2292,11 +2194,6 @@ namespace DSCUpdater
     private void toolStripStatusLabel2_Click(object sender, EventArgs e)
     {
       UpdateDscEditorConnection();
-    }
-
-    private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
-    {
-
     }
 
     private void ultraToolbarsManager1_ToolClick(object sender, Infragistics.Win.UltraWinToolbars.ToolClickEventArgs e)
@@ -2424,20 +2321,54 @@ namespace DSCUpdater
       }
     }
 
-    private void btnRevertSession_Click_1(object sender, EventArgs e)
-    {
-
-    }
-
     private void btnCancel_Click(object sender, MouseEventArgs e)
     {
 
     }
 
+    private void btnReviewUpdate_Click(object sender, EventArgs e)
+    {
+      if (PerformDscQc(txtFileName.Text) == 0)
+      {
+        LoadTab(tabPageControlMain.Tab.Key);
+      }
+      else
+      {
+        MessageBox.Show("Please fix Dsc Editor errors and reload the update file.", "Dsc Editor errors were found", MessageBoxButtons.OK, MessageBoxIcon.Error);
+      }
+    }
 
-
+    private void btnCancelUpdate_Click(object sender, EventArgs e)
+    {
+      projectDataSet.DscUpdater.Clear();
+      txtFileName.Clear();
+    }
+    /*
+    [Table]
+    public class DscUpdater
+    {
+      [Column]
+      public string RNo;
+      [Column]
+      public int DscId;
+      [Column]
+      public double NewRoofArea;
+      [Column]
+      public double NewRoofDiscoIcArea;
+      [Column]
+      public double NewRoofDrywellIcArea;
+      [Column]
+      public double NewParkArea;
+      [Column]
+      public double NewParkDiscoIcArea;
+      [Column]
+      public double NewParkDrywellIcArea;
+    }*/
   }
+
 }
+
+
 
 namespace CSharp
 {
