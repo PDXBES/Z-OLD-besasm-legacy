@@ -31,9 +31,9 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmDSCEditorHistory));
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.projectDataSet = new DSCUpdater.projectDataSet();
+            this.projectDataSet = new DSCUpdater.ProjectDataSet();
             this.sESSIONBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.sESSIONTableAdapter = new DSCUpdater.projectDataSetTableAdapters.SESSIONTableAdapter();
+            this.sESSIONTableAdapter = new DSCUpdater.ProjectDataSetTableAdapters.SESSIONTableAdapter();
             this.bindingNavigator1 = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
@@ -70,9 +70,9 @@
             this.dataGridView1.Size = new System.Drawing.Size(399, 128);
             this.dataGridView1.TabIndex = 0;
             // 
-            // projectDataSet
+            // ProjectDataSet
             // 
-            this.projectDataSet.DataSetName = "projectDataSet";
+            this.projectDataSet.DataSetName = "ProjectDataSet";
             this.projectDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // sESSIONBindingSource
@@ -253,9 +253,9 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dataGridView1;
-        private projectDataSet projectDataSet;
+        private ProjectDataSet projectDataSet;
         private System.Windows.Forms.BindingSource sESSIONBindingSource;
-        private DSCUpdater.projectDataSetTableAdapters.SESSIONTableAdapter sESSIONTableAdapter;
+        private DSCUpdater.ProjectDataSetTableAdapters.SESSIONTableAdapter sESSIONTableAdapter;
         private System.Windows.Forms.DataGridViewTextBoxColumn editidDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn editdateDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn editedbyDataGridViewTextBoxColumn;

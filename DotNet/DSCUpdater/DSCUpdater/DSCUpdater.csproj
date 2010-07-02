@@ -65,6 +65,9 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Data.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Data.SqlServerCe, Version=3.5.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
     <Reference Include="System.Design" />
     <Reference Include="System.Runtime.Serialization.Formatters.Soap" />
@@ -149,15 +152,23 @@
     <Compile Include="frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="Program.cs" />
-    <Compile Include="projectDataSet.cs">
-      <DependentUpon>projectDataSet.xsd</DependentUpon>
-      <SubType>Component</SubType>
+    <Compile Include="LinqMaster.cs">
+      <DependentUpon>LinqMaster.dbml</DependentUpon>
     </Compile>
-    <Compile Include="projectDataSet.Designer.cs">
+    <Compile Include="LinqMaster.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>projectDataSet.xsd</DependentUpon>
+      <DependentUpon>LinqMaster.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="ProjectDataSet.cs">
+      <DependentUpon>ProjectDataSet.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ProjectDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProjectDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmDSCEditorHistory.resx">
@@ -205,16 +216,16 @@
     </Compile>
     <None Include="app.config" />
     <None Include="DSCUpdater_TemporaryKey.pfx" />
-    <None Include="projectDataSet.xsc">
-      <DependentUpon>projectDataSet.xsd</DependentUpon>
+    <None Include="ProjectDataSet.xsc">
+      <DependentUpon>ProjectDataSet.xsd</DependentUpon>
     </None>
-    <None Include="projectDataSet.xsd">
+    <None Include="ProjectDataSet.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>projectDataSet.Designer.cs</LastGenOutput>
+      <LastGenOutput>ProjectDataSet.Designer.cs</LastGenOutput>
     </None>
-    <None Include="projectDataSet.xss">
-      <DependentUpon>projectDataSet.xsd</DependentUpon>
+    <None Include="ProjectDataSet.xss">
+      <DependentUpon>ProjectDataSet.xsd</DependentUpon>
     </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -267,12 +278,20 @@
     <None Include="Calendar.png" />
     <None Include="DocumentRevert.png" />
     <None Include="AdjustableWrench.png" />
+    <None Include="LinqMaster.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>LinqMaster.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
     <None Include="WormGear.png" />
     <None Include="WrenchGears.jpg" />
     <None Include="Server.png" />
     <None Include="UploadFile.png" />
     <None Include="Spreadsheet.png" />
     <EmbeddedResource Include="DSCUpdaterSplash.png" />
+    <None Include="LinqMaster.dbml.layout">
+      <DependentUpon>LinqMaster.dbml</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="ADODB">
@@ -291,6 +310,14 @@
       <WrapperTool>tlbimp</WrapperTool>
       <Isolated>False</Isolated>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Template\test_db.mdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\DataSources\" />

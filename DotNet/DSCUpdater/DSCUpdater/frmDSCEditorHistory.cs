@@ -18,7 +18,7 @@ namespace DSCUpdater
 
         private void frmDSCEditorHistory_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'projectDataSet.SESSION' table. You can move, or remove it, as needed.
+            // TODO: This line of code loads data into the 'ProjectDataSet.SESSION' table. You can move, or remove it, as needed.
             this.sESSIONTableAdapter.Fill(this.projectDataSet.SESSION);
 
         }
