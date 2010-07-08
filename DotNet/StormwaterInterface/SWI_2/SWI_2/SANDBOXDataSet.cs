@@ -2,6 +2,10 @@
     
     
     public partial class SANDBOXDataSet {
+        partial class SWSP_MATERIAL_TYPEDataTable
+        {
+        }
+    
         partial class SWSP_SURVEY_PAGEDataTable
         {
         }
