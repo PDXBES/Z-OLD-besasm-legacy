@@ -1829,14 +1829,6 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 						new UnitCost((decimal)((double)CIPPPipeCost(_InsideDiameter, out outsideCIPPCostTable)), "ft"));
 					if (outsideCIPPCostTable)
 						_OutsideTableMessages.Add("CIPP Cost", "Outside CIPP cost table");
-					DirectConstructionCostItems.Add(string.Format("Lateral {0:F0} in inside diam", _InsideDiameter), 
-						new UnitCost((decimal)((double)(_InsideDiameter <= 24 ? 
-						_LateralLessThanEqualTo24InDiamCost : 
-						_LateralGreaterThan24InDiamCost)), "ea"));
-					DirectConstructionCostItems.Add(string.Format("TV cleaning {0:F0} in inside diam", _InsideDiameter), 
-						new UnitCost((decimal)((double)(_InsideDiameter <= 24 ? 
-						_TvCleanLessThanEqualTo24InDiamCost : 
-						_TvCleanGreaterThan24InDiamCost)), "ft"));
 					break;
 				case PipeMaterial.Pipeburst:
 					_OutsideTableMessages.Clear();

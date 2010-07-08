@@ -1,8 +1,7 @@
-﻿namespace DSCUpdater 
-{
-    
-    
-    public partial class projectDataSet 
+﻿//namespace DSCUpdater 
+namespace DSCUpdater
+{      
+    public partial class ProjectDataSet 
     {
 
     }
