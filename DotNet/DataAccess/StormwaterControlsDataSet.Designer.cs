@@ -51,6 +51,14 @@ namespace SystemsAnalysis.DataAccess {
         
         private TableE19DataTable tableTableE19;
         
+        private TableE03aDataTable tableTableE03a;
+        
+        private TableE03bDataTable tableTableE03b;
+        
+        private TableE22DataTable tableTableE22;
+        
+        private TableE21DataTable tableTableE21;
+        
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -115,6 +123,18 @@ namespace SystemsAnalysis.DataAccess {
                 }
                 if ((ds.Tables["TableE19"] != null)) {
                     base.Tables.Add(new TableE19DataTable(ds.Tables["TableE19"]));
+                }
+                if ((ds.Tables["TableE03a"] != null)) {
+                    base.Tables.Add(new TableE03aDataTable(ds.Tables["TableE03a"]));
+                }
+                if ((ds.Tables["TableE03b"] != null)) {
+                    base.Tables.Add(new TableE03bDataTable(ds.Tables["TableE03b"]));
+                }
+                if ((ds.Tables["TableE22"] != null)) {
+                    base.Tables.Add(new TableE22DataTable(ds.Tables["TableE22"]));
+                }
+                if ((ds.Tables["TableE21"] != null)) {
+                    base.Tables.Add(new TableE21DataTable(ds.Tables["TableE21"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -252,6 +272,42 @@ namespace SystemsAnalysis.DataAccess {
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public TableE03aDataTable TableE03a {
+            get {
+                return this.tableTableE03a;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public TableE03bDataTable TableE03b {
+            get {
+                return this.tableTableE03b;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public TableE22DataTable TableE22 {
+            get {
+                return this.tableTableE22;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public TableE21DataTable TableE21 {
+            get {
+                return this.tableTableE21;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.BrowsableAttribute(true)]
         [global::System.ComponentModel.DesignerSerializationVisibilityAttribute(global::System.ComponentModel.DesignerSerializationVisibility.Visible)]
         public override global::System.Data.SchemaSerializationMode SchemaSerializationMode {
@@ -348,6 +404,18 @@ namespace SystemsAnalysis.DataAccess {
                 }
                 if ((ds.Tables["TableE19"] != null)) {
                     base.Tables.Add(new TableE19DataTable(ds.Tables["TableE19"]));
+                }
+                if ((ds.Tables["TableE03a"] != null)) {
+                    base.Tables.Add(new TableE03aDataTable(ds.Tables["TableE03a"]));
+                }
+                if ((ds.Tables["TableE03b"] != null)) {
+                    base.Tables.Add(new TableE03bDataTable(ds.Tables["TableE03b"]));
+                }
+                if ((ds.Tables["TableE22"] != null)) {
+                    base.Tables.Add(new TableE22DataTable(ds.Tables["TableE22"]));
+                }
+                if ((ds.Tables["TableE21"] != null)) {
+                    base.Tables.Add(new TableE21DataTable(ds.Tables["TableE21"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -457,6 +525,30 @@ namespace SystemsAnalysis.DataAccess {
                     this.tableTableE19.InitVars();
                 }
             }
+            this.tableTableE03a = ((TableE03aDataTable)(base.Tables["TableE03a"]));
+            if ((initTable == true)) {
+                if ((this.tableTableE03a != null)) {
+                    this.tableTableE03a.InitVars();
+                }
+            }
+            this.tableTableE03b = ((TableE03bDataTable)(base.Tables["TableE03b"]));
+            if ((initTable == true)) {
+                if ((this.tableTableE03b != null)) {
+                    this.tableTableE03b.InitVars();
+                }
+            }
+            this.tableTableE22 = ((TableE22DataTable)(base.Tables["TableE22"]));
+            if ((initTable == true)) {
+                if ((this.tableTableE22 != null)) {
+                    this.tableTableE22.InitVars();
+                }
+            }
+            this.tableTableE21 = ((TableE21DataTable)(base.Tables["TableE21"]));
+            if ((initTable == true)) {
+                if ((this.tableTableE21 != null)) {
+                    this.tableTableE21.InitVars();
+                }
+            }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -492,6 +584,14 @@ namespace SystemsAnalysis.DataAccess {
             base.Tables.Add(this.tableTableE18);
             this.tableTableE19 = new TableE19DataTable();
             base.Tables.Add(this.tableTableE19);
+            this.tableTableE03a = new TableE03aDataTable();
+            base.Tables.Add(this.tableTableE03a);
+            this.tableTableE03b = new TableE03bDataTable();
+            base.Tables.Add(this.tableTableE03b);
+            this.tableTableE22 = new TableE22DataTable();
+            base.Tables.Add(this.tableTableE22);
+            this.tableTableE21 = new TableE21DataTable();
+            base.Tables.Add(this.tableTableE21);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -556,6 +656,26 @@ namespace SystemsAnalysis.DataAccess {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private bool ShouldSerializeTableE19() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private bool ShouldSerializeTableE03a() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private bool ShouldSerializeTableE03b() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private bool ShouldSerializeTableE22() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private bool ShouldSerializeTableE21() {
             return false;
         }
         
@@ -637,6 +757,14 @@ namespace SystemsAnalysis.DataAccess {
         public delegate void TableE18RowChangeEventHandler(object sender, TableE18RowChangeEvent e);
         
         public delegate void TableE19RowChangeEventHandler(object sender, TableE19RowChangeEvent e);
+        
+        public delegate void TableE03aRowChangeEventHandler(object sender, TableE03aRowChangeEvent e);
+        
+        public delegate void TableE03bRowChangeEventHandler(object sender, TableE03bRowChangeEvent e);
+        
+        public delegate void TableE22RowChangeEventHandler(object sender, TableE22RowChangeEvent e);
+        
+        public delegate void TableE21RowChangeEventHandler(object sender, TableE21RowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -7778,6 +7906,1171 @@ namespace SystemsAnalysis.DataAccess {
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
                 attribute2.FixedValue = "TableE19DataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class TableE03aDataTable : global::System.Data.TypedTableBase<TableE03aRow> {
+            
+            private global::System.Data.DataColumn columnnodeName;
+            
+            private global::System.Data.DataColumn columngroundElevFt;
+            
+            private global::System.Data.DataColumn columncrownElevFt;
+            
+            private global::System.Data.DataColumn columninvertElevFt;
+            
+            private global::System.Data.DataColumn columnqInstCfs;
+            
+            private global::System.Data.DataColumn columninitialDepthFt;
+            
+            private global::System.Data.DataColumn columninterfaceFlowPct;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public TableE03aDataTable() {
+                this.TableName = "TableE03a";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal TableE03aDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected TableE03aDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn nodeNameColumn {
+                get {
+                    return this.columnnodeName;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn groundElevFtColumn {
+                get {
+                    return this.columngroundElevFt;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn crownElevFtColumn {
+                get {
+                    return this.columncrownElevFt;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn invertElevFtColumn {
+                get {
+                    return this.columninvertElevFt;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn qInstCfsColumn {
+                get {
+                    return this.columnqInstCfs;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn initialDepthFtColumn {
+                get {
+                    return this.columninitialDepthFt;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn interfaceFlowPctColumn {
+                get {
+                    return this.columninterfaceFlowPct;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public TableE03aRow this[int index] {
+                get {
+                    return ((TableE03aRow)(this.Rows[index]));
+                }
+            }
+            
+            public event TableE03aRowChangeEventHandler TableE03aRowChanging;
+            
+            public event TableE03aRowChangeEventHandler TableE03aRowChanged;
+            
+            public event TableE03aRowChangeEventHandler TableE03aRowDeleting;
+            
+            public event TableE03aRowChangeEventHandler TableE03aRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void AddTableE03aRow(TableE03aRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public TableE03aRow AddTableE03aRow(string nodeName, double groundElevFt, double crownElevFt, double invertElevFt, double qInstCfs, double initialDepthFt, double interfaceFlowPct) {
+                TableE03aRow rowTableE03aRow = ((TableE03aRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        nodeName,
+                        groundElevFt,
+                        crownElevFt,
+                        invertElevFt,
+                        qInstCfs,
+                        initialDepthFt,
+                        interfaceFlowPct};
+                rowTableE03aRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowTableE03aRow);
+                return rowTableE03aRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public TableE03aRow FindBynodeName(string nodeName) {
+                return ((TableE03aRow)(this.Rows.Find(new object[] {
+                            nodeName})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public override global::System.Data.DataTable Clone() {
+                TableE03aDataTable cln = ((TableE03aDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new TableE03aDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal void InitVars() {
+                this.columnnodeName = base.Columns["nodeName"];
+                this.columngroundElevFt = base.Columns["groundElevFt"];
+                this.columncrownElevFt = base.Columns["crownElevFt"];
+                this.columninvertElevFt = base.Columns["invertElevFt"];
+                this.columnqInstCfs = base.Columns["qInstCfs"];
+                this.columninitialDepthFt = base.Columns["initialDepthFt"];
+                this.columninterfaceFlowPct = base.Columns["interfaceFlowPct"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            private void InitClass() {
+                this.columnnodeName = new global::System.Data.DataColumn("nodeName", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnnodeName);
+                this.columngroundElevFt = new global::System.Data.DataColumn("groundElevFt", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columngroundElevFt);
+                this.columncrownElevFt = new global::System.Data.DataColumn("crownElevFt", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncrownElevFt);
+                this.columninvertElevFt = new global::System.Data.DataColumn("invertElevFt", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columninvertElevFt);
+                this.columnqInstCfs = new global::System.Data.DataColumn("qInstCfs", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnqInstCfs);
+                this.columninitialDepthFt = new global::System.Data.DataColumn("initialDepthFt", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columninitialDepthFt);
+                this.columninterfaceFlowPct = new global::System.Data.DataColumn("interfaceFlowPct", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columninterfaceFlowPct);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnnodeName}, true));
+                this.columnnodeName.AllowDBNull = false;
+                this.columnnodeName.Unique = true;
+                this.columnnodeName.MaxLength = 50;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public TableE03aRow NewTableE03aRow() {
+                return ((TableE03aRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new TableE03aRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Type GetRowType() {
+                return typeof(TableE03aRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.TableE03aRowChanged != null)) {
+                    this.TableE03aRowChanged(this, new TableE03aRowChangeEvent(((TableE03aRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.TableE03aRowChanging != null)) {
+                    this.TableE03aRowChanging(this, new TableE03aRowChangeEvent(((TableE03aRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.TableE03aRowDeleted != null)) {
+                    this.TableE03aRowDeleted(this, new TableE03aRowChangeEvent(((TableE03aRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.TableE03aRowDeleting != null)) {
+                    this.TableE03aRowDeleting(this, new TableE03aRowChangeEvent(((TableE03aRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void RemoveTableE03aRow(TableE03aRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                StormwaterControlsDataSet ds = new StormwaterControlsDataSet();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "TableE03aDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class TableE03bDataTable : global::System.Data.TypedTableBase<TableE03bRow> {
+            
+            private global::System.Data.DataColumn columnnodeName;
+            
+            private global::System.Data.DataColumn columnxCoordFt;
+            
+            private global::System.Data.DataColumn columnyCoordFt;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public TableE03bDataTable() {
+                this.TableName = "TableE03b";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal TableE03bDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected TableE03bDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn nodeNameColumn {
+                get {
+                    return this.columnnodeName;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn xCoordFtColumn {
+                get {
+                    return this.columnxCoordFt;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn yCoordFtColumn {
+                get {
+                    return this.columnyCoordFt;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public TableE03bRow this[int index] {
+                get {
+                    return ((TableE03bRow)(this.Rows[index]));
+                }
+            }
+            
+            public event TableE03bRowChangeEventHandler TableE03bRowChanging;
+            
+            public event TableE03bRowChangeEventHandler TableE03bRowChanged;
+            
+            public event TableE03bRowChangeEventHandler TableE03bRowDeleting;
+            
+            public event TableE03bRowChangeEventHandler TableE03bRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void AddTableE03bRow(TableE03bRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public TableE03bRow AddTableE03bRow(string nodeName, double xCoordFt, double yCoordFt) {
+                TableE03bRow rowTableE03bRow = ((TableE03bRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        nodeName,
+                        xCoordFt,
+                        yCoordFt};
+                rowTableE03bRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowTableE03bRow);
+                return rowTableE03bRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public override global::System.Data.DataTable Clone() {
+                TableE03bDataTable cln = ((TableE03bDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new TableE03bDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal void InitVars() {
+                this.columnnodeName = base.Columns["nodeName"];
+                this.columnxCoordFt = base.Columns["xCoordFt"];
+                this.columnyCoordFt = base.Columns["yCoordFt"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            private void InitClass() {
+                this.columnnodeName = new global::System.Data.DataColumn("nodeName", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnnodeName);
+                this.columnxCoordFt = new global::System.Data.DataColumn("xCoordFt", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnxCoordFt);
+                this.columnyCoordFt = new global::System.Data.DataColumn("yCoordFt", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnyCoordFt);
+                this.columnnodeName.MaxLength = 50;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public TableE03bRow NewTableE03bRow() {
+                return ((TableE03bRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new TableE03bRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Type GetRowType() {
+                return typeof(TableE03bRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.TableE03bRowChanged != null)) {
+                    this.TableE03bRowChanged(this, new TableE03bRowChangeEvent(((TableE03bRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.TableE03bRowChanging != null)) {
+                    this.TableE03bRowChanging(this, new TableE03bRowChangeEvent(((TableE03bRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.TableE03bRowDeleted != null)) {
+                    this.TableE03bRowDeleted(this, new TableE03bRowChangeEvent(((TableE03bRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.TableE03bRowDeleting != null)) {
+                    this.TableE03bRowDeleting(this, new TableE03bRowChangeEvent(((TableE03bRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void RemoveTableE03bRow(TableE03bRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                StormwaterControlsDataSet ds = new StormwaterControlsDataSet();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "TableE03bDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class TableE22DataTable : global::System.Data.TypedTableBase<TableE22Row> {
+            
+            private global::System.Data.DataColumn columnoverallErrorPct;
+            
+            private global::System.Data.DataColumn columnworstNodeErrorPct;
+            
+            private global::System.Data.DataColumn columnworstNodalErrorNode;
+            
+            private global::System.Data.DataColumn columntotalInflowLossPct;
+            
+            private global::System.Data.DataColumn columnoveralllConinuityError;
+            
+            private global::System.Data.DataColumn columnefficiency;
+            
+            private global::System.Data.DataColumn columnefficiencyPct;
+            
+            private global::System.Data.DataColumn columnmostNodeNonConvergences;
+            
+            private global::System.Data.DataColumn columntotalNonConvergences;
+            
+            private global::System.Data.DataColumn columntotalNonConvergedNodes;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public TableE22DataTable() {
+                this.TableName = "TableE22";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal TableE22DataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected TableE22DataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn overallErrorPctColumn {
+                get {
+                    return this.columnoverallErrorPct;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn worstNodeErrorPctColumn {
+                get {
+                    return this.columnworstNodeErrorPct;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn worstNodalErrorNodeColumn {
+                get {
+                    return this.columnworstNodalErrorNode;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn totalInflowLossPctColumn {
+                get {
+                    return this.columntotalInflowLossPct;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn overalllConinuityErrorColumn {
+                get {
+                    return this.columnoveralllConinuityError;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn efficiencyColumn {
+                get {
+                    return this.columnefficiency;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn efficiencyPctColumn {
+                get {
+                    return this.columnefficiencyPct;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn mostNodeNonConvergencesColumn {
+                get {
+                    return this.columnmostNodeNonConvergences;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn totalNonConvergencesColumn {
+                get {
+                    return this.columntotalNonConvergences;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn totalNonConvergedNodesColumn {
+                get {
+                    return this.columntotalNonConvergedNodes;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public TableE22Row this[int index] {
+                get {
+                    return ((TableE22Row)(this.Rows[index]));
+                }
+            }
+            
+            public event TableE22RowChangeEventHandler TableE22RowChanging;
+            
+            public event TableE22RowChangeEventHandler TableE22RowChanged;
+            
+            public event TableE22RowChangeEventHandler TableE22RowDeleting;
+            
+            public event TableE22RowChangeEventHandler TableE22RowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void AddTableE22Row(TableE22Row row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public TableE22Row AddTableE22Row(double overallErrorPct, double worstNodeErrorPct, string worstNodalErrorNode, double totalInflowLossPct, string overalllConinuityError, string efficiency, double efficiencyPct, int mostNodeNonConvergences, int totalNonConvergences, int totalNonConvergedNodes) {
+                TableE22Row rowTableE22Row = ((TableE22Row)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        overallErrorPct,
+                        worstNodeErrorPct,
+                        worstNodalErrorNode,
+                        totalInflowLossPct,
+                        overalllConinuityError,
+                        efficiency,
+                        efficiencyPct,
+                        mostNodeNonConvergences,
+                        totalNonConvergences,
+                        totalNonConvergedNodes};
+                rowTableE22Row.ItemArray = columnValuesArray;
+                this.Rows.Add(rowTableE22Row);
+                return rowTableE22Row;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public override global::System.Data.DataTable Clone() {
+                TableE22DataTable cln = ((TableE22DataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new TableE22DataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal void InitVars() {
+                this.columnoverallErrorPct = base.Columns["overallErrorPct"];
+                this.columnworstNodeErrorPct = base.Columns["worstNodeErrorPct"];
+                this.columnworstNodalErrorNode = base.Columns["worstNodalErrorNode"];
+                this.columntotalInflowLossPct = base.Columns["totalInflowLossPct"];
+                this.columnoveralllConinuityError = base.Columns["overalllConinuityError"];
+                this.columnefficiency = base.Columns["efficiency"];
+                this.columnefficiencyPct = base.Columns["efficiencyPct"];
+                this.columnmostNodeNonConvergences = base.Columns["mostNodeNonConvergences"];
+                this.columntotalNonConvergences = base.Columns["totalNonConvergences"];
+                this.columntotalNonConvergedNodes = base.Columns["totalNonConvergedNodes"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            private void InitClass() {
+                this.columnoverallErrorPct = new global::System.Data.DataColumn("overallErrorPct", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnoverallErrorPct);
+                this.columnworstNodeErrorPct = new global::System.Data.DataColumn("worstNodeErrorPct", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnworstNodeErrorPct);
+                this.columnworstNodalErrorNode = new global::System.Data.DataColumn("worstNodalErrorNode", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnworstNodalErrorNode);
+                this.columntotalInflowLossPct = new global::System.Data.DataColumn("totalInflowLossPct", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columntotalInflowLossPct);
+                this.columnoveralllConinuityError = new global::System.Data.DataColumn("overalllConinuityError", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnoveralllConinuityError);
+                this.columnefficiency = new global::System.Data.DataColumn("efficiency", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnefficiency);
+                this.columnefficiencyPct = new global::System.Data.DataColumn("efficiencyPct", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnefficiencyPct);
+                this.columnmostNodeNonConvergences = new global::System.Data.DataColumn("mostNodeNonConvergences", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnmostNodeNonConvergences);
+                this.columntotalNonConvergences = new global::System.Data.DataColumn("totalNonConvergences", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columntotalNonConvergences);
+                this.columntotalNonConvergedNodes = new global::System.Data.DataColumn("totalNonConvergedNodes", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columntotalNonConvergedNodes);
+                this.columnworstNodalErrorNode.MaxLength = 50;
+                this.columnoveralllConinuityError.MaxLength = 50;
+                this.columnefficiency.MaxLength = 50;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public TableE22Row NewTableE22Row() {
+                return ((TableE22Row)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new TableE22Row(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Type GetRowType() {
+                return typeof(TableE22Row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.TableE22RowChanged != null)) {
+                    this.TableE22RowChanged(this, new TableE22RowChangeEvent(((TableE22Row)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.TableE22RowChanging != null)) {
+                    this.TableE22RowChanging(this, new TableE22RowChangeEvent(((TableE22Row)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.TableE22RowDeleted != null)) {
+                    this.TableE22RowDeleted(this, new TableE22RowChangeEvent(((TableE22Row)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.TableE22RowDeleting != null)) {
+                    this.TableE22RowDeleting(this, new TableE22RowChangeEvent(((TableE22Row)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void RemoveTableE22Row(TableE22Row row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                StormwaterControlsDataSet ds = new StormwaterControlsDataSet();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "TableE22DataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class TableE21DataTable : global::System.Data.TypedTableBase<TableE21Row> {
+            
+            private global::System.Data.DataColumn columnNodeName;
+            
+            private global::System.Data.DataColumn columnInflowVolumeCuFt;
+            
+            private global::System.Data.DataColumn columnAverageInflowCfs;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public TableE21DataTable() {
+                this.TableName = "TableE21";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal TableE21DataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected TableE21DataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn NodeNameColumn {
+                get {
+                    return this.columnNodeName;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn InflowVolumeCuFtColumn {
+                get {
+                    return this.columnInflowVolumeCuFt;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn AverageInflowCfsColumn {
+                get {
+                    return this.columnAverageInflowCfs;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public TableE21Row this[int index] {
+                get {
+                    return ((TableE21Row)(this.Rows[index]));
+                }
+            }
+            
+            public event TableE21RowChangeEventHandler TableE21RowChanging;
+            
+            public event TableE21RowChangeEventHandler TableE21RowChanged;
+            
+            public event TableE21RowChangeEventHandler TableE21RowDeleting;
+            
+            public event TableE21RowChangeEventHandler TableE21RowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void AddTableE21Row(TableE21Row row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public TableE21Row AddTableE21Row(string NodeName, double InflowVolumeCuFt, double AverageInflowCfs) {
+                TableE21Row rowTableE21Row = ((TableE21Row)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        NodeName,
+                        InflowVolumeCuFt,
+                        AverageInflowCfs};
+                rowTableE21Row.ItemArray = columnValuesArray;
+                this.Rows.Add(rowTableE21Row);
+                return rowTableE21Row;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public TableE21Row FindByNodeName(string NodeName) {
+                return ((TableE21Row)(this.Rows.Find(new object[] {
+                            NodeName})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public override global::System.Data.DataTable Clone() {
+                TableE21DataTable cln = ((TableE21DataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new TableE21DataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal void InitVars() {
+                this.columnNodeName = base.Columns["NodeName"];
+                this.columnInflowVolumeCuFt = base.Columns["InflowVolumeCuFt"];
+                this.columnAverageInflowCfs = base.Columns["AverageInflowCfs"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            private void InitClass() {
+                this.columnNodeName = new global::System.Data.DataColumn("NodeName", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNodeName);
+                this.columnInflowVolumeCuFt = new global::System.Data.DataColumn("InflowVolumeCuFt", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnInflowVolumeCuFt);
+                this.columnAverageInflowCfs = new global::System.Data.DataColumn("AverageInflowCfs", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnAverageInflowCfs);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnNodeName}, true));
+                this.columnNodeName.AllowDBNull = false;
+                this.columnNodeName.Unique = true;
+                this.columnNodeName.MaxLength = 50;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public TableE21Row NewTableE21Row() {
+                return ((TableE21Row)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new TableE21Row(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Type GetRowType() {
+                return typeof(TableE21Row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.TableE21RowChanged != null)) {
+                    this.TableE21RowChanged(this, new TableE21RowChangeEvent(((TableE21Row)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.TableE21RowChanging != null)) {
+                    this.TableE21RowChanging(this, new TableE21RowChangeEvent(((TableE21Row)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.TableE21RowDeleted != null)) {
+                    this.TableE21RowDeleted(this, new TableE21RowChangeEvent(((TableE21Row)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.TableE21RowDeleting != null)) {
+                    this.TableE21RowDeleting(this, new TableE21RowChangeEvent(((TableE21Row)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void RemoveTableE21Row(TableE21Row row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                StormwaterControlsDataSet ds = new StormwaterControlsDataSet();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "TableE21DataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -15465,6 +16758,611 @@ namespace SystemsAnalysis.DataAccess {
         }
         
         /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public partial class TableE03aRow : global::System.Data.DataRow {
+            
+            private TableE03aDataTable tableTableE03a;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal TableE03aRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableTableE03a = ((TableE03aDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string nodeName {
+                get {
+                    return ((string)(this[this.tableTableE03a.nodeNameColumn]));
+                }
+                set {
+                    this[this.tableTableE03a.nodeNameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public double groundElevFt {
+                get {
+                    try {
+                        return ((double)(this[this.tableTableE03a.groundElevFtColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'groundElevFt\' in table \'TableE03a\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableTableE03a.groundElevFtColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public double crownElevFt {
+                get {
+                    try {
+                        return ((double)(this[this.tableTableE03a.crownElevFtColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'crownElevFt\' in table \'TableE03a\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableTableE03a.crownElevFtColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public double invertElevFt {
+                get {
+                    try {
+                        return ((double)(this[this.tableTableE03a.invertElevFtColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'invertElevFt\' in table \'TableE03a\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableTableE03a.invertElevFtColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public double qInstCfs {
+                get {
+                    try {
+                        return ((double)(this[this.tableTableE03a.qInstCfsColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'qInstCfs\' in table \'TableE03a\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableTableE03a.qInstCfsColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public double initialDepthFt {
+                get {
+                    try {
+                        return ((double)(this[this.tableTableE03a.initialDepthFtColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'initialDepthFt\' in table \'TableE03a\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableTableE03a.initialDepthFtColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public double interfaceFlowPct {
+                get {
+                    try {
+                        return ((double)(this[this.tableTableE03a.interfaceFlowPctColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'interfaceFlowPct\' in table \'TableE03a\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableTableE03a.interfaceFlowPctColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsgroundElevFtNull() {
+                return this.IsNull(this.tableTableE03a.groundElevFtColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetgroundElevFtNull() {
+                this[this.tableTableE03a.groundElevFtColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IscrownElevFtNull() {
+                return this.IsNull(this.tableTableE03a.crownElevFtColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetcrownElevFtNull() {
+                this[this.tableTableE03a.crownElevFtColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsinvertElevFtNull() {
+                return this.IsNull(this.tableTableE03a.invertElevFtColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetinvertElevFtNull() {
+                this[this.tableTableE03a.invertElevFtColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsqInstCfsNull() {
+                return this.IsNull(this.tableTableE03a.qInstCfsColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetqInstCfsNull() {
+                this[this.tableTableE03a.qInstCfsColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsinitialDepthFtNull() {
+                return this.IsNull(this.tableTableE03a.initialDepthFtColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetinitialDepthFtNull() {
+                this[this.tableTableE03a.initialDepthFtColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsinterfaceFlowPctNull() {
+                return this.IsNull(this.tableTableE03a.interfaceFlowPctColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetinterfaceFlowPctNull() {
+                this[this.tableTableE03a.interfaceFlowPctColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public partial class TableE03bRow : global::System.Data.DataRow {
+            
+            private TableE03bDataTable tableTableE03b;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal TableE03bRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableTableE03b = ((TableE03bDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string nodeName {
+                get {
+                    try {
+                        return ((string)(this[this.tableTableE03b.nodeNameColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'nodeName\' in table \'TableE03b\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableTableE03b.nodeNameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public double xCoordFt {
+                get {
+                    try {
+                        return ((double)(this[this.tableTableE03b.xCoordFtColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'xCoordFt\' in table \'TableE03b\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableTableE03b.xCoordFtColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public double yCoordFt {
+                get {
+                    try {
+                        return ((double)(this[this.tableTableE03b.yCoordFtColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'yCoordFt\' in table \'TableE03b\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableTableE03b.yCoordFtColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsnodeNameNull() {
+                return this.IsNull(this.tableTableE03b.nodeNameColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetnodeNameNull() {
+                this[this.tableTableE03b.nodeNameColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsxCoordFtNull() {
+                return this.IsNull(this.tableTableE03b.xCoordFtColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetxCoordFtNull() {
+                this[this.tableTableE03b.xCoordFtColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsyCoordFtNull() {
+                return this.IsNull(this.tableTableE03b.yCoordFtColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetyCoordFtNull() {
+                this[this.tableTableE03b.yCoordFtColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public partial class TableE22Row : global::System.Data.DataRow {
+            
+            private TableE22DataTable tableTableE22;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal TableE22Row(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableTableE22 = ((TableE22DataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public double overallErrorPct {
+                get {
+                    try {
+                        return ((double)(this[this.tableTableE22.overallErrorPctColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'overallErrorPct\' in table \'TableE22\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableTableE22.overallErrorPctColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public double worstNodeErrorPct {
+                get {
+                    try {
+                        return ((double)(this[this.tableTableE22.worstNodeErrorPctColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'worstNodeErrorPct\' in table \'TableE22\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableTableE22.worstNodeErrorPctColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string worstNodalErrorNode {
+                get {
+                    try {
+                        return ((string)(this[this.tableTableE22.worstNodalErrorNodeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'worstNodalErrorNode\' in table \'TableE22\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableTableE22.worstNodalErrorNodeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public double totalInflowLossPct {
+                get {
+                    try {
+                        return ((double)(this[this.tableTableE22.totalInflowLossPctColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'totalInflowLossPct\' in table \'TableE22\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableTableE22.totalInflowLossPctColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string overalllConinuityError {
+                get {
+                    try {
+                        return ((string)(this[this.tableTableE22.overalllConinuityErrorColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'overalllConinuityError\' in table \'TableE22\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableTableE22.overalllConinuityErrorColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string efficiency {
+                get {
+                    try {
+                        return ((string)(this[this.tableTableE22.efficiencyColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'efficiency\' in table \'TableE22\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableTableE22.efficiencyColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public double efficiencyPct {
+                get {
+                    try {
+                        return ((double)(this[this.tableTableE22.efficiencyPctColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'efficiencyPct\' in table \'TableE22\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableTableE22.efficiencyPctColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int mostNodeNonConvergences {
+                get {
+                    try {
+                        return ((int)(this[this.tableTableE22.mostNodeNonConvergencesColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'mostNodeNonConvergences\' in table \'TableE22\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableTableE22.mostNodeNonConvergencesColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int totalNonConvergences {
+                get {
+                    try {
+                        return ((int)(this[this.tableTableE22.totalNonConvergencesColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'totalNonConvergences\' in table \'TableE22\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableTableE22.totalNonConvergencesColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int totalNonConvergedNodes {
+                get {
+                    try {
+                        return ((int)(this[this.tableTableE22.totalNonConvergedNodesColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'totalNonConvergedNodes\' in table \'TableE22\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableTableE22.totalNonConvergedNodesColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsoverallErrorPctNull() {
+                return this.IsNull(this.tableTableE22.overallErrorPctColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetoverallErrorPctNull() {
+                this[this.tableTableE22.overallErrorPctColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsworstNodeErrorPctNull() {
+                return this.IsNull(this.tableTableE22.worstNodeErrorPctColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetworstNodeErrorPctNull() {
+                this[this.tableTableE22.worstNodeErrorPctColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsworstNodalErrorNodeNull() {
+                return this.IsNull(this.tableTableE22.worstNodalErrorNodeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetworstNodalErrorNodeNull() {
+                this[this.tableTableE22.worstNodalErrorNodeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IstotalInflowLossPctNull() {
+                return this.IsNull(this.tableTableE22.totalInflowLossPctColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SettotalInflowLossPctNull() {
+                this[this.tableTableE22.totalInflowLossPctColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsoveralllConinuityErrorNull() {
+                return this.IsNull(this.tableTableE22.overalllConinuityErrorColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetoveralllConinuityErrorNull() {
+                this[this.tableTableE22.overalllConinuityErrorColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsefficiencyNull() {
+                return this.IsNull(this.tableTableE22.efficiencyColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetefficiencyNull() {
+                this[this.tableTableE22.efficiencyColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsefficiencyPctNull() {
+                return this.IsNull(this.tableTableE22.efficiencyPctColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetefficiencyPctNull() {
+                this[this.tableTableE22.efficiencyPctColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsmostNodeNonConvergencesNull() {
+                return this.IsNull(this.tableTableE22.mostNodeNonConvergencesColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetmostNodeNonConvergencesNull() {
+                this[this.tableTableE22.mostNodeNonConvergencesColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IstotalNonConvergencesNull() {
+                return this.IsNull(this.tableTableE22.totalNonConvergencesColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SettotalNonConvergencesNull() {
+                this[this.tableTableE22.totalNonConvergencesColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IstotalNonConvergedNodesNull() {
+                return this.IsNull(this.tableTableE22.totalNonConvergedNodesColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SettotalNonConvergedNodesNull() {
+                this[this.tableTableE22.totalNonConvergedNodesColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public partial class TableE21Row : global::System.Data.DataRow {
+            
+            private TableE21DataTable tableTableE21;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal TableE21Row(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableTableE21 = ((TableE21DataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string NodeName {
+                get {
+                    return ((string)(this[this.tableTableE21.NodeNameColumn]));
+                }
+                set {
+                    this[this.tableTableE21.NodeNameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public double InflowVolumeCuFt {
+                get {
+                    try {
+                        return ((double)(this[this.tableTableE21.InflowVolumeCuFtColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'InflowVolumeCuFt\' in table \'TableE21\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableTableE21.InflowVolumeCuFtColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public double AverageInflowCfs {
+                get {
+                    try {
+                        return ((double)(this[this.tableTableE21.AverageInflowCfsColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'AverageInflowCfs\' in table \'TableE21\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableTableE21.AverageInflowCfsColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsInflowVolumeCuFtNull() {
+                return this.IsNull(this.tableTableE21.InflowVolumeCuFtColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetInflowVolumeCuFtNull() {
+                this[this.tableTableE21.InflowVolumeCuFtColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsAverageInflowCfsNull() {
+                return this.IsNull(this.tableTableE21.AverageInflowCfsColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetAverageInflowCfsNull() {
+                this[this.tableTableE21.AverageInflowCfsColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
@@ -15854,6 +17752,130 @@ namespace SystemsAnalysis.DataAccess {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public TableE19Row Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public class TableE03aRowChangeEvent : global::System.EventArgs {
+            
+            private TableE03aRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public TableE03aRowChangeEvent(TableE03aRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public TableE03aRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public class TableE03bRowChangeEvent : global::System.EventArgs {
+            
+            private TableE03bRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public TableE03bRowChangeEvent(TableE03bRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public TableE03bRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public class TableE22RowChangeEvent : global::System.EventArgs {
+            
+            private TableE22Row eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public TableE22RowChangeEvent(TableE22Row row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public TableE22Row Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public class TableE21RowChangeEvent : global::System.EventArgs {
+            
+            private TableE21Row eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public TableE21RowChangeEvent(TableE21Row row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public TableE21Row Row {
                 get {
                     return this.eventRow;
                 }
@@ -27648,6 +29670,1347 @@ namespace SystemsAnalysis.DataAccess.StormwaterControlsDataSetTableAdapters {
     }
     
     /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class TableE03aTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.OleDb.OleDbDataAdapter _adapter;
+        
+        private global::System.Data.OleDb.OleDbConnection _connection;
+        
+        private global::System.Data.OleDb.OleDbTransaction _transaction;
+        
+        private global::System.Data.OleDb.OleDbCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public TableE03aTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected internal global::System.Data.OleDb.OleDbDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.OleDb.OleDbConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.OleDb.OleDbCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.OleDb.OleDbTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected global::System.Data.OleDb.OleDbCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.OleDb.OleDbDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "TableE03a";
+            tableMapping.ColumnMappings.Add("nodeName", "nodeName");
+            tableMapping.ColumnMappings.Add("groundElevFt", "groundElevFt");
+            tableMapping.ColumnMappings.Add("crownElevFt", "crownElevFt");
+            tableMapping.ColumnMappings.Add("invertElevFt", "invertElevFt");
+            tableMapping.ColumnMappings.Add("qInstCfs", "qInstCfs");
+            tableMapping.ColumnMappings.Add("initialDepthFt", "initialDepthFt");
+            tableMapping.ColumnMappings.Add("interfaceFlowPct", "interfaceFlowPct");
+            this._adapter.TableMappings.Add(tableMapping);
+            this._adapter.DeleteCommand = new global::System.Data.OleDb.OleDbCommand();
+            this._adapter.DeleteCommand.Connection = this.Connection;
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM `TableE03a` WHERE ((`nodeName` = ?) AND ((? = 1 AND `groundElevFt` IS NULL) OR (`groundElevFt` = ?)) AND ((? = 1 AND `crownElevFt` IS NULL) OR (`crownElevFt` = ?)) AND ((? = 1 AND `invertElevFt` IS NULL) OR (`invertElevFt` = ?)) AND ((? = 1 AND `qInstCfs` IS NULL) OR (`qInstCfs` = ?)) AND ((? = 1 AND `initialDepthFt` IS NULL) OR (`initialDepthFt` = ?)) AND ((? = 1 AND `interfaceFlowPct` IS NULL) OR (`interfaceFlowPct` = ?)))";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_nodeName", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "nodeName", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_groundElevFt", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "groundElevFt", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_groundElevFt", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "groundElevFt", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_crownElevFt", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "crownElevFt", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_crownElevFt", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "crownElevFt", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_invertElevFt", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "invertElevFt", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_invertElevFt", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "invertElevFt", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_qInstCfs", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "qInstCfs", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_qInstCfs", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "qInstCfs", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_initialDepthFt", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "initialDepthFt", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_initialDepthFt", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "initialDepthFt", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_interfaceFlowPct", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "interfaceFlowPct", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_interfaceFlowPct", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "interfaceFlowPct", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.InsertCommand = new global::System.Data.OleDb.OleDbCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = "INSERT INTO `TableE03a` (`nodeName`, `groundElevFt`, `crownElevFt`, `invertElevFt" +
+                "`, `qInstCfs`, `initialDepthFt`, `interfaceFlowPct`) VALUES (?, ?, ?, ?, ?, ?, ?" +
+                ")";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("nodeName", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "nodeName", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("groundElevFt", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "groundElevFt", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("crownElevFt", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "crownElevFt", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("invertElevFt", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "invertElevFt", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("qInstCfs", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "qInstCfs", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("initialDepthFt", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "initialDepthFt", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("interfaceFlowPct", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "interfaceFlowPct", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand = new global::System.Data.OleDb.OleDbCommand();
+            this._adapter.UpdateCommand.Connection = this.Connection;
+            this._adapter.UpdateCommand.CommandText = @"UPDATE `TableE03a` SET `nodeName` = ?, `groundElevFt` = ?, `crownElevFt` = ?, `invertElevFt` = ?, `qInstCfs` = ?, `initialDepthFt` = ?, `interfaceFlowPct` = ? WHERE ((`nodeName` = ?) AND ((? = 1 AND `groundElevFt` IS NULL) OR (`groundElevFt` = ?)) AND ((? = 1 AND `crownElevFt` IS NULL) OR (`crownElevFt` = ?)) AND ((? = 1 AND `invertElevFt` IS NULL) OR (`invertElevFt` = ?)) AND ((? = 1 AND `qInstCfs` IS NULL) OR (`qInstCfs` = ?)) AND ((? = 1 AND `initialDepthFt` IS NULL) OR (`initialDepthFt` = ?)) AND ((? = 1 AND `interfaceFlowPct` IS NULL) OR (`interfaceFlowPct` = ?)))";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("nodeName", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "nodeName", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("groundElevFt", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "groundElevFt", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("crownElevFt", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "crownElevFt", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("invertElevFt", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "invertElevFt", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("qInstCfs", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "qInstCfs", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("initialDepthFt", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "initialDepthFt", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("interfaceFlowPct", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "interfaceFlowPct", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_nodeName", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "nodeName", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_groundElevFt", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "groundElevFt", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_groundElevFt", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "groundElevFt", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_crownElevFt", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "crownElevFt", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_crownElevFt", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "crownElevFt", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_invertElevFt", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "invertElevFt", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_invertElevFt", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "invertElevFt", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_qInstCfs", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "qInstCfs", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_qInstCfs", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "qInstCfs", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_initialDepthFt", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "initialDepthFt", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_initialDepthFt", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "initialDepthFt", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_interfaceFlowPct", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "interfaceFlowPct", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_interfaceFlowPct", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "interfaceFlowPct", global::System.Data.DataRowVersion.Original, false, null));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitConnection() {
+            this._connection = new global::System.Data.OleDb.OleDbConnection();
+            this._connection.ConnectionString = global::SystemsAnalysis.DataAccess.Properties.Settings.Default.XPSWMMResultsConnectionString;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.OleDb.OleDbCommand[1];
+            this._commandCollection[0] = new global::System.Data.OleDb.OleDbCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = "SELECT     nodeName, groundElevFt, crownElevFt, invertElevFt, qInstCfs, initialDe" +
+                "pthFt, interfaceFlowPct\r\nFROM         TableE03a";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(StormwaterControlsDataSet.TableE03aDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual StormwaterControlsDataSet.TableE03aDataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            StormwaterControlsDataSet.TableE03aDataTable dataTable = new StormwaterControlsDataSet.TableE03aDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(StormwaterControlsDataSet.TableE03aDataTable dataTable) {
+            return this.Adapter.Update(dataTable);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(StormwaterControlsDataSet dataSet) {
+            return this.Adapter.Update(dataSet, "TableE03a");
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow dataRow) {
+            return this.Adapter.Update(new global::System.Data.DataRow[] {
+                        dataRow});
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow[] dataRows) {
+            return this.Adapter.Update(dataRows);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
+        public virtual int Delete(string Original_nodeName, global::System.Nullable<double> Original_groundElevFt, global::System.Nullable<double> Original_crownElevFt, global::System.Nullable<double> Original_invertElevFt, global::System.Nullable<double> Original_qInstCfs, global::System.Nullable<double> Original_initialDepthFt, global::System.Nullable<double> Original_interfaceFlowPct) {
+            if ((Original_nodeName == null)) {
+                this.Adapter.DeleteCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[0].Value = ((string)(Original_nodeName));
+            }
+            if ((Original_groundElevFt.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[2].Value = ((double)(Original_groundElevFt.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            if ((Original_crownElevFt.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[4].Value = ((double)(Original_crownElevFt.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            if ((Original_invertElevFt.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[6].Value = ((double)(Original_invertElevFt.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            if ((Original_qInstCfs.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[8].Value = ((double)(Original_qInstCfs.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[8].Value = global::System.DBNull.Value;
+            }
+            if ((Original_initialDepthFt.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[10].Value = ((double)(Original_initialDepthFt.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[10].Value = global::System.DBNull.Value;
+            }
+            if ((Original_interfaceFlowPct.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[11].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[12].Value = ((double)(Original_interfaceFlowPct.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[11].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[12].Value = global::System.DBNull.Value;
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
+            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.DeleteCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.DeleteCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(string nodeName, global::System.Nullable<double> groundElevFt, global::System.Nullable<double> crownElevFt, global::System.Nullable<double> invertElevFt, global::System.Nullable<double> qInstCfs, global::System.Nullable<double> initialDepthFt, global::System.Nullable<double> interfaceFlowPct) {
+            if ((nodeName == null)) {
+                this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(nodeName));
+            }
+            if ((groundElevFt.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[1].Value = ((double)(groundElevFt.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            if ((crownElevFt.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[2].Value = ((double)(crownElevFt.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            if ((invertElevFt.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[3].Value = ((double)(invertElevFt.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            if ((qInstCfs.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[4].Value = ((double)(qInstCfs.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            if ((initialDepthFt.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[5].Value = ((double)(initialDepthFt.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[5].Value = global::System.DBNull.Value;
+            }
+            if ((interfaceFlowPct.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[6].Value = ((double)(interfaceFlowPct.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(string nodeName, global::System.Nullable<double> groundElevFt, global::System.Nullable<double> crownElevFt, global::System.Nullable<double> invertElevFt, global::System.Nullable<double> qInstCfs, global::System.Nullable<double> initialDepthFt, global::System.Nullable<double> interfaceFlowPct, string Original_nodeName, global::System.Nullable<double> Original_groundElevFt, global::System.Nullable<double> Original_crownElevFt, global::System.Nullable<double> Original_invertElevFt, global::System.Nullable<double> Original_qInstCfs, global::System.Nullable<double> Original_initialDepthFt, global::System.Nullable<double> Original_interfaceFlowPct) {
+            if ((nodeName == null)) {
+                this.Adapter.UpdateCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(nodeName));
+            }
+            if ((groundElevFt.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[1].Value = ((double)(groundElevFt.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            if ((crownElevFt.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[2].Value = ((double)(crownElevFt.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            if ((invertElevFt.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[3].Value = ((double)(invertElevFt.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            if ((qInstCfs.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[4].Value = ((double)(qInstCfs.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            if ((initialDepthFt.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[5].Value = ((double)(initialDepthFt.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[5].Value = global::System.DBNull.Value;
+            }
+            if ((interfaceFlowPct.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((double)(interfaceFlowPct.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            if ((Original_nodeName == null)) {
+                this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((string)(Original_nodeName));
+            }
+            if ((Original_groundElevFt.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((double)(Original_groundElevFt.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[9].Value = global::System.DBNull.Value;
+            }
+            if ((Original_crownElevFt.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[11].Value = ((double)(Original_crownElevFt.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[11].Value = global::System.DBNull.Value;
+            }
+            if ((Original_invertElevFt.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[13].Value = ((double)(Original_invertElevFt.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[13].Value = global::System.DBNull.Value;
+            }
+            if ((Original_qInstCfs.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[15].Value = ((double)(Original_qInstCfs.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[15].Value = global::System.DBNull.Value;
+            }
+            if ((Original_initialDepthFt.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[17].Value = ((double)(Original_initialDepthFt.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[17].Value = global::System.DBNull.Value;
+            }
+            if ((Original_interfaceFlowPct.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[18].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[19].Value = ((double)(Original_interfaceFlowPct.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[18].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[19].Value = global::System.DBNull.Value;
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
+            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.UpdateCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.UpdateCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(global::System.Nullable<double> groundElevFt, global::System.Nullable<double> crownElevFt, global::System.Nullable<double> invertElevFt, global::System.Nullable<double> qInstCfs, global::System.Nullable<double> initialDepthFt, global::System.Nullable<double> interfaceFlowPct, string Original_nodeName, global::System.Nullable<double> Original_groundElevFt, global::System.Nullable<double> Original_crownElevFt, global::System.Nullable<double> Original_invertElevFt, global::System.Nullable<double> Original_qInstCfs, global::System.Nullable<double> Original_initialDepthFt, global::System.Nullable<double> Original_interfaceFlowPct) {
+            return this.Update(Original_nodeName, groundElevFt, crownElevFt, invertElevFt, qInstCfs, initialDepthFt, interfaceFlowPct, Original_nodeName, Original_groundElevFt, Original_crownElevFt, Original_invertElevFt, Original_qInstCfs, Original_initialDepthFt, Original_interfaceFlowPct);
+        }
+    }
+    
+    /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class TableE03bTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.OleDb.OleDbDataAdapter _adapter;
+        
+        private global::System.Data.OleDb.OleDbConnection _connection;
+        
+        private global::System.Data.OleDb.OleDbTransaction _transaction;
+        
+        private global::System.Data.OleDb.OleDbCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public TableE03bTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected internal global::System.Data.OleDb.OleDbDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.OleDb.OleDbConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.OleDb.OleDbCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.OleDb.OleDbTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected global::System.Data.OleDb.OleDbCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.OleDb.OleDbDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "TableE03b";
+            tableMapping.ColumnMappings.Add("nodeName", "nodeName");
+            tableMapping.ColumnMappings.Add("xCoordFt", "xCoordFt");
+            tableMapping.ColumnMappings.Add("yCoordFt", "yCoordFt");
+            this._adapter.TableMappings.Add(tableMapping);
+            this._adapter.InsertCommand = new global::System.Data.OleDb.OleDbCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = "INSERT INTO `TableE03b` (`nodeName`, `xCoordFt`, `yCoordFt`) VALUES (?, ?, ?)";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("nodeName", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "nodeName", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("xCoordFt", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "xCoordFt", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("yCoordFt", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "yCoordFt", global::System.Data.DataRowVersion.Current, false, null));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitConnection() {
+            this._connection = new global::System.Data.OleDb.OleDbConnection();
+            this._connection.ConnectionString = global::SystemsAnalysis.DataAccess.Properties.Settings.Default.XPSWMMResultsConnectionString;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.OleDb.OleDbCommand[1];
+            this._commandCollection[0] = new global::System.Data.OleDb.OleDbCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = "SELECT     nodeName, xCoordFt, yCoordFt\r\nFROM         TableE03b";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(StormwaterControlsDataSet.TableE03bDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual StormwaterControlsDataSet.TableE03bDataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            StormwaterControlsDataSet.TableE03bDataTable dataTable = new StormwaterControlsDataSet.TableE03bDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(StormwaterControlsDataSet.TableE03bDataTable dataTable) {
+            return this.Adapter.Update(dataTable);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(StormwaterControlsDataSet dataSet) {
+            return this.Adapter.Update(dataSet, "TableE03b");
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow dataRow) {
+            return this.Adapter.Update(new global::System.Data.DataRow[] {
+                        dataRow});
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow[] dataRows) {
+            return this.Adapter.Update(dataRows);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(string nodeName, global::System.Nullable<double> xCoordFt, global::System.Nullable<double> yCoordFt) {
+            if ((nodeName == null)) {
+                this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(nodeName));
+            }
+            if ((xCoordFt.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[1].Value = ((double)(xCoordFt.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            if ((yCoordFt.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[2].Value = ((double)(yCoordFt.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+    }
+    
+    /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class TableE22TableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.OleDb.OleDbDataAdapter _adapter;
+        
+        private global::System.Data.OleDb.OleDbConnection _connection;
+        
+        private global::System.Data.OleDb.OleDbTransaction _transaction;
+        
+        private global::System.Data.OleDb.OleDbCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public TableE22TableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected internal global::System.Data.OleDb.OleDbDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.OleDb.OleDbConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.OleDb.OleDbCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.OleDb.OleDbTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected global::System.Data.OleDb.OleDbCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.OleDb.OleDbDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "TableE22";
+            tableMapping.ColumnMappings.Add("overallErrorPct", "overallErrorPct");
+            tableMapping.ColumnMappings.Add("worstNodeErrorPct", "worstNodeErrorPct");
+            tableMapping.ColumnMappings.Add("worstNodalErrorNode", "worstNodalErrorNode");
+            tableMapping.ColumnMappings.Add("totalInflowLossPct", "totalInflowLossPct");
+            tableMapping.ColumnMappings.Add("overalllConinuityError", "overalllConinuityError");
+            tableMapping.ColumnMappings.Add("efficiency", "efficiency");
+            tableMapping.ColumnMappings.Add("efficiencyPct", "efficiencyPct");
+            tableMapping.ColumnMappings.Add("mostNodeNonConvergences", "mostNodeNonConvergences");
+            tableMapping.ColumnMappings.Add("totalNonConvergences", "totalNonConvergences");
+            tableMapping.ColumnMappings.Add("totalNonConvergedNodes", "totalNonConvergedNodes");
+            this._adapter.TableMappings.Add(tableMapping);
+            this._adapter.InsertCommand = new global::System.Data.OleDb.OleDbCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO `TableE22` (`overallErrorPct`, `worstNodeErrorPct`, `worstNodalErrorNode`, `totalInflowLossPct`, `overalllConinuityError`, `efficiency`, `efficiencyPct`, `mostNodeNonConvergences`, `totalNonConvergences`, `totalNonConvergedNodes`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("overallErrorPct", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "overallErrorPct", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("worstNodeErrorPct", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "worstNodeErrorPct", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("worstNodalErrorNode", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "worstNodalErrorNode", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("totalInflowLossPct", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "totalInflowLossPct", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("overalllConinuityError", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "overalllConinuityError", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("efficiency", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "efficiency", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("efficiencyPct", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "efficiencyPct", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("mostNodeNonConvergences", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "mostNodeNonConvergences", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("totalNonConvergences", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "totalNonConvergences", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("totalNonConvergedNodes", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "totalNonConvergedNodes", global::System.Data.DataRowVersion.Current, false, null));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitConnection() {
+            this._connection = new global::System.Data.OleDb.OleDbConnection();
+            this._connection.ConnectionString = global::SystemsAnalysis.DataAccess.Properties.Settings.Default.XPSWMMResultsConnectionString;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.OleDb.OleDbCommand[1];
+            this._commandCollection[0] = new global::System.Data.OleDb.OleDbCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = "SELECT     overallErrorPct, worstNodeErrorPct, worstNodalErrorNode, totalInflowLo" +
+                "ssPct, overalllConinuityError, efficiency, efficiencyPct, \r\n                    " +
+                "  mostNodeNonConvergences, totalNonConvergences, totalNonConvergedNodes\r\nFROM   " +
+                "      TableE22";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(StormwaterControlsDataSet.TableE22DataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual StormwaterControlsDataSet.TableE22DataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            StormwaterControlsDataSet.TableE22DataTable dataTable = new StormwaterControlsDataSet.TableE22DataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(StormwaterControlsDataSet.TableE22DataTable dataTable) {
+            return this.Adapter.Update(dataTable);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(StormwaterControlsDataSet dataSet) {
+            return this.Adapter.Update(dataSet, "TableE22");
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow dataRow) {
+            return this.Adapter.Update(new global::System.Data.DataRow[] {
+                        dataRow});
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow[] dataRows) {
+            return this.Adapter.Update(dataRows);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(global::System.Nullable<double> overallErrorPct, global::System.Nullable<double> worstNodeErrorPct, string worstNodalErrorNode, global::System.Nullable<double> totalInflowLossPct, string overalllConinuityError, string efficiency, global::System.Nullable<double> efficiencyPct, global::System.Nullable<int> mostNodeNonConvergences, global::System.Nullable<int> totalNonConvergences, global::System.Nullable<int> totalNonConvergedNodes) {
+            if ((overallErrorPct.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[0].Value = ((double)(overallErrorPct.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            if ((worstNodeErrorPct.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[1].Value = ((double)(worstNodeErrorPct.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            if ((worstNodalErrorNode == null)) {
+                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(worstNodalErrorNode));
+            }
+            if ((totalInflowLossPct.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[3].Value = ((double)(totalInflowLossPct.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            if ((overalllConinuityError == null)) {
+                this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[4].Value = ((string)(overalllConinuityError));
+            }
+            if ((efficiency == null)) {
+                this.Adapter.InsertCommand.Parameters[5].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[5].Value = ((string)(efficiency));
+            }
+            if ((efficiencyPct.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[6].Value = ((double)(efficiencyPct.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            if ((mostNodeNonConvergences.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[7].Value = ((int)(mostNodeNonConvergences.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[7].Value = global::System.DBNull.Value;
+            }
+            if ((totalNonConvergences.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[8].Value = ((int)(totalNonConvergences.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[8].Value = global::System.DBNull.Value;
+            }
+            if ((totalNonConvergedNodes.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[9].Value = ((int)(totalNonConvergedNodes.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[9].Value = global::System.DBNull.Value;
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+    }
+    
+    /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class TableE21TableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.OleDb.OleDbDataAdapter _adapter;
+        
+        private global::System.Data.OleDb.OleDbConnection _connection;
+        
+        private global::System.Data.OleDb.OleDbTransaction _transaction;
+        
+        private global::System.Data.OleDb.OleDbCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public TableE21TableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected internal global::System.Data.OleDb.OleDbDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.OleDb.OleDbConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.OleDb.OleDbCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.OleDb.OleDbTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected global::System.Data.OleDb.OleDbCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.OleDb.OleDbDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "TableE21";
+            tableMapping.ColumnMappings.Add("NodeName", "NodeName");
+            tableMapping.ColumnMappings.Add("InflowVolumeCuFt", "InflowVolumeCuFt");
+            tableMapping.ColumnMappings.Add("AverageInflowCfs", "AverageInflowCfs");
+            this._adapter.TableMappings.Add(tableMapping);
+            this._adapter.DeleteCommand = new global::System.Data.OleDb.OleDbCommand();
+            this._adapter.DeleteCommand.Connection = this.Connection;
+            this._adapter.DeleteCommand.CommandText = "DELETE FROM `TableE21` WHERE ((`nodeName` = ?) AND ((? = 1 AND `inflowVolumeCuFt`" +
+                " IS NULL) OR (`inflowVolumeCuFt` = ?)) AND ((? = 1 AND `averageInflowCfs` IS NUL" +
+                "L) OR (`averageInflowCfs` = ?)))";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_NodeName", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "NodeName", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_InflowVolumeCuFt", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "InflowVolumeCuFt", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_InflowVolumeCuFt", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "InflowVolumeCuFt", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_AverageInflowCfs", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "AverageInflowCfs", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_AverageInflowCfs", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "AverageInflowCfs", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.InsertCommand = new global::System.Data.OleDb.OleDbCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = "INSERT INTO `TableE21` (`nodeName`, `inflowVolumeCuFt`, `averageInflowCfs`) VALUE" +
+                "S (?, ?, ?)";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("NodeName", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "NodeName", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("InflowVolumeCuFt", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "InflowVolumeCuFt", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("AverageInflowCfs", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "AverageInflowCfs", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand = new global::System.Data.OleDb.OleDbCommand();
+            this._adapter.UpdateCommand.Connection = this.Connection;
+            this._adapter.UpdateCommand.CommandText = "UPDATE `TableE21` SET `nodeName` = ?, `inflowVolumeCuFt` = ?, `averageInflowCfs` " +
+                "= ? WHERE ((`nodeName` = ?) AND ((? = 1 AND `inflowVolumeCuFt` IS NULL) OR (`inf" +
+                "lowVolumeCuFt` = ?)) AND ((? = 1 AND `averageInflowCfs` IS NULL) OR (`averageInf" +
+                "lowCfs` = ?)))";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("NodeName", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "NodeName", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("InflowVolumeCuFt", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "InflowVolumeCuFt", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("AverageInflowCfs", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "AverageInflowCfs", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_NodeName", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "NodeName", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_InflowVolumeCuFt", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "InflowVolumeCuFt", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_InflowVolumeCuFt", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "InflowVolumeCuFt", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_AverageInflowCfs", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "AverageInflowCfs", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_AverageInflowCfs", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "AverageInflowCfs", global::System.Data.DataRowVersion.Original, false, null));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitConnection() {
+            this._connection = new global::System.Data.OleDb.OleDbConnection();
+            this._connection.ConnectionString = global::SystemsAnalysis.DataAccess.Properties.Settings.Default.XPSWMMResultsConnectionString;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.OleDb.OleDbCommand[1];
+            this._commandCollection[0] = new global::System.Data.OleDb.OleDbCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = "SELECT     nodeName AS NodeName, inflowVolumeCuFt AS InflowVolumeCuFt, averageInf" +
+                "lowCfs AS AverageInflowCfs\r\nFROM         TableE21";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(StormwaterControlsDataSet.TableE21DataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual StormwaterControlsDataSet.TableE21DataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            StormwaterControlsDataSet.TableE21DataTable dataTable = new StormwaterControlsDataSet.TableE21DataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(StormwaterControlsDataSet.TableE21DataTable dataTable) {
+            return this.Adapter.Update(dataTable);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(StormwaterControlsDataSet dataSet) {
+            return this.Adapter.Update(dataSet, "TableE21");
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow dataRow) {
+            return this.Adapter.Update(new global::System.Data.DataRow[] {
+                        dataRow});
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow[] dataRows) {
+            return this.Adapter.Update(dataRows);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
+        public virtual int Delete(string Original_NodeName, double Original_InflowVolumeCuFt, double Original_AverageInflowCfs) {
+            if ((Original_NodeName == null)) {
+                throw new global::System.ArgumentNullException("Original_NodeName");
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[0].Value = ((string)(Original_NodeName));
+            }
+            this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
+            this.Adapter.DeleteCommand.Parameters[2].Value = ((double)(Original_InflowVolumeCuFt));
+            this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
+            this.Adapter.DeleteCommand.Parameters[4].Value = ((double)(Original_AverageInflowCfs));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
+            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.DeleteCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.DeleteCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(string NodeName, double InflowVolumeCuFt, double AverageInflowCfs) {
+            if ((NodeName == null)) {
+                throw new global::System.ArgumentNullException("NodeName");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(NodeName));
+            }
+            this.Adapter.InsertCommand.Parameters[1].Value = ((double)(InflowVolumeCuFt));
+            this.Adapter.InsertCommand.Parameters[2].Value = ((double)(AverageInflowCfs));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(string NodeName, double InflowVolumeCuFt, double AverageInflowCfs, string Original_NodeName, double Original_InflowVolumeCuFt, double Original_AverageInflowCfs) {
+            if ((NodeName == null)) {
+                throw new global::System.ArgumentNullException("NodeName");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(NodeName));
+            }
+            this.Adapter.UpdateCommand.Parameters[1].Value = ((double)(InflowVolumeCuFt));
+            this.Adapter.UpdateCommand.Parameters[2].Value = ((double)(AverageInflowCfs));
+            if ((Original_NodeName == null)) {
+                throw new global::System.ArgumentNullException("Original_NodeName");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[3].Value = ((string)(Original_NodeName));
+            }
+            this.Adapter.UpdateCommand.Parameters[4].Value = ((object)(0));
+            this.Adapter.UpdateCommand.Parameters[5].Value = ((double)(Original_InflowVolumeCuFt));
+            this.Adapter.UpdateCommand.Parameters[6].Value = ((object)(0));
+            this.Adapter.UpdateCommand.Parameters[7].Value = ((double)(Original_AverageInflowCfs));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
+            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.UpdateCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.UpdateCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(double InflowVolumeCuFt, double AverageInflowCfs, string Original_NodeName, double Original_InflowVolumeCuFt, double Original_AverageInflowCfs) {
+            return this.Update(Original_NodeName, InflowVolumeCuFt, AverageInflowCfs, Original_NodeName, Original_InflowVolumeCuFt, Original_AverageInflowCfs);
+        }
+    }
+    
+    /// <summary>
     ///TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
     ///</summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
@@ -27681,6 +31044,14 @@ namespace SystemsAnalysis.DataAccess.StormwaterControlsDataSetTableAdapters {
         private TableE18TableAdapter _tableE18TableAdapter;
         
         private TableE19TableAdapter _tableE19TableAdapter;
+        
+        private TableE03aTableAdapter _tableE03aTableAdapter;
+        
+        private TableE03bTableAdapter _tableE03bTableAdapter;
+        
+        private TableE22TableAdapter _tableE22TableAdapter;
+        
+        private TableE21TableAdapter _tableE21TableAdapter;
         
         private bool _backupDataSetBeforeUpdate;
         
@@ -27840,6 +31211,58 @@ namespace SystemsAnalysis.DataAccess.StormwaterControlsDataSetTableAdapters {
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
+            "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
+            "", "System.Drawing.Design.UITypeEditor")]
+        public TableE03aTableAdapter TableE03aTableAdapter {
+            get {
+                return this._tableE03aTableAdapter;
+            }
+            set {
+                this._tableE03aTableAdapter = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
+            "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
+            "", "System.Drawing.Design.UITypeEditor")]
+        public TableE03bTableAdapter TableE03bTableAdapter {
+            get {
+                return this._tableE03bTableAdapter;
+            }
+            set {
+                this._tableE03bTableAdapter = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
+            "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
+            "", "System.Drawing.Design.UITypeEditor")]
+        public TableE22TableAdapter TableE22TableAdapter {
+            get {
+                return this._tableE22TableAdapter;
+            }
+            set {
+                this._tableE22TableAdapter = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
+            "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
+            "", "System.Drawing.Design.UITypeEditor")]
+        public TableE21TableAdapter TableE21TableAdapter {
+            get {
+                return this._tableE21TableAdapter;
+            }
+            set {
+                this._tableE21TableAdapter = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         public bool BackupDataSetBeforeUpdate {
             get {
                 return this._backupDataSetBeforeUpdate;
@@ -27900,6 +31323,22 @@ namespace SystemsAnalysis.DataAccess.StormwaterControlsDataSetTableAdapters {
                             && (this._tableE19TableAdapter.Connection != null))) {
                     return this._tableE19TableAdapter.Connection;
                 }
+                if (((this._tableE03aTableAdapter != null) 
+                            && (this._tableE03aTableAdapter.Connection != null))) {
+                    return this._tableE03aTableAdapter.Connection;
+                }
+                if (((this._tableE03bTableAdapter != null) 
+                            && (this._tableE03bTableAdapter.Connection != null))) {
+                    return this._tableE03bTableAdapter.Connection;
+                }
+                if (((this._tableE22TableAdapter != null) 
+                            && (this._tableE22TableAdapter.Connection != null))) {
+                    return this._tableE22TableAdapter.Connection;
+                }
+                if (((this._tableE21TableAdapter != null) 
+                            && (this._tableE21TableAdapter.Connection != null))) {
+                    return this._tableE21TableAdapter.Connection;
+                }
                 return null;
             }
             set {
@@ -27945,6 +31384,18 @@ namespace SystemsAnalysis.DataAccess.StormwaterControlsDataSetTableAdapters {
                 if ((this._tableE19TableAdapter != null)) {
                     count = (count + 1);
                 }
+                if ((this._tableE03aTableAdapter != null)) {
+                    count = (count + 1);
+                }
+                if ((this._tableE03bTableAdapter != null)) {
+                    count = (count + 1);
+                }
+                if ((this._tableE22TableAdapter != null)) {
+                    count = (count + 1);
+                }
+                if ((this._tableE21TableAdapter != null)) {
+                    count = (count + 1);
+                }
                 return count;
             }
         }
@@ -27955,21 +31406,12 @@ namespace SystemsAnalysis.DataAccess.StormwaterControlsDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private int UpdateUpdatedRows(StormwaterControlsDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
-            if ((this._mdl_dirsc_acTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.mdl_dirsc_ac.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+            if ((this._tableE18TableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.TableE18.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
-                    result = (result + this._mdl_dirsc_acTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
-            if ((this._altStreetTargetsTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.AltStreetTargets.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._altStreetTargetsTableAdapter.Update(updatedRows));
+                    result = (result + this._tableE18TableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -27982,21 +31424,48 @@ namespace SystemsAnalysis.DataAccess.StormwaterControlsDataSetTableAdapters {
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._tableE18TableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.TableE18.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+            if ((this._tableE22TableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.TableE22.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
-                    result = (result + this._tableE18TableAdapter.Update(updatedRows));
+                    result = (result + this._tableE22TableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._altParkingTargetsTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.AltParkingTargets.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+            if ((this._tableE21TableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.TableE21.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
-                    result = (result + this._altParkingTargetsTableAdapter.Update(updatedRows));
+                    result = (result + this._tableE21TableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._tableE03aTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.TableE03a.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._tableE03aTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._tableE03bTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.TableE03b.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._tableE03bTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._mdl_dirsc_acTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.mdl_dirsc_ac.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._mdl_dirsc_acTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -28009,12 +31478,12 @@ namespace SystemsAnalysis.DataAccess.StormwaterControlsDataSetTableAdapters {
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._mdl_SurfSC_acTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.mdl_SurfSC_ac.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+            if ((this._ic_RoofTargetsTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.ic_RoofTargets.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
-                    result = (result + this._mdl_SurfSC_acTableAdapter.Update(updatedRows));
+                    result = (result + this._ic_RoofTargetsTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -28027,12 +31496,30 @@ namespace SystemsAnalysis.DataAccess.StormwaterControlsDataSetTableAdapters {
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._altRoofTargetsTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.AltRoofTargets.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+            if ((this._mdl_SurfSC_acTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.mdl_SurfSC_ac.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
-                    result = (result + this._altRoofTargetsTableAdapter.Update(updatedRows));
+                    result = (result + this._mdl_SurfSC_acTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._altParkingTargetsTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.AltParkingTargets.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._altParkingTargetsTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._altStreetTargetsTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.AltStreetTargets.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._altStreetTargetsTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -28045,12 +31532,12 @@ namespace SystemsAnalysis.DataAccess.StormwaterControlsDataSetTableAdapters {
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._ic_RoofTargetsTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.ic_RoofTargets.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+            if ((this._altRoofTargetsTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.AltRoofTargets.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
-                    result = (result + this._ic_RoofTargetsTableAdapter.Update(updatedRows));
+                    result = (result + this._altRoofTargetsTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -28063,19 +31550,11 @@ namespace SystemsAnalysis.DataAccess.StormwaterControlsDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private int UpdateInsertedRows(StormwaterControlsDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
-            if ((this._mdl_dirsc_acTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.mdl_dirsc_ac.Select(null, null, global::System.Data.DataViewRowState.Added);
+            if ((this._tableE18TableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.TableE18.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
-                    result = (result + this._mdl_dirsc_acTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
-            if ((this._altStreetTargetsTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.AltStreetTargets.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._altStreetTargetsTableAdapter.Update(addedRows));
+                    result = (result + this._tableE18TableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -28087,19 +31566,43 @@ namespace SystemsAnalysis.DataAccess.StormwaterControlsDataSetTableAdapters {
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._tableE18TableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.TableE18.Select(null, null, global::System.Data.DataViewRowState.Added);
+            if ((this._tableE22TableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.TableE22.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
-                    result = (result + this._tableE18TableAdapter.Update(addedRows));
+                    result = (result + this._tableE22TableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._altParkingTargetsTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.AltParkingTargets.Select(null, null, global::System.Data.DataViewRowState.Added);
+            if ((this._tableE21TableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.TableE21.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
-                    result = (result + this._altParkingTargetsTableAdapter.Update(addedRows));
+                    result = (result + this._tableE21TableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._tableE03aTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.TableE03a.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._tableE03aTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._tableE03bTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.TableE03b.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._tableE03bTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._mdl_dirsc_acTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.mdl_dirsc_ac.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._mdl_dirsc_acTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -28111,11 +31614,11 @@ namespace SystemsAnalysis.DataAccess.StormwaterControlsDataSetTableAdapters {
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._mdl_SurfSC_acTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.mdl_SurfSC_ac.Select(null, null, global::System.Data.DataViewRowState.Added);
+            if ((this._ic_RoofTargetsTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.ic_RoofTargets.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
-                    result = (result + this._mdl_SurfSC_acTableAdapter.Update(addedRows));
+                    result = (result + this._ic_RoofTargetsTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -28127,11 +31630,27 @@ namespace SystemsAnalysis.DataAccess.StormwaterControlsDataSetTableAdapters {
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._altRoofTargetsTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.AltRoofTargets.Select(null, null, global::System.Data.DataViewRowState.Added);
+            if ((this._mdl_SurfSC_acTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.mdl_SurfSC_ac.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
-                    result = (result + this._altRoofTargetsTableAdapter.Update(addedRows));
+                    result = (result + this._mdl_SurfSC_acTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._altParkingTargetsTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.AltParkingTargets.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._altParkingTargetsTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._altStreetTargetsTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.AltStreetTargets.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._altStreetTargetsTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -28143,11 +31662,11 @@ namespace SystemsAnalysis.DataAccess.StormwaterControlsDataSetTableAdapters {
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._ic_RoofTargetsTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.ic_RoofTargets.Select(null, null, global::System.Data.DataViewRowState.Added);
+            if ((this._altRoofTargetsTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.AltRoofTargets.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
-                    result = (result + this._ic_RoofTargetsTableAdapter.Update(addedRows));
+                    result = (result + this._altRoofTargetsTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -28160,11 +31679,11 @@ namespace SystemsAnalysis.DataAccess.StormwaterControlsDataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private int UpdateDeletedRows(StormwaterControlsDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
             int result = 0;
-            if ((this._ic_RoofTargetsTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.ic_RoofTargets.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+            if ((this._altRoofTargetsTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.AltRoofTargets.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    result = (result + this._ic_RoofTargetsTableAdapter.Update(deletedRows));
+                    result = (result + this._altRoofTargetsTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -28176,35 +31695,11 @@ namespace SystemsAnalysis.DataAccess.StormwaterControlsDataSetTableAdapters {
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._altRoofTargetsTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.AltRoofTargets.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+            if ((this._altStreetTargetsTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.AltStreetTargets.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    result = (result + this._altRoofTargetsTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
-            if ((this._iCNodeTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.ICNode.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._iCNodeTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
-            if ((this._mdl_SurfSC_acTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.mdl_SurfSC_ac.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._mdl_SurfSC_acTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
-            if ((this._ic_StreetTargetsTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.ic_StreetTargets.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._ic_StreetTargetsTableAdapter.Update(deletedRows));
+                    result = (result + this._altStreetTargetsTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -28216,11 +31711,75 @@ namespace SystemsAnalysis.DataAccess.StormwaterControlsDataSetTableAdapters {
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._tableE18TableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.TableE18.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+            if ((this._mdl_SurfSC_acTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.mdl_SurfSC_ac.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    result = (result + this._tableE18TableAdapter.Update(deletedRows));
+                    result = (result + this._mdl_SurfSC_acTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._iCNodeTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.ICNode.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._iCNodeTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._ic_RoofTargetsTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.ic_RoofTargets.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._ic_RoofTargetsTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._ic_StreetTargetsTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.ic_StreetTargets.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._ic_StreetTargetsTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._mdl_dirsc_acTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.mdl_dirsc_ac.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._mdl_dirsc_acTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._tableE03bTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.TableE03b.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._tableE03bTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._tableE03aTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.TableE03a.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._tableE03aTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._tableE21TableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.TableE21.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._tableE21TableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._tableE22TableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.TableE22.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._tableE22TableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -28232,19 +31791,11 @@ namespace SystemsAnalysis.DataAccess.StormwaterControlsDataSetTableAdapters {
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._altStreetTargetsTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.AltStreetTargets.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+            if ((this._tableE18TableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.TableE18.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    result = (result + this._altStreetTargetsTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
-            if ((this._mdl_dirsc_acTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.mdl_dirsc_ac.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._mdl_dirsc_acTableAdapter.Update(deletedRows));
+                    result = (result + this._tableE18TableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -28337,6 +31888,26 @@ namespace SystemsAnalysis.DataAccess.StormwaterControlsDataSetTableAdapters {
             }
             if (((this._tableE19TableAdapter != null) 
                         && (this.MatchTableAdapterConnection(this._tableE19TableAdapter.Connection) == false))) {
+                throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
+                        "tring.");
+            }
+            if (((this._tableE03aTableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._tableE03aTableAdapter.Connection) == false))) {
+                throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
+                        "tring.");
+            }
+            if (((this._tableE03bTableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._tableE03bTableAdapter.Connection) == false))) {
+                throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
+                        "tring.");
+            }
+            if (((this._tableE22TableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._tableE22TableAdapter.Connection) == false))) {
+                throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
+                        "tring.");
+            }
+            if (((this._tableE21TableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._tableE21TableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
                         "tring.");
             }
@@ -28471,6 +32042,42 @@ namespace SystemsAnalysis.DataAccess.StormwaterControlsDataSetTableAdapters {
                         adaptersWithAcceptChangesDuringUpdate.Add(this._tableE19TableAdapter.Adapter);
                     }
                 }
+                if ((this._tableE03aTableAdapter != null)) {
+                    revertConnections.Add(this._tableE03aTableAdapter, this._tableE03aTableAdapter.Connection);
+                    this._tableE03aTableAdapter.Connection = ((global::System.Data.OleDb.OleDbConnection)(workConnection));
+                    this._tableE03aTableAdapter.Transaction = ((global::System.Data.OleDb.OleDbTransaction)(workTransaction));
+                    if (this._tableE03aTableAdapter.Adapter.AcceptChangesDuringUpdate) {
+                        this._tableE03aTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
+                        adaptersWithAcceptChangesDuringUpdate.Add(this._tableE03aTableAdapter.Adapter);
+                    }
+                }
+                if ((this._tableE03bTableAdapter != null)) {
+                    revertConnections.Add(this._tableE03bTableAdapter, this._tableE03bTableAdapter.Connection);
+                    this._tableE03bTableAdapter.Connection = ((global::System.Data.OleDb.OleDbConnection)(workConnection));
+                    this._tableE03bTableAdapter.Transaction = ((global::System.Data.OleDb.OleDbTransaction)(workTransaction));
+                    if (this._tableE03bTableAdapter.Adapter.AcceptChangesDuringUpdate) {
+                        this._tableE03bTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
+                        adaptersWithAcceptChangesDuringUpdate.Add(this._tableE03bTableAdapter.Adapter);
+                    }
+                }
+                if ((this._tableE22TableAdapter != null)) {
+                    revertConnections.Add(this._tableE22TableAdapter, this._tableE22TableAdapter.Connection);
+                    this._tableE22TableAdapter.Connection = ((global::System.Data.OleDb.OleDbConnection)(workConnection));
+                    this._tableE22TableAdapter.Transaction = ((global::System.Data.OleDb.OleDbTransaction)(workTransaction));
+                    if (this._tableE22TableAdapter.Adapter.AcceptChangesDuringUpdate) {
+                        this._tableE22TableAdapter.Adapter.AcceptChangesDuringUpdate = false;
+                        adaptersWithAcceptChangesDuringUpdate.Add(this._tableE22TableAdapter.Adapter);
+                    }
+                }
+                if ((this._tableE21TableAdapter != null)) {
+                    revertConnections.Add(this._tableE21TableAdapter, this._tableE21TableAdapter.Connection);
+                    this._tableE21TableAdapter.Connection = ((global::System.Data.OleDb.OleDbConnection)(workConnection));
+                    this._tableE21TableAdapter.Transaction = ((global::System.Data.OleDb.OleDbTransaction)(workTransaction));
+                    if (this._tableE21TableAdapter.Adapter.AcceptChangesDuringUpdate) {
+                        this._tableE21TableAdapter.Adapter.AcceptChangesDuringUpdate = false;
+                        adaptersWithAcceptChangesDuringUpdate.Add(this._tableE21TableAdapter.Adapter);
+                    }
+                }
                 // 
                 //---- Perform updates -----------
                 //
@@ -28572,6 +32179,22 @@ namespace SystemsAnalysis.DataAccess.StormwaterControlsDataSetTableAdapters {
                 if ((this._tableE19TableAdapter != null)) {
                     this._tableE19TableAdapter.Connection = ((global::System.Data.OleDb.OleDbConnection)(revertConnections[this._tableE19TableAdapter]));
                     this._tableE19TableAdapter.Transaction = null;
+                }
+                if ((this._tableE03aTableAdapter != null)) {
+                    this._tableE03aTableAdapter.Connection = ((global::System.Data.OleDb.OleDbConnection)(revertConnections[this._tableE03aTableAdapter]));
+                    this._tableE03aTableAdapter.Transaction = null;
+                }
+                if ((this._tableE03bTableAdapter != null)) {
+                    this._tableE03bTableAdapter.Connection = ((global::System.Data.OleDb.OleDbConnection)(revertConnections[this._tableE03bTableAdapter]));
+                    this._tableE03bTableAdapter.Transaction = null;
+                }
+                if ((this._tableE22TableAdapter != null)) {
+                    this._tableE22TableAdapter.Connection = ((global::System.Data.OleDb.OleDbConnection)(revertConnections[this._tableE22TableAdapter]));
+                    this._tableE22TableAdapter.Transaction = null;
+                }
+                if ((this._tableE21TableAdapter != null)) {
+                    this._tableE21TableAdapter.Connection = ((global::System.Data.OleDb.OleDbConnection)(revertConnections[this._tableE21TableAdapter]));
+                    this._tableE21TableAdapter.Transaction = null;
                 }
                 if ((0 < adaptersWithAcceptChangesDuringUpdate.Count)) {
                     global::System.Data.Common.DataAdapter[] adapters = new System.Data.Common.DataAdapter[adaptersWithAcceptChangesDuringUpdate.Count];
