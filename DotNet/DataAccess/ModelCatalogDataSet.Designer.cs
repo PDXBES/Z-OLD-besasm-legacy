@@ -456,7 +456,7 @@ namespace SystemsAnalysis.DataAccess {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class StormCatalogDataTable : global::System.Data.DataTable, global::System.Collections.IEnumerable {
+        public partial class StormCatalogDataTable : global::System.Data.TypedTableBase<StormCatalogRow> {
             
             private global::System.Data.DataColumn columnStormID;
             
@@ -609,11 +609,6 @@ namespace SystemsAnalysis.DataAccess {
             public StormCatalogRow FindByStormID(int StormID) {
                 return ((StormCatalogRow)(this.Rows.Find(new object[] {
                             StormID})));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public virtual global::System.Collections.IEnumerator GetEnumerator() {
-                return this.Rows.GetEnumerator();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -800,7 +795,7 @@ namespace SystemsAnalysis.DataAccess {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class ModelScenarioDataTable : global::System.Data.DataTable, global::System.Collections.IEnumerable {
+        public partial class ModelScenarioDataTable : global::System.Data.TypedTableBase<ModelScenarioRow> {
             
             private global::System.Data.DataColumn columnScenarioID;
             
@@ -906,11 +901,6 @@ namespace SystemsAnalysis.DataAccess {
             public ModelScenarioRow FindByScenarioID(int ScenarioID) {
                 return ((ModelScenarioRow)(this.Rows.Find(new object[] {
                             ScenarioID})));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public virtual global::System.Collections.IEnumerator GetEnumerator() {
-                return this.Rows.GetEnumerator();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1076,7 +1066,7 @@ namespace SystemsAnalysis.DataAccess {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class LinkHydraulicsDataTable : global::System.Data.DataTable, global::System.Collections.IEnumerable {
+        public partial class LinkHydraulicsDataTable : global::System.Data.TypedTableBase<LinkHydraulicsRow> {
             
             private global::System.Data.DataColumn columnLinkHydraulicsID;
             
@@ -1262,11 +1252,6 @@ namespace SystemsAnalysis.DataAccess {
             public LinkHydraulicsRow FindByLinkHydraulicsID(int LinkHydraulicsID) {
                 return ((LinkHydraulicsRow)(this.Rows.Find(new object[] {
                             LinkHydraulicsID})));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public virtual global::System.Collections.IEnumerator GetEnumerator() {
-                return this.Rows.GetEnumerator();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1463,7 +1448,7 @@ namespace SystemsAnalysis.DataAccess {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class NodeHydraulicsDataTable : global::System.Data.DataTable, global::System.Collections.IEnumerable {
+        public partial class NodeHydraulicsDataTable : global::System.Data.TypedTableBase<NodeHydraulicsRow> {
             
             private global::System.Data.DataColumn columnNodeHydraulicsID;
             
@@ -1639,11 +1624,6 @@ namespace SystemsAnalysis.DataAccess {
             public NodeHydraulicsRow FindByNodeHydraulicsID(int NodeHydraulicsID) {
                 return ((NodeHydraulicsRow)(this.Rows.Find(new object[] {
                             NodeHydraulicsID})));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public virtual global::System.Collections.IEnumerator GetEnumerator() {
-                return this.Rows.GetEnumerator();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1839,7 +1819,7 @@ namespace SystemsAnalysis.DataAccess {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class DscHydraulicsDataTable : global::System.Data.DataTable, global::System.Collections.IEnumerable {
+        public partial class DscHydraulicsDataTable : global::System.Data.TypedTableBase<DscHydraulicsRow> {
             
             private global::System.Data.DataColumn columnDscHydraulicsID;
             
@@ -1985,11 +1965,6 @@ namespace SystemsAnalysis.DataAccess {
             public DscHydraulicsRow FindByDscHydraulicsID(int DscHydraulicsID) {
                 return ((DscHydraulicsRow)(this.Rows.Find(new object[] {
                             DscHydraulicsID})));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public virtual global::System.Collections.IEnumerator GetEnumerator() {
-                return this.Rows.GetEnumerator();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2170,7 +2145,7 @@ namespace SystemsAnalysis.DataAccess {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class ModelCatalogDataTable : global::System.Data.DataTable, global::System.Collections.IEnumerable {
+        public partial class ModelCatalogDataTable : global::System.Data.TypedTableBase<ModelCatalogRow> {
             
             private global::System.Data.DataColumn columnModelID;
             
@@ -2373,11 +2348,6 @@ namespace SystemsAnalysis.DataAccess {
             public ModelCatalogRow FindByModelID(int ModelID) {
                 return ((ModelCatalogRow)(this.Rows.Find(new object[] {
                             ModelID})));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public virtual global::System.Collections.IEnumerator GetEnumerator() {
-                return this.Rows.GetEnumerator();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

@@ -29,21 +29,9 @@ namespace SystemsAnalysis.DataAccess {
         
         private ASSESSMENT_TYPEDataTable tableASSESSMENT_TYPE;
         
-        private CONSTRUCTORDataTable tableCONSTRUCTOR;
-        
-        private CONTRACTORDataTable tableCONTRACTOR;
-        
-        private DESIGNERDataTable tableDESIGNER;
-        
         private DESTINATIONDataTable tableDESTINATION;
         
         private IMPERVIOUS_AREA_TYPEDataTable tableIMPERVIOUS_AREA_TYPE;
-        
-        private INFILTRATION_TESTDataTable tableINFILTRATION_TEST;
-        
-        private INFORMATION_SOURCEDataTable tableINFORMATION_SOURCE;
-        
-        private MANAGEMENTDataTable tableMANAGEMENT;
         
         private OPPORTUNITY_FEASIBILITYDataTable tableOPPORTUNITY_FEASIBILITY;
         
@@ -53,23 +41,15 @@ namespace SystemsAnalysis.DataAccess {
         
         private SITE_ASSESSMENTDataTable tableSITE_ASSESSMENT;
         
-        private SITE_MODEL_CONDITIONDataTable tableSITE_MODEL_CONDITION;
-        
         private SITE_OPPORTUNITYDataTable tableSITE_OPPORTUNITY;
         
         private SITEDataTable tableSITE;
         
-        private global::System.Data.DataRelation relationFK_PROJECT_CONSTRUCTOR;
+        private RETRO_BASINDataTable tableRETRO_BASIN;
         
-        private global::System.Data.DataRelation relationFK_PROJECT_CONTRACTOR;
-        
-        private global::System.Data.DataRelation relationFK_PROJECT_DESIGNER;
+        private SEWER_BASINDataTable tableSEWER_BASIN;
         
         private global::System.Data.DataRelation relationFK_PROJECT_FACILITY_TYPE;
-        
-        private global::System.Data.DataRelation relationFK_PROJECT_INFILTRATION_TEST;
-        
-        private global::System.Data.DataRelation relationFK_PROJECT_MANAGEMENT;
         
         private global::System.Data.DataRelation relationFK_PROJECT_PROJECT_STATUS;
         
@@ -81,19 +61,11 @@ namespace SystemsAnalysis.DataAccess {
         
         private global::System.Data.DataRelation relationFK_SITE_ASSESSMENT_IMPERVIOUS_AREA_TYPE;
         
-        private global::System.Data.DataRelation relationFK_SITE_ASSESSMENT_INFORMATION_SOURCE;
-        
-        private global::System.Data.DataRelation relationFK_SITE_ASSESSMENT_MANAGEMENT;
-        
         private global::System.Data.DataRelation relationFK_SITE_ASSESSMENT_PROJECT;
         
         private global::System.Data.DataRelation relationFK_SITE_OPPORTUNITY_FACILITY_TYPE;
         
-        private global::System.Data.DataRelation relationFK_SITE_OPPORTUNITY_MANAGEMENT;
-        
         private global::System.Data.DataRelation relationFK_SITE_ASSESSMENT_SITE;
-        
-        private global::System.Data.DataRelation relationFK_SITE_MODEL_CONDITION_SITE;
         
         private global::System.Data.DataRelation relationFK_SITE_OPPORTUNITY_SITE;
         
@@ -129,29 +101,11 @@ namespace SystemsAnalysis.DataAccess {
                 if ((ds.Tables["ASSESSMENT_TYPE"] != null)) {
                     base.Tables.Add(new ASSESSMENT_TYPEDataTable(ds.Tables["ASSESSMENT_TYPE"]));
                 }
-                if ((ds.Tables["CONSTRUCTOR"] != null)) {
-                    base.Tables.Add(new CONSTRUCTORDataTable(ds.Tables["CONSTRUCTOR"]));
-                }
-                if ((ds.Tables["CONTRACTOR"] != null)) {
-                    base.Tables.Add(new CONTRACTORDataTable(ds.Tables["CONTRACTOR"]));
-                }
-                if ((ds.Tables["DESIGNER"] != null)) {
-                    base.Tables.Add(new DESIGNERDataTable(ds.Tables["DESIGNER"]));
-                }
                 if ((ds.Tables["DESTINATION"] != null)) {
                     base.Tables.Add(new DESTINATIONDataTable(ds.Tables["DESTINATION"]));
                 }
                 if ((ds.Tables["IMPERVIOUS_AREA_TYPE"] != null)) {
                     base.Tables.Add(new IMPERVIOUS_AREA_TYPEDataTable(ds.Tables["IMPERVIOUS_AREA_TYPE"]));
-                }
-                if ((ds.Tables["INFILTRATION_TEST"] != null)) {
-                    base.Tables.Add(new INFILTRATION_TESTDataTable(ds.Tables["INFILTRATION_TEST"]));
-                }
-                if ((ds.Tables["INFORMATION_SOURCE"] != null)) {
-                    base.Tables.Add(new INFORMATION_SOURCEDataTable(ds.Tables["INFORMATION_SOURCE"]));
-                }
-                if ((ds.Tables["MANAGEMENT"] != null)) {
-                    base.Tables.Add(new MANAGEMENTDataTable(ds.Tables["MANAGEMENT"]));
                 }
                 if ((ds.Tables["OPPORTUNITY_FEASIBILITY"] != null)) {
                     base.Tables.Add(new OPPORTUNITY_FEASIBILITYDataTable(ds.Tables["OPPORTUNITY_FEASIBILITY"]));
@@ -165,14 +119,17 @@ namespace SystemsAnalysis.DataAccess {
                 if ((ds.Tables["SITE_ASSESSMENT"] != null)) {
                     base.Tables.Add(new SITE_ASSESSMENTDataTable(ds.Tables["SITE_ASSESSMENT"]));
                 }
-                if ((ds.Tables["SITE_MODEL_CONDITION"] != null)) {
-                    base.Tables.Add(new SITE_MODEL_CONDITIONDataTable(ds.Tables["SITE_MODEL_CONDITION"]));
-                }
                 if ((ds.Tables["SITE_OPPORTUNITY"] != null)) {
                     base.Tables.Add(new SITE_OPPORTUNITYDataTable(ds.Tables["SITE_OPPORTUNITY"]));
                 }
                 if ((ds.Tables["SITE"] != null)) {
                     base.Tables.Add(new SITEDataTable(ds.Tables["SITE"]));
+                }
+                if ((ds.Tables["RETRO_BASIN"] != null)) {
+                    base.Tables.Add(new RETRO_BASINDataTable(ds.Tables["RETRO_BASIN"]));
+                }
+                if ((ds.Tables["SEWER_BASIN"] != null)) {
+                    base.Tables.Add(new SEWER_BASINDataTable(ds.Tables["SEWER_BASIN"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -213,33 +170,6 @@ namespace SystemsAnalysis.DataAccess {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public CONSTRUCTORDataTable CONSTRUCTOR {
-            get {
-                return this.tableCONSTRUCTOR;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Browsable(false)]
-        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public CONTRACTORDataTable CONTRACTOR {
-            get {
-                return this.tableCONTRACTOR;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Browsable(false)]
-        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public DESIGNERDataTable DESIGNER {
-            get {
-                return this.tableDESIGNER;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Browsable(false)]
-        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
         public DESTINATIONDataTable DESTINATION {
             get {
                 return this.tableDESTINATION;
@@ -252,33 +182,6 @@ namespace SystemsAnalysis.DataAccess {
         public IMPERVIOUS_AREA_TYPEDataTable IMPERVIOUS_AREA_TYPE {
             get {
                 return this.tableIMPERVIOUS_AREA_TYPE;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Browsable(false)]
-        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public INFILTRATION_TESTDataTable INFILTRATION_TEST {
-            get {
-                return this.tableINFILTRATION_TEST;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Browsable(false)]
-        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public INFORMATION_SOURCEDataTable INFORMATION_SOURCE {
-            get {
-                return this.tableINFORMATION_SOURCE;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Browsable(false)]
-        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public MANAGEMENTDataTable MANAGEMENT {
-            get {
-                return this.tableMANAGEMENT;
             }
         }
         
@@ -321,15 +224,6 @@ namespace SystemsAnalysis.DataAccess {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public SITE_MODEL_CONDITIONDataTable SITE_MODEL_CONDITION {
-            get {
-                return this.tableSITE_MODEL_CONDITION;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Browsable(false)]
-        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
         public SITE_OPPORTUNITYDataTable SITE_OPPORTUNITY {
             get {
                 return this.tableSITE_OPPORTUNITY;
@@ -342,6 +236,24 @@ namespace SystemsAnalysis.DataAccess {
         public SITEDataTable SITE {
             get {
                 return this.tableSITE;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public RETRO_BASINDataTable RETRO_BASIN {
+            get {
+                return this.tableRETRO_BASIN;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public SEWER_BASINDataTable SEWER_BASIN {
+            get {
+                return this.tableSEWER_BASIN;
             }
         }
         
@@ -410,29 +322,11 @@ namespace SystemsAnalysis.DataAccess {
                 if ((ds.Tables["ASSESSMENT_TYPE"] != null)) {
                     base.Tables.Add(new ASSESSMENT_TYPEDataTable(ds.Tables["ASSESSMENT_TYPE"]));
                 }
-                if ((ds.Tables["CONSTRUCTOR"] != null)) {
-                    base.Tables.Add(new CONSTRUCTORDataTable(ds.Tables["CONSTRUCTOR"]));
-                }
-                if ((ds.Tables["CONTRACTOR"] != null)) {
-                    base.Tables.Add(new CONTRACTORDataTable(ds.Tables["CONTRACTOR"]));
-                }
-                if ((ds.Tables["DESIGNER"] != null)) {
-                    base.Tables.Add(new DESIGNERDataTable(ds.Tables["DESIGNER"]));
-                }
                 if ((ds.Tables["DESTINATION"] != null)) {
                     base.Tables.Add(new DESTINATIONDataTable(ds.Tables["DESTINATION"]));
                 }
                 if ((ds.Tables["IMPERVIOUS_AREA_TYPE"] != null)) {
                     base.Tables.Add(new IMPERVIOUS_AREA_TYPEDataTable(ds.Tables["IMPERVIOUS_AREA_TYPE"]));
-                }
-                if ((ds.Tables["INFILTRATION_TEST"] != null)) {
-                    base.Tables.Add(new INFILTRATION_TESTDataTable(ds.Tables["INFILTRATION_TEST"]));
-                }
-                if ((ds.Tables["INFORMATION_SOURCE"] != null)) {
-                    base.Tables.Add(new INFORMATION_SOURCEDataTable(ds.Tables["INFORMATION_SOURCE"]));
-                }
-                if ((ds.Tables["MANAGEMENT"] != null)) {
-                    base.Tables.Add(new MANAGEMENTDataTable(ds.Tables["MANAGEMENT"]));
                 }
                 if ((ds.Tables["OPPORTUNITY_FEASIBILITY"] != null)) {
                     base.Tables.Add(new OPPORTUNITY_FEASIBILITYDataTable(ds.Tables["OPPORTUNITY_FEASIBILITY"]));
@@ -446,14 +340,17 @@ namespace SystemsAnalysis.DataAccess {
                 if ((ds.Tables["SITE_ASSESSMENT"] != null)) {
                     base.Tables.Add(new SITE_ASSESSMENTDataTable(ds.Tables["SITE_ASSESSMENT"]));
                 }
-                if ((ds.Tables["SITE_MODEL_CONDITION"] != null)) {
-                    base.Tables.Add(new SITE_MODEL_CONDITIONDataTable(ds.Tables["SITE_MODEL_CONDITION"]));
-                }
                 if ((ds.Tables["SITE_OPPORTUNITY"] != null)) {
                     base.Tables.Add(new SITE_OPPORTUNITYDataTable(ds.Tables["SITE_OPPORTUNITY"]));
                 }
                 if ((ds.Tables["SITE"] != null)) {
                     base.Tables.Add(new SITEDataTable(ds.Tables["SITE"]));
+                }
+                if ((ds.Tables["RETRO_BASIN"] != null)) {
+                    base.Tables.Add(new RETRO_BASINDataTable(ds.Tables["RETRO_BASIN"]));
+                }
+                if ((ds.Tables["SEWER_BASIN"] != null)) {
+                    base.Tables.Add(new SEWER_BASINDataTable(ds.Tables["SEWER_BASIN"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -497,24 +394,6 @@ namespace SystemsAnalysis.DataAccess {
                     this.tableASSESSMENT_TYPE.InitVars();
                 }
             }
-            this.tableCONSTRUCTOR = ((CONSTRUCTORDataTable)(base.Tables["CONSTRUCTOR"]));
-            if ((initTable == true)) {
-                if ((this.tableCONSTRUCTOR != null)) {
-                    this.tableCONSTRUCTOR.InitVars();
-                }
-            }
-            this.tableCONTRACTOR = ((CONTRACTORDataTable)(base.Tables["CONTRACTOR"]));
-            if ((initTable == true)) {
-                if ((this.tableCONTRACTOR != null)) {
-                    this.tableCONTRACTOR.InitVars();
-                }
-            }
-            this.tableDESIGNER = ((DESIGNERDataTable)(base.Tables["DESIGNER"]));
-            if ((initTable == true)) {
-                if ((this.tableDESIGNER != null)) {
-                    this.tableDESIGNER.InitVars();
-                }
-            }
             this.tableDESTINATION = ((DESTINATIONDataTable)(base.Tables["DESTINATION"]));
             if ((initTable == true)) {
                 if ((this.tableDESTINATION != null)) {
@@ -525,24 +404,6 @@ namespace SystemsAnalysis.DataAccess {
             if ((initTable == true)) {
                 if ((this.tableIMPERVIOUS_AREA_TYPE != null)) {
                     this.tableIMPERVIOUS_AREA_TYPE.InitVars();
-                }
-            }
-            this.tableINFILTRATION_TEST = ((INFILTRATION_TESTDataTable)(base.Tables["INFILTRATION_TEST"]));
-            if ((initTable == true)) {
-                if ((this.tableINFILTRATION_TEST != null)) {
-                    this.tableINFILTRATION_TEST.InitVars();
-                }
-            }
-            this.tableINFORMATION_SOURCE = ((INFORMATION_SOURCEDataTable)(base.Tables["INFORMATION_SOURCE"]));
-            if ((initTable == true)) {
-                if ((this.tableINFORMATION_SOURCE != null)) {
-                    this.tableINFORMATION_SOURCE.InitVars();
-                }
-            }
-            this.tableMANAGEMENT = ((MANAGEMENTDataTable)(base.Tables["MANAGEMENT"]));
-            if ((initTable == true)) {
-                if ((this.tableMANAGEMENT != null)) {
-                    this.tableMANAGEMENT.InitVars();
                 }
             }
             this.tableOPPORTUNITY_FEASIBILITY = ((OPPORTUNITY_FEASIBILITYDataTable)(base.Tables["OPPORTUNITY_FEASIBILITY"]));
@@ -569,12 +430,6 @@ namespace SystemsAnalysis.DataAccess {
                     this.tableSITE_ASSESSMENT.InitVars();
                 }
             }
-            this.tableSITE_MODEL_CONDITION = ((SITE_MODEL_CONDITIONDataTable)(base.Tables["SITE_MODEL_CONDITION"]));
-            if ((initTable == true)) {
-                if ((this.tableSITE_MODEL_CONDITION != null)) {
-                    this.tableSITE_MODEL_CONDITION.InitVars();
-                }
-            }
             this.tableSITE_OPPORTUNITY = ((SITE_OPPORTUNITYDataTable)(base.Tables["SITE_OPPORTUNITY"]));
             if ((initTable == true)) {
                 if ((this.tableSITE_OPPORTUNITY != null)) {
@@ -587,24 +442,27 @@ namespace SystemsAnalysis.DataAccess {
                     this.tableSITE.InitVars();
                 }
             }
-            this.relationFK_PROJECT_CONSTRUCTOR = this.Relations["FK_PROJECT_CONSTRUCTOR"];
-            this.relationFK_PROJECT_CONTRACTOR = this.Relations["FK_PROJECT_CONTRACTOR"];
-            this.relationFK_PROJECT_DESIGNER = this.Relations["FK_PROJECT_DESIGNER"];
+            this.tableRETRO_BASIN = ((RETRO_BASINDataTable)(base.Tables["RETRO_BASIN"]));
+            if ((initTable == true)) {
+                if ((this.tableRETRO_BASIN != null)) {
+                    this.tableRETRO_BASIN.InitVars();
+                }
+            }
+            this.tableSEWER_BASIN = ((SEWER_BASINDataTable)(base.Tables["SEWER_BASIN"]));
+            if ((initTable == true)) {
+                if ((this.tableSEWER_BASIN != null)) {
+                    this.tableSEWER_BASIN.InitVars();
+                }
+            }
             this.relationFK_PROJECT_FACILITY_TYPE = this.Relations["FK_PROJECT_FACILITY_TYPE"];
-            this.relationFK_PROJECT_INFILTRATION_TEST = this.Relations["FK_PROJECT_INFILTRATION_TEST"];
-            this.relationFK_PROJECT_MANAGEMENT = this.Relations["FK_PROJECT_MANAGEMENT"];
             this.relationFK_PROJECT_PROJECT_STATUS = this.Relations["FK_PROJECT_PROJECT_STATUS"];
             this.relationFK_SITE_ASSESSMENT_ASSESSMENT_TYPE = this.Relations["FK_SITE_ASSESSMENT_ASSESSMENT_TYPE"];
             this.relationFK_SITE_ASSESSMENT_DESTINATION = this.Relations["FK_SITE_ASSESSMENT_DESTINATION"];
             this.relationFK_SITE_ASSESSMENT_FACILITY_TYPE = this.Relations["FK_SITE_ASSESSMENT_FACILITY_TYPE"];
             this.relationFK_SITE_ASSESSMENT_IMPERVIOUS_AREA_TYPE = this.Relations["FK_SITE_ASSESSMENT_IMPERVIOUS_AREA_TYPE"];
-            this.relationFK_SITE_ASSESSMENT_INFORMATION_SOURCE = this.Relations["FK_SITE_ASSESSMENT_INFORMATION_SOURCE"];
-            this.relationFK_SITE_ASSESSMENT_MANAGEMENT = this.Relations["FK_SITE_ASSESSMENT_MANAGEMENT"];
             this.relationFK_SITE_ASSESSMENT_PROJECT = this.Relations["FK_SITE_ASSESSMENT_PROJECT"];
             this.relationFK_SITE_OPPORTUNITY_FACILITY_TYPE = this.Relations["FK_SITE_OPPORTUNITY_FACILITY_TYPE"];
-            this.relationFK_SITE_OPPORTUNITY_MANAGEMENT = this.Relations["FK_SITE_OPPORTUNITY_MANAGEMENT"];
             this.relationFK_SITE_ASSESSMENT_SITE = this.Relations["FK_SITE_ASSESSMENT_SITE"];
-            this.relationFK_SITE_MODEL_CONDITION_SITE = this.Relations["FK_SITE_MODEL_CONDITION_SITE"];
             this.relationFK_SITE_OPPORTUNITY_SITE = this.Relations["FK_SITE_OPPORTUNITY_SITE"];
         }
         
@@ -619,22 +477,10 @@ namespace SystemsAnalysis.DataAccess {
             base.Tables.Add(this.tableFACILITY_TYPE);
             this.tableASSESSMENT_TYPE = new ASSESSMENT_TYPEDataTable();
             base.Tables.Add(this.tableASSESSMENT_TYPE);
-            this.tableCONSTRUCTOR = new CONSTRUCTORDataTable();
-            base.Tables.Add(this.tableCONSTRUCTOR);
-            this.tableCONTRACTOR = new CONTRACTORDataTable();
-            base.Tables.Add(this.tableCONTRACTOR);
-            this.tableDESIGNER = new DESIGNERDataTable();
-            base.Tables.Add(this.tableDESIGNER);
             this.tableDESTINATION = new DESTINATIONDataTable();
             base.Tables.Add(this.tableDESTINATION);
             this.tableIMPERVIOUS_AREA_TYPE = new IMPERVIOUS_AREA_TYPEDataTable();
             base.Tables.Add(this.tableIMPERVIOUS_AREA_TYPE);
-            this.tableINFILTRATION_TEST = new INFILTRATION_TESTDataTable();
-            base.Tables.Add(this.tableINFILTRATION_TEST);
-            this.tableINFORMATION_SOURCE = new INFORMATION_SOURCEDataTable();
-            base.Tables.Add(this.tableINFORMATION_SOURCE);
-            this.tableMANAGEMENT = new MANAGEMENTDataTable();
-            base.Tables.Add(this.tableMANAGEMENT);
             this.tableOPPORTUNITY_FEASIBILITY = new OPPORTUNITY_FEASIBILITYDataTable();
             base.Tables.Add(this.tableOPPORTUNITY_FEASIBILITY);
             this.tablePROJECT = new PROJECTDataTable();
@@ -643,36 +489,18 @@ namespace SystemsAnalysis.DataAccess {
             base.Tables.Add(this.tablePROJECT_STATUS);
             this.tableSITE_ASSESSMENT = new SITE_ASSESSMENTDataTable();
             base.Tables.Add(this.tableSITE_ASSESSMENT);
-            this.tableSITE_MODEL_CONDITION = new SITE_MODEL_CONDITIONDataTable();
-            base.Tables.Add(this.tableSITE_MODEL_CONDITION);
             this.tableSITE_OPPORTUNITY = new SITE_OPPORTUNITYDataTable();
             base.Tables.Add(this.tableSITE_OPPORTUNITY);
             this.tableSITE = new SITEDataTable();
             base.Tables.Add(this.tableSITE);
-            this.relationFK_PROJECT_CONSTRUCTOR = new global::System.Data.DataRelation("FK_PROJECT_CONSTRUCTOR", new global::System.Data.DataColumn[] {
-                        this.tableCONSTRUCTOR.constructor_idColumn}, new global::System.Data.DataColumn[] {
-                        this.tablePROJECT.constructor_idColumn}, false);
-            this.Relations.Add(this.relationFK_PROJECT_CONSTRUCTOR);
-            this.relationFK_PROJECT_CONTRACTOR = new global::System.Data.DataRelation("FK_PROJECT_CONTRACTOR", new global::System.Data.DataColumn[] {
-                        this.tableCONTRACTOR.contractor_idColumn}, new global::System.Data.DataColumn[] {
-                        this.tablePROJECT.contractor_idColumn}, false);
-            this.Relations.Add(this.relationFK_PROJECT_CONTRACTOR);
-            this.relationFK_PROJECT_DESIGNER = new global::System.Data.DataRelation("FK_PROJECT_DESIGNER", new global::System.Data.DataColumn[] {
-                        this.tableDESIGNER.designer_idColumn}, new global::System.Data.DataColumn[] {
-                        this.tablePROJECT.designer_idColumn}, false);
-            this.Relations.Add(this.relationFK_PROJECT_DESIGNER);
+            this.tableRETRO_BASIN = new RETRO_BASINDataTable();
+            base.Tables.Add(this.tableRETRO_BASIN);
+            this.tableSEWER_BASIN = new SEWER_BASINDataTable();
+            base.Tables.Add(this.tableSEWER_BASIN);
             this.relationFK_PROJECT_FACILITY_TYPE = new global::System.Data.DataRelation("FK_PROJECT_FACILITY_TYPE", new global::System.Data.DataColumn[] {
                         this.tableFACILITY_TYPE.facility_type_idColumn}, new global::System.Data.DataColumn[] {
                         this.tablePROJECT.facility_type_idColumn}, false);
             this.Relations.Add(this.relationFK_PROJECT_FACILITY_TYPE);
-            this.relationFK_PROJECT_INFILTRATION_TEST = new global::System.Data.DataRelation("FK_PROJECT_INFILTRATION_TEST", new global::System.Data.DataColumn[] {
-                        this.tableINFILTRATION_TEST.infiltration_test_idColumn}, new global::System.Data.DataColumn[] {
-                        this.tablePROJECT.infiltration_test_idColumn}, false);
-            this.Relations.Add(this.relationFK_PROJECT_INFILTRATION_TEST);
-            this.relationFK_PROJECT_MANAGEMENT = new global::System.Data.DataRelation("FK_PROJECT_MANAGEMENT", new global::System.Data.DataColumn[] {
-                        this.tableMANAGEMENT.management_idColumn}, new global::System.Data.DataColumn[] {
-                        this.tablePROJECT.management_idColumn}, false);
-            this.Relations.Add(this.relationFK_PROJECT_MANAGEMENT);
             this.relationFK_PROJECT_PROJECT_STATUS = new global::System.Data.DataRelation("FK_PROJECT_PROJECT_STATUS", new global::System.Data.DataColumn[] {
                         this.tablePROJECT_STATUS.project_status_idColumn}, new global::System.Data.DataColumn[] {
                         this.tablePROJECT.project_status_idColumn}, false);
@@ -693,14 +521,6 @@ namespace SystemsAnalysis.DataAccess {
                         this.tableIMPERVIOUS_AREA_TYPE.ia_type_idColumn}, new global::System.Data.DataColumn[] {
                         this.tableSITE_ASSESSMENT.ia_type_idColumn}, false);
             this.Relations.Add(this.relationFK_SITE_ASSESSMENT_IMPERVIOUS_AREA_TYPE);
-            this.relationFK_SITE_ASSESSMENT_INFORMATION_SOURCE = new global::System.Data.DataRelation("FK_SITE_ASSESSMENT_INFORMATION_SOURCE", new global::System.Data.DataColumn[] {
-                        this.tableINFORMATION_SOURCE.information_source_idColumn}, new global::System.Data.DataColumn[] {
-                        this.tableSITE_ASSESSMENT.information_source_idColumn}, false);
-            this.Relations.Add(this.relationFK_SITE_ASSESSMENT_INFORMATION_SOURCE);
-            this.relationFK_SITE_ASSESSMENT_MANAGEMENT = new global::System.Data.DataRelation("FK_SITE_ASSESSMENT_MANAGEMENT", new global::System.Data.DataColumn[] {
-                        this.tableMANAGEMENT.management_idColumn}, new global::System.Data.DataColumn[] {
-                        this.tableSITE_ASSESSMENT.management_idColumn}, false);
-            this.Relations.Add(this.relationFK_SITE_ASSESSMENT_MANAGEMENT);
             this.relationFK_SITE_ASSESSMENT_PROJECT = new global::System.Data.DataRelation("FK_SITE_ASSESSMENT_PROJECT", new global::System.Data.DataColumn[] {
                         this.tablePROJECT.project_idColumn}, new global::System.Data.DataColumn[] {
                         this.tableSITE_ASSESSMENT.project_idColumn}, false);
@@ -709,18 +529,10 @@ namespace SystemsAnalysis.DataAccess {
                         this.tableFACILITY_TYPE.facility_type_idColumn}, new global::System.Data.DataColumn[] {
                         this.tableSITE_OPPORTUNITY.facility_type_idColumn}, false);
             this.Relations.Add(this.relationFK_SITE_OPPORTUNITY_FACILITY_TYPE);
-            this.relationFK_SITE_OPPORTUNITY_MANAGEMENT = new global::System.Data.DataRelation("FK_SITE_OPPORTUNITY_MANAGEMENT", new global::System.Data.DataColumn[] {
-                        this.tableMANAGEMENT.management_idColumn}, new global::System.Data.DataColumn[] {
-                        this.tableSITE_OPPORTUNITY.management_idColumn}, false);
-            this.Relations.Add(this.relationFK_SITE_OPPORTUNITY_MANAGEMENT);
             this.relationFK_SITE_ASSESSMENT_SITE = new global::System.Data.DataRelation("FK_SITE_ASSESSMENT_SITE", new global::System.Data.DataColumn[] {
                         this.tableSITE.site_idColumn}, new global::System.Data.DataColumn[] {
                         this.tableSITE_ASSESSMENT.site_idColumn}, false);
             this.Relations.Add(this.relationFK_SITE_ASSESSMENT_SITE);
-            this.relationFK_SITE_MODEL_CONDITION_SITE = new global::System.Data.DataRelation("FK_SITE_MODEL_CONDITION_SITE", new global::System.Data.DataColumn[] {
-                        this.tableSITE.site_idColumn}, new global::System.Data.DataColumn[] {
-                        this.tableSITE_MODEL_CONDITION.site_idColumn}, false);
-            this.Relations.Add(this.relationFK_SITE_MODEL_CONDITION_SITE);
             this.relationFK_SITE_OPPORTUNITY_SITE = new global::System.Data.DataRelation("FK_SITE_OPPORTUNITY_SITE", new global::System.Data.DataColumn[] {
                         this.tableSITE.site_idColumn}, new global::System.Data.DataColumn[] {
                         this.tableSITE_OPPORTUNITY.site_idColumn}, false);
@@ -738,42 +550,12 @@ namespace SystemsAnalysis.DataAccess {
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializeCONSTRUCTOR() {
-            return false;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializeCONTRACTOR() {
-            return false;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializeDESIGNER() {
-            return false;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private bool ShouldSerializeDESTINATION() {
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private bool ShouldSerializeIMPERVIOUS_AREA_TYPE() {
-            return false;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializeINFILTRATION_TEST() {
-            return false;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializeINFORMATION_SOURCE() {
-            return false;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializeMANAGEMENT() {
             return false;
         }
         
@@ -798,17 +580,22 @@ namespace SystemsAnalysis.DataAccess {
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializeSITE_MODEL_CONDITION() {
-            return false;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private bool ShouldSerializeSITE_OPPORTUNITY() {
             return false;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private bool ShouldSerializeSITE() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private bool ShouldSerializeRETRO_BASIN() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private bool ShouldSerializeSEWER_BASIN() {
             return false;
         }
         
@@ -869,21 +656,9 @@ namespace SystemsAnalysis.DataAccess {
         
         public delegate void ASSESSMENT_TYPERowChangeEventHandler(object sender, ASSESSMENT_TYPERowChangeEvent e);
         
-        public delegate void CONSTRUCTORRowChangeEventHandler(object sender, CONSTRUCTORRowChangeEvent e);
-        
-        public delegate void CONTRACTORRowChangeEventHandler(object sender, CONTRACTORRowChangeEvent e);
-        
-        public delegate void DESIGNERRowChangeEventHandler(object sender, DESIGNERRowChangeEvent e);
-        
         public delegate void DESTINATIONRowChangeEventHandler(object sender, DESTINATIONRowChangeEvent e);
         
         public delegate void IMPERVIOUS_AREA_TYPERowChangeEventHandler(object sender, IMPERVIOUS_AREA_TYPERowChangeEvent e);
-        
-        public delegate void INFILTRATION_TESTRowChangeEventHandler(object sender, INFILTRATION_TESTRowChangeEvent e);
-        
-        public delegate void INFORMATION_SOURCERowChangeEventHandler(object sender, INFORMATION_SOURCERowChangeEvent e);
-        
-        public delegate void MANAGEMENTRowChangeEventHandler(object sender, MANAGEMENTRowChangeEvent e);
         
         public delegate void OPPORTUNITY_FEASIBILITYRowChangeEventHandler(object sender, OPPORTUNITY_FEASIBILITYRowChangeEvent e);
         
@@ -893,11 +668,13 @@ namespace SystemsAnalysis.DataAccess {
         
         public delegate void SITE_ASSESSMENTRowChangeEventHandler(object sender, SITE_ASSESSMENTRowChangeEvent e);
         
-        public delegate void SITE_MODEL_CONDITIONRowChangeEventHandler(object sender, SITE_MODEL_CONDITIONRowChangeEvent e);
-        
         public delegate void SITE_OPPORTUNITYRowChangeEventHandler(object sender, SITE_OPPORTUNITYRowChangeEvent e);
         
         public delegate void SITERowChangeEventHandler(object sender, SITERowChangeEvent e);
+        
+        public delegate void RETRO_BASINRowChangeEventHandler(object sender, RETRO_BASINRowChangeEvent e);
+        
+        public delegate void SEWER_BASINRowChangeEventHandler(object sender, SEWER_BASINRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -1409,762 +1186,6 @@ namespace SystemsAnalysis.DataAccess {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class CONSTRUCTORDataTable : global::System.Data.TypedTableBase<CONSTRUCTORRow> {
-            
-            private global::System.Data.DataColumn columnconstructor_id;
-            
-            private global::System.Data.DataColumn columnname;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public CONSTRUCTORDataTable() {
-                this.TableName = "CONSTRUCTOR";
-                this.BeginInit();
-                this.InitClass();
-                this.EndInit();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal CONSTRUCTORDataTable(global::System.Data.DataTable table) {
-                this.TableName = table.TableName;
-                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
-                    this.CaseSensitive = table.CaseSensitive;
-                }
-                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
-                    this.Locale = table.Locale;
-                }
-                if ((table.Namespace != table.DataSet.Namespace)) {
-                    this.Namespace = table.Namespace;
-                }
-                this.Prefix = table.Prefix;
-                this.MinimumCapacity = table.MinimumCapacity;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected CONSTRUCTORDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
-                    base(info, context) {
-                this.InitVars();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn constructor_idColumn {
-                get {
-                    return this.columnconstructor_id;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn nameColumn {
-                get {
-                    return this.columnname;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.ComponentModel.Browsable(false)]
-            public int Count {
-                get {
-                    return this.Rows.Count;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public CONSTRUCTORRow this[int index] {
-                get {
-                    return ((CONSTRUCTORRow)(this.Rows[index]));
-                }
-            }
-            
-            public event CONSTRUCTORRowChangeEventHandler CONSTRUCTORRowChanging;
-            
-            public event CONSTRUCTORRowChangeEventHandler CONSTRUCTORRowChanged;
-            
-            public event CONSTRUCTORRowChangeEventHandler CONSTRUCTORRowDeleting;
-            
-            public event CONSTRUCTORRowChangeEventHandler CONSTRUCTORRowDeleted;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void AddCONSTRUCTORRow(CONSTRUCTORRow row) {
-                this.Rows.Add(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public CONSTRUCTORRow AddCONSTRUCTORRow(string name) {
-                CONSTRUCTORRow rowCONSTRUCTORRow = ((CONSTRUCTORRow)(this.NewRow()));
-                object[] columnValuesArray = new object[] {
-                        null,
-                        name};
-                rowCONSTRUCTORRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowCONSTRUCTORRow);
-                return rowCONSTRUCTORRow;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public CONSTRUCTORRow FindByconstructor_id(int constructor_id) {
-                return ((CONSTRUCTORRow)(this.Rows.Find(new object[] {
-                            constructor_id})));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public override global::System.Data.DataTable Clone() {
-                CONSTRUCTORDataTable cln = ((CONSTRUCTORDataTable)(base.Clone()));
-                cln.InitVars();
-                return cln;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Data.DataTable CreateInstance() {
-                return new CONSTRUCTORDataTable();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal void InitVars() {
-                this.columnconstructor_id = base.Columns["constructor_id"];
-                this.columnname = base.Columns["name"];
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            private void InitClass() {
-                this.columnconstructor_id = new global::System.Data.DataColumn("constructor_id", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnconstructor_id);
-                this.columnname = new global::System.Data.DataColumn("name", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnname);
-                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columnconstructor_id}, true));
-                this.columnconstructor_id.AutoIncrement = true;
-                this.columnconstructor_id.AutoIncrementSeed = -1;
-                this.columnconstructor_id.AutoIncrementStep = -1;
-                this.columnconstructor_id.AllowDBNull = false;
-                this.columnconstructor_id.ReadOnly = true;
-                this.columnconstructor_id.Unique = true;
-                this.columnname.AllowDBNull = false;
-                this.columnname.MaxLength = 50;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public CONSTRUCTORRow NewCONSTRUCTORRow() {
-                return ((CONSTRUCTORRow)(this.NewRow()));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new CONSTRUCTORRow(builder);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Type GetRowType() {
-                return typeof(CONSTRUCTORRow);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanged(e);
-                if ((this.CONSTRUCTORRowChanged != null)) {
-                    this.CONSTRUCTORRowChanged(this, new CONSTRUCTORRowChangeEvent(((CONSTRUCTORRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanging(e);
-                if ((this.CONSTRUCTORRowChanging != null)) {
-                    this.CONSTRUCTORRowChanging(this, new CONSTRUCTORRowChangeEvent(((CONSTRUCTORRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleted(e);
-                if ((this.CONSTRUCTORRowDeleted != null)) {
-                    this.CONSTRUCTORRowDeleted(this, new CONSTRUCTORRowChangeEvent(((CONSTRUCTORRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleting(e);
-                if ((this.CONSTRUCTORRowDeleting != null)) {
-                    this.CONSTRUCTORRowDeleting(this, new CONSTRUCTORRowChangeEvent(((CONSTRUCTORRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void RemoveCONSTRUCTORRow(CONSTRUCTORRow row) {
-                this.Rows.Remove(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
-                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                RetrofitsDataSet ds = new RetrofitsDataSet();
-                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
-                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
-                any1.MinOccurs = new decimal(0);
-                any1.MaxOccurs = decimal.MaxValue;
-                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any1);
-                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
-                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
-                any2.MinOccurs = new decimal(1);
-                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any2);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute1.Name = "namespace";
-                attribute1.FixedValue = ds.Namespace;
-                type.Attributes.Add(attribute1);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "CONSTRUCTORDataTable";
-                type.Attributes.Add(attribute2);
-                type.Particle = sequence;
-                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-                if (xs.Contains(dsSchema.TargetNamespace)) {
-                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
-                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-                    try {
-                        global::System.Xml.Schema.XmlSchema schema = null;
-                        dsSchema.Write(s1);
-                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
-                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
-                            s2.SetLength(0);
-                            schema.Write(s2);
-                            if ((s1.Length == s2.Length)) {
-                                s1.Position = 0;
-                                s2.Position = 0;
-                                for (; ((s1.Position != s1.Length) 
-                                            && (s1.ReadByte() == s2.ReadByte())); ) {
-                                    ;
-                                }
-                                if ((s1.Position == s1.Length)) {
-                                    return type;
-                                }
-                            }
-                        }
-                    }
-                    finally {
-                        if ((s1 != null)) {
-                            s1.Close();
-                        }
-                        if ((s2 != null)) {
-                            s2.Close();
-                        }
-                    }
-                }
-                xs.Add(dsSchema);
-                return type;
-            }
-        }
-        
-        /// <summary>
-        ///Represents the strongly named DataTable class.
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        [global::System.Serializable()]
-        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class CONTRACTORDataTable : global::System.Data.TypedTableBase<CONTRACTORRow> {
-            
-            private global::System.Data.DataColumn columncontractor_id;
-            
-            private global::System.Data.DataColumn columnname;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public CONTRACTORDataTable() {
-                this.TableName = "CONTRACTOR";
-                this.BeginInit();
-                this.InitClass();
-                this.EndInit();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal CONTRACTORDataTable(global::System.Data.DataTable table) {
-                this.TableName = table.TableName;
-                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
-                    this.CaseSensitive = table.CaseSensitive;
-                }
-                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
-                    this.Locale = table.Locale;
-                }
-                if ((table.Namespace != table.DataSet.Namespace)) {
-                    this.Namespace = table.Namespace;
-                }
-                this.Prefix = table.Prefix;
-                this.MinimumCapacity = table.MinimumCapacity;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected CONTRACTORDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
-                    base(info, context) {
-                this.InitVars();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn contractor_idColumn {
-                get {
-                    return this.columncontractor_id;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn nameColumn {
-                get {
-                    return this.columnname;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.ComponentModel.Browsable(false)]
-            public int Count {
-                get {
-                    return this.Rows.Count;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public CONTRACTORRow this[int index] {
-                get {
-                    return ((CONTRACTORRow)(this.Rows[index]));
-                }
-            }
-            
-            public event CONTRACTORRowChangeEventHandler CONTRACTORRowChanging;
-            
-            public event CONTRACTORRowChangeEventHandler CONTRACTORRowChanged;
-            
-            public event CONTRACTORRowChangeEventHandler CONTRACTORRowDeleting;
-            
-            public event CONTRACTORRowChangeEventHandler CONTRACTORRowDeleted;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void AddCONTRACTORRow(CONTRACTORRow row) {
-                this.Rows.Add(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public CONTRACTORRow AddCONTRACTORRow(string name) {
-                CONTRACTORRow rowCONTRACTORRow = ((CONTRACTORRow)(this.NewRow()));
-                object[] columnValuesArray = new object[] {
-                        null,
-                        name};
-                rowCONTRACTORRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowCONTRACTORRow);
-                return rowCONTRACTORRow;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public CONTRACTORRow FindBycontractor_id(int contractor_id) {
-                return ((CONTRACTORRow)(this.Rows.Find(new object[] {
-                            contractor_id})));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public override global::System.Data.DataTable Clone() {
-                CONTRACTORDataTable cln = ((CONTRACTORDataTable)(base.Clone()));
-                cln.InitVars();
-                return cln;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Data.DataTable CreateInstance() {
-                return new CONTRACTORDataTable();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal void InitVars() {
-                this.columncontractor_id = base.Columns["contractor_id"];
-                this.columnname = base.Columns["name"];
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            private void InitClass() {
-                this.columncontractor_id = new global::System.Data.DataColumn("contractor_id", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columncontractor_id);
-                this.columnname = new global::System.Data.DataColumn("name", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnname);
-                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columncontractor_id}, true));
-                this.columncontractor_id.AutoIncrement = true;
-                this.columncontractor_id.AutoIncrementSeed = -1;
-                this.columncontractor_id.AutoIncrementStep = -1;
-                this.columncontractor_id.AllowDBNull = false;
-                this.columncontractor_id.ReadOnly = true;
-                this.columncontractor_id.Unique = true;
-                this.columnname.AllowDBNull = false;
-                this.columnname.MaxLength = 250;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public CONTRACTORRow NewCONTRACTORRow() {
-                return ((CONTRACTORRow)(this.NewRow()));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new CONTRACTORRow(builder);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Type GetRowType() {
-                return typeof(CONTRACTORRow);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanged(e);
-                if ((this.CONTRACTORRowChanged != null)) {
-                    this.CONTRACTORRowChanged(this, new CONTRACTORRowChangeEvent(((CONTRACTORRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanging(e);
-                if ((this.CONTRACTORRowChanging != null)) {
-                    this.CONTRACTORRowChanging(this, new CONTRACTORRowChangeEvent(((CONTRACTORRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleted(e);
-                if ((this.CONTRACTORRowDeleted != null)) {
-                    this.CONTRACTORRowDeleted(this, new CONTRACTORRowChangeEvent(((CONTRACTORRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleting(e);
-                if ((this.CONTRACTORRowDeleting != null)) {
-                    this.CONTRACTORRowDeleting(this, new CONTRACTORRowChangeEvent(((CONTRACTORRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void RemoveCONTRACTORRow(CONTRACTORRow row) {
-                this.Rows.Remove(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
-                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                RetrofitsDataSet ds = new RetrofitsDataSet();
-                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
-                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
-                any1.MinOccurs = new decimal(0);
-                any1.MaxOccurs = decimal.MaxValue;
-                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any1);
-                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
-                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
-                any2.MinOccurs = new decimal(1);
-                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any2);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute1.Name = "namespace";
-                attribute1.FixedValue = ds.Namespace;
-                type.Attributes.Add(attribute1);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "CONTRACTORDataTable";
-                type.Attributes.Add(attribute2);
-                type.Particle = sequence;
-                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-                if (xs.Contains(dsSchema.TargetNamespace)) {
-                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
-                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-                    try {
-                        global::System.Xml.Schema.XmlSchema schema = null;
-                        dsSchema.Write(s1);
-                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
-                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
-                            s2.SetLength(0);
-                            schema.Write(s2);
-                            if ((s1.Length == s2.Length)) {
-                                s1.Position = 0;
-                                s2.Position = 0;
-                                for (; ((s1.Position != s1.Length) 
-                                            && (s1.ReadByte() == s2.ReadByte())); ) {
-                                    ;
-                                }
-                                if ((s1.Position == s1.Length)) {
-                                    return type;
-                                }
-                            }
-                        }
-                    }
-                    finally {
-                        if ((s1 != null)) {
-                            s1.Close();
-                        }
-                        if ((s2 != null)) {
-                            s2.Close();
-                        }
-                    }
-                }
-                xs.Add(dsSchema);
-                return type;
-            }
-        }
-        
-        /// <summary>
-        ///Represents the strongly named DataTable class.
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        [global::System.Serializable()]
-        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class DESIGNERDataTable : global::System.Data.TypedTableBase<DESIGNERRow> {
-            
-            private global::System.Data.DataColumn columndesigner_id;
-            
-            private global::System.Data.DataColumn columnname;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public DESIGNERDataTable() {
-                this.TableName = "DESIGNER";
-                this.BeginInit();
-                this.InitClass();
-                this.EndInit();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal DESIGNERDataTable(global::System.Data.DataTable table) {
-                this.TableName = table.TableName;
-                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
-                    this.CaseSensitive = table.CaseSensitive;
-                }
-                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
-                    this.Locale = table.Locale;
-                }
-                if ((table.Namespace != table.DataSet.Namespace)) {
-                    this.Namespace = table.Namespace;
-                }
-                this.Prefix = table.Prefix;
-                this.MinimumCapacity = table.MinimumCapacity;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected DESIGNERDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
-                    base(info, context) {
-                this.InitVars();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn designer_idColumn {
-                get {
-                    return this.columndesigner_id;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn nameColumn {
-                get {
-                    return this.columnname;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.ComponentModel.Browsable(false)]
-            public int Count {
-                get {
-                    return this.Rows.Count;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public DESIGNERRow this[int index] {
-                get {
-                    return ((DESIGNERRow)(this.Rows[index]));
-                }
-            }
-            
-            public event DESIGNERRowChangeEventHandler DESIGNERRowChanging;
-            
-            public event DESIGNERRowChangeEventHandler DESIGNERRowChanged;
-            
-            public event DESIGNERRowChangeEventHandler DESIGNERRowDeleting;
-            
-            public event DESIGNERRowChangeEventHandler DESIGNERRowDeleted;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void AddDESIGNERRow(DESIGNERRow row) {
-                this.Rows.Add(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public DESIGNERRow AddDESIGNERRow(string name) {
-                DESIGNERRow rowDESIGNERRow = ((DESIGNERRow)(this.NewRow()));
-                object[] columnValuesArray = new object[] {
-                        null,
-                        name};
-                rowDESIGNERRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowDESIGNERRow);
-                return rowDESIGNERRow;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public DESIGNERRow FindBydesigner_id(int designer_id) {
-                return ((DESIGNERRow)(this.Rows.Find(new object[] {
-                            designer_id})));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public override global::System.Data.DataTable Clone() {
-                DESIGNERDataTable cln = ((DESIGNERDataTable)(base.Clone()));
-                cln.InitVars();
-                return cln;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Data.DataTable CreateInstance() {
-                return new DESIGNERDataTable();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal void InitVars() {
-                this.columndesigner_id = base.Columns["designer_id"];
-                this.columnname = base.Columns["name"];
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            private void InitClass() {
-                this.columndesigner_id = new global::System.Data.DataColumn("designer_id", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columndesigner_id);
-                this.columnname = new global::System.Data.DataColumn("name", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnname);
-                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columndesigner_id}, true));
-                this.columndesigner_id.AutoIncrement = true;
-                this.columndesigner_id.AutoIncrementSeed = -1;
-                this.columndesigner_id.AutoIncrementStep = -1;
-                this.columndesigner_id.AllowDBNull = false;
-                this.columndesigner_id.ReadOnly = true;
-                this.columndesigner_id.Unique = true;
-                this.columnname.AllowDBNull = false;
-                this.columnname.MaxLength = 50;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public DESIGNERRow NewDESIGNERRow() {
-                return ((DESIGNERRow)(this.NewRow()));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new DESIGNERRow(builder);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Type GetRowType() {
-                return typeof(DESIGNERRow);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanged(e);
-                if ((this.DESIGNERRowChanged != null)) {
-                    this.DESIGNERRowChanged(this, new DESIGNERRowChangeEvent(((DESIGNERRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanging(e);
-                if ((this.DESIGNERRowChanging != null)) {
-                    this.DESIGNERRowChanging(this, new DESIGNERRowChangeEvent(((DESIGNERRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleted(e);
-                if ((this.DESIGNERRowDeleted != null)) {
-                    this.DESIGNERRowDeleted(this, new DESIGNERRowChangeEvent(((DESIGNERRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleting(e);
-                if ((this.DESIGNERRowDeleting != null)) {
-                    this.DESIGNERRowDeleting(this, new DESIGNERRowChangeEvent(((DESIGNERRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void RemoveDESIGNERRow(DESIGNERRow row) {
-                this.Rows.Remove(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
-                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                RetrofitsDataSet ds = new RetrofitsDataSet();
-                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
-                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
-                any1.MinOccurs = new decimal(0);
-                any1.MaxOccurs = decimal.MaxValue;
-                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any1);
-                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
-                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
-                any2.MinOccurs = new decimal(1);
-                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any2);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute1.Name = "namespace";
-                attribute1.FixedValue = ds.Namespace;
-                type.Attributes.Add(attribute1);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "DESIGNERDataTable";
-                type.Attributes.Add(attribute2);
-                type.Particle = sequence;
-                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-                if (xs.Contains(dsSchema.TargetNamespace)) {
-                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
-                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-                    try {
-                        global::System.Xml.Schema.XmlSchema schema = null;
-                        dsSchema.Write(s1);
-                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
-                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
-                            s2.SetLength(0);
-                            schema.Write(s2);
-                            if ((s1.Length == s2.Length)) {
-                                s1.Position = 0;
-                                s2.Position = 0;
-                                for (; ((s1.Position != s1.Length) 
-                                            && (s1.ReadByte() == s2.ReadByte())); ) {
-                                    ;
-                                }
-                                if ((s1.Position == s1.Length)) {
-                                    return type;
-                                }
-                            }
-                        }
-                    }
-                    finally {
-                        if ((s1 != null)) {
-                            s1.Close();
-                        }
-                        if ((s2 != null)) {
-                            s2.Close();
-                        }
-                    }
-                }
-                xs.Add(dsSchema);
-                return type;
-            }
-        }
-        
-        /// <summary>
-        ///Represents the strongly named DataTable class.
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        [global::System.Serializable()]
-        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class DESTINATIONDataTable : global::System.Data.TypedTableBase<DESTINATIONRow> {
             
             private global::System.Data.DataColumn columndestination_id;
@@ -2623,762 +1644,6 @@ namespace SystemsAnalysis.DataAccess {
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
                 attribute2.FixedValue = "IMPERVIOUS_AREA_TYPEDataTable";
-                type.Attributes.Add(attribute2);
-                type.Particle = sequence;
-                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-                if (xs.Contains(dsSchema.TargetNamespace)) {
-                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
-                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-                    try {
-                        global::System.Xml.Schema.XmlSchema schema = null;
-                        dsSchema.Write(s1);
-                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
-                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
-                            s2.SetLength(0);
-                            schema.Write(s2);
-                            if ((s1.Length == s2.Length)) {
-                                s1.Position = 0;
-                                s2.Position = 0;
-                                for (; ((s1.Position != s1.Length) 
-                                            && (s1.ReadByte() == s2.ReadByte())); ) {
-                                    ;
-                                }
-                                if ((s1.Position == s1.Length)) {
-                                    return type;
-                                }
-                            }
-                        }
-                    }
-                    finally {
-                        if ((s1 != null)) {
-                            s1.Close();
-                        }
-                        if ((s2 != null)) {
-                            s2.Close();
-                        }
-                    }
-                }
-                xs.Add(dsSchema);
-                return type;
-            }
-        }
-        
-        /// <summary>
-        ///Represents the strongly named DataTable class.
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        [global::System.Serializable()]
-        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class INFILTRATION_TESTDataTable : global::System.Data.TypedTableBase<INFILTRATION_TESTRow> {
-            
-            private global::System.Data.DataColumn columninfiltration_test_id;
-            
-            private global::System.Data.DataColumn columnname;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public INFILTRATION_TESTDataTable() {
-                this.TableName = "INFILTRATION_TEST";
-                this.BeginInit();
-                this.InitClass();
-                this.EndInit();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal INFILTRATION_TESTDataTable(global::System.Data.DataTable table) {
-                this.TableName = table.TableName;
-                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
-                    this.CaseSensitive = table.CaseSensitive;
-                }
-                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
-                    this.Locale = table.Locale;
-                }
-                if ((table.Namespace != table.DataSet.Namespace)) {
-                    this.Namespace = table.Namespace;
-                }
-                this.Prefix = table.Prefix;
-                this.MinimumCapacity = table.MinimumCapacity;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected INFILTRATION_TESTDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
-                    base(info, context) {
-                this.InitVars();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn infiltration_test_idColumn {
-                get {
-                    return this.columninfiltration_test_id;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn nameColumn {
-                get {
-                    return this.columnname;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.ComponentModel.Browsable(false)]
-            public int Count {
-                get {
-                    return this.Rows.Count;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public INFILTRATION_TESTRow this[int index] {
-                get {
-                    return ((INFILTRATION_TESTRow)(this.Rows[index]));
-                }
-            }
-            
-            public event INFILTRATION_TESTRowChangeEventHandler INFILTRATION_TESTRowChanging;
-            
-            public event INFILTRATION_TESTRowChangeEventHandler INFILTRATION_TESTRowChanged;
-            
-            public event INFILTRATION_TESTRowChangeEventHandler INFILTRATION_TESTRowDeleting;
-            
-            public event INFILTRATION_TESTRowChangeEventHandler INFILTRATION_TESTRowDeleted;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void AddINFILTRATION_TESTRow(INFILTRATION_TESTRow row) {
-                this.Rows.Add(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public INFILTRATION_TESTRow AddINFILTRATION_TESTRow(string name) {
-                INFILTRATION_TESTRow rowINFILTRATION_TESTRow = ((INFILTRATION_TESTRow)(this.NewRow()));
-                object[] columnValuesArray = new object[] {
-                        null,
-                        name};
-                rowINFILTRATION_TESTRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowINFILTRATION_TESTRow);
-                return rowINFILTRATION_TESTRow;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public INFILTRATION_TESTRow FindByinfiltration_test_id(int infiltration_test_id) {
-                return ((INFILTRATION_TESTRow)(this.Rows.Find(new object[] {
-                            infiltration_test_id})));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public override global::System.Data.DataTable Clone() {
-                INFILTRATION_TESTDataTable cln = ((INFILTRATION_TESTDataTable)(base.Clone()));
-                cln.InitVars();
-                return cln;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Data.DataTable CreateInstance() {
-                return new INFILTRATION_TESTDataTable();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal void InitVars() {
-                this.columninfiltration_test_id = base.Columns["infiltration_test_id"];
-                this.columnname = base.Columns["name"];
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            private void InitClass() {
-                this.columninfiltration_test_id = new global::System.Data.DataColumn("infiltration_test_id", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columninfiltration_test_id);
-                this.columnname = new global::System.Data.DataColumn("name", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnname);
-                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columninfiltration_test_id}, true));
-                this.columninfiltration_test_id.AutoIncrement = true;
-                this.columninfiltration_test_id.AutoIncrementSeed = -1;
-                this.columninfiltration_test_id.AutoIncrementStep = -1;
-                this.columninfiltration_test_id.AllowDBNull = false;
-                this.columninfiltration_test_id.ReadOnly = true;
-                this.columninfiltration_test_id.Unique = true;
-                this.columnname.AllowDBNull = false;
-                this.columnname.MaxLength = 50;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public INFILTRATION_TESTRow NewINFILTRATION_TESTRow() {
-                return ((INFILTRATION_TESTRow)(this.NewRow()));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new INFILTRATION_TESTRow(builder);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Type GetRowType() {
-                return typeof(INFILTRATION_TESTRow);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanged(e);
-                if ((this.INFILTRATION_TESTRowChanged != null)) {
-                    this.INFILTRATION_TESTRowChanged(this, new INFILTRATION_TESTRowChangeEvent(((INFILTRATION_TESTRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanging(e);
-                if ((this.INFILTRATION_TESTRowChanging != null)) {
-                    this.INFILTRATION_TESTRowChanging(this, new INFILTRATION_TESTRowChangeEvent(((INFILTRATION_TESTRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleted(e);
-                if ((this.INFILTRATION_TESTRowDeleted != null)) {
-                    this.INFILTRATION_TESTRowDeleted(this, new INFILTRATION_TESTRowChangeEvent(((INFILTRATION_TESTRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleting(e);
-                if ((this.INFILTRATION_TESTRowDeleting != null)) {
-                    this.INFILTRATION_TESTRowDeleting(this, new INFILTRATION_TESTRowChangeEvent(((INFILTRATION_TESTRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void RemoveINFILTRATION_TESTRow(INFILTRATION_TESTRow row) {
-                this.Rows.Remove(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
-                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                RetrofitsDataSet ds = new RetrofitsDataSet();
-                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
-                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
-                any1.MinOccurs = new decimal(0);
-                any1.MaxOccurs = decimal.MaxValue;
-                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any1);
-                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
-                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
-                any2.MinOccurs = new decimal(1);
-                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any2);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute1.Name = "namespace";
-                attribute1.FixedValue = ds.Namespace;
-                type.Attributes.Add(attribute1);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "INFILTRATION_TESTDataTable";
-                type.Attributes.Add(attribute2);
-                type.Particle = sequence;
-                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-                if (xs.Contains(dsSchema.TargetNamespace)) {
-                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
-                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-                    try {
-                        global::System.Xml.Schema.XmlSchema schema = null;
-                        dsSchema.Write(s1);
-                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
-                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
-                            s2.SetLength(0);
-                            schema.Write(s2);
-                            if ((s1.Length == s2.Length)) {
-                                s1.Position = 0;
-                                s2.Position = 0;
-                                for (; ((s1.Position != s1.Length) 
-                                            && (s1.ReadByte() == s2.ReadByte())); ) {
-                                    ;
-                                }
-                                if ((s1.Position == s1.Length)) {
-                                    return type;
-                                }
-                            }
-                        }
-                    }
-                    finally {
-                        if ((s1 != null)) {
-                            s1.Close();
-                        }
-                        if ((s2 != null)) {
-                            s2.Close();
-                        }
-                    }
-                }
-                xs.Add(dsSchema);
-                return type;
-            }
-        }
-        
-        /// <summary>
-        ///Represents the strongly named DataTable class.
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        [global::System.Serializable()]
-        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class INFORMATION_SOURCEDataTable : global::System.Data.TypedTableBase<INFORMATION_SOURCERow> {
-            
-            private global::System.Data.DataColumn columninformation_source_id;
-            
-            private global::System.Data.DataColumn columnname;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public INFORMATION_SOURCEDataTable() {
-                this.TableName = "INFORMATION_SOURCE";
-                this.BeginInit();
-                this.InitClass();
-                this.EndInit();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal INFORMATION_SOURCEDataTable(global::System.Data.DataTable table) {
-                this.TableName = table.TableName;
-                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
-                    this.CaseSensitive = table.CaseSensitive;
-                }
-                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
-                    this.Locale = table.Locale;
-                }
-                if ((table.Namespace != table.DataSet.Namespace)) {
-                    this.Namespace = table.Namespace;
-                }
-                this.Prefix = table.Prefix;
-                this.MinimumCapacity = table.MinimumCapacity;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected INFORMATION_SOURCEDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
-                    base(info, context) {
-                this.InitVars();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn information_source_idColumn {
-                get {
-                    return this.columninformation_source_id;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn nameColumn {
-                get {
-                    return this.columnname;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.ComponentModel.Browsable(false)]
-            public int Count {
-                get {
-                    return this.Rows.Count;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public INFORMATION_SOURCERow this[int index] {
-                get {
-                    return ((INFORMATION_SOURCERow)(this.Rows[index]));
-                }
-            }
-            
-            public event INFORMATION_SOURCERowChangeEventHandler INFORMATION_SOURCERowChanging;
-            
-            public event INFORMATION_SOURCERowChangeEventHandler INFORMATION_SOURCERowChanged;
-            
-            public event INFORMATION_SOURCERowChangeEventHandler INFORMATION_SOURCERowDeleting;
-            
-            public event INFORMATION_SOURCERowChangeEventHandler INFORMATION_SOURCERowDeleted;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void AddINFORMATION_SOURCERow(INFORMATION_SOURCERow row) {
-                this.Rows.Add(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public INFORMATION_SOURCERow AddINFORMATION_SOURCERow(string name) {
-                INFORMATION_SOURCERow rowINFORMATION_SOURCERow = ((INFORMATION_SOURCERow)(this.NewRow()));
-                object[] columnValuesArray = new object[] {
-                        null,
-                        name};
-                rowINFORMATION_SOURCERow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowINFORMATION_SOURCERow);
-                return rowINFORMATION_SOURCERow;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public INFORMATION_SOURCERow FindByinformation_source_id(int information_source_id) {
-                return ((INFORMATION_SOURCERow)(this.Rows.Find(new object[] {
-                            information_source_id})));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public override global::System.Data.DataTable Clone() {
-                INFORMATION_SOURCEDataTable cln = ((INFORMATION_SOURCEDataTable)(base.Clone()));
-                cln.InitVars();
-                return cln;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Data.DataTable CreateInstance() {
-                return new INFORMATION_SOURCEDataTable();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal void InitVars() {
-                this.columninformation_source_id = base.Columns["information_source_id"];
-                this.columnname = base.Columns["name"];
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            private void InitClass() {
-                this.columninformation_source_id = new global::System.Data.DataColumn("information_source_id", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columninformation_source_id);
-                this.columnname = new global::System.Data.DataColumn("name", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnname);
-                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columninformation_source_id}, true));
-                this.columninformation_source_id.AutoIncrement = true;
-                this.columninformation_source_id.AutoIncrementSeed = -1;
-                this.columninformation_source_id.AutoIncrementStep = -1;
-                this.columninformation_source_id.AllowDBNull = false;
-                this.columninformation_source_id.ReadOnly = true;
-                this.columninformation_source_id.Unique = true;
-                this.columnname.AllowDBNull = false;
-                this.columnname.MaxLength = 50;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public INFORMATION_SOURCERow NewINFORMATION_SOURCERow() {
-                return ((INFORMATION_SOURCERow)(this.NewRow()));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new INFORMATION_SOURCERow(builder);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Type GetRowType() {
-                return typeof(INFORMATION_SOURCERow);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanged(e);
-                if ((this.INFORMATION_SOURCERowChanged != null)) {
-                    this.INFORMATION_SOURCERowChanged(this, new INFORMATION_SOURCERowChangeEvent(((INFORMATION_SOURCERow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanging(e);
-                if ((this.INFORMATION_SOURCERowChanging != null)) {
-                    this.INFORMATION_SOURCERowChanging(this, new INFORMATION_SOURCERowChangeEvent(((INFORMATION_SOURCERow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleted(e);
-                if ((this.INFORMATION_SOURCERowDeleted != null)) {
-                    this.INFORMATION_SOURCERowDeleted(this, new INFORMATION_SOURCERowChangeEvent(((INFORMATION_SOURCERow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleting(e);
-                if ((this.INFORMATION_SOURCERowDeleting != null)) {
-                    this.INFORMATION_SOURCERowDeleting(this, new INFORMATION_SOURCERowChangeEvent(((INFORMATION_SOURCERow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void RemoveINFORMATION_SOURCERow(INFORMATION_SOURCERow row) {
-                this.Rows.Remove(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
-                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                RetrofitsDataSet ds = new RetrofitsDataSet();
-                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
-                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
-                any1.MinOccurs = new decimal(0);
-                any1.MaxOccurs = decimal.MaxValue;
-                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any1);
-                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
-                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
-                any2.MinOccurs = new decimal(1);
-                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any2);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute1.Name = "namespace";
-                attribute1.FixedValue = ds.Namespace;
-                type.Attributes.Add(attribute1);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "INFORMATION_SOURCEDataTable";
-                type.Attributes.Add(attribute2);
-                type.Particle = sequence;
-                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-                if (xs.Contains(dsSchema.TargetNamespace)) {
-                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
-                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-                    try {
-                        global::System.Xml.Schema.XmlSchema schema = null;
-                        dsSchema.Write(s1);
-                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
-                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
-                            s2.SetLength(0);
-                            schema.Write(s2);
-                            if ((s1.Length == s2.Length)) {
-                                s1.Position = 0;
-                                s2.Position = 0;
-                                for (; ((s1.Position != s1.Length) 
-                                            && (s1.ReadByte() == s2.ReadByte())); ) {
-                                    ;
-                                }
-                                if ((s1.Position == s1.Length)) {
-                                    return type;
-                                }
-                            }
-                        }
-                    }
-                    finally {
-                        if ((s1 != null)) {
-                            s1.Close();
-                        }
-                        if ((s2 != null)) {
-                            s2.Close();
-                        }
-                    }
-                }
-                xs.Add(dsSchema);
-                return type;
-            }
-        }
-        
-        /// <summary>
-        ///Represents the strongly named DataTable class.
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        [global::System.Serializable()]
-        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class MANAGEMENTDataTable : global::System.Data.TypedTableBase<MANAGEMENTRow> {
-            
-            private global::System.Data.DataColumn columnmanagement_id;
-            
-            private global::System.Data.DataColumn columnname;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public MANAGEMENTDataTable() {
-                this.TableName = "MANAGEMENT";
-                this.BeginInit();
-                this.InitClass();
-                this.EndInit();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal MANAGEMENTDataTable(global::System.Data.DataTable table) {
-                this.TableName = table.TableName;
-                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
-                    this.CaseSensitive = table.CaseSensitive;
-                }
-                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
-                    this.Locale = table.Locale;
-                }
-                if ((table.Namespace != table.DataSet.Namespace)) {
-                    this.Namespace = table.Namespace;
-                }
-                this.Prefix = table.Prefix;
-                this.MinimumCapacity = table.MinimumCapacity;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected MANAGEMENTDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
-                    base(info, context) {
-                this.InitVars();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn management_idColumn {
-                get {
-                    return this.columnmanagement_id;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn nameColumn {
-                get {
-                    return this.columnname;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.ComponentModel.Browsable(false)]
-            public int Count {
-                get {
-                    return this.Rows.Count;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public MANAGEMENTRow this[int index] {
-                get {
-                    return ((MANAGEMENTRow)(this.Rows[index]));
-                }
-            }
-            
-            public event MANAGEMENTRowChangeEventHandler MANAGEMENTRowChanging;
-            
-            public event MANAGEMENTRowChangeEventHandler MANAGEMENTRowChanged;
-            
-            public event MANAGEMENTRowChangeEventHandler MANAGEMENTRowDeleting;
-            
-            public event MANAGEMENTRowChangeEventHandler MANAGEMENTRowDeleted;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void AddMANAGEMENTRow(MANAGEMENTRow row) {
-                this.Rows.Add(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public MANAGEMENTRow AddMANAGEMENTRow(string name) {
-                MANAGEMENTRow rowMANAGEMENTRow = ((MANAGEMENTRow)(this.NewRow()));
-                object[] columnValuesArray = new object[] {
-                        null,
-                        name};
-                rowMANAGEMENTRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowMANAGEMENTRow);
-                return rowMANAGEMENTRow;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public MANAGEMENTRow FindBymanagement_id(int management_id) {
-                return ((MANAGEMENTRow)(this.Rows.Find(new object[] {
-                            management_id})));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public override global::System.Data.DataTable Clone() {
-                MANAGEMENTDataTable cln = ((MANAGEMENTDataTable)(base.Clone()));
-                cln.InitVars();
-                return cln;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Data.DataTable CreateInstance() {
-                return new MANAGEMENTDataTable();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal void InitVars() {
-                this.columnmanagement_id = base.Columns["management_id"];
-                this.columnname = base.Columns["name"];
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            private void InitClass() {
-                this.columnmanagement_id = new global::System.Data.DataColumn("management_id", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnmanagement_id);
-                this.columnname = new global::System.Data.DataColumn("name", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnname);
-                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columnmanagement_id}, true));
-                this.columnmanagement_id.AutoIncrement = true;
-                this.columnmanagement_id.AutoIncrementSeed = -1;
-                this.columnmanagement_id.AutoIncrementStep = -1;
-                this.columnmanagement_id.AllowDBNull = false;
-                this.columnmanagement_id.ReadOnly = true;
-                this.columnmanagement_id.Unique = true;
-                this.columnname.AllowDBNull = false;
-                this.columnname.MaxLength = 50;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public MANAGEMENTRow NewMANAGEMENTRow() {
-                return ((MANAGEMENTRow)(this.NewRow()));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new MANAGEMENTRow(builder);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Type GetRowType() {
-                return typeof(MANAGEMENTRow);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanged(e);
-                if ((this.MANAGEMENTRowChanged != null)) {
-                    this.MANAGEMENTRowChanged(this, new MANAGEMENTRowChangeEvent(((MANAGEMENTRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanging(e);
-                if ((this.MANAGEMENTRowChanging != null)) {
-                    this.MANAGEMENTRowChanging(this, new MANAGEMENTRowChangeEvent(((MANAGEMENTRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleted(e);
-                if ((this.MANAGEMENTRowDeleted != null)) {
-                    this.MANAGEMENTRowDeleted(this, new MANAGEMENTRowChangeEvent(((MANAGEMENTRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleting(e);
-                if ((this.MANAGEMENTRowDeleting != null)) {
-                    this.MANAGEMENTRowDeleting(this, new MANAGEMENTRowChangeEvent(((MANAGEMENTRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void RemoveMANAGEMENTRow(MANAGEMENTRow row) {
-                this.Rows.Remove(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
-                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                RetrofitsDataSet ds = new RetrofitsDataSet();
-                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
-                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
-                any1.MinOccurs = new decimal(0);
-                any1.MaxOccurs = decimal.MaxValue;
-                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any1);
-                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
-                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
-                any2.MinOccurs = new decimal(1);
-                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any2);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute1.Name = "namespace";
-                attribute1.FixedValue = ds.Namespace;
-                type.Attributes.Add(attribute1);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "MANAGEMENTDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -4022,12 +2287,12 @@ namespace SystemsAnalysis.DataAccess {
                         int ia_managed_paved, 
                         int facility_size, 
                         int storage_volume, 
-                        INFILTRATION_TESTRow parentINFILTRATION_TESTRowByFK_PROJECT_INFILTRATION_TEST, 
+                        int infiltration_test_id, 
                         decimal infiltration_rate, 
                         PROJECT_STATUSRow parentPROJECT_STATUSRowByFK_PROJECT_PROJECT_STATUS, 
-                        DESIGNERRow parentDESIGNERRowByFK_PROJECT_DESIGNER, 
-                        CONSTRUCTORRow parentCONSTRUCTORRowByFK_PROJECT_CONSTRUCTOR, 
-                        CONTRACTORRow parentCONTRACTORRowByFK_PROJECT_CONTRACTOR, 
+                        int designer_id, 
+                        int constructor_id, 
+                        int contractor_id, 
                         decimal city_cost, 
                         string primary_contact_name, 
                         string primary_contact_phone, 
@@ -4036,7 +2301,7 @@ namespace SystemsAnalysis.DataAccess {
                         int project_manager_id, 
                         int o_and_m_id, 
                         int permit_status_id, 
-                        MANAGEMENTRow parentMANAGEMENTRowByFK_PROJECT_MANAGEMENT, 
+                        int management_id, 
                         string create_by, 
                         System.DateTime create_date, 
                         string update_by, 
@@ -4053,12 +2318,12 @@ namespace SystemsAnalysis.DataAccess {
                         ia_managed_paved,
                         facility_size,
                         storage_volume,
-                        null,
+                        infiltration_test_id,
                         infiltration_rate,
                         null,
-                        null,
-                        null,
-                        null,
+                        designer_id,
+                        constructor_id,
+                        contractor_id,
                         city_cost,
                         primary_contact_name,
                         primary_contact_phone,
@@ -4067,7 +2332,7 @@ namespace SystemsAnalysis.DataAccess {
                         project_manager_id,
                         o_and_m_id,
                         permit_status_id,
-                        null,
+                        management_id,
                         create_by,
                         create_date,
                         update_by,
@@ -4076,23 +2341,8 @@ namespace SystemsAnalysis.DataAccess {
                 if ((parentFACILITY_TYPERowByFK_PROJECT_FACILITY_TYPE != null)) {
                     columnValuesArray[4] = parentFACILITY_TYPERowByFK_PROJECT_FACILITY_TYPE[0];
                 }
-                if ((parentINFILTRATION_TESTRowByFK_PROJECT_INFILTRATION_TEST != null)) {
-                    columnValuesArray[9] = parentINFILTRATION_TESTRowByFK_PROJECT_INFILTRATION_TEST[0];
-                }
                 if ((parentPROJECT_STATUSRowByFK_PROJECT_PROJECT_STATUS != null)) {
                     columnValuesArray[11] = parentPROJECT_STATUSRowByFK_PROJECT_PROJECT_STATUS[0];
-                }
-                if ((parentDESIGNERRowByFK_PROJECT_DESIGNER != null)) {
-                    columnValuesArray[12] = parentDESIGNERRowByFK_PROJECT_DESIGNER[0];
-                }
-                if ((parentCONSTRUCTORRowByFK_PROJECT_CONSTRUCTOR != null)) {
-                    columnValuesArray[13] = parentCONSTRUCTORRowByFK_PROJECT_CONSTRUCTOR[0];
-                }
-                if ((parentCONTRACTORRowByFK_PROJECT_CONTRACTOR != null)) {
-                    columnValuesArray[14] = parentCONTRACTORRowByFK_PROJECT_CONTRACTOR[0];
-                }
-                if ((parentMANAGEMENTRowByFK_PROJECT_MANAGEMENT != null)) {
-                    columnValuesArray[23] = parentMANAGEMENTRowByFK_PROJECT_MANAGEMENT[0];
                 }
                 rowPROJECTRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowPROJECTRow);
@@ -4876,11 +3126,11 @@ namespace SystemsAnalysis.DataAccess {
                         SITERow parentSITERowByFK_SITE_ASSESSMENT_SITE, 
                         System.DateTime assessment_date, 
                         int staff_id, 
-                        INFORMATION_SOURCERow parentINFORMATION_SOURCERowByFK_SITE_ASSESSMENT_INFORMATION_SOURCE, 
+                        int information_source_id, 
                         IMPERVIOUS_AREA_TYPERow parentIMPERVIOUS_AREA_TYPERowByFK_SITE_ASSESSMENT_IMPERVIOUS_AREA_TYPE, 
                         int ia_sqft, 
                         DESTINATIONRow parentDESTINATIONRowByFK_SITE_ASSESSMENT_DESTINATION, 
-                        MANAGEMENTRow parentMANAGEMENTRowByFK_SITE_ASSESSMENT_MANAGEMENT, 
+                        int management_id, 
                         FACILITY_TYPERow parentFACILITY_TYPERowByFK_SITE_ASSESSMENT_FACILITY_TYPE, 
                         string hansen_id, 
                         ASSESSMENT_TYPERow parentASSESSMENT_TYPERowByFK_SITE_ASSESSMENT_ASSESSMENT_TYPE, 
@@ -4897,11 +3147,11 @@ namespace SystemsAnalysis.DataAccess {
                         null,
                         assessment_date,
                         staff_id,
-                        null,
+                        information_source_id,
                         null,
                         ia_sqft,
                         null,
-                        null,
+                        management_id,
                         null,
                         hansen_id,
                         null,
@@ -4915,17 +3165,11 @@ namespace SystemsAnalysis.DataAccess {
                 if ((parentSITERowByFK_SITE_ASSESSMENT_SITE != null)) {
                     columnValuesArray[1] = parentSITERowByFK_SITE_ASSESSMENT_SITE[0];
                 }
-                if ((parentINFORMATION_SOURCERowByFK_SITE_ASSESSMENT_INFORMATION_SOURCE != null)) {
-                    columnValuesArray[4] = parentINFORMATION_SOURCERowByFK_SITE_ASSESSMENT_INFORMATION_SOURCE[0];
-                }
                 if ((parentIMPERVIOUS_AREA_TYPERowByFK_SITE_ASSESSMENT_IMPERVIOUS_AREA_TYPE != null)) {
                     columnValuesArray[5] = parentIMPERVIOUS_AREA_TYPERowByFK_SITE_ASSESSMENT_IMPERVIOUS_AREA_TYPE[0];
                 }
                 if ((parentDESTINATIONRowByFK_SITE_ASSESSMENT_DESTINATION != null)) {
                     columnValuesArray[7] = parentDESTINATIONRowByFK_SITE_ASSESSMENT_DESTINATION[0];
-                }
-                if ((parentMANAGEMENTRowByFK_SITE_ASSESSMENT_MANAGEMENT != null)) {
-                    columnValuesArray[8] = parentMANAGEMENTRowByFK_SITE_ASSESSMENT_MANAGEMENT[0];
                 }
                 if ((parentFACILITY_TYPERowByFK_SITE_ASSESSMENT_FACILITY_TYPE != null)) {
                     columnValuesArray[9] = parentFACILITY_TYPERowByFK_SITE_ASSESSMENT_FACILITY_TYPE[0];
@@ -5168,352 +3412,6 @@ namespace SystemsAnalysis.DataAccess {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class SITE_MODEL_CONDITIONDataTable : global::System.Data.TypedTableBase<SITE_MODEL_CONDITIONRow> {
-            
-            private global::System.Data.DataColumn columnsite_model_condition_id;
-            
-            private global::System.Data.DataColumn columnsite_id;
-            
-            private global::System.Data.DataColumn columnmodel_date;
-            
-            private global::System.Data.DataColumn columnroof_total;
-            
-            private global::System.Data.DataColumn columnroof_connected;
-            
-            private global::System.Data.DataColumn columnpave_total;
-            
-            private global::System.Data.DataColumn columnpave_connected;
-            
-            private global::System.Data.DataColumn columnmanagement_id;
-            
-            private global::System.Data.DataColumn columnsewer_node;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public SITE_MODEL_CONDITIONDataTable() {
-                this.TableName = "SITE_MODEL_CONDITION";
-                this.BeginInit();
-                this.InitClass();
-                this.EndInit();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal SITE_MODEL_CONDITIONDataTable(global::System.Data.DataTable table) {
-                this.TableName = table.TableName;
-                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
-                    this.CaseSensitive = table.CaseSensitive;
-                }
-                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
-                    this.Locale = table.Locale;
-                }
-                if ((table.Namespace != table.DataSet.Namespace)) {
-                    this.Namespace = table.Namespace;
-                }
-                this.Prefix = table.Prefix;
-                this.MinimumCapacity = table.MinimumCapacity;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected SITE_MODEL_CONDITIONDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
-                    base(info, context) {
-                this.InitVars();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn site_model_condition_idColumn {
-                get {
-                    return this.columnsite_model_condition_id;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn site_idColumn {
-                get {
-                    return this.columnsite_id;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn model_dateColumn {
-                get {
-                    return this.columnmodel_date;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn roof_totalColumn {
-                get {
-                    return this.columnroof_total;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn roof_connectedColumn {
-                get {
-                    return this.columnroof_connected;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn pave_totalColumn {
-                get {
-                    return this.columnpave_total;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn pave_connectedColumn {
-                get {
-                    return this.columnpave_connected;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn management_idColumn {
-                get {
-                    return this.columnmanagement_id;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn sewer_nodeColumn {
-                get {
-                    return this.columnsewer_node;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.ComponentModel.Browsable(false)]
-            public int Count {
-                get {
-                    return this.Rows.Count;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public SITE_MODEL_CONDITIONRow this[int index] {
-                get {
-                    return ((SITE_MODEL_CONDITIONRow)(this.Rows[index]));
-                }
-            }
-            
-            public event SITE_MODEL_CONDITIONRowChangeEventHandler SITE_MODEL_CONDITIONRowChanging;
-            
-            public event SITE_MODEL_CONDITIONRowChangeEventHandler SITE_MODEL_CONDITIONRowChanged;
-            
-            public event SITE_MODEL_CONDITIONRowChangeEventHandler SITE_MODEL_CONDITIONRowDeleting;
-            
-            public event SITE_MODEL_CONDITIONRowChangeEventHandler SITE_MODEL_CONDITIONRowDeleted;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void AddSITE_MODEL_CONDITIONRow(SITE_MODEL_CONDITIONRow row) {
-                this.Rows.Add(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public SITE_MODEL_CONDITIONRow AddSITE_MODEL_CONDITIONRow(SITERow parentSITERowByFK_SITE_MODEL_CONDITION_SITE, System.DateTime model_date, int roof_total, int roof_connected, int pave_total, int pave_connected, int management_id, string sewer_node) {
-                SITE_MODEL_CONDITIONRow rowSITE_MODEL_CONDITIONRow = ((SITE_MODEL_CONDITIONRow)(this.NewRow()));
-                object[] columnValuesArray = new object[] {
-                        null,
-                        null,
-                        model_date,
-                        roof_total,
-                        roof_connected,
-                        pave_total,
-                        pave_connected,
-                        management_id,
-                        sewer_node};
-                if ((parentSITERowByFK_SITE_MODEL_CONDITION_SITE != null)) {
-                    columnValuesArray[1] = parentSITERowByFK_SITE_MODEL_CONDITION_SITE[0];
-                }
-                rowSITE_MODEL_CONDITIONRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowSITE_MODEL_CONDITIONRow);
-                return rowSITE_MODEL_CONDITIONRow;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public SITE_MODEL_CONDITIONRow FindBysite_model_condition_id(int site_model_condition_id) {
-                return ((SITE_MODEL_CONDITIONRow)(this.Rows.Find(new object[] {
-                            site_model_condition_id})));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public override global::System.Data.DataTable Clone() {
-                SITE_MODEL_CONDITIONDataTable cln = ((SITE_MODEL_CONDITIONDataTable)(base.Clone()));
-                cln.InitVars();
-                return cln;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Data.DataTable CreateInstance() {
-                return new SITE_MODEL_CONDITIONDataTable();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal void InitVars() {
-                this.columnsite_model_condition_id = base.Columns["site_model_condition_id"];
-                this.columnsite_id = base.Columns["site_id"];
-                this.columnmodel_date = base.Columns["model_date"];
-                this.columnroof_total = base.Columns["roof_total"];
-                this.columnroof_connected = base.Columns["roof_connected"];
-                this.columnpave_total = base.Columns["pave_total"];
-                this.columnpave_connected = base.Columns["pave_connected"];
-                this.columnmanagement_id = base.Columns["management_id"];
-                this.columnsewer_node = base.Columns["sewer_node"];
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            private void InitClass() {
-                this.columnsite_model_condition_id = new global::System.Data.DataColumn("site_model_condition_id", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnsite_model_condition_id);
-                this.columnsite_id = new global::System.Data.DataColumn("site_id", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnsite_id);
-                this.columnmodel_date = new global::System.Data.DataColumn("model_date", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnmodel_date);
-                this.columnroof_total = new global::System.Data.DataColumn("roof_total", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnroof_total);
-                this.columnroof_connected = new global::System.Data.DataColumn("roof_connected", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnroof_connected);
-                this.columnpave_total = new global::System.Data.DataColumn("pave_total", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnpave_total);
-                this.columnpave_connected = new global::System.Data.DataColumn("pave_connected", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnpave_connected);
-                this.columnmanagement_id = new global::System.Data.DataColumn("management_id", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnmanagement_id);
-                this.columnsewer_node = new global::System.Data.DataColumn("sewer_node", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnsewer_node);
-                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columnsite_model_condition_id}, true));
-                this.columnsite_model_condition_id.AutoIncrement = true;
-                this.columnsite_model_condition_id.AutoIncrementSeed = -1;
-                this.columnsite_model_condition_id.AutoIncrementStep = -1;
-                this.columnsite_model_condition_id.AllowDBNull = false;
-                this.columnsite_model_condition_id.ReadOnly = true;
-                this.columnsite_model_condition_id.Unique = true;
-                this.columnsite_id.AllowDBNull = false;
-                this.columnsewer_node.MaxLength = 10;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public SITE_MODEL_CONDITIONRow NewSITE_MODEL_CONDITIONRow() {
-                return ((SITE_MODEL_CONDITIONRow)(this.NewRow()));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new SITE_MODEL_CONDITIONRow(builder);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Type GetRowType() {
-                return typeof(SITE_MODEL_CONDITIONRow);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanged(e);
-                if ((this.SITE_MODEL_CONDITIONRowChanged != null)) {
-                    this.SITE_MODEL_CONDITIONRowChanged(this, new SITE_MODEL_CONDITIONRowChangeEvent(((SITE_MODEL_CONDITIONRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanging(e);
-                if ((this.SITE_MODEL_CONDITIONRowChanging != null)) {
-                    this.SITE_MODEL_CONDITIONRowChanging(this, new SITE_MODEL_CONDITIONRowChangeEvent(((SITE_MODEL_CONDITIONRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleted(e);
-                if ((this.SITE_MODEL_CONDITIONRowDeleted != null)) {
-                    this.SITE_MODEL_CONDITIONRowDeleted(this, new SITE_MODEL_CONDITIONRowChangeEvent(((SITE_MODEL_CONDITIONRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleting(e);
-                if ((this.SITE_MODEL_CONDITIONRowDeleting != null)) {
-                    this.SITE_MODEL_CONDITIONRowDeleting(this, new SITE_MODEL_CONDITIONRowChangeEvent(((SITE_MODEL_CONDITIONRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void RemoveSITE_MODEL_CONDITIONRow(SITE_MODEL_CONDITIONRow row) {
-                this.Rows.Remove(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
-                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                RetrofitsDataSet ds = new RetrofitsDataSet();
-                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
-                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
-                any1.MinOccurs = new decimal(0);
-                any1.MaxOccurs = decimal.MaxValue;
-                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any1);
-                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
-                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
-                any2.MinOccurs = new decimal(1);
-                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any2);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute1.Name = "namespace";
-                attribute1.FixedValue = ds.Namespace;
-                type.Attributes.Add(attribute1);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "SITE_MODEL_CONDITIONDataTable";
-                type.Attributes.Add(attribute2);
-                type.Particle = sequence;
-                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-                if (xs.Contains(dsSchema.TargetNamespace)) {
-                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
-                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-                    try {
-                        global::System.Xml.Schema.XmlSchema schema = null;
-                        dsSchema.Write(s1);
-                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
-                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
-                            s2.SetLength(0);
-                            schema.Write(s2);
-                            if ((s1.Length == s2.Length)) {
-                                s1.Position = 0;
-                                s2.Position = 0;
-                                for (; ((s1.Position != s1.Length) 
-                                            && (s1.ReadByte() == s2.ReadByte())); ) {
-                                    ;
-                                }
-                                if ((s1.Position == s1.Length)) {
-                                    return type;
-                                }
-                            }
-                        }
-                    }
-                    finally {
-                        if ((s1 != null)) {
-                            s1.Close();
-                        }
-                        if ((s2 != null)) {
-                            s2.Close();
-                        }
-                    }
-                }
-                xs.Add(dsSchema);
-                return type;
-            }
-        }
-        
-        /// <summary>
-        ///Represents the strongly named DataTable class.
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        [global::System.Serializable()]
-        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class SITE_OPPORTUNITYDataTable : global::System.Data.TypedTableBase<SITE_OPPORTUNITYRow> {
             
             private global::System.Data.DataColumn columnsite_opportunity_id;
@@ -5674,13 +3572,13 @@ namespace SystemsAnalysis.DataAccess {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public SITE_OPPORTUNITYRow AddSITE_OPPORTUNITYRow(SITERow parentSITERowByFK_SITE_OPPORTUNITY_SITE, int ia_sqft, MANAGEMENTRow parentMANAGEMENTRowByFK_SITE_OPPORTUNITY_MANAGEMENT, FACILITY_TYPERow parentFACILITY_TYPERowByFK_SITE_OPPORTUNITY_FACILITY_TYPE, int opportunity_feasibility, string create_by, System.DateTime create_date, string update_by, System.DateTime update_date, byte[] modified_time) {
+            public SITE_OPPORTUNITYRow AddSITE_OPPORTUNITYRow(SITERow parentSITERowByFK_SITE_OPPORTUNITY_SITE, int ia_sqft, int management_id, FACILITY_TYPERow parentFACILITY_TYPERowByFK_SITE_OPPORTUNITY_FACILITY_TYPE, int opportunity_feasibility, string create_by, System.DateTime create_date, string update_by, System.DateTime update_date, byte[] modified_time) {
                 SITE_OPPORTUNITYRow rowSITE_OPPORTUNITYRow = ((SITE_OPPORTUNITYRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
                         null,
                         ia_sqft,
-                        null,
+                        management_id,
                         null,
                         opportunity_feasibility,
                         create_by,
@@ -5690,9 +3588,6 @@ namespace SystemsAnalysis.DataAccess {
                         modified_time};
                 if ((parentSITERowByFK_SITE_OPPORTUNITY_SITE != null)) {
                     columnValuesArray[1] = parentSITERowByFK_SITE_OPPORTUNITY_SITE[0];
-                }
-                if ((parentMANAGEMENTRowByFK_SITE_OPPORTUNITY_MANAGEMENT != null)) {
-                    columnValuesArray[3] = parentMANAGEMENTRowByFK_SITE_OPPORTUNITY_MANAGEMENT[0];
                 }
                 if ((parentFACILITY_TYPERowByFK_SITE_OPPORTUNITY_FACILITY_TYPE != null)) {
                     columnValuesArray[4] = parentFACILITY_TYPERowByFK_SITE_OPPORTUNITY_FACILITY_TYPE[0];
@@ -6294,6 +4189,510 @@ namespace SystemsAnalysis.DataAccess {
         }
         
         /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class RETRO_BASINDataTable : global::System.Data.TypedTableBase<RETRO_BASINRow> {
+            
+            private global::System.Data.DataColumn columnretro_basin_id;
+            
+            private global::System.Data.DataColumn columnname;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public RETRO_BASINDataTable() {
+                this.TableName = "RETRO_BASIN";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal RETRO_BASINDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected RETRO_BASINDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn retro_basin_idColumn {
+                get {
+                    return this.columnretro_basin_id;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn nameColumn {
+                get {
+                    return this.columnname;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public RETRO_BASINRow this[int index] {
+                get {
+                    return ((RETRO_BASINRow)(this.Rows[index]));
+                }
+            }
+            
+            public event RETRO_BASINRowChangeEventHandler RETRO_BASINRowChanging;
+            
+            public event RETRO_BASINRowChangeEventHandler RETRO_BASINRowChanged;
+            
+            public event RETRO_BASINRowChangeEventHandler RETRO_BASINRowDeleting;
+            
+            public event RETRO_BASINRowChangeEventHandler RETRO_BASINRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void AddRETRO_BASINRow(RETRO_BASINRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public RETRO_BASINRow AddRETRO_BASINRow(string name) {
+                RETRO_BASINRow rowRETRO_BASINRow = ((RETRO_BASINRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        null,
+                        name};
+                rowRETRO_BASINRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowRETRO_BASINRow);
+                return rowRETRO_BASINRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public RETRO_BASINRow FindByretro_basin_id(int retro_basin_id) {
+                return ((RETRO_BASINRow)(this.Rows.Find(new object[] {
+                            retro_basin_id})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public override global::System.Data.DataTable Clone() {
+                RETRO_BASINDataTable cln = ((RETRO_BASINDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new RETRO_BASINDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal void InitVars() {
+                this.columnretro_basin_id = base.Columns["retro_basin_id"];
+                this.columnname = base.Columns["name"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            private void InitClass() {
+                this.columnretro_basin_id = new global::System.Data.DataColumn("retro_basin_id", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnretro_basin_id);
+                this.columnname = new global::System.Data.DataColumn("name", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnname);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnretro_basin_id}, true));
+                this.columnretro_basin_id.AutoIncrement = true;
+                this.columnretro_basin_id.AutoIncrementSeed = -1;
+                this.columnretro_basin_id.AutoIncrementStep = -1;
+                this.columnretro_basin_id.AllowDBNull = false;
+                this.columnretro_basin_id.ReadOnly = true;
+                this.columnretro_basin_id.Unique = true;
+                this.columnname.AllowDBNull = false;
+                this.columnname.MaxLength = 50;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public RETRO_BASINRow NewRETRO_BASINRow() {
+                return ((RETRO_BASINRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new RETRO_BASINRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Type GetRowType() {
+                return typeof(RETRO_BASINRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.RETRO_BASINRowChanged != null)) {
+                    this.RETRO_BASINRowChanged(this, new RETRO_BASINRowChangeEvent(((RETRO_BASINRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.RETRO_BASINRowChanging != null)) {
+                    this.RETRO_BASINRowChanging(this, new RETRO_BASINRowChangeEvent(((RETRO_BASINRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.RETRO_BASINRowDeleted != null)) {
+                    this.RETRO_BASINRowDeleted(this, new RETRO_BASINRowChangeEvent(((RETRO_BASINRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.RETRO_BASINRowDeleting != null)) {
+                    this.RETRO_BASINRowDeleting(this, new RETRO_BASINRowChangeEvent(((RETRO_BASINRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void RemoveRETRO_BASINRow(RETRO_BASINRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                RetrofitsDataSet ds = new RetrofitsDataSet();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "RETRO_BASINDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class SEWER_BASINDataTable : global::System.Data.TypedTableBase<SEWER_BASINRow> {
+            
+            private global::System.Data.DataColumn columnsewer_basin_id;
+            
+            private global::System.Data.DataColumn columnname;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public SEWER_BASINDataTable() {
+                this.TableName = "SEWER_BASIN";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal SEWER_BASINDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected SEWER_BASINDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn sewer_basin_idColumn {
+                get {
+                    return this.columnsewer_basin_id;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn nameColumn {
+                get {
+                    return this.columnname;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public SEWER_BASINRow this[int index] {
+                get {
+                    return ((SEWER_BASINRow)(this.Rows[index]));
+                }
+            }
+            
+            public event SEWER_BASINRowChangeEventHandler SEWER_BASINRowChanging;
+            
+            public event SEWER_BASINRowChangeEventHandler SEWER_BASINRowChanged;
+            
+            public event SEWER_BASINRowChangeEventHandler SEWER_BASINRowDeleting;
+            
+            public event SEWER_BASINRowChangeEventHandler SEWER_BASINRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void AddSEWER_BASINRow(SEWER_BASINRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public SEWER_BASINRow AddSEWER_BASINRow(string name) {
+                SEWER_BASINRow rowSEWER_BASINRow = ((SEWER_BASINRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        null,
+                        name};
+                rowSEWER_BASINRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowSEWER_BASINRow);
+                return rowSEWER_BASINRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public SEWER_BASINRow FindBysewer_basin_id(int sewer_basin_id) {
+                return ((SEWER_BASINRow)(this.Rows.Find(new object[] {
+                            sewer_basin_id})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public override global::System.Data.DataTable Clone() {
+                SEWER_BASINDataTable cln = ((SEWER_BASINDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new SEWER_BASINDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal void InitVars() {
+                this.columnsewer_basin_id = base.Columns["sewer_basin_id"];
+                this.columnname = base.Columns["name"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            private void InitClass() {
+                this.columnsewer_basin_id = new global::System.Data.DataColumn("sewer_basin_id", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnsewer_basin_id);
+                this.columnname = new global::System.Data.DataColumn("name", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnname);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnsewer_basin_id}, true));
+                this.columnsewer_basin_id.AutoIncrement = true;
+                this.columnsewer_basin_id.AutoIncrementSeed = -1;
+                this.columnsewer_basin_id.AutoIncrementStep = -1;
+                this.columnsewer_basin_id.AllowDBNull = false;
+                this.columnsewer_basin_id.ReadOnly = true;
+                this.columnsewer_basin_id.Unique = true;
+                this.columnname.AllowDBNull = false;
+                this.columnname.MaxLength = 50;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public SEWER_BASINRow NewSEWER_BASINRow() {
+                return ((SEWER_BASINRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new SEWER_BASINRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Type GetRowType() {
+                return typeof(SEWER_BASINRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.SEWER_BASINRowChanged != null)) {
+                    this.SEWER_BASINRowChanged(this, new SEWER_BASINRowChangeEvent(((SEWER_BASINRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.SEWER_BASINRowChanging != null)) {
+                    this.SEWER_BASINRowChanging(this, new SEWER_BASINRowChangeEvent(((SEWER_BASINRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.SEWER_BASINRowDeleted != null)) {
+                    this.SEWER_BASINRowDeleted(this, new SEWER_BASINRowChangeEvent(((SEWER_BASINRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.SEWER_BASINRowDeleting != null)) {
+                    this.SEWER_BASINRowDeleting(this, new SEWER_BASINRowChangeEvent(((SEWER_BASINRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void RemoveSEWER_BASINRow(SEWER_BASINRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                RetrofitsDataSet ds = new RetrofitsDataSet();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "SEWER_BASINDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
@@ -6407,141 +4806,6 @@ namespace SystemsAnalysis.DataAccess {
         ///Represents strongly named DataRow class.
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        public partial class CONSTRUCTORRow : global::System.Data.DataRow {
-            
-            private CONSTRUCTORDataTable tableCONSTRUCTOR;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal CONSTRUCTORRow(global::System.Data.DataRowBuilder rb) : 
-                    base(rb) {
-                this.tableCONSTRUCTOR = ((CONSTRUCTORDataTable)(this.Table));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public int constructor_id {
-                get {
-                    return ((int)(this[this.tableCONSTRUCTOR.constructor_idColumn]));
-                }
-                set {
-                    this[this.tableCONSTRUCTOR.constructor_idColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string name {
-                get {
-                    return ((string)(this[this.tableCONSTRUCTOR.nameColumn]));
-                }
-                set {
-                    this[this.tableCONSTRUCTOR.nameColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public PROJECTRow[] GetPROJECTRows() {
-                if ((this.Table.ChildRelations["FK_PROJECT_CONSTRUCTOR"] == null)) {
-                    return new PROJECTRow[0];
-                }
-                else {
-                    return ((PROJECTRow[])(base.GetChildRows(this.Table.ChildRelations["FK_PROJECT_CONSTRUCTOR"])));
-                }
-            }
-        }
-        
-        /// <summary>
-        ///Represents strongly named DataRow class.
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        public partial class CONTRACTORRow : global::System.Data.DataRow {
-            
-            private CONTRACTORDataTable tableCONTRACTOR;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal CONTRACTORRow(global::System.Data.DataRowBuilder rb) : 
-                    base(rb) {
-                this.tableCONTRACTOR = ((CONTRACTORDataTable)(this.Table));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public int contractor_id {
-                get {
-                    return ((int)(this[this.tableCONTRACTOR.contractor_idColumn]));
-                }
-                set {
-                    this[this.tableCONTRACTOR.contractor_idColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string name {
-                get {
-                    return ((string)(this[this.tableCONTRACTOR.nameColumn]));
-                }
-                set {
-                    this[this.tableCONTRACTOR.nameColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public PROJECTRow[] GetPROJECTRows() {
-                if ((this.Table.ChildRelations["FK_PROJECT_CONTRACTOR"] == null)) {
-                    return new PROJECTRow[0];
-                }
-                else {
-                    return ((PROJECTRow[])(base.GetChildRows(this.Table.ChildRelations["FK_PROJECT_CONTRACTOR"])));
-                }
-            }
-        }
-        
-        /// <summary>
-        ///Represents strongly named DataRow class.
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        public partial class DESIGNERRow : global::System.Data.DataRow {
-            
-            private DESIGNERDataTable tableDESIGNER;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal DESIGNERRow(global::System.Data.DataRowBuilder rb) : 
-                    base(rb) {
-                this.tableDESIGNER = ((DESIGNERDataTable)(this.Table));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public int designer_id {
-                get {
-                    return ((int)(this[this.tableDESIGNER.designer_idColumn]));
-                }
-                set {
-                    this[this.tableDESIGNER.designer_idColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string name {
-                get {
-                    return ((string)(this[this.tableDESIGNER.nameColumn]));
-                }
-                set {
-                    this[this.tableDESIGNER.nameColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public PROJECTRow[] GetPROJECTRows() {
-                if ((this.Table.ChildRelations["FK_PROJECT_DESIGNER"] == null)) {
-                    return new PROJECTRow[0];
-                }
-                else {
-                    return ((PROJECTRow[])(base.GetChildRows(this.Table.ChildRelations["FK_PROJECT_DESIGNER"])));
-                }
-            }
-        }
-        
-        /// <summary>
-        ///Represents strongly named DataRow class.
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
         public partial class DESTINATIONRow : global::System.Data.DataRow {
             
             private DESTINATIONDataTable tableDESTINATION;
@@ -6624,161 +4888,6 @@ namespace SystemsAnalysis.DataAccess {
                 }
                 else {
                     return ((SITE_ASSESSMENTRow[])(base.GetChildRows(this.Table.ChildRelations["FK_SITE_ASSESSMENT_IMPERVIOUS_AREA_TYPE"])));
-                }
-            }
-        }
-        
-        /// <summary>
-        ///Represents strongly named DataRow class.
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        public partial class INFILTRATION_TESTRow : global::System.Data.DataRow {
-            
-            private INFILTRATION_TESTDataTable tableINFILTRATION_TEST;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal INFILTRATION_TESTRow(global::System.Data.DataRowBuilder rb) : 
-                    base(rb) {
-                this.tableINFILTRATION_TEST = ((INFILTRATION_TESTDataTable)(this.Table));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public int infiltration_test_id {
-                get {
-                    return ((int)(this[this.tableINFILTRATION_TEST.infiltration_test_idColumn]));
-                }
-                set {
-                    this[this.tableINFILTRATION_TEST.infiltration_test_idColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string name {
-                get {
-                    return ((string)(this[this.tableINFILTRATION_TEST.nameColumn]));
-                }
-                set {
-                    this[this.tableINFILTRATION_TEST.nameColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public PROJECTRow[] GetPROJECTRows() {
-                if ((this.Table.ChildRelations["FK_PROJECT_INFILTRATION_TEST"] == null)) {
-                    return new PROJECTRow[0];
-                }
-                else {
-                    return ((PROJECTRow[])(base.GetChildRows(this.Table.ChildRelations["FK_PROJECT_INFILTRATION_TEST"])));
-                }
-            }
-        }
-        
-        /// <summary>
-        ///Represents strongly named DataRow class.
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        public partial class INFORMATION_SOURCERow : global::System.Data.DataRow {
-            
-            private INFORMATION_SOURCEDataTable tableINFORMATION_SOURCE;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal INFORMATION_SOURCERow(global::System.Data.DataRowBuilder rb) : 
-                    base(rb) {
-                this.tableINFORMATION_SOURCE = ((INFORMATION_SOURCEDataTable)(this.Table));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public int information_source_id {
-                get {
-                    return ((int)(this[this.tableINFORMATION_SOURCE.information_source_idColumn]));
-                }
-                set {
-                    this[this.tableINFORMATION_SOURCE.information_source_idColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string name {
-                get {
-                    return ((string)(this[this.tableINFORMATION_SOURCE.nameColumn]));
-                }
-                set {
-                    this[this.tableINFORMATION_SOURCE.nameColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public SITE_ASSESSMENTRow[] GetSITE_ASSESSMENTRows() {
-                if ((this.Table.ChildRelations["FK_SITE_ASSESSMENT_INFORMATION_SOURCE"] == null)) {
-                    return new SITE_ASSESSMENTRow[0];
-                }
-                else {
-                    return ((SITE_ASSESSMENTRow[])(base.GetChildRows(this.Table.ChildRelations["FK_SITE_ASSESSMENT_INFORMATION_SOURCE"])));
-                }
-            }
-        }
-        
-        /// <summary>
-        ///Represents strongly named DataRow class.
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        public partial class MANAGEMENTRow : global::System.Data.DataRow {
-            
-            private MANAGEMENTDataTable tableMANAGEMENT;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal MANAGEMENTRow(global::System.Data.DataRowBuilder rb) : 
-                    base(rb) {
-                this.tableMANAGEMENT = ((MANAGEMENTDataTable)(this.Table));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public int management_id {
-                get {
-                    return ((int)(this[this.tableMANAGEMENT.management_idColumn]));
-                }
-                set {
-                    this[this.tableMANAGEMENT.management_idColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string name {
-                get {
-                    return ((string)(this[this.tableMANAGEMENT.nameColumn]));
-                }
-                set {
-                    this[this.tableMANAGEMENT.nameColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public PROJECTRow[] GetPROJECTRows() {
-                if ((this.Table.ChildRelations["FK_PROJECT_MANAGEMENT"] == null)) {
-                    return new PROJECTRow[0];
-                }
-                else {
-                    return ((PROJECTRow[])(base.GetChildRows(this.Table.ChildRelations["FK_PROJECT_MANAGEMENT"])));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public SITE_ASSESSMENTRow[] GetSITE_ASSESSMENTRows() {
-                if ((this.Table.ChildRelations["FK_SITE_ASSESSMENT_MANAGEMENT"] == null)) {
-                    return new SITE_ASSESSMENTRow[0];
-                }
-                else {
-                    return ((SITE_ASSESSMENTRow[])(base.GetChildRows(this.Table.ChildRelations["FK_SITE_ASSESSMENT_MANAGEMENT"])));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public SITE_OPPORTUNITYRow[] GetSITE_OPPORTUNITYRows() {
-                if ((this.Table.ChildRelations["FK_SITE_OPPORTUNITY_MANAGEMENT"] == null)) {
-                    return new SITE_OPPORTUNITYRow[0];
-                }
-                else {
-                    return ((SITE_OPPORTUNITYRow[])(base.GetChildRows(this.Table.ChildRelations["FK_SITE_OPPORTUNITY_MANAGEMENT"])));
                 }
             }
         }
@@ -7143,62 +5252,12 @@ namespace SystemsAnalysis.DataAccess {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public CONSTRUCTORRow CONSTRUCTORRow {
-                get {
-                    return ((CONSTRUCTORRow)(this.GetParentRow(this.Table.ParentRelations["FK_PROJECT_CONSTRUCTOR"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_PROJECT_CONSTRUCTOR"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public CONTRACTORRow CONTRACTORRow {
-                get {
-                    return ((CONTRACTORRow)(this.GetParentRow(this.Table.ParentRelations["FK_PROJECT_CONTRACTOR"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_PROJECT_CONTRACTOR"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public DESIGNERRow DESIGNERRow {
-                get {
-                    return ((DESIGNERRow)(this.GetParentRow(this.Table.ParentRelations["FK_PROJECT_DESIGNER"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_PROJECT_DESIGNER"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public FACILITY_TYPERow FACILITY_TYPERow {
                 get {
                     return ((FACILITY_TYPERow)(this.GetParentRow(this.Table.ParentRelations["FK_PROJECT_FACILITY_TYPE"])));
                 }
                 set {
                     this.SetParentRow(value, this.Table.ParentRelations["FK_PROJECT_FACILITY_TYPE"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public INFILTRATION_TESTRow INFILTRATION_TESTRow {
-                get {
-                    return ((INFILTRATION_TESTRow)(this.GetParentRow(this.Table.ParentRelations["FK_PROJECT_INFILTRATION_TEST"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_PROJECT_INFILTRATION_TEST"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public MANAGEMENTRow MANAGEMENTRow {
-                get {
-                    return ((MANAGEMENTRow)(this.GetParentRow(this.Table.ParentRelations["FK_PROJECT_MANAGEMENT"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_PROJECT_MANAGEMENT"]);
                 }
             }
             
@@ -7578,26 +5637,6 @@ namespace SystemsAnalysis.DataAccess {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public INFORMATION_SOURCERow INFORMATION_SOURCERow {
-                get {
-                    return ((INFORMATION_SOURCERow)(this.GetParentRow(this.Table.ParentRelations["FK_SITE_ASSESSMENT_INFORMATION_SOURCE"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_SITE_ASSESSMENT_INFORMATION_SOURCE"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public MANAGEMENTRow MANAGEMENTRow {
-                get {
-                    return ((MANAGEMENTRow)(this.GetParentRow(this.Table.ParentRelations["FK_SITE_ASSESSMENT_MANAGEMENT"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_SITE_ASSESSMENT_MANAGEMENT"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public PROJECTRow PROJECTRow {
                 get {
                     return ((PROJECTRow)(this.GetParentRow(this.Table.ParentRelations["FK_SITE_ASSESSMENT_PROJECT"])));
@@ -7685,226 +5724,6 @@ namespace SystemsAnalysis.DataAccess {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public void Setmodified_timeNull() {
                 this[this.tableSITE_ASSESSMENT.modified_timeColumn] = global::System.Convert.DBNull;
-            }
-        }
-        
-        /// <summary>
-        ///Represents strongly named DataRow class.
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        public partial class SITE_MODEL_CONDITIONRow : global::System.Data.DataRow {
-            
-            private SITE_MODEL_CONDITIONDataTable tableSITE_MODEL_CONDITION;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal SITE_MODEL_CONDITIONRow(global::System.Data.DataRowBuilder rb) : 
-                    base(rb) {
-                this.tableSITE_MODEL_CONDITION = ((SITE_MODEL_CONDITIONDataTable)(this.Table));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public int site_model_condition_id {
-                get {
-                    return ((int)(this[this.tableSITE_MODEL_CONDITION.site_model_condition_idColumn]));
-                }
-                set {
-                    this[this.tableSITE_MODEL_CONDITION.site_model_condition_idColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public int site_id {
-                get {
-                    return ((int)(this[this.tableSITE_MODEL_CONDITION.site_idColumn]));
-                }
-                set {
-                    this[this.tableSITE_MODEL_CONDITION.site_idColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public System.DateTime model_date {
-                get {
-                    try {
-                        return ((global::System.DateTime)(this[this.tableSITE_MODEL_CONDITION.model_dateColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'model_date\' in table \'SITE_MODEL_CONDITION\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableSITE_MODEL_CONDITION.model_dateColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public int roof_total {
-                get {
-                    try {
-                        return ((int)(this[this.tableSITE_MODEL_CONDITION.roof_totalColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'roof_total\' in table \'SITE_MODEL_CONDITION\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableSITE_MODEL_CONDITION.roof_totalColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public int roof_connected {
-                get {
-                    try {
-                        return ((int)(this[this.tableSITE_MODEL_CONDITION.roof_connectedColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'roof_connected\' in table \'SITE_MODEL_CONDITION\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableSITE_MODEL_CONDITION.roof_connectedColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public int pave_total {
-                get {
-                    try {
-                        return ((int)(this[this.tableSITE_MODEL_CONDITION.pave_totalColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'pave_total\' in table \'SITE_MODEL_CONDITION\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableSITE_MODEL_CONDITION.pave_totalColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public int pave_connected {
-                get {
-                    try {
-                        return ((int)(this[this.tableSITE_MODEL_CONDITION.pave_connectedColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'pave_connected\' in table \'SITE_MODEL_CONDITION\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableSITE_MODEL_CONDITION.pave_connectedColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public int management_id {
-                get {
-                    try {
-                        return ((int)(this[this.tableSITE_MODEL_CONDITION.management_idColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'management_id\' in table \'SITE_MODEL_CONDITION\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableSITE_MODEL_CONDITION.management_idColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string sewer_node {
-                get {
-                    try {
-                        return ((string)(this[this.tableSITE_MODEL_CONDITION.sewer_nodeColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'sewer_node\' in table \'SITE_MODEL_CONDITION\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableSITE_MODEL_CONDITION.sewer_nodeColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public SITERow SITERow {
-                get {
-                    return ((SITERow)(this.GetParentRow(this.Table.ParentRelations["FK_SITE_MODEL_CONDITION_SITE"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_SITE_MODEL_CONDITION_SITE"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool Ismodel_dateNull() {
-                return this.IsNull(this.tableSITE_MODEL_CONDITION.model_dateColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void Setmodel_dateNull() {
-                this[this.tableSITE_MODEL_CONDITION.model_dateColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool Isroof_totalNull() {
-                return this.IsNull(this.tableSITE_MODEL_CONDITION.roof_totalColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void Setroof_totalNull() {
-                this[this.tableSITE_MODEL_CONDITION.roof_totalColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool Isroof_connectedNull() {
-                return this.IsNull(this.tableSITE_MODEL_CONDITION.roof_connectedColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void Setroof_connectedNull() {
-                this[this.tableSITE_MODEL_CONDITION.roof_connectedColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool Ispave_totalNull() {
-                return this.IsNull(this.tableSITE_MODEL_CONDITION.pave_totalColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void Setpave_totalNull() {
-                this[this.tableSITE_MODEL_CONDITION.pave_totalColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool Ispave_connectedNull() {
-                return this.IsNull(this.tableSITE_MODEL_CONDITION.pave_connectedColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void Setpave_connectedNull() {
-                this[this.tableSITE_MODEL_CONDITION.pave_connectedColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool Ismanagement_idNull() {
-                return this.IsNull(this.tableSITE_MODEL_CONDITION.management_idColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void Setmanagement_idNull() {
-                this[this.tableSITE_MODEL_CONDITION.management_idColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool Issewer_nodeNull() {
-                return this.IsNull(this.tableSITE_MODEL_CONDITION.sewer_nodeColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void Setsewer_nodeNull() {
-                this[this.tableSITE_MODEL_CONDITION.sewer_nodeColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -8044,16 +5863,6 @@ namespace SystemsAnalysis.DataAccess {
                 }
                 set {
                     this.SetParentRow(value, this.Table.ParentRelations["FK_SITE_OPPORTUNITY_FACILITY_TYPE"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public MANAGEMENTRow MANAGEMENTRow {
-                get {
-                    return ((MANAGEMENTRow)(this.GetParentRow(this.Table.ParentRelations["FK_SITE_OPPORTUNITY_MANAGEMENT"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_SITE_OPPORTUNITY_MANAGEMENT"]);
                 }
             }
             
@@ -8268,22 +6077,82 @@ namespace SystemsAnalysis.DataAccess {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public SITE_MODEL_CONDITIONRow[] GetSITE_MODEL_CONDITIONRows() {
-                if ((this.Table.ChildRelations["FK_SITE_MODEL_CONDITION_SITE"] == null)) {
-                    return new SITE_MODEL_CONDITIONRow[0];
-                }
-                else {
-                    return ((SITE_MODEL_CONDITIONRow[])(base.GetChildRows(this.Table.ChildRelations["FK_SITE_MODEL_CONDITION_SITE"])));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public SITE_OPPORTUNITYRow[] GetSITE_OPPORTUNITYRows() {
                 if ((this.Table.ChildRelations["FK_SITE_OPPORTUNITY_SITE"] == null)) {
                     return new SITE_OPPORTUNITYRow[0];
                 }
                 else {
                     return ((SITE_OPPORTUNITYRow[])(base.GetChildRows(this.Table.ChildRelations["FK_SITE_OPPORTUNITY_SITE"])));
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public partial class RETRO_BASINRow : global::System.Data.DataRow {
+            
+            private RETRO_BASINDataTable tableRETRO_BASIN;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal RETRO_BASINRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableRETRO_BASIN = ((RETRO_BASINDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int retro_basin_id {
+                get {
+                    return ((int)(this[this.tableRETRO_BASIN.retro_basin_idColumn]));
+                }
+                set {
+                    this[this.tableRETRO_BASIN.retro_basin_idColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string name {
+                get {
+                    return ((string)(this[this.tableRETRO_BASIN.nameColumn]));
+                }
+                set {
+                    this[this.tableRETRO_BASIN.nameColumn] = value;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public partial class SEWER_BASINRow : global::System.Data.DataRow {
+            
+            private SEWER_BASINDataTable tableSEWER_BASIN;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal SEWER_BASINRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableSEWER_BASIN = ((SEWER_BASINDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int sewer_basin_id {
+                get {
+                    return ((int)(this[this.tableSEWER_BASIN.sewer_basin_idColumn]));
+                }
+                set {
+                    this[this.tableSEWER_BASIN.sewer_basin_idColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string name {
+                get {
+                    return ((string)(this[this.tableSEWER_BASIN.nameColumn]));
+                }
+                set {
+                    this[this.tableSEWER_BASIN.nameColumn] = value;
                 }
             }
         }
@@ -8354,99 +6223,6 @@ namespace SystemsAnalysis.DataAccess {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        public class CONSTRUCTORRowChangeEvent : global::System.EventArgs {
-            
-            private CONSTRUCTORRow eventRow;
-            
-            private global::System.Data.DataRowAction eventAction;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public CONSTRUCTORRowChangeEvent(CONSTRUCTORRow row, global::System.Data.DataRowAction action) {
-                this.eventRow = row;
-                this.eventAction = action;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public CONSTRUCTORRow Row {
-                get {
-                    return this.eventRow;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataRowAction Action {
-                get {
-                    return this.eventAction;
-                }
-            }
-        }
-        
-        /// <summary>
-        ///Row event argument class
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        public class CONTRACTORRowChangeEvent : global::System.EventArgs {
-            
-            private CONTRACTORRow eventRow;
-            
-            private global::System.Data.DataRowAction eventAction;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public CONTRACTORRowChangeEvent(CONTRACTORRow row, global::System.Data.DataRowAction action) {
-                this.eventRow = row;
-                this.eventAction = action;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public CONTRACTORRow Row {
-                get {
-                    return this.eventRow;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataRowAction Action {
-                get {
-                    return this.eventAction;
-                }
-            }
-        }
-        
-        /// <summary>
-        ///Row event argument class
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        public class DESIGNERRowChangeEvent : global::System.EventArgs {
-            
-            private DESIGNERRow eventRow;
-            
-            private global::System.Data.DataRowAction eventAction;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public DESIGNERRowChangeEvent(DESIGNERRow row, global::System.Data.DataRowAction action) {
-                this.eventRow = row;
-                this.eventAction = action;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public DESIGNERRow Row {
-                get {
-                    return this.eventRow;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataRowAction Action {
-                get {
-                    return this.eventAction;
-                }
-            }
-        }
-        
-        /// <summary>
-        ///Row event argument class
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
         public class DESTINATIONRowChangeEvent : global::System.EventArgs {
             
             private DESTINATIONRow eventRow;
@@ -8492,99 +6268,6 @@ namespace SystemsAnalysis.DataAccess {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public IMPERVIOUS_AREA_TYPERow Row {
-                get {
-                    return this.eventRow;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataRowAction Action {
-                get {
-                    return this.eventAction;
-                }
-            }
-        }
-        
-        /// <summary>
-        ///Row event argument class
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        public class INFILTRATION_TESTRowChangeEvent : global::System.EventArgs {
-            
-            private INFILTRATION_TESTRow eventRow;
-            
-            private global::System.Data.DataRowAction eventAction;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public INFILTRATION_TESTRowChangeEvent(INFILTRATION_TESTRow row, global::System.Data.DataRowAction action) {
-                this.eventRow = row;
-                this.eventAction = action;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public INFILTRATION_TESTRow Row {
-                get {
-                    return this.eventRow;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataRowAction Action {
-                get {
-                    return this.eventAction;
-                }
-            }
-        }
-        
-        /// <summary>
-        ///Row event argument class
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        public class INFORMATION_SOURCERowChangeEvent : global::System.EventArgs {
-            
-            private INFORMATION_SOURCERow eventRow;
-            
-            private global::System.Data.DataRowAction eventAction;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public INFORMATION_SOURCERowChangeEvent(INFORMATION_SOURCERow row, global::System.Data.DataRowAction action) {
-                this.eventRow = row;
-                this.eventAction = action;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public INFORMATION_SOURCERow Row {
-                get {
-                    return this.eventRow;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataRowAction Action {
-                get {
-                    return this.eventAction;
-                }
-            }
-        }
-        
-        /// <summary>
-        ///Row event argument class
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        public class MANAGEMENTRowChangeEvent : global::System.EventArgs {
-            
-            private MANAGEMENTRow eventRow;
-            
-            private global::System.Data.DataRowAction eventAction;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public MANAGEMENTRowChangeEvent(MANAGEMENTRow row, global::System.Data.DataRowAction action) {
-                this.eventRow = row;
-                this.eventAction = action;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public MANAGEMENTRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -8726,37 +6409,6 @@ namespace SystemsAnalysis.DataAccess {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        public class SITE_MODEL_CONDITIONRowChangeEvent : global::System.EventArgs {
-            
-            private SITE_MODEL_CONDITIONRow eventRow;
-            
-            private global::System.Data.DataRowAction eventAction;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public SITE_MODEL_CONDITIONRowChangeEvent(SITE_MODEL_CONDITIONRow row, global::System.Data.DataRowAction action) {
-                this.eventRow = row;
-                this.eventAction = action;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public SITE_MODEL_CONDITIONRow Row {
-                get {
-                    return this.eventRow;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataRowAction Action {
-                get {
-                    return this.eventAction;
-                }
-            }
-        }
-        
-        /// <summary>
-        ///Row event argument class
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
         public class SITE_OPPORTUNITYRowChangeEvent : global::System.EventArgs {
             
             private SITE_OPPORTUNITYRow eventRow;
@@ -8802,6 +6454,68 @@ namespace SystemsAnalysis.DataAccess {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public SITERow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public class RETRO_BASINRowChangeEvent : global::System.EventArgs {
+            
+            private RETRO_BASINRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public RETRO_BASINRowChangeEvent(RETRO_BASINRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public RETRO_BASINRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public class SEWER_BASINRowChangeEvent : global::System.EventArgs {
+            
+            private SEWER_BASINRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public SEWER_BASINRowChangeEvent(SEWER_BASINRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public SEWER_BASINRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -9431,906 +7145,6 @@ namespace SystemsAnalysis.DataAccess.RetrofitsDataSetTableAdapters {
     [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
         ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-    public partial class CONSTRUCTORTableAdapter : global::System.ComponentModel.Component {
-        
-        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
-        
-        private global::System.Data.SqlClient.SqlConnection _connection;
-        
-        private global::System.Data.SqlClient.SqlTransaction _transaction;
-        
-        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
-        
-        private bool _clearBeforeFill;
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public CONSTRUCTORTableAdapter() {
-            this.ClearBeforeFill = true;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
-            get {
-                if ((this._adapter == null)) {
-                    this.InitAdapter();
-                }
-                return this._adapter;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.SqlClient.SqlConnection Connection {
-            get {
-                if ((this._connection == null)) {
-                    this.InitConnection();
-                }
-                return this._connection;
-            }
-            set {
-                this._connection = value;
-                if ((this.Adapter.InsertCommand != null)) {
-                    this.Adapter.InsertCommand.Connection = value;
-                }
-                if ((this.Adapter.DeleteCommand != null)) {
-                    this.Adapter.DeleteCommand.Connection = value;
-                }
-                if ((this.Adapter.UpdateCommand != null)) {
-                    this.Adapter.UpdateCommand.Connection = value;
-                }
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    if ((this.CommandCollection[i] != null)) {
-                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
-                    }
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.SqlClient.SqlTransaction Transaction {
-            get {
-                return this._transaction;
-            }
-            set {
-                this._transaction = value;
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    this.CommandCollection[i].Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.DeleteCommand != null))) {
-                    this.Adapter.DeleteCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.InsertCommand != null))) {
-                    this.Adapter.InsertCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.UpdateCommand != null))) {
-                    this.Adapter.UpdateCommand.Transaction = this._transaction;
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
-            get {
-                if ((this._commandCollection == null)) {
-                    this.InitCommandCollection();
-                }
-                return this._commandCollection;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public bool ClearBeforeFill {
-            get {
-                return this._clearBeforeFill;
-            }
-            set {
-                this._clearBeforeFill = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitAdapter() {
-            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
-            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
-            tableMapping.SourceTable = "Table";
-            tableMapping.DataSetTable = "CONSTRUCTOR";
-            tableMapping.ColumnMappings.Add("constructor_id", "constructor_id");
-            tableMapping.ColumnMappings.Add("name", "name");
-            this._adapter.TableMappings.Add(tableMapping);
-            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[CONSTRUCTOR] WHERE (([constructor_id] = @Original_constructor_" +
-                "id) AND ([name] = @Original_name))";
-            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_constructor_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "constructor_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "name", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[CONSTRUCTOR] ([name]) VALUES (@name);\r\nSELECT constructor_id, " +
-                "name FROM dbo.CONSTRUCTOR WHERE (constructor_id = SCOPE_IDENTITY())";
-            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = "UPDATE [dbo].[CONSTRUCTOR] SET [name] = @name WHERE (([constructor_id] = @Origina" +
-                "l_constructor_id) AND ([name] = @Original_name));\r\nSELECT constructor_id, name F" +
-                "ROM dbo.CONSTRUCTOR WHERE (constructor_id = @constructor_id)";
-            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_constructor_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "constructor_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "name", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@constructor_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "constructor_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitConnection() {
-            this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::SystemsAnalysis.DataAccess.Properties.Settings.Default.RETRO_RGConnectionString;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
-            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
-            this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT     dbo.CONSTRUCTOR.*\r\nFROM         dbo.CONSTRUCTOR";
-            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(RetrofitsDataSet.CONSTRUCTORDataTable dataTable) {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            if ((this.ClearBeforeFill == true)) {
-                dataTable.Clear();
-            }
-            int returnValue = this.Adapter.Fill(dataTable);
-            return returnValue;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual RetrofitsDataSet.CONSTRUCTORDataTable GetData() {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            RetrofitsDataSet.CONSTRUCTORDataTable dataTable = new RetrofitsDataSet.CONSTRUCTORDataTable();
-            this.Adapter.Fill(dataTable);
-            return dataTable;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(RetrofitsDataSet.CONSTRUCTORDataTable dataTable) {
-            return this.Adapter.Update(dataTable);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(RetrofitsDataSet dataSet) {
-            return this.Adapter.Update(dataSet, "CONSTRUCTOR");
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow dataRow) {
-            return this.Adapter.Update(new global::System.Data.DataRow[] {
-                        dataRow});
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow[] dataRows) {
-            return this.Adapter.Update(dataRows);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_constructor_id, string Original_name) {
-            this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_constructor_id));
-            if ((Original_name == null)) {
-                throw new global::System.ArgumentNullException("Original_name");
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((string)(Original_name));
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
-            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.DeleteCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.DeleteCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string name) {
-            if ((name == null)) {
-                throw new global::System.ArgumentNullException("name");
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(name));
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
-            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.InsertCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.InsertCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string name, int Original_constructor_id, string Original_name, int constructor_id) {
-            if ((name == null)) {
-                throw new global::System.ArgumentNullException("name");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(name));
-            }
-            this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(Original_constructor_id));
-            if ((Original_name == null)) {
-                throw new global::System.ArgumentNullException("Original_name");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(Original_name));
-            }
-            this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(constructor_id));
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
-            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.UpdateCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.UpdateCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string name, int Original_constructor_id, string Original_name) {
-            return this.Update(name, Original_constructor_id, Original_name, Original_constructor_id);
-        }
-    }
-    
-    /// <summary>
-    ///Represents the connection and commands used to retrieve and save data.
-    ///</summary>
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
-    [global::System.ComponentModel.ToolboxItem(true)]
-    [global::System.ComponentModel.DataObjectAttribute(true)]
-    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
-        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
-    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-    public partial class CONTRACTORTableAdapter : global::System.ComponentModel.Component {
-        
-        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
-        
-        private global::System.Data.SqlClient.SqlConnection _connection;
-        
-        private global::System.Data.SqlClient.SqlTransaction _transaction;
-        
-        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
-        
-        private bool _clearBeforeFill;
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public CONTRACTORTableAdapter() {
-            this.ClearBeforeFill = true;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
-            get {
-                if ((this._adapter == null)) {
-                    this.InitAdapter();
-                }
-                return this._adapter;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.SqlClient.SqlConnection Connection {
-            get {
-                if ((this._connection == null)) {
-                    this.InitConnection();
-                }
-                return this._connection;
-            }
-            set {
-                this._connection = value;
-                if ((this.Adapter.InsertCommand != null)) {
-                    this.Adapter.InsertCommand.Connection = value;
-                }
-                if ((this.Adapter.DeleteCommand != null)) {
-                    this.Adapter.DeleteCommand.Connection = value;
-                }
-                if ((this.Adapter.UpdateCommand != null)) {
-                    this.Adapter.UpdateCommand.Connection = value;
-                }
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    if ((this.CommandCollection[i] != null)) {
-                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
-                    }
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.SqlClient.SqlTransaction Transaction {
-            get {
-                return this._transaction;
-            }
-            set {
-                this._transaction = value;
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    this.CommandCollection[i].Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.DeleteCommand != null))) {
-                    this.Adapter.DeleteCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.InsertCommand != null))) {
-                    this.Adapter.InsertCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.UpdateCommand != null))) {
-                    this.Adapter.UpdateCommand.Transaction = this._transaction;
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
-            get {
-                if ((this._commandCollection == null)) {
-                    this.InitCommandCollection();
-                }
-                return this._commandCollection;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public bool ClearBeforeFill {
-            get {
-                return this._clearBeforeFill;
-            }
-            set {
-                this._clearBeforeFill = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitAdapter() {
-            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
-            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
-            tableMapping.SourceTable = "Table";
-            tableMapping.DataSetTable = "CONTRACTOR";
-            tableMapping.ColumnMappings.Add("contractor_id", "contractor_id");
-            tableMapping.ColumnMappings.Add("name", "name");
-            this._adapter.TableMappings.Add(tableMapping);
-            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[CONTRACTOR] WHERE (([contractor_id] = @Original_contractor_id)" +
-                " AND ([name] = @Original_name))";
-            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_contractor_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "contractor_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "name", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[CONTRACTOR] ([name]) VALUES (@name);\r\nSELECT contractor_id, na" +
-                "me FROM dbo.CONTRACTOR WHERE (contractor_id = SCOPE_IDENTITY())";
-            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = "UPDATE [dbo].[CONTRACTOR] SET [name] = @name WHERE (([contractor_id] = @Original_" +
-                "contractor_id) AND ([name] = @Original_name));\r\nSELECT contractor_id, name FROM " +
-                "dbo.CONTRACTOR WHERE (contractor_id = @contractor_id)";
-            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_contractor_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "contractor_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "name", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@contractor_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "contractor_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitConnection() {
-            this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::SystemsAnalysis.DataAccess.Properties.Settings.Default.RETRO_RGConnectionString;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
-            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
-            this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT     dbo.CONTRACTOR.*\r\nFROM         dbo.CONTRACTOR";
-            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(RetrofitsDataSet.CONTRACTORDataTable dataTable) {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            if ((this.ClearBeforeFill == true)) {
-                dataTable.Clear();
-            }
-            int returnValue = this.Adapter.Fill(dataTable);
-            return returnValue;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual RetrofitsDataSet.CONTRACTORDataTable GetData() {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            RetrofitsDataSet.CONTRACTORDataTable dataTable = new RetrofitsDataSet.CONTRACTORDataTable();
-            this.Adapter.Fill(dataTable);
-            return dataTable;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(RetrofitsDataSet.CONTRACTORDataTable dataTable) {
-            return this.Adapter.Update(dataTable);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(RetrofitsDataSet dataSet) {
-            return this.Adapter.Update(dataSet, "CONTRACTOR");
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow dataRow) {
-            return this.Adapter.Update(new global::System.Data.DataRow[] {
-                        dataRow});
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow[] dataRows) {
-            return this.Adapter.Update(dataRows);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_contractor_id, string Original_name) {
-            this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_contractor_id));
-            if ((Original_name == null)) {
-                throw new global::System.ArgumentNullException("Original_name");
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((string)(Original_name));
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
-            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.DeleteCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.DeleteCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string name) {
-            if ((name == null)) {
-                throw new global::System.ArgumentNullException("name");
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(name));
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
-            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.InsertCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.InsertCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string name, int Original_contractor_id, string Original_name, int contractor_id) {
-            if ((name == null)) {
-                throw new global::System.ArgumentNullException("name");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(name));
-            }
-            this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(Original_contractor_id));
-            if ((Original_name == null)) {
-                throw new global::System.ArgumentNullException("Original_name");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(Original_name));
-            }
-            this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(contractor_id));
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
-            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.UpdateCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.UpdateCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string name, int Original_contractor_id, string Original_name) {
-            return this.Update(name, Original_contractor_id, Original_name, Original_contractor_id);
-        }
-    }
-    
-    /// <summary>
-    ///Represents the connection and commands used to retrieve and save data.
-    ///</summary>
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
-    [global::System.ComponentModel.ToolboxItem(true)]
-    [global::System.ComponentModel.DataObjectAttribute(true)]
-    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
-        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
-    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-    public partial class DESIGNERTableAdapter : global::System.ComponentModel.Component {
-        
-        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
-        
-        private global::System.Data.SqlClient.SqlConnection _connection;
-        
-        private global::System.Data.SqlClient.SqlTransaction _transaction;
-        
-        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
-        
-        private bool _clearBeforeFill;
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public DESIGNERTableAdapter() {
-            this.ClearBeforeFill = true;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
-            get {
-                if ((this._adapter == null)) {
-                    this.InitAdapter();
-                }
-                return this._adapter;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.SqlClient.SqlConnection Connection {
-            get {
-                if ((this._connection == null)) {
-                    this.InitConnection();
-                }
-                return this._connection;
-            }
-            set {
-                this._connection = value;
-                if ((this.Adapter.InsertCommand != null)) {
-                    this.Adapter.InsertCommand.Connection = value;
-                }
-                if ((this.Adapter.DeleteCommand != null)) {
-                    this.Adapter.DeleteCommand.Connection = value;
-                }
-                if ((this.Adapter.UpdateCommand != null)) {
-                    this.Adapter.UpdateCommand.Connection = value;
-                }
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    if ((this.CommandCollection[i] != null)) {
-                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
-                    }
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.SqlClient.SqlTransaction Transaction {
-            get {
-                return this._transaction;
-            }
-            set {
-                this._transaction = value;
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    this.CommandCollection[i].Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.DeleteCommand != null))) {
-                    this.Adapter.DeleteCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.InsertCommand != null))) {
-                    this.Adapter.InsertCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.UpdateCommand != null))) {
-                    this.Adapter.UpdateCommand.Transaction = this._transaction;
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
-            get {
-                if ((this._commandCollection == null)) {
-                    this.InitCommandCollection();
-                }
-                return this._commandCollection;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public bool ClearBeforeFill {
-            get {
-                return this._clearBeforeFill;
-            }
-            set {
-                this._clearBeforeFill = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitAdapter() {
-            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
-            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
-            tableMapping.SourceTable = "Table";
-            tableMapping.DataSetTable = "DESIGNER";
-            tableMapping.ColumnMappings.Add("designer_id", "designer_id");
-            tableMapping.ColumnMappings.Add("name", "name");
-            this._adapter.TableMappings.Add(tableMapping);
-            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[DESIGNER] WHERE (([designer_id] = @Original_designer_id) AND (" +
-                "[name] = @Original_name))";
-            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_designer_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "designer_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "name", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[DESIGNER] ([name]) VALUES (@name);\r\nSELECT designer_id, name F" +
-                "ROM dbo.DESIGNER WHERE (designer_id = SCOPE_IDENTITY())";
-            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = "UPDATE [dbo].[DESIGNER] SET [name] = @name WHERE (([designer_id] = @Original_desi" +
-                "gner_id) AND ([name] = @Original_name));\r\nSELECT designer_id, name FROM dbo.DESI" +
-                "GNER WHERE (designer_id = @designer_id)";
-            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_designer_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "designer_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "name", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@designer_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "designer_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitConnection() {
-            this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::SystemsAnalysis.DataAccess.Properties.Settings.Default.RETRO_RGConnectionString;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
-            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
-            this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT     dbo.DESIGNER.*\r\nFROM         dbo.DESIGNER";
-            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(RetrofitsDataSet.DESIGNERDataTable dataTable) {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            if ((this.ClearBeforeFill == true)) {
-                dataTable.Clear();
-            }
-            int returnValue = this.Adapter.Fill(dataTable);
-            return returnValue;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual RetrofitsDataSet.DESIGNERDataTable GetData() {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            RetrofitsDataSet.DESIGNERDataTable dataTable = new RetrofitsDataSet.DESIGNERDataTable();
-            this.Adapter.Fill(dataTable);
-            return dataTable;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(RetrofitsDataSet.DESIGNERDataTable dataTable) {
-            return this.Adapter.Update(dataTable);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(RetrofitsDataSet dataSet) {
-            return this.Adapter.Update(dataSet, "DESIGNER");
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow dataRow) {
-            return this.Adapter.Update(new global::System.Data.DataRow[] {
-                        dataRow});
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow[] dataRows) {
-            return this.Adapter.Update(dataRows);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_designer_id, string Original_name) {
-            this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_designer_id));
-            if ((Original_name == null)) {
-                throw new global::System.ArgumentNullException("Original_name");
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((string)(Original_name));
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
-            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.DeleteCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.DeleteCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string name) {
-            if ((name == null)) {
-                throw new global::System.ArgumentNullException("name");
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(name));
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
-            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.InsertCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.InsertCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string name, int Original_designer_id, string Original_name, int designer_id) {
-            if ((name == null)) {
-                throw new global::System.ArgumentNullException("name");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(name));
-            }
-            this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(Original_designer_id));
-            if ((Original_name == null)) {
-                throw new global::System.ArgumentNullException("Original_name");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(Original_name));
-            }
-            this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(designer_id));
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
-            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.UpdateCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.UpdateCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string name, int Original_designer_id, string Original_name) {
-            return this.Update(name, Original_designer_id, Original_name, Original_designer_id);
-        }
-    }
-    
-    /// <summary>
-    ///Represents the connection and commands used to retrieve and save data.
-    ///</summary>
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
-    [global::System.ComponentModel.ToolboxItem(true)]
-    [global::System.ComponentModel.DataObjectAttribute(true)]
-    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
-        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
-    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
     public partial class DESTINATIONTableAdapter : global::System.ComponentModel.Component {
         
         private global::System.Data.SqlClient.SqlDataAdapter _adapter;
@@ -10918,906 +7732,6 @@ namespace SystemsAnalysis.DataAccess.RetrofitsDataSetTableAdapters {
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
         public virtual int Update(string name, int Original_ia_type_id, string Original_name) {
             return this.Update(name, Original_ia_type_id, Original_name, Original_ia_type_id);
-        }
-    }
-    
-    /// <summary>
-    ///Represents the connection and commands used to retrieve and save data.
-    ///</summary>
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
-    [global::System.ComponentModel.ToolboxItem(true)]
-    [global::System.ComponentModel.DataObjectAttribute(true)]
-    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
-        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
-    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-    public partial class INFILTRATION_TESTTableAdapter : global::System.ComponentModel.Component {
-        
-        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
-        
-        private global::System.Data.SqlClient.SqlConnection _connection;
-        
-        private global::System.Data.SqlClient.SqlTransaction _transaction;
-        
-        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
-        
-        private bool _clearBeforeFill;
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public INFILTRATION_TESTTableAdapter() {
-            this.ClearBeforeFill = true;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
-            get {
-                if ((this._adapter == null)) {
-                    this.InitAdapter();
-                }
-                return this._adapter;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.SqlClient.SqlConnection Connection {
-            get {
-                if ((this._connection == null)) {
-                    this.InitConnection();
-                }
-                return this._connection;
-            }
-            set {
-                this._connection = value;
-                if ((this.Adapter.InsertCommand != null)) {
-                    this.Adapter.InsertCommand.Connection = value;
-                }
-                if ((this.Adapter.DeleteCommand != null)) {
-                    this.Adapter.DeleteCommand.Connection = value;
-                }
-                if ((this.Adapter.UpdateCommand != null)) {
-                    this.Adapter.UpdateCommand.Connection = value;
-                }
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    if ((this.CommandCollection[i] != null)) {
-                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
-                    }
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.SqlClient.SqlTransaction Transaction {
-            get {
-                return this._transaction;
-            }
-            set {
-                this._transaction = value;
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    this.CommandCollection[i].Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.DeleteCommand != null))) {
-                    this.Adapter.DeleteCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.InsertCommand != null))) {
-                    this.Adapter.InsertCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.UpdateCommand != null))) {
-                    this.Adapter.UpdateCommand.Transaction = this._transaction;
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
-            get {
-                if ((this._commandCollection == null)) {
-                    this.InitCommandCollection();
-                }
-                return this._commandCollection;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public bool ClearBeforeFill {
-            get {
-                return this._clearBeforeFill;
-            }
-            set {
-                this._clearBeforeFill = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitAdapter() {
-            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
-            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
-            tableMapping.SourceTable = "Table";
-            tableMapping.DataSetTable = "INFILTRATION_TEST";
-            tableMapping.ColumnMappings.Add("infiltration_test_id", "infiltration_test_id");
-            tableMapping.ColumnMappings.Add("name", "name");
-            this._adapter.TableMappings.Add(tableMapping);
-            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[INFILTRATION_TEST] WHERE (([infiltration_test_id] = @Original_" +
-                "infiltration_test_id) AND ([name] = @Original_name))";
-            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_infiltration_test_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "infiltration_test_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "name", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[INFILTRATION_TEST] ([name]) VALUES (@name);\r\nSELECT infiltrati" +
-                "on_test_id, name FROM dbo.INFILTRATION_TEST WHERE (infiltration_test_id = SCOPE_" +
-                "IDENTITY())";
-            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[INFILTRATION_TEST] SET [name] = @name WHERE (([infiltration_test_id] = @Original_infiltration_test_id) AND ([name] = @Original_name));
-SELECT infiltration_test_id, name FROM dbo.INFILTRATION_TEST WHERE (infiltration_test_id = @infiltration_test_id)";
-            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_infiltration_test_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "infiltration_test_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "name", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@infiltration_test_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "infiltration_test_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitConnection() {
-            this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::SystemsAnalysis.DataAccess.Properties.Settings.Default.RETRO_RGConnectionString;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
-            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
-            this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT     dbo.INFILTRATION_TEST.*\r\nFROM         dbo.INFILTRATION_TEST";
-            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(RetrofitsDataSet.INFILTRATION_TESTDataTable dataTable) {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            if ((this.ClearBeforeFill == true)) {
-                dataTable.Clear();
-            }
-            int returnValue = this.Adapter.Fill(dataTable);
-            return returnValue;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual RetrofitsDataSet.INFILTRATION_TESTDataTable GetData() {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            RetrofitsDataSet.INFILTRATION_TESTDataTable dataTable = new RetrofitsDataSet.INFILTRATION_TESTDataTable();
-            this.Adapter.Fill(dataTable);
-            return dataTable;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(RetrofitsDataSet.INFILTRATION_TESTDataTable dataTable) {
-            return this.Adapter.Update(dataTable);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(RetrofitsDataSet dataSet) {
-            return this.Adapter.Update(dataSet, "INFILTRATION_TEST");
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow dataRow) {
-            return this.Adapter.Update(new global::System.Data.DataRow[] {
-                        dataRow});
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow[] dataRows) {
-            return this.Adapter.Update(dataRows);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_infiltration_test_id, string Original_name) {
-            this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_infiltration_test_id));
-            if ((Original_name == null)) {
-                throw new global::System.ArgumentNullException("Original_name");
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((string)(Original_name));
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
-            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.DeleteCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.DeleteCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string name) {
-            if ((name == null)) {
-                throw new global::System.ArgumentNullException("name");
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(name));
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
-            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.InsertCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.InsertCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string name, int Original_infiltration_test_id, string Original_name, int infiltration_test_id) {
-            if ((name == null)) {
-                throw new global::System.ArgumentNullException("name");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(name));
-            }
-            this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(Original_infiltration_test_id));
-            if ((Original_name == null)) {
-                throw new global::System.ArgumentNullException("Original_name");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(Original_name));
-            }
-            this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(infiltration_test_id));
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
-            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.UpdateCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.UpdateCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string name, int Original_infiltration_test_id, string Original_name) {
-            return this.Update(name, Original_infiltration_test_id, Original_name, Original_infiltration_test_id);
-        }
-    }
-    
-    /// <summary>
-    ///Represents the connection and commands used to retrieve and save data.
-    ///</summary>
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
-    [global::System.ComponentModel.ToolboxItem(true)]
-    [global::System.ComponentModel.DataObjectAttribute(true)]
-    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
-        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
-    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-    public partial class INFORMATION_SOURCETableAdapter : global::System.ComponentModel.Component {
-        
-        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
-        
-        private global::System.Data.SqlClient.SqlConnection _connection;
-        
-        private global::System.Data.SqlClient.SqlTransaction _transaction;
-        
-        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
-        
-        private bool _clearBeforeFill;
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public INFORMATION_SOURCETableAdapter() {
-            this.ClearBeforeFill = true;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
-            get {
-                if ((this._adapter == null)) {
-                    this.InitAdapter();
-                }
-                return this._adapter;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.SqlClient.SqlConnection Connection {
-            get {
-                if ((this._connection == null)) {
-                    this.InitConnection();
-                }
-                return this._connection;
-            }
-            set {
-                this._connection = value;
-                if ((this.Adapter.InsertCommand != null)) {
-                    this.Adapter.InsertCommand.Connection = value;
-                }
-                if ((this.Adapter.DeleteCommand != null)) {
-                    this.Adapter.DeleteCommand.Connection = value;
-                }
-                if ((this.Adapter.UpdateCommand != null)) {
-                    this.Adapter.UpdateCommand.Connection = value;
-                }
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    if ((this.CommandCollection[i] != null)) {
-                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
-                    }
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.SqlClient.SqlTransaction Transaction {
-            get {
-                return this._transaction;
-            }
-            set {
-                this._transaction = value;
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    this.CommandCollection[i].Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.DeleteCommand != null))) {
-                    this.Adapter.DeleteCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.InsertCommand != null))) {
-                    this.Adapter.InsertCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.UpdateCommand != null))) {
-                    this.Adapter.UpdateCommand.Transaction = this._transaction;
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
-            get {
-                if ((this._commandCollection == null)) {
-                    this.InitCommandCollection();
-                }
-                return this._commandCollection;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public bool ClearBeforeFill {
-            get {
-                return this._clearBeforeFill;
-            }
-            set {
-                this._clearBeforeFill = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitAdapter() {
-            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
-            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
-            tableMapping.SourceTable = "Table";
-            tableMapping.DataSetTable = "INFORMATION_SOURCE";
-            tableMapping.ColumnMappings.Add("information_source_id", "information_source_id");
-            tableMapping.ColumnMappings.Add("name", "name");
-            this._adapter.TableMappings.Add(tableMapping);
-            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[INFORMATION_SOURCE] WHERE (([information_source_id] = @Origina" +
-                "l_information_source_id) AND ([name] = @Original_name))";
-            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_information_source_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "information_source_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "name", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[INFORMATION_SOURCE] ([name]) VALUES (@name);\r\nSELECT informati" +
-                "on_source_id, name FROM dbo.INFORMATION_SOURCE WHERE (information_source_id = SC" +
-                "OPE_IDENTITY())";
-            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[INFORMATION_SOURCE] SET [name] = @name WHERE (([information_source_id] = @Original_information_source_id) AND ([name] = @Original_name));
-SELECT information_source_id, name FROM dbo.INFORMATION_SOURCE WHERE (information_source_id = @information_source_id)";
-            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_information_source_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "information_source_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "name", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@information_source_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "information_source_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitConnection() {
-            this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::SystemsAnalysis.DataAccess.Properties.Settings.Default.RETRO_RGConnectionString;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
-            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
-            this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT     dbo.INFORMATION_SOURCE.*\r\nFROM         dbo.INFORMATION_SOURCE";
-            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(RetrofitsDataSet.INFORMATION_SOURCEDataTable dataTable) {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            if ((this.ClearBeforeFill == true)) {
-                dataTable.Clear();
-            }
-            int returnValue = this.Adapter.Fill(dataTable);
-            return returnValue;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual RetrofitsDataSet.INFORMATION_SOURCEDataTable GetData() {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            RetrofitsDataSet.INFORMATION_SOURCEDataTable dataTable = new RetrofitsDataSet.INFORMATION_SOURCEDataTable();
-            this.Adapter.Fill(dataTable);
-            return dataTable;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(RetrofitsDataSet.INFORMATION_SOURCEDataTable dataTable) {
-            return this.Adapter.Update(dataTable);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(RetrofitsDataSet dataSet) {
-            return this.Adapter.Update(dataSet, "INFORMATION_SOURCE");
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow dataRow) {
-            return this.Adapter.Update(new global::System.Data.DataRow[] {
-                        dataRow});
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow[] dataRows) {
-            return this.Adapter.Update(dataRows);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_information_source_id, string Original_name) {
-            this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_information_source_id));
-            if ((Original_name == null)) {
-                throw new global::System.ArgumentNullException("Original_name");
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((string)(Original_name));
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
-            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.DeleteCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.DeleteCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string name) {
-            if ((name == null)) {
-                throw new global::System.ArgumentNullException("name");
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(name));
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
-            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.InsertCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.InsertCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string name, int Original_information_source_id, string Original_name, int information_source_id) {
-            if ((name == null)) {
-                throw new global::System.ArgumentNullException("name");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(name));
-            }
-            this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(Original_information_source_id));
-            if ((Original_name == null)) {
-                throw new global::System.ArgumentNullException("Original_name");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(Original_name));
-            }
-            this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(information_source_id));
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
-            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.UpdateCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.UpdateCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string name, int Original_information_source_id, string Original_name) {
-            return this.Update(name, Original_information_source_id, Original_name, Original_information_source_id);
-        }
-    }
-    
-    /// <summary>
-    ///Represents the connection and commands used to retrieve and save data.
-    ///</summary>
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
-    [global::System.ComponentModel.ToolboxItem(true)]
-    [global::System.ComponentModel.DataObjectAttribute(true)]
-    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
-        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
-    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-    public partial class MANAGEMENTTableAdapter : global::System.ComponentModel.Component {
-        
-        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
-        
-        private global::System.Data.SqlClient.SqlConnection _connection;
-        
-        private global::System.Data.SqlClient.SqlTransaction _transaction;
-        
-        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
-        
-        private bool _clearBeforeFill;
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public MANAGEMENTTableAdapter() {
-            this.ClearBeforeFill = true;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
-            get {
-                if ((this._adapter == null)) {
-                    this.InitAdapter();
-                }
-                return this._adapter;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.SqlClient.SqlConnection Connection {
-            get {
-                if ((this._connection == null)) {
-                    this.InitConnection();
-                }
-                return this._connection;
-            }
-            set {
-                this._connection = value;
-                if ((this.Adapter.InsertCommand != null)) {
-                    this.Adapter.InsertCommand.Connection = value;
-                }
-                if ((this.Adapter.DeleteCommand != null)) {
-                    this.Adapter.DeleteCommand.Connection = value;
-                }
-                if ((this.Adapter.UpdateCommand != null)) {
-                    this.Adapter.UpdateCommand.Connection = value;
-                }
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    if ((this.CommandCollection[i] != null)) {
-                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
-                    }
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.SqlClient.SqlTransaction Transaction {
-            get {
-                return this._transaction;
-            }
-            set {
-                this._transaction = value;
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    this.CommandCollection[i].Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.DeleteCommand != null))) {
-                    this.Adapter.DeleteCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.InsertCommand != null))) {
-                    this.Adapter.InsertCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.UpdateCommand != null))) {
-                    this.Adapter.UpdateCommand.Transaction = this._transaction;
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
-            get {
-                if ((this._commandCollection == null)) {
-                    this.InitCommandCollection();
-                }
-                return this._commandCollection;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public bool ClearBeforeFill {
-            get {
-                return this._clearBeforeFill;
-            }
-            set {
-                this._clearBeforeFill = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitAdapter() {
-            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
-            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
-            tableMapping.SourceTable = "Table";
-            tableMapping.DataSetTable = "MANAGEMENT";
-            tableMapping.ColumnMappings.Add("management_id", "management_id");
-            tableMapping.ColumnMappings.Add("name", "name");
-            this._adapter.TableMappings.Add(tableMapping);
-            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[MANAGEMENT] WHERE (([management_id] = @Original_management_id)" +
-                " AND ([name] = @Original_name))";
-            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_management_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "management_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "name", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[MANAGEMENT] ([name]) VALUES (@name);\r\nSELECT management_id, na" +
-                "me FROM dbo.MANAGEMENT WHERE (management_id = SCOPE_IDENTITY())";
-            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = "UPDATE [dbo].[MANAGEMENT] SET [name] = @name WHERE (([management_id] = @Original_" +
-                "management_id) AND ([name] = @Original_name));\r\nSELECT management_id, name FROM " +
-                "dbo.MANAGEMENT WHERE (management_id = @management_id)";
-            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_management_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "management_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "name", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@management_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "management_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitConnection() {
-            this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::SystemsAnalysis.DataAccess.Properties.Settings.Default.RETRO_RGConnectionString;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
-            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
-            this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT     dbo.MANAGEMENT.*\r\nFROM         dbo.MANAGEMENT";
-            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(RetrofitsDataSet.MANAGEMENTDataTable dataTable) {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            if ((this.ClearBeforeFill == true)) {
-                dataTable.Clear();
-            }
-            int returnValue = this.Adapter.Fill(dataTable);
-            return returnValue;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual RetrofitsDataSet.MANAGEMENTDataTable GetData() {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            RetrofitsDataSet.MANAGEMENTDataTable dataTable = new RetrofitsDataSet.MANAGEMENTDataTable();
-            this.Adapter.Fill(dataTable);
-            return dataTable;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(RetrofitsDataSet.MANAGEMENTDataTable dataTable) {
-            return this.Adapter.Update(dataTable);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(RetrofitsDataSet dataSet) {
-            return this.Adapter.Update(dataSet, "MANAGEMENT");
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow dataRow) {
-            return this.Adapter.Update(new global::System.Data.DataRow[] {
-                        dataRow});
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow[] dataRows) {
-            return this.Adapter.Update(dataRows);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_management_id, string Original_name) {
-            this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_management_id));
-            if ((Original_name == null)) {
-                throw new global::System.ArgumentNullException("Original_name");
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((string)(Original_name));
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
-            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.DeleteCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.DeleteCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string name) {
-            if ((name == null)) {
-                throw new global::System.ArgumentNullException("name");
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(name));
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
-            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.InsertCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.InsertCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string name, int Original_management_id, string Original_name, int management_id) {
-            if ((name == null)) {
-                throw new global::System.ArgumentNullException("name");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(name));
-            }
-            this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(Original_management_id));
-            if ((Original_name == null)) {
-                throw new global::System.ArgumentNullException("Original_name");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(Original_name));
-            }
-            this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(management_id));
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
-            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.UpdateCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.UpdateCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string name, int Original_management_id, string Original_name) {
-            return this.Update(name, Original_management_id, Original_name, Original_management_id);
         }
     }
     
@@ -13559,564 +9473,6 @@ SELECT site_assessment_id, site_id, assessment_date, staff_id, information_sourc
     [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
         ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-    public partial class SITE_MODEL_CONDITIONTableAdapter : global::System.ComponentModel.Component {
-        
-        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
-        
-        private global::System.Data.SqlClient.SqlConnection _connection;
-        
-        private global::System.Data.SqlClient.SqlTransaction _transaction;
-        
-        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
-        
-        private bool _clearBeforeFill;
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public SITE_MODEL_CONDITIONTableAdapter() {
-            this.ClearBeforeFill = true;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
-            get {
-                if ((this._adapter == null)) {
-                    this.InitAdapter();
-                }
-                return this._adapter;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.SqlClient.SqlConnection Connection {
-            get {
-                if ((this._connection == null)) {
-                    this.InitConnection();
-                }
-                return this._connection;
-            }
-            set {
-                this._connection = value;
-                if ((this.Adapter.InsertCommand != null)) {
-                    this.Adapter.InsertCommand.Connection = value;
-                }
-                if ((this.Adapter.DeleteCommand != null)) {
-                    this.Adapter.DeleteCommand.Connection = value;
-                }
-                if ((this.Adapter.UpdateCommand != null)) {
-                    this.Adapter.UpdateCommand.Connection = value;
-                }
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    if ((this.CommandCollection[i] != null)) {
-                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
-                    }
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.SqlClient.SqlTransaction Transaction {
-            get {
-                return this._transaction;
-            }
-            set {
-                this._transaction = value;
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    this.CommandCollection[i].Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.DeleteCommand != null))) {
-                    this.Adapter.DeleteCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.InsertCommand != null))) {
-                    this.Adapter.InsertCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.UpdateCommand != null))) {
-                    this.Adapter.UpdateCommand.Transaction = this._transaction;
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
-            get {
-                if ((this._commandCollection == null)) {
-                    this.InitCommandCollection();
-                }
-                return this._commandCollection;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public bool ClearBeforeFill {
-            get {
-                return this._clearBeforeFill;
-            }
-            set {
-                this._clearBeforeFill = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitAdapter() {
-            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
-            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
-            tableMapping.SourceTable = "Table";
-            tableMapping.DataSetTable = "SITE_MODEL_CONDITION";
-            tableMapping.ColumnMappings.Add("site_model_condition_id", "site_model_condition_id");
-            tableMapping.ColumnMappings.Add("site_id", "site_id");
-            tableMapping.ColumnMappings.Add("model_date", "model_date");
-            tableMapping.ColumnMappings.Add("roof_total", "roof_total");
-            tableMapping.ColumnMappings.Add("roof_connected", "roof_connected");
-            tableMapping.ColumnMappings.Add("pave_total", "pave_total");
-            tableMapping.ColumnMappings.Add("pave_connected", "pave_connected");
-            tableMapping.ColumnMappings.Add("management_id", "management_id");
-            tableMapping.ColumnMappings.Add("sewer_node", "sewer_node");
-            this._adapter.TableMappings.Add(tableMapping);
-            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[SITE_MODEL_CONDITION] WHERE (([site_model_condition_id] = @Original_site_model_condition_id) AND ([site_id] = @Original_site_id) AND ((@IsNull_model_date = 1 AND [model_date] IS NULL) OR ([model_date] = @Original_model_date)) AND ((@IsNull_roof_total = 1 AND [roof_total] IS NULL) OR ([roof_total] = @Original_roof_total)) AND ((@IsNull_roof_connected = 1 AND [roof_connected] IS NULL) OR ([roof_connected] = @Original_roof_connected)) AND ((@IsNull_pave_total = 1 AND [pave_total] IS NULL) OR ([pave_total] = @Original_pave_total)) AND ((@IsNull_pave_connected = 1 AND [pave_connected] IS NULL) OR ([pave_connected] = @Original_pave_connected)) AND ((@IsNull_management_id = 1 AND [management_id] IS NULL) OR ([management_id] = @Original_management_id)) AND ((@IsNull_sewer_node = 1 AND [sewer_node] IS NULL) OR ([sewer_node] = @Original_sewer_node)))";
-            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_site_model_condition_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "site_model_condition_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_site_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "site_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_model_date", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "model_date", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_model_date", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "model_date", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_roof_total", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "roof_total", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_roof_total", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "roof_total", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_roof_connected", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "roof_connected", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_roof_connected", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "roof_connected", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_pave_total", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "pave_total", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_pave_total", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "pave_total", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_pave_connected", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "pave_connected", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_pave_connected", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "pave_connected", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_management_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "management_id", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_management_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "management_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_sewer_node", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "sewer_node", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_sewer_node", global::System.Data.SqlDbType.Char, 0, global::System.Data.ParameterDirection.Input, 0, 0, "sewer_node", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[SITE_MODEL_CONDITION] ([site_id], [model_date], [roof_total], [roof_connected], [pave_total], [pave_connected], [management_id], [sewer_node]) VALUES (@site_id, @model_date, @roof_total, @roof_connected, @pave_total, @pave_connected, @management_id, @sewer_node);
-SELECT site_model_condition_id, site_id, model_date, roof_total, roof_connected, pave_total, pave_connected, management_id, sewer_node FROM dbo.SITE_MODEL_CONDITION WHERE (site_model_condition_id = SCOPE_IDENTITY())";
-            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@site_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "site_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@model_date", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "model_date", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@roof_total", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "roof_total", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@roof_connected", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "roof_connected", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@pave_total", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "pave_total", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@pave_connected", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "pave_connected", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@management_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "management_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@sewer_node", global::System.Data.SqlDbType.Char, 0, global::System.Data.ParameterDirection.Input, 0, 0, "sewer_node", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[SITE_MODEL_CONDITION] SET [site_id] = @site_id, [model_date] = @model_date, [roof_total] = @roof_total, [roof_connected] = @roof_connected, [pave_total] = @pave_total, [pave_connected] = @pave_connected, [management_id] = @management_id, [sewer_node] = @sewer_node WHERE (([site_model_condition_id] = @Original_site_model_condition_id) AND ([site_id] = @Original_site_id) AND ((@IsNull_model_date = 1 AND [model_date] IS NULL) OR ([model_date] = @Original_model_date)) AND ((@IsNull_roof_total = 1 AND [roof_total] IS NULL) OR ([roof_total] = @Original_roof_total)) AND ((@IsNull_roof_connected = 1 AND [roof_connected] IS NULL) OR ([roof_connected] = @Original_roof_connected)) AND ((@IsNull_pave_total = 1 AND [pave_total] IS NULL) OR ([pave_total] = @Original_pave_total)) AND ((@IsNull_pave_connected = 1 AND [pave_connected] IS NULL) OR ([pave_connected] = @Original_pave_connected)) AND ((@IsNull_management_id = 1 AND [management_id] IS NULL) OR ([management_id] = @Original_management_id)) AND ((@IsNull_sewer_node = 1 AND [sewer_node] IS NULL) OR ([sewer_node] = @Original_sewer_node)));
-SELECT site_model_condition_id, site_id, model_date, roof_total, roof_connected, pave_total, pave_connected, management_id, sewer_node FROM dbo.SITE_MODEL_CONDITION WHERE (site_model_condition_id = @site_model_condition_id)";
-            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@site_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "site_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@model_date", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "model_date", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@roof_total", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "roof_total", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@roof_connected", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "roof_connected", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@pave_total", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "pave_total", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@pave_connected", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "pave_connected", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@management_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "management_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@sewer_node", global::System.Data.SqlDbType.Char, 0, global::System.Data.ParameterDirection.Input, 0, 0, "sewer_node", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_site_model_condition_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "site_model_condition_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_site_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "site_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_model_date", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "model_date", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_model_date", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "model_date", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_roof_total", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "roof_total", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_roof_total", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "roof_total", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_roof_connected", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "roof_connected", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_roof_connected", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "roof_connected", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_pave_total", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "pave_total", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_pave_total", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "pave_total", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_pave_connected", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "pave_connected", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_pave_connected", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "pave_connected", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_management_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "management_id", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_management_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "management_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_sewer_node", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "sewer_node", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_sewer_node", global::System.Data.SqlDbType.Char, 0, global::System.Data.ParameterDirection.Input, 0, 0, "sewer_node", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@site_model_condition_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "site_model_condition_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitConnection() {
-            this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::SystemsAnalysis.DataAccess.Properties.Settings.Default.RETRO_RGConnectionString;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
-            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
-            this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT     dbo.SITE_MODEL_CONDITION.*\r\nFROM         dbo.SITE_MODEL_CONDITION";
-            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(RetrofitsDataSet.SITE_MODEL_CONDITIONDataTable dataTable) {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            if ((this.ClearBeforeFill == true)) {
-                dataTable.Clear();
-            }
-            int returnValue = this.Adapter.Fill(dataTable);
-            return returnValue;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual RetrofitsDataSet.SITE_MODEL_CONDITIONDataTable GetData() {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            RetrofitsDataSet.SITE_MODEL_CONDITIONDataTable dataTable = new RetrofitsDataSet.SITE_MODEL_CONDITIONDataTable();
-            this.Adapter.Fill(dataTable);
-            return dataTable;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(RetrofitsDataSet.SITE_MODEL_CONDITIONDataTable dataTable) {
-            return this.Adapter.Update(dataTable);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(RetrofitsDataSet dataSet) {
-            return this.Adapter.Update(dataSet, "SITE_MODEL_CONDITION");
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow dataRow) {
-            return this.Adapter.Update(new global::System.Data.DataRow[] {
-                        dataRow});
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow[] dataRows) {
-            return this.Adapter.Update(dataRows);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_site_model_condition_id, int Original_site_id, global::System.Nullable<global::System.DateTime> Original_model_date, global::System.Nullable<int> Original_roof_total, global::System.Nullable<int> Original_roof_connected, global::System.Nullable<int> Original_pave_total, global::System.Nullable<int> Original_pave_connected, global::System.Nullable<int> Original_management_id, string Original_sewer_node) {
-            this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_site_model_condition_id));
-            this.Adapter.DeleteCommand.Parameters[1].Value = ((int)(Original_site_id));
-            if ((Original_model_date.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[2].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((System.DateTime)(Original_model_date.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[2].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            if ((Original_roof_total.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((int)(Original_roof_total.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[5].Value = global::System.DBNull.Value;
-            }
-            if ((Original_roof_connected.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[6].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[7].Value = ((int)(Original_roof_connected.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[6].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[7].Value = global::System.DBNull.Value;
-            }
-            if ((Original_pave_total.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[8].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[9].Value = ((int)(Original_pave_total.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[8].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[9].Value = global::System.DBNull.Value;
-            }
-            if ((Original_pave_connected.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[10].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[11].Value = ((int)(Original_pave_connected.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[10].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[11].Value = global::System.DBNull.Value;
-            }
-            if ((Original_management_id.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[12].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[13].Value = ((int)(Original_management_id.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[12].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[13].Value = global::System.DBNull.Value;
-            }
-            if ((Original_sewer_node == null)) {
-                this.Adapter.DeleteCommand.Parameters[14].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[15].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[14].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[15].Value = ((string)(Original_sewer_node));
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
-            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.DeleteCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.DeleteCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(int site_id, global::System.Nullable<global::System.DateTime> model_date, global::System.Nullable<int> roof_total, global::System.Nullable<int> roof_connected, global::System.Nullable<int> pave_total, global::System.Nullable<int> pave_connected, global::System.Nullable<int> management_id, string sewer_node) {
-            this.Adapter.InsertCommand.Parameters[0].Value = ((int)(site_id));
-            if ((model_date.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[1].Value = ((System.DateTime)(model_date.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
-            if ((roof_total.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[2].Value = ((int)(roof_total.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            if ((roof_connected.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[3].Value = ((int)(roof_connected.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            if ((pave_total.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[4].Value = ((int)(pave_total.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
-            if ((pave_connected.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[5].Value = ((int)(pave_connected.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[5].Value = global::System.DBNull.Value;
-            }
-            if ((management_id.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[6].Value = ((int)(management_id.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            if ((sewer_node == null)) {
-                this.Adapter.InsertCommand.Parameters[7].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[7].Value = ((string)(sewer_node));
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
-            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.InsertCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.InsertCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(
-                    int site_id, 
-                    global::System.Nullable<global::System.DateTime> model_date, 
-                    global::System.Nullable<int> roof_total, 
-                    global::System.Nullable<int> roof_connected, 
-                    global::System.Nullable<int> pave_total, 
-                    global::System.Nullable<int> pave_connected, 
-                    global::System.Nullable<int> management_id, 
-                    string sewer_node, 
-                    int Original_site_model_condition_id, 
-                    int Original_site_id, 
-                    global::System.Nullable<global::System.DateTime> Original_model_date, 
-                    global::System.Nullable<int> Original_roof_total, 
-                    global::System.Nullable<int> Original_roof_connected, 
-                    global::System.Nullable<int> Original_pave_total, 
-                    global::System.Nullable<int> Original_pave_connected, 
-                    global::System.Nullable<int> Original_management_id, 
-                    string Original_sewer_node, 
-                    int site_model_condition_id) {
-            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(site_id));
-            if ((model_date.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[1].Value = ((System.DateTime)(model_date.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
-            if ((roof_total.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(roof_total.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            if ((roof_connected.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(roof_connected.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            if ((pave_total.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(pave_total.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
-            if ((pave_connected.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(pave_connected.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[5].Value = global::System.DBNull.Value;
-            }
-            if ((management_id.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((int)(management_id.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            if ((sewer_node == null)) {
-                this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((string)(sewer_node));
-            }
-            this.Adapter.UpdateCommand.Parameters[8].Value = ((int)(Original_site_model_condition_id));
-            this.Adapter.UpdateCommand.Parameters[9].Value = ((int)(Original_site_id));
-            if ((Original_model_date.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[11].Value = ((System.DateTime)(Original_model_date.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[11].Value = global::System.DBNull.Value;
-            }
-            if ((Original_roof_total.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[13].Value = ((int)(Original_roof_total.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[13].Value = global::System.DBNull.Value;
-            }
-            if ((Original_roof_connected.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[15].Value = ((int)(Original_roof_connected.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[15].Value = global::System.DBNull.Value;
-            }
-            if ((Original_pave_total.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[17].Value = ((int)(Original_pave_total.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[17].Value = global::System.DBNull.Value;
-            }
-            if ((Original_pave_connected.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[18].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[19].Value = ((int)(Original_pave_connected.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[18].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[19].Value = global::System.DBNull.Value;
-            }
-            if ((Original_management_id.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[20].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[21].Value = ((int)(Original_management_id.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[20].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[21].Value = global::System.DBNull.Value;
-            }
-            if ((Original_sewer_node == null)) {
-                this.Adapter.UpdateCommand.Parameters[22].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[23].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[22].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[23].Value = ((string)(Original_sewer_node));
-            }
-            this.Adapter.UpdateCommand.Parameters[24].Value = ((int)(site_model_condition_id));
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
-            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.UpdateCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.UpdateCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(
-                    int site_id, 
-                    global::System.Nullable<global::System.DateTime> model_date, 
-                    global::System.Nullable<int> roof_total, 
-                    global::System.Nullable<int> roof_connected, 
-                    global::System.Nullable<int> pave_total, 
-                    global::System.Nullable<int> pave_connected, 
-                    global::System.Nullable<int> management_id, 
-                    string sewer_node, 
-                    int Original_site_model_condition_id, 
-                    int Original_site_id, 
-                    global::System.Nullable<global::System.DateTime> Original_model_date, 
-                    global::System.Nullable<int> Original_roof_total, 
-                    global::System.Nullable<int> Original_roof_connected, 
-                    global::System.Nullable<int> Original_pave_total, 
-                    global::System.Nullable<int> Original_pave_connected, 
-                    global::System.Nullable<int> Original_management_id, 
-                    string Original_sewer_node) {
-            return this.Update(site_id, model_date, roof_total, roof_connected, pave_total, pave_connected, management_id, sewer_node, Original_site_model_condition_id, Original_site_id, Original_model_date, Original_roof_total, Original_roof_connected, Original_pave_total, Original_pave_connected, Original_management_id, Original_sewer_node, Original_site_model_condition_id);
-        }
-    }
-    
-    /// <summary>
-    ///Represents the connection and commands used to retrieve and save data.
-    ///</summary>
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
-    [global::System.ComponentModel.ToolboxItem(true)]
-    [global::System.ComponentModel.DataObjectAttribute(true)]
-    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
-        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
-    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
     public partial class SITE_OPPORTUNITYTableAdapter : global::System.ComponentModel.Component {
         
         private global::System.Data.SqlClient.SqlDataAdapter _adapter;
@@ -14873,6 +10229,606 @@ SELECT site_id, property_id, site_use, site_use_description, neighborhood, sewer
     }
     
     /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class RETRO_BASINTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::System.Data.SqlClient.SqlConnection _connection;
+        
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public RETRO_BASINTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "RETRO_BASIN";
+            tableMapping.ColumnMappings.Add("retro_basin_id", "retro_basin_id");
+            tableMapping.ColumnMappings.Add("name", "name");
+            this._adapter.TableMappings.Add(tableMapping);
+            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.DeleteCommand.Connection = this.Connection;
+            this._adapter.DeleteCommand.CommandText = "DELETE FROM [RETRO_BASIN] WHERE (([retro_basin_id] = @Original_retro_basin_id) AN" +
+                "D ([name] = @Original_name))";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_retro_basin_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "retro_basin_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "name", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [RETRO_BASIN] ([name]) VALUES (@name);\r\nSELECT retro_basin_id, name F" +
+                "ROM RETRO_BASIN WHERE (retro_basin_id = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.UpdateCommand.Connection = this.Connection;
+            this._adapter.UpdateCommand.CommandText = "UPDATE [RETRO_BASIN] SET [name] = @name WHERE (([retro_basin_id] = @Original_retr" +
+                "o_basin_id) AND ([name] = @Original_name));\r\nSELECT retro_basin_id, name FROM RE" +
+                "TRO_BASIN WHERE (retro_basin_id = @retro_basin_id)";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_retro_basin_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "retro_basin_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "name", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@retro_basin_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "retro_basin_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = global::SystemsAnalysis.DataAccess.Properties.Settings.Default.RETRO_RGConnectionString;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = "SELECT     retro_basin_id, name\r\nFROM         RETRO_BASIN";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(RetrofitsDataSet.RETRO_BASINDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual RetrofitsDataSet.RETRO_BASINDataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            RetrofitsDataSet.RETRO_BASINDataTable dataTable = new RetrofitsDataSet.RETRO_BASINDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(RetrofitsDataSet.RETRO_BASINDataTable dataTable) {
+            return this.Adapter.Update(dataTable);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(RetrofitsDataSet dataSet) {
+            return this.Adapter.Update(dataSet, "RETRO_BASIN");
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow dataRow) {
+            return this.Adapter.Update(new global::System.Data.DataRow[] {
+                        dataRow});
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow[] dataRows) {
+            return this.Adapter.Update(dataRows);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
+        public virtual int Delete(int Original_retro_basin_id, string Original_name) {
+            this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_retro_basin_id));
+            if ((Original_name == null)) {
+                throw new global::System.ArgumentNullException("Original_name");
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[1].Value = ((string)(Original_name));
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
+            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.DeleteCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.DeleteCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(string name) {
+            if ((name == null)) {
+                throw new global::System.ArgumentNullException("name");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(name));
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(string name, int Original_retro_basin_id, string Original_name, int retro_basin_id) {
+            if ((name == null)) {
+                throw new global::System.ArgumentNullException("name");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(name));
+            }
+            this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(Original_retro_basin_id));
+            if ((Original_name == null)) {
+                throw new global::System.ArgumentNullException("Original_name");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(Original_name));
+            }
+            this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(retro_basin_id));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
+            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.UpdateCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.UpdateCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(string name, int Original_retro_basin_id, string Original_name) {
+            return this.Update(name, Original_retro_basin_id, Original_name, Original_retro_basin_id);
+        }
+    }
+    
+    /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class SEWER_BASINTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::System.Data.SqlClient.SqlConnection _connection;
+        
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public SEWER_BASINTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "SEWER_BASIN";
+            tableMapping.ColumnMappings.Add("sewer_basin_id", "sewer_basin_id");
+            tableMapping.ColumnMappings.Add("name", "name");
+            this._adapter.TableMappings.Add(tableMapping);
+            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.DeleteCommand.Connection = this.Connection;
+            this._adapter.DeleteCommand.CommandText = "DELETE FROM [SEWER_BASIN] WHERE (([sewer_basin_id] = @Original_sewer_basin_id) AN" +
+                "D ([name] = @Original_name))";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_sewer_basin_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "sewer_basin_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "name", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [SEWER_BASIN] ([name]) VALUES (@name);\r\nSELECT sewer_basin_id, name F" +
+                "ROM SEWER_BASIN WHERE (sewer_basin_id = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.UpdateCommand.Connection = this.Connection;
+            this._adapter.UpdateCommand.CommandText = "UPDATE [SEWER_BASIN] SET [name] = @name WHERE (([sewer_basin_id] = @Original_sewe" +
+                "r_basin_id) AND ([name] = @Original_name));\r\nSELECT sewer_basin_id, name FROM SE" +
+                "WER_BASIN WHERE (sewer_basin_id = @sewer_basin_id)";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_sewer_basin_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "sewer_basin_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "name", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@sewer_basin_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "sewer_basin_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = global::SystemsAnalysis.DataAccess.Properties.Settings.Default.RETRO_RGConnectionString;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = "SELECT     sewer_basin_id, name\r\nFROM         SEWER_BASIN";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(RetrofitsDataSet.SEWER_BASINDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual RetrofitsDataSet.SEWER_BASINDataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            RetrofitsDataSet.SEWER_BASINDataTable dataTable = new RetrofitsDataSet.SEWER_BASINDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(RetrofitsDataSet.SEWER_BASINDataTable dataTable) {
+            return this.Adapter.Update(dataTable);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(RetrofitsDataSet dataSet) {
+            return this.Adapter.Update(dataSet, "SEWER_BASIN");
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow dataRow) {
+            return this.Adapter.Update(new global::System.Data.DataRow[] {
+                        dataRow});
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow[] dataRows) {
+            return this.Adapter.Update(dataRows);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
+        public virtual int Delete(int Original_sewer_basin_id, string Original_name) {
+            this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_sewer_basin_id));
+            if ((Original_name == null)) {
+                throw new global::System.ArgumentNullException("Original_name");
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[1].Value = ((string)(Original_name));
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
+            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.DeleteCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.DeleteCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(string name) {
+            if ((name == null)) {
+                throw new global::System.ArgumentNullException("name");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(name));
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(string name, int Original_sewer_basin_id, string Original_name, int sewer_basin_id) {
+            if ((name == null)) {
+                throw new global::System.ArgumentNullException("name");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(name));
+            }
+            this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(Original_sewer_basin_id));
+            if ((Original_name == null)) {
+                throw new global::System.ArgumentNullException("Original_name");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(Original_name));
+            }
+            this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(sewer_basin_id));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
+            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.UpdateCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.UpdateCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(string name, int Original_sewer_basin_id, string Original_name) {
+            return this.Update(name, Original_sewer_basin_id, Original_name, Original_sewer_basin_id);
+        }
+    }
+    
+    /// <summary>
     ///TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
     ///</summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
@@ -14889,21 +10845,9 @@ SELECT site_id, property_id, site_use, site_use_description, neighborhood, sewer
         
         private ASSESSMENT_TYPETableAdapter _aSSESSMENT_TYPETableAdapter;
         
-        private CONSTRUCTORTableAdapter _cONSTRUCTORTableAdapter;
-        
-        private CONTRACTORTableAdapter _cONTRACTORTableAdapter;
-        
-        private DESIGNERTableAdapter _dESIGNERTableAdapter;
-        
         private DESTINATIONTableAdapter _dESTINATIONTableAdapter;
         
         private IMPERVIOUS_AREA_TYPETableAdapter _iMPERVIOUS_AREA_TYPETableAdapter;
-        
-        private INFILTRATION_TESTTableAdapter _iNFILTRATION_TESTTableAdapter;
-        
-        private INFORMATION_SOURCETableAdapter _iNFORMATION_SOURCETableAdapter;
-        
-        private MANAGEMENTTableAdapter _mANAGEMENTTableAdapter;
         
         private OPPORTUNITY_FEASIBILITYTableAdapter _oPPORTUNITY_FEASIBILITYTableAdapter;
         
@@ -14913,11 +10857,13 @@ SELECT site_id, property_id, site_use, site_use_description, neighborhood, sewer
         
         private SITE_ASSESSMENTTableAdapter _sITE_ASSESSMENTTableAdapter;
         
-        private SITE_MODEL_CONDITIONTableAdapter _sITE_MODEL_CONDITIONTableAdapter;
-        
         private SITE_OPPORTUNITYTableAdapter _sITE_OPPORTUNITYTableAdapter;
         
         private SITETableAdapter _sITETableAdapter;
+        
+        private RETRO_BASINTableAdapter _rETRO_BASINTableAdapter;
+        
+        private SEWER_BASINTableAdapter _sEWER_BASINTableAdapter;
         
         private bool _backupDataSetBeforeUpdate;
         
@@ -14963,45 +10909,6 @@ SELECT site_id, property_id, site_use, site_use_description, neighborhood, sewer
         [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
             "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
             "", "System.Drawing.Design.UITypeEditor")]
-        public CONSTRUCTORTableAdapter CONSTRUCTORTableAdapter {
-            get {
-                return this._cONSTRUCTORTableAdapter;
-            }
-            set {
-                this._cONSTRUCTORTableAdapter = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
-            "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
-            "", "System.Drawing.Design.UITypeEditor")]
-        public CONTRACTORTableAdapter CONTRACTORTableAdapter {
-            get {
-                return this._cONTRACTORTableAdapter;
-            }
-            set {
-                this._cONTRACTORTableAdapter = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
-            "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
-            "", "System.Drawing.Design.UITypeEditor")]
-        public DESIGNERTableAdapter DESIGNERTableAdapter {
-            get {
-                return this._dESIGNERTableAdapter;
-            }
-            set {
-                this._dESIGNERTableAdapter = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
-            "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
-            "", "System.Drawing.Design.UITypeEditor")]
         public DESTINATIONTableAdapter DESTINATIONTableAdapter {
             get {
                 return this._dESTINATIONTableAdapter;
@@ -15021,45 +10928,6 @@ SELECT site_id, property_id, site_use, site_use_description, neighborhood, sewer
             }
             set {
                 this._iMPERVIOUS_AREA_TYPETableAdapter = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
-            "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
-            "", "System.Drawing.Design.UITypeEditor")]
-        public INFILTRATION_TESTTableAdapter INFILTRATION_TESTTableAdapter {
-            get {
-                return this._iNFILTRATION_TESTTableAdapter;
-            }
-            set {
-                this._iNFILTRATION_TESTTableAdapter = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
-            "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
-            "", "System.Drawing.Design.UITypeEditor")]
-        public INFORMATION_SOURCETableAdapter INFORMATION_SOURCETableAdapter {
-            get {
-                return this._iNFORMATION_SOURCETableAdapter;
-            }
-            set {
-                this._iNFORMATION_SOURCETableAdapter = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
-            "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
-            "", "System.Drawing.Design.UITypeEditor")]
-        public MANAGEMENTTableAdapter MANAGEMENTTableAdapter {
-            get {
-                return this._mANAGEMENTTableAdapter;
-            }
-            set {
-                this._mANAGEMENTTableAdapter = value;
             }
         }
         
@@ -15119,19 +10987,6 @@ SELECT site_id, property_id, site_use, site_use_description, neighborhood, sewer
         [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
             "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
             "", "System.Drawing.Design.UITypeEditor")]
-        public SITE_MODEL_CONDITIONTableAdapter SITE_MODEL_CONDITIONTableAdapter {
-            get {
-                return this._sITE_MODEL_CONDITIONTableAdapter;
-            }
-            set {
-                this._sITE_MODEL_CONDITIONTableAdapter = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
-            "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
-            "", "System.Drawing.Design.UITypeEditor")]
         public SITE_OPPORTUNITYTableAdapter SITE_OPPORTUNITYTableAdapter {
             get {
                 return this._sITE_OPPORTUNITYTableAdapter;
@@ -15151,6 +11006,32 @@ SELECT site_id, property_id, site_use, site_use_description, neighborhood, sewer
             }
             set {
                 this._sITETableAdapter = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
+            "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
+            "", "System.Drawing.Design.UITypeEditor")]
+        public RETRO_BASINTableAdapter RETRO_BASINTableAdapter {
+            get {
+                return this._rETRO_BASINTableAdapter;
+            }
+            set {
+                this._rETRO_BASINTableAdapter = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
+            "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
+            "", "System.Drawing.Design.UITypeEditor")]
+        public SEWER_BASINTableAdapter SEWER_BASINTableAdapter {
+            get {
+                return this._sEWER_BASINTableAdapter;
+            }
+            set {
+                this._sEWER_BASINTableAdapter = value;
             }
         }
         
@@ -15179,18 +11060,6 @@ SELECT site_id, property_id, site_use, site_use_description, neighborhood, sewer
                             && (this._aSSESSMENT_TYPETableAdapter.Connection != null))) {
                     return this._aSSESSMENT_TYPETableAdapter.Connection;
                 }
-                if (((this._cONSTRUCTORTableAdapter != null) 
-                            && (this._cONSTRUCTORTableAdapter.Connection != null))) {
-                    return this._cONSTRUCTORTableAdapter.Connection;
-                }
-                if (((this._cONTRACTORTableAdapter != null) 
-                            && (this._cONTRACTORTableAdapter.Connection != null))) {
-                    return this._cONTRACTORTableAdapter.Connection;
-                }
-                if (((this._dESIGNERTableAdapter != null) 
-                            && (this._dESIGNERTableAdapter.Connection != null))) {
-                    return this._dESIGNERTableAdapter.Connection;
-                }
                 if (((this._dESTINATIONTableAdapter != null) 
                             && (this._dESTINATIONTableAdapter.Connection != null))) {
                     return this._dESTINATIONTableAdapter.Connection;
@@ -15198,18 +11067,6 @@ SELECT site_id, property_id, site_use, site_use_description, neighborhood, sewer
                 if (((this._iMPERVIOUS_AREA_TYPETableAdapter != null) 
                             && (this._iMPERVIOUS_AREA_TYPETableAdapter.Connection != null))) {
                     return this._iMPERVIOUS_AREA_TYPETableAdapter.Connection;
-                }
-                if (((this._iNFILTRATION_TESTTableAdapter != null) 
-                            && (this._iNFILTRATION_TESTTableAdapter.Connection != null))) {
-                    return this._iNFILTRATION_TESTTableAdapter.Connection;
-                }
-                if (((this._iNFORMATION_SOURCETableAdapter != null) 
-                            && (this._iNFORMATION_SOURCETableAdapter.Connection != null))) {
-                    return this._iNFORMATION_SOURCETableAdapter.Connection;
-                }
-                if (((this._mANAGEMENTTableAdapter != null) 
-                            && (this._mANAGEMENTTableAdapter.Connection != null))) {
-                    return this._mANAGEMENTTableAdapter.Connection;
                 }
                 if (((this._oPPORTUNITY_FEASIBILITYTableAdapter != null) 
                             && (this._oPPORTUNITY_FEASIBILITYTableAdapter.Connection != null))) {
@@ -15227,10 +11084,6 @@ SELECT site_id, property_id, site_use, site_use_description, neighborhood, sewer
                             && (this._sITE_ASSESSMENTTableAdapter.Connection != null))) {
                     return this._sITE_ASSESSMENTTableAdapter.Connection;
                 }
-                if (((this._sITE_MODEL_CONDITIONTableAdapter != null) 
-                            && (this._sITE_MODEL_CONDITIONTableAdapter.Connection != null))) {
-                    return this._sITE_MODEL_CONDITIONTableAdapter.Connection;
-                }
                 if (((this._sITE_OPPORTUNITYTableAdapter != null) 
                             && (this._sITE_OPPORTUNITYTableAdapter.Connection != null))) {
                     return this._sITE_OPPORTUNITYTableAdapter.Connection;
@@ -15238,6 +11091,14 @@ SELECT site_id, property_id, site_use, site_use_description, neighborhood, sewer
                 if (((this._sITETableAdapter != null) 
                             && (this._sITETableAdapter.Connection != null))) {
                     return this._sITETableAdapter.Connection;
+                }
+                if (((this._rETRO_BASINTableAdapter != null) 
+                            && (this._rETRO_BASINTableAdapter.Connection != null))) {
+                    return this._rETRO_BASINTableAdapter.Connection;
+                }
+                if (((this._sEWER_BASINTableAdapter != null) 
+                            && (this._sEWER_BASINTableAdapter.Connection != null))) {
+                    return this._sEWER_BASINTableAdapter.Connection;
                 }
                 return null;
             }
@@ -15257,28 +11118,10 @@ SELECT site_id, property_id, site_use, site_use_description, neighborhood, sewer
                 if ((this._aSSESSMENT_TYPETableAdapter != null)) {
                     count = (count + 1);
                 }
-                if ((this._cONSTRUCTORTableAdapter != null)) {
-                    count = (count + 1);
-                }
-                if ((this._cONTRACTORTableAdapter != null)) {
-                    count = (count + 1);
-                }
-                if ((this._dESIGNERTableAdapter != null)) {
-                    count = (count + 1);
-                }
                 if ((this._dESTINATIONTableAdapter != null)) {
                     count = (count + 1);
                 }
                 if ((this._iMPERVIOUS_AREA_TYPETableAdapter != null)) {
-                    count = (count + 1);
-                }
-                if ((this._iNFILTRATION_TESTTableAdapter != null)) {
-                    count = (count + 1);
-                }
-                if ((this._iNFORMATION_SOURCETableAdapter != null)) {
-                    count = (count + 1);
-                }
-                if ((this._mANAGEMENTTableAdapter != null)) {
                     count = (count + 1);
                 }
                 if ((this._oPPORTUNITY_FEASIBILITYTableAdapter != null)) {
@@ -15293,13 +11136,16 @@ SELECT site_id, property_id, site_use, site_use_description, neighborhood, sewer
                 if ((this._sITE_ASSESSMENTTableAdapter != null)) {
                     count = (count + 1);
                 }
-                if ((this._sITE_MODEL_CONDITIONTableAdapter != null)) {
-                    count = (count + 1);
-                }
                 if ((this._sITE_OPPORTUNITYTableAdapter != null)) {
                     count = (count + 1);
                 }
                 if ((this._sITETableAdapter != null)) {
+                    count = (count + 1);
+                }
+                if ((this._rETRO_BASINTableAdapter != null)) {
+                    count = (count + 1);
+                }
+                if ((this._sEWER_BASINTableAdapter != null)) {
                     count = (count + 1);
                 }
                 return count;
@@ -15321,57 +11167,12 @@ SELECT site_id, property_id, site_use, site_use_description, neighborhood, sewer
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._dESIGNERTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.DESIGNER.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._dESIGNERTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
-            if ((this._mANAGEMENTTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.MANAGEMENT.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._mANAGEMENTTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
-            if ((this._iNFILTRATION_TESTTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.INFILTRATION_TEST.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._iNFILTRATION_TESTTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
             if ((this._fACILITY_TYPETableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.FACILITY_TYPE.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
                     result = (result + this._fACILITY_TYPETableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
-            if ((this._cONSTRUCTORTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.CONSTRUCTOR.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._cONSTRUCTORTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
-            if ((this._cONTRACTORTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.CONTRACTOR.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._cONTRACTORTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -15393,15 +11194,6 @@ SELECT site_id, property_id, site_use, site_use_description, neighborhood, sewer
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._dESTINATIONTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.DESTINATION.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._dESTINATIONTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
             if ((this._aSSESSMENT_TYPETableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.ASSESSMENT_TYPE.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
@@ -15420,21 +11212,30 @@ SELECT site_id, property_id, site_use, site_use_description, neighborhood, sewer
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._iNFORMATION_SOURCETableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.INFORMATION_SOURCE.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+            if ((this._dESTINATIONTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.DESTINATION.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
-                    result = (result + this._iNFORMATION_SOURCETableAdapter.Update(updatedRows));
+                    result = (result + this._dESTINATIONTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._sITE_OPPORTUNITYTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.SITE_OPPORTUNITY.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+            if ((this._sEWER_BASINTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.SEWER_BASIN.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
-                    result = (result + this._sITE_OPPORTUNITYTableAdapter.Update(updatedRows));
+                    result = (result + this._sEWER_BASINTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._rETRO_BASINTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.RETRO_BASIN.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._rETRO_BASINTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -15456,12 +11257,12 @@ SELECT site_id, property_id, site_use, site_use_description, neighborhood, sewer
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._sITE_MODEL_CONDITIONTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.SITE_MODEL_CONDITION.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+            if ((this._sITE_OPPORTUNITYTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.SITE_OPPORTUNITY.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
-                    result = (result + this._sITE_MODEL_CONDITIONTableAdapter.Update(updatedRows));
+                    result = (result + this._sITE_OPPORTUNITYTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -15482,51 +11283,11 @@ SELECT site_id, property_id, site_use, site_use_description, neighborhood, sewer
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._dESIGNERTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.DESIGNER.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._dESIGNERTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
-            if ((this._mANAGEMENTTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.MANAGEMENT.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._mANAGEMENTTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
-            if ((this._iNFILTRATION_TESTTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.INFILTRATION_TEST.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._iNFILTRATION_TESTTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
             if ((this._fACILITY_TYPETableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.FACILITY_TYPE.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
                     result = (result + this._fACILITY_TYPETableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
-            if ((this._cONSTRUCTORTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.CONSTRUCTOR.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._cONSTRUCTORTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
-            if ((this._cONTRACTORTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.CONTRACTOR.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._cONTRACTORTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -15546,14 +11307,6 @@ SELECT site_id, property_id, site_use, site_use_description, neighborhood, sewer
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._dESTINATIONTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.DESTINATION.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._dESTINATIONTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
             if ((this._aSSESSMENT_TYPETableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.ASSESSMENT_TYPE.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
@@ -15570,19 +11323,27 @@ SELECT site_id, property_id, site_use, site_use_description, neighborhood, sewer
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._iNFORMATION_SOURCETableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.INFORMATION_SOURCE.Select(null, null, global::System.Data.DataViewRowState.Added);
+            if ((this._dESTINATIONTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.DESTINATION.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
-                    result = (result + this._iNFORMATION_SOURCETableAdapter.Update(addedRows));
+                    result = (result + this._dESTINATIONTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._sITE_OPPORTUNITYTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.SITE_OPPORTUNITY.Select(null, null, global::System.Data.DataViewRowState.Added);
+            if ((this._sEWER_BASINTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.SEWER_BASIN.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
-                    result = (result + this._sITE_OPPORTUNITYTableAdapter.Update(addedRows));
+                    result = (result + this._sEWER_BASINTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._rETRO_BASINTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.RETRO_BASIN.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._rETRO_BASINTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -15602,11 +11363,11 @@ SELECT site_id, property_id, site_use, site_use_description, neighborhood, sewer
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._sITE_MODEL_CONDITIONTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.SITE_MODEL_CONDITION.Select(null, null, global::System.Data.DataViewRowState.Added);
+            if ((this._sITE_OPPORTUNITYTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.SITE_OPPORTUNITY.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
-                    result = (result + this._sITE_MODEL_CONDITIONTableAdapter.Update(addedRows));
+                    result = (result + this._sITE_OPPORTUNITYTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -15619,11 +11380,11 @@ SELECT site_id, property_id, site_use, site_use_description, neighborhood, sewer
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private int UpdateDeletedRows(RetrofitsDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
             int result = 0;
-            if ((this._sITE_MODEL_CONDITIONTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.SITE_MODEL_CONDITION.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+            if ((this._sITE_OPPORTUNITYTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.SITE_OPPORTUNITY.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    result = (result + this._sITE_MODEL_CONDITIONTableAdapter.Update(deletedRows));
+                    result = (result + this._sITE_OPPORTUNITYTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -15643,19 +11404,27 @@ SELECT site_id, property_id, site_use, site_use_description, neighborhood, sewer
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._sITE_OPPORTUNITYTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.SITE_OPPORTUNITY.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+            if ((this._rETRO_BASINTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.RETRO_BASIN.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    result = (result + this._sITE_OPPORTUNITYTableAdapter.Update(deletedRows));
+                    result = (result + this._rETRO_BASINTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._iNFORMATION_SOURCETableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.INFORMATION_SOURCE.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+            if ((this._sEWER_BASINTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.SEWER_BASIN.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    result = (result + this._iNFORMATION_SOURCETableAdapter.Update(deletedRows));
+                    result = (result + this._sEWER_BASINTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._dESTINATIONTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.DESTINATION.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._dESTINATIONTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -15675,14 +11444,6 @@ SELECT site_id, property_id, site_use, site_use_description, neighborhood, sewer
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._dESTINATIONTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.DESTINATION.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._dESTINATIONTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
             if ((this._sITETableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.SITE.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
@@ -15699,51 +11460,11 @@ SELECT site_id, property_id, site_use, site_use_description, neighborhood, sewer
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._cONTRACTORTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.CONTRACTOR.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._cONTRACTORTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
-            if ((this._cONSTRUCTORTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.CONSTRUCTOR.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._cONSTRUCTORTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
             if ((this._fACILITY_TYPETableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.FACILITY_TYPE.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._fACILITY_TYPETableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
-            if ((this._iNFILTRATION_TESTTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.INFILTRATION_TEST.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._iNFILTRATION_TESTTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
-            if ((this._mANAGEMENTTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.MANAGEMENT.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._mANAGEMENTTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
-            if ((this._dESIGNERTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.DESIGNER.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._dESIGNERTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -15802,21 +11523,6 @@ SELECT site_id, property_id, site_use, site_use_description, neighborhood, sewer
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
                         "tring.");
             }
-            if (((this._cONSTRUCTORTableAdapter != null) 
-                        && (this.MatchTableAdapterConnection(this._cONSTRUCTORTableAdapter.Connection) == false))) {
-                throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
-                        "tring.");
-            }
-            if (((this._cONTRACTORTableAdapter != null) 
-                        && (this.MatchTableAdapterConnection(this._cONTRACTORTableAdapter.Connection) == false))) {
-                throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
-                        "tring.");
-            }
-            if (((this._dESIGNERTableAdapter != null) 
-                        && (this.MatchTableAdapterConnection(this._dESIGNERTableAdapter.Connection) == false))) {
-                throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
-                        "tring.");
-            }
             if (((this._dESTINATIONTableAdapter != null) 
                         && (this.MatchTableAdapterConnection(this._dESTINATIONTableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
@@ -15824,21 +11530,6 @@ SELECT site_id, property_id, site_use, site_use_description, neighborhood, sewer
             }
             if (((this._iMPERVIOUS_AREA_TYPETableAdapter != null) 
                         && (this.MatchTableAdapterConnection(this._iMPERVIOUS_AREA_TYPETableAdapter.Connection) == false))) {
-                throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
-                        "tring.");
-            }
-            if (((this._iNFILTRATION_TESTTableAdapter != null) 
-                        && (this.MatchTableAdapterConnection(this._iNFILTRATION_TESTTableAdapter.Connection) == false))) {
-                throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
-                        "tring.");
-            }
-            if (((this._iNFORMATION_SOURCETableAdapter != null) 
-                        && (this.MatchTableAdapterConnection(this._iNFORMATION_SOURCETableAdapter.Connection) == false))) {
-                throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
-                        "tring.");
-            }
-            if (((this._mANAGEMENTTableAdapter != null) 
-                        && (this.MatchTableAdapterConnection(this._mANAGEMENTTableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
                         "tring.");
             }
@@ -15862,11 +11553,6 @@ SELECT site_id, property_id, site_use, site_use_description, neighborhood, sewer
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
                         "tring.");
             }
-            if (((this._sITE_MODEL_CONDITIONTableAdapter != null) 
-                        && (this.MatchTableAdapterConnection(this._sITE_MODEL_CONDITIONTableAdapter.Connection) == false))) {
-                throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
-                        "tring.");
-            }
             if (((this._sITE_OPPORTUNITYTableAdapter != null) 
                         && (this.MatchTableAdapterConnection(this._sITE_OPPORTUNITYTableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
@@ -15874,6 +11560,16 @@ SELECT site_id, property_id, site_use, site_use_description, neighborhood, sewer
             }
             if (((this._sITETableAdapter != null) 
                         && (this.MatchTableAdapterConnection(this._sITETableAdapter.Connection) == false))) {
+                throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
+                        "tring.");
+            }
+            if (((this._rETRO_BASINTableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._rETRO_BASINTableAdapter.Connection) == false))) {
+                throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
+                        "tring.");
+            }
+            if (((this._sEWER_BASINTableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._sEWER_BASINTableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
                         "tring.");
             }
@@ -15927,33 +11623,6 @@ SELECT site_id, property_id, site_use, site_use_description, neighborhood, sewer
                         adaptersWithAcceptChangesDuringUpdate.Add(this._aSSESSMENT_TYPETableAdapter.Adapter);
                     }
                 }
-                if ((this._cONSTRUCTORTableAdapter != null)) {
-                    revertConnections.Add(this._cONSTRUCTORTableAdapter, this._cONSTRUCTORTableAdapter.Connection);
-                    this._cONSTRUCTORTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
-                    this._cONSTRUCTORTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
-                    if (this._cONSTRUCTORTableAdapter.Adapter.AcceptChangesDuringUpdate) {
-                        this._cONSTRUCTORTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
-                        adaptersWithAcceptChangesDuringUpdate.Add(this._cONSTRUCTORTableAdapter.Adapter);
-                    }
-                }
-                if ((this._cONTRACTORTableAdapter != null)) {
-                    revertConnections.Add(this._cONTRACTORTableAdapter, this._cONTRACTORTableAdapter.Connection);
-                    this._cONTRACTORTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
-                    this._cONTRACTORTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
-                    if (this._cONTRACTORTableAdapter.Adapter.AcceptChangesDuringUpdate) {
-                        this._cONTRACTORTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
-                        adaptersWithAcceptChangesDuringUpdate.Add(this._cONTRACTORTableAdapter.Adapter);
-                    }
-                }
-                if ((this._dESIGNERTableAdapter != null)) {
-                    revertConnections.Add(this._dESIGNERTableAdapter, this._dESIGNERTableAdapter.Connection);
-                    this._dESIGNERTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
-                    this._dESIGNERTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
-                    if (this._dESIGNERTableAdapter.Adapter.AcceptChangesDuringUpdate) {
-                        this._dESIGNERTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
-                        adaptersWithAcceptChangesDuringUpdate.Add(this._dESIGNERTableAdapter.Adapter);
-                    }
-                }
                 if ((this._dESTINATIONTableAdapter != null)) {
                     revertConnections.Add(this._dESTINATIONTableAdapter, this._dESTINATIONTableAdapter.Connection);
                     this._dESTINATIONTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
@@ -15970,33 +11639,6 @@ SELECT site_id, property_id, site_use, site_use_description, neighborhood, sewer
                     if (this._iMPERVIOUS_AREA_TYPETableAdapter.Adapter.AcceptChangesDuringUpdate) {
                         this._iMPERVIOUS_AREA_TYPETableAdapter.Adapter.AcceptChangesDuringUpdate = false;
                         adaptersWithAcceptChangesDuringUpdate.Add(this._iMPERVIOUS_AREA_TYPETableAdapter.Adapter);
-                    }
-                }
-                if ((this._iNFILTRATION_TESTTableAdapter != null)) {
-                    revertConnections.Add(this._iNFILTRATION_TESTTableAdapter, this._iNFILTRATION_TESTTableAdapter.Connection);
-                    this._iNFILTRATION_TESTTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
-                    this._iNFILTRATION_TESTTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
-                    if (this._iNFILTRATION_TESTTableAdapter.Adapter.AcceptChangesDuringUpdate) {
-                        this._iNFILTRATION_TESTTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
-                        adaptersWithAcceptChangesDuringUpdate.Add(this._iNFILTRATION_TESTTableAdapter.Adapter);
-                    }
-                }
-                if ((this._iNFORMATION_SOURCETableAdapter != null)) {
-                    revertConnections.Add(this._iNFORMATION_SOURCETableAdapter, this._iNFORMATION_SOURCETableAdapter.Connection);
-                    this._iNFORMATION_SOURCETableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
-                    this._iNFORMATION_SOURCETableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
-                    if (this._iNFORMATION_SOURCETableAdapter.Adapter.AcceptChangesDuringUpdate) {
-                        this._iNFORMATION_SOURCETableAdapter.Adapter.AcceptChangesDuringUpdate = false;
-                        adaptersWithAcceptChangesDuringUpdate.Add(this._iNFORMATION_SOURCETableAdapter.Adapter);
-                    }
-                }
-                if ((this._mANAGEMENTTableAdapter != null)) {
-                    revertConnections.Add(this._mANAGEMENTTableAdapter, this._mANAGEMENTTableAdapter.Connection);
-                    this._mANAGEMENTTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
-                    this._mANAGEMENTTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
-                    if (this._mANAGEMENTTableAdapter.Adapter.AcceptChangesDuringUpdate) {
-                        this._mANAGEMENTTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
-                        adaptersWithAcceptChangesDuringUpdate.Add(this._mANAGEMENTTableAdapter.Adapter);
                     }
                 }
                 if ((this._oPPORTUNITY_FEASIBILITYTableAdapter != null)) {
@@ -16035,15 +11677,6 @@ SELECT site_id, property_id, site_use, site_use_description, neighborhood, sewer
                         adaptersWithAcceptChangesDuringUpdate.Add(this._sITE_ASSESSMENTTableAdapter.Adapter);
                     }
                 }
-                if ((this._sITE_MODEL_CONDITIONTableAdapter != null)) {
-                    revertConnections.Add(this._sITE_MODEL_CONDITIONTableAdapter, this._sITE_MODEL_CONDITIONTableAdapter.Connection);
-                    this._sITE_MODEL_CONDITIONTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
-                    this._sITE_MODEL_CONDITIONTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
-                    if (this._sITE_MODEL_CONDITIONTableAdapter.Adapter.AcceptChangesDuringUpdate) {
-                        this._sITE_MODEL_CONDITIONTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
-                        adaptersWithAcceptChangesDuringUpdate.Add(this._sITE_MODEL_CONDITIONTableAdapter.Adapter);
-                    }
-                }
                 if ((this._sITE_OPPORTUNITYTableAdapter != null)) {
                     revertConnections.Add(this._sITE_OPPORTUNITYTableAdapter, this._sITE_OPPORTUNITYTableAdapter.Connection);
                     this._sITE_OPPORTUNITYTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
@@ -16060,6 +11693,24 @@ SELECT site_id, property_id, site_use, site_use_description, neighborhood, sewer
                     if (this._sITETableAdapter.Adapter.AcceptChangesDuringUpdate) {
                         this._sITETableAdapter.Adapter.AcceptChangesDuringUpdate = false;
                         adaptersWithAcceptChangesDuringUpdate.Add(this._sITETableAdapter.Adapter);
+                    }
+                }
+                if ((this._rETRO_BASINTableAdapter != null)) {
+                    revertConnections.Add(this._rETRO_BASINTableAdapter, this._rETRO_BASINTableAdapter.Connection);
+                    this._rETRO_BASINTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
+                    this._rETRO_BASINTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
+                    if (this._rETRO_BASINTableAdapter.Adapter.AcceptChangesDuringUpdate) {
+                        this._rETRO_BASINTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
+                        adaptersWithAcceptChangesDuringUpdate.Add(this._rETRO_BASINTableAdapter.Adapter);
+                    }
+                }
+                if ((this._sEWER_BASINTableAdapter != null)) {
+                    revertConnections.Add(this._sEWER_BASINTableAdapter, this._sEWER_BASINTableAdapter.Connection);
+                    this._sEWER_BASINTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
+                    this._sEWER_BASINTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
+                    if (this._sEWER_BASINTableAdapter.Adapter.AcceptChangesDuringUpdate) {
+                        this._sEWER_BASINTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
+                        adaptersWithAcceptChangesDuringUpdate.Add(this._sEWER_BASINTableAdapter.Adapter);
                     }
                 }
                 // 
@@ -16128,18 +11779,6 @@ SELECT site_id, property_id, site_use, site_use_description, neighborhood, sewer
                     this._aSSESSMENT_TYPETableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._aSSESSMENT_TYPETableAdapter]));
                     this._aSSESSMENT_TYPETableAdapter.Transaction = null;
                 }
-                if ((this._cONSTRUCTORTableAdapter != null)) {
-                    this._cONSTRUCTORTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._cONSTRUCTORTableAdapter]));
-                    this._cONSTRUCTORTableAdapter.Transaction = null;
-                }
-                if ((this._cONTRACTORTableAdapter != null)) {
-                    this._cONTRACTORTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._cONTRACTORTableAdapter]));
-                    this._cONTRACTORTableAdapter.Transaction = null;
-                }
-                if ((this._dESIGNERTableAdapter != null)) {
-                    this._dESIGNERTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._dESIGNERTableAdapter]));
-                    this._dESIGNERTableAdapter.Transaction = null;
-                }
                 if ((this._dESTINATIONTableAdapter != null)) {
                     this._dESTINATIONTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._dESTINATIONTableAdapter]));
                     this._dESTINATIONTableAdapter.Transaction = null;
@@ -16147,18 +11786,6 @@ SELECT site_id, property_id, site_use, site_use_description, neighborhood, sewer
                 if ((this._iMPERVIOUS_AREA_TYPETableAdapter != null)) {
                     this._iMPERVIOUS_AREA_TYPETableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._iMPERVIOUS_AREA_TYPETableAdapter]));
                     this._iMPERVIOUS_AREA_TYPETableAdapter.Transaction = null;
-                }
-                if ((this._iNFILTRATION_TESTTableAdapter != null)) {
-                    this._iNFILTRATION_TESTTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._iNFILTRATION_TESTTableAdapter]));
-                    this._iNFILTRATION_TESTTableAdapter.Transaction = null;
-                }
-                if ((this._iNFORMATION_SOURCETableAdapter != null)) {
-                    this._iNFORMATION_SOURCETableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._iNFORMATION_SOURCETableAdapter]));
-                    this._iNFORMATION_SOURCETableAdapter.Transaction = null;
-                }
-                if ((this._mANAGEMENTTableAdapter != null)) {
-                    this._mANAGEMENTTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._mANAGEMENTTableAdapter]));
-                    this._mANAGEMENTTableAdapter.Transaction = null;
                 }
                 if ((this._oPPORTUNITY_FEASIBILITYTableAdapter != null)) {
                     this._oPPORTUNITY_FEASIBILITYTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._oPPORTUNITY_FEASIBILITYTableAdapter]));
@@ -16176,10 +11803,6 @@ SELECT site_id, property_id, site_use, site_use_description, neighborhood, sewer
                     this._sITE_ASSESSMENTTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._sITE_ASSESSMENTTableAdapter]));
                     this._sITE_ASSESSMENTTableAdapter.Transaction = null;
                 }
-                if ((this._sITE_MODEL_CONDITIONTableAdapter != null)) {
-                    this._sITE_MODEL_CONDITIONTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._sITE_MODEL_CONDITIONTableAdapter]));
-                    this._sITE_MODEL_CONDITIONTableAdapter.Transaction = null;
-                }
                 if ((this._sITE_OPPORTUNITYTableAdapter != null)) {
                     this._sITE_OPPORTUNITYTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._sITE_OPPORTUNITYTableAdapter]));
                     this._sITE_OPPORTUNITYTableAdapter.Transaction = null;
@@ -16187,6 +11810,14 @@ SELECT site_id, property_id, site_use, site_use_description, neighborhood, sewer
                 if ((this._sITETableAdapter != null)) {
                     this._sITETableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._sITETableAdapter]));
                     this._sITETableAdapter.Transaction = null;
+                }
+                if ((this._rETRO_BASINTableAdapter != null)) {
+                    this._rETRO_BASINTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._rETRO_BASINTableAdapter]));
+                    this._rETRO_BASINTableAdapter.Transaction = null;
+                }
+                if ((this._sEWER_BASINTableAdapter != null)) {
+                    this._sEWER_BASINTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._sEWER_BASINTableAdapter]));
+                    this._sEWER_BASINTableAdapter.Transaction = null;
                 }
                 if ((0 < adaptersWithAcceptChangesDuringUpdate.Count)) {
                     global::System.Data.Common.DataAdapter[] adapters = new System.Data.Common.DataAdapter[adaptersWithAcceptChangesDuringUpdate.Count];
