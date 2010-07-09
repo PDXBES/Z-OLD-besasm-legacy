@@ -707,7 +707,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 			string qaWorkspacePath = Path.GetDirectoryName(Application.ExecutablePath);
 			string altPath = altInfo.AlternativePath;
 			File.Copy(qaWorkspacePath + Path.DirectorySeparatorChar + "QaQc_PipXP.WOR",
-				altPath + Path.DirectorySeparatorChar + "QaQc_PipXP.WOR");
+				altPath + Path.DirectorySeparatorChar + "QaQc_PipXP.WOR",true);
 			return true;
 		} // CopyQAAltPipXPWorkspace()
 
@@ -802,6 +802,18 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 			_LastSelectedModelDirectory = modelPath;
 			string selectedAlt = (string)lstvwAlternatives.ActiveItem.Value;
 			SelectedAlternative altInfo = new SelectedAlternative(modelPath, selectedAlt);
+
+      if (!ModelHasPipXPTable(modelPath))
+      {
+        lblProgress.Text = "Creating pipe conflict table";
+        lblProgress.Refresh();
+        bool createWasSuccessful = CreatePipXPTable(modelPath);
+        if (!createWasSuccessful)
+        {
+          MessageBox.Show("A problem occurred creating the conflict table.  Please try again.", "Problem creating conflict table");
+          return;
+        } // if
+      } // if
 
 			if (!AlternativeHasAltPipXPTable(altInfo))
 			{
