@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SystemsAnalysis", "SystemsAnalysis", "{E18F2027-1743-445D-8D77-B66A116C26CA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest", "UnitTest\UnitTest.csproj", "{A0B81195-E9B0-4C89-A80C-CA29E2B47929}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Classes", "Classes\Classes.csproj", "{3176DA9C-B2C1-46C8-B7DC-E3B71F13E7F9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI", "UI\UI.csproj", "{BE42DA12-8B4E-46B4-83EA-63CA7BC1B1A9}"
@@ -34,7 +32,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemsAnalysis.Utils.MapIn
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "MapInfoUtilities", "Lib\MapBasicWrapper\MapInfoUtilities.vbproj", "{0B14EB87-1BFF-4D54-A4A4-47263EE1CB18}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemsAnalysis.Utils.AccessUtils.DatabaseManagement", "Lib\Utils.AccessUtils.DatabaseManagement\SystemsAnalysis.Utils.AccessUtils.DatabaseManagement.csproj", "{1DCF1AAE-A211-4A29-AE5C-13AAAD890B08}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest", "UnitTest\UnitTest.csproj", "{A0B81195-E9B0-4C89-A80C-CA29E2B47929}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemsAnalysis.Utils.AccessUtils.DatabaseManagement", "..\AccessUtils\DatabaseManagement\SystemsAnalysis.Utils.AccessUtils.DatabaseManagement.csproj", "{1DCF1AAE-A211-4A29-AE5C-13AAAD890B08}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,10 +42,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A0B81195-E9B0-4C89-A80C-CA29E2B47929}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A0B81195-E9B0-4C89-A80C-CA29E2B47929}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A0B81195-E9B0-4C89-A80C-CA29E2B47929}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A0B81195-E9B0-4C89-A80C-CA29E2B47929}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3176DA9C-B2C1-46C8-B7DC-E3B71F13E7F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3176DA9C-B2C1-46C8-B7DC-E3B71F13E7F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3176DA9C-B2C1-46C8-B7DC-E3B71F13E7F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -98,6 +94,10 @@ Global
 		{0B14EB87-1BFF-4D54-A4A4-47263EE1CB18}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0B14EB87-1BFF-4D54-A4A4-47263EE1CB18}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0B14EB87-1BFF-4D54-A4A4-47263EE1CB18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0B81195-E9B0-4C89-A80C-CA29E2B47929}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0B81195-E9B0-4C89-A80C-CA29E2B47929}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0B81195-E9B0-4C89-A80C-CA29E2B47929}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0B81195-E9B0-4C89-A80C-CA29E2B47929}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1DCF1AAE-A211-4A29-AE5C-13AAAD890B08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1DCF1AAE-A211-4A29-AE5C-13AAAD890B08}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1DCF1AAE-A211-4A29-AE5C-13AAAD890B08}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -116,6 +116,5 @@ Global
 		{B6E1DEF7-D4EB-4D0A-8867-A324FE226D34} = {E18F2027-1743-445D-8D77-B66A116C26CA}
 		{19DE0713-65B7-4D46-A537-49704F93CB90} = {E18F2027-1743-445D-8D77-B66A116C26CA}
 		{9AE8BF25-3ABF-402D-BC63-841E8588D20C} = {E18F2027-1743-445D-8D77-B66A116C26CA}
-		{1DCF1AAE-A211-4A29-AE5C-13AAAD890B08} = {E18F2027-1743-445D-8D77-B66A116C26CA}
 	EndGlobalSection
 EndGlobal
