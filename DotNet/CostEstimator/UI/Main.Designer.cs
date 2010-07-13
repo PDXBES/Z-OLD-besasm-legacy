@@ -124,7 +124,6 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       Infragistics.Win.Appearance appearance4 = new Infragistics.Win.Appearance();
       Infragistics.Win.Layout.GridBagConstraint gridBagConstraint16 = new Infragistics.Win.Layout.GridBagConstraint();
       Infragistics.Win.Layout.GridBagConstraint gridBagConstraint17 = new Infragistics.Win.Layout.GridBagConstraint();
-      Infragistics.Win.UltraWinTabControl.UltraTab ultraTab3 = new Infragistics.Win.UltraWinTabControl.UltraTab();
       Infragistics.Win.UltraWinTabControl.UltraTab ultraTab4 = new Infragistics.Win.UltraWinTabControl.UltraTab();
       Infragistics.Win.UltraWinTabControl.UltraTab ultraTab5 = new Infragistics.Win.UltraWinTabControl.UltraTab();
       Infragistics.Win.UltraWinTabControl.UltraTab ultraTab6 = new Infragistics.Win.UltraWinTabControl.UltraTab();
@@ -134,9 +133,10 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       Infragistics.Win.UltraWinTabControl.UltraTab ultraTab10 = new Infragistics.Win.UltraWinTabControl.UltraTab();
       Infragistics.Win.UltraWinTabControl.UltraTab ultraTab11 = new Infragistics.Win.UltraWinTabControl.UltraTab();
       Infragistics.Win.UltraWinTabControl.UltraTab ultraTab12 = new Infragistics.Win.UltraWinTabControl.UltraTab();
-      Infragistics.Win.UltraWinTabControl.UltraTab ultraTab13 = new Infragistics.Win.UltraWinTabControl.UltraTab();
       Infragistics.Win.UltraWinTabControl.UltraTab ultraTab14 = new Infragistics.Win.UltraWinTabControl.UltraTab();
       Infragistics.Win.UltraWinTabControl.UltraTab ultraTab15 = new Infragistics.Win.UltraWinTabControl.UltraTab();
+      Infragistics.Win.UltraWinTabControl.UltraTab ultraTab16 = new Infragistics.Win.UltraWinTabControl.UltraTab();
+      Infragistics.Win.UltraWinTabControl.UltraTab ultraTab17 = new Infragistics.Win.UltraWinTabControl.UltraTab();
       Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool34 = new Infragistics.Win.UltraWinToolbars.ButtonTool("Cost Estimator Options");
       Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool25 = new Infragistics.Win.UltraWinToolbars.ButtonTool("Exit Cost Estimator");
       Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool27 = new Infragistics.Win.UltraWinToolbars.ButtonTool("New Project");
@@ -164,28 +164,28 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool23 = new Infragistics.Win.UltraWinToolbars.ButtonTool("Open Project");
       Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool24 = new Infragistics.Win.UltraWinToolbars.ButtonTool("Save Project");
       Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool6 = new Infragistics.Win.UltraWinToolbars.ButtonTool("New Project");
-      Infragistics.Win.Appearance appearance6 = new Infragistics.Win.Appearance();
-      Infragistics.Win.Appearance appearance7 = new Infragistics.Win.Appearance();
+      Infragistics.Win.Appearance appearance19 = new Infragistics.Win.Appearance();
+      Infragistics.Win.Appearance appearance20 = new Infragistics.Win.Appearance();
       Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool7 = new Infragistics.Win.UltraWinToolbars.ButtonTool("Open Project");
-      Infragistics.Win.Appearance appearance8 = new Infragistics.Win.Appearance();
-      Infragistics.Win.Appearance appearance9 = new Infragistics.Win.Appearance();
+      Infragistics.Win.Appearance appearance21 = new Infragistics.Win.Appearance();
+      Infragistics.Win.Appearance appearance22 = new Infragistics.Win.Appearance();
       Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool8 = new Infragistics.Win.UltraWinToolbars.ButtonTool("Save Project");
-      Infragistics.Win.Appearance appearance10 = new Infragistics.Win.Appearance();
-      Infragistics.Win.Appearance appearance11 = new Infragistics.Win.Appearance();
+      Infragistics.Win.Appearance appearance23 = new Infragistics.Win.Appearance();
+      Infragistics.Win.Appearance appearance24 = new Infragistics.Win.Appearance();
       Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool9 = new Infragistics.Win.UltraWinToolbars.ButtonTool("Close Project");
-      Infragistics.Win.Appearance appearance12 = new Infragistics.Win.Appearance();
-      Infragistics.Win.Appearance appearance13 = new Infragistics.Win.Appearance();
+      Infragistics.Win.Appearance appearance25 = new Infragistics.Win.Appearance();
+      Infragistics.Win.Appearance appearance26 = new Infragistics.Win.Appearance();
       Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool10 = new Infragistics.Win.UltraWinToolbars.ButtonTool("Save Project As");
-      Infragistics.Win.Appearance appearance14 = new Infragistics.Win.Appearance();
-      Infragistics.Win.Appearance appearance15 = new Infragistics.Win.Appearance();
+      Infragistics.Win.Appearance appearance27 = new Infragistics.Win.Appearance();
+      Infragistics.Win.Appearance appearance28 = new Infragistics.Win.Appearance();
       Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool12 = new Infragistics.Win.UltraWinToolbars.ButtonTool("Estimate from Alternative");
       Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool14 = new Infragistics.Win.UltraWinToolbars.ButtonTool("Change Global Settings");
       Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool17 = new Infragistics.Win.UltraWinToolbars.ButtonTool("Detach From Pool");
-      Infragistics.Win.Appearance appearance16 = new Infragistics.Win.Appearance();
+      Infragistics.Win.Appearance appearance29 = new Infragistics.Win.Appearance();
       Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool18 = new Infragistics.Win.UltraWinToolbars.ButtonTool("Link to Item");
-      Infragistics.Win.Appearance appearance17 = new Infragistics.Win.Appearance();
+      Infragistics.Win.Appearance appearance30 = new Infragistics.Win.Appearance();
       Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool26 = new Infragistics.Win.UltraWinToolbars.ButtonTool("Exit Cost Estimator");
-      Infragistics.Win.Appearance appearance18 = new Infragistics.Win.Appearance();
+      Infragistics.Win.Appearance appearance31 = new Infragistics.Win.Appearance();
       Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool32 = new Infragistics.Win.UltraWinToolbars.ButtonTool("Batch Alternatives");
       Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool35 = new Infragistics.Win.UltraWinToolbars.ButtonTool("Cost Estimator Options");
       Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool19 = new Infragistics.Win.UltraWinToolbars.ButtonTool("Estimate from Model");
@@ -244,7 +244,6 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       this.tabMain = new Infragistics.Win.UltraWinTabControl.UltraTabControl();
       this.ultraTabSharedControlsPage1 = new Infragistics.Win.UltraWinTabControl.UltraTabSharedControlsPage();
       this._Main_Toolbars_Dock_Area_Left = new Infragistics.Win.UltraWinToolbars.UltraToolbarsDockArea();
-      this.toolbarManager = new Infragistics.Win.UltraWinToolbars.UltraToolbarsManager(this.components);
       this._Main_Toolbars_Dock_Area_Right = new Infragistics.Win.UltraWinToolbars.UltraToolbarsDockArea();
       this._Main_Toolbars_Dock_Area_Top = new Infragistics.Win.UltraWinToolbars.UltraToolbarsDockArea();
       this._Main_Toolbars_Dock_Area_Bottom = new Infragistics.Win.UltraWinToolbars.UltraToolbarsDockArea();
@@ -252,6 +251,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       this.bkgWorkerLoadAlternative = new System.ComponentModel.BackgroundWorker();
       this.dlgSave = new System.Windows.Forms.SaveFileDialog();
       this.bkgWorkerLoadModel = new System.ComponentModel.BackgroundWorker();
+      this.toolbarManager = new Infragistics.Win.UltraWinToolbars.UltraToolbarsManager(this.components);
       this.ultraTabPageControl9.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.ultraGridBagLayoutPanel8)).BeginInit();
       this.ultraGridBagLayoutPanel8.SuspendLayout();
@@ -296,7 +296,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       this.ultraTabPageControl9.Controls.Add(this.ultraGridBagLayoutPanel8);
       this.ultraTabPageControl9.Location = new System.Drawing.Point(102, 9);
       this.ultraTabPageControl9.Name = "ultraTabPageControl9";
-      this.ultraTabPageControl9.Size = new System.Drawing.Size(771, 576);
+      this.ultraTabPageControl9.Size = new System.Drawing.Size(763, 422);
       // 
       // ultraGridBagLayoutPanel8
       // 
@@ -305,7 +305,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       this.ultraGridBagLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill;
       this.ultraGridBagLayoutPanel8.Location = new System.Drawing.Point(0, 0);
       this.ultraGridBagLayoutPanel8.Name = "ultraGridBagLayoutPanel8";
-      this.ultraGridBagLayoutPanel8.Size = new System.Drawing.Size(771, 576);
+      this.ultraGridBagLayoutPanel8.Size = new System.Drawing.Size(763, 422);
       this.ultraGridBagLayoutPanel8.TabIndex = 1;
       // 
       // gridGlobalPipeSettings
@@ -315,7 +315,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       this.gridGlobalPipeSettings.DisplayLayout.AutoFitStyle = Infragistics.Win.UltraWinGrid.AutoFitStyle.ResizeAllColumns;
       ultraGridColumn3.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
       ultraGridColumn3.Header.VisiblePosition = 0;
-      ultraGridColumn3.Width = 731;
+      ultraGridColumn3.Width = 723;
       ultraGridColumn4.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
       ultraGridColumn4.Header.VisiblePosition = 1;
       ultraGridColumn5.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
@@ -344,7 +344,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
             ultraGridColumn11});
       ultraGridColumn12.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
       ultraGridColumn12.Header.VisiblePosition = 0;
-      ultraGridColumn12.Width = 626;
+      ultraGridColumn12.Width = 618;
       ultraGridColumn13.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
       ultraGridColumn13.Header.VisiblePosition = 1;
       ultraGridColumn13.Width = 86;
@@ -354,7 +354,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       ultraGridBand3.HeaderVisible = true;
       ultraGridColumn14.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
       ultraGridColumn14.Header.VisiblePosition = 0;
-      ultraGridColumn14.Width = 626;
+      ultraGridColumn14.Width = 618;
       ultraGridColumn15.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
       ultraGridColumn15.Header.VisiblePosition = 1;
       ultraGridColumn15.Width = 86;
@@ -364,7 +364,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       ultraGridBand4.HeaderVisible = true;
       ultraGridColumn16.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
       ultraGridColumn16.Header.VisiblePosition = 0;
-      ultraGridColumn16.Width = 626;
+      ultraGridColumn16.Width = 618;
       ultraGridColumn17.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
       ultraGridColumn17.Header.VisiblePosition = 1;
       ultraGridColumn17.Width = 86;
@@ -374,7 +374,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       ultraGridBand5.HeaderVisible = true;
       ultraGridColumn18.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
       ultraGridColumn18.Header.VisiblePosition = 0;
-      ultraGridColumn18.Width = 626;
+      ultraGridColumn18.Width = 618;
       ultraGridColumn19.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
       ultraGridColumn19.Header.VisiblePosition = 1;
       ultraGridColumn19.Width = 86;
@@ -384,7 +384,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       ultraGridBand6.HeaderVisible = true;
       ultraGridColumn20.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
       ultraGridColumn20.Header.VisiblePosition = 0;
-      ultraGridColumn20.Width = 626;
+      ultraGridColumn20.Width = 618;
       ultraGridColumn21.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
       ultraGridColumn21.Header.VisiblePosition = 1;
       ultraGridColumn21.Width = 86;
@@ -394,32 +394,32 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       ultraGridBand7.HeaderVisible = true;
       ultraGridColumn22.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
       ultraGridColumn22.Header.VisiblePosition = 0;
-      ultraGridColumn22.Width = 616;
+      ultraGridColumn22.Width = 609;
       ultraGridColumn23.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
       ultraGridColumn23.Header.VisiblePosition = 1;
-      ultraGridColumn23.Width = 96;
+      ultraGridColumn23.Width = 95;
       ultraGridBand8.Columns.AddRange(new object[] {
             ultraGridColumn22,
             ultraGridColumn23});
       ultraGridColumn24.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
       ultraGridColumn24.Header.VisiblePosition = 0;
-      ultraGridColumn24.Width = 535;
+      ultraGridColumn24.Width = 528;
       ultraGridColumn25.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
       ultraGridColumn25.Header.VisiblePosition = 1;
       ultraGridColumn25.Width = 81;
       ultraGridColumn26.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
       ultraGridColumn26.Header.VisiblePosition = 2;
-      ultraGridColumn26.Width = 96;
+      ultraGridColumn26.Width = 95;
       ultraGridBand9.Columns.AddRange(new object[] {
             ultraGridColumn24,
             ultraGridColumn25,
             ultraGridColumn26});
       ultraGridColumn27.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
       ultraGridColumn27.Header.VisiblePosition = 0;
-      ultraGridColumn27.Width = 616;
+      ultraGridColumn27.Width = 609;
       ultraGridColumn28.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
       ultraGridColumn28.Header.VisiblePosition = 1;
-      ultraGridColumn28.Width = 96;
+      ultraGridColumn28.Width = 95;
       ultraGridBand10.Columns.AddRange(new object[] {
             ultraGridColumn27,
             ultraGridColumn28});
@@ -444,7 +444,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       this.gridGlobalPipeSettings.Location = new System.Drawing.Point(0, 0);
       this.gridGlobalPipeSettings.Name = "gridGlobalPipeSettings";
       this.ultraGridBagLayoutPanel8.SetPreferredSize(this.gridGlobalPipeSettings, new System.Drawing.Size(550, 80));
-      this.gridGlobalPipeSettings.Size = new System.Drawing.Size(771, 545);
+      this.gridGlobalPipeSettings.Size = new System.Drawing.Size(763, 391);
       this.gridGlobalPipeSettings.TabIndex = 2;
       this.gridGlobalPipeSettings.Text = "ultraGrid1";
       // 
@@ -499,7 +499,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       gridBagConstraint21.OriginX = 0;
       gridBagConstraint21.OriginY = 1;
       this.ultraGridBagLayoutPanel8.SetGridBagConstraint(this.btnExportPipeCostTables, gridBagConstraint21);
-      this.btnExportPipeCostTables.Location = new System.Drawing.Point(621, 553);
+      this.btnExportPipeCostTables.Location = new System.Drawing.Point(613, 399);
       this.btnExportPipeCostTables.Name = "btnExportPipeCostTables";
       this.ultraGridBagLayoutPanel8.SetPreferredSize(this.btnExportPipeCostTables, new System.Drawing.Size(150, 23));
       this.btnExportPipeCostTables.Size = new System.Drawing.Size(150, 23);
@@ -511,7 +511,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       this.ultraTabPageControl10.Controls.Add(this.gridGlobalInflowControlSettings);
       this.ultraTabPageControl10.Location = new System.Drawing.Point(-10000, -10000);
       this.ultraTabPageControl10.Name = "ultraTabPageControl10";
-      this.ultraTabPageControl10.Size = new System.Drawing.Size(771, 576);
+      this.ultraTabPageControl10.Size = new System.Drawing.Size(763, 422);
       // 
       // gridGlobalInflowControlSettings
       // 
@@ -523,10 +523,10 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       appearance5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
       ultraGridColumn1.CellAppearance = appearance5;
       ultraGridColumn1.Header.VisiblePosition = 0;
-      ultraGridColumn1.Width = 375;
+      ultraGridColumn1.Width = 371;
       ultraGridColumn2.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
       ultraGridColumn2.Header.VisiblePosition = 1;
-      ultraGridColumn2.Width = 375;
+      ultraGridColumn2.Width = 371;
       ultraGridBand1.Columns.AddRange(new object[] {
             ultraGridColumn1,
             ultraGridColumn2});
@@ -537,7 +537,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       this.gridGlobalInflowControlSettings.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.gridGlobalInflowControlSettings.Location = new System.Drawing.Point(0, 0);
       this.gridGlobalInflowControlSettings.Name = "gridGlobalInflowControlSettings";
-      this.gridGlobalInflowControlSettings.Size = new System.Drawing.Size(771, 576);
+      this.gridGlobalInflowControlSettings.Size = new System.Drawing.Size(763, 422);
       this.gridGlobalInflowControlSettings.TabIndex = 0;
       this.gridGlobalInflowControlSettings.Text = "ultraGrid2";
       // 
@@ -552,7 +552,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       // pageHome
       // 
       this.pageHome.Controls.Add(this.pnlHome);
-      this.pageHome.Location = new System.Drawing.Point(-10000, -10000);
+      this.pageHome.Location = new System.Drawing.Point(9, 30);
       this.pageHome.Name = "pageHome";
       this.pageHome.Size = new System.Drawing.Size(874, 471);
       // 
@@ -632,30 +632,30 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       // 
       this.pageCosts.Location = new System.Drawing.Point(-10000, -10000);
       this.pageCosts.Name = "pageCosts";
-      this.pageCosts.Size = new System.Drawing.Size(882, 625);
+      this.pageCosts.Size = new System.Drawing.Size(874, 471);
       // 
       // ultraTabPageControl1
       // 
       this.ultraTabPageControl1.Location = new System.Drawing.Point(-10000, -10000);
       this.ultraTabPageControl1.Name = "ultraTabPageControl1";
-      this.ultraTabPageControl1.Size = new System.Drawing.Size(882, 625);
+      this.ultraTabPageControl1.Size = new System.Drawing.Size(874, 471);
       // 
       // pageCostFactorPool
       // 
       this.pageCostFactorPool.Location = new System.Drawing.Point(-10000, -10000);
       this.pageCostFactorPool.Name = "pageCostFactorPool";
-      this.pageCostFactorPool.Size = new System.Drawing.Size(882, 625);
+      this.pageCostFactorPool.Size = new System.Drawing.Size(874, 471);
       // 
       // pageCostItemPool
       // 
       this.pageCostItemPool.Location = new System.Drawing.Point(-10000, -10000);
       this.pageCostItemPool.Name = "pageCostItemPool";
-      this.pageCostItemPool.Size = new System.Drawing.Size(882, 625);
+      this.pageCostItemPool.Size = new System.Drawing.Size(874, 471);
       // 
       // pageSelectAlternative
       // 
       this.pageSelectAlternative.Controls.Add(this.ultraGridBagLayoutPanel2);
-      this.pageSelectAlternative.Location = new System.Drawing.Point(9, 30);
+      this.pageSelectAlternative.Location = new System.Drawing.Point(-10000, -10000);
       this.pageSelectAlternative.Name = "pageSelectAlternative";
       this.pageSelectAlternative.Size = new System.Drawing.Size(874, 471);
       // 
@@ -769,7 +769,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       this.pageGlobalSettings.Controls.Add(this.ultraGridBagLayoutPanel7);
       this.pageGlobalSettings.Location = new System.Drawing.Point(-10000, -10000);
       this.pageGlobalSettings.Name = "pageGlobalSettings";
-      this.pageGlobalSettings.Size = new System.Drawing.Size(882, 625);
+      this.pageGlobalSettings.Size = new System.Drawing.Size(874, 471);
       // 
       // ultraGridBagLayoutPanel7
       // 
@@ -778,7 +778,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       this.ultraGridBagLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
       this.ultraGridBagLayoutPanel7.Location = new System.Drawing.Point(0, 0);
       this.ultraGridBagLayoutPanel7.Name = "ultraGridBagLayoutPanel7";
-      this.ultraGridBagLayoutPanel7.Size = new System.Drawing.Size(882, 625);
+      this.ultraGridBagLayoutPanel7.Size = new System.Drawing.Size(874, 471);
       this.ultraGridBagLayoutPanel7.TabIndex = 1;
       // 
       // btnCloseGlobalSettings
@@ -787,7 +787,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       gridBagConstraint18.OriginX = 0;
       gridBagConstraint18.OriginY = 1;
       this.ultraGridBagLayoutPanel7.SetGridBagConstraint(this.btnCloseGlobalSettings, gridBagConstraint18);
-      this.btnCloseGlobalSettings.Location = new System.Drawing.Point(807, 602);
+      this.btnCloseGlobalSettings.Location = new System.Drawing.Point(799, 448);
       this.btnCloseGlobalSettings.Name = "btnCloseGlobalSettings";
       this.ultraGridBagLayoutPanel7.SetPreferredSize(this.btnCloseGlobalSettings, new System.Drawing.Size(75, 23));
       this.btnCloseGlobalSettings.Size = new System.Drawing.Size(75, 23);
@@ -811,7 +811,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       this.tabGlobalSettings.Name = "tabGlobalSettings";
       this.ultraGridBagLayoutPanel7.SetPreferredSize(this.tabGlobalSettings, new System.Drawing.Size(905, 449));
       this.tabGlobalSettings.SharedControlsPage = this.ultraTabSharedControlsPage2;
-      this.tabGlobalSettings.Size = new System.Drawing.Size(882, 594);
+      this.tabGlobalSettings.Size = new System.Drawing.Size(874, 440);
       this.tabGlobalSettings.TabIndex = 0;
       this.tabGlobalSettings.TabOrientation = Infragistics.Win.UltraWinTabs.TabOrientation.LeftTop;
       this.tabGlobalSettings.TabPageMargins.Bottom = 8;
@@ -834,14 +834,14 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       // 
       this.ultraTabSharedControlsPage2.Location = new System.Drawing.Point(-10000, -10000);
       this.ultraTabSharedControlsPage2.Name = "ultraTabSharedControlsPage2";
-      this.ultraTabSharedControlsPage2.Size = new System.Drawing.Size(771, 576);
+      this.ultraTabSharedControlsPage2.Size = new System.Drawing.Size(763, 422);
       // 
       // pageOptions
       // 
       this.pageOptions.Controls.Add(this.ultraGridBagLayoutPanel1);
       this.pageOptions.Location = new System.Drawing.Point(-10000, -10000);
       this.pageOptions.Name = "pageOptions";
-      this.pageOptions.Size = new System.Drawing.Size(882, 625);
+      this.pageOptions.Size = new System.Drawing.Size(874, 471);
       // 
       // ultraGridBagLayoutPanel1
       // 
@@ -854,7 +854,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       this.ultraGridBagLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
       this.ultraGridBagLayoutPanel1.Location = new System.Drawing.Point(0, 0);
       this.ultraGridBagLayoutPanel1.Name = "ultraGridBagLayoutPanel1";
-      this.ultraGridBagLayoutPanel1.Size = new System.Drawing.Size(882, 625);
+      this.ultraGridBagLayoutPanel1.Size = new System.Drawing.Size(874, 471);
       this.ultraGridBagLayoutPanel1.TabIndex = 0;
       // 
       // chkAllowENRCCIChange
@@ -863,7 +863,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       gridBagConstraint7.OriginX = 0;
       gridBagConstraint7.OriginY = 2;
       this.ultraGridBagLayoutPanel1.SetGridBagConstraint(this.chkAllowENRCCIChange, gridBagConstraint7);
-      this.chkAllowENRCCIChange.Location = new System.Drawing.Point(0, 303);
+      this.chkAllowENRCCIChange.Location = new System.Drawing.Point(0, 226);
       this.chkAllowENRCCIChange.Name = "chkAllowENRCCIChange";
       this.ultraGridBagLayoutPanel1.SetPreferredSize(this.chkAllowENRCCIChange, new System.Drawing.Size(120, 20));
       this.chkAllowENRCCIChange.Size = new System.Drawing.Size(200, 20);
@@ -877,10 +877,10 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       gridBagConstraint8.OriginY = 1;
       gridBagConstraint8.SpanX = 2;
       this.ultraGridBagLayoutPanel1.SetGridBagConstraint(this.chkDoNotGenerateManholeCosts, gridBagConstraint8);
-      this.chkDoNotGenerateManholeCosts.Location = new System.Drawing.Point(0, 283);
+      this.chkDoNotGenerateManholeCosts.Location = new System.Drawing.Point(0, 206);
       this.chkDoNotGenerateManholeCosts.Name = "chkDoNotGenerateManholeCosts";
       this.ultraGridBagLayoutPanel1.SetPreferredSize(this.chkDoNotGenerateManholeCosts, new System.Drawing.Size(120, 20));
-      this.chkDoNotGenerateManholeCosts.Size = new System.Drawing.Size(882, 20);
+      this.chkDoNotGenerateManholeCosts.Size = new System.Drawing.Size(874, 20);
       this.chkDoNotGenerateManholeCosts.TabIndex = 5;
       this.chkDoNotGenerateManholeCosts.Text = "Do not generate manhole costs (this session only)";
       // 
@@ -891,7 +891,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       gridBagConstraint9.OriginX = 1;
       gridBagConstraint9.OriginY = 3;
       this.ultraGridBagLayoutPanel1.SetGridBagConstraint(this.btnOptionsOK, gridBagConstraint9);
-      this.btnOptionsOK.Location = new System.Drawing.Point(807, 343);
+      this.btnOptionsOK.Location = new System.Drawing.Point(799, 266);
       this.btnOptionsOK.Name = "btnOptionsOK";
       this.ultraGridBagLayoutPanel1.SetPreferredSize(this.btnOptionsOK, new System.Drawing.Size(75, 23));
       this.btnOptionsOK.Size = new System.Drawing.Size(75, 23);
@@ -911,7 +911,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       gridBagConstraint10.OriginY = 0;
       gridBagConstraint10.WeightX = 1F;
       this.ultraGridBagLayoutPanel1.SetGridBagConstraint(this.edtMasterPipXPLocation, gridBagConstraint10);
-      this.edtMasterPipXPLocation.Location = new System.Drawing.Point(200, 258);
+      this.edtMasterPipXPLocation.Location = new System.Drawing.Point(200, 181);
       this.edtMasterPipXPLocation.Multiline = true;
       this.edtMasterPipXPLocation.Name = "edtMasterPipXPLocation";
       this.edtMasterPipXPLocation.NullText = "Enter the location of the Master Pipe Conflicts table";
@@ -919,7 +919,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       appearance3.ForeColor = System.Drawing.Color.Silver;
       this.edtMasterPipXPLocation.NullTextAppearance = appearance3;
       this.ultraGridBagLayoutPanel1.SetPreferredSize(this.edtMasterPipXPLocation, new System.Drawing.Size(100, 25));
-      this.edtMasterPipXPLocation.Size = new System.Drawing.Size(682, 25);
+      this.edtMasterPipXPLocation.Size = new System.Drawing.Size(674, 25);
       this.edtMasterPipXPLocation.TabIndex = 2;
       this.edtMasterPipXPLocation.EditorButtonClick += new Infragistics.Win.UltraWinEditors.EditorButtonEventHandler(this.edtMasterPipXPLocation_EditorButtonClick);
       // 
@@ -929,7 +929,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       gridBagConstraint11.OriginX = 0;
       gridBagConstraint11.OriginY = 0;
       this.ultraGridBagLayoutPanel1.SetGridBagConstraint(this.ultraLabel2, gridBagConstraint11);
-      this.ultraLabel2.Location = new System.Drawing.Point(0, 258);
+      this.ultraLabel2.Location = new System.Drawing.Point(0, 181);
       this.ultraLabel2.Name = "ultraLabel2";
       this.ultraGridBagLayoutPanel1.SetPreferredSize(this.ultraLabel2, new System.Drawing.Size(200, 23));
       this.ultraLabel2.Size = new System.Drawing.Size(200, 25);
@@ -941,7 +941,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       this.pageProgress.Controls.Add(this.ultraGridBagLayoutPanel4);
       this.pageProgress.Location = new System.Drawing.Point(-10000, -10000);
       this.pageProgress.Name = "pageProgress";
-      this.pageProgress.Size = new System.Drawing.Size(882, 625);
+      this.pageProgress.Size = new System.Drawing.Size(874, 471);
       // 
       // ultraGridBagLayoutPanel4
       // 
@@ -952,7 +952,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       this.ultraGridBagLayoutPanel4.Location = new System.Drawing.Point(0, 0);
       this.ultraGridBagLayoutPanel4.Name = "ultraGridBagLayoutPanel4";
       this.ultraGridBagLayoutPanel4.Padding = new System.Windows.Forms.Padding(16, 0, 16, 0);
-      this.ultraGridBagLayoutPanel4.Size = new System.Drawing.Size(882, 625);
+      this.ultraGridBagLayoutPanel4.Size = new System.Drawing.Size(874, 471);
       this.ultraGridBagLayoutPanel4.TabIndex = 0;
       // 
       // lblProgress
@@ -963,10 +963,10 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       gridBagConstraint16.OriginX = 0;
       gridBagConstraint16.OriginY = 0;
       this.ultraGridBagLayoutPanel4.SetGridBagConstraint(this.lblProgress, gridBagConstraint16);
-      this.lblProgress.Location = new System.Drawing.Point(16, 289);
+      this.lblProgress.Location = new System.Drawing.Point(16, 212);
       this.lblProgress.Name = "lblProgress";
       this.ultraGridBagLayoutPanel4.SetPreferredSize(this.lblProgress, new System.Drawing.Size(100, 23));
-      this.lblProgress.Size = new System.Drawing.Size(850, 23);
+      this.lblProgress.Size = new System.Drawing.Size(842, 23);
       this.lblProgress.TabIndex = 1;
       // 
       // prgMainProgress
@@ -976,10 +976,10 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       gridBagConstraint17.OriginY = 1;
       gridBagConstraint17.WeightX = 1F;
       this.ultraGridBagLayoutPanel4.SetGridBagConstraint(this.prgMainProgress, gridBagConstraint17);
-      this.prgMainProgress.Location = new System.Drawing.Point(16, 312);
+      this.prgMainProgress.Location = new System.Drawing.Point(16, 235);
       this.prgMainProgress.Name = "prgMainProgress";
       this.ultraGridBagLayoutPanel4.SetPreferredSize(this.prgMainProgress, new System.Drawing.Size(75, 23));
-      this.prgMainProgress.Size = new System.Drawing.Size(850, 23);
+      this.prgMainProgress.Size = new System.Drawing.Size(842, 23);
       this.prgMainProgress.TabIndex = 0;
       this.prgMainProgress.Text = "[Formatted]";
       // 
@@ -987,25 +987,25 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       // 
       this.pageBatch.Location = new System.Drawing.Point(-10000, -10000);
       this.pageBatch.Name = "pageBatch";
-      this.pageBatch.Size = new System.Drawing.Size(882, 625);
+      this.pageBatch.Size = new System.Drawing.Size(874, 471);
       // 
       // ultraTabPageControl2
       // 
       this.ultraTabPageControl2.Location = new System.Drawing.Point(-10000, -10000);
       this.ultraTabPageControl2.Name = "ultraTabPageControl2";
-      this.ultraTabPageControl2.Size = new System.Drawing.Size(882, 625);
+      this.ultraTabPageControl2.Size = new System.Drawing.Size(874, 471);
       // 
       // ultraTabPageControl3
       // 
       this.ultraTabPageControl3.Location = new System.Drawing.Point(-10000, -10000);
       this.ultraTabPageControl3.Name = "ultraTabPageControl3";
-      this.ultraTabPageControl3.Size = new System.Drawing.Size(882, 625);
+      this.ultraTabPageControl3.Size = new System.Drawing.Size(874, 471);
       // 
       // ultraTabPageControl4
       // 
       this.ultraTabPageControl4.Location = new System.Drawing.Point(-10000, -10000);
       this.ultraTabPageControl4.Name = "ultraTabPageControl4";
-      this.ultraTabPageControl4.Size = new System.Drawing.Size(882, 625);
+      this.ultraTabPageControl4.Size = new System.Drawing.Size(874, 471);
       // 
       // dlgOpen
       // 
@@ -1047,47 +1047,46 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       this.tabMain.TabPageMargins.Left = 8;
       this.tabMain.TabPageMargins.Right = 8;
       this.tabMain.TabPageMargins.Top = 8;
-      ultraTab3.Key = "Home";
-      ultraTab3.TabPage = this.pageHome;
-      ultraTab3.Text = "Home";
-      ultraTab4.Key = "Costs";
-      ultraTab4.TabPage = this.pageCosts;
-      ultraTab4.Text = "Costs";
-      ultraTab5.Key = "Project Info";
-      ultraTab5.TabPage = this.ultraTabPageControl1;
-      ultraTab5.Text = "Project Info";
-      ultraTab6.Key = "Cost Factor Pool";
-      ultraTab6.TabPage = this.pageCostFactorPool;
-      ultraTab6.Text = "Cost Factor Pool";
-      ultraTab7.Key = "Cost Item Pool";
-      ultraTab7.TabPage = this.pageCostItemPool;
-      ultraTab7.Text = "Cost Item Pool";
-      ultraTab8.Key = "Select Alternative";
-      ultraTab8.TabPage = this.pageSelectAlternative;
-      ultraTab8.Text = "Select Alternative";
-      ultraTab9.Key = "Global Settings";
-      ultraTab9.TabPage = this.pageGlobalSettings;
-      ultraTab9.Text = "Global Settings";
-      ultraTab10.Key = "Options";
-      ultraTab10.TabPage = this.pageOptions;
-      ultraTab10.Text = "Options";
-      ultraTab11.Key = "Progress";
-      ultraTab11.TabPage = this.pageProgress;
-      ultraTab11.Text = "Progress";
-      ultraTab12.Key = "Batch";
-      ultraTab12.TabPage = this.pageBatch;
-      ultraTab12.Text = "Batch";
-      ultraTab13.Key = "Final";
-      ultraTab13.TabPage = this.ultraTabPageControl2;
-      ultraTab13.Text = "Final";
-      ultraTab14.Key = "Select Estimate Items";
-      ultraTab14.TabPage = this.ultraTabPageControl3;
-      ultraTab14.Text = "Select Estimate Items";
-      ultraTab15.Key = "Export";
-      ultraTab15.TabPage = this.ultraTabPageControl4;
-      ultraTab15.Text = "Export";
+      ultraTab4.Key = "Home";
+      ultraTab4.TabPage = this.pageHome;
+      ultraTab4.Text = "Home";
+      ultraTab5.Key = "Costs";
+      ultraTab5.TabPage = this.pageCosts;
+      ultraTab5.Text = "Costs";
+      ultraTab6.Key = "Project Info";
+      ultraTab6.TabPage = this.ultraTabPageControl1;
+      ultraTab6.Text = "Project Info";
+      ultraTab7.Key = "Cost Factor Pool";
+      ultraTab7.TabPage = this.pageCostFactorPool;
+      ultraTab7.Text = "Cost Factor Pool";
+      ultraTab8.Key = "Cost Item Pool";
+      ultraTab8.TabPage = this.pageCostItemPool;
+      ultraTab8.Text = "Cost Item Pool";
+      ultraTab9.Key = "Select Alternative";
+      ultraTab9.TabPage = this.pageSelectAlternative;
+      ultraTab9.Text = "Select Alternative";
+      ultraTab10.Key = "Global Settings";
+      ultraTab10.TabPage = this.pageGlobalSettings;
+      ultraTab10.Text = "Global Settings";
+      ultraTab11.Key = "Options";
+      ultraTab11.TabPage = this.pageOptions;
+      ultraTab11.Text = "Options";
+      ultraTab12.Key = "Progress";
+      ultraTab12.TabPage = this.pageProgress;
+      ultraTab12.Text = "Progress";
+      ultraTab14.Key = "Batch";
+      ultraTab14.TabPage = this.pageBatch;
+      ultraTab14.Text = "Batch";
+      ultraTab15.Key = "Final";
+      ultraTab15.TabPage = this.ultraTabPageControl2;
+      ultraTab15.Text = "Final";
+      ultraTab16.Key = "Select Estimate Items";
+      ultraTab16.TabPage = this.ultraTabPageControl3;
+      ultraTab16.Text = "Select Estimate Items";
+      ultraTab17.Key = "Export";
+      ultraTab17.TabPage = this.ultraTabPageControl4;
+      ultraTab17.Text = "Export";
       this.tabMain.Tabs.AddRange(new Infragistics.Win.UltraWinTabControl.UltraTab[] {
-            ultraTab3,
             ultraTab4,
             ultraTab5,
             ultraTab6,
@@ -1097,9 +1096,10 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
             ultraTab10,
             ultraTab11,
             ultraTab12,
-            ultraTab13,
             ultraTab14,
-            ultraTab15});
+            ultraTab15,
+            ultraTab16,
+            ultraTab17});
       this.tabMain.UseAppStyling = false;
       this.tabMain.ViewStyle = Infragistics.Win.UltraWinTabControl.ViewStyle.Office2007;
       this.tabMain.SelectedTabChanging += new Infragistics.Win.UltraWinTabControl.SelectedTabChangingEventHandler(this.tabMain_SelectedTabChanging);
@@ -1121,6 +1121,55 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       this._Main_Toolbars_Dock_Area_Left.Name = "_Main_Toolbars_Dock_Area_Left";
       this._Main_Toolbars_Dock_Area_Left.Size = new System.Drawing.Size(4, 510);
       this._Main_Toolbars_Dock_Area_Left.ToolbarsManager = this.toolbarManager;
+      // 
+      // _Main_Toolbars_Dock_Area_Right
+      // 
+      this._Main_Toolbars_Dock_Area_Right.AccessibleRole = System.Windows.Forms.AccessibleRole.Grouping;
+      this._Main_Toolbars_Dock_Area_Right.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(219)))), ((int)(((byte)(255)))));
+      this._Main_Toolbars_Dock_Area_Right.DockedPosition = Infragistics.Win.UltraWinToolbars.DockedPosition.Right;
+      this._Main_Toolbars_Dock_Area_Right.ForeColor = System.Drawing.SystemColors.ControlText;
+      this._Main_Toolbars_Dock_Area_Right.InitialResizeAreaExtent = 4;
+      this._Main_Toolbars_Dock_Area_Right.Location = new System.Drawing.Point(896, 150);
+      this._Main_Toolbars_Dock_Area_Right.Name = "_Main_Toolbars_Dock_Area_Right";
+      this._Main_Toolbars_Dock_Area_Right.Size = new System.Drawing.Size(4, 510);
+      this._Main_Toolbars_Dock_Area_Right.ToolbarsManager = this.toolbarManager;
+      // 
+      // _Main_Toolbars_Dock_Area_Top
+      // 
+      this._Main_Toolbars_Dock_Area_Top.AccessibleRole = System.Windows.Forms.AccessibleRole.Grouping;
+      this._Main_Toolbars_Dock_Area_Top.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(219)))), ((int)(((byte)(255)))));
+      this._Main_Toolbars_Dock_Area_Top.DockedPosition = Infragistics.Win.UltraWinToolbars.DockedPosition.Top;
+      this._Main_Toolbars_Dock_Area_Top.ForeColor = System.Drawing.SystemColors.ControlText;
+      this._Main_Toolbars_Dock_Area_Top.Location = new System.Drawing.Point(0, 0);
+      this._Main_Toolbars_Dock_Area_Top.Name = "_Main_Toolbars_Dock_Area_Top";
+      this._Main_Toolbars_Dock_Area_Top.Size = new System.Drawing.Size(900, 150);
+      this._Main_Toolbars_Dock_Area_Top.ToolbarsManager = this.toolbarManager;
+      // 
+      // _Main_Toolbars_Dock_Area_Bottom
+      // 
+      this._Main_Toolbars_Dock_Area_Bottom.AccessibleRole = System.Windows.Forms.AccessibleRole.Grouping;
+      this._Main_Toolbars_Dock_Area_Bottom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(219)))), ((int)(((byte)(255)))));
+      this._Main_Toolbars_Dock_Area_Bottom.DockedPosition = Infragistics.Win.UltraWinToolbars.DockedPosition.Bottom;
+      this._Main_Toolbars_Dock_Area_Bottom.ForeColor = System.Drawing.SystemColors.ControlText;
+      this._Main_Toolbars_Dock_Area_Bottom.InitialResizeAreaExtent = 4;
+      this._Main_Toolbars_Dock_Area_Bottom.Location = new System.Drawing.Point(0, 660);
+      this._Main_Toolbars_Dock_Area_Bottom.Name = "_Main_Toolbars_Dock_Area_Bottom";
+      this._Main_Toolbars_Dock_Area_Bottom.Size = new System.Drawing.Size(900, 4);
+      this._Main_Toolbars_Dock_Area_Bottom.ToolbarsManager = this.toolbarManager;
+      // 
+      // bkgWorkerLoadAlternative
+      // 
+      this.bkgWorkerLoadAlternative.WorkerReportsProgress = true;
+      this.bkgWorkerLoadAlternative.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bkgWorkerLoadAlternative_DoWork);
+      this.bkgWorkerLoadAlternative.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bkgWorkerLoadAlternative_RunWorkerCompleted);
+      this.bkgWorkerLoadAlternative.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bkgWorkerLoadAlternative_ProgressChanged);
+      // 
+      // bkgWorkerLoadModel
+      // 
+      this.bkgWorkerLoadModel.WorkerReportsProgress = true;
+      this.bkgWorkerLoadModel.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bkgWorkerLoadModel_DoWork);
+      this.bkgWorkerLoadModel.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bkgWorkerLoadModel_RunWorkerCompleted);
+      this.bkgWorkerLoadModel.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bkgWorkerLoadModel_ProgressChanged);
       // 
       // toolbarManager
       // 
@@ -1173,41 +1222,41 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
             buttonTool24});
       this.toolbarManager.Ribbon.Visible = true;
       this.toolbarManager.ShowFullMenusDelay = 500;
-      appearance6.Image = global::SystemsAnalysis.Analysis.CostEstimator.UI.Properties.Resources.NewProject;
-      buttonTool6.SharedPropsInternal.AppearancesLarge.Appearance = appearance6;
-      appearance7.Image = global::SystemsAnalysis.Analysis.CostEstimator.UI.Properties.Resources.NewProject_small;
-      buttonTool6.SharedPropsInternal.AppearancesSmall.Appearance = appearance7;
+      appearance19.Image = global::SystemsAnalysis.Analysis.CostEstimator.UI.Properties.Resources.NewProject;
+      buttonTool6.SharedPropsInternal.AppearancesLarge.Appearance = appearance19;
+      appearance20.Image = global::SystemsAnalysis.Analysis.CostEstimator.UI.Properties.Resources.NewProject_small;
+      buttonTool6.SharedPropsInternal.AppearancesSmall.Appearance = appearance20;
       buttonTool6.SharedPropsInternal.Caption = "New Project";
-      appearance8.Image = global::SystemsAnalysis.Analysis.CostEstimator.UI.Properties.Resources.OpenProject;
-      buttonTool7.SharedPropsInternal.AppearancesLarge.Appearance = appearance8;
-      appearance9.Image = global::SystemsAnalysis.Analysis.CostEstimator.UI.Properties.Resources.OpenProject_small;
-      buttonTool7.SharedPropsInternal.AppearancesSmall.Appearance = appearance9;
+      appearance21.Image = global::SystemsAnalysis.Analysis.CostEstimator.UI.Properties.Resources.OpenProject;
+      buttonTool7.SharedPropsInternal.AppearancesLarge.Appearance = appearance21;
+      appearance22.Image = global::SystemsAnalysis.Analysis.CostEstimator.UI.Properties.Resources.OpenProject_small;
+      buttonTool7.SharedPropsInternal.AppearancesSmall.Appearance = appearance22;
       buttonTool7.SharedPropsInternal.Caption = "Open Project";
-      appearance10.Image = global::SystemsAnalysis.Analysis.CostEstimator.UI.Properties.Resources.SaveProject;
-      buttonTool8.SharedPropsInternal.AppearancesLarge.Appearance = appearance10;
-      appearance11.Image = global::SystemsAnalysis.Analysis.CostEstimator.UI.Properties.Resources.SaveProject_small;
-      buttonTool8.SharedPropsInternal.AppearancesSmall.Appearance = appearance11;
+      appearance23.Image = global::SystemsAnalysis.Analysis.CostEstimator.UI.Properties.Resources.SaveProject;
+      buttonTool8.SharedPropsInternal.AppearancesLarge.Appearance = appearance23;
+      appearance24.Image = global::SystemsAnalysis.Analysis.CostEstimator.UI.Properties.Resources.SaveProject_small;
+      buttonTool8.SharedPropsInternal.AppearancesSmall.Appearance = appearance24;
       buttonTool8.SharedPropsInternal.Caption = "Save Project";
-      appearance12.Image = global::SystemsAnalysis.Analysis.CostEstimator.UI.Properties.Resources.CloseProject;
-      buttonTool9.SharedPropsInternal.AppearancesLarge.Appearance = appearance12;
-      appearance13.Image = global::SystemsAnalysis.Analysis.CostEstimator.UI.Properties.Resources.CloseProject_small;
-      buttonTool9.SharedPropsInternal.AppearancesSmall.Appearance = appearance13;
+      appearance25.Image = global::SystemsAnalysis.Analysis.CostEstimator.UI.Properties.Resources.CloseProject;
+      buttonTool9.SharedPropsInternal.AppearancesLarge.Appearance = appearance25;
+      appearance26.Image = global::SystemsAnalysis.Analysis.CostEstimator.UI.Properties.Resources.CloseProject_small;
+      buttonTool9.SharedPropsInternal.AppearancesSmall.Appearance = appearance26;
       buttonTool9.SharedPropsInternal.Caption = "Close Project";
-      appearance14.Image = global::SystemsAnalysis.Analysis.CostEstimator.UI.Properties.Resources.SaveProjectAs;
-      buttonTool10.SharedPropsInternal.AppearancesLarge.Appearance = appearance14;
-      appearance15.Image = global::SystemsAnalysis.Analysis.CostEstimator.UI.Properties.Resources.SaveProjectAs_small;
-      buttonTool10.SharedPropsInternal.AppearancesSmall.Appearance = appearance15;
+      appearance27.Image = global::SystemsAnalysis.Analysis.CostEstimator.UI.Properties.Resources.SaveProjectAs;
+      buttonTool10.SharedPropsInternal.AppearancesLarge.Appearance = appearance27;
+      appearance28.Image = global::SystemsAnalysis.Analysis.CostEstimator.UI.Properties.Resources.SaveProjectAs_small;
+      buttonTool10.SharedPropsInternal.AppearancesSmall.Appearance = appearance28;
       buttonTool10.SharedPropsInternal.Caption = "Save Project As";
       buttonTool12.SharedPropsInternal.Caption = "Estimate from Alternative";
       buttonTool14.SharedPropsInternal.Caption = "Change Global Settings";
-      appearance16.Image = global::SystemsAnalysis.Analysis.CostEstimator.UI.Properties.Resources.DetachFromPool_small;
-      buttonTool17.SharedPropsInternal.AppearancesSmall.Appearance = appearance16;
+      appearance29.Image = global::SystemsAnalysis.Analysis.CostEstimator.UI.Properties.Resources.DetachFromPool_small;
+      buttonTool17.SharedPropsInternal.AppearancesSmall.Appearance = appearance29;
       buttonTool17.SharedPropsInternal.Caption = "Detach From Pool";
-      appearance17.Image = global::SystemsAnalysis.Analysis.CostEstimator.UI.Properties.Resources.Link_small;
-      buttonTool18.SharedPropsInternal.AppearancesSmall.Appearance = appearance17;
+      appearance30.Image = global::SystemsAnalysis.Analysis.CostEstimator.UI.Properties.Resources.Link_small;
+      buttonTool18.SharedPropsInternal.AppearancesSmall.Appearance = appearance30;
       buttonTool18.SharedPropsInternal.Caption = "Link to Item";
-      appearance18.Image = global::SystemsAnalysis.Analysis.CostEstimator.UI.Properties.Resources.CloseCostEstimator_small;
-      buttonTool26.SharedPropsInternal.AppearancesSmall.Appearance = appearance18;
+      appearance31.Image = global::SystemsAnalysis.Analysis.CostEstimator.UI.Properties.Resources.CloseCostEstimator_small;
+      buttonTool26.SharedPropsInternal.AppearancesSmall.Appearance = appearance31;
       buttonTool26.SharedPropsInternal.Caption = "Exit Cost Estimator";
       buttonTool26.SharedPropsInternal.DisplayStyle = Infragistics.Win.UltraWinToolbars.ToolDisplayStyle.ImageAndText;
       buttonTool32.SharedPropsInternal.Caption = "Batch Alternatives";
@@ -1236,55 +1285,6 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
             listTool2,
             buttonTool36});
       this.toolbarManager.ToolClick += new Infragistics.Win.UltraWinToolbars.ToolClickEventHandler(this.toolbarManager_ToolClick);
-      // 
-      // _Main_Toolbars_Dock_Area_Right
-      // 
-      this._Main_Toolbars_Dock_Area_Right.AccessibleRole = System.Windows.Forms.AccessibleRole.Grouping;
-      this._Main_Toolbars_Dock_Area_Right.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(219)))), ((int)(((byte)(255)))));
-      this._Main_Toolbars_Dock_Area_Right.DockedPosition = Infragistics.Win.UltraWinToolbars.DockedPosition.Right;
-      this._Main_Toolbars_Dock_Area_Right.ForeColor = System.Drawing.SystemColors.ControlText;
-      this._Main_Toolbars_Dock_Area_Right.InitialResizeAreaExtent = 4;
-      this._Main_Toolbars_Dock_Area_Right.Location = new System.Drawing.Point(896, 150);
-      this._Main_Toolbars_Dock_Area_Right.Name = "_Main_Toolbars_Dock_Area_Right";
-      this._Main_Toolbars_Dock_Area_Right.Size = new System.Drawing.Size(4, 510);
-      this._Main_Toolbars_Dock_Area_Right.ToolbarsManager = this.toolbarManager;
-      // 
-      // _Main_Toolbars_Dock_Area_Top
-      // 
-      this._Main_Toolbars_Dock_Area_Top.AccessibleRole = System.Windows.Forms.AccessibleRole.Grouping;
-      this._Main_Toolbars_Dock_Area_Top.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(219)))), ((int)(((byte)(255)))));
-      this._Main_Toolbars_Dock_Area_Top.DockedPosition = Infragistics.Win.UltraWinToolbars.DockedPosition.Top;
-      this._Main_Toolbars_Dock_Area_Top.ForeColor = System.Drawing.SystemColors.ControlText;
-      this._Main_Toolbars_Dock_Area_Top.Location = new System.Drawing.Point(0, 0);
-      this._Main_Toolbars_Dock_Area_Top.Name = "_Main_Toolbars_Dock_Area_Top";
-      this._Main_Toolbars_Dock_Area_Top.Size = new System.Drawing.Size(900, 150);
-      this._Main_Toolbars_Dock_Area_Top.ToolbarsManager = this.toolbarManager;
-      // 
-      // _Main_Toolbars_Dock_Area_Bottom
-      // 
-      this._Main_Toolbars_Dock_Area_Bottom.AccessibleRole = System.Windows.Forms.AccessibleRole.Grouping;
-      this._Main_Toolbars_Dock_Area_Bottom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(219)))), ((int)(((byte)(255)))));
-      this._Main_Toolbars_Dock_Area_Bottom.DockedPosition = Infragistics.Win.UltraWinToolbars.DockedPosition.Bottom;
-      this._Main_Toolbars_Dock_Area_Bottom.ForeColor = System.Drawing.SystemColors.ControlText;
-      this._Main_Toolbars_Dock_Area_Bottom.InitialResizeAreaExtent = 4;
-      this._Main_Toolbars_Dock_Area_Bottom.Location = new System.Drawing.Point(0, 660);
-      this._Main_Toolbars_Dock_Area_Bottom.Name = "_Main_Toolbars_Dock_Area_Bottom";
-      this._Main_Toolbars_Dock_Area_Bottom.Size = new System.Drawing.Size(900, 4);
-      this._Main_Toolbars_Dock_Area_Bottom.ToolbarsManager = this.toolbarManager;
-      // 
-      // bkgWorkerLoadAlternative
-      // 
-      this.bkgWorkerLoadAlternative.WorkerReportsProgress = true;
-      this.bkgWorkerLoadAlternative.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bkgWorkerLoadAlternative_DoWork);
-      this.bkgWorkerLoadAlternative.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bkgWorkerLoadAlternative_RunWorkerCompleted);
-      this.bkgWorkerLoadAlternative.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bkgWorkerLoadAlternative_ProgressChanged);
-      // 
-      // bkgWorkerLoadModel
-      // 
-      this.bkgWorkerLoadModel.WorkerReportsProgress = true;
-      this.bkgWorkerLoadModel.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bkgWorkerLoadModel_DoWork);
-      this.bkgWorkerLoadModel.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bkgWorkerLoadModel_RunWorkerCompleted);
-      this.bkgWorkerLoadModel.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bkgWorkerLoadModel_ProgressChanged);
       // 
       // Main
       // 

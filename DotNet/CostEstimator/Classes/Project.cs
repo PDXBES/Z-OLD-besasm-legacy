@@ -1392,6 +1392,11 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
         string itemName = "";
         CostItemFactor baseStreetTargetCostItemFactor = null;
         CostItem poolCostItem = null;
+
+        CostItemFactor CETrafficControlCIF = null;
+            CostItemFactor CEAdaRampCIF = null;
+            CostItemFactor CEWaterLineSleevingCIF = null;
+
         switch (streetTarget.TypeCode)
         {
           case "v":
@@ -1434,27 +1439,32 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
             newCostItem = new CostItem(_ICCoster.InflowControl.ToString(), 1,
               (decimal)((double)icCost / _ICCoster.FacilitySizeCuFt), "cuft");
             poolCostItem = AddCostItemToPool(newCostItem);
-
+            
             CostItem newCETrafficControlCostItem = new CostItem("Curb extension traffic control",
               1, _ICCoster.CurbExtensionTrafficControl, "ea");
             CostItem poolCETrafficControlCostItem = AddCostItemToPool(newCETrafficControlCostItem);
-            CostItemFactor CETrafficControlCIF = new CostItemFactor(poolCETrafficControlCostItem.Name, 
+            CETrafficControlCIF = new CostItemFactor(poolCETrafficControlCostItem.Name, 
               poolCETrafficControlCostItem, null, 1);
 
             CostItem newCEAdaRampCostItem = new CostItem("Curb extension ADA ramp", 
               1, _ICCoster.CurbExtensionAdaRamp, "ea");
             CostItem poolCEAdaRampCostItem = AddCostItemToPool(newCEAdaRampCostItem);
-            CostItemFactor CEAdaRampCIF = new CostItemFactor(poolCEAdaRampCostItem.Name, 
+            CEAdaRampCIF = new CostItemFactor(poolCEAdaRampCostItem.Name, 
               poolCEAdaRampCostItem, null, 1);
 
             CostItem newCEWaterLineSleevingCostItem = new CostItem("Curb extension water line sleeving", 
               1, _ICCoster.CurbExtensionWaterLineSleeving, "ea");
             CostItem poolCEWaterLineSleevingCostItem = AddCostItemToPool(newCEWaterLineSleevingCostItem);
-            CostItemFactor CEWaterLineSleevingCIF = new CostItemFactor(poolCEWaterLineSleevingCostItem.Name,
+            CEWaterLineSleevingCIF = new CostItemFactor(poolCEWaterLineSleevingCostItem.Name,
               poolCEWaterLineSleevingCostItem, null, 1);
+
+            AddCostItemFactorToPool(CETrafficControlCIF);
+            AddCostItemFactorToPool(CEAdaRampCIF);
+            AddCostItemFactorToPool(CEWaterLineSleevingCIF);
 
             streetTargetCostItemFactor = new CostItemFactor(itemName,
               null, null, 1);
+
             streetTargetCostItemFactor.AddCostItemFactor(CETrafficControlCIF);
             streetTargetCostItemFactor.AddCostItemFactor(CEAdaRampCIF);
             streetTargetCostItemFactor.AddCostItemFactor(CEWaterLineSleevingCIF);
@@ -1468,6 +1478,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 
         AddCostItemFactorToPool(streetTargetCostItemFactor);
         AddCostItemFactorToPool(baseStreetTargetCostItemFactor);
+
         int icIndex = currentCostItem.AddCostItemFactor(streetTargetCostItemFactor);
         if (icIndex == -1)
           throw new Exception("Cannot add CostItemFactor");
@@ -1476,7 +1487,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
           throw new Exception("Cannot add CostItemFactor");
         if (streetTargetCostItemFactor.PrefactoredCost < streetTargetCostItemFactor.Cost)
           streetTargetCostItemFactor.Comment = "Raised to minimum cost";
-
+    
         PrepareStreetReportItem(streetTarget, streetTargetCostItemFactor);
       } // foreach  (streetTarget)
 
@@ -1908,7 +1919,16 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       if (index == 0)
         return _ProjectEstimate;
       else
-        return _CostItemFactors[index];
+      {
+        if (_CostItemFactors.ContainsKey(index))
+        {
+          return _CostItemFactors[index];
+        }
+        else
+        {
+          throw new KeyNotFoundException("CostItemFactor Index " + index + " not found in CostItemFactorPool");
+        }
+      }
     } // CostItemFactorFromPool(index)
 
     /// <summary>
