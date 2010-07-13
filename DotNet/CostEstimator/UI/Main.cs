@@ -368,10 +368,19 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 				if (_project != null)
 					CloseProject();
 
-				_project = new Project();
-				_project.LoadFromFile(dlgOpen.FileName);
-				_project.FileName = dlgOpen.FileName;
-				SetupProjectForCostGrid();
+        try
+        {
+          _project = new Project();
+          _project.LoadFromFile(dlgOpen.FileName);
+          _project.FileName = dlgOpen.FileName;
+          SetupProjectForCostGrid();
+        }
+        catch (Exception ex)
+        {
+          MessageBox.Show(ex.Message, "Error opening project file.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+          return;
+        }
+
 
 				string fileName = dlgOpen.FileName;
 
