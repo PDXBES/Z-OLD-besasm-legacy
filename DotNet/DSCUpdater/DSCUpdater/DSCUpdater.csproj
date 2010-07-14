@@ -231,9 +231,9 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Template\UserUpdate.csv">
+    <EmbeddedResource Include="Template\UserUpdate.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </EmbeddedResource>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -283,6 +283,9 @@
       <LastGenOutput>LinqMaster.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
+    <EmbeddedResource Include="Template\UserUpdateTemplate.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <None Include="WormGear.png" />
     <None Include="WrenchGears.jpg" />
     <None Include="Server.png" />

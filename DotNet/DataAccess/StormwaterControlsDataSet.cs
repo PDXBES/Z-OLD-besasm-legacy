@@ -90,8 +90,8 @@ namespace SystemsAnalysis.DataAccess
       XPSWMMResults xpSwmmResults = new XPSWMMResults(swmmOutputFile);
       //xpSwmmResults.GetTableE01().CopyToDataTable(this.Table01, LoadOption.PreserveChanges);
       //xpSwmmResults.GetTableE02().CopyToDataTable(this.Table02, LoadOption.PreserveChanges);
-      xpSwmmResults.GetTableE03a().CopyToDataTable(this.TableE03a, LoadOption.PreserveChanges);
-      xpSwmmResults.GetTableE03b().CopyToDataTable(this.TableE03b, LoadOption.PreserveChanges);
+      //xpSwmmResults.GetTableE03a().CopyToDataTable(this.TableE03a, LoadOption.PreserveChanges);
+      //xpSwmmResults.GetTableE03b().CopyToDataTable(this.TableE03b, LoadOption.PreserveChanges);
       //xpSwmmResults.GetTableE04().CopyToDataTable(this.Table04, LoadOption.PreserveChanges);
       //xpSwmmResults.GetTableE04a().CopyToDataTable(this.Table04a, LoadOption.PreserveChanges);
       //xpSwmmResults.GetTableE04b().CopyToDataTable(this.Table04b, LoadOption.PreserveChanges);
@@ -115,8 +115,8 @@ namespace SystemsAnalysis.DataAccess
       //xpSwmmResults.GetTableE17().CopyToDataTable(this.Table17, LoadOption.PreserveChanges);
       xpSwmmResults.GetTableE18().CopyToDataTable(this.TableE18, LoadOption.PreserveChanges);
       xpSwmmResults.GetTableE19().CopyToDataTable(this.TableE19, LoadOption.PreserveChanges);
-      xpSwmmResults.GetTableE21().CopyToDataTable(this.TableE21, LoadOption.PreserveChanges);
-      xpSwmmResults.GetTableE22().CopyToDataTable(this.TableE22, LoadOption.PreserveChanges);
+      //xpSwmmResults.GetTableE21().CopyToDataTable(this.TableE21, LoadOption.PreserveChanges);
+      //xpSwmmResults.GetTableE22().CopyToDataTable(this.TableE22, LoadOption.PreserveChanges);
     }
   }
 }

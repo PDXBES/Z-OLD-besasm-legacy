@@ -58,10 +58,14 @@ namespace DSCUpdater
     string[] DataResult1 = { "", "", "", "", "", "", "", "" };
     string[] Titles = { "RNO", "DSCID", "New Roof Area", "New Roof DISCO IC Area", "New Roof Drywell IC Area" };
 
-    public enum DscErrors
+    public static class DscErrors
     {
-      PendingUpdate, DscNotFound, ParkICGreaterThanParkArea, RoofICGreaterThanRoofArea
+      public const string PendingUpdate = "Dsc Has Pending Update";
+      public const string DscNotFound = "Dsc Not Found in Master";
+      public const string ParkICGreaterThanParkArea = "Park IC Area > Park Area";
+      public const string RoofICGreaterThanRoofArea = "Roof IC Area > Roof Area";
     }
+
 
     public frmMain()
     {
@@ -75,6 +79,7 @@ namespace DSCUpdater
     {
       try
       {
+        Cursor = Cursors.WaitCursor;
         ultraStatusBar1.Panels["dscEditorConnection"].Text = "Dsc Editor: " + ConnectionStringSummary(Properties.Settings.Default.DscEditorConnectionString);
         ultraStatusBar1.Panels["masterDataConnection"].Text = "Master Data: " + ConnectionStringSummary(Properties.Settings.Default.MasterDataConnectionString);
 
@@ -85,20 +90,23 @@ namespace DSCUpdater
         this.sESSIONTableAdapter.Fill(this.projectDataSet.SESSION);
         bindingNavigator1.BindingSource = sESSIONBindingSource;
 
-        ProjectDataSetTableAdapters.mstDscTableAdapter mstDscTA = new DSCUpdater.ProjectDataSetTableAdapters.mstDscTableAdapter();
-        mstDscTA.Fill(projectDataSet.mstDsc);
-
-        SqlConnection sqlCon = new SqlConnection(Properties.Settings.Default.DscEditorConnectionString);
-        sqlCon.Open();
-        SqlCommand sqlCmd = new SqlCommand();
-        sqlCmd.CommandText = "DELETE FROM USERUPDATE";
-        sqlCmd.Connection = sqlCon;
-        sqlCmd.ExecuteNonQuery();
+        SetStatus("Loading Master Dsc...");
+        ProjectDataSetTableAdapters.MstDscTableAdapter mstDscTA = new DSCUpdater.ProjectDataSetTableAdapters.MstDscTableAdapter();
+        mstDscTA.Fill(projectDataSet.MstDsc);
       }
       catch (SqlException sqlException)
       {
         MessageBox.Show(sqlException.Message + "\n" + "Please specify server and database connection parameters on the Database Connection Options tab.", "DSCUpdater: SQL Exception Thrown", MessageBoxButtons.OK, MessageBoxIcon.Error);
         UpdateDscEditorConnection();
+      }
+      catch (Exception ex)
+      {
+        
+      }
+      finally
+      {
+        Cursor = Cursors.Default;
+        SetStatus("Ready");
       }
     }
 
@@ -201,7 +209,7 @@ namespace DSCUpdater
     }
 
     private static void AddEditDateCommandParameter(SqlCommand sqlCmd, SqlConnection sqlCon)
-    {
+    {          
       //add editDate parameter to SQL command sqlCmd
       DateTime editDate = DateTime.Now;
       SqlParameter pEditDate = sqlCmd.CreateParameter();
@@ -1131,24 +1139,23 @@ namespace DSCUpdater
     {
       impAQCCounter = 0;
       SetStatus("Ready");
-      SetProgress(0);
+      SetProgress = 0;
       txtFileName.Text = "";
       LoadTab(tabPageControlMain.Tab.Key);
     }
 
-    private void SetProgress(int progress)
+    private int SetProgress
     {
-      this.ultraStatusBar1.Panels["progressBar"].ProgressBarInfo.Value = progress;
-
+      get
+      {
+        return this.ultraStatusBar1.Panels["progressBar"].ProgressBarInfo.Value;
+      }
+      set
+      {
+        this.ultraStatusBar1.Panels["progressBar"].ProgressBarInfo.Value = value;
+      }
     }
 
-    private int SetAndIncrementProgress(int progress)
-    {
-      SetProgress(progress);
-      return ++this.ultraStatusBar1.Panels["progress"].ProgressBarInfo.Value;
-
-
-    }
     private void SetStatus(string status)
     {
       this.ultraStatusBar1.Panels["status"].Text = status;
@@ -1295,7 +1302,7 @@ namespace DSCUpdater
 
     private void DownloadUpdateTemplate()
     {
-      string templatePath = Path.GetDirectoryName(Application.ExecutablePath) + "\\Template\\UserUpdate.csv";
+      string templatePath = Path.GetDirectoryName(Application.ExecutablePath) + "\\Template\\UserUpdateTemplate.csv";
       SaveFileDialog sfdMain = new SaveFileDialog();
       sfdMain.Title = "Where do you want to save the UserUpdate file?";
       sfdMain.InitialDirectory = @"C:\";
@@ -1391,11 +1398,7 @@ namespace DSCUpdater
 
         //close the SQL connection
         sqlCon.Close();
-
-        //HACK: there must be a better way to accomlish this...
-        //btnSubmitUpdates.Visible = false;
-
-        btnCancel.Text = "Return";
+        
         MessageBox.Show("All updates to the modeling system have completed sucessfully.  To review changes from this edit session, return to the main page, and click on the 'Load Update History' button to load the desired edit session.", "DSCUpdater: Update Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
         try
@@ -1413,121 +1416,146 @@ namespace DSCUpdater
       {
         MessageBox.Show(ex.Message, "DSCUpdater: Exception Thrown", MessageBoxButtons.OK, MessageBoxIcon.Error);
       }
+      finally
+      {
+        SetStatus("Ready");
+        SetProgress = 0;
+        Cursor.Current = Cursors.WaitCursor;
 
-      SetStatus("Ready");
-      SetProgress(0);
-      Cursor.Current = Cursors.WaitCursor;
+        RestartUpdate();
+      }
+      return;
     }
 
     private int PerformDscQc(string fileName)
     {
       int qcCount = 0;
 
+
       // establish a query context over ADO.NET sql connection                  
+      WriteDscUpdateFile(fileName);
+
       ProjectDataSetTableAdapters.DscUpdaterTableAdapter dscUpdaterTA;
       dscUpdaterTA = new ProjectDataSetTableAdapters.DscUpdaterTableAdapter();
-
       dscUpdaterTA.Fill(projectDataSet.DscUpdater);
 
-
-      //Table<DscUpdater> dscUpdater = dscUpdaterContext.GetTable<DscUpdater>();
-
-      // build the query
-      var query = from m in projectDataSet.MstDsc
-                  join d in projectDataSet.DscQc
-                  on m.DSCID equals d.DscID
-                  where m.roofAreaNeedsUpdate == true ||
-                  m.parkAreaNeedsUpdate == true
-                  select new
-                  {
-                    DscID = m.DSCID,
-                    ErrorCode = DscErrors.PendingUpdate,
-                    ErrorDescription = ""
-                  };
-
       DataTable qcDt = projectDataSet.DscQc;
+      qcDt.Clear();
 
-      foreach (var row in query)
-      {
-        qcDt.Rows.Add(row);
-      }
+      // build the pending update query
+      qcCount += QAQueryPendingUpdate(qcDt);
 
-      // execute the query
-      /*foreach (var item in query)
-        Console.WriteLine("{0} {1} {2} {3}",
-                          item.Name, item.OrderID,
-                          item.Amount, item.Age);
-      */
+      qcCount += QAQueryDscNotFound(qcDt);
 
-      return 1;
-      string strSQLImpAQC = "SELECT mst_DSC_ac.DSCID AS [DSC ID], " +
-                     "mst_DSC_ac.surveyedRfAreaSqFt AS [Surveyed Roof Area], " +
-                     "mst_DSC_ac.surveyedPkAreaSqft AS [Surveyed Park Area] " +
-                     "FROM mst_DSC_ac INNER JOIN USERUPDATE ON " +
-                     "mst_DSC_ac.DSCID = USERUPDATE.dsc_id " +
-                     "WHERE (((mst_DSC_ac.roofAreaNeedsUpdate)='True')) " +
-                     "OR (((mst_DSC_ac.parkAreaNeedsUpdate)='True'))";
+      qcCount += QAQueryRoofIcAreaGreaterThanNewRoofArea(qcDt);
 
-      SqlDataAdapter sqlDAImpAQC = new SqlDataAdapter(strSQLImpAQC, Properties.Settings.Default.DscEditorConnectionString);
-      SqlCommandBuilder sqlCBImpAQC = new SqlCommandBuilder(sqlDAImpAQC);
-      DataTable dtImpAQC = new DataTable();
-      sqlDAImpAQC.Fill(dtImpAQC);
-      //MessageBox.Show("ImpAQC = " + Convert.ToString(dtImpAQC.Rows.Count));
-      dtImpAQC.Locale = System.Globalization.CultureInfo.InvariantCulture;
+      qcCount += QAQueryParkIcAreaGreaterThanNewParkArea(qcDt);
 
-      //run SelectUSERUPDATENotInDSC query
-      string strSQLDSCQC =
-        "SELECT USERUPDATE.dsc_id as 'DSC ID', " +
-        DscErrors.PendingUpdate + " as 'ErrorCode' " +
-        "null as 'ErrorDescription'" +
-        "FROM mst_DSC_ac RIGHT OUTER JOIN USERUPDATE " +
-        "ON mst_DSC_ac.DSCID = USERUPDATE.dsc_id " +
-        "WHERE (mst_DSC_ac.DSCID IS NULL)";
-
-      SqlDataAdapter sqlDADSCQC = new SqlDataAdapter(strSQLDSCQC, Properties.Settings.Default.DscEditorConnectionString);
-      SqlCommandBuilder sqlCBDSCQC = new SqlCommandBuilder(sqlDADSCQC);
-      DataTable dtDSCQC = new DataTable();
-      sqlDADSCQC.Fill(dtDSCQC);
-      dtDSCQC.Locale = System.Globalization.CultureInfo.InvariantCulture;
-
-      //run SelectParkICAreaGreaterThanNewParkArea
-      string strSQLParkQC =
-        "SELECT USERUPDATE.dsc_id, " +
-        DscErrors.ParkICGreaterThanParkArea + " as 'ErrorCode' " +
-        "USERUPDATE.new_park_disco_ic_area_sqft & '+' & " +
-        "USERUPDATE.new_park_drywell_ic_area_sqft & '>' & " +
-        "USERUPDATE.new_park_area_sqft as 'ErrorDescription' " +
-        "FROM USERUPDATE " +
-        "WHERE ([new_park_disco_ic_area_sqft]+[new_park_drywell_ic_area_sqft])>[new_park_area_sqft]";
-
-      SqlDataAdapter sqlDAParkQC = new SqlDataAdapter(strSQLParkQC, Properties.Settings.Default.DscEditorConnectionString);
-      SqlCommandBuilder sqlCBParkQC = new SqlCommandBuilder(sqlDAParkQC);
-      DataTable dtParkQC = new DataTable();
-
-      //fill Park QC data adapter
-      sqlDAParkQC.Fill(dtParkQC);
-      dtParkQC.Locale = System.Globalization.CultureInfo.InvariantCulture;
-
-      //run SelectRoofICAreaGreaterThanNewRoofArea
-      string strSQLRoofQC =
-        "SELECT USERUPDATE.dsc_id, " +
-        DscErrors.RoofICGreaterThanRoofArea + " as 'ErrorCode' " +
-        "USERUPDATE.new_roof_disco_ic_area_sqft & '+' &" +
-        "USERUPDATE.new_roof_drywell_ic_area_sqft & '>' &" +
-        "USERUPDATE.new_roof_area_sqft as 'ErrorDescription' " +
-        "FROM USERUPDATE WHERE " +
-        "([new_roof_disco_ic_area_sqft]+[new_roof_drywell_ic_area_sqft])>[new_roof_area_sqft]";
-
-
-      SqlDataAdapter sqlDARoofQC = new SqlDataAdapter(strSQLRoofQC, Properties.Settings.Default.DscEditorConnectionString);
-      SqlCommandBuilder sqlCBRoofQC = new SqlCommandBuilder(sqlDARoofQC);
-      DataTable dtRoofQC = new DataTable();
-      sqlDARoofQC.Fill(dtRoofQC);
-      dtRoofQC.Locale = System.Globalization.CultureInfo.InvariantCulture;
-
+      SetProgress = 0;
       return qcCount;
     }
 
+    private int QAQueryPendingUpdate(DataTable qcDt) 
+    {
+      int qcCount =0;
+
+      var qryPendingUpdate =
+        from m in projectDataSet.MstDsc
+        join d in projectDataSet.DscUpdater
+        on m.DSCID equals d.DscId
+        where m.roofAreaNeedsUpdate == true ||
+        m.parkAreaNeedsUpdate == true
+        select new
+        {
+          DscID = m.DSCID,
+          ErrorCode = (string)DscErrors.PendingUpdate,
+          ErrorDescription = d.DscId + " has pending updates"
+        };
+
+      foreach (var row in qryPendingUpdate)
+      {
+        qcDt.Rows.Add(row.DscID, row.ErrorCode, row.ErrorDescription);
+        SetProgress++;
+        qcCount++;
+      }
+      return qcCount;
+    }
+
+    private int QAQueryDscNotFound(DataTable qcDt)
+    {
+      int qcCount = 0;
+      var qryDscNotFound =
+        from d in projectDataSet.DscUpdater
+        join m in projectDataSet.MstDsc
+        on d.DscId equals m.DSCID
+        into dJoin
+        from outerJoin in dJoin.DefaultIfEmpty()
+        where outerJoin == null
+        select new
+        {
+          DscID = -1,
+          ErrorCode = DscErrors.DscNotFound,
+          ErrorDescription = d.DscId + " does not exist in master data",          
+        };
+
+      foreach (var row in qryDscNotFound)
+      {
+        qcDt.Rows.Add(row.DscID, row.ErrorCode, row.ErrorDescription);
+        SetProgress++;
+        qcCount++;
+      }
+      return qcCount;
+    }
+
+    private int QAQueryRoofIcAreaGreaterThanNewRoofArea(DataTable qcDt)
+    {
+      int qcCount = 0;
+      var qryRoofIcAreaGreaterThanNewRoofArea =
+        from m in projectDataSet.MstDsc
+        join d in projectDataSet.DscUpdater
+        on m.DSCID equals d.DscId
+        where d.NewRoofDiscoArea + d.NewRoofDrywellIcArea > d.NewRoofArea
+        select new
+        {
+          DscID = m.DSCID,
+          ErrorCode = DscErrors.RoofICGreaterThanRoofArea,
+          ErrorDescription = d.NewRoofDiscoArea + " + " + d.NewRoofDrywellIcArea + " > " + d.NewRoofArea
+        };
+
+      foreach (var row in qryRoofIcAreaGreaterThanNewRoofArea)
+      {
+        qcDt.Rows.Add(row.DscID, row.ErrorCode, row.ErrorDescription);
+        SetProgress++;
+        qcCount++;
+      }
+      return qcCount;
+    }
+
+    private int QAQueryParkIcAreaGreaterThanNewParkArea(DataTable qcDt)
+    {
+      int qcCount = 0;
+
+      var qryParkIcAreaGreaterThanNewParkArea =
+        from m in projectDataSet.MstDsc
+        join d in projectDataSet.DscUpdater
+        on m.DSCID equals d.DscId
+        where d.NewParkDiscoIcArea + d.NewParkDrywellIcArea > d.NewParkArea
+        select new
+        {
+          DscID = m.DSCID,
+          ErrorCode = DscErrors.ParkICGreaterThanParkArea,
+          ErrorDescription = d.NewParkDiscoIcArea + " + " + d.NewParkDrywellIcArea + " > " + d.NewParkArea
+        };
+
+      foreach (var row in qryParkIcAreaGreaterThanNewParkArea)
+      {
+        qcDt.Rows.Add(row.DscID, row.ErrorCode, row.ErrorDescription);
+        SetProgress++;
+        qcCount++;
+      }
+      return qcCount;
+    }
+    
     private DataTable CsvToDataTable(string csvFile)
     {
       SqlConnection sqlCon = new SqlConnection(Properties.Settings.Default.DscEditorConnectionString);
@@ -1602,14 +1630,6 @@ namespace DSCUpdater
 
     private void btnLoadUpdateFile_Click(object sender, EventArgs e)
     {
-      /// <summary>
-      /// Open TEMP.CSV as ODBC database file
-      /// Access data using SQL 'Select' command
-      /// Move data from DATABASE to DataTable and assign to DataGridView object
-      /// Make each column UNSORTABLE to stop user messing with data!!!
-      /// </summary>
-
-      dgvDscQc.Visible = false;
       SetStatus("Loading");
 
       //Open file dialog handling
@@ -1624,40 +1644,41 @@ namespace DSCUpdater
         return;
       }
 
-      string dscUpdateFile = Properties.Settings.Default.DscUpdateFile;
       txtFileName.Text = ofdMain.FileName;
+     
+      btnSubmitUpdates.Enabled = false;
+
+      //create qcCOunter variable that is used to increment the number of QC checks that fail to pass
+      int qcCounter;
+      qcCounter = PerformDscQc(txtFileName.Text);
+
+      if (qcCounter == 0)
+      {
+        btnSubmitUpdates.Enabled = true;
+      }
+      else
+      {
+        LoadTab("tabUpdateFileErrors");        
+      }
+
+      dgvData.Visible = true;
+      SetStatus("Ready");
+    }
+
+    private void WriteDscUpdateFile(string fileName)
+    {
+      if (!File.Exists(fileName))
+      {
+        throw new FileNotFoundException();
+      }
+
+
+      string dscUpdateFile = Properties.Settings.Default.DscUpdateFile;
       if (File.Exists(dscUpdateFile))
       {
         File.Delete(dscUpdateFile);
       }
-      File.Copy(ofdMain.FileName, dscUpdateFile);
-
-      btnReviewUpdate.Enabled = false;
-
-
-      // Clear datagrid contents
-      dgvData.SelectAll();
-      dgvData.ClearSelection();
-      // Set file name
-
-      //SetStatus(= "Loading" + FileSize + "  bytes. Please wait a moment.";
-
-      SetProgress(0);
-
-      //create qcCOunter variable that is used to increment the number of QC checks that fail to pass
-      int qcCounter;
-      qcCounter = PerformDscQc(fileName);
-
-      if (qcCounter == 0)
-      {
-        btnReviewUpdate.Enabled = true;
-      }
-      else
-      {
-        dgvDscQc.Visible = true;
-      }
-
-      SetStatus("Ready");
+      File.Copy(fileName, dscUpdateFile, true);
     }
 
     private void btnUpdaterEditorEnter_Click(object sender, EventArgs e)
@@ -2330,19 +2351,38 @@ namespace DSCUpdater
     {
       if (PerformDscQc(txtFileName.Text) == 0)
       {
-        LoadTab(tabPageControlMain.Tab.Key);
+        LoadTab(tabPageControlLoadedUpdateReview.Tab.Key);
       }
       else
       {
-        MessageBox.Show("Please fix Dsc Editor errors and reload the update file.", "Dsc Editor errors were found", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        LoadTab("tabUpdateFileErrors");   
       }
     }
 
     private void btnCancelUpdate_Click(object sender, EventArgs e)
     {
+      RestartUpdate();
+    }
+
+    private void btnExportErrors_Click(object sender, EventArgs e)
+    {
+      throw new NotImplementedException();
+    }
+
+    private void btnUpdateErrorCancel_Click(object sender, EventArgs e)
+    {
+      RestartUpdate();
+    }
+
+    private void RestartUpdate()
+    {
+      LoadTab(tabPageControlMain.Tab.Key);
       projectDataSet.DscUpdater.Clear();
+      projectDataSet.DscQc.Clear();
+      dgvData.Visible = false;
       txtFileName.Clear();
     }
+
     /*
     [Table]
     public class DscUpdater

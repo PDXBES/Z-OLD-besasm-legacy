@@ -48,7 +48,19 @@
             System.Data.Common.DbConnectionStringBuilder csb;
             csb = new System.Data.Common.DbConnectionStringBuilder();
 
-            csb.ConnectionString = (string)this["DscUpdateConnectionString"];
+            csb.ConnectionString = DscUpdateConnectionString;// (string)this["DscUpdateConnectionString"];
+            string dataDirectory;
+            if (System.AppDomain.CurrentDomain.GetData("DataDirectory") == null)
+            {
+              dataDirectory = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            }
+            else
+            {
+              dataDirectory = (string)System.AppDomain.CurrentDomain.GetData("DataDirectory");
+            }
+
+            csb.ConnectionString = csb.ConnectionString.Replace(
+              "|DataDirectory|", dataDirectory);
             return System.IO.Path.GetFullPath((string)csb["Data Source"]) + "\\UserUpdate.csv";            
           }
         }     
