@@ -1,0 +1,73 @@
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CharacterizationQueriesManager", "CharacterizationQueriesManager.csproj", "{1489F1BD-4E32-4A0E-9613-241A87836FBC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemsAnalysis.Utils.ArcObjects.MapControl.PanZoom", "\\Cassio\modeling\Model_Programs\DotNet\ArcObjectsUtils\MapControlUtils\PanZoom_Commands\SystemsAnalysis.Utils.ArcObjects.MapControl.PanZoom.csproj", "{120CF791-801E-4669-8D65-174DCABF47EC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemsAnalysis.Utils.ArcObjects.MapControl.SelectCommands", "\\Cassio\modeling\Model_Programs\DotNet\ArcObjectsUtils\MapControlUtils\Select_Commands\SystemsAnalysis.Utils.ArcObjects.MapControl.SelectCommands.csproj", "{63AD8943-A61C-4AC7-B6F8-DA20E063E64F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemsAnalysis.Modeling", "..\..\DotNet\Modeling\SystemsAnalysis.Modeling.csproj", "{54555B74-906E-4D29-9BC3-7653805B6AD0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemsAnalysis.Tracer", "..\..\DotNet\Tracer\SystemsAnalysis.Tracer.csproj", "{C8B24858-1D99-4519-9A1D-CF129CED9ADA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemsAnalysis.DataAccess", "..\..\DotNet\DataAccess\SystemsAnalysis.DataAccess.csproj", "{D81499E0-ED3E-4C85-9F8E-72C263AA24C4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemsAnalysis.Utils.ArcObjects.MapControl.MapControlHelper", "..\..\DotNet\ArcObjectsUtils\MapControlUtils\MapControlHelper\SystemsAnalysis.Utils.ArcObjects.MapControl.MapControlHelper.csproj", "{D08971DD-9DAD-4DE1-88CA-35EE30AB6B23}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemsAnalysis.Types", "..\..\DotNet\Types\SystemsAnalysis.Types.csproj", "{AFB81561-9859-4FA2-86AD-0C6833488E41}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemsAnalysis.Modeling.PumpStations", "..\..\DotNet\PumpStations\SystemsAnalysis.Modeling.PumpStations.csproj", "{3623E8C3-4DFB-4635-801C-C577328937C3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemsAnalysis.Utils.EventHandlers", "\\Cassio\Modeling\Model_Programs\DotNet\DotNetUtils\EventHandlerUtils\SystemsAnalysis.Utils.EventHandlers.csproj", "{9AE8BF25-3ABF-402D-BC63-841E8588D20C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1489F1BD-4E32-4A0E-9613-241A87836FBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1489F1BD-4E32-4A0E-9613-241A87836FBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1489F1BD-4E32-4A0E-9613-241A87836FBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1489F1BD-4E32-4A0E-9613-241A87836FBC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{120CF791-801E-4669-8D65-174DCABF47EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{120CF791-801E-4669-8D65-174DCABF47EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{120CF791-801E-4669-8D65-174DCABF47EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{120CF791-801E-4669-8D65-174DCABF47EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63AD8943-A61C-4AC7-B6F8-DA20E063E64F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63AD8943-A61C-4AC7-B6F8-DA20E063E64F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63AD8943-A61C-4AC7-B6F8-DA20E063E64F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63AD8943-A61C-4AC7-B6F8-DA20E063E64F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54555B74-906E-4D29-9BC3-7653805B6AD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54555B74-906E-4D29-9BC3-7653805B6AD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54555B74-906E-4D29-9BC3-7653805B6AD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54555B74-906E-4D29-9BC3-7653805B6AD0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8B24858-1D99-4519-9A1D-CF129CED9ADA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8B24858-1D99-4519-9A1D-CF129CED9ADA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8B24858-1D99-4519-9A1D-CF129CED9ADA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8B24858-1D99-4519-9A1D-CF129CED9ADA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D81499E0-ED3E-4C85-9F8E-72C263AA24C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D81499E0-ED3E-4C85-9F8E-72C263AA24C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D81499E0-ED3E-4C85-9F8E-72C263AA24C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D81499E0-ED3E-4C85-9F8E-72C263AA24C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D08971DD-9DAD-4DE1-88CA-35EE30AB6B23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D08971DD-9DAD-4DE1-88CA-35EE30AB6B23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D08971DD-9DAD-4DE1-88CA-35EE30AB6B23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D08971DD-9DAD-4DE1-88CA-35EE30AB6B23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFB81561-9859-4FA2-86AD-0C6833488E41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFB81561-9859-4FA2-86AD-0C6833488E41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFB81561-9859-4FA2-86AD-0C6833488E41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFB81561-9859-4FA2-86AD-0C6833488E41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3623E8C3-4DFB-4635-801C-C577328937C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3623E8C3-4DFB-4635-801C-C577328937C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3623E8C3-4DFB-4635-801C-C577328937C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3623E8C3-4DFB-4635-801C-C577328937C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9AE8BF25-3ABF-402D-BC63-841E8588D20C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AE8BF25-3ABF-402D-BC63-841E8588D20C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AE8BF25-3ABF-402D-BC63-841E8588D20C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AE8BF25-3ABF-402D-BC63-841E8588D20C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
