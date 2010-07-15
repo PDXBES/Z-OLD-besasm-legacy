@@ -20,6 +20,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 		ConflictPackage _ConflictPackage;
 		#endregion
 
+    private static double BORINGJACKINGMULTIPLIER = 2.5;
+
 		#region Constructors
 		/// <summary>
 		/// Create boring jacking ancillary cost
@@ -69,7 +71,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 				pipeCoster.Material = _ConflictPackage.PipeMaterial;
 				pipeCoster.Depth = _ConflictPackage.Depth;
 
-				return (decimal)((double)pipeCoster.DirectConstructionCost * 3);
+        return (decimal)((double)pipeCoster.DirectConstructionCost * BORINGJACKINGMULTIPLIER);
 			} // get
 		} // UnitCost
 
