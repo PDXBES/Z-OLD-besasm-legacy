@@ -9,7 +9,7 @@
   <DownspoutDisconnectionCostPerAcre>2900</DownspoutDisconnectionCostPerAcre>
 	<EcoroofMinCost>7300</EcoroofMinCost>
   <EcoroofCostPerAcre>286000</EcoroofCostPerAcre>
-  <CurbExtensionMinCost>3700</CurbExtensionMinCost>
+  <CurbExtensionMinCost>8850</CurbExtensionMinCost>
   <CurbExtensionCostPerCuFt>49</CurbExtensionCostPerCuFt>
   <CurbExtensionMinCuFt>75</CurbExtensionMinCuFt>
   <CurbExtensionTrafficControl>1000</CurbExtensionTrafficControl>
