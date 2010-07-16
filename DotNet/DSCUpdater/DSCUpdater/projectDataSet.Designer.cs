@@ -782,6 +782,20 @@ namespace DSCUpdater {
             
             private global::System.Data.DataColumn columndsc_id;
             
+            private global::System.Data.DataColumn columnrno;
+            
+            private global::System.Data.DataColumn columnnew_roof_area_sqft;
+            
+            private global::System.Data.DataColumn columnnew_roof_disco_ic_area_sqft;
+            
+            private global::System.Data.DataColumn columnnew_roof_drywell_ic_area_sqft;
+            
+            private global::System.Data.DataColumn columnnew_park_area_sqft;
+            
+            private global::System.Data.DataColumn columnnew_park_disco_ic_area_sqft;
+            
+            private global::System.Data.DataColumn columnnew_park_drywell_ic_area_sqft;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public USERUPDATEDataTable() {
                 this.TableName = "USERUPDATE";
@@ -820,6 +834,55 @@ namespace DSCUpdater {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn rnoColumn {
+                get {
+                    return this.columnrno;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn new_roof_area_sqftColumn {
+                get {
+                    return this.columnnew_roof_area_sqft;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn new_roof_disco_ic_area_sqftColumn {
+                get {
+                    return this.columnnew_roof_disco_ic_area_sqft;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn new_roof_drywell_ic_area_sqftColumn {
+                get {
+                    return this.columnnew_roof_drywell_ic_area_sqft;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn new_park_area_sqftColumn {
+                get {
+                    return this.columnnew_park_area_sqft;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn new_park_disco_ic_area_sqftColumn {
+                get {
+                    return this.columnnew_park_disco_ic_area_sqft;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn new_park_drywell_ic_area_sqftColumn {
+                get {
+                    return this.columnnew_park_drywell_ic_area_sqft;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -848,13 +911,26 @@ namespace DSCUpdater {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public USERUPDATERow AddUSERUPDATERow(int dsc_id) {
+            public USERUPDATERow AddUSERUPDATERow(int dsc_id, string rno, int new_roof_area_sqft, int new_roof_disco_ic_area_sqft, int new_roof_drywell_ic_area_sqft, int new_park_area_sqft, int new_park_disco_ic_area_sqft, int new_park_drywell_ic_area_sqft) {
                 USERUPDATERow rowUSERUPDATERow = ((USERUPDATERow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
-                        dsc_id};
+                        dsc_id,
+                        rno,
+                        new_roof_area_sqft,
+                        new_roof_disco_ic_area_sqft,
+                        new_roof_drywell_ic_area_sqft,
+                        new_park_area_sqft,
+                        new_park_disco_ic_area_sqft,
+                        new_park_drywell_ic_area_sqft};
                 rowUSERUPDATERow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowUSERUPDATERow);
                 return rowUSERUPDATERow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public USERUPDATERow FindBydsc_id(int dsc_id) {
+                return ((USERUPDATERow)(this.Rows.Find(new object[] {
+                            dsc_id})));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -872,13 +948,38 @@ namespace DSCUpdater {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             internal void InitVars() {
                 this.columndsc_id = base.Columns["dsc_id"];
+                this.columnrno = base.Columns["rno"];
+                this.columnnew_roof_area_sqft = base.Columns["new_roof_area_sqft"];
+                this.columnnew_roof_disco_ic_area_sqft = base.Columns["new_roof_disco_ic_area_sqft"];
+                this.columnnew_roof_drywell_ic_area_sqft = base.Columns["new_roof_drywell_ic_area_sqft"];
+                this.columnnew_park_area_sqft = base.Columns["new_park_area_sqft"];
+                this.columnnew_park_disco_ic_area_sqft = base.Columns["new_park_disco_ic_area_sqft"];
+                this.columnnew_park_drywell_ic_area_sqft = base.Columns["new_park_drywell_ic_area_sqft"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             private void InitClass() {
                 this.columndsc_id = new global::System.Data.DataColumn("dsc_id", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columndsc_id);
+                this.columnrno = new global::System.Data.DataColumn("rno", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnrno);
+                this.columnnew_roof_area_sqft = new global::System.Data.DataColumn("new_roof_area_sqft", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnnew_roof_area_sqft);
+                this.columnnew_roof_disco_ic_area_sqft = new global::System.Data.DataColumn("new_roof_disco_ic_area_sqft", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnnew_roof_disco_ic_area_sqft);
+                this.columnnew_roof_drywell_ic_area_sqft = new global::System.Data.DataColumn("new_roof_drywell_ic_area_sqft", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnnew_roof_drywell_ic_area_sqft);
+                this.columnnew_park_area_sqft = new global::System.Data.DataColumn("new_park_area_sqft", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnnew_park_area_sqft);
+                this.columnnew_park_disco_ic_area_sqft = new global::System.Data.DataColumn("new_park_disco_ic_area_sqft", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnnew_park_disco_ic_area_sqft);
+                this.columnnew_park_drywell_ic_area_sqft = new global::System.Data.DataColumn("new_park_drywell_ic_area_sqft", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnnew_park_drywell_ic_area_sqft);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columndsc_id}, true));
                 this.columndsc_id.AllowDBNull = false;
+                this.columndsc_id.Unique = true;
+                this.columnrno.MaxLength = 2147483647;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4679,6 +4780,185 @@ namespace DSCUpdater {
                 set {
                     this[this.tableUSERUPDATE.dsc_idColumn] = value;
                 }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string rno {
+                get {
+                    try {
+                        return ((string)(this[this.tableUSERUPDATE.rnoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'rno\' in table \'USERUPDATE\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableUSERUPDATE.rnoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int new_roof_area_sqft {
+                get {
+                    try {
+                        return ((int)(this[this.tableUSERUPDATE.new_roof_area_sqftColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'new_roof_area_sqft\' in table \'USERUPDATE\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableUSERUPDATE.new_roof_area_sqftColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int new_roof_disco_ic_area_sqft {
+                get {
+                    try {
+                        return ((int)(this[this.tableUSERUPDATE.new_roof_disco_ic_area_sqftColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'new_roof_disco_ic_area_sqft\' in table \'USERUPDATE\' is DBNul" +
+                                "l.", e);
+                    }
+                }
+                set {
+                    this[this.tableUSERUPDATE.new_roof_disco_ic_area_sqftColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int new_roof_drywell_ic_area_sqft {
+                get {
+                    try {
+                        return ((int)(this[this.tableUSERUPDATE.new_roof_drywell_ic_area_sqftColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'new_roof_drywell_ic_area_sqft\' in table \'USERUPDATE\' is DBN" +
+                                "ull.", e);
+                    }
+                }
+                set {
+                    this[this.tableUSERUPDATE.new_roof_drywell_ic_area_sqftColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int new_park_area_sqft {
+                get {
+                    try {
+                        return ((int)(this[this.tableUSERUPDATE.new_park_area_sqftColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'new_park_area_sqft\' in table \'USERUPDATE\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableUSERUPDATE.new_park_area_sqftColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int new_park_disco_ic_area_sqft {
+                get {
+                    try {
+                        return ((int)(this[this.tableUSERUPDATE.new_park_disco_ic_area_sqftColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'new_park_disco_ic_area_sqft\' in table \'USERUPDATE\' is DBNul" +
+                                "l.", e);
+                    }
+                }
+                set {
+                    this[this.tableUSERUPDATE.new_park_disco_ic_area_sqftColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int new_park_drywell_ic_area_sqft {
+                get {
+                    try {
+                        return ((int)(this[this.tableUSERUPDATE.new_park_drywell_ic_area_sqftColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'new_park_drywell_ic_area_sqft\' in table \'USERUPDATE\' is DBN" +
+                                "ull.", e);
+                    }
+                }
+                set {
+                    this[this.tableUSERUPDATE.new_park_drywell_ic_area_sqftColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsrnoNull() {
+                return this.IsNull(this.tableUSERUPDATE.rnoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetrnoNull() {
+                this[this.tableUSERUPDATE.rnoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool Isnew_roof_area_sqftNull() {
+                return this.IsNull(this.tableUSERUPDATE.new_roof_area_sqftColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void Setnew_roof_area_sqftNull() {
+                this[this.tableUSERUPDATE.new_roof_area_sqftColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool Isnew_roof_disco_ic_area_sqftNull() {
+                return this.IsNull(this.tableUSERUPDATE.new_roof_disco_ic_area_sqftColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void Setnew_roof_disco_ic_area_sqftNull() {
+                this[this.tableUSERUPDATE.new_roof_disco_ic_area_sqftColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool Isnew_roof_drywell_ic_area_sqftNull() {
+                return this.IsNull(this.tableUSERUPDATE.new_roof_drywell_ic_area_sqftColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void Setnew_roof_drywell_ic_area_sqftNull() {
+                this[this.tableUSERUPDATE.new_roof_drywell_ic_area_sqftColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool Isnew_park_area_sqftNull() {
+                return this.IsNull(this.tableUSERUPDATE.new_park_area_sqftColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void Setnew_park_area_sqftNull() {
+                this[this.tableUSERUPDATE.new_park_area_sqftColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool Isnew_park_disco_ic_area_sqftNull() {
+                return this.IsNull(this.tableUSERUPDATE.new_park_disco_ic_area_sqftColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void Setnew_park_disco_ic_area_sqftNull() {
+                this[this.tableUSERUPDATE.new_park_disco_ic_area_sqftColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool Isnew_park_drywell_ic_area_sqftNull() {
+                return this.IsNull(this.tableUSERUPDATE.new_park_drywell_ic_area_sqftColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void Setnew_park_drywell_ic_area_sqftNull() {
+                this[this.tableUSERUPDATE.new_park_drywell_ic_area_sqftColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -8879,12 +9159,68 @@ SELECT edit_id, edit_date, edited_by FROM SESSION WHERE (edit_id = @edit_id)";
             tableMapping.SourceTable = "Table";
             tableMapping.DataSetTable = "USERUPDATE";
             tableMapping.ColumnMappings.Add("dsc_id", "dsc_id");
+            tableMapping.ColumnMappings.Add("rno", "rno");
+            tableMapping.ColumnMappings.Add("new_roof_area_sqft", "new_roof_area_sqft");
+            tableMapping.ColumnMappings.Add("new_roof_disco_ic_area_sqft", "new_roof_disco_ic_area_sqft");
+            tableMapping.ColumnMappings.Add("new_roof_drywell_ic_area_sqft", "new_roof_drywell_ic_area_sqft");
+            tableMapping.ColumnMappings.Add("new_park_area_sqft", "new_park_area_sqft");
+            tableMapping.ColumnMappings.Add("new_park_disco_ic_area_sqft", "new_park_disco_ic_area_sqft");
+            tableMapping.ColumnMappings.Add("new_park_drywell_ic_area_sqft", "new_park_drywell_ic_area_sqft");
             this._adapter.TableMappings.Add(tableMapping);
+            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.DeleteCommand.Connection = this.Connection;
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [USERUPDATE] WHERE (([dsc_id] = @Original_dsc_id) AND ((@IsNull_new_roof_area_sqft = 1 AND [new_roof_area_sqft] IS NULL) OR ([new_roof_area_sqft] = @Original_new_roof_area_sqft)) AND ((@IsNull_new_roof_disco_ic_area_sqft = 1 AND [new_roof_disco_ic_area_sqft] IS NULL) OR ([new_roof_disco_ic_area_sqft] = @Original_new_roof_disco_ic_area_sqft)) AND ((@IsNull_new_roof_drywell_ic_area_sqft = 1 AND [new_roof_drywell_ic_area_sqft] IS NULL) OR ([new_roof_drywell_ic_area_sqft] = @Original_new_roof_drywell_ic_area_sqft)) AND ((@IsNull_new_park_area_sqft = 1 AND [new_park_area_sqft] IS NULL) OR ([new_park_area_sqft] = @Original_new_park_area_sqft)) AND ((@IsNull_new_park_disco_ic_area_sqft = 1 AND [new_park_disco_ic_area_sqft] IS NULL) OR ([new_park_disco_ic_area_sqft] = @Original_new_park_disco_ic_area_sqft)) AND ((@IsNull_new_park_drywell_ic_area_sqft = 1 AND [new_park_drywell_ic_area_sqft] IS NULL) OR ([new_park_drywell_ic_area_sqft] = @Original_new_park_drywell_ic_area_sqft)))";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_dsc_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "dsc_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_new_roof_area_sqft", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "new_roof_area_sqft", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_new_roof_area_sqft", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "new_roof_area_sqft", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_new_roof_disco_ic_area_sqft", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "new_roof_disco_ic_area_sqft", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_new_roof_disco_ic_area_sqft", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "new_roof_disco_ic_area_sqft", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_new_roof_drywell_ic_area_sqft", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "new_roof_drywell_ic_area_sqft", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_new_roof_drywell_ic_area_sqft", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "new_roof_drywell_ic_area_sqft", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_new_park_area_sqft", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "new_park_area_sqft", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_new_park_area_sqft", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "new_park_area_sqft", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_new_park_disco_ic_area_sqft", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "new_park_disco_ic_area_sqft", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_new_park_disco_ic_area_sqft", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "new_park_disco_ic_area_sqft", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_new_park_drywell_ic_area_sqft", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "new_park_drywell_ic_area_sqft", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_new_park_drywell_ic_area_sqft", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "new_park_drywell_ic_area_sqft", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[USERUPDATE] ([dsc_id]) VALUES (@dsc_id)";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [USERUPDATE] ([rno], [dsc_id], [new_roof_area_sqft], [new_roof_disco_ic_area_sqft], [new_roof_drywell_ic_area_sqft], [new_park_area_sqft], [new_park_disco_ic_area_sqft], [new_park_drywell_ic_area_sqft]) VALUES (@rno, @dsc_id, @new_roof_area_sqft, @new_roof_disco_ic_area_sqft, @new_roof_drywell_ic_area_sqft, @new_park_area_sqft, @new_park_disco_ic_area_sqft, @new_park_drywell_ic_area_sqft)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@rno", global::System.Data.SqlDbType.Text, 0, global::System.Data.ParameterDirection.Input, 0, 0, "rno", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@dsc_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "dsc_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@new_roof_area_sqft", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "new_roof_area_sqft", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@new_roof_disco_ic_area_sqft", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "new_roof_disco_ic_area_sqft", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@new_roof_drywell_ic_area_sqft", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "new_roof_drywell_ic_area_sqft", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@new_park_area_sqft", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "new_park_area_sqft", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@new_park_disco_ic_area_sqft", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "new_park_disco_ic_area_sqft", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@new_park_drywell_ic_area_sqft", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "new_park_drywell_ic_area_sqft", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.UpdateCommand.Connection = this.Connection;
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [USERUPDATE] SET [rno] = @rno, [dsc_id] = @dsc_id, [new_roof_area_sqft] = @new_roof_area_sqft, [new_roof_disco_ic_area_sqft] = @new_roof_disco_ic_area_sqft, [new_roof_drywell_ic_area_sqft] = @new_roof_drywell_ic_area_sqft, [new_park_area_sqft] = @new_park_area_sqft, [new_park_disco_ic_area_sqft] = @new_park_disco_ic_area_sqft, [new_park_drywell_ic_area_sqft] = @new_park_drywell_ic_area_sqft WHERE (([dsc_id] = @Original_dsc_id) AND ((@IsNull_new_roof_area_sqft = 1 AND [new_roof_area_sqft] IS NULL) OR ([new_roof_area_sqft] = @Original_new_roof_area_sqft)) AND ((@IsNull_new_roof_disco_ic_area_sqft = 1 AND [new_roof_disco_ic_area_sqft] IS NULL) OR ([new_roof_disco_ic_area_sqft] = @Original_new_roof_disco_ic_area_sqft)) AND ((@IsNull_new_roof_drywell_ic_area_sqft = 1 AND [new_roof_drywell_ic_area_sqft] IS NULL) OR ([new_roof_drywell_ic_area_sqft] = @Original_new_roof_drywell_ic_area_sqft)) AND ((@IsNull_new_park_area_sqft = 1 AND [new_park_area_sqft] IS NULL) OR ([new_park_area_sqft] = @Original_new_park_area_sqft)) AND ((@IsNull_new_park_disco_ic_area_sqft = 1 AND [new_park_disco_ic_area_sqft] IS NULL) OR ([new_park_disco_ic_area_sqft] = @Original_new_park_disco_ic_area_sqft)) AND ((@IsNull_new_park_drywell_ic_area_sqft = 1 AND [new_park_drywell_ic_area_sqft] IS NULL) OR ([new_park_drywell_ic_area_sqft] = @Original_new_park_drywell_ic_area_sqft)))";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@rno", global::System.Data.SqlDbType.Text, 0, global::System.Data.ParameterDirection.Input, 0, 0, "rno", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@dsc_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "dsc_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@new_roof_area_sqft", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "new_roof_area_sqft", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@new_roof_disco_ic_area_sqft", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "new_roof_disco_ic_area_sqft", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@new_roof_drywell_ic_area_sqft", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "new_roof_drywell_ic_area_sqft", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@new_park_area_sqft", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "new_park_area_sqft", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@new_park_disco_ic_area_sqft", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "new_park_disco_ic_area_sqft", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@new_park_drywell_ic_area_sqft", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "new_park_drywell_ic_area_sqft", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_dsc_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "dsc_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_new_roof_area_sqft", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "new_roof_area_sqft", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_new_roof_area_sqft", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "new_roof_area_sqft", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_new_roof_disco_ic_area_sqft", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "new_roof_disco_ic_area_sqft", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_new_roof_disco_ic_area_sqft", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "new_roof_disco_ic_area_sqft", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_new_roof_drywell_ic_area_sqft", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "new_roof_drywell_ic_area_sqft", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_new_roof_drywell_ic_area_sqft", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "new_roof_drywell_ic_area_sqft", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_new_park_area_sqft", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "new_park_area_sqft", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_new_park_area_sqft", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "new_park_area_sqft", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_new_park_disco_ic_area_sqft", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "new_park_disco_ic_area_sqft", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_new_park_disco_ic_area_sqft", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "new_park_disco_ic_area_sqft", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_new_park_drywell_ic_area_sqft", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "new_park_drywell_ic_area_sqft", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_new_park_drywell_ic_area_sqft", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "new_park_drywell_ic_area_sqft", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -8898,7 +9234,7 @@ SELECT edit_id, edit_date, edited_by FROM SESSION WHERE (edit_id = @edit_id)";
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT dsc_id FROM dbo.USERUPDATE";
+            this._commandCollection[0].CommandText = "SELECT     USERUPDATE.*\r\nFROM         USERUPDATE";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -8951,9 +9287,120 @@ SELECT edit_id, edit_date, edited_by FROM SESSION WHERE (edit_id = @edit_id)";
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
+        public virtual int Delete(int Original_dsc_id, global::System.Nullable<int> Original_new_roof_area_sqft, global::System.Nullable<int> Original_new_roof_disco_ic_area_sqft, global::System.Nullable<int> Original_new_roof_drywell_ic_area_sqft, global::System.Nullable<int> Original_new_park_area_sqft, global::System.Nullable<int> Original_new_park_disco_ic_area_sqft, global::System.Nullable<int> Original_new_park_drywell_ic_area_sqft) {
+            this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_dsc_id));
+            if ((Original_new_roof_area_sqft.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[2].Value = ((int)(Original_new_roof_area_sqft.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            if ((Original_new_roof_disco_ic_area_sqft.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[4].Value = ((int)(Original_new_roof_disco_ic_area_sqft.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            if ((Original_new_roof_drywell_ic_area_sqft.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[6].Value = ((int)(Original_new_roof_drywell_ic_area_sqft.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            if ((Original_new_park_area_sqft.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[8].Value = ((int)(Original_new_park_area_sqft.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[8].Value = global::System.DBNull.Value;
+            }
+            if ((Original_new_park_disco_ic_area_sqft.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[10].Value = ((int)(Original_new_park_disco_ic_area_sqft.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[10].Value = global::System.DBNull.Value;
+            }
+            if ((Original_new_park_drywell_ic_area_sqft.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[11].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[12].Value = ((int)(Original_new_park_drywell_ic_area_sqft.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[11].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[12].Value = global::System.DBNull.Value;
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
+            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.DeleteCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.DeleteCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(int dsc_id) {
-            this.Adapter.InsertCommand.Parameters[0].Value = ((int)(dsc_id));
+        public virtual int Insert(string rno, int dsc_id, global::System.Nullable<int> new_roof_area_sqft, global::System.Nullable<int> new_roof_disco_ic_area_sqft, global::System.Nullable<int> new_roof_drywell_ic_area_sqft, global::System.Nullable<int> new_park_area_sqft, global::System.Nullable<int> new_park_disco_ic_area_sqft, global::System.Nullable<int> new_park_drywell_ic_area_sqft) {
+            if ((rno == null)) {
+                this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(rno));
+            }
+            this.Adapter.InsertCommand.Parameters[1].Value = ((int)(dsc_id));
+            if ((new_roof_area_sqft.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[2].Value = ((int)(new_roof_area_sqft.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            if ((new_roof_disco_ic_area_sqft.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[3].Value = ((int)(new_roof_disco_ic_area_sqft.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            if ((new_roof_drywell_ic_area_sqft.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[4].Value = ((int)(new_roof_drywell_ic_area_sqft.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            if ((new_park_area_sqft.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[5].Value = ((int)(new_park_area_sqft.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[5].Value = global::System.DBNull.Value;
+            }
+            if ((new_park_disco_ic_area_sqft.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[6].Value = ((int)(new_park_disco_ic_area_sqft.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            if ((new_park_drywell_ic_area_sqft.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[7].Value = ((int)(new_park_drywell_ic_area_sqft.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[7].Value = global::System.DBNull.Value;
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -8968,6 +9415,125 @@ SELECT edit_id, edit_date, edited_by FROM SESSION WHERE (edit_id = @edit_id)";
                     this.Adapter.InsertCommand.Connection.Close();
                 }
             }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(string rno, int dsc_id, global::System.Nullable<int> new_roof_area_sqft, global::System.Nullable<int> new_roof_disco_ic_area_sqft, global::System.Nullable<int> new_roof_drywell_ic_area_sqft, global::System.Nullable<int> new_park_area_sqft, global::System.Nullable<int> new_park_disco_ic_area_sqft, global::System.Nullable<int> new_park_drywell_ic_area_sqft, int Original_dsc_id, global::System.Nullable<int> Original_new_roof_area_sqft, global::System.Nullable<int> Original_new_roof_disco_ic_area_sqft, global::System.Nullable<int> Original_new_roof_drywell_ic_area_sqft, global::System.Nullable<int> Original_new_park_area_sqft, global::System.Nullable<int> Original_new_park_disco_ic_area_sqft, global::System.Nullable<int> Original_new_park_drywell_ic_area_sqft) {
+            if ((rno == null)) {
+                this.Adapter.UpdateCommand.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(rno));
+            }
+            this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(dsc_id));
+            if ((new_roof_area_sqft.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(new_roof_area_sqft.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            if ((new_roof_disco_ic_area_sqft.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(new_roof_disco_ic_area_sqft.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            if ((new_roof_drywell_ic_area_sqft.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(new_roof_drywell_ic_area_sqft.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            if ((new_park_area_sqft.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(new_park_area_sqft.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[5].Value = global::System.DBNull.Value;
+            }
+            if ((new_park_disco_ic_area_sqft.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((int)(new_park_disco_ic_area_sqft.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            if ((new_park_drywell_ic_area_sqft.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((int)(new_park_drywell_ic_area_sqft.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[8].Value = ((int)(Original_dsc_id));
+            if ((Original_new_roof_area_sqft.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((int)(Original_new_roof_area_sqft.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[10].Value = global::System.DBNull.Value;
+            }
+            if ((Original_new_roof_disco_ic_area_sqft.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[11].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[12].Value = ((int)(Original_new_roof_disco_ic_area_sqft.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[11].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[12].Value = global::System.DBNull.Value;
+            }
+            if ((Original_new_roof_drywell_ic_area_sqft.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[13].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[14].Value = ((int)(Original_new_roof_drywell_ic_area_sqft.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[13].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[14].Value = global::System.DBNull.Value;
+            }
+            if ((Original_new_park_area_sqft.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[15].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[16].Value = ((int)(Original_new_park_area_sqft.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[15].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[16].Value = global::System.DBNull.Value;
+            }
+            if ((Original_new_park_disco_ic_area_sqft.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[17].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[18].Value = ((int)(Original_new_park_disco_ic_area_sqft.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[17].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[18].Value = global::System.DBNull.Value;
+            }
+            if ((Original_new_park_drywell_ic_area_sqft.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[19].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[20].Value = ((int)(Original_new_park_drywell_ic_area_sqft.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[19].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[20].Value = global::System.DBNull.Value;
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
+            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.UpdateCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.UpdateCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(string rno, global::System.Nullable<int> new_roof_area_sqft, global::System.Nullable<int> new_roof_disco_ic_area_sqft, global::System.Nullable<int> new_roof_drywell_ic_area_sqft, global::System.Nullable<int> new_park_area_sqft, global::System.Nullable<int> new_park_disco_ic_area_sqft, global::System.Nullable<int> new_park_drywell_ic_area_sqft, int Original_dsc_id, global::System.Nullable<int> Original_new_roof_area_sqft, global::System.Nullable<int> Original_new_roof_disco_ic_area_sqft, global::System.Nullable<int> Original_new_roof_drywell_ic_area_sqft, global::System.Nullable<int> Original_new_park_area_sqft, global::System.Nullable<int> Original_new_park_disco_ic_area_sqft, global::System.Nullable<int> Original_new_park_drywell_ic_area_sqft) {
+            return this.Update(rno, Original_dsc_id, new_roof_area_sqft, new_roof_disco_ic_area_sqft, new_roof_drywell_ic_area_sqft, new_park_area_sqft, new_park_disco_ic_area_sqft, new_park_drywell_ic_area_sqft, Original_dsc_id, Original_new_roof_area_sqft, Original_new_roof_disco_ic_area_sqft, Original_new_roof_drywell_ic_area_sqft, Original_new_park_area_sqft, Original_new_park_disco_ic_area_sqft, Original_new_park_drywell_ic_area_sqft);
         }
     }
     
@@ -13916,112 +14482,99 @@ FROM         mst_dsc_ac";
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.OleDb.OleDbCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[mst_ic_DiscoVeg_ac] WHERE (([MAPINFO_ID] = @Original_MAPINFO_ID) AND ([dscID] = @Original_dscID) AND ((@IsNull_ParcelID = 1 AND [ParcelID] IS NULL) OR ([ParcelID] = @Original_ParcelID)) AND ((@IsNull_DivideID = 1 AND [DivideID] IS NULL) OR ([DivideID] = @Original_DivideID)) AND ([RoofRPark] = @Original_RoofRPark) AND ([assumekey] = @Original_assumekey) AND ((@IsNull_TimeFrame = 1 AND [TimeFrame] IS NULL) OR ([TimeFrame] = @Original_TimeFrame)) AND ((@IsNull_ApplyAreaTF = 1 AND [ApplyAreaTF] IS NULL) OR ([ApplyAreaTF] = @Original_ApplyAreaTF)) AND ((@IsNull_ValidFromDate = 1 AND [ValidFromDate] IS NULL) OR ([ValidFromDate] = @Original_ValidFromDate)) AND ((@IsNull_ValidToDate = 1 AND [ValidToDate] IS NULL) OR ([ValidToDate] = @Original_ValidToDate)) AND ((@IsNull_SqFt = 1 AND [SqFt] IS NULL) OR ([SqFt] = @Original_SqFt)) AND ((@IsNull_Effectiveness = 1 AND [Effectiveness] IS NULL) OR ([Effectiveness] = @Original_Effectiveness)) AND ((@IsNull_Comment = 1 AND [Comment] IS NULL) OR ([Comment] = @Original_Comment)) AND ((@IsNull_AppendDate = 1 AND [AppendDate] IS NULL) OR ([AppendDate] = @Original_AppendDate)))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM `mst_ic_DiscoVeg_ac` WHERE ((`MAPINFO_ID` = ?) AND ((? = 1 AND `dscID` IS NULL) OR (`dscID` = ?)) AND ((? = 1 AND `ParcelID` IS NULL) OR (`ParcelID` = ?)) AND ((? = 1 AND `DivideID` IS NULL) OR (`DivideID` = ?)) AND ((? = 1 AND `RoofRPark` IS NULL) OR (`RoofRPark` = ?)) AND ((? = 1 AND `assumekey` IS NULL) OR (`assumekey` = ?)) AND ((? = 1 AND `TimeFrame` IS NULL) OR (`TimeFrame` = ?)) AND ((? = 1 AND `ApplyAreaTF` IS NULL) OR (`ApplyAreaTF` = ?)) AND ((? = 1 AND `ValidFromDate` IS NULL) OR (`ValidFromDate` = ?)) AND ((? = 1 AND `ValidToDate` IS NULL) OR (`ValidToDate` = ?)) AND ((? = 1 AND `SqFt` IS NULL) OR (`SqFt` = ?)) AND ((? = 1 AND `Effectiveness` IS NULL) OR (`Effectiveness` = ?)) AND ((? = 1 AND `Comment` IS NULL) OR (`Comment` = ?)) AND ((? = 1 AND `AppendDate` IS NULL) OR (`AppendDate` = ?)))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@Original_MAPINFO_ID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "MAPINFO_ID", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@Original_dscID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "dscID", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@IsNull_ParcelID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ParcelID", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@Original_ParcelID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ParcelID", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@IsNull_DivideID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "DivideID", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@Original_DivideID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "DivideID", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@Original_RoofRPark", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "RoofRPark", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@Original_assumekey", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "assumekey", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@IsNull_TimeFrame", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "TimeFrame", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@Original_TimeFrame", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "TimeFrame", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@IsNull_ApplyAreaTF", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ApplyAreaTF", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@Original_ApplyAreaTF", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ApplyAreaTF", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@IsNull_ValidFromDate", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ValidFromDate", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@Original_ValidFromDate", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ValidFromDate", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@IsNull_ValidToDate", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ValidToDate", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@Original_ValidToDate", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ValidToDate", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@IsNull_SqFt", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "SqFt", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@Original_SqFt", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "SqFt", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@IsNull_Effectiveness", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Effectiveness", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@Original_Effectiveness", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Effectiveness", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@IsNull_Comment", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Comment", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@Original_Comment", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Comment", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@IsNull_AppendDate", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "AppendDate", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@Original_AppendDate", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "AppendDate", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_MAPINFO_ID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "MAPINFO_ID", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_dscID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "dscID", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_dscID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "dscID", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_ParcelID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ParcelID", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_ParcelID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ParcelID", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_DivideID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "DivideID", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_DivideID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "DivideID", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_RoofRPark", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "RoofRPark", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_RoofRPark", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "RoofRPark", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_assumekey", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "assumekey", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_assumekey", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "assumekey", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_TimeFrame", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "TimeFrame", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_TimeFrame", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "TimeFrame", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_ApplyAreaTF", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ApplyAreaTF", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_ApplyAreaTF", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ApplyAreaTF", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_ValidFromDate", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ValidFromDate", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_ValidFromDate", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ValidFromDate", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_ValidToDate", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ValidToDate", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_ValidToDate", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ValidToDate", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_SqFt", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "SqFt", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_SqFt", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "SqFt", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_Effectiveness", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Effectiveness", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_Effectiveness", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Effectiveness", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_Comment", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Comment", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_Comment", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Comment", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_AppendDate", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "AppendDate", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_AppendDate", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "AppendDate", global::System.Data.DataRowVersion.Original, false, null));
             this._adapter.InsertCommand = new global::System.Data.OleDb.OleDbCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[mst_ic_DiscoVeg_ac] ([dscID], [ParcelID], [DivideID], [RoofRPark], [assumekey], [TimeFrame], [ApplyAreaTF], [ValidFromDate], [ValidToDate], [SqFt], [Effectiveness], [Comment], [AppendDate]) VALUES (@dscID, @ParcelID, @DivideID, @RoofRPark, @assumekey, @TimeFrame, @ApplyAreaTF, @ValidFromDate, @ValidToDate, @SqFt, @Effectiveness, @Comment, @AppendDate);
-SELECT MAPINFO_ID, dscID, ParcelID, DivideID, RoofRPark, assumekey, TimeFrame, ApplyAreaTF, ValidFromDate, ValidToDate, SqFt, Effectiveness, Comment, AppendDate FROM mst_ic_DiscoVeg_ac WHERE (RoofRPark = @RoofRPark) AND (assumekey = @assumekey) AND (dscID = @dscID)";
+            this._adapter.InsertCommand.CommandText = "INSERT INTO `mst_ic_DiscoVeg_ac` (`dscID`, `ParcelID`, `DivideID`, `RoofRPark`, `" +
+                "assumekey`, `TimeFrame`, `ApplyAreaTF`, `ValidFromDate`, `ValidToDate`, `SqFt`, " +
+                "`Effectiveness`, `Comment`, `AppendDate`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, " +
+                "?, ?, ?)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@dscID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "dscID", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@ParcelID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ParcelID", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@DivideID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "DivideID", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@RoofRPark", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "RoofRPark", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@assumekey", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "assumekey", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@TimeFrame", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "TimeFrame", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@ApplyAreaTF", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ApplyAreaTF", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@ValidFromDate", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ValidFromDate", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@ValidToDate", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ValidToDate", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@SqFt", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "SqFt", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@Effectiveness", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Effectiveness", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@Comment", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Comment", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@AppendDate", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "AppendDate", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("dscID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "dscID", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("ParcelID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ParcelID", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("DivideID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "DivideID", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("RoofRPark", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "RoofRPark", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("assumekey", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "assumekey", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("TimeFrame", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "TimeFrame", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("ApplyAreaTF", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ApplyAreaTF", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("ValidFromDate", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ValidFromDate", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("ValidToDate", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ValidToDate", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("SqFt", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "SqFt", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Effectiveness", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Effectiveness", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Comment", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Comment", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("AppendDate", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "AppendDate", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.UpdateCommand = new global::System.Data.OleDb.OleDbCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = "UPDATE [dbo].[mst_ic_DiscoVeg_ac] SET [dscID] = @dscID, [ParcelID] = @ParcelID, [" +
-                "DivideID] = @DivideID, [RoofRPark] = @RoofRPark, [assumekey] = @assumekey, [Time" +
-                "Frame] = @TimeFrame, [ApplyAreaTF] = @ApplyAreaTF, [ValidFromDate] = @ValidFromD" +
-                "ate, [ValidToDate] = @ValidToDate, [SqFt] = @SqFt, [Effectiveness] = @Effectiven" +
-                "ess, [Comment] = @Comment, [AppendDate] = @AppendDate WHERE (([MAPINFO_ID] = @Or" +
-                "iginal_MAPINFO_ID) AND ([dscID] = @Original_dscID) AND ((@IsNull_ParcelID = 1 AN" +
-                "D [ParcelID] IS NULL) OR ([ParcelID] = @Original_ParcelID)) AND ((@IsNull_Divide" +
-                "ID = 1 AND [DivideID] IS NULL) OR ([DivideID] = @Original_DivideID)) AND ([RoofR" +
-                "Park] = @Original_RoofRPark) AND ([assumekey] = @Original_assumekey) AND ((@IsNu" +
-                "ll_TimeFrame = 1 AND [TimeFrame] IS NULL) OR ([TimeFrame] = @Original_TimeFrame)" +
-                ") AND ((@IsNull_ApplyAreaTF = 1 AND [ApplyAreaTF] IS NULL) OR ([ApplyAreaTF] = @" +
-                "Original_ApplyAreaTF)) AND ((@IsNull_ValidFromDate = 1 AND [ValidFromDate] IS NU" +
-                "LL) OR ([ValidFromDate] = @Original_ValidFromDate)) AND ((@IsNull_ValidToDate = " +
-                "1 AND [ValidToDate] IS NULL) OR ([ValidToDate] = @Original_ValidToDate)) AND ((@" +
-                "IsNull_SqFt = 1 AND [SqFt] IS NULL) OR ([SqFt] = @Original_SqFt)) AND ((@IsNull_" +
-                "Effectiveness = 1 AND [Effectiveness] IS NULL) OR ([Effectiveness] = @Original_E" +
-                "ffectiveness)) AND ((@IsNull_Comment = 1 AND [Comment] IS NULL) OR ([Comment] = " +
-                "@Original_Comment)) AND ((@IsNull_AppendDate = 1 AND [AppendDate] IS NULL) OR ([" +
-                "AppendDate] = @Original_AppendDate)));\r\nSELECT MAPINFO_ID, dscID, ParcelID, Divi" +
-                "deID, RoofRPark, assumekey, TimeFrame, ApplyAreaTF, ValidFromDate, ValidToDate, " +
-                "SqFt, Effectiveness, Comment, AppendDate FROM mst_ic_DiscoVeg_ac WHERE (RoofRPar" +
-                "k = @RoofRPark) AND (assumekey = @assumekey) AND (dscID = @dscID)";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE `mst_ic_DiscoVeg_ac` SET `dscID` = ?, `ParcelID` = ?, `DivideID` = ?, `RoofRPark` = ?, `assumekey` = ?, `TimeFrame` = ?, `ApplyAreaTF` = ?, `ValidFromDate` = ?, `ValidToDate` = ?, `SqFt` = ?, `Effectiveness` = ?, `Comment` = ?, `AppendDate` = ? WHERE ((`MAPINFO_ID` = ?) AND ((? = 1 AND `dscID` IS NULL) OR (`dscID` = ?)) AND ((? = 1 AND `ParcelID` IS NULL) OR (`ParcelID` = ?)) AND ((? = 1 AND `DivideID` IS NULL) OR (`DivideID` = ?)) AND ((? = 1 AND `RoofRPark` IS NULL) OR (`RoofRPark` = ?)) AND ((? = 1 AND `assumekey` IS NULL) OR (`assumekey` = ?)) AND ((? = 1 AND `TimeFrame` IS NULL) OR (`TimeFrame` = ?)) AND ((? = 1 AND `ApplyAreaTF` IS NULL) OR (`ApplyAreaTF` = ?)) AND ((? = 1 AND `ValidFromDate` IS NULL) OR (`ValidFromDate` = ?)) AND ((? = 1 AND `ValidToDate` IS NULL) OR (`ValidToDate` = ?)) AND ((? = 1 AND `SqFt` IS NULL) OR (`SqFt` = ?)) AND ((? = 1 AND `Effectiveness` IS NULL) OR (`Effectiveness` = ?)) AND ((? = 1 AND `Comment` IS NULL) OR (`Comment` = ?)) AND ((? = 1 AND `AppendDate` IS NULL) OR (`AppendDate` = ?)))";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@dscID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "dscID", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@ParcelID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ParcelID", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@DivideID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "DivideID", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@RoofRPark", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "RoofRPark", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@assumekey", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "assumekey", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@TimeFrame", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "TimeFrame", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@ApplyAreaTF", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ApplyAreaTF", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@ValidFromDate", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ValidFromDate", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@ValidToDate", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ValidToDate", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@SqFt", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "SqFt", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@Effectiveness", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Effectiveness", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@Comment", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Comment", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@AppendDate", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "AppendDate", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@Original_MAPINFO_ID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "MAPINFO_ID", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@Original_dscID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "dscID", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@IsNull_ParcelID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ParcelID", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@Original_ParcelID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ParcelID", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@IsNull_DivideID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "DivideID", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@Original_DivideID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "DivideID", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@Original_RoofRPark", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "RoofRPark", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@Original_assumekey", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "assumekey", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@IsNull_TimeFrame", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "TimeFrame", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@Original_TimeFrame", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "TimeFrame", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@IsNull_ApplyAreaTF", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ApplyAreaTF", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@Original_ApplyAreaTF", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ApplyAreaTF", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@IsNull_ValidFromDate", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ValidFromDate", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@Original_ValidFromDate", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ValidFromDate", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@IsNull_ValidToDate", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ValidToDate", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@Original_ValidToDate", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ValidToDate", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@IsNull_SqFt", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "SqFt", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@Original_SqFt", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "SqFt", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@IsNull_Effectiveness", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Effectiveness", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@Original_Effectiveness", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Effectiveness", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@IsNull_Comment", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Comment", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@Original_Comment", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Comment", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@IsNull_AppendDate", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "AppendDate", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("@Original_AppendDate", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "AppendDate", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("dscID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "dscID", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("ParcelID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ParcelID", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("DivideID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "DivideID", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("RoofRPark", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "RoofRPark", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("assumekey", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "assumekey", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("TimeFrame", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "TimeFrame", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("ApplyAreaTF", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ApplyAreaTF", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("ValidFromDate", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ValidFromDate", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("ValidToDate", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ValidToDate", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("SqFt", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "SqFt", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Effectiveness", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Effectiveness", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Comment", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Comment", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("AppendDate", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "AppendDate", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_MAPINFO_ID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "MAPINFO_ID", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_dscID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "dscID", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_dscID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "dscID", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_ParcelID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ParcelID", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_ParcelID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ParcelID", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_DivideID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "DivideID", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_DivideID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "DivideID", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_RoofRPark", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "RoofRPark", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_RoofRPark", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "RoofRPark", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_assumekey", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "assumekey", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_assumekey", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "assumekey", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_TimeFrame", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "TimeFrame", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_TimeFrame", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "TimeFrame", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_ApplyAreaTF", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ApplyAreaTF", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_ApplyAreaTF", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ApplyAreaTF", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_ValidFromDate", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ValidFromDate", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_ValidFromDate", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ValidFromDate", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_ValidToDate", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ValidToDate", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_ValidToDate", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "ValidToDate", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_SqFt", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "SqFt", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_SqFt", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "SqFt", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_Effectiveness", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Effectiveness", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_Effectiveness", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Effectiveness", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_Comment", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Comment", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_Comment", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Comment", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_AppendDate", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "AppendDate", global::System.Data.DataRowVersion.Original, true, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_AppendDate", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "AppendDate", global::System.Data.DataRowVersion.Original, false, null));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -14035,9 +14588,9 @@ SELECT MAPINFO_ID, dscID, ParcelID, DivideID, RoofRPark, assumekey, TimeFrame, A
             this._commandCollection = new global::System.Data.OleDb.OleDbCommand[1];
             this._commandCollection[0] = new global::System.Data.OleDb.OleDbCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT MAPINFO_ID, dscID, ParcelID, DivideID, RoofRPark, assumekey, TimeFrame, Ap" +
-                "plyAreaTF, ValidFromDate, ValidToDate, SqFt, Effectiveness, Comment, AppendDate " +
-                "FROM dbo.mst_ic_DiscoVeg_ac";
+            this._commandCollection[0].CommandText = "SELECT     MAPINFO_ID, dscID, ParcelID, DivideID, RoofRPark, assumekey, TimeFrame" +
+                ", ApplyAreaTF, ValidFromDate, ValidToDate, SqFt, Effectiveness, Comment,\r\n      " +
+                "                 AppendDate\r\nFROM         mst_ic_DiscoVeg_ac";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -14086,458 +14639,6 @@ SELECT MAPINFO_ID, dscID, ParcelID, DivideID, RoofRPark, assumekey, TimeFrame, A
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         public virtual int Update(global::System.Data.DataRow[] dataRows) {
             return this.Adapter.Update(dataRows);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int @Original_MAPINFO_ID, int @Original_dscID, global::System.Nullable<int> @Original_ParcelID, global::System.Nullable<int> @Original_DivideID, string @Original_RoofRPark, string @Original_assumekey, string @Original_TimeFrame, string @Original_ApplyAreaTF, string @Original_ValidFromDate, string @Original_ValidToDate, global::System.Nullable<int> @Original_SqFt, global::System.Nullable<double> @Original_Effectiveness, string @Original_Comment, string @Original_AppendDate) {
-            this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(@Original_MAPINFO_ID));
-            this.Adapter.DeleteCommand.Parameters[1].Value = ((int)(@Original_dscID));
-            if ((@Original_ParcelID.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[2].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((int)(@Original_ParcelID.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[2].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            if ((@Original_DivideID.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((int)(@Original_DivideID.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[5].Value = global::System.DBNull.Value;
-            }
-            if ((@Original_RoofRPark == null)) {
-                throw new global::System.ArgumentNullException("@Original_RoofRPark");
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[6].Value = ((string)(@Original_RoofRPark));
-            }
-            if ((@Original_assumekey == null)) {
-                throw new global::System.ArgumentNullException("@Original_assumekey");
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[7].Value = ((string)(@Original_assumekey));
-            }
-            if ((@Original_TimeFrame == null)) {
-                this.Adapter.DeleteCommand.Parameters[8].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[9].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[8].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[9].Value = ((string)(@Original_TimeFrame));
-            }
-            if ((@Original_ApplyAreaTF == null)) {
-                this.Adapter.DeleteCommand.Parameters[10].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[11].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[10].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[11].Value = ((string)(@Original_ApplyAreaTF));
-            }
-            if ((@Original_ValidFromDate == null)) {
-                this.Adapter.DeleteCommand.Parameters[12].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[13].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[12].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[13].Value = ((string)(@Original_ValidFromDate));
-            }
-            if ((@Original_ValidToDate == null)) {
-                this.Adapter.DeleteCommand.Parameters[14].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[15].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[14].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[15].Value = ((string)(@Original_ValidToDate));
-            }
-            if ((@Original_SqFt.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[16].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[17].Value = ((int)(@Original_SqFt.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[16].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[17].Value = global::System.DBNull.Value;
-            }
-            if ((@Original_Effectiveness.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[18].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[19].Value = ((double)(@Original_Effectiveness.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[18].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[19].Value = global::System.DBNull.Value;
-            }
-            if ((@Original_Comment == null)) {
-                this.Adapter.DeleteCommand.Parameters[20].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[21].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[20].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[21].Value = ((string)(@Original_Comment));
-            }
-            if ((@Original_AppendDate == null)) {
-                this.Adapter.DeleteCommand.Parameters[22].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[23].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[22].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[23].Value = ((string)(@Original_AppendDate));
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
-            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.DeleteCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.DeleteCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(int @dscID, global::System.Nullable<int> @ParcelID, global::System.Nullable<int> @DivideID, string @RoofRPark, string @assumekey, string @TimeFrame, string @ApplyAreaTF, string @ValidFromDate, string @ValidToDate, global::System.Nullable<int> @SqFt, global::System.Nullable<double> @Effectiveness, string @Comment, string @AppendDate) {
-            this.Adapter.InsertCommand.Parameters[0].Value = ((int)(@dscID));
-            if ((@ParcelID.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[1].Value = ((int)(@ParcelID.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
-            if ((@DivideID.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[2].Value = ((int)(@DivideID.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            if ((@RoofRPark == null)) {
-                throw new global::System.ArgumentNullException("@RoofRPark");
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[3].Value = ((string)(@RoofRPark));
-            }
-            if ((@assumekey == null)) {
-                throw new global::System.ArgumentNullException("@assumekey");
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[4].Value = ((string)(@assumekey));
-            }
-            if ((@TimeFrame == null)) {
-                this.Adapter.InsertCommand.Parameters[5].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[5].Value = ((string)(@TimeFrame));
-            }
-            if ((@ApplyAreaTF == null)) {
-                this.Adapter.InsertCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[6].Value = ((string)(@ApplyAreaTF));
-            }
-            if ((@ValidFromDate == null)) {
-                this.Adapter.InsertCommand.Parameters[7].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[7].Value = ((string)(@ValidFromDate));
-            }
-            if ((@ValidToDate == null)) {
-                this.Adapter.InsertCommand.Parameters[8].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[8].Value = ((string)(@ValidToDate));
-            }
-            if ((@SqFt.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[9].Value = ((int)(@SqFt.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[9].Value = global::System.DBNull.Value;
-            }
-            if ((@Effectiveness.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[10].Value = ((double)(@Effectiveness.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[10].Value = global::System.DBNull.Value;
-            }
-            if ((@Comment == null)) {
-                this.Adapter.InsertCommand.Parameters[11].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[11].Value = ((string)(@Comment));
-            }
-            if ((@AppendDate == null)) {
-                this.Adapter.InsertCommand.Parameters[12].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[12].Value = ((string)(@AppendDate));
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
-            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.InsertCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.InsertCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(
-                    int @dscID, 
-                    global::System.Nullable<int> @ParcelID, 
-                    global::System.Nullable<int> @DivideID, 
-                    string @RoofRPark, 
-                    string @assumekey, 
-                    string @TimeFrame, 
-                    string @ApplyAreaTF, 
-                    string @ValidFromDate, 
-                    string @ValidToDate, 
-                    global::System.Nullable<int> @SqFt, 
-                    global::System.Nullable<double> @Effectiveness, 
-                    string @Comment, 
-                    string @AppendDate, 
-                    int @Original_MAPINFO_ID, 
-                    int @Original_dscID, 
-                    global::System.Nullable<int> @Original_ParcelID, 
-                    global::System.Nullable<int> @Original_DivideID, 
-                    string @Original_RoofRPark, 
-                    string @Original_assumekey, 
-                    string @Original_TimeFrame, 
-                    string @Original_ApplyAreaTF, 
-                    string @Original_ValidFromDate, 
-                    string @Original_ValidToDate, 
-                    global::System.Nullable<int> @Original_SqFt, 
-                    global::System.Nullable<double> @Original_Effectiveness, 
-                    string @Original_Comment, 
-                    string @Original_AppendDate) {
-            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(@dscID));
-            if ((@ParcelID.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(@ParcelID.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
-            if ((@DivideID.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(@DivideID.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            if ((@RoofRPark == null)) {
-                throw new global::System.ArgumentNullException("@RoofRPark");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[3].Value = ((string)(@RoofRPark));
-            }
-            if ((@assumekey == null)) {
-                throw new global::System.ArgumentNullException("@assumekey");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((string)(@assumekey));
-            }
-            if ((@TimeFrame == null)) {
-                this.Adapter.UpdateCommand.Parameters[5].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((string)(@TimeFrame));
-            }
-            if ((@ApplyAreaTF == null)) {
-                this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((string)(@ApplyAreaTF));
-            }
-            if ((@ValidFromDate == null)) {
-                this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((string)(@ValidFromDate));
-            }
-            if ((@ValidToDate == null)) {
-                this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((string)(@ValidToDate));
-            }
-            if ((@SqFt.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((int)(@SqFt.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[9].Value = global::System.DBNull.Value;
-            }
-            if ((@Effectiveness.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((double)(@Effectiveness.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[10].Value = global::System.DBNull.Value;
-            }
-            if ((@Comment == null)) {
-                this.Adapter.UpdateCommand.Parameters[11].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[11].Value = ((string)(@Comment));
-            }
-            if ((@AppendDate == null)) {
-                this.Adapter.UpdateCommand.Parameters[12].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((string)(@AppendDate));
-            }
-            this.Adapter.UpdateCommand.Parameters[13].Value = ((int)(@Original_MAPINFO_ID));
-            this.Adapter.UpdateCommand.Parameters[14].Value = ((int)(@Original_dscID));
-            if ((@Original_ParcelID.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[15].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[16].Value = ((int)(@Original_ParcelID.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[15].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[16].Value = global::System.DBNull.Value;
-            }
-            if ((@Original_DivideID.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[17].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[18].Value = ((int)(@Original_DivideID.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[17].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[18].Value = global::System.DBNull.Value;
-            }
-            if ((@Original_RoofRPark == null)) {
-                throw new global::System.ArgumentNullException("@Original_RoofRPark");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[19].Value = ((string)(@Original_RoofRPark));
-            }
-            if ((@Original_assumekey == null)) {
-                throw new global::System.ArgumentNullException("@Original_assumekey");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[20].Value = ((string)(@Original_assumekey));
-            }
-            if ((@Original_TimeFrame == null)) {
-                this.Adapter.UpdateCommand.Parameters[21].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[22].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[21].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[22].Value = ((string)(@Original_TimeFrame));
-            }
-            if ((@Original_ApplyAreaTF == null)) {
-                this.Adapter.UpdateCommand.Parameters[23].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[24].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[23].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[24].Value = ((string)(@Original_ApplyAreaTF));
-            }
-            if ((@Original_ValidFromDate == null)) {
-                this.Adapter.UpdateCommand.Parameters[25].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[26].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[25].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[26].Value = ((string)(@Original_ValidFromDate));
-            }
-            if ((@Original_ValidToDate == null)) {
-                this.Adapter.UpdateCommand.Parameters[27].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[28].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[27].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[28].Value = ((string)(@Original_ValidToDate));
-            }
-            if ((@Original_SqFt.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[29].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[30].Value = ((int)(@Original_SqFt.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[29].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[30].Value = global::System.DBNull.Value;
-            }
-            if ((@Original_Effectiveness.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[31].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[32].Value = ((double)(@Original_Effectiveness.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[31].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[32].Value = global::System.DBNull.Value;
-            }
-            if ((@Original_Comment == null)) {
-                this.Adapter.UpdateCommand.Parameters[33].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[34].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[33].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[34].Value = ((string)(@Original_Comment));
-            }
-            if ((@Original_AppendDate == null)) {
-                this.Adapter.UpdateCommand.Parameters[35].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[36].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[35].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[36].Value = ((string)(@Original_AppendDate));
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
-            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.UpdateCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.UpdateCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(
-                    global::System.Nullable<int> @ParcelID, 
-                    global::System.Nullable<int> @DivideID, 
-                    string @TimeFrame, 
-                    string @ApplyAreaTF, 
-                    string @ValidFromDate, 
-                    string @ValidToDate, 
-                    global::System.Nullable<int> @SqFt, 
-                    global::System.Nullable<double> @Effectiveness, 
-                    string @Comment, 
-                    string @AppendDate, 
-                    int @Original_MAPINFO_ID, 
-                    int @Original_dscID, 
-                    global::System.Nullable<int> @Original_ParcelID, 
-                    global::System.Nullable<int> @Original_DivideID, 
-                    string @Original_RoofRPark, 
-                    string @Original_assumekey, 
-                    string @Original_TimeFrame, 
-                    string @Original_ApplyAreaTF, 
-                    string @Original_ValidFromDate, 
-                    string @Original_ValidToDate, 
-                    global::System.Nullable<int> @Original_SqFt, 
-                    global::System.Nullable<double> @Original_Effectiveness, 
-                    string @Original_Comment, 
-                    string @Original_AppendDate) {
-            return this.Update(@Original_dscID, @ParcelID, @DivideID, @Original_RoofRPark, @Original_assumekey, @TimeFrame, @ApplyAreaTF, @ValidFromDate, @ValidToDate, @SqFt, @Effectiveness, @Comment, @AppendDate, @Original_MAPINFO_ID, @Original_dscID, @Original_ParcelID, @Original_DivideID, @Original_RoofRPark, @Original_assumekey, @Original_TimeFrame, @Original_ApplyAreaTF, @Original_ValidFromDate, @Original_ValidToDate, @Original_SqFt, @Original_Effectiveness, @Original_Comment, @Original_AppendDate);
         }
     }
     
