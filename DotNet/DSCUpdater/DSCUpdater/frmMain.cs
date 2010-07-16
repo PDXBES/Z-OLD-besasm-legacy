@@ -29,17 +29,6 @@ namespace DSCUpdater
 {
   public partial class frmMain : Form
   {
-    public int newRoofDrywellArea = 0;
-    public int newRoofDISCOICArea = 0;
-    public int newParkDrywellICArea = 0;
-    public int newParkDISCOICArea = 0;
-    public int newParkICArea = 0;
-    public int newRoofICArea = 0;
-    public int newRoofArea = 0;
-    public int newParkArea = 0;
-    public int selectedIndex = 0;
-    public int impAQCCounter = 0;
-
     SqlDataAdapter daUpdaterEditor;
     DataTable dtUpdaterEditor;
 
@@ -167,40 +156,6 @@ namespace DSCUpdater
       sqlCon.Close();
     }
 
-    private void ReadData()
-    {
-      string tempPath = "C:";
-      string strCon = @"Driver={Microsoft Text Driver (*.txt; *.csv)};Dbq=" + tempPath + @"\;Extensions=asc,csv,tab,txt";
-      OdbcConnection con = new OdbcConnection(strCon);
-      OdbcDataAdapter da = new OdbcDataAdapter("Select [RNO],[DSCID],[New Roof Area], [New Roof DISCO IC Area],[New Roof Drywell IC Area], [New Park Area], [New Park DISCO IC Area], [New Park Drywell IC Area] from temp.csv", con);
-      DataTable dt1 = new DataTable();
-      da.Fill(dt1);
-
-      dgvData.DataSource = dt1;
-      dgvData.Columns[0].Width = 75;
-      dgvData.Columns[1].Width = 75;
-      dgvData.Columns[2].Width = 50;
-      dgvData.Columns[3].Width = 50;
-      dgvData.Columns[4].Width = 50;
-      dgvData.Columns[5].Width = 50;
-      dgvData.Columns[6].Width = 50;
-      dgvData.Columns[7].Width = 50;
-      dgvData.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-      dgvData.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-      dgvData.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-      dgvData.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-      dgvData.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-      dgvData.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-      dgvData.Columns[6].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-      dgvData.Columns[7].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-      dgvData.Columns[0].DefaultCellStyle.Format = "T";
-
-      foreach (DataGridViewColumn col in dgvData.Columns)
-      {
-        col.SortMode = DataGridViewColumnSortMode.NotSortable;
-      }
-    }
-
     private static void AddEditDateCommandParameter(SqlCommand sqlCmd, SqlConnection sqlCon)
     {
       //add editDate parameter to SQL command sqlCmd
@@ -297,7 +252,7 @@ namespace DSCUpdater
       SqlParameter pNewParkArea = sqlCmd.CreateParameter();
       pNewParkArea.ParameterName = "@newParkArea";
       pNewParkArea.SqlDbType = SqlDbType.Int;
-      pNewParkArea.Value = newParkArea;
+      pNewParkArea.Value = 0;//newParkArea;
       pNewParkArea.Direction = ParameterDirection.Input;
       sqlCmd.Parameters.Add(pNewParkArea);
       //sqlCmd.CommandTimeout = 300;
@@ -311,7 +266,7 @@ namespace DSCUpdater
       SqlParameter pNewParkDISCOArea = sqlCmd.CreateParameter();
       pNewParkDISCOArea.ParameterName = "@newParkDISCOArea";
       pNewParkDISCOArea.SqlDbType = SqlDbType.Int;
-      pNewParkDISCOArea.Value = newParkDISCOICArea;
+      pNewParkDISCOArea.Value = 0;// newParkDISCOICArea;
       pNewParkDISCOArea.Direction = ParameterDirection.Input;
       sqlCmd.Parameters.Add(pNewParkDISCOArea);
       //sqlCmd.CommandTimeout = 300;
@@ -325,7 +280,7 @@ namespace DSCUpdater
       SqlParameter pNewParkDrywellArea = sqlCmd.CreateParameter();
       pNewParkDrywellArea.ParameterName = "@newParkDrywellArea";
       pNewParkDrywellArea.SqlDbType = SqlDbType.Int;
-      pNewParkDrywellArea.Value = newParkDrywellICArea;
+      pNewParkDrywellArea.Value = 0;// newParkDrywellICArea;
       pNewParkDrywellArea.Direction = ParameterDirection.Input;
       sqlCmd.Parameters.Add(pNewParkDrywellArea);
       //sqlCmd.CommandTimeout = 300;
@@ -339,7 +294,7 @@ namespace DSCUpdater
       SqlParameter pNewRoofArea = sqlCmd.CreateParameter();
       pNewRoofArea.ParameterName = "@newRoofkArea";
       pNewRoofArea.SqlDbType = SqlDbType.Int;
-      pNewRoofArea.Value = newRoofArea;
+      pNewRoofArea.Value = 0;// newRoofArea;
       pNewRoofArea.Direction = ParameterDirection.Input;
       sqlCmd.Parameters.Add(pNewRoofArea);
       //sqlCmd.CommandTimeout = 300;
@@ -353,7 +308,7 @@ namespace DSCUpdater
       SqlParameter pNewRoofDISCOArea = sqlCmd.CreateParameter();
       pNewRoofDISCOArea.ParameterName = "@newRoofDISCOArea";
       pNewRoofDISCOArea.SqlDbType = SqlDbType.Int;
-      pNewRoofDISCOArea.Value = newRoofDISCOICArea;
+      pNewRoofDISCOArea.Value = 0;// newRoofDISCOICArea;
       pNewRoofDISCOArea.Direction = ParameterDirection.Input;
       sqlCmd.Parameters.Add(pNewRoofDISCOArea);
       //sqlCmd.CommandTimeout = 300;
@@ -367,7 +322,7 @@ namespace DSCUpdater
       SqlParameter pNewRoofDrywellArea = sqlCmd.CreateParameter();
       pNewRoofDrywellArea.ParameterName = "@newRoofDrywellArea";
       pNewRoofDrywellArea.SqlDbType = SqlDbType.Int;
-      pNewRoofDrywellArea.Value = newRoofDrywellArea;
+      pNewRoofDrywellArea.Value = 0;// newRoofDrywellArea;
       pNewRoofDrywellArea.Direction = ParameterDirection.Input;
       sqlCmd.Parameters.Add(pNewRoofDrywellArea);
       //sqlCmd.CommandTimeout = 300;
@@ -491,18 +446,48 @@ namespace DSCUpdater
                            "0 AS old_park_drywell_ic_area_sqft, 0 AS old_roof_drywell_ic_area_sqft, " +
                            "0 AS new_roof_drywell_ic_area_sqft, 0 AS new_park_drywell_ic_area_sqft " +
                            "FROM USERUPDATE INNER JOIN mst_DSC_ac ON USERUPDATE.dsc_id=mst_DSC_ac.DSCID";
-      sqlCmd.ExecuteNonQuery();
+      //sqlCmd.ExecuteNonQuery();
 
-      ProjectDataSet.DSCEDITAppendTableDataTable  dt = new ProjectDataSet.DSCEDITAppendTableDataTable();
-      
-        var qry = from d in projectDataSet.DSCEDITAppendTable
-        select new
-        {
-          dscid = d.dsc_id
-        };
+      int dscId;
+      int editId = 0;//TODO: What should this value be?
 
-      
-      
+      int newRoofArea, newParkArea;
+      int oldRoofArea, oldParkArea;
+
+      int newRoofDiscoArea, newParkDiscoArea;
+      int newRoofDrywellArea, newParkDrywellArea;
+
+      int oldRoofDiscoArea = 0, oldParkDiscoArea = 0; //TODO: What should these values be?
+      int oldRoofDrywellArea = 0, oldParkDrywellArea = 0; //TODO: What should these values be?
+
+      foreach (ProjectDataSet.USERUPDATERow userUpdateRow in projectDataSet.USERUPDATE)
+      {
+        dscId = userUpdateRow.dsc_id;
+        ProjectDataSet.MstDscRow mstDscRow = projectDataSet.MstDsc.FindByDSCID(dscId);
+
+        oldRoofArea = mstDscRow.RfAreaFtEX;
+        oldParkArea = mstDscRow.PkAreaFtEX;
+
+        newRoofArea = userUpdateRow.new_roof_area_sqft;
+        newParkArea = userUpdateRow.new_park_area_sqft;
+
+        newRoofDiscoArea = userUpdateRow.new_roof_disco_ic_area_sqft;
+        newParkDiscoArea = userUpdateRow.new_park_disco_ic_area_sqft;
+
+        newRoofDrywellArea = userUpdateRow.new_roof_drywell_ic_area_sqft;
+        newParkDrywellArea = userUpdateRow.new_park_drywell_ic_area_sqft;
+
+        projectDataSet.DSCEDIT.AddDSCEDITRow(
+          editId, DateTime.Now, Environment.UserName, userUpdateRow.rno, dscId,
+          oldRoofArea, newRoofArea, oldRoofDiscoArea, newRoofDiscoArea, oldRoofDrywellArea, newRoofDrywellArea,
+          oldParkArea, newParkArea, oldParkDiscoArea, newParkDiscoArea, oldParkDrywellArea, newParkDrywellArea,
+          true);
+      }
+
+      projectDataSet.DSCEDIT.AcceptChanges();
+
+      return;
+
 
       //run UpdateOldImperviousArea query to update the old_park_area_sqft and old_roof_area_sqft fields in the DSCEDITAPPEND table
       sqlCmd.CommandText = "UPDATE DSCEDITAPPEND SET old_park_area_sqft = mst_DSC_ac.PkAreaFtEX, " +
@@ -1099,52 +1084,6 @@ namespace DSCUpdater
       sqlCmd.ExecuteNonQuery();
     }
 
-    private static void BatchDSCEDIT(SqlCommand sqlCmd)
-    {
-      //run Append2DSCEDIT query                          
-      sqlCmd.CommandText = "INSERT INTO DSCEDIT (edit_id, " +
-                           "edit_date, edited_by, rno, dsc_id, old_roof_area_sqft, " +
-                           "new_roof_area_sqft, old_roof_disco_ic_area_sqft, " +
-                           "new_roof_disco_ic_area_sqft, old_roof_drywell_ic_area_sqft, " +
-                           "new_roof_drywell_ic_area_sqft, old_park_area_sqft, " +
-                           "new_park_area_sqft, old_park_disco_ic_area_sqft, " +
-                           "new_park_disco_ic_area_sqft, old_park_drywell_ic_area_sqft, " +
-                           "new_park_drywell_ic_area_sqft) SELECT " +
-                           "DSCEDITAPPEND.edit_id AS edit_id, " +
-                           "DSCEDITAPPEND.edit_date AS edit_date, " +
-                           "DSCEDITAPPEND.edited_by AS edited_by, " +
-                           "DSCEDITAPPEND.RNO AS rno, " +
-                           "DSCEDITAPPEND.dsc_id AS dsc_id, " +
-                           "DSCEDITAPPEND.old_roof_area_sqft AS old_roof_area_sqft, " +
-                           "DSCEDITAPPEND.new_roof_area_sqft AS new_roof_area_sqft, " +
-                           "DSCEDITAPPEND.old_roof_disco_ic_area_sqft AS old_roof_disco_ic_area_sqft, " +
-                           "DSCEDITAPPEND.new_roof_disco_ic_area_sqft AS new_roof_disco_ic_area_sqft, " +
-                           "DSCEDITAPPEND.old_roof_drywell_ic_area_sqft AS old_roof_drywell_ic_area_sqft, " +
-                           "DSCEDITAPPEND.new_roof_drywell_ic_area_sqft AS new_roof_drywell_ic_area_sqft, " +
-                           "DSCEDITAPPEND.old_park_area_sqft AS old_park_area_sqft, " +
-                           "DSCEDITAPPEND.new_park_area_sqft AS new_park_area_sqft, " +
-                           "DSCEDITAPPEND.old_park_disco_ic_area_sqft AS old_park_disco_ic_area_sqft, " +
-                           "DSCEDITAPPEND.new_park_disco_ic_area_sqft AS new_park_disco_ic_area_sqft, " +
-                           "DSCEDITAPPEND.old_park_drywell_ic_area_sqft AS old_park_drywell_ic_area_sqft, " +
-                           "DSCEDITAPPEND.new_park_drywell_ic_area_sqft AS new_park_drywell_ic_area_sqft " +
-                           "FROM DSCEDITAPPEND";
-      sqlCmd.ExecuteNonQuery();
-      sqlCmd.CommandText = "UPDATE DSCEDIT SET updater_editor_value_changed = 'False'";
-      sqlCmd.ExecuteNonQuery();
-
-    }
-
-    private static void BatchDeleteFromSQlTables(SqlCommand sqlCmd)
-    {
-      //run DeleteDSCEDITAPPEND Table query
-      sqlCmd.CommandText = "DELETE FROM DSCEDITAPPEND";
-      sqlCmd.ExecuteNonQuery();
-
-      //run DeleteUserUpdate Table query
-      sqlCmd.CommandText = "DELETE FROM USERUPDATE";
-      sqlCmd.ExecuteNonQuery();
-    }
-
     private static void BatchCheckNewRetroSiteAssessments(SqlCommand sqlCmd)
     {
 
@@ -1167,17 +1106,13 @@ namespace DSCUpdater
       string bodyValue = "This is an auto-generated email." + "\r\n" +
                 "This message is a request for changes to the impervious area coverage." + "\r\n" +
                 "The attached table lists parcels by DSCID that are in need of updates in the modeling system.";
-      CSharp.OutlookMail oMail = new CSharp.OutlookMail();
+      OutlookMail oMail = new OutlookMail();
       oMail.AddToOutbox(toValue, subjectValue, bodyValue);
     }
 
     private void btnCancel_Click(object sender, EventArgs e)
     {
-      impAQCCounter = 0;
-      SetStatus("Ready");
-      SetProgress = 0;
-      txtFileName.Text = "";
-      LoadTab(tabPageControlMain.Tab.Key);
+      RestartUpdate();
     }
 
     private int SetProgress
@@ -1211,10 +1146,6 @@ namespace DSCUpdater
     {
       Application.Exit();
       //TO-DO: change DSCUpdaterConfig.xml file DB connection settings back to default
-    }
-
-    private void btnDSCQC_Click(object sender, EventArgs e)
-    {
     }
 
     private void btnUpdaterHistoryReturn_Click(object sender, EventArgs e)
@@ -1331,11 +1262,6 @@ namespace DSCUpdater
       }
     }
 
-    private void btnCloseOptions_Click(object sender, EventArgs e)
-    {
-
-    }
-
     private void DownloadUpdateTemplate()
     {
       string templatePath = Path.GetDirectoryName(Application.ExecutablePath) + "\\Template\\UserUpdateTemplate.csv";
@@ -1370,25 +1296,8 @@ namespace DSCUpdater
       Cursor.Current = Cursors.Arrow;
     }
 
-    private void RevertSessionChanges()
-    {
-      //tabControlMain.TabPages.Remove(tabMain);
-      //tabControlMain.TabPages.Remove(tabLoadedUpdateReview);
-      //tabControlMain.TabPages.Remove(tabUpdaterEditor);
-      //tabControlMain.TabPages.Remove(tabMissingDSC);
-      //tabControlMain.TabPages.Remove(tabIncorrectParkICArea);
-      //tabControlMain.TabPages.Remove(tabIncorrectRoofICArea);
-      //tabControlMain.TabPages.Remove(tabPendingImpAChanges);
-      //tabControlMain.TabPages.Remove(tabDBConnOptions);
-      //tabControlMain.TabPages.Remove(tabDownloadTemplate);       
-      //tabControlMain.Visible = true;
-      //MessageBox.Show("RevertSessionChanges");
-    }
-
     private void btnSubmitUpdates_Click(object sender, EventArgs e)
     {
-      Cursor.Current = Cursors.WaitCursor;
-      SetStatus("Submitting");
 
       SqlConnection sqlCon = new SqlConnection(Properties.Settings.Default.DscEditorConnectionString);
       sqlCon.Open();
@@ -1396,19 +1305,21 @@ namespace DSCUpdater
 
       //run SelectPendingImpAreaUpdates      
 
-      int qcCounter;
-      qcCounter = PrepareUpdateFile(txtFileName.Text);
-      if (qcCounter != 0)
+      if (!PrepareUpdateFile(txtFileName.Text))
       {
         LoadTab("tabUpdateFileErrors");
         return;
-      }      
-      
+      }
+
+      Cursor.Current = Cursors.WaitCursor;
+      SetStatus("Submitting");
+
       try
       {
-        
+
         //the following are extracted methods that add SQL command parameters
-        AddEditDateCommandParameter(sqlCmd, sqlCon);
+
+        /*AddEditDateCommandParameter(sqlCmd, sqlCon);
         AddEditedByCommandParameter(sqlCmd, sqlCon);
         AddNewParkAreaCommandParameter(sqlCmd, sqlCon);
         AddNewParkAreaDrywellCommandParameter(sqlCmd, sqlCon);
@@ -1416,14 +1327,14 @@ namespace DSCUpdater
         AddNewRoofAreaCommandParameter(sqlCmd, sqlCon);
         AddNewRoofAreaDrywellCommandParameter(sqlCmd, sqlCon);
         AddNewRoofDISCOAreaCommandParameter(sqlCmd, sqlCon);
-        AddEditIDCommandParameter(sqlCmd);
+        AddEditIDCommandParameter(sqlCmd)*/
 
         //the following are extracted methods based on batch queries:          
         BatchDSCEDITAPPENDQueries(sqlCmd);
         BatchNewICRecords(sqlCmd);
         BatchUpdateMasterICTables(sqlCmd);
         BatchUpdateDSCAreas(sqlCmd);
-        BatchDSCEDIT(sqlCmd);
+
         BatchSESSION(sqlCmd);
 
         sqlCmd.CommandText = "INSERT INTO IMPUPDATE SELECT dsc_edit_id, dsc_id, new_roof_area_sqft, " +
@@ -1435,14 +1346,6 @@ namespace DSCUpdater
         sqlCmd.ExecuteNonQuery();
 
         ExportIMPUPDATEToCSV();
-
-        sqlCmd.CommandText = "DELETE FROM IMPUPDATE";
-        sqlCmd.ExecuteNonQuery();
-
-        BatchDeleteFromSQlTables(sqlCmd);
-
-        //close the SQL connection
-        sqlCon.Close();
 
         MessageBox.Show("All updates to the modeling system have completed sucessfully.  To review changes from this edit session, return to the main page, and click on the 'Load Update History' button to load the desired edit session.", "DSCUpdater: Update Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -1488,10 +1391,10 @@ namespace DSCUpdater
       mstIcDiscoVegTA.FillByDscIdList(projectDataSet.MstIcDiscoVeg, dscids);
 
       ProjectDataSetTableAdapters.MstIcDrywellTableAdapter mstIcDrywellTA = new DSCUpdater.ProjectDataSetTableAdapters.MstIcDrywellTableAdapter();
-      mstIcDrywellTA.FillByDscIdList(projectDataSet.MstIcDrywell, dscids);      
+      mstIcDrywellTA.FillByDscIdList(projectDataSet.MstIcDrywell, dscids);
     }
 
-    private int PrepareUpdateFile(string fileName)
+    private bool PrepareUpdateFile(string fileName)
     {
       WriteDscUpdateFile(fileName);
       LoadDscData();
@@ -1499,7 +1402,7 @@ namespace DSCUpdater
       int qcCount = 0;
       SetProgress = 0;
 
-      projectDataSet.DscQc.Clear(); 
+      projectDataSet.DscQc.Clear();
 
       // build the pending update query
       qcCount += QCQueryPendingUpdate(projectDataSet.DscQc);
@@ -1514,7 +1417,7 @@ namespace DSCUpdater
       qcCount += QCQueryParkIcArea(projectDataSet.DscQc);
 
       SetProgress = 0;
-      return qcCount;
+      return qcCount == 0;
     }
     private int QCQueryPendingUpdate(DataTable qcDt)
     {
@@ -1688,13 +1591,8 @@ namespace DSCUpdater
 
       btnSubmitUpdates.Enabled = false;
       txtFileName.Text = ofdMain.FileName;
-      
-      WriteDscUpdateFile(txtFileName.Text);
-      
-      int qcCounter;
-      qcCounter = PrepareUpdateFile(txtFileName.Text);
 
-      if (qcCounter != 0)
+      if (!PrepareUpdateFile(txtFileName.Text))
       {
         LoadTab("tabUpdateFileErrors");
         return;
@@ -1726,6 +1624,15 @@ namespace DSCUpdater
 
     private void btnUpdaterEditorEnter_Click(object sender, EventArgs e)
     {
+      int newRoofDrywellArea = 0;
+      int newRoofDISCOICArea = 0;
+      int newParkDrywellICArea = 0;
+      int newParkDISCOICArea = 0;
+      int newParkICArea = 0;
+      int newRoofICArea = 0;
+      int newRoofArea = 0;
+      int newParkArea = 0;
+
       #region NewParkArea
 
       try
@@ -1914,30 +1821,12 @@ namespace DSCUpdater
       txtNewRoofDISCOICArea.Text = "";
       txtNewRoofDrywellICArea.Text = "";
       txtNewRoofArea.Text = "";
-
-      newParkDISCOICArea = 0;
-      newParkDrywellICArea = 0;
-      newParkArea = 0;
-
-      newRoofDISCOICArea = 0;
-      newRoofDrywellArea = 0;
-      newRoofArea = 0;
     }
 
     private void btnSubmitUpdaterEditorChanges_Click(object sender, EventArgs e)
     {
       SqlConnection sqlCon = new SqlConnection(Properties.Settings.Default.DscEditorConnectionString);
-      sqlCon.Open();
       SqlCommand sqlCmd = new SqlCommand();
-      sqlCmd.CommandText = "DELETE FROM DSCEDITAPPEND";
-      sqlCmd.Connection = sqlCon;
-      sqlCmd.ExecuteNonQuery();
-
-      SqlBulkCopy bulkcopy = new SqlBulkCopy(sqlCon);
-      bulkcopy.DestinationTableName = "DSCEDITAPPEND";
-      bulkcopy.WriteToServer(dtUpdaterEditor);
-      bulkcopy.Close();
-      sqlCon.Close();
 
       AddEditDateCommandParameter(sqlCmd, sqlCon);
       AddEditedByCommandParameter(sqlCmd, sqlCon);
@@ -2415,51 +2304,44 @@ namespace DSCUpdater
       btnSubmitUpdates.Enabled = false;
       txtFileName.Clear();
     }
-    
+
   }
 
 }
 
-
-
-namespace CSharp
+public class OutlookMail
 {
-  public class OutlookMail
+  private Microsoft.Office.Interop.Outlook.Application oApp;
+  private Microsoft.Office.Interop.Outlook._NameSpace oNameSpace;
+  private Microsoft.Office.Interop.Outlook.MAPIFolder oOutboxFolder;
+
+  public OutlookMail()
   {
-    private Microsoft.Office.Interop.Outlook.Application oApp;
-    private Microsoft.Office.Interop.Outlook._NameSpace oNameSpace;
-    private Microsoft.Office.Interop.Outlook.MAPIFolder oOutboxFolder;
-
-    public OutlookMail()
-    {
-      oApp = new Microsoft.Office.Interop.Outlook.Application();
-      oNameSpace = oApp.GetNamespace("MAPI");
-      oNameSpace.Logon(null, null, true, true);
-      oOutboxFolder = oNameSpace.GetDefaultFolder(Microsoft.Office.Interop.Outlook.OlDefaultFolders.olFolderOutbox);
-    }
-
-    public void AddToOutbox(string toValue, string subjectValue, string bodyValue)
-    {
-      Microsoft.Office.Interop.Outlook._MailItem oMailItem = (Microsoft.Office.Interop.Outlook._MailItem)oApp.CreateItem(Microsoft.Office.Interop.Outlook.OlItemType.olMailItem);
-      String sSource = "C:\\temp\\IMPUPDATE.csv";
-      String sDisplayName = "IMPUPDATE";
-      int iPosition = 1;
-      int iAttachType = (int)Microsoft.Office.Interop.Outlook.OlAttachmentType.olByValue;
-      Microsoft.Office.Interop.Outlook.Attachment oAttach = oMailItem.Attachments.Add(sSource, iAttachType, iPosition, sDisplayName);
-      toValue = "jrubengb@gmail.com";
-      subjectValue = "Request for Impervious Area Update";
-      bodyValue = "This is an auto-generated email." + "\r\n" +
-                "This message is a request for changes to the impervious area coverage." + "\r\n" +
-                "The attached table lists parcels by DSCID that are in need of updates in the modeling system.";
-      oMailItem.To = toValue;
-      oMailItem.Subject = subjectValue;
-      oMailItem.Body = bodyValue;
-      oMailItem.SaveSentMessageFolder = oOutboxFolder;
-      oMailItem.Send();
-    }
+    oApp = new Microsoft.Office.Interop.Outlook.Application();
+    oNameSpace = oApp.GetNamespace("MAPI");
+    oNameSpace.Logon(null, null, true, true);
+    oOutboxFolder = oNameSpace.GetDefaultFolder(Microsoft.Office.Interop.Outlook.OlDefaultFolders.olFolderOutbox);
   }
 
+  public void AddToOutbox(string toValue, string subjectValue, string bodyValue)
+  {
+    Microsoft.Office.Interop.Outlook._MailItem oMailItem = (Microsoft.Office.Interop.Outlook._MailItem)oApp.CreateItem(Microsoft.Office.Interop.Outlook.OlItemType.olMailItem);
+    String sSource = "C:\\temp\\IMPUPDATE.csv";
+    String sDisplayName = "IMPUPDATE";
+    int iPosition = 1;
+    int iAttachType = (int)Microsoft.Office.Interop.Outlook.OlAttachmentType.olByValue;
+    Microsoft.Office.Interop.Outlook.Attachment oAttach = oMailItem.Attachments.Add(sSource, iAttachType, iPosition, sDisplayName);
+    toValue = "jrubengb@gmail.com";
+    subjectValue = "Request for Impervious Area Update";
+    bodyValue = "This is an auto-generated email." + "\r\n" +
+              "This message is a request for changes to the impervious area coverage." + "\r\n" +
+              "The attached table lists parcels by DSCID that are in need of updates in the modeling system.";
+    oMailItem.To = toValue;
+    oMailItem.Subject = subjectValue;
+    oMailItem.Body = bodyValue;
+    oMailItem.SaveSentMessageFolder = oOutboxFolder;
+    oMailItem.Send();
+  }
 }
-
 
 
