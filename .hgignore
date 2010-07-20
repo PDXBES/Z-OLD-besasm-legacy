@@ -8,3 +8,6 @@ glob:*.dcu
 glob:__history/*
 glob:*.local
 glob:*.orig
+glob:DotNet/StormwaterInterface/SWI_2/SWI_2/Properties/licenses.licx
+glob:Delphi/InterfaceMaster/ModelSupport_InterfaceMaster/default.txaPackage
+glob:Delphi/InterfaceMaster/ModelSupport_InterfaceMaster/InterfaceMaster.prjconfig
