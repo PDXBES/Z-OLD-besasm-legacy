@@ -36,6 +36,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ProductName>Cost Estimator</ProductName>
     <PublisherName>BES Systems Analysis</PublisherName>
+    <CreateWebPageOnPublish>false</CreateWebPageOnPublish>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <ApplicationRevision>45</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
