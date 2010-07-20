@@ -1,0 +1,48 @@
+#
+# MKMF template makefile for protected mode executables.
+#
+FC        = f77l3
+LINKER    = 386link
+PROGRAM   = 32MULTC.exe
+DEST      = .
+EXTHDRS         =
+FFLAGS    =
+HDRS            =
+LDFLAGS   = -80486 -FULLWARN -STUB RUNB
+LDMAP     = NUL
+LIBS      =
+MAKEFILE  = Makefile
+OBJS            = 32multc.obj combin.obj error.obj ierror.obj inface.obj \
+                  multcomb.obj ntime.obj strip.obj
+SRCS            = 32multc.for combin.for error.for ierror.for inface.for \
+                  multcomb.for ntime.for strip.for
+
+$(PROGRAM):     $(OBJS) $(LIBS)
+          $(LINKER) $(OBJS) -EXE $@ -MAP $(LDMAP) -LIB $(LIBS) $(LDFLAGS)
+
+clean:;         @del -f $(OBJS)
+
+depend:;   @mkmf -f $(MAKEFILE) PROGRAM=$(PROGRAM) DEST=$(DEST)
+
+install:   $(PROGRAM)
+                @echo Installing $(PROGRAM) in $(DEST)
+                @if not $(DEST)x==.x copy $(PROGRAM) $(DEST)
+### OPUS MKMF:  Do not remove this line!  Automatic dependencies follow.
+
+32multc.obj: TAPES.INC
+
+combin.obj: COMB.INC INTER.INC STIMER.INC TAPES.INC
+
+error.obj: TAPES.INC
+
+ierror.obj: TAPES.INC
+
+inface.obj: INTER.INC TAPES.INC
+
+
+multcomb.obj: INTER.INC STIMER.INC TAPES.INC
+
+ntime.obj: STIMER.INC
+
+strip.obj: TAPES.INC
+
