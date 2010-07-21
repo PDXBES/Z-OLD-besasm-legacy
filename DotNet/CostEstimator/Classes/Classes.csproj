@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{3176DA9C-B2C1-46C8-B7DC-E3B71F13E7F9}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -74,13 +74,13 @@
     <Compile Include="UnitCost.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Alternatives\SystemsAnalysis.Modeling.Alternatives.csproj">
-      <Project>{D5E4B31B-D773-4877-9008-80F74475DE93}</Project>
-      <Name>SystemsAnalysis.Modeling.Alternatives</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Lib\DataAccess\SystemsAnalysis.DataAccess.csproj">
       <Project>{D81499E0-ED3E-4C85-9F8E-72C263AA24C4}</Project>
       <Name>SystemsAnalysis.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lib\ModelingAlternatives\SystemsAnalysis.Modeling.Alternatives.csproj">
+      <Project>{D5E4B31B-D773-4877-9008-80F74475DE93}</Project>
+      <Name>SystemsAnalysis.Modeling.Alternatives</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lib\Modeling\SystemsAnalysis.Modeling.csproj">
       <Project>{54555B74-906E-4D29-9BC3-7653805B6AD0}</Project>
@@ -97,25 +97,29 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="DirectConstructionItems.xsd">
-      <SubType>Designer</SubType>
+      <SubType>
+      </SubType>
     </None>
     <None Include="DirectConstructionItems.xsx">
       <DependentUpon>DirectConstructionItems.xsd</DependentUpon>
     </None>
     <None Include="PipeCostReference.xsd">
-      <SubType>Designer</SubType>
+      <SubType>
+      </SubType>
     </None>
     <None Include="PipeCostReference.xsx">
       <DependentUpon>PipeCostReference.xsd</DependentUpon>
     </None>
     <None Include="InflowControlCostReference.xsd">
-      <SubType>Designer</SubType>
+      <SubType>
+      </SubType>
     </None>
     <None Include="InflowControlCostReference.xsx">
       <DependentUpon>InflowControlCostReference.xsd</DependentUpon>
     </None>
     <None Include="CostEstimateProject.xsd">
-      <SubType>Designer</SubType>
+      <SubType>
+      </SubType>
     </None>
     <None Include="CostEstimateProject.xsx">
       <DependentUpon>CostEstimateProject.xsd</DependentUpon>
