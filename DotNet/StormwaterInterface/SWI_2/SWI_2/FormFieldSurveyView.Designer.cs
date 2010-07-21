@@ -325,7 +325,6 @@
             this.labelSheetNo = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.ultraDateTimeEditorDate = new Infragistics.Win.UltraWinEditors.UltraDateTimeEditor();
-            this.ultraTextEditorEvaluator = new Infragistics.Win.UltraWinEditors.UltraTextEditor();
             this.ultraTextEditorWeather = new Infragistics.Win.UltraWinEditors.UltraTextEditor();
             this.fKSURVEYPAGEVIEWBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.fKVIEWSUBWATERSHEDBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -339,15 +338,18 @@
             this.sWSP_VIEWTableAdapter = new SWI_2.SANDBOXDataSetTableAdapters.SWSP_VIEWTableAdapter();
             this.sWSP_SURVEY_PAGETableAdapter = new SWI_2.SANDBOXDataSetTableAdapters.SWSP_SURVEY_PAGETableAdapter();
             this.ultraComboMapNo = new Infragistics.Win.UltraWinGrid.UltraCombo();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.comboBoxSurveyPage = new System.Windows.Forms.ComboBox();
+            this.checkedListBoxEvaluators = new System.Windows.Forms.CheckedListBox();
+            this.sWSPSURVEYPAGEEVALUATORBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.sWSP_SURVEY_PAGE_EVALUATORTableAdapter = new SWI_2.SANDBOXDataSetTableAdapters.SWSP_SURVEY_PAGE_EVALUATORTableAdapter();
+            this.sWSPEVALUATORBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.sWSP_EVALUATORTableAdapter = new SWI_2.SANDBOXDataSetTableAdapters.SWSP_EVALUATORTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLinkInfo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataTableFieldSurveyEditableBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sANDBOXDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataTableFieldSurveyBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sWSPMESH1BindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ultraDateTimeEditorDate)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ultraTextEditorEvaluator)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ultraTextEditorWeather)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fKSURVEYPAGEVIEWBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fKVIEWSUBWATERSHEDBindingSource)).BeginInit();
@@ -357,6 +359,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.ultraComboWatershed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ultraComboSubwatershed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ultraComboMapNo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sWSPSURVEYPAGEEVALUATORBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sWSPEVALUATORBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridViewLinkInfo
@@ -385,6 +389,7 @@
             this.dataGridViewLinkInfo.Name = "dataGridViewLinkInfo";
             this.dataGridViewLinkInfo.Size = new System.Drawing.Size(1007, 232);
             this.dataGridViewLinkInfo.TabIndex = 0;
+            this.dataGridViewLinkInfo.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.dataGridViewLinkInfo_RowsRemoved);
             // 
             // usnodeDataGridViewTextBoxColumn
             // 
@@ -590,13 +595,6 @@
             this.ultraDateTimeEditorDate.Name = "ultraDateTimeEditorDate";
             this.ultraDateTimeEditorDate.Size = new System.Drawing.Size(113, 21);
             this.ultraDateTimeEditorDate.TabIndex = 11;
-            // 
-            // ultraTextEditorEvaluator
-            // 
-            this.ultraTextEditorEvaluator.Location = new System.Drawing.Point(304, 46);
-            this.ultraTextEditorEvaluator.Name = "ultraTextEditorEvaluator";
-            this.ultraTextEditorEvaluator.Size = new System.Drawing.Size(82, 21);
-            this.ultraTextEditorEvaluator.TabIndex = 12;
             // 
             // ultraTextEditorWeather
             // 
@@ -1525,40 +1523,60 @@
             this.ultraComboMapNo.TabIndex = 19;
             this.ultraComboMapNo.ValueMember = "view_id";
             // 
-            // comboBox1
+            // comboBoxSurveyPage
             // 
-            this.comboBox1.DataSource = this.fKSURVEYPAGEVIEWBindingSource;
-            this.comboBox1.DisplayMember = "page_number";
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(559, 90);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(45, 21);
-            this.comboBox1.TabIndex = 20;
-            this.comboBox1.ValueMember = "survey_page_id";
+            this.comboBoxSurveyPage.DataSource = this.fKSURVEYPAGEVIEWBindingSource;
+            this.comboBoxSurveyPage.DisplayMember = "page_number";
+            this.comboBoxSurveyPage.FormattingEnabled = true;
+            this.comboBoxSurveyPage.Location = new System.Drawing.Point(559, 90);
+            this.comboBoxSurveyPage.Name = "comboBoxSurveyPage";
+            this.comboBoxSurveyPage.Size = new System.Drawing.Size(45, 21);
+            this.comboBoxSurveyPage.TabIndex = 20;
+            this.comboBoxSurveyPage.ValueMember = "survey_page_id";
+            this.comboBoxSurveyPage.SelectedValueChanged += new System.EventHandler(this.SurveyPageValueChanged);
             // 
-            // button1
+            // checkedListBoxEvaluators
             // 
-            this.button1.Location = new System.Drawing.Point(889, 50);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(98, 56);
-            this.button1.TabIndex = 21;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.checkedListBoxEvaluators.DataSource = this.sANDBOXDataSet.SWSP_EVALUATOR;
+            this.checkedListBoxEvaluators.DisplayMember = "Initials";
+            this.checkedListBoxEvaluators.FormattingEnabled = true;
+            this.checkedListBoxEvaluators.Location = new System.Drawing.Point(304, 43);
+            this.checkedListBoxEvaluators.Name = "checkedListBoxEvaluators";
+            this.checkedListBoxEvaluators.Size = new System.Drawing.Size(96, 79);
+            this.checkedListBoxEvaluators.TabIndex = 22;
+            this.checkedListBoxEvaluators.ValueMember = "evaluator_id";
+            this.checkedListBoxEvaluators.SelectedIndexChanged += new System.EventHandler(this.checkedListBoxEvaluators_SelectedIndexChanged);
+            // 
+            // sWSPSURVEYPAGEEVALUATORBindingSource
+            // 
+            this.sWSPSURVEYPAGEEVALUATORBindingSource.DataMember = "SWSP_SURVEY_PAGE_EVALUATOR";
+            this.sWSPSURVEYPAGEEVALUATORBindingSource.DataSource = this.sANDBOXDataSet;
+            // 
+            // sWSP_SURVEY_PAGE_EVALUATORTableAdapter
+            // 
+            this.sWSP_SURVEY_PAGE_EVALUATORTableAdapter.ClearBeforeFill = true;
+            // 
+            // sWSPEVALUATORBindingSource
+            // 
+            this.sWSPEVALUATORBindingSource.DataMember = "SWSP_EVALUATOR";
+            this.sWSPEVALUATORBindingSource.DataSource = this.sANDBOXDataSet;
+            // 
+            // sWSP_EVALUATORTableAdapter
+            // 
+            this.sWSP_EVALUATORTableAdapter.ClearBeforeFill = true;
             // 
             // FormFieldSurveyView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1031, 509);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.checkedListBoxEvaluators);
+            this.Controls.Add(this.comboBoxSurveyPage);
             this.Controls.Add(this.ultraComboMapNo);
             this.Controls.Add(this.ultraComboSubwatershed);
             this.Controls.Add(this.ultraComboWatershed);
             this.Controls.Add(this.ultraTextEditorComments);
             this.Controls.Add(this.ultraTextEditorWeather);
-            this.Controls.Add(this.ultraTextEditorEvaluator);
             this.Controls.Add(this.ultraDateTimeEditorDate);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.labelSheetNo);
@@ -1577,7 +1595,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataTableFieldSurveyBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sWSPMESH1BindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ultraDateTimeEditorDate)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ultraTextEditorEvaluator)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ultraTextEditorWeather)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fKSURVEYPAGEVIEWBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fKVIEWSUBWATERSHEDBindingSource)).EndInit();
@@ -1587,10 +1604,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.ultraComboWatershed)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ultraComboSubwatershed)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ultraComboMapNo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sWSPSURVEYPAGEEVALUATORBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sWSPEVALUATORBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
+
+        
 
         #endregion
 
@@ -1606,7 +1627,6 @@
         private System.Windows.Forms.Label labelSheetNo;
         private System.Windows.Forms.Label label1;
         private Infragistics.Win.UltraWinEditors.UltraDateTimeEditor ultraDateTimeEditorDate;
-        private Infragistics.Win.UltraWinEditors.UltraTextEditor ultraTextEditorEvaluator;
         private Infragistics.Win.UltraWinEditors.UltraTextEditor ultraTextEditorWeather;
         private Infragistics.Win.UltraWinEditors.UltraTextEditor ultraTextEditorComments;
         private System.Windows.Forms.BindingSource sWSPWATERSHEDBindingSource;
@@ -1620,10 +1640,9 @@
         private System.Windows.Forms.BindingSource fKSURVEYPAGEVIEWBindingSource;
         private SWI_2.SANDBOXDataSetTableAdapters.SWSP_SURVEY_PAGETableAdapter sWSP_SURVEY_PAGETableAdapter;
         private Infragistics.Win.UltraWinGrid.UltraCombo ultraComboMapNo;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox comboBoxSurveyPage;
         private System.Windows.Forms.BindingSource dataTableFieldSurveyBindingSource;
         private System.Windows.Forms.BindingSource dataTableFieldSurveyEditableBindingSource;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.DataGridViewTextBoxColumn usnodeDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn dsnodeDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn linktypeDataGridViewTextBoxColumn;
@@ -1640,5 +1659,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dsdepthinDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn action;
+        private System.Windows.Forms.CheckedListBox checkedListBoxEvaluators;
+        private System.Windows.Forms.BindingSource sWSPSURVEYPAGEEVALUATORBindingSource;
+        private SWI_2.SANDBOXDataSetTableAdapters.SWSP_SURVEY_PAGE_EVALUATORTableAdapter sWSP_SURVEY_PAGE_EVALUATORTableAdapter;
+        private System.Windows.Forms.BindingSource sWSPEVALUATORBindingSource;
+        private SWI_2.SANDBOXDataSetTableAdapters.SWSP_EVALUATORTableAdapter sWSP_EVALUATORTableAdapter;
     }
 }
