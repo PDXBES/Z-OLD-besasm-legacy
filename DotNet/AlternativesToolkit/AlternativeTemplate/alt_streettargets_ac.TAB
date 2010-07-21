@@ -1,0 +1,15 @@
+!table
+!version 410
+!charset WindowsLatin1
+
+Definition Table
+  File "alternative_package.mdb"
+  Type ACCESS TABLE "alt_streettargets_ac" Charset "WindowsLatin1"
+  Fields 7
+    NGTOStreet Char (7) Index 1 ;
+    BuildModelIC Logical ;
+    ICID Integer ;
+    Constructed Integer ;
+    AltICID Integer ;
+    Evaluation Char (1) ;
+    FocusArea Char (10) ;

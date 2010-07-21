@@ -1,0 +1,629 @@
+'mapbasic fillename = DSCtoolpad.mb 
+'
+'
+include "MapBasic.def"
+include "Menu.def"
+include "Icons.def"
+
+include "C:\Development\MapBasic\Common\trunk\Inc\EMGCoordSys.def"
+
+declare sub MkStubPt
+declare sub MkZinger
+declare Sub MkZingerFromMstDscId(ByVal UpdateMstDscId as integer)
+declare sub MkZingTbl
+declare sub MaxZingID
+global gIconFile as String
+global gTempDir as String
+global gBuildZingCountIterator as Integer
+global AllMasters as Logical
+
+declare sub SetGotoPipe
+declare sub PipeAttribs
+declare sub ParcelAttribs
+declare sub SetSanFLOW
+declare sub SetStormFLOW
+
+declare sub BuildZingProgBar
+
+declare sub RefreshDSCZingers
+declare sub ToggleLabel
+declare sub PointFromDS(ByVal LineObj as object,ByVal fDist as float)
+declare Function VerifyDSCSelection() as logical
+declare Function VerifyDiscoClassChange(ByVal newDisco as string, ByVal oldDisco as string) as logical
+declare Sub RunStr(ByVal FromTbl as string,ByVal FromCol as string,ByVal ColVal as string,ByVal ToTbl as string)
+'declare sub RunStr(ByVal FromTbl, FromCol, ColVal, ToTbl as string)
+
+Dim 	MaxDscID, 
+	 	MaxZid, 
+	 	exLID, 
+	 	exAID, 
+		exMID,  
+		exPID,  
+		LOTid,
+		iLabel
+			as integer
+Dim 	exDIA, 
+		exHGT, 
+		exUIE, 
+		exDIE, 
+		exLEN, 
+		LPTx,
+		LPTy
+			as float
+
+dim LOTx,LOTy,dscX,dscY, SANd2s, SDd2s as float
+dim stubX, StubY, stubDist as float
+
+Dim 	exDSN,
+		exUSN,
+		exSOP, 
+		exMAT, 
+		exSHP, 
+		exLTP, 
+		exFTP, 
+		exSPL, 
+		DoStr, 
+		sFlowTO		
+			as string
+Dim 	pObj,
+		LinkObj, 
+		exObj 
+			as object
+global DscReady as Logical
+global PipReady as Logical			
+global alwaysVerifyDiscoClass as logical
+'-------------------------------------------------------------------------------------------------
+sub MkZingTbl
+	dim iTbl as integer
+	dim extent as object
+	
+	dim mapminx, mapminy, mapmaxx, mapmaxy as float
+	mapminx = MapperInfo(FrontWindow(), MAPPER_INFO_MINX)
+	mapminy = MapperInfo(FrontWindow(), MAPPER_INFO_MINY)
+	mapmaxx = MapperInfo(FrontWindow(), MAPPER_INFO_MAXX)
+	mapmaxy  = MapperInfo(FrontWindow(), MAPPER_INFO_MAXY)
+	 
+	Create Rect Into Variable extent (mapminx, mapminy) (mapmaxx, mapmaxy)
+	Print "Extent Window: (" & mapminx & "," & mapminy & ") - (" & mapmaxx & "," & mapmaxy & ")"
+	OnError goto skipTbl
+	
+	
+	'ASSERT: Zingers table is opened, and named mst_dsc_zingers. If this is true, delete code below
+	'If FileExists("C:\Documents and Settings\issacg\Desktop\Parcels_Divides\mst_dsc_zingers.tab") AND Then
+'		Print "Opening DSC Zinger Table"
+		'Open Table "C:\Documents and Settings\issacg\Desktop\Parcels_Divides\mst_dsc_zingers.tab" interactive
+	'Else
+'		Print "Creating DSC Zinger Table..."
+		'Select DSCID "ZingID" ,DscID, DscID "LinkID" from mst_Dsc where rowid = -1 into qySaver 
+		'Commit Table qySaver As "C:\Temp\mst_dsc_zingers.tab" TYPE NATIVE Charset "WindowsLatin1"
+		'Open Table "C:\Temp\mst_dsc_zingers.tab" interactive
+		'Close Table qySaver
+		
+		'delete this once the program is ready for production, and uncomment the above
+		'Print "Opening DSC Zinger Table"
+		'Open Table "C:\Data\Zingers\mst_dsc_zingers.tab" interactive
+	'End If
+	
+	Select * from mst_Dsc where mst_Dsc.obj within extent into qyRunSet
+	
+	Dim zingCount as integer
+	zingCount = SelectionInfo(SEL_INFO_NROWS)
+	gBuildZingCountIterator = 1
+	If Ask("Found " & zingCount & " visible DSCs. Create Zingers?", "Yes", "No") = False Then
+		Print "Create Zingers canceled"
+		Exit Sub
+	End If
+
+	ProgressBar "Creating Zingers" Calling BuildZingProgBar Range zingCount
+		
+	Close Table qyRunSet
+	Close Table qyOneDsc
+	
+	Commit Table mst_dsc_zingers
+	Dim k as integer
+		
+	For k = 1 To MapperInfo(FrontWindow(), MAPPER_INFO_LAYERS)
+		If LayerInfo(FrontWindow(), k, LAYER_INFO_NAME) = "mst_dsc_zingers" Then
+			Exit Sub
+		End If
+	Next
+	Add Map Layer mst_dsc_zingers
+	Set Map Layer mst_dsc_zingers Global Line (1,59,32960) 
+	Set Map Layer mst_dsc_zingers Display Global
+
+Exit Sub
+skipTbl:
+	Print "ZingTbl: " + Err() + ": " + Error$()
+	Resume Next
+End Sub
+'---------------------------------------------------------
+Sub BuildZingProgBar
+	'FOR iTbl = 1 to tableinfo(qyRunSet,8)
+		Select * from qyRunSet where rowid = gBuildZingCountIterator into qyOneDsc
+		Call MkZingerFromMstDscId(qyOneDsc.DscId)
+		If gBuildZingCountIterator = TableInfo(qyRunSet, TAB_INFO_NROWS) Then
+			ProgressBar = -1
+		Else
+			ProgressBar = gBuildZingCountIterator
+		End If
+		gBuildZingCountIterator = gBuildZingCountIterator + 1
+	'NEXT
+
+end Sub
+'---------------------------------------------------------
+sub MkStubPt
+
+OnError GoTo RedirError
+
+dim dsX,dsY as float
+dim stubPt as object
+dim sSource, exLTYP, ExDiscoClass as string
+dim mdlPipCount as integer
+dim j as integer
+
+mdlPipCount=0
+
+	Call SetStdCoordSys()
+	'Verify selected items is a DSC	
+	IF Selectioninfo(1) not like "%mst_dsc%" THEN
+		Print "DSC Not selected."		
+	End If
+	Print "Flagging DSCFrom. " & Str$(SelectionInfo(3)) & " DSC(s) selected."
+	Select * from selection into QyTarget
+	
+				
+	'At this point, QyTarget contains the selected DSC(s), which may be in mdl_DSC or alt_DSC
+
+	Print "Selecting existing entries from mst_DSC."
+	Select * from QyTarget into QyDSCFrom
+	
+	DscReady=1  
+				
+	'At this point, QyDscFrom contains the selected DSC(s), which are will be in mst_DSC
+	
+	'Finds the nearest selected link of the appropriate type,
+	'and sets the following variables:	
+	'exLID =qySetPipeTo.linkID
+	'sSource="mdl"
+	'exLTYP=qySetPipeTo.LinkType
+	'LinkObj= qySetPipeTo.obj	
+	
+	Dim tmpUSIE as float
+	Dim tmpDSIE as float
+	Dim tmpFrac as float
+	Dim tmpCrown as float
+
+	stubX = commandinfo(CMD_INFO_X)
+	stubY = commandinfo(CMD_INFO_Y)
+	Dim bufferDistance as Integer
+	Dim bufferIteration as Integer
+	bufferIteration = 0
+	bufferDistance = (MapperInfo(FrontWindow(), MAPPER_INFO_MAXX) - MapperInfo(FrontWindow(), MAPPER_INFO_MINX))/100
+	print "Buffer distance = " & bufferDistance & " ft."
+	
+	stubPt = createcircle(stubX,stubY,bufferDistance)
+	print "Click location = (" & stubX & "," & stubY & ")"
+
+	DO	
+		bufferIteration = bufferIteration + 1
+		stubPt = buffer(stubPt,12,bufferDistance, "ft")
+		print "Buffering Click Location. Distance = " & str$(bufferDistance * bufferIteration) & " ft."
+		IF bufferIteration > 4 THEN
+			DscReady=0
+			Note "No pipe found after 4 iterations.  No pipe within " & bufferDistance * bufferIteration & " ft."
+			Run Menu command 1701
+			Exit Sub			
+		END IF
+
+		IF sFlowTO = "toSAN" THEN
+			'CHECKING FOR NEAREST MDL SEGMENT TO STUB
+			Select * from mst_links where obj intersects stubPt and LinkType in("C","S","IS","IC","TR") into qyMdlPipeTo
+				mdlPipCount=tableinfo(qyMdlPipeTo,8)
+				
+		END IF
+
+		IF sFlowTO = "toSTORM" THEN
+			'CHECKING FOR NEAREST MDL SEGMENT TO STUB
+			'Should this also consider the ditches we are placing into mstLinks?
+			'Obviously if we are redirecting stormwater to the drainage system, can't
+			'we also direct stormwater to ditches?
+			Select * from mst_links where obj intersects stubPt and LinkType in("D","C", "CO") into qyMdlPipeTo
+				mdlPipCount=tableinfo(qyMdlPipeTo,8)
+				
+		END IF
+		
+		'As long as we at least have a pipe in the model?
+		IF mdlPipCount>0 Then
+			'get the first pipe from the table of model pipes
+			Select * from qyMdlPipeTo where rowid=1 into qySetPipeTo
+
+			'exLID seems to mean previous link ID?
+			exLID =qySetPipeTo.MLinkID
+			'tracking the source?
+			sSource="mdl"
+			'tracking what the previous connection was classified as?
+			exLTYP=qySetPipeTo.LinkType
+			'tracking the object that the pipes were going to?
+			LinkObj= qySetPipeTo.obj
+			
+			'this seems to be tracking the x location of the primary node of the goto pipe
+			dsX= objectnodeX(LinkObj,1,objectinfo(LinkObj,20))
+			'this seems to be tracking the y location of the primary node of the goto pipe
+			dsY= objectnodeY(LinkObj,1,objectinfo(LinkObj,20))
+	
+			'this is keeping track of how far the primary node is from the place there the mouse was clicked?
+			stubDist=Distance(dsX,dsY,stubX,stubY, "FT")
+			
+			'keep track of where the USIE is located
+			tmpUSIE = qySetPipeTo.USIE
+			'keep track of where the DSIE is located
+			tmpDSIE = qySetPipeTo.DSIE
+			'
+
+			tmpFrac = 1-Round(StubDist/objectLen(linkObj,"FT"), 0.001)
+			If (qySetPipeTo.Height = 0) Then
+				tmpCrown = qySetPipeTo.DiamWidth
+			Else
+				tmpCrown = qySetPipeTo.Height
+			End if
+
+			Close table qyMdlPipeTo
+			IF mdlPipCount>1 THEN
+				Note 	"Multiple possible connection point found." + Chr$(10) +
+
+						"Please verify mst_dsc table and adjust connectivity as needed."			 
+			END IF		
+			Exit Do
+		END IF
+		
+	LOOP
+
+
+	print "Pipe selected, setting connectivity."
+	
+	For j = 1 to TableInfo(QyDscFrom, TAB_INFO_NROWS)		
+		Dim tmpDSCID as integer	
+		Select * From QyDscFrom Into QyOneDSC Where RowId = j			
+		Print "Setting mst_DSC info for MstDscId=" & QyOneDSC.DscId
+		ExDiscoClass=QyOneDSC.DiscoClass
+		tmpDSCID = QyOneDSC.DSCID
+		DO CASE sFlowTO	
+			Case "toSAN"
+				Print "Setting ToMLinkSan, Frac2SwrBeg and SanSwrCrown"
+				Update QyOneDSC set ToMLinkSan = exLID, Frac2SwrBeg = tmpFrac, SanSwrCrown = (tmpDSIE + (tmpUSIE - tmpDSIE) * tmpFrac) + (tmpCrown / 12), PipeFlowTypeSan = exLTyp Where ROWID = 1
+				
+				'IF ExDiscoClass in("C","S") THEN
+				'	Update QyOneDSC set isActiveStorm = 1
+				'END IF
+				'If currently connecting to a sanitary-only pipe, the DiscoClass should be "S" unless their is a valid storm connection
+				
+				Select * From mst_links Where MLinkId = exLID Into QyToMst					
+				Print "Checking for DiscoClass change..."
+				If exLTYP = "S" and tableinfo(QyToMst,8) = 0 Then
+					If VerifyDiscoClassChange("S", ExDiscoClass) Then
+						Print "Made sanitary connection, but no storm connection exists. Setting DiscoClass to 'S'"
+						Update QyOneDSC Set DiscoClass = "S"
+					End If
+				End If
+				If exLTYP = "C" and tableinfo(QyToMst,8) = 0 Then
+					If VerifyDiscoClassChange("C", ExDiscoClass) Then
+						Print "Made combined connection, but no storm connection exists. Setting DiscoClass to 'C'"
+						Update QyOneDSC Set DiscoClass = "C"
+					End If					
+				End If
+			Case "toSTORM"
+				Update QyOneDSC set ToMLinkStorm = exLID, PipeFlowTypeStorm = exLTYP Where ROWID = 1
+				'Update QyOneDSC set ConnectFractionSTORM = Round(StubDist/objectLen(linkObj,"FT"), 0.001)
+				If VerifyDiscoClassChange("D", ExDiscoClass) Then
+						Print "Made storm connection, Setting DiscoClass to 'D'"
+						Update QyOneDSC Set DiscoClass = "D"
+				End If									
+		END CASE	
+		Print "Making zinger for new connection"		
+		Call MkZingerFromMstDscId(tmpDSCID)
+	Next		
+
+	DscReady=0
+	Run Menu command 304
+	Run Menu command 1701
+
+exit sub
+RedirError:
+	Note "Error redirecting dsc: " & Error$()
+End Sub
+'---------------------------------------------------------
+sub SetSanFLOW
+	if VerifyDSCSelection() = false then
+		exit sub
+	end if
+	sFlowTO = "toSAN"
+	'Find a place in the Divide tool that, after the divides are done, I can
+	'send to here a list of the DSC objects that have been modified.
+	'from this list, I can search for the zingers that are associated with the
+	'modified DSC objects.
+	'TableOfDSCChangesToBeMade will contain all of the changed DSC objects, the final
+	'versions, but will not have the original DSC objects.  This means that the
+	'DSC that were original will have to be found by looking for the lowest DSCID in the
+	'set and using that.  The problem will be when we are doing our first split.  This
+	'could possibly be indistinguishable from a split on a DSCId of 1.  What I could do is
+	'look for a DSCId of 0 in the associated zingers, and if there is one, then I will assume that the split occured
+	'on the 0, but if there is no 0, then just assume that there has already been a
+	'split and use the DSCId of 1.  any other things will just assume... a split based on the lowest
+	'DSCId
+	'Should identify here whether the call is from the DSC splitter or from the user making
+	'an adjustment to the current zinger.  This should also be repreated in the SetStormFLOW
+	'sub.  This will go something like:
+	'if callingFunction is DSCCleaver then
+	'	select the zinger of the ParcelID+DivideID that matches the divided DSC
+	'	get the coordinates of the second node for the zinger line
+	'else if the calling function is the Redirect command then
+	'	get the coordinates of the mouse click
+	'end if
+	CALL MkStubPt
+	sFlowTO = ""
+End Sub
+'---------------------------------------------------------
+sub SetStormFLOW
+	if VerifyDSCSelection() = false then
+		exit sub
+	end if
+	
+	sFlowTO = "toSTORM"
+	CALL MkStubPt
+	sFlowTO = ""
+End Sub
+'---------------------------------------------------------
+'Assert: Table mst_dsc_zingers exists
+Sub MkZingerFromMstDscId(ByVal UpdateMstDscId as integer)
+	Dim iDivideID As Integer
+	Dim iParcelID As Integer
+	Dim iUpdateMstDSCID as Integer
+	
+	OnError Goto ZingerFromDSCError
+	'TODO: Need to check if zinger table exists, if it does this crashes
+	iUpdateMstDscId = Val(Str$(UpdateMstDscId))
+	iParcelID = UpdateMstDscId\100
+	
+	Print "Finding old zinger"
+	Select * From mst_dsc_zingers Where mst_dsc_zingers.DscId = UpdateMstDscId or mst_dsc_zingers.DscId = iParcelID *100 Into QyDelete
+
+	Print "Deleting old zinger"
+	If TableInfo(QyDelete, TAB_INFO_NROWS) > 0 Then
+		Delete From QyDelete
+		Drop Table QyDelete
+		Commit Table mst_dsc_zingers
+	End If	
+	
+	'Do query based upon parcelID and DivideID instead of DSCID since parcel and divide are indexed!!
+	'Select * From mst_dsc Where mst_dsc.DscId = Val(Str$(UpdateMstDscId)) Into QyUpdateDsc
+	'iDivideID = Val(Right$(Str$(UpdateMstDscId),2))
+	iDivideId = iUpdateMstDscID - iParcelId*100
+	
+	Print "Finding DSC record"
+	Select * From mst_dsc Where mst_dsc.ParcelID = iParcelID AND  mst_dsc.DivideID = iDivideID Into QyUpdateDsc
+	
+	If (QyUpdateDSC.ToMLinkSan <> 0) Then
+		Print "Creating Sanitary Zinger: " & UpdateMstDscId & ", " & QyUpdateDsc.ToMLinkSan & ", " & QyUpdateDsc.Frac2SwrBeg & ", San"
+		'Do sanitary zinger
+	
+		Select QyUpdateDsc.DscId, QyUpdateDsc.ToMLinkSan "ToMLink", "San" "LinkType", QyUpdateDsc.Frac2SwrBeg From QyUpdateDsc Into QyTarget
+		Call MkZinger	
+	Else
+		Print "No Sanitary Connection Found: " & UpdateMstDscId
+	End If
+	
+		
+	If (QyUpdateDSC.ToMLinkStorm <> 0) Then
+			Print "Creating Storm Zinger: " & UpdateMstDscId & ", " & QyUpdateDsc.ToMLinkStorm & ", " & QyUpdateDsc.Frac2SwrBeg
+			Select QyUpdateDsc.DscId, QyUpdateDsc.ToMLinkStorm "ToMLink", "Storm" "LinkType", QyUpdateDsc.Frac2SwrBeg From QyUpdateDsc Into QyTarget
+			Call MkZinger
+	Else
+		Print "No Storm Connection Found: " & UpdateMstDscId
+	End If
+	
+	Close Table QyUpdateDsc
+	
+	Exit Sub
+ZingerFromDSCError:
+	Print "DSC Error: " & Err$
+		Close Table QyUpdateDsc
+	
+End Sub
+'---------------------------------------------------------
+'Assert: Table qyTarget exists with the following fields:
+'	DscId, ToMLinkId, LinkType, Frac2SwrBeg
+sub MkZinger
+
+dim DscId,ZingId as integer
+dim DscObj as object
+dim Dostr, sourceCOL, sVal, sToTbl as string
+dim MLinkId as integer
+
+
+dim SANsource, SDsource,SANtbl, SDtbl as string
+dim ConnectionFraction, Dist2Stub as float
+
+OnError GOTO noZinger
+LPTx=0
+LPTy=0
+		LOTx= centroidx(QyTarget.obj)
+		LOTy= centroidy(QyTarget.obj)
+		
+		DscObj= QyTarget.obj
+		DscId = QyTarget.DscID	
+		MLinkId = QyTarget.ToMLink		
+		
+		ConnectionFraction = QyTarget.Frac2SwrBeg		
+
+		Print "Calling MaxZingID"
+		Call MaxZingID
+		Print "Out of MaxZingID"
+
+		sToTbl= "QyPipeTo"
+		
+			maxZid = maxZid+1
+
+			Dim iMLinkId As Integer
+			iMLinkID = Val(Str$(MLinkId))
+			
+			Select * From mst_links Where mst_links.MLinkId = iMLinkID Into qyPipeTo
+			
+			LinkObj= qyPipeTo.Obj				
+			
+			Dim p as Pen			
+			If (QyTarget.LinkType = "San") Then
+				p = MakePen(1, 2, RED)
+			Else
+				p = MakePen(1, 2, GREEN)
+			End If					
+			
+			Insert Into mst_dsc_zingers Select maxZid, QyTarget.DscId, QyTarget.ToMLink, QyTarget.LinkType From QyTarget
+			
+			Select * from mst_dsc_zingers where AltZingID = maxZid into QyZing			
+						
+'			Update QyZing set object = outobj
+			Dist2Stub=(1-ConnectionFraction) * objectlen(LinkObj, "ft")		
+			'Sets LPTx & LPTy to a point along LinkObj
+			Print "Calling PointFromDS"
+			CALL PointFromDS(LinkObj, Dist2Stub)
+			Print "Out of PointFrom DS"
+			Dim zObj as object
+			zObj = CreateLine(LOTx,LOTy,LPTx,LPTy)
+			'zObj = ConvertToPline(zObj)
+			Alter Object zObj  Info OBJ_INFO_PEN, p
+			Update QyZing set object = zObj
+			
+				
+			'Sets LPTx & LPTy to a point along LinkObj
+			'CALL PointFromDS(LinkObj, Dist2Stub)
+			'Update QyZing set object = CreateLine(LOTx,LOTy,LPTx,LPTy)			
+			'Update QyZing set object = ConvertToPline(obj)	
+			'Alter object QyZing.obj Info OBJ_INFO_PEN, p			
+
+	Close table QyTarget
+	Commit Table mst_dsc_zingers
+
+Exit Sub
+noZinger:
+	Print "Make Zinger Error: " + Err() + ": " + Error$()		
+End Sub
+'---------------------------------------------------------
+sub MaxZingID
+
+	Select Max(altZingID) from mst_dsc_zingers into qyMaxZid
+	MaxZid=qyMaxZid.col1
+	Close Table QyMaxZid
+
+End Sub
+'---------------------------------------------------------
+Sub ToggleLabel
+	IF iLbl = 1 THEN
+		Set Map Layer 3 Label Auto On
+		Set Map Layer 3 Label Auto On
+	END IF
+	IF iLbl = 0 THEN
+		Set Map Layer 3 Label Auto On
+		Set Map Layer 3 Label Auto On
+	END IF
+		
+
+End Sub
+'---------------------------------------------------------
+sub RefreshDSCZingers
+
+Onerror goto skiprefresh
+
+	'Drop table mst_dsc_zingers
+	
+	CALL MkZingTbl
+
+RUN MENU COMMAND 304
+RUN MENU COMMAND 1701
+
+exit sub
+
+skiprefresh:
+Resume NExt
+End Sub
+'---------------------------------------------------------
+sub PointFromDS(ByVal LineObj as object,ByVal fDist as float)
+dim BegX, BegY, EndX, EndY, objLen,ratio as float
+dim OutObj, TrimObj as object
+
+OnError goto skipDsPt
+
+'BegX= objectnodeX(LineObj,1,1)
+'BegY= objectnodeY(LineObj,1,1)
+EndX= objectnodeX(LineObj,1,objectinfo(LineObj,20))
+EndY= objectnodeY(LineObj,1,objectinfo(LineObj,20))
+
+TrimObj= createcircle(endX,EndY,fDist)
+
+OutObj=overlap(LineObj,TrimObj)
+
+LPTx = objectnodex(outObj,1,1)
+LPTy = objectnodey(outObj,1,1)
+
+Exit sub
+
+skipDsPt:
+	Print "DownstreamPt: " + Err() + ": " + Error$()
+		Resume Next
+End Sub
+'---------------------------------------------------------
+Function VerifyDSCSelection() as logical
+If Not SelectionInfo(1) Then
+	VerifyDSCSelection = false
+	Note "Please select a DSC to Redirect Flow"
+	exit function
+End If
+IF Selectioninfo(1) NOT like "%DSC%" or Selectioninfo(1) like "ModifiedDSC" THEN
+		Alter button ID 90008 uncheck
+		Run Menu Command 1701
+		Note "Please select a DSC to Redirect Flow"
+		VerifyDSCSelection = false
+		exit function
+	END IF
+	VerifyDSCSelection = true
+End Function
+'---------------------------------------------------------
+Function VerifyDiscoClassChange(ByVal newDisco as string, ByVal oldDisco as string) as logical
+
+	If oldDisco = newDisco Or Not alwaysVerifyDiscoClass Then
+		VerifyDiscoClassChange = true
+		Exit Function
+	End If
+	
+	Dialog
+		Title "Change DiscoClass?"
+		Width 200 Height 100
+		Control StaticText
+			Position 1,1
+
+			Width 190 Height 60
+			Title "Would you like to change the DiscoClass to be consistent with the new connection?" & Chr$(10) & Chr$(10) &
+			"DSC DiscoClass will be changed from " & oldDisco & " to " & newDisco & "." & Chr$(10) & Chr$(10) & 
+			"(Note: You may later manually specify the DiscoClass by modifying the alt_dsc table.)"			
+		Control OKButton 
+			Position 55, 65
+			ID 50000
+			Title "&Yes"			
+		Control CancelButton 
+			Position 95, 65
+			ID 50001
+			Title "&No"			
+		Control CheckBox
+			Position 1, 85
+			ID 50002
+			Title "&Always prompt me to change DiscoClass?"
+			Value TRUE
+			Into alwaysVerifyDiscoClass
+	
+	VerifyDiscoClassChange = CommandInfo( CMD_INFO_DLG_OK )
+		
+End Function
+
+Sub RunStr(ByVal FromTbl as string,ByVal FromCol as string,ByVal ColVal as string,ByVal ToTbl as string)
+		DoStr = Str$("Select * from " & FromTbl & " where " & FromCOL & " = " & ColVal & " into " & ToTbl)
+		Run Command DoStr
+End Sub

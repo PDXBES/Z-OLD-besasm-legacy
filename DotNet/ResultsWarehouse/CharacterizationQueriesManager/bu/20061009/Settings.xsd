@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema id="Settings" targetNamespace="SystemsAnalysis.Characterization.Settings.xsd" elementFormDefault="qualified"
+	attributeFormDefault="qualified" xmlns="SystemsAnalysis.Characterization.Settings.xsd"
+	xmlns:mstns="SystemsAnalysis.Characterization.Settings.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+	<xs:element name="Settings" msdata:IsDataSet="true">
+		<xs:complexType>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element name="Files" maxOccurs="1" minOccurs="1">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="CharTemplate" type="xs:string" minOccurs="1" default="\\Cassio\Modeling\Model_Programs\ResultsWarehouse\CharacterizationQueriesManager\xml\CharacterizationTable.xml"
+								maxOccurs="1" />
+							<xs:element name="OutputDir" type="xs:string" minOccurs="1" default="\\Cassio\Modeling\Model_Programs\ResultsWarehouse\CharacterizationQueriesManager\xml\"
+								maxOccurs="1" />
+							<xs:element name="PumpStationDB" type="xs:string" minOccurs="1" default="\\cassio\modeling\AGMaster21\Pumps\PumpStationDB.mdb"
+								maxOccurs="1" />
+							<xs:element name="AGMasterDB" type="xs:string" default="\\CASSIO\Modeling\AGMaster21\AgMaster21.mdb" />
+							<xs:element name="ResultsWarehouseDB" type="xs:string" default="\\Cassio\systems_planning\SPCommon\Char\Hydraulics\ModelResultsWarehouse.mdb" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="FeatureClasses" maxOccurs="1" minOccurs="1">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="MstLinks" type="xs:string" minOccurs="0" />
+							<xs:element name="MstSSC" type="xs:string" minOccurs="0" />
+							<xs:element name="UICDB" type="xs:string" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
