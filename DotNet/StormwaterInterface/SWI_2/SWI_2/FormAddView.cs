@@ -61,10 +61,15 @@ namespace SWI_2
                 
                 SWI_2.SANDBOXDataSetTableAdapters.SWSP_SURVEY_PAGETableAdapter taS = new SWI_2.SANDBOXDataSetTableAdapters.SWSP_SURVEY_PAGETableAdapter();
                 taS.Insert(taV.ScalarQuery(), (int)numericUpDownAddFirstSurveyPage.Value, System.DateTime.Today, "", "");
-                _MyParentForm.CurrentView = (int)numericUpDownAddView.Value;
-                _MyParentForm.CurrentSurveyPage = (int)numericUpDownAddFirstSurveyPage.Value;
-                _MyParentForm.CurrentWatershed = (int)comboBoxWatershed.SelectedValue;
-                _MyParentForm.CurrentSubwatershed = (int)comboBoxSubwatershed.SelectedValue;
+                //_MyParentForm is for base users, so they need to be told what they were doing.
+                //homefully administrators can remember.
+                if (_MyParentForm != null)
+                {
+                    _MyParentForm.CurrentView = (int)numericUpDownAddView.Value;
+                    _MyParentForm.CurrentSurveyPage = (int)numericUpDownAddFirstSurveyPage.Value;
+                    _MyParentForm.CurrentWatershed = (int)comboBoxWatershed.SelectedValue;
+                    _MyParentForm.CurrentSubwatershed = (int)comboBoxSubwatershed.SelectedValue;
+                }
             }
             catch (Exception ex)
             {
@@ -80,13 +85,18 @@ namespace SWI_2
             // TODO: This line of code loads data into the 'sANDBOXDataSet.SWSP_SUBWATERSHED' table. You can move, or remove it, as needed.
             this.sWSP_SUBWATERSHEDTableAdapter.Fill(this.sANDBOXDataSet.SWSP_SUBWATERSHED);
 
-            while (_MyParentForm.CurrentWatershed != (int)((System.Data.DataRowView)sWSPWATERSHEDBindingSource.Current)["watershed_id"])
+            //_MyParentForm is for base users, so they need to be told what they were doing.
+            //homefully administrators can remember.
+            if (_MyParentForm != null)
             {
-                sWSPWATERSHEDBindingSource.MoveNext();
-            }
-            while (_MyParentForm.CurrentSubwatershed != (int)((System.Data.DataRowView)fKSUBWATERSHEDWATERSHEDBindingSource.Current)["subwatershed_id"])
-            {
-                fKSUBWATERSHEDWATERSHEDBindingSource.MoveNext();
+                while (_MyParentForm.CurrentWatershed != (int)((System.Data.DataRowView)sWSPWATERSHEDBindingSource.Current)["watershed_id"])
+                {
+                    sWSPWATERSHEDBindingSource.MoveNext();
+                }
+                while (_MyParentForm.CurrentSubwatershed != (int)((System.Data.DataRowView)fKSUBWATERSHEDWATERSHEDBindingSource.Current)["subwatershed_id"])
+                {
+                    fKSUBWATERSHEDWATERSHEDBindingSource.MoveNext();
+                }
             }
 
         }

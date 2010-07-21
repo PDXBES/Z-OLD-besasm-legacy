@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.IO;
 using System.Windows.Forms;
 
 namespace SWI_2
@@ -50,7 +51,8 @@ namespace SWI_2
 
         private void buttonUpdateDatabase_Click(object sender, EventArgs e)
         {
-            CheckEvaluatorsAssociatedWithThisSurveyPage(sender, e);
+            //CheckEvaluatorsAssociatedWithThisSurveyPage(sender, e);
+            checkedListBoxEvaluators_SelectedIndexChanged(sender, e);
             this.fKSURVEYPAGEVIEWBindingSource.EndEdit();
             this.sWSP_SURVEY_PAGETableAdapter.Update(sANDBOXDataSet);
         }
@@ -256,7 +258,6 @@ namespace SWI_2
             object item;
             try
             {
-
                 for (int index = 0; index < checkedListBoxEvaluators.Items.Count; index++)
                 {
                     item = checkedListBoxEvaluators.Items[index];
@@ -316,7 +317,6 @@ namespace SWI_2
                 fKDITCHSURVEYPAGEBindingSource.MoveFirst();
                 dataGridViewDitches.Refresh();
                 this.sWSP_PHOTOTableAdapter.FillByGlobalID((SANDBOXDataSet.SWSP_PHOTODataTable)((SANDBOXDataSet)this.sWSPPHOTOBindingSource.DataSource).SWSP_PHOTO, (int)((System.Data.DataRowView)fKDITCHSURVEYPAGEBindingSource.Current)["global_id"]);
-
             }
             catch (Exception ex)
             {
@@ -329,13 +329,13 @@ namespace SWI_2
         {
             try
             {
-            foreach (object rowObject in dataGridViewCulverts.Rows)
-            {
-                ((DataGridViewRow)rowObject).Selected = false;
-            }
-            dataGridViewCulverts.Rows[0].Selected = true;
-            fKCULVERTSURVEYPAGEBindingSource1.MoveFirst();
-            dataGridViewCulverts.Refresh();
+                foreach (object rowObject in dataGridViewCulverts.Rows)
+                {
+                    ((DataGridViewRow)rowObject).Selected = false;
+                }
+                dataGridViewCulverts.Rows[0].Selected = true;
+                fKCULVERTSURVEYPAGEBindingSource1.MoveFirst();
+                dataGridViewCulverts.Refresh();
             }
             catch (Exception ex)
             {
@@ -346,13 +346,13 @@ namespace SWI_2
         {
             try
             {
-            foreach (object rowObject in dataGridViewPipes.Rows)
-            {
-                ((DataGridViewRow)rowObject).Selected = false;
-            }
-            dataGridViewPipes.Rows[0].Selected = true;
-            fKPIPESURVEYPAGEBindingSource.MoveFirst();
-            dataGridViewPipes.Refresh();
+                foreach (object rowObject in dataGridViewPipes.Rows)
+                {
+                    ((DataGridViewRow)rowObject).Selected = false;
+                }
+                dataGridViewPipes.Rows[0].Selected = true;
+                fKPIPESURVEYPAGEBindingSource.MoveFirst();
+                dataGridViewPipes.Refresh();
             }
             catch (Exception ex)
             {
@@ -361,10 +361,16 @@ namespace SWI_2
 
         private void buttonDitchesDelete_Click(object sender, EventArgs e)
         {
+            try{
             this.sWSP_DITCHTableAdapter.DeleteQuery(((int)((System.Data.DataRowView)fKDITCHSURVEYPAGEBindingSource.Current)["ditch_id"]));
             this.sWSP_DITCHTableAdapter.Update(sANDBOXDataSet);
             this.sWSP_DITCHTableAdapter.Fill((SANDBOXDataSet.SWSP_DITCHDataTable)((SANDBOXDataSet)this.sWSPDITCHBindingSource.DataSource).SWSP_DITCH);
             dataGridViewDitches.Refresh();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("You haven't selected a record to delete");
+            }
         }
 
         private void buttonDitchesAdd_Click(object sender, EventArgs e)
@@ -384,7 +390,9 @@ namespace SWI_2
                                                 null,
                                                 null,
                                                 10,
-                                                "");
+                                                "",
+                                                "DSNODE",
+                                                "USNODE");
             this.sWSP_DITCHTableAdapter.Fill((SANDBOXDataSet.SWSP_DITCHDataTable)((SANDBOXDataSet)this.sWSPDITCHBindingSource.DataSource).SWSP_DITCH);
 
             fKDITCHSURVEYPAGEBindingSource.MoveLast();
@@ -423,15 +431,22 @@ namespace SWI_2
 
         private void buttonUpdateDitch_Click(object sender, EventArgs e)
         {
-            int currentSelected = (int)((System.Data.DataRowView)fKDITCHSURVEYPAGEBindingSource.Current)["global_id"];
-            this.fKDITCHSURVEYPAGEBindingSource.EndEdit();
-            this.sWSP_DITCHTableAdapter.Update(sANDBOXDataSet);
-            this.sWSP_DITCHTableAdapter.Fill((SANDBOXDataSet.SWSP_DITCHDataTable)((SANDBOXDataSet)this.sWSPDITCHBindingSource.DataSource).SWSP_DITCH);
-            while (currentSelected != (int)((System.Data.DataRowView)fKDITCHSURVEYPAGEBindingSource.Current)["global_id"])
+            try
             {
-                fKDITCHSURVEYPAGEBindingSource.MoveNext();
+                int currentSelected = (int)((System.Data.DataRowView)fKDITCHSURVEYPAGEBindingSource.Current)["global_id"];
+                this.fKDITCHSURVEYPAGEBindingSource.EndEdit();
+                this.sWSP_DITCHTableAdapter.Update(sANDBOXDataSet);
+                this.sWSP_DITCHTableAdapter.Fill((SANDBOXDataSet.SWSP_DITCHDataTable)((SANDBOXDataSet)this.sWSPDITCHBindingSource.DataSource).SWSP_DITCH);
+                while (currentSelected != (int)((System.Data.DataRowView)fKDITCHSURVEYPAGEBindingSource.Current)["global_id"])
+                {
+                    fKDITCHSURVEYPAGEBindingSource.MoveNext();
+                }
+                dataGridViewDitches.Refresh();
+             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Nothing to update!");
             }
-            dataGridViewDitches.Refresh();
         }
 
         private void buttonCulvertsAdd_Click(object sender, EventArgs e)
@@ -451,8 +466,11 @@ namespace SWI_2
                                                 4,
                                                 null,
                                                 null,
+                                                null,
                                                 10,
-                                                "");
+                                                "",
+                                                "DSNODE",
+                                                "USNODE");
             this.sWSP_CULVERTTableAdapter.Fill((SANDBOXDataSet.SWSP_CULVERTDataTable)((SANDBOXDataSet)this.sWSPCULVERTBindingSource.DataSource).SWSP_CULVERT);
 
             fKCULVERTSURVEYPAGEBindingSource1.MoveLast();
@@ -461,23 +479,37 @@ namespace SWI_2
 
         private void buttonCulvertsDelete_Click(object sender, EventArgs e)
         {
-            this.sWSP_CULVERTTableAdapter.DeleteQuery(((int)((System.Data.DataRowView)fKCULVERTSURVEYPAGEBindingSource1.Current)["culvert_id"]));
-            this.sWSP_CULVERTTableAdapter.Update(sANDBOXDataSet);
-            this.sWSP_CULVERTTableAdapter.Fill((SANDBOXDataSet.SWSP_CULVERTDataTable)((SANDBOXDataSet)this.sWSPCULVERTBindingSource.DataSource).SWSP_CULVERT);
-            dataGridViewCulverts.Refresh();
+            try
+            {
+                this.sWSP_CULVERTTableAdapter.DeleteQuery(((int)((System.Data.DataRowView)fKCULVERTSURVEYPAGEBindingSource1.Current)["culvert_id"]));
+                this.sWSP_CULVERTTableAdapter.Update(sANDBOXDataSet);
+                this.sWSP_CULVERTTableAdapter.Fill((SANDBOXDataSet.SWSP_CULVERTDataTable)((SANDBOXDataSet)this.sWSPCULVERTBindingSource.DataSource).SWSP_CULVERT);
+                dataGridViewCulverts.Refresh();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("You haven't selected a record to delete");
+            }
         }
 
         private void buttonUpdateCulvert_Click(object sender, EventArgs e)
         {
-            int currentSelected = (int)((System.Data.DataRowView)fKCULVERTSURVEYPAGEBindingSource1.Current)["global_id"];
-            this.fKCULVERTSURVEYPAGEBindingSource1.EndEdit();
-            this.sWSP_CULVERTTableAdapter.Update(sANDBOXDataSet);
-            this.sWSP_CULVERTTableAdapter.Fill((SANDBOXDataSet.SWSP_CULVERTDataTable)((SANDBOXDataSet)this.sWSPCULVERTBindingSource.DataSource).SWSP_CULVERT);
-            while (currentSelected != (int)((System.Data.DataRowView)fKCULVERTSURVEYPAGEBindingSource1.Current)["global_id"])
+            try
             {
-                fKCULVERTSURVEYPAGEBindingSource1.MoveNext();
+                int currentSelected = (int)((System.Data.DataRowView)fKCULVERTSURVEYPAGEBindingSource1.Current)["global_id"];
+                this.fKCULVERTSURVEYPAGEBindingSource1.EndEdit();
+                this.sWSP_CULVERTTableAdapter.Update(sANDBOXDataSet);
+                this.sWSP_CULVERTTableAdapter.Fill((SANDBOXDataSet.SWSP_CULVERTDataTable)((SANDBOXDataSet)this.sWSPCULVERTBindingSource.DataSource).SWSP_CULVERT);
+                while (currentSelected != (int)((System.Data.DataRowView)fKCULVERTSURVEYPAGEBindingSource1.Current)["global_id"])
+                {
+                    fKCULVERTSURVEYPAGEBindingSource1.MoveNext();
+                }
+                dataGridViewCulverts.Refresh();
             }
-            dataGridViewCulverts.Refresh();
+            catch (Exception ex)
+            {
+                MessageBox.Show("Nothing to update!");
+            }
         }
 
         private void buttonPipesAdd_Click(object sender, EventArgs e)
@@ -496,6 +528,7 @@ namespace SWI_2
                                                 null,
                                                 null,
                                                 null,
+                                                null,
                                                 10,
                                                 4,
                                                 "");
@@ -507,23 +540,72 @@ namespace SWI_2
 
         private void buttonPipesDelete_Click(object sender, EventArgs e)
         {
+            try{
             this.sWSP_PIPETableAdapter.DeleteQuery(((int)((System.Data.DataRowView)fKPIPESURVEYPAGEBindingSource.Current)["pipe_id"]));
             this.sWSP_PIPETableAdapter.Update(sANDBOXDataSet);
             this.sWSP_PIPETableAdapter.Fill((SANDBOXDataSet.SWSP_PIPEDataTable)((SANDBOXDataSet)this.sWSPPIPEBindingSource.DataSource).SWSP_PIPE);
             dataGridViewPipes.Refresh();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("You haven't selected a record to delete");
+            }
         }
 
         private void buttonUpdatePipe_Click(object sender, EventArgs e)
         {
-            int currentSelected = (int)((System.Data.DataRowView)fKPIPESURVEYPAGEBindingSource.Current)["global_id"];
-            this.fKPIPESURVEYPAGEBindingSource.EndEdit();
-            this.sWSP_PIPETableAdapter.Update(sANDBOXDataSet);
-            this.sWSP_PIPETableAdapter.Fill((SANDBOXDataSet.SWSP_PIPEDataTable)((SANDBOXDataSet)this.sWSPPIPEBindingSource.DataSource).SWSP_PIPE);
-            while (currentSelected != (int)((System.Data.DataRowView)fKPIPESURVEYPAGEBindingSource.Current)["global_id"])
+            try
             {
-                fKPIPESURVEYPAGEBindingSource.MoveNext();
+                int currentSelected = (int)((System.Data.DataRowView)fKPIPESURVEYPAGEBindingSource.Current)["global_id"];
+                this.fKPIPESURVEYPAGEBindingSource.EndEdit();
+                this.sWSP_PIPETableAdapter.Update(sANDBOXDataSet);
+                this.sWSP_PIPETableAdapter.Fill((SANDBOXDataSet.SWSP_PIPEDataTable)((SANDBOXDataSet)this.sWSPPIPEBindingSource.DataSource).SWSP_PIPE);
+                while (currentSelected != (int)((System.Data.DataRowView)fKPIPESURVEYPAGEBindingSource.Current)["global_id"])
+                {
+                    fKPIPESURVEYPAGEBindingSource.MoveNext();
+                }
+                dataGridViewPipes.Refresh();
+             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Nothing to update!");
             }
-            dataGridViewPipes.Refresh();
+        }
+
+        private void surveyViewToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+            FormFieldSurveyView child = new FormFieldSurveyView();
+
+            this.Enabled = false;
+            child.ShowDialog();
+            this.Enabled = true;
+
+            this.sWSP_GLOBAL_IDTableAdapter.Fill(this.sANDBOXDataSet.SWSP_GLOBAL_ID);
+            this.sWSP_PIPETableAdapter.Fill(this.sANDBOXDataSet.SWSP_PIPE);
+            this.sWSP_SHAPE_TYPETableAdapter.Fill(this.sANDBOXDataSet.SWSP_SHAPE_TYPE);
+            this.sWSP_CULVERT_OPENING_TYPETableAdapter.Fill(this.sANDBOXDataSet.SWSP_CULVERT_OPENING_TYPE);
+            this.sWSP_CULVERTTableAdapter.Fill(this.sANDBOXDataSet.SWSP_CULVERT);
+            this.sWSP_PHOTOTableAdapter.Fill(this.sANDBOXDataSet.SWSP_PHOTO);
+            this.sWSP_MATERIAL_TYPETableAdapter.Fill(this.sANDBOXDataSet.SWSP_MATERIAL_TYPE);
+            this.sWSP_FACING_TYPETableAdapter.Fill(this.sANDBOXDataSet.SWSP_FACING_TYPE);
+            this.sWSP_DITCHTableAdapter.Fill(this.sANDBOXDataSet.SWSP_DITCH);
+            this.sWSP_SURVEY_PAGE_EVALUATORTableAdapter.Fill(this.sANDBOXDataSet.SWSP_SURVEY_PAGE_EVALUATOR);
+            this.sWSP_EVALUATORTableAdapter.Fill(this.sANDBOXDataSet.SWSP_EVALUATOR);
+            this.sWSP_SURVEY_PAGETableAdapter.Fill(this.sANDBOXDataSet.SWSP_SURVEY_PAGE);
+            this.sWSP_VIEWTableAdapter.Fill(this.sANDBOXDataSet.SWSP_VIEW);
+            this.sWSP_SUBWATERSHEDTableAdapter.Fill(this.sANDBOXDataSet.SWSP_SUBWATERSHED);
+            this.sWSP_WATERSHEDTableAdapter.Fill(this.sANDBOXDataSet.SWSP_WATERSHED);
+
+            _lastGlobalID = 0;
+            _lastSearch = _lastSearchVar.culvert;
+
+            try
+            {
+                dataGridViewDitches.Rows[0].Selected = true;
+            }
+            catch (Exception ex)
+            {
+            }
         }
 
         private void dataAdministratorToolStripMenuItem_Click(object sender, EventArgs e)
@@ -534,10 +616,37 @@ namespace SWI_2
             this.Enabled = false;
             child.ShowDialog();
             this.Enabled = true;
+
+            this.sWSP_GLOBAL_IDTableAdapter.Fill(this.sANDBOXDataSet.SWSP_GLOBAL_ID);
+            this.sWSP_PIPETableAdapter.Fill(this.sANDBOXDataSet.SWSP_PIPE);
+            this.sWSP_SHAPE_TYPETableAdapter.Fill(this.sANDBOXDataSet.SWSP_SHAPE_TYPE);
+            this.sWSP_CULVERT_OPENING_TYPETableAdapter.Fill(this.sANDBOXDataSet.SWSP_CULVERT_OPENING_TYPE);
+            this.sWSP_CULVERTTableAdapter.Fill(this.sANDBOXDataSet.SWSP_CULVERT);
+            this.sWSP_PHOTOTableAdapter.Fill(this.sANDBOXDataSet.SWSP_PHOTO);
+            this.sWSP_MATERIAL_TYPETableAdapter.Fill(this.sANDBOXDataSet.SWSP_MATERIAL_TYPE);
+            this.sWSP_FACING_TYPETableAdapter.Fill(this.sANDBOXDataSet.SWSP_FACING_TYPE);
+            this.sWSP_DITCHTableAdapter.Fill(this.sANDBOXDataSet.SWSP_DITCH);
+            this.sWSP_SURVEY_PAGE_EVALUATORTableAdapter.Fill(this.sANDBOXDataSet.SWSP_SURVEY_PAGE_EVALUATOR);
+            this.sWSP_EVALUATORTableAdapter.Fill(this.sANDBOXDataSet.SWSP_EVALUATOR);
+            this.sWSP_SURVEY_PAGETableAdapter.Fill(this.sANDBOXDataSet.SWSP_SURVEY_PAGE);
+            this.sWSP_VIEWTableAdapter.Fill(this.sANDBOXDataSet.SWSP_VIEW);
+            this.sWSP_SUBWATERSHEDTableAdapter.Fill(this.sANDBOXDataSet.SWSP_SUBWATERSHED);
+            this.sWSP_WATERSHEDTableAdapter.Fill(this.sANDBOXDataSet.SWSP_WATERSHED);
+
+            _lastGlobalID = 0;
+            _lastSearch = _lastSearchVar.culvert;
+
+            try
+            {
+                dataGridViewDitches.Rows[0].Selected = true;
+            }
+            catch (Exception ex)
+            {
+            }
         }
 
         //This function is usually called during the search procedure, it allows the datatables
-        //to reload themselves and beviewed properly by the interface.
+        //to reload themselves and be viewed properly by the interface.
         private void RefreshInterfaceTables()
         {
             sWSPWATERSHEDBindingSource.MoveFirst();
@@ -622,13 +731,11 @@ namespace SWI_2
                     {
                         findFirstCulvert();
                     }
-
                     //third search the pipes table
                     else if((this.sWSP_PIPETableAdapter.FindFirstGlobalID(currentSelected)).HasValue)
                     {
                         findFirstPipe();
                     }
-
                     //fourth search all of the ditches table (if there is only one match we will end up right back where we started).
                     else if ((this.sWSP_DITCHTableAdapter.FindFirstGlobalID(currentSelected)).HasValue)
                     {
@@ -693,13 +800,11 @@ namespace SWI_2
                         }
                         this.Refresh();
                     }
-
                     //second search the pipes table
                     else if ((this.sWSP_PIPETableAdapter.FindFirstGlobalID(currentSelected)).HasValue)
                     {
                         findFirstPipe();
                     }
-
                     //third search all of the ditches table (if there is only one match we will end up right back where we started).
                     else if ((this.sWSP_DITCHTableAdapter.FindFirstGlobalID(currentSelected)).HasValue)
                     {
@@ -769,27 +874,22 @@ namespace SWI_2
                             fKPIPESURVEYPAGEBindingSource.MoveNext();
                         }
                         this.Refresh();
-
                     }
                     //second search all of the ditches table (if there is only one match we will end up right back where we started).
                     else if ((this.sWSP_DITCHTableAdapter.FindFirstGlobalID(textBoxFindNode.Text)).HasValue)
                     {
                         findFirstDitch();
-
                     }
                     //third search the culverts table
                     else if ((this.sWSP_CULVERTTableAdapter.FindFirstGlobalID(textBoxFindNode.Text)).HasValue)
                     {
                         findFirstCulvert();
                     }
-
                     //fourth search the pipes table
                     else if ((this.sWSP_PIPETableAdapter.FindFirstGlobalID(textBoxFindNode.Text)).HasValue)
                     {
                         findFirstPipe();
                     }
-
-                    
                 }
                 else
                 {
@@ -864,30 +964,30 @@ namespace SWI_2
 
         private void textBoxDitchesNode_TextChanged(object sender, EventArgs e)
         {
-            if (textBoxDitchesNode.Text.Length > 10)
+            if (textBoxDitchesMeasuredNode.Text.Length > 10)
             {
-                textBoxDitchesNode.Text = textBoxDitchesNode.Text.Substring(0, 10);
+                textBoxDitchesMeasuredNode.Text = textBoxDitchesMeasuredNode.Text.Substring(0, 10);
             }
-            textBoxDitchesNode.Text = textBoxDitchesNode.Text.Trim();
+            textBoxDitchesMeasuredNode.Text = textBoxDitchesMeasuredNode.Text.Trim();
         }
 
         private void textBoxDitchesNode_Enter(object sender, EventArgs e)
         {
-            textBoxDitchesNode.Text = textBoxDitchesNode.Text.Trim();
+            textBoxDitchesMeasuredNode.Text = textBoxDitchesMeasuredNode.Text.Trim();
         }
 
         private void textBoxCulvertsNode_TextChanged(object sender, EventArgs e)
         {
-            if (textBoxCulvertsNode.Text.Length > 10)
+            if (textBoxCulvertsMeasuredNode.Text.Length > 10)
             {
-                textBoxCulvertsNode.Text = textBoxCulvertsNode.Text.Substring(0, 10);
+                textBoxCulvertsMeasuredNode.Text = textBoxCulvertsMeasuredNode.Text.Substring(0, 10);
             }
-            textBoxCulvertsNode.Text = textBoxCulvertsNode.Text.Trim();
+            textBoxCulvertsMeasuredNode.Text = textBoxCulvertsMeasuredNode.Text.Trim();
         }
 
         private void textBoxCulvertsNode_Enter(object sender, EventArgs e)
         {
-            textBoxCulvertsNode.Text = textBoxCulvertsNode.Text.Trim();
+            textBoxCulvertsMeasuredNode.Text = textBoxCulvertsMeasuredNode.Text.Trim();
         }
 
         private void textBoxPipesDSNode_TextChanged(object sender, EventArgs e)
@@ -969,6 +1069,202 @@ namespace SWI_2
                 }
 
             }
+        }
+
+        private void exportReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog DialogSave = new SaveFileDialog();
+            DialogSave.DefaultExt = "csv";
+            DialogSave.Filter = "Text file (*.csv)|*.csv|XML file (*.xml)|*.xml|All files (*.*)|*.*";
+            DialogSave.AddExtension = true;
+            DialogSave.RestoreDirectory = true;
+            DialogSave.Title = "Where do you want to save the file?";
+            DialogSave.InitialDirectory = @"C:/";
+            if (DialogSave.ShowDialog() == DialogResult.OK)
+            {
+                this.Cursor = Cursors.WaitCursor;
+                try
+                {
+                    //All the pipes
+                    SANDBOXDataSetTableAdapters.SWSP_PIPESTableAdapter thePipesTableAdapter =
+                        new SWI_2.SANDBOXDataSetTableAdapters.SWSP_PIPESTableAdapter();
+                    SANDBOXDataSet.SWSP_PIPESDataTable thePipesDataTable =
+                        new SANDBOXDataSet.SWSP_PIPESDataTable();
+
+                    /*thePipesTableAdapter.Fill(thePipesDataTable);
+                    CreateCSVFile(thePipesDataTable, DialogSave.FileName, "All of the pipes in the stormwater database");
+                    thePipesDataTable.Clear();*/
+                    thePipesTableAdapter.FillByBadNoDSNode(thePipesDataTable);
+                    CreateCSVFile(thePipesDataTable, DialogSave.FileName, "Pipes with no DS Node");
+                    thePipesDataTable.Clear();
+                    thePipesTableAdapter.FillByBadNoDSNodeMatch(thePipesDataTable);
+                    CreateCSVFile(thePipesDataTable, DialogSave.FileName, "Pipes with no matching pipe in mst_links with the same downstream node");
+                    thePipesDataTable.Clear();
+                    thePipesTableAdapter.FillByBadNoInsideDiamIn(thePipesDataTable);
+                    CreateCSVFile(thePipesDataTable, DialogSave.FileName, "Pipes with no inside diameter");
+                    thePipesDataTable.Clear();
+                    thePipesTableAdapter.FillByBadNoUSDSMatch(thePipesDataTable);
+                    CreateCSVFile(thePipesDataTable, DialogSave.FileName, "Pipes with no matching pipe in mst_links with the same upstream and downstream nodes");
+                    thePipesDataTable.Clear();
+                    thePipesTableAdapter.FillByBadNoUSNode(thePipesDataTable);
+                    CreateCSVFile(thePipesDataTable, DialogSave.FileName, "Pipes with no US node");
+                    thePipesDataTable.Clear();
+                    thePipesTableAdapter.FillByBadNoUSNodeMatch(thePipesDataTable);
+                    CreateCSVFile(thePipesDataTable, DialogSave.FileName, "Pipes with no matching pipe in mst_links with the same upstream node");
+                    thePipesDataTable.Clear();
+                    thePipesTableAdapter.FillByPipesOK(thePipesDataTable);
+                    CreateCSVFile(thePipesDataTable, DialogSave.FileName, "Pipes that have completely valid data");
+
+                    //All the ditches
+                    SANDBOXDataSetTableAdapters.SWSP_DITCHESTableAdapter theDitchesTableAdapter =
+                        new SWI_2.SANDBOXDataSetTableAdapters.SWSP_DITCHESTableAdapter();
+                    SANDBOXDataSet.SWSP_DITCHESDataTable theDitchesDataTable =
+                        new SANDBOXDataSet.SWSP_DITCHESDataTable();
+
+                    /*theDitchesDataTable.Clear();
+                    theDitchesTableAdapter.Fill(theDitchesDataTable);
+                    CreateCSVFile(theDitchesDataTable, DialogSave.FileName, "All of the ditches in the stormwater database");*/
+                    theDitchesTableAdapter.FillByBadDepthLT1(theDitchesDataTable);
+                    CreateCSVFile(theDitchesDataTable, DialogSave.FileName, "Ditches with depth less than one inch");
+                    theDitchesDataTable.Clear();
+                    theDitchesTableAdapter.FillByBadNoDSFacingMatch(theDitchesDataTable);
+                    CreateCSVFile(theDitchesDataTable, DialogSave.FileName, "Ditches with no matching link in mst_links with the same downstream node");
+                    theDitchesDataTable.Clear();
+                    theDitchesTableAdapter.FillByBadNoFacing(theDitchesDataTable);
+                    CreateCSVFile(theDitchesDataTable, DialogSave.FileName, "Ditches without a facing");
+                    theDitchesDataTable.Clear();
+                    theDitchesTableAdapter.FillByBadNoNode(theDitchesDataTable);
+                    CreateCSVFile(theDitchesDataTable, DialogSave.FileName, "Ditches without a node");
+                    theDitchesDataTable.Clear();
+                    theDitchesTableAdapter.FillByBadNoUSFacingMatch(theDitchesDataTable);
+                    CreateCSVFile(theDitchesDataTable, DialogSave.FileName, "Ditches with no matching link in mst_links with the same upstream node");
+                    theDitchesDataTable.Clear();
+                    theDitchesTableAdapter.FillByBadWidthsImproper(theDitchesDataTable);
+                    CreateCSVFile(theDitchesDataTable, DialogSave.FileName, "Ditches with top width less than bottom width or no widths");
+                    theDitchesDataTable.Clear();
+                    theDitchesTableAdapter.FillByDitchesOK(theDitchesDataTable);
+                    CreateCSVFile(theDitchesDataTable, DialogSave.FileName, "Ditches that have completely valid data");
+
+                    //All the culverts
+                    SANDBOXDataSetTableAdapters.SWSP_CULVERTSTableAdapter theCulvertsTableAdapter =
+                        new SWI_2.SANDBOXDataSetTableAdapters.SWSP_CULVERTSTableAdapter();
+                    SANDBOXDataSet.SWSP_CULVERTSDataTable theCulvertsDataTable =
+                        new SANDBOXDataSet.SWSP_CULVERTSDataTable();
+
+                    /*theCulvertsTableAdapter.Fill(theCulvertsDataTable);
+                    CreateCSVFile(theCulvertsDataTable, DialogSave.FileName, "All of the culverts in the stormwater database");
+                    theCulvertsDataTable.Clear();*/
+                    theCulvertsTableAdapter.FillByBadDiameterNotStandard(theCulvertsDataTable);
+                    CreateCSVFile(theCulvertsDataTable, DialogSave.FileName, "Culverts with non-standard diameters");
+                    theCulvertsDataTable.Clear();
+                    theCulvertsTableAdapter.FillByBadNoDimension(theCulvertsDataTable);
+                    CreateCSVFile(theCulvertsDataTable, DialogSave.FileName, "Culverts with no valid measurments");
+                    theCulvertsDataTable.Clear();
+                    theCulvertsTableAdapter.FillByBadNoDSFacingMatch(theCulvertsDataTable);
+                    CreateCSVFile(theCulvertsDataTable, DialogSave.FileName, "Culverts with no matching link in mst_links with the same downstream node");
+                    theCulvertsDataTable.Clear();
+                    theCulvertsTableAdapter.FillByBadNoFacing(theCulvertsDataTable);
+                    CreateCSVFile(theCulvertsDataTable, DialogSave.FileName, "Culverts without a facing");
+                    theCulvertsDataTable.Clear();
+                    theCulvertsTableAdapter.FillByBadNoNode(theCulvertsDataTable);
+                    CreateCSVFile(theCulvertsDataTable, DialogSave.FileName, "Culverts without a node");
+                    theCulvertsDataTable.Clear();
+                    theCulvertsTableAdapter.FillByBadNoUSFacingMatch(theCulvertsDataTable);
+                    CreateCSVFile(theCulvertsDataTable, DialogSave.FileName, "Culverts with no matching link in mst_links with the same upstream node");
+                    theCulvertsDataTable.Clear();
+                    theCulvertsTableAdapter.FillByCulvertsOK(theCulvertsDataTable);
+                    CreateCSVFile(theCulvertsDataTable, DialogSave.FileName, "Culverts that have completely valid data");
+                }
+                catch (Exception ex)
+                {
+                    this.Cursor = Cursors.Arrow;
+                }
+ 
+                this.Cursor = Cursors.Arrow;
+            }
+            DialogSave.Dispose();
+            DialogSave = null;
+        }
+
+        public void CreateCSVFile(DataTable dt, string strFilePath, string strTableDescription)
+        {
+
+            #region Export Grid to CSV
+            //Create the CSV file to which grid data will be exported.
+            StreamWriter sw = new StreamWriter(strFilePath, true);
+            //write the table description
+            sw.Write(strTableDescription);
+            sw.Write(sw.NewLine);
+            //write the headers.
+            int iColCount = dt.Columns.Count;
+
+            for (int i = 0; i < iColCount; i++)
+            {
+                sw.Write(dt.Columns[i]);
+                if (i < iColCount - 1)
+                {
+                    sw.Write(",");
+                }
+            }
+
+            sw.Write(sw.NewLine);
+            //Now write all the rows.
+            foreach (DataRow dr in dt.Rows)
+            {
+                for (int i = 0; i < iColCount; i++)
+                {
+                    if (!Convert.IsDBNull(dr[i]))
+                    {
+                        sw.Write(dr[i].ToString().Replace(",", "/"));
+                    }
+
+                    if (i < iColCount - 1)
+                    {
+                        sw.Write(",");
+                    }
+                }
+                sw.Write(sw.NewLine);
+            }
+            sw.Write(sw.NewLine);
+
+            sw.Close();
+            #endregion
+        }
+
+        private void textBoxCulvertsDSNode_TextChanged(object sender, EventArgs e)
+        {
+            if (textBoxCulvertsDSNode.Text.Length > 10)
+            {
+                textBoxCulvertsDSNode.Text = textBoxCulvertsDSNode.Text.Substring(0, 10);
+            }
+            textBoxCulvertsDSNode.Text = textBoxCulvertsDSNode.Text.Trim();
+        }
+
+        private void textBoxCulvertsUSNode_TextChanged(object sender, EventArgs e)
+        {
+            if (textBoxCulvertsUSNode.Text.Length > 10)
+            {
+                textBoxCulvertsUSNode.Text = textBoxCulvertsUSNode.Text.Substring(0, 10);
+            }
+            textBoxCulvertsUSNode.Text = textBoxCulvertsUSNode.Text.Trim();
+        }
+
+        private void textBoxDitchesDSNode_TextChanged(object sender, EventArgs e)
+        {
+            if (textBoxDitchesDSNode.Text.Length > 10)
+            {
+                textBoxDitchesDSNode.Text = textBoxDitchesDSNode.Text.Substring(0, 10);
+            }
+            textBoxDitchesDSNode.Text = textBoxDitchesDSNode.Text.Trim();
+        }
+
+        private void textBoxDitchesUSNode_TextChanged(object sender, EventArgs e)
+        {
+            if (textBoxDitchesUSNode.Text.Length > 10)
+            {
+                textBoxDitchesUSNode.Text = textBoxDitchesUSNode.Text.Substring(0, 10);
+            }
+            textBoxDitchesUSNode.Text = textBoxDitchesUSNode.Text.Trim();
         }
     }
 }
