@@ -2,6 +2,14 @@
     
     
     public partial class SANDBOXDataSet {
+        partial class DataTableFieldSurveyDataTable
+        {
+      }
+    
+        partial class SWSP_MESH1DataTable
+        {
+        }
+    
         partial class SWSP_MATERIAL_TYPEDataTable
         {
         }
