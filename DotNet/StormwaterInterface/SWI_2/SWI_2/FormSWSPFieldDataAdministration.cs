@@ -153,24 +153,41 @@ namespace SWI_2
 
         private void buttonWatershedsUpdate_Click(object sender, EventArgs e)
         {
-            this.sWSPWATERSHEDBindingSource.EndEdit();
-            this.sWSP_WATERSHEDTableAdapter.Update(sANDBOXDataSet);
-            this.sWSP_WATERSHEDTableAdapter.Fill((SANDBOXDataSet.SWSP_WATERSHEDDataTable)((SANDBOXDataSet)this.sWSPWATERSHEDBindingSource.DataSource).SWSP_WATERSHED);
-            dataGridViewWatersheds.Refresh();
-        }
-
-        private void buttonWatershedsDelete_Click(object sender, EventArgs e)
-        {
             try
             {
-                this.sWSP_WATERSHEDTableAdapter.DeleteQuery((int)(((System.Data.DataRowView)sWSPWATERSHEDBindingSource.Current)["watershed_id"]));
+                this.sWSPWATERSHEDBindingSource.EndEdit();
                 this.sWSP_WATERSHEDTableAdapter.Update(sANDBOXDataSet);
                 this.sWSP_WATERSHEDTableAdapter.Fill((SANDBOXDataSet.SWSP_WATERSHEDDataTable)((SANDBOXDataSet)this.sWSPWATERSHEDBindingSource.DataSource).SWSP_WATERSHED);
                 dataGridViewWatersheds.Refresh();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("You cannot delete that watershed at this time.  Try deleting associated subwatersheds.");
+                MessageBox.Show("Update may not have been performed due to improper data input");
+            }
+        }
+
+        private void buttonWatershedsDelete_Click(object sender, EventArgs e)
+        {
+            DialogResult dr = MessageBox.Show("Do you wish to delete Watershed " + (string)(((System.Data.DataRowView)sWSPWATERSHEDBindingSource.Current)["watershed"]) + " and ALL of its related records?", "Really bad idea", MessageBoxButtons.YesNo);
+
+            if (dr == DialogResult.Yes)
+            {
+                DialogResult dr2 = MessageBox.Show("It is a bad idea to delete Watershed " + (string)(((System.Data.DataRowView)sWSPWATERSHEDBindingSource.Current)["watershed"]) + " and ALL of its related records!  Are you SURE you want to do this?", "Really bad idea", MessageBoxButtons.YesNo);
+
+                if (dr2 == DialogResult.Yes)
+                {
+                    try
+                    {
+                        this.sWSP_WATERSHEDTableAdapter.DeleteQuery((int)(((System.Data.DataRowView)sWSPWATERSHEDBindingSource.Current)["watershed_id"]));
+                        this.sWSP_WATERSHEDTableAdapter.Update(sANDBOXDataSet);
+                        this.sWSP_WATERSHEDTableAdapter.Fill((SANDBOXDataSet.SWSP_WATERSHEDDataTable)((SANDBOXDataSet)this.sWSPWATERSHEDBindingSource.DataSource).SWSP_WATERSHED);
+                        dataGridViewWatersheds.Refresh();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("You cannot delete that watershed at this time.  Try deleting associated subwatersheds.");
+                    }
+                }
             }
         }
 
@@ -182,24 +199,41 @@ namespace SWI_2
 
         private void buttonSubwatershedsUpdate_Click(object sender, EventArgs e)
         {
-            this.fKSUBWATERSHEDWATERSHEDBindingSource.EndEdit();
-            this.sWSP_SUBWATERSHEDTableAdapter.Update(sANDBOXDataSet);
-            this.sWSP_SUBWATERSHEDTableAdapter.Fill((SANDBOXDataSet.SWSP_SUBWATERSHEDDataTable)((SANDBOXDataSet)this.sWSPWATERSHEDBindingSource.DataSource).SWSP_SUBWATERSHED);
-            dataGridViewSubwatersheds.Refresh();
+            try
+            {
+                this.fKSUBWATERSHEDWATERSHEDBindingSource1.EndEdit();
+                this.sWSP_SUBWATERSHEDTableAdapter.Update(sANDBOXDataSet);
+                this.sWSP_SUBWATERSHEDTableAdapter.Fill((SANDBOXDataSet.SWSP_SUBWATERSHEDDataTable)((SANDBOXDataSet)this.sWSPWATERSHEDBindingSource.DataSource).SWSP_SUBWATERSHED);
+                dataGridViewSubwatersheds.Refresh();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Update may not have been completed due to improper data input");
+            }
         }
 
         private void buttonSubwatershedsDelete_Click(object sender, EventArgs e)
         {
-            try
+            DialogResult dr = MessageBox.Show("Do you wish to delete Subwatershed " + (string)(((System.Data.DataRowView)fKSUBWATERSHEDWATERSHEDBindingSource1.Current)["subwatershed"]) + " and ALL of its related records?", "Really bad idea", MessageBoxButtons.YesNo);
+
+            if (dr == DialogResult.Yes)
             {
-                this.sWSP_SUBWATERSHEDTableAdapter.DeleteQuery((int)(((System.Data.DataRowView)fKSUBWATERSHEDWATERSHEDBindingSource.Current)["subwatershed_id"]));
-                this.sWSP_SUBWATERSHEDTableAdapter.Update(sANDBOXDataSet);
-                this.sWSP_SUBWATERSHEDTableAdapter.Fill((SANDBOXDataSet.SWSP_SUBWATERSHEDDataTable)((SANDBOXDataSet)this.sWSPWATERSHEDBindingSource.DataSource).SWSP_SUBWATERSHED);
-                dataGridViewWatersheds.Refresh();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("You cannot delete that subwatershed at this time.  Try deleting associated maps.");
+                DialogResult dr2 = MessageBox.Show("It is a bad idea to delete Subwatershed " + (string)(((System.Data.DataRowView)fKSUBWATERSHEDWATERSHEDBindingSource1.Current)["subwatershed"]) + " and ALL of its related records!  Are you SURE you want to do this?", "Really bad idea", MessageBoxButtons.YesNo);
+
+                if (dr2 == DialogResult.Yes)
+                {
+                    try
+                    {
+                        this.sWSP_SUBWATERSHEDTableAdapter.DeleteQuery((int)(((System.Data.DataRowView)fKSUBWATERSHEDWATERSHEDBindingSource1.Current)["subwatershed_id"]));
+                        this.sWSP_SUBWATERSHEDTableAdapter.Update(sANDBOXDataSet);
+                        this.sWSP_SUBWATERSHEDTableAdapter.Fill((SANDBOXDataSet.SWSP_SUBWATERSHEDDataTable)((SANDBOXDataSet)this.sWSPWATERSHEDBindingSource.DataSource).SWSP_SUBWATERSHED);
+                        dataGridViewWatersheds.Refresh();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("You cannot delete that subwatershed at this time.  Try deleting associated maps.");
+                    }
+                }
             }
         }
 
@@ -211,18 +245,32 @@ namespace SWI_2
 
         private void buttonEvaluatorsUpdate_Click(object sender, EventArgs e)
         {
-            this.sWSPEVALUATORBindingSource.EndEdit();
-            this.sWSP_EVALUATORTableAdapter.Update(sANDBOXDataSet);
-            this.sWSP_EVALUATORTableAdapter.Fill((SANDBOXDataSet.SWSP_EVALUATORDataTable)((SANDBOXDataSet)this.sWSPEVALUATORBindingSource.DataSource).SWSP_EVALUATOR);
-            dataGridViewEvaluators.Refresh();
+            try
+            {
+                this.sWSPEVALUATORBindingSource.EndEdit();
+                this.sWSP_EVALUATORTableAdapter.Update(sANDBOXDataSet);
+                this.sWSP_EVALUATORTableAdapter.Fill((SANDBOXDataSet.SWSP_EVALUATORDataTable)((SANDBOXDataSet)this.sWSPEVALUATORBindingSource.DataSource).SWSP_EVALUATOR);
+                dataGridViewEvaluators.Refresh();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Update may not have been completed due to improper data format");
+            }
         }
 
         private void buttonEvaluatorsDelete_Click(object sender, EventArgs e)
         {
-            this.sWSP_EVALUATORTableAdapter.DeleteQuery((int)(((System.Data.DataRowView)sWSPEVALUATORBindingSource.Current)["evaluator_id"]));
-            this.sWSP_EVALUATORTableAdapter.Update(sANDBOXDataSet);
-            this.sWSP_EVALUATORTableAdapter.Fill((SANDBOXDataSet.SWSP_EVALUATORDataTable)((SANDBOXDataSet)this.sWSPEVALUATORBindingSource.DataSource).SWSP_EVALUATOR);
-            dataGridViewEvaluators.Refresh();
+            try
+            {
+                this.sWSP_EVALUATORTableAdapter.DeleteQuery((int)(((System.Data.DataRowView)sWSPEVALUATORBindingSource.Current)["evaluator_id"]));
+                this.sWSP_EVALUATORTableAdapter.Update(sANDBOXDataSet);
+                this.sWSP_EVALUATORTableAdapter.Fill((SANDBOXDataSet.SWSP_EVALUATORDataTable)((SANDBOXDataSet)this.sWSPEVALUATORBindingSource.DataSource).SWSP_EVALUATOR);
+                dataGridViewEvaluators.Refresh();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("You may not have selected an evaluator to delete");
+            }
         }
 
         private void buttonCulvertOpeningsAdd_Click(object sender, EventArgs e)
@@ -233,10 +281,17 @@ namespace SWI_2
 
         private void buttonCulvertOpeningsUpdate_Click(object sender, EventArgs e)
         {
-            this.sWSPCULVERTOPENINGTYPEBindingSource.EndEdit();
-            this.sWSP_CULVERT_OPENING_TYPETableAdapter.Update(sANDBOXDataSet);
-            this.sWSP_CULVERT_OPENING_TYPETableAdapter.Fill((SANDBOXDataSet.SWSP_CULVERT_OPENING_TYPEDataTable)((SANDBOXDataSet)this.sWSPCULVERTOPENINGTYPEBindingSource.DataSource).SWSP_CULVERT_OPENING_TYPE);
-            dataGridViewCulvertOpenings.Refresh();
+            try
+            {
+                this.sWSPCULVERTOPENINGTYPEBindingSource.EndEdit();
+                this.sWSP_CULVERT_OPENING_TYPETableAdapter.Update(sANDBOXDataSet);
+                this.sWSP_CULVERT_OPENING_TYPETableAdapter.Fill((SANDBOXDataSet.SWSP_CULVERT_OPENING_TYPEDataTable)((SANDBOXDataSet)this.sWSPCULVERTOPENINGTYPEBindingSource.DataSource).SWSP_CULVERT_OPENING_TYPE);
+                dataGridViewCulvertOpenings.Refresh();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Update may not have been completed due to improper data format");
+            }
         }
 
         private void buttonCulvertOpeningsDelete_Click(object sender, EventArgs e)
@@ -250,6 +305,7 @@ namespace SWI_2
                 }
                 catch (Exception ex)
                 {
+                    MessageBox.Show("You may not have selected an opening type to delete");
                 }
         }
 
@@ -261,10 +317,17 @@ namespace SWI_2
 
         private void buttonFacingsUpdate_Click(object sender, EventArgs e)
         {
-            this.sWSPFACINGTYPEBindingSource.EndEdit();
-            this.sWSP_FACING_TYPETableAdapter.Update(sANDBOXDataSet);
-            this.sWSP_FACING_TYPETableAdapter.Fill((SANDBOXDataSet.SWSP_FACING_TYPEDataTable)((SANDBOXDataSet)this.sWSPFACINGTYPEBindingSource.DataSource).SWSP_FACING_TYPE);
-            dataGridViewFacings.Refresh();
+            try
+            {
+                this.sWSPFACINGTYPEBindingSource.EndEdit();
+                this.sWSP_FACING_TYPETableAdapter.Update(sANDBOXDataSet);
+                this.sWSP_FACING_TYPETableAdapter.Fill((SANDBOXDataSet.SWSP_FACING_TYPEDataTable)((SANDBOXDataSet)this.sWSPFACINGTYPEBindingSource.DataSource).SWSP_FACING_TYPE);
+                dataGridViewFacings.Refresh();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Update may not have been completed due to improper data format");
+            }
         }
 
         private void buttonFacingsDelete_Click(object sender, EventArgs e)
@@ -278,6 +341,7 @@ namespace SWI_2
                 }
                 catch (Exception ex)
                 {
+                    MessageBox.Show("You may not have selected an opening type to delete");
                 }
         }
 
@@ -289,18 +353,32 @@ namespace SWI_2
 
         private void buttonShapesUpdate_Click(object sender, EventArgs e)
         {
-            this.sWSPSHAPETYPEBindingSource.EndEdit();
-            this.sWSP_SHAPE_TYPETableAdapter.Update(sANDBOXDataSet);
-            this.sWSP_SHAPE_TYPETableAdapter.Fill((SANDBOXDataSet.SWSP_SHAPE_TYPEDataTable)((SANDBOXDataSet)this.sWSPSHAPETYPEBindingSource.DataSource).SWSP_SHAPE_TYPE);
-            dataGridViewShapes.Refresh();
+            try
+            {
+                this.sWSPSHAPETYPEBindingSource.EndEdit();
+                this.sWSP_SHAPE_TYPETableAdapter.Update(sANDBOXDataSet);
+                this.sWSP_SHAPE_TYPETableAdapter.Fill((SANDBOXDataSet.SWSP_SHAPE_TYPEDataTable)((SANDBOXDataSet)this.sWSPSHAPETYPEBindingSource.DataSource).SWSP_SHAPE_TYPE);
+                dataGridViewShapes.Refresh();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Update may not have been completed due to improper data format");
+            }
         }
 
         private void buttonShapesDelete_Click(object sender, EventArgs e)
         {
-            this.sWSP_SHAPE_TYPETableAdapter.DeleteQuery((int)((System.Data.DataRowView)sWSPSHAPETYPEBindingSource.Current)["shape_type_id"]);
-            this.sWSP_SHAPE_TYPETableAdapter.Update(sANDBOXDataSet);
-            this.sWSP_SHAPE_TYPETableAdapter.Fill((SANDBOXDataSet.SWSP_SHAPE_TYPEDataTable)((SANDBOXDataSet)this.sWSPSHAPETYPEBindingSource.DataSource).SWSP_SHAPE_TYPE);
-            dataGridViewShapes.Refresh();
+            try
+            {
+                this.sWSP_SHAPE_TYPETableAdapter.DeleteQuery((int)((System.Data.DataRowView)sWSPSHAPETYPEBindingSource.Current)["shape_type_id"]);
+                this.sWSP_SHAPE_TYPETableAdapter.Update(sANDBOXDataSet);
+                this.sWSP_SHAPE_TYPETableAdapter.Fill((SANDBOXDataSet.SWSP_SHAPE_TYPEDataTable)((SANDBOXDataSet)this.sWSPSHAPETYPEBindingSource.DataSource).SWSP_SHAPE_TYPE);
+                dataGridViewShapes.Refresh();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("You might not have selected a shape to delete!");
+            }
         }
 
         private void buttonMaterialsAdd_Click(object sender, EventArgs e)
@@ -311,18 +389,32 @@ namespace SWI_2
 
         private void buttonMaterialsUpdate_Click(object sender, EventArgs e)
         {
-            this.sWSPMATERIALTYPEBindingSource.EndEdit();
-            this.sWSP_MATERIAL_TYPETableAdapter.Update(sANDBOXDataSet);
-            this.sWSP_MATERIAL_TYPETableAdapter.Fill((SANDBOXDataSet.SWSP_MATERIAL_TYPEDataTable)((SANDBOXDataSet)this.sWSPMATERIALTYPEBindingSource.DataSource).SWSP_MATERIAL_TYPE);
-            dataGridViewMaterials.Refresh();
+            try
+            {
+                this.sWSPMATERIALTYPEBindingSource.EndEdit();
+                this.sWSP_MATERIAL_TYPETableAdapter.Update(sANDBOXDataSet);
+                this.sWSP_MATERIAL_TYPETableAdapter.Fill((SANDBOXDataSet.SWSP_MATERIAL_TYPEDataTable)((SANDBOXDataSet)this.sWSPMATERIALTYPEBindingSource.DataSource).SWSP_MATERIAL_TYPE);
+                dataGridViewMaterials.Refresh();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Update may not have been completed due to improper data format");
+            }
         }
 
         private void buttonMaterialsDelete_Click(object sender, EventArgs e)
         {
-            this.sWSP_MATERIAL_TYPETableAdapter.DeleteQuery((int)((System.Data.DataRowView)sWSPMATERIALTYPEBindingSource.Current)["material_type_id"]);
-            this.sWSP_MATERIAL_TYPETableAdapter.Update(sANDBOXDataSet);
-            this.sWSP_MATERIAL_TYPETableAdapter.Fill((SANDBOXDataSet.SWSP_MATERIAL_TYPEDataTable)((SANDBOXDataSet)this.sWSPMATERIALTYPEBindingSource.DataSource).SWSP_MATERIAL_TYPE);
-            dataGridViewMaterials.Refresh();
+            try
+            {
+                this.sWSP_MATERIAL_TYPETableAdapter.DeleteQuery((int)((System.Data.DataRowView)sWSPMATERIALTYPEBindingSource.Current)["material_type_id"]);
+                this.sWSP_MATERIAL_TYPETableAdapter.Update(sANDBOXDataSet);
+                this.sWSP_MATERIAL_TYPETableAdapter.Fill((SANDBOXDataSet.SWSP_MATERIAL_TYPEDataTable)((SANDBOXDataSet)this.sWSPMATERIALTYPEBindingSource.DataSource).SWSP_MATERIAL_TYPE);
+                dataGridViewMaterials.Refresh();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("You may not have selected a material to delete");
+            }
         }
 
         private void buttonDelete_Click(object sender, EventArgs e)
