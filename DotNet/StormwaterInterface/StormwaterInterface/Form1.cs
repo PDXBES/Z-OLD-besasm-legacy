@@ -376,7 +376,7 @@ namespace StormwaterInterface
                 {
                     if (!Convert.IsDBNull(dr[i]))
                     {
-                        sw.Write(dr[i].ToString().Replace(",", "`"));
+                        sw.Write(dr[i].ToString().Replace(",", "\",\""));
                     }
 
                     if (i < iColCount - 1)

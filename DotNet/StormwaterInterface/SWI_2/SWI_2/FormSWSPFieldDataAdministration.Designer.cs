@@ -29,6 +29,85 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand1 = new Infragistics.Win.UltraWinGrid.UltraGridBand("FK_VIEW_SUBWATERSHED", -1);
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn1 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("view_id", -1, null, 0, Infragistics.Win.UltraWinGrid.SortIndicator.Ascending, false);
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn2 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("subwatershed_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn3 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("view_number");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn4 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("description");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn5 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_SURVEY_PAGE_VIEW");
+            Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand2 = new Infragistics.Win.UltraWinGrid.UltraGridBand("FK_SURVEY_PAGE_VIEW", 0);
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn6 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("survey_page_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn7 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("view_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn8 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("page_number");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn9 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("date");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn10 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("weather");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn11 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Comment");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn12 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_CULVERT_SURVEY_PAGE");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn13 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_DITCH_SURVEY_PAGE");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn14 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_PIPE_SURVEY_PAGE");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn15 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_SURVEY_PAGE_EVALUATOR_SURVEY_PAGE");
+            Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand3 = new Infragistics.Win.UltraWinGrid.UltraGridBand("FK_CULVERT_SURVEY_PAGE", 1);
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn16 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("culvert_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn17 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("global_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn18 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("survey_page_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn19 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("node");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn20 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("facing");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn21 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("culvert_opening");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn22 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("shape");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn23 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("full_diam_in");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn24 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("unobstructed_height_in");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn25 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("material");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn26 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("comment");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn27 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("full_width_in");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn28 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("us_node");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn29 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ds_node");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn30 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_PHOTO_CULVERT");
+            Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand4 = new Infragistics.Win.UltraWinGrid.UltraGridBand("FK_DITCH_SURVEY_PAGE", 1);
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn31 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ditch_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn32 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("global_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn33 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("survey_page_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn34 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("node");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn35 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("facing");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn36 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("depth_in");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn37 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("top_width_in");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn38 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("bottom_width_in");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn39 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("material");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn40 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("comment");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn41 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("us_node");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn42 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ds_node");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn43 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_PHOTO_DITCH");
+            Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand5 = new Infragistics.Win.UltraWinGrid.UltraGridBand("FK_PIPE_SURVEY_PAGE", 1);
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn44 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("pipe_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn45 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("global_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn46 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("survey_page_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn47 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("us_node");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn48 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ds_node");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn49 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("us_depth_in");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn50 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ds_depth_in");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn51 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("inside_diam_in");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn52 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("material");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn53 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("shape");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn54 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("comment");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn55 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("inside_width_in");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn56 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_PHOTO_PIPE");
+            Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand6 = new Infragistics.Win.UltraWinGrid.UltraGridBand("FK_SURVEY_PAGE_EVALUATOR_SURVEY_PAGE", 1);
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn57 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("survey_page_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn58 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("evaluator_id");
+            Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand7 = new Infragistics.Win.UltraWinGrid.UltraGridBand("FK_PHOTO_CULVERT", 2);
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn59 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("photo_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn60 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("global_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn61 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("location");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn62 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("comment");
+            Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand8 = new Infragistics.Win.UltraWinGrid.UltraGridBand("FK_PHOTO_DITCH", 4);
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn63 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("photo_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn64 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("global_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn65 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("location");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn66 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("comment");
+            Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand9 = new Infragistics.Win.UltraWinGrid.UltraGridBand("FK_PHOTO_PIPE", 6);
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn67 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("photo_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn68 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("global_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn69 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("location");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn70 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("comment");
             this.tabControlFormSWSPFieldDataAdministration = new System.Windows.Forms.TabControl();
             this.tabPageWatersheds = new System.Windows.Forms.TabPage();
             this.buttonSubwatershedsUpdate = new System.Windows.Forms.Button();
@@ -92,18 +171,30 @@
             this.labelFacings = new System.Windows.Forms.Label();
             this.labelCulvertOpenings = new System.Windows.Forms.Label();
             this.tabPageViewsAndSurveys = new System.Windows.Forms.TabPage();
-            this.fKSURVEYPAGEVIEWBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.fKVIEWSUBWATERSHEDBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.ultraButtonDeleteSelectedView = new Infragistics.Win.Misc.UltraButton();
+            this.ultraGrid1 = new Infragistics.Win.UltraWinGrid.UltraGrid();
+            this.fKVIEWSUBWATERSHEDBindingSource3 = new System.Windows.Forms.BindingSource(this.components);
             this.fKSUBWATERSHEDWATERSHEDBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.labelView = new System.Windows.Forms.Label();
+            this.dataGridViewSurveyPages = new System.Windows.Forms.DataGridView();
+            this.surveypageidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.viewidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pagenumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.weatherDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.commentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fKSURVEYPAGEVIEWBindingSource5 = new System.Windows.Forms.BindingSource(this.components);
             this.comboBoxSubwatershed = new System.Windows.Forms.ComboBox();
             this.comboBoxWatershed = new System.Windows.Forms.ComboBox();
-            this.buttonDelete = new System.Windows.Forms.Button();
+            this.buttonDeleteSelectedPage = new System.Windows.Forms.Button();
             this.buttonAddSurveyPage = new System.Windows.Forms.Button();
             this.buttonAddView = new System.Windows.Forms.Button();
             this.labelSubwatershed = new System.Windows.Forms.Label();
             this.labelWatershed = new System.Windows.Forms.Label();
             this.labelViews = new System.Windows.Forms.Label();
+            this.fKSURVEYPAGEVIEWBindingSource4 = new System.Windows.Forms.BindingSource(this.components);
+            this.fKVIEWSUBWATERSHEDBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.fKSURVEYPAGEVIEWBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.fKVIEWSUBWATERSHEDBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.sWSPVIEWBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.sWSPSURVEYPAGEBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.buttonOK = new System.Windows.Forms.Button();
@@ -118,17 +209,8 @@
             this.sWSP_SURVEY_PAGETableAdapter = new SWI_2.SANDBOXDataSetTableAdapters.SWSP_SURVEY_PAGETableAdapter();
             this.fKSURVEYPAGEVIEWBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.fKSURVEYPAGEVIEWBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.fKVIEWSUBWATERSHEDBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.fKSURVEYPAGEVIEWBindingSource3 = new System.Windows.Forms.BindingSource(this.components);
-            this.surveypageidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.viewidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pagenumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.weatherDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.commentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fKSURVEYPAGEVIEWBindingSource4 = new System.Windows.Forms.BindingSource(this.components);
+            this.fKVIEWSUBWATERSHEDBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.tabControlFormSWSPFieldDataAdministration.SuspendLayout();
             this.tabPageWatersheds.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSubwatersheds)).BeginInit();
@@ -149,17 +231,21 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCulvertOpenings)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sWSPCULVERTOPENINGTYPEBindingSource)).BeginInit();
             this.tabPageViewsAndSurveys.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ultraGrid1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fKVIEWSUBWATERSHEDBindingSource3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fKSUBWATERSHEDWATERSHEDBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSurveyPages)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fKSURVEYPAGEVIEWBindingSource5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fKSURVEYPAGEVIEWBindingSource4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fKVIEWSUBWATERSHEDBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fKSURVEYPAGEVIEWBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fKVIEWSUBWATERSHEDBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fKSUBWATERSHEDWATERSHEDBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sWSPVIEWBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sWSPSURVEYPAGEBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fKSURVEYPAGEVIEWBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fKSURVEYPAGEVIEWBindingSource2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fKVIEWSUBWATERSHEDBindingSource1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fKSURVEYPAGEVIEWBindingSource3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fKSURVEYPAGEVIEWBindingSource4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fKVIEWSUBWATERSHEDBindingSource2)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControlFormSWSPFieldDataAdministration
@@ -758,12 +844,12 @@
             // 
             // tabPageViewsAndSurveys
             // 
-            this.tabPageViewsAndSurveys.Controls.Add(this.dataGridView1);
-            this.tabPageViewsAndSurveys.Controls.Add(this.comboBox1);
-            this.tabPageViewsAndSurveys.Controls.Add(this.labelView);
+            this.tabPageViewsAndSurveys.Controls.Add(this.ultraButtonDeleteSelectedView);
+            this.tabPageViewsAndSurveys.Controls.Add(this.ultraGrid1);
+            this.tabPageViewsAndSurveys.Controls.Add(this.dataGridViewSurveyPages);
             this.tabPageViewsAndSurveys.Controls.Add(this.comboBoxSubwatershed);
             this.tabPageViewsAndSurveys.Controls.Add(this.comboBoxWatershed);
-            this.tabPageViewsAndSurveys.Controls.Add(this.buttonDelete);
+            this.tabPageViewsAndSurveys.Controls.Add(this.buttonDeleteSelectedPage);
             this.tabPageViewsAndSurveys.Controls.Add(this.buttonAddSurveyPage);
             this.tabPageViewsAndSurveys.Controls.Add(this.buttonAddView);
             this.tabPageViewsAndSurveys.Controls.Add(this.labelSubwatershed);
@@ -776,29 +862,338 @@
             this.tabPageViewsAndSurveys.Text = "Views and Surveys";
             this.tabPageViewsAndSurveys.UseVisualStyleBackColor = true;
             // 
-            // fKSURVEYPAGEVIEWBindingSource
+            // ultraButtonDeleteSelectedView
             // 
-            this.fKSURVEYPAGEVIEWBindingSource.DataMember = "FK_SURVEY_PAGE_VIEW";
-            this.fKSURVEYPAGEVIEWBindingSource.DataSource = this.fKVIEWSUBWATERSHEDBindingSource;
+            this.ultraButtonDeleteSelectedView.Location = new System.Drawing.Point(166, 335);
+            this.ultraButtonDeleteSelectedView.Name = "ultraButtonDeleteSelectedView";
+            this.ultraButtonDeleteSelectedView.Size = new System.Drawing.Size(127, 26);
+            this.ultraButtonDeleteSelectedView.TabIndex = 17;
+            this.ultraButtonDeleteSelectedView.Text = "Delete Selected View";
+            this.ultraButtonDeleteSelectedView.Click += new System.EventHandler(this.ultraButtonDeleteSelectedView_Click);
             // 
-            // fKVIEWSUBWATERSHEDBindingSource
+            // ultraGrid1
             // 
-            this.fKVIEWSUBWATERSHEDBindingSource.DataMember = "FK_VIEW_SUBWATERSHED";
-            this.fKVIEWSUBWATERSHEDBindingSource.DataSource = this.fKSUBWATERSHEDWATERSHEDBindingSource;
+            this.ultraGrid1.DataSource = this.fKVIEWSUBWATERSHEDBindingSource3;
+            ultraGridColumn1.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn1.Header.VisiblePosition = 0;
+            ultraGridColumn1.Width = 98;
+            ultraGridColumn2.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn2.Header.VisiblePosition = 1;
+            ultraGridColumn3.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn3.Header.VisiblePosition = 2;
+            ultraGridColumn3.Width = 100;
+            ultraGridColumn4.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn4.Header.VisiblePosition = 3;
+            ultraGridColumn5.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn5.Header.VisiblePosition = 4;
+            ultraGridBand1.Columns.AddRange(new object[] {
+            ultraGridColumn1,
+            ultraGridColumn2,
+            ultraGridColumn3,
+            ultraGridColumn4,
+            ultraGridColumn5});
+            ultraGridBand1.Expandable = false;
+            ultraGridBand1.Indentation = 0;
+            ultraGridColumn6.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn6.Header.VisiblePosition = 0;
+            ultraGridColumn6.Width = 98;
+            ultraGridColumn7.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn7.Header.VisiblePosition = 1;
+            ultraGridColumn8.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn8.Header.VisiblePosition = 2;
+            ultraGridColumn8.Width = 100;
+            ultraGridColumn9.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn9.Header.VisiblePosition = 3;
+            ultraGridColumn10.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn10.Header.VisiblePosition = 4;
+            ultraGridColumn11.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn11.Header.VisiblePosition = 5;
+            ultraGridColumn12.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn12.Header.VisiblePosition = 6;
+            ultraGridColumn13.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn13.Header.VisiblePosition = 7;
+            ultraGridColumn14.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn14.Header.VisiblePosition = 8;
+            ultraGridColumn15.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn15.Header.VisiblePosition = 9;
+            ultraGridBand2.Columns.AddRange(new object[] {
+            ultraGridColumn6,
+            ultraGridColumn7,
+            ultraGridColumn8,
+            ultraGridColumn9,
+            ultraGridColumn10,
+            ultraGridColumn11,
+            ultraGridColumn12,
+            ultraGridColumn13,
+            ultraGridColumn14,
+            ultraGridColumn15});
+            ultraGridBand2.Expandable = false;
+            ultraGridBand2.Indentation = 0;
+            ultraGridColumn16.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn16.Header.VisiblePosition = 0;
+            ultraGridColumn16.Width = 79;
+            ultraGridColumn17.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn17.Header.VisiblePosition = 1;
+            ultraGridColumn18.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn18.Header.VisiblePosition = 2;
+            ultraGridColumn18.Width = 100;
+            ultraGridColumn19.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn19.Header.VisiblePosition = 3;
+            ultraGridColumn20.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn20.Header.VisiblePosition = 4;
+            ultraGridColumn21.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn21.Header.VisiblePosition = 5;
+            ultraGridColumn22.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn22.Header.VisiblePosition = 6;
+            ultraGridColumn23.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn23.Header.VisiblePosition = 7;
+            ultraGridColumn24.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn24.Header.VisiblePosition = 8;
+            ultraGridColumn25.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn25.Header.VisiblePosition = 9;
+            ultraGridColumn26.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn26.Header.VisiblePosition = 10;
+            ultraGridColumn27.Header.VisiblePosition = 11;
+            ultraGridColumn28.Header.VisiblePosition = 12;
+            ultraGridColumn29.Header.VisiblePosition = 13;
+            ultraGridColumn30.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn30.Header.VisiblePosition = 14;
+            ultraGridBand3.Columns.AddRange(new object[] {
+            ultraGridColumn16,
+            ultraGridColumn17,
+            ultraGridColumn18,
+            ultraGridColumn19,
+            ultraGridColumn20,
+            ultraGridColumn21,
+            ultraGridColumn22,
+            ultraGridColumn23,
+            ultraGridColumn24,
+            ultraGridColumn25,
+            ultraGridColumn26,
+            ultraGridColumn27,
+            ultraGridColumn28,
+            ultraGridColumn29,
+            ultraGridColumn30});
+            ultraGridColumn31.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn31.Header.VisiblePosition = 0;
+            ultraGridColumn31.Width = 79;
+            ultraGridColumn32.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn32.Header.VisiblePosition = 1;
+            ultraGridColumn33.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn33.Header.VisiblePosition = 2;
+            ultraGridColumn33.Width = 100;
+            ultraGridColumn34.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn34.Header.VisiblePosition = 3;
+            ultraGridColumn35.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn35.Header.VisiblePosition = 4;
+            ultraGridColumn36.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn36.Header.VisiblePosition = 5;
+            ultraGridColumn37.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn37.Header.VisiblePosition = 6;
+            ultraGridColumn38.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn38.Header.VisiblePosition = 7;
+            ultraGridColumn39.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn39.Header.VisiblePosition = 8;
+            ultraGridColumn40.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn40.Header.VisiblePosition = 9;
+            ultraGridColumn41.Header.VisiblePosition = 10;
+            ultraGridColumn42.Header.VisiblePosition = 11;
+            ultraGridColumn43.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn43.Header.VisiblePosition = 12;
+            ultraGridBand4.Columns.AddRange(new object[] {
+            ultraGridColumn31,
+            ultraGridColumn32,
+            ultraGridColumn33,
+            ultraGridColumn34,
+            ultraGridColumn35,
+            ultraGridColumn36,
+            ultraGridColumn37,
+            ultraGridColumn38,
+            ultraGridColumn39,
+            ultraGridColumn40,
+            ultraGridColumn41,
+            ultraGridColumn42,
+            ultraGridColumn43});
+            ultraGridColumn44.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn44.Header.VisiblePosition = 0;
+            ultraGridColumn44.Width = 79;
+            ultraGridColumn45.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn45.Header.VisiblePosition = 1;
+            ultraGridColumn46.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn46.Header.VisiblePosition = 2;
+            ultraGridColumn46.Width = 100;
+            ultraGridColumn47.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn47.Header.VisiblePosition = 3;
+            ultraGridColumn48.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn48.Header.VisiblePosition = 4;
+            ultraGridColumn49.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn49.Header.VisiblePosition = 5;
+            ultraGridColumn50.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn50.Header.VisiblePosition = 6;
+            ultraGridColumn51.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn51.Header.VisiblePosition = 7;
+            ultraGridColumn52.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn52.Header.VisiblePosition = 8;
+            ultraGridColumn53.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn53.Header.VisiblePosition = 9;
+            ultraGridColumn54.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn54.Header.VisiblePosition = 10;
+            ultraGridColumn55.Header.VisiblePosition = 11;
+            ultraGridColumn56.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn56.Header.VisiblePosition = 12;
+            ultraGridBand5.Columns.AddRange(new object[] {
+            ultraGridColumn44,
+            ultraGridColumn45,
+            ultraGridColumn46,
+            ultraGridColumn47,
+            ultraGridColumn48,
+            ultraGridColumn49,
+            ultraGridColumn50,
+            ultraGridColumn51,
+            ultraGridColumn52,
+            ultraGridColumn53,
+            ultraGridColumn54,
+            ultraGridColumn55,
+            ultraGridColumn56});
+            ultraGridColumn57.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn57.Header.VisiblePosition = 0;
+            ultraGridColumn57.Width = 79;
+            ultraGridColumn58.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn58.Header.VisiblePosition = 1;
+            ultraGridBand6.Columns.AddRange(new object[] {
+            ultraGridColumn57,
+            ultraGridColumn58});
+            ultraGridColumn59.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn59.Header.VisiblePosition = 0;
+            ultraGridColumn59.Width = 60;
+            ultraGridColumn60.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn60.Header.VisiblePosition = 1;
+            ultraGridColumn61.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn61.Header.VisiblePosition = 2;
+            ultraGridColumn61.Width = 100;
+            ultraGridColumn62.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn62.Header.VisiblePosition = 3;
+            ultraGridBand7.Columns.AddRange(new object[] {
+            ultraGridColumn59,
+            ultraGridColumn60,
+            ultraGridColumn61,
+            ultraGridColumn62});
+            ultraGridColumn63.Header.VisiblePosition = 0;
+            ultraGridColumn64.Header.VisiblePosition = 1;
+            ultraGridColumn65.Header.VisiblePosition = 2;
+            ultraGridColumn66.Header.VisiblePosition = 3;
+            ultraGridBand8.Columns.AddRange(new object[] {
+            ultraGridColumn63,
+            ultraGridColumn64,
+            ultraGridColumn65,
+            ultraGridColumn66});
+            ultraGridColumn67.Header.VisiblePosition = 0;
+            ultraGridColumn68.Header.VisiblePosition = 1;
+            ultraGridColumn69.Header.VisiblePosition = 2;
+            ultraGridColumn70.Header.VisiblePosition = 3;
+            ultraGridBand9.Columns.AddRange(new object[] {
+            ultraGridColumn67,
+            ultraGridColumn68,
+            ultraGridColumn69,
+            ultraGridColumn70});
+            this.ultraGrid1.DisplayLayout.BandsSerializer.Add(ultraGridBand1);
+            this.ultraGrid1.DisplayLayout.BandsSerializer.Add(ultraGridBand2);
+            this.ultraGrid1.DisplayLayout.BandsSerializer.Add(ultraGridBand3);
+            this.ultraGrid1.DisplayLayout.BandsSerializer.Add(ultraGridBand4);
+            this.ultraGrid1.DisplayLayout.BandsSerializer.Add(ultraGridBand5);
+            this.ultraGrid1.DisplayLayout.BandsSerializer.Add(ultraGridBand6);
+            this.ultraGrid1.DisplayLayout.BandsSerializer.Add(ultraGridBand7);
+            this.ultraGrid1.DisplayLayout.BandsSerializer.Add(ultraGridBand8);
+            this.ultraGrid1.DisplayLayout.BandsSerializer.Add(ultraGridBand9);
+            this.ultraGrid1.DisplayLayout.GroupByBox.Hidden = true;
+            this.ultraGrid1.DisplayLayout.MaxColScrollRegions = 1;
+            this.ultraGrid1.DisplayLayout.MaxRowScrollRegions = 1;
+            this.ultraGrid1.DisplayLayout.Override.AllowAddNew = Infragistics.Win.UltraWinGrid.AllowAddNew.No;
+            this.ultraGrid1.DisplayLayout.Override.AllowDelete = Infragistics.Win.DefaultableBoolean.False;
+            this.ultraGrid1.DisplayLayout.Override.AllowUpdate = Infragistics.Win.DefaultableBoolean.False;
+            this.ultraGrid1.DisplayLayout.Override.CellClickAction = Infragistics.Win.UltraWinGrid.CellClickAction.EditAndSelectText;
+            this.ultraGrid1.DisplayLayout.Override.HeaderClickAction = Infragistics.Win.UltraWinGrid.HeaderClickAction.SortMulti;
+            this.ultraGrid1.DisplayLayout.ScrollBounds = Infragistics.Win.UltraWinGrid.ScrollBounds.ScrollToFill;
+            this.ultraGrid1.DisplayLayout.ScrollStyle = Infragistics.Win.UltraWinGrid.ScrollStyle.Immediate;
+            this.ultraGrid1.DisplayLayout.ViewStyleBand = Infragistics.Win.UltraWinGrid.ViewStyleBand.OutlookGroupBy;
+            this.ultraGrid1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ultraGrid1.Location = new System.Drawing.Point(12, 72);
+            this.ultraGrid1.Name = "ultraGrid1";
+            this.ultraGrid1.Size = new System.Drawing.Size(278, 257);
+            this.ultraGrid1.TabIndex = 16;
+            // 
+            // fKVIEWSUBWATERSHEDBindingSource3
+            // 
+            this.fKVIEWSUBWATERSHEDBindingSource3.DataMember = "FK_VIEW_SUBWATERSHED";
+            this.fKVIEWSUBWATERSHEDBindingSource3.DataSource = this.fKSUBWATERSHEDWATERSHEDBindingSource;
             // 
             // fKSUBWATERSHEDWATERSHEDBindingSource
             // 
             this.fKSUBWATERSHEDWATERSHEDBindingSource.DataMember = "FK_SUBWATERSHED_WATERSHED";
             this.fKSUBWATERSHEDWATERSHEDBindingSource.DataSource = this.sWSPWATERSHEDBindingSource;
             // 
-            // labelView
+            // dataGridViewSurveyPages
             // 
-            this.labelView.AutoSize = true;
-            this.labelView.Location = new System.Drawing.Point(38, 63);
-            this.labelView.Name = "labelView";
-            this.labelView.Size = new System.Drawing.Size(30, 13);
-            this.labelView.TabIndex = 11;
-            this.labelView.Text = "View";
+            this.dataGridViewSurveyPages.AutoGenerateColumns = false;
+            this.dataGridViewSurveyPages.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewSurveyPages.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.surveypageidDataGridViewTextBoxColumn,
+            this.viewidDataGridViewTextBoxColumn,
+            this.pagenumberDataGridViewTextBoxColumn,
+            this.dateDataGridViewTextBoxColumn,
+            this.weatherDataGridViewTextBoxColumn,
+            this.commentDataGridViewTextBoxColumn});
+            this.dataGridViewSurveyPages.DataSource = this.fKSURVEYPAGEVIEWBindingSource5;
+            this.dataGridViewSurveyPages.Location = new System.Drawing.Point(299, 72);
+            this.dataGridViewSurveyPages.Name = "dataGridViewSurveyPages";
+            this.dataGridViewSurveyPages.Size = new System.Drawing.Size(278, 257);
+            this.dataGridViewSurveyPages.TabIndex = 15;
+            // 
+            // surveypageidDataGridViewTextBoxColumn
+            // 
+            this.surveypageidDataGridViewTextBoxColumn.DataPropertyName = "survey_page_id";
+            this.surveypageidDataGridViewTextBoxColumn.HeaderText = "survey_page_id";
+            this.surveypageidDataGridViewTextBoxColumn.Name = "surveypageidDataGridViewTextBoxColumn";
+            this.surveypageidDataGridViewTextBoxColumn.ReadOnly = true;
+            this.surveypageidDataGridViewTextBoxColumn.Width = 75;
+            // 
+            // viewidDataGridViewTextBoxColumn
+            // 
+            this.viewidDataGridViewTextBoxColumn.DataPropertyName = "view_id";
+            this.viewidDataGridViewTextBoxColumn.HeaderText = "view_id";
+            this.viewidDataGridViewTextBoxColumn.Name = "viewidDataGridViewTextBoxColumn";
+            this.viewidDataGridViewTextBoxColumn.Width = 50;
+            // 
+            // pagenumberDataGridViewTextBoxColumn
+            // 
+            this.pagenumberDataGridViewTextBoxColumn.DataPropertyName = "page_number";
+            this.pagenumberDataGridViewTextBoxColumn.HeaderText = "page_number";
+            this.pagenumberDataGridViewTextBoxColumn.Name = "pagenumberDataGridViewTextBoxColumn";
+            this.pagenumberDataGridViewTextBoxColumn.Width = 75;
+            // 
+            // dateDataGridViewTextBoxColumn
+            // 
+            this.dateDataGridViewTextBoxColumn.DataPropertyName = "date";
+            this.dateDataGridViewTextBoxColumn.HeaderText = "date";
+            this.dateDataGridViewTextBoxColumn.Name = "dateDataGridViewTextBoxColumn";
+            this.dateDataGridViewTextBoxColumn.Width = 75;
+            // 
+            // weatherDataGridViewTextBoxColumn
+            // 
+            this.weatherDataGridViewTextBoxColumn.DataPropertyName = "weather";
+            this.weatherDataGridViewTextBoxColumn.HeaderText = "weather";
+            this.weatherDataGridViewTextBoxColumn.Name = "weatherDataGridViewTextBoxColumn";
+            // 
+            // commentDataGridViewTextBoxColumn
+            // 
+            this.commentDataGridViewTextBoxColumn.DataPropertyName = "Comment";
+            this.commentDataGridViewTextBoxColumn.HeaderText = "Comment";
+            this.commentDataGridViewTextBoxColumn.Name = "commentDataGridViewTextBoxColumn";
+            // 
+            // fKSURVEYPAGEVIEWBindingSource5
+            // 
+            this.fKSURVEYPAGEVIEWBindingSource5.DataMember = "FK_SURVEY_PAGE_VIEW";
+            this.fKSURVEYPAGEVIEWBindingSource5.DataSource = this.fKVIEWSUBWATERSHEDBindingSource3;
             // 
             // comboBoxSubwatershed
             // 
@@ -822,21 +1217,21 @@
             this.comboBoxWatershed.TabIndex = 9;
             this.comboBoxWatershed.ValueMember = "watershed_id";
             // 
-            // buttonDelete
+            // buttonDeleteSelectedPage
             // 
-            this.buttonDelete.Location = new System.Drawing.Point(393, 335);
-            this.buttonDelete.Name = "buttonDelete";
-            this.buttonDelete.Size = new System.Drawing.Size(127, 26);
-            this.buttonDelete.TabIndex = 8;
-            this.buttonDelete.Text = "Delete";
-            this.buttonDelete.UseVisualStyleBackColor = true;
-            this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
+            this.buttonDeleteSelectedPage.Location = new System.Drawing.Point(450, 335);
+            this.buttonDeleteSelectedPage.Name = "buttonDeleteSelectedPage";
+            this.buttonDeleteSelectedPage.Size = new System.Drawing.Size(127, 26);
+            this.buttonDeleteSelectedPage.TabIndex = 8;
+            this.buttonDeleteSelectedPage.Text = "Delete Selected Page";
+            this.buttonDeleteSelectedPage.UseVisualStyleBackColor = true;
+            this.buttonDeleteSelectedPage.Click += new System.EventHandler(this.buttonDelete_Click);
             // 
             // buttonAddSurveyPage
             // 
-            this.buttonAddSurveyPage.Location = new System.Drawing.Point(261, 335);
+            this.buttonAddSurveyPage.Location = new System.Drawing.Point(299, 335);
             this.buttonAddSurveyPage.Name = "buttonAddSurveyPage";
-            this.buttonAddSurveyPage.Size = new System.Drawing.Size(126, 26);
+            this.buttonAddSurveyPage.Size = new System.Drawing.Size(127, 26);
             this.buttonAddSurveyPage.TabIndex = 7;
             this.buttonAddSurveyPage.Text = "Add survey page...";
             this.buttonAddSurveyPage.UseVisualStyleBackColor = true;
@@ -844,9 +1239,9 @@
             // 
             // buttonAddView
             // 
-            this.buttonAddView.Location = new System.Drawing.Point(141, 335);
+            this.buttonAddView.Location = new System.Drawing.Point(12, 335);
             this.buttonAddView.Name = "buttonAddView";
-            this.buttonAddView.Size = new System.Drawing.Size(114, 26);
+            this.buttonAddView.Size = new System.Drawing.Size(127, 26);
             this.buttonAddView.TabIndex = 6;
             this.buttonAddView.Text = "Add view...";
             this.buttonAddView.UseVisualStyleBackColor = true;
@@ -878,6 +1273,26 @@
             this.labelViews.Size = new System.Drawing.Size(35, 13);
             this.labelViews.TabIndex = 0;
             this.labelViews.Text = "Views";
+            // 
+            // fKSURVEYPAGEVIEWBindingSource4
+            // 
+            this.fKSURVEYPAGEVIEWBindingSource4.DataMember = "FK_SURVEY_PAGE_VIEW";
+            this.fKSURVEYPAGEVIEWBindingSource4.DataSource = this.fKVIEWSUBWATERSHEDBindingSource1;
+            // 
+            // fKVIEWSUBWATERSHEDBindingSource1
+            // 
+            this.fKVIEWSUBWATERSHEDBindingSource1.DataMember = "FK_VIEW_SUBWATERSHED";
+            this.fKVIEWSUBWATERSHEDBindingSource1.DataSource = this.fKSUBWATERSHEDWATERSHEDBindingSource;
+            // 
+            // fKSURVEYPAGEVIEWBindingSource
+            // 
+            this.fKSURVEYPAGEVIEWBindingSource.DataMember = "FK_SURVEY_PAGE_VIEW";
+            this.fKSURVEYPAGEVIEWBindingSource.DataSource = this.fKVIEWSUBWATERSHEDBindingSource;
+            // 
+            // fKVIEWSUBWATERSHEDBindingSource
+            // 
+            this.fKVIEWSUBWATERSHEDBindingSource.DataMember = "FK_VIEW_SUBWATERSHED";
+            this.fKVIEWSUBWATERSHEDBindingSource.DataSource = this.fKSUBWATERSHEDWATERSHEDBindingSource;
             // 
             // sWSPVIEWBindingSource
             // 
@@ -945,85 +1360,15 @@
             this.fKSURVEYPAGEVIEWBindingSource2.DataMember = "FK_SURVEY_PAGE_VIEW";
             this.fKSURVEYPAGEVIEWBindingSource2.DataSource = this.fKVIEWSUBWATERSHEDBindingSource;
             // 
-            // comboBox1
-            // 
-            this.comboBox1.DataSource = this.fKVIEWSUBWATERSHEDBindingSource1;
-            this.comboBox1.DisplayMember = "view_number";
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(84, 59);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(97, 21);
-            this.comboBox1.TabIndex = 14;
-            this.comboBox1.ValueMember = "view_id";
-            // 
-            // fKVIEWSUBWATERSHEDBindingSource1
-            // 
-            this.fKVIEWSUBWATERSHEDBindingSource1.DataMember = "FK_VIEW_SUBWATERSHED";
-            this.fKVIEWSUBWATERSHEDBindingSource1.DataSource = this.fKSUBWATERSHEDWATERSHEDBindingSource;
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.AutoGenerateColumns = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.surveypageidDataGridViewTextBoxColumn,
-            this.viewidDataGridViewTextBoxColumn,
-            this.pagenumberDataGridViewTextBoxColumn,
-            this.dateDataGridViewTextBoxColumn,
-            this.weatherDataGridViewTextBoxColumn,
-            this.commentDataGridViewTextBoxColumn});
-            this.dataGridView1.DataSource = this.fKSURVEYPAGEVIEWBindingSource4;
-            this.dataGridView1.Location = new System.Drawing.Point(10, 96);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(584, 230);
-            this.dataGridView1.TabIndex = 15;
-            // 
             // fKSURVEYPAGEVIEWBindingSource3
             // 
             this.fKSURVEYPAGEVIEWBindingSource3.DataMember = "FK_SURVEY_PAGE_VIEW";
             this.fKSURVEYPAGEVIEWBindingSource3.DataSource = this.fKVIEWSUBWATERSHEDBindingSource;
             // 
-            // surveypageidDataGridViewTextBoxColumn
+            // fKVIEWSUBWATERSHEDBindingSource2
             // 
-            this.surveypageidDataGridViewTextBoxColumn.DataPropertyName = "survey_page_id";
-            this.surveypageidDataGridViewTextBoxColumn.HeaderText = "survey_page_id";
-            this.surveypageidDataGridViewTextBoxColumn.Name = "surveypageidDataGridViewTextBoxColumn";
-            this.surveypageidDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // viewidDataGridViewTextBoxColumn
-            // 
-            this.viewidDataGridViewTextBoxColumn.DataPropertyName = "view_id";
-            this.viewidDataGridViewTextBoxColumn.HeaderText = "view_id";
-            this.viewidDataGridViewTextBoxColumn.Name = "viewidDataGridViewTextBoxColumn";
-            // 
-            // pagenumberDataGridViewTextBoxColumn
-            // 
-            this.pagenumberDataGridViewTextBoxColumn.DataPropertyName = "page_number";
-            this.pagenumberDataGridViewTextBoxColumn.HeaderText = "page_number";
-            this.pagenumberDataGridViewTextBoxColumn.Name = "pagenumberDataGridViewTextBoxColumn";
-            // 
-            // dateDataGridViewTextBoxColumn
-            // 
-            this.dateDataGridViewTextBoxColumn.DataPropertyName = "date";
-            this.dateDataGridViewTextBoxColumn.HeaderText = "date";
-            this.dateDataGridViewTextBoxColumn.Name = "dateDataGridViewTextBoxColumn";
-            // 
-            // weatherDataGridViewTextBoxColumn
-            // 
-            this.weatherDataGridViewTextBoxColumn.DataPropertyName = "weather";
-            this.weatherDataGridViewTextBoxColumn.HeaderText = "weather";
-            this.weatherDataGridViewTextBoxColumn.Name = "weatherDataGridViewTextBoxColumn";
-            // 
-            // commentDataGridViewTextBoxColumn
-            // 
-            this.commentDataGridViewTextBoxColumn.DataPropertyName = "Comment";
-            this.commentDataGridViewTextBoxColumn.HeaderText = "Comment";
-            this.commentDataGridViewTextBoxColumn.Name = "commentDataGridViewTextBoxColumn";
-            // 
-            // fKSURVEYPAGEVIEWBindingSource4
-            // 
-            this.fKSURVEYPAGEVIEWBindingSource4.DataMember = "FK_SURVEY_PAGE_VIEW";
-            this.fKSURVEYPAGEVIEWBindingSource4.DataSource = this.fKVIEWSUBWATERSHEDBindingSource1;
+            this.fKVIEWSUBWATERSHEDBindingSource2.DataMember = "FK_VIEW_SUBWATERSHED";
+            this.fKVIEWSUBWATERSHEDBindingSource2.DataSource = this.fKSUBWATERSHEDWATERSHEDBindingSource;
             // 
             // FormSWSPFieldDataAdministration
             // 
@@ -1059,17 +1404,21 @@
             ((System.ComponentModel.ISupportInitialize)(this.sWSPCULVERTOPENINGTYPEBindingSource)).EndInit();
             this.tabPageViewsAndSurveys.ResumeLayout(false);
             this.tabPageViewsAndSurveys.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ultraGrid1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fKVIEWSUBWATERSHEDBindingSource3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fKSUBWATERSHEDWATERSHEDBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSurveyPages)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fKSURVEYPAGEVIEWBindingSource5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fKSURVEYPAGEVIEWBindingSource4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fKVIEWSUBWATERSHEDBindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fKSURVEYPAGEVIEWBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fKVIEWSUBWATERSHEDBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fKSUBWATERSHEDWATERSHEDBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sWSPVIEWBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sWSPSURVEYPAGEBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fKSURVEYPAGEVIEWBindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fKSURVEYPAGEVIEWBindingSource2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fKVIEWSUBWATERSHEDBindingSource1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fKSURVEYPAGEVIEWBindingSource3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fKSURVEYPAGEVIEWBindingSource4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fKVIEWSUBWATERSHEDBindingSource2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1115,7 +1464,7 @@
         private System.Windows.Forms.Label labelSubwatershed;
         private System.Windows.Forms.Label labelWatershed;
         private System.Windows.Forms.Label labelViews;
-        private System.Windows.Forms.Button buttonDelete;
+        private System.Windows.Forms.Button buttonDeleteSelectedPage;
         private System.Windows.Forms.Button buttonAddSurveyPage;
         private System.Windows.Forms.Button buttonAddView;
         private System.Windows.Forms.ComboBox comboBoxSubwatershed;
@@ -1164,19 +1513,22 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn culvertopeningDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn descriptionDataGridViewTextBoxColumn2;
         private System.Windows.Forms.BindingSource fKSURVEYPAGEVIEWBindingSource;
-        private System.Windows.Forms.Label labelView;
         private System.Windows.Forms.BindingSource fKSURVEYPAGEVIEWBindingSource1;
         private System.Windows.Forms.BindingSource fKSURVEYPAGEVIEWBindingSource2;
-        private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.BindingSource fKVIEWSUBWATERSHEDBindingSource1;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dataGridViewSurveyPages;
+        private System.Windows.Forms.BindingSource fKSURVEYPAGEVIEWBindingSource3;
+        private System.Windows.Forms.BindingSource fKSURVEYPAGEVIEWBindingSource4;
         private System.Windows.Forms.DataGridViewTextBoxColumn surveypageidDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn viewidDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn pagenumberDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn dateDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn weatherDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn commentDataGridViewTextBoxColumn;
-        private System.Windows.Forms.BindingSource fKSURVEYPAGEVIEWBindingSource3;
-        private System.Windows.Forms.BindingSource fKSURVEYPAGEVIEWBindingSource4;
+        private System.Windows.Forms.BindingSource fKVIEWSUBWATERSHEDBindingSource2;
+        private Infragistics.Win.Misc.UltraButton ultraButtonDeleteSelectedView;
+        private Infragistics.Win.UltraWinGrid.UltraGrid ultraGrid1;
+        private System.Windows.Forms.BindingSource fKVIEWSUBWATERSHEDBindingSource3;
+        private System.Windows.Forms.BindingSource fKSURVEYPAGEVIEWBindingSource5;
     }
 }
