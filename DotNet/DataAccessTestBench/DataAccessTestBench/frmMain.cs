@@ -508,6 +508,26 @@ namespace DataAccessTestBench
       dgvTableE19.DataSource = rpReport.scDS.TableE19;
     }
 
+    private void btnLoadE03aData_Click(object sender, EventArgs e)
+    {
+      dgvTableE03a.DataSource = rpReport.scDS.TableE03a;
+    }
+
+    private void btnE03bData_Click(object sender, EventArgs e)
+    {
+      dgvTableE03b.DataSource = rpReport.scDS.TableE03b;
+    }
+
+    private void btnLoadE21Data_Click(object sender, EventArgs e)
+    {
+      dgvTableE21.DataSource = rpReport.scDS.TableE21;
+    }
+
+    private void btnLoadE22_Click(object sender, EventArgs e)
+    {
+      dgvTableE22.DataSource = rpReport.scDS.TableE22;
+    }
+
     private void btnChooseTestModelPath_Click(object sender, EventArgs e)
     {
       if (ofdModelDataSource.ShowDialog() == DialogResult.OK)

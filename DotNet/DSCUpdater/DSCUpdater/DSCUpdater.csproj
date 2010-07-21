@@ -110,55 +110,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="frmDSCEditorHistory.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmDSCEditorHistory.Designer.cs">
-      <DependentUpon>frmDSCEditorHistory.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmDSCUpdaterEditor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmDSCUpdaterEditor.Designer.cs">
-      <DependentUpon>frmDSCUpdaterEditor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmICParkDISCO.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmICParkDISCO.Designer.cs">
-      <DependentUpon>frmICParkDISCO.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmICParkDrywell.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmICParkDrywell.Designer.cs">
-      <DependentUpon>frmICParkDrywell.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmICRoofDISCO.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmICRoofDISCO.Designer.cs">
-      <DependentUpon>frmICRoofDISCO.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmICRoofDrywell.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmICRoofDrywell.Designer.cs">
-      <DependentUpon>frmICRoofDrywell.cs</DependentUpon>
-    </Compile>
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
-    </Compile>
-    <Compile Include="LinqMaster.cs">
-      <DependentUpon>LinqMaster.dbml</DependentUpon>
-    </Compile>
-    <Compile Include="LinqMaster.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>LinqMaster.dbml</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="ProjectDataSet.cs">
@@ -171,30 +127,6 @@
       <DependentUpon>ProjectDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="frmDSCEditorHistory.resx">
-      <DependentUpon>frmDSCEditorHistory.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmDSCUpdaterEditor.resx">
-      <DependentUpon>frmDSCUpdaterEditor.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmICParkDISCO.resx">
-      <DependentUpon>frmICParkDISCO.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmICParkDrywell.resx">
-      <DependentUpon>frmICParkDrywell.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmICRoofDISCO.resx">
-      <DependentUpon>frmICRoofDISCO.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmICRoofDrywell.resx">
-      <DependentUpon>frmICRoofDrywell.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -231,9 +163,9 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Template\UserUpdate.csv">
+    <EmbeddedResource Include="Template\UserUpdate.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </EmbeddedResource>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -278,20 +210,15 @@
     <None Include="Calendar.png" />
     <None Include="DocumentRevert.png" />
     <None Include="AdjustableWrench.png" />
-    <None Include="LinqMaster.dbml">
-      <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>LinqMaster.designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
+    <EmbeddedResource Include="Template\UserUpdateTemplate.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <None Include="WormGear.png" />
     <None Include="WrenchGears.jpg" />
     <None Include="Server.png" />
     <None Include="UploadFile.png" />
     <None Include="Spreadsheet.png" />
     <EmbeddedResource Include="DSCUpdaterSplash.png" />
-    <None Include="LinqMaster.dbml.layout">
-      <DependentUpon>LinqMaster.dbml</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="ADODB">

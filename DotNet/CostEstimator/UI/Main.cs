@@ -368,10 +368,19 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 				if (_project != null)
 					CloseProject();
 
-				_project = new Project();
-				_project.LoadFromFile(dlgOpen.FileName);
-				_project.FileName = dlgOpen.FileName;
-				SetupProjectForCostGrid();
+        try
+        {
+          _project = new Project();
+          _project.LoadFromFile(dlgOpen.FileName);
+          _project.FileName = dlgOpen.FileName;
+          SetupProjectForCostGrid();
+        }
+        catch (Exception ex)
+        {
+          MessageBox.Show(ex.Message, "Error opening project file.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+          return;
+        }
+
 
 				string fileName = dlgOpen.FileName;
 
@@ -707,7 +716,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 			string qaWorkspacePath = Path.GetDirectoryName(Application.ExecutablePath);
 			string altPath = altInfo.AlternativePath;
 			File.Copy(qaWorkspacePath + Path.DirectorySeparatorChar + "QaQc_PipXP.WOR",
-				altPath + Path.DirectorySeparatorChar + "QaQc_PipXP.WOR");
+				altPath + Path.DirectorySeparatorChar + "QaQc_PipXP.WOR",true);
 			return true;
 		} // CopyQAAltPipXPWorkspace()
 
@@ -802,6 +811,18 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 			_LastSelectedModelDirectory = modelPath;
 			string selectedAlt = (string)lstvwAlternatives.ActiveItem.Value;
 			SelectedAlternative altInfo = new SelectedAlternative(modelPath, selectedAlt);
+
+      if (!ModelHasPipXPTable(modelPath))
+      {
+        lblProgress.Text = "Creating pipe conflict table";
+        lblProgress.Refresh();
+        bool createWasSuccessful = CreatePipXPTable(modelPath);
+        if (!createWasSuccessful)
+        {
+          MessageBox.Show("A problem occurred creating the conflict table.  Please try again.", "Problem creating conflict table");
+          return;
+        } // if
+      } // if
 
 			if (!AlternativeHasAltPipXPTable(altInfo))
 			{

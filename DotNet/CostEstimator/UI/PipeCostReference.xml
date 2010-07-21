@@ -680,49 +680,49 @@
       <manholeDiameterIn>48</manholeDiameterIn>
       <baseCost>1865</baseCost>
       <costPerFtDepthAbove8Ft>317</costPerFtDepthAbove8Ft>
-			<rimFrameCost>340</rimFrameCost>
+			<rimFrameCost>0</rimFrameCost>
 		</ManholeCostRecord>
     <ManholeCostRecord>
       <manholeDiameterIn>60</manholeDiameterIn>
       <baseCost>1865</baseCost>
       <costPerFtDepthAbove8Ft>401</costPerFtDepthAbove8Ft>
-			<rimFrameCost>340</rimFrameCost>
+			<rimFrameCost>0</rimFrameCost>
     </ManholeCostRecord>
     <ManholeCostRecord>
       <manholeDiameterIn>72</manholeDiameterIn>
       <baseCost>1865</baseCost>
       <costPerFtDepthAbove8Ft>605</costPerFtDepthAbove8Ft>
-			<rimFrameCost>340</rimFrameCost>
+			<rimFrameCost>0</rimFrameCost>
 		</ManholeCostRecord>
     <ManholeCostRecord>
       <manholeDiameterIn>84</manholeDiameterIn>
       <baseCost>3130</baseCost>
       <costPerFtDepthAbove8Ft>928</costPerFtDepthAbove8Ft>
-			<rimFrameCost>340</rimFrameCost>
+			<rimFrameCost>0</rimFrameCost>
 		</ManholeCostRecord>
     <ManholeCostRecord>
       <manholeDiameterIn>96</manholeDiameterIn>
       <baseCost>4650</baseCost>
       <costPerFtDepthAbove8Ft>1020</costPerFtDepthAbove8Ft>
-			<rimFrameCost>340</rimFrameCost>
+			<rimFrameCost>0</rimFrameCost>
 		</ManholeCostRecord>
     <ManholeCostRecord>
       <manholeDiameterIn>108</manholeDiameterIn>
       <baseCost>5710</baseCost>
       <costPerFtDepthAbove8Ft>1105</costPerFtDepthAbove8Ft>
-			<rimFrameCost>340</rimFrameCost>
+			<rimFrameCost>0</rimFrameCost>
 		</ManholeCostRecord>
 		<ManholeCostRecord>
 			<manholeDiameterIn>120</manholeDiameterIn>
 			<baseCost>6260</baseCost>
 			<costPerFtDepthAbove8Ft>1272</costPerFtDepthAbove8Ft>
-			<rimFrameCost>340</rimFrameCost>
+			<rimFrameCost>0</rimFrameCost>
 		</ManholeCostRecord>
     <ManholeCostRecord>
       <manholeDiameterIn>132</manholeDiameterIn>
       <baseCost>8440</baseCost>
       <costPerFtDepthAbove8Ft>1150</costPerFtDepthAbove8Ft>
-			<rimFrameCost>340</rimFrameCost>
+			<rimFrameCost>0</rimFrameCost>
 		</ManholeCostRecord>
   </ManholeCostTable>
 	<ManholeCostDepthFactorTable>
@@ -878,8 +878,8 @@
 		<year>2008</year>
 	</BaseENR>
   <CurrentENR>
-		<value>8805</value>
-		<month>6</month>
+		<value>8865</value>
+		<month>7</month>
 		<year>2010</year>
 	</CurrentENR>
 </PipeCostOptions>
