@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<namespace name="uMIConstants">
+  <const name="mi_M_TOOLS_SELECTOR" type="Integer">
+    <value>
+      $6A5
+    </value>
+  </const>
+  <const name="mi_M_TOOLS_SEARCH_RECT" type="Integer">
+    <value>
+      $6BA
+    </value>
+  </const>
+  <const name="mi_M_TOOLS_SEARCH_RADIUS" type="Integer">
+    <value>
+      $6A7
+    </value>
+  </const>
+  <const name="mi_M_TOOLS_SEARCH_BOUNDARY" type="Integer">
+    <value>
+      $6A8
+    </value>
+  </const>
+  <const name="mi_M_TOOLS_EXPAND" type="Integer">
+    <value>
+      $6A9
+    </value>
+  </const>
+  <const name="mi_M_TOOLS_ZOOM_IN" type="Integer">
+    <value>
+      $6A9
+    </value>
+  </const>
+  <const name="mi_M_TOOLS_SHRINK" type="Integer">
+    <value>
+      $6AA
+    </value>
+  </const>
+  <const name="mi_M_TOOLS_ZOOM_OUT" type="Integer">
+    <value>
+      $6AA
+    </value>
+  </const>
+  <const name="mi_M_TOOLS_RECENTER" type="Integer">
+    <value>
+      $6A6
+    </value>
+  </const>
+  <const name="mi_M_TOOLS_PAN" type="Integer">
+    <value>
+      $6A6
+    </value>
+  </const>
+  <const name="mi_M_TOOLS_PNT_QUERY" type="Integer">
+    <value>
+      $6AB
+    </value>
+  </const>
+  <const name="mi_M_TOOLS_INFO" type="Integer">
+    <value>
+      $6AB
+    </value>
+  </const>
+  <const name="mi_M_TOOLS_LABELER" type="Integer">
+    <value>
+      $6AC
+    </value>
+  </const>
+  <const name="mi_M_TOOLS_RULER" type="Integer">
+    <value>
+      $6AE
+    </value>
+  </const>
+  <const name="mi_M_TOOLS_DRAGWINDOW" type="Integer">
+    <value>
+      $6C6
+    </value>
+  </const>
+  <const name="mi_M_TOOLS_SYMBOL" type="Integer">
+    <value>
+      $6AF
+    </value>
+  </const>
+  <const name="mi_M_TOOLS_LINE" type="Integer">
+    <value>
+      $6B0
+    </value>
+  </const>
+  <const name="mi_M_TOOLS_POLYLINE" type="Integer">
+    <value>
+      $6B1
+    </value>
+  </const>
+  <const name="mi_M_TOOLS_ARC" type="Integer">
+    <value>
+      $6B4
+    </value>
+  </const>
+  <const name="mi_M_TOOLS_POLYGON" type="Integer">
+    <value>
+      $6B2
+    </value>
+  </const>
+  <const name="mi_M_TOOLS_ELLIPSE" type="Integer">
+    <value>
+      $6B3
+    </value>
+  </const>
+  <const name="mi_M_TOOLS_RECTANGLE" type="Integer">
+    <value>
+      $6B5
+    </value>
+  </const>
+  <const name="mi_M_TOOLS_ROUNDEDRECT" type="Integer">
+    <value>
+      $6B6
+    </value>
+  </const>
+  <const name="mi_M_TOOLS_TEXT" type="Integer">
+    <value>
+      $6AD
+    </value>
+  </const>
+  <const name="mi_M_TOOLS_FRAME" type="Integer">
+    <value>
+      $6B7
+    </value>
+  </const>
+</namespace>

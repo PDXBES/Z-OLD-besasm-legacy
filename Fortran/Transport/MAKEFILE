@@ -1,0 +1,131 @@
+#
+# MKMF template makefile for protected mode executables.
+#
+FC        = f77l3
+LINKER    = 386link
+PROGRAM   = 32trans.exe
+DEST      = .
+EXTHDRS         =
+FFLAGS    =
+HDRS            =
+LDFLAGS   = -FULLWARN -80486 -STUB RUNB
+LDMAP     = nul
+LIBS      =
+MAKEFILE  = Makefile
+OBJS            = blkmn.obj circle.obj ckfilepx.obj dated.obj depth.obj \
+                  dpsi.obj dwload.obj error.obj filthpx.obj finda.obj \
+                  firstpx.obj getdep.obj getnat.obj getsum.obj ierror.obj \
+                  inface.obj infil.obj inital.obj intranx5.obj jdate.obj \
+                  ldate.obj maintrn.obj newton.obj ninpx.obj \
+                  ntime.obj otrain.obj pct.obj power.obj printf.obj \
+                  printq.obj psi.obj qual.obj radh.obj routepx3.obj \
+                  slop_px.obj stime.obj strip.obj t23check.obj tintrp.obj \
+                  tranvspx.obj trblockx.obj tstorgsm.obj tstrdtsm.obj \
+                  vel.obj
+SRCS            = blkmn.for circle.for ckfilepx.for dated.for depth.for \
+                  dpsi.for dwload.for error.for filthpx.for finda.for \
+                  firstpx.for getdep.for getnat.for getsum.for ierror.for \
+                  inface.for infil.for inital.for intranx5.for jdate.for \
+                  ldate.for maintrn.for newton.for ninpx.for \
+                  ntime.for otrain.for pct.for power.for printf.for \
+                  printq.for psi.for qual.for radh.for routepx3.for \
+                  slop_px.for stime.for strip.for t23check.for tintrp.for \
+                  tranvspx.for trblockx.for tstorgsm.for tstrdtsm.for \
+                  vel.for
+
+$(PROGRAM):     $(OBJS) $(LIBS)
+          $(LINKER) $(OBJS) -EXE $@ -MAP $(LDMAP) -LIB $(LIBS) $(LDFLAGS)
+
+clean:;         @del -f $(OBJS)
+
+depend:;   @mkmf -f $(MAKEFILE) PROGRAM=$(PROGRAM) DEST=$(DEST)
+
+install:   $(PROGRAM)
+                @echo Installing $(PROGRAM) in $(DEST)
+                @if not $(DEST)x==.x copy $(PROGRAM) $(DEST)
+### OPUS MKMF:  Do not remove this line!  Automatic dependencies follow.
+
+blkmn.obj: INTER.INC TAPES.INC
+
+circle.obj: TAPES.INC
+
+ckfilepx.obj: TAPES.INC
+
+dated.obj: STIMER.INC
+
+depth.obj: FLODAT.INC HUGO.INC NEW81.INC TABLES.INC TAPES.INC
+
+dpsi.obj: FLODAT.INC HUGO.INC NEW81.INC PSIDPS.INC TABLES.INC TAPES.INC
+
+dwload.obj: DRWF.INC HUGO.INC INTER.INC NEW81.INC STIMER.INC TABLES.INC \
+         TAPES.INC TST.INC
+
+error.obj: TAPES.INC
+
+filthpx.obj: DRWF.INC HUGO.INC NEW81.INC TABLES.INC TAPES.INC
+
+finda.obj: FLODAT.INC HUGO.INC NEW81.INC TABLES.INC TAPES.INC
+
+firstpx.obj: FLODAT.INC HUGO.INC NAMES.INC NEW81.INC NEWTR.INC TABLES.INC \
+         TAPES.INC TST.INC VARY.INC
+
+getnat.obj: FLODAT.INC TAPES.INC
+
+ierror.obj: TAPES.INC
+
+inface.obj: INTER.INC TAPES.INC
+
+infil.obj: HUGO.INC INTER.INC NAMES.INC NEW81.INC STIMER.INC TABLES.INC \
+         TAPES.INC
+
+inital.obj: DRWF.INC HUGO.INC INTER.INC NEW81.INC STIMER.INC TABLES.INC \
+         TAPES.INC TST.INC
+
+intranx5.obj: DRWF.INC FLODAT.INC HUGO.INC INTER.INC NAMES.INC NEW81.INC \
+         NEWTR.INC STIMER.INC TABLES.INC TAPES.INC TST.INC VARY.INC
+
+maintrn.obj: TAPES.INC
+
+newton.obj: HUGO.INC NEW81.INC TABLES.INC TAPES.INC
+
+ninpx.obj: HUGO.INC TAPES.INC
+
+ntime.obj: STIMER.INC
+
+otrain.obj: DRWF.INC HUGO.INC INTER.INC NAMES.INC NEW81.INC NEWTR.INC \
+         STIMER.INC TABLES.INC TAPES.INC TST.INC
+
+pct.obj: TAPES.INC
+
+printf.obj: HUGO.INC INTER.INC NEW81.INC STIMER.INC TAPES.INC
+
+printq.obj: HUGO.INC INTER.INC NEW81.INC STIMER.INC TAPES.INC
+
+psi.obj: FLODAT.INC HUGO.INC NEW81.INC PSIDPS.INC TABLES.INC TAPES.INC
+
+qual.obj: HUGO.INC NAMES.INC NEW81.INC TABLES.INC TAPES.INC TST.INC
+
+radh.obj: FLODAT.INC HUGO.INC NEW81.INC TABLES.INC TAPES.INC
+
+routepx3.obj: FLODAT.INC HUGO.INC NAMES.INC NEW81.INC TABLES.INC TAPES.INC \
+         TST.INC VARY.INC
+
+slop_px.obj: HUGO.INC NAMES.INC NEW81.INC TABLES.INC TAPES.INC
+
+stime.obj: STIMER.INC
+
+strip.obj: TAPES.INC
+
+t23check.obj: DRWF.INC FLODAT.INC HUGO.INC INTER.INC NAMES.INC NEW81.INC \
+         NEWTR.INC STIMER.INC TABLES.INC TAPES.INC TST.INC VARY.INC
+
+tranvspx.obj: DRWF.INC HUGO.INC INTER.INC NAMES.INC NEW81.INC NEWTR.INC \
+         STIMER.INC TABLES.INC TAPES.INC TST.INC VARY.INC
+
+trblockx.obj: NAMES.INC
+
+tstorgsm.obj: HUGO.INC NEW81.INC TAPES.INC TST.INC
+
+tstrdtsm.obj: HUGO.INC INTER.INC NEW81.INC TAPES.INC TST.INC
+
+
