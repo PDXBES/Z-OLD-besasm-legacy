@@ -12,14 +12,24 @@ namespace SWI_2
     public partial class FormFieldSurveyView : Form
     {
         public HashSet<int> deletedGlobalID;
+        int tempGlobal_id;
 
         public FormFieldSurveyView()
         {
             InitializeComponent();
         }
 
+
+
+
         private void FormFieldSurveyView_Load(object sender, EventArgs e)
         {
+            // TODO: This line of code loads data into the 'sANDBOXDataSet.SWSP_CULVERT_OPENING_TYPE' table. You can move, or remove it, as needed.
+            this.sWSP_CULVERT_OPENING_TYPETableAdapter.Fill(this.sANDBOXDataSet.SWSP_CULVERT_OPENING_TYPE);
+            // TODO: This line of code loads data into the 'sANDBOXDataSet.SWSP_MATERIAL_TYPE' table. You can move, or remove it, as needed.
+            this.sWSP_MATERIAL_TYPETableAdapter.Fill(this.sANDBOXDataSet.SWSP_MATERIAL_TYPE);
+            // TODO: This line of code loads data into the 'sANDBOXDataSet.SWSP_SHAPE_TYPE' table. You can move, or remove it, as needed.
+            this.sWSP_SHAPE_TYPETableAdapter.Fill(this.sANDBOXDataSet.SWSP_SHAPE_TYPE);
             // TODO: This line of code loads data into the 'sANDBOXDataSet.SWSP_EVALUATOR' table. You can move, or remove it, as needed.
             this.sWSP_EVALUATORTableAdapter.Fill(this.sANDBOXDataSet.SWSP_EVALUATOR);
             // TODO: This line of code loads data into the 'sANDBOXDataSet.SWSP_SURVEY_PAGE' table. You can move, or remove it, as needed.
@@ -33,6 +43,7 @@ namespace SWI_2
             // TODO: This line of code loads data into the 'sANDBOXDataSet.SWSP_MESH1' table. You can move, or remove it, as needed.
             this.sWSP_MESH1TableAdapter.Fill(this.sANDBOXDataSet.SWSP_MESH1);
             deletedGlobalID = new HashSet<int>();
+            tempGlobal_id = 0;
             //fill the FieldSurveypageview datatable with the data from the MESH1 datatable
             foreach(DataRow r in this.sANDBOXDataSet.SWSP_MESH1)
             {
@@ -42,10 +53,13 @@ namespace SWI_2
             }
 
             //every time the datagridview is refreshed, the default values have to be changed
-            sANDBOXDataSet.DataTableFieldSurveyEditable.Columns["watershed"].DefaultValue = ultraComboWatershed.Text;
-            sANDBOXDataSet.DataTableFieldSurveyEditable.Columns["subwatershed"].DefaultValue = ultraComboSubwatershed.Text;
-            sANDBOXDataSet.DataTableFieldSurveyEditable.Columns["view_number"].DefaultValue = int.Parse(ultraComboMapNo.Text);
+            sANDBOXDataSet.DataTableFieldSurveyEditable.Columns["watershed"].DefaultValue = comboBoxWatershed.Text;
+            sANDBOXDataSet.DataTableFieldSurveyEditable.Columns["subwatershed"].DefaultValue = comboBoxSubwatershed.Text;
+            sANDBOXDataSet.DataTableFieldSurveyEditable.Columns["view_number"].DefaultValue = int.Parse(comboBoxMapNo.Text);
             sANDBOXDataSet.DataTableFieldSurveyEditable.Columns["page_number"].DefaultValue = int.Parse(comboBoxSurveyPage.Text);
+            sANDBOXDataSet.DataTableFieldSurveyEditable.Columns["us_node"].DefaultValue = "";
+            sANDBOXDataSet.DataTableFieldSurveyEditable.Columns["ds_node"].DefaultValue = "";
+            sANDBOXDataSet.DataTableFieldSurveyEditable.Columns["node"].DefaultValue = "";
 
             PopulateLinkInfo();
         }
@@ -65,10 +79,13 @@ namespace SWI_2
             try
             {
                 //every time the datagridview is refreshed, the default values have to be changed
-                sANDBOXDataSet.DataTableFieldSurveyEditable.Columns["watershed"].DefaultValue = ultraComboWatershed.Text;
-                sANDBOXDataSet.DataTableFieldSurveyEditable.Columns["subwatershed"].DefaultValue = ultraComboSubwatershed.Text;
-                sANDBOXDataSet.DataTableFieldSurveyEditable.Columns["view_number"].DefaultValue = int.Parse(ultraComboMapNo.Text);
-                sANDBOXDataSet.DataTableFieldSurveyEditable.Columns["page_number"].DefaultValue = int.Parse(comboBoxSurveyPage.Text);
+                //This event will generally follow a page update, but that change will not yet have hit the tables, so
+                //the page should be retrieved from the textbox.  Oddly enough, the tables will generally be the ONLY
+                //place you can find the correct subwatershed, so get the subwatershed from the tables.
+                sANDBOXDataSet.DataTableFieldSurveyEditable.Columns["watershed"].DefaultValue = (string)((DataRowView)sWSPWATERSHEDBindingSource.Current)[1];
+                sANDBOXDataSet.DataTableFieldSurveyEditable.Columns["subwatershed"].DefaultValue = (string)((DataRowView)fKSUBWATERSHEDWATERSHEDBindingSource.Current)[2];
+                sANDBOXDataSet.DataTableFieldSurveyEditable.Columns["view_number"].DefaultValue = (int)((DataRowView)fKVIEWSUBWATERSHEDBindingSource.Current)[2];
+                sANDBOXDataSet.DataTableFieldSurveyEditable.Columns["page_number"].DefaultValue = Int32.Parse(comboBoxSurveyPage.Text);
 
                 //1:All changes to DataTableFieldSurveyEditable should be committed to DataTableFieldSurvey
                 //  in a different procedure, if a user deleted a row, it would have already been taken out of
@@ -82,7 +99,9 @@ namespace SWI_2
                 {
                     if (r.RowState == DataRowState.Added)
                     {
+                        tempGlobal_id--;
                         r["action"] = 2;
+                        r["global_id"] = tempGlobal_id;
                         sANDBOXDataSet.DataTableFieldSurvey.LoadDataRow(r.ItemArray, false);
                         sANDBOXDataSet.DataTableFieldSurvey.EndLoadData();
                         sANDBOXDataSet.DataTableFieldSurvey.AcceptChanges();
@@ -91,6 +110,7 @@ namespace SWI_2
                     if (r.RowState == DataRowState.Modified)
                     {
                         r["action"] = 3;
+                        sANDBOXDataSet.DataTableFieldSurvey.RemoveDataTableFieldSurveyRow((SANDBOXDataSet.DataTableFieldSurveyRow)(sANDBOXDataSet.DataTableFieldSurvey.Select("global_id = " + r["global_id"].ToString()))[0]);
                         sANDBOXDataSet.DataTableFieldSurvey.LoadDataRow(r.ItemArray, false);
                         sANDBOXDataSet.DataTableFieldSurvey.EndLoadData();
                         sANDBOXDataSet.DataTableFieldSurvey.AcceptChanges();
@@ -116,16 +136,18 @@ namespace SWI_2
                 sANDBOXDataSet.DataTableFieldSurveyEditable.AcceptChanges();
                 foreach (DataRow r in this.sANDBOXDataSet.DataTableFieldSurvey)
                 {
-                    if ((int)r.ItemArray[15] == Int32.Parse(ultraComboMapNo.Text) &&
-                       (int)r.ItemArray[16] == Int32.Parse(comboBoxSurveyPage.Text) &&
-                       (string)r.ItemArray[17] == ultraComboWatershed.Text &&
-                       (string)r.ItemArray[18] == ultraComboSubwatershed.Text)
+                    if ((int)r.ItemArray[15] == (int)((DataRowView)fKVIEWSUBWATERSHEDBindingSource.Current)[2] &&
+                        (int)r.ItemArray[16] == Int32.Parse(comboBoxSurveyPage.Text)&&// (int) ((DataRowView)fKSURVEYPAGEVIEWBindingSource.Current)[2] &&
+                       (string)r.ItemArray[17] == (string) ((DataRowView)sWSPWATERSHEDBindingSource.Current)[1] &&
+                       (string)r.ItemArray[18] == (string)((DataRowView)fKSUBWATERSHEDWATERSHEDBindingSource.Current)[2])
                     {
                         sANDBOXDataSet.DataTableFieldSurveyEditable.LoadDataRow(r.ItemArray, false);
                         sANDBOXDataSet.DataTableFieldSurveyEditable.EndLoadData();
                         sANDBOXDataSet.DataTableFieldSurveyEditable.AcceptChanges();
                     }
                 }
+                dataGridViewLinkInfo.Refresh();
+
             }
             catch (Exception ex)
             {
@@ -175,6 +197,21 @@ namespace SWI_2
             }
         }
 
+        private void comboBoxMapNo_SelectedValueChanged(object sender, System.EventArgs e)
+        {
+            SurveyPageValueChanged(sender, e);
+        }
+
+        private void comboBoxSurveyPage_SelectedValueChanged(object sender, System.EventArgs e)
+        {
+            SurveyPageValueChanged(sender, e);
+        }
+
+        private void comboBoxSurveyPage_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            //SurveyPageValueChanged(sender, e);
+        }
+
         private void SurveyPageValueChanged(object sender, System.EventArgs e)
         {
             CheckEvaluatorsAssociatedWithThisSurveyPage();
@@ -207,6 +244,259 @@ namespace SWI_2
             }
             catch (Exception ex)
             {
+            }
+        }
+
+        private void translateChangesAndSaveToDatabase()
+        {
+            int watershed_id = 0;
+            int subwatershed_id = 0;
+            int view_id = 0;
+            int page_id = 0;
+            int material_id = 0;
+            int shape_id = 0;
+            int culvert_opening_type = 0;
+            //facing will soon be deprecated.  This might need to be removed.
+            int facing_id = 3;
+
+            foreach (DataRow r in this.sANDBOXDataSet.DataTableFieldSurvey)
+            {
+                //if the global_id is negative, then we are adding a record
+                if ((int)r["global_id"] < 0)
+                {
+                    //get the watershed_id
+                    watershed_id = (int)((DataRow)sANDBOXDataSet.SWSP_WATERSHED.Select("watershed = '" + (string)r["watershed"] + "'")[0]).ItemArray[0];
+
+                    //get the subwatershed_id
+                    subwatershed_id = (int)((DataRow)sANDBOXDataSet.SWSP_SUBWATERSHED.Select("subwatershed = '" + (string)r["subwatershed"] + "' AND watershed_id = " + watershed_id.ToString())[0]).ItemArray[0];
+                    //get the view_id
+                    view_id = (int)((DataRow)sANDBOXDataSet.SWSP_VIEW.Select("view_number = " + ((int)r["view_number"]).ToString() + " AND subwatershed_id = " + subwatershed_id.ToString())[0]).ItemArray[0];
+                    //get the page_id
+                    page_id = (int)((DataRow)sANDBOXDataSet.SWSP_SURVEY_PAGE.Select("page_number = " + ((int)r["page_number"]).ToString() + " AND view_id = " + view_id.ToString())[0]).ItemArray[0];
+                    //get the material_id
+                    if (r["material"] is System.DBNull) { r["material"] = "UNSPEC"; }
+                    material_id = (int)((DataRow)sANDBOXDataSet.SWSP_MATERIAL_TYPE.Select("material = '" + (string)r["material"] + "'")[0]).ItemArray[0];
+                    //get the shape_id
+                    if (r["shape"] is System.DBNull) { r["shape"] = "UNK"; }
+                    shape_id = (int)((DataRow)sANDBOXDataSet.SWSP_SHAPE_TYPE.Select("shape = '" + (string)r["shape"] + "'")[0]).ItemArray[0];
+                    //get the culvert_opening_type_id
+                    if (r["culvert_opening"] is System.DBNull) { culvert_opening_type = (int)((DataRow)sANDBOXDataSet.SWSP_CULVERT_OPENING_TYPE.Select("culvert_opening is null")[0]).ItemArray[0];
+                    }
+                    else { culvert_opening_type = (int)((DataRow)sANDBOXDataSet.SWSP_CULVERT_OPENING_TYPE.Select("culvert_opening = '" + (string)r["culvert_opening"] + "'")[0]).ItemArray[0];
+                    }
+                    //the transfer of this data should be handled simply to the linkinfo datasource
+                    //insert based on the value in the link type column
+                    if ((string)r["linktype"] == "Pipe")
+                    {
+                        int globalID = 0;
+                        //adding a pipe means:
+                        //placing a new entry in the globalID table,
+                        //taking that value and using it to create a new pipe
+                        this.sWSP_GLOBAL_IDTableAdapter.Insert("");
+                        //what was the global ID that was just inserted?  The highest value in the GlobalID table.  Since we just inserted to it, there is no chance that it could be null
+                        globalID = (int)this.sWSP_GLOBAL_IDTableAdapter.ScalarQuery();
+                        //add this record to the SWSP_PIPE table
+                        this.sWSP_PIPETableAdapter.Insert(globalID,
+                                                            page_id,
+                                                            (string)r["us_node"],
+                                                            (string)r["ds_node"],
+                                                            (double?)((r["us_depth_in"] is System.DBNull) ? null : (double?)r["us_depth_in"]),
+                                                            (double?)((r["ds_depth_in"] is System.DBNull) ? null : (double?)r["ds_depth_in"]),
+                                                            (double?)((r["dimension1"] is System.DBNull) ? null : (double?)r["dimension1"]),
+                                                            (double?)((r["dimension2"] is System.DBNull) ? null : (double?)r["dimension2"]),
+                                                            material_id,
+                                                            shape_id,
+                                                            "",
+                                                            (int?)((r["length_ft"] is System.DBNull) ? null :(int?)r["length_ft"]));
+                    }
+                    else if ((string)r["linktype"] == "Ditch")
+                    {
+                        int globalID = 0;
+                        //adding a pipe means:
+                        //placing a new entry in the globalID table,
+                        //taking that value and using it to create a new pipe
+                        this.sWSP_GLOBAL_IDTableAdapter.Insert("");
+                        //what was the global ID that was just inserted?  The highest value in the GlobalID table.  Since we just inserted to it, there is no chance that it could be null
+                        globalID = (int)this.sWSP_GLOBAL_IDTableAdapter.ScalarQuery();
+                        //add this record to the SWSP_PIPE table
+                        this.sWSP_DITCHTableAdapter.Insert(globalID,
+                                                            page_id,
+                                                            (string)r["node"],
+                                                            facing_id,
+                                                            (double?)((r["dimension3"] is System.DBNull) ? null : (double?)r["dimension3"]),
+                                                            (double?)((r["dimension1"] is System.DBNull) ? null : (double?)r["dimension1"]),
+                                                            (double?)((r["dimension2"] is System.DBNull) ? null : (double?)r["dimension2"]),
+                                                            material_id,
+                                                            "",
+                                                            (string)r["ds_node"],
+                                                            (string)r["us_node"],
+                                                            (int?)((r["length_ft"] is System.DBNull) ? null : (int?)r["length_ft"]));
+                    }
+                    else if ((string)r["linktype"] == "Culvert")
+                    {
+                        int globalID = 0;
+                        //adding a pipe means:
+                        //placing a new entry in the globalID table,
+                        //taking that value and using it to create a new pipe
+                        this.sWSP_GLOBAL_IDTableAdapter.Insert("");
+                        //what was the global ID that was just inserted?  The highest value in the GlobalID table.  Since we just inserted to it, there is no chance that it could be null
+                        globalID = (int)this.sWSP_GLOBAL_IDTableAdapter.ScalarQuery();
+                        //add this record to the SWSP_PIPE table
+                        this.sWSP_CULVERTTableAdapter.Insert(globalID,
+                                                            page_id,
+                                                            (string)r["node"],
+                                                            facing_id,
+                                                            culvert_opening_type,
+                                                            shape_id,
+                                                            (double?)((r["dimension1"] is System.DBNull) ? null : (double?)r["dimension1"]),
+                                                            (double?)((r["dimension2"] is System.DBNull) ? null : (double?)r["dimension2"]),
+                                                            (double?)((r["dimension3"] is System.DBNull) ? null : (double?)r["dimension3"]),
+                                                            material_id,
+                                                            "",
+                                                            (string)r["ds_node"],
+                                                            (string)r["us_node"],
+                                                            (int?)((r["length_ft"] is System.DBNull) ? null : (int?)r["length_ft"]));
+                    }
+                }
+                else if (r["action"] is System.DBNull)
+                {
+                    //do nothing
+                }
+                //if the global id is positive, and the action flag is 3, then we are modifying an existing record
+                else if ((int)r["action"] == 3)
+                {
+                    //get the material_id
+                    if (r["material"] is System.DBNull) { r["material"] = "UNSPEC"; }
+                    material_id = (int)((DataRow)sANDBOXDataSet.SWSP_MATERIAL_TYPE.Select("material = '" + (string)r["material"] + "'")[0]).ItemArray[0];
+                    //get the shape_id
+                    if (r["shape"] is System.DBNull) { r["shape"] = "UNK"; }
+                    shape_id = (int)((DataRow)sANDBOXDataSet.SWSP_SHAPE_TYPE.Select("shape = '" + (string)r["shape"] + "'")[0]).ItemArray[0];
+                    //get the culvert_opening_type_id
+                    if (r["culvert_opening"] is System.DBNull)
+                    {
+                        culvert_opening_type = (int)((DataRow)sANDBOXDataSet.SWSP_CULVERT_OPENING_TYPE.Select("culvert_opening is null")[0]).ItemArray[0];
+                    }
+                    else
+                    {
+                        culvert_opening_type = (int)((DataRow)sANDBOXDataSet.SWSP_CULVERT_OPENING_TYPE.Select("culvert_opening = '" + (string)r["culvert_opening"] + "'")[0]).ItemArray[0];
+                    }
+
+                    if ((string)r["linktype"] == "Pipe")
+                    {
+                        this.sWSP_PIPETableAdapter.UpdateQuery(
+                                                            page_id,
+                                                            (string)r["us_node"],
+                                                            (string)r["ds_node"],
+                                                            (double?)((r["us_depth_in"] is System.DBNull) ? null : (double?)r["us_depth_in"]),
+                                                            (double?)((r["ds_depth_in"] is System.DBNull) ? null : (double?)r["ds_depth_in"]),
+                                                            (double?)((r["dimension1"] is System.DBNull) ? null : (double?)r["dimension1"]),
+                                                            (double?)((r["dimension2"] is System.DBNull) ? null : (double?)r["dimension2"]),
+                                                            material_id,
+                                                            shape_id,
+                                                            "",
+                                                            (int?)((r["length_ft"] is System.DBNull) ? null : (int?)r["length_ft"]),
+                                                            (int)r["global_id"]);
+                    }
+                    else if ((string)r["linktype"] == "Ditch")
+                    {
+                        this.sWSP_DITCHTableAdapter.UpdateQuery(
+                                                            page_id,
+                                                            (string)r["node"],
+                                                            facing_id,
+                                                            (double?)((r["dimension3"] is System.DBNull) ? null : (double?)r["dimension3"]),
+                                                            (double?)((r["dimension1"] is System.DBNull) ? null : (double?)r["dimension1"]),
+                                                            (double?)((r["dimension2"] is System.DBNull) ? null : (double?)r["dimension2"]),
+                                                            material_id,
+                                                            "",
+                                                            (string)r["ds_node"],
+                                                            (string)r["us_node"],
+                                                            (int?)((r["length_ft"] is System.DBNull) ? null : (int?)r["length_ft"]),
+                                                            (int)r["global_id"]);
+                    }
+                    else if ((string)r["linktype"] == "Culvert")
+                    {
+                        this.sWSP_CULVERTTableAdapter.UpdateQuery(
+                                                            page_id,
+                                                            (string)r["node"],
+                                                            facing_id,
+                                                            culvert_opening_type,
+                                                            shape_id,
+                                                            (double?)((r["dimension1"] is System.DBNull) ? null : (double?)r["dimension1"]),
+                                                            (double?)((r["dimension2"] is System.DBNull) ? null : (double?)r["dimension2"]),
+                                                            (double?)((r["dimension3"] is System.DBNull) ? null : (double?)r["dimension3"]),
+                                                            material_id,
+                                                            "",
+                                                            (string)r["ds_node"],
+                                                            (string)r["us_node"],
+                                                            (int?)((r["length_ft"] is System.DBNull) ? null : (int?)r["length_ft"]),
+                                                            (int)r["global_id"]);
+                    }
+                }
+                else if ((int)r["action"] == 1)
+                {
+                    if ((string)r["linktype"] == "Pipe")
+                    {
+                        this.sWSP_PIPETableAdapter.DeleteByGlobalID((int)r["global_id"]);
+                    }
+                    else if ((string)r["linktype"] == "Culvert")
+                    {
+                        this.sWSP_CULVERTTableAdapter.DeleteByGlobalID((int)r["global_id"]);
+                    }
+                    else if ((string)r["linktype"] == "Ditch")
+                    {
+                        this.sWSP_DITCHTableAdapter.DeleteByGlobalID((int)r["global_id"]);
+                    }
+                }
+            }
+        }
+        void dataGridViewLinkInfo_Leave(object sender, System.EventArgs e)
+        {
+            //yes this redundancy is really necessary
+            dataGridViewLinkInfo.CurrentRow.DataGridView.EndEdit();
+            dataGridViewLinkInfo.EndEdit();
+            CurrencyManager cm = (CurrencyManager)dataGridViewLinkInfo.BindingContext[dataGridViewLinkInfo.DataSource, dataGridViewLinkInfo.DataMember];
+            cm.EndCurrentEdit();
+
+            PopulateLinkInfo();
+        }
+
+        void dataGridViewLinkInfo_MouseLeave(object sender, System.EventArgs e)
+        {
+            //yes this redundancy is really necessary
+            /*dataGridViewLinkInfo.CurrentRow.DataGridView.EndEdit();
+            dataGridViewLinkInfo.EndEdit();
+            CurrencyManager cm = (CurrencyManager)dataGridViewLinkInfo.BindingContext[dataGridViewLinkInfo.DataSource, dataGridViewLinkInfo.DataMember];
+            cm.EndCurrentEdit();
+
+            PopulateLinkInfo();*/
+        }
+
+        private void FormFieldSurveyView_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (!Environment.HasShutdownStarted)
+            {
+                //yes this redundancy is really necessary
+                dataGridViewLinkInfo.CurrentRow.DataGridView.EndEdit();
+                dataGridViewLinkInfo.EndEdit();
+                CurrencyManager cm = (CurrencyManager)dataGridViewLinkInfo.BindingContext[dataGridViewLinkInfo.DataSource, dataGridViewLinkInfo.DataMember];
+                cm.EndCurrentEdit();
+
+                PopulateLinkInfo();
+                //e.Cancel = true;
+                DialogResult theAnswer = MessageBox.Show("Do you wish to save changes to the database?", "Save before closing", MessageBoxButtons.YesNoCancel);
+                if (theAnswer == DialogResult.No)
+                {
+                    //do nothing
+                }
+                else if (theAnswer == DialogResult.Cancel)
+                {
+                    e.Cancel = true;
+                }
+                else if (theAnswer == DialogResult.Yes)
+                {
+                    translateChangesAndSaveToDatabase();
+                }
+
             }
         }
     }
