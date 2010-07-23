@@ -51,26 +51,28 @@
             Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn17 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("full_width_in");
             Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn18 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("us_node");
             Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn19 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ds_node");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn20 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_PHOTO_CULVERT");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn20 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("length_ft");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn21 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_PHOTO_CULVERT");
             Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand3 = new Infragistics.Win.UltraWinGrid.UltraGridBand("FK_PIPE_SHAPE_TYPE", 0);
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn21 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("pipe_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn22 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("global_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn23 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("survey_page_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn24 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("us_node");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn25 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ds_node");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn26 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("us_depth_in");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn27 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ds_depth_in");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn28 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("inside_diam_in");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn29 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("material");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn30 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("shape");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn31 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("comment");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn32 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("inside_width_in");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn33 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_PHOTO_PIPE");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn22 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("pipe_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn23 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("global_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn24 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("survey_page_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn25 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("us_node");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn26 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ds_node");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn27 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("us_depth_in");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn28 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ds_depth_in");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn29 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("inside_diam_in");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn30 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("material");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn31 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("shape");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn32 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("comment");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn33 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("inside_width_in");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn34 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("length_ft");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn35 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_PHOTO_PIPE");
             Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand4 = new Infragistics.Win.UltraWinGrid.UltraGridBand("FK_PHOTO_CULVERT", 1);
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn34 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("photo_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn35 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("global_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn36 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("location");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn37 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("comment");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn36 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("photo_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn37 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("global_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn38 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("location");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn39 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("comment");
             Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand5 = new Infragistics.Win.UltraWinGrid.UltraGridBand("FK_PHOTO_PIPE", 3);
             Infragistics.Win.Appearance appearance61 = new Infragistics.Win.Appearance();
             Infragistics.Win.Appearance appearance62 = new Infragistics.Win.Appearance();
@@ -85,61 +87,64 @@
             Infragistics.Win.Appearance appearance68 = new Infragistics.Win.Appearance();
             Infragistics.Win.Appearance appearance25 = new Infragistics.Win.Appearance();
             Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand6 = new Infragistics.Win.UltraWinGrid.UltraGridBand("SWSP_MATERIAL_TYPE", -1);
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn38 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("material_type_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn39 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("material");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn40 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("description");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn41 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_CULVERT_MATERIAL_TYPE");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn42 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_DITCH_MATERIAL_TYPE");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn43 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_PIPE_MATERIAL_TYPE");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn40 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("material_type_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn41 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("material");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn42 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("description");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn43 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_CULVERT_MATERIAL_TYPE");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn44 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_DITCH_MATERIAL_TYPE");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn45 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_PIPE_MATERIAL_TYPE");
             Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand7 = new Infragistics.Win.UltraWinGrid.UltraGridBand("FK_CULVERT_MATERIAL_TYPE", 0);
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn44 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("culvert_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn45 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("global_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn46 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("survey_page_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn47 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("node");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn48 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("facing");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn49 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("culvert_opening");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn50 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("shape");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn51 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("full_diam_in");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn52 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("unobstructed_height_in");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn53 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("material");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn54 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("comment");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn55 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("full_width_in");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn56 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("us_node");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn57 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ds_node");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn58 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_PHOTO_CULVERT");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn46 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("culvert_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn47 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("global_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn48 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("survey_page_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn49 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("node");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn50 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("facing");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn51 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("culvert_opening");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn52 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("shape");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn53 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("full_diam_in");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn54 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("unobstructed_height_in");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn55 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("material");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn56 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("comment");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn57 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("full_width_in");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn58 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("us_node");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn59 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ds_node");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn60 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("length_ft");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn61 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_PHOTO_CULVERT");
             Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand8 = new Infragistics.Win.UltraWinGrid.UltraGridBand("FK_DITCH_MATERIAL_TYPE", 0);
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn59 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ditch_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn60 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("global_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn61 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("survey_page_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn62 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("node");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn63 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("facing");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn64 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("depth_in");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn65 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("top_width_in");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn66 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("bottom_width_in");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn67 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("material");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn68 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("comment");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn69 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("us_node");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn70 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ds_node");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn71 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_PHOTO_DITCH");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn62 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ditch_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn63 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("global_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn64 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("survey_page_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn65 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("node");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn66 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("facing");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn67 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("depth_in");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn68 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("top_width_in");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn69 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("bottom_width_in");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn70 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("material");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn71 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("comment");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn72 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("us_node");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn73 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ds_node");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn74 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("length_ft");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn75 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_PHOTO_DITCH");
             Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand9 = new Infragistics.Win.UltraWinGrid.UltraGridBand("FK_PIPE_MATERIAL_TYPE", 0);
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn72 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("pipe_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn73 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("global_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn74 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("survey_page_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn75 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("us_node");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn76 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ds_node");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn77 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("us_depth_in");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn78 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ds_depth_in");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn79 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("inside_diam_in");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn80 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("material");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn81 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("shape");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn82 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("comment");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn83 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("inside_width_in");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn84 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_PHOTO_PIPE");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn76 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("pipe_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn77 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("global_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn78 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("survey_page_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn79 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("us_node");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn80 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ds_node");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn81 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("us_depth_in");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn82 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ds_depth_in");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn83 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("inside_diam_in");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn84 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("material");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn85 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("shape");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn86 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("comment");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn87 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("inside_width_in");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn88 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("length_ft");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn89 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_PHOTO_PIPE");
             Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand10 = new Infragistics.Win.UltraWinGrid.UltraGridBand("FK_PHOTO_CULVERT", 1);
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn85 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("photo_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn86 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("global_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn87 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("location");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn88 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("comment");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn90 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("photo_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn91 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("global_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn92 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("location");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn93 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("comment");
             Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand11 = new Infragistics.Win.UltraWinGrid.UltraGridBand("FK_PHOTO_DITCH", 3);
             Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand12 = new Infragistics.Win.UltraWinGrid.UltraGridBand("FK_PHOTO_PIPE", 5);
             Infragistics.Win.Appearance appearance19 = new Infragistics.Win.Appearance();
@@ -155,46 +160,48 @@
             Infragistics.Win.Appearance appearance29 = new Infragistics.Win.Appearance();
             Infragistics.Win.Appearance appearance4 = new Infragistics.Win.Appearance();
             Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand13 = new Infragistics.Win.UltraWinGrid.UltraGridBand("SWSP_FACING_TYPE", -1);
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn89 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("facing_type_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn90 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("facing");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn91 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("description");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn92 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_CULVERT_FACING_TYPE");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn93 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_DITCH_FACING_TYPE");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn94 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("facing_type_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn95 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("facing");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn96 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("description");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn97 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_CULVERT_FACING_TYPE");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn98 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_DITCH_FACING_TYPE");
             Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand14 = new Infragistics.Win.UltraWinGrid.UltraGridBand("FK_CULVERT_FACING_TYPE", 0);
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn94 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("culvert_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn95 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("global_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn96 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("survey_page_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn97 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("node");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn98 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("facing");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn99 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("culvert_opening");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn100 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("shape");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn101 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("full_diam_in");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn102 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("unobstructed_height_in");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn103 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("material");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn104 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("comment");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn105 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("full_width_in");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn106 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("us_node");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn107 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ds_node");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn108 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_PHOTO_CULVERT");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn99 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("culvert_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn100 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("global_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn101 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("survey_page_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn102 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("node");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn103 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("facing");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn104 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("culvert_opening");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn105 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("shape");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn106 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("full_diam_in");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn107 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("unobstructed_height_in");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn108 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("material");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn109 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("comment");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn110 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("full_width_in");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn111 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("us_node");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn112 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ds_node");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn113 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("length_ft");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn114 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_PHOTO_CULVERT");
             Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand15 = new Infragistics.Win.UltraWinGrid.UltraGridBand("FK_DITCH_FACING_TYPE", 0);
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn109 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ditch_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn110 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("global_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn111 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("survey_page_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn112 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("node");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn113 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("facing");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn114 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("depth_in");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn115 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("top_width_in");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn116 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("bottom_width_in");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn117 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("material");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn118 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("comment");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn119 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("us_node");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn120 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ds_node");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn121 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_PHOTO_DITCH");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn115 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ditch_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn116 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("global_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn117 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("survey_page_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn118 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("node");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn119 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("facing");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn120 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("depth_in");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn121 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("top_width_in");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn122 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("bottom_width_in");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn123 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("material");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn124 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("comment");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn125 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("us_node");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn126 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ds_node");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn127 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("length_ft");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn128 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_PHOTO_DITCH");
             Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand16 = new Infragistics.Win.UltraWinGrid.UltraGridBand("FK_PHOTO_CULVERT", 1);
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn122 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("photo_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn123 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("global_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn124 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("location");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn125 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("comment");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn129 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("photo_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn130 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("global_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn131 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("location");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn132 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("comment");
             Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand17 = new Infragistics.Win.UltraWinGrid.UltraGridBand("FK_PHOTO_DITCH", 3);
             Infragistics.Win.Appearance appearance1 = new Infragistics.Win.Appearance();
             Infragistics.Win.Appearance appearance2 = new Infragistics.Win.Appearance();
@@ -209,61 +216,64 @@
             Infragistics.Win.Appearance appearance8 = new Infragistics.Win.Appearance();
             Infragistics.Win.Appearance appearance49 = new Infragistics.Win.Appearance();
             Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand18 = new Infragistics.Win.UltraWinGrid.UltraGridBand("SWSP_MATERIAL_TYPE", -1);
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn126 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("material_type_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn127 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("material");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn128 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("description");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn129 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_CULVERT_MATERIAL_TYPE");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn130 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_DITCH_MATERIAL_TYPE");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn131 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_PIPE_MATERIAL_TYPE");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn133 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("material_type_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn134 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("material");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn135 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("description");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn136 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_CULVERT_MATERIAL_TYPE");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn137 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_DITCH_MATERIAL_TYPE");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn138 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_PIPE_MATERIAL_TYPE");
             Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand19 = new Infragistics.Win.UltraWinGrid.UltraGridBand("FK_CULVERT_MATERIAL_TYPE", 0);
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn132 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("culvert_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn133 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("global_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn134 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("survey_page_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn135 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("node");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn136 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("facing");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn137 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("culvert_opening");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn138 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("shape");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn139 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("full_diam_in");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn140 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("unobstructed_height_in");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn141 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("material");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn142 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("comment");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn143 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("full_width_in");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn144 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("us_node");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn145 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ds_node");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn146 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_PHOTO_CULVERT");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn139 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("culvert_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn140 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("global_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn141 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("survey_page_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn142 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("node");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn143 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("facing");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn144 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("culvert_opening");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn145 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("shape");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn146 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("full_diam_in");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn147 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("unobstructed_height_in");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn148 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("material");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn149 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("comment");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn150 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("full_width_in");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn151 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("us_node");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn152 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ds_node");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn153 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("length_ft");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn154 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_PHOTO_CULVERT");
             Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand20 = new Infragistics.Win.UltraWinGrid.UltraGridBand("FK_DITCH_MATERIAL_TYPE", 0);
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn147 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ditch_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn148 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("global_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn149 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("survey_page_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn150 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("node");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn151 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("facing");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn152 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("depth_in");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn153 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("top_width_in");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn154 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("bottom_width_in");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn155 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("material");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn156 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("comment");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn157 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("us_node");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn158 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ds_node");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn159 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_PHOTO_DITCH");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn155 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ditch_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn156 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("global_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn157 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("survey_page_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn158 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("node");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn159 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("facing");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn160 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("depth_in");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn161 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("top_width_in");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn162 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("bottom_width_in");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn163 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("material");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn164 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("comment");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn165 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("us_node");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn166 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ds_node");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn167 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("length_ft");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn168 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_PHOTO_DITCH");
             Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand21 = new Infragistics.Win.UltraWinGrid.UltraGridBand("FK_PIPE_MATERIAL_TYPE", 0);
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn160 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("pipe_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn161 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("global_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn162 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("survey_page_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn163 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("us_node");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn164 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ds_node");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn165 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("us_depth_in");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn166 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ds_depth_in");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn167 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("inside_diam_in");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn168 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("material");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn169 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("shape");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn170 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("comment");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn171 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("inside_width_in");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn172 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_PHOTO_PIPE");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn169 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("pipe_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn170 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("global_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn171 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("survey_page_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn172 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("us_node");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn173 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ds_node");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn174 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("us_depth_in");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn175 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ds_depth_in");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn176 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("inside_diam_in");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn177 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("material");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn178 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("shape");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn179 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("comment");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn180 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("inside_width_in");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn181 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("length_ft");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn182 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_PHOTO_PIPE");
             Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand22 = new Infragistics.Win.UltraWinGrid.UltraGridBand("FK_PHOTO_CULVERT", 1);
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn173 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("photo_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn174 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("global_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn175 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("location");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn176 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("comment");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn183 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("photo_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn184 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("global_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn185 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("location");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn186 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("comment");
             Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand23 = new Infragistics.Win.UltraWinGrid.UltraGridBand("FK_PHOTO_DITCH", 3);
             Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand24 = new Infragistics.Win.UltraWinGrid.UltraGridBand("FK_PHOTO_PIPE", 5);
             Infragistics.Win.Appearance appearance46 = new Infragistics.Win.Appearance();
@@ -279,46 +289,48 @@
             Infragistics.Win.Appearance appearance53 = new Infragistics.Win.Appearance();
             Infragistics.Win.Appearance appearance76 = new Infragistics.Win.Appearance();
             Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand25 = new Infragistics.Win.UltraWinGrid.UltraGridBand("SWSP_SHAPE_TYPE", -1);
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn177 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("shape_type_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn178 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("shape");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn179 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("description");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn180 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_CULVERT_SHAPE_TYPE");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn181 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_PIPE_SHAPE_TYPE");
-            Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand26 = new Infragistics.Win.UltraWinGrid.UltraGridBand("FK_CULVERT_SHAPE_TYPE", 0);
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn182 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("culvert_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn183 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("global_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn184 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("survey_page_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn185 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("node");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn186 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("facing");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn187 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("culvert_opening");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn187 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("shape_type_id");
             Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn188 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("shape");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn189 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("full_diam_in");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn190 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("unobstructed_height_in");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn191 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("material");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn192 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("comment");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn193 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("full_width_in");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn194 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("us_node");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn195 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ds_node");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn196 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_PHOTO_CULVERT");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn189 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("description");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn190 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_CULVERT_SHAPE_TYPE");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn191 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_PIPE_SHAPE_TYPE");
+            Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand26 = new Infragistics.Win.UltraWinGrid.UltraGridBand("FK_CULVERT_SHAPE_TYPE", 0);
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn192 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("culvert_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn193 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("global_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn194 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("survey_page_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn195 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("node");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn196 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("facing");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn197 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("culvert_opening");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn198 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("shape");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn199 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("full_diam_in");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn200 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("unobstructed_height_in");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn201 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("material");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn202 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("comment");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn203 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("full_width_in");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn204 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("us_node");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn205 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ds_node");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn206 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("length_ft");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn207 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_PHOTO_CULVERT");
             Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand27 = new Infragistics.Win.UltraWinGrid.UltraGridBand("FK_PIPE_SHAPE_TYPE", 0);
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn197 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("pipe_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn198 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("global_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn199 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("survey_page_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn200 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("us_node");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn201 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ds_node");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn202 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("us_depth_in");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn203 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ds_depth_in");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn204 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("inside_diam_in");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn205 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("material");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn206 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("shape");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn207 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("comment");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn208 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("inside_width_in");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn209 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_PHOTO_PIPE");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn208 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("pipe_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn209 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("global_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn210 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("survey_page_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn211 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("us_node");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn212 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ds_node");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn213 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("us_depth_in");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn214 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ds_depth_in");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn215 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("inside_diam_in");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn216 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("material");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn217 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("shape");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn218 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("comment");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn219 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("inside_width_in");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn220 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("length_ft");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn221 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_PHOTO_PIPE");
             Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand28 = new Infragistics.Win.UltraWinGrid.UltraGridBand("FK_PHOTO_CULVERT", 1);
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn210 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("photo_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn211 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("global_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn212 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("location");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn213 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("comment");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn222 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("photo_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn223 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("global_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn224 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("location");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn225 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("comment");
             Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand29 = new Infragistics.Win.UltraWinGrid.UltraGridBand("FK_PHOTO_PIPE", 3);
             Infragistics.Win.Appearance appearance73 = new Infragistics.Win.Appearance();
             Infragistics.Win.Appearance appearance74 = new Infragistics.Win.Appearance();
@@ -333,46 +345,48 @@
             Infragistics.Win.Appearance appearance80 = new Infragistics.Win.Appearance();
             Infragistics.Win.Appearance appearance16 = new Infragistics.Win.Appearance();
             Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand30 = new Infragistics.Win.UltraWinGrid.UltraGridBand("SWSP_FACING_TYPE", -1);
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn214 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("facing_type_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn215 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("facing");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn216 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("description");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn217 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_CULVERT_FACING_TYPE");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn218 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_DITCH_FACING_TYPE");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn226 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("facing_type_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn227 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("facing");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn228 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("description");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn229 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_CULVERT_FACING_TYPE");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn230 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_DITCH_FACING_TYPE");
             Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand31 = new Infragistics.Win.UltraWinGrid.UltraGridBand("FK_CULVERT_FACING_TYPE", 0);
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn219 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("culvert_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn220 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("global_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn221 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("survey_page_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn222 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("node");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn223 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("facing");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn224 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("culvert_opening");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn225 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("shape");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn226 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("full_diam_in");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn227 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("unobstructed_height_in");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn228 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("material");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn229 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("comment");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn230 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("full_width_in");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn231 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("us_node");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn232 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ds_node");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn233 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_PHOTO_CULVERT");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn231 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("culvert_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn232 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("global_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn233 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("survey_page_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn234 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("node");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn235 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("facing");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn236 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("culvert_opening");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn237 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("shape");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn238 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("full_diam_in");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn239 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("unobstructed_height_in");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn240 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("material");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn241 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("comment");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn242 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("full_width_in");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn243 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("us_node");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn244 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ds_node");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn245 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("length_ft");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn246 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_PHOTO_CULVERT");
             Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand32 = new Infragistics.Win.UltraWinGrid.UltraGridBand("FK_DITCH_FACING_TYPE", 0);
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn234 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ditch_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn235 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("global_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn236 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("survey_page_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn237 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("node");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn238 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("facing");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn239 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("depth_in");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn240 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("top_width_in");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn241 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("bottom_width_in");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn242 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("material");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn243 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("comment");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn244 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("us_node");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn245 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ds_node");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn246 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_PHOTO_DITCH");
-            Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand33 = new Infragistics.Win.UltraWinGrid.UltraGridBand("FK_PHOTO_CULVERT", 1);
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn247 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("photo_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn247 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ditch_id");
             Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn248 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("global_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn249 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("location");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn250 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("comment");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn249 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("survey_page_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn250 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("node");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn251 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("facing");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn252 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("depth_in");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn253 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("top_width_in");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn254 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("bottom_width_in");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn255 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("material");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn256 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("comment");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn257 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("us_node");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn258 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ds_node");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn259 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("length_ft");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn260 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_PHOTO_DITCH");
+            Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand33 = new Infragistics.Win.UltraWinGrid.UltraGridBand("FK_PHOTO_CULVERT", 1);
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn261 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("photo_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn262 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("global_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn263 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("location");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn264 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("comment");
             Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand34 = new Infragistics.Win.UltraWinGrid.UltraGridBand("FK_PHOTO_DITCH", 3);
             Infragistics.Win.Appearance appearance13 = new Infragistics.Win.Appearance();
             Infragistics.Win.Appearance appearance14 = new Infragistics.Win.Appearance();
@@ -387,61 +401,64 @@
             Infragistics.Win.Appearance appearance23 = new Infragistics.Win.Appearance();
             Infragistics.Win.Appearance appearance37 = new Infragistics.Win.Appearance();
             Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand35 = new Infragistics.Win.UltraWinGrid.UltraGridBand("SWSP_MATERIAL_TYPE", -1);
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn251 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("material_type_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn252 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("material");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn253 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("description");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn254 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_CULVERT_MATERIAL_TYPE");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn255 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_DITCH_MATERIAL_TYPE");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn256 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_PIPE_MATERIAL_TYPE");
-            Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand36 = new Infragistics.Win.UltraWinGrid.UltraGridBand("FK_CULVERT_MATERIAL_TYPE", 0);
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn257 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("culvert_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn258 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("global_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn259 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("survey_page_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn260 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("node");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn261 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("facing");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn262 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("culvert_opening");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn263 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("shape");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn264 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("full_diam_in");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn265 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("unobstructed_height_in");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn265 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("material_type_id");
             Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn266 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("material");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn267 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("comment");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn268 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("full_width_in");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn269 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("us_node");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn270 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ds_node");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn271 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_PHOTO_CULVERT");
-            Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand37 = new Infragistics.Win.UltraWinGrid.UltraGridBand("FK_DITCH_MATERIAL_TYPE", 0);
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn272 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ditch_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn273 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("global_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn274 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("survey_page_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn275 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("node");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn276 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("facing");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn277 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("depth_in");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn278 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("top_width_in");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn279 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("bottom_width_in");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn267 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("description");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn268 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_CULVERT_MATERIAL_TYPE");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn269 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_DITCH_MATERIAL_TYPE");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn270 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_PIPE_MATERIAL_TYPE");
+            Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand36 = new Infragistics.Win.UltraWinGrid.UltraGridBand("FK_CULVERT_MATERIAL_TYPE", 0);
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn271 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("culvert_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn272 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("global_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn273 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("survey_page_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn274 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("node");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn275 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("facing");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn276 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("culvert_opening");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn277 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("shape");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn278 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("full_diam_in");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn279 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("unobstructed_height_in");
             Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn280 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("material");
             Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn281 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("comment");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn282 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("us_node");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn283 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ds_node");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn284 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_PHOTO_DITCH");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn282 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("full_width_in");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn283 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("us_node");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn284 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ds_node");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn285 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("length_ft");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn286 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_PHOTO_CULVERT");
+            Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand37 = new Infragistics.Win.UltraWinGrid.UltraGridBand("FK_DITCH_MATERIAL_TYPE", 0);
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn287 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ditch_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn288 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("global_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn289 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("survey_page_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn290 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("node");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn291 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("facing");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn292 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("depth_in");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn293 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("top_width_in");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn294 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("bottom_width_in");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn295 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("material");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn296 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("comment");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn297 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("us_node");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn298 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ds_node");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn299 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("length_ft");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn300 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_PHOTO_DITCH");
             Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand38 = new Infragistics.Win.UltraWinGrid.UltraGridBand("FK_PIPE_MATERIAL_TYPE", 0);
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn285 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("pipe_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn286 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("global_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn287 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("survey_page_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn288 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("us_node");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn289 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ds_node");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn290 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("us_depth_in");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn291 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ds_depth_in");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn292 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("inside_diam_in");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn293 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("material");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn294 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("shape");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn295 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("comment");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn296 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("inside_width_in");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn297 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_PHOTO_PIPE");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn301 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("pipe_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn302 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("global_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn303 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("survey_page_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn304 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("us_node");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn305 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ds_node");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn306 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("us_depth_in");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn307 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ds_depth_in");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn308 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("inside_diam_in");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn309 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("material");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn310 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("shape");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn311 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("comment");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn312 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("inside_width_in");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn313 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("length_ft");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn314 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_PHOTO_PIPE");
             Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand39 = new Infragistics.Win.UltraWinGrid.UltraGridBand("FK_PHOTO_CULVERT", 1);
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn298 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("photo_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn299 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("global_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn300 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("location");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn301 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("comment");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn315 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("photo_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn316 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("global_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn317 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("location");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn318 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("comment");
             Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand40 = new Infragistics.Win.UltraWinGrid.UltraGridBand("FK_PHOTO_DITCH", 3);
             Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand41 = new Infragistics.Win.UltraWinGrid.UltraGridBand("FK_PHOTO_PIPE", 5);
             Infragistics.Win.Appearance appearance34 = new Infragistics.Win.Appearance();
@@ -460,17 +477,13 @@
             this.fKSURVEYPAGEVIEWBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.fKVIEWSUBWATERSHEDBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.fKSUBWATERSHEDWATERSHEDBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.sWSPWATERSHEDBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.sANDBOXDataSet = new SWI_2.SANDBOXDataSet();
             this.tabControlDitchesCulvertsPipes = new System.Windows.Forms.TabControl();
             this.tabPagePipes = new System.Windows.Forms.TabPage();
             this.ultraNumericEditorPipesInnerWidth = new Infragistics.Win.UltraWinEditors.UltraNumericEditor();
             this.ultraLabelInnerWidth = new Infragistics.Win.Misc.UltraLabel();
             this.ultraComboPipesShape = new Infragistics.Win.UltraWinGrid.UltraCombo();
             this.fKPIPESURVEYPAGEBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.sWSPSHAPETYPEBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.ultraComboPipesMaterial = new Infragistics.Win.UltraWinGrid.UltraCombo();
-            this.sWSPMATERIALTYPEBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.ultraNumericEditorPipesInnerDiameter = new Infragistics.Win.UltraWinEditors.UltraNumericEditor();
             this.ultraNumericEditorPipesDSDepth = new Infragistics.Win.UltraWinEditors.UltraNumericEditor();
             this.ultraNumericEditorPipesUSDepth = new Infragistics.Win.UltraWinEditors.UltraNumericEditor();
@@ -488,8 +501,6 @@
             this.buttonPipesAdd = new System.Windows.Forms.Button();
             this.buttonPipesDelete = new System.Windows.Forms.Button();
             this.dataGridViewPipes = new System.Windows.Forms.DataGridView();
-            this.usnodeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dsnodeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPageDitches = new System.Windows.Forms.TabPage();
             this.textBoxDitchesUSNode = new System.Windows.Forms.TextBox();
             this.fKDITCHSURVEYPAGEBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -497,7 +508,6 @@
             this.textBoxDitchesDSNode = new System.Windows.Forms.TextBox();
             this.labelDitchesDSNode = new System.Windows.Forms.Label();
             this.ultraComboDitchesFacingDirection = new Infragistics.Win.UltraWinGrid.UltraCombo();
-            this.sWSPFACINGTYPEBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.ultraComboDitchesMaterial = new Infragistics.Win.UltraWinGrid.UltraCombo();
             this.ultraNumericEditorDitchesBottomWidth = new Infragistics.Win.UltraWinEditors.UltraNumericEditor();
             this.ultraNumericEditorDitchesTopWidth = new Infragistics.Win.UltraWinEditors.UltraNumericEditor();
@@ -516,7 +526,6 @@
             this.dataGridViewDitches = new System.Windows.Forms.DataGridView();
             this.us_node = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ds_node = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nodeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPageCulverts = new System.Windows.Forms.TabPage();
             this.textBoxCulvertsDSNode = new System.Windows.Forms.TextBox();
             this.fKCULVERTSURVEYPAGEBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
@@ -531,7 +540,6 @@
             this.buttonUpdateCulvert = new System.Windows.Forms.Button();
             this.buttonCulvertsViewAddPhotos = new System.Windows.Forms.Button();
             this.comboBoxCulvertsType = new System.Windows.Forms.ComboBox();
-            this.sWSPCULVERTOPENINGTYPEBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.textBoxCulvertsMeasuredNode = new System.Windows.Forms.TextBox();
             this.labelCulvertsMeasuredNode = new System.Windows.Forms.Label();
             this.labelCulvertsFacingDirection = new System.Windows.Forms.Label();
@@ -545,7 +553,6 @@
             this.dataGridViewCulverts = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nodeDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fKCULVERTFACINGTYPEBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.menuStripMainForm = new System.Windows.Forms.MenuStrip();
             this.fIleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -576,7 +583,17 @@
             this.fKPIPEMATERIALTYPEBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.fKPIPEMATERIALTYPEBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.ultraDateTimeEditorSurveyDate = new Infragistics.Win.UltraWinEditors.UltraDateTimeEditor();
+            this.sWSPWATERSHEDBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.sANDBOXDataSet = new SWI_2.SANDBOXDataSet();
             this.checkedListBoxEvaluators = new System.Windows.Forms.CheckedListBox();
+            this.sWSPSHAPETYPEBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.sWSPMATERIALTYPEBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.usnodeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dsnodeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sWSPFACINGTYPEBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.nodeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sWSPCULVERTOPENINGTYPEBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.nodeDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sWSPFACINGTYPEBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.sWSPPHOTOBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.sWSPCULVERTBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -608,16 +625,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.fKSURVEYPAGEVIEWBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fKVIEWSUBWATERSHEDBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fKSUBWATERSHEDWATERSHEDBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sWSPWATERSHEDBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sANDBOXDataSet)).BeginInit();
             this.tabControlDitchesCulvertsPipes.SuspendLayout();
             this.tabPagePipes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ultraNumericEditorPipesInnerWidth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ultraComboPipesShape)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fKPIPESURVEYPAGEBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sWSPSHAPETYPEBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ultraComboPipesMaterial)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sWSPMATERIALTYPEBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ultraNumericEditorPipesInnerDiameter)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ultraNumericEditorPipesDSDepth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ultraNumericEditorPipesUSDepth)).BeginInit();
@@ -625,7 +638,6 @@
             this.tabPageDitches.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fKDITCHSURVEYPAGEBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ultraComboDitchesFacingDirection)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sWSPFACINGTYPEBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ultraComboDitchesMaterial)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ultraNumericEditorDitchesBottomWidth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ultraNumericEditorDitchesTopWidth)).BeginInit();
@@ -638,7 +650,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.ultraComboCulvertsMaterial)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ultraNumericEditorCulvertsUnobstructedHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ultraNumericEditorCulvertsFullDepth)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sWSPCULVERTOPENINGTYPEBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCulverts)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fKCULVERTFACINGTYPEBindingSource)).BeginInit();
             this.menuStripMainForm.SuspendLayout();
@@ -647,6 +658,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.fKPIPEMATERIALTYPEBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fKPIPEMATERIALTYPEBindingSource2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ultraDateTimeEditorSurveyDate)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sWSPWATERSHEDBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sANDBOXDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sWSPSHAPETYPEBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sWSPMATERIALTYPEBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sWSPFACINGTYPEBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sWSPCULVERTOPENINGTYPEBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sWSPFACINGTYPEBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sWSPPHOTOBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sWSPCULVERTBindingSource)).BeginInit();
@@ -695,16 +712,6 @@
             // 
             this.fKSUBWATERSHEDWATERSHEDBindingSource.DataMember = "FK_SUBWATERSHED_WATERSHED";
             this.fKSUBWATERSHEDWATERSHEDBindingSource.DataSource = this.sWSPWATERSHEDBindingSource;
-            // 
-            // sWSPWATERSHEDBindingSource
-            // 
-            this.sWSPWATERSHEDBindingSource.DataMember = "SWSP_WATERSHED";
-            this.sWSPWATERSHEDBindingSource.DataSource = this.sANDBOXDataSet;
-            // 
-            // sANDBOXDataSet
-            // 
-            this.sANDBOXDataSet.DataSetName = "SANDBOXDataSet";
-            this.sANDBOXDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // tabControlDitchesCulvertsPipes
             // 
@@ -825,6 +832,8 @@
             ultraGridColumn19.Header.VisiblePosition = 13;
             ultraGridColumn20.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
             ultraGridColumn20.Header.VisiblePosition = 14;
+            ultraGridColumn21.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn21.Header.VisiblePosition = 15;
             ultraGridBand2.Columns.AddRange(new object[] {
             ultraGridColumn6,
             ultraGridColumn7,
@@ -840,35 +849,37 @@
             ultraGridColumn17,
             ultraGridColumn18,
             ultraGridColumn19,
-            ultraGridColumn20});
-            ultraGridColumn21.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn21.Header.VisiblePosition = 0;
+            ultraGridColumn20,
+            ultraGridColumn21});
             ultraGridColumn22.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn22.Header.VisiblePosition = 1;
+            ultraGridColumn22.Header.VisiblePosition = 0;
             ultraGridColumn23.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn23.Header.VisiblePosition = 2;
+            ultraGridColumn23.Header.VisiblePosition = 1;
             ultraGridColumn24.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn24.Header.VisiblePosition = 3;
+            ultraGridColumn24.Header.VisiblePosition = 2;
             ultraGridColumn25.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn25.Header.VisiblePosition = 4;
+            ultraGridColumn25.Header.VisiblePosition = 3;
             ultraGridColumn26.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn26.Header.VisiblePosition = 5;
+            ultraGridColumn26.Header.VisiblePosition = 4;
             ultraGridColumn27.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn27.Header.VisiblePosition = 6;
+            ultraGridColumn27.Header.VisiblePosition = 5;
             ultraGridColumn28.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn28.Header.VisiblePosition = 7;
+            ultraGridColumn28.Header.VisiblePosition = 6;
             ultraGridColumn29.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn29.Header.VisiblePosition = 8;
+            ultraGridColumn29.Header.VisiblePosition = 7;
             ultraGridColumn30.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn30.Header.VisiblePosition = 9;
+            ultraGridColumn30.Header.VisiblePosition = 8;
             ultraGridColumn31.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn31.Header.VisiblePosition = 10;
+            ultraGridColumn31.Header.VisiblePosition = 9;
             ultraGridColumn32.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn32.Header.VisiblePosition = 11;
+            ultraGridColumn32.Header.VisiblePosition = 10;
             ultraGridColumn33.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn33.Header.VisiblePosition = 12;
+            ultraGridColumn33.Header.VisiblePosition = 11;
+            ultraGridColumn34.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn34.Header.VisiblePosition = 12;
+            ultraGridColumn35.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn35.Header.VisiblePosition = 13;
             ultraGridBand3.Columns.AddRange(new object[] {
-            ultraGridColumn21,
             ultraGridColumn22,
             ultraGridColumn23,
             ultraGridColumn24,
@@ -880,20 +891,22 @@
             ultraGridColumn30,
             ultraGridColumn31,
             ultraGridColumn32,
-            ultraGridColumn33});
-            ultraGridColumn34.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn34.Header.VisiblePosition = 0;
-            ultraGridColumn35.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn35.Header.VisiblePosition = 1;
-            ultraGridColumn36.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn36.Header.VisiblePosition = 2;
-            ultraGridColumn37.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn37.Header.VisiblePosition = 3;
-            ultraGridBand4.Columns.AddRange(new object[] {
+            ultraGridColumn33,
             ultraGridColumn34,
-            ultraGridColumn35,
+            ultraGridColumn35});
+            ultraGridColumn36.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn36.Header.VisiblePosition = 0;
+            ultraGridColumn37.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn37.Header.VisiblePosition = 1;
+            ultraGridColumn38.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn38.Header.VisiblePosition = 2;
+            ultraGridColumn39.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn39.Header.VisiblePosition = 3;
+            ultraGridBand4.Columns.AddRange(new object[] {
             ultraGridColumn36,
-            ultraGridColumn37});
+            ultraGridColumn37,
+            ultraGridColumn38,
+            ultraGridColumn39});
             this.ultraComboPipesShape.DisplayLayout.BandsSerializer.Add(ultraGridBand1);
             this.ultraComboPipesShape.DisplayLayout.BandsSerializer.Add(ultraGridBand2);
             this.ultraComboPipesShape.DisplayLayout.BandsSerializer.Add(ultraGridBand3);
@@ -963,11 +976,6 @@
             this.fKPIPESURVEYPAGEBindingSource.DataMember = "FK_PIPE_SURVEY_PAGE";
             this.fKPIPESURVEYPAGEBindingSource.DataSource = this.fKSURVEYPAGEVIEWBindingSource;
             // 
-            // sWSPSHAPETYPEBindingSource
-            // 
-            this.sWSPSHAPETYPEBindingSource.DataMember = "SWSP_SHAPE_TYPE";
-            this.sWSPSHAPETYPEBindingSource.DataSource = this.sANDBOXDataSet;
-            // 
             // ultraComboPipesMaterial
             // 
             this.ultraComboPipesMaterial.CheckedListSettings.CheckStateMember = "";
@@ -976,60 +984,60 @@
             appearance25.BackColor = System.Drawing.SystemColors.Window;
             appearance25.BorderColor = System.Drawing.SystemColors.InactiveCaption;
             this.ultraComboPipesMaterial.DisplayLayout.Appearance = appearance25;
-            ultraGridColumn38.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn38.Header.VisiblePosition = 0;
-            ultraGridColumn38.Hidden = true;
-            ultraGridColumn39.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn39.Header.VisiblePosition = 1;
             ultraGridColumn40.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn40.Header.VisiblePosition = 2;
+            ultraGridColumn40.Header.VisiblePosition = 0;
             ultraGridColumn40.Hidden = true;
             ultraGridColumn41.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn41.Header.VisiblePosition = 3;
+            ultraGridColumn41.Header.VisiblePosition = 1;
             ultraGridColumn42.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn42.Header.VisiblePosition = 4;
+            ultraGridColumn42.Header.VisiblePosition = 2;
+            ultraGridColumn42.Hidden = true;
             ultraGridColumn43.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn43.Header.VisiblePosition = 5;
+            ultraGridColumn43.Header.VisiblePosition = 3;
+            ultraGridColumn44.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn44.Header.VisiblePosition = 4;
+            ultraGridColumn45.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn45.Header.VisiblePosition = 5;
             ultraGridBand6.Columns.AddRange(new object[] {
-            ultraGridColumn38,
-            ultraGridColumn39,
             ultraGridColumn40,
             ultraGridColumn41,
             ultraGridColumn42,
-            ultraGridColumn43});
-            ultraGridColumn44.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn44.Header.VisiblePosition = 0;
-            ultraGridColumn45.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn45.Header.VisiblePosition = 1;
-            ultraGridColumn46.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn46.Header.VisiblePosition = 2;
-            ultraGridColumn47.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn47.Header.VisiblePosition = 3;
-            ultraGridColumn48.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn48.Header.VisiblePosition = 4;
-            ultraGridColumn49.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn49.Header.VisiblePosition = 5;
-            ultraGridColumn50.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn50.Header.VisiblePosition = 6;
-            ultraGridColumn51.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn51.Header.VisiblePosition = 7;
-            ultraGridColumn52.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn52.Header.VisiblePosition = 8;
-            ultraGridColumn53.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn53.Header.VisiblePosition = 9;
-            ultraGridColumn54.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn54.Header.VisiblePosition = 10;
-            ultraGridColumn55.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn55.Header.VisiblePosition = 11;
-            ultraGridColumn56.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn56.Header.VisiblePosition = 12;
-            ultraGridColumn57.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn57.Header.VisiblePosition = 13;
-            ultraGridColumn58.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn58.Header.VisiblePosition = 14;
-            ultraGridBand7.Columns.AddRange(new object[] {
+            ultraGridColumn43,
             ultraGridColumn44,
-            ultraGridColumn45,
+            ultraGridColumn45});
+            ultraGridColumn46.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn46.Header.VisiblePosition = 0;
+            ultraGridColumn47.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn47.Header.VisiblePosition = 1;
+            ultraGridColumn48.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn48.Header.VisiblePosition = 2;
+            ultraGridColumn49.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn49.Header.VisiblePosition = 3;
+            ultraGridColumn50.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn50.Header.VisiblePosition = 4;
+            ultraGridColumn51.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn51.Header.VisiblePosition = 5;
+            ultraGridColumn52.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn52.Header.VisiblePosition = 6;
+            ultraGridColumn53.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn53.Header.VisiblePosition = 7;
+            ultraGridColumn54.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn54.Header.VisiblePosition = 8;
+            ultraGridColumn55.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn55.Header.VisiblePosition = 9;
+            ultraGridColumn56.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn56.Header.VisiblePosition = 10;
+            ultraGridColumn57.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn57.Header.VisiblePosition = 11;
+            ultraGridColumn58.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn58.Header.VisiblePosition = 12;
+            ultraGridColumn59.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn59.Header.VisiblePosition = 13;
+            ultraGridColumn60.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn60.Header.VisiblePosition = 14;
+            ultraGridColumn61.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn61.Header.VisiblePosition = 15;
+            ultraGridBand7.Columns.AddRange(new object[] {
             ultraGridColumn46,
             ultraGridColumn47,
             ultraGridColumn48,
@@ -1042,37 +1050,39 @@
             ultraGridColumn55,
             ultraGridColumn56,
             ultraGridColumn57,
-            ultraGridColumn58});
-            ultraGridColumn59.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn59.Header.VisiblePosition = 0;
-            ultraGridColumn60.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn60.Header.VisiblePosition = 1;
-            ultraGridColumn61.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn61.Header.VisiblePosition = 2;
-            ultraGridColumn62.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn62.Header.VisiblePosition = 3;
-            ultraGridColumn63.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn63.Header.VisiblePosition = 4;
-            ultraGridColumn64.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn64.Header.VisiblePosition = 5;
-            ultraGridColumn65.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn65.Header.VisiblePosition = 6;
-            ultraGridColumn66.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn66.Header.VisiblePosition = 7;
-            ultraGridColumn67.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn67.Header.VisiblePosition = 8;
-            ultraGridColumn68.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn68.Header.VisiblePosition = 9;
-            ultraGridColumn69.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn69.Header.VisiblePosition = 10;
-            ultraGridColumn70.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn70.Header.VisiblePosition = 11;
-            ultraGridColumn71.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn71.Header.VisiblePosition = 12;
-            ultraGridBand8.Columns.AddRange(new object[] {
+            ultraGridColumn58,
             ultraGridColumn59,
             ultraGridColumn60,
-            ultraGridColumn61,
+            ultraGridColumn61});
+            ultraGridColumn62.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn62.Header.VisiblePosition = 0;
+            ultraGridColumn63.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn63.Header.VisiblePosition = 1;
+            ultraGridColumn64.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn64.Header.VisiblePosition = 2;
+            ultraGridColumn65.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn65.Header.VisiblePosition = 3;
+            ultraGridColumn66.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn66.Header.VisiblePosition = 4;
+            ultraGridColumn67.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn67.Header.VisiblePosition = 5;
+            ultraGridColumn68.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn68.Header.VisiblePosition = 6;
+            ultraGridColumn69.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn69.Header.VisiblePosition = 7;
+            ultraGridColumn70.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn70.Header.VisiblePosition = 8;
+            ultraGridColumn71.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn71.Header.VisiblePosition = 9;
+            ultraGridColumn72.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn72.Header.VisiblePosition = 10;
+            ultraGridColumn73.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn73.Header.VisiblePosition = 11;
+            ultraGridColumn74.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn74.Header.VisiblePosition = 12;
+            ultraGridColumn75.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn75.Header.VisiblePosition = 13;
+            ultraGridBand8.Columns.AddRange(new object[] {
             ultraGridColumn62,
             ultraGridColumn63,
             ultraGridColumn64,
@@ -1082,38 +1092,40 @@
             ultraGridColumn68,
             ultraGridColumn69,
             ultraGridColumn70,
-            ultraGridColumn71});
-            ultraGridColumn72.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn72.Header.VisiblePosition = 0;
-            ultraGridColumn73.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn73.Header.VisiblePosition = 1;
-            ultraGridColumn74.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn74.Header.VisiblePosition = 2;
-            ultraGridColumn75.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn75.Header.VisiblePosition = 3;
-            ultraGridColumn76.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn76.Header.VisiblePosition = 4;
-            ultraGridColumn77.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn77.Header.VisiblePosition = 5;
-            ultraGridColumn78.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn78.Header.VisiblePosition = 6;
-            ultraGridColumn79.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn79.Header.VisiblePosition = 7;
-            ultraGridColumn80.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn80.Header.VisiblePosition = 8;
-            ultraGridColumn81.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn81.Header.VisiblePosition = 9;
-            ultraGridColumn82.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn82.Header.VisiblePosition = 10;
-            ultraGridColumn83.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn83.Header.VisiblePosition = 11;
-            ultraGridColumn84.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn84.Header.VisiblePosition = 12;
-            ultraGridBand9.Columns.AddRange(new object[] {
+            ultraGridColumn71,
             ultraGridColumn72,
             ultraGridColumn73,
             ultraGridColumn74,
-            ultraGridColumn75,
+            ultraGridColumn75});
+            ultraGridColumn76.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn76.Header.VisiblePosition = 0;
+            ultraGridColumn77.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn77.Header.VisiblePosition = 1;
+            ultraGridColumn78.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn78.Header.VisiblePosition = 2;
+            ultraGridColumn79.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn79.Header.VisiblePosition = 3;
+            ultraGridColumn80.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn80.Header.VisiblePosition = 4;
+            ultraGridColumn81.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn81.Header.VisiblePosition = 5;
+            ultraGridColumn82.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn82.Header.VisiblePosition = 6;
+            ultraGridColumn83.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn83.Header.VisiblePosition = 7;
+            ultraGridColumn84.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn84.Header.VisiblePosition = 8;
+            ultraGridColumn85.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn85.Header.VisiblePosition = 9;
+            ultraGridColumn86.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn86.Header.VisiblePosition = 10;
+            ultraGridColumn87.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn87.Header.VisiblePosition = 11;
+            ultraGridColumn88.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn88.Header.VisiblePosition = 12;
+            ultraGridColumn89.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn89.Header.VisiblePosition = 13;
+            ultraGridBand9.Columns.AddRange(new object[] {
             ultraGridColumn76,
             ultraGridColumn77,
             ultraGridColumn78,
@@ -1122,20 +1134,25 @@
             ultraGridColumn81,
             ultraGridColumn82,
             ultraGridColumn83,
-            ultraGridColumn84});
-            ultraGridColumn85.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn85.Header.VisiblePosition = 0;
-            ultraGridColumn86.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn86.Header.VisiblePosition = 1;
-            ultraGridColumn87.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn87.Header.VisiblePosition = 2;
-            ultraGridColumn88.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn88.Header.VisiblePosition = 3;
-            ultraGridBand10.Columns.AddRange(new object[] {
+            ultraGridColumn84,
             ultraGridColumn85,
             ultraGridColumn86,
             ultraGridColumn87,
-            ultraGridColumn88});
+            ultraGridColumn88,
+            ultraGridColumn89});
+            ultraGridColumn90.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn90.Header.VisiblePosition = 0;
+            ultraGridColumn91.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn91.Header.VisiblePosition = 1;
+            ultraGridColumn92.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn92.Header.VisiblePosition = 2;
+            ultraGridColumn93.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn93.Header.VisiblePosition = 3;
+            ultraGridBand10.Columns.AddRange(new object[] {
+            ultraGridColumn90,
+            ultraGridColumn91,
+            ultraGridColumn92,
+            ultraGridColumn93});
             this.ultraComboPipesMaterial.DisplayLayout.BandsSerializer.Add(ultraGridBand6);
             this.ultraComboPipesMaterial.DisplayLayout.BandsSerializer.Add(ultraGridBand7);
             this.ultraComboPipesMaterial.DisplayLayout.BandsSerializer.Add(ultraGridBand8);
@@ -1201,11 +1218,6 @@
             this.ultraComboPipesMaterial.TabIndex = 67;
             this.ultraComboPipesMaterial.Text = "ultraComboPipesMaterial";
             this.ultraComboPipesMaterial.ValueMember = "material_type_id";
-            // 
-            // sWSPMATERIALTYPEBindingSource
-            // 
-            this.sWSPMATERIALTYPEBindingSource.DataMember = "SWSP_MATERIAL_TYPE";
-            this.sWSPMATERIALTYPEBindingSource.DataSource = this.sANDBOXDataSet;
             // 
             // ultraNumericEditorPipesInnerDiameter
             // 
@@ -1384,20 +1396,6 @@
             this.dataGridViewPipes.Size = new System.Drawing.Size(248, 159);
             this.dataGridViewPipes.TabIndex = 44;
             // 
-            // usnodeDataGridViewTextBoxColumn
-            // 
-            this.usnodeDataGridViewTextBoxColumn.DataPropertyName = "us_node";
-            this.usnodeDataGridViewTextBoxColumn.HeaderText = "US Node";
-            this.usnodeDataGridViewTextBoxColumn.Name = "usnodeDataGridViewTextBoxColumn";
-            this.usnodeDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // dsnodeDataGridViewTextBoxColumn
-            // 
-            this.dsnodeDataGridViewTextBoxColumn.DataPropertyName = "ds_node";
-            this.dsnodeDataGridViewTextBoxColumn.HeaderText = "DS Node";
-            this.dsnodeDataGridViewTextBoxColumn.Name = "dsnodeDataGridViewTextBoxColumn";
-            this.dsnodeDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
             // tabPageDitches
             // 
             this.tabPageDitches.Controls.Add(this.textBoxDitchesUSNode);
@@ -1480,60 +1478,57 @@
             appearance4.BackColor = System.Drawing.SystemColors.Window;
             appearance4.BorderColor = System.Drawing.SystemColors.InactiveCaption;
             this.ultraComboDitchesFacingDirection.DisplayLayout.Appearance = appearance4;
-            ultraGridColumn89.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn89.Header.VisiblePosition = 0;
-            ultraGridColumn89.Hidden = true;
-            ultraGridColumn90.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn90.Header.VisiblePosition = 1;
-            ultraGridColumn91.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn91.Header.VisiblePosition = 2;
-            ultraGridColumn91.Hidden = true;
-            ultraGridColumn92.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn92.Header.VisiblePosition = 3;
-            ultraGridColumn93.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn93.Header.VisiblePosition = 4;
-            ultraGridBand13.Columns.AddRange(new object[] {
-            ultraGridColumn89,
-            ultraGridColumn90,
-            ultraGridColumn91,
-            ultraGridColumn92,
-            ultraGridColumn93});
             ultraGridColumn94.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
             ultraGridColumn94.Header.VisiblePosition = 0;
+            ultraGridColumn94.Hidden = true;
             ultraGridColumn95.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
             ultraGridColumn95.Header.VisiblePosition = 1;
             ultraGridColumn96.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
             ultraGridColumn96.Header.VisiblePosition = 2;
+            ultraGridColumn96.Hidden = true;
             ultraGridColumn97.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
             ultraGridColumn97.Header.VisiblePosition = 3;
             ultraGridColumn98.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
             ultraGridColumn98.Header.VisiblePosition = 4;
-            ultraGridColumn99.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn99.Header.VisiblePosition = 5;
-            ultraGridColumn100.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn100.Header.VisiblePosition = 6;
-            ultraGridColumn101.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn101.Header.VisiblePosition = 7;
-            ultraGridColumn102.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn102.Header.VisiblePosition = 8;
-            ultraGridColumn103.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn103.Header.VisiblePosition = 9;
-            ultraGridColumn104.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn104.Header.VisiblePosition = 10;
-            ultraGridColumn105.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn105.Header.VisiblePosition = 11;
-            ultraGridColumn106.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn106.Header.VisiblePosition = 12;
-            ultraGridColumn107.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn107.Header.VisiblePosition = 13;
-            ultraGridColumn108.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn108.Header.VisiblePosition = 14;
-            ultraGridBand14.Columns.AddRange(new object[] {
+            ultraGridBand13.Columns.AddRange(new object[] {
             ultraGridColumn94,
             ultraGridColumn95,
             ultraGridColumn96,
             ultraGridColumn97,
-            ultraGridColumn98,
+            ultraGridColumn98});
+            ultraGridColumn99.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn99.Header.VisiblePosition = 0;
+            ultraGridColumn100.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn100.Header.VisiblePosition = 1;
+            ultraGridColumn101.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn101.Header.VisiblePosition = 2;
+            ultraGridColumn102.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn102.Header.VisiblePosition = 3;
+            ultraGridColumn103.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn103.Header.VisiblePosition = 4;
+            ultraGridColumn104.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn104.Header.VisiblePosition = 5;
+            ultraGridColumn105.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn105.Header.VisiblePosition = 6;
+            ultraGridColumn106.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn106.Header.VisiblePosition = 7;
+            ultraGridColumn107.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn107.Header.VisiblePosition = 8;
+            ultraGridColumn108.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn108.Header.VisiblePosition = 9;
+            ultraGridColumn109.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn109.Header.VisiblePosition = 10;
+            ultraGridColumn110.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn110.Header.VisiblePosition = 11;
+            ultraGridColumn111.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn111.Header.VisiblePosition = 12;
+            ultraGridColumn112.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn112.Header.VisiblePosition = 13;
+            ultraGridColumn113.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn113.Header.VisiblePosition = 14;
+            ultraGridColumn114.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn114.Header.VisiblePosition = 15;
+            ultraGridBand14.Columns.AddRange(new object[] {
             ultraGridColumn99,
             ultraGridColumn100,
             ultraGridColumn101,
@@ -1543,60 +1538,69 @@
             ultraGridColumn105,
             ultraGridColumn106,
             ultraGridColumn107,
-            ultraGridColumn108});
-            ultraGridColumn109.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn109.Header.VisiblePosition = 0;
-            ultraGridColumn110.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn110.Header.VisiblePosition = 1;
-            ultraGridColumn111.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn111.Header.VisiblePosition = 2;
-            ultraGridColumn112.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn112.Header.VisiblePosition = 3;
-            ultraGridColumn113.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn113.Header.VisiblePosition = 4;
-            ultraGridColumn114.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn114.Header.VisiblePosition = 5;
-            ultraGridColumn115.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn115.Header.VisiblePosition = 6;
-            ultraGridColumn116.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn116.Header.VisiblePosition = 7;
-            ultraGridColumn117.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn117.Header.VisiblePosition = 8;
-            ultraGridColumn118.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn118.Header.VisiblePosition = 9;
-            ultraGridColumn119.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn119.Header.VisiblePosition = 10;
-            ultraGridColumn120.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn120.Header.VisiblePosition = 11;
-            ultraGridColumn121.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn121.Header.VisiblePosition = 12;
-            ultraGridBand15.Columns.AddRange(new object[] {
+            ultraGridColumn108,
             ultraGridColumn109,
             ultraGridColumn110,
             ultraGridColumn111,
             ultraGridColumn112,
             ultraGridColumn113,
-            ultraGridColumn114,
+            ultraGridColumn114});
+            ultraGridColumn115.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn115.Header.VisiblePosition = 0;
+            ultraGridColumn116.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn116.Header.VisiblePosition = 1;
+            ultraGridColumn117.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn117.Header.VisiblePosition = 2;
+            ultraGridColumn118.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn118.Header.VisiblePosition = 3;
+            ultraGridColumn119.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn119.Header.VisiblePosition = 4;
+            ultraGridColumn120.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn120.Header.VisiblePosition = 5;
+            ultraGridColumn121.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn121.Header.VisiblePosition = 6;
+            ultraGridColumn122.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn122.Header.VisiblePosition = 7;
+            ultraGridColumn123.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn123.Header.VisiblePosition = 8;
+            ultraGridColumn124.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn124.Header.VisiblePosition = 9;
+            ultraGridColumn125.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn125.Header.VisiblePosition = 10;
+            ultraGridColumn126.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn126.Header.VisiblePosition = 11;
+            ultraGridColumn127.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn127.Header.VisiblePosition = 12;
+            ultraGridColumn128.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn128.Header.VisiblePosition = 13;
+            ultraGridBand15.Columns.AddRange(new object[] {
             ultraGridColumn115,
             ultraGridColumn116,
             ultraGridColumn117,
             ultraGridColumn118,
             ultraGridColumn119,
             ultraGridColumn120,
-            ultraGridColumn121});
-            ultraGridColumn122.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn122.Header.VisiblePosition = 0;
-            ultraGridColumn123.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn123.Header.VisiblePosition = 1;
-            ultraGridColumn124.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn124.Header.VisiblePosition = 2;
-            ultraGridColumn125.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn125.Header.VisiblePosition = 3;
-            ultraGridBand16.Columns.AddRange(new object[] {
+            ultraGridColumn121,
             ultraGridColumn122,
             ultraGridColumn123,
             ultraGridColumn124,
-            ultraGridColumn125});
+            ultraGridColumn125,
+            ultraGridColumn126,
+            ultraGridColumn127,
+            ultraGridColumn128});
+            ultraGridColumn129.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn129.Header.VisiblePosition = 0;
+            ultraGridColumn130.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn130.Header.VisiblePosition = 1;
+            ultraGridColumn131.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn131.Header.VisiblePosition = 2;
+            ultraGridColumn132.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn132.Header.VisiblePosition = 3;
+            ultraGridBand16.Columns.AddRange(new object[] {
+            ultraGridColumn129,
+            ultraGridColumn130,
+            ultraGridColumn131,
+            ultraGridColumn132});
             this.ultraComboDitchesFacingDirection.DisplayLayout.BandsSerializer.Add(ultraGridBand13);
             this.ultraComboDitchesFacingDirection.DisplayLayout.BandsSerializer.Add(ultraGridBand14);
             this.ultraComboDitchesFacingDirection.DisplayLayout.BandsSerializer.Add(ultraGridBand15);
@@ -1662,11 +1666,6 @@
             this.ultraComboDitchesFacingDirection.ValueMember = "facing_type_id";
             this.ultraComboDitchesFacingDirection.Visible = false;
             // 
-            // sWSPFACINGTYPEBindingSource
-            // 
-            this.sWSPFACINGTYPEBindingSource.DataMember = "SWSP_FACING_TYPE";
-            this.sWSPFACINGTYPEBindingSource.DataSource = this.sANDBOXDataSet;
-            // 
             // ultraComboDitchesMaterial
             // 
             this.ultraComboDitchesMaterial.CheckedListSettings.CheckStateMember = "";
@@ -1675,65 +1674,60 @@
             appearance49.BackColor = System.Drawing.SystemColors.Window;
             appearance49.BorderColor = System.Drawing.SystemColors.InactiveCaption;
             this.ultraComboDitchesMaterial.DisplayLayout.Appearance = appearance49;
-            ultraGridColumn126.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn126.Header.VisiblePosition = 0;
-            ultraGridColumn126.Hidden = true;
-            ultraGridColumn127.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn127.Header.VisiblePosition = 1;
-            ultraGridColumn128.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn128.Header.VisiblePosition = 2;
-            ultraGridColumn128.Hidden = true;
-            ultraGridColumn129.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn129.Header.VisiblePosition = 3;
-            ultraGridColumn130.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn130.Header.VisiblePosition = 4;
-            ultraGridColumn131.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn131.Header.VisiblePosition = 5;
-            ultraGridBand18.Columns.AddRange(new object[] {
-            ultraGridColumn126,
-            ultraGridColumn127,
-            ultraGridColumn128,
-            ultraGridColumn129,
-            ultraGridColumn130,
-            ultraGridColumn131});
-            ultraGridColumn132.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn132.Header.VisiblePosition = 0;
             ultraGridColumn133.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn133.Header.VisiblePosition = 1;
+            ultraGridColumn133.Header.VisiblePosition = 0;
+            ultraGridColumn133.Hidden = true;
             ultraGridColumn134.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn134.Header.VisiblePosition = 2;
+            ultraGridColumn134.Header.VisiblePosition = 1;
             ultraGridColumn135.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn135.Header.VisiblePosition = 3;
+            ultraGridColumn135.Header.VisiblePosition = 2;
+            ultraGridColumn135.Hidden = true;
             ultraGridColumn136.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn136.Header.VisiblePosition = 4;
+            ultraGridColumn136.Header.VisiblePosition = 3;
             ultraGridColumn137.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn137.Header.VisiblePosition = 5;
+            ultraGridColumn137.Header.VisiblePosition = 4;
             ultraGridColumn138.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn138.Header.VisiblePosition = 6;
-            ultraGridColumn139.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn139.Header.VisiblePosition = 7;
-            ultraGridColumn140.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn140.Header.VisiblePosition = 8;
-            ultraGridColumn141.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn141.Header.VisiblePosition = 9;
-            ultraGridColumn142.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn142.Header.VisiblePosition = 10;
-            ultraGridColumn143.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn143.Header.VisiblePosition = 11;
-            ultraGridColumn144.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn144.Header.VisiblePosition = 12;
-            ultraGridColumn145.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn145.Header.VisiblePosition = 13;
-            ultraGridColumn146.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn146.Header.VisiblePosition = 14;
-            ultraGridBand19.Columns.AddRange(new object[] {
-            ultraGridColumn132,
+            ultraGridColumn138.Header.VisiblePosition = 5;
+            ultraGridBand18.Columns.AddRange(new object[] {
             ultraGridColumn133,
             ultraGridColumn134,
             ultraGridColumn135,
             ultraGridColumn136,
             ultraGridColumn137,
-            ultraGridColumn138,
+            ultraGridColumn138});
+            ultraGridColumn139.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn139.Header.VisiblePosition = 0;
+            ultraGridColumn140.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn140.Header.VisiblePosition = 1;
+            ultraGridColumn141.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn141.Header.VisiblePosition = 2;
+            ultraGridColumn142.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn142.Header.VisiblePosition = 3;
+            ultraGridColumn143.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn143.Header.VisiblePosition = 4;
+            ultraGridColumn144.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn144.Header.VisiblePosition = 5;
+            ultraGridColumn145.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn145.Header.VisiblePosition = 6;
+            ultraGridColumn146.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn146.Header.VisiblePosition = 7;
+            ultraGridColumn147.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn147.Header.VisiblePosition = 8;
+            ultraGridColumn148.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn148.Header.VisiblePosition = 9;
+            ultraGridColumn149.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn149.Header.VisiblePosition = 10;
+            ultraGridColumn150.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn150.Header.VisiblePosition = 11;
+            ultraGridColumn151.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn151.Header.VisiblePosition = 12;
+            ultraGridColumn152.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn152.Header.VisiblePosition = 13;
+            ultraGridColumn153.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn153.Header.VisiblePosition = 14;
+            ultraGridColumn154.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn154.Header.VisiblePosition = 15;
+            ultraGridBand19.Columns.AddRange(new object[] {
             ultraGridColumn139,
             ultraGridColumn140,
             ultraGridColumn141,
@@ -1741,34 +1735,7 @@
             ultraGridColumn143,
             ultraGridColumn144,
             ultraGridColumn145,
-            ultraGridColumn146});
-            ultraGridColumn147.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn147.Header.VisiblePosition = 0;
-            ultraGridColumn148.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn148.Header.VisiblePosition = 1;
-            ultraGridColumn149.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn149.Header.VisiblePosition = 2;
-            ultraGridColumn150.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn150.Header.VisiblePosition = 3;
-            ultraGridColumn151.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn151.Header.VisiblePosition = 4;
-            ultraGridColumn152.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn152.Header.VisiblePosition = 5;
-            ultraGridColumn153.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn153.Header.VisiblePosition = 6;
-            ultraGridColumn154.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn154.Header.VisiblePosition = 7;
-            ultraGridColumn155.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn155.Header.VisiblePosition = 8;
-            ultraGridColumn156.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn156.Header.VisiblePosition = 9;
-            ultraGridColumn157.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn157.Header.VisiblePosition = 10;
-            ultraGridColumn158.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn158.Header.VisiblePosition = 11;
-            ultraGridColumn159.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn159.Header.VisiblePosition = 12;
-            ultraGridBand20.Columns.AddRange(new object[] {
+            ultraGridColumn146,
             ultraGridColumn147,
             ultraGridColumn148,
             ultraGridColumn149,
@@ -1776,39 +1743,41 @@
             ultraGridColumn151,
             ultraGridColumn152,
             ultraGridColumn153,
-            ultraGridColumn154,
+            ultraGridColumn154});
+            ultraGridColumn155.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn155.Header.VisiblePosition = 0;
+            ultraGridColumn156.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn156.Header.VisiblePosition = 1;
+            ultraGridColumn157.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn157.Header.VisiblePosition = 2;
+            ultraGridColumn158.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn158.Header.VisiblePosition = 3;
+            ultraGridColumn159.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn159.Header.VisiblePosition = 4;
+            ultraGridColumn160.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn160.Header.VisiblePosition = 5;
+            ultraGridColumn161.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn161.Header.VisiblePosition = 6;
+            ultraGridColumn162.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn162.Header.VisiblePosition = 7;
+            ultraGridColumn163.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn163.Header.VisiblePosition = 8;
+            ultraGridColumn164.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn164.Header.VisiblePosition = 9;
+            ultraGridColumn165.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn165.Header.VisiblePosition = 10;
+            ultraGridColumn166.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn166.Header.VisiblePosition = 11;
+            ultraGridColumn167.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn167.Header.VisiblePosition = 12;
+            ultraGridColumn168.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn168.Header.VisiblePosition = 13;
+            ultraGridBand20.Columns.AddRange(new object[] {
             ultraGridColumn155,
             ultraGridColumn156,
             ultraGridColumn157,
             ultraGridColumn158,
-            ultraGridColumn159});
-            ultraGridColumn160.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn160.Header.VisiblePosition = 0;
-            ultraGridColumn161.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn161.Header.VisiblePosition = 1;
-            ultraGridColumn162.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn162.Header.VisiblePosition = 2;
-            ultraGridColumn163.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn163.Header.VisiblePosition = 3;
-            ultraGridColumn164.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn164.Header.VisiblePosition = 4;
-            ultraGridColumn165.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn165.Header.VisiblePosition = 5;
-            ultraGridColumn166.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn166.Header.VisiblePosition = 6;
-            ultraGridColumn167.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn167.Header.VisiblePosition = 7;
-            ultraGridColumn168.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn168.Header.VisiblePosition = 8;
-            ultraGridColumn169.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn169.Header.VisiblePosition = 9;
-            ultraGridColumn170.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn170.Header.VisiblePosition = 10;
-            ultraGridColumn171.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn171.Header.VisiblePosition = 11;
-            ultraGridColumn172.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn172.Header.VisiblePosition = 12;
-            ultraGridBand21.Columns.AddRange(new object[] {
+            ultraGridColumn159,
             ultraGridColumn160,
             ultraGridColumn161,
             ultraGridColumn162,
@@ -1817,24 +1786,63 @@
             ultraGridColumn165,
             ultraGridColumn166,
             ultraGridColumn167,
-            ultraGridColumn168,
+            ultraGridColumn168});
+            ultraGridColumn169.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn169.Header.VisiblePosition = 0;
+            ultraGridColumn170.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn170.Header.VisiblePosition = 1;
+            ultraGridColumn171.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn171.Header.VisiblePosition = 2;
+            ultraGridColumn172.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn172.Header.VisiblePosition = 3;
+            ultraGridColumn173.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn173.Header.VisiblePosition = 4;
+            ultraGridColumn174.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn174.Header.VisiblePosition = 5;
+            ultraGridColumn175.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn175.Header.VisiblePosition = 6;
+            ultraGridColumn176.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn176.Header.VisiblePosition = 7;
+            ultraGridColumn177.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn177.Header.VisiblePosition = 8;
+            ultraGridColumn178.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn178.Header.VisiblePosition = 9;
+            ultraGridColumn179.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn179.Header.VisiblePosition = 10;
+            ultraGridColumn180.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn180.Header.VisiblePosition = 11;
+            ultraGridColumn181.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn181.Header.VisiblePosition = 12;
+            ultraGridColumn182.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn182.Header.VisiblePosition = 13;
+            ultraGridBand21.Columns.AddRange(new object[] {
             ultraGridColumn169,
             ultraGridColumn170,
             ultraGridColumn171,
-            ultraGridColumn172});
-            ultraGridColumn173.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn173.Header.VisiblePosition = 0;
-            ultraGridColumn174.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn174.Header.VisiblePosition = 1;
-            ultraGridColumn175.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn175.Header.VisiblePosition = 2;
-            ultraGridColumn176.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn176.Header.VisiblePosition = 3;
-            ultraGridBand22.Columns.AddRange(new object[] {
+            ultraGridColumn172,
             ultraGridColumn173,
             ultraGridColumn174,
             ultraGridColumn175,
-            ultraGridColumn176});
+            ultraGridColumn176,
+            ultraGridColumn177,
+            ultraGridColumn178,
+            ultraGridColumn179,
+            ultraGridColumn180,
+            ultraGridColumn181,
+            ultraGridColumn182});
+            ultraGridColumn183.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn183.Header.VisiblePosition = 0;
+            ultraGridColumn184.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn184.Header.VisiblePosition = 1;
+            ultraGridColumn185.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn185.Header.VisiblePosition = 2;
+            ultraGridColumn186.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn186.Header.VisiblePosition = 3;
+            ultraGridBand22.Columns.AddRange(new object[] {
+            ultraGridColumn183,
+            ultraGridColumn184,
+            ultraGridColumn185,
+            ultraGridColumn186});
             this.ultraComboDitchesMaterial.DisplayLayout.BandsSerializer.Add(ultraGridBand18);
             this.ultraComboDitchesMaterial.DisplayLayout.BandsSerializer.Add(ultraGridBand19);
             this.ultraComboDitchesMaterial.DisplayLayout.BandsSerializer.Add(ultraGridBand20);
@@ -2077,14 +2085,6 @@
             this.ds_node.ReadOnly = true;
             this.ds_node.Width = 66;
             // 
-            // nodeDataGridViewTextBoxColumn
-            // 
-            this.nodeDataGridViewTextBoxColumn.DataPropertyName = "node";
-            this.nodeDataGridViewTextBoxColumn.HeaderText = "Measured";
-            this.nodeDataGridViewTextBoxColumn.Name = "nodeDataGridViewTextBoxColumn";
-            this.nodeDataGridViewTextBoxColumn.ReadOnly = true;
-            this.nodeDataGridViewTextBoxColumn.Width = 66;
-            // 
             // tabPageCulverts
             // 
             this.tabPageCulverts.Controls.Add(this.textBoxCulvertsDSNode);
@@ -2169,97 +2169,62 @@
             appearance76.BackColor = System.Drawing.SystemColors.Window;
             appearance76.BorderColor = System.Drawing.SystemColors.InactiveCaption;
             this.ultraComboCulvertsShape.DisplayLayout.Appearance = appearance76;
-            ultraGridColumn177.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn177.Header.VisiblePosition = 0;
-            ultraGridColumn177.Hidden = true;
-            ultraGridColumn178.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn178.Header.VisiblePosition = 1;
-            ultraGridColumn179.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn179.Header.VisiblePosition = 2;
-            ultraGridColumn179.Hidden = true;
-            ultraGridColumn180.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn180.Header.VisiblePosition = 3;
-            ultraGridColumn181.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn181.Header.VisiblePosition = 4;
-            ultraGridBand25.Columns.AddRange(new object[] {
-            ultraGridColumn177,
-            ultraGridColumn178,
-            ultraGridColumn179,
-            ultraGridColumn180,
-            ultraGridColumn181});
-            ultraGridColumn182.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn182.Header.VisiblePosition = 0;
-            ultraGridColumn183.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn183.Header.VisiblePosition = 1;
-            ultraGridColumn184.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn184.Header.VisiblePosition = 2;
-            ultraGridColumn185.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn185.Header.VisiblePosition = 3;
-            ultraGridColumn186.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn186.Header.VisiblePosition = 4;
             ultraGridColumn187.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn187.Header.VisiblePosition = 5;
+            ultraGridColumn187.Header.VisiblePosition = 0;
+            ultraGridColumn187.Hidden = true;
             ultraGridColumn188.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn188.Header.VisiblePosition = 6;
+            ultraGridColumn188.Header.VisiblePosition = 1;
             ultraGridColumn189.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn189.Header.VisiblePosition = 7;
+            ultraGridColumn189.Header.VisiblePosition = 2;
+            ultraGridColumn189.Hidden = true;
             ultraGridColumn190.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn190.Header.VisiblePosition = 8;
+            ultraGridColumn190.Header.VisiblePosition = 3;
             ultraGridColumn191.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn191.Header.VisiblePosition = 9;
-            ultraGridColumn192.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn192.Header.VisiblePosition = 10;
-            ultraGridColumn193.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn193.Header.VisiblePosition = 11;
-            ultraGridColumn194.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn194.Header.VisiblePosition = 12;
-            ultraGridColumn195.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn195.Header.VisiblePosition = 13;
-            ultraGridColumn196.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn196.Header.VisiblePosition = 14;
-            ultraGridBand26.Columns.AddRange(new object[] {
-            ultraGridColumn182,
-            ultraGridColumn183,
-            ultraGridColumn184,
-            ultraGridColumn185,
-            ultraGridColumn186,
+            ultraGridColumn191.Header.VisiblePosition = 4;
+            ultraGridBand25.Columns.AddRange(new object[] {
             ultraGridColumn187,
             ultraGridColumn188,
             ultraGridColumn189,
             ultraGridColumn190,
-            ultraGridColumn191,
+            ultraGridColumn191});
+            ultraGridColumn192.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn192.Header.VisiblePosition = 0;
+            ultraGridColumn193.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn193.Header.VisiblePosition = 1;
+            ultraGridColumn194.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn194.Header.VisiblePosition = 2;
+            ultraGridColumn195.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn195.Header.VisiblePosition = 3;
+            ultraGridColumn196.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn196.Header.VisiblePosition = 4;
+            ultraGridColumn197.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn197.Header.VisiblePosition = 5;
+            ultraGridColumn198.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn198.Header.VisiblePosition = 6;
+            ultraGridColumn199.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn199.Header.VisiblePosition = 7;
+            ultraGridColumn200.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn200.Header.VisiblePosition = 8;
+            ultraGridColumn201.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn201.Header.VisiblePosition = 9;
+            ultraGridColumn202.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn202.Header.VisiblePosition = 10;
+            ultraGridColumn203.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn203.Header.VisiblePosition = 11;
+            ultraGridColumn204.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn204.Header.VisiblePosition = 12;
+            ultraGridColumn205.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn205.Header.VisiblePosition = 13;
+            ultraGridColumn206.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn206.Header.VisiblePosition = 14;
+            ultraGridColumn207.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn207.Header.VisiblePosition = 15;
+            ultraGridBand26.Columns.AddRange(new object[] {
             ultraGridColumn192,
             ultraGridColumn193,
             ultraGridColumn194,
             ultraGridColumn195,
-            ultraGridColumn196});
-            ultraGridColumn197.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn197.Header.VisiblePosition = 0;
-            ultraGridColumn198.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn198.Header.VisiblePosition = 1;
-            ultraGridColumn199.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn199.Header.VisiblePosition = 2;
-            ultraGridColumn200.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn200.Header.VisiblePosition = 3;
-            ultraGridColumn201.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn201.Header.VisiblePosition = 4;
-            ultraGridColumn202.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn202.Header.VisiblePosition = 5;
-            ultraGridColumn203.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn203.Header.VisiblePosition = 6;
-            ultraGridColumn204.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn204.Header.VisiblePosition = 7;
-            ultraGridColumn205.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn205.Header.VisiblePosition = 8;
-            ultraGridColumn206.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn206.Header.VisiblePosition = 9;
-            ultraGridColumn207.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn207.Header.VisiblePosition = 10;
-            ultraGridColumn208.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn208.Header.VisiblePosition = 11;
-            ultraGridColumn209.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn209.Header.VisiblePosition = 12;
-            ultraGridBand27.Columns.AddRange(new object[] {
+            ultraGridColumn196,
             ultraGridColumn197,
             ultraGridColumn198,
             ultraGridColumn199,
@@ -2270,22 +2235,63 @@
             ultraGridColumn204,
             ultraGridColumn205,
             ultraGridColumn206,
-            ultraGridColumn207,
-            ultraGridColumn208,
-            ultraGridColumn209});
+            ultraGridColumn207});
+            ultraGridColumn208.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn208.Header.VisiblePosition = 0;
+            ultraGridColumn209.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn209.Header.VisiblePosition = 1;
             ultraGridColumn210.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn210.Header.VisiblePosition = 0;
+            ultraGridColumn210.Header.VisiblePosition = 2;
             ultraGridColumn211.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn211.Header.VisiblePosition = 1;
+            ultraGridColumn211.Header.VisiblePosition = 3;
             ultraGridColumn212.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn212.Header.VisiblePosition = 2;
+            ultraGridColumn212.Header.VisiblePosition = 4;
             ultraGridColumn213.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn213.Header.VisiblePosition = 3;
-            ultraGridBand28.Columns.AddRange(new object[] {
+            ultraGridColumn213.Header.VisiblePosition = 5;
+            ultraGridColumn214.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn214.Header.VisiblePosition = 6;
+            ultraGridColumn215.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn215.Header.VisiblePosition = 7;
+            ultraGridColumn216.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn216.Header.VisiblePosition = 8;
+            ultraGridColumn217.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn217.Header.VisiblePosition = 9;
+            ultraGridColumn218.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn218.Header.VisiblePosition = 10;
+            ultraGridColumn219.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn219.Header.VisiblePosition = 11;
+            ultraGridColumn220.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn220.Header.VisiblePosition = 12;
+            ultraGridColumn221.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn221.Header.VisiblePosition = 13;
+            ultraGridBand27.Columns.AddRange(new object[] {
+            ultraGridColumn208,
+            ultraGridColumn209,
             ultraGridColumn210,
             ultraGridColumn211,
             ultraGridColumn212,
-            ultraGridColumn213});
+            ultraGridColumn213,
+            ultraGridColumn214,
+            ultraGridColumn215,
+            ultraGridColumn216,
+            ultraGridColumn217,
+            ultraGridColumn218,
+            ultraGridColumn219,
+            ultraGridColumn220,
+            ultraGridColumn221});
+            ultraGridColumn222.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn222.Header.VisiblePosition = 0;
+            ultraGridColumn223.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn223.Header.VisiblePosition = 1;
+            ultraGridColumn224.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn224.Header.VisiblePosition = 2;
+            ultraGridColumn225.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn225.Header.VisiblePosition = 3;
+            ultraGridBand28.Columns.AddRange(new object[] {
+            ultraGridColumn222,
+            ultraGridColumn223,
+            ultraGridColumn224,
+            ultraGridColumn225});
             this.ultraComboCulvertsShape.DisplayLayout.BandsSerializer.Add(ultraGridBand25);
             this.ultraComboCulvertsShape.DisplayLayout.BandsSerializer.Add(ultraGridBand26);
             this.ultraComboCulvertsShape.DisplayLayout.BandsSerializer.Add(ultraGridBand27);
@@ -2358,97 +2364,60 @@
             appearance16.BackColor = System.Drawing.SystemColors.Window;
             appearance16.BorderColor = System.Drawing.SystemColors.InactiveCaption;
             this.ultraComboCulvertsFacingDirection.DisplayLayout.Appearance = appearance16;
-            ultraGridColumn214.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn214.Header.VisiblePosition = 0;
-            ultraGridColumn214.Hidden = true;
-            ultraGridColumn215.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn215.Header.VisiblePosition = 1;
-            ultraGridColumn216.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn216.Header.VisiblePosition = 2;
-            ultraGridColumn216.Hidden = true;
-            ultraGridColumn217.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn217.Header.VisiblePosition = 3;
-            ultraGridColumn218.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn218.Header.VisiblePosition = 4;
-            ultraGridBand30.Columns.AddRange(new object[] {
-            ultraGridColumn214,
-            ultraGridColumn215,
-            ultraGridColumn216,
-            ultraGridColumn217,
-            ultraGridColumn218});
-            ultraGridColumn219.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn219.Header.VisiblePosition = 0;
-            ultraGridColumn220.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn220.Header.VisiblePosition = 1;
-            ultraGridColumn221.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn221.Header.VisiblePosition = 2;
-            ultraGridColumn222.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn222.Header.VisiblePosition = 3;
-            ultraGridColumn223.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn223.Header.VisiblePosition = 4;
-            ultraGridColumn224.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn224.Header.VisiblePosition = 5;
-            ultraGridColumn225.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn225.Header.VisiblePosition = 6;
             ultraGridColumn226.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn226.Header.VisiblePosition = 7;
+            ultraGridColumn226.Header.VisiblePosition = 0;
+            ultraGridColumn226.Hidden = true;
             ultraGridColumn227.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn227.Header.VisiblePosition = 8;
+            ultraGridColumn227.Header.VisiblePosition = 1;
             ultraGridColumn228.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn228.Header.VisiblePosition = 9;
+            ultraGridColumn228.Header.VisiblePosition = 2;
+            ultraGridColumn228.Hidden = true;
             ultraGridColumn229.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn229.Header.VisiblePosition = 10;
+            ultraGridColumn229.Header.VisiblePosition = 3;
             ultraGridColumn230.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn230.Header.VisiblePosition = 11;
-            ultraGridColumn231.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn231.Header.VisiblePosition = 12;
-            ultraGridColumn232.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn232.Header.VisiblePosition = 13;
-            ultraGridColumn233.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn233.Header.VisiblePosition = 14;
-            ultraGridBand31.Columns.AddRange(new object[] {
-            ultraGridColumn219,
-            ultraGridColumn220,
-            ultraGridColumn221,
-            ultraGridColumn222,
-            ultraGridColumn223,
-            ultraGridColumn224,
-            ultraGridColumn225,
+            ultraGridColumn230.Header.VisiblePosition = 4;
+            ultraGridBand30.Columns.AddRange(new object[] {
             ultraGridColumn226,
             ultraGridColumn227,
             ultraGridColumn228,
             ultraGridColumn229,
-            ultraGridColumn230,
+            ultraGridColumn230});
+            ultraGridColumn231.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn231.Header.VisiblePosition = 0;
+            ultraGridColumn232.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn232.Header.VisiblePosition = 1;
+            ultraGridColumn233.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn233.Header.VisiblePosition = 2;
+            ultraGridColumn234.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn234.Header.VisiblePosition = 3;
+            ultraGridColumn235.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn235.Header.VisiblePosition = 4;
+            ultraGridColumn236.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn236.Header.VisiblePosition = 5;
+            ultraGridColumn237.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn237.Header.VisiblePosition = 6;
+            ultraGridColumn238.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn238.Header.VisiblePosition = 7;
+            ultraGridColumn239.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn239.Header.VisiblePosition = 8;
+            ultraGridColumn240.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn240.Header.VisiblePosition = 9;
+            ultraGridColumn241.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn241.Header.VisiblePosition = 10;
+            ultraGridColumn242.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn242.Header.VisiblePosition = 11;
+            ultraGridColumn243.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn243.Header.VisiblePosition = 12;
+            ultraGridColumn244.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn244.Header.VisiblePosition = 13;
+            ultraGridColumn245.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn245.Header.VisiblePosition = 14;
+            ultraGridColumn246.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn246.Header.VisiblePosition = 15;
+            ultraGridBand31.Columns.AddRange(new object[] {
             ultraGridColumn231,
             ultraGridColumn232,
-            ultraGridColumn233});
-            ultraGridColumn234.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn234.Header.VisiblePosition = 0;
-            ultraGridColumn235.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn235.Header.VisiblePosition = 1;
-            ultraGridColumn236.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn236.Header.VisiblePosition = 2;
-            ultraGridColumn237.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn237.Header.VisiblePosition = 3;
-            ultraGridColumn238.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn238.Header.VisiblePosition = 4;
-            ultraGridColumn239.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn239.Header.VisiblePosition = 5;
-            ultraGridColumn240.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn240.Header.VisiblePosition = 6;
-            ultraGridColumn241.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn241.Header.VisiblePosition = 7;
-            ultraGridColumn242.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn242.Header.VisiblePosition = 8;
-            ultraGridColumn243.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn243.Header.VisiblePosition = 9;
-            ultraGridColumn244.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn244.Header.VisiblePosition = 10;
-            ultraGridColumn245.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn245.Header.VisiblePosition = 11;
-            ultraGridColumn246.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn246.Header.VisiblePosition = 12;
-            ultraGridBand32.Columns.AddRange(new object[] {
+            ultraGridColumn233,
             ultraGridColumn234,
             ultraGridColumn235,
             ultraGridColumn236,
@@ -2470,11 +2439,54 @@
             ultraGridColumn249.Header.VisiblePosition = 2;
             ultraGridColumn250.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
             ultraGridColumn250.Header.VisiblePosition = 3;
-            ultraGridBand33.Columns.AddRange(new object[] {
+            ultraGridColumn251.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn251.Header.VisiblePosition = 4;
+            ultraGridColumn252.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn252.Header.VisiblePosition = 5;
+            ultraGridColumn253.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn253.Header.VisiblePosition = 6;
+            ultraGridColumn254.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn254.Header.VisiblePosition = 7;
+            ultraGridColumn255.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn255.Header.VisiblePosition = 8;
+            ultraGridColumn256.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn256.Header.VisiblePosition = 9;
+            ultraGridColumn257.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn257.Header.VisiblePosition = 10;
+            ultraGridColumn258.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn258.Header.VisiblePosition = 11;
+            ultraGridColumn259.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn259.Header.VisiblePosition = 12;
+            ultraGridColumn260.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn260.Header.VisiblePosition = 13;
+            ultraGridBand32.Columns.AddRange(new object[] {
             ultraGridColumn247,
             ultraGridColumn248,
             ultraGridColumn249,
-            ultraGridColumn250});
+            ultraGridColumn250,
+            ultraGridColumn251,
+            ultraGridColumn252,
+            ultraGridColumn253,
+            ultraGridColumn254,
+            ultraGridColumn255,
+            ultraGridColumn256,
+            ultraGridColumn257,
+            ultraGridColumn258,
+            ultraGridColumn259,
+            ultraGridColumn260});
+            ultraGridColumn261.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn261.Header.VisiblePosition = 0;
+            ultraGridColumn262.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn262.Header.VisiblePosition = 1;
+            ultraGridColumn263.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn263.Header.VisiblePosition = 2;
+            ultraGridColumn264.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn264.Header.VisiblePosition = 3;
+            ultraGridBand33.Columns.AddRange(new object[] {
+            ultraGridColumn261,
+            ultraGridColumn262,
+            ultraGridColumn263,
+            ultraGridColumn264});
             this.ultraComboCulvertsFacingDirection.DisplayLayout.BandsSerializer.Add(ultraGridBand30);
             this.ultraComboCulvertsFacingDirection.DisplayLayout.BandsSerializer.Add(ultraGridBand31);
             this.ultraComboCulvertsFacingDirection.DisplayLayout.BandsSerializer.Add(ultraGridBand32);
@@ -2548,100 +2560,61 @@
             appearance37.BackColor = System.Drawing.SystemColors.Window;
             appearance37.BorderColor = System.Drawing.SystemColors.InactiveCaption;
             this.ultraComboCulvertsMaterial.DisplayLayout.Appearance = appearance37;
-            ultraGridColumn251.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn251.Header.VisiblePosition = 0;
-            ultraGridColumn251.Hidden = true;
-            ultraGridColumn252.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn252.Header.VisiblePosition = 1;
-            ultraGridColumn253.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn253.Header.VisiblePosition = 2;
-            ultraGridColumn253.Hidden = true;
-            ultraGridColumn254.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn254.Header.VisiblePosition = 3;
-            ultraGridColumn255.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn255.Header.VisiblePosition = 4;
-            ultraGridColumn256.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn256.Header.VisiblePosition = 5;
-            ultraGridBand35.Columns.AddRange(new object[] {
-            ultraGridColumn251,
-            ultraGridColumn252,
-            ultraGridColumn253,
-            ultraGridColumn254,
-            ultraGridColumn255,
-            ultraGridColumn256});
-            ultraGridColumn257.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn257.Header.VisiblePosition = 0;
-            ultraGridColumn258.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn258.Header.VisiblePosition = 1;
-            ultraGridColumn259.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn259.Header.VisiblePosition = 2;
-            ultraGridColumn260.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn260.Header.VisiblePosition = 3;
-            ultraGridColumn261.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn261.Header.VisiblePosition = 4;
-            ultraGridColumn262.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn262.Header.VisiblePosition = 5;
-            ultraGridColumn263.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn263.Header.VisiblePosition = 6;
-            ultraGridColumn264.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn264.Header.VisiblePosition = 7;
             ultraGridColumn265.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn265.Header.VisiblePosition = 8;
+            ultraGridColumn265.Header.VisiblePosition = 0;
+            ultraGridColumn265.Hidden = true;
             ultraGridColumn266.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn266.Header.VisiblePosition = 9;
+            ultraGridColumn266.Header.VisiblePosition = 1;
             ultraGridColumn267.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn267.Header.VisiblePosition = 10;
+            ultraGridColumn267.Header.VisiblePosition = 2;
+            ultraGridColumn267.Hidden = true;
             ultraGridColumn268.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn268.Header.VisiblePosition = 11;
+            ultraGridColumn268.Header.VisiblePosition = 3;
             ultraGridColumn269.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn269.Header.VisiblePosition = 12;
+            ultraGridColumn269.Header.VisiblePosition = 4;
             ultraGridColumn270.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn270.Header.VisiblePosition = 13;
-            ultraGridColumn271.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn271.Header.VisiblePosition = 14;
-            ultraGridBand36.Columns.AddRange(new object[] {
-            ultraGridColumn257,
-            ultraGridColumn258,
-            ultraGridColumn259,
-            ultraGridColumn260,
-            ultraGridColumn261,
-            ultraGridColumn262,
-            ultraGridColumn263,
-            ultraGridColumn264,
+            ultraGridColumn270.Header.VisiblePosition = 5;
+            ultraGridBand35.Columns.AddRange(new object[] {
             ultraGridColumn265,
             ultraGridColumn266,
             ultraGridColumn267,
             ultraGridColumn268,
             ultraGridColumn269,
-            ultraGridColumn270,
-            ultraGridColumn271});
+            ultraGridColumn270});
+            ultraGridColumn271.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn271.Header.VisiblePosition = 0;
             ultraGridColumn272.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn272.Header.VisiblePosition = 0;
+            ultraGridColumn272.Header.VisiblePosition = 1;
             ultraGridColumn273.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn273.Header.VisiblePosition = 1;
+            ultraGridColumn273.Header.VisiblePosition = 2;
             ultraGridColumn274.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn274.Header.VisiblePosition = 2;
+            ultraGridColumn274.Header.VisiblePosition = 3;
             ultraGridColumn275.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn275.Header.VisiblePosition = 3;
+            ultraGridColumn275.Header.VisiblePosition = 4;
             ultraGridColumn276.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn276.Header.VisiblePosition = 4;
+            ultraGridColumn276.Header.VisiblePosition = 5;
             ultraGridColumn277.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn277.Header.VisiblePosition = 5;
+            ultraGridColumn277.Header.VisiblePosition = 6;
             ultraGridColumn278.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn278.Header.VisiblePosition = 6;
+            ultraGridColumn278.Header.VisiblePosition = 7;
             ultraGridColumn279.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn279.Header.VisiblePosition = 7;
+            ultraGridColumn279.Header.VisiblePosition = 8;
             ultraGridColumn280.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn280.Header.VisiblePosition = 8;
+            ultraGridColumn280.Header.VisiblePosition = 9;
             ultraGridColumn281.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn281.Header.VisiblePosition = 9;
+            ultraGridColumn281.Header.VisiblePosition = 10;
             ultraGridColumn282.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn282.Header.VisiblePosition = 10;
+            ultraGridColumn282.Header.VisiblePosition = 11;
             ultraGridColumn283.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn283.Header.VisiblePosition = 11;
+            ultraGridColumn283.Header.VisiblePosition = 12;
             ultraGridColumn284.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn284.Header.VisiblePosition = 12;
-            ultraGridBand37.Columns.AddRange(new object[] {
+            ultraGridColumn284.Header.VisiblePosition = 13;
+            ultraGridColumn285.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn285.Header.VisiblePosition = 14;
+            ultraGridColumn286.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn286.Header.VisiblePosition = 15;
+            ultraGridBand36.Columns.AddRange(new object[] {
+            ultraGridColumn271,
             ultraGridColumn272,
             ultraGridColumn273,
             ultraGridColumn274,
@@ -2654,36 +2627,38 @@
             ultraGridColumn281,
             ultraGridColumn282,
             ultraGridColumn283,
-            ultraGridColumn284});
-            ultraGridColumn285.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn285.Header.VisiblePosition = 0;
-            ultraGridColumn286.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn286.Header.VisiblePosition = 1;
-            ultraGridColumn287.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn287.Header.VisiblePosition = 2;
-            ultraGridColumn288.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn288.Header.VisiblePosition = 3;
-            ultraGridColumn289.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn289.Header.VisiblePosition = 4;
-            ultraGridColumn290.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn290.Header.VisiblePosition = 5;
-            ultraGridColumn291.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn291.Header.VisiblePosition = 6;
-            ultraGridColumn292.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn292.Header.VisiblePosition = 7;
-            ultraGridColumn293.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn293.Header.VisiblePosition = 8;
-            ultraGridColumn294.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn294.Header.VisiblePosition = 9;
-            ultraGridColumn295.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn295.Header.VisiblePosition = 10;
-            ultraGridColumn296.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn296.Header.VisiblePosition = 11;
-            ultraGridColumn297.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn297.Header.VisiblePosition = 12;
-            ultraGridBand38.Columns.AddRange(new object[] {
+            ultraGridColumn284,
             ultraGridColumn285,
-            ultraGridColumn286,
+            ultraGridColumn286});
+            ultraGridColumn287.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn287.Header.VisiblePosition = 0;
+            ultraGridColumn288.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn288.Header.VisiblePosition = 1;
+            ultraGridColumn289.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn289.Header.VisiblePosition = 2;
+            ultraGridColumn290.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn290.Header.VisiblePosition = 3;
+            ultraGridColumn291.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn291.Header.VisiblePosition = 4;
+            ultraGridColumn292.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn292.Header.VisiblePosition = 5;
+            ultraGridColumn293.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn293.Header.VisiblePosition = 6;
+            ultraGridColumn294.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn294.Header.VisiblePosition = 7;
+            ultraGridColumn295.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn295.Header.VisiblePosition = 8;
+            ultraGridColumn296.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn296.Header.VisiblePosition = 9;
+            ultraGridColumn297.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn297.Header.VisiblePosition = 10;
+            ultraGridColumn298.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn298.Header.VisiblePosition = 11;
+            ultraGridColumn299.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn299.Header.VisiblePosition = 12;
+            ultraGridColumn300.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn300.Header.VisiblePosition = 13;
+            ultraGridBand37.Columns.AddRange(new object[] {
             ultraGridColumn287,
             ultraGridColumn288,
             ultraGridColumn289,
@@ -2694,20 +2669,66 @@
             ultraGridColumn294,
             ultraGridColumn295,
             ultraGridColumn296,
-            ultraGridColumn297});
-            ultraGridColumn298.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn298.Header.VisiblePosition = 0;
-            ultraGridColumn299.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn299.Header.VisiblePosition = 1;
-            ultraGridColumn300.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn300.Header.VisiblePosition = 2;
-            ultraGridColumn301.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-            ultraGridColumn301.Header.VisiblePosition = 3;
-            ultraGridBand39.Columns.AddRange(new object[] {
+            ultraGridColumn297,
             ultraGridColumn298,
             ultraGridColumn299,
-            ultraGridColumn300,
-            ultraGridColumn301});
+            ultraGridColumn300});
+            ultraGridColumn301.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn301.Header.VisiblePosition = 0;
+            ultraGridColumn302.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn302.Header.VisiblePosition = 1;
+            ultraGridColumn303.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn303.Header.VisiblePosition = 2;
+            ultraGridColumn304.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn304.Header.VisiblePosition = 3;
+            ultraGridColumn305.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn305.Header.VisiblePosition = 4;
+            ultraGridColumn306.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn306.Header.VisiblePosition = 5;
+            ultraGridColumn307.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn307.Header.VisiblePosition = 6;
+            ultraGridColumn308.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn308.Header.VisiblePosition = 7;
+            ultraGridColumn309.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn309.Header.VisiblePosition = 8;
+            ultraGridColumn310.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn310.Header.VisiblePosition = 9;
+            ultraGridColumn311.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn311.Header.VisiblePosition = 10;
+            ultraGridColumn312.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn312.Header.VisiblePosition = 11;
+            ultraGridColumn313.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn313.Header.VisiblePosition = 12;
+            ultraGridColumn314.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn314.Header.VisiblePosition = 13;
+            ultraGridBand38.Columns.AddRange(new object[] {
+            ultraGridColumn301,
+            ultraGridColumn302,
+            ultraGridColumn303,
+            ultraGridColumn304,
+            ultraGridColumn305,
+            ultraGridColumn306,
+            ultraGridColumn307,
+            ultraGridColumn308,
+            ultraGridColumn309,
+            ultraGridColumn310,
+            ultraGridColumn311,
+            ultraGridColumn312,
+            ultraGridColumn313,
+            ultraGridColumn314});
+            ultraGridColumn315.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn315.Header.VisiblePosition = 0;
+            ultraGridColumn316.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn316.Header.VisiblePosition = 1;
+            ultraGridColumn317.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn317.Header.VisiblePosition = 2;
+            ultraGridColumn318.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+            ultraGridColumn318.Header.VisiblePosition = 3;
+            ultraGridBand39.Columns.AddRange(new object[] {
+            ultraGridColumn315,
+            ultraGridColumn316,
+            ultraGridColumn317,
+            ultraGridColumn318});
             this.ultraComboCulvertsMaterial.DisplayLayout.BandsSerializer.Add(ultraGridBand35);
             this.ultraComboCulvertsMaterial.DisplayLayout.BandsSerializer.Add(ultraGridBand36);
             this.ultraComboCulvertsMaterial.DisplayLayout.BandsSerializer.Add(ultraGridBand37);
@@ -2830,11 +2851,6 @@
             this.comboBoxCulvertsType.Size = new System.Drawing.Size(90, 21);
             this.comboBoxCulvertsType.TabIndex = 45;
             this.comboBoxCulvertsType.ValueMember = "culvert_opening_type_id";
-            // 
-            // sWSPCULVERTOPENINGTYPEBindingSource
-            // 
-            this.sWSPCULVERTOPENINGTYPEBindingSource.DataMember = "SWSP_CULVERT_OPENING_TYPE";
-            this.sWSPCULVERTOPENINGTYPEBindingSource.DataSource = this.sANDBOXDataSet;
             // 
             // textBoxCulvertsMeasuredNode
             // 
@@ -2965,14 +2981,6 @@
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             this.dataGridViewTextBoxColumn2.ReadOnly = true;
             this.dataGridViewTextBoxColumn2.Width = 66;
-            // 
-            // nodeDataGridViewTextBoxColumn1
-            // 
-            this.nodeDataGridViewTextBoxColumn1.DataPropertyName = "node";
-            this.nodeDataGridViewTextBoxColumn1.HeaderText = "Measured";
-            this.nodeDataGridViewTextBoxColumn1.Name = "nodeDataGridViewTextBoxColumn1";
-            this.nodeDataGridViewTextBoxColumn1.ReadOnly = true;
-            this.nodeDataGridViewTextBoxColumn1.Width = 66;
             // 
             // fKCULVERTFACINGTYPEBindingSource
             // 
@@ -3238,6 +3246,16 @@
             this.ultraDateTimeEditorSurveyDate.Size = new System.Drawing.Size(144, 21);
             this.ultraDateTimeEditorSurveyDate.TabIndex = 103;
             // 
+            // sWSPWATERSHEDBindingSource
+            // 
+            this.sWSPWATERSHEDBindingSource.DataMember = "SWSP_WATERSHED";
+            this.sWSPWATERSHEDBindingSource.DataSource = this.sANDBOXDataSet;
+            // 
+            // sANDBOXDataSet
+            // 
+            this.sANDBOXDataSet.DataSetName = "SANDBOXDataSet";
+            this.sANDBOXDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
             // checkedListBoxEvaluators
             // 
             this.checkedListBoxEvaluators.DataSource = this.sANDBOXDataSet.SWSP_EVALUATOR;
@@ -3249,6 +3267,56 @@
             this.checkedListBoxEvaluators.TabIndex = 5;
             this.checkedListBoxEvaluators.ValueMember = "evaluator_id";
             this.checkedListBoxEvaluators.SelectedIndexChanged += new System.EventHandler(this.checkedListBoxEvaluators_SelectedIndexChanged);
+            // 
+            // sWSPSHAPETYPEBindingSource
+            // 
+            this.sWSPSHAPETYPEBindingSource.DataMember = "SWSP_SHAPE_TYPE";
+            this.sWSPSHAPETYPEBindingSource.DataSource = this.sANDBOXDataSet;
+            // 
+            // sWSPMATERIALTYPEBindingSource
+            // 
+            this.sWSPMATERIALTYPEBindingSource.DataMember = "SWSP_MATERIAL_TYPE";
+            this.sWSPMATERIALTYPEBindingSource.DataSource = this.sANDBOXDataSet;
+            // 
+            // usnodeDataGridViewTextBoxColumn
+            // 
+            this.usnodeDataGridViewTextBoxColumn.DataPropertyName = "us_node";
+            this.usnodeDataGridViewTextBoxColumn.HeaderText = "US Node";
+            this.usnodeDataGridViewTextBoxColumn.Name = "usnodeDataGridViewTextBoxColumn";
+            this.usnodeDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // dsnodeDataGridViewTextBoxColumn
+            // 
+            this.dsnodeDataGridViewTextBoxColumn.DataPropertyName = "ds_node";
+            this.dsnodeDataGridViewTextBoxColumn.HeaderText = "DS Node";
+            this.dsnodeDataGridViewTextBoxColumn.Name = "dsnodeDataGridViewTextBoxColumn";
+            this.dsnodeDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // sWSPFACINGTYPEBindingSource
+            // 
+            this.sWSPFACINGTYPEBindingSource.DataMember = "SWSP_FACING_TYPE";
+            this.sWSPFACINGTYPEBindingSource.DataSource = this.sANDBOXDataSet;
+            // 
+            // nodeDataGridViewTextBoxColumn
+            // 
+            this.nodeDataGridViewTextBoxColumn.DataPropertyName = "node";
+            this.nodeDataGridViewTextBoxColumn.HeaderText = "Measured";
+            this.nodeDataGridViewTextBoxColumn.Name = "nodeDataGridViewTextBoxColumn";
+            this.nodeDataGridViewTextBoxColumn.ReadOnly = true;
+            this.nodeDataGridViewTextBoxColumn.Width = 66;
+            // 
+            // sWSPCULVERTOPENINGTYPEBindingSource
+            // 
+            this.sWSPCULVERTOPENINGTYPEBindingSource.DataMember = "SWSP_CULVERT_OPENING_TYPE";
+            this.sWSPCULVERTOPENINGTYPEBindingSource.DataSource = this.sANDBOXDataSet;
+            // 
+            // nodeDataGridViewTextBoxColumn1
+            // 
+            this.nodeDataGridViewTextBoxColumn1.DataPropertyName = "node";
+            this.nodeDataGridViewTextBoxColumn1.HeaderText = "Measured";
+            this.nodeDataGridViewTextBoxColumn1.Name = "nodeDataGridViewTextBoxColumn1";
+            this.nodeDataGridViewTextBoxColumn1.ReadOnly = true;
+            this.nodeDataGridViewTextBoxColumn1.Width = 66;
             // 
             // sWSPFACINGTYPEBindingSource1
             // 
@@ -3410,17 +3478,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.fKSURVEYPAGEVIEWBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fKVIEWSUBWATERSHEDBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fKSUBWATERSHEDWATERSHEDBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sWSPWATERSHEDBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sANDBOXDataSet)).EndInit();
             this.tabControlDitchesCulvertsPipes.ResumeLayout(false);
             this.tabPagePipes.ResumeLayout(false);
             this.tabPagePipes.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ultraNumericEditorPipesInnerWidth)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ultraComboPipesShape)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fKPIPESURVEYPAGEBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sWSPSHAPETYPEBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ultraComboPipesMaterial)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sWSPMATERIALTYPEBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ultraNumericEditorPipesInnerDiameter)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ultraNumericEditorPipesDSDepth)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ultraNumericEditorPipesUSDepth)).EndInit();
@@ -3429,7 +3493,6 @@
             this.tabPageDitches.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fKDITCHSURVEYPAGEBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ultraComboDitchesFacingDirection)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sWSPFACINGTYPEBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ultraComboDitchesMaterial)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ultraNumericEditorDitchesBottomWidth)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ultraNumericEditorDitchesTopWidth)).EndInit();
@@ -3443,7 +3506,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.ultraComboCulvertsMaterial)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ultraNumericEditorCulvertsUnobstructedHeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ultraNumericEditorCulvertsFullDepth)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sWSPCULVERTOPENINGTYPEBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCulverts)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fKCULVERTFACINGTYPEBindingSource)).EndInit();
             this.menuStripMainForm.ResumeLayout(false);
@@ -3453,6 +3515,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.fKPIPEMATERIALTYPEBindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fKPIPEMATERIALTYPEBindingSource2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ultraDateTimeEditorSurveyDate)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sWSPWATERSHEDBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sANDBOXDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sWSPSHAPETYPEBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sWSPMATERIALTYPEBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sWSPFACINGTYPEBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sWSPCULVERTOPENINGTYPEBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sWSPFACINGTYPEBindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sWSPPHOTOBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sWSPCULVERTBindingSource)).EndInit();

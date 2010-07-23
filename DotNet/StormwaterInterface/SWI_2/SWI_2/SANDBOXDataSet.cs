@@ -2,6 +2,10 @@
     
     
     public partial class SANDBOXDataSet {
+        partial class SWSP_PIPEDataTable
+        {
+        }
+    
         partial class DataTableFieldSurveyDataTable
         {
       }
@@ -26,3 +30,10 @@
 
 
 
+
+namespace SWI_2.SANDBOXDataSetTableAdapters {
+    
+    
+    public partial class SWSP_CULVERTTableAdapter {
+    }
+}
