@@ -18,7 +18,8 @@ namespace SWI_2
         private int _CurrentWatershed;
         private int _CurrentSubwatershed;
         private enum _lastSearchVar { ditch, culvert, pipe };
-        private _lastSearchVar _lastSearch; 
+        private _lastSearchVar _lastSearch;
+        private bool _returningFromForm;
 
         public FormMain()
         {
@@ -239,6 +240,7 @@ namespace SWI_2
             // TODO: This line of code loads data into the 'sANDBOXDataSet.SWSP_WATERSHED' table. You can move, or remove it, as needed.
             this.sWSP_WATERSHEDTableAdapter.Fill(this.sANDBOXDataSet.SWSP_WATERSHED);
 
+            _returningFromForm = false;
             _lastGlobalID = 0;
             _lastSearch = _lastSearchVar.culvert; 
 
@@ -255,53 +257,63 @@ namespace SWI_2
         {
             //check the objects in the checkedListBox the evaluator_id is in
             //the Survey_Page_Evaluator Dataset for this SurveyPage
-            object item;
-            try
+            if (_returningFromForm == false)
             {
-                for (int index = 0; index < checkedListBoxEvaluators.Items.Count; index++)
+                object item;
+                try
                 {
-                    item = checkedListBoxEvaluators.Items[index];
-                    if (this.sWSP_SURVEY_PAGE_EVALUATORTableAdapter.IdentifyValidEvaluators((int)comboBoxSurveyPage.SelectedValue, (int)((System.Data.DataRowView)item).Row[0]) != 0)
+                    for (int index = 0; index < checkedListBoxEvaluators.Items.Count; index++)
                     {
-                        checkedListBoxEvaluators.SetItemChecked(index, true);
-                    }
-                    else
-                    {
-                        checkedListBoxEvaluators.SetItemChecked(index, false);
+                        item = checkedListBoxEvaluators.Items[index];
+                        if (this.sWSP_SURVEY_PAGE_EVALUATORTableAdapter.IdentifyValidEvaluators((int)comboBoxSurveyPage.SelectedValue, (int)((System.Data.DataRowView)item).Row[0]) != 0)
+                        {
+                            checkedListBoxEvaluators.SetItemChecked(index, true);
+                        }
+                        else
+                        {
+                            checkedListBoxEvaluators.SetItemChecked(index, false);
+                        }
                     }
                 }
-            }
-            catch (Exception ex)
-            {
+                catch (Exception ex)
+                {
+                }
             }
         }
 
         private void checkedListBoxEvaluators_SelectedIndexChanged(object sender, EventArgs e)
         {
-            System.Data.DataRowView item;
-            //check the index of the selected items.
-            //Update Survey_Page_Evaluator according to which ones are selected
-            
-            //Delete all the associated evaluators with this page
-            this.sWSP_SURVEY_PAGE_EVALUATORTableAdapter.DeleteQuery((int)comboBoxSurveyPage.SelectedValue);
-            //refill the evaulator/page associations
-            try
+            if (_returningFromForm == false)
             {
-                for (int index = 0; index < checkedListBoxEvaluators.Items.Count; index++)
-                {
-                    item = (System.Data.DataRowView)checkedListBoxEvaluators.Items[index];
-                    if (checkedListBoxEvaluators.CheckedIndices.Contains(index))
-                    {
-                        this.sWSP_SURVEY_PAGE_EVALUATORTableAdapter.InsertQuery((int)comboBoxSurveyPage.SelectedValue, (int)((System.Data.DataRowView)item).Row[0]);
-                    }
-                }
+                System.Data.DataRowView item;
+                //check the index of the selected items.
+                //Update Survey_Page_Evaluator according to which ones are selected
 
-                this.sWSP_SURVEY_PAGE_EVALUATORTableAdapter.Update(sANDBOXDataSet);
-                this.sWSP_SURVEY_PAGE_EVALUATORTableAdapter.Fill((SANDBOXDataSet.SWSP_SURVEY_PAGE_EVALUATORDataTable)((SANDBOXDataSet)this.sWSPSURVEYPAGEEVALUATORBindingSource.DataSource).SWSP_SURVEY_PAGE_EVALUATOR);
-                checkedListBoxEvaluators.Refresh();
-            }
-            catch (Exception ex)
-            {
+                //Delete all the associated evaluators with this page
+
+                //refill the evaulator/page associations
+                try
+                {
+                    if (checkedListBoxEvaluators.Items.Count > 0)
+                    {
+                        this.sWSP_SURVEY_PAGE_EVALUATORTableAdapter.DeleteQuery((int)comboBoxSurveyPage.SelectedValue);
+                    }
+                    for (int index = 0; index < checkedListBoxEvaluators.Items.Count; index++)
+                    {
+                        item = (System.Data.DataRowView)checkedListBoxEvaluators.Items[index];
+                        if (checkedListBoxEvaluators.CheckedIndices.Contains(index))
+                        {
+                            this.sWSP_SURVEY_PAGE_EVALUATORTableAdapter.InsertQuery((int)comboBoxSurveyPage.SelectedValue, (int)((System.Data.DataRowView)item).Row[0]);
+                        }
+                    }
+
+                    this.sWSP_SURVEY_PAGE_EVALUATORTableAdapter.Update(sANDBOXDataSet);
+                    this.sWSP_SURVEY_PAGE_EVALUATORTableAdapter.Fill((SANDBOXDataSet.SWSP_SURVEY_PAGE_EVALUATORDataTable)((SANDBOXDataSet)this.sWSPSURVEYPAGEEVALUATORBindingSource.DataSource).SWSP_SURVEY_PAGE_EVALUATOR);
+                    checkedListBoxEvaluators.Refresh();
+                }
+                catch (Exception ex)
+                {
+                }
             }
         }
 
@@ -392,7 +404,8 @@ namespace SWI_2
                                                 10,
                                                 "",
                                                 "DSNODE",
-                                                "USNODE");
+                                                "USNODE",
+                                                null);
             this.sWSP_DITCHTableAdapter.Fill((SANDBOXDataSet.SWSP_DITCHDataTable)((SANDBOXDataSet)this.sWSPDITCHBindingSource.DataSource).SWSP_DITCH);
 
             fKDITCHSURVEYPAGEBindingSource.MoveLast();
@@ -470,7 +483,8 @@ namespace SWI_2
                                                 10,
                                                 "",
                                                 "DSNODE",
-                                                "USNODE");
+                                                "USNODE",
+                                                null);
             this.sWSP_CULVERTTableAdapter.Fill((SANDBOXDataSet.SWSP_CULVERTDataTable)((SANDBOXDataSet)this.sWSPCULVERTBindingSource.DataSource).SWSP_CULVERT);
 
             fKCULVERTSURVEYPAGEBindingSource1.MoveLast();
@@ -531,7 +545,8 @@ namespace SWI_2
                                                 null,
                                                 10,
                                                 4,
-                                                "");
+                                                "",
+                                                null);
             this.sWSP_PIPETableAdapter.Fill((SANDBOXDataSet.SWSP_PIPEDataTable)((SANDBOXDataSet)this.sWSPPIPEBindingSource.DataSource).SWSP_PIPE);
 
             fKPIPESURVEYPAGEBindingSource.MoveLast();
@@ -576,6 +591,7 @@ namespace SWI_2
         {
             FormFieldSurveyView child = new FormFieldSurveyView();
 
+            _returningFromForm = true;
             this.Enabled = false;
             child.ShowDialog();
             this.Enabled = true;
@@ -598,6 +614,8 @@ namespace SWI_2
 
             _lastGlobalID = 0;
             _lastSearch = _lastSearchVar.culvert;
+            _returningFromForm = false;
+            CheckEvaluatorsAssociatedWithThisSurveyPage(null, null);
 
             try
             {
@@ -613,6 +631,7 @@ namespace SWI_2
             FormSWSPFieldDataAdministration child = new FormSWSPFieldDataAdministration();
 
             //child.GlobalID = (int)((System.Data.DataRowView)fKPIPESURVEYPAGEBindingSource.Current)["global_id"];
+            _returningFromForm = true;
             this.Enabled = false;
             child.ShowDialog();
             this.Enabled = true;
@@ -626,15 +645,18 @@ namespace SWI_2
             this.sWSP_MATERIAL_TYPETableAdapter.Fill(this.sANDBOXDataSet.SWSP_MATERIAL_TYPE);
             this.sWSP_FACING_TYPETableAdapter.Fill(this.sANDBOXDataSet.SWSP_FACING_TYPE);
             this.sWSP_DITCHTableAdapter.Fill(this.sANDBOXDataSet.SWSP_DITCH);
-            this.sWSP_SURVEY_PAGE_EVALUATORTableAdapter.Fill(this.sANDBOXDataSet.SWSP_SURVEY_PAGE_EVALUATOR);
             this.sWSP_EVALUATORTableAdapter.Fill(this.sANDBOXDataSet.SWSP_EVALUATOR);
+            this.sWSP_SURVEY_PAGE_EVALUATORTableAdapter.Fill(this.sANDBOXDataSet.SWSP_SURVEY_PAGE_EVALUATOR);
             this.sWSP_SURVEY_PAGETableAdapter.Fill(this.sANDBOXDataSet.SWSP_SURVEY_PAGE);
             this.sWSP_VIEWTableAdapter.Fill(this.sANDBOXDataSet.SWSP_VIEW);
             this.sWSP_SUBWATERSHEDTableAdapter.Fill(this.sANDBOXDataSet.SWSP_SUBWATERSHED);
             this.sWSP_WATERSHEDTableAdapter.Fill(this.sANDBOXDataSet.SWSP_WATERSHED);
+            
 
             _lastGlobalID = 0;
             _lastSearch = _lastSearchVar.culvert;
+            _returningFromForm = false;
+            CheckEvaluatorsAssociatedWithThisSurveyPage(null, null);
 
             try
             {

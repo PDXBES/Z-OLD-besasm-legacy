@@ -28,6 +28,8 @@ namespace SystemsAnalysis.Reporting
         /// </summary>
         private void InitializeComponent()
         {
+          Infragistics.Win.UltraWinTabControl.UltraTab ultraTab1 = new Infragistics.Win.UltraWinTabControl.UltraTab();
+          Infragistics.Win.UltraWinTabControl.UltraTab ultraTab2 = new Infragistics.Win.UltraWinTabControl.UltraTab();
           Infragistics.Win.Appearance appearance1 = new Infragistics.Win.Appearance();
           Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand1 = new Infragistics.Win.UltraWinGrid.UltraGridBand("ModelCatalog", -1);
           Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn1 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ModelID");
@@ -142,39 +144,37 @@ namespace SystemsAnalysis.Reporting
           Infragistics.Win.Appearance appearance34 = new Infragistics.Win.Appearance();
           Infragistics.Win.Appearance appearance35 = new Infragistics.Win.Appearance();
           Infragistics.Win.Appearance appearance36 = new Infragistics.Win.Appearance();
-          Infragistics.Win.UltraWinTabControl.UltraTab ultraTab1 = new Infragistics.Win.UltraWinTabControl.UltraTab();
-          Infragistics.Win.UltraWinTabControl.UltraTab ultraTab2 = new Infragistics.Win.UltraWinTabControl.UltraTab();
           this.ultraTabPageControl1 = new Infragistics.Win.UltraWinTabControl.UltraTabPageControl();
-          this.grdModelCatalog = new Infragistics.Win.UltraWinGrid.UltraGrid();
-          this.modelCatalogDS = new SystemsAnalysis.DataAccess.ModelCatalogDataSet();
           this.panel1 = new System.Windows.Forms.Panel();
           this.btnEditModel = new Infragistics.Win.Misc.UltraButton();
           this.btnUploadModels = new Infragistics.Win.Misc.UltraButton();
           this.lblScenario = new System.Windows.Forms.Label();
-          this.cmbSelectScenario = new Infragistics.Win.UltraWinGrid.UltraCombo();
           this.btnClose = new Infragistics.Win.Misc.UltraButton();
           this.btnAddNewModel = new Infragistics.Win.Misc.UltraButton();
           this.btnCancelUpload = new Infragistics.Win.Misc.UltraButton();
           this.ultraTabPageControl2 = new Infragistics.Win.UltraWinTabControl.UltraTabPageControl();
-          this.ultraGrid1 = new Infragistics.Win.UltraWinGrid.UltraGrid();
-          this.feDS = new SystemsAnalysis.DataAccess.FlowEstimationDataSet();
           this.panel2 = new System.Windows.Forms.Panel();
           this.btnAddFecResults = new Infragistics.Win.Misc.UltraButton();
           this.ultraProgressBar1 = new Infragistics.Win.UltraWinProgressBar.UltraProgressBar();
           this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
           this.ultraTabControl1 = new Infragistics.Win.UltraWinTabControl.UltraTabControl();
           this.ultraTabSharedControlsPage1 = new Infragistics.Win.UltraWinTabControl.UltraTabSharedControlsPage();
+          this.grdModelCatalog = new Infragistics.Win.UltraWinGrid.UltraGrid();
+          this.modelCatalogDS = new SystemsAnalysis.DataAccess.ModelCatalogDataSet();
+          this.cmbSelectScenario = new Infragistics.Win.UltraWinGrid.UltraCombo();
+          this.ultraGrid1 = new Infragistics.Win.UltraWinGrid.UltraGrid();
+          this.feDS = new SystemsAnalysis.DataAccess.FlowEstimationDataSet();
           this.ultraTabPageControl1.SuspendLayout();
-          ((System.ComponentModel.ISupportInitialize)(this.grdModelCatalog)).BeginInit();
-          ((System.ComponentModel.ISupportInitialize)(this.modelCatalogDS)).BeginInit();
           this.panel1.SuspendLayout();
-          ((System.ComponentModel.ISupportInitialize)(this.cmbSelectScenario)).BeginInit();
           this.ultraTabPageControl2.SuspendLayout();
-          ((System.ComponentModel.ISupportInitialize)(this.ultraGrid1)).BeginInit();
-          ((System.ComponentModel.ISupportInitialize)(this.feDS)).BeginInit();
           this.panel2.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.ultraTabControl1)).BeginInit();
           this.ultraTabControl1.SuspendLayout();
+          ((System.ComponentModel.ISupportInitialize)(this.grdModelCatalog)).BeginInit();
+          ((System.ComponentModel.ISupportInitialize)(this.modelCatalogDS)).BeginInit();
+          ((System.ComponentModel.ISupportInitialize)(this.cmbSelectScenario)).BeginInit();
+          ((System.ComponentModel.ISupportInitialize)(this.ultraGrid1)).BeginInit();
+          ((System.ComponentModel.ISupportInitialize)(this.feDS)).BeginInit();
           this.SuspendLayout();
           // 
           // ultraTabPageControl1
@@ -182,9 +182,176 @@ namespace SystemsAnalysis.Reporting
           this.ultraTabPageControl1.Controls.Add(this.grdModelCatalog);
           this.ultraTabPageControl1.Controls.Add(this.panel1);
           this.ultraTabPageControl1.Location = new System.Drawing.Point(1, 20);
-          this.ultraTabPageControl1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+          this.ultraTabPageControl1.Margin = new System.Windows.Forms.Padding(2);
           this.ultraTabPageControl1.Name = "ultraTabPageControl1";
           this.ultraTabPageControl1.Size = new System.Drawing.Size(578, 299);
+          // 
+          // panel1
+          // 
+          this.panel1.Controls.Add(this.btnEditModel);
+          this.panel1.Controls.Add(this.btnUploadModels);
+          this.panel1.Controls.Add(this.lblScenario);
+          this.panel1.Controls.Add(this.cmbSelectScenario);
+          this.panel1.Controls.Add(this.btnClose);
+          this.panel1.Controls.Add(this.btnAddNewModel);
+          this.panel1.Controls.Add(this.btnCancelUpload);
+          this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+          this.panel1.Location = new System.Drawing.Point(0, 218);
+          this.panel1.Margin = new System.Windows.Forms.Padding(2);
+          this.panel1.Name = "panel1";
+          this.panel1.Size = new System.Drawing.Size(578, 81);
+          this.panel1.TabIndex = 28;
+          // 
+          // btnEditModel
+          // 
+          this.btnEditModel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+          this.btnEditModel.ButtonStyle = Infragistics.Win.UIElementButtonStyle.VisualStudio2005Button;
+          this.btnEditModel.Location = new System.Drawing.Point(208, 43);
+          this.btnEditModel.Margin = new System.Windows.Forms.Padding(2);
+          this.btnEditModel.Name = "btnEditModel";
+          this.btnEditModel.Size = new System.Drawing.Size(88, 34);
+          this.btnEditModel.TabIndex = 35;
+          this.btnEditModel.Text = "Edit Model";
+          this.btnEditModel.Click += new System.EventHandler(this.btnEditModel_Click);
+          // 
+          // btnUploadModels
+          // 
+          this.btnUploadModels.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+          this.btnUploadModels.ButtonStyle = Infragistics.Win.UIElementButtonStyle.VisualStudio2005Button;
+          this.btnUploadModels.Location = new System.Drawing.Point(302, 43);
+          this.btnUploadModels.Margin = new System.Windows.Forms.Padding(2);
+          this.btnUploadModels.Name = "btnUploadModels";
+          this.btnUploadModels.Size = new System.Drawing.Size(88, 34);
+          this.btnUploadModels.TabIndex = 28;
+          this.btnUploadModels.Text = "Upload Models";
+          this.btnUploadModels.Click += new System.EventHandler(this.btnUploadModels_Click);
+          // 
+          // lblScenario
+          // 
+          this.lblScenario.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+          this.lblScenario.Location = new System.Drawing.Point(61, 20);
+          this.lblScenario.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+          this.lblScenario.Name = "lblScenario";
+          this.lblScenario.Size = new System.Drawing.Size(50, 20);
+          this.lblScenario.TabIndex = 29;
+          this.lblScenario.Text = "Scenario:";
+          this.lblScenario.TextAlign = System.Drawing.ContentAlignment.TopRight;
+          // 
+          // btnClose
+          // 
+          this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+          this.btnClose.ButtonStyle = Infragistics.Win.UIElementButtonStyle.VisualStudio2005Button;
+          this.btnClose.Location = new System.Drawing.Point(394, 43);
+          this.btnClose.Margin = new System.Windows.Forms.Padding(2);
+          this.btnClose.Name = "btnClose";
+          this.btnClose.Size = new System.Drawing.Size(88, 34);
+          this.btnClose.TabIndex = 32;
+          this.btnClose.Text = "Close";
+          this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+          // 
+          // btnAddNewModel
+          // 
+          this.btnAddNewModel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+          this.btnAddNewModel.ButtonStyle = Infragistics.Win.UIElementButtonStyle.VisualStudio2005Button;
+          this.btnAddNewModel.Location = new System.Drawing.Point(116, 43);
+          this.btnAddNewModel.Margin = new System.Windows.Forms.Padding(2);
+          this.btnAddNewModel.Name = "btnAddNewModel";
+          this.btnAddNewModel.Size = new System.Drawing.Size(88, 34);
+          this.btnAddNewModel.TabIndex = 31;
+          this.btnAddNewModel.Text = "Add New Model";
+          this.btnAddNewModel.Click += new System.EventHandler(this.btnAddNewModel_Click);
+          // 
+          // btnCancelUpload
+          // 
+          this.btnCancelUpload.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+          this.btnCancelUpload.ButtonStyle = Infragistics.Win.UIElementButtonStyle.VisualStudio2005Button;
+          this.btnCancelUpload.Location = new System.Drawing.Point(116, 43);
+          this.btnCancelUpload.Margin = new System.Windows.Forms.Padding(2);
+          this.btnCancelUpload.Name = "btnCancelUpload";
+          this.btnCancelUpload.Size = new System.Drawing.Size(368, 34);
+          this.btnCancelUpload.TabIndex = 34;
+          this.btnCancelUpload.Text = "Cancel Upload";
+          this.btnCancelUpload.Visible = false;
+          this.btnCancelUpload.Click += new System.EventHandler(this.btnCancelUpload_Click);
+          // 
+          // ultraTabPageControl2
+          // 
+          this.ultraTabPageControl2.Controls.Add(this.ultraGrid1);
+          this.ultraTabPageControl2.Controls.Add(this.panel2);
+          this.ultraTabPageControl2.Location = new System.Drawing.Point(-10000, -10000);
+          this.ultraTabPageControl2.Margin = new System.Windows.Forms.Padding(2);
+          this.ultraTabPageControl2.Name = "ultraTabPageControl2";
+          this.ultraTabPageControl2.Size = new System.Drawing.Size(578, 299);
+          // 
+          // panel2
+          // 
+          this.panel2.Controls.Add(this.btnAddFecResults);
+          this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
+          this.panel2.Location = new System.Drawing.Point(0, 259);
+          this.panel2.Margin = new System.Windows.Forms.Padding(2);
+          this.panel2.Name = "panel2";
+          this.panel2.Size = new System.Drawing.Size(578, 40);
+          this.panel2.TabIndex = 2;
+          // 
+          // btnAddFecResults
+          // 
+          this.btnAddFecResults.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+          this.btnAddFecResults.ButtonStyle = Infragistics.Win.UIElementButtonStyle.VisualStudio2005Button;
+          this.btnAddFecResults.Location = new System.Drawing.Point(185, 5);
+          this.btnAddFecResults.Margin = new System.Windows.Forms.Padding(2);
+          this.btnAddFecResults.Name = "btnAddFecResults";
+          this.btnAddFecResults.Size = new System.Drawing.Size(194, 29);
+          this.btnAddFecResults.TabIndex = 1;
+          this.btnAddFecResults.Text = "Add FEC Results from Clipboard";
+          this.btnAddFecResults.Click += new System.EventHandler(this.btnAddFecResults_Click);
+          // 
+          // ultraProgressBar1
+          // 
+          this.ultraProgressBar1.Dock = System.Windows.Forms.DockStyle.Bottom;
+          this.ultraProgressBar1.Enabled = false;
+          this.ultraProgressBar1.Location = new System.Drawing.Point(0, 320);
+          this.ultraProgressBar1.Margin = new System.Windows.Forms.Padding(2);
+          this.ultraProgressBar1.Name = "ultraProgressBar1";
+          this.ultraProgressBar1.Size = new System.Drawing.Size(580, 19);
+          this.ultraProgressBar1.TabIndex = 33;
+          this.ultraProgressBar1.Text = "[Formatted]";
+          this.ultraProgressBar1.Visible = false;
+          // 
+          // backgroundWorker1
+          // 
+          this.backgroundWorker1.WorkerReportsProgress = true;
+          this.backgroundWorker1.WorkerSupportsCancellation = true;
+          this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
+          this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
+          this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
+          // 
+          // ultraTabControl1
+          // 
+          this.ultraTabControl1.Controls.Add(this.ultraTabSharedControlsPage1);
+          this.ultraTabControl1.Controls.Add(this.ultraTabPageControl1);
+          this.ultraTabControl1.Controls.Add(this.ultraTabPageControl2);
+          this.ultraTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+          this.ultraTabControl1.Location = new System.Drawing.Point(0, 0);
+          this.ultraTabControl1.Margin = new System.Windows.Forms.Padding(2);
+          this.ultraTabControl1.Name = "ultraTabControl1";
+          this.ultraTabControl1.SharedControlsPage = this.ultraTabSharedControlsPage1;
+          this.ultraTabControl1.Size = new System.Drawing.Size(580, 320);
+          this.ultraTabControl1.Style = Infragistics.Win.UltraWinTabControl.UltraTabControlStyle.VisualStudio2005;
+          this.ultraTabControl1.TabIndex = 35;
+          ultraTab1.TabPage = this.ultraTabPageControl1;
+          ultraTab1.Text = "Hydraulic Model";
+          ultraTab2.TabPage = this.ultraTabPageControl2;
+          ultraTab2.Text = "Regression Model";
+          this.ultraTabControl1.Tabs.AddRange(new Infragistics.Win.UltraWinTabControl.UltraTab[] {
+            ultraTab1,
+            ultraTab2});
+          // 
+          // ultraTabSharedControlsPage1
+          // 
+          this.ultraTabSharedControlsPage1.Location = new System.Drawing.Point(-10000, -10000);
+          this.ultraTabSharedControlsPage1.Margin = new System.Windows.Forms.Padding(2);
+          this.ultraTabSharedControlsPage1.Name = "ultraTabSharedControlsPage1";
+          this.ultraTabSharedControlsPage1.Size = new System.Drawing.Size(578, 299);
           // 
           // grdModelCatalog
           // 
@@ -200,29 +367,29 @@ namespace SystemsAnalysis.Reporting
           ultraGridColumn2.Header.VisiblePosition = 1;
           ultraGridColumn2.Width = 14;
           ultraGridColumn3.Header.VisiblePosition = 2;
-          ultraGridColumn3.Width = 87;
+          ultraGridColumn3.Width = 95;
           ultraGridColumn4.Header.VisiblePosition = 3;
-          ultraGridColumn4.Width = 56;
+          ultraGridColumn4.Width = 57;
           ultraGridColumn5.Header.VisiblePosition = 4;
-          ultraGridColumn5.Width = 62;
+          ultraGridColumn5.Width = 63;
           ultraGridColumn6.Header.VisiblePosition = 5;
-          ultraGridColumn6.Width = 54;
+          ultraGridColumn6.Width = 55;
           ultraGridColumn7.Header.VisiblePosition = 6;
           ultraGridColumn7.Hidden = true;
           ultraGridColumn8.Header.VisiblePosition = 7;
-          ultraGridColumn8.Width = 54;
+          ultraGridColumn8.Width = 55;
           ultraGridColumn9.Header.VisiblePosition = 8;
-          ultraGridColumn9.Width = 58;
+          ultraGridColumn9.Width = 59;
           ultraGridColumn10.Header.Caption = "Modeler";
           ultraGridColumn10.Header.VisiblePosition = 9;
-          ultraGridColumn10.Width = 54;
+          ultraGridColumn10.Width = 55;
           ultraGridColumn11.Header.VisiblePosition = 10;
           ultraGridColumn11.Hidden = true;
           ultraGridColumn11.Width = 56;
           ultraGridColumn12.Header.VisiblePosition = 11;
-          ultraGridColumn12.Width = 48;
+          ultraGridColumn12.Width = 49;
           ultraGridColumn13.Header.VisiblePosition = 12;
-          ultraGridColumn13.Width = 54;
+          ultraGridColumn13.Width = 55;
           ultraGridBand1.Columns.AddRange(new object[] {
             ultraGridColumn1,
             ultraGridColumn2,
@@ -294,7 +461,7 @@ namespace SystemsAnalysis.Reporting
           this.grdModelCatalog.Dock = System.Windows.Forms.DockStyle.Fill;
           this.grdModelCatalog.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
           this.grdModelCatalog.Location = new System.Drawing.Point(0, 0);
-          this.grdModelCatalog.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+          this.grdModelCatalog.Margin = new System.Windows.Forms.Padding(2);
           this.grdModelCatalog.Name = "grdModelCatalog";
           this.grdModelCatalog.Size = new System.Drawing.Size(578, 218);
           this.grdModelCatalog.TabIndex = 27;
@@ -303,57 +470,6 @@ namespace SystemsAnalysis.Reporting
           // 
           this.modelCatalogDS.DataSetName = "ModelCatalogDataSet";
           this.modelCatalogDS.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-          // 
-          // panel1
-          // 
-          this.panel1.Controls.Add(this.btnEditModel);
-          this.panel1.Controls.Add(this.btnUploadModels);
-          this.panel1.Controls.Add(this.lblScenario);
-          this.panel1.Controls.Add(this.cmbSelectScenario);
-          this.panel1.Controls.Add(this.btnClose);
-          this.panel1.Controls.Add(this.btnAddNewModel);
-          this.panel1.Controls.Add(this.btnCancelUpload);
-          this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-          this.panel1.Location = new System.Drawing.Point(0, 218);
-          this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-          this.panel1.Name = "panel1";
-          this.panel1.Size = new System.Drawing.Size(578, 81);
-          this.panel1.TabIndex = 28;
-          // 
-          // btnEditModel
-          // 
-          this.btnEditModel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-          this.btnEditModel.ButtonStyle = Infragistics.Win.UIElementButtonStyle.VisualStudio2005Button;
-          this.btnEditModel.Location = new System.Drawing.Point(208, 43);
-          this.btnEditModel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-          this.btnEditModel.Name = "btnEditModel";
-          this.btnEditModel.Size = new System.Drawing.Size(88, 34);
-          this.btnEditModel.TabIndex = 35;
-          this.btnEditModel.Text = "Edit Model";
-          this.btnEditModel.Click += new System.EventHandler(this.btnEditModel_Click);
-          // 
-          // btnUploadModels
-          // 
-          this.btnUploadModels.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-          this.btnUploadModels.ButtonStyle = Infragistics.Win.UIElementButtonStyle.VisualStudio2005Button;
-          this.btnUploadModels.Location = new System.Drawing.Point(302, 43);
-          this.btnUploadModels.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-          this.btnUploadModels.Name = "btnUploadModels";
-          this.btnUploadModels.Size = new System.Drawing.Size(88, 34);
-          this.btnUploadModels.TabIndex = 28;
-          this.btnUploadModels.Text = "Upload Models";
-          this.btnUploadModels.Click += new System.EventHandler(this.btnUploadModels_Click);
-          // 
-          // lblScenario
-          // 
-          this.lblScenario.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-          this.lblScenario.Location = new System.Drawing.Point(61, 20);
-          this.lblScenario.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-          this.lblScenario.Name = "lblScenario";
-          this.lblScenario.Size = new System.Drawing.Size(50, 20);
-          this.lblScenario.TabIndex = 29;
-          this.lblScenario.Text = "Scenario:";
-          this.lblScenario.TextAlign = System.Drawing.ContentAlignment.TopRight;
           // 
           // cmbSelectScenario
           // 
@@ -500,58 +616,12 @@ namespace SystemsAnalysis.Reporting
           this.cmbSelectScenario.DisplayStyle = Infragistics.Win.EmbeddableElementDisplayStyle.VisualStudio2005;
           this.cmbSelectScenario.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
           this.cmbSelectScenario.Location = new System.Drawing.Point(116, 20);
-          this.cmbSelectScenario.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+          this.cmbSelectScenario.Margin = new System.Windows.Forms.Padding(2);
           this.cmbSelectScenario.Name = "cmbSelectScenario";
           this.cmbSelectScenario.Size = new System.Drawing.Size(368, 22);
           this.cmbSelectScenario.TabIndex = 30;
           this.cmbSelectScenario.ValueMember = "ScenarioID";
           this.cmbSelectScenario.RowSelected += new Infragistics.Win.UltraWinGrid.RowSelectedEventHandler(this.cmbSelectScenario_RowSelected);
-          // 
-          // btnClose
-          // 
-          this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-          this.btnClose.ButtonStyle = Infragistics.Win.UIElementButtonStyle.VisualStudio2005Button;
-          this.btnClose.Location = new System.Drawing.Point(394, 43);
-          this.btnClose.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-          this.btnClose.Name = "btnClose";
-          this.btnClose.Size = new System.Drawing.Size(88, 34);
-          this.btnClose.TabIndex = 32;
-          this.btnClose.Text = "Close";
-          this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
-          // 
-          // btnAddNewModel
-          // 
-          this.btnAddNewModel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-          this.btnAddNewModel.ButtonStyle = Infragistics.Win.UIElementButtonStyle.VisualStudio2005Button;
-          this.btnAddNewModel.Location = new System.Drawing.Point(116, 43);
-          this.btnAddNewModel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-          this.btnAddNewModel.Name = "btnAddNewModel";
-          this.btnAddNewModel.Size = new System.Drawing.Size(88, 34);
-          this.btnAddNewModel.TabIndex = 31;
-          this.btnAddNewModel.Text = "Add New Model";
-          this.btnAddNewModel.Click += new System.EventHandler(this.btnAddNewModel_Click);
-          // 
-          // btnCancelUpload
-          // 
-          this.btnCancelUpload.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-          this.btnCancelUpload.ButtonStyle = Infragistics.Win.UIElementButtonStyle.VisualStudio2005Button;
-          this.btnCancelUpload.Location = new System.Drawing.Point(116, 43);
-          this.btnCancelUpload.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-          this.btnCancelUpload.Name = "btnCancelUpload";
-          this.btnCancelUpload.Size = new System.Drawing.Size(368, 34);
-          this.btnCancelUpload.TabIndex = 34;
-          this.btnCancelUpload.Text = "Cancel Upload";
-          this.btnCancelUpload.Visible = false;
-          this.btnCancelUpload.Click += new System.EventHandler(this.btnCancelUpload_Click);
-          // 
-          // ultraTabPageControl2
-          // 
-          this.ultraTabPageControl2.Controls.Add(this.ultraGrid1);
-          this.ultraTabPageControl2.Controls.Add(this.panel2);
-          this.ultraTabPageControl2.Location = new System.Drawing.Point(-7500, -8125);
-          this.ultraTabPageControl2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-          this.ultraTabPageControl2.Name = "ultraTabPageControl2";
-          this.ultraTabPageControl2.Size = new System.Drawing.Size(578, 299);
           // 
           // ultraGrid1
           // 
@@ -564,13 +634,13 @@ namespace SystemsAnalysis.Reporting
           ultraGridColumn48.Header.VisiblePosition = 0;
           ultraGridColumn48.Width = 14;
           ultraGridColumn49.Header.VisiblePosition = 1;
-          ultraGridColumn49.Width = 14;
+          ultraGridColumn49.Width = 29;
           ultraGridColumn50.Header.VisiblePosition = 2;
           ultraGridColumn50.Width = 14;
           ultraGridColumn51.Header.VisiblePosition = 3;
           ultraGridColumn51.Width = 14;
           ultraGridColumn52.Header.VisiblePosition = 4;
-          ultraGridColumn52.Width = 44;
+          ultraGridColumn52.Width = 45;
           ultraGridColumn53.Header.VisiblePosition = 5;
           ultraGridColumn53.Width = 28;
           ultraGridColumn54.Header.VisiblePosition = 6;
@@ -696,7 +766,7 @@ namespace SystemsAnalysis.Reporting
           this.ultraGrid1.Dock = System.Windows.Forms.DockStyle.Fill;
           this.ultraGrid1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
           this.ultraGrid1.Location = new System.Drawing.Point(0, 0);
-          this.ultraGrid1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+          this.ultraGrid1.Margin = new System.Windows.Forms.Padding(2);
           this.ultraGrid1.Name = "ultraGrid1";
           this.ultraGrid1.Size = new System.Drawing.Size(578, 259);
           this.ultraGrid1.TabIndex = 0;
@@ -707,76 +777,6 @@ namespace SystemsAnalysis.Reporting
           this.feDS.DataSetName = "FlowEstimationDataSet";
           this.feDS.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
           // 
-          // panel2
-          // 
-          this.panel2.Controls.Add(this.btnAddFecResults);
-          this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-          this.panel2.Location = new System.Drawing.Point(0, 259);
-          this.panel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-          this.panel2.Name = "panel2";
-          this.panel2.Size = new System.Drawing.Size(578, 40);
-          this.panel2.TabIndex = 2;
-          // 
-          // btnAddFecResults
-          // 
-          this.btnAddFecResults.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-          this.btnAddFecResults.ButtonStyle = Infragistics.Win.UIElementButtonStyle.VisualStudio2005Button;
-          this.btnAddFecResults.Location = new System.Drawing.Point(185, 5);
-          this.btnAddFecResults.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-          this.btnAddFecResults.Name = "btnAddFecResults";
-          this.btnAddFecResults.Size = new System.Drawing.Size(194, 29);
-          this.btnAddFecResults.TabIndex = 1;
-          this.btnAddFecResults.Text = "Add FEC Results from Clipboard";
-          this.btnAddFecResults.Click += new System.EventHandler(this.btnAddFecResults_Click);
-          // 
-          // ultraProgressBar1
-          // 
-          this.ultraProgressBar1.Dock = System.Windows.Forms.DockStyle.Bottom;
-          this.ultraProgressBar1.Enabled = false;
-          this.ultraProgressBar1.Location = new System.Drawing.Point(0, 320);
-          this.ultraProgressBar1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-          this.ultraProgressBar1.Name = "ultraProgressBar1";
-          this.ultraProgressBar1.Size = new System.Drawing.Size(580, 19);
-          this.ultraProgressBar1.TabIndex = 33;
-          this.ultraProgressBar1.Text = "[Formatted]";
-          this.ultraProgressBar1.Visible = false;
-          // 
-          // backgroundWorker1
-          // 
-          this.backgroundWorker1.WorkerReportsProgress = true;
-          this.backgroundWorker1.WorkerSupportsCancellation = true;
-          this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
-          this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
-          this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
-          // 
-          // ultraTabControl1
-          // 
-          this.ultraTabControl1.Controls.Add(this.ultraTabSharedControlsPage1);
-          this.ultraTabControl1.Controls.Add(this.ultraTabPageControl1);
-          this.ultraTabControl1.Controls.Add(this.ultraTabPageControl2);
-          this.ultraTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-          this.ultraTabControl1.Location = new System.Drawing.Point(0, 0);
-          this.ultraTabControl1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-          this.ultraTabControl1.Name = "ultraTabControl1";
-          this.ultraTabControl1.SharedControlsPage = this.ultraTabSharedControlsPage1;
-          this.ultraTabControl1.Size = new System.Drawing.Size(580, 320);
-          this.ultraTabControl1.Style = Infragistics.Win.UltraWinTabControl.UltraTabControlStyle.VisualStudio2005;
-          this.ultraTabControl1.TabIndex = 35;
-          ultraTab1.TabPage = this.ultraTabPageControl1;
-          ultraTab1.Text = "Hydraulic Model";
-          ultraTab2.TabPage = this.ultraTabPageControl2;
-          ultraTab2.Text = "Regression Model";
-          this.ultraTabControl1.Tabs.AddRange(new Infragistics.Win.UltraWinTabControl.UltraTab[] {
-            ultraTab1,
-            ultraTab2});
-          // 
-          // ultraTabSharedControlsPage1
-          // 
-          this.ultraTabSharedControlsPage1.Location = new System.Drawing.Point(-7500, -8125);
-          this.ultraTabSharedControlsPage1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-          this.ultraTabSharedControlsPage1.Name = "ultraTabSharedControlsPage1";
-          this.ultraTabSharedControlsPage1.Size = new System.Drawing.Size(578, 299);
-          // 
           // ModelCatalogMaintForm
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -784,24 +784,24 @@ namespace SystemsAnalysis.Reporting
           this.ClientSize = new System.Drawing.Size(580, 339);
           this.Controls.Add(this.ultraTabControl1);
           this.Controls.Add(this.ultraProgressBar1);
-          this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+          this.Margin = new System.Windows.Forms.Padding(2);
           this.Name = "ModelCatalogMaintForm";
           this.ShowIcon = false;
           this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
           this.Text = "Model Catalog Maintenance";
           this.Load += new System.EventHandler(this.ModelCatalogMaintForm_Load);
           this.ultraTabPageControl1.ResumeLayout(false);
-          ((System.ComponentModel.ISupportInitialize)(this.grdModelCatalog)).EndInit();
-          ((System.ComponentModel.ISupportInitialize)(this.modelCatalogDS)).EndInit();
           this.panel1.ResumeLayout(false);
           this.panel1.PerformLayout();
-          ((System.ComponentModel.ISupportInitialize)(this.cmbSelectScenario)).EndInit();
           this.ultraTabPageControl2.ResumeLayout(false);
-          ((System.ComponentModel.ISupportInitialize)(this.ultraGrid1)).EndInit();
-          ((System.ComponentModel.ISupportInitialize)(this.feDS)).EndInit();
           this.panel2.ResumeLayout(false);
           ((System.ComponentModel.ISupportInitialize)(this.ultraTabControl1)).EndInit();
           this.ultraTabControl1.ResumeLayout(false);
+          ((System.ComponentModel.ISupportInitialize)(this.grdModelCatalog)).EndInit();
+          ((System.ComponentModel.ISupportInitialize)(this.modelCatalogDS)).EndInit();
+          ((System.ComponentModel.ISupportInitialize)(this.cmbSelectScenario)).EndInit();
+          ((System.ComponentModel.ISupportInitialize)(this.ultraGrid1)).EndInit();
+          ((System.ComponentModel.ISupportInitialize)(this.feDS)).EndInit();
           this.ResumeLayout(false);
 
         }

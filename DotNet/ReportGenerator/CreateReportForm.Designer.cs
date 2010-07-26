@@ -371,7 +371,7 @@ namespace SystemsAnalysis.Reporting
           this.reportOptionsLayoutPanel.ColumnCount = 3;
           this.reportOptionsLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
           this.reportOptionsLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-          this.reportOptionsLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 117F));
+          this.reportOptionsLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 118F));
           this.reportOptionsLayoutPanel.Controls.Add(this.lblIncludedLibrary, 0, 0);
           this.reportOptionsLayoutPanel.Controls.Add(this.lblIncludedLibraryName, 1, 0);
           this.reportOptionsLayoutPanel.Controls.Add(this.lblAuxilaryData, 0, 1);
@@ -433,13 +433,13 @@ namespace SystemsAnalysis.Reporting
           this.txtAuxilaryDataValue.Location = new System.Drawing.Point(86, 22);
           this.txtAuxilaryDataValue.Margin = new System.Windows.Forms.Padding(2);
           this.txtAuxilaryDataValue.Name = "txtAuxilaryDataValue";
-          this.txtAuxilaryDataValue.Size = new System.Drawing.Size(257, 21);
+          this.txtAuxilaryDataValue.Size = new System.Drawing.Size(256, 21);
           this.txtAuxilaryDataValue.TabIndex = 3;
           this.txtAuxilaryDataValue.Text = "ultraTextEditor1";
           // 
           // btnBrowseAuxilaryData
           // 
-          this.btnBrowseAuxilaryData.Location = new System.Drawing.Point(348, 22);
+          this.btnBrowseAuxilaryData.Location = new System.Drawing.Point(347, 22);
           this.btnBrowseAuxilaryData.Margin = new System.Windows.Forms.Padding(2);
           this.btnBrowseAuxilaryData.Name = "btnBrowseAuxilaryData";
           this.btnBrowseAuxilaryData.Size = new System.Drawing.Size(52, 19);
@@ -496,7 +496,7 @@ namespace SystemsAnalysis.Reporting
           this.cmbReportChooser.DisplayLayout.AutoFitStyle = Infragistics.Win.UltraWinGrid.AutoFitStyle.ResizeAllColumns;
           ultraGridColumn1.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
           ultraGridColumn1.Header.VisiblePosition = 0;
-          ultraGridColumn1.Width = 279;
+          ultraGridColumn1.Width = 280;
           ultraGridColumn2.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
           ultraGridColumn2.AutoSizeMode = Infragistics.Win.UltraWinGrid.ColumnAutoSizeMode.None;
           ultraGridColumn2.Header.Enabled = false;
