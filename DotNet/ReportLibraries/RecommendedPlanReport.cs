@@ -62,7 +62,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
       {
         auxilaryDataDescription = new Dictionary<string, string>();
         auxilaryDataDescription.Add("ModelPath", "Model Directory (Model.ini)");
-        //auxilaryDataDescription.Add("AlternativePath", "Alternative Package (alternative_package.mdb)");
+        auxilaryDataDescription.Add("AlternativePath", "Alternative Package (alternative_package.mdb)");
         auxilaryDataDescription.Add("SwmmOutputFile", "Swmm Output File (.out)");
       }
       
