@@ -60,6 +60,7 @@ namespace SWI_2
             sANDBOXDataSet.DataTableFieldSurveyEditable.Columns["us_node"].DefaultValue = "";
             sANDBOXDataSet.DataTableFieldSurveyEditable.Columns["ds_node"].DefaultValue = "";
             sANDBOXDataSet.DataTableFieldSurveyEditable.Columns["node"].DefaultValue = "";
+            sANDBOXDataSet.DataTableFieldSurveyEditable.Columns["linktype"].DefaultValue = "Pipe";
 
             PopulateLinkInfo();
         }
@@ -476,7 +477,14 @@ namespace SWI_2
             if (!Environment.HasShutdownStarted)
             {
                 //yes this redundancy is really necessary
-                dataGridViewLinkInfo.CurrentRow.DataGridView.EndEdit();
+                try
+                {
+                    //sometimes, the user will not have a row selected when they close out.
+                    dataGridViewLinkInfo.CurrentRow.DataGridView.EndEdit();
+                }
+                catch (Exception ex)
+                {
+                }
                 dataGridViewLinkInfo.EndEdit();
                 CurrencyManager cm = (CurrencyManager)dataGridViewLinkInfo.BindingContext[dataGridViewLinkInfo.DataSource, dataGridViewLinkInfo.DataMember];
                 cm.EndCurrentEdit();
@@ -497,6 +505,163 @@ namespace SWI_2
                     translateChangesAndSaveToDatabase();
                 }
 
+            }
+        }
+
+        private void buttonAddMap_Click(object sender, EventArgs e)
+        {
+            int CurrentView = 0;
+            int CurrentSurveyPage = 0;
+            int CurrentWatershed = 0;
+            int CurrentSubwatershed = 0;
+
+            //these error traps need to happen in case someone has deleted all the views or survey pages for the subwatershed
+            try
+            {
+                CurrentView = (int)((System.Data.DataRowView)fKVIEWSUBWATERSHEDBindingSource.Current)["view_number"];
+            }
+            catch (Exception ex)
+            {
+                CurrentView = 0;
+            }
+            try
+            {
+                CurrentSurveyPage = (int)((System.Data.DataRowView)fKSURVEYPAGEVIEWBindingSource.Current)["page_number"];
+            }
+            catch (Exception ex)
+            {
+                CurrentSurveyPage = 0;
+            }
+            try
+            {
+                CurrentWatershed = (int)((System.Data.DataRowView)sWSPWATERSHEDBindingSource.Current)["watershed_id"];
+            }
+            catch (Exception ex)
+            {
+                CurrentWatershed = 0;
+            }
+            try
+            {
+                CurrentSubwatershed = (int)((System.Data.DataRowView)fKSUBWATERSHEDWATERSHEDBindingSource.Current)["subwatershed_id"];
+            }
+            catch (Exception ex)
+            {
+                CurrentSubwatershed = 0;
+            }
+
+            FormAddView child = new FormAddView();
+            this.Enabled = false;
+            child.ShowDialog();
+            // TODO: This line of code loads data into the 'sANDBOXDataSet.SWSP_VIEW' table. You can move, or remove it, as needed.
+            this.sWSP_VIEWTableAdapter.Fill(this.sANDBOXDataSet.SWSP_VIEW);
+            // TODO: This line of code loads data into the 'sANDBOXDataSet.SWSP_SURVEY_PAGE' table. You can move, or remove it, as needed.
+            this.sWSP_SURVEY_PAGETableAdapter.Fill(this.sANDBOXDataSet.SWSP_SURVEY_PAGE);
+            this.Enabled = true;
+            if (CurrentWatershed != 0)
+            {
+                while (CurrentWatershed != (int)((System.Data.DataRowView)sWSPWATERSHEDBindingSource.Current)["watershed_id"])
+                {
+                    sWSPWATERSHEDBindingSource.MoveNext();
+                }
+            }
+            if (CurrentSubwatershed != 0)
+            {
+                while (CurrentSubwatershed != (int)((System.Data.DataRowView)fKSUBWATERSHEDWATERSHEDBindingSource.Current)["subwatershed_id"])
+                {
+                    fKSUBWATERSHEDWATERSHEDBindingSource.MoveNext();
+                }
+            }
+            if (CurrentView != 0)
+            {
+                while (CurrentView != (int)((System.Data.DataRowView)fKVIEWSUBWATERSHEDBindingSource.Current)["view_number"])
+                {
+                    fKVIEWSUBWATERSHEDBindingSource.MoveNext();
+                }
+            }
+            if (CurrentSurveyPage != 0)
+            {
+                while (CurrentSurveyPage != (int)((System.Data.DataRowView)fKSURVEYPAGEVIEWBindingSource.Current)["page_number"])
+                {
+                    fKSURVEYPAGEVIEWBindingSource.MoveNext();
+                }
+            }
+        }
+
+        private void buttonAddSurveyPage_Click(object sender, EventArgs e)
+        {
+            int CurrentView = 0;
+            int CurrentSurveyPage = 0;
+            int CurrentWatershed = 0;
+            int CurrentSubwatershed = 0;
+
+            //these error traps need to happen in case someone has deleted all the views or survey pages for the subwatershed
+            try
+            {
+                CurrentView = (int)((System.Data.DataRowView)fKVIEWSUBWATERSHEDBindingSource.Current)["view_number"];
+            }
+            catch (Exception ex)
+            {
+                CurrentView = 0;
+            }
+            try
+            {
+                CurrentSurveyPage = (int)((System.Data.DataRowView)fKSURVEYPAGEVIEWBindingSource.Current)["page_number"];
+            }
+            catch (Exception ex)
+            {
+                CurrentSurveyPage = 0;
+            }
+            try
+            {
+                CurrentWatershed = (int)((System.Data.DataRowView)sWSPWATERSHEDBindingSource.Current)["watershed_id"];
+            }
+            catch (Exception ex)
+            {
+                CurrentWatershed = 0;
+            }
+            try
+            {
+                CurrentSubwatershed = (int)((System.Data.DataRowView)fKSUBWATERSHEDWATERSHEDBindingSource.Current)["subwatershed_id"];
+            }
+            catch (Exception ex)
+            {
+                CurrentSubwatershed = 0;
+            }
+            FormAddSurvey child = new FormAddSurvey();
+            child.MapNo = (int)((System.Data.DataRowView)comboBoxMapNo.SelectedItem)["view_number"];
+            child.SurveyPage = (int)((System.Data.DataRowView)comboBoxSurveyPage.SelectedItem)["page_number"];
+            this.Enabled = false;
+            child.ShowDialog();
+            // TODO: This line of code loads data into the 'sANDBOXDataSet.SWSP_SURVEY_PAGE' table. You can move, or remove it, as needed.
+            this.sWSP_SURVEY_PAGETableAdapter.Fill(this.sANDBOXDataSet.SWSP_SURVEY_PAGE);
+            this.Enabled = true;
+            if (CurrentWatershed != 0)
+            {
+                while (CurrentWatershed != (int)((System.Data.DataRowView)sWSPWATERSHEDBindingSource.Current)["watershed_id"])
+                {
+                    sWSPWATERSHEDBindingSource.MoveNext();
+                }
+            }
+            if (CurrentSubwatershed != 0)
+            {
+                while (CurrentSubwatershed != (int)((System.Data.DataRowView)fKSUBWATERSHEDWATERSHEDBindingSource.Current)["subwatershed_id"])
+                {
+                    fKSUBWATERSHEDWATERSHEDBindingSource.MoveNext();
+                }
+            }
+            if (CurrentView != 0)
+            {
+                while (CurrentView != (int)((System.Data.DataRowView)fKVIEWSUBWATERSHEDBindingSource.Current)["view_number"])
+                {
+                    fKVIEWSUBWATERSHEDBindingSource.MoveNext();
+                }
+            }
+            if (CurrentSurveyPage != 0)
+            {
+                while (CurrentSurveyPage != (int)((System.Data.DataRowView)fKSURVEYPAGEVIEWBindingSource.Current)["page_number"])
+                {
+                    fKSURVEYPAGEVIEWBindingSource.MoveNext();
+                }
             }
         }
     }
