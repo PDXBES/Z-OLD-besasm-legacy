@@ -214,6 +214,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 				ClearPages();
 				tabMain.SelectedTab = tabMain.Tabs["Home"];
 			}
+
+      SetAppCaption();
 		}
 
 		private void CreateNewProject()
