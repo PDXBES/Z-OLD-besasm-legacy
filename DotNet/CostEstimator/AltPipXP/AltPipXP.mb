@@ -300,7 +300,6 @@ Open table "\\Cassio\modeling\SAMaster_22\Links\mst_Links_ac.TAB" as MLA interac
 		HardArea Integer,
 		uD2Gw Float, dD2Gw Float, 
 		BoreJack Integer, FocusID Char(15) 
-'		HardArea Integer
 		)Interactive
 
 	Close Table QyText
@@ -385,8 +384,7 @@ SUB RunXP
 
 '=======> GOTO TestRun '(ignore line: TEST SHORTCUT-enter before "GOTO") 
 
-
-'============>(Alias,Start, Stop, Step, UpdtFld1, UpdtFld2, UpdtFld3, UpdtFld4, UpdtFld5)
+'=======>(bufftype,doCase,Alias,Start,Stop,Step,UpdtFld1, UpdtFld2, UpdtFld3, UpdtFld4, UpdtFld5)
 	CALL GetXPdat(1,0,"WtrTbl", 	2,12,2,"pWtr","pFt2Wtr", "", "", "")
 	CALL GetXPdat(1,0,"SewerP",	2,10,2,"pSewer","pFt2Swr", "", "", "")
 	CALL GetXPdat(0,1,"StrtTbl",	10,30,10,"pStrt","pFt2Strt", "","", "")
@@ -1209,15 +1207,6 @@ NoXpipes:
 			Open Table "\\Cassio\systemsplanning\8063_CombinedFacPan\Models\Alts\Focus_Areas\MapInfo\Tab\Master_Current\Master_Focus_Areas" 
 				As FocusAreas Interactive
 			Add Column alt_PipXP_ac (FocusID )From FocusAreas Set To FocusArea Where contains
-
-			'UPDATING BoreJack FIELD
-			'BoreJack values 1-n; >0 indicates number of conditions requiring boring or jacking;
-			Select * From alt_PipXP_ac where (uDepth + dDepth)/2 > 30 into QyUpdt Browse * from QyUpdt
-				Update QyUpdt set BoreJack = 1
-			Select * From alt_PipXP_ac where (xFrwy+ xRail + xLRT +xBldg)>0 into QyUpdt Browse * from QyUpdt
-				Update QyUpdt set BoreJack = BoreJack + (xFrwy+ xRail + xLRT +xBldg)
-			Commit table alt_PipXP_ac
-			Close table QyUpdt
 
 			Print "Bore/Jack Info updated " + Time(12)
 
