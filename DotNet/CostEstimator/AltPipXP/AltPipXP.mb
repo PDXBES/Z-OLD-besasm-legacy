@@ -298,9 +298,8 @@ Open table "\\Cassio\modeling\SAMaster_22\Links\mst_Links_ac.TAB" as MLA interac
 		xPol Integer, xFt2Pol Integer, xFire Integer, xFt2Fire Integer,
 		xBldg Integer, xFt2Bldg Integer, xHyd Integer, xFt2Hyd Integer,
 		HardArea Integer,
-		FocusID Char(15), BoreJack Integer,
-		uD2Gw Float, dD2Gw Float 
-'		HardArea Integer
+		uD2Gw Float, dD2Gw Float, 
+		BoreJack Integer, FocusID Char(15) 
 		)Interactive
 
 	Close Table QyText
@@ -359,6 +358,7 @@ FOR iLoop= 1 to tableinfo(QyTblGrp, 8)-1
 	print time(12) + "....." + sCase
 	Open table sTbl as CurTbl interactive
 	Select * from CurTbl where obj intersects oMBR into QySaver
+
 	Commit Table QySaver as sTmpPath + sCase + ".tab" 	TYPE NATIVE Charset "WindowsLatin1"
 	Update QyCurTbl set sText = sTmpPath + sCase + ".tab"
 	Close Table CurTbl
@@ -384,8 +384,7 @@ SUB RunXP
 
 '=======> GOTO TestRun '(ignore line: TEST SHORTCUT-enter before "GOTO") 
 
-
-'============>(Alias,Start, Stop, Step, UpdtFld1, UpdtFld2, UpdtFld3, UpdtFld4, UpdtFld5)
+'=======>(bufftype,doCase,Alias,Start,Stop,Step,UpdtFld1, UpdtFld2, UpdtFld3, UpdtFld4, UpdtFld5)
 	CALL GetXPdat(1,0,"WtrTbl", 	2,12,2,"pWtr","pFt2Wtr", "", "", "")
 	CALL GetXPdat(1,0,"SewerP",	2,10,2,"pSewer","pFt2Swr", "", "", "")
 	CALL GetXPdat(0,1,"StrtTbl",	10,30,10,"pStrt","pFt2Strt", "","", "")
@@ -408,7 +407,6 @@ SUB RunXP
 	CALL GetXPdat(1,0,"Bldg", 		2,10,2,"", "", "xBldg", "xFt2Bldg","")
 	CALL GetXPdat(3,0,"gSlope", 	1,8,1,	"","","", "", "")
 	CALL GetXPdat(1,0,"ECSI", 		10,60,10,	"", "", "xEcsi",	"xFt2Ecsi","")
-
 GOTO NoTest
 TestRun:   '  ====> Start TestRun 
 
@@ -1202,6 +1200,15 @@ NoXpipes:
 				END IF
 
 			Print "Hard Areas Identified " + Time(12)
+
+
+			'UPDATING FocusId FIELD WITH PROJECT AREA NAME
+			'Hard coded path to Focus areas to be revised to be more flexible; insert into ListOfTbls.tab;
+			Open Table "\\Cassio\systemsplanning\8063_CombinedFacPan\Models\Alts\Focus_Areas\MapInfo\Tab\Master_Current\Master_Focus_Areas" 
+				As FocusAreas Interactive
+			Add Column alt_PipXP_ac (FocusID )From FocusAreas Set To FocusArea Where contains
+
+			Print "Bore/Jack Info updated " + Time(12)
 
 	'========================================\
 	END CASE '=== E N D  O F  C A S E S ======>
