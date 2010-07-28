@@ -272,6 +272,8 @@ Open table "\\Cassio\modeling\SAMaster_22\Links\mst_Links_ac.TAB" as MLA interac
 
 '======> replaced 6/24/08		xStorm Integer, xDMinD Integer, xDMaxD Integer, 
 '======> replaced 6/24/08		pStorm Integer, pDMaxD Integer, pFt2Storm Integer,
+'======> added fields 7/21/10		FocusID Char(15), BoreJack Char(5)
+
 	Alter Table OutputTbl 
 		( add
 		MstLinkID integer, COMPKEY integer,
@@ -295,7 +297,10 @@ Open table "\\Cassio\modeling\SAMaster_22\Links\mst_Links_ac.TAB" as MLA interac
 		xSchl Integer, xFt2Schl Integer, xHosp Integer, xFt2Hosp Integer,
 		xPol Integer, xFt2Pol Integer, xFire Integer, xFt2Fire Integer,
 		xBldg Integer, xFt2Bldg Integer, xHyd Integer, xFt2Hyd Integer,
-		HardArea Integer
+		HardArea Integer,
+		FocusID Char(15), BoreJack Integer,
+		uD2Gw Float, dD2Gw Float 
+'		HardArea Integer
 		)Interactive
 
 	Close Table QyText
