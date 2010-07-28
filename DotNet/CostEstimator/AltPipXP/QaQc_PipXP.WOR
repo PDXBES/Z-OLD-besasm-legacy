@@ -2,16 +2,21 @@
 !Version 550
 !Charset WindowsLatin1
 Open Table "alt_PipXP_ac" As alt_PipXP_ac Interactive
-Open Table "\\Cassio\gis3\Projects_Arc\mst_PIPxp\Data\MI\Tbls\WtrTbl" As WATER_Lines Interactive
 Open Table "\\Cassio\systemsplanning\8063_CombinedFacPlan\Models\Alts\Focus_Areas\MapInfo\Tab\Master_Current\Master_Focus_Areas" As Master_Focus_Areas Interactive
-'
-Add Column "alt_PipXP_ac" (FocArea )From Master_Focus_Areas Set To FocusArea Where contains
+
+'UPDATING FocusID FIELD with Project Area Name
+Add Column alt_PipXP_ac (FocusID )From Master_Focus_Areas Set To FocusArea Where contains
+
+'UPDATING BoreJack FIELD
+'BoreJack values 1-n; >0 indicates number of conditions requiring boring or jacking;
 Select * From alt_PipXP_ac where (uDepth + dDepth)/2 > 30 into QyUpdt Browse * from QyUpdt
 Update QyUpdt set BoreJack = 1
 Select * From alt_PipXP_ac where (xFrwy+ xRail + xLRT +xBldg)>0 into QyUpdt Browse * from QyUpdt
 Update QyUpdt set BoreJack = BoreJack + (xFrwy+ xRail + xLRT +xBldg)
+Commit table alt_PipXP_ac
 Close table QyUpdt
-'
+
+Open Table "\\Cassio\gis3\Projects_Arc\mst_PIPxp\Data\MI\Tbls\WtrTbl" As WATER_Lines Interactive
 Open Table "\\Cassio\gis3\Projects_Arc\mst_PIPxp\Data\MI\Tbls\CL_nods" As CL_nods Interactive
 Open Table "\\Cassio\gis3\Projects_Arc\mst_PIPxp\Data\MI\Tbls\DetailedRailroads" As RAILROADS Interactive
 Open Table "\\Cassio\gis3\Projects_Arc\mst_PIPxp\Data\MI\Tbls\emergency_routes_pdx" As EmergencyRoutes Interactive
@@ -327,10 +332,4 @@ Create Cartographic Legend
     Using Column object 
     Style Font ("Arial",1,9,0)
       Text "streets_pdx" Line Pen (4,2,15790320) 
-Browse * From xpPipes
-  Position (0.46875,0.53125) Units "in"
-  Width 7.53125 Units "in" Height 1.875 Units "in" 
-  Row 27 Column 67
-
-Save Workspace as "QaQc_PipXP.WOR"
 

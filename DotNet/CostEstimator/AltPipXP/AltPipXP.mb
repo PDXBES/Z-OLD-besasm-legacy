@@ -298,8 +298,8 @@ Open table "\\Cassio\modeling\SAMaster_22\Links\mst_Links_ac.TAB" as MLA interac
 		xPol Integer, xFt2Pol Integer, xFire Integer, xFt2Fire Integer,
 		xBldg Integer, xFt2Bldg Integer, xHyd Integer, xFt2Hyd Integer,
 		HardArea Integer,
-		FocusID Char(15), BoreJack Integer,
-		uD2Gw Float, dD2Gw Float 
+		uD2Gw Float, dD2Gw Float, 
+		BoreJack Integer, FocusID Char(15) 
 '		HardArea Integer
 		)Interactive
 
@@ -359,6 +359,7 @@ FOR iLoop= 1 to tableinfo(QyTblGrp, 8)-1
 	print time(12) + "....." + sCase
 	Open table sTbl as CurTbl interactive
 	Select * from CurTbl where obj intersects oMBR into QySaver
+
 	Commit Table QySaver as sTmpPath + sCase + ".tab" 	TYPE NATIVE Charset "WindowsLatin1"
 	Update QyCurTbl set sText = sTmpPath + sCase + ".tab"
 	Close Table CurTbl
@@ -408,7 +409,6 @@ SUB RunXP
 	CALL GetXPdat(1,0,"Bldg", 		2,10,2,"", "", "xBldg", "xFt2Bldg","")
 	CALL GetXPdat(3,0,"gSlope", 	1,8,1,	"","","", "", "")
 	CALL GetXPdat(1,0,"ECSI", 		10,60,10,	"", "", "xEcsi",	"xFt2Ecsi","")
-
 GOTO NoTest
 TestRun:   '  ====> Start TestRun 
 
@@ -1202,6 +1202,24 @@ NoXpipes:
 				END IF
 
 			Print "Hard Areas Identified " + Time(12)
+
+
+			'UPDATING FocusId FIELD WITH PROJECT AREA NAME
+			'Hard coded path to Focus areas to be revised to be more flexible; insert into ListOfTbls.tab;
+			Open Table "\\Cassio\systemsplanning\8063_CombinedFacPan\Models\Alts\Focus_Areas\MapInfo\Tab\Master_Current\Master_Focus_Areas" 
+				As FocusAreas Interactive
+			Add Column alt_PipXP_ac (FocusID )From FocusAreas Set To FocusArea Where contains
+
+			'UPDATING BoreJack FIELD
+			'BoreJack values 1-n; >0 indicates number of conditions requiring boring or jacking;
+			Select * From alt_PipXP_ac where (uDepth + dDepth)/2 > 30 into QyUpdt Browse * from QyUpdt
+				Update QyUpdt set BoreJack = 1
+			Select * From alt_PipXP_ac where (xFrwy+ xRail + xLRT +xBldg)>0 into QyUpdt Browse * from QyUpdt
+				Update QyUpdt set BoreJack = BoreJack + (xFrwy+ xRail + xLRT +xBldg)
+			Commit table alt_PipXP_ac
+			Close table QyUpdt
+
+			Print "Bore/Jack Info updated " + Time(12)
 
 	'========================================\
 	END CASE '=== E N D  O F  C A S E S ======>
