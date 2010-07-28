@@ -1149,7 +1149,8 @@ NoXpipes:
 		CASE "gSlope"		'=========================
 			Select AltLinkID, UsNode, DsNode,usie,dsie,
 				usie "USgElev",dsie "DSgElev",
-				Length,USIE "gSlopPct",USIE "xPipSlope"     
+				Length,USIE "gSlopPct",USIE "xPipSlope",
+				USIE "dMHDepth",USIE "uMHDepth"     
 				from inputTbl into QySaver
 			Commit table QySaver as sTmpPath + "SlopeDat.tab"
 				TYPE NATIVE Charset "WindowsLatin1"
@@ -1160,13 +1161,19 @@ NoXpipes:
 			Update QyZeroLen set Length = 0.0001
 			Update  SlopeDat set gSlopPct = 100 * (USgelev-DSgelev)/Length
 			Update  SlopeDat set xPipSlope = (usie-dsie)/Length
+
+			Update  SlopeDat set uMHDepth = USgElev-USIE
+			Update  SlopeDat set dMHDepth = DSgElev-DSIE
+
 			Commit Table SlopeDat interactive
 
 			Add Column AltPips(gSlope) from SlopeDat set to Round(gSlopPct,0)where AltLinkID = AltLinkID
 			Add Column AltPips(xPipSlope) from SlopeDat set to xPipSlope where AltLinkID = AltLinkID
 
-					Add column AltPips(uDepth) from InputTbl set to USIE where col1 = col1
-					Add column AltPips(dDepth) from InputTbl set to DSIE where col1 = col1
+'					Add column AltPips(uDepth) from InputTbl set to USgElev-USIE where col1 = col1
+'					Add column AltPips(dDepth) from InputTbl set to DSgElev-DSIE where col1 = col1
+					Add column AltPips(uDepth) from SlopeDat set to uMHDepth where AltLinkID = AltLinkID
+					Add column AltPips(dDepth) from SlopeDat set to dMHDepth where AltLinkID = AltLinkID
 
 			Close Table NodTbl
 			Close Table SlopeDat
