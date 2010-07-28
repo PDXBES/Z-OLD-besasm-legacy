@@ -240,6 +240,10 @@ Set Map
       With SUMPID1
       Parallel On Auto Off Overlap Off Duplicates On Offset 2
       Visibility On
+
+Set Map Window frontwindow() Zoom Entire Layer 18
+Set Window frontwindow() Title "Main Map"
+
 Create Cartographic Legend
   Position (8.19792,0.114583) Units "in"
   Width 2.76042 Units "in" Height 5 Units "in" 
@@ -333,3 +337,4 @@ Create Cartographic Legend
     Style Font ("Arial",1,9,0)
       Text "streets_pdx" Line Pen (4,2,15790320) 
 
+Run Menu command 304
