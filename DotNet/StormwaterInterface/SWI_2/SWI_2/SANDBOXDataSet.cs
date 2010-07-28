@@ -2,6 +2,22 @@
     
     
     public partial class SANDBOXDataSet {
+        partial class SWSP_PIPEDataTable
+        {
+        }
+    
+        partial class DataTableFieldSurveyDataTable
+        {
+      }
+    
+        partial class SWSP_MESH1DataTable
+        {
+        }
+    
+        partial class SWSP_MATERIAL_TYPEDataTable
+        {
+        }
+    
         partial class SWSP_SURVEY_PAGEDataTable
         {
         }
@@ -14,3 +30,10 @@
 
 
 
+
+namespace SWI_2.SANDBOXDataSetTableAdapters {
+    
+    
+    public partial class SWSP_CULVERTTableAdapter {
+    }
+}
