@@ -3,7 +3,7 @@
 // Path: C:\Development\CostEstimatorV2\UI, Author: Arnel
 // Code lines: 29, Size of file: 486 Bytes
 // Creation date: 3/21/2008 4:00 AM
-// Last modified: 8/18/2009 2:55 PM
+// Last modified: 7/29/2010 4:24 PM
 
 #region Using directives
 using System;
@@ -875,7 +875,37 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 			}
 		}
 
-		private void dsProject_RowEndEdit(object sender, RowEndEditEventArgs e)
+    private static void CompileReportGenericData(CostItemFactor costItemFactor)
+    {
+      ReportGenericItem reportItem = costItemFactor.Data as ReportGenericItem;
+      reportItem.Name = costItemFactor.Name;
+      reportItem.Quantity = costItemFactor.Quantity;
+      reportItem.UnitName = costItemFactor.CostItem != null ?
+        costItemFactor.CostItem.UnitName : "ea";
+      reportItem.UnitPrice = costItemFactor.CostItem != null ?
+        (decimal)((double)costItemFactor.CostItem.UnitCost *
+        costItemFactor.Factor) : costItemFactor.Cost;
+      reportItem.Group = "General";
+      reportItem.Item = costItemFactor;
+      reportItem.Comment = costItemFactor.Comment ?? string.Empty;
+    }
+
+    private static void CompileReportInflowControlData(CostItemFactor costItemFactor)
+    {
+      ReportInflowControlItem reportItem = costItemFactor.Data as ReportInflowControlItem;
+      reportItem.Name = costItemFactor.Name;
+      reportItem.Comment = costItemFactor.Comment ?? string.Empty;
+      reportItem.Cost = costItemFactor.Cost;
+    }
+
+    private static void CompileReportPipeData(CostItemFactor costItemFactor)
+    {
+      ReportPipeItem reportItem = costItemFactor.Data as ReportPipeItem;
+      reportItem.Name = costItemFactor.Name;
+      reportItem.Comment = costItemFactor.Comment ?? string.Empty;
+    }
+
+    private void dsProject_RowEndEdit(object sender, RowEndEditEventArgs e)
 		{
 			string bandName = BandOfRow(e.Row);
 			CostItemFactor costItemFactor = null;
@@ -890,37 +920,33 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 					switch (costItemFactor.ReportItemType)
 					{
 						case ReportItemType.Generic:
-							{
-								ReportGenericItem reportItem = costItemFactor.Data as ReportGenericItem;
-								reportItem.Name = costItemFactor.Name;
-								reportItem.Quantity = costItemFactor.Quantity;
-								reportItem.UnitName = costItemFactor.CostItem != null ?
-									costItemFactor.CostItem.UnitName : "ea";
-								reportItem.UnitPrice = costItemFactor.CostItem != null ?
-									(decimal)((double)costItemFactor.CostItem.UnitCost *
-									costItemFactor.Factor) : costItemFactor.Cost;
-								reportItem.Group = "General";
-								reportItem.Item = costItemFactor;
-								reportItem.Comment = costItemFactor.Comment ?? string.Empty;
-							}
+              CompileReportGenericData(costItemFactor);
 							break;
 						case ReportItemType.InflowControl:
-							{
-								ReportInflowControlItem reportItem = costItemFactor.Data as ReportInflowControlItem;
-								reportItem.Name = costItemFactor.Name;
-								reportItem.Comment = costItemFactor.Comment ?? string.Empty;
-								reportItem.Cost = costItemFactor.Cost;
-							} // block
+              CompileReportInflowControlData(costItemFactor);
 							break;
 						case ReportItemType.Pipe:
-							{
-								ReportPipeItem reportItem = costItemFactor.Data as ReportPipeItem;
-								reportItem.Name = costItemFactor.Name;
-								reportItem.Comment = costItemFactor.Comment ?? string.Empty;
-							} // block
+              CompileReportPipeData(costItemFactor);
 							break;
 					}
 					break;
+        case "CostItem":
+          {
+            CostItemFactor currentCIF = GetCostItemFactor(e.Row);
+            switch (currentCIF.ReportItemType)
+            {
+              case ReportItemType.Generic:
+                CompileReportGenericData(currentCIF);
+                break;
+              case ReportItemType.InflowControl:
+                CompileReportInflowControlData(currentCIF);
+                break;
+              case ReportItemType.Pipe:
+                CompileReportPipeData(currentCIF);
+                break;
+            }
+          } // block
+          break;
 			}
 
 			dsProject.ResetCachedValues();

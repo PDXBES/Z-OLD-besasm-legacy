@@ -25,6 +25,7 @@ using Infragistics.Win.AppStyling;
 using SystemsAnalysis.Utils.MapInfoUtils;
 using SystemsAnalysis.Analysis.CostEstimator.Classes;
 using SystemsAnalysis.Modeling;
+using System.Diagnostics;
 #endregion
 
 namespace SystemsAnalysis.Analysis.CostEstimator.UI
@@ -613,6 +614,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 					} // try
 					catch (System.Data.OleDb.OleDbException e)
 					{
+            Debug.WriteLine("CleanupPipXP: DROP TABLE mdl_pipxp_ac threw an "+
+              "exception: " + e.Message);
 					}
         }
 				// catch
@@ -752,7 +755,9 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 			}
 			catch (System.Data.OleDb.OleDbException e)
 			{
-			} // catch
+        Debug.WriteLine("CleanupPipXP: DROP TABLE mdl_pipxp_ac threw an " +
+          "exception: " + e.Message);
+      } // catch
 			altPackageConn.Close();
 		} // CleanupAltPipXP(altInfo)
 
@@ -1089,10 +1094,12 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 					} // try
 					catch (System.Deployment.Application.InvalidDeploymentException ex)
 					{
-					} // catch
+            Debug.WriteLine("Main_Load: threw an exception: " + ex.Message);
+          } // catch
 					catch (Exception ex)
 					{
-						MessageBox.Show("Exception:\n" + ex.Message);
+            Debug.WriteLine("Main_Load: threw an exception: " + ex.Message);
+            MessageBox.Show("Exception:\n" + ex.Message);
 					} // catch
 				} // if
 

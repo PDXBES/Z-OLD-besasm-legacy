@@ -30,40 +30,40 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 		{
       this.components = new System.ComponentModel.Container();
       Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand2 = new Infragistics.Win.UltraWinGrid.UltraGridBand("PipeCosterSettings", -1);
-      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn3 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Name");
-      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn4 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Params");
-      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn5 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ConcretePipe");
-      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn6 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("PVCHDPE");
-      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn7 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("CIPP");
-      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn8 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Pipeburst");
-      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn9 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Lateral");
-      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn10 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Manhole");
-      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn11 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FlowDiversion");
+      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn31 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Name");
+      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn32 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Params");
+      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn33 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ConcretePipe");
+      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn34 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("PVCHDPE");
+      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn35 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("CIPP");
+      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn36 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Pipeburst");
+      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn37 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Lateral");
+      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn38 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Manhole");
+      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn39 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FlowDiversion");
       Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand3 = new Infragistics.Win.UltraWinGrid.UltraGridBand("Params", 0);
-      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn12 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Name");
-      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn13 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Value");
+      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn40 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Name");
+      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn41 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Value");
       Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand4 = new Infragistics.Win.UltraWinGrid.UltraGridBand("ConcretePipe", 0);
-      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn14 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Name");
-      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn15 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Value");
+      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn42 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Name");
+      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn43 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Value");
       Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand5 = new Infragistics.Win.UltraWinGrid.UltraGridBand("PVCHDPE", 0);
-      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn16 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Name");
-      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn17 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Value");
+      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn44 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Name");
+      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn45 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Value");
       Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand6 = new Infragistics.Win.UltraWinGrid.UltraGridBand("CIPP", 0);
-      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn18 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Name");
-      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn19 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Value");
+      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn46 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Name");
+      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn47 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Value");
       Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand7 = new Infragistics.Win.UltraWinGrid.UltraGridBand("Pipeburst", 0);
-      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn20 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Name");
-      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn21 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Value");
+      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn48 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Name");
+      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn49 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Value");
       Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand8 = new Infragistics.Win.UltraWinGrid.UltraGridBand("Lateral", 0);
-      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn22 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Name");
-      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn23 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Value");
+      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn50 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Name");
+      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn51 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Value");
       Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand9 = new Infragistics.Win.UltraWinGrid.UltraGridBand("Manhole", 0);
-      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn24 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Name");
-      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn25 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("MinimumCost");
-      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn26 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("CostPerFtDepthAbove8Ft");
+      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn52 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Name");
+      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn53 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("MinimumCost");
+      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn54 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("CostPerFtDepthAbove8Ft");
       Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand10 = new Infragistics.Win.UltraWinGrid.UltraGridBand("FlowDiversion", 0);
-      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn27 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Name");
-      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn28 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Value");
+      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn55 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Name");
+      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn56 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Value");
       Infragistics.Win.Layout.GridBagConstraint gridBagConstraint20 = new Infragistics.Win.Layout.GridBagConstraint();
       Infragistics.Win.UltraWinDataSource.UltraDataBand ultraDataBand1 = new Infragistics.Win.UltraWinDataSource.UltraDataBand("Params");
       Infragistics.Win.UltraWinDataSource.UltraDataColumn ultraDataColumn3 = new Infragistics.Win.UltraWinDataSource.UltraDataColumn("Name");
@@ -93,9 +93,9 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       Infragistics.Win.UltraWinDataSource.UltraDataColumn ultraDataColumn20 = new Infragistics.Win.UltraWinDataSource.UltraDataColumn("Name");
       Infragistics.Win.Layout.GridBagConstraint gridBagConstraint21 = new Infragistics.Win.Layout.GridBagConstraint();
       Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand1 = new Infragistics.Win.UltraWinGrid.UltraGridBand("InflowControlCosterParameters", -1);
-      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn1 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Name");
-      Infragistics.Win.Appearance appearance5 = new Infragistics.Win.Appearance();
-      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn2 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Value");
+      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn29 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Name");
+      Infragistics.Win.Appearance appearance6 = new Infragistics.Win.Appearance();
+      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn30 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Value");
       Infragistics.Win.UltraWinDataSource.UltraDataColumn ultraDataColumn1 = new Infragistics.Win.UltraWinDataSource.UltraDataColumn("Name");
       Infragistics.Win.UltraWinDataSource.UltraDataColumn ultraDataColumn2 = new Infragistics.Win.UltraWinDataSource.UltraDataColumn("Value");
       Infragistics.Win.Layout.GridBagConstraint gridBagConstraint12 = new Infragistics.Win.Layout.GridBagConstraint();
@@ -244,6 +244,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       this.tabMain = new Infragistics.Win.UltraWinTabControl.UltraTabControl();
       this.ultraTabSharedControlsPage1 = new Infragistics.Win.UltraWinTabControl.UltraTabSharedControlsPage();
       this._Main_Toolbars_Dock_Area_Left = new Infragistics.Win.UltraWinToolbars.UltraToolbarsDockArea();
+      this.toolbarManager = new Infragistics.Win.UltraWinToolbars.UltraToolbarsManager(this.components);
       this._Main_Toolbars_Dock_Area_Right = new Infragistics.Win.UltraWinToolbars.UltraToolbarsDockArea();
       this._Main_Toolbars_Dock_Area_Top = new Infragistics.Win.UltraWinToolbars.UltraToolbarsDockArea();
       this._Main_Toolbars_Dock_Area_Bottom = new Infragistics.Win.UltraWinToolbars.UltraToolbarsDockArea();
@@ -251,7 +252,6 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       this.bkgWorkerLoadAlternative = new System.ComponentModel.BackgroundWorker();
       this.dlgSave = new System.Windows.Forms.SaveFileDialog();
       this.bkgWorkerLoadModel = new System.ComponentModel.BackgroundWorker();
-      this.toolbarManager = new Infragistics.Win.UltraWinToolbars.UltraToolbarsManager(this.components);
       this.ultraTabPageControl9.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.ultraGridBagLayoutPanel8)).BeginInit();
       this.ultraGridBagLayoutPanel8.SuspendLayout();
@@ -313,116 +313,116 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       this.gridGlobalPipeSettings.CalcManager = this.ultraCalcManager1;
       this.gridGlobalPipeSettings.DataSource = this.dsGlobalPipeSettings;
       this.gridGlobalPipeSettings.DisplayLayout.AutoFitStyle = Infragistics.Win.UltraWinGrid.AutoFitStyle.ResizeAllColumns;
-      ultraGridColumn3.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-      ultraGridColumn3.Header.VisiblePosition = 0;
-      ultraGridColumn3.Width = 723;
-      ultraGridColumn4.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-      ultraGridColumn4.Header.VisiblePosition = 1;
-      ultraGridColumn5.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-      ultraGridColumn5.Header.VisiblePosition = 2;
-      ultraGridColumn6.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-      ultraGridColumn6.Header.VisiblePosition = 5;
-      ultraGridColumn7.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-      ultraGridColumn7.Header.VisiblePosition = 3;
-      ultraGridColumn8.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-      ultraGridColumn8.Header.VisiblePosition = 4;
-      ultraGridColumn9.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-      ultraGridColumn9.Header.VisiblePosition = 6;
-      ultraGridColumn10.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-      ultraGridColumn10.Header.VisiblePosition = 7;
-      ultraGridColumn11.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-      ultraGridColumn11.Header.VisiblePosition = 8;
+      ultraGridColumn31.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+      ultraGridColumn31.Header.VisiblePosition = 0;
+      ultraGridColumn31.Width = 723;
+      ultraGridColumn32.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+      ultraGridColumn32.Header.VisiblePosition = 1;
+      ultraGridColumn33.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+      ultraGridColumn33.Header.VisiblePosition = 2;
+      ultraGridColumn34.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+      ultraGridColumn34.Header.VisiblePosition = 5;
+      ultraGridColumn35.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+      ultraGridColumn35.Header.VisiblePosition = 3;
+      ultraGridColumn36.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+      ultraGridColumn36.Header.VisiblePosition = 4;
+      ultraGridColumn37.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+      ultraGridColumn37.Header.VisiblePosition = 6;
+      ultraGridColumn38.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+      ultraGridColumn38.Header.VisiblePosition = 7;
+      ultraGridColumn39.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+      ultraGridColumn39.Header.VisiblePosition = 8;
       ultraGridBand2.Columns.AddRange(new object[] {
-            ultraGridColumn3,
-            ultraGridColumn4,
-            ultraGridColumn5,
-            ultraGridColumn6,
-            ultraGridColumn7,
-            ultraGridColumn8,
-            ultraGridColumn9,
-            ultraGridColumn10,
-            ultraGridColumn11});
-      ultraGridColumn12.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-      ultraGridColumn12.Header.VisiblePosition = 0;
-      ultraGridColumn12.Width = 618;
-      ultraGridColumn13.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-      ultraGridColumn13.Header.VisiblePosition = 1;
-      ultraGridColumn13.Width = 86;
+            ultraGridColumn31,
+            ultraGridColumn32,
+            ultraGridColumn33,
+            ultraGridColumn34,
+            ultraGridColumn35,
+            ultraGridColumn36,
+            ultraGridColumn37,
+            ultraGridColumn38,
+            ultraGridColumn39});
+      ultraGridColumn40.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+      ultraGridColumn40.Header.VisiblePosition = 0;
+      ultraGridColumn40.Width = 618;
+      ultraGridColumn41.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+      ultraGridColumn41.Header.VisiblePosition = 1;
+      ultraGridColumn41.Width = 86;
       ultraGridBand3.Columns.AddRange(new object[] {
-            ultraGridColumn12,
-            ultraGridColumn13});
+            ultraGridColumn40,
+            ultraGridColumn41});
       ultraGridBand3.HeaderVisible = true;
-      ultraGridColumn14.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-      ultraGridColumn14.Header.VisiblePosition = 0;
-      ultraGridColumn14.Width = 618;
-      ultraGridColumn15.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-      ultraGridColumn15.Header.VisiblePosition = 1;
-      ultraGridColumn15.Width = 86;
+      ultraGridColumn42.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+      ultraGridColumn42.Header.VisiblePosition = 0;
+      ultraGridColumn42.Width = 618;
+      ultraGridColumn43.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+      ultraGridColumn43.Header.VisiblePosition = 1;
+      ultraGridColumn43.Width = 86;
       ultraGridBand4.Columns.AddRange(new object[] {
-            ultraGridColumn14,
-            ultraGridColumn15});
+            ultraGridColumn42,
+            ultraGridColumn43});
       ultraGridBand4.HeaderVisible = true;
-      ultraGridColumn16.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-      ultraGridColumn16.Header.VisiblePosition = 0;
-      ultraGridColumn16.Width = 618;
-      ultraGridColumn17.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-      ultraGridColumn17.Header.VisiblePosition = 1;
-      ultraGridColumn17.Width = 86;
+      ultraGridColumn44.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+      ultraGridColumn44.Header.VisiblePosition = 0;
+      ultraGridColumn44.Width = 618;
+      ultraGridColumn45.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+      ultraGridColumn45.Header.VisiblePosition = 1;
+      ultraGridColumn45.Width = 86;
       ultraGridBand5.Columns.AddRange(new object[] {
-            ultraGridColumn16,
-            ultraGridColumn17});
+            ultraGridColumn44,
+            ultraGridColumn45});
       ultraGridBand5.HeaderVisible = true;
-      ultraGridColumn18.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-      ultraGridColumn18.Header.VisiblePosition = 0;
-      ultraGridColumn18.Width = 618;
-      ultraGridColumn19.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-      ultraGridColumn19.Header.VisiblePosition = 1;
-      ultraGridColumn19.Width = 86;
+      ultraGridColumn46.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+      ultraGridColumn46.Header.VisiblePosition = 0;
+      ultraGridColumn46.Width = 618;
+      ultraGridColumn47.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+      ultraGridColumn47.Header.VisiblePosition = 1;
+      ultraGridColumn47.Width = 86;
       ultraGridBand6.Columns.AddRange(new object[] {
-            ultraGridColumn18,
-            ultraGridColumn19});
+            ultraGridColumn46,
+            ultraGridColumn47});
       ultraGridBand6.HeaderVisible = true;
-      ultraGridColumn20.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-      ultraGridColumn20.Header.VisiblePosition = 0;
-      ultraGridColumn20.Width = 618;
-      ultraGridColumn21.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-      ultraGridColumn21.Header.VisiblePosition = 1;
-      ultraGridColumn21.Width = 86;
+      ultraGridColumn48.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+      ultraGridColumn48.Header.VisiblePosition = 0;
+      ultraGridColumn48.Width = 618;
+      ultraGridColumn49.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+      ultraGridColumn49.Header.VisiblePosition = 1;
+      ultraGridColumn49.Width = 86;
       ultraGridBand7.Columns.AddRange(new object[] {
-            ultraGridColumn20,
-            ultraGridColumn21});
+            ultraGridColumn48,
+            ultraGridColumn49});
       ultraGridBand7.HeaderVisible = true;
-      ultraGridColumn22.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-      ultraGridColumn22.Header.VisiblePosition = 0;
-      ultraGridColumn22.Width = 609;
-      ultraGridColumn23.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-      ultraGridColumn23.Header.VisiblePosition = 1;
-      ultraGridColumn23.Width = 95;
+      ultraGridColumn50.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+      ultraGridColumn50.Header.VisiblePosition = 0;
+      ultraGridColumn50.Width = 609;
+      ultraGridColumn51.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+      ultraGridColumn51.Header.VisiblePosition = 1;
+      ultraGridColumn51.Width = 95;
       ultraGridBand8.Columns.AddRange(new object[] {
-            ultraGridColumn22,
-            ultraGridColumn23});
-      ultraGridColumn24.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-      ultraGridColumn24.Header.VisiblePosition = 0;
-      ultraGridColumn24.Width = 528;
-      ultraGridColumn25.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-      ultraGridColumn25.Header.VisiblePosition = 1;
-      ultraGridColumn25.Width = 81;
-      ultraGridColumn26.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-      ultraGridColumn26.Header.VisiblePosition = 2;
-      ultraGridColumn26.Width = 95;
+            ultraGridColumn50,
+            ultraGridColumn51});
+      ultraGridColumn52.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+      ultraGridColumn52.Header.VisiblePosition = 0;
+      ultraGridColumn52.Width = 528;
+      ultraGridColumn53.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+      ultraGridColumn53.Header.VisiblePosition = 1;
+      ultraGridColumn53.Width = 81;
+      ultraGridColumn54.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+      ultraGridColumn54.Header.VisiblePosition = 2;
+      ultraGridColumn54.Width = 95;
       ultraGridBand9.Columns.AddRange(new object[] {
-            ultraGridColumn24,
-            ultraGridColumn25,
-            ultraGridColumn26});
-      ultraGridColumn27.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-      ultraGridColumn27.Header.VisiblePosition = 0;
-      ultraGridColumn27.Width = 609;
-      ultraGridColumn28.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-      ultraGridColumn28.Header.VisiblePosition = 1;
-      ultraGridColumn28.Width = 95;
+            ultraGridColumn52,
+            ultraGridColumn53,
+            ultraGridColumn54});
+      ultraGridColumn55.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+      ultraGridColumn55.Header.VisiblePosition = 0;
+      ultraGridColumn55.Width = 609;
+      ultraGridColumn56.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+      ultraGridColumn56.Header.VisiblePosition = 1;
+      ultraGridColumn56.Width = 95;
       ultraGridBand10.Columns.AddRange(new object[] {
-            ultraGridColumn27,
-            ultraGridColumn28});
+            ultraGridColumn55,
+            ultraGridColumn56});
       this.gridGlobalPipeSettings.DisplayLayout.BandsSerializer.Add(ultraGridBand2);
       this.gridGlobalPipeSettings.DisplayLayout.BandsSerializer.Add(ultraGridBand3);
       this.gridGlobalPipeSettings.DisplayLayout.BandsSerializer.Add(ultraGridBand4);
@@ -518,18 +518,18 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       this.gridGlobalInflowControlSettings.CalcManager = this.ultraCalcManager1;
       this.gridGlobalInflowControlSettings.DataSource = this.dsGlobalInflowControlSettings;
       this.gridGlobalInflowControlSettings.DisplayLayout.AutoFitStyle = Infragistics.Win.UltraWinGrid.AutoFitStyle.ResizeAllColumns;
-      ultraGridColumn1.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-      ultraGridColumn1.CellActivation = Infragistics.Win.UltraWinGrid.Activation.NoEdit;
-      appearance5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-      ultraGridColumn1.CellAppearance = appearance5;
-      ultraGridColumn1.Header.VisiblePosition = 0;
-      ultraGridColumn1.Width = 371;
-      ultraGridColumn2.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
-      ultraGridColumn2.Header.VisiblePosition = 1;
-      ultraGridColumn2.Width = 371;
+      ultraGridColumn29.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+      ultraGridColumn29.CellActivation = Infragistics.Win.UltraWinGrid.Activation.NoEdit;
+      appearance6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+      ultraGridColumn29.CellAppearance = appearance6;
+      ultraGridColumn29.Header.VisiblePosition = 0;
+      ultraGridColumn29.Width = 371;
+      ultraGridColumn30.AutoCompleteMode = Infragistics.Win.AutoCompleteMode.Append;
+      ultraGridColumn30.Header.VisiblePosition = 1;
+      ultraGridColumn30.Width = 371;
       ultraGridBand1.Columns.AddRange(new object[] {
-            ultraGridColumn1,
-            ultraGridColumn2});
+            ultraGridColumn29,
+            ultraGridColumn30});
       this.gridGlobalInflowControlSettings.DisplayLayout.BandsSerializer.Add(ultraGridBand1);
       this.gridGlobalInflowControlSettings.DisplayLayout.CaptionVisible = Infragistics.Win.DefaultableBoolean.False;
       this.gridGlobalInflowControlSettings.DisplayLayout.ScrollStyle = Infragistics.Win.UltraWinGrid.ScrollStyle.Immediate;
@@ -1122,55 +1122,6 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       this._Main_Toolbars_Dock_Area_Left.Size = new System.Drawing.Size(4, 510);
       this._Main_Toolbars_Dock_Area_Left.ToolbarsManager = this.toolbarManager;
       // 
-      // _Main_Toolbars_Dock_Area_Right
-      // 
-      this._Main_Toolbars_Dock_Area_Right.AccessibleRole = System.Windows.Forms.AccessibleRole.Grouping;
-      this._Main_Toolbars_Dock_Area_Right.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(219)))), ((int)(((byte)(255)))));
-      this._Main_Toolbars_Dock_Area_Right.DockedPosition = Infragistics.Win.UltraWinToolbars.DockedPosition.Right;
-      this._Main_Toolbars_Dock_Area_Right.ForeColor = System.Drawing.SystemColors.ControlText;
-      this._Main_Toolbars_Dock_Area_Right.InitialResizeAreaExtent = 4;
-      this._Main_Toolbars_Dock_Area_Right.Location = new System.Drawing.Point(896, 150);
-      this._Main_Toolbars_Dock_Area_Right.Name = "_Main_Toolbars_Dock_Area_Right";
-      this._Main_Toolbars_Dock_Area_Right.Size = new System.Drawing.Size(4, 510);
-      this._Main_Toolbars_Dock_Area_Right.ToolbarsManager = this.toolbarManager;
-      // 
-      // _Main_Toolbars_Dock_Area_Top
-      // 
-      this._Main_Toolbars_Dock_Area_Top.AccessibleRole = System.Windows.Forms.AccessibleRole.Grouping;
-      this._Main_Toolbars_Dock_Area_Top.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(219)))), ((int)(((byte)(255)))));
-      this._Main_Toolbars_Dock_Area_Top.DockedPosition = Infragistics.Win.UltraWinToolbars.DockedPosition.Top;
-      this._Main_Toolbars_Dock_Area_Top.ForeColor = System.Drawing.SystemColors.ControlText;
-      this._Main_Toolbars_Dock_Area_Top.Location = new System.Drawing.Point(0, 0);
-      this._Main_Toolbars_Dock_Area_Top.Name = "_Main_Toolbars_Dock_Area_Top";
-      this._Main_Toolbars_Dock_Area_Top.Size = new System.Drawing.Size(900, 150);
-      this._Main_Toolbars_Dock_Area_Top.ToolbarsManager = this.toolbarManager;
-      // 
-      // _Main_Toolbars_Dock_Area_Bottom
-      // 
-      this._Main_Toolbars_Dock_Area_Bottom.AccessibleRole = System.Windows.Forms.AccessibleRole.Grouping;
-      this._Main_Toolbars_Dock_Area_Bottom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(219)))), ((int)(((byte)(255)))));
-      this._Main_Toolbars_Dock_Area_Bottom.DockedPosition = Infragistics.Win.UltraWinToolbars.DockedPosition.Bottom;
-      this._Main_Toolbars_Dock_Area_Bottom.ForeColor = System.Drawing.SystemColors.ControlText;
-      this._Main_Toolbars_Dock_Area_Bottom.InitialResizeAreaExtent = 4;
-      this._Main_Toolbars_Dock_Area_Bottom.Location = new System.Drawing.Point(0, 660);
-      this._Main_Toolbars_Dock_Area_Bottom.Name = "_Main_Toolbars_Dock_Area_Bottom";
-      this._Main_Toolbars_Dock_Area_Bottom.Size = new System.Drawing.Size(900, 4);
-      this._Main_Toolbars_Dock_Area_Bottom.ToolbarsManager = this.toolbarManager;
-      // 
-      // bkgWorkerLoadAlternative
-      // 
-      this.bkgWorkerLoadAlternative.WorkerReportsProgress = true;
-      this.bkgWorkerLoadAlternative.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bkgWorkerLoadAlternative_DoWork);
-      this.bkgWorkerLoadAlternative.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bkgWorkerLoadAlternative_RunWorkerCompleted);
-      this.bkgWorkerLoadAlternative.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bkgWorkerLoadAlternative_ProgressChanged);
-      // 
-      // bkgWorkerLoadModel
-      // 
-      this.bkgWorkerLoadModel.WorkerReportsProgress = true;
-      this.bkgWorkerLoadModel.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bkgWorkerLoadModel_DoWork);
-      this.bkgWorkerLoadModel.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bkgWorkerLoadModel_RunWorkerCompleted);
-      this.bkgWorkerLoadModel.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bkgWorkerLoadModel_ProgressChanged);
-      // 
       // toolbarManager
       // 
       this.toolbarManager.DesignerFlags = 1;
@@ -1285,6 +1236,55 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
             listTool2,
             buttonTool36});
       this.toolbarManager.ToolClick += new Infragistics.Win.UltraWinToolbars.ToolClickEventHandler(this.toolbarManager_ToolClick);
+      // 
+      // _Main_Toolbars_Dock_Area_Right
+      // 
+      this._Main_Toolbars_Dock_Area_Right.AccessibleRole = System.Windows.Forms.AccessibleRole.Grouping;
+      this._Main_Toolbars_Dock_Area_Right.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(219)))), ((int)(((byte)(255)))));
+      this._Main_Toolbars_Dock_Area_Right.DockedPosition = Infragistics.Win.UltraWinToolbars.DockedPosition.Right;
+      this._Main_Toolbars_Dock_Area_Right.ForeColor = System.Drawing.SystemColors.ControlText;
+      this._Main_Toolbars_Dock_Area_Right.InitialResizeAreaExtent = 4;
+      this._Main_Toolbars_Dock_Area_Right.Location = new System.Drawing.Point(896, 150);
+      this._Main_Toolbars_Dock_Area_Right.Name = "_Main_Toolbars_Dock_Area_Right";
+      this._Main_Toolbars_Dock_Area_Right.Size = new System.Drawing.Size(4, 510);
+      this._Main_Toolbars_Dock_Area_Right.ToolbarsManager = this.toolbarManager;
+      // 
+      // _Main_Toolbars_Dock_Area_Top
+      // 
+      this._Main_Toolbars_Dock_Area_Top.AccessibleRole = System.Windows.Forms.AccessibleRole.Grouping;
+      this._Main_Toolbars_Dock_Area_Top.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(219)))), ((int)(((byte)(255)))));
+      this._Main_Toolbars_Dock_Area_Top.DockedPosition = Infragistics.Win.UltraWinToolbars.DockedPosition.Top;
+      this._Main_Toolbars_Dock_Area_Top.ForeColor = System.Drawing.SystemColors.ControlText;
+      this._Main_Toolbars_Dock_Area_Top.Location = new System.Drawing.Point(0, 0);
+      this._Main_Toolbars_Dock_Area_Top.Name = "_Main_Toolbars_Dock_Area_Top";
+      this._Main_Toolbars_Dock_Area_Top.Size = new System.Drawing.Size(900, 150);
+      this._Main_Toolbars_Dock_Area_Top.ToolbarsManager = this.toolbarManager;
+      // 
+      // _Main_Toolbars_Dock_Area_Bottom
+      // 
+      this._Main_Toolbars_Dock_Area_Bottom.AccessibleRole = System.Windows.Forms.AccessibleRole.Grouping;
+      this._Main_Toolbars_Dock_Area_Bottom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(219)))), ((int)(((byte)(255)))));
+      this._Main_Toolbars_Dock_Area_Bottom.DockedPosition = Infragistics.Win.UltraWinToolbars.DockedPosition.Bottom;
+      this._Main_Toolbars_Dock_Area_Bottom.ForeColor = System.Drawing.SystemColors.ControlText;
+      this._Main_Toolbars_Dock_Area_Bottom.InitialResizeAreaExtent = 4;
+      this._Main_Toolbars_Dock_Area_Bottom.Location = new System.Drawing.Point(0, 660);
+      this._Main_Toolbars_Dock_Area_Bottom.Name = "_Main_Toolbars_Dock_Area_Bottom";
+      this._Main_Toolbars_Dock_Area_Bottom.Size = new System.Drawing.Size(900, 4);
+      this._Main_Toolbars_Dock_Area_Bottom.ToolbarsManager = this.toolbarManager;
+      // 
+      // bkgWorkerLoadAlternative
+      // 
+      this.bkgWorkerLoadAlternative.WorkerReportsProgress = true;
+      this.bkgWorkerLoadAlternative.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bkgWorkerLoadAlternative_DoWork);
+      this.bkgWorkerLoadAlternative.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bkgWorkerLoadAlternative_RunWorkerCompleted);
+      this.bkgWorkerLoadAlternative.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bkgWorkerLoadAlternative_ProgressChanged);
+      // 
+      // bkgWorkerLoadModel
+      // 
+      this.bkgWorkerLoadModel.WorkerReportsProgress = true;
+      this.bkgWorkerLoadModel.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bkgWorkerLoadModel_DoWork);
+      this.bkgWorkerLoadModel.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bkgWorkerLoadModel_RunWorkerCompleted);
+      this.bkgWorkerLoadModel.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bkgWorkerLoadModel_ProgressChanged);
       // 
       // Main
       // 
