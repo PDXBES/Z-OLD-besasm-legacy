@@ -13,6 +13,9 @@ using System.Text;
 
 namespace SystemsAnalysis.Analysis.CostEstimator.UI
 {
+  /// <summary>
+  /// Holds information about an estimate item
+  /// </summary>
 	public class EstimateItemSelection
 	{
 		#region Variables
