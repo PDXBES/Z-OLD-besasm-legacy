@@ -29,6 +29,9 @@ using SystemsAnalysis.Modeling;
 
 namespace SystemsAnalysis.Analysis.CostEstimator.UI
 {
+  /// <summary>
+  /// Main form
+  /// </summary>
 	public partial class Main : Form
 	{
 		#region Constants

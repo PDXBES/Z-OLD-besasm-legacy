@@ -20,7 +20,14 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 	public struct SelectedAlternative
 	{
 		#region Variables
-		private string _ModelPath;
+		/// <summary>
+		/// The model path
+		/// </summary>
+    private string _ModelPath;
+
+    /// <summary>
+    /// The name of the alternative
+    /// </summary>
 		public string AlternativeName;
 		#endregion
 
@@ -46,7 +53,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 		/// <summary>
 		/// Alternative path
 		/// </summary>
-		/// <returns>String</returns>
+		/// <returns>Alternative path</returns>
 		public string AlternativePath
 		{
 			get
@@ -58,11 +65,21 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 		#endregion
 
 		#region Methods
-		public SelectedAlternative(string modelPath, string alternativeName)
+		/// <summary>
+		/// Constructs a SelectedAlternative object
+		/// </summary>
+		/// <param name="modelPath">Model directory</param>
+		/// <param name="alternativeName">Name of the alternative</param>
+    public SelectedAlternative(string modelPath, string alternativeName)
 		{
 			_ModelPath = modelPath;
 			AlternativeName = alternativeName;
 		} // SelectedAlternative
+
+    /// <summary>
+    /// The alternative name as a string
+    /// </summary>
+    /// <returns>Alternative name</returns>
 		public override string ToString()
 		{
 			return AlternativeName;
