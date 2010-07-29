@@ -1,0 +1,24 @@
+--------------------Configuration: SWMMParser - Win32 Debug--------------------
+Begining build with project "D:\Development\F32\SWMMPars\SWMMParser.dsp", at root.
+Active configuration is Win32 (x86) Dynamic-Link Library (based on Win32 (x86) Dynamic-Link Library)
+
+Project's tools are:
+			"Fortran 90 Compiler for 80x86" with flags "/include:"Debug/" /compile_only /nologo /libs:dll /debug:full /optimize:0 /warn:nofileopt /module:"Debug/" /object:"Debug/" /pdbfile:"Debug/DF50.PDB" /dll "
+			"OLE Type Library Maker" with flags "/nologo /D "_DEBUG" /mktyplib203 /o NUL /win32 "
+			"Win32 Resource Compiler" with flags "/l 0x409 /d "_DEBUG" "
+			"Browser Database Maker" with flags "/nologo /o"Debug/SWMMParser.bsc" "
+			"COFF Linker for 80x86" with flags "kernel32.lib /nologo /subsystem:windows /dll /incremental:yes /pdb:"Debug/SWMMParser.pdb" /debug /machine:I386 /out:"Debug/SWMMParser.dll" /implib:"Debug/SWMMParser.lib" /pdbtype:sept "
+			"Custom Build" with flags ""
+			"<Component 0xa>" with flags ""
+
+Creating temp file "C:\TEMP\RSP1F.tmp" with contents </include:"Debug/" /compile_only /nologo /libs:dll /debug:full /optimize:0 /warn:nofileopt /module:"Debug/" /object:"Debug/" /pdbfile:"Debug/DF50.PDB" /dll 
+"D:\Development\F32\SWMMPars\SWMMParser.f90"
+>
+Creating command line "link.exe kernel32.lib /nologo /subsystem:windows /dll /incremental:yes /pdb:"Debug/SWMMParser.pdb" /debug /machine:I386 /out:"Debug/SWMMParser.dll" /implib:"Debug/SWMMParser.lib" /pdbtype:sept  .\Debug\SWMMParser.obj" 
+Compiling Fortran...
+D:\Development\F32\SWMMPars\SWMMParser.f90
+Linking...
+
+
+
+SWMMParser.dll - 0 error(s), 0 warning(s)
