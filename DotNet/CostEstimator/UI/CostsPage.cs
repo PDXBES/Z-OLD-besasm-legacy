@@ -931,6 +931,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 					}
 					break;
         case "CostItem":
+        case "Factors":
           {
             CostItemFactor currentCIF = GetCostItemFactor(e.Row);
             switch (currentCIF.ReportItemType)
