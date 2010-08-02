@@ -16,7 +16,14 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 	public class ErrorInfo
 	{
 		#region Variables
-		private bool _NoError = true;
+		/// <summary>
+		/// Flag for whether an error has occurred
+		/// </summary>
+    private bool _NoError = true;
+
+    /// <summary>
+    /// Holds the error message for display to the user
+    /// </summary>
 		private string _Message = string.Empty;
 		#endregion
 
