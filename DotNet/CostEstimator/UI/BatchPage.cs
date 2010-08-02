@@ -23,6 +23,9 @@ using SystemsAnalysis.Analysis.CostEstimator.Classes;
 
 namespace SystemsAnalysis.Analysis.CostEstimator.UI
 {
+  /// <summary>
+  /// Batch page
+  /// </summary>
 	public partial class BatchPage : CostEstimator.UI.ChildFormTemplate
 	{
 		#region Variables
