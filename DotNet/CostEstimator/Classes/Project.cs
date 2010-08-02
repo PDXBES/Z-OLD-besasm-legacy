@@ -981,6 +981,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
           bw.ReportProgress((int)((double)linkCounter / (double)totalLinks * 100), "Reading links: " + linkCounter);
           if (altLink.Operation == SystemsAnalysis.Types.Enumerators.AlternativeOperation.DEL ||
             altLink.Operation == SystemsAnalysis.Types.Enumerators.AlternativeOperation.SPL ||
+            altLink.Operation == SystemsAnalysis.Types.Enumerators.AlternativeOperation.CON ||
             (altLink.Operation == SystemsAnalysis.Types.Enumerators.AlternativeOperation.RIK && altLink.FocusArea == ""))
             continue;
 
