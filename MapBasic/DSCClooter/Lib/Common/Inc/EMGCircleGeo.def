@@ -1,0 +1,4 @@
+'
+'	General Circle Geometry
+'
+declare function MakeCircle(x as float, y as float, Radius as float) as object

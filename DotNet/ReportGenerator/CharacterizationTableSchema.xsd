@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="CharacterizationTableSchema" elementFormDefault="qualified" xmlns="SystemsAnalysis.ReportingTableSchema" xmlns:mstns="http://tempuri.org/CharacterizationTableSchema.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" targetNamespace="SystemsAnalysis.ReportingTableSchema">
+  <xs:element name="ReportGenerator">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="CharacterizationTable" minOccurs="1" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence maxOccurs="unbounded" minOccurs="1">
+              <xs:element name="Row" maxOccurs="unbounded" minOccurs="1">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Cell" maxOccurs="unbounded" minOccurs="1">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="Function" minOccurs="0" maxOccurs="1">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="Parameter" minOccurs="0" maxOccurs="unbounded">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                    </xs:sequence>
+                                    <xs:attribute name="parameterName">
+                                      <xs:simpleType>
+                                        <xs:restriction base="xs:string">
+                                          <xs:enumeration value="MinValue" />
+                                          <xs:enumeration value="MaxValue" />
+                                          <xs:enumeration value="ScenarioID" />
+                                          <xs:enumeration value="TimeFrame" />
+                                          <xs:enumeration value="LandUse" />
+                                          <xs:enumeration value="LinkType" />
+                                          <xs:enumeration value="IsFraction" />
+                                          <xs:enumeration value="DiscoClass" />
+                                          <xs:enumeration value="MinPipeSize" />
+                                          <xs:enumeration value="MaxPipeSize" />
+                                        </xs:restriction>
+                                      </xs:simpleType>
+                                    </xs:attribute>
+                                    <xs:attribute name="parameterValue" type="xs:string" />
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                              <xs:attribute name="functionName">
+                                <xs:simpleType>
+                                  <xs:restriction base="xs:string">
+                                    <xs:enumeration value="PipeSurchargeCount" />
+                                    <xs:enumeration value="QQRatio" />
+                                    <xs:enumeration value="ZoningByLanduse" />
+                                    <xs:enumeration value="PipeSegmentCount" />
+                                    <xs:enumeration value="PipeSegmentLength" />
+                                    <xs:enumeration value="MinPipeDiameter" />
+                                    <xs:enumeration value="MaxPipeDiameter" />
+                                    <xs:enumeration value="RoofDiscoCount" />
+                                    <xs:enumeration value="RoofDiscoCountByLanduse" />
+                                    <xs:enumeration value="SewerBackupRisk" />
+                                    <xs:enumeration value="PipeDiameterRange" />
+                                    <xs:enumeration value="DivLocation" />
+                                    <xs:enumeration value="DivNodeID" />
+                                    <xs:enumeration value="DivID" />
+                                    <xs:enumeration value="DivNodeType" />
+                                    <xs:enumeration value="DivStatus" />
+                                    <xs:enumeration value="DivOutfallID" />
+                                    <xs:enumeration value="PSName" />
+                                    <xs:enumeration value="PSType" />
+                                    <xs:enumeration value="PSLocation" />
+                                    <xs:enumeration value="PSFirmCapacity" />
+                                    <xs:enumeration value="PSFullCapacity" />
+                                    <xs:enumeration value="PSWetWellNum" />
+                                    <xs:enumeration value="PSWetWellVolume" />
+                                    <xs:enumeration value="PSWetWellBypass" />
+                                    <xs:enumeration value="PSForceMainID" />
+                                    <xs:enumeration value="PSForceMainDiameter" />
+                                    <xs:enumeration value="PSForceMainLength" />
+                                    <xs:enumeration value="PSForceMainHead" />
+                                    <xs:enumeration value="PSPumpNumber" />
+                                    <xs:enumeration value="PSPumpMotorSpeed" />
+                                    <xs:enumeration value="PSPumpHP" />
+                                    <xs:enumeration value="PSPumpCapacity" />
+                                    <xs:enumeration value="UICCount" />
+                                    <xs:enumeration value="UICForReviewCount" />
+                                    <xs:enumeration value="PSWetWellDimensions" />
+                                    <xs:enumeration value="PipeSurchargeSummary" />
+                                    <xs:enumeration value="PipeSurchargeTimeSummary" />
+                                    <xs:enumeration value="PipeSurchargeLength" />
+                                    <xs:enumeration value="PipeSurchargeTimeLength" />
+                                    <xs:enumeration value="DSCCount" />
+                                    <xs:enumeration value="CountByDiscoClass" />
+                                    <xs:enumeration value="QQRatioSummary" />
+                                  </xs:restriction>
+                                </xs:simpleType>
+                              </xs:attribute>
+                              <xs:attribute name="isFraction" type="xs:boolean" default="true" />
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                        <xs:attribute name="data" type="xs:string" msprop:nullValue="_empty" />
+                        <xs:attribute name="cellType" default="BLANK">
+                          <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                              <xs:enumeration id="1" value="COLUMNNAME" />
+                              <xs:enumeration value="ROWNAME" id="2" />
+                              <xs:enumeration value="FUNCTION" id="3" />
+                              <xs:enumeration value="FOOTER" id="4" />
+                              <xs:enumeration value="BLANK" id="5" />
+                              <xs:enumeration value="CONST" />
+                              <xs:enumeration value="SUBCOLUMN" />
+                              <xs:enumeration value="EMPHASIS" />
+                            </xs:restriction>
+                          </xs:simpleType>
+                        </xs:attribute>
+                        <xs:attribute name="footerID" type="xs:string" msprop:nullValue="_empty" />
+                        <xs:attribute name="colSpan" type="xs:int" default="0" />
+                        <xs:attribute name="rowSpan" type="xs:int" default="0" />
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                  <xs:attribute name="isMultiRow" type="xs:boolean" default="false" />
+                  <xs:attribute name="multiRowKey" type="xs:string" />
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="Footer" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType>
+                  <xs:sequence />
+                  <xs:attribute name="footerID" type="xs:string" />
+                  <xs:attribute name="footerText" type="xs:string" />
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute name="tableNumber" type="xs:positiveInteger" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="1" msdata:AutoIncrementStep="1" />
+            <xs:attribute name="tableTitle" type="xs:string" msprop:nullValue="_empty" />
+            <xs:attribute name="columnCount" type="xs:int" />
+            <xs:attribute name="isMultiTable" type="xs:boolean" default="false" />
+            <xs:attribute name="multiTableKey" type="xs:string" />
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="studyArea" type="xs:string" msprop:nullValue="_empty" />
+      <xs:attribute name="reportName" type="xs:string" />
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
