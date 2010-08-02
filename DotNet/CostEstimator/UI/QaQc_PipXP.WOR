@@ -2,10 +2,10 @@
 !Version 550
 !Charset WindowsLatin1
 Open Table "alt_PipXP_ac" As alt_PipXP_ac Interactive
-Open Table "\\Cassio\systemsplanning\8063_CombinedFacPlan\Models\Alts\Focus_Areas\MapInfo\Tab\Master_Current\Master_Focus_Areas" As Master_Focus_Areas Interactive
+Open Table "\\Cassio\SystemsPlanning\8063_CombinedFacPlan\Models\RP\Project_Areas\MapInfo\Tab\Master_Current\Master_Project_Areas" As Master_Project_Areas Interactive
 
 'UPDATING FocusID FIELD with Project Area Name
-Add Column alt_PipXP_ac (FocusID )From Master_Focus_Areas Set To FocusArea Where contains
+Add Column alt_PipXP_ac (FocusID )From Master_Project_Areas Set To ProjectArea Where contains
 
 'UPDATING BoreJack FIELD
 'BoreJack values 1-n; >0 indicates number of conditions requiring boring or jacking;
@@ -43,17 +43,18 @@ Set Window MapBasic
   Position (0.291667,6.3125) Units "in"
   Width 8.45833 Units "in" Height 2.5 Units "in" Min
 Open Window MapBasic
-Map From Master_Focus_Areas,Sewer_Basins_Pdx,FIRE_Stations,POLICE_Stations,SCHOOLS,HOSPITALS,
+Map From Master_Project_Areas,Sewer_Basins_Pdx,FIRE_Stations,POLICE_Stations,SCHOOLS,HOSPITALS,
   ECSI_Sites,RAILROADS,Light_Rail,mst_links_mi,HYDRANTS,WATER_Lines,
   Gas_Lines,FIBER_Routes,MS4_Boundary,mst_DSC_ac,Mdl_BLDG,alt_PipXP_ac,
   streets_pdx,EmergencyRoutes,CL_nods,ENV_ZONE,SUMPED_Area 
-  Position (0.322917,0.0833333) Units "in"
+  Position (0.145833,0.0729167) Units "in"
   Width 7.75 Units "in" Height 7.38542 Units "in" 
 Set Window FrontWindow() ScrollBars Off Autoscroll On Snap Mode On
 Set Map
   CoordSys Earth Projection 3, 33, "ft", -120.5, 43.6666666667, 44.3333333333, 46, 8202099.7379999999, 0
-  Center (7648676.945,678249.0669)
-  Zoom 3656.250105 Units "ft"
+  Center (7645000,693000)
+  Zoom 1000 Units "ft"
+'  Zoom 10000 Units "ft"
   Preserve Zoom Display Zoom
   Distance Units "ft" Area Units "sq ft" XY Units "ft"
   Distance Type Cartesian
@@ -63,8 +64,8 @@ Set Map
     Global Pen (17,90,0)  Brush (1,16777215,16777215)  Symbol (32,16777215,5)  Line (1,2,7368959)  Font ("Arial Narrow",257,9,0,16777215)
     Selectable Off
     Label Line None Position Center Font ("Arial",1281,10,16776960,32768) Pen (1,2,0) 
-      With FocusArea
-      Parallel On Auto On Overlap Off Duplicates On PartialSegments On Offset 2
+      With ProjectArea
+      Parallel On Auto On Overlap On Duplicates On PartialSegments On Offset 2
       Visibility On
   Layer 2
     Display Graphic
@@ -240,13 +241,11 @@ Set Map
       With SUMPID1
       Parallel On Auto Off Overlap Off Duplicates On Offset 2
       Visibility On
-
-Set Map Window frontwindow() Zoom Entire Layer 18
-Set Window frontwindow() Title "Main Map"
-
+Set Window FrontWindow() Title "Main Map"
+Set Map Window FrontWindow() zoom entire layer 18
 Create Cartographic Legend
-  Position (8.19792,0.114583) Units "in"
-  Width 2.76042 Units "in" Height 5 Units "in" 
+  Position (8.02083,0.0833333) Units "in"
+  Width 2.76042 Units "in" Height 5.36458 Units "in" 
   Window Title "Legend of Sewer_Basins_Pdx,...,SUMPED_Area Map"
   Portrait
   Default Frame Style "#" Font ("Arial",1,9,0)
@@ -336,5 +335,10 @@ Create Cartographic Legend
     Using Column object 
     Style Font ("Arial",1,9,0)
       Text "streets_pdx" Line Pen (4,2,15790320) 
+  Frame From Layer 1
+    Border Pen (0,1,0) 
+    Using Column object 
+    Style Font ("Arial",1,9,0)
+      Text "Master_Project_Areas" Region Pen (17,90,0)  Brush (1,0,16777215) 
 
 Run Menu command 304
