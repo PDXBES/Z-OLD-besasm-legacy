@@ -915,26 +915,34 @@ namespace SWI_2
                 }
                 else
                 {
-                    //since the strings didn't match, we can't assume that there will ever be a match, so just search all the tables starting with the lowest global_id in ditches
-                    //stop after we have looked at them all, and just return nothing (MessageBox.Show("No matches found");)
-                    if ((this.sWSP_DITCHTableAdapter.FindFirstGlobalID(textBoxFindNode.Text)).HasValue)
+                    try
                     {
-                        findFirstDitch();
+                        //since the strings didn't match, we can't assume that there will ever be a match, so just search all the tables starting with the lowest global_id in ditches
+                        //stop after we have looked at them all, and just return nothing (MessageBox.Show("No matches found");)
+                        if ((this.sWSP_DITCHTableAdapter.FindFirstGlobalID(textBoxFindNode.Text)).HasValue)
+                        {
+                            findFirstDitch();
+                        }
+                        //second search the culverts table
+                        else if ((this.sWSP_CULVERTTableAdapter.FindFirstGlobalID(textBoxFindNode.Text)).HasValue)
+                        {
+                            findFirstCulvert();
+                        }
+                        //third search the pipes table
+                        else if ((this.sWSP_PIPETableAdapter.FindFirstGlobalID(textBoxFindNode.Text)).HasValue)
+                        {
+                            findFirstPipe();
+                        }
+                        else
+                        {
+                            MessageBox.Show("No match found");
+                        }
                     }
-                    //second search the culverts table
-                    else if ((this.sWSP_CULVERTTableAdapter.FindFirstGlobalID(textBoxFindNode.Text)).HasValue)
+                    catch (Exception ex)
                     {
-                        findFirstCulvert();
+                        //there was no currently selected datarow object.
                     }
-                    //third search the pipes table
-                    else if ((this.sWSP_PIPETableAdapter.FindFirstGlobalID(textBoxFindNode.Text)).HasValue)
-                    {
-                        findFirstPipe();
-                    }
-                    else
-                    {
-                        MessageBox.Show("No match found");
-                    }
+                    
                 }
             }
         }
