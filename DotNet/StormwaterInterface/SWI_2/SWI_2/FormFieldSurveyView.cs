@@ -57,9 +57,9 @@ namespace SWI_2
             sANDBOXDataSet.DataTableFieldSurveyEditable.Columns["subwatershed"].DefaultValue = comboBoxSubwatershed.Text;
             sANDBOXDataSet.DataTableFieldSurveyEditable.Columns["view_number"].DefaultValue = int.Parse(comboBoxMapNo.Text);
             sANDBOXDataSet.DataTableFieldSurveyEditable.Columns["page_number"].DefaultValue = int.Parse(comboBoxSurveyPage.Text);
-            sANDBOXDataSet.DataTableFieldSurveyEditable.Columns["us_node"].DefaultValue = "";
-            sANDBOXDataSet.DataTableFieldSurveyEditable.Columns["ds_node"].DefaultValue = "";
-            sANDBOXDataSet.DataTableFieldSurveyEditable.Columns["node"].DefaultValue = "";
+            sANDBOXDataSet.DataTableFieldSurveyEditable.Columns["us_node"].DefaultValue = " ";
+            sANDBOXDataSet.DataTableFieldSurveyEditable.Columns["ds_node"].DefaultValue = " ";
+            sANDBOXDataSet.DataTableFieldSurveyEditable.Columns["node"].DefaultValue = " ";
             sANDBOXDataSet.DataTableFieldSurveyEditable.Columns["linktype"].DefaultValue = "Pipe";
 
             PopulateLinkInfo();
@@ -140,7 +140,8 @@ namespace SWI_2
                     if ((int)r.ItemArray[15] == (int)((DataRowView)fKVIEWSUBWATERSHEDBindingSource.Current)[2] &&
                         (int)r.ItemArray[16] == Int32.Parse(comboBoxSurveyPage.Text)&&// (int) ((DataRowView)fKSURVEYPAGEVIEWBindingSource.Current)[2] &&
                        (string)r.ItemArray[17] == (string) ((DataRowView)sWSPWATERSHEDBindingSource.Current)[1] &&
-                       (string)r.ItemArray[18] == (string)((DataRowView)fKSUBWATERSHEDWATERSHEDBindingSource.Current)[2])
+                       (string)r.ItemArray[18] == (string)((DataRowView)fKSUBWATERSHEDWATERSHEDBindingSource.Current)[2] &&
+                        (int)((r.ItemArray[19] is System.DBNull) ? 0 : (int)r.ItemArray[19]) != 1)
                     {
                         sANDBOXDataSet.DataTableFieldSurveyEditable.LoadDataRow(r.ItemArray, false);
                         sANDBOXDataSet.DataTableFieldSurveyEditable.EndLoadData();
@@ -262,29 +263,34 @@ namespace SWI_2
 
             foreach (DataRow r in this.sANDBOXDataSet.DataTableFieldSurvey)
             {
+                //get the watershed_id
+                watershed_id = (int)((DataRow)sANDBOXDataSet.SWSP_WATERSHED.Select("watershed = '" + (string)r["watershed"] + "'")[0]).ItemArray[0];
+
+                //get the subwatershed_id
+                subwatershed_id = (int)((DataRow)sANDBOXDataSet.SWSP_SUBWATERSHED.Select("subwatershed = '" + (string)r["subwatershed"] + "' AND watershed_id = " + watershed_id.ToString())[0]).ItemArray[0];
+                //get the view_id
+                view_id = (int)((DataRow)sANDBOXDataSet.SWSP_VIEW.Select("view_number = " + ((int)r["view_number"]).ToString() + " AND subwatershed_id = " + subwatershed_id.ToString())[0]).ItemArray[0];
+                //get the page_id
+                page_id = (int)((DataRow)sANDBOXDataSet.SWSP_SURVEY_PAGE.Select("page_number = " + ((int)r["page_number"]).ToString() + " AND view_id = " + view_id.ToString())[0]).ItemArray[0];
+                //get the material_id
+                if (r["material"] is System.DBNull) { r["material"] = "UNSPEC"; }
+                material_id = (int)((DataRow)sANDBOXDataSet.SWSP_MATERIAL_TYPE.Select("material = '" + (string)r["material"] + "'")[0]).ItemArray[0];
+                //get the shape_id
+                if (r["shape"] is System.DBNull) { r["shape"] = "UNK"; }
+                shape_id = (int)((DataRow)sANDBOXDataSet.SWSP_SHAPE_TYPE.Select("shape = '" + (string)r["shape"] + "'")[0]).ItemArray[0];
+                //get the culvert_opening_type_id
+                if (r["culvert_opening"] is System.DBNull)
+                {
+                    culvert_opening_type = (int)((DataRow)sANDBOXDataSet.SWSP_CULVERT_OPENING_TYPE.Select("culvert_opening is null")[0]).ItemArray[0];
+                }
+                else
+                {
+                    culvert_opening_type = (int)((DataRow)sANDBOXDataSet.SWSP_CULVERT_OPENING_TYPE.Select("culvert_opening = '" + (string)r["culvert_opening"] + "'")[0]).ItemArray[0];
+                }
                 //if the global_id is negative, then we are adding a record
                 if ((int)r["global_id"] < 0)
                 {
-                    //get the watershed_id
-                    watershed_id = (int)((DataRow)sANDBOXDataSet.SWSP_WATERSHED.Select("watershed = '" + (string)r["watershed"] + "'")[0]).ItemArray[0];
-
-                    //get the subwatershed_id
-                    subwatershed_id = (int)((DataRow)sANDBOXDataSet.SWSP_SUBWATERSHED.Select("subwatershed = '" + (string)r["subwatershed"] + "' AND watershed_id = " + watershed_id.ToString())[0]).ItemArray[0];
-                    //get the view_id
-                    view_id = (int)((DataRow)sANDBOXDataSet.SWSP_VIEW.Select("view_number = " + ((int)r["view_number"]).ToString() + " AND subwatershed_id = " + subwatershed_id.ToString())[0]).ItemArray[0];
-                    //get the page_id
-                    page_id = (int)((DataRow)sANDBOXDataSet.SWSP_SURVEY_PAGE.Select("page_number = " + ((int)r["page_number"]).ToString() + " AND view_id = " + view_id.ToString())[0]).ItemArray[0];
-                    //get the material_id
-                    if (r["material"] is System.DBNull) { r["material"] = "UNSPEC"; }
-                    material_id = (int)((DataRow)sANDBOXDataSet.SWSP_MATERIAL_TYPE.Select("material = '" + (string)r["material"] + "'")[0]).ItemArray[0];
-                    //get the shape_id
-                    if (r["shape"] is System.DBNull) { r["shape"] = "UNK"; }
-                    shape_id = (int)((DataRow)sANDBOXDataSet.SWSP_SHAPE_TYPE.Select("shape = '" + (string)r["shape"] + "'")[0]).ItemArray[0];
-                    //get the culvert_opening_type_id
-                    if (r["culvert_opening"] is System.DBNull) { culvert_opening_type = (int)((DataRow)sANDBOXDataSet.SWSP_CULVERT_OPENING_TYPE.Select("culvert_opening is null")[0]).ItemArray[0];
-                    }
-                    else { culvert_opening_type = (int)((DataRow)sANDBOXDataSet.SWSP_CULVERT_OPENING_TYPE.Select("culvert_opening = '" + (string)r["culvert_opening"] + "'")[0]).ItemArray[0];
-                    }
+                    
                     //the transfer of this data should be handled simply to the linkinfo datasource
                     //insert based on the value in the link type column
                     if ((string)r["linktype"] == "Pipe")
@@ -364,6 +370,9 @@ namespace SWI_2
                     //do nothing
                 }
                 //if the global id is positive, and the action flag is 3, then we are modifying an existing record
+                //and must check to see if the existing global id belongs to a different type of conduit.
+                //if the existing global id belongs to a different conduit type, then we need to delete the 
+                //previous conduit type and insert the new one.
                 else if ((int)r["action"] == 3)
                 {
                     //get the material_id
@@ -384,10 +393,33 @@ namespace SWI_2
 
                     if ((string)r["linktype"] == "Pipe")
                     {
-                        this.sWSP_PIPETableAdapter.UpdateQuery(
+                        //check pipe table for this global id
+                        //if the global id does not exist in the pipe table, delete from the ditch and culvert table
+                        if (this.sWSP_PIPETableAdapter.GetDataByGlobalID((int)r["global_id"]).Count < 1)
+                        {
+                            this.sWSP_DITCHTableAdapter.DeleteByGlobalID((int)r["global_id"]);
+                            this.sWSP_CULVERTTableAdapter.DeleteByGlobalID((int)r["global_id"]);
+                            //  then insert to the pipe table
+                            this.sWSP_PIPETableAdapter.Insert(
+                                                            (int)r["global_id"],
                                                             page_id,
-                                                            (string)r["us_node"],
-                                                            (string)r["ds_node"],
+                                                            ((r["us_node"] is System.DBNull) ? "" : (string)r["us_node"]),
+                                                            ((r["ds_node"] is System.DBNull) ? "" : (string)r["ds_node"]),
+                                                            (double?)((r["us_depth_in"] is System.DBNull) ? null : (double?)r["us_depth_in"]),
+                                                            (double?)((r["ds_depth_in"] is System.DBNull) ? null : (double?)r["ds_depth_in"]),
+                                                            (double?)((r["dimension1"] is System.DBNull) ? null : (double?)r["dimension1"]),
+                                                            (double?)((r["dimension2"] is System.DBNull) ? null : (double?)r["dimension2"]),
+                                                            material_id,
+                                                            shape_id,
+                                                            "",
+                                                            (int?)((r["length_ft"] is System.DBNull) ? null : (int?)r["length_ft"])
+                                                            );
+                        }
+                        else{
+                            this.sWSP_PIPETableAdapter.UpdateQuery(
+                                                            page_id,
+                                                            ((r["us_node"] is System.DBNull) ? "" : (string)r["us_node"]),
+                                                            ((r["ds_node"] is System.DBNull) ? "" : (string)r["ds_node"]),
                                                             (double?)((r["us_depth_in"] is System.DBNull) ? null : (double?)r["us_depth_in"]),
                                                             (double?)((r["ds_depth_in"] is System.DBNull) ? null : (double?)r["ds_depth_in"]),
                                                             (double?)((r["dimension1"] is System.DBNull) ? null : (double?)r["dimension1"]),
@@ -397,40 +429,93 @@ namespace SWI_2
                                                             "",
                                                             (int?)((r["length_ft"] is System.DBNull) ? null : (int?)r["length_ft"]),
                                                             (int)r["global_id"]);
+                        }
                     }
                     else if ((string)r["linktype"] == "Ditch")
                     {
-                        this.sWSP_DITCHTableAdapter.UpdateQuery(
-                                                            page_id,
-                                                            (string)r["node"],
-                                                            facing_id,
-                                                            (double?)((r["dimension3"] is System.DBNull) ? null : (double?)r["dimension3"]),
-                                                            (double?)((r["dimension1"] is System.DBNull) ? null : (double?)r["dimension1"]),
-                                                            (double?)((r["dimension2"] is System.DBNull) ? null : (double?)r["dimension2"]),
-                                                            material_id,
-                                                            "",
-                                                            (string)r["ds_node"],
-                                                            (string)r["us_node"],
-                                                            (int?)((r["length_ft"] is System.DBNull) ? null : (int?)r["length_ft"]),
-                                                            (int)r["global_id"]);
+                        //check pipe table for this global id
+                        //if the global id does not exist in the pipe table, delete from the ditch and culvert table
+                        if (this.sWSP_DITCHTableAdapter.GetDataByGlobalID((int)r["global_id"]).Count < 1)
+                        {
+                            this.sWSP_PIPETableAdapter.DeleteByGlobalID((int)r["global_id"]);
+                            this.sWSP_CULVERTTableAdapter.DeleteByGlobalID((int)r["global_id"]);
+                            //  then insert to the pipe table
+                            this.sWSP_DITCHTableAdapter.Insert(
+                                                                (int)r["global_id"],
+                                                                page_id,
+                                                                ((r["node"] is System.DBNull) ? "" : (string)r["node"]),
+                                                                facing_id,
+                                                                (double?)((r["dimension3"] is System.DBNull) ? null : (double?)r["dimension3"]),
+                                                                (double?)((r["dimension1"] is System.DBNull) ? null : (double?)r["dimension1"]),
+                                                                (double?)((r["dimension2"] is System.DBNull) ? null : (double?)r["dimension2"]),
+                                                                material_id,
+                                                                "",
+                                                                ((r["ds_node"] is System.DBNull) ? "" : (string)r["ds_node"]),
+                                                                ((r["us_node"] is System.DBNull) ? "" : (string)r["us_node"]),
+                                                                (int?)((r["length_ft"] is System.DBNull) ? null : (int?)r["length_ft"])
+                                                                );
+                        }
+                        else
+                        {
+                            this.sWSP_DITCHTableAdapter.UpdateQuery(
+                                                                page_id,
+                                                                ((r["node"] is System.DBNull) ? "" : (string)r["node"]),
+                                                                facing_id,
+                                                                (double?)((r["dimension3"] is System.DBNull) ? null : (double?)r["dimension3"]),
+                                                                (double?)((r["dimension1"] is System.DBNull) ? null : (double?)r["dimension1"]),
+                                                                (double?)((r["dimension2"] is System.DBNull) ? null : (double?)r["dimension2"]),
+                                                                material_id,
+                                                                "",
+                                                                ((r["ds_node"] is System.DBNull) ? "" : (string)r["ds_node"]),
+                                                                ((r["us_node"] is System.DBNull) ? "" : (string)r["us_node"]),
+                                                                (int?)((r["length_ft"] is System.DBNull) ? null : (int?)r["length_ft"]),
+                                                                (int)r["global_id"]);
+                        }
                     }
                     else if ((string)r["linktype"] == "Culvert")
                     {
-                        this.sWSP_CULVERTTableAdapter.UpdateQuery(
-                                                            page_id,
-                                                            (string)r["node"],
-                                                            facing_id,
-                                                            culvert_opening_type,
-                                                            shape_id,
-                                                            (double?)((r["dimension1"] is System.DBNull) ? null : (double?)r["dimension1"]),
-                                                            (double?)((r["dimension2"] is System.DBNull) ? null : (double?)r["dimension2"]),
-                                                            (double?)((r["dimension3"] is System.DBNull) ? null : (double?)r["dimension3"]),
-                                                            material_id,
-                                                            "",
-                                                            (string)r["ds_node"],
-                                                            (string)r["us_node"],
-                                                            (int?)((r["length_ft"] is System.DBNull) ? null : (int?)r["length_ft"]),
-                                                            (int)r["global_id"]);
+                        //check pipe table for this global id
+                        //if the global id does not exist in the pipe table, delete from the ditch and culvert table
+                        if (this.sWSP_CULVERTTableAdapter.GetDataByGlobalID((int)r["global_id"]).Count < 1)
+                        {
+                            this.sWSP_DITCHTableAdapter.DeleteByGlobalID((int)r["global_id"]);
+                            this.sWSP_PIPETableAdapter.DeleteByGlobalID((int)r["global_id"]);
+                            //  then insert to the pipe table
+                            this.sWSP_CULVERTTableAdapter.Insert(
+                                                                (int)r["global_id"],
+                                                                page_id,
+                                                                ((r["node"] is System.DBNull) ? "" : (string)r["node"]),
+                                                                facing_id,
+                                                                culvert_opening_type,
+                                                                shape_id,
+                                                                (double?)((r["dimension1"] is System.DBNull) ? null : (double?)r["dimension1"]),
+                                                                (double?)((r["dimension2"] is System.DBNull) ? null : (double?)r["dimension2"]),
+                                                                (double?)((r["dimension3"] is System.DBNull) ? null : (double?)r["dimension3"]),
+                                                                material_id,
+                                                                "",
+                                                                ((r["ds_node"] is System.DBNull) ? "" : (string)r["ds_node"]),
+                                                                ((r["us_node"] is System.DBNull) ? "" : (string)r["us_node"]),
+                                                                (int?)((r["length_ft"] is System.DBNull) ? null : (int?)r["length_ft"])
+                                                                );
+                        }
+                        else
+                        {
+                            this.sWSP_CULVERTTableAdapter.UpdateQuery(
+                                                                page_id,
+                                                                ((r["node"] is System.DBNull) ? "" : (string)r["node"]),
+                                                                facing_id,
+                                                                culvert_opening_type,
+                                                                shape_id,
+                                                                (double?)((r["dimension1"] is System.DBNull) ? null : (double?)r["dimension1"]),
+                                                                (double?)((r["dimension2"] is System.DBNull) ? null : (double?)r["dimension2"]),
+                                                                (double?)((r["dimension3"] is System.DBNull) ? null : (double?)r["dimension3"]),
+                                                                material_id,
+                                                                "",
+                                                                ((r["ds_node"] is System.DBNull) ? "" : (string)r["ds_node"]),
+                                                                ((r["us_node"] is System.DBNull) ? "" : (string)r["us_node"]),
+                                                                (int?)((r["length_ft"] is System.DBNull) ? null : (int?)r["length_ft"]),
+                                                                (int)r["global_id"]);
+                        }
                     }
                 }
                 else if ((int)r["action"] == 1)
@@ -449,6 +534,8 @@ namespace SWI_2
                     }
                 }
             }
+            this.fKSURVEYPAGEVIEWBindingSource.EndEdit();
+            this.sWSP_SURVEY_PAGETableAdapter.Update(sANDBOXDataSet);
         }
         void dataGridViewLinkInfo_Leave(object sender, System.EventArgs e)
         {
@@ -463,13 +550,7 @@ namespace SWI_2
 
         void dataGridViewLinkInfo_MouseLeave(object sender, System.EventArgs e)
         {
-            //yes this redundancy is really necessary
-            /*dataGridViewLinkInfo.CurrentRow.DataGridView.EndEdit();
-            dataGridViewLinkInfo.EndEdit();
-            CurrencyManager cm = (CurrencyManager)dataGridViewLinkInfo.BindingContext[dataGridViewLinkInfo.DataSource, dataGridViewLinkInfo.DataMember];
-            cm.EndCurrentEdit();
 
-            PopulateLinkInfo();*/
         }
 
         private void FormFieldSurveyView_FormClosing(object sender, FormClosingEventArgs e)
