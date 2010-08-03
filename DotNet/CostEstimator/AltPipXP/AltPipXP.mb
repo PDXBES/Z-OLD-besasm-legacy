@@ -272,6 +272,8 @@ Open table "\\Cassio\modeling\SAMaster_22\Links\mst_Links_ac.TAB" as MLA interac
 
 '======> replaced 6/24/08		xStorm Integer, xDMinD Integer, xDMaxD Integer, 
 '======> replaced 6/24/08		pStorm Integer, pDMaxD Integer, pFt2Storm Integer,
+'======> added fields 7/21/10		FocusID Char(15), BoreJack Char(5)
+
 	Alter Table OutputTbl 
 		( add
 		MstLinkID integer, COMPKEY integer,
@@ -295,7 +297,9 @@ Open table "\\Cassio\modeling\SAMaster_22\Links\mst_Links_ac.TAB" as MLA interac
 		xSchl Integer, xFt2Schl Integer, xHosp Integer, xFt2Hosp Integer,
 		xPol Integer, xFt2Pol Integer, xFire Integer, xFt2Fire Integer,
 		xBldg Integer, xFt2Bldg Integer, xHyd Integer, xFt2Hyd Integer,
-		HardArea Integer
+		HardArea Integer,
+		uD2Gw Float, dD2Gw Float, 
+		BoreJack Integer, FocusID Char(15) 
 		)Interactive
 
 	Close Table QyText
@@ -354,6 +358,7 @@ FOR iLoop= 1 to tableinfo(QyTblGrp, 8)-1
 	print time(12) + "....." + sCase
 	Open table sTbl as CurTbl interactive
 	Select * from CurTbl where obj intersects oMBR into QySaver
+
 	Commit Table QySaver as sTmpPath + sCase + ".tab" 	TYPE NATIVE Charset "WindowsLatin1"
 	Update QyCurTbl set sText = sTmpPath + sCase + ".tab"
 	Close Table CurTbl
@@ -379,8 +384,7 @@ SUB RunXP
 
 '=======> GOTO TestRun '(ignore line: TEST SHORTCUT-enter before "GOTO") 
 
-
-'============>(Alias,Start, Stop, Step, UpdtFld1, UpdtFld2, UpdtFld3, UpdtFld4, UpdtFld5)
+'=======>(bufftype,doCase,Alias,Start,Stop,Step,UpdtFld1, UpdtFld2, UpdtFld3, UpdtFld4, UpdtFld5)
 	CALL GetXPdat(1,0,"WtrTbl", 	2,12,2,"pWtr","pFt2Wtr", "", "", "")
 	CALL GetXPdat(1,0,"SewerP",	2,10,2,"pSewer","pFt2Swr", "", "", "")
 	CALL GetXPdat(0,1,"StrtTbl",	10,30,10,"pStrt","pFt2Strt", "","", "")
@@ -403,7 +407,6 @@ SUB RunXP
 	CALL GetXPdat(1,0,"Bldg", 		2,10,2,"", "", "xBldg", "xFt2Bldg","")
 	CALL GetXPdat(3,0,"gSlope", 	1,8,1,	"","","", "", "")
 	CALL GetXPdat(1,0,"ECSI", 		10,60,10,	"", "", "xEcsi",	"xFt2Ecsi","")
-
 GOTO NoTest
 TestRun:   '  ====> Start TestRun 
 
@@ -1146,7 +1149,8 @@ NoXpipes:
 		CASE "gSlope"		'=========================
 			Select AltLinkID, UsNode, DsNode,usie,dsie,
 				usie "USgElev",dsie "DSgElev",
-				Length,USIE "gSlopPct",USIE "xPipSlope"     
+				Length,USIE "gSlopPct",USIE "xPipSlope",
+				USIE "dMHDepth",USIE "uMHDepth"     
 				from inputTbl into QySaver
 			Commit table QySaver as sTmpPath + "SlopeDat.tab"
 				TYPE NATIVE Charset "WindowsLatin1"
@@ -1157,13 +1161,19 @@ NoXpipes:
 			Update QyZeroLen set Length = 0.0001
 			Update  SlopeDat set gSlopPct = 100 * (USgelev-DSgelev)/Length
 			Update  SlopeDat set xPipSlope = (usie-dsie)/Length
+
+			Update  SlopeDat set uMHDepth = USgElev-USIE
+			Update  SlopeDat set dMHDepth = DSgElev-DSIE
+
 			Commit Table SlopeDat interactive
 
 			Add Column AltPips(gSlope) from SlopeDat set to Round(gSlopPct,0)where AltLinkID = AltLinkID
 			Add Column AltPips(xPipSlope) from SlopeDat set to xPipSlope where AltLinkID = AltLinkID
 
-					Add column AltPips(uDepth) from InputTbl set to USIE where col1 = col1
-					Add column AltPips(dDepth) from InputTbl set to DSIE where col1 = col1
+'					Add column AltPips(uDepth) from InputTbl set to USgElev-USIE where col1 = col1
+'					Add column AltPips(dDepth) from InputTbl set to DSgElev-DSIE where col1 = col1
+					Add column AltPips(uDepth) from SlopeDat set to uMHDepth where AltLinkID = AltLinkID
+					Add column AltPips(dDepth) from SlopeDat set to dMHDepth where AltLinkID = AltLinkID
 
 			Close Table NodTbl
 			Close Table SlopeDat
@@ -1197,6 +1207,15 @@ NoXpipes:
 				END IF
 
 			Print "Hard Areas Identified " + Time(12)
+
+
+			'UPDATING FocusId FIELD WITH PROJECT AREA NAME
+			'Hard coded path to Focus areas to be revised to be more flexible; insert into ListOfTbls.tab;
+			Open Table "\\Cassio\systemsplanning\8063_CombinedFacPan\Models\Alts\Focus_Areas\MapInfo\Tab\Master_Current\Master_Focus_Areas" 
+				As FocusAreas Interactive
+			Add Column alt_PipXP_ac (FocusID )From FocusAreas Set To FocusArea Where contains
+
+			Print "Bore/Jack Info updated " + Time(12)
 
 	'========================================\
 	END CASE '=== E N D  O F  C A S E S ======>

@@ -25,35 +25,77 @@ using Infragistics.Win.AppStyling;
 using SystemsAnalysis.Utils.MapInfoUtils;
 using SystemsAnalysis.Analysis.CostEstimator.Classes;
 using SystemsAnalysis.Modeling;
+using System.Diagnostics;
 #endregion
 
 namespace SystemsAnalysis.Analysis.CostEstimator.UI
 {
+  /// <summary>
+  /// Main form
+  /// </summary>
 	public partial class Main : Form
 	{
 		#region Constants
-		private string _LastSelectedModelDirectory;
+    /// <summary>
+    /// Standard file extension for cost estimate projects.  Files are actually
+    /// XML files.
+    /// </summary>
     private const string COST_ESTIMATE_PROJECT_FILE_EXTENSION = ".cep";
+
+    /// <summary>
+    /// Standard file extension for access databases.
+    /// </summary>
 		private const string ACCESS_FILE_EXTENSION = ".mdb";
 		#endregion
 
 		#region Variables
+		/// <summary>
+		/// Last selected model directory
+		/// </summary>
+    private string _LastSelectedModelDirectory;
+
+    /// <summary>
+    /// Current project
+    /// </summary>
 		private Project _project = null;
+
+    /// <summary>
+    /// List of factor types for use in costs grid
+    /// </summary>
     private Infragistics.Win.ValueList _factorTypeListForGridCosts = new Infragistics.Win.ValueList();
+
+    /// <summary>
+    /// List of factor types for use in cost factor pool grid
+    /// </summary>
 		private Infragistics.Win.ValueList _factorTypeListForGridCostFactorPool = 
 			new Infragistics.Win.ValueList();
 
+    /// <summary>
+    /// Dictionary of pages (name, ChildFormTemplate page)
+    /// </summary>
 		private Dictionary<string, ChildFormTemplate> _mainPages = new Dictionary<string, ChildFormTemplate>();
 
+    /// <summary>
+    /// Splash screen thread
+    /// </summary>
 		private System.Threading.Thread splashThread;
 
+    /// <summary>
+    /// User configuration settings
+    /// </summary>
 		private UserSettings _UserSettings = new UserSettings();
 
+    /// <summary>
+    /// Last tab user was on
+    /// </summary>
 		private Infragistics.Win.UltraWinTabControl.UltraTab lastTab = null;
 		#endregion
 
 		#region Constructors
-		public Main()
+		/// <summary>
+		/// Initializes the main form
+		/// </summary>
+    public Main()
 		{
 			splashThread = new System.Threading.Thread(new System.Threading.ThreadStart(DoSplash));
 			splashThread.Start();
@@ -71,7 +113,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 
 		#region Splash
 		/// <summary>
-		/// Do splash
+		/// Runs the splash screen (for threading)
 		/// </summary>
 		private static void DoSplash()
 		{
@@ -88,7 +130,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 			if (System.Deployment.Application.ApplicationDeployment.IsNetworkDeployed)
 			{
 				Version v = System.Deployment.Application.ApplicationDeployment.CurrentDeployment.CurrentVersion;
-				versionText = v.Major + "." + v.Minor + "." + v.Build + "." + v.Revision;
+        versionText = String.Format("{0}.{1}.{2}.{3}", v.Major, v.Minor, v.Build, v.Revision);
 				dateText = File.GetLastWriteTime(System.Reflection.Assembly.GetExecutingAssembly().Location).ToString("MMMM dd yyyy");
 			} // if
 			else
@@ -98,13 +140,14 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 				int majorVersion = System.Reflection.Assembly.GetExecutingAssembly().GetName(false).Version.Major;
 				int build = System.Reflection.Assembly.GetExecutingAssembly().GetName(false).Version.Build;
 				int revision = System.Reflection.Assembly.GetExecutingAssembly().GetName(false).Version.Revision;
-				versionText = majorVersion + "." + minorVersion + "." + build + "." + revision;
+        versionText = String.Format("{0}.{1}.{2}.{3}", majorVersion, minorVersion, build, revision);
 
 				FileInfo fi = new FileInfo("PWMPDataSystem.exe");
 				string date = fi.CreationTime.Date.ToString("MMMM dd yyyy");
 				dateText = date;
 			} // else
 
+      // This local variable is disposed when the surrounding thread closes
 			SplashScreen sp = new SplashScreen(versionText, dateText);
 			sp.ShowDialog(waitForClick);
 		} // DoSplash(waitForClick)
@@ -171,7 +214,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 		#endregion
 
 		/// <summary>
-		/// Set app caption
+		/// Set app caption automatically depending on whether a named project is active
 		/// </summary>
 		private void SetAppCaption()
 		{
@@ -187,6 +230,10 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 			CloseProject(false);
 		} // CloseProject()
 
+    /// <summary>
+    /// Close project
+    /// </summary>
+    /// <param name="forceClose">True to force closure of the project (used in error situation)</param>
 		public void CloseProject(bool forceClose)
 		{
 			bool canceled = false;
@@ -214,8 +261,13 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 				ClearPages();
 				tabMain.SelectedTab = tabMain.Tabs["Home"];
 			}
+
+      SetAppCaption();
 		}
 
+    /// <summary>
+    /// Create and initialize a new project
+    /// </summary>
 		private void CreateNewProject()
 		{
 			CloseProject();
@@ -224,6 +276,10 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 			(_mainPages["Costs"] as CostsPage).dsProject.Rows.SetCount(1, true);
 		}
 
+    /// <summary>
+    /// Opens a UI for selecting an alternative for costing by having user
+    /// choose model folder and then the contained alternative
+    /// </summary>
 		private void SelectModelForAlternative()
 		{
 			dlgBrowseFolder.Description = "Browse for a model folder";
@@ -256,7 +312,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 		}
 
 		/// <summary>
-		/// Select model
+		/// Opens a UI for selecting a model for costing
 		/// </summary>
 		private void SelectModel()
 		{
@@ -285,7 +341,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 		} // SelectModel()
 
 		/// <summary>
-		/// View progress
+		/// View progress page
 		/// </summary>
 		public void ViewProgress()
 		{
@@ -293,7 +349,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 		} // ViewProgress()
 
 		/// <summary>
-		/// View project info
+		/// View project info page
 		/// </summary>
 		public void ViewProjectInfo()
 		{
@@ -301,7 +357,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 		} // ViewProjectInfo()
 
 		/// <summary>
-		/// View cost factor pool
+		/// View cost factor pool page
 		/// </summary>
 		public void ViewCostFactorPool()
 		{
@@ -309,7 +365,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 		} // ViewCostFactorPool()
 
 		/// <summary>
-		/// View cost item pool
+		/// View cost item pool page
 		/// </summary>
 		public void ViewCostItemPool()
 		{
@@ -317,7 +373,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 		} // ViewCostItemPool()
 
 		/// <summary>
-		/// View costs
+		/// View costs page
 		/// </summary>
 		public void ViewCosts()
 		{
@@ -325,13 +381,18 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 		} // ViewCosts()
 
 		/// <summary>
-		/// View report
+		/// View report page
 		/// </summary>
 		public void ViewReport()
 		{
 			tabMain.SelectedTab = tabMain.Tabs["Final"];
 		} // ViewReport()
 
+    /// <summary>
+    /// Add a filename to the application's MRU list (stored in the user's
+    /// settings file)
+    /// </summary>
+    /// <param name="fileName">Filename to add to MRU list</param>
 		private void AddFileToMRUList(string fileName)
 		{
 			ArrayList mruFiles = _UserSettings.MostRecentlyUsedFiles;
@@ -350,11 +411,10 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 			mruList.Insert(0, fileName, fileName);
 			if (mruList.Count > _UserSettings.NumMostRecentlyUsedFiles)
 				mruList.RemoveAt(mruList.Count - 1);
-
-
 		}
+
 		/// <summary>
-		/// Open project
+		/// Opens a UI for selecting an existing project to view
 		/// </summary>
 		private void OpenProject()
 		{
@@ -468,11 +528,13 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 		} // ViewGlobalSettings()
 
 		/// <summary>
-		/// Batch alternatives
+		/// Batch alternatives (not implemented yet)
 		/// </summary>
 		private void BatchAlternatives()
 		{
 			tabMain.SelectedTab = tabMain.Tabs["Batch"];
+
+      // TODO: Actual batching logic
 		} // BatchAlternatives()
 
     /// <summary>
@@ -527,7 +589,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 		/// <summary>
 		/// Removes the pipxp_ac.mdb file from the Links directory
 		/// </summary>
-		/// <param name="modelPath">Model path</param>
+		/// <param name="modelPath">Model directory containing the pipxp_ac.mdb file</param>
 		private void CleanupPipXP(string modelPath)
 		{
 			string pipXPTableFileName = modelPath + Path.DirectorySeparatorChar + "Links" +
@@ -552,6 +614,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 					} // try
 					catch (System.Data.OleDb.OleDbException e)
 					{
+            Debug.WriteLine("CleanupPipXP: DROP TABLE mdl_pipxp_ac threw an "+
+              "exception: " + e.Message);
 					}
         }
 				// catch
@@ -560,9 +624,9 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 		} // CleanupPipXP(modelPath)
 
 		/// <summary>
-		/// Model has pip XP table
+		/// Returns whether model directory already has a PipXP table
 		/// </summary>
-		/// <param name="modelPath">Model path</param>
+		/// <param name="modelPath">Model directory</param>
 		/// <returns>True if model has a PipXP table in the Links directory</returns>
 		private bool ModelHasPipXPTable(string modelPath)
 		{
@@ -572,9 +636,9 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 		} // ModelHasPipXPTable(modelPath)
 
 		/// <summary>
-		/// Copy master pip XP data
+		/// Copy master PipXP data
 		/// </summary>
-		/// <param name="modelPath">Model path</param>
+		/// <param name="modelPath">Model directory</param>
 		private void CopyMasterPipXPData(string modelPath)
 		{
 			try
@@ -598,9 +662,9 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 		} // CopyMasterPipXPData(modelPath)
 
 		/// <summary>
-		/// Link pip XP to data access DB
+		/// Link PipXP data to data access DB
 		/// </summary>
-		/// <param name="modelPath">Model path</param>
+		/// <param name="modelPath">Model directory</param>
 		private void LinkPipXPToDataAccessDB(string modelPath)
 		{
 			Catalog dataAccessCatalog = new CatalogClass();
@@ -627,7 +691,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 		} // LinkPipXPToDataAccessDB(modelPath)
 
 		/// <summary>
-		/// Create pip XP table
+		/// Create PipXP table
 		/// </summary>
 		/// <param name="modelPath">Model path</param>
 		/// <returns>Bool</returns>
@@ -691,7 +755,9 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 			}
 			catch (System.Data.OleDb.OleDbException e)
 			{
-			} // catch
+        Debug.WriteLine("CleanupPipXP: DROP TABLE mdl_pipxp_ac threw an " +
+          "exception: " + e.Message);
+      } // catch
 			altPackageConn.Close();
 		} // CleanupAltPipXP(altInfo)
 
@@ -948,6 +1014,10 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 			(_mainPages["Costs"] as CostsPage).gridCosts.Refresh();
 		} // SetupProjectForCostGrid()
 
+    /// <summary>
+    /// Move to the costs tab if there's a project, otherwise move to the
+    /// opening switchboard
+    /// </summary>
 		private void CloseTabAndReturnToProject()
 		{
 			if (_project != null)
@@ -985,7 +1055,16 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 			_mainPages.Clear();
 		} // ClearPages()
 
-		#endregion
+    /// <summary>
+    /// Pass settings to costs page
+    /// </summary>
+    private void PassSettingsToCostsPage()
+    {
+      CostsPage costsPage = (CostsPage)_mainPages["Costs"];
+      costsPage.Settings = _UserSettings;
+    } // PassSettingsToCostsPage()
+
+    #endregion
 
 		// Events
 
@@ -1015,10 +1094,12 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 					} // try
 					catch (System.Deployment.Application.InvalidDeploymentException ex)
 					{
-					} // catch
+            Debug.WriteLine("Main_Load: threw an exception: " + ex.Message);
+          } // catch
 					catch (Exception ex)
 					{
-						MessageBox.Show("Exception:\n" + ex.Message);
+            Debug.WriteLine("Main_Load: threw an exception: " + ex.Message);
+            MessageBox.Show("Exception:\n" + ex.Message);
 					} // catch
 				} // if
 
@@ -1257,11 +1338,6 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 			tabMain.SelectedTab = tabMain.Tabs["Costs"];
 		}
 
-		/// <summary>
-		/// Ds global inflow control settings _ cell data requested
-		/// </summary>
-		/// <param name="sender">Sender</param>
-		/// <param name="e">E</param>
 		private void dsGlobalInflowControlSettings_CellDataRequested(object sender, CellDataRequestedEventArgs e)
 		{
 			int currentRowIndex = e.Row.Index;
@@ -1330,15 +1406,6 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 			else
 				SetupProjectForCostGrid();
 		}
-
-		/// <summary>
-		/// Pass settings to costs page
-		/// </summary>
-		private void PassSettingsToCostsPage()
-		{
-			CostsPage costsPage = (CostsPage)_mainPages["Costs"];
-			costsPage.Settings = _UserSettings;
-		} // PassSettingsToCostsPage()
 
 		private void btnEstimateFromAlternative_Click(object sender, EventArgs e)
 		{

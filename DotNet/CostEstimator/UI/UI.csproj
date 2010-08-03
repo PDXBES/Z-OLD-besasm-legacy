@@ -38,7 +38,7 @@
     <PublisherName>BES Systems Analysis</PublisherName>
     <CreateWebPageOnPublish>false</CreateWebPageOnPublish>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>45</ApplicationRevision>
+    <ApplicationRevision>48</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -193,12 +193,6 @@
     </Compile>
     <Compile Include="Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
-    </Compile>
-    <Compile Include="OptionsPage.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="OptionsPage.Designer.cs">
-      <DependentUpon>OptionsPage.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="ProjectInfoPage.cs">
@@ -362,10 +356,6 @@
     <EmbeddedResource Include="FinalPage.resx">
       <SubType>Designer</SubType>
       <DependentUpon>FinalPage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OptionsPage.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>OptionsPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ProjectInfoPage.resx">
       <SubType>Designer</SubType>

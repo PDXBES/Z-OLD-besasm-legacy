@@ -1,7 +1,21 @@
 !Workspace
 !Version 550
 !Charset WindowsLatin1
-Open Table "\\Cassio\systems_planning\8063_CombinedFacPlan\Models\Alts\alt_PipXP_ac" As alt_PipXP_ac Interactive
+Open Table "alt_PipXP_ac" As alt_PipXP_ac Interactive
+Open Table "\\Cassio\SystemsPlanning\8063_CombinedFacPlan\Models\RP\Project_Areas\MapInfo\Tab\Master_Current\Master_Project_Areas" As Master_Project_Areas Interactive
+
+'UPDATING FocusID FIELD with Project Area Name
+Add Column alt_PipXP_ac (FocusID )From Master_Project_Areas Set To ProjectArea Where contains
+
+'UPDATING BoreJack FIELD
+'BoreJack values 1-n; >0 indicates number of conditions requiring boring or jacking;
+Select * From alt_PipXP_ac where (uDepth + dDepth)/2 > 30 into QyUpdt Browse * from QyUpdt
+Update QyUpdt set BoreJack = 1
+Select * From alt_PipXP_ac where (xFrwy+ xRail + xLRT +xBldg)>0 into QyUpdt Browse * from QyUpdt
+Update QyUpdt set BoreJack = BoreJack + (xFrwy+ xRail + xLRT +xBldg)
+Commit table alt_PipXP_ac
+Close table QyUpdt
+
 Open Table "\\Cassio\gis3\Projects_Arc\mst_PIPxp\Data\MI\Tbls\WtrTbl" As WATER_Lines Interactive
 Open Table "\\Cassio\gis3\Projects_Arc\mst_PIPxp\Data\MI\Tbls\CL_nods" As CL_nods Interactive
 Open Table "\\Cassio\gis3\Projects_Arc\mst_PIPxp\Data\MI\Tbls\DetailedRailroads" As RAILROADS Interactive
@@ -24,286 +38,307 @@ Open Table "\\Cassio\gis3\Projects_Arc\mst_PIPxp\Data\MI\Tbls\PoliceStations" As
 Open Table "\\Cassio\gis3\Projects_Arc\mst_PIPxp\Data\MI\Tbls\fire_stations_metro" As FIRE_Stations Interactive
 Open Table "\\Cassio\gis3\Projects_Arc\mst_PIPxp\Data\MI\Tbls\UIC_SC_auto" As SUMPED_Area Interactive
 Open Table "\\Cassio\Modeling\SAMaster_22\Parcels_Divides\mst_DSC_ac" As mst_DSC_ac Interactive
+
 Set Window MapBasic
-  Position (-0.572917,5.71875) Units "in"
-  Width 12.7188 Units "in" Height 2.58333 Units "in" Min
+  Position (0.291667,6.3125) Units "in"
+  Width 8.45833 Units "in" Height 2.5 Units "in" Min
 Open Window MapBasic
-Map From Sewer_Basins_Pdx,FIRE_Stations,POLICE_Stations,SCHOOLS,HOSPITALS,ECSI_Sites,
-  RAILROADS,Light_Rail,mst_links_mi,HYDRANTS,WATER_Lines,Gas_Lines,
-  FIBER_Routes,MS4_Boundary,mst_DSC_ac,Mdl_BLDG,alt_PipXP_ac,streets_pdx,
-  EmergencyRoutes,CL_nods,ENV_ZONE,SUMPED_Area 
-  Position (0.0729167,0.09375) Units "in"
+Map From Master_Project_Areas,Sewer_Basins_Pdx,FIRE_Stations,POLICE_Stations,SCHOOLS,HOSPITALS,
+  ECSI_Sites,RAILROADS,Light_Rail,mst_links_mi,HYDRANTS,WATER_Lines,
+  Gas_Lines,FIBER_Routes,MS4_Boundary,mst_DSC_ac,Mdl_BLDG,alt_PipXP_ac,
+  streets_pdx,EmergencyRoutes,CL_nods,ENV_ZONE,SUMPED_Area 
+  Position (0.145833,0.0729167) Units "in"
   Width 7.75 Units "in" Height 7.38542 Units "in" 
-Set Window FrontWindow() ScrollBars Off Autoscroll On
-Set Map Window Frontwindow() Zoom Entire Layer  "alt_PipXP_ac"
+Set Window FrontWindow() ScrollBars Off Autoscroll On Snap Mode On
 Set Map
   CoordSys Earth Projection 3, 33, "ft", -120.5, 43.6666666667, 44.3333333333, 46, 8202099.7379999999, 0
-'  Center (7654784.98,671375.9935)
-'  Zoom 13691.45421 Units "ft"
+  Center (7645000,693000)
+  Zoom 1000 Units "ft"
+'  Zoom 10000 Units "ft"
   Preserve Zoom Display Zoom
   Distance Units "ft" Area Units "sq ft" XY Units "ft"
+  Distance Type Cartesian
 Set Map
   Layer 1
+    Display Global
+    Global Pen (17,90,0)  Brush (1,16777215,16777215)  Symbol (32,16777215,5)  Line (1,2,7368959)  Font ("Arial Narrow",257,9,0,16777215)
+    Selectable Off
+    Label Line None Position Center Font ("Arial",1281,10,16776960,32768) Pen (1,2,0) 
+      With ProjectArea
+      Parallel On Auto On Overlap On Duplicates On PartialSegments On Offset 2
+      Visibility On
+  Layer 2
     Display Graphic
-    Global   Symbol (35,0,12)   
+    Global  Brush (1,16777215,16777215)  Symbol (35,0,12)  Line (1,2,7368959)  Font ("Arial Narrow",257,9,0,16777215)
     Selectable Off
     Label Line None Position Center Font ("Arial",0,9,0) Pen (1,2,0) 
       With Basin_ID
       Parallel On Auto Off Overlap Off Duplicates On Offset 2
       Visibility On
-  Layer 2
+  Layer 3
     Display Global
-    Global   Symbol ("FIRE1-32.BMP",0,36,0)   
+    Global  Brush (1,16777215,16777215)  Symbol ("FIRE1-32.BMP",0,36,0)  Line (1,2,7368959)  Font ("Arial Narrow",257,9,0,16777215)
     Zoom (0, 10000) Units "ft" 
     Label Line Arrow Position Right Font ("Arial",0,9,0) Pen (1,2,0) 
       With Station
       Parallel On Auto Off Overlap Off Duplicates On Offset 2
       Visibility On
-  Layer 3
-    Display Global
-    Global   Symbol ("BADG1-32.BMP",0,24,0)   
-    Zoom (0, 10000) Units "ft" 
-    Label Line Arrow Position Right Font ("Arial",0,9,0) Pen (1,2,0) 
-      With RNO
-      Parallel On Auto Off Overlap Off Duplicates On Offset 2
-      Visibility On
   Layer 4
     Display Global
-    Global   Symbol (38,11556864,24,"MapInfo Real Estate",257,0)   
+    Global  Brush (1,16777215,16777215)  Symbol ("BADG1-32.BMP",0,24,0)  Line (1,2,7368959)  Font ("Arial Narrow",257,9,0,16777215)
     Zoom (0, 10000) Units "ft" 
-    Label Line Arrow Position Below Font ("Arial Narrow",258,10,255,16777215) Pen (1,2,0) 
-      With NAME
-      Parallel On Auto On Overlap Off Duplicates On Offset 2
-      Visibility Zoom (0, 1000) Units "ft"
+    Label Line Arrow Position Right Font ("Arial",0,9,0) Pen (1,2,0) 
+      With Rno
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
   Layer 5
     Display Global
-    Global   Symbol (47,5672960,36,"MapInfo Real Estate",0,0)   
+    Global  Brush (1,16777215,16777215)  Symbol (38,11556864,24,"MapInfo Real Estate",257,0)  Line (1,2,7368959)  Font ("Arial Narrow",257,9,0,16777215)
+    Zoom (0, 10000) Units "ft" 
+    Label Line Arrow Position Below Font ("Arial Narrow",258,10,255,16777215) Pen (1,2,0) 
+      With Name
+      Parallel On Auto On Overlap Off Duplicates On Offset 2
+      Visibility Zoom (0, 1000) Units "ft"
+  Layer 6
+    Display Global
+    Global  Brush (1,16777215,16777215)  Symbol (47,5672960,36,"MapInfo Real Estate",0,0)  Line (1,2,7368959)  Font ("Arial Narrow",257,9,0,16777215)
     Zoom (0, 10000) Units "ft" 
     Label Line Arrow Position Below Font ("Arial Narrow",258,9,255,16777215) Pen (1,2,0) 
       With Name
       Parallel Off Auto On Overlap Off Duplicates On PartialSegments On Offset 10
       Visibility Zoom (0, 5000) Units "ft"
-  Layer 6
-    Display Global
-    Global   Symbol (76,16711680,30,"MapInfo Miscellaneous",257,0)   
-    Zoom (0, 5000) Units "ft" 
-    Label Line None Position Below Font ("Arial",257,9,16711680,16776960) Pen (1,2,0) 
-      With CODE
-      Parallel On Auto On Overlap Off Duplicates On PartialSegments On Offset 10
-      Visibility Zoom (0, 1000) Units "ft"
   Layer 7
     Display Global
-    Global   Symbol (35,0,12)  Line (22,26,32896)  
+    Global  Brush (1,16777215,16777215)  Symbol (76,16711680,30,"MapInfo Miscellaneous",257,0)  Line (1,2,7368959)  Font ("Arial Narrow",257,9,0,16777215)
     Zoom (0, 5000) Units "ft" 
-    Label Line Arrow Position Above Font ("Arial",0,9,0) Pen (1,2,0) 
-      With SOURCE
-      Parallel On Auto Off Overlap Off Duplicates Off Offset 2
-      Visibility On
+    Label Line None Position Below Font ("Arial",257,9,16711680,16776960) Pen (1,2,0) 
+      With Code
+      Parallel On Auto On Overlap Off Duplicates On PartialSegments On Offset 10
+      Visibility Zoom (0, 1000) Units "ft"
   Layer 8
     Display Global
-    Global   Symbol (35,0,12)  Line (20,46,32768)  
+    Global  Brush (1,16777215,16777215)  Symbol (35,0,12)  Line (22,26,32896)  Font ("Arial Narrow",257,9,0,16777215)
+    Zoom (0, 5000) Units "ft" 
+    Label Line Arrow Position Above Font ("Arial",0,9,0) Pen (1,2,0) 
+      With Source
+      Parallel On Auto Off Overlap Off Duplicates Off Offset 2
+      Visibility On
+  Layer 9
+    Display Global
+    Global  Brush (1,16777215,16777215)  Symbol (35,0,12)  Line (20,46,32768)  Font ("Arial Narrow",257,9,0,16777215)
     Zoom (0, 5000) Units "ft" 
     Label Line None Position Right Font ("Arial",1025,7,32768,13696976) Pen (1,2,0) 
       With " -  LITE RAIL  - "
       Parallel On Auto On Overlap Off Duplicates On PartialSegments On Offset 2 Max 6
       Visibility Zoom (0, 1500) Units "ft"
-  Layer 9
+  Layer 10
     Display Off
-    Global   Symbol (35,0,12)  Line (1,2,16756991)  
+    Global  Brush (1,16777215,16777215)  Symbol (35,0,12)  Line (1,2,16756991)  Font ("Arial Narrow",257,9,0,16777215)
     Label Line Arrow Position Above Font ("Arial",0,9,0) Pen (1,2,0) 
       With USNode
       Parallel On Auto Off Overlap Off Duplicates Off Offset 2
       Visibility On
-  Layer 10
+  Layer 11
     Display Global
-    Global   Symbol (41,14201087,7,"MapInfo Cartographic",0,0)   
+    Global  Brush (1,16777215,16777215)  Symbol (41,14201087,7,"MapInfo Cartographic",0,0)  Line (1,2,7368959)  Font ("Arial Narrow",257,9,0,16777215)
     Zoom (0, 5000) Units "ft" 
     Label Line Arrow Position Right Font ("Arial",0,9,0) Pen (1,2,0) 
       With MAINVALVET
       Parallel On Auto Off Overlap Off Duplicates On Offset 2
       Visibility On
-  Layer 11
-    Display Global
-    Global   Symbol (35,0,12)  Line (2,3,4243711)  
-    Zoom (0, 1000) Units "ft" 
-    Label Line Arrow Position Center Font ("Arial Narrow",0,7,7368959,16777215) Pen (1,2,0) 
-      With MAINSIZE+"''    W  A  T  E  R  "
-      Parallel On Auto On Overlap Off Duplicates On PartialSegments On Offset 2 Max 8
-      Visibility Zoom (0, 500) Units "ft"
   Layer 12
     Display Global
-    Global   Symbol (35,0,12)  Line (1,113,16711680)  
+    Global  Brush (1,16777215,16777215)  Symbol (35,0,12)  Line (2,3,4243711)  Font ("Arial Narrow",257,9,0,16777215)
+    Zoom (0, 1000) Units "ft" 
+    Label Line Arrow Position Above Font ("Arial Narrow",0,7,7368959,16777215) Pen (1,2,0) 
+      With MAINSIZE+"''    W  A  T  E  R  "
+      Parallel On Auto On Overlap Off Duplicates On PartialSegments On Offset 3 Max 8
+      Visibility Zoom (0, 500) Units "ft"
+  Layer 13
+    Display Global
+    Global  Brush (1,16777215,16777215)  Symbol (35,0,12)  Line (1,113,16711680)  Font ("Arial Narrow",257,9,0,16777215)
     Zoom (0, 5000) Units "ft" 
     Label Line Arrow Position Center Font ("Arial",513,7,16711680,16776960) Pen (1,2,0) 
       With "  M  A  J  O  R     G  A  S     L   I  N  E  "
       Parallel On Auto On Overlap Off Duplicates On PartialSegments On Offset 2 Max 6
       Visibility Zoom (0, 500) Units "ft"
-  Layer 13
+  Layer 14
     Display Global
-    Global   Symbol (35,0,12)  Line (20,112,9445631)  
+    Global  Brush (1,16777215,16777215)  Symbol (35,0,12)  Line (20,112,9445631)  Font ("Arial Narrow",257,9,0,16777215)
     Zoom (0, 5000) Units "ft" 
     Label Line None Position Center Font ("Arial",1,7,255,13689087) Pen (1,2,0) 
       With "  F I B E R   R O U T E  "
       Parallel On Auto On Overlap Off Duplicates On PartialSegments On Offset 2 Max 6
       Visibility Zoom (0, 1000) Units "ft"
-  Layer 14
+  Layer 15
     Display Off
-    Global   Symbol (35,0,12)   
+    Global  Brush (1,16777215,16777215)  Symbol (35,0,12)  Line (1,2,7368959)  Font ("Arial Narrow",257,9,0,16777215)
     Label Line None Position Center Font ("Arial",0,9,0) Pen (1,2,0) 
       With OUTFALL_ID
       Parallel On Auto Off Overlap Off Duplicates On Offset 2
       Visibility On
-  Layer 15
+  Layer 16
     Display Global
-    Global Pen (22,2,8245248)  Brush (1,16777215,16777215)  Symbol (35,0,12)   
+    Global Pen (22,2,8245248)  Brush (1,16777215,16777215)  Symbol (35,0,12)  Line (1,2,7368959)  Font ("Arial Narrow",257,9,0,16777215)
     Zoom (0, 5000) Units "ft" 
     Label Line None Position Center Font ("Arial Narrow",0,9,11559167) Pen (1,2,0) 
       With SITEADDR
       Parallel On Auto On Overlap Off Duplicates On Offset 2
       Visibility Zoom (0, 500) Units "ft"
-  Layer 16
+  Layer 17
     Display Global
-    Global Pen (1,2,12632319)  Brush (16,14737632)  Symbol (35,0,12)   
+    Global Pen (1,2,12632319)  Brush (16,14737632)  Symbol (35,0,12)  Line (1,2,7368959)  Font ("Arial Narrow",257,9,0,16777215)
     Selectable Off
     Zoom (0, 5000) Units "ft" 
     Label Line None Position Center Font ("Arial",0,9,0) Pen (1,2,0) 
       With GENSOURCE
       Parallel On Auto Off Overlap Off Duplicates On Offset 2
       Visibility On
-  Layer 17
+  Layer 18
     Display Graphic
-    Global   Symbol (35,0,12)   
+    Global  Brush (1,16777215,16777215)  Symbol (35,0,12)  Line (1,2,7368959)  Font ("Arial Narrow",257,9,0,16777215)
+    Arrows On
+    Nodes On
     Label Line Arrow Position Above Font ("Arial",0,9,0) Pen (1,2,0) 
       With USNode
       Parallel On Auto Off Overlap Off Duplicates Off Offset 2
       Visibility On
-  Layer 18
-    Display Global
-    Global   Symbol (35,0,12)  Line (4,2,15790320)  
-    Zoom (4000, 10000) Units "ft" 
-    Label Line Arrow Position Above Font ("Arial",0,9,0) Pen (1,2,0) 
-      With Prefix
-      Parallel On Auto Off Overlap Off Duplicates Off Offset 2
-      Visibility On
   Layer 19
     Display Global
-    Global   Symbol (35,0,12)  Line (90,2,16764992)  
+    Global  Brush (1,16777215,16777215)  Symbol (35,0,12)  Line (4,2,15790320)  Font ("Arial Narrow",257,9,0,16777215)
+    Zoom (4000, 10000) Units "ft" 
+    Label Line Arrow Position Above Font ("Arial",0,9,0) Pen (1,2,0) 
+      With PREFIX
+      Parallel On Auto Off Overlap Off Duplicates Off Offset 2
+      Visibility On
+  Layer 20
+    Display Global
+    Global  Brush (1,16777215,16777215)  Symbol (35,0,12)  Line (90,2,16764992)  Font ("Arial Narrow",257,9,0,16777215)
     Label Line Arrow Position Center Font ("Arial",1025,9,13658112,16777136) Pen (1,2,0) 
       With "<EMERGENCY  >"
       Parallel On Auto On Overlap Off Duplicates On PartialSegments On Offset 2 Max 4
       Visibility Zoom (0, 1000) Units "ft"
-  Layer 20
+  Layer 21
     Display Off
-    Global   Symbol (70,15790320,9,"MapInfo Cartographic",0,45)   
+    Global  Brush (1,16777215,16777215)  Symbol (70,15790320,9,"MapInfo Cartographic",0,45)  Line (1,2,7368959)  Font ("Arial Narrow",257,9,0,16777215)
     Zoom (0, 5000) Units "ft" 
     Label Line Arrow Position Right Font ("Arial",0,9,0) Pen (1,2,0) 
       With street_full
       Parallel On Auto Off Overlap Off Duplicates On Offset 2
       Visibility On
-  Layer 21
+  Layer 22
     Display Graphic
-    Global   Symbol (35,0,12)   
+    Global  Brush (1,16777215,16777215)  Symbol (35,0,12)  Line (1,2,7368959)  Font ("Arial Narrow",257,9,0,16777215)
     Label Line None Position Center Font ("Arial",0,9,0) Pen (1,2,0) 
-      With OVRLY
+      With Ovrly
       Parallel On Auto Off Overlap Off Duplicates On Offset 2
       Visibility On
-  Layer 22
+  Layer 23
     Display Global
-    Global Pen (1,2,9483775)  Brush (16,10535167)  Symbol (35,0,12)   
+    Global Pen (1,2,9483775)  Brush (16,10535167)  Symbol (35,0,12)  Line (1,2,7368959)  Font ("Arial Narrow",257,9,0,16777215)
     Zoom (0, 10000) Units "ft" 
     Label Line None Position Center Font ("Arial",0,9,0) Pen (1,2,0) 
       With SUMPID1
       Parallel On Auto Off Overlap Off Duplicates On Offset 2
       Visibility On
+Set Window FrontWindow() Title "Main Map"
+Set Map Window FrontWindow() zoom entire layer 18
 Create Cartographic Legend
-  Position (8.11458,0.15625) Units "in"
-  Width 2.76042 Units "in" Height 5 Units "in" 
+  Position (8.02083,0.0833333) Units "in"
+  Width 2.76042 Units "in" Height 5.36458 Units "in" 
   Window Title "Legend of Sewer_Basins_Pdx,...,SUMPED_Area Map"
   Portrait
   Default Frame Style "#" Font ("Arial",1,9,0)
-  Frame From Layer 10
+  Frame From Layer 11
     Border Pen (0,1,0) 
     Using Column object 
     Style Font ("Arial",1,9,0)
       Text "HYDRANTS" Symbol (41,14201087,7,"MapInfo Cartographic",0,0) 
-  Frame From Layer 5
-    Border Pen (0,1,0) 
-    Using Column object 
-    Style Font ("Arial",1,9,0)
-      Text "HOSPITALS" Symbol (47,5672960,36,"MapInfo Real Estate",0,0) 
-  Frame From Layer 4
-    Border Pen (0,1,0) 
-    Using Column object 
-    Style Font ("Arial",1,9,0)
-      Text "SCHOOLS" Symbol (38,11556864,24,"MapInfo Real Estate",257,0) 
   Frame From Layer 6
     Border Pen (0,1,0) 
     Using Column object 
     Style Font ("Arial",1,9,0)
-      Text "ECSI_Sites" Symbol (76,16711680,30,"MapInfo Miscellaneous",257,0) 
-  Frame From Layer 2
+      Text "HOSPITALS" Symbol (47,5672960,36,"MapInfo Real Estate",0,0) 
+  Frame From Layer 5
     Border Pen (0,1,0) 
     Using Column object 
     Style Font ("Arial",1,9,0)
-      Text "FIRE_Stations" Symbol ("FIRE1-32.BMP",0,36,0) 
+      Text "SCHOOLS" Symbol (38,11556864,24,"MapInfo Real Estate",257,0) 
+  Frame From Layer 7
+    Border Pen (0,1,0) 
+    Using Column object 
+    Style Font ("Arial",1,9,0)
+      Text "ECSI_Sites" Symbol (76,16711680,30,"MapInfo Miscellaneous",257,0) 
   Frame From Layer 3
     Border Pen (0,1,0) 
     Using Column object 
     Style Font ("Arial",1,9,0)
+      Text "FIRE_Stations" Symbol ("FIRE1-32.BMP",0,36,0) 
+  Frame From Layer 4
+    Border Pen (0,1,0) 
+    Using Column object 
+    Style Font ("Arial",1,9,0)
       Text "POLICE_Stations" Symbol ("BADG1-32.BMP",0,24,0) 
-  Frame From Layer 16
+  Frame From Layer 17
     Border Pen (0,1,0) 
     Using Column object 
     Style Font ("Arial",1,9,0)
       Text "Mdl_BLDG" Region Pen (1,2,12632319)  Brush (16,14737632) 
-  Frame From Layer 15
+  Frame From Layer 16
     Border Pen (0,1,0) 
     Using Column object 
     Style Font ("Arial",1,9,0)
       Text "mst_DSC_ac" Region Pen (22,2,8245248)  Brush (1,0,16777215) 
-  Frame From Layer 22
+  Frame From Layer 23
     Border Pen (0,1,0) 
     Using Column object 
     Style Font ("Arial",1,9,0)
       Text "SUMPED_Area" Region Pen (1,2,9483775)  Brush (16,10535167) 
-  Frame From Layer 21
+  Frame From Layer 22
     Border Pen (0,1,0) 
     Using Column object 
     Style Font ("Arial",1,9,0)
       Text "Preservation EZone" Region Pen (1,2,16768112)  Brush (15,14476900) 
       Text "Conservation EZone" Region Pen (1,2,10551200)  Brush (16,13500288) 
-  Frame From Layer 7
-    Border Pen (0,1,0) 
-    Using Column object 
-    Style Font ("Arial",1,9,0)
-      Text "RAILROADS" Line Pen (22,26,32896) 
   Frame From Layer 8
     Border Pen (0,1,0) 
     Using Column object 
     Style Font ("Arial",1,9,0)
-      Text "Light_Rail" Line Pen (20,46,32768) 
-  Frame From Layer 11
+      Text "RAILROADS" Line Pen (22,26,32896) 
+  Frame From Layer 9
     Border Pen (0,1,0) 
     Using Column object 
     Style Font ("Arial",1,9,0)
-      Text "WATER_Lines" Line Pen (2,3,4243711) 
+      Text "Light_Rail" Line Pen (20,46,32768) 
   Frame From Layer 12
     Border Pen (0,1,0) 
     Using Column object 
     Style Font ("Arial",1,9,0)
-      Text "Gas_Lines" Line Pen (1,113,16711680) 
+      Text "WATER_Lines" Line Pen (2,3,4243711) 
   Frame From Layer 13
     Border Pen (0,1,0) 
     Using Column object 
     Style Font ("Arial",1,9,0)
+      Text "Gas_Lines" Line Pen (1,113,16711680) 
+  Frame From Layer 14
+    Border Pen (0,1,0) 
+    Using Column object 
+    Style Font ("Arial",1,9,0)
       Text "FIBER_Routes" Line Pen (20,112,9445631) 
-  Frame From Layer 19
+  Frame From Layer 20
     Border Pen (0,1,0) 
     Using Column object 
     Style Font ("Arial",1,9,0)
       Text "EmergencyRoutes" Line Pen (90,2,16764992) 
-  Frame From Layer 18
+  Frame From Layer 19
     Border Pen (0,1,0) 
     Using Column object 
     Style Font ("Arial",1,9,0)
       Text "streets_pdx" Line Pen (4,2,15790320) 
+  Frame From Layer 1
+    Border Pen (0,1,0) 
+    Using Column object 
+    Style Font ("Arial",1,9,0)
+      Text "Master_Project_Areas" Region Pen (17,90,0)  Brush (1,0,16777215) 
+
+Run Menu command 304
