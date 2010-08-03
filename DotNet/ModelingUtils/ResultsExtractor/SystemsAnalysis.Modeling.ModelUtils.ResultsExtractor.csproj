@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{AA8663B3-4B31-4F11-BD73-9CC3EF99101F}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -70,20 +70,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TableE01DataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="TableE03aDataSet.cs">
-      <DependentUpon>TableE03aDataSet.xsd</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="TableE03aDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TableE03aDataSet.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="TableE03bDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TableE03bDataSet.xsd</DependentUpon>
-    </Compile>
     <Compile Include="TableE09DataSet.cs">
       <DependentUpon>TableE09DataSet.xsd</DependentUpon>
       <SubType>Component</SubType>
@@ -125,16 +111,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TableE20DataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="TableE21DataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TableE21DataSet.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="TableE22DataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TableE22DataSet.xsd</DependentUpon>
-    </Compile>
     <Compile Include="XPSWMMResults.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -154,28 +130,6 @@
     </None>
     <None Include="TableE01DataSet.xss">
       <DependentUpon>TableE01DataSet.xsd</DependentUpon>
-    </None>
-    <None Include="TableE03aDataSet.xsc">
-      <DependentUpon>TableE03aDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="TableE03aDataSet.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>TableE03aDataSet.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="TableE03aDataSet.xss">
-      <DependentUpon>TableE03aDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="TableE03bDataSet.xsc">
-      <DependentUpon>TableE03bDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="TableE03bDataSet.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>TableE03bDataSet.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="TableE03bDataSet.xss">
-      <DependentUpon>TableE03bDataSet.xsd</DependentUpon>
     </None>
     <None Include="TableE09DataSet.xsc">
       <DependentUpon>TableE09DataSet.xsd</DependentUpon>
@@ -231,28 +185,6 @@
     </None>
     <None Include="TableE20DataSet.xss">
       <DependentUpon>TableE20DataSet.xsd</DependentUpon>
-    </None>
-    <None Include="TableE21DataSet.xsc">
-      <DependentUpon>TableE21DataSet.xsd</DependentUpon>
-    </None>
-    <None Include="TableE21DataSet.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>TableE21DataSet.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="TableE21DataSet.xss">
-      <DependentUpon>TableE21DataSet.xsd</DependentUpon>
-    </None>
-    <None Include="TableE22DataSet.xsc">
-      <DependentUpon>TableE22DataSet.xsd</DependentUpon>
-    </None>
-    <None Include="TableE22DataSet.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>TableE22DataSet.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="TableE22DataSet.xss">
-      <DependentUpon>TableE22DataSet.xsd</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
