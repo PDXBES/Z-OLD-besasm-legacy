@@ -61,12 +61,11 @@
             this.labelMapNo = new System.Windows.Forms.Label();
             this.labelSheetNo = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.ultraDateTimeEditorDate = new Infragistics.Win.UltraWinEditors.UltraDateTimeEditor();
-            this.ultraTextEditorWeather = new Infragistics.Win.UltraWinEditors.UltraTextEditor();
             this.fKSURVEYPAGEVIEWBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.fKVIEWSUBWATERSHEDBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.fKSUBWATERSHEDWATERSHEDBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.sWSPWATERSHEDBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.ultraTextEditorWeather = new Infragistics.Win.UltraWinEditors.UltraTextEditor();
             this.ultraTextEditorComments = new Infragistics.Win.UltraWinEditors.UltraTextEditor();
             this.sWSP_WATERSHEDTableAdapter = new SWI_2.SANDBOXDataSetTableAdapters.SWSP_WATERSHEDTableAdapter();
             this.sWSP_SUBWATERSHEDTableAdapter = new SWI_2.SANDBOXDataSetTableAdapters.SWSP_SUBWATERSHEDTableAdapter();
@@ -90,6 +89,7 @@
             this.sWSP_DITCHTableAdapter = new SWI_2.SANDBOXDataSetTableAdapters.SWSP_DITCHTableAdapter();
             this.buttonAddMap = new System.Windows.Forms.Button();
             this.buttonAddSurveyPage = new System.Windows.Forms.Button();
+            this.ultraDateTimeEditor = new Infragistics.Win.UltraWinEditors.UltraDateTimeEditor();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLinkInfo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sWSPSHAPETYPEBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sANDBOXDataSet)).BeginInit();
@@ -98,15 +98,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataTableFieldSurveyEditableBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataTableFieldSurveyBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sWSPMESH1BindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ultraDateTimeEditorDate)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ultraTextEditorWeather)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fKSURVEYPAGEVIEWBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fKVIEWSUBWATERSHEDBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fKSUBWATERSHEDWATERSHEDBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sWSPWATERSHEDBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ultraTextEditorWeather)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ultraTextEditorComments)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sWSPSURVEYPAGEEVALUATORBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sWSPEVALUATORBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ultraDateTimeEditor)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridViewLinkInfo
@@ -379,22 +379,6 @@
             this.label1.TabIndex = 7;
             this.label1.Text = "Weather";
             // 
-            // ultraDateTimeEditorDate
-            // 
-            this.ultraDateTimeEditorDate.DataBindings.Add(new System.Windows.Forms.Binding("DateTime", this.fKSURVEYPAGEVIEWBindingSource, "date", true));
-            this.ultraDateTimeEditorDate.Location = new System.Drawing.Point(86, 46);
-            this.ultraDateTimeEditorDate.Name = "ultraDateTimeEditorDate";
-            this.ultraDateTimeEditorDate.Size = new System.Drawing.Size(113, 21);
-            this.ultraDateTimeEditorDate.TabIndex = 11;
-            // 
-            // ultraTextEditorWeather
-            // 
-            this.ultraTextEditorWeather.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.fKSURVEYPAGEVIEWBindingSource, "weather", true));
-            this.ultraTextEditorWeather.Location = new System.Drawing.Point(86, 90);
-            this.ultraTextEditorWeather.Name = "ultraTextEditorWeather";
-            this.ultraTextEditorWeather.Size = new System.Drawing.Size(113, 21);
-            this.ultraTextEditorWeather.TabIndex = 14;
-            // 
             // fKSURVEYPAGEVIEWBindingSource
             // 
             this.fKSURVEYPAGEVIEWBindingSource.DataMember = "FK_SURVEY_PAGE_VIEW";
@@ -414,6 +398,14 @@
             // 
             this.sWSPWATERSHEDBindingSource.DataMember = "SWSP_WATERSHED";
             this.sWSPWATERSHEDBindingSource.DataSource = this.sANDBOXDataSet;
+            // 
+            // ultraTextEditorWeather
+            // 
+            this.ultraTextEditorWeather.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.fKSURVEYPAGEVIEWBindingSource, "weather", true));
+            this.ultraTextEditorWeather.Location = new System.Drawing.Point(86, 90);
+            this.ultraTextEditorWeather.Name = "ultraTextEditorWeather";
+            this.ultraTextEditorWeather.Size = new System.Drawing.Size(113, 21);
+            this.ultraTextEditorWeather.TabIndex = 14;
             // 
             // ultraTextEditorComments
             // 
@@ -569,11 +561,20 @@
             this.buttonAddSurveyPage.UseVisualStyleBackColor = true;
             this.buttonAddSurveyPage.Click += new System.EventHandler(this.buttonAddSurveyPage_Click);
             // 
+            // ultraDateTimeEditor
+            // 
+            this.ultraDateTimeEditor.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.fKSURVEYPAGEVIEWBindingSource, "date", true));
+            this.ultraDateTimeEditor.Location = new System.Drawing.Point(89, 47);
+            this.ultraDateTimeEditor.Name = "ultraDateTimeEditor";
+            this.ultraDateTimeEditor.Size = new System.Drawing.Size(109, 21);
+            this.ultraDateTimeEditor.TabIndex = 30;
+            // 
             // FormFieldSurveyView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1031, 509);
+            this.Controls.Add(this.ultraDateTimeEditor);
             this.Controls.Add(this.buttonAddSurveyPage);
             this.Controls.Add(this.buttonAddMap);
             this.Controls.Add(this.comboBoxSubwatershed);
@@ -583,7 +584,6 @@
             this.Controls.Add(this.checkedListBoxEvaluators);
             this.Controls.Add(this.ultraTextEditorComments);
             this.Controls.Add(this.ultraTextEditorWeather);
-            this.Controls.Add(this.ultraDateTimeEditorDate);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.labelSheetNo);
             this.Controls.Add(this.labelMapNo);
@@ -604,15 +604,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataTableFieldSurveyEditableBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataTableFieldSurveyBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sWSPMESH1BindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ultraDateTimeEditorDate)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ultraTextEditorWeather)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fKSURVEYPAGEVIEWBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fKVIEWSUBWATERSHEDBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fKSUBWATERSHEDWATERSHEDBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sWSPWATERSHEDBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ultraTextEditorWeather)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ultraTextEditorComments)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sWSPSURVEYPAGEEVALUATORBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sWSPEVALUATORBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ultraDateTimeEditor)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -637,7 +637,6 @@
         private System.Windows.Forms.Label labelMapNo;
         private System.Windows.Forms.Label labelSheetNo;
         private System.Windows.Forms.Label label1;
-        private Infragistics.Win.UltraWinEditors.UltraDateTimeEditor ultraDateTimeEditorDate;
         private Infragistics.Win.UltraWinEditors.UltraTextEditor ultraTextEditorWeather;
         private Infragistics.Win.UltraWinEditors.UltraTextEditor ultraTextEditorComments;
         private System.Windows.Forms.BindingSource sWSPWATERSHEDBindingSource;
@@ -687,5 +686,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dsdepthinDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn action;
+        private Infragistics.Win.UltraWinEditors.UltraDateTimeEditor ultraDateTimeEditor;
     }
 }
