@@ -534,6 +534,8 @@ namespace SWI_2
                     }
                 }
             }
+            this.fKSURVEYPAGEVIEWBindingSource.EndEdit();
+            this.sWSP_SURVEY_PAGETableAdapter.Update(sANDBOXDataSet);
         }
         void dataGridViewLinkInfo_Leave(object sender, System.EventArgs e)
         {
@@ -548,13 +550,7 @@ namespace SWI_2
 
         void dataGridViewLinkInfo_MouseLeave(object sender, System.EventArgs e)
         {
-            //yes this redundancy is really necessary
-            /*dataGridViewLinkInfo.CurrentRow.DataGridView.EndEdit();
-            dataGridViewLinkInfo.EndEdit();
-            CurrencyManager cm = (CurrencyManager)dataGridViewLinkInfo.BindingContext[dataGridViewLinkInfo.DataSource, dataGridViewLinkInfo.DataMember];
-            cm.EndCurrentEdit();
 
-            PopulateLinkInfo();*/
         }
 
         private void FormFieldSurveyView_FormClosing(object sender, FormClosingEventArgs e)
