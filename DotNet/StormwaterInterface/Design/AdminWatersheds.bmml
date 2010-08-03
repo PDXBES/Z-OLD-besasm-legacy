@@ -1,0 +1,71 @@
+<mockup version="1.0" skin="sketch" measuredW="866" measuredH="665" mockupW="792" mockupH="628">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::TitleWindow" x="64" y="27" w="792" h="628" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>SWSP%20Field%20Data%20Administration</text>
+      </controlProperties>
+    </control>
+    <control controlID="1" controlTypeID="com.balsamiq.mockups::VerticalTabBar" x="79" y="63" w="762" h="520" measuredW="200" measuredH="194" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <hrefs>%2CAdminEvaluators%26bm%3BAdminEvaluators.bmml%26bm%3BAdminEvaluators.bmml%26bm%3BAdminEvaluators.bmml%2CAdminTypes%26bm%3BAdminTypes.bmml%26bm%3BAdminTypes.bmml%26bm%3BAdminTypes.bmml%2CAdminViewsAndSurveys%26bm%3BAdminViewsAndSurveys.bmml%26bm%3BAdminViewsAndSurveys.bmml%26bm%3BAdminViewsAndSurveys.bmml</hrefs>
+        <position>left</position>
+        <selectedIndex>0</selectedIndex>
+        <text>Watersheds%0AEvaluators%0ATypes%0AViews%20and%20Surveys</text>
+      </controlProperties>
+    </control>
+    <control controlID="2" controlTypeID="com.balsamiq.mockups::Label" x="217" y="78" w="-1" h="-1" measuredW="79" measuredH="25" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Watersheds</text>
+      </controlProperties>
+    </control>
+    <control controlID="3" controlTypeID="com.balsamiq.mockups::List" x="220" y="107" w="117" h="425" measuredW="100" measuredH="126" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <selectedIndex>4</selectedIndex>
+        <text>Columbia%20Slough%0AFanno%20Creek%0AJohnson%20Creek%0ATryon%20Creek%0AWillamette%20River</text>
+        <verticalScrollbar>true</verticalScrollbar>
+      </controlProperties>
+    </control>
+    <control controlID="4" controlTypeID="com.balsamiq.mockups::Button" x="217" y="541" w="-1" h="-1" measuredW="49" measuredH="28" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Add</text>
+      </controlProperties>
+    </control>
+    <control controlID="5" controlTypeID="com.balsamiq.mockups::Button" x="273" y="541" w="-1" h="-1" measuredW="64" measuredH="28" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Delete</text>
+      </controlProperties>
+    </control>
+    <control controlID="6" controlTypeID="com.balsamiq.mockups::Label" x="364" y="77" w="-1" h="-1" measuredW="226" measuredH="25" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Subwatersheds%20of%20Willamette%20River</text>
+      </controlProperties>
+    </control>
+    <control controlID="7" controlTypeID="com.balsamiq.mockups::List" x="366" y="103" w="117" h="429" measuredW="100" measuredH="126" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <selectedIndex>4</selectedIndex>
+        <text>Dorky%20Creek%0AGoober%20Creek%0AStephens%20Creek</text>
+        <verticalScrollbar>true</verticalScrollbar>
+      </controlProperties>
+    </control>
+    <control controlID="8" controlTypeID="com.balsamiq.mockups::Button" x="364" y="541" w="-1" h="-1" measuredW="49" measuredH="28" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Add</text>
+      </controlProperties>
+    </control>
+    <control controlID="9" controlTypeID="com.balsamiq.mockups::Button" x="419" y="541" w="-1" h="-1" measuredW="64" measuredH="28" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Delete</text>
+      </controlProperties>
+    </control>
+    <control controlID="10" controlTypeID="com.balsamiq.mockups::Button" x="776" y="592" w="-1" h="-1" measuredW="65" measuredH="28" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Cancel</text>
+      </controlProperties>
+    </control>
+    <control controlID="11" controlTypeID="com.balsamiq.mockups::Button" x="727" y="592" w="-1" h="-1" measuredW="43" measuredH="28" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>OK</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>

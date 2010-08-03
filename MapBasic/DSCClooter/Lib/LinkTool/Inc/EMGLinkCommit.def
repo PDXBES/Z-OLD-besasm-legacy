@@ -1,0 +1,7 @@
+'
+'
+Declare Sub CommitAppend()
+Declare Sub CommitDelete()
+Declare Sub OrphanNodes()
+
+Global gOrphanCheck as logical
