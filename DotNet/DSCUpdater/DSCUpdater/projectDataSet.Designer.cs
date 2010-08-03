@@ -604,10 +604,10 @@ namespace DSCUpdater {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public SESSIONRow AddSESSIONRow(int edit_id, System.DateTime edit_date, string edited_by) {
+            public SESSIONRow AddSESSIONRow(System.DateTime edit_date, string edited_by) {
                 SESSIONRow rowSESSIONRow = ((SESSIONRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
-                        edit_id,
+                        null,
                         edit_date,
                         edited_by};
                 rowSESSIONRow.ItemArray = columnValuesArray;
@@ -650,6 +650,7 @@ namespace DSCUpdater {
                 base.Columns.Add(this.columnedited_by);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnedit_id}, true));
+                this.columnedit_id.AutoIncrement = true;
                 this.columnedit_id.AllowDBNull = false;
                 this.columnedit_id.Unique = true;
                 this.columnedit_date.AllowDBNull = false;
@@ -2081,13 +2082,13 @@ namespace DSCUpdater {
             
             private global::System.Data.DataColumn columnNewRoofDiscoArea;
             
-            private global::System.Data.DataColumn columnNewRoofDrywellIcArea;
+            private global::System.Data.DataColumn columnNewRoofDrywellArea;
             
             private global::System.Data.DataColumn columnNewParkArea;
             
-            private global::System.Data.DataColumn columnNewParkDiscoIcArea;
+            private global::System.Data.DataColumn columnNewParkDiscoArea;
             
-            private global::System.Data.DataColumn columnNewParkDrywellIcArea;
+            private global::System.Data.DataColumn columnNewParkDrywellArea;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public DscUpdaterDataTable() {
@@ -2148,9 +2149,9 @@ namespace DSCUpdater {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn NewRoofDrywellIcAreaColumn {
+            public global::System.Data.DataColumn NewRoofDrywellAreaColumn {
                 get {
-                    return this.columnNewRoofDrywellIcArea;
+                    return this.columnNewRoofDrywellArea;
                 }
             }
             
@@ -2162,16 +2163,16 @@ namespace DSCUpdater {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn NewParkDiscoIcAreaColumn {
+            public global::System.Data.DataColumn NewParkDiscoAreaColumn {
                 get {
-                    return this.columnNewParkDiscoIcArea;
+                    return this.columnNewParkDiscoArea;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn NewParkDrywellIcAreaColumn {
+            public global::System.Data.DataColumn NewParkDrywellAreaColumn {
                 get {
-                    return this.columnNewParkDrywellIcArea;
+                    return this.columnNewParkDrywellArea;
                 }
             }
             
@@ -2204,17 +2205,17 @@ namespace DSCUpdater {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public DscUpdaterRow AddDscUpdaterRow(string RNo, int DscId, double NewRoofArea, double NewRoofDiscoArea, double NewRoofDrywellIcArea, double NewParkArea, double NewParkDiscoIcArea, double NewParkDrywellIcArea) {
+            public DscUpdaterRow AddDscUpdaterRow(string RNo, int DscId, double NewRoofArea, double NewRoofDiscoArea, double NewRoofDrywellArea, double NewParkArea, double NewParkDiscoArea, double NewParkDrywellArea) {
                 DscUpdaterRow rowDscUpdaterRow = ((DscUpdaterRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         RNo,
                         DscId,
                         NewRoofArea,
                         NewRoofDiscoArea,
-                        NewRoofDrywellIcArea,
+                        NewRoofDrywellArea,
                         NewParkArea,
-                        NewParkDiscoIcArea,
-                        NewParkDrywellIcArea};
+                        NewParkDiscoArea,
+                        NewParkDrywellArea};
                 rowDscUpdaterRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowDscUpdaterRow);
                 return rowDscUpdaterRow;
@@ -2244,10 +2245,10 @@ namespace DSCUpdater {
                 this.columnDscId = base.Columns["DscId"];
                 this.columnNewRoofArea = base.Columns["NewRoofArea"];
                 this.columnNewRoofDiscoArea = base.Columns["NewRoofDiscoArea"];
-                this.columnNewRoofDrywellIcArea = base.Columns["NewRoofDrywellIcArea"];
+                this.columnNewRoofDrywellArea = base.Columns["NewRoofDrywellArea"];
                 this.columnNewParkArea = base.Columns["NewParkArea"];
-                this.columnNewParkDiscoIcArea = base.Columns["NewParkDiscoIcArea"];
-                this.columnNewParkDrywellIcArea = base.Columns["NewParkDrywellIcArea"];
+                this.columnNewParkDiscoArea = base.Columns["NewParkDiscoArea"];
+                this.columnNewParkDrywellArea = base.Columns["NewParkDrywellArea"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2260,14 +2261,14 @@ namespace DSCUpdater {
                 base.Columns.Add(this.columnNewRoofArea);
                 this.columnNewRoofDiscoArea = new global::System.Data.DataColumn("NewRoofDiscoArea", typeof(double), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnNewRoofDiscoArea);
-                this.columnNewRoofDrywellIcArea = new global::System.Data.DataColumn("NewRoofDrywellIcArea", typeof(double), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnNewRoofDrywellIcArea);
+                this.columnNewRoofDrywellArea = new global::System.Data.DataColumn("NewRoofDrywellArea", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNewRoofDrywellArea);
                 this.columnNewParkArea = new global::System.Data.DataColumn("NewParkArea", typeof(double), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnNewParkArea);
-                this.columnNewParkDiscoIcArea = new global::System.Data.DataColumn("NewParkDiscoIcArea", typeof(double), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnNewParkDiscoIcArea);
-                this.columnNewParkDrywellIcArea = new global::System.Data.DataColumn("NewParkDrywellIcArea", typeof(double), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnNewParkDrywellIcArea);
+                this.columnNewParkDiscoArea = new global::System.Data.DataColumn("NewParkDiscoArea", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNewParkDiscoArea);
+                this.columnNewParkDrywellArea = new global::System.Data.DataColumn("NewParkDrywellArea", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNewParkDrywellArea);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnDscId}, true));
                 this.columnRNo.Caption = "RNO";
@@ -2277,10 +2278,10 @@ namespace DSCUpdater {
                 this.columnDscId.Caption = "DSCID";
                 this.columnNewRoofArea.Caption = "New Roof Area";
                 this.columnNewRoofDiscoArea.Caption = "New Roof DISCO IC Area";
-                this.columnNewRoofDrywellIcArea.Caption = "New Roof Drywell IC Area";
+                this.columnNewRoofDrywellArea.Caption = "New Roof Drywell Area";
                 this.columnNewParkArea.Caption = "New Park Area";
-                this.columnNewParkDiscoIcArea.Caption = "New Park DISCO IC Area";
-                this.columnNewParkDrywellIcArea.Caption = "New Park Drywell IC Area";
+                this.columnNewParkDiscoArea.Caption = "New Park DISCO Area";
+                this.columnNewParkDrywellArea.Caption = "New Park Drywel Area";
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3860,11 +3861,11 @@ namespace DSCUpdater {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public MstIcDiscoVegRow FindBydscIDRoofRParkassumekey(int dscID, string RoofRPark, string assumekey) {
+            public MstIcDiscoVegRow FindBydscIDRoofRParkTimeFrame(int dscID, string RoofRPark, string TimeFrame) {
                 return ((MstIcDiscoVegRow)(this.Rows.Find(new object[] {
                             dscID,
                             RoofRPark,
-                            assumekey})));
+                            TimeFrame})));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3930,7 +3931,7 @@ namespace DSCUpdater {
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columndscID,
                                 this.columnRoofRPark,
-                                this.columnassumekey}, true));
+                                this.columnTimeFrame}, true));
                 this.columnMAPINFO_ID.AutoIncrement = true;
                 this.columnMAPINFO_ID.AutoIncrementSeed = -1;
                 this.columnMAPINFO_ID.AutoIncrementStep = -1;
@@ -3941,6 +3942,7 @@ namespace DSCUpdater {
                 this.columnRoofRPark.MaxLength = 1;
                 this.columnassumekey.AllowDBNull = false;
                 this.columnassumekey.MaxLength = 4;
+                this.columnTimeFrame.AllowDBNull = false;
                 this.columnTimeFrame.MaxLength = 2;
                 this.columnApplyAreaTF.MaxLength = 2;
                 this.columnValidFromDate.MaxLength = 21;
@@ -4270,9 +4272,11 @@ namespace DSCUpdater {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public MstIcDrywellRow FindByMAPINFO_ID(int MAPINFO_ID) {
+            public MstIcDrywellRow FindBydscIDRoofRParkTimeFrame(int dscID, string RoofRPark, string TimeFrame) {
                 return ((MstIcDrywellRow)(this.Rows.Find(new object[] {
-                            MAPINFO_ID})));
+                            dscID,
+                            RoofRPark,
+                            TimeFrame})));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4333,14 +4337,19 @@ namespace DSCUpdater {
                 this.columnAppendDate = new global::System.Data.DataColumn("AppendDate", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnAppendDate);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columnMAPINFO_ID}, true));
+                                this.columndscID,
+                                this.columnRoofRPark,
+                                this.columnTimeFrame}, true));
                 this.columnMAPINFO_ID.AutoIncrement = true;
                 this.columnMAPINFO_ID.AutoIncrementSeed = -1;
                 this.columnMAPINFO_ID.AutoIncrementStep = -1;
                 this.columnMAPINFO_ID.AllowDBNull = false;
-                this.columnMAPINFO_ID.Unique = true;
+                this.columndscID.AllowDBNull = false;
+                this.columnRoofRPark.AllowDBNull = false;
                 this.columnRoofRPark.MaxLength = 1;
+                this.columnassumeKey.AllowDBNull = false;
                 this.columnassumeKey.MaxLength = 4;
+                this.columnTimeFrame.AllowDBNull = false;
                 this.columnTimeFrame.MaxLength = 2;
                 this.columnApplyAreaTF.MaxLength = 2;
                 this.columnValidFromDate.MaxLength = 8;
@@ -5839,17 +5848,17 @@ namespace DSCUpdater {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public double NewRoofDrywellIcArea {
+            public double NewRoofDrywellArea {
                 get {
                     try {
-                        return ((double)(this[this.tableDscUpdater.NewRoofDrywellIcAreaColumn]));
+                        return ((double)(this[this.tableDscUpdater.NewRoofDrywellAreaColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'NewRoofDrywellIcArea\' in table \'DscUpdater\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'NewRoofDrywellArea\' in table \'DscUpdater\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableDscUpdater.NewRoofDrywellIcAreaColumn] = value;
+                    this[this.tableDscUpdater.NewRoofDrywellAreaColumn] = value;
                 }
             }
             
@@ -5869,32 +5878,32 @@ namespace DSCUpdater {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public double NewParkDiscoIcArea {
+            public double NewParkDiscoArea {
                 get {
                     try {
-                        return ((double)(this[this.tableDscUpdater.NewParkDiscoIcAreaColumn]));
+                        return ((double)(this[this.tableDscUpdater.NewParkDiscoAreaColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'NewParkDiscoIcArea\' in table \'DscUpdater\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'NewParkDiscoArea\' in table \'DscUpdater\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableDscUpdater.NewParkDiscoIcAreaColumn] = value;
+                    this[this.tableDscUpdater.NewParkDiscoAreaColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public double NewParkDrywellIcArea {
+            public double NewParkDrywellArea {
                 get {
                     try {
-                        return ((double)(this[this.tableDscUpdater.NewParkDrywellIcAreaColumn]));
+                        return ((double)(this[this.tableDscUpdater.NewParkDrywellAreaColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'NewParkDrywellIcArea\' in table \'DscUpdater\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'NewParkDrywellArea\' in table \'DscUpdater\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableDscUpdater.NewParkDrywellIcAreaColumn] = value;
+                    this[this.tableDscUpdater.NewParkDrywellAreaColumn] = value;
                 }
             }
             
@@ -5929,13 +5938,13 @@ namespace DSCUpdater {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsNewRoofDrywellIcAreaNull() {
-                return this.IsNull(this.tableDscUpdater.NewRoofDrywellIcAreaColumn);
+            public bool IsNewRoofDrywellAreaNull() {
+                return this.IsNull(this.tableDscUpdater.NewRoofDrywellAreaColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetNewRoofDrywellIcAreaNull() {
-                this[this.tableDscUpdater.NewRoofDrywellIcAreaColumn] = global::System.Convert.DBNull;
+            public void SetNewRoofDrywellAreaNull() {
+                this[this.tableDscUpdater.NewRoofDrywellAreaColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5949,23 +5958,23 @@ namespace DSCUpdater {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsNewParkDiscoIcAreaNull() {
-                return this.IsNull(this.tableDscUpdater.NewParkDiscoIcAreaColumn);
+            public bool IsNewParkDiscoAreaNull() {
+                return this.IsNull(this.tableDscUpdater.NewParkDiscoAreaColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetNewParkDiscoIcAreaNull() {
-                this[this.tableDscUpdater.NewParkDiscoIcAreaColumn] = global::System.Convert.DBNull;
+            public void SetNewParkDiscoAreaNull() {
+                this[this.tableDscUpdater.NewParkDiscoAreaColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsNewParkDrywellIcAreaNull() {
-                return this.IsNull(this.tableDscUpdater.NewParkDrywellIcAreaColumn);
+            public bool IsNewParkDrywellAreaNull() {
+                return this.IsNull(this.tableDscUpdater.NewParkDrywellAreaColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetNewParkDrywellIcAreaNull() {
-                this[this.tableDscUpdater.NewParkDrywellIcAreaColumn] = global::System.Convert.DBNull;
+            public void SetNewParkDrywellAreaNull() {
+                this[this.tableDscUpdater.NewParkDrywellAreaColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -7816,12 +7825,7 @@ namespace DSCUpdater {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string TimeFrame {
                 get {
-                    try {
-                        return ((string)(this[this.tableMstIcDiscoVeg.TimeFrameColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'TimeFrame\' in table \'MstIcDiscoVeg\' is DBNull.", e);
-                    }
+                    return ((string)(this[this.tableMstIcDiscoVeg.TimeFrameColumn]));
                 }
                 set {
                     this[this.tableMstIcDiscoVeg.TimeFrameColumn] = value;
@@ -7954,16 +7958,6 @@ namespace DSCUpdater {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsTimeFrameNull() {
-                return this.IsNull(this.tableMstIcDiscoVeg.TimeFrameColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetTimeFrameNull() {
-                this[this.tableMstIcDiscoVeg.TimeFrameColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public bool IsApplyAreaTFNull() {
                 return this.IsNull(this.tableMstIcDiscoVeg.ApplyAreaTFColumn);
             }
@@ -8061,12 +8055,7 @@ namespace DSCUpdater {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public int dscID {
                 get {
-                    try {
-                        return ((int)(this[this.tableMstIcDrywell.dscIDColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'dscID\' in table \'MstIcDrywell\' is DBNull.", e);
-                    }
+                    return ((int)(this[this.tableMstIcDrywell.dscIDColumn]));
                 }
                 set {
                     this[this.tableMstIcDrywell.dscIDColumn] = value;
@@ -8106,12 +8095,7 @@ namespace DSCUpdater {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string RoofRPark {
                 get {
-                    try {
-                        return ((string)(this[this.tableMstIcDrywell.RoofRParkColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'RoofRPark\' in table \'MstIcDrywell\' is DBNull.", e);
-                    }
+                    return ((string)(this[this.tableMstIcDrywell.RoofRParkColumn]));
                 }
                 set {
                     this[this.tableMstIcDrywell.RoofRParkColumn] = value;
@@ -8121,12 +8105,7 @@ namespace DSCUpdater {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string assumeKey {
                 get {
-                    try {
-                        return ((string)(this[this.tableMstIcDrywell.assumeKeyColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'assumeKey\' in table \'MstIcDrywell\' is DBNull.", e);
-                    }
+                    return ((string)(this[this.tableMstIcDrywell.assumeKeyColumn]));
                 }
                 set {
                     this[this.tableMstIcDrywell.assumeKeyColumn] = value;
@@ -8136,12 +8115,7 @@ namespace DSCUpdater {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string TimeFrame {
                 get {
-                    try {
-                        return ((string)(this[this.tableMstIcDrywell.TimeFrameColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'TimeFrame\' in table \'MstIcDrywell\' is DBNull.", e);
-                    }
+                    return ((string)(this[this.tableMstIcDrywell.TimeFrameColumn]));
                 }
                 set {
                     this[this.tableMstIcDrywell.TimeFrameColumn] = value;
@@ -8239,16 +8213,6 @@ namespace DSCUpdater {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsdscIDNull() {
-                return this.IsNull(this.tableMstIcDrywell.dscIDColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetdscIDNull() {
-                this[this.tableMstIcDrywell.dscIDColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public bool IsParcelIDNull() {
                 return this.IsNull(this.tableMstIcDrywell.ParcelIDColumn);
             }
@@ -8266,36 +8230,6 @@ namespace DSCUpdater {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public void SetDivideIDNull() {
                 this[this.tableMstIcDrywell.DivideIDColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsRoofRParkNull() {
-                return this.IsNull(this.tableMstIcDrywell.RoofRParkColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetRoofRParkNull() {
-                this[this.tableMstIcDrywell.RoofRParkColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsassumeKeyNull() {
-                return this.IsNull(this.tableMstIcDrywell.assumeKeyColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetassumeKeyNull() {
-                this[this.tableMstIcDrywell.assumeKeyColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsTimeFrameNull() {
-                return this.IsNull(this.tableMstIcDrywell.TimeFrameColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetTimeFrameNull() {
-                this[this.tableMstIcDrywell.TimeFrameColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -11002,10 +10936,10 @@ SELECT dsc_edit_id, edit_id, edit_date, edited_by, rno, dsc_id, old_roof_area_sq
             tableMapping.ColumnMappings.Add("RNO", "RNo");
             tableMapping.ColumnMappings.Add("New Roof Area", "NewRoofArea");
             tableMapping.ColumnMappings.Add("New Roof DISCO IC Area", "NewRoofDiscoArea");
-            tableMapping.ColumnMappings.Add("New Roof Drywell IC Area", "NewRoofDrywellIcArea");
+            tableMapping.ColumnMappings.Add("New Roof Drywell IC Area", "NewRoofDrywellArea");
             tableMapping.ColumnMappings.Add("New Park Area", "NewParkArea");
-            tableMapping.ColumnMappings.Add("New Park DISCO IC Area", "NewParkDiscoIcArea");
-            tableMapping.ColumnMappings.Add("New Park Drywell IC Area", "NewParkDrywellIcArea");
+            tableMapping.ColumnMappings.Add("New Park DISCO IC Area", "NewParkDiscoArea");
+            tableMapping.ColumnMappings.Add("New Park Drywell IC Area", "NewParkDrywellArea");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.OleDb.OleDbCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
@@ -14926,16 +14860,10 @@ FROM         mst_dsc_ac";
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_MAPINFO_ID, global::System.Nullable<int> Original_dscID, global::System.Nullable<int> Original_ParcelID, global::System.Nullable<int> Original_DivideID, string Original_RoofRPark, string Original_assumeKey, string Original_TimeFrame, string Original_ApplyAreaTF, string Original_ValidFromDate, string Original_ValidToDate, global::System.Nullable<int> Original_SqFt, string Original_Comment, string Original_AppendDate) {
+        public virtual int Delete(int Original_MAPINFO_ID, int Original_dscID, global::System.Nullable<int> Original_ParcelID, global::System.Nullable<int> Original_DivideID, string Original_RoofRPark, string Original_assumeKey, string Original_TimeFrame, string Original_ApplyAreaTF, string Original_ValidFromDate, string Original_ValidToDate, global::System.Nullable<int> Original_SqFt, string Original_Comment, string Original_AppendDate) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_MAPINFO_ID));
-            if ((Original_dscID.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[2].Value = ((int)(Original_dscID.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
+            this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
+            this.Adapter.DeleteCommand.Parameters[2].Value = ((int)(Original_dscID));
             if ((Original_ParcelID.HasValue == true)) {
                 this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
                 this.Adapter.DeleteCommand.Parameters[4].Value = ((int)(Original_ParcelID.Value));
@@ -14953,24 +14881,21 @@ FROM         mst_dsc_ac";
                 this.Adapter.DeleteCommand.Parameters[6].Value = global::System.DBNull.Value;
             }
             if ((Original_RoofRPark == null)) {
-                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[8].Value = global::System.DBNull.Value;
+                throw new global::System.ArgumentNullException("Original_RoofRPark");
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(0));
                 this.Adapter.DeleteCommand.Parameters[8].Value = ((string)(Original_RoofRPark));
             }
             if ((Original_assumeKey == null)) {
-                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[10].Value = global::System.DBNull.Value;
+                throw new global::System.ArgumentNullException("Original_assumeKey");
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(0));
                 this.Adapter.DeleteCommand.Parameters[10].Value = ((string)(Original_assumeKey));
             }
             if ((Original_TimeFrame == null)) {
-                this.Adapter.DeleteCommand.Parameters[11].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[12].Value = global::System.DBNull.Value;
+                throw new global::System.ArgumentNullException("Original_TimeFrame");
             }
             else {
                 this.Adapter.DeleteCommand.Parameters[11].Value = ((object)(0));
@@ -15043,13 +14968,8 @@ FROM         mst_dsc_ac";
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(global::System.Nullable<int> dscID, global::System.Nullable<int> ParcelID, global::System.Nullable<int> DivideID, string RoofRPark, string assumeKey, string TimeFrame, string ApplyAreaTF, string ValidFromDate, string ValidToDate, global::System.Nullable<int> SqFt, string Comment, string AppendDate) {
-            if ((dscID.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[0].Value = ((int)(dscID.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
-            }
+        public virtual int Insert(int dscID, global::System.Nullable<int> ParcelID, global::System.Nullable<int> DivideID, string RoofRPark, string assumeKey, string TimeFrame, string ApplyAreaTF, string ValidFromDate, string ValidToDate, global::System.Nullable<int> SqFt, string Comment, string AppendDate) {
+            this.Adapter.InsertCommand.Parameters[0].Value = ((int)(dscID));
             if ((ParcelID.HasValue == true)) {
                 this.Adapter.InsertCommand.Parameters[1].Value = ((int)(ParcelID.Value));
             }
@@ -15063,19 +14983,19 @@ FROM         mst_dsc_ac";
                 this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
             }
             if ((RoofRPark == null)) {
-                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
+                throw new global::System.ArgumentNullException("RoofRPark");
             }
             else {
                 this.Adapter.InsertCommand.Parameters[3].Value = ((string)(RoofRPark));
             }
             if ((assumeKey == null)) {
-                this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
+                throw new global::System.ArgumentNullException("assumeKey");
             }
             else {
                 this.Adapter.InsertCommand.Parameters[4].Value = ((string)(assumeKey));
             }
             if ((TimeFrame == null)) {
-                this.Adapter.InsertCommand.Parameters[5].Value = global::System.DBNull.Value;
+                throw new global::System.ArgumentNullException("TimeFrame");
             }
             else {
                 this.Adapter.InsertCommand.Parameters[5].Value = ((string)(TimeFrame));
@@ -15136,7 +15056,7 @@ FROM         mst_dsc_ac";
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
         public virtual int Update(
-                    global::System.Nullable<int> dscID, 
+                    int dscID, 
                     global::System.Nullable<int> ParcelID, 
                     global::System.Nullable<int> DivideID, 
                     string RoofRPark, 
@@ -15149,7 +15069,7 @@ FROM         mst_dsc_ac";
                     string Comment, 
                     string AppendDate, 
                     int Original_MAPINFO_ID, 
-                    global::System.Nullable<int> Original_dscID, 
+                    int Original_dscID, 
                     global::System.Nullable<int> Original_ParcelID, 
                     global::System.Nullable<int> Original_DivideID, 
                     string Original_RoofRPark, 
@@ -15161,12 +15081,7 @@ FROM         mst_dsc_ac";
                     global::System.Nullable<int> Original_SqFt, 
                     string Original_Comment, 
                     string Original_AppendDate) {
-            if ((dscID.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(dscID.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[0].Value = global::System.DBNull.Value;
-            }
+            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(dscID));
             if ((ParcelID.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(ParcelID.Value));
             }
@@ -15180,19 +15095,19 @@ FROM         mst_dsc_ac";
                 this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
             }
             if ((RoofRPark == null)) {
-                this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
+                throw new global::System.ArgumentNullException("RoofRPark");
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[3].Value = ((string)(RoofRPark));
             }
             if ((assumeKey == null)) {
-                this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
+                throw new global::System.ArgumentNullException("assumeKey");
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[4].Value = ((string)(assumeKey));
             }
             if ((TimeFrame == null)) {
-                this.Adapter.UpdateCommand.Parameters[5].Value = global::System.DBNull.Value;
+                throw new global::System.ArgumentNullException("TimeFrame");
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[5].Value = ((string)(TimeFrame));
@@ -15234,14 +15149,8 @@ FROM         mst_dsc_ac";
                 this.Adapter.UpdateCommand.Parameters[11].Value = ((string)(AppendDate));
             }
             this.Adapter.UpdateCommand.Parameters[12].Value = ((int)(Original_MAPINFO_ID));
-            if ((Original_dscID.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[13].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[14].Value = ((int)(Original_dscID.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[13].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[14].Value = global::System.DBNull.Value;
-            }
+            this.Adapter.UpdateCommand.Parameters[13].Value = ((object)(0));
+            this.Adapter.UpdateCommand.Parameters[14].Value = ((int)(Original_dscID));
             if ((Original_ParcelID.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[15].Value = ((object)(0));
                 this.Adapter.UpdateCommand.Parameters[16].Value = ((int)(Original_ParcelID.Value));
@@ -15259,24 +15168,21 @@ FROM         mst_dsc_ac";
                 this.Adapter.UpdateCommand.Parameters[18].Value = global::System.DBNull.Value;
             }
             if ((Original_RoofRPark == null)) {
-                this.Adapter.UpdateCommand.Parameters[19].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[20].Value = global::System.DBNull.Value;
+                throw new global::System.ArgumentNullException("Original_RoofRPark");
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[19].Value = ((object)(0));
                 this.Adapter.UpdateCommand.Parameters[20].Value = ((string)(Original_RoofRPark));
             }
             if ((Original_assumeKey == null)) {
-                this.Adapter.UpdateCommand.Parameters[21].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[22].Value = global::System.DBNull.Value;
+                throw new global::System.ArgumentNullException("Original_assumeKey");
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[21].Value = ((object)(0));
                 this.Adapter.UpdateCommand.Parameters[22].Value = ((string)(Original_assumeKey));
             }
             if ((Original_TimeFrame == null)) {
-                this.Adapter.UpdateCommand.Parameters[23].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[24].Value = global::System.DBNull.Value;
+                throw new global::System.ArgumentNullException("Original_TimeFrame");
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[23].Value = ((object)(0));
@@ -15344,6 +15250,35 @@ FROM         mst_dsc_ac";
                     this.Adapter.UpdateCommand.Connection.Close();
                 }
             }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(
+                    global::System.Nullable<int> ParcelID, 
+                    global::System.Nullable<int> DivideID, 
+                    string assumeKey, 
+                    string ApplyAreaTF, 
+                    string ValidFromDate, 
+                    string ValidToDate, 
+                    global::System.Nullable<int> SqFt, 
+                    string Comment, 
+                    string AppendDate, 
+                    int Original_MAPINFO_ID, 
+                    int Original_dscID, 
+                    global::System.Nullable<int> Original_ParcelID, 
+                    global::System.Nullable<int> Original_DivideID, 
+                    string Original_RoofRPark, 
+                    string Original_assumeKey, 
+                    string Original_TimeFrame, 
+                    string Original_ApplyAreaTF, 
+                    string Original_ValidFromDate, 
+                    string Original_ValidToDate, 
+                    global::System.Nullable<int> Original_SqFt, 
+                    string Original_Comment, 
+                    string Original_AppendDate) {
+            return this.Update(Original_dscID, ParcelID, DivideID, Original_RoofRPark, assumeKey, Original_TimeFrame, ApplyAreaTF, ValidFromDate, ValidToDate, SqFt, Comment, AppendDate, Original_MAPINFO_ID, Original_dscID, Original_ParcelID, Original_DivideID, Original_RoofRPark, Original_assumeKey, Original_TimeFrame, Original_ApplyAreaTF, Original_ValidFromDate, Original_ValidToDate, Original_SqFt, Original_Comment, Original_AppendDate);
         }
     }
     

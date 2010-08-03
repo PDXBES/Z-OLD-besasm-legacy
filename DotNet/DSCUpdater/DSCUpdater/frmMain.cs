@@ -426,142 +426,33 @@ namespace DSCUpdater
       return (dtReturn);
     }
     public delegate object[] CreateRowDelegate<T>(T t);
-     */
+     */    
 
-    private void BatchDSCEDITAPPENDQueries(SqlCommand sqlCmd)
+    private void UpdateDscTables()
     {
-      //run Append2DSCEDITAPPEND query-appends user-defined file into DSCEDITAPPEND sql table                          
-      sqlCmd.CommandText = "INSERT INTO DSCEDITAPPEND (dsc_edit_id, edit_id, edit_date, edited_by, rno, dsc_id, " +
-                           "old_roof_area_sqft, new_roof_area_sqft, old_roof_disco_ic_area_sqft, " +
-                           "new_roof_disco_ic_area_sqft, old_park_area_sqft, new_park_area_sqft, " +
-                           "old_park_disco_ic_area_sqft, new_park_disco_ic_area_sqft, " +
-                           "old_park_drywell_ic_area_sqft, old_roof_drywell_ic_area_sqft, " +
-                           "new_roof_drywell_ic_area_sqft, new_park_drywell_ic_area_sqft) " +
-                           "SELECT 0 AS dsc_edit_id, @editID AS edit_id, @editDate AS edit_date, @editedBy AS edited_by, " +
-                           "mst_DSC_ac.RNO AS rno, USERUPDATE.dsc_id AS dsc_id, " +
-                           "mst_DSC_ac.RfAreaFtEX AS old_roof_area_sqft, 0 AS new_roof_area_sqft, " +
-                           "0 AS old_roof_disco_ic_area_sqft, 0 AS new_roof_disco_ic_area_sqft, " +
-                           "mst_DSC_ac.PkAreaFtEX AS old_park_area_sqft, 0 AS new_park_area_sqft, " +
-                           "0 AS old_park_disco_ic_area_sqft, 0 AS new_park_disco_ic_area_sqft, " +
-                           "0 AS old_park_drywell_ic_area_sqft, 0 AS old_roof_drywell_ic_area_sqft, " +
-                           "0 AS new_roof_drywell_ic_area_sqft, 0 AS new_park_drywell_ic_area_sqft " +
-                           "FROM USERUPDATE INNER JOIN mst_DSC_ac ON USERUPDATE.dsc_id=mst_DSC_ac.DSCID";
-      //sqlCmd.ExecuteNonQuery();
+      /*
+       * 1) Obtain a list of DSCIDs that don't already exist in IC table
+       * 2) Append new IC records if don't exist already
+       * 3) Update new IC records with new data (2 & 3 can be merged
+       * */
+      int editSessionId = UpdateTableSession();
 
-      int dscId;
-      int editId = 0;//TODO: What should this value be?
-
-      int newRoofArea, newParkArea;
-      int oldRoofArea, oldParkArea;
-
-      int newRoofDiscoArea, newParkDiscoArea;
-      int newRoofDrywellArea, newParkDrywellArea;
-
-      int oldRoofDiscoArea = 0, oldParkDiscoArea = 0; //TODO: What should these values be?
-      int oldRoofDrywellArea = 0, oldParkDrywellArea = 0; //TODO: What should these values be?
-
-      foreach (ProjectDataSet.USERUPDATERow userUpdateRow in projectDataSet.USERUPDATE)
+      foreach (ProjectDataSet.DscUpdaterRow dscUpdaterRow in projectDataSet.DscUpdater)
       {
-        dscId = userUpdateRow.dsc_id;
-        ProjectDataSet.MstDscRow mstDscRow = projectDataSet.MstDsc.FindByDSCID(dscId);
+        int dscId = dscUpdaterRow.DscId;
+        //Add any needed DiscoVeg Roof ICs
+        UpdateMstDiscoVegRecord(dscId, (int)dscUpdaterRow.NewRoofDiscoArea, (int)dscUpdaterRow.NewParkDiscoArea);
 
-        oldRoofArea = mstDscRow.RfAreaFtEX;
-        oldParkArea = mstDscRow.PkAreaFtEX;
+        //Add any needed Drywell Roof ICs
+        UpdateMstDrywellRecord(dscId, (int)dscUpdaterRow.NewRoofDrywellArea, (int)dscUpdaterRow.NewParkDrywellArea);
 
-        newRoofArea = userUpdateRow.new_roof_area_sqft;
-        newParkArea = userUpdateRow.new_park_area_sqft;
+        UpdateMstDscRecord(dscId, (int)dscUpdaterRow.NewRoofArea, (int)dscUpdaterRow.NewParkArea);
 
-        newRoofDiscoArea = userUpdateRow.new_roof_disco_ic_area_sqft;
-        newParkDiscoArea = userUpdateRow.new_park_disco_ic_area_sqft;
-
-        newRoofDrywellArea = userUpdateRow.new_roof_drywell_ic_area_sqft;
-        newParkDrywellArea = userUpdateRow.new_park_drywell_ic_area_sqft;
-
-        projectDataSet.DSCEDIT.AddDSCEDITRow(
-          editId, DateTime.Now, Environment.UserName, userUpdateRow.rno, dscId,
-          oldRoofArea, newRoofArea, oldRoofDiscoArea, newRoofDiscoArea, oldRoofDrywellArea, newRoofDrywellArea,
-          oldParkArea, newParkArea, oldParkDiscoArea, newParkDiscoArea, oldParkDrywellArea, newParkDrywellArea,
-          true);
+        UpdateDscEdit(editSessionId, dscUpdaterRow);
       }
-
-      projectDataSet.DSCEDIT.AcceptChanges();
-
-      return;
-
-
-      //run UpdateOldImperviousArea query to update the old_park_area_sqft and old_roof_area_sqft fields in the DSCEDITAPPEND table
-      sqlCmd.CommandText = "UPDATE DSCEDITAPPEND SET old_park_area_sqft = mst_DSC_ac.PkAreaFtEX, " +
-                        "old_roof_area_sqft = mst_DSC_ac.RfAreaFtEX " +
-                        "FROM DSCEDITAPPEND INNER JOIN mst_DSC_ac " +
-                        "ON DSCEDITAPPEND.dsc_id = mst_DSC_ac.dscID";
-      sqlCmd.ExecuteNonQuery();
-
-      //run UpdateOldParkDISCOICArea query
-      sqlCmd.CommandText = "UPDATE DSCEDITAPPEND SET " +
-                        "old_park_disco_ic_area_sqft = mst_ic_DiscoVeg_ac.SqFt " +
-                        "FROM DSCEDITAPPEND INNER JOIN mst_ic_DiscoVeg_ac " +
-                        "ON DSCEDITAPPEND.dsc_id = mst_ic_DiscoVeg_ac.dscID " +
-                        "WHERE (((mst_ic_DiscoVeg_ac.RoofRPark)=N'P') " +
-                        "AND ((mst_ic_DiscoVeg_ac.TimeFrame)=N'EX') " +
-                        "AND ((mst_ic_DiscoVeg_ac.assumekey)=N'DDEX')) " +
-                        "OR (((mst_ic_DiscoVeg_ac.assumekey)=N'SE01'))";
-      sqlCmd.ExecuteNonQuery();
-
-      //run UpdateOldParkDrywellArea query
-      sqlCmd.CommandText = "UPDATE DSCEDITAPPEND SET " +
-                        "old_park_disco_ic_area_sqft = mst_ic_Drywell_ac.SqFt " +
-                        "FROM DSCEDITAPPEND INNER JOIN mst_ic_Drywell_ac " +
-                        "ON DSCEDITAPPEND.dsc_id = mst_ic_Drywell_ac.dscID " +
-                        "WHERE (((mst_ic_Drywell_ac.RoofRPark)=N'P') " +
-                        "AND ((mst_ic_Drywell_ac.TimeFrame)=N'EX') " +
-                        "AND ((mst_ic_Drywell_ac.assumeKey)=N'DWPR')) " +
-                        "OR (((mst_ic_Drywell_ac.assumeKey)=N'LE80')) " +
-                        "OR (((mst_ic_Drywell_ac.assumeKey)=N'SE01')) " +
-                        "OR (((mst_ic_Drywell_ac.assumeKey)=N'EX01')) " +
-                        "OR (((mst_ic_Drywell_ac.assumeKey)=N'INSU'))";
-      sqlCmd.ExecuteNonQuery();
-
-      //run UpdateOldRoofDISCOICArea query
-      sqlCmd.CommandText = "UPDATE DSCEDITAPPEND SET " +
-                        "old_roof_disco_ic_area_sqft = mst_ic_DiscoVeg_ac.SqFt " +
-                        "FROM DSCEDITAPPEND INNER JOIN mst_ic_DiscoVeg_ac " +
-                        "ON DSCEDITAPPEND.dsc_id = mst_ic_DiscoVeg_ac.dscID " +
-                        "WHERE (((mst_ic_DiscoVeg_ac.RoofRPark)=N'R') " +
-                        "AND ((mst_ic_DiscoVeg_ac.TimeFrame)=N'EX') " +
-                        "AND ((mst_ic_DiscoVeg_ac.assumekey)=N'DDEX')) " +
-                        "OR (((mst_ic_DiscoVeg_ac.assumekey)=N'SE01'))";
-      sqlCmd.ExecuteNonQuery();
-
-      //run UpdateOldRoofDrywellIC Area query
-      sqlCmd.CommandText = "UPDATE DSCEDITAPPEND SET " +
-                        "old_roof_drywell_ic_area_sqft = mst_ic_Drywell_ac.SqFt " +
-                        "FROM DSCEDITAPPEND INNER JOIN mst_ic_Drywell_ac " +
-                        "ON DSCEDITAPPEND.dsc_id = mst_ic_Drywell_ac.dscID " +
-                        "WHERE  (((mst_ic_Drywell_ac.RoofRPark)=N'R') " +
-                        "AND ((mst_ic_Drywell_ac.TimeFrame)=N'EX') " +
-                        "AND ((mst_ic_Drywell_ac.assumeKey)=N'DWPR')) " +
-                        "OR (((mst_ic_Drywell_ac.assumeKey)=N'LE80')) " +
-                        "OR (((mst_ic_Drywell_ac.assumeKey)=N'SE01')) " +
-                        "OR (((mst_ic_Drywell_ac.assumeKey)=N'EX01')) " +
-                        "OR (((mst_ic_Drywell_ac.assumeKey)=N'INSU'))";
-      sqlCmd.ExecuteNonQuery();
-
-      //run UpdateDSCEDITAPPENDfromUSERUPDATE query
-      sqlCmd.CommandText = "UPDATE DSCEDITAPPEND SET " +
-                        "new_roof_area_sqft = USERUPDATE.new_roof_area_sqft, " +
-                        "new_roof_disco_ic_area_sqft=USERUPDATE.new_roof_disco_ic_area_sqft, " +
-                        "new_roof_drywell_ic_area_sqft=USERUPDATE.new_roof_drywell_ic_area_sqft, " +
-                        "new_park_area_sqft=USERUPDATE.new_park_area_sqft, " +
-                        "new_park_disco_ic_area_sqft=USERUPDATE.new_park_disco_ic_area_sqft, " +
-                        "new_park_drywell_ic_area_sqft=USERUPDATE.new_park_drywell_ic_area_sqft " +
-                        "FROM DSCEDITAPPEND INNER JOIN USERUPDATE " +
-                        "ON DSCEDITAPPEND.dsc_id=USERUPDATE.dsc_id";
-      sqlCmd.ExecuteNonQuery();
-    }
-
-    private static void BatchNewICRecords(SqlCommand sqlCmd)
-    {
+      #region old sql queries
       //run AppendNewParkDISCORecords queries
+      SqlCommand sqlCmd = null;
       sqlCmd.CommandText = "CREATE TABLE FIRSTLIST " +
                            "([dsc_id] [int])";
       sqlCmd.ExecuteNonQuery();
@@ -834,78 +725,109 @@ namespace DSCUpdater
                         "AND mst_ic_Drywell_ac.RoofRPark = 'R') " +
                         "WHERE (DSCEDITAPPEND.new_roof_drywell_ic_area_sqft <> 0)";
       sqlCmd.ExecuteNonQuery();
+      #endregion
     }
 
-    private static void BatchUpdateMasterICTables(SqlCommand sqlCmd)
+    private void UpdateMstDiscoVegRecord(int dscId, int newRoofDiscoArea, int newParkDiscoArea)
     {
-      //run UpdateCurrentParkDISCORecords query
-      sqlCmd.CommandText = "UPDATE mst_ic_DiscoVeg_ac SET " +
-                        "SqFt = DSCEDITAPPEND.new_park_disco_ic_area_sqft " +
-                        "FROM mst_ic_DiscoVeg_ac INNER JOIN DSCEDITAPPEND " +
-                        "ON mst_ic_DiscoVeg_ac.dscID = DSCEDITAPPEND.dsc_id " +
-                        "WHERE (((mst_ic_DiscoVeg_ac.RoofRPark)=N'P') " +
-                        "AND ((mst_ic_DiscoVeg_ac.TimeFrame)=N'EX') " +
-                        "AND ((mst_ic_DiscoVeg_ac.assumekey)=N'DDEX')) " +
-                        "OR (((mst_ic_DiscoVeg_ac.assumekey)=N'SE01'))";
-      sqlCmd.ExecuteNonQuery();
+      ProjectDataSet.MstIcDiscoVegRow mstIcDiscoVegRow = projectDataSet.MstIcDiscoVeg.FindBydscIDRoofRParkTimeFrame(dscId, "R", "EX");
+      if (mstIcDiscoVegRow == null)
+      {
+        mstIcDiscoVegRow = projectDataSet.MstIcDiscoVeg.AddMstIcDiscoVegRow(
+          dscId, Convert.ToInt32(dscId / 100), Convert.ToInt32(dscId % 100),
+          "R", "DDEX", "EX", "EX", String.Empty, String.Empty,
+          0, .7, "", DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss"));
+      }
+      mstIcDiscoVegRow.SqFt = newRoofDiscoArea;
 
-      //run UpdateCurrentParkDrywell query
-      sqlCmd.CommandText = "UPDATE mst_ic_Drywell_ac SET " +
-                        "SqFt = DSCEDITAPPEND.new_park_drywell_ic_area_sqft " +
-                        "FROM mst_ic_Drywell_ac INNER JOIN DSCEDITAPPEND ON " +
-                        "mst_ic_Drywell_ac.dscID = DSCEDITAPPEND.dsc_id WHERE " +
-                        "(((mst_ic_Drywell_ac.RoofRPark)=N'P') AND " +
-                        "((mst_ic_Drywell_ac.TimeFrame)=N'EX') AND " +
-                        "((mst_ic_Drywell_ac.assumeKey)=N'DWPR')) OR " +
-                        "(((mst_ic_Drywell_ac.assumeKey)=N'LE80')) OR " +
-                        "(((mst_ic_Drywell_ac.assumeKey)=N'SE01')) OR " +
-                        "(((mst_ic_Drywell_ac.assumeKey)=N'EX01')) OR " +
-                        "(((mst_ic_Drywell_ac.assumeKey)=N'INSU'))";
-      sqlCmd.ExecuteNonQuery();
-
-      //run UpdateCurrentRoofDISCORecords query
-      sqlCmd.CommandText = "UPDATE mst_ic_DiscoVeg_ac SET " +
-                        "SqFt = DSCEDITAPPEND.new_roof_disco_ic_area_sqft FROM " +
-                        "mst_ic_DiscoVeg_ac INNER JOIN DSCEDITAPPEND ON " +
-                        "mst_ic_DiscoVeg_ac.dscID = DSCEDITAPPEND.dsc_id WHERE " +
-                        "(((mst_ic_DiscoVeg_ac.RoofRPark)=N'R') AND " +
-                        "((mst_ic_DiscoVeg_ac.TimeFrame)=N'EX') AND " +
-                        "((mst_ic_DiscoVeg_ac.assumekey)=N'DDEX')) OR " +
-                        "(((mst_ic_DiscoVeg_ac.assumekey)=N'SE01'))";
-      sqlCmd.ExecuteNonQuery();
-
-      //run UpdateCurrentRoofDrywellRecords query
-      sqlCmd.CommandText = "UPDATE mst_ic_Drywell_ac SET " +
-                        "SqFt = DSCEDITAPPEND.new_roof_drywell_ic_area_sqft FROM " +
-                        "mst_ic_Drywell_ac INNER JOIN DSCEDITAPPEND ON " +
-                        "mst_ic_Drywell_ac.dscID = DSCEDITAPPEND.dsc_id WHERE " +
-                        "(((mst_ic_Drywell_ac.RoofRPark)=N'R') AND " +
-                        "((mst_ic_Drywell_ac.TimeFrame)=N'EX') AND " +
-                        "((mst_ic_Drywell_ac.assumeKey)=N'DWPR')) OR " +
-                        "(((mst_ic_Drywell_ac.assumeKey)=N'LE80')) OR " +
-                        "(((mst_ic_Drywell_ac.assumeKey)=N'SE01')) OR " +
-                        "(((mst_ic_Drywell_ac.assumeKey)=N'EX01')) OR " +
-                        "(((mst_ic_Drywell_ac.assumeKey)=N'INSU'))";
-      sqlCmd.ExecuteNonQuery();
+      //Add any needed DiscoVeg Park ICs
+      mstIcDiscoVegRow = projectDataSet.MstIcDiscoVeg.FindBydscIDRoofRParkTimeFrame(dscId, "P", "EX");
+      if (mstIcDiscoVegRow == null)
+      {
+        mstIcDiscoVegRow = projectDataSet.MstIcDiscoVeg.AddMstIcDiscoVegRow(
+          dscId, Convert.ToInt32(dscId / 100), Convert.ToInt32(dscId % 100),
+          "P", "DDEX", "EX", "EX", String.Empty, String.Empty,
+          0, .7, "", DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss"));
+      }
+      mstIcDiscoVegRow.SqFt = newParkDiscoArea;
     }
-
-    private static void BatchUpdateDSCAreas(SqlCommand sqlCmd)
+    private void UpdateMstDrywellRecord(int dscId, int newRoofDrywellArea, int newParkDrywellArea)
     {
-      //run UpdateMasterParkArea query
-      sqlCmd.CommandText = "UPDATE mst_DSC_ac SET " +
-                        "surveyedPkAreaSqft = DSCEDITAPPEND.new_park_area_sqft, " +
-                        "parkAreaNeedsUpdate = 1 FROM mst_DSC_ac INNER JOIN DSCEDITAPPEND " +
-                        "ON mst_DSC_ac.DSCID = DSCEDITAPPEND.dsc_id " +
-                        "AND mst_DSC_ac.PkAreaFtEX <> DSCEDITAPPEND.new_park_area_sqft";
-      sqlCmd.ExecuteNonQuery();
+      ProjectDataSet.MstIcDrywellRow mstIcDrywellRow = projectDataSet.MstIcDrywell.FindBydscIDRoofRParkTimeFrame(dscId, "R", "EX");
+      if (mstIcDrywellRow == null)
+      {
+        mstIcDrywellRow = projectDataSet.MstIcDrywell.AddMstIcDrywellRow(
+          dscId, Convert.ToInt32(dscId / 100), Convert.ToInt32(dscId % 100),
+          "R", "DDEX", "EX", "EX", String.Empty, String.Empty,
+          0, "", DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss"));
+      }
+      mstIcDrywellRow.SqFt = newRoofDrywellArea;
 
-      //run UpdateMasterRoofArea query
-      sqlCmd.CommandText = "UPDATE mst_DSC_ac SET " +
-                        "surveyedRfAreaSqFt = DSCEDITAPPEND.new_roof_area_sqft, " +
-                        "roofAreaNeedsUpdate = 1 FROM mst_DSC_ac INNER JOIN DSCEDITAPPEND " +
-                        "ON mst_DSC_ac.DSCID = DSCEDITAPPEND.dsc_id AND " +
-                        "mst_DSC_ac.RfAreaFtEX <> DSCEDITAPPEND.new_roof_area_sqft";
-      sqlCmd.ExecuteNonQuery();
+      //Add any needed Drywell Park ICs
+      mstIcDrywellRow = projectDataSet.MstIcDrywell.FindBydscIDRoofRParkTimeFrame(dscId, "P", "EX");
+      if (mstIcDrywellRow == null)
+      {
+        mstIcDrywellRow = projectDataSet.MstIcDrywell.AddMstIcDrywellRow(
+          dscId, Convert.ToInt32(dscId / 100), Convert.ToInt32(dscId % 100),
+          "P", "DDEX", "EX", "EX", String.Empty, String.Empty,
+          0, "", DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss"));
+      }
+      mstIcDrywellRow.SqFt = newParkDrywellArea;
+    }
+    private void UpdateMstDscRecord(int dscId, int newRoofArea, int newParkArea)
+    {
+      ProjectDataSet.MstDscRow mstDscRow = projectDataSet.MstDsc.FindByDSCID(dscId);
+      if (mstDscRow == null)
+      {
+        throw new Exception("Dsc " + dscId + " not found in master data.");
+      }
+
+      mstDscRow.RfAreaFtEX = newRoofArea;
+      mstDscRow.PkAreaFtEX = newParkArea;
+      return;
+    }
+    private void UpdateDscEdit(int editSessionId, ProjectDataSet.DscUpdaterRow dscUpdaterRow)
+    {
+      int dscId;      
+
+      int newRoofArea, newParkArea;
+      int oldRoofArea, oldParkArea;
+
+      int newRoofDiscoArea, newParkDiscoArea;
+      int newRoofDrywellArea, newParkDrywellArea;
+
+      int oldRoofDiscoArea = 0, oldParkDiscoArea = 0; //TODO: What should these values be?
+      int oldRoofDrywellArea = 0, oldParkDrywellArea = 0; //TODO: What should these values be?
+
+      dscId = dscUpdaterRow.DscId;
+      ProjectDataSet.MstDscRow mstDscRow = projectDataSet.MstDsc.FindByDSCID(dscId);
+
+      oldRoofArea = mstDscRow.RfAreaFtEX;
+      oldParkArea = mstDscRow.PkAreaFtEX;
+
+      newRoofArea = (int)dscUpdaterRow.NewRoofArea;
+      newParkArea = (int)dscUpdaterRow.NewParkArea;
+
+      newRoofDiscoArea = (int)dscUpdaterRow.NewRoofDiscoArea;
+      newParkDiscoArea = (int)dscUpdaterRow.NewParkDiscoArea;
+
+      newRoofDrywellArea = (int)dscUpdaterRow.NewRoofDrywellArea;
+      newParkDrywellArea = (int)dscUpdaterRow.NewParkDrywellArea;
+
+      projectDataSet.DSCEDIT.AddDSCEDITRow(
+        editSessionId, DateTime.Now, Environment.UserName, dscUpdaterRow.RNo, dscId,
+        oldRoofArea, newRoofArea, oldRoofDiscoArea, newRoofDiscoArea, oldRoofDrywellArea, newRoofDrywellArea,
+        oldParkArea, newParkArea, oldParkDiscoArea, newParkDiscoArea, oldParkDrywellArea, newParkDrywellArea,
+        true);
+
+      return;
+    }
+    private int UpdateTableSession()
+    {
+      ProjectDataSet.SESSIONRow sessionRow =
+        projectDataSet.SESSION.AddSESSIONRow(DateTime.Now, Environment.UserName);
+
+      return sessionRow.edit_id;
     }
 
     private static void BatchRevertICEdits(SqlCommand sqlCmd)
@@ -1074,16 +996,7 @@ namespace DSCUpdater
                            "   (([mst_ic_Drywell_ac].[TimeFrame])='EX')))";
       sqlCmd.ExecuteNonQuery();
     }
-
-    private static void BatchSESSION(SqlCommand sqlCmd)
-    {
-      //insert new record into SESSION signifying the edit event
-      sqlCmd.CommandText = "SET IDENTITY_INSERT [SESSION] ON " +
-                           "INSERT [SESSION] (edit_id,edit_date,edited_by) VALUES " +
-                           "(@editID, @editDate, @editedBy)";
-      sqlCmd.ExecuteNonQuery();
-    }
-
+   
     private static void BatchCheckNewRetroSiteAssessments(SqlCommand sqlCmd)
     {
 
@@ -1316,26 +1229,8 @@ namespace DSCUpdater
 
       try
       {
-
-        //the following are extracted methods that add SQL command parameters
-
-        /*AddEditDateCommandParameter(sqlCmd, sqlCon);
-        AddEditedByCommandParameter(sqlCmd, sqlCon);
-        AddNewParkAreaCommandParameter(sqlCmd, sqlCon);
-        AddNewParkAreaDrywellCommandParameter(sqlCmd, sqlCon);
-        AddNewParkDISCOAreaCommandParameter(sqlCmd, sqlCon);
-        AddNewRoofAreaCommandParameter(sqlCmd, sqlCon);
-        AddNewRoofAreaDrywellCommandParameter(sqlCmd, sqlCon);
-        AddNewRoofDISCOAreaCommandParameter(sqlCmd, sqlCon);
-        AddEditIDCommandParameter(sqlCmd)*/
-
-        //the following are extracted methods based on batch queries:          
-        BatchDSCEDITAPPENDQueries(sqlCmd);
-        BatchNewICRecords(sqlCmd);
-        BatchUpdateMasterICTables(sqlCmd);
-        BatchUpdateDSCAreas(sqlCmd);
-
-        BatchSESSION(sqlCmd);
+        //the following are extracted methods based on batch queries:                  
+        UpdateDscTables();        
 
         sqlCmd.CommandText = "INSERT INTO IMPUPDATE SELECT dsc_edit_id, dsc_id, new_roof_area_sqft, " +
                              "old_roof_area_sqft, new_park_area_sqft, old_park_area_sqft FROM [DSCEDIT] " +
@@ -1375,7 +1270,7 @@ namespace DSCUpdater
       return;
     }
 
-    private void LoadDscData()
+    private void LoadMstData()
     {
       ProjectDataSetTableAdapters.DscUpdaterTableAdapter dscUpdaterTA;
       dscUpdaterTA = new ProjectDataSetTableAdapters.DscUpdaterTableAdapter();
@@ -1392,12 +1287,15 @@ namespace DSCUpdater
 
       ProjectDataSetTableAdapters.MstIcDrywellTableAdapter mstIcDrywellTA = new DSCUpdater.ProjectDataSetTableAdapters.MstIcDrywellTableAdapter();
       mstIcDrywellTA.FillByDscIdList(projectDataSet.MstIcDrywell, dscids);
+
+      ProjectDataSetTableAdapters.SESSIONTableAdapter sessionTA = new DSCUpdater.ProjectDataSetTableAdapters.SESSIONTableAdapter();
+      sessionTA.Fill(projectDataSet.SESSION);
     }
 
     private bool PrepareUpdateFile(string fileName)
     {
       WriteDscUpdateFile(fileName);
-      LoadDscData();
+      LoadMstData();
 
       int qcCount = 0;
       SetProgress = 0;
@@ -1476,12 +1374,12 @@ namespace DSCUpdater
         from m in projectDataSet.MstDsc
         join d in projectDataSet.DscUpdater
         on m.DSCID equals d.DscId
-        where d.NewRoofDiscoArea + d.NewRoofDrywellIcArea > d.NewRoofArea
+        where d.NewRoofDiscoArea + d.NewRoofDrywellArea > d.NewRoofArea
         select new
         {
           DscID = m.DSCID,
           ErrorCode = DscErrors.RoofICGreaterThanRoofArea,
-          ErrorDescription = d.NewRoofDiscoArea + " + " + d.NewRoofDrywellIcArea + " > " + d.NewRoofArea
+          ErrorDescription = d.NewRoofDiscoArea + " + " + d.NewRoofDrywellArea + " > " + d.NewRoofArea
         };
 
       foreach (var row in qryRoofIcAreaGreaterThanNewRoofArea)
@@ -1500,12 +1398,12 @@ namespace DSCUpdater
         from m in projectDataSet.MstDsc
         join d in projectDataSet.DscUpdater
         on m.DSCID equals d.DscId
-        where d.NewParkDiscoIcArea + d.NewParkDrywellIcArea > d.NewParkArea
+        where d.NewParkDiscoArea + d.NewParkDrywellArea > d.NewParkArea
         select new
         {
           DscID = m.DSCID,
           ErrorCode = DscErrors.ParkICGreaterThanParkArea,
-          ErrorDescription = d.NewParkDiscoIcArea + " + " + d.NewParkDrywellIcArea + " > " + d.NewParkArea
+          ErrorDescription = d.NewParkDiscoArea + " + " + d.NewParkDrywellArea + " > " + d.NewParkArea
         };
 
       foreach (var row in qryParkIcAreaGreaterThanNewParkArea)
@@ -1851,10 +1749,9 @@ namespace DSCUpdater
                            "OR ((DSCEDIT.new_park_drywell_ic_area_sqft<>DSCEDITAPPEND.new_park_drywell_ic_area_sqft))";
       sqlCmd.ExecuteNonQuery();
 
-      BatchNewICRecords(sqlCmd);
-      BatchUpdateMasterICTables(sqlCmd);
-      BatchUpdateDSCAreas(sqlCmd);
-      BatchSESSION(sqlCmd);
+      UpdateDscTables();
+      //BatchUpdateMasterICTables(sqlCmd);
+      UpdateTableSession();
 
       sqlCmd.CommandText = "UPDATE DSCEDITAPPEND SET dsc_edit_id=0";
       sqlCmd.ExecuteNonQuery();
@@ -1977,7 +1874,7 @@ namespace DSCUpdater
           AddEditIDCommandParameter(sqlCmd);
           AddEditDateCommandParameter(sqlCmd, sqlCon);
           AddEditedByCommandParameter(sqlCmd, sqlCon);
-          BatchSESSION(sqlCmd);
+          UpdateTableSession();
 
           sqlCmd.CommandText = "UPDATE DSCEDITAPPEND " +
                                "SET DSCEDITAPPEND.edit_id = @editID, " +
