@@ -1,0 +1,128 @@
+﻿<xml version="1.0" encoding="utf-8">
+  <StudyArea studyArea="Alder Basin">
+    <CharacterizationTable tableNumber="1" tableTitle="Overview of Collection System Performance">
+      <Column displayOrder="1">
+        <Cell displayOrder="1" data="Criteria" cellType="COLUMNNAME" footerID="" />
+        <Cell displayOrder="2" data="Pipe Surcharge: Percent of study area where the hydraulic grade line is &gt; 4 feet above the pipe crown" cellType="ROWNAME" footerID="a" />
+        <Cell displayOrder="3" data="Percent of the study area with peak flow to design flow ratio &gt; 1.2" cellType="ROWNAME" footerID="a" />
+        <Cell displayOrder="4" data="Basement Sewer Backup Risk as Distance from Finished Floor: Percent of study area within 0 to 8 feet" cellType="ROWNAME" footerID="b" />
+      </Column>
+      <Column displayOrder="2">
+        <Cell displayOrder="1" data="2-Year Storm Existing Conditions" cellType="COLUMNNAME" />
+        <Cell displayOrder="2" cellType="FUNCTION" data="0.2810345" />
+        <Cell displayOrder="3" cellType="FUNCTION" data="0.1413793" />
+        <Cell displayOrder="4" cellType="FUNCTION" data="0.993898145975123" />
+      </Column>
+      <Column displayOrder="3">
+        <Cell displayOrder="1" data="5-Year Storm Existing Conditions" cellType="COLUMNNAME" />
+        <Cell displayOrder="2" cellType="FUNCTION" data="0.4362069" />
+        <Cell displayOrder="3" cellType="FUNCTION" data="0.2034483" />
+        <Cell displayOrder="4" cellType="FUNCTION" data="0.98850035203004" />
+      </Column>
+      <Column displayOrder="4">
+        <Cell displayOrder="1" data="25-Year Storm Existing Conditions" cellType="COLUMNNAME" />
+        <Cell displayOrder="2" cellType="FUNCTION" data="0.6301724" />
+        <Cell displayOrder="3" cellType="FUNCTION" data="0.2758621" />
+        <Cell displayOrder="4" cellType="FUNCTION" data="0.98380661816475" />
+      </Column>
+      <Column displayOrder="5">
+        <Cell displayOrder="1" data="25-Year Storm Future Conditions" cellType="COLUMNNAME" />
+        <Cell displayOrder="2" cellType="FUNCTION" data="0.6241379" />
+        <Cell displayOrder="3" cellType="FUNCTION" data="0.2836207" />
+        <Cell displayOrder="4" cellType="FUNCTION" data="0.984041304858015" />
+      </Column>
+      <Footer footerID="a" footerText="Based on number of pipe segments." />
+      <Footer footerID="b" footerText="Based on number of tax lots." />
+    </CharacterizationTable>
+    <CharacterizationTable tableNumber="2" tableTitle="Zoning and Effective Impervious Area">
+      <Column displayOrder="1">
+        <Cell displayOrder="1" cellType="BLANK" />
+        <Cell displayOrder="2" data="Existing (2006)" cellType="ROWNAME" />
+        <Cell displayOrder="3" data="Future (2040)" cellType="ROWNAME" />
+      </Column>
+      <Column displayOrder="2">
+        <Cell displayOrder="1" data="Total Area (acres)" cellType="COLUMNNAME" footerID="" />
+        <Cell displayOrder="2" cellType="BLANK" />
+        <Cell displayOrder="3" cellType="BLANK" />
+      </Column>
+      <Column displayOrder="3">
+        <Cell displayOrder="1" data="Single Family Residential (acres)" cellType="COLUMNNAME" footerID="" />
+        <Cell displayOrder="2" cellType="FUNCTION" data="2693" />
+        <Cell displayOrder="3" cellType="FUNCTION" data="2693" />
+      </Column>
+      <Column displayOrder="4">
+        <Cell displayOrder="1" data="Mutli-Family Residential (acres)" cellType="COLUMNNAME" footerID="" />
+        <Cell displayOrder="2" cellType="FUNCTION" data="449" />
+        <Cell displayOrder="3" cellType="FUNCTION" data="449" />
+      </Column>
+      <Column displayOrder="5">
+        <Cell displayOrder="1" data="Industrial (acres)" cellType="COLUMNNAME" footerID="" />
+        <Cell displayOrder="2" cellType="FUNCTION" data="701" />
+        <Cell displayOrder="3" cellType="FUNCTION" data="701" />
+      </Column>
+      <Column displayOrder="6">
+        <Cell displayOrder="1" data="Commercial (acres)" cellType="COLUMNNAME" footerID="" />
+        <Cell displayOrder="2" cellType="FUNCTION" data="391" />
+        <Cell displayOrder="3" cellType="FUNCTION" data="391" />
+      </Column>
+      <Column displayOrder="7">
+        <Cell displayOrder="1" data="Parks and Open Spaces (acres)" cellType="COLUMNNAME" footerID="" />
+        <Cell displayOrder="2" cellType="FUNCTION" data="27" />
+        <Cell displayOrder="3" cellType="FUNCTION" data="27" />
+      </Column>
+      <Column displayOrder="8">
+        <Cell displayOrder="1" data="Other (acres)" cellType="COLUMNNAME" footerID="" />
+        <Cell displayOrder="2" cellType="FUNCTION" data="0" />
+        <Cell displayOrder="3" cellType="FUNCTION" data="0" />
+      </Column>
+      <Column displayOrder="9">
+        <Cell displayOrder="1" data="Effective Impervious Area (acres)" cellType="COLUMNNAME" footerID="*" />
+        <Cell displayOrder="2" cellType="BLANK" />
+        <Cell displayOrder="3" cellType="BLANK" />
+      </Column>
+      <Footer footerID="*" footerText="For information about how effective impervious area is calculated, refer to the Explicit Model Generation and Analysis Tool Set (EMGAATS) documentation provided in Appendix A of the Combined Sewer System Plan Characterization Summary. " />
+    </CharacterizationTable>
+    <CharacterizationTable tableNumber="3" tableTitle="Collection System Features">
+      <Column displayOrder="1">
+        <Cell displayOrder="1" data="Feature" cellType="COLUMNNAME" />
+        <Cell displayOrder="2" data="Combined sewer" cellType="ROWNAME" />
+        <Cell displayOrder="3" data="Stormwater" cellType="ROWNAME" />
+        <Cell displayOrder="4" data="Sanitary Sewer" cellType="ROWNAME" />
+        <Cell displayOrder="5" data="Interceptor" cellType="ROWNAME" />
+        <Cell displayOrder="6" data="Outfall line" cellType="ROWNAME" />
+      </Column>
+      <Column displayOrder="2">
+        <Cell displayOrder="1" data="No. of Segments" cellType="COLUMNNAME" />
+        <Cell displayOrder="2" cellType="FUNCTION" data="844" />
+        <Cell displayOrder="3" cellType="FUNCTION" data="171" />
+        <Cell displayOrder="4" cellType="FUNCTION" data="104" />
+        <Cell displayOrder="5" cellType="BLANK" />
+        <Cell displayOrder="6" cellType="BLANK" />
+      </Column>
+      <Column displayOrder="3">
+        <Cell displayOrder="1" data="Length (miles)" cellType="COLUMNNAME" />
+        <Cell displayOrder="2" cellType="FUNCTION" data="167716" />
+        <Cell displayOrder="3" cellType="FUNCTION" data="25301" />
+        <Cell displayOrder="4" cellType="FUNCTION" data="18004" />
+        <Cell displayOrder="5" data="Not applicable" cellType="CONST" />
+        <Cell displayOrder="6" data="Not applicable" cellType="CONST" />
+      </Column>
+      <Column displayOrder="4">
+        <Cell displayOrder="1" data="Range in Diameter (inches)" cellType="COLUMNNAME" />
+        <Cell displayOrder="2" cellType="FUNCTION" data="0 - 0" />
+        <Cell displayOrder="3" cellType="FUNCTION" data="0 - 0" />
+        <Cell displayOrder="4" cellType="FUNCTION" data="0 - 0" />
+        <Cell displayOrder="5" data="Not applicable" cellType="CONST" />
+        <Cell displayOrder="6" data="Not applicable" cellType="CONST" />
+      </Column>
+      <Column displayOrder="5">
+        <Cell displayOrder="1" data="Name and ID" cellType="COLUMNNAME" />
+        <Cell displayOrder="2" data="Not applicable" cellType="CONST" />
+        <Cell displayOrder="3" data="Not applicable" cellType="CONST" />
+        <Cell displayOrder="4" data="Not applicable" cellType="CONST" />
+        <Cell displayOrder="5" cellType="FUNCTION" data="UNKNOWN FUNCTION" />
+        <Cell displayOrder="6" cellType="FUNCTION" data="UNKNOWN FUNCTION" />
+      </Column>
+    </CharacterizationTable>
+  </StudyArea>
+</xml>

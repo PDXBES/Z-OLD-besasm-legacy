@@ -1,0 +1,15 @@
+[Link] 
+Application=..\exe\EMGMTools.mbx 
+Module=..\..\common\source\EMGMTabUtil.mbo
+Module=EMGLinkAppDel.mbo
+Module=EMGLinkCheck.mbo
+Module=..\..\common\source\EMGLinegeo.mbo
+Module=..\..\common\source\EMGCoordSys.mbo
+Module=..\..\common\source\EMGCircleGeo.mbo
+Module=EMGLinkCommit.mbo
+Module=..\..\common\source\EMGLogger.mbo
+Module=..\..\common\Source\INIUtils.mbo
+Module=EMGFinder.mbo
+Module=EMGDelList.mbo
+Module=EMGLinkColData.mbo
+

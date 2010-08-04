@@ -1,0 +1,379 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectType>Local</ProjectType>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1489F1BD-4E32-4A0E-9613-241A87836FBC}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon>\\Cassio\Modeling\Model_Programs\ResultsWarehouse\CharacterizationQueriesManager\App.ico</ApplicationIcon>
+    <AssemblyKeyContainerName>
+    </AssemblyKeyContainerName>
+    <AssemblyName>CharacterizationTool</AssemblyName>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>SystemsAnalysis.Characterization</RootNamespace>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <StartupObject>
+    </StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DocumentationFile>SystemsAnalysis.Characterization.CharacterizationTool.xml</DocumentationFile>
+    <DebugSymbols>true</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>false</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>SystemsAnalysis.Characterization.CharacterizationTool.xml</DocumentationFile>
+    <DebugSymbols>false</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>true</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>none</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CGIS.MapWorks.ESRIUtils">
+      <Name>CGIS.MapWorks.ESRIUtils</Name>
+      <HintPath>..\..\DotNet\ArcObjectsUtils\CGISUtils\ESRIUtils\bin\Release\CGIS.MapWorks.ESRIUtils.dll</HintPath>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.AxMapControl">
+      <Name>ESRI.ArcGIS.AxMapControl</Name>
+      <HintPath>C:\Program Files\ArcGIS\DotNet\ESRI.ArcGIS.AxMapControl.dll</HintPath>
+      <AssemblyFolderKey>hklm\dn\arcgis desktop</AssemblyFolderKey>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.Carto">
+      <Name>ESRI.ArcGIS.Carto</Name>
+      <HintPath>C:\Program Files\ArcGIS\DotNet\ESRI.ArcGIS.Carto.dll</HintPath>
+      <AssemblyFolderKey>hklm\dn\arcgis desktop</AssemblyFolderKey>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.Catalog">
+      <Name>ESRI.ArcGIS.Catalog</Name>
+      <HintPath>C:\Program Files\ArcGIS\DotNet\ESRI.ArcGIS.Catalog.dll</HintPath>
+      <AssemblyFolderKey>hklm\dn\arcgis desktop</AssemblyFolderKey>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.DataSourcesGDB">
+      <Name>ESRI.ArcGIS.DataSourcesGDB</Name>
+      <HintPath>C:\Program Files\ArcGIS\DotNet\ESRI.ArcGIS.DataSourcesGDB.dll</HintPath>
+      <AssemblyFolderKey>hklm\dn\arcgis desktop</AssemblyFolderKey>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.Display">
+      <Name>ESRI.ArcGIS.Display</Name>
+      <HintPath>C:\Program Files\ArcGIS\DotNet\ESRI.ArcGIS.Display.dll</HintPath>
+      <AssemblyFolderKey>hklm\dn\arcgis desktop</AssemblyFolderKey>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.Framework">
+      <Name>ESRI.ArcGIS.Framework</Name>
+      <HintPath>C:\Program Files\ArcGIS\DotNet\ESRI.ArcGIS.Framework.dll</HintPath>
+      <AssemblyFolderKey>hklm\dn\arcgis desktop</AssemblyFolderKey>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.Geodatabase">
+      <Name>ESRI.ArcGIS.Geodatabase</Name>
+      <HintPath>C:\Program Files\ArcGIS\DotNet\ESRI.ArcGIS.Geodatabase.dll</HintPath>
+      <AssemblyFolderKey>hklm\dn\arcgis desktop</AssemblyFolderKey>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.Geometry">
+      <Name>ESRI.ArcGIS.Geometry</Name>
+      <HintPath>C:\Program Files\ArcGIS\DotNet\ESRI.ArcGIS.Geometry.dll</HintPath>
+      <AssemblyFolderKey>hklm\dn\arcgis desktop</AssemblyFolderKey>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.System">
+      <Name>ESRI.ArcGIS.System</Name>
+      <HintPath>C:\Program Files\ArcGIS\DotNet\ESRI.ArcGIS.System.dll</HintPath>
+      <AssemblyFolderKey>hklm\dn\arcgis desktop</AssemblyFolderKey>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.SystemUI">
+      <Name>ESRI.ArcGIS.SystemUI</Name>
+      <HintPath>C:\Program Files\ArcGIS\DotNet\ESRI.ArcGIS.SystemUI.dll</HintPath>
+      <AssemblyFolderKey>hklm\dn\arcgis desktop</AssemblyFolderKey>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.Utility">
+      <Name>ESRI.ArcGIS.Utility</Name>
+      <HintPath>C:\Program Files\ArcGIS\DotNet\ESRI.ArcGIS.Utility.dll</HintPath>
+      <AssemblyFolderKey>hklm\dn\arcgis desktop</AssemblyFolderKey>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Infragistics2.Shared.v6.3, Version=6.3.20063.53, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb" />
+    <Reference Include="Infragistics2.Win.Misc.v6.3, Version=6.3.20063.53, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb" />
+    <Reference Include="Infragistics2.Win.UltraWinGrid.v6.3, Version=6.3.20063.53, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb" />
+    <Reference Include="Infragistics2.Win.UltraWinTabControl.v6.3, Version=6.3.20063.53, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb" />
+    <Reference Include="Infragistics2.Win.v6.3, Version=6.3.20063.53, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.VisualBasic">
+      <Name>Microsoft.VisualBasic</Name>
+    </Reference>
+    <Reference Include="stdole">
+      <Name>stdole</Name>
+      <HintPath>C:\Program Files\Microsoft.NET\Primary Interop Assemblies\stdole.dll</HintPath>
+      <AssemblyFolderKey>hklm\primary interop assemblies</AssemblyFolderKey>
+    </Reference>
+    <Reference Include="System">
+      <Name>System</Name>
+    </Reference>
+    <Reference Include="System.Data">
+      <Name>System.Data</Name>
+    </Reference>
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Design">
+      <Name>System.Design</Name>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Name>System.Drawing</Name>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization.Formatters.Soap" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms">
+      <Name>System.Windows.Forms</Name>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Name>System.XML</Name>
+    </Reference>
+    <Reference Include="SystemsAnalysis.Modeling.ModelResults.XPSWMMResults, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\DotNet\ModelingUtils\ResultsExtractor\bin\Release\SystemsAnalysis.Modeling.ModelResults.XPSWMMResults.dll</HintPath>
+    </Reference>
+    <Reference Include="SystemsAnalysis.Utils.INIFile, Version=1.0.2769.18343, Culture=neutral">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\DotNet\INIFile\bin\SystemsAnalysis.Utils.INIFile.dll</HintPath>
+    </Reference>
+    <ProjectReference Include="..\..\DotNet\ArcObjectsUtils\MapControlUtils\MapControlHelper\SystemsAnalysis.Utils.ArcObjects.MapControl.MapControlHelper.csproj">
+      <Name>SystemsAnalysis.Utils.ArcObjects.MapControl.MapControlHelper</Name>
+      <Project>{D08971DD-9DAD-4DE1-88CA-35EE30AB6B23}</Project>
+      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DotNet\DataAccess\SystemsAnalysis.DataAccess.csproj">
+      <Name>SystemsAnalysis.DataAccess</Name>
+      <Project>{D81499E0-ED3E-4C85-9F8E-72C263AA24C4}</Project>
+      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DotNet\Modeling\SystemsAnalysis.Modeling.csproj">
+      <Name>SystemsAnalysis.Modeling</Name>
+      <Project>{54555B74-906E-4D29-9BC3-7653805B6AD0}</Project>
+      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DotNet\PumpStations\SystemsAnalysis.Modeling.PumpStations.csproj">
+      <Name>SystemsAnalysis.Modeling.PumpStations</Name>
+      <Project>{3623E8C3-4DFB-4635-801C-C577328937C3}</Project>
+      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DotNet\Tracer\SystemsAnalysis.Tracer.csproj">
+      <Name>SystemsAnalysis.Tracer</Name>
+      <Project>{C8B24858-1D99-4519-9A1D-CF129CED9ADA}</Project>
+      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DotNet\Types\SystemsAnalysis.Types.csproj">
+      <Project>{AFB81561-9859-4FA2-86AD-0C6833488E41}</Project>
+      <Name>SystemsAnalysis.Types</Name>
+    </ProjectReference>
+    <ProjectReference Include="\\Cassio\modeling\Model_Programs\DotNet\ArcObjectsUtils\MapControlUtils\PanZoom_Commands\SystemsAnalysis.Utils.ArcObjects.MapControl.PanZoom.csproj">
+      <Name>SystemsAnalysis.MapControl.PanZoom</Name>
+      <Project>{120CF791-801E-4669-8D65-174DCABF47EC}</Project>
+      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
+    </ProjectReference>
+    <ProjectReference Include="\\Cassio\modeling\Model_Programs\DotNet\ArcObjectsUtils\MapControlUtils\Select_Commands\SystemsAnalysis.Utils.ArcObjects.MapControl.SelectCommands.csproj">
+      <Name>SystemsAnalysis.MapControl.SelectCommands</Name>
+      <Project>{63AD8943-A61C-4AC7-B6F8-DA20E063E64F}</Project>
+      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
+    </ProjectReference>
+    <ProjectReference Include="\\Cassio\Modeling\Model_Programs\DotNet\DotNetUtils\EventHandlerUtils\SystemsAnalysis.Utils.EventHandlers.csproj">
+      <Name>SystemsAnalysis.Utils.EventHandlerUtils</Name>
+      <Project>{9AE8BF25-3ABF-402D-BC63-841E8588D20C}</Project>
+      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
+    </ProjectReference>
+    <COMReference Include="AxSHDocVw">
+      <Guid>{EAB22AC0-30C1-11CF-A7EB-0000C05BAE0B}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>1</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>aximp</WrapperTool>
+    </COMReference>
+    <COMReference Include="SHDocVw">
+      <Guid>{EAB22AC0-30C1-11CF-A7EB-0000C05BAE0B}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>1</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App.ico" />
+    <Content Include="Default_Settings.xml" />
+    <Content Include="ProgramSettings.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ProgramSettings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="xml\CSSPCharacterizationTemplate.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CharacterizationTableSchema.xsd">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="xml\excel_char.xsl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="xml\SSSPCharacterizationTemplate.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Compile Include="AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CharacterizationEngine.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CharacterizationExceptions.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CharacterizationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CharacterizationForm.Designer.cs">
+      <DependentUpon>CharacterizationForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DscHydraulic.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DscHydraulics.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="InputBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LinkHydraulic.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="LinkHydraulics.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ModelCatalogMaintForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModelCatalogMaintForm.Designer.cs">
+      <DependentUpon>ModelCatalogMaintForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelCatalogViewForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModelCatalogViewForm.Designer.cs">
+      <DependentUpon>ModelCatalogViewForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NodeHydraulic.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="NodeHydraulics.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Preferences.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProgramSettings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProgramSettings.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="SplashScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SplashScreen.designer.cs">
+      <DependentUpon>SplashScreen.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="CharacterizationForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>CharacterizationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InputBox.resx">
+      <DependentUpon>InputBox.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="licenses.licx" />
+    <EmbeddedResource Include="ModelCatalogMaintForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ModelCatalogMaintForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModelCatalogViewForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ModelCatalogViewForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Preferences.resx">
+      <DependentUpon>Preferences.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <SubType>Designer</SubType>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SplashRepGen.png" />
+    <EmbeddedResource Include="SplashScreen.resx">
+      <DependentUpon>SplashScreen.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <None Include="ProgramSettings.xsx">
+      <DependentUpon>ProgramSettings.xsd</DependentUpon>
+    </None>
+    <None Include="CharacterizationTableSchema.xsx">
+      <DependentUpon>CharacterizationTableSchema.xsd</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>
