@@ -17,6 +17,9 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 		Unassigned, Generic, Summary, Pipe, InflowControl
 	} // enum ReportItemType
 
+  /// <summary>
+  /// Common functions for all report items
+  /// </summary>
 	public interface ReportItem
 	{
 		void WriteXML(XmlWriter xw);

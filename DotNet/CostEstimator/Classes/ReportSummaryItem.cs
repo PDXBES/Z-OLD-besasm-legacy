@@ -14,6 +14,9 @@ using System.Xml;
 
 namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 {
+  /// <summary>
+  /// A summary reporting item
+  /// </summary>
 	public class ReportSummaryItem : ReportItem
 	{
 		#region Variables

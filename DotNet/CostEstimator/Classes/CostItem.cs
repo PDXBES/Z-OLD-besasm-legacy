@@ -14,6 +14,11 @@ using System.Xml;
 
 namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 {
+  /// <summary>
+  /// A CostItem provides the costing basis for a CostItemFactor.  It is combined
+  /// with one or more factors in a CostItemFactor to calculate the cost for a
+  /// line item (a CostItemFactor).
+  /// </summary>
 	public class CostItem
 	{
 		#region Variables
@@ -264,7 +269,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 		} // AssignID()
 
 		/// <summary>
-		/// Write XML
+		/// Write XML for saving CostItem information to file
 		/// </summary>
 		public void WriteXML(XmlWriter xw)
 		{

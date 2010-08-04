@@ -45,15 +45,13 @@
     <Compile Include="BoringJackingAncillaryCost.cs" />
     <Compile Include="BypassPumpingAncillaryCost.cs" />
     <Compile Include="CasedStringProcessor.cs" />
+    <Compile Include="Common.cs" />
     <Compile Include="ConflictPackage.cs" />
     <Compile Include="ConstructionDurationCalculator.cs" />
-    <Compile Include="CostEngine.cs">
-    </Compile>
     <Compile Include="CosterParameter.cs" />
     <Compile Include="CostFactor.cs" />
     <Compile Include="CostItem.cs" />
     <Compile Include="CostItemFactor.cs" />
-    <Compile Include="CostItemOrigin.cs" />
     <Compile Include="CrossingRelocationAncillaryCost.cs" />
     <Compile Include="DifficultAreaAncillaryFactor.cs" />
     <Compile Include="EnvironmentalMitigationAncillaryCost.cs" />

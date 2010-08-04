@@ -14,6 +14,11 @@ using SystemsAnalysis.Modeling.Alternatives;
 
 namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 {
+  /// <summary>
+  /// Cost for relocating parallel and close proximity utility pipes (close
+  /// proximity being horizontally a maximum of third of the average pipe
+  /// depth away)
+  /// </summary>
 	class ParallelRelocationAncillaryCost : AncillaryCost
 	{
 		#region Variables

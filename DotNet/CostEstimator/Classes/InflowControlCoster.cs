@@ -28,7 +28,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 	} // enum InflowControl
 
 	/// <summary>
-	/// Inflow control coster
+	/// Inflow control costing engine
 	/// </summary>
 	public class InflowControlCoster
 	{
@@ -60,7 +60,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 		private double _DrainageAreaSqFt;
 		private bool _MinCostUsed;
 
-		public SortedList<string, CosterParameter> CosterParameters = new SortedList<string, CosterParameter>();
+		public SortedList<string, CosterParameter> CosterParameters = 
+      new SortedList<string, CosterParameter>();
 		#endregion
 
 		#region Constructors
@@ -127,31 +128,36 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 				{
 					case Classes.InflowControl.GreenStreetPlanter:
 						{
-							decimal calcCost = (decimal)((double)_GreenStreetPlanterCostPerAcre * _DrainageAreaSqFt / 43560);
+							decimal calcCost = (decimal)((double)_GreenStreetPlanterCostPerAcre *
+                _DrainageAreaSqFt / Common.SQUARE_FEET_PER_ACRE);
 							_MinCostUsed = calcCost < _GreenStreetPlanterMinCost;
 							return Math.Max(_GreenStreetPlanterMinCost, calcCost);
 						} // block
 					case Classes.InflowControl.InfiltrationPlanter:
 						{
-							decimal calcCost = (decimal)((double)_InfiltrationPlanterCostPerAcre * _DrainageAreaSqFt / 43560);
+              decimal calcCost = (decimal)((double)_InfiltrationPlanterCostPerAcre * 
+                _DrainageAreaSqFt / Common.SQUARE_FEET_PER_ACRE);
 							_MinCostUsed = calcCost < _InfiltrationPlanterMinCost;
 							return Math.Max(_InfiltrationPlanterMinCost, calcCost);
 						} // block
 					case Classes.InflowControl.VegetatedInfiltrationBasin:
 						{
-							decimal calcCost = (decimal)((double)_VegetatedInfiltrationBasinCostPerAcre * _DrainageAreaSqFt / 43560);
+              decimal calcCost = (decimal)((double)_VegetatedInfiltrationBasinCostPerAcre *
+                _DrainageAreaSqFt / Common.SQUARE_FEET_PER_ACRE);
 							_MinCostUsed = calcCost < _VegetatedInfiltrationBasinMinCost;
 							return Math.Max(_VegetatedInfiltrationBasinMinCost, calcCost);
 						} // block
 					case Classes.InflowControl.DownspoutDisconnection:
 						{
-							decimal calcCost = (decimal)((double)_DownspoutDisconnectionCostPerAcre * _DrainageAreaSqFt / 43560);
+              decimal calcCost = (decimal)((double)_DownspoutDisconnectionCostPerAcre *
+                _DrainageAreaSqFt / Common.SQUARE_FEET_PER_ACRE);
 							_MinCostUsed = calcCost < _DownspoutDisconnectionMinCost;
 							return Math.Max(_DownspoutDisconnectionMinCost, calcCost);
 						} // block
 					case Classes.InflowControl.Ecoroof:
 						{
-							decimal calcCost = (decimal)((double)_EcoroofCostPerAcre * _DrainageAreaSqFt / 43560);
+              decimal calcCost = (decimal)((double)_EcoroofCostPerAcre *
+                _DrainageAreaSqFt / Common.SQUARE_FEET_PER_ACRE);
 							_MinCostUsed = calcCost < _EcoroofMinCost;
 							return Math.Max(_EcoroofMinCost, calcCost);
 						} // block

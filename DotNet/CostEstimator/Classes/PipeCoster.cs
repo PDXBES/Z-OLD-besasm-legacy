@@ -84,6 +84,9 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 		} // ManholeDepthFactor(minDiameter, maxDiameter, minDepth)
 	} // ManholeDepthFactor
 
+  /// <summary>
+  /// An Engineering News Record Construction Cost Index
+  /// </summary>
 	public struct ENR
 	{
 		public int Value;

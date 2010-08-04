@@ -13,8 +13,13 @@ using System.Text;
 
 namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 {
+  /// <summary>
+  /// Cost for building a pipe in a difficult area (unpaved and steep, or
+  /// historically difficult area [e.g., downtown area])
+  /// </summary>
 	class DifficultAreaAncillaryFactor : AncillaryFactor
 	{
+    private const int MIN_PIPE_SLOPE_FOR_DIFFICULT_AREA = 10;
 		private ConflictPackage _ConflictPackage;
 
 		/// <summary>
@@ -34,7 +39,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 				if (_ConflictPackage != null)
 				{
 					if (!_ConflictPackage.Conflicts.IsInStreet && 
-						Math.Abs(_ConflictPackage.Conflicts.SurfaceSlopePct) >= 10)
+						Math.Abs(_ConflictPackage.Conflicts.SurfaceSlopePct) >= MIN_PIPE_SLOPE_FOR_DIFFICULT_AREA)
 						reason.Append("unpaved/steep surface,");
 					if (_ConflictPackage.Conflicts.IsHardArea)
 						reason.Append("difficult area,");
@@ -62,7 +67,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 			{
 				if ((_ConflictPackage != null && _ConflictPackage.Conflicts != null) && 
 					((!_ConflictPackage.Conflicts.IsInStreet &&
-					Math.Abs(_ConflictPackage.Conflicts.SurfaceSlopePct) >= 10) ||
+					Math.Abs(_ConflictPackage.Conflicts.SurfaceSlopePct) >= MIN_PIPE_SLOPE_FOR_DIFFICULT_AREA) ||
 					_ConflictPackage.Conflicts.IsHardArea))
 					return 0.50;
 				else

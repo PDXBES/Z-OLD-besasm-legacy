@@ -20,7 +20,7 @@ using SystemsAnalysis.Modeling.Alternatives;
 namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 {
   /// <summary>
-  /// Project
+  /// A container holding CostItemFactor line items
   /// </summary>
   public class Project
   {
@@ -1151,7 +1151,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
         CheckFocusArea(focusAreas, parkingTarget.FocusArea);
         CostItemFactor currentCostItem = Estimate(parkingTarget.FocusArea).ChildCostItemFactor(DESC_INFLOW_CONTROL_DIRECT_CONSTRUCTION).ChildCostItemFactor("Parking");
 
-        _ICCoster.DrainageAreaSqFt = 43560;
+        _ICCoster.DrainageAreaSqFt = Common.SQUARE_FEET_PER_ACRE;
         _ICCoster.InflowControl = InflowControl.VegetatedInfiltrationBasin;
         decimal icCost = _ICCoster.Cost;
 
@@ -1164,7 +1164,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
         CostItemFactor parkingTargetCostItemFactor = new CostItemFactor(itemName,
           null, null, 1);
         CostItemFactor baseParkingTargetCostItemFactor = new CostItemFactor(newCostItem.Name,
-          poolCostItem, null, parkingTarget.ControlledArea / 43560);
+          poolCostItem, null, parkingTarget.ControlledArea / Common.SQUARE_FEET_PER_ACRE);
         parkingTargetCostItemFactor.MinCost = _ICCoster.VegetatedInfiltrationBasinMinCost;
         AddCostItemFactorToPool(parkingTargetCostItemFactor);
         AddCostItemFactorToPool(baseParkingTargetCostItemFactor);
@@ -1230,7 +1230,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
         CheckFocusArea(focusAreas, roofTarget.FocusArea);
         CostItemFactor currentCostItem = Estimate(roofTarget.FocusArea).ChildCostItemFactor(DESC_INFLOW_CONTROL_DIRECT_CONSTRUCTION).ChildCostItemFactor("Roof"); ;
 
-        _ICCoster.DrainageAreaSqFt = 43560;
+        _ICCoster.DrainageAreaSqFt = Common.SQUARE_FEET_PER_ACRE;
         CostItemFactor roofTargetCostItemFactor = null;
         if (roofTarget.DSToBioretention > 0)
         {
@@ -1245,7 +1245,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
           roofTargetCostItemFactor = new CostItemFactor(itemName,
             null, null, 1);
           CostItemFactor baseRoofTargetCostItemFactor = new CostItemFactor(newCostItem.Name,
-            poolCostItem, null, roofTarget.AreaToBioretention / 43560);
+            poolCostItem, null, roofTarget.AreaToBioretention / Common.SQUARE_FEET_PER_ACRE);
           roofTargetCostItemFactor.MinCost = _ICCoster.VegetatedInfiltrationBasinMinCost;
           AddCostItemFactorToPool(roofTargetCostItemFactor);
           AddCostItemFactorToPool(baseRoofTargetCostItemFactor);
@@ -1273,7 +1273,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
           roofTargetCostItemFactor = new CostItemFactor(itemName,
             null, null, 1);
           CostItemFactor baseRoofTargetCostItemFactor = new CostItemFactor(newCostItem.Name,
-            poolCostItem, null, roofTarget.AreaToEcoroof / 43560);
+            poolCostItem, null, roofTarget.AreaToEcoroof / Common.SQUARE_FEET_PER_ACRE);
           roofTargetCostItemFactor.MinCost = _ICCoster.EcoroofMinCost;
           AddCostItemFactorToPool(roofTargetCostItemFactor);
           AddCostItemFactorToPool(baseRoofTargetCostItemFactor);
@@ -1301,7 +1301,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
           roofTargetCostItemFactor = new CostItemFactor(itemName,
             null, null, 1);
           CostItemFactor baseRoofTargetCostItemFactor = new CostItemFactor(newCostItem.Name,
-            poolCostItem, null, roofTarget.AreaToPlanter / 43560);
+            poolCostItem, null, roofTarget.AreaToPlanter / Common.SQUARE_FEET_PER_ACRE);
           roofTargetCostItemFactor.MinCost = _ICCoster.InfiltrationPlanterMinCost;
           AddCostItemFactorToPool(roofTargetCostItemFactor);
           AddCostItemFactorToPool(baseRoofTargetCostItemFactor);
@@ -1329,7 +1329,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
           roofTargetCostItemFactor = new CostItemFactor(itemName,
             null, null, 1);
           CostItemFactor baseRoofTargetCostItemFactor = new CostItemFactor(newCostItem.Name,
-            poolCostItem, null, roofTarget.AreaToVeg / 43560);
+            poolCostItem, null, roofTarget.AreaToVeg / Common.SQUARE_FEET_PER_ACRE);
           roofTargetCostItemFactor.MinCost = _ICCoster.DownspoutDisconnectionMinCost;
           AddCostItemFactorToPool(roofTargetCostItemFactor);
           AddCostItemFactorToPool(baseRoofTargetCostItemFactor);
