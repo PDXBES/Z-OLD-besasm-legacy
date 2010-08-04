@@ -1,0 +1,548 @@
+'--------------------------------------------------------
+SUB DeleteWeir
+	'A user should select a link then select “Delete Weir”.  
+	'If no weir is present then state so, otherwise create a delete entry in alt_speclinks
+	'If the user is selecting an alt_SpecLinks node that represents a weir,
+	'this sub should call a function which removes the alt_SpecLinks weir from the
+	'specLinkData and specLinks tables.
+	DIM lIsItModified AS Integer
+	DIM iAltLinkID AS Integer
+	DIM iMdlSpecLinkID AS Integer
+	DIM iAltSpecLinkID AS Integer
+	DIM iSpecLinkIndex AS Integer
+	DIM iLinkID AS Integer
+	DIM numResults AS Integer
+	DIM iChoice AS Integer
+	DIM sSLtyp AS String
+	DIM sSLNode AS String
+	
+	ONERROR GOTO skipDeleteWeir
+	
+	SET COORDSYS EARTH PROJECTION 3, 33, "ft", -120.5, 43.6666666667, 44.3333333333, 46, 8202099.7379999999, 0
+	
+	IF DeleteCheck("Weir") = false THEN
+		EXIT SUB
+	END IF
+	
+	'Check to see if this object has been modified already.  The problem
+	'really is that we don't want deleted items to be deleted again,
+	'or deleted items to be modified, or modified items to be deleted.
+	'We also cannot allow modified items to be modified.
+	'Since we have not and will not give the user tools to modify added 
+	'items or enter a delete command into the special links table
+	'for added items then those are cases we can ignore.
+	lIsItModified = IsItModified()
+	
+	IF lIsItModified < 0 THEN
+		UselessReturnValue = ModifiedSelectionDialog()
+		
+		IF CommandInfo(CMD_INFO_DLG_OK) THEN
+			'The user wants to delete one of the deletes or modifications
+			'So we should give the user a list of the deletes and modifications
+			'related to this link.  The user will select one and then we will delete it
+			iLinkID = DeleteModelLinkObject(lIsItModified, "Weir")
+		END IF
+		
+		EXIT SUB
+	END IF
+	
+	'get the LinkID from the mdl_links table and then search the mdl_SpecLinks
+	'table for the set of special links which are associated with this link
+	
+	iLinkID = qyTarget.LinkID
+	
+	CALL VisiblePointLocation
+		
+	SELECT * FROM mdl_SpecLinks WHERE ToLinkID = iLinkID and SpecLinkType LIKE "W%" INTO qySpecLinks
+	
+	'If there are no special links or weirs in the special links associated with this link
+	'then throw an error and quit
+	
+	numResults = Tableinfo(qySpecLinks,TAB_INFO_NROWS)
+	IF	numResults = 0 THEN
+		NOTE "No weir data associated with the link you have selected!"
+		EXIT SUB
+	END IF
+	
+	SELECT * FROM mdl_SpecLinks WHERE SLID = lIsItModified INTO qySpecLinks
+	
+	'Get a unique value for AltSpecLinkID
+	iAltSpecLinkID = maxAltSpecLinkID()
+	iMdlSpecLinkID = qySpecLinks.SLID
+	iSpecLinkIndex = qySpecLinks.ToLinkNDX
+	sSLtyp = qySpecLinks.SpecLinkType
+	sSLNode = qySpecLinks.SLNode
+	
+	'Get the current symbol style and save it, then
+		'place the graphic object into the alt_special links table
+		'then reset to the old symbol style
+		DIM sym_user_symbol AS Symbol
+		sym_user_symbol = CurrentSymbol( )
+		SET STYLE Symbol MakeSymbol( 56,RED,18 )
+		INSERT INTO VisibleSpecials(OBJ, AltSpecLinkID, MdlSpecLinkID, AltLinkID, Operation, SpecLinkIndex, SpecLinkType, SLNode)
+			VALUES( CreatePoint( sx2, sy2), iAltSpecLinkID, iMdlSpecLinkID, 0, "DEL", iSpecLinkIndex, sSLtyp, sSLNode)
+			SET STYLE Symbol sym_user_symbol
+			
+		INSERT INTO alt_speclinks(AltSpecLinkID, MdlSpecLinkID, AltLinkID, Operation, SpecLinkIndex, SpecLinkType, SLNode)
+			VALUES(iAltSpecLinkID, iMdlSpecLinkID, 0, "DEL", iSpecLinkIndex, sSLtyp, sSLNode)
+	
+	EXIT SUB
+skipDeleteWeir:	
+	CALL DebugNote("Delete Weir Crashed - Error: " & Err() & " " & Error$() )
+	RESUME NEXT
+END SUB
+'--------------------------------------------------------
+SUB DeleteOrifice
+	'A user should select a link then select “Delete Orifice”.  
+	'If no orifice is present then state so, otherwise create a delete entry in alt_speclinks
+	DIM iAltLinkID AS Integer
+	DIM iMdlSpecLinkID AS Integer
+	DIM iAltSpecLinkID AS Integer
+	DIM iSpecLinkIndex AS Integer
+	DIM iLinkID AS Integer
+	DIM numResults AS Integer
+	DIM iChoice AS Integer
+	DIM sSLtyp AS String
+	DIM sSLNode AS String
+	DIM lIsItModified AS Integer
+	
+	ONERROR GOTO skipDeleteOrifice
+	
+	SET COORDSYS EARTH PROJECTION 3, 33, "ft", -120.5, 43.6666666667, 44.3333333333, 46, 8202099.7379999999, 0
+	
+	IF DeleteCheck("Orifice") = false THEN
+		EXIT SUB
+	END IF
+	
+	'Check to see if this object has been modified already.
+	lIsItModified = IsItModified()
+	
+	IF lIsItModified < 0 THEN
+		UselessReturnValue = ModifiedSelectionDialog()
+		
+		IF CommandInfo(CMD_INFO_DLG_OK) THEN
+			'The user wants to delete one of the deletes or modifications
+			'So we should give the user a list of the deletes and modifications
+			'related to this link.  The user will select one and then we will delete it
+			iLinkID = DeleteModelLinkObject(lIsItModified, "Orifice")
+		END IF
+		
+		EXIT SUB
+	END IF
+	
+	'get the LinkID from the mdl_links table and then search the mdl_SpecLinks
+	'table for the set of special links which are associated with this link
+	iLinkID = qyTarget.LinkID
+	
+	CALL VisiblePointLocation
+		
+	SELECT * FROM mdl_SpecLinks WHERE ToLinkID = iLinkID and SpecLinkType LIKE "O%" INTO qySpecLinks
+	
+	'If there are no special links or orifices in the special links associated with this link
+	'then throw an error and quit
+	
+	numResults = Tableinfo(qySpecLinks,TAB_INFO_NROWS)
+	IF	numResults = 0 THEN
+		NOTE "No orifice data associated with the link you have selected!"
+		EXIT SUB
+	END IF
+	
+	SELECT * FROM mdl_SpecLinks WHERE SLID = lIsItModified INTO qySpecLinks
+	
+	'Get a unique value for AltSpecLinkID
+	iAltSpecLinkID = maxAltSpecLinkID()
+	iMdlSpecLinkID = qySpecLinks.SLID
+	iSpecLinkIndex = qySpecLinks.ToLinkNDX
+	sSLtyp = qySpecLinks.SpecLinkType
+	sSLNode = qySpecLinks.SLNode
+	
+	'Get the current symbol style and save it, then
+	'place the graphic object into the alt_special links table
+	'then reset to the old symbol style
+	DIM sym_user_symbol AS Symbol
+	sym_user_symbol = CurrentSymbol( )
+	SET STYLE Symbol ( 70,RED,18, "MapInfo Cartographic", 0, 45 )
+	INSERT INTO VisibleSpecials(OBJ, AltSpecLinkID, MdlSpecLinkID, AltLinkID, Operation, SpecLinkIndex, SpecLinkType, SLNode)
+		VALUES( CreatePoint( sx2, sy2), iAltSpecLinkID, iMdlSpecLinkID, 0, "DEL", iSpecLinkIndex, sSLtyp, sSLNode)
+	SET STYLE Symbol sym_user_symbol		
+	
+	INSERT INTO alt_speclinks(AltSpecLinkID, MdlSpecLinkID, AltLinkID, Operation, SpecLinkIndex, SpecLinkType, SLNode)
+		VALUES(iAltSpecLinkID, iMdlSpecLinkID, 0, "DEL", iSpecLinkIndex, sSLtyp, sSLNode)
+	
+	EXIT SUB
+skipDeleteOrifice:	
+	CALL DebugNote("Delete Orifice Crashed - Error: " & Err() & " " & Error$() )
+	RESUME NEXT
+END SUB
+'--------------------------------------------------------
+SUB DeletePump
+	'DeletePump will delete pumps from a model link or an alt link or delete added or changed pumps
+	'from the visible specials group.  DeletePump should just flag the indicated pump as a DEL
+	'operation.  The engine should remove the associated pump curves and specialLinkData objects
+	'A user should select a link then select “Delete Pump”.  
+	'If no pump is present then state so, otherwise create a delete entry in alt_speclinks
+	DIM iAltLinkID AS Integer
+	DIM iMdlSpecLinkID AS Integer
+	DIM iAltSpecLinkID AS Integer
+	DIM iSpecLinkIndex AS Integer
+	DIM iLinkID AS Integer
+	DIM numResults AS Integer
+	DIM iChoice AS Integer
+	DIM sSLtyp AS String
+	DIM sSLNode AS String
+	DIM lIsItModified AS Integer
+	
+	ONERROR GOTO skipDeletePump
+	
+	SET COORDSYS EARTH PROJECTION 3, 33, "ft", -120.5, 43.6666666667, 44.3333333333, 46, 8202099.7379999999, 0
+	
+	IF DeleteCheck("Pump") = false THEN
+		EXIT SUB
+	END IF
+	
+	'Check to see if this object has been modified already.  The problem
+	'really is that we don't want deleted items to be deleted again,
+	'or deleted items to be modified, or modified items to be deleted.
+	'We also cannot allow modified items to be modified.
+	'Since we have not and will not give the user tools to modify added 
+	'items or enter a delete command into the special links table
+	'for added items then those are cases we can ignore.
+	lIsItModified = IsItModified()
+	
+	IF lIsItModified < 0 THEN
+		UselessReturnValue = ModifiedSelectionDialog()
+		
+		IF CommandInfo(CMD_INFO_DLG_OK) THEN
+			'The user wants to delete one of the deletes or modifications
+			'So we should give the user a list of the deletes and modifications
+			'related to this link.  The user will select one and then we will delete it
+			iLinkID = DeleteModelLinkObject(lIsItModified, "Pump")
+		END IF
+		
+		EXIT SUB
+	END IF
+	
+	'get the LinkID from the mdl_links table and then search the mdl_SpecLinks
+	'table for the set of special links which are associated with this link
+	iLinkID = qyTarget.LinkID
+	
+	CALL VisiblePointLocation
+		
+	SELECT * FROM mdl_SpecLinks WHERE ToLinkID = iLinkID and SpecLinkType LIKE "P%" INTO qySpecLinks
+	
+	'If there are no special links or orifices in the special links associated with this link
+	'then throw an error and quit
+	
+	numResults = Tableinfo(qySpecLinks,TAB_INFO_NROWS)
+	IF	numResults = 0 THEN
+		NOTE "No pump data associated with the link you have selected!"
+		EXIT SUB
+	END IF
+	
+	'Get a unique value for AltSpecLinkID
+	iAltSpecLinkID = maxAltSpecLinkID()
+	iMdlSpecLinkID = qySpecLinks.SLID
+	iSpecLinkIndex = qySpecLinks.ToLinkNDX
+	sSLtyp = qySpecLinks.SpecLinkType
+	sSLNode = qySpecLinks.SLNode
+	
+	'Get the current symbol style and save it, then
+	'place the graphic object into the alt_special links table
+	'then reset to the old symbol style
+	DIM sym_user_symbol AS Symbol
+	sym_user_symbol = CurrentSymbol( )
+	SET STYLE Symbol ( 34,RED,18, "MapInfo Cartographic", 0, 45 )
+	INSERT INTO VisibleSpecials(OBJ, AltSpecLinkID, MdlSpecLinkID, AltLinkID, Operation, SpecLinkIndex, SpecLinkType, SLNode)
+		VALUES( CreatePoint( sx2, sy2), iAltSpecLinkID, iMdlSpecLinkID, 0, "DEL", iSpecLinkIndex, sSLtyp, sSLNode)
+	SET STYLE Symbol sym_user_symbol		
+	
+	INSERT INTO alt_speclinks(AltSpecLinkID, MdlSpecLinkID, AltLinkID, Operation, SpecLinkIndex, SpecLinkType, SLNode)
+		VALUES(iAltSpecLinkID, iMdlSpecLinkID, 0, "DEL", iSpecLinkIndex, sSLtyp, sSLNode)
+	
+	EXIT SUB
+skipDeletePump:	
+	CALL DebugNote("Delete Pump Crashed - Error: " & Err() & " " & Error$() )
+	RESUME NEXT
+END SUB
+'--------------------------------------------------------
+FUNCTION DeleteAltLinkPump() AS Integer
+	'DeletePump will delete pumps from a model link or an alt link or delete added or changed pumps
+	'from the visible specials group.  DeletePump should just flag the indicated pump as a DEL
+	'operation.  The engine should remove the associated pump curves and specialLinkData objects
+	'A user should select a link then select “Delete Pump”.  
+	'If no pump is present then state so, otherwise create a delete entry in alt_speclinks
+	DIM iAltLinkID AS Integer
+	DIM SLID AS Integer
+	DIM iMdlSpecLinkID AS Integer
+	DIM iAltSpecLinkID AS Integer
+	DIM iSpecLinkIndex AS Integer
+	DIM iLinkID AS Integer
+	DIM numResults AS Integer
+	DIM iChoice AS Integer
+	DIM sSLtyp AS String
+	DIM sSLNode AS String
+	DIM lIsItModified AS Integer
+	DIM PT AS String
+	
+	SET COORDSYS EARTH PROJECTION 3, 33, "ft", -120.5, 43.6666666667, 44.3333333333, 46, 8202099.7379999999, 0
+	
+	IF NOT selectioninfo(1) THEN
+		NOTE "Please select a segment to delete a pump from!"
+		EXIT SUB
+	END IF
+	
+	SELECT * FROM selection INTO qyTarget
+	
+	IF	Tableinfo(qyTarget,TAB_INFO_NROWS)<>1 THEN
+		NOTE "Delete pump operation available to one object at a time!"
+		EXIT SUB
+	END IF
+	
+	iAltLinkID = qyTarget.AltLinkID
+	
+	'If the alt link has an alt special link that is a pump going to it
+	SELECT * FROM alt_speclinks WHERE AltLinkID = iAltLinkID AND SpecLinkType = "PS" INTO theCheck
+	
+	numResults = Tableinfo(theCheck,TAB_INFO_NROWS)
+	IF numResults = 0 THEN
+		Note "No pumps associated with this alt link"
+		EXIT FUNCTION
+	END IF
+	
+	'If there are more than one pumps associated with this link
+	IF numResults > 1 THEN
+		'Ask the user which pump they wish to delete
+		DIM I AS Integer
+		DIM sChoices AS String
+		
+		'Create the string for the user to select from in the Listbox
+		FOR I = 1 TO numResults - 1
+			FETCH REC I FROM theCheck
+			sChoices = sChoices + theCheck.AltSpecLinkID + ";"
+		NEXT
+		
+		FETCH REC numResults FROM theCheck
+		sChoices = sChoices + theCheck.AltSpecLinkID
+		
+		DIALOG   
+		TITLE "Select which special link you want to operate on:" POSITION 250,100 
+		CONTROL STATICTEXT		ID 8500	POSITION 10,7			WIDTH 200		TITLE "SPECIAL LINK SELECTION FORM"    
+		CONTROL STATICTEXT		ID 8480	POSITION 10,30		WIDTH 140		TITLE "SPECIAL LINK ID:" 
+		CONTROL LISTBOX TITLE sChoices ID 8470 POSITION 155,30		WIDTH 60 HEIGHT 30 VALUE 1 INTO iChoice
+		CONTROL OKBUTTON		ID 8340	POSITION 10,135		WIDTH 45		TITLE "OK"			CALLING SplUpdt 
+		
+		FETCH REC iChoice FROM theCheck
+	END IF
+	
+	SLID = theCheck.AltSpecLinkID
+	
+	SELECT * FROM alt_speclinkdata WHERE AltSpecLinkID = SLID INTO Lame
+	SELECT * FROM Lame WHERE Tag = "PNAME" INTO Lame2
+	PT = Lame2.Value
+	SELECT * FROM alt_pumpcurves WHERE PumpType = PT INTO Lame3
+	DELETE FROM Lame3
+	CLOSE TABLE Lame
+	CLOSE TABLE Lame2
+	CLOSE TABLE Lame3
+	
+	UselessReturnValue = DeleteFromAltSpecialTables(SLID)
+	
+END FUNCTION
+'--------------------------------------------------------
+FUNCTION DeleteAltLinkWeir() AS Integer
+	DIM iAltLinkID AS Integer
+	DIM SLID AS Integer
+	DIM iMdlSpecLinkID AS Integer
+	DIM iAltSpecLinkID AS Integer
+	DIM iSpecLinkIndex AS Integer
+	DIM iLinkID AS Integer
+	DIM numResults AS Integer
+	DIM iChoice AS Integer
+	DIM sSLtyp AS String
+	DIM sSLNode AS String
+	DIM lIsItModified AS Integer
+	
+	SET COORDSYS EARTH PROJECTION 3, 33, "ft", -120.5, 43.6666666667, 44.3333333333, 46, 8202099.7379999999, 0
+	
+	IF NOT selectioninfo(1) THEN
+		NOTE "Please select a segment to delete a weir from!"
+		EXIT SUB
+	END IF
+	
+	SELECT * FROM selection INTO qyTarget
+	
+	IF	Tableinfo(qyTarget,TAB_INFO_NROWS)<>1 THEN
+		NOTE "Delete weir operation available to one object at a time!"
+		EXIT SUB
+	END IF
+	
+	iAltLinkID = qyTarget.AltLinkID
+	
+	'If the alt link has an alt special link that is a pump going to it
+	SELECT * FROM alt_speclinks WHERE AltLinkID = iAltLinkID AND SpecLinkType LIKE "W%" INTO theCheck
+	
+	numResults = Tableinfo(theCheck,TAB_INFO_NROWS)
+	IF numResults = 0 THEN
+		Note "No weirs associated with this alt link"
+		EXIT FUNCTION
+	END IF
+	
+	'If there is more than one weir associated with this link
+	IF numResults > 1 THEN
+		'Ask the user which weir they wish to delete
+		DIM I AS Integer
+		DIM sChoices AS String
+		
+		'Create the string for the user to select from in the Listbox
+		FOR I = 1 TO numResults - 1
+			FETCH REC I FROM theCheck
+			sChoices = sChoices + theCheck.AltSpecLinkID + ";"
+		NEXT
+		
+		FETCH REC numResults FROM theCheck
+		sChoices = sChoices + theCheck.AltSpecLinkID
+		
+		DIALOG   
+		TITLE "Select which special link you want to operate on:" POSITION 250,100 
+		CONTROL STATICTEXT		ID 8500	POSITION 10,7			WIDTH 200		TITLE "SPECIAL LINK SELECTION FORM"    
+		CONTROL STATICTEXT		ID 8480	POSITION 10,30		WIDTH 140		TITLE "SPECIAL LINK ID:" 
+		CONTROL LISTBOX TITLE sChoices ID 8470 POSITION 155,30		WIDTH 60 HEIGHT 30 VALUE 1 INTO iChoice
+		CONTROL OKBUTTON		ID 8340	POSITION 10,135		WIDTH 45		TITLE "OK"			CALLING SplUpdt 
+		
+		FETCH REC iChoice FROM theCheck
+	END IF
+	
+	SLID = theCheck.AltSpecLinkID
+	
+	UselessReturnValue = DeleteFromAltSpecialTables(SLID)
+	
+END FUNCTION
+'--------------------------------------------------------
+FUNCTION DeleteAltLinkOrifice() AS Integer
+	DIM iAltLinkID AS Integer
+	DIM SLID AS Integer
+	DIM numResults AS Integer
+	DIM iChoice AS Integer
+	
+	SET COORDSYS EARTH PROJECTION 3, 33, "ft", -120.5, 43.6666666667, 44.3333333333, 46, 8202099.7379999999, 0
+	
+	IF NOT selectioninfo(1) THEN
+		NOTE "Please select a segment to delete an orifice from!"
+		EXIT SUB
+	END IF
+	
+	SELECT * FROM selection INTO qyTarget
+	
+	IF	Tableinfo(qyTarget,TAB_INFO_NROWS)<>1 THEN
+		NOTE "Delete orifice operation available to one object at a time!"
+		EXIT SUB
+	END IF
+	
+	iAltLinkID = qyTarget.AltLinkID
+	
+	'If the alt link has an alt special link that is a orifice going to it
+	SELECT * FROM alt_speclinks WHERE AltLinkID = iAltLinkID AND SpecLinkType LIKE "O%" INTO theCheck
+	
+	numResults = Tableinfo(theCheck,TAB_INFO_NROWS)
+	IF numResults = 0 THEN
+		Note "No orifices associated with this alt link"
+		EXIT FUNCTION
+	END IF
+	
+	'If there is more than one orifice associated with this link
+	IF numResults > 1 THEN
+		'Ask the user which orifice they wish to delete
+		DIM I AS Integer
+		DIM sChoices AS String
+		
+		'Create the string for the user to select from in the Listbox
+		FOR I = 1 TO numResults - 1
+			FETCH REC I FROM theCheck
+			sChoices = sChoices + theCheck.AltSpecLinkID + ";"
+		NEXT
+		
+		FETCH REC numResults FROM theCheck
+		sChoices = sChoices + theCheck.AltSpecLinkID
+		
+		DIALOG   
+		TITLE "Select which special link you want to operate on:" POSITION 250,100 
+		CONTROL STATICTEXT		ID 8500	POSITION 10,7			WIDTH 200		TITLE "SPECIAL LINK SELECTION FORM"    
+		CONTROL STATICTEXT		ID 8480	POSITION 10,30		WIDTH 140		TITLE "SPECIAL LINK ID:" 
+		CONTROL LISTBOX TITLE sChoices ID 8470 POSITION 155,30		WIDTH 60 HEIGHT 30 VALUE 1 INTO iChoice
+		CONTROL OKBUTTON		ID 8340	POSITION 10,135		WIDTH 45		TITLE "OK"			CALLING SplUpdt 
+		
+		FETCH REC iChoice FROM theCheck
+	END IF
+	
+	SLID = theCheck.AltSpecLinkID
+	
+	UselessReturnValue = DeleteFromAltSpecialTables(SLID)
+	
+END FUNCTION
+
+'--------------------------------------------------------
+FUNCTION DeleteModelLinkObject(BYVAL lIsItModified AS Integer, BYVAL sObjectType AS String) AS Integer
+	DIM SLID AS Integer
+	DIM iAltSpecLinkID AS Integer
+	DIM PT AS String
+	
+	SET COORDSYS EARTH PROJECTION 3, 33, "ft", -120.5, 43.6666666667, 44.3333333333, 46, 8202099.7379999999, 0
+	
+	IF NOT selectioninfo(1) THEN
+		NOTE "Please select a segment to delete from!"
+		EXIT FUNCTION
+	END IF
+	
+	SLID = lIsItModified
+	'If the IsItModified check comes back positive, then there are no
+	'modifications to the link
+	IF SLID > 0 THEN
+		NOTE "No modification on this special link to delete."
+		EXIT FUNCTION
+	END IF
+	
+	'Change the SLID to make it positive
+	SLID = -SLID
+	
+	'If the SLID returned by IsItModified is not related to an object then
+	'say so and exit the function
+	IF sObjectType = "Weir" THEN
+		SELECT * FROM alt_speclinks WHERE MdlSpecLinkID = SLID AND SpecLinkType LIKE "W%" INTO psTest 
+		IF Tableinfo(psTest,TAB_INFO_NROWS) < 1 THEN
+			NOTE "Special link selected is not a weir"
+			CLOSE TABLE psTest
+			EXIT FUNCTION
+		END IF
+	ELSEIF sObjectType = "Orifice" THEN
+		SELECT * FROM alt_speclinks WHERE MdlSpecLinkID = SLID AND SpecLinkType LIKE "O%" INTO psTest 
+		IF Tableinfo(psTest,TAB_INFO_NROWS) < 1 THEN
+			NOTE "Special link selected is not an orifice"
+			CLOSE TABLE psTest
+			EXIT FUNCTION
+		END IF
+	ELSEIF sObjectType = "Pump" THEN
+		SELECT * FROM alt_speclinks WHERE MdlSpecLinkID = SLID AND SpecLinkType LIKE "P%" INTO psTest 
+		IF Tableinfo(psTest,TAB_INFO_NROWS) < 1 THEN
+			NOTE "Special link selected is not a pump"
+			CLOSE TABLE psTest
+			EXIT FUNCTION
+		END IF
+	END IF
+	
+	SLID = psTest.AltSpecLinkID
+	CLOSE TABLE psTest
+	
+	IF sObjectType = "Pump" THEN
+		SELECT * FROM alt_speclinkdata WHERE AltSpecLinkID = SLID INTO Lame
+		SELECT * FROM Lame WHERE Tag = "PNAME" INTO Lame2
+		PT = Lame2.Value
+		SELECT * FROM alt_pumpcurves WHERE PumpType = PT INTO Lame3
+		DELETE FROM Lame3
+		CLOSE TABLE Lame
+		CLOSE TABLE Lame2
+		CLOSE TABLE Lame3
+	END IF
+	
+	UselessReturnValue = DeleteFromAltSpecialTables(SLID)
+	
+END FUNCTION

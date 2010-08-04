@@ -1,0 +1,23 @@
+[MSF Status File]
+Version=1.00
+ProjectType=0
+External=0
+BrkptCount=0
+WatchCount=17
+WatchExpr1=j
+WatchExpr2=icond(j)
+WatchExpr3=length(j)
+WatchExpr4=dummy5
+WatchExpr5=a
+WatchExpr6=diamtr(j)
+WatchExpr7=x
+WatchExpr8=dnoff(j)
+WatchExpr9=upoff(j)
+WatchExpr10=dummy4
+WatchExpr11=njce
+WatchExpr12=ncextra
+WatchExpr13=nc
+WatchExpr14=icond(30)
+WatchExpr15=icond(31)
+WatchExpr16=icond(29)
+WatchExpr17=length(30)

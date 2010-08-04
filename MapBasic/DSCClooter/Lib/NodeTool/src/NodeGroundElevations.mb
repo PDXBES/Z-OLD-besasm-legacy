@@ -1,0 +1,88 @@
+' GetElev.mbx
+'This routine is specific to Mdl_Nodes_ac and has been created as
+'part of the development of the Alternative Tool
+'Created : April 10, 2006 by ATT
+'Routine starts with a selection from mdl_nodes_ac or any node table that
+'contains the Field "GrndElev"
+'Elevation has been based on the Points table used in the creation of the 5Ft pixel DEM
+Declare Sub AssignGroundElev(ByVal TName as string, ByVal ElevField as string, ByVal sFile as string)
+Declare Sub DoDlg
+
+Dim i, j as integer
+Dim iObj as object
+Dim x1,y1, iElev as float
+Dim sFile,PtsPath,PtsTbl, DoStr, TmpLst as String
+Dim ElevFld as string
+Global WshdPath(5) as string
+Global Wshd(5) as string
+
+Sub AssignGroundElev(ByVal TName as string, ByVal ElevField as string, ByVal sFile as string)
+
+Dim iElev as float
+
+OnError goto ErrOut
+Run Command "Select * from " & TName & " into QyRunSet Where " & ElevField & " = 0"
+
+set distance units "ft"
+Set CoordSys Earth Projection 3, 33, "ft",
+	 -120.5, 43.6666666667, 44.3333333333, 
+	 46, 8202099.7379999999, 0
+	 
+TmpLst= "" 
+i = 1
+Open File sFile For Input as #99
+Do While Not EOF(99)
+	input #99, WshdPath(i), Wshd(i)
+	TmpLst = TmpLst + Wshd(i) + ";"
+	i = i + 1
+	      If (i + 1) >= UBound(Wshd) Then 
+	        	ReDim Wshd(i + 5)
+	        	ReDim WshdPath(i + 5)
+	      End If 
+'	Print TmpLst
+Loop
+Close File #99
+
+if tableinfo(QyRunSet, 8) = 0 then
+	exit sub
+end if
+
+For j = 1 to tableinfo(QyRunSet,8)
+	Select * from QyRunSet where rowid = j into QyUpdt
+	x1 = centroidx(QyUpdt.obj)
+	y1 = centroidy(QyUpdt.obj)
+	Update QyUpdt set obj = createcircle(x1,y1,5)
+	For i = 1 to 8
+	 	PtsTbl= WshdPath(i) + Wshd(i)
+		DoStr = Str$("Open Table " & Chr$(34) & PtsTbl & ".tab"& Chr$(34) & " Hide")
+			Run Command DoStr
+'			print "Opening " & PtsTbl
+	
+		DoStr =Str$("Select Avg(col1) from " & Wshd(i) &	" where object within(Select obj from QyUpdt) into QyElev" )
+			Run Command DoStr
+
+'		Print  tableinfo(QyElev,8)
+		if tableinfo(QyElev,8)>=1 then
+			iElev= QyElev.col1
+'			Print iElev 
+			DoStr = "Update QyUpdt set " & ElevField & " = " & iElev
+			Run Command DoStr
+			Update QyUpdt set obj = createpoint(x1,y1)
+			Close Table Wshd(i)
+			goto nextRec
+		end if
+	Next
+	nextRec:
+Next
+
+Close Table QyRunSet
+Close Table QyUpdt
+Print "Elevation Extraction Done!"
+Commit Table TName
+Exit Sub
+ErrOut:
+Print "Error..." & Time(12)
+Resume Next
+End Sub
+
+'----------------------------------------

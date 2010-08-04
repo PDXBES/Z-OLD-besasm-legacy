@@ -1,0 +1,353 @@
+Include "MAPBASIC.DEF" 
+Include "QAQC_Color.DEF"
+Include "..\..\common\inc\EMGGlobal.def"
+Include "..\..\Common\Inc\EMGMTabUtil.def"
+'Include "..\..\Common\Inc\EMGLogger.def"
+Include "..\..\Common\Inc\INIUtils.def"
+include "..\..\common\inc\EMGOpenUtils.def"
+
+
+dim sName, sPath, sDirect, SDir, FileName, y, LinkRNode, ColStr, ColName, com1, com2, com3, com4, com5, com6 , com7, com8, com9, com10 as String
+dim i, j, nQCRows, idWindow1, idWindow3, n, p, q, color1, color2, nQCLink, nQCNode, nQCTotal, count3 as integer
+dim Ncols, nMapLayer as SmallInt
+dim cmdstr, CommandStr as string
+dim mycolors(20), ncolors as integer
+dim mMasterFiles(7) as FileSpec
+
+Declare Sub InitHousekeeping
+Declare Sub SayHello
+Declare Sub BuildMenus
+Declare Sub CreateQCWorkspace
+Declare Sub Main 
+Declare Sub LineCt
+Declare sub CancelProgram
+Declare Sub LayerOrder
+
+'
+' InitHousekeeping
+'   Initialize logger and global variables
+Sub InitHousekeeping
+
+	' print, msg, status, file
+'	Call SetLogOptions (TRUE, TRUE, TRUE, FALSE)
+
+	gstrAppName = "QCWorkspace"
+	gstrCopyRight = "Copyright (c) 2001, 2002, 2003, 2007 City of Portland Bureau of Environmental Services and CH2M HILL, Inc."
+	gstrVersion = "2.2"
+	gstrVerDate = "Jan 17, 2007"
+	gstrAppFolder = ApplicationDirectory$()
+
+	'  the names and locations of the master files need not be hard coded.  If the INI file
+	'  contains a value for the "Root" Key, and/or INIKey, then use it, otherwise just use the 'FullPath'.
+	'	in other words, FullPath is the default.
+	mMasterFiles(1).Name = "Master Links"
+	mMasterFiles(1).FullPath = "Links\mst_Links_ac"
+	mMasterFiles(1).INISection = "masterfiles"
+	mMasterFiles(1).INIKey = "links"
+	mMasterFiles(1).Alias = "mst_links"
+
+	mMasterFiles(2).Name = "Master Nodes"
+	mMasterFiles(2).FullPath = "Nodes\mst_Nodes_ac"
+	mMasterFiles(2).INISection = "masterfiles"
+	mMasterFiles(2).INIKey = "Nodes"
+	mMasterFiles(2).Alias = "mst_nodes"
+
+	mMasterFiles(3).Name = "Master Special Links"
+	mMasterFiles(3).FullPath = "Links\mst_SpecLinks_ac"
+	mMasterFiles(3).INISection = "masterfiles"
+	mMasterFiles(3).INIKey = "speclinks"
+	mMasterFiles(3).Alias = "mst_SpecLinks"
+
+	mMasterFiles(4).Name = "Master Special Links Data"
+	mMasterFiles(4).FullPath = "Links\mst_SpecLinkData_ac"
+	mMasterFiles(4).INISection = "masterfiles"
+	mMasterFiles(4).INIKey = "speclinksdata"
+	mMasterFiles(4).Alias = "mst_SpecLinksData"
+
+	mMasterFiles(5).Name = "Master Surface Subcatchments"
+	mMasterFiles(5).FullPath = "Surface\mst_SurfSC_ac"
+	mMasterFiles(5).INISection = "masterfiles"
+	mMasterFiles(5).INIKey = "surface"
+	mMasterFiles(5).Alias = "mst_SurfSC"
+
+  mMasterFiles(6).Name = "Quartersections"
+	mMasterFiles(6).FullPath = "Grid\QS_bound"
+	mMasterFiles(6).INISection = "masterfiles"
+	mMasterFiles(6).INIKey = "Quartersections"
+	mMasterFiles(6).Alias = "mst_Quartersections"
+
+  mMasterFiles(7).Name = "Master Direct Subcatchments"
+	mMasterFiles(7).FullPath = "Parcels_Divides\mst_DSC_ac"
+	mMasterFiles(7).INISection = "masterfiles"
+	mMasterFiles(7).INIKey = "dsc"
+	mMasterFiles(7).Alias = "mst_DSC"
+
+End Sub
+
+'
+' SayHello
+'   Provide descriptive startup messages
+Sub SayHello
+
+	CLS
+	print gstrAppName
+	print	gstrCopyRight
+	print	"Version " + gstrVersion + " - " + gstrVerDate
+	print	"Running from " & gstrAppFolder
+
+End Sub
+
+'
+' BuildMenus
+'   Build menu to be called externally
+'
+Sub BuildMenus
+  Create Menu "QCWorkspace" As
+	 "&QCWorkspace" ID 6700 Calling CreateQCWorkspace
+End Sub
+
+'
+' CreateQCWorkspace
+'   Create workspaces for quality control
+'   This should be called only after gmdlRootFolder has been set
+''
+Sub CreateQCWorkspace
+  Dim MasterRoot as String
+  Dim MasterWorsPath as String
+  
+  if gmdlRootFolder = "" then
+    Exit Sub
+  end if
+
+	MasterRoot = LTrim$(RTrim$(ReadINI(gmdlRootFolder & "\model.ini", "masterfiles", "Root", "")))
+  if MasterRoot <> "" then
+    MasterRoot = fixFolderSlash(masterRoot)
+  end if
+  MasterWorsPath = MasterRoot & "Master_Wors\"
+
+
+	Run Application MasterWorsPath & "QAQC_BaseWor.WOR"
+'	Open Table "W:\AGMaster2\Links\mst_links_ac.TAB" Interactive
+	Open Table MasterWorsPath & "QAQC_link.tab"
+	Open Table gmdlRootFolder & "\links\mdl_links_ac.tab"
+	Open Table gmdlRootFolder & "\nodes\mdl_nodes_ac.tab"
+
+  idWindow1 = WindowID(1)
+  idWindow3 = WindowID(3)
+  Add Map Window idWindow1 Layer mdl_Links_ac
+  Set Map Window idWindow1 Layer 1 Arrows On Display Global Global Line (3,2,8421504)
+  Set Map Window idWindow1 Zoom Entire Layer 1
+  Add Map Window idWindow3 Layer mdl_Links_ac
+  Set Map Window idWindow3 Layer 1 Arrows On Display Global Global Line (3,2,8421504)
+  Set Map Window idWindow3 Zoom Entire Layer 1
+
+	sDir = Str$(gmdlRootFolder & "\qc\")
+	Select *  from mst_Nodes_ac , mst_SpecLinks_ac  where mst_Nodes_ac . Node = mst_SpecLinks_ac . Node and mst_SpecLinks_ac.timeframe <> "AB" into mstSpecialLinkNodes 
+	Select *  from mst_links_ac , mst_SpecLinks_ac  where mst_links_ac . MLinkID = mst_SpecLinks_ac . ToMLinkID and mst_SpecLinks_ac.timeframe <> "AB" into mstSpecialLinks 
+	commit table mstSpecialLinkNodes as sdir + "mstSpecialLinkNodes" TYPE NATIVE Charset "WindowsLatin1"
+	commit table mstSpecialLinks as sdir + "mstSpecialLinks" TYPE NATIVE Charset "WindowsLatin1"
+	close table mstSpecialLinkNodes
+	close table mstSpecialLinks
+	open table sdir + "mstSpecialLinkNodes.TAB" interactive
+	open table sdir + "mstSpecialLinks.TAB" interactive
+	
+  j = 1
+  nQCRows = TableInfo(QAQC_link,TAB_INFO_NROWS)
+  nQCLink = 0
+  nQCNode = 0
+
+  Do While j <= nQCRows
+  	Select * from QAQC_link where RowID = j into QyName
+  	FileName = QyName.File_Name
+  	Call LineCt
+  	If p = 1 Then
+  			Print FileName + " is Clean"
+  			goto Skip1
+  	End If
+  	Register Table sDir + FileName + ".txt" TYPE ASCII Delimiter 32 Titles Charset "WindowsLatin1" Into SDir + FileName +".TAB"
+  	Open Table sDir + FileName + ".TAB" Interactive
+  	Commit Table FileName As sDir + FileName + "_Q.TAB" TYPE NATIVE Charset "WindowsLatin1"
+  	Close Table FileName Interactive
+  	Open Table sDir + FileName + "_Q.TAB" Interactive
+  	Ncols = TableInfo(FileName + "_Q", TAB_INFO_NCOLS)
+  	q = 1
+  	n = 1
+  	ColStr = Str$("Select ")
+  		Do While    q <= Ncols
+  			ColName = ColumnInfo(FileName +"_Q", "COL" + q, COL_INFO_NAME)
+  			ColStr = Str$(ColStr  + FileName + "_Q." + ColName)
+  			If q < Ncols then
+  				ColStr = Str$(ColStr + ", ")
+  			End If
+  			If ColName = "MLinkID" then
+  				n = n
+  	 		Else
+  	 			n = n + 1
+  			End If
+  			q = q + 1
+  		Loop
+  	If n < q then
+  			LinkRNode = Str$(" from " + FileName + "_Q, mst_links_ac where " + FileName + "_Q.MLinkID=mst_links_ac.MLinkID into ")
+  		Else if n = q then
+  			LinkRNode = Str$(" from " + FileName + "_Q, mst_Nodes_ac where " + FileName + "_Q.Node=mst_Nodes_ac.Node into ")
+  		End If
+  	End If
+  	Com1 = Str$(ColStr + LinkRNode + FileName)
+  	Run Command Com1
+  	Commit Table FileName As sDir + FileName + ".TAB" TYPE NATIVE Charset "WindowsLatin1"
+  	Close Table FileName Interactive
+  	Close Table FileName + "_Q" Interactive
+  	Open Table sDir + FileName + ".TAB" Interactive
+  	Print FileName
+
+     If n < q then 'Link Clauses
+         color1 = mycolors(nQCLink mod ncolors + 1)
+  	   Add Map
+  			Window idWindow1
+   	   	Layer FileName
+  			cmdstr = "Set Map Window " + format$(idWindow1,"0") + " Layer 1 Display Global Global Line (" + format$((nQCLink+2)*10 + 10,"0") + "," + format$(2,"0") + ","+ format$(color1,"0") +")"
+          	'Print cmdstr
+          	run command cmdstr
+           nQCLink = nQCLink + 1
+  	Else if n = q then 'Node Clauses
+  		 color2 = mycolors(nQCNode mod ncolors + 1)
+  		Add Map
+  	   	Window idWindow1
+   	   	Layer FileName
+  			cmdstr = "Set Map Window " + format$(idWindow1,"0") + " Layer 1 Display Global Global Symbol(" + format$(34,"0") + "," + format$(color2,"0") + ","+ format$(nQCNode + 9,"0") +")"
+          	run command cmdstr
+           nQCNode = nQCNode + 1
+        End If
+    End If
+    Kill sDir + FileName + "_Q.TAB"
+    Kill sDir + FileName + "_Q.DAT"
+  	Skip1:
+  	j = j + 1
+  Loop
+  Close Table QyName
+
+  Call LayerOrder
+  Close Table QAQC_link
+
+	set map redraw off
+	Add Map Window format$(idWindow1,"0") Layer mstSpecialLinkNodes, mstSpecialLinks
+	Set Map Window format$(idWindow1,"0") Layer 1 Display Global Global Symbol (44,16776960,18) 
+	Set Map Window format$(idWindow1,"0") Layer 2 Display Global Global Line (110,65,16776960) 
+  nMapLayer = MapperInfo(idWindow1,MAPPER_INFO_LAYERS)
+  CommandStr = "Set Map Window " + format$(idWindow1,"0") + " Order "
+  if nMapLayer > 3 then
+	  for count3 = 1 to nMapLayer - 3 step 1
+	  	CommandStr = CommandStr & Format$(count3 + 2,"0") & ","
+	  next
+	  CommandStr = CommandStr & "1,2," & Format$(nMapLayer,"0")
+	  run command CommandStr
+	end if
+	set map redraw on
+	
+
+
+	sDir = Str$(gmdlRootFolder & "\wors\")
+  Save Workspace As sDir & "QCWorkspace.WOR"
+  Print "Doggy-Dog Done!"
+End Sub
+
+Sub Main 
+
+  dim projfolderpath as string
+  dim MasterRoot as String
+  
+  mycolors(1)= PURPLE
+  mycolors(2)= YELLOW1
+  mycolors(3)= RED1
+  mycolors(4)= GREEN1
+  mycolors(5)= BLUE1
+  mycolors(6)= CYAN1
+  mycolors(7)= MAGENTA1
+  mycolors(8)= ORANGE
+  mycolors(9)= CRANNY
+  mycolors(10)= TEAL
+                             	
+  ncolors = 10
+
+'	Call SetLogOptions (TRUE, TRUE, TRUE, TRUE)
+
+  Call InitHousekeeping		' have to init some globals before we can say hello
+  Call InitOpenUtilGlobals  ' this sets up table names for the EMGOpenUtils functions
+	Call SayHello
+  Call BuildMenus
+End Sub
+
+Sub LineCt
+  Dim str As String
+  p = 0
+  y = "Go"
+  Open File sDir + FileName + ".txt"  For Input As #1
+  Do While y = "Go"
+    Line Input #1, str
+    If not EOF(1) Then
+    			p = p + 1
+    		Else
+  			y = "Stop"
+       End If
+    If p > 1 Then
+    	  		y = "Stop"
+    	  End If
+  Loop
+  Close File #1
+End Sub
+
+'reverses order of QC layers
+Sub LayerOrder
+
+  nQCTotal = nQCLink + nQCNode
+  
+  count3 = nQCTotal 
+  nMapLayer = MapperInfo(idWindow1,MAPPER_INFO_LAYERS)
+  
+  
+  Print nQCTotal + " QC layers"
+  Print nmaplayer + " Total Map Layers"
+  
+  if nQCTotal > 0 then
+      CommandStr = "Set Map Window " + format$(idWindow1,"0") + " Order "
+  else
+      exit sub
+  end if
+    
+    'reorder QC layers
+	Do while count3 > 0
+		CommandStr = CommandStr + format$(count3,"0") 
+		if count3 > 1 then 
+		    CommandStr = CommandStr + ","
+		end if
+		count3 = count3 - 1 
+	Loop
+	
+	count3 = nQCTotal + 1
+
+    'leave non QC layers in the same order	
+	Do while count3 <= nMapLayer 
+		CommandStr = CommandStr + "," + format$(count3,"0")
+		count3 = count3 + 1
+	Loop 
+    'print CommandStr
+	
+  Run Command CommandStr
+   
+  'create a legend
+  CommandStr = "Create Cartographic Legend From Window " + format$(idWindow1,"0") + " Position (0,0) Units " + chr$(34) + "in" + chr$(34) + " Width 1.08333 Units " + chr$(34) + "in" + chr$(34) + " Height 0.927083 Units " + chr$(34) + "in" + chr$(34) + " Scrollbars On Portrait Default Frame Title " + chr$(34) + "# " + chr$(34) +  " Font (" + chr$(34) + "Arial" + chr$(34) + ",0,10,0) Default Frame Style " + chr$(34) + "%" + chr$(34) + " Font (" + chr$(34) + "Arial" + chr$(34) + ",0,0,0) "
+  
+  for count3 = 1 to nQCtotal step 1
+      CommandStr = Commandstr + " Frame From Layer " + format$(count3,"0")
+  next
+  
+  'Print CommandStr
+
+  Run Command CommandStr
+    
+    
+End Sub
+
+Sub CancelProgram
+  End Program
+End Sub    
