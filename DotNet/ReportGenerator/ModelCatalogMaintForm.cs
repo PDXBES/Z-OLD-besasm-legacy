@@ -1,6 +1,5 @@
 using ESRI.ArcGIS.Geodatabase;
 using ESRI.ArcGIS.Utility;
-
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,7 +9,6 @@ using System.Text;
 using System.Windows.Forms;
 using SystemsAnalysis.Modeling.ModelResults;
 using SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor;
-
 using SystemsAnalysis.DataAccess;
 using SystemsAnalysis.Modeling;
 using SystemsAnalysis.Utils.Events;
