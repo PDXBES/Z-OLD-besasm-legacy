@@ -92,310 +92,6 @@ namespace DSCUpdater
       }
     }
 
-    private string columnNames(DataTable dtSchemaTable, string delimiter)
-    {
-      string strOut = "";
-      if (delimiter.ToLower() == "tab")
-      {
-        delimiter = "\t";
-      }
-
-      for (int i = 0; i < dtSchemaTable.Rows.Count; i++)
-      {
-        strOut += dtSchemaTable.Rows[i][0].ToString();
-        if (i < dtSchemaTable.Rows.Count - 1)
-        {
-          strOut += delimiter;
-        }
-      }
-      return strOut;
-    }
-
-    private void ExportIMPUPDATEToCSV()
-    {
-      string fileOut = "C:\\temp\\IMPUPDATE.csv";
-      SqlConnection sqlCon = new SqlConnection(Properties.Settings.Default.DscEditorConnectionString);
-      string sqlQuery = "SELECT * FROM IMPUPDATE";
-      SqlCommand sqlCmd = new SqlCommand(sqlQuery, sqlCon);
-      sqlCon.Open();
-
-      // Creates a SqlDataReader instance to read data from the table.
-      SqlDataReader sqlDataReader = sqlCmd.ExecuteReader();
-
-      // Retrives the schema of the table.
-      DataTable dtSchema = sqlDataReader.GetSchemaTable();
-
-      // Creates the CSV file as a stream, using the given encoding.
-      StreamWriter sw = new StreamWriter(fileOut, false, Encoding.ASCII);
-
-      // represents a full row
-      string strRow;
-
-      // Writes the column headers     
-      sw.WriteLine(columnNames(dtSchema, ","));
-
-      // Reads the rows one by one from the SqlDataReader
-      // transfers them to a string with the given separator character and
-      // writes it to the file.
-      while (sqlDataReader.Read())
-      {
-        strRow = "";
-        for (int i = 0; i < sqlDataReader.FieldCount; i++)
-        {
-          strRow += sqlDataReader.GetInt32(i);
-          if (i < sqlDataReader.FieldCount - 1)
-          {
-            strRow += ",";
-          }
-        }
-        sw.WriteLine(strRow);
-      }
-
-      // Closes the text stream and the database connenction.
-      sw.Close();
-      sqlCon.Close();
-    }
-
-    private static void AddEditDateCommandParameter(SqlCommand sqlCmd, SqlConnection sqlCon)
-    {
-      //add editDate parameter to SQL command sqlCmd
-      DateTime editDate = DateTime.Now;
-      SqlParameter pEditDate = sqlCmd.CreateParameter();
-      pEditDate.ParameterName = "@editDate";
-      pEditDate.SqlDbType = SqlDbType.DateTime;
-      pEditDate.Value = editDate;
-      pEditDate.Direction = ParameterDirection.Input;
-      sqlCmd.Parameters.Add(pEditDate);
-      sqlCmd.CommandTimeout = 300;
-      sqlCmd.Connection = sqlCon;
-      if (sqlCon.State == ConnectionState.Closed)
-      {
-        sqlCon.Open();
-      }
-    }
-
-    private static void AddEditedByCommandParameter(SqlCommand sqlCmd, SqlConnection sqlCon)
-    {
-      //add editedBy parameter to SQL command cmd
-      string editedBy;
-      editedBy = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
-      SqlParameter pEditedBy = sqlCmd.CreateParameter();
-      pEditedBy.ParameterName = "@editedBy";
-      pEditedBy.SqlDbType = SqlDbType.VarChar;
-      pEditedBy.Size = 50;
-      pEditedBy.Value = editedBy;
-      pEditedBy.Direction = ParameterDirection.Input;
-      sqlCmd.Parameters.Add(pEditedBy);
-      sqlCmd.CommandTimeout = 300;
-      sqlCmd.Connection = sqlCon;
-      if (sqlCon.State == ConnectionState.Closed)
-      {
-        sqlCon.Open();
-      }
-    }
-
-    private void AddEditIDCommandParameter(SqlCommand sqlCmd)
-    {
-      //add editID parameter to SQL command   
-      int editID;
-      sqlCmd.CommandText = "SELECT Max(edit_id) FROM SESSION";
-      if (sqlCmd.ExecuteScalar() is DBNull)
-      {
-        editID = 1;
-        SqlParameter pEditID = sqlCmd.CreateParameter();
-        pEditID.ParameterName = "@editID";
-        pEditID.SqlDbType = SqlDbType.Int;
-        pEditID.Value = editID;
-        pEditID.Direction = ParameterDirection.Input;
-        sqlCmd.Parameters.Add(pEditID);
-      }
-      else
-      {
-        editID = Convert.ToInt32(sqlCmd.ExecuteScalar());
-        SqlParameter pEditID = sqlCmd.CreateParameter();
-        pEditID.ParameterName = "@editID";
-        pEditID.SqlDbType = SqlDbType.Int;
-        pEditID.Value = editID + 1;
-        pEditID.Direction = ParameterDirection.Input;
-        sqlCmd.Parameters.Add(pEditID);
-      }
-    }
-
-    public void AddSESSIONEditIDCommandParameter(SqlCommand sqlCmd)
-    {
-      int sessionEditID = 0;
-      SqlParameter pSessionEditID = sqlCmd.CreateParameter();
-      pSessionEditID.ParameterName = "@sessionEditID";
-      pSessionEditID.SqlDbType = SqlDbType.Int;
-      pSessionEditID.Value = Convert.ToInt32(dgvUpdaterHistory.SelectedCells[0].Value);
-      sessionEditID = Convert.ToInt32(pSessionEditID.Value);
-      pSessionEditID.Direction = ParameterDirection.Input;
-      sqlCmd.Parameters.Add(pSessionEditID);
-    }
-
-    public void AddEditorEditIDCommandParameter(SqlCommand sqlCmd)
-    {
-      int editorEditID = 0;
-      SqlParameter pEditorEditID = sqlCmd.CreateParameter();
-      dgvUpdaterEditor.Rows[0].Selected = true;
-      editorEditID = Convert.ToInt32(dgvUpdaterEditor.SelectedCells[1].Value);
-      pEditorEditID.ParameterName = "@editorEditID";
-      pEditorEditID.SqlDbType = SqlDbType.Int;
-      pEditorEditID.Value = editorEditID;
-      pEditorEditID.Direction = ParameterDirection.Input;
-      sqlCmd.Parameters.Add(pEditorEditID);
-    }
-
-    private void AddNewParkAreaCommandParameter(SqlCommand sqlCmd, SqlConnection sqlCon)
-    {
-      //add newParkArea parameter to SQL command cmd
-      SqlParameter pNewParkArea = sqlCmd.CreateParameter();
-      pNewParkArea.ParameterName = "@newParkArea";
-      pNewParkArea.SqlDbType = SqlDbType.Int;
-      pNewParkArea.Value = 0;//newParkArea;
-      pNewParkArea.Direction = ParameterDirection.Input;
-      sqlCmd.Parameters.Add(pNewParkArea);
-      //sqlCmd.CommandTimeout = 300;
-      //sqlCmd.Connection = sqlCon;
-      //sqlCon.Open();
-    }
-
-    private void AddNewParkDISCOAreaCommandParameter(SqlCommand sqlCmd, SqlConnection sqlCon)
-    {
-      //add newParkDISCOArea parameter to SQL command cmd
-      SqlParameter pNewParkDISCOArea = sqlCmd.CreateParameter();
-      pNewParkDISCOArea.ParameterName = "@newParkDISCOArea";
-      pNewParkDISCOArea.SqlDbType = SqlDbType.Int;
-      pNewParkDISCOArea.Value = 0;// newParkDISCOICArea;
-      pNewParkDISCOArea.Direction = ParameterDirection.Input;
-      sqlCmd.Parameters.Add(pNewParkDISCOArea);
-      //sqlCmd.CommandTimeout = 300;
-      //sqlCmd.Connection = sqlCon;
-      //sqlCon.Open();
-    }
-
-    private void AddNewParkAreaDrywellCommandParameter(SqlCommand sqlCmd, SqlConnection sqlCon)
-    {
-      //add newParkDrywellArea parameter to SQL command cmd
-      SqlParameter pNewParkDrywellArea = sqlCmd.CreateParameter();
-      pNewParkDrywellArea.ParameterName = "@newParkDrywellArea";
-      pNewParkDrywellArea.SqlDbType = SqlDbType.Int;
-      pNewParkDrywellArea.Value = 0;// newParkDrywellICArea;
-      pNewParkDrywellArea.Direction = ParameterDirection.Input;
-      sqlCmd.Parameters.Add(pNewParkDrywellArea);
-      //sqlCmd.CommandTimeout = 300;
-      //sqlCmd.Connection = sqlCon;
-      //sqlCon.Open();
-    }
-
-    private void AddNewRoofAreaCommandParameter(SqlCommand sqlCmd, SqlConnection sqlCon)
-    {
-      //add newRoofArea parameter to SQL command cmd
-      SqlParameter pNewRoofArea = sqlCmd.CreateParameter();
-      pNewRoofArea.ParameterName = "@newRoofkArea";
-      pNewRoofArea.SqlDbType = SqlDbType.Int;
-      pNewRoofArea.Value = 0;// newRoofArea;
-      pNewRoofArea.Direction = ParameterDirection.Input;
-      sqlCmd.Parameters.Add(pNewRoofArea);
-      //sqlCmd.CommandTimeout = 300;
-      //sqlCmd.Connection = sqlCon;
-      //sqlCon.Open();
-    }
-
-    private void AddNewRoofDISCOAreaCommandParameter(SqlCommand sqlCmd, SqlConnection sqlCon)
-    {
-      //add newRoofDISCOArea parameter to SQL command cmd
-      SqlParameter pNewRoofDISCOArea = sqlCmd.CreateParameter();
-      pNewRoofDISCOArea.ParameterName = "@newRoofDISCOArea";
-      pNewRoofDISCOArea.SqlDbType = SqlDbType.Int;
-      pNewRoofDISCOArea.Value = 0;// newRoofDISCOICArea;
-      pNewRoofDISCOArea.Direction = ParameterDirection.Input;
-      sqlCmd.Parameters.Add(pNewRoofDISCOArea);
-      //sqlCmd.CommandTimeout = 300;
-      //sqlCmd.Connection = sqlCon;
-      //sqlCon.Open();
-    }
-
-    private void AddNewRoofAreaDrywellCommandParameter(SqlCommand sqlCmd, SqlConnection sqlCon)
-    {
-      //add newRoofkDrywellArea parameter to SQL command sqlCmd
-      SqlParameter pNewRoofDrywellArea = sqlCmd.CreateParameter();
-      pNewRoofDrywellArea.ParameterName = "@newRoofDrywellArea";
-      pNewRoofDrywellArea.SqlDbType = SqlDbType.Int;
-      pNewRoofDrywellArea.Value = 0;// newRoofDrywellArea;
-      pNewRoofDrywellArea.Direction = ParameterDirection.Input;
-      sqlCmd.Parameters.Add(pNewRoofDrywellArea);
-      //sqlCmd.CommandTimeout = 300;
-      //sqlCmd.Connection = sqlCon;
-      //sqlCon.Open();
-    }
-
-    private void AddUpdaterEditorParkAreaCommandParameter(SqlCommand sqlCmd)
-    {
-      //add updaterEditorParkArea parameter to SQL command sqlCmd
-      SqlParameter pUpdaterEditorParkArea = sqlCmd.CreateParameter();
-      pUpdaterEditorParkArea.ParameterName = "@updaterEditorParkArea";
-      pUpdaterEditorParkArea.SqlDbType = SqlDbType.Int;
-      pUpdaterEditorParkArea.Value = Convert.ToInt32(txtNewParkArea.Text);
-      pUpdaterEditorParkArea.Direction = ParameterDirection.Input;
-      sqlCmd.Parameters.Add(pUpdaterEditorParkArea);
-    }
-
-    private void AddUpdaterEditorParkDiscoICAreaCommandParameter(SqlCommand sqlCmd)
-    {
-      //add updaterEditorParkArea parameter to SQL command sqlCmd
-      SqlParameter pUpdaterEditorParkDiscoICArea = sqlCmd.CreateParameter();
-      pUpdaterEditorParkDiscoICArea.ParameterName = "@updaterEditorParkDiscoICArea";
-      pUpdaterEditorParkDiscoICArea.SqlDbType = SqlDbType.Int;
-      pUpdaterEditorParkDiscoICArea.Value = Convert.ToInt32(txtNewParkDISCOICArea.Text);
-      pUpdaterEditorParkDiscoICArea.Direction = ParameterDirection.Input;
-      sqlCmd.Parameters.Add(pUpdaterEditorParkDiscoICArea);
-    }
-
-    private void AddUpdaterEditorParkDrywellICAreaCommandParameter(SqlCommand sqlCmd)
-    {
-      //add updaterEditorParkArea parameter to SQL command sqlCmd
-      SqlParameter pUpdaterEditorParkDrywellICArea = sqlCmd.CreateParameter();
-      pUpdaterEditorParkDrywellICArea.ParameterName = "@updaterEditorParkDrywellICArea";
-      pUpdaterEditorParkDrywellICArea.SqlDbType = SqlDbType.Int;
-      pUpdaterEditorParkDrywellICArea.Value = Convert.ToInt32(txtNewParkDrywellICArea.Text);
-      pUpdaterEditorParkDrywellICArea.Direction = ParameterDirection.Input;
-      sqlCmd.Parameters.Add(pUpdaterEditorParkDrywellICArea);
-    }
-
-    private void AddUpdaterEditorRoofAreaCommandParameter(SqlCommand sqlCmd)
-    {
-      //add updaterEditorParkArea parameter to SQL command sqlCmd
-      SqlParameter pUpdaterEditorRoofArea = sqlCmd.CreateParameter();
-      pUpdaterEditorRoofArea.ParameterName = "@updaterEditorRoofArea";
-      pUpdaterEditorRoofArea.SqlDbType = SqlDbType.Int;
-      pUpdaterEditorRoofArea.Value = Convert.ToInt32(txtNewRoofArea.Text);
-      pUpdaterEditorRoofArea.Direction = ParameterDirection.Input;
-      sqlCmd.Parameters.Add(pUpdaterEditorRoofArea);
-    }
-
-    private void AddUpdaterEditorRoofDiscoICAreaCommandParameter(SqlCommand sqlCmd)
-    {
-      //add updaterEditorParkArea parameter to SQL command sqlCmd
-      SqlParameter pUpdaterEditorRoofDiscoIC = sqlCmd.CreateParameter();
-      pUpdaterEditorRoofDiscoIC.ParameterName = "@updaterEditorRoofDiscoICArea";
-      pUpdaterEditorRoofDiscoIC.SqlDbType = SqlDbType.Int;
-      pUpdaterEditorRoofDiscoIC.Value = Convert.ToInt32(txtNewRoofDISCOICArea.Text);
-      pUpdaterEditorRoofDiscoIC.Direction = ParameterDirection.Input;
-      sqlCmd.Parameters.Add(pUpdaterEditorRoofDiscoIC);
-    }
-
-    private void AddUpdaterEditorRoofDrywellICAreaCommandParameter(SqlCommand sqlCmd)
-    {
-      //add updaterEditorParkArea parameter to SQL command sqlCmd
-      SqlParameter pUpdaterEditorRoofDrywellICArea = sqlCmd.CreateParameter();
-      pUpdaterEditorRoofDrywellICArea.ParameterName = "@updaterEditorRoofDrywellICArea";
-      pUpdaterEditorRoofDrywellICArea.SqlDbType = SqlDbType.Int;
-      pUpdaterEditorRoofDrywellICArea.Value = Convert.ToInt32(txtNewRoofDrywellICArea.Text);
-      pUpdaterEditorRoofDrywellICArea.Direction = ParameterDirection.Input;
-      sqlCmd.Parameters.Add(pUpdaterEditorRoofDrywellICArea);
-    }
-
     /*
     public static DataTable ToADOTable<T>(
            this IEnumerable<T> varlist, CreateRowDelegate<T> fn)
@@ -426,7 +122,7 @@ namespace DSCUpdater
       return (dtReturn);
     }
     public delegate object[] CreateRowDelegate<T>(T t);
-     */    
+     */
 
     private void UpdateDscTables()
     {
@@ -450,6 +146,7 @@ namespace DSCUpdater
 
         UpdateDscEdit(editSessionId, dscUpdaterRow);
       }
+      return;
       #region old sql queries
       //run AppendNewParkDISCORecords queries
       SqlCommand sqlCmd = null;
@@ -735,8 +432,8 @@ namespace DSCUpdater
       {
         mstIcDiscoVegRow = projectDataSet.MstIcDiscoVeg.AddMstIcDiscoVegRow(
           dscId, Convert.ToInt32(dscId / 100), Convert.ToInt32(dscId % 100),
-          "R", "DDEX", "EX", "EX", String.Empty, String.Empty,
-          0, .7, "", DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss"));
+          "R", "DDEX", "EX", "EX", null, null,
+          0, .7, "DSCUpdater", DateTime.Now.ToString("yyyyMMdd"));
       }
       mstIcDiscoVegRow.SqFt = newRoofDiscoArea;
 
@@ -746,8 +443,8 @@ namespace DSCUpdater
       {
         mstIcDiscoVegRow = projectDataSet.MstIcDiscoVeg.AddMstIcDiscoVegRow(
           dscId, Convert.ToInt32(dscId / 100), Convert.ToInt32(dscId % 100),
-          "P", "DDEX", "EX", "EX", String.Empty, String.Empty,
-          0, .7, "", DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss"));
+          "P", "DDEX", "EX", "EX", null, null,
+          0, .7, "DSCUpdater", DateTime.Now.ToString("yyyyMMdd"));
       }
       mstIcDiscoVegRow.SqFt = newParkDiscoArea;
     }
@@ -758,8 +455,8 @@ namespace DSCUpdater
       {
         mstIcDrywellRow = projectDataSet.MstIcDrywell.AddMstIcDrywellRow(
           dscId, Convert.ToInt32(dscId / 100), Convert.ToInt32(dscId % 100),
-          "R", "DDEX", "EX", "EX", String.Empty, String.Empty,
-          0, "", DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss"));
+          "R", "DDEX", "EX", "EX", null, null,
+          0, "DSCUpdater", DateTime.Now.ToString("yyyyMMdd"));
       }
       mstIcDrywellRow.SqFt = newRoofDrywellArea;
 
@@ -769,8 +466,8 @@ namespace DSCUpdater
       {
         mstIcDrywellRow = projectDataSet.MstIcDrywell.AddMstIcDrywellRow(
           dscId, Convert.ToInt32(dscId / 100), Convert.ToInt32(dscId % 100),
-          "P", "DDEX", "EX", "EX", String.Empty, String.Empty,
-          0, "", DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss"));
+          "P", "DDEX", "EX", "EX", null, null,
+          0, "DSCUpdater", DateTime.Now.ToString("yyyyMMdd"));
       }
       mstIcDrywellRow.SqFt = newParkDrywellArea;
     }
@@ -788,7 +485,7 @@ namespace DSCUpdater
     }
     private void UpdateDscEdit(int editSessionId, ProjectDataSet.DscUpdaterRow dscUpdaterRow)
     {
-      int dscId;      
+      int dscId;
 
       int newRoofArea, newParkArea;
       int oldRoofArea, oldParkArea;
@@ -814,8 +511,8 @@ namespace DSCUpdater
       newRoofDrywellArea = (int)dscUpdaterRow.NewRoofDrywellArea;
       newParkDrywellArea = (int)dscUpdaterRow.NewParkDrywellArea;
 
-      projectDataSet.DSCEDIT.AddDSCEDITRow(
-        editSessionId, DateTime.Now, Environment.UserName, dscUpdaterRow.RNo, dscId,
+      projectDataSet.DSCEDIT.AddDSCEDITRow(projectDataSet.SESSION.FindByedit_id(editSessionId),
+        DateTime.Now, Environment.UserName, dscUpdaterRow.RNo, dscId,
         oldRoofArea, newRoofArea, oldRoofDiscoArea, newRoofDiscoArea, oldRoofDrywellArea, newRoofDrywellArea,
         oldParkArea, newParkArea, oldParkDiscoArea, newParkDiscoArea, oldParkDrywellArea, newParkDrywellArea,
         true);
@@ -996,7 +693,7 @@ namespace DSCUpdater
                            "   (([mst_ic_Drywell_ac].[TimeFrame])='EX')))";
       sqlCmd.ExecuteNonQuery();
     }
-   
+
     private static void BatchCheckNewRetroSiteAssessments(SqlCommand sqlCmd)
     {
 
@@ -1063,19 +760,18 @@ namespace DSCUpdater
 
     private void btnUpdaterHistoryReturn_Click(object sender, EventArgs e)
     {
-      if (txtNewParkArea.Text != "" || txtNewRoofArea.Text != "" || txtNewRoofDrywellICArea.Text != "" || txtNewRoofDISCOICArea.Text != "")
+      if (projectDataSet.HasChanges())
       {
-        if (MessageBox.Show("Abandon editing without saving?", "DSC Updater", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+        if (MessageBox.Show(
+          "Abandon Edits?", "Warning: Unsaved Changes",
+          MessageBoxButtons.OKCancel, MessageBoxIcon.Warning)
+          != DialogResult.OK)
         {
-
+          return;          
         }
       }
-      else
-      {
-
-      }
-      this.sESSIONTableAdapter.Fill(this.projectDataSet.SESSION);
-      bindingNavigator1.BindingSource = sESSIONBindingSource;
+      projectDataSet.RejectChanges();
+      LoadTab("dscEditorHistory");      
     }
 
     private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
@@ -1104,75 +800,76 @@ namespace DSCUpdater
       string currentRoofDrywellICAreaLblText = "";
 
       //MessageBox.Show(dgvUpdaterEditor.SelectedRows.Count.ToString());
-      if (dgvUpdaterEditor.SelectedRows.Count == 0)
+      if (dgvUpdaterEditor.Selected.Rows.Count == 0)
       {
         return;
       }
 
-      if (dgvUpdaterEditor.SelectedRows.Count == 1)
+      if (dgvUpdaterEditor.Selected.Rows.Count != 1)
       {
-        txtNewParkArea.Enabled = true;
-        txtNewRoofArea.Enabled = true;
-        txtNewParkDISCOICArea.Enabled = true;
-        txtNewParkDrywellICArea.Enabled = true;
-        txtNewRoofDISCOICArea.Enabled = true;
-        txtNewRoofDrywellICArea.Enabled = true;
-
-        if (dgvUpdaterEditor.SelectedRows[0].Cells[4].Value.ToString() != "" && dgvUpdaterEditor.SelectedRows[0].Cells[18].Value.ToString() == "False")
-        {
-          //MessageBox.Show("If1");
-          rNoLblText = "RNO: Not Available";
-          currentParkAreaLblText = "Current park area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[13].Value.ToString();
-          currentParkDiscoICAreaLblText = "Current park DISCO IC area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[15].Value.ToString(); ;
-          currentParkDrywellICAreaLblText = "Current park drywell IC area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[17].Value.ToString();
-          currentRoofAreaLblText = "Current roof area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[7].Value.ToString();
-          currentRoofDiscoICAreaLblText = "Current roof DISCO IC area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[9].Value.ToString();
-          currentRoofDrywellICAreaLblText = "Current roof drywell IC area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[11].Value.ToString();
-        }
-
-        if (dgvUpdaterEditor.SelectedRows[0].Cells[4].Value.ToString() != "" && dgvUpdaterEditor.SelectedRows[0].Cells[18].Value.ToString() == "True")
-        {
-          //MessageBox.Show("If2");
-          rNoLblText = "RNO: " + dgvUpdaterEditor.SelectedRows[0].Cells[4].Value.ToString();
-          currentParkAreaLblText = "Updated park area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[13].Value.ToString();
-          currentParkDiscoICAreaLblText = "Updated park DISCO IC area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[15].Value.ToString(); ;
-          currentParkDrywellICAreaLblText = "Updated park drywell IC area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[17].Value.ToString();
-          currentRoofAreaLblText = "Updated roof area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[7].Value.ToString();
-          currentRoofDiscoICAreaLblText = "Updated roof DISCO IC area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[9].Value.ToString();
-          currentRoofDrywellICAreaLblText = "Updated roof drywell IC area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[11].Value.ToString();
-        }
-
-        if (dgvUpdaterEditor.SelectedRows[0].Cells[4].Value.ToString() == "" && dgvUpdaterEditor.SelectedRows[0].Cells[18].Value.ToString() == "False")
-        {
-          //MessageBox.Show("If3");
-          rNoLblText = "RNO: Not Available";
-          currentParkAreaLblText = "Current park area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[13].Value.ToString();
-          currentParkDiscoICAreaLblText = "Current park DISCO IC area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[15].Value.ToString(); ;
-          currentParkDrywellICAreaLblText = "Current park drywell IC area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[17].Value.ToString();
-          currentRoofAreaLblText = "Current roof area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[7].Value.ToString();
-          currentRoofDiscoICAreaLblText = "Current roof DISCO IC area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[9].Value.ToString();
-          currentRoofDrywellICAreaLblText = "Current roof drywell IC area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[11].Value.ToString();
-        }
-
-        if (dgvUpdaterEditor.SelectedRows[0].Cells[4].Value.ToString() == "" && dgvUpdaterEditor.SelectedRows[0].Cells[18].Value.ToString() == "True")
-        {
-          //MessageBox.Show("If4");
-          rNoLblText = "RNO: Not Available";
-          currentParkAreaLblText = "Updated park area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[13].Value.ToString();
-          currentParkDiscoICAreaLblText = "Updated park DISCO IC area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[15].Value.ToString(); ;
-          currentParkDrywellICAreaLblText = "Updated park drywell IC area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[17].Value.ToString();
-          currentRoofAreaLblText = "Updated roof area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[7].Value.ToString();
-          currentRoofDiscoICAreaLblText = "Updated roof DISCO IC area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[9].Value.ToString();
-          currentRoofDrywellICAreaLblText = "Updated roof drywell IC area (sqft): " + dgvUpdaterEditor.SelectedRows[0].Cells[11].Value.ToString();
-        }
-        lblSelectedEditorRNO.Text = rNoLblText;
-        lblSelectedEditorPkArea.Text = currentParkAreaLblText;
-        lblSelectedEditorPkDISCOICArea.Text = currentParkDiscoICAreaLblText;
-        lblSelectedEditorPkDrywellICArea.Text = currentParkDrywellICAreaLblText;
-        lblSelectedEditorRfArea.Text = currentRoofAreaLblText;
-        lblSelectedEditorRfDISCOICArea.Text = currentRoofDiscoICAreaLblText;
-        lblSelectedEditorRfDrywellICArea.Text = currentRoofDrywellICAreaLblText;
+        return;
       }
+      txtNewParkArea.Enabled = true;
+      txtNewRoofArea.Enabled = true;
+      txtNewParkDISCOICArea.Enabled = true;
+      txtNewParkDrywellICArea.Enabled = true;
+      txtNewRoofDISCOICArea.Enabled = true;
+      txtNewRoofDrywellICArea.Enabled = true;
+
+      if (dgvUpdaterEditor.Selected.Rows[0].Cells[4].Value.ToString() != "" && dgvUpdaterEditor.Selected.Rows[0].Cells[18].Value.ToString() == "False")
+      {
+        //MessageBox.Show("If1");
+        rNoLblText = "RNO: Not Available";
+        currentParkAreaLblText = "Current park area (sqft): " + dgvUpdaterEditor.Selected.Rows[0].Cells[13].Value.ToString();
+        currentParkDiscoICAreaLblText = "Current park DISCO IC area (sqft): " + dgvUpdaterEditor.Selected.Rows[0].Cells[15].Value.ToString(); ;
+        currentParkDrywellICAreaLblText = "Current park drywell IC area (sqft): " + dgvUpdaterEditor.Selected.Rows[0].Cells[17].Value.ToString();
+        currentRoofAreaLblText = "Current roof area (sqft): " + dgvUpdaterEditor.Selected.Rows[0].Cells[7].Value.ToString();
+        currentRoofDiscoICAreaLblText = "Current roof DISCO IC area (sqft): " + dgvUpdaterEditor.Selected.Rows[0].Cells[9].Value.ToString();
+        currentRoofDrywellICAreaLblText = "Current roof drywell IC area (sqft): " + dgvUpdaterEditor.Selected.Rows[0].Cells[11].Value.ToString();
+      }
+
+      if (dgvUpdaterEditor.Selected.Rows[0].Cells[4].Value.ToString() != "" && dgvUpdaterEditor.Selected.Rows[0].Cells[18].Value.ToString() == "True")
+      {
+        //MessageBox.Show("If2");
+        rNoLblText = "RNO: " + dgvUpdaterEditor.Selected.Rows[0].Cells[4].Value.ToString();
+        currentParkAreaLblText = "Updated park area (sqft): " + dgvUpdaterEditor.Selected.Rows[0].Cells[13].Value.ToString();
+        currentParkDiscoICAreaLblText = "Updated park DISCO IC area (sqft): " + dgvUpdaterEditor.Selected.Rows[0].Cells[15].Value.ToString(); ;
+        currentParkDrywellICAreaLblText = "Updated park drywell IC area (sqft): " + dgvUpdaterEditor.Selected.Rows[0].Cells[17].Value.ToString();
+        currentRoofAreaLblText = "Updated roof area (sqft): " + dgvUpdaterEditor.Selected.Rows[0].Cells[7].Value.ToString();
+        currentRoofDiscoICAreaLblText = "Updated roof DISCO IC area (sqft): " + dgvUpdaterEditor.Selected.Rows[0].Cells[9].Value.ToString();
+        currentRoofDrywellICAreaLblText = "Updated roof drywell IC area (sqft): " + dgvUpdaterEditor.Selected.Rows[0].Cells[11].Value.ToString();
+      }
+
+      if (dgvUpdaterEditor.Selected.Rows[0].Cells[4].Value.ToString() == "" && dgvUpdaterEditor.Selected.Rows[0].Cells[18].Value.ToString() == "False")
+      {
+        //MessageBox.Show("If3");
+        rNoLblText = "RNO: Not Available";
+        currentParkAreaLblText = "Current park area (sqft): " + dgvUpdaterEditor.Selected.Rows[0].Cells[13].Value.ToString();
+        currentParkDiscoICAreaLblText = "Current park DISCO IC area (sqft): " + dgvUpdaterEditor.Selected.Rows[0].Cells[15].Value.ToString(); ;
+        currentParkDrywellICAreaLblText = "Current park drywell IC area (sqft): " + dgvUpdaterEditor.Selected.Rows[0].Cells[17].Value.ToString();
+        currentRoofAreaLblText = "Current roof area (sqft): " + dgvUpdaterEditor.Selected.Rows[0].Cells[7].Value.ToString();
+        currentRoofDiscoICAreaLblText = "Current roof DISCO IC area (sqft): " + dgvUpdaterEditor.Selected.Rows[0].Cells[9].Value.ToString();
+        currentRoofDrywellICAreaLblText = "Current roof drywell IC area (sqft): " + dgvUpdaterEditor.Selected.Rows[0].Cells[11].Value.ToString();
+      }
+
+      if (dgvUpdaterEditor.Selected.Rows[0].Cells[4].Value.ToString() == "" && dgvUpdaterEditor.Selected.Rows[0].Cells[18].Value.ToString() == "True")
+      {
+        //MessageBox.Show("If4");
+        rNoLblText = "RNO: Not Available";
+        currentParkAreaLblText = "Updated park area (sqft): " + dgvUpdaterEditor.Selected.Rows[0].Cells[13].Value.ToString();
+        currentParkDiscoICAreaLblText = "Updated park DISCO IC area (sqft): " + dgvUpdaterEditor.Selected.Rows[0].Cells[15].Value.ToString(); ;
+        currentParkDrywellICAreaLblText = "Updated park drywell IC area (sqft): " + dgvUpdaterEditor.Selected.Rows[0].Cells[17].Value.ToString();
+        currentRoofAreaLblText = "Updated roof area (sqft): " + dgvUpdaterEditor.Selected.Rows[0].Cells[7].Value.ToString();
+        currentRoofDiscoICAreaLblText = "Updated roof DISCO IC area (sqft): " + dgvUpdaterEditor.Selected.Rows[0].Cells[9].Value.ToString();
+        currentRoofDrywellICAreaLblText = "Updated roof drywell IC area (sqft): " + dgvUpdaterEditor.Selected.Rows[0].Cells[11].Value.ToString();
+      }
+      lblSelectedEditorRNO.Text = rNoLblText;
+      lblSelectedEditorPkArea.Text = currentParkAreaLblText;
+      lblSelectedEditorPkDISCOICArea.Text = currentParkDiscoICAreaLblText;
+      lblSelectedEditorPkDrywellICArea.Text = currentParkDrywellICAreaLblText;
+      lblSelectedEditorRfArea.Text = currentRoofAreaLblText;
+      lblSelectedEditorRfDISCOICArea.Text = currentRoofDiscoICAreaLblText;
+      lblSelectedEditorRfDrywellICArea.Text = currentRoofDrywellICAreaLblText;
     }
 
     private void DownloadUpdateTemplate()
@@ -1218,20 +915,30 @@ namespace DSCUpdater
 
       //run SelectPendingImpAreaUpdates      
 
+      Cursor.Current = Cursors.WaitCursor;
+      SetStatus("Submitting");
+
       if (!PrepareUpdateFile(txtFileName.Text))
       {
         LoadTab("tabUpdateFileErrors");
         return;
       }
 
-      Cursor.Current = Cursors.WaitCursor;
-      SetStatus("Submitting");
-
       try
       {
         //the following are extracted methods based on batch queries:                  
-        UpdateDscTables();        
+        UpdateDscTables();
 
+        if (projectDataSet.HasErrors)
+        {
+          projectDataSet.RejectChanges();
+          MessageBox.Show("Errors were found in the update tables. No changes commited.");
+          return;
+        }        
+        SaveMstData();
+        
+        //TODO: What does IMPUPDATE table do? Do I need to write to this table here?
+        /*
         sqlCmd.CommandText = "INSERT INTO IMPUPDATE SELECT dsc_edit_id, dsc_id, new_roof_area_sqft, " +
                              "old_roof_area_sqft, new_park_area_sqft, old_park_area_sqft FROM [DSCEDIT] " +
                              "WHERE ((([DSCEDIT].[new_roof_area_sqft])<>[DSCEDIT].[old_roof_area_sqft]) " +
@@ -1241,32 +948,34 @@ namespace DSCUpdater
         sqlCmd.ExecuteNonQuery();
 
         ExportIMPUPDATEToCSV();
-
-        MessageBox.Show("All updates to the modeling system have completed sucessfully.  To review changes from this edit session, return to the main page, and click on the 'Load Update History' button to load the desired edit session.", "DSCUpdater: Update Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-        try
-        {
-          SendImpAEmail();
-        }
-        catch (Exception ex)
-        {
-          MessageBox.Show("Unable to send email - Your changes have not been committed" + ex.Message);
-          return;
-        }
-
+        */
+        MessageBox.Show("All updates to the modeling system have completed sucessfully.  To review changes from this edit session, return to the main page, and click on the 'Load Update History' button to load the desired edit session.", "DSCUpdater: Update Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);        
       }
       catch (Exception ex)
       {
-        MessageBox.Show(ex.Message, "DSCUpdater: Exception Thrown", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        MessageBox.Show(ex.Message, "DSCUpdater: Exception Thrown", MessageBoxButtons.OK, MessageBoxIcon.Error);        
+        return;
       }
       finally
       {
         SetStatus("Ready");
         SetProgress = 0;
         Cursor.Current = Cursors.WaitCursor;
-
         RestartUpdate();
       }
+
+      LoadTab("tabUpdaterHistory");
+
+      try
+      {
+        SendImpAEmail();
+      }
+      catch (Exception ex)
+      {
+        MessageBox.Show("Unable to send email - Impervious Area Update Request has not been logged." + ex.Message);
+        return;
+      }
+      
       return;
     }
 
@@ -1290,6 +999,34 @@ namespace DSCUpdater
 
       ProjectDataSetTableAdapters.SESSIONTableAdapter sessionTA = new DSCUpdater.ProjectDataSetTableAdapters.SESSIONTableAdapter();
       sessionTA.Fill(projectDataSet.SESSION);
+    }
+    private void SaveMstData()
+    {
+      ProjectDataSet changedProjectDataSet = (ProjectDataSet)projectDataSet.GetChanges();      
+
+      ProjectDataSetTableAdapters.DscUpdaterTableAdapter dscUpdaterTA;
+      dscUpdaterTA = new ProjectDataSetTableAdapters.DscUpdaterTableAdapter();
+      dscUpdaterTA.Update(changedProjectDataSet.DscUpdater);
+
+      SetStatus("Updating Master Dsc...");
+      IEnumerable<int> dscids = from d in projectDataSet.DscUpdater select d.DscId;
+
+      ProjectDataSetTableAdapters.MstDscTableAdapter mstDscTA = new DSCUpdater.ProjectDataSetTableAdapters.MstDscTableAdapter();
+      mstDscTA.Update(changedProjectDataSet.MstDsc);
+
+      ProjectDataSetTableAdapters.MstIcDiscoVegTableAdapter mstIcDiscoVegTA = new DSCUpdater.ProjectDataSetTableAdapters.MstIcDiscoVegTableAdapter();
+      mstIcDiscoVegTA.Update(changedProjectDataSet.MstIcDiscoVeg);
+
+      ProjectDataSetTableAdapters.MstIcDrywellTableAdapter mstIcDrywellTA = new DSCUpdater.ProjectDataSetTableAdapters.MstIcDrywellTableAdapter();
+      mstIcDrywellTA.Update(changedProjectDataSet.MstIcDrywell);
+
+      ProjectDataSetTableAdapters.SESSIONTableAdapter sessionTA = new DSCUpdater.ProjectDataSetTableAdapters.SESSIONTableAdapter();
+      sessionTA.Update(changedProjectDataSet.SESSION);
+
+      ProjectDataSetTableAdapters.DSCEDITTableAdapter dscEditTA = new DSCUpdater.ProjectDataSetTableAdapters.DSCEDITTableAdapter();
+      dscEditTA.Update(changedProjectDataSet.DSCEDIT);
+
+      LoadMstData();
     }
 
     private bool PrepareUpdateFile(string fileName)
@@ -1421,54 +1158,61 @@ namespace DSCUpdater
       if (dgvUpdaterHistory.SelectedRows.Count > 1)
       {
         MessageBox.Show("Only one Editor History session may be selected at a time.", "DSC Editor History: Selection Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        return;
       }
 
       else if (dgvUpdaterHistory.SelectedRows.Count == 0)
       {
         MessageBox.Show("No Editor History session selected. Please select valid Editor History session.", "DSC Editor History: Selection Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        return;
       }
-      else
-      {
-        SqlConnection sqlCon = new SqlConnection(Properties.Settings.Default.DscEditorConnectionString);
-        sqlCon.Open();
-        SqlCommand sqlCmd = new SqlCommand();
-        AddSESSIONEditIDCommandParameter(sqlCmd);
-        sqlCmd.CommandText = "SELECT dsc_edit_id, edit_id, edit_date, " +
-                             "edited_by, rno, dsc_id, old_roof_area_sqft, new_roof_area_sqft, " +
-                             "old_roof_disco_ic_area_sqft, new_roof_disco_ic_area_sqft, " +
-                             "old_roof_drywell_ic_area_sqft, new_roof_drywell_ic_area_sqft, " +
-                             "old_park_area_sqft, new_park_area_sqft, old_park_disco_ic_area_sqft, " +
-                             "new_park_disco_ic_area_sqft, " +
-                             "old_park_drywell_ic_area_sqft, new_park_drywell_ic_area_sqft, " +
-                             "updater_editor_value_changed " +
-                             "FROM DSCEDIT WHERE (DSCEDIT.edit_id = @sessionEditID)";
 
-        sqlCmd.Connection = sqlCon;
-        daUpdaterEditor = new SqlDataAdapter(sqlCmd);
-        //this should be called dtUpdaterEditor
-        dtUpdaterEditor = new DataTable();
-        //MessageBox.Show(dtUpdaterEditor.Rows.Count.ToString());
-        daUpdaterEditor.Fill(dtUpdaterEditor);
-        dtUpdaterEditor.Locale = System.Globalization.CultureInfo.InvariantCulture;
-        BindingSource bsSQL = new BindingSource();
-        bsSQL.DataSource = dtUpdaterEditor;
-        bindingNavigator2.BindingSource = bsSQL;
-        dgvUpdaterEditor.DataSource = bsSQL;
+      int editId = (int)dgvUpdaterHistory.SelectedRows[0].Cells["edit_id"].Value;
+      ProjectDataSetTableAdapters.DSCEDITTableAdapter dscEditTA = new DSCUpdater.ProjectDataSetTableAdapters.DSCEDITTableAdapter();
+      dscEditTA.FillByEditId(projectDataSet.DSCEDIT, editId);
 
-        //begin tab control
-        txtNewRoofArea.Enabled = false;
-        txtNewParkArea.Enabled = false;
-        txtNewParkDISCOICArea.Enabled = false;
-        txtNewParkDrywellICArea.Enabled = false;
-        txtNewRoofDISCOICArea.Enabled = false;
-        txtNewRoofDrywellICArea.Enabled = false;
-        btnRevertSession.Enabled = true;
-        btnUpdaterEditorEnter.Enabled = true;
-        btnSubmitUpdaterEditorChanges.Enabled = true;
-        btnUpdaterEditorClear.Enabled = true;
-        btnUpdaterEditorCloseCancel.Text = "Cancel";
-        //MessageBox.Show(dgvUpdaterEditor.RowCount.ToString());
-      }
+      LoadTab("tabUpdaterEditor");
+      return;
+
+      SqlConnection sqlCon = new SqlConnection(Properties.Settings.Default.DscEditorConnectionString);
+      sqlCon.Open();
+      SqlCommand sqlCmd = new SqlCommand();
+
+      sqlCmd.CommandText = "SELECT dsc_edit_id, edit_id, edit_date, " +
+                           "edited_by, rno, dsc_id, old_roof_area_sqft, new_roof_area_sqft, " +
+                           "old_roof_disco_ic_area_sqft, new_roof_disco_ic_area_sqft, " +
+                           "old_roof_drywell_ic_area_sqft, new_roof_drywell_ic_area_sqft, " +
+                           "old_park_area_sqft, new_park_area_sqft, old_park_disco_ic_area_sqft, " +
+                           "new_park_disco_ic_area_sqft, " +
+                           "old_park_drywell_ic_area_sqft, new_park_drywell_ic_area_sqft, " +
+                           "updater_editor_value_changed " +
+                           "FROM DSCEDIT WHERE (DSCEDIT.edit_id = @sessionEditID)";
+
+      sqlCmd.Connection = sqlCon;
+      daUpdaterEditor = new SqlDataAdapter(sqlCmd);
+      //this should be called dtUpdaterEditor
+      dtUpdaterEditor = new DataTable();
+      //MessageBox.Show(dtUpdaterEditor.Rows.Count.ToString());
+      daUpdaterEditor.Fill(dtUpdaterEditor);
+      dtUpdaterEditor.Locale = System.Globalization.CultureInfo.InvariantCulture;
+      BindingSource bsSQL = new BindingSource();
+      bsSQL.DataSource = dtUpdaterEditor;
+      dgvUpdaterEditor.DataSource = bsSQL;
+
+      //begin tab control
+      txtNewRoofArea.Enabled = false;
+      txtNewParkArea.Enabled = false;
+      txtNewParkDISCOICArea.Enabled = false;
+      txtNewParkDrywellICArea.Enabled = false;
+      txtNewRoofDISCOICArea.Enabled = false;
+      txtNewRoofDrywellICArea.Enabled = false;
+      btnRevertSession.Enabled = true;
+      btnUpdaterEditorEnter.Enabled = true;
+      btnSubmitUpdaterEditorChanges.Enabled = true;
+      btnUpdaterEditorClear.Enabled = true;
+      btnUpdaterEditorCloseCancel.Text = "Cancel";
+      //MessageBox.Show(dgvUpdaterEditor.RowCount.ToString());
+
     }
 
     private void btnLoadUpdateFile_Click(object sender, EventArgs e)
@@ -1487,6 +1231,8 @@ namespace DSCUpdater
         return;
       }
 
+      Cursor = Cursors.WaitCursor;
+
       btnSubmitUpdates.Enabled = false;
       txtFileName.Text = ofdMain.FileName;
 
@@ -1496,6 +1242,7 @@ namespace DSCUpdater
         return;
       }
 
+      Cursor = Cursors.Default;
       btnSubmitUpdates.Enabled = true;
       dgvData.Visible = true;
       SetStatus("Ready");
@@ -1538,8 +1285,8 @@ namespace DSCUpdater
         if (txtNewParkArea.Text != "")
         {
           newParkArea = Convert.ToInt32(txtNewParkArea.Text);
-          dgvUpdaterEditor.SelectedCells[13].Value = Convert.ToInt32(txtNewParkArea.Text);
-          dgvUpdaterEditor.SelectedCells[18].Value = Convert.ToBoolean(true);
+          dgvUpdaterEditor.Selected.Cells[13].Value = Convert.ToInt32(txtNewParkArea.Text);
+          dgvUpdaterEditor.Selected.Cells[18].Value = Convert.ToBoolean(true);
         }
         else
         {
@@ -1565,8 +1312,8 @@ namespace DSCUpdater
         if (txtNewParkDISCOICArea.Text != "")
         {
           newParkDISCOICArea = Convert.ToInt32(txtNewParkDISCOICArea.Text);
-          dgvUpdaterEditor.SelectedCells[15].Value = Convert.ToInt32(txtNewParkDISCOICArea.Text);
-          dgvUpdaterEditor.SelectedCells[18].Value = Convert.ToBoolean(true);
+          dgvUpdaterEditor.Selected.Cells[15].Value = Convert.ToInt32(txtNewParkDISCOICArea.Text);
+          dgvUpdaterEditor.Selected.Cells[18].Value = Convert.ToBoolean(true);
         }
         else
         {
@@ -1593,8 +1340,8 @@ namespace DSCUpdater
         if (txtNewParkDrywellICArea.Text != "")
         {
           newParkDrywellICArea = Convert.ToInt32(txtNewParkDrywellICArea.Text);
-          dgvUpdaterEditor.SelectedCells[17].Value = Convert.ToInt32(txtNewParkDrywellICArea.Text);
-          dgvUpdaterEditor.SelectedCells[18].Value = Convert.ToBoolean(true);
+          dgvUpdaterEditor.Selected.Cells[17].Value = Convert.ToInt32(txtNewParkDrywellICArea.Text);
+          dgvUpdaterEditor.Selected.Cells[18].Value = Convert.ToBoolean(true);
         }
         else
         {
@@ -1622,8 +1369,8 @@ namespace DSCUpdater
         if (txtNewRoofArea.Text != "")
         {
           newRoofArea = Convert.ToInt32(txtNewRoofArea.Text);
-          dgvUpdaterEditor.SelectedCells[7].Value = Convert.ToInt32(txtNewRoofArea.Text);
-          dgvUpdaterEditor.SelectedCells[18].Value = Convert.ToBoolean(true);
+          dgvUpdaterEditor.Selected.Cells[7].Value = Convert.ToInt32(txtNewRoofArea.Text);
+          dgvUpdaterEditor.Selected.Cells[18].Value = Convert.ToBoolean(true);
         }
         else
         {
@@ -1651,8 +1398,8 @@ namespace DSCUpdater
         if (txtNewRoofDISCOICArea.Text != "")
         {
           newRoofDISCOICArea = Convert.ToInt32(txtNewRoofDISCOICArea.Text);
-          dgvUpdaterEditor.SelectedCells[9].Value = Convert.ToInt32(txtNewRoofDISCOICArea.Text);
-          dgvUpdaterEditor.SelectedCells[18].Value = Convert.ToBoolean(true);
+          dgvUpdaterEditor.Selected.Cells[9].Value = Convert.ToInt32(txtNewRoofDISCOICArea.Text);
+          dgvUpdaterEditor.Selected.Cells[18].Value = Convert.ToBoolean(true);
         }
         else
         {
@@ -1680,8 +1427,8 @@ namespace DSCUpdater
         if (txtNewRoofDrywellICArea.Text != "")
         {
           newRoofDrywellArea = Convert.ToInt32(txtNewRoofDrywellICArea.Text);
-          dgvUpdaterEditor.SelectedCells[11].Value = Convert.ToInt32(txtNewRoofDrywellICArea.Text);
-          dgvUpdaterEditor.SelectedCells[18].Value = Convert.ToBoolean(true);
+          dgvUpdaterEditor.Selected.Cells[11].Value = Convert.ToInt32(txtNewRoofDrywellICArea.Text);
+          dgvUpdaterEditor.Selected.Cells[18].Value = Convert.ToBoolean(true);
         }
         else
         {
@@ -1723,9 +1470,10 @@ namespace DSCUpdater
 
     private void btnSubmitUpdaterEditorChanges_Click(object sender, EventArgs e)
     {
+      /*
       SqlConnection sqlCon = new SqlConnection(Properties.Settings.Default.DscEditorConnectionString);
       SqlCommand sqlCmd = new SqlCommand();
-
+      
       AddEditDateCommandParameter(sqlCmd, sqlCon);
       AddEditedByCommandParameter(sqlCmd, sqlCon);
       AddEditIDCommandParameter(sqlCmd);
@@ -1809,25 +1557,24 @@ namespace DSCUpdater
       MessageBox.Show("Changes submitted.  Internal email will now be sent from Outlook", "DSCEditor: Changes Submitted", MessageBoxButtons.OK, MessageBoxIcon.Information);
       btnSubmitUpdaterEditorChanges.Enabled = false;
       SendImpAEmail();
+       * */
     }
 
     private void btnRevertSession_Click(object sender, EventArgs e)
     {
       //TODO: Verify that entries in dgvUpdaterEditor are only displaying a single session id. The grid must be filtered by session id to use this tool.
       int dgvRowCount = 0;
-      dgvRowCount = dgvUpdaterEditor.RowCount;
+      dgvRowCount = dgvUpdaterEditor.Rows.Count;
       DialogResult dr = MessageBox.Show(dgvRowCount + " records will be reverted.  Do you wish to continue? (Changes can only be undone by submitting a new update file)", "Confirm Revert Operation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
       if (dr == DialogResult.Yes)
       {
         int maxEditID = 0;
         int editorEditID = 0;
         dgvUpdaterEditor.Rows[0].Selected = true;
-        editorEditID = Convert.ToInt32(dgvUpdaterEditor.SelectedCells[1].Value);
+        editorEditID = Convert.ToInt32(dgvUpdaterEditor.Selected.Cells[1].Value);
         SqlConnection sqlCon = new SqlConnection(Properties.Settings.Default.DscEditorConnectionString);
         sqlCon.Open();
         SqlCommand sqlCmd = new SqlCommand();
-
-        AddEditorEditIDCommandParameter(sqlCmd);
 
         sqlCmd.CommandText = "DELETE FROM DSCEDITAPPEND";
         sqlCmd.Connection = sqlCon;
@@ -1870,6 +1617,7 @@ namespace DSCUpdater
 
         else
         {
+          /*
           BatchRevertICEdits(sqlCmd);
           AddEditIDCommandParameter(sqlCmd);
           AddEditDateCommandParameter(sqlCmd, sqlCon);
@@ -1973,6 +1721,7 @@ namespace DSCUpdater
           dtUpdaterEditor.Clear();
           dgvUpdaterEditor.Refresh();
           SendImpAEmail();
+           */
         }
       }
     }
@@ -2200,6 +1949,11 @@ namespace DSCUpdater
       dgvData.Visible = false;
       btnSubmitUpdates.Enabled = false;
       txtFileName.Clear();
+    }
+
+    private void dgvUpdaterEditor_AfterSelectChange(object sender, Infragistics.Win.UltraWinGrid.AfterSelectChangeEventArgs e)
+    {
+      //TODO: Update text fields to reflect current selected data grid row.
     }
 
   }

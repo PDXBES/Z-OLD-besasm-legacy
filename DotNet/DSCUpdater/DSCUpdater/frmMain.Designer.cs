@@ -33,7 +33,31 @@
       Infragistics.Win.Appearance appearance20 = new Infragistics.Win.Appearance();
       Infragistics.Win.Appearance appearance21 = new Infragistics.Win.Appearance();
       Infragistics.Win.Appearance appearance29 = new Infragistics.Win.Appearance();
-      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
+      Infragistics.Win.Appearance appearance1 = new Infragistics.Win.Appearance();
+      Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand1 = new Infragistics.Win.UltraWinGrid.UltraGridBand("DSCEDIT", -1);
+      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn1 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("dsc_edit_id");
+      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn2 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("edit_id");
+      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn3 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("edit_date");
+      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn4 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("edited_by");
+      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn5 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("rno");
+      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn6 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("dsc_id", -1, null, 0, Infragistics.Win.UltraWinGrid.SortIndicator.Ascending, false);
+      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn7 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("old_roof_area_sqft");
+      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn8 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("new_roof_area_sqft");
+      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn9 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("old_roof_disco_ic_area_sqft");
+      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn10 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("new_roof_disco_ic_area_sqft");
+      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn11 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("old_roof_drywell_ic_area_sqft");
+      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn12 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("new_roof_drywell_ic_area_sqft");
+      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn13 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("old_park_area_sqft");
+      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn14 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("new_park_area_sqft");
+      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn15 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("old_park_disco_ic_area_sqft");
+      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn16 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("new_park_disco_ic_area_sqft");
+      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn17 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("old_park_drywell_ic_area_sqft");
+      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn18 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("new_park_drywell_ic_area_sqft");
+      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn19 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("updater_editor_value_changed");
+      Infragistics.Win.Appearance appearance2 = new Infragistics.Win.Appearance();
+      Infragistics.Win.Appearance appearance9 = new Infragistics.Win.Appearance();
+      Infragistics.Win.Appearance appearance12 = new Infragistics.Win.Appearance();
+      Infragistics.Win.Appearance appearance13 = new Infragistics.Win.Appearance();
       Infragistics.Win.Appearance appearance10 = new Infragistics.Win.Appearance();
       Infragistics.Win.Appearance appearance11 = new Infragistics.Win.Appearance();
       Infragistics.Win.Appearance appearance14 = new Infragistics.Win.Appearance();
@@ -42,6 +66,7 @@
       Infragistics.Win.Appearance appearance24 = new Infragistics.Win.Appearance();
       Infragistics.Win.Appearance appearance25 = new Infragistics.Win.Appearance();
       Infragistics.Win.Appearance appearance26 = new Infragistics.Win.Appearance();
+      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
       System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
       System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
       System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -115,18 +140,8 @@
       this.btnViewNewRetroAssessments = new Infragistics.Win.Misc.UltraButton();
       this.dgvIncomingRetroChanges = new System.Windows.Forms.DataGridView();
       this.tabPageControlUpdaterEditor = new Infragistics.Win.UltraWinTabControl.UltraTabPageControl();
-      this.dgvUpdaterEditor = new System.Windows.Forms.DataGridView();
-      this.updater_editor_value_changed = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.bindingNavigator2 = new System.Windows.Forms.BindingNavigator(this.components);
-      this.bindingNavigatorCountItem1 = new System.Windows.Forms.ToolStripLabel();
-      this.bindingNavigatorMoveFirstItem1 = new System.Windows.Forms.ToolStripButton();
-      this.bindingNavigatorMovePreviousItem1 = new System.Windows.Forms.ToolStripButton();
-      this.bindingNavigatorSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-      this.bindingNavigatorPositionItem1 = new System.Windows.Forms.ToolStripTextBox();
-      this.bindingNavigatorSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-      this.bindingNavigatorMoveNextItem1 = new System.Windows.Forms.ToolStripButton();
-      this.bindingNavigatorMoveLastItem1 = new System.Windows.Forms.ToolStripButton();
-      this.bindingNavigatorSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+      this.dgvUpdaterEditor = new Infragistics.Win.UltraWinGrid.UltraGrid();
+      this.projectDataSet = new DSCUpdater.ProjectDataSet();
       this.pnlCurrentDSCAreas = new Infragistics.Win.Misc.UltraPanel();
       this.pnlNewDSCAreas = new Infragistics.Win.Misc.UltraPanel();
       this.txtNewRoofArea = new Infragistics.Win.UltraWinEditors.UltraTextEditor();
@@ -166,11 +181,9 @@
       this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
       this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
       this.dgvUpdaterHistory = new System.Windows.Forms.DataGridView();
-      this.editidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.editdateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.editedbyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.sESSIONBindingSource = new System.Windows.Forms.BindingSource(this.components);
-      this.projectDataSet = new DSCUpdater.ProjectDataSet();
+      this.edit_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.edit_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.edited_by = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.tabPageControlLoadedUpdateReview = new Infragistics.Win.UltraWinTabControl.UltraTabPageControl();
       this.dgvDscQc = new System.Windows.Forms.DataGridView();
       this.dscIDDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -185,10 +198,7 @@
       this.dscIdDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.newRoofAreaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.newRoofDiscoAreaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.newRoofDrywellIcAreaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.newParkAreaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.newParkDiscoIcAreaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.newParkDrywellIcAreaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.ultraPanel4 = new Infragistics.Win.Misc.UltraPanel();
       this.btnSubmitUpdates = new Infragistics.Win.Misc.UltraButton();
       this.txtFileName = new Infragistics.Win.UltraWinEditors.UltraTextEditor();
@@ -205,6 +215,7 @@
       this.ultraStatusBar1 = new Infragistics.Win.UltraWinStatusBar.UltraStatusBar();
       this.ultraTabSharedControlsPage3 = new Infragistics.Win.UltraWinTabControl.UltraTabSharedControlsPage();
       this.tabControlMain = new Infragistics.Win.UltraWinTabControl.UltraTabControl();
+      this.sESSIONBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.sESSIONTableAdapter = new DSCUpdater.ProjectDataSetTableAdapters.SESSIONTableAdapter();
       btnExportErrors = new Infragistics.Win.Misc.UltraButton();
       this.tabPageControlApplyRetroUpdates.SuspendLayout();
@@ -219,8 +230,7 @@
       ((System.ComponentModel.ISupportInitialize)(this.dgvIncomingRetroChanges)).BeginInit();
       this.tabPageControlUpdaterEditor.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.dgvUpdaterEditor)).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator2)).BeginInit();
-      this.bindingNavigator2.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.projectDataSet)).BeginInit();
       this.pnlCurrentDSCAreas.ClientArea.SuspendLayout();
       this.pnlCurrentDSCAreas.SuspendLayout();
       this.pnlNewDSCAreas.ClientArea.SuspendLayout();
@@ -241,8 +251,6 @@
       ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
       this.bindingNavigator1.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.dgvUpdaterHistory)).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)(this.sESSIONBindingSource)).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)(this.projectDataSet)).BeginInit();
       this.tabPageControlLoadedUpdateReview.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.dgvDscQc)).BeginInit();
       this.ultraPanel3.ClientArea.SuspendLayout();
@@ -256,6 +264,7 @@
       ((System.ComponentModel.ISupportInitialize)(this.ultraToolbarsManager1)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.tabControlMain)).BeginInit();
       this.tabControlMain.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.sESSIONBindingSource)).BeginInit();
       this.SuspendLayout();
       // 
       // btnExportErrors
@@ -431,128 +440,140 @@
       // 
       this.tabPageControlUpdaterEditor.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
       this.tabPageControlUpdaterEditor.Controls.Add(this.dgvUpdaterEditor);
-      this.tabPageControlUpdaterEditor.Controls.Add(this.bindingNavigator2);
       this.tabPageControlUpdaterEditor.Controls.Add(this.pnlCurrentDSCAreas);
-      this.tabPageControlUpdaterEditor.Location = new System.Drawing.Point(-10000, -10000);
+      this.tabPageControlUpdaterEditor.Location = new System.Drawing.Point(1, 22);
       this.tabPageControlUpdaterEditor.Name = "tabPageControlUpdaterEditor";
       this.tabPageControlUpdaterEditor.Padding = new System.Windows.Forms.Padding(3);
       this.tabPageControlUpdaterEditor.Size = new System.Drawing.Size(713, 416);
       // 
       // dgvUpdaterEditor
       // 
-      this.dgvUpdaterEditor.AllowUserToAddRows = false;
-      this.dgvUpdaterEditor.AllowUserToDeleteRows = false;
-      this.dgvUpdaterEditor.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
-      this.dgvUpdaterEditor.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-      this.dgvUpdaterEditor.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.updater_editor_value_changed});
+      this.dgvUpdaterEditor.DataMember = "SESSION.FK_SESSION_DSCEDIT";
+      this.dgvUpdaterEditor.DataSource = this.projectDataSet;
+      appearance1.BackColor = System.Drawing.Color.White;
+      this.dgvUpdaterEditor.DisplayLayout.Appearance = appearance1;
+      ultraGridColumn1.Header.VisiblePosition = 0;
+      ultraGridColumn1.Hidden = true;
+      ultraGridColumn2.Header.VisiblePosition = 1;
+      ultraGridColumn2.Hidden = true;
+      ultraGridColumn3.Header.VisiblePosition = 2;
+      ultraGridColumn3.Hidden = true;
+      ultraGridColumn4.Header.VisiblePosition = 3;
+      ultraGridColumn4.Hidden = true;
+      ultraGridColumn5.Header.Caption = "R No.";
+      ultraGridColumn5.Header.VisiblePosition = 4;
+      ultraGridColumn5.Width = 32;
+      ultraGridColumn6.Header.Caption = "DSC ID";
+      ultraGridColumn6.Header.VisiblePosition = 5;
+      ultraGridColumn6.Width = 55;
+      ultraGridColumn7.Header.Caption = "Old Roof Area";
+      ultraGridColumn7.Header.VisiblePosition = 6;
+      ultraGridColumn7.Width = 81;
+      ultraGridColumn8.Header.Caption = "New Roof Area";
+      ultraGridColumn8.Header.VisiblePosition = 7;
+      ultraGridColumn8.Hidden = true;
+      ultraGridColumn8.Width = 79;
+      ultraGridColumn9.Header.Caption = "Old Roof Disco Area";
+      ultraGridColumn9.Header.VisiblePosition = 8;
+      ultraGridColumn9.Width = 87;
+      ultraGridColumn10.Header.Caption = "New Roof Disco Area";
+      ultraGridColumn10.Header.VisiblePosition = 9;
+      ultraGridColumn10.Hidden = true;
+      ultraGridColumn10.Width = 56;
+      ultraGridColumn11.Header.Caption = "Old Roof Drywell Area";
+      ultraGridColumn11.Header.VisiblePosition = 10;
+      ultraGridColumn11.Width = 98;
+      ultraGridColumn12.Header.Caption = "New Roof Drywell Area";
+      ultraGridColumn12.Header.VisiblePosition = 11;
+      ultraGridColumn12.Hidden = true;
+      ultraGridColumn12.Width = 59;
+      ultraGridColumn13.Header.Caption = "Old Park Area";
+      ultraGridColumn13.Header.VisiblePosition = 12;
+      ultraGridColumn13.Width = 65;
+      ultraGridColumn14.Header.Caption = "New Park Area";
+      ultraGridColumn14.Header.VisiblePosition = 13;
+      ultraGridColumn14.Hidden = true;
+      ultraGridColumn14.Width = 40;
+      ultraGridColumn15.Header.Caption = "Old Park Disco Area";
+      ultraGridColumn15.Header.VisiblePosition = 14;
+      ultraGridColumn15.Width = 85;
+      ultraGridColumn16.Header.Caption = "New Park Disco Area";
+      ultraGridColumn16.Header.VisiblePosition = 15;
+      ultraGridColumn16.Hidden = true;
+      ultraGridColumn16.Width = 55;
+      ultraGridColumn17.Header.Caption = "Old Park Drywell Area";
+      ultraGridColumn17.Header.VisiblePosition = 16;
+      ultraGridColumn17.Width = 102;
+      ultraGridColumn18.Header.Caption = "New Park Drywell Area";
+      ultraGridColumn18.Header.VisiblePosition = 17;
+      ultraGridColumn18.Hidden = true;
+      ultraGridColumn18.Width = 59;
+      ultraGridColumn19.Header.Caption = "Value Changed";
+      ultraGridColumn19.Header.VisiblePosition = 18;
+      ultraGridColumn19.Width = 92;
+      ultraGridBand1.Columns.AddRange(new object[] {
+            ultraGridColumn1,
+            ultraGridColumn2,
+            ultraGridColumn3,
+            ultraGridColumn4,
+            ultraGridColumn5,
+            ultraGridColumn6,
+            ultraGridColumn7,
+            ultraGridColumn8,
+            ultraGridColumn9,
+            ultraGridColumn10,
+            ultraGridColumn11,
+            ultraGridColumn12,
+            ultraGridColumn13,
+            ultraGridColumn14,
+            ultraGridColumn15,
+            ultraGridColumn16,
+            ultraGridColumn17,
+            ultraGridColumn18,
+            ultraGridColumn19});
+      ultraGridBand1.GroupHeadersVisible = false;
+      this.dgvUpdaterEditor.DisplayLayout.BandsSerializer.Add(ultraGridBand1);
+      this.dgvUpdaterEditor.DisplayLayout.MaxColScrollRegions = 1;
+      this.dgvUpdaterEditor.DisplayLayout.MaxRowScrollRegions = 1;
+      this.dgvUpdaterEditor.DisplayLayout.Override.AllowAddNew = Infragistics.Win.UltraWinGrid.AllowAddNew.No;
+      this.dgvUpdaterEditor.DisplayLayout.Override.AllowDelete = Infragistics.Win.DefaultableBoolean.False;
+      this.dgvUpdaterEditor.DisplayLayout.Override.AllowUpdate = Infragistics.Win.DefaultableBoolean.False;
+      appearance2.BackColor = System.Drawing.Color.Transparent;
+      this.dgvUpdaterEditor.DisplayLayout.Override.CardAreaAppearance = appearance2;
+      this.dgvUpdaterEditor.DisplayLayout.Override.CellClickAction = Infragistics.Win.UltraWinGrid.CellClickAction.EditAndSelectText;
+      appearance9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(168)))), ((int)(((byte)(167)))), ((int)(((byte)(191)))));
+      appearance9.BackColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(112)))), ((int)(((byte)(111)))), ((int)(((byte)(145)))));
+      appearance9.BackGradientStyle = Infragistics.Win.GradientStyle.Vertical;
+      appearance9.FontData.BoldAsString = "True";
+      appearance9.FontData.Name = "Arial";
+      appearance9.FontData.SizeInPoints = 10F;
+      appearance9.ForeColor = System.Drawing.Color.White;
+      appearance9.ThemedElementAlpha = Infragistics.Win.Alpha.Transparent;
+      this.dgvUpdaterEditor.DisplayLayout.Override.HeaderAppearance = appearance9;
+      this.dgvUpdaterEditor.DisplayLayout.Override.HeaderClickAction = Infragistics.Win.UltraWinGrid.HeaderClickAction.SortMulti;
+      appearance12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(168)))), ((int)(((byte)(167)))), ((int)(((byte)(191)))));
+      appearance12.BackColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(112)))), ((int)(((byte)(111)))), ((int)(((byte)(145)))));
+      appearance12.BackGradientStyle = Infragistics.Win.GradientStyle.Vertical;
+      this.dgvUpdaterEditor.DisplayLayout.Override.RowSelectorAppearance = appearance12;
+      appearance13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(230)))), ((int)(((byte)(148)))));
+      appearance13.BackColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(149)))), ((int)(((byte)(21)))));
+      appearance13.BackGradientStyle = Infragistics.Win.GradientStyle.Vertical;
+      this.dgvUpdaterEditor.DisplayLayout.Override.SelectedRowAppearance = appearance13;
+      this.dgvUpdaterEditor.DisplayLayout.Override.WrapHeaderText = Infragistics.Win.DefaultableBoolean.True;
+      this.dgvUpdaterEditor.DisplayLayout.ScrollBounds = Infragistics.Win.UltraWinGrid.ScrollBounds.ScrollToFill;
+      this.dgvUpdaterEditor.DisplayLayout.ScrollStyle = Infragistics.Win.UltraWinGrid.ScrollStyle.Immediate;
       this.dgvUpdaterEditor.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.dgvUpdaterEditor.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.dgvUpdaterEditor.Location = new System.Drawing.Point(3, 3);
       this.dgvUpdaterEditor.Name = "dgvUpdaterEditor";
-      this.dgvUpdaterEditor.Size = new System.Drawing.Size(703, 166);
-      this.dgvUpdaterEditor.TabIndex = 24;
-      this.dgvUpdaterEditor.SelectionChanged += new System.EventHandler(this.dgvUpdaterEditor_SelectionChanged);
+      this.dgvUpdaterEditor.Size = new System.Drawing.Size(703, 191);
+      this.dgvUpdaterEditor.TabIndex = 28;
+      this.dgvUpdaterEditor.AfterSelectChange += new Infragistics.Win.UltraWinGrid.AfterSelectChangeEventHandler(this.dgvUpdaterEditor_AfterSelectChange);
       // 
-      // updater_editor_value_changed
+      // projectDataSet
       // 
-      this.updater_editor_value_changed.DataPropertyName = "updater_editor_value_changed";
-      this.updater_editor_value_changed.HeaderText = "Value Changed";
-      this.updater_editor_value_changed.Name = "updater_editor_value_changed";
-      this.updater_editor_value_changed.Width = 97;
-      // 
-      // bindingNavigator2
-      // 
-      this.bindingNavigator2.AddNewItem = null;
-      this.bindingNavigator2.CountItem = this.bindingNavigatorCountItem1;
-      this.bindingNavigator2.DeleteItem = null;
-      this.bindingNavigator2.Dock = System.Windows.Forms.DockStyle.Bottom;
-      this.bindingNavigator2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.bindingNavigatorMoveFirstItem1,
-            this.bindingNavigatorMovePreviousItem1,
-            this.bindingNavigatorSeparator3,
-            this.bindingNavigatorPositionItem1,
-            this.bindingNavigatorCountItem1,
-            this.bindingNavigatorSeparator4,
-            this.bindingNavigatorMoveNextItem1,
-            this.bindingNavigatorMoveLastItem1,
-            this.bindingNavigatorSeparator5});
-      this.bindingNavigator2.Location = new System.Drawing.Point(3, 169);
-      this.bindingNavigator2.MoveFirstItem = this.bindingNavigatorMoveFirstItem1;
-      this.bindingNavigator2.MoveLastItem = this.bindingNavigatorMoveLastItem1;
-      this.bindingNavigator2.MoveNextItem = this.bindingNavigatorMoveNextItem1;
-      this.bindingNavigator2.MovePreviousItem = this.bindingNavigatorMovePreviousItem1;
-      this.bindingNavigator2.Name = "bindingNavigator2";
-      this.bindingNavigator2.PositionItem = this.bindingNavigatorPositionItem1;
-      this.bindingNavigator2.Size = new System.Drawing.Size(703, 25);
-      this.bindingNavigator2.TabIndex = 19;
-      this.bindingNavigator2.Text = "bindingNavigator2";
-      // 
-      // bindingNavigatorCountItem1
-      // 
-      this.bindingNavigatorCountItem1.Name = "bindingNavigatorCountItem1";
-      this.bindingNavigatorCountItem1.Size = new System.Drawing.Size(36, 22);
-      this.bindingNavigatorCountItem1.Text = "of {0}";
-      this.bindingNavigatorCountItem1.ToolTipText = "Total number of items";
-      // 
-      // bindingNavigatorMoveFirstItem1
-      // 
-      this.bindingNavigatorMoveFirstItem1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-      this.bindingNavigatorMoveFirstItem1.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveFirstItem1.Image")));
-      this.bindingNavigatorMoveFirstItem1.Name = "bindingNavigatorMoveFirstItem1";
-      this.bindingNavigatorMoveFirstItem1.RightToLeftAutoMirrorImage = true;
-      this.bindingNavigatorMoveFirstItem1.Size = new System.Drawing.Size(23, 22);
-      this.bindingNavigatorMoveFirstItem1.Text = "Move first";
-      // 
-      // bindingNavigatorMovePreviousItem1
-      // 
-      this.bindingNavigatorMovePreviousItem1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-      this.bindingNavigatorMovePreviousItem1.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMovePreviousItem1.Image")));
-      this.bindingNavigatorMovePreviousItem1.Name = "bindingNavigatorMovePreviousItem1";
-      this.bindingNavigatorMovePreviousItem1.RightToLeftAutoMirrorImage = true;
-      this.bindingNavigatorMovePreviousItem1.Size = new System.Drawing.Size(23, 22);
-      this.bindingNavigatorMovePreviousItem1.Text = "Move previous";
-      // 
-      // bindingNavigatorSeparator3
-      // 
-      this.bindingNavigatorSeparator3.Name = "bindingNavigatorSeparator3";
-      this.bindingNavigatorSeparator3.Size = new System.Drawing.Size(6, 25);
-      // 
-      // bindingNavigatorPositionItem1
-      // 
-      this.bindingNavigatorPositionItem1.AccessibleName = "Position";
-      this.bindingNavigatorPositionItem1.AutoSize = false;
-      this.bindingNavigatorPositionItem1.Name = "bindingNavigatorPositionItem1";
-      this.bindingNavigatorPositionItem1.Size = new System.Drawing.Size(50, 21);
-      this.bindingNavigatorPositionItem1.Text = "0";
-      this.bindingNavigatorPositionItem1.ToolTipText = "Current position";
-      // 
-      // bindingNavigatorSeparator4
-      // 
-      this.bindingNavigatorSeparator4.Name = "bindingNavigatorSeparator4";
-      this.bindingNavigatorSeparator4.Size = new System.Drawing.Size(6, 25);
-      // 
-      // bindingNavigatorMoveNextItem1
-      // 
-      this.bindingNavigatorMoveNextItem1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-      this.bindingNavigatorMoveNextItem1.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveNextItem1.Image")));
-      this.bindingNavigatorMoveNextItem1.Name = "bindingNavigatorMoveNextItem1";
-      this.bindingNavigatorMoveNextItem1.RightToLeftAutoMirrorImage = true;
-      this.bindingNavigatorMoveNextItem1.Size = new System.Drawing.Size(23, 22);
-      this.bindingNavigatorMoveNextItem1.Text = "Move next";
-      // 
-      // bindingNavigatorMoveLastItem1
-      // 
-      this.bindingNavigatorMoveLastItem1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-      this.bindingNavigatorMoveLastItem1.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveLastItem1.Image")));
-      this.bindingNavigatorMoveLastItem1.Name = "bindingNavigatorMoveLastItem1";
-      this.bindingNavigatorMoveLastItem1.RightToLeftAutoMirrorImage = true;
-      this.bindingNavigatorMoveLastItem1.Size = new System.Drawing.Size(23, 22);
-      this.bindingNavigatorMoveLastItem1.Text = "Move last";
-      // 
-      // bindingNavigatorSeparator5
-      // 
-      this.bindingNavigatorSeparator5.Name = "bindingNavigatorSeparator5";
-      this.bindingNavigatorSeparator5.Size = new System.Drawing.Size(6, 25);
+      this.projectDataSet.DataSetName = "ProjectDataSet";
+      this.projectDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
       // 
       // pnlCurrentDSCAreas
       // 
@@ -590,7 +611,7 @@
       this.pnlNewDSCAreas.Dock = System.Windows.Forms.DockStyle.Fill;
       this.pnlNewDSCAreas.Location = new System.Drawing.Point(231, 0);
       this.pnlNewDSCAreas.Name = "pnlNewDSCAreas";
-      this.pnlNewDSCAreas.Size = new System.Drawing.Size(294, 215);
+      this.pnlNewDSCAreas.Size = new System.Drawing.Size(292, 213);
       this.pnlNewDSCAreas.TabIndex = 25;
       // 
       // txtNewRoofArea
@@ -687,7 +708,7 @@
       this.ultraGroupBox2.Dock = System.Windows.Forms.DockStyle.Left;
       this.ultraGroupBox2.Location = new System.Drawing.Point(0, 0);
       this.ultraGroupBox2.Name = "ultraGroupBox2";
-      this.ultraGroupBox2.Size = new System.Drawing.Size(231, 215);
+      this.ultraGroupBox2.Size = new System.Drawing.Size(231, 213);
       this.ultraGroupBox2.TabIndex = 27;
       this.ultraGroupBox2.ViewStyle = Infragistics.Win.Misc.GroupBoxViewStyle.VisualStudio2005;
       // 
@@ -771,9 +792,9 @@
       this.ultraGroupBox1.Controls.Add(this.lblRevertSession);
       this.ultraGroupBox1.Controls.Add(this.btnRevertSession);
       this.ultraGroupBox1.Dock = System.Windows.Forms.DockStyle.Right;
-      this.ultraGroupBox1.Location = new System.Drawing.Point(525, 0);
+      this.ultraGroupBox1.Location = new System.Drawing.Point(523, 0);
       this.ultraGroupBox1.Name = "ultraGroupBox1";
-      this.ultraGroupBox1.Size = new System.Drawing.Size(178, 215);
+      this.ultraGroupBox1.Size = new System.Drawing.Size(178, 213);
       this.ultraGroupBox1.TabIndex = 26;
       this.ultraGroupBox1.ViewStyle = Infragistics.Win.Misc.GroupBoxViewStyle.VisualStudio2005;
       // 
@@ -964,47 +985,39 @@
       this.dgvUpdaterHistory.AutoGenerateColumns = false;
       this.dgvUpdaterHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.dgvUpdaterHistory.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.editidDataGridViewTextBoxColumn,
-            this.editdateDataGridViewTextBoxColumn,
-            this.editedbyDataGridViewTextBoxColumn});
-      this.dgvUpdaterHistory.DataSource = this.sESSIONBindingSource;
+            this.edit_id,
+            this.edit_date,
+            this.edited_by});
+      this.dgvUpdaterHistory.DataMember = "SESSION";
+      this.dgvUpdaterHistory.DataSource = this.projectDataSet;
       this.dgvUpdaterHistory.Dock = System.Windows.Forms.DockStyle.Fill;
       this.dgvUpdaterHistory.Location = new System.Drawing.Point(3, 3);
+      this.dgvUpdaterHistory.MultiSelect = false;
       this.dgvUpdaterHistory.Name = "dgvUpdaterHistory";
       this.dgvUpdaterHistory.ReadOnly = true;
       this.dgvUpdaterHistory.Size = new System.Drawing.Size(707, 410);
       this.dgvUpdaterHistory.TabIndex = 2;
       // 
-      // editidDataGridViewTextBoxColumn
+      // edit_id
       // 
-      this.editidDataGridViewTextBoxColumn.DataPropertyName = "edit_id";
-      this.editidDataGridViewTextBoxColumn.HeaderText = "Edit ID";
-      this.editidDataGridViewTextBoxColumn.Name = "editidDataGridViewTextBoxColumn";
-      this.editidDataGridViewTextBoxColumn.ReadOnly = true;
+      this.edit_id.DataPropertyName = "edit_id";
+      this.edit_id.HeaderText = "edit_id";
+      this.edit_id.Name = "edit_id";
+      this.edit_id.ReadOnly = true;
       // 
-      // editdateDataGridViewTextBoxColumn
+      // edit_date
       // 
-      this.editdateDataGridViewTextBoxColumn.DataPropertyName = "edit_date";
-      this.editdateDataGridViewTextBoxColumn.HeaderText = "Edit Date";
-      this.editdateDataGridViewTextBoxColumn.Name = "editdateDataGridViewTextBoxColumn";
-      this.editdateDataGridViewTextBoxColumn.ReadOnly = true;
+      this.edit_date.DataPropertyName = "edit_date";
+      this.edit_date.HeaderText = "edit_date";
+      this.edit_date.Name = "edit_date";
+      this.edit_date.ReadOnly = true;
       // 
-      // editedbyDataGridViewTextBoxColumn
+      // edited_by
       // 
-      this.editedbyDataGridViewTextBoxColumn.DataPropertyName = "edited_by";
-      this.editedbyDataGridViewTextBoxColumn.HeaderText = "Edited By";
-      this.editedbyDataGridViewTextBoxColumn.Name = "editedbyDataGridViewTextBoxColumn";
-      this.editedbyDataGridViewTextBoxColumn.ReadOnly = true;
-      // 
-      // sESSIONBindingSource
-      // 
-      this.sESSIONBindingSource.DataMember = "SESSION";
-      this.sESSIONBindingSource.DataSource = this.projectDataSet;
-      // 
-      // projectDataSet
-      // 
-      this.projectDataSet.DataSetName = "ProjectDataSet";
-      this.projectDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+      this.edited_by.DataPropertyName = "edited_by";
+      this.edited_by.HeaderText = "edited_by";
+      this.edited_by.Name = "edited_by";
+      this.edited_by.ReadOnly = true;
       // 
       // tabPageControlLoadedUpdateReview
       // 
@@ -1099,7 +1112,7 @@
       // 
       this.tabPageControlMain.Controls.Add(this.dgvData);
       this.tabPageControlMain.Controls.Add(this.ultraPanel4);
-      this.tabPageControlMain.Location = new System.Drawing.Point(1, 22);
+      this.tabPageControlMain.Location = new System.Drawing.Point(-10000, -10000);
       this.tabPageControlMain.Name = "tabPageControlMain";
       this.tabPageControlMain.Padding = new System.Windows.Forms.Padding(3);
       this.tabPageControlMain.Size = new System.Drawing.Size(713, 416);
@@ -1116,10 +1129,7 @@
             this.dscIdDataGridViewTextBoxColumn2,
             this.newRoofAreaDataGridViewTextBoxColumn,
             this.newRoofDiscoAreaDataGridViewTextBoxColumn,
-            this.newRoofDrywellIcAreaDataGridViewTextBoxColumn,
-            this.newParkAreaDataGridViewTextBoxColumn,
-            this.newParkDiscoIcAreaDataGridViewTextBoxColumn,
-            this.newParkDrywellIcAreaDataGridViewTextBoxColumn});
+            this.newParkAreaDataGridViewTextBoxColumn});
       this.dgvData.DataMember = "DscUpdater";
       this.dgvData.DataSource = this.projectDataSet;
       this.dgvData.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -1158,33 +1168,12 @@
       this.newRoofDiscoAreaDataGridViewTextBoxColumn.Name = "newRoofDiscoAreaDataGridViewTextBoxColumn";
       this.newRoofDiscoAreaDataGridViewTextBoxColumn.ReadOnly = true;
       // 
-      // newRoofDrywellIcAreaDataGridViewTextBoxColumn
-      // 
-      this.newRoofDrywellIcAreaDataGridViewTextBoxColumn.DataPropertyName = "NewRoofDrywellIcArea";
-      this.newRoofDrywellIcAreaDataGridViewTextBoxColumn.HeaderText = "NewRoofDrywellIcArea";
-      this.newRoofDrywellIcAreaDataGridViewTextBoxColumn.Name = "newRoofDrywellIcAreaDataGridViewTextBoxColumn";
-      this.newRoofDrywellIcAreaDataGridViewTextBoxColumn.ReadOnly = true;
-      // 
       // newParkAreaDataGridViewTextBoxColumn
       // 
       this.newParkAreaDataGridViewTextBoxColumn.DataPropertyName = "NewParkArea";
       this.newParkAreaDataGridViewTextBoxColumn.HeaderText = "NewParkArea";
       this.newParkAreaDataGridViewTextBoxColumn.Name = "newParkAreaDataGridViewTextBoxColumn";
       this.newParkAreaDataGridViewTextBoxColumn.ReadOnly = true;
-      // 
-      // newParkDiscoIcAreaDataGridViewTextBoxColumn
-      // 
-      this.newParkDiscoIcAreaDataGridViewTextBoxColumn.DataPropertyName = "NewParkDiscoIcArea";
-      this.newParkDiscoIcAreaDataGridViewTextBoxColumn.HeaderText = "NewParkDiscoIcArea";
-      this.newParkDiscoIcAreaDataGridViewTextBoxColumn.Name = "newParkDiscoIcAreaDataGridViewTextBoxColumn";
-      this.newParkDiscoIcAreaDataGridViewTextBoxColumn.ReadOnly = true;
-      // 
-      // newParkDrywellIcAreaDataGridViewTextBoxColumn
-      // 
-      this.newParkDrywellIcAreaDataGridViewTextBoxColumn.DataPropertyName = "NewParkDrywellIcArea";
-      this.newParkDrywellIcAreaDataGridViewTextBoxColumn.HeaderText = "NewParkDrywellIcArea";
-      this.newParkDrywellIcAreaDataGridViewTextBoxColumn.Name = "newParkDrywellIcAreaDataGridViewTextBoxColumn";
-      this.newParkDrywellIcAreaDataGridViewTextBoxColumn.ReadOnly = true;
       // 
       // ultraPanel4
       // 
@@ -1511,6 +1500,11 @@
       this.tabControlMain.ViewStyle = Infragistics.Win.UltraWinTabControl.ViewStyle.Office2007;
       this.tabControlMain.SelectedTabChanged += new Infragistics.Win.UltraWinTabControl.SelectedTabChangedEventHandler(this.tabControlMain_SelectedTabChanged);
       // 
+      // sESSIONBindingSource
+      // 
+      this.sESSIONBindingSource.DataMember = "SESSION";
+      this.sESSIONBindingSource.DataSource = this.projectDataSet;
+      // 
       // sESSIONTableAdapter
       // 
       this.sESSIONTableAdapter.ClearBeforeFill = true;
@@ -1545,11 +1539,8 @@
       this.grpBoxViewRetroUpdates.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.dgvIncomingRetroChanges)).EndInit();
       this.tabPageControlUpdaterEditor.ResumeLayout(false);
-      this.tabPageControlUpdaterEditor.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this.dgvUpdaterEditor)).EndInit();
-      ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator2)).EndInit();
-      this.bindingNavigator2.ResumeLayout(false);
-      this.bindingNavigator2.PerformLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.projectDataSet)).EndInit();
       this.pnlCurrentDSCAreas.ClientArea.ResumeLayout(false);
       this.pnlCurrentDSCAreas.ResumeLayout(false);
       this.pnlNewDSCAreas.ClientArea.ResumeLayout(false);
@@ -1574,8 +1565,6 @@
       this.bindingNavigator1.ResumeLayout(false);
       this.bindingNavigator1.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this.dgvUpdaterHistory)).EndInit();
-      ((System.ComponentModel.ISupportInitialize)(this.sESSIONBindingSource)).EndInit();
-      ((System.ComponentModel.ISupportInitialize)(this.projectDataSet)).EndInit();
       this.tabPageControlLoadedUpdateReview.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.dgvDscQc)).EndInit();
       this.ultraPanel3.ClientArea.ResumeLayout(false);
@@ -1590,6 +1579,7 @@
       ((System.ComponentModel.ISupportInitialize)(this.ultraToolbarsManager1)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.tabControlMain)).EndInit();
       this.tabControlMain.ResumeLayout(false);
+      ((System.ComponentModel.ISupportInitialize)(this.sESSIONBindingSource)).EndInit();
       this.ResumeLayout(false);
 
     }
@@ -1630,22 +1620,7 @@
     private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem;
     private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
     private System.Windows.Forms.DataGridView dgvUpdaterHistory;
-    private System.Windows.Forms.DataGridViewTextBoxColumn editidDataGridViewTextBoxColumn;
-    private System.Windows.Forms.DataGridViewTextBoxColumn editdateDataGridViewTextBoxColumn;
-    private System.Windows.Forms.DataGridViewTextBoxColumn editedbyDataGridViewTextBoxColumn;
     private Infragistics.Win.UltraWinTabControl.UltraTabPageControl tabPageControlUpdaterEditor;
-    private System.Windows.Forms.BindingNavigator bindingNavigator2;
-    private System.Windows.Forms.ToolStripLabel bindingNavigatorCountItem1;
-    private System.Windows.Forms.ToolStripButton bindingNavigatorMoveFirstItem1;
-    private System.Windows.Forms.ToolStripButton bindingNavigatorMovePreviousItem1;
-    private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator3;
-    private System.Windows.Forms.ToolStripTextBox bindingNavigatorPositionItem1;
-    private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator4;
-    private System.Windows.Forms.ToolStripButton bindingNavigatorMoveNextItem1;
-    private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem1;
-    private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator5;
-    private System.Windows.Forms.DataGridView dgvUpdaterEditor;
-    private System.Windows.Forms.DataGridViewTextBoxColumn updater_editor_value_changed;
     private Infragistics.Win.Misc.UltraPanel pnlCurrentDSCAreas;
     private Infragistics.Win.Misc.UltraPanel pnlNewDSCAreas;
     public Infragistics.Win.UltraWinEditors.UltraTextEditor txtNewRoofArea;
@@ -1703,6 +1678,10 @@
     private System.Windows.Forms.DataGridViewTextBoxColumn newParkAreaDataGridViewTextBoxColumn;
     private System.Windows.Forms.DataGridViewTextBoxColumn newParkDiscoIcAreaDataGridViewTextBoxColumn;
     private System.Windows.Forms.DataGridViewTextBoxColumn newParkDrywellIcAreaDataGridViewTextBoxColumn;
+    private Infragistics.Win.UltraWinGrid.UltraGrid dgvUpdaterEditor;
+    private System.Windows.Forms.DataGridViewTextBoxColumn edit_id;
+    private System.Windows.Forms.DataGridViewTextBoxColumn edit_date;
+    private System.Windows.Forms.DataGridViewTextBoxColumn edited_by;
   }
 }
 
