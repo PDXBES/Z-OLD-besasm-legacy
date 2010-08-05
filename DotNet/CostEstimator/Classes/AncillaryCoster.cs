@@ -16,7 +16,9 @@ using SystemsAnalysis.Modeling;
 namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 {
 	/// <summary>
-	/// Ancillary coster
+	/// Supplementary costing engine for ancillary costs incurred by positional
+  /// qualities such as overlaid utilities, transportation, and special
+  /// environmental zones
 	/// </summary>
 	public class AncillaryCoster
 	{
@@ -34,9 +36,9 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 
 		#region Constructors
 		/// <summary>
-		/// Create ancillary coster
+		/// Create ancillary coster for an alternative package
 		/// </summary>
-		/// <param name="altPackage">Alt package</param>
+		/// <param name="altPackage">The alternative package being processed</param>
 		public AncillaryCoster(AlternativePackage altPackage)
 		{
 			_AltPackage = altPackage;
@@ -44,9 +46,9 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 		} // AncillaryCoster(altPackage)
 
 		/// <summary>
-		/// Create ancillary coster
+		/// Create ancillary coster for a model
 		/// </summary>
-		/// <param name="model">Model</param>
+		/// <param name="model">The model being processed</param>
 		public AncillaryCoster(Model model)
 		{
 			_Model = model;
@@ -56,9 +58,9 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 
 		#region Properties
 		/// <summary>
-		/// Alt pip XP
+		/// Returns the current AltPipXP record
 		/// </summary>
-		/// <returns>Alt pip XP</returns>
+		/// <returns>An AltPipXP record</returns>
 		public AltPipXP AltPipXP
 		{
 			get
@@ -77,9 +79,9 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 		} // AltPipXP
 
 		/// <summary>
-		/// Alt link
+		/// Returns the current AltLink record
 		/// </summary>
-		/// <returns>Alt link</returns>
+		/// <returns>An AltLink record</returns>
 		public AltLink AltLink
 		{
 			get
@@ -98,9 +100,9 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 		} // AltLink
 
 		/// <summary>
-		/// Pip XP
+		/// Returns the current PipXp record
 		/// </summary>
-		/// <returns>Pip XP</returns>
+		/// <returns>A PipXp record</returns>
 		public PipXP PipXP
 		{
 			get
@@ -119,9 +121,9 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 		} // PipXP
 
 		/// <summary>
-		/// Link
+		/// Returns the current link being processed
 		/// </summary>
-		/// <returns>Link</returns>
+		/// <returns>A Link record</returns>
 		public Link Link
 		{
 			get
@@ -139,6 +141,11 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 			} // set
 		} // Link
 
+    /// <summary>
+    /// Calculates and packages ancillary costs for a given link's conflict package
+    /// </summary>
+    /// <param name="ancillaryCosts">Reference to list that will contain ancillary costs</param>
+    /// <param name="conflictPackage">Conflict package from link that will be used to get ancillary costs</param>
 		private static void GetAncillaryCosts(List<AncillaryCost> ancillaryCosts, ConflictPackage conflictPackage)
 		{
 			ancillaryCosts.Add(new BoringJackingAncillaryCost(conflictPackage).AncillaryCost);
@@ -158,10 +165,10 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 		}
 
 		/// <summary>
-		/// Get ancillary factors
+		/// Packages ancillary factors for a given link's conflict package
 		/// </summary>
-		/// <param name="ancillaryFactors">Ancillary factors</param>
-		/// <param name="conflictPackage">Conflict package</param>
+		/// <param name="ancillaryFactors">Reference to list that will contain ancillary factors</param>
+		/// <param name="conflictPackage">Conflict package from link that will be used to get ancillary factors</param>
 		private static void GetAncillaryFactors(List<AncillaryFactor> ancillaryFactors, ConflictPackage conflictPackage)
 		{
 			ancillaryFactors.Add(new DifficultAreaAncillaryFactor(conflictPackage).AncillaryFactor);
@@ -174,9 +181,9 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 		} // GetAncillaryFactors(ancillaryFactors, conflictPackage)
 
 		/// <summary>
-		/// Ancillary costs
+		/// Returns list of ancillary costs from the current alternative package
 		/// </summary>
-		/// <returns>List</returns>
+		/// <returns>List of ancillary costs</returns>
 		public List<AncillaryCost> AlternativeAncillaryCosts
 		{
 			get
@@ -191,9 +198,9 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 		} // AncillaryCosts
 
 		/// <summary>
-		/// Ancillary factors
+		/// Returns list of ancillary factors from the current alternative package
 		/// </summary>
-		/// <returns>List</returns>
+		/// <returns>List of ancillary factors</returns>
 		public List<AncillaryFactor> AlternativeAncillaryFactors
 		{
 			get
@@ -208,9 +215,9 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 		} // AncillaryFactors
 
 		/// <summary>
-		/// Model ancillary costs
+		/// Returns list of ancillary costs from the current model
 		/// </summary>
-		/// <returns>List</returns>
+		/// <returns>List of ancillary costs</returns>
 		public List<AncillaryCost> ModelAncillaryCosts
 		{
 			get
@@ -225,9 +232,9 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 		} // ModelAncillaryCosts
 
 		/// <summary>
-		/// Model ancillary factors
+		/// Returns list of ancillary factors from the current model
 		/// </summary>
-		/// <returns>List</returns>
+		/// <returns>List of ancillary factors</returns>
 		public List<AncillaryFactor> ModelAncillaryFactors
 		{
 			get

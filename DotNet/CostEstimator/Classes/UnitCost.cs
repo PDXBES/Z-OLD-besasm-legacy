@@ -13,6 +13,9 @@ using System.Text;
 
 namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 {
+  /// <summary>
+  /// Consolidates a cost and its associated number of units and unit name
+  /// </summary>
 	public struct UnitCost
 	{
 		public decimal CostPerUnit;

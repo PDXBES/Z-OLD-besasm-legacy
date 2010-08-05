@@ -11,12 +11,15 @@ using System.Text;
 
 namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 {
+  /// <summary>
+  /// Common interface for all ancillary factors
+  /// </summary>
 	public interface AncillaryFactor
 	{
 		/// <summary>
-		/// Name
+		/// The name of the ancillary factor
 		/// </summary>
-		/// <returns>String</returns>
+		/// <returns>A String containing the ancillary factor name</returns>
 		string Name
 		{
 			get;
@@ -32,7 +35,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 		} // FactorType
 
 		/// <summary>
-		/// Factor
+		/// Factor value
 		/// </summary>
 		/// <returns>Double</returns>
 		double Factor

@@ -12,6 +12,9 @@ using System.Xml;
 
 namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 {
+  /// <summary>
+  /// A pipe reporting item
+  /// </summary>
 	public class ReportPipeItem : ReportItem
 	{
 		#region Variables

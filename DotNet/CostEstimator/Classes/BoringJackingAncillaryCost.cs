@@ -14,8 +14,12 @@ using SystemsAnalysis.Modeling.Alternatives;
 
 namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 {
+  /// <summary>
+  /// Boring/Jacking cost
+  /// </summary>
 	class BoringJackingAncillaryCost : AncillaryCost
 	{
+    private const int MINIMUM_PIPE_DEPTH_REQUIRED_FOR_BORING_JACKING_FT = 30;
 		#region Variables
 		ConflictPackage _ConflictPackage;
 		#endregion
@@ -34,7 +38,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 
 		#region Properties
 		/// <summary>
-		/// Name
+		/// Name of boring/jacking item, based on diameter, pipe material, depth
 		/// </summary>
 		/// <returns>String</returns>
 		public string Name
@@ -47,7 +51,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 		} // Name
 
 		/// <summary>
-		/// Cost
+		/// Cost in dollars of the boring/jacking
 		/// </summary>
 		/// <returns>Decimal</returns>
 		public decimal Cost
@@ -59,7 +63,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 		} // Cost
 
 		/// <summary>
-		/// Unit cost
+		/// Unit cost per foot of the boring/jacking
 		/// </summary>
 		/// <returns>Decimal</returns>
 		public decimal UnitCost
@@ -76,7 +80,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 		} // UnitCost
 
 		/// <summary>
-		/// Unit cost
+		/// Unit name
 		/// </summary>
 		/// <returns>String</returns>
 		public string Unit
@@ -88,7 +92,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 		} // UnitCost
 
 		/// <summary>
-		/// Units
+		/// Length of boring/jacking
 		/// </summary>
 		/// <returns>Double</returns>
 		public double Units
@@ -97,7 +101,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 			{
 				if (IsBoringJacking)
 				{
-					bool highPipeDepth = _ConflictPackage.Depth > 30;
+					bool highPipeDepth = _ConflictPackage.Depth > MINIMUM_PIPE_DEPTH_REQUIRED_FOR_BORING_JACKING_FT;
 					bool crossesFreeway = _ConflictPackage.Conflicts.NumFreewayCrossings > 0;
 					if (highPipeDepth || crossesFreeway)
 					{
@@ -118,11 +122,15 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 			} // get
 		} // Units
 
+    /// <summary>
+    /// Determines whether pipe needs boring/jacking
+    /// </summary>
+    /// <returns>True if pipe needs boring/jackng</returns>
 		private bool IsBoringJacking
 		{
 			get
 			{
-				bool highPipeDepth = _ConflictPackage.Depth > 30;
+				bool highPipeDepth = _ConflictPackage.Depth > MINIMUM_PIPE_DEPTH_REQUIRED_FOR_BORING_JACKING_FT;
 				bool crossesFreeway = _ConflictPackage.Conflicts.NumFreewayCrossings > 0;
 				bool crossesRailroad = _ConflictPackage.Conflicts.NumRailroadCrossings > 0;
 				bool crossesLightRail = _ConflictPackage.Conflicts.NumLightRailCrossings > 0;
@@ -133,9 +141,10 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 		} // IsBoringJacking
 
 		/// <summary>
-		/// Ancillary cost
+		/// Returns reference to self if there is a cost
 		/// </summary>
-		/// <returns>Ancillary cost</returns>
+		/// <returns>Ancillary cost (if cost > 0 and conflicts are available) or
+    /// null otherwise</returns>
 		public AncillaryCost AncillaryCost
 		{
 			get

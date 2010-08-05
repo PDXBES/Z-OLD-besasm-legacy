@@ -13,6 +13,9 @@ using System.Xml;
 
 namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 {
+  /// <summary>
+  /// An inflow control reporting item
+  /// </summary>
 	public class ReportInflowControlItem : ReportItem
 	{
 		#region Variables

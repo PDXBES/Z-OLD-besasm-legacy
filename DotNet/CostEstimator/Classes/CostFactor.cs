@@ -14,6 +14,12 @@ using System.Xml;
 
 namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 {
+  /// <summary>
+  /// Determines how cost factor is applied. Simple = CIF.Cost * Factor,
+  /// Additive = CIF.Cost * (1 + Factor), IndirectAdditive = CIF.Cost * (1 + Sum
+  /// of all Indirect Factors on same level), IndirectSimple = CIF.Cost * (Sum
+  /// of all Indirect Factors on same level)
+  /// </summary>
 	public enum CostFactorType
 	{
 		Simple,
@@ -22,6 +28,11 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 		IndirectSimple
 	} // enum CostFactorType
 
+  /// <summary>
+  /// A factor applied to a CostItemFactor's cost, after all child costs and
+  /// factors have been calculated and added to the CostItemFactor's CostItem,
+  /// if any
+  /// </summary>
 	public class CostFactor
 	{
 		#region Variables
@@ -240,7 +251,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 		} // AssignID()
 
 		/// <summary>
-		/// Write XML
+		/// Write XML for saving CostFactor information to file
 		/// </summary>
 		/// <param name="xw">Xw</param>
 		public void WriteXML(XmlWriter xw)

@@ -15,7 +15,12 @@ using SystemsAnalysis.Modeling.Alternatives;
 
 namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 {
-	public class ConflictPackage
+	/// <summary>
+	/// A ConflictPackage packages conflict information about an alternative link
+  /// and includes references to the AltLink, AltPackage, and PipeConflict (PipXP)
+  /// record.
+	/// </summary>
+  public class ConflictPackage
 	{
 		#region Variables
 		private AlternativePackage _AltPackage = null;
@@ -29,11 +34,11 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 
 		#region Constructors
 		/// <summary>
-		/// Create conflict package
+		/// Create conflict package from an alternative
 		/// </summary>
-		/// <param name="altPackage">Alt package</param>
-		/// <param name="link">Link</param>
-		/// <param name="altPipXP">Alt pip XP</param>
+		/// <param name="altPackage">An alternative package</param>
+		/// <param name="link">An alternative link within the alternative package</param>
+		/// <param name="altPipXP">The link's AltPipXP record</param>
 		public ConflictPackage(AlternativePackage altPackage, AltLink altLink, AltPipXP altPipXP)
 		{
 			_AltPackage = altPackage;
@@ -42,11 +47,11 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 		} // ConflictPackage(altPackage, link, altPipXP)
 
 		/// <summary>
-		/// Create conflict package
+		/// Create conflict package from a model
 		/// </summary>
-		/// <param name="model">Model</param>
-		/// <param name="link">Link</param>
-		/// <param name="pipXP">Pip XP</param>
+		/// <param name="model">A model</param>
+		/// <param name="link">A link within the model</param>
+		/// <param name="pipXP">The link's PipXP record</param>
 		public ConflictPackage(Model model, Link link, PipXP pipXP)
 		{
 			_Model = model;
@@ -57,7 +62,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 
 		#region Properties
 		/// <summary>
-		/// Diameter
+		/// Diameter in feet
 		/// </summary>
 		/// <returns>Double</returns>
 		public double Diameter
@@ -69,7 +74,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 		} // Diameter
 
 		/// <summary>
-		/// Depth
+		/// Average depth in feet (average of upstream and downstream depths)
 		/// </summary>
 		/// <returns>Double</returns>
 		public double Depth
@@ -82,7 +87,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 		} // Depth
 
 		/// <summary>
-		/// Length
+		/// Length in feet
 		/// </summary>
 		/// <returns>Double</returns>
 		public double Length
@@ -95,7 +100,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 		} // Length
 
 		/// <summary>
-		/// Slope
+		/// Slope in ft/ft
 		/// </summary>
 		/// <returns>Double</returns>
 		public double Slope
@@ -106,6 +111,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 					(_AltLink.USIE - _AltLink.DSIE) / _AltLink.Length;
 			}
 		} // Slope
+
 		/// <summary>
 		/// Pipe material
 		/// </summary>
@@ -120,7 +126,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 		} // PipeMaterial
 
 		/// <summary>
-		/// USNode
+		/// Upstream node ID
 		/// </summary>
 		/// <returns>String</returns>
 		public string USNode
@@ -132,7 +138,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 		} // USNode
 
 		/// <summary>
-		/// DSNode
+		/// Downstream node id
 		/// </summary>
 		/// <returns>String</returns>
 		public string DSNode
@@ -144,7 +150,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 		} // DSNode
 
 		/// <summary>
-		/// Mst link ID
+		/// Master link ID
 		/// </summary>
 		/// <returns>Int</returns>
 		public int MstLinkID
@@ -156,9 +162,9 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 		} // MstLinkID
 
 		/// <summary>
-		/// Conflict
+		/// Conflict information
 		/// </summary>
-		/// <returns>Pipe conflict</returns>
+		/// <returns>Pipe conflict record</returns>
 		public PipeConflict Conflicts
 		{
 			get

@@ -11,6 +11,9 @@ using System.Text;
 
 namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 {
+  /// <summary>
+  /// Common interface for all ancillary costs
+  /// </summary>
 	public interface AncillaryCost
 	{
 		/// <summary>
@@ -59,7 +62,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 		} // Units
 
 		/// <summary>
-		/// Ancillary cost
+		/// Ancillary cost; generally returns a reference to self if there is a
+    /// cost, null otherwise
 		/// </summary>
 		/// <returns>Ancillary cost</returns>
 		AncillaryCost AncillaryCost

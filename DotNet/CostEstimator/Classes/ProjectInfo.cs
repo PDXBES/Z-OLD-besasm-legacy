@@ -15,7 +15,7 @@ using System.Xml;
 namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 {
 	/// <summary>
-	/// Project info
+	/// Cost Estimate Project metadata
 	/// </summary>
 	public class ProjectInfo
 	{
