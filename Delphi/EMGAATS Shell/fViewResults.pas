@@ -184,13 +184,13 @@ begin
                 else if ArchiveDatabaseResult = mrNo then
                 begin
                   // Delete the files
-                  DeleteSearchResult := FindFirst(CurrentResultsDir + '*.*',
+                  DeleteSearchResult := FindFirst(CurrentResultsDir + '\*.*',
                     faAnyFile + faReadOnly, DeleteSearch);
                   if DeleteSearchResult = 0 then
                   begin
-                    DeleteFile(CurrentResultsDir + DeleteSearch.Name);
+                    DeleteFile(CurrentResultsDir + '\' + DeleteSearch.Name);
                     while FindNext(DeleteSearch) = 0 do
-                      DeleteFile(currentResultsDir + DeleteSearch.Name);
+                      DeleteFile(currentResultsDir + '\' + DeleteSearch.Name);
                     FindClose(DeleteSearch);
                   end;
                 end
