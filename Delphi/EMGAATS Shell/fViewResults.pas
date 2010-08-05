@@ -115,6 +115,12 @@ var
   ResultsDBFileName: String;
   ResultsDBPath: String;
   XPResultsProcessor: TXPResultsProcessor;
+  ArchiveDatabaseResult: Integer;
+  CurrentResultsDir: String;
+  NewArchiveDir: String;
+  NewArchiveNum: Integer;
+  DeleteSearch: TSearchRec;
+  DeleteSearchResult: Integer;
 begin
   if (lstAvailableResults.SelCount = 0) or (lstAvailableWorkspaces.SelCount = 0) or
     (lstAvailableSizes.SelCount = 0) then
@@ -156,20 +162,55 @@ begin
                 ResultsDBFileName := ResultsDBPath + JustNameL(lstAvailableResults.Items[CurrentResult]) + '_' + ModelResultsStoreFileName;
                 ResultsFileName := IncludeTrailingPathDelimiter(CurrentModel.Path) + 'sim\' + lstAvailableResults.Items[CurrentResult];
               end;
-              if not FileExists(ResultsDBFileName) then
+
+              if FileExists(ResultsDBFileName) then
               begin
-                pnlProgress.Show;
-                lblStatus.Caption := 'Creating results database ' + ResultsDBFileName;
-                Application.ProcessMessages;
+                ArchiveDatabaseResult := MessageDlg('File ' + resultsDBFileName +
+                ' exists.  Archive?', mtWarning, mbYesNoCancel, 0,
+                mbYes);
 
-                XPResultsProcessor := TXPResultsProcessor.Create;
-                XPResultsProcessor.ProcessResults(ResultsFileName, ResultsDBFileName);
-                XPResultsProcessor.Free;
-
-                lblStatus.Caption := '';
-                pnlProgress.Hide;
-                Application.ProcessMessages;
+                CurrentResultsDir := ExcludeTrailingPathDelimiter(ExtractFileDir(ResultsDBFileName));
+                if ArchiveDatabaseResult = mrYes then
+                begin
+                  // Find the best name for the archive dir (ModelResults0x)
+                  NewArchiveNum := 1;
+                  while DirectoryExists(Format('%s%.2d', [CurrentResultsDir, NewArchiveNum])) do
+                    Inc(NewArchiveNum);
+                  NewArchiveDir := Format('%s%.2d', [CurrentResultsDir, NewArchiveNum]);
+                  // Move files from the current directory to the archive dir
+                  MoveFile(PAnsiChar(CurrentResultsDir), PAnsiChar(NewArchiveDir));
+                  ForceDirectories(CurrentResultsDir);
+                end
+                else if ArchiveDatabaseResult = mrNo then
+                begin
+                  // Delete the files
+                  DeleteSearchResult := FindFirst(CurrentResultsDir + '*.*',
+                    faAnyFile + faReadOnly, DeleteSearch);
+                  if DeleteSearchResult = 0 then
+                  begin
+                    DeleteFile(CurrentResultsDir + DeleteSearch.Name);
+                    while FindNext(DeleteSearch) = 0 do
+                      DeleteFile(currentResultsDir + DeleteSearch.Name);
+                    FindClose(DeleteSearch);
+                  end;
+                end
+                else
+                begin
+                  Exit;
+                end;
               end;
+
+              pnlProgress.Show;
+              lblStatus.Caption := 'Creating results database ' + ResultsDBFileName;
+              Application.ProcessMessages;
+
+              XPResultsProcessor := TXPResultsProcessor.Create;
+              XPResultsProcessor.ProcessResults(ResultsFileName, ResultsDBFileName);
+              XPResultsProcessor.Free;
+
+              lblStatus.Caption := '';
+              pnlProgress.Hide;
+              Application.ProcessMessages;
 
               ABuildInstruction := TBuildResultViewInstruction.Create(
                 ResultsDBFileName,

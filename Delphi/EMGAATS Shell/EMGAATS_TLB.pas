@@ -12,7 +12,7 @@ unit EMGAATS_TLB;
 // ************************************************************************ //
 
 // PASTLWTR : 1.2
-// File generated on 4/20/2010 5:20:40 PM from Type Library described below.
+// File generated on 8/5/2010 3:16:43 PM from Type Library described below.
 
 // ************************************************************************  //
 // Type Lib: Z:\Development\besasm-legacy\Delphi\EMGAATS Shell\EMGAATS.tlb (1)
