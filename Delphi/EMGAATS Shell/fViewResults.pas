@@ -121,6 +121,23 @@ var
   NewArchiveNum: Integer;
   DeleteSearch: TSearchRec;
   DeleteSearchResult: Integer;
+
+  procedure CreateResultsDatabase;
+  begin
+    // Create results database
+    pnlProgress.Show;
+    lblStatus.Caption := 'Creating results database ' + ResultsDBFileName;
+    Application.ProcessMessages;
+
+    XPResultsProcessor := TXPResultsProcessor.Create;
+    XPResultsProcessor.ProcessResults(ResultsFileName, ResultsDBFileName);
+    XPResultsProcessor.Free;
+
+    lblStatus.Caption := '';
+    pnlProgress.Hide;
+    Application.ProcessMessages;
+  end;
+
 begin
   if (lstAvailableResults.SelCount = 0) or (lstAvailableWorkspaces.SelCount = 0) or
     (lstAvailableSizes.SelCount = 0) then
@@ -180,37 +197,22 @@ begin
                   // Move files from the current directory to the archive dir
                   MoveFile(PAnsiChar(CurrentResultsDir), PAnsiChar(NewArchiveDir));
                   ForceDirectories(CurrentResultsDir);
+
+                  CreateResultsDatabase;
                 end
                 else if ArchiveDatabaseResult = mrNo then
                 begin
-                  // Delete the files
-                  DeleteSearchResult := FindFirst(CurrentResultsDir + '\*.*',
-                    faAnyFile + faReadOnly, DeleteSearch);
-                  if DeleteSearchResult = 0 then
-                  begin
-                    DeleteFile(CurrentResultsDir + '\' + DeleteSearch.Name);
-                    while FindNext(DeleteSearch) = 0 do
-                      DeleteFile(currentResultsDir + '\' + DeleteSearch.Name);
-                    FindClose(DeleteSearch);
-                  end;
+                  // Pass through to the next steps
                 end
                 else
                 begin
                   Exit;
                 end;
+              end
+              else
+              begin
+                CreateResultsDatabase;
               end;
-
-              pnlProgress.Show;
-              lblStatus.Caption := 'Creating results database ' + ResultsDBFileName;
-              Application.ProcessMessages;
-
-              XPResultsProcessor := TXPResultsProcessor.Create;
-              XPResultsProcessor.ProcessResults(ResultsFileName, ResultsDBFileName);
-              XPResultsProcessor.Free;
-
-              lblStatus.Caption := '';
-              pnlProgress.Hide;
-              Application.ProcessMessages;
 
               ABuildInstruction := TBuildResultViewInstruction.Create(
                 ResultsDBFileName,
