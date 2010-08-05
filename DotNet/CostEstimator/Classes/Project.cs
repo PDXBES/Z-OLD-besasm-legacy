@@ -979,6 +979,9 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
         {
           linkCounter++;
           bw.ReportProgress((int)((double)linkCounter / (double)totalLinks * 100), "Reading links: " + linkCounter);
+
+          // Skip the pipe if it's a delete (abandon), split/connect (these are original
+          // pipes), and replace-in-kinds if no focus area was assigned
           if (altLink.Operation == SystemsAnalysis.Types.Enumerators.AlternativeOperation.DEL ||
             altLink.Operation == SystemsAnalysis.Types.Enumerators.AlternativeOperation.SPL ||
             altLink.Operation == SystemsAnalysis.Types.Enumerators.AlternativeOperation.CON ||

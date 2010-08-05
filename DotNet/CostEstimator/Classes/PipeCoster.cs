@@ -466,16 +466,20 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 		/// <returns>Decimal</returns>
 		public decimal DirectConstructionCost
 		{
-			get
-			{
-				AssignDirectConstructionCostItems();
+      get
+      {
+        AssignDirectConstructionCostItems();
 
-				decimal directCost = 0m;
-				foreach (KeyValuePair<string, UnitCost> kvpair in DirectConstructionCostItems)
-					directCost += kvpair.Value.CostPerUnit;
+        decimal directCost = 0m;
 
-				return directCost;
-			} // get
+        foreach (KeyValuePair<string, UnitCost> kvpair in DirectConstructionCostItems)
+        {
+          UnitCost item = kvpair.Value;
+          directCost += item.CostPerUnit * (decimal)item.Units;
+        }
+
+        return directCost;
+      } // get
 		} // DirectConstructionCost
 
 		/// <summary>
@@ -1354,6 +1358,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 		/// <returns>Decimal</returns>
 		public decimal ManholeCost(double pipeDiameter, double depth, out bool outsideTable)
 		{
+      // CH2M Hill Formulas convert the diameter to feet first in this formula
+      // for some reason
 			double pipeTotalWallThickness = (pipeDiameter / 12 + 1) * 2;
 			double manholeDiameterSafetySpacer = 12;
 			double requiredManholeSize = pipeTotalWallThickness + pipeDiameter + manholeDiameterSafetySpacer;
