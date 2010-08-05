@@ -14,8 +14,13 @@ using SystemsAnalysis.Modeling.Alternatives;
 
 namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 {
+  /// <summary>
+  /// Cost for utility crossings
+  /// </summary>
 	class CrossingRelocationAncillaryCost : AncillaryCost
 	{
+    private const int COST_PER_CROSSING = 5000;
+
 		#region Variables
 		private ConflictPackage _ConflictPackage;
 		#endregion
@@ -64,7 +69,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 		{
 			get
       {
-				return 5000;
+				return COST_PER_CROSSING;
       }
 		} // UnitCost
 

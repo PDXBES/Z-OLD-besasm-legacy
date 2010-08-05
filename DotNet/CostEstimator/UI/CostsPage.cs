@@ -108,7 +108,10 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 		#endregion
 
 		#region Methods
-		private void SetupProjectDataSource()
+		/// <summary>
+		/// Sets up the local data source for the loaded project
+		/// </summary>
+    private void SetupProjectDataSource()
 		{
 			dsProject.Rows.SetCount(1);
 			UltraDataRowsCollection estimateRows = dsProject.Rows[0].GetChildRows("CostItemFactor1");
@@ -122,7 +125,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 			}
 		}
 
-		/// <summary>
+    /// <summary>
 		/// Initialize
 		/// </summary>
 		/// <param name="parentControl">Parent control</param>
@@ -150,12 +153,17 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 		/// Depth of row
 		/// </summary>
 		/// <param name="row">Row</param>
-		/// <returns>Int</returns>
+    /// <returns>Integer representing the number of levels of depth from the top of the costing hierarchy</returns>
 		private int DepthOfRow(UltraDataRow row)
 		{
 			return ProcessDepthOfRow(row.Band.Key);
 		} // DepthOfRow(row)
 
+    /// <summary>
+    /// Depth of row
+    /// </summary>
+    /// <param name="row">Row</param>
+    /// <returns>Integer representing the number of levels of depth from the top of the costing hierarchy</returns>
 		private int DepthOfRow(UltraGridRow row)
 		{
 			return ProcessDepthOfRow(row.Band.Key);
@@ -283,6 +291,11 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 			}
 		} // GetCostItemFactor(column, row)
 
+    /// <summary>
+    /// Gets the Cost Item Factor object from a grid row
+    /// </summary>
+    /// <param name="row">The grid row of the presumed cost item factor</param>
+    /// <returns>The corresponding CostItemFactor object</returns>
 		private CostItemFactor GetCostItemFactor(UltraGridRow row)
 		{
 			if (row == null)
@@ -310,6 +323,11 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 				return null;
 		} // GetCostItem(row)
 
+    /// <summary>
+    /// Gets the Cost Item object from a grid row
+    /// </summary>
+    /// <param name="row">The grid row of the presumed cost item</param>
+    /// <returns>The corresponding CostItem object</returns>
 		private CostItem GetCostItem(UltraGridRow row)
 		{
 			UltraDataRow dataRow = row.ListObject as UltraDataRow;
@@ -334,6 +352,11 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 				return null;
 		} // GetCostFactor(row)
 
+    /// <summary>
+    /// Gets the Cost Factor object from a grid row
+    /// </summary>
+    /// <param name="row">The grid row of the presumed cost factor</param>
+    /// <returns>The corresponding CostFactor object</returns>
 		private CostFactor GetCostFactor(UltraGridRow row)
 		{
 			UltraDataRow dataRow = row.ListObject as UltraDataRow;
@@ -379,6 +402,10 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 			}
 		} // SetupDataSetForCostItemFactor(aCostItemFactor)
 
+    /// <summary>
+    /// Hides or shows the Add Items row from the grid
+    /// </summary>
+    /// <param name="hidden">true to hide the add (new) item rows, false to show</param>
 		public void HideAddItemsFromCostGrid(bool hidden)
 		{
 			if (hidden)
@@ -491,6 +518,9 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 			}
 		} // FillSelectCostItemFactorTree(estimateIndex)
 
+    /// <summary>
+    /// Sets up the grid to have user select a cost item factor
+    /// </summary>
 		private void SetupSelectCostItemFactorTree()
 		{
 			treeCostItemFactor.Nodes.Clear();
@@ -509,6 +539,9 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 				MessageBox.Show("Could not figure out the estimate you're interested in.  Select a row inside an estimate and try again.");
 		}
 
+    /// <summary>
+    /// Update the cells of the row currently being edited
+    /// </summary>
 		public void UpdateCurrentlyEditingRow()
 		{
    		if (gridCosts.ActiveRow != null)
@@ -529,17 +562,24 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 					using (StreamWriter pipeCostsStream = new StreamWriter(dlgSave.FileName))
 					{
 						List<ReportPipeItem> pipeItems = _project.ReportPipeItems();
-						pipeCostsStream.WriteLine("MLinkID,USNode,DSNode,DirectConstructionCost,TotalConstructionCost,PipelineBuildDuration");
+						pipeCostsStream.WriteLine("MLinkID,USNode,DSNode," +
+              "DirectConstructionCost,TotalConstructionCost,PipelineBuildDuration");
 						foreach (ReportPipeItem item in pipeItems)
 						{
 							string[] itemNameItems = item.Name.Split(new char[] { ' ', '-' }, StringSplitOptions.None);
 							try
 							{
-								pipeCostsStream.WriteLine(string.Format("{0},{1},{2},{3:F0},{5:F0},{4}", itemNameItems[0], itemNameItems[1], itemNameItems[2], item.DirectConstructionCost, Math.Ceiling(item.ExcavationVolCuYd / ConstructionDurationCalculator.MAINLINE_BUILD_RATE_PER_DAY_CUYD), item.TotalConstructionCost));
+								pipeCostsStream.WriteLine(string.Format("{0},{1},{2},{3:F0},{5:F0},{4}", 
+                  itemNameItems[0], itemNameItems[1], itemNameItems[2], 
+                  item.DirectConstructionCost, 
+                  Math.Ceiling(item.ExcavationVolCuYd / 
+                  ConstructionDurationCalculator.MAINLINE_BUILD_RATE_PER_DAY_CUYD), 
+                  item.TotalConstructionCost));
 							} // try
 							catch (Exception e)
 							{
-								MessageBox.Show(String.Format("{0}\n\n{1}", string.Format("Problem writing item {0}", item.Name), e.Message));
+								MessageBox.Show(String.Format("{0}\n\n{1}",
+                  string.Format("Problem writing item {0}", item.Name), e.Message));
 							} // catch
 						}
 						// foreach  (item)

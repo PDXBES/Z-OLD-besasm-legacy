@@ -16,7 +16,8 @@ using SystemsAnalysis.Types;
 namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 {
 	/// <summary>
-	/// Traffic control ancillary cost
+	/// Traffic control costs, varying by traffic usage (arterials, freeways, 
+  /// normal residential streets)
 	/// </summary>
 	/// <returns>Ancillary cost</returns>
 	class TrafficControlAncillaryCost : AncillaryCost

@@ -14,6 +14,9 @@ using SystemsAnalysis.Modeling.Alternatives;
 
 namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 {
+  /// <summary>
+  /// Cost for building pipe across an environmental zone
+  /// </summary>
 	class EnvironmentalMitigationAncillaryCost : AncillaryCost
 	{
 		#region Constants
@@ -92,8 +95,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 		{
 			get
 			{
-				return (double)(_ConflictPackage.Conflicts.AreaConservationZoneSqFt + 
-					_ConflictPackage.Conflicts.AreaPreservationZoneSqFt) / 43560;
+				return (double)(_ConflictPackage.Conflicts.AreaConservationZoneSqFt +
+          _ConflictPackage.Conflicts.AreaPreservationZoneSqFt) / Common.SQUARE_FEET_PER_ACRE;
 			} // get
 		} // Units
 

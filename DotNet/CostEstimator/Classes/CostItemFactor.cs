@@ -15,7 +15,8 @@ using System.Xml;
 namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 {
 	/// <summary>
-	/// Cost item factor
+	/// A CostItemFactor combines a CostItem and zero or more CostFactors, in
+  /// addition to and any number of child CostItemFactors to form a line item cost.
 	/// </summary>
 	public class CostItemFactor
 	{
@@ -124,7 +125,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 		} // Cost
 
 		/// <summary>
-		/// Prefactored cost
+		/// Prefactored cost (does not prefactor child costs, however)
 		/// </summary>
 		/// <returns>Decimal</returns>
 		public decimal PrefactoredCost
@@ -160,7 +161,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 		} // ParentCostItemFactor
 
 		/// <summary>
-		/// Child cost
+		/// Sum of child CostItemFactors
 		/// </summary>
 		/// <returns>Decimal</returns>
 		public decimal ChildCost
@@ -183,7 +184,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 		} // ChildCost
 
 		/// <summary>
-		/// Num child cost item factors
+		/// Number of child cost item factors
 		/// </summary>
 		/// <returns>Int</returns>
 		public int ChildCostItemFactorCount

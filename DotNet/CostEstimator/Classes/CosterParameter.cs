@@ -13,6 +13,11 @@ using System.Text;
 
 namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 {
+  /// <summary>
+  /// A set of CosterParameter objects are used by the costing engines
+  /// (InflowControlCoster and PipeCoster) to represent components of what those
+  /// cost engines are analyzing.
+  /// </summary>
 	public struct CosterParameter
 	{
 		public string Name;

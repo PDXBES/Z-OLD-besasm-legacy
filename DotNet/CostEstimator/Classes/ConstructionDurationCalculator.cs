@@ -15,11 +15,16 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 	public class ConstructionDurationCalculator
 	{
 		public const int MAINLINE_BUILD_RATE_PER_DAY_CUYD = 140;
+    public const double MANHOLE_BUILD_RATE_PER_DAY_FT = 10;
+    public const double CROSSING_RATE_PER_DAY_EA = 0.5;
+    public const int PAVEMENT_REPAIR_RATE_PER_DAY_FT = 250;
+
 		#region Properties
 		/// <summary>
-		/// Construction duration
+		/// Duration of construction based on build rates of components (mainline,
+    /// manhole, pavement, and crossings)
 		/// </summary>
-		/// <returns>Double</returns>
+		/// <returns>Number of fractional days needed to build pipe</returns>
 		static public double ConstructionDurationDays(ConflictPackage conflictPackage)
 		{
 			PipeCoster pipeCoster = new PipeCoster();
@@ -29,7 +34,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 			pipeCoster.Material = conflictPackage.PipeMaterial;
 
 			// 1 day per 10 ft vertical of manhole
-			double manholeConstructionDurationDays = conflictPackage.Depth / 10;
+			double manholeConstructionDurationDays = conflictPackage.Depth /
+        MANHOLE_BUILD_RATE_PER_DAY_FT;
 			// Mainline at 140 cy per day
 			double mainlineConstructionDurationDays = pipeCoster.ExcavationVolume * conflictPackage.Length / MAINLINE_BUILD_RATE_PER_DAY_CUYD;
 			// Utility crossings add 0.5 days per conflict
@@ -38,9 +44,9 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 				conflictPackage.Conflicts.NumGasCrossings +
 				conflictPackage.Conflicts.NumSewerCrossings +
 				conflictPackage.Conflicts.NumWaterCrossings;
-			double utilityCrossingDurationDays = numUtilityCrossings * 0.5;
+			double utilityCrossingDurationDays = numUtilityCrossings * CROSSING_RATE_PER_DAY_EA;
 			// Pavement repair at 250 feet per day
-			double pavementRepairDurationDays = conflictPackage.Length / 250;
+			double pavementRepairDurationDays = conflictPackage.Length / PAVEMENT_REPAIR_RATE_PER_DAY_FT;
 
 			double numDays = Math.Ceiling(
 				manholeConstructionDurationDays +

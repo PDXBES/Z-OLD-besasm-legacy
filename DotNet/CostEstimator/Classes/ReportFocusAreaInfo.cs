@@ -13,6 +13,9 @@ using System.Text;
 
 namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 {
+  /// <summary>
+  /// Holds the focus area name
+  /// </summary>
 	public class ReportFocusAreaInfo
 	{
 		string _Name;

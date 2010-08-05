@@ -14,8 +14,13 @@ using SystemsAnalysis.Modeling.Alternatives;
 
 namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 {
+  /// <summary>
+  /// Cost for bypass pumping during construction
+  /// </summary>
 	class BypassPumpingAncillaryCost : AncillaryCost
 	{
+    private const int ASSUMED_BYPASS_FLOW_FRACTION_OF_PIPE_CAPACITY = 5;
+
 		#region Variables
 		ConflictPackage _ConflictPackage;
 		#endregion
@@ -151,7 +156,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 		{
 			get
 			{
-				return PipeCapacity / 5;
+				return PipeCapacity / ASSUMED_BYPASS_FLOW_FRACTION_OF_PIPE_CAPACITY;
 			} // get
 		} // BypassFlow
 		#endregion

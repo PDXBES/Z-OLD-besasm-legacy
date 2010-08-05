@@ -14,6 +14,10 @@ using SystemsAnalysis.Modeling.Alternatives;
 
 namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 {
+  /// <summary>
+  /// Cost for building pipe through a known hazardous material/polluted
+  /// underground soil area
+  /// </summary>
 	class HazardousMaterialAncillaryCost : AncillaryCost
 	{
 		#region Constants
