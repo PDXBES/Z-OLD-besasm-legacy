@@ -265,7 +265,6 @@ namespace SWI_2
             {
                 //get the watershed_id
                 watershed_id = (int)((DataRow)sANDBOXDataSet.SWSP_WATERSHED.Select("watershed = '" + (string)r["watershed"] + "'")[0]).ItemArray[0];
-
                 //get the subwatershed_id
                 subwatershed_id = (int)((DataRow)sANDBOXDataSet.SWSP_SUBWATERSHED.Select("subwatershed = '" + (string)r["subwatershed"] + "' AND watershed_id = " + watershed_id.ToString())[0]).ItemArray[0];
                 //get the view_id
@@ -319,13 +318,13 @@ namespace SWI_2
                     else if ((string)r["linktype"] == "Ditch")
                     {
                         int globalID = 0;
-                        //adding a pipe means:
+                        //adding a ditch means:
                         //placing a new entry in the globalID table,
-                        //taking that value and using it to create a new pipe
+                        //taking that value and using it to create a new ditch
                         this.sWSP_GLOBAL_IDTableAdapter.Insert("");
                         //what was the global ID that was just inserted?  The highest value in the GlobalID table.  Since we just inserted to it, there is no chance that it could be null
                         globalID = (int)this.sWSP_GLOBAL_IDTableAdapter.ScalarQuery();
-                        //add this record to the SWSP_PIPE table
+                        //add this record to the SWSP_DITCH table
                         this.sWSP_DITCHTableAdapter.Insert(globalID,
                                                             page_id,
                                                             (string)r["node"],
@@ -342,13 +341,13 @@ namespace SWI_2
                     else if ((string)r["linktype"] == "Culvert")
                     {
                         int globalID = 0;
-                        //adding a pipe means:
+                        //adding a culvert means:
                         //placing a new entry in the globalID table,
-                        //taking that value and using it to create a new pipe
+                        //taking that value and using it to create a new culvert
                         this.sWSP_GLOBAL_IDTableAdapter.Insert("");
                         //what was the global ID that was just inserted?  The highest value in the GlobalID table.  Since we just inserted to it, there is no chance that it could be null
                         globalID = (int)this.sWSP_GLOBAL_IDTableAdapter.ScalarQuery();
-                        //add this record to the SWSP_PIPE table
+                        //add this record to the SWSP_CULVERT table
                         this.sWSP_CULVERTTableAdapter.Insert(globalID,
                                                             page_id,
                                                             (string)r["node"],
@@ -373,6 +372,9 @@ namespace SWI_2
                 //and must check to see if the existing global id belongs to a different type of conduit.
                 //if the existing global id belongs to a different conduit type, then we need to delete the 
                 //previous conduit type and insert the new one.
+                //There is also the case that perhaps another user has already deleted this pipe. This case is handled
+                //by the case when the pipes have not been found in the PIPEID field, then they are deleted
+                //from the other tables.  This algorithm pretty much assures that the pipe will be recreated.
                 else if ((int)r["action"] == 3)
                 {
                     //get the material_id
@@ -560,7 +562,7 @@ namespace SWI_2
                 //yes this redundancy is really necessary
                 try
                 {
-                    //sometimes, the user will not have a row selected when they close out.
+                    //sometimes the user will not have a row selected when they close out.
                     dataGridViewLinkInfo.CurrentRow.DataGridView.EndEdit();
                 }
                 catch (Exception ex)
@@ -571,7 +573,6 @@ namespace SWI_2
                 cm.EndCurrentEdit();
 
                 PopulateLinkInfo();
-                //e.Cancel = true;
                 DialogResult theAnswer = MessageBox.Show("Do you wish to save changes to the database?", "Save before closing", MessageBoxButtons.YesNoCancel);
                 if (theAnswer == DialogResult.No)
                 {
