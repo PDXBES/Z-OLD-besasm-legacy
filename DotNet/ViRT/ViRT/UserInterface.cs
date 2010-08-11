@@ -20,7 +20,7 @@ using ESRI.ArcGIS.SystemUI;
 using System.IO;
 using System.Reflection;
 using System.Diagnostics;
-using translator;
+//using translator;
 
 namespace ViRT
 {
@@ -1083,7 +1083,12 @@ namespace ViRT
 
         private void buttonImportMapInfoLinks_Click(object sender, EventArgs e)
         {
-            string MapInfoConvertFile = "";
+            ImportLinks();
+        }
+
+        private void ImportLinks()
+        {
+           /* string MapInfoConvertFile = "";
             if (openFileDialogMapInfoFile.ShowDialog() == DialogResult.OK)
             {
                 MapInfoConvertFile = openFileDialogMapInfoFile.FileName;
@@ -1148,7 +1153,7 @@ namespace ViRT
                 translator.GISTranslator gisTranslator = new GISTranslator();
 
                 //create a pgdb 
-                gisTranslator.TranslateOneFileToLyr("c:\\temp\\linksFile.tab", "c:\\temp\\", /*"c:\\temp\\*/"linksFile.mdb", true);
+                gisTranslator.TranslateOneFileToLyr("c:\\temp\\linksFile.tab", "c:\\temp\\", "linksFile.mdb", true);
                 //create a layer file from the pgdb
 
                 //this function may be larger than it needs to be.
@@ -1202,7 +1207,7 @@ namespace ViRT
                 
                 MessageBox.Show("DONE!");
                 
-            }
+            }*/
         }
 
         // Define the event handlers.
