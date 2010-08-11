@@ -1901,7 +1901,10 @@ begin
 
   CodeSite.EnterMethod('TDeployRunoffCommand.Execute');
   if fModel.Config.HasDirectSubcatchments or fModel.Config.HasSurfaceSubcatchments then
-    inherited
+  begin
+    inherited;
+    fModel.Config.RunoffDeployDate := Now;
+  end
   else
   begin
     fModel.AddError(TEMGAATSError.Create('Could not create runoff file.  No ' +
@@ -2188,9 +2191,19 @@ begin
     Exit;
   try
     datmodHydroStats.Calculate(fModel.QCWorkbookFileName);
+    if (FileExists(fModel.QCWorkbookFileName)) and
+      (FileDateToDateTime(FileAge(fModel.QCWorkbookFileName)) >
+      fModel.Config.RunoffDeployDate) then
+      fModel.AddError(TEMGAATSError.Create('Hydrologic quality control: ' +
+        fModel.Config.HydroQCFileName + ' created.', eetInfo))
+    else
+      fModel.AddError(TEMGAATSError.Create('Hydrologic quality control file was not ' +
+      'created.  Check Excel macro security settings.', eetError));
   except
-    fModel.AddError(TEMGAATSError.Create('Hydrologic quality control: ' +
-      fModel.Config.HydroQCFileName + ' created.', eetInfo));
+    on E: Exception do
+      fModel.AddError(TEMGAATSError.Create('Problem creating hydrologic quality control: ' +
+        fModel.Config.HydroQCFileName + ' was not created.'#13'Exception: ' +
+        E.Message , eetError));
   end;
 
   // Send this to the report page
