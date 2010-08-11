@@ -1,0 +1,7 @@
+Declare Function OpenTable(sPathName as String, ByVal sTabName As String, ByVal sAlias as String, ByVal Gentle as logical) As Logical
+Declare Function CheckOrCreateColumn( ByVal sTabname as String, ByVal sColname as string, ByVal sColType as string) as Logical
+Declare Function IsTableOpen(ByVal sTable as String) as Logical
+Declare Function IsColumnThere(ByVal sTable as String, sColName as String) as Logical
+Declare Function FixFolderSlash(ByVal FolderName as string) as string
+Declare Function APIBrowseFolders(ByVal szTitle as string) as string 
+

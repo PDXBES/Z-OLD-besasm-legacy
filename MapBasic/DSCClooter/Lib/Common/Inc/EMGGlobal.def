@@ -1,0 +1,25 @@
+'
+'	============ EMGAATS Workbench =================
+'
+'	Copyright (c) 2001, 2002  City of Portland, OR Bureau of Environmental Services
+'	 and CH2M HILL, Inc.
+'
+'	EMGGlobal.def
+'
+'	Defines for EMGGlobal.mb
+'
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+'
+global 	gstrAppName 		as 	String
+global	gstrCopyRight 	as 	String
+global	gstrVersion 		as 	string
+global	gstrVerDate 		as 	string
+global 	gstrAppFolder	as string
+
+global		gmstLinksPath as string
+global		gmstNodesPath as string
+global		gmstNodeDiversionsPath as string
+global		gmdlTracePath as string
+global		gmdlRootFolder as string
+global		gmdlLinksPath as string
+Global	gstrTimeFrame	as string

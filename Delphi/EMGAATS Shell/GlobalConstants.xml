@@ -1,0 +1,196 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<namespace name="GlobalConstants">
+  <struct name="TACrelink">
+    <field name="linkmdb" type="string" visibility="public" />
+    <field name="linktable" type="string" visibility="public" />
+    <field name="srctable" type="string" visibility="public" />
+    <field name="srcdatabase" type="string" visibility="public" />
+    <field name="emsg" type="string" visibility="public" />
+  </struct>
+  <const name="ReturnSuccess" type="Integer">
+    <value>
+      $FFFFFFFF
+    </value>
+  </const>
+  <const name="ReturnCaution" type="Integer">
+    <value>
+      $0
+    </value>
+  </const>
+  <const name="ReturnFailure" type="Integer">
+    <value>
+      $1
+    </value>
+  </const>
+  <const name="RSSwarn" type="Comp">
+    <value>
+      0.02
+    </value>
+  </const>
+  <const name="EMGAATSVersion" type="string">
+    <value>
+      2.2
+    </value>
+  </const>
+  <const name="EMGAATSVersionComment" type="string">
+    <value>
+      22 May 2007
+    </value>
+  </const>
+  <const name="SystemConfigFileName" type="string">
+    <value>
+      EMGAATSSystem.ini
+    </value>
+  </const>
+  <const name="TemplateUserConfigFileName" type="string">
+    <value>
+      EMGAATSUserTemplate.ini
+    </value>
+  </const>
+  <const name="UserConfigLocation" type="string">
+    <value>
+      \BES_SystemsAnalysis\EMGAATS_2.2
+    </value>
+  </const>
+  <const name="UserConfigFileName" type="string">
+    <value>
+      EMGAATSUser.ini
+    </value>
+  </const>
+  <const name="ModelConfigFileName" type="string">
+    <value>
+      Model.ini
+    </value>
+  </const>
+  <const name="ModelResultsStoreFileName" type="string">
+    <value>
+      ModelResults.mdb
+    </value>
+  </const>
+  <const name="SystemIniFileName" type="string">
+    <value>
+      EMGAATS.ini
+    </value>
+  </const>
+  <const name="ModelResultsDirName" type="string">
+    <value>
+      ModelResults
+    </value>
+  </const>
+  <const name="PatchIniFileName" type="string">
+    <value>
+      patch.ini
+    </value>
+  </const>
+  <const name="UserRegistryKey" type="string">
+    <value>
+      Software\EMGAATS
+    </value>
+  </const>
+  <const name="PATCH_allmdbs" type="Integer">
+    <value>
+      $64
+    </value>
+  </const>
+  <const name="Patch_mxd" type="Integer">
+    <value>
+      $65
+    </value>
+  </const>
+  <const name="PATCH_IC01" type="Integer">
+    <value>
+      $66
+    </value>
+  </const>
+  <const name="ModelIniFileName" type="string">
+    <value>
+      Model.ini
+    </value>
+  </const>
+  <const name="strMasterSection" type="string">
+    <value>
+      MasterFiles
+    </value>
+  </const>
+  <const name="strMdlState" type="string">
+    <value>
+      ModelState
+    </value>
+  </const>
+  <const name="strMdlRootSection" type="string">
+    <value>
+      rootlinks
+    </value>
+  </const>
+  <const name="strmdlstopsection" type="string">
+    <value>
+      stoplinks
+    </value>
+  </const>
+  <const name="strRetraceSection" type="string">
+    <value>
+      Retrace
+    </value>
+  </const>
+  <const name="strBuildLogSection" type="string">
+    <value>
+      BuildLog
+    </value>
+  </const>
+  <const name="strMBmsg" type="string">
+    <value>
+      gstrCurrentMessage
+    </value>
+  </const>
+  <const name="strMBrc" type="string">
+    <value>
+      gstrReturnStatus
+    </value>
+  </const>
+  <const name="emgwError" type="string">
+    <value>
+      ERROR
+    </value>
+  </const>
+  <const name="emgwFailure" type="string">
+    <value>
+      FAILURE
+    </value>
+  </const>
+  <const name="emgwSuccess" type="string">
+    <value>
+      SUCCESS
+    </value>
+  </const>
+  <const name="MDBSSectionString" type="string">
+    <value>
+      mdbs
+    </value>
+  </const>
+  <const name="MDBSDirPath" type="string">
+    <value>
+      \mdbs\
+    </value>
+  </const>
+  <const name="strLookupTables" type="string">
+    <value>
+      LookupTables
+    </value>
+  </const>
+  <const name="MaxPathLength" type="Integer">
+    <value>
+      $FA
+    </value>
+  </const>
+  <const name="SHGFP_TYPE_CURRENT" type="Integer">
+    <value>
+      $0
+    </value>
+  </const>
+  <function name="IsRequiredMDB" visibility="private">
+    <parameters>
+      <parameter name="AKey" type="string" />
+      <retval type="Boolean" />
+    </parameters>
+  </function>
+</namespace>

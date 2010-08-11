@@ -1,0 +1,957 @@
+'mapbasic fillename = DSCtoolpad.mb 
+'
+'
+include "MapBasic.def"
+include "Menu.def"
+include "Icons.def"
+include "AlternativeWorkbench.def"
+include "..\Common\Inc\EMGMTabUtil.def"
+include "..\common\inc\EMGCoordSys.def"
+
+declare sub FixBrokenDSCConnection
+declare sub EditSaveDSC
+declare sub EditRevertDSC
+declare sub MkStubPt
+declare sub MkZinger
+declare Sub MkZingerFromAltDscId(ByVal UpdateAltDscId as integer)
+declare sub MkZingTbl
+declare sub MaxAltDscID
+declare sub MaxZingID
+declare sub SetGotoPipe
+declare sub PipeAttribs
+declare sub ParcelAttribs
+declare sub SetSanFLOW
+declare sub SetStormFLOW
+declare sub SetSanActive
+declare sub SetStormActive
+declare sub SetActive
+declare sub RefreshDSCZingers
+declare sub ToggleLabel
+declare sub PointFromDS(ByVal LineObj as object,ByVal fDist as float)
+declare Function VerifyDSCSelection() as logical
+declare Function VerifyDiscoClassChange(ByVal newDisco as string, ByVal oldDisco as string) as logical
+'declare sub RunStr(ByVal FromTbl, FromCol, ColVal, ToTbl as string)
+
+Dim 	MaxDscID, 
+	 	MaxZid, 
+	 	exLID, 
+	 	exAID, 
+		exMID,  
+		exPID,  
+		LOTid,
+		iLabel
+			as integer
+Dim 	exDIA, 
+		exHGT, 
+		exUIE, 
+		exDIE, 
+		exLEN, 
+		LPTx,
+		LPTy
+			as float
+
+dim LOTx,LOTy,dscX,dscY, SANd2s, SDd2s as float
+dim stubX, StubY, stubDist as float
+
+Dim 	exDSN,
+		exUSN,
+		exSOP, 
+		exMAT, 
+		exSHP, 
+		exLTP, 
+		exFTP, 
+		exSPL, 
+		DoStr, 
+		sFlowTO		
+			as string
+Dim 	pObj,
+		LinkObj, 
+		exObj 
+			as object
+Dim 	DscReady,
+		PipReady 
+			as Logical
+Dim alwaysVerifyDiscoClass as logical
+'---------------------------------------------------------
+'Starting point for the DSC Toolpad
+sub DSCToolPad
+	
+	Call SetStdCoordSys()
+	Call ResetAltWorkbench	
+	Pack Table alt_dsc Graphic Data
+	
+	Select *  from mdl_Links, alt_links where mdl_Links.LinkID = alt_links.MdlLinkID and alt_links.operation = any("DEL", "SPL", "UPD") into mdl_links_removed
+	Run Menu Command 311 'M_QUERY_INVERTSELECT
+	If SelectionInfo(SEL_INFO_NROWS) > 0 Then
+		Select * from selection into mdl_links_applied	
+	Else
+		Select * from mdl_links into mdl_links_applied
+	End If
+	'mdl_Links . LinkID not in ( select LinkID from alt_links , mdl_links where operation in ( "DEL" , "SPL" , "UPD" ) and alt_links . mdllinkid = mdl_links . linkid )  into mdl_links_applied noselect  
+
+	Select *  from alt_links  where Operation not in ( "DEL" , "SPL" )  into alt_links_applied noselect  
+	Commit Table mdl_links_applied as gTempDir & "mdl_links_applied.tab"
+	Commit Table alt_links_applied as gTempDir & "alt_links_applied.tab"
+	Close Table mdl_links_applied
+	Close Table alt_links_applied
+	Open Table gTempDir & "mdl_links_applied.tab"
+	Open Table gTempDir & "alt_links_applied.tab"
+	
+	'Work-around: alt_links should have a PipeFlowType instead of LinkType. However, refactoring for this would be expensive. Therefore this code
+	'simply adds the PipeFlowType field and uses data from LinkType as the source.
+	Alter table alt_links_applied (add PipeFlowType char(2))
+	Update alt_links_applied set pipeflowtype = linktype
+	Commit Table alt_links_applied
+
+	
+	Run Application gDSCEditingTemplate
+	
+	Set distance units "ft"
+	Set area units "sq ft"
+
+	DscReady=0
+	PipReady=0 
+	alwaysVerifyDiscoClass = 1
+	
+	If Ask("Check for broken direct subcatchment connections?", "Yes", "No") = True Then
+		Call FixBrokenDSCConnection
+	End If
+	If Ask("Build zingers for alternative direct subcatchments?", "Yes", "No") = True Then
+		Call RefreshDSCZingers	
+	End If	
+	
+OnError GOTO skipPad
+	Alter ButtonPad "DSC Editing Tools" Show	
+				
+	Call ZoomToLayer("DSC Main Map", "Mdl_DSC")
+
+
+Exit Sub
+skipPad:
+'	Call Debugnote("DSCpad: "& Err() & " " & Error$())
+	Print "Toolpad Err: "& Err() & " " & Error$()
+	Resume Next
+
+End Sub
+'-------------------------------------------------------------------------------------------------
+Sub InitDSCToolPad
+Create ButtonPad "DSC Editing Tools" As 
+		ToolButton HelpMsg  "\n Select"		ID 90014	Icon	0	Calling 1701 
+		ToolButton HelpMsg  "\n Pan/Grabber"	ID 90013	Icon	7	Calling 1702
+		ToolButton HelpMsg  "\n Zoom In"		ID 90011	Icon	4	Calling 1705
+		ToolButton HelpMsg  "\n Zoom Out"		ID 90012	Icon	5	Calling 1706
+		PushButton HelpMsg  "\n Save Edits"		    		ID 90004	Icon	40	Calling EditSaveDSC		 
+		PushButton HelpMsg  "\n Revert to Last Save"			ID 90005	Icon	62 File gIconFile Calling EditRevertDSC		 
+
+	  						Separator		
+		PushButton HelpMsg  "\n Add Chicklets" 	ID 90006	Icon	108	File gIconFile Calling AddChicklets			 			 
+	  						Separator	
+		ToolButton HelpMsg  "\n Redirect Sanitary Flow"	ID 90008	Icon 66 File gIconFile	Calling SetSanFLOW 
+							Drawmode	DM_CUSTOM_POINT	Cursor	MI_CURSOR_CROSSHAIR								
+		ToolButton HelpMsg  "\n Redirect Storm Flow"	ID 90018	Icon 68 File gIconFile	Calling SetStormFLOW 
+							Drawmode	DM_CUSTOM_POINT	Cursor	MI_CURSOR_CROSSHAIR								
+	  						Separator	  								
+		PushButton HelpMsg  "\n Activate/Deactivate DSC" ID 90010	Icon 76 File gIconFile Calling SetActive 		  									
+							Separator	
+		PushButton HelpMsg  "\n Refresh Zingers"	ID 80502	Icon 74 File gIconFile Calling RefreshDSCZingers							
+' 		PushButton HelpMsg  "\n Toggle Labels" 	ID 90006	Icon 244	Calling ToggleLabel			 								
+'		ToolButton  HelpMsg "\n Split Pipe at Point"    		ID 90009	Icon 64 File sIconFile	Calling SplitPip	
+'	  						Drawmode	DM_CUSTOM_POINT	Cursor	MI_CURSOR_CROSSHAIR	
+			Title "DSC Editing Tools" 	Width 10	Hide	Float position(7,1.5) 'units "in"			
+End Sub
+'-------------------------------------------------------------------------------------------------
+sub FixBrokenDSCConnection
+	dim iQy, sActive as integer
+	
+	'Steps:
+	'1: Exlude those DSC that already have an entry in alt_dsc
+	'2: Find those DSC that do not have a corresponding ToLinkSan in mdl_links_applied (broken connections)
+	'3: Add the broken connections to mdl_dsc
+	'4: F
+	'4: Check if the LinkID did not change for UPD pipes and direct the alt_dsc connection to the UPD
+	
+	Print "Finding broken sanitary connections"
+
+	Select Mdl_DSC.DscId, Mdl_DSC.ToLinkSan, Mdl_DSC.DiscoClass From Mdl_DSC, Alt_DSC Where Mdl_DSC.DscId = Alt_DSC.MdlDSCID into QyDSC_InAlt
+	
+	If SelectionInfo(SEL_INFO_NROWS) > 0 Then
+		Run Menu Command 311 'M_QUERY_INVERTSELECT
+		Select DscId, ToLinkSan, DiscoClass From SELECTION into QyDSC_NotInAlt
+		Commit Table QyDSC_NotInAlt as gTempDir & "QyDSC_NotInAlt.tab"
+		Close Table QyDSC_NotInAlt
+		Open Table gTempDir & "QyDSC_NotInAlt.tab"
+	Else
+		Select DscId, ToLinkSan, DiscoClass From Mdl_DSC into qyMdl_DSC
+		Commit Table qyMdl_DSC As gTempDir & "QyDSC_NotInAlt.tab"
+		Close Table qyMdl_DSC
+		Open Table gTempDir & "QyDSC_NotInAlt.tab"		
+	End If	
+	Create Index On QyDSC_NotInAlt(ToLinkSan)
+	
+	Select * from QyDSC_NotInAlt, mdl_Links_applied where ToLinkSan=mdl_Links_applied.LinkID into QyDSC_NotInAlt_InMdl
+	Run Menu Command 311 'M_QUERY_INVERTSELECT
+	'Select * from Selection Where DiscoClass = Any("C", "S") into QyDSC_NotInAlt_NotInMdl
+	Select * from Selection Where ToLinkSan <> 0 into QyDSC_NotInAlt_NotInMdl
+	'FIX: Exclude parcels connected to update pipes since the connection is still valid
+	If TableInfo(QyDSC_NotInAlt_NotInMdl, TAB_INFO_NROWS) > 0 Then		
+		Commit Table QyDSC_NotInAlt_NotInMdl as gTempDir & "QyDSC_NotInAlt_NotInMdl.tab"
+		Close Table QyDSC_NotInAlt_NotInMdl
+		Open Table gTempDir & "QyDSC_NotInAlt_NotInMdl.tab"
+		
+		Select * from QyDSC_NotInAlt_NotInMdl, alt_links_applied where QyDSC_NotInAlt_NotInMdl.ToLinkSan = alt_links_applied.MdlLinkID and alt_links_applied.operation = "UPD" into QyDSC_NotInAlt_NotInMdl_Upd
+		
+		If TableInfo(QyDSC_NotInAlt_NotInMdl,TAB_INFO_NROWS) = SelectionInfo(SEL_INFO_NROWS) Then
+			Print "No sanitary DSCs to reconnect"
+		Else
+			'The statement "Run Menu Command 311" only works if at least 1 row is selected. If not, the invert selection operation fails and the query must be built manually
+			Run Menu Command 311 'M_QUERY_INVERTSELECT		
+			
+			
+			If SelectionInfo(SEL_INFO_NROWS) > 0 Then				
+				Select * From selection Into QyDSC_NotInAlt_NotInMdl_NotUpd
+			Else			
+				Select * From QyDSC_NotInAlt_NotInMdl Into QyDSC_NotInAlt_NotInMdl_NotUpd
+			End If
+			
+			Print "Creating alternatives for broken sanitary connections."
+		
+			Insert Into alt_dsc ( AltDSCID, MdlDSCid,LinkIDSan, DiscoClass, IsActive) Select 0, DSCID, 0, DiscoClass, 0 From QyDSC_NotInAlt_NotInMdl_NotUpd		
+			Drop Table QyDSC_NotInAlt_NotInMdl_NotUpd			
+		End If
+		Drop Table QyDSC_NotInAlt_NotInMdl
+		
+	End If
+	
+	Print "Finding broken storm connections."
+	Close Table QyDSC_NotInAlt
+	'Close Table QyDSC_NotInAlt_NotInMdl
+	
+
+	Select Mdl_DSC.DscId, Mdl_DSC.ToLinkStorm, Mdl_DSC.DiscoClass From Mdl_DSC, Alt_DSC Where Mdl_DSC.DscId = Alt_DSC.MdlDSCID into QyDSC_InAlt
+	If SelectionInfo(SEL_INFO_NROWS) > 0 Then
+		Run Menu Command 311 'M_QUERY_INVERTSELECT
+		Select DscId, ToLinkStorm, DiscoClass From SELECTION into QyDSC_NotInAlt
+		Commit Table QyDSC_NotInAlt as gTempDir & "QyDSC_NotInAlt.tab"
+		Close Table QyDSC_NotInAlt
+
+		Open Table gTempDir & "QyDSC_NotInAlt.tab"
+	Else
+		Select DscId, ToLinkStorm, DiscoClass From Mdl_DSC into qyMdl_DSC
+		Commit Table qyMdl_DSC As gTempDir & "QyDSC_NotInAlt.tab"
+		Close Table qyMdl_DSC
+		Open Table gTempDir & "QyDSC_NotInAlt.tab"		
+	End If	
+	Create Index On QyDSC_NotInAlt(ToLinkStorm)
+	
+	Select * from QyDSC_NotInAlt, mdl_Links_applied where ToLinkStorm=mdl_Links_applied.LinkID into QyDSC_NotInAlt_InMdl
+	Run Menu Command 311 'M_QUERY_INVERTSELECT
+	Select * from Selection Where DiscoClass = "D" into QyDSC_NotInAlt_NotInMdl
+		
+	'FIX: Exclude parcels connected to update pipes since the connection is still valid
+	If TableInfo(QyDSC_NotInAlt_NotInMdl, TAB_INFO_NROWS) > 0 Then		
+		Commit Table QyDSC_NotInAlt_NotInMdl as gTempDir & "QyDSC_NotInAlt_NotInMdl.tab"
+		Close Table QyDSC_NotInAlt_NotInMdl
+		Open Table gTempDir & "QyDSC_NotInAlt_NotInMdl.tab"
+		
+		Select * from QyDSC_NotInAlt_NotInMdl, alt_links_applied where QyDSC_NotInAlt_NotInMdl.ToLinkStorm = alt_links_applied.MdlLinkID and alt_links_applied.operation = "UPD" into QyDSC_NotInAlt_NotInMdl_Upd
+		
+		If TableInfo(QyDSC_NotInAlt_NotInMdl,TAB_INFO_NROWS) = SelectionInfo(SEL_INFO_NROWS) Then
+			Print "No DSCs to reconnect"
+		Else
+			'The statement "Run Menu Command 311" only works if at least 1 row is selected. If not, the invert selection operation fails and the query must be built manually
+			Run Menu Command 311 'M_QUERY_INVERTSELECT
+			If SelectionInfo(SEL_INFO_NROWS) > 0 Then				
+				Select * From selection Into QyDSC_NotInAlt_NotInMdl_NotUpd
+			Else
+				Select * From QyDSC_NotInAlt_NotInMdl Into QyDSC_NotInAlt_NotInMdl_NotUpd
+			End If
+				
+			Print "Creating alternatives for broken storm connections."
+	
+			Insert Into alt_dsc ( AltDSCID, MdlDSCid,LinkIDStorm, DiscoClass, IsActive) Select 0, DSCID, 0, DiscoClass, 0 From QyDSC_NotInAlt_NotInMdl_NotUpd
+			Drop Table QyDSC_NotInAlt_NotInMdl_NotUpd
+		End If
+	End If
+
+	Close Table QyDSC_InAlt
+	Close Table QyDSC_NotInAlt
+
+CALL MaxAltDscID
+
+	Select * from alt_Dsc where AltDSCID = 0 into QyUpdt
+	Update QyUpdt set AltDSCID = MaxDSCid + rowid
+		Close Table QyUpdt
+
+End Sub
+'---------------------------------------------------------
+sub MkZingTbl
+dim iTbl as integer
+
+	OnError goto skipTbl
+	
+	Print "Creating DSC Zinger Table..."
+	Select altDscID "altZingID" ,altDscID, altDscID "LinkID" from Alt_Dsc where rowid = -1 into qySaver 
+	Commit Table qySaver As gTempDir & "alt_Zing.tab" TYPE NATIVE Charset "WindowsLatin1"
+	Open Table gTempDir & "alt_zing.tab" interactive
+	Close Table qySaver
+	
+	Select * from Alt_Dsc where Str$(obj)="region" and IsActive = true into qyRunSet
+
+	FOR iTbl = 1 to tableinfo(qyRunSet,8)	
+		Select * from qyRunSet where rowid = iTbl into qyOneDsc	
+		Call MkZingerFromAltDscId(qyOneDsc.AltDscId)
+	NEXT
+	Close Table qyRunSet
+	'Close Table qyOneDsc
+	
+	Commit Table Alt_Zing
+	Add Map Layer alt_zing
+	Set Map Layer alt_zing Global Line (1,59,32960) 
+	Set Map Layer alt_zing Display Global
+
+Exit Sub
+skipTbl:
+	Print "ZingTbl: " + Err() + ": " + Error$()
+	Resume Next
+End Sub
+'---------------------------------------------------------
+sub EditSaveDSC
+
+	Commit table alt_speclinks interactive
+	Commit table alt_ssc interactive
+	Commit table alt_dsc interactive
+
+End Sub
+'---------------------------------------------------------
+sub EditRevertDSC
+
+	IF Ask(("Are you sure you wish to revert changes?"), "Yes", "No")=0 THEN
+			Exit Sub
+	END IF
+	Rollback table alt_speclinks
+	Rollback table alt_ssc
+	Rollback table alt_dsc
+	Rollback Table alt_zing
+
+End Sub
+'---------------------------------------------------------
+sub PipeAttribs
+
+	exDSN= Selection.DSnode
+	exUSN= Selection.USnode
+	exLTP= Selection.PipeFlowType
+	exDIA= Selection.DiamWidth
+	exHGT= Selection.Height
+	exUIE= Selection.USIE
+	exDIE= Selection.DSIE
+	exMAT= Selection.Material
+	exLEN= Selection.Length
+	exSPL= Selection.IsSpecLink
+
+	IF Selectioninfo(1) like "%mdl%" THEN
+		'Mdl obj variables
+		exLID= Selection.LinkID
+		exFTP= Selection.PipeFlowType
+		exSHP= Selection.Shape
+	ELSE 
+		'Alt obj variables
+		exAID= Selection.AltLinkID
+		exLID= Selection.MdlLinkdID
+		exSHP= Selection.PipeShape
+		exSOP= Selection.Operation
+	END IF
+	Print "Pipe Data Ready..."
+
+End Sub
+'---------------------------------------------------------
+sub MaxAltDscID
+
+	Select max(AltDscID) from alt_dsc into qyMaxAltDscID noselect
+		MaxDscID=qyMaxAltDscID.col1
+		Close Table qyMaxAltDscID
+End Sub
+'---------------------------------------------------------
+sub ParcelAttribs
+
+	exObj= Selection.Obj
+	exPID= Selection.DscID
+'	exPSan
+'	exPStorm
+
+'	exUSN= Selection.USnode
+'	exSOP= Selection.Operation
+
+	Print "Parcel Data Ready...UC!"
+
+End Sub
+'---------------------------------------------------------
+sub MkStubPt
+
+OnError GoTo RedirError
+
+dim dsX,dsY as float
+dim stubPt as object
+dim sSource, exLTYP, ExDiscoClass as string
+dim mdlPipCount, altPipCount, iOp as integer
+
+mdlPipCount=0
+altPipCount=0
+
+	Call SetStdCoordSys()
+	'Verify selected items is a DSC	
+	IF Selectioninfo(1) not like "%DSC%" THEN
+		Print "DSC Not selected."		
+	End If
+	Print "Flagging DSCFrom. " & Str$(SelectionInfo(3)) & " DSC(s) selected."
+	Select * from selection into QyTarget
+	'If the selected DSC is in mdl_dsc then read data...
+	IF Selectioninfo(1) like "%mdl%" THEN
+		Call RunStr("alt_dsc", "MdlDSCID", QyTarget.DscID, "QyAlreadyExists")
+		'...unless it has a corresponding entry in alt_dsc, in which case select that entry
+		If TableInfo(QyAlreadyExists, TAB_INFO_NROWS) <> 0 Then					
+			Print "You selected mdl_dsc, but entry already exists in alt_dsc. Switching to alt_dsc."
+			Select * From QyAlreadyExists into QyTarget
+		End If
+		iOp=1
+		sSource = "mdl"		
+	END IF
+	'If the selected DSC is in alt_dsc then read data...
+	IF Selectioninfo(1) like "%alt%" THEN
+		iOp=0
+		sSource = "alt"				
+	END IF
+				
+	'At this point, QyTarget contains the selected DSC(s), which may be in mdl_DSC or alt_DSC
+
+	IF iOp=1 THEN		
+		'DSC SELECTED FROM MDL_dsc
+		Print "Creating new entries in alt_DSC."
+		Dim j as integer
+		For j = 1 to TableInfo(QyTarget, TAB_INFO_NROWS)
+			CALL MaxAltDscID	
+			Select * From QyTarget Where RowId = j Into QyOneDSC			
+			Insert Into alt_dsc (AltDSCID, MdlDscID, DiscoClass, IsActive)
+				Select MaxDscID+1, QyOneDSC.DscID, QyOneDSC.DiscoClass, 1 From QyOneDSC
+		Next
+		Print "Selecting new entries from alt_DSC."
+		Select * From alt_dsc Where MdlDSCID in (select DscID From QyTarget) into qyDSCFrom
+		'Update qyDscFrom set obj = pObj
+		'Add Column "qyDscFrom" (obj)From mdl_DSC Set To obj Where MdlDSCID = DscID
+	END IF
+	
+	IF iOp=0 THEN
+		'DSC SELECTED FROM ALT_dsc
+		'Select * from alt_dsc where MdlDscID= LOTid into qyDscFrom
+		Print "Selecting existing entries from alt_DSC."
+		Select * from QyTarget into QyDSCFrom
+	END IF
+	
+	DscReady=1  
+				
+	'At this point, QyDscFrom contains the selected DSC(s), which are will be in alt_DSC
+	
+	'Finds the nearest selected link of the appropriate type,
+	'and sets the following variables:	
+	'exLID =qySetPipeTo.linkID
+	'sSource="mdl"
+	'exLTYP=qySetPipeTo.PipeFlowType
+	'LinkObj= qySetPipeTo.obj	
+	stubX = commandinfo(CMD_INFO_X)
+	stubY = commandinfo(CMD_INFO_Y)
+	Dim bufferDistance as Integer
+	Dim bufferIteration as Integer
+	bufferIteration = 0
+	bufferDistance = (MapperInfo(FindWindowIDByName("DSC Main Map"), MAPPER_INFO_MAXX) - MapperInfo(FindWindowIDByName("DSC Main Map"), MAPPER_INFO_MINX))/100
+	print "Buffer distance = " & bufferDistance & " ft."
+	
+	stubPt = createcircle(stubX,stubY,bufferDistance)
+	print "Click location = (" & stubX & "," & stubY & ")"
+
+	DO	
+		bufferIteration = bufferIteration + 1
+		stubPt = buffer(stubPt,12,bufferDistance, "ft")
+		print "Buffering Click Location. Distance = " & str$(bufferDistance * bufferIteration) & " ft."
+		IF bufferIteration > 4 THEN
+			DscReady=0
+			Note "No pipe found after 4 iterations.  No pipe within " & bufferDistance * bufferIteration & " ft."
+			Run Menu command 1701
+			Exit Sub			
+		END IF
+
+		IF sFlowTO = "toSAN" THEN
+			'CHECKING FOR NEAREST MDL SEGMENT TO STUB
+			Select * from mdl_links_applied where PipeFlowType in("C","S","IS","IC") and  obj intersects stubPt into qyMdlPipeTo
+				mdlPipCount=tableinfo(qyMdlPipeTo,8)
+	
+			'CHECKING FOR NEAREST ALT SEGMENT TO STUB
+			Select * from alt_links_applied where PipeFlowType in("C","S","IS","IC") and obj intersects stubPt into qyAltPipeTo
+				altPipCount = tableinfo(qyAltPipeTo,8)
+		END IF
+
+		IF sFlowTO = "toSTORM" THEN
+			'CHECKING FOR NEAREST MDL SEGMENT TO STUB
+			Select * from mdl_links_applied where PipeFlowType in("D","C") and  obj intersects stubPt into qyMdlPipeTo
+				mdlPipCount=tableinfo(qyMdlPipeTo,8)
+	
+			'CHECKING FOR NEAREST ALT SEGMENT TO STUB
+			Select * from alt_links_applied where PipeFlowType in("D","C") and obj intersects stubPt into qyAltPipeTo
+				altPipCount = tableinfo(qyAltPipeTo,8)
+		END IF
+		IF mdlPipCount>0 and altPIpCount=0 THEN
+			Select * from qyMdlPipeTo where rowid=1 into qySetPipeTo
+			exLID =qySetPipeTo.linkID
+			sSource="mdl"
+			exLTYP=qySetPipeTo.PipeFlowType
+			LinkObj= qySetPipeTo.obj
+
+			Close table qyMdlPipeTo
+			IF mdlPipCount>1 THEN
+				Note 	"Multiple possible connection point found." + Chr$(10) +
+						"Please verify alt_dsc table and adjust connectivity as needed."			 
+			END IF		
+			Exit Do
+		END IF
+
+		IF altPipCount>0 and mdlPipCount=0 THEN
+			Select * from qyAltPipeTo where rowid=1 into qySetPipeTo
+			exLID = qySetPipeTo.AltlinkID
+			sSource="alt"
+			exLTYP=qySetPipeTo.PipeFlowType
+			LinkObj= qySetPipeTo.obj
+
+			Close table qyAltPipeTo
+			IF altPipCount>1 THEN
+				Note 	"Multiple possible connection point found." + Chr$(10) +
+						"Please verify alt_dsc table and adjust connectivity as needed."			 
+			END IF		
+			Exit Do
+		END IF
+
+		IF mdlPipCount>0 and altPipCount>0 THEN
+			Select * from qyMdlPipeTo where rowid=1 into qySetPipeTo
+			exLID =qySetPipeTo.linkID
+			sSource="mdl"
+			exLTYP=qySetPipeTo.PipeFlowType
+			LinkObj= qySetPipeTo.obj
+
+			Close table qyMdlPipeTo
+			Note 	"Multiple possible connection point found." + Chr$(10) +
+						"Please verify alt_dsc table and adjust connectivity as needed."			 
+			Exit Do
+		END IF		
+
+	LOOP
+
+	dsX= objectnodeX(LinkObj,1,objectinfo(LinkObj,20))
+	dsY= objectnodeY(LinkObj,1,objectinfo(LinkObj,20))
+
+	stubDist=Distance(dsX,dsY,stubX,stubY, "FT")
+	print "Pipe selected, setting connectivity."
+	
+	For j = 1 to TableInfo(QyDscFrom, TAB_INFO_NROWS)		
+		Dim tempAltDscId as integer	
+		Select * From QyDscFrom Into QyOneDSC Where RowId = j			
+		Print "Setting Alt_DSC info for AltDscId=" & QyOneDSC.AltDscId
+		ExDiscoClass=QyOneDSC.DiscoClass
+		tempAltDscId = QyOneDSC.AltDscId
+		DO CASE sFlowTO	
+			Case "toSAN"
+				Update QyOneDSC set LinkIDSan = exLID, LinkSourceSAN = sSource, IsActive=1
+				Update QyOneDSC set ConnectFractionSAN = 1- Round(StubDist/objectLen(linkObj,"FT"), 0.001)
+				'IF ExDiscoClass in("C","S") THEN
+				'	Update QyOneDSC set isActiveStorm = 1
+				'END IF
+				'If currently connecting to a sanitary-only pipe, the DiscoClass should be "S" unless their is a valid storm connection
+				Select * From alt_links_applied Where AltLinkId In (Select LinkIDStorm From QyOneDSC Where LinkSourceStorm = "alt") Into QyToAlt
+				Select * From mdl_links_applied Where LinkId In (Select LinkIDStorm From QyOneDSC Where LinkSourceStorm = "mdl") Into QyToMdl					
+				If exLTYP = "S" and tableinfo(QyToMdl,8) + tableinfo(QyToAlt,8)= 0 Then
+					If VerifyDiscoClassChange("S", ExDiscoClass) Then
+						Print "Made sanitary connection, but no storm connection exists. Setting DiscoClass to 'S'"
+						Update QyOneDSC Set DiscoClass = "S"
+					End If
+				End If
+				If exLTYP = "C" and tableinfo(QyToMdl,8) + tableinfo(QyToAlt,8)= 0 Then
+					If VerifyDiscoClassChange("C", ExDiscoClass) Then
+						Print "Made combined connection, but no storm connection exists. Setting DiscoClass to 'C'"
+						Update QyOneDSC Set DiscoClass = "C"
+					End If					
+				End If
+			Case "toSTORM"
+				Update QyOneDSC set LinkIDStorm = exLID, LinkSourceStorm = sSource, IsActive=1
+				Update QyOneDSC set ConnectFractionSTORM = 1-Round(StubDist/objectLen(linkObj,"FT"), 0.001)
+				If VerifyDiscoClassChange("D", ExDiscoClass) Then
+						Print "Made storm connection, Setting DiscoClass to 'D'"
+						Update QyOneDSC Set DiscoClass = "D"
+				End If									
+		END CASE			
+		Call MkZingerFromAltDscId(tempAltDscId)
+	Next		
+
+	DscReady=0
+	Run Menu command 304
+	Run Menu command 1701
+
+exit sub
+RedirError:
+	Note "Error redirecting subcatchment: " & Error$()
+End Sub
+'---------------------------------------------------------
+sub SetGotoPipe
+
+EXIT SUB
+	IF NOT DscReady THEN
+		Note "Please select a DSC for flow redirection."
+		Exit sub
+	END IF
+	
+	IF NOT Selectioninfo(1) THEN
+		Note "Please select a Link for flow redirection!"
+		Exit sub
+	END IF
+	IF Selectioninfo(1) like "%links%" THEN
+		Print "Flagging PipeGOTO"
+		PipReady = 1
+		
+		Select * from Selection into qyPipeTO
+		Call PipeAttribs
+	
+		Update qyDscFrom set LinkIdSAN = exLID, 		ConnectFractionSan = stubDist, 
+		IsActiveN=1
+
+		Select * from alt_Dsc where altDSCid= MaxDscID+1 into QyTarget
+		Call MkZinger 		
+
+	ELSE
+		Note "Invalid selection. Please select a Link."
+		Exit sub
+	END IF
+ 
+End Sub
+'---------------------------------------------------------
+sub SetSanFLOW
+	if VerifyDSCSelection() = false then
+		exit sub
+	end if
+	sFlowTO = "toSAN"
+	CALL MkStubPt
+	sFlowTO = ""
+End Sub
+'---------------------------------------------------------
+sub SetStormFLOW
+	if VerifyDSCSelection() = false then
+		exit sub
+	end if
+	
+	sFlowTO = "toSTORM"
+	CALL MkStubPt
+	sFlowTO = ""
+End Sub
+'---------------------------------------------------------
+sub SetActive
+dim exSAN, exSANid, exSDid as integer
+dim ExDiscoClass as string
+
+	IF NOT Selectioninfo(1) THEN
+		Note "Select a DSC to activate/deactivate."
+		Exit sub
+	END IF
+	IF Selectioninfo(1) NOT like "%dsc%" THEN
+		Note "Please select a DSC to activate/deactivate."
+		Exit sub
+	END IF
+
+	IF Selectioninfo(1) like "%mdl_dsc%" THEN
+			pObj=selection.obj
+			LotID=selection.DscID
+			ExSANid= Selection.ToLinkSan
+			ExSDid = Selection.ToLinkStorm
+			ExDiscoClass = Selection.DiscoClass		
+
+			Select * from alt_dsc where MdlDSCid = LotID into QyChkAlt
+
+			IF tableinfo(QyChkAlt,8)= 0 THEN
+				CALL MaxAltDscID
+				Insert into alt_dsc(AltDSCID, MdlDscID,LinkIDSan,  LinkIDStorm, DiscoClass, IsActive) 
+								values(MaxDscID+1, LotID, 0, 0, ExDiscoClass, 1)
+	
+				Select * from Alt_dsc where AltDSCID= MaxDscID+1
+				update selection set obj = pObj 
+			ELSE
+				Select * from QyChkAlt
+		END IF
+
+	END IF
+	
+	IF Selectioninfo(1) like "%alt_dsc%" THEN
+		Select * From Selection into QyTargetDSC
+		ExSAN= QyTargetDSC.IsActive
+
+		IF ExSAN=1 THEN
+			Update QyTargetDSC set IsActive=0 
+			Close Table QyTargetDSC 
+			exit sub
+		END IF
+
+		IF ExSAN=0 THEN
+			ExSANid= QyTargetDSC.LinkIDSan
+			ExSDid= QyTargetDSC.LinkIDStorm
+			ExDiscoClass= QyTargetDSC.DiscoClass
+			LotID=QyTargetDSC.MdlDscID
+
+			Select * From alt_links_applied Where AltLinkId In (Select LinkIDSan From QyTargetDSC Where LinkSourceSan = "alt") Into QyToAlt
+			Select * From mdl_links_applied Where LinkId In (Select LinkIDSan From QyTargetDSC Where LinkSourceSan = "mdl") Into QyToMdl					
+			Print "LinkIDSan: " & ExSanID & ". LinkIDStorm: " & ExSDId & ". DiscoClass: " & ExDiscoClass
+			IF tableinfo(QyToMdl,8) + tableinfo(QyToAlt,8)= 0 THEN
+				Note "Cannot activate DSC. Connection point does not exist or not specified." + CHR$(10)+
+						"You must first redirect this subcatchment to a mdl_link or alt_link."
+				Exit Sub 
+			END IF
+			
+			Select * from alt_dsc where MdlDSCid = LotID into QyChkAlt
+
+			Update selection set IsActive=1 
+
+		END IF
+
+	END IF
+
+'RUN MENU COMMAND 304
+RUN MENU COMMAND 1701
+
+End Sub
+'---------------------------------------------------------
+'Assert: Table alt_zing exists
+Sub MkZingerFromAltDscId(ByVal UpdateAltDscId as integer)
+	OnError Goto ZingerFromDSCError
+	'TODO: Need to check if zinger table exists, if it does this crashes
+	If IsTableOpen("alt_zing") = FALSE Then
+		Print "Creating DSC Zinger Table..."
+		Select altDscID "altZingID" ,altDscID, altDscID "LinkID" from Alt_Dsc where rowid = -1 into qySaver 
+		Commit Table qySaver As gTempDir & "alt_Zing.tab" TYPE NATIVE Charset "WindowsLatin1"
+		Open Table gTempDir & "alt_zing.tab" interactive
+		Close Table qySaver
+	End If
+	Select * From Alt_Zing Where Alt_Zing.AltDscId = Val(Str$(UpdateAltDscId)) Into QyDelete
+	If TableInfo(QyDelete, TAB_INFO_NROWS) > 0 Then
+		Delete From QyDelete
+		Drop Table QyDelete
+		Commit Table Alt_Zing
+	End If	
+	
+	Select * From Alt_Dsc Where Alt_Dsc.AltDscId = Val(Str$(UpdateAltDscId)) Into QyUpdateDsc
+	Print "Creating Zinger: " & UpdateAltDscId & ", " & QyUpdateDsc.AltDscId & ", " & QyUpdateDsc.LinkIdSan & ", " & QyUpdateDsc.ConnectFractionSan
+	'Do sanitary zinger
+	If QyUpdateDsc.LinkSourceSan = "mdl" Then
+		Select * From QyUpdateDsc Where QyUpdateDsc.LinkIdSan In (Select LinkId From mdl_links) Into QyLinkInMdl
+	Else
+		Select * From QyUpdateDsc Where QyUpdateDsc.LinkIdSan In (Select AltLinkId From alt_links)Into QyLinkInMdl
+	End If
+	
+	If QyUpdateDsc.LinkSourceSan = "mdl" And TableInfo(QyLinkInMdl, TAB_INFO_NROWS) = 1 Then
+		Select QyUpdateDsc.MdlDscId, QyUpdateDsc.AltDscId, QyUpdateDsc.LinkIdSan "LinkId", "mdl" "LinkSource", QyUpdateDsc.ConnectFractionSan "ConnectFraction" From QyUpdateDsc Into QyTarget
+		Call MkZinger
+	ElseIf qyOneDsc.LinkSourceSan = "alt" And TableInfo(QyLinkInMdl, TAB_INFO_NROWS) = 1 Then
+		Select QyUpdateDsc.MdlDscId, QyUpdateDsc.AltDscId, QyUpdateDsc.LinkIdSan "LinkId", "alt" "LinkSource", QyUpdateDsc.ConnectFractionSan "ConnectFraction" From QyUpdateDsc Into QyTarget
+		Call MkZinger
+	End If
+	
+	'Do storm zinger
+	If QyUpdateDsc.LinkSourceStorm = "mdl" Then
+		Select * From QyUpdateDsc Where QyUpdateDsc.LinkIdStorm In (Select LinkId From mdl_links) Into QyLinkInMdl
+	Else
+		Select * From QyUpdateDsc Where QyUpdateDsc.LinkIdStorm In (Select AltLinkId From alt_links)Into QyLinkInMdl
+	End If
+	
+	If QyUpdateDsc.LinkSourceStorm = "mdl" And TableInfo(QyLinkInMdl, TAB_INFO_NROWS) = 1 Then
+		Select QyUpdateDsc.MdlDscId, QyUpdateDsc.AltDscId, QyUpdateDsc.LinkIdStorm "LinkId", "mdl" "LinkSource", QyUpdateDsc.ConnectFractionStorm "ConnectFraction" From QyUpdateDsc Into QyTarget
+		Call MkZinger
+	ElseIf QyUpdateDsc.LinkSourceStorm= "alt" And TableInfo(QyLinkInMdl, TAB_INFO_NROWS) = 1 Then
+		Select QyUpdateDsc.MdlDscId, QyUpdateDsc.AltDscId, QyUpdateDsc.LinkIdStorm "LinkId", "alt" "LinkSource", QyUpdateDsc.ConnectFractionStorm "ConnectFraction" From QyUpdateDsc Into QyTarget
+		Call MkZinger
+	End If		
+	Close Table QyLinkInMdl
+	Close Table QyUpdateDsc
+	
+	Exit Sub
+ZingerFromDSCError:
+	Print "DSC Error: " & Err$
+	Close Table QyLinkInMdl
+	Close Table QyUpdateDsc
+	
+End Sub
+'---------------------------------------------------------
+'Assert: Table qyTarget exists with the following fields:
+'	MdlDscId, AltDscId, LinkId, LinkSource, ConnectFraction
+sub MkZinger
+
+dim DscId,ZingId, AltDscId as integer
+dim DscObj as object
+dim Dostr, sourceCOL, sVal, sToTbl as string
+dim LinkId as integer
+dim LinkSource  as string
+dim SANsource, SDsource,SANtbl, SDtbl as string
+dim ConnectionFraction, Dist2Stub as float
+
+OnError GOTO noZinger
+LPTx=0
+LPTy=0
+		LOTx= centroidx(QyTarget.obj)
+		LOTy= centroidy(QyTarget.obj)
+		
+		DscObj= QyTarget.obj
+		DscId = QyTarget.MdlDscID
+		AltDscId = QyTarget.AltDscID
+		LinkId = QyTarget.LinkID
+		LinkSource = QyTarget.LinkSource
+		
+		ConnectionFraction = QyTarget.ConnectFraction		
+
+		Call MaxZingID
+
+		sToTbl= "QyPipeTo"
+		
+			maxZid = maxZid+1
+
+			If LinkSource = "mdl" Then
+				Select * From mdl_links Where mdl_links.LinkId = Val(Str$(LinkId)) Into qyPipeTo
+			Else
+				Select * From alt_links Where alt_links.AltLinkId = Val(Str$(LinkId)) Into qyPipeTo
+			End If
+			LinkObj= qyPipeTo.Obj
+						
+			Print "MaxZid=" & str$(maxZid) & ", " & "AltDscId=" & str$(AltDscId) & ", " & "LinkId=" & str$(LinkId) & "."			
+			Insert Into Alt_Zing Select maxZid, QyTarget.AltDscId, QyTarget.LinkId From QyTarget
+			
+			Select * from Alt_zing where AltZingID = maxZid into QyZing			
+						
+'			Update QyZing set object = outobj
+			Dist2Stub= (1 - ConnectionFraction) * objectlen(LinkObj, "ft")		
+			'Sets LPTx & LPTy to a point along LinkObj
+			CALL PointFromDS(LinkObj, Dist2Stub)
+			Update QyZing set object = CreateLine(LOTx,LOTy,LPTx,LPTy)
+			Update QyZing set object = ConvertToPline(obj)		
+
+	Close table QyTarget
+	Commit Table Alt_Zing
+
+Exit Sub
+noZinger:
+	Print "Make Zinger Error: " + Err() + ": " + Error$()		
+End Sub
+'---------------------------------------------------------
+sub MaxZingID
+
+	Select Max(altZingID) from alt_Zing into qyMaxZid
+	MaxZid=qyMaxZid.col1
+	Close Table QyMaxZid
+
+End Sub
+'---------------------------------------------------------
+Sub ToggleLabel
+	IF iLbl = 1 THEN
+		Set Map Layer 3 Label Auto On
+		Set Map Layer 3 Label Auto On
+	END IF
+	IF iLbl = 0 THEN
+		Set Map Layer 3 Label Auto On
+		Set Map Layer 3 Label Auto On
+	END IF
+		
+
+End Sub
+'---------------------------------------------------------
+sub RefreshDSCZingers
+
+Onerror goto skiprefresh
+
+	Drop table alt_Zing
+	
+	CALL MkZingTbl
+
+RUN MENU COMMAND 304
+RUN MENU COMMAND 1701
+
+exit sub
+
+skiprefresh:
+Resume NExt
+End Sub
+'---------------------------------------------------------
+sub PointFromDS(ByVal LineObj as object,ByVal fDist as float)
+dim BegX, BegY, EndX, EndY, objLen,ratio as float
+dim OutObj, TrimObj as object
+
+OnError goto skipDsPt
+
+'BegX= objectnodeX(LineObj,1,1)
+'BegY= objectnodeY(LineObj,1,1)
+EndX= objectnodeX(LineObj,1,objectinfo(LineObj,20))
+EndY= objectnodeY(LineObj,1,objectinfo(LineObj,20))
+
+TrimObj= createcircle(endX,EndY,fDist)
+
+OutObj=overlap(LineObj,TrimObj)
+
+LPTx = objectnodex(outObj,1,1)
+LPTy = objectnodey(outObj,1,1)
+
+Print "Zinger Geom: " & LPTx & " " & LPTY & " " & fDist
+
+Exit sub
+
+skipDsPt:
+	Print "DownstreamPt: " + Err() + ": " + Error$()
+		Resume Next
+End Sub
+'---------------------------------------------------------
+Function VerifyDSCSelection() as logical
+If Not SelectionInfo(1) Then
+	VerifyDSCSelection = false
+	Note "Please select a DSC to Redirect Flow"
+	exit function
+End If
+IF Selectioninfo(1) NOT like "%DSC%" THEN
+		Alter button ID 90008 uncheck
+		Run Menu Command 1701
+		Note "Please select a DSC to Redirect Flow"
+		VerifyDSCSelection = false
+		exit function
+	END IF
+	VerifyDSCSelection = true
+End Function
+'---------------------------------------------------------
+Function VerifyDiscoClassChange(ByVal newDisco as string, ByVal oldDisco as string) as logical
+
+	If oldDisco = newDisco Or Not alwaysVerifyDiscoClass Then
+		VerifyDiscoClassChange = true
+		Exit Function
+	End If
+	
+	Dialog
+		Title "DiscoClass Warning"
+		Width 200 Height 100
+		Control StaticText
+			Position 1,1
+
+			Width 190 Height 60
+			Title "Would you like to change the DiscoClass to be consistent with the new connection?" & Chr$(10) & Chr$(10) &
+			"DSC DiscoClass will be changed from " & oldDisco & " to " & newDisco & "." & Chr$(10) & Chr$(10) & 
+			"(Note: You may later manually specify the DiscoClass by modifying the alt_dsc table.)"			
+		Control OKButton 
+			Position 55, 65
+			ID 50000
+			Title "&Yes"			
+		Control CancelButton 
+			Position 95, 65
+			ID 50001
+			Title "&No"			
+		Control CheckBox
+			Position 1, 85
+			ID 50002
+			Title "&Always prompt me to change DiscoClass"
+			Value TRUE
+			Into alwaysVerifyDiscoClass
+	
+	VerifyDiscoClassChange = CommandInfo( CMD_INFO_DLG_OK )
+		
+End Function
