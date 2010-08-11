@@ -477,13 +477,17 @@
             this.fKSURVEYPAGEVIEWBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.fKVIEWSUBWATERSHEDBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.fKSUBWATERSHEDWATERSHEDBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.sWSPWATERSHEDBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.sANDBOXDataSet = new SWI_2.SANDBOXDataSet();
             this.tabControlDitchesCulvertsPipes = new System.Windows.Forms.TabControl();
             this.tabPagePipes = new System.Windows.Forms.TabPage();
             this.ultraNumericEditorPipesInnerWidth = new Infragistics.Win.UltraWinEditors.UltraNumericEditor();
             this.ultraLabelInnerWidth = new Infragistics.Win.Misc.UltraLabel();
             this.ultraComboPipesShape = new Infragistics.Win.UltraWinGrid.UltraCombo();
             this.fKPIPESURVEYPAGEBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.sWSPSHAPETYPEBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.ultraComboPipesMaterial = new Infragistics.Win.UltraWinGrid.UltraCombo();
+            this.sWSPMATERIALTYPEBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.ultraNumericEditorPipesInnerDiameter = new Infragistics.Win.UltraWinEditors.UltraNumericEditor();
             this.ultraNumericEditorPipesDSDepth = new Infragistics.Win.UltraWinEditors.UltraNumericEditor();
             this.ultraNumericEditorPipesUSDepth = new Infragistics.Win.UltraWinEditors.UltraNumericEditor();
@@ -501,6 +505,8 @@
             this.buttonPipesAdd = new System.Windows.Forms.Button();
             this.buttonPipesDelete = new System.Windows.Forms.Button();
             this.dataGridViewPipes = new System.Windows.Forms.DataGridView();
+            this.usnodeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dsnodeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPageDitches = new System.Windows.Forms.TabPage();
             this.textBoxDitchesUSNode = new System.Windows.Forms.TextBox();
             this.fKDITCHSURVEYPAGEBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -508,6 +514,7 @@
             this.textBoxDitchesDSNode = new System.Windows.Forms.TextBox();
             this.labelDitchesDSNode = new System.Windows.Forms.Label();
             this.ultraComboDitchesFacingDirection = new Infragistics.Win.UltraWinGrid.UltraCombo();
+            this.sWSPFACINGTYPEBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.ultraComboDitchesMaterial = new Infragistics.Win.UltraWinGrid.UltraCombo();
             this.ultraNumericEditorDitchesBottomWidth = new Infragistics.Win.UltraWinEditors.UltraNumericEditor();
             this.ultraNumericEditorDitchesTopWidth = new Infragistics.Win.UltraWinEditors.UltraNumericEditor();
@@ -526,6 +533,7 @@
             this.dataGridViewDitches = new System.Windows.Forms.DataGridView();
             this.us_node = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ds_node = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nodeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPageCulverts = new System.Windows.Forms.TabPage();
             this.textBoxCulvertsDSNode = new System.Windows.Forms.TextBox();
             this.fKCULVERTSURVEYPAGEBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
@@ -540,6 +548,7 @@
             this.buttonUpdateCulvert = new System.Windows.Forms.Button();
             this.buttonCulvertsViewAddPhotos = new System.Windows.Forms.Button();
             this.comboBoxCulvertsType = new System.Windows.Forms.ComboBox();
+            this.sWSPCULVERTOPENINGTYPEBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.textBoxCulvertsMeasuredNode = new System.Windows.Forms.TextBox();
             this.labelCulvertsMeasuredNode = new System.Windows.Forms.Label();
             this.labelCulvertsFacingDirection = new System.Windows.Forms.Label();
@@ -553,6 +562,7 @@
             this.dataGridViewCulverts = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nodeDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fKCULVERTFACINGTYPEBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.menuStripMainForm = new System.Windows.Forms.MenuStrip();
             this.fIleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -583,17 +593,7 @@
             this.fKPIPEMATERIALTYPEBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.fKPIPEMATERIALTYPEBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.ultraDateTimeEditorSurveyDate = new Infragistics.Win.UltraWinEditors.UltraDateTimeEditor();
-            this.sWSPWATERSHEDBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.sANDBOXDataSet = new SWI_2.SANDBOXDataSet();
             this.checkedListBoxEvaluators = new System.Windows.Forms.CheckedListBox();
-            this.sWSPSHAPETYPEBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.sWSPMATERIALTYPEBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.usnodeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dsnodeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sWSPFACINGTYPEBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.nodeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sWSPCULVERTOPENINGTYPEBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.nodeDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sWSPFACINGTYPEBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.sWSPPHOTOBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.sWSPCULVERTBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -625,12 +625,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.fKSURVEYPAGEVIEWBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fKVIEWSUBWATERSHEDBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fKSUBWATERSHEDWATERSHEDBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sWSPWATERSHEDBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sANDBOXDataSet)).BeginInit();
             this.tabControlDitchesCulvertsPipes.SuspendLayout();
             this.tabPagePipes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ultraNumericEditorPipesInnerWidth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ultraComboPipesShape)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fKPIPESURVEYPAGEBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sWSPSHAPETYPEBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ultraComboPipesMaterial)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sWSPMATERIALTYPEBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ultraNumericEditorPipesInnerDiameter)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ultraNumericEditorPipesDSDepth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ultraNumericEditorPipesUSDepth)).BeginInit();
@@ -638,6 +642,7 @@
             this.tabPageDitches.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fKDITCHSURVEYPAGEBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ultraComboDitchesFacingDirection)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sWSPFACINGTYPEBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ultraComboDitchesMaterial)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ultraNumericEditorDitchesBottomWidth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ultraNumericEditorDitchesTopWidth)).BeginInit();
@@ -650,6 +655,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.ultraComboCulvertsMaterial)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ultraNumericEditorCulvertsUnobstructedHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ultraNumericEditorCulvertsFullDepth)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sWSPCULVERTOPENINGTYPEBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCulverts)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fKCULVERTFACINGTYPEBindingSource)).BeginInit();
             this.menuStripMainForm.SuspendLayout();
@@ -658,12 +664,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.fKPIPEMATERIALTYPEBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fKPIPEMATERIALTYPEBindingSource2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ultraDateTimeEditorSurveyDate)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sWSPWATERSHEDBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sANDBOXDataSet)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sWSPSHAPETYPEBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sWSPMATERIALTYPEBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sWSPFACINGTYPEBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sWSPCULVERTOPENINGTYPEBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sWSPFACINGTYPEBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sWSPPHOTOBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sWSPCULVERTBindingSource)).BeginInit();
@@ -713,6 +713,16 @@
             this.fKSUBWATERSHEDWATERSHEDBindingSource.DataMember = "FK_SUBWATERSHED_WATERSHED";
             this.fKSUBWATERSHEDWATERSHEDBindingSource.DataSource = this.sWSPWATERSHEDBindingSource;
             // 
+            // sWSPWATERSHEDBindingSource
+            // 
+            this.sWSPWATERSHEDBindingSource.DataMember = "SWSP_WATERSHED";
+            this.sWSPWATERSHEDBindingSource.DataSource = this.sANDBOXDataSet;
+            // 
+            // sANDBOXDataSet
+            // 
+            this.sANDBOXDataSet.DataSetName = "SANDBOXDataSet";
+            this.sANDBOXDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
             // tabControlDitchesCulvertsPipes
             // 
             this.tabControlDitchesCulvertsPipes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
@@ -761,20 +771,20 @@
             // 
             // ultraNumericEditorPipesInnerWidth
             // 
-            this.ultraNumericEditorPipesInnerWidth.Location = new System.Drawing.Point(686, 81);
+            this.ultraNumericEditorPipesInnerWidth.Location = new System.Drawing.Point(543, 81);
             this.ultraNumericEditorPipesInnerWidth.MaskInput = "{LOC}nnnnnnn.nn";
             this.ultraNumericEditorPipesInnerWidth.Name = "ultraNumericEditorPipesInnerWidth";
             this.ultraNumericEditorPipesInnerWidth.NumericType = Infragistics.Win.UltraWinEditors.NumericType.Double;
             this.ultraNumericEditorPipesInnerWidth.Size = new System.Drawing.Size(83, 21);
-            this.ultraNumericEditorPipesInnerWidth.TabIndex = 74;
+            this.ultraNumericEditorPipesInnerWidth.TabIndex = 65;
             // 
             // ultraLabelInnerWidth
             // 
-            this.ultraLabelInnerWidth.Location = new System.Drawing.Point(686, 65);
+            this.ultraLabelInnerWidth.Location = new System.Drawing.Point(543, 65);
             this.ultraLabelInnerWidth.Name = "ultraLabelInnerWidth";
-            this.ultraLabelInnerWidth.Size = new System.Drawing.Size(81, 16);
+            this.ultraLabelInnerWidth.Size = new System.Drawing.Size(85, 16);
             this.ultraLabelInnerWidth.TabIndex = 73;
-            this.ultraLabelInnerWidth.Text = "Inner Width (in)";
+            this.ultraLabelInnerWidth.Text = "Inner Height (in)";
             // 
             // ultraComboPipesShape
             // 
@@ -964,10 +974,10 @@
             this.ultraComboPipesShape.DisplayLayout.ScrollStyle = Infragistics.Win.UltraWinGrid.ScrollStyle.Immediate;
             this.ultraComboPipesShape.DisplayLayout.ViewStyleBand = Infragistics.Win.UltraWinGrid.ViewStyleBand.OutlookGroupBy;
             this.ultraComboPipesShape.DisplayMember = "shape";
-            this.ultraComboPipesShape.Location = new System.Drawing.Point(881, 80);
+            this.ultraComboPipesShape.Location = new System.Drawing.Point(738, 80);
             this.ultraComboPipesShape.Name = "ultraComboPipesShape";
             this.ultraComboPipesShape.Size = new System.Drawing.Size(100, 22);
-            this.ultraComboPipesShape.TabIndex = 68;
+            this.ultraComboPipesShape.TabIndex = 67;
             this.ultraComboPipesShape.Text = "ultraComboPipesShape";
             this.ultraComboPipesShape.ValueMember = "shape_type_id";
             // 
@@ -975,6 +985,11 @@
             // 
             this.fKPIPESURVEYPAGEBindingSource.DataMember = "FK_PIPE_SURVEY_PAGE";
             this.fKPIPESURVEYPAGEBindingSource.DataSource = this.fKSURVEYPAGEVIEWBindingSource;
+            // 
+            // sWSPSHAPETYPEBindingSource
+            // 
+            this.sWSPSHAPETYPEBindingSource.DataMember = "SWSP_SHAPE_TYPE";
+            this.sWSPSHAPETYPEBindingSource.DataSource = this.sANDBOXDataSet;
             // 
             // ultraComboPipesMaterial
             // 
@@ -1212,45 +1227,50 @@
             this.ultraComboPipesMaterial.DisplayLayout.ScrollStyle = Infragistics.Win.UltraWinGrid.ScrollStyle.Immediate;
             this.ultraComboPipesMaterial.DisplayLayout.ViewStyleBand = Infragistics.Win.UltraWinGrid.ViewStyleBand.OutlookGroupBy;
             this.ultraComboPipesMaterial.DisplayMember = "material";
-            this.ultraComboPipesMaterial.Location = new System.Drawing.Point(775, 81);
+            this.ultraComboPipesMaterial.Location = new System.Drawing.Point(632, 81);
             this.ultraComboPipesMaterial.Name = "ultraComboPipesMaterial";
             this.ultraComboPipesMaterial.Size = new System.Drawing.Size(98, 22);
-            this.ultraComboPipesMaterial.TabIndex = 67;
+            this.ultraComboPipesMaterial.TabIndex = 666;
             this.ultraComboPipesMaterial.Text = "ultraComboPipesMaterial";
             this.ultraComboPipesMaterial.ValueMember = "material_type_id";
+            // 
+            // sWSPMATERIALTYPEBindingSource
+            // 
+            this.sWSPMATERIALTYPEBindingSource.DataMember = "SWSP_MATERIAL_TYPE";
+            this.sWSPMATERIALTYPEBindingSource.DataSource = this.sANDBOXDataSet;
             // 
             // ultraNumericEditorPipesInnerDiameter
             // 
             this.ultraNumericEditorPipesInnerDiameter.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.fKPIPESURVEYPAGEBindingSource, "inside_diam_in", true));
-            this.ultraNumericEditorPipesInnerDiameter.Location = new System.Drawing.Point(593, 81);
+            this.ultraNumericEditorPipesInnerDiameter.Location = new System.Drawing.Point(450, 81);
             this.ultraNumericEditorPipesInnerDiameter.MaskInput = "{LOC}nnnnnnn.nn";
             this.ultraNumericEditorPipesInnerDiameter.Name = "ultraNumericEditorPipesInnerDiameter";
             this.ultraNumericEditorPipesInnerDiameter.Nullable = true;
             this.ultraNumericEditorPipesInnerDiameter.NumericType = Infragistics.Win.UltraWinEditors.NumericType.Double;
             this.ultraNumericEditorPipesInnerDiameter.Size = new System.Drawing.Size(90, 21);
-            this.ultraNumericEditorPipesInnerDiameter.TabIndex = 66;
+            this.ultraNumericEditorPipesInnerDiameter.TabIndex = 64;
             // 
             // ultraNumericEditorPipesDSDepth
             // 
             this.ultraNumericEditorPipesDSDepth.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.fKPIPESURVEYPAGEBindingSource, "ds_depth_in", true));
-            this.ultraNumericEditorPipesDSDepth.Location = new System.Drawing.Point(519, 81);
+            this.ultraNumericEditorPipesDSDepth.Location = new System.Drawing.Point(916, 81);
             this.ultraNumericEditorPipesDSDepth.MaskInput = "{LOC}-nnnn.nn";
             this.ultraNumericEditorPipesDSDepth.Name = "ultraNumericEditorPipesDSDepth";
             this.ultraNumericEditorPipesDSDepth.Nullable = true;
             this.ultraNumericEditorPipesDSDepth.NumericType = Infragistics.Win.UltraWinEditors.NumericType.Double;
             this.ultraNumericEditorPipesDSDepth.Size = new System.Drawing.Size(68, 21);
-            this.ultraNumericEditorPipesDSDepth.TabIndex = 65;
+            this.ultraNumericEditorPipesDSDepth.TabIndex = 69;
             // 
             // ultraNumericEditorPipesUSDepth
             // 
             this.ultraNumericEditorPipesUSDepth.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.fKPIPESURVEYPAGEBindingSource, "us_depth_in", true));
-            this.ultraNumericEditorPipesUSDepth.Location = new System.Drawing.Point(447, 81);
+            this.ultraNumericEditorPipesUSDepth.Location = new System.Drawing.Point(844, 81);
             this.ultraNumericEditorPipesUSDepth.MaskInput = "{LOC}-nnnn.nn";
             this.ultraNumericEditorPipesUSDepth.Name = "ultraNumericEditorPipesUSDepth";
             this.ultraNumericEditorPipesUSDepth.Nullable = true;
             this.ultraNumericEditorPipesUSDepth.NumericType = Infragistics.Win.UltraWinEditors.NumericType.Double;
             this.ultraNumericEditorPipesUSDepth.Size = new System.Drawing.Size(66, 21);
-            this.ultraNumericEditorPipesUSDepth.TabIndex = 64;
+            this.ultraNumericEditorPipesUSDepth.TabIndex = 68;
             // 
             // buttonUpdatePipe
             // 
@@ -1277,7 +1297,7 @@
             // labelPipesShape
             // 
             this.labelPipesShape.AutoSize = true;
-            this.labelPipesShape.Location = new System.Drawing.Point(878, 66);
+            this.labelPipesShape.Location = new System.Drawing.Point(735, 66);
             this.labelPipesShape.Name = "labelPipesShape";
             this.labelPipesShape.Size = new System.Drawing.Size(38, 13);
             this.labelPipesShape.TabIndex = 66;
@@ -1286,7 +1306,7 @@
             // labelPipesInnerDiameter
             // 
             this.labelPipesInnerDiameter.AutoSize = true;
-            this.labelPipesInnerDiameter.Location = new System.Drawing.Point(590, 66);
+            this.labelPipesInnerDiameter.Location = new System.Drawing.Point(447, 66);
             this.labelPipesInnerDiameter.Name = "labelPipesInnerDiameter";
             this.labelPipesInnerDiameter.Size = new System.Drawing.Size(93, 13);
             this.labelPipesInnerDiameter.TabIndex = 65;
@@ -1333,7 +1353,7 @@
             // labelMaterial
             // 
             this.labelMaterial.AutoSize = true;
-            this.labelMaterial.Location = new System.Drawing.Point(772, 66);
+            this.labelMaterial.Location = new System.Drawing.Point(629, 66);
             this.labelMaterial.Name = "labelMaterial";
             this.labelMaterial.Size = new System.Drawing.Size(44, 13);
             this.labelMaterial.TabIndex = 57;
@@ -1342,7 +1362,7 @@
             // labelPipesDSDepth
             // 
             this.labelPipesDSDepth.AutoSize = true;
-            this.labelPipesDSDepth.Location = new System.Drawing.Point(516, 65);
+            this.labelPipesDSDepth.Location = new System.Drawing.Point(913, 65);
             this.labelPipesDSDepth.Name = "labelPipesDSDepth";
             this.labelPipesDSDepth.Size = new System.Drawing.Size(71, 13);
             this.labelPipesDSDepth.TabIndex = 56;
@@ -1351,7 +1371,7 @@
             // labelPipesUSDepth
             // 
             this.labelPipesUSDepth.AutoSize = true;
-            this.labelPipesUSDepth.Location = new System.Drawing.Point(444, 65);
+            this.labelPipesUSDepth.Location = new System.Drawing.Point(841, 65);
             this.labelPipesUSDepth.Name = "labelPipesUSDepth";
             this.labelPipesUSDepth.Size = new System.Drawing.Size(69, 13);
             this.labelPipesUSDepth.TabIndex = 55;
@@ -1395,6 +1415,20 @@
             this.dataGridViewPipes.ReadOnly = true;
             this.dataGridViewPipes.Size = new System.Drawing.Size(248, 159);
             this.dataGridViewPipes.TabIndex = 44;
+            // 
+            // usnodeDataGridViewTextBoxColumn
+            // 
+            this.usnodeDataGridViewTextBoxColumn.DataPropertyName = "us_node";
+            this.usnodeDataGridViewTextBoxColumn.HeaderText = "US Node";
+            this.usnodeDataGridViewTextBoxColumn.Name = "usnodeDataGridViewTextBoxColumn";
+            this.usnodeDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // dsnodeDataGridViewTextBoxColumn
+            // 
+            this.dsnodeDataGridViewTextBoxColumn.DataPropertyName = "ds_node";
+            this.dsnodeDataGridViewTextBoxColumn.HeaderText = "DS Node";
+            this.dsnodeDataGridViewTextBoxColumn.Name = "dsnodeDataGridViewTextBoxColumn";
+            this.dsnodeDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // tabPageDitches
             // 
@@ -1666,6 +1700,11 @@
             this.ultraComboDitchesFacingDirection.ValueMember = "facing_type_id";
             this.ultraComboDitchesFacingDirection.Visible = false;
             // 
+            // sWSPFACINGTYPEBindingSource
+            // 
+            this.sWSPFACINGTYPEBindingSource.DataMember = "SWSP_FACING_TYPE";
+            this.sWSPFACINGTYPEBindingSource.DataSource = this.sANDBOXDataSet;
+            // 
             // ultraComboDitchesMaterial
             // 
             this.ultraComboDitchesMaterial.CheckedListSettings.CheckStateMember = "";
@@ -1902,45 +1941,45 @@
             this.ultraComboDitchesMaterial.DisplayLayout.ScrollStyle = Infragistics.Win.UltraWinGrid.ScrollStyle.Immediate;
             this.ultraComboDitchesMaterial.DisplayLayout.ViewStyleBand = Infragistics.Win.UltraWinGrid.ViewStyleBand.OutlookGroupBy;
             this.ultraComboDitchesMaterial.DisplayMember = "material";
-            this.ultraComboDitchesMaterial.Location = new System.Drawing.Point(850, 79);
+            this.ultraComboDitchesMaterial.Location = new System.Drawing.Point(846, 79);
             this.ultraComboDitchesMaterial.Name = "ultraComboDitchesMaterial";
             this.ultraComboDitchesMaterial.Size = new System.Drawing.Size(107, 22);
-            this.ultraComboDitchesMaterial.TabIndex = 63;
+            this.ultraComboDitchesMaterial.TabIndex = 62;
             this.ultraComboDitchesMaterial.Text = "ultraComboDitchesMaterial";
             this.ultraComboDitchesMaterial.ValueMember = "material_type_id";
             // 
             // ultraNumericEditorDitchesBottomWidth
             // 
             this.ultraNumericEditorDitchesBottomWidth.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.fKDITCHSURVEYPAGEBindingSource, "bottom_width_in", true));
-            this.ultraNumericEditorDitchesBottomWidth.Location = new System.Drawing.Point(737, 80);
+            this.ultraNumericEditorDitchesBottomWidth.Location = new System.Drawing.Point(620, 80);
             this.ultraNumericEditorDitchesBottomWidth.MaskInput = "{LOC}-nnnnnnnnnn.nn";
             this.ultraNumericEditorDitchesBottomWidth.Name = "ultraNumericEditorDitchesBottomWidth";
             this.ultraNumericEditorDitchesBottomWidth.Nullable = true;
             this.ultraNumericEditorDitchesBottomWidth.NumericType = Infragistics.Win.UltraWinEditors.NumericType.Double;
             this.ultraNumericEditorDitchesBottomWidth.Size = new System.Drawing.Size(107, 21);
-            this.ultraNumericEditorDitchesBottomWidth.TabIndex = 62;
+            this.ultraNumericEditorDitchesBottomWidth.TabIndex = 60;
             // 
             // ultraNumericEditorDitchesTopWidth
             // 
             this.ultraNumericEditorDitchesTopWidth.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.fKDITCHSURVEYPAGEBindingSource, "top_width_in", true));
-            this.ultraNumericEditorDitchesTopWidth.Location = new System.Drawing.Point(624, 80);
+            this.ultraNumericEditorDitchesTopWidth.Location = new System.Drawing.Point(507, 80);
             this.ultraNumericEditorDitchesTopWidth.MaskInput = "{LOC}-nnnnnnnnnn.nn";
             this.ultraNumericEditorDitchesTopWidth.Name = "ultraNumericEditorDitchesTopWidth";
             this.ultraNumericEditorDitchesTopWidth.Nullable = true;
             this.ultraNumericEditorDitchesTopWidth.NumericType = Infragistics.Win.UltraWinEditors.NumericType.Double;
             this.ultraNumericEditorDitchesTopWidth.Size = new System.Drawing.Size(107, 21);
-            this.ultraNumericEditorDitchesTopWidth.TabIndex = 61;
+            this.ultraNumericEditorDitchesTopWidth.TabIndex = 59;
             // 
             // ultraNumericEditorDitchesDepth
             // 
             this.ultraNumericEditorDitchesDepth.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.fKDITCHSURVEYPAGEBindingSource, "depth_in", true));
-            this.ultraNumericEditorDitchesDepth.Location = new System.Drawing.Point(508, 80);
+            this.ultraNumericEditorDitchesDepth.Location = new System.Drawing.Point(733, 80);
             this.ultraNumericEditorDitchesDepth.MaskInput = "{LOC}-nnnnnnnnnn.nn";
             this.ultraNumericEditorDitchesDepth.Name = "ultraNumericEditorDitchesDepth";
             this.ultraNumericEditorDitchesDepth.Nullable = true;
             this.ultraNumericEditorDitchesDepth.NumericType = Infragistics.Win.UltraWinEditors.NumericType.Double;
             this.ultraNumericEditorDitchesDepth.Size = new System.Drawing.Size(107, 21);
-            this.ultraNumericEditorDitchesDepth.TabIndex = 60;
+            this.ultraNumericEditorDitchesDepth.TabIndex = 61;
             // 
             // buttonUpdateDitch
             // 
@@ -1996,7 +2035,7 @@
             // labelDitchesMaterial
             // 
             this.labelDitchesMaterial.AutoSize = true;
-            this.labelDitchesMaterial.Location = new System.Drawing.Point(847, 65);
+            this.labelDitchesMaterial.Location = new System.Drawing.Point(843, 65);
             this.labelDitchesMaterial.Name = "labelDitchesMaterial";
             this.labelDitchesMaterial.Size = new System.Drawing.Size(44, 13);
             this.labelDitchesMaterial.TabIndex = 53;
@@ -2005,7 +2044,7 @@
             // labelDitchesBottomWidth
             // 
             this.labelDitchesBottomWidth.AutoSize = true;
-            this.labelDitchesBottomWidth.Location = new System.Drawing.Point(734, 65);
+            this.labelDitchesBottomWidth.Location = new System.Drawing.Point(617, 65);
             this.labelDitchesBottomWidth.Name = "labelDitchesBottomWidth";
             this.labelDitchesBottomWidth.Size = new System.Drawing.Size(85, 13);
             this.labelDitchesBottomWidth.TabIndex = 51;
@@ -2014,7 +2053,7 @@
             // labelDitchesTopWidth
             // 
             this.labelDitchesTopWidth.AutoSize = true;
-            this.labelDitchesTopWidth.Location = new System.Drawing.Point(621, 65);
+            this.labelDitchesTopWidth.Location = new System.Drawing.Point(504, 65);
             this.labelDitchesTopWidth.Name = "labelDitchesTopWidth";
             this.labelDitchesTopWidth.Size = new System.Drawing.Size(71, 13);
             this.labelDitchesTopWidth.TabIndex = 50;
@@ -2023,11 +2062,11 @@
             // labelDitchesDepth
             // 
             this.labelDitchesDepth.AutoSize = true;
-            this.labelDitchesDepth.Location = new System.Drawing.Point(508, 65);
+            this.labelDitchesDepth.Location = new System.Drawing.Point(733, 65);
             this.labelDitchesDepth.Name = "labelDitchesDepth";
-            this.labelDitchesDepth.Size = new System.Drawing.Size(53, 13);
+            this.labelDitchesDepth.Size = new System.Drawing.Size(55, 13);
             this.labelDitchesDepth.TabIndex = 49;
-            this.labelDitchesDepth.Text = "Depth (in)";
+            this.labelDitchesDepth.Text = "Height (in)";
             // 
             // buttonDitchesAdd
             // 
@@ -2084,6 +2123,14 @@
             this.ds_node.Name = "ds_node";
             this.ds_node.ReadOnly = true;
             this.ds_node.Width = 66;
+            // 
+            // nodeDataGridViewTextBoxColumn
+            // 
+            this.nodeDataGridViewTextBoxColumn.DataPropertyName = "node";
+            this.nodeDataGridViewTextBoxColumn.HeaderText = "Measured";
+            this.nodeDataGridViewTextBoxColumn.Name = "nodeDataGridViewTextBoxColumn";
+            this.nodeDataGridViewTextBoxColumn.ReadOnly = true;
+            this.nodeDataGridViewTextBoxColumn.Width = 66;
             // 
             // tabPageCulverts
             // 
@@ -2349,10 +2396,10 @@
             this.ultraComboCulvertsShape.DisplayLayout.ScrollStyle = Infragistics.Win.UltraWinGrid.ScrollStyle.Immediate;
             this.ultraComboCulvertsShape.DisplayLayout.ViewStyleBand = Infragistics.Win.UltraWinGrid.ViewStyleBand.OutlookGroupBy;
             this.ultraComboCulvertsShape.DisplayMember = "shape";
-            this.ultraComboCulvertsShape.Location = new System.Drawing.Point(941, 79);
+            this.ultraComboCulvertsShape.Location = new System.Drawing.Point(517, 77);
             this.ultraComboCulvertsShape.Name = "ultraComboCulvertsShape";
             this.ultraComboCulvertsShape.Size = new System.Drawing.Size(95, 22);
-            this.ultraComboCulvertsShape.TabIndex = 49;
+            this.ultraComboCulvertsShape.TabIndex = 44;
             this.ultraComboCulvertsShape.Text = "ultraComboCulvertsShape";
             this.ultraComboCulvertsShape.ValueMember = "shape_type_id";
             // 
@@ -2788,34 +2835,34 @@
             this.ultraComboCulvertsMaterial.DisplayLayout.ScrollStyle = Infragistics.Win.UltraWinGrid.ScrollStyle.Immediate;
             this.ultraComboCulvertsMaterial.DisplayLayout.ViewStyleBand = Infragistics.Win.UltraWinGrid.ViewStyleBand.OutlookGroupBy;
             this.ultraComboCulvertsMaterial.DisplayMember = "material";
-            this.ultraComboCulvertsMaterial.Location = new System.Drawing.Point(835, 79);
+            this.ultraComboCulvertsMaterial.Location = new System.Drawing.Point(838, 77);
             this.ultraComboCulvertsMaterial.Name = "ultraComboCulvertsMaterial";
             this.ultraComboCulvertsMaterial.Size = new System.Drawing.Size(100, 22);
-            this.ultraComboCulvertsMaterial.TabIndex = 48;
+            this.ultraComboCulvertsMaterial.TabIndex = 47;
             this.ultraComboCulvertsMaterial.Text = "ultraComboCulvertsMaterial";
             this.ultraComboCulvertsMaterial.ValueMember = "material_type_id";
             // 
             // ultraNumericEditorCulvertsUnobstructedHeight
             // 
             this.ultraNumericEditorCulvertsUnobstructedHeight.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.fKCULVERTSURVEYPAGEBindingSource1, "unobstructed_height_in", true));
-            this.ultraNumericEditorCulvertsUnobstructedHeight.Location = new System.Drawing.Point(709, 79);
+            this.ultraNumericEditorCulvertsUnobstructedHeight.Location = new System.Drawing.Point(712, 77);
             this.ultraNumericEditorCulvertsUnobstructedHeight.MaskInput = "{LOC}-nnnnnnnnnn.nn";
             this.ultraNumericEditorCulvertsUnobstructedHeight.Name = "ultraNumericEditorCulvertsUnobstructedHeight";
             this.ultraNumericEditorCulvertsUnobstructedHeight.Nullable = true;
             this.ultraNumericEditorCulvertsUnobstructedHeight.NumericType = Infragistics.Win.UltraWinEditors.NumericType.Double;
             this.ultraNumericEditorCulvertsUnobstructedHeight.Size = new System.Drawing.Size(120, 21);
-            this.ultraNumericEditorCulvertsUnobstructedHeight.TabIndex = 47;
+            this.ultraNumericEditorCulvertsUnobstructedHeight.TabIndex = 46;
             // 
             // ultraNumericEditorCulvertsFullDepth
             // 
             this.ultraNumericEditorCulvertsFullDepth.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.fKCULVERTSURVEYPAGEBindingSource1, "full_diam_in", true));
-            this.ultraNumericEditorCulvertsFullDepth.Location = new System.Drawing.Point(613, 79);
+            this.ultraNumericEditorCulvertsFullDepth.Location = new System.Drawing.Point(616, 77);
             this.ultraNumericEditorCulvertsFullDepth.MaskInput = "{LOC}-nnnnnnnnnn.nn";
             this.ultraNumericEditorCulvertsFullDepth.Name = "ultraNumericEditorCulvertsFullDepth";
             this.ultraNumericEditorCulvertsFullDepth.Nullable = true;
             this.ultraNumericEditorCulvertsFullDepth.NumericType = Infragistics.Win.UltraWinEditors.NumericType.Double;
             this.ultraNumericEditorCulvertsFullDepth.Size = new System.Drawing.Size(90, 21);
-            this.ultraNumericEditorCulvertsFullDepth.TabIndex = 46;
+            this.ultraNumericEditorCulvertsFullDepth.TabIndex = 45;
             // 
             // buttonUpdateCulvert
             // 
@@ -2846,11 +2893,16 @@
             this.comboBoxCulvertsType.DisplayMember = "culvert_opening";
             this.comboBoxCulvertsType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxCulvertsType.FormattingEnabled = true;
-            this.comboBoxCulvertsType.Location = new System.Drawing.Point(517, 79);
+            this.comboBoxCulvertsType.Location = new System.Drawing.Point(942, 77);
             this.comboBoxCulvertsType.Name = "comboBoxCulvertsType";
             this.comboBoxCulvertsType.Size = new System.Drawing.Size(90, 21);
-            this.comboBoxCulvertsType.TabIndex = 45;
+            this.comboBoxCulvertsType.TabIndex = 48;
             this.comboBoxCulvertsType.ValueMember = "culvert_opening_type_id";
+            // 
+            // sWSPCULVERTOPENINGTYPEBindingSource
+            // 
+            this.sWSPCULVERTOPENINGTYPEBindingSource.DataMember = "SWSP_CULVERT_OPENING_TYPE";
+            this.sWSPCULVERTOPENINGTYPEBindingSource.DataSource = this.sANDBOXDataSet;
             // 
             // textBoxCulvertsMeasuredNode
             // 
@@ -2884,7 +2936,7 @@
             // labelCulvertsMaterial
             // 
             this.labelCulvertsMaterial.AutoSize = true;
-            this.labelCulvertsMaterial.Location = new System.Drawing.Point(832, 63);
+            this.labelCulvertsMaterial.Location = new System.Drawing.Point(835, 61);
             this.labelCulvertsMaterial.Name = "labelCulvertsMaterial";
             this.labelCulvertsMaterial.Size = new System.Drawing.Size(44, 13);
             this.labelCulvertsMaterial.TabIndex = 38;
@@ -2893,7 +2945,7 @@
             // labelCulvertsUnobstructedHeight
             // 
             this.labelCulvertsUnobstructedHeight.AutoSize = true;
-            this.labelCulvertsUnobstructedHeight.Location = new System.Drawing.Point(706, 63);
+            this.labelCulvertsUnobstructedHeight.Location = new System.Drawing.Point(709, 61);
             this.labelCulvertsUnobstructedHeight.Name = "labelCulvertsUnobstructedHeight";
             this.labelCulvertsUnobstructedHeight.Size = new System.Drawing.Size(120, 13);
             this.labelCulvertsUnobstructedHeight.TabIndex = 37;
@@ -2902,7 +2954,7 @@
             // labelCulvertsFullDepth
             // 
             this.labelCulvertsFullDepth.AutoSize = true;
-            this.labelCulvertsFullDepth.Location = new System.Drawing.Point(610, 63);
+            this.labelCulvertsFullDepth.Location = new System.Drawing.Point(613, 61);
             this.labelCulvertsFullDepth.Name = "labelCulvertsFullDepth";
             this.labelCulvertsFullDepth.Size = new System.Drawing.Size(70, 13);
             this.labelCulvertsFullDepth.TabIndex = 36;
@@ -2911,7 +2963,7 @@
             // labelCulvertsShape
             // 
             this.labelCulvertsShape.AutoSize = true;
-            this.labelCulvertsShape.Location = new System.Drawing.Point(938, 63);
+            this.labelCulvertsShape.Location = new System.Drawing.Point(514, 61);
             this.labelCulvertsShape.Name = "labelCulvertsShape";
             this.labelCulvertsShape.Size = new System.Drawing.Size(38, 13);
             this.labelCulvertsShape.TabIndex = 35;
@@ -2920,11 +2972,11 @@
             // labelCulvertsType
             // 
             this.labelCulvertsType.AutoSize = true;
-            this.labelCulvertsType.Location = new System.Drawing.Point(514, 63);
+            this.labelCulvertsType.Location = new System.Drawing.Point(939, 61);
             this.labelCulvertsType.Name = "labelCulvertsType";
-            this.labelCulvertsType.Size = new System.Drawing.Size(31, 13);
+            this.labelCulvertsType.Size = new System.Drawing.Size(40, 13);
             this.labelCulvertsType.TabIndex = 34;
-            this.labelCulvertsType.Text = "Type";
+            this.labelCulvertsType.Text = "L, P, O";
             // 
             // buttonCulvertsAdd
             // 
@@ -2981,6 +3033,14 @@
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             this.dataGridViewTextBoxColumn2.ReadOnly = true;
             this.dataGridViewTextBoxColumn2.Width = 66;
+            // 
+            // nodeDataGridViewTextBoxColumn1
+            // 
+            this.nodeDataGridViewTextBoxColumn1.DataPropertyName = "node";
+            this.nodeDataGridViewTextBoxColumn1.HeaderText = "Measured";
+            this.nodeDataGridViewTextBoxColumn1.Name = "nodeDataGridViewTextBoxColumn1";
+            this.nodeDataGridViewTextBoxColumn1.ReadOnly = true;
+            this.nodeDataGridViewTextBoxColumn1.Width = 66;
             // 
             // fKCULVERTFACINGTYPEBindingSource
             // 
@@ -3246,16 +3306,6 @@
             this.ultraDateTimeEditorSurveyDate.Size = new System.Drawing.Size(144, 21);
             this.ultraDateTimeEditorSurveyDate.TabIndex = 103;
             // 
-            // sWSPWATERSHEDBindingSource
-            // 
-            this.sWSPWATERSHEDBindingSource.DataMember = "SWSP_WATERSHED";
-            this.sWSPWATERSHEDBindingSource.DataSource = this.sANDBOXDataSet;
-            // 
-            // sANDBOXDataSet
-            // 
-            this.sANDBOXDataSet.DataSetName = "SANDBOXDataSet";
-            this.sANDBOXDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
             // checkedListBoxEvaluators
             // 
             this.checkedListBoxEvaluators.DataSource = this.sANDBOXDataSet.SWSP_EVALUATOR;
@@ -3267,56 +3317,6 @@
             this.checkedListBoxEvaluators.TabIndex = 5;
             this.checkedListBoxEvaluators.ValueMember = "evaluator_id";
             this.checkedListBoxEvaluators.SelectedIndexChanged += new System.EventHandler(this.checkedListBoxEvaluators_SelectedIndexChanged);
-            // 
-            // sWSPSHAPETYPEBindingSource
-            // 
-            this.sWSPSHAPETYPEBindingSource.DataMember = "SWSP_SHAPE_TYPE";
-            this.sWSPSHAPETYPEBindingSource.DataSource = this.sANDBOXDataSet;
-            // 
-            // sWSPMATERIALTYPEBindingSource
-            // 
-            this.sWSPMATERIALTYPEBindingSource.DataMember = "SWSP_MATERIAL_TYPE";
-            this.sWSPMATERIALTYPEBindingSource.DataSource = this.sANDBOXDataSet;
-            // 
-            // usnodeDataGridViewTextBoxColumn
-            // 
-            this.usnodeDataGridViewTextBoxColumn.DataPropertyName = "us_node";
-            this.usnodeDataGridViewTextBoxColumn.HeaderText = "US Node";
-            this.usnodeDataGridViewTextBoxColumn.Name = "usnodeDataGridViewTextBoxColumn";
-            this.usnodeDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // dsnodeDataGridViewTextBoxColumn
-            // 
-            this.dsnodeDataGridViewTextBoxColumn.DataPropertyName = "ds_node";
-            this.dsnodeDataGridViewTextBoxColumn.HeaderText = "DS Node";
-            this.dsnodeDataGridViewTextBoxColumn.Name = "dsnodeDataGridViewTextBoxColumn";
-            this.dsnodeDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // sWSPFACINGTYPEBindingSource
-            // 
-            this.sWSPFACINGTYPEBindingSource.DataMember = "SWSP_FACING_TYPE";
-            this.sWSPFACINGTYPEBindingSource.DataSource = this.sANDBOXDataSet;
-            // 
-            // nodeDataGridViewTextBoxColumn
-            // 
-            this.nodeDataGridViewTextBoxColumn.DataPropertyName = "node";
-            this.nodeDataGridViewTextBoxColumn.HeaderText = "Measured";
-            this.nodeDataGridViewTextBoxColumn.Name = "nodeDataGridViewTextBoxColumn";
-            this.nodeDataGridViewTextBoxColumn.ReadOnly = true;
-            this.nodeDataGridViewTextBoxColumn.Width = 66;
-            // 
-            // sWSPCULVERTOPENINGTYPEBindingSource
-            // 
-            this.sWSPCULVERTOPENINGTYPEBindingSource.DataMember = "SWSP_CULVERT_OPENING_TYPE";
-            this.sWSPCULVERTOPENINGTYPEBindingSource.DataSource = this.sANDBOXDataSet;
-            // 
-            // nodeDataGridViewTextBoxColumn1
-            // 
-            this.nodeDataGridViewTextBoxColumn1.DataPropertyName = "node";
-            this.nodeDataGridViewTextBoxColumn1.HeaderText = "Measured";
-            this.nodeDataGridViewTextBoxColumn1.Name = "nodeDataGridViewTextBoxColumn1";
-            this.nodeDataGridViewTextBoxColumn1.ReadOnly = true;
-            this.nodeDataGridViewTextBoxColumn1.Width = 66;
             // 
             // sWSPFACINGTYPEBindingSource1
             // 
@@ -3478,13 +3478,17 @@
             ((System.ComponentModel.ISupportInitialize)(this.fKSURVEYPAGEVIEWBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fKVIEWSUBWATERSHEDBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fKSUBWATERSHEDWATERSHEDBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sWSPWATERSHEDBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sANDBOXDataSet)).EndInit();
             this.tabControlDitchesCulvertsPipes.ResumeLayout(false);
             this.tabPagePipes.ResumeLayout(false);
             this.tabPagePipes.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ultraNumericEditorPipesInnerWidth)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ultraComboPipesShape)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fKPIPESURVEYPAGEBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sWSPSHAPETYPEBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ultraComboPipesMaterial)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sWSPMATERIALTYPEBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ultraNumericEditorPipesInnerDiameter)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ultraNumericEditorPipesDSDepth)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ultraNumericEditorPipesUSDepth)).EndInit();
@@ -3493,6 +3497,7 @@
             this.tabPageDitches.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fKDITCHSURVEYPAGEBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ultraComboDitchesFacingDirection)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sWSPFACINGTYPEBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ultraComboDitchesMaterial)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ultraNumericEditorDitchesBottomWidth)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ultraNumericEditorDitchesTopWidth)).EndInit();
@@ -3506,6 +3511,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.ultraComboCulvertsMaterial)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ultraNumericEditorCulvertsUnobstructedHeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ultraNumericEditorCulvertsFullDepth)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sWSPCULVERTOPENINGTYPEBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCulverts)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fKCULVERTFACINGTYPEBindingSource)).EndInit();
             this.menuStripMainForm.ResumeLayout(false);
@@ -3515,12 +3521,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.fKPIPEMATERIALTYPEBindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fKPIPEMATERIALTYPEBindingSource2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ultraDateTimeEditorSurveyDate)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sWSPWATERSHEDBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sANDBOXDataSet)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sWSPSHAPETYPEBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sWSPMATERIALTYPEBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sWSPFACINGTYPEBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sWSPCULVERTOPENINGTYPEBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sWSPFACINGTYPEBindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sWSPPHOTOBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sWSPCULVERTBindingSource)).EndInit();
