@@ -41,13 +41,13 @@ namespace SystemsAnalysis.DataAccess {
         
         private SITE_ASSESSMENTDataTable tableSITE_ASSESSMENT;
         
-        private SITE_OPPORTUNITYDataTable tableSITE_OPPORTUNITY;
-        
         private SITEDataTable tableSITE;
         
         private RETRO_BASINDataTable tableRETRO_BASIN;
         
         private SEWER_BASINDataTable tableSEWER_BASIN;
+        
+        private SITE_OPPORTUNITYDataTable tableSITE_OPPORTUNITY;
         
         private global::System.Data.DataRelation relationFK_PROJECT_FACILITY_TYPE;
         
@@ -63,9 +63,11 @@ namespace SystemsAnalysis.DataAccess {
         
         private global::System.Data.DataRelation relationFK_SITE_ASSESSMENT_PROJECT;
         
+        private global::System.Data.DataRelation relationFK_SITE_ASSESSMENT_SITE;
+        
         private global::System.Data.DataRelation relationFK_SITE_OPPORTUNITY_FACILITY_TYPE;
         
-        private global::System.Data.DataRelation relationFK_SITE_ASSESSMENT_SITE;
+        private global::System.Data.DataRelation relationFK_SITE_OPPORTUNITY_IMPERVIOUS_AREA_TYPE;
         
         private global::System.Data.DataRelation relationFK_SITE_OPPORTUNITY_SITE;
         
@@ -119,9 +121,6 @@ namespace SystemsAnalysis.DataAccess {
                 if ((ds.Tables["SITE_ASSESSMENT"] != null)) {
                     base.Tables.Add(new SITE_ASSESSMENTDataTable(ds.Tables["SITE_ASSESSMENT"]));
                 }
-                if ((ds.Tables["SITE_OPPORTUNITY"] != null)) {
-                    base.Tables.Add(new SITE_OPPORTUNITYDataTable(ds.Tables["SITE_OPPORTUNITY"]));
-                }
                 if ((ds.Tables["SITE"] != null)) {
                     base.Tables.Add(new SITEDataTable(ds.Tables["SITE"]));
                 }
@@ -130,6 +129,9 @@ namespace SystemsAnalysis.DataAccess {
                 }
                 if ((ds.Tables["SEWER_BASIN"] != null)) {
                     base.Tables.Add(new SEWER_BASINDataTable(ds.Tables["SEWER_BASIN"]));
+                }
+                if ((ds.Tables["SITE_OPPORTUNITY"] != null)) {
+                    base.Tables.Add(new SITE_OPPORTUNITYDataTable(ds.Tables["SITE_OPPORTUNITY"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -224,15 +226,6 @@ namespace SystemsAnalysis.DataAccess {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public SITE_OPPORTUNITYDataTable SITE_OPPORTUNITY {
-            get {
-                return this.tableSITE_OPPORTUNITY;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Browsable(false)]
-        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
         public SITEDataTable SITE {
             get {
                 return this.tableSITE;
@@ -254,6 +247,15 @@ namespace SystemsAnalysis.DataAccess {
         public SEWER_BASINDataTable SEWER_BASIN {
             get {
                 return this.tableSEWER_BASIN;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public SITE_OPPORTUNITYDataTable SITE_OPPORTUNITY {
+            get {
+                return this.tableSITE_OPPORTUNITY;
             }
         }
         
@@ -340,9 +342,6 @@ namespace SystemsAnalysis.DataAccess {
                 if ((ds.Tables["SITE_ASSESSMENT"] != null)) {
                     base.Tables.Add(new SITE_ASSESSMENTDataTable(ds.Tables["SITE_ASSESSMENT"]));
                 }
-                if ((ds.Tables["SITE_OPPORTUNITY"] != null)) {
-                    base.Tables.Add(new SITE_OPPORTUNITYDataTable(ds.Tables["SITE_OPPORTUNITY"]));
-                }
                 if ((ds.Tables["SITE"] != null)) {
                     base.Tables.Add(new SITEDataTable(ds.Tables["SITE"]));
                 }
@@ -351,6 +350,9 @@ namespace SystemsAnalysis.DataAccess {
                 }
                 if ((ds.Tables["SEWER_BASIN"] != null)) {
                     base.Tables.Add(new SEWER_BASINDataTable(ds.Tables["SEWER_BASIN"]));
+                }
+                if ((ds.Tables["SITE_OPPORTUNITY"] != null)) {
+                    base.Tables.Add(new SITE_OPPORTUNITYDataTable(ds.Tables["SITE_OPPORTUNITY"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -430,12 +432,6 @@ namespace SystemsAnalysis.DataAccess {
                     this.tableSITE_ASSESSMENT.InitVars();
                 }
             }
-            this.tableSITE_OPPORTUNITY = ((SITE_OPPORTUNITYDataTable)(base.Tables["SITE_OPPORTUNITY"]));
-            if ((initTable == true)) {
-                if ((this.tableSITE_OPPORTUNITY != null)) {
-                    this.tableSITE_OPPORTUNITY.InitVars();
-                }
-            }
             this.tableSITE = ((SITEDataTable)(base.Tables["SITE"]));
             if ((initTable == true)) {
                 if ((this.tableSITE != null)) {
@@ -454,6 +450,12 @@ namespace SystemsAnalysis.DataAccess {
                     this.tableSEWER_BASIN.InitVars();
                 }
             }
+            this.tableSITE_OPPORTUNITY = ((SITE_OPPORTUNITYDataTable)(base.Tables["SITE_OPPORTUNITY"]));
+            if ((initTable == true)) {
+                if ((this.tableSITE_OPPORTUNITY != null)) {
+                    this.tableSITE_OPPORTUNITY.InitVars();
+                }
+            }
             this.relationFK_PROJECT_FACILITY_TYPE = this.Relations["FK_PROJECT_FACILITY_TYPE"];
             this.relationFK_PROJECT_PROJECT_STATUS = this.Relations["FK_PROJECT_PROJECT_STATUS"];
             this.relationFK_SITE_ASSESSMENT_ASSESSMENT_TYPE = this.Relations["FK_SITE_ASSESSMENT_ASSESSMENT_TYPE"];
@@ -461,8 +463,9 @@ namespace SystemsAnalysis.DataAccess {
             this.relationFK_SITE_ASSESSMENT_FACILITY_TYPE = this.Relations["FK_SITE_ASSESSMENT_FACILITY_TYPE"];
             this.relationFK_SITE_ASSESSMENT_IMPERVIOUS_AREA_TYPE = this.Relations["FK_SITE_ASSESSMENT_IMPERVIOUS_AREA_TYPE"];
             this.relationFK_SITE_ASSESSMENT_PROJECT = this.Relations["FK_SITE_ASSESSMENT_PROJECT"];
-            this.relationFK_SITE_OPPORTUNITY_FACILITY_TYPE = this.Relations["FK_SITE_OPPORTUNITY_FACILITY_TYPE"];
             this.relationFK_SITE_ASSESSMENT_SITE = this.Relations["FK_SITE_ASSESSMENT_SITE"];
+            this.relationFK_SITE_OPPORTUNITY_FACILITY_TYPE = this.Relations["FK_SITE_OPPORTUNITY_FACILITY_TYPE"];
+            this.relationFK_SITE_OPPORTUNITY_IMPERVIOUS_AREA_TYPE = this.Relations["FK_SITE_OPPORTUNITY_IMPERVIOUS_AREA_TYPE"];
             this.relationFK_SITE_OPPORTUNITY_SITE = this.Relations["FK_SITE_OPPORTUNITY_SITE"];
         }
         
@@ -489,14 +492,14 @@ namespace SystemsAnalysis.DataAccess {
             base.Tables.Add(this.tablePROJECT_STATUS);
             this.tableSITE_ASSESSMENT = new SITE_ASSESSMENTDataTable();
             base.Tables.Add(this.tableSITE_ASSESSMENT);
-            this.tableSITE_OPPORTUNITY = new SITE_OPPORTUNITYDataTable();
-            base.Tables.Add(this.tableSITE_OPPORTUNITY);
             this.tableSITE = new SITEDataTable();
             base.Tables.Add(this.tableSITE);
             this.tableRETRO_BASIN = new RETRO_BASINDataTable();
             base.Tables.Add(this.tableRETRO_BASIN);
             this.tableSEWER_BASIN = new SEWER_BASINDataTable();
             base.Tables.Add(this.tableSEWER_BASIN);
+            this.tableSITE_OPPORTUNITY = new SITE_OPPORTUNITYDataTable();
+            base.Tables.Add(this.tableSITE_OPPORTUNITY);
             this.relationFK_PROJECT_FACILITY_TYPE = new global::System.Data.DataRelation("FK_PROJECT_FACILITY_TYPE", new global::System.Data.DataColumn[] {
                         this.tableFACILITY_TYPE.facility_type_idColumn}, new global::System.Data.DataColumn[] {
                         this.tablePROJECT.facility_type_idColumn}, false);
@@ -525,14 +528,18 @@ namespace SystemsAnalysis.DataAccess {
                         this.tablePROJECT.project_idColumn}, new global::System.Data.DataColumn[] {
                         this.tableSITE_ASSESSMENT.project_idColumn}, false);
             this.Relations.Add(this.relationFK_SITE_ASSESSMENT_PROJECT);
-            this.relationFK_SITE_OPPORTUNITY_FACILITY_TYPE = new global::System.Data.DataRelation("FK_SITE_OPPORTUNITY_FACILITY_TYPE", new global::System.Data.DataColumn[] {
-                        this.tableFACILITY_TYPE.facility_type_idColumn}, new global::System.Data.DataColumn[] {
-                        this.tableSITE_OPPORTUNITY.facility_type_idColumn}, false);
-            this.Relations.Add(this.relationFK_SITE_OPPORTUNITY_FACILITY_TYPE);
             this.relationFK_SITE_ASSESSMENT_SITE = new global::System.Data.DataRelation("FK_SITE_ASSESSMENT_SITE", new global::System.Data.DataColumn[] {
                         this.tableSITE.site_idColumn}, new global::System.Data.DataColumn[] {
                         this.tableSITE_ASSESSMENT.site_idColumn}, false);
             this.Relations.Add(this.relationFK_SITE_ASSESSMENT_SITE);
+            this.relationFK_SITE_OPPORTUNITY_FACILITY_TYPE = new global::System.Data.DataRelation("FK_SITE_OPPORTUNITY_FACILITY_TYPE", new global::System.Data.DataColumn[] {
+                        this.tableFACILITY_TYPE.facility_type_idColumn}, new global::System.Data.DataColumn[] {
+                        this.tableSITE_OPPORTUNITY.facility_type_idColumn}, false);
+            this.Relations.Add(this.relationFK_SITE_OPPORTUNITY_FACILITY_TYPE);
+            this.relationFK_SITE_OPPORTUNITY_IMPERVIOUS_AREA_TYPE = new global::System.Data.DataRelation("FK_SITE_OPPORTUNITY_IMPERVIOUS_AREA_TYPE", new global::System.Data.DataColumn[] {
+                        this.tableIMPERVIOUS_AREA_TYPE.ia_type_idColumn}, new global::System.Data.DataColumn[] {
+                        this.tableSITE_OPPORTUNITY.ia_type_idColumn}, false);
+            this.Relations.Add(this.relationFK_SITE_OPPORTUNITY_IMPERVIOUS_AREA_TYPE);
             this.relationFK_SITE_OPPORTUNITY_SITE = new global::System.Data.DataRelation("FK_SITE_OPPORTUNITY_SITE", new global::System.Data.DataColumn[] {
                         this.tableSITE.site_idColumn}, new global::System.Data.DataColumn[] {
                         this.tableSITE_OPPORTUNITY.site_idColumn}, false);
@@ -580,11 +587,6 @@ namespace SystemsAnalysis.DataAccess {
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private bool ShouldSerializeSITE_OPPORTUNITY() {
-            return false;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private bool ShouldSerializeSITE() {
             return false;
         }
@@ -596,6 +598,11 @@ namespace SystemsAnalysis.DataAccess {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private bool ShouldSerializeSEWER_BASIN() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private bool ShouldSerializeSITE_OPPORTUNITY() {
             return false;
         }
         
@@ -668,13 +675,13 @@ namespace SystemsAnalysis.DataAccess {
         
         public delegate void SITE_ASSESSMENTRowChangeEventHandler(object sender, SITE_ASSESSMENTRowChangeEvent e);
         
-        public delegate void SITE_OPPORTUNITYRowChangeEventHandler(object sender, SITE_OPPORTUNITYRowChangeEvent e);
-        
         public delegate void SITERowChangeEventHandler(object sender, SITERowChangeEvent e);
         
         public delegate void RETRO_BASINRowChangeEventHandler(object sender, RETRO_BASINRowChangeEvent e);
         
         public delegate void SEWER_BASINRowChangeEventHandler(object sender, SEWER_BASINRowChangeEvent e);
+        
+        public delegate void SITE_OPPORTUNITYRowChangeEventHandler(object sender, SITE_OPPORTUNITYRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -1790,9 +1797,9 @@ namespace SystemsAnalysis.DataAccess {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public OPPORTUNITY_FEASIBILITYRow FindByrating_value(int rating_value) {
+            public OPPORTUNITY_FEASIBILITYRow FindByopportunity_feasibility_id(int opportunity_feasibility_id) {
                 return ((OPPORTUNITY_FEASIBILITYRow)(this.Rows.Find(new object[] {
-                            rating_value})));
+                            opportunity_feasibility_id})));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1823,14 +1830,14 @@ namespace SystemsAnalysis.DataAccess {
                 this.columnmeaning = new global::System.Data.DataColumn("meaning", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnmeaning);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columnrating_value}, true));
+                                this.columnopportunity_feasibility_id}, true));
                 this.columnopportunity_feasibility_id.AutoIncrement = true;
                 this.columnopportunity_feasibility_id.AutoIncrementSeed = -1;
                 this.columnopportunity_feasibility_id.AutoIncrementStep = -1;
                 this.columnopportunity_feasibility_id.AllowDBNull = false;
                 this.columnopportunity_feasibility_id.ReadOnly = true;
+                this.columnopportunity_feasibility_id.Unique = true;
                 this.columnrating_value.AllowDBNull = false;
-                this.columnrating_value.Unique = true;
                 this.columnmeaning.AllowDBNull = false;
                 this.columnmeaning.MaxLength = 500;
             }
@@ -1964,8 +1971,6 @@ namespace SystemsAnalysis.DataAccess {
             
             private global::System.Data.DataColumn columnname;
             
-            private global::System.Data.DataColumn columnpartnership_type_id;
-            
             private global::System.Data.DataColumn columnfacility_type_id;
             
             private global::System.Data.DataColumn columnia_managed_roof;
@@ -1982,39 +1987,11 @@ namespace SystemsAnalysis.DataAccess {
             
             private global::System.Data.DataColumn columnproject_status_id;
             
-            private global::System.Data.DataColumn columndesigner_id;
-            
-            private global::System.Data.DataColumn columnconstructor_id;
-            
-            private global::System.Data.DataColumn columncontractor_id;
-            
-            private global::System.Data.DataColumn columncity_cost;
-            
-            private global::System.Data.DataColumn columnprimary_contact_name;
-            
-            private global::System.Data.DataColumn columnprimary_contact_phone;
-            
-            private global::System.Data.DataColumn columnprimary_contact_email;
-            
-            private global::System.Data.DataColumn columnprimary_contact_type_id;
-            
-            private global::System.Data.DataColumn columnproject_manager_id;
-            
-            private global::System.Data.DataColumn columno_and_m_id;
-            
-            private global::System.Data.DataColumn columnpermit_status_id;
-            
-            private global::System.Data.DataColumn columnmanagement_id;
-            
-            private global::System.Data.DataColumn columncreate_by;
-            
-            private global::System.Data.DataColumn columncreate_date;
-            
             private global::System.Data.DataColumn columnupdate_by;
             
             private global::System.Data.DataColumn columnupdate_date;
             
-            private global::System.Data.DataColumn columnmodified_time;
+            private global::System.Data.DataColumn columnmanagement_id;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public PROJECTDataTable() {
@@ -2064,13 +2041,6 @@ namespace SystemsAnalysis.DataAccess {
             public global::System.Data.DataColumn nameColumn {
                 get {
                     return this.columnname;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn partnership_type_idColumn {
-                get {
-                    return this.columnpartnership_type_id;
                 }
             }
             
@@ -2131,104 +2101,6 @@ namespace SystemsAnalysis.DataAccess {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn designer_idColumn {
-                get {
-                    return this.columndesigner_id;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn constructor_idColumn {
-                get {
-                    return this.columnconstructor_id;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn contractor_idColumn {
-                get {
-                    return this.columncontractor_id;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn city_costColumn {
-                get {
-                    return this.columncity_cost;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn primary_contact_nameColumn {
-                get {
-                    return this.columnprimary_contact_name;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn primary_contact_phoneColumn {
-                get {
-                    return this.columnprimary_contact_phone;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn primary_contact_emailColumn {
-                get {
-                    return this.columnprimary_contact_email;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn primary_contact_type_idColumn {
-                get {
-                    return this.columnprimary_contact_type_id;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn project_manager_idColumn {
-                get {
-                    return this.columnproject_manager_id;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn o_and_m_idColumn {
-                get {
-                    return this.columno_and_m_id;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn permit_status_idColumn {
-                get {
-                    return this.columnpermit_status_id;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn management_idColumn {
-                get {
-                    return this.columnmanagement_id;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn create_byColumn {
-                get {
-                    return this.columncreate_by;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn create_dateColumn {
-                get {
-                    return this.columncreate_date;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public global::System.Data.DataColumn update_byColumn {
                 get {
                     return this.columnupdate_by;
@@ -2243,9 +2115,9 @@ namespace SystemsAnalysis.DataAccess {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn modified_timeColumn {
+            public global::System.Data.DataColumn management_idColumn {
                 get {
-                    return this.columnmodified_time;
+                    return this.columnmanagement_id;
                 }
             }
             
@@ -2278,41 +2150,12 @@ namespace SystemsAnalysis.DataAccess {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public PROJECTRow AddPROJECTRow(
-                        int site_id, 
-                        string name, 
-                        int partnership_type_id, 
-                        FACILITY_TYPERow parentFACILITY_TYPERowByFK_PROJECT_FACILITY_TYPE, 
-                        int ia_managed_roof, 
-                        int ia_managed_paved, 
-                        int facility_size, 
-                        int storage_volume, 
-                        int infiltration_test_id, 
-                        decimal infiltration_rate, 
-                        PROJECT_STATUSRow parentPROJECT_STATUSRowByFK_PROJECT_PROJECT_STATUS, 
-                        int designer_id, 
-                        int constructor_id, 
-                        int contractor_id, 
-                        decimal city_cost, 
-                        string primary_contact_name, 
-                        string primary_contact_phone, 
-                        string primary_contact_email, 
-                        int primary_contact_type_id, 
-                        int project_manager_id, 
-                        int o_and_m_id, 
-                        int permit_status_id, 
-                        int management_id, 
-                        string create_by, 
-                        System.DateTime create_date, 
-                        string update_by, 
-                        System.DateTime update_date, 
-                        byte[] modified_time) {
+            public PROJECTRow AddPROJECTRow(int site_id, string name, FACILITY_TYPERow parentFACILITY_TYPERowByFK_PROJECT_FACILITY_TYPE, int ia_managed_roof, int ia_managed_paved, int facility_size, int storage_volume, int infiltration_test_id, decimal infiltration_rate, PROJECT_STATUSRow parentPROJECT_STATUSRowByFK_PROJECT_PROJECT_STATUS, string update_by, System.DateTime update_date, int management_id) {
                 PROJECTRow rowPROJECTRow = ((PROJECTRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
                         site_id,
                         name,
-                        partnership_type_id,
                         null,
                         ia_managed_roof,
                         ia_managed_paved,
@@ -2321,28 +2164,14 @@ namespace SystemsAnalysis.DataAccess {
                         infiltration_test_id,
                         infiltration_rate,
                         null,
-                        designer_id,
-                        constructor_id,
-                        contractor_id,
-                        city_cost,
-                        primary_contact_name,
-                        primary_contact_phone,
-                        primary_contact_email,
-                        primary_contact_type_id,
-                        project_manager_id,
-                        o_and_m_id,
-                        permit_status_id,
-                        management_id,
-                        create_by,
-                        create_date,
                         update_by,
                         update_date,
-                        modified_time};
+                        management_id};
                 if ((parentFACILITY_TYPERowByFK_PROJECT_FACILITY_TYPE != null)) {
-                    columnValuesArray[4] = parentFACILITY_TYPERowByFK_PROJECT_FACILITY_TYPE[0];
+                    columnValuesArray[3] = parentFACILITY_TYPERowByFK_PROJECT_FACILITY_TYPE[0];
                 }
                 if ((parentPROJECT_STATUSRowByFK_PROJECT_PROJECT_STATUS != null)) {
-                    columnValuesArray[11] = parentPROJECT_STATUSRowByFK_PROJECT_PROJECT_STATUS[0];
+                    columnValuesArray[10] = parentPROJECT_STATUSRowByFK_PROJECT_PROJECT_STATUS[0];
                 }
                 rowPROJECTRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowPROJECTRow);
@@ -2372,7 +2201,6 @@ namespace SystemsAnalysis.DataAccess {
                 this.columnproject_id = base.Columns["project_id"];
                 this.columnsite_id = base.Columns["site_id"];
                 this.columnname = base.Columns["name"];
-                this.columnpartnership_type_id = base.Columns["partnership_type_id"];
                 this.columnfacility_type_id = base.Columns["facility_type_id"];
                 this.columnia_managed_roof = base.Columns["ia_managed_roof"];
                 this.columnia_managed_paved = base.Columns["ia_managed_paved"];
@@ -2381,23 +2209,9 @@ namespace SystemsAnalysis.DataAccess {
                 this.columninfiltration_test_id = base.Columns["infiltration_test_id"];
                 this.columninfiltration_rate = base.Columns["infiltration_rate"];
                 this.columnproject_status_id = base.Columns["project_status_id"];
-                this.columndesigner_id = base.Columns["designer_id"];
-                this.columnconstructor_id = base.Columns["constructor_id"];
-                this.columncontractor_id = base.Columns["contractor_id"];
-                this.columncity_cost = base.Columns["city_cost"];
-                this.columnprimary_contact_name = base.Columns["primary_contact_name"];
-                this.columnprimary_contact_phone = base.Columns["primary_contact_phone"];
-                this.columnprimary_contact_email = base.Columns["primary_contact_email"];
-                this.columnprimary_contact_type_id = base.Columns["primary_contact_type_id"];
-                this.columnproject_manager_id = base.Columns["project_manager_id"];
-                this.columno_and_m_id = base.Columns["o_and_m_id"];
-                this.columnpermit_status_id = base.Columns["permit_status_id"];
-                this.columnmanagement_id = base.Columns["management_id"];
-                this.columncreate_by = base.Columns["create_by"];
-                this.columncreate_date = base.Columns["create_date"];
                 this.columnupdate_by = base.Columns["update_by"];
                 this.columnupdate_date = base.Columns["update_date"];
-                this.columnmodified_time = base.Columns["modified_time"];
+                this.columnmanagement_id = base.Columns["management_id"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2408,8 +2222,6 @@ namespace SystemsAnalysis.DataAccess {
                 base.Columns.Add(this.columnsite_id);
                 this.columnname = new global::System.Data.DataColumn("name", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnname);
-                this.columnpartnership_type_id = new global::System.Data.DataColumn("partnership_type_id", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnpartnership_type_id);
                 this.columnfacility_type_id = new global::System.Data.DataColumn("facility_type_id", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnfacility_type_id);
                 this.columnia_managed_roof = new global::System.Data.DataColumn("ia_managed_roof", typeof(int), null, global::System.Data.MappingType.Element);
@@ -2426,40 +2238,12 @@ namespace SystemsAnalysis.DataAccess {
                 base.Columns.Add(this.columninfiltration_rate);
                 this.columnproject_status_id = new global::System.Data.DataColumn("project_status_id", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnproject_status_id);
-                this.columndesigner_id = new global::System.Data.DataColumn("designer_id", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columndesigner_id);
-                this.columnconstructor_id = new global::System.Data.DataColumn("constructor_id", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnconstructor_id);
-                this.columncontractor_id = new global::System.Data.DataColumn("contractor_id", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columncontractor_id);
-                this.columncity_cost = new global::System.Data.DataColumn("city_cost", typeof(decimal), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columncity_cost);
-                this.columnprimary_contact_name = new global::System.Data.DataColumn("primary_contact_name", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnprimary_contact_name);
-                this.columnprimary_contact_phone = new global::System.Data.DataColumn("primary_contact_phone", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnprimary_contact_phone);
-                this.columnprimary_contact_email = new global::System.Data.DataColumn("primary_contact_email", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnprimary_contact_email);
-                this.columnprimary_contact_type_id = new global::System.Data.DataColumn("primary_contact_type_id", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnprimary_contact_type_id);
-                this.columnproject_manager_id = new global::System.Data.DataColumn("project_manager_id", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnproject_manager_id);
-                this.columno_and_m_id = new global::System.Data.DataColumn("o_and_m_id", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columno_and_m_id);
-                this.columnpermit_status_id = new global::System.Data.DataColumn("permit_status_id", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnpermit_status_id);
-                this.columnmanagement_id = new global::System.Data.DataColumn("management_id", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnmanagement_id);
-                this.columncreate_by = new global::System.Data.DataColumn("create_by", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columncreate_by);
-                this.columncreate_date = new global::System.Data.DataColumn("create_date", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columncreate_date);
                 this.columnupdate_by = new global::System.Data.DataColumn("update_by", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnupdate_by);
                 this.columnupdate_date = new global::System.Data.DataColumn("update_date", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnupdate_date);
-                this.columnmodified_time = new global::System.Data.DataColumn("modified_time", typeof(byte[]), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnmodified_time);
+                this.columnmanagement_id = new global::System.Data.DataColumn("management_id", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnmanagement_id);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnproject_id}, true));
                 this.columnproject_id.AutoIncrement = true;
@@ -2471,7 +2255,6 @@ namespace SystemsAnalysis.DataAccess {
                 this.columnsite_id.AllowDBNull = false;
                 this.columnname.AllowDBNull = false;
                 this.columnname.MaxLength = 50;
-                this.columnpartnership_type_id.AllowDBNull = false;
                 this.columnfacility_type_id.AllowDBNull = false;
                 this.columnia_managed_roof.AllowDBNull = false;
                 this.columnia_managed_paved.AllowDBNull = false;
@@ -2480,27 +2263,10 @@ namespace SystemsAnalysis.DataAccess {
                 this.columninfiltration_test_id.AllowDBNull = false;
                 this.columninfiltration_rate.AllowDBNull = false;
                 this.columnproject_status_id.AllowDBNull = false;
-                this.columndesigner_id.AllowDBNull = false;
-                this.columnconstructor_id.AllowDBNull = false;
-                this.columncontractor_id.AllowDBNull = false;
-                this.columncity_cost.AllowDBNull = false;
-                this.columnprimary_contact_name.AllowDBNull = false;
-                this.columnprimary_contact_name.MaxLength = 250;
-                this.columnprimary_contact_phone.AllowDBNull = false;
-                this.columnprimary_contact_phone.MaxLength = 15;
-                this.columnprimary_contact_email.MaxLength = 250;
-                this.columnprimary_contact_type_id.AllowDBNull = false;
-                this.columnproject_manager_id.AllowDBNull = false;
-                this.columno_and_m_id.AllowDBNull = false;
-                this.columnpermit_status_id.AllowDBNull = false;
-                this.columnmanagement_id.AllowDBNull = false;
-                this.columncreate_by.AllowDBNull = false;
-                this.columncreate_by.MaxLength = 20;
-                this.columncreate_date.AllowDBNull = false;
                 this.columnupdate_by.AllowDBNull = false;
                 this.columnupdate_by.MaxLength = 20;
                 this.columnupdate_date.AllowDBNull = false;
-                this.columnmodified_time.ReadOnly = true;
+                this.columnmanagement_id.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2898,8 +2664,6 @@ namespace SystemsAnalysis.DataAccess {
             
             private global::System.Data.DataColumn columnassessment_date;
             
-            private global::System.Data.DataColumn columnstaff_id;
-            
             private global::System.Data.DataColumn columninformation_source_id;
             
             private global::System.Data.DataColumn columnia_type_id;
@@ -2907,8 +2671,6 @@ namespace SystemsAnalysis.DataAccess {
             private global::System.Data.DataColumn columnia_sqft;
             
             private global::System.Data.DataColumn columndestination_id;
-            
-            private global::System.Data.DataColumn columnmanagement_id;
             
             private global::System.Data.DataColumn columnfacility_type_id;
             
@@ -2920,15 +2682,11 @@ namespace SystemsAnalysis.DataAccess {
             
             private global::System.Data.DataColumn columnproject_id;
             
-            private global::System.Data.DataColumn columncreate_by;
-            
-            private global::System.Data.DataColumn columncreate_date;
-            
             private global::System.Data.DataColumn columnupdate_by;
             
             private global::System.Data.DataColumn columnupdate_date;
             
-            private global::System.Data.DataColumn columnmodified_time;
+            private global::System.Data.DataColumn columnmanagement_id;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public SITE_ASSESSMENTDataTable() {
@@ -2982,13 +2740,6 @@ namespace SystemsAnalysis.DataAccess {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn staff_idColumn {
-                get {
-                    return this.columnstaff_id;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public global::System.Data.DataColumn information_source_idColumn {
                 get {
                     return this.columninformation_source_id;
@@ -3013,13 +2764,6 @@ namespace SystemsAnalysis.DataAccess {
             public global::System.Data.DataColumn destination_idColumn {
                 get {
                     return this.columndestination_id;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn management_idColumn {
-                get {
-                    return this.columnmanagement_id;
                 }
             }
             
@@ -3059,20 +2803,6 @@ namespace SystemsAnalysis.DataAccess {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn create_byColumn {
-                get {
-                    return this.columncreate_by;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn create_dateColumn {
-                get {
-                    return this.columncreate_date;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public global::System.Data.DataColumn update_byColumn {
                 get {
                     return this.columnupdate_by;
@@ -3087,9 +2817,9 @@ namespace SystemsAnalysis.DataAccess {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn modified_timeColumn {
+            public global::System.Data.DataColumn management_idColumn {
                 get {
-                    return this.columnmodified_time;
+                    return this.columnmanagement_id;
                 }
             }
             
@@ -3122,63 +2852,41 @@ namespace SystemsAnalysis.DataAccess {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public SITE_ASSESSMENTRow AddSITE_ASSESSMENTRow(
-                        SITERow parentSITERowByFK_SITE_ASSESSMENT_SITE, 
-                        System.DateTime assessment_date, 
-                        int staff_id, 
-                        int information_source_id, 
-                        IMPERVIOUS_AREA_TYPERow parentIMPERVIOUS_AREA_TYPERowByFK_SITE_ASSESSMENT_IMPERVIOUS_AREA_TYPE, 
-                        int ia_sqft, 
-                        DESTINATIONRow parentDESTINATIONRowByFK_SITE_ASSESSMENT_DESTINATION, 
-                        int management_id, 
-                        FACILITY_TYPERow parentFACILITY_TYPERowByFK_SITE_ASSESSMENT_FACILITY_TYPE, 
-                        string hansen_id, 
-                        ASSESSMENT_TYPERow parentASSESSMENT_TYPERowByFK_SITE_ASSESSMENT_ASSESSMENT_TYPE, 
-                        System.Guid gis_uniqueid, 
-                        PROJECTRow parentPROJECTRowByFK_SITE_ASSESSMENT_PROJECT, 
-                        string create_by, 
-                        System.DateTime create_date, 
-                        string update_by, 
-                        System.DateTime update_date, 
-                        byte[] modified_time) {
+            public SITE_ASSESSMENTRow AddSITE_ASSESSMENTRow(SITERow parentSITERowByFK_SITE_ASSESSMENT_SITE, System.DateTime assessment_date, int information_source_id, IMPERVIOUS_AREA_TYPERow parentIMPERVIOUS_AREA_TYPERowByFK_SITE_ASSESSMENT_IMPERVIOUS_AREA_TYPE, int ia_sqft, DESTINATIONRow parentDESTINATIONRowByFK_SITE_ASSESSMENT_DESTINATION, FACILITY_TYPERow parentFACILITY_TYPERowByFK_SITE_ASSESSMENT_FACILITY_TYPE, string hansen_id, ASSESSMENT_TYPERow parentASSESSMENT_TYPERowByFK_SITE_ASSESSMENT_ASSESSMENT_TYPE, System.Guid gis_uniqueid, PROJECTRow parentPROJECTRowByFK_SITE_ASSESSMENT_PROJECT, string update_by, System.DateTime update_date, int management_id) {
                 SITE_ASSESSMENTRow rowSITE_ASSESSMENTRow = ((SITE_ASSESSMENTRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
                         null,
                         assessment_date,
-                        staff_id,
                         information_source_id,
                         null,
                         ia_sqft,
                         null,
-                        management_id,
                         null,
                         hansen_id,
                         null,
                         gis_uniqueid,
                         null,
-                        create_by,
-                        create_date,
                         update_by,
                         update_date,
-                        modified_time};
+                        management_id};
                 if ((parentSITERowByFK_SITE_ASSESSMENT_SITE != null)) {
                     columnValuesArray[1] = parentSITERowByFK_SITE_ASSESSMENT_SITE[0];
                 }
                 if ((parentIMPERVIOUS_AREA_TYPERowByFK_SITE_ASSESSMENT_IMPERVIOUS_AREA_TYPE != null)) {
-                    columnValuesArray[5] = parentIMPERVIOUS_AREA_TYPERowByFK_SITE_ASSESSMENT_IMPERVIOUS_AREA_TYPE[0];
+                    columnValuesArray[4] = parentIMPERVIOUS_AREA_TYPERowByFK_SITE_ASSESSMENT_IMPERVIOUS_AREA_TYPE[0];
                 }
                 if ((parentDESTINATIONRowByFK_SITE_ASSESSMENT_DESTINATION != null)) {
-                    columnValuesArray[7] = parentDESTINATIONRowByFK_SITE_ASSESSMENT_DESTINATION[0];
+                    columnValuesArray[6] = parentDESTINATIONRowByFK_SITE_ASSESSMENT_DESTINATION[0];
                 }
                 if ((parentFACILITY_TYPERowByFK_SITE_ASSESSMENT_FACILITY_TYPE != null)) {
-                    columnValuesArray[9] = parentFACILITY_TYPERowByFK_SITE_ASSESSMENT_FACILITY_TYPE[0];
+                    columnValuesArray[7] = parentFACILITY_TYPERowByFK_SITE_ASSESSMENT_FACILITY_TYPE[0];
                 }
                 if ((parentASSESSMENT_TYPERowByFK_SITE_ASSESSMENT_ASSESSMENT_TYPE != null)) {
-                    columnValuesArray[11] = parentASSESSMENT_TYPERowByFK_SITE_ASSESSMENT_ASSESSMENT_TYPE[0];
+                    columnValuesArray[9] = parentASSESSMENT_TYPERowByFK_SITE_ASSESSMENT_ASSESSMENT_TYPE[0];
                 }
                 if ((parentPROJECTRowByFK_SITE_ASSESSMENT_PROJECT != null)) {
-                    columnValuesArray[13] = parentPROJECTRowByFK_SITE_ASSESSMENT_PROJECT[0];
+                    columnValuesArray[11] = parentPROJECTRowByFK_SITE_ASSESSMENT_PROJECT[0];
                 }
                 rowSITE_ASSESSMENTRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowSITE_ASSESSMENTRow);
@@ -3208,22 +2916,18 @@ namespace SystemsAnalysis.DataAccess {
                 this.columnsite_assessment_id = base.Columns["site_assessment_id"];
                 this.columnsite_id = base.Columns["site_id"];
                 this.columnassessment_date = base.Columns["assessment_date"];
-                this.columnstaff_id = base.Columns["staff_id"];
                 this.columninformation_source_id = base.Columns["information_source_id"];
                 this.columnia_type_id = base.Columns["ia_type_id"];
                 this.columnia_sqft = base.Columns["ia_sqft"];
                 this.columndestination_id = base.Columns["destination_id"];
-                this.columnmanagement_id = base.Columns["management_id"];
                 this.columnfacility_type_id = base.Columns["facility_type_id"];
                 this.columnhansen_id = base.Columns["hansen_id"];
                 this.columnassessment_type_id = base.Columns["assessment_type_id"];
                 this.columngis_uniqueid = base.Columns["gis_uniqueid"];
                 this.columnproject_id = base.Columns["project_id"];
-                this.columncreate_by = base.Columns["create_by"];
-                this.columncreate_date = base.Columns["create_date"];
                 this.columnupdate_by = base.Columns["update_by"];
                 this.columnupdate_date = base.Columns["update_date"];
-                this.columnmodified_time = base.Columns["modified_time"];
+                this.columnmanagement_id = base.Columns["management_id"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3234,8 +2938,6 @@ namespace SystemsAnalysis.DataAccess {
                 base.Columns.Add(this.columnsite_id);
                 this.columnassessment_date = new global::System.Data.DataColumn("assessment_date", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnassessment_date);
-                this.columnstaff_id = new global::System.Data.DataColumn("staff_id", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnstaff_id);
                 this.columninformation_source_id = new global::System.Data.DataColumn("information_source_id", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columninformation_source_id);
                 this.columnia_type_id = new global::System.Data.DataColumn("ia_type_id", typeof(int), null, global::System.Data.MappingType.Element);
@@ -3244,8 +2946,6 @@ namespace SystemsAnalysis.DataAccess {
                 base.Columns.Add(this.columnia_sqft);
                 this.columndestination_id = new global::System.Data.DataColumn("destination_id", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columndestination_id);
-                this.columnmanagement_id = new global::System.Data.DataColumn("management_id", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnmanagement_id);
                 this.columnfacility_type_id = new global::System.Data.DataColumn("facility_type_id", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnfacility_type_id);
                 this.columnhansen_id = new global::System.Data.DataColumn("hansen_id", typeof(string), null, global::System.Data.MappingType.Element);
@@ -3256,16 +2956,12 @@ namespace SystemsAnalysis.DataAccess {
                 base.Columns.Add(this.columngis_uniqueid);
                 this.columnproject_id = new global::System.Data.DataColumn("project_id", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnproject_id);
-                this.columncreate_by = new global::System.Data.DataColumn("create_by", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columncreate_by);
-                this.columncreate_date = new global::System.Data.DataColumn("create_date", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columncreate_date);
                 this.columnupdate_by = new global::System.Data.DataColumn("update_by", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnupdate_by);
                 this.columnupdate_date = new global::System.Data.DataColumn("update_date", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnupdate_date);
-                this.columnmodified_time = new global::System.Data.DataColumn("modified_time", typeof(byte[]), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnmodified_time);
+                this.columnmanagement_id = new global::System.Data.DataColumn("management_id", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnmanagement_id);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnsite_assessment_id}, true));
                 this.columnsite_assessment_id.AutoIncrement = true;
@@ -3276,19 +2972,14 @@ namespace SystemsAnalysis.DataAccess {
                 this.columnsite_assessment_id.Unique = true;
                 this.columnsite_id.AllowDBNull = false;
                 this.columnassessment_date.AllowDBNull = false;
-                this.columnstaff_id.AllowDBNull = false;
                 this.columninformation_source_id.AllowDBNull = false;
                 this.columnia_type_id.AllowDBNull = false;
                 this.columndestination_id.AllowDBNull = false;
                 this.columnhansen_id.MaxLength = 10;
                 this.columnassessment_type_id.AllowDBNull = false;
-                this.columncreate_by.AllowDBNull = false;
-                this.columncreate_by.MaxLength = 20;
-                this.columncreate_date.AllowDBNull = false;
                 this.columnupdate_by.AllowDBNull = false;
                 this.columnupdate_by.MaxLength = 20;
                 this.columnupdate_date.AllowDBNull = false;
-                this.columnmodified_time.ReadOnly = true;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3412,416 +3103,19 @@ namespace SystemsAnalysis.DataAccess {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class SITE_OPPORTUNITYDataTable : global::System.Data.TypedTableBase<SITE_OPPORTUNITYRow> {
-            
-            private global::System.Data.DataColumn columnsite_opportunity_id;
-            
-            private global::System.Data.DataColumn columnsite_id;
-            
-            private global::System.Data.DataColumn columnia_sqft;
-            
-            private global::System.Data.DataColumn columnmanagement_id;
-            
-            private global::System.Data.DataColumn columnfacility_type_id;
-            
-            private global::System.Data.DataColumn columnopportunity_feasibility;
-            
-            private global::System.Data.DataColumn columncreate_by;
-            
-            private global::System.Data.DataColumn columncreate_date;
-            
-            private global::System.Data.DataColumn columnupdate_by;
-            
-            private global::System.Data.DataColumn columnupdate_date;
-            
-            private global::System.Data.DataColumn columnmodified_time;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public SITE_OPPORTUNITYDataTable() {
-                this.TableName = "SITE_OPPORTUNITY";
-                this.BeginInit();
-                this.InitClass();
-                this.EndInit();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal SITE_OPPORTUNITYDataTable(global::System.Data.DataTable table) {
-                this.TableName = table.TableName;
-                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
-                    this.CaseSensitive = table.CaseSensitive;
-                }
-                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
-                    this.Locale = table.Locale;
-                }
-                if ((table.Namespace != table.DataSet.Namespace)) {
-                    this.Namespace = table.Namespace;
-                }
-                this.Prefix = table.Prefix;
-                this.MinimumCapacity = table.MinimumCapacity;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected SITE_OPPORTUNITYDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
-                    base(info, context) {
-                this.InitVars();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn site_opportunity_idColumn {
-                get {
-                    return this.columnsite_opportunity_id;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn site_idColumn {
-                get {
-                    return this.columnsite_id;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn ia_sqftColumn {
-                get {
-                    return this.columnia_sqft;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn management_idColumn {
-                get {
-                    return this.columnmanagement_id;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn facility_type_idColumn {
-                get {
-                    return this.columnfacility_type_id;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn opportunity_feasibilityColumn {
-                get {
-                    return this.columnopportunity_feasibility;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn create_byColumn {
-                get {
-                    return this.columncreate_by;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn create_dateColumn {
-                get {
-                    return this.columncreate_date;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn update_byColumn {
-                get {
-                    return this.columnupdate_by;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn update_dateColumn {
-                get {
-                    return this.columnupdate_date;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn modified_timeColumn {
-                get {
-                    return this.columnmodified_time;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.ComponentModel.Browsable(false)]
-            public int Count {
-                get {
-                    return this.Rows.Count;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public SITE_OPPORTUNITYRow this[int index] {
-                get {
-                    return ((SITE_OPPORTUNITYRow)(this.Rows[index]));
-                }
-            }
-            
-            public event SITE_OPPORTUNITYRowChangeEventHandler SITE_OPPORTUNITYRowChanging;
-            
-            public event SITE_OPPORTUNITYRowChangeEventHandler SITE_OPPORTUNITYRowChanged;
-            
-            public event SITE_OPPORTUNITYRowChangeEventHandler SITE_OPPORTUNITYRowDeleting;
-            
-            public event SITE_OPPORTUNITYRowChangeEventHandler SITE_OPPORTUNITYRowDeleted;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void AddSITE_OPPORTUNITYRow(SITE_OPPORTUNITYRow row) {
-                this.Rows.Add(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public SITE_OPPORTUNITYRow AddSITE_OPPORTUNITYRow(SITERow parentSITERowByFK_SITE_OPPORTUNITY_SITE, int ia_sqft, int management_id, FACILITY_TYPERow parentFACILITY_TYPERowByFK_SITE_OPPORTUNITY_FACILITY_TYPE, int opportunity_feasibility, string create_by, System.DateTime create_date, string update_by, System.DateTime update_date, byte[] modified_time) {
-                SITE_OPPORTUNITYRow rowSITE_OPPORTUNITYRow = ((SITE_OPPORTUNITYRow)(this.NewRow()));
-                object[] columnValuesArray = new object[] {
-                        null,
-                        null,
-                        ia_sqft,
-                        management_id,
-                        null,
-                        opportunity_feasibility,
-                        create_by,
-                        create_date,
-                        update_by,
-                        update_date,
-                        modified_time};
-                if ((parentSITERowByFK_SITE_OPPORTUNITY_SITE != null)) {
-                    columnValuesArray[1] = parentSITERowByFK_SITE_OPPORTUNITY_SITE[0];
-                }
-                if ((parentFACILITY_TYPERowByFK_SITE_OPPORTUNITY_FACILITY_TYPE != null)) {
-                    columnValuesArray[4] = parentFACILITY_TYPERowByFK_SITE_OPPORTUNITY_FACILITY_TYPE[0];
-                }
-                rowSITE_OPPORTUNITYRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowSITE_OPPORTUNITYRow);
-                return rowSITE_OPPORTUNITYRow;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public SITE_OPPORTUNITYRow FindBysite_opportunity_id(int site_opportunity_id) {
-                return ((SITE_OPPORTUNITYRow)(this.Rows.Find(new object[] {
-                            site_opportunity_id})));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public override global::System.Data.DataTable Clone() {
-                SITE_OPPORTUNITYDataTable cln = ((SITE_OPPORTUNITYDataTable)(base.Clone()));
-                cln.InitVars();
-                return cln;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Data.DataTable CreateInstance() {
-                return new SITE_OPPORTUNITYDataTable();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal void InitVars() {
-                this.columnsite_opportunity_id = base.Columns["site_opportunity_id"];
-                this.columnsite_id = base.Columns["site_id"];
-                this.columnia_sqft = base.Columns["ia_sqft"];
-                this.columnmanagement_id = base.Columns["management_id"];
-                this.columnfacility_type_id = base.Columns["facility_type_id"];
-                this.columnopportunity_feasibility = base.Columns["opportunity_feasibility"];
-                this.columncreate_by = base.Columns["create_by"];
-                this.columncreate_date = base.Columns["create_date"];
-                this.columnupdate_by = base.Columns["update_by"];
-                this.columnupdate_date = base.Columns["update_date"];
-                this.columnmodified_time = base.Columns["modified_time"];
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            private void InitClass() {
-                this.columnsite_opportunity_id = new global::System.Data.DataColumn("site_opportunity_id", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnsite_opportunity_id);
-                this.columnsite_id = new global::System.Data.DataColumn("site_id", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnsite_id);
-                this.columnia_sqft = new global::System.Data.DataColumn("ia_sqft", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnia_sqft);
-                this.columnmanagement_id = new global::System.Data.DataColumn("management_id", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnmanagement_id);
-                this.columnfacility_type_id = new global::System.Data.DataColumn("facility_type_id", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnfacility_type_id);
-                this.columnopportunity_feasibility = new global::System.Data.DataColumn("opportunity_feasibility", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnopportunity_feasibility);
-                this.columncreate_by = new global::System.Data.DataColumn("create_by", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columncreate_by);
-                this.columncreate_date = new global::System.Data.DataColumn("create_date", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columncreate_date);
-                this.columnupdate_by = new global::System.Data.DataColumn("update_by", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnupdate_by);
-                this.columnupdate_date = new global::System.Data.DataColumn("update_date", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnupdate_date);
-                this.columnmodified_time = new global::System.Data.DataColumn("modified_time", typeof(byte[]), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnmodified_time);
-                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columnsite_opportunity_id}, true));
-                this.columnsite_opportunity_id.AutoIncrement = true;
-                this.columnsite_opportunity_id.AutoIncrementSeed = -1;
-                this.columnsite_opportunity_id.AutoIncrementStep = -1;
-                this.columnsite_opportunity_id.AllowDBNull = false;
-                this.columnsite_opportunity_id.ReadOnly = true;
-                this.columnsite_opportunity_id.Unique = true;
-                this.columnsite_id.AllowDBNull = false;
-                this.columnia_sqft.AllowDBNull = false;
-                this.columnmanagement_id.AllowDBNull = false;
-                this.columnfacility_type_id.AllowDBNull = false;
-                this.columnopportunity_feasibility.AllowDBNull = false;
-                this.columncreate_by.AllowDBNull = false;
-                this.columncreate_by.MaxLength = 20;
-                this.columncreate_date.AllowDBNull = false;
-                this.columnupdate_by.AllowDBNull = false;
-                this.columnupdate_by.MaxLength = 20;
-                this.columnupdate_date.AllowDBNull = false;
-                this.columnmodified_time.ReadOnly = true;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public SITE_OPPORTUNITYRow NewSITE_OPPORTUNITYRow() {
-                return ((SITE_OPPORTUNITYRow)(this.NewRow()));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new SITE_OPPORTUNITYRow(builder);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override global::System.Type GetRowType() {
-                return typeof(SITE_OPPORTUNITYRow);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanged(e);
-                if ((this.SITE_OPPORTUNITYRowChanged != null)) {
-                    this.SITE_OPPORTUNITYRowChanged(this, new SITE_OPPORTUNITYRowChangeEvent(((SITE_OPPORTUNITYRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanging(e);
-                if ((this.SITE_OPPORTUNITYRowChanging != null)) {
-                    this.SITE_OPPORTUNITYRowChanging(this, new SITE_OPPORTUNITYRowChangeEvent(((SITE_OPPORTUNITYRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleted(e);
-                if ((this.SITE_OPPORTUNITYRowDeleted != null)) {
-                    this.SITE_OPPORTUNITYRowDeleted(this, new SITE_OPPORTUNITYRowChangeEvent(((SITE_OPPORTUNITYRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleting(e);
-                if ((this.SITE_OPPORTUNITYRowDeleting != null)) {
-                    this.SITE_OPPORTUNITYRowDeleting(this, new SITE_OPPORTUNITYRowChangeEvent(((SITE_OPPORTUNITYRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void RemoveSITE_OPPORTUNITYRow(SITE_OPPORTUNITYRow row) {
-                this.Rows.Remove(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
-                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                RetrofitsDataSet ds = new RetrofitsDataSet();
-                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
-                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
-                any1.MinOccurs = new decimal(0);
-                any1.MaxOccurs = decimal.MaxValue;
-                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any1);
-                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
-                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
-                any2.MinOccurs = new decimal(1);
-                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any2);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute1.Name = "namespace";
-                attribute1.FixedValue = ds.Namespace;
-                type.Attributes.Add(attribute1);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "SITE_OPPORTUNITYDataTable";
-                type.Attributes.Add(attribute2);
-                type.Particle = sequence;
-                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-                if (xs.Contains(dsSchema.TargetNamespace)) {
-                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
-                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-                    try {
-                        global::System.Xml.Schema.XmlSchema schema = null;
-                        dsSchema.Write(s1);
-                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
-                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
-                            s2.SetLength(0);
-                            schema.Write(s2);
-                            if ((s1.Length == s2.Length)) {
-                                s1.Position = 0;
-                                s2.Position = 0;
-                                for (; ((s1.Position != s1.Length) 
-                                            && (s1.ReadByte() == s2.ReadByte())); ) {
-                                    ;
-                                }
-                                if ((s1.Position == s1.Length)) {
-                                    return type;
-                                }
-                            }
-                        }
-                    }
-                    finally {
-                        if ((s1 != null)) {
-                            s1.Close();
-                        }
-                        if ((s2 != null)) {
-                            s2.Close();
-                        }
-                    }
-                }
-                xs.Add(dsSchema);
-                return type;
-            }
-        }
-        
-        /// <summary>
-        ///Represents the strongly named DataTable class.
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        [global::System.Serializable()]
-        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class SITEDataTable : global::System.Data.TypedTableBase<SITERow> {
             
             private global::System.Data.DataColumn columnsite_id;
             
             private global::System.Data.DataColumn columnproperty_id;
             
-            private global::System.Data.DataColumn columnsite_use;
-            
-            private global::System.Data.DataColumn columnsite_use_description;
-            
-            private global::System.Data.DataColumn columnneighborhood;
-            
             private global::System.Data.DataColumn columnsewer_basin;
             
             private global::System.Data.DataColumn columnretro_basin;
             
-            private global::System.Data.DataColumn columncreate_by;
-            
-            private global::System.Data.DataColumn columncreate_date;
-            
             private global::System.Data.DataColumn columnupdate_by;
             
             private global::System.Data.DataColumn columnupdate_date;
-            
-            private global::System.Data.DataColumn columnmodified_time;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public SITEDataTable() {
@@ -3868,27 +3162,6 @@ namespace SystemsAnalysis.DataAccess {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn site_useColumn {
-                get {
-                    return this.columnsite_use;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn site_use_descriptionColumn {
-                get {
-                    return this.columnsite_use_description;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn neighborhoodColumn {
-                get {
-                    return this.columnneighborhood;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public global::System.Data.DataColumn sewer_basinColumn {
                 get {
                     return this.columnsewer_basin;
@@ -3903,20 +3176,6 @@ namespace SystemsAnalysis.DataAccess {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn create_byColumn {
-                get {
-                    return this.columncreate_by;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn create_dateColumn {
-                get {
-                    return this.columncreate_date;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public global::System.Data.DataColumn update_byColumn {
                 get {
                     return this.columnupdate_by;
@@ -3927,13 +3186,6 @@ namespace SystemsAnalysis.DataAccess {
             public global::System.Data.DataColumn update_dateColumn {
                 get {
                     return this.columnupdate_date;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn modified_timeColumn {
-                get {
-                    return this.columnmodified_time;
                 }
             }
             
@@ -3966,21 +3218,15 @@ namespace SystemsAnalysis.DataAccess {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public SITERow AddSITERow(string property_id, string site_use, string site_use_description, string neighborhood, string sewer_basin, string retro_basin, string create_by, System.DateTime create_date, string update_by, System.DateTime update_date, byte[] modified_time) {
+            public SITERow AddSITERow(string property_id, string sewer_basin, string retro_basin, string update_by, System.DateTime update_date) {
                 SITERow rowSITERow = ((SITERow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
                         property_id,
-                        site_use,
-                        site_use_description,
-                        neighborhood,
                         sewer_basin,
                         retro_basin,
-                        create_by,
-                        create_date,
                         update_by,
-                        update_date,
-                        modified_time};
+                        update_date};
                 rowSITERow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowSITERow);
                 return rowSITERow;
@@ -4008,16 +3254,10 @@ namespace SystemsAnalysis.DataAccess {
             internal void InitVars() {
                 this.columnsite_id = base.Columns["site_id"];
                 this.columnproperty_id = base.Columns["property_id"];
-                this.columnsite_use = base.Columns["site_use"];
-                this.columnsite_use_description = base.Columns["site_use_description"];
-                this.columnneighborhood = base.Columns["neighborhood"];
                 this.columnsewer_basin = base.Columns["sewer_basin"];
                 this.columnretro_basin = base.Columns["retro_basin"];
-                this.columncreate_by = base.Columns["create_by"];
-                this.columncreate_date = base.Columns["create_date"];
                 this.columnupdate_by = base.Columns["update_by"];
                 this.columnupdate_date = base.Columns["update_date"];
-                this.columnmodified_time = base.Columns["modified_time"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4026,26 +3266,14 @@ namespace SystemsAnalysis.DataAccess {
                 base.Columns.Add(this.columnsite_id);
                 this.columnproperty_id = new global::System.Data.DataColumn("property_id", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnproperty_id);
-                this.columnsite_use = new global::System.Data.DataColumn("site_use", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnsite_use);
-                this.columnsite_use_description = new global::System.Data.DataColumn("site_use_description", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnsite_use_description);
-                this.columnneighborhood = new global::System.Data.DataColumn("neighborhood", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnneighborhood);
                 this.columnsewer_basin = new global::System.Data.DataColumn("sewer_basin", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnsewer_basin);
                 this.columnretro_basin = new global::System.Data.DataColumn("retro_basin", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnretro_basin);
-                this.columncreate_by = new global::System.Data.DataColumn("create_by", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columncreate_by);
-                this.columncreate_date = new global::System.Data.DataColumn("create_date", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columncreate_date);
                 this.columnupdate_by = new global::System.Data.DataColumn("update_by", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnupdate_by);
                 this.columnupdate_date = new global::System.Data.DataColumn("update_date", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnupdate_date);
-                this.columnmodified_time = new global::System.Data.DataColumn("modified_time", typeof(byte[]), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnmodified_time);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnsite_id}, true));
                 this.columnsite_id.AutoIncrement = true;
@@ -4056,21 +3284,13 @@ namespace SystemsAnalysis.DataAccess {
                 this.columnsite_id.Unique = true;
                 this.columnproperty_id.AllowDBNull = false;
                 this.columnproperty_id.MaxLength = 7;
-                this.columnsite_use.MaxLength = 50;
-                this.columnsite_use_description.MaxLength = 50;
-                this.columnneighborhood.AllowDBNull = false;
-                this.columnneighborhood.MaxLength = 50;
                 this.columnsewer_basin.AllowDBNull = false;
                 this.columnsewer_basin.MaxLength = 50;
                 this.columnretro_basin.AllowDBNull = false;
                 this.columnretro_basin.MaxLength = 50;
-                this.columncreate_by.AllowDBNull = false;
-                this.columncreate_by.MaxLength = 20;
-                this.columncreate_date.AllowDBNull = false;
                 this.columnupdate_by.AllowDBNull = false;
                 this.columnupdate_by.MaxLength = 20;
                 this.columnupdate_date.AllowDBNull = false;
-                this.columnmodified_time.ReadOnly = true;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4693,6 +3913,364 @@ namespace SystemsAnalysis.DataAccess {
         }
         
         /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class SITE_OPPORTUNITYDataTable : global::System.Data.TypedTableBase<SITE_OPPORTUNITYRow> {
+            
+            private global::System.Data.DataColumn columnsite_opportunity_id;
+            
+            private global::System.Data.DataColumn columnsite_id;
+            
+            private global::System.Data.DataColumn columnia_sqft;
+            
+            private global::System.Data.DataColumn columnia_type_id;
+            
+            private global::System.Data.DataColumn columnmanagement_id;
+            
+            private global::System.Data.DataColumn columnfacility_type_id;
+            
+            private global::System.Data.DataColumn columnopportunity_feasibility;
+            
+            private global::System.Data.DataColumn columnupdate_by;
+            
+            private global::System.Data.DataColumn columnupdate_date;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public SITE_OPPORTUNITYDataTable() {
+                this.TableName = "SITE_OPPORTUNITY";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal SITE_OPPORTUNITYDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected SITE_OPPORTUNITYDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn site_opportunity_idColumn {
+                get {
+                    return this.columnsite_opportunity_id;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn site_idColumn {
+                get {
+                    return this.columnsite_id;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn ia_sqftColumn {
+                get {
+                    return this.columnia_sqft;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn ia_type_idColumn {
+                get {
+                    return this.columnia_type_id;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn management_idColumn {
+                get {
+                    return this.columnmanagement_id;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn facility_type_idColumn {
+                get {
+                    return this.columnfacility_type_id;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn opportunity_feasibilityColumn {
+                get {
+                    return this.columnopportunity_feasibility;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn update_byColumn {
+                get {
+                    return this.columnupdate_by;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn update_dateColumn {
+                get {
+                    return this.columnupdate_date;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public SITE_OPPORTUNITYRow this[int index] {
+                get {
+                    return ((SITE_OPPORTUNITYRow)(this.Rows[index]));
+                }
+            }
+            
+            public event SITE_OPPORTUNITYRowChangeEventHandler SITE_OPPORTUNITYRowChanging;
+            
+            public event SITE_OPPORTUNITYRowChangeEventHandler SITE_OPPORTUNITYRowChanged;
+            
+            public event SITE_OPPORTUNITYRowChangeEventHandler SITE_OPPORTUNITYRowDeleting;
+            
+            public event SITE_OPPORTUNITYRowChangeEventHandler SITE_OPPORTUNITYRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void AddSITE_OPPORTUNITYRow(SITE_OPPORTUNITYRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public SITE_OPPORTUNITYRow AddSITE_OPPORTUNITYRow(SITERow parentSITERowByFK_SITE_OPPORTUNITY_SITE, int ia_sqft, IMPERVIOUS_AREA_TYPERow parentIMPERVIOUS_AREA_TYPERowByFK_SITE_OPPORTUNITY_IMPERVIOUS_AREA_TYPE, int management_id, FACILITY_TYPERow parentFACILITY_TYPERowByFK_SITE_OPPORTUNITY_FACILITY_TYPE, int opportunity_feasibility, string update_by, System.DateTime update_date) {
+                SITE_OPPORTUNITYRow rowSITE_OPPORTUNITYRow = ((SITE_OPPORTUNITYRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        null,
+                        null,
+                        ia_sqft,
+                        null,
+                        management_id,
+                        null,
+                        opportunity_feasibility,
+                        update_by,
+                        update_date};
+                if ((parentSITERowByFK_SITE_OPPORTUNITY_SITE != null)) {
+                    columnValuesArray[1] = parentSITERowByFK_SITE_OPPORTUNITY_SITE[0];
+                }
+                if ((parentIMPERVIOUS_AREA_TYPERowByFK_SITE_OPPORTUNITY_IMPERVIOUS_AREA_TYPE != null)) {
+                    columnValuesArray[3] = parentIMPERVIOUS_AREA_TYPERowByFK_SITE_OPPORTUNITY_IMPERVIOUS_AREA_TYPE[0];
+                }
+                if ((parentFACILITY_TYPERowByFK_SITE_OPPORTUNITY_FACILITY_TYPE != null)) {
+                    columnValuesArray[5] = parentFACILITY_TYPERowByFK_SITE_OPPORTUNITY_FACILITY_TYPE[0];
+                }
+                rowSITE_OPPORTUNITYRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowSITE_OPPORTUNITYRow);
+                return rowSITE_OPPORTUNITYRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public SITE_OPPORTUNITYRow FindBysite_opportunity_id(int site_opportunity_id) {
+                return ((SITE_OPPORTUNITYRow)(this.Rows.Find(new object[] {
+                            site_opportunity_id})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public override global::System.Data.DataTable Clone() {
+                SITE_OPPORTUNITYDataTable cln = ((SITE_OPPORTUNITYDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new SITE_OPPORTUNITYDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal void InitVars() {
+                this.columnsite_opportunity_id = base.Columns["site_opportunity_id"];
+                this.columnsite_id = base.Columns["site_id"];
+                this.columnia_sqft = base.Columns["ia_sqft"];
+                this.columnia_type_id = base.Columns["ia_type_id"];
+                this.columnmanagement_id = base.Columns["management_id"];
+                this.columnfacility_type_id = base.Columns["facility_type_id"];
+                this.columnopportunity_feasibility = base.Columns["opportunity_feasibility"];
+                this.columnupdate_by = base.Columns["update_by"];
+                this.columnupdate_date = base.Columns["update_date"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            private void InitClass() {
+                this.columnsite_opportunity_id = new global::System.Data.DataColumn("site_opportunity_id", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnsite_opportunity_id);
+                this.columnsite_id = new global::System.Data.DataColumn("site_id", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnsite_id);
+                this.columnia_sqft = new global::System.Data.DataColumn("ia_sqft", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnia_sqft);
+                this.columnia_type_id = new global::System.Data.DataColumn("ia_type_id", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnia_type_id);
+                this.columnmanagement_id = new global::System.Data.DataColumn("management_id", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnmanagement_id);
+                this.columnfacility_type_id = new global::System.Data.DataColumn("facility_type_id", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnfacility_type_id);
+                this.columnopportunity_feasibility = new global::System.Data.DataColumn("opportunity_feasibility", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnopportunity_feasibility);
+                this.columnupdate_by = new global::System.Data.DataColumn("update_by", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnupdate_by);
+                this.columnupdate_date = new global::System.Data.DataColumn("update_date", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnupdate_date);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnsite_opportunity_id}, true));
+                this.columnsite_opportunity_id.AutoIncrement = true;
+                this.columnsite_opportunity_id.AutoIncrementSeed = -1;
+                this.columnsite_opportunity_id.AutoIncrementStep = -1;
+                this.columnsite_opportunity_id.AllowDBNull = false;
+                this.columnsite_opportunity_id.ReadOnly = true;
+                this.columnsite_opportunity_id.Unique = true;
+                this.columnsite_id.AllowDBNull = false;
+                this.columnia_sqft.AllowDBNull = false;
+                this.columnmanagement_id.AllowDBNull = false;
+                this.columnfacility_type_id.AllowDBNull = false;
+                this.columnopportunity_feasibility.AllowDBNull = false;
+                this.columnupdate_by.AllowDBNull = false;
+                this.columnupdate_by.MaxLength = 20;
+                this.columnupdate_date.AllowDBNull = false;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public SITE_OPPORTUNITYRow NewSITE_OPPORTUNITYRow() {
+                return ((SITE_OPPORTUNITYRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new SITE_OPPORTUNITYRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override global::System.Type GetRowType() {
+                return typeof(SITE_OPPORTUNITYRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.SITE_OPPORTUNITYRowChanged != null)) {
+                    this.SITE_OPPORTUNITYRowChanged(this, new SITE_OPPORTUNITYRowChangeEvent(((SITE_OPPORTUNITYRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.SITE_OPPORTUNITYRowChanging != null)) {
+                    this.SITE_OPPORTUNITYRowChanging(this, new SITE_OPPORTUNITYRowChangeEvent(((SITE_OPPORTUNITYRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.SITE_OPPORTUNITYRowDeleted != null)) {
+                    this.SITE_OPPORTUNITYRowDeleted(this, new SITE_OPPORTUNITYRowChangeEvent(((SITE_OPPORTUNITYRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.SITE_OPPORTUNITYRowDeleting != null)) {
+                    this.SITE_OPPORTUNITYRowDeleting(this, new SITE_OPPORTUNITYRowChangeEvent(((SITE_OPPORTUNITYRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void RemoveSITE_OPPORTUNITYRow(SITE_OPPORTUNITYRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                RetrofitsDataSet ds = new RetrofitsDataSet();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "SITE_OPPORTUNITYDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
@@ -4890,6 +4468,16 @@ namespace SystemsAnalysis.DataAccess {
                     return ((SITE_ASSESSMENTRow[])(base.GetChildRows(this.Table.ChildRelations["FK_SITE_ASSESSMENT_IMPERVIOUS_AREA_TYPE"])));
                 }
             }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public SITE_OPPORTUNITYRow[] GetSITE_OPPORTUNITYRows() {
+                if ((this.Table.ChildRelations["FK_SITE_OPPORTUNITY_IMPERVIOUS_AREA_TYPE"] == null)) {
+                    return new SITE_OPPORTUNITYRow[0];
+                }
+                else {
+                    return ((SITE_OPPORTUNITYRow[])(base.GetChildRows(this.Table.ChildRelations["FK_SITE_OPPORTUNITY_IMPERVIOUS_AREA_TYPE"])));
+                }
+            }
         }
         
         /// <summary>
@@ -4982,16 +4570,6 @@ namespace SystemsAnalysis.DataAccess {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public int partnership_type_id {
-                get {
-                    return ((int)(this[this.tablePROJECT.partnership_type_idColumn]));
-                }
-                set {
-                    this[this.tablePROJECT.partnership_type_idColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public int facility_type_id {
                 get {
                     return ((int)(this[this.tablePROJECT.facility_type_idColumn]));
@@ -5072,151 +4650,6 @@ namespace SystemsAnalysis.DataAccess {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public int designer_id {
-                get {
-                    return ((int)(this[this.tablePROJECT.designer_idColumn]));
-                }
-                set {
-                    this[this.tablePROJECT.designer_idColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public int constructor_id {
-                get {
-                    return ((int)(this[this.tablePROJECT.constructor_idColumn]));
-                }
-                set {
-                    this[this.tablePROJECT.constructor_idColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public int contractor_id {
-                get {
-                    return ((int)(this[this.tablePROJECT.contractor_idColumn]));
-                }
-                set {
-                    this[this.tablePROJECT.contractor_idColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public decimal city_cost {
-                get {
-                    return ((decimal)(this[this.tablePROJECT.city_costColumn]));
-                }
-                set {
-                    this[this.tablePROJECT.city_costColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string primary_contact_name {
-                get {
-                    return ((string)(this[this.tablePROJECT.primary_contact_nameColumn]));
-                }
-                set {
-                    this[this.tablePROJECT.primary_contact_nameColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string primary_contact_phone {
-                get {
-                    return ((string)(this[this.tablePROJECT.primary_contact_phoneColumn]));
-                }
-                set {
-                    this[this.tablePROJECT.primary_contact_phoneColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string primary_contact_email {
-                get {
-                    try {
-                        return ((string)(this[this.tablePROJECT.primary_contact_emailColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'primary_contact_email\' in table \'PROJECT\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tablePROJECT.primary_contact_emailColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public int primary_contact_type_id {
-                get {
-                    return ((int)(this[this.tablePROJECT.primary_contact_type_idColumn]));
-                }
-                set {
-                    this[this.tablePROJECT.primary_contact_type_idColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public int project_manager_id {
-                get {
-                    return ((int)(this[this.tablePROJECT.project_manager_idColumn]));
-                }
-                set {
-                    this[this.tablePROJECT.project_manager_idColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public int o_and_m_id {
-                get {
-                    return ((int)(this[this.tablePROJECT.o_and_m_idColumn]));
-                }
-                set {
-                    this[this.tablePROJECT.o_and_m_idColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public int permit_status_id {
-                get {
-                    return ((int)(this[this.tablePROJECT.permit_status_idColumn]));
-                }
-                set {
-                    this[this.tablePROJECT.permit_status_idColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public int management_id {
-                get {
-                    return ((int)(this[this.tablePROJECT.management_idColumn]));
-                }
-                set {
-                    this[this.tablePROJECT.management_idColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string create_by {
-                get {
-                    return ((string)(this[this.tablePROJECT.create_byColumn]));
-                }
-                set {
-                    this[this.tablePROJECT.create_byColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public System.DateTime create_date {
-                get {
-                    return ((global::System.DateTime)(this[this.tablePROJECT.create_dateColumn]));
-                }
-                set {
-                    this[this.tablePROJECT.create_dateColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string update_by {
                 get {
                     return ((string)(this[this.tablePROJECT.update_byColumn]));
@@ -5237,17 +4670,12 @@ namespace SystemsAnalysis.DataAccess {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public byte[] modified_time {
+            public int management_id {
                 get {
-                    try {
-                        return ((byte[])(this[this.tablePROJECT.modified_timeColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'modified_time\' in table \'PROJECT\' is DBNull.", e);
-                    }
+                    return ((int)(this[this.tablePROJECT.management_idColumn]));
                 }
                 set {
-                    this[this.tablePROJECT.modified_timeColumn] = value;
+                    this[this.tablePROJECT.management_idColumn] = value;
                 }
             }
             
@@ -5269,26 +4697,6 @@ namespace SystemsAnalysis.DataAccess {
                 set {
                     this.SetParentRow(value, this.Table.ParentRelations["FK_PROJECT_PROJECT_STATUS"]);
                 }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool Isprimary_contact_emailNull() {
-                return this.IsNull(this.tablePROJECT.primary_contact_emailColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void Setprimary_contact_emailNull() {
-                this[this.tablePROJECT.primary_contact_emailColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool Ismodified_timeNull() {
-                return this.IsNull(this.tablePROJECT.modified_timeColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void Setmodified_timeNull() {
-                this[this.tablePROJECT.modified_timeColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5402,16 +4810,6 @@ namespace SystemsAnalysis.DataAccess {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public int staff_id {
-                get {
-                    return ((int)(this[this.tableSITE_ASSESSMENT.staff_idColumn]));
-                }
-                set {
-                    this[this.tableSITE_ASSESSMENT.staff_idColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public int information_source_id {
                 get {
                     return ((int)(this[this.tableSITE_ASSESSMENT.information_source_idColumn]));
@@ -5453,21 +4851,6 @@ namespace SystemsAnalysis.DataAccess {
                 }
                 set {
                     this[this.tableSITE_ASSESSMENT.destination_idColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public int management_id {
-                get {
-                    try {
-                        return ((int)(this[this.tableSITE_ASSESSMENT.management_idColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'management_id\' in table \'SITE_ASSESSMENT\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableSITE_ASSESSMENT.management_idColumn] = value;
                 }
             }
             
@@ -5542,26 +4925,6 @@ namespace SystemsAnalysis.DataAccess {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string create_by {
-                get {
-                    return ((string)(this[this.tableSITE_ASSESSMENT.create_byColumn]));
-                }
-                set {
-                    this[this.tableSITE_ASSESSMENT.create_byColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public System.DateTime create_date {
-                get {
-                    return ((global::System.DateTime)(this[this.tableSITE_ASSESSMENT.create_dateColumn]));
-                }
-                set {
-                    this[this.tableSITE_ASSESSMENT.create_dateColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string update_by {
                 get {
                     return ((string)(this[this.tableSITE_ASSESSMENT.update_byColumn]));
@@ -5582,17 +4945,17 @@ namespace SystemsAnalysis.DataAccess {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public byte[] modified_time {
+            public int management_id {
                 get {
                     try {
-                        return ((byte[])(this[this.tableSITE_ASSESSMENT.modified_timeColumn]));
+                        return ((int)(this[this.tableSITE_ASSESSMENT.management_idColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'modified_time\' in table \'SITE_ASSESSMENT\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'management_id\' in table \'SITE_ASSESSMENT\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableSITE_ASSESSMENT.modified_timeColumn] = value;
+                    this[this.tableSITE_ASSESSMENT.management_idColumn] = value;
                 }
             }
             
@@ -5667,16 +5030,6 @@ namespace SystemsAnalysis.DataAccess {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool Ismanagement_idNull() {
-                return this.IsNull(this.tableSITE_ASSESSMENT.management_idColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void Setmanagement_idNull() {
-                this[this.tableSITE_ASSESSMENT.management_idColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public bool Isfacility_type_idNull() {
                 return this.IsNull(this.tableSITE_ASSESSMENT.facility_type_idColumn);
             }
@@ -5717,173 +5070,13 @@ namespace SystemsAnalysis.DataAccess {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool Ismodified_timeNull() {
-                return this.IsNull(this.tableSITE_ASSESSMENT.modified_timeColumn);
+            public bool Ismanagement_idNull() {
+                return this.IsNull(this.tableSITE_ASSESSMENT.management_idColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void Setmodified_timeNull() {
-                this[this.tableSITE_ASSESSMENT.modified_timeColumn] = global::System.Convert.DBNull;
-            }
-        }
-        
-        /// <summary>
-        ///Represents strongly named DataRow class.
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        public partial class SITE_OPPORTUNITYRow : global::System.Data.DataRow {
-            
-            private SITE_OPPORTUNITYDataTable tableSITE_OPPORTUNITY;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            internal SITE_OPPORTUNITYRow(global::System.Data.DataRowBuilder rb) : 
-                    base(rb) {
-                this.tableSITE_OPPORTUNITY = ((SITE_OPPORTUNITYDataTable)(this.Table));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public int site_opportunity_id {
-                get {
-                    return ((int)(this[this.tableSITE_OPPORTUNITY.site_opportunity_idColumn]));
-                }
-                set {
-                    this[this.tableSITE_OPPORTUNITY.site_opportunity_idColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public int site_id {
-                get {
-                    return ((int)(this[this.tableSITE_OPPORTUNITY.site_idColumn]));
-                }
-                set {
-                    this[this.tableSITE_OPPORTUNITY.site_idColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public int ia_sqft {
-                get {
-                    return ((int)(this[this.tableSITE_OPPORTUNITY.ia_sqftColumn]));
-                }
-                set {
-                    this[this.tableSITE_OPPORTUNITY.ia_sqftColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public int management_id {
-                get {
-                    return ((int)(this[this.tableSITE_OPPORTUNITY.management_idColumn]));
-                }
-                set {
-                    this[this.tableSITE_OPPORTUNITY.management_idColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public int facility_type_id {
-                get {
-                    return ((int)(this[this.tableSITE_OPPORTUNITY.facility_type_idColumn]));
-                }
-                set {
-                    this[this.tableSITE_OPPORTUNITY.facility_type_idColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public int opportunity_feasibility {
-                get {
-                    return ((int)(this[this.tableSITE_OPPORTUNITY.opportunity_feasibilityColumn]));
-                }
-                set {
-                    this[this.tableSITE_OPPORTUNITY.opportunity_feasibilityColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string create_by {
-                get {
-                    return ((string)(this[this.tableSITE_OPPORTUNITY.create_byColumn]));
-                }
-                set {
-                    this[this.tableSITE_OPPORTUNITY.create_byColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public System.DateTime create_date {
-                get {
-                    return ((global::System.DateTime)(this[this.tableSITE_OPPORTUNITY.create_dateColumn]));
-                }
-                set {
-                    this[this.tableSITE_OPPORTUNITY.create_dateColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string update_by {
-                get {
-                    return ((string)(this[this.tableSITE_OPPORTUNITY.update_byColumn]));
-                }
-                set {
-                    this[this.tableSITE_OPPORTUNITY.update_byColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public System.DateTime update_date {
-                get {
-                    return ((global::System.DateTime)(this[this.tableSITE_OPPORTUNITY.update_dateColumn]));
-                }
-                set {
-                    this[this.tableSITE_OPPORTUNITY.update_dateColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public byte[] modified_time {
-                get {
-                    try {
-                        return ((byte[])(this[this.tableSITE_OPPORTUNITY.modified_timeColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'modified_time\' in table \'SITE_OPPORTUNITY\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableSITE_OPPORTUNITY.modified_timeColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public FACILITY_TYPERow FACILITY_TYPERow {
-                get {
-                    return ((FACILITY_TYPERow)(this.GetParentRow(this.Table.ParentRelations["FK_SITE_OPPORTUNITY_FACILITY_TYPE"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_SITE_OPPORTUNITY_FACILITY_TYPE"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public SITERow SITERow {
-                get {
-                    return ((SITERow)(this.GetParentRow(this.Table.ParentRelations["FK_SITE_OPPORTUNITY_SITE"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_SITE_OPPORTUNITY_SITE"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool Ismodified_timeNull() {
-                return this.IsNull(this.tableSITE_OPPORTUNITY.modified_timeColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void Setmodified_timeNull() {
-                this[this.tableSITE_OPPORTUNITY.modified_timeColumn] = global::System.Convert.DBNull;
+            public void Setmanagement_idNull() {
+                this[this.tableSITE_ASSESSMENT.management_idColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -5922,46 +5115,6 @@ namespace SystemsAnalysis.DataAccess {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string site_use {
-                get {
-                    try {
-                        return ((string)(this[this.tableSITE.site_useColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'site_use\' in table \'SITE\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableSITE.site_useColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string site_use_description {
-                get {
-                    try {
-                        return ((string)(this[this.tableSITE.site_use_descriptionColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'site_use_description\' in table \'SITE\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableSITE.site_use_descriptionColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string neighborhood {
-                get {
-                    return ((string)(this[this.tableSITE.neighborhoodColumn]));
-                }
-                set {
-                    this[this.tableSITE.neighborhoodColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string sewer_basin {
                 get {
                     return ((string)(this[this.tableSITE.sewer_basinColumn]));
@@ -5978,26 +5131,6 @@ namespace SystemsAnalysis.DataAccess {
                 }
                 set {
                     this[this.tableSITE.retro_basinColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string create_by {
-                get {
-                    return ((string)(this[this.tableSITE.create_byColumn]));
-                }
-                set {
-                    this[this.tableSITE.create_byColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public System.DateTime create_date {
-                get {
-                    return ((global::System.DateTime)(this[this.tableSITE.create_dateColumn]));
-                }
-                set {
-                    this[this.tableSITE.create_dateColumn] = value;
                 }
             }
             
@@ -6019,51 +5152,6 @@ namespace SystemsAnalysis.DataAccess {
                 set {
                     this[this.tableSITE.update_dateColumn] = value;
                 }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public byte[] modified_time {
-                get {
-                    try {
-                        return ((byte[])(this[this.tableSITE.modified_timeColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'modified_time\' in table \'SITE\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableSITE.modified_timeColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool Issite_useNull() {
-                return this.IsNull(this.tableSITE.site_useColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void Setsite_useNull() {
-                this[this.tableSITE.site_useColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool Issite_use_descriptionNull() {
-                return this.IsNull(this.tableSITE.site_use_descriptionColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void Setsite_use_descriptionNull() {
-                this[this.tableSITE.site_use_descriptionColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool Ismodified_timeNull() {
-                return this.IsNull(this.tableSITE.modified_timeColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void Setmodified_timeNull() {
-                this[this.tableSITE.modified_timeColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -6154,6 +5242,156 @@ namespace SystemsAnalysis.DataAccess {
                 set {
                     this[this.tableSEWER_BASIN.nameColumn] = value;
                 }
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public partial class SITE_OPPORTUNITYRow : global::System.Data.DataRow {
+            
+            private SITE_OPPORTUNITYDataTable tableSITE_OPPORTUNITY;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            internal SITE_OPPORTUNITYRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableSITE_OPPORTUNITY = ((SITE_OPPORTUNITYDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int site_opportunity_id {
+                get {
+                    return ((int)(this[this.tableSITE_OPPORTUNITY.site_opportunity_idColumn]));
+                }
+                set {
+                    this[this.tableSITE_OPPORTUNITY.site_opportunity_idColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int site_id {
+                get {
+                    return ((int)(this[this.tableSITE_OPPORTUNITY.site_idColumn]));
+                }
+                set {
+                    this[this.tableSITE_OPPORTUNITY.site_idColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int ia_sqft {
+                get {
+                    return ((int)(this[this.tableSITE_OPPORTUNITY.ia_sqftColumn]));
+                }
+                set {
+                    this[this.tableSITE_OPPORTUNITY.ia_sqftColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int ia_type_id {
+                get {
+                    try {
+                        return ((int)(this[this.tableSITE_OPPORTUNITY.ia_type_idColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ia_type_id\' in table \'SITE_OPPORTUNITY\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSITE_OPPORTUNITY.ia_type_idColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int management_id {
+                get {
+                    return ((int)(this[this.tableSITE_OPPORTUNITY.management_idColumn]));
+                }
+                set {
+                    this[this.tableSITE_OPPORTUNITY.management_idColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int facility_type_id {
+                get {
+                    return ((int)(this[this.tableSITE_OPPORTUNITY.facility_type_idColumn]));
+                }
+                set {
+                    this[this.tableSITE_OPPORTUNITY.facility_type_idColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public int opportunity_feasibility {
+                get {
+                    return ((int)(this[this.tableSITE_OPPORTUNITY.opportunity_feasibilityColumn]));
+                }
+                set {
+                    this[this.tableSITE_OPPORTUNITY.opportunity_feasibilityColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string update_by {
+                get {
+                    return ((string)(this[this.tableSITE_OPPORTUNITY.update_byColumn]));
+                }
+                set {
+                    this[this.tableSITE_OPPORTUNITY.update_byColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public System.DateTime update_date {
+                get {
+                    return ((global::System.DateTime)(this[this.tableSITE_OPPORTUNITY.update_dateColumn]));
+                }
+                set {
+                    this[this.tableSITE_OPPORTUNITY.update_dateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public FACILITY_TYPERow FACILITY_TYPERow {
+                get {
+                    return ((FACILITY_TYPERow)(this.GetParentRow(this.Table.ParentRelations["FK_SITE_OPPORTUNITY_FACILITY_TYPE"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_SITE_OPPORTUNITY_FACILITY_TYPE"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public IMPERVIOUS_AREA_TYPERow IMPERVIOUS_AREA_TYPERow {
+                get {
+                    return ((IMPERVIOUS_AREA_TYPERow)(this.GetParentRow(this.Table.ParentRelations["FK_SITE_OPPORTUNITY_IMPERVIOUS_AREA_TYPE"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_SITE_OPPORTUNITY_IMPERVIOUS_AREA_TYPE"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public SITERow SITERow {
+                get {
+                    return ((SITERow)(this.GetParentRow(this.Table.ParentRelations["FK_SITE_OPPORTUNITY_SITE"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_SITE_OPPORTUNITY_SITE"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool Isia_type_idNull() {
+                return this.IsNull(this.tableSITE_OPPORTUNITY.ia_type_idColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void Setia_type_idNull() {
+                this[this.tableSITE_OPPORTUNITY.ia_type_idColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -6409,37 +5647,6 @@ namespace SystemsAnalysis.DataAccess {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-        public class SITE_OPPORTUNITYRowChangeEvent : global::System.EventArgs {
-            
-            private SITE_OPPORTUNITYRow eventRow;
-            
-            private global::System.Data.DataRowAction eventAction;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public SITE_OPPORTUNITYRowChangeEvent(SITE_OPPORTUNITYRow row, global::System.Data.DataRowAction action) {
-                this.eventRow = row;
-                this.eventAction = action;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public SITE_OPPORTUNITYRow Row {
-                get {
-                    return this.eventRow;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataRowAction Action {
-                get {
-                    return this.eventAction;
-                }
-            }
-        }
-        
-        /// <summary>
-        ///Row event argument class
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
         public class SITERowChangeEvent : global::System.EventArgs {
             
             private SITERow eventRow;
@@ -6516,6 +5723,37 @@ namespace SystemsAnalysis.DataAccess {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public SEWER_BASINRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+        public class SITE_OPPORTUNITYRowChangeEvent : global::System.EventArgs {
+            
+            private SITE_OPPORTUNITYRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public SITE_OPPORTUNITYRowChangeEvent(SITE_OPPORTUNITYRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public SITE_OPPORTUNITYRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -6653,22 +5891,22 @@ namespace SystemsAnalysis.DataAccess.RetrofitsDataSetTableAdapters {
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[FACILITY_TYPE] WHERE (([facility_type_id] = @Original_facility" +
-                "_type_id) AND ([name] = @Original_name))";
+            this._adapter.DeleteCommand.CommandText = "DELETE FROM [FACILITY_TYPE] WHERE (([facility_type_id] = @Original_facility_type_" +
+                "id) AND ([name] = @Original_name))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_facility_type_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "facility_type_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "name", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[FACILITY_TYPE] ([name]) VALUES (@name);\r\nSELECT facility_type_" +
-                "id, name FROM dbo.FACILITY_TYPE WHERE (facility_type_id = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [FACILITY_TYPE] ([name]) VALUES (@name);\r\nSELECT facility_type_id, na" +
+                "me FROM FACILITY_TYPE WHERE (facility_type_id = SCOPE_IDENTITY())";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = "UPDATE [dbo].[FACILITY_TYPE] SET [name] = @name WHERE (([facility_type_id] = @Ori" +
-                "ginal_facility_type_id) AND ([name] = @Original_name));\r\nSELECT facility_type_id" +
-                ", name FROM dbo.FACILITY_TYPE WHERE (facility_type_id = @facility_type_id)";
+            this._adapter.UpdateCommand.CommandText = "UPDATE [FACILITY_TYPE] SET [name] = @name WHERE (([facility_type_id] = @Original_" +
+                "facility_type_id) AND ([name] = @Original_name));\r\nSELECT facility_type_id, name" +
+                " FROM FACILITY_TYPE WHERE (facility_type_id = @facility_type_id)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_facility_type_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "facility_type_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -6687,7 +5925,7 @@ namespace SystemsAnalysis.DataAccess.RetrofitsDataSetTableAdapters {
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT     dbo.FACILITY_TYPE.*\r\nFROM         dbo.FACILITY_TYPE";
+            this._commandCollection[0].CommandText = "SELECT     facility_type_id, name\r\nFROM         FACILITY_TYPE";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -6953,24 +6191,22 @@ namespace SystemsAnalysis.DataAccess.RetrofitsDataSetTableAdapters {
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[ASSESSMENT_TYPE] WHERE (([assessment_type_id] = @Original_asse" +
-                "ssment_type_id) AND ([name] = @Original_name))";
+            this._adapter.DeleteCommand.CommandText = "DELETE FROM [ASSESSMENT_TYPE] WHERE (([assessment_type_id] = @Original_assessment" +
+                "_type_id) AND ([name] = @Original_name))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_assessment_type_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "assessment_type_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "name", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[ASSESSMENT_TYPE] ([name]) VALUES (@name);\r\nSELECT assessment_t" +
-                "ype_id, name FROM dbo.ASSESSMENT_TYPE WHERE (assessment_type_id = SCOPE_IDENTITY" +
-                "())";
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [ASSESSMENT_TYPE] ([name]) VALUES (@name);\r\nSELECT assessment_type_id" +
+                ", name FROM ASSESSMENT_TYPE WHERE (assessment_type_id = SCOPE_IDENTITY())";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = "UPDATE [dbo].[ASSESSMENT_TYPE] SET [name] = @name WHERE (([assessment_type_id] = " +
-                "@Original_assessment_type_id) AND ([name] = @Original_name));\r\nSELECT assessment" +
-                "_type_id, name FROM dbo.ASSESSMENT_TYPE WHERE (assessment_type_id = @assessment_" +
-                "type_id)";
+            this._adapter.UpdateCommand.CommandText = "UPDATE [ASSESSMENT_TYPE] SET [name] = @name WHERE (([assessment_type_id] = @Origi" +
+                "nal_assessment_type_id) AND ([name] = @Original_name));\r\nSELECT assessment_type_" +
+                "id, name FROM ASSESSMENT_TYPE WHERE (assessment_type_id = @assessment_type_id)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_assessment_type_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "assessment_type_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -6989,7 +6225,7 @@ namespace SystemsAnalysis.DataAccess.RetrofitsDataSetTableAdapters {
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT     dbo.ASSESSMENT_TYPE.*\r\nFROM         dbo.ASSESSMENT_TYPE";
+            this._commandCollection[0].CommandText = "SELECT     assessment_type_id, name\r\nFROM         ASSESSMENT_TYPE";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -7255,22 +6491,22 @@ namespace SystemsAnalysis.DataAccess.RetrofitsDataSetTableAdapters {
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[DESTINATION] WHERE (([destination_id] = @Original_destination_" +
-                "id) AND ([name] = @Original_name))";
+            this._adapter.DeleteCommand.CommandText = "DELETE FROM [DESTINATION] WHERE (([destination_id] = @Original_destination_id) AN" +
+                "D ([name] = @Original_name))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_destination_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "destination_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "name", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[DESTINATION] ([name]) VALUES (@name);\r\nSELECT destination_id, " +
-                "name FROM dbo.DESTINATION WHERE (destination_id = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [DESTINATION] ([name]) VALUES (@name);\r\nSELECT destination_id, name F" +
+                "ROM DESTINATION WHERE (destination_id = SCOPE_IDENTITY())";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = "UPDATE [dbo].[DESTINATION] SET [name] = @name WHERE (([destination_id] = @Origina" +
-                "l_destination_id) AND ([name] = @Original_name));\r\nSELECT destination_id, name F" +
-                "ROM dbo.DESTINATION WHERE (destination_id = @destination_id)";
+            this._adapter.UpdateCommand.CommandText = "UPDATE [DESTINATION] SET [name] = @name WHERE (([destination_id] = @Original_dest" +
+                "ination_id) AND ([name] = @Original_name));\r\nSELECT destination_id, name FROM DE" +
+                "STINATION WHERE (destination_id = @destination_id)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_destination_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "destination_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -7289,7 +6525,7 @@ namespace SystemsAnalysis.DataAccess.RetrofitsDataSetTableAdapters {
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT     dbo.DESTINATION.*\r\nFROM         dbo.DESTINATION";
+            this._commandCollection[0].CommandText = "SELECT     destination_id, name\r\nFROM         DESTINATION";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -7856,25 +7092,25 @@ namespace SystemsAnalysis.DataAccess.RetrofitsDataSetTableAdapters {
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[OPPORTUNITY_FEASIBILITY] WHERE (([opportunity_feasibility_id] " +
-                "= @Original_opportunity_feasibility_id) AND ([rating_value] = @Original_rating_v" +
-                "alue) AND ([meaning] = @Original_meaning))";
+            this._adapter.DeleteCommand.CommandText = "DELETE FROM [OPPORTUNITY_FEASIBILITY] WHERE (([opportunity_feasibility_id] = @Ori" +
+                "ginal_opportunity_feasibility_id) AND ([rating_value] = @Original_rating_value) " +
+                "AND ([meaning] = @Original_meaning))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_opportunity_feasibility_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "opportunity_feasibility_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_rating_value", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "rating_value", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_meaning", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "meaning", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[OPPORTUNITY_FEASIBILITY] ([rating_value], [meaning]) VALUES (@" +
-                "rating_value, @meaning);\r\nSELECT opportunity_feasibility_id, rating_value, meani" +
-                "ng FROM dbo.OPPORTUNITY_FEASIBILITY WHERE (rating_value = @rating_value)";
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [OPPORTUNITY_FEASIBILITY] ([rating_value], [meaning]) VALUES (@rating" +
+                "_value, @meaning);\r\nSELECT opportunity_feasibility_id, rating_value, meaning FRO" +
+                "M OPPORTUNITY_FEASIBILITY WHERE (rating_value = @rating_value)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@rating_value", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "rating_value", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@meaning", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "meaning", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[OPPORTUNITY_FEASIBILITY] SET [rating_value] = @rating_value, [meaning] = @meaning WHERE (([opportunity_feasibility_id] = @Original_opportunity_feasibility_id) AND ([rating_value] = @Original_rating_value) AND ([meaning] = @Original_meaning));
-SELECT opportunity_feasibility_id, rating_value, meaning FROM dbo.OPPORTUNITY_FEASIBILITY WHERE (rating_value = @rating_value)";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [OPPORTUNITY_FEASIBILITY] SET [rating_value] = @rating_value, [meaning] = @meaning WHERE (([opportunity_feasibility_id] = @Original_opportunity_feasibility_id) AND ([rating_value] = @Original_rating_value) AND ([meaning] = @Original_meaning));
+SELECT opportunity_feasibility_id, rating_value, meaning FROM OPPORTUNITY_FEASIBILITY WHERE (rating_value = @rating_value)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@rating_value", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "rating_value", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@meaning", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "meaning", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -7894,8 +7130,8 @@ SELECT opportunity_feasibility_id, rating_value, meaning FROM dbo.OPPORTUNITY_FE
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT     dbo.OPPORTUNITY_FEASIBILITY.*\r\nFROM         dbo.OPPORTUNITY_FEASIBILIT" +
-                "Y";
+            this._commandCollection[0].CommandText = "SELECT     opportunity_feasibility_id, rating_value, meaning\r\nFROM         OPPORT" +
+                "UNITY_FEASIBILITY";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -8035,13 +7271,6 @@ SELECT opportunity_feasibility_id, rating_value, meaning FROM dbo.OPPORTUNITY_FE
                 }
             }
         }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string meaning, int Original_opportunity_feasibility_id, int Original_rating_value, string Original_meaning) {
-            return this.Update(Original_rating_value, meaning, Original_opportunity_feasibility_id, Original_rating_value, Original_meaning);
-        }
     }
     
     /// <summary>
@@ -8162,7 +7391,6 @@ SELECT opportunity_feasibility_id, rating_value, meaning FROM dbo.OPPORTUNITY_FE
             tableMapping.ColumnMappings.Add("project_id", "project_id");
             tableMapping.ColumnMappings.Add("site_id", "site_id");
             tableMapping.ColumnMappings.Add("name", "name");
-            tableMapping.ColumnMappings.Add("partnership_type_id", "partnership_type_id");
             tableMapping.ColumnMappings.Add("facility_type_id", "facility_type_id");
             tableMapping.ColumnMappings.Add("ia_managed_roof", "ia_managed_roof");
             tableMapping.ColumnMappings.Add("ia_managed_paved", "ia_managed_paved");
@@ -8171,108 +7399,35 @@ SELECT opportunity_feasibility_id, rating_value, meaning FROM dbo.OPPORTUNITY_FE
             tableMapping.ColumnMappings.Add("infiltration_test_id", "infiltration_test_id");
             tableMapping.ColumnMappings.Add("infiltration_rate", "infiltration_rate");
             tableMapping.ColumnMappings.Add("project_status_id", "project_status_id");
-            tableMapping.ColumnMappings.Add("designer_id", "designer_id");
-            tableMapping.ColumnMappings.Add("constructor_id", "constructor_id");
-            tableMapping.ColumnMappings.Add("contractor_id", "contractor_id");
-            tableMapping.ColumnMappings.Add("city_cost", "city_cost");
-            tableMapping.ColumnMappings.Add("primary_contact_name", "primary_contact_name");
-            tableMapping.ColumnMappings.Add("primary_contact_phone", "primary_contact_phone");
-            tableMapping.ColumnMappings.Add("primary_contact_email", "primary_contact_email");
-            tableMapping.ColumnMappings.Add("primary_contact_type_id", "primary_contact_type_id");
-            tableMapping.ColumnMappings.Add("project_manager_id", "project_manager_id");
-            tableMapping.ColumnMappings.Add("o_and_m_id", "o_and_m_id");
-            tableMapping.ColumnMappings.Add("permit_status_id", "permit_status_id");
-            tableMapping.ColumnMappings.Add("management_id", "management_id");
-            tableMapping.ColumnMappings.Add("create_by", "create_by");
-            tableMapping.ColumnMappings.Add("create_date", "create_date");
             tableMapping.ColumnMappings.Add("update_by", "update_by");
             tableMapping.ColumnMappings.Add("update_date", "update_date");
-            tableMapping.ColumnMappings.Add("modified_time", "modified_time");
+            tableMapping.ColumnMappings.Add("management_id", "management_id");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[PROJECT] WHERE (([project_id] = @Original_project_id) AND ([mo" +
-                "dified_time] = @Original_modified_time))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [PROJECT] WHERE (([project_id] = @Original_project_id) AND ([site_id] = @Original_site_id) AND ([name] = @Original_name) AND ([facility_type_id] = @Original_facility_type_id) AND ([ia_managed_roof] = @Original_ia_managed_roof) AND ([ia_managed_paved] = @Original_ia_managed_paved) AND ([facility_size] = @Original_facility_size) AND ([storage_volume] = @Original_storage_volume) AND ([infiltration_test_id] = @Original_infiltration_test_id) AND ([infiltration_rate] = @Original_infiltration_rate) AND ([project_status_id] = @Original_project_status_id) AND ([update_by] = @Original_update_by) AND ([update_date] = @Original_update_date) AND ([management_id] = @Original_management_id))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_project_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "project_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_modified_time", global::System.Data.SqlDbType.Timestamp, 0, global::System.Data.ParameterDirection.Input, 0, 0, "modified_time", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[PROJECT] ([site_id], [name], [partnership_type_id], [facility_" +
-                "type_id], [ia_managed_roof], [ia_managed_paved], [facility_size], [storage_volum" +
-                "e], [infiltration_test_id], [infiltration_rate], [project_status_id], [designer_" +
-                "id], [constructor_id], [contractor_id], [city_cost], [primary_contact_name], [pr" +
-                "imary_contact_phone], [primary_contact_email], [primary_contact_type_id], [proje" +
-                "ct_manager_id], [o_and_m_id], [permit_status_id], [management_id], [create_by], " +
-                "[create_date], [update_by], [update_date]) VALUES (@site_id, @name, @partnership" +
-                "_type_id, @facility_type_id, @ia_managed_roof, @ia_managed_paved, @facility_size" +
-                ", @storage_volume, @infiltration_test_id, @infiltration_rate, @project_status_id" +
-                ", @designer_id, @constructor_id, @contractor_id, @city_cost, @primary_contact_na" +
-                "me, @primary_contact_phone, @primary_contact_email, @primary_contact_type_id, @p" +
-                "roject_manager_id, @o_and_m_id, @permit_status_id, @management_id, @create_by, @" +
-                "create_date, @update_by, @update_date);\r\nSELECT project_id, site_id, name, partn" +
-                "ership_type_id, facility_type_id, ia_managed_roof, ia_managed_paved, facility_si" +
-                "ze, storage_volume, infiltration_test_id, infiltration_rate, project_status_id, " +
-                "designer_id, constructor_id, contractor_id, city_cost, primary_contact_name, pri" +
-                "mary_contact_phone, primary_contact_email, primary_contact_type_id, project_mana" +
-                "ger_id, o_and_m_id, permit_status_id, management_id, create_by, create_date, upd" +
-                "ate_by, update_date, modified_time FROM dbo.PROJECT WHERE (project_id = SCOPE_ID" +
-                "ENTITY())";
-            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@site_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "site_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@partnership_type_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "partnership_type_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@facility_type_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "facility_type_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ia_managed_roof", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ia_managed_roof", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ia_managed_paved", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ia_managed_paved", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@facility_size", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "facility_size", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@storage_volume", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "storage_volume", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@infiltration_test_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "infiltration_test_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@infiltration_rate", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 2, "infiltration_rate", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@project_status_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "project_status_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@designer_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "designer_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@constructor_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "constructor_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@contractor_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "contractor_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@city_cost", global::System.Data.SqlDbType.Money, 0, global::System.Data.ParameterDirection.Input, 0, 0, "city_cost", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@primary_contact_name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "primary_contact_name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@primary_contact_phone", global::System.Data.SqlDbType.Char, 0, global::System.Data.ParameterDirection.Input, 0, 0, "primary_contact_phone", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@primary_contact_email", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "primary_contact_email", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@primary_contact_type_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "primary_contact_type_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@project_manager_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "project_manager_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@o_and_m_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "o_and_m_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@permit_status_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "permit_status_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@management_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "management_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@create_by", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "create_by", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@create_date", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "create_date", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@update_by", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "update_by", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@update_date", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "update_date", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_site_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "site_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "name", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_facility_type_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "facility_type_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ia_managed_roof", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ia_managed_roof", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ia_managed_paved", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ia_managed_paved", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_facility_size", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "facility_size", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_storage_volume", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "storage_volume", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_infiltration_test_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "infiltration_test_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_infiltration_rate", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 2, "infiltration_rate", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_project_status_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "project_status_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_update_by", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "update_by", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_update_date", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "update_date", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_management_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "management_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = "UPDATE [dbo].[PROJECT] SET [site_id] = @site_id, [name] = @name, [partnership_typ" +
-                "e_id] = @partnership_type_id, [facility_type_id] = @facility_type_id, [ia_manage" +
-                "d_roof] = @ia_managed_roof, [ia_managed_paved] = @ia_managed_paved, [facility_si" +
-                "ze] = @facility_size, [storage_volume] = @storage_volume, [infiltration_test_id]" +
-                " = @infiltration_test_id, [infiltration_rate] = @infiltration_rate, [project_sta" +
-                "tus_id] = @project_status_id, [designer_id] = @designer_id, [constructor_id] = @" +
-                "constructor_id, [contractor_id] = @contractor_id, [city_cost] = @city_cost, [pri" +
-                "mary_contact_name] = @primary_contact_name, [primary_contact_phone] = @primary_c" +
-                "ontact_phone, [primary_contact_email] = @primary_contact_email, [primary_contact" +
-                "_type_id] = @primary_contact_type_id, [project_manager_id] = @project_manager_id" +
-                ", [o_and_m_id] = @o_and_m_id, [permit_status_id] = @permit_status_id, [managemen" +
-                "t_id] = @management_id, [create_by] = @create_by, [create_date] = @create_date, " +
-                "[update_by] = @update_by, [update_date] = @update_date WHERE (([project_id] = @O" +
-                "riginal_project_id) AND ([modified_time] = @Original_modified_time));\r\nSELECT pr" +
-                "oject_id, site_id, name, partnership_type_id, facility_type_id, ia_managed_roof," +
-                " ia_managed_paved, facility_size, storage_volume, infiltration_test_id, infiltra" +
-                "tion_rate, project_status_id, designer_id, constructor_id, contractor_id, city_c" +
-                "ost, primary_contact_name, primary_contact_phone, primary_contact_email, primary" +
-                "_contact_type_id, project_manager_id, o_and_m_id, permit_status_id, management_i" +
-                "d, create_by, create_date, update_by, update_date, modified_time FROM dbo.PROJEC" +
-                "T WHERE (project_id = @project_id)";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [PROJECT] SET [site_id] = @site_id, [name] = @name, [facility_type_id] = @facility_type_id, [ia_managed_roof] = @ia_managed_roof, [ia_managed_paved] = @ia_managed_paved, [facility_size] = @facility_size, [storage_volume] = @storage_volume, [infiltration_test_id] = @infiltration_test_id, [infiltration_rate] = @infiltration_rate, [project_status_id] = @project_status_id, [update_by] = @update_by, [update_date] = @update_date, [management_id] = @management_id WHERE (([project_id] = @Original_project_id) AND ([site_id] = @Original_site_id) AND ([name] = @Original_name) AND ([facility_type_id] = @Original_facility_type_id) AND ([ia_managed_roof] = @Original_ia_managed_roof) AND ([ia_managed_paved] = @Original_ia_managed_paved) AND ([facility_size] = @Original_facility_size) AND ([storage_volume] = @Original_storage_volume) AND ([infiltration_test_id] = @Original_infiltration_test_id) AND ([infiltration_rate] = @Original_infiltration_rate) AND ([project_status_id] = @Original_project_status_id) AND ([update_by] = @Original_update_by) AND ([update_date] = @Original_update_date) AND ([management_id] = @Original_management_id));
+SELECT project_id, site_id, name, facility_type_id, ia_managed_roof, ia_managed_paved, facility_size, storage_volume, infiltration_test_id, infiltration_rate, project_status_id, update_by, update_date, management_id FROM PROJECT WHERE (project_id = @project_id)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@site_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "site_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@partnership_type_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "partnership_type_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@facility_type_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "facility_type_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ia_managed_roof", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ia_managed_roof", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ia_managed_paved", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ia_managed_paved", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -8281,24 +7436,23 @@ SELECT opportunity_feasibility_id, rating_value, meaning FROM dbo.OPPORTUNITY_FE
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@infiltration_test_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "infiltration_test_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@infiltration_rate", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 2, "infiltration_rate", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@project_status_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "project_status_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@designer_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "designer_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@constructor_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "constructor_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@contractor_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "contractor_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@city_cost", global::System.Data.SqlDbType.Money, 0, global::System.Data.ParameterDirection.Input, 0, 0, "city_cost", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@primary_contact_name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "primary_contact_name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@primary_contact_phone", global::System.Data.SqlDbType.Char, 0, global::System.Data.ParameterDirection.Input, 0, 0, "primary_contact_phone", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@primary_contact_email", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "primary_contact_email", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@primary_contact_type_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "primary_contact_type_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@project_manager_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "project_manager_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@o_and_m_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "o_and_m_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@permit_status_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "permit_status_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@management_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "management_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@create_by", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "create_by", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@create_date", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "create_date", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@update_by", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "update_by", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@update_date", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "update_date", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@management_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "management_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_project_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "project_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_modified_time", global::System.Data.SqlDbType.Timestamp, 0, global::System.Data.ParameterDirection.Input, 0, 0, "modified_time", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_site_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "site_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "name", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_facility_type_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "facility_type_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ia_managed_roof", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ia_managed_roof", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ia_managed_paved", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ia_managed_paved", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_facility_size", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "facility_size", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_storage_volume", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "storage_volume", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_infiltration_test_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "infiltration_test_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_infiltration_rate", global::System.Data.SqlDbType.Decimal, 0, global::System.Data.ParameterDirection.Input, 10, 2, "infiltration_rate", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_project_status_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "project_status_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_update_by", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "update_by", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_update_date", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "update_date", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_management_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "management_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@project_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "project_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
@@ -8313,7 +7467,9 @@ SELECT opportunity_feasibility_id, rating_value, meaning FROM dbo.OPPORTUNITY_FE
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT     dbo.PROJECT.*\r\nFROM         dbo.PROJECT";
+            this._commandCollection[0].CommandText = @"SELECT     project_id, site_id, name, facility_type_id, ia_managed_roof, ia_managed_paved, facility_size, storage_volume, infiltration_test_id, infiltration_rate, 
+                      project_status_id, update_by, update_date, management_id
+FROM         PROJECT";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -8367,14 +7523,31 @@ SELECT opportunity_feasibility_id, rating_value, meaning FROM dbo.OPPORTUNITY_FE
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_project_id, byte[] Original_modified_time) {
+        public virtual int Delete(int Original_project_id, int Original_site_id, string Original_name, int Original_facility_type_id, int Original_ia_managed_roof, int Original_ia_managed_paved, int Original_facility_size, int Original_storage_volume, int Original_infiltration_test_id, decimal Original_infiltration_rate, int Original_project_status_id, string Original_update_by, System.DateTime Original_update_date, int Original_management_id) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_project_id));
-            if ((Original_modified_time == null)) {
-                throw new global::System.ArgumentNullException("Original_modified_time");
+            this.Adapter.DeleteCommand.Parameters[1].Value = ((int)(Original_site_id));
+            if ((Original_name == null)) {
+                throw new global::System.ArgumentNullException("Original_name");
             }
             else {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((byte[])(Original_modified_time));
+                this.Adapter.DeleteCommand.Parameters[2].Value = ((string)(Original_name));
             }
+            this.Adapter.DeleteCommand.Parameters[3].Value = ((int)(Original_facility_type_id));
+            this.Adapter.DeleteCommand.Parameters[4].Value = ((int)(Original_ia_managed_roof));
+            this.Adapter.DeleteCommand.Parameters[5].Value = ((int)(Original_ia_managed_paved));
+            this.Adapter.DeleteCommand.Parameters[6].Value = ((int)(Original_facility_size));
+            this.Adapter.DeleteCommand.Parameters[7].Value = ((int)(Original_storage_volume));
+            this.Adapter.DeleteCommand.Parameters[8].Value = ((int)(Original_infiltration_test_id));
+            this.Adapter.DeleteCommand.Parameters[9].Value = ((decimal)(Original_infiltration_rate));
+            this.Adapter.DeleteCommand.Parameters[10].Value = ((int)(Original_project_status_id));
+            if ((Original_update_by == null)) {
+                throw new global::System.ArgumentNullException("Original_update_by");
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[11].Value = ((string)(Original_update_by));
+            }
+            this.Adapter.DeleteCommand.Parameters[12].Value = ((System.DateTime)(Original_update_date));
+            this.Adapter.DeleteCommand.Parameters[13].Value = ((int)(Original_management_id));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -8393,115 +7566,10 @@ SELECT opportunity_feasibility_id, rating_value, meaning FROM dbo.OPPORTUNITY_FE
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(
-                    int site_id, 
-                    string name, 
-                    int partnership_type_id, 
-                    int facility_type_id, 
-                    int ia_managed_roof, 
-                    int ia_managed_paved, 
-                    int facility_size, 
-                    int storage_volume, 
-                    int infiltration_test_id, 
-                    decimal infiltration_rate, 
-                    int project_status_id, 
-                    int designer_id, 
-                    int constructor_id, 
-                    int contractor_id, 
-                    decimal city_cost, 
-                    string primary_contact_name, 
-                    string primary_contact_phone, 
-                    string primary_contact_email, 
-                    int primary_contact_type_id, 
-                    int project_manager_id, 
-                    int o_and_m_id, 
-                    int permit_status_id, 
-                    int management_id, 
-                    string create_by, 
-                    System.DateTime create_date, 
-                    string update_by, 
-                    System.DateTime update_date) {
-            this.Adapter.InsertCommand.Parameters[0].Value = ((int)(site_id));
-            if ((name == null)) {
-                throw new global::System.ArgumentNullException("name");
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(name));
-            }
-            this.Adapter.InsertCommand.Parameters[2].Value = ((int)(partnership_type_id));
-            this.Adapter.InsertCommand.Parameters[3].Value = ((int)(facility_type_id));
-            this.Adapter.InsertCommand.Parameters[4].Value = ((int)(ia_managed_roof));
-            this.Adapter.InsertCommand.Parameters[5].Value = ((int)(ia_managed_paved));
-            this.Adapter.InsertCommand.Parameters[6].Value = ((int)(facility_size));
-            this.Adapter.InsertCommand.Parameters[7].Value = ((int)(storage_volume));
-            this.Adapter.InsertCommand.Parameters[8].Value = ((int)(infiltration_test_id));
-            this.Adapter.InsertCommand.Parameters[9].Value = ((decimal)(infiltration_rate));
-            this.Adapter.InsertCommand.Parameters[10].Value = ((int)(project_status_id));
-            this.Adapter.InsertCommand.Parameters[11].Value = ((int)(designer_id));
-            this.Adapter.InsertCommand.Parameters[12].Value = ((int)(constructor_id));
-            this.Adapter.InsertCommand.Parameters[13].Value = ((int)(contractor_id));
-            this.Adapter.InsertCommand.Parameters[14].Value = ((decimal)(city_cost));
-            if ((primary_contact_name == null)) {
-                throw new global::System.ArgumentNullException("primary_contact_name");
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[15].Value = ((string)(primary_contact_name));
-            }
-            if ((primary_contact_phone == null)) {
-                throw new global::System.ArgumentNullException("primary_contact_phone");
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[16].Value = ((string)(primary_contact_phone));
-            }
-            if ((primary_contact_email == null)) {
-                this.Adapter.InsertCommand.Parameters[17].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[17].Value = ((string)(primary_contact_email));
-            }
-            this.Adapter.InsertCommand.Parameters[18].Value = ((int)(primary_contact_type_id));
-            this.Adapter.InsertCommand.Parameters[19].Value = ((int)(project_manager_id));
-            this.Adapter.InsertCommand.Parameters[20].Value = ((int)(o_and_m_id));
-            this.Adapter.InsertCommand.Parameters[21].Value = ((int)(permit_status_id));
-            this.Adapter.InsertCommand.Parameters[22].Value = ((int)(management_id));
-            if ((create_by == null)) {
-                throw new global::System.ArgumentNullException("create_by");
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[23].Value = ((string)(create_by));
-            }
-            this.Adapter.InsertCommand.Parameters[24].Value = ((System.DateTime)(create_date));
-            if ((update_by == null)) {
-                throw new global::System.ArgumentNullException("update_by");
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[25].Value = ((string)(update_by));
-            }
-            this.Adapter.InsertCommand.Parameters[26].Value = ((System.DateTime)(update_date));
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
-            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.InsertCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.InsertCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
         public virtual int Update(
                     int site_id, 
                     string name, 
-                    int partnership_type_id, 
                     int facility_type_id, 
                     int ia_managed_roof, 
                     int ia_managed_paved, 
@@ -8510,24 +7578,23 @@ SELECT opportunity_feasibility_id, rating_value, meaning FROM dbo.OPPORTUNITY_FE
                     int infiltration_test_id, 
                     decimal infiltration_rate, 
                     int project_status_id, 
-                    int designer_id, 
-                    int constructor_id, 
-                    int contractor_id, 
-                    decimal city_cost, 
-                    string primary_contact_name, 
-                    string primary_contact_phone, 
-                    string primary_contact_email, 
-                    int primary_contact_type_id, 
-                    int project_manager_id, 
-                    int o_and_m_id, 
-                    int permit_status_id, 
-                    int management_id, 
-                    string create_by, 
-                    System.DateTime create_date, 
                     string update_by, 
                     System.DateTime update_date, 
+                    int management_id, 
                     int Original_project_id, 
-                    byte[] Original_modified_time, 
+                    int Original_site_id, 
+                    string Original_name, 
+                    int Original_facility_type_id, 
+                    int Original_ia_managed_roof, 
+                    int Original_ia_managed_paved, 
+                    int Original_facility_size, 
+                    int Original_storage_volume, 
+                    int Original_infiltration_test_id, 
+                    decimal Original_infiltration_rate, 
+                    int Original_project_status_id, 
+                    string Original_update_by, 
+                    System.DateTime Original_update_date, 
+                    int Original_management_id, 
                     int project_id) {
             this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(site_id));
             if ((name == null)) {
@@ -8536,64 +7603,47 @@ SELECT opportunity_feasibility_id, rating_value, meaning FROM dbo.OPPORTUNITY_FE
             else {
                 this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(name));
             }
-            this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(partnership_type_id));
-            this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(facility_type_id));
-            this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(ia_managed_roof));
-            this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(ia_managed_paved));
-            this.Adapter.UpdateCommand.Parameters[6].Value = ((int)(facility_size));
-            this.Adapter.UpdateCommand.Parameters[7].Value = ((int)(storage_volume));
-            this.Adapter.UpdateCommand.Parameters[8].Value = ((int)(infiltration_test_id));
-            this.Adapter.UpdateCommand.Parameters[9].Value = ((decimal)(infiltration_rate));
-            this.Adapter.UpdateCommand.Parameters[10].Value = ((int)(project_status_id));
-            this.Adapter.UpdateCommand.Parameters[11].Value = ((int)(designer_id));
-            this.Adapter.UpdateCommand.Parameters[12].Value = ((int)(constructor_id));
-            this.Adapter.UpdateCommand.Parameters[13].Value = ((int)(contractor_id));
-            this.Adapter.UpdateCommand.Parameters[14].Value = ((decimal)(city_cost));
-            if ((primary_contact_name == null)) {
-                throw new global::System.ArgumentNullException("primary_contact_name");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[15].Value = ((string)(primary_contact_name));
-            }
-            if ((primary_contact_phone == null)) {
-                throw new global::System.ArgumentNullException("primary_contact_phone");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[16].Value = ((string)(primary_contact_phone));
-            }
-            if ((primary_contact_email == null)) {
-                this.Adapter.UpdateCommand.Parameters[17].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[17].Value = ((string)(primary_contact_email));
-            }
-            this.Adapter.UpdateCommand.Parameters[18].Value = ((int)(primary_contact_type_id));
-            this.Adapter.UpdateCommand.Parameters[19].Value = ((int)(project_manager_id));
-            this.Adapter.UpdateCommand.Parameters[20].Value = ((int)(o_and_m_id));
-            this.Adapter.UpdateCommand.Parameters[21].Value = ((int)(permit_status_id));
-            this.Adapter.UpdateCommand.Parameters[22].Value = ((int)(management_id));
-            if ((create_by == null)) {
-                throw new global::System.ArgumentNullException("create_by");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[23].Value = ((string)(create_by));
-            }
-            this.Adapter.UpdateCommand.Parameters[24].Value = ((System.DateTime)(create_date));
+            this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(facility_type_id));
+            this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(ia_managed_roof));
+            this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(ia_managed_paved));
+            this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(facility_size));
+            this.Adapter.UpdateCommand.Parameters[6].Value = ((int)(storage_volume));
+            this.Adapter.UpdateCommand.Parameters[7].Value = ((int)(infiltration_test_id));
+            this.Adapter.UpdateCommand.Parameters[8].Value = ((decimal)(infiltration_rate));
+            this.Adapter.UpdateCommand.Parameters[9].Value = ((int)(project_status_id));
             if ((update_by == null)) {
                 throw new global::System.ArgumentNullException("update_by");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[25].Value = ((string)(update_by));
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((string)(update_by));
             }
-            this.Adapter.UpdateCommand.Parameters[26].Value = ((System.DateTime)(update_date));
-            this.Adapter.UpdateCommand.Parameters[27].Value = ((int)(Original_project_id));
-            if ((Original_modified_time == null)) {
-                throw new global::System.ArgumentNullException("Original_modified_time");
+            this.Adapter.UpdateCommand.Parameters[11].Value = ((System.DateTime)(update_date));
+            this.Adapter.UpdateCommand.Parameters[12].Value = ((int)(management_id));
+            this.Adapter.UpdateCommand.Parameters[13].Value = ((int)(Original_project_id));
+            this.Adapter.UpdateCommand.Parameters[14].Value = ((int)(Original_site_id));
+            if ((Original_name == null)) {
+                throw new global::System.ArgumentNullException("Original_name");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[28].Value = ((byte[])(Original_modified_time));
+                this.Adapter.UpdateCommand.Parameters[15].Value = ((string)(Original_name));
             }
-            this.Adapter.UpdateCommand.Parameters[29].Value = ((int)(project_id));
+            this.Adapter.UpdateCommand.Parameters[16].Value = ((int)(Original_facility_type_id));
+            this.Adapter.UpdateCommand.Parameters[17].Value = ((int)(Original_ia_managed_roof));
+            this.Adapter.UpdateCommand.Parameters[18].Value = ((int)(Original_ia_managed_paved));
+            this.Adapter.UpdateCommand.Parameters[19].Value = ((int)(Original_facility_size));
+            this.Adapter.UpdateCommand.Parameters[20].Value = ((int)(Original_storage_volume));
+            this.Adapter.UpdateCommand.Parameters[21].Value = ((int)(Original_infiltration_test_id));
+            this.Adapter.UpdateCommand.Parameters[22].Value = ((decimal)(Original_infiltration_rate));
+            this.Adapter.UpdateCommand.Parameters[23].Value = ((int)(Original_project_status_id));
+            if ((Original_update_by == null)) {
+                throw new global::System.ArgumentNullException("Original_update_by");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[24].Value = ((string)(Original_update_by));
+            }
+            this.Adapter.UpdateCommand.Parameters[25].Value = ((System.DateTime)(Original_update_date));
+            this.Adapter.UpdateCommand.Parameters[26].Value = ((int)(Original_management_id));
+            this.Adapter.UpdateCommand.Parameters[27].Value = ((int)(project_id));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -8616,7 +7666,6 @@ SELECT opportunity_feasibility_id, rating_value, meaning FROM dbo.OPPORTUNITY_FE
         public virtual int Update(
                     int site_id, 
                     string name, 
-                    int partnership_type_id, 
                     int facility_type_id, 
                     int ia_managed_roof, 
                     int ia_managed_paved, 
@@ -8625,25 +7674,24 @@ SELECT opportunity_feasibility_id, rating_value, meaning FROM dbo.OPPORTUNITY_FE
                     int infiltration_test_id, 
                     decimal infiltration_rate, 
                     int project_status_id, 
-                    int designer_id, 
-                    int constructor_id, 
-                    int contractor_id, 
-                    decimal city_cost, 
-                    string primary_contact_name, 
-                    string primary_contact_phone, 
-                    string primary_contact_email, 
-                    int primary_contact_type_id, 
-                    int project_manager_id, 
-                    int o_and_m_id, 
-                    int permit_status_id, 
-                    int management_id, 
-                    string create_by, 
-                    System.DateTime create_date, 
                     string update_by, 
                     System.DateTime update_date, 
+                    int management_id, 
                     int Original_project_id, 
-                    byte[] Original_modified_time) {
-            return this.Update(site_id, name, partnership_type_id, facility_type_id, ia_managed_roof, ia_managed_paved, facility_size, storage_volume, infiltration_test_id, infiltration_rate, project_status_id, designer_id, constructor_id, contractor_id, city_cost, primary_contact_name, primary_contact_phone, primary_contact_email, primary_contact_type_id, project_manager_id, o_and_m_id, permit_status_id, management_id, create_by, create_date, update_by, update_date, Original_project_id, Original_modified_time, Original_project_id);
+                    int Original_site_id, 
+                    string Original_name, 
+                    int Original_facility_type_id, 
+                    int Original_ia_managed_roof, 
+                    int Original_ia_managed_paved, 
+                    int Original_facility_size, 
+                    int Original_storage_volume, 
+                    int Original_infiltration_test_id, 
+                    decimal Original_infiltration_rate, 
+                    int Original_project_status_id, 
+                    string Original_update_by, 
+                    System.DateTime Original_update_date, 
+                    int Original_management_id) {
+            return this.Update(site_id, name, facility_type_id, ia_managed_roof, ia_managed_paved, facility_size, storage_volume, infiltration_test_id, infiltration_rate, project_status_id, update_by, update_date, management_id, Original_project_id, Original_site_id, Original_name, Original_facility_type_id, Original_ia_managed_roof, Original_ia_managed_paved, Original_facility_size, Original_storage_volume, Original_infiltration_test_id, Original_infiltration_rate, Original_project_status_id, Original_update_by, Original_update_date, Original_management_id, Original_project_id);
         }
     }
     
@@ -9075,76 +8123,99 @@ SELECT project_status_id, name, display_order FROM dbo.PROJECT_STATUS WHERE (pro
             tableMapping.ColumnMappings.Add("site_assessment_id", "site_assessment_id");
             tableMapping.ColumnMappings.Add("site_id", "site_id");
             tableMapping.ColumnMappings.Add("assessment_date", "assessment_date");
-            tableMapping.ColumnMappings.Add("staff_id", "staff_id");
             tableMapping.ColumnMappings.Add("information_source_id", "information_source_id");
             tableMapping.ColumnMappings.Add("ia_type_id", "ia_type_id");
             tableMapping.ColumnMappings.Add("ia_sqft", "ia_sqft");
             tableMapping.ColumnMappings.Add("destination_id", "destination_id");
-            tableMapping.ColumnMappings.Add("management_id", "management_id");
             tableMapping.ColumnMappings.Add("facility_type_id", "facility_type_id");
             tableMapping.ColumnMappings.Add("hansen_id", "hansen_id");
             tableMapping.ColumnMappings.Add("assessment_type_id", "assessment_type_id");
             tableMapping.ColumnMappings.Add("gis_uniqueid", "gis_uniqueid");
             tableMapping.ColumnMappings.Add("project_id", "project_id");
-            tableMapping.ColumnMappings.Add("create_by", "create_by");
-            tableMapping.ColumnMappings.Add("create_date", "create_date");
             tableMapping.ColumnMappings.Add("update_by", "update_by");
             tableMapping.ColumnMappings.Add("update_date", "update_date");
-            tableMapping.ColumnMappings.Add("modified_time", "modified_time");
+            tableMapping.ColumnMappings.Add("management_id", "management_id");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[SITE_ASSESSMENT] WHERE (([site_assessment_id] = @Original_site" +
-                "_assessment_id) AND ([modified_time] = @Original_modified_time))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [SITE_ASSESSMENT] WHERE (([site_assessment_id] = @Original_site_assessment_id) AND ([site_id] = @Original_site_id) AND ([assessment_date] = @Original_assessment_date) AND ([information_source_id] = @Original_information_source_id) AND ([ia_type_id] = @Original_ia_type_id) AND ([destination_id] = @Original_destination_id) AND ((@IsNull_facility_type_id = 1 AND [facility_type_id] IS NULL) OR ([facility_type_id] = @Original_facility_type_id)) AND ((@IsNull_hansen_id = 1 AND [hansen_id] IS NULL) OR ([hansen_id] = @Original_hansen_id)) AND ([assessment_type_id] = @Original_assessment_type_id) AND ((@IsNull_gis_uniqueid = 1 AND [gis_uniqueid] IS NULL) OR ([gis_uniqueid] = @Original_gis_uniqueid)) AND ((@IsNull_project_id = 1 AND [project_id] IS NULL) OR ([project_id] = @Original_project_id)) AND ([update_by] = @Original_update_by) AND ([update_date] = @Original_update_date) AND ((@IsNull_management_id = 1 AND [management_id] IS NULL) OR ([management_id] = @Original_management_id)))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_site_assessment_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "site_assessment_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_modified_time", global::System.Data.SqlDbType.Timestamp, 0, global::System.Data.ParameterDirection.Input, 0, 0, "modified_time", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[SITE_ASSESSMENT] ([site_id], [assessment_date], [staff_id], [information_source_id], [ia_type_id], [ia_sqft], [destination_id], [management_id], [facility_type_id], [hansen_id], [assessment_type_id], [gis_uniqueid], [project_id], [create_by], [create_date], [update_by], [update_date]) VALUES (@site_id, @assessment_date, @staff_id, @information_source_id, @ia_type_id, @ia_sqft, @destination_id, @management_id, @facility_type_id, @hansen_id, @assessment_type_id, @gis_uniqueid, @project_id, @create_by, @create_date, @update_by, @update_date);
-SELECT site_assessment_id, site_id, assessment_date, staff_id, information_source_id, ia_type_id, ia_sqft, destination_id, management_id, facility_type_id, hansen_id, assessment_type_id, gis_uniqueid, project_id, create_by, create_date, update_by, update_date, modified_time FROM dbo.SITE_ASSESSMENT WHERE (site_assessment_id = SCOPE_IDENTITY())";
-            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@site_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "site_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@assessment_date", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "assessment_date", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@staff_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "staff_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@information_source_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "information_source_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ia_type_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ia_type_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ia_sqft", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ia_sqft", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@destination_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "destination_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@management_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "management_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@facility_type_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "facility_type_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@hansen_id", global::System.Data.SqlDbType.Char, 0, global::System.Data.ParameterDirection.Input, 0, 0, "hansen_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@assessment_type_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "assessment_type_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@gis_uniqueid", global::System.Data.SqlDbType.UniqueIdentifier, 0, global::System.Data.ParameterDirection.Input, 0, 0, "gis_uniqueid", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@project_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "project_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@create_by", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "create_by", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@create_date", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "create_date", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@update_by", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "update_by", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@update_date", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "update_date", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_site_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "site_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_assessment_date", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "assessment_date", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_information_source_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "information_source_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ia_type_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ia_type_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_destination_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "destination_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_facility_type_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "facility_type_id", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_facility_type_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "facility_type_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_hansen_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "hansen_id", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_hansen_id", global::System.Data.SqlDbType.Char, 0, global::System.Data.ParameterDirection.Input, 0, 0, "hansen_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_assessment_type_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "assessment_type_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_gis_uniqueid", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "gis_uniqueid", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_gis_uniqueid", global::System.Data.SqlDbType.UniqueIdentifier, 0, global::System.Data.ParameterDirection.Input, 0, 0, "gis_uniqueid", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_project_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "project_id", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_project_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "project_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_update_by", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "update_by", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_update_date", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "update_date", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_management_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "management_id", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_management_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "management_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[SITE_ASSESSMENT] SET [site_id] = @site_id, [assessment_date] = @assessment_date, [staff_id] = @staff_id, [information_source_id] = @information_source_id, [ia_type_id] = @ia_type_id, [ia_sqft] = @ia_sqft, [destination_id] = @destination_id, [management_id] = @management_id, [facility_type_id] = @facility_type_id, [hansen_id] = @hansen_id, [assessment_type_id] = @assessment_type_id, [gis_uniqueid] = @gis_uniqueid, [project_id] = @project_id, [create_by] = @create_by, [create_date] = @create_date, [update_by] = @update_by, [update_date] = @update_date WHERE (([site_assessment_id] = @Original_site_assessment_id) AND ([modified_time] = @Original_modified_time));
-SELECT site_assessment_id, site_id, assessment_date, staff_id, information_source_id, ia_type_id, ia_sqft, destination_id, management_id, facility_type_id, hansen_id, assessment_type_id, gis_uniqueid, project_id, create_by, create_date, update_by, update_date, modified_time FROM dbo.SITE_ASSESSMENT WHERE (site_assessment_id = @site_assessment_id)";
+            this._adapter.UpdateCommand.CommandText = "UPDATE [SITE_ASSESSMENT] SET [site_id] = @site_id, [assessment_date] = @assessmen" +
+                "t_date, [information_source_id] = @information_source_id, [ia_type_id] = @ia_typ" +
+                "e_id, [destination_id] = @destination_id, [facility_type_id] = @facility_type_id" +
+                ", [hansen_id] = @hansen_id, [assessment_type_id] = @assessment_type_id, [gis_uni" +
+                "queid] = @gis_uniqueid, [project_id] = @project_id, [update_by] = @update_by, [u" +
+                "pdate_date] = @update_date, [management_id] = @management_id WHERE (([site_asses" +
+                "sment_id] = @Original_site_assessment_id) AND ([site_id] = @Original_site_id) AN" +
+                "D ([assessment_date] = @Original_assessment_date) AND ([information_source_id] =" +
+                " @Original_information_source_id) AND ([ia_type_id] = @Original_ia_type_id) AND " +
+                "([destination_id] = @Original_destination_id) AND ((@IsNull_facility_type_id = 1" +
+                " AND [facility_type_id] IS NULL) OR ([facility_type_id] = @Original_facility_typ" +
+                "e_id)) AND ((@IsNull_hansen_id = 1 AND [hansen_id] IS NULL) OR ([hansen_id] = @O" +
+                "riginal_hansen_id)) AND ([assessment_type_id] = @Original_assessment_type_id) AN" +
+                "D ((@IsNull_gis_uniqueid = 1 AND [gis_uniqueid] IS NULL) OR ([gis_uniqueid] = @O" +
+                "riginal_gis_uniqueid)) AND ((@IsNull_project_id = 1 AND [project_id] IS NULL) OR" +
+                " ([project_id] = @Original_project_id)) AND ([update_by] = @Original_update_by) " +
+                "AND ([update_date] = @Original_update_date) AND ((@IsNull_management_id = 1 AND " +
+                "[management_id] IS NULL) OR ([management_id] = @Original_management_id)));\r\nSELE" +
+                "CT site_assessment_id, site_id, assessment_date, information_source_id, ia_type_" +
+                "id, destination_id, facility_type_id, hansen_id, assessment_type_id, gis_uniquei" +
+                "d, project_id, update_by, update_date, management_id FROM SITE_ASSESSMENT WHERE " +
+                "(site_assessment_id = @site_assessment_id)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@site_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "site_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@assessment_date", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "assessment_date", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@staff_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "staff_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@information_source_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "information_source_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ia_type_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ia_type_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ia_sqft", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ia_sqft", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@destination_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "destination_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@management_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "management_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@facility_type_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "facility_type_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@hansen_id", global::System.Data.SqlDbType.Char, 0, global::System.Data.ParameterDirection.Input, 0, 0, "hansen_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@assessment_type_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "assessment_type_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@gis_uniqueid", global::System.Data.SqlDbType.UniqueIdentifier, 0, global::System.Data.ParameterDirection.Input, 0, 0, "gis_uniqueid", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@project_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "project_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@create_by", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "create_by", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@create_date", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "create_date", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@update_by", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "update_by", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@update_date", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "update_date", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@management_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "management_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_site_assessment_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "site_assessment_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_modified_time", global::System.Data.SqlDbType.Timestamp, 0, global::System.Data.ParameterDirection.Input, 0, 0, "modified_time", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_site_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "site_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_assessment_date", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "assessment_date", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_information_source_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "information_source_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ia_type_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ia_type_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_destination_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "destination_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_facility_type_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "facility_type_id", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_facility_type_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "facility_type_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_hansen_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "hansen_id", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_hansen_id", global::System.Data.SqlDbType.Char, 0, global::System.Data.ParameterDirection.Input, 0, 0, "hansen_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_assessment_type_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "assessment_type_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_gis_uniqueid", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "gis_uniqueid", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_gis_uniqueid", global::System.Data.SqlDbType.UniqueIdentifier, 0, global::System.Data.ParameterDirection.Input, 0, 0, "gis_uniqueid", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_project_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "project_id", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_project_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "project_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_update_by", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "update_by", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_update_date", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "update_date", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_management_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "management_id", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_management_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "management_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@site_assessment_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "site_assessment_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
@@ -9159,7 +8230,9 @@ SELECT site_assessment_id, site_id, assessment_date, staff_id, information_sourc
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT     dbo.SITE_ASSESSMENT.*\r\nFROM         dbo.SITE_ASSESSMENT";
+            this._commandCollection[0].CommandText = @"SELECT     site_assessment_id, site_id, assessment_date, information_source_id, ia_type_id, destination_id, facility_type_id, hansen_id, assessment_type_id, 
+                      gis_uniqueid, project_id, update_by, update_date, management_id
+FROM         SITE_ASSESSMENT";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -9213,13 +8286,60 @@ SELECT site_assessment_id, site_id, assessment_date, staff_id, information_sourc
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_site_assessment_id, byte[] Original_modified_time) {
+        public virtual int Delete(int Original_site_assessment_id, int Original_site_id, System.DateTime Original_assessment_date, int Original_information_source_id, int Original_ia_type_id, int Original_destination_id, global::System.Nullable<int> Original_facility_type_id, string Original_hansen_id, int Original_assessment_type_id, global::System.Nullable<global::System.Guid> Original_gis_uniqueid, global::System.Nullable<int> Original_project_id, string Original_update_by, System.DateTime Original_update_date, global::System.Nullable<int> Original_management_id) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_site_assessment_id));
-            if ((Original_modified_time == null)) {
-                throw new global::System.ArgumentNullException("Original_modified_time");
+            this.Adapter.DeleteCommand.Parameters[1].Value = ((int)(Original_site_id));
+            this.Adapter.DeleteCommand.Parameters[2].Value = ((System.DateTime)(Original_assessment_date));
+            this.Adapter.DeleteCommand.Parameters[3].Value = ((int)(Original_information_source_id));
+            this.Adapter.DeleteCommand.Parameters[4].Value = ((int)(Original_ia_type_id));
+            this.Adapter.DeleteCommand.Parameters[5].Value = ((int)(Original_destination_id));
+            if ((Original_facility_type_id.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[6].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[7].Value = ((int)(Original_facility_type_id.Value));
             }
             else {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((byte[])(Original_modified_time));
+                this.Adapter.DeleteCommand.Parameters[6].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[7].Value = global::System.DBNull.Value;
+            }
+            if ((Original_hansen_id == null)) {
+                this.Adapter.DeleteCommand.Parameters[8].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[9].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[8].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[9].Value = ((string)(Original_hansen_id));
+            }
+            this.Adapter.DeleteCommand.Parameters[10].Value = ((int)(Original_assessment_type_id));
+            if ((Original_gis_uniqueid.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[11].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[12].Value = ((System.Guid)(Original_gis_uniqueid.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[11].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[12].Value = global::System.DBNull.Value;
+            }
+            if ((Original_project_id.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[13].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[14].Value = ((int)(Original_project_id.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[13].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[14].Value = global::System.DBNull.Value;
+            }
+            if ((Original_update_by == null)) {
+                throw new global::System.ArgumentNullException("Original_update_by");
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[15].Value = ((string)(Original_update_by));
+            }
+            this.Adapter.DeleteCommand.Parameters[16].Value = ((System.DateTime)(Original_update_date));
+            if ((Original_management_id.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[17].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[18].Value = ((int)(Original_management_id.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[17].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[18].Value = global::System.DBNull.Value;
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -9239,187 +8359,134 @@ SELECT site_assessment_id, site_id, assessment_date, staff_id, information_sourc
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(
-                    int site_id, 
-                    System.DateTime assessment_date, 
-                    int staff_id, 
-                    int information_source_id, 
-                    int ia_type_id, 
-                    global::System.Nullable<int> ia_sqft, 
-                    int destination_id, 
-                    global::System.Nullable<int> management_id, 
-                    global::System.Nullable<int> facility_type_id, 
-                    string hansen_id, 
-                    int assessment_type_id, 
-                    global::System.Nullable<global::System.Guid> gis_uniqueid, 
-                    global::System.Nullable<int> project_id, 
-                    string create_by, 
-                    System.DateTime create_date, 
-                    string update_by, 
-                    System.DateTime update_date) {
-            this.Adapter.InsertCommand.Parameters[0].Value = ((int)(site_id));
-            this.Adapter.InsertCommand.Parameters[1].Value = ((System.DateTime)(assessment_date));
-            this.Adapter.InsertCommand.Parameters[2].Value = ((int)(staff_id));
-            this.Adapter.InsertCommand.Parameters[3].Value = ((int)(information_source_id));
-            this.Adapter.InsertCommand.Parameters[4].Value = ((int)(ia_type_id));
-            if ((ia_sqft.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[5].Value = ((int)(ia_sqft.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[5].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.InsertCommand.Parameters[6].Value = ((int)(destination_id));
-            if ((management_id.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[7].Value = ((int)(management_id.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[7].Value = global::System.DBNull.Value;
-            }
-            if ((facility_type_id.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[8].Value = ((int)(facility_type_id.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[8].Value = global::System.DBNull.Value;
-            }
-            if ((hansen_id == null)) {
-                this.Adapter.InsertCommand.Parameters[9].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[9].Value = ((string)(hansen_id));
-            }
-            this.Adapter.InsertCommand.Parameters[10].Value = ((int)(assessment_type_id));
-            if ((gis_uniqueid.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[11].Value = ((System.Guid)(gis_uniqueid.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[11].Value = global::System.DBNull.Value;
-            }
-            if ((project_id.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[12].Value = ((int)(project_id.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[12].Value = global::System.DBNull.Value;
-            }
-            if ((create_by == null)) {
-                throw new global::System.ArgumentNullException("create_by");
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[13].Value = ((string)(create_by));
-            }
-            this.Adapter.InsertCommand.Parameters[14].Value = ((System.DateTime)(create_date));
-            if ((update_by == null)) {
-                throw new global::System.ArgumentNullException("update_by");
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[15].Value = ((string)(update_by));
-            }
-            this.Adapter.InsertCommand.Parameters[16].Value = ((System.DateTime)(update_date));
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
-            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.InsertCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.InsertCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
         public virtual int Update(
                     int site_id, 
                     System.DateTime assessment_date, 
-                    int staff_id, 
                     int information_source_id, 
                     int ia_type_id, 
-                    global::System.Nullable<int> ia_sqft, 
                     int destination_id, 
-                    global::System.Nullable<int> management_id, 
                     global::System.Nullable<int> facility_type_id, 
                     string hansen_id, 
                     int assessment_type_id, 
                     global::System.Nullable<global::System.Guid> gis_uniqueid, 
                     global::System.Nullable<int> project_id, 
-                    string create_by, 
-                    System.DateTime create_date, 
                     string update_by, 
                     System.DateTime update_date, 
+                    global::System.Nullable<int> management_id, 
                     int Original_site_assessment_id, 
-                    byte[] Original_modified_time, 
+                    int Original_site_id, 
+                    System.DateTime Original_assessment_date, 
+                    int Original_information_source_id, 
+                    int Original_ia_type_id, 
+                    int Original_destination_id, 
+                    global::System.Nullable<int> Original_facility_type_id, 
+                    string Original_hansen_id, 
+                    int Original_assessment_type_id, 
+                    global::System.Nullable<global::System.Guid> Original_gis_uniqueid, 
+                    global::System.Nullable<int> Original_project_id, 
+                    string Original_update_by, 
+                    System.DateTime Original_update_date, 
+                    global::System.Nullable<int> Original_management_id, 
                     int site_assessment_id) {
             this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(site_id));
             this.Adapter.UpdateCommand.Parameters[1].Value = ((System.DateTime)(assessment_date));
-            this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(staff_id));
-            this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(information_source_id));
-            this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(ia_type_id));
-            if ((ia_sqft.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(ia_sqft.Value));
+            this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(information_source_id));
+            this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(ia_type_id));
+            this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(destination_id));
+            if ((facility_type_id.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(facility_type_id.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[5].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[6].Value = ((int)(destination_id));
-            if ((management_id.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((int)(management_id.Value));
+            if ((hansen_id == null)) {
+                this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((string)(hansen_id));
             }
-            if ((facility_type_id.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((int)(facility_type_id.Value));
+            this.Adapter.UpdateCommand.Parameters[7].Value = ((int)(assessment_type_id));
+            if ((gis_uniqueid.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((System.Guid)(gis_uniqueid.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
             }
-            if ((hansen_id == null)) {
+            if ((project_id.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((int)(project_id.Value));
+            }
+            else {
                 this.Adapter.UpdateCommand.Parameters[9].Value = global::System.DBNull.Value;
             }
-            else {
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((string)(hansen_id));
-            }
-            this.Adapter.UpdateCommand.Parameters[10].Value = ((int)(assessment_type_id));
-            if ((gis_uniqueid.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[11].Value = ((System.Guid)(gis_uniqueid.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[11].Value = global::System.DBNull.Value;
-            }
-            if ((project_id.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((int)(project_id.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[12].Value = global::System.DBNull.Value;
-            }
-            if ((create_by == null)) {
-                throw new global::System.ArgumentNullException("create_by");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[13].Value = ((string)(create_by));
-            }
-            this.Adapter.UpdateCommand.Parameters[14].Value = ((System.DateTime)(create_date));
             if ((update_by == null)) {
                 throw new global::System.ArgumentNullException("update_by");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[15].Value = ((string)(update_by));
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((string)(update_by));
             }
-            this.Adapter.UpdateCommand.Parameters[16].Value = ((System.DateTime)(update_date));
-            this.Adapter.UpdateCommand.Parameters[17].Value = ((int)(Original_site_assessment_id));
-            if ((Original_modified_time == null)) {
-                throw new global::System.ArgumentNullException("Original_modified_time");
+            this.Adapter.UpdateCommand.Parameters[11].Value = ((System.DateTime)(update_date));
+            if ((management_id.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[12].Value = ((int)(management_id.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[18].Value = ((byte[])(Original_modified_time));
+                this.Adapter.UpdateCommand.Parameters[12].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[19].Value = ((int)(site_assessment_id));
+            this.Adapter.UpdateCommand.Parameters[13].Value = ((int)(Original_site_assessment_id));
+            this.Adapter.UpdateCommand.Parameters[14].Value = ((int)(Original_site_id));
+            this.Adapter.UpdateCommand.Parameters[15].Value = ((System.DateTime)(Original_assessment_date));
+            this.Adapter.UpdateCommand.Parameters[16].Value = ((int)(Original_information_source_id));
+            this.Adapter.UpdateCommand.Parameters[17].Value = ((int)(Original_ia_type_id));
+            this.Adapter.UpdateCommand.Parameters[18].Value = ((int)(Original_destination_id));
+            if ((Original_facility_type_id.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[19].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[20].Value = ((int)(Original_facility_type_id.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[19].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[20].Value = global::System.DBNull.Value;
+            }
+            if ((Original_hansen_id == null)) {
+                this.Adapter.UpdateCommand.Parameters[21].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[22].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[21].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[22].Value = ((string)(Original_hansen_id));
+            }
+            this.Adapter.UpdateCommand.Parameters[23].Value = ((int)(Original_assessment_type_id));
+            if ((Original_gis_uniqueid.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[24].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[25].Value = ((System.Guid)(Original_gis_uniqueid.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[24].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[25].Value = global::System.DBNull.Value;
+            }
+            if ((Original_project_id.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[26].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[27].Value = ((int)(Original_project_id.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[26].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[27].Value = global::System.DBNull.Value;
+            }
+            if ((Original_update_by == null)) {
+                throw new global::System.ArgumentNullException("Original_update_by");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[28].Value = ((string)(Original_update_by));
+            }
+            this.Adapter.UpdateCommand.Parameters[29].Value = ((System.DateTime)(Original_update_date));
+            if ((Original_management_id.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[30].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[31].Value = ((int)(Original_management_id.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[30].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[31].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[32].Value = ((int)(site_assessment_id));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -9442,374 +8509,32 @@ SELECT site_assessment_id, site_id, assessment_date, staff_id, information_sourc
         public virtual int Update(
                     int site_id, 
                     System.DateTime assessment_date, 
-                    int staff_id, 
                     int information_source_id, 
                     int ia_type_id, 
-                    global::System.Nullable<int> ia_sqft, 
                     int destination_id, 
-                    global::System.Nullable<int> management_id, 
                     global::System.Nullable<int> facility_type_id, 
                     string hansen_id, 
                     int assessment_type_id, 
                     global::System.Nullable<global::System.Guid> gis_uniqueid, 
                     global::System.Nullable<int> project_id, 
-                    string create_by, 
-                    System.DateTime create_date, 
                     string update_by, 
                     System.DateTime update_date, 
+                    global::System.Nullable<int> management_id, 
                     int Original_site_assessment_id, 
-                    byte[] Original_modified_time) {
-            return this.Update(site_id, assessment_date, staff_id, information_source_id, ia_type_id, ia_sqft, destination_id, management_id, facility_type_id, hansen_id, assessment_type_id, gis_uniqueid, project_id, create_by, create_date, update_by, update_date, Original_site_assessment_id, Original_modified_time, Original_site_assessment_id);
-        }
-    }
-    
-    /// <summary>
-    ///Represents the connection and commands used to retrieve and save data.
-    ///</summary>
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
-    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
-    [global::System.ComponentModel.ToolboxItem(true)]
-    [global::System.ComponentModel.DataObjectAttribute(true)]
-    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
-        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
-    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-    public partial class SITE_OPPORTUNITYTableAdapter : global::System.ComponentModel.Component {
-        
-        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
-        
-        private global::System.Data.SqlClient.SqlConnection _connection;
-        
-        private global::System.Data.SqlClient.SqlTransaction _transaction;
-        
-        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
-        
-        private bool _clearBeforeFill;
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public SITE_OPPORTUNITYTableAdapter() {
-            this.ClearBeforeFill = true;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
-            get {
-                if ((this._adapter == null)) {
-                    this.InitAdapter();
-                }
-                return this._adapter;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.SqlClient.SqlConnection Connection {
-            get {
-                if ((this._connection == null)) {
-                    this.InitConnection();
-                }
-                return this._connection;
-            }
-            set {
-                this._connection = value;
-                if ((this.Adapter.InsertCommand != null)) {
-                    this.Adapter.InsertCommand.Connection = value;
-                }
-                if ((this.Adapter.DeleteCommand != null)) {
-                    this.Adapter.DeleteCommand.Connection = value;
-                }
-                if ((this.Adapter.UpdateCommand != null)) {
-                    this.Adapter.UpdateCommand.Connection = value;
-                }
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    if ((this.CommandCollection[i] != null)) {
-                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
-                    }
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.SqlClient.SqlTransaction Transaction {
-            get {
-                return this._transaction;
-            }
-            set {
-                this._transaction = value;
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    this.CommandCollection[i].Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.DeleteCommand != null))) {
-                    this.Adapter.DeleteCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.InsertCommand != null))) {
-                    this.Adapter.InsertCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.UpdateCommand != null))) {
-                    this.Adapter.UpdateCommand.Transaction = this._transaction;
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
-            get {
-                if ((this._commandCollection == null)) {
-                    this.InitCommandCollection();
-                }
-                return this._commandCollection;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public bool ClearBeforeFill {
-            get {
-                return this._clearBeforeFill;
-            }
-            set {
-                this._clearBeforeFill = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitAdapter() {
-            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
-            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
-            tableMapping.SourceTable = "Table";
-            tableMapping.DataSetTable = "SITE_OPPORTUNITY";
-            tableMapping.ColumnMappings.Add("site_opportunity_id", "site_opportunity_id");
-            tableMapping.ColumnMappings.Add("site_id", "site_id");
-            tableMapping.ColumnMappings.Add("ia_sqft", "ia_sqft");
-            tableMapping.ColumnMappings.Add("management_id", "management_id");
-            tableMapping.ColumnMappings.Add("facility_type_id", "facility_type_id");
-            tableMapping.ColumnMappings.Add("opportunity_feasibility", "opportunity_feasibility");
-            tableMapping.ColumnMappings.Add("create_by", "create_by");
-            tableMapping.ColumnMappings.Add("create_date", "create_date");
-            tableMapping.ColumnMappings.Add("update_by", "update_by");
-            tableMapping.ColumnMappings.Add("update_date", "update_date");
-            tableMapping.ColumnMappings.Add("modified_time", "modified_time");
-            this._adapter.TableMappings.Add(tableMapping);
-            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[SITE_OPPORTUNITY] WHERE (([site_opportunity_id] = @Original_si" +
-                "te_opportunity_id) AND ([modified_time] = @Original_modified_time))";
-            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_site_opportunity_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "site_opportunity_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_modified_time", global::System.Data.SqlDbType.Timestamp, 0, global::System.Data.ParameterDirection.Input, 0, 0, "modified_time", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[SITE_OPPORTUNITY] ([site_id], [ia_sqft], [management_id], [facility_type_id], [opportunity_feasibility], [create_by], [create_date], [update_by], [update_date]) VALUES (@site_id, @ia_sqft, @management_id, @facility_type_id, @opportunity_feasibility, @create_by, @create_date, @update_by, @update_date);
-SELECT site_opportunity_id, site_id, ia_sqft, management_id, facility_type_id, opportunity_feasibility, create_by, create_date, update_by, update_date, modified_time FROM dbo.SITE_OPPORTUNITY WHERE (site_opportunity_id = SCOPE_IDENTITY())";
-            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@site_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "site_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ia_sqft", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ia_sqft", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@management_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "management_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@facility_type_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "facility_type_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@opportunity_feasibility", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "opportunity_feasibility", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@create_by", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "create_by", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@create_date", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "create_date", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@update_by", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "update_by", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@update_date", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "update_date", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[SITE_OPPORTUNITY] SET [site_id] = @site_id, [ia_sqft] = @ia_sqft, [management_id] = @management_id, [facility_type_id] = @facility_type_id, [opportunity_feasibility] = @opportunity_feasibility, [create_by] = @create_by, [create_date] = @create_date, [update_by] = @update_by, [update_date] = @update_date WHERE (([site_opportunity_id] = @Original_site_opportunity_id) AND ([modified_time] = @Original_modified_time));
-SELECT site_opportunity_id, site_id, ia_sqft, management_id, facility_type_id, opportunity_feasibility, create_by, create_date, update_by, update_date, modified_time FROM dbo.SITE_OPPORTUNITY WHERE (site_opportunity_id = @site_opportunity_id)";
-            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@site_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "site_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ia_sqft", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ia_sqft", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@management_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "management_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@facility_type_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "facility_type_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@opportunity_feasibility", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "opportunity_feasibility", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@create_by", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "create_by", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@create_date", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "create_date", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@update_by", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "update_by", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@update_date", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "update_date", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_site_opportunity_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "site_opportunity_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_modified_time", global::System.Data.SqlDbType.Timestamp, 0, global::System.Data.ParameterDirection.Input, 0, 0, "modified_time", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@site_opportunity_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "site_opportunity_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitConnection() {
-            this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::SystemsAnalysis.DataAccess.Properties.Settings.Default.RETRO_RGConnectionString;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
-            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
-            this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT     dbo.SITE_OPPORTUNITY.*\r\nFROM         dbo.SITE_OPPORTUNITY";
-            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(RetrofitsDataSet.SITE_OPPORTUNITYDataTable dataTable) {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            if ((this.ClearBeforeFill == true)) {
-                dataTable.Clear();
-            }
-            int returnValue = this.Adapter.Fill(dataTable);
-            return returnValue;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual RetrofitsDataSet.SITE_OPPORTUNITYDataTable GetData() {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            RetrofitsDataSet.SITE_OPPORTUNITYDataTable dataTable = new RetrofitsDataSet.SITE_OPPORTUNITYDataTable();
-            this.Adapter.Fill(dataTable);
-            return dataTable;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(RetrofitsDataSet.SITE_OPPORTUNITYDataTable dataTable) {
-            return this.Adapter.Update(dataTable);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(RetrofitsDataSet dataSet) {
-            return this.Adapter.Update(dataSet, "SITE_OPPORTUNITY");
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow dataRow) {
-            return this.Adapter.Update(new global::System.Data.DataRow[] {
-                        dataRow});
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow[] dataRows) {
-            return this.Adapter.Update(dataRows);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_site_opportunity_id, byte[] Original_modified_time) {
-            this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_site_opportunity_id));
-            if ((Original_modified_time == null)) {
-                throw new global::System.ArgumentNullException("Original_modified_time");
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((byte[])(Original_modified_time));
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
-            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.DeleteCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.DeleteCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(int site_id, int ia_sqft, int management_id, int facility_type_id, int opportunity_feasibility, string create_by, System.DateTime create_date, string update_by, System.DateTime update_date) {
-            this.Adapter.InsertCommand.Parameters[0].Value = ((int)(site_id));
-            this.Adapter.InsertCommand.Parameters[1].Value = ((int)(ia_sqft));
-            this.Adapter.InsertCommand.Parameters[2].Value = ((int)(management_id));
-            this.Adapter.InsertCommand.Parameters[3].Value = ((int)(facility_type_id));
-            this.Adapter.InsertCommand.Parameters[4].Value = ((int)(opportunity_feasibility));
-            if ((create_by == null)) {
-                throw new global::System.ArgumentNullException("create_by");
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[5].Value = ((string)(create_by));
-            }
-            this.Adapter.InsertCommand.Parameters[6].Value = ((System.DateTime)(create_date));
-            if ((update_by == null)) {
-                throw new global::System.ArgumentNullException("update_by");
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[7].Value = ((string)(update_by));
-            }
-            this.Adapter.InsertCommand.Parameters[8].Value = ((System.DateTime)(update_date));
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
-            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.InsertCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.InsertCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(int site_id, int ia_sqft, int management_id, int facility_type_id, int opportunity_feasibility, string create_by, System.DateTime create_date, string update_by, System.DateTime update_date, int Original_site_opportunity_id, byte[] Original_modified_time, int site_opportunity_id) {
-            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(site_id));
-            this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(ia_sqft));
-            this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(management_id));
-            this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(facility_type_id));
-            this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(opportunity_feasibility));
-            if ((create_by == null)) {
-                throw new global::System.ArgumentNullException("create_by");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((string)(create_by));
-            }
-            this.Adapter.UpdateCommand.Parameters[6].Value = ((System.DateTime)(create_date));
-            if ((update_by == null)) {
-                throw new global::System.ArgumentNullException("update_by");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((string)(update_by));
-            }
-            this.Adapter.UpdateCommand.Parameters[8].Value = ((System.DateTime)(update_date));
-            this.Adapter.UpdateCommand.Parameters[9].Value = ((int)(Original_site_opportunity_id));
-            if ((Original_modified_time == null)) {
-                throw new global::System.ArgumentNullException("Original_modified_time");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((byte[])(Original_modified_time));
-            }
-            this.Adapter.UpdateCommand.Parameters[11].Value = ((int)(site_opportunity_id));
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
-            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.UpdateCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.UpdateCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(int site_id, int ia_sqft, int management_id, int facility_type_id, int opportunity_feasibility, string create_by, System.DateTime create_date, string update_by, System.DateTime update_date, int Original_site_opportunity_id, byte[] Original_modified_time) {
-            return this.Update(site_id, ia_sqft, management_id, facility_type_id, opportunity_feasibility, create_by, create_date, update_by, update_date, Original_site_opportunity_id, Original_modified_time, Original_site_opportunity_id);
+                    int Original_site_id, 
+                    System.DateTime Original_assessment_date, 
+                    int Original_information_source_id, 
+                    int Original_ia_type_id, 
+                    int Original_destination_id, 
+                    global::System.Nullable<int> Original_facility_type_id, 
+                    string Original_hansen_id, 
+                    int Original_assessment_type_id, 
+                    global::System.Nullable<global::System.Guid> Original_gis_uniqueid, 
+                    global::System.Nullable<int> Original_project_id, 
+                    string Original_update_by, 
+                    System.DateTime Original_update_date, 
+                    global::System.Nullable<int> Original_management_id) {
+            return this.Update(site_id, assessment_date, information_source_id, ia_type_id, destination_id, facility_type_id, hansen_id, assessment_type_id, gis_uniqueid, project_id, update_by, update_date, management_id, Original_site_assessment_id, Original_site_id, Original_assessment_date, Original_information_source_id, Original_ia_type_id, Original_destination_id, Original_facility_type_id, Original_hansen_id, Original_assessment_type_id, Original_gis_uniqueid, Original_project_id, Original_update_by, Original_update_date, Original_management_id, Original_site_assessment_id);
         }
     }
     
@@ -9930,56 +8655,37 @@ SELECT site_opportunity_id, site_id, ia_sqft, management_id, facility_type_id, o
             tableMapping.DataSetTable = "SITE";
             tableMapping.ColumnMappings.Add("site_id", "site_id");
             tableMapping.ColumnMappings.Add("property_id", "property_id");
-            tableMapping.ColumnMappings.Add("site_use", "site_use");
-            tableMapping.ColumnMappings.Add("site_use_description", "site_use_description");
-            tableMapping.ColumnMappings.Add("neighborhood", "neighborhood");
             tableMapping.ColumnMappings.Add("sewer_basin", "sewer_basin");
             tableMapping.ColumnMappings.Add("retro_basin", "retro_basin");
-            tableMapping.ColumnMappings.Add("create_by", "create_by");
-            tableMapping.ColumnMappings.Add("create_date", "create_date");
             tableMapping.ColumnMappings.Add("update_by", "update_by");
             tableMapping.ColumnMappings.Add("update_date", "update_date");
-            tableMapping.ColumnMappings.Add("modified_time", "modified_time");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[SITE] WHERE (([site_id] = @Original_site_id) AND ([modified_ti" +
-                "me] = @Original_modified_time))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [SITE] WHERE (([site_id] = @Original_site_id) AND ([property_id] = @Original_property_id) AND ([sewer_basin] = @Original_sewer_basin) AND ([retro_basin] = @Original_retro_basin) AND ([update_by] = @Original_update_by) AND ([update_date] = @Original_update_date))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_site_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "site_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_modified_time", global::System.Data.SqlDbType.Timestamp, 0, global::System.Data.ParameterDirection.Input, 0, 0, "modified_time", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[SITE] ([property_id], [site_use], [site_use_description], [neighborhood], [sewer_basin], [retro_basin], [create_by], [create_date], [update_by], [update_date]) VALUES (@property_id, @site_use, @site_use_description, @neighborhood, @sewer_basin, @retro_basin, @create_by, @create_date, @update_by, @update_date);
-SELECT site_id, property_id, site_use, site_use_description, neighborhood, sewer_basin, retro_basin, create_by, create_date, update_by, update_date, modified_time FROM dbo.SITE WHERE (site_id = SCOPE_IDENTITY())";
-            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@property_id", global::System.Data.SqlDbType.Char, 0, global::System.Data.ParameterDirection.Input, 0, 0, "property_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@site_use", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "site_use", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@site_use_description", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "site_use_description", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@neighborhood", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "neighborhood", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@sewer_basin", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "sewer_basin", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@retro_basin", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "retro_basin", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@create_by", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "create_by", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@create_date", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "create_date", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@update_by", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "update_by", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@update_date", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "update_date", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_property_id", global::System.Data.SqlDbType.Char, 0, global::System.Data.ParameterDirection.Input, 0, 0, "property_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_sewer_basin", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "sewer_basin", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_retro_basin", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "retro_basin", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_update_by", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "update_by", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_update_date", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "update_date", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[SITE] SET [property_id] = @property_id, [site_use] = @site_use, [site_use_description] = @site_use_description, [neighborhood] = @neighborhood, [sewer_basin] = @sewer_basin, [retro_basin] = @retro_basin, [create_by] = @create_by, [create_date] = @create_date, [update_by] = @update_by, [update_date] = @update_date WHERE (([site_id] = @Original_site_id) AND ([modified_time] = @Original_modified_time));
-SELECT site_id, property_id, site_use, site_use_description, neighborhood, sewer_basin, retro_basin, create_by, create_date, update_by, update_date, modified_time FROM dbo.SITE WHERE (site_id = @site_id)";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [SITE] SET [property_id] = @property_id, [sewer_basin] = @sewer_basin, [retro_basin] = @retro_basin, [update_by] = @update_by, [update_date] = @update_date WHERE (([site_id] = @Original_site_id) AND ([property_id] = @Original_property_id) AND ([sewer_basin] = @Original_sewer_basin) AND ([retro_basin] = @Original_retro_basin) AND ([update_by] = @Original_update_by) AND ([update_date] = @Original_update_date));
+SELECT site_id, property_id, sewer_basin, retro_basin, update_by, update_date FROM SITE WHERE (site_id = @site_id)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@property_id", global::System.Data.SqlDbType.Char, 0, global::System.Data.ParameterDirection.Input, 0, 0, "property_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@site_use", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "site_use", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@site_use_description", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "site_use_description", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@neighborhood", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "neighborhood", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@sewer_basin", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "sewer_basin", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@retro_basin", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "retro_basin", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@create_by", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "create_by", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@create_date", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "create_date", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@update_by", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "update_by", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@update_date", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "update_date", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_site_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "site_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_modified_time", global::System.Data.SqlDbType.Timestamp, 0, global::System.Data.ParameterDirection.Input, 0, 0, "modified_time", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_property_id", global::System.Data.SqlDbType.Char, 0, global::System.Data.ParameterDirection.Input, 0, 0, "property_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_sewer_basin", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "sewer_basin", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_retro_basin", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "retro_basin", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_update_by", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "update_by", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_update_date", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "update_date", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@site_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "site_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
@@ -9994,7 +8700,8 @@ SELECT site_id, property_id, site_use, site_use_description, neighborhood, sewer
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT     dbo.SITE.*\r\nFROM         dbo.SITE";
+            this._commandCollection[0].CommandText = "SELECT     site_id, property_id, sewer_basin, retro_basin, update_by, update_date" +
+                "\r\nFROM         SITE";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -10048,14 +8755,33 @@ SELECT site_id, property_id, site_use, site_use_description, neighborhood, sewer
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_site_id, byte[] Original_modified_time) {
+        public virtual int Delete(int Original_site_id, string Original_property_id, string Original_sewer_basin, string Original_retro_basin, string Original_update_by, System.DateTime Original_update_date) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_site_id));
-            if ((Original_modified_time == null)) {
-                throw new global::System.ArgumentNullException("Original_modified_time");
+            if ((Original_property_id == null)) {
+                throw new global::System.ArgumentNullException("Original_property_id");
             }
             else {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((byte[])(Original_modified_time));
+                this.Adapter.DeleteCommand.Parameters[1].Value = ((string)(Original_property_id));
             }
+            if ((Original_sewer_basin == null)) {
+                throw new global::System.ArgumentNullException("Original_sewer_basin");
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[2].Value = ((string)(Original_sewer_basin));
+            }
+            if ((Original_retro_basin == null)) {
+                throw new global::System.ArgumentNullException("Original_retro_basin");
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((string)(Original_retro_basin));
+            }
+            if ((Original_update_by == null)) {
+                throw new global::System.ArgumentNullException("Original_update_by");
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[4].Value = ((string)(Original_update_by));
+            }
+            this.Adapter.DeleteCommand.Parameters[5].Value = ((System.DateTime)(Original_update_date));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -10074,136 +8800,60 @@ SELECT site_id, property_id, site_use, site_use_description, neighborhood, sewer
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string property_id, string site_use, string site_use_description, string neighborhood, string sewer_basin, string retro_basin, string create_by, System.DateTime create_date, string update_by, System.DateTime update_date) {
-            if ((property_id == null)) {
-                throw new global::System.ArgumentNullException("property_id");
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(property_id));
-            }
-            if ((site_use == null)) {
-                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(site_use));
-            }
-            if ((site_use_description == null)) {
-                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(site_use_description));
-            }
-            if ((neighborhood == null)) {
-                throw new global::System.ArgumentNullException("neighborhood");
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[3].Value = ((string)(neighborhood));
-            }
-            if ((sewer_basin == null)) {
-                throw new global::System.ArgumentNullException("sewer_basin");
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[4].Value = ((string)(sewer_basin));
-            }
-            if ((retro_basin == null)) {
-                throw new global::System.ArgumentNullException("retro_basin");
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[5].Value = ((string)(retro_basin));
-            }
-            if ((create_by == null)) {
-                throw new global::System.ArgumentNullException("create_by");
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[6].Value = ((string)(create_by));
-            }
-            this.Adapter.InsertCommand.Parameters[7].Value = ((System.DateTime)(create_date));
-            if ((update_by == null)) {
-                throw new global::System.ArgumentNullException("update_by");
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[8].Value = ((string)(update_by));
-            }
-            this.Adapter.InsertCommand.Parameters[9].Value = ((System.DateTime)(update_date));
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
-            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.InsertCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.InsertCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string property_id, string site_use, string site_use_description, string neighborhood, string sewer_basin, string retro_basin, string create_by, System.DateTime create_date, string update_by, System.DateTime update_date, int Original_site_id, byte[] Original_modified_time, int site_id) {
+        public virtual int Update(string property_id, string sewer_basin, string retro_basin, string update_by, System.DateTime update_date, int Original_site_id, string Original_property_id, string Original_sewer_basin, string Original_retro_basin, string Original_update_by, System.DateTime Original_update_date, int site_id) {
             if ((property_id == null)) {
                 throw new global::System.ArgumentNullException("property_id");
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(property_id));
             }
-            if ((site_use == null)) {
-                this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(site_use));
-            }
-            if ((site_use_description == null)) {
-                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(site_use_description));
-            }
-            if ((neighborhood == null)) {
-                throw new global::System.ArgumentNullException("neighborhood");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[3].Value = ((string)(neighborhood));
-            }
             if ((sewer_basin == null)) {
                 throw new global::System.ArgumentNullException("sewer_basin");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((string)(sewer_basin));
+                this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(sewer_basin));
             }
             if ((retro_basin == null)) {
                 throw new global::System.ArgumentNullException("retro_basin");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((string)(retro_basin));
+                this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(retro_basin));
             }
-            if ((create_by == null)) {
-                throw new global::System.ArgumentNullException("create_by");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((string)(create_by));
-            }
-            this.Adapter.UpdateCommand.Parameters[7].Value = ((System.DateTime)(create_date));
             if ((update_by == null)) {
                 throw new global::System.ArgumentNullException("update_by");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((string)(update_by));
+                this.Adapter.UpdateCommand.Parameters[3].Value = ((string)(update_by));
             }
-            this.Adapter.UpdateCommand.Parameters[9].Value = ((System.DateTime)(update_date));
-            this.Adapter.UpdateCommand.Parameters[10].Value = ((int)(Original_site_id));
-            if ((Original_modified_time == null)) {
-                throw new global::System.ArgumentNullException("Original_modified_time");
+            this.Adapter.UpdateCommand.Parameters[4].Value = ((System.DateTime)(update_date));
+            this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(Original_site_id));
+            if ((Original_property_id == null)) {
+                throw new global::System.ArgumentNullException("Original_property_id");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[11].Value = ((byte[])(Original_modified_time));
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((string)(Original_property_id));
             }
-            this.Adapter.UpdateCommand.Parameters[12].Value = ((int)(site_id));
+            if ((Original_sewer_basin == null)) {
+                throw new global::System.ArgumentNullException("Original_sewer_basin");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((string)(Original_sewer_basin));
+            }
+            if ((Original_retro_basin == null)) {
+                throw new global::System.ArgumentNullException("Original_retro_basin");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((string)(Original_retro_basin));
+            }
+            if ((Original_update_by == null)) {
+                throw new global::System.ArgumentNullException("Original_update_by");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((string)(Original_update_by));
+            }
+            this.Adapter.UpdateCommand.Parameters[10].Value = ((System.DateTime)(Original_update_date));
+            this.Adapter.UpdateCommand.Parameters[11].Value = ((int)(site_id));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -10223,8 +8873,8 @@ SELECT site_id, property_id, site_use, site_use_description, neighborhood, sewer
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string property_id, string site_use, string site_use_description, string neighborhood, string sewer_basin, string retro_basin, string create_by, System.DateTime create_date, string update_by, System.DateTime update_date, int Original_site_id, byte[] Original_modified_time) {
-            return this.Update(property_id, site_use, site_use_description, neighborhood, sewer_basin, retro_basin, create_by, create_date, update_by, update_date, Original_site_id, Original_modified_time, Original_site_id);
+        public virtual int Update(string property_id, string sewer_basin, string retro_basin, string update_by, System.DateTime update_date, int Original_site_id, string Original_property_id, string Original_sewer_basin, string Original_retro_basin, string Original_update_by, System.DateTime Original_update_date) {
+            return this.Update(property_id, sewer_basin, retro_basin, update_by, update_date, Original_site_id, Original_property_id, Original_sewer_basin, Original_retro_basin, Original_update_by, Original_update_date, Original_site_id);
         }
     }
     
@@ -10829,6 +9479,379 @@ SELECT site_id, property_id, site_use, site_use_description, neighborhood, sewer
     }
     
     /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class SITE_OPPORTUNITYTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::System.Data.SqlClient.SqlConnection _connection;
+        
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public SITE_OPPORTUNITYTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "SITE_OPPORTUNITY";
+            tableMapping.ColumnMappings.Add("site_opportunity_id", "site_opportunity_id");
+            tableMapping.ColumnMappings.Add("site_id", "site_id");
+            tableMapping.ColumnMappings.Add("ia_sqft", "ia_sqft");
+            tableMapping.ColumnMappings.Add("ia_type_id", "ia_type_id");
+            tableMapping.ColumnMappings.Add("management_id", "management_id");
+            tableMapping.ColumnMappings.Add("facility_type_id", "facility_type_id");
+            tableMapping.ColumnMappings.Add("opportunity_feasibility", "opportunity_feasibility");
+            tableMapping.ColumnMappings.Add("update_by", "update_by");
+            tableMapping.ColumnMappings.Add("update_date", "update_date");
+            this._adapter.TableMappings.Add(tableMapping);
+            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.DeleteCommand.Connection = this.Connection;
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [SITE_OPPORTUNITY] WHERE (([site_opportunity_id] = @Original_site_opportunity_id) AND ([site_id] = @Original_site_id) AND ([ia_sqft] = @Original_ia_sqft) AND ((@IsNull_ia_type_id = 1 AND [ia_type_id] IS NULL) OR ([ia_type_id] = @Original_ia_type_id)) AND ([management_id] = @Original_management_id) AND ([facility_type_id] = @Original_facility_type_id) AND ([opportunity_feasibility] = @Original_opportunity_feasibility) AND ([update_by] = @Original_update_by) AND ([update_date] = @Original_update_date))";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_site_opportunity_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "site_opportunity_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_site_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "site_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ia_sqft", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ia_sqft", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ia_type_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ia_type_id", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ia_type_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ia_type_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_management_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "management_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_facility_type_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "facility_type_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_opportunity_feasibility", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "opportunity_feasibility", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_update_by", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "update_by", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_update_date", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "update_date", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.UpdateCommand.Connection = this.Connection;
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [SITE_OPPORTUNITY] SET [site_id] = @site_id, [ia_sqft] = @ia_sqft, [ia_type_id] = @ia_type_id, [management_id] = @management_id, [facility_type_id] = @facility_type_id, [opportunity_feasibility] = @opportunity_feasibility, [update_by] = @update_by, [update_date] = @update_date WHERE (([site_opportunity_id] = @Original_site_opportunity_id) AND ([site_id] = @Original_site_id) AND ([ia_sqft] = @Original_ia_sqft) AND ((@IsNull_ia_type_id = 1 AND [ia_type_id] IS NULL) OR ([ia_type_id] = @Original_ia_type_id)) AND ([management_id] = @Original_management_id) AND ([facility_type_id] = @Original_facility_type_id) AND ([opportunity_feasibility] = @Original_opportunity_feasibility) AND ([update_by] = @Original_update_by) AND ([update_date] = @Original_update_date));
+SELECT site_opportunity_id, site_id, ia_sqft, ia_type_id, management_id, facility_type_id, opportunity_feasibility, update_by, update_date FROM SITE_OPPORTUNITY WHERE (site_opportunity_id = @site_opportunity_id)";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@site_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "site_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ia_sqft", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ia_sqft", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ia_type_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ia_type_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@management_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "management_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@facility_type_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "facility_type_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@opportunity_feasibility", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "opportunity_feasibility", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@update_by", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "update_by", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@update_date", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "update_date", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_site_opportunity_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "site_opportunity_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_site_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "site_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ia_sqft", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ia_sqft", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_ia_type_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ia_type_id", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ia_type_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ia_type_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_management_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "management_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_facility_type_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "facility_type_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_opportunity_feasibility", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "opportunity_feasibility", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_update_by", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "update_by", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_update_date", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "update_date", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@site_opportunity_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "site_opportunity_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = global::SystemsAnalysis.DataAccess.Properties.Settings.Default.RETRO_RGConnectionString;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = "SELECT     site_opportunity_id, site_id, ia_sqft, ia_type_id, management_id, faci" +
+                "lity_type_id, opportunity_feasibility, update_by, update_date\r\nFROM         SITE" +
+                "_OPPORTUNITY";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(RetrofitsDataSet.SITE_OPPORTUNITYDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual RetrofitsDataSet.SITE_OPPORTUNITYDataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            RetrofitsDataSet.SITE_OPPORTUNITYDataTable dataTable = new RetrofitsDataSet.SITE_OPPORTUNITYDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(RetrofitsDataSet.SITE_OPPORTUNITYDataTable dataTable) {
+            return this.Adapter.Update(dataTable);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(RetrofitsDataSet dataSet) {
+            return this.Adapter.Update(dataSet, "SITE_OPPORTUNITY");
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow dataRow) {
+            return this.Adapter.Update(new global::System.Data.DataRow[] {
+                        dataRow});
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow[] dataRows) {
+            return this.Adapter.Update(dataRows);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
+        public virtual int Delete(int Original_site_opportunity_id, int Original_site_id, int Original_ia_sqft, global::System.Nullable<int> Original_ia_type_id, int Original_management_id, int Original_facility_type_id, int Original_opportunity_feasibility, string Original_update_by, System.DateTime Original_update_date) {
+            this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_site_opportunity_id));
+            this.Adapter.DeleteCommand.Parameters[1].Value = ((int)(Original_site_id));
+            this.Adapter.DeleteCommand.Parameters[2].Value = ((int)(Original_ia_sqft));
+            if ((Original_ia_type_id.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[4].Value = ((int)(Original_ia_type_id.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.DeleteCommand.Parameters[5].Value = ((int)(Original_management_id));
+            this.Adapter.DeleteCommand.Parameters[6].Value = ((int)(Original_facility_type_id));
+            this.Adapter.DeleteCommand.Parameters[7].Value = ((int)(Original_opportunity_feasibility));
+            if ((Original_update_by == null)) {
+                throw new global::System.ArgumentNullException("Original_update_by");
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[8].Value = ((string)(Original_update_by));
+            }
+            this.Adapter.DeleteCommand.Parameters[9].Value = ((System.DateTime)(Original_update_date));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
+            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.DeleteCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.DeleteCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(
+                    int site_id, 
+                    int ia_sqft, 
+                    global::System.Nullable<int> ia_type_id, 
+                    int management_id, 
+                    int facility_type_id, 
+                    int opportunity_feasibility, 
+                    string update_by, 
+                    System.DateTime update_date, 
+                    int Original_site_opportunity_id, 
+                    int Original_site_id, 
+                    int Original_ia_sqft, 
+                    global::System.Nullable<int> Original_ia_type_id, 
+                    int Original_management_id, 
+                    int Original_facility_type_id, 
+                    int Original_opportunity_feasibility, 
+                    string Original_update_by, 
+                    System.DateTime Original_update_date, 
+                    int site_opportunity_id) {
+            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(site_id));
+            this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(ia_sqft));
+            if ((ia_type_id.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(ia_type_id.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(management_id));
+            this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(facility_type_id));
+            this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(opportunity_feasibility));
+            if ((update_by == null)) {
+                throw new global::System.ArgumentNullException("update_by");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((string)(update_by));
+            }
+            this.Adapter.UpdateCommand.Parameters[7].Value = ((System.DateTime)(update_date));
+            this.Adapter.UpdateCommand.Parameters[8].Value = ((int)(Original_site_opportunity_id));
+            this.Adapter.UpdateCommand.Parameters[9].Value = ((int)(Original_site_id));
+            this.Adapter.UpdateCommand.Parameters[10].Value = ((int)(Original_ia_sqft));
+            if ((Original_ia_type_id.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[11].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[12].Value = ((int)(Original_ia_type_id.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[11].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[12].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[13].Value = ((int)(Original_management_id));
+            this.Adapter.UpdateCommand.Parameters[14].Value = ((int)(Original_facility_type_id));
+            this.Adapter.UpdateCommand.Parameters[15].Value = ((int)(Original_opportunity_feasibility));
+            if ((Original_update_by == null)) {
+                throw new global::System.ArgumentNullException("Original_update_by");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[16].Value = ((string)(Original_update_by));
+            }
+            this.Adapter.UpdateCommand.Parameters[17].Value = ((System.DateTime)(Original_update_date));
+            this.Adapter.UpdateCommand.Parameters[18].Value = ((int)(site_opportunity_id));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
+            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.UpdateCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.UpdateCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(
+                    int site_id, 
+                    int ia_sqft, 
+                    global::System.Nullable<int> ia_type_id, 
+                    int management_id, 
+                    int facility_type_id, 
+                    int opportunity_feasibility, 
+                    string update_by, 
+                    System.DateTime update_date, 
+                    int Original_site_opportunity_id, 
+                    int Original_site_id, 
+                    int Original_ia_sqft, 
+                    global::System.Nullable<int> Original_ia_type_id, 
+                    int Original_management_id, 
+                    int Original_facility_type_id, 
+                    int Original_opportunity_feasibility, 
+                    string Original_update_by, 
+                    System.DateTime Original_update_date) {
+            return this.Update(site_id, ia_sqft, ia_type_id, management_id, facility_type_id, opportunity_feasibility, update_by, update_date, Original_site_opportunity_id, Original_site_id, Original_ia_sqft, Original_ia_type_id, Original_management_id, Original_facility_type_id, Original_opportunity_feasibility, Original_update_by, Original_update_date, Original_site_opportunity_id);
+        }
+    }
+    
+    /// <summary>
     ///TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
     ///</summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")]
@@ -10857,13 +9880,13 @@ SELECT site_id, property_id, site_use, site_use_description, neighborhood, sewer
         
         private SITE_ASSESSMENTTableAdapter _sITE_ASSESSMENTTableAdapter;
         
-        private SITE_OPPORTUNITYTableAdapter _sITE_OPPORTUNITYTableAdapter;
-        
         private SITETableAdapter _sITETableAdapter;
         
         private RETRO_BASINTableAdapter _rETRO_BASINTableAdapter;
         
         private SEWER_BASINTableAdapter _sEWER_BASINTableAdapter;
+        
+        private SITE_OPPORTUNITYTableAdapter _sITE_OPPORTUNITYTableAdapter;
         
         private bool _backupDataSetBeforeUpdate;
         
@@ -10987,19 +10010,6 @@ SELECT site_id, property_id, site_use, site_use_description, neighborhood, sewer
         [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
             "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
             "", "System.Drawing.Design.UITypeEditor")]
-        public SITE_OPPORTUNITYTableAdapter SITE_OPPORTUNITYTableAdapter {
-            get {
-                return this._sITE_OPPORTUNITYTableAdapter;
-            }
-            set {
-                this._sITE_OPPORTUNITYTableAdapter = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
-            "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
-            "", "System.Drawing.Design.UITypeEditor")]
         public SITETableAdapter SITETableAdapter {
             get {
                 return this._sITETableAdapter;
@@ -11032,6 +10042,19 @@ SELECT site_id, property_id, site_use, site_use_description, neighborhood, sewer
             }
             set {
                 this._sEWER_BASINTableAdapter = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
+            "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
+            "", "System.Drawing.Design.UITypeEditor")]
+        public SITE_OPPORTUNITYTableAdapter SITE_OPPORTUNITYTableAdapter {
+            get {
+                return this._sITE_OPPORTUNITYTableAdapter;
+            }
+            set {
+                this._sITE_OPPORTUNITYTableAdapter = value;
             }
         }
         
@@ -11084,10 +10107,6 @@ SELECT site_id, property_id, site_use, site_use_description, neighborhood, sewer
                             && (this._sITE_ASSESSMENTTableAdapter.Connection != null))) {
                     return this._sITE_ASSESSMENTTableAdapter.Connection;
                 }
-                if (((this._sITE_OPPORTUNITYTableAdapter != null) 
-                            && (this._sITE_OPPORTUNITYTableAdapter.Connection != null))) {
-                    return this._sITE_OPPORTUNITYTableAdapter.Connection;
-                }
                 if (((this._sITETableAdapter != null) 
                             && (this._sITETableAdapter.Connection != null))) {
                     return this._sITETableAdapter.Connection;
@@ -11099,6 +10118,10 @@ SELECT site_id, property_id, site_use, site_use_description, neighborhood, sewer
                 if (((this._sEWER_BASINTableAdapter != null) 
                             && (this._sEWER_BASINTableAdapter.Connection != null))) {
                     return this._sEWER_BASINTableAdapter.Connection;
+                }
+                if (((this._sITE_OPPORTUNITYTableAdapter != null) 
+                            && (this._sITE_OPPORTUNITYTableAdapter.Connection != null))) {
+                    return this._sITE_OPPORTUNITYTableAdapter.Connection;
                 }
                 return null;
             }
@@ -11136,9 +10159,6 @@ SELECT site_id, property_id, site_use, site_use_description, neighborhood, sewer
                 if ((this._sITE_ASSESSMENTTableAdapter != null)) {
                     count = (count + 1);
                 }
-                if ((this._sITE_OPPORTUNITYTableAdapter != null)) {
-                    count = (count + 1);
-                }
                 if ((this._sITETableAdapter != null)) {
                     count = (count + 1);
                 }
@@ -11146,6 +10166,9 @@ SELECT site_id, property_id, site_use, site_use_description, neighborhood, sewer
                     count = (count + 1);
                 }
                 if ((this._sEWER_BASINTableAdapter != null)) {
+                    count = (count + 1);
+                }
+                if ((this._sITE_OPPORTUNITYTableAdapter != null)) {
                     count = (count + 1);
                 }
                 return count;
@@ -11221,6 +10244,15 @@ SELECT site_id, property_id, site_use, site_use_description, neighborhood, sewer
                     allChangedRows.AddRange(updatedRows);
                 }
             }
+            if ((this._sITE_OPPORTUNITYTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.SITE_OPPORTUNITY.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._sITE_OPPORTUNITYTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
             if ((this._sEWER_BASINTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.SEWER_BASIN.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
@@ -11254,15 +10286,6 @@ SELECT site_id, property_id, site_use, site_use_description, neighborhood, sewer
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
                     result = (result + this._sITE_ASSESSMENTTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
-            if ((this._sITE_OPPORTUNITYTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.SITE_OPPORTUNITY.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._sITE_OPPORTUNITYTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -11331,6 +10354,14 @@ SELECT site_id, property_id, site_use, site_use_description, neighborhood, sewer
                     allAddedRows.AddRange(addedRows);
                 }
             }
+            if ((this._sITE_OPPORTUNITYTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.SITE_OPPORTUNITY.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._sITE_OPPORTUNITYTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
             if ((this._sEWER_BASINTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.SEWER_BASIN.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
@@ -11363,14 +10394,6 @@ SELECT site_id, property_id, site_use, site_use_description, neighborhood, sewer
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._sITE_OPPORTUNITYTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.SITE_OPPORTUNITY.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._sITE_OPPORTUNITYTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
             return result;
         }
         
@@ -11380,14 +10403,6 @@ SELECT site_id, property_id, site_use, site_use_description, neighborhood, sewer
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private int UpdateDeletedRows(RetrofitsDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
             int result = 0;
-            if ((this._sITE_OPPORTUNITYTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.SITE_OPPORTUNITY.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._sITE_OPPORTUNITYTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
             if ((this._sITE_ASSESSMENTTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.SITE_ASSESSMENT.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
@@ -11417,6 +10432,14 @@ SELECT site_id, property_id, site_use, site_use_description, neighborhood, sewer
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._sEWER_BASINTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._sITE_OPPORTUNITYTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.SITE_OPPORTUNITY.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._sITE_OPPORTUNITYTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -11553,11 +10576,6 @@ SELECT site_id, property_id, site_use, site_use_description, neighborhood, sewer
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
                         "tring.");
             }
-            if (((this._sITE_OPPORTUNITYTableAdapter != null) 
-                        && (this.MatchTableAdapterConnection(this._sITE_OPPORTUNITYTableAdapter.Connection) == false))) {
-                throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
-                        "tring.");
-            }
             if (((this._sITETableAdapter != null) 
                         && (this.MatchTableAdapterConnection(this._sITETableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
@@ -11570,6 +10588,11 @@ SELECT site_id, property_id, site_use, site_use_description, neighborhood, sewer
             }
             if (((this._sEWER_BASINTableAdapter != null) 
                         && (this.MatchTableAdapterConnection(this._sEWER_BASINTableAdapter.Connection) == false))) {
+                throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
+                        "tring.");
+            }
+            if (((this._sITE_OPPORTUNITYTableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._sITE_OPPORTUNITYTableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
                         "tring.");
             }
@@ -11677,15 +10700,6 @@ SELECT site_id, property_id, site_use, site_use_description, neighborhood, sewer
                         adaptersWithAcceptChangesDuringUpdate.Add(this._sITE_ASSESSMENTTableAdapter.Adapter);
                     }
                 }
-                if ((this._sITE_OPPORTUNITYTableAdapter != null)) {
-                    revertConnections.Add(this._sITE_OPPORTUNITYTableAdapter, this._sITE_OPPORTUNITYTableAdapter.Connection);
-                    this._sITE_OPPORTUNITYTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
-                    this._sITE_OPPORTUNITYTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
-                    if (this._sITE_OPPORTUNITYTableAdapter.Adapter.AcceptChangesDuringUpdate) {
-                        this._sITE_OPPORTUNITYTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
-                        adaptersWithAcceptChangesDuringUpdate.Add(this._sITE_OPPORTUNITYTableAdapter.Adapter);
-                    }
-                }
                 if ((this._sITETableAdapter != null)) {
                     revertConnections.Add(this._sITETableAdapter, this._sITETableAdapter.Connection);
                     this._sITETableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
@@ -11711,6 +10725,15 @@ SELECT site_id, property_id, site_use, site_use_description, neighborhood, sewer
                     if (this._sEWER_BASINTableAdapter.Adapter.AcceptChangesDuringUpdate) {
                         this._sEWER_BASINTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
                         adaptersWithAcceptChangesDuringUpdate.Add(this._sEWER_BASINTableAdapter.Adapter);
+                    }
+                }
+                if ((this._sITE_OPPORTUNITYTableAdapter != null)) {
+                    revertConnections.Add(this._sITE_OPPORTUNITYTableAdapter, this._sITE_OPPORTUNITYTableAdapter.Connection);
+                    this._sITE_OPPORTUNITYTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
+                    this._sITE_OPPORTUNITYTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
+                    if (this._sITE_OPPORTUNITYTableAdapter.Adapter.AcceptChangesDuringUpdate) {
+                        this._sITE_OPPORTUNITYTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
+                        adaptersWithAcceptChangesDuringUpdate.Add(this._sITE_OPPORTUNITYTableAdapter.Adapter);
                     }
                 }
                 // 
@@ -11803,10 +10826,6 @@ SELECT site_id, property_id, site_use, site_use_description, neighborhood, sewer
                     this._sITE_ASSESSMENTTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._sITE_ASSESSMENTTableAdapter]));
                     this._sITE_ASSESSMENTTableAdapter.Transaction = null;
                 }
-                if ((this._sITE_OPPORTUNITYTableAdapter != null)) {
-                    this._sITE_OPPORTUNITYTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._sITE_OPPORTUNITYTableAdapter]));
-                    this._sITE_OPPORTUNITYTableAdapter.Transaction = null;
-                }
                 if ((this._sITETableAdapter != null)) {
                     this._sITETableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._sITETableAdapter]));
                     this._sITETableAdapter.Transaction = null;
@@ -11818,6 +10837,10 @@ SELECT site_id, property_id, site_use, site_use_description, neighborhood, sewer
                 if ((this._sEWER_BASINTableAdapter != null)) {
                     this._sEWER_BASINTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._sEWER_BASINTableAdapter]));
                     this._sEWER_BASINTableAdapter.Transaction = null;
+                }
+                if ((this._sITE_OPPORTUNITYTableAdapter != null)) {
+                    this._sITE_OPPORTUNITYTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._sITE_OPPORTUNITYTableAdapter]));
+                    this._sITE_OPPORTUNITYTableAdapter.Transaction = null;
                 }
                 if ((0 < adaptersWithAcceptChangesDuringUpdate.Count)) {
                     global::System.Data.Common.DataAdapter[] adapters = new System.Data.Common.DataAdapter[adaptersWithAcceptChangesDuringUpdate.Count];
