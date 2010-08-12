@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<namespace name="unitmodelcontrols">
+  <function name="getmodelname" visibility="private">
+    <parameters>
+      <parameter name="modelpath" type="PAnsiChar" />
+      <retval type="string" />
+    </parameters>
+  </function>
+</namespace>

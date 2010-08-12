@@ -1,0 +1,142 @@
+include "MapBasic.def"
+include "..\inc\EMGPatch.def"
+include "..\..\common\inc\EMGGlobal.def"
+include "..\..\common\inc\TableUtils.def"
+include "..\..\common\inc\INIUtils.def"
+include "..\..\common\inc\EMGLogger.def"
+
+Sub AddICtables()
+Dim 	OKToGO as logical
+Dim		Msg as string
+
+Dim		TraceTabPath as string
+
+Dim		mdlICInfiltPath as string
+Dim		mdlICInfiltMDBPath as string
+Dim		mdlICInfiltTable as string
+
+Dim		mdlICSWPlntPath as String
+Dim		mdlICSWPlntMDBPath as String
+Dim 	mdlICSWPlntTable as String
+
+Dim		mdlICngtoRedirPath as string
+Dim		mdlICngtoRedirMDBPath as string
+Dim		mdlICngtoRedirTable as string
+
+
+dim		strTemp as string
+Dim		ModelINIPath as string
+Dim		FullPath as string
+Dim		AliasName as string
+Dim		TableName as string
+Dim		PathName as string
+
+	call SetLogOptions(TRUE,TRUE,TRUE,TRUE)
+	Call Loggit("Hello from AddICTables...")
+
+	' Check that all required data is present and ready to go
+
+	OKTOGO = TRUE
+	if len(gmdlRootFolder) = 0 then
+		OKToGO = FALSE
+		Call loggit( "gmdlRootFolder not specified.")
+	end if
+	if not OKToGO then
+		call Loggit( "FAILURE:  At least one required global not set.")
+		gstrReturnStatus = "FAILURE"
+		exit sub
+	end if
+	
+	' All is in order, proceed...
+	close all interactive
+
+	gmdlRootFolder = FixFolderSlash(gmdlRootFolder)
+
+	ModelINIPath = gmdlRootFolder & "model.ini"
+	FullPath = ReadINI(ModelINIPath, "treeverse","tracefile", "")
+
+	gmdlTracePath = FullPath
+
+	AliasName = "mdl_Trace"
+	TableName = PathToTableName$(FullPath)
+	PathName = PathToDirectory$(FullPath)
+
+	
+	' new table Mar 22 2004
+	strTemp = gmdlRootFolder & "IC\" & "mdl_ic_Infilt_ac"
+	mdlICInfiltPath = strTemp & ".tab"
+	mdlICInfiltMDBPath = strTemp & ".mdb"
+	mdlICInfiltTable = PathToTableName$(mdlICInfiltPath)
+
+	' new table Mar 22 2004
+	strTemp = gmdlRootFolder & "IC\" & "mdl_ic_SWPlnt_ac"
+	mdlICSWPlntPath = strTemp & ".tab"
+	mdlICSWPlntMDBPath = strTemp & ".mdb"
+	mdlICSWPlntTable = PathToTableName$(mdlICSWPlntPath)
+
+	' new table mar 31 2004
+	strTemp = gmdlRootFolder & "IC\" & "mdl_ic_NgtoRedir_ac"
+	mdlICngtoRedirPath = strTemp & ".tab"
+	mdlICngtoRedirMDBPath  = strTemp & ".mdb"
+	mdlICngtoRedirTable = PathToTableName$(mdlICNgtoRedirPath)
+
+
+Create Table mdl_ic_Infilt
+	(
+	ParcelID		integer,
+	DivideID		integer,
+	RoofRPark		char(1),
+	assumeKey		char(4),
+	TimeFrame char(2),
+	ApplyAreaTF char(2),
+	SqFt			integer,
+	Comment char(16),
+	AppendDate char(8)
+
+	)
+	File	mdlICInfiltPath
+	Type Access Database mdlICInfiltMDBPath Version 3.0 Table mdlICInfiltTable
+  Create Index on mdl_ic_Infilt (ParcelID)
+  Create Index on mdl_ic_Infilt (DivideID)
+
+Create Table mdl_ic_SWPlnt
+	(
+	ParcelID		integer,
+	DivideID		integer,
+	RoofRPark		char(1),
+	assumeKey		char(4),
+	TimeFrame char(2),
+	ApplyAreaTF char(2),
+	SqFt			integer,
+	Comment char(16),
+	AppendDate char(8)
+
+	)
+	File	mdlICSWPlntPath
+	Type Access Database mdlICSWPlntMDBPath Version 3.0 Table mdlICSWPlntTable
+  Create Index on mdl_ic_SWPlnt (ParcelID)
+  Create Index on mdl_ic_SWPlnt (DivideID)
+
+Create Table mdl_ic_NgtoRedir
+	(
+	SurfSCID integer, 
+	ngto char(10)
+	) File mdlICngtoRedirPath
+  Type Access Database mdlICngtoRedirMDBPath Version 3.0 Table mdlICngtoRedirTable
+
+
+	
+	gstrReturnStatus = "SUCCESS"
+ 
+End Sub
+
+
+
+
+
+
+
+
+
+
+

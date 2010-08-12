@@ -1,0 +1,237 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<namespace name="uEMGWorkbenchManager">
+  <class name="TEMGWorkbenchManager">
+    <ancestor name="TObject" namespace="System">
+      <methodref name="Create" visibility="public">
+      </methodref>
+      <methodref name="Free" visibility="public">
+      </methodref>
+      <methodref name="InitInstance" visibility="public">
+      </methodref>
+      <methodref name="CleanupInstance" visibility="public">
+      </methodref>
+      <methodref name="ClassType" visibility="public">
+      </methodref>
+      <methodref name="ClassName" visibility="public">
+      </methodref>
+      <methodref name="ClassNameIs" visibility="public">
+      </methodref>
+      <methodref name="ClassParent" visibility="public">
+      </methodref>
+      <methodref name="ClassInfo" visibility="public">
+      </methodref>
+      <methodref name="InstanceSize" visibility="public">
+      </methodref>
+      <methodref name="InheritsFrom" visibility="public">
+      </methodref>
+      <methodref name="MethodAddress" visibility="public">
+      </methodref>
+      <methodref name="MethodName" visibility="public">
+      </methodref>
+      <methodref name="FieldAddress" visibility="public">
+      </methodref>
+      <methodref name="GetInterface" visibility="public">
+      </methodref>
+      <methodref name="GetInterfaceEntry" visibility="public">
+      </methodref>
+      <methodref name="GetInterfaceTable" visibility="public">
+      </methodref>
+      <methodref name="SafeCallException" visibility="public">
+      </methodref>
+      <methodref name="AfterConstruction" visibility="public">
+      </methodref>
+      <methodref name="BeforeDestruction" visibility="public">
+      </methodref>
+      <methodref name="Dispatch" visibility="public">
+      </methodref>
+      <methodref name="DefaultHandler" visibility="public">
+      </methodref>
+      <methodref name="NewInstance" visibility="public">
+      </methodref>
+      <methodref name="FreeInstance" visibility="public">
+      </methodref>
+      <methodref name="Destroy" visibility="public">
+      </methodref>
+    </ancestor>
+    <members>
+      <field name="fMapInfoApp" type="OleVariant" visibility="private" />
+      <field name="fModel" type="TEMGAATSModel" visibility="private" />
+      <field name="fStatusPane" type="TRzGlyphStatus" visibility="private" />
+      <function name="RunMenuCommand" visibility="private">
+        <parameters>
+          <parameter name="CommandID" type="string" />
+          <retval type="string" />
+        </parameters>
+      </function>
+      <function name="GetModelPath" visibility="private">
+        <parameters>
+          <retval type="string" />
+        </parameters>
+      </function>
+      <procedure name="SetStatusPane" visibility="private">
+        <parameters>
+          <parameter name="Value" type="TRzGlyphStatus" paramflags="const" />
+        </parameters>
+      </procedure>
+      <constructor name="Create" visibility="public">
+        <parameters>
+        </parameters>
+      </constructor>
+      <destructor name="Destroy" visibility="public">
+        <parameters>
+        </parameters>
+      </destructor>
+      <procedure name="RunCommand" visibility="public">
+        <parameters>
+          <parameter name="Command" type="string" />
+        </parameters>
+      </procedure>
+      <function name="Eval" visibility="public">
+        <parameters>
+          <parameter name="Expression" type="string" />
+          <retval type="Variant" />
+        </parameters>
+      </function>
+      <procedure name="SetModel" visibility="public">
+        <parameters>
+          <parameter name="AModel" type="TEMGAATSModel" />
+        </parameters>
+      </procedure>
+      <procedure name="CreateModelTables" visibility="public">
+      </procedure>
+      <procedure name="OpenTables" visibility="public">
+      </procedure>
+      <procedure name="TraceParcels" visibility="public">
+      </procedure>
+      <procedure name="TraceSurfaceSubcatchments" visibility="public">
+      </procedure>
+      <procedure name="CreateSurfaceSubcatchmentPointers" visibility="public">
+      </procedure>
+      <procedure name="CheckMapInfoProcess" visibility="public">
+      </procedure>
+      <procedure name="Initialize" visibility="public">
+        <parameters>
+          <parameter name="EMGAppLocation" type="string" />
+        </parameters>
+      </procedure>
+      <procedure name="CreateMappablePipes" visibility="public">
+      </procedure>
+      <procedure name="GetSpecialLinksData" visibility="public">
+      </procedure>
+      <procedure name="RelateDSCtoSurfSC" visibility="public">
+      </procedure>
+      <procedure name="CheckForDuplicateDSCs" visibility="public">
+      </procedure>
+      <procedure name="CheckForExcessiveICAreas" visibility="public">
+      </procedure>
+      <procedure name="ClearTable" visibility="public">
+        <parameters>
+          <parameter name="ATable" type="string" />
+        </parameters>
+      </procedure>
+      <procedure name="ClearNetwork" visibility="public">
+      </procedure>
+      <procedure name="ClearDirectSubcatchments" visibility="public">
+      </procedure>
+      <procedure name="ClearSurfaceSubcatchments" visibility="public">
+      </procedure>
+      <procedure name="SetTimeFrame" visibility="public">
+        <parameters>
+          <parameter name="ATimeFrame" type="TTimeFrame" />
+        </parameters>
+      </procedure>
+      <property name="ModelPath" visibility="public" read="GetModelPath" type="string" />
+      <property name="StatusPane" visibility="public" read="fStatusPane" write="SetStatusPane" type="TRzGlyphStatus" />
+      <function name="CreateStudyAreaBoundary" visibility="public">
+        <parameters>
+          <retval type="Boolean" />
+        </parameters>
+      </function>
+    </members>
+  </class>
+  <class name="EEMGWorkbenchException">
+    <ancestor name="Exception" namespace="SysUtils">
+      <methodref name="Create" visibility="public">
+      </methodref>
+      <methodref name="CreateFmt" visibility="public">
+      </methodref>
+      <methodref name="CreateRes" visibility="public">
+      </methodref>
+      <methodref name="CreateRes" visibility="public">
+      </methodref>
+      <methodref name="CreateResFmt" visibility="public">
+      </methodref>
+      <methodref name="CreateResFmt" visibility="public">
+      </methodref>
+      <methodref name="CreateHelp" visibility="public">
+      </methodref>
+      <methodref name="CreateFmtHelp" visibility="public">
+      </methodref>
+      <methodref name="CreateResHelp" visibility="public">
+      </methodref>
+      <methodref name="CreateResHelp" visibility="public">
+      </methodref>
+      <methodref name="CreateResFmtHelp" visibility="public">
+      </methodref>
+      <methodref name="CreateResFmtHelp" visibility="public">
+      </methodref>
+      <propertyref name="HelpContext" visibility="public">
+      </propertyref>
+      <propertyref name="Message" visibility="public">
+      </propertyref>
+      <ancestor name="TObject" namespace="System">
+        <methodref name="Create" visibility="public">
+        </methodref>
+        <methodref name="Free" visibility="public">
+        </methodref>
+        <methodref name="InitInstance" visibility="public">
+        </methodref>
+        <methodref name="CleanupInstance" visibility="public">
+        </methodref>
+        <methodref name="ClassType" visibility="public">
+        </methodref>
+        <methodref name="ClassName" visibility="public">
+        </methodref>
+        <methodref name="ClassNameIs" visibility="public">
+        </methodref>
+        <methodref name="ClassParent" visibility="public">
+        </methodref>
+        <methodref name="ClassInfo" visibility="public">
+        </methodref>
+        <methodref name="InstanceSize" visibility="public">
+        </methodref>
+        <methodref name="InheritsFrom" visibility="public">
+        </methodref>
+        <methodref name="MethodAddress" visibility="public">
+        </methodref>
+        <methodref name="MethodName" visibility="public">
+        </methodref>
+        <methodref name="FieldAddress" visibility="public">
+        </methodref>
+        <methodref name="GetInterface" visibility="public">
+        </methodref>
+        <methodref name="GetInterfaceEntry" visibility="public">
+        </methodref>
+        <methodref name="GetInterfaceTable" visibility="public">
+        </methodref>
+        <methodref name="SafeCallException" visibility="public">
+        </methodref>
+        <methodref name="AfterConstruction" visibility="public">
+        </methodref>
+        <methodref name="BeforeDestruction" visibility="public">
+        </methodref>
+        <methodref name="Dispatch" visibility="public">
+        </methodref>
+        <methodref name="DefaultHandler" visibility="public">
+        </methodref>
+        <methodref name="NewInstance" visibility="public">
+        </methodref>
+        <methodref name="FreeInstance" visibility="public">
+        </methodref>
+        <methodref name="Destroy" visibility="public">
+        </methodref>
+      </ancestor>
+    </ancestor>
+  </class>
+  <variable name="EMGWorkbenchManager" type="TEMGWorkbenchManager" />
+</namespace>

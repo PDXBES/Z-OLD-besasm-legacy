@@ -1,0 +1,6 @@
+[LINK]
+Application=WORM_v3.MBX
+Module=str_lib.mbo
+Module=MiStdlib.mbo
+Module=worm_v3.mbo
+'Module=more modules *.MBO
