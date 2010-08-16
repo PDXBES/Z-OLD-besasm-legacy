@@ -16,6 +16,14 @@ type
     fForcedStopLinks: THashedStringList;
     fStormsToBuild: TStringList;
     fTraceStormwater: Boolean;
+    function GetAndUpdateString(SectionName: String; KeyName: String;
+      DefaultValue: String): String;
+    function GetAndUpdateBool(SectionName: String; KeyName: String;
+      DefaultValue: Boolean): Boolean;
+    function GetAndUpdateDateTime(SectionName: String; KeyName: String;
+      DefaultValue: TDateTime): TDateTime;
+    function GetAndUpdateInt(SectionName: String; KeyName: String;
+      DefaultValue: Integer): Integer;
     function GetHasDirectSubcatchments: Boolean;
     function GetHasNetwork: Boolean;
     function GetHasSurfaceSubcatchments: Boolean;
@@ -364,6 +372,7 @@ resourcestring
 
   // QC Config Keys
   HydroQCFileNameKey = 'HydroQCFileName';
+  DefaultHydroQCFileName = 'HydroQC.xls';
 
   // Master Files Paths Config Keys
   MasterRootKey = 'Root';
@@ -580,44 +589,76 @@ begin
   inherited;
 end;
 
+function TModelConfig.GetAndUpdateString(SectionName: String; KeyName: String;
+  DefaultValue: String): String;
+begin
+  Result := fConfig.ReadString(SectionName, KeyName, DefaultValue);
+  fConfig.WriteString(SectionName, KeyName, Result);
+  fConfig.UpdateFile;
+end;
+
+function TModelConfig.GetAndUpdateBool(SectionName: String; KeyName: String;
+  DefaultValue: Boolean): Boolean;
+begin
+  Result := fConfig.ReadBool(SectionName, KeyName, DefaultValue);
+  fConfig.WriteBool(SectionName, KeyName, Result);
+  fConfig.UpdateFile;
+end;
+
+function TModelConfig.GetAndUpdateDateTime(SectionName: String; KeyName: String;
+  DefaultValue: TDateTime): TDateTime;
+begin
+  Result := fConfig.ReadDateTime(SectionName, KeyName, DefaultValue);
+  fConfig.WriteDateTime(SectionName, KeyName, Result);
+  fConfig.UpdateFile;
+end;
+
+function TModelConfig.GetAndUpdateInt(SectionName: String; KeyName: String;
+  DefaultValue: Integer): Integer;
+begin
+  Result := fConfig.ReadInteger(SectionName, KeyName, DefaultValue);
+  fConfig.WriteInteger(SectionName, KeyName, Result);
+  fConfig.UpdateFile;
+end;
+
 function TModelConfig.GetCreatedVia: String;
 begin
-  Result := fConfig.ReadString(AdminSection, CreatedViaKey, '');
+  Result := GetAndUpdateString(AdminSection, CreatedViaKey, '');
 end;
 
 function TModelConfig.GetDebugFileName: TFileName;
 begin
-  Result := fConfig.ReadString(TreeVerseSection, DebugFileKey, '');
+  Result := GetAndUpdateString(TreeVerseSection, DebugFileKey, '');
 end;
 
 function TModelConfig.GetDebugTrace: Boolean;
 begin
-  Result := fConfig.ReadBool(TreeVerseSection, DebugTraceKey, False);
+  Result := GetAndUpdateBool(TreeVerseSection, DebugTraceKey, False);
 end;
 
 function TModelConfig.GetDescription: String;
 begin
-  Result := fConfig.ReadString(AdminSection, DescriptionKey, '');
+  Result := GetAndUpdateString(AdminSection, DescriptionKey, '');
 end;
 
 function TModelConfig.GetDSNodeField: String;
 begin
-  Result := fConfig.ReadString(TreeVerseSection, DSNodeKey, '')
+  Result := GetAndUpdateString(TreeVerseSection, DSNodeKey, '');
 end;
 
 function TModelConfig.GetElementField: String;
 begin
-  Result := fConfig.ReadString(TreeVerseSection, ElementKey, '');
+  Result := GetAndUpdateString(TreeVerseSection, ElementKey, '');
 end;
 
 function TModelConfig.GetEMGWorkbenchPath: String;
 begin
-  Result := fConfig.ReadString(CodeSection, EMGWorkbenchKey, '');
+  Result := GetAndUpdateString(CodeSection, EMGWorkbenchKey, '');
 end;
 
 function TModelConfig.GetEngineExportFileName: TFileName;
 begin
-  Result := fConfig.ReadString(SimulationSection, EngineFileKey, DefaultEngineFileValue);
+  Result := GetAndUpdateString(SimulationSection, EngineFileKey, DefaultEngineFileValue);
 end;
 
 function TModelConfig.GetFileName: String;
@@ -677,57 +718,57 @@ end;
 
 function TModelConfig.GetForceMDBRefresh: Boolean;
 begin
-  Result := fConfig.ReadBool(AdminSection, ForceMDBRefreshKey, True);
+  Result := GetAndUpdateBool(AdminSection, ForceMDBRefreshKey, True);
 end;
 
 function TModelConfig.GetHasDirectSubcatchments: Boolean;
 begin
-  Result := fConfig.ReadBool(ModelStateSection, HasDirectSubcatchmentsKey, False);
+  Result := GetAndUpdateBool(ModelStateSection, HasDirectSubcatchmentsKey, False);
 end;
 
 function TModelConfig.GetHasNetwork: Boolean;
 begin
-  Result := fConfig.ReadBool(ModelStateSection, HasNetworkKey, False);
+  Result := GetAndUpdateBool(ModelStateSection, HasNetworkKey, False);
 end;
 
 function TModelConfig.GetHasSkeletonModel: Boolean;
 begin
-  Result := fConfig.ReadBool(ModelStateSection, HasSkeletonModelKey, False)
+  Result := GetAndUpdateBool(ModelStateSection, HasSkeletonModelKey, False)
 end;
 
 function TModelConfig.GetHasStandardDirectories: Boolean;
 begin
-  Result := fConfig.ReadBool(ModelStateSection, HasStandardDirectoriesKey, False)
+  Result := GetAndUpdateBool(ModelStateSection, HasStandardDirectoriesKey, False)
 end;
 
 function TModelConfig.GetHasSurfaceSubcatchments: Boolean;
 begin
-  Result := fConfig.ReadBool(ModelStateSection, HasSurfaceSubcatchmentsKey, False);
+  Result := GetAndUpdateBool(ModelStateSection, HasSurfaceSubcatchmentsKey, False);
 end;
 
 function TModelConfig.GetHydroQCFileName: string;
 begin
-  Result := fConfig.ReadString(QCSection, HydroQCFileNameKey, '')
+  Result := GetAndUpdateString(QCSection, HydroQCFileNameKey, DefaultHydroQCFileName);
 end;
 
 function TModelConfig.GetLinkExistingTable: String;
 begin
-  Result := fConfig.ReadString(TreeVerseSection, LinkExistingKey, '');
+  Result := GetAndUpdateString(TreeVerseSection, LinkExistingKey, '');
 end;
 
 function TModelConfig.GetLinkField: String;
 begin
-  Result := fConfig.ReadString(TreeVerseSection, LinkKey, '');
+  Result := GetAndUpdateString(TreeVerseSection, LinkKey, '');
 end;
 
 function TModelConfig.GetLinkFutureTable: String;
 begin
-  Result := fConfig.ReadString(TreeVerseSection, LinkFutureKey, '');
+  Result := GetAndUpdateString(TreeVerseSection, LinkFutureKey, '');
 end;
 
 function TModelConfig.GetMasterLinksPath: String;
 begin
-  Result := fConfig.ReadString(MasterFilesSection, MasterLinksKey, '');
+  Result := GetAndUpdateString(MasterFilesSection, MasterLinksKey, '');
 end;
 
 function TModelConfig.GetMasterMDBFileIDs(index: Integer): String;
@@ -762,37 +803,37 @@ end;
 
 function TModelConfig.GetMasterNodesPath: String;
 begin
-  Result := fConfig.ReadString(MasterFilesSection, MasterNodesKey, '');
+  Result := GetAndUpdateString(MasterFilesSection, MasterNodesKey, '');
 end;
 
 function TModelConfig.GetMasterParcelsPath: String;
 begin
-  Result := fConfig.ReadString(MasterFilesSection, MasterParcelsKey, '');
+  Result := GetAndUpdateString(MasterFilesSection, MasterParcelsKey, '');
 end;
 
 function TModelConfig.GetMasterQuartersectionPath: String;
 begin
-  Result := fConfig.ReadString(MasterFilesSection, MasterQuartersectionsKey, '');
+  Result := GetAndUpdateString(MasterFilesSection, MasterQuartersectionsKey, '');
 end;
 
 function TModelConfig.GetMasterRootPath: String;
 begin
-  Result := fConfig.ReadString(MasterFilesSection, MasterRootKey, '');
+  Result := GetAndUpdateString(MasterFilesSection, MasterRootKey, '');
 end;
 
 function TModelConfig.GetMasterSpecLinksDataPath: String;
 begin
-  Result := fConfig.ReadString(MasterFilesSection, MasterSpecLinksDataKey, '')
+  Result := GetAndUpdateString(MasterFilesSection, MasterSpecLinksDataKey, '')
 end;
 
 function TModelConfig.GetMasterSpecLinksPath: String;
 begin
-  Result := fConfig.ReadString(MasterFilesSection, MasterSpecLinksKey, '')
+  Result := GetAndUpdateString(MasterFilesSection, MasterSpecLinksKey, '')
 end;
 
 function TModelConfig.GetMasterSurfacePath: String;
 begin
-  Result := fConfig.ReadString(MasterFilesSection, MasterSurfaceKey, '')
+  Result := GetAndUpdateString(MasterFilesSection, MasterSurfaceKey, '')
 end;
 
 procedure TModelConfig.GetMDBFiles;
@@ -813,23 +854,23 @@ end;
 
 function TModelConfig.GetModelCreateDate: TDateTime;
 begin
-  Result := fConfig.ReadDateTime(AdminSection, CreatedKey, MinDateTime);
+  Result := GetAndUpdateDateTime(AdminSection, CreatedKey, MinDateTime);
 end;
 
 function TModelConfig.GetModelEnteredDate: TDateTime;
 begin
-  Result := fConfig.ReadDateTime(AdminSection, EnteredKey, MinDateTime);
+  Result := GetAndUpdateDateTime(AdminSection, EnteredKey, MinDateTime);
 end;
 
 function TModelConfig.GetModelModifiedDate: TDateTime;
 begin
-  Result := fConfig.ReadDateTime(AdminSection, ModifiedKey, MinDateTime);
+  Result := GetAndUpdateDateTime(AdminSection, ModifiedKey, MinDateTime);
   { TODO -oAMM -cFile consistency : Check if modified date > created date and provide warning if not }
 end;
 
 function TModelConfig.GetModelName: String;
 begin
-  Result := fConfig.ReadString(AdminSection, NameKey, '');
+  Result := GetAndUpdateString(AdminSection, NameKey, '');
 end;
 
 function TModelConfig.GetPath: String;
@@ -839,22 +880,22 @@ end;
 
 function TModelConfig.GetReachField: String;
 begin
-  Result := fConfig.ReadString(TreeVerseSection, ReachKey, '');
+  Result := GetAndUpdateString(TreeVerseSection, ReachKey, '');
 end;
 
 function TModelConfig.GetResultViewsProjectDescription: String;
 begin
-  Result := fConfig.ReadString(ResultViewsSection, ProjectDescriptionKey, '');
+  Result := GetAndUpdateString(ResultViewsSection, ProjectDescriptionKey, '');
 end;
 
 function TModelConfig.GetResultViewsProjectNumber: String;
 begin
-  Result := fConfig.ReadString(ResultViewsSection, ProjectNumberKey, '');
+  Result := GetAndUpdateString(ResultViewsSection, ProjectNumberKey, '');
 end;
 
 function TModelConfig.GetResultViewsStudyAreaID: String;
 begin
-  Result := fConfig.ReadString(ResultViewsSection, StudyAreaIDKey, '');
+  Result := GetAndUpdateString(ResultViewsSection, StudyAreaIDKey, '');
 end;
 
 function TModelConfig.GetRootLink(Index: Integer): Integer;
@@ -884,12 +925,12 @@ end;
 
 function TModelConfig.GetRunoffDeployDate: TDateTime;
 begin
-  Result := fConfig.ReadDateTime(AdminSection, RunoffDeployedKey, MinDateTime);
+  Result := GetAndUpdateDateTime(AdminSection, RunoffDeployedKey, MinDateTime);
 end;
 
 function TModelConfig.GetRunoffFileName: TFileName;
 begin
-  Result := fConfig.ReadString(SimulationSection, RunoffFileKey, '');
+  Result := GetAndUpdateString(SimulationSection, RunoffFileKey, '');
 end;
 
 procedure TModelConfig.GetStandardDirectories;
@@ -985,7 +1026,7 @@ end;
 
 function TModelConfig.GetSystemMDBRefreshDate: TDateTime;
 begin
-  Result := fConfig.ReadDateTime(AdminSection, SystemMDBUpdateDateKey, MinDateTime);
+  Result := GetAndUpdateDateTime(AdminSection, SystemMDBUpdateDateKey, MinDateTime);
 end;
 
 function TModelConfig.GetTimeFrame: TTimeFrame;
@@ -1002,47 +1043,47 @@ end;
 
 function TModelConfig.GetTitle: String;
 begin
-  Result := fConfig.ReadString(AdminSection, TitleKey, '');
+  Result := GetAndUpdateString(AdminSection, TitleKey, '');
 end;
 
 function TModelConfig.GetTraceFileName: TFileName;
 begin
-  Result := fConfig.ReadString(TreeVerseSection, TraceFileKey, '');
+  Result := GetAndUpdateString(TreeVerseSection, TraceFileKey, '');
 end;
 
 function TModelConfig.GetTraceSourceDatabase: TFileName;
 begin
-  Result := fConfig.ReadString(TreeVerseSection, SourceDatabaseKey, '');
+  Result := GetAndUpdateString(TreeVerseSection, SourceDatabaseKey, '');
 end;
 
 function TModelConfig.GetTraceSourceTable: String;
 begin
-  Result := fConfig.ReadString(TreeVerseSection, SourceTableKey, '');
+  Result := GetAndUpdateString(TreeVerseSection, SourceTableKey, '');
 end;
 
 function TModelConfig.GetTraceStormwater: Boolean;
 begin
-  Result := fConfig.ReadBool(TreeVerseSection, TraceStormwaterKey, False);
+  Result := GetAndUpdateBool(TreeVerseSection, TraceStormwaterKey, False);
 end;
 
 function TModelConfig.GetTransportFileName: TFileName;
 begin
-  Result := fConfig.ReadString(SimulationSection, TransportFileKey, '');
+  Result := GetAndUpdateString(SimulationSection, TransportFileKey, '');
 end;
 
 function TModelConfig.GetUseBaseflow: Boolean;
 begin
-  Result := fConfig.ReadBool(SimulationSection, UseBaseflowKey, True);
+  Result := GetAndUpdateBool(SimulationSection, UseBaseflowKey, True);
 end;
 
 function TModelConfig.GetUSNodeField: String;
 begin
-  Result := fConfig.ReadString(TreeVerseSection, USNodeKey, '');
+  Result := GetAndUpdateString(TreeVerseSection, USNodeKey, '');
 end;
 
 function TModelConfig.GetVersion: String;
 begin
-  Result := fConfig.ReadString(ControlSection, VersionKey, '');
+  Result := GetAndUpdateString(ControlSection, VersionKey, '');
 end;
 
 procedure TModelConfig.Revert;

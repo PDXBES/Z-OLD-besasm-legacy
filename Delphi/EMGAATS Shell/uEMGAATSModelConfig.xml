@@ -63,6 +63,38 @@
       <field name="fForcedStopLinks" type="THashedStringList" visibility="private" />
       <field name="fStormsToBuild" type="TStringList" visibility="private" />
       <field name="fTraceStormwater" type="Boolean" visibility="private" />
+      <function name="GetAndUpdateString" visibility="private">
+        <parameters>
+          <parameter name="SectionName" type="string" />
+          <parameter name="KeyName" type="string" />
+          <parameter name="DefaultValue" type="string" />
+          <retval type="string" />
+        </parameters>
+      </function>
+      <function name="GetAndUpdateBool" visibility="private">
+        <parameters>
+          <parameter name="SectionName" type="string" />
+          <parameter name="KeyName" type="string" />
+          <parameter name="DefaultValue" type="Boolean" />
+          <retval type="Boolean" />
+        </parameters>
+      </function>
+      <function name="GetAndUpdateDateTime" visibility="private">
+        <parameters>
+          <parameter name="SectionName" type="string" />
+          <parameter name="KeyName" type="string" />
+          <parameter name="DefaultValue" type="TDateTime" />
+          <retval type="TDateTime" />
+        </parameters>
+      </function>
+      <function name="GetAndUpdateInt" visibility="private">
+        <parameters>
+          <parameter name="SectionName" type="string" />
+          <parameter name="KeyName" type="string" />
+          <parameter name="DefaultValue" type="Integer" />
+          <retval type="Integer" />
+        </parameters>
+      </function>
       <function name="GetHasDirectSubcatchments" visibility="private">
         <parameters>
           <retval type="Boolean" />
