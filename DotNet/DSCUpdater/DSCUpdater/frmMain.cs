@@ -2,28 +2,28 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
+using System.Configuration.Assemblies;
 using System.Data;
 using System.Data.Odbc;
 using System.Data.OleDb;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using System.IO;
-using Microsoft.VisualBasic;
-using System.Security.Principal;
-using System.Text.RegularExpressions;
+using System.Data.Linq;
+using System.Data.Linq.Mapping;
 using System.Data.Sql;
 using System.Data.SqlClient;
 using System.Data.SqlTypes;
 using System.Data.SqlServerCe;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Drawing;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Windows.Forms;
+using System.IO;
+using System.Security.Principal;
 using Microsoft.SqlServer.Server;
 using Microsoft.SqlServer;
-using System.Configuration.Assemblies;
 using Microsoft.Office;
-using System.Data.Linq;
-using System.Linq.Expressions;
-using System.Data.Linq.Mapping;
+using Microsoft.VisualBasic;
 using SystemsAnalysis.DataAccess;
 
 namespace DSCUpdater
@@ -47,19 +47,14 @@ namespace DSCUpdater
     Int64[] SearchList = new long[1];
 
     //string LineText;
-    string tempFileName;
+    string tempFileName = @"C:\Temp.csv";    
 
     // Use to populate the grid. 
     string[] DataResult1 = { "", "", "", "", "", "", "", "" };
     string[] Titles = { "RNO", "DSCID", "New Roof Area", "New Roof DISCO IC Area", "New Roof Drywell IC Area" };
     #endregion
 
-    public frmMain()
-    {
-      InitializeComponent();
-      tempFileName = @"C:\Temp.csv";    
-    }
-
+    #region cleanup
     /*
     public static DataTable ToADOTable<T>(
            this IEnumerable<T> varlist, CreateRowDelegate<T> fn)
@@ -91,6 +86,12 @@ namespace DSCUpdater
     }
     public delegate object[] CreateRowDelegate<T>(T t);
      */
+    #endregion
+
+    public frmMain()
+    {
+      InitializeComponent();
+    }
 
     private int SetProgress
     {
@@ -767,8 +768,8 @@ namespace DSCUpdater
     private void LoadUpdaterHistory()
     {
       //MessageBox.Show("LoadUpdaterHistory");     
-      this.sESSIONTableAdapter.Fill(this.projectDataSet.SESSION);
-      bindingNavigator1.BindingSource = sESSIONBindingSource;
+      this.sessionTableAdapter.Fill(this.projectDataSet.SESSION);
+      updaterHistoryBindingNav.BindingSource = sessionBindingSource;
       tabControlMain.Visible = true;
       Cursor.Current = Cursors.Arrow;
     }
@@ -940,6 +941,7 @@ namespace DSCUpdater
       sqlCmd.ExecuteNonQuery();
     }
 
+    //ImpAreaChanges
     private static void SendImpAEmail()
     {
       string toValue = "jrubengb@gmail.com";
@@ -948,7 +950,103 @@ namespace DSCUpdater
                 "This message is a request for changes to the impervious area coverage." + "\r\n" +
                 "The attached table lists parcels by DSCID that are in need of updates in the modeling system.";
       OutlookMail oMail = new OutlookMail();
-      oMail.AddToOutbox(toValue, subjectValue, bodyValue);
+      oMail.AddToOutboxImpAreaChanges(toValue, subjectValue, bodyValue);
+    }
+
+    //AllChanges
+    private static void SendRetroAllChangesEmail()
+    {
+      string toValue = "jrubengb@gmail.com";
+      string subjectValue = "Request for DSC and Inflow Control Records Update";
+      string bodyValue = "This is an auto-generated email." + "r\n" +
+                        "This message is a request for changed to the DSC and Inflow Controls coverages." + "r\n" +
+                        "The attached tables list parcels by DSCID that are in need of updates in the modeling system.";
+      OutlookMail oMail = new OutlookMail();
+      oMail.AddToOutboxAllRetroChanges(toValue, subjectValue, bodyValue);
+    }
+
+    //AssessmentsPotentialChanges
+    private static void SendRetroAssessmentPotentialChangesEmail()
+    {
+      string toValue = "jrubengb@gmail.com";
+      string subjectValue = "Request for DSC and Inflow Control Records Update";
+      string bodyValue = "This is an auto-generated email." + "r\n" +
+                        "This message is a request for changed to the DSC and Inflow Controls coverages." + "r\n" +
+                        "The attached tables list parcels by DSCID that are in need of updates in the modeling system.";
+      OutlookMail oMail = new OutlookMail();
+      oMail.AddToOutboxAssessmentsPotentialChanges(toValue, subjectValue, bodyValue);
+    }
+
+    //AssessmentsConstructedChanges
+    private static void SendRetroAssessmentConstructedChangesEmail()
+    {
+      string toValue = "jrubengb@gmail.com";
+      string subjectValue = "Request for DSC and Inflow Control Records Update";
+      string bodyValue = "This is an auto-generated email." + "r\n" +
+                        "This message is a request for changed to the DSC and Inflow Controls coverages." + "r\n" +
+                        "The attached tables list parcels by DSCID that are in need of updates in the modeling system.";
+      OutlookMail oMail = new OutlookMail();
+      oMail.AddToOutboxAssessmentConstructedChanges(toValue, subjectValue, bodyValue);
+    }
+
+    //AssessmentsChangesOnly
+    private static void SendRetroAssessmentsChangesOnlyEmail()
+    {
+      string toValue = "jrubengb@gmail.com";
+      string subjectValue = "Request for DSC Records Update";
+      string bodyValue = "This is an auto-generated email." + "r\n" +
+                        "This message is a request for changes to DSC coverage." + "r\n" +
+                        "The attached tables list parcels by DSCID that are in need of updates in the modeling system.";
+      OutlookMail oMail = new OutlookMail();
+      oMail.AddToOutboxAssessmentsChangesOnly(toValue, subjectValue, bodyValue);
+    }
+
+    //PotentialConstructedChanges
+    private static void SendRetroPotentialConstructedEmail()
+    {
+      string toValue = "jrubengb@gmail.com";
+      string subjectValue = "Request for Inflow Control Records Update";
+      string bodyValue = "This is an auto-generated email." + "r\n" +
+                        "This message is a request for changes to the Inflow Controls coverage(s)." + "r\n" +
+                        "The attached tables list parcels by DSCID that are in need of updates in the modeling system.";
+      OutlookMail oMail = new OutlookMail();
+      oMail.AddToOutboxPotentialConstructedChanges(toValue, subjectValue, bodyValue);
+    }
+
+    //PotentialChangesOnly
+    private static void SendRetroPotentialChangesOnlyEmail()
+    {
+      string toValue = "jrubengb@gmail.com";
+      string subjectValue = "Request for Inflow Control Records Update";
+      string bodyValue = "This is an auto-generated email." + "r\n" +
+                        "This message is a request for changes to the Inflow Controls coverage(s)." + "r\n" +
+                        "The attached tables list parcels by DSCID that are in need of updates in the modeling system.";
+      OutlookMail oMail = new OutlookMail();
+      oMail.AddToOutboxPotentialChangesOnly(toValue, subjectValue, bodyValue);
+    }
+
+    //ConstructedChangesOnly
+    private static void SendRetroConstructedChangesOnlyEmail()
+    {
+      string toValue = "jrubengb@gmail.com";
+      string subjectValue = "Request for Inflow Control Records Update";
+      string bodyValue = "This is an auto-generated email." + "r\n" +
+                        "This message is a request for changes to the Inflow Controls coverage(s)." + "r\n" +
+                        "The attached tables list parcels by DSCID that are in need of updates in the modeling system.";
+      OutlookMail oMail = new OutlookMail();
+      oMail.AddToOutboxConstructedChangesOnly(toValue, subjectValue, bodyValue);
+    }
+
+    //NoChanges
+    private static void SendRetroNoChangesEmail()
+    {
+      string toValue = "jrubengb@gmail.com";
+      string subjectValue = "No RETRO Changes Update";
+      string bodyValue = "This is an auto-generated email." + "r\n" +
+                        "This message is to inform you that no changes were found." + "r\n" +
+                        "The attached tables are test tables.";
+      OutlookMail oMail = new OutlookMail();
+      oMail.AddToOutboxNoChanges(toValue, subjectValue, bodyValue);
     }
 
     private void LoadMstData()
@@ -1020,6 +1118,45 @@ namespace DSCUpdater
     private void ApplyRetroUpdates()
     {
       
+    }
+
+    public static void ExportToCSV(DataTable dt, string strFilePath, string fileName)
+    {
+      var sw = new StreamWriter(strFilePath + fileName, false);
+
+      // Write the headers.
+      int iColCount = dt.Columns.Count;
+      for (int i = 0; i < iColCount; i++)
+      {
+        sw.Write(dt.Columns[i]);
+        if (i < iColCount - 1) sw.Write(",");
+      }
+
+      sw.Write(sw.NewLine);
+
+      // Write rows.
+      foreach (DataRow dr in dt.Rows)
+      {
+        for (int i = 0; i < iColCount; i++)
+        {
+          if (!Convert.IsDBNull(dr[i]))
+          {
+            if (dr[i].ToString().StartsWith("0"))
+            {
+              sw.Write(@"=""" + dr[i] + @"""");
+            }
+            else
+            {
+              sw.Write(dr[i].ToString());
+            }
+          }
+
+          if (i < iColCount - 1) sw.Write(",");
+        }
+        sw.Write(sw.NewLine);
+      }
+
+      sw.Close();
     }
  
     private void btnCancel_Click(object sender, EventArgs e)
@@ -1201,9 +1338,9 @@ namespace DSCUpdater
 
     }
 
-    private void btnCloseEditorHistory_Click(object sender, EventArgs e)
+    private void btnCloseUpdaterHistory_Click(object sender, EventArgs e)
     {
-
+      RestartUpdate();
     }
 
     private void btnUpdaterHistoryReturn_Click(object sender, EventArgs e)
@@ -1219,7 +1356,7 @@ namespace DSCUpdater
         }
       }
       projectDataSet.RejectChanges();
-      LoadTab("dscEditorHistory");
+      LoadTab("tabUpdaterHistory");
     }
 
     private void btnUpdaterEditorEnter_Click(object sender, EventArgs e)
@@ -1522,9 +1659,7 @@ namespace DSCUpdater
     {
       if (Convert.ToString(dgvIncomingRetroChanges.DataSource) != "")
       {
-        //To-Do: check to see which of the following is the best method for clearing the dgv
         dgvIncomingRetroChanges.DataSource = null;
-        ((DataView)dgvIncomingRetroChanges.DataSource).Table.Clear();
       }
 
       try
@@ -1533,8 +1668,9 @@ namespace DSCUpdater
         rDS.InitRetroDataSet();
         int newSiteAssessmentsCount;
         DateTime maxSiteAssessmentsDate;
-        DataTable siteAssessmentsTable = new DataTable();
-
+        DataTable assessment = new DataTable();
+        DataView assessmentDataView = new DataView();
+        
         if (viewSiteAssessmentsHasRun == 0)
         {
           maxSiteAssessmentsDate =
@@ -1547,19 +1683,41 @@ namespace DSCUpdater
             select r.site_assessment_id;
 
           newSiteAssessmentsCount = qrySiteAssessMentsCount.Count();
-          
-          IEnumerable<DataRow> qrySelectNewSiteAssessmentRecords =
-            (from r in rDS.SITE_ASSESSMENT.AsEnumerable()
-            where r.update_date >= maxSiteAssessmentsDate && r.update_date <= System.DateTime.Now
-            select r.site_assessment_id) as IEnumerable<DataRow>;
 
-          siteAssessmentsTable = qrySelectNewSiteAssessmentRecords.CopyToDataTable<DataRow>();
+          if (newSiteAssessmentsCount > 0)
+          {
+            assessment = rDS.Tables["SITE_ASSESSMENT"];
+            EnumerableRowCollection<DataRow> qrySelectNewSiteAssessmentRecords =
+            (from r in assessment.AsEnumerable()
+             where r.Field<DateTime>("update_date") >= maxSiteAssessmentsDate && r.Field<DateTime>("update_date") <= System.DateTime.Now
+             select r);
 
-          retroBindingSource.DataSource = siteAssessmentsTable;
-          dgvIncomingRetroChanges.DataSource = retroBindingSource;
-          lblNewRetroSiteAssessments.Text = Convert.ToString(newSiteAssessmentsCount);
-          MessageBox.Show("Current new site assessments list shows changes since previous site assessment update which occured on " + Convert.ToString(maxSiteAssessmentsDate) + ". To change the date range, choose a start date on the calendar and re-click on the 'View New Site Assessments' button.");
-          viewSiteAssessmentsHasRun = 1;          
+            assessmentDataView = qrySelectNewSiteAssessmentRecords.AsDataView();
+
+            retroBindingSource.DataSource = assessmentDataView;
+            dgvIncomingRetroChanges.DataSource = retroBindingSource;
+            lblNewRetroSiteAssessments.Text = "New Site Assessments: " + Convert.ToString(newSiteAssessmentsCount);
+            MessageBox.Show("Current new site assessments list shows changes since previous site assessment update which occured on " + Convert.ToString(maxSiteAssessmentsDate) + ". To change the date range, choose a start date on the calendar and re-click on the 'View New Site Assessments' button.");
+            viewSiteAssessmentsHasRun = 1;
+
+            DataTable siteAssessmentsDataTable = assessmentDataView.Table.Clone();
+            foreach (DataRowView drv in assessmentDataView)
+            {
+              siteAssessmentsDataTable.ImportRow(drv.Row);
+            }
+            siteAssessmentsDataTable.AcceptChanges();
+
+            ExportToCSV(siteAssessmentsDataTable, "c:\\temp\\", "SiteAssessments.csv");
+
+            return;
+          }
+
+          else
+          {
+            MessageBox.Show("No new site assessments added to RETRO database since " + maxSiteAssessmentsDate + ". Try the using the calendar to find potential ICs within specific time period.", "No Site Assesments within Date Range", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            viewPotentialICsHasRun = 1;
+            return;
+          }          
         }
         
         if (viewSiteAssessmentsHasRun == 1)
@@ -1572,12 +1730,41 @@ namespace DSCUpdater
             select r.site_assessment_id;
 
           newSiteAssessmentsCount = qrySiteAssessMentsCount.Count();
-          
-          retroBindingSource.DataSource = siteAssessmentsTable;
-          dgvIncomingRetroChanges.DataSource = retroBindingSource;
-          lblNewRetroSiteAssessments.Text = Convert.ToString(newSiteAssessmentsCount);
-          MessageBox.Show("New site assessments since " + maxSiteAssessmentsDate + " are displayed in the data grid view.");
-          viewSiteAssessmentsHasRun = 1;  
+
+          if (newSiteAssessmentsCount > 0)
+          {
+            assessment = rDS.Tables["SITE_ASSESSMENT"];
+            EnumerableRowCollection<DataRow> qrySelectNewSiteAssessmentRecords =
+            (from r in assessment.AsEnumerable()
+             where r.Field<DateTime>("update_date") >= maxSiteAssessmentsDate && r.Field<DateTime>("update_date") <= System.DateTime.Now
+             select r);
+
+            assessmentDataView = qrySelectNewSiteAssessmentRecords.AsDataView();
+
+            retroBindingSource.DataSource = assessmentDataView;
+            dgvIncomingRetroChanges.DataSource = retroBindingSource;
+            lblNewRetroSiteAssessments.Text = "New Site Assessments: " + Convert.ToString(newSiteAssessmentsCount);
+            MessageBox.Show(newSiteAssessmentsCount + " new site assessments since " + maxSiteAssessmentsDate + " are displayed in the data grid view.");
+            viewSiteAssessmentsHasRun = 1;
+
+            DataTable siteAssessmentsDataTable =  assessmentDataView.Table.Clone();
+            foreach (DataRowView drv in assessmentDataView)
+            {
+              siteAssessmentsDataTable.ImportRow(drv.Row);
+            }
+            siteAssessmentsDataTable.AcceptChanges();
+
+            ExportToCSV(siteAssessmentsDataTable, "c:\\temp\\", "SiteAssessments.csv");
+
+            return;
+          }
+
+          else
+          {
+            MessageBox.Show("No new site assessments added to RETRO database since " + maxSiteAssessmentsDate + ". Try the using the calendar to find potential ICs within specific time period.", "No Site Assesments within Date Range", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            viewPotentialICsHasRun = 1;
+            return;
+          }        
         }
       }
       catch (Exception ex)
@@ -1590,9 +1777,7 @@ namespace DSCUpdater
     {
       if (Convert.ToString(dgvIncomingRetroChanges.DataSource) != "")
       {
-        //To-Do: check to see which of the following is the best method for clearing the dgv
         dgvIncomingRetroChanges.DataSource = null;
-        ((DataView)dgvIncomingRetroChanges.DataSource).Table.Clear();
       }
 
       try
@@ -1600,8 +1785,9 @@ namespace DSCUpdater
         rDS = new RetrofitsDataSet();
         rDS.InitRetroDataSet();
         int newIcTargetsCount;
-        DataTable icTargetsTable = new DataTable();
         DateTime maxIcTargetsDate;
+        DataTable opportunity = new DataTable();
+        DataView icTargetsDataView = new DataView();
         
         if (viewPotentialICsHasRun == 0)
         {
@@ -1611,46 +1797,126 @@ namespace DSCUpdater
 
           IEnumerable<int> qryNewIcTargetsCount =
             from r in rDS.SITE_OPPORTUNITY
-            where r.update_date >= maxIcTargetsDate && r.update_date <= System.DateTime.Now
+            where r.update_date >= maxIcTargetsDate 
+            && r.update_date <= System.DateTime.Now
+            && (r.opportunity_feasibility == 1 || r.opportunity_feasibility == 2)
             select r.site_opportunity_id;
 
           newIcTargetsCount = qryNewIcTargetsCount.Count();
-          
-          IEnumerable<DataRow> qrySelectNewIcTargetsRecords =
-            (from r in rDS.SITE_OPPORTUNITY.AsEnumerable()
-             where r.update_date >= maxIcTargetsDate && r.update_date <= System.DateTime.Now
-             select r.site_opportunity_id) as IEnumerable<DataRow>;
 
-          icTargetsTable = qrySelectNewIcTargetsRecords.CopyToDataTable<DataRow>();
-          retroBindingSource.DataSource = icTargetsTable;
-          dgvIncomingRetroChanges.DataSource = retroBindingSource;
-          lblNewRetroIcTargets.Text = Convert.ToString(newIcTargetsCount);
-          MessageBox.Show("Current new potential ICs list shows changes since previous potential ICs update which occured on " + Convert.ToString(maxIcTargetsDate) + ". To change the date range, choose a start date on the calendar and re-click on the 'View New IC Targets' button.");
-          viewPotentialICsHasRun = 1;
+          if (newIcTargetsCount > 0)
+          {
+            opportunity = rDS.Tables["SITE_OPPORTUNITY"];
+
+            EnumerableRowCollection<DataRow> qrySelectNewIcTargetsRecords =
+              (from r in opportunity.AsEnumerable()
+               where r.Field<DateTime>("update_date") >= maxIcTargetsDate 
+               && r.Field<DateTime>("update_date") <= System.DateTime.Now
+               && (r.Field<int>("opportunity_feasibility") == 1 || r.Field<int>("opportunity_feasibility") == 2)
+               select r);
+
+            icTargetsDataView = qrySelectNewIcTargetsRecords.AsDataView();
+
+            retroBindingSource.DataSource = icTargetsDataView;
+            dgvIncomingRetroChanges.DataSource = retroBindingSource;
+            lblNewRetroIcTargets.Text = "New IC Targets: " + Convert.ToString(newIcTargetsCount);
+            MessageBox.Show("Current new potential ICs list shows changes since previous potential ICs update which occured on " + Convert.ToString(maxIcTargetsDate) + ". To change the date range, choose a start date on the calendar and re-click on the 'View New IC Targets' button.");
+            viewPotentialICsHasRun = 1;
+
+            DataTable potentialICsDataTable = icTargetsDataView.Table.Clone();
+            foreach (DataRowView drv in icTargetsDataView)
+            {
+              potentialICsDataTable.ImportRow(drv.Row);
+            }
+            potentialICsDataTable.AcceptChanges();
+
+            //TO-DO: join the icTargetsDataView to the SITE table on site_id to get property_id
+            //property_id will be returned in the exported "PotentialICs" table which the technician
+            //will use as reference for digitizing new IC alt targets
+
+            //TO-DO: also look to join other fields (such as ia_type_id from IMPERVIOUS_AREA_TYPE, management_id
+            //from MANAGEMENT, facility_type_id from FACILITY_TYPE, and opportunity_feasibility from OPPORTUNITY_FEASIBILITY)
+            //in order to provide actual descriptions of what each field means (e.g., facility_type_id 1 = "Infiltration", management_id 4 = "Rain Garden")
+            //Note: definition/description for opportunity_feasibility_id may not be needed since this won't affect the formatted IC alt record-it would only 
+            //serve as supplemental information.
+
+            //TO-DO: look at dropping some fields from the exported user file such as: update_by, update_date, opportunity_feasibility, etc.  These fields
+            //would only act as supplemental info and are not necessary for digitizing the IC alt record.
+            
+            ExportToCSV(potentialICsDataTable, "c:\\temp\\", "PotentialICs.csv");
+
+            return;
+          }
+          else
+          {
+            MessageBox.Show("No new potential IC targets added to RETRO database since " + maxIcTargetsDate + ". Try the using the calendar to find potential ICs within specific time period.", "No Potential ICs within Date Range", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            viewPotentialICsHasRun = 1;  
+            return;
+          }
         }
 
         if (viewPotentialICsHasRun == 1)
-        {
+        {          
           maxIcTargetsDate = clndrRetrofitsChanges.SelectionStart.Date;
 
           IEnumerable<int> qryNewIcTargetsCount =
             from r in rDS.SITE_OPPORTUNITY
-            where r.update_date >= maxIcTargetsDate && r.update_date <= System.DateTime.Now
+            where r.update_date >= maxIcTargetsDate 
+            && r.update_date <= System.DateTime.Now
+            && (r.opportunity_feasibility == 1 || r.opportunity_feasibility == 2)
             select r.site_opportunity_id;
 
           newIcTargetsCount = qryNewIcTargetsCount.Count();
-          
-          IEnumerable<DataRow> qrySelectNewIcTargetsRecords =
-            (from r in rDS.SITE_OPPORTUNITY.AsEnumerable()
-             where r.update_date >= maxIcTargetsDate && r.update_date <= System.DateTime.Now
-             select r.site_opportunity_id) as IEnumerable<DataRow>;
 
-          icTargetsTable = qrySelectNewIcTargetsRecords.CopyToDataTable<DataRow>();
-          retroBindingSource.DataSource = icTargetsTable;
-          dgvIncomingRetroChanges.DataSource = retroBindingSource;
-          lblNewRetroIcTargets.Text = Convert.ToString(newIcTargetsCount);
-          MessageBox.Show(newIcTargetsCount + " New IC targets since " + maxIcTargetsDate + " are displayed in the data grid view.");
-          viewPotentialICsHasRun = 1;
+          if (newIcTargetsCount > 0)
+          {
+            opportunity = rDS.Tables["SITE_OPPORTUNITY"];
+
+            EnumerableRowCollection<DataRow> qrySelectNewIcTargetsRecords =
+              (from r in opportunity.AsEnumerable()
+               where r.Field<DateTime>("update_date") >= maxIcTargetsDate 
+               && r.Field<DateTime>("update_date") <= System.DateTime.Now
+               && (r.Field<int>("opportunity_feasibility") == 1 || r.Field<int>("opportunity_feasibility") == 2)
+               select r);
+
+           icTargetsDataView = qrySelectNewIcTargetsRecords.AsDataView();
+
+            retroBindingSource.DataSource = icTargetsDataView;
+            dgvIncomingRetroChanges.DataSource = retroBindingSource;
+            lblNewRetroIcTargets.Text = "New IC Targets: " + Convert.ToString(newIcTargetsCount);
+            MessageBox.Show(newIcTargetsCount + " New IC targets since " + maxIcTargetsDate + " are displayed in the data grid view.");
+            viewPotentialICsHasRun = 1;
+
+            DataTable potentialICsDataTable = icTargetsDataView.Table.Clone();
+            foreach (DataRowView drv in icTargetsDataView)
+            {
+              potentialICsDataTable.ImportRow(drv.Row);
+            }
+            potentialICsDataTable.AcceptChanges();
+
+            //TO-DO: join the icTargetsDataView to the SITE table on site_id to get property_id
+            //property_id will be returned in the exported "PotentialICs" table which the technician
+            //will use as reference for digitizing new IC alt targets
+
+            //TO-DO: also look to join other fields (such as ia_type_id from IMPERVIOUS_AREA_TYPE, management_id
+            //from MANAGEMENT, facility_type_id from FACILITY_TYPE, and opportunity_feasibility from OPPORTUNITY_FEASIBILITY)
+            //in order to provide actual descriptions of what each field means (e.g., facility_type_id 1 = "Infiltration", management_id 4 = "Rain Garden")
+            //Note: definition/description for opportunity_feasibility_id may not be needed since this won't affect the formatted IC alt record-it would only 
+            //serve as supplemental information.
+
+            //TO-DO: look at dropping some fields from the exported user file such as: update_by, update_date, opportunity_feasibility, etc.  These fields
+            //would only act as supplemental info and are not necessary for digitizing the IC alt record.
+            
+            ExportToCSV(potentialICsDataTable, "c:\\temp\\", "PotentialICs.csv");
+            return;
+          }
+
+          else
+          {
+            MessageBox.Show("No new potential IC targets added to RETRO database since " + maxIcTargetsDate + ". Try the using the calendar to find potential ICs within specific time period.", "No Potential ICs within Date Range", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            viewPotentialICsHasRun = 1;
+            return;
+          }  
         }
       }
 
@@ -1664,9 +1930,7 @@ namespace DSCUpdater
     {
       if (Convert.ToString(dgvIncomingRetroChanges.DataSource) != "")
       {
-        //To-Do: check to see which of the following is the best method for clearing the dgv
         dgvIncomingRetroChanges.DataSource = null;
-        ((DataView)dgvIncomingRetroChanges.DataSource).Table.Clear();
       }
       
       try
@@ -1675,7 +1939,8 @@ namespace DSCUpdater
         rDS.InitRetroDataSet();
         int newConstructedICsCount;
         DateTime maxConstructedICsDate;
-        DataTable constructedICsTable = new DataTable();
+        DataTable project = new DataTable();
+        DataView projectDataView = new DataView();
 
         if (viewConstructedICsHasRun == 0)
         {
@@ -1685,48 +1950,125 @@ namespace DSCUpdater
 
           IEnumerable<int> qryNewConstructedICsCount =
             from r in rDS.PROJECT
-            where r.update_date >= maxConstructedICsDate && r.update_date <= System.DateTime.Now
+            where r.update_date >= maxConstructedICsDate 
+            && r.update_date <= System.DateTime.Now
+            && r.project_status_id == 4
             select r.project_id;
 
           newConstructedICsCount = qryNewConstructedICsCount.Count();
-          
-          IEnumerable<DataRow> qrySelectNewConstructedICsRecords =
-            (from r in rDS.PROJECT.AsEnumerable()
-             where r.update_date >= maxConstructedICsDate && r.update_date <= System.DateTime.Now
-             select r.project_id) as IEnumerable<DataRow>;
 
-          constructedICsTable = qrySelectNewConstructedICsRecords.CopyToDataTable<DataRow>();
+          if (newConstructedICsCount > 0)
+          {
+            project = rDS.Tables["PROJECT"];
+            EnumerableRowCollection<DataRow> qrySelectNewConstructedICsRecords =
+            (from r in project.AsEnumerable()
+             where r.Field<DateTime>("update_date") >= maxConstructedICsDate
+             && r.Field<DateTime>("update_date") <= System.DateTime.Now
+             && r.Field<int>("project_status_id") == 4
+             select r);
 
-          retroBindingSource.DataSource = constructedICsTable;
-          dgvIncomingRetroChanges.DataSource = retroBindingSource;
-          lblNewConstrRetroFacs.Text = Convert.ToString(newConstructedICsCount);
-          MessageBox.Show("Current new constructed ICs list shows changes since previous constructed ICs update which occured on " + Convert.ToString(maxConstructedICsDate) + ". To change the date range, choose a start date on the calendar and re-click on the 'View New Constructed Facilities' button.");
-          viewConstructedICsHasRun = 1;
+            projectDataView = qrySelectNewConstructedICsRecords.AsDataView();
+
+            retroBindingSource.DataSource = projectDataView;
+            dgvIncomingRetroChanges.DataSource = retroBindingSource;
+            lblNewConstrRetroFacs.Text = "New Constructed ICs: " + Convert.ToString(newConstructedICsCount);
+            MessageBox.Show("Current new constructed ICs list shows changes since previous constructed ICs update which occured on " + Convert.ToString(maxConstructedICsDate) + ". To change the date range, choose a start date on the calendar and re-click on the 'View New Constructed Facilities' button.");
+            viewConstructedICsHasRun = 1;
+            
+            DataTable constructedICsDataTable = projectDataView.Table.Clone();
+            foreach (DataRowView drv in projectDataView)
+            {
+              constructedICsDataTable.ImportRow(drv.Row);
+            }
+            constructedICsDataTable.AcceptChanges();
+
+            //TO-DO: join the projectDataView to the SITE table on site_id to get property_id
+            //property_id will be returned in the exported "ConstructedICs" table which the technician
+            //will use as reference for digitizing new IC alt targets
+
+            //TO-DO: also look to join other fields (such as management_id from MANAGEMENT, facility_type_id from FACILITY_TYPE,   
+            //in order to provide actual descriptions of what each field means (e.g., facility_type_id 1 = "Infiltration", management_id 4 = "Rain Garden")
+            //Note: definition/description for opportunity_feasibility_id may not be needed since this won't affect the formatted IC alt record-it would only 
+            //serve as supplemental information.
+
+            //TO-DO: look at dropping some fields from the exported user file such as: name, facility_size, storage_volume, infiltration_test_id, 
+            //infiltration_rate, project_status_id, update_by, update_date, opportunity_feasibility, etc.  These fields
+            //would only act as supplemental info and are not necessary for digitizing the IC alt record.
+            
+            ExportToCSV(constructedICsDataTable, "c:\\temp\\","ConstructedICs.csv");
+            return;
+          }
+
+          else
+          {
+            MessageBox.Show("No new completed projects added to RETRO database since " + maxConstructedICsDate + ". Try the using the calendar to find completed projects within specific time period.", "No Completed Projects within Date Range", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            viewConstructedICsHasRun = 1;
+            return;
+          }     
         }
 
-        if (viewPotentialICsHasRun == 1)
+        if (viewConstructedICsHasRun == 1)
         {
           maxConstructedICsDate = clndrRetrofitsChanges.SelectionStart.Date;
 
           IEnumerable<int> qryNewIcTargetsCount =
             from r in rDS.PROJECT
-            where r.update_date >= maxConstructedICsDate && r.update_date <= System.DateTime.Now
+            where r.update_date >= maxConstructedICsDate 
+            && r.update_date <= System.DateTime.Now
+            && r.project_status_id == 4
             select r.project_id;
 
           newConstructedICsCount = qryNewIcTargetsCount.Count();
 
-          IEnumerable<DataRow> qrySelectNewConstructedICsRecords =
-            (from r in rDS.PROJECT.AsEnumerable()
-             where r.update_date >= maxConstructedICsDate && r.update_date <= System.DateTime.Now
-             select r.project_id) as IEnumerable<DataRow>;
-
-          constructedICsTable = qrySelectNewConstructedICsRecords.CopyToDataTable<DataRow>();
+          if (newConstructedICsCount > 0)
+          {
+            project = rDS.Tables["PROJECT"];
           
-          retroBindingSource.DataSource = constructedICsTable;
-          dgvIncomingRetroChanges.DataSource = retroBindingSource;
-          lblNewConstrRetroFacs.Text = Convert.ToString(newConstructedICsCount);
-          MessageBox.Show(newConstructedICsCount + " New Constructed ICs since " + maxConstructedICsDate + " are displayed in the data grid view.");
-          viewConstructedICsHasRun = 1;
+            EnumerableRowCollection<DataRow> qrySelectNewConstructedICsRecords =
+            (from r in project.AsEnumerable()
+             where r.Field<DateTime>("update_date") >= maxConstructedICsDate 
+             && r.Field<DateTime>("update_date") <= System.DateTime.Now
+             && r.Field<int>("project_status_id") == 4
+             select r);
+
+            projectDataView = qrySelectNewConstructedICsRecords.AsDataView();
+
+            retroBindingSource.DataSource = projectDataView;
+            dgvIncomingRetroChanges.DataSource = retroBindingSource;
+            lblNewConstrRetroFacs.Text = "New Constructed ICs: " + Convert.ToString(newConstructedICsCount);
+            MessageBox.Show(newConstructedICsCount + " New Constructed ICs since " + maxConstructedICsDate + " are displayed in the data grid view.");
+            viewConstructedICsHasRun = 1;
+
+            //TO-DO: join the projectDataView to the SITE table on site_id to get property_id
+            //property_id will be returned in the exported "ConstructedICs" table which the technician
+            //will use as reference for digitizing new IC alt targets
+
+            //TO-DO: also look to join other fields (such as management_id from MANAGEMENT, facility_type_id from FACILITY_TYPE, 
+            //in order to provide actual descriptions of what each field means (e.g., facility_type_id 1 = "Infiltration", management_id 4 = "Rain Garden")
+            //Note: definition/description for opportunity_feasibility_id may not be needed since this won't affect the formatted IC alt record-it would only 
+            //serve as supplemental information.
+
+            //TO-DO: look at dropping some fields from the exported user file such as: name, facility_size, storage_volume, infiltration_test_id, 
+            //infiltration_rate, project_status_id, update_by, update_date, opportunity_feasibility, etc.  These fields
+            //would only act as supplemental info and are not necessary for digitizing the IC alt record.
+            
+            DataTable constructedICsDataTable = projectDataView.Table.Clone();
+            foreach (DataRowView drv in projectDataView)
+            {
+              constructedICsDataTable.ImportRow(drv.Row);
+            }
+            constructedICsDataTable.AcceptChanges();
+        
+            ExportToCSV(constructedICsDataTable, "c:\\temp\\", "ConstructedICs.csv");
+            return;
+          }
+
+          else
+          {
+            MessageBox.Show("No new completed projects added to RETRO database since " + maxConstructedICsDate + ". Try the using the calendar to find completed projects within specific time period.", "No Completed Projects within Date Range", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            viewConstructedICsHasRun = 1;
+            return;
+          }
         }
       }
 
@@ -1735,32 +2077,187 @@ namespace DSCUpdater
         MessageBox.Show("Could Not Load Incoming Changes: " + ex.Message, "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
       }
     }
-
+    
     private void btnApplyRetroUpdates_Click(object sender, EventArgs e)
     {
       //TO-DO: create parameter to count the number of incoming new site assessments from RETRO DB
       //Need to think about everything that comprises a new assessment (i.e., updated impervious area, ic area, etc.)
       //Parameter will be passed to the message box confirming the updates will be applied
-      int countOfNewSiteAssessments = 0;
 
-      //TO-DO: create parameter to count the number of incoming new ic targets from RETRO DB
-      //Parameter will be passed to the message box confirming the updates will be applied
-      int countOfNewPotentialICs = 0;
-
-      //TO-DO: create parameter to count the number of constrcuted IC from the RETRO DB
-      //Parameter will be passed to the message box confirming the updates will be applied
-      int countOfNewConstructedICs = 0;
-
-      DialogResult result = MessageBox.Show("The following updates will be applied:" + "\r\n" +
-        countOfNewSiteAssessments + " new site assessments will be applied to master modeling tables." + "\r\n" +
-        countOfNewPotentialICs + " new potential inflow controls will be added to the IC Alts GIS coverage(s)." + "\r\n" +
-        countOfNewSiteAssessments + " new constructed inflow controls will be added to the IC Alt GIS coverage(s)." + "\r\n", "Confirm Update", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation);
-      if (result == DialogResult.OK)
+      try
       {
-        ApplyRetroUpdates();
-      }     
+        rDS = new RetrofitsDataSet();
+        rDS.InitRetroDataSet();
+        int newSiteAssessmentsCount;
+        int newIcTargetsCount;
+        int newConstructedICsCount;
+        DateTime maxSiteAssessmentsDate;
+        DateTime maxIcTargetsDate;
+        DateTime maxConstructedICsDate;
+        DataTable siteAssessmentsTable = new DataTable();
+        DataTable icTargetsTable = new DataTable();
+        DataTable constructedICsTable = new DataTable();
+
+        maxSiteAssessmentsDate =
+            (from s in projectDataSet.SESSION
+             select s.edit_date).Max();
+
+        IEnumerable<int> qrySiteAssessMentsCount =
+          from r in rDS.SITE_ASSESSMENT
+          where r.update_date >= maxSiteAssessmentsDate && r.update_date <= System.DateTime.Now
+          select r.site_assessment_id;
+
+        newSiteAssessmentsCount = qrySiteAssessMentsCount.Count();
+
+        maxIcTargetsDate =
+            (from s in projectDataSet.SESSION
+             select s.edit_date).Max();
+
+        IEnumerable<int> qryNewIcTargetsCount =
+          from r in rDS.SITE_OPPORTUNITY
+          where r.update_date >= maxIcTargetsDate && r.update_date <= System.DateTime.Now
+          select r.site_opportunity_id;
+
+        newIcTargetsCount = qryNewIcTargetsCount.Count();
+
+        maxConstructedICsDate =
+            (from s in projectDataSet.SESSION
+             select s.edit_date).Max();
+
+        IEnumerable<int> qryNewConstructedICsCount =
+          from r in rDS.PROJECT
+          where r.update_date >= maxConstructedICsDate && r.update_date <= System.DateTime.Now
+          select r.project_id;
+
+        newConstructedICsCount = qryNewConstructedICsCount.Count();
+
+        if (newSiteAssessmentsCount > 0)
+        {
+          IEnumerable<DataRow> qrySelectNewSiteAssessmentRecords =
+          (from r in rDS.SITE_ASSESSMENT.AsEnumerable()
+           where r.update_date >= maxSiteAssessmentsDate && r.update_date <= System.DateTime.Now
+           select r.site_assessment_id) as IEnumerable<DataRow>;
+
+          siteAssessmentsTable = qrySelectNewSiteAssessmentRecords.CopyToDataTable<DataRow>();
+        }
+
+        if (newIcTargetsCount > 0)
+        {
+          IEnumerable<DataRow> qrySelectNewIcTargetsRecords =
+            (from r in rDS.SITE_OPPORTUNITY.AsEnumerable()
+             where r.update_date >= maxIcTargetsDate && r.update_date <= System.DateTime.Now
+             select r.site_opportunity_id) as IEnumerable<DataRow>;
+
+          icTargetsTable = qrySelectNewIcTargetsRecords.CopyToDataTable<DataRow>();
+        }
+
+        if (newConstructedICsCount > 0)
+        {
+          IEnumerable<DataRow> qrySelectNewConstructedICsRecords =
+          (from r in rDS.PROJECT.AsEnumerable()
+           where r.update_date >= maxConstructedICsDate && r.update_date <= System.DateTime.Now
+           select r.project_id) as IEnumerable<DataRow>;
+
+          constructedICsTable = qrySelectNewConstructedICsRecords.CopyToDataTable<DataRow>();
+        }
+        
+        DialogResult result = MessageBox.Show("The following updates will be applied:" + "\r\n" +
+        newSiteAssessmentsCount+" new site assessments will be applied to master modeling tables." + "\r\n" +
+        newIcTargetsCount + " new potential inflow controls will be added to the IC Alts GIS coverage(s)." + "\r\n" +
+        newConstructedICsCount + " new constructed inflow controls will be added to the IC Alt GIS coverage(s)." + "\r\n", "Confirm Update", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation);
+
+        if (result == DialogResult.OK)
+        {
+          //ApplyRetroUpdates();
+          int retroChangesType = 0;
+
+          if (newSiteAssessmentsCount > 0 && newIcTargetsCount > 0 && newConstructedICsCount > 0)
+          {
+            retroChangesType = 1; //AllChanges
+          }
+
+          if (newSiteAssessmentsCount > 0 && newIcTargetsCount > 0 && newConstructedICsCount == 0)
+          {
+            retroChangesType = 2; //AssessmentsPotentialChanges
+          }
+
+          if (newSiteAssessmentsCount > 0 && newIcTargetsCount == 0 && newConstructedICsCount > 0)
+          {
+            retroChangesType = 3; //AssessmentsConstructedChanges
+          }
+
+          if (newSiteAssessmentsCount > 0 && newIcTargetsCount == 0 && newConstructedICsCount > 0)
+          {
+            retroChangesType = 4; //AssessmentsChangesOnly
+          }
+
+          if (newSiteAssessmentsCount == 0 && newIcTargetsCount > 0 && newConstructedICsCount > 0)
+          {
+            retroChangesType = 5; //PotentialConstructedChanges
+          }
+          
+          if (newSiteAssessmentsCount == 0 && newIcTargetsCount > 0 && newConstructedICsCount == 0)
+          {
+            retroChangesType = 6; //PotentialChangesOnly
+          }
+          
+          if (newSiteAssessmentsCount == 0 && newIcTargetsCount == 0 && newConstructedICsCount > 0)
+          {
+            retroChangesType = 7; //ConstructedChangesOnly
+          }
+
+          if (newSiteAssessmentsCount == 0 && newIcTargetsCount == 0 && newConstructedICsCount == 0)
+          {
+            retroChangesType = 8; //NoChanges
+          }
+
+          switch(retroChangesType)
+          {
+            case 0:
+              MessageBox.Show("0. This should not have happened");
+              break;
+            case 1:
+              MessageBox.Show("1. AllChanges.");
+              SendRetroAllChangesEmail();
+              break;
+            case 2:
+              MessageBox.Show("2. AssessmentsPotentialChanges.");
+              SendRetroAssessmentPotentialChangesEmail();
+              break;
+            case 3:
+              MessageBox.Show("3. AssessmentsConstructedChanges.");
+              SendRetroAssessmentConstructedChangesEmail();
+              break;
+            case 4:
+              MessageBox.Show("4. AssessmentsChangesOnly.");
+              SendRetroAssessmentsChangesOnlyEmail();
+              break;
+            case 5:
+              MessageBox.Show("5. PotentialConstructedChanges.");
+              SendRetroPotentialConstructedEmail();
+              break;
+            case 6:
+              MessageBox.Show("6. PotentialChangesOnly.");
+              SendRetroPotentialChangesOnlyEmail();
+              break;
+            case 7:
+              MessageBox.Show("7. ConstructedChangesOnly.");
+              SendRetroConstructedChangesOnlyEmail();
+              break;
+            case 8:
+              MessageBox.Show("8. NoChanges.");
+              SendRetroNoChangesEmail();
+              break;
+          }
+        }       
+      }
+
+      catch (Exception ex)
+      {
+        MessageBox.Show("Could not apply RETRO changes: " + ex.Message, "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+      }
     }
-       
+     
     private void btnExportErrors_Click(object sender, EventArgs e)
     {
       throw new NotImplementedException();
@@ -1784,8 +2281,8 @@ namespace DSCUpdater
         projectDataSet.EnforceConstraints = false;
         //this.dSCEDITTableAdapter.Fill(this.ProjectDataSet.DSCEDIT);
         // TODO: This line of code loads data into the 'ProjectDataSet.SESSION' table. You can move, or remove it, as needed.
-        this.sESSIONTableAdapter.Fill(this.projectDataSet.SESSION);
-        bindingNavigator1.BindingSource = sESSIONBindingSource;
+        this.sessionTableAdapter.Fill(this.projectDataSet.SESSION);
+        updaterHistoryBindingNav.BindingSource = sessionBindingSource;
       }
       catch (SqlException sqlException)
       {
@@ -1827,7 +2324,9 @@ namespace DSCUpdater
 
     private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
     {
-
+      string fi;
+      fi = @"\\Cassio\asm_apps\Apps\DSCUpdater\DSCUpdaterPublish.htm";
+      System.Diagnostics.Process.Start("IEXPLORE.EXE", fi);
     }
 
     private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1880,6 +2379,18 @@ namespace DSCUpdater
     {
       //BatchRevertICEdits();
     }
+
+    private void btnUpdaterEditorCloseCancel_Click(object sender, EventArgs e)
+    {
+      RestartUpdate();
+    }
+
+    private void clndrRetrofitsChanges_DateChanged(object sender, DateRangeEventArgs e)
+    {
+      viewSiteAssessmentsHasRun = 1;
+      viewPotentialICsHasRun = 1;
+      viewConstructedICsHasRun = 1;
+    }
   }
 }
 
@@ -1905,7 +2416,7 @@ public class OutlookMail
     oOutboxFolder = oNameSpace.GetDefaultFolder(Microsoft.Office.Interop.Outlook.OlDefaultFolders.olFolderOutbox);
   }
 
-  public void AddToOutbox(string toValue, string subjectValue, string bodyValue)
+  public void AddToOutboxImpAreaChanges(string toValue, string subjectValue, string bodyValue)
   {
     Microsoft.Office.Interop.Outlook._MailItem oMailItem = (Microsoft.Office.Interop.Outlook._MailItem)oApp.CreateItem(Microsoft.Office.Interop.Outlook.OlItemType.olMailItem);
     String sSource = "C:\\temp\\IMPUPDATE.csv";
@@ -1918,6 +2429,209 @@ public class OutlookMail
     bodyValue = "This is an auto-generated email." + "\r\n" +
               "This message is a request for changes to the impervious area coverage." + "\r\n" +
               "The attached table lists parcels by DSCID that are in need of updates in the modeling system.";
+    oMailItem.To = toValue;
+    oMailItem.Subject = subjectValue;
+    oMailItem.Body = bodyValue;
+    oMailItem.SaveSentMessageFolder = oOutboxFolder;
+    oMailItem.Send();
+  }
+
+  //AllChanges
+  public void AddToOutboxAllRetroChanges(string toValue,string subjectValue,string bodyValue)
+  {
+    Microsoft.Office.Interop.Outlook._MailItem oMailItem = (Microsoft.Office.Interop.Outlook._MailItem)oApp.CreateItem(Microsoft.Office.Interop.Outlook.OlItemType.olMailItem);
+    String sSource1 = "C:\\temp\\SiteAssessments.csv";
+    String sDisplayName1 = "SiteAssessments";
+    String sSource2 = "C:\\temp\\PotentialICs.csv";
+    String sDisplayName2 = "PotentialICs";
+    String sSource3 = "C:\\temp\\ConstructedICs.csv";
+    String sDisplayName3 = "ConstructedICs";
+    int iPosition1 = 1;
+    int iAttachType1 = (int)Microsoft.Office.Interop.Outlook.OlAttachmentType.olByValue;
+    int iPosition2 = 2;
+    int iAttachType2 = (int)Microsoft.Office.Interop.Outlook.OlAttachmentType.olByValue;
+    int iPosition3 = 3;
+    int iAttachType3 = (int)Microsoft.Office.Interop.Outlook.OlAttachmentType.olByValue;
+    Microsoft.Office.Interop.Outlook.Attachment oAttach = oMailItem.Attachments.Add(sSource1, iAttachType1, iPosition1, sDisplayName1);
+    oAttach = oMailItem.Attachments.Add(sSource2, iAttachType2, iPosition2, sDisplayName2);
+    oAttach = oMailItem.Attachments.Add(sSource3, iAttachType3, iPosition3, sDisplayName3);
+    toValue = "jrubengb@gmail.com";
+    subjectValue = "Request for DSC & Inflow Control Update";
+    bodyValue = "This is an auto-generated email." + "\r\n" +
+              "This message is a request for changes to the DSC and Inflow Controls coverages." + "\r\n" +
+              "The attached tables list parcels by DSCID that are in need of updates in the modeling system.";
+    oMailItem.To = toValue;
+    oMailItem.Subject = subjectValue;
+    oMailItem.Body = bodyValue;
+    oMailItem.SaveSentMessageFolder = oOutboxFolder;
+    oMailItem.Send();
+  }
+
+  //AssessmentsPotentialChanges
+  public void AddToOutboxAssessmentsPotentialChanges(string toValue, string subjectValue, string bodyValue)
+  {
+    Microsoft.Office.Interop.Outlook._MailItem oMailItem = (Microsoft.Office.Interop.Outlook._MailItem)oApp.CreateItem(Microsoft.Office.Interop.Outlook.OlItemType.olMailItem);
+    String sSource1 = "C:\\temp\\SiteAssessments.csv";
+    String sDisplayName1 = "SiteAssessments";
+    String sSource2 = "C:\\temp\\PotentialICs.csv";
+    String sDisplayName2 = "PotentialICs";
+    int iPosition1 = 1;
+    int iAttachType1 = (int)Microsoft.Office.Interop.Outlook.OlAttachmentType.olByValue;
+    int iPosition2 = 2;
+    int iAttachType2 = (int)Microsoft.Office.Interop.Outlook.OlAttachmentType.olByValue;
+    Microsoft.Office.Interop.Outlook.Attachment oAttach = oMailItem.Attachments.Add(sSource1, iAttachType1, iPosition1, sDisplayName1);
+    oAttach = oMailItem.Attachments.Add(sSource2, iAttachType2, iPosition2, sDisplayName2);
+    toValue = "jrubengb@gmail.com";
+    subjectValue = "Request for DSC & Inflow Control Update";
+    bodyValue = "This is an auto-generated email." + "\r\n" +
+              "This message is a request for changes to the DSC and Inflow Controls coverages." + "\r\n" +
+              "The attached tables list parcels by DSCID that are in need of updates in the modeling system.";
+    oMailItem.To = toValue;
+    oMailItem.Subject = subjectValue;
+    oMailItem.Body = bodyValue;
+    oMailItem.SaveSentMessageFolder = oOutboxFolder;
+    oMailItem.Send();
+  }
+
+  //AssessmentsConstructedChanges
+  public void AddToOutboxAssessmentConstructedChanges(string toValue, string subjectValue, string bodyValue)
+  {
+    Microsoft.Office.Interop.Outlook._MailItem oMailItem = (Microsoft.Office.Interop.Outlook._MailItem)oApp.CreateItem(Microsoft.Office.Interop.Outlook.OlItemType.olMailItem);
+    String sSource1 = "C:\\temp\\SiteAssessments.csv";
+    String sDisplayName1 = "SiteAssessments";
+    String sSource2 = "C:\\temp\\ConstructedICs.csv";
+    String sDisplayName2 = "ConstructedICs";
+    int iPosition1 = 1;
+    int iAttachType1 = (int)Microsoft.Office.Interop.Outlook.OlAttachmentType.olByValue;
+    int iPosition2 = 2;
+    int iAttachType2 = (int)Microsoft.Office.Interop.Outlook.OlAttachmentType.olByValue;
+    Microsoft.Office.Interop.Outlook.Attachment oAttach = oMailItem.Attachments.Add(sSource1, iAttachType1, iPosition1, sDisplayName1);
+    oAttach = oMailItem.Attachments.Add(sSource2, iAttachType2, iPosition2, sDisplayName2);
+    toValue = "jrubengb@gmail.com";
+    subjectValue = "Request for DSC & Inflow Control Update";
+    bodyValue = "This is an auto-generated email." + "\r\n" +
+              "This message is a request for changes to the DSC and Inflow Controls coverages." + "\r\n" +
+              "The attached tables list parcels by DSCID that are in need of updates in the modeling system.";
+    oMailItem.To = toValue;
+    oMailItem.Subject = subjectValue;
+    oMailItem.Body = bodyValue;
+    oMailItem.SaveSentMessageFolder = oOutboxFolder;
+    oMailItem.Send();
+  }
+  
+  //AssessmentsChangesOnly
+  public void AddToOutboxAssessmentsChangesOnly(string toValue, string subjectValue, string bodyValue)
+  {
+    Microsoft.Office.Interop.Outlook._MailItem oMailItem = (Microsoft.Office.Interop.Outlook._MailItem)oApp.CreateItem(Microsoft.Office.Interop.Outlook.OlItemType.olMailItem);
+    String sSource = "C:\\temp\\SiteAssessments.csv";
+    String sDisplayName = "SiteAssessments";
+    int iPosition1 = 1;
+    int iAttachType1 = (int)Microsoft.Office.Interop.Outlook.OlAttachmentType.olByValue;
+    Microsoft.Office.Interop.Outlook.Attachment oAttach = oMailItem.Attachments.Add(sSource, iAttachType1, iPosition1, sDisplayName);
+    toValue = "jrubengb@gmail.com";
+    subjectValue = "Request for DSC Update";
+    bodyValue = "This is an auto-generated email." + "\r\n" +
+              "This message is a request for changes to the DSC coverage." + "\r\n" +
+              "The attached tables list parcels by DSCID that are in need of updates in the modeling system.";
+    oMailItem.To = toValue;
+    oMailItem.Subject = subjectValue;
+    oMailItem.Body = bodyValue;
+    oMailItem.SaveSentMessageFolder = oOutboxFolder;
+    oMailItem.Send();
+  }
+
+  //PotentialConstructedChanges
+  public void AddToOutboxPotentialConstructedChanges(string toValue, string subjectValue, string bodyValue)
+  {
+    Microsoft.Office.Interop.Outlook._MailItem oMailItem = (Microsoft.Office.Interop.Outlook._MailItem)oApp.CreateItem(Microsoft.Office.Interop.Outlook.OlItemType.olMailItem);
+    String sSource1 = "C:\\temp\\PotentialICs.csv";
+    String sDisplayName1 = "PotentialICs";
+    String sSource2 = "C:\\temp\\ConstructedICs.csv";
+    String sDisplayName2 = "ConstructedICs";
+    int iPosition1 = 1;
+    int iAttachType1 = (int)Microsoft.Office.Interop.Outlook.OlAttachmentType.olByValue;
+    int iPosition2 = 2;
+    int iAttachType2 = (int)Microsoft.Office.Interop.Outlook.OlAttachmentType.olByValue;
+    Microsoft.Office.Interop.Outlook.Attachment oAttach = oMailItem.Attachments.Add(sSource1, iAttachType1, iPosition1, sDisplayName1);
+    oAttach = oMailItem.Attachments.Add(sSource2, iAttachType2, iPosition2, sDisplayName2);
+    toValue = "jrubengb@gmail.com";
+    subjectValue = "Request for Inflow Control Update";
+    bodyValue = "This is an auto-generated email." + "\r\n" +
+              "This message is a request for changes to the Inflow Controls coverages." + "\r\n" +
+              "The attached tables list parcels by DSCID that are in need of updates in the modeling system.";
+    oMailItem.To = toValue;
+    oMailItem.Subject = subjectValue;
+    oMailItem.Body = bodyValue;
+    oMailItem.SaveSentMessageFolder = oOutboxFolder;
+    oMailItem.Send();
+  }
+  
+  //PotentialChangesOnly
+  public void AddToOutboxPotentialChangesOnly(string toValue, string subjectValue, string bodyValue)
+  {
+    Microsoft.Office.Interop.Outlook._MailItem oMailItem = (Microsoft.Office.Interop.Outlook._MailItem)oApp.CreateItem(Microsoft.Office.Interop.Outlook.OlItemType.olMailItem);
+    String sSource = "C:\\temp\\PotentialICs.csv";
+    String sDisplayName = "PotentialICs";
+    int iPosition1 = 1;
+    int iAttachType1 = (int)Microsoft.Office.Interop.Outlook.OlAttachmentType.olByValue;
+    Microsoft.Office.Interop.Outlook.Attachment oAttach = oMailItem.Attachments.Add(sSource, iAttachType1, iPosition1, sDisplayName);
+    toValue = "jrubengb@gmail.com";
+    subjectValue = "Request for Inflow Control Update";
+    bodyValue = "This is an auto-generated email." + "\r\n" +
+              "This message is a request for changes to the Potential Inflow Controls coverage(s)." + "\r\n" +
+              "The attached tables list parcels by DSCID that are in need of updates in the modeling system.";
+    oMailItem.To = toValue;
+    oMailItem.Subject = subjectValue;
+    oMailItem.Body = bodyValue;
+    oMailItem.SaveSentMessageFolder = oOutboxFolder;
+    oMailItem.Send();
+  }
+
+  //ConstructedChangesOnly
+  public void AddToOutboxConstructedChangesOnly(string toValue, string subjectValue, string bodyValue)
+  {
+    Microsoft.Office.Interop.Outlook._MailItem oMailItem = (Microsoft.Office.Interop.Outlook._MailItem)oApp.CreateItem(Microsoft.Office.Interop.Outlook.OlItemType.olMailItem);
+    String sSource = "C:\\temp\\ConstructedICs.csv";
+    String sDisplayName = "ConstructedICs";
+    int iPosition1 = 1;
+    int iAttachType1 = (int)Microsoft.Office.Interop.Outlook.OlAttachmentType.olByValue;
+    Microsoft.Office.Interop.Outlook.Attachment oAttach = oMailItem.Attachments.Add(sSource, iAttachType1, iPosition1, sDisplayName);
+    toValue = "jrubengb@gmail.com";
+    subjectValue = "Request for Inflow Control Update";
+    bodyValue = "This is an auto-generated email." + "\r\n" +
+              "This message is a request for changes to the Constructed Inflow Controls coverage(s)." + "\r\n" +
+              "The attached tables list parcels by DSCID that are in need of updates in the modeling system.";
+    oMailItem.To = toValue;
+    oMailItem.Subject = subjectValue;
+    oMailItem.Body = bodyValue;
+    oMailItem.SaveSentMessageFolder = oOutboxFolder;
+    oMailItem.Send();
+  }
+  
+  //NoChanges 
+  public void AddToOutboxNoChanges(string toValue, string subjectValue, string bodyValue)
+  {
+    Microsoft.Office.Interop.Outlook._MailItem oMailItem = (Microsoft.Office.Interop.Outlook._MailItem)oApp.CreateItem(Microsoft.Office.Interop.Outlook.OlItemType.olMailItem);
+    String sSource1 = "C:\\temp\\SiteAssessments.csv";
+    String sDisplayName1 = "SiteAssessments";
+    String sSource2 = "C:\\temp\\PotentialICs.csv";
+    String sDisplayName2 = "PotentialICs";
+    String sSource3 = "C:\\temp\\ConstructedICs.csv";
+    String sDisplayName3 = "ConstructedICs";
+    int iPosition1 = 1;
+    int iAttachType1 = (int)Microsoft.Office.Interop.Outlook.OlAttachmentType.olByValue;
+    int iPosition2 = 2;
+    int iAttachType2 = (int)Microsoft.Office.Interop.Outlook.OlAttachmentType.olByValue;
+    int iPosition3 = 3;
+    int iAttachType3 = (int)Microsoft.Office.Interop.Outlook.OlAttachmentType.olByValue;
+    Microsoft.Office.Interop.Outlook.Attachment oAttach = oMailItem.Attachments.Add(sSource1, iAttachType1, iPosition1, sDisplayName1);
+    oAttach = oMailItem.Attachments.Add(sSource2, iAttachType2, iPosition2, sDisplayName2);
+    oAttach = oMailItem.Attachments.Add(sSource3, iAttachType3, iPosition3, sDisplayName3);
+    toValue = "jrubengb@gmail.com";
+    subjectValue = "No RETRO Changes Update";
+    bodyValue = "This is an auto-generated email." + "r\n" +
+                "This message is to inform you that no changes were found." + "r\n" +
+                "The attached tables are test tables.";
     oMailItem.To = toValue;
     oMailItem.Subject = subjectValue;
     oMailItem.Body = bodyValue;

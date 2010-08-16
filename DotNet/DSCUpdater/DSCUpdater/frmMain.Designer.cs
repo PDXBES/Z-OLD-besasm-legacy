@@ -96,7 +96,6 @@
       Infragistics.Win.UltraWinToolbars.PopupMenuTool popupMenuTool5 = new Infragistics.Win.UltraWinToolbars.PopupMenuTool("help");
       Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool3 = new Infragistics.Win.UltraWinToolbars.ButtonTool("about");
       Infragistics.Win.UltraWinToolbars.PopupMenuTool popupMenuTool6 = new Infragistics.Win.UltraWinToolbars.PopupMenuTool("file");
-      Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool25 = new Infragistics.Win.UltraWinToolbars.ButtonTool("tabDownloadTemplate");
       Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool4 = new Infragistics.Win.UltraWinToolbars.ButtonTool("tabMain");
       Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool21 = new Infragistics.Win.UltraWinToolbars.ButtonTool("tabCheckRetroUpdates");
       Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool22 = new Infragistics.Win.UltraWinToolbars.ButtonTool("tabApplyRetroUpdates");
@@ -129,7 +128,6 @@
       this.dgvApplyRetroUpdates = new System.Windows.Forms.DataGridView();
       this.tabPageControlCheckRetroUpdates = new Infragistics.Win.UltraWinTabControl.UltraTabPageControl();
       this.ultraPanel1 = new Infragistics.Win.Misc.UltraPanel();
-      this.ultraDropDownButton1 = new Infragistics.Win.Misc.UltraDropDownButton();
       this.grpBoxCheckRetroUpdates = new Infragistics.Win.Misc.UltraGroupBox();
       this.lblNewConstrRetroFacs = new Infragistics.Win.Misc.UltraLabel();
       this.lblNewRetroIcTargets = new Infragistics.Win.Misc.UltraLabel();
@@ -171,7 +169,7 @@
       this.ultraPanel2 = new Infragistics.Win.Misc.UltraPanel();
       this.btnCloseUpdaterHistory = new Infragistics.Win.Misc.UltraButton();
       this.btnLoadSelectedEditSession = new Infragistics.Win.Misc.UltraButton();
-      this.bindingNavigator1 = new System.Windows.Forms.BindingNavigator(this.components);
+      this.updaterHistoryBindingNav = new System.Windows.Forms.BindingNavigator(this.components);
       this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
       this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
       this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
@@ -209,16 +207,16 @@
       this.sfdMain = new System.Windows.Forms.SaveFileDialog();
       this.expBarMain = new Infragistics.Win.UltraWinExplorerBar.UltraExplorerBar();
       this._frmMain_Toolbars_Dock_Area_Left = new Infragistics.Win.UltraWinToolbars.UltraToolbarsDockArea();
-      this.ultraToolbarsManager1 = new Infragistics.Win.UltraWinToolbars.UltraToolbarsManager(this.components);
+      this.toolbarManagerMain = new Infragistics.Win.UltraWinToolbars.UltraToolbarsManager(this.components);
       this._frmMain_Toolbars_Dock_Area_Right = new Infragistics.Win.UltraWinToolbars.UltraToolbarsDockArea();
       this._frmMain_Toolbars_Dock_Area_Top = new Infragistics.Win.UltraWinToolbars.UltraToolbarsDockArea();
       this._frmMain_Toolbars_Dock_Area_Bottom = new Infragistics.Win.UltraWinToolbars.UltraToolbarsDockArea();
       this.statusBarMain = new Infragistics.Win.UltraWinStatusBar.UltraStatusBar();
       this.ultraTabSharedControlsPage3 = new Infragistics.Win.UltraWinTabControl.UltraTabSharedControlsPage();
       this.tabControlMain = new Infragistics.Win.UltraWinTabControl.UltraTabControl();
-      this.sESSIONBindingSource = new System.Windows.Forms.BindingSource(this.components);
-      this.sESSIONTableAdapter = new DSCUpdater.ProjectDataSetTableAdapters.SESSIONTableAdapter();
       this.retroBindingSource = new System.Windows.Forms.BindingSource(this.components);
+      this.sessionBindingSource = new System.Windows.Forms.BindingSource(this.components);
+      this.sessionTableAdapter = new DSCUpdater.ProjectDataSetTableAdapters.SESSIONTableAdapter();
       btnExportErrors = new Infragistics.Win.Misc.UltraButton();
       this.tabPageControlApplyRetroUpdates.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.dgvApplyRetroUpdates)).BeginInit();
@@ -250,8 +248,8 @@
       this.tabPageControlUpdaterHistory.SuspendLayout();
       this.ultraPanel2.ClientArea.SuspendLayout();
       this.ultraPanel2.SuspendLayout();
-      ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
-      this.bindingNavigator1.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.updaterHistoryBindingNav)).BeginInit();
+      this.updaterHistoryBindingNav.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.dgvUpdaterHistory)).BeginInit();
       this.tabPageControlLoadedUpdateReview.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.dgvDscQc)).BeginInit();
@@ -263,11 +261,11 @@
       this.ultraPanel4.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.txtFileName)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.expBarMain)).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)(this.ultraToolbarsManager1)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.toolbarManagerMain)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.tabControlMain)).BeginInit();
       this.tabControlMain.SuspendLayout();
-      ((System.ComponentModel.ISupportInitialize)(this.sESSIONBindingSource)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.retroBindingSource)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.sessionBindingSource)).BeginInit();
       this.SuspendLayout();
       // 
       // btnExportErrors
@@ -295,9 +293,9 @@
       // 
       this.btnApplyRetroUpdates.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
       this.btnApplyRetroUpdates.ButtonStyle = Infragistics.Win.UIElementButtonStyle.VisualStudio2005Button;
-      this.btnApplyRetroUpdates.Location = new System.Drawing.Point(551, 415);
+      this.btnApplyRetroUpdates.Location = new System.Drawing.Point(551, 357);
       this.btnApplyRetroUpdates.Name = "btnApplyRetroUpdates";
-      this.btnApplyRetroUpdates.Size = new System.Drawing.Size(151, 23);
+      this.btnApplyRetroUpdates.Size = new System.Drawing.Size(151, 40);
       this.btnApplyRetroUpdates.TabIndex = 1;
       this.btnApplyRetroUpdates.Text = "Apply RETRO Updates";
       this.btnApplyRetroUpdates.Click += new System.EventHandler(this.btnApplyRetroUpdates_Click);
@@ -310,7 +308,7 @@
       this.dgvApplyRetroUpdates.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.dgvApplyRetroUpdates.Location = new System.Drawing.Point(0, 0);
       this.dgvApplyRetroUpdates.Name = "dgvApplyRetroUpdates";
-      this.dgvApplyRetroUpdates.Size = new System.Drawing.Size(702, 409);
+      this.dgvApplyRetroUpdates.Size = new System.Drawing.Size(702, 351);
       this.dgvApplyRetroUpdates.TabIndex = 0;
       // 
       // tabPageControlCheckRetroUpdates
@@ -327,7 +325,6 @@
       // 
       // ultraPanel1.ClientArea
       // 
-      this.ultraPanel1.ClientArea.Controls.Add(this.ultraDropDownButton1);
       this.ultraPanel1.ClientArea.Controls.Add(this.grpBoxCheckRetroUpdates);
       this.ultraPanel1.ClientArea.Controls.Add(this.clndrRetrofitsChanges);
       this.ultraPanel1.ClientArea.Controls.Add(this.grpBoxViewRetroUpdates);
@@ -336,14 +333,6 @@
       this.ultraPanel1.Name = "ultraPanel1";
       this.ultraPanel1.Size = new System.Drawing.Size(375, 438);
       this.ultraPanel1.TabIndex = 8;
-      // 
-      // ultraDropDownButton1
-      // 
-      this.ultraDropDownButton1.Location = new System.Drawing.Point(208, 203);
-      this.ultraDropDownButton1.Name = "ultraDropDownButton1";
-      this.ultraDropDownButton1.Size = new System.Drawing.Size(144, 28);
-      this.ultraDropDownButton1.TabIndex = 8;
-      this.ultraDropDownButton1.Text = "ultraDropDownButton1";
       // 
       // grpBoxCheckRetroUpdates
       // 
@@ -394,6 +383,7 @@
       this.clndrRetrofitsChanges.Location = new System.Drawing.Point(192, 9);
       this.clndrRetrofitsChanges.Name = "clndrRetrofitsChanges";
       this.clndrRetrofitsChanges.TabIndex = 7;
+      this.clndrRetrofitsChanges.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.clndrRetrofitsChanges_DateChanged);
       // 
       // grpBoxViewRetroUpdates
       // 
@@ -623,7 +613,7 @@
       this.pnlNewDSCAreas.Dock = System.Windows.Forms.DockStyle.Fill;
       this.pnlNewDSCAreas.Location = new System.Drawing.Point(231, 0);
       this.pnlNewDSCAreas.Name = "pnlNewDSCAreas";
-      this.pnlNewDSCAreas.Size = new System.Drawing.Size(293, 213);
+      this.pnlNewDSCAreas.Size = new System.Drawing.Size(295, 215);
       this.pnlNewDSCAreas.TabIndex = 25;
       // 
       // txtNewRoofArea
@@ -720,7 +710,7 @@
       this.ultraGroupBox2.Dock = System.Windows.Forms.DockStyle.Left;
       this.ultraGroupBox2.Location = new System.Drawing.Point(0, 0);
       this.ultraGroupBox2.Name = "ultraGroupBox2";
-      this.ultraGroupBox2.Size = new System.Drawing.Size(231, 213);
+      this.ultraGroupBox2.Size = new System.Drawing.Size(231, 215);
       this.ultraGroupBox2.TabIndex = 27;
       this.ultraGroupBox2.ViewStyle = Infragistics.Win.Misc.GroupBoxViewStyle.VisualStudio2005;
       // 
@@ -804,9 +794,9 @@
       this.ultraGroupBox1.Controls.Add(this.lblRevertSession);
       this.ultraGroupBox1.Controls.Add(this.btnRevertSession);
       this.ultraGroupBox1.Dock = System.Windows.Forms.DockStyle.Right;
-      this.ultraGroupBox1.Location = new System.Drawing.Point(524, 0);
+      this.ultraGroupBox1.Location = new System.Drawing.Point(526, 0);
       this.ultraGroupBox1.Name = "ultraGroupBox1";
-      this.ultraGroupBox1.Size = new System.Drawing.Size(178, 213);
+      this.ultraGroupBox1.Size = new System.Drawing.Size(178, 215);
       this.ultraGroupBox1.TabIndex = 26;
       this.ultraGroupBox1.ViewStyle = Infragistics.Win.Misc.GroupBoxViewStyle.VisualStudio2005;
       // 
@@ -818,6 +808,7 @@
       this.btnUpdaterEditorCloseCancel.Size = new System.Drawing.Size(116, 23);
       this.btnUpdaterEditorCloseCancel.TabIndex = 31;
       this.btnUpdaterEditorCloseCancel.Text = "Cancel";
+      this.btnUpdaterEditorCloseCancel.Click += new System.EventHandler(this.btnUpdaterEditorCloseCancel_Click);
       // 
       // btnSubmitUpdaterEditorChanges
       // 
@@ -851,7 +842,7 @@
       // tabPageControlUpdaterHistory
       // 
       this.tabPageControlUpdaterHistory.Controls.Add(this.ultraPanel2);
-      this.tabPageControlUpdaterHistory.Controls.Add(this.bindingNavigator1);
+      this.tabPageControlUpdaterHistory.Controls.Add(this.updaterHistoryBindingNav);
       this.tabPageControlUpdaterHistory.Controls.Add(this.dgvUpdaterHistory);
       this.tabPageControlUpdaterHistory.Location = new System.Drawing.Point(-10000, -10000);
       this.tabPageControlUpdaterHistory.Name = "tabPageControlUpdaterHistory";
@@ -880,6 +871,7 @@
       this.btnCloseUpdaterHistory.Size = new System.Drawing.Size(148, 64);
       this.btnCloseUpdaterHistory.TabIndex = 5;
       this.btnCloseUpdaterHistory.Text = "Close Updater History";
+      this.btnCloseUpdaterHistory.Click += new System.EventHandler(this.btnCloseUpdaterHistory_Click);
       // 
       // btnLoadSelectedEditSession
       // 
@@ -892,13 +884,13 @@
       this.btnLoadSelectedEditSession.Text = "Load Selected Edit Session";
       this.btnLoadSelectedEditSession.Click += new System.EventHandler(this.btnLoadSelectedEditSession_Click);
       // 
-      // bindingNavigator1
+      // updaterHistoryBindingNav
       // 
-      this.bindingNavigator1.AddNewItem = null;
-      this.bindingNavigator1.CountItem = this.bindingNavigatorCountItem;
-      this.bindingNavigator1.DeleteItem = null;
-      this.bindingNavigator1.Dock = System.Windows.Forms.DockStyle.Bottom;
-      this.bindingNavigator1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+      this.updaterHistoryBindingNav.AddNewItem = null;
+      this.updaterHistoryBindingNav.CountItem = this.bindingNavigatorCountItem;
+      this.updaterHistoryBindingNav.DeleteItem = null;
+      this.updaterHistoryBindingNav.Dock = System.Windows.Forms.DockStyle.Bottom;
+      this.updaterHistoryBindingNav.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.bindingNavigatorMoveFirstItem,
             this.bindingNavigatorMovePreviousItem,
             this.bindingNavigatorSeparator,
@@ -908,17 +900,17 @@
             this.bindingNavigatorMoveNextItem,
             this.bindingNavigatorMoveLastItem,
             this.bindingNavigatorSeparator2});
-      this.bindingNavigator1.Location = new System.Drawing.Point(3, 416);
-      this.bindingNavigator1.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
-      this.bindingNavigator1.MoveLastItem = this.bindingNavigatorMoveLastItem;
-      this.bindingNavigator1.MoveNextItem = this.bindingNavigatorMoveNextItem;
-      this.bindingNavigator1.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
-      this.bindingNavigator1.Name = "bindingNavigator1";
-      this.bindingNavigator1.PositionItem = this.bindingNavigatorPositionItem;
-      this.bindingNavigator1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-      this.bindingNavigator1.Size = new System.Drawing.Size(708, 25);
-      this.bindingNavigator1.TabIndex = 3;
-      this.bindingNavigator1.Text = "bindingNavigator1";
+      this.updaterHistoryBindingNav.Location = new System.Drawing.Point(3, 416);
+      this.updaterHistoryBindingNav.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
+      this.updaterHistoryBindingNav.MoveLastItem = this.bindingNavigatorMoveLastItem;
+      this.updaterHistoryBindingNav.MoveNextItem = this.bindingNavigatorMoveNextItem;
+      this.updaterHistoryBindingNav.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
+      this.updaterHistoryBindingNav.Name = "updaterHistoryBindingNav";
+      this.updaterHistoryBindingNav.PositionItem = this.bindingNavigatorPositionItem;
+      this.updaterHistoryBindingNav.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
+      this.updaterHistoryBindingNav.Size = new System.Drawing.Size(708, 25);
+      this.updaterHistoryBindingNav.TabIndex = 3;
+      this.updaterHistoryBindingNav.Text = "bindingNavigator1";
       // 
       // bindingNavigatorCountItem
       // 
@@ -1317,17 +1309,17 @@
       this._frmMain_Toolbars_Dock_Area_Left.Location = new System.Drawing.Point(0, 19);
       this._frmMain_Toolbars_Dock_Area_Left.Name = "_frmMain_Toolbars_Dock_Area_Left";
       this._frmMain_Toolbars_Dock_Area_Left.Size = new System.Drawing.Size(0, 467);
-      this._frmMain_Toolbars_Dock_Area_Left.ToolbarsManager = this.ultraToolbarsManager1;
+      this._frmMain_Toolbars_Dock_Area_Left.ToolbarsManager = this.toolbarManagerMain;
       // 
-      // ultraToolbarsManager1
+      // toolbarManagerMain
       // 
-      this.ultraToolbarsManager1.DesignerFlags = 1;
-      this.ultraToolbarsManager1.DockWithinContainer = this;
-      this.ultraToolbarsManager1.DockWithinContainerBaseType = typeof(System.Windows.Forms.Form);
-      this.ultraToolbarsManager1.MenuAnimationStyle = Infragistics.Win.UltraWinToolbars.MenuAnimationStyle.Slide;
-      this.ultraToolbarsManager1.SaveSettingsFormat = Infragistics.Win.SaveSettingsFormat.Xml;
-      this.ultraToolbarsManager1.SettingsKey = "frmMain.ultraToolbarsManager1";
-      this.ultraToolbarsManager1.ShowFullMenusDelay = 500;
+      this.toolbarManagerMain.DesignerFlags = 1;
+      this.toolbarManagerMain.DockWithinContainer = this;
+      this.toolbarManagerMain.DockWithinContainerBaseType = typeof(System.Windows.Forms.Form);
+      this.toolbarManagerMain.MenuAnimationStyle = Infragistics.Win.UltraWinToolbars.MenuAnimationStyle.Slide;
+      this.toolbarManagerMain.SaveSettingsFormat = Infragistics.Win.SaveSettingsFormat.Xml;
+      this.toolbarManagerMain.SettingsKey = "frmMain.ultraToolbarsManager1";
+      this.toolbarManagerMain.ShowFullMenusDelay = 500;
       ultraToolbar1.DockedColumn = 0;
       ultraToolbar1.DockedRow = 0;
       ultraToolbar1.FloatingLocation = new System.Drawing.Point(441, 328);
@@ -1339,7 +1331,7 @@
             popupMenuTool2,
             popupMenuTool3});
       ultraToolbar1.Text = "UltraToolbar1";
-      this.ultraToolbarsManager1.Toolbars.AddRange(new Infragistics.Win.UltraWinToolbars.UltraToolbar[] {
+      this.toolbarManagerMain.Toolbars.AddRange(new Infragistics.Win.UltraWinToolbars.UltraToolbar[] {
             ultraToolbar1});
       popupMenuTool4.SharedPropsInternal.Caption = "&Options";
       buttonTool5.InstanceProps.IsFirstInGroup = true;
@@ -1351,13 +1343,11 @@
       popupMenuTool5.Tools.AddRange(new Infragistics.Win.UltraWinToolbars.ToolBase[] {
             buttonTool3});
       popupMenuTool6.SharedPropsInternal.Caption = "&File";
-      buttonTool25.InstanceProps.IsFirstInGroup = true;
       buttonTool4.InstanceProps.IsFirstInGroup = true;
       buttonTool21.InstanceProps.IsFirstInGroup = true;
       buttonTool23.InstanceProps.IsFirstInGroup = true;
       buttonTool10.InstanceProps.IsFirstInGroup = true;
       popupMenuTool6.Tools.AddRange(new Infragistics.Win.UltraWinToolbars.ToolBase[] {
-            buttonTool25,
             buttonTool4,
             buttonTool21,
             buttonTool22,
@@ -1384,7 +1374,7 @@
       buttonTool20.SharedPropsInternal.Caption = "&Check RETRO Updates";
       buttonTool20.SharedPropsInternal.Category = "loadTab";
       buttonTool6.SharedPropsInternal.Caption = "Download DSC Update Template";
-      this.ultraToolbarsManager1.Tools.AddRange(new Infragistics.Win.UltraWinToolbars.ToolBase[] {
+      this.toolbarManagerMain.Tools.AddRange(new Infragistics.Win.UltraWinToolbars.ToolBase[] {
             popupMenuTool4,
             popupMenuTool5,
             popupMenuTool6,
@@ -1399,7 +1389,7 @@
             buttonTool19,
             buttonTool20,
             buttonTool6});
-      this.ultraToolbarsManager1.ToolClick += new Infragistics.Win.UltraWinToolbars.ToolClickEventHandler(this.ultraToolbarsManager1_ToolClick);
+      this.toolbarManagerMain.ToolClick += new Infragistics.Win.UltraWinToolbars.ToolClickEventHandler(this.ultraToolbarsManager1_ToolClick);
       // 
       // _frmMain_Toolbars_Dock_Area_Right
       // 
@@ -1410,7 +1400,7 @@
       this._frmMain_Toolbars_Dock_Area_Right.Location = new System.Drawing.Point(933, 19);
       this._frmMain_Toolbars_Dock_Area_Right.Name = "_frmMain_Toolbars_Dock_Area_Right";
       this._frmMain_Toolbars_Dock_Area_Right.Size = new System.Drawing.Size(0, 467);
-      this._frmMain_Toolbars_Dock_Area_Right.ToolbarsManager = this.ultraToolbarsManager1;
+      this._frmMain_Toolbars_Dock_Area_Right.ToolbarsManager = this.toolbarManagerMain;
       // 
       // _frmMain_Toolbars_Dock_Area_Top
       // 
@@ -1421,7 +1411,7 @@
       this._frmMain_Toolbars_Dock_Area_Top.Location = new System.Drawing.Point(0, 0);
       this._frmMain_Toolbars_Dock_Area_Top.Name = "_frmMain_Toolbars_Dock_Area_Top";
       this._frmMain_Toolbars_Dock_Area_Top.Size = new System.Drawing.Size(933, 19);
-      this._frmMain_Toolbars_Dock_Area_Top.ToolbarsManager = this.ultraToolbarsManager1;
+      this._frmMain_Toolbars_Dock_Area_Top.ToolbarsManager = this.toolbarManagerMain;
       // 
       // _frmMain_Toolbars_Dock_Area_Bottom
       // 
@@ -1432,7 +1422,7 @@
       this._frmMain_Toolbars_Dock_Area_Bottom.Location = new System.Drawing.Point(0, 486);
       this._frmMain_Toolbars_Dock_Area_Bottom.Name = "_frmMain_Toolbars_Dock_Area_Bottom";
       this._frmMain_Toolbars_Dock_Area_Bottom.Size = new System.Drawing.Size(933, 0);
-      this._frmMain_Toolbars_Dock_Area_Bottom.ToolbarsManager = this.ultraToolbarsManager1;
+      this._frmMain_Toolbars_Dock_Area_Bottom.ToolbarsManager = this.toolbarManagerMain;
       // 
       // statusBarMain
       // 
@@ -1510,14 +1500,14 @@
       this.tabControlMain.ViewStyle = Infragistics.Win.UltraWinTabControl.ViewStyle.Office2007;
       this.tabControlMain.SelectedTabChanged += new Infragistics.Win.UltraWinTabControl.SelectedTabChangedEventHandler(this.tabControlMain_SelectedTabChanged);
       // 
-      // sESSIONBindingSource
+      // sessionBindingSource
       // 
-      this.sESSIONBindingSource.DataMember = "SESSION";
-      this.sESSIONBindingSource.DataSource = this.projectDataSet;
+      this.sessionBindingSource.DataMember = "SESSION";
+      this.sessionBindingSource.DataSource = this.projectDataSet;
       // 
-      // sESSIONTableAdapter
+      // sessionTableAdapter
       // 
-      this.sESSIONTableAdapter.ClearBeforeFill = true;
+      this.sessionTableAdapter.ClearBeforeFill = true;
       // 
       // frmMain
       // 
@@ -1535,7 +1525,7 @@
       this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
       this.IsMdiContainer = true;
       this.Name = "frmMain";
-      this.Text = "DSCUpdater";
+      this.Text = "DSC Updater";
       this.Shown += new System.EventHandler(this.frmMain_Load);
       this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmMain_FormClosed);
       this.tabPageControlApplyRetroUpdates.ResumeLayout(false);
@@ -1571,9 +1561,9 @@
       this.tabPageControlUpdaterHistory.PerformLayout();
       this.ultraPanel2.ClientArea.ResumeLayout(false);
       this.ultraPanel2.ResumeLayout(false);
-      ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).EndInit();
-      this.bindingNavigator1.ResumeLayout(false);
-      this.bindingNavigator1.PerformLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.updaterHistoryBindingNav)).EndInit();
+      this.updaterHistoryBindingNav.ResumeLayout(false);
+      this.updaterHistoryBindingNav.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this.dgvUpdaterHistory)).EndInit();
       this.tabPageControlLoadedUpdateReview.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.dgvDscQc)).EndInit();
@@ -1586,11 +1576,11 @@
       this.ultraPanel4.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.txtFileName)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.expBarMain)).EndInit();
-      ((System.ComponentModel.ISupportInitialize)(this.ultraToolbarsManager1)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.toolbarManagerMain)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.tabControlMain)).EndInit();
       this.tabControlMain.ResumeLayout(false);
-      ((System.ComponentModel.ISupportInitialize)(this.sESSIONBindingSource)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.retroBindingSource)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.sessionBindingSource)).EndInit();
       this.ResumeLayout(false);
 
     }
@@ -1599,11 +1589,11 @@
 
     private System.Windows.Forms.OpenFileDialog ofdMain;
     private ProjectDataSet projectDataSet;
-    private System.Windows.Forms.BindingSource sESSIONBindingSource;
-    private DSCUpdater.ProjectDataSetTableAdapters.SESSIONTableAdapter sESSIONTableAdapter;
+    private System.Windows.Forms.BindingSource sessionBindingSource;
+    private DSCUpdater.ProjectDataSetTableAdapters.SESSIONTableAdapter sessionTableAdapter;
     private System.Windows.Forms.SaveFileDialog sfdMain;
     private Infragistics.Win.UltraWinExplorerBar.UltraExplorerBar expBarMain;
-    private Infragistics.Win.UltraWinToolbars.UltraToolbarsManager ultraToolbarsManager1;
+    private Infragistics.Win.UltraWinToolbars.UltraToolbarsManager toolbarManagerMain;
     private Infragistics.Win.UltraWinToolbars.UltraToolbarsDockArea _frmMain_Toolbars_Dock_Area_Left;
     private Infragistics.Win.UltraWinToolbars.UltraToolbarsDockArea _frmMain_Toolbars_Dock_Area_Right;
     private Infragistics.Win.UltraWinToolbars.UltraToolbarsDockArea _frmMain_Toolbars_Dock_Area_Top;
@@ -1620,7 +1610,7 @@
     private Infragistics.Win.Misc.UltraPanel ultraPanel2;
     private Infragistics.Win.Misc.UltraButton btnCloseUpdaterHistory;
     private Infragistics.Win.Misc.UltraButton btnLoadSelectedEditSession;
-    private System.Windows.Forms.BindingNavigator bindingNavigator1;
+    private System.Windows.Forms.BindingNavigator updaterHistoryBindingNav;
     private System.Windows.Forms.ToolStripLabel bindingNavigatorCountItem;
     private System.Windows.Forms.ToolStripButton bindingNavigatorMoveFirstItem;
     private System.Windows.Forms.ToolStripButton bindingNavigatorMovePreviousItem;
@@ -1693,7 +1683,6 @@
     private System.Windows.Forms.DataGridViewTextBoxColumn edit_id;
     private System.Windows.Forms.DataGridViewTextBoxColumn edit_date;
     private System.Windows.Forms.DataGridViewTextBoxColumn edited_by;
-    private Infragistics.Win.Misc.UltraDropDownButton ultraDropDownButton1;
     private System.Windows.Forms.BindingSource retroBindingSource;
   }
 }
