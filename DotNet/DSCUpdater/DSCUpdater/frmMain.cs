@@ -941,6 +941,7 @@ namespace DSCUpdater
       sqlCmd.ExecuteNonQuery();
     }
 
+    //ImpAreaChanges
     private static void SendImpAEmail()
     {
       string toValue = "jrubengb@gmail.com";
@@ -949,7 +950,103 @@ namespace DSCUpdater
                 "This message is a request for changes to the impervious area coverage." + "\r\n" +
                 "The attached table lists parcels by DSCID that are in need of updates in the modeling system.";
       OutlookMail oMail = new OutlookMail();
-      oMail.AddToOutbox(toValue, subjectValue, bodyValue);
+      oMail.AddToOutboxImpAreaChanges(toValue, subjectValue, bodyValue);
+    }
+
+    //AllChanges
+    private static void SendRetroAllChangesEmail()
+    {
+      string toValue = "jrubengb@gmail.com";
+      string subjectValue = "Request for DSC and Inflow Control Records Update";
+      string bodyValue = "This is an auto-generated email." + "r\n" +
+                        "This message is a request for changed to the DSC and Inflow Controls coverages." + "r\n" +
+                        "The attached tables list parcels by DSCID that are in need of updates in the modeling system.";
+      OutlookMail oMail = new OutlookMail();
+      oMail.AddToOutboxAllRetroChanges(toValue, subjectValue, bodyValue);
+    }
+
+    //AssessmentsPotentialChanges
+    private static void SendRetroAssessmentPotentialChangesEmail()
+    {
+      string toValue = "jrubengb@gmail.com";
+      string subjectValue = "Request for DSC and Inflow Control Records Update";
+      string bodyValue = "This is an auto-generated email." + "r\n" +
+                        "This message is a request for changed to the DSC and Inflow Controls coverages." + "r\n" +
+                        "The attached tables list parcels by DSCID that are in need of updates in the modeling system.";
+      OutlookMail oMail = new OutlookMail();
+      oMail.AddToOutboxAssessmentsPotentialChanges(toValue, subjectValue, bodyValue);
+    }
+
+    //AssessmentsConstructedChanges
+    private static void SendRetroAssessmentConstructedChangesEmail()
+    {
+      string toValue = "jrubengb@gmail.com";
+      string subjectValue = "Request for DSC and Inflow Control Records Update";
+      string bodyValue = "This is an auto-generated email." + "r\n" +
+                        "This message is a request for changed to the DSC and Inflow Controls coverages." + "r\n" +
+                        "The attached tables list parcels by DSCID that are in need of updates in the modeling system.";
+      OutlookMail oMail = new OutlookMail();
+      oMail.AddToOutboxAssessmentConstructedChanges(toValue, subjectValue, bodyValue);
+    }
+
+    //AssessmentsChangesOnly
+    private static void SendRetroAssessmentsChangesOnlyEmail()
+    {
+      string toValue = "jrubengb@gmail.com";
+      string subjectValue = "Request for DSC Records Update";
+      string bodyValue = "This is an auto-generated email." + "r\n" +
+                        "This message is a request for changes to DSC coverage." + "r\n" +
+                        "The attached tables list parcels by DSCID that are in need of updates in the modeling system.";
+      OutlookMail oMail = new OutlookMail();
+      oMail.AddToOutboxAssessmentsChangesOnly(toValue, subjectValue, bodyValue);
+    }
+
+    //PotentialConstructedChanges
+    private static void SendRetroPotentialConstructedEmail()
+    {
+      string toValue = "jrubengb@gmail.com";
+      string subjectValue = "Request for Inflow Control Records Update";
+      string bodyValue = "This is an auto-generated email." + "r\n" +
+                        "This message is a request for changes to the Inflow Controls coverage(s)." + "r\n" +
+                        "The attached tables list parcels by DSCID that are in need of updates in the modeling system.";
+      OutlookMail oMail = new OutlookMail();
+      oMail.AddToOutboxPotentialConstructedChanges(toValue, subjectValue, bodyValue);
+    }
+
+    //PotentialChangesOnly
+    private static void SendRetroPotentialChangesOnlyEmail()
+    {
+      string toValue = "jrubengb@gmail.com";
+      string subjectValue = "Request for Inflow Control Records Update";
+      string bodyValue = "This is an auto-generated email." + "r\n" +
+                        "This message is a request for changes to the Inflow Controls coverage(s)." + "r\n" +
+                        "The attached tables list parcels by DSCID that are in need of updates in the modeling system.";
+      OutlookMail oMail = new OutlookMail();
+      oMail.AddToOutboxPotentialChangesOnly(toValue, subjectValue, bodyValue);
+    }
+
+    //ConstructedChangesOnly
+    private static void SendRetroConstructedChangesOnlyEmail()
+    {
+      string toValue = "jrubengb@gmail.com";
+      string subjectValue = "Request for Inflow Control Records Update";
+      string bodyValue = "This is an auto-generated email." + "r\n" +
+                        "This message is a request for changes to the Inflow Controls coverage(s)." + "r\n" +
+                        "The attached tables list parcels by DSCID that are in need of updates in the modeling system.";
+      OutlookMail oMail = new OutlookMail();
+      oMail.AddToOutboxConstructedChangesOnly(toValue, subjectValue, bodyValue);
+    }
+
+    //NoChanges
+    private static void SendRetroNoChangesEmail()
+    {
+      string toValue = "jrubengb@gmail.com";
+      string subjectValue = "No RETRO Changes Update";
+      string bodyValue = "This is an auto-generated email." + "r\n" +
+                        "This message is to inform you that no changes were found." + "r\n" +
+                        "The attached tables are test tables.";
+      OutlookMail oMail = new OutlookMail();
+      oMail.AddToOutboxNoChanges(toValue, subjectValue, bodyValue);
     }
 
     private void LoadMstData()
@@ -2068,11 +2165,91 @@ namespace DSCUpdater
         newSiteAssessmentsCount+" new site assessments will be applied to master modeling tables." + "\r\n" +
         newIcTargetsCount + " new potential inflow controls will be added to the IC Alts GIS coverage(s)." + "\r\n" +
         newConstructedICsCount + " new constructed inflow controls will be added to the IC Alt GIS coverage(s)." + "\r\n", "Confirm Update", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation);
-        
+
         if (result == DialogResult.OK)
         {
           //ApplyRetroUpdates();
-        }     
+          int retroChangesType = 0;
+
+          if (newSiteAssessmentsCount > 0 && newIcTargetsCount > 0 && newConstructedICsCount > 0)
+          {
+            retroChangesType = 1; //AllChanges
+          }
+
+          if (newSiteAssessmentsCount > 0 && newIcTargetsCount > 0 && newConstructedICsCount == 0)
+          {
+            retroChangesType = 2; //AssessmentsPotentialChanges
+          }
+
+          if (newSiteAssessmentsCount > 0 && newIcTargetsCount == 0 && newConstructedICsCount > 0)
+          {
+            retroChangesType = 3; //AssessmentsConstructedChanges
+          }
+
+          if (newSiteAssessmentsCount > 0 && newIcTargetsCount == 0 && newConstructedICsCount > 0)
+          {
+            retroChangesType = 4; //AssessmentsChangesOnly
+          }
+
+          if (newSiteAssessmentsCount == 0 && newIcTargetsCount > 0 && newConstructedICsCount > 0)
+          {
+            retroChangesType = 5; //PotentialConstructedChanges
+          }
+          
+          if (newSiteAssessmentsCount == 0 && newIcTargetsCount > 0 && newConstructedICsCount == 0)
+          {
+            retroChangesType = 6; //PotentialChangesOnly
+          }
+          
+          if (newSiteAssessmentsCount == 0 && newIcTargetsCount == 0 && newConstructedICsCount > 0)
+          {
+            retroChangesType = 7; //ConstructedChangesOnly
+          }
+
+          if (newSiteAssessmentsCount == 0 && newIcTargetsCount == 0 && newConstructedICsCount == 0)
+          {
+            retroChangesType = 8; //NoChanges
+          }
+
+          switch(retroChangesType)
+          {
+            case 0:
+              MessageBox.Show("0. This should not have happened");
+              break;
+            case 1:
+              MessageBox.Show("1. AllChanges.");
+              SendRetroAllChangesEmail();
+              break;
+            case 2:
+              MessageBox.Show("2. AssessmentsPotentialChanges.");
+              SendRetroAssessmentPotentialChangesEmail();
+              break;
+            case 3:
+              MessageBox.Show("3. AssessmentsConstructedChanges.");
+              SendRetroAssessmentConstructedChangesEmail();
+              break;
+            case 4:
+              MessageBox.Show("4. AssessmentsChangesOnly.");
+              SendRetroAssessmentsChangesOnlyEmail();
+              break;
+            case 5:
+              MessageBox.Show("5. PotentialConstructedChanges.");
+              SendRetroPotentialConstructedEmail();
+              break;
+            case 6:
+              MessageBox.Show("6. PotentialChangesOnly.");
+              SendRetroPotentialChangesOnlyEmail();
+              break;
+            case 7:
+              MessageBox.Show("7. ConstructedChangesOnly.");
+              SendRetroConstructedChangesOnlyEmail();
+              break;
+            case 8:
+              MessageBox.Show("8. NoChanges.");
+              SendRetroNoChangesEmail();
+              break;
+          }
+        }       
       }
 
       catch (Exception ex)
@@ -2080,7 +2257,7 @@ namespace DSCUpdater
         MessageBox.Show("Could not apply RETRO changes: " + ex.Message, "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
       }
     }
-       
+     
     private void btnExportErrors_Click(object sender, EventArgs e)
     {
       throw new NotImplementedException();
@@ -2239,7 +2416,7 @@ public class OutlookMail
     oOutboxFolder = oNameSpace.GetDefaultFolder(Microsoft.Office.Interop.Outlook.OlDefaultFolders.olFolderOutbox);
   }
 
-  public void AddToOutbox(string toValue, string subjectValue, string bodyValue)
+  public void AddToOutboxImpAreaChanges(string toValue, string subjectValue, string bodyValue)
   {
     Microsoft.Office.Interop.Outlook._MailItem oMailItem = (Microsoft.Office.Interop.Outlook._MailItem)oApp.CreateItem(Microsoft.Office.Interop.Outlook.OlItemType.olMailItem);
     String sSource = "C:\\temp\\IMPUPDATE.csv";
@@ -2252,6 +2429,209 @@ public class OutlookMail
     bodyValue = "This is an auto-generated email." + "\r\n" +
               "This message is a request for changes to the impervious area coverage." + "\r\n" +
               "The attached table lists parcels by DSCID that are in need of updates in the modeling system.";
+    oMailItem.To = toValue;
+    oMailItem.Subject = subjectValue;
+    oMailItem.Body = bodyValue;
+    oMailItem.SaveSentMessageFolder = oOutboxFolder;
+    oMailItem.Send();
+  }
+
+  //AllChanges
+  public void AddToOutboxAllRetroChanges(string toValue,string subjectValue,string bodyValue)
+  {
+    Microsoft.Office.Interop.Outlook._MailItem oMailItem = (Microsoft.Office.Interop.Outlook._MailItem)oApp.CreateItem(Microsoft.Office.Interop.Outlook.OlItemType.olMailItem);
+    String sSource1 = "C:\\temp\\SiteAssessments.csv";
+    String sDisplayName1 = "SiteAssessments";
+    String sSource2 = "C:\\temp\\PotentialICs.csv";
+    String sDisplayName2 = "PotentialICs";
+    String sSource3 = "C:\\temp\\ConstructedICs.csv";
+    String sDisplayName3 = "ConstructedICs";
+    int iPosition1 = 1;
+    int iAttachType1 = (int)Microsoft.Office.Interop.Outlook.OlAttachmentType.olByValue;
+    int iPosition2 = 2;
+    int iAttachType2 = (int)Microsoft.Office.Interop.Outlook.OlAttachmentType.olByValue;
+    int iPosition3 = 3;
+    int iAttachType3 = (int)Microsoft.Office.Interop.Outlook.OlAttachmentType.olByValue;
+    Microsoft.Office.Interop.Outlook.Attachment oAttach = oMailItem.Attachments.Add(sSource1, iAttachType1, iPosition1, sDisplayName1);
+    oAttach = oMailItem.Attachments.Add(sSource2, iAttachType2, iPosition2, sDisplayName2);
+    oAttach = oMailItem.Attachments.Add(sSource3, iAttachType3, iPosition3, sDisplayName3);
+    toValue = "jrubengb@gmail.com";
+    subjectValue = "Request for DSC & Inflow Control Update";
+    bodyValue = "This is an auto-generated email." + "\r\n" +
+              "This message is a request for changes to the DSC and Inflow Controls coverages." + "\r\n" +
+              "The attached tables list parcels by DSCID that are in need of updates in the modeling system.";
+    oMailItem.To = toValue;
+    oMailItem.Subject = subjectValue;
+    oMailItem.Body = bodyValue;
+    oMailItem.SaveSentMessageFolder = oOutboxFolder;
+    oMailItem.Send();
+  }
+
+  //AssessmentsPotentialChanges
+  public void AddToOutboxAssessmentsPotentialChanges(string toValue, string subjectValue, string bodyValue)
+  {
+    Microsoft.Office.Interop.Outlook._MailItem oMailItem = (Microsoft.Office.Interop.Outlook._MailItem)oApp.CreateItem(Microsoft.Office.Interop.Outlook.OlItemType.olMailItem);
+    String sSource1 = "C:\\temp\\SiteAssessments.csv";
+    String sDisplayName1 = "SiteAssessments";
+    String sSource2 = "C:\\temp\\PotentialICs.csv";
+    String sDisplayName2 = "PotentialICs";
+    int iPosition1 = 1;
+    int iAttachType1 = (int)Microsoft.Office.Interop.Outlook.OlAttachmentType.olByValue;
+    int iPosition2 = 2;
+    int iAttachType2 = (int)Microsoft.Office.Interop.Outlook.OlAttachmentType.olByValue;
+    Microsoft.Office.Interop.Outlook.Attachment oAttach = oMailItem.Attachments.Add(sSource1, iAttachType1, iPosition1, sDisplayName1);
+    oAttach = oMailItem.Attachments.Add(sSource2, iAttachType2, iPosition2, sDisplayName2);
+    toValue = "jrubengb@gmail.com";
+    subjectValue = "Request for DSC & Inflow Control Update";
+    bodyValue = "This is an auto-generated email." + "\r\n" +
+              "This message is a request for changes to the DSC and Inflow Controls coverages." + "\r\n" +
+              "The attached tables list parcels by DSCID that are in need of updates in the modeling system.";
+    oMailItem.To = toValue;
+    oMailItem.Subject = subjectValue;
+    oMailItem.Body = bodyValue;
+    oMailItem.SaveSentMessageFolder = oOutboxFolder;
+    oMailItem.Send();
+  }
+
+  //AssessmentsConstructedChanges
+  public void AddToOutboxAssessmentConstructedChanges(string toValue, string subjectValue, string bodyValue)
+  {
+    Microsoft.Office.Interop.Outlook._MailItem oMailItem = (Microsoft.Office.Interop.Outlook._MailItem)oApp.CreateItem(Microsoft.Office.Interop.Outlook.OlItemType.olMailItem);
+    String sSource1 = "C:\\temp\\SiteAssessments.csv";
+    String sDisplayName1 = "SiteAssessments";
+    String sSource2 = "C:\\temp\\ConstructedICs.csv";
+    String sDisplayName2 = "ConstructedICs";
+    int iPosition1 = 1;
+    int iAttachType1 = (int)Microsoft.Office.Interop.Outlook.OlAttachmentType.olByValue;
+    int iPosition2 = 2;
+    int iAttachType2 = (int)Microsoft.Office.Interop.Outlook.OlAttachmentType.olByValue;
+    Microsoft.Office.Interop.Outlook.Attachment oAttach = oMailItem.Attachments.Add(sSource1, iAttachType1, iPosition1, sDisplayName1);
+    oAttach = oMailItem.Attachments.Add(sSource2, iAttachType2, iPosition2, sDisplayName2);
+    toValue = "jrubengb@gmail.com";
+    subjectValue = "Request for DSC & Inflow Control Update";
+    bodyValue = "This is an auto-generated email." + "\r\n" +
+              "This message is a request for changes to the DSC and Inflow Controls coverages." + "\r\n" +
+              "The attached tables list parcels by DSCID that are in need of updates in the modeling system.";
+    oMailItem.To = toValue;
+    oMailItem.Subject = subjectValue;
+    oMailItem.Body = bodyValue;
+    oMailItem.SaveSentMessageFolder = oOutboxFolder;
+    oMailItem.Send();
+  }
+  
+  //AssessmentsChangesOnly
+  public void AddToOutboxAssessmentsChangesOnly(string toValue, string subjectValue, string bodyValue)
+  {
+    Microsoft.Office.Interop.Outlook._MailItem oMailItem = (Microsoft.Office.Interop.Outlook._MailItem)oApp.CreateItem(Microsoft.Office.Interop.Outlook.OlItemType.olMailItem);
+    String sSource = "C:\\temp\\SiteAssessments.csv";
+    String sDisplayName = "SiteAssessments";
+    int iPosition1 = 1;
+    int iAttachType1 = (int)Microsoft.Office.Interop.Outlook.OlAttachmentType.olByValue;
+    Microsoft.Office.Interop.Outlook.Attachment oAttach = oMailItem.Attachments.Add(sSource, iAttachType1, iPosition1, sDisplayName);
+    toValue = "jrubengb@gmail.com";
+    subjectValue = "Request for DSC Update";
+    bodyValue = "This is an auto-generated email." + "\r\n" +
+              "This message is a request for changes to the DSC coverage." + "\r\n" +
+              "The attached tables list parcels by DSCID that are in need of updates in the modeling system.";
+    oMailItem.To = toValue;
+    oMailItem.Subject = subjectValue;
+    oMailItem.Body = bodyValue;
+    oMailItem.SaveSentMessageFolder = oOutboxFolder;
+    oMailItem.Send();
+  }
+
+  //PotentialConstructedChanges
+  public void AddToOutboxPotentialConstructedChanges(string toValue, string subjectValue, string bodyValue)
+  {
+    Microsoft.Office.Interop.Outlook._MailItem oMailItem = (Microsoft.Office.Interop.Outlook._MailItem)oApp.CreateItem(Microsoft.Office.Interop.Outlook.OlItemType.olMailItem);
+    String sSource1 = "C:\\temp\\PotentialICs.csv";
+    String sDisplayName1 = "PotentialICs";
+    String sSource2 = "C:\\temp\\ConstructedICs.csv";
+    String sDisplayName2 = "ConstructedICs";
+    int iPosition1 = 1;
+    int iAttachType1 = (int)Microsoft.Office.Interop.Outlook.OlAttachmentType.olByValue;
+    int iPosition2 = 2;
+    int iAttachType2 = (int)Microsoft.Office.Interop.Outlook.OlAttachmentType.olByValue;
+    Microsoft.Office.Interop.Outlook.Attachment oAttach = oMailItem.Attachments.Add(sSource1, iAttachType1, iPosition1, sDisplayName1);
+    oAttach = oMailItem.Attachments.Add(sSource2, iAttachType2, iPosition2, sDisplayName2);
+    toValue = "jrubengb@gmail.com";
+    subjectValue = "Request for Inflow Control Update";
+    bodyValue = "This is an auto-generated email." + "\r\n" +
+              "This message is a request for changes to the Inflow Controls coverages." + "\r\n" +
+              "The attached tables list parcels by DSCID that are in need of updates in the modeling system.";
+    oMailItem.To = toValue;
+    oMailItem.Subject = subjectValue;
+    oMailItem.Body = bodyValue;
+    oMailItem.SaveSentMessageFolder = oOutboxFolder;
+    oMailItem.Send();
+  }
+  
+  //PotentialChangesOnly
+  public void AddToOutboxPotentialChangesOnly(string toValue, string subjectValue, string bodyValue)
+  {
+    Microsoft.Office.Interop.Outlook._MailItem oMailItem = (Microsoft.Office.Interop.Outlook._MailItem)oApp.CreateItem(Microsoft.Office.Interop.Outlook.OlItemType.olMailItem);
+    String sSource = "C:\\temp\\PotentialICs.csv";
+    String sDisplayName = "PotentialICs";
+    int iPosition1 = 1;
+    int iAttachType1 = (int)Microsoft.Office.Interop.Outlook.OlAttachmentType.olByValue;
+    Microsoft.Office.Interop.Outlook.Attachment oAttach = oMailItem.Attachments.Add(sSource, iAttachType1, iPosition1, sDisplayName);
+    toValue = "jrubengb@gmail.com";
+    subjectValue = "Request for Inflow Control Update";
+    bodyValue = "This is an auto-generated email." + "\r\n" +
+              "This message is a request for changes to the Potential Inflow Controls coverage(s)." + "\r\n" +
+              "The attached tables list parcels by DSCID that are in need of updates in the modeling system.";
+    oMailItem.To = toValue;
+    oMailItem.Subject = subjectValue;
+    oMailItem.Body = bodyValue;
+    oMailItem.SaveSentMessageFolder = oOutboxFolder;
+    oMailItem.Send();
+  }
+
+  //ConstructedChangesOnly
+  public void AddToOutboxConstructedChangesOnly(string toValue, string subjectValue, string bodyValue)
+  {
+    Microsoft.Office.Interop.Outlook._MailItem oMailItem = (Microsoft.Office.Interop.Outlook._MailItem)oApp.CreateItem(Microsoft.Office.Interop.Outlook.OlItemType.olMailItem);
+    String sSource = "C:\\temp\\ConstructedICs.csv";
+    String sDisplayName = "ConstructedICs";
+    int iPosition1 = 1;
+    int iAttachType1 = (int)Microsoft.Office.Interop.Outlook.OlAttachmentType.olByValue;
+    Microsoft.Office.Interop.Outlook.Attachment oAttach = oMailItem.Attachments.Add(sSource, iAttachType1, iPosition1, sDisplayName);
+    toValue = "jrubengb@gmail.com";
+    subjectValue = "Request for Inflow Control Update";
+    bodyValue = "This is an auto-generated email." + "\r\n" +
+              "This message is a request for changes to the Constructed Inflow Controls coverage(s)." + "\r\n" +
+              "The attached tables list parcels by DSCID that are in need of updates in the modeling system.";
+    oMailItem.To = toValue;
+    oMailItem.Subject = subjectValue;
+    oMailItem.Body = bodyValue;
+    oMailItem.SaveSentMessageFolder = oOutboxFolder;
+    oMailItem.Send();
+  }
+  
+  //NoChanges 
+  public void AddToOutboxNoChanges(string toValue, string subjectValue, string bodyValue)
+  {
+    Microsoft.Office.Interop.Outlook._MailItem oMailItem = (Microsoft.Office.Interop.Outlook._MailItem)oApp.CreateItem(Microsoft.Office.Interop.Outlook.OlItemType.olMailItem);
+    String sSource1 = "C:\\temp\\SiteAssessments.csv";
+    String sDisplayName1 = "SiteAssessments";
+    String sSource2 = "C:\\temp\\PotentialICs.csv";
+    String sDisplayName2 = "PotentialICs";
+    String sSource3 = "C:\\temp\\ConstructedICs.csv";
+    String sDisplayName3 = "ConstructedICs";
+    int iPosition1 = 1;
+    int iAttachType1 = (int)Microsoft.Office.Interop.Outlook.OlAttachmentType.olByValue;
+    int iPosition2 = 2;
+    int iAttachType2 = (int)Microsoft.Office.Interop.Outlook.OlAttachmentType.olByValue;
+    int iPosition3 = 3;
+    int iAttachType3 = (int)Microsoft.Office.Interop.Outlook.OlAttachmentType.olByValue;
+    Microsoft.Office.Interop.Outlook.Attachment oAttach = oMailItem.Attachments.Add(sSource1, iAttachType1, iPosition1, sDisplayName1);
+    oAttach = oMailItem.Attachments.Add(sSource2, iAttachType2, iPosition2, sDisplayName2);
+    oAttach = oMailItem.Attachments.Add(sSource3, iAttachType3, iPosition3, sDisplayName3);
+    toValue = "jrubengb@gmail.com";
+    subjectValue = "No RETRO Changes Update";
+    bodyValue = "This is an auto-generated email." + "r\n" +
+                "This message is to inform you that no changes were found." + "r\n" +
+                "The attached tables are test tables.";
     oMailItem.To = toValue;
     oMailItem.Subject = subjectValue;
     oMailItem.Body = bodyValue;
