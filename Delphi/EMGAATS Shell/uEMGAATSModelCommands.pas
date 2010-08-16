@@ -2217,8 +2217,6 @@ begin
     [Double(datmodHydroStats.csdscTA)]), eetInfo));
   fModel.AddError(TEMGAATSError.Create(Format('Direct subcatchments impervious area checksum: %.2f',
     [Double(datmodHydroStats.csdscTA)]), eetInfo));
-  fModel.AddError(TEMGAATSError.Create('Hydrologic quality control: ' +
-    fModel.Config.HydroQCFileName + ' created.', eetInfo));
 
   if (Abs(double(datmodHydroStats.csHCardTA)) > RSSwarn) or
     (Abs(double(datmodHydroStats.csHCardIA)) > RSSwarn) or
