@@ -374,7 +374,18 @@ namespace ArcSpooler.UI
 					MatchMasterZoom = Convert.ToBoolean(dataFrameNode.Attribute("matchMasterZoom").Value)
 				};
 				dataFrames.Add(newDataFrame);
-			} // foreach  (dataFrameNode)
+
+        IEnumerable<XElement> highlightLayerNodes =
+          dataFrameNode.Descendants("highlightLayer");
+        foreach (XElement element in highlightLayerNodes)
+        {
+          newDataFrame.HighlightLayers.Add(new HighlightLayer(
+            Convert.ToBoolean(element.Attribute("hide").Value),
+            element.Attribute("layerName").Value,
+            element.Attribute("layerField").Value));
+        } // foreach  (element)
+
+      } // foreach  (dataFrameNode)
 			DataFrames = dataFrames;
 
 			if (log.IsDebugEnabled)

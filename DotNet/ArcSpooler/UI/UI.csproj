@@ -14,8 +14,8 @@
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <ApplicationIcon>Resources\ArcSpooler.ico</ApplicationIcon>
-    <ManifestCertificateThumbprint>7613158342DE230E47D0BDC06986F673393BB71A</ManifestCertificateThumbprint>
-    <ManifestKeyFile>UI_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestCertificateThumbprint>131F0ECB94385C152483791A5BC8A1AE6A5D6554</ManifestCertificateThumbprint>
+    <ManifestKeyFile>ASMApps_ClickOnceKey.pfx</ManifestKeyFile>
     <GenerateManifests>true</GenerateManifests>
     <SignManifests>true</SignManifests>
     <PublishUrl>\\cassio\ASM_Apps\Apps\ArcSpooler\</PublishUrl>
@@ -28,7 +28,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>3</ApplicationRevision>
+    <ApplicationRevision>5</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -53,31 +53,40 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ESRI.ArcGIS.ArcMapUI, Version=9.2.3.1380, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=MSIL">
-      <Private>True</Private>
+      <SpecificVersion>False</SpecificVersion>
+      <Private>False</Private>
     </Reference>
     <Reference Include="ESRI.ArcGIS.Carto, Version=9.2.3.1380, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=MSIL">
-      <Private>True</Private>
+      <SpecificVersion>False</SpecificVersion>
+      <Private>False</Private>
     </Reference>
     <Reference Include="ESRI.ArcGIS.Display, Version=9.2.3.1380, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=MSIL">
-      <Private>True</Private>
+      <SpecificVersion>False</SpecificVersion>
+      <Private>False</Private>
     </Reference>
     <Reference Include="ESRI.ArcGIS.EditorExt, Version=9.2.3.1380, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=MSIL">
-      <Private>True</Private>
+      <SpecificVersion>False</SpecificVersion>
+      <Private>False</Private>
     </Reference>
     <Reference Include="ESRI.ArcGIS.Geodatabase, Version=9.2.3.1380, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=MSIL">
-      <Private>True</Private>
+      <SpecificVersion>False</SpecificVersion>
+      <Private>False</Private>
     </Reference>
     <Reference Include="ESRI.ArcGIS.GeoDatabaseUI, Version=9.2.3.1380, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=MSIL">
-      <Private>True</Private>
+      <SpecificVersion>False</SpecificVersion>
+      <Private>False</Private>
     </Reference>
     <Reference Include="ESRI.ArcGIS.Geometry, Version=9.2.3.1380, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=MSIL">
-      <Private>True</Private>
+      <SpecificVersion>False</SpecificVersion>
+      <Private>False</Private>
     </Reference>
     <Reference Include="ESRI.ArcGIS.Output, Version=9.2.3.1380, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=MSIL">
-      <Private>True</Private>
+      <SpecificVersion>False</SpecificVersion>
+      <Private>False</Private>
     </Reference>
     <Reference Include="ESRI.ArcGIS.System, Version=9.2.3.1380, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=MSIL">
-      <Private>True</Private>
+      <SpecificVersion>False</SpecificVersion>
+      <Private>False</Private>
     </Reference>
     <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -102,48 +111,48 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="Infragistics2.Shared.v8.3, Version=8.3.20083.1009, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files\Infragistics\NetAdvantage for .NET 2008 Vol. 3 CLR 2.0\windows forms\bin\Infragistics2.Shared.v8.3.dll</HintPath>
+    <Reference Include="Infragistics2.Shared.v10.2, Version=10.2.20102.1004, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
+      <HintPath>C:\Program Files\Infragistics\NetAdvantage 2010.2\Windows Forms\Bin\Infragistics2.Shared.v10.2.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Infragistics2.Win.Misc.v8.3, Version=8.3.20083.1009, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files\Infragistics\NetAdvantage for .NET 2008 Vol. 3 CLR 2.0\windows forms\bin\Infragistics2.Win.Misc.v8.3.dll</HintPath>
+    <Reference Include="Infragistics2.Win.Misc.v10.2, Version=10.2.20102.1004, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
+      <HintPath>C:\Program Files\Infragistics\NetAdvantage 2010.2\Windows Forms\Bin\Infragistics2.Win.Misc.v10.2.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Infragistics2.Win.UltraWinEditors.v8.3, Version=8.3.20083.1009, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files\Infragistics\NetAdvantage for .NET 2008 Vol. 3 CLR 2.0\windows forms\bin\Infragistics2.Win.UltraWinEditors.v8.3.dll</HintPath>
+    <Reference Include="Infragistics2.Win.UltraWinEditors.v10.2, Version=10.2.20102.1004, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
+      <HintPath>C:\Program Files\Infragistics\NetAdvantage 2010.2\Windows Forms\Bin\Infragistics2.Win.UltraWinEditors.v10.2.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Infragistics2.Win.UltraWinListView.v8.3, Version=8.3.20083.1009, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files\Infragistics\NetAdvantage for .NET 2008 Vol. 3 CLR 2.0\windows forms\bin\Infragistics2.Win.UltraWinListView.v8.3.dll</HintPath>
+    <Reference Include="Infragistics2.Win.UltraWinListView.v10.2, Version=10.2.20102.1004, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
+      <HintPath>C:\Program Files\Infragistics\NetAdvantage 2010.2\Windows Forms\Bin\Infragistics2.Win.UltraWinListView.v10.2.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Infragistics2.Win.UltraWinStatusBar.v8.3, Version=8.3.20083.1009, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files\Infragistics\NetAdvantage for .NET 2008 Vol. 3 CLR 2.0\windows forms\bin\Infragistics2.Win.UltraWinStatusBar.v8.3.dll</HintPath>
+    <Reference Include="Infragistics2.Win.UltraWinStatusBar.v10.2, Version=10.2.20102.1004, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
+      <HintPath>C:\Program Files\Infragistics\NetAdvantage 2010.2\Windows Forms\Bin\Infragistics2.Win.UltraWinStatusBar.v10.2.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Infragistics2.Win.UltraWinTabControl.v8.3, Version=8.3.20083.1009, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files\Infragistics\NetAdvantage for .NET 2008 Vol. 3 CLR 2.0\windows forms\bin\Infragistics2.Win.UltraWinTabControl.v8.3.dll</HintPath>
+    <Reference Include="Infragistics2.Win.UltraWinTabControl.v10.2, Version=10.2.20102.1004, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
+      <HintPath>C:\Program Files\Infragistics\NetAdvantage 2010.2\Windows Forms\Bin\Infragistics2.Win.UltraWinTabControl.v10.2.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Infragistics2.Win.UltraWinToolbars.v8.3, Version=8.3.20083.1009, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files\Infragistics\NetAdvantage for .NET 2008 Vol. 3 CLR 2.0\windows forms\bin\Infragistics2.Win.UltraWinToolbars.v8.3.dll</HintPath>
+    <Reference Include="Infragistics2.Win.UltraWinToolbars.v10.2, Version=10.2.20102.1004, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
+      <HintPath>C:\Program Files\Infragistics\NetAdvantage 2010.2\Windows Forms\Bin\Infragistics2.Win.UltraWinToolbars.v10.2.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Infragistics2.Win.UltraWinTree.v8.3, Version=8.3.20083.1009, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files\Infragistics\NetAdvantage for .NET 2008 Vol. 3 CLR 2.0\windows forms\bin\Infragistics2.Win.UltraWinTree.v8.3.dll</HintPath>
+    <Reference Include="Infragistics2.Win.UltraWinTree.v10.2, Version=10.2.20102.1004, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
+      <HintPath>C:\Program Files\Infragistics\NetAdvantage 2010.2\Windows Forms\Bin\Infragistics2.Win.UltraWinTree.v10.2.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Infragistics2.Win.v8.3, Version=8.3.20083.1009, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files\Infragistics\NetAdvantage for .NET 2008 Vol. 3 CLR 2.0\windows forms\bin\Infragistics2.Win.v8.3.dll</HintPath>
+    <Reference Include="Infragistics2.Win.v10.2, Version=10.2.20102.1004, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
+      <HintPath>C:\Program Files\Infragistics\NetAdvantage 2010.2\Windows Forms\Bin\Infragistics2.Win.v10.2.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
       <Private>True</Private>
     </Reference>
@@ -249,6 +258,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="App.config" />
+    <None Include="ASMApps_ClickOnceKey.pfx" />
     <None Include="Resources\Save-tiny.png" />
     <None Include="Resources\Delete-tiny.png" />
     <None Include="Resources\BrowseFile-tiny.png" />
