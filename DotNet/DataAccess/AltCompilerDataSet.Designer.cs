@@ -925,11 +925,11 @@ namespace SystemsAnalysis.DataAccess {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string focus_area {
                 get {
-                    try {
-                        return ((string)(this[this.tableSP_RP_BSBR.focus_areaColumn]));
+                    if (this.Isfocus_areaNull()) {
+                        return null;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'focus_area\' in table \'SP_RP_BSBR\' is DBNull.", e);
+                    else {
+                        return ((string)(this[this.tableSP_RP_BSBR.focus_areaColumn]));
                     }
                 }
                 set {
