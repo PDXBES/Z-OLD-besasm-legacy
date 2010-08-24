@@ -1,0 +1,11 @@
+#QUITONERROR
+
+#FILES=*.for
+#COMPILE=@lf95 -c -nap -nchk -npca -ntrace -nsav -nstchk -o1 -nw %fi
+
+#LINK=@lf95 @%rf -exe %ex
+#TARGET=32mult95.exe
+
+LF95
+FILES=*.FOR
+TARGET=32mult95.exe
