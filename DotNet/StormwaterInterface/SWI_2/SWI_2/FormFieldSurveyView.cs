@@ -286,6 +286,7 @@ namespace SWI_2
                 {
                     culvert_opening_type = (int)((DataRow)sANDBOXDataSet.SWSP_CULVERT_OPENING_TYPE.Select("culvert_opening = '" + (string)r["culvert_opening"] + "'")[0]).ItemArray[0];
                 }
+                if (r["photo_id"] is System.DBNull) { r["photo_id"] = " "; }
                 //if the global_id is negative, then we are adding a record
                 if ((int)r["global_id"] < 0)
                 {
@@ -312,7 +313,7 @@ namespace SWI_2
                                                             (double?)((r["dimension2"] is System.DBNull) ? null : (double?)r["dimension2"]),
                                                             material_id,
                                                             shape_id,
-                                                            "",
+                                                            (string)r["photo_id"],
                                                             (int?)((r["length_ft"] is System.DBNull) ? null :(int?)r["length_ft"]));
                     }
                     else if ((string)r["linktype"] == "Ditch")
@@ -333,7 +334,7 @@ namespace SWI_2
                                                             (double?)((r["dimension1"] is System.DBNull) ? null : (double?)r["dimension1"]),
                                                             (double?)((r["dimension2"] is System.DBNull) ? null : (double?)r["dimension2"]),
                                                             material_id,
-                                                            "",
+                                                            (string)r["photo_id"],
                                                             (string)r["ds_node"],
                                                             (string)r["us_node"],
                                                             (int?)((r["length_ft"] is System.DBNull) ? null : (int?)r["length_ft"]));
@@ -358,7 +359,7 @@ namespace SWI_2
                                                             (double?)((r["dimension2"] is System.DBNull) ? null : (double?)r["dimension2"]),
                                                             (double?)((r["dimension3"] is System.DBNull) ? null : (double?)r["dimension3"]),
                                                             material_id,
-                                                            "",
+                                                            (string)r["photo_id"],
                                                             (string)r["ds_node"],
                                                             (string)r["us_node"],
                                                             (int?)((r["length_ft"] is System.DBNull) ? null : (int?)r["length_ft"]));
@@ -413,7 +414,7 @@ namespace SWI_2
                                                             (double?)((r["dimension2"] is System.DBNull) ? null : (double?)r["dimension2"]),
                                                             material_id,
                                                             shape_id,
-                                                            "",
+                                                            (string)r["photo_id"],
                                                             (int?)((r["length_ft"] is System.DBNull) ? null : (int?)r["length_ft"])
                                                             );
                         }
@@ -428,7 +429,7 @@ namespace SWI_2
                                                             (double?)((r["dimension2"] is System.DBNull) ? null : (double?)r["dimension2"]),
                                                             material_id,
                                                             shape_id,
-                                                            "",
+                                                            (string)r["photo_id"],
                                                             (int?)((r["length_ft"] is System.DBNull) ? null : (int?)r["length_ft"]),
                                                             (int)r["global_id"]);
                         }
@@ -451,7 +452,7 @@ namespace SWI_2
                                                                 (double?)((r["dimension1"] is System.DBNull) ? null : (double?)r["dimension1"]),
                                                                 (double?)((r["dimension2"] is System.DBNull) ? null : (double?)r["dimension2"]),
                                                                 material_id,
-                                                                "",
+                                                                (string)r["photo_id"],
                                                                 ((r["ds_node"] is System.DBNull) ? "" : (string)r["ds_node"]),
                                                                 ((r["us_node"] is System.DBNull) ? "" : (string)r["us_node"]),
                                                                 (int?)((r["length_ft"] is System.DBNull) ? null : (int?)r["length_ft"])
@@ -467,7 +468,7 @@ namespace SWI_2
                                                                 (double?)((r["dimension1"] is System.DBNull) ? null : (double?)r["dimension1"]),
                                                                 (double?)((r["dimension2"] is System.DBNull) ? null : (double?)r["dimension2"]),
                                                                 material_id,
-                                                                "",
+                                                                (string)r["photo_id"],
                                                                 ((r["ds_node"] is System.DBNull) ? "" : (string)r["ds_node"]),
                                                                 ((r["us_node"] is System.DBNull) ? "" : (string)r["us_node"]),
                                                                 (int?)((r["length_ft"] is System.DBNull) ? null : (int?)r["length_ft"]),
@@ -494,7 +495,7 @@ namespace SWI_2
                                                                 (double?)((r["dimension2"] is System.DBNull) ? null : (double?)r["dimension2"]),
                                                                 (double?)((r["dimension3"] is System.DBNull) ? null : (double?)r["dimension3"]),
                                                                 material_id,
-                                                                "",
+                                                                (string)r["photo_id"],
                                                                 ((r["ds_node"] is System.DBNull) ? "" : (string)r["ds_node"]),
                                                                 ((r["us_node"] is System.DBNull) ? "" : (string)r["us_node"]),
                                                                 (int?)((r["length_ft"] is System.DBNull) ? null : (int?)r["length_ft"])
@@ -512,7 +513,7 @@ namespace SWI_2
                                                                 (double?)((r["dimension2"] is System.DBNull) ? null : (double?)r["dimension2"]),
                                                                 (double?)((r["dimension3"] is System.DBNull) ? null : (double?)r["dimension3"]),
                                                                 material_id,
-                                                                "",
+                                                                (string)r["photo_id"],
                                                                 ((r["ds_node"] is System.DBNull) ? "" : (string)r["ds_node"]),
                                                                 ((r["us_node"] is System.DBNull) ? "" : (string)r["us_node"]),
                                                                 (int?)((r["length_ft"] is System.DBNull) ? null : (int?)r["length_ft"]),

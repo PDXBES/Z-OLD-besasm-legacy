@@ -59,33 +59,33 @@ namespace SystemsAnalysis.Grid.GridAnalysis
         private void CreateCalcTableQuery(int selectionSetAreaID)
         {
             string calcTableQuery;
-            calcTableQuery = "SELECT WshdGrd100FtOpt.*, " +
-                "FE_SELECTION_SETS.percent_overlap as grid_overlap, " +
-                "GridIntermediateResults.Description AS IntermediateResultsDescription, " +
-                "GridIntermediateResults.IMP_pct, GridIntermediateResults.COL_B, " +
-                "GridIntermediateResults.COL_C, GridIntermediateResults.COL_D, " +
-                "GridIntermediateResults.COL_E, GridIntermediateResults.COL_F, " +
-                "GridIntermediateResults.COL_G, GridIntermediateResults.COL_H, " +
-                "GridIntermediateResults.COL_I, GridIntermediateResults.COL_J, " +
-                "GridIntermediateResults.COL_K, GridIntermediateResults.COL_L, " +
-                "GridIntermediateResults.COL_M, GridIntermediateResults.COL_N, " +
-                "GridIntermediateResults.COL_O, GridIntermediateResults.COL_P, GridIntermediateResults.COL_Q, " +
-                "GridResults.Description AS GridResultsDescription, " +
-                "GridResults.COL_1, GridResults.COL_2, GridResults.COL_3, " +
-                "GridResults.TP, GridResults.TP_DRY, GridResults.TP_WET, " +
-                "GridResults.TSS, GridResults.TSS_DRY, GridResults.TSS_WET, " +
-                "GridResults.BOD, GridResults.BOD_DRY, GridResults.BOD_WET," +
-                "GridResults.ECOLI, GridResults.ECOLI_DRY, GridResults.ECOLI_WET, " +
-                "GridResults.PbD, GridResults.PbD_DRY, GridResults.PbD_WET " +
-                "FROM ((WshdGrd100FtOpt INNER JOIN FE_SELECTION_SETS " +
-                "ON WshdGrd100FtOpt.Description = FE_SELECTION_SETS.description) " +
-                "LEFT JOIN GridResults " +
-                "ON FE_SELECTION_SETS.description = GridResults.Description) " +
-                "LEFT JOIN GridIntermediateResults " +
-                "ON WshdGrd100FtOpt.Description = GridIntermediateResults.Description " +
-                "WHERE (((FE_SELECTION_SETS.selection_set_area_id)= " + selectionSetAreaID + "));";
+            calcTableQuery = "SELECT GRID_WshdGrd100FtOpt.*, " +
+                "GRID_FE_SELECTION_SETS.percent_overlap as grid_overlap, " +
+                "GRID_GridIntermediateResults.Description AS IntermediateResultsDescription, " +
+                "GRID_GridIntermediateResults.IMP_pct, GRID_GridIntermediateResults.COL_B, " +
+                "GRID_GridIntermediateResults.COL_C, GRID_GridIntermediateResults.COL_D, " +
+                "GRID_GridIntermediateResults.COL_E, GRID_GridIntermediateResults.COL_F, " +
+                "GRID_GridIntermediateResults.COL_G, GRID_GridIntermediateResults.COL_H, " +
+                "GRID_GridIntermediateResults.COL_I, GRID_GridIntermediateResults.COL_J, " +
+                "GRID_GridIntermediateResults.COL_K, GRID_GridIntermediateResults.COL_L, " +
+                "GRID_GridIntermediateResults.COL_M, GRID_GridIntermediateResults.COL_N, " +
+                "GRID_GridIntermediateResults.COL_O, GRID_GridIntermediateResults.COL_P, GRID_GridIntermediateResults.COL_Q, " +
+                "GRID_GridResults.Description AS GridResultsDescription, " +
+                "GRID_GridResults.COL_1, GRID_GridResults.COL_2, GRID_GridResults.COL_3, " +
+                "GRID_GridResults.TP, GRID_GridResults.TP_DRY, GRID_GridResults.TP_WET, " +
+                "GRID_GridResults.TSS, GRID_GridResults.TSS_DRY, GRID_GridResults.TSS_WET, " +
+                "GRID_GridResults.BOD, GRID_GridResults.BOD_DRY, GRID_GridResults.BOD_WET," +
+                "GRID_GridResults.ECOLI, GRID_GridResults.ECOLI_DRY, GRID_GridResults.ECOLI_WET, " +
+                "GRID_GridResults.PbD, GRID_GridResults.PbD_DRY, GRID_GridResults.PbD_WET " +
+                "FROM ((GRID_WshdGrd100FtOpt INNER JOIN GRID_FE_SELECTION_SETS " +
+                "ON GRID_WshdGrd100FtOpt.Description = GRID_FE_SELECTION_SETS.description) " +
+                "LEFT JOIN GRID_GridResults " +
+                "ON GRID_FE_SELECTION_SETS.description = GRID_GridResults.Description) " +
+                "LEFT JOIN GRID_GridIntermediateResults " +
+                "ON GRID_WshdGrd100FtOpt.Description = GRID_GridIntermediateResults.Description " +
+                "WHERE (((GRID_FE_SELECTION_SETS.selection_set_area_id)= " + selectionSetAreaID + "));";
 
-            accessHelper.CreateQuery("calc_table", calcTableQuery);
+            accessHelper.SQLCreateVIEW("GRID_calc_table", calcTableQuery);
             return;
         }
         private void CreateBMPUnionQuery()
@@ -98,32 +98,32 @@ namespace SystemsAnalysis.Grid.GridAnalysis
             int bmpSourceCount = 0;
             if (prfPath != "")
             {
-                accessHelper.LinkTable(bmpTableName, prfPath);
-                bmpUnionQuery += "SELECT * FROM PRF_LIST ";
+                accessHelper.SQLLinkTable(bmpTableName, prfPath);
+                bmpUnionQuery += "SELECT * FROM GRID_PRF_LIST ";
                 bmpSourceCount++;
             }
             if (mipPath != "")
             {
-                accessHelper.LinkTable(mipTableName, mipPath);
+                accessHelper.SQLLinkTable(mipTableName, mipPath);
                 if (bmpSourceCount > 0)
                 {
                     bmpUnionQuery += "UNION ";
                 }
-                bmpUnionQuery += "SELECT * FROM MIP_LIST ";
+                bmpUnionQuery += "SELECT * FROM GRID_MIP_LIST ";
                 bmpSourceCount++;
             }
             if (osfPath != "")
             {
-                accessHelper.LinkTable(osfTableName, osfPath);
+                accessHelper.SQLLinkTable(osfTableName, osfPath);
                 if (bmpSourceCount > 0)
                 {
                     bmpUnionQuery += "UNION ";
                 }
-                bmpUnionQuery += " SELECT * FROM OSF_LIST ";
+                bmpUnionQuery += " SELECT * FROM GRID_OSF_LIST ";
             }
             bmpUnionQuery += ";";
 
-            accessHelper.CreateQuery("BMP_LIST_UNION_QRY", bmpUnionQuery);
+            accessHelper.SQLCreateVIEW("GRID_BMP_LIST_UNION_QRY", bmpUnionQuery);
             return;
         }
         private void CreatePRFListQuery(bool inStream, string timePeriod)
@@ -131,13 +131,13 @@ namespace SystemsAnalysis.Grid.GridAnalysis
             string prfListQuery;
             int specialConditions;
             specialConditions = (!inStream ? 1 : 0) + (timePeriod == "EX" ? 1 : 0);
-            prfListQuery = "SELECT PDX_BMP_GRID.Description, BMP_TABLES.BMP_TYPE, " +
-                "BMP_TYPE_TABLE_GENERAL.BMP_TYPE_GEN_ID, BMP_TYPE_TABLE_GENERAL.BMP_TYPE_DESCRIPTION, " +
-                "PDX_BMP_GRID.Percent_Overlap " +
-                "FROM BMP_TYPE_TABLE_GENERAL INNER JOIN " +
-                "(PDX_BMP_GRID INNER JOIN BMP_TABLES ON PDX_BMP_GRID.BMP_Type1 = BMP_TABLES.BMP_TYPE) " +
-                "ON BMP_TYPE_TABLE_GENERAL.BMP_TYPE_GEN_ID = BMP_TABLES.BMP_TYPE_GEN_ID " +
-                "WHERE (BMP_TABLES.SA_SOURCE=\"PRF\") ";
+            prfListQuery = "SELECT GRID_PDX_BMP_GRID.Description, GRID_BMP_TABLES.BMP_TYPE, " +
+                "GRID_BMP_TYPE_TABLE_GENERAL.BMP_TYPE_GEN_ID, GRID_BMP_TYPE_TABLE_GENERAL.BMP_TYPE_DESCRIPTION, " +
+                "GRID_PDX_BMP_GRID.Percent_Overlap " +
+                "FROM GRID_BMP_TYPE_TABLE_GENERAL INNER JOIN " +
+                "(GRID_PDX_BMP_GRID INNER JOIN GRID_BMP_TABLES ON GRID_PDX_BMP_GRID.BMP_Type1 = GRID_BMP_TABLES.BMP_TYPE) " +
+                "ON GRID_BMP_TYPE_TABLE_GENERAL.BMP_TYPE_GEN_ID = GRID_BMP_TABLES.BMP_TYPE_GEN_ID " +
+                "WHERE (GRID_BMP_TABLES.SA_SOURCE='PRF') ";
 
             if (specialConditions > 0)
             {
@@ -145,7 +145,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis
             }
             if (!inStream)
             {
-                prfListQuery += "((PDX_BMP_GRID.INSTREAM)=False) ";
+                prfListQuery += "((GRID_PDX_BMP_GRID.INSTREAM)=0) ";
             }
 
             //Should this simply assume that the timePeriod is EX considering that
@@ -157,9 +157,9 @@ namespace SystemsAnalysis.Grid.GridAnalysis
             }
             if (timePeriod == "EX")
             {
-                prfListQuery += "((PDX_BMP_GRID.TimeFrame)=\"EX\");";
+                prfListQuery += "((GRID_PDX_BMP_GRID.TimeFrame)= 'EX');";
             }
-            accessHelper.CreateQuery("PRF_LIST", prfListQuery);
+            accessHelper.SQLCreateVIEW("GRID_PRF_LIST", prfListQuery);
         }
 
         /// <summary>
@@ -168,7 +168,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis
         /// <returns>A GridModelOutput object containing model run metadata</returns>
         public GridModelOutput ExecuteModels()
         {
-            accessHelper = new AccessHelper(gridModelPath);
+            accessHelper = new AccessHelper(gridModelPath, "Data Source=WS09858\\SQLEXPRESS;Initial Catalog=PortlandHarbor;Integrated Security=True");
 
             GridModelOutput gridModelOutput = new GridModelOutput();            
             foreach (GridModelRun gridModelRun in gridModelRuns)
@@ -176,6 +176,16 @@ namespace SystemsAnalysis.Grid.GridAnalysis
                 try
                 {
                     this.StatusChanged("Executing " + gridModelRun.ModelDescription);
+                    /////Moved from ExecuteModel
+                    accessHelper.SQLLinkTable(gridDataTableName, gridDataPath);
+                    accessHelper.SQLLinkTable(gridModelRun.BMPEffectivenessTable,
+                        gridModelRun.BMPEffectivenessDB, "GRID_BMP_PERFORMANCE");
+                    accessHelper.SQLLinkTable(gridModelRun.PollutantLoadingTable,
+                        gridModelRun.PollutantLoadingDB, "GRID_pollutant_loadings");
+
+                    CreatePRFListQuery(gridModelRun.InstreamFacilities, gridModelRun.TimePeriod);
+                    CreateBMPUnionQuery();
+                    //////
                     ExecuteModel(gridModelRun);
                     gridModelOutput.AddPollutantLoadingMetadataDS(gridModelRun.ScenarioDescription);
                 }
@@ -191,14 +201,14 @@ namespace SystemsAnalysis.Grid.GridAnalysis
         }
         private void ExecuteModel(GridModelRun gridModelRun)
         {            
-            accessHelper.LinkTable(gridDataTableName, gridDataPath);
-            accessHelper.LinkTable(gridModelRun.BMPEffectivenessTable,
-                gridModelRun.BMPEffectivenessDB, "BMP_PERFORMANCE");
-            accessHelper.LinkTable(gridModelRun.PollutantLoadingTable,
-                gridModelRun.PollutantLoadingDB, "pollutant_loadings");
+            /*accessHelper.SQLLinkTable(gridDataTableName, gridDataPath);
+            accessHelper.SQLLinkTable(gridModelRun.BMPEffectivenessTable,
+                gridModelRun.BMPEffectivenessDB, "GRID_BMP_PERFORMANCE");
+            accessHelper.SQLLinkTable(gridModelRun.PollutantLoadingTable,
+                gridModelRun.PollutantLoadingDB, "GRID_pollutant_loadings");
 
             CreatePRFListQuery(gridModelRun.InstreamFacilities, gridModelRun.TimePeriod);
-            CreateBMPUnionQuery();
+            CreateBMPUnionQuery();*/
             CreateCalcTableQuery(gridModelRun.SelectionSetAreaID);
 
             double rainfall;
@@ -222,7 +232,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis
                 gridModelResults.Add(gridModelResult);
                 Dictionary<string, double> modelResultsSummary;
 
-                modelResultsSummary = accessHelper.ExecuteAggregateQueryDoubles("calc_table_summary");
+                modelResultsSummary = accessHelper.SQLExecuteAggregateQueryDoubles("GRID_calc_table_summary");
                 foreach (KeyValuePair<string, double> kvp in modelResultsSummary)
                 {
                     try
@@ -249,7 +259,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis
                     try
                     {
                         this.StatusChanged(gridModelRun.ModelDescription + ": Executing process '" + gridProcess.ProcessName + "'");
-                        accessHelper.ExecuteActionQuery(gridProcess.ProcessName);
+                        accessHelper.SQLExecuteActionQuery(gridProcess.ProcessName);
                     }
                     catch (Exception ex)
                     {
@@ -288,12 +298,12 @@ namespace SystemsAnalysis.Grid.GridAnalysis
             variableKeyFieldName = ConfigurationManager.AppSettings.Get("variableKeyFieldName");
             string variableValueFieldName;
             variableValueFieldName = ConfigurationManager.AppSettings.Get("variableValueFieldName");
-            accessHelper.WriteKeyValueTable(variableTableName, variableKeyFieldName, name, variableValueFieldName, value);
+            accessHelper.SQLWriteKeyValueTable(variableTableName, variableKeyFieldName, name, variableValueFieldName, value);
         }
 
         private void SetRainfall(double rainfall)
         {
-            SetGridVariable("Precip", rainfall);
+            accessHelper.SetSQLGridVariable("Precip", rainfall);
         }
 
         private void ExportResults(string outputFileName)
@@ -304,11 +314,11 @@ namespace SystemsAnalysis.Grid.GridAnalysis
             }
             try
             {
-                accessHelper.ExportTable("GridResults", outputFileName, AccessHelper.FileType.CSV);
+                accessHelper.SQLExportTable("GRID_GridResults", outputFileName, AccessHelper.FileType.CSV);
             }
             catch (System.Runtime.InteropServices.COMException ex)
             {
-                accessHelper.ExportTable("GridResults", outputFileName, AccessHelper.FileType.CSV);
+                accessHelper.SQLExportTable("GRID_GridResults", outputFileName, AccessHelper.FileType.CSV);
             }
             return;
         }
