@@ -383,7 +383,7 @@ namespace SWI_2
 
         private void buttonMaterialsAdd_Click(object sender, EventArgs e)
         {
-            this.sWSP_MATERIAL_TYPETableAdapter.Insert("NewMat", "New material description");
+            this.sWSP_MATERIAL_TYPETableAdapter.Insert("0NewMa", "New material description");
             this.sWSP_MATERIAL_TYPETableAdapter.Fill((SANDBOXDataSet.SWSP_MATERIAL_TYPEDataTable)((SANDBOXDataSet)this.sWSPMATERIALTYPEBindingSource.DataSource).SWSP_MATERIAL_TYPE);
         }
 
