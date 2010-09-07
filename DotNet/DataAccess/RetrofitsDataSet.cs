@@ -3,6 +3,14 @@
     
     public partial class RetrofitsDataSet
     {
+      partial class SiteAssessmentDataTable
+      {
+      }
+    
+      partial class SiteOpportunityDataTable
+      {
+      }
+    
       public void InitRetroDataSet()
       {
         RetrofitsDataSetTableAdapters.SITE_ASSESSMENTTableAdapter siteAssessmentTA;
@@ -53,5 +61,12 @@
         sewerBasinTA = new RetrofitsDataSetTableAdapters.SEWER_BASINTableAdapter();
         sewerBasinTA.Fill(tableSEWER_BASIN);
       }
+    }
+}
+
+namespace SystemsAnalysis.DataAccess.RetrofitsDataSetTableAdapters {
+    
+    
+    public partial class SiteAssessmentTableAdapter {
     }
 }

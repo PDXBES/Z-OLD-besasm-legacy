@@ -100,7 +100,6 @@
       Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool21 = new Infragistics.Win.UltraWinToolbars.ButtonTool("tabCheckRetroUpdates");
       Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool22 = new Infragistics.Win.UltraWinToolbars.ButtonTool("tabApplyRetroUpdates");
       Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool23 = new Infragistics.Win.UltraWinToolbars.ButtonTool("tabUpdaterHistory");
-      Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool7 = new Infragistics.Win.UltraWinToolbars.ButtonTool("tabRevertSessionChanges");
       Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool10 = new Infragistics.Win.UltraWinToolbars.ButtonTool("exit");
       Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool11 = new Infragistics.Win.UltraWinToolbars.ButtonTool("changeDscEditorConnection");
       Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool12 = new Infragistics.Win.UltraWinToolbars.ButtonTool("changeMasterDataConnection");
@@ -109,7 +108,6 @@
       Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool15 = new Infragistics.Win.UltraWinToolbars.ButtonTool("tabDownloadTemplate");
       Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool16 = new Infragistics.Win.UltraWinToolbars.ButtonTool("tabMain");
       Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool17 = new Infragistics.Win.UltraWinToolbars.ButtonTool("tabUpdaterHistory");
-      Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool18 = new Infragistics.Win.UltraWinToolbars.ButtonTool("tabRevertSessionChanges");
       Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool19 = new Infragistics.Win.UltraWinToolbars.ButtonTool("tabApplyRetroUpdates");
       Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool20 = new Infragistics.Win.UltraWinToolbars.ButtonTool("tabCheckRetroUpdates");
       Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool6 = new Infragistics.Win.UltraWinToolbars.ButtonTool("downloadTemplate");
@@ -127,12 +125,16 @@
       this.btnApplyRetroUpdates = new Infragistics.Win.Misc.UltraButton();
       this.dgvApplyRetroUpdates = new System.Windows.Forms.DataGridView();
       this.tabPageControlCheckRetroUpdates = new Infragistics.Win.UltraWinTabControl.UltraTabPageControl();
-      this.ultraPanel1 = new Infragistics.Win.Misc.UltraPanel();
+      this.panelCheckRetroUpdates = new Infragistics.Win.Misc.UltraPanel();
+      this.btnExportToTemplate = new Infragistics.Win.Misc.UltraButton();
+      this.lblRetrofitsCalEnd = new Infragistics.Win.Misc.UltraLabel();
+      this.lblRetrofitsCalStart = new Infragistics.Win.Misc.UltraLabel();
+      this.clndrRetrofitsChangesEnd = new System.Windows.Forms.DateTimePicker();
+      this.clndrRetrofitsChangesStart = new System.Windows.Forms.DateTimePicker();
       this.grpBoxCheckRetroUpdates = new Infragistics.Win.Misc.UltraGroupBox();
       this.lblNewConstrRetroFacs = new Infragistics.Win.Misc.UltraLabel();
       this.lblNewRetroIcTargets = new Infragistics.Win.Misc.UltraLabel();
       this.lblNewRetroSiteAssessments = new Infragistics.Win.Misc.UltraLabel();
-      this.clndrRetrofitsChanges = new System.Windows.Forms.MonthCalendar();
       this.grpBoxViewRetroUpdates = new Infragistics.Win.Misc.UltraGroupBox();
       this.btnViewNewConstrFacs = new Infragistics.Win.Misc.UltraButton();
       this.btnViewNewIcTargets = new Infragistics.Win.Misc.UltraButton();
@@ -217,12 +219,13 @@
       this.retroBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.sessionBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.sessionTableAdapter = new DSCUpdater.ProjectDataSetTableAdapters.SESSIONTableAdapter();
+      this.rDS = new SystemsAnalysis.DataAccess.RetrofitsDataSet();
       btnExportErrors = new Infragistics.Win.Misc.UltraButton();
       this.tabPageControlApplyRetroUpdates.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.dgvApplyRetroUpdates)).BeginInit();
       this.tabPageControlCheckRetroUpdates.SuspendLayout();
-      this.ultraPanel1.ClientArea.SuspendLayout();
-      this.ultraPanel1.SuspendLayout();
+      this.panelCheckRetroUpdates.ClientArea.SuspendLayout();
+      this.panelCheckRetroUpdates.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.grpBoxCheckRetroUpdates)).BeginInit();
       this.grpBoxCheckRetroUpdates.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.grpBoxViewRetroUpdates)).BeginInit();
@@ -266,6 +269,7 @@
       this.tabControlMain.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.retroBindingSource)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.sessionBindingSource)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.rDS)).BeginInit();
       this.SuspendLayout();
       // 
       // btnExportErrors
@@ -293,7 +297,7 @@
       // 
       this.btnApplyRetroUpdates.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
       this.btnApplyRetroUpdates.ButtonStyle = Infragistics.Win.UIElementButtonStyle.VisualStudio2005Button;
-      this.btnApplyRetroUpdates.Location = new System.Drawing.Point(551, 357);
+      this.btnApplyRetroUpdates.Location = new System.Drawing.Point(551, 328);
       this.btnApplyRetroUpdates.Name = "btnApplyRetroUpdates";
       this.btnApplyRetroUpdates.Size = new System.Drawing.Size(151, 40);
       this.btnApplyRetroUpdates.TabIndex = 1;
@@ -308,31 +312,82 @@
       this.dgvApplyRetroUpdates.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.dgvApplyRetroUpdates.Location = new System.Drawing.Point(0, 0);
       this.dgvApplyRetroUpdates.Name = "dgvApplyRetroUpdates";
-      this.dgvApplyRetroUpdates.Size = new System.Drawing.Size(702, 351);
+      this.dgvApplyRetroUpdates.Size = new System.Drawing.Size(702, 322);
       this.dgvApplyRetroUpdates.TabIndex = 0;
       // 
       // tabPageControlCheckRetroUpdates
       // 
-      this.tabPageControlCheckRetroUpdates.Controls.Add(this.ultraPanel1);
+      this.tabPageControlCheckRetroUpdates.Controls.Add(this.panelCheckRetroUpdates);
       this.tabPageControlCheckRetroUpdates.Controls.Add(this.dgvIncomingRetroChanges);
-      this.tabPageControlCheckRetroUpdates.Location = new System.Drawing.Point(1, 22);
+      this.tabPageControlCheckRetroUpdates.Location = new System.Drawing.Point(-10000, -10000);
       this.tabPageControlCheckRetroUpdates.Name = "tabPageControlCheckRetroUpdates";
       this.tabPageControlCheckRetroUpdates.Padding = new System.Windows.Forms.Padding(3);
       this.tabPageControlCheckRetroUpdates.Size = new System.Drawing.Size(714, 444);
       // 
-      // ultraPanel1
+      // panelCheckRetroUpdates
       // 
       // 
-      // ultraPanel1.ClientArea
+      // panelCheckRetroUpdates.ClientArea
       // 
-      this.ultraPanel1.ClientArea.Controls.Add(this.grpBoxCheckRetroUpdates);
-      this.ultraPanel1.ClientArea.Controls.Add(this.clndrRetrofitsChanges);
-      this.ultraPanel1.ClientArea.Controls.Add(this.grpBoxViewRetroUpdates);
-      this.ultraPanel1.Dock = System.Windows.Forms.DockStyle.Right;
-      this.ultraPanel1.Location = new System.Drawing.Point(336, 3);
-      this.ultraPanel1.Name = "ultraPanel1";
-      this.ultraPanel1.Size = new System.Drawing.Size(375, 438);
-      this.ultraPanel1.TabIndex = 8;
+      this.panelCheckRetroUpdates.ClientArea.Controls.Add(this.btnExportToTemplate);
+      this.panelCheckRetroUpdates.ClientArea.Controls.Add(this.lblRetrofitsCalEnd);
+      this.panelCheckRetroUpdates.ClientArea.Controls.Add(this.lblRetrofitsCalStart);
+      this.panelCheckRetroUpdates.ClientArea.Controls.Add(this.clndrRetrofitsChangesEnd);
+      this.panelCheckRetroUpdates.ClientArea.Controls.Add(this.clndrRetrofitsChangesStart);
+      this.panelCheckRetroUpdates.ClientArea.Controls.Add(this.grpBoxCheckRetroUpdates);
+      this.panelCheckRetroUpdates.ClientArea.Controls.Add(this.grpBoxViewRetroUpdates);
+      this.panelCheckRetroUpdates.Dock = System.Windows.Forms.DockStyle.Right;
+      this.panelCheckRetroUpdates.Location = new System.Drawing.Point(507, 3);
+      this.panelCheckRetroUpdates.Name = "panelCheckRetroUpdates";
+      this.panelCheckRetroUpdates.Size = new System.Drawing.Size(204, 438);
+      this.panelCheckRetroUpdates.TabIndex = 8;
+      // 
+      // btnExportToTemplate
+      // 
+      this.btnExportToTemplate.ButtonStyle = Infragistics.Win.UIElementButtonStyle.VisualStudio2005Button;
+      this.btnExportToTemplate.Location = new System.Drawing.Point(20, 377);
+      this.btnExportToTemplate.Name = "btnExportToTemplate";
+      this.btnExportToTemplate.Size = new System.Drawing.Size(162, 49);
+      this.btnExportToTemplate.TabIndex = 12;
+      this.btnExportToTemplate.Text = "Export Assessments to Template";
+      this.btnExportToTemplate.Visible = false;
+      this.btnExportToTemplate.Click += new System.EventHandler(this.btnExportToTemplate_Click);
+      // 
+      // lblRetrofitsCalEnd
+      // 
+      this.lblRetrofitsCalEnd.AutoSize = true;
+      this.lblRetrofitsCalEnd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline);
+      this.lblRetrofitsCalEnd.Location = new System.Drawing.Point(7, 331);
+      this.lblRetrofitsCalEnd.Name = "lblRetrofitsCalEnd";
+      this.lblRetrofitsCalEnd.Size = new System.Drawing.Size(93, 14);
+      this.lblRetrofitsCalEnd.TabIndex = 11;
+      this.lblRetrofitsCalEnd.Text = "Choose End Date";
+      // 
+      // lblRetrofitsCalStart
+      // 
+      this.lblRetrofitsCalStart.AutoSize = true;
+      this.lblRetrofitsCalStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline);
+      this.lblRetrofitsCalStart.Location = new System.Drawing.Point(3, 273);
+      this.lblRetrofitsCalStart.Name = "lblRetrofitsCalStart";
+      this.lblRetrofitsCalStart.Size = new System.Drawing.Size(97, 14);
+      this.lblRetrofitsCalStart.TabIndex = 10;
+      this.lblRetrofitsCalStart.Text = "Choose Start Date";
+      // 
+      // clndrRetrofitsChangesEnd
+      // 
+      this.clndrRetrofitsChangesEnd.Location = new System.Drawing.Point(0, 351);
+      this.clndrRetrofitsChangesEnd.Name = "clndrRetrofitsChangesEnd";
+      this.clndrRetrofitsChangesEnd.Size = new System.Drawing.Size(200, 20);
+      this.clndrRetrofitsChangesEnd.TabIndex = 9;
+      this.clndrRetrofitsChangesEnd.ValueChanged += new System.EventHandler(this.clndrRetrofitsChangesEnd_ValueChanged);
+      // 
+      // clndrRetrofitsChangesStart
+      // 
+      this.clndrRetrofitsChangesStart.Location = new System.Drawing.Point(1, 293);
+      this.clndrRetrofitsChangesStart.Name = "clndrRetrofitsChangesStart";
+      this.clndrRetrofitsChangesStart.Size = new System.Drawing.Size(200, 20);
+      this.clndrRetrofitsChangesStart.TabIndex = 8;
+      this.clndrRetrofitsChangesStart.ValueChanged += new System.EventHandler(this.clndrRetrofitsChangesStart_ValueChanged);
       // 
       // grpBoxCheckRetroUpdates
       // 
@@ -341,7 +396,7 @@
       this.grpBoxCheckRetroUpdates.Controls.Add(this.lblNewRetroIcTargets);
       this.grpBoxCheckRetroUpdates.Controls.Add(this.lblNewRetroSiteAssessments);
       this.grpBoxCheckRetroUpdates.HeaderPosition = Infragistics.Win.Misc.GroupBoxHeaderPosition.TopOnBorder;
-      this.grpBoxCheckRetroUpdates.Location = new System.Drawing.Point(8, 170);
+      this.grpBoxCheckRetroUpdates.Location = new System.Drawing.Point(10, 164);
       this.grpBoxCheckRetroUpdates.Name = "grpBoxCheckRetroUpdates";
       this.grpBoxCheckRetroUpdates.Size = new System.Drawing.Size(172, 103);
       this.grpBoxCheckRetroUpdates.TabIndex = 1;
@@ -378,13 +433,6 @@
       this.lblNewRetroSiteAssessments.TabIndex = 0;
       this.lblNewRetroSiteAssessments.Text = "New Site Assessments: 0";
       // 
-      // clndrRetrofitsChanges
-      // 
-      this.clndrRetrofitsChanges.Location = new System.Drawing.Point(192, 9);
-      this.clndrRetrofitsChanges.Name = "clndrRetrofitsChanges";
-      this.clndrRetrofitsChanges.TabIndex = 7;
-      this.clndrRetrofitsChanges.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.clndrRetrofitsChanges_DateChanged);
-      // 
       // grpBoxViewRetroUpdates
       // 
       this.grpBoxViewRetroUpdates.CaptionAlignment = Infragistics.Win.Misc.GroupBoxCaptionAlignment.Center;
@@ -392,7 +440,7 @@
       this.grpBoxViewRetroUpdates.Controls.Add(this.btnViewNewIcTargets);
       this.grpBoxViewRetroUpdates.Controls.Add(this.btnViewNewRetroAssessments);
       this.grpBoxViewRetroUpdates.HeaderPosition = Infragistics.Win.Misc.GroupBoxHeaderPosition.TopOnBorder;
-      this.grpBoxViewRetroUpdates.Location = new System.Drawing.Point(8, 9);
+      this.grpBoxViewRetroUpdates.Location = new System.Drawing.Point(10, 3);
       this.grpBoxViewRetroUpdates.Name = "grpBoxViewRetroUpdates";
       this.grpBoxViewRetroUpdates.Size = new System.Drawing.Size(172, 155);
       this.grpBoxViewRetroUpdates.TabIndex = 6;
@@ -432,10 +480,9 @@
       // dgvIncomingRetroChanges
       // 
       this.dgvIncomingRetroChanges.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-      this.dgvIncomingRetroChanges.Dock = System.Windows.Forms.DockStyle.Fill;
       this.dgvIncomingRetroChanges.Location = new System.Drawing.Point(3, 3);
       this.dgvIncomingRetroChanges.Name = "dgvIncomingRetroChanges";
-      this.dgvIncomingRetroChanges.Size = new System.Drawing.Size(708, 438);
+      this.dgvIncomingRetroChanges.Size = new System.Drawing.Size(498, 438);
       this.dgvIncomingRetroChanges.TabIndex = 0;
       // 
       // tabPageControlUpdaterEditor
@@ -613,7 +660,7 @@
       this.pnlNewDSCAreas.Dock = System.Windows.Forms.DockStyle.Fill;
       this.pnlNewDSCAreas.Location = new System.Drawing.Point(231, 0);
       this.pnlNewDSCAreas.Name = "pnlNewDSCAreas";
-      this.pnlNewDSCAreas.Size = new System.Drawing.Size(295, 215);
+      this.pnlNewDSCAreas.Size = new System.Drawing.Size(293, 213);
       this.pnlNewDSCAreas.TabIndex = 25;
       // 
       // txtNewRoofArea
@@ -710,7 +757,7 @@
       this.ultraGroupBox2.Dock = System.Windows.Forms.DockStyle.Left;
       this.ultraGroupBox2.Location = new System.Drawing.Point(0, 0);
       this.ultraGroupBox2.Name = "ultraGroupBox2";
-      this.ultraGroupBox2.Size = new System.Drawing.Size(231, 215);
+      this.ultraGroupBox2.Size = new System.Drawing.Size(231, 213);
       this.ultraGroupBox2.TabIndex = 27;
       this.ultraGroupBox2.ViewStyle = Infragistics.Win.Misc.GroupBoxViewStyle.VisualStudio2005;
       // 
@@ -794,9 +841,9 @@
       this.ultraGroupBox1.Controls.Add(this.lblRevertSession);
       this.ultraGroupBox1.Controls.Add(this.btnRevertSession);
       this.ultraGroupBox1.Dock = System.Windows.Forms.DockStyle.Right;
-      this.ultraGroupBox1.Location = new System.Drawing.Point(526, 0);
+      this.ultraGroupBox1.Location = new System.Drawing.Point(524, 0);
       this.ultraGroupBox1.Name = "ultraGroupBox1";
-      this.ultraGroupBox1.Size = new System.Drawing.Size(178, 215);
+      this.ultraGroupBox1.Size = new System.Drawing.Size(178, 213);
       this.ultraGroupBox1.TabIndex = 26;
       this.ultraGroupBox1.ViewStyle = Infragistics.Win.Misc.GroupBoxViewStyle.VisualStudio2005;
       // 
@@ -1114,7 +1161,7 @@
       // 
       this.tabPageControlMain.Controls.Add(this.dgvData);
       this.tabPageControlMain.Controls.Add(this.ultraPanel4);
-      this.tabPageControlMain.Location = new System.Drawing.Point(-10000, -10000);
+      this.tabPageControlMain.Location = new System.Drawing.Point(1, 22);
       this.tabPageControlMain.Name = "tabPageControlMain";
       this.tabPageControlMain.Padding = new System.Windows.Forms.Padding(3);
       this.tabPageControlMain.Size = new System.Drawing.Size(714, 444);
@@ -1318,7 +1365,7 @@
       this.toolbarManagerMain.DockWithinContainerBaseType = typeof(System.Windows.Forms.Form);
       this.toolbarManagerMain.MenuAnimationStyle = Infragistics.Win.UltraWinToolbars.MenuAnimationStyle.Slide;
       this.toolbarManagerMain.SaveSettingsFormat = Infragistics.Win.SaveSettingsFormat.Xml;
-      this.toolbarManagerMain.SettingsKey = "frmMain.ultraToolbarsManager1";
+      this.toolbarManagerMain.SettingsKey = "frmMain.toolbarManagerMain";
       this.toolbarManagerMain.ShowFullMenusDelay = 500;
       ultraToolbar1.DockedColumn = 0;
       ultraToolbar1.DockedRow = 0;
@@ -1330,7 +1377,7 @@
             popupMenuTool1,
             popupMenuTool2,
             popupMenuTool3});
-      ultraToolbar1.Text = "UltraToolbar1";
+      ultraToolbar1.Text = "toolbarManagerMain";
       this.toolbarManagerMain.Toolbars.AddRange(new Infragistics.Win.UltraWinToolbars.UltraToolbar[] {
             ultraToolbar1});
       popupMenuTool4.SharedPropsInternal.Caption = "&Options";
@@ -1352,7 +1399,6 @@
             buttonTool21,
             buttonTool22,
             buttonTool23,
-            buttonTool7,
             buttonTool10});
       buttonTool11.SharedPropsInternal.Caption = "Change &DSC Editor Database Connection...";
       buttonTool12.SharedPropsInternal.Caption = "Change &Master Data Database Connection";
@@ -1365,15 +1411,14 @@
       buttonTool15.SharedPropsInternal.Category = "loadTab";
       buttonTool16.SharedPropsInternal.Caption = "Load &Update File";
       buttonTool16.SharedPropsInternal.Category = "loadTab";
-      buttonTool17.SharedPropsInternal.Caption = "Load Updater &History";
+      buttonTool17.SharedPropsInternal.Caption = "&View Editor History";
       buttonTool17.SharedPropsInternal.Category = "loadTab";
-      buttonTool18.SharedPropsInternal.Caption = "&Revert Session Changes";
-      buttonTool18.SharedPropsInternal.Category = "loadTab";
       buttonTool19.SharedPropsInternal.Caption = "&Apply RETRO Updates";
       buttonTool19.SharedPropsInternal.Category = "loadTab";
       buttonTool20.SharedPropsInternal.Caption = "&Check RETRO Updates";
       buttonTool20.SharedPropsInternal.Category = "loadTab";
       buttonTool6.SharedPropsInternal.Caption = "Download DSC Update Template";
+      buttonTool6.SharedPropsInternal.Category = "loadTab";
       this.toolbarManagerMain.Tools.AddRange(new Infragistics.Win.UltraWinToolbars.ToolBase[] {
             popupMenuTool4,
             popupMenuTool5,
@@ -1385,11 +1430,10 @@
             buttonTool15,
             buttonTool16,
             buttonTool17,
-            buttonTool18,
             buttonTool19,
             buttonTool20,
             buttonTool6});
-      this.toolbarManagerMain.ToolClick += new Infragistics.Win.UltraWinToolbars.ToolClickEventHandler(this.ultraToolbarsManager1_ToolClick);
+      this.toolbarManagerMain.ToolClick += new Infragistics.Win.UltraWinToolbars.ToolClickEventHandler(this.toolbarManagerMain_ToolClick);
       // 
       // _frmMain_Toolbars_Dock_Area_Right
       // 
@@ -1509,6 +1553,11 @@
       // 
       this.sessionTableAdapter.ClearBeforeFill = true;
       // 
+      // rDS
+      // 
+      this.rDS.DataSetName = "RetrofitsDataSet";
+      this.rDS.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+      // 
       // frmMain
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1531,8 +1580,9 @@
       this.tabPageControlApplyRetroUpdates.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.dgvApplyRetroUpdates)).EndInit();
       this.tabPageControlCheckRetroUpdates.ResumeLayout(false);
-      this.ultraPanel1.ClientArea.ResumeLayout(false);
-      this.ultraPanel1.ResumeLayout(false);
+      this.panelCheckRetroUpdates.ClientArea.ResumeLayout(false);
+      this.panelCheckRetroUpdates.ClientArea.PerformLayout();
+      this.panelCheckRetroUpdates.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.grpBoxCheckRetroUpdates)).EndInit();
       this.grpBoxCheckRetroUpdates.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.grpBoxViewRetroUpdates)).EndInit();
@@ -1581,6 +1631,7 @@
       this.tabControlMain.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.retroBindingSource)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.sessionBindingSource)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.rDS)).EndInit();
       this.ResumeLayout(false);
 
     }
@@ -1647,12 +1698,11 @@
     private Infragistics.Win.Misc.UltraLabel lblRevertSession;
     private Infragistics.Win.Misc.UltraButton btnRevertSession;
     private Infragistics.Win.UltraWinTabControl.UltraTabPageControl tabPageControlCheckRetroUpdates;
-    private Infragistics.Win.Misc.UltraPanel ultraPanel1;
+    private Infragistics.Win.Misc.UltraPanel panelCheckRetroUpdates;
     private Infragistics.Win.Misc.UltraGroupBox grpBoxCheckRetroUpdates;
     private Infragistics.Win.Misc.UltraLabel lblNewConstrRetroFacs;
     private Infragistics.Win.Misc.UltraLabel lblNewRetroIcTargets;
     private Infragistics.Win.Misc.UltraLabel lblNewRetroSiteAssessments;
-    private System.Windows.Forms.MonthCalendar clndrRetrofitsChanges;
     private Infragistics.Win.Misc.UltraGroupBox grpBoxViewRetroUpdates;
     private Infragistics.Win.Misc.UltraButton btnViewNewConstrFacs;
     private Infragistics.Win.Misc.UltraButton btnViewNewIcTargets;
@@ -1684,6 +1734,12 @@
     private System.Windows.Forms.DataGridViewTextBoxColumn edit_date;
     private System.Windows.Forms.DataGridViewTextBoxColumn edited_by;
     private System.Windows.Forms.BindingSource retroBindingSource;
+    private SystemsAnalysis.DataAccess.RetrofitsDataSet rDS;
+    private System.Windows.Forms.DateTimePicker clndrRetrofitsChangesStart;
+    private Infragistics.Win.Misc.UltraLabel lblRetrofitsCalEnd;
+    private Infragistics.Win.Misc.UltraLabel lblRetrofitsCalStart;
+    private System.Windows.Forms.DateTimePicker clndrRetrofitsChangesEnd;
+    private Infragistics.Win.Misc.UltraButton btnExportToTemplate;
   }
 }
 
