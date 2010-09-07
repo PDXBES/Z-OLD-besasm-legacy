@@ -13,7 +13,7 @@
   </template>
   <sourceDatabase>
     <connectionString>Provider=Microsoft.Jet.OLEDB.4.0;Data Source=\\cassio\Storm_SysPlan\SC_Pilot\GIS\Map_Docs\PGDB\Field_Visit_Views.mdb;User Id=admin;Password=;</connectionString>
-    <sourceTable>FannoViewsTest</sourceTable>
+    <sourceTable>FannoViews</sourceTable>
     <sourceField>FID_Text</sourceField>
   </sourceDatabase>
   <output createMXD="true" createPDF="true" pdfResolution="300">
