@@ -1,0 +1,47 @@
+<mockup version="1.0" skin="sketch" measuredW="866" measuredH="665" mockupW="792" mockupH="628">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::TitleWindow" x="64" y="27" w="792" h="628" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>SWSP%20Field%20Data%20Administration</text>
+      </controlProperties>
+    </control>
+    <control controlID="1" controlTypeID="com.balsamiq.mockups::VerticalTabBar" x="79" y="63" w="762" h="520" measuredW="200" measuredH="194" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <hrefs>AdminWatersheds%26bm%3BAdminWatersheds.bmml%26bm%3BAdminWatersheds.bmml%26bm%3BAdminWatersheds.bmml%2CAdminEvaluators%26bm%3BAdminEvaluators.bmml%26bm%3BAdminEvaluators.bmml%26bm%3BAdminEvaluators.bmml%2CAdminTypes%26bm%3BAdminTypes.bmml%26bm%3BAdminTypes.bmml%26bm%3BAdminTypes.bmml%2CAdminViewsAndSurveys%26bm%3BAdminViewsAndSurveys.bmml%26bm%3BAdminViewsAndSurveys.bmml%26bm%3BAdminViewsAndSurveys.bmml</hrefs>
+        <position>left</position>
+        <selectedIndex>1</selectedIndex>
+        <text>Watersheds%0AEvaluators%0ATypes%0AViews%20and%20Surveys</text>
+      </controlProperties>
+    </control>
+    <control controlID="2" controlTypeID="com.balsamiq.mockups::Label" x="217" y="78" w="-1" h="-1" measuredW="68" measuredH="25" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Evaluators</text>
+      </controlProperties>
+    </control>
+    <control controlID="4" controlTypeID="com.balsamiq.mockups::Button" x="712" y="540" w="-1" h="-1" measuredW="49" measuredH="28" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Add</text>
+      </controlProperties>
+    </control>
+    <control controlID="5" controlTypeID="com.balsamiq.mockups::Button" x="767" y="540" w="-1" h="-1" measuredW="64" measuredH="28" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Delete</text>
+      </controlProperties>
+    </control>
+    <control controlID="10" controlTypeID="com.balsamiq.mockups::Button" x="776" y="592" w="-1" h="-1" measuredW="65" measuredH="28" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Cancel</text>
+      </controlProperties>
+    </control>
+    <control controlID="11" controlTypeID="com.balsamiq.mockups::Button" x="727" y="592" w="-1" h="-1" measuredW="43" measuredH="28" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>OK</text>
+      </controlProperties>
+    </control>
+    <control controlID="12" controlTypeID="com.balsamiq.mockups::DataGrid" x="217" y="103" w="609" h="428" measuredW="236" measuredH="88" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Initials%2C%20Last%20Name%2C%20First%20Name%0AAA%2C%20Anonymous%2C%20Alcoholics%0ABB%2C%20Boop%2C%20Betty</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>
