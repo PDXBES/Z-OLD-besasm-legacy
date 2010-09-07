@@ -3,7 +3,7 @@
 // Path: D:\Development\ArcSpooler\UI, Author: arnelm
 // Code lines: 16, Size of file: 288 Bytes
 // Creation date: 10/31/2008 6:11 PM
-// Last modified: 2/23/2009 5:30 PM
+// Last modified: 9/2/2010 4:22 PM
 
 #region Using directives
 using System;
@@ -374,10 +374,16 @@ namespace ArcSpooler.UI
 		/// <param name="layerToShift">Layer to shift</param>
 		/// <param name="layerKeyField">Layer key field</param>
 		/// <param name="key">Key</param>
-		public void ShiftMapFrame(string masterMapFrame, string layerToShift, 
-			string layerKeyField, string key, bool zoomToObject, bool rotateMap,
-			double scaleInterval)
+    public void ShiftMapFrame(string masterMapFrame, string layerToShift,
+      string layerKeyField, string key, bool zoomToObject, bool rotateMap,
+      double scaleInterval)
 		{
+      if (log.IsDebugEnabled)
+        log.Debug(
+          string.Format("Shifting master map frame {0} {1}:{2} {3} zoom={4}, rotateMap={5}, scaleInterval={6}",
+            masterMapFrame, layerToShift, layerKeyField, key, zoomToObject, rotateMap,
+            scaleInterval));
+
 			IMapFrame mapFrame = MapFrame(masterMapFrame);
 			IEnvelope mapBounds;
 			IEnvelope mapFrameBounds = (mapFrame as IElement).Geometry.Envelope;
@@ -385,12 +391,18 @@ namespace ArcSpooler.UI
 				layerKeyField, key);
 			if (selectedFeature == null)
 			{
-				throw new ArgumentException(
-					string.Format("Object {0} for field {1}, layer {2} doesn't exist", key,
-					layerKeyField, layerToShift));
+				string exceptionMessage = string.Format("Object {0} for field {1}, layer {2} doesn't exist", key,
+        					layerKeyField, layerToShift);
+        
+        if (log.IsDebugEnabled)
+          log.Debug(exceptionMessage);
+        throw new ArgumentException(exceptionMessage);
 			} // if
 
-			IPoint newCenter = new PointClass()
+      if (log.IsDebugEnabled)
+        log.Debug("  selection successful");
+      
+      IPoint newCenter = new PointClass()
 			{
 				X = (selectedFeature.Extent.XMax + selectedFeature.Extent.XMin) / 2,
 				Y = (selectedFeature.Extent.YMax + selectedFeature.Extent.YMin) / 2
@@ -399,7 +411,10 @@ namespace ArcSpooler.UI
 			bool featureForcesRotate = false;
 			if (rotateMap)
 			{
-				double featureAspectRatio = selectedFeature.Extent.Height / selectedFeature.Extent.Width;
+        if (log.IsDebugEnabled)
+          log.Debug("  rotating map");
+
+        double featureAspectRatio = selectedFeature.Extent.Height / selectedFeature.Extent.Width;
 				double mapAspectRatio = mapFrameBounds.Height / mapFrameBounds.Width;
 				if (mapAspectRatio < 1) // wider than taller
 					featureForcesRotate = featureAspectRatio > (mapAspectRatio * 5/4);
@@ -411,7 +426,10 @@ namespace ArcSpooler.UI
 
 			if (zoomToObject)
 			{
-				double mapFrameWidth = mapFrameBounds.Width;
+        if (log.IsDebugEnabled)
+          log.Debug("  zooming object");
+
+        double mapFrameWidth = mapFrameBounds.Width;
 				double mapFrameHeight = mapFrameBounds.Height;
 				double mapAspectRatio = mapFrameBounds.Height / mapFrameBounds.Width;
 				double mapUnitsPerMapFrameUnit;
@@ -448,6 +466,9 @@ namespace ArcSpooler.UI
 				mapBounds.Expand(1.1, 1.1, true);
 			} // if
 			masterMapView.Refresh();
+
+      if (log.IsDebugEnabled)
+        log.Debug("End shift master map frame");
 		} // ShiftMapFrame(masterMapFrame, layerToShift, layerKeyField)
 
 		/// <summary>
@@ -458,7 +479,11 @@ namespace ArcSpooler.UI
 		public void ShiftMapFrame(string masterMapFrame, string slaveMapFrame,
 			bool zoomToObject, bool rotateMap)
 		{
-			IMapFrame masterFrame = MapFrame(masterMapFrame);
+      if (log.IsDebugEnabled)
+        log.Debug(String.Format("Shifting slave map frame {0}:{1} zoom={1}, rotateMap={2}", 
+          masterMapFrame, slaveMapFrame, zoomToObject, rotateMap));
+      
+      IMapFrame masterFrame = MapFrame(masterMapFrame);
 			IEnvelope masterBounds = masterFrame.MapBounds;
 			IMapFrame slaveFrame = MapFrame(slaveMapFrame);
 			IEnvelope slaveBounds = slaveFrame.MapBounds;
@@ -496,6 +521,10 @@ namespace ArcSpooler.UI
 		/// <param name="defQuery">Def query</param>
 		public void ChangeDefinitionQuery(IMap map, string layerName, string defQuery)
 		{
+      if (log.IsDebugEnabled)
+        log.Debug(string.Format("Changing definition query {0} -> {1}",
+          layerName, defQuery));
+
 			IFeatureLayer layer = FeatureLayer(map, layerName);
 			IFeatureLayerDefinition layerDef = layer as IFeatureLayerDefinition;
 			layerDef.DefinitionExpression = defQuery;
@@ -509,6 +538,10 @@ namespace ArcSpooler.UI
 		public void AddTableToLayout(IMap map, string layerName, string boundingElementName,
 			string orderByField)
 		{
+      if (log.IsDebugEnabled)
+        log.Debug(string.Format("Adding table to layout {0}, boundingElementName={1}, orderBy={2}",
+          layerName, boundingElementName, orderByField));
+
 			IPageLayout pageLayout = MapDocument.PageLayout;
 			IGraphicsContainer pageContainer = pageLayout as IGraphicsContainer;
 			IElement boundingElementRect = RectangleElement(boundingElementName) as IElement;
@@ -612,6 +645,9 @@ namespace ArcSpooler.UI
 			ref double currentColCoord,
 			int numCols)
 		{
+      if (log.IsDebugEnabled)
+        log.Debug(string.Format("Adding text {0}", text));
+
 			ITextElement textElement = new TextElementClass();
 			ITextSymbol textSymbol = new TextSymbolClass()
 			{

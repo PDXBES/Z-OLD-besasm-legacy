@@ -3,7 +3,7 @@
 // Path: D:\Development\ArcSpooler\UI, Author: arnelm
 // Code lines: 31, Size of file: 616 Bytes
 // Creation date: 10/30/2008 11:26 AM
-// Last modified: 3/6/2009 3:05 PM
+// Last modified: 9/2/2010 9:58 AM
 
 #region Using directives
 using System;
@@ -247,13 +247,14 @@ namespace ArcSpooler.UI
 			{
 				StringBuilder errorMessage = new StringBuilder();
 				errorMessage.AppendLine("The following objects were not spooled due to an error:");
-				foreach (string item in _ProcessingEngine.ErrorKeys)
+				foreach (KeyValuePair<string, string> item in _ProcessingEngine.ErrorKeys)
 				{
-					errorMessage.AppendLine(item);
+					errorMessage.AppendLine(string.Format("{0}:{1}", item.Key, item.Value));
 				} // foreach  (item)
 				errorMessage.AppendLine("These keys have been added as a new selection list named ErrorPending");
 
-				_PreEngine.SaveSelection("ErrorPending", _ProcessingEngine.ErrorKeys);
+        List<string> keys = new List<string>(_ProcessingEngine.ErrorKeys.Keys);
+				_PreEngine.SaveSelection("ErrorPending", keys);
 				UpdateSelectionSetComboList();
 				cmbSelectionSet.SelectedIndex = cmbSelectionSet.Items.IndexOf("ErrorPending");
 

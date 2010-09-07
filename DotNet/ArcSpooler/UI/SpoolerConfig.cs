@@ -3,7 +3,7 @@
 // Path: D:\Development\ArcSpooler\UI, Author: arnelm
 // Code lines: 31, Size of file: 431 Bytes
 // Creation date: 10/31/2008 3:50 PM
-// Last modified: 11/17/2009 12:01 PM
+// Last modified: 9/2/2010 11:15 AM
 
 #region Using directives
 using System;
@@ -437,7 +437,8 @@ namespace ArcSpooler.UI
 			foreach (XElement dynamicTextFieldNode in dynamicTextFieldNodes)
 			{
 				dynamicTextFields.Add(new DynamicTextField(dynamicTextFieldNode.Attribute("baseName").Value,
-					dynamicTextFieldNode.Attribute("modifyToField").Value,
+          dynamicTextFieldNode.Attribute("modifyToField") != null ? 
+            dynamicTextFieldNode.Attribute("modifyToField").Value : string.Empty,
 					dynamicTextFieldNode.Attribute("replaceFormat").Value)
 					{
 						BoundaryFrame = dynamicTextFieldNode.Attribute("boundaryFrame") != null ?
@@ -447,6 +448,14 @@ namespace ArcSpooler.UI
 						BorderYFromBoundary = dynamicTextFieldNode.Attribute("borderYFromBoundary") != null ?
 							Convert.ToDouble(dynamicTextFieldNode.Attribute("borderYFromBoundary").Value) : 0
 					});
+        DynamicTextField newDynamicTextField = dynamicTextFields.Last();
+
+        IEnumerable<XElement> fieldSpecNodes = dynamicTextFieldNode.Descendants("fieldSpec");
+        foreach (XElement fieldSpecNode in fieldSpecNodes)
+        {
+          newDynamicTextField.AddFieldSpec(fieldSpecNode.Attribute("name").Value,
+            fieldSpecNode.Attribute("type").Value);
+        } // foreach  (fieldSpecNode)
 			} // foreach  (textFieldNode)
 			DynamicTextFields = dynamicTextFields;
 

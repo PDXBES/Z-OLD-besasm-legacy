@@ -3,7 +3,7 @@
 // Path: D:\Development\ArcSpooler\UI, Author: arnelm
 // Code lines: 21, Size of file: 322 Bytes
 // Creation date: 11/2/2008 11:48 PM
-// Last modified: 11/17/2009 11:28 AM
+// Last modified: 9/2/2010 4:44 PM
 
 #region Using directives
 using System;
@@ -39,7 +39,7 @@ namespace ArcSpooler.UI
 		private DataTable _SourceTable;
 		private List<string> _SourceKeys = new List<string>();
 		private List<string> _ProcessKeys = new List<string>();
-		private List<string> _ErrorKeys = new List<string>();
+		private Dictionary<string, string> _ErrorKeys = new Dictionary<string, string>();
 
 		private static readonly log4net.ILog log = LogManager.GetLogger(
 			System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
@@ -129,7 +129,7 @@ namespace ArcSpooler.UI
 		/// Error keys
 		/// </summary>
 		/// <returns>List</returns>
-		public List<string> ErrorKeys
+		public Dictionary<string, string> ErrorKeys
 		{
 			get
 			{
@@ -173,6 +173,9 @@ namespace ArcSpooler.UI
 		/// </summary>
 		public void InitializeDataSource()
 		{
+      if (log.IsDebugEnabled)
+        log.Debug("Initializing data source");
+
 			OleDbConnection conn = new OleDbConnection(_Config.SourceConnectionString);
 			OleDbDataAdapter adapter = new OleDbDataAdapter("SELECT * FROM " + _Config.SourceTable, conn);
 			OleDbCommandBuilder cmd = new OleDbCommandBuilder(adapter);
@@ -199,7 +202,10 @@ namespace ArcSpooler.UI
 		{
 			try
 			{
-				WriteStartJob();
+        if (log.IsDebugEnabled)
+          log.Debug("Running jobs");
+        
+        WriteStartJob();
 				WriteJobList();
 
 				int jobCounter = 0;
@@ -222,6 +228,10 @@ namespace ArcSpooler.UI
 			finally
 			{
 				WriteEndJob();
+
+        if (log.IsDebugEnabled)
+          log.Debug("End jobs");
+
 			} // finally
 		} // Run()
 
@@ -230,7 +240,10 @@ namespace ArcSpooler.UI
 		/// </summary>
 		public void ProduceOutput(string key)
 		{
-			IMapDocument doc = _Config.TemplateDocument;
+      if (log.IsDebugEnabled)
+        log.Debug("Producing output " + key);
+      
+      IMapDocument doc = _Config.TemplateDocument;
 			_Config.ReloadTemplateFile();
 
 			try
@@ -253,7 +266,7 @@ namespace ArcSpooler.UI
 			catch (Exception e)
 			{
 				// TODO: add another list or redef the _ErrorKeys list to include error message in list for display
-				_ErrorKeys.Add(key);
+				_ErrorKeys.Add(key, e.Message);
 			} // catch
 		} // ProduceOutput(key)
 
@@ -263,7 +276,10 @@ namespace ArcSpooler.UI
 		/// <param name="doc">Doc</param>
 		public void RenderContent(IMapDocument doc, string key)
 		{
-			MapDocumentHelper mdocHelper = new MapDocumentHelper(doc);
+      if (log.IsDebugEnabled)
+        log.Debug("Rendering content");
+      
+      MapDocumentHelper mdocHelper = new MapDocumentHelper(doc);
 			ShiftMapFrames(key, mdocHelper);
 			RenderTextFields(mdocHelper, key);
 			RenderDynamicTextFields(mdocHelper, key);
@@ -280,7 +296,10 @@ namespace ArcSpooler.UI
 		{
 			try
 			{
-				mdocHelper.ShiftMapFrame(_Config.MasterDataFrame.Name,
+        if (log.IsDebugEnabled)
+          log.Debug("Shifting master data frame");
+        
+        mdocHelper.ShiftMapFrame(_Config.MasterDataFrame.Name,
 					_Config.MasterDataFrame.LayerToShift, _Config.MasterDataFrame.LayerKeyField,
 					key, _Config.MasterDataFrame.ZoomToObject, _Config.MasterDataFrame.RotateMap,
 					_Config.MasterDataFrame.ScaleInterval);
@@ -292,18 +311,29 @@ namespace ArcSpooler.UI
 
 			foreach (HighlightLayer item in _Config.MasterDataFrame.HighlightLayers)
 			{
-				item.Value = key;
+        if (log.IsDebugEnabled)
+          log.Debug("Shifiting highlight layer " + item.LayerName);
+        
+        item.Value = key;
 				mdocHelper.ChangeDefinitionQuery(mdocHelper.Map(_Config.MasterDataFrame.Name),
 					item.LayerName, item.DefQuery);
 			} // foreach  (item)
 
 			foreach (DataFrame frame in _Config.DataFrames)
 			{
-				mdocHelper.ShiftMapFrame(_Config.MasterDataFrame.Name, frame.Name,
+        if (log.IsDebugEnabled)
+          log.Debug("Shifting data frame " + frame.Name);
+        
+        mdocHelper.ShiftMapFrame(_Config.MasterDataFrame.Name, frame.Name,
 					frame.MatchMasterZoom, _Config.MasterDataFrame.RotateMap);
 
 				foreach (HighlightLayer item in frame.HighlightLayers)
 				{
+          if (log.IsDebugEnabled)
+            log.Debug(
+              String.Format("Shifting highlight layer within data frame {0} : {1}", 
+              frame.Name, item.LayerName));
+
 					item.Value = key;
 					mdocHelper.ChangeDefinitionQuery(mdocHelper.Map(frame.Name),
 						item.LayerName, item.DefQuery);
@@ -319,6 +349,9 @@ namespace ArcSpooler.UI
 		{
 			foreach (TextField item in _Config.TextFields)
 			{
+        if (log.IsDebugEnabled)
+          log.Debug("Rendering text field " + item.Name);
+
 				ITextElement textField = mdocHelper.TextElement(item.Name);
 				string specialFieldContent = string.Empty;
 				if (item.ModifyTo == "$FILENAME")
@@ -345,22 +378,39 @@ namespace ArcSpooler.UI
 		{
 			foreach (DynamicTextField item in _Config.DynamicTextFields)
 			{
-				ITextElement textField = mdocHelper.TextElement(item.Name);
-				var rows = _SourceTable.AsEnumerable();
-				var selectedRow = from row in rows
-													where row.Field<string>(_Config.SourceField) == key
-													select row;
-				item.ReplaceString = selectedRow.First().Field<string>(item.ModifyToField);
-				textField.Text = item.ModifyTo;
+        if (log.IsDebugEnabled)
+          log.Debug("Rendering dynamic text field " + item.Name);
 
-				if (item.BoundaryFrame.Length > 0)
-				{
-					IRectangleElement boundingRect = mdocHelper.RectangleElement(item.BoundaryFrame);
-					IEnvelope rectBounds = (boundingRect as IElement).Geometry.Envelope;
-					rectBounds.Expand(-item.BorderXFromBoundary, -item.BorderYFromBoundary, false);
-					(textField as IElement).Geometry = rectBounds;
-				} // if
-			} // foreach  (item)
+        ITextElement textField = mdocHelper.TextElement(item.Name);
+        var rows = _SourceTable.AsEnumerable();
+        var selectedRow = from row in rows
+                          where row.Field<string>(_Config.SourceField) == key
+                          select row;
+
+        item.ClearFieldValues();
+        if (item.FieldSpecCount > 0)
+        {
+          for (int i = 0; i < (item.FieldSpecCount); i++)
+          {
+            item.AddFieldValue(item.GetFieldSpecFieldName(i),
+              selectedRow.First().Field<object>(item.GetFieldSpecFieldName(i)).ToString());
+          }
+          textField.Text = item.ModifyTo;
+        } // if
+        else
+        {
+          item.ReplaceString = selectedRow.First().Field<string>(item.ModifyToField);
+          textField.Text = item.ModifyTo;
+        } // else
+
+        if (item.BoundaryFrame.Length > 0)
+        {
+          IRectangleElement boundingRect = mdocHelper.RectangleElement(item.BoundaryFrame);
+          IEnvelope rectBounds = (boundingRect as IElement).Geometry.Envelope;
+          rectBounds.Expand(-item.BorderXFromBoundary, -item.BorderYFromBoundary, false);
+          (textField as IElement).Geometry = rectBounds;
+        } // if
+      } // foreach  (item)
 		} // RenderDynamicTextFields(mdocHelper, key)
 
 		/// <summary>
@@ -372,6 +422,9 @@ namespace ArcSpooler.UI
 		{
 			foreach (Table table in _Config.Tables)
 			{
+        if (log.IsDebugEnabled)
+          log.Debug("Rendering table " + table.Name);
+
 				IMap masterMap = (from item in mdocHelper.Maps
 												 where item.Name == _Config.MasterDataFrame.Name
 												 select item).First();
@@ -387,6 +440,9 @@ namespace ArcSpooler.UI
 		{
 			foreach (Group item in _Config.Groups)
 			{
+        if (log.IsDebugEnabled)
+          log.Debug("Rendering group " + item.Name);
+
 				OleDbConnection conn = new OleDbConnection(_Config.SourceConnectionString);
 				OleDbDataAdapter adapter = new OleDbDataAdapter(string.Format(item.Sql, key), conn);
 				OleDbCommandBuilder cmd = new OleDbCommandBuilder(adapter);
@@ -501,6 +557,9 @@ namespace ArcSpooler.UI
 		/// <param name="geoPDF">Doc</param>
 		private void SavePDF(string key, IMapDocument doc, bool createGeoPDF)
 		{
+      if (log.IsDebugEnabled)
+        log.Debug("Saving PDF " + key);
+
 			//IExport pdfExporter = createGeoPDF ?
 			//	new ExportGeoPDFClass() { } as IExport :
 			//	new ExportPDFClass() { EmbedFonts = true } as IExport;
@@ -584,6 +643,9 @@ namespace ArcSpooler.UI
 		/// <param name="name">Name</param>
 		public void SetSelection(string name)
 		{
+      if (log.IsDebugEnabled)
+        log.Debug("Setting selection set " + name);
+
 			_ProcessKeys.Clear();
 			foreach (string selection in _Config.SelectionSet(name))
 			{
@@ -671,8 +733,8 @@ namespace ArcSpooler.UI
 			if (log.IsDebugEnabled && _ErrorKeys.Count > 0)
 			{
 				log.Debug("Error items:");
-				foreach (string item in _ErrorKeys)
-					log.Debug("  " + item);
+				foreach (KeyValuePair<string, string> item in _ErrorKeys)
+					log.Debug(string.Format("  {0}:{1}", item.Key, item.Value));
 			}
 		} // WriteErrorJobs()
 
