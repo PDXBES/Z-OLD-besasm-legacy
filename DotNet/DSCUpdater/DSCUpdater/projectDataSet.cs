@@ -7,6 +7,9 @@ namespace DSCUpdater
 {
   public partial class ProjectDataSet
   {
+    partial class DSCEDITDataTable
+    {
+    }
 
     partial class MstDscDataTable
     {
