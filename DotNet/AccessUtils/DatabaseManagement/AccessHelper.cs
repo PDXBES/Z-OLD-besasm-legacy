@@ -6,6 +6,9 @@ using dao;
 using System.Reflection;
 //using Microsoft.Office.Interop.Access.Dao;
 using System.IO;
+using System.Data.SqlClient;
+using System.Data.OleDb;
+using System.Text;
 
 namespace SystemsAnalysis.Utils.AccessUtils
 {
@@ -21,12 +24,13 @@ namespace SystemsAnalysis.Utils.AccessUtils
     private bool disposed;
     private DateTime startTime;
     private Database CurrentDB;
+    private SqlConnection CurrentSQLDB;
 
     public static void CreateNewMdb(string database)
     {
       Assembly ass = Assembly.GetExecutingAssembly();
-      Stream stream = ass.GetManifestResourceStream("SystemsAnalysis.Utils.AccessUtils._empty.mdb");
-      Stream output = new FileStream(database, FileMode.Create);
+      System.IO.Stream stream = ass.GetManifestResourceStream("SystemsAnalysis.Utils.AccessUtils._empty.mdb");
+      System.IO.Stream output = new FileStream(database, FileMode.Create);
 
       byte[] buffer = new byte[32 * 1024];
       int read;
@@ -56,9 +60,34 @@ namespace SystemsAnalysis.Utils.AccessUtils
       accessApp = ShellGetDB(databaseName, 2000);
       //accessApp = new Access.Application();
       CurrentDB = this.accessApp.CurrentDb();
+      CurrentSQLDB = null;
 
       disposed = false;
     }
+
+    public AccessHelper(string databaseName, string SQLDatabaseName)
+    {
+        //force shutdown of access before we try to open a new instance of ms Access
+        //This is necessary because if we are doing many many runs, eventually
+        //access will fail to close completely (managed code doesn't always
+        //implement a destructor completely).
+        startTime = System.DateTime.Now;
+        accessApp = ShellGetDB(databaseName, 2000);
+        //accessApp = new Access.Application();
+        CurrentDB = this.accessApp.CurrentDb();
+        CurrentSQLDB = new SqlConnection(SQLDatabaseName/*"Data Source=WS09858\\SQLEXPRESS;Initial Catalog=PortlandHarbor;Integrated Security=True"*/);
+        try
+        {
+            CurrentSQLDB.Open();
+        }
+        catch (Exception ex)
+        {
+            //handle this
+        }
+
+        disposed = false;
+    }
+
 
     /// <summary>
     /// Links a single table in the specified Access database. The table will first be 
@@ -70,6 +99,10 @@ namespace SystemsAnalysis.Utils.AccessUtils
     public void LinkTable(string tableName, string sourceDatabase)
     {
       LinkTable(tableName, sourceDatabase, tableName);
+    }
+    public void SQLLinkTable(string tableName, string sourceDatabase)
+    {
+        SQLLinkTable(tableName, sourceDatabase, tableName);
     }
 
     /// <summary>
@@ -92,6 +125,43 @@ namespace SystemsAnalysis.Utils.AccessUtils
       linkTable.Connect = ";DATABASE=" + sourceDatabase;
       linkTable.SourceTableName = tableName;
       CurrentDB.TableDefs.Append(linkTable);
+    }
+
+    public void SQLLinkTable(string tableName, string sourceDatabase, string linkName)
+    {
+        System.Data.DataTable table = new System.Data.DataTable();
+        //dao.TableDef linkTable;
+        string linkTableConnection = ";DATABASE=" + sourceDatabase;
+        //linkTable.SourceTableName = tableName;
+
+        string DROPsql = "DROP TABLE " + tableName;
+        SqlCommand cmd = new SqlCommand(DROPsql, CurrentSQLDB);
+        try
+        {
+            cmd.ExecuteNonQuery();
+        }
+        catch (SqlException ae)
+        {
+            //Could not drop table
+        }
+        try
+        {
+            OleDbDataAdapter accDataAdapter = new OleDbDataAdapter("SELECT * FROM " + tableName, linkTableConnection);
+            accDataAdapter.Fill(table);
+
+            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter("SELECT * FROM " + tableName, CurrentSQLDB);
+            SqlCommandBuilder sqlCommandBuilder = new SqlCommandBuilder(sqlDataAdapter);
+            //sqlDataAdapter.InsertCommand = sqlCommandBuilder.GetInsertCommand();
+            sqlDataAdapter.UpdateCommand = sqlCommandBuilder.GetUpdateCommand();
+            //sqlDataAdapter.DeleteCommand = sqlCommandBuilder.GetDeleteCommand();
+            sqlDataAdapter.Update(table);
+        }
+        catch (Exception ex)
+        {
+            //if (accConnection.State == System.Data.ConnectionState.Open)
+                //accConnection.Close();
+            //MessageBox.Show("Import failed with error: " + ex.ToString)
+        }
     }
 
     /// <summary>
@@ -179,6 +249,42 @@ namespace SystemsAnalysis.Utils.AccessUtils
       CurrentDB.CreateQueryDef(queryName, queryText);
     }
 
+    public void SQLCreateVIEW(string queryName, string queryText)
+    {
+        SQLDeleteVIEW(queryName);
+        string CREATEsql = "CREATE VIEW " + queryName + " AS  " + queryText;
+        SqlCommand cmd = new SqlCommand(CREATEsql, CurrentSQLDB);
+        cmd.CommandType = System.Data.CommandType.Text;
+        try
+        {
+            cmd.Prepare();
+            cmd.ExecuteNonQuery();
+        }
+        catch (SqlException ae)
+        {
+            //Handle this
+        }
+        return;
+    }
+
+    public void SQLCreatePROCEDURE(string queryName, string queryText)
+    {
+        SQLDeletePROCEDURE(queryName);
+        string CREATEsql = "CREATE PROCEDURE " + queryName + " AS  BEGIN " + queryText + " END";
+        SqlCommand cmd = new SqlCommand(CREATEsql, CurrentSQLDB);
+        cmd.CommandType = System.Data.CommandType.Text;
+        try
+        {
+            cmd.Prepare();
+            cmd.ExecuteNonQuery();
+        }
+        catch (SqlException ae)
+        {
+            //Handle this
+        }
+        return;
+    }
+
     /// <summary>
     /// Deletes a query from the current database.
     /// </summary>
@@ -192,6 +298,36 @@ namespace SystemsAnalysis.Utils.AccessUtils
       return;
     }
 
+    public void SQLDeleteVIEW(string queryName)
+    {
+        string DROPsql = "DROP VIEW " + queryName;
+        SqlCommand cmd = new SqlCommand(DROPsql, CurrentSQLDB);
+        try
+        {
+            cmd.ExecuteNonQuery();
+        }
+        catch (SqlException ae)
+        {
+            //Could not drop table
+        }
+        return;
+    }
+
+    public void SQLDeletePROCEDURE(string queryName)
+    {
+        string DROPsql = "DROP PROCEDURE " + queryName;
+        SqlCommand cmd = new SqlCommand(DROPsql, CurrentSQLDB);
+        try
+        {
+            cmd.ExecuteNonQuery();
+        }
+        catch (SqlException ae)
+        {
+            //Could not drop table
+        }
+        return;
+    }
+
     /// <summary>
     /// Executes an action query in the current database.
     /// </summary>
@@ -202,6 +338,67 @@ namespace SystemsAnalysis.Utils.AccessUtils
       queryDef = GetQueryDef(queryName);
       queryDef.Execute(null);
     }
+
+    public void SQLExecuteActionQuery(string queryName)
+    {
+        SqlCommand cmd = new SqlCommand();
+        Int32 rowsAffected;
+
+        cmd.CommandText = queryName;
+        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+        cmd.Connection = CurrentSQLDB;
+
+        rowsAffected = cmd.ExecuteNonQuery();
+        /*string EXECUTEsql = queryName;
+        SqlCommand cmd = new SqlCommand(EXECUTEsql, CurrentSQLDB);
+        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+        try
+        {
+            cmd.ExecuteNonQuery();
+        }
+        catch (SqlException ae)
+        {
+            //Could not drop table
+        }*/
+    }
+
+    public void SQLExecuteActionQuery(string queryName, string parameterName, int parameter)
+    {
+        SqlCommand cmd = new SqlCommand();
+        Int32 rowsAffected;
+
+        cmd.CommandText = queryName;
+        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+        cmd.Connection = CurrentSQLDB;
+
+        cmd.Parameters.Add(new SqlParameter(parameterName, OleDbType.Integer)).Value = parameter;
+
+        /*string EXECUTEsql = queryName;
+        SqlCommand cmd = new SqlCommand(EXECUTEsql, CurrentSQLDB);
+        cmd.CommandType = System.Data.CommandType.StoredProcedure;*/
+        try
+        {
+            rowsAffected = cmd.ExecuteNonQuery();
+        }
+        catch (SqlException ae)
+        {
+            //Could not drop table
+        }
+    }
+    
+      public void SetSQLGridVariable(string varName, double theValue)
+      {
+          string UPDATEsql = "UPDATE GRID_variables SET Value = " + theValue.ToString() + " WHERE Variable ='" + varName + "'";
+          SqlCommand cmd = new SqlCommand(UPDATEsql, CurrentSQLDB);
+        try
+        {
+            cmd.ExecuteNonQuery();
+        }
+        catch (SqlException ae)
+        {
+            //Could not drop table
+        }
+      }
 
     /// <summary>
     /// translates a CSV file to an access file for MapInfo consumption
@@ -381,59 +578,82 @@ namespace SystemsAnalysis.Utils.AccessUtils
       accessApp.DoCmd.TransferText(Microsoft.Office.Interop.Access.AcTextTransferType.acExportDelim,
          Type.Missing, tableName, outputFile, true, Type.Missing, Type.Missing);
       return;
-      /*StreamWriter streamWriter;
-      try
-      {
-          if (File.Exists(outputFile))
-          {
-              File.Delete(outputFile);
-          }
-          streamWriter = new StreamWriter(outputFile);
-      }
-      catch (Exception ex)
-      {
-          throw new Exception("Could not create file ' " + outputFile + "': " + ex.Message);
-      }
+    }
 
-      try
-      {
-          dao.TableDef tableDef;
-          tableDef = GetTableDef(tableName);
-          if (tableDef == null)
-          {
-              throw new Exception("Table " + tableName + " not found");
-          }
-          dao.Recordset recordSet;
-          recordSet = tableDef.OpenRecordset(Type.Missing, Type.Missing);
-          dao.Fields fields = recordSet.Fields;
-          for (int i = 0; i < fields.Count - 1; i++)
-          {
-              streamWriter.Write((string)fields[i].Name.ToString());
-              streamWriter.Write(", ");
-          }
-          streamWriter.WriteLine(fields[fields.Count - 1].Name.ToString());
+    public void SQLExportTable(string tableName, string strFilePath, FileType exportType)
+    {
+        System.Data.DataTable dt = new System.Data.DataTable();
+        //dao.TableDef linkTable;
 
-          recordSet.MoveFirst();
-          while (!recordSet.EOF)
-          {
-              for (int i = 0; i < fields.Count - 1; i++)
-              {
-                  streamWriter.Write((string)fields[i].Value.ToString());
-                  streamWriter.Write(", ");
-              }
-              streamWriter.WriteLine(fields[fields.Count - 1].Value.ToString());
-              recordSet.MoveNext();
-          }
-      }
-      catch (Exception ex)
-      {
-          throw new Exception("Could not write ' " + outputFile + "': " + ex.Message);
-      }
-      finally
-      {
-          streamWriter.Close();
-      }
-      return;*/
+        try
+        {
+            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter("SELECT * FROM " + tableName, CurrentSQLDB);
+            SqlCommandBuilder sqlCommandBuilder = new SqlCommandBuilder(sqlDataAdapter);
+            sqlDataAdapter.Fill(dt);
+
+            // Create the CSV file to which grid data will be exported.
+
+            StreamWriter sw = new StreamWriter(strFilePath, false);
+
+            // First we will write the headers.
+
+            //DataTable dt = m_dsProducts.Tables[0];
+
+            int iColCount = dt.Columns.Count;
+
+            for (int i = 0; i < iColCount; i++)
+            {
+
+                sw.Write(dt.Columns[i]);
+
+                if (i < iColCount - 1)
+                {
+
+                    sw.Write(",");
+
+                }
+
+            }
+
+            sw.Write(sw.NewLine);
+
+            // Now write all the rows.
+
+            foreach (System.Data.DataRow dr in dt.Rows)
+            {
+
+                for (int i = 0; i < iColCount; i++)
+                {
+
+                    if (!Convert.IsDBNull(dr[i]))
+                    {
+
+                        sw.Write(dr[i].ToString());
+
+                    }
+
+                    if (i < iColCount - 1)
+                    {
+
+                        sw.Write(",");
+
+                    }
+
+                }
+
+                sw.Write(sw.NewLine);
+
+            }
+
+            sw.Close();
+        }
+        catch (Exception ex)
+        {
+            //if (accConnection.State == System.Data.ConnectionState.Open)
+            //accConnection.Close();
+            //MessageBox.Show("Import failed with error: " + ex.ToString)
+        }
+
     }
 
     /// <summary>
@@ -472,6 +692,32 @@ namespace SystemsAnalysis.Utils.AccessUtils
         rs.MoveNext();
       }
       throw new Exception("UpdateKeyValueTable Exception: Key '" + key + "' not found.");
+    }
+
+    public void SQLWriteKeyValueTable(string tableName, string keyField, string key, string valueField, object value)
+    {
+        System.Data.DataTable dt = new System.Data.DataTable();
+        try
+        {
+            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter("SELECT * FROM " + tableName, CurrentSQLDB);
+            SqlCommandBuilder sqlCommandBuilder = new SqlCommandBuilder(sqlDataAdapter);
+            //sqlDataAdapter.InsertCommand = sqlCommandBuilder.GetInsertCommand();
+            sqlDataAdapter.UpdateCommand = sqlCommandBuilder.GetUpdateCommand();
+            //sqlDataAdapter.DeleteCommand = sqlCommandBuilder.GetDeleteCommand();
+            sqlDataAdapter.Fill(dt);
+
+            Dictionary<string, double> aggregateQueryResults;
+            aggregateQueryResults = new Dictionary<string, double>();
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                dt.Rows[i][keyField] = value;
+                dt.AcceptChanges();
+            }
+        }
+        catch (Exception ex)
+        {
+        }
+        return;
     }
 
     /// <summary>
@@ -831,6 +1077,40 @@ namespace SystemsAnalysis.Utils.AccessUtils
 
       }
       return aggregateQueryResults;
+    }
+
+    public Dictionary<string, double> SQLExecuteAggregateQueryDoubles(string queryName)
+    {
+        System.Data.DataTable dt = new System.Data.DataTable();
+        try
+        {
+            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter("SELECT * FROM " + queryName, CurrentSQLDB);
+            SqlCommandBuilder sqlCommandBuilder = new SqlCommandBuilder(sqlDataAdapter);
+            //sqlDataAdapter.InsertCommand = sqlCommandBuilder.GetInsertCommand();
+            //sqlDataAdapter.UpdateCommand = sqlCommandBuilder.GetUpdateCommand();
+            //sqlDataAdapter.DeleteCommand = sqlCommandBuilder.GetDeleteCommand();
+            sqlDataAdapter.Fill(dt);
+
+            Dictionary<string, double> aggregateQueryResults;
+            aggregateQueryResults = new Dictionary<string, double>();
+            for (int i = 0; i < dt.Columns.Count; i++)
+            {
+                if (!Convert.IsDBNull(dt.Rows[0][i]))
+                {
+                    aggregateQueryResults.Add(dt.Columns[i].ColumnName, (double)dt.Rows[0][i]);
+                }
+                else
+                {
+                    aggregateQueryResults.Add(dt.Columns[i].ColumnName, (double)0);
+                }
+
+            }
+            return aggregateQueryResults;
+        }
+        catch (Exception ex)
+        {
+        }
+        return null;
     }
   }
 }

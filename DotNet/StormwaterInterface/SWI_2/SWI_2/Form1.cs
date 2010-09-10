@@ -1296,5 +1296,10 @@ namespace SWI_2
             }
             textBoxDitchesUSNode.Text = textBoxDitchesUSNode.Text.Trim();
         }
+
+        private void ultraNumericEditorPipesInnerWidth_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
