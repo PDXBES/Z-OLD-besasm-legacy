@@ -3,6 +3,10 @@
 
     public partial class GridInterfaceDataSet
     {
+        partial class FEProcessDataTable
+        {
+        }
+    
         public bool ModelRunExists(int scenarioID, int selectionSetAreaID, int hyetographID)
         {
             foreach (GridInterfaceDataSet.FEModelRunRow modelRunRow in this.FEModelRun)

@@ -168,7 +168,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis
         /// <returns>A GridModelOutput object containing model run metadata</returns>
         public GridModelOutput ExecuteModels()
         {
-            accessHelper = new AccessHelper(gridModelPath, "Data Source=WS09858\\SQLEXPRESS;Initial Catalog=PortlandHarbor;Integrated Security=True");
+            accessHelper = new AccessHelper(gridModelPath, /*"Data Source=WS09858\\SQLEXPRESS;Initial Catalog=PortlandHarbor;Integrated Security=True"*/"Data Source=SIRTOBY;Initial Catalog=SANDBOX;Persist Security Info=True;User ID=GIS;Password=Extra$hade");
 
             GridModelOutput gridModelOutput = new GridModelOutput();            
             foreach (GridModelRun gridModelRun in gridModelRuns)
@@ -209,13 +209,18 @@ namespace SystemsAnalysis.Grid.GridAnalysis
 
             CreatePRFListQuery(gridModelRun.InstreamFacilities, gridModelRun.TimePeriod);
             CreateBMPUnionQuery();*/
-            CreateCalcTableQuery(gridModelRun.SelectionSetAreaID);
 
+            //create calcTableQuery should be part of the main procedure query
+            //CreateCalcTableQuery(gridModelRun.SelectionSetAreaID);
+
+            //rainfall may be able to just be a database table update
             double rainfall;
 
+            //runcount may also be a SQL stored procedure loop
             int runCount = 1;
             int totalRunCount = gridModelRun.GridModelTimeSteps.Count;
 
+            //this could be part of the sql stored procedure loop
             foreach (GridModelTimeStep gridModelTimeStep in gridModelRun.GridModelTimeSteps)
             {
                 rainfall = gridModelTimeStep.Rainfall;
@@ -251,25 +256,37 @@ namespace SystemsAnalysis.Grid.GridAnalysis
         private void ExecuteTimeStep(GridModelRun gridModelRun, double rainfall)
         {
             SetRainfall(rainfall);
-
+            //string massiveStoredProcedure =  "";
+            //This set of procedures should instead be replaced by dynamically creating the stored procedure to execute these
+            //processes within SQL server.  That should cut down on process time by quite a bit.
             foreach (GridProcessGroup gridProcessGroup in gridModelRun.GridProcessGroups.OrderBy(gridProcessGroup => gridProcessGroup.GroupOrder))
             {
-                foreach (GridProcess gridProcess in gridProcessGroup.GridProcesses.OrderBy(gridProcess => gridProcess.ProcessOrder))
-                {
+                //foreach (GridProcess gridProcess in gridProcessGroup.GridProcesses.OrderBy(gridProcess => gridProcess.ProcessOrder))
+                //{
                     try
                     {
-                        this.StatusChanged(gridModelRun.ModelDescription + ": Executing process '" + gridProcess.ProcessName + "'");
-                        accessHelper.SQLExecuteActionQuery(gridProcess.ProcessName);
+                        this.StatusChanged(gridModelRun.ModelDescription + ": Executing process '" + gridProcessGroup.GroupName + "'");/*gridProcess.ProcessName + "'");*/
+                            if(gridProcessGroup.GroupName == "GRID_SETUP" || gridProcessGroup.GroupName == "GRID_RUNOFF")
+                            {
+                                accessHelper.SQLExecuteActionQuery(gridProcessGroup.GroupName,"@SelectionSetID", gridModelRun.SelectionSetAreaID);
+                            }else{
+                                accessHelper.SQLExecuteActionQuery(gridProcessGroup.GroupName);
+                            }
+                        //accessHelper.SQLExecuteActionQuery(gridProcess.ProcessName);
+                        //massiveStoredProcedure = massiveStoredProcedure + " EXEC " + gridProcessGroup.GroupName + " ";//gridProcess.ProcessName + " ";
                     }
                     catch (Exception ex)
                     {
-                        if (gridProcess.Critical)
+                        /*if (gridProcess.Critical)
                         {
                             throw new Exception("Unable to execute critical Grid Query '" + gridProcess.ProcessName + "': " + ex.Message);
-                        }
+                        }*/
                     }
-                }
+               //}
             }
+            //just execute the whole stored procedure here
+            //accessHelper.SQLCreatePROCEDURE("GRID_MASSPROC", massiveStoredProcedure);
+            //accessHelper.SQLExecuteActionQuery("GRID_MASSPROC");
             return;
         }
 
@@ -287,7 +304,6 @@ namespace SystemsAnalysis.Grid.GridAnalysis
                 runDescription = runDescription.PadLeft(totalRunCountToString.Length, '0');
             }
             return runDescription;
-
         }
 
         private void SetGridVariable(string name, double value)

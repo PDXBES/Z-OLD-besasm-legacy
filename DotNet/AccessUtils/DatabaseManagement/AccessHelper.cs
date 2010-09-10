@@ -262,7 +262,7 @@ namespace SystemsAnalysis.Utils.AccessUtils
         }
         catch (SqlException ae)
         {
-            //Could not drop table
+            //Handle this
         }
         return;
     }
@@ -270,7 +270,7 @@ namespace SystemsAnalysis.Utils.AccessUtils
     public void SQLCreatePROCEDURE(string queryName, string queryText)
     {
         SQLDeletePROCEDURE(queryName);
-        string CREATEsql = "CREATE PROCEDURE " + queryName + " AS  " + queryText;
+        string CREATEsql = "CREATE PROCEDURE " + queryName + " AS  BEGIN " + queryText + " END";
         SqlCommand cmd = new SqlCommand(CREATEsql, CurrentSQLDB);
         cmd.CommandType = System.Data.CommandType.Text;
         try
@@ -280,7 +280,7 @@ namespace SystemsAnalysis.Utils.AccessUtils
         }
         catch (SqlException ae)
         {
-            //Could not drop table
+            //Handle this
         }
         return;
     }
@@ -361,10 +361,34 @@ namespace SystemsAnalysis.Utils.AccessUtils
             //Could not drop table
         }*/
     }
+
+    public void SQLExecuteActionQuery(string queryName, string parameterName, int parameter)
+    {
+        SqlCommand cmd = new SqlCommand();
+        Int32 rowsAffected;
+
+        cmd.CommandText = queryName;
+        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+        cmd.Connection = CurrentSQLDB;
+
+        cmd.Parameters.Add(new SqlParameter(parameterName, OleDbType.Integer)).Value = parameter;
+
+        /*string EXECUTEsql = queryName;
+        SqlCommand cmd = new SqlCommand(EXECUTEsql, CurrentSQLDB);
+        cmd.CommandType = System.Data.CommandType.StoredProcedure;*/
+        try
+        {
+            rowsAffected = cmd.ExecuteNonQuery();
+        }
+        catch (SqlException ae)
+        {
+            //Could not drop table
+        }
+    }
     
-      public void SetSQLGridVariable(/*"Precip"*/string varName, double rainfall)
+      public void SetSQLGridVariable(string varName, double theValue)
       {
-          string UPDATEsql = "UPDATE GRID_variables SET Value = " + rainfall.ToString() + " WHERE Variable ='" + varName + "'";
+          string UPDATEsql = "UPDATE GRID_variables SET Value = " + theValue.ToString() + " WHERE Variable ='" + varName + "'";
           SqlCommand cmd = new SqlCommand(UPDATEsql, CurrentSQLDB);
         try
         {
