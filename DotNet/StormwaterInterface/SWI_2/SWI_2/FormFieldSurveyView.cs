@@ -106,6 +106,7 @@ namespace SWI_2
                         sANDBOXDataSet.DataTableFieldSurvey.LoadDataRow(r.ItemArray, false);
                         sANDBOXDataSet.DataTableFieldSurvey.EndLoadData();
                         sANDBOXDataSet.DataTableFieldSurvey.AcceptChanges();
+                        this.swsP_PHOTOTableAdapter1.InsertQuery(tempGlobal_id, "", "");
                     }
 
                     if (r.RowState == DataRowState.Modified)
@@ -286,15 +287,17 @@ namespace SWI_2
                 {
                     culvert_opening_type = (int)((DataRow)sANDBOXDataSet.SWSP_CULVERT_OPENING_TYPE.Select("culvert_opening = '" + (string)r["culvert_opening"] + "'")[0]).ItemArray[0];
                 }
+                if (r["photo_id"] is System.DBNull) { r["photo_id"] = " "; }
                 //if the global_id is negative, then we are adding a record
+                int old_global_id = (int)r["global_id"];
                 if ((int)r["global_id"] < 0)
                 {
-                    
+                    int globalID = 0;
                     //the transfer of this data should be handled simply to the linkinfo datasource
                     //insert based on the value in the link type column
                     if ((string)r["linktype"] == "Pipe")
                     {
-                        int globalID = 0;
+                        
                         //adding a pipe means:
                         //placing a new entry in the globalID table,
                         //taking that value and using it to create a new pipe
@@ -312,12 +315,11 @@ namespace SWI_2
                                                             (double?)((r["dimension2"] is System.DBNull) ? null : (double?)r["dimension2"]),
                                                             material_id,
                                                             shape_id,
-                                                            "",
+                                                            (string)r["photo_id"],
                                                             (int?)((r["length_ft"] is System.DBNull) ? null :(int?)r["length_ft"]));
                     }
                     else if ((string)r["linktype"] == "Ditch")
                     {
-                        int globalID = 0;
                         //adding a ditch means:
                         //placing a new entry in the globalID table,
                         //taking that value and using it to create a new ditch
@@ -333,14 +335,13 @@ namespace SWI_2
                                                             (double?)((r["dimension1"] is System.DBNull) ? null : (double?)r["dimension1"]),
                                                             (double?)((r["dimension2"] is System.DBNull) ? null : (double?)r["dimension2"]),
                                                             material_id,
-                                                            "",
+                                                            (string)r["photo_id"],
                                                             (string)r["ds_node"],
                                                             (string)r["us_node"],
                                                             (int?)((r["length_ft"] is System.DBNull) ? null : (int?)r["length_ft"]));
                     }
                     else if ((string)r["linktype"] == "Culvert")
                     {
-                        int globalID = 0;
                         //adding a culvert means:
                         //placing a new entry in the globalID table,
                         //taking that value and using it to create a new culvert
@@ -358,11 +359,13 @@ namespace SWI_2
                                                             (double?)((r["dimension2"] is System.DBNull) ? null : (double?)r["dimension2"]),
                                                             (double?)((r["dimension3"] is System.DBNull) ? null : (double?)r["dimension3"]),
                                                             material_id,
-                                                            "",
+                                                            (string)r["photo_id"],
                                                             (string)r["ds_node"],
                                                             (string)r["us_node"],
                                                             (int?)((r["length_ft"] is System.DBNull) ? null : (int?)r["length_ft"]));
                     }
+
+                    this.swsP_PHOTOTableAdapter1.UpdateQueryNewGlobalID(globalID, old_global_id);
                 }
                 else if (r["action"] is System.DBNull)
                 {
@@ -413,7 +416,7 @@ namespace SWI_2
                                                             (double?)((r["dimension2"] is System.DBNull) ? null : (double?)r["dimension2"]),
                                                             material_id,
                                                             shape_id,
-                                                            "",
+                                                            (string)r["photo_id"],
                                                             (int?)((r["length_ft"] is System.DBNull) ? null : (int?)r["length_ft"])
                                                             );
                         }
@@ -428,7 +431,7 @@ namespace SWI_2
                                                             (double?)((r["dimension2"] is System.DBNull) ? null : (double?)r["dimension2"]),
                                                             material_id,
                                                             shape_id,
-                                                            "",
+                                                            (string)r["photo_id"],
                                                             (int?)((r["length_ft"] is System.DBNull) ? null : (int?)r["length_ft"]),
                                                             (int)r["global_id"]);
                         }
@@ -451,7 +454,7 @@ namespace SWI_2
                                                                 (double?)((r["dimension1"] is System.DBNull) ? null : (double?)r["dimension1"]),
                                                                 (double?)((r["dimension2"] is System.DBNull) ? null : (double?)r["dimension2"]),
                                                                 material_id,
-                                                                "",
+                                                                (string)r["photo_id"],
                                                                 ((r["ds_node"] is System.DBNull) ? "" : (string)r["ds_node"]),
                                                                 ((r["us_node"] is System.DBNull) ? "" : (string)r["us_node"]),
                                                                 (int?)((r["length_ft"] is System.DBNull) ? null : (int?)r["length_ft"])
@@ -467,7 +470,7 @@ namespace SWI_2
                                                                 (double?)((r["dimension1"] is System.DBNull) ? null : (double?)r["dimension1"]),
                                                                 (double?)((r["dimension2"] is System.DBNull) ? null : (double?)r["dimension2"]),
                                                                 material_id,
-                                                                "",
+                                                                (string)r["photo_id"],
                                                                 ((r["ds_node"] is System.DBNull) ? "" : (string)r["ds_node"]),
                                                                 ((r["us_node"] is System.DBNull) ? "" : (string)r["us_node"]),
                                                                 (int?)((r["length_ft"] is System.DBNull) ? null : (int?)r["length_ft"]),
@@ -494,7 +497,7 @@ namespace SWI_2
                                                                 (double?)((r["dimension2"] is System.DBNull) ? null : (double?)r["dimension2"]),
                                                                 (double?)((r["dimension3"] is System.DBNull) ? null : (double?)r["dimension3"]),
                                                                 material_id,
-                                                                "",
+                                                                (string)r["photo_id"],
                                                                 ((r["ds_node"] is System.DBNull) ? "" : (string)r["ds_node"]),
                                                                 ((r["us_node"] is System.DBNull) ? "" : (string)r["us_node"]),
                                                                 (int?)((r["length_ft"] is System.DBNull) ? null : (int?)r["length_ft"])
@@ -512,7 +515,7 @@ namespace SWI_2
                                                                 (double?)((r["dimension2"] is System.DBNull) ? null : (double?)r["dimension2"]),
                                                                 (double?)((r["dimension3"] is System.DBNull) ? null : (double?)r["dimension3"]),
                                                                 material_id,
-                                                                "",
+                                                                (string)r["photo_id"],
                                                                 ((r["ds_node"] is System.DBNull) ? "" : (string)r["ds_node"]),
                                                                 ((r["us_node"] is System.DBNull) ? "" : (string)r["us_node"]),
                                                                 (int?)((r["length_ft"] is System.DBNull) ? null : (int?)r["length_ft"]),
@@ -520,6 +523,11 @@ namespace SWI_2
                         }
                     }
                 }
+
+                //update all of the photos that had the previous global_id to the new global_id
+                //this. sWSP_DITCHTableAdapter.GetDataByGlobalID((int)r["global_id"]).Count < 1));
+                //this.swsP_PHOTOTableAdapter1.UpdateQueryNewGlobalID(;
+
                 else if ((int)r["action"] == 1)
                 {
                     if ((string)r["linktype"] == "Pipe")
@@ -744,6 +752,29 @@ namespace SWI_2
                 {
                     fKSURVEYPAGEVIEWBindingSource.MoveNext();
                 }
+            }
+        }
+
+        private void dataGridViewLinkInfo_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 10)//check whether is it button column or not.....
+            {
+                int currentrow = this.dataGridViewLinkInfo.CurrentRow.Index;
+                this.dataGridViewLinkInfo.CurrentRow.DataGridView.EndEdit();
+                this.dataGridViewLinkInfo.EndEdit();
+                CurrencyManager cm = (CurrencyManager)dataGridViewLinkInfo.BindingContext[dataGridViewLinkInfo.DataSource, dataGridViewLinkInfo.DataMember];
+                cm.EndCurrentEdit();
+                PopulateLinkInfo();
+
+                this.dataGridViewLinkInfo.CurrentCell = dataGridViewLinkInfo.Rows[currentrow].Cells[0];
+
+                dataGridViewLinkInfo.Rows[currentrow].Selected = true;
+                FormPhotos child = new FormPhotos();
+
+                child.GlobalID = (int)((System.Data.DataRowView)dataTableFieldSurveyEditableBindingSource.Current)["global_id"];
+                this.Enabled = false;
+                child.ShowDialog();
+                this.Enabled = true;
             }
         }
     }
