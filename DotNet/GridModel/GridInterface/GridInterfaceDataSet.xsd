@@ -1021,7 +1021,7 @@ ORDER BY group_order</CommandText>
               <xs:element name="process_group" msprop:Generator_UserColumnName="process_group" msprop:Generator_ColumnPropNameInRow="process_group" msprop:Generator_ColumnVarNameInTable="columnprocess_group" msprop:Generator_ColumnPropNameInTable="process_groupColumn" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
-                    <xs:maxLength value="50" />
+                    <xs:maxLength value="60" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
@@ -1035,7 +1035,7 @@ ORDER BY group_order</CommandText>
               <xs:element name="process_group" msprop:Generator_UserColumnName="process_group" msprop:Generator_ColumnPropNameInRow="process_group" msprop:Generator_ColumnVarNameInTable="columnprocess_group" msprop:Generator_ColumnPropNameInTable="process_groupColumn" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
-                    <xs:maxLength value="10" />
+                    <xs:maxLength value="20" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
@@ -1058,7 +1058,7 @@ ORDER BY group_order</CommandText>
               <xs:element name="process_group" msprop:Generator_UserColumnName="process_group" msprop:Generator_ColumnPropNameInRow="process_group" msprop:Generator_ColumnVarNameInTable="columnprocess_group" msprop:Generator_ColumnPropNameInTable="process_groupColumn">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
-                    <xs:maxLength value="10" />
+                    <xs:maxLength value="20" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
