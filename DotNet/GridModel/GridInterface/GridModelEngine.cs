@@ -98,13 +98,13 @@ namespace SystemsAnalysis.Grid.GridAnalysis
             int bmpSourceCount = 0;
             if (prfPath != "")
             {
-                accessHelper.SQLLinkTable(bmpTableName, prfPath);
+                accessHelper.SQLCopyAccessTable(bmpTableName, prfPath, "GRID_" + bmpTableName);
                 bmpUnionQuery += "SELECT * FROM GRID_PRF_LIST ";
                 bmpSourceCount++;
             }
             if (mipPath != "")
             {
-                accessHelper.SQLLinkTable(mipTableName, mipPath);
+                accessHelper.SQLCopyAccessTable(mipTableName, mipPath, "GRID_" + mipTableName);
                 if (bmpSourceCount > 0)
                 {
                     bmpUnionQuery += "UNION ";
@@ -114,7 +114,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis
             }
             if (osfPath != "")
             {
-                accessHelper.SQLLinkTable(osfTableName, osfPath);
+                accessHelper.SQLCopyAccessTable(osfTableName, osfPath, "GRID_" + osfTableName);
                 if (bmpSourceCount > 0)
                 {
                     bmpUnionQuery += "UNION ";
@@ -177,10 +177,10 @@ namespace SystemsAnalysis.Grid.GridAnalysis
                 {
                     this.StatusChanged("Executing " + gridModelRun.ModelDescription);
                     /////Moved from ExecuteModel
-                    accessHelper.SQLLinkTable(gridDataTableName, gridDataPath);
-                    accessHelper.SQLLinkTable(gridModelRun.BMPEffectivenessTable,
+                    accessHelper.SQLCopyAccessTable(gridDataTableName, gridDataPath, "GRID_" + gridDataTableName);
+                    accessHelper.SQLCopyAccessTable(gridModelRun.BMPEffectivenessTable,
                         gridModelRun.BMPEffectivenessDB, "GRID_BMP_PERFORMANCE");
-                    accessHelper.SQLLinkTable(gridModelRun.PollutantLoadingTable,
+                    accessHelper.SQLCopyAccessTable(gridModelRun.PollutantLoadingTable,
                         gridModelRun.PollutantLoadingDB, "GRID_pollutant_loadings");
 
                     CreatePRFListQuery(gridModelRun.InstreamFacilities, gridModelRun.TimePeriod);
@@ -201,37 +201,20 @@ namespace SystemsAnalysis.Grid.GridAnalysis
         }
         private void ExecuteModel(GridModelRun gridModelRun)
         {            
-            /*accessHelper.SQLLinkTable(gridDataTableName, gridDataPath);
-            accessHelper.SQLLinkTable(gridModelRun.BMPEffectivenessTable,
-                gridModelRun.BMPEffectivenessDB, "GRID_BMP_PERFORMANCE");
-            accessHelper.SQLLinkTable(gridModelRun.PollutantLoadingTable,
-                gridModelRun.PollutantLoadingDB, "GRID_pollutant_loadings");
-
-            CreatePRFListQuery(gridModelRun.InstreamFacilities, gridModelRun.TimePeriod);
-            CreateBMPUnionQuery();*/
-
-            //create calcTableQuery should be part of the main procedure query
-            //CreateCalcTableQuery(gridModelRun.SelectionSetAreaID);
-
-            //rainfall may be able to just be a database table update
-            double rainfall;
-
             //runcount may also be a SQL stored procedure loop
             int runCount = 1;
             int totalRunCount = gridModelRun.GridModelTimeSteps.Count;
 
+            ExecuteTimeSteps(gridModelRun);
             //this could be part of the sql stored procedure loop
             foreach (GridModelTimeStep gridModelTimeStep in gridModelRun.GridModelTimeSteps)
             {
-                rainfall = gridModelTimeStep.Rainfall;
-                ExecuteTimeStep(gridModelRun, rainfall);
-
                 this.StatusChanged(gridModelRun.ModelDescription + ": " + "Exporting results");
 
                 string runDescription = GetFormattedRunCount(runCount, totalRunCount);
                 string outputFile = outputDirectory + "\\" + gridModelRun.Area + "_" + gridModelRun.SubArea + "\\" + gridModelRun.ScenarioDescription + "\\" + runDescription + "_" + gridModelTimeStep.Comment + ".csv";
 
-                ExportResults(outputFile);
+                ExportResultsAllTimeSteps(outputFile);
                 GridModelResult gridModelResult;
                 gridModelResult = new GridModelResult(outputFile, gridModelRun.Area, gridModelRun.SubArea, gridModelRun.ModelDescription, gridModelTimeStep.Comment);
                 gridModelResults.Add(gridModelResult);
@@ -253,40 +236,36 @@ namespace SystemsAnalysis.Grid.GridAnalysis
             }
             return;
         }
-        private void ExecuteTimeStep(GridModelRun gridModelRun, double rainfall)
+
+        private void ExecuteTimeSteps(GridModelRun gridModelRun)
         {
-            SetRainfall(rainfall);
-            //string massiveStoredProcedure =  "";
-            //This set of procedures should instead be replaced by dynamically creating the stored procedure to execute these
-            //processes within SQL server.  That should cut down on process time by quite a bit.
             foreach (GridProcessGroup gridProcessGroup in gridModelRun.GridProcessGroups.OrderBy(gridProcessGroup => gridProcessGroup.GroupOrder))
             {
-                //foreach (GridProcess gridProcess in gridProcessGroup.GridProcesses.OrderBy(gridProcess => gridProcess.ProcessOrder))
-                //{
-                    try
+                try
+                {
+                    this.StatusChanged(gridModelRun.ModelDescription + ": Executing process '" + gridProcessGroup.GroupName + "'");/*gridProcess.ProcessName + "'");*/
+                    if (gridProcessGroup.GroupName == "GRID_SETUP_RAINMESH" )
                     {
-                        this.StatusChanged(gridModelRun.ModelDescription + ": Executing process '" + gridProcessGroup.GroupName + "'");/*gridProcess.ProcessName + "'");*/
-                            if(gridProcessGroup.GroupName == "GRID_SETUP" || gridProcessGroup.GroupName == "GRID_RUNOFF")
-                            {
-                                accessHelper.SQLExecuteActionQuery(gridProcessGroup.GroupName,"@SelectionSetID", gridModelRun.SelectionSetAreaID);
-                            }else{
-                                accessHelper.SQLExecuteActionQuery(gridProcessGroup.GroupName);
-                            }
-                        //accessHelper.SQLExecuteActionQuery(gridProcess.ProcessName);
-                        //massiveStoredProcedure = massiveStoredProcedure + " EXEC " + gridProcessGroup.GroupName + " ";//gridProcess.ProcessName + " ";
+                        accessHelper.SQLExecuteActionQuery(gridProcessGroup.GroupName, "@SelectionSetID", gridModelRun.SelectionSetAreaID, "@ProjectID", ProjectID);
                     }
-                    catch (Exception ex)
+                    else if (gridProcessGroup.GroupName == "GRID_RUNOFF_RAINMESH")
                     {
-                        /*if (gridProcess.Critical)
-                        {
-                            throw new Exception("Unable to execute critical Grid Query '" + gridProcess.ProcessName + "': " + ex.Message);
-                        }*/
+                        accessHelper.SQLExecuteActionQuery(gridProcessGroup.GroupName, "@SelectionSetID", gridModelRun.SelectionSetAreaID);
                     }
-               //}
+                    else
+                    {
+                        accessHelper.SQLExecuteActionQuery(gridProcessGroup.GroupName);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    /*if (gridProcess.Critical)
+                    {
+                        throw new Exception("Unable to execute critical Grid Query '" + gridProcess.ProcessName + "': " + ex.Message);
+                    }*/
+                }
             }
-            //just execute the whole stored procedure here
-            //accessHelper.SQLCreatePROCEDURE("GRID_MASSPROC", massiveStoredProcedure);
-            //accessHelper.SQLExecuteActionQuery("GRID_MASSPROC");
+
             return;
         }
 
@@ -320,6 +299,23 @@ namespace SystemsAnalysis.Grid.GridAnalysis
         private void SetRainfall(double rainfall)
         {
             accessHelper.SetSQLGridVariable("Precip", rainfall);
+        }
+
+        private void ExportResultsAllTimeSteps(string outputFileName)
+        {
+            if (!Directory.Exists(Path.GetFullPath(outputFileName)))
+            {
+                Directory.CreateDirectory(Path.GetDirectoryName(outputFileName));
+            }
+            try
+            {
+                accessHelper.SQLExportTablePortion("GRID_GridResults", outputFileName, AccessHelper.FileType.CSV, "comment", (Path.GetFileNameWithoutExtension(outputFileName)).Remove(0,3));
+            }
+            catch (System.Runtime.InteropServices.COMException ex)
+            {
+                accessHelper.SQLExportTablePortion("GRID_GridResults", outputFileName, AccessHelper.FileType.CSV, "comment", (Path.GetFileNameWithoutExtension(outputFileName)).Remove(0,3));
+            }
+            return;
         }
 
         private void ExportResults(string outputFileName)

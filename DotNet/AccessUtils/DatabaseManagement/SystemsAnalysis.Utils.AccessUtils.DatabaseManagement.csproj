@@ -94,6 +94,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="AccessHelper.cs" />
+    <Compile Include="SqlTableCreator.cs" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="Access">
