@@ -1,0 +1,939 @@
+F77L-EM/32 FORTRAN 77 Version 5.10 (compiling for the 80386/80486) Tue Jan 11 16:56:05 2000 	Page:     1
+Copyright(c) 1988-1993, Lahey Computer Systems, Inc. ALL RIGHTS RESERVED
+
+PROGRAM AXTPARSE - Compiling Options:  /N0/N2/4/N7/NA2/B/NC/NC1/ND/NF/H/NI/NK/L/P/NQ1/NQ2/NQ3/R/NS/NT/NV/W/NX/Z1
+Source file Listing
+
+         1         PROGRAM AXTPARSE
+         2   c routine to automatically read SWMM4 EXTRAN Generic.out output file and 
+         3   c parse for spreadsheet format
+         4   c
+         5   c function is to read number of time steps, timing parameters, and
+         6   c  the depth, conduit flow fields from summary output section.
+         7   C     6/23/95:  Add in ability to create interface file
+         8   C     7/24/96:  AMM Added XTPARSER capabilities
+         9   C                 if no AXTPARSE.INP file found, assume XTPARSER functions.
+        10   C                 if no GENERIC.OUT file found, ask for an output file.
+        11   C                 XTPARSER outputs to EX_COND.CSV and EX_JUNC.CSV.
+        12   C                 XTPARSER at this time does not print out the runtime messages. 
+        13   C    10/17/96: VCA - Increase Format to write large numbers of hours
+        14   C     8/15/97: VCA - Correct writing of XFL & XHG Files for first time step
+        15   C     5/27/99: AMM - Increased element limit (MAXD) to 4000
+        16   C     1/11/2000: AMM - Fixed problem with reading incorrect Delta
+        17   C======================================================================
+        18         IMPLICIT NONE
+        19   
+        20         INCLUDE 'TAPESIR.INC'
+I1       1   C=======================================================================
+I1       2   C     NW   = NUMBER OF SUBCATCHMENTS IN THE RUNOFF BLOCK
+I1       3   C     NG   = NUMBER OF GUTTER/PIPES IN THE RUNOFF BLOCK
+I1       4   C     NET  = NUMBER OF ELEMENTS IN THE TRANSPORT BLOCK
+I1       5   C     NTH  = NUMBER OF INPUT HYDROGRAPHS IN TRANSPORT
+I1       6   C     NEE  = NUMBER OF ELEMENTS IN EXTRAN BLOCK
+I1       7   C     NGW  = NUMBER OF SUBCATCHMENTS WITH GROUNDWATER
+I1       8   C                     COMPARTMENTS IN RUNOFF
+I1       9   C     NIE  = NUMBER OF INTERFACE LOCATIONS FOR ALL BLOCKS
+I1      10   C     NEP  = NUMBER OF EXTRAN PUMPS
+I1      11   C     NEO  = NUMBER OF EXTRAN ORIFICES
+I1      12   C     NTG  = NUMBER OF TIDE GATES OR FREE OUTFALLS IN EXTRAN
+I1      13   C     NEW  = NUMBER OF EXTRAN WEIRS
+I1      14   C     NPO  = NUMBER OF EXTRAN PRINTOUT LOCATIONS
+I1      15   C     NTE  = NUMBER OF TIDE ELEMENTS IN EXTRAN
+I1      16   C     NNC  = NUMBER OF NATURAL CHANNELS IN EXTRAN AND TRANSPORT
+I1      17   C     NVSE = NUMBER OF STORAGE JUNCTIONS IN EXTRAN
+I1      18   C     NVST = NUMBER OF DATA POINTS FOR VARIABLE STORAGE ELEMENTS
+I1      19   C            IN THE EXTRAN BLOCK
+I1      20   C     NEH  = NUMBER OF INPUT HYDROGRAPHS IN THE EXTRAN BLOCK
+I1      21   C
+I1      22   C     INSTRUCTIONS - INCREASE DIMENSIONS OF SUBCATCHMENTS ETC.
+I1      23   C                    BY MODIFYING THE PARAMETER STATEMENT
+I1      24   C                    AND RECOMPILING YOUR PROGRAM
+I1      25   C=======================================================================
+I1      26         INTEGER*2 NW,NG,NET,NEE,NGW,NTH,NIE,NTE,NEW,NEO,NEP,NTG,NPO,NVSE,
+I1      27        +          NVST,NNC,NEH,INCNT,IOUTCT,JIN,JOUT,JCE,NSCRAT,N5,N6,JKP
+I1      28         PARAMETER(NW=1,NG=1,NET=1,NEE=1,NGW=1,NTH=1,
+I1      29        +          NIE=500,NTE=1,NEW=1,NEO=1,NEP=1,NTG=1,
+I1      30        +          NPO=1,NVSE=1,NVST=1,NNC=1,NEH=1)
+F77L-EM/32 FORTRAN 77 Version 5.10 (compiling for the 80386/80486) Tue Jan 11 16:56:05 2000 	Page:     2
+Copyright(c) 1988-1993, Lahey Computer Systems, Inc. ALL RIGHTS RESERVED
+
+PROGRAM AXTPARSE - Compiling Options:  /N0/N2/4/N7/NA2/B/NC/NC1/ND/NF/H/NI/NK/L/P/NQ1/NQ2/NQ3/R/NS/NT/NV/W/NX/Z1
+Source file Listing
+
+I1      31         CHARACTER*2 CC
+I1      32         COMMON /TAPES/INCNT,IOUTCT,JIN(25),JOUT(25),JCE,
+I1      33        *              NSCRAT(7),N5,N6,JKP(57),CC
+        21         INCLUDE 'INTER.INC'
+I2       1         CHARACTER    TITLE*80,SOURCE*20,PNAME*8,PUNIT*8,KAN*16
+I2       2         INTEGER NBD,NLOC,NDIM,NQUAL,LOCATS,IDATEZ,NEXT,LAST,NJCE
+I2       3         REAL TRIBA,TZERO,QCONV
+I2       4         COMMON/INTER1/NBD(6),NLOC(NIE),NDIM(10),TRIBA,TZERO,QCONV,
+I2       5        1              NQUAL,LOCATS,IDATEZ,NEXT,LAST,NJCE
+I2       6         COMMON/INTER2/SOURCE,PNAME(10),PUNIT(10),TITLE(4),KAN(NIE)
+        22         
+        23         CHARACTER DUMMY1*36,DUMMY3*6,SUR*1
+        24         CHARACTER DUMMY4*14,BLANK*10,AJUNC*10,ACOND*10,DUMMY5*13
+        25         CHARACTER ECOND*10
+        26         CHARACTER*40 SWMMFILE
+        27         LOGICAL HAMLET,HIT,XTPARSER
+        28         INTEGER MAXD,JSUR,ICOND,KCOND,JUNC,KJUNC,KACAD,KJ,
+        29        +  KC,I,J,N7,IPCON,NDT,NSTART,IPCYC,NCN,NC,
+        30        +  NJN,NJ,LINEC,NCEXTRA,LINEJ,JN,ICN,ICYC,IRD,
+        31        +  K,IC,NYEAR,JDAY,JULDAY,YESDAY,L,M,N,X
+        32         REAL PRTGD,PRTQ,CROWN,BOTTOM,PRTBOT,PRTCWN,ELEV,DEPTH,FLOW,
+        33        +  PRTE,GRND,DELT,DELTA,TIME,TIMDAY,SFLOW,A
+        34   C AMM 7/24/96 Added following array types
+        35         REAL LENGTH,DIAMTR,DNOFF,UPOFF,PRTLEN,PRTDIA,PRTDNO,PRTUPO
+        36   C
+        37         PARAMETER(MAXD=5000)
+        38         DIMENSION JUNC(MAXD),DEPTH(MAXD),ELEV(MAXD),FLOW(MAXD),
+        39        +  ICOND(MAXD),KJUNC(MAXD),KCOND(MAXD),IPCON(MAXD),
+        40        +  PRTE(MAXD),PRTQ(MAXD),SUR(MAXD),JSUR(MAXD),
+        41        +  GRND(MAXD),BOTTOM(MAXD),PRTGD(MAXD),PRTBOT(MAXD),
+        42        +  AJUNC(MAXD),ACOND(MAXD),PRTCWN(MAXD),CROWN(MAXD),SFLOW(MAXD),
+        43        +  LENGTH(MAXD),DIAMTR(MAXD),DNOFF(MAXD),UPOFF(MAXD),PRTLEN(MAXD),
+        44        +  PRTDIA(MAXD),PRTDNO(MAXD),PRTUPO(MAXD)
+        45   C AMM 6/22/95
+        46   C AXTPARSE.INP Data
+        47         CHARACTER AXTFILE*40,NMINT*40,NMROOT*40
+        48         INTEGER NCOND,ANODE,ACONDS
+        49         DIMENSION ANODE(MAXD),NCOND(MAXD),ACONDS(MAXD,8)
+        50   C      
+        51         DATA BLANK/'          '/
+        52   c
+        53   C check to see if requested junction/cond data has been output from acad
+        54   C Index KACAD used to indicate which files (junc or cond data) were
+        55   c requested.  KACAD=0->no request, KACAD=1->junc only, 
+        56   c KACAD=2->cond data only, KACAD=3->both
+        57   c
+        58         KACAD=0
+        59         KJ=0
+        60         KC=0
+        61         WRITE(*,'(A)') ' ******************************'
+F77L-EM/32 FORTRAN 77 Version 5.10 (compiling for the 80386/80486) Tue Jan 11 16:56:05 2000 	Page:     3
+Copyright(c) 1988-1993, Lahey Computer Systems, Inc. ALL RIGHTS RESERVED
+
+PROGRAM AXTPARSE - Compiling Options:  /N0/N2/4/N7/NA2/B/NC/NC1/ND/NF/H/NI/NK/L/P/NQ1/NQ2/NQ3/R/NS/NT/NV/W/NX/Z1
+Source file Listing
+
+        62         WRITE(*,'(A)') ' *** XTPARSER/Auto-XTPARSER ***'
+        63         WRITE(*,'(A)') ' ******************************'
+        64         WRITE(*,'(A/)') ' 1/11/2000 Build'
+        65         INQUIRE(FILE='AC_JUNC.DAT',EXIST=HAMLET)
+        66         IF(HAMLET)THEN
+        67           OPEN(55,ERR=3100,FILE='AC_JUNC.DAT',STATUS='OLD')
+        68           KACAD=1
+        69           DO 1 I=1,1000
+        70             READ(55,*,END=2,ERR=2)KJUNC(I)
+        71             IF(KJUNC(I).EQ.0)GO TO 2
+        72             KJ=KJ+1
+        73   1       CONTINUE
+        74   
+        75   2       CONTINUE
+        76   
+        77           IF(KJ.GT.500)THEN
+        78             WRITE(*,3200)
+        79             KJ=500
+        80           ENDIF
+        81         ENDIF
+        82   
+        83         INQUIRE(FILE='AC_COND.DAT',EXIST=HAMLET)
+        84         IF(HAMLET)THEN
+        85           OPEN(56,ERR=3100,FILE='AC_COND.DAT',STATUS='OLD')
+        86           KACAD=KACAD+2
+        87           DO 3 I=1,1000
+        88             READ(56,*,END=4,ERR=4)KCOND(I)
+        89             If(KCOND(I).LT.1) GO To 4
+        90             KC = KC + 1
+        91   3       CONTINUE
+        92   4       IF(KC.GT.500)THEN
+        93             WRITE(*,3200)
+        94             KC=500
+        95           ENDIF
+        96         ENDIF
+        97   C AMM 6/22/95
+        98   C Request AXTPARSE.INP file
+        99   C AMM 7/26/96 Modified to perform like XTPARSER if AXTPARSE.INP not found.
+       100   C             Previously, AXTPARSE would ask where an AXTPARSE input file
+       101   C             was located.
+       102         INQUIRE(FILE='AXTPARSE.INP',EXIST=HAMLET)
+       103         IF (HAMLET) THEN
+       104           OPEN(50,ERR=3100,FILE='AXTPARSE.INP',STATUS='OLD')
+       105           XTPARSER = .FALSE.
+       106           WRITE(*,'(/A/)')'  AXTPARSE.INP found, Running Auto-XTParser'
+       107         ELSE
+       108           WRITE(*,'(A)')'  No AXTPARSE.INP file found, Running XTParser. '
+       109           XTPARSER = .TRUE.
+       110           GOTO 10000
+       111         ENDIF
+F77L-EM/32 FORTRAN 77 Version 5.10 (compiling for the 80386/80486) Tue Jan 11 16:56:05 2000 	Page:     4
+Copyright(c) 1988-1993, Lahey Computer Systems, Inc. ALL RIGHTS RESERVED
+
+PROGRAM AXTPARSE - Compiling Options:  /N0/N2/4/N7/NA2/B/NC/NC1/ND/NF/H/NI/NK/L/P/NQ1/NQ2/NQ3/R/NS/NT/NV/W/NX/Z1
+Source file Listing
+
+       112   
+       113   C Read in AXTPARSE.INP file
+       114         READ(50,*) NMINT,NMROOT
+       115         READ(50,*) TITLE(1)
+       116         READ(50,*) TITLE(2)
+       117         READ(50,*) IDATEZ
+       118         READ(50,*) LOCATS
+       119         DO 8000 I = 1,LOCATS
+       120           READ(50,*) ANODE(I),NCOND(I),(ACONDS(I,J),J=1,NCOND(I))
+       121   8000  CONTINUE
+       122         NQUAL = 0
+       123   
+       124   c here request file names and open for ASCII output
+       125   C AMM 7/24/96 Added jump to this portion if AXTPARSE.INP file not found.
+       126   10000 INQUIRE(FILE='generic.out',EXIST=HAMLET)
+       127         IF(HAMLET)THEN
+       128           OPEN(5,ERR=3100,FILE='generic.out',STATUS='OLD')
+       129           SWMMFile='GENERIC.OUT'
+       130           WRITE(*,'(/A/)')'  GENERIC.OUT found.'
+       131         ELSE
+       132           WRITE(*,'(/A)')'  No GENERIC.OUT file found. '
+       133           WRITE(*,'(A\)')'  Please Enter Path & Name of Output File: '
+       134           READ(*,'(A\)') SWMMFile
+       135           INQUIRE(FILE=SWMMFile,EXIST=HAMLET)
+       136           IF(HAMLET)THEN
+       137             OPEN(5,ERR=3100,FILE=SWMMFile,STATUS='OLD')
+       138           ELSE        
+       139             WRITE(*,'(A\)')' ERROR! File Not Found! '
+       140             STOP
+       141           ENDIF
+       142         ENDIF
+       143   C General Unit numbers: N6 = Junctions, N7 = Conduits
+       144         N5=5
+       145   C AMM 1/10/2000 ? Someone change these? Maybe me?
+       146   C      N6=6000
+       147   C      N7=7000
+       148         N6=6
+       149         N7=7
+       150   
+       151   C AMM 7/24/96 Added branch if XTPARSER is on; if XTPARSER is running,
+       152   C use the original EX_COND.CSV and EX_JUNC.CSV filenames.  Otherwise, use
+       153   C AXTPARSER's .XHG and .XFL extensions.
+       154         IF (XTPARSER) THEN
+       155           IF(KACAD.NE.2) OPEN(N6,FILE='EX_JUNC.CSV')
+       156           IF(KACAD.NE.1) OPEN(N7,FILE='EX_COND.CSV')
+       157         ELSE
+       158           IF(KACAD.NE.2) OPEN(N6,FILE=NMROOT//'.XHG')
+       159           IF(KACAD.NE.1) OPEN(N7,FILE=NMROOT//'.XFL') 
+       160           OPEN(51,FILE=NMINT,FORM='UNFORMATTED')
+       161         ENDIF
+F77L-EM/32 FORTRAN 77 Version 5.10 (compiling for the 80386/80486) Tue Jan 11 16:56:05 2000 	Page:     5
+Copyright(c) 1988-1993, Lahey Computer Systems, Inc. ALL RIGHTS RESERVED
+
+PROGRAM AXTPARSE - Compiling Options:  /N0/N2/4/N7/NA2/B/NC/NC1/ND/NF/H/NI/NK/L/P/NQ1/NQ2/NQ3/R/NS/NT/NV/W/NX/Z1
+Source file Listing
+
+       162   
+       163         DO 5 J=1,MAXD
+       164           JSUR(J)=0
+       165   5     CONTINUE
+       166         NJCE=0
+       167         
+       168         DO 8 J = 1, 4
+       169           TITLE(J) = ' '
+       170   8     CONTINUE
+       171   C     
+       172   C     Write message to user on status of processing:
+       173   C AMM 7/24/96 Added branch to process XTPARSER stuff
+       174         IF (XTPARSER) THEN
+       175           WRITE(*,4130) SWMMFile
+       176           WRITE(*,4140)
+       177    4130   FORMAT(/,10X,' **********  EXTRAN-PARSER  **********',//,
+       178        +   10X,' Processing Extran Output File: ',A40)
+       179    4140   FORMAT(/,18X,'==>> Is the Current Julian Date')
+       180         ELSE
+       181           SWMMFile = NMROOT//'.OUT'
+       182           WRITE(*,4110) SWMMFile
+       183    4110   FORMAT(/,10X,' **********  AUTO-EXTRAN-PARSER  **********',//,
+       184        +    10X,' Processing Extran Output File: ',A40)
+       185           WRITE(*,4120)
+       186    4120   FORMAT( /,18X,'==>> Is the Current Julian Date')
+       187         ENDIF
+       188   
+       189   
+       190   c HERE READ DATA FILE TO FIND CONTROLS
+       191   C
+       192         DO 10 I=1,2000
+       193           READ(N5,'(A)',END=9901)DUMMY1
+       194           IF(DUMMY1.EQ.' Integration cycles.................')THEN
+       195             BACKSPACE 5
+       196             READ(N5,'(36X,I8)')NDT
+       197           ELSEIF(DUMMY1.EQ.' Length of integration step is......')THEN
+       198             BACKSPACE 5
+       199             READ(N5,'(36X,F8.2)')DELT
+       200           ELSEIF(DUMMY1.EQ.' Printing starts in cycle...........')THEN
+       201             BACKSPACE 5
+       202             READ(N5,'(36X,I8)')NSTART
+       203           ELSEIF(DUMMY1.EQ.' Intermediate printout intervals of.')THEN
+       204             IF(IPCYC.LE.0) Then
+       205               BACKSPACE 5
+       206               READ(N5,'(36X,I8)')IPCYC
+       207             ENDIF
+       208           ELSEIF(DUMMY1.EQ.' Initial time.......................')THEN
+       209             BACKSPACE 5
+       210             READ(N5,'(36X,F8.2)') TZero
+       211             GO TO 11
+F77L-EM/32 FORTRAN 77 Version 5.10 (compiling for the 80386/80486) Tue Jan 11 16:56:05 2000 	Page:     6
+Copyright(c) 1988-1993, Lahey Computer Systems, Inc. ALL RIGHTS RESERVED
+
+PROGRAM AXTPARSE - Compiling Options:  /N0/N2/4/N7/NA2/B/NC/NC1/ND/NF/H/NI/NK/L/P/NQ1/NQ2/NQ3/R/NS/NT/NV/W/NX/Z1
+Source file Listing
+
+       212           ENDIF
+       213   10    CONTINUE
+       214   9901  WRITE(*,'(A)')' READING ERROR!  File may not produced have been ',
+       215        +              'produced by PDXTRAN Version 4.x'
+       216         STOP
+       217   11    CONTINUE
+       218   c-----------------------------------------------------------------------
+       219   C finished reading controls--look for warning messages and initialize
+       220   
+       221         DO 111 I=1,1000000
+       222           READ(N5,'(A)',ERR=111) DUMMY4
+       223     185   FORMAT(5X,A14)
+       224   C     Check for Title(1) and Title(2)
+       225           IF(Title(1).EQ.' ') Then
+       226             IF(DUMMY4.EQ.' WASHINGTON, D') THEN
+       227               READ(N5,*)
+       228               READ(N5,*)
+       229               READ(N5,'(5X,A)') Title(1)
+       230               READ(N5,'(5X,A)') Title(2)
+       231             ENDIF
+       232           ENDIF
+       233           
+       234           IF(DUMMY4.EQ.' Title from fi')THEN
+       235             READ(N5,'(1X,A80)')Title(3)
+       236             READ(N5,'(1X,A80)')Title(4)
+       237             READ(N5,*)
+       238             READ(N5,*)
+       239             READ(N5,*)
+       240             READ(N5,*)
+       241             READ(N5,*)
+       242             READ(N5,*)
+       243             READ(N5,'(52X,I8)') IDateZ
+       244             READ(N5,'(52X,F8.1)') TZero
+       245             READ(N5,*)
+       246             READ(N5,*)
+       247             READ(N5,'(52X,F8.2)') TRIBA
+       248             READ(N5,'(52X,I8)') NJCE
+       249   *          GO TO 160
+       250           ENDIF
+       251    
+       252   c read conduit numbers
+       253           IF(DUMMY4.EQ.'  INP  CONDUIT')THEN
+       254             READ(N5,'(A)')
+       255             READ(N5,'(A)')
+       256             READ(N5,*,ERR=1114)J,ICOND(J)
+       257             GO TO 1113
+       258   1114      NJCE=1
+       259             WRITE(*,*) ' Error in Reading Output File - NJCE set to 1'
+       260   1113      BACKSPACE N5
+       261   
+       262             DO 113 NCN=1,MAXD
+F77L-EM/32 FORTRAN 77 Version 5.10 (compiling for the 80386/80486) Tue Jan 11 16:56:05 2000 	Page:     7
+Copyright(c) 1988-1993, Lahey Computer Systems, Inc. ALL RIGHTS RESERVED
+
+PROGRAM AXTPARSE - Compiling Options:  /N0/N2/4/N7/NA2/B/NC/NC1/ND/NF/H/NI/NK/L/P/NQ1/NQ2/NQ3/R/NS/NT/NV/W/NX/Z1
+Source file Listing
+
+       263   105         IF(NJCE.EQ.0)THEN
+       264                 IF (XTPARSER) THEN
+       265                   READ(N5,10001,ERR=114)J
+       266                   BACKSPACE N5
+       267                   IF (J.EQ.0) THEN
+       268   C AMM 7/31/96 Changed following statement from NC=NCN-1 because NCN was
+       269   C             found to reset itself when the GOTO 111 statement is
+       270   C             executed.
+       271                     NC=NC+NCN-1
+       272                     GOTO 111
+       273                  ELSE
+       274                   READ(N5,10001,ERR=114)J,ICOND(J),LENGTH(J),DUMMY5,A,A,
+       275        +            DIAMTR(J),A,X,X,DNOFF(J),UPOFF(J)
+       276                   ENDIF
+       277   C 7/24/96 AMM added FORMAT statement for reading conduit information
+       278   10001           FORMAT(I4,I10,F10.0,A10,F10.2,F10.5,2(F10.2),2(I10),
+       279        +            2(F8.2))
+       280                 ELSE
+       281                   READ(N5,*,ERR=114)J,ICOND(J)
+       282                 ENDIF
+       283               ELSE
+       284                 READ(5,5001,ERR=114)J,ACOND(J)
+       285               ENDIF
+       286               GO TO 113
+       287   
+       288   C     READ ERR-CHK FOR MORE CONDUITS ON NEXT PAGE AND GET WARNINGS
+       289   114         BACKSPACE 5
+       290               DO 104 J=1,1000
+       291                 READ(N5,'(A)')DUMMY4
+       292                 IF(DUMMY4.EQ.'  INP  CONDUIT')THEN
+       293                   READ(N5,'(A)')
+       294                   READ(N5,'(A)')
+       295                   GO TO 105
+       296                 ENDIF
+       297   
+       298                 IF(DUMMY4.EQ.' *  Equivalent')THEN
+       299                   BACKSPACE 5
+       300                   BACKSPACE 5
+       301                   BACKSPACE 5
+       302                   NC=NCN-1
+       303                   GO TO 111
+       304                 ENDIF
+       305   
+       306                 IF(DUMMY4.EQ.' INP  JUNCTION')THEN
+       307                   BACKSPACE 5
+       308                   NC=NCN-1
+       309                   GO TO 111
+       310                 ENDIF
+       311   
+       312   104         CONTINUE
+F77L-EM/32 FORTRAN 77 Version 5.10 (compiling for the 80386/80486) Tue Jan 11 16:56:05 2000 	Page:     8
+Copyright(c) 1988-1993, Lahey Computer Systems, Inc. ALL RIGHTS RESERVED
+
+PROGRAM AXTPARSE - Compiling Options:  /N0/N2/4/N7/NA2/B/NC/NC1/ND/NF/H/NI/NK/L/P/NQ1/NQ2/NQ3/R/NS/NT/NV/W/NX/Z1
+Source file Listing
+
+       313   113       CONTINUE
+       314           ENDIF
+       315   
+       316   c read junction data
+       317           IF(DUMMY4.EQ.' INP  JUNCTION')THEN
+       318             READ(N5,'(A)')
+       319             READ(N5,'(A)')
+       320   
+       321   1061      DO 115 NJN=1,MAXD
+       322   106         IF(NJCE.EQ.0)THEN
+       323                 READ(N5,*,ERR=116)J,JUNC(J),GRND(J),CROWN(J),BOTTOM(J)
+       324               ELSE
+       325                 READ(N5,*,ERR=116)J,AJUNC(J),GRND(J),CROWN(J),BOTTOM(J)
+       326               ENDIF 
+       327               GO TO 115
+       328   C READ ERR-CHECK FOR MORE JUNCTIONS ON NEXT PAGE OR CONDUIT WARNING MSG
+       329   116         BACKSPACE 5
+       330               DO 1116 J=1,1000
+       331                 READ(N5,'(A)')DUMMY4
+       332                 IF(DUMMY4.EQ.' INP  JUNCTION')THEN
+       333                   READ(N5,'(A)')
+       334                   READ(N5,'(A)')
+       335                   GO TO 106
+       336                 ELSEIF(DUMMY4.EQ.'      lie abov')THEN
+       337                   GO TO 106
+       338                 ENDIF
+       339             
+       340                 IF(DUMMY4.EQ.' STORAGE JUNCT' .OR.
+       341        +          DUMMY4.EQ.' *        DIUR' .OR.
+       342        +          DUMMY4.EQ.' # Header info' .OR.
+       343        +          DUMMY4.EQ.' *        INTE'     )THEN
+       344                   NJ=NJN-1
+       345                   LINEJ=FLOAT(NJ)/3.+.7
+       346                   BACKSPACE 5
+       347                   GO TO 111
+       348                 ENDIF
+       349   1116        CONTINUE
+       350   115       CONTINUE
+       351           ENDIF
+       352   
+       353   C Find extra conduits created internally
+       354           IF(DUMMY4.EQ.' *        INTE')THEN
+       355             DO 117 J=1,4
+       356   117         READ(N5,*)
+       357             DO 118 J=1,1000
+       358               IF(NJCE.EQ.0)THEN
+       359                 READ(N5,'(1X,I14)')NCEXTRA
+       360                 IF(NCEXTRA.EQ.0)THEN
+       361                   GO TO 119
+       362                 ELSE
+F77L-EM/32 FORTRAN 77 Version 5.10 (compiling for the 80386/80486) Tue Jan 11 16:56:05 2000 	Page:     9
+Copyright(c) 1988-1993, Lahey Computer Systems, Inc. ALL RIGHTS RESERVED
+
+PROGRAM AXTPARSE - Compiling Options:  /N0/N2/4/N7/NA2/B/NC/NC1/ND/NF/H/NI/NK/L/P/NQ1/NQ2/NQ3/R/NS/NT/NV/W/NX/Z1
+Source file Listing
+
+       363                   NC=NC+1
+       364                   ICOND(NC)=NCEXTRA
+       365                 ENDIF
+       366               ELSE
+       367                 READ(N5,'(5X,A)')ECOND
+       368                 IF(ECOND.EQ.BLANK)THEN
+       369                   GO TO 119
+       370                 ELSE
+       371                   NC=NC+1
+       372                   ACOND(NC)=ECOND
+       373                 ENDIF
+       374               ENDIF
+       375   118       CONTINUE 
+       376   119       LINEC=FLOAT(NC)/4.+0.8
+       377           ENDIF
+       378                                                                               
+       379   C Read initial date and time for solution
+       380           IF(DUMMY4.EQ.' Initial Julia')THEN
+       381             BACKSPACE 5
+       382             READ(N5,'(51X,I8)') IDATEZ
+       383             READ(N5,'(51X,F8.0)')TZERO
+       384             TZERO=TZERO/3600.
+       385           ENDIF
+       386   
+       387   c Read initial junction conditions
+       388           IF(DUMMY4.EQ.' JUNCTION / DE')THEN
+       389             IF(NJCE.EQ.0)THEN
+       390               DO 150 JN=1,LINEJ,3
+       391                 READ(5,6000,ERR=151)JUNC(JN),DEPTH(JN),ELEV(JN),
+       392        +          JUNC(JN+1),DEPTH(JN+1),ELEV(JN+1),
+       393        +          JUNC(JN+2),DEPTH(JN+2),ELEV(JN+2)
+       394   150         CONTINUE
+       395             ELSE
+       396               DO 152 JN=1,LINEJ,3
+       397                 READ(5,6015,ERR=151)AJUNC(JN),DEPTH(JN),ELEV(JN),
+       398        +          AJUNC(JN+1),DEPTH(JN+1),ELEV(JN+1),
+       399        +          AJUNC(JN+2),DEPTH(JN+2),ELEV(JN+2)
+       400                 IF(AJUNC(JN).EQ.BLANK)GO TO 151  
+       401   152         CONTINUE
+       402             ENDIF
+       403   151         CONTINUE
+       404             BACKSPACE 5
+       405           ENDIF
+       406   
+       407   c Read initial conduit conditions
+       408   
+       409           IF(DUMMY4.EQ.'   CONDUIT/   ')THEN
+       410             IF(NJCE.EQ.0)THEN
+       411               DO 155 ICN=1,LINEC,4
+       412                 READ(5,6001,ERR=156)ICOND(ICN),FLOW(ICN),ICOND(ICN+1),
+       413        +          FLOW(ICN+1),ICOND(ICN+2),FLOW(ICN+2),
+F77L-EM/32 FORTRAN 77 Version 5.10 (compiling for the 80386/80486) Tue Jan 11 16:56:05 2000 	Page:    10
+Copyright(c) 1988-1993, Lahey Computer Systems, Inc. ALL RIGHTS RESERVED
+
+PROGRAM AXTPARSE - Compiling Options:  /N0/N2/4/N7/NA2/B/NC/NC1/ND/NF/H/NI/NK/L/P/NQ1/NQ2/NQ3/R/NS/NT/NV/W/NX/Z1
+Source file Listing
+
+       414        +          ICOND(ICN+3),FLOW(ICN+3)
+       415   155         CONTINUE
+       416   156         CONTINUE
+       417             ELSE
+       418               DO 157 ICN=1,LINEC,4
+       419                 READ(5,6001,ERR=158)ACOND(ICN),FLOW(ICN),ACOND(ICN+1),
+       420        +          FLOW(ICN+1),ACOND(ICN+2),FLOW(ICN+2),
+       421        +          ACOND(ICN+3),FLOW(ICN+3)
+       422   157         CONTINUE
+       423   158         CONTINUE
+       424             ENDIF
+       425   *        Finished Reading all that we can now:
+       426             GOTO 160
+       427           ENDIF
+       428   111   CONTINUE
+       429   160   CONTINUE
+       430   
+       431   C       Now assign Delta Time Step and default Source
+       432         SOURCE = 'PDXTran-AXTParser'
+       433   C AMM 1/10/2000 Corrected calculation of Delta
+       434   C      DELTA = 60.0 * FLOAT(INT(DELT * IPCYC + 5)/60)
+       435         DELTA = DELT * IPCYC
+       436   
+       437         NYEAR = IDATEZ / 1000
+       438         JDAY = IDATEZ - NYEAR*1000
+       439          
+       440   C AMM 6/22/95
+       441   C Reprocess the node/conduit list from AXTPARSE.INP so that the conduit
+       442   C  list uses the array indexes in ICOND().
+       443         DO 8100 I=1,LOCATS
+       444           DO 8105 J=1,NCOND(I)
+       445             HIT = .FALSE.
+       446             K = 1
+       447             IF (NJCE.EQ.1) THEN
+       448               DO WHILE ((K.LE.MAXD).AND.(.NOT.HIT))
+       449                 IF(ICOND(K).EQ.ACONDS(I,J)) THEN
+       450                   ACONDS(I,J) = K
+       451                   HIT = .TRUE.
+       452                 ELSE
+       453                   K = K+1
+       454                 END IF
+       455               END DO
+       456               IF (K .GT. MAXD) THEN
+       457                 WRITE(*,8600) ACONDS(I,J),ANODE(I)
+       458                 STOP
+       459               END IF
+       460             ELSE
+       461               DO WHILE ((K.LE.MAXD).AND.(.NOT.HIT))
+       462                 IF(ICOND(K).EQ.ACONDS(I,J)) THEN
+       463                   ACONDS(I,J) = K
+F77L-EM/32 FORTRAN 77 Version 5.10 (compiling for the 80386/80486) Tue Jan 11 16:56:05 2000 	Page:    11
+Copyright(c) 1988-1993, Lahey Computer Systems, Inc. ALL RIGHTS RESERVED
+
+PROGRAM AXTPARSE - Compiling Options:  /N0/N2/4/N7/NA2/B/NC/NC1/ND/NF/H/NI/NK/L/P/NQ1/NQ2/NQ3/R/NS/NT/NV/W/NX/Z1
+Source file Listing
+
+       464                   HIT = .TRUE.
+       465                 ELSE
+       466                   K = K+1
+       467                 END IF
+       468               END DO
+       469               IF (K .GT. MAXD) THEN
+       470                 WRITE(*,8600) ACONDS(I,J),ANODE(I)
+       471                 STOP
+       472               END IF
+       473             END IF
+       474   8105    CONTINUE
+       475   8100  CONTINUE
+       476   8600  FORMAT(/,' ===> ERROR! CONDUIT',I10,' CONNECTING TO ',I10,
+       477        +' NOT FOUND IN EXTRAN FILE')
+       478   C AMM 6/22/95
+       479   C Write out interface header
+       480         IF (.NOT. XTPARSER) THEN
+       481           WRITE(51) TITLE(1)
+       482           WRITE(51) TITLE(2)
+       483           WRITE(51) IDATEZ, TZERO
+       484           WRITE(51) TITLE(3)
+       485           WRITE(51) TITLE(4)
+       486           WRITE(51) SOURCE, LOCATS, NQUAL, TRIBA, NJCE
+       487           IF(NJCE.LE.0) WRITE(51) (ANODE(K), K=1, LOCATS)
+       488           IF(NJCE.GE.1) WRITE(51) (KAN(I),I=1,LOCATS)
+       489           IF(NQUAL.GT.0) WRITE(51)  (PNAME(J),J=1,NQUAL)
+       490           IF(NQUAL.GT.0) WRITE(51)  (PUNIT(J),J=1,NQUAL)
+       491           IF(NQUAL.GT.0) WRITE(51)  (NDIM(J),J=1,NQUAL)
+       492           QCONV = 1.0
+       493           WRITE(51) QCONV
+       494         ENDIF
+       495   
+       496   C
+       497   C NOW WRITE THE TOP OF OUTPUT FILE AND INITIAL CONDITION
+       498   
+       499   C       Test if user wants all or a select few.  Write full inteface
+       500   C       data/header only for KACAD = 0
+       501   C AMM 7/30/96 Changed this so that full interface data/header will
+       502   C             always print when XTPARSER function is used.
+       503         IF(KACAD.EQ.0)THEN
+       504           IF (XTPARSER) THEN
+       505             WRITE(N6,'(A)')'"Junction WSElev Data From XTParser"'
+       506             WRITE(N6,10005)SWMMFile
+       507             WRITE(N7,'(A)')'"Conduit Flow Data From XTParser"'
+       508             WRITE(N7,10005)SWMMFile
+       509   10005     FORMAT('"',A,'"')
+       510           ELSE
+       511             WRITE(N6,'(A)')'"Junction WSElev Data From Auto-XTParser"'
+       512             WRITE(N7,'(A)')'"Conduit Flow Data From Auto-XTParser"'
+       513           ENDIF
+F77L-EM/32 FORTRAN 77 Version 5.10 (compiling for the 80386/80486) Tue Jan 11 16:56:05 2000 	Page:    12
+Copyright(c) 1988-1993, Lahey Computer Systems, Inc. ALL RIGHTS RESERVED
+
+PROGRAM AXTPARSE - Compiling Options:  /N0/N2/4/N7/NA2/B/NC/NC1/ND/NF/H/NI/NK/L/P/NQ1/NQ2/NQ3/R/NS/NT/NV/W/NX/Z1
+Source file Listing
+
+       514               
+       515           WRITE(N6,4000) Title(1),Title(2),IDateZ,TZero,
+       516        +    Title(3),Title(4),Source,TRIBA,Delta,NJ
+       517           WRITE(N7,4000) Title(1),Title(2),IDateZ,TZero,
+       518        +    Title(3),Title(4),Source,TRIBA,Delta,NC
+       519        
+       520           IF(NJCE.EQ.0)THEN
+       521             WRITE(N6,6008)(JUNC(J),J=1,NJ)
+       522             WRITE(N7,6018)(ICOND(J),J=1,NC)
+       523           ELSE
+       524             WRITE(N6,6013)(AJUNC(J),J=1,NJ)
+       525             WRITE(N7,6023)(ACOND(J),J=1,NC)
+       526           ENDIF
+       527   
+       528           WRITE(N6,6009)(GRND(J),J=1,NJ)
+       529           WRITE(N6,6012)(CROWN(J),J=1,NJ)
+       530           WRITE(N6,6011)(BOTTOM(J),J=1,NJ)
+       531           WRITE(N6,'(/)')
+       532           IF (XTPARSER) THEN
+       533             WRITE(N7, 6024)(LENGTH(J),J=1,NC)
+       534             WRITE(N7, 6025)(DIAMTR(J),J=1,NC)
+       535             WRITE(N7, 6026)(DNOFF(J),J=1,NC)
+       536             WRITE(N7, 6027)(UPOFF(J),J=1,NC)
+       537           ENDIF
+       538           WRITE(N7,'(/)')
+       539         
+       540           IF(NSTART.LE.1)THEN
+       541             WRITE(N6,6003)TZERO/3600.,(BOTTOM(J),J=1,NJ)
+       542             WRITE(N7,6003)TZERO/3600.,(FLOW(J),J=1,NC)
+       543           ENDIF
+       544   
+       545         ELSE
+       546           IF(KACAD.EQ.1 .OR. KACAD.EQ.3)THEN
+       547             IF (XTPARSER) THEN
+       548               WRITE(N6,'(A)')'"Junction WSElev Data From XTParser"'
+       549               WRITE(N6,10005)SWMMFile
+       550               WRITE(N7,'(A)')'"Conduit Flow Data From XTParser"'
+       551               WRITE(N7,10005)SWMMFile
+       552               WRITE(N6,4000) Title(1),Title(2),IDateZ,TZero,
+       553        +        Title(3),Title(4),Source,TRIBA,Delta,KJ
+       554               WRITE(N7,4000) Title(1),Title(2),IDateZ,TZero,
+       555        +        Title(3),Title(4),Source,TRIBA,Delta,KC
+       556             ENDIF
+       557               
+       558             IF (.NOT.XTPARSER) THEN
+       559               WRITE(N6,'(A,I10/)')' "STARTING DATE =", ',IDATEZ
+       560             ENDIF
+       561             WRITE(N6,6008)(KJUNC(J),J=1,KJ)
+       562   C
+       563             DO 450 K=1,KJ
+F77L-EM/32 FORTRAN 77 Version 5.10 (compiling for the 80386/80486) Tue Jan 11 16:56:05 2000 	Page:    13
+Copyright(c) 1988-1993, Lahey Computer Systems, Inc. ALL RIGHTS RESERVED
+
+PROGRAM AXTPARSE - Compiling Options:  /N0/N2/4/N7/NA2/B/NC/NC1/ND/NF/H/NI/NK/L/P/NQ1/NQ2/NQ3/R/NS/NT/NV/W/NX/Z1
+Source file Listing
+
+       564               DO 448 J=1,NJ
+       565                 IF(JUNC(J).EQ.KJUNC(K))GO TO 449
+       566   448         CONTINUE
+       567               WRITE(*,7000)KJUNC(K)
+       568               STOP
+       569   449         PRTGD(K)=GRND(J)
+       570               PRTCWN(K)=CROWN(J)
+       571               PRTBOT(K)=BOTTOM(J)
+       572   450       CONTINUE
+       573             WRITE(N6,6009)(PRTGD(J),J=1,KJ)
+       574             WRITE(N6,6012)(PRTCWN(J),J=1,KJ)
+       575             WRITE(N6,6011)(PRTBOT(J),J=1,KJ)
+       576             WRITE(N6,'(/)')
+       577           ENDIF
+       578   
+       579           IF(KACAD.GT.1)THEN
+       580             IF (.NOT.XTPARSER) THEN
+       581               WRITE(N7,'(A,I10/)')' "STARTING DATE =", ',IDATEZ
+       582             ENDIF
+       583             WRITE(N7,6018)(KCOND(J),J=1,KC)
+       584             DO 500 K=1,KC
+       585               DO 498 J=1,MAXD
+       586                 IF(ICOND(J).EQ.KCOND(K))GO TO 499
+       587   498         CONTINUE
+       588               WRITE(*,7100)KCOND(K)
+       589               STOP
+       590   499         IPCON(K)=J
+       591               PRTLEN(K)=LENGTH(J)
+       592               PRTDIA(K)=DIAMTR(J)
+       593               PRTDNO(K)=DNOFF(J)
+       594               PRTUPO(K)=UPOFF(J)
+       595   500       CONTINUE
+       596             WRITE(N7,6024)(PRTLEN(J),J=1,KC)
+       597             WRITE(N7,6025)(PRTDIA(J),J=1,KC)
+       598             WRITE(N7,6026)(PRTDNO(J),J=1,KC)
+       599             WRITE(N7,6027)(PRTUPO(J),J=1,KC)
+       600             WRITE(N7,'(/)')
+       601           ENDIF
+       602         ENDIF
+       603             
+       604   C ' CUMULATIVE OVERFLOW VOLUME FROM NODE'
+       605   C NOW FIND THE FIRST CYCLE OF OUTPUT
+       606   
+       607         DO 30 I=1,1000000 
+       608   C BEGIN DO LOOP FOR EACH TIME STEP/PRINT INTERVAL
+       609           READ(N5,'(A)')DUMMY3
+       610           IF(DUMMY3.EQ.' CYCLE')GO TO 35
+       611   30    CONTINUE
+       612   C NOW WE HAVE FOUND THE FIRST CYCLE TIME OUTPUT
+       613   C
+       614   35    BACKSPACE 5
+F77L-EM/32 FORTRAN 77 Version 5.10 (compiling for the 80386/80486) Tue Jan 11 16:56:05 2000 	Page:    14
+Copyright(c) 1988-1993, Lahey Computer Systems, Inc. ALL RIGHTS RESERVED
+
+PROGRAM AXTPARSE - Compiling Options:  /N0/N2/4/N7/NA2/B/NC/NC1/ND/NF/H/NI/NK/L/P/NQ1/NQ2/NQ3/R/NS/NT/NV/W/NX/Z1
+Source file Listing
+
+       615         READ(N5,'(6X,I11)')ICYC
+       616   C ICYC is the number of time steps skipped
+       617         IRD=(NDT-NSTART)/IPCYC
+       618         DO 50 IC=1,IRD+1
+       619           TIME=(ICYC*DELT+TZERO)/3600.
+       620   C         Calculate Julian Day for Interface File
+       621           JDAY = (IDATEZ - NYEAR*1000) + INT((TIME+.01)/24.)
+       622           IF(JDAY.GT.365) THEN
+       623             JDAY = JDAY - 365
+       624             NYEAR = (IDATEZ/1000) + INT(JDAY/365.)
+       625           ENDIF
+       626           JULDAY = NYEAR*1000 + JDAY
+       627             
+       628   C         Calculate TIMDAY for Interface file - round to nearest Delta
+       629           TIMDAY = TIME - 24.*Int((TIME+.01)/24.)
+       630           If(TIMDAY.LT.0.00) TIMDAY = 0.00
+       631           TIMDAY = Delta * Float(Int((TIMDAY * 3600.+5.)/Delta))
+       632           
+       633           DO 36 K=1,1000
+       634             READ(N5,'(A)',ERR=51,END=51)DUMMY3
+       635             IF(DUMMY3.EQ.' JUNCT')GOTO 37
+       636   36      CONTINUE
+       637   
+       638   37      DO 38 JN=1,LINEJ*3,3
+       639             IF(NJCE.EQ.0)THEN
+       640               READ(5,6010,ERR=40)JUNC(JN),DEPTH(JN),SUR(JN),ELEV(JN),
+       641        +        JUNC(JN+1),DEPTH(JN+1),SUR(JN+1),ELEV(JN+1),
+       642        +        JUNC(JN+2),DEPTH(JN+2),SUR(JN+2),ELEV(JN+2)
+       643             ELSE
+       644               READ(5,6014,ERR=40)AJUNC(JN),DEPTH(JN),SUR(JN),ELEV(JN),
+       645        +        AJUNC(JN+1),DEPTH(JN+1),SUR(JN+1),ELEV(JN+1),
+       646        +        AJUNC(JN+2),DEPTH(JN+2),SUR(JN+2),ELEV(JN+2)
+       647             ENDIF
+       648             DO 371 J=JN,JN+2
+       649               IF(SUR(J).NE.' ' .OR. ELEV(J).GT.CROWN(J))THEN
+       650                 IF(ELEV(J)-GRND(J) .LE. 1.E-06)JSUR(J)=1
+       651               ENDIF
+       652   371       CONTINUE
+       653   38      CONTINUE
+       654   40      CONTINUE
+       655   
+       656           BACKSPACE 5
+       657           DO 400 K=1,1000
+       658             READ(N5,'(A)')DUMMY3
+       659             IF(DUMMY3.EQ.'   CON')GOTO 401
+       660   400     CONTINUE
+       661   401     CONTINUE
+       662   
+       663           DO 41 ICN=1,LINEC*4,4
+       664             IF(NJCE.EQ.0)THEN
+F77L-EM/32 FORTRAN 77 Version 5.10 (compiling for the 80386/80486) Tue Jan 11 16:56:05 2000 	Page:    15
+Copyright(c) 1988-1993, Lahey Computer Systems, Inc. ALL RIGHTS RESERVED
+
+PROGRAM AXTPARSE - Compiling Options:  /N0/N2/4/N7/NA2/B/NC/NC1/ND/NF/H/NI/NK/L/P/NQ1/NQ2/NQ3/R/NS/NT/NV/W/NX/Z1
+Source file Listing
+
+       665               READ(5,6001,ERR=42)ICOND(ICN),FLOW(ICN),ICOND(ICN+1),
+       666        +        FLOW(ICN+1),ICOND(ICN+2),FLOW(ICN+2),
+       667        +        ICOND(ICN+3),FLOW(ICN+3)
+       668             ELSE
+       669               READ(5,6016,ERR=42)ACOND(ICN),FLOW(ICN),ACOND(ICN+1),
+       670        +        FLOW(ICN+1),ACOND(ICN+2),FLOW(ICN+2),
+       671        +        ACOND(ICN+3),FLOW(ICN+3)
+       672             ENDIF
+       673   41      CONTINUE
+       674   42      CONTINUE
+       675   C
+       676   C
+       677   *        Write message to screen to tell user the current date examined:
+       678   *                   
+       679   C AMM 7/24/96 line 4130 renumbered to 4150 to avoid conflict with new
+       680   *             line 4130 above.
+       681           IF(JULDAY.NE.YESDAY) THEN
+       682             WRITE(*,4150) JulDay
+       683             YESDAY = JulDay
+       684           ENDIF
+       685    4150   FORMAT('+',10X,I6)
+       686              
+       687   C         WRITE DATA TO FILES:
+       688   C
+       689           IF(KACAD.EQ.0)THEN
+       690             WRITE(N6,6003)TIME,(ELEV(J),J=1,NJ)
+       691             WRITE(N7,6003)TIME,(FLOW(J),J=1,NC)
+       692   C AMM 6/22/95
+       693   C Write out time step to interface file
+       694             DO 8300 L = 1, LOCATS
+       695               SFLOW(L) = 0
+       696               DO 8305 M=1, NCOND(L)
+       697                 SFLOW(L) = SFLOW(L)+FLOW((ACONDS(L,M)))*QCONV
+       698   8305        CONTINUE
+       699   8300      CONTINUE          
+       700   
+       701             IF (.NOT. XTPARSER) THEN
+       702               WRITE(51) julday, TIMDAY, delta, (SFLOW(N),N=1,LOCATS)
+       703             ENDIF
+       704         
+       705           ELSE
+       706             IF(KACAD.EQ.1 .OR. KACAD.EQ.3)THEN
+       707               DO 600 K=1,KJ
+       708                 DO 10500 J=1,NJ
+       709                   IF(JUNC(J).EQ.KJUNC(K)) GOTO 10502
+       710   10500         CONTINUE
+       711                 WRITE(*,7000) KJUNC(K)
+       712                 STOP
+       713   10502         PRTE(K)=ELEV(J)
+       714   600         CONTINUE
+F77L-EM/32 FORTRAN 77 Version 5.10 (compiling for the 80386/80486) Tue Jan 11 16:56:05 2000 	Page:    16
+Copyright(c) 1988-1993, Lahey Computer Systems, Inc. ALL RIGHTS RESERVED
+
+PROGRAM AXTPARSE - Compiling Options:  /N0/N2/4/N7/NA2/B/NC/NC1/ND/NF/H/NI/NK/L/P/NQ1/NQ2/NQ3/R/NS/NT/NV/W/NX/Z1
+Source file Listing
+
+       715               WRITE(N6,6003)TIME,(PRTE(J),J=1,KJ)
+       716             ENDIF
+       717   C
+       718             IF(KACAD.GT.1)then
+       719               DO 601 K=1,KC
+       720                 J=IPCON(K)
+       721                 PRTQ(K)=FLOW(J)
+       722   601         CONTINUE
+       723               WRITE(N7,6003)TIME,(PRTQ(J),J=1,KC)
+       724             ENDIF
+       725           ENDIF
+       726   C
+       727           IF(IC.LT.IRD)THEN
+       728             DO 46 I=1,10000
+       729               READ(N5,'(A)',ERR=51,END=51)DUMMY3
+       730               IF(DUMMY3.EQ.' CYCLE')THEN
+       731                 BACKSPACE 5
+       732                 READ(N5,'(6X,I11)')ICYC
+       733                 GO TO 50
+       734               ENDIF
+       735   46        CONTINUE
+       736           ELSE
+       737             GO TO 51
+       738           ENDIF
+       739   C
+       740   50    CONTINUE
+       741   51    CONTINUE
+       742   C
+       743   88    CONTINUE
+       744   
+       745   100   IF (XTPARSER) THEN
+       746           WRITE(*,'(A)')
+       747           STOP 'XTPARSER Ended normally.'
+       748         ELSE
+       749           WRITE(*,'(A)')
+       750           STOP 'Auto-XTPARSER Ended normally.'
+       751         ENDIF
+       752   c
+       753   3100  WRITE(*,'(a)')' Error in opening request files'
+       754         STOP
+       755   C=======================================================================
+       756   3200  FORMAT(' ERROR, ONLY THE FIRST 500 ELEMENTS WILL BE PRINTED')
+       757   4000  FORMAT(/,2('"',A80,'"',/),'"Starting Date =", ',I6,', ',
+       758        +      '"Starting Time = ",',F8.2,/,2('"',A80,'"',/),
+       759        +      '"',A20,'", "Area = ",',F8.2,/,
+       760        +      '"Output Time Step (secs) = ", ',F10.2,/,
+       761        +      '"Number of Locations = ", ',I6)
+       762   5000  FORMAT(' RUN TIME MESSAGES FROM FILE ',A/
+       763        +' USING INTERFACE FILE ',A//)
+       764   5001  FORMAT(I4,A10,F10.0)
+F77L-EM/32 FORTRAN 77 Version 5.10 (compiling for the 80386/80486) Tue Jan 11 16:56:05 2000 	Page:    17
+Copyright(c) 1988-1993, Lahey Computer Systems, Inc. ALL RIGHTS RESERVED
+
+PROGRAM AXTPARSE - Compiling Options:  /N0/N2/4/N7/NA2/B/NC/NC1/ND/NF/H/NI/NK/L/P/NQ1/NQ2/NQ3/R/NS/NT/NV/W/NX/Z1
+Source file Listing
+
+       765   6000  FORMAT(3(I10,1X,F7.2,2X,F9.2))
+       766   6001  FORMAT(4(I10,1X,F11.2,1X))
+       767   6002  FORMAT('('/(1X,20I10))
+       768   6003  FORMAT(F16.3,',',500(F8.2,','))
+       769   6004  FORMAT('''(')
+       770   6005  FORMAT(')')
+       771   6006  FORMAT('(')
+       772   6007  FORMAT(')''')
+       773   6008  FORMAT('"JUNC", ',500(I8,','))
+       774   6009  FORMAT('"GROUND", ',500(F8.2,','))
+       775   6010  FORMAT(3(I10,1X,F7.2,A,1X,F9.2))
+       776   6011  FORMAT('"INVERT", ',500(F8.2,', '))
+       777   6012  FORMAT('"CROWN", ',500(F8.2,', '))
+       778   6013  FORMAT('"JUNC", ',500(A8,', '))
+       779   6014  FORMAT(3(A10,1X,F7.2,A,1X,F9.2))
+       780   6015  FORMAT(3(A10,1X,F7.2,2X,F9.2))
+       781   6016  FORMAT(4(A10,1X,F11.2,1X))
+       782   6018  FORMAT('"COND", ',500(I8,','))
+       783   6023  FORMAT('"COND", ',500(A8,','))
+       784   C AMM 7/24/96 Added following formats for printing Conduit Info
+       785   6024  FORMAT('"LENGTH", ',500(F8.2,', '))
+       786   6025  FORMAT('"DIAMETER", ',500(F8.2,', '))
+       787   6026  FORMAT('"DN OFFSET", ',500(F8.2,', '))
+       788   6027  FORMAT('"UP OFFSET", ',500(F8.2,', '))
+       789   7000  FORMAT(/,' ===> ERROR! JUNCTION',I10,' NOT FOUND IN EXTRAN FILE')
+       790   7100  FORMAT(/,' ===> ERROR! CONDUIT ',I10,' NOT FOUND IN EXTRAN FILE')
+       791   C=======================================================================
+       792         END
+Warning - CHARACTER*40 variable (AXTFILE) is declared but never used, File axtparse.for, line 47.
+Warning - INTEGER array (JSUR) assigned a value, never used, File axtparse.for, lines 164, 650.
+Warning - CHARACTER*13 variable (DUMMY5) assigned a value, never used, File axtparse.for, line 275.
+Warning - REAL variable (A) assigned a value, never used, File axtparse.for, line 275.
+Warning - INTEGER variable (X) assigned a value, never used, File axtparse.for, line 275.
+Warning - REAL array (DEPTH) assigned a value, never used, File axtparse.for, lines 393, 399, 642, 646.
