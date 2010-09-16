@@ -69,49 +69,49 @@ namespace SWI_2 {
         
         private DataTableFieldSurveyEditableDataTable tableDataTableFieldSurveyEditable;
         
-        private global::System.Data.DataRelation relationFK_CULVERT_CULVERT_OPENING_TYPE;
+        private global::System.Data.DataRelation relationFK_SURVEY_PAGE_EVALUATOR_SURVEY_PAGE;
         
-        private global::System.Data.DataRelation relationFK_CULVERT_FACING_TYPE;
+        private global::System.Data.DataRelation relationFK_SURVEY_PAGE_VIEW;
         
-        private global::System.Data.DataRelation relationFK_CULVERT_MATERIAL_TYPE;
+        private global::System.Data.DataRelation relationFK_PIPE_SURVEY_PAGE;
         
-        private global::System.Data.DataRelation relationFK_CULVERT_SHAPE_TYPE;
+        private global::System.Data.DataRelation relationFK_VIEW_SUBWATERSHED;
         
-        private global::System.Data.DataRelation relationFK_CULVERT_SURVEY_PAGE;
+        private global::System.Data.DataRelation relationFK_SUBWATERSHED_WATERSHED;
         
-        private global::System.Data.DataRelation relationFK_SWSP_CULVERT_SWSP_GLOBAL_ID;
-        
-        private global::System.Data.DataRelation relationFK_DITCH_FACING_TYPE;
-        
-        private global::System.Data.DataRelation relationFK_DITCH_MATERIAL_TYPE;
-        
-        private global::System.Data.DataRelation relationFK_DITCH_SURVEY_PAGE;
-        
-        private global::System.Data.DataRelation relationFK_SWSP_DITCH_SWSP_GLOBAL_ID;
-        
-        private global::System.Data.DataRelation relationFK_PHOTO_CULVERT;
-        
-        private global::System.Data.DataRelation relationFK_PHOTO_DITCH;
+        private global::System.Data.DataRelation relationFK_PIPE_SHAPE_TYPE;
         
         private global::System.Data.DataRelation relationFK_PHOTO_PIPE;
         
         private global::System.Data.DataRelation relationFK_PIPE_MATERIAL_TYPE;
         
-        private global::System.Data.DataRelation relationFK_PIPE_SHAPE_TYPE;
-        
-        private global::System.Data.DataRelation relationFK_PIPE_SURVEY_PAGE;
-        
         private global::System.Data.DataRelation relationFK_SWSP_PIPE_SWSP_GLOBAL_ID;
-        
-        private global::System.Data.DataRelation relationFK_SUBWATERSHED_WATERSHED;
-        
-        private global::System.Data.DataRelation relationFK_SURVEY_PAGE_VIEW;
         
         private global::System.Data.DataRelation relationFK_SURVEY_PAGE_EVALUATOR_EVALUATOR;
         
-        private global::System.Data.DataRelation relationFK_SURVEY_PAGE_EVALUATOR_SURVEY_PAGE;
+        private global::System.Data.DataRelation relationFK_PHOTO_DITCH;
         
-        private global::System.Data.DataRelation relationFK_VIEW_SUBWATERSHED;
+        private global::System.Data.DataRelation relationFK_SWSP_DITCH_SWSP_GLOBAL_ID;
+        
+        private global::System.Data.DataRelation relationFK_DITCH_SURVEY_PAGE;
+        
+        private global::System.Data.DataRelation relationFK_DITCH_MATERIAL_TYPE;
+        
+        private global::System.Data.DataRelation relationFK_DITCH_FACING_TYPE;
+        
+        private global::System.Data.DataRelation relationFK_PHOTO_CULVERT;
+        
+        private global::System.Data.DataRelation relationFK_SWSP_CULVERT_SWSP_GLOBAL_ID;
+        
+        private global::System.Data.DataRelation relationFK_CULVERT_SURVEY_PAGE;
+        
+        private global::System.Data.DataRelation relationFK_CULVERT_SHAPE_TYPE;
+        
+        private global::System.Data.DataRelation relationFK_CULVERT_MATERIAL_TYPE;
+        
+        private global::System.Data.DataRelation relationFK_CULVERT_FACING_TYPE;
+        
+        private global::System.Data.DataRelation relationFK_CULVERT_CULVERT_OPENING_TYPE;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -708,28 +708,28 @@ namespace SWI_2 {
                     this.tableDataTableFieldSurveyEditable.InitVars();
                 }
             }
-            this.relationFK_CULVERT_CULVERT_OPENING_TYPE = this.Relations["FK_CULVERT_CULVERT_OPENING_TYPE"];
-            this.relationFK_CULVERT_FACING_TYPE = this.Relations["FK_CULVERT_FACING_TYPE"];
-            this.relationFK_CULVERT_MATERIAL_TYPE = this.Relations["FK_CULVERT_MATERIAL_TYPE"];
-            this.relationFK_CULVERT_SHAPE_TYPE = this.Relations["FK_CULVERT_SHAPE_TYPE"];
-            this.relationFK_CULVERT_SURVEY_PAGE = this.Relations["FK_CULVERT_SURVEY_PAGE"];
-            this.relationFK_SWSP_CULVERT_SWSP_GLOBAL_ID = this.Relations["FK_SWSP_CULVERT_SWSP_GLOBAL_ID"];
-            this.relationFK_DITCH_FACING_TYPE = this.Relations["FK_DITCH_FACING_TYPE"];
-            this.relationFK_DITCH_MATERIAL_TYPE = this.Relations["FK_DITCH_MATERIAL_TYPE"];
-            this.relationFK_DITCH_SURVEY_PAGE = this.Relations["FK_DITCH_SURVEY_PAGE"];
-            this.relationFK_SWSP_DITCH_SWSP_GLOBAL_ID = this.Relations["FK_SWSP_DITCH_SWSP_GLOBAL_ID"];
-            this.relationFK_PHOTO_CULVERT = this.Relations["FK_PHOTO_CULVERT"];
-            this.relationFK_PHOTO_DITCH = this.Relations["FK_PHOTO_DITCH"];
+            this.relationFK_SURVEY_PAGE_EVALUATOR_SURVEY_PAGE = this.Relations["FK_SURVEY_PAGE_EVALUATOR_SURVEY_PAGE"];
+            this.relationFK_SURVEY_PAGE_VIEW = this.Relations["FK_SURVEY_PAGE_VIEW"];
+            this.relationFK_PIPE_SURVEY_PAGE = this.Relations["FK_PIPE_SURVEY_PAGE"];
+            this.relationFK_VIEW_SUBWATERSHED = this.Relations["FK_VIEW_SUBWATERSHED"];
+            this.relationFK_SUBWATERSHED_WATERSHED = this.Relations["FK_SUBWATERSHED_WATERSHED"];
+            this.relationFK_PIPE_SHAPE_TYPE = this.Relations["FK_PIPE_SHAPE_TYPE"];
             this.relationFK_PHOTO_PIPE = this.Relations["FK_PHOTO_PIPE"];
             this.relationFK_PIPE_MATERIAL_TYPE = this.Relations["FK_PIPE_MATERIAL_TYPE"];
-            this.relationFK_PIPE_SHAPE_TYPE = this.Relations["FK_PIPE_SHAPE_TYPE"];
-            this.relationFK_PIPE_SURVEY_PAGE = this.Relations["FK_PIPE_SURVEY_PAGE"];
             this.relationFK_SWSP_PIPE_SWSP_GLOBAL_ID = this.Relations["FK_SWSP_PIPE_SWSP_GLOBAL_ID"];
-            this.relationFK_SUBWATERSHED_WATERSHED = this.Relations["FK_SUBWATERSHED_WATERSHED"];
-            this.relationFK_SURVEY_PAGE_VIEW = this.Relations["FK_SURVEY_PAGE_VIEW"];
             this.relationFK_SURVEY_PAGE_EVALUATOR_EVALUATOR = this.Relations["FK_SURVEY_PAGE_EVALUATOR_EVALUATOR"];
-            this.relationFK_SURVEY_PAGE_EVALUATOR_SURVEY_PAGE = this.Relations["FK_SURVEY_PAGE_EVALUATOR_SURVEY_PAGE"];
-            this.relationFK_VIEW_SUBWATERSHED = this.Relations["FK_VIEW_SUBWATERSHED"];
+            this.relationFK_PHOTO_DITCH = this.Relations["FK_PHOTO_DITCH"];
+            this.relationFK_SWSP_DITCH_SWSP_GLOBAL_ID = this.Relations["FK_SWSP_DITCH_SWSP_GLOBAL_ID"];
+            this.relationFK_DITCH_SURVEY_PAGE = this.Relations["FK_DITCH_SURVEY_PAGE"];
+            this.relationFK_DITCH_MATERIAL_TYPE = this.Relations["FK_DITCH_MATERIAL_TYPE"];
+            this.relationFK_DITCH_FACING_TYPE = this.Relations["FK_DITCH_FACING_TYPE"];
+            this.relationFK_PHOTO_CULVERT = this.Relations["FK_PHOTO_CULVERT"];
+            this.relationFK_SWSP_CULVERT_SWSP_GLOBAL_ID = this.Relations["FK_SWSP_CULVERT_SWSP_GLOBAL_ID"];
+            this.relationFK_CULVERT_SURVEY_PAGE = this.Relations["FK_CULVERT_SURVEY_PAGE"];
+            this.relationFK_CULVERT_SHAPE_TYPE = this.Relations["FK_CULVERT_SHAPE_TYPE"];
+            this.relationFK_CULVERT_MATERIAL_TYPE = this.Relations["FK_CULVERT_MATERIAL_TYPE"];
+            this.relationFK_CULVERT_FACING_TYPE = this.Relations["FK_CULVERT_FACING_TYPE"];
+            this.relationFK_CULVERT_CULVERT_OPENING_TYPE = this.Relations["FK_CULVERT_CULVERT_OPENING_TYPE"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -783,54 +783,30 @@ namespace SWI_2 {
             base.Tables.Add(this.tableDataTableFieldSurvey);
             this.tableDataTableFieldSurveyEditable = new DataTableFieldSurveyEditableDataTable();
             base.Tables.Add(this.tableDataTableFieldSurveyEditable);
-            this.relationFK_CULVERT_CULVERT_OPENING_TYPE = new global::System.Data.DataRelation("FK_CULVERT_CULVERT_OPENING_TYPE", new global::System.Data.DataColumn[] {
-                        this.tableSWSP_CULVERT_OPENING_TYPE.culvert_opening_type_idColumn}, new global::System.Data.DataColumn[] {
-                        this.tableSWSP_CULVERT.culvert_openingColumn}, false);
-            this.Relations.Add(this.relationFK_CULVERT_CULVERT_OPENING_TYPE);
-            this.relationFK_CULVERT_FACING_TYPE = new global::System.Data.DataRelation("FK_CULVERT_FACING_TYPE", new global::System.Data.DataColumn[] {
-                        this.tableSWSP_FACING_TYPE.facing_type_idColumn}, new global::System.Data.DataColumn[] {
-                        this.tableSWSP_CULVERT.facingColumn}, false);
-            this.Relations.Add(this.relationFK_CULVERT_FACING_TYPE);
-            this.relationFK_CULVERT_MATERIAL_TYPE = new global::System.Data.DataRelation("FK_CULVERT_MATERIAL_TYPE", new global::System.Data.DataColumn[] {
-                        this.tableSWSP_MATERIAL_TYPE.material_type_idColumn}, new global::System.Data.DataColumn[] {
-                        this.tableSWSP_CULVERT.materialColumn}, false);
-            this.Relations.Add(this.relationFK_CULVERT_MATERIAL_TYPE);
-            this.relationFK_CULVERT_SHAPE_TYPE = new global::System.Data.DataRelation("FK_CULVERT_SHAPE_TYPE", new global::System.Data.DataColumn[] {
+            this.relationFK_SURVEY_PAGE_EVALUATOR_SURVEY_PAGE = new global::System.Data.DataRelation("FK_SURVEY_PAGE_EVALUATOR_SURVEY_PAGE", new global::System.Data.DataColumn[] {
+                        this.tableSWSP_SURVEY_PAGE.survey_page_idColumn}, new global::System.Data.DataColumn[] {
+                        this.tableSWSP_SURVEY_PAGE_EVALUATOR.survey_page_idColumn}, false);
+            this.Relations.Add(this.relationFK_SURVEY_PAGE_EVALUATOR_SURVEY_PAGE);
+            this.relationFK_SURVEY_PAGE_VIEW = new global::System.Data.DataRelation("FK_SURVEY_PAGE_VIEW", new global::System.Data.DataColumn[] {
+                        this.tableSWSP_VIEW.view_idColumn}, new global::System.Data.DataColumn[] {
+                        this.tableSWSP_SURVEY_PAGE.view_idColumn}, false);
+            this.Relations.Add(this.relationFK_SURVEY_PAGE_VIEW);
+            this.relationFK_PIPE_SURVEY_PAGE = new global::System.Data.DataRelation("FK_PIPE_SURVEY_PAGE", new global::System.Data.DataColumn[] {
+                        this.tableSWSP_SURVEY_PAGE.survey_page_idColumn}, new global::System.Data.DataColumn[] {
+                        this.tableSWSP_PIPE.survey_page_idColumn}, false);
+            this.Relations.Add(this.relationFK_PIPE_SURVEY_PAGE);
+            this.relationFK_VIEW_SUBWATERSHED = new global::System.Data.DataRelation("FK_VIEW_SUBWATERSHED", new global::System.Data.DataColumn[] {
+                        this.tableSWSP_SUBWATERSHED.subwatershed_idColumn}, new global::System.Data.DataColumn[] {
+                        this.tableSWSP_VIEW.subwatershed_idColumn}, false);
+            this.Relations.Add(this.relationFK_VIEW_SUBWATERSHED);
+            this.relationFK_SUBWATERSHED_WATERSHED = new global::System.Data.DataRelation("FK_SUBWATERSHED_WATERSHED", new global::System.Data.DataColumn[] {
+                        this.tableSWSP_WATERSHED.watershed_idColumn}, new global::System.Data.DataColumn[] {
+                        this.tableSWSP_SUBWATERSHED.watershed_idColumn}, false);
+            this.Relations.Add(this.relationFK_SUBWATERSHED_WATERSHED);
+            this.relationFK_PIPE_SHAPE_TYPE = new global::System.Data.DataRelation("FK_PIPE_SHAPE_TYPE", new global::System.Data.DataColumn[] {
                         this.tableSWSP_SHAPE_TYPE.shape_type_idColumn}, new global::System.Data.DataColumn[] {
-                        this.tableSWSP_CULVERT.shapeColumn}, false);
-            this.Relations.Add(this.relationFK_CULVERT_SHAPE_TYPE);
-            this.relationFK_CULVERT_SURVEY_PAGE = new global::System.Data.DataRelation("FK_CULVERT_SURVEY_PAGE", new global::System.Data.DataColumn[] {
-                        this.tableSWSP_SURVEY_PAGE.survey_page_idColumn}, new global::System.Data.DataColumn[] {
-                        this.tableSWSP_CULVERT.survey_page_idColumn}, false);
-            this.Relations.Add(this.relationFK_CULVERT_SURVEY_PAGE);
-            this.relationFK_SWSP_CULVERT_SWSP_GLOBAL_ID = new global::System.Data.DataRelation("FK_SWSP_CULVERT_SWSP_GLOBAL_ID", new global::System.Data.DataColumn[] {
-                        this.tableSWSP_GLOBAL_ID.global_idColumn}, new global::System.Data.DataColumn[] {
-                        this.tableSWSP_CULVERT.global_idColumn}, false);
-            this.Relations.Add(this.relationFK_SWSP_CULVERT_SWSP_GLOBAL_ID);
-            this.relationFK_DITCH_FACING_TYPE = new global::System.Data.DataRelation("FK_DITCH_FACING_TYPE", new global::System.Data.DataColumn[] {
-                        this.tableSWSP_FACING_TYPE.facing_type_idColumn}, new global::System.Data.DataColumn[] {
-                        this.tableSWSP_DITCH.facingColumn}, false);
-            this.Relations.Add(this.relationFK_DITCH_FACING_TYPE);
-            this.relationFK_DITCH_MATERIAL_TYPE = new global::System.Data.DataRelation("FK_DITCH_MATERIAL_TYPE", new global::System.Data.DataColumn[] {
-                        this.tableSWSP_MATERIAL_TYPE.material_type_idColumn}, new global::System.Data.DataColumn[] {
-                        this.tableSWSP_DITCH.materialColumn}, false);
-            this.Relations.Add(this.relationFK_DITCH_MATERIAL_TYPE);
-            this.relationFK_DITCH_SURVEY_PAGE = new global::System.Data.DataRelation("FK_DITCH_SURVEY_PAGE", new global::System.Data.DataColumn[] {
-                        this.tableSWSP_SURVEY_PAGE.survey_page_idColumn}, new global::System.Data.DataColumn[] {
-                        this.tableSWSP_DITCH.survey_page_idColumn}, false);
-            this.Relations.Add(this.relationFK_DITCH_SURVEY_PAGE);
-            this.relationFK_SWSP_DITCH_SWSP_GLOBAL_ID = new global::System.Data.DataRelation("FK_SWSP_DITCH_SWSP_GLOBAL_ID", new global::System.Data.DataColumn[] {
-                        this.tableSWSP_GLOBAL_ID.global_idColumn}, new global::System.Data.DataColumn[] {
-                        this.tableSWSP_DITCH.global_idColumn}, false);
-            this.Relations.Add(this.relationFK_SWSP_DITCH_SWSP_GLOBAL_ID);
-            this.relationFK_PHOTO_CULVERT = new global::System.Data.DataRelation("FK_PHOTO_CULVERT", new global::System.Data.DataColumn[] {
-                        this.tableSWSP_CULVERT.global_idColumn}, new global::System.Data.DataColumn[] {
-                        this.tableSWSP_PHOTO.global_idColumn}, false);
-            this.Relations.Add(this.relationFK_PHOTO_CULVERT);
-            this.relationFK_PHOTO_DITCH = new global::System.Data.DataRelation("FK_PHOTO_DITCH", new global::System.Data.DataColumn[] {
-                        this.tableSWSP_DITCH.global_idColumn}, new global::System.Data.DataColumn[] {
-                        this.tableSWSP_PHOTO.global_idColumn}, false);
-            this.Relations.Add(this.relationFK_PHOTO_DITCH);
+                        this.tableSWSP_PIPE.shapeColumn}, false);
+            this.Relations.Add(this.relationFK_PIPE_SHAPE_TYPE);
             this.relationFK_PHOTO_PIPE = new global::System.Data.DataRelation("FK_PHOTO_PIPE", new global::System.Data.DataColumn[] {
                         this.tableSWSP_PIPE.global_idColumn}, new global::System.Data.DataColumn[] {
                         this.tableSWSP_PHOTO.global_idColumn}, false);
@@ -839,38 +815,62 @@ namespace SWI_2 {
                         this.tableSWSP_MATERIAL_TYPE.material_type_idColumn}, new global::System.Data.DataColumn[] {
                         this.tableSWSP_PIPE.materialColumn}, false);
             this.Relations.Add(this.relationFK_PIPE_MATERIAL_TYPE);
-            this.relationFK_PIPE_SHAPE_TYPE = new global::System.Data.DataRelation("FK_PIPE_SHAPE_TYPE", new global::System.Data.DataColumn[] {
-                        this.tableSWSP_SHAPE_TYPE.shape_type_idColumn}, new global::System.Data.DataColumn[] {
-                        this.tableSWSP_PIPE.shapeColumn}, false);
-            this.Relations.Add(this.relationFK_PIPE_SHAPE_TYPE);
-            this.relationFK_PIPE_SURVEY_PAGE = new global::System.Data.DataRelation("FK_PIPE_SURVEY_PAGE", new global::System.Data.DataColumn[] {
-                        this.tableSWSP_SURVEY_PAGE.survey_page_idColumn}, new global::System.Data.DataColumn[] {
-                        this.tableSWSP_PIPE.survey_page_idColumn}, false);
-            this.Relations.Add(this.relationFK_PIPE_SURVEY_PAGE);
             this.relationFK_SWSP_PIPE_SWSP_GLOBAL_ID = new global::System.Data.DataRelation("FK_SWSP_PIPE_SWSP_GLOBAL_ID", new global::System.Data.DataColumn[] {
                         this.tableSWSP_GLOBAL_ID.global_idColumn}, new global::System.Data.DataColumn[] {
                         this.tableSWSP_PIPE.global_idColumn}, false);
             this.Relations.Add(this.relationFK_SWSP_PIPE_SWSP_GLOBAL_ID);
-            this.relationFK_SUBWATERSHED_WATERSHED = new global::System.Data.DataRelation("FK_SUBWATERSHED_WATERSHED", new global::System.Data.DataColumn[] {
-                        this.tableSWSP_WATERSHED.watershed_idColumn}, new global::System.Data.DataColumn[] {
-                        this.tableSWSP_SUBWATERSHED.watershed_idColumn}, false);
-            this.Relations.Add(this.relationFK_SUBWATERSHED_WATERSHED);
-            this.relationFK_SURVEY_PAGE_VIEW = new global::System.Data.DataRelation("FK_SURVEY_PAGE_VIEW", new global::System.Data.DataColumn[] {
-                        this.tableSWSP_VIEW.view_idColumn}, new global::System.Data.DataColumn[] {
-                        this.tableSWSP_SURVEY_PAGE.view_idColumn}, false);
-            this.Relations.Add(this.relationFK_SURVEY_PAGE_VIEW);
             this.relationFK_SURVEY_PAGE_EVALUATOR_EVALUATOR = new global::System.Data.DataRelation("FK_SURVEY_PAGE_EVALUATOR_EVALUATOR", new global::System.Data.DataColumn[] {
                         this.tableSWSP_EVALUATOR.evaluator_idColumn}, new global::System.Data.DataColumn[] {
                         this.tableSWSP_SURVEY_PAGE_EVALUATOR.evaluator_idColumn}, false);
             this.Relations.Add(this.relationFK_SURVEY_PAGE_EVALUATOR_EVALUATOR);
-            this.relationFK_SURVEY_PAGE_EVALUATOR_SURVEY_PAGE = new global::System.Data.DataRelation("FK_SURVEY_PAGE_EVALUATOR_SURVEY_PAGE", new global::System.Data.DataColumn[] {
+            this.relationFK_PHOTO_DITCH = new global::System.Data.DataRelation("FK_PHOTO_DITCH", new global::System.Data.DataColumn[] {
+                        this.tableSWSP_DITCH.global_idColumn}, new global::System.Data.DataColumn[] {
+                        this.tableSWSP_PHOTO.global_idColumn}, false);
+            this.Relations.Add(this.relationFK_PHOTO_DITCH);
+            this.relationFK_SWSP_DITCH_SWSP_GLOBAL_ID = new global::System.Data.DataRelation("FK_SWSP_DITCH_SWSP_GLOBAL_ID", new global::System.Data.DataColumn[] {
+                        this.tableSWSP_GLOBAL_ID.global_idColumn}, new global::System.Data.DataColumn[] {
+                        this.tableSWSP_DITCH.global_idColumn}, false);
+            this.Relations.Add(this.relationFK_SWSP_DITCH_SWSP_GLOBAL_ID);
+            this.relationFK_DITCH_SURVEY_PAGE = new global::System.Data.DataRelation("FK_DITCH_SURVEY_PAGE", new global::System.Data.DataColumn[] {
                         this.tableSWSP_SURVEY_PAGE.survey_page_idColumn}, new global::System.Data.DataColumn[] {
-                        this.tableSWSP_SURVEY_PAGE_EVALUATOR.survey_page_idColumn}, false);
-            this.Relations.Add(this.relationFK_SURVEY_PAGE_EVALUATOR_SURVEY_PAGE);
-            this.relationFK_VIEW_SUBWATERSHED = new global::System.Data.DataRelation("FK_VIEW_SUBWATERSHED", new global::System.Data.DataColumn[] {
-                        this.tableSWSP_SUBWATERSHED.subwatershed_idColumn}, new global::System.Data.DataColumn[] {
-                        this.tableSWSP_VIEW.subwatershed_idColumn}, false);
-            this.Relations.Add(this.relationFK_VIEW_SUBWATERSHED);
+                        this.tableSWSP_DITCH.survey_page_idColumn}, false);
+            this.Relations.Add(this.relationFK_DITCH_SURVEY_PAGE);
+            this.relationFK_DITCH_MATERIAL_TYPE = new global::System.Data.DataRelation("FK_DITCH_MATERIAL_TYPE", new global::System.Data.DataColumn[] {
+                        this.tableSWSP_MATERIAL_TYPE.material_type_idColumn}, new global::System.Data.DataColumn[] {
+                        this.tableSWSP_DITCH.materialColumn}, false);
+            this.Relations.Add(this.relationFK_DITCH_MATERIAL_TYPE);
+            this.relationFK_DITCH_FACING_TYPE = new global::System.Data.DataRelation("FK_DITCH_FACING_TYPE", new global::System.Data.DataColumn[] {
+                        this.tableSWSP_FACING_TYPE.facing_type_idColumn}, new global::System.Data.DataColumn[] {
+                        this.tableSWSP_DITCH.facingColumn}, false);
+            this.Relations.Add(this.relationFK_DITCH_FACING_TYPE);
+            this.relationFK_PHOTO_CULVERT = new global::System.Data.DataRelation("FK_PHOTO_CULVERT", new global::System.Data.DataColumn[] {
+                        this.tableSWSP_CULVERT.global_idColumn}, new global::System.Data.DataColumn[] {
+                        this.tableSWSP_PHOTO.global_idColumn}, false);
+            this.Relations.Add(this.relationFK_PHOTO_CULVERT);
+            this.relationFK_SWSP_CULVERT_SWSP_GLOBAL_ID = new global::System.Data.DataRelation("FK_SWSP_CULVERT_SWSP_GLOBAL_ID", new global::System.Data.DataColumn[] {
+                        this.tableSWSP_GLOBAL_ID.global_idColumn}, new global::System.Data.DataColumn[] {
+                        this.tableSWSP_CULVERT.global_idColumn}, false);
+            this.Relations.Add(this.relationFK_SWSP_CULVERT_SWSP_GLOBAL_ID);
+            this.relationFK_CULVERT_SURVEY_PAGE = new global::System.Data.DataRelation("FK_CULVERT_SURVEY_PAGE", new global::System.Data.DataColumn[] {
+                        this.tableSWSP_SURVEY_PAGE.survey_page_idColumn}, new global::System.Data.DataColumn[] {
+                        this.tableSWSP_CULVERT.survey_page_idColumn}, false);
+            this.Relations.Add(this.relationFK_CULVERT_SURVEY_PAGE);
+            this.relationFK_CULVERT_SHAPE_TYPE = new global::System.Data.DataRelation("FK_CULVERT_SHAPE_TYPE", new global::System.Data.DataColumn[] {
+                        this.tableSWSP_SHAPE_TYPE.shape_type_idColumn}, new global::System.Data.DataColumn[] {
+                        this.tableSWSP_CULVERT.shapeColumn}, false);
+            this.Relations.Add(this.relationFK_CULVERT_SHAPE_TYPE);
+            this.relationFK_CULVERT_MATERIAL_TYPE = new global::System.Data.DataRelation("FK_CULVERT_MATERIAL_TYPE", new global::System.Data.DataColumn[] {
+                        this.tableSWSP_MATERIAL_TYPE.material_type_idColumn}, new global::System.Data.DataColumn[] {
+                        this.tableSWSP_CULVERT.materialColumn}, false);
+            this.Relations.Add(this.relationFK_CULVERT_MATERIAL_TYPE);
+            this.relationFK_CULVERT_FACING_TYPE = new global::System.Data.DataRelation("FK_CULVERT_FACING_TYPE", new global::System.Data.DataColumn[] {
+                        this.tableSWSP_FACING_TYPE.facing_type_idColumn}, new global::System.Data.DataColumn[] {
+                        this.tableSWSP_CULVERT.facingColumn}, false);
+            this.Relations.Add(this.relationFK_CULVERT_FACING_TYPE);
+            this.relationFK_CULVERT_CULVERT_OPENING_TYPE = new global::System.Data.DataRelation("FK_CULVERT_CULVERT_OPENING_TYPE", new global::System.Data.DataColumn[] {
+                        this.tableSWSP_CULVERT_OPENING_TYPE.culvert_opening_type_idColumn}, new global::System.Data.DataColumn[] {
+                        this.tableSWSP_CULVERT.culvert_openingColumn}, false);
+            this.Relations.Add(this.relationFK_CULVERT_CULVERT_OPENING_TYPE);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3363,15 +3363,15 @@ namespace SWI_2 {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public SWSP_PHOTORow AddSWSP_PHOTORow(SWSP_CULVERTRow parentSWSP_CULVERTRowByFK_PHOTO_CULVERT, string location, string comment) {
+            public SWSP_PHOTORow AddSWSP_PHOTORow(SWSP_PIPERow parentSWSP_PIPERowByFK_PHOTO_PIPE, string location, string comment) {
                 SWSP_PHOTORow rowSWSP_PHOTORow = ((SWSP_PHOTORow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
                         null,
                         location,
                         comment};
-                if ((parentSWSP_CULVERTRowByFK_PHOTO_CULVERT != null)) {
-                    columnValuesArray[1] = parentSWSP_CULVERTRowByFK_PHOTO_CULVERT[1];
+                if ((parentSWSP_PIPERowByFK_PHOTO_PIPE != null)) {
+                    columnValuesArray[1] = parentSWSP_PIPERowByFK_PHOTO_PIPE[1];
                 }
                 rowSWSP_PHOTORow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowSWSP_PHOTORow);
@@ -3576,6 +3576,10 @@ namespace SWI_2 {
             
             private global::System.Data.DataColumn columnlength_ft;
             
+            private global::System.Data.DataColumn columnnode;
+            
+            private global::System.Data.DataColumn columnunobstructed_height_in;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public SWSP_PIPEDataTable() {
                 this.TableName = "SWSP_PIPE";
@@ -3698,6 +3702,20 @@ namespace SWI_2 {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn nodeColumn {
+                get {
+                    return this.columnnode;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn unobstructed_height_inColumn {
+                get {
+                    return this.columnunobstructed_height_in;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -3726,7 +3744,7 @@ namespace SWI_2 {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public SWSP_PIPERow AddSWSP_PIPERow(SWSP_GLOBAL_IDRow parentSWSP_GLOBAL_IDRowByFK_SWSP_PIPE_SWSP_GLOBAL_ID, SWSP_SURVEY_PAGERow parentSWSP_SURVEY_PAGERowByFK_PIPE_SURVEY_PAGE, string us_node, string ds_node, double us_depth_in, double ds_depth_in, double inside_diam_in, SWSP_MATERIAL_TYPERow parentSWSP_MATERIAL_TYPERowByFK_PIPE_MATERIAL_TYPE, SWSP_SHAPE_TYPERow parentSWSP_SHAPE_TYPERowByFK_PIPE_SHAPE_TYPE, string comment, double inside_width_in, int length_ft) {
+            public SWSP_PIPERow AddSWSP_PIPERow(SWSP_GLOBAL_IDRow parentSWSP_GLOBAL_IDRowByFK_SWSP_PIPE_SWSP_GLOBAL_ID, SWSP_SURVEY_PAGERow parentSWSP_SURVEY_PAGERowByFK_PIPE_SURVEY_PAGE, string us_node, string ds_node, double us_depth_in, double ds_depth_in, double inside_diam_in, SWSP_MATERIAL_TYPERow parentSWSP_MATERIAL_TYPERowByFK_PIPE_MATERIAL_TYPE, SWSP_SHAPE_TYPERow parentSWSP_SHAPE_TYPERowByFK_PIPE_SHAPE_TYPE, string comment, double inside_width_in, int length_ft, string node, double unobstructed_height_in) {
                 SWSP_PIPERow rowSWSP_PIPERow = ((SWSP_PIPERow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -3741,7 +3759,9 @@ namespace SWI_2 {
                         null,
                         comment,
                         inside_width_in,
-                        length_ft};
+                        length_ft,
+                        node,
+                        unobstructed_height_in};
                 if ((parentSWSP_GLOBAL_IDRowByFK_SWSP_PIPE_SWSP_GLOBAL_ID != null)) {
                     columnValuesArray[1] = parentSWSP_GLOBAL_IDRowByFK_SWSP_PIPE_SWSP_GLOBAL_ID[0];
                 }
@@ -3792,6 +3812,8 @@ namespace SWI_2 {
                 this.columncomment = base.Columns["comment"];
                 this.columninside_width_in = base.Columns["inside_width_in"];
                 this.columnlength_ft = base.Columns["length_ft"];
+                this.columnnode = base.Columns["node"];
+                this.columnunobstructed_height_in = base.Columns["unobstructed_height_in"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3822,6 +3844,10 @@ namespace SWI_2 {
                 base.Columns.Add(this.columninside_width_in);
                 this.columnlength_ft = new global::System.Data.DataColumn("length_ft", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnlength_ft);
+                this.columnnode = new global::System.Data.DataColumn("node", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnnode);
+                this.columnunobstructed_height_in = new global::System.Data.DataColumn("unobstructed_height_in", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnunobstructed_height_in);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnpipe_id}, true));
                 this.columnpipe_id.AutoIncrement = true;
@@ -3835,6 +3861,7 @@ namespace SWI_2 {
                 this.columnus_node.MaxLength = 10;
                 this.columnds_node.MaxLength = 10;
                 this.columncomment.MaxLength = 2147483647;
+                this.columnnode.MaxLength = 10;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -8894,42 +8921,12 @@ namespace SWI_2 {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public SWSP_CULVERT_OPENING_TYPERow SWSP_CULVERT_OPENING_TYPERow {
+            public SWSP_GLOBAL_IDRow SWSP_GLOBAL_IDRow {
                 get {
-                    return ((SWSP_CULVERT_OPENING_TYPERow)(this.GetParentRow(this.Table.ParentRelations["FK_CULVERT_CULVERT_OPENING_TYPE"])));
+                    return ((SWSP_GLOBAL_IDRow)(this.GetParentRow(this.Table.ParentRelations["FK_SWSP_CULVERT_SWSP_GLOBAL_ID"])));
                 }
                 set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_CULVERT_CULVERT_OPENING_TYPE"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public SWSP_FACING_TYPERow SWSP_FACING_TYPERow {
-                get {
-                    return ((SWSP_FACING_TYPERow)(this.GetParentRow(this.Table.ParentRelations["FK_CULVERT_FACING_TYPE"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_CULVERT_FACING_TYPE"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public SWSP_MATERIAL_TYPERow SWSP_MATERIAL_TYPERow {
-                get {
-                    return ((SWSP_MATERIAL_TYPERow)(this.GetParentRow(this.Table.ParentRelations["FK_CULVERT_MATERIAL_TYPE"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_CULVERT_MATERIAL_TYPE"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public SWSP_SHAPE_TYPERow SWSP_SHAPE_TYPERow {
-                get {
-                    return ((SWSP_SHAPE_TYPERow)(this.GetParentRow(this.Table.ParentRelations["FK_CULVERT_SHAPE_TYPE"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_CULVERT_SHAPE_TYPE"]);
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_SWSP_CULVERT_SWSP_GLOBAL_ID"]);
                 }
             }
             
@@ -8944,12 +8941,42 @@ namespace SWI_2 {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public SWSP_GLOBAL_IDRow SWSP_GLOBAL_IDRow {
+            public SWSP_SHAPE_TYPERow SWSP_SHAPE_TYPERow {
                 get {
-                    return ((SWSP_GLOBAL_IDRow)(this.GetParentRow(this.Table.ParentRelations["FK_SWSP_CULVERT_SWSP_GLOBAL_ID"])));
+                    return ((SWSP_SHAPE_TYPERow)(this.GetParentRow(this.Table.ParentRelations["FK_CULVERT_SHAPE_TYPE"])));
                 }
                 set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_SWSP_CULVERT_SWSP_GLOBAL_ID"]);
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_CULVERT_SHAPE_TYPE"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public SWSP_MATERIAL_TYPERow SWSP_MATERIAL_TYPERow {
+                get {
+                    return ((SWSP_MATERIAL_TYPERow)(this.GetParentRow(this.Table.ParentRelations["FK_CULVERT_MATERIAL_TYPE"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_CULVERT_MATERIAL_TYPE"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public SWSP_FACING_TYPERow SWSP_FACING_TYPERow {
+                get {
+                    return ((SWSP_FACING_TYPERow)(this.GetParentRow(this.Table.ParentRelations["FK_CULVERT_FACING_TYPE"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_CULVERT_FACING_TYPE"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public SWSP_CULVERT_OPENING_TYPERow SWSP_CULVERT_OPENING_TYPERow {
+                get {
+                    return ((SWSP_CULVERT_OPENING_TYPERow)(this.GetParentRow(this.Table.ParentRelations["FK_CULVERT_CULVERT_OPENING_TYPE"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_CULVERT_CULVERT_OPENING_TYPE"]);
                 }
             }
             
@@ -9366,22 +9393,12 @@ namespace SWI_2 {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public SWSP_FACING_TYPERow SWSP_FACING_TYPERow {
+            public SWSP_GLOBAL_IDRow SWSP_GLOBAL_IDRow {
                 get {
-                    return ((SWSP_FACING_TYPERow)(this.GetParentRow(this.Table.ParentRelations["FK_DITCH_FACING_TYPE"])));
+                    return ((SWSP_GLOBAL_IDRow)(this.GetParentRow(this.Table.ParentRelations["FK_SWSP_DITCH_SWSP_GLOBAL_ID"])));
                 }
                 set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_DITCH_FACING_TYPE"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public SWSP_MATERIAL_TYPERow SWSP_MATERIAL_TYPERow {
-                get {
-                    return ((SWSP_MATERIAL_TYPERow)(this.GetParentRow(this.Table.ParentRelations["FK_DITCH_MATERIAL_TYPE"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_DITCH_MATERIAL_TYPE"]);
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_SWSP_DITCH_SWSP_GLOBAL_ID"]);
                 }
             }
             
@@ -9396,12 +9413,22 @@ namespace SWI_2 {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public SWSP_GLOBAL_IDRow SWSP_GLOBAL_IDRow {
+            public SWSP_MATERIAL_TYPERow SWSP_MATERIAL_TYPERow {
                 get {
-                    return ((SWSP_GLOBAL_IDRow)(this.GetParentRow(this.Table.ParentRelations["FK_SWSP_DITCH_SWSP_GLOBAL_ID"])));
+                    return ((SWSP_MATERIAL_TYPERow)(this.GetParentRow(this.Table.ParentRelations["FK_DITCH_MATERIAL_TYPE"])));
                 }
                 set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_SWSP_DITCH_SWSP_GLOBAL_ID"]);
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_DITCH_MATERIAL_TYPE"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public SWSP_FACING_TYPERow SWSP_FACING_TYPERow {
+                get {
+                    return ((SWSP_FACING_TYPERow)(this.GetParentRow(this.Table.ParentRelations["FK_DITCH_FACING_TYPE"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_DITCH_FACING_TYPE"]);
                 }
             }
             
@@ -9686,22 +9713,22 @@ namespace SWI_2 {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public SWSP_CULVERTRow[] GetSWSP_CULVERTRows() {
-                if ((this.Table.ChildRelations["FK_CULVERT_FACING_TYPE"] == null)) {
-                    return new SWSP_CULVERTRow[0];
-                }
-                else {
-                    return ((SWSP_CULVERTRow[])(base.GetChildRows(this.Table.ChildRelations["FK_CULVERT_FACING_TYPE"])));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public SWSP_DITCHRow[] GetSWSP_DITCHRows() {
                 if ((this.Table.ChildRelations["FK_DITCH_FACING_TYPE"] == null)) {
                     return new SWSP_DITCHRow[0];
                 }
                 else {
                     return ((SWSP_DITCHRow[])(base.GetChildRows(this.Table.ChildRelations["FK_DITCH_FACING_TYPE"])));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public SWSP_CULVERTRow[] GetSWSP_CULVERTRows() {
+                if ((this.Table.ChildRelations["FK_CULVERT_FACING_TYPE"] == null)) {
+                    return new SWSP_CULVERTRow[0];
+                }
+                else {
+                    return ((SWSP_CULVERTRow[])(base.GetChildRows(this.Table.ChildRelations["FK_CULVERT_FACING_TYPE"])));
                 }
             }
         }
@@ -9756,12 +9783,12 @@ namespace SWI_2 {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public SWSP_CULVERTRow[] GetSWSP_CULVERTRows() {
-                if ((this.Table.ChildRelations["FK_SWSP_CULVERT_SWSP_GLOBAL_ID"] == null)) {
-                    return new SWSP_CULVERTRow[0];
+            public SWSP_PIPERow[] GetSWSP_PIPERows() {
+                if ((this.Table.ChildRelations["FK_SWSP_PIPE_SWSP_GLOBAL_ID"] == null)) {
+                    return new SWSP_PIPERow[0];
                 }
                 else {
-                    return ((SWSP_CULVERTRow[])(base.GetChildRows(this.Table.ChildRelations["FK_SWSP_CULVERT_SWSP_GLOBAL_ID"])));
+                    return ((SWSP_PIPERow[])(base.GetChildRows(this.Table.ChildRelations["FK_SWSP_PIPE_SWSP_GLOBAL_ID"])));
                 }
             }
             
@@ -9776,12 +9803,12 @@ namespace SWI_2 {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public SWSP_PIPERow[] GetSWSP_PIPERows() {
-                if ((this.Table.ChildRelations["FK_SWSP_PIPE_SWSP_GLOBAL_ID"] == null)) {
-                    return new SWSP_PIPERow[0];
+            public SWSP_CULVERTRow[] GetSWSP_CULVERTRows() {
+                if ((this.Table.ChildRelations["FK_SWSP_CULVERT_SWSP_GLOBAL_ID"] == null)) {
+                    return new SWSP_CULVERTRow[0];
                 }
                 else {
-                    return ((SWSP_PIPERow[])(base.GetChildRows(this.Table.ChildRelations["FK_SWSP_PIPE_SWSP_GLOBAL_ID"])));
+                    return ((SWSP_CULVERTRow[])(base.GetChildRows(this.Table.ChildRelations["FK_SWSP_CULVERT_SWSP_GLOBAL_ID"])));
                 }
             }
         }
@@ -9861,12 +9888,12 @@ namespace SWI_2 {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public SWSP_CULVERTRow[] GetSWSP_CULVERTRows() {
-                if ((this.Table.ChildRelations["FK_CULVERT_MATERIAL_TYPE"] == null)) {
-                    return new SWSP_CULVERTRow[0];
+            public SWSP_PIPERow[] GetSWSP_PIPERows() {
+                if ((this.Table.ChildRelations["FK_PIPE_MATERIAL_TYPE"] == null)) {
+                    return new SWSP_PIPERow[0];
                 }
                 else {
-                    return ((SWSP_CULVERTRow[])(base.GetChildRows(this.Table.ChildRelations["FK_CULVERT_MATERIAL_TYPE"])));
+                    return ((SWSP_PIPERow[])(base.GetChildRows(this.Table.ChildRelations["FK_PIPE_MATERIAL_TYPE"])));
                 }
             }
             
@@ -9881,12 +9908,12 @@ namespace SWI_2 {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public SWSP_PIPERow[] GetSWSP_PIPERows() {
-                if ((this.Table.ChildRelations["FK_PIPE_MATERIAL_TYPE"] == null)) {
-                    return new SWSP_PIPERow[0];
+            public SWSP_CULVERTRow[] GetSWSP_CULVERTRows() {
+                if ((this.Table.ChildRelations["FK_CULVERT_MATERIAL_TYPE"] == null)) {
+                    return new SWSP_CULVERTRow[0];
                 }
                 else {
-                    return ((SWSP_PIPERow[])(base.GetChildRows(this.Table.ChildRelations["FK_PIPE_MATERIAL_TYPE"])));
+                    return ((SWSP_CULVERTRow[])(base.GetChildRows(this.Table.ChildRelations["FK_CULVERT_MATERIAL_TYPE"])));
                 }
             }
         }
@@ -9956,12 +9983,12 @@ namespace SWI_2 {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public SWSP_CULVERTRow SWSP_CULVERTRow {
+            public SWSP_PIPERow SWSP_PIPERow {
                 get {
-                    return ((SWSP_CULVERTRow)(this.GetParentRow(this.Table.ParentRelations["FK_PHOTO_CULVERT"])));
+                    return ((SWSP_PIPERow)(this.GetParentRow(this.Table.ParentRelations["FK_PHOTO_PIPE"])));
                 }
                 set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_PHOTO_CULVERT"]);
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_PHOTO_PIPE"]);
                 }
             }
             
@@ -9976,12 +10003,12 @@ namespace SWI_2 {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public SWSP_PIPERow SWSP_PIPERow {
+            public SWSP_CULVERTRow SWSP_CULVERTRow {
                 get {
-                    return ((SWSP_PIPERow)(this.GetParentRow(this.Table.ParentRelations["FK_PHOTO_PIPE"])));
+                    return ((SWSP_CULVERTRow)(this.GetParentRow(this.Table.ParentRelations["FK_PHOTO_CULVERT"])));
                 }
                 set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_PHOTO_PIPE"]);
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_PHOTO_CULVERT"]);
                 }
             }
             
@@ -10201,12 +10228,42 @@ namespace SWI_2 {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public SWSP_MATERIAL_TYPERow SWSP_MATERIAL_TYPERow {
+            public string node {
                 get {
-                    return ((SWSP_MATERIAL_TYPERow)(this.GetParentRow(this.Table.ParentRelations["FK_PIPE_MATERIAL_TYPE"])));
+                    try {
+                        return ((string)(this[this.tableSWSP_PIPE.nodeColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'node\' in table \'SWSP_PIPE\' is DBNull.", e);
+                    }
                 }
                 set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_PIPE_MATERIAL_TYPE"]);
+                    this[this.tableSWSP_PIPE.nodeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public double unobstructed_height_in {
+                get {
+                    try {
+                        return ((double)(this[this.tableSWSP_PIPE.unobstructed_height_inColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'unobstructed_height_in\' in table \'SWSP_PIPE\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableSWSP_PIPE.unobstructed_height_inColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public SWSP_SURVEY_PAGERow SWSP_SURVEY_PAGERow {
+                get {
+                    return ((SWSP_SURVEY_PAGERow)(this.GetParentRow(this.Table.ParentRelations["FK_PIPE_SURVEY_PAGE"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_PIPE_SURVEY_PAGE"]);
                 }
             }
             
@@ -10221,12 +10278,12 @@ namespace SWI_2 {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public SWSP_SURVEY_PAGERow SWSP_SURVEY_PAGERow {
+            public SWSP_MATERIAL_TYPERow SWSP_MATERIAL_TYPERow {
                 get {
-                    return ((SWSP_SURVEY_PAGERow)(this.GetParentRow(this.Table.ParentRelations["FK_PIPE_SURVEY_PAGE"])));
+                    return ((SWSP_MATERIAL_TYPERow)(this.GetParentRow(this.Table.ParentRelations["FK_PIPE_MATERIAL_TYPE"])));
                 }
                 set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_PIPE_SURVEY_PAGE"]);
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_PIPE_MATERIAL_TYPE"]);
                 }
             }
             
@@ -10341,6 +10398,26 @@ namespace SWI_2 {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsnodeNull() {
+                return this.IsNull(this.tableSWSP_PIPE.nodeColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetnodeNull() {
+                this[this.tableSWSP_PIPE.nodeColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool Isunobstructed_height_inNull() {
+                return this.IsNull(this.tableSWSP_PIPE.unobstructed_height_inColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void Setunobstructed_height_inNull() {
+                this[this.tableSWSP_PIPE.unobstructed_height_inColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public SWSP_PHOTORow[] GetSWSP_PHOTORows() {
                 if ((this.Table.ChildRelations["FK_PHOTO_PIPE"] == null)) {
                     return new SWSP_PHOTORow[0];
@@ -10426,22 +10503,22 @@ namespace SWI_2 {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public SWSP_CULVERTRow[] GetSWSP_CULVERTRows() {
-                if ((this.Table.ChildRelations["FK_CULVERT_SHAPE_TYPE"] == null)) {
-                    return new SWSP_CULVERTRow[0];
-                }
-                else {
-                    return ((SWSP_CULVERTRow[])(base.GetChildRows(this.Table.ChildRelations["FK_CULVERT_SHAPE_TYPE"])));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public SWSP_PIPERow[] GetSWSP_PIPERows() {
                 if ((this.Table.ChildRelations["FK_PIPE_SHAPE_TYPE"] == null)) {
                     return new SWSP_PIPERow[0];
                 }
                 else {
                     return ((SWSP_PIPERow[])(base.GetChildRows(this.Table.ChildRelations["FK_PIPE_SHAPE_TYPE"])));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public SWSP_CULVERTRow[] GetSWSP_CULVERTRows() {
+                if ((this.Table.ChildRelations["FK_CULVERT_SHAPE_TYPE"] == null)) {
+                    return new SWSP_CULVERTRow[0];
+                }
+                else {
+                    return ((SWSP_CULVERTRow[])(base.GetChildRows(this.Table.ChildRelations["FK_CULVERT_SHAPE_TYPE"])));
                 }
             }
         }
@@ -10696,22 +10773,12 @@ namespace SWI_2 {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public SWSP_CULVERTRow[] GetSWSP_CULVERTRows() {
-                if ((this.Table.ChildRelations["FK_CULVERT_SURVEY_PAGE"] == null)) {
-                    return new SWSP_CULVERTRow[0];
+            public SWSP_SURVEY_PAGE_EVALUATORRow[] GetSWSP_SURVEY_PAGE_EVALUATORRows() {
+                if ((this.Table.ChildRelations["FK_SURVEY_PAGE_EVALUATOR_SURVEY_PAGE"] == null)) {
+                    return new SWSP_SURVEY_PAGE_EVALUATORRow[0];
                 }
                 else {
-                    return ((SWSP_CULVERTRow[])(base.GetChildRows(this.Table.ChildRelations["FK_CULVERT_SURVEY_PAGE"])));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public SWSP_DITCHRow[] GetSWSP_DITCHRows() {
-                if ((this.Table.ChildRelations["FK_DITCH_SURVEY_PAGE"] == null)) {
-                    return new SWSP_DITCHRow[0];
-                }
-                else {
-                    return ((SWSP_DITCHRow[])(base.GetChildRows(this.Table.ChildRelations["FK_DITCH_SURVEY_PAGE"])));
+                    return ((SWSP_SURVEY_PAGE_EVALUATORRow[])(base.GetChildRows(this.Table.ChildRelations["FK_SURVEY_PAGE_EVALUATOR_SURVEY_PAGE"])));
                 }
             }
             
@@ -10726,12 +10793,22 @@ namespace SWI_2 {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public SWSP_SURVEY_PAGE_EVALUATORRow[] GetSWSP_SURVEY_PAGE_EVALUATORRows() {
-                if ((this.Table.ChildRelations["FK_SURVEY_PAGE_EVALUATOR_SURVEY_PAGE"] == null)) {
-                    return new SWSP_SURVEY_PAGE_EVALUATORRow[0];
+            public SWSP_DITCHRow[] GetSWSP_DITCHRows() {
+                if ((this.Table.ChildRelations["FK_DITCH_SURVEY_PAGE"] == null)) {
+                    return new SWSP_DITCHRow[0];
                 }
                 else {
-                    return ((SWSP_SURVEY_PAGE_EVALUATORRow[])(base.GetChildRows(this.Table.ChildRelations["FK_SURVEY_PAGE_EVALUATOR_SURVEY_PAGE"])));
+                    return ((SWSP_DITCHRow[])(base.GetChildRows(this.Table.ChildRelations["FK_DITCH_SURVEY_PAGE"])));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public SWSP_CULVERTRow[] GetSWSP_CULVERTRows() {
+                if ((this.Table.ChildRelations["FK_CULVERT_SURVEY_PAGE"] == null)) {
+                    return new SWSP_CULVERTRow[0];
+                }
+                else {
+                    return ((SWSP_CULVERTRow[])(base.GetChildRows(this.Table.ChildRelations["FK_CULVERT_SURVEY_PAGE"])));
                 }
             }
         }
@@ -10771,22 +10848,22 @@ namespace SWI_2 {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public SWSP_EVALUATORRow SWSP_EVALUATORRow {
-                get {
-                    return ((SWSP_EVALUATORRow)(this.GetParentRow(this.Table.ParentRelations["FK_SURVEY_PAGE_EVALUATOR_EVALUATOR"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_SURVEY_PAGE_EVALUATOR_EVALUATOR"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public SWSP_SURVEY_PAGERow SWSP_SURVEY_PAGERow {
                 get {
                     return ((SWSP_SURVEY_PAGERow)(this.GetParentRow(this.Table.ParentRelations["FK_SURVEY_PAGE_EVALUATOR_SURVEY_PAGE"])));
                 }
                 set {
                     this.SetParentRow(value, this.Table.ParentRelations["FK_SURVEY_PAGE_EVALUATOR_SURVEY_PAGE"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public SWSP_EVALUATORRow SWSP_EVALUATORRow {
+                get {
+                    return ((SWSP_EVALUATORRow)(this.GetParentRow(this.Table.ParentRelations["FK_SURVEY_PAGE_EVALUATOR_EVALUATOR"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_SURVEY_PAGE_EVALUATOR_EVALUATOR"]);
                 }
             }
         }
@@ -18473,10 +18550,12 @@ SELECT photo_id, global_id, location, comment FROM SWSP_PHOTO WHERE (photo_id = 
             tableMapping.ColumnMappings.Add("comment", "comment");
             tableMapping.ColumnMappings.Add("inside_width_in", "inside_width_in");
             tableMapping.ColumnMappings.Add("length_ft", "length_ft");
+            tableMapping.ColumnMappings.Add("node", "node");
+            tableMapping.ColumnMappings.Add("unobstructed_height_in", "unobstructed_height_in");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [SWSP_PIPE] WHERE (([pipe_id] = @Original_pipe_id) AND ([global_id] = @Original_global_id) AND ([survey_page_id] = @Original_survey_page_id) AND ((@IsNull_us_node = 1 AND [us_node] IS NULL) OR ([us_node] = @Original_us_node)) AND ((@IsNull_ds_node = 1 AND [ds_node] IS NULL) OR ([ds_node] = @Original_ds_node)) AND ((@IsNull_us_depth_in = 1 AND [us_depth_in] IS NULL) OR ([us_depth_in] = @Original_us_depth_in)) AND ((@IsNull_ds_depth_in = 1 AND [ds_depth_in] IS NULL) OR ([ds_depth_in] = @Original_ds_depth_in)) AND ((@IsNull_inside_diam_in = 1 AND [inside_diam_in] IS NULL) OR ([inside_diam_in] = @Original_inside_diam_in)) AND ((@IsNull_inside_width_in = 1 AND [inside_width_in] IS NULL) OR ([inside_width_in] = @Original_inside_width_in)) AND ((@IsNull_material = 1 AND [material] IS NULL) OR ([material] = @Original_material)) AND ((@IsNull_shape = 1 AND [shape] IS NULL) OR ([shape] = @Original_shape)) AND ((@IsNull_length_ft = 1 AND [length_ft] IS NULL) OR ([length_ft] = @Original_length_ft)))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [SWSP_PIPE] WHERE (([pipe_id] = @Original_pipe_id) AND ([global_id] = @Original_global_id) AND ([survey_page_id] = @Original_survey_page_id) AND ((@IsNull_us_node = 1 AND [us_node] IS NULL) OR ([us_node] = @Original_us_node)) AND ((@IsNull_ds_node = 1 AND [ds_node] IS NULL) OR ([ds_node] = @Original_ds_node)) AND ((@IsNull_us_depth_in = 1 AND [us_depth_in] IS NULL) OR ([us_depth_in] = @Original_us_depth_in)) AND ((@IsNull_ds_depth_in = 1 AND [ds_depth_in] IS NULL) OR ([ds_depth_in] = @Original_ds_depth_in)) AND ((@IsNull_inside_diam_in = 1 AND [inside_diam_in] IS NULL) OR ([inside_diam_in] = @Original_inside_diam_in)) AND ((@IsNull_inside_width_in = 1 AND [inside_width_in] IS NULL) OR ([inside_width_in] = @Original_inside_width_in)) AND ((@IsNull_material = 1 AND [material] IS NULL) OR ([material] = @Original_material)) AND ((@IsNull_shape = 1 AND [shape] IS NULL) OR ([shape] = @Original_shape)) AND ((@IsNull_length_ft = 1 AND [length_ft] IS NULL) OR ([length_ft] = @Original_length_ft)) AND ((@IsNull_node = 1 AND [node] IS NULL) OR ([node] = @Original_node)) AND ((@IsNull_unobstructed_height_in = 1 AND [unobstructed_height_in] IS NULL) OR ([unobstructed_height_in] = @Original_unobstructed_height_in)))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_pipe_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "pipe_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_global_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "global_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -18499,10 +18578,14 @@ SELECT photo_id, global_id, location, comment FROM SWSP_PHOTO WHERE (photo_id = 
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_shape", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "shape", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_length_ft", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "length_ft", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_length_ft", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "length_ft", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_node", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "node", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_node", global::System.Data.SqlDbType.Char, 0, global::System.Data.ParameterDirection.Input, 0, 0, "node", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_unobstructed_height_in", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "unobstructed_height_in", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_unobstructed_height_in", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "unobstructed_height_in", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [SWSP_PIPE] ([global_id], [survey_page_id], [us_node], [ds_node], [us_depth_in], [ds_depth_in], [inside_diam_in], [inside_width_in], [material], [shape], [comment], [length_ft]) VALUES (@global_id, @survey_page_id, @us_node, @ds_node, @us_depth_in, @ds_depth_in, @inside_diam_in, @inside_width_in, @material, @shape, @comment, @length_ft);
-SELECT pipe_id, global_id, survey_page_id, us_node, ds_node, us_depth_in, ds_depth_in, inside_diam_in, inside_width_in, material, shape, comment, length_ft FROM SWSP_PIPE WHERE (pipe_id = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [SWSP_PIPE] ([global_id], [survey_page_id], [us_node], [ds_node], [us_depth_in], [ds_depth_in], [inside_diam_in], [inside_width_in], [material], [shape], [comment], [length_ft], [node], [unobstructed_height_in]) VALUES (@global_id, @survey_page_id, @us_node, @ds_node, @us_depth_in, @ds_depth_in, @inside_diam_in, @inside_width_in, @material, @shape, @comment, @length_ft, @node, @unobstructed_height_in);
+SELECT pipe_id, global_id, survey_page_id, us_node, ds_node, us_depth_in, ds_depth_in, inside_diam_in, inside_width_in, material, shape, comment, length_ft, node, unobstructed_height_in FROM SWSP_PIPE WHERE (pipe_id = SCOPE_IDENTITY())";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@global_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "global_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@survey_page_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "survey_page_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -18516,28 +18599,34 @@ SELECT pipe_id, global_id, survey_page_id, us_node, ds_node, us_depth_in, ds_dep
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@shape", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "shape", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@comment", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "comment", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@length_ft", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "length_ft", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@node", global::System.Data.SqlDbType.Char, 0, global::System.Data.ParameterDirection.Input, 0, 0, "node", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@unobstructed_height_in", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "unobstructed_height_in", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
             this._adapter.UpdateCommand.CommandText = "UPDATE [SWSP_PIPE] SET [global_id] = @global_id, [survey_page_id] = @survey_page_" +
                 "id, [us_node] = @us_node, [ds_node] = @ds_node, [us_depth_in] = @us_depth_in, [d" +
                 "s_depth_in] = @ds_depth_in, [inside_diam_in] = @inside_diam_in, [inside_width_in" +
                 "] = @inside_width_in, [material] = @material, [shape] = @shape, [comment] = @com" +
-                "ment, [length_ft] = @length_ft WHERE (([pipe_id] = @Original_pipe_id) AND ([glob" +
-                "al_id] = @Original_global_id) AND ([survey_page_id] = @Original_survey_page_id) " +
-                "AND ((@IsNull_us_node = 1 AND [us_node] IS NULL) OR ([us_node] = @Original_us_no" +
-                "de)) AND ((@IsNull_ds_node = 1 AND [ds_node] IS NULL) OR ([ds_node] = @Original_" +
-                "ds_node)) AND ((@IsNull_us_depth_in = 1 AND [us_depth_in] IS NULL) OR ([us_depth" +
-                "_in] = @Original_us_depth_in)) AND ((@IsNull_ds_depth_in = 1 AND [ds_depth_in] I" +
-                "S NULL) OR ([ds_depth_in] = @Original_ds_depth_in)) AND ((@IsNull_inside_diam_in" +
-                " = 1 AND [inside_diam_in] IS NULL) OR ([inside_diam_in] = @Original_inside_diam_" +
-                "in)) AND ((@IsNull_inside_width_in = 1 AND [inside_width_in] IS NULL) OR ([insid" +
-                "e_width_in] = @Original_inside_width_in)) AND ((@IsNull_material = 1 AND [materi" +
-                "al] IS NULL) OR ([material] = @Original_material)) AND ((@IsNull_shape = 1 AND [" +
-                "shape] IS NULL) OR ([shape] = @Original_shape)) AND ((@IsNull_length_ft = 1 AND " +
-                "[length_ft] IS NULL) OR ([length_ft] = @Original_length_ft)));\r\nSELECT pipe_id, " +
-                "global_id, survey_page_id, us_node, ds_node, us_depth_in, ds_depth_in, inside_di" +
-                "am_in, inside_width_in, material, shape, comment, length_ft FROM SWSP_PIPE WHERE" +
-                " (pipe_id = @pipe_id)";
+                "ment, [length_ft] = @length_ft, [node] = @node, [unobstructed_height_in] = @unob" +
+                "structed_height_in WHERE (([pipe_id] = @Original_pipe_id) AND ([global_id] = @Or" +
+                "iginal_global_id) AND ([survey_page_id] = @Original_survey_page_id) AND ((@IsNul" +
+                "l_us_node = 1 AND [us_node] IS NULL) OR ([us_node] = @Original_us_node)) AND ((@" +
+                "IsNull_ds_node = 1 AND [ds_node] IS NULL) OR ([ds_node] = @Original_ds_node)) AN" +
+                "D ((@IsNull_us_depth_in = 1 AND [us_depth_in] IS NULL) OR ([us_depth_in] = @Orig" +
+                "inal_us_depth_in)) AND ((@IsNull_ds_depth_in = 1 AND [ds_depth_in] IS NULL) OR (" +
+                "[ds_depth_in] = @Original_ds_depth_in)) AND ((@IsNull_inside_diam_in = 1 AND [in" +
+                "side_diam_in] IS NULL) OR ([inside_diam_in] = @Original_inside_diam_in)) AND ((@" +
+                "IsNull_inside_width_in = 1 AND [inside_width_in] IS NULL) OR ([inside_width_in] " +
+                "= @Original_inside_width_in)) AND ((@IsNull_material = 1 AND [material] IS NULL)" +
+                " OR ([material] = @Original_material)) AND ((@IsNull_shape = 1 AND [shape] IS NU" +
+                "LL) OR ([shape] = @Original_shape)) AND ((@IsNull_length_ft = 1 AND [length_ft] " +
+                "IS NULL) OR ([length_ft] = @Original_length_ft)) AND ((@IsNull_node = 1 AND [nod" +
+                "e] IS NULL) OR ([node] = @Original_node)) AND ((@IsNull_unobstructed_height_in =" +
+                " 1 AND [unobstructed_height_in] IS NULL) OR ([unobstructed_height_in] = @Origina" +
+                "l_unobstructed_height_in)));\r\nSELECT pipe_id, global_id, survey_page_id, us_node" +
+                ", ds_node, us_depth_in, ds_depth_in, inside_diam_in, inside_width_in, material, " +
+                "shape, comment, length_ft, node, unobstructed_height_in FROM SWSP_PIPE WHERE (pi" +
+                "pe_id = @pipe_id)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@global_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "global_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@survey_page_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "survey_page_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -18551,6 +18640,8 @@ SELECT pipe_id, global_id, survey_page_id, us_node, ds_node, us_depth_in, ds_dep
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@shape", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "shape", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@comment", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "comment", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@length_ft", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "length_ft", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@node", global::System.Data.SqlDbType.Char, 0, global::System.Data.ParameterDirection.Input, 0, 0, "node", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@unobstructed_height_in", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "unobstructed_height_in", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_pipe_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "pipe_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_global_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "global_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_survey_page_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "survey_page_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -18572,6 +18663,10 @@ SELECT pipe_id, global_id, survey_page_id, us_node, ds_node, us_depth_in, ds_dep
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_shape", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "shape", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_length_ft", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "length_ft", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_length_ft", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "length_ft", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_node", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "node", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_node", global::System.Data.SqlDbType.Char, 0, global::System.Data.ParameterDirection.Input, 0, 0, "node", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_unobstructed_height_in", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "unobstructed_height_in", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_unobstructed_height_in", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "unobstructed_height_in", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@pipe_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "pipe_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
@@ -18586,9 +18681,9 @@ SELECT pipe_id, global_id, survey_page_id, us_node, ds_node, us_depth_in, ds_dep
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[7];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT pipe_id, global_id, survey_page_id, us_node, ds_node, us_depth_in, ds_dept" +
-                "h_in, inside_diam_in, inside_width_in, material, shape, comment, length_ft FROM " +
-                "SWSP_PIPE";
+            this._commandCollection[0].CommandText = "SELECT        pipe_id, global_id, survey_page_id, us_node, ds_node, us_depth_in, " +
+                "ds_depth_in, inside_diam_in, inside_width_in, material, shape, comment, length_f" +
+                "t, node, unobstructed_height_in\r\nFROM            SWSP_PIPE";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[1].Connection = this.Connection;
@@ -18602,9 +18697,9 @@ SELECT pipe_id, global_id, survey_page_id, us_node, ds_node, us_depth_in, ds_dep
             this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_pipe_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "pipe_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._commandCollection[3] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[3].Connection = this.Connection;
-            this._commandCollection[3].CommandText = "SELECT pipe_id, global_id, survey_page_id, us_node, ds_node, us_depth_in, ds_dept" +
-                "h_in, inside_diam_in, inside_width_in, material, shape, comment, length_ft FROM " +
-                "SWSP_PIPE WHERE global_id = @global_id";
+            this._commandCollection[3].CommandText = @"SELECT        comment, ds_depth_in, ds_node, global_id, inside_diam_in, inside_width_in, length_ft, material, node, pipe_id, shape, survey_page_id, unobstructed_height_in, us_depth_in, us_node
+FROM            SWSP_PIPE
+WHERE        (global_id = @global_id)";
             this._commandCollection[3].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@global_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "global_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[4] = new global::System.Data.SqlClient.SqlCommand();
@@ -18623,7 +18718,10 @@ SELECT pipe_id, global_id, survey_page_id, us_node, ds_node, us_depth_in, ds_dep
             this._commandCollection[5].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@findNode", global::System.Data.SqlDbType.Char, 10, global::System.Data.ParameterDirection.Input, 0, 0, "us_node", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[6] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[6].Connection = this.Connection;
-            this._commandCollection[6].CommandText = @"UPDATE [SWSP_PIPE] SET [survey_page_id] = @survey_page_id, [us_node] = @us_node, [ds_node] = @ds_node, [us_depth_in] = @us_depth_in, [ds_depth_in] = @ds_depth_in, [inside_diam_in] = @inside_diam_in, [inside_width_in] = @inside_width_in, [material] = @material, [shape] = @shape, [comment] = @comment, [length_ft] = @length_ft WHERE ([global_id] = @Original_global_id)";
+            this._commandCollection[6].CommandText = @"UPDATE       SWSP_PIPE
+SET                survey_page_id = @survey_page_id, us_node = @us_node, ds_node = @ds_node, us_depth_in = @us_depth_in, ds_depth_in = @ds_depth_in, inside_diam_in = @inside_diam_in, 
+                         inside_width_in = @inside_width_in, material = @material, shape = @shape, comment = @comment, length_ft = @length_ft, node =@node, unobstructed_height_in =@unobstructed_height_in
+WHERE        (global_id = @Original_global_id)";
             this._commandCollection[6].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[6].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@survey_page_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "survey_page_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[6].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@us_node", global::System.Data.SqlDbType.Char, 10, global::System.Data.ParameterDirection.Input, 0, 0, "us_node", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -18636,6 +18734,8 @@ SELECT pipe_id, global_id, survey_page_id, us_node, ds_node, us_depth_in, ds_dep
             this._commandCollection[6].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@shape", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "shape", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[6].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@comment", global::System.Data.SqlDbType.VarChar, 2147483647, global::System.Data.ParameterDirection.Input, 0, 0, "comment", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[6].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@length_ft", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "length_ft", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[6].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@node", global::System.Data.SqlDbType.Char, 10, global::System.Data.ParameterDirection.Input, 0, 0, "node", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[6].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@unobstructed_height_in", global::System.Data.SqlDbType.Float, 8, global::System.Data.ParameterDirection.Input, 0, 0, "unobstructed_height_in", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[6].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_global_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "global_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
         }
         
@@ -18713,7 +18813,7 @@ SELECT pipe_id, global_id, survey_page_id, us_node, ds_node, us_depth_in, ds_dep
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_pipe_id, int Original_global_id, int Original_survey_page_id, string Original_us_node, string Original_ds_node, global::System.Nullable<double> Original_us_depth_in, global::System.Nullable<double> Original_ds_depth_in, global::System.Nullable<double> Original_inside_diam_in, global::System.Nullable<double> Original_inside_width_in, global::System.Nullable<int> Original_material, global::System.Nullable<int> Original_shape, global::System.Nullable<int> Original_length_ft) {
+        public virtual int Delete(int Original_pipe_id, int Original_global_id, int Original_survey_page_id, string Original_us_node, string Original_ds_node, global::System.Nullable<double> Original_us_depth_in, global::System.Nullable<double> Original_ds_depth_in, global::System.Nullable<double> Original_inside_diam_in, global::System.Nullable<double> Original_inside_width_in, global::System.Nullable<int> Original_material, global::System.Nullable<int> Original_shape, global::System.Nullable<int> Original_length_ft, string Original_node, global::System.Nullable<double> Original_unobstructed_height_in) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_pipe_id));
             this.Adapter.DeleteCommand.Parameters[1].Value = ((int)(Original_global_id));
             this.Adapter.DeleteCommand.Parameters[2].Value = ((int)(Original_survey_page_id));
@@ -18789,6 +18889,22 @@ SELECT pipe_id, global_id, survey_page_id, us_node, ds_node, us_depth_in, ds_dep
                 this.Adapter.DeleteCommand.Parameters[19].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[20].Value = global::System.DBNull.Value;
             }
+            if ((Original_node == null)) {
+                this.Adapter.DeleteCommand.Parameters[21].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[22].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[21].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[22].Value = ((string)(Original_node));
+            }
+            if ((Original_unobstructed_height_in.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[23].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[24].Value = ((double)(Original_unobstructed_height_in.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[23].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[24].Value = global::System.DBNull.Value;
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -18808,7 +18924,7 @@ SELECT pipe_id, global_id, survey_page_id, us_node, ds_node, us_depth_in, ds_dep
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(int global_id, int survey_page_id, string us_node, string ds_node, global::System.Nullable<double> us_depth_in, global::System.Nullable<double> ds_depth_in, global::System.Nullable<double> inside_diam_in, global::System.Nullable<double> inside_width_in, global::System.Nullable<int> material, global::System.Nullable<int> shape, string comment, global::System.Nullable<int> length_ft) {
+        public virtual int Insert(int global_id, int survey_page_id, string us_node, string ds_node, global::System.Nullable<double> us_depth_in, global::System.Nullable<double> ds_depth_in, global::System.Nullable<double> inside_diam_in, global::System.Nullable<double> inside_width_in, global::System.Nullable<int> material, global::System.Nullable<int> shape, string comment, global::System.Nullable<int> length_ft, string node, global::System.Nullable<double> unobstructed_height_in) {
             this.Adapter.InsertCommand.Parameters[0].Value = ((int)(global_id));
             this.Adapter.InsertCommand.Parameters[1].Value = ((int)(survey_page_id));
             if ((us_node == null)) {
@@ -18871,6 +18987,18 @@ SELECT pipe_id, global_id, survey_page_id, us_node, ds_node, us_depth_in, ds_dep
             else {
                 this.Adapter.InsertCommand.Parameters[11].Value = global::System.DBNull.Value;
             }
+            if ((node == null)) {
+                this.Adapter.InsertCommand.Parameters[12].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[12].Value = ((string)(node));
+            }
+            if ((unobstructed_height_in.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[13].Value = ((double)(unobstructed_height_in.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[13].Value = global::System.DBNull.Value;
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -18903,6 +19031,8 @@ SELECT pipe_id, global_id, survey_page_id, us_node, ds_node, us_depth_in, ds_dep
                     global::System.Nullable<int> shape, 
                     string comment, 
                     global::System.Nullable<int> length_ft, 
+                    string node, 
+                    global::System.Nullable<double> unobstructed_height_in, 
                     int Original_pipe_id, 
                     int Original_global_id, 
                     int Original_survey_page_id, 
@@ -18915,6 +19045,8 @@ SELECT pipe_id, global_id, survey_page_id, us_node, ds_node, us_depth_in, ds_dep
                     global::System.Nullable<int> Original_material, 
                     global::System.Nullable<int> Original_shape, 
                     global::System.Nullable<int> Original_length_ft, 
+                    string Original_node, 
+                    global::System.Nullable<double> Original_unobstructed_height_in, 
                     int pipe_id) {
             this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(global_id));
             this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(survey_page_id));
@@ -18978,82 +19110,110 @@ SELECT pipe_id, global_id, survey_page_id, us_node, ds_node, us_depth_in, ds_dep
             else {
                 this.Adapter.UpdateCommand.Parameters[11].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[12].Value = ((int)(Original_pipe_id));
-            this.Adapter.UpdateCommand.Parameters[13].Value = ((int)(Original_global_id));
-            this.Adapter.UpdateCommand.Parameters[14].Value = ((int)(Original_survey_page_id));
-            if ((Original_us_node == null)) {
-                this.Adapter.UpdateCommand.Parameters[15].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[16].Value = global::System.DBNull.Value;
+            if ((node == null)) {
+                this.Adapter.UpdateCommand.Parameters[12].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[15].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[16].Value = ((string)(Original_us_node));
+                this.Adapter.UpdateCommand.Parameters[12].Value = ((string)(node));
             }
-            if ((Original_ds_node == null)) {
+            if ((unobstructed_height_in.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[13].Value = ((double)(unobstructed_height_in.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[13].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[14].Value = ((int)(Original_pipe_id));
+            this.Adapter.UpdateCommand.Parameters[15].Value = ((int)(Original_global_id));
+            this.Adapter.UpdateCommand.Parameters[16].Value = ((int)(Original_survey_page_id));
+            if ((Original_us_node == null)) {
                 this.Adapter.UpdateCommand.Parameters[17].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[18].Value = global::System.DBNull.Value;
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[17].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[18].Value = ((string)(Original_ds_node));
+                this.Adapter.UpdateCommand.Parameters[18].Value = ((string)(Original_us_node));
             }
-            if ((Original_us_depth_in.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[19].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[20].Value = ((double)(Original_us_depth_in.Value));
-            }
-            else {
+            if ((Original_ds_node == null)) {
                 this.Adapter.UpdateCommand.Parameters[19].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[20].Value = global::System.DBNull.Value;
             }
-            if ((Original_ds_depth_in.HasValue == true)) {
+            else {
+                this.Adapter.UpdateCommand.Parameters[19].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[20].Value = ((string)(Original_ds_node));
+            }
+            if ((Original_us_depth_in.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[21].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[22].Value = ((double)(Original_ds_depth_in.Value));
+                this.Adapter.UpdateCommand.Parameters[22].Value = ((double)(Original_us_depth_in.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[21].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[22].Value = global::System.DBNull.Value;
             }
-            if ((Original_inside_diam_in.HasValue == true)) {
+            if ((Original_ds_depth_in.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[23].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[24].Value = ((double)(Original_inside_diam_in.Value));
+                this.Adapter.UpdateCommand.Parameters[24].Value = ((double)(Original_ds_depth_in.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[23].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[24].Value = global::System.DBNull.Value;
             }
-            if ((Original_inside_width_in.HasValue == true)) {
+            if ((Original_inside_diam_in.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[25].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[26].Value = ((double)(Original_inside_width_in.Value));
+                this.Adapter.UpdateCommand.Parameters[26].Value = ((double)(Original_inside_diam_in.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[25].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[26].Value = global::System.DBNull.Value;
             }
-            if ((Original_material.HasValue == true)) {
+            if ((Original_inside_width_in.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[27].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[28].Value = ((int)(Original_material.Value));
+                this.Adapter.UpdateCommand.Parameters[28].Value = ((double)(Original_inside_width_in.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[27].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[28].Value = global::System.DBNull.Value;
             }
-            if ((Original_shape.HasValue == true)) {
+            if ((Original_material.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[29].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[30].Value = ((int)(Original_shape.Value));
+                this.Adapter.UpdateCommand.Parameters[30].Value = ((int)(Original_material.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[29].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[30].Value = global::System.DBNull.Value;
             }
-            if ((Original_length_ft.HasValue == true)) {
+            if ((Original_shape.HasValue == true)) {
                 this.Adapter.UpdateCommand.Parameters[31].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[32].Value = ((int)(Original_length_ft.Value));
+                this.Adapter.UpdateCommand.Parameters[32].Value = ((int)(Original_shape.Value));
             }
             else {
                 this.Adapter.UpdateCommand.Parameters[31].Value = ((object)(1));
                 this.Adapter.UpdateCommand.Parameters[32].Value = global::System.DBNull.Value;
             }
-            this.Adapter.UpdateCommand.Parameters[33].Value = ((int)(pipe_id));
+            if ((Original_length_ft.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[33].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[34].Value = ((int)(Original_length_ft.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[33].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[34].Value = global::System.DBNull.Value;
+            }
+            if ((Original_node == null)) {
+                this.Adapter.UpdateCommand.Parameters[35].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[36].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[35].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[36].Value = ((string)(Original_node));
+            }
+            if ((Original_unobstructed_height_in.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[37].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[38].Value = ((double)(Original_unobstructed_height_in.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[37].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[38].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[39].Value = ((int)(pipe_id));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -19086,6 +19246,8 @@ SELECT pipe_id, global_id, survey_page_id, us_node, ds_node, us_depth_in, ds_dep
                     global::System.Nullable<int> shape, 
                     string comment, 
                     global::System.Nullable<int> length_ft, 
+                    string node, 
+                    global::System.Nullable<double> unobstructed_height_in, 
                     int Original_pipe_id, 
                     int Original_global_id, 
                     int Original_survey_page_id, 
@@ -19097,8 +19259,10 @@ SELECT pipe_id, global_id, survey_page_id, us_node, ds_node, us_depth_in, ds_dep
                     global::System.Nullable<double> Original_inside_width_in, 
                     global::System.Nullable<int> Original_material, 
                     global::System.Nullable<int> Original_shape, 
-                    global::System.Nullable<int> Original_length_ft) {
-            return this.Update(global_id, survey_page_id, us_node, ds_node, us_depth_in, ds_depth_in, inside_diam_in, inside_width_in, material, shape, comment, length_ft, Original_pipe_id, Original_global_id, Original_survey_page_id, Original_us_node, Original_ds_node, Original_us_depth_in, Original_ds_depth_in, Original_inside_diam_in, Original_inside_width_in, Original_material, Original_shape, Original_length_ft, Original_pipe_id);
+                    global::System.Nullable<int> Original_length_ft, 
+                    string Original_node, 
+                    global::System.Nullable<double> Original_unobstructed_height_in) {
+            return this.Update(global_id, survey_page_id, us_node, ds_node, us_depth_in, ds_depth_in, inside_diam_in, inside_width_in, material, shape, comment, length_ft, node, unobstructed_height_in, Original_pipe_id, Original_global_id, Original_survey_page_id, Original_us_node, Original_ds_node, Original_us_depth_in, Original_ds_depth_in, Original_inside_diam_in, Original_inside_width_in, Original_material, Original_shape, Original_length_ft, Original_node, Original_unobstructed_height_in, Original_pipe_id);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -19217,7 +19381,7 @@ SELECT pipe_id, global_id, survey_page_id, us_node, ds_node, us_depth_in, ds_dep
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, false)]
-        public virtual int UpdateQuery(int survey_page_id, string us_node, string ds_node, global::System.Nullable<double> us_depth_in, global::System.Nullable<double> ds_depth_in, global::System.Nullable<double> inside_diam_in, global::System.Nullable<double> inside_width_in, global::System.Nullable<int> material, global::System.Nullable<int> shape, string comment, global::System.Nullable<int> length_ft, int Original_global_id) {
+        public virtual int UpdateQuery(int survey_page_id, string us_node, string ds_node, global::System.Nullable<double> us_depth_in, global::System.Nullable<double> ds_depth_in, global::System.Nullable<double> inside_diam_in, global::System.Nullable<double> inside_width_in, global::System.Nullable<int> material, global::System.Nullable<int> shape, string comment, global::System.Nullable<int> length_ft, string node, global::System.Nullable<double> unobstructed_height_in, int Original_global_id) {
             global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[6];
             command.Parameters[0].Value = ((int)(survey_page_id));
             if ((us_node == null)) {
@@ -19280,7 +19444,19 @@ SELECT pipe_id, global_id, survey_page_id, us_node, ds_node, us_depth_in, ds_dep
             else {
                 command.Parameters[10].Value = global::System.DBNull.Value;
             }
-            command.Parameters[11].Value = ((int)(Original_global_id));
+            if ((node == null)) {
+                command.Parameters[11].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[11].Value = ((string)(node));
+            }
+            if ((unobstructed_height_in.HasValue == true)) {
+                command.Parameters[12].Value = ((double)(unobstructed_height_in.Value));
+            }
+            else {
+                command.Parameters[12].Value = global::System.DBNull.Value;
+            }
+            command.Parameters[13].Value = ((int)(Original_global_id));
             global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
             if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -23579,12 +23755,12 @@ FROM            SWSP_CULVERTS_BAD_NO_USFACINGMATCH";
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._sWSP_MATERIAL_TYPETableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.SWSP_MATERIAL_TYPE.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+            if ((this._sWSP_SHAPE_TYPETableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.SWSP_SHAPE_TYPE.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
-                    result = (result + this._sWSP_MATERIAL_TYPETableAdapter.Update(updatedRows));
+                    result = (result + this._sWSP_SHAPE_TYPETableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -23597,12 +23773,12 @@ FROM            SWSP_CULVERTS_BAD_NO_USFACINGMATCH";
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._sWSP_SHAPE_TYPETableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.SWSP_SHAPE_TYPE.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+            if ((this._sWSP_MATERIAL_TYPETableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.SWSP_MATERIAL_TYPE.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
-                    result = (result + this._sWSP_SHAPE_TYPETableAdapter.Update(updatedRows));
+                    result = (result + this._sWSP_MATERIAL_TYPETableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -23633,15 +23809,6 @@ FROM            SWSP_CULVERTS_BAD_NO_USFACINGMATCH";
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._sWSP_CULVERTTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.SWSP_CULVERT.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._sWSP_CULVERTTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
             if ((this._sWSP_EVALUATORTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.SWSP_EVALUATOR.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
@@ -23666,6 +23833,15 @@ FROM            SWSP_CULVERTS_BAD_NO_USFACINGMATCH";
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
                     result = (result + this._sWSP_PIPETableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._sWSP_CULVERTTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.SWSP_CULVERT.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._sWSP_CULVERTTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -23720,11 +23896,11 @@ FROM            SWSP_CULVERTS_BAD_NO_USFACINGMATCH";
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._sWSP_MATERIAL_TYPETableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.SWSP_MATERIAL_TYPE.Select(null, null, global::System.Data.DataViewRowState.Added);
+            if ((this._sWSP_SHAPE_TYPETableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.SWSP_SHAPE_TYPE.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
-                    result = (result + this._sWSP_MATERIAL_TYPETableAdapter.Update(addedRows));
+                    result = (result + this._sWSP_SHAPE_TYPETableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -23736,11 +23912,11 @@ FROM            SWSP_CULVERTS_BAD_NO_USFACINGMATCH";
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._sWSP_SHAPE_TYPETableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.SWSP_SHAPE_TYPE.Select(null, null, global::System.Data.DataViewRowState.Added);
+            if ((this._sWSP_MATERIAL_TYPETableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.SWSP_MATERIAL_TYPE.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
-                    result = (result + this._sWSP_SHAPE_TYPETableAdapter.Update(addedRows));
+                    result = (result + this._sWSP_MATERIAL_TYPETableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -23768,14 +23944,6 @@ FROM            SWSP_CULVERTS_BAD_NO_USFACINGMATCH";
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._sWSP_CULVERTTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.SWSP_CULVERT.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._sWSP_CULVERTTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
             if ((this._sWSP_EVALUATORTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.SWSP_EVALUATOR.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
@@ -23797,6 +23965,14 @@ FROM            SWSP_CULVERTS_BAD_NO_USFACINGMATCH";
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
                     result = (result + this._sWSP_PIPETableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._sWSP_CULVERTTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.SWSP_CULVERT.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._sWSP_CULVERTTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -23841,6 +24017,14 @@ FROM            SWSP_CULVERTS_BAD_NO_USFACINGMATCH";
                     allChangedRows.AddRange(deletedRows);
                 }
             }
+            if ((this._sWSP_CULVERTTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.SWSP_CULVERT.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._sWSP_CULVERTTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
             if ((this._sWSP_PIPETableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.SWSP_PIPE.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
@@ -23862,14 +24046,6 @@ FROM            SWSP_CULVERTS_BAD_NO_USFACINGMATCH";
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._sWSP_EVALUATORTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
-            if ((this._sWSP_CULVERTTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.SWSP_CULVERT.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._sWSP_CULVERTTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -23897,11 +24073,11 @@ FROM            SWSP_CULVERTS_BAD_NO_USFACINGMATCH";
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._sWSP_SHAPE_TYPETableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.SWSP_SHAPE_TYPE.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+            if ((this._sWSP_MATERIAL_TYPETableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.SWSP_MATERIAL_TYPE.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    result = (result + this._sWSP_SHAPE_TYPETableAdapter.Update(deletedRows));
+                    result = (result + this._sWSP_MATERIAL_TYPETableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -23913,11 +24089,11 @@ FROM            SWSP_CULVERTS_BAD_NO_USFACINGMATCH";
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._sWSP_MATERIAL_TYPETableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.SWSP_MATERIAL_TYPE.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+            if ((this._sWSP_SHAPE_TYPETableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.SWSP_SHAPE_TYPE.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    result = (result + this._sWSP_MATERIAL_TYPETableAdapter.Update(deletedRows));
+                    result = (result + this._sWSP_SHAPE_TYPETableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }

@@ -100,9 +100,9 @@ namespace SystemsAnalysis.Utils.AccessUtils
     {
       LinkTable(tableName, sourceDatabase, tableName);
     }
-    public void SQLLinkTable(string tableName, string sourceDatabase)
+    public void SQLCopyAccessTable(string tableName, string sourceDatabase)
     {
-        SQLLinkTable(tableName, sourceDatabase, tableName);
+        SQLCopyAccessTable(tableName, sourceDatabase, tableName);
     }
 
     /// <summary>
@@ -127,14 +127,14 @@ namespace SystemsAnalysis.Utils.AccessUtils
       CurrentDB.TableDefs.Append(linkTable);
     }
 
-    public void SQLLinkTable(string tableName, string sourceDatabase, string linkName)
+    public void SQLCopyAccessTable(string AccessTableName, string sourceDatabase, string SQLTableName)
     {
         System.Data.DataTable table = new System.Data.DataTable();
         //dao.TableDef linkTable;
-        string linkTableConnection = ";DATABASE=" + sourceDatabase;
+        string linkTableConnection = "Provider=Microsoft.Jet.OleDb.4.0;DATA SOURCE=" + sourceDatabase;
         //linkTable.SourceTableName = tableName;
 
-        string DROPsql = "DROP TABLE " + tableName;
+        string DROPsql = "DROP TABLE " + SQLTableName;
         SqlCommand cmd = new SqlCommand(DROPsql, CurrentSQLDB);
         try
         {
@@ -146,15 +146,44 @@ namespace SystemsAnalysis.Utils.AccessUtils
         }
         try
         {
-            OleDbDataAdapter accDataAdapter = new OleDbDataAdapter("SELECT * FROM " + tableName, linkTableConnection);
+            OleDbDataAdapter accDataAdapter = new OleDbDataAdapter("SELECT * FROM " + AccessTableName, linkTableConnection);
             accDataAdapter.Fill(table);
+            SqlTableCreator theCreator = new SqlTableCreator(CurrentSQLDB);
+            table.TableName = SQLTableName;
+            
+            try
+            {
+                theCreator.CreateFromDataTable(table);
+                //Open a connection with destination database;
+                using (SqlConnection connection = 
+                       new SqlConnection(CurrentSQLDB.ConnectionString))
+                {
+                   connection.Open();
 
-            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter("SELECT * FROM " + tableName, CurrentSQLDB);
-            SqlCommandBuilder sqlCommandBuilder = new SqlCommandBuilder(sqlDataAdapter);
-            //sqlDataAdapter.InsertCommand = sqlCommandBuilder.GetInsertCommand();
-            sqlDataAdapter.UpdateCommand = sqlCommandBuilder.GetUpdateCommand();
-            //sqlDataAdapter.DeleteCommand = sqlCommandBuilder.GetDeleteCommand();
-            sqlDataAdapter.Update(table);
+                   //Open bulkcopy connection.
+                   using (SqlBulkCopy bulkcopy = new SqlBulkCopy(connection))
+                   {
+                    //Set destination table name
+                    //to table previously created.
+                    bulkcopy.DestinationTableName = table.TableName;
+
+                    try
+                    {
+                       bulkcopy.WriteToServer(table);
+                    }
+                    catch (Exception ex)
+                    {
+                       Console.WriteLine(ex.Message);
+                    }
+                	
+                    connection.Close();
+                   }
+                }
+            }
+            catch (SqlException ae)
+            {
+                //Could not drop table
+            }
         }
         catch (Exception ex)
         {
@@ -385,6 +414,31 @@ namespace SystemsAnalysis.Utils.AccessUtils
             //Could not drop table
         }
     }
+
+    public void SQLExecuteActionQuery(string queryName, string parameterName, int parameter, string parameterName2, int parameter2)
+    {
+        SqlCommand cmd = new SqlCommand();
+        Int32 rowsAffected;
+
+        cmd.CommandText = queryName;
+        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+        cmd.Connection = CurrentSQLDB;
+
+        cmd.Parameters.Add(new SqlParameter(parameterName, OleDbType.Integer)).Value = parameter;
+        cmd.Parameters.Add(new SqlParameter(parameterName2, OleDbType.Integer)).Value = parameter2;
+
+        /*string EXECUTEsql = queryName;
+        SqlCommand cmd = new SqlCommand(EXECUTEsql, CurrentSQLDB);
+        cmd.CommandType = System.Data.CommandType.StoredProcedure;*/
+        try
+        {
+            rowsAffected = cmd.ExecuteNonQuery();
+        }
+        catch (SqlException ae)
+        {
+            //Could not drop table
+        }
+    }
     
       public void SetSQLGridVariable(string varName, double theValue)
       {
@@ -580,6 +634,58 @@ namespace SystemsAnalysis.Utils.AccessUtils
       return;
     }
 
+    public void SQLExportTablePortion(string tableName, string strFilePath, FileType exportType, string columnName, string parameter)
+    {
+        System.Data.DataTable dt = new System.Data.DataTable();
+        //dao.TableDef linkTable;
+
+        try
+        {
+            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter("SELECT * FROM " + tableName + " WHERE " + columnName + " = '" + parameter + "'", CurrentSQLDB);
+            SqlCommandBuilder sqlCommandBuilder = new SqlCommandBuilder(sqlDataAdapter);
+            sqlDataAdapter.Fill(dt);
+
+            // Create the CSV file to which grid data will be exported.
+            StreamWriter sw = new StreamWriter(strFilePath, false);
+            // First we will write the headers.
+            //DataTable dt = m_dsProducts.Tables[0];
+            int iColCount = dt.Columns.Count;
+            for (int i = 0; i < iColCount; i++)
+            {
+                sw.Write(dt.Columns[i]);
+                if (i < iColCount - 1)
+                {
+                    sw.Write(",");
+                }
+            }
+            sw.Write(sw.NewLine);
+            // Now write all the rows.
+            foreach (System.Data.DataRow dr in dt.Rows)
+            {
+                for (int i = 0; i < iColCount; i++)
+                {
+                    if (!Convert.IsDBNull(dr[i]))
+                    {
+                        sw.Write(dr[i].ToString());
+                    }
+                    if (i < iColCount - 1)
+                    {
+                        sw.Write(",");
+                    }
+                }
+                sw.Write(sw.NewLine);
+            }
+            sw.Close();
+        }
+        catch (Exception ex)
+        {
+            //if (accConnection.State == System.Data.ConnectionState.Open)
+            //accConnection.Close();
+            //MessageBox.Show("Import failed with error: " + ex.ToString)
+        }
+
+    }
+
     public void SQLExportTable(string tableName, string strFilePath, FileType exportType)
     {
         System.Data.DataTable dt = new System.Data.DataTable();
@@ -592,59 +698,35 @@ namespace SystemsAnalysis.Utils.AccessUtils
             sqlDataAdapter.Fill(dt);
 
             // Create the CSV file to which grid data will be exported.
-
             StreamWriter sw = new StreamWriter(strFilePath, false);
-
             // First we will write the headers.
-
             //DataTable dt = m_dsProducts.Tables[0];
-
             int iColCount = dt.Columns.Count;
-
             for (int i = 0; i < iColCount; i++)
             {
-
                 sw.Write(dt.Columns[i]);
-
                 if (i < iColCount - 1)
                 {
-
                     sw.Write(",");
-
                 }
-
             }
-
             sw.Write(sw.NewLine);
-
             // Now write all the rows.
-
             foreach (System.Data.DataRow dr in dt.Rows)
             {
-
                 for (int i = 0; i < iColCount; i++)
                 {
-
                     if (!Convert.IsDBNull(dr[i]))
                     {
-
                         sw.Write(dr[i].ToString());
-
                     }
-
                     if (i < iColCount - 1)
                     {
-
                         sw.Write(",");
-
                     }
-
                 }
-
                 sw.Write(sw.NewLine);
-
             }
-
             sw.Close();
         }
         catch (Exception ex)
@@ -1112,5 +1194,8 @@ namespace SystemsAnalysis.Utils.AccessUtils
         }
         return null;
     }
+
+    
+
   }
 }

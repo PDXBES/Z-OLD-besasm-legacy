@@ -29,7 +29,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>53</ApplicationRevision>
+    <ApplicationRevision>56</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -190,8 +190,8 @@
     </None>
     <None Include="SANDBOXDataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>SANDBOXDataSet.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>SANDBOXDataSet.Designer.cs</LastGenOutput>
     </None>
     <None Include="SANDBOXDataSet.xss">
       <DependentUpon>SANDBOXDataSet.xsd</DependentUpon>

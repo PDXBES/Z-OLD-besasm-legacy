@@ -546,6 +546,8 @@ namespace SWI_2
                                                 10,
                                                 4,
                                                 "",
+                                                null,
+                                                "",
                                                 null);
             this.sWSP_PIPETableAdapter.Fill((SANDBOXDataSet.SWSP_PIPEDataTable)((SANDBOXDataSet)this.sWSPPIPEBindingSource.DataSource).SWSP_PIPE);
 

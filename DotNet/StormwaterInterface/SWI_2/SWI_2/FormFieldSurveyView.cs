@@ -43,7 +43,15 @@ namespace SWI_2
             // TODO: This line of code loads data into the 'sANDBOXDataSet.SWSP_MESH1' table. You can move, or remove it, as needed.
             this.sWSP_MESH1TableAdapter.Fill(this.sANDBOXDataSet.SWSP_MESH1);
             deletedGlobalID = new HashSet<int>();
-            tempGlobal_id = 0;
+            //this is to separate sessions.
+            //This SHOULD be replaced with an activeusers table in the database.
+            //The activeusers table will give a user 5,000 entries, and this interface will tell the user to 
+            //restart the session if they exceed 5,000 entries(unlikely but possible). So user A will
+            //have entries -1 to -5000, user B will have entries -5001 to -10,000.  This will ensure that
+            //people wont overwrite each others changes.  With the random approach, there nearly a
+            //3% chance of overwriting, assuming that users enter 1,000 entries per session.
+            Random random = new Random();
+            tempGlobal_id = -1000-(int)(30000*random.NextDouble());
             //fill the FieldSurveypageview datatable with the data from the MESH1 datatable
             foreach(DataRow r in this.sANDBOXDataSet.SWSP_MESH1)
             {
@@ -316,7 +324,9 @@ namespace SWI_2
                                                             material_id,
                                                             shape_id,
                                                             (string)r["photo_id"],
-                                                            (int?)((r["length_ft"] is System.DBNull) ? null :(int?)r["length_ft"]));
+                                                            (int?)((r["length_ft"] is System.DBNull) ? null :(int?)r["length_ft"]),
+                                                            (string)r["node"],
+                                                            (double?)((r["dimension3"] is System.DBNull) ? null : (double?)r["dimension3"]));
                     }
                     else if ((string)r["linktype"] == "Ditch")
                     {
@@ -417,7 +427,9 @@ namespace SWI_2
                                                             material_id,
                                                             shape_id,
                                                             (string)r["photo_id"],
-                                                            (int?)((r["length_ft"] is System.DBNull) ? null : (int?)r["length_ft"])
+                                                            (int?)((r["length_ft"] is System.DBNull) ? null : (int?)r["length_ft"]),
+                                                            (string)r["node"],
+                                                            (double?)((r["dimension3"] is System.DBNull) ? null : (double?)r["dimension3"])
                                                             );
                         }
                         else{
@@ -433,6 +445,8 @@ namespace SWI_2
                                                             shape_id,
                                                             (string)r["photo_id"],
                                                             (int?)((r["length_ft"] is System.DBNull) ? null : (int?)r["length_ft"]),
+                                                            ((r["node"] is System.DBNull) ? "" : (string)r["node"]),
+                                                            (double?)((r["dimension3"] is System.DBNull) ? null : (double?)r["dimension3"]),
                                                             (int)r["global_id"]);
                         }
                     }
