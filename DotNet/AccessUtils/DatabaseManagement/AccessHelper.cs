@@ -439,20 +439,6 @@ namespace SystemsAnalysis.Utils.AccessUtils
             //Could not drop table
         }
     }
-    
-      public void SetSQLGridVariable(string varName, double theValue)
-      {
-          string UPDATEsql = "UPDATE GRID_variables SET Value = " + theValue.ToString() + " WHERE Variable ='" + varName + "'";
-          SqlCommand cmd = new SqlCommand(UPDATEsql, CurrentSQLDB);
-        try
-        {
-            cmd.ExecuteNonQuery();
-        }
-        catch (SqlException ae)
-        {
-            //Could not drop table
-        }
-      }
 
     /// <summary>
     /// translates a CSV file to an access file for MapInfo consumption
@@ -1168,9 +1154,6 @@ namespace SystemsAnalysis.Utils.AccessUtils
         {
             SqlDataAdapter sqlDataAdapter = new SqlDataAdapter("SELECT * FROM " + queryName, CurrentSQLDB);
             SqlCommandBuilder sqlCommandBuilder = new SqlCommandBuilder(sqlDataAdapter);
-            //sqlDataAdapter.InsertCommand = sqlCommandBuilder.GetInsertCommand();
-            //sqlDataAdapter.UpdateCommand = sqlCommandBuilder.GetUpdateCommand();
-            //sqlDataAdapter.DeleteCommand = sqlCommandBuilder.GetDeleteCommand();
             sqlDataAdapter.Fill(dt);
 
             Dictionary<string, double> aggregateQueryResults;
@@ -1194,8 +1177,5 @@ namespace SystemsAnalysis.Utils.AccessUtils
         }
         return null;
     }
-
-    
-
   }
 }

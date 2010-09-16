@@ -296,11 +296,6 @@ namespace SystemsAnalysis.Grid.GridAnalysis
             accessHelper.SQLWriteKeyValueTable(variableTableName, variableKeyFieldName, name, variableValueFieldName, value);
         }
 
-        private void SetRainfall(double rainfall)
-        {
-            accessHelper.SetSQLGridVariable("Precip", rainfall);
-        }
-
         private void ExportResultsAllTimeSteps(string outputFileName)
         {
             if (!Directory.Exists(Path.GetFullPath(outputFileName)))
