@@ -216,7 +216,11 @@
       <xs:documentation>Specifies a text field whose value will be replaced by a field from the sourceTable during spooling.</xs:documentation>
     </xs:annotation>
     <xs:sequence minOccurs="0" maxOccurs="unbounded">
-      <xs:element name="fieldSpec" type="FieldSpecType" />
+      <xs:element name="fieldSpec" type="FieldSpecType">
+        <xs:annotation>
+          <xs:documentation>A set of field specs to be used in a dynamic field format</xs:documentation>
+        </xs:annotation>
+      </xs:element>
     </xs:sequence>
     <xs:attribute name="baseName" type="xs:string">
       <xs:annotation>
@@ -438,7 +442,7 @@
     </xs:attribute>
     <xs:attribute name="type" type="xs:string">
       <xs:annotation>
-        <xs:documentation>The type of the field (valid values are int, text, float, datetime).</xs:documentation>
+        <xs:documentation>The type of the field (valid values are int, text, float or double, datetime).</xs:documentation>
       </xs:annotation>
     </xs:attribute>
   </xs:complexType>
