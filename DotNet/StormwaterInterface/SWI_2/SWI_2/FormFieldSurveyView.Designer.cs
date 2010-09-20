@@ -44,7 +44,7 @@
             this.sWSPMATERIALTYPEBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.culvertopeningDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.sWSPCULVERTOPENINGTYPEBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.photoidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.photoidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewButtonColumn();
             this.lengthftDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.usdepthinDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dsdepthinDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -90,6 +90,7 @@
             this.buttonAddMap = new System.Windows.Forms.Button();
             this.buttonAddSurveyPage = new System.Windows.Forms.Button();
             this.ultraDateTimeEditor = new Infragistics.Win.UltraWinEditors.UltraDateTimeEditor();
+            this.swsP_PHOTOTableAdapter1 = new SWI_2.SANDBOXDataSetTableAdapters.SWSP_PHOTOTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLinkInfo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sWSPSHAPETYPEBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sANDBOXDataSet)).BeginInit();
@@ -138,6 +139,7 @@
             this.dataGridViewLinkInfo.Leave += new System.EventHandler(this.dataGridViewLinkInfo_Leave);
             this.dataGridViewLinkInfo.MouseLeave += new System.EventHandler(this.dataGridViewLinkInfo_MouseLeave);
             this.dataGridViewLinkInfo.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.dataGridViewLinkInfo_RowsRemoved);
+            this.dataGridViewLinkInfo.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewLinkInfo_CellClick);
             // 
             // usnodeDataGridViewTextBoxColumn
             // 
@@ -258,6 +260,8 @@
             this.photoidDataGridViewTextBoxColumn.DataPropertyName = "photo_id";
             this.photoidDataGridViewTextBoxColumn.HeaderText = "Photo ID";
             this.photoidDataGridViewTextBoxColumn.Name = "photoidDataGridViewTextBoxColumn";
+            this.photoidDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.photoidDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.photoidDataGridViewTextBoxColumn.Width = 125;
             // 
             // lengthftDataGridViewTextBoxColumn
@@ -569,6 +573,10 @@
             this.ultraDateTimeEditor.Size = new System.Drawing.Size(109, 21);
             this.ultraDateTimeEditor.TabIndex = 30;
             // 
+            // swsP_PHOTOTableAdapter1
+            // 
+            this.swsP_PHOTOTableAdapter1.ClearBeforeFill = true;
+            // 
             // FormFieldSurveyView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -670,6 +678,7 @@
         private SWI_2.SANDBOXDataSetTableAdapters.SWSP_DITCHTableAdapter sWSP_DITCHTableAdapter;
         private System.Windows.Forms.Button buttonAddMap;
         private System.Windows.Forms.Button buttonAddSurveyPage;
+        private Infragistics.Win.UltraWinEditors.UltraDateTimeEditor ultraDateTimeEditor;
         private System.Windows.Forms.DataGridViewTextBoxColumn usnodeDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn dsnodeDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewComboBoxColumn linktypeDataGridViewTextBoxColumn;
@@ -680,12 +689,12 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dimension3DataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewComboBoxColumn materialDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewComboBoxColumn culvertopeningDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn photoidDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewButtonColumn photoidDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn lengthftDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn usdepthinDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn dsdepthinDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn action;
-        private Infragistics.Win.UltraWinEditors.UltraDateTimeEditor ultraDateTimeEditor;
+        private SWI_2.SANDBOXDataSetTableAdapters.SWSP_PHOTOTableAdapter swsP_PHOTOTableAdapter1;
     }
 }

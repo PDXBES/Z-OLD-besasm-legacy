@@ -546,6 +546,8 @@ namespace SWI_2
                                                 10,
                                                 4,
                                                 "",
+                                                null,
+                                                "",
                                                 null);
             this.sWSP_PIPETableAdapter.Fill((SANDBOXDataSet.SWSP_PIPEDataTable)((SANDBOXDataSet)this.sWSPPIPEBindingSource.DataSource).SWSP_PIPE);
 
@@ -1295,6 +1297,11 @@ namespace SWI_2
                 textBoxDitchesUSNode.Text = textBoxDitchesUSNode.Text.Substring(0, 10);
             }
             textBoxDitchesUSNode.Text = textBoxDitchesUSNode.Text.Trim();
+        }
+
+        private void ultraNumericEditorPipesInnerWidth_ValueChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
