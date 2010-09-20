@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="VirtualRain">
+</Property><Property Name="Solution File" Value="W:\Model_Programs\VirtualRain\Backup\Backup\Backup\VirtualRain.sln">
+</Property><Property Name="User Options File" Value="W:\Model_Programs\VirtualRain\Backup\Backup\Backup\VirtualRain.suo">
+</Property><Property Name="Date" Value="Monday, June 02, 2008">
+</Property><Property Name="Time" Value="14:44 PM">
+</Property></Properties><Event ErrorLevel="0" Project="" Source="VirtualRain.sln" Description="File successfully backed up as W:\Model_Programs\VirtualRain\Backup\Backup\Backup\Backup\VirtualRain.sln">
+</Event><Event ErrorLevel="0" Project="" Source="VirtualRain.suo" Description="File successfully backed up as W:\Model_Programs\VirtualRain\Backup\Backup\Backup\Backup\VirtualRain.suo">
+</Event><Event ErrorLevel="0" Project="VirtualRain" Source="VirtualRain.csproj" Description="Project file successfully backed up as W:\Model_Programs\VirtualRain\Backup\Backup\Backup\Backup\VirtualRain.csproj">
+</Event><Event ErrorLevel="0" Project="VirtualRain" Source="VirtualRain.csproj.user" Description="Project user file successfully backed up as W:\Model_Programs\VirtualRain\Backup\Backup\Backup\Backup\VirtualRain.csproj.user">
+</Event><Event ErrorLevel="0" Project="VirtualRain" Source="AssemblyInfo.cs" Description="File successfully backed up as W:\Model_Programs\VirtualRain\Backup\Backup\Backup\Backup\AssemblyInfo.cs">
+</Event><Event ErrorLevel="0" Project="VirtualRain" Source="Dataset1.cs" Description="File successfully backed up as W:\Model_Programs\VirtualRain\Backup\Backup\Backup\Backup\Dataset1.cs">
+</Event><Event ErrorLevel="0" Project="VirtualRain" Source="Form1.cs" Description="File successfully backed up as W:\Model_Programs\VirtualRain\Backup\Backup\Backup\Backup\Form1.cs">
+</Event><Event ErrorLevel="0" Project="VirtualRain" Source="GraphCreator.cs" Description="File successfully backed up as W:\Model_Programs\VirtualRain\Backup\Backup\Backup\Backup\GraphCreator.cs">
+</Event><Event ErrorLevel="0" Project="VirtualRain" Source="qsDS.cs" Description="File successfully backed up as W:\Model_Programs\VirtualRain\Backup\Backup\Backup\Backup\qsDS.cs">
+</Event><Event ErrorLevel="0" Project="VirtualRain" Source="app.config" Description="File successfully backed up as W:\Model_Programs\VirtualRain\Backup\Backup\Backup\Backup\app.config">
+</Event><Event ErrorLevel="0" Project="VirtualRain" Source="Dataset1.xsx" Description="File successfully backed up as W:\Model_Programs\VirtualRain\Backup\Backup\Backup\Backup\Dataset1.xsx">
+</Event><Event ErrorLevel="0" Project="VirtualRain" Source="qsDS.xsx" Description="File successfully backed up as W:\Model_Programs\VirtualRain\Backup\Backup\Backup\Backup\qsDS.xsx">
+</Event><Event ErrorLevel="0" Project="VirtualRain" Source="App.ico" Description="File successfully backed up as W:\Model_Programs\VirtualRain\Backup\Backup\Backup\Backup\App.ico">
+</Event><Event ErrorLevel="0" Project="VirtualRain" Source="Dataset1.xsd" Description="File successfully backed up as W:\Model_Programs\VirtualRain\Backup\Backup\Backup\Backup\Dataset1.xsd">
+</Event><Event ErrorLevel="0" Project="VirtualRain" Source="qsDS.xsd" Description="File successfully backed up as W:\Model_Programs\VirtualRain\Backup\Backup\Backup\Backup\qsDS.xsd">
+</Event><Event ErrorLevel="0" Project="VirtualRain" Source="Form1.resx" Description="File successfully backed up as W:\Model_Programs\VirtualRain\Backup\Backup\Backup\Backup\Form1.resx">
+</Event><Event ErrorLevel="0" Project="VirtualRain" Source="licenses.licx" Description="File successfully backed up as W:\Model_Programs\VirtualRain\Backup\Backup\Backup\Backup\licenses.licx">
+</Event><Event ErrorLevel="0" Project="VirtualRain" Source="VirtualRain.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="VirtualRain" Source="VirtualRain.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="VirtualRain Installer.vdproj" Source="VirtualRain Installer\VirtualRain Installer.vdproj" Description="Project file successfully backed up as W:\Model_Programs\VirtualRain\Backup\Backup\Backup\Backup\VirtualRain Installer\VirtualRain Installer.vdproj">
+</Event><Event ErrorLevel="0" Project="" Source="VirtualRain.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="VirtualRain.sln" Description="Converted">
+</Event><Event ErrorLevel="0" Project="VirtualRain" Source="VirtualRain.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="VirtualRain Installer.vdproj" Source="VirtualRain Installer\VirtualRain Installer.vdproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="VirtualRain Installer.vdproj" Source="VirtualRain Installer\VirtualRain Installer.vdproj" Description="Converted">
+</Event></UpgradeLog>

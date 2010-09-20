@@ -1,0 +1,13 @@
+!table
+!version 300
+!charset WindowsLatin1
+
+Definition Table
+  Type NATIVE Charset "WindowsLatin1"
+  Fields 6
+    Desc Char (25) ;
+    UpdtXP Integer ;
+    GetFld Char (25) ;
+    LstAlias Char (15) ;
+    sText Char (254) ;
+    GrpFld Char (25) ;

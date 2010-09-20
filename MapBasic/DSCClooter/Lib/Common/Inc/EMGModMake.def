@@ -1,0 +1,4 @@
+Declare Sub CreateModelTables()
+
+Declare Sub CreateLaterals(ByVal LP as string, ByVal LMDBP as string, ByVal LT as string, ByVal Alias as string )
+
