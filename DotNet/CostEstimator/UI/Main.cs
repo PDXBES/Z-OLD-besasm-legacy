@@ -3,7 +3,7 @@
 // Path: C:\Development\CostEstimatorV2\UI, Author: Arnel
 // Code lines: 151, Size of file: 4.04 KB
 // Creation date: 3/7/2008 8:58 AM
-// Last modified: 8/18/2009 2:35 PM
+// Last modified: 9/17/2010 1:14 PM
 
 #region Using directives
 using System;
@@ -472,17 +472,25 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 		/// </summary>
 		private void SaveProject()
 		{
-			if (_project.FileName.Length == 0)
-				SaveProjectAs();
-			else
-			{
-				if (!_project.SaveToFile(_project.FileName))
-					{
-						MessageBox.Show(String.Format("An error occurred during save.  The file {0} may be corrupt.\n\n", dlgSave.FileName));
-						return;
-					}
-				AddFileToMRUList(_project.FileName);
-			}
+      pageCosts.Hide();
+      try
+      {
+        if (_project.FileName.Length == 0)
+          SaveProjectAs();
+        else
+        {
+          if (!_project.SaveToFile(_project.FileName))
+          {
+            MessageBox.Show(String.Format("An error occurred during save.  The file {0} may be corrupt.\n\n", dlgSave.FileName));
+            return;
+          }
+          AddFileToMRUList(_project.FileName);
+        }
+      }
+      finally
+      {
+        pageCosts.Show();
+      } // finally
 			SetAppCaption();
 		} // SaveProject()
 
@@ -491,25 +499,33 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 		/// </summary>
 		private void SaveProjectAs()
 		{
-			dlgSave.DefaultExt = COST_ESTIMATE_PROJECT_FILE_EXTENSION;
-			dlgSave.Title = "Save Cost Estimate Project File";
-			dlgSave.InitialDirectory = _LastSelectedModelDirectory;
-			dlgSave.Filter = "Cost Estimate Project (*.cep)|*.cep|All files (*.*)|*.*";
-			dlgSave.FilterIndex = 0;
-			dlgSave.FileName = "";
-			if (dlgSave.ShowDialog() == DialogResult.OK)
-			{
-				if (!_project.SaveToFile(dlgSave.FileName))
-				{
-					MessageBox.Show(String.Format(
-						"An error occurred during save.  The file {0} may be corrupt.\n\n", 
-						dlgSave.FileName));
-					return;
-				}
-				_project.FileName = dlgSave.FileName;
-				AddFileToMRUList(_project.FileName);
-				SetAppCaption();
-			} // if
+      pageCosts.Hide();
+      try
+      {
+        dlgSave.DefaultExt = COST_ESTIMATE_PROJECT_FILE_EXTENSION;
+        dlgSave.Title = "Save Cost Estimate Project File";
+        dlgSave.InitialDirectory = _LastSelectedModelDirectory;
+        dlgSave.Filter = "Cost Estimate Project (*.cep)|*.cep|All files (*.*)|*.*";
+        dlgSave.FilterIndex = 0;
+        dlgSave.FileName = "";
+        if (dlgSave.ShowDialog() == DialogResult.OK)
+        {
+          if (!_project.SaveToFile(dlgSave.FileName))
+          {
+            MessageBox.Show(String.Format(
+              "An error occurred during save.  The file {0} may be corrupt.\n\n",
+              dlgSave.FileName));
+            return;
+          }
+          _project.FileName = dlgSave.FileName;
+          AddFileToMRUList(_project.FileName);
+          SetAppCaption();
+        } // if
+      }
+      finally
+      {
+        pageCosts.Show();
+      } // finally
 		} // SaveProjectAs()
 
 		/// <summary>

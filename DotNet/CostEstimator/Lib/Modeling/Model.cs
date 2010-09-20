@@ -693,6 +693,9 @@ namespace SystemsAnalysis.Modeling
 			/// <returns>Pip XP</returns>
 			public PipXP ConflictFromLink(Link link)
 			{
+        if (modelConflicts == null)
+          return null;
+
 				foreach (KeyValuePair<int, PipXP> kvPair in modelConflicts)
 				{
 					if (kvPair.Value.MstLinkID == link.MLinkID)
