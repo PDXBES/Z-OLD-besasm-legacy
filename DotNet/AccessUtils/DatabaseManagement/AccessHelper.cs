@@ -9,6 +9,11 @@ using System.IO;
 using System.Data.SqlClient;
 using System.Data.OleDb;
 using System.Text;
+using System.Management;
+using SMO = Microsoft.SqlServer.Management.Smo;
+using System.Security.AccessControl;
+using Microsoft.SqlServer.Management.Smo.RegisteredServers;
+
 
 namespace SystemsAnalysis.Utils.AccessUtils
 {
@@ -23,7 +28,7 @@ namespace SystemsAnalysis.Utils.AccessUtils
     private Access.Application accessApp;
     private bool disposed;
     private DateTime startTime;
-    private Database CurrentDB;
+    private dao.Database CurrentDB;
     private SqlConnection CurrentSQLDB;
 
     public static void CreateNewMdb(string database)
@@ -88,6 +93,21 @@ namespace SystemsAnalysis.Utils.AccessUtils
         disposed = false;
     }
 
+    public AccessHelper()
+    {
+        //force shutdown of access before we try to open a new instance of ms Access
+        //This is necessary because if we are doing many many runs, eventually
+        //access will fail to close completely (managed code doesn't always
+        //implement a destructor completely).
+        startTime = System.DateTime.Now;
+        //accessApp = ShellGetDB(databaseName, 2000);
+        //accessApp = new Access.Application();
+        CurrentDB = null;
+        CurrentSQLDB = null;
+
+        disposed = false;
+    }
+
 
     /// <summary>
     /// Links a single table in the specified Access database. The table will first be 
@@ -125,6 +145,73 @@ namespace SystemsAnalysis.Utils.AccessUtils
       linkTable.Connect = ";DATABASE=" + sourceDatabase;
       linkTable.SourceTableName = tableName;
       CurrentDB.TableDefs.Append(linkTable);
+    }
+
+    public static void SQLCopySQLTable(string SQLInputTableName, string inputDatabase, string SQLOutputTableName, string outputDatabase)
+    {
+        System.Data.DataTable inputTable = new System.Data.DataTable();
+        //System.Data.DataTable outputTable = new System.Data.DataTable();
+        SqlConnection outputDatabaseConnection = new SqlConnection(outputDatabase);
+        outputDatabaseConnection.Open();
+
+        //remove any existing matching output table from the output database
+        string DROPsql = "DROP TABLE " + SQLOutputTableName;
+        SqlCommand cmd = new SqlCommand(DROPsql, outputDatabaseConnection);
+        try
+        {
+            cmd.ExecuteNonQuery();
+        }
+        catch (SqlException ae)
+        {
+            //Could not drop table
+        }
+        try
+        {
+            SqlDataAdapter SQLInputDataAdapter = new SqlDataAdapter("SELECT * FROM " + SQLInputTableName, inputDatabase);
+            
+            SQLInputDataAdapter.Fill(inputTable);
+            SqlTableCreator theCreator = new SqlTableCreator(outputDatabaseConnection);
+            inputTable.TableName = SQLInputTableName;
+            try
+            {
+                theCreator.CreateFromDataTable(inputTable);
+                //Open a connection with destination database;
+                using (SqlConnection connection =
+                       new SqlConnection(outputDatabase))
+                {
+                    connection.Open();
+
+                    //Open bulkcopy connection.
+                    using (SqlBulkCopy bulkcopy = new SqlBulkCopy(connection))
+                    {
+                        //Set destination table name
+                        //to table previously created.
+                        bulkcopy.DestinationTableName = SQLOutputTableName;
+
+                        try
+                        {
+                            bulkcopy.WriteToServer(inputTable);
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex.Message);
+                        }
+
+                        connection.Close();
+                    }
+                }
+            }
+            catch (SqlException ae)
+            {
+                //Could not drop table
+            }
+        }
+        catch (Exception ex)
+        {
+            //if (accConnection.State == System.Data.ConnectionState.Open)
+            //accConnection.Close();
+            //MessageBox.Show("Import failed with error: " + ex.ToString)
+        }
     }
 
     public void SQLCopyAccessTable(string AccessTableName, string sourceDatabase, string SQLTableName)
@@ -439,20 +526,6 @@ namespace SystemsAnalysis.Utils.AccessUtils
             //Could not drop table
         }
     }
-    
-      public void SetSQLGridVariable(string varName, double theValue)
-      {
-          string UPDATEsql = "UPDATE GRID_variables SET Value = " + theValue.ToString() + " WHERE Variable ='" + varName + "'";
-          SqlCommand cmd = new SqlCommand(UPDATEsql, CurrentSQLDB);
-        try
-        {
-            cmd.ExecuteNonQuery();
-        }
-        catch (SqlException ae)
-        {
-            //Could not drop table
-        }
-      }
 
     /// <summary>
     /// translates a CSV file to an access file for MapInfo consumption
@@ -1168,9 +1241,6 @@ namespace SystemsAnalysis.Utils.AccessUtils
         {
             SqlDataAdapter sqlDataAdapter = new SqlDataAdapter("SELECT * FROM " + queryName, CurrentSQLDB);
             SqlCommandBuilder sqlCommandBuilder = new SqlCommandBuilder(sqlDataAdapter);
-            //sqlDataAdapter.InsertCommand = sqlCommandBuilder.GetInsertCommand();
-            //sqlDataAdapter.UpdateCommand = sqlCommandBuilder.GetUpdateCommand();
-            //sqlDataAdapter.DeleteCommand = sqlCommandBuilder.GetDeleteCommand();
             sqlDataAdapter.Fill(dt);
 
             Dictionary<string, double> aggregateQueryResults;
@@ -1195,7 +1265,242 @@ namespace SystemsAnalysis.Utils.AccessUtils
         return null;
     }
 
-    
+    //methods for translating and archiving SQL server databases/tables
+    //this method is important for archiving the sql server database.  Without this method, the 
+    //user can only archive to the C: SQL server default location.
+    public void ArchiveTable(string tablename, string archiveLocation)
+    {
+        string tempPath = Directory.CreateDirectory(archiveLocation).FullName;
+
+      //set permissions
+      SelectQuery sQuery = new SelectQuery("Win32_Group", "Domain='" + System.Environment.UserDomainName.ToString() + "'");
+      try
+      {
+          DirectoryInfo myDirectoryInfo = new DirectoryInfo(archiveLocation);
+        DirectorySecurity myDirectorySecurity = myDirectoryInfo.GetAccessControl();
+        ManagementObjectSearcher mSearcher = new ManagementObjectSearcher(sQuery);
+        foreach (ManagementObject mObject in mSearcher.Get())
+        {
+          string User = System.Environment.UserDomainName + "\\" + mObject["Name"];
+          if (User.StartsWith(System.Environment.MachineName+"\\SQL"))
+            myDirectorySecurity.AddAccessRule(new FileSystemAccessRule(User, FileSystemRights.FullControl, AccessControlType.Allow));
+        }
+        myDirectoryInfo.SetAccessControl(myDirectorySecurity);
+      }
+      catch (Exception ex)
+      {
+        Console.WriteLine(ex.StackTrace);
+      } 
+    }
+      /*public bool bakBackup()        
+      {            
+          //If the connection returns false return from this method too.            
+          //if (!connectToSQLServer())                
+              //return false;            
+          try            
+          {
+              SMO.Server theServer = new SMO.Server(this.CurrentSQLDB.ConnectionString);
+              // Create a new backup object                
+              SMO.Backup bkpDatabase = new SMO.Backup();                
+              // Set the type to database                
+              bkpDatabase.Action = SMO.BackupActionType.Database;                
+              // set the database name we want to actually backup                
+              bkpDatabase.Database = dbName;                
+              // To get the file from me actual backup create BackupDeviceItem                
+              SMO.BackupDeviceItem bkpDevice = new SMO.BackupDeviceItem(this.backupFile, DeviceType.File);                
+              // add the backup file device to our backup                
+              bkpDatabase.Devices.Add(bkpDevice);                
+              // execute the actual backup using Smo                
+              bkpDatabase.SqlBackup(theServer);                
+              //verify if the file exist                
+              if (File.Exists(this.backupFile))                    
+                  return true;                
+              else                    
+                  return false;            
+          }            
+          catch (Exception ex)            
+          {                
+              Console.WriteLine("Backup file couldn't be created" + ex.StackTrace);                
+              return false;            
+          }        
+      }*/
+
+      //get all available SQL Servers    
+      public static Object[] SQLGetListOfServers()
+        {
+          List<Object> theList = new List<object>();
+
+          try
+          {
+            /*System.Data.DataTable dt = SMO.SmoApplication.EnumAvailableSqlServers(false);
+
+            if (dt.Rows.Count > 0)
+            {
+                // Load server names into combo box
+                foreach (System.Data.DataRow dr in dt.Rows)
+                {
+                    theList.Add(dr["Name"]);
+                }
+            }*/
+
+          //Registry for local
+            try
+            {
+                Microsoft.Win32.RegistryKey rk = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Microsoft SQL Server");
+                String[] instances = (String[])rk.GetValue("InstalledInstances");
+                if (instances.Length > 0)
+                {
+                    foreach (String element in instances)
+                    {
+                        String name = "";
+                        //only add if it doesn't exist
+                        if (element == "MSSQLSERVER")
+                            name = System.Environment.MachineName;
+                        else
+                            name = System.Environment.MachineName + @"\" + element;
+
+                        if (theList.Contains(name) == false)
+                            theList.Add(name);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                //no local servers
+            }
+
+              //network servers
+            /*try
+            {
+                List<ServerInstance> networkServers = new List<ServerInstance>();
+
+                using (DataTable dataSources = sSqlDataSourceEnumerator.Instance.GetDataSources())
+                {
+                    foreach (DataRow dataSource in dataSources.Rows)
+                    {
+                        networkServers.Add(new ServerInstance(
+                            (string)dataSource["ServerName"],
+                            Convert.IsDBNull(dataSource["InstanceName"]) ? string.Empty :
+                            (string)dataSource["InstanceName"],
+                            Convert.IsDBNull(dataSource["Version"]) ?
+                            "0.0" : (string)dataSource["Version"]));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                //no network servers
+            }*/
+
+            // Registered Servers
+            try
+            {
+                RegisteredServer[] rsvrs = SMO.SqlServerRegistrations.EnumRegisteredServers();
+
+                foreach (RegisteredServer rs in rsvrs)
+                {
+                    String name = "";
+
+                    name = rs.ServerInstance.Replace(".", System.Environment.MachineName)
+                                            .Replace("(local)", System.Environment.MachineName)
+                                            .Replace("localhost", System.Environment.MachineName);
+                    //only add if it doesn't exist
+                    if (theList.Contains(name) == false && name.Length > 0)
+                        theList.Add(name);
+                }
+            }
+            catch (Exception ex)
+            {
+                //no registered servers
+            }
+
+        }
+        catch (SMO.SmoException ex)
+        {
+           //DisplayErrorMessage(ex);
+        }
+        catch (Exception ex)
+        {
+           //DisplayErrorMessage(ex);
+        }
+          Object[] theObjects;
+          if (theList.Count > 0)
+          {
+              theObjects = new Object[theList.Count];
+              for (int i = 0; i < theList.Count; i++)
+              {
+                  theObjects[i] = theList[i];
+              }
+              return theObjects;
+          }
+          else
+          {
+              return null;
+          }
+        
+     }
+
+      //get all available databases in an SQLServer    
+      public static Object[] SQLGetListOfDatabasesInServer(string theServer)
+      {
+          List<Object> theList = new List<object>();
+
+          try
+          {
+
+              SMO.Server svr = new Microsoft.SqlServer.Management.Smo.Server(theServer);
+              System.Data.DataTable dt = new System.Data.DataTable();
+              dt.Columns.Add("DatabaseName");
+
+              foreach(Microsoft.SqlServer.Management.Smo.Database db in svr.Databases)
+              {
+                  System.Data.DataRow dr = dt.NewRow();
+                  dr["DatabaseName"] = db.Name;
+                  dt.Rows.Add(dr);
+              }
+
+
+              if (dt.Rows.Count > 0)
+              {
+                  // Load server names into combo box
+                  foreach (System.Data.DataRow dr in dt.Rows)
+                  {
+                      theList.Add(dr["DatabaseName"]);
+                  }
+              }
+          }
+          catch (SMO.SmoException ex)
+          {
+              //DisplayErrorMessage(ex);
+          }
+          catch (Exception ex)
+          {
+              //DisplayErrorMessage(ex);
+          }
+          Object[] theObjects;
+          if (theList.Count > 0)
+          {
+              theObjects = new Object[theList.Count];
+              for (int i = 0; i < theList.Count; i++)
+              {
+                  theObjects[i] = theList[i];
+              }
+              return theObjects;
+          }
+          else
+          {
+              return null;
+          }
+
+      }
+
+      //Still need to implement transfer of the tables from the main SIRTOBY server to the
+      //user designated server and database.  So far this will only work with a local 
+      //database such as SQL server.  There is still a need to make sure that the user
+      //can access an actual network server, but until the time those can be listed without
+      //requiring a 30 second start up time, this is the way it should be done.
+
+      //table transfer funcion for SMO operations:
 
   }
 }
