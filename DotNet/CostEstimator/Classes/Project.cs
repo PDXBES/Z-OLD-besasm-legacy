@@ -3,7 +3,7 @@
 // Path: C:\Development\CostEstimatorV2\Classes, Author: Arnel
 // Code lines: 14, Size of file: 185 Bytes
 // Creation date: 3/1/2008 3:02 PM
-// Last modified: 5/11/2009 1:44 PM
+// Last modified: 9/17/2010 8:25 AM
 
 #region Using directives
 using System;
@@ -277,6 +277,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
             kvpair.Value.WriteXML(saveFile);
           } // foreach  (kvpair)
           saveFile.WriteEndElement();
+          saveFile.Flush();
 
           saveFile.WriteStartElement("StandardCostFactorPool");
           foreach (KeyValuePair<int, CostFactor> kvpair in _StandardCostFactorPool)
@@ -284,6 +285,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
             kvpair.Value.WriteXML(saveFile);
           } // foreach  (kvpair)
           saveFile.WriteEndElement();
+          saveFile.Flush();
 
           saveFile.WriteStartElement("CostFactorPool");
           foreach (KeyValuePair<int, CostFactor> kvpair in _CostFactorPool)
@@ -291,6 +293,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
             kvpair.Value.WriteXML(saveFile);
           } // foreach  (kvpair)
           saveFile.WriteEndElement();
+          saveFile.Flush();
 
           saveFile.WriteStartElement("CostItemPool");
           foreach (KeyValuePair<int, CostItem> kvpair in _CostItemPool)
@@ -298,6 +301,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
             kvpair.Value.WriteXML(saveFile);
           } // foreach  (kvpair)
           saveFile.WriteEndElement();
+          saveFile.Flush();
 
           saveFile.WriteStartElement("Estimates");
           foreach (KeyValuePair<int, CostItemFactor> kvpair in _Estimates)
@@ -1562,6 +1566,9 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       bool generateManholeCosts, out string errorMessage)
     {
       int linkCounter = 0;
+      Link currentLink = null;
+      string currentStage = "";
+
       try
       {
         if (Directory.Exists(modelPath))
@@ -1591,9 +1598,12 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 
           foreach (Link link in model.ModelLinks.Values)
           {
+            currentLink = link;
+
             if (selectedMLinkIds != null && !selectedMLinkIds.Contains(link.MLinkID))
               continue;
 
+            currentStage = "Calculating progress";
             linkCounter++;
             double fractionDone = (double)linkCounter / (double)totalLinks;
             int elapsedDuration = Convert.ToInt32((DateTime.Now - startTime).Duration().TotalMinutes);
@@ -1603,8 +1613,13 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
               string.Format("Reading links: {0} out of {1}, {2} minutes left",
               linkCounter, totalLinks, durationLeft));
 
+            currentStage = "Assigning PipeCoster depth";
             _PipeCoster.Depth = model.PipeDepth(link);
+
+            currentStage = "Assigning PipeCoster inside diameter";
             _PipeCoster.InsideDiameter = link.Diameter;
+
+            currentStage = "Assigning PipeCoster material";
             switch (link.Material.ToUpper())
             {
               case "PVC":
@@ -1623,6 +1638,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
             } // switch
 
             // Pipe and Manhole CostItemFactor
+            currentStage = "Creating pipe/manhole CostItemFactor";
             CostItemFactor pipeAndManholeCostItemFactor = new CostItemFactor(string.Format("{0} {1}-{2}",
               link.MLinkID, link.USNodeName, link.DSNodeName));
             _CostItemFactors.Add(pipeAndManholeCostItemFactor.ID, pipeAndManholeCostItemFactor);
@@ -1633,6 +1649,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 
             CostItem manholeCostItem = null;
             // Manhole CostItem
+            currentStage = "Generating manhole costs";
             if (generateManholeCosts)
             {
               string manholeCostItemName = string.Format("Manhole {0:F0} in diam {1:F0} ft deep",
@@ -1649,6 +1666,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
             }
 
             // Pipe CostItemFactor
+            currentStage = "Creating pipe CostItemFactor";
             string pipeItemName = string.Format("Pipe {0:F1} in diam, {1:F0} ft deep, {2}",
               link.Diameter,
               model.PipeDepth(link),
@@ -1662,6 +1680,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 
             CostItemFactor manholeCostItemFactor = null;
             // Manhole CostItemFactor
+            currentStage = "Creating manhole CostItemFactor";
             if (generateManholeCosts)
             {
               string manholeItemName = string.Format("Manhole {0:F0} in diam, {1:F0} ft deep",
@@ -1675,6 +1694,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
             }
 
             // Ancillary CostItemFactors
+            currentStage = "Creating ancillary CostItemFactors";
             AncillaryCoster ancillaryCoster = new AncillaryCoster(model);
             ancillaryCoster.Link = link;
             ancillaryCoster.PipXP = model.ConflictFromLink(link);
@@ -1700,6 +1720,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
             } // else
 
             // Ancillary CostFactors
+            currentStage = "Creating ancillary CostFactors";
             List<AncillaryFactor> ancillaryFactors = ancillaryCoster.ModelAncillaryFactors;
             foreach (AncillaryFactor ancillaryFactor in ancillaryFactors)
             {
@@ -1709,6 +1730,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
             } // foreach  (ancillaryFactor)
 
             // Prepare report item
+            currentStage = "Preparing report item";
             pipeAndManholeCostItemFactor.Data = new ReportPipeItem();
             pipeAndManholeCostItemFactor.ReportItemType = ReportItemType.Pipe;
             ReportPipeItem reportPipeItem = pipeAndManholeCostItemFactor.Data as ReportPipeItem;
@@ -1724,7 +1746,9 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
             reportPipeItem.PipeAndManhole = pipeAndManholeCostItemFactor;
 
           } // foreach  (link)
+          currentLink = null;
 
+          currentStage = "Preparing Estimate CostItemFactors";
           foreach (KeyValuePair<int, CostItemFactor> kvpair in _Estimates)
           {
             int index = _ProjectEstimate.AddCostItemFactor(kvpair.Value);
@@ -1748,7 +1772,14 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       catch (Exception e)
       {
         _IsDirty = true;
-        errorMessage = e.Message;
+        string currentLinkMessage = "";
+        if (currentLink != null)
+          currentLinkMessage = string.Format("{0} {1}->{2}:", currentLink.MLinkID, 
+            currentLink.USNodeName, currentLink.DSNodeName);
+
+        errorMessage = currentLink != null ? 
+          string.Format("{0} {1} {2}", currentStage, currentLinkMessage, e.Message) :
+          e.Message;
         return false;
       } // catch (Exception)
 

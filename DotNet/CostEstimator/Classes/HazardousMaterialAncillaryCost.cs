@@ -105,8 +105,11 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 				pipeCoster.Material = _ConflictPackage.PipeMaterial;
 				pipeCoster.Depth = _ConflictPackage.Depth;
 
-				return (affectedLength / _ConflictPackage.Length) *
-					(pipeCoster.ExcavationVolume * _ConflictPackage.Length);
+        if (pipeCoster.ExcavationVolume <= 0 || _ConflictPackage.Length <= 0)
+          return 0;
+        else
+          return (affectedLength / _ConflictPackage.Length) *
+            (pipeCoster.ExcavationVolume * _ConflictPackage.Length);
 			} // get
 		} // Units
 
