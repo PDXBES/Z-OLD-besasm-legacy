@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;
 using System.Xml.Serialization;
+using SystemsAnalysis.Utils.AccessUtils;
 
 namespace SystemsAnalysis.Grid.GridAnalysis
 {
@@ -29,6 +30,8 @@ namespace SystemsAnalysis.Grid.GridAnalysis
             {
                 gridInterfaceDS.LoadData();
                 cmbSelectedProject.SelectedIndex = 0;
+                Object[] theObjects = (Object[])AccessHelper.SQLGetListOfServers();
+                this.cboServers.Items.AddRange(theObjects);
             }
             catch (Exception ex)
             {
@@ -244,7 +247,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis
                 MessageBox.Show("Error Updating Processes: " + ex.Message, "Error Updating Processes", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-
+            
         }
 
         private void btnLoadModels_Click(object sender, EventArgs e)
@@ -736,6 +739,57 @@ namespace SystemsAnalysis.Grid.GridAnalysis
         private void browseToApplicationFolderToolStripMenuItem_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start(System.AppDomain.CurrentDomain.BaseDirectory);
+        }
+
+        private void tabPageDefineProjects_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cboServers_SelectedValueChanged(object sender, EventArgs e)
+        {
+            Object[] theObjects = (Object[])AccessHelper.SQLGetListOfDatabasesInServer(cboServers.SelectedItem.ToString());
+            this.cboDatabases.Items.Clear();
+            this.cboDatabases.Items.AddRange(theObjects);
+        }
+
+        private void ultraButtonArchiveInputOutput_Click(object sender, EventArgs e)
+        {
+            //this should not be in this part of the program.
+            //but then again, I haven't been able to get the guys in charge of creating a dedicated
+            //database for the gridmodel to actually do that so this is really jsut a temporary workaround.
+            string inputDatabase = "Data Source=SIRTOBY;Initial Catalog=SANDBOX;Persist Security Info=True;User ID=GIS;Password=Extra$hade";
+            string outputDatabase = "Data Source=" + this.cboServers.Text + ";Initial Catalog=" + this.cboDatabases.Text + ";Trusted_Connection=yes";
+
+
+            AccessHelper.SQLCopySQLTable("GRID_GridResults",
+                "Data Source=SIRTOBY;Initial Catalog=SANDBOX;Persist Security Info=True;User ID=GIS;Password=Extra$hade",
+                "GRID_GridResults",
+                "Data Source=" + this.cboServers.Text + ";Initial Catalog=" + this.cboDatabases.Text + ";Trusted_Connection=yes");
+
+            AccessHelper.SQLCopySQLTable("GRID_ZONING_IMP", inputDatabase, "GRID_ZONING_IMP", outputDatabase);
+            AccessHelper.SQLCopySQLTable("GRID_variables", inputDatabase, "GRID_variables", outputDatabase);
+            AccessHelper.SQLCopySQLTable("GRID_FE_SELECTION_SETS", inputDatabase, "GRID_FE_SELECTION_SETS", outputDatabase);
+            AccessHelper.SQLCopySQLTable("GRID_FE_SELECTION_SET_AREAS", inputDatabase, "GRID_FE_SELECTION_SET_AREAS", outputDatabase);
+            AccessHelper.SQLCopySQLTable("GRID_FE_SCENARIOS", inputDatabase, "GRID_FE_SCENARIOS", outputDatabase);
+            AccessHelper.SQLCopySQLTable("GRID_FE_SCENARIO_X_PROCESS", inputDatabase, "GRID_FE_SCENARIO_X_PROCESS", outputDatabase);
+            AccessHelper.SQLCopySQLTable("GRID_FE_PROCESS_GROUP", inputDatabase, "GRID_FE_PROCESS_GROUP", outputDatabase);
+            AccessHelper.SQLCopySQLTable("GRID_FE_PROCESS", inputDatabase, "GRID_FE_PROCESS", outputDatabase);
+            AccessHelper.SQLCopySQLTable("GRID_FE_MODEL_RUN", inputDatabase, "GRID_FE_MODEL_RUN", outputDatabase);
+            AccessHelper.SQLCopySQLTable("GRID_FE_HYETOGRAPHS", inputDatabase, "GRID_FE_HYETOGRAPHS", outputDatabase);
+            AccessHelper.SQLCopySQLTable("GRID_FE_HYETOGRAPH_DATA", inputDatabase, "GRID_FE_HYETOGRAPH_DATA", outputDatabase);
+            AccessHelper.SQLCopySQLTable("GRID_FE_GRID_PROJECTS", inputDatabase, "GRID_FE_GRID_PROJECTS", outputDatabase);
+            AccessHelper.SQLCopySQLTable("GRID_Contaminants", inputDatabase, "GRID_Contaminants", outputDatabase);
+            AccessHelper.SQLCopySQLTable("GRID_BMP_TYPE_TABLE_GENERAL", inputDatabase, "GRID_BMP_TYPE_TABLE_GENERAL", outputDatabase);
+            if(gridModelEngine != null)
+            {
+                if (gridModelEngine.GridDataTable != null)
+                {
+                    AccessHelper.SQLCopySQLTable("GRID_" + gridModelEngine.GridDataTable, inputDatabase, "GRID_" + gridModelEngine.GridDataTable, outputDatabase);
+                }
+            }
+            AccessHelper.SQLCopySQLTable("GRID_BMP_PERFORMANCE", inputDatabase, "GRID_BMP_PERFORMANCE", outputDatabase);
+            AccessHelper.SQLCopySQLTable("GRID_pollutant_loadings", inputDatabase, "GRID_pollutant_loadings", outputDatabase);
         }
 
     }
