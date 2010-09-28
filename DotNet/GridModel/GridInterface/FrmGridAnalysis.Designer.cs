@@ -240,18 +240,46 @@
             Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn124 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FE_SCENARIOSFE_SCENARIO_X_PROCESS");
             Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn125 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FE_SCENARIOSFE_MODEL_RUN");
             Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand20 = new Infragistics.Win.UltraWinGrid.UltraGridBand("FE_SCENARIOSFE_SCENARIO_X_PROCESS", 1);
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn126 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("scenario_x_process_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn127 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("scenario_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn128 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("process_group");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn129 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FEScenarioXProcess_FEProcessGroup");
             Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand21 = new Infragistics.Win.UltraWinGrid.UltraGridBand("FEScenarioXProcess_FEProcessGroup", 2);
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn130 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("process_group_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn131 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("process_group");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn132 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("description");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn133 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("group_order");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn134 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FEProcessGroup_FEProcess");
             Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand22 = new Infragistics.Win.UltraWinGrid.UltraGridBand("FEProcessGroup_FEProcess", 3);
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn135 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("process_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn136 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("process_group");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn137 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("process_order");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn138 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("process_name");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn139 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("critical");
             Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand23 = new Infragistics.Win.UltraWinGrid.UltraGridBand("FE_SCENARIOSFE_MODEL_RUN", 1);
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn140 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("model_run_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn141 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("scenario_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn142 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("selection_set_area_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn143 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("hyetograph_id");
             Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand24 = new Infragistics.Win.UltraWinGrid.UltraGridBand("FE_GRID_PROJECTSFE_SELECTION_SET_AREAS1", 0);
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn126 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("selection_set_area_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn127 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("project_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn128 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("area");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn129 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("sub_area");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn130 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FE_SELECTION_SET_AREASFE_SELECTION_SETS");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn131 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FE_SELECTION_SET_AREASFE_GRID_MODEL_RUN");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn144 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("selection_set_area_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn145 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("project_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn146 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("area");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn147 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("sub_area");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn148 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FE_SELECTION_SET_AREASFE_SELECTION_SETS");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn149 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FE_SELECTION_SET_AREASFE_GRID_MODEL_RUN");
             Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand25 = new Infragistics.Win.UltraWinGrid.UltraGridBand("FE_SELECTION_SET_AREASFE_SELECTION_SETS", 6);
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn150 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("selection_set_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn151 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("selection_set_area_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn152 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("description");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn153 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("col_name");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn154 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("row_name");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn155 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("percent_overlap");
             Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand26 = new Infragistics.Win.UltraWinGrid.UltraGridBand("FE_SELECTION_SET_AREASFE_GRID_MODEL_RUN", 6);
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn156 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("model_run_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn157 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("scenario_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn158 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("selection_set_area_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn159 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("hyetograph_id");
             Infragistics.Win.Appearance appearance62 = new Infragistics.Win.Appearance();
             Infragistics.Win.Appearance appearance63 = new Infragistics.Win.Appearance();
             Infragistics.Win.Appearance appearance64 = new Infragistics.Win.Appearance();
@@ -280,14 +308,6 @@
             this.btnDefineModelRun = new Infragistics.Win.Misc.UltraButton();
             this.btnCommitHyetographChanges = new Infragistics.Win.Misc.UltraButton();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPageDefineProjects = new System.Windows.Forms.TabPage();
-            this.txtOutputDirectory = new Infragistics.Win.UltraWinEditors.UltraTextEditor();
-            this.btnCommitProjectChanges = new Infragistics.Win.Misc.UltraButton();
-            this.lblNewProjectName = new Infragistics.Win.Misc.UltraLabel();
-            this.btnDeleteProject = new Infragistics.Win.Misc.UltraButton();
-            this.txtNewProjectName = new Infragistics.Win.UltraWinEditors.UltraTextEditor();
-            this.btnAddNewProject = new Infragistics.Win.Misc.UltraButton();
-            this.lstDefineProject = new System.Windows.Forms.ListBox();
             this.tabPageDefineScenarios = new System.Windows.Forms.TabPage();
             this.txtScenarioID = new Infragistics.Win.UltraWinEditors.UltraTextEditor();
             this.feScenariosBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -346,6 +366,18 @@
             this.btnImportModelResults = new Infragistics.Win.Misc.UltraButton();
             this.grdModelResults = new Infragistics.Win.UltraWinGrid.UltraGrid();
             this.gridModelResultsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.tabPageDefineProjects = new System.Windows.Forms.TabPage();
+            this.cboDatabases = new System.Windows.Forms.ComboBox();
+            this.labelArchiveDatabase = new System.Windows.Forms.Label();
+            this.cboServers = new System.Windows.Forms.ComboBox();
+            this.labelArchiveServer = new System.Windows.Forms.Label();
+            this.txtOutputDirectory = new Infragistics.Win.UltraWinEditors.UltraTextEditor();
+            this.btnCommitProjectChanges = new Infragistics.Win.Misc.UltraButton();
+            this.lblNewProjectName = new Infragistics.Win.Misc.UltraLabel();
+            this.btnDeleteProject = new Infragistics.Win.Misc.UltraButton();
+            this.txtNewProjectName = new Infragistics.Win.UltraWinEditors.UltraTextEditor();
+            this.btnAddNewProject = new Infragistics.Win.Misc.UltraButton();
+            this.lstDefineProject = new System.Windows.Forms.ListBox();
             this.lblOutputDirectory = new Infragistics.Win.Misc.UltraLabel();
             this.pnlBottom = new System.Windows.Forms.Panel();
             this.btnDeleteStoredModelRuns = new Infragistics.Win.Misc.UltraButton();
@@ -367,6 +399,7 @@
             this.onlineHelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlMiddle = new System.Windows.Forms.Panel();
+            this.ultraButtonArchiveInputOutput = new Infragistics.Win.Misc.UltraButton();
             ((System.ComponentModel.ISupportInitialize)(this.txtGridPath)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.feGridProjectsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridInterfaceDS)).BeginInit();
@@ -374,9 +407,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtMIPPath)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtOSFPath)).BeginInit();
             this.tabControl1.SuspendLayout();
-            this.tabPageDefineProjects.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtOutputDirectory)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtNewProjectName)).BeginInit();
             this.tabPageDefineScenarios.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtScenarioID)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.feScenariosBindingSource)).BeginInit();
@@ -404,6 +434,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtRunDate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdModelResults)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridModelResultsBindingSource)).BeginInit();
+            this.tabPageDefineProjects.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtOutputDirectory)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtNewProjectName)).BeginInit();
             this.pnlBottom.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdModelRuns)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.qryModelRunBindingSource)).BeginInit();
@@ -568,100 +601,6 @@
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(1049, 410);
             this.tabControl1.TabIndex = 0;
-            // 
-            // tabPageDefineProjects
-            // 
-            this.tabPageDefineProjects.Controls.Add(this.txtOutputDirectory);
-            this.tabPageDefineProjects.Controls.Add(this.btnCommitProjectChanges);
-            this.tabPageDefineProjects.Controls.Add(this.lblNewProjectName);
-            this.tabPageDefineProjects.Controls.Add(this.btnDeleteProject);
-            this.tabPageDefineProjects.Controls.Add(this.txtNewProjectName);
-            this.tabPageDefineProjects.Controls.Add(this.btnAddNewProject);
-            this.tabPageDefineProjects.Controls.Add(this.lstDefineProject);
-            this.tabPageDefineProjects.Controls.Add(this.lblProjectList);
-            this.tabPageDefineProjects.Controls.Add(this.txtGridPath);
-            this.tabPageDefineProjects.Controls.Add(this.lblPRFPath);
-            this.tabPageDefineProjects.Controls.Add(this.txtPRFPath);
-            this.tabPageDefineProjects.Controls.Add(this.lblGridPath);
-            this.tabPageDefineProjects.Controls.Add(this.lblOutputDirectory);
-            this.tabPageDefineProjects.Controls.Add(this.lblMIPPath);
-            this.tabPageDefineProjects.Controls.Add(this.txtMIPPath);
-            this.tabPageDefineProjects.Controls.Add(this.txtOSFPath);
-            this.tabPageDefineProjects.Controls.Add(this.lblOSFPath);
-            this.tabPageDefineProjects.Location = new System.Drawing.Point(4, 25);
-            this.tabPageDefineProjects.Name = "tabPageDefineProjects";
-            this.tabPageDefineProjects.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageDefineProjects.Size = new System.Drawing.Size(1041, 381);
-            this.tabPageDefineProjects.TabIndex = 3;
-            this.tabPageDefineProjects.Text = "Define Projects";
-            this.tabPageDefineProjects.UseVisualStyleBackColor = true;
-            // 
-            // txtOutputDirectory
-            // 
-            this.txtOutputDirectory.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.feGridProjectsBindingSource, "default_output_path", true));
-            this.txtOutputDirectory.DisplayStyle = Infragistics.Win.EmbeddableElementDisplayStyle.VisualStudio2005;
-            this.txtOutputDirectory.Location = new System.Drawing.Point(368, 137);
-            this.txtOutputDirectory.Name = "txtOutputDirectory";
-            this.txtOutputDirectory.Size = new System.Drawing.Size(509, 21);
-            this.txtOutputDirectory.TabIndex = 8;
-            // 
-            // btnCommitProjectChanges
-            // 
-            this.btnCommitProjectChanges.ButtonStyle = Infragistics.Win.UIElementButtonStyle.VisualStudio2005Button;
-            this.btnCommitProjectChanges.Location = new System.Drawing.Point(284, 171);
-            this.btnCommitProjectChanges.Name = "btnCommitProjectChanges";
-            this.btnCommitProjectChanges.Size = new System.Drawing.Size(313, 35);
-            this.btnCommitProjectChanges.TabIndex = 9;
-            this.btnCommitProjectChanges.Text = "Commit Changes to Project";
-            this.btnCommitProjectChanges.Click += new System.EventHandler(this.btnCommitProjectChanges_Click);
-            // 
-            // lblNewProjectName
-            // 
-            this.lblNewProjectName.AutoSize = true;
-            this.lblNewProjectName.Location = new System.Drawing.Point(9, 212);
-            this.lblNewProjectName.Name = "lblNewProjectName";
-            this.lblNewProjectName.Size = new System.Drawing.Size(98, 14);
-            this.lblNewProjectName.TabIndex = 59;
-            this.lblNewProjectName.Text = "New Project Name";
-            // 
-            // btnDeleteProject
-            // 
-            this.btnDeleteProject.ButtonStyle = Infragistics.Win.UIElementButtonStyle.VisualStudio2005Button;
-            this.btnDeleteProject.Location = new System.Drawing.Point(147, 171);
-            this.btnDeleteProject.Name = "btnDeleteProject";
-            this.btnDeleteProject.Size = new System.Drawing.Size(128, 35);
-            this.btnDeleteProject.TabIndex = 2;
-            this.btnDeleteProject.Text = "Delete Project";
-            this.btnDeleteProject.Click += new System.EventHandler(this.btnDeleteProject_Click);
-            // 
-            // txtNewProjectName
-            // 
-            this.txtNewProjectName.DisplayStyle = Infragistics.Win.EmbeddableElementDisplayStyle.VisualStudio2005;
-            this.txtNewProjectName.Location = new System.Drawing.Point(9, 228);
-            this.txtNewProjectName.Name = "txtNewProjectName";
-            this.txtNewProjectName.Size = new System.Drawing.Size(177, 21);
-            this.txtNewProjectName.TabIndex = 3;
-            // 
-            // btnAddNewProject
-            // 
-            this.btnAddNewProject.ButtonStyle = Infragistics.Win.UIElementButtonStyle.VisualStudio2005Button;
-            this.btnAddNewProject.Location = new System.Drawing.Point(10, 171);
-            this.btnAddNewProject.Name = "btnAddNewProject";
-            this.btnAddNewProject.Size = new System.Drawing.Size(131, 35);
-            this.btnAddNewProject.TabIndex = 1;
-            this.btnAddNewProject.Text = "Add New Project";
-            this.btnAddNewProject.Click += new System.EventHandler(this.btnAddNewProject_Click);
-            // 
-            // lstDefineProject
-            // 
-            this.lstDefineProject.DataSource = this.feGridProjectsBindingSource;
-            this.lstDefineProject.DisplayMember = "project_description";
-            this.lstDefineProject.FormattingEnabled = true;
-            this.lstDefineProject.Location = new System.Drawing.Point(7, 19);
-            this.lstDefineProject.Name = "lstDefineProject";
-            this.lstDefineProject.Size = new System.Drawing.Size(265, 147);
-            this.lstDefineProject.TabIndex = 0;
-            this.lstDefineProject.ValueMember = "project_id";
             // 
             // tabPageDefineScenarios
             // 
@@ -1804,6 +1743,141 @@
             this.gridModelResultsBindingSource.DataMember = "GridModelResults";
             this.gridModelResultsBindingSource.DataSource = this.gridModelOutputBindingSource;
             // 
+            // tabPageDefineProjects
+            // 
+            this.tabPageDefineProjects.Controls.Add(this.ultraButtonArchiveInputOutput);
+            this.tabPageDefineProjects.Controls.Add(this.cboDatabases);
+            this.tabPageDefineProjects.Controls.Add(this.labelArchiveDatabase);
+            this.tabPageDefineProjects.Controls.Add(this.cboServers);
+            this.tabPageDefineProjects.Controls.Add(this.labelArchiveServer);
+            this.tabPageDefineProjects.Controls.Add(this.txtOutputDirectory);
+            this.tabPageDefineProjects.Controls.Add(this.btnCommitProjectChanges);
+            this.tabPageDefineProjects.Controls.Add(this.lblNewProjectName);
+            this.tabPageDefineProjects.Controls.Add(this.btnDeleteProject);
+            this.tabPageDefineProjects.Controls.Add(this.txtNewProjectName);
+            this.tabPageDefineProjects.Controls.Add(this.btnAddNewProject);
+            this.tabPageDefineProjects.Controls.Add(this.lstDefineProject);
+            this.tabPageDefineProjects.Controls.Add(this.lblProjectList);
+            this.tabPageDefineProjects.Controls.Add(this.txtGridPath);
+            this.tabPageDefineProjects.Controls.Add(this.lblPRFPath);
+            this.tabPageDefineProjects.Controls.Add(this.txtPRFPath);
+            this.tabPageDefineProjects.Controls.Add(this.lblGridPath);
+            this.tabPageDefineProjects.Controls.Add(this.lblOutputDirectory);
+            this.tabPageDefineProjects.Controls.Add(this.lblMIPPath);
+            this.tabPageDefineProjects.Controls.Add(this.txtMIPPath);
+            this.tabPageDefineProjects.Controls.Add(this.txtOSFPath);
+            this.tabPageDefineProjects.Controls.Add(this.lblOSFPath);
+            this.tabPageDefineProjects.Location = new System.Drawing.Point(4, 25);
+            this.tabPageDefineProjects.Name = "tabPageDefineProjects";
+            this.tabPageDefineProjects.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageDefineProjects.Size = new System.Drawing.Size(1041, 381);
+            this.tabPageDefineProjects.TabIndex = 3;
+            this.tabPageDefineProjects.Text = "Define Projects";
+            this.tabPageDefineProjects.UseVisualStyleBackColor = true;
+            this.tabPageDefineProjects.Click += new System.EventHandler(this.tabPageDefineProjects_Click);
+            // 
+            // cboDatabases
+            // 
+            this.cboDatabases.FormattingEnabled = true;
+            this.cboDatabases.Location = new System.Drawing.Point(369, 192);
+            this.cboDatabases.Name = "cboDatabases";
+            this.cboDatabases.Size = new System.Drawing.Size(508, 21);
+            this.cboDatabases.TabIndex = 66;
+            // 
+            // labelArchiveDatabase
+            // 
+            this.labelArchiveDatabase.AutoSize = true;
+            this.labelArchiveDatabase.Location = new System.Drawing.Point(275, 196);
+            this.labelArchiveDatabase.Name = "labelArchiveDatabase";
+            this.labelArchiveDatabase.Size = new System.Drawing.Size(92, 13);
+            this.labelArchiveDatabase.TabIndex = 65;
+            this.labelArchiveDatabase.Text = "Archive Database";
+            // 
+            // cboServers
+            // 
+            this.cboServers.FormattingEnabled = true;
+            this.cboServers.Location = new System.Drawing.Point(369, 164);
+            this.cboServers.Name = "cboServers";
+            this.cboServers.Size = new System.Drawing.Size(508, 21);
+            this.cboServers.TabIndex = 64;
+            this.cboServers.SelectionChangeCommitted += new System.EventHandler(this.cboServers_SelectedValueChanged);
+            // 
+            // labelArchiveServer
+            // 
+            this.labelArchiveServer.AutoSize = true;
+            this.labelArchiveServer.Location = new System.Drawing.Point(275, 170);
+            this.labelArchiveServer.Name = "labelArchiveServer";
+            this.labelArchiveServer.Size = new System.Drawing.Size(77, 13);
+            this.labelArchiveServer.TabIndex = 63;
+            this.labelArchiveServer.Text = "Archive Server";
+            // 
+            // txtOutputDirectory
+            // 
+            this.txtOutputDirectory.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.feGridProjectsBindingSource, "default_output_path", true));
+            this.txtOutputDirectory.DisplayStyle = Infragistics.Win.EmbeddableElementDisplayStyle.VisualStudio2005;
+            this.txtOutputDirectory.Location = new System.Drawing.Point(368, 137);
+            this.txtOutputDirectory.Name = "txtOutputDirectory";
+            this.txtOutputDirectory.Size = new System.Drawing.Size(509, 21);
+            this.txtOutputDirectory.TabIndex = 8;
+            // 
+            // btnCommitProjectChanges
+            // 
+            this.btnCommitProjectChanges.ButtonStyle = Infragistics.Win.UIElementButtonStyle.VisualStudio2005Button;
+            this.btnCommitProjectChanges.Location = new System.Drawing.Point(281, 225);
+            this.btnCommitProjectChanges.Name = "btnCommitProjectChanges";
+            this.btnCommitProjectChanges.Size = new System.Drawing.Size(313, 35);
+            this.btnCommitProjectChanges.TabIndex = 9;
+            this.btnCommitProjectChanges.Text = "Commit Changes to Project";
+            this.btnCommitProjectChanges.Click += new System.EventHandler(this.btnCommitProjectChanges_Click);
+            // 
+            // lblNewProjectName
+            // 
+            this.lblNewProjectName.AutoSize = true;
+            this.lblNewProjectName.Location = new System.Drawing.Point(6, 266);
+            this.lblNewProjectName.Name = "lblNewProjectName";
+            this.lblNewProjectName.Size = new System.Drawing.Size(98, 14);
+            this.lblNewProjectName.TabIndex = 59;
+            this.lblNewProjectName.Text = "New Project Name";
+            // 
+            // btnDeleteProject
+            // 
+            this.btnDeleteProject.ButtonStyle = Infragistics.Win.UIElementButtonStyle.VisualStudio2005Button;
+            this.btnDeleteProject.Location = new System.Drawing.Point(144, 225);
+            this.btnDeleteProject.Name = "btnDeleteProject";
+            this.btnDeleteProject.Size = new System.Drawing.Size(128, 35);
+            this.btnDeleteProject.TabIndex = 2;
+            this.btnDeleteProject.Text = "Delete Project";
+            this.btnDeleteProject.Click += new System.EventHandler(this.btnDeleteProject_Click);
+            // 
+            // txtNewProjectName
+            // 
+            this.txtNewProjectName.DisplayStyle = Infragistics.Win.EmbeddableElementDisplayStyle.VisualStudio2005;
+            this.txtNewProjectName.Location = new System.Drawing.Point(6, 282);
+            this.txtNewProjectName.Name = "txtNewProjectName";
+            this.txtNewProjectName.Size = new System.Drawing.Size(177, 21);
+            this.txtNewProjectName.TabIndex = 3;
+            // 
+            // btnAddNewProject
+            // 
+            this.btnAddNewProject.ButtonStyle = Infragistics.Win.UIElementButtonStyle.VisualStudio2005Button;
+            this.btnAddNewProject.Location = new System.Drawing.Point(7, 225);
+            this.btnAddNewProject.Name = "btnAddNewProject";
+            this.btnAddNewProject.Size = new System.Drawing.Size(131, 35);
+            this.btnAddNewProject.TabIndex = 1;
+            this.btnAddNewProject.Text = "Add New Project";
+            this.btnAddNewProject.Click += new System.EventHandler(this.btnAddNewProject_Click);
+            // 
+            // lstDefineProject
+            // 
+            this.lstDefineProject.DataSource = this.feGridProjectsBindingSource;
+            this.lstDefineProject.DisplayMember = "project_description";
+            this.lstDefineProject.FormattingEnabled = true;
+            this.lstDefineProject.Location = new System.Drawing.Point(7, 19);
+            this.lstDefineProject.Name = "lstDefineProject";
+            this.lstDefineProject.Size = new System.Drawing.Size(265, 199);
+            this.lstDefineProject.TabIndex = 0;
+            this.lstDefineProject.ValueMember = "project_id";
+            // 
             // lblOutputDirectory
             // 
             this.lblOutputDirectory.AutoSize = true;
@@ -1914,17 +1988,79 @@
             ultraGridColumn125});
             ultraGridColumn126.Header.VisiblePosition = 0;
             ultraGridColumn127.Header.VisiblePosition = 1;
-            ultraGridColumn128.Header.VisiblePosition = 4;
-            ultraGridColumn129.Header.VisiblePosition = 5;
-            ultraGridColumn130.Header.VisiblePosition = 2;
-            ultraGridColumn131.Header.VisiblePosition = 3;
-            ultraGridBand24.Columns.AddRange(new object[] {
+            ultraGridColumn128.Header.VisiblePosition = 2;
+            ultraGridColumn129.Header.VisiblePosition = 3;
+            ultraGridBand20.Columns.AddRange(new object[] {
             ultraGridColumn126,
             ultraGridColumn127,
             ultraGridColumn128,
-            ultraGridColumn129,
+            ultraGridColumn129});
+            ultraGridColumn130.Header.VisiblePosition = 0;
+            ultraGridColumn131.Header.VisiblePosition = 1;
+            ultraGridColumn132.Header.VisiblePosition = 2;
+            ultraGridColumn133.Header.VisiblePosition = 3;
+            ultraGridColumn134.Header.VisiblePosition = 4;
+            ultraGridBand21.Columns.AddRange(new object[] {
             ultraGridColumn130,
-            ultraGridColumn131});
+            ultraGridColumn131,
+            ultraGridColumn132,
+            ultraGridColumn133,
+            ultraGridColumn134});
+            ultraGridColumn135.Header.VisiblePosition = 0;
+            ultraGridColumn136.Header.VisiblePosition = 1;
+            ultraGridColumn137.Header.VisiblePosition = 2;
+            ultraGridColumn138.Header.VisiblePosition = 3;
+            ultraGridColumn139.Header.VisiblePosition = 4;
+            ultraGridBand22.Columns.AddRange(new object[] {
+            ultraGridColumn135,
+            ultraGridColumn136,
+            ultraGridColumn137,
+            ultraGridColumn138,
+            ultraGridColumn139});
+            ultraGridColumn140.Header.VisiblePosition = 0;
+            ultraGridColumn141.Header.VisiblePosition = 1;
+            ultraGridColumn142.Header.VisiblePosition = 2;
+            ultraGridColumn143.Header.VisiblePosition = 3;
+            ultraGridBand23.Columns.AddRange(new object[] {
+            ultraGridColumn140,
+            ultraGridColumn141,
+            ultraGridColumn142,
+            ultraGridColumn143});
+            ultraGridColumn144.Header.VisiblePosition = 0;
+            ultraGridColumn145.Header.VisiblePosition = 1;
+            ultraGridColumn146.Header.VisiblePosition = 4;
+            ultraGridColumn147.Header.VisiblePosition = 5;
+            ultraGridColumn148.Header.VisiblePosition = 2;
+            ultraGridColumn149.Header.VisiblePosition = 3;
+            ultraGridBand24.Columns.AddRange(new object[] {
+            ultraGridColumn144,
+            ultraGridColumn145,
+            ultraGridColumn146,
+            ultraGridColumn147,
+            ultraGridColumn148,
+            ultraGridColumn149});
+            ultraGridColumn150.Header.VisiblePosition = 0;
+            ultraGridColumn151.Header.VisiblePosition = 1;
+            ultraGridColumn152.Header.VisiblePosition = 2;
+            ultraGridColumn153.Header.VisiblePosition = 3;
+            ultraGridColumn154.Header.VisiblePosition = 4;
+            ultraGridColumn155.Header.VisiblePosition = 5;
+            ultraGridBand25.Columns.AddRange(new object[] {
+            ultraGridColumn150,
+            ultraGridColumn151,
+            ultraGridColumn152,
+            ultraGridColumn153,
+            ultraGridColumn154,
+            ultraGridColumn155});
+            ultraGridColumn156.Header.VisiblePosition = 0;
+            ultraGridColumn157.Header.VisiblePosition = 1;
+            ultraGridColumn158.Header.VisiblePosition = 2;
+            ultraGridColumn159.Header.VisiblePosition = 3;
+            ultraGridBand26.Columns.AddRange(new object[] {
+            ultraGridColumn156,
+            ultraGridColumn157,
+            ultraGridColumn158,
+            ultraGridColumn159});
             this.grdModelRuns.DisplayLayout.BandsSerializer.Add(ultraGridBand18);
             this.grdModelRuns.DisplayLayout.BandsSerializer.Add(ultraGridBand19);
             this.grdModelRuns.DisplayLayout.BandsSerializer.Add(ultraGridBand20);
@@ -2079,13 +2215,13 @@
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(109, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(99, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -2095,20 +2231,20 @@
             this.reloadDataToolStripMenuItem,
             this.browseToApplicationFolderToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(45, 20);
             this.toolsToolStripMenuItem.Text = "Tools";
             // 
             // reloadDataToolStripMenuItem
             // 
             this.reloadDataToolStripMenuItem.Name = "reloadDataToolStripMenuItem";
-            this.reloadDataToolStripMenuItem.Size = new System.Drawing.Size(265, 22);
+            this.reloadDataToolStripMenuItem.Size = new System.Drawing.Size(222, 22);
             this.reloadDataToolStripMenuItem.Text = "Reload Data";
             this.reloadDataToolStripMenuItem.Click += new System.EventHandler(this.reloadDataToolStripMenuItem_Click);
             // 
             // browseToApplicationFolderToolStripMenuItem
             // 
             this.browseToApplicationFolderToolStripMenuItem.Name = "browseToApplicationFolderToolStripMenuItem";
-            this.browseToApplicationFolderToolStripMenuItem.Size = new System.Drawing.Size(265, 22);
+            this.browseToApplicationFolderToolStripMenuItem.Size = new System.Drawing.Size(222, 22);
             this.browseToApplicationFolderToolStripMenuItem.Text = "Browse to Application Folder";
             this.browseToApplicationFolderToolStripMenuItem.Click += new System.EventHandler(this.browseToApplicationFolderToolStripMenuItem_Click);
             // 
@@ -2118,20 +2254,20 @@
             this.onlineHelpToolStripMenuItem,
             this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
             this.helpToolStripMenuItem.Text = "Help";
             // 
             // onlineHelpToolStripMenuItem
             // 
             this.onlineHelpToolStripMenuItem.Name = "onlineHelpToolStripMenuItem";
-            this.onlineHelpToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.onlineHelpToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.onlineHelpToolStripMenuItem.Text = "Online Help";
             this.onlineHelpToolStripMenuItem.Click += new System.EventHandler(this.onlineHelpToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -2145,6 +2281,16 @@
             this.pnlMiddle.Padding = new System.Windows.Forms.Padding(0, 3, 0, 0);
             this.pnlMiddle.Size = new System.Drawing.Size(1051, 415);
             this.pnlMiddle.TabIndex = 33;
+            // 
+            // ultraButtonArchiveInputOutput
+            // 
+            this.ultraButtonArchiveInputOutput.ButtonStyle = Infragistics.Win.UIElementButtonStyle.VisualStudio2005Button;
+            this.ultraButtonArchiveInputOutput.Location = new System.Drawing.Point(670, 225);
+            this.ultraButtonArchiveInputOutput.Name = "ultraButtonArchiveInputOutput";
+            this.ultraButtonArchiveInputOutput.Size = new System.Drawing.Size(207, 35);
+            this.ultraButtonArchiveInputOutput.TabIndex = 67;
+            this.ultraButtonArchiveInputOutput.Text = "Archive Input/Output";
+            this.ultraButtonArchiveInputOutput.Click += new System.EventHandler(this.ultraButtonArchiveInputOutput_Click);
             // 
             // FrmGridAnalysis
             // 
@@ -2166,10 +2312,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtMIPPath)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtOSFPath)).EndInit();
             this.tabControl1.ResumeLayout(false);
-            this.tabPageDefineProjects.ResumeLayout(false);
-            this.tabPageDefineProjects.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtOutputDirectory)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtNewProjectName)).EndInit();
             this.tabPageDefineScenarios.ResumeLayout(false);
             this.tabPageDefineScenarios.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtScenarioID)).EndInit();
@@ -2202,6 +2344,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtRunDate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdModelResults)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridModelResultsBindingSource)).EndInit();
+            this.tabPageDefineProjects.ResumeLayout(false);
+            this.tabPageDefineProjects.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtOutputDirectory)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtNewProjectName)).EndInit();
             this.pnlBottom.ResumeLayout(false);
             this.pnlBottom.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdModelRuns)).EndInit();
@@ -2324,6 +2470,11 @@
         private Infragistics.Win.Misc.UltraLabel ultraLabel1;
         private System.Windows.Forms.ToolStripMenuItem browseToApplicationFolderToolStripMenuItem;
         private Infragistics.Win.Misc.UltraButton btnExportModelResults;
+        private System.Windows.Forms.Label labelArchiveServer;
+        private System.Windows.Forms.ComboBox cboServers;
+        private System.Windows.Forms.ComboBox cboDatabases;
+        private System.Windows.Forms.Label labelArchiveDatabase;
+        private Infragistics.Win.Misc.UltraButton ultraButtonArchiveInputOutput;
     }
 }
 

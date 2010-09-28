@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
 using System.Data.SqlClient;
+
 
 namespace SystemsAnalysis.Utils.AccessUtils
 {
@@ -209,6 +209,11 @@ namespace SystemsAnalysis.Utils.AccessUtils
                 case "System.DateTime":
                     return "DATETIME";
 
+                //Please do not add support for boolean[] or bit[]
+                //or whatever because those fields are from tables that
+                //have been transferred to SQL server from Access and
+                //have likely not yet been given a primary key and has 
+                //not yet had the timestamp field removed.
                 case "System.Boolean":
                     return "BIT";
                 default:
