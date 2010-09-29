@@ -1447,7 +1447,6 @@ namespace SystemsAnalysis.Utils.AccessUtils
 
           try
           {
-
               SMO.Server svr = new Microsoft.SqlServer.Management.Smo.Server(theServer);
               System.Data.DataTable dt = new System.Data.DataTable();
               dt.Columns.Add("DatabaseName");
@@ -1458,7 +1457,6 @@ namespace SystemsAnalysis.Utils.AccessUtils
                   dr["DatabaseName"] = db.Name;
                   dt.Rows.Add(dr);
               }
-
 
               if (dt.Rows.Count > 0)
               {
@@ -1493,14 +1491,5 @@ namespace SystemsAnalysis.Utils.AccessUtils
           }
 
       }
-
-      //Still need to implement transfer of the tables from the main SIRTOBY server to the
-      //user designated server and database.  So far this will only work with a local 
-      //database such as SQL server.  There is still a need to make sure that the user
-      //can access an actual network server, but until the time those can be listed without
-      //requiring a 30 second start up time, this is the way it should be done.
-
-      //table transfer funcion for SMO operations:
-
   }
 }

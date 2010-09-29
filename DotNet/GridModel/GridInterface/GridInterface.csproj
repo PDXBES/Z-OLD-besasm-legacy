@@ -94,6 +94,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FormUserIDAndPasswordEntry.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormUserIDAndPasswordEntry.Designer.cs">
+      <DependentUpon>FormUserIDAndPasswordEntry.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmChooseProcesses.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -368,6 +374,9 @@
     </PublishFile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="FormUserIDAndPasswordEntry.resx">
+      <DependentUpon>FormUserIDAndPasswordEntry.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SplashGridModel.png" />
   </ItemGroup>
   <ItemGroup>
