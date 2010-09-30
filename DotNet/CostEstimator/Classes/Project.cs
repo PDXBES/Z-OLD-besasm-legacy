@@ -3,7 +3,7 @@
 // Path: C:\Development\CostEstimatorV2\Classes, Author: Arnel
 // Code lines: 14, Size of file: 185 Bytes
 // Creation date: 3/1/2008 3:02 PM
-// Last modified: 9/17/2010 8:25 AM
+// Last modified: 9/29/2010 1:09 PM
 
 #region Using directives
 using System;
@@ -2116,6 +2116,41 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       _ProjectEstimate.DeleteCostItemFactor(index);
       _IsDirty = true;
     } // DeleteEstimate(index)
+
+    /// <summary>
+    /// Pipe items
+    /// </summary>
+    /// <returns>List</returns>
+    public List<CostItemFactor> PipeItems()
+    {
+      List<CostItemFactor> pipeList = new List<CostItemFactor>();
+
+      for (int i = 0; i < _Estimates.Count; i++)
+      {
+        List<CostItemFactor> estimatePipeList = PipeItems(i);
+        pipeList.AddRange(estimatePipeList);
+      }
+
+      return pipeList;
+    } // PipeItems()
+
+    /// <summary>
+    /// Pipe items
+    /// </summary>
+    /// <param name="estimateIndex">Estimate index</param>
+    /// <returns>List</returns>
+    public List<CostItemFactor> PipeItems(int estimateIndex)
+    {
+      List<CostItemFactor> pipeList = new List<CostItemFactor>();
+      CostItemFactor estimate = Estimate(estimateIndex);
+      CostItemFactor pipeDirectConstructionCIF = estimate.ChildCostItemFactor(DESC_PIPE_DIRECT_CONSTRUCTION);
+      foreach (CostItemFactor pipeCIF in pipeDirectConstructionCIF.ChildCostItemFactors)
+      {
+        pipeList.Add(pipeCIF);
+      } // foreach  (pipeCIF)
+
+      return pipeList;
+    } // PipeItems(estimateIndex)
 
     /// <summary>
     /// Report pipe items
