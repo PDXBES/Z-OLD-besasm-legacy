@@ -3,7 +3,7 @@
 // Path: C:\Development\CostEstimatorV2\UI, Author: Arnel
 // Code lines: 29, Size of file: 486 Bytes
 // Creation date: 3/21/2008 4:00 AM
-// Last modified: 7/29/2010 4:24 PM
+// Last modified: 9/30/2010 7:26 AM
 
 #region Using directives
 using System;
@@ -113,7 +113,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 		/// </summary>
     private void SetupProjectDataSource()
 		{
-			dsProject.Rows.SetCount(1);
+      System.Diagnostics.Debug.WriteLine("SetupProjectDataSource");
+      dsProject.Rows.SetCount(1);
 			UltraDataRowsCollection estimateRows = dsProject.Rows[0].GetChildRows("CostItemFactor1");
 			estimateRows.SetCount(_project.EstimateCount);
 
@@ -132,7 +133,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 		/// <param name="mainForm">Main form</param>
 		public override void Initialize(Control parentControl, Main mainForm)
 		{
-			base.Initialize(parentControl, mainForm);
+      System.Diagnostics.Debug.WriteLine("Initialize");
+      base.Initialize(parentControl, mainForm);
 			//toolbarManager.MdiParentManager = AppForm.toolbarManager;
 		} // Initialize(parentControl, mainForm)
 
@@ -143,7 +145,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 		/// <returns>String</returns>
 		private int ProcessDepthOfRow(string bandName)
 		{
-			string numbers = "01234567890";
+      System.Diagnostics.Debug.WriteLine("ProcessDepthOfRow");
+      string numbers = "01234567890";
 			char[] numberChars = numbers.ToCharArray();
 			int depthIndex = bandName.LastIndexOfAny(numberChars);
 			return Convert.ToInt32(bandName.Substring(depthIndex));
@@ -176,7 +179,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 		/// <returns>String</returns>
 		private string ProcessBandNameOfRow(string bandName)
 		{
-			string numbers = "01234567890";
+      System.Diagnostics.Debug.WriteLine("ProcessBandNameOfRow");
+      string numbers = "01234567890";
 			char[] numberChars = numbers.ToCharArray();
 			int depthIndex = bandName.LastIndexOfAny(numberChars);
 
@@ -257,7 +261,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 		/// <returns>Cost item factor</returns>
 		private CostItemFactor GetCostItemFactor(UltraDataRow row)
 		{
-			if (row == null)
+      System.Diagnostics.Debug.WriteLine("GetCostItemFactor");
+      if (row == null)
 				return null;
 
 			int depth = DepthOfRow(row);
@@ -298,7 +303,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
     /// <returns>The corresponding CostItemFactor object</returns>
 		private CostItemFactor GetCostItemFactor(UltraGridRow row)
 		{
-			if (row == null)
+      System.Diagnostics.Debug.WriteLine("GetCostItemFactor");
+      if (row == null)
 				return null;
 
 			UltraDataRow dataRow = row.ListObject as UltraDataRow;
@@ -313,7 +319,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 		/// <returns>Cost item</returns>
 		private CostItem GetCostItem(UltraDataRow row)
 		{
-			string bandName = BandOfRow(row);
+      System.Diagnostics.Debug.WriteLine("GetCostItem");
+      string bandName = BandOfRow(row);
 			if (bandName == "CostItem")
 			{
 				CostItemFactor currentCostItemFactor = GetCostItemFactor(row);
@@ -330,7 +337,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
     /// <returns>The corresponding CostItem object</returns>
 		private CostItem GetCostItem(UltraGridRow row)
 		{
-			UltraDataRow dataRow = row.ListObject as UltraDataRow;
+      System.Diagnostics.Debug.WriteLine("GetCostItem");
+      UltraDataRow dataRow = row.ListObject as UltraDataRow;
 			return GetCostItem(dataRow);
 		} // GetCostItem(row)
 
@@ -341,7 +349,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 		/// <returns>Cost factor</returns>
 		private CostFactor GetCostFactor(UltraDataRow row)
 		{
-			string bandName = BandOfRow(row);
+      System.Diagnostics.Debug.WriteLine("GetCostFactor");
+      string bandName = BandOfRow(row);
 			if (bandName == "Factors")
 			{
 				CostItemFactor currentCostItemFactor = GetCostItemFactor(row);
@@ -359,7 +368,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
     /// <returns>The corresponding CostFactor object</returns>
 		private CostFactor GetCostFactor(UltraGridRow row)
 		{
-			UltraDataRow dataRow = row.ListObject as UltraDataRow;
+      System.Diagnostics.Debug.WriteLine("GetCostFactor");
+      UltraDataRow dataRow = row.ListObject as UltraDataRow;
 			return GetCostFactor(dataRow);
 		} // GetCostFactor(row)
 
@@ -370,6 +380,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 		private void SetupDataSetForCostItemFactor(CostItemFactor aCostItemFactor,
 			UltraDataRow aCostItemFactorRow, int depth)
 		{
+      System.Diagnostics.Debug.WriteLine("SetupDataSetForCostItemFactor(CostItemFactor, UltraDataRow, int)");
 			UltraDataRowsCollection costItemRows = aCostItemFactorRow.GetChildRows(
 				string.Format("CostItem{0}", depth + 1));
 
@@ -408,7 +419,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
     /// <param name="hidden">true to hide the add (new) item rows, false to show</param>
 		public void HideAddItemsFromCostGrid(bool hidden)
 		{
-			if (hidden)
+      System.Diagnostics.Debug.WriteLine("HideAddItemsFromCostGrid");
+      if (hidden)
 				gridCosts.DisplayLayout.Override.AllowAddNew = Infragistics.Win.UltraWinGrid.AllowAddNew.No;
 			else
 				gridCosts.DisplayLayout.Override.AllowAddNew = Infragistics.Win.UltraWinGrid.AllowAddNew.TemplateOnBottom;
@@ -419,7 +431,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 		/// </summary>
 		private void HandleDetachFromPool()
 		{
-			UltraGridRow currentRow = gridCosts.ActiveRow;
+      System.Diagnostics.Debug.WriteLine("HandleDetachFromPool()");
+      UltraGridRow currentRow = gridCosts.ActiveRow;
 			string bandName = BandOfRow(currentRow);
 			if (bandName == "CostItem" || bandName == "Factors")
 			{
@@ -456,7 +469,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 		/// </summary>
 		private void ReadDirectConstructionItems()
 		{
-			XmlReaderSettings readerFileSettings = new XmlReaderSettings
+      System.Diagnostics.Debug.WriteLine("ReadDirectConstructionItems");
+      XmlReaderSettings readerFileSettings = new XmlReaderSettings
 			{
 				IgnoreWhitespace = true, 
 				ValidationType = ValidationType.Schema, 
@@ -504,7 +518,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 		/// <param name="estimateIndex">Estimate index</param>
 		private void FillSelectCostItemFactorTree(UltraTreeNode parentNode, CostItemFactor currentCIF, ref int nodeID)
 		{
-			foreach (CostItemFactor cif in currentCIF.ChildCostItemFactors)
+      System.Diagnostics.Debug.WriteLine("FillSelectCostItemFactorTree()");
+      foreach (CostItemFactor cif in currentCIF.ChildCostItemFactors)
 			{
 				nodeID++;
 				System.Diagnostics.Debug.WriteLine(string.Format("{0} {1}", nodeID, cif.Name));
@@ -523,7 +538,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
     /// </summary>
 		private void SetupSelectCostItemFactorTree()
 		{
-			treeCostItemFactor.Nodes.Clear();
+      System.Diagnostics.Debug.WriteLine("SetupSelectCostItemFactorTree()");
+      treeCostItemFactor.Nodes.Clear();
 			CostItemFactor currentEstimate = EstimateOfRow(gridCosts.ActiveRow);
 			if (currentEstimate != null)
 			{
@@ -553,53 +569,161 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 		/// </summary>
 		private void ExportPipeCosts()
 		{
-			dlgSave.Title = "Save pipe costs as text file";
+			dlgSave.Title = "Sa.ve pipe costs as text file";
 			dlgSave.DefaultExt = "csv";
 			if (dlgSave.ShowDialog() == DialogResult.OK)
 			{
-				try
-				{
-					using (StreamWriter pipeCostsStream = new StreamWriter(dlgSave.FileName))
-					{
-						List<ReportPipeItem> pipeItems = _project.ReportPipeItems();
-						pipeCostsStream.WriteLine("MLinkID,USNode,DSNode," +
-              "DirectConstructionCost,TotalConstructionCost,PipelineBuildDuration");
-						foreach (ReportPipeItem item in pipeItems)
-						{
-							string[] itemNameItems = item.Name.Split(new char[] { ' ', '-' }, StringSplitOptions.None);
-							try
-							{
-								pipeCostsStream.WriteLine(string.Format("{0},{1},{2},{3:F0},{5:F0},{4}", 
-                  itemNameItems[0], itemNameItems[1], itemNameItems[2], 
-                  item.DirectConstructionCost, 
-                  Math.Ceiling(item.ExcavationVolCuYd / 
-                  ConstructionDurationCalculator.MAINLINE_BUILD_RATE_PER_DAY_CUYD), 
-                  item.TotalConstructionCost));
-							} // try
-							catch (Exception e)
-							{
-								MessageBox.Show(String.Format("{0}\n\n{1}",
-                  string.Format("Problem writing item {0}", item.Name), e.Message));
-							} // catch
-						}
-						// foreach  (item)
-						pipeCostsStream.Close();
-					}
-				}
-				catch (Exception e)
-				{
-					MessageBox.Show("A problem occurred while writing the file:\n\n" + e.Message);
-				} // catch
+        try
+        {
+          System.Diagnostics.Debug.WriteLine("ExportPipeCosts: Hiding grid");
+          gridCosts.Hide();
+          try
+          {
+            using (StreamWriter pipeCostsStream = new StreamWriter(dlgSave.FileName))
+            {
+              List<ReportPipeItem> pipeItems = _project.ReportPipeItems();
+              pipeCostsStream.WriteLine("MLinkID,USNode,DSNode," +
+                "DirectConstructionCost,TotalConstructionCost,PipelineBuildDuration");
+              foreach (ReportPipeItem item in pipeItems)
+              {
+                string[] itemNameItems = item.Name.Split(new char[] { ' ', '-' }, StringSplitOptions.None);
+                try
+                {
+                  pipeCostsStream.WriteLine(string.Format("{0},{1},{2},{3:F0},{5:F0},{4}",
+                    itemNameItems[0], itemNameItems[1], itemNameItems[2],
+                    item.DirectConstructionCost,
+                    Math.Ceiling(item.ExcavationVolCuYd /
+                    ConstructionDurationCalculator.MAINLINE_BUILD_RATE_PER_DAY_CUYD),
+                    item.TotalConstructionCost));
+                } // try
+                catch (Exception e)
+                {
+                  MessageBox.Show(String.Format("{0}\n\n{1}",
+                    string.Format("Problem writing item {0}", item.Name), e.Message));
+                } // catch
+              }
+              // foreach  (item)
+              pipeCostsStream.Close();
+            }
+          }
+          finally
+          {
+            System.Diagnostics.Debug.WriteLine("ExportPipeCosts: Showing grid");
+            gridCosts.Show();
+          } // finally
+        }
+        catch (Exception e)
+        {
+          MessageBox.Show("A problem occurred while writing the file:\n\n" + e.Message);
+        } // catch
 			} // if
 		} // ExportPipeCosts()
+
+    /// <summary>
+    /// Export detailed costs
+    /// </summary>
+    private void ExportDetailedCosts()
+    {
+      // Assemble pipe costs
+      List<CostItemFactor> pipeList = _project.PipeItems();
+      Dictionary<CostItemFactor, CostItemFactor> pipeCIFs = new Dictionary<CostItemFactor, CostItemFactor>();
+      Dictionary<CostItemFactor, CostItemFactor> manholeCIFs = new Dictionary<CostItemFactor, CostItemFactor>();
+      Dictionary<CostItemFactor, List<CostItemFactor>> ancillaryCIFs = new Dictionary<CostItemFactor, List<CostItemFactor>>();
+      foreach (CostItemFactor item in pipeList)
+      {
+        if (item.ReportItemType == ReportItemType.Pipe)
+        {
+          List<CostItemFactor> subItems = item.ChildCostItemFactors;
+          CostItemFactor pipeCIF = null;
+          CostItemFactor manholeCIF = null;
+          List<CostItemFactor> ancillaryCIFList = new List<CostItemFactor>();
+          foreach (CostItemFactor subItem in subItems)
+          {
+            if (subItem.Name.StartsWith("Pipe"))
+            {
+              pipeCIF = subItem;
+              pipeCIFs.Add(item, pipeCIF);
+            } // if
+            else if (subItem.Name.StartsWith("Manhole"))
+            {
+              manholeCIF = subItem;
+              manholeCIFs.Add(item, manholeCIF);
+            } // if
+            else
+            {
+              ancillaryCIFList.Add(subItem);
+            } // else
+          } // foreach  (subItem)
+          if (ancillaryCIFList.Count > 0)
+            ancillaryCIFs.Add(item, ancillaryCIFList);
+          else
+            ancillaryCIFs.Add(item, new List<CostItemFactor>());
+        } // if
+      } // foreach  (item)
+
+      // Do the export
+      dlgSave.Title = "Save pipe costs as text file";
+      dlgSave.DefaultExt = "csv";
+      if (dlgSave.ShowDialog() == DialogResult.OK)
+      {
+        System.Diagnostics.Debug.WriteLine("ExportDetailedCosts: Hiding grid");
+        gridCosts.Hide();
+        try
+        {
+          using (StreamWriter pipeCostsStream = new StreamWriter(dlgSave.FileName))
+          {
+            foreach (CostItemFactor item in pipeList)
+            {
+              char[] separators = { ' ', '-' };
+              string[] tokens = item.Name.Split(separators);
+              string MLinkID = "", USNode = "", DSNode = "";
+              if (tokens.Length >= 3)
+              {
+                MLinkID = tokens[0];
+                USNode = tokens[1];
+                DSNode = tokens[2];
+              } // if
+
+              pipeCostsStream.WriteLine(string.Format("\"Link\",{0},{1},{2},{3:#}", 
+                MLinkID, USNode, DSNode, item.Cost));
+              if (pipeCIFs[item] != null)
+                pipeCostsStream.WriteLine(string.Format("\"Pipe\",{0},{1},{2},{3:#}", 
+                  MLinkID, USNode, DSNode, pipeCIFs[item].Cost));
+              if (manholeCIFs[item] != null)
+                pipeCostsStream.WriteLine(string.Format("\"Manhole\",{0},{1},{2},{3:#}", 
+                  MLinkID, USNode, DSNode, manholeCIFs[item].Cost));
+              if (ancillaryCIFs[item].Count > 0)
+              {
+                foreach (CostItemFactor ancillaryCIF in ancillaryCIFs[item])
+                {
+                  string ancillaryName = ancillaryCIF.Name.StartsWith("Boring/jacking") ?
+                    "Boring/jacking" : ancillaryCIF.Name;
+                  pipeCostsStream.WriteLine(string.Format("\"{4}\",{0},{1},{2},{3:#}",
+                    MLinkID, USNode, DSNode, ancillaryCIF.Cost,
+                    ancillaryName));
+                } // foreach  (ancillaryCIF)
+              } // if
+            } // foreach  (item)
+          } // using (pipeCostsStream)
+        } // try
+        finally
+        {
+          System.Diagnostics.Debug.WriteLine("ExportDetailedCosts: Showing grid");
+          gridCosts.Show();
+        } // finally
+      } // if
+    } // ExportDetailedCosts()
 		#endregion
 
 		private void dsProject_CellDataRequested(object sender, CellDataRequestedEventArgs e)
 		{
-			CostItemFactor currentCostItemFactor = GetCostItemFactor(e.Row);
+      System.Diagnostics.Debug.WriteLine(string.Format("dsProject_CellDataRequested: {0} {1}",
+        sender.GetType().Name, e.Column.Key));
+      CostItemFactor currentCostItemFactor = GetCostItemFactor(e.Row);
 			if (currentCostItemFactor != null && BandOfRow(e.Row) == "CostItemFactor")
 			{
-				switch (e.Column.Key)
+        System.Diagnostics.Debug.WriteLine("CostItemFactor");
+        switch (e.Column.Key)
 				{
 					case "ID":
 						e.Data = currentCostItemFactor.ID;
@@ -629,7 +753,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 
 			if (currentCostItem != null && BandOfRow(e.Row) == "CostItem")
 			{
-				switch (e.Column.Key)
+        System.Diagnostics.Debug.WriteLine("CostItem");
+        switch (e.Column.Key)
 				{
 					case "ID":
 						e.Data = currentCostItem.ID;
@@ -656,7 +781,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 
 			if (currentCostFactor != null && BandOfRow(e.Row) == "Factors")
 			{
-				switch (e.Column.Key)
+        System.Diagnostics.Debug.WriteLine("Factors");
+        switch (e.Column.Key)
 				{
 					case "ID":
 						e.Data = currentCostFactor.ID;
@@ -682,7 +808,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 
 		private void dsProject_CellDataUpdating(object sender, CellDataUpdatingEventArgs e)
 		{
-			string bandName = BandOfRow(e.Row);
+      System.Diagnostics.Debug.WriteLine("dsProject_CellDataUpdating");
+      string bandName = BandOfRow(e.Row);
 			int id = Convert.ToInt32(e.Row.GetCellValue("ID", true));
 			switch (bandName)
 			{
@@ -733,7 +860,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 
 		private void dsProject_CellDataUpdated(object sender, CellDataUpdatedEventArgs e)
 		{
-			string bandName = BandOfRow(e.Row);
+      System.Diagnostics.Debug.WriteLine("dsProject_CellDataUpdated");
+      string bandName = BandOfRow(e.Row);
 			int id = Convert.ToInt32(e.Row.GetCellValue("ID", true));
 			switch (bandName)
 			{
@@ -800,7 +928,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 
 		private void dsProject_RowAdded(object sender, RowAddedEventArgs e)
 		{
-			string bandName = BandOfRow(e.Row);
+      System.Diagnostics.Debug.WriteLine("dsProject_RowAdded");
+      string bandName = BandOfRow(e.Row);
 			CostItemFactor parentCostItemFactor = null;
 			int depth = DepthOfRow(e.Row);
 			if (depth > 1)
@@ -866,7 +995,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 
 		private void dsProject_RowCancelEdit(object sender, RowCancelEditEventArgs e)
 		{
-			string bandName = BandOfRow(e.Row);
+      System.Diagnostics.Debug.WriteLine("dsProject_RowCancelEdit()");
+      string bandName = BandOfRow(e.Row);
 			int depth = DepthOfRow(e.Row);
 			switch (bandName)
 			{
@@ -887,13 +1017,15 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 
 		private void dsProject_RowDeleted(object sender, RowDeletedEventArgs e)
 		{
-			dsProject.ResetCachedValues();
+      System.Diagnostics.Debug.WriteLine("dsProject_RowDeleted()");
+      dsProject.ResetCachedValues();
 			//gridCosts.Refresh();
 		}
 
 		private void dsProject_RowDeleting(object sender, RowDeletingEventArgs e)
 		{
-			string bandName = BandOfRow(e.Row);
+      System.Diagnostics.Debug.WriteLine("dsProject_RowDeleting");
+      string bandName = BandOfRow(e.Row);
 			int depth = DepthOfRow(e.Row);
 			CostItemFactor costItemFactor = GetCostItemFactor(e.Row.ParentRow);
 			switch (bandName)
@@ -917,6 +1049,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 
     private static void CompileReportGenericData(CostItemFactor costItemFactor)
     {
+      System.Diagnostics.Debug.WriteLine("CompileReportGenericData");
       ReportGenericItem reportItem = costItemFactor.Data as ReportGenericItem;
       reportItem.Name = costItemFactor.Name;
       reportItem.Quantity = costItemFactor.Quantity;
@@ -932,6 +1065,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 
     private static void CompileReportInflowControlData(CostItemFactor costItemFactor)
     {
+      System.Diagnostics.Debug.WriteLine("CompileReportInflowControlData");
       ReportInflowControlItem reportItem = costItemFactor.Data as ReportInflowControlItem;
       reportItem.Name = costItemFactor.Name;
       reportItem.Comment = costItemFactor.Comment ?? string.Empty;
@@ -940,6 +1074,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 
     private static void CompileReportPipeData(CostItemFactor costItemFactor)
     {
+      System.Diagnostics.Debug.WriteLine("CompileReportPipeData");
       ReportPipeItem reportItem = costItemFactor.Data as ReportPipeItem;
       reportItem.Name = costItemFactor.Name;
       reportItem.Comment = costItemFactor.Comment ?? string.Empty;
@@ -947,7 +1082,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 
     private void dsProject_RowEndEdit(object sender, RowEndEditEventArgs e)
 		{
-			string bandName = BandOfRow(e.Row);
+      System.Diagnostics.Debug.WriteLine("dsProject_RowEndEdit()");
+      string bandName = BandOfRow(e.Row);
 			CostItemFactor costItemFactor = null;
 			if (bandName == "CostItemFactor")
 				costItemFactor = GetCostItemFactor(e.Row);
@@ -996,7 +1132,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 
 		private void CostsPage_Load(object sender, EventArgs e)
 		{
-			// Setup cost grid for factors
+      System.Diagnostics.Debug.WriteLine("CostsPage_Load");
+      // Setup cost grid for factors
 			foreach (string s in Enum.GetNames(typeof(CostFactorType)))
 			{
 				CostFactorType itemToAdd = (CostFactorType)Enum.Parse(typeof(CostFactorType), s);
@@ -1017,7 +1154,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 
 		private void trackENR_ValueChanged(object sender, EventArgs e)
 		{
-			if (!settingUpProject)
+      System.Diagnostics.Debug.WriteLine("trackENR_ValueChanged()");
+      if (!settingUpProject)
 			{
 				edtENR.Text = trackENR.Value.ToString();
 				_project.FactorFromPool("ENR").FactorValue = trackENR.MidpointSettings.Value == null ? 1 :
@@ -1032,7 +1170,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 
 		private void edtENR_ValueChanged(object sender, EventArgs e)
 		{
-			if (!settingUpProject)
+      System.Diagnostics.Debug.WriteLine("edtENR_ValueChanged()");
+      if (!settingUpProject)
 			{
 				int testValue = (int)edtENR.Value;
 				if (testValue < trackENR.MinValue || testValue > trackENR.MaxValue)
@@ -1052,7 +1191,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 
 		private void toolbarManager_ToolClick(object sender, Infragistics.Win.UltraWinToolbars.ToolClickEventArgs e)
 		{
-			UpdateCurrentlyEditingRow();
+      System.Diagnostics.Debug.WriteLine("toolbarManager_ToolClick()");
+      UpdateCurrentlyEditingRow();
 
  			switch (e.Tool.Key)
 			{
@@ -1152,12 +1292,17 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 					ExportPipeCosts();
 					break;
 
+        case "Export Detailed Costs":
+          ExportDetailedCosts();
+          break;
+
 			}
 		}
 
 		private void CostsPage_VisibleChanged(object sender, EventArgs e)
 		{
-			if (AppForm != null && Visible == true)
+      System.Diagnostics.Debug.WriteLine("CostsPage_VisibleChanged()");
+      if (AppForm != null && Visible == true)
 			{
 				if (AppForm.toolbarManager.ActiveMdiChildManager != null)
 				{
@@ -1181,7 +1326,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 
 		private void dsOtherDirectConstructionFactors_CellDataRequested(object sender, CellDataRequestedEventArgs e)
 		{
-			if (_currentDirectConstructionCIF != null)
+      System.Diagnostics.Debug.WriteLine("dsOtherDirectConstructionFactors_CellDataUpdated()");
+      if (_currentDirectConstructionCIF != null)
 			{
 				int currentRow = e.Row.Index;
 				switch (e.Column.Key)
@@ -1205,7 +1351,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 
 		private void dsOtherDirectConstructionFactors_CellDataUpdated(object sender, CellDataUpdatedEventArgs e)
 		{
-			if (_currentDirectConstructionCIF != null)
+      System.Diagnostics.Debug.WriteLine("dsOtherDirectConstructionFactors_CellDataUpdated");
+      if (_currentDirectConstructionCIF != null)
 			{
 				int currentRow = e.Row.Index;
 				switch (e.Column.Key)
@@ -1225,13 +1372,15 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 
 		private void dsOtherDirectConstructionFactors_RowEndEdit(object sender, RowEndEditEventArgs e)
 		{
-			dsOtherDirectConstructionFactors.ResetCachedValues();
+      System.Diagnostics.Debug.WriteLine("dsOtherDirectConstructionFactors_RowEndEdit()");
+      dsOtherDirectConstructionFactors.ResetCachedValues();
 			gridOtherDirectConstruction.Refresh();
 		}
 
 		private void btnOKOtherDirectConstruction_Click(object sender, EventArgs e)
 		{
-			CostItemFactor estimateCostItemFactor = _currentDirectConstructionCIF;
+      System.Diagnostics.Debug.WriteLine("btnOKSelectCostItemFactor_Click()");
+      CostItemFactor estimateCostItemFactor = _currentDirectConstructionCIF;
 			CostItemFactor directCostItemFactor = cmbApplyTo.SelectedItem.DataValue as CostItemFactor;
 			CostItemFactor otherDCCostItemFactor = estimateCostItemFactor.ChildCostItemFactor("Other direct construction");
 
@@ -1311,12 +1460,14 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 
 		private void btnCancelOtherDirectConstruction_Click(object sender, EventArgs e)
 		{
-			tabCosts.SelectedTab = tabCosts.Tabs["Costs"];
+      System.Diagnostics.Debug.WriteLine("btnCancelOtherDirectConstruction_Click()");
+      tabCosts.SelectedTab = tabCosts.Tabs["Costs"];
 		}
 
 		private void btnOKSelectCostItemFactor_Click(object sender, EventArgs e)
 		{
-			if (treeCostItemFactor.SelectedNodes.Count == 0)
+      System.Diagnostics.Debug.WriteLine("btnOKSelectCostItemFactor_Click()");
+      if (treeCostItemFactor.SelectedNodes.Count == 0)
 				return;
 
 			CostItemFactor selectedCostItemFactor = treeCostItemFactor.SelectedNodes[0].Tag as CostItemFactor;
@@ -1384,18 +1535,21 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 
 		private void btnCancelSelectCostItemFactor_Click(object sender, EventArgs e)
 		{
-			tabCosts.SelectedTab = tabCosts.Tabs["Costs"];
+      System.Diagnostics.Debug.WriteLine("btnCancelSelectCostItemFactor_Click()");
+      tabCosts.SelectedTab = tabCosts.Tabs["Costs"];
 		}
 
 		private void cmbApplyTo_ValueChanged(object sender, EventArgs e)
 		{
-			dsOtherDirectConstructionFactors.ResetCachedValues();
+      System.Diagnostics.Debug.WriteLine("cmbApplyTo_ValueChanged");
+      dsOtherDirectConstructionFactors.ResetCachedValues();
 			gridOtherDirectConstruction.Refresh();
 		}
 
 		private void gridCosts_AfterRowExpanded(object sender, RowEventArgs e)
 		{
-			string bandName = BandOfRow(e.Row);
+      System.Diagnostics.Debug.WriteLine("gridCosts_AfterRowExpanded()");
+      string bandName = BandOfRow(e.Row);
 			int depth = DepthOfRow(e.Row);
 			switch (bandName)
 			{
@@ -1414,7 +1568,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 
 		private void gridCosts_AfterRowInsert(object sender, RowEventArgs e)
 		{
-			string bandName = BandOfRow(e.Row);
+      System.Diagnostics.Debug.WriteLine("gridCosts_AfterRowInsert()");
+      string bandName = BandOfRow(e.Row);
 			int depth = DepthOfRow(e.Row);
 			switch (bandName)
 			{
@@ -1433,7 +1588,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 
 		private void calENRDate_ValueChanged(object sender, EventArgs e)
 		{
-			DateTime newDateTime = (DateTime)calENRDate.Value;
+      System.Diagnostics.Debug.WriteLine("calENRDate_ValueChanged()");
+      DateTime newDateTime = (DateTime)calENRDate.Value;
 			ENR newENRValue = new ENR(trackENR.Value, newDateTime.Month,
 				newDateTime.Year);
 			_project.ProjectInfo.ENR = newENRValue;

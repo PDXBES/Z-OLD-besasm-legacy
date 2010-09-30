@@ -3,7 +3,7 @@
 // Path: C:\Development\CostEstimatorV2\UI, Author: Arnel
 // Code lines: 151, Size of file: 4.04 KB
 // Creation date: 3/7/2008 8:58 AM
-// Last modified: 9/17/2010 1:14 PM
+// Last modified: 9/22/2010 3:30 PM
 
 #region Using directives
 using System;
@@ -1008,26 +1008,34 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 		/// </summary>
 		private void SetupProjectForCostGrid()
 		{
-			tabMain.SelectedTab = tabMain.Tabs["Costs"];
-			(_mainPages["Costs"] as CostsPage).dsProject.Rows.SetCount(1);
-			UltraDataRowsCollection estimateRows = (_mainPages["Costs"] as CostsPage).dsProject.Rows[0].GetChildRows("CostItemFactor1");
-			estimateRows.SetCount(_project.EstimateCount);
+      pageCosts.Hide();
+      try
+      {
+        tabMain.SelectedTab = tabMain.Tabs["Costs"];
+        (_mainPages["Costs"] as CostsPage).dsProject.Rows.SetCount(1);
+        UltraDataRowsCollection estimateRows = (_mainPages["Costs"] as CostsPage).dsProject.Rows[0].GetChildRows("CostItemFactor1");
+        estimateRows.SetCount(_project.EstimateCount);
 
-			lblProgress.Text = "Setting up data";
-			lblProgress.Refresh();
-			int numEstimates = _project.EstimateCount;
-			for (int i = 0; i < _project.EstimateCount; i++)
-			{
-				prgMainProgress.Value = (int)((double)i / (double)numEstimates * 100);
-				prgMainProgress.Refresh();
-				CostItemFactor estimateCostItemFactor = _project.Estimate(i);
-				UltraDataRow estimateCostItemFactorRow = estimateRows[i];
-				SetupDataSetForCostItemFactor(estimateCostItemFactor, estimateCostItemFactorRow, 1);
-			} // for
-			prgMainProgress.Value = 0;
+        lblProgress.Text = "Setting up data";
+        lblProgress.Refresh();
+        int numEstimates = _project.EstimateCount;
+        for (int i = 0; i < _project.EstimateCount; i++)
+        {
+          prgMainProgress.Value = (int)((double)i / (double)numEstimates * 100);
+          prgMainProgress.Refresh();
+          CostItemFactor estimateCostItemFactor = _project.Estimate(i);
+          UltraDataRow estimateCostItemFactorRow = estimateRows[i];
+          SetupDataSetForCostItemFactor(estimateCostItemFactor, estimateCostItemFactorRow, 1);
+        } // for
+        prgMainProgress.Value = 0;
 
-			(_mainPages["Costs"] as CostsPage).dsProject.ResetCachedValues();
-			(_mainPages["Costs"] as CostsPage).gridCosts.Refresh();
+        (_mainPages["Costs"] as CostsPage).dsProject.ResetCachedValues();
+        (_mainPages["Costs"] as CostsPage).gridCosts.Refresh();
+      }
+      finally
+      {
+        pageCosts.Show();
+      } // finally
 		} // SetupProjectForCostGrid()
 
     /// <summary>
