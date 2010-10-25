@@ -1276,7 +1276,7 @@ namespace SystemsAnalysis.Utils.AccessUtils
       SelectQuery sQuery = new SelectQuery("Win32_Group", "Domain='" + System.Environment.UserDomainName.ToString() + "'");
       try
       {
-          DirectoryInfo myDirectoryInfo = new DirectoryInfo(archiveLocation);
+        DirectoryInfo myDirectoryInfo = new DirectoryInfo(archiveLocation);
         DirectorySecurity myDirectorySecurity = myDirectoryInfo.GetAccessControl();
         ManagementObjectSearcher mSearcher = new ManagementObjectSearcher(sQuery);
         foreach (ManagementObject mObject in mSearcher.Get())
@@ -1292,39 +1292,7 @@ namespace SystemsAnalysis.Utils.AccessUtils
         Console.WriteLine(ex.StackTrace);
       } 
     }
-      /*public bool bakBackup()        
-      {            
-          //If the connection returns false return from this method too.            
-          //if (!connectToSQLServer())                
-              //return false;            
-          try            
-          {
-              SMO.Server theServer = new SMO.Server(this.CurrentSQLDB.ConnectionString);
-              // Create a new backup object                
-              SMO.Backup bkpDatabase = new SMO.Backup();                
-              // Set the type to database                
-              bkpDatabase.Action = SMO.BackupActionType.Database;                
-              // set the database name we want to actually backup                
-              bkpDatabase.Database = dbName;                
-              // To get the file from me actual backup create BackupDeviceItem                
-              SMO.BackupDeviceItem bkpDevice = new SMO.BackupDeviceItem(this.backupFile, DeviceType.File);                
-              // add the backup file device to our backup                
-              bkpDatabase.Devices.Add(bkpDevice);                
-              // execute the actual backup using Smo                
-              bkpDatabase.SqlBackup(theServer);                
-              //verify if the file exist                
-              if (File.Exists(this.backupFile))                    
-                  return true;                
-              else                    
-                  return false;            
-          }            
-          catch (Exception ex)            
-          {                
-              Console.WriteLine("Backup file couldn't be created" + ex.StackTrace);                
-              return false;            
-          }        
-      }*/
-
+      
       //get all available SQL Servers    
       public static Object[] SQLGetListOfServers()
         {
