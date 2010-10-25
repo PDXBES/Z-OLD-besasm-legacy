@@ -41,6 +41,14 @@
           }
         }
 
+        public string SetFfeDataConnectionString
+        {
+          set
+          {
+            this["FfeDataConnectionString"] = value;
+          }
+        }
+
         public string DscUpdateFile
         {
           get
