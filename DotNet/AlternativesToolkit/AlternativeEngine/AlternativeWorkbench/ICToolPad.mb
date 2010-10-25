@@ -1,0 +1,717 @@
+'mapbasic filename =ICToolPad.mb
+
+
+INCLUDE "MapBasic.def"
+INCLUDE "Menu.def"
+INCLUDE "Icons.def"
+INCLUDE "AlternativeWorkbench.def"
+INCLUDE "..\common\trunk\inc\EMGCoordSys.def"
+
+'---------------------------------------------------------
+DECLARE SUB ToggleBuildModelIC
+DECLARE SUB ToggleAllBuildModelIC
+DECLARE SUB PopulateAltICTable
+
+DECLARE SUB ToggleRoofTarget
+DECLARE SUB ToggleParkingTarget
+DECLARE SUB ToggleStreetTarget
+DECLARE SUB ToggleAllRoofTarget
+DECLARE SUB ToggleAllParkingTarget
+DECLARE SUB ToggleAllStreetTarget
+
+'---------------------------------------------------------
+'Starting point for the IC Toolpad
+SUB ICToolPad 
+
+ONERROR GOTO SkipPad
+	CALL ResetAltWorkbench
+
+	Pack Table alt_dsc Graphic Data
+
+	Select *  from mdl_Links, alt_links where mdl_Links.LinkID = alt_links.MdlLinkID and alt_links.operation = any("DEL", "SPL", "UPD") into mdl_links_removed
+	Run Menu Command 311 'M_QUERY_INVERTSELECT
+	If SelectionInfo(SEL_INFO_NROWS) > 0 Then
+		Select * from selection into mdl_links_applied
+	Else
+		Select * from mdl_links into mdl_links_applied
+	End If
+
+	Select *  from alt_links  where Operation not in ("DEL" , "SPL")  into alt_links_applied noselect
+	Commit Table mdl_links_applied as gTempDir & "mdl_links_applied.tab"
+	Commit Table alt_links_applied as gTempDir & "alt_links_applied.tab"
+	Close Table mdl_links_applied
+	Close Table alt_links_applied
+	Open Table gTempDir & "mdl_links_applied.tab"
+	Open Table gTempDir & "alt_links_applied.tab"
+
+	'Try to open the master ic tables.  If the master IC tables do not exist,
+	'tell the user and do not allow them to use this tool.
+	IF  FileExists(gBaseModelPath & "ICAlt\mst_ic_ParkingTargets_ac.TAB")  Then
+		Open Table gBaseModelPath & "ICAlt\mst_ic_ParkingTargets_ac.TAB" AS mst_ic_ParkingTargetsX ReadOnly
+		SELECT 
+		mst_ic_ParkingTargetsX.OBJ,
+		mst_ic_ParkingTargetsX.NGTO_Direct,
+		mst_ic_ParkingTargetsX.NGTO_Surface,
+		mst_ic_ParkingTargetsX.NGTOParking,
+		mst_ic_ParkingTargetsX.NGTO,
+		mst_ic_ParkingTargetsX.BuildModelIC,
+		mst_ic_ParkingTargetsX.ICID,
+		mst_ic_ParkingTargetsX.Constructed,
+		mst_ic_ParkingTargetsX.Difficulty
+		FROM mst_ic_ParkingTargetsX, mdl_Nodes WHERE mst_ic_ParkingTargetsX.NGTO_Direct = mdl_Nodes.Node AND mst_ic_ParkingTargetsX.Difficulty <> 0 INTO mst_ic_ParkingTargets
+		Commit Table mst_ic_ParkingTargets as gTempDir & "mst_ic_ParkingTargets_ac.TAB"
+		Close Table mst_ic_ParkingTargets
+		Open Table gTempDir & "mst_ic_ParkingTargets_ac.TAB" as mst_ic_ParkingTargets
+		
+		SELECT 
+		mst_ic_ParkingTargetsX.OBJ,
+		mst_ic_ParkingTargetsX.NGTO_Direct,
+		mst_ic_ParkingTargetsX.NGTO_Surface,
+		mst_ic_ParkingTargetsX.NGTOParking,
+		mst_ic_ParkingTargetsX.NGTO,
+		mst_ic_ParkingTargetsX.BuildModelIC,
+		mst_ic_ParkingTargetsX.ICID,
+		mst_ic_ParkingTargetsX.Constructed,
+		mst_ic_ParkingTargetsX.Difficulty
+		FROM mst_ic_ParkingTargetsX, mdl_Nodes WHERE mst_ic_ParkingTargetsX.NGTO_Surface = mdl_Nodes.Node AND mst_ic_ParkingTargetsX.Difficulty <> 0 INTO mst_ic_ParkingTargets2
+		SELECT * FROM mst_ic_ParkingTargets2 WHERE ICID NOT IN (SELECT ICID FROM mst_ic_ParkingTargets) INTO mipt2
+		INSERT INTO mst_ic_ParkingTargets SELECT * FROM mipt2
+		Commit Table mst_ic_ParkingTargets
+		Close Table mst_ic_ParkingTargets
+		Open Table gTempDir & "mst_ic_ParkingTargets_ac.TAB" as mst_ic_ParkingTargets
+		CLOSE TABLE mst_ic_ParkingTargets2
+		CLOSE TABLE mipt2
+		
+		SELECT 
+		mst_ic_ParkingTargetsX.OBJ,
+		mst_ic_ParkingTargetsX.NGTO_Direct,
+		mst_ic_ParkingTargetsX.NGTO_Surface,
+		mst_ic_ParkingTargetsX.NGTOParking,
+		mst_ic_ParkingTargetsX.NGTO,
+		mst_ic_ParkingTargetsX.BuildModelIC,
+		mst_ic_ParkingTargetsX.ICID,
+		mst_ic_ParkingTargetsX.Constructed,
+		mst_ic_ParkingTargetsX.Difficulty
+		FROM mst_ic_ParkingTargetsX, mdl_Nodes WHERE mst_ic_ParkingTargetsX.NGTOParking = mdl_Nodes.Node AND mst_ic_ParkingTargetsX.Difficulty <> 0 INTO mst_ic_ParkingTargets3
+		SELECT * FROM mst_ic_ParkingTargets3 WHERE ICID NOT IN (SELECT ICID FROM mst_ic_ParkingTargets) INTO mipt3
+		INSERT INTO mst_ic_ParkingTargets SELECT * FROM mipt3
+		Commit Table mst_ic_ParkingTargets
+		Close Table mst_ic_ParkingTargets
+		Open Table gTempDir & "mst_ic_ParkingTargets_ac.TAB" as mst_ic_ParkingTargets
+		CLOSE TABLE mst_ic_ParkingTargets3
+		CLOSE TABLE mipt3
+		
+		SELECT 
+		mst_ic_ParkingTargetsX.OBJ,
+		mst_ic_ParkingTargetsX.NGTO_Direct,
+		mst_ic_ParkingTargetsX.NGTO_Surface,
+		mst_ic_ParkingTargetsX.NGTOParking,
+		mst_ic_ParkingTargetsX.NGTO,
+		mst_ic_ParkingTargetsX.BuildModelIC,
+		mst_ic_ParkingTargetsX.ICID,
+		mst_ic_ParkingTargetsX.Constructed,
+		mst_ic_ParkingTargetsX.Difficulty
+		FROM mst_ic_ParkingTargetsX, mdl_Nodes WHERE mst_ic_ParkingTargetsX.NGTO = mdl_Nodes.Node AND mst_ic_ParkingTargetsX.Difficulty <> 0 INTO mst_ic_ParkingTargets4
+		SELECT * FROM mst_ic_ParkingTargets4 WHERE ICID NOT IN (SELECT ICID FROM mst_ic_ParkingTargets) into mipt4
+		INSERT INTO mst_ic_ParkingTargets SELECT * FROM mipt4
+		Commit Table mst_ic_ParkingTargets
+		CLOSE TABLE mst_ic_ParkingTargetsX
+		'JHB: We will only modify temporary copy of mst_ic_xxxTarget Commit Table mst_ic_ParkingTargets as gBaseModelPath & "ICAlt\mst_ic_ParkingTargets_ac.TAB" Type Access Database gBaseModelPath & "ICAlt\mst_ic_ParkingTargets_ac.mdb" Table "mst_ic_ParkingTargets_ac"
+		'CLOSE TABLE mst_ic_ParkingTargets4
+		'CLOSE TABLE mipt4
+		'JHB: We will only modify temporary copy of mst_ic_xxxTarget CLOSE TABLE mst_ic_ParkingTargets
+		'JHB: We will only modify temporary copy of mst_ic_xxxTarget Open Table gBaseModelPath & "ICAlt\mst_ic_ParkingTargets_ac.TAB" AS mst_ic_ParkingTargets
+	ELSE
+		NOTE "mst_ic_ParkingTargets does not exist in your Base Model"
+		EXIT SUB
+	END IF
+	
+	IF  FileExists(gBaseModelPath & "ICAlt\mst_ic_RoofTargets_ac.TAB")  Then
+		Open Table gBaseModelPath & "ICAlt\mst_ic_RoofTargets_ac.TAB" AS mst_ic_RoofTargetsX ReadOnly
+		
+		SELECT 
+		mst_ic_RoofTargetsX.OBJ,
+		mst_ic_RoofTargetsX.NGTORoof,
+		mst_ic_RoofTargetsX.BuildModelIC,
+		mst_ic_RoofTargetsX.ICID,
+		mst_ic_RoofTargetsX.Constructed,
+		mst_ic_RoofTargetsX.Difficulty
+		FROM mst_ic_RoofTargetsX, mdl_Nodes WHERE mst_ic_RoofTargetsX.NGTORoof = mdl_Nodes.Node AND mst_ic_RoofTargetsX.Difficulty <> 0 INTO mst_ic_RoofTargets
+		Commit Table mst_ic_RoofTargets as gTempDir & "mst_ic_RoofTargets_ac.TAB"
+		'JHB: We will only modify temporary copy of mst_ic_xxxTarget Close Table mst_ic_RoofTargets		
+		CLOSE TABLE mst_ic_RoofTargetsX
+		Open Table gTempDir & "mst_ic_RoofTargets_ac.TAB" as mst_ic_RoofTargets
+		'JHB: We will only modify temporary copy of mst_ic_xxxTarget Commit Table mst_ic_RoofTargets as gBaseModelPath & "ICAlt\mst_ic_RoofTargets_ac.TAB" Type Access Database gBaseModelPath & "ICAlt\mst_ic_RoofTargets_ac.mdb" Table "mst_ic_RoofTargets_ac"
+
+		'JHB: We will only modify temporary copy of mst_ic_xxxTarget CLOSE TABLE mst_ic_RoofTargets
+		'JHB: We will only modify temporary copy of mst_ic_xxxTarget Open Table gBaseModelPath & "ICAlt\mst_ic_RoofTargets_ac.TAB" AS mst_ic_RoofTargets
+	ELSE
+		NOTE "mst_ic_RoofTargets does not exist in your Base Model"
+		EXIT SUB
+	END IF
+	
+	IF  FileExists(gBaseModelPath & "ICAlt\mst_ic_StreetTargets_ac.TAB")  Then
+		Open Table gBaseModelPath & "ICAlt\mst_ic_StreetTargets_ac.TAB" AS mst_ic_StreetTargetsX ReadOnly
+		
+		SELECT 
+		mst_ic_StreetTargetsX.OBJ,
+		mst_ic_StreetTargetsX.NGTOStreet,
+		mst_ic_StreetTargetsX.BuildModelIC,
+		mst_ic_StreetTargetsX.ICID,
+		mst_ic_StreetTargetsX.Constructed,
+		mst_ic_StreetTargetsX.Evaluation
+		FROM mst_ic_StreetTargetsX, mdl_Nodes WHERE mst_ic_StreetTargetsX.NGTOStreet = mdl_Nodes.Node AND mst_ic_StreetTargetsX.Evaluation IN ("Y", "M", "L") INTO mst_ic_StreetTargets
+		Commit Table mst_ic_StreetTargets as gTempDir & "mst_ic_StreetTargets_ac.TAB"
+		Close Table mst_ic_StreetTargets
+		Open Table gTempDir & "mst_ic_StreetTargets_ac.TAB" as mst_ic_StreetTargets
+		CLOSE TABLE mst_ic_StreetTargetsX
+		'JHB: We will only modify temporary copy of mst_ic_xxxTarget Commit Table mst_ic_StreetTargets as gBaseModelPath & "ICAlt\mst_ic_StreetTargets_ac.TAB" Type Access Database gBaseModelPath & "ICAlt\mst_ic_StreetTargets_ac.mdb" Table "mst_ic_StreetTargets_ac"
+
+		'JHB: We will only modify temporary copy of mst_ic_xxxTarget CLOSE TABLE mst_ic_StreetTargets
+		'JHB: We will only modify temporary copy of mst_ic_xxxTarget Open Table gBaseModelPath & "ICAlt\mst_ic_StreetTargets_ac.TAB" AS mst_ic_StreetTargets
+	ELSE
+		NOTE "mst_ic_StreetTargets does not exist in your Base Model"
+		EXIT SUB
+	END IF
+
+	RUN APPLICATION gICEditingTemplate
+
+	SET distance UNITS "ft"
+	SET area UNITS "sq ft"
+
+	CALL ZoomToLayer("Main Map", "mdl_links_applied")
+
+	ALTER BUTTONPAD "IC Editing Tools" SHOW
+
+	SET WINDOW FindWindowIDByName("Main Map") FRONT
+
+	CALL PopulateAltICTable
+
+EXIT SUB
+skipPad:
+'	Call Debugnote("ICToolpad: "& Err() & " " & Error$())
+	PRINT "Toolpad Err: "& Err() & " " & Error$()
+	RESUME NEXT
+
+END SUB
+'---------------------------------------------------------
+SUB InitICToolPad
+CREATE BUTTONPAD "IC Editing Tools" AS
+	TOOLBUTTON HELPMSG  "\n Select"		ID 90014	ICON	0	CALLING 1701
+	TOOLBUTTON HELPMSG  "\n Pan/Grabber"	ID 90013	ICON	7	CALLING 1702
+	TOOLBUTTON HELPMSG  "\n Zoom In"		ID 90011	ICON	4	CALLING 1705
+	TOOLBUTTON HELPMSG  "\n Zoom Out"		ID 90012	ICON	5	CALLING 1706
+	PUSHBUTTON HELPMSG  "\n Save Edits"		    		ID 90004	ICON	40	CALLING EditSave
+	PUSHBUTTON HELPMSG  "\n Revert to Last Save"			ID 90005	ICON	62 FILE gIconFile CALLING EditRevert	 						
+	PushButton HelpMsg  "\n Add Chicklets" 	ID 90006	Icon	108	File gIconFile Calling AddChicklets	
+	 						SEPARATOR
+
+	PUSHBUTTON HELPMSG  "\n Toggle BuildModelIC"					ID 91001	ICON	100 FILE gIconFile 	CALLING ToggleBuildModelIC
+							SEPARATOR
+	PUSHBUTTON HELPMSG  "\n Turn BuildModelIC on/off for all street targets"		ID 91002	ICON	102 FILE gIconFile 	CALLING ToggleAllStreetTarget
+	PUSHBUTTON HELPMSG  "\n Turn BuildModelIC on/off for all roof targets"		ID 91003	ICON	104 FILE gIconFile 	CALLING ToggleAllRoofTarget
+	PUSHBUTTON HELPMSG  "\n Turn BuildModelIC on/off for all parking targets"		ID 91004	ICON	106 FILE gIconFile 	CALLING ToggleAllParkingTarget
+
+	TITLE "IC Editing Tools" 	WIDTH 10	HIDE	Float POSITION(7,1.5) 'units "in"
+END SUB
+'---------------------------------------------------------
+SUB ToggleBuildModelIC
+	ONERROR GOTO skipToggleBuildModelIC
+
+	SET COORDSYS EARTH PROJECTION 3, 33, "ft", -120.5, 43.6666666667, 44.3333333333, 46, 8202099.7379999999, 0
+
+	SELECT * FROM selection INTO qyTarget
+
+	IF NOT selectioninfo(1) THEN
+		NOTE "Please select an IC to modify!"
+		EXIT SUB
+	END IF
+
+	IF selectioninfo(1) NOT LIKE "%targets%" THEN
+		NOTE "Must modify an IC target!"
+		EXIT SUB
+	END IF
+
+	IF selectioninfo(1) LIKE "%mst_ic_ParkingTargets%" THEN
+		CALL ToggleParkingTarget
+	ELSEIF selectioninfo(1) LIKE "%mst_ic_RoofTargets%" THEN
+		CALL ToggleRoofTarget
+	ELSEIF selectioninfo(1) LIKE "%mst_ic_StreetTargets%" THEN
+		CALL ToggleStreetTarget
+	ELSEIF selectioninfo(1) LIKE "%alt_rooftargets%" THEN
+		CALL ToggleRoofTarget
+	ELSEIF selectioninfo(1) LIKE "%alt_parkingtargets%" THEN
+		CALL ToggleParkingTarget
+	ELSEIF selectioninfo(1) LIKE "%alt_streettargets%" THEN
+		CALL ToggleStreetTarget
+	ELSE
+		NOTE "Something is wrong with the tables you are working with."
+	END IF
+
+EXIT SUB
+skipToggleBuildModelIC:
+	CALL DebugNote("ToggleBuildModelIC Crashed - Error: " & Err() & " " & Error$() )
+	RESUME NEXT
+END SUB
+'---------------------------------------------------------
+SUB ToggleAllBuildModelIC
+	ONERROR GOTO skipToggleAllBuildModelIC
+
+	SET COORDSYS EARTH PROJECTION 3, 33, "ft", -120.5, 43.6666666667, 44.3333333333, 46, 8202099.7379999999, 0
+
+	SELECT * FROM selection INTO qyTarget
+
+	IF NOT selectioninfo(1) THEN
+		NOTE "Please select an IC to modify!"
+		EXIT SUB
+	END IF
+
+	IF selectioninfo(1) NOT LIKE "%targets%" THEN
+		NOTE "Must modify an IC target!"
+		EXIT SUB
+	END IF
+
+	IF selectioninfo(1) LIKE "%mst_ic_ParkingTargets%" THEN
+		CALL ToggleAllParkingTarget
+	ELSEIF selectioninfo(1) LIKE "%mst_ic_RoofTargets%" THEN
+		CALL ToggleAllRoofTarget
+	ELSEIF selectioninfo(1) LIKE "%mst_ic_StreetTargets%" THEN
+		CALL ToggleAllStreetTarget
+	ELSEIF selectioninfo(1) LIKE "%alt_rooftargets%" THEN
+		CALL ToggleAllRoofTarget
+	ELSEIF selectioninfo(1) LIKE "%alt_parkingtargets%" THEN
+		CALL ToggleAllParkingTarget
+	ELSEIF selectioninfo(1) LIKE "%alt_streettargets%" THEN
+		CALL ToggleAllStreetTarget
+	ELSE
+		NOTE "Something is wrong with the tables you are working with"
+	END IF
+
+EXIT SUB
+skipToggleAllBuildModelIC:
+	CALL DebugNote("ToggleAllBuildModelIC Crashed - Error: " & Err() & " " & Error$() )
+	RESUME NEXT
+END SUB
+'---------------------------------------------------------
+SUB ToggleParkingTarget
+	DIM iICID AS Integer
+	DIM iAltICID AS Integer
+	DIM sNGTO_Direct AS String
+	DIM sNGTO_Surface AS String
+	DIM sNGTOParking AS String
+	DIM sNGTO AS String
+	DIM lBuildModelIC AS Logical
+	DIM iConstructed AS Integer
+	DIM iDifficulty AS Integer
+	DIM oObj AS Object
+
+	Fetch First From qyTarget
+	Do While Not EOT(qyTarget)    
+		oObj = qyTarget.Obj
+		sNGTO_Direct  = qyTarget.NGTO_Direct
+		sNGTO_Surface  = qyTarget.NGTO_Surface
+		sNGTOParking  	= qyTarget.NGTOParking
+		sNGTO  = qyTarget.NGTO
+		lBuildModelIC  = qyTarget.BuildModelIC
+		iICID  = qyTarget.ICID
+		iConstructed  = qyTarget.Constructed
+		iDifficulty = qyTarget.Difficulty
+
+		ONERROR GOTO skipToggleParkingTarget
+
+		SELECT * FROM alt_Parkingtargets WHERE ICID = iICID INTO qy1
+
+		IF Tableinfo(qy1,TAB_INFO_NROWS) = 1 THEN
+			IF qy1.BuildModelIC = 0 THEN
+				Update qy1 Set BuildModelIC = 1
+			ELSE
+				Update qy1 Set BuildModelIC = 0
+			END IF
+		ELSEIF Tableinfo(qy1,TAB_INFO_NROWS) = 0 THEN
+			SELECT MAX(AltICID) FROM alt_Parkingtargets INTO qy2
+			iAltICID = qy2.COL(1) + 1
+				CLOSE TABLE qy2
+
+			INSERT INTO alt_Parkingtargets(OBJ, NGTO_Direct, NGTO_Surface, NGTOParking, NGTO, BuildModelIC, ICID, Constructed, AltICID, Difficulty)
+		 		VALUES(oOBJ, sNGTO_Direct,sNGTO_Surface,sNGTOParking,sNGTO,lBuildModelIC,iICID,iConstructed,iAltICID,iDifficulty)
+		 	SELECT * FROM alt_Parkingtargets WHERE ICID = iICID INTO qy1
+		 	IF qy1.BuildModelIC = 0 THEN
+				Update qy1 Set BuildModelIC = 1
+			ELSE
+				Update qy1 Set BuildModelIC = 0
+			END IF
+		ELSE
+			NOTE "There are duplicate ICID values in alt_Parkingtargets."
+		END IF
+
+		CLOSE TABLE qy1
+	Fetch Next From qyTarget
+	Loop
+
+	CLOSE TABLE qyTarget
+
+EXIT SUB
+skipToggleParkingTarget:
+	CALL DebugNote("ToggleParkingTarget Crashed - Error: " & Err() & " " & Error$() )
+	RESUME NEXT
+END SUB
+'---------------------------------------------------------
+SUB ToggleAllParkingTarget
+	DIM iICID AS Integer
+	DIM iAltICID AS Integer
+	DIM sNGTO_Direct AS String
+	DIM sNGTO_Surface AS String
+	DIM sNGTOParking AS String
+	DIM sNGTO AS String
+	DIM lBuildModelIC AS Logical
+	DIM iConstructed AS Integer
+	DIM iDifficulty AS Integer
+	DIM oObj AS Object
+
+	'Test to see if there are any objects in alt*Targets
+	'If there are no objects, then fill alt*Targets with all of the
+	'objects in mst_ic_*Targets, but set all of the buildModelIC to 
+	'true.  If there is at least one object in alt*Targets, then
+	'get the value of the buildModelIC field of the first object in
+	'alt_*Targets, delete all of the objects in the alt_*Targets
+	'table, and then refill the alt_*Targets table with all of the
+	'values from the mst_ic_*Targets table, only with the opposite
+	'value of the buildModelIC field retrieved from the earlier
+	'part of this algorithm.
+	ONERROR GOTO skipToggleAllParkingTarget
+	
+	IF TableInfo(alt_parkingtargets, TAB_INFO_NROWS) > 0 THEN
+		Fetch First From alt_parkingtargets
+		lBuildModelIC = alt_parkingtargets.BuildModelIC
+		Delete From alt_parkingtargets
+		Commit Table alt_parkingtargets
+	ELSE
+		Fetch First From mst_ic_ParkingTargets
+		lBuildModelIC = mst_ic_ParkingTargets.BuildModelIC
+	END IF
+	
+	IF lBuildModelIC = 0 THEN
+		lBuildModelIC = 1
+	ELSE
+		lBuildModelIC = 0
+	END IF
+	
+	iAltICID = 0
+	
+	Fetch First From mst_ic_ParkingTargets
+	Do While Not EOT(mst_ic_ParkingTargets)    
+		oObj = mst_ic_ParkingTargets.Obj
+		sNGTO_Direct  = mst_ic_ParkingTargets.NGTO_Direct
+		sNGTO_Surface  = mst_ic_ParkingTargets.NGTO_Surface
+		sNGTOParking  	= mst_ic_ParkingTargets.NGTOParking
+		sNGTO  = mst_ic_ParkingTargets.NGTO
+		iICID  = mst_ic_ParkingTargets.ICID
+		iConstructed  = mst_ic_ParkingTargets.Constructed
+		iDifficulty = mst_ic_ParkingTargets.Difficulty
+		
+		IF iConstructed = 0 THEN
+			iAltICID = iAltICID + 1
+
+			INSERT INTO alt_Parkingtargets(OBJ, NGTO_Direct, NGTO_Surface, NGTOParking, NGTO, BuildModelIC, ICID, Constructed, AltICID, Difficulty)
+	 			VALUES(oOBJ, sNGTO_Direct,sNGTO_Surface,sNGTOParking,sNGTO,lBuildModelIC,iICID,iConstructed,iAltICID,iDifficulty)
+		END IF
+					
+		Fetch Next From mst_ic_ParkingTargets
+	Loop
+	
+	'INSERT INTO alt_Parkingtargets(OBJ, NGTO_Direct, NGTO_Surface, NGTOParking, NGTO, BuildModelIC, ICID, Constructed, AltICID)
+	' 			Select OBJ, NGTO_Direct, NGTO_Surface, NGTOParking, NGTO, BuildModelIC, ICID, Constructed, 1
+	' 			FROM mst_ic_ParkingTargets
+	'Update alt_parkingtargets set AltICID = ROWID
+	
+	'UPDATE alt_Parkingtargets
+	'	Set BuildModelIC = lBuildModelIC
+
+EXIT SUB
+skipToggleAllParkingTarget:
+	CALL DebugNote("ToggleAllParkingTarget Crashed - Error: " & Err() & " " & Error$() )
+	RESUME NEXT
+END SUB
+'---------------------------------------------------------
+SUB ToggleRoofTarget
+	DIM iICID AS Integer
+	DIM iAltICID AS Integer
+	DIM sNGTORoof AS String
+	DIM lBuildModelIC AS Logical
+	DIM iConstructed AS Integer
+	DIM iDifficulty AS Integer
+	DIM oObj AS Object
+
+	Fetch First From qyTarget
+	Do While Not EOT(qyTarget)    
+
+		oObj = qyTarget.Obj
+		sNGTORoof  	= qyTarget.NGTORoof
+		lBuildModelIC  = qyTarget.BuildModelIC
+		iICID  = qyTarget.ICID
+		iConstructed  = qyTarget.Constructed
+
+		sNGTORoof  = qyTarget.NGTORoof
+		lBuildModelIC  = qyTarget.BuildModelIC
+		iICID  = qyTarget.ICID
+		iConstructed  = qyTarget.Constructed
+		iDifficulty = qyTarget.Difficulty
+
+		ONERROR GOTO skipToggleRoofTarget
+
+		SELECT * FROM alt_Rooftargets WHERE ICID = iICID INTO qy1
+
+		IF Tableinfo(qy1,TAB_INFO_NROWS) = 1 THEN
+			IF qy1.BuildModelIC = 0 THEN
+				Update qy1 Set BuildModelIC = 1
+			ELSE
+				Update qy1 Set BuildModelIC = 0
+			END IF
+		ELSEIF Tableinfo(qy1,TAB_INFO_NROWS) = 0 THEN
+			SELECT MAX(AltICID) FROM alt_Rooftargets INTO qy2
+			iAltICID = qy2.COL(1) + 1
+				CLOSE TABLE qy2
+
+			INSERT INTO alt_rooftargets(OBJ, NGTORoof, BuildModelIC, ICID, Constructed, AltICID, Difficulty)
+		 		VALUES(oOBJ, sNGTORoof,lBuildModelIC,iICID,iConstructed,iAltICID,iDifficulty)
+		 	SELECT * FROM alt_Rooftargets WHERE ICID = iICID INTO qy1
+		 	IF qy1.BuildModelIC = 0 THEN
+				Update qy1 Set BuildModelIC = 1
+			ELSE
+				Update qy1 Set BuildModelIC = 0
+			END IF
+		ELSE
+			NOTE "There are duplicate ICID values in alt_Rooftargets."
+		END IF
+
+		CLOSE TABLE qy1
+	Fetch Next From qyTarget  
+	Loop
+
+	CLOSE TABLE qyTarget
+
+EXIT SUB
+skipToggleRoofTarget:
+	CALL DebugNote("ToggleRoofTarget Crashed - Error: " & Err() & " " & Error$() )
+	RESUME NEXT
+END SUB
+'---------------------------------------------------------
+SUB ToggleAllRoofTarget
+	DIM iICID AS Integer
+	DIM iAltICID AS Integer
+	DIM sNGTORoof AS String
+	DIM lBuildModelIC AS Logical
+	DIM iConstructed AS Integer
+	DIM oObj AS Object
+	DIM iDifficulty AS Integer
+
+	'Test to see if there are any objects in alt*Targets
+	'If there are no objects, then fill alt*Targets with all of the
+	'objects in mst_ic_*Targets, but set all of the buildModelIC to 
+	'true.  If there is at least one object in alt*Targets, then
+	'get the value of the buildModelIC field of the first object in
+	'alt_*Targets, delete all of the objects in the alt_*Targets
+	'table, and then refill the alt_*Targets table with all of the
+	'values from the mst_ic_*Targets table, only with the opposite
+	'value of the buildModelIC field retrieved from the earlier
+	'part of this algorithm.
+	ONERROR GOTO skipToggleAllRoofTarget
+	
+	IF TableInfo(alt_rooftargets, TAB_INFO_NROWS) > 0 THEN
+		Fetch First From alt_rooftargets
+		lBuildModelIC = alt_rooftargets.BuildModelIC
+		Delete From alt_rooftargets
+		Commit Table alt_rooftargets
+	ELSE
+		Fetch First From mst_ic_RoofTargets
+		lBuildModelIC = mst_ic_RoofTargets.BuildModelIC
+	END IF
+	
+	IF lBuildModelIC = 0 THEN
+		lBuildModelIC = 1
+	ELSE
+		lBuildModelIC = 0
+	END IF
+	
+	iAltICID = 0
+	
+	Fetch First From mst_ic_RoofTargets
+	Do While Not EOT(mst_ic_RoofTargets)    
+		oObj = mst_ic_RoofTargets.Obj
+		sNGTORoof  	= mst_ic_RoofTargets.NGTORoof
+		iICID  = mst_ic_RoofTargets.ICID
+		iConstructed  = mst_ic_RoofTargets.Constructed
+		iDifficulty = mst_ic_RoofTargets.Difficulty
+
+		IF iConstructed = 0 THEN
+			iAltICID = iAltICID + 1
+	
+			INSERT INTO alt_Rooftargets(OBJ, NGTORoof, BuildModelIC, ICID, Constructed, AltICID, Difficulty)
+		 		VALUES(oOBJ,sNGTORoof,lBuildModelIC,iICID,iConstructed,iAltICID,iDifficulty)
+		END IF
+		
+		Fetch Next From mst_ic_RoofTargets
+	Loop
+	
+	'INSERT INTO alt_Rooftargets(OBJ, NGTORoof, BuildModelIC, ICID, Constructed, AltICID)
+	' 			Select OBJ, NGTORoof, BuildModelIC, ICID, Constructed, 1
+	' 			FROM mst_ic_RoofTargets
+	'Update alt_Rooftargets set AltICID = ROWID
+	
+	'UPDATE alt_Rooftargets
+	'	Set BuildModelIC = lBuildModelIC
+
+EXIT SUB
+skipToggleAllRoofTarget:
+	CALL DebugNote("ToggleAllRoofTarget Crashed - Error: " & Err() & " " & Error$() )
+	RESUME NEXT
+END SUB
+'---------------------------------------------------------
+SUB ToggleStreetTarget
+	DIM iICID AS Integer
+	DIM iAltICID AS Integer
+	DIM sNGTOStreet AS String
+	DIM lBuildModelIC AS Logical
+	DIM iConstructed AS Integer
+	DIM sEvaluation AS String
+	DIM oObj AS Object
+
+	Fetch First From qyTarget
+	Do While Not EOT(qyTarget)
+		oObj = qyTarget.Obj
+		sNGTOStreet = qyTarget.NGTOStreet
+		lBuildModelIC = qyTarget.BuildModelIC
+		iICID = qyTarget.ICID
+		iConstructed = qyTarget.Constructed
+		sEvaluation = qyTarget.Evaluation
+
+		ONERROR GOTO skipToggleStreetTarget
+
+		SELECT * FROM alt_streettargets WHERE ICID = iICID INTO qy1
+
+		IF Tableinfo(qy1,TAB_INFO_NROWS) = 1 THEN
+			IF qy1.BuildModelIC = 0 THEN
+				Update qy1 Set BuildModelIC = 1
+			ELSE
+				Update qy1 Set BuildModelIC = 0
+			END IF
+		ELSEIF Tableinfo(qy1,TAB_INFO_NROWS) = 0 THEN
+			SELECT MAX(AltICID) FROM alt_streettargets INTO qy2
+			iAltICID = qy2.COL(1) + 1
+				CLOSE TABLE qy2
+
+			INSERT INTO alt_streettargets(OBJ, NGTOStreet, BuildModelIC, ICID, Constructed, AltICID, Evaluation)
+		 		VALUES(oOBJ, sNGTOStreet,lBuildModelIC,iICID,iConstructed,iAltICID, sEvaluation)
+		 	SELECT * FROM alt_streettargets WHERE ICID = iICID INTO qy1
+		 	IF qy1.BuildModelIC = 0 THEN
+				Update qy1 Set BuildModelIC = 1
+			ELSE
+				Update qy1 Set BuildModelIC = 0
+			END IF
+		ELSE
+			NOTE "There are duplicate ICID values in alt_streettargets."
+		END IF
+	
+		CLOSE TABLE qy1
+	Fetch Next From qyTarget
+	Loop
+	
+	CLOSE TABLE qyTarget
+
+EXIT SUB
+skipToggleStreetTarget:
+	CALL DebugNote("ToggleStreetTarget Crashed - Error: " & Err() & " " & Error$() )
+	RESUME NEXT
+END SUB
+'---------------------------------------------------------
+SUB ToggleAllStreetTarget
+	DIM iICID AS Integer
+	DIM iAltICID AS Integer
+	DIM sNGTOStreet AS String
+	DIM lBuildModelIC AS Logical
+	DIM iConstructed AS Integer
+	DIM oObj AS Object
+
+	'Test to see if there are any objects in alt*Targets
+	'If there are no objects, then fill alt*Targets with all of the
+	'objects in mst_ic_*Targets, but set all of the buildModelIC to 
+	'true.  If there is at least one object in alt*Targets, then
+	'get the value of the buildModelIC field of the first object in
+	'alt_*Targets, delete all of the objects in the alt_*Targets
+	'table, and then refill the alt_*Targets table with all of the
+	'values from the mst_ic_*Targets table, only with the opposite
+	'value of the buildModelIC field retrieved from the earlier
+	'part of this algorithm.
+	ONERROR GOTO skipToggleAllStreetTarget
+	
+	IF TableInfo(alt_streettargets, TAB_INFO_NROWS) > 0 THEN
+		Fetch First From alt_streettargets
+		lBuildModelIC = alt_streettargets.BuildModelIC
+		Delete From alt_streettargets
+		Commit Table alt_streettargets
+	ELSE
+		Fetch First From mst_ic_StreetTargets
+		lBuildModelIC = mst_ic_StreetTargets.BuildModelIC
+	END IF
+	
+	IF lBuildModelIC = 0 THEN
+		lBuildModelIC = 1
+	ELSE
+		lBuildModelIC = 0
+	END IF
+	
+	iAltICID = 0
+	
+	Fetch First From mst_ic_StreetTargets
+	Do While Not EOT(mst_ic_StreetTargets)    
+		oObj = mst_ic_StreetTargets.Obj
+		sNGTOStreet  = mst_ic_StreetTargets.NGTOStreet
+		iICID  = mst_ic_StreetTargets.ICID
+		iConstructed  = mst_ic_StreetTargets.Constructed
+
+		iAltICID = iAltICID + 1
+
+		IF iConstructed = 0 THEN
+			INSERT INTO alt_Streettargets(OBJ, NGTOStreet, BuildModelIC, ICID, Constructed, AltICID)
+		 		VALUES(oOBJ,sNGTOStreet,lBuildModelIC,iICID,iConstructed,iAltICID)
+	
+			Fetch Next From mst_ic_StreetTargets
+		END IF
+	Loop
+	
+	'INSERT INTO alt_Streettargets(OBJ, NGTOStreet, BuildModelIC, ICID, Constructed, AltICID)
+	' 			Select OBJ, NGTOStreet, BuildModelIC, ICID, Constructed, 1
+	' 			FROM mst_ic_StreetTargets
+	'Update alt_Streettargets set AltICID = ROWID
+	
+	'UPDATE alt_Streettargets
+	'	Set BuildModelIC = lBuildModelIC
+
+EXIT SUB
+skipToggleAllStreetTarget:
+	CALL DebugNote("ToggleAllStreetTarget Crashed - Error: " & Err() & " " & Error$() )
+	RESUME NEXT
+END SUB
+'---------------------------------------------------------
+SUB PopulateAltICTable
+	DIM lChoice AS Logical
+
+	'Attention!  Base model contains X active ICs!
+	lChoice = ASK("Do you wish to copy any active ICs from the base model to the current alternative?", "Yes", "No")
+
+	IF lChoice = 0 THEN
+		EXIT SUB
+	END IF
+
+	SELECT * FROM alt_parkingtargets WHERE ICID IN (SELECT ICID FROM mst_ic_ParkingTargets WHERE BuildModelIC = 1) INTO Temp1
+	SELECT * FROM alt_rooftargets WHERE ICID IN (SELECT ICID FROM mst_ic_RoofTargets WHERE BuildModelIC = 1) INTO Temp2
+	SELECT * FROM alt_streettargets WHERE ICID IN (SELECT ICID FROM mst_ic_StreetTargets WHERE BuildModelIC = 1) INTO Temp3
+
+	Update Temp1 Set BuildModelIC = 1
+	Update Temp2 Set BuildModelIC = 1
+	Update Temp3 Set BuildModelIC = 1
+
+	CLOSE TABLE Temp1
+	CLOSE TABLE Temp2
+	CLOSE TABLE Temp3
+END SUB
