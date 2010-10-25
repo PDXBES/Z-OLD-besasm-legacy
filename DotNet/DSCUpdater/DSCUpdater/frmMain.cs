@@ -1,11 +1,14 @@
 ﻿
-#region using directives
+#region Using Directives
+
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
 using System.Configuration.Assemblies;
 using System.Data;
+using System.Data.DataSetExtensions;
 using System.Data.Odbc;
 using System.Data.OleDb;
 using System.Data.Linq;
@@ -27,13 +30,15 @@ using Microsoft.SqlServer;
 using Microsoft.Office;
 using Microsoft.VisualBasic;
 using SystemsAnalysis.DataAccess;
+using SystemsAnalysis.Utils.AccessUtils;
+
 #endregion
 
 namespace DSCUpdater
 {
   public partial class frmMain : Form
   {
-    #region global variables
+    #region Global Variables
     SqlDataAdapter daUpdaterEditor;
     DataTable dtUpdaterEditor;
     DateTime retrofitsStartDate;
@@ -73,6 +78,10 @@ namespace DSCUpdater
     public delegate object[] CreateRowDelegate<T>(T t);
      */
     #endregion
+
+#region Declarations
+    ArrayList arrTables;
+#endregion
 
     public frmMain()
     {
@@ -134,7 +143,6 @@ namespace DSCUpdater
     {
       Microsoft.Data.ConnectionUI.DataConnectionDialog dataConnectionDialog = new
       Microsoft.Data.ConnectionUI.DataConnectionDialog();
-
       Microsoft.Data.ConnectionUI.DataSource.AddStandardDataSources(dataConnectionDialog);
 
       //TODO: Detect whether Master Data is SQL or Access (Jet) and set SelectedDataSource accordingly
@@ -152,6 +160,28 @@ namespace DSCUpdater
       Properties.Settings.Default.SetMasterDataConnectionString = dataConnectionDialog.ConnectionString;
       Properties.Settings.Default.Save();
       statusBarMain.Panels["masterDataConnection"].Text = "Master Data: " + ConnectionStringSummary(Properties.Settings.Default.MasterDataConnectionString);
+      return;
+    }
+
+    private void UpdateFfeDataConnection()
+    {
+      Microsoft.Data.ConnectionUI.DataConnectionDialog dataConnectionDialog = new
+      Microsoft.Data.ConnectionUI.DataConnectionDialog();
+      Microsoft.Data.ConnectionUI.DataSource.AddStandardDataSources(dataConnectionDialog);
+
+      //TODO: Detect whether Master Data is SQL or Access (Jet) and set SelectedDataSource accordingly
+      string ffeDataConnectionString = Properties.Settings.Default.FfeDataConnectionString;
+      dataConnectionDialog.SelectedDataSource = Microsoft.Data.ConnectionUI.DataSource.AccessDataSource;
+      dataConnectionDialog.ConnectionString = ffeDataConnectionString;
+
+      if (Microsoft.Data.ConnectionUI.DataConnectionDialog.Show(dataConnectionDialog) != DialogResult.OK)
+      {
+        return;
+      }
+
+      Properties.Settings.Default.SetFfeDataConnectionString = dataConnectionDialog.ConnectionString;
+      Properties.Settings.Default.Save();
+      statusBarMain.Panels["ffeDataConnection"].Text = "FFE Data: " + ConnectionStringSummary(Properties.Settings.Default.FfeDataConnectionString);
       return;
     }
 
@@ -759,7 +789,7 @@ namespace DSCUpdater
       tabControlMain.Visible = true;
       Cursor.Current = Cursors.Arrow;
     }
-
+        
     private static void BatchRevertICEdits(SqlCommand sqlCmd)
     {
       //Update roof DISCO records in mst_DiscoVeg_ac to old value
@@ -1104,6 +1134,134 @@ namespace DSCUpdater
     private void ApplyRetroUpdates()
     {
 
+    }
+
+    public void StoreTableNames()
+    {
+      DataTable schemaTable;
+      arrTables = new ArrayList();
+      this.Refresh();
+
+      if (Properties.Settings.Default.FfeDataConnectionString != string.Empty)
+      {
+        using (OleDbConnection conn = new OleDbConnection(Properties.Settings.Default.FfeDataConnectionString))
+        {
+          try
+          {
+            conn.Open();
+            schemaTable = conn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, new Object[] { null, null, null, "TABLE" });
+            for (int i = 0; i < schemaTable.Rows.Count; i++)
+            {
+              arrTables.Add(schemaTable.Rows[i].ItemArray[2].ToString());
+            }
+          }
+          catch (Exception ex)
+          {
+            MessageBox.Show(ex.Message, "Connection Error");
+          }
+        }
+      }
+    }
+
+    private void RunFfeUpdates()
+    {
+      OleDbConnection conn;
+      OleDbCommand comm;
+      OleDbDataAdapter daGeoCodedFfe;
+      OleDbDataAdapter daAppend;
+      DataSet dsFfe;
+      string appendTableName;
+      string adapterQueryText;
+      
+      conn = new OleDbConnection(Properties.Settings.Default.FfeDataConnectionString);
+      comm = new OleDbCommand();
+      daAppend = new OleDbDataAdapter();
+      daGeoCodedFfe = new OleDbDataAdapter();
+      dsFfe = new DataSet();
+      appendTableName = lstFfeDbTables.SelectedItem.ToString();
+      adapterQueryText = "Select * from " + appendTableName;
+      comm.Connection = conn;
+      
+      try
+      {
+        //open connection to FFE database
+        conn.Open();
+
+        //create data table and fill dataset from FFE database append table
+        daAppend.SelectCommand = new OleDbCommand(adapterQueryText,conn);
+        daAppend.Fill(dsFfe,"Append");
+
+        //create data table and fill dataset from FFE database geocoded_ffe table
+        adapterQueryText = "Select * from geocoded_FFE";
+        daGeoCodedFfe.SelectCommand = new OleDbCommand(adapterQueryText,conn);
+        daGeoCodedFfe.Fill(dsFfe,"GeocodedFfe");
+
+        DataTable dtAppend = dsFfe.Tables["Append"];
+        DataTable dtGeoFfe = dsFfe.Tables["GeocodedFfe"];
+        
+        //select append datatable from FFE dataset into an enumerable Linq collection
+        var append = dsFfe.Tables["Append"].AsEnumerable();
+
+        //select geo datatable from FFE dataset into an enumerable Linq collection      
+        var geo = dsFfe.Tables["GeocodedFfe"].AsEnumerable();
+
+        var qryGeoApppendCount =
+              (from a in append
+              join g in geo
+              on a.Field<string>("RNO")
+              equals g.Field<string>("RNO")
+              group g by g.Field<int>("DSCID") into appendGeo
+              select new
+              {
+                DscId = appendGeo.Key,
+                DscIdCount = appendGeo.Count()
+              })
+              .Where(a => a.DscIdCount > 1);
+
+        if (qryGeoApppendCount.Count() > 0)
+        {
+          throw new Exception("The Append table has duplicates in the Geocoded table. " +
+                              "All records from the Append table may have only one corresponding record " +
+                              "in the Geocoded table, referenced by DSCID.  Please correct the tables so that " +
+                              "the Geocoded table has had unique DSCID values.");
+        }
+
+        //append new survey records to the FFE table
+        comm.CommandText = "INSERT INTO FFE ( SITEADDR, RNO, " +
+                           "SURVEYFFE, NOBSMT, SURVEYDATE, ADDDATE, " +
+                           "NOTES ) SELECT " +
+                           appendTableName + ".SITEADDR,   " +
+                           appendTableName + ".RNO,   " +
+                           appendTableName + ".SURVEYFFE,   " +
+                           appendTableName + ".NOBSMT,   " +
+                           appendTableName + ".SURVEYDATE,   " +
+                           appendTableName + ".ADDDATE,   " +
+                           appendTableName + ".NOTES FROM  " +
+                           appendTableName;
+        comm.ExecuteNonQuery();
+        
+        //update DSCID in FFE table using geocoded_FFE table
+        comm.CommandType = CommandType.StoredProcedure;
+        comm.CommandText = "Update_DSCID_From_Geocoded_FFE";
+        comm.ExecuteNonQuery();
+
+        //update mst_DSC_ac table based on FFE table values
+        comm.CommandType = CommandType.StoredProcedure;
+        comm.CommandText = "UpdateFFE";
+        comm.ExecuteNonQuery();
+
+        //update AddDate values in FFE table for recently added records
+        comm.CommandType = CommandType.StoredProcedure;
+        comm.CommandText = "UpdateFFEAddDate";
+        comm.ExecuteNonQuery();
+
+        //close connection to FFE database
+        conn.Close();
+      }
+      catch (Exception ex)
+      {
+        MessageBox.Show(ex.Message, "FFE Update Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+      }
     }
 
     public static void ExportToCSV(DataTable dt, string strFilePath, string fileName)
@@ -2265,6 +2423,38 @@ namespace DSCUpdater
     {
 
     }
+
+    private void lstFfeDbTables_SelectedIndexChanged(object sender, EventArgs e)
+    {
+      lblSelectedFfeDbTable.Text = "Selected Table: "+ lstFfeDbTables.SelectedItem.ToString();
+    }
+
+    private void closeToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+      RestartUpdate();
+    }
+
+    private void openViewConnectionToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+      UpdateFfeDataConnection();
+    }
+
+    private void loadDataForCurrentConnectionToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+      // get tables
+      StoreTableNames();
+      
+      // clear internal list
+      lstFfeDbTables.Items.Clear();
+
+      //update the list
+      lstFfeDbTables.Items.AddRange(arrTables.ToArray());
+    }
+
+    private void btnRunFfeUpdates_Click(object sender, EventArgs e)
+    {
+      RunFfeUpdates();
+    }    
   }
 }
 
