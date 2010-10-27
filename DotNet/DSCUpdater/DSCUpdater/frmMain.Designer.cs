@@ -35,25 +35,25 @@
       Infragistics.Win.Appearance appearance29 = new Infragistics.Win.Appearance();
       Infragistics.Win.Appearance appearance1 = new Infragistics.Win.Appearance();
       Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand1 = new Infragistics.Win.UltraWinGrid.UltraGridBand("DSCEDIT", -1);
-      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn20 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("dsc_edit_id");
-      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn21 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("edit_id");
-      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn22 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("edit_date");
-      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn23 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("edited_by");
-      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn24 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("rno");
-      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn25 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("dsc_id", -1, null, 0, Infragistics.Win.UltraWinGrid.SortIndicator.Ascending, false);
-      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn26 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("old_roof_area_sqft");
-      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn27 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("new_roof_area_sqft");
-      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn28 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("old_roof_disco_ic_area_sqft");
-      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn29 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("new_roof_disco_ic_area_sqft");
-      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn30 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("old_roof_drywell_ic_area_sqft");
-      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn31 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("new_roof_drywell_ic_area_sqft");
-      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn32 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("old_park_area_sqft");
-      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn33 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("new_park_area_sqft");
-      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn34 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("old_park_disco_ic_area_sqft");
-      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn35 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("new_park_disco_ic_area_sqft");
-      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn36 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("old_park_drywell_ic_area_sqft");
-      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn37 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("new_park_drywell_ic_area_sqft");
-      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn38 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("updater_editor_value_changed");
+      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn1 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("dsc_edit_id");
+      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn2 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("edit_id");
+      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn3 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("edit_date");
+      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn4 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("edited_by");
+      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn5 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("rno");
+      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn6 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("dsc_id", -1, null, 0, Infragistics.Win.UltraWinGrid.SortIndicator.Ascending, false);
+      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn7 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("old_roof_area_sqft");
+      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn8 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("new_roof_area_sqft");
+      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn9 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("old_roof_disco_ic_area_sqft");
+      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn10 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("new_roof_disco_ic_area_sqft");
+      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn11 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("old_roof_drywell_ic_area_sqft");
+      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn12 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("new_roof_drywell_ic_area_sqft");
+      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn13 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("old_park_area_sqft");
+      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn14 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("new_park_area_sqft");
+      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn15 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("old_park_disco_ic_area_sqft");
+      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn16 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("new_park_disco_ic_area_sqft");
+      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn17 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("old_park_drywell_ic_area_sqft");
+      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn18 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("new_park_drywell_ic_area_sqft");
+      Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn19 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("updater_editor_value_changed");
       Infragistics.Win.Appearance appearance2 = new Infragistics.Win.Appearance();
       Infragistics.Win.Appearance appearance9 = new Infragistics.Win.Appearance();
       Infragistics.Win.Appearance appearance12 = new Infragistics.Win.Appearance();
@@ -80,6 +80,9 @@
       Infragistics.Win.Appearance appearance5 = new Infragistics.Win.Appearance();
       Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarItem ultraExplorerBarItem3 = new Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarItem();
       Infragistics.Win.Appearance appearance6 = new Infragistics.Win.Appearance();
+      Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarGroup ultraExplorerBarGroup4 = new Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarGroup();
+      Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarItem ultraExplorerBarItem6 = new Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarItem();
+      Infragistics.Win.Appearance appearance34 = new Infragistics.Win.Appearance();
       Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarGroup ultraExplorerBarGroup3 = new Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarGroup();
       Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarItem ultraExplorerBarItem4 = new Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarItem();
       Infragistics.Win.Appearance appearance7 = new Infragistics.Win.Appearance();
@@ -207,7 +210,7 @@
       this.txtFileName = new Infragistics.Win.UltraWinEditors.UltraTextEditor();
       this.btnCancelUpdate = new Infragistics.Win.Misc.UltraButton();
       this.btnLoadUpdateFile = new Infragistics.Win.Misc.UltraButton();
-      this.ultraTabPageControl1 = new Infragistics.Win.UltraWinTabControl.UltraTabPageControl();
+      this.tabFfeUpdates = new Infragistics.Win.UltraWinTabControl.UltraTabPageControl();
       this.btnRunFfeUpdates = new Infragistics.Win.Misc.UltraButton();
       this.grpFfeDbTables = new System.Windows.Forms.GroupBox();
       this.lblSelectedFfeDbTable = new System.Windows.Forms.Label();
@@ -230,10 +233,9 @@
       this.statusBarMain = new Infragistics.Win.UltraWinStatusBar.UltraStatusBar();
       this.ultraTabSharedControlsPage3 = new Infragistics.Win.UltraWinTabControl.UltraTabSharedControlsPage();
       this.tabControlMain = new Infragistics.Win.UltraWinTabControl.UltraTabControl();
-      this.retroBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.sessionBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.sessionTableAdapter = new DSCUpdater.ProjectDataSetTableAdapters.SESSIONTableAdapter();
-      this.rDS = new SystemsAnalysis.DataAccess.RetrofitsDataSet();
+      this.retroBindingSource = new System.Windows.Forms.BindingSource(this.components);
       btnExportErrors = new Infragistics.Win.Misc.UltraButton();
       this.tabPageControlApplyRetroUpdates.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.dgvApplyRetroUpdates)).BeginInit();
@@ -277,16 +279,15 @@
       this.ultraPanel4.ClientArea.SuspendLayout();
       this.ultraPanel4.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.txtFileName)).BeginInit();
-      this.ultraTabPageControl1.SuspendLayout();
+      this.tabFfeUpdates.SuspendLayout();
       this.grpFfeDbTables.SuspendLayout();
       this.mnuFfeUpdates.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.expBarMain)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.toolbarManagerMain)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.tabControlMain)).BeginInit();
       this.tabControlMain.SuspendLayout();
-      ((System.ComponentModel.ISupportInitialize)(this.retroBindingSource)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.sessionBindingSource)).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)(this.rDS)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.retroBindingSource)).BeginInit();
       this.SuspendLayout();
       // 
       // btnExportErrors
@@ -305,7 +306,7 @@
       // 
       this.tabPageControlApplyRetroUpdates.Controls.Add(this.btnApplyRetroUpdates);
       this.tabPageControlApplyRetroUpdates.Controls.Add(this.dgvApplyRetroUpdates);
-      this.tabPageControlApplyRetroUpdates.Location = new System.Drawing.Point(-10000, -10000);
+      this.tabPageControlApplyRetroUpdates.Location = new System.Drawing.Point(1, 22);
       this.tabPageControlApplyRetroUpdates.Name = "tabPageControlApplyRetroUpdates";
       this.tabPageControlApplyRetroUpdates.Padding = new System.Windows.Forms.Padding(3);
       this.tabPageControlApplyRetroUpdates.Size = new System.Drawing.Size(714, 426);
@@ -518,85 +519,85 @@
       this.dgvUpdaterEditor.DataSource = this.projectDataSet;
       appearance1.BackColor = System.Drawing.Color.White;
       this.dgvUpdaterEditor.DisplayLayout.Appearance = appearance1;
-      ultraGridColumn20.Header.VisiblePosition = 0;
-      ultraGridColumn20.Hidden = true;
-      ultraGridColumn21.Header.VisiblePosition = 1;
-      ultraGridColumn21.Hidden = true;
-      ultraGridColumn22.Header.VisiblePosition = 2;
-      ultraGridColumn22.Hidden = true;
-      ultraGridColumn23.Header.VisiblePosition = 3;
-      ultraGridColumn23.Hidden = true;
-      ultraGridColumn24.Header.Caption = "R No.";
-      ultraGridColumn24.Header.VisiblePosition = 4;
-      ultraGridColumn24.Width = 32;
-      ultraGridColumn25.Header.Caption = "DSC ID";
-      ultraGridColumn25.Header.VisiblePosition = 5;
-      ultraGridColumn25.Width = 55;
-      ultraGridColumn26.Header.Caption = "Old Roof Area";
-      ultraGridColumn26.Header.VisiblePosition = 6;
-      ultraGridColumn26.Width = 81;
-      ultraGridColumn27.Header.Caption = "New Roof Area";
-      ultraGridColumn27.Header.VisiblePosition = 7;
-      ultraGridColumn27.Hidden = true;
-      ultraGridColumn27.Width = 79;
-      ultraGridColumn28.Header.Caption = "Old Roof Disco Area";
-      ultraGridColumn28.Header.VisiblePosition = 8;
-      ultraGridColumn28.Width = 87;
-      ultraGridColumn29.Header.Caption = "New Roof Disco Area";
-      ultraGridColumn29.Header.VisiblePosition = 9;
-      ultraGridColumn29.Hidden = true;
-      ultraGridColumn29.Width = 56;
-      ultraGridColumn30.Header.Caption = "Old Roof Drywell Area";
-      ultraGridColumn30.Header.VisiblePosition = 10;
-      ultraGridColumn30.Width = 98;
-      ultraGridColumn31.Header.Caption = "New Roof Drywell Area";
-      ultraGridColumn31.Header.VisiblePosition = 11;
-      ultraGridColumn31.Hidden = true;
-      ultraGridColumn31.Width = 59;
-      ultraGridColumn32.Header.Caption = "Old Park Area";
-      ultraGridColumn32.Header.VisiblePosition = 12;
-      ultraGridColumn32.Width = 65;
-      ultraGridColumn33.Header.Caption = "New Park Area";
-      ultraGridColumn33.Header.VisiblePosition = 13;
-      ultraGridColumn33.Hidden = true;
-      ultraGridColumn33.Width = 40;
-      ultraGridColumn34.Header.Caption = "Old Park Disco Area";
-      ultraGridColumn34.Header.VisiblePosition = 14;
-      ultraGridColumn34.Width = 85;
-      ultraGridColumn35.Header.Caption = "New Park Disco Area";
-      ultraGridColumn35.Header.VisiblePosition = 15;
-      ultraGridColumn35.Hidden = true;
-      ultraGridColumn35.Width = 55;
-      ultraGridColumn36.Header.Caption = "Old Park Drywell Area";
-      ultraGridColumn36.Header.VisiblePosition = 16;
-      ultraGridColumn36.Width = 102;
-      ultraGridColumn37.Header.Caption = "New Park Drywell Area";
-      ultraGridColumn37.Header.VisiblePosition = 17;
-      ultraGridColumn37.Hidden = true;
-      ultraGridColumn37.Width = 59;
-      ultraGridColumn38.Header.Caption = "Value Changed";
-      ultraGridColumn38.Header.VisiblePosition = 18;
-      ultraGridColumn38.Width = 92;
+      ultraGridColumn1.Header.VisiblePosition = 0;
+      ultraGridColumn1.Hidden = true;
+      ultraGridColumn2.Header.VisiblePosition = 1;
+      ultraGridColumn2.Hidden = true;
+      ultraGridColumn3.Header.VisiblePosition = 2;
+      ultraGridColumn3.Hidden = true;
+      ultraGridColumn4.Header.VisiblePosition = 3;
+      ultraGridColumn4.Hidden = true;
+      ultraGridColumn5.Header.Caption = "R No.";
+      ultraGridColumn5.Header.VisiblePosition = 4;
+      ultraGridColumn5.Width = 32;
+      ultraGridColumn6.Header.Caption = "DSC ID";
+      ultraGridColumn6.Header.VisiblePosition = 5;
+      ultraGridColumn6.Width = 55;
+      ultraGridColumn7.Header.Caption = "Old Roof Area";
+      ultraGridColumn7.Header.VisiblePosition = 6;
+      ultraGridColumn7.Width = 81;
+      ultraGridColumn8.Header.Caption = "New Roof Area";
+      ultraGridColumn8.Header.VisiblePosition = 7;
+      ultraGridColumn8.Hidden = true;
+      ultraGridColumn8.Width = 79;
+      ultraGridColumn9.Header.Caption = "Old Roof Disco Area";
+      ultraGridColumn9.Header.VisiblePosition = 8;
+      ultraGridColumn9.Width = 87;
+      ultraGridColumn10.Header.Caption = "New Roof Disco Area";
+      ultraGridColumn10.Header.VisiblePosition = 9;
+      ultraGridColumn10.Hidden = true;
+      ultraGridColumn10.Width = 56;
+      ultraGridColumn11.Header.Caption = "Old Roof Drywell Area";
+      ultraGridColumn11.Header.VisiblePosition = 10;
+      ultraGridColumn11.Width = 98;
+      ultraGridColumn12.Header.Caption = "New Roof Drywell Area";
+      ultraGridColumn12.Header.VisiblePosition = 11;
+      ultraGridColumn12.Hidden = true;
+      ultraGridColumn12.Width = 59;
+      ultraGridColumn13.Header.Caption = "Old Park Area";
+      ultraGridColumn13.Header.VisiblePosition = 12;
+      ultraGridColumn13.Width = 65;
+      ultraGridColumn14.Header.Caption = "New Park Area";
+      ultraGridColumn14.Header.VisiblePosition = 13;
+      ultraGridColumn14.Hidden = true;
+      ultraGridColumn14.Width = 40;
+      ultraGridColumn15.Header.Caption = "Old Park Disco Area";
+      ultraGridColumn15.Header.VisiblePosition = 14;
+      ultraGridColumn15.Width = 85;
+      ultraGridColumn16.Header.Caption = "New Park Disco Area";
+      ultraGridColumn16.Header.VisiblePosition = 15;
+      ultraGridColumn16.Hidden = true;
+      ultraGridColumn16.Width = 55;
+      ultraGridColumn17.Header.Caption = "Old Park Drywell Area";
+      ultraGridColumn17.Header.VisiblePosition = 16;
+      ultraGridColumn17.Width = 102;
+      ultraGridColumn18.Header.Caption = "New Park Drywell Area";
+      ultraGridColumn18.Header.VisiblePosition = 17;
+      ultraGridColumn18.Hidden = true;
+      ultraGridColumn18.Width = 59;
+      ultraGridColumn19.Header.Caption = "Value Changed";
+      ultraGridColumn19.Header.VisiblePosition = 18;
+      ultraGridColumn19.Width = 92;
       ultraGridBand1.Columns.AddRange(new object[] {
-            ultraGridColumn20,
-            ultraGridColumn21,
-            ultraGridColumn22,
-            ultraGridColumn23,
-            ultraGridColumn24,
-            ultraGridColumn25,
-            ultraGridColumn26,
-            ultraGridColumn27,
-            ultraGridColumn28,
-            ultraGridColumn29,
-            ultraGridColumn30,
-            ultraGridColumn31,
-            ultraGridColumn32,
-            ultraGridColumn33,
-            ultraGridColumn34,
-            ultraGridColumn35,
-            ultraGridColumn36,
-            ultraGridColumn37,
-            ultraGridColumn38});
+            ultraGridColumn1,
+            ultraGridColumn2,
+            ultraGridColumn3,
+            ultraGridColumn4,
+            ultraGridColumn5,
+            ultraGridColumn6,
+            ultraGridColumn7,
+            ultraGridColumn8,
+            ultraGridColumn9,
+            ultraGridColumn10,
+            ultraGridColumn11,
+            ultraGridColumn12,
+            ultraGridColumn13,
+            ultraGridColumn14,
+            ultraGridColumn15,
+            ultraGridColumn16,
+            ultraGridColumn17,
+            ultraGridColumn18,
+            ultraGridColumn19});
       ultraGridBand1.GroupHeadersVisible = false;
       this.dgvUpdaterEditor.DisplayLayout.BandsSerializer.Add(ultraGridBand1);
       this.dgvUpdaterEditor.DisplayLayout.MaxColScrollRegions = 1;
@@ -677,7 +678,7 @@
       this.pnlNewDSCAreas.Dock = System.Windows.Forms.DockStyle.Fill;
       this.pnlNewDSCAreas.Location = new System.Drawing.Point(231, 0);
       this.pnlNewDSCAreas.Name = "pnlNewDSCAreas";
-      this.pnlNewDSCAreas.Size = new System.Drawing.Size(295, 215);
+      this.pnlNewDSCAreas.Size = new System.Drawing.Size(293, 213);
       this.pnlNewDSCAreas.TabIndex = 25;
       // 
       // txtNewRoofArea
@@ -774,7 +775,7 @@
       this.ultraGroupBox2.Dock = System.Windows.Forms.DockStyle.Left;
       this.ultraGroupBox2.Location = new System.Drawing.Point(0, 0);
       this.ultraGroupBox2.Name = "ultraGroupBox2";
-      this.ultraGroupBox2.Size = new System.Drawing.Size(231, 215);
+      this.ultraGroupBox2.Size = new System.Drawing.Size(231, 213);
       this.ultraGroupBox2.TabIndex = 27;
       this.ultraGroupBox2.ViewStyle = Infragistics.Win.Misc.GroupBoxViewStyle.VisualStudio2005;
       // 
@@ -858,9 +859,9 @@
       this.ultraGroupBox1.Controls.Add(this.lblRevertSession);
       this.ultraGroupBox1.Controls.Add(this.btnRevertSession);
       this.ultraGroupBox1.Dock = System.Windows.Forms.DockStyle.Right;
-      this.ultraGroupBox1.Location = new System.Drawing.Point(526, 0);
+      this.ultraGroupBox1.Location = new System.Drawing.Point(524, 0);
       this.ultraGroupBox1.Name = "ultraGroupBox1";
-      this.ultraGroupBox1.Size = new System.Drawing.Size(178, 215);
+      this.ultraGroupBox1.Size = new System.Drawing.Size(178, 213);
       this.ultraGroupBox1.TabIndex = 26;
       this.ultraGroupBox1.ViewStyle = Infragistics.Win.Misc.GroupBoxViewStyle.VisualStudio2005;
       // 
@@ -1178,7 +1179,7 @@
       // 
       this.tabPageControlMain.Controls.Add(this.dgvData);
       this.tabPageControlMain.Controls.Add(this.ultraPanel4);
-      this.tabPageControlMain.Location = new System.Drawing.Point(1, 22);
+      this.tabPageControlMain.Location = new System.Drawing.Point(-10000, -10000);
       this.tabPageControlMain.Name = "tabPageControlMain";
       this.tabPageControlMain.Padding = new System.Windows.Forms.Padding(3);
       this.tabPageControlMain.Size = new System.Drawing.Size(714, 426);
@@ -1302,14 +1303,14 @@
       this.btnLoadUpdateFile.Text = "Load Update File";
       this.btnLoadUpdateFile.Click += new System.EventHandler(this.btnLoadUpdateFile_Click);
       // 
-      // ultraTabPageControl1
+      // tabFfeUpdates
       // 
-      this.ultraTabPageControl1.Controls.Add(this.btnRunFfeUpdates);
-      this.ultraTabPageControl1.Controls.Add(this.grpFfeDbTables);
-      this.ultraTabPageControl1.Controls.Add(this.mnuFfeUpdates);
-      this.ultraTabPageControl1.Location = new System.Drawing.Point(-10000, -10000);
-      this.ultraTabPageControl1.Name = "ultraTabPageControl1";
-      this.ultraTabPageControl1.Size = new System.Drawing.Size(714, 426);
+      this.tabFfeUpdates.Controls.Add(this.btnRunFfeUpdates);
+      this.tabFfeUpdates.Controls.Add(this.grpFfeDbTables);
+      this.tabFfeUpdates.Controls.Add(this.mnuFfeUpdates);
+      this.tabFfeUpdates.Location = new System.Drawing.Point(-10000, -10000);
+      this.tabFfeUpdates.Name = "tabFfeUpdates";
+      this.tabFfeUpdates.Size = new System.Drawing.Size(714, 426);
       // 
       // btnRunFfeUpdates
       // 
@@ -1440,6 +1441,13 @@
             ultraExplorerBarItem2,
             ultraExplorerBarItem3});
       ultraExplorerBarGroup2.Text = "Retrofits Database Updates";
+      ultraExplorerBarItem6.Key = "tabFfeUpdates";
+      appearance34.Image = ((object)(resources.GetObject("appearance34.Image")));
+      ultraExplorerBarItem6.Settings.AppearancesLarge.Appearance = appearance34;
+      ultraExplorerBarItem6.Text = "Update FFE Data";
+      ultraExplorerBarGroup4.Items.AddRange(new Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarItem[] {
+            ultraExplorerBarItem6});
+      ultraExplorerBarGroup4.Text = "FFE Data Updates";
       ultraExplorerBarItem4.Key = "tabUpdaterHistory";
       appearance7.Image = ((object)(resources.GetObject("appearance7.Image")));
       ultraExplorerBarItem4.Settings.AppearancesLarge.Appearance = appearance7;
@@ -1457,6 +1465,7 @@
       this.expBarMain.Groups.AddRange(new Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarGroup[] {
             ultraExplorerBarGroup1,
             ultraExplorerBarGroup2,
+            ultraExplorerBarGroup4,
             ultraExplorerBarGroup3});
       this.expBarMain.GroupSettings.Style = Infragistics.Win.UltraWinExplorerBar.GroupStyle.LargeImagesWithText;
       this.expBarMain.ItemSettings.Style = Infragistics.Win.UltraWinExplorerBar.ItemStyle.Button;
@@ -1639,7 +1648,7 @@
       this.tabControlMain.Controls.Add(this.tabPageControlCheckRetroUpdates);
       this.tabControlMain.Controls.Add(this.tabPageControlApplyRetroUpdates);
       this.tabControlMain.Controls.Add(this.ultraTabSharedControlsPage3);
-      this.tabControlMain.Controls.Add(this.ultraTabPageControl1);
+      this.tabControlMain.Controls.Add(this.tabFfeUpdates);
       this.tabControlMain.Dock = System.Windows.Forms.DockStyle.Fill;
       this.tabControlMain.Location = new System.Drawing.Point(217, 19);
       this.tabControlMain.Name = "tabControlMain";
@@ -1664,7 +1673,8 @@
       tabMain.Key = "tabMain";
       tabMain.TabPage = this.tabPageControlMain;
       tabMain.Text = "Load Update File";
-      ultraTab1.TabPage = this.ultraTabPageControl1;
+      ultraTab1.Key = "tabFfeUpdates";
+      ultraTab1.TabPage = this.tabFfeUpdates;
       ultraTab1.Text = "Run FFE Updates";
       this.tabControlMain.Tabs.AddRange(new Infragistics.Win.UltraWinTabControl.UltraTab[] {
             tabApplyRetroUpdates,
@@ -1685,11 +1695,6 @@
       // sessionTableAdapter
       // 
       this.sessionTableAdapter.ClearBeforeFill = true;
-      // 
-      // rDS
-      // 
-      this.rDS.DataSetName = "RetrofitsDataSet";
-      this.rDS.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
       // 
       // frmMain
       // 
@@ -1759,8 +1764,8 @@
       this.ultraPanel4.ClientArea.PerformLayout();
       this.ultraPanel4.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)(this.txtFileName)).EndInit();
-      this.ultraTabPageControl1.ResumeLayout(false);
-      this.ultraTabPageControl1.PerformLayout();
+      this.tabFfeUpdates.ResumeLayout(false);
+      this.tabFfeUpdates.PerformLayout();
       this.grpFfeDbTables.ResumeLayout(false);
       this.grpFfeDbTables.PerformLayout();
       this.mnuFfeUpdates.ResumeLayout(false);
@@ -1769,9 +1774,8 @@
       ((System.ComponentModel.ISupportInitialize)(this.toolbarManagerMain)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.tabControlMain)).EndInit();
       this.tabControlMain.ResumeLayout(false);
-      ((System.ComponentModel.ISupportInitialize)(this.retroBindingSource)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.sessionBindingSource)).EndInit();
-      ((System.ComponentModel.ISupportInitialize)(this.rDS)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.retroBindingSource)).EndInit();
       this.ResumeLayout(false);
 
     }
@@ -1874,13 +1878,12 @@
     private System.Windows.Forms.DataGridViewTextBoxColumn edit_date;
     private System.Windows.Forms.DataGridViewTextBoxColumn edited_by;
     private System.Windows.Forms.BindingSource retroBindingSource;
-    private SystemsAnalysis.DataAccess.RetrofitsDataSet rDS;
     private System.Windows.Forms.DateTimePicker clndrRetrofitsChangesStart;
     private Infragistics.Win.Misc.UltraLabel lblRetrofitsCalEnd;
     private Infragistics.Win.Misc.UltraLabel lblRetrofitsCalStart;
     private System.Windows.Forms.DateTimePicker clndrRetrofitsChangesEnd;
     private Infragistics.Win.Misc.UltraButton btnExportToTemplate;
-    private Infragistics.Win.UltraWinTabControl.UltraTabPageControl ultraTabPageControl1;
+    private Infragistics.Win.UltraWinTabControl.UltraTabPageControl tabFfeUpdates;
     private System.Windows.Forms.ListBox lstFfeDbTables;
     private System.Windows.Forms.MenuStrip mnuFfeUpdates;
     private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;

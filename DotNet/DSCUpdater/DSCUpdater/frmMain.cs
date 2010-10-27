@@ -8,7 +8,6 @@ using System.ComponentModel;
 using System.Configuration;
 using System.Configuration.Assemblies;
 using System.Data;
-using System.Data.DataSetExtensions;
 using System.Data.Odbc;
 using System.Data.OleDb;
 using System.Data.Linq;
@@ -43,6 +42,8 @@ namespace DSCUpdater
     DataTable dtUpdaterEditor;
     DateTime retrofitsStartDate;
     DateTime retrofitsEndDate;
+    public RetrofitsDataSet rDS;
+
     #endregion
 
     #region cleanup
