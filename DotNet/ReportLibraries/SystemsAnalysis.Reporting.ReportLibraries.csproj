@@ -91,6 +91,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AlternativeReport.cs" />
+    <Compile Include="DesignDiversionFlowsReport.cs" />
     <Compile Include="FecQaReport.cs" />
     <Compile Include="FecReport.cs" />
     <Compile Include="ModelReport.cs" />
@@ -121,6 +122,10 @@
     <ProjectReference Include="..\ModelBuilder\ModelConfiguration\SystemsAnalysis.ModelConstruction.ModelConfiguration.csproj">
       <Project>{19DE0713-65B7-4D46-A537-49704F93CB90}</Project>
       <Name>SystemsAnalysis.ModelConstruction.ModelConfiguration</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ModelingUtils\ResultsExtractor\SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor.csproj">
+      <Project>{AA8663B3-4B31-4F11-BD73-9CC3EF99101F}</Project>
+      <Name>SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor</Name>
     </ProjectReference>
     <ProjectReference Include="..\Modeling\SystemsAnalysis.Modeling.csproj">
       <Project>{54555B74-906E-4D29-9BC3-7653805B6AD0}</Project>

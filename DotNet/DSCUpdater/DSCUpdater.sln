@@ -9,6 +9,10 @@ Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "DSCUpdaterSetup", "DSCUpdat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemsAnalysis.DataAccess", "..\DataAccess\SystemsAnalysis.DataAccess.csproj", "{D81499E0-ED3E-4C85-9F8E-72C263AA24C4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemsAnalysis.Utils.AccessUtils.DatabaseManagement", "..\AccessUtils\DatabaseManagement\SystemsAnalysis.Utils.AccessUtils.DatabaseManagement.csproj", "{1DCF1AAE-A211-4A29-AE5C-13AAAD890B08}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor", "..\ModelingUtils\ResultsExtractor\SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor.csproj", "{AA8663B3-4B31-4F11-BD73-9CC3EF99101F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +29,14 @@ Global
 		{D81499E0-ED3E-4C85-9F8E-72C263AA24C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D81499E0-ED3E-4C85-9F8E-72C263AA24C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D81499E0-ED3E-4C85-9F8E-72C263AA24C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1DCF1AAE-A211-4A29-AE5C-13AAAD890B08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1DCF1AAE-A211-4A29-AE5C-13AAAD890B08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1DCF1AAE-A211-4A29-AE5C-13AAAD890B08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1DCF1AAE-A211-4A29-AE5C-13AAAD890B08}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA8663B3-4B31-4F11-BD73-9CC3EF99101F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA8663B3-4B31-4F11-BD73-9CC3EF99101F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA8663B3-4B31-4F11-BD73-9CC3EF99101F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA8663B3-4B31-4F11-BD73-9CC3EF99101F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
