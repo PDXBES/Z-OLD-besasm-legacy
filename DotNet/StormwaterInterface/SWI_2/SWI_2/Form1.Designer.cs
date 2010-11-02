@@ -673,6 +673,9 @@
             this.sWSP_GLOBAL_IDBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.sWSP_GLOBAL_IDTableAdapter = new SWI_2.SANDBOXDataSetTableAdapters.SWSP_GLOBAL_IDTableAdapter();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.sANDBOXDataSet1 = new SWI_2.SANDBOXDataSet1();
+            this.sWSPGLOBALIDBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.sWSP_GLOBAL_IDTableAdapter1 = new SWI_2.SANDBOXDataSet1TableAdapters.SWSP_GLOBAL_IDTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.fKSURVEYPAGEVIEWBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fKVIEWSUBWATERSHEDBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fKSUBWATERSHEDWATERSHEDBindingSource)).BeginInit();
@@ -727,6 +730,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.sWSPDITCHBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sWSPCULVERTBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sWSP_GLOBAL_IDBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sANDBOXDataSet1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sWSPGLOBALIDBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonAddView
@@ -3612,6 +3617,20 @@
             this.panel1.Size = new System.Drawing.Size(1047, 471);
             this.panel1.TabIndex = 104;
             // 
+            // sANDBOXDataSet1
+            // 
+            this.sANDBOXDataSet1.DataSetName = "SANDBOXDataSet1";
+            this.sANDBOXDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // sWSPGLOBALIDBindingSource
+            // 
+            this.sWSPGLOBALIDBindingSource.DataMember = "SWSP_GLOBAL_ID";
+            this.sWSPGLOBALIDBindingSource.DataSource = this.sANDBOXDataSet1;
+            // 
+            // sWSP_GLOBAL_IDTableAdapter1
+            // 
+            this.sWSP_GLOBAL_IDTableAdapter1.ClearBeforeFill = true;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3704,6 +3723,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.sWSPDITCHBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sWSPCULVERTBindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sWSP_GLOBAL_IDBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sANDBOXDataSet1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sWSPGLOBALIDBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -3862,6 +3883,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn nodeDataGridViewTextBoxColumn;
         private System.Windows.Forms.ToolStripMenuItem surveyViewToolStripMenuItem;
         private System.Windows.Forms.Panel panel1;
+        private SANDBOXDataSet1 sANDBOXDataSet1;
+        private System.Windows.Forms.BindingSource sWSPGLOBALIDBindingSource;
+        private SWI_2.SANDBOXDataSet1TableAdapters.SWSP_GLOBAL_IDTableAdapter sWSP_GLOBAL_IDTableAdapter1;
     }
 }
 

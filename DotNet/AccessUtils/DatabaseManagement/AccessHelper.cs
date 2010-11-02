@@ -174,7 +174,7 @@ namespace SystemsAnalysis.Utils.AccessUtils
             inputTable.TableName = SQLInputTableName;
             try
             {
-                theCreator.CreateFromDataTable(inputTable);
+                theCreator.CreateFromDataTable(inputTable, SQLOutputTableName);
                 //Open a connection with destination database;
                 using (SqlConnection connection =
                        new SqlConnection(outputDatabase))
