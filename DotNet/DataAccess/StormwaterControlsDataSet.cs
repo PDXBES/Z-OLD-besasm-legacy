@@ -1,6 +1,5 @@
 ﻿using SystemsAnalysis.Utils.AccessUtils;
 using System.IO;
-using SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor;
 using System.Data;
 
 namespace SystemsAnalysis.DataAccess
