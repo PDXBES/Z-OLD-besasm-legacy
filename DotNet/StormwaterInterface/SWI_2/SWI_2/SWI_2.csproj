@@ -29,7 +29,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>58</ApplicationRevision>
+    <ApplicationRevision>68</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -196,15 +196,16 @@
     <None Include="SANDBOXDataSet.xss">
       <DependentUpon>SANDBOXDataSet.xsd</DependentUpon>
     </None>
-    <None Include="SANDBOXDataSet1.xsc">
-      <DependentUpon>SANDBOXDataSet1.xsd</DependentUpon>
+    <None Include="SANDBOXDataSet11.xsc">
+      <DependentUpon>SANDBOXDataSet11.xsd</DependentUpon>
     </None>
-    <None Include="SANDBOXDataSet1.xsd">
-      <SubType>
-      </SubType>
+    <None Include="SANDBOXDataSet11.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>SANDBOXDataSet11.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </None>
-    <None Include="SANDBOXDataSet1.xss">
-      <DependentUpon>SANDBOXDataSet1.xsd</DependentUpon>
+    <None Include="SANDBOXDataSet11.xss">
+      <DependentUpon>SANDBOXDataSet11.xsd</DependentUpon>
     </None>
     <None Include="SWI_2_TemporaryKey.pfx" />
     <Compile Include="Properties\Settings.Designer.cs">
@@ -220,6 +221,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SANDBOXDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="SANDBOXDataSet11.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SANDBOXDataSet11.xsd</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

@@ -94,6 +94,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FormServerDatabaseUserIDPasswordDomainEntry.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormServerDatabaseUserIDPasswordDomainEntry.Designer.cs">
+      <DependentUpon>FormServerDatabaseUserIDPasswordDomainEntry.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormUserIDAndPasswordEntry.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -374,6 +380,9 @@
     </PublishFile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="FormServerDatabaseUserIDPasswordDomainEntry.resx">
+      <DependentUpon>FormServerDatabaseUserIDPasswordDomainEntry.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormUserIDAndPasswordEntry.resx">
       <DependentUpon>FormUserIDAndPasswordEntry.cs</DependentUpon>
     </EmbeddedResource>

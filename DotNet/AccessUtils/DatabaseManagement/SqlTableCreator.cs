@@ -92,6 +92,19 @@ namespace SystemsAnalysis.Utils.AccessUtils
 
             return cmd.ExecuteNonQuery();
         }
+
+        public object CreateFromDataTable(System.Data.DataTable table, String tableName)
+        {
+            string sql = GetCreateFromDataTableSQL(/*_tableName*/tableName, table);
+            SqlCommand cmd;
+
+            if (_transaction != null && _transaction.Connection != null)
+                cmd = new SqlCommand(sql, _connection, _transaction);
+            else
+                cmd = new SqlCommand(sql, _connection);
+
+            return cmd.ExecuteNonQuery();
+        }
         #endregion
 
         #region Static Methods

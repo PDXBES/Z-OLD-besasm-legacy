@@ -34,6 +34,8 @@
             this.textBoxPassword = new System.Windows.Forms.TextBox();
             this.checkBoxUseTrustedConnection = new System.Windows.Forms.CheckBox();
             this.buttonOK = new System.Windows.Forms.Button();
+            this.textBoxDomain = new System.Windows.Forms.TextBox();
+            this.labelDomain = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // labelUserID
@@ -72,7 +74,7 @@
             // checkBoxUseTrustedConnection
             // 
             this.checkBoxUseTrustedConnection.AutoSize = true;
-            this.checkBoxUseTrustedConnection.Location = new System.Drawing.Point(74, 89);
+            this.checkBoxUseTrustedConnection.Location = new System.Drawing.Point(74, 122);
             this.checkBoxUseTrustedConnection.Name = "checkBoxUseTrustedConnection";
             this.checkBoxUseTrustedConnection.Size = new System.Drawing.Size(141, 17);
             this.checkBoxUseTrustedConnection.TabIndex = 4;
@@ -81,7 +83,7 @@
             // 
             // buttonOK
             // 
-            this.buttonOK.Location = new System.Drawing.Point(197, 122);
+            this.buttonOK.Location = new System.Drawing.Point(197, 155);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(69, 22);
             this.buttonOK.TabIndex = 5;
@@ -89,11 +91,30 @@
             this.buttonOK.UseVisualStyleBackColor = true;
             this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
             // 
+            // textBoxDomain
+            // 
+            this.textBoxDomain.Location = new System.Drawing.Point(74, 96);
+            this.textBoxDomain.Name = "textBoxDomain";
+            this.textBoxDomain.Size = new System.Drawing.Size(156, 20);
+            this.textBoxDomain.TabIndex = 7;
+            this.textBoxDomain.UseSystemPasswordChar = true;
+            // 
+            // labelDomain
+            // 
+            this.labelDomain.AutoSize = true;
+            this.labelDomain.Location = new System.Drawing.Point(5, 99);
+            this.labelDomain.Name = "labelDomain";
+            this.labelDomain.Size = new System.Drawing.Size(46, 13);
+            this.labelDomain.TabIndex = 6;
+            this.labelDomain.Text = "Domain:";
+            // 
             // FormUserIDAndPasswordEntry
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(283, 160);
+            this.ClientSize = new System.Drawing.Size(283, 193);
+            this.Controls.Add(this.textBoxDomain);
+            this.Controls.Add(this.labelDomain);
             this.Controls.Add(this.buttonOK);
             this.Controls.Add(this.checkBoxUseTrustedConnection);
             this.Controls.Add(this.textBoxPassword);
@@ -116,5 +137,7 @@
         private System.Windows.Forms.TextBox textBoxPassword;
         private System.Windows.Forms.CheckBox checkBoxUseTrustedConnection;
         private System.Windows.Forms.Button buttonOK;
+        private System.Windows.Forms.TextBox textBoxDomain;
+        private System.Windows.Forms.Label labelDomain;
     }
 }

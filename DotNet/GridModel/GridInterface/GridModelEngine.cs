@@ -66,7 +66,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis
 
             gridModelRuns = new List<GridModelRun>();
             gridModelResults = new List<GridModelResult>();
-            accessHelper = new AccessHelper(gridModelPath, /*"Data Source=WS09858\\SQLEXPRESS;Initial Catalog=PortlandHarbor;Integrated Security=True"*/"Data Source=SIRTOBY;Initial Catalog=SANDBOX;");
+            accessHelper = new AccessHelper(gridModelPath, "Data Source=SIRTOBY;Initial Catalog=SANDBOX;");
 
         }
 

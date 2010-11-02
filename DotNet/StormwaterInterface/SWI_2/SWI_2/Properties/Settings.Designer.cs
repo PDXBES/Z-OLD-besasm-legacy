@@ -32,5 +32,16 @@ namespace SWI_2.Properties {
                 return ((string)(this["SANDBOXConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=\"C:\\Documents and Settings\\issacg\\De" +
+            "sktop\\discretize\\Condition_Grade_Average.mdb\"")]
+        public string Condition_Grade_AverageConnectionString {
+            get {
+                return ((string)(this["Condition_Grade_AverageConnectionString"]));
+            }
+        }
     }
 }
