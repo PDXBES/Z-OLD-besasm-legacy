@@ -167,6 +167,7 @@ namespace SystemsAnalysis.Utils.AccessUtils
         }
         try
         {
+            //copying to access should be ok here.
             SqlDataAdapter SQLInputDataAdapter = new SqlDataAdapter("SELECT * FROM " + SQLInputTableName, inputDatabase);
             
             SQLInputDataAdapter.Fill(inputTable);
@@ -278,6 +279,97 @@ namespace SystemsAnalysis.Utils.AccessUtils
                 //accConnection.Close();
             //MessageBox.Show("Import failed with error: " + ex.ToString)
         }
+    }
+
+    public static void AccessCopySQLTable(string AccessTableName, string sourceDatabase, string SQLTableName, string outputDatabase)
+    {
+        System.Data.DataTable table = new System.Data.DataTable();
+        //dao.TableDef linkTable;
+        string linkTableConnection = outputDatabase;
+        //linkTable.SourceTableName = tableName;
+        dao._DBEngine dbEng = new dao.DBEngineClass();
+        dao.Workspace ws = dbEng.CreateWorkspace("", "admin", "", dao.WorkspaceTypeEnum.dbUseJet);
+        dao.Database db = ws.OpenDatabase(outputDatabase, true, false, "");
+
+
+        //get rid of the table if it already exists in access
+        try
+        {
+            db.Execute("DROP TABLE " + AccessTableName, Type.Missing);
+        }
+        catch (Exception ex)
+        {
+            //table doesnt exist
+        }
+        //create a linked table to the sql server table
+        //GRID_GridResults
+        dao.TableDef theTable = db.CreateTableDef(AccessTableName, System.Reflection.Missing.Value, SQLTableName, sourceDatabase);
+        theTable.Connect = sourceDatabase;
+        theTable.SourceTableName = SQLTableName;
+        db.TableDefs.Append(theTable);
+        //copy the linked table to a permanent table in access
+
+        //delete the linked table...
+        //dont implement this yet, make sure you are actually getting linked tables from
+        //the previous step.
+
+        db.Close();
+        ws.Close();
+    }
+
+    public static void AccessDropTable(string AccessTableName, string outputDatabase)
+    {
+
+        string linkTableConnection = outputDatabase;
+        //linkTable.SourceTableName = tableName;
+        dao._DBEngine dbEng = new dao.DBEngineClass();
+        dao.Workspace ws = dbEng.CreateWorkspace("", "admin", "", dao.WorkspaceTypeEnum.dbUseJet);
+        dao.Database db = ws.OpenDatabase(outputDatabase, true, false, "");
+
+        //get rid of the table if it already exists in access
+        try
+        {
+            db.Execute("DROP TABLE " + AccessTableName, Type.Missing);
+        }
+        catch (Exception ex)
+        {
+            //table doesnt exist
+        }
+
+        db.Close();
+        ws.Close();
+    }
+
+    public static void AccessCopyTable(string CopiedTableName, string OriginalTableName, string outputDatabase)
+    {
+
+        string linkTableConnection = outputDatabase;
+        //linkTable.SourceTableName = tableName;
+        dao._DBEngine dbEng = new dao.DBEngineClass();
+        dao.Workspace ws = dbEng.CreateWorkspace("", "admin", "", dao.WorkspaceTypeEnum.dbUseJet);
+        dao.Database db = ws.OpenDatabase(outputDatabase, true, false, "");
+
+        //get rid of the table if it already exists in access
+        try
+        {
+            db.Execute("DROP TABLE " + CopiedTableName, Type.Missing);
+        }
+        catch (Exception ex)
+        {
+            //table doesn't exist
+        }
+
+        try
+        {
+            db.Execute("SELECT * INTO " +CopiedTableName + " FROM " + OriginalTableName, Type.Missing);
+        }
+        catch (Exception ex)
+        {
+            //table doesn't exist
+        }
+
+        db.Close();
+        ws.Close();
     }
 
     /// <summary>
@@ -1458,6 +1550,32 @@ namespace SystemsAnalysis.Utils.AccessUtils
               return null;
           }
 
+      }
+
+      public static bool SQLTestDatabase(string databaseName, string tableName)
+      {
+          bool connectionWorks = false;
+
+          System.Data.DataTable inputTable = new System.Data.DataTable();
+          //System.Data.DataTable outputTable = new System.Data.DataTable();
+          SqlConnection outputDatabaseConnection = new SqlConnection(databaseName);
+          outputDatabaseConnection.Open();
+
+          //remove any existing matching output table from the output database
+          string SELECTsql = "SELECT TOP 1 * FROM " + tableName;
+          SqlCommand cmd = new SqlCommand(SELECTsql, outputDatabaseConnection);
+          try
+          {
+              cmd.ExecuteNonQuery();
+              connectionWorks = true;
+          }
+          catch (SqlException ae)
+          {
+              //Could not select from table
+              connectionWorks = false;
+          }
+
+          return connectionWorks;
       }
   }
 }

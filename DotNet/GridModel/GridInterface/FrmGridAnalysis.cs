@@ -38,11 +38,118 @@ namespace SystemsAnalysis.Grid.GridAnalysis
             //table set, and the user should be asked if the tables are listed under a specific
             //domain (in case the program needs to preface the tablenames with a "domainName."
             //qualifier before the actual table names.
-            FormUserIDAndPasswordEntry child = new FormUserIDAndPasswordEntry();
-            child.FormClosing += new FormClosingEventHandler(child_FormClosing);
-            this.Enabled = false;
-            child.ShowDialog();
-            this.Enabled = true;
+            bool serverIsUsable = false;
+            string inputDatabase = "";
+
+            while (!serverIsUsable)
+            {
+                //get the connection information
+                FormServerDatabaseUserIDPasswordDomainEntry child = new FormServerDatabaseUserIDPasswordDomainEntry();
+                child.FormClosing += new FormClosingEventHandler(child_FormClosing2);
+                this.Enabled = false;
+                child.ShowDialog();
+                this.Enabled = true;
+                
+                //test the connection information:
+                inputDatabase = "Data Source=" + server + ";Initial Catalog=" + database;
+                if (trustedConnection == true)
+                {
+                    inputDatabase += ";Trusted_Connection=yes";
+                }
+                else
+                {
+                    inputDatabase += ";Persist Security Info=True;User ID=" + userID + ";Password=" + password;
+                }
+
+                if (domain != "")
+                {
+                    domain = domain + ".";
+                }
+
+                serverIsUsable = AccessHelper.SQLTestDatabase(inputDatabase, domain + "GRID_GridResults");
+                serverIsUsable = serverIsUsable && AccessHelper.SQLTestDatabase(inputDatabase, domain + "GRID_ZONING_IMP");
+                serverIsUsable = serverIsUsable && AccessHelper.SQLTestDatabase(inputDatabase, domain + "GRID_variables");
+                serverIsUsable = serverIsUsable && AccessHelper.SQLTestDatabase(inputDatabase, domain + "GRID_FE_SELECTION_SETS");
+                serverIsUsable = serverIsUsable && AccessHelper.SQLTestDatabase(inputDatabase, domain + "GRID_FE_SELECTION_SET_AREAS");
+                serverIsUsable = serverIsUsable && AccessHelper.SQLTestDatabase(inputDatabase, domain + "GRID_FE_SCENARIOS");
+                serverIsUsable = serverIsUsable && AccessHelper.SQLTestDatabase(inputDatabase, domain + "GRID_FE_SCENARIO_X_PROCESS");
+                serverIsUsable = serverIsUsable && AccessHelper.SQLTestDatabase(inputDatabase, domain + "GRID_FE_PROCESS_GROUP");
+                serverIsUsable = serverIsUsable && AccessHelper.SQLTestDatabase(inputDatabase, domain + "GRID_FE_PROCESS");
+                serverIsUsable = serverIsUsable && AccessHelper.SQLTestDatabase(inputDatabase, domain + "GRID_FE_MODEL_RUN");
+                serverIsUsable = serverIsUsable && AccessHelper.SQLTestDatabase(inputDatabase, domain + "GRID_FE_HYETOGRAPHS");
+                serverIsUsable = serverIsUsable && AccessHelper.SQLTestDatabase(inputDatabase, domain + "GRID_FE_HYETOGRAPH_DATA");
+                serverIsUsable = serverIsUsable && AccessHelper.SQLTestDatabase(inputDatabase, domain + "GRID_FE_GRID_PROJECTS");
+                serverIsUsable = serverIsUsable && AccessHelper.SQLTestDatabase(inputDatabase, domain + "GRID_Contaminants");
+                serverIsUsable = serverIsUsable && AccessHelper.SQLTestDatabase(inputDatabase, domain + "GRID_BMP_TYPE_TABLE_GENERAL");
+                serverIsUsable = serverIsUsable && AccessHelper.SQLTestDatabase(inputDatabase, domain + "GRID_BMP_PERFORMANCE");
+                serverIsUsable = serverIsUsable && AccessHelper.SQLTestDatabase(inputDatabase, domain + "GRID_pollutant_loadings");
+            }
+
+            //now that we know the server is usable, copy the tables from the server to the access file:
+            //string dataDirectory = System.Deployment.Application.ApplicationDeployment.CurrentDeployment.DataDirectory;
+            //string AccessString = dataDirectory + "\\Waterqual_GIS_v5_0.mdb";
+            string AccessString = /*"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=*/"C:\\Development\\DotNet\\GridModel\\GridInterface\\Waterqual_GIS_v5_0.mdb";
+            string inputDatabaseStringForAccess = "ODBC;"/*DRIVER={sql server}*/+";DSN=" + server + ";DATABASE = " + database + ";Integrated Security=SSPI;";
+            AccessHelper.AccessCopySQLTable("GRID_GridResults", inputDatabaseStringForAccess, domain + "GRID_GridResults", AccessString);
+            AccessHelper.AccessCopySQLTable("GRID_ZONING_IMP", inputDatabaseStringForAccess, domain + "GRID_ZONING_IMP", AccessString);
+            AccessHelper.AccessCopySQLTable("GRID_variables", inputDatabaseStringForAccess, domain + "GRID_variables", AccessString);
+            AccessHelper.AccessCopySQLTable("GRID_FE_SELECTION_SETS", inputDatabaseStringForAccess, domain + "GRID_FE_SELECTION_SETS", AccessString);
+            AccessHelper.AccessCopySQLTable("GRID_FE_SELECTION_SET_AREAS", inputDatabaseStringForAccess, domain + "GRID_FE_SELECTION_SET_AREAS", AccessString);
+            AccessHelper.AccessCopySQLTable("GRID_FE_SCENARIOS", inputDatabaseStringForAccess, domain + "GRID_FE_SCENARIOS", AccessString);
+            AccessHelper.AccessCopySQLTable("GRID_FE_SCENARIO_X_PROCESS", inputDatabaseStringForAccess, domain + "GRID_FE_SCENARIO_X_PROCESS", AccessString);
+            AccessHelper.AccessCopySQLTable("GRID_FE_PROCESS_GROUP", inputDatabaseStringForAccess, domain + "GRID_FE_PROCESS_GROUP", AccessString);
+            AccessHelper.AccessCopySQLTable("GRID_FE_PROCESS", inputDatabaseStringForAccess, domain + "GRID_FE_PROCESS", AccessString);
+            AccessHelper.AccessCopySQLTable("GRID_FE_MODEL_RUN", inputDatabaseStringForAccess, domain + "GRID_FE_MODEL_RUN", AccessString);
+            AccessHelper.AccessCopySQLTable("GRID_FE_HYETOGRAPHS", inputDatabaseStringForAccess, domain + "GRID_FE_HYETOGRAPHS", AccessString);
+            AccessHelper.AccessCopySQLTable("GRID_FE_HYETOGRAPH_DATA", inputDatabaseStringForAccess, domain + "GRID_FE_HYETOGRAPH_DATA", AccessString);
+            AccessHelper.AccessCopySQLTable("GRID_FE_GRID_PROJECTS", inputDatabaseStringForAccess, domain + "GRID_FE_GRID_PROJECTS", AccessString);
+            AccessHelper.AccessCopySQLTable("GRID_Contaminants", inputDatabaseStringForAccess, domain + "GRID_Contaminants", AccessString);
+            AccessHelper.AccessCopySQLTable("GRID_BMP_TYPE_TABLE_GENERAL", inputDatabaseStringForAccess, domain + "GRID_BMP_TYPE_TABLE_GENERAL", AccessString);
+            AccessHelper.AccessCopySQLTable("GRID_BMP_PERFORMANCE", inputDatabaseStringForAccess, domain + "GRID_BMP_PERFORMANCE", AccessString);
+            AccessHelper.AccessCopySQLTable("GRID_pollutant_loadings", inputDatabaseStringForAccess, domain + "GRID_pollutant_loadings", AccessString);
+
+            //now that the user has probably entered in a server, database, user id, password, and maybe a domain name,
+            //the program should try to copy the proper sql server database tables into the Access database.
+            //If tables already exist in the database, just write over them.
+            //The real problem is that we are currently working with a database that we no longer have create/drop
+            //permissions on, so the fastest SQL procedures are no longer available to us.
+            AccessHelper.AccessCopyTable("GridResults", "GRID_GridResults", AccessString);
+            AccessHelper.AccessCopyTable("ZONING_IMP",  "GRID_ZONING_IMP", AccessString);
+            AccessHelper.AccessCopyTable("variables",  "GRID_variables", AccessString);
+            AccessHelper.AccessCopyTable("FE_SELECTION_SETS",  "GRID_FE_SELECTION_SETS", AccessString);
+            AccessHelper.AccessCopyTable("FE_SELECTION_SET_AREAS",  "GRID_FE_SELECTION_SET_AREAS", AccessString);
+            AccessHelper.AccessCopyTable("FE_SCENARIOS",  "GRID_FE_SCENARIOS", AccessString);
+            AccessHelper.AccessCopyTable("FE_SCENARIO_X_PROCESS", "GRID_FE_SCENARIO_X_PROCESS", AccessString);
+            AccessHelper.AccessCopyTable("FE_PROCESS_GROUP", "GRID_FE_PROCESS_GROUP", AccessString);
+            AccessHelper.AccessCopyTable("FE_PROCESS",  "GRID_FE_PROCESS", AccessString);
+            AccessHelper.AccessCopyTable("FE_MODEL_RUN",  "GRID_FE_MODEL_RUN", AccessString);
+            AccessHelper.AccessCopyTable("FE_HYETOGRAPHS",  "GRID_FE_HYETOGRAPHS", AccessString);
+            AccessHelper.AccessCopyTable("FE_HYETOGRAPH_DATA", "GRID_FE_HYETOGRAPH_DATA", AccessString);
+            AccessHelper.AccessCopyTable("FE_GRID_PROJECTS", "GRID_FE_GRID_PROJECTS", AccessString);
+            AccessHelper.AccessCopyTable("Contaminants", "GRID_Contaminants", AccessString);
+            AccessHelper.AccessCopyTable("BMP_TYPE_TABLE_GENERAL", "GRID_BMP_TYPE_TABLE_GENERAL", AccessString);
+            AccessHelper.AccessCopyTable("BMP_PERFORMANCE", "GRID_BMP_PERFORMANCE", AccessString);
+            AccessHelper.AccessCopyTable("pollutant_loadings", "GRID_pollutant_loadings", AccessString);
+            //now copy the linked tables straight into access.  We are doing this because there doesn't seem to be a function
+            //that simply copies an SQL table into access.  So this is a sideways way of going about it.
+
+            AccessHelper.AccessDropTable("GRID_GridResults", AccessString);
+            AccessHelper.AccessDropTable("GRID_ZONING_IMP", AccessString);
+            AccessHelper.AccessDropTable("GRID_variables", AccessString);
+            AccessHelper.AccessDropTable("GRID_FE_SELECTION_SETS", AccessString);
+            AccessHelper.AccessDropTable("GRID_FE_SELECTION_SET_AREAS", AccessString);
+            AccessHelper.AccessDropTable("GRID_FE_SCENARIOS", AccessString);
+            AccessHelper.AccessDropTable("GRID_FE_SCENARIO_X_PROCESS", AccessString);
+            AccessHelper.AccessDropTable("GRID_FE_PROCESS_GROUP", AccessString);
+            AccessHelper.AccessDropTable("GRID_FE_PROCESS", AccessString);
+            AccessHelper.AccessDropTable("GRID_FE_MODEL_RUN", AccessString);
+            AccessHelper.AccessDropTable("GRID_FE_HYETOGRAPHS", AccessString);
+            AccessHelper.AccessDropTable("GRID_FE_HYETOGRAPH_DATA", AccessString);
+            AccessHelper.AccessDropTable("GRID_FE_GRID_PROJECTS", AccessString);
+            AccessHelper.AccessDropTable("GRID_Contaminants", AccessString);
+            AccessHelper.AccessDropTable("GRID_BMP_TYPE_TABLE_GENERAL", AccessString);
+            AccessHelper.AccessDropTable("GRID_BMP_PERFORMANCE", AccessString);
+            AccessHelper.AccessDropTable("GRID_pollutant_loadings", AccessString);
 
             try
             {
@@ -171,7 +278,6 @@ namespace SystemsAnalysis.Grid.GridAnalysis
             {
                 MessageBox.Show("Error Commiting Hyetograph Changes: " + ex.Message, "Error Comitting Hyetograph Changes", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
 
         private void btnAddNewScenario_Click(object sender, EventArgs e)
@@ -201,7 +307,6 @@ namespace SystemsAnalysis.Grid.GridAnalysis
             {
                 MessageBox.Show("Error Adding New Scenario: " + ex.Message, "Error Adding New Scenario", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
         private void btnDeleteScenario_Click(object sender, EventArgs e)
         {
@@ -221,7 +326,6 @@ namespace SystemsAnalysis.Grid.GridAnalysis
             {
                 MessageBox.Show("Error Deleting Scenario: " + ex.Message, "Error Deleting Scenario", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
 
         private void btnCommitScenarioChanges_Click(object sender, EventArgs e)
@@ -263,8 +367,6 @@ namespace SystemsAnalysis.Grid.GridAnalysis
             {
                 MessageBox.Show("Error Updating Processes: " + ex.Message, "Error Updating Processes", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-            
         }
 
         private void btnLoadModels_Click(object sender, EventArgs e)
@@ -370,7 +472,6 @@ namespace SystemsAnalysis.Grid.GridAnalysis
             {
                 MessageBox.Show("Error Importing Model Metadata: " + ex.Message, "Error Importing Model Metadata", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
         private void btnExportModelMetadata_Click(object sender, EventArgs e)
         {
@@ -392,7 +493,6 @@ namespace SystemsAnalysis.Grid.GridAnalysis
             {
                 MessageBox.Show("Error Exporting Model Metadata: " + ex.Message, "Error Exporting Model Metadata", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
         private void ExportModelMetadata(string fileName)
         {
@@ -644,7 +744,6 @@ namespace SystemsAnalysis.Grid.GridAnalysis
             gridModelEngine = new GridModelEngine(projectID, projectDescription,
                 txtGridPath.Text, txtPRFPath.Text, txtMIPPath.Text, txtOSFPath.Text, txtOutputDirectory.Text);
             gridModelEngineBindingSource.DataSource = gridModelEngine.GridModelRuns;
-
         }
 
         private void btnDeleteStoredModelRuns_Click(object sender, EventArgs e)
@@ -799,7 +898,6 @@ namespace SystemsAnalysis.Grid.GridAnalysis
             //check to see if the user has add/delete/update rights to the database
             
 
-
             //check to see if there is already a gridModelEngine
             if (gridModelEngine == null)
             {
@@ -940,5 +1038,14 @@ namespace SystemsAnalysis.Grid.GridAnalysis
             trustedConnection = ((FormUserIDAndPasswordEntry)sender).useTrustedConnection;
         }
 
+        void child_FormClosing2(object sender, FormClosingEventArgs e)
+        {
+            userID = ((FormServerDatabaseUserIDPasswordDomainEntry)sender).UserID;
+            password = ((FormServerDatabaseUserIDPasswordDomainEntry)sender).Password;
+            database = ((FormServerDatabaseUserIDPasswordDomainEntry)sender).Database;
+            server = ((FormServerDatabaseUserIDPasswordDomainEntry)sender).Server;
+            domain = ((FormServerDatabaseUserIDPasswordDomainEntry)sender).Domain;
+            trustedConnection = ((FormServerDatabaseUserIDPasswordDomainEntry)sender).useTrustedConnection;
+        }
     }
 }
