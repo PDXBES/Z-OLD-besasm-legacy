@@ -46,5 +46,10 @@ namespace SystemsAnalysis.Grid.GridAnalysis
         {
             this.Close();
         }
+
+        private void buttonOK_Click_1(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

@@ -18174,7 +18174,7 @@ SELECT photo_id, global_id, location, comment FROM GIS.SWSP_PHOTO WHERE (photo_i
             this._commandCollection[2].Connection = this.Connection;
             this._commandCollection[2].CommandText = "INSERT INTO GIS.SWSP_PHOTO\r\n                         (global_id, location, commen" +
                 "t)\r\nVALUES        (@global_id,@location,@comment); \r\nSELECT photo_id, global_id," +
-                " location, comment FROM SWSP_PHOTO WHERE (photo_id = SCOPE_IDENTITY())";
+                " location, comment FROM GIS.SWSP_PHOTO WHERE (photo_id = SCOPE_IDENTITY())";
             this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@global_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "global_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@location", global::System.Data.SqlDbType.VarChar, 255, global::System.Data.ParameterDirection.Input, 0, 0, "location", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -18184,7 +18184,7 @@ SELECT photo_id, global_id, location, comment FROM GIS.SWSP_PHOTO WHERE (photo_i
             this._commandCollection[3].CommandText = @"UPDATE       GIS.SWSP_PHOTO
 SET                global_id = @global_id, location = @location, comment = @comment
 WHERE        (photo_id = @Original_photo_id) AND (global_id = @Original_global_id); 
-SELECT photo_id, global_id, location, comment FROM SWSP_PHOTO WHERE (photo_id = @photo_id)";
+SELECT photo_id, global_id, location, comment FROM GIS.SWSP_PHOTO WHERE (photo_id = @photo_id)";
             this._commandCollection[3].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@global_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "global_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@location", global::System.Data.SqlDbType.VarChar, 255, global::System.Data.ParameterDirection.Input, 0, 0, "location", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
