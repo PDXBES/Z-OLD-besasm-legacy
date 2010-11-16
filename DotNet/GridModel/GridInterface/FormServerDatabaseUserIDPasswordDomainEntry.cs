@@ -18,6 +18,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis
         public string Password = "";
         public string Domain = "";
         public bool useTrustedConnection = false;
+        public bool SQLisSource = false;
 
 
         public FormServerDatabaseUserIDPasswordDomainEntry()
@@ -30,6 +31,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis
             textBoxPassword.Text = Password;
             textBoxDomain.Text = Domain;
             checkBoxUseTrustedConnection.Checked = useTrustedConnection;
+            radioButtonAccessDB.Checked = true;
         }
 
         private void FormServerDatabaseUserIDPasswordDomainEntry_FormClosing(object sender, FormClosingEventArgs e)
@@ -40,6 +42,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis
             Server = textBoxServer.Text;
             Database = textBoxDatabase.Text;
             useTrustedConnection = checkBoxUseTrustedConnection.Checked;
+            SQLisSource = radioButtonSQLServer.Checked;
         }
 
         private void buttonOK_Click(object sender, EventArgs e)
@@ -50,6 +53,27 @@ namespace SystemsAnalysis.Grid.GridAnalysis
         private void buttonOK_Click_1(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void radioButtonSQLServer_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButtonSQLServer.Checked == true)
+            {
+                textBoxServer.Enabled = true;
+                textBoxUserID.Enabled = true;
+                textBoxPassword.Enabled = true;
+                textBoxDomain.Enabled = true;
+                textBoxDatabase.Enabled = true;
+            }
+        }
+
+        private void radioButtonAccessDB_CheckedChanged(object sender, EventArgs e)
+        {
+            textBoxServer.Enabled = false;
+            textBoxUserID.Enabled = false;
+            textBoxPassword.Enabled = false;
+            textBoxDomain.Enabled = false;
+            textBoxDatabase.Enabled = false;
         }
     }
 }
