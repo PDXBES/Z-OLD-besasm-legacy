@@ -15,10 +15,10 @@
     <ManifestCertificateThumbprint>1B074F05BC35DE971F992EC7F199511194791BE3</ManifestCertificateThumbprint>
     <ManifestKeyFile>GridInterface_TemporaryKey.pfx</ManifestKeyFile>
     <GenerateManifests>true</GenerateManifests>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <StartupObject>SystemsAnalysis.Grid.GridAnalysis.Program</StartupObject>
-    <PublishUrl>\\cassio\modeling\Model_Programs\bin\GridModel\</PublishUrl>
+    <PublishUrl>\\CASSIO\ASM_Apps\Apps\GRIDModel\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Unc</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
@@ -28,16 +28,17 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <InstallUrl>\\cassio\modeling\Model_Programs\bin\GridModel\</InstallUrl>
+    <InstallUrl>\\CASSIO\ASM_Apps\Apps\GRIDModel\</InstallUrl>
     <SupportUrl>http://twiki.bes-sa.org/bin/view/Development/GRIDModel</SupportUrl>
     <TargetCulture>en-US</TargetCulture>
     <ProductName>Grid Model</ProductName>
     <PublisherName>BES Systems Analysis</PublisherName>
     <WebPage>publish.htm</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>19</ApplicationRevision>
+    <ApplicationRevision>32</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
