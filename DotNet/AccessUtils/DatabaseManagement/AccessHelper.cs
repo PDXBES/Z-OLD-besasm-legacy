@@ -120,9 +120,9 @@ namespace SystemsAnalysis.Utils.AccessUtils
     {
       LinkTable(tableName, sourceDatabase, tableName);
     }
-    public void SQLCopyAccessTable(string tableName, string sourceDatabase)
+    public void SQLCopyAccessTable(string AccessTableName, string sourceDatabase, string SQLTableName)
     {
-        SQLCopyAccessTable(tableName, sourceDatabase, tableName);
+        SQLCopyAccessTable(AccessTableName, sourceDatabase, SQLTableName, CurrentSQLDB.ConnectionString);
     }
 
     /// <summary>
@@ -215,15 +215,17 @@ namespace SystemsAnalysis.Utils.AccessUtils
         }
     }
 
-    public void SQLCopyAccessTable(string AccessTableName, string sourceDatabase, string SQLTableName)
+    public static void SQLCopyAccessTable(string AccessTableName, string sourceDatabase, string SQLTableName, string SQLDB)
     {
         System.Data.DataTable table = new System.Data.DataTable();
         //dao.TableDef linkTable;
         string linkTableConnection = "Provider=Microsoft.Jet.OleDb.4.0;DATA SOURCE=" + sourceDatabase;
         //linkTable.SourceTableName = tableName;
+        SqlConnection thisSQLDB = new SqlConnection(SQLDB);
+        thisSQLDB.Open();
 
         string DROPsql = "DROP TABLE " + SQLTableName;
-        SqlCommand cmd = new SqlCommand(DROPsql, CurrentSQLDB);
+        SqlCommand cmd = new SqlCommand(DROPsql, thisSQLDB);
         try
         {
             cmd.ExecuteNonQuery();
@@ -236,36 +238,36 @@ namespace SystemsAnalysis.Utils.AccessUtils
         {
             OleDbDataAdapter accDataAdapter = new OleDbDataAdapter("SELECT * FROM " + AccessTableName, linkTableConnection);
             accDataAdapter.Fill(table);
-            SqlTableCreator theCreator = new SqlTableCreator(CurrentSQLDB);
+            SqlTableCreator theCreator = new SqlTableCreator(thisSQLDB);
             table.TableName = SQLTableName;
-            
+
             try
             {
                 theCreator.CreateFromDataTable(table);
                 //Open a connection with destination database;
-                using (SqlConnection connection = 
-                       new SqlConnection(CurrentSQLDB.ConnectionString))
+                using (SqlConnection connection =
+                       new SqlConnection(thisSQLDB.ConnectionString))
                 {
-                   connection.Open();
+                    connection.Open();
 
-                   //Open bulkcopy connection.
-                   using (SqlBulkCopy bulkcopy = new SqlBulkCopy(connection))
-                   {
-                    //Set destination table name
-                    //to table previously created.
-                    bulkcopy.DestinationTableName = table.TableName;
+                    //Open bulkcopy connection.
+                    using (SqlBulkCopy bulkcopy = new SqlBulkCopy(connection))
+                    {
+                        //Set destination table name
+                        //to table previously created.
+                        bulkcopy.DestinationTableName = table.TableName;
 
-                    try
-                    {
-                       bulkcopy.WriteToServer(table);
+                        try
+                        {
+                            bulkcopy.WriteToServer(table);
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex.Message);
+                        }
+
+                        connection.Close();
                     }
-                    catch (Exception ex)
-                    {
-                       Console.WriteLine(ex.Message);
-                    }
-                	
-                    connection.Close();
-                   }
                 }
             }
             catch (SqlException ae)
@@ -276,9 +278,10 @@ namespace SystemsAnalysis.Utils.AccessUtils
         catch (Exception ex)
         {
             //if (accConnection.State == System.Data.ConnectionState.Open)
-                //accConnection.Close();
+            //accConnection.Close();
             //MessageBox.Show("Import failed with error: " + ex.ToString)
         }
+        thisSQLDB.Close();
     }
 
     public static void AccessCopySQLTable(string AccessTableName, string sourceDatabase, string SQLTableName, string outputDatabase)

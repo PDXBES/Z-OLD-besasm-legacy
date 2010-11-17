@@ -59,21 +59,11 @@ namespace SystemsAnalysis.Grid.GridAnalysis
         {
             if (radioButtonSQLServer.Checked == true)
             {
-                textBoxServer.Enabled = true;
-                textBoxUserID.Enabled = true;
-                textBoxPassword.Enabled = true;
-                textBoxDomain.Enabled = true;
-                textBoxDatabase.Enabled = true;
             }
         }
 
         private void radioButtonAccessDB_CheckedChanged(object sender, EventArgs e)
         {
-            textBoxServer.Enabled = false;
-            textBoxUserID.Enabled = false;
-            textBoxPassword.Enabled = false;
-            textBoxDomain.Enabled = false;
-            textBoxDatabase.Enabled = false;
         }
     }
 }

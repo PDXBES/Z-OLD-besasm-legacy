@@ -24,6 +24,14 @@ namespace SystemsAnalysis.Grid.GridAnalysis
         bool trustedConnection = false;
         bool SQLisSource = true;
 
+        string ArchiveUserID = "";
+        string ArchivePassword = "";
+        string ArchiveDomain = "";
+        string ArchiveServer = "";
+        string ArchiveDatabase = "";
+        bool ArchiveTrustedConnection = false;
+
+
         public FrmGridAnalysis()
         {
             System.Threading.Thread th = new System.Threading.Thread(new System.Threading.ThreadStart(DoSplash));
@@ -42,7 +50,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis
             bool serverIsUsable = false;
             string inputDatabase = "";
 
-            while (!serverIsUsable && SQLisSource == true)
+            while (!serverIsUsable)
             {
                 //get the connection information
                 FormServerDatabaseUserIDPasswordDomainEntry child = new FormServerDatabaseUserIDPasswordDomainEntry();
@@ -51,8 +59,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis
                 child.ShowDialog();
                 this.Enabled = true;
 
-                if (SQLisSource == true)
-                {
+                
                     //test the connection information:
                     inputDatabase = "Data Source=" + server + ";Initial Catalog=" + database;
                     if (trustedConnection == true)
@@ -86,14 +93,32 @@ namespace SystemsAnalysis.Grid.GridAnalysis
                     serverIsUsable = serverIsUsable && AccessHelper.SQLTestDatabase(inputDatabase, domain + "GRID_BMP_TYPE_TABLE_GENERAL");
                     serverIsUsable = serverIsUsable && AccessHelper.SQLTestDatabase(inputDatabase, domain + "GRID_BMP_PERFORMANCE");
                     serverIsUsable = serverIsUsable && AccessHelper.SQLTestDatabase(inputDatabase, domain + "GRID_pollutant_loadings");
-                }
+                
             }
 
             //now that we know the server is usable, copy the tables from the server to the access file:
             //string dataDirectory = System.Deployment.Application.ApplicationDeployment.CurrentDeployment.DataDirectory;
             //string AccessString = dataDirectory + "\\Waterqual_GIS_v5_0.mdb";
             string AccessString = /*"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=*/System.Windows.Forms.Application.StartupPath + "..\\Waterqual_GIS_v5_0.mdb";
-            string inputDatabaseStringForAccess = "ODBC;"/*DRIVER={sql server}*/+";DSN=" + server + ";DATABASE = " + database + ";Integrated Security=SSPI;";
+            string inputDatabaseStringForAccess = "ODBC;"/*DRIVER={sql server}*/+";DSN=" + server + ";DATABASE = " + database;
+            if (trustedConnection == true)
+            {
+                inputDatabaseStringForAccess += ";Trusted_Connection=yes";
+            }
+            else
+            {
+                inputDatabaseStringForAccess += ";Persist Security Info=True;User ID=" + userID + ";Password=" + password;
+            }
+            string outputDatabaseStringForAccess = "Data Source="+ server +";Initial Catalog="+database;
+            if (trustedConnection == true)
+            {
+                outputDatabaseStringForAccess += ";Trusted_Connection=yes";
+            }
+            else
+            {
+                outputDatabaseStringForAccess += ";Persist Security Info=True;User ID=" + userID + ";Password=" + password;
+            }
+
 
             if (SQLisSource == true)
             {
@@ -157,6 +182,29 @@ namespace SystemsAnalysis.Grid.GridAnalysis
                 AccessHelper.AccessDropTable("GRID_BMP_TYPE_TABLE_GENERAL", AccessString);
                 AccessHelper.AccessDropTable("GRID_BMP_PERFORMANCE", AccessString);
                 AccessHelper.AccessDropTable("GRID_pollutant_loadings", AccessString);
+            }
+            else
+            {
+                AccessHelper.SQLCopyAccessTable("ZONING_IMP", AccessString, "GRID_ZONING_IMP", outputDatabaseStringForAccess);
+                AccessHelper.SQLCopyAccessTable("variables", AccessString, "GRID_variables", outputDatabaseStringForAccess);
+                AccessHelper.SQLCopyAccessTable("FE_SELECTION_SETS", AccessString, "GRID_FE_SELECTION_SETS", outputDatabaseStringForAccess);
+                AccessHelper.SQLCopyAccessTable("FE_SELECTION_SET_AREAS", AccessString, "GRID_FE_SELECTION_SET_AREAS", outputDatabaseStringForAccess);
+                AccessHelper.SQLCopyAccessTable("FE_SCENARIOS", AccessString, "GRID_FE_SCENARIOS", outputDatabaseStringForAccess);
+                AccessHelper.SQLCopyAccessTable("FE_SCENARIO_X_PROCESS", AccessString, "GRID_FE_SCENARIO_X_PROCESS", outputDatabaseStringForAccess);
+                AccessHelper.SQLCopyAccessTable("FE_PROCESS_GROUP", AccessString, "GRID_FE_PROCESS_GROUP", outputDatabaseStringForAccess);
+                AccessHelper.SQLCopyAccessTable("FE_PROCESS", AccessString, "GRID_FE_PROCESS", outputDatabaseStringForAccess);
+                AccessHelper.SQLCopyAccessTable("FE_MODEL_RUN", AccessString, "GRID_FE_MODEL_RUN", outputDatabaseStringForAccess);
+                AccessHelper.SQLCopyAccessTable("FE_HYETOGRAPHS", AccessString, "GRID_FE_HYETOGRAPHS", outputDatabaseStringForAccess);
+                AccessHelper.SQLCopyAccessTable("FE_HYETOGRAPH_DATA", AccessString, "GRID_FE_HYETOGRAPH_DATA", outputDatabaseStringForAccess);
+                AccessHelper.SQLCopyAccessTable("FE_GRID_PROJECTS", AccessString, "GRID_FE_GRID_PROJECTS", outputDatabaseStringForAccess);
+                AccessHelper.SQLCopyAccessTable("Contaminants", AccessString, "GRID_Contaminants", outputDatabaseStringForAccess);
+                AccessHelper.SQLCopyAccessTable("BMP_TYPE_TABLE_GENERAL", AccessString, "GRID_BMP_TYPE_TABLE_GENERAL", outputDatabaseStringForAccess);
+
+                AccessHelper.SQLCopyAccessTable("WshdGrd100FtOpt", AccessString, "GRID_WshdGrd100FtOpt", outputDatabaseStringForAccess);
+                AccessHelper.SQLCopyAccessTable("BMP_PERFORMANCE",
+                    AccessString, "GRID_BMP_PERFORMANCE", outputDatabaseStringForAccess);
+                AccessHelper.SQLCopyAccessTable("pollutant_loadings",
+                    AccessString, "GRID_pollutant_loadings", outputDatabaseStringForAccess);
             }
             try
             {
@@ -748,8 +796,17 @@ namespace SystemsAnalysis.Grid.GridAnalysis
             int projectID = (int)drv["project_id"];
             string projectDescription = (string)drv["project_description"];
 
+            string inputDatabase = "Data Source=" + server + ";Initial Catalog=" + database;
+            if (trustedConnection == true)
+            {
+                inputDatabase += ";Trusted_Connection=yes";
+            }
+            else
+            {
+                inputDatabase += ";Persist Security Info=True;User ID=" + userID + ";Password=" + password;
+            }
             gridModelEngine = new GridModelEngine(projectID, projectDescription,
-                txtGridPath.Text, txtPRFPath.Text, txtMIPPath.Text, txtOSFPath.Text, txtOutputDirectory.Text);
+                txtGridPath.Text, txtPRFPath.Text, txtMIPPath.Text, txtOSFPath.Text, txtOutputDirectory.Text, inputDatabase);
             gridModelEngineBindingSource.DataSource = gridModelEngine.GridModelRuns;
         }
 
@@ -892,15 +949,23 @@ namespace SystemsAnalysis.Grid.GridAnalysis
             this.Enabled = true;
 
             //check to see if a connection can be made
-            string inputDatabase = "Data Source=SIRTOBY;Initial Catalog=SANDBOX;Integrated Security=SSPI;";//User ID=GIS;Password=Extra$hade";
-            string outputDatabase = "Data Source=" + this.cboServers.Text + ";Initial Catalog=" + this.cboDatabases.Text;
+            string inputDatabase = "Data Source=" + server + ";Initial Catalog="+database;
             if (trustedConnection == true)
+            {
+                inputDatabase += ";Trusted_Connection=yes";
+            }
+            else
+            {
+                inputDatabase += ";Persist Security Info=True;User ID="+userID+";Password="+password;
+            }
+            string outputDatabase = "Data Source=" + this.cboServers.Text + ";Initial Catalog=" + this.cboDatabases.Text;
+            if (ArchiveTrustedConnection == true)
             {
                 outputDatabase += ";Trusted_Connection=yes";
             }
             else
             {
-                outputDatabase += ";Persist Security Info=True;User ID="+userID+";Password="+password;
+                outputDatabase += ";Persist Security Info=True;User ID="+ArchiveUserID+";Password="+ArchivePassword;
             }
             //check to see if the user has add/delete/update rights to the database
             
@@ -916,30 +981,39 @@ namespace SystemsAnalysis.Grid.GridAnalysis
                     DataRowView drv = (DataRowView)cmbSelectedProject.SelectedItem;
                     int projectID = (int)drv["project_id"];
                     string projectDescription = (string)drv["project_description"];
-
+                    inputDatabase = "Data Source=" + server + ";Initial Catalog=" + database;
+                    if (trustedConnection == true)
+                    {
+                        inputDatabase += ";Trusted_Connection=yes";
+                    }
+                    else
+                    {
+                        inputDatabase += ";Persist Security Info=True;User ID=" + userID + ";Password=" + password;
+                    }
                     gridModelEngine = new GridModelEngine(projectID, projectDescription,
-                txtGridPath.Text, txtPRFPath.Text, txtMIPPath.Text, txtOSFPath.Text, txtOutputDirectory.Text);
-                    AccessHelper.SQLCopySQLTable("GIS.GRID_GridResults", inputDatabase, "GRID_GridResults", outputDatabase);
+                txtGridPath.Text, txtPRFPath.Text, txtMIPPath.Text, txtOSFPath.Text, txtOutputDirectory.Text, inputDatabase);
+                    AccessHelper.SQLCopySQLTable("GRID_GridResults", inputDatabase, "GRID_GridResults", outputDatabase);
                 //"Data Source=SIRTOBY;Initial Catalog=SANDBOX;Integrated Security=SSPI;",//;User ID=GIS;Password=Extra$hade",
                 //"GRID_GridResults",
                 //"Data Source=" + this.cboServers.Text + ";Initial Catalog=" + this.cboDatabases.Text + ";Trusted_Connection=yes");
 
-                    AccessHelper.SQLCopySQLTable("GIS.GRID_ZONING_IMP", inputDatabase, "GRID_ZONING_IMP", outputDatabase);
-                    AccessHelper.SQLCopySQLTable("GIS.GRID_variables", inputDatabase, "GRID_variables", outputDatabase);
-                    AccessHelper.SQLCopySQLTable("GIS.GRID_FE_SELECTION_SETS", inputDatabase, "GRID_FE_SELECTION_SETS", outputDatabase);
-                    AccessHelper.SQLCopySQLTable("GIS.GRID_FE_SELECTION_SET_AREAS", inputDatabase, "GRID_FE_SELECTION_SET_AREAS", outputDatabase);
-                    AccessHelper.SQLCopySQLTable("GIS.GRID_FE_SCENARIOS", inputDatabase, "GRID_FE_SCENARIOS", outputDatabase);
-                    AccessHelper.SQLCopySQLTable("GIS.GRID_FE_SCENARIO_X_PROCESS", inputDatabase, "GRID_FE_SCENARIO_X_PROCESS", outputDatabase);
-                    AccessHelper.SQLCopySQLTable("GIS.GRID_FE_PROCESS_GROUP", inputDatabase, "GRID_FE_PROCESS_GROUP", outputDatabase);
-                    AccessHelper.SQLCopySQLTable("GIS.GRID_FE_PROCESS", inputDatabase, "GRID_FE_PROCESS", outputDatabase);
-                    AccessHelper.SQLCopySQLTable("GIS.GRID_FE_MODEL_RUN", inputDatabase, "GRID_FE_MODEL_RUN", outputDatabase);
-                    AccessHelper.SQLCopySQLTable("GIS.GRID_FE_HYETOGRAPHS", inputDatabase, "GRID_FE_HYETOGRAPHS", outputDatabase);
-                    AccessHelper.SQLCopySQLTable("GIS.GRID_FE_HYETOGRAPH_DATA", inputDatabase, "GRID_FE_HYETOGRAPH_DATA", outputDatabase);
-                    AccessHelper.SQLCopySQLTable("GIS.GRID_FE_GRID_PROJECTS", inputDatabase, "GRID_FE_GRID_PROJECTS", outputDatabase);
-                    AccessHelper.SQLCopySQLTable("GIS.GRID_Contaminants", inputDatabase, "GRID_Contaminants", outputDatabase);
-                    AccessHelper.SQLCopySQLTable("GIS.GRID_BMP_TYPE_TABLE_GENERAL", inputDatabase, "GRID_BMP_TYPE_TABLE_GENERAL", outputDatabase);
-                    AccessHelper.SQLCopySQLTable("GIS.GRID_BMP_PERFORMANCE", inputDatabase, "GRID_BMP_PERFORMANCE", outputDatabase);
-                    AccessHelper.SQLCopySQLTable("GIS.GRID_pollutant_loadings", inputDatabase, "GRID_pollutant_loadings", outputDatabase);
+                    AccessHelper.SQLCopySQLTable("GRID_ZONING_IMP", inputDatabase, "GRID_ZONING_IMP", outputDatabase);
+                    AccessHelper.SQLCopySQLTable("GRID_variables", inputDatabase, "GRID_variables", outputDatabase);
+                    AccessHelper.SQLCopySQLTable("GRID_FE_SELECTION_SETS", inputDatabase, "GRID_FE_SELECTION_SETS", outputDatabase);
+                    AccessHelper.SQLCopySQLTable("GRID_FE_SELECTION_SET_AREAS", inputDatabase, "GRID_FE_SELECTION_SET_AREAS", outputDatabase);
+                    AccessHelper.SQLCopySQLTable("GRID_FE_SCENARIOS", inputDatabase, "GRID_FE_SCENARIOS", outputDatabase);
+                    AccessHelper.SQLCopySQLTable("GRID_FE_SCENARIO_X_PROCESS", inputDatabase, "GRID_FE_SCENARIO_X_PROCESS", outputDatabase);
+                    AccessHelper.SQLCopySQLTable("GRID_FE_PROCESS_GROUP", inputDatabase, "GRID_FE_PROCESS_GROUP", outputDatabase);
+                    AccessHelper.SQLCopySQLTable("GRID_FE_PROCESS", inputDatabase, "GRID_FE_PROCESS", outputDatabase);
+                    AccessHelper.SQLCopySQLTable("GRID_FE_MODEL_RUN", inputDatabase, "GRID_FE_MODEL_RUN", outputDatabase);
+                    AccessHelper.SQLCopySQLTable("GRID_FE_HYETOGRAPHS", inputDatabase, "GRID_FE_HYETOGRAPHS", outputDatabase);
+                    AccessHelper.SQLCopySQLTable("GRID_FE_HYETOGRAPH_DATA", inputDatabase, "GRID_FE_HYETOGRAPH_DATA", outputDatabase);
+                    AccessHelper.SQLCopySQLTable("GRID_FE_GRID_PROJECTS", inputDatabase, "GRID_FE_GRID_PROJECTS", outputDatabase);
+                    AccessHelper.SQLCopySQLTable("GRID_Contaminants", inputDatabase, "GRID_Contaminants", outputDatabase);
+                    AccessHelper.SQLCopySQLTable("GRID_BMP_TYPE_TABLE_GENERAL", inputDatabase, "GRID_BMP_TYPE_TABLE_GENERAL", outputDatabase);
+                    AccessHelper.SQLCopySQLTable("GRID_BMP_PERFORMANCE", inputDatabase, "GRID_BMP_PERFORMANCE", outputDatabase);
+                    AccessHelper.SQLCopySQLTable("GRID_pollutant_loadings", inputDatabase, "GRID_pollutant_loadings", outputDatabase);
+                    AccessHelper.SQLCopySQLTable("GRID_WshdGrd100FtOpt", inputDatabase, "GRID_WshdGrd100FtOpt", outputDatabase);
                 }
                 catch (Exception ex)
                 {
@@ -963,30 +1037,39 @@ namespace SystemsAnalysis.Grid.GridAnalysis
                             DataRowView drv = (DataRowView)cmbSelectedProject.SelectedItem;
                             int projectID = (int)drv["project_id"];
                             string projectDescription = (string)drv["project_description"];
-
+                            inputDatabase = "Data Source=" + server + ";Initial Catalog=" + database;
+                            if (trustedConnection == true)
+                            {
+                                inputDatabase += ";Trusted_Connection=yes";
+                            }
+                            else
+                            {
+                                inputDatabase += ";Persist Security Info=True;User ID=" + userID + ";Password=" + password;
+                            }
                             gridModelEngine = new GridModelEngine(projectID, projectDescription,
-                txtGridPath.Text, txtPRFPath.Text, txtMIPPath.Text, txtOSFPath.Text, txtOutputDirectory.Text);
-                            AccessHelper.SQLCopySQLTable("GIS.GRID_GridResults", inputDatabase, "GRID_GridResults", outputDatabase);
+                txtGridPath.Text, txtPRFPath.Text, txtMIPPath.Text, txtOSFPath.Text, txtOutputDirectory.Text, inputDatabase);
+                            AccessHelper.SQLCopySQLTable("GRID_GridResults", inputDatabase, "GRID_GridResults", outputDatabase);
                 //"Data Source=SIRTOBY;Initial Catalog=SANDBOX;Persist Security Info=True;User ID=GIS;Password=Extra$hade",
                 //"GRID_GridResults",
                 //"Data Source=" + this.cboServers.Text + ";Initial Catalog=" + this.cboDatabases.Text + ";Trusted_Connection=yes");
 
-                            AccessHelper.SQLCopySQLTable("GIS.GRID_ZONING_IMP", inputDatabase, "GRID_ZONING_IMP", outputDatabase);
-                            AccessHelper.SQLCopySQLTable("GIS.GRID_variables", inputDatabase, "GRID_variables", outputDatabase);
-                            AccessHelper.SQLCopySQLTable("GIS.GRID_FE_SELECTION_SETS", inputDatabase, "GRID_FE_SELECTION_SETS", outputDatabase);
-                            AccessHelper.SQLCopySQLTable("GIS.GRID_FE_SELECTION_SET_AREAS", inputDatabase, "GRID_FE_SELECTION_SET_AREAS", outputDatabase);
-                            AccessHelper.SQLCopySQLTable("GIS.GRID_FE_SCENARIOS", inputDatabase, "GRID_FE_SCENARIOS", outputDatabase);
-                            AccessHelper.SQLCopySQLTable("GIS.GRID_FE_SCENARIO_X_PROCESS", inputDatabase, "GRID_FE_SCENARIO_X_PROCESS", outputDatabase);
-                            AccessHelper.SQLCopySQLTable("GIS.GRID_FE_PROCESS_GROUP", inputDatabase, "GRID_FE_PROCESS_GROUP", outputDatabase);
-                            AccessHelper.SQLCopySQLTable("GIS.GRID_FE_PROCESS", inputDatabase, "GRID_FE_PROCESS", outputDatabase);
-                            AccessHelper.SQLCopySQLTable("GIS.GRID_FE_MODEL_RUN", inputDatabase, "GRID_FE_MODEL_RUN", outputDatabase);
-                            AccessHelper.SQLCopySQLTable("GIS.GRID_FE_HYETOGRAPHS", inputDatabase, "GRID_FE_HYETOGRAPHS", outputDatabase);
-                            AccessHelper.SQLCopySQLTable("GIS.GRID_FE_HYETOGRAPH_DATA", inputDatabase, "GRID_FE_HYETOGRAPH_DATA", outputDatabase);
-                            AccessHelper.SQLCopySQLTable("GIS.GRID_FE_GRID_PROJECTS", inputDatabase, "GRID_FE_GRID_PROJECTS", outputDatabase);
-                            AccessHelper.SQLCopySQLTable("GIS.GRID_Contaminants", inputDatabase, "GRID_Contaminants", outputDatabase);
-                            AccessHelper.SQLCopySQLTable("GIS.GRID_BMP_TYPE_TABLE_GENERAL", inputDatabase, "GRID_BMP_TYPE_TABLE_GENERAL", outputDatabase);
-                            AccessHelper.SQLCopySQLTable("GIS.GRID_BMP_PERFORMANCE", inputDatabase, "GRID_BMP_PERFORMANCE", outputDatabase);
-                            AccessHelper.SQLCopySQLTable("GIS.GRID_pollutant_loadings", inputDatabase, "GRID_pollutant_loadings", outputDatabase);
+                            AccessHelper.SQLCopySQLTable("GRID_ZONING_IMP", inputDatabase, "GRID_ZONING_IMP", outputDatabase);
+                            AccessHelper.SQLCopySQLTable("GRID_variables", inputDatabase, "GRID_variables", outputDatabase);
+                            AccessHelper.SQLCopySQLTable("GRID_FE_SELECTION_SETS", inputDatabase, "GRID_FE_SELECTION_SETS", outputDatabase);
+                            AccessHelper.SQLCopySQLTable("GRID_FE_SELECTION_SET_AREAS", inputDatabase, "GRID_FE_SELECTION_SET_AREAS", outputDatabase);
+                            AccessHelper.SQLCopySQLTable("GRID_FE_SCENARIOS", inputDatabase, "GRID_FE_SCENARIOS", outputDatabase);
+                            AccessHelper.SQLCopySQLTable("GRID_FE_SCENARIO_X_PROCESS", inputDatabase, "GRID_FE_SCENARIO_X_PROCESS", outputDatabase);
+                            AccessHelper.SQLCopySQLTable("GRID_FE_PROCESS_GROUP", inputDatabase, "GRID_FE_PROCESS_GROUP", outputDatabase);
+                            AccessHelper.SQLCopySQLTable("GRID_FE_PROCESS", inputDatabase, "GRID_FE_PROCESS", outputDatabase);
+                            AccessHelper.SQLCopySQLTable("GRID_FE_MODEL_RUN", inputDatabase, "GRID_FE_MODEL_RUN", outputDatabase);
+                            AccessHelper.SQLCopySQLTable("GRID_FE_HYETOGRAPHS", inputDatabase, "GRID_FE_HYETOGRAPHS", outputDatabase);
+                            AccessHelper.SQLCopySQLTable("GRID_FE_HYETOGRAPH_DATA", inputDatabase, "GRID_FE_HYETOGRAPH_DATA", outputDatabase);
+                            AccessHelper.SQLCopySQLTable("GRID_FE_GRID_PROJECTS", inputDatabase, "GRID_FE_GRID_PROJECTS", outputDatabase);
+                            AccessHelper.SQLCopySQLTable("GRID_Contaminants", inputDatabase, "GRID_Contaminants", outputDatabase);
+                            AccessHelper.SQLCopySQLTable("GRID_BMP_TYPE_TABLE_GENERAL", inputDatabase, "GRID_BMP_TYPE_TABLE_GENERAL", outputDatabase);
+                            AccessHelper.SQLCopySQLTable("GRID_BMP_PERFORMANCE", inputDatabase, "GRID_BMP_PERFORMANCE", outputDatabase);
+                            AccessHelper.SQLCopySQLTable("GRID_pollutant_loadings", inputDatabase, "GRID_pollutant_loadings", outputDatabase);
+                            AccessHelper.SQLCopySQLTable("GRID_WshdGrd100FtOpt", inputDatabase, "GRID_WshdGrd100FtOpt", outputDatabase);
                         }
                         catch (Exception ex)
                         {
@@ -1001,34 +1084,30 @@ namespace SystemsAnalysis.Grid.GridAnalysis
                     //archiveEverything()
                     try
                     {
-                        AccessHelper.SQLCopySQLTable("GIS.GRID_GridResults", inputDatabase, "GRID_GridResults", outputDatabase);
+                        AccessHelper.SQLCopySQLTable("GRID_GridResults", inputDatabase, "GRID_GridResults", outputDatabase);
                 //"Data Source=SIRTOBY;Initial Catalog=SANDBOX;Persist Security Info=True;User ID=GIS;Password=Extra$hade",
                 //"GRID_GridResults",
                 //"Data Source=" + this.cboServers.Text + ";Initial Catalog=" + this.cboDatabases.Text + ";Trusted_Connection=yes");
 
-                        AccessHelper.SQLCopySQLTable("GIS.GRID_ZONING_IMP", inputDatabase, "GRID_ZONING_IMP", outputDatabase);
-                        AccessHelper.SQLCopySQLTable("GIS.GRID_variables", inputDatabase, "GRID_variables", outputDatabase);
-                        AccessHelper.SQLCopySQLTable("GIS.GRID_FE_SELECTION_SETS", inputDatabase, "GRID_FE_SELECTION_SETS", outputDatabase);
-                        AccessHelper.SQLCopySQLTable("GIS.GRID_FE_SELECTION_SET_AREAS", inputDatabase, "GRID_FE_SELECTION_SET_AREAS", outputDatabase);
-                        AccessHelper.SQLCopySQLTable("GIS.GRID_FE_SCENARIOS", inputDatabase, "GRID_FE_SCENARIOS", outputDatabase);
-                        AccessHelper.SQLCopySQLTable("GIS.GRID_FE_SCENARIO_X_PROCESS", inputDatabase, "GRID_FE_SCENARIO_X_PROCESS", outputDatabase);
-                        AccessHelper.SQLCopySQLTable("GIS.GRID_FE_PROCESS_GROUP", inputDatabase, "GRID_FE_PROCESS_GROUP", outputDatabase);
-                        AccessHelper.SQLCopySQLTable("GIS.GRID_FE_PROCESS", inputDatabase, "GRID_FE_PROCESS", outputDatabase);
-                        AccessHelper.SQLCopySQLTable("GIS.GRID_FE_MODEL_RUN", inputDatabase, "GRID_FE_MODEL_RUN", outputDatabase);
-                        AccessHelper.SQLCopySQLTable("GIS.GRID_FE_HYETOGRAPHS", inputDatabase, "GRID_FE_HYETOGRAPHS", outputDatabase);
-                        AccessHelper.SQLCopySQLTable("GIS.GRID_FE_HYETOGRAPH_DATA", inputDatabase, "GRID_FE_HYETOGRAPH_DATA", outputDatabase);
-                        AccessHelper.SQLCopySQLTable("GIS.GRID_FE_GRID_PROJECTS", inputDatabase, "GRID_FE_GRID_PROJECTS", outputDatabase);
-                        AccessHelper.SQLCopySQLTable("GIS.GRID_Contaminants", inputDatabase, "GRID_Contaminants", outputDatabase);
-                        AccessHelper.SQLCopySQLTable("GIS.GRID_BMP_TYPE_TABLE_GENERAL", inputDatabase, "GRID_BMP_TYPE_TABLE_GENERAL", outputDatabase);
-                        if (gridModelEngine != null)
-                        {
-                            if (gridModelEngine.GridDataTable != null)
-                            {
-                                AccessHelper.SQLCopySQLTable("GIS.GRID_" + gridModelEngine.GridDataTable, inputDatabase, "GRID_" + gridModelEngine.GridDataTable, outputDatabase);
-                            }
-                        }
-                        AccessHelper.SQLCopySQLTable("GIS.GRID_BMP_PERFORMANCE", inputDatabase, "GRID_BMP_PERFORMANCE", outputDatabase);
-                        AccessHelper.SQLCopySQLTable("GIS.GRID_pollutant_loadings", inputDatabase, "GRID_pollutant_loadings", outputDatabase);
+                        AccessHelper.SQLCopySQLTable("GRID_ZONING_IMP", inputDatabase, "GRID_ZONING_IMP", outputDatabase);
+                        AccessHelper.SQLCopySQLTable("GRID_variables", inputDatabase, "GRID_variables", outputDatabase);
+                        AccessHelper.SQLCopySQLTable("GRID_FE_SELECTION_SETS", inputDatabase, "GRID_FE_SELECTION_SETS", outputDatabase);
+                        AccessHelper.SQLCopySQLTable("GRID_FE_SELECTION_SET_AREAS", inputDatabase, "GRID_FE_SELECTION_SET_AREAS", outputDatabase);
+                        AccessHelper.SQLCopySQLTable("GRID_FE_SCENARIOS", inputDatabase, "GRID_FE_SCENARIOS", outputDatabase);
+                        AccessHelper.SQLCopySQLTable("GRID_FE_SCENARIO_X_PROCESS", inputDatabase, "GRID_FE_SCENARIO_X_PROCESS", outputDatabase);
+                        AccessHelper.SQLCopySQLTable("GRID_FE_PROCESS_GROUP", inputDatabase, "GRID_FE_PROCESS_GROUP", outputDatabase);
+                        AccessHelper.SQLCopySQLTable("GRID_FE_PROCESS", inputDatabase, "GRID_FE_PROCESS", outputDatabase);
+                        AccessHelper.SQLCopySQLTable("GRID_FE_MODEL_RUN", inputDatabase, "GRID_FE_MODEL_RUN", outputDatabase);
+                        AccessHelper.SQLCopySQLTable("GRID_FE_HYETOGRAPHS", inputDatabase, "GRID_FE_HYETOGRAPHS", outputDatabase);
+                        AccessHelper.SQLCopySQLTable("GRID_FE_HYETOGRAPH_DATA", inputDatabase, "GRID_FE_HYETOGRAPH_DATA", outputDatabase);
+                        AccessHelper.SQLCopySQLTable("GRID_FE_GRID_PROJECTS", inputDatabase, "GRID_FE_GRID_PROJECTS", outputDatabase);
+                        AccessHelper.SQLCopySQLTable("GRID_Contaminants", inputDatabase, "GRID_Contaminants", outputDatabase);
+                        AccessHelper.SQLCopySQLTable("GRID_BMP_TYPE_TABLE_GENERAL", inputDatabase, "GRID_BMP_TYPE_TABLE_GENERAL", outputDatabase);
+                        AccessHelper.SQLCopySQLTable("GRID_BMP_PERFORMANCE", inputDatabase, "GRID_BMP_PERFORMANCE", outputDatabase);
+                        AccessHelper.SQLCopySQLTable("GRID_pollutant_loadings", inputDatabase, "GRID_pollutant_loadings", outputDatabase);
+                        AccessHelper.SQLCopySQLTable("GRID_WshdGrd100FtOpt", inputDatabase, "GRID_WshdGrd100FtOpt", outputDatabase);
+                        AccessHelper.SQLCopySQLTable("GRID_GridCompiledResults", inputDatabase, "GRID_GridCompiledResults", outputDatabase);
+
                     }
                     catch (Exception ex)
                     {
@@ -1040,9 +1119,9 @@ namespace SystemsAnalysis.Grid.GridAnalysis
 
         void child_FormClosing(object sender, FormClosingEventArgs e)
         {
-            userID = ((FormUserIDAndPasswordEntry)sender).UserID;
-            password = ((FormUserIDAndPasswordEntry)sender).Password;
-            trustedConnection = ((FormUserIDAndPasswordEntry)sender).useTrustedConnection;
+            ArchiveUserID = ((FormUserIDAndPasswordEntry)sender).UserID;
+            ArchivePassword = ((FormUserIDAndPasswordEntry)sender).Password;
+            ArchiveTrustedConnection = ((FormUserIDAndPasswordEntry)sender).useTrustedConnection;
         }
 
         void child_FormClosing2(object sender, FormClosingEventArgs e)
