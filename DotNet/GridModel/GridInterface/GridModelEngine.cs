@@ -19,12 +19,13 @@ namespace SystemsAnalysis.Grid.GridAnalysis
         private List<GridModelRun> gridModelRuns;
         private List<GridModelResult> gridModelResults;
         public string GridDataTable = null;
+        private string SQLDatabaseConnectionString;
 
         private AccessHelper accessHelper;
 
         public GridModelEngine(int projectID, string projectDescription, string gridDataPath,
-            string bmpPath, string mipPath, string osfPath, string outputDirectory)
-            : this()
+            string bmpPath, string mipPath, string osfPath, string outputDirectory, string SQLDatabaseConnectionString)
+            : this(SQLDatabaseConnectionString)
         {
             this.projectID = projectID;
             this.projectDescription = projectDescription;
@@ -33,7 +34,8 @@ namespace SystemsAnalysis.Grid.GridAnalysis
             this.mipPath = mipPath;
             this.osfPath = osfPath;
             this.outputDirectory = outputDirectory;
-            accessHelper = new AccessHelper(gridModelPath, /*"Data Source=WS09858\\SQLEXPRESS;Initial Catalog=PortlandHarbor;Integrated Security=True"*/"Data Source=SIRTOBY;Initial Catalog=SANDBOX;Persist Security Info=True;User ID=GIS;Password=Extra$hade");
+            this.SQLDatabaseConnectionString = SQLDatabaseConnectionString;
+            accessHelper = new AccessHelper(gridModelPath, /*"Data Source=WS09858\\SQLEXPRESS;Initial Catalog=PortlandHarbor;Integrated Security=True"*/SQLDatabaseConnectionString);
 
             /*accessHelper.SQLCopyAccessTable("ZONING_IMP", gridModelPath, "GRID_ZONING_IMP");
             accessHelper.SQLCopyAccessTable("variables", gridModelPath, "GRID_variables");
@@ -58,7 +60,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis
             accessHelper.SQLCopyAccessTable(gridModelRuns[0].PollutantLoadingTable,
                 gridModelRuns[0].PollutantLoadingDB, "GRID_pollutant_loadings");*/
         }
-        public GridModelEngine()
+        public GridModelEngine(string SQLDatabaseConnectionString)
         {            
             this.gridModelPath = System.AppDomain.CurrentDomain.BaseDirectory + "Waterqual_GIS_v5_0.mdb";
             
@@ -66,8 +68,18 @@ namespace SystemsAnalysis.Grid.GridAnalysis
 
             gridModelRuns = new List<GridModelRun>();
             gridModelResults = new List<GridModelResult>();
-            accessHelper = new AccessHelper(gridModelPath, "Data Source=SIRTOBY;Initial Catalog=SANDBOX;");
+            accessHelper = new AccessHelper(gridModelPath, SQLDatabaseConnectionString/*"Data Source=SIRTOBY;Initial Catalog=SANDBOX;"*/);
 
+        }
+        public GridModelEngine()
+        {
+            this.gridModelPath = System.AppDomain.CurrentDomain.BaseDirectory + "Waterqual_GIS_v5_0.mdb";
+
+            gridDataTableName = ConfigurationManager.AppSettings.Get("gridDataTableName");
+
+            gridModelRuns = new List<GridModelRun>();
+            gridModelResults = new List<GridModelResult>();
+            accessHelper = new AccessHelper();
         }
 
         #region Accessors for Xml serialization
