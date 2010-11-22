@@ -4,14 +4,14 @@
 include "MapBasic.def"
 include "Menu.def"
 include "Icons.def"
-include "C:\Development\MapBasic\Common\trunk\Inc\EMGCoordSys.def"
-'include "C:\Development\MapBasic\Common\trunk\Inc\EMGOpenUtils.def"
-include "C:\Development\MapBasic\Common\trunk\Inc\EMGLogger.def"
-include "C:\Development\MapBasic\Common\trunk\Inc\EMGMTabUtil.def"
-include "C:\Development\MapBasic\Common\trunk\Inc\INIUtils.def"
+include "C:\Development\MapBasic\DSCClooter\Lib\Common\Inc\EMGCoordSys.def"
+'include "C:\Development\MapBasic\DSCClooter\Lib\Common\Source\EMGOpenUtils.def"
+include "C:\Development\MapBasic\DSCClooter\Lib\Common\Inc\EMGLogger.def"
+include "C:\Development\MapBasic\DSCClooter\Lib\Common\Inc\EMGMTabUtil.def"
+include "C:\Development\MapBasic\DSCClooter\Lib\Common\Inc\INIUtils.def"
 
-include "C:\Development\MapBasic\Common\trunk\Inc\EMGGlobal.def"
-include "C:\Development\MapBasic\Common\trunk\Inc\EMGModMake.def"
+include "C:\Development\MapBasic\DSCClooter\Lib\Common\Inc\EMGGlobal.def"
+include "C:\Development\MapBasic\DSCClooter\Lib\Common\Inc\EMGModMake.def"
 
 global gIconFile as String
 global gTempDir as String

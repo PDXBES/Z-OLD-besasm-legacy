@@ -5,7 +5,7 @@ include "MapBasic.def"
 include "Menu.def"
 include "Icons.def"
 
-include "C:\Development\MapBasic\Common\trunk\Inc\EMGCoordSys.def"
+include "C:\Development\MapBasic\Common\Inc\EMGCoordSys.def"
 
 declare sub MkStubPt
 declare sub MkZinger
@@ -217,18 +217,24 @@ mdlPipCount=0
 
 		IF sFlowTO = "toSAN" THEN
 			'CHECKING FOR NEAREST MDL SEGMENT TO STUB
-			Select * from mst_links where obj intersects stubPt and LinkType in("C","S","IS","IC","TR") into qyMdlPipeTo
-				mdlPipCount=tableinfo(qyMdlPipeTo,8)
+			IF bufferIteration = 4 THEN
+				Select * from mst_links where obj intersects stubPt into qyMdlPipeTo
+					mdlPipCount=tableinfo(qyMdlPipeTo,8)
+			ELSE
+				Select * from mst_links where obj intersects stubPt and LinkType in("C","S","IS","IC","TR") into qyMdlPipeTo
+					mdlPipCount=tableinfo(qyMdlPipeTo,8)
+			END IF
 				
 		END IF
 
 		IF sFlowTO = "toSTORM" THEN
-			'CHECKING FOR NEAREST MDL SEGMENT TO STUB
-			'Should this also consider the ditches we are placing into mstLinks?
-			'Obviously if we are redirecting stormwater to the drainage system, can't
-			'we also direct stormwater to ditches?
-			Select * from mst_links where obj intersects stubPt and LinkType in("D","C", "CO") into qyMdlPipeTo
-				mdlPipCount=tableinfo(qyMdlPipeTo,8)
+			IF bufferIteration = 4 THEN
+				Select * from mst_links where obj intersects stubPt into qyMdlPipeTo
+					mdlPipCount=tableinfo(qyMdlPipeTo,8)
+			ELSE
+				Select * from mst_links where obj intersects stubPt and LinkType in("D","C", "CO") into qyMdlPipeTo
+					mdlPipCount=tableinfo(qyMdlPipeTo,8)
+			END IF
 				
 		END IF
 		
