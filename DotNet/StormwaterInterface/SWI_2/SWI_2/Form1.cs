@@ -1303,5 +1303,17 @@ namespace SWI_2
         {
 
         }
+
+        private void updateMstlinksacToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //This function will just read all of the approved values into master links
+            //So, we will be taking the values from SWSP_PIPES_OK, SWSP_DITCHES_OK,
+            //and SWSP_CULVERTS_OK.
+            //These values will then be populated into mst_links_ac using the 
+            //accessHelper class.  See the Gridmodel for demonstations on how this
+            //is done
+
+
+        }
     }
 }
