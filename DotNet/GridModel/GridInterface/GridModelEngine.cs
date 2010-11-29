@@ -291,6 +291,10 @@ namespace SystemsAnalysis.Grid.GridAnalysis
                     {
                         accessHelper.SQLExecuteActionQuery(gridProcessGroup.GroupName, "@SelectionSetID", gridModelRun.SelectionSetAreaID);
                     }
+                    else if (gridProcessGroup.GroupName == "GRID_COMMON_RAINMESH")
+                    {
+                        accessHelper.SQLExecuteActionQuery(gridProcessGroup.GroupName, "@SelectionSetID", gridModelRun.SelectionSetAreaID);
+                    }
                     else
                     {
                         accessHelper.SQLExecuteActionQuery(gridProcessGroup.GroupName);
@@ -313,7 +317,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis
             string runDescription;
             if (totalRunCount == 1)
             {
-                runDescription = "";
+                runDescription = "01";
             }
             else
             {

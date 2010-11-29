@@ -673,9 +673,8 @@
             this.sWSP_GLOBAL_IDBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.sWSP_GLOBAL_IDTableAdapter = new SWI_2.SANDBOXDataSetTableAdapters.SWSP_GLOBAL_IDTableAdapter();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.sANDBOXDataSet1 = new SWI_2.SANDBOXDataSet1();
             this.sWSPGLOBALIDBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.sWSP_GLOBAL_IDTableAdapter1 = new SWI_2.SANDBOXDataSet1TableAdapters.SWSP_GLOBAL_IDTableAdapter();
+            this.updateMstlinksacToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.fKSURVEYPAGEVIEWBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fKVIEWSUBWATERSHEDBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fKSUBWATERSHEDWATERSHEDBindingSource)).BeginInit();
@@ -730,7 +729,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.sWSPDITCHBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sWSPCULVERTBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sWSP_GLOBAL_IDBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sANDBOXDataSet1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sWSPGLOBALIDBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -3237,7 +3235,7 @@
             // exportReportToolStripMenuItem
             // 
             this.exportReportToolStripMenuItem.Name = "exportReportToolStripMenuItem";
-            this.exportReportToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.exportReportToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exportReportToolStripMenuItem.Text = "Export Report";
             this.exportReportToolStripMenuItem.Click += new System.EventHandler(this.exportReportToolStripMenuItem_Click);
             // 
@@ -3245,7 +3243,8 @@
             // 
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.dataAdministratorToolStripMenuItem,
-            this.surveyViewToolStripMenuItem});
+            this.surveyViewToolStripMenuItem,
+            this.updateMstlinksacToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             this.toolsToolStripMenuItem.Size = new System.Drawing.Size(45, 20);
             this.toolsToolStripMenuItem.Text = "Tools";
@@ -3253,14 +3252,14 @@
             // dataAdministratorToolStripMenuItem
             // 
             this.dataAdministratorToolStripMenuItem.Name = "dataAdministratorToolStripMenuItem";
-            this.dataAdministratorToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.dataAdministratorToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
             this.dataAdministratorToolStripMenuItem.Text = "Data Administrator";
             this.dataAdministratorToolStripMenuItem.Click += new System.EventHandler(this.dataAdministratorToolStripMenuItem_Click);
             // 
             // surveyViewToolStripMenuItem
             // 
             this.surveyViewToolStripMenuItem.Name = "surveyViewToolStripMenuItem";
-            this.surveyViewToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.surveyViewToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
             this.surveyViewToolStripMenuItem.Text = "Survey View";
             this.surveyViewToolStripMenuItem.Click += new System.EventHandler(this.surveyViewToolStripMenuItem_Click);
             // 
@@ -3617,19 +3616,12 @@
             this.panel1.Size = new System.Drawing.Size(1047, 471);
             this.panel1.TabIndex = 104;
             // 
-            // sANDBOXDataSet1
+            // updateMstlinksacToolStripMenuItem
             // 
-            this.sANDBOXDataSet1.DataSetName = "SANDBOXDataSet1";
-            this.sANDBOXDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // sWSPGLOBALIDBindingSource
-            // 
-            this.sWSPGLOBALIDBindingSource.DataMember = "SWSP_GLOBAL_ID";
-            this.sWSPGLOBALIDBindingSource.DataSource = this.sANDBOXDataSet1;
-            // 
-            // sWSP_GLOBAL_IDTableAdapter1
-            // 
-            this.sWSP_GLOBAL_IDTableAdapter1.ClearBeforeFill = true;
+            this.updateMstlinksacToolStripMenuItem.Name = "updateMstlinksacToolStripMenuItem";
+            this.updateMstlinksacToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.updateMstlinksacToolStripMenuItem.Text = "Update mst_links_ac";
+            this.updateMstlinksacToolStripMenuItem.Click += new System.EventHandler(this.updateMstlinksacToolStripMenuItem_Click);
             // 
             // FormMain
             // 
@@ -3723,7 +3715,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.sWSPDITCHBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sWSPCULVERTBindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sWSP_GLOBAL_IDBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sANDBOXDataSet1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sWSPGLOBALIDBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -3883,9 +3874,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn nodeDataGridViewTextBoxColumn;
         private System.Windows.Forms.ToolStripMenuItem surveyViewToolStripMenuItem;
         private System.Windows.Forms.Panel panel1;
-        private SANDBOXDataSet1 sANDBOXDataSet1;
         private System.Windows.Forms.BindingSource sWSPGLOBALIDBindingSource;
-        private SWI_2.SANDBOXDataSet1TableAdapters.SWSP_GLOBAL_IDTableAdapter sWSP_GLOBAL_IDTableAdapter1;
+        private System.Windows.Forms.ToolStripMenuItem updateMstlinksacToolStripMenuItem;
     }
 }
 

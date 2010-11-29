@@ -159,6 +159,7 @@ namespace SystemsAnalysis.Utils.AccessUtils
         SqlCommand cmd = new SqlCommand(DROPsql, outputDatabaseConnection);
         try
         {
+            cmd.CommandTimeout = 0;
             cmd.ExecuteNonQuery();
         }
         catch (SqlException ae)
@@ -191,6 +192,7 @@ namespace SystemsAnalysis.Utils.AccessUtils
 
                         try
                         {
+                            bulkcopy.BulkCopyTimeout = 0;
                             bulkcopy.WriteToServer(inputTable);
                         }
                         catch (Exception ex)
@@ -228,6 +230,7 @@ namespace SystemsAnalysis.Utils.AccessUtils
         SqlCommand cmd = new SqlCommand(DROPsql, thisSQLDB);
         try
         {
+            cmd.CommandTimeout = 0;
             cmd.ExecuteNonQuery();
         }
         catch (SqlException ae)
@@ -259,6 +262,7 @@ namespace SystemsAnalysis.Utils.AccessUtils
 
                         try
                         {
+                            bulkcopy.BulkCopyTimeout = 0;
                             bulkcopy.WriteToServer(table);
                         }
                         catch (Exception ex)
@@ -515,6 +519,7 @@ namespace SystemsAnalysis.Utils.AccessUtils
         SqlCommand cmd = new SqlCommand(DROPsql, CurrentSQLDB);
         try
         {
+            cmd.CommandTimeout = 0;
             cmd.ExecuteNonQuery();
         }
         catch (SqlException ae)
@@ -530,6 +535,7 @@ namespace SystemsAnalysis.Utils.AccessUtils
         SqlCommand cmd = new SqlCommand(DROPsql, CurrentSQLDB);
         try
         {
+            cmd.CommandTimeout = 0;
             cmd.ExecuteNonQuery();
         }
         catch (SqlException ae)
@@ -559,18 +565,15 @@ namespace SystemsAnalysis.Utils.AccessUtils
         cmd.CommandType = System.Data.CommandType.StoredProcedure;
         cmd.Connection = CurrentSQLDB;
 
-        rowsAffected = cmd.ExecuteNonQuery();
-        /*string EXECUTEsql = queryName;
-        SqlCommand cmd = new SqlCommand(EXECUTEsql, CurrentSQLDB);
-        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+        cmd.CommandTimeout = 0;
         try
         {
-            cmd.ExecuteNonQuery();
+            rowsAffected = cmd.ExecuteNonQuery();
         }
         catch (SqlException ae)
         {
-            //Could not drop table
-        }*/
+            //Error message here
+        }
     }
 
     public void SQLExecuteActionQuery(string queryName, string parameterName, int parameter)
@@ -589,6 +592,7 @@ namespace SystemsAnalysis.Utils.AccessUtils
         cmd.CommandType = System.Data.CommandType.StoredProcedure;*/
         try
         {
+            cmd.CommandTimeout = 0;
             rowsAffected = cmd.ExecuteNonQuery();
         }
         catch (SqlException ae)
@@ -614,6 +618,7 @@ namespace SystemsAnalysis.Utils.AccessUtils
         cmd.CommandType = System.Data.CommandType.StoredProcedure;*/
         try
         {
+            cmd.CommandTimeout = 0;
             rowsAffected = cmd.ExecuteNonQuery();
         }
         catch (SqlException ae)
@@ -1569,6 +1574,7 @@ namespace SystemsAnalysis.Utils.AccessUtils
           SqlCommand cmd = new SqlCommand(SELECTsql, outputDatabaseConnection);
           try
           {
+              cmd.CommandTimeout = 0;
               cmd.ExecuteNonQuery();
               connectionWorks = true;
           }
