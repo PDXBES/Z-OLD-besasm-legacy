@@ -200,11 +200,11 @@ namespace SystemsAnalysis.Grid.GridAnalysis
                 AccessHelper.SQLCopyAccessTable("Contaminants", AccessString, "GRID_Contaminants", outputDatabaseStringForAccess);
                 AccessHelper.SQLCopyAccessTable("BMP_TYPE_TABLE_GENERAL", AccessString, "GRID_BMP_TYPE_TABLE_GENERAL", outputDatabaseStringForAccess);
 
-                AccessHelper.SQLCopyAccessTable("WshdGrd100FtOpt", AccessString, "GRID_WshdGrd100FtOpt", outputDatabaseStringForAccess);
+                /*AccessHelper.SQLCopyAccessTable("WshdGrd100FtOpt", AccessString, "GRID_WshdGrd100FtOpt", outputDatabaseStringForAccess);
                 AccessHelper.SQLCopyAccessTable("BMP_PERFORMANCE",
                     AccessString, "GRID_BMP_PERFORMANCE", outputDatabaseStringForAccess);
                 AccessHelper.SQLCopyAccessTable("pollutant_loadings",
-                    AccessString, "GRID_pollutant_loadings", outputDatabaseStringForAccess);
+                    AccessString, "GRID_pollutant_loadings", outputDatabaseStringForAccess);*/
             }
             try
             {
@@ -442,6 +442,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis
             {
                 CreateGridModelEngine();
                 LoadStoredModelRuns();
+                gridModelEngine.populateGridData();
             }
             catch (Exception ex)
             {

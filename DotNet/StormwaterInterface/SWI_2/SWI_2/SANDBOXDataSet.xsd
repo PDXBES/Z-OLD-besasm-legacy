@@ -1979,10 +1979,11 @@ FROM            GIS.SWSP_PIPE INNER JOIN
               <DbSource ConnectionRef="SANDBOXConnectionString (Settings)" DbObjectName="SANDBOX.ROSE\\issacg.SWSP_MESH" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT        global_id, us_node, ds_node, LinkType, node, shape, dimension1, dimension2, dimension3, material, culvert_opening, photo_id, length_ft, us_depth_in, ds_depth_in, view_number, page_number, watershed, 
-                         subwatershed
-FROM            SWSP_MESH
-ORDER BY view_number, page_number, global_id</CommandText>
+                    <CommandText>
+                      SELECT        global_id, us_node, ds_node, LinkType, node, shape, dimension1, dimension2, dimension3, material, culvert_opening, photo_id, length_ft, us_depth_in, ds_depth_in, view_number, page_number, watershed,
+                      subwatershed
+                      FROM            ROSE\issacg.SWSP_MESH
+                      ORDER BY view_number, page_number, global_id</CommandText>
                     <Parameters />
                   </DbCommand>
                 </SelectCommand>

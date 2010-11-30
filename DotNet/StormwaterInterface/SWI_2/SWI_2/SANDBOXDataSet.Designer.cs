@@ -23391,10 +23391,11 @@ FROM            GIS.SWSP_PIPE INNER JOIN
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = @"SELECT        global_id, us_node, ds_node, LinkType, node, shape, dimension1, dimension2, dimension3, material, culvert_opening, photo_id, length_ft, us_depth_in, ds_depth_in, view_number, page_number, watershed, 
-                         subwatershed
-FROM            SWSP_MESH
-ORDER BY view_number, page_number, global_id";
+            this._commandCollection[0].CommandText = @"
+                      SELECT        global_id, us_node, ds_node, LinkType, node, shape, dimension1, dimension2, dimension3, material, culvert_opening, photo_id, length_ft, us_depth_in, ds_depth_in, view_number, page_number, watershed,
+                      subwatershed
+                      FROM            SWSP_MESH
+                      ORDER BY view_number, page_number, global_id";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
