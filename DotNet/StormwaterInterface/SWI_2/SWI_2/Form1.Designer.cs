@@ -607,6 +607,7 @@
             this.menuStripMainForm = new System.Windows.Forms.MenuStrip();
             this.fIleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.updateMstlinksacToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataAdministratorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.surveyViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -635,7 +636,6 @@
             this.ultraDateTimeEditorSurveyDate = new Infragistics.Win.UltraWinEditors.UltraDateTimeEditor();
             this.panel1 = new System.Windows.Forms.Panel();
             this.sWSPGLOBALIDBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.updateMstlinksacToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sWSPWATERSHEDBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.sANDBOXDataSet = new SWI_2.SANDBOXDataSet();
             this.checkedListBoxEvaluators = new System.Windows.Forms.CheckedListBox();
@@ -3180,6 +3180,12 @@
             this.exportReportToolStripMenuItem.Text = "Export Report";
             this.exportReportToolStripMenuItem.Click += new System.EventHandler(this.exportReportToolStripMenuItem_Click);
             // 
+            // updateMstlinksacToolStripMenuItem
+            // 
+            this.updateMstlinksacToolStripMenuItem.Name = "updateMstlinksacToolStripMenuItem";
+            this.updateMstlinksacToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.updateMstlinksacToolStripMenuItem.Text = "Update mst_links_ac";
+            // 
             // toolsToolStripMenuItem
             // 
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -3419,12 +3425,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1047, 471);
             this.panel1.TabIndex = 104;
-            // 
-            // updateMstlinksacToolStripMenuItem
-            // 
-            this.updateMstlinksacToolStripMenuItem.Name = "updateMstlinksacToolStripMenuItem";
-            this.updateMstlinksacToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
-            this.updateMstlinksacToolStripMenuItem.Text = "Update mst_links_ac";
             // 
             // sWSPWATERSHEDBindingSource
             // 

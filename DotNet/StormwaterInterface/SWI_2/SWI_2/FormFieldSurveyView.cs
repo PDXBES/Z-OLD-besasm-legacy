@@ -47,7 +47,7 @@ namespace SWI_2
             //This SHOULD be replaced with an activeusers table in the database.
             //The activeusers table will give a user 5,000 entries, and this interface will tell the user to 
             //restart the session if they exceed 5,000 entries(unlikely but possible). So user A will
-            //have entries -1 to -5000, user B will have entries -5001 to -10,000.  This will ensure that
+            //have entries -1 to -5000, user B will have entries -5001 to -10,000.  This make it less likely that
             //people wont overwrite each others changes.  With the random approach, there nearly a
             //3% chance of overwriting, assuming that users enter 1,000 entries per session.
             Random random = new Random();

@@ -35,31 +35,12 @@ namespace SystemsAnalysis.Grid.GridAnalysis
             this.osfPath = osfPath;
             this.outputDirectory = outputDirectory;
             this.SQLDatabaseConnectionString = SQLDatabaseConnectionString;
-            accessHelper = new AccessHelper(gridModelPath, /*"Data Source=WS09858\\SQLEXPRESS;Initial Catalog=PortlandHarbor;Integrated Security=True"*/SQLDatabaseConnectionString);
+            accessHelper = new AccessHelper(gridModelPath, SQLDatabaseConnectionString);
 
-            /*accessHelper.SQLCopyAccessTable("ZONING_IMP", gridModelPath, "GRID_ZONING_IMP");
-            accessHelper.SQLCopyAccessTable("variables", gridModelPath, "GRID_variables");
-            accessHelper.SQLCopyAccessTable("FE_SELECTION_SETS", gridModelPath, "GRID_FE_SELECTION_SETS");
-            accessHelper.SQLCopyAccessTable("FE_SELECTION_SET_AREAS", gridModelPath, "GRID_FE_SELECTION_SET_AREAS");
-            accessHelper.SQLCopyAccessTable("FE_SCENARIOS", gridModelPath, "GRID_FE_SCENARIOS");
-            accessHelper.SQLCopyAccessTable("FE_SCENARIO_X_PROCESS", gridModelPath, "GRID_FE_SCENARIO_X_PROCESS");
-            accessHelper.SQLCopyAccessTable("FE_PROCESS_GROUP", gridModelPath, "GRID_FE_PROCESS_GROUP");
-            accessHelper.SQLCopyAccessTable("FE_PROCESS", gridModelPath, "GRID_FE_PROCESS");
-            accessHelper.SQLCopyAccessTable("FE_MODEL_RUN", gridModelPath, "GRID_FE_MODEL_RUN");
-            accessHelper.SQLCopyAccessTable("FE_HYETOGRAPHS", gridModelPath, "GRID_FE_HYETOGRAPHS");
-            accessHelper.SQLCopyAccessTable("FE_HYETOGRAPH_DATA", gridModelPath, "GRID_FE_HYETOGRAPH_DATA");
-            accessHelper.SQLCopyAccessTable("FE_GRID_PROJECTS", gridModelPath, "GRID_FE_GRID_PROJECTS");
-            accessHelper.SQLCopyAccessTable("Contaminants", gridModelPath, "GRID_Contaminants");
-            accessHelper.SQLCopyAccessTable("BMP_TYPE_TABLE_GENERAL", gridModelPath, "GRID_BMP_TYPE_TABLE_GENERAL");
-
-            GridDataTable = gridDataTableName;
-            /////Moved from ExecuteModel
-            accessHelper.SQLCopyAccessTable(gridDataTableName, gridDataPath, "GRID_" + gridDataTableName);
-            accessHelper.SQLCopyAccessTable(gridModelRuns[0].BMPEffectivenessTable,
-                gridModelRuns[0].BMPEffectivenessDB, "GRID_BMP_PERFORMANCE");
-            accessHelper.SQLCopyAccessTable(gridModelRuns[0].PollutantLoadingTable,
-                gridModelRuns[0].PollutantLoadingDB, "GRID_pollutant_loadings");*/
+            
         }
+        //These constructors should not be connecting to the base access database to get the grid table
+        //the grid table is really too large to be placing in the base access database, it should just be a linked table.
         public GridModelEngine(string SQLDatabaseConnectionString)
         {            
             this.gridModelPath = System.AppDomain.CurrentDomain.BaseDirectory + "Waterqual_GIS_v5_0.mdb";
@@ -71,6 +52,8 @@ namespace SystemsAnalysis.Grid.GridAnalysis
             accessHelper = new AccessHelper(gridModelPath, SQLDatabaseConnectionString/*"Data Source=SIRTOBY;Initial Catalog=SANDBOX;"*/);
 
         }
+        //These constructors should not be connecting to the base access database to get the grid table
+        //the grid table is really too large to be placing in the base access database, it should just be a linked table.
         public GridModelEngine()
         {
             this.gridModelPath = System.AppDomain.CurrentDomain.BaseDirectory + "Waterqual_GIS_v5_0.mdb";
@@ -80,6 +63,15 @@ namespace SystemsAnalysis.Grid.GridAnalysis
             gridModelRuns = new List<GridModelRun>();
             gridModelResults = new List<GridModelResult>();
             accessHelper = new AccessHelper();
+        }
+
+        public void populateGridData()
+        {
+            accessHelper.SQLCopyAccessTable(gridModelRuns[0].BMPEffectivenessTable,
+                gridModelRuns[0].BMPEffectivenessDB, "GRID_BMP_PERFORMANCE");
+            accessHelper.SQLCopyAccessTable(gridModelRuns[0].PollutantLoadingTable,
+                gridModelRuns[0].PollutantLoadingDB, "GRID_pollutant_loadings");
+            accessHelper.SQLCopyAccessTable(gridDataTableName, gridDataPath, "GRID_" + gridDataTableName);
         }
 
         #region Accessors for Xml serialization
