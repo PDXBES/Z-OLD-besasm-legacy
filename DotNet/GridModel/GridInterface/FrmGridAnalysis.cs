@@ -96,10 +96,14 @@ namespace SystemsAnalysis.Grid.GridAnalysis
                 
             }
 
-            //now that we know the server is usable, copy the tables from the server to the access file:
-            //string dataDirectory = System.Deployment.Application.ApplicationDeployment.CurrentDeployment.DataDirectory;
-            //string AccessString = dataDirectory + "\\Waterqual_GIS_v5_0.mdb";
-            string AccessString = /*"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=*/System.Windows.Forms.Application.StartupPath + "..\\Waterqual_GIS_v5_0.mdb";
+            //if the user has selected that we get the data from an access .mdb, then
+            //import those tables
+
+
+
+
+
+            ///*waterqualReference* string AccessString = /*"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=*/System.Windows.Forms.Application.StartupPath + "..\\Waterqual_GIS_v5_0.mdb";
             string inputDatabaseStringForAccess = "ODBC;"/*DRIVER={sql server}*/+";DSN=" + server + ";DATABASE = " + database;
             if (trustedConnection == true)
             {
@@ -119,7 +123,8 @@ namespace SystemsAnalysis.Grid.GridAnalysis
                 outputDatabaseStringForAccess += ";Persist Security Info=True;User ID=" + userID + ";Password=" + password;
             }
 
-
+            //this is defunct.  These queries should only happen when someone wants to archive the data to access
+            /*
             if (SQLisSource == true)
             {
                 AccessHelper.AccessCopySQLTable("GRID_GridResults", inputDatabaseStringForAccess, domain + "GRID_GridResults", AccessString);
@@ -205,7 +210,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis
                     AccessString, "GRID_BMP_PERFORMANCE", outputDatabaseStringForAccess);
                 AccessHelper.SQLCopyAccessTable("pollutant_loadings",
                     AccessString, "GRID_pollutant_loadings", outputDatabaseStringForAccess);*/
-            }
+            //}*/
             try
             {
                 gridInterfaceDS.LoadData();
@@ -290,7 +295,8 @@ namespace SystemsAnalysis.Grid.GridAnalysis
                 }
                 else
                 {
-                    feModelRunTA.Insert(scenarioID, selectionSetAreaID, hyetographID);
+                    int? NextModelRunID = feModelRunTA.GetNextModelRunID();
+                    feModelRunTA.InsertQuery(NextModelRunID, scenarioID, selectionSetAreaID, hyetographID);
                     gridInterfaceDS.RefreshModelRunQuery();
                 }
             }
