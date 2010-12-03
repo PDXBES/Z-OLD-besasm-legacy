@@ -43,7 +43,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis
         //the grid table is really too large to be placing in the base access database, it should just be a linked table.
         public GridModelEngine(string SQLDatabaseConnectionString)
         {            
-            this.gridModelPath = System.AppDomain.CurrentDomain.BaseDirectory + "Waterqual_GIS_v5_0.mdb";
+            ///*waterqualReference* this.gridModelPath = System.AppDomain.CurrentDomain.BaseDirectory + "Waterqual_GIS_v5_0.mdb";
             
             gridDataTableName = ConfigurationManager.AppSettings.Get("gridDataTableName");
 
@@ -56,7 +56,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis
         //the grid table is really too large to be placing in the base access database, it should just be a linked table.
         public GridModelEngine()
         {
-            this.gridModelPath = System.AppDomain.CurrentDomain.BaseDirectory + "Waterqual_GIS_v5_0.mdb";
+            ///*waterqualReference* this.gridModelPath = System.AppDomain.CurrentDomain.BaseDirectory + "Waterqual_GIS_v5_0.mdb";
 
             gridDataTableName = ConfigurationManager.AppSettings.Get("gridDataTableName");
 

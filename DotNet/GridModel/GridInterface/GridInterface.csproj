@@ -91,6 +91,9 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization.Formatters.Soap" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -139,12 +142,12 @@
       <DependentUpon>PollutantLoadingMetadataDataSet.xsd</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="PollutantLoad.cs" />
     <Compile Include="PollutantLoadingMetadataDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>PollutantLoadingMetadataDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="PollutantLoad.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FrmChooseProcesses.resx">
@@ -388,11 +391,6 @@
       <DependentUpon>FormUserIDAndPasswordEntry.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SplashGridModel.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Waterqual_GIS_v5_0.mdb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\AccessUtils\DatabaseManagement\SystemsAnalysis.Utils.AccessUtils.DatabaseManagement.csproj">

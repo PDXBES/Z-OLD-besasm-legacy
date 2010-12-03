@@ -4,7 +4,7 @@
     <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
       <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
         <Connections>
-          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="Waterqual_GIS_v5_0ConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="Waterqual_GIS_v5_0ConnectionString (Settings)" PropertyReference="ApplicationSettings.SystemsAnalysis.Grid.GridAnalysis.Properties.Settings.GlobalReference.Default.Waterqual_GIS_v5_0ConnectionString" Provider="System.Data.OleDb" />
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="Waterqual_GIS_v5_0ConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="Waterqual_GIS_v5_0ConnectionString (Settings)" PropertyReference="ApplicationSettings.SystemsAnalysis.Grid.GridAnalysis.Properties.Settings.GlobalReference.Default.Waterqual_GIS_v5_0ConnectionString" Provider="System.Data.SqlClient" />
         </Connections>
         <Tables>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="BmpPerformanceTableAdapter" GeneratorDataComponentClassName="BmpPerformanceTableAdapter" Name="BmpPerformance" UserDataComponentName="BmpPerformanceTableAdapter">
