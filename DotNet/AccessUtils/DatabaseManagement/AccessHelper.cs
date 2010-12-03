@@ -211,9 +211,7 @@ namespace SystemsAnalysis.Utils.AccessUtils
         }
         catch (Exception ex)
         {
-            //if (accConnection.State == System.Data.ConnectionState.Open)
-            //accConnection.Close();
-            //MessageBox.Show("Import failed with error: " + ex.ToString)
+            //write error message
         }
     }
 
@@ -281,9 +279,7 @@ namespace SystemsAnalysis.Utils.AccessUtils
         }
         catch (Exception ex)
         {
-            //if (accConnection.State == System.Data.ConnectionState.Open)
-            //accConnection.Close();
-            //MessageBox.Show("Import failed with error: " + ex.ToString)
+            //show errors
         }
         thisSQLDB.Close();
     }
@@ -309,16 +305,11 @@ namespace SystemsAnalysis.Utils.AccessUtils
             //table doesnt exist
         }
         //create a linked table to the sql server table
-        //GRID_GridResults
         dao.TableDef theTable = db.CreateTableDef(AccessTableName, System.Reflection.Missing.Value, SQLTableName, sourceDatabase);
         theTable.Connect = sourceDatabase;
         theTable.SourceTableName = SQLTableName;
         db.TableDefs.Append(theTable);
         //copy the linked table to a permanent table in access
-
-        //delete the linked table...
-        //dont implement this yet, make sure you are actually getting linked tables from
-        //the previous step.
 
         db.Close();
         ws.Close();
@@ -852,9 +843,7 @@ namespace SystemsAnalysis.Utils.AccessUtils
         }
         catch (Exception ex)
         {
-            //if (accConnection.State == System.Data.ConnectionState.Open)
-            //accConnection.Close();
-            //MessageBox.Show("Import failed with error: " + ex.ToString)
+            //error message
         }
 
     }
@@ -904,9 +893,7 @@ namespace SystemsAnalysis.Utils.AccessUtils
         }
         catch (Exception ex)
         {
-            //if (accConnection.State == System.Data.ConnectionState.Open)
-            //accConnection.Close();
-            //MessageBox.Show("Import failed with error: " + ex.ToString)
+            //error message
         }
 
     }
