@@ -193,7 +193,7 @@ namespace SWI_2
                 for (int index = 0; index < checkedListBoxEvaluators.Items.Count; index++)
                 {
                     item = checkedListBoxEvaluators.Items[index];
-                    if (this.sWSP_SURVEY_PAGE_EVALUATORTableAdapter.IdentifyValidEvaluators((int)comboBoxSurveyPage.SelectedValue, (int)((System.Data.DataRowView)item).Row[0]) != 0)
+                    if ((int)this.sWSP_SURVEY_PAGE_EVALUATORTableAdapter.IdentifyValidEvaluators((int)comboBoxSurveyPage.SelectedValue, (int)((System.Data.DataRowView)item).Row[0]) != 0)
                     {
                         checkedListBoxEvaluators.SetItemChecked(index, true);
                     }
