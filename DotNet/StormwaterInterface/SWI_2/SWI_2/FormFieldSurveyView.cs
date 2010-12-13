@@ -309,11 +309,11 @@ namespace SWI_2
                         //adding a pipe means:
                         //placing a new entry in the globalID table,
                         //taking that value and using it to create a new pipe
-                        this.sWSP_GLOBAL_IDTableAdapter.Insert("");
+                        this.sWSP_GLOBAL_IDTableAdapter.InsertQuery("");
                         //what was the global ID that was just inserted?  The highest value in the GlobalID table.  Since we just inserted to it, there is no chance that it could be null
                         globalID = (int)this.sWSP_GLOBAL_IDTableAdapter.ScalarQuery();
                         //add this record to the SWSP_PIPE table
-                        this.sWSP_PIPETableAdapter.Insert(globalID,
+                        this.sWSP_PIPETableAdapter.InsertQuery(globalID,
                                                             page_id,
                                                             (string)r["us_node"],
                                                             (string)r["ds_node"],
@@ -333,11 +333,11 @@ namespace SWI_2
                         //adding a ditch means:
                         //placing a new entry in the globalID table,
                         //taking that value and using it to create a new ditch
-                        this.sWSP_GLOBAL_IDTableAdapter.Insert("");
+                        this.sWSP_GLOBAL_IDTableAdapter.InsertQuery("");
                         //what was the global ID that was just inserted?  The highest value in the GlobalID table.  Since we just inserted to it, there is no chance that it could be null
                         globalID = (int)this.sWSP_GLOBAL_IDTableAdapter.ScalarQuery();
                         //add this record to the SWSP_DITCH table
-                        this.sWSP_DITCHTableAdapter.Insert(globalID,
+                        this.sWSP_DITCHTableAdapter.InsertQuery(globalID,
                                                             page_id,
                                                             (string)r["node"],
                                                             facing_id,
@@ -355,11 +355,11 @@ namespace SWI_2
                         //adding a culvert means:
                         //placing a new entry in the globalID table,
                         //taking that value and using it to create a new culvert
-                        this.sWSP_GLOBAL_IDTableAdapter.Insert("");
+                        this.sWSP_GLOBAL_IDTableAdapter.InsertQuery("");
                         //what was the global ID that was just inserted?  The highest value in the GlobalID table.  Since we just inserted to it, there is no chance that it could be null
                         globalID = (int)this.sWSP_GLOBAL_IDTableAdapter.ScalarQuery();
                         //add this record to the SWSP_CULVERT table
-                        this.sWSP_CULVERTTableAdapter.Insert(globalID,
+                        this.sWSP_CULVERTTableAdapter.InsertQuery(globalID,
                                                             page_id,
                                                             (string)r["node"],
                                                             facing_id,
@@ -415,7 +415,7 @@ namespace SWI_2
                             this.sWSP_DITCHTableAdapter.DeleteByGlobalID((int)r["global_id"]);
                             this.sWSP_CULVERTTableAdapter.DeleteByGlobalID((int)r["global_id"]);
                             //  then insert to the pipe table
-                            this.sWSP_PIPETableAdapter.Insert(
+                            this.sWSP_PIPETableAdapter.InsertQuery(
                                                             (int)r["global_id"],
                                                             page_id,
                                                             ((r["us_node"] is System.DBNull) ? "" : (string)r["us_node"]),
@@ -459,7 +459,7 @@ namespace SWI_2
                             this.sWSP_PIPETableAdapter.DeleteByGlobalID((int)r["global_id"]);
                             this.sWSP_CULVERTTableAdapter.DeleteByGlobalID((int)r["global_id"]);
                             //  then insert to the pipe table
-                            this.sWSP_DITCHTableAdapter.Insert(
+                            this.sWSP_DITCHTableAdapter.InsertQuery(
                                                                 (int)r["global_id"],
                                                                 page_id,
                                                                 ((r["node"] is System.DBNull) ? "" : (string)r["node"]),
@@ -500,7 +500,7 @@ namespace SWI_2
                             this.sWSP_DITCHTableAdapter.DeleteByGlobalID((int)r["global_id"]);
                             this.sWSP_PIPETableAdapter.DeleteByGlobalID((int)r["global_id"]);
                             //  then insert to the pipe table
-                            this.sWSP_CULVERTTableAdapter.Insert(
+                            this.sWSP_CULVERTTableAdapter.InsertQuery(
                                                                 (int)r["global_id"],
                                                                 page_id,
                                                                 ((r["node"] is System.DBNull) ? "" : (string)r["node"]),

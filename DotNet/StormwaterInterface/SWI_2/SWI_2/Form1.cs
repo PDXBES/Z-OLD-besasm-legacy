@@ -391,10 +391,10 @@ namespace SWI_2
             //adding a ditch means:
             //placing a new entry in the globalID table,
             //taking that value and using it to create a new ditch
-            this.sWSP_GLOBAL_IDTableAdapter.Insert("");
+            this.sWSP_GLOBAL_IDTableAdapter.InsertQuery("");
             //what was the global ID that was just inserted?  The highest value in the GlobalID table.  Since we just inserted to it, there is no chance that it could be null
             globalID = (int)this.sWSP_GLOBAL_IDTableAdapter.ScalarQuery();
-            this.sWSP_DITCHTableAdapter.Insert(globalID,
+            this.sWSP_DITCHTableAdapter.InsertQuery(globalID,
                                                 ((int)((System.Data.DataRowView)fKSURVEYPAGEVIEWBindingSource.Current)["survey_page_id"]),
                                                 "",
                                                 3,
@@ -468,10 +468,10 @@ namespace SWI_2
             //adding a ditch means:
             //placing a new entry in the globalID table,
             //taking that value and using it to create a new ditch
-            this.sWSP_GLOBAL_IDTableAdapter.Insert("");
+            this.sWSP_GLOBAL_IDTableAdapter.InsertQuery("");
             //what was the global ID that was just inserted?  The highest value in the GlobalID table.  Since we just inserted to it, there is no chance that it could be null
             globalID = (int)this.sWSP_GLOBAL_IDTableAdapter.ScalarQuery();
-            this.sWSP_CULVERTTableAdapter.Insert(globalID,
+            this.sWSP_CULVERTTableAdapter.InsertQuery(globalID,
                                                 ((int)((System.Data.DataRowView)fKSURVEYPAGEVIEWBindingSource.Current)["survey_page_id"]),
                                                 "",
                                                 3,
@@ -532,10 +532,10 @@ namespace SWI_2
             //adding a pipe means:
             //placing a new entry in the globalID table,
             //taking that value and using it to create a new pipe
-            this.sWSP_GLOBAL_IDTableAdapter.Insert("");
+            this.sWSP_GLOBAL_IDTableAdapter.InsertQuery("");
             //what was the global ID that was just inserted?  The highest value in the GlobalID table.  Since we just inserted to it, there is no chance that it could be null
             globalID = (int)this.sWSP_GLOBAL_IDTableAdapter.ScalarQuery();
-            this.sWSP_PIPETableAdapter.Insert(globalID,
+            this.sWSP_PIPETableAdapter.InsertQuery(globalID,
                                                 ((int)((System.Data.DataRowView)fKSURVEYPAGEVIEWBindingSource.Current)["survey_page_id"]),
                                                 "",
                                                 "",

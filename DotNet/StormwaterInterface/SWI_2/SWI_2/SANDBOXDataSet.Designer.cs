@@ -14387,7 +14387,7 @@ SELECT culvert_id, global_id, survey_page_id, node, facing, culvert_opening, sha
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[7];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[8];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT        culvert_id, global_id, survey_page_id, node, facing, culvert_openin" +
@@ -14410,8 +14410,7 @@ SELECT culvert_id, global_id, survey_page_id, node, facing, culvert_opening, sha
             this._commandCollection[3].Connection = this.Connection;
             this._commandCollection[3].CommandText = "SELECT comment, culvert_id, culvert_opening, ds_node, facing, full_diam_in, full_" +
                 "width_in, global_id, length_ft, material, node, shape, survey_page_id, unobstruc" +
-                "ted_height_in, us_node FROM [ROSE\\issacg].SWSP_CULVERT WHERE (global_id = @globa" +
-                "l_id)";
+                "ted_height_in, us_node FROM SWSP_CULVERT WHERE (global_id = @global_id)";
             this._commandCollection[3].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@global_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "global_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[4] = new global::System.Data.SqlClient.SqlCommand();
@@ -14430,11 +14429,10 @@ SELECT culvert_id, global_id, survey_page_id, node, facing, culvert_opening, sha
             this._commandCollection[5].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@findNode", global::System.Data.SqlDbType.Char, 10, global::System.Data.ParameterDirection.Input, 0, 0, "node", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[6] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[6].Connection = this.Connection;
-            this._commandCollection[6].CommandText = @"UPDATE       [ROSE\issacg].SWSP_CULVERT
-SET                survey_page_id = @survey_page_id, node = @node, facing = @facing, culvert_opening = @culvert_opening, shape = @shape, full_diam_in = @full_diam_in, full_width_in = @full_width_in, 
-                         unobstructed_height_in = @unobstructed_height_in, material = @material, comment = @comment, ds_node = @ds_node, us_node = @us_node, length_ft = @length_ft
-WHERE        (global_id = @Original_global_id)";
+            this._commandCollection[6].CommandText = @"INSERT INTO [ROSE\issacg].[SWSP_CULVERT] ([global_id], [survey_page_id], [node], [facing], [culvert_opening], [shape], [full_diam_in], [full_width_in], [unobstructed_height_in], [material], [comment], [ds_node], [us_node], [length_ft]) VALUES (@global_id, @survey_page_id, @node, @facing, @culvert_opening, @shape, @full_diam_in, @full_width_in, @unobstructed_height_in, @material, @comment, @ds_node, @us_node, @length_ft);
+SELECT culvert_id, global_id, survey_page_id, node, facing, culvert_opening, shape, full_diam_in, full_width_in, unobstructed_height_in, material, comment, ds_node, us_node, length_ft FROM  [ROSE\issacg].SWSP_CULVERT WHERE (culvert_id = SCOPE_IDENTITY())";
             this._commandCollection[6].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[6].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@global_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "global_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[6].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@survey_page_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "survey_page_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[6].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@node", global::System.Data.SqlDbType.Char, 10, global::System.Data.ParameterDirection.Input, 0, 0, "node", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[6].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@facing", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "facing", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -14448,7 +14446,27 @@ WHERE        (global_id = @Original_global_id)";
             this._commandCollection[6].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ds_node", global::System.Data.SqlDbType.NChar, 10, global::System.Data.ParameterDirection.Input, 0, 0, "ds_node", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[6].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@us_node", global::System.Data.SqlDbType.NChar, 10, global::System.Data.ParameterDirection.Input, 0, 0, "us_node", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[6].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@length_ft", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "length_ft", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._commandCollection[6].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_global_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "global_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._commandCollection[7] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[7].Connection = this.Connection;
+            this._commandCollection[7].CommandText = @"UPDATE       [ROSE\issacg].SWSP_CULVERT
+SET                survey_page_id = @survey_page_id, node = @node, facing = @facing, culvert_opening = @culvert_opening, shape = @shape, full_diam_in = @full_diam_in, full_width_in = @full_width_in, 
+                         unobstructed_height_in = @unobstructed_height_in, material = @material, comment = @comment, ds_node = @ds_node, us_node = @us_node, length_ft = @length_ft
+WHERE        (global_id = @Original_global_id)";
+            this._commandCollection[7].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[7].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@survey_page_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "survey_page_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[7].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@node", global::System.Data.SqlDbType.Char, 10, global::System.Data.ParameterDirection.Input, 0, 0, "node", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[7].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@facing", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "facing", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[7].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@culvert_opening", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "culvert_opening", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[7].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@shape", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "shape", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[7].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@full_diam_in", global::System.Data.SqlDbType.Float, 8, global::System.Data.ParameterDirection.Input, 0, 0, "full_diam_in", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[7].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@full_width_in", global::System.Data.SqlDbType.Float, 8, global::System.Data.ParameterDirection.Input, 0, 0, "full_width_in", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[7].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@unobstructed_height_in", global::System.Data.SqlDbType.Float, 8, global::System.Data.ParameterDirection.Input, 0, 0, "unobstructed_height_in", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[7].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@material", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "material", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[7].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@comment", global::System.Data.SqlDbType.VarChar, 2147483647, global::System.Data.ParameterDirection.Input, 0, 0, "comment", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[7].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ds_node", global::System.Data.SqlDbType.NChar, 10, global::System.Data.ParameterDirection.Input, 0, 0, "ds_node", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[7].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@us_node", global::System.Data.SqlDbType.NChar, 10, global::System.Data.ParameterDirection.Input, 0, 0, "us_node", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[7].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@length_ft", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "length_ft", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[7].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_global_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "global_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -15092,9 +15110,105 @@ WHERE        (global_id = @Original_global_id)";
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, false)]
+        public virtual int InsertQuery(int global_id, int survey_page_id, string node, global::System.Nullable<int> facing, global::System.Nullable<int> culvert_opening, global::System.Nullable<int> shape, global::System.Nullable<double> full_diam_in, global::System.Nullable<double> full_width_in, global::System.Nullable<double> unobstructed_height_in, global::System.Nullable<int> material, string comment, string ds_node, string us_node, global::System.Nullable<int> length_ft) {
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[6];
+            command.Parameters[0].Value = ((int)(global_id));
+            command.Parameters[1].Value = ((int)(survey_page_id));
+            if ((node == null)) {
+                command.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[2].Value = ((string)(node));
+            }
+            if ((facing.HasValue == true)) {
+                command.Parameters[3].Value = ((int)(facing.Value));
+            }
+            else {
+                command.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            if ((culvert_opening.HasValue == true)) {
+                command.Parameters[4].Value = ((int)(culvert_opening.Value));
+            }
+            else {
+                command.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            if ((shape.HasValue == true)) {
+                command.Parameters[5].Value = ((int)(shape.Value));
+            }
+            else {
+                command.Parameters[5].Value = global::System.DBNull.Value;
+            }
+            if ((full_diam_in.HasValue == true)) {
+                command.Parameters[6].Value = ((double)(full_diam_in.Value));
+            }
+            else {
+                command.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            if ((full_width_in.HasValue == true)) {
+                command.Parameters[7].Value = ((double)(full_width_in.Value));
+            }
+            else {
+                command.Parameters[7].Value = global::System.DBNull.Value;
+            }
+            if ((unobstructed_height_in.HasValue == true)) {
+                command.Parameters[8].Value = ((double)(unobstructed_height_in.Value));
+            }
+            else {
+                command.Parameters[8].Value = global::System.DBNull.Value;
+            }
+            if ((material.HasValue == true)) {
+                command.Parameters[9].Value = ((int)(material.Value));
+            }
+            else {
+                command.Parameters[9].Value = global::System.DBNull.Value;
+            }
+            if ((comment == null)) {
+                command.Parameters[10].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[10].Value = ((string)(comment));
+            }
+            if ((ds_node == null)) {
+                command.Parameters[11].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[11].Value = ((string)(ds_node));
+            }
+            if ((us_node == null)) {
+                command.Parameters[12].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[12].Value = ((string)(us_node));
+            }
+            if ((length_ft.HasValue == true)) {
+                command.Parameters[13].Value = ((int)(length_ft.Value));
+            }
+            else {
+                command.Parameters[13].Value = global::System.DBNull.Value;
+            }
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            int returnValue;
+            try {
+                returnValue = command.ExecuteNonQuery();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, false)]
         public virtual int UpdateQuery(int survey_page_id, string node, global::System.Nullable<int> facing, global::System.Nullable<int> culvert_opening, global::System.Nullable<int> shape, global::System.Nullable<double> full_diam_in, global::System.Nullable<double> full_width_in, global::System.Nullable<double> unobstructed_height_in, global::System.Nullable<int> material, string comment, string ds_node, string us_node, global::System.Nullable<int> length_ft, int Original_global_id) {
-            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[6];
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[7];
             command.Parameters[0].Value = ((int)(survey_page_id));
             if ((node == null)) {
                 command.Parameters[1].Value = global::System.DBNull.Value;
@@ -15345,7 +15459,7 @@ SELECT culvert_opening_type_id, culvert_opening, description FROM SWSP_CULVERT_O
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[3];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT        culvert_opening_type_id, culvert_opening, description\r\nFROM        " +
@@ -15357,6 +15471,13 @@ SELECT culvert_opening_type_id, culvert_opening, description FROM SWSP_CULVERT_O
                 "g_type_id = @Original_culvert_opening_type_id)";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_culvert_opening_type_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "culvert_opening_type_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._commandCollection[2] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[2].Connection = this.Connection;
+            this._commandCollection[2].CommandText = @"INSERT INTO [ROSE\issacg].[SWSP_CULVERT_OPENING_TYPE] ([culvert_opening], [description]) VALUES (@culvert_opening, @description);
+SELECT culvert_opening_type_id, culvert_opening, description FROM [ROSE\issacg].SWSP_CULVERT_OPENING_TYPE WHERE (culvert_opening_type_id = SCOPE_IDENTITY())";
+            this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@culvert_opening", global::System.Data.SqlDbType.Char, 1, global::System.Data.ParameterDirection.Input, 0, 0, "culvert_opening", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@description", global::System.Data.SqlDbType.VarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "description", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -15538,6 +15659,40 @@ SELECT culvert_opening_type_id, culvert_opening, description FROM SWSP_CULVERT_O
         public virtual int DeleteQuery(int Original_culvert_opening_type_id) {
             global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[1];
             command.Parameters[0].Value = ((int)(Original_culvert_opening_type_id));
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            int returnValue;
+            try {
+                returnValue = command.ExecuteNonQuery();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, false)]
+        public virtual int InsertQuery(string culvert_opening, string description) {
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[2];
+            if ((culvert_opening == null)) {
+                command.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[0].Value = ((string)(culvert_opening));
+            }
+            if ((description == null)) {
+                command.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[1].Value = ((string)(description));
+            }
             global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
             if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -15776,7 +15931,7 @@ SELECT ditch_id, global_id, survey_page_id, node, facing, depth_in, top_width_in
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[8];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[9];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT        ditch_id, global_id, survey_page_id, node, facing, depth_in, top_wi" +
@@ -15798,8 +15953,8 @@ SELECT ditch_id, global_id, survey_page_id, node, facing, depth_in, top_width_in
             this._commandCollection[3] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[3].Connection = this.Connection;
             this._commandCollection[3].CommandText = "SELECT bottom_width_in, comment, depth_in, ditch_id, ds_node, facing, global_id, " +
-                "length_ft, material, node, survey_page_id, top_width_in, us_node FROM [ROSE\\issa" +
-                "cg].SWSP_DITCH WHERE (global_id = @global_id)";
+                "length_ft, material, node, survey_page_id, top_width_in, us_node FROM SWSP_DITCH" +
+                " WHERE (global_id = @global_id)";
             this._commandCollection[3].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@global_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "global_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[4] = new global::System.Data.SqlClient.SqlCommand();
@@ -15828,11 +15983,10 @@ FROM            [ROSE\issacg].SWSP_DITCH INNER JOIN
             this._commandCollection[6].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@findNode", global::System.Data.SqlDbType.Char, 10, global::System.Data.ParameterDirection.Input, 0, 0, "node", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[7] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[7].Connection = this.Connection;
-            this._commandCollection[7].CommandText = @"UPDATE       [ROSE\issacg].SWSP_DITCH
-SET                survey_page_id = @survey_page_id, node = @node, facing = @facing, depth_in = @depth_in, top_width_in = @top_width_in, bottom_width_in = @bottom_width_in, material = @material, comment = @comment, 
-                         ds_node = @ds_node, us_node = @us_node, length_ft = @length_ft
-WHERE        (global_id = @Original_global_id)";
+            this._commandCollection[7].CommandText = @"INSERT INTO [ROSE\issacg].[SWSP_DITCH] ([global_id], [survey_page_id], [node], [facing], [depth_in], [top_width_in], [bottom_width_in], [material], [comment], [ds_node], [us_node], [length_ft]) VALUES (@global_id, @survey_page_id, @node, @facing, @depth_in, @top_width_in, @bottom_width_in, @material, @comment, @ds_node, @us_node, @length_ft);
+SELECT ditch_id, global_id, survey_page_id, node, facing, depth_in, top_width_in, bottom_width_in, material, comment, ds_node, us_node, length_ft FROM  [ROSE\issacg].SWSP_DITCH WHERE (ditch_id = SCOPE_IDENTITY())";
             this._commandCollection[7].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[7].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@global_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "global_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[7].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@survey_page_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "survey_page_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[7].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@node", global::System.Data.SqlDbType.Char, 10, global::System.Data.ParameterDirection.Input, 0, 0, "node", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[7].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@facing", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "facing", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -15844,7 +15998,25 @@ WHERE        (global_id = @Original_global_id)";
             this._commandCollection[7].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ds_node", global::System.Data.SqlDbType.NChar, 10, global::System.Data.ParameterDirection.Input, 0, 0, "ds_node", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[7].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@us_node", global::System.Data.SqlDbType.NChar, 10, global::System.Data.ParameterDirection.Input, 0, 0, "us_node", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[7].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@length_ft", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "length_ft", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._commandCollection[7].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_global_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "global_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._commandCollection[8] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[8].Connection = this.Connection;
+            this._commandCollection[8].CommandText = @"UPDATE       [ROSE\issacg].SWSP_DITCH
+SET                survey_page_id = @survey_page_id, node = @node, facing = @facing, depth_in = @depth_in, top_width_in = @top_width_in, bottom_width_in = @bottom_width_in, material = @material, comment = @comment, 
+                         ds_node = @ds_node, us_node = @us_node, length_ft = @length_ft
+WHERE        (global_id = @Original_global_id)";
+            this._commandCollection[8].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[8].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@survey_page_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "survey_page_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[8].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@node", global::System.Data.SqlDbType.Char, 10, global::System.Data.ParameterDirection.Input, 0, 0, "node", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[8].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@facing", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "facing", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[8].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@depth_in", global::System.Data.SqlDbType.Float, 8, global::System.Data.ParameterDirection.Input, 0, 0, "depth_in", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[8].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@top_width_in", global::System.Data.SqlDbType.Float, 8, global::System.Data.ParameterDirection.Input, 0, 0, "top_width_in", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[8].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@bottom_width_in", global::System.Data.SqlDbType.Float, 8, global::System.Data.ParameterDirection.Input, 0, 0, "bottom_width_in", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[8].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@material", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "material", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[8].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@comment", global::System.Data.SqlDbType.VarChar, 2147483647, global::System.Data.ParameterDirection.Input, 0, 0, "comment", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[8].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ds_node", global::System.Data.SqlDbType.NChar, 10, global::System.Data.ParameterDirection.Input, 0, 0, "ds_node", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[8].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@us_node", global::System.Data.SqlDbType.NChar, 10, global::System.Data.ParameterDirection.Input, 0, 0, "us_node", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[8].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@length_ft", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "length_ft", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[8].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_global_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "global_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -16448,9 +16620,93 @@ WHERE        (global_id = @Original_global_id)";
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, false)]
+        public virtual int InsertQuery(int global_id, int survey_page_id, string node, global::System.Nullable<int> facing, global::System.Nullable<double> depth_in, global::System.Nullable<double> top_width_in, global::System.Nullable<double> bottom_width_in, global::System.Nullable<int> material, string comment, string ds_node, string us_node, global::System.Nullable<int> length_ft) {
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[7];
+            command.Parameters[0].Value = ((int)(global_id));
+            command.Parameters[1].Value = ((int)(survey_page_id));
+            if ((node == null)) {
+                command.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[2].Value = ((string)(node));
+            }
+            if ((facing.HasValue == true)) {
+                command.Parameters[3].Value = ((int)(facing.Value));
+            }
+            else {
+                command.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            if ((depth_in.HasValue == true)) {
+                command.Parameters[4].Value = ((double)(depth_in.Value));
+            }
+            else {
+                command.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            if ((top_width_in.HasValue == true)) {
+                command.Parameters[5].Value = ((double)(top_width_in.Value));
+            }
+            else {
+                command.Parameters[5].Value = global::System.DBNull.Value;
+            }
+            if ((bottom_width_in.HasValue == true)) {
+                command.Parameters[6].Value = ((double)(bottom_width_in.Value));
+            }
+            else {
+                command.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            if ((material.HasValue == true)) {
+                command.Parameters[7].Value = ((int)(material.Value));
+            }
+            else {
+                command.Parameters[7].Value = global::System.DBNull.Value;
+            }
+            if ((comment == null)) {
+                command.Parameters[8].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[8].Value = ((string)(comment));
+            }
+            if ((ds_node == null)) {
+                command.Parameters[9].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[9].Value = ((string)(ds_node));
+            }
+            if ((us_node == null)) {
+                command.Parameters[10].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[10].Value = ((string)(us_node));
+            }
+            if ((length_ft.HasValue == true)) {
+                command.Parameters[11].Value = ((int)(length_ft.Value));
+            }
+            else {
+                command.Parameters[11].Value = global::System.DBNull.Value;
+            }
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            int returnValue;
+            try {
+                returnValue = command.ExecuteNonQuery();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, false)]
         public virtual int UpdateQuery(int survey_page_id, string node, global::System.Nullable<int> facing, global::System.Nullable<double> depth_in, global::System.Nullable<double> top_width_in, global::System.Nullable<double> bottom_width_in, global::System.Nullable<int> material, string comment, string ds_node, string us_node, global::System.Nullable<int> length_ft, int Original_global_id) {
-            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[7];
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[8];
             command.Parameters[0].Value = ((int)(survey_page_id));
             if ((node == null)) {
                 command.Parameters[1].Value = global::System.DBNull.Value;
@@ -16694,7 +16950,7 @@ SELECT evaluator_id, initials, last_name, first_name FROM SWSP_EVALUATOR WHERE (
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[3];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT        evaluator_id, initials, last_name, first_name\r\nFROM            [ROS" +
@@ -16706,6 +16962,14 @@ SELECT evaluator_id, initials, last_name, first_name FROM SWSP_EVALUATOR WHERE (
                 "evaluator_id)";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_evaluator_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "evaluator_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._commandCollection[2] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[2].Connection = this.Connection;
+            this._commandCollection[2].CommandText = @"INSERT INTO [ROSE\issacg].[SWSP_EVALUATOR] ([initials], [last_name], [first_name]) VALUES (@initials, @last_name, @first_name);
+SELECT evaluator_id, initials, last_name, first_name FROM  [ROSE\issacg].SWSP_EVALUATOR WHERE (evaluator_id = SCOPE_IDENTITY()) ORDER BY initials";
+            this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@initials", global::System.Data.SqlDbType.VarChar, 3, global::System.Data.ParameterDirection.Input, 0, 0, "initials", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@last_name", global::System.Data.SqlDbType.VarChar, 30, global::System.Data.ParameterDirection.Input, 0, 0, "last_name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@first_name", global::System.Data.SqlDbType.VarChar, 30, global::System.Data.ParameterDirection.Input, 0, 0, "first_name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -16927,6 +17191,46 @@ SELECT evaluator_id, initials, last_name, first_name FROM SWSP_EVALUATOR WHERE (
             }
             return returnValue;
         }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, false)]
+        public virtual int InsertQuery(string initials, string last_name, string first_name) {
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[2];
+            if ((initials == null)) {
+                throw new global::System.ArgumentNullException("initials");
+            }
+            else {
+                command.Parameters[0].Value = ((string)(initials));
+            }
+            if ((last_name == null)) {
+                command.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[1].Value = ((string)(last_name));
+            }
+            if ((first_name == null)) {
+                command.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[2].Value = ((string)(first_name));
+            }
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            int returnValue;
+            try {
+                returnValue = command.ExecuteNonQuery();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            return returnValue;
+        }
     }
     
     /// <summary>
@@ -17088,7 +17392,7 @@ SELECT facing_type_id, facing, description FROM SWSP_FACING_TYPE WHERE (facing_t
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[3];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT        facing_type_id, facing, description\r\nFROM            [ROSE\\issacg]." +
@@ -17100,6 +17404,14 @@ SELECT facing_type_id, facing, description FROM SWSP_FACING_TYPE WHERE (facing_t
                 "nal_facing_type_id)";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_facing_type_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "facing_type_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._commandCollection[2] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[2].Connection = this.Connection;
+            this._commandCollection[2].CommandText = "INSERT INTO [ROSE\\issacg].[SWSP_FACING_TYPE] ([facing], [description]) VALUES (@f" +
+                "acing, @description);\r\nSELECT facing_type_id, facing, description FROM  [ROSE\\is" +
+                "sacg].SWSP_FACING_TYPE WHERE (facing_type_id = SCOPE_IDENTITY())";
+            this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@facing", global::System.Data.SqlDbType.Char, 1, global::System.Data.ParameterDirection.Input, 0, 0, "facing", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@description", global::System.Data.SqlDbType.VarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "description", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -17293,6 +17605,40 @@ SELECT facing_type_id, facing, description FROM SWSP_FACING_TYPE WHERE (facing_t
             }
             return returnValue;
         }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, false)]
+        public virtual int InsertQuery(string facing, string description) {
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[2];
+            if ((facing == null)) {
+                throw new global::System.ArgumentNullException("facing");
+            }
+            else {
+                command.Parameters[0].Value = ((string)(facing));
+            }
+            if ((description == null)) {
+                command.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[1].Value = ((string)(description));
+            }
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            int returnValue;
+            try {
+                returnValue = command.ExecuteNonQuery();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            return returnValue;
+        }
     }
     
     /// <summary>
@@ -17449,17 +17795,24 @@ SELECT global_id, description FROM SWSP_GLOBAL_ID WHERE (global_id = @global_id)
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[3];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT        global_id, description\r\nFROM           [ROSE\\issacg]. SWSP_GLOBAL_I" +
-                "D";
+            this._commandCollection[0].CommandText = "SELECT        global_id, description\r\nFROM           [ROSE\\issacg].SWSP_GLOBAL_ID" +
+                "";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[1].Connection = this.Connection;
-            this._commandCollection[1].CommandText = "SELECT        MAX(global_id) AS Expr1\r\nFROM            [ROSE\\issacg].SWSP_GLOBAL_" +
-                "ID";
+            this._commandCollection[1].CommandText = "INSERT INTO [ROSE\\issacg].[SWSP_GLOBAL_ID] ([description]) VALUES (@description);" +
+                "\r\nSELECT global_id, description FROM  [ROSE\\issacg].SWSP_GLOBAL_ID WHERE (global" +
+                "_id = SCOPE_IDENTITY())";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@description", global::System.Data.SqlDbType.VarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "description", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[2] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[2].Connection = this.Connection;
+            this._commandCollection[2].CommandText = "SELECT        MAX(global_id) AS Expr1\r\nFROM            [ROSE\\issacg].SWSP_GLOBAL_" +
+                "ID";
+            this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -17599,8 +17952,36 @@ SELECT global_id, description FROM SWSP_GLOBAL_ID WHERE (global_id = @global_id)
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual object ScalarQuery() {
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, false)]
+        public virtual int InsertQuery(string description) {
             global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[1];
+            if ((description == null)) {
+                command.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[0].Value = ((string)(description));
+            }
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            int returnValue;
+            try {
+                returnValue = command.ExecuteNonQuery();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual object ScalarQuery() {
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[2];
             global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
             if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -17786,7 +18167,7 @@ SELECT material_type_id, material, description FROM SWSP_MATERIAL_TYPE WHERE (ma
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[3];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT        material_type_id, material, description\r\nFROM            [ROSE\\issa" +
@@ -17798,6 +18179,13 @@ SELECT material_type_id, material, description FROM SWSP_MATERIAL_TYPE WHERE (ma
                 "riginal_material_type_id)";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_material_type_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "material_type_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._commandCollection[2] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[2].Connection = this.Connection;
+            this._commandCollection[2].CommandText = @"INSERT INTO [ROSE\issacg].[SWSP_MATERIAL_TYPE] ([material], [description]) VALUES (@material, @description);
+SELECT material_type_id, material, description FROM  [ROSE\issacg].SWSP_MATERIAL_TYPE WHERE (material_type_id = SCOPE_IDENTITY()) ORDER BY material";
+            this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@material", global::System.Data.SqlDbType.Char, 6, global::System.Data.ParameterDirection.Input, 0, 0, "material", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@description", global::System.Data.SqlDbType.VarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "description", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -17991,6 +18379,40 @@ SELECT material_type_id, material, description FROM SWSP_MATERIAL_TYPE WHERE (ma
             }
             return returnValue;
         }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, false)]
+        public virtual int InsertQuery(string material, string description) {
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[2];
+            if ((material == null)) {
+                throw new global::System.ArgumentNullException("material");
+            }
+            else {
+                command.Parameters[0].Value = ((string)(material));
+            }
+            if ((description == null)) {
+                command.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[1].Value = ((string)(description));
+            }
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            int returnValue;
+            try {
+                returnValue = command.ExecuteNonQuery();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            return returnValue;
+        }
     }
     
     /// <summary>
@@ -18163,8 +18585,8 @@ SELECT photo_id, global_id, location, comment FROM SWSP_PHOTO WHERE (photo_id = 
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[1].Connection = this.Connection;
-            this._commandCollection[1].CommandText = "SELECT comment, global_id, location, photo_id FROM [ROSE\\issacg].SWSP_PHOTO WHERE" +
-                " (global_id = @global_id)";
+            this._commandCollection[1].CommandText = "SELECT comment, global_id, location, photo_id FROM SWSP_PHOTO WHERE (global_id = " +
+                "@global_id)";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@global_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "global_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[2] = new global::System.Data.SqlClient.SqlCommand();
@@ -18738,7 +19160,7 @@ SELECT pipe_id, global_id, survey_page_id, us_node, ds_node, us_depth_in, ds_dep
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[7];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[8];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT        pipe_id, global_id, survey_page_id, us_node, ds_node, us_depth_in, " +
@@ -18760,8 +19182,7 @@ SELECT pipe_id, global_id, survey_page_id, us_node, ds_node, us_depth_in, ds_dep
             this._commandCollection[3].Connection = this.Connection;
             this._commandCollection[3].CommandText = "SELECT comment, ds_depth_in, ds_node, global_id, inside_diam_in, inside_width_in," +
                 " length_ft, material, node, pipe_id, shape, survey_page_id, unobstructed_height_" +
-                "in, us_depth_in, us_node FROM [ROSE\\issacg].SWSP_PIPE WHERE (global_id = @global" +
-                "_id)";
+                "in, us_depth_in, us_node FROM SWSP_PIPE WHERE (global_id = @global_id)";
             this._commandCollection[3].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@global_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "global_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[4] = new global::System.Data.SqlClient.SqlCommand();
@@ -18781,11 +19202,10 @@ SELECT pipe_id, global_id, survey_page_id, us_node, ds_node, us_depth_in, ds_dep
             this._commandCollection[5].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@findNode", global::System.Data.SqlDbType.Char, 10, global::System.Data.ParameterDirection.Input, 0, 0, "us_node", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[6] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[6].Connection = this.Connection;
-            this._commandCollection[6].CommandText = @"UPDATE       [ROSE\issacg].SWSP_PIPE
-SET                survey_page_id = @survey_page_id, us_node = @us_node, ds_node = @ds_node, us_depth_in = @us_depth_in, ds_depth_in = @ds_depth_in, inside_diam_in = @inside_diam_in, 
-                         inside_width_in = @inside_width_in, material = @material, shape = @shape, comment = @comment, length_ft = @length_ft, node = @node, unobstructed_height_in = @unobstructed_height_in
-WHERE        (global_id = @Original_global_id)";
+            this._commandCollection[6].CommandText = @"INSERT INTO [ROSE\issacg].[SWSP_PIPE] ([global_id], [survey_page_id], [us_node], [ds_node], [us_depth_in], [ds_depth_in], [inside_diam_in], [inside_width_in], [material], [shape], [comment], [length_ft], [node], [unobstructed_height_in]) VALUES (@global_id, @survey_page_id, @us_node, @ds_node, @us_depth_in, @ds_depth_in, @inside_diam_in, @inside_width_in, @material, @shape, @comment, @length_ft, @node, @unobstructed_height_in);
+SELECT pipe_id, global_id, survey_page_id, us_node, ds_node, us_depth_in, ds_depth_in, inside_diam_in, inside_width_in, material, shape, comment, length_ft, node, unobstructed_height_in FROM [ROSE\issacg].SWSP_PIPE WHERE (pipe_id = SCOPE_IDENTITY())";
             this._commandCollection[6].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[6].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@global_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "global_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[6].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@survey_page_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "survey_page_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[6].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@us_node", global::System.Data.SqlDbType.Char, 10, global::System.Data.ParameterDirection.Input, 0, 0, "us_node", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[6].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ds_node", global::System.Data.SqlDbType.Char, 10, global::System.Data.ParameterDirection.Input, 0, 0, "ds_node", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -18799,7 +19219,27 @@ WHERE        (global_id = @Original_global_id)";
             this._commandCollection[6].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@length_ft", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "length_ft", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[6].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@node", global::System.Data.SqlDbType.Char, 10, global::System.Data.ParameterDirection.Input, 0, 0, "node", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[6].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@unobstructed_height_in", global::System.Data.SqlDbType.Float, 8, global::System.Data.ParameterDirection.Input, 0, 0, "unobstructed_height_in", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._commandCollection[6].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_global_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "global_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._commandCollection[7] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[7].Connection = this.Connection;
+            this._commandCollection[7].CommandText = @"UPDATE       [ROSE\issacg].SWSP_PIPE
+SET                survey_page_id = @survey_page_id, us_node = @us_node, ds_node = @ds_node, us_depth_in = @us_depth_in, ds_depth_in = @ds_depth_in, inside_diam_in = @inside_diam_in, 
+                         inside_width_in = @inside_width_in, material = @material, shape = @shape, comment = @comment, length_ft = @length_ft, node = @node, unobstructed_height_in = @unobstructed_height_in
+WHERE        (global_id = @Original_global_id)";
+            this._commandCollection[7].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[7].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@survey_page_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "survey_page_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[7].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@us_node", global::System.Data.SqlDbType.Char, 10, global::System.Data.ParameterDirection.Input, 0, 0, "us_node", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[7].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ds_node", global::System.Data.SqlDbType.Char, 10, global::System.Data.ParameterDirection.Input, 0, 0, "ds_node", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[7].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@us_depth_in", global::System.Data.SqlDbType.Float, 8, global::System.Data.ParameterDirection.Input, 0, 0, "us_depth_in", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[7].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ds_depth_in", global::System.Data.SqlDbType.Float, 8, global::System.Data.ParameterDirection.Input, 0, 0, "ds_depth_in", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[7].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@inside_diam_in", global::System.Data.SqlDbType.Float, 8, global::System.Data.ParameterDirection.Input, 0, 0, "inside_diam_in", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[7].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@inside_width_in", global::System.Data.SqlDbType.Float, 8, global::System.Data.ParameterDirection.Input, 0, 0, "inside_width_in", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[7].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@material", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "material", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[7].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@shape", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "shape", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[7].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@comment", global::System.Data.SqlDbType.VarChar, 2147483647, global::System.Data.ParameterDirection.Input, 0, 0, "comment", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[7].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@length_ft", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "length_ft", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[7].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@node", global::System.Data.SqlDbType.Char, 10, global::System.Data.ParameterDirection.Input, 0, 0, "node", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[7].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@unobstructed_height_in", global::System.Data.SqlDbType.Float, 8, global::System.Data.ParameterDirection.Input, 0, 0, "unobstructed_height_in", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[7].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_global_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "global_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -19443,9 +19883,105 @@ WHERE        (global_id = @Original_global_id)";
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, false)]
+        public virtual int InsertQuery(int global_id, int survey_page_id, string us_node, string ds_node, global::System.Nullable<double> us_depth_in, global::System.Nullable<double> ds_depth_in, global::System.Nullable<double> inside_diam_in, global::System.Nullable<double> inside_width_in, global::System.Nullable<int> material, global::System.Nullable<int> shape, string comment, global::System.Nullable<int> length_ft, string node, global::System.Nullable<double> unobstructed_height_in) {
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[6];
+            command.Parameters[0].Value = ((int)(global_id));
+            command.Parameters[1].Value = ((int)(survey_page_id));
+            if ((us_node == null)) {
+                command.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[2].Value = ((string)(us_node));
+            }
+            if ((ds_node == null)) {
+                command.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[3].Value = ((string)(ds_node));
+            }
+            if ((us_depth_in.HasValue == true)) {
+                command.Parameters[4].Value = ((double)(us_depth_in.Value));
+            }
+            else {
+                command.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            if ((ds_depth_in.HasValue == true)) {
+                command.Parameters[5].Value = ((double)(ds_depth_in.Value));
+            }
+            else {
+                command.Parameters[5].Value = global::System.DBNull.Value;
+            }
+            if ((inside_diam_in.HasValue == true)) {
+                command.Parameters[6].Value = ((double)(inside_diam_in.Value));
+            }
+            else {
+                command.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            if ((inside_width_in.HasValue == true)) {
+                command.Parameters[7].Value = ((double)(inside_width_in.Value));
+            }
+            else {
+                command.Parameters[7].Value = global::System.DBNull.Value;
+            }
+            if ((material.HasValue == true)) {
+                command.Parameters[8].Value = ((int)(material.Value));
+            }
+            else {
+                command.Parameters[8].Value = global::System.DBNull.Value;
+            }
+            if ((shape.HasValue == true)) {
+                command.Parameters[9].Value = ((int)(shape.Value));
+            }
+            else {
+                command.Parameters[9].Value = global::System.DBNull.Value;
+            }
+            if ((comment == null)) {
+                command.Parameters[10].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[10].Value = ((string)(comment));
+            }
+            if ((length_ft.HasValue == true)) {
+                command.Parameters[11].Value = ((int)(length_ft.Value));
+            }
+            else {
+                command.Parameters[11].Value = global::System.DBNull.Value;
+            }
+            if ((node == null)) {
+                command.Parameters[12].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[12].Value = ((string)(node));
+            }
+            if ((unobstructed_height_in.HasValue == true)) {
+                command.Parameters[13].Value = ((double)(unobstructed_height_in.Value));
+            }
+            else {
+                command.Parameters[13].Value = global::System.DBNull.Value;
+            }
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            int returnValue;
+            try {
+                returnValue = command.ExecuteNonQuery();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, false)]
         public virtual int UpdateQuery(int survey_page_id, string us_node, string ds_node, global::System.Nullable<double> us_depth_in, global::System.Nullable<double> ds_depth_in, global::System.Nullable<double> inside_diam_in, global::System.Nullable<double> inside_width_in, global::System.Nullable<int> material, global::System.Nullable<int> shape, string comment, global::System.Nullable<int> length_ft, string node, global::System.Nullable<double> unobstructed_height_in, int Original_global_id) {
-            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[6];
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[7];
             command.Parameters[0].Value = ((int)(survey_page_id));
             if ((us_node == null)) {
                 command.Parameters[1].Value = global::System.DBNull.Value;
@@ -19697,7 +20233,7 @@ SELECT shape_type_id, shape, description FROM SWSP_SHAPE_TYPE WHERE (shape_type_
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[3];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT        shape_type_id, shape, description\r\nFROM            [ROSE\\issacg].SW" +
@@ -19709,6 +20245,14 @@ SELECT shape_type_id, shape, description FROM SWSP_SHAPE_TYPE WHERE (shape_type_
                 "l_shape_type_id)";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_shape_type_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "shape_type_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._commandCollection[2] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[2].Connection = this.Connection;
+            this._commandCollection[2].CommandText = "INSERT INTO [ROSE\\issacg].[SWSP_SHAPE_TYPE] ([shape], [description]) VALUES (@sha" +
+                "pe, @description);\r\nSELECT shape_type_id, shape, description FROM  [ROSE\\issacg]" +
+                ".SWSP_SHAPE_TYPE WHERE (shape_type_id = SCOPE_IDENTITY()) ORDER BY shape";
+            this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@shape", global::System.Data.SqlDbType.VarChar, 6, global::System.Data.ParameterDirection.Input, 0, 0, "shape", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@description", global::System.Data.SqlDbType.VarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "description", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -19906,6 +20450,40 @@ SELECT shape_type_id, shape, description FROM SWSP_SHAPE_TYPE WHERE (shape_type_
             }
             return returnValue;
         }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, false)]
+        public virtual int InsertQuery(string shape, string description) {
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[2];
+            if ((shape == null)) {
+                command.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[0].Value = ((string)(shape));
+            }
+            if ((description == null)) {
+                command.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[1].Value = ((string)(description));
+            }
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            int returnValue;
+            try {
+                returnValue = command.ExecuteNonQuery();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            return returnValue;
+        }
     }
     
     /// <summary>
@@ -20069,7 +20647,7 @@ SELECT subwatershed_id, watershed_id, subwatershed, description FROM SWSP_SUBWAT
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[3];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT        subwatershed_id, watershed_id, subwatershed, description\r\nFROM     " +
@@ -20081,6 +20659,14 @@ SELECT subwatershed_id, watershed_id, subwatershed, description FROM SWSP_SUBWAT
                 "ginal_subwatershed_id)";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_subwatershed_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "subwatershed_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._commandCollection[2] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[2].Connection = this.Connection;
+            this._commandCollection[2].CommandText = @"INSERT INTO [ROSE\issacg].[SWSP_SUBWATERSHED] ([watershed_id], [subwatershed], [description]) VALUES (@watershed_id, @subwatershed, @description);
+SELECT subwatershed_id, watershed_id, subwatershed, description FROM  [ROSE\issacg].SWSP_SUBWATERSHED WHERE (subwatershed_id = SCOPE_IDENTITY())";
+            this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@watershed_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "watershed_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@subwatershed", global::System.Data.SqlDbType.VarChar, 30, global::System.Data.ParameterDirection.Input, 0, 0, "subwatershed", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@description", global::System.Data.SqlDbType.VarChar, 250, global::System.Data.ParameterDirection.Input, 0, 0, "description", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -20278,6 +20864,41 @@ SELECT subwatershed_id, watershed_id, subwatershed, description FROM SWSP_SUBWAT
             }
             return returnValue;
         }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, false)]
+        public virtual int InsertQuery(int watershed_id, string subwatershed, string description) {
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[2];
+            command.Parameters[0].Value = ((int)(watershed_id));
+            if ((subwatershed == null)) {
+                throw new global::System.ArgumentNullException("subwatershed");
+            }
+            else {
+                command.Parameters[1].Value = ((string)(subwatershed));
+            }
+            if ((description == null)) {
+                command.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[2].Value = ((string)(description));
+            }
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            int returnValue;
+            try {
+                returnValue = command.ExecuteNonQuery();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            return returnValue;
+        }
     }
     
     /// <summary>
@@ -20455,7 +21076,7 @@ SELECT survey_page_id, view_id, page_number, date, weather, Comment FROM SWSP_SU
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[3];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT        survey_page_id, view_id, page_number, date, weather, Comment\r\nFROM " +
@@ -20467,6 +21088,16 @@ SELECT survey_page_id, view_id, page_number, date, weather, Comment FROM SWSP_SU
                 "nal_survey_page_id)";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_survey_page_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "survey_page_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._commandCollection[2] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[2].Connection = this.Connection;
+            this._commandCollection[2].CommandText = @"INSERT INTO [ROSE\issacg].[SWSP_SURVEY_PAGE] ([view_id], [page_number], [date], [weather], [Comment]) VALUES (@view_id, @page_number, @date, @weather, @Comment);
+SELECT survey_page_id, view_id, page_number, date, weather, Comment FROM  [ROSE\issacg].SWSP_SURVEY_PAGE WHERE (survey_page_id = SCOPE_IDENTITY()) ORDER BY view_id, page_number";
+            this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@view_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "view_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@page_number", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "page_number", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@date", global::System.Data.SqlDbType.DateTime, 8, global::System.Data.ParameterDirection.Input, 0, 0, "date", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@weather", global::System.Data.SqlDbType.VarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "weather", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Comment", global::System.Data.SqlDbType.VarChar, 2147483647, global::System.Data.ParameterDirection.Input, 0, 0, "Comment", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -20716,6 +21347,58 @@ SELECT survey_page_id, view_id, page_number, date, weather, Comment FROM SWSP_SU
         public virtual int DeleteQuery(int Original_survey_page_id) {
             global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[1];
             command.Parameters[0].Value = ((int)(Original_survey_page_id));
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            int returnValue;
+            try {
+                returnValue = command.ExecuteNonQuery();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, false)]
+        public virtual int InsertQuery(global::System.Nullable<int> view_id, global::System.Nullable<int> page_number, global::System.Nullable<global::System.DateTime> date, string weather, string Comment) {
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[2];
+            if ((view_id.HasValue == true)) {
+                command.Parameters[0].Value = ((int)(view_id.Value));
+            }
+            else {
+                command.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            if ((page_number.HasValue == true)) {
+                command.Parameters[1].Value = ((int)(page_number.Value));
+            }
+            else {
+                command.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            if ((date.HasValue == true)) {
+                command.Parameters[2].Value = ((System.DateTime)(date.Value));
+            }
+            else {
+                command.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            if ((weather == null)) {
+                command.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[3].Value = ((string)(weather));
+            }
+            if ((Comment == null)) {
+                command.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[4].Value = ((string)(Comment));
+            }
             global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
             if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -21274,7 +21957,7 @@ SELECT view_id, subwatershed_id, view_number, description FROM SWSP_VIEW WHERE (
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[4];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[5];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT        view_id, subwatershed_id, view_number, description\r\nFROM           " +
@@ -21287,15 +21970,23 @@ SELECT view_id, subwatershed_id, view_number, description FROM SWSP_VIEW WHERE (
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@view_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "view_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._commandCollection[2] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[2].Connection = this.Connection;
-            this._commandCollection[2].CommandText = "SELECT        MAX(view_id) AS Expr1\r\nFROM            [ROSE\\issacg].SWSP_VIEW";
+            this._commandCollection[2].CommandText = @"INSERT INTO [ROSE\issacg].[SWSP_VIEW] ([subwatershed_id], [view_number], [description]) VALUES (@subwatershed_id, @view_number, @description);
+SELECT view_id, subwatershed_id, view_number, description FROM  [ROSE\issacg].SWSP_VIEW WHERE (view_id = SCOPE_IDENTITY()) ORDER BY view_number";
             this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@subwatershed_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "subwatershed_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@view_number", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "view_number", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@description", global::System.Data.SqlDbType.VarChar, 100, global::System.Data.ParameterDirection.Input, 0, 0, "description", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[3] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[3].Connection = this.Connection;
-            this._commandCollection[3].CommandText = "SELECT        view_id\r\nFROM            [ROSE\\issacg].SWSP_VIEW\r\nWHERE        (vie" +
-                "w_number = @view_number) AND (subwatershed_id = @subwatershed_id)";
+            this._commandCollection[3].CommandText = "SELECT        MAX(view_id) AS Expr1\r\nFROM            [ROSE\\issacg].SWSP_VIEW";
             this._commandCollection[3].CommandType = global::System.Data.CommandType.Text;
-            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@view_number", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "view_number", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@subwatershed_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "subwatershed_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[4] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[4].Connection = this.Connection;
+            this._commandCollection[4].CommandText = "SELECT        view_id\r\nFROM            [ROSE\\issacg].SWSP_VIEW\r\nWHERE        (vie" +
+                "w_number = @view_number) AND (subwatershed_id = @subwatershed_id)";
+            this._commandCollection[4].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[4].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@view_number", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "view_number", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[4].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@subwatershed_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "subwatershed_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -21476,8 +22167,38 @@ SELECT view_id, subwatershed_id, view_number, description FROM SWSP_VIEW WHERE (
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual object ScalarQuery() {
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, false)]
+        public virtual int InsertQuery(int subwatershed_id, int view_number, string description) {
             global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[2];
+            command.Parameters[0].Value = ((int)(subwatershed_id));
+            command.Parameters[1].Value = ((int)(view_number));
+            if ((description == null)) {
+                command.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[2].Value = ((string)(description));
+            }
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            int returnValue;
+            try {
+                returnValue = command.ExecuteNonQuery();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual object ScalarQuery() {
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[3];
             global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
             if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -21504,7 +22225,7 @@ SELECT view_id, subwatershed_id, view_number, description FROM SWSP_VIEW WHERE (
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         public virtual object ScalarQueryViewIDByViewNumber(int view_number, int subwatershed_id) {
-            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[3];
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[4];
             command.Parameters[0].Value = ((int)(view_number));
             command.Parameters[1].Value = ((int)(subwatershed_id));
             global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
@@ -21690,7 +22411,7 @@ SELECT watershed_id, watershed, description FROM SWSP_WATERSHED WHERE (watershed
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[3];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT        watershed_id, watershed, description\r\nFROM            [ROSE\\issacg]" +
@@ -21702,6 +22423,14 @@ SELECT watershed_id, watershed, description FROM SWSP_WATERSHED WHERE (watershed
                 "watershed_id)";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_watershed_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "watershed_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._commandCollection[2] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[2].Connection = this.Connection;
+            this._commandCollection[2].CommandText = "INSERT INTO [ROSE\\issacg].[SWSP_WATERSHED] ([watershed], [description]) VALUES (@" +
+                "watershed, @description);\r\nSELECT watershed_id, watershed, description FROM  [RO" +
+                "SE\\issacg].SWSP_WATERSHED WHERE (watershed_id = SCOPE_IDENTITY())";
+            this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@watershed", global::System.Data.SqlDbType.VarChar, 30, global::System.Data.ParameterDirection.Input, 0, 0, "watershed", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@description", global::System.Data.SqlDbType.VarChar, 250, global::System.Data.ParameterDirection.Input, 0, 0, "description", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -21879,6 +22608,40 @@ SELECT watershed_id, watershed, description FROM SWSP_WATERSHED WHERE (watershed
         public virtual int DeleteQuery(int Original_watershed_id) {
             global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[1];
             command.Parameters[0].Value = ((int)(Original_watershed_id));
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            int returnValue;
+            try {
+                returnValue = command.ExecuteNonQuery();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, false)]
+        public virtual int InsertQuery(string watershed, string description) {
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[2];
+            if ((watershed == null)) {
+                throw new global::System.ArgumentNullException("watershed");
+            }
+            else {
+                command.Parameters[0].Value = ((string)(watershed));
+            }
+            if ((description == null)) {
+                command.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[1].Value = ((string)(description));
+            }
             global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
             if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
