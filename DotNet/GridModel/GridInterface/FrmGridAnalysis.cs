@@ -47,10 +47,10 @@ namespace SystemsAnalysis.Grid.GridAnalysis
             //table set, and the user should be asked if the tables are listed under a specific
             //domain (in case the program needs to preface the tablenames with a "domainName."
             //qualifier before the actual table names.
-            bool serverIsUsable = false;
+            string serverIsUsable = "empty";
             string inputDatabase = "";
 
-            while (!serverIsUsable)
+            while (serverIsUsable != "")
             {
                 //get the connection information
                 FormServerDatabaseUserIDPasswordDomainEntry child = new FormServerDatabaseUserIDPasswordDomainEntry();
@@ -60,69 +60,100 @@ namespace SystemsAnalysis.Grid.GridAnalysis
                 this.Enabled = true;
 
                 
-                    //test the connection information:
-                    inputDatabase = "Data Source=" + server + ";Initial Catalog=" + database;
-                    if (trustedConnection == true)
-                    {
-                        inputDatabase += ";Trusted_Connection=yes";
-                    }
-                    else
-                    {
-                        inputDatabase += ";Persist Security Info=True;User ID=" + userID + ";Password=" + password;
-                    }
+                //test the connection information:
+                inputDatabase = "Data Source=" + server + ";Initial Catalog=" + database;
+                if (trustedConnection == true)
+                {
+                    inputDatabase += ";Trusted_Connection=yes";
+                }
+                else
+                {
+                    inputDatabase += ";Persist Security Info=True;User ID=" + userID + ";Password=" + password;
+                }
 
-                    if (domain != "")
-                    {
-                        domain = domain + ".";
-                    }
+                if (domain != "")
+                {
+                    domain = domain + ".";
+                }
 
-                    serverIsUsable = AccessHelper.SQLTestDatabase(inputDatabase, domain + "GRID_GridResults");
-                    serverIsUsable = serverIsUsable && AccessHelper.SQLTestDatabase(inputDatabase, domain + "GRID_ZONING_IMP");
-                    serverIsUsable = serverIsUsable && AccessHelper.SQLTestDatabase(inputDatabase, domain + "GRID_variables");
-                    serverIsUsable = serverIsUsable && AccessHelper.SQLTestDatabase(inputDatabase, domain + "GRID_FE_SELECTION_SETS");
-                    serverIsUsable = serverIsUsable && AccessHelper.SQLTestDatabase(inputDatabase, domain + "GRID_FE_SELECTION_SET_AREAS");
-                    serverIsUsable = serverIsUsable && AccessHelper.SQLTestDatabase(inputDatabase, domain + "GRID_FE_SCENARIOS");
-                    serverIsUsable = serverIsUsable && AccessHelper.SQLTestDatabase(inputDatabase, domain + "GRID_FE_SCENARIO_X_PROCESS");
-                    serverIsUsable = serverIsUsable && AccessHelper.SQLTestDatabase(inputDatabase, domain + "GRID_FE_PROCESS_GROUP");
-                    serverIsUsable = serverIsUsable && AccessHelper.SQLTestDatabase(inputDatabase, domain + "GRID_FE_PROCESS");
-                    serverIsUsable = serverIsUsable && AccessHelper.SQLTestDatabase(inputDatabase, domain + "GRID_FE_MODEL_RUN");
-                    serverIsUsable = serverIsUsable && AccessHelper.SQLTestDatabase(inputDatabase, domain + "GRID_FE_HYETOGRAPHS");
-                    serverIsUsable = serverIsUsable && AccessHelper.SQLTestDatabase(inputDatabase, domain + "GRID_FE_HYETOGRAPH_DATA");
-                    serverIsUsable = serverIsUsable && AccessHelper.SQLTestDatabase(inputDatabase, domain + "GRID_FE_GRID_PROJECTS");
-                    serverIsUsable = serverIsUsable && AccessHelper.SQLTestDatabase(inputDatabase, domain + "GRID_Contaminants");
-                    serverIsUsable = serverIsUsable && AccessHelper.SQLTestDatabase(inputDatabase, domain + "GRID_BMP_TYPE_TABLE_GENERAL");
-                    serverIsUsable = serverIsUsable && AccessHelper.SQLTestDatabase(inputDatabase, domain + "GRID_BMP_PERFORMANCE");
-                    serverIsUsable = serverIsUsable && AccessHelper.SQLTestDatabase(inputDatabase, domain + "GRID_pollutant_loadings");
-                
+                serverIsUsable = AccessHelper.SQLTestDatabase(inputDatabase, domain + "GRID_GridResults");
+                serverIsUsable = serverIsUsable + AccessHelper.SQLTestDatabase(inputDatabase, domain + "GRID_ZONING_IMP");
+                serverIsUsable = serverIsUsable + AccessHelper.SQLTestDatabase(inputDatabase, domain + "GRID_variables");
+                serverIsUsable = serverIsUsable + AccessHelper.SQLTestDatabase(inputDatabase, domain + "GRID_FE_SELECTION_SETS");
+                serverIsUsable = serverIsUsable + AccessHelper.SQLTestDatabase(inputDatabase, domain + "GRID_FE_SELECTION_SET_AREAS");
+                serverIsUsable = serverIsUsable + AccessHelper.SQLTestDatabase(inputDatabase, domain + "GRID_FE_SCENARIOS");
+                serverIsUsable = serverIsUsable + AccessHelper.SQLTestDatabase(inputDatabase, domain + "GRID_FE_SCENARIO_X_PROCESS");
+                serverIsUsable = serverIsUsable + AccessHelper.SQLTestDatabase(inputDatabase, domain + "GRID_FE_PROCESS_GROUP");
+                serverIsUsable = serverIsUsable + AccessHelper.SQLTestDatabase(inputDatabase, domain + "GRID_FE_PROCESS");
+                serverIsUsable = serverIsUsable + AccessHelper.SQLTestDatabase(inputDatabase, domain + "GRID_FE_MODEL_RUN");
+                serverIsUsable = serverIsUsable + AccessHelper.SQLTestDatabase(inputDatabase, domain + "GRID_FE_HYETOGRAPHS");
+                serverIsUsable = serverIsUsable + AccessHelper.SQLTestDatabase(inputDatabase, domain + "GRID_FE_HYETOGRAPH_DATA");
+                serverIsUsable = serverIsUsable + AccessHelper.SQLTestDatabase(inputDatabase, domain + "GRID_FE_GRID_PROJECTS");
+                serverIsUsable = serverIsUsable + AccessHelper.SQLTestDatabase(inputDatabase, domain + "GRID_Contaminants");
+                serverIsUsable = serverIsUsable + AccessHelper.SQLTestDatabase(inputDatabase, domain + "GRID_BMP_TYPE_TABLE_GENERAL");
+                serverIsUsable = serverIsUsable + AccessHelper.SQLTestDatabase(inputDatabase, domain + "GRID_BMP_PERFORMANCE");
+                serverIsUsable = serverIsUsable + AccessHelper.SQLTestDatabase(inputDatabase, domain + "GRID_pollutant_loadings");
+                if (serverIsUsable != "")
+                {
+                    MessageBox.Show("The server you have selected is not acceptable to use for the GRIDMODEL");
+                    MessageBox.Show(serverIsUsable);
+                }
+                //if the user has selected the access source radio button, then you also have to try to import the 
+                //access database.  If the access database import fails, then you need to return to the
+                //server selection form
+                else if (SQLisSource == false)
+                {
+
+                    //user provided path of the source access database
+                    System.Windows.Forms.FolderBrowserDialog theFolderBrowserDialog = new FolderBrowserDialog();
+
+                    DialogResult result = theFolderBrowserDialog.ShowDialog();
+                    if(result == DialogResult.OK)
+                    {
+                        string AccessString = theFolderBrowserDialog.SelectedPath;
+
+                        string inputDatabaseStringForAccess = "ODBC;"/*DRIVER={sql server}*/+ ";DSN=" + server + ";DATABASE = " + database;
+                        if (trustedConnection == true)
+                        {
+                            inputDatabaseStringForAccess += ";Trusted_Connection=yes";
+                        }
+                        else
+                        {
+                            inputDatabaseStringForAccess += ";Persist Security Info=True;User ID=" + userID + ";Password=" + password;
+                        }
+                        string outputDatabaseStringForAccess = "Data Source=" + server + ";Initial Catalog=" + database;
+                        if (trustedConnection == true)
+                        {
+                            outputDatabaseStringForAccess += ";Trusted_Connection=yes";
+                        }
+                        else
+                        {
+                            outputDatabaseStringForAccess += ";Persist Security Info=True;User ID=" + userID + ";Password=" + password;
+                        }
+                        serverIsUsable = serverIsUsable + AccessHelper.SQLCopyAccessTable("ZONING_IMP", AccessString, "GRID_ZONING_IMP", outputDatabaseStringForAccess);
+                        serverIsUsable = serverIsUsable + AccessHelper.SQLCopyAccessTable("variables", AccessString, "GRID_variables", outputDatabaseStringForAccess);
+                        serverIsUsable = serverIsUsable + AccessHelper.SQLCopyAccessTable("FE_SELECTION_SETS", AccessString, "GRID_FE_SELECTION_SETS", outputDatabaseStringForAccess);
+                        serverIsUsable = serverIsUsable + AccessHelper.SQLCopyAccessTable("FE_SELECTION_SET_AREAS", AccessString, "GRID_FE_SELECTION_SET_AREAS", outputDatabaseStringForAccess);
+                        serverIsUsable = serverIsUsable + AccessHelper.SQLCopyAccessTable("FE_SCENARIOS", AccessString, "GRID_FE_SCENARIOS", outputDatabaseStringForAccess);
+                        serverIsUsable = serverIsUsable + AccessHelper.SQLCopyAccessTable("FE_SCENARIO_X_PROCESS", AccessString, "GRID_FE_SCENARIO_X_PROCESS", outputDatabaseStringForAccess);
+                        serverIsUsable = serverIsUsable + AccessHelper.SQLCopyAccessTable("FE_PROCESS_GROUP", AccessString, "GRID_FE_PROCESS_GROUP", outputDatabaseStringForAccess);
+                        serverIsUsable = serverIsUsable + AccessHelper.SQLCopyAccessTable("FE_PROCESS", AccessString, "GRID_FE_PROCESS", outputDatabaseStringForAccess);
+                        serverIsUsable = serverIsUsable + AccessHelper.SQLCopyAccessTable("FE_MODEL_RUN", AccessString, "GRID_FE_MODEL_RUN", outputDatabaseStringForAccess);
+                        serverIsUsable = serverIsUsable + AccessHelper.SQLCopyAccessTable("FE_HYETOGRAPHS", AccessString, "GRID_FE_HYETOGRAPHS", outputDatabaseStringForAccess);
+                        serverIsUsable = serverIsUsable + AccessHelper.SQLCopyAccessTable("FE_HYETOGRAPH_DATA", AccessString, "GRID_FE_HYETOGRAPH_DATA", outputDatabaseStringForAccess);
+                        serverIsUsable = serverIsUsable + AccessHelper.SQLCopyAccessTable("FE_GRID_PROJECTS", AccessString, "GRID_FE_GRID_PROJECTS", outputDatabaseStringForAccess);
+                        serverIsUsable = serverIsUsable + AccessHelper.SQLCopyAccessTable("Contaminants", AccessString, "GRID_Contaminants", outputDatabaseStringForAccess);
+                        serverIsUsable = serverIsUsable + AccessHelper.SQLCopyAccessTable("BMP_TYPE_TABLE_GENERAL", AccessString, "GRID_BMP_TYPE_TABLE_GENERAL", outputDatabaseStringForAccess);
+                    }
+                    else serverIsUsable = serverIsUsable + "Chosen access file is unacceptable";
+                }
             }
 
             //if the user has selected that we get the data from an access .mdb, then
             //import those tables
 
-
-
-
-
             ///*waterqualReference* string AccessString = /*"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=*/System.Windows.Forms.Application.StartupPath + "..\\Waterqual_GIS_v5_0.mdb";
-            string inputDatabaseStringForAccess = "ODBC;"/*DRIVER={sql server}*/+";DSN=" + server + ";DATABASE = " + database;
-            if (trustedConnection == true)
-            {
-                inputDatabaseStringForAccess += ";Trusted_Connection=yes";
-            }
-            else
-            {
-                inputDatabaseStringForAccess += ";Persist Security Info=True;User ID=" + userID + ";Password=" + password;
-            }
-            string outputDatabaseStringForAccess = "Data Source="+ server +";Initial Catalog="+database;
-            if (trustedConnection == true)
-            {
-                outputDatabaseStringForAccess += ";Trusted_Connection=yes";
-            }
-            else
-            {
-                outputDatabaseStringForAccess += ";Persist Security Info=True;User ID=" + userID + ";Password=" + password;
-            }
-
+ 
             //this is defunct.  These queries should only happen when someone wants to archive the data to access
             /*
             if (SQLisSource == true)

@@ -898,8 +898,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnproject_id}, true));
                 this.columnproject_id.AutoIncrement = true;
-                this.columnproject_id.AutoIncrementSeed = -1;
-                this.columnproject_id.AutoIncrementStep = -1;
+                this.columnproject_id.AutoIncrementSeed = 1;
                 this.columnproject_id.AllowDBNull = false;
                 this.columnproject_id.Unique = true;
                 this.columnproject_description.MaxLength = 50;
@@ -1208,8 +1207,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnselection_set_id}, true));
                 this.columnselection_set_id.AutoIncrement = true;
-                this.columnselection_set_id.AutoIncrementSeed = -1;
-                this.columnselection_set_id.AutoIncrementStep = -1;
+                this.columnselection_set_id.AutoIncrementSeed = 1;
                 this.columnselection_set_id.AllowDBNull = false;
                 this.columnselection_set_id.Unique = true;
                 this.columndescription.MaxLength = 10;
@@ -1502,8 +1500,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnhyetograph_data_id}, true));
                 this.columnhyetograph_data_id.AutoIncrement = true;
-                this.columnhyetograph_data_id.AutoIncrementSeed = -1;
-                this.columnhyetograph_data_id.AutoIncrementStep = -1;
+                this.columnhyetograph_data_id.AutoIncrementSeed = 1;
                 this.columnhyetograph_data_id.AllowDBNull = false;
                 this.columnhyetograph_data_id.Unique = true;
                 this.columncomment.MaxLength = 50;
@@ -1791,8 +1788,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnhyetograph_id}, true));
                 this.columnhyetograph_id.AutoIncrement = true;
-                this.columnhyetograph_id.AutoIncrementSeed = -1;
-                this.columnhyetograph_id.AutoIncrementStep = -1;
+                this.columnhyetograph_id.AutoIncrementSeed = 1;
                 this.columnhyetograph_id.AllowDBNull = false;
                 this.columnhyetograph_id.Unique = true;
                 this.columndescription.MaxLength = 50;
@@ -2420,8 +2416,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnscenario_id}, true));
                 this.columnscenario_id.AutoIncrement = true;
-                this.columnscenario_id.AutoIncrementSeed = -1;
-                this.columnscenario_id.AutoIncrementStep = -1;
+                this.columnscenario_id.AutoIncrementSeed = 1;
                 this.columnscenario_id.AllowDBNull = false;
                 this.columnscenario_id.Unique = true;
                 this.columntime_period.MaxLength = 50;
@@ -2704,8 +2699,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnselection_set_area_id}, true));
                 this.columnselection_set_area_id.AutoIncrement = true;
-                this.columnselection_set_area_id.AutoIncrementSeed = -1;
-                this.columnselection_set_area_id.AutoIncrementStep = -1;
+                this.columnselection_set_area_id.AutoIncrementSeed = 1;
                 this.columnselection_set_area_id.AllowDBNull = false;
                 this.columnselection_set_area_id.Unique = true;
                 this.columnarea.MaxLength = 50;
@@ -3141,8 +3135,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
                 this.columnproject_id.AutoIncrementSeed = -1;
                 this.columnproject_id.AutoIncrementStep = -1;
                 this.columnmodel_run_id.AutoIncrement = true;
-                this.columnmodel_run_id.AutoIncrementSeed = -1;
-                this.columnmodel_run_id.AutoIncrementStep = -1;
+                this.columnmodel_run_id.AutoIncrementSeed = 1;
                 this.columnmodel_run_id.AllowDBNull = false;
                 this.columnmodel_run_id.Unique = true;
                 this.columnarea.MaxLength = 50;
@@ -3415,8 +3408,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnscenario_x_process_id}, true));
                 this.columnscenario_x_process_id.AutoIncrement = true;
-                this.columnscenario_x_process_id.AutoIncrementSeed = -1;
-                this.columnscenario_x_process_id.AutoIncrementStep = -1;
+                this.columnscenario_x_process_id.AutoIncrementSeed = 1;
                 this.columnscenario_x_process_id.AllowDBNull = false;
                 this.columnscenario_x_process_id.Unique = true;
                 this.columnprocess_group.MaxLength = 60;
@@ -3707,8 +3699,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnprocess_id}, true));
                 this.columnprocess_id.AutoIncrement = true;
-                this.columnprocess_id.AutoIncrementSeed = -1;
-                this.columnprocess_id.AutoIncrementStep = -1;
+                this.columnprocess_id.AutoIncrementSeed = 1;
                 this.columnprocess_id.AllowDBNull = false;
                 this.columnprocess_id.Unique = true;
                 this.columnprocess_group.MaxLength = 20;
@@ -8047,17 +8038,34 @@ WHERE        (project_id = @project_id)";
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [GRID_FE_SCENARIOS] ([scenario_id], [project_id], [time_period], [description], [include_instream_facilities], [pollutant_loading_db], [pollutant_loading_table], [bmp_effectiveness_db], [bmp_effectiveness_table]) VALUES (@scenario_id, @project_id, @time_period, @description, @include_instream_facilities, @pollutant_loading_db, @pollutant_loading_table, @bmp_effectiveness_db, @bmp_effectiveness_table)";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO GRID_FE_SCENARIOS
+                         (project_id, time_period, description, include_instream_facilities, pollutant_loading_db, pollutant_loading_table, bmp_effectiveness_db, bmp_effectiveness_table)
+VALUES        (@project_id,@time_period,@description,@include_instream_facilities,@pollutant_loading_db,@pollutant_loading_table,@bmp_effectiveness_db,@bmp_effectiveness_table)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@scenario_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "scenario_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@project_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "project_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@time_period", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "time_period", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@description", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "description", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@include_instream_facilities", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "include_instream_facilities", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@pollutant_loading_db", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "pollutant_loading_db", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@pollutant_loading_table", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "pollutant_loading_table", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@bmp_effectiveness_db", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "bmp_effectiveness_db", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@bmp_effectiveness_table", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "bmp_effectiveness_table", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@project_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "project_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@time_period", global::System.Data.SqlDbType.VarChar, 255, global::System.Data.ParameterDirection.Input, 0, 0, "time_period", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@description", global::System.Data.SqlDbType.VarChar, 255, global::System.Data.ParameterDirection.Input, 0, 0, "description", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@include_instream_facilities", global::System.Data.SqlDbType.Bit, 1, global::System.Data.ParameterDirection.Input, 0, 0, "include_instream_facilities", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@pollutant_loading_db", global::System.Data.SqlDbType.VarChar, 255, global::System.Data.ParameterDirection.Input, 0, 0, "pollutant_loading_db", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@pollutant_loading_table", global::System.Data.SqlDbType.VarChar, 255, global::System.Data.ParameterDirection.Input, 0, 0, "pollutant_loading_table", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@bmp_effectiveness_db", global::System.Data.SqlDbType.VarChar, 255, global::System.Data.ParameterDirection.Input, 0, 0, "bmp_effectiveness_db", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@bmp_effectiveness_table", global::System.Data.SqlDbType.VarChar, 255, global::System.Data.ParameterDirection.Input, 0, 0, "bmp_effectiveness_table", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.UpdateCommand.Connection = this.Connection;
+            this._adapter.UpdateCommand.CommandText = @"UPDATE       GRID_FE_SCENARIOS
+SET                project_id = @project_id, time_period = @time_period, description = @description, include_instream_facilities = @include_instream_facilities, pollutant_loading_db = @pollutant_loading_db, 
+                         pollutant_loading_table = @pollutant_loading_table, bmp_effectiveness_db = @bmp_effectiveness_db, bmp_effectiveness_table = @bmp_effectiveness_table
+WHERE        (scenario_id = @scenario_id)";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@project_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "project_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@time_period", global::System.Data.SqlDbType.VarChar, 255, global::System.Data.ParameterDirection.Input, 0, 0, "time_period", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@description", global::System.Data.SqlDbType.VarChar, 255, global::System.Data.ParameterDirection.Input, 0, 0, "description", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@include_instream_facilities", global::System.Data.SqlDbType.Bit, 1, global::System.Data.ParameterDirection.Input, 0, 0, "include_instream_facilities", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@pollutant_loading_db", global::System.Data.SqlDbType.VarChar, 255, global::System.Data.ParameterDirection.Input, 0, 0, "pollutant_loading_db", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@pollutant_loading_table", global::System.Data.SqlDbType.VarChar, 255, global::System.Data.ParameterDirection.Input, 0, 0, "pollutant_loading_table", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@bmp_effectiveness_db", global::System.Data.SqlDbType.VarChar, 255, global::System.Data.ParameterDirection.Input, 0, 0, "bmp_effectiveness_db", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@bmp_effectiveness_table", global::System.Data.SqlDbType.VarChar, 255, global::System.Data.ParameterDirection.Input, 0, 0, "bmp_effectiveness_table", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@scenario_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "scenario_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -8619,14 +8627,28 @@ FROM          ((((GRID_FE_SELECTION_SET_AREAS INNER JOIN
             tableMapping.ColumnMappings.Add("scenario_id", "scenario_id");
             tableMapping.ColumnMappings.Add("process_group", "process_group");
             this._adapter.TableMappings.Add(tableMapping);
+            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.DeleteCommand.Connection = this.Connection;
+            this._adapter.DeleteCommand.CommandText = "DELETE FROM GRID_FE_SCENARIO_X_PROCESS\r\nWHERE        (scenario_x_process_id = @sc" +
+                "enario_x_process_id)";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@scenario_x_process_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "scenario_x_process_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [GRID_FE_SCENARIO_X_PROCESS] ([scenario_x_process_id], [scenario_id]," +
-                " [process_group]) VALUES (@scenario_x_process_id, @scenario_id, @process_group)";
+            this._adapter.InsertCommand.CommandText = "INSERT INTO GRID_FE_SCENARIO_X_PROCESS\r\n                         (scenario_id, pr" +
+                "ocess_group)\r\nVALUES        (@scenario_id,@process_group)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@scenario_x_process_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "scenario_x_process_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@scenario_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "scenario_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@process_group", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "process_group", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@scenario_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "scenario_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@process_group", global::System.Data.SqlDbType.VarChar, 255, global::System.Data.ParameterDirection.Input, 0, 0, "process_group", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.UpdateCommand.Connection = this.Connection;
+            this._adapter.UpdateCommand.CommandText = "UPDATE       GRID_FE_SCENARIO_X_PROCESS\r\nSET                scenario_id = @scenar" +
+                "io_id, process_group = @process_group\r\nWHERE        (scenario_x_process_id = @sc" +
+                "enario_x_process_id)";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@scenario_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "scenario_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@process_group", global::System.Data.SqlDbType.VarChar, 255, global::System.Data.ParameterDirection.Input, 0, 0, "process_group", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@scenario_x_process_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "scenario_x_process_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -9053,14 +9075,12 @@ FROM          ((((GRID_FE_SELECTION_SET_AREAS INNER JOIN
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [GRID_FE_PROCESS_GROUP] ([process_group_id], [process_group], [descri" +
-                "ption], [group_order]) VALUES (@process_group_id, @process_group, @description, " +
-                "@group_order)";
+            this._adapter.InsertCommand.CommandText = "INSERT INTO GRID_FE_PROCESS_GROUP\r\n                         (process_group, descr" +
+                "iption, group_order)\r\nVALUES        (@process_group,@description,@group_order)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@process_group_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "process_group_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@process_group", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "process_group", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@description", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "description", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@group_order", global::System.Data.SqlDbType.Real, 0, global::System.Data.ParameterDirection.Input, 0, 0, "group_order", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@process_group", global::System.Data.SqlDbType.VarChar, 255, global::System.Data.ParameterDirection.Input, 0, 0, "process_group", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@description", global::System.Data.SqlDbType.VarChar, 255, global::System.Data.ParameterDirection.Input, 0, 0, "description", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@group_order", global::System.Data.SqlDbType.Real, 4, global::System.Data.ParameterDirection.Input, 0, 0, "group_order", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

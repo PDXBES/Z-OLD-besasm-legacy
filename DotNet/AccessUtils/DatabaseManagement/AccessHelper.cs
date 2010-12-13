@@ -120,9 +120,9 @@ namespace SystemsAnalysis.Utils.AccessUtils
     {
       LinkTable(tableName, sourceDatabase, tableName);
     }
-    public void SQLCopyAccessTable(string AccessTableName, string sourceDatabase, string SQLTableName)
+    public string SQLCopyAccessTable(string AccessTableName, string sourceDatabase, string SQLTableName)
     {
-        SQLCopyAccessTable(AccessTableName, sourceDatabase, SQLTableName, CurrentSQLDB.ConnectionString);
+        return SQLCopyAccessTable(AccessTableName, sourceDatabase, SQLTableName, CurrentSQLDB.ConnectionString);
     }
 
     /// <summary>
@@ -215,8 +215,9 @@ namespace SystemsAnalysis.Utils.AccessUtils
         }
     }
 
-    public static void SQLCopyAccessTable(string AccessTableName, string sourceDatabase, string SQLTableName, string SQLDB)
+    public static string SQLCopyAccessTable(string AccessTableName, string sourceDatabase, string SQLTableName, string SQLDB)
     {
+        string exceptionString = "";
         System.Data.DataTable table = new System.Data.DataTable();
         //dao.TableDef linkTable;
         string linkTableConnection = "Provider=Microsoft.Jet.OleDb.4.0;DATA SOURCE=" + sourceDatabase;
@@ -230,13 +231,6 @@ namespace SystemsAnalysis.Utils.AccessUtils
         {
             cmd.CommandTimeout = 0;
             cmd.ExecuteNonQuery();
-        }
-        catch (SqlException ae)
-        {
-            //Could not drop table
-        }
-        try
-        {
             OleDbDataAdapter accDataAdapter = new OleDbDataAdapter("SELECT * FROM " + AccessTableName, linkTableConnection);
             accDataAdapter.Fill(table);
             SqlTableCreator theCreator = new SqlTableCreator(thisSQLDB);
@@ -266,6 +260,7 @@ namespace SystemsAnalysis.Utils.AccessUtils
                         catch (Exception ex)
                         {
                             Console.WriteLine(ex.Message);
+                            exceptionString = exceptionString + ex.ToString();
                         }
 
                         connection.Close();
@@ -274,14 +269,15 @@ namespace SystemsAnalysis.Utils.AccessUtils
             }
             catch (SqlException ae)
             {
-                //Could not drop table
+                exceptionString = exceptionString + ae.ToString();
             }
         }
         catch (Exception ex)
         {
-            //show errors
+            exceptionString = exceptionString + ex.ToString();
         }
         thisSQLDB.Close();
+        return exceptionString;
     }
 
     public static void AccessCopySQLTable(string AccessTableName, string sourceDatabase, string SQLTableName, string outputDatabase)
@@ -1547,28 +1543,28 @@ namespace SystemsAnalysis.Utils.AccessUtils
 
       }
 
-      public static bool SQLTestDatabase(string databaseName, string tableName)
+      public static string SQLTestDatabase(string databaseName, string tableName)
       {
-          bool connectionWorks = false;
+          string connectionWorks = "";
 
           System.Data.DataTable inputTable = new System.Data.DataTable();
           //System.Data.DataTable outputTable = new System.Data.DataTable();
           SqlConnection outputDatabaseConnection = new SqlConnection(databaseName);
-          outputDatabaseConnection.Open();
-
-          //remove any existing matching output table from the output database
-          string SELECTsql = "SELECT TOP 1 * FROM " + tableName;
-          SqlCommand cmd = new SqlCommand(SELECTsql, outputDatabaseConnection);
           try
           {
+              outputDatabaseConnection.Open();
+              //remove any existing matching output table from the output database
+              string SELECTsql = "SELECT TOP 1 * FROM " + tableName;
+              SqlCommand cmd = new SqlCommand(SELECTsql, outputDatabaseConnection);
+
               cmd.CommandTimeout = 0;
               cmd.ExecuteNonQuery();
-              connectionWorks = true;
+              connectionWorks = "";
           }
           catch (SqlException ae)
           {
               //Could not select from table
-              connectionWorks = false;
+              connectionWorks = ae.ToString();
           }
 
           return connectionWorks;
