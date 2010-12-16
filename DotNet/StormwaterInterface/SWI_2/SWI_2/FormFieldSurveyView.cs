@@ -24,6 +24,12 @@ namespace SWI_2
 
         private void FormFieldSurveyView_Load(object sender, EventArgs e)
         {
+            System.Security.Principal.WindowsIdentity ident = System.Security.Principal.WindowsIdentity.GetCurrent();
+            System.Security.Principal.WindowsPrincipal user = new System.Security.Principal.WindowsPrincipal(ident);
+            string theName = "["+user.Identity.Name+"]";
+            //MessageBox.Show(theName);
+            this.sWSP_MESH1TableAdapter.SET_SCHEMA_ISSACG(theName);
+
             // TODO: This line of code loads data into the 'sANDBOXDataSet.SWSP_CULVERT_OPENING_TYPE' table. You can move, or remove it, as needed.
             this.sWSP_CULVERT_OPENING_TYPETableAdapter.Fill(this.sANDBOXDataSet.SWSP_CULVERT_OPENING_TYPE);
             // TODO: This line of code loads data into the 'sANDBOXDataSet.SWSP_MATERIAL_TYPE' table. You can move, or remove it, as needed.
