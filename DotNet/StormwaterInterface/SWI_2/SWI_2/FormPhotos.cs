@@ -39,7 +39,7 @@ namespace SWI_2
 
         private void buttonDeletePhoto_Click(object sender, EventArgs e)
         {
-            this.sWSP_PHOTOTableAdapter.Delete((int)this.dataGridViewPhotos.CurrentRow.Cells[0].Value, (int)this.dataGridViewPhotos.CurrentRow.Cells[1].Value, (string)this.dataGridViewPhotos.CurrentRow.Cells[2].Value);
+            this.sWSP_PHOTOTableAdapter.DeleteQuery((int)this.dataGridViewPhotos.CurrentRow.Cells[0].Value);
             this.sWSP_PHOTOTableAdapter.FillByGlobalID((SANDBOXDataSet.SWSP_PHOTODataTable)((SANDBOXDataSet)this.sWSPPHOTOBindingSource.DataSource).SWSP_PHOTO, _GlobalID);
         }
 
