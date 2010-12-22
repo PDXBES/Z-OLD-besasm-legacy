@@ -33,7 +33,6 @@
     <TargetCulture>en-US</TargetCulture>
     <ProductName>Grid Model</ProductName>
     <PublisherName>BES Systems Analysis</PublisherName>
-    <WebPage>publish.htm</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <ApplicationRevision>37</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
