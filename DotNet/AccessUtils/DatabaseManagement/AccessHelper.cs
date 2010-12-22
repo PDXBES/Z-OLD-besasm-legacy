@@ -334,6 +334,29 @@ namespace SystemsAnalysis.Utils.AccessUtils
         ws.Close();
     }
 
+    public static void AccessDropQuery(string AccessQueryName, string outputDatabase)
+    {
+
+        string linkTableConnection = outputDatabase;
+        //linkTable.SourceTableName = tableName;
+        dao._DBEngine dbEng = new dao.DBEngineClass();
+        dao.Workspace ws = dbEng.CreateWorkspace("", "admin", "", dao.WorkspaceTypeEnum.dbUseJet);
+        dao.Database db = ws.OpenDatabase(outputDatabase, true, false, "");
+
+        //get rid of the table if it already exists in access
+        try
+        {
+            db.DeleteQueryDef(AccessQueryName);
+        }
+        catch (Exception ex)
+        {
+            //table doesnt exist
+        }
+
+        db.Close();
+        ws.Close();
+    }
+
     public static void AccessCopyTable(string CopiedTableName, string OriginalTableName, string outputDatabase)
     {
 
@@ -440,6 +463,35 @@ namespace SystemsAnalysis.Utils.AccessUtils
     }
 
     /// <summary>
+    /// The name of a query to create in a database.
+    /// The name of the database to create the query in
+    /// </summary>
+    /// <param name ="queryName">The name of the query to create</param>
+    /// <param name ="queryText">An SQL statement to store in a query in the database</param>
+    /// <param name ="DatabaseName">The location of the access database in which to place the query</param>
+    public static void AccessCreateQuery(string queryName, string queryText, string accessDBLocation)
+    {
+        //delete the query, if it already exists
+        AccessDropQuery(queryName, accessDBLocation);
+
+        dao._DBEngine dbEng = new dao.DBEngineClass();
+        dao.Workspace ws = dbEng.CreateWorkspace("", "admin", "", dao.WorkspaceTypeEnum.dbUseJet);
+        dao.Database db = ws.OpenDatabase(accessDBLocation, true, false, "");
+
+        try
+        {
+            db.CreateQueryDef(queryName, queryText);
+        }
+        catch (Exception ex)
+        {
+            //
+        }
+
+        db.Close();
+        ws.Close();
+    }
+
+    /// <summary>
     /// The name of a query to create in the current database.
     /// </summary>
     /// <param name="queryName">The name of the query to create</param>
@@ -541,6 +593,43 @@ namespace SystemsAnalysis.Utils.AccessUtils
       dao.QueryDef queryDef;
       queryDef = GetQueryDef(queryName);
       queryDef.Execute(null);
+    }
+
+    /// <summary>
+    /// Executes an action query in the provided database
+    /// </summary>
+    /// <param name="queryName">The name of the action query to execute</param>
+    /// <param name="accessDBLocation">The location of the database in which to execute the action query</param>
+    public static void AccessExecuteActionQuery(string queryName, string accessDBLocation)
+    {
+        dao._DBEngine dbEng = new dao.DBEngineClass();
+        dao.Workspace ws = dbEng.CreateWorkspace("", "admin", "", dao.WorkspaceTypeEnum.dbUseJet);
+        dao.Database db = ws.OpenDatabase(accessDBLocation, true, false, "");
+
+        try
+        {
+            dao.QueryDef queryDef = null;
+
+            dao.QueryDefs queryDefs = db.QueryDefs;
+
+            for (int i = 0; i < queryDefs.Count; i++)
+            {
+                dao.QueryDef queryDefMatch = queryDefs[i];
+                if (queryName.ToUpper() == queryDefMatch.Name.ToUpper())
+                {
+                    queryDef = queryDefMatch;
+                }
+            }
+
+            queryDef.Execute(null);
+        }
+        catch (Exception ex)
+        {
+            //
+        }
+
+        db.Close();
+        ws.Close();
     }
 
     public void SQLExecuteActionQuery(string queryName)
