@@ -3,7 +3,7 @@
 // Path: C:\Development\DotNet\CostEstimator\Classes, Author: Arnel
 // Code lines: 18, Size of file: 292 Bytes
 // Creation date: 6/11/2008 5:42 PM
-// Last modified: 11/24/2008 4:57 PM
+// Last modified: 10/12/2010 2:59 PM
 
 #region Using directives
 using System;
@@ -25,6 +25,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 		#endregion
 
     private static double BORINGJACKINGMULTIPLIER = 2.5;
+    private static double MICROTUNNELMULTIPLIER = 3.0;
 
 		#region Constructors
 		/// <summary>
@@ -45,8 +46,17 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 		{
 			get
 			{
-				return string.Format("Boring/jacking {0:F0} in diam, {1} pipe, {2:F0} ft deep", _ConflictPackage.Diameter,
-					_ConflictPackage.PipeMaterial, _ConflictPackage.Depth);
+        string tunnelType = "Not boring/jacking";
+        if (IsBoringJacking)
+        {
+          if (IsMicroTunnel)
+            tunnelType = "Microtunnel";
+          else
+            tunnelType = "Boring/jacking";
+        } // if
+
+				return string.Format("{3} {0:F0} in diam, {1} pipe, {2:F0} ft deep", _ConflictPackage.Diameter,
+					_ConflictPackage.PipeMaterial, _ConflictPackage.Depth, tunnelType);
 			} // get
 		} // Name
 
@@ -75,7 +85,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 				pipeCoster.Material = _ConflictPackage.PipeMaterial;
 				pipeCoster.Depth = _ConflictPackage.Depth;
 
-        return (decimal)((double)pipeCoster.DirectConstructionCost * BORINGJACKINGMULTIPLIER);
+        double multiplier = IsMicroTunnel ? MICROTUNNELMULTIPLIER : BORINGJACKINGMULTIPLIER;
+        return (decimal)((double)pipeCoster.DirectConstructionCost * multiplier);
 			} // get
 		} // UnitCost
 
@@ -91,6 +102,18 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 			} // get
 		} // UnitCost
 
+    /// <summary>
+    /// Is micro tunnel
+    /// </summary>
+    /// <returns>Bool</returns>
+    public bool IsMicroTunnel
+    {
+      get
+      {
+        return _ConflictPackage.Length <= 50;
+      } // get
+    } // isMicroTunnel
+
 		/// <summary>
 		/// Length of boring/jacking
 		/// </summary>
@@ -103,6 +126,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 				{
 					bool highPipeDepth = _ConflictPackage.Depth > MINIMUM_PIPE_DEPTH_REQUIRED_FOR_BORING_JACKING_FT;
 					bool crossesFreeway = _ConflictPackage.Conflicts.NumFreewayCrossings > 0;
+
 					if (highPipeDepth || crossesFreeway)
 					{
 						return _ConflictPackage.Length;
@@ -118,7 +142,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 					} // else
 				} // if
 				else
-					return 0;
+          return 0;
 			} // get
 		} // Units
 
