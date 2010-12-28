@@ -6,11 +6,19 @@ using System.Collections;
 namespace SystemsAnalysis.Tracer
 {
     /// <summary>
-    /// Summary description for Network.
+    /// A Network of Edges
     /// </summary>
     public class Network : INetwork
     {
+        /// <summary>
+        /// The collection of Edges forming the Network
+        /// </summary>
         private IGraphEdges edges;
+
+        /// <summary>
+        /// An internal counter used during tracing to track the number times
+        /// the trace has iterated over the network
+        /// </summary>
         static int recursionCount = 0;
         /// <summary>
         /// Creates a new, empty Network.
@@ -27,6 +35,7 @@ namespace SystemsAnalysis.Tracer
         {
             this.edges = edges;
         }
+
         /// <summary>
         /// Creates a new Network from an ADO.NET DataTable.
         /// </summary>
@@ -39,7 +48,7 @@ namespace SystemsAnalysis.Tracer
         /// <param name="sinkNodeField">The name of the field containing the Sink Node 
         /// of the GraphEdges. Also known as the Downstream Node.</param>
         public Network(DataTable GraphDataTable, string edgeIDField,
-        string sourceNodeField, string sinkNodeField)
+          string sourceNodeField, string sinkNodeField)
         {
             edges = new GraphEdges();
             DataRowCollection GraphDataRows = GraphDataTable.Rows;
@@ -140,6 +149,10 @@ namespace SystemsAnalysis.Tracer
             return subNetwork;
         }
 
+        /// <summary>
+        /// Adds an edge to the internal collection of edges
+        /// </summary>
+        /// <param name="edge">The edge to add</param>
         private void AddGraphEdge(IGraphEdge edge)
         {
             this.edges.Add(edge);
