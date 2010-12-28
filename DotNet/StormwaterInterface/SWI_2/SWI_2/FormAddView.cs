@@ -57,10 +57,10 @@ namespace SWI_2
             try
             {
                 SWI_2.SANDBOXDataSetTableAdapters.SWSP_VIEWTableAdapter taV = new SWI_2.SANDBOXDataSetTableAdapters.SWSP_VIEWTableAdapter();
-                taV.Insert((int)comboBoxSubwatershed.SelectedValue, (int)numericUpDownAddView.Value, "");
+                taV.InsertQuery((int)comboBoxSubwatershed.SelectedValue, (int)numericUpDownAddView.Value, "");
                 
                 SWI_2.SANDBOXDataSetTableAdapters.SWSP_SURVEY_PAGETableAdapter taS = new SWI_2.SANDBOXDataSetTableAdapters.SWSP_SURVEY_PAGETableAdapter();
-                taS.Insert(taV.ScalarQuery(), (int)numericUpDownAddFirstSurveyPage.Value, System.DateTime.Today, "", "");
+                taS.InsertQuery((int)taV.ScalarQuery(), (int)numericUpDownAddFirstSurveyPage.Value, System.DateTime.Today, "", "");
                 //_MyParentForm is for base users, so they need to be told what they were doing.
                 //homefully administrators can remember.
                 if (_MyParentForm != null)

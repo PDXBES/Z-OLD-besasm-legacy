@@ -19,12 +19,13 @@ namespace SystemsAnalysis.Grid.GridAnalysis
         private List<GridModelRun> gridModelRuns;
         private List<GridModelResult> gridModelResults;
         public string GridDataTable = null;
+        private string SQLDatabaseConnectionString;
 
         private AccessHelper accessHelper;
 
         public GridModelEngine(int projectID, string projectDescription, string gridDataPath,
-            string bmpPath, string mipPath, string osfPath, string outputDirectory)
-            : this()
+            string bmpPath, string mipPath, string osfPath, string outputDirectory, string SQLDatabaseConnectionString)
+            : this(SQLDatabaseConnectionString)
         {
             this.projectID = projectID;
             this.projectDescription = projectDescription;
@@ -33,15 +34,44 @@ namespace SystemsAnalysis.Grid.GridAnalysis
             this.mipPath = mipPath;
             this.osfPath = osfPath;
             this.outputDirectory = outputDirectory;
+            this.SQLDatabaseConnectionString = SQLDatabaseConnectionString;
+            accessHelper = new AccessHelper(gridModelPath, SQLDatabaseConnectionString);
+
+            
         }
-        public GridModelEngine()
+        //These constructors should not be connecting to the base access database to get the grid table
+        //the grid table is really too large to be placing in the base access database, it should just be a linked table.
+        public GridModelEngine(string SQLDatabaseConnectionString)
         {            
-            this.gridModelPath = System.AppDomain.CurrentDomain.BaseDirectory + "Waterqual_GIS_v5_0.mdb";
+            ///*waterqualReference* this.gridModelPath = System.AppDomain.CurrentDomain.BaseDirectory + "Waterqual_GIS_v5_0.mdb";
             
             gridDataTableName = ConfigurationManager.AppSettings.Get("gridDataTableName");
 
             gridModelRuns = new List<GridModelRun>();
             gridModelResults = new List<GridModelResult>();
+            accessHelper = new AccessHelper(gridModelPath, SQLDatabaseConnectionString/*"Data Source=SIRTOBY;Initial Catalog=SANDBOX;"*/);
+
+        }
+        //These constructors should not be connecting to the base access database to get the grid table
+        //the grid table is really too large to be placing in the base access database, it should just be a linked table.
+        public GridModelEngine()
+        {
+            ///*waterqualReference* this.gridModelPath = System.AppDomain.CurrentDomain.BaseDirectory + "Waterqual_GIS_v5_0.mdb";
+
+            gridDataTableName = ConfigurationManager.AppSettings.Get("gridDataTableName");
+
+            gridModelRuns = new List<GridModelRun>();
+            gridModelResults = new List<GridModelResult>();
+            accessHelper = new AccessHelper();
+        }
+
+        public void populateGridData()
+        {
+            accessHelper.SQLCopyAccessTable(gridModelRuns[0].BMPEffectivenessTable,
+                gridModelRuns[0].BMPEffectivenessDB, "GRID_BMP_PERFORMANCE");
+            accessHelper.SQLCopyAccessTable(gridModelRuns[0].PollutantLoadingTable,
+                gridModelRuns[0].PollutantLoadingDB, "GRID_pollutant_loadings");
+            accessHelper.SQLCopyAccessTable(gridDataTableName, gridDataPath, "GRID_" + gridDataTableName);
         }
 
         #region Accessors for Xml serialization
@@ -169,43 +199,24 @@ namespace SystemsAnalysis.Grid.GridAnalysis
         /// <returns>A GridModelOutput object containing model run metadata</returns>
         public GridModelOutput ExecuteModels()
         {
-            accessHelper = new AccessHelper(gridModelPath, /*"Data Source=WS09858\\SQLEXPRESS;Initial Catalog=PortlandHarbor;Integrated Security=True"*/"Data Source=SIRTOBY;Initial Catalog=SANDBOX;Persist Security Info=True;User ID=GIS;Password=Extra$hade");
-
+            
             GridModelOutput gridModelOutput = new GridModelOutput();
             
             //copy all of the important tables from the access database to the SQL server database
-            accessHelper.SQLCopyAccessTable("ZONING_IMP", gridModelPath, "GRID_ZONING_IMP");
-            accessHelper.SQLCopyAccessTable("variables", gridModelPath, "GRID_variables");
-            accessHelper.SQLCopyAccessTable("FE_SELECTION_SETS", gridModelPath, "GRID_FE_SELECTION_SETS");
-            accessHelper.SQLCopyAccessTable("FE_SELECTION_SET_AREAS", gridModelPath, "GRID_FE_SELECTION_SET_AREAS");
-            accessHelper.SQLCopyAccessTable("FE_SCENARIOS", gridModelPath, "GRID_FE_SCENARIOS");
-            accessHelper.SQLCopyAccessTable("FE_SCENARIO_X_PROCESS", gridModelPath, "GRID_FE_SCENARIO_X_PROCESS");
-            accessHelper.SQLCopyAccessTable("FE_PROCESS_GROUP", gridModelPath, "GRID_FE_PROCESS_GROUP");
-            accessHelper.SQLCopyAccessTable("FE_PROCESS", gridModelPath, "GRID_FE_PROCESS");
-            accessHelper.SQLCopyAccessTable("FE_MODEL_RUN", gridModelPath, "GRID_FE_MODEL_RUN");
-            accessHelper.SQLCopyAccessTable("FE_HYETOGRAPHS", gridModelPath, "GRID_FE_HYETOGRAPHS");
-            accessHelper.SQLCopyAccessTable("FE_HYETOGRAPH_DATA", gridModelPath, "GRID_FE_HYETOGRAPH_DATA");
-            accessHelper.SQLCopyAccessTable("FE_GRID_PROJECTS", gridModelPath, "GRID_FE_GRID_PROJECTS");
-            accessHelper.SQLCopyAccessTable("Contaminants", gridModelPath, "GRID_Contaminants");
-            accessHelper.SQLCopyAccessTable("BMP_TYPE_TABLE_GENERAL", gridModelPath, "GRID_BMP_TYPE_TABLE_GENERAL");
-
-            GridDataTable = gridDataTableName;
-            /////Moved from ExecuteModel
-            accessHelper.SQLCopyAccessTable(gridDataTableName, gridDataPath, "GRID_" + gridDataTableName);
-            accessHelper.SQLCopyAccessTable(gridModelRuns[0].BMPEffectivenessTable,
-                gridModelRuns[0].BMPEffectivenessDB, "GRID_BMP_PERFORMANCE");
-            accessHelper.SQLCopyAccessTable(gridModelRuns[0].PollutantLoadingTable,
-                gridModelRuns[0].PollutantLoadingDB, "GRID_pollutant_loadings");
+           
 
             CreatePRFListQuery(gridModelRuns[0].InstreamFacilities, gridModelRuns[0].TimePeriod);
             CreateBMPUnionQuery();
+            accessHelper.SQLExecuteActionQuery("GRID_ClearCompiledResults");
             foreach (GridModelRun gridModelRun in gridModelRuns)
             {
                 try
                 {
                     this.StatusChanged("Executing " + gridModelRun.ModelDescription);
                     //////
+                    
                     ExecuteModel(gridModelRun);
+                    accessHelper.SQLExecuteActionQuery("GRID_CompileResults");
                     gridModelOutput.AddPollutantLoadingMetadataDS(gridModelRun.ScenarioDescription);
                 }
                 catch (Exception ex)
@@ -226,6 +237,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis
 
             ExecuteTimeSteps(gridModelRun);
             //this could be part of the sql stored procedure loop
+            
             foreach (GridModelTimeStep gridModelTimeStep in gridModelRun.GridModelTimeSteps)
             {
                 this.StatusChanged(gridModelRun.ModelDescription + ": " + "Exporting results");
@@ -271,6 +283,10 @@ namespace SystemsAnalysis.Grid.GridAnalysis
                     {
                         accessHelper.SQLExecuteActionQuery(gridProcessGroup.GroupName, "@SelectionSetID", gridModelRun.SelectionSetAreaID);
                     }
+                    else if (gridProcessGroup.GroupName == "GRID_COMMON_RAINMESH")
+                    {
+                        accessHelper.SQLExecuteActionQuery(gridProcessGroup.GroupName, "@SelectionSetID", gridModelRun.SelectionSetAreaID);
+                    }
                     else
                     {
                         accessHelper.SQLExecuteActionQuery(gridProcessGroup.GroupName);
@@ -293,7 +309,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis
             string runDescription;
             if (totalRunCount == 1)
             {
-                runDescription = "";
+                runDescription = "01";
             }
             else
             {

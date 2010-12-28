@@ -15,10 +15,10 @@
     <ManifestCertificateThumbprint>1B074F05BC35DE971F992EC7F199511194791BE3</ManifestCertificateThumbprint>
     <ManifestKeyFile>GridInterface_TemporaryKey.pfx</ManifestKeyFile>
     <GenerateManifests>true</GenerateManifests>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <StartupObject>SystemsAnalysis.Grid.GridAnalysis.Program</StartupObject>
-    <PublishUrl>\\cassio\modeling\Model_Programs\bin\GridModel\</PublishUrl>
+    <PublishUrl>\\CASSIO\ASM_Apps\Apps\GRIDModel\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Unc</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
@@ -28,16 +28,16 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <InstallUrl>\\cassio\modeling\Model_Programs\bin\GridModel\</InstallUrl>
+    <InstallUrl>\\CASSIO\ASM_Apps\Apps\GRIDModel\</InstallUrl>
     <SupportUrl>http://twiki.bes-sa.org/bin/view/Development/GRIDModel</SupportUrl>
     <TargetCulture>en-US</TargetCulture>
     <ProductName>Grid Model</ProductName>
     <PublisherName>BES Systems Analysis</PublisherName>
-    <WebPage>publish.htm</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>19</ApplicationRevision>
+    <ApplicationRevision>37</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -90,10 +90,19 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization.Formatters.Soap" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FormServerDatabaseUserIDPasswordDomainEntry.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormServerDatabaseUserIDPasswordDomainEntry.Designer.cs">
+      <DependentUpon>FormServerDatabaseUserIDPasswordDomainEntry.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormUserIDAndPasswordEntry.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -132,12 +141,12 @@
       <DependentUpon>PollutantLoadingMetadataDataSet.xsd</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="PollutantLoad.cs" />
     <Compile Include="PollutantLoadingMetadataDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>PollutantLoadingMetadataDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="PollutantLoad.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FrmChooseProcesses.resx">
@@ -374,15 +383,13 @@
     </PublishFile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="FormServerDatabaseUserIDPasswordDomainEntry.resx">
+      <DependentUpon>FormServerDatabaseUserIDPasswordDomainEntry.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormUserIDAndPasswordEntry.resx">
       <DependentUpon>FormUserIDAndPasswordEntry.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SplashGridModel.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Waterqual_GIS_v5_0.mdb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\AccessUtils\DatabaseManagement\SystemsAnalysis.Utils.AccessUtils.DatabaseManagement.csproj">

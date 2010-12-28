@@ -106,6 +106,7 @@
       <Name>System.Data</Name>
     </Reference>
     <Reference Include="System.Management" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.XML">
       <Name>System.XML</Name>
     </Reference>

@@ -14,6 +14,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis
         public event EventHandler InfoFormClosed; 
         public string UserID="";
         public string Password="";
+        public string Domain="";
         public bool useTrustedConnection=false;
 
         public FormUserIDAndPasswordEntry()
@@ -22,6 +23,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis
 
             textBoxUserID.Text = UserID;
             textBoxPassword.Text = Password;
+            textBoxDomain.Text = Domain;
             checkBoxUseTrustedConnection.Checked = useTrustedConnection;
         }
 
@@ -29,6 +31,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis
         {
             UserID = textBoxUserID.Text;
             Password = textBoxPassword.Text;
+            Domain = textBoxDomain.Text;
             useTrustedConnection = checkBoxUseTrustedConnection.Checked;
         }
 
