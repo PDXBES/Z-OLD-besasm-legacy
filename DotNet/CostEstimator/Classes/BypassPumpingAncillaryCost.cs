@@ -86,12 +86,12 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 				// >15 cfs: $7000 per day
 
 				if (BypassFlow <= 3)
-					return 1000;
+					return 500;
 				else if (BypassFlow <= 7)
-					return 2500;
+					return 1000;
 				else if (BypassFlow <= 15)
-					return 4000;
-				else return 7000;
+					return 2000;
+				else return 3000;
 			}
 		} // UnitCost
 
