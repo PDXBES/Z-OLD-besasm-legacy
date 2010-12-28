@@ -147,7 +147,7 @@ namespace SWI_2
 
         private void buttonWatershedsAdd_Click(object sender, EventArgs e)
         {
-            this.sWSP_WATERSHEDTableAdapter.Insert("New Watershed", "");
+            this.sWSP_WATERSHEDTableAdapter.InsertQuery("New Watershed", "");
             this.sWSP_WATERSHEDTableAdapter.Fill((SANDBOXDataSet.SWSP_WATERSHEDDataTable)((SANDBOXDataSet)this.sWSPWATERSHEDBindingSource.DataSource).SWSP_WATERSHED);
         }
 
@@ -193,7 +193,7 @@ namespace SWI_2
 
         private void buttonSubwatershedsAdd_Click(object sender, EventArgs e)
         {
-            this.sWSP_SUBWATERSHEDTableAdapter.Insert((int)(((System.Data.DataRowView)sWSPWATERSHEDBindingSource.Current)["watershed_id"]), "New Subwatershed", "");
+            this.sWSP_SUBWATERSHEDTableAdapter.InsertQuery((int)(((System.Data.DataRowView)sWSPWATERSHEDBindingSource.Current)["watershed_id"]), "New Subwatershed", "");
             this.sWSP_SUBWATERSHEDTableAdapter.Fill((SANDBOXDataSet.SWSP_SUBWATERSHEDDataTable)((SANDBOXDataSet)this.sWSPWATERSHEDBindingSource.DataSource).SWSP_SUBWATERSHED);
         }
 
@@ -239,7 +239,7 @@ namespace SWI_2
 
         private void buttonEvaluatorsAdd_Click(object sender, EventArgs e)
         {
-            this.sWSP_EVALUATORTableAdapter.Insert("", "LastName", "FirstName");
+            this.sWSP_EVALUATORTableAdapter.InsertQuery("", "LastName", "FirstName");
             this.sWSP_EVALUATORTableAdapter.Fill((SANDBOXDataSet.SWSP_EVALUATORDataTable)((SANDBOXDataSet)this.sWSPEVALUATORBindingSource.DataSource).SWSP_EVALUATOR);
         }
 
@@ -275,7 +275,7 @@ namespace SWI_2
 
         private void buttonCulvertOpeningsAdd_Click(object sender, EventArgs e)
         {
-            this.sWSP_CULVERT_OPENING_TYPETableAdapter.Insert("", "New Opening Type");
+            this.sWSP_CULVERT_OPENING_TYPETableAdapter.InsertQuery("", "New Opening Type");
             this.sWSP_CULVERT_OPENING_TYPETableAdapter.Fill((SANDBOXDataSet.SWSP_CULVERT_OPENING_TYPEDataTable)((SANDBOXDataSet)this.sWSPCULVERTOPENINGTYPEBindingSource.DataSource).SWSP_CULVERT_OPENING_TYPE);
         }
 
@@ -311,7 +311,7 @@ namespace SWI_2
 
         private void buttonFacingsAdd_Click(object sender, EventArgs e)
         {
-            this.sWSP_FACING_TYPETableAdapter.Insert("", "New Facing Type");
+            this.sWSP_FACING_TYPETableAdapter.InsertQuery("", "New Facing Type");
             this.sWSP_FACING_TYPETableAdapter.Fill((SANDBOXDataSet.SWSP_FACING_TYPEDataTable)((SANDBOXDataSet)this.sWSPFACINGTYPEBindingSource.DataSource).SWSP_FACING_TYPE);
         }
 
@@ -347,7 +347,7 @@ namespace SWI_2
 
         private void buttonShapesAdd_Click(object sender, EventArgs e)
         {
-            this.sWSP_SHAPE_TYPETableAdapter.Insert("NewShp", "New Shape Description");
+            this.sWSP_SHAPE_TYPETableAdapter.InsertQuery("NewShp", "New Shape Description");
             this.sWSP_SHAPE_TYPETableAdapter.Fill((SANDBOXDataSet.SWSP_SHAPE_TYPEDataTable)((SANDBOXDataSet)this.sWSPSHAPETYPEBindingSource.DataSource).SWSP_SHAPE_TYPE);
         }
 
@@ -383,7 +383,7 @@ namespace SWI_2
 
         private void buttonMaterialsAdd_Click(object sender, EventArgs e)
         {
-            this.sWSP_MATERIAL_TYPETableAdapter.Insert("0NewMa", "New material description");
+            this.sWSP_MATERIAL_TYPETableAdapter.InsertQuery("0NewMa", "New material description");
             this.sWSP_MATERIAL_TYPETableAdapter.Fill((SANDBOXDataSet.SWSP_MATERIAL_TYPEDataTable)((SANDBOXDataSet)this.sWSPMATERIALTYPEBindingSource.DataSource).SWSP_MATERIAL_TYPE);
         }
 

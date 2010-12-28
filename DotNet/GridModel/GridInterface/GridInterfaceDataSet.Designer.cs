@@ -898,8 +898,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnproject_id}, true));
                 this.columnproject_id.AutoIncrement = true;
-                this.columnproject_id.AutoIncrementSeed = -1;
-                this.columnproject_id.AutoIncrementStep = -1;
+                this.columnproject_id.AutoIncrementSeed = 1;
                 this.columnproject_id.AllowDBNull = false;
                 this.columnproject_id.Unique = true;
                 this.columnproject_description.MaxLength = 50;
@@ -1146,7 +1145,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public FESelectionSetsRow AddFESelectionSetsRow(FESelectionSetAreasRow parentFESelectionSetAreasRowByFE_SELECTION_SET_AREASFE_SELECTION_SETS, string description, string col_name, string row_name, double percent_overlap) {
+            public FESelectionSetsRow AddFESelectionSetsRow(FESelectionSetAreasRow parentFESelectionSetAreasRowByFE_SELECTION_SET_AREASFE_SELECTION_SETS, string description, string col_name, string row_name, float percent_overlap) {
                 FESelectionSetsRow rowFESelectionSetsRow = ((FESelectionSetsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -1203,13 +1202,12 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
                 base.Columns.Add(this.columncol_name);
                 this.columnrow_name = new global::System.Data.DataColumn("row_name", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnrow_name);
-                this.columnpercent_overlap = new global::System.Data.DataColumn("percent_overlap", typeof(double), null, global::System.Data.MappingType.Element);
+                this.columnpercent_overlap = new global::System.Data.DataColumn("percent_overlap", typeof(float), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnpercent_overlap);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnselection_set_id}, true));
                 this.columnselection_set_id.AutoIncrement = true;
-                this.columnselection_set_id.AutoIncrementSeed = -1;
-                this.columnselection_set_id.AutoIncrementStep = -1;
+                this.columnselection_set_id.AutoIncrementSeed = 1;
                 this.columnselection_set_id.AllowDBNull = false;
                 this.columnselection_set_id.Unique = true;
                 this.columndescription.MaxLength = 10;
@@ -1344,11 +1342,11 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
             
             private global::System.Data.DataColumn columnhyetograph_id;
             
-            private global::System.Data.DataColumn columnrainfall;
-            
             private global::System.Data.DataColumn columnrun_order;
             
             private global::System.Data.DataColumn columncomment;
+            
+            private global::System.Data.DataColumn columnrainfall;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public FEHyetographDataDataTable() {
@@ -1395,13 +1393,6 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn rainfallColumn {
-                get {
-                    return this.columnrainfall;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public global::System.Data.DataColumn run_orderColumn {
                 get {
                     return this.columnrun_order;
@@ -1412,6 +1403,13 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
             public global::System.Data.DataColumn commentColumn {
                 get {
                     return this.columncomment;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn rainfallColumn {
+                get {
+                    return this.columnrainfall;
                 }
             }
             
@@ -1444,14 +1442,14 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public FEHyetographDataRow AddFEHyetographDataRow(FEHyetographsRow parentFEHyetographsRowByFE_HYETOGRAPHSFE_HYETOGRAPH_DATA, double rainfall, int run_order, string comment) {
+            public FEHyetographDataRow AddFEHyetographDataRow(FEHyetographsRow parentFEHyetographsRowByFE_HYETOGRAPHSFE_HYETOGRAPH_DATA, int run_order, string comment, float rainfall) {
                 FEHyetographDataRow rowFEHyetographDataRow = ((FEHyetographDataRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
                         null,
-                        rainfall,
                         run_order,
-                        comment};
+                        comment,
+                        rainfall};
                 if ((parentFEHyetographsRowByFE_HYETOGRAPHSFE_HYETOGRAPH_DATA != null)) {
                     columnValuesArray[1] = parentFEHyetographsRowByFE_HYETOGRAPHSFE_HYETOGRAPH_DATA[0];
                 }
@@ -1482,9 +1480,9 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
             internal void InitVars() {
                 this.columnhyetograph_data_id = base.Columns["hyetograph_data_id"];
                 this.columnhyetograph_id = base.Columns["hyetograph_id"];
-                this.columnrainfall = base.Columns["rainfall"];
                 this.columnrun_order = base.Columns["run_order"];
                 this.columncomment = base.Columns["comment"];
+                this.columnrainfall = base.Columns["rainfall"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1493,17 +1491,16 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
                 base.Columns.Add(this.columnhyetograph_data_id);
                 this.columnhyetograph_id = new global::System.Data.DataColumn("hyetograph_id", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnhyetograph_id);
-                this.columnrainfall = new global::System.Data.DataColumn("rainfall", typeof(double), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnrainfall);
                 this.columnrun_order = new global::System.Data.DataColumn("run_order", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnrun_order);
                 this.columncomment = new global::System.Data.DataColumn("comment", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columncomment);
+                this.columnrainfall = new global::System.Data.DataColumn("rainfall", typeof(float), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnrainfall);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnhyetograph_data_id}, true));
                 this.columnhyetograph_data_id.AutoIncrement = true;
-                this.columnhyetograph_data_id.AutoIncrementSeed = -1;
-                this.columnhyetograph_data_id.AutoIncrementStep = -1;
+                this.columnhyetograph_data_id.AutoIncrementSeed = 1;
                 this.columnhyetograph_data_id.AllowDBNull = false;
                 this.columnhyetograph_data_id.Unique = true;
                 this.columncomment.MaxLength = 50;
@@ -1636,11 +1633,11 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
             
             private global::System.Data.DataColumn columndescription;
             
-            private global::System.Data.DataColumn columntime_step;
-            
             private global::System.Data.DataColumn columntime_step_units;
             
             private global::System.Data.DataColumn columnsource;
+            
+            private global::System.Data.DataColumn columntime_step;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public FEHyetographsDataTable() {
@@ -1687,13 +1684,6 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn time_stepColumn {
-                get {
-                    return this.columntime_step;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public global::System.Data.DataColumn time_step_unitsColumn {
                 get {
                     return this.columntime_step_units;
@@ -1704,6 +1694,13 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
             public global::System.Data.DataColumn sourceColumn {
                 get {
                     return this.columnsource;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn time_stepColumn {
+                get {
+                    return this.columntime_step;
                 }
             }
             
@@ -1736,14 +1733,14 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public FEHyetographsRow AddFEHyetographsRow(string description, double time_step, string time_step_units, string source) {
+            public FEHyetographsRow AddFEHyetographsRow(string description, string time_step_units, string source, float time_step) {
                 FEHyetographsRow rowFEHyetographsRow = ((FEHyetographsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
                         description,
-                        time_step,
                         time_step_units,
-                        source};
+                        source,
+                        time_step};
                 rowFEHyetographsRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowFEHyetographsRow);
                 return rowFEHyetographsRow;
@@ -1771,9 +1768,9 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
             internal void InitVars() {
                 this.columnhyetograph_id = base.Columns["hyetograph_id"];
                 this.columndescription = base.Columns["description"];
-                this.columntime_step = base.Columns["time_step"];
                 this.columntime_step_units = base.Columns["time_step_units"];
                 this.columnsource = base.Columns["source"];
+                this.columntime_step = base.Columns["time_step"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1782,17 +1779,16 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
                 base.Columns.Add(this.columnhyetograph_id);
                 this.columndescription = new global::System.Data.DataColumn("description", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columndescription);
-                this.columntime_step = new global::System.Data.DataColumn("time_step", typeof(double), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columntime_step);
                 this.columntime_step_units = new global::System.Data.DataColumn("time_step_units", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columntime_step_units);
                 this.columnsource = new global::System.Data.DataColumn("source", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnsource);
+                this.columntime_step = new global::System.Data.DataColumn("time_step", typeof(float), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columntime_step);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnhyetograph_id}, true));
                 this.columnhyetograph_id.AutoIncrement = true;
-                this.columnhyetograph_id.AutoIncrementSeed = -1;
-                this.columnhyetograph_id.AutoIncrementStep = -1;
+                this.columnhyetograph_id.AutoIncrementSeed = 1;
                 this.columnhyetograph_id.AllowDBNull = false;
                 this.columnhyetograph_id.Unique = true;
                 this.columndescription.MaxLength = 50;
@@ -2078,8 +2074,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnmodel_run_id}, true));
                 this.columnmodel_run_id.AutoIncrement = true;
-                this.columnmodel_run_id.AutoIncrementSeed = -1;
-                this.columnmodel_run_id.AutoIncrementStep = -1;
+                this.columnmodel_run_id.AutoIncrementSeed = 1;
                 this.columnmodel_run_id.AllowDBNull = false;
                 this.columnmodel_run_id.Unique = true;
             }
@@ -2421,8 +2416,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnscenario_id}, true));
                 this.columnscenario_id.AutoIncrement = true;
-                this.columnscenario_id.AutoIncrementSeed = -1;
-                this.columnscenario_id.AutoIncrementStep = -1;
+                this.columnscenario_id.AutoIncrementSeed = 1;
                 this.columnscenario_id.AllowDBNull = false;
                 this.columnscenario_id.Unique = true;
                 this.columntime_period.MaxLength = 50;
@@ -2705,8 +2699,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnselection_set_area_id}, true));
                 this.columnselection_set_area_id.AutoIncrement = true;
-                this.columnselection_set_area_id.AutoIncrementSeed = -1;
-                this.columnselection_set_area_id.AutoIncrementStep = -1;
+                this.columnselection_set_area_id.AutoIncrementSeed = 1;
                 this.columnselection_set_area_id.AllowDBNull = false;
                 this.columnselection_set_area_id.Unique = true;
                 this.columnarea.MaxLength = 50;
@@ -2838,15 +2831,11 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
             
             private global::System.Data.DataColumn columntime_period;
             
-            private global::System.Data.DataColumn columnscenario_description;
-            
             private global::System.Data.DataColumn columnscenario_id;
             
             private global::System.Data.DataColumn columnselection_set_area_id;
             
             private global::System.Data.DataColumn columnhyetograph_id;
-            
-            private global::System.Data.DataColumn columnhyetograph_description;
             
             private global::System.Data.DataColumn columnproject_id;
             
@@ -2867,6 +2856,10 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
             private global::System.Data.DataColumn columnbmp_effectiveness_db;
             
             private global::System.Data.DataColumn columnbmp_effectiveness_table;
+            
+            private global::System.Data.DataColumn columnscenario_description;
+            
+            private global::System.Data.DataColumn columnhyetograph_description;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public QryModelRunDataTable() {
@@ -2906,13 +2899,6 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn scenario_descriptionColumn {
-                get {
-                    return this.columnscenario_description;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public global::System.Data.DataColumn scenario_idColumn {
                 get {
                     return this.columnscenario_id;
@@ -2930,13 +2916,6 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
             public global::System.Data.DataColumn hyetograph_idColumn {
                 get {
                     return this.columnhyetograph_id;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn hyetograph_descriptionColumn {
-                get {
-                    return this.columnhyetograph_description;
                 }
             }
             
@@ -3011,6 +2990,20 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn scenario_descriptionColumn {
+                get {
+                    return this.columnscenario_description;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn hyetograph_descriptionColumn {
+                get {
+                    return this.columnhyetograph_description;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -3039,15 +3032,13 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public QryModelRunRow AddQryModelRunRow(string time_period, string scenario_description, int scenario_id, int selection_set_area_id, int hyetograph_id, string hyetograph_description, string area, string sub_area, bool include_instream_facilities, string project_description, string pollutant_loading_db, string pollutant_loading_table, string bmp_effectiveness_db, string bmp_effectiveness_table) {
+            public QryModelRunRow AddQryModelRunRow(string time_period, int scenario_id, int selection_set_area_id, int hyetograph_id, string area, string sub_area, bool include_instream_facilities, string project_description, string pollutant_loading_db, string pollutant_loading_table, string bmp_effectiveness_db, string bmp_effectiveness_table, string scenario_description, string hyetograph_description) {
                 QryModelRunRow rowQryModelRunRow = ((QryModelRunRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         time_period,
-                        scenario_description,
                         scenario_id,
                         selection_set_area_id,
                         hyetograph_id,
-                        hyetograph_description,
                         null,
                         null,
                         area,
@@ -3057,7 +3048,9 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
                         pollutant_loading_db,
                         pollutant_loading_table,
                         bmp_effectiveness_db,
-                        bmp_effectiveness_table};
+                        bmp_effectiveness_table,
+                        scenario_description,
+                        hyetograph_description};
                 rowQryModelRunRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowQryModelRunRow);
                 return rowQryModelRunRow;
@@ -3084,11 +3077,9 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             internal void InitVars() {
                 this.columntime_period = base.Columns["time_period"];
-                this.columnscenario_description = base.Columns["scenario_description"];
                 this.columnscenario_id = base.Columns["scenario_id"];
                 this.columnselection_set_area_id = base.Columns["selection_set_area_id"];
                 this.columnhyetograph_id = base.Columns["hyetograph_id"];
-                this.columnhyetograph_description = base.Columns["hyetograph_description"];
                 this.columnproject_id = base.Columns["project_id"];
                 this.columnmodel_run_id = base.Columns["model_run_id"];
                 this.columnarea = base.Columns["area"];
@@ -3099,22 +3090,20 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
                 this.columnpollutant_loading_table = base.Columns["pollutant_loading_table"];
                 this.columnbmp_effectiveness_db = base.Columns["bmp_effectiveness_db"];
                 this.columnbmp_effectiveness_table = base.Columns["bmp_effectiveness_table"];
+                this.columnscenario_description = base.Columns["scenario_description"];
+                this.columnhyetograph_description = base.Columns["hyetograph_description"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             private void InitClass() {
                 this.columntime_period = new global::System.Data.DataColumn("time_period", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columntime_period);
-                this.columnscenario_description = new global::System.Data.DataColumn("scenario_description", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnscenario_description);
                 this.columnscenario_id = new global::System.Data.DataColumn("scenario_id", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnscenario_id);
                 this.columnselection_set_area_id = new global::System.Data.DataColumn("selection_set_area_id", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnselection_set_area_id);
                 this.columnhyetograph_id = new global::System.Data.DataColumn("hyetograph_id", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnhyetograph_id);
-                this.columnhyetograph_description = new global::System.Data.DataColumn("hyetograph_description", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnhyetograph_description);
                 this.columnproject_id = new global::System.Data.DataColumn("project_id", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnproject_id);
                 this.columnmodel_run_id = new global::System.Data.DataColumn("model_run_id", typeof(int), null, global::System.Data.MappingType.Element);
@@ -3135,17 +3124,18 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
                 base.Columns.Add(this.columnbmp_effectiveness_db);
                 this.columnbmp_effectiveness_table = new global::System.Data.DataColumn("bmp_effectiveness_table", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnbmp_effectiveness_table);
+                this.columnscenario_description = new global::System.Data.DataColumn("scenario_description", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnscenario_description);
+                this.columnhyetograph_description = new global::System.Data.DataColumn("hyetograph_description", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnhyetograph_description);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnmodel_run_id}, true));
                 this.columntime_period.MaxLength = 50;
-                this.columnscenario_description.MaxLength = 50;
-                this.columnhyetograph_description.MaxLength = 50;
                 this.columnproject_id.AutoIncrement = true;
                 this.columnproject_id.AutoIncrementSeed = -1;
                 this.columnproject_id.AutoIncrementStep = -1;
                 this.columnmodel_run_id.AutoIncrement = true;
-                this.columnmodel_run_id.AutoIncrementSeed = -1;
-                this.columnmodel_run_id.AutoIncrementStep = -1;
+                this.columnmodel_run_id.AutoIncrementSeed = 1;
                 this.columnmodel_run_id.AllowDBNull = false;
                 this.columnmodel_run_id.Unique = true;
                 this.columnarea.MaxLength = 50;
@@ -3155,6 +3145,8 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
                 this.columnpollutant_loading_table.MaxLength = 50;
                 this.columnbmp_effectiveness_db.MaxLength = 100;
                 this.columnbmp_effectiveness_table.MaxLength = 50;
+                this.columnscenario_description.MaxLength = 255;
+                this.columnhyetograph_description.MaxLength = 255;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3416,8 +3408,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnscenario_x_process_id}, true));
                 this.columnscenario_x_process_id.AutoIncrement = true;
-                this.columnscenario_x_process_id.AutoIncrementSeed = -1;
-                this.columnscenario_x_process_id.AutoIncrementStep = -1;
+                this.columnscenario_x_process_id.AutoIncrementSeed = 1;
                 this.columnscenario_x_process_id.AllowDBNull = false;
                 this.columnscenario_x_process_id.Unique = true;
                 this.columnprocess_group.MaxLength = 60;
@@ -3550,11 +3541,11 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
             
             private global::System.Data.DataColumn columnprocess_group;
             
-            private global::System.Data.DataColumn columnprocess_order;
-            
             private global::System.Data.DataColumn columnprocess_name;
             
             private global::System.Data.DataColumn columncritical;
+            
+            private global::System.Data.DataColumn columnprocess_order;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public FEProcessDataTable() {
@@ -3601,13 +3592,6 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn process_orderColumn {
-                get {
-                    return this.columnprocess_order;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public global::System.Data.DataColumn process_nameColumn {
                 get {
                     return this.columnprocess_name;
@@ -3618,6 +3602,13 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
             public global::System.Data.DataColumn criticalColumn {
                 get {
                     return this.columncritical;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn process_orderColumn {
+                get {
+                    return this.columnprocess_order;
                 }
             }
             
@@ -3650,14 +3641,14 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public FEProcessRow AddFEProcessRow(FEProcessGroupRow parentFEProcessGroupRowByFEProcessGroup_FEProcess, double process_order, string process_name, bool critical) {
+            public FEProcessRow AddFEProcessRow(FEProcessGroupRow parentFEProcessGroupRowByFEProcessGroup_FEProcess, string process_name, bool critical, float process_order) {
                 FEProcessRow rowFEProcessRow = ((FEProcessRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
                         null,
-                        process_order,
                         process_name,
-                        critical};
+                        critical,
+                        process_order};
                 if ((parentFEProcessGroupRowByFEProcessGroup_FEProcess != null)) {
                     columnValuesArray[1] = parentFEProcessGroupRowByFEProcessGroup_FEProcess[1];
                 }
@@ -3688,9 +3679,9 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
             internal void InitVars() {
                 this.columnprocess_id = base.Columns["process_id"];
                 this.columnprocess_group = base.Columns["process_group"];
-                this.columnprocess_order = base.Columns["process_order"];
                 this.columnprocess_name = base.Columns["process_name"];
                 this.columncritical = base.Columns["critical"];
+                this.columnprocess_order = base.Columns["process_order"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3699,17 +3690,16 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
                 base.Columns.Add(this.columnprocess_id);
                 this.columnprocess_group = new global::System.Data.DataColumn("process_group", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnprocess_group);
-                this.columnprocess_order = new global::System.Data.DataColumn("process_order", typeof(double), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnprocess_order);
                 this.columnprocess_name = new global::System.Data.DataColumn("process_name", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnprocess_name);
                 this.columncritical = new global::System.Data.DataColumn("critical", typeof(bool), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columncritical);
+                this.columnprocess_order = new global::System.Data.DataColumn("process_order", typeof(float), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnprocess_order);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnprocess_id}, true));
                 this.columnprocess_id.AutoIncrement = true;
-                this.columnprocess_id.AutoIncrementSeed = -1;
-                this.columnprocess_id.AutoIncrementStep = -1;
+                this.columnprocess_id.AutoIncrementSeed = 1;
                 this.columnprocess_id.AllowDBNull = false;
                 this.columnprocess_id.Unique = true;
                 this.columnprocess_group.MaxLength = 20;
@@ -3934,7 +3924,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public FEProcessGroupRow AddFEProcessGroupRow(int process_group_id, FEScenarioXProcessRow parentFEScenarioXProcessRowByFEScenarioXProcess_FEProcessGroup, string description, double group_order) {
+            public FEProcessGroupRow AddFEProcessGroupRow(int process_group_id, FEScenarioXProcessRow parentFEScenarioXProcessRowByFEScenarioXProcess_FEProcessGroup, string description, float group_order) {
                 FEProcessGroupRow rowFEProcessGroupRow = ((FEProcessGroupRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         process_group_id,
@@ -3983,11 +3973,10 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
                 base.Columns.Add(this.columnprocess_group);
                 this.columndescription = new global::System.Data.DataColumn("description", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columndescription);
-                this.columngroup_order = new global::System.Data.DataColumn("group_order", typeof(double), null, global::System.Data.MappingType.Element);
+                this.columngroup_order = new global::System.Data.DataColumn("group_order", typeof(float), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columngroup_order);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnprocess_group}, true));
-                this.columnprocess_group_id.AllowDBNull = false;
                 this.columnprocess_group.AllowDBNull = false;
                 this.columnprocess_group.Unique = true;
                 this.columnprocess_group.MaxLength = 20;
@@ -4663,10 +4652,10 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public double percent_overlap {
+            public float percent_overlap {
                 get {
                     try {
-                        return ((double)(this[this.tableFESelectionSets.percent_overlapColumn]));
+                        return ((float)(this[this.tableFESelectionSets.percent_overlapColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'percent_overlap\' in table \'FESelectionSets\' is DBNull.", e);
@@ -4778,21 +4767,6 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public double rainfall {
-                get {
-                    try {
-                        return ((double)(this[this.tableFEHyetographData.rainfallColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'rainfall\' in table \'FEHyetographData\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableFEHyetographData.rainfallColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public int run_order {
                 get {
                     try {
@@ -4823,6 +4797,21 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public float rainfall {
+                get {
+                    try {
+                        return ((float)(this[this.tableFEHyetographData.rainfallColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'rainfall\' in table \'FEHyetographData\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableFEHyetographData.rainfallColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public FEHyetographsRow FEHyetographsRow {
                 get {
                     return ((FEHyetographsRow)(this.GetParentRow(this.Table.ParentRelations["FE_HYETOGRAPHSFE_HYETOGRAPH_DATA"])));
@@ -4843,16 +4832,6 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsrainfallNull() {
-                return this.IsNull(this.tableFEHyetographData.rainfallColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetrainfallNull() {
-                this[this.tableFEHyetographData.rainfallColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public bool Isrun_orderNull() {
                 return this.IsNull(this.tableFEHyetographData.run_orderColumn);
             }
@@ -4870,6 +4849,16 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public void SetcommentNull() {
                 this[this.tableFEHyetographData.commentColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsrainfallNull() {
+                return this.IsNull(this.tableFEHyetographData.rainfallColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetrainfallNull() {
+                this[this.tableFEHyetographData.rainfallColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -4913,21 +4902,6 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public double time_step {
-                get {
-                    try {
-                        return ((double)(this[this.tableFEHyetographs.time_stepColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'time_step\' in table \'FEHyetographs\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableFEHyetographs.time_stepColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string time_step_units {
                 get {
                     try {
@@ -4958,6 +4932,21 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public float time_step {
+                get {
+                    try {
+                        return ((float)(this[this.tableFEHyetographs.time_stepColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'time_step\' in table \'FEHyetographs\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableFEHyetographs.time_stepColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public bool IsdescriptionNull() {
                 return this.IsNull(this.tableFEHyetographs.descriptionColumn);
             }
@@ -4965,16 +4954,6 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public void SetdescriptionNull() {
                 this[this.tableFEHyetographs.descriptionColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool Istime_stepNull() {
-                return this.IsNull(this.tableFEHyetographs.time_stepColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void Settime_stepNull() {
-                this[this.tableFEHyetographs.time_stepColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4995,6 +4974,16 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public void SetsourceNull() {
                 this[this.tableFEHyetographs.sourceColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool Istime_stepNull() {
+                return this.IsNull(this.tableFEHyetographs.time_stepColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void Settime_stepNull() {
+                this[this.tableFEHyetographs.time_stepColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5584,21 +5573,6 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string scenario_description {
-                get {
-                    try {
-                        return ((string)(this[this.tableQryModelRun.scenario_descriptionColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'scenario_description\' in table \'QryModelRun\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableQryModelRun.scenario_descriptionColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public int scenario_id {
                 get {
                     try {
@@ -5640,21 +5614,6 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
                 }
                 set {
                     this[this.tableQryModelRun.hyetograph_idColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string hyetograph_description {
-                get {
-                    try {
-                        return ((string)(this[this.tableQryModelRun.hyetograph_descriptionColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'hyetograph_description\' in table \'QryModelRun\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableQryModelRun.hyetograph_descriptionColumn] = value;
                 }
             }
             
@@ -5805,6 +5764,36 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string scenario_description {
+                get {
+                    try {
+                        return ((string)(this[this.tableQryModelRun.scenario_descriptionColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'scenario_description\' in table \'QryModelRun\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableQryModelRun.scenario_descriptionColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string hyetograph_description {
+                get {
+                    try {
+                        return ((string)(this[this.tableQryModelRun.hyetograph_descriptionColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'hyetograph_description\' in table \'QryModelRun\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableQryModelRun.hyetograph_descriptionColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public FEGridProjectsRow FEGridProjectsRow {
                 get {
                     return ((FEGridProjectsRow)(this.GetParentRow(this.Table.ParentRelations["FEGridProjects_QryModelRun"])));
@@ -5822,16 +5811,6 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public void Settime_periodNull() {
                 this[this.tableQryModelRun.time_periodColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool Isscenario_descriptionNull() {
-                return this.IsNull(this.tableQryModelRun.scenario_descriptionColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void Setscenario_descriptionNull() {
-                this[this.tableQryModelRun.scenario_descriptionColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5862,16 +5841,6 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public void Sethyetograph_idNull() {
                 this[this.tableQryModelRun.hyetograph_idColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool Ishyetograph_descriptionNull() {
-                return this.IsNull(this.tableQryModelRun.hyetograph_descriptionColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void Sethyetograph_descriptionNull() {
-                this[this.tableQryModelRun.hyetograph_descriptionColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5962,6 +5931,26 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public void Setbmp_effectiveness_tableNull() {
                 this[this.tableQryModelRun.bmp_effectiveness_tableColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool Isscenario_descriptionNull() {
+                return this.IsNull(this.tableQryModelRun.scenario_descriptionColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void Setscenario_descriptionNull() {
+                this[this.tableQryModelRun.scenario_descriptionColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool Ishyetograph_descriptionNull() {
+                return this.IsNull(this.tableQryModelRun.hyetograph_descriptionColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void Sethyetograph_descriptionNull() {
+                this[this.tableQryModelRun.hyetograph_descriptionColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -6120,21 +6109,6 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public double process_order {
-                get {
-                    try {
-                        return ((double)(this[this.tableFEProcess.process_orderColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'process_order\' in table \'FEProcess\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableFEProcess.process_orderColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string process_name {
                 get {
                     try {
@@ -6165,6 +6139,21 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public float process_order {
+                get {
+                    try {
+                        return ((float)(this[this.tableFEProcess.process_orderColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'process_order\' in table \'FEProcess\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableFEProcess.process_orderColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public FEProcessGroupRow FEProcessGroupRow {
                 get {
                     return ((FEProcessGroupRow)(this.GetParentRow(this.Table.ParentRelations["FEProcessGroup_FEProcess"])));
@@ -6182,16 +6171,6 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public void Setprocess_groupNull() {
                 this[this.tableFEProcess.process_groupColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool Isprocess_orderNull() {
-                return this.IsNull(this.tableFEProcess.process_orderColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void Setprocess_orderNull() {
-                this[this.tableFEProcess.process_orderColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -6213,6 +6192,16 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
             public void SetcriticalNull() {
                 this[this.tableFEProcess.criticalColumn] = global::System.Convert.DBNull;
             }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool Isprocess_orderNull() {
+                return this.IsNull(this.tableFEProcess.process_orderColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void Setprocess_orderNull() {
+                this[this.tableFEProcess.process_orderColumn] = global::System.Convert.DBNull;
+            }
         }
         
         /// <summary>
@@ -6232,7 +6221,12 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public int process_group_id {
                 get {
-                    return ((int)(this[this.tableFEProcessGroup.process_group_idColumn]));
+                    try {
+                        return ((int)(this[this.tableFEProcessGroup.process_group_idColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'process_group_id\' in table \'FEProcessGroup\' is DBNull.", e);
+                    }
                 }
                 set {
                     this[this.tableFEProcessGroup.process_group_idColumn] = value;
@@ -6265,10 +6259,10 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public double group_order {
+            public float group_order {
                 get {
                     try {
-                        return ((double)(this[this.tableFEProcessGroup.group_orderColumn]));
+                        return ((float)(this[this.tableFEProcessGroup.group_orderColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'group_order\' in table \'FEProcessGroup\' is DBNull.", e);
@@ -6287,6 +6281,16 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
                 set {
                     this.SetParentRow(value, this.Table.ParentRelations["FEScenarioXProcess_FEProcessGroup"]);
                 }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool Isprocess_group_idNull() {
+                return this.IsNull(this.tableFEProcessGroup.process_group_idColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void Setprocess_group_idNull() {
+                this[this.tableFEProcessGroup.process_group_idColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -6823,13 +6827,13 @@ namespace SystemsAnalysis.Grid.GridAnalysis.GridInterfaceDataSetTableAdapters {
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
     public partial class FEGridProjectsTableAdapter : global::System.ComponentModel.Component {
         
-        private global::System.Data.OleDb.OleDbDataAdapter _adapter;
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
         
-        private global::System.Data.OleDb.OleDbConnection _connection;
+        private global::System.Data.SqlClient.SqlConnection _connection;
         
-        private global::System.Data.OleDb.OleDbTransaction _transaction;
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
         
-        private global::System.Data.OleDb.OleDbCommand[] _commandCollection;
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
         
         private bool _clearBeforeFill;
         
@@ -6839,7 +6843,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis.GridInterfaceDataSetTableAdapters {
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected internal global::System.Data.OleDb.OleDbDataAdapter Adapter {
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
             get {
                 if ((this._adapter == null)) {
                     this.InitAdapter();
@@ -6849,7 +6853,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis.GridInterfaceDataSetTableAdapters {
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.OleDb.OleDbConnection Connection {
+        internal global::System.Data.SqlClient.SqlConnection Connection {
             get {
                 if ((this._connection == null)) {
                     this.InitConnection();
@@ -6869,14 +6873,14 @@ namespace SystemsAnalysis.Grid.GridAnalysis.GridInterfaceDataSetTableAdapters {
                 }
                 for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
                     if ((this.CommandCollection[i] != null)) {
-                        ((global::System.Data.OleDb.OleDbCommand)(this.CommandCollection[i])).Connection = value;
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
                     }
                 }
             }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.OleDb.OleDbTransaction Transaction {
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
             get {
                 return this._transaction;
             }
@@ -6901,7 +6905,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis.GridInterfaceDataSetTableAdapters {
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected global::System.Data.OleDb.OleDbCommand[] CommandCollection {
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
             get {
                 if ((this._commandCollection == null)) {
                     this.InitCommandCollection();
@@ -6922,7 +6926,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis.GridInterfaceDataSetTableAdapters {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitAdapter() {
-            this._adapter = new global::System.Data.OleDb.OleDbDataAdapter();
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
             global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
             tableMapping.SourceTable = "Table";
             tableMapping.DataSetTable = "FEGridProjects";
@@ -6934,72 +6938,48 @@ namespace SystemsAnalysis.Grid.GridAnalysis.GridInterfaceDataSetTableAdapters {
             tableMapping.ColumnMappings.Add("osf_path", "osf_path");
             tableMapping.ColumnMappings.Add("default_output_path", "default_output_path");
             this._adapter.TableMappings.Add(tableMapping);
-            this._adapter.DeleteCommand = new global::System.Data.OleDb.OleDbCommand();
-            this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM `FE_GRID_PROJECTS` WHERE ((`project_id` = ?) AND ((? = 1 AND `project_description` IS NULL) OR (`project_description` = ?)) AND ((? = 1 AND `grid_path` IS NULL) OR (`grid_path` = ?)) AND ((? = 1 AND `bmp_path` IS NULL) OR (`bmp_path` = ?)) AND ((? = 1 AND `mip_path` IS NULL) OR (`mip_path` = ?)) AND ((? = 1 AND `osf_path` IS NULL) OR (`osf_path` = ?)) AND ((? = 1 AND `default_output_path` IS NULL) OR (`default_output_path` = ?)))";
-            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_project_id", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "project_id", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_project_description", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "project_description", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_project_description", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "project_description", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_grid_path", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "grid_path", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_grid_path", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "grid_path", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_bmp_path", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "bmp_path", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_bmp_path", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "bmp_path", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_mip_path", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "mip_path", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_mip_path", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "mip_path", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_osf_path", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "osf_path", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_osf_path", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "osf_path", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_default_output_path", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "default_output_path", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_default_output_path", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "default_output_path", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.InsertCommand = new global::System.Data.OleDb.OleDbCommand();
+            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO `FE_GRID_PROJECTS` (`project_description`, `grid_path`, `bmp_path`, `" +
-                "mip_path`, `osf_path`, `default_output_path`) VALUES (?, ?, ?, ?, ?, ?)";
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [GRID_FE_GRID_PROJECTS] ([project_id], [project_description], [grid_p" +
+                "ath], [bmp_path], [mip_path], [osf_path], [default_output_path]) VALUES (@projec" +
+                "t_id, @project_description, @grid_path, @bmp_path, @mip_path, @osf_path, @defaul" +
+                "t_output_path)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("project_description", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "project_description", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("grid_path", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "grid_path", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("bmp_path", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "bmp_path", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("mip_path", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "mip_path", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("osf_path", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "osf_path", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("default_output_path", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "default_output_path", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand = new global::System.Data.OleDb.OleDbCommand();
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@project_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "project_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@project_description", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "project_description", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@grid_path", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "grid_path", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@bmp_path", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "bmp_path", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@mip_path", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "mip_path", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@osf_path", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "osf_path", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@default_output_path", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "default_output_path", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE `FE_GRID_PROJECTS` SET `project_description` = ?, `grid_path` = ?, `bmp_path` = ?, `mip_path` = ?, `osf_path` = ?, `default_output_path` = ? WHERE ((`project_id` = ?) AND ((? = 1 AND `project_description` IS NULL) OR (`project_description` = ?)) AND ((? = 1 AND `grid_path` IS NULL) OR (`grid_path` = ?)) AND ((? = 1 AND `bmp_path` IS NULL) OR (`bmp_path` = ?)) AND ((? = 1 AND `mip_path` IS NULL) OR (`mip_path` = ?)) AND ((? = 1 AND `osf_path` IS NULL) OR (`osf_path` = ?)) AND ((? = 1 AND `default_output_path` IS NULL) OR (`default_output_path` = ?)))";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE       GRID_FE_GRID_PROJECTS
+SET                project_description = @project_description, grid_path = @grid_path, bmp_path = @bmp_path, mip_path = @mip_path, osf_path = @osf_path, default_output_path = @default_output_path
+WHERE        (project_id = @project_id)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("project_description", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "project_description", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("grid_path", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "grid_path", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("bmp_path", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "bmp_path", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("mip_path", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "mip_path", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("osf_path", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "osf_path", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("default_output_path", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "default_output_path", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_project_id", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "project_id", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_project_description", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "project_description", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_project_description", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "project_description", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_grid_path", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "grid_path", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_grid_path", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "grid_path", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_bmp_path", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "bmp_path", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_bmp_path", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "bmp_path", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_mip_path", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "mip_path", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_mip_path", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "mip_path", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_osf_path", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "osf_path", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_osf_path", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "osf_path", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_default_output_path", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "default_output_path", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_default_output_path", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "default_output_path", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@project_description", global::System.Data.SqlDbType.VarChar, 255, global::System.Data.ParameterDirection.Input, 0, 0, "project_description", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@grid_path", global::System.Data.SqlDbType.VarChar, 255, global::System.Data.ParameterDirection.Input, 0, 0, "grid_path", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@bmp_path", global::System.Data.SqlDbType.VarChar, 255, global::System.Data.ParameterDirection.Input, 0, 0, "bmp_path", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@mip_path", global::System.Data.SqlDbType.VarChar, 255, global::System.Data.ParameterDirection.Input, 0, 0, "mip_path", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@osf_path", global::System.Data.SqlDbType.VarChar, 255, global::System.Data.ParameterDirection.Input, 0, 0, "osf_path", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@default_output_path", global::System.Data.SqlDbType.VarChar, 255, global::System.Data.ParameterDirection.Input, 0, 0, "default_output_path", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@project_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "project_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitConnection() {
-            this._connection = new global::System.Data.OleDb.OleDbConnection();
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
             this._connection.ConnectionString = global::SystemsAnalysis.Grid.GridAnalysis.Properties.Settings.Default.Waterqual_GIS_v5_0ConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.OleDb.OleDbCommand[1];
-            this._commandCollection[0] = new global::System.Data.OleDb.OleDbCommand();
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT project_id, project_description, grid_path, bmp_path, mip_path, osf_path, " +
-                "default_output_path FROM FE_GRID_PROJECTS";
+            this._commandCollection[0].CommandText = "SELECT        project_id, project_description, grid_path, bmp_path, mip_path, osf" +
+                "_path, default_output_path\r\nFROM            GRID_FE_GRID_PROJECTS";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -7049,236 +7029,6 @@ namespace SystemsAnalysis.Grid.GridAnalysis.GridInterfaceDataSetTableAdapters {
         public virtual int Update(global::System.Data.DataRow[] dataRows) {
             return this.Adapter.Update(dataRows);
         }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_project_id, string Original_project_description, string Original_grid_path, string Original_bmp_path, string Original_mip_path, string Original_osf_path, string Original_default_output_path) {
-            this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_project_id));
-            if ((Original_project_description == null)) {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[2].Value = ((string)(Original_project_description));
-            }
-            if ((Original_grid_path == null)) {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((string)(Original_grid_path));
-            }
-            if ((Original_bmp_path == null)) {
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[6].Value = ((string)(Original_bmp_path));
-            }
-            if ((Original_mip_path == null)) {
-                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[8].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[8].Value = ((string)(Original_mip_path));
-            }
-            if ((Original_osf_path == null)) {
-                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[10].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[10].Value = ((string)(Original_osf_path));
-            }
-            if ((Original_default_output_path == null)) {
-                this.Adapter.DeleteCommand.Parameters[11].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[12].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[11].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[12].Value = ((string)(Original_default_output_path));
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
-            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.DeleteCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.DeleteCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string project_description, string grid_path, string bmp_path, string mip_path, string osf_path, string default_output_path) {
-            if ((project_description == null)) {
-                this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(project_description));
-            }
-            if ((grid_path == null)) {
-                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(grid_path));
-            }
-            if ((bmp_path == null)) {
-                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(bmp_path));
-            }
-            if ((mip_path == null)) {
-                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[3].Value = ((string)(mip_path));
-            }
-            if ((osf_path == null)) {
-                this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[4].Value = ((string)(osf_path));
-            }
-            if ((default_output_path == null)) {
-                this.Adapter.InsertCommand.Parameters[5].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[5].Value = ((string)(default_output_path));
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
-            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.InsertCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.InsertCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string project_description, string grid_path, string bmp_path, string mip_path, string osf_path, string default_output_path, int Original_project_id, string Original_project_description, string Original_grid_path, string Original_bmp_path, string Original_mip_path, string Original_osf_path, string Original_default_output_path) {
-            if ((project_description == null)) {
-                this.Adapter.UpdateCommand.Parameters[0].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(project_description));
-            }
-            if ((grid_path == null)) {
-                this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(grid_path));
-            }
-            if ((bmp_path == null)) {
-                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(bmp_path));
-            }
-            if ((mip_path == null)) {
-                this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[3].Value = ((string)(mip_path));
-            }
-            if ((osf_path == null)) {
-                this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((string)(osf_path));
-            }
-            if ((default_output_path == null)) {
-                this.Adapter.UpdateCommand.Parameters[5].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((string)(default_output_path));
-            }
-            this.Adapter.UpdateCommand.Parameters[6].Value = ((int)(Original_project_id));
-            if ((Original_project_description == null)) {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((string)(Original_project_description));
-            }
-            if ((Original_grid_path == null)) {
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[10].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((string)(Original_grid_path));
-            }
-            if ((Original_bmp_path == null)) {
-                this.Adapter.UpdateCommand.Parameters[11].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[12].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[11].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((string)(Original_bmp_path));
-            }
-            if ((Original_mip_path == null)) {
-                this.Adapter.UpdateCommand.Parameters[13].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[14].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[13].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[14].Value = ((string)(Original_mip_path));
-            }
-            if ((Original_osf_path == null)) {
-                this.Adapter.UpdateCommand.Parameters[15].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[16].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[15].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[16].Value = ((string)(Original_osf_path));
-            }
-            if ((Original_default_output_path == null)) {
-                this.Adapter.UpdateCommand.Parameters[17].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[18].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[17].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[18].Value = ((string)(Original_default_output_path));
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
-            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.UpdateCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.UpdateCommand.Connection.Close();
-                }
-            }
-        }
     }
     
     /// <summary>
@@ -7293,13 +7043,13 @@ namespace SystemsAnalysis.Grid.GridAnalysis.GridInterfaceDataSetTableAdapters {
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
     public partial class FESelectionSetsTableAdapter : global::System.ComponentModel.Component {
         
-        private global::System.Data.OleDb.OleDbDataAdapter _adapter;
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
         
-        private global::System.Data.OleDb.OleDbConnection _connection;
+        private global::System.Data.SqlClient.SqlConnection _connection;
         
-        private global::System.Data.OleDb.OleDbTransaction _transaction;
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
         
-        private global::System.Data.OleDb.OleDbCommand[] _commandCollection;
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
         
         private bool _clearBeforeFill;
         
@@ -7309,7 +7059,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis.GridInterfaceDataSetTableAdapters {
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected internal global::System.Data.OleDb.OleDbDataAdapter Adapter {
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
             get {
                 if ((this._adapter == null)) {
                     this.InitAdapter();
@@ -7319,7 +7069,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis.GridInterfaceDataSetTableAdapters {
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.OleDb.OleDbConnection Connection {
+        internal global::System.Data.SqlClient.SqlConnection Connection {
             get {
                 if ((this._connection == null)) {
                     this.InitConnection();
@@ -7339,14 +7089,14 @@ namespace SystemsAnalysis.Grid.GridAnalysis.GridInterfaceDataSetTableAdapters {
                 }
                 for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
                     if ((this.CommandCollection[i] != null)) {
-                        ((global::System.Data.OleDb.OleDbCommand)(this.CommandCollection[i])).Connection = value;
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
                     }
                 }
             }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.OleDb.OleDbTransaction Transaction {
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
             get {
                 return this._transaction;
             }
@@ -7371,7 +7121,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis.GridInterfaceDataSetTableAdapters {
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected global::System.Data.OleDb.OleDbCommand[] CommandCollection {
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
             get {
                 if ((this._commandCollection == null)) {
                     this.InitCommandCollection();
@@ -7392,7 +7142,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis.GridInterfaceDataSetTableAdapters {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitAdapter() {
-            this._adapter = new global::System.Data.OleDb.OleDbDataAdapter();
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
             global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
             tableMapping.SourceTable = "Table";
             tableMapping.DataSetTable = "FESelectionSets";
@@ -7403,66 +7153,34 @@ namespace SystemsAnalysis.Grid.GridAnalysis.GridInterfaceDataSetTableAdapters {
             tableMapping.ColumnMappings.Add("row_name", "row_name");
             tableMapping.ColumnMappings.Add("percent_overlap", "percent_overlap");
             this._adapter.TableMappings.Add(tableMapping);
-            this._adapter.DeleteCommand = new global::System.Data.OleDb.OleDbCommand();
-            this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM `FE_SELECTION_SETS` WHERE ((`selection_set_id` = ?) AND ((? = 1 AND `selection_set_area_id` IS NULL) OR (`selection_set_area_id` = ?)) AND ((? = 1 AND `description` IS NULL) OR (`description` = ?)) AND ((? = 1 AND `col_name` IS NULL) OR (`col_name` = ?)) AND ((? = 1 AND `row_name` IS NULL) OR (`row_name` = ?)) AND ((? = 1 AND `percent_overlap` IS NULL) OR (`percent_overlap` = ?)))";
-            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_selection_set_id", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "selection_set_id", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_selection_set_area_id", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "selection_set_area_id", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_selection_set_area_id", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "selection_set_area_id", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_description", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "description", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_description", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "description", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_col_name", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "col_name", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_col_name", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "col_name", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_row_name", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "row_name", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_row_name", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "row_name", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_percent_overlap", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "percent_overlap", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_percent_overlap", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "percent_overlap", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.InsertCommand = new global::System.Data.OleDb.OleDbCommand();
+            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO `FE_SELECTION_SETS` (`selection_set_area_id`, `description`, `col_nam" +
-                "e`, `row_name`, `percent_overlap`) VALUES (?, ?, ?, ?, ?)";
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [GRID_FE_SELECTION_SETS] ([selection_set_id], [selection_set_area_id]" +
+                ", [description], [col_name], [row_name], [percent_overlap]) VALUES (@selection_s" +
+                "et_id, @selection_set_area_id, @description, @col_name, @row_name, @percent_over" +
+                "lap)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("selection_set_area_id", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "selection_set_area_id", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("description", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "description", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("col_name", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "col_name", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("row_name", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "row_name", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("percent_overlap", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "percent_overlap", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand = new global::System.Data.OleDb.OleDbCommand();
-            this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE `FE_SELECTION_SETS` SET `selection_set_area_id` = ?, `description` = ?, `col_name` = ?, `row_name` = ?, `percent_overlap` = ? WHERE ((`selection_set_id` = ?) AND ((? = 1 AND `selection_set_area_id` IS NULL) OR (`selection_set_area_id` = ?)) AND ((? = 1 AND `description` IS NULL) OR (`description` = ?)) AND ((? = 1 AND `col_name` IS NULL) OR (`col_name` = ?)) AND ((? = 1 AND `row_name` IS NULL) OR (`row_name` = ?)) AND ((? = 1 AND `percent_overlap` IS NULL) OR (`percent_overlap` = ?)))";
-            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("selection_set_area_id", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "selection_set_area_id", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("description", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "description", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("col_name", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "col_name", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("row_name", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "row_name", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("percent_overlap", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "percent_overlap", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_selection_set_id", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "selection_set_id", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_selection_set_area_id", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "selection_set_area_id", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_selection_set_area_id", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "selection_set_area_id", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_description", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "description", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_description", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "description", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_col_name", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "col_name", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_col_name", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "col_name", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_row_name", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "row_name", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_row_name", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "row_name", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_percent_overlap", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "percent_overlap", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_percent_overlap", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "percent_overlap", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@selection_set_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "selection_set_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@selection_set_area_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "selection_set_area_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@description", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "description", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@col_name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "col_name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@row_name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "row_name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@percent_overlap", global::System.Data.SqlDbType.Real, 0, global::System.Data.ParameterDirection.Input, 0, 0, "percent_overlap", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitConnection() {
-            this._connection = new global::System.Data.OleDb.OleDbConnection();
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
             this._connection.ConnectionString = global::SystemsAnalysis.Grid.GridAnalysis.Properties.Settings.Default.Waterqual_GIS_v5_0ConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.OleDb.OleDbCommand[1];
-            this._commandCollection[0] = new global::System.Data.OleDb.OleDbCommand();
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT selection_set_id, selection_set_area_id, description, col_name, row_name, " +
-                "percent_overlap FROM FE_SELECTION_SETS";
+            this._commandCollection[0].CommandText = "SELECT        selection_set_id, selection_set_area_id, description, col_name, row" +
+                "_name, percent_overlap\r\nFROM            GRID_FE_SELECTION_SETS";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -7512,208 +7230,6 @@ namespace SystemsAnalysis.Grid.GridAnalysis.GridInterfaceDataSetTableAdapters {
         public virtual int Update(global::System.Data.DataRow[] dataRows) {
             return this.Adapter.Update(dataRows);
         }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_selection_set_id, global::System.Nullable<int> Original_selection_set_area_id, string Original_description, string Original_col_name, string Original_row_name, global::System.Nullable<double> Original_percent_overlap) {
-            this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_selection_set_id));
-            if ((Original_selection_set_area_id.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[2].Value = ((int)(Original_selection_set_area_id.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            if ((Original_description == null)) {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((string)(Original_description));
-            }
-            if ((Original_col_name == null)) {
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[6].Value = ((string)(Original_col_name));
-            }
-            if ((Original_row_name == null)) {
-                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[8].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[8].Value = ((string)(Original_row_name));
-            }
-            if ((Original_percent_overlap.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[10].Value = ((double)(Original_percent_overlap.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[10].Value = global::System.DBNull.Value;
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
-            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.DeleteCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.DeleteCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(global::System.Nullable<int> selection_set_area_id, string description, string col_name, string row_name, global::System.Nullable<double> percent_overlap) {
-            if ((selection_set_area_id.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[0].Value = ((int)(selection_set_area_id.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
-            }
-            if ((description == null)) {
-                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(description));
-            }
-            if ((col_name == null)) {
-                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(col_name));
-            }
-            if ((row_name == null)) {
-                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[3].Value = ((string)(row_name));
-            }
-            if ((percent_overlap.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[4].Value = ((double)(percent_overlap.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
-            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.InsertCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.InsertCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(global::System.Nullable<int> selection_set_area_id, string description, string col_name, string row_name, global::System.Nullable<double> percent_overlap, int Original_selection_set_id, global::System.Nullable<int> Original_selection_set_area_id, string Original_description, string Original_col_name, string Original_row_name, global::System.Nullable<double> Original_percent_overlap) {
-            if ((selection_set_area_id.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(selection_set_area_id.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[0].Value = global::System.DBNull.Value;
-            }
-            if ((description == null)) {
-                this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(description));
-            }
-            if ((col_name == null)) {
-                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(col_name));
-            }
-            if ((row_name == null)) {
-                this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[3].Value = ((string)(row_name));
-            }
-            if ((percent_overlap.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((double)(percent_overlap.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(Original_selection_set_id));
-            if ((Original_selection_set_area_id.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((int)(Original_selection_set_area_id.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
-            }
-            if ((Original_description == null)) {
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[9].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((string)(Original_description));
-            }
-            if ((Original_col_name == null)) {
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[11].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[11].Value = ((string)(Original_col_name));
-            }
-            if ((Original_row_name == null)) {
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[13].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[13].Value = ((string)(Original_row_name));
-            }
-            if ((Original_percent_overlap.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[15].Value = ((double)(Original_percent_overlap.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[15].Value = global::System.DBNull.Value;
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
-            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.UpdateCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.UpdateCommand.Connection.Close();
-                }
-            }
-        }
     }
     
     /// <summary>
@@ -7728,13 +7244,13 @@ namespace SystemsAnalysis.Grid.GridAnalysis.GridInterfaceDataSetTableAdapters {
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
     public partial class FEHyetographDataTableAdapter : global::System.ComponentModel.Component {
         
-        private global::System.Data.OleDb.OleDbDataAdapter _adapter;
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
         
-        private global::System.Data.OleDb.OleDbConnection _connection;
+        private global::System.Data.SqlClient.SqlConnection _connection;
         
-        private global::System.Data.OleDb.OleDbTransaction _transaction;
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
         
-        private global::System.Data.OleDb.OleDbCommand[] _commandCollection;
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
         
         private bool _clearBeforeFill;
         
@@ -7744,7 +7260,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis.GridInterfaceDataSetTableAdapters {
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected internal global::System.Data.OleDb.OleDbDataAdapter Adapter {
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
             get {
                 if ((this._adapter == null)) {
                     this.InitAdapter();
@@ -7754,7 +7270,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis.GridInterfaceDataSetTableAdapters {
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.OleDb.OleDbConnection Connection {
+        internal global::System.Data.SqlClient.SqlConnection Connection {
             get {
                 if ((this._connection == null)) {
                     this.InitConnection();
@@ -7774,14 +7290,14 @@ namespace SystemsAnalysis.Grid.GridAnalysis.GridInterfaceDataSetTableAdapters {
                 }
                 for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
                     if ((this.CommandCollection[i] != null)) {
-                        ((global::System.Data.OleDb.OleDbCommand)(this.CommandCollection[i])).Connection = value;
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
                     }
                 }
             }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.OleDb.OleDbTransaction Transaction {
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
             get {
                 return this._transaction;
             }
@@ -7806,7 +7322,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis.GridInterfaceDataSetTableAdapters {
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected global::System.Data.OleDb.OleDbCommand[] CommandCollection {
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
             get {
                 if ((this._commandCollection == null)) {
                     this.InitCommandCollection();
@@ -7827,70 +7343,42 @@ namespace SystemsAnalysis.Grid.GridAnalysis.GridInterfaceDataSetTableAdapters {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitAdapter() {
-            this._adapter = new global::System.Data.OleDb.OleDbDataAdapter();
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
             global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
             tableMapping.SourceTable = "Table";
             tableMapping.DataSetTable = "FEHyetographData";
             tableMapping.ColumnMappings.Add("hyetograph_data_id", "hyetograph_data_id");
             tableMapping.ColumnMappings.Add("hyetograph_id", "hyetograph_id");
-            tableMapping.ColumnMappings.Add("rainfall", "rainfall");
             tableMapping.ColumnMappings.Add("run_order", "run_order");
             tableMapping.ColumnMappings.Add("comment", "comment");
+            tableMapping.ColumnMappings.Add("rainfall", "rainfall");
             this._adapter.TableMappings.Add(tableMapping);
-            this._adapter.DeleteCommand = new global::System.Data.OleDb.OleDbCommand();
-            this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM `FE_HYETOGRAPH_DATA` WHERE ((`hyetograph_data_id` = ?) AND ((? = 1 AND `hyetograph_id` IS NULL) OR (`hyetograph_id` = ?)) AND ((? = 1 AND `rainfall` IS NULL) OR (`rainfall` = ?)) AND ((? = 1 AND `run_order` IS NULL) OR (`run_order` = ?)) AND ((? = 1 AND `comment` IS NULL) OR (`comment` = ?)))";
-            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_hyetograph_data_id", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "hyetograph_data_id", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_hyetograph_id", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "hyetograph_id", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_hyetograph_id", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "hyetograph_id", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_rainfall", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "rainfall", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_rainfall", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "rainfall", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_run_order", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "run_order", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_run_order", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "run_order", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_comment", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "comment", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_comment", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "comment", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.InsertCommand = new global::System.Data.OleDb.OleDbCommand();
+            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO `FE_HYETOGRAPH_DATA` (`hyetograph_id`, `rainfall`, `run_order`, `comm" +
-                "ent`) VALUES (?, ?, ?, ?)";
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [GRID_FE_HYETOGRAPH_DATA] ([hyetograph_data_id], [hyetograph_id], [ra" +
+                "infall], [run_order], [comment]) VALUES (@hyetograph_data_id, @hyetograph_id, @r" +
+                "ainfall, @run_order, @comment)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("hyetograph_id", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "hyetograph_id", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("rainfall", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "rainfall", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("run_order", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "run_order", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("comment", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "comment", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand = new global::System.Data.OleDb.OleDbCommand();
-            this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE `FE_HYETOGRAPH_DATA` SET `hyetograph_id` = ?, `rainfall` = ?, `run_order` = ?, `comment` = ? WHERE ((`hyetograph_data_id` = ?) AND ((? = 1 AND `hyetograph_id` IS NULL) OR (`hyetograph_id` = ?)) AND ((? = 1 AND `rainfall` IS NULL) OR (`rainfall` = ?)) AND ((? = 1 AND `run_order` IS NULL) OR (`run_order` = ?)) AND ((? = 1 AND `comment` IS NULL) OR (`comment` = ?)))";
-            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("hyetograph_id", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "hyetograph_id", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("rainfall", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "rainfall", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("run_order", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "run_order", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("comment", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "comment", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_hyetograph_data_id", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "hyetograph_data_id", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_hyetograph_id", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "hyetograph_id", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_hyetograph_id", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "hyetograph_id", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_rainfall", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "rainfall", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_rainfall", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "rainfall", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_run_order", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "run_order", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_run_order", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "run_order", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_comment", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "comment", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_comment", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "comment", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@hyetograph_data_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "hyetograph_data_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@hyetograph_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "hyetograph_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@rainfall", global::System.Data.SqlDbType.Real, 0, global::System.Data.ParameterDirection.Input, 0, 0, "rainfall", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@run_order", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "run_order", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@comment", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "comment", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitConnection() {
-            this._connection = new global::System.Data.OleDb.OleDbConnection();
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
             this._connection.ConnectionString = global::SystemsAnalysis.Grid.GridAnalysis.Properties.Settings.Default.Waterqual_GIS_v5_0ConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.OleDb.OleDbCommand[1];
-            this._commandCollection[0] = new global::System.Data.OleDb.OleDbCommand();
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT hyetograph_data_id, hyetograph_id, rainfall, run_order, comment FROM FE_HY" +
-                "ETOGRAPH_DATA";
+            this._commandCollection[0].CommandText = "SELECT hyetograph_data_id, hyetograph_id, rainfall, run_order, comment FROM GRID_" +
+                "FE_HYETOGRAPH_DATA";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -7940,180 +7428,6 @@ namespace SystemsAnalysis.Grid.GridAnalysis.GridInterfaceDataSetTableAdapters {
         public virtual int Update(global::System.Data.DataRow[] dataRows) {
             return this.Adapter.Update(dataRows);
         }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_hyetograph_data_id, global::System.Nullable<int> Original_hyetograph_id, global::System.Nullable<double> Original_rainfall, global::System.Nullable<int> Original_run_order, string Original_comment) {
-            this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_hyetograph_data_id));
-            if ((Original_hyetograph_id.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[2].Value = ((int)(Original_hyetograph_id.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            if ((Original_rainfall.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((double)(Original_rainfall.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
-            if ((Original_run_order.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[6].Value = ((int)(Original_run_order.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            if ((Original_comment == null)) {
-                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[8].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[8].Value = ((string)(Original_comment));
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
-            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.DeleteCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.DeleteCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(global::System.Nullable<int> hyetograph_id, global::System.Nullable<double> rainfall, global::System.Nullable<int> run_order, string comment) {
-            if ((hyetograph_id.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[0].Value = ((int)(hyetograph_id.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
-            }
-            if ((rainfall.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[1].Value = ((double)(rainfall.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
-            if ((run_order.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[2].Value = ((int)(run_order.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            if ((comment == null)) {
-                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[3].Value = ((string)(comment));
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
-            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.InsertCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.InsertCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(global::System.Nullable<int> hyetograph_id, global::System.Nullable<double> rainfall, global::System.Nullable<int> run_order, string comment, int Original_hyetograph_data_id, global::System.Nullable<int> Original_hyetograph_id, global::System.Nullable<double> Original_rainfall, global::System.Nullable<int> Original_run_order, string Original_comment) {
-            if ((hyetograph_id.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(hyetograph_id.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[0].Value = global::System.DBNull.Value;
-            }
-            if ((rainfall.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[1].Value = ((double)(rainfall.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
-            if ((run_order.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(run_order.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            if ((comment == null)) {
-                this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[3].Value = ((string)(comment));
-            }
-            this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(Original_hyetograph_data_id));
-            if ((Original_hyetograph_id.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((int)(Original_hyetograph_id.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            if ((Original_rainfall.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((double)(Original_rainfall.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
-            }
-            if ((Original_run_order.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((int)(Original_run_order.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[10].Value = global::System.DBNull.Value;
-            }
-            if ((Original_comment == null)) {
-                this.Adapter.UpdateCommand.Parameters[11].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[12].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[11].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((string)(Original_comment));
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
-            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.UpdateCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.UpdateCommand.Connection.Close();
-                }
-            }
-        }
     }
     
     /// <summary>
@@ -8128,13 +7442,13 @@ namespace SystemsAnalysis.Grid.GridAnalysis.GridInterfaceDataSetTableAdapters {
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
     public partial class FEHyetographsTableAdapter : global::System.ComponentModel.Component {
         
-        private global::System.Data.OleDb.OleDbDataAdapter _adapter;
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
         
-        private global::System.Data.OleDb.OleDbConnection _connection;
+        private global::System.Data.SqlClient.SqlConnection _connection;
         
-        private global::System.Data.OleDb.OleDbTransaction _transaction;
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
         
-        private global::System.Data.OleDb.OleDbCommand[] _commandCollection;
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
         
         private bool _clearBeforeFill;
         
@@ -8144,7 +7458,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis.GridInterfaceDataSetTableAdapters {
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected internal global::System.Data.OleDb.OleDbDataAdapter Adapter {
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
             get {
                 if ((this._adapter == null)) {
                     this.InitAdapter();
@@ -8154,7 +7468,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis.GridInterfaceDataSetTableAdapters {
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.OleDb.OleDbConnection Connection {
+        internal global::System.Data.SqlClient.SqlConnection Connection {
             get {
                 if ((this._connection == null)) {
                     this.InitConnection();
@@ -8174,14 +7488,14 @@ namespace SystemsAnalysis.Grid.GridAnalysis.GridInterfaceDataSetTableAdapters {
                 }
                 for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
                     if ((this.CommandCollection[i] != null)) {
-                        ((global::System.Data.OleDb.OleDbCommand)(this.CommandCollection[i])).Connection = value;
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
                     }
                 }
             }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.OleDb.OleDbTransaction Transaction {
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
             get {
                 return this._transaction;
             }
@@ -8206,7 +7520,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis.GridInterfaceDataSetTableAdapters {
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected global::System.Data.OleDb.OleDbCommand[] CommandCollection {
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
             get {
                 if ((this._commandCollection == null)) {
                     this.InitCommandCollection();
@@ -8227,70 +7541,42 @@ namespace SystemsAnalysis.Grid.GridAnalysis.GridInterfaceDataSetTableAdapters {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitAdapter() {
-            this._adapter = new global::System.Data.OleDb.OleDbDataAdapter();
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
             global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
             tableMapping.SourceTable = "Table";
             tableMapping.DataSetTable = "FEHyetographs";
             tableMapping.ColumnMappings.Add("hyetograph_id", "hyetograph_id");
             tableMapping.ColumnMappings.Add("description", "description");
-            tableMapping.ColumnMappings.Add("time_step", "time_step");
             tableMapping.ColumnMappings.Add("time_step_units", "time_step_units");
             tableMapping.ColumnMappings.Add("source", "source");
+            tableMapping.ColumnMappings.Add("time_step", "time_step");
             this._adapter.TableMappings.Add(tableMapping);
-            this._adapter.DeleteCommand = new global::System.Data.OleDb.OleDbCommand();
-            this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM `FE_HYETOGRAPHS` WHERE ((`hyetograph_id` = ?) AND ((? = 1 AND `description` IS NULL) OR (`description` = ?)) AND ((? = 1 AND `time_step` IS NULL) OR (`time_step` = ?)) AND ((? = 1 AND `time_step_units` IS NULL) OR (`time_step_units` = ?)) AND ((? = 1 AND `source` IS NULL) OR (`source` = ?)))";
-            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_hyetograph_id", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "hyetograph_id", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_description", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "description", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_description", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "description", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_time_step", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "time_step", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_time_step", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "time_step", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_time_step_units", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "time_step_units", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_time_step_units", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "time_step_units", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_source", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "source", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_source", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "source", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.InsertCommand = new global::System.Data.OleDb.OleDbCommand();
+            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO `FE_HYETOGRAPHS` (`description`, `time_step`, `time_step_units`, `sou" +
-                "rce`) VALUES (?, ?, ?, ?)";
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [GRID_FE_HYETOGRAPHS] ([hyetograph_id], [description], [time_step], [" +
+                "time_step_units], [source]) VALUES (@hyetograph_id, @description, @time_step, @t" +
+                "ime_step_units, @source)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("description", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "description", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("time_step", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "time_step", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("time_step_units", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "time_step_units", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("source", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "source", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand = new global::System.Data.OleDb.OleDbCommand();
-            this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE `FE_HYETOGRAPHS` SET `description` = ?, `time_step` = ?, `time_step_units` = ?, `source` = ? WHERE ((`hyetograph_id` = ?) AND ((? = 1 AND `description` IS NULL) OR (`description` = ?)) AND ((? = 1 AND `time_step` IS NULL) OR (`time_step` = ?)) AND ((? = 1 AND `time_step_units` IS NULL) OR (`time_step_units` = ?)) AND ((? = 1 AND `source` IS NULL) OR (`source` = ?)))";
-            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("description", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "description", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("time_step", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "time_step", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("time_step_units", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "time_step_units", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("source", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "source", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_hyetograph_id", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "hyetograph_id", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_description", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "description", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_description", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "description", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_time_step", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "time_step", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_time_step", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "time_step", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_time_step_units", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "time_step_units", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_time_step_units", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "time_step_units", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_source", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "source", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_source", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "source", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@hyetograph_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "hyetograph_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@description", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "description", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@time_step", global::System.Data.SqlDbType.Real, 0, global::System.Data.ParameterDirection.Input, 0, 0, "time_step", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@time_step_units", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "time_step_units", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@source", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "source", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitConnection() {
-            this._connection = new global::System.Data.OleDb.OleDbConnection();
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
             this._connection.ConnectionString = global::SystemsAnalysis.Grid.GridAnalysis.Properties.Settings.Default.Waterqual_GIS_v5_0ConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.OleDb.OleDbCommand[1];
-            this._commandCollection[0] = new global::System.Data.OleDb.OleDbCommand();
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT hyetograph_id, description, time_step, time_step_units, source FROM FE_HYE" +
-                "TOGRAPHS";
+            this._commandCollection[0].CommandText = "SELECT hyetograph_id, description, time_step, time_step_units, source FROM GRID_F" +
+                "E_HYETOGRAPHS";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -8340,180 +7626,6 @@ namespace SystemsAnalysis.Grid.GridAnalysis.GridInterfaceDataSetTableAdapters {
         public virtual int Update(global::System.Data.DataRow[] dataRows) {
             return this.Adapter.Update(dataRows);
         }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_hyetograph_id, string Original_description, global::System.Nullable<double> Original_time_step, string Original_time_step_units, string Original_source) {
-            this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_hyetograph_id));
-            if ((Original_description == null)) {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[2].Value = ((string)(Original_description));
-            }
-            if ((Original_time_step.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((double)(Original_time_step.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
-            if ((Original_time_step_units == null)) {
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[6].Value = ((string)(Original_time_step_units));
-            }
-            if ((Original_source == null)) {
-                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[8].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[8].Value = ((string)(Original_source));
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
-            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.DeleteCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.DeleteCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string description, global::System.Nullable<double> time_step, string time_step_units, string source) {
-            if ((description == null)) {
-                this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(description));
-            }
-            if ((time_step.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[1].Value = ((double)(time_step.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
-            if ((time_step_units == null)) {
-                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(time_step_units));
-            }
-            if ((source == null)) {
-                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[3].Value = ((string)(source));
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
-            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.InsertCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.InsertCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string description, global::System.Nullable<double> time_step, string time_step_units, string source, int Original_hyetograph_id, string Original_description, global::System.Nullable<double> Original_time_step, string Original_time_step_units, string Original_source) {
-            if ((description == null)) {
-                this.Adapter.UpdateCommand.Parameters[0].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(description));
-            }
-            if ((time_step.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[1].Value = ((double)(time_step.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
-            if ((time_step_units == null)) {
-                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(time_step_units));
-            }
-            if ((source == null)) {
-                this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[3].Value = ((string)(source));
-            }
-            this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(Original_hyetograph_id));
-            if ((Original_description == null)) {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((string)(Original_description));
-            }
-            if ((Original_time_step.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((double)(Original_time_step.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
-            }
-            if ((Original_time_step_units == null)) {
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[10].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((string)(Original_time_step_units));
-            }
-            if ((Original_source == null)) {
-                this.Adapter.UpdateCommand.Parameters[11].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[12].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[11].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((string)(Original_source));
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
-            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.UpdateCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.UpdateCommand.Connection.Close();
-                }
-            }
-        }
     }
     
     /// <summary>
@@ -8528,13 +7640,13 @@ namespace SystemsAnalysis.Grid.GridAnalysis.GridInterfaceDataSetTableAdapters {
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
     public partial class FEModelRunTableAdapter : global::System.ComponentModel.Component {
         
-        private global::System.Data.OleDb.OleDbDataAdapter _adapter;
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
         
-        private global::System.Data.OleDb.OleDbConnection _connection;
+        private global::System.Data.SqlClient.SqlConnection _connection;
         
-        private global::System.Data.OleDb.OleDbTransaction _transaction;
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
         
-        private global::System.Data.OleDb.OleDbCommand[] _commandCollection;
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
         
         private bool _clearBeforeFill;
         
@@ -8544,7 +7656,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis.GridInterfaceDataSetTableAdapters {
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected internal global::System.Data.OleDb.OleDbDataAdapter Adapter {
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
             get {
                 if ((this._adapter == null)) {
                     this.InitAdapter();
@@ -8554,7 +7666,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis.GridInterfaceDataSetTableAdapters {
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.OleDb.OleDbConnection Connection {
+        internal global::System.Data.SqlClient.SqlConnection Connection {
             get {
                 if ((this._connection == null)) {
                     this.InitConnection();
@@ -8574,14 +7686,14 @@ namespace SystemsAnalysis.Grid.GridAnalysis.GridInterfaceDataSetTableAdapters {
                 }
                 for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
                     if ((this.CommandCollection[i] != null)) {
-                        ((global::System.Data.OleDb.OleDbCommand)(this.CommandCollection[i])).Connection = value;
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
                     }
                 }
             }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.OleDb.OleDbTransaction Transaction {
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
             get {
                 return this._transaction;
             }
@@ -8606,7 +7718,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis.GridInterfaceDataSetTableAdapters {
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected global::System.Data.OleDb.OleDbCommand[] CommandCollection {
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
             get {
                 if ((this._commandCollection == null)) {
                     this.InitCommandCollection();
@@ -8627,7 +7739,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis.GridInterfaceDataSetTableAdapters {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitAdapter() {
-            this._adapter = new global::System.Data.OleDb.OleDbDataAdapter();
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
             global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
             tableMapping.SourceTable = "Table";
             tableMapping.DataSetTable = "FEModelRun";
@@ -8636,55 +7748,46 @@ namespace SystemsAnalysis.Grid.GridAnalysis.GridInterfaceDataSetTableAdapters {
             tableMapping.ColumnMappings.Add("selection_set_area_id", "selection_set_area_id");
             tableMapping.ColumnMappings.Add("hyetograph_id", "hyetograph_id");
             this._adapter.TableMappings.Add(tableMapping);
-            this._adapter.DeleteCommand = new global::System.Data.OleDb.OleDbCommand();
-            this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM `FE_MODEL_RUN` WHERE ((`model_run_id` = ?) AND ((? = 1 AND `scenario_id` IS NULL) OR (`scenario_id` = ?)) AND ((? = 1 AND `selection_set_area_id` IS NULL) OR (`selection_set_area_id` = ?)) AND ((? = 1 AND `hyetograph_id` IS NULL) OR (`hyetograph_id` = ?)))";
-            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_model_run_id", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "model_run_id", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_scenario_id", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "scenario_id", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_scenario_id", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "scenario_id", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_selection_set_area_id", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "selection_set_area_id", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_selection_set_area_id", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "selection_set_area_id", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_hyetograph_id", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "hyetograph_id", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_hyetograph_id", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "hyetograph_id", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.InsertCommand = new global::System.Data.OleDb.OleDbCommand();
+            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO `FE_MODEL_RUN` (`scenario_id`, `selection_set_area_id`, `hyetograph_i" +
-                "d`) VALUES (?, ?, ?)";
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [GRID_FE_MODEL_RUN] ([model_run_id], [scenario_id], [selection_set_ar" +
+                "ea_id], [hyetograph_id]) VALUES (@model_run_id, @scenario_id, @selection_set_are" +
+                "a_id, @hyetograph_id)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("scenario_id", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "scenario_id", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("selection_set_area_id", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "selection_set_area_id", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("hyetograph_id", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "hyetograph_id", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand = new global::System.Data.OleDb.OleDbCommand();
-            this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE `FE_MODEL_RUN` SET `scenario_id` = ?, `selection_set_area_id` = ?, `hyetograph_id` = ? WHERE ((`model_run_id` = ?) AND ((? = 1 AND `scenario_id` IS NULL) OR (`scenario_id` = ?)) AND ((? = 1 AND `selection_set_area_id` IS NULL) OR (`selection_set_area_id` = ?)) AND ((? = 1 AND `hyetograph_id` IS NULL) OR (`hyetograph_id` = ?)))";
-            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("scenario_id", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "scenario_id", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("selection_set_area_id", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "selection_set_area_id", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("hyetograph_id", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "hyetograph_id", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_model_run_id", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "model_run_id", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_scenario_id", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "scenario_id", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_scenario_id", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "scenario_id", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_selection_set_area_id", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "selection_set_area_id", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_selection_set_area_id", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "selection_set_area_id", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_hyetograph_id", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "hyetograph_id", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_hyetograph_id", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "hyetograph_id", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@model_run_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "model_run_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@scenario_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "scenario_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@selection_set_area_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "selection_set_area_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@hyetograph_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "hyetograph_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitConnection() {
-            this._connection = new global::System.Data.OleDb.OleDbConnection();
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
             this._connection.ConnectionString = global::SystemsAnalysis.Grid.GridAnalysis.Properties.Settings.Default.Waterqual_GIS_v5_0ConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.OleDb.OleDbCommand[1];
-            this._commandCollection[0] = new global::System.Data.OleDb.OleDbCommand();
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[3];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT model_run_id, scenario_id, selection_set_area_id, hyetograph_id FROM FE_MO" +
-                "DEL_RUN";
+            this._commandCollection[0].CommandText = "SELECT        model_run_id, scenario_id, selection_set_area_id, hyetograph_id\r\nFR" +
+                "OM            GRID_FE_MODEL_RUN";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[1].Connection = this.Connection;
+            this._commandCollection[1].CommandText = "SELECT MAX(model_run_id)+1 FROM GRID_FE_MODEL_RUN";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[2] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[2].Connection = this.Connection;
+            this._commandCollection[2].CommandText = "INSERT INTO [GRID_FE_MODEL_RUN] ([model_run_id], [scenario_id], [selection_set_ar" +
+                "ea_id], [hyetograph_id]) VALUES (@model_run_id, @scenario_id, @selection_set_are" +
+                "a_id, @hyetograph_id)";
+            this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@model_run_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "model_run_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@scenario_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "scenario_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@selection_set_area_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "selection_set_area_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@hyetograph_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "hyetograph_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -8736,148 +7839,75 @@ namespace SystemsAnalysis.Grid.GridAnalysis.GridInterfaceDataSetTableAdapters {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_model_run_id, global::System.Nullable<int> Original_scenario_id, global::System.Nullable<int> Original_selection_set_area_id, global::System.Nullable<int> Original_hyetograph_id) {
-            this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_model_run_id));
-            if ((Original_scenario_id.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[2].Value = ((int)(Original_scenario_id.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            if ((Original_selection_set_area_id.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((int)(Original_selection_set_area_id.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
-            if ((Original_hyetograph_id.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[6].Value = ((int)(Original_hyetograph_id.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
-            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+        public virtual global::System.Nullable<int> GetNextModelRunID() {
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[1];
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.DeleteCommand.Connection.Open();
+                command.Connection.Open();
             }
+            object returnValue;
             try {
-                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
-                return returnValue;
+                returnValue = command.ExecuteScalar();
             }
             finally {
                 if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.DeleteCommand.Connection.Close();
+                    command.Connection.Close();
                 }
+            }
+            if (((returnValue == null) 
+                        || (returnValue.GetType() == typeof(global::System.DBNull)))) {
+                return new global::System.Nullable<int>();
+            }
+            else {
+                return new global::System.Nullable<int>(((int)(returnValue)));
             }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(global::System.Nullable<int> scenario_id, global::System.Nullable<int> selection_set_area_id, global::System.Nullable<int> hyetograph_id) {
-            if ((scenario_id.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[0].Value = ((int)(scenario_id.Value));
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, false)]
+        public virtual int InsertQuery(global::System.Nullable<int> model_run_id, global::System.Nullable<int> scenario_id, global::System.Nullable<int> selection_set_area_id, global::System.Nullable<int> hyetograph_id) {
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[2];
+            if ((model_run_id.HasValue == true)) {
+                command.Parameters[0].Value = ((int)(model_run_id.Value));
             }
             else {
-                this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
+                command.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            if ((scenario_id.HasValue == true)) {
+                command.Parameters[1].Value = ((int)(scenario_id.Value));
+            }
+            else {
+                command.Parameters[1].Value = global::System.DBNull.Value;
             }
             if ((selection_set_area_id.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[1].Value = ((int)(selection_set_area_id.Value));
+                command.Parameters[2].Value = ((int)(selection_set_area_id.Value));
             }
             else {
-                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
+                command.Parameters[2].Value = global::System.DBNull.Value;
             }
             if ((hyetograph_id.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[2].Value = ((int)(hyetograph_id.Value));
+                command.Parameters[3].Value = ((int)(hyetograph_id.Value));
             }
             else {
-                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
+                command.Parameters[3].Value = global::System.DBNull.Value;
             }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
-            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.InsertCommand.Connection.Open();
+                command.Connection.Open();
             }
+            int returnValue;
             try {
-                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
-                return returnValue;
+                returnValue = command.ExecuteNonQuery();
             }
             finally {
                 if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.InsertCommand.Connection.Close();
+                    command.Connection.Close();
                 }
             }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(global::System.Nullable<int> scenario_id, global::System.Nullable<int> selection_set_area_id, global::System.Nullable<int> hyetograph_id, int Original_model_run_id, global::System.Nullable<int> Original_scenario_id, global::System.Nullable<int> Original_selection_set_area_id, global::System.Nullable<int> Original_hyetograph_id) {
-            if ((scenario_id.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(scenario_id.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[0].Value = global::System.DBNull.Value;
-            }
-            if ((selection_set_area_id.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(selection_set_area_id.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
-            if ((hyetograph_id.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(hyetograph_id.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(Original_model_run_id));
-            if ((Original_scenario_id.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(Original_scenario_id.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[5].Value = global::System.DBNull.Value;
-            }
-            if ((Original_selection_set_area_id.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((int)(Original_selection_set_area_id.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
-            }
-            if ((Original_hyetograph_id.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((int)(Original_hyetograph_id.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[9].Value = global::System.DBNull.Value;
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
-            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.UpdateCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.UpdateCommand.Connection.Close();
-                }
-            }
+            return returnValue;
         }
     }
     
@@ -8893,13 +7923,13 @@ namespace SystemsAnalysis.Grid.GridAnalysis.GridInterfaceDataSetTableAdapters {
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
     public partial class FEScenariosTableAdapter : global::System.ComponentModel.Component {
         
-        private global::System.Data.OleDb.OleDbDataAdapter _adapter;
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
         
-        private global::System.Data.OleDb.OleDbConnection _connection;
+        private global::System.Data.SqlClient.SqlConnection _connection;
         
-        private global::System.Data.OleDb.OleDbTransaction _transaction;
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
         
-        private global::System.Data.OleDb.OleDbCommand[] _commandCollection;
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
         
         private bool _clearBeforeFill;
         
@@ -8909,7 +7939,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis.GridInterfaceDataSetTableAdapters {
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected internal global::System.Data.OleDb.OleDbDataAdapter Adapter {
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
             get {
                 if ((this._adapter == null)) {
                     this.InitAdapter();
@@ -8919,7 +7949,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis.GridInterfaceDataSetTableAdapters {
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.OleDb.OleDbConnection Connection {
+        internal global::System.Data.SqlClient.SqlConnection Connection {
             get {
                 if ((this._connection == null)) {
                     this.InitConnection();
@@ -8939,14 +7969,14 @@ namespace SystemsAnalysis.Grid.GridAnalysis.GridInterfaceDataSetTableAdapters {
                 }
                 for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
                     if ((this.CommandCollection[i] != null)) {
-                        ((global::System.Data.OleDb.OleDbCommand)(this.CommandCollection[i])).Connection = value;
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
                     }
                 }
             }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.OleDb.OleDbTransaction Transaction {
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
             get {
                 return this._transaction;
             }
@@ -8971,7 +8001,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis.GridInterfaceDataSetTableAdapters {
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected global::System.Data.OleDb.OleDbCommand[] CommandCollection {
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
             get {
                 if ((this._commandCollection == null)) {
                     this.InitCommandCollection();
@@ -8992,7 +8022,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis.GridInterfaceDataSetTableAdapters {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitAdapter() {
-            this._adapter = new global::System.Data.OleDb.OleDbDataAdapter();
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
             global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
             tableMapping.SourceTable = "Table";
             tableMapping.DataSetTable = "FEScenarios";
@@ -9006,54 +8036,52 @@ namespace SystemsAnalysis.Grid.GridAnalysis.GridInterfaceDataSetTableAdapters {
             tableMapping.ColumnMappings.Add("bmp_effectiveness_db", "bmp_effectiveness_db");
             tableMapping.ColumnMappings.Add("bmp_effectiveness_table", "bmp_effectiveness_table");
             this._adapter.TableMappings.Add(tableMapping);
-            this._adapter.DeleteCommand = new global::System.Data.OleDb.OleDbCommand();
-            this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = "DELETE FROM `FE_SCENARIOS` WHERE ((`scenario_id` = ?))";
-            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_scenario_id", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "scenario_id", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.InsertCommand = new global::System.Data.OleDb.OleDbCommand();
+            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO `FE_SCENARIOS` (`project_id`, `time_period`, `description`, `include_" +
-                "instream_facilities`, `pollutant_loading_db`, `pollutant_loading_table`, `bmp_ef" +
-                "fectiveness_db`, `bmp_effectiveness_table`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO GRID_FE_SCENARIOS
+                         (project_id, time_period, description, include_instream_facilities, pollutant_loading_db, pollutant_loading_table, bmp_effectiveness_db, bmp_effectiveness_table)
+VALUES        (@project_id,@time_period,@description,@include_instream_facilities,@pollutant_loading_db,@pollutant_loading_table,@bmp_effectiveness_db,@bmp_effectiveness_table)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("project_id", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "project_id", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("time_period", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "time_period", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("description", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "description", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("include_instream_facilities", global::System.Data.OleDb.OleDbType.Boolean, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "include_instream_facilities", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("pollutant_loading_db", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "pollutant_loading_db", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("pollutant_loading_table", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "pollutant_loading_table", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("bmp_effectiveness_db", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "bmp_effectiveness_db", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("bmp_effectiveness_table", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "bmp_effectiveness_table", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand = new global::System.Data.OleDb.OleDbCommand();
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@project_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "project_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@time_period", global::System.Data.SqlDbType.VarChar, 255, global::System.Data.ParameterDirection.Input, 0, 0, "time_period", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@description", global::System.Data.SqlDbType.VarChar, 255, global::System.Data.ParameterDirection.Input, 0, 0, "description", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@include_instream_facilities", global::System.Data.SqlDbType.Bit, 1, global::System.Data.ParameterDirection.Input, 0, 0, "include_instream_facilities", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@pollutant_loading_db", global::System.Data.SqlDbType.VarChar, 255, global::System.Data.ParameterDirection.Input, 0, 0, "pollutant_loading_db", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@pollutant_loading_table", global::System.Data.SqlDbType.VarChar, 255, global::System.Data.ParameterDirection.Input, 0, 0, "pollutant_loading_table", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@bmp_effectiveness_db", global::System.Data.SqlDbType.VarChar, 255, global::System.Data.ParameterDirection.Input, 0, 0, "bmp_effectiveness_db", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@bmp_effectiveness_table", global::System.Data.SqlDbType.VarChar, 255, global::System.Data.ParameterDirection.Input, 0, 0, "bmp_effectiveness_table", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE `FE_SCENARIOS` SET `project_id` = ?, `time_period` = ?, `description` = ?, `include_instream_facilities` = ?, `pollutant_loading_db` = ?, `pollutant_loading_table` = ?, `bmp_effectiveness_db` = ?, `bmp_effectiveness_table` = ? WHERE ((`scenario_id` = ?))";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE       GRID_FE_SCENARIOS
+SET                project_id = @project_id, time_period = @time_period, description = @description, include_instream_facilities = @include_instream_facilities, pollutant_loading_db = @pollutant_loading_db, 
+                         pollutant_loading_table = @pollutant_loading_table, bmp_effectiveness_db = @bmp_effectiveness_db, bmp_effectiveness_table = @bmp_effectiveness_table
+WHERE        (scenario_id = @scenario_id)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("project_id", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "project_id", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("time_period", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "time_period", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("description", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "description", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("include_instream_facilities", global::System.Data.OleDb.OleDbType.Boolean, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "include_instream_facilities", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("pollutant_loading_db", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "pollutant_loading_db", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("pollutant_loading_table", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "pollutant_loading_table", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("bmp_effectiveness_db", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "bmp_effectiveness_db", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("bmp_effectiveness_table", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "bmp_effectiveness_table", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_scenario_id", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "scenario_id", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@project_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "project_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@time_period", global::System.Data.SqlDbType.VarChar, 255, global::System.Data.ParameterDirection.Input, 0, 0, "time_period", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@description", global::System.Data.SqlDbType.VarChar, 255, global::System.Data.ParameterDirection.Input, 0, 0, "description", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@include_instream_facilities", global::System.Data.SqlDbType.Bit, 1, global::System.Data.ParameterDirection.Input, 0, 0, "include_instream_facilities", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@pollutant_loading_db", global::System.Data.SqlDbType.VarChar, 255, global::System.Data.ParameterDirection.Input, 0, 0, "pollutant_loading_db", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@pollutant_loading_table", global::System.Data.SqlDbType.VarChar, 255, global::System.Data.ParameterDirection.Input, 0, 0, "pollutant_loading_table", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@bmp_effectiveness_db", global::System.Data.SqlDbType.VarChar, 255, global::System.Data.ParameterDirection.Input, 0, 0, "bmp_effectiveness_db", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@bmp_effectiveness_table", global::System.Data.SqlDbType.VarChar, 255, global::System.Data.ParameterDirection.Input, 0, 0, "bmp_effectiveness_table", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@scenario_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "scenario_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitConnection() {
-            this._connection = new global::System.Data.OleDb.OleDbConnection();
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
             this._connection.ConnectionString = global::SystemsAnalysis.Grid.GridAnalysis.Properties.Settings.Default.Waterqual_GIS_v5_0ConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.OleDb.OleDbCommand[1];
-            this._commandCollection[0] = new global::System.Data.OleDb.OleDbCommand();
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT scenario_id, project_id, time_period, description, include_instream_facili" +
-                "ties, pollutant_loading_db, pollutant_loading_table, bmp_effectiveness_db, bmp_e" +
-                "ffectiveness_table FROM FE_SCENARIOS";
+            this._commandCollection[0].CommandText = "SELECT        scenario_id, project_id, time_period, description, include_instream" +
+                "_facilities, pollutant_loading_db, pollutant_loading_table, bmp_effectiveness_db" +
+                ", bmp_effectiveness_table\r\nFROM            GRID_FE_SCENARIOS";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -9103,154 +8131,6 @@ namespace SystemsAnalysis.Grid.GridAnalysis.GridInterfaceDataSetTableAdapters {
         public virtual int Update(global::System.Data.DataRow[] dataRows) {
             return this.Adapter.Update(dataRows);
         }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_scenario_id) {
-            this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_scenario_id));
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
-            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.DeleteCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.DeleteCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(global::System.Nullable<int> project_id, string time_period, string description, bool include_instream_facilities, string pollutant_loading_db, string pollutant_loading_table, string bmp_effectiveness_db, string bmp_effectiveness_table) {
-            if ((project_id.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[0].Value = ((int)(project_id.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
-            }
-            if ((time_period == null)) {
-                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(time_period));
-            }
-            if ((description == null)) {
-                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(description));
-            }
-            this.Adapter.InsertCommand.Parameters[3].Value = ((bool)(include_instream_facilities));
-            if ((pollutant_loading_db == null)) {
-                this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[4].Value = ((string)(pollutant_loading_db));
-            }
-            if ((pollutant_loading_table == null)) {
-                this.Adapter.InsertCommand.Parameters[5].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[5].Value = ((string)(pollutant_loading_table));
-            }
-            if ((bmp_effectiveness_db == null)) {
-                this.Adapter.InsertCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[6].Value = ((string)(bmp_effectiveness_db));
-            }
-            if ((bmp_effectiveness_table == null)) {
-                this.Adapter.InsertCommand.Parameters[7].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[7].Value = ((string)(bmp_effectiveness_table));
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
-            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.InsertCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.InsertCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(global::System.Nullable<int> project_id, string time_period, string description, bool include_instream_facilities, string pollutant_loading_db, string pollutant_loading_table, string bmp_effectiveness_db, string bmp_effectiveness_table, int Original_scenario_id) {
-            if ((project_id.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(project_id.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[0].Value = global::System.DBNull.Value;
-            }
-            if ((time_period == null)) {
-                this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(time_period));
-            }
-            if ((description == null)) {
-                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(description));
-            }
-            this.Adapter.UpdateCommand.Parameters[3].Value = ((bool)(include_instream_facilities));
-            if ((pollutant_loading_db == null)) {
-                this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((string)(pollutant_loading_db));
-            }
-            if ((pollutant_loading_table == null)) {
-                this.Adapter.UpdateCommand.Parameters[5].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((string)(pollutant_loading_table));
-            }
-            if ((bmp_effectiveness_db == null)) {
-                this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((string)(bmp_effectiveness_db));
-            }
-            if ((bmp_effectiveness_table == null)) {
-                this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((string)(bmp_effectiveness_table));
-            }
-            this.Adapter.UpdateCommand.Parameters[8].Value = ((int)(Original_scenario_id));
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
-            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.UpdateCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.UpdateCommand.Connection.Close();
-                }
-            }
-        }
     }
     
     /// <summary>
@@ -9265,13 +8145,13 @@ namespace SystemsAnalysis.Grid.GridAnalysis.GridInterfaceDataSetTableAdapters {
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
     public partial class FESelectionSetAreasTableAdapter : global::System.ComponentModel.Component {
         
-        private global::System.Data.OleDb.OleDbDataAdapter _adapter;
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
         
-        private global::System.Data.OleDb.OleDbConnection _connection;
+        private global::System.Data.SqlClient.SqlConnection _connection;
         
-        private global::System.Data.OleDb.OleDbTransaction _transaction;
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
         
-        private global::System.Data.OleDb.OleDbCommand[] _commandCollection;
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
         
         private bool _clearBeforeFill;
         
@@ -9281,7 +8161,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis.GridInterfaceDataSetTableAdapters {
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected internal global::System.Data.OleDb.OleDbDataAdapter Adapter {
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
             get {
                 if ((this._adapter == null)) {
                     this.InitAdapter();
@@ -9291,7 +8171,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis.GridInterfaceDataSetTableAdapters {
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.OleDb.OleDbConnection Connection {
+        internal global::System.Data.SqlClient.SqlConnection Connection {
             get {
                 if ((this._connection == null)) {
                     this.InitConnection();
@@ -9311,14 +8191,14 @@ namespace SystemsAnalysis.Grid.GridAnalysis.GridInterfaceDataSetTableAdapters {
                 }
                 for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
                     if ((this.CommandCollection[i] != null)) {
-                        ((global::System.Data.OleDb.OleDbCommand)(this.CommandCollection[i])).Connection = value;
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
                     }
                 }
             }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.OleDb.OleDbTransaction Transaction {
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
             get {
                 return this._transaction;
             }
@@ -9343,7 +8223,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis.GridInterfaceDataSetTableAdapters {
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected global::System.Data.OleDb.OleDbCommand[] CommandCollection {
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
             get {
                 if ((this._commandCollection == null)) {
                     this.InitCommandCollection();
@@ -9364,7 +8244,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis.GridInterfaceDataSetTableAdapters {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitAdapter() {
-            this._adapter = new global::System.Data.OleDb.OleDbDataAdapter();
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
             global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
             tableMapping.SourceTable = "Table";
             tableMapping.DataSetTable = "FESelectionSetAreas";
@@ -9373,57 +8253,31 @@ namespace SystemsAnalysis.Grid.GridAnalysis.GridInterfaceDataSetTableAdapters {
             tableMapping.ColumnMappings.Add("area", "area");
             tableMapping.ColumnMappings.Add("sub_area", "sub_area");
             this._adapter.TableMappings.Add(tableMapping);
-            this._adapter.DeleteCommand = new global::System.Data.OleDb.OleDbCommand();
-            this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = "DELETE FROM `FE_SELECTION_SET_AREAS` WHERE ((`selection_set_area_id` = ?) AND ((?" +
-                " = 1 AND `project_id` IS NULL) OR (`project_id` = ?)) AND ((? = 1 AND `area` IS " +
-                "NULL) OR (`area` = ?)) AND ((? = 1 AND `sub_area` IS NULL) OR (`sub_area` = ?)))" +
-                "";
-            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_selection_set_area_id", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "selection_set_area_id", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_project_id", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "project_id", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_project_id", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "project_id", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_area", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "area", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_area", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "area", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_sub_area", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "sub_area", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_sub_area", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "sub_area", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.InsertCommand = new global::System.Data.OleDb.OleDbCommand();
+            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO `FE_SELECTION_SET_AREAS` (`project_id`, `area`, `sub_area`) VALUES (?" +
-                ", ?, ?)";
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [GRID_FE_SELECTION_SET_AREAS] ([selection_set_area_id], [project_id]," +
+                " [area], [sub_area]) VALUES (@selection_set_area_id, @project_id, @area, @sub_ar" +
+                "ea)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("project_id", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "project_id", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("area", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "area", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("sub_area", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "sub_area", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand = new global::System.Data.OleDb.OleDbCommand();
-            this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE `FE_SELECTION_SET_AREAS` SET `project_id` = ?, `area` = ?, `sub_area` = ? WHERE ((`selection_set_area_id` = ?) AND ((? = 1 AND `project_id` IS NULL) OR (`project_id` = ?)) AND ((? = 1 AND `area` IS NULL) OR (`area` = ?)) AND ((? = 1 AND `sub_area` IS NULL) OR (`sub_area` = ?)))";
-            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("project_id", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "project_id", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("area", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "area", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("sub_area", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "sub_area", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_selection_set_area_id", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "selection_set_area_id", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_project_id", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "project_id", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_project_id", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "project_id", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_area", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "area", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_area", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "area", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_sub_area", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "sub_area", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_sub_area", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "sub_area", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@selection_set_area_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "selection_set_area_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@project_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "project_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@area", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "area", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@sub_area", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "sub_area", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitConnection() {
-            this._connection = new global::System.Data.OleDb.OleDbConnection();
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
             this._connection.ConnectionString = global::SystemsAnalysis.Grid.GridAnalysis.Properties.Settings.Default.Waterqual_GIS_v5_0ConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.OleDb.OleDbCommand[1];
-            this._commandCollection[0] = new global::System.Data.OleDb.OleDbCommand();
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT selection_set_area_id, project_id, area, sub_area FROM FE_SELECTION_SET_AR" +
-                "EAS";
+            this._commandCollection[0].CommandText = "SELECT selection_set_area_id, project_id, area, sub_area FROM GRID_FE_SELECTION_S" +
+                "ET_AREAS";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -9473,152 +8327,6 @@ namespace SystemsAnalysis.Grid.GridAnalysis.GridInterfaceDataSetTableAdapters {
         public virtual int Update(global::System.Data.DataRow[] dataRows) {
             return this.Adapter.Update(dataRows);
         }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_selection_set_area_id, global::System.Nullable<int> Original_project_id, string Original_area, string Original_sub_area) {
-            this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_selection_set_area_id));
-            if ((Original_project_id.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[2].Value = ((int)(Original_project_id.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            if ((Original_area == null)) {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((string)(Original_area));
-            }
-            if ((Original_sub_area == null)) {
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[6].Value = ((string)(Original_sub_area));
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
-            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.DeleteCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.DeleteCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(global::System.Nullable<int> project_id, string area, string sub_area) {
-            if ((project_id.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[0].Value = ((int)(project_id.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
-            }
-            if ((area == null)) {
-                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(area));
-            }
-            if ((sub_area == null)) {
-                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(sub_area));
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
-            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.InsertCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.InsertCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(global::System.Nullable<int> project_id, string area, string sub_area, int Original_selection_set_area_id, global::System.Nullable<int> Original_project_id, string Original_area, string Original_sub_area) {
-            if ((project_id.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(project_id.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[0].Value = global::System.DBNull.Value;
-            }
-            if ((area == null)) {
-                this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(area));
-            }
-            if ((sub_area == null)) {
-                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(sub_area));
-            }
-            this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(Original_selection_set_area_id));
-            if ((Original_project_id.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(Original_project_id.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[5].Value = global::System.DBNull.Value;
-            }
-            if ((Original_area == null)) {
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((string)(Original_area));
-            }
-            if ((Original_sub_area == null)) {
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[9].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((string)(Original_sub_area));
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
-            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.UpdateCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.UpdateCommand.Connection.Close();
-                }
-            }
-        }
     }
     
     /// <summary>
@@ -9633,13 +8341,13 @@ namespace SystemsAnalysis.Grid.GridAnalysis.GridInterfaceDataSetTableAdapters {
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
     public partial class QryModelRunTableAdapter : global::System.ComponentModel.Component {
         
-        private global::System.Data.OleDb.OleDbDataAdapter _adapter;
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
         
-        private global::System.Data.OleDb.OleDbConnection _connection;
+        private global::System.Data.SqlClient.SqlConnection _connection;
         
-        private global::System.Data.OleDb.OleDbTransaction _transaction;
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
         
-        private global::System.Data.OleDb.OleDbCommand[] _commandCollection;
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
         
         private bool _clearBeforeFill;
         
@@ -9649,7 +8357,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis.GridInterfaceDataSetTableAdapters {
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected internal global::System.Data.OleDb.OleDbDataAdapter Adapter {
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
             get {
                 if ((this._adapter == null)) {
                     this.InitAdapter();
@@ -9659,7 +8367,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis.GridInterfaceDataSetTableAdapters {
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.OleDb.OleDbConnection Connection {
+        internal global::System.Data.SqlClient.SqlConnection Connection {
             get {
                 if ((this._connection == null)) {
                     this.InitConnection();
@@ -9679,14 +8387,14 @@ namespace SystemsAnalysis.Grid.GridAnalysis.GridInterfaceDataSetTableAdapters {
                 }
                 for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
                     if ((this.CommandCollection[i] != null)) {
-                        ((global::System.Data.OleDb.OleDbCommand)(this.CommandCollection[i])).Connection = value;
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
                     }
                 }
             }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.OleDb.OleDbTransaction Transaction {
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
             get {
                 return this._transaction;
             }
@@ -9711,7 +8419,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis.GridInterfaceDataSetTableAdapters {
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected global::System.Data.OleDb.OleDbCommand[] CommandCollection {
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
             get {
                 if ((this._commandCollection == null)) {
                     this.InitCommandCollection();
@@ -9732,16 +8440,14 @@ namespace SystemsAnalysis.Grid.GridAnalysis.GridInterfaceDataSetTableAdapters {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitAdapter() {
-            this._adapter = new global::System.Data.OleDb.OleDbDataAdapter();
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
             global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
             tableMapping.SourceTable = "Table";
             tableMapping.DataSetTable = "QryModelRun";
             tableMapping.ColumnMappings.Add("time_period", "time_period");
-            tableMapping.ColumnMappings.Add("description", "scenario_description");
             tableMapping.ColumnMappings.Add("scenario_id", "scenario_id");
             tableMapping.ColumnMappings.Add("selection_set_area_id", "selection_set_area_id");
             tableMapping.ColumnMappings.Add("hyetograph_id", "hyetograph_id");
-            tableMapping.ColumnMappings.Add("hyetograph", "hyetograph_description");
             tableMapping.ColumnMappings.Add("project_id", "project_id");
             tableMapping.ColumnMappings.Add("model_run_id", "model_run_id");
             tableMapping.ColumnMappings.Add("area", "area");
@@ -9752,28 +8458,30 @@ namespace SystemsAnalysis.Grid.GridAnalysis.GridInterfaceDataSetTableAdapters {
             tableMapping.ColumnMappings.Add("pollutant_loading_table", "pollutant_loading_table");
             tableMapping.ColumnMappings.Add("bmp_effectiveness_db", "bmp_effectiveness_db");
             tableMapping.ColumnMappings.Add("bmp_effectiveness_table", "bmp_effectiveness_table");
+            tableMapping.ColumnMappings.Add("scenario_description", "scenario_description");
+            tableMapping.ColumnMappings.Add("hyetograph_description", "hyetograph_description");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitConnection() {
-            this._connection = new global::System.Data.OleDb.OleDbConnection();
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
             this._connection.ConnectionString = global::SystemsAnalysis.Grid.GridAnalysis.Properties.Settings.Default.Waterqual_GIS_v5_0ConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.OleDb.OleDbCommand[1];
-            this._commandCollection[0] = new global::System.Data.OleDb.OleDbCommand();
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = @"SELECT       FE_SELECTION_SET_AREAS.area, FE_SELECTION_SET_AREAS.sub_area, FE_SCENARIOS.time_period, FE_SCENARIOS.description, FE_MODEL_RUN.scenario_id, FE_MODEL_RUN.selection_set_area_id, FE_MODEL_RUN.hyetograph_id, FE_HYETOGRAPHS.description AS hyetograph, 
-                    FE_GRID_PROJECTS.project_id, FE_MODEL_RUN.model_run_id, FE_SCENARIOS.include_instream_facilities, FE_GRID_PROJECTS.project_description, FE_SCENARIOS.pollutant_loading_db, FE_SCENARIOS.pollutant_loading_table, FE_SCENARIOS.bmp_effectiveness_db, 
-                    FE_SCENARIOS.bmp_effectiveness_table
-FROM          ((((FE_SELECTION_SET_AREAS INNER JOIN
-                    FE_MODEL_RUN ON FE_SELECTION_SET_AREAS.selection_set_area_id = FE_MODEL_RUN.selection_set_area_id) INNER JOIN
-                    FE_SCENARIOS ON FE_MODEL_RUN.scenario_id = FE_SCENARIOS.scenario_id) INNER JOIN
-                    FE_GRID_PROJECTS ON FE_SELECTION_SET_AREAS.project_id = FE_GRID_PROJECTS.project_id AND FE_SCENARIOS.project_id = FE_GRID_PROJECTS.project_id) INNER JOIN
-                    FE_HYETOGRAPHS ON FE_MODEL_RUN.hyetograph_id = FE_HYETOGRAPHS.hyetograph_id)";
+            this._commandCollection[0].CommandText = @"SELECT       GRID_FE_SELECTION_SET_AREAS.area, GRID_FE_SELECTION_SET_AREAS.sub_area, GRID_FE_SCENARIOS.time_period, GRID_FE_SCENARIOS.description as scenario_description, GRID_FE_MODEL_RUN.scenario_id, GRID_FE_MODEL_RUN.selection_set_area_id, GRID_FE_MODEL_RUN.hyetograph_id, GRID_FE_HYETOGRAPHS.description AS hyetograph_description, 
+                    GRID_FE_GRID_PROJECTS.project_id, GRID_FE_MODEL_RUN.model_run_id, GRID_FE_SCENARIOS.include_instream_facilities, GRID_FE_GRID_PROJECTS.project_description, GRID_FE_SCENARIOS.pollutant_loading_db, GRID_FE_SCENARIOS.pollutant_loading_table, GRID_FE_SCENARIOS.bmp_effectiveness_db, 
+                    GRID_FE_SCENARIOS.bmp_effectiveness_table
+FROM          ((((GRID_FE_SELECTION_SET_AREAS INNER JOIN
+                    GRID_FE_MODEL_RUN ON GRID_FE_SELECTION_SET_AREAS.selection_set_area_id = GRID_FE_MODEL_RUN.selection_set_area_id) INNER JOIN
+                    GRID_FE_SCENARIOS ON GRID_FE_MODEL_RUN.scenario_id = GRID_FE_SCENARIOS.scenario_id) INNER JOIN
+                    GRID_FE_GRID_PROJECTS ON GRID_FE_SELECTION_SET_AREAS.project_id = GRID_FE_GRID_PROJECTS.project_id AND GRID_FE_SCENARIOS.project_id = GRID_FE_GRID_PROJECTS.project_id) INNER JOIN
+                    GRID_FE_HYETOGRAPHS ON GRID_FE_MODEL_RUN.hyetograph_id = GRID_FE_HYETOGRAPHS.hyetograph_id)";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -9812,13 +8520,13 @@ FROM          ((((FE_SELECTION_SET_AREAS INNER JOIN
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
     public partial class FEScenarioXProcessTableAdapter : global::System.ComponentModel.Component {
         
-        private global::System.Data.OleDb.OleDbDataAdapter _adapter;
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
         
-        private global::System.Data.OleDb.OleDbConnection _connection;
+        private global::System.Data.SqlClient.SqlConnection _connection;
         
-        private global::System.Data.OleDb.OleDbTransaction _transaction;
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
         
-        private global::System.Data.OleDb.OleDbCommand[] _commandCollection;
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
         
         private bool _clearBeforeFill;
         
@@ -9828,7 +8536,7 @@ FROM          ((((FE_SELECTION_SET_AREAS INNER JOIN
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected internal global::System.Data.OleDb.OleDbDataAdapter Adapter {
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
             get {
                 if ((this._adapter == null)) {
                     this.InitAdapter();
@@ -9838,7 +8546,7 @@ FROM          ((((FE_SELECTION_SET_AREAS INNER JOIN
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.OleDb.OleDbConnection Connection {
+        internal global::System.Data.SqlClient.SqlConnection Connection {
             get {
                 if ((this._connection == null)) {
                     this.InitConnection();
@@ -9858,14 +8566,14 @@ FROM          ((((FE_SELECTION_SET_AREAS INNER JOIN
                 }
                 for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
                     if ((this.CommandCollection[i] != null)) {
-                        ((global::System.Data.OleDb.OleDbCommand)(this.CommandCollection[i])).Connection = value;
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
                     }
                 }
             }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.OleDb.OleDbTransaction Transaction {
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
             get {
                 return this._transaction;
             }
@@ -9890,7 +8598,7 @@ FROM          ((((FE_SELECTION_SET_AREAS INNER JOIN
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected global::System.Data.OleDb.OleDbCommand[] CommandCollection {
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
             get {
                 if ((this._commandCollection == null)) {
                     this.InitCommandCollection();
@@ -9911,7 +8619,7 @@ FROM          ((((FE_SELECTION_SET_AREAS INNER JOIN
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitAdapter() {
-            this._adapter = new global::System.Data.OleDb.OleDbDataAdapter();
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
             global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
             tableMapping.SourceTable = "Table";
             tableMapping.DataSetTable = "FEScenarioXProcess";
@@ -9919,60 +8627,50 @@ FROM          ((((FE_SELECTION_SET_AREAS INNER JOIN
             tableMapping.ColumnMappings.Add("scenario_id", "scenario_id");
             tableMapping.ColumnMappings.Add("process_group", "process_group");
             this._adapter.TableMappings.Add(tableMapping);
-            this._adapter.DeleteCommand = new global::System.Data.OleDb.OleDbCommand();
+            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = "DELETE FROM `FE_SCENARIO_X_PROCESS` WHERE ((`scenario_x_process_id` = ?) AND ((? " +
-                "= 1 AND `scenario_id` IS NULL) OR (`scenario_id` = ?)) AND ((? = 1 AND `process_" +
-                "group` IS NULL) OR (`process_group` = ?)))";
+            this._adapter.DeleteCommand.CommandText = "DELETE FROM GRID_FE_SCENARIO_X_PROCESS\r\nWHERE        (scenario_x_process_id = @sc" +
+                "enario_x_process_id)";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_scenario_x_process_id", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "scenario_x_process_id", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_scenario_id", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "scenario_id", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_scenario_id", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "scenario_id", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_process_group", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "process_group", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_process_group", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "process_group", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.InsertCommand = new global::System.Data.OleDb.OleDbCommand();
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@scenario_x_process_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "scenario_x_process_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO `FE_SCENARIO_X_PROCESS` (`scenario_id`, `process_group`) VALUES (?, ?" +
-                ")";
+            this._adapter.InsertCommand.CommandText = "INSERT INTO GRID_FE_SCENARIO_X_PROCESS\r\n                         (scenario_id, pr" +
+                "ocess_group)\r\nVALUES        (@scenario_id,@process_group)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("scenario_id", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "scenario_id", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("process_group", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "process_group", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand = new global::System.Data.OleDb.OleDbCommand();
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@scenario_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "scenario_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@process_group", global::System.Data.SqlDbType.VarChar, 255, global::System.Data.ParameterDirection.Input, 0, 0, "process_group", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = "UPDATE `FE_SCENARIO_X_PROCESS` SET `scenario_id` = ?, `process_group` = ? WHERE (" +
-                "(`scenario_x_process_id` = ?) AND ((? = 1 AND `scenario_id` IS NULL) OR (`scenar" +
-                "io_id` = ?)) AND ((? = 1 AND `process_group` IS NULL) OR (`process_group` = ?)))" +
-                "";
+            this._adapter.UpdateCommand.CommandText = "UPDATE       GRID_FE_SCENARIO_X_PROCESS\r\nSET                scenario_id = @scenar" +
+                "io_id, process_group = @process_group\r\nWHERE        (scenario_x_process_id = @sc" +
+                "enario_x_process_id)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("scenario_id", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "scenario_id", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("process_group", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "process_group", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_scenario_x_process_id", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "scenario_x_process_id", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_scenario_id", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "scenario_id", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_scenario_id", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "scenario_id", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_process_group", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "process_group", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_process_group", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "process_group", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@scenario_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "scenario_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@process_group", global::System.Data.SqlDbType.VarChar, 255, global::System.Data.ParameterDirection.Input, 0, 0, "process_group", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@scenario_x_process_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "scenario_x_process_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitConnection() {
-            this._connection = new global::System.Data.OleDb.OleDbConnection();
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
             this._connection.ConnectionString = global::SystemsAnalysis.Grid.GridAnalysis.Properties.Settings.Default.Waterqual_GIS_v5_0ConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.OleDb.OleDbCommand[2];
-            this._commandCollection[0] = new global::System.Data.OleDb.OleDbCommand();
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT       scenario_x_process_id, scenario_id, process_group\r\nFROM          FE_" +
-                "SCENARIO_X_PROCESS";
+            this._commandCollection[0].CommandText = "SELECT       scenario_x_process_id, scenario_id, process_group\r\nFROM          GRI" +
+                "D_FE_SCENARIO_X_PROCESS";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
-            this._commandCollection[1] = new global::System.Data.OleDb.OleDbCommand();
+            this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[1].Connection = this.Connection;
-            this._commandCollection[1].CommandText = "SELECT process_group, scenario_id, scenario_x_process_id FROM FE_SCENARIO_X_PROCE" +
-                "SS WHERE (scenario_id = ?)";
+            this._commandCollection[1].CommandText = "SELECT process_group, scenario_id, scenario_x_process_id FROM GRID_FE_SCENARIO_X_" +
+                "PROCESS WHERE (scenario_id = @scenario_id)";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
-            this._commandCollection[1].Parameters.Add(new global::System.Data.OleDb.OleDbParameter("scenario_id", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "scenario_id", global::System.Data.DataRowVersion.Current, false, null));
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@scenario_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "scenario_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -10069,13 +8767,13 @@ FROM          ((((FE_SELECTION_SET_AREAS INNER JOIN
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
     public partial class FEProcessTableAdapter : global::System.ComponentModel.Component {
         
-        private global::System.Data.OleDb.OleDbDataAdapter _adapter;
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
         
-        private global::System.Data.OleDb.OleDbConnection _connection;
+        private global::System.Data.SqlClient.SqlConnection _connection;
         
-        private global::System.Data.OleDb.OleDbTransaction _transaction;
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
         
-        private global::System.Data.OleDb.OleDbCommand[] _commandCollection;
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
         
         private bool _clearBeforeFill;
         
@@ -10085,7 +8783,7 @@ FROM          ((((FE_SELECTION_SET_AREAS INNER JOIN
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected internal global::System.Data.OleDb.OleDbDataAdapter Adapter {
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
             get {
                 if ((this._adapter == null)) {
                     this.InitAdapter();
@@ -10095,7 +8793,7 @@ FROM          ((((FE_SELECTION_SET_AREAS INNER JOIN
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.OleDb.OleDbConnection Connection {
+        internal global::System.Data.SqlClient.SqlConnection Connection {
             get {
                 if ((this._connection == null)) {
                     this.InitConnection();
@@ -10115,14 +8813,14 @@ FROM          ((((FE_SELECTION_SET_AREAS INNER JOIN
                 }
                 for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
                     if ((this.CommandCollection[i] != null)) {
-                        ((global::System.Data.OleDb.OleDbCommand)(this.CommandCollection[i])).Connection = value;
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
                     }
                 }
             }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.OleDb.OleDbTransaction Transaction {
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
             get {
                 return this._transaction;
             }
@@ -10147,7 +8845,7 @@ FROM          ((((FE_SELECTION_SET_AREAS INNER JOIN
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected global::System.Data.OleDb.OleDbCommand[] CommandCollection {
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
             get {
                 if ((this._commandCollection == null)) {
                     this.InitCommandCollection();
@@ -10168,70 +8866,42 @@ FROM          ((((FE_SELECTION_SET_AREAS INNER JOIN
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitAdapter() {
-            this._adapter = new global::System.Data.OleDb.OleDbDataAdapter();
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
             global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
             tableMapping.SourceTable = "Table";
             tableMapping.DataSetTable = "FEProcess";
             tableMapping.ColumnMappings.Add("process_id", "process_id");
             tableMapping.ColumnMappings.Add("process_group", "process_group");
-            tableMapping.ColumnMappings.Add("process_order", "process_order");
             tableMapping.ColumnMappings.Add("process_name", "process_name");
             tableMapping.ColumnMappings.Add("critical", "critical");
+            tableMapping.ColumnMappings.Add("process_order", "process_order");
             this._adapter.TableMappings.Add(tableMapping);
-            this._adapter.DeleteCommand = new global::System.Data.OleDb.OleDbCommand();
-            this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM `FE_PROCESS` WHERE ((`process_id` = ?) AND ((? = 1 AND `process_group` IS NULL) OR (`process_group` = ?)) AND ((? = 1 AND `process_order` IS NULL) OR (`process_order` = ?)) AND ((? = 1 AND `process_name` IS NULL) OR (`process_name` = ?)) AND ((? = 1 AND `critical` IS NULL) OR (`critical` = ?)))";
-            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_process_id", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "process_id", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_process_group", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "process_group", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_process_group", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "process_group", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_process_order", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "process_order", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_process_order", global::System.Data.OleDb.OleDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "process_order", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_process_name", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "process_name", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_process_name", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "process_name", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_critical", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "critical", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_critical", global::System.Data.OleDb.OleDbType.Boolean, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "critical", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.InsertCommand = new global::System.Data.OleDb.OleDbCommand();
+            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO `FE_PROCESS` (`process_group`, `process_order`, `process_name`, `crit" +
-                "ical`) VALUES (?, ?, ?, ?)";
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [GRID_FE_PROCESS] ([process_id], [process_group], [process_order], [p" +
+                "rocess_name], [critical]) VALUES (@process_id, @process_group, @process_order, @" +
+                "process_name, @critical)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("process_group", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "process_group", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("process_order", global::System.Data.OleDb.OleDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "process_order", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("process_name", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "process_name", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("critical", global::System.Data.OleDb.OleDbType.Boolean, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "critical", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand = new global::System.Data.OleDb.OleDbCommand();
-            this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE `FE_PROCESS` SET `process_group` = ?, `process_order` = ?, `process_name` = ?, `critical` = ? WHERE ((`process_id` = ?) AND ((? = 1 AND `process_group` IS NULL) OR (`process_group` = ?)) AND ((? = 1 AND `process_order` IS NULL) OR (`process_order` = ?)) AND ((? = 1 AND `process_name` IS NULL) OR (`process_name` = ?)) AND ((? = 1 AND `critical` IS NULL) OR (`critical` = ?)))";
-            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("process_group", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "process_group", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("process_order", global::System.Data.OleDb.OleDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "process_order", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("process_name", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "process_name", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("critical", global::System.Data.OleDb.OleDbType.Boolean, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "critical", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_process_id", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "process_id", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_process_group", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "process_group", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_process_group", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "process_group", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_process_order", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "process_order", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_process_order", global::System.Data.OleDb.OleDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "process_order", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_process_name", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "process_name", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_process_name", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "process_name", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_critical", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "critical", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_critical", global::System.Data.OleDb.OleDbType.Boolean, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "critical", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@process_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "process_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@process_group", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "process_group", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@process_order", global::System.Data.SqlDbType.Real, 0, global::System.Data.ParameterDirection.Input, 0, 0, "process_order", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@process_name", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "process_name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@critical", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "critical", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitConnection() {
-            this._connection = new global::System.Data.OleDb.OleDbConnection();
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
             this._connection.ConnectionString = global::SystemsAnalysis.Grid.GridAnalysis.Properties.Settings.Default.Waterqual_GIS_v5_0ConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.OleDb.OleDbCommand[1];
-            this._commandCollection[0] = new global::System.Data.OleDb.OleDbCommand();
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT       process_id, process_group, process_order, process_name, critical\r\nFR" +
-                "OM          FE_PROCESS\r\nORDER BY process_order";
+                "OM          GRID_FE_PROCESS\r\nORDER BY process_order";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -10281,158 +8951,6 @@ FROM          ((((FE_SELECTION_SET_AREAS INNER JOIN
         public virtual int Update(global::System.Data.DataRow[] dataRows) {
             return this.Adapter.Update(dataRows);
         }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_process_id, string Original_process_group, global::System.Nullable<short> Original_process_order, string Original_process_name, bool Original_critical) {
-            this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_process_id));
-            if ((Original_process_group == null)) {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[2].Value = ((string)(Original_process_group));
-            }
-            if ((Original_process_order.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((short)(Original_process_order.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
-            if ((Original_process_name == null)) {
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[6].Value = ((string)(Original_process_name));
-            }
-            this.Adapter.DeleteCommand.Parameters[7].Value = ((object)(0));
-            this.Adapter.DeleteCommand.Parameters[8].Value = ((bool)(Original_critical));
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
-            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.DeleteCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.DeleteCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string process_group, global::System.Nullable<short> process_order, string process_name, bool critical) {
-            if ((process_group == null)) {
-                this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(process_group));
-            }
-            if ((process_order.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[1].Value = ((short)(process_order.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
-            if ((process_name == null)) {
-                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(process_name));
-            }
-            this.Adapter.InsertCommand.Parameters[3].Value = ((bool)(critical));
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
-            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.InsertCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.InsertCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string process_group, global::System.Nullable<short> process_order, string process_name, bool critical, int Original_process_id, string Original_process_group, global::System.Nullable<short> Original_process_order, string Original_process_name, bool Original_critical) {
-            if ((process_group == null)) {
-                this.Adapter.UpdateCommand.Parameters[0].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(process_group));
-            }
-            if ((process_order.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[1].Value = ((short)(process_order.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
-            if ((process_name == null)) {
-                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(process_name));
-            }
-            this.Adapter.UpdateCommand.Parameters[3].Value = ((bool)(critical));
-            this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(Original_process_id));
-            if ((Original_process_group == null)) {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((string)(Original_process_group));
-            }
-            if ((Original_process_order.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((short)(Original_process_order.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
-            }
-            if ((Original_process_name == null)) {
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[10].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((string)(Original_process_name));
-            }
-            this.Adapter.UpdateCommand.Parameters[11].Value = ((object)(0));
-            this.Adapter.UpdateCommand.Parameters[12].Value = ((bool)(Original_critical));
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
-            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.UpdateCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.UpdateCommand.Connection.Close();
-                }
-            }
-        }
     }
     
     /// <summary>
@@ -10447,13 +8965,13 @@ FROM          ((((FE_SELECTION_SET_AREAS INNER JOIN
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
     public partial class FEProcessGroupTableAdapter : global::System.ComponentModel.Component {
         
-        private global::System.Data.OleDb.OleDbDataAdapter _adapter;
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
         
-        private global::System.Data.OleDb.OleDbConnection _connection;
+        private global::System.Data.SqlClient.SqlConnection _connection;
         
-        private global::System.Data.OleDb.OleDbTransaction _transaction;
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
         
-        private global::System.Data.OleDb.OleDbCommand[] _commandCollection;
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
         
         private bool _clearBeforeFill;
         
@@ -10463,7 +8981,7 @@ FROM          ((((FE_SELECTION_SET_AREAS INNER JOIN
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected internal global::System.Data.OleDb.OleDbDataAdapter Adapter {
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
             get {
                 if ((this._adapter == null)) {
                     this.InitAdapter();
@@ -10473,7 +8991,7 @@ FROM          ((((FE_SELECTION_SET_AREAS INNER JOIN
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.OleDb.OleDbConnection Connection {
+        internal global::System.Data.SqlClient.SqlConnection Connection {
             get {
                 if ((this._connection == null)) {
                     this.InitConnection();
@@ -10493,14 +9011,14 @@ FROM          ((((FE_SELECTION_SET_AREAS INNER JOIN
                 }
                 for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
                     if ((this.CommandCollection[i] != null)) {
-                        ((global::System.Data.OleDb.OleDbCommand)(this.CommandCollection[i])).Connection = value;
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
                     }
                 }
             }
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal global::System.Data.OleDb.OleDbTransaction Transaction {
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
             get {
                 return this._transaction;
             }
@@ -10525,7 +9043,7 @@ FROM          ((((FE_SELECTION_SET_AREAS INNER JOIN
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        protected global::System.Data.OleDb.OleDbCommand[] CommandCollection {
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
             get {
                 if ((this._commandCollection == null)) {
                     this.InitCommandCollection();
@@ -10546,7 +9064,7 @@ FROM          ((((FE_SELECTION_SET_AREAS INNER JOIN
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitAdapter() {
-            this._adapter = new global::System.Data.OleDb.OleDbDataAdapter();
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
             global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
             tableMapping.SourceTable = "Table";
             tableMapping.DataSetTable = "FEProcessGroup";
@@ -10555,56 +9073,29 @@ FROM          ((((FE_SELECTION_SET_AREAS INNER JOIN
             tableMapping.ColumnMappings.Add("description", "description");
             tableMapping.ColumnMappings.Add("group_order", "group_order");
             this._adapter.TableMappings.Add(tableMapping);
-            this._adapter.DeleteCommand = new global::System.Data.OleDb.OleDbCommand();
-            this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM `FE_PROCESS_GROUP` WHERE ((`process_group_id` = ?) AND ((? = 1 AND `process_group` IS NULL) OR (`process_group` = ?)) AND ((? = 1 AND `description` IS NULL) OR (`description` = ?)) AND ((? = 1 AND `group_order` IS NULL) OR (`group_order` = ?)))";
-            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_process_group_id", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "process_group_id", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_process_group", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "process_group", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_process_group", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "process_group", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_description", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "description", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_description", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "description", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_group_order", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "group_order", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_group_order", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "group_order", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.InsertCommand = new global::System.Data.OleDb.OleDbCommand();
+            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO `FE_PROCESS_GROUP` (`process_group_id`, `process_group`, `description" +
-                "`, `group_order`) VALUES (?, ?, ?, ?)";
+            this._adapter.InsertCommand.CommandText = "INSERT INTO GRID_FE_PROCESS_GROUP\r\n                         (process_group, descr" +
+                "iption, group_order)\r\nVALUES        (@process_group,@description,@group_order)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("process_group_id", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "process_group_id", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("process_group", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "process_group", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("description", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "description", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("group_order", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "group_order", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand = new global::System.Data.OleDb.OleDbCommand();
-            this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE `FE_PROCESS_GROUP` SET `process_group_id` = ?, `process_group` = ?, `description` = ?, `group_order` = ? WHERE ((`process_group_id` = ?) AND ((? = 1 AND `process_group` IS NULL) OR (`process_group` = ?)) AND ((? = 1 AND `description` IS NULL) OR (`description` = ?)) AND ((? = 1 AND `group_order` IS NULL) OR (`group_order` = ?)))";
-            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("process_group_id", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "process_group_id", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("process_group", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "process_group", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("description", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "description", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("group_order", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "group_order", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_process_group_id", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "process_group_id", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_process_group", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "process_group", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_process_group", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "process_group", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_description", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "description", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_description", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "description", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_group_order", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "group_order", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_group_order", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "group_order", global::System.Data.DataRowVersion.Original, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@process_group", global::System.Data.SqlDbType.VarChar, 255, global::System.Data.ParameterDirection.Input, 0, 0, "process_group", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@description", global::System.Data.SqlDbType.VarChar, 255, global::System.Data.ParameterDirection.Input, 0, 0, "description", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@group_order", global::System.Data.SqlDbType.Real, 4, global::System.Data.ParameterDirection.Input, 0, 0, "group_order", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitConnection() {
-            this._connection = new global::System.Data.OleDb.OleDbConnection();
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
             this._connection.ConnectionString = global::SystemsAnalysis.Grid.GridAnalysis.Properties.Settings.Default.Waterqual_GIS_v5_0ConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.OleDb.OleDbCommand[1];
-            this._commandCollection[0] = new global::System.Data.OleDb.OleDbCommand();
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT       process_group_id, process_group, description, group_order\r\nFROM     " +
-                "     FE_PROCESS_GROUP\r\nORDER BY group_order";
+                "     GRID_FE_PROCESS_GROUP\r\nORDER BY group_order";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -10653,181 +9144,6 @@ FROM          ((((FE_SELECTION_SET_AREAS INNER JOIN
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         public virtual int Update(global::System.Data.DataRow[] dataRows) {
             return this.Adapter.Update(dataRows);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(global::System.Nullable<int> Original_process_group_id, string Original_process_group, string Original_description, global::System.Nullable<double> Original_group_order) {
-            if ((Original_process_group_id.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_process_group_id.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[0].Value = global::System.DBNull.Value;
-            }
-            if ((Original_process_group == null)) {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[2].Value = ((string)(Original_process_group));
-            }
-            if ((Original_description == null)) {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((string)(Original_description));
-            }
-            if ((Original_group_order.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[6].Value = ((double)(Original_group_order.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
-            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.DeleteCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.DeleteCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(global::System.Nullable<int> process_group_id, string process_group, string description, global::System.Nullable<double> group_order) {
-            if ((process_group_id.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[0].Value = ((int)(process_group_id.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
-            }
-            if ((process_group == null)) {
-                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(process_group));
-            }
-            if ((description == null)) {
-                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(description));
-            }
-            if ((group_order.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[3].Value = ((double)(group_order.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
-            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.InsertCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.InsertCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(global::System.Nullable<int> process_group_id, string process_group, string description, global::System.Nullable<double> group_order, global::System.Nullable<int> Original_process_group_id, string Original_process_group, string Original_description, global::System.Nullable<double> Original_group_order) {
-            if ((process_group_id.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(process_group_id.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[0].Value = global::System.DBNull.Value;
-            }
-            if ((process_group == null)) {
-                this.Adapter.UpdateCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(process_group));
-            }
-            if ((description == null)) {
-                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(description));
-            }
-            if ((group_order.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[3].Value = ((double)(group_order.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            if ((Original_process_group_id.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(Original_process_group_id.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
-            if ((Original_process_group == null)) {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((string)(Original_process_group));
-            }
-            if ((Original_description == null)) {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((string)(Original_description));
-            }
-            if ((Original_group_order.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((double)(Original_group_order.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[10].Value = global::System.DBNull.Value;
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
-            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.UpdateCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.UpdateCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(global::System.Nullable<int> process_group_id, string description, global::System.Nullable<double> group_order, global::System.Nullable<int> Original_process_group_id, string Original_process_group, string Original_description, global::System.Nullable<double> Original_group_order) {
-            return this.Update(process_group_id, Original_process_group, description, group_order, Original_process_group_id, Original_process_group, Original_description, Original_group_order);
         }
     }
     
@@ -11506,8 +9822,8 @@ FROM          ((((FE_SELECTION_SET_AREAS INNER JOIN
                 //
                 if ((this._fEGridProjectsTableAdapter != null)) {
                     revertConnections.Add(this._fEGridProjectsTableAdapter, this._fEGridProjectsTableAdapter.Connection);
-                    this._fEGridProjectsTableAdapter.Connection = ((global::System.Data.OleDb.OleDbConnection)(workConnection));
-                    this._fEGridProjectsTableAdapter.Transaction = ((global::System.Data.OleDb.OleDbTransaction)(workTransaction));
+                    this._fEGridProjectsTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
+                    this._fEGridProjectsTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
                     if (this._fEGridProjectsTableAdapter.Adapter.AcceptChangesDuringUpdate) {
                         this._fEGridProjectsTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
                         adaptersWithAcceptChangesDuringUpdate.Add(this._fEGridProjectsTableAdapter.Adapter);
@@ -11515,8 +9831,8 @@ FROM          ((((FE_SELECTION_SET_AREAS INNER JOIN
                 }
                 if ((this._fESelectionSetsTableAdapter != null)) {
                     revertConnections.Add(this._fESelectionSetsTableAdapter, this._fESelectionSetsTableAdapter.Connection);
-                    this._fESelectionSetsTableAdapter.Connection = ((global::System.Data.OleDb.OleDbConnection)(workConnection));
-                    this._fESelectionSetsTableAdapter.Transaction = ((global::System.Data.OleDb.OleDbTransaction)(workTransaction));
+                    this._fESelectionSetsTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
+                    this._fESelectionSetsTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
                     if (this._fESelectionSetsTableAdapter.Adapter.AcceptChangesDuringUpdate) {
                         this._fESelectionSetsTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
                         adaptersWithAcceptChangesDuringUpdate.Add(this._fESelectionSetsTableAdapter.Adapter);
@@ -11524,8 +9840,8 @@ FROM          ((((FE_SELECTION_SET_AREAS INNER JOIN
                 }
                 if ((this._fEHyetographDataTableAdapter != null)) {
                     revertConnections.Add(this._fEHyetographDataTableAdapter, this._fEHyetographDataTableAdapter.Connection);
-                    this._fEHyetographDataTableAdapter.Connection = ((global::System.Data.OleDb.OleDbConnection)(workConnection));
-                    this._fEHyetographDataTableAdapter.Transaction = ((global::System.Data.OleDb.OleDbTransaction)(workTransaction));
+                    this._fEHyetographDataTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
+                    this._fEHyetographDataTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
                     if (this._fEHyetographDataTableAdapter.Adapter.AcceptChangesDuringUpdate) {
                         this._fEHyetographDataTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
                         adaptersWithAcceptChangesDuringUpdate.Add(this._fEHyetographDataTableAdapter.Adapter);
@@ -11533,8 +9849,8 @@ FROM          ((((FE_SELECTION_SET_AREAS INNER JOIN
                 }
                 if ((this._fEHyetographsTableAdapter != null)) {
                     revertConnections.Add(this._fEHyetographsTableAdapter, this._fEHyetographsTableAdapter.Connection);
-                    this._fEHyetographsTableAdapter.Connection = ((global::System.Data.OleDb.OleDbConnection)(workConnection));
-                    this._fEHyetographsTableAdapter.Transaction = ((global::System.Data.OleDb.OleDbTransaction)(workTransaction));
+                    this._fEHyetographsTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
+                    this._fEHyetographsTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
                     if (this._fEHyetographsTableAdapter.Adapter.AcceptChangesDuringUpdate) {
                         this._fEHyetographsTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
                         adaptersWithAcceptChangesDuringUpdate.Add(this._fEHyetographsTableAdapter.Adapter);
@@ -11542,8 +9858,8 @@ FROM          ((((FE_SELECTION_SET_AREAS INNER JOIN
                 }
                 if ((this._fEModelRunTableAdapter != null)) {
                     revertConnections.Add(this._fEModelRunTableAdapter, this._fEModelRunTableAdapter.Connection);
-                    this._fEModelRunTableAdapter.Connection = ((global::System.Data.OleDb.OleDbConnection)(workConnection));
-                    this._fEModelRunTableAdapter.Transaction = ((global::System.Data.OleDb.OleDbTransaction)(workTransaction));
+                    this._fEModelRunTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
+                    this._fEModelRunTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
                     if (this._fEModelRunTableAdapter.Adapter.AcceptChangesDuringUpdate) {
                         this._fEModelRunTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
                         adaptersWithAcceptChangesDuringUpdate.Add(this._fEModelRunTableAdapter.Adapter);
@@ -11551,8 +9867,8 @@ FROM          ((((FE_SELECTION_SET_AREAS INNER JOIN
                 }
                 if ((this._fEScenariosTableAdapter != null)) {
                     revertConnections.Add(this._fEScenariosTableAdapter, this._fEScenariosTableAdapter.Connection);
-                    this._fEScenariosTableAdapter.Connection = ((global::System.Data.OleDb.OleDbConnection)(workConnection));
-                    this._fEScenariosTableAdapter.Transaction = ((global::System.Data.OleDb.OleDbTransaction)(workTransaction));
+                    this._fEScenariosTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
+                    this._fEScenariosTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
                     if (this._fEScenariosTableAdapter.Adapter.AcceptChangesDuringUpdate) {
                         this._fEScenariosTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
                         adaptersWithAcceptChangesDuringUpdate.Add(this._fEScenariosTableAdapter.Adapter);
@@ -11560,8 +9876,8 @@ FROM          ((((FE_SELECTION_SET_AREAS INNER JOIN
                 }
                 if ((this._fESelectionSetAreasTableAdapter != null)) {
                     revertConnections.Add(this._fESelectionSetAreasTableAdapter, this._fESelectionSetAreasTableAdapter.Connection);
-                    this._fESelectionSetAreasTableAdapter.Connection = ((global::System.Data.OleDb.OleDbConnection)(workConnection));
-                    this._fESelectionSetAreasTableAdapter.Transaction = ((global::System.Data.OleDb.OleDbTransaction)(workTransaction));
+                    this._fESelectionSetAreasTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
+                    this._fESelectionSetAreasTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
                     if (this._fESelectionSetAreasTableAdapter.Adapter.AcceptChangesDuringUpdate) {
                         this._fESelectionSetAreasTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
                         adaptersWithAcceptChangesDuringUpdate.Add(this._fESelectionSetAreasTableAdapter.Adapter);
@@ -11569,8 +9885,8 @@ FROM          ((((FE_SELECTION_SET_AREAS INNER JOIN
                 }
                 if ((this._fEScenarioXProcessTableAdapter != null)) {
                     revertConnections.Add(this._fEScenarioXProcessTableAdapter, this._fEScenarioXProcessTableAdapter.Connection);
-                    this._fEScenarioXProcessTableAdapter.Connection = ((global::System.Data.OleDb.OleDbConnection)(workConnection));
-                    this._fEScenarioXProcessTableAdapter.Transaction = ((global::System.Data.OleDb.OleDbTransaction)(workTransaction));
+                    this._fEScenarioXProcessTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
+                    this._fEScenarioXProcessTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
                     if (this._fEScenarioXProcessTableAdapter.Adapter.AcceptChangesDuringUpdate) {
                         this._fEScenarioXProcessTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
                         adaptersWithAcceptChangesDuringUpdate.Add(this._fEScenarioXProcessTableAdapter.Adapter);
@@ -11578,8 +9894,8 @@ FROM          ((((FE_SELECTION_SET_AREAS INNER JOIN
                 }
                 if ((this._fEProcessTableAdapter != null)) {
                     revertConnections.Add(this._fEProcessTableAdapter, this._fEProcessTableAdapter.Connection);
-                    this._fEProcessTableAdapter.Connection = ((global::System.Data.OleDb.OleDbConnection)(workConnection));
-                    this._fEProcessTableAdapter.Transaction = ((global::System.Data.OleDb.OleDbTransaction)(workTransaction));
+                    this._fEProcessTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
+                    this._fEProcessTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
                     if (this._fEProcessTableAdapter.Adapter.AcceptChangesDuringUpdate) {
                         this._fEProcessTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
                         adaptersWithAcceptChangesDuringUpdate.Add(this._fEProcessTableAdapter.Adapter);
@@ -11587,8 +9903,8 @@ FROM          ((((FE_SELECTION_SET_AREAS INNER JOIN
                 }
                 if ((this._fEProcessGroupTableAdapter != null)) {
                     revertConnections.Add(this._fEProcessGroupTableAdapter, this._fEProcessGroupTableAdapter.Connection);
-                    this._fEProcessGroupTableAdapter.Connection = ((global::System.Data.OleDb.OleDbConnection)(workConnection));
-                    this._fEProcessGroupTableAdapter.Transaction = ((global::System.Data.OleDb.OleDbTransaction)(workTransaction));
+                    this._fEProcessGroupTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
+                    this._fEProcessGroupTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
                     if (this._fEProcessGroupTableAdapter.Adapter.AcceptChangesDuringUpdate) {
                         this._fEProcessGroupTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
                         adaptersWithAcceptChangesDuringUpdate.Add(this._fEProcessGroupTableAdapter.Adapter);
@@ -11653,43 +9969,43 @@ FROM          ((((FE_SELECTION_SET_AREAS INNER JOIN
                     workConnection.Close();
                 }
                 if ((this._fEGridProjectsTableAdapter != null)) {
-                    this._fEGridProjectsTableAdapter.Connection = ((global::System.Data.OleDb.OleDbConnection)(revertConnections[this._fEGridProjectsTableAdapter]));
+                    this._fEGridProjectsTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._fEGridProjectsTableAdapter]));
                     this._fEGridProjectsTableAdapter.Transaction = null;
                 }
                 if ((this._fESelectionSetsTableAdapter != null)) {
-                    this._fESelectionSetsTableAdapter.Connection = ((global::System.Data.OleDb.OleDbConnection)(revertConnections[this._fESelectionSetsTableAdapter]));
+                    this._fESelectionSetsTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._fESelectionSetsTableAdapter]));
                     this._fESelectionSetsTableAdapter.Transaction = null;
                 }
                 if ((this._fEHyetographDataTableAdapter != null)) {
-                    this._fEHyetographDataTableAdapter.Connection = ((global::System.Data.OleDb.OleDbConnection)(revertConnections[this._fEHyetographDataTableAdapter]));
+                    this._fEHyetographDataTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._fEHyetographDataTableAdapter]));
                     this._fEHyetographDataTableAdapter.Transaction = null;
                 }
                 if ((this._fEHyetographsTableAdapter != null)) {
-                    this._fEHyetographsTableAdapter.Connection = ((global::System.Data.OleDb.OleDbConnection)(revertConnections[this._fEHyetographsTableAdapter]));
+                    this._fEHyetographsTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._fEHyetographsTableAdapter]));
                     this._fEHyetographsTableAdapter.Transaction = null;
                 }
                 if ((this._fEModelRunTableAdapter != null)) {
-                    this._fEModelRunTableAdapter.Connection = ((global::System.Data.OleDb.OleDbConnection)(revertConnections[this._fEModelRunTableAdapter]));
+                    this._fEModelRunTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._fEModelRunTableAdapter]));
                     this._fEModelRunTableAdapter.Transaction = null;
                 }
                 if ((this._fEScenariosTableAdapter != null)) {
-                    this._fEScenariosTableAdapter.Connection = ((global::System.Data.OleDb.OleDbConnection)(revertConnections[this._fEScenariosTableAdapter]));
+                    this._fEScenariosTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._fEScenariosTableAdapter]));
                     this._fEScenariosTableAdapter.Transaction = null;
                 }
                 if ((this._fESelectionSetAreasTableAdapter != null)) {
-                    this._fESelectionSetAreasTableAdapter.Connection = ((global::System.Data.OleDb.OleDbConnection)(revertConnections[this._fESelectionSetAreasTableAdapter]));
+                    this._fESelectionSetAreasTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._fESelectionSetAreasTableAdapter]));
                     this._fESelectionSetAreasTableAdapter.Transaction = null;
                 }
                 if ((this._fEScenarioXProcessTableAdapter != null)) {
-                    this._fEScenarioXProcessTableAdapter.Connection = ((global::System.Data.OleDb.OleDbConnection)(revertConnections[this._fEScenarioXProcessTableAdapter]));
+                    this._fEScenarioXProcessTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._fEScenarioXProcessTableAdapter]));
                     this._fEScenarioXProcessTableAdapter.Transaction = null;
                 }
                 if ((this._fEProcessTableAdapter != null)) {
-                    this._fEProcessTableAdapter.Connection = ((global::System.Data.OleDb.OleDbConnection)(revertConnections[this._fEProcessTableAdapter]));
+                    this._fEProcessTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._fEProcessTableAdapter]));
                     this._fEProcessTableAdapter.Transaction = null;
                 }
                 if ((this._fEProcessGroupTableAdapter != null)) {
-                    this._fEProcessGroupTableAdapter.Connection = ((global::System.Data.OleDb.OleDbConnection)(revertConnections[this._fEProcessGroupTableAdapter]));
+                    this._fEProcessGroupTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._fEProcessGroupTableAdapter]));
                     this._fEProcessGroupTableAdapter.Transaction = null;
                 }
                 if ((0 < adaptersWithAcceptChangesDuringUpdate.Count)) {

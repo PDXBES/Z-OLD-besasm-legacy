@@ -24,6 +24,12 @@ namespace SWI_2
 
         private void FormFieldSurveyView_Load(object sender, EventArgs e)
         {
+            System.Security.Principal.WindowsIdentity ident = System.Security.Principal.WindowsIdentity.GetCurrent();
+            System.Security.Principal.WindowsPrincipal user = new System.Security.Principal.WindowsPrincipal(ident);
+            string theName = "["+user.Identity.Name+"]";
+            //MessageBox.Show(theName);
+            this.sWSP_MESH1TableAdapter.SET_SCHEMA_ISSACG(theName);
+
             // TODO: This line of code loads data into the 'sANDBOXDataSet.SWSP_CULVERT_OPENING_TYPE' table. You can move, or remove it, as needed.
             this.sWSP_CULVERT_OPENING_TYPETableAdapter.Fill(this.sANDBOXDataSet.SWSP_CULVERT_OPENING_TYPE);
             // TODO: This line of code loads data into the 'sANDBOXDataSet.SWSP_MATERIAL_TYPE' table. You can move, or remove it, as needed.
@@ -47,7 +53,7 @@ namespace SWI_2
             //This SHOULD be replaced with an activeusers table in the database.
             //The activeusers table will give a user 5,000 entries, and this interface will tell the user to 
             //restart the session if they exceed 5,000 entries(unlikely but possible). So user A will
-            //have entries -1 to -5000, user B will have entries -5001 to -10,000.  This will ensure that
+            //have entries -1 to -5000, user B will have entries -5001 to -10,000.  This make it less likely that
             //people wont overwrite each others changes.  With the random approach, there nearly a
             //3% chance of overwriting, assuming that users enter 1,000 entries per session.
             Random random = new Random();
@@ -193,7 +199,7 @@ namespace SWI_2
                 for (int index = 0; index < checkedListBoxEvaluators.Items.Count; index++)
                 {
                     item = checkedListBoxEvaluators.Items[index];
-                    if (this.sWSP_SURVEY_PAGE_EVALUATORTableAdapter.IdentifyValidEvaluators((int)comboBoxSurveyPage.SelectedValue, (int)((System.Data.DataRowView)item).Row[0]) != 0)
+                    if ((int)this.sWSP_SURVEY_PAGE_EVALUATORTableAdapter.IdentifyValidEvaluators((int)comboBoxSurveyPage.SelectedValue, (int)((System.Data.DataRowView)item).Row[0]) != 0)
                     {
                         checkedListBoxEvaluators.SetItemChecked(index, true);
                     }
@@ -309,11 +315,11 @@ namespace SWI_2
                         //adding a pipe means:
                         //placing a new entry in the globalID table,
                         //taking that value and using it to create a new pipe
-                        this.sWSP_GLOBAL_IDTableAdapter.Insert("");
+                        this.sWSP_GLOBAL_IDTableAdapter.InsertQuery("");
                         //what was the global ID that was just inserted?  The highest value in the GlobalID table.  Since we just inserted to it, there is no chance that it could be null
                         globalID = (int)this.sWSP_GLOBAL_IDTableAdapter.ScalarQuery();
                         //add this record to the SWSP_PIPE table
-                        this.sWSP_PIPETableAdapter.Insert(globalID,
+                        this.sWSP_PIPETableAdapter.InsertQuery(globalID,
                                                             page_id,
                                                             (string)r["us_node"],
                                                             (string)r["ds_node"],
@@ -333,11 +339,11 @@ namespace SWI_2
                         //adding a ditch means:
                         //placing a new entry in the globalID table,
                         //taking that value and using it to create a new ditch
-                        this.sWSP_GLOBAL_IDTableAdapter.Insert("");
+                        this.sWSP_GLOBAL_IDTableAdapter.InsertQuery("");
                         //what was the global ID that was just inserted?  The highest value in the GlobalID table.  Since we just inserted to it, there is no chance that it could be null
                         globalID = (int)this.sWSP_GLOBAL_IDTableAdapter.ScalarQuery();
                         //add this record to the SWSP_DITCH table
-                        this.sWSP_DITCHTableAdapter.Insert(globalID,
+                        this.sWSP_DITCHTableAdapter.InsertQuery(globalID,
                                                             page_id,
                                                             (string)r["node"],
                                                             facing_id,
@@ -355,11 +361,11 @@ namespace SWI_2
                         //adding a culvert means:
                         //placing a new entry in the globalID table,
                         //taking that value and using it to create a new culvert
-                        this.sWSP_GLOBAL_IDTableAdapter.Insert("");
+                        this.sWSP_GLOBAL_IDTableAdapter.InsertQuery("");
                         //what was the global ID that was just inserted?  The highest value in the GlobalID table.  Since we just inserted to it, there is no chance that it could be null
                         globalID = (int)this.sWSP_GLOBAL_IDTableAdapter.ScalarQuery();
                         //add this record to the SWSP_CULVERT table
-                        this.sWSP_CULVERTTableAdapter.Insert(globalID,
+                        this.sWSP_CULVERTTableAdapter.InsertQuery(globalID,
                                                             page_id,
                                                             (string)r["node"],
                                                             facing_id,
@@ -415,7 +421,7 @@ namespace SWI_2
                             this.sWSP_DITCHTableAdapter.DeleteByGlobalID((int)r["global_id"]);
                             this.sWSP_CULVERTTableAdapter.DeleteByGlobalID((int)r["global_id"]);
                             //  then insert to the pipe table
-                            this.sWSP_PIPETableAdapter.Insert(
+                            this.sWSP_PIPETableAdapter.InsertQuery(
                                                             (int)r["global_id"],
                                                             page_id,
                                                             ((r["us_node"] is System.DBNull) ? "" : (string)r["us_node"]),
@@ -459,7 +465,7 @@ namespace SWI_2
                             this.sWSP_PIPETableAdapter.DeleteByGlobalID((int)r["global_id"]);
                             this.sWSP_CULVERTTableAdapter.DeleteByGlobalID((int)r["global_id"]);
                             //  then insert to the pipe table
-                            this.sWSP_DITCHTableAdapter.Insert(
+                            this.sWSP_DITCHTableAdapter.InsertQuery(
                                                                 (int)r["global_id"],
                                                                 page_id,
                                                                 ((r["node"] is System.DBNull) ? "" : (string)r["node"]),
@@ -500,7 +506,7 @@ namespace SWI_2
                             this.sWSP_DITCHTableAdapter.DeleteByGlobalID((int)r["global_id"]);
                             this.sWSP_PIPETableAdapter.DeleteByGlobalID((int)r["global_id"]);
                             //  then insert to the pipe table
-                            this.sWSP_CULVERTTableAdapter.Insert(
+                            this.sWSP_CULVERTTableAdapter.InsertQuery(
                                                                 (int)r["global_id"],
                                                                 page_id,
                                                                 ((r["node"] is System.DBNull) ? "" : (string)r["node"]),
@@ -574,7 +580,13 @@ namespace SWI_2
 
         void dataGridViewLinkInfo_MouseLeave(object sender, System.EventArgs e)
         {
+            //yes this redundancy is really necessary
+            /*dataGridViewLinkInfo.CurrentRow.DataGridView.EndEdit();
+            dataGridViewLinkInfo.EndEdit();
+            CurrencyManager cm = (CurrencyManager)dataGridViewLinkInfo.BindingContext[dataGridViewLinkInfo.DataSource, dataGridViewLinkInfo.DataMember];
+            cm.EndCurrentEdit();
 
+            PopulateLinkInfo();*/
         }
 
         private void FormFieldSurveyView_FormClosing(object sender, FormClosingEventArgs e)

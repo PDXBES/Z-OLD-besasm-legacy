@@ -367,6 +367,7 @@
             this.grdModelResults = new Infragistics.Win.UltraWinGrid.UltraGrid();
             this.gridModelResultsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tabPageDefineProjects = new System.Windows.Forms.TabPage();
+            this.ultraButtonArchiveInputOutput = new Infragistics.Win.Misc.UltraButton();
             this.cboDatabases = new System.Windows.Forms.ComboBox();
             this.labelArchiveDatabase = new System.Windows.Forms.Label();
             this.cboServers = new System.Windows.Forms.ComboBox();
@@ -399,7 +400,6 @@
             this.onlineHelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlMiddle = new System.Windows.Forms.Panel();
-            this.ultraButtonArchiveInputOutput = new Infragistics.Win.Misc.UltraButton();
             ((System.ComponentModel.ISupportInitialize)(this.txtGridPath)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.feGridProjectsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridInterfaceDS)).BeginInit();
@@ -1776,6 +1776,16 @@
             this.tabPageDefineProjects.UseVisualStyleBackColor = true;
             this.tabPageDefineProjects.Click += new System.EventHandler(this.tabPageDefineProjects_Click);
             // 
+            // ultraButtonArchiveInputOutput
+            // 
+            this.ultraButtonArchiveInputOutput.ButtonStyle = Infragistics.Win.UIElementButtonStyle.VisualStudio2005Button;
+            this.ultraButtonArchiveInputOutput.Location = new System.Drawing.Point(670, 225);
+            this.ultraButtonArchiveInputOutput.Name = "ultraButtonArchiveInputOutput";
+            this.ultraButtonArchiveInputOutput.Size = new System.Drawing.Size(207, 35);
+            this.ultraButtonArchiveInputOutput.TabIndex = 67;
+            this.ultraButtonArchiveInputOutput.Text = "Archive Input/Output";
+            this.ultraButtonArchiveInputOutput.Click += new System.EventHandler(this.ultraButtonArchiveInputOutput_Click);
+            // 
             // cboDatabases
             // 
             this.cboDatabases.FormattingEnabled = true;
@@ -2281,16 +2291,6 @@
             this.pnlMiddle.Padding = new System.Windows.Forms.Padding(0, 3, 0, 0);
             this.pnlMiddle.Size = new System.Drawing.Size(1051, 415);
             this.pnlMiddle.TabIndex = 33;
-            // 
-            // ultraButtonArchiveInputOutput
-            // 
-            this.ultraButtonArchiveInputOutput.ButtonStyle = Infragistics.Win.UIElementButtonStyle.VisualStudio2005Button;
-            this.ultraButtonArchiveInputOutput.Location = new System.Drawing.Point(670, 225);
-            this.ultraButtonArchiveInputOutput.Name = "ultraButtonArchiveInputOutput";
-            this.ultraButtonArchiveInputOutput.Size = new System.Drawing.Size(207, 35);
-            this.ultraButtonArchiveInputOutput.TabIndex = 67;
-            this.ultraButtonArchiveInputOutput.Text = "Archive Input/Output";
-            this.ultraButtonArchiveInputOutput.Click += new System.EventHandler(this.ultraButtonArchiveInputOutput_Click);
             // 
             // FrmGridAnalysis
             // 

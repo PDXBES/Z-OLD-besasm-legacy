@@ -61,7 +61,7 @@ namespace SWI_2
                 SWI_2.SANDBOXDataSetTableAdapters.SWSP_VIEWTableAdapter taV = new SWI_2.SANDBOXDataSetTableAdapters.SWSP_VIEWTableAdapter();
 
                 SWI_2.SANDBOXDataSetTableAdapters.SWSP_SURVEY_PAGETableAdapter taS = new SWI_2.SANDBOXDataSetTableAdapters.SWSP_SURVEY_PAGETableAdapter();
-                taS.Insert((int)taV.ScalarQueryViewIDByViewNumber((int)numericUpDownView.Value, (int)comboBoxSubwatershed.SelectedValue), (int)numericUpDownAddPage.Value, System.DateTime.Today, "", "");
+                taS.InsertQuery((int)taV.ScalarQueryViewIDByViewNumber((int)numericUpDownView.Value, (int)comboBoxSubwatershed.SelectedValue), (int)numericUpDownAddPage.Value, System.DateTime.Today, "", "");
 
                 if (_MyParentForm != null)
                 {
