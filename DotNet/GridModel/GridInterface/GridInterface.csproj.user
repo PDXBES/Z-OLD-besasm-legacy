@@ -1,0 +1,15 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PublishUrlHistory>\\CASSIO\ASM_Apps\Apps\GRIDModel\|\\cassio\modeling\Model_Programs\bin\GridModel\</PublishUrlHistory>
+    <InstallUrlHistory>\\CASSIO\ASM_Apps\Apps\GRIDModel\|\\cassio\modeling\Model_Programs\bin\GridModel\</InstallUrlHistory>
+    <SupportUrlHistory>http://twiki.bes-sa.org/bin/view/Development/GRIDModel</SupportUrlHistory>
+    <UpdateUrlHistory>
+    </UpdateUrlHistory>
+    <BootstrapperUrlHistory>
+    </BootstrapperUrlHistory>
+    <FallbackCulture>en-US</FallbackCulture>
+    <VerifyUploadedFiles>false</VerifyUploadedFiles>
+    <ErrorReportUrlHistory>
+    </ErrorReportUrlHistory>
+  </PropertyGroup>
+</Project>
