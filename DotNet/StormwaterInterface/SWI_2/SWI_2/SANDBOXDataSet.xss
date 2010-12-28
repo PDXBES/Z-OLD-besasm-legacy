@@ -11,7 +11,7 @@
     <Shape ID="DesignTable:SWSP_DITCH" ZOrder="8" X="885" Y="-89" Height="372" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="215" />
     <Shape ID="DesignTable:SWSP_EVALUATOR" ZOrder="13" X="847" Y="-28" Height="148" Width="248" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="87" />
     <Shape ID="DesignTable:SWSP_FACING_TYPE" ZOrder="20" X="264" Y="-25" Height="132" Width="257" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="71" />
-    <Shape ID="DesignTable:SWSP_GLOBAL_ID" ZOrder="21" X="-85" Y="-71" Height="148" Width="243" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="55" />
+    <Shape ID="DesignTable:SWSP_GLOBAL_ID" ZOrder="21" X="-85" Y="-71" Height="164" Width="243" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="55" />
     <Shape ID="DesignTable:SWSP_MATERIAL_TYPE" ZOrder="14" X="833" Y="82" Height="132" Width="272" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="71" />
     <Shape ID="DesignTable:SWSP_PHOTO" ZOrder="10" X="870" Y="448" Height="196" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="87" />
     <Shape ID="DesignTable:SWSP_PIPE" ZOrder="11" X="471" Y="29" Height="390" Width="300" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="249" />
@@ -186,7 +186,7 @@
       <RoutePoints>
         <Point>
           <X>-59</X>
-          <Y>77</Y>
+          <Y>93</Y>
         </Point>
         <Point>
           <X>-59</X>
@@ -238,15 +238,15 @@
       <RoutePoints>
         <Point>
           <X>-25</X>
-          <Y>77</Y>
+          <Y>93</Y>
         </Point>
         <Point>
           <X>-25</X>
-          <Y>85</Y>
+          <Y>101</Y>
         </Point>
         <Point>
           <X>885</X>
-          <Y>85</Y>
+          <Y>101</Y>
         </Point>
       </RoutePoints>
     </Connector>

@@ -206,7 +206,7 @@ namespace SystemsAnalysis.Utils.AccessUtils
             }
             catch (SqlException ae)
             {
-                //Could not drop table
+                
             }
         }
         catch (Exception ex)

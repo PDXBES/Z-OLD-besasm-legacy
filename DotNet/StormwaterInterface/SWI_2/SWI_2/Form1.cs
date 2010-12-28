@@ -1319,7 +1319,7 @@ namespace SWI_2
 
         private void updateMstlinksacToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-            string mst_linksDB = "\\\\Cassio\\modeling\\SAMaster_22\\Links\\mst_links_ac.mdb";
+            string mst_linksDB = /*"E:\\MstLinksCopy\\mst_links_ac.mdb";*/"\\\\Cassio\\modeling\\SAMaster_22\\Links\\mst_links_ac.mdb";
             //copy the good tables to the mst_links database
             AccessHelper.AccessCopySQLTable("GoodPipes_x", "ODBC;DSN=SIRTOBY;DATABASE = SANDBOX;Trusted_Connection=yes", "ROSE\\issacg.SWSP_PIPES_OK", mst_linksDB);
             AccessHelper.AccessCopyTable("GoodPipes", "GoodPipes_x", mst_linksDB); 
@@ -1379,6 +1379,7 @@ namespace SWI_2
             AccessHelper.AccessCreateQuery("theQuery", theQuery, mst_linksDB);
             AccessHelper.AccessExecuteActionQuery("theQuery", mst_linksDB);
             //delete copied tables
+            //AccessHelper.AccessCopyTable("Pipes", "GoodPipes_x", mst_linksDB);
             AccessHelper.AccessDropTable("GoodPipes_x", mst_linksDB);
             AccessHelper.AccessDropQuery("theQuery", mst_linksDB);
 
@@ -1441,6 +1442,7 @@ namespace SWI_2
             AccessHelper.AccessCreateQuery("theQuery", theQuery, mst_linksDB);
             AccessHelper.AccessExecuteActionQuery("theQuery", mst_linksDB);
             //delete copied tables
+            //AccessHelper.AccessCopyTable("Culverts", "GoodPipes_x", mst_linksDB);
             AccessHelper.AccessDropTable("GoodPipes_x", mst_linksDB);
             AccessHelper.AccessDropQuery("theQuery", mst_linksDB);
 
@@ -1482,7 +1484,14 @@ namespace SWI_2
                 "WHERE length_ft <>0 AND length_ft is not null";
             AccessHelper.AccessCreateQuery("theQuery", theQuery, mst_linksDB);
             AccessHelper.AccessExecuteActionQuery("theQuery", mst_linksDB);
+            //update the shape field - yes this should be done
+            theQuery =
+                "update theMatches " +
+                "set PipeShape = 'TR31' " ;
+            AccessHelper.AccessCreateQuery("theQuery", theQuery, mst_linksDB);
+            AccessHelper.AccessExecuteActionQuery("theQuery", mst_linksDB);
             //delete copied tables
+            //AccessHelper.AccessCopyTable("Ditches", "GoodPipes_x", mst_linksDB);
             AccessHelper.AccessDropTable("GoodPipes_x", mst_linksDB);
             AccessHelper.AccessDropQuery("theQuery", mst_linksDB);
             AccessHelper.AccessDropTable("GoodPipes", mst_linksDB);

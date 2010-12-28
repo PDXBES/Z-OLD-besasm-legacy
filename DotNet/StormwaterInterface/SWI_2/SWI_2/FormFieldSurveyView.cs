@@ -24,11 +24,11 @@ namespace SWI_2
 
         private void FormFieldSurveyView_Load(object sender, EventArgs e)
         {
-            System.Security.Principal.WindowsIdentity ident = System.Security.Principal.WindowsIdentity.GetCurrent();
-            System.Security.Principal.WindowsPrincipal user = new System.Security.Principal.WindowsPrincipal(ident);
-            string theName = "["+user.Identity.Name+"]";
+            //System.Security.Principal.WindowsIdentity ident = System.Security.Principal.WindowsIdentity.GetCurrent();
+           // System.Security.Principal.WindowsPrincipal user = new System.Security.Principal.WindowsPrincipal(ident);
+            //string theName = "["+user.Identity.Name+"]";
             //MessageBox.Show(theName);
-            this.sWSP_MESH1TableAdapter.SET_SCHEMA_ISSACG(theName);
+            //this.sWSP_MESH1TableAdapter.SET_SCHEMA_ISSACG(theName);
 
             // TODO: This line of code loads data into the 'sANDBOXDataSet.SWSP_CULVERT_OPENING_TYPE' table. You can move, or remove it, as needed.
             this.sWSP_CULVERT_OPENING_TYPETableAdapter.Fill(this.sANDBOXDataSet.SWSP_CULVERT_OPENING_TYPE);
@@ -50,14 +50,7 @@ namespace SWI_2
             this.sWSP_MESH1TableAdapter.Fill(this.sANDBOXDataSet.SWSP_MESH1);
             deletedGlobalID = new HashSet<int>();
             //this is to separate sessions.
-            //This SHOULD be replaced with an activeusers table in the database.
-            //The activeusers table will give a user 5,000 entries, and this interface will tell the user to 
-            //restart the session if they exceed 5,000 entries(unlikely but possible). So user A will
-            //have entries -1 to -5000, user B will have entries -5001 to -10,000.  This make it less likely that
-            //people wont overwrite each others changes.  With the random approach, there nearly a
-            //3% chance of overwriting, assuming that users enter 1,000 entries per session.
-            Random random = new Random();
-            tempGlobal_id = -1000-(int)(30000*random.NextDouble());
+            tempGlobal_id = -1000 * (int)this.sWSP_MESH1TableAdapter.SWI_GET_SPID();
             //fill the FieldSurveypageview datatable with the data from the MESH1 datatable
             foreach(DataRow r in this.sANDBOXDataSet.SWSP_MESH1)
             {
