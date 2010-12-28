@@ -1,0 +1,91 @@
+'
+'	============ EMGAATS Workbench =================
+'
+'	Copyright (c) 2001  City of Portland, OR Bureau of Environmental Services and David J Collins Engineering
+'
+Define MODE_MASTER 1
+Define MODE_MODEL 2
+
+Define RETURNSUCCESS -1
+Define RETURNCAUTION 0
+Define RETURNFAILURE 1
+
+' For EMG 2.2, Removed certain tables for clean up
+'DEFINE NDX_MDL_LINKS 				1
+'DEFINE NDX_MDL_NODES 				2
+'DEFINE NDX_MDL_DIRSC 				3
+'DEFINE NDX_MDL_LATS 				4
+'DEFINE NDX_MDL_LATENDPT 		5
+'DEFINE NDX_MDL_LINKRES 			6
+'DEFINE NDX_MDL_NODERES 			7
+'DEFINE NDX_MDL_SPECLINKS 		8
+'DEFINE NDX_MDL_SPECLINKDATA 9
+'DEFINE NDX_MDL_SPECNODEDATA 10
+'DEFINE NDX_MDL_DEFINETAGS 	11
+'DEFINE NDX_MDL_SURFSC 			12
+'DEFINE NDX_MDL_SURFZING 		13
+'DEFINE NDX_MDL_DISCOVEG 		14
+'DEFINE NDX_MDL_DRYWELL 			15
+'DEFINE NDX_MDL_GRNROOF 			16
+'DEFINE NDX_MDL_STORE 				17
+'DEFINE NDX_MDL_SWPLNT 			18
+'DEFINE NDX_MDL_INFILT 			19
+'DEFINE NDX_MDL_NGTOREDIR 		20
+
+DEFINE NDX_MDL_LINKS 				1
+DEFINE NDX_MDL_NODES 				2
+DEFINE NDX_MDL_DIRSC 				3
+DEFINE NDX_MDL_SPECLINKS    4
+DEFINE NDX_MDL_SPECLINKDATA 5
+DEFINE NDX_MDL_SURFSC       6
+DEFINE NDX_MDL_SURFZING     7
+
+Define NDX_MASTER_LINKS 			1
+Define NDX_MASTER_NODES 			2
+Define NDX_MASTER_DIVIDES 		3
+Define NDX_MASTER_PARCELS 		4
+Define NDX_MASTER_LATERALS 		5
+Define NDX_MASTER_LATENDPTS 	6
+Define NDX_MASTER_SPECLINKS		7
+Define NDX_MASTER_SURFSC 			8
+Define NDX_MASTER_VIRTGAGE 		9
+Define NDX_MASTER_BUILDING		10
+Define NDX_MASTER_PARKING			11
+Define NDX_MASTER_ZONING			12
+Define NDX_MASTER_GENZONE			13
+Define NDX_MASTER_IC_DISCO		14
+Define NDX_MASTER_IC_GREEN		15
+Define NDX_MASTER_IC_STORE		16
+Define NDX_MASTER_IC_DRYWELL	17
+Define NDX_MASTER_IMPSA				18
+
+Type FileSpec
+	Name as string
+	FullPath as string
+	Alias as string
+	IniSection as string
+	IniKey as string
+	OKtoOpen as logical
+	AllowWrite as logical
+End Type
+
+global gmstFiles(18) as FileSpec
+global gmdlFiles(7) as FileSpec
+
+global gmstINIfullpath as string
+global gmdlINIfullpath as string
+
+global gEMGAATSmode as integer
+
+declare sub InitOpenUtilGlobals()
+declare function ReallyOpenMaster() as integer
+declare function ReallyOpenModel() as integer
+declare function setOKtoOpen(fspec() as FileSpec, ndxs() as integer) as integer
+declare function setAllowWrite(fspec() as FileSpec, ndxs() as integer) as integer
+
+'03Feb2005 Collins
+declare function setModelAllOpen() as integer
+declare function setModelAllClose() as integer
+
+'22Mar2004 Collins this moved from EMGInit
+Declare Sub	CommitModel()

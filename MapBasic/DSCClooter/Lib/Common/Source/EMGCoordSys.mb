@@ -1,0 +1,10 @@
+'
+'	coordinate system functions
+'
+include "MapBasic.def"
+include "..\inc\EMGCoordSys.def"
+
+Sub SetStdCoordSys()
+	'	Bounds are portland metro urban growth boundary, more or less.
+	Set coordsys earth projection 3, 74, 3, -120.5, 43.6666666667, 44.3333333333, 46, 8202099.738, 0 Bounds (7500000, 500000) (8000000, 750000)
+End Sub
