@@ -107,7 +107,6 @@
     <Reference Include="System.Xml">
       <Name>System.XML</Name>
     </Reference>
-    <Reference Include="SystemsAnalysis.DataAccess, Version=1.0.3943.20848, Culture=neutral, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AltCompilerDataSet.cs">
@@ -209,6 +208,13 @@
       <DependentUpon>SAMasterDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="StormwaterControls.cs" />
+    <Compile Include="StormwaterControlsDataSet.cs">
+      <DependentUpon>StormwaterControlsDataSet.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="StormwaterControlsDataSet.Designer.cs">
+      <DependentUpon>StormwaterControlsDataSet.cs</DependentUpon>
+    </Compile>
     <None Include="AltCompilerDataSet.xsc">
       <DependentUpon>AltCompilerDataSet.xsd</DependentUpon>
     </None>
@@ -324,6 +330,15 @@
     <None Include="SAMasterDataSet.xss">
       <DependentUpon>SAMasterDataSet.xsd</DependentUpon>
     </None>
+    <None Include="StormwaterControlsDataSet.xsc">
+      <DependentUpon>StormwaterControlsDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="StormwaterControlsDataSet.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="StormwaterControlsDataSet.xss">
+      <DependentUpon>StormwaterControlsDataSet.xsd</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -356,6 +371,10 @@
     <ProjectReference Include="..\AccessUtils\DatabaseManagement\SystemsAnalysis.Utils.AccessUtils.DatabaseManagement.csproj">
       <Project>{1DCF1AAE-A211-4A29-AE5C-13AAAD890B08}</Project>
       <Name>SystemsAnalysis.Utils.AccessUtils.DatabaseManagement</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ModelingUtils\ResultsExtractor\SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor.csproj">
+      <Project>{AA8663B3-4B31-4F11-BD73-9CC3EF99101F}</Project>
+      <Name>SystemsAnalysis.Modeling.ModelUtils.ResultsExtractor</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
