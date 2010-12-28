@@ -227,6 +227,9 @@ namespace SystemsAnalysis.Reporting
           case "StatusLog":
             ActivateStatusLog();
             break;
+          case "DownloadXmlReader":
+            DownloadXmlReader();
+          break;
           default:
             return;
         } // switch
@@ -266,6 +269,36 @@ namespace SystemsAnalysis.Reporting
       childForm.WindowState = FormWindowState.Maximized;
       childForm.Show();
     }
+
+    private void DownloadXmlReader()
+    {
+      SaveFileDialog sfdXmlTemplate = new SaveFileDialog();
+      sfdXmlTemplate.DefaultExt = "xsl";
+      sfdXmlTemplate.FileName = "XMLReportReader";
+      sfdXmlTemplate.Filter = "Excel XSL Template (*.xsl)|*.xsl";
+      sfdXmlTemplate.AddExtension = true;
+      sfdXmlTemplate.RestoreDirectory = true;
+      sfdXmlTemplate.Title = "Where do you want to save the file?";
+      
+      try
+      {
+        if (sfdXmlTemplate.ShowDialog() == DialogResult.OK)
+        {
+          string templatePath = Path.GetDirectoryName(Application.ExecutablePath) + "\\xml\\excel_char.xsl";    
+          File.Copy(templatePath, sfdXmlTemplate.FileName, true);
+        }
+      }
+      catch (Exception ex)
+      {
+        MessageBox.Show("There was a problem saving the XML reader: " + ex.Message, "Error Saving File", MessageBoxButtons.OK, MessageBoxIcon.Error);
+      }
+      finally
+      {
+        sfdXmlTemplate.Dispose();
+        sfdXmlTemplate = null;
+      }
+    }
+    
     /// <summary>
     /// Activate manage model catalog form
     /// </summary>
@@ -409,6 +442,35 @@ namespace SystemsAnalysis.Reporting
     private void ApplicationInterface_Load(object sender, EventArgs e)
     {
 
+    }
+
+    private void downloadEmdToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+      SaveFileDialog sfdDownloadEmd = new SaveFileDialog();
+      sfdDownloadEmd.DefaultExt = "doc";
+      sfdDownloadEmd.FileName = "EMD094";
+      sfdDownloadEmd.Filter = "Word Document (*.doc)|*.doc";
+      sfdDownloadEmd.AddExtension = true;
+      sfdDownloadEmd.RestoreDirectory = true;
+      sfdDownloadEmd.Title = "Where do you want to save the file?";
+
+      try
+      {
+        if (sfdDownloadEmd.ShowDialog() == DialogResult.OK)
+        {
+          string templatePath = Path.GetDirectoryName(Application.ExecutablePath) + "\\doc\\EMD094.doc";
+          File.Copy(templatePath, sfdDownloadEmd.FileName, true);
+        }
+      }
+      catch (Exception ex)
+      {
+        MessageBox.Show("There was a problem saving the EMD: " + ex.Message, "Error Saving File", MessageBoxButtons.OK, MessageBoxIcon.Error);
+      }
+      finally
+      {
+        sfdDownloadEmd.Dispose();
+        sfdDownloadEmd = null;
+      }
     }
   }
 }
