@@ -1,6 +1,11 @@
 ﻿
 #region Using Directives
 
+using Microsoft.SqlServer.Server;
+using Microsoft.SqlServer;
+using Microsoft.Office;
+using Microsoft.VisualBasic;
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,18 +21,16 @@ using System.Data.Sql;
 using System.Data.SqlClient;
 using System.Data.SqlTypes;
 using System.Data.SqlServerCe;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Drawing;
+using System.Security.Principal;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Windows.Forms;
-using System.IO;
-using System.Security.Principal;
-using Microsoft.SqlServer.Server;
-using Microsoft.SqlServer;
-using Microsoft.Office;
-using Microsoft.VisualBasic;
+
 using SystemsAnalysis.DataAccess;
 using SystemsAnalysis.Utils.AccessUtils;
 
@@ -80,15 +83,53 @@ namespace DSCUpdater
      */
     #endregion
 
-#region Declarations
-    ArrayList arrTables;
-#endregion
+    #region Declarations
+      ArrayList arrTables;
+  #endregion
 
     public frmMain()
     {
+      Thread thread = new Thread(DoSplash);
+      thread.Start();
+      this.Hide();
       InitializeComponent();
     }
 
+    private static void DoSplash()
+    {
+      DoSplash(false);
+    }
+
+    private static void DoSplash(bool waitForClick)
+    {
+      string versionText = "x.x.x.x";
+      string dateText = "1/1/1900";
+      if (System.Deployment.Application.ApplicationDeployment.IsNetworkDeployed)
+      {
+        Version v = System.Deployment.Application.ApplicationDeployment.CurrentDeployment.CurrentVersion;
+        versionText =v.Major + "." + v.Minor + "." + v.Build + "." + v.Revision;
+        dateText = File.GetLastWriteTime(System.Reflection.Assembly.GetExecutingAssembly().Location).ToString("MMMM dd yyyy");
+      }
+      else
+      {
+        System.Reflection.AssemblyName assemblyName = 
+          System.Reflection.Assembly.GetExecutingAssembly().GetName(false);
+        int minorVersion = assemblyName.Version.Minor;
+        int majorVersion = assemblyName.Version.Major;
+        int build = assemblyName.Version.Build;
+        int revision = assemblyName.Version.Revision;
+        versionText = string.Format("{0}.{1}.{2}.{3}",majorVersion,minorVersion,build,revision);
+
+        FileInfo fi = new FileInfo("DSCUpdater.exe");
+        dateText = fi.CreationTime.Date.ToString("MMMM dd yyyy");
+
+        using (frmSplashScreen frmSp = new frmSplashScreen(versionText,dateText))
+        {
+          frmSp.ShowDialog(waitForClick);
+        }
+      }
+    }
+    
     private int SetProgress
     {
       get
@@ -2470,11 +2511,6 @@ namespace DSCUpdater
     }
 
     #endregion
-
-
-
-
-
   }
 }
 
