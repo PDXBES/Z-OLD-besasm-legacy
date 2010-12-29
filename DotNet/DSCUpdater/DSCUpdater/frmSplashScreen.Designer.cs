@@ -35,6 +35,10 @@
           this.lblVersionInfo = new Infragistics.Win.Misc.UltraLabel();
           this.SuspendLayout();
           // 
+          // tmrSplashScreen
+          // 
+          this.tmrSplashScreen.Tick += new System.EventHandler(this.tmrSplashScreen_Tick);
+          // 
           // lblVersionInfo
           // 
           appearance2.BackColor = System.Drawing.Color.Transparent;
@@ -62,7 +66,8 @@
           this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
           this.Text = "SplashScreen";
           this.TopMost = true;
-          this.Load += new System.EventHandler(this.SplashScreen_Load);
+          this.Load += new System.EventHandler(this.frmSplashScreen_Load);
+          this.Click += new System.EventHandler(this.frmSplashScreen_Click);
           this.ResumeLayout(false);
 
         }
