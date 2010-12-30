@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="RainDSClass" targetNamespace="http://tempuri.org/RainDSClass.xsd" xmlns:mstns="http://tempuri.org/RainDSClass.xsd" xmlns="http://tempuri.org/RainDSClass.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="NEPTUNEConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="NEPTUNEConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.ViRT.Properties.Settings.GlobalReference.Default.NEPTUNEConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="V_MODEL_RAIN_FIVE_MINUTETableAdapter" GeneratorDataComponentClassName="V_MODEL_RAIN_FIVE_MINUTETableAdapter" Name="V_MODEL_RAIN_FIVE_MINUTE" UserDataComponentName="V_MODEL_RAIN_FIVE_MINUTETableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="NEPTUNEConnectionString (Settings)" DbObjectName="NEPTUNE.dbo.V_MODEL_RAIN_FIVE_MINUTE" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT h2_number, five_minute_date_time, five_minute_sum_inches FROM dbo.V_MODEL_RAIN_FIVE_MINUTE</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="h2_number" DataSetColumn="h2_number" />
+              <Mapping SourceColumn="five_minute_date_time" DataSetColumn="five_minute_date_time" />
+              <Mapping SourceColumn="five_minute_sum_inches" DataSetColumn="five_minute_sum_inches" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="RainDSClass" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_DataSetName="RainDSClass" msprop:Generator_UserDSName="RainDSClass" msprop:EnableTableAdapterManager="True">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="V_MODEL_RAIN_FIVE_MINUTE" msprop:Generator_UserTableName="V_MODEL_RAIN_FIVE_MINUTE" msprop:Generator_RowDeletedName="V_MODEL_RAIN_FIVE_MINUTERowDeleted" msprop:Generator_TableClassName="V_MODEL_RAIN_FIVE_MINUTEDataTable" msprop:Generator_RowChangedName="V_MODEL_RAIN_FIVE_MINUTERowChanged" msprop:Generator_RowClassName="V_MODEL_RAIN_FIVE_MINUTERow" msprop:Generator_RowChangingName="V_MODEL_RAIN_FIVE_MINUTERowChanging" msprop:Generator_RowEvArgName="V_MODEL_RAIN_FIVE_MINUTERowChangeEvent" msprop:Generator_RowEvHandlerName="V_MODEL_RAIN_FIVE_MINUTERowChangeEventHandler" msprop:Generator_TablePropName="V_MODEL_RAIN_FIVE_MINUTE" msprop:Generator_TableVarName="tableV_MODEL_RAIN_FIVE_MINUTE" msprop:Generator_RowDeletingName="V_MODEL_RAIN_FIVE_MINUTERowDeleting">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="h2_number" msprop:Generator_UserColumnName="h2_number" msprop:Generator_ColumnPropNameInRow="h2_number" msprop:Generator_ColumnVarNameInTable="columnh2_number" msprop:Generator_ColumnPropNameInTable="h2_numberColumn" type="xs:int" />
+              <xs:element name="five_minute_date_time" msprop:Generator_UserColumnName="five_minute_date_time" msprop:Generator_ColumnPropNameInRow="five_minute_date_time" msprop:Generator_ColumnVarNameInTable="columnfive_minute_date_time" msprop:Generator_ColumnPropNameInTable="five_minute_date_timeColumn" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="five_minute_sum_inches" msprop:Generator_UserColumnName="five_minute_sum_inches" msprop:Generator_ColumnPropNameInRow="five_minute_sum_inches" msprop:Generator_ColumnVarNameInTable="columnfive_minute_sum_inches" msprop:Generator_ColumnPropNameInTable="five_minute_sum_inchesColumn" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

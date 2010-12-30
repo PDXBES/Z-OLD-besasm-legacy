@@ -1,0 +1,75 @@
+[Config]
+Relative path=1
+Compilator.SaveAll=0
+Compilator.Capture=0
+Compilator.HideOutput=0
+DefaultCPIndex=0
+LogtoEnd=0
+DontOpen=0
+FileFormat=0
+[Project tree]
+EMGWorkbench
+	-Common
+		..\..\Common\Inc\EMGCircleGeo.def
+		..\..\Common\Source\EMGCircleGeo.mb
+		..\..\Common\Inc\EMGCoordSys.def
+		..\..\Common\Source\EMGCoordSys.mb
+		..\..\Common\Inc\EMGfuncts.def
+		..\..\Common\Source\EMGfuncts.mb
+		..\..\Common\Inc\EMGGlobal.def
+		..\..\Common\Inc\EMGLaterals.def
+		..\..\Common\Source\EMGLaterals.mb
+		..\..\Common\Inc\EMGLatShare.def
+		..\..\Common\Inc\EMGLatSnap.def
+		..\..\Common\Source\EMGLatSnap.mb
+		..\..\Common\Inc\EMGLineGeo.def
+		..\..\Common\Source\EMGLineGeo.MB
+		..\..\Common\Inc\EMGLogger.def
+		..\..\Common\Source\EMGLogger.mb
+		..\..\Common\Inc\EMGModMake.def
+		..\..\Common\Source\EMGModMake.mb
+		..\..\Common\Inc\EMGMTabUtil.def
+		..\..\Common\Source\EMGMTabUtil.mb
+		..\..\Common\Inc\EMGOpenUtils.def
+		..\..\Common\Source\EMGOpenUtils.mb
+		..\..\Common\Inc\EMGToolGlobal.def
+		..\..\Common\Inc\INIUtils.def
+		..\..\Common\Source\INIUtils.mb
+		..\..\Common\Inc\SpaceCheck.def
+		..\..\Common\Source\SpaceCheck.mb
+		..\..\Common\Inc\TableUtils.DEF
+	+Source
+		..\Inc\EMGAbout.def
+		EMGAbout.mb
+		..\Inc\EMGBuildDeck.def
+		EMGBuildDeck.mb
+		..\Inc\EMGCalcDSC.def
+		EMGCalcDSC.mb
+		..\Inc\EMGEnd.def
+		EMGEnd.mb
+		..\Inc\EMGHelp.def
+		EMGHelp.mb
+		..\Inc\EMGInit.def
+		EMGInit.mb
+		EMGMain.MB
+		..\Inc\EMGMenus.def
+		EMGMenus.mb
+		..\Inc\EMGPatch.def
+		EMGpatch.mb
+		..\Inc\EMGSurfSC.def
+		EMGSurfSC.mb
+		..\Inc\EMGTraceLinks.def
+		EMGTraceLinks.MB
+		EMGWorkbench.mbp
+[Open project files]
+0=New1.txt
+1=EMGTraceLinks.MB
+[Selected Project Files]
+Main=
+Selected=EMGTraceLinks.MB
+[New1.txt]
+TopLine=1
+Caret=1,1
+[EMGTraceLinks.MB]
+TopLine=327
+Caret=36,373

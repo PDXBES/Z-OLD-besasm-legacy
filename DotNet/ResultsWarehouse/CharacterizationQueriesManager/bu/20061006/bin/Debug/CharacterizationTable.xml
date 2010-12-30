@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8" ?>
+	<StudyArea studyArea="Beech-Essex Basin" xmlns="SystemsAnalysis.CharacterizationTableSchema">
+		<CharacterizationTable tableNumber="1" tableTitle="Overview of Collection System Performance">
+			<Column displayOrder="1">
+				<Cell displayOrder="1" data="Criteria" cellType="COLUMNNAME" footerID=""></Cell>
+				<Cell displayOrder="2" data="Pipe Surcharge: Percent of study area where the hydraulic grade line is &gt; 4 feet above the pipe crown"
+					cellType="ROWNAME" footerID="a"></Cell>
+				<Cell displayOrder="3" data="Percent of the study area with peak flow to design flow ratio &gt; 1.2"
+					cellType="ROWNAME" footerID="a"></Cell>
+				<Cell displayOrder="4" data="Basement Sewer Backup Risk as Distance from Finished Floor: Percent of study area within 0 to 8 feet"
+					cellType="ROWNAME" footerID="b"></Cell>
+			</Column>
+			<Column displayOrder="2">
+				<Cell displayOrder="1" data="2-Year Storm Existing Conditions" cellType="COLUMNNAME"></Cell>
+				<Cell displayOrder="2" cellType="FUNCTION">
+					<Function functionName="PipeSurcharge" isFraction="true">
+						<Parameter parameterName="ScenarioID" parameterValue="1"></Parameter>
+						<Parameter parameterName="MinValue" parameterValue="4"></Parameter>
+						<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+					</Function>
+				</Cell>
+				<Cell displayOrder="3" cellType="FUNCTION">
+					<Function functionName="QQRatio" isFraction="true">
+						<Parameter parameterName="ScenarioID" parameterValue="1"></Parameter>
+						<Parameter parameterName="MinValue" parameterValue="1.2"></Parameter>
+						<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+					</Function>
+				</Cell>
+				<Cell displayOrder="4" cellType="FUNCTION">
+					<Function functionName="SewerBackupRisk" isFraction="true">
+						<Parameter parameterName="ScenarioID" parameterValue="1"></Parameter>
+						<Parameter parameterName="MinValue" parameterValue="1.2"></Parameter>
+						<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+					</Function>
+				</Cell>
+			</Column>
+			<Column displayOrder="3">
+				<Cell displayOrder="1" data="5-Year Storm Existing Conditions" cellType="COLUMNNAME"></Cell>
+				<Cell displayOrder="2" cellType="FUNCTION">
+					<Function functionName="PipeSurcharge" isFraction="true">
+						<Parameter parameterName="ScenarioID" parameterValue="2"></Parameter>
+						<Parameter parameterName="MinValue" parameterValue="4"></Parameter>
+						<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+					</Function>
+				</Cell>
+				<Cell displayOrder="3" cellType="FUNCTION">
+					<Function functionName="QQRatio" isFraction="true">
+						<Parameter parameterName="ScenarioID" parameterValue="2"></Parameter>
+						<Parameter parameterName="MinValue" parameterValue="1.2"></Parameter>
+						<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+					</Function>
+				</Cell>
+				<Cell displayOrder="4" cellType="FUNCTION">
+					<Function functionName="SewerBackupRisk" isFraction="true">
+						<Parameter parameterName="ScenarioID" parameterValue="2"></Parameter>
+						<Parameter parameterName="MinValue" parameterValue="1.2"></Parameter>
+						<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+					</Function>
+				</Cell>
+			</Column>
+			<Column displayOrder="4">
+				<Cell displayOrder="1" data="25-Year Storm Existing Conditions" cellType="COLUMNNAME"></Cell>
+				<Cell displayOrder="2" cellType="FUNCTION">
+					<Function functionName="PipeSurcharge" isFraction="true">
+						<Parameter parameterName="ScenarioID" parameterValue="3"></Parameter>
+						<Parameter parameterName="MinValue" parameterValue="4"></Parameter>
+						<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+					</Function>
+				</Cell>
+				<Cell displayOrder="3" cellType="FUNCTION">
+					<Function functionName="QQRatio" isFraction="true">
+						<Parameter parameterName="ScenarioID" parameterValue="3"></Parameter>
+						<Parameter parameterName="MinValue" parameterValue="1.2"></Parameter>
+						<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+					</Function>
+				</Cell>
+				<Cell displayOrder="4" cellType="FUNCTION">
+					<Function functionName="SewerBackupRisk" isFraction="true">
+						<Parameter parameterName="ScenarioID" parameterValue="3"></Parameter>
+						<Parameter parameterName="MinValue" parameterValue="1.2"></Parameter>
+						<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+					</Function>
+				</Cell>
+			</Column>
+			<Column displayOrder="5">
+				<Cell displayOrder="1" data="25-Year Storm Future Conditions" cellType="COLUMNNAME"></Cell>
+				<Cell displayOrder="2" cellType="FUNCTION">
+					<Function functionName="PipeSurcharge" isFraction="true">
+						<Parameter parameterName="ScenarioID" parameterValue="4"></Parameter>
+						<Parameter parameterName="MinValue" parameterValue="4"></Parameter>
+						<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+					</Function>
+				</Cell>
+				<Cell displayOrder="3" cellType="FUNCTION">
+					<Function functionName="QQRatio" isFraction="true">
+						<Parameter parameterName="ScenarioID" parameterValue="4"></Parameter>
+						<Parameter parameterName="MinValue" parameterValue="1.2"></Parameter>
+						<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+					</Function>
+				</Cell>
+				<Cell displayOrder="4" cellType="FUNCTION">
+					<Function functionName="SewerBackupRisk" isFraction="true">
+						<Parameter parameterName="ScenarioID" parameterValue="4"></Parameter>
+						<Parameter parameterName="MinValue" parameterValue="1.2"></Parameter>
+						<Parameter parameterName="MaxValue" parameterValue="MAX"></Parameter>
+					</Function>
+				</Cell>
+			</Column>
+			<Footer footerID="a" footerText="Based on number of pipe segments."></Footer>
+			<Footer footerID="b" footerText="Based on number of tax lots."></Footer>
+		</CharacterizationTable>
+		<CharacterizationTable tableNumber="2" tableTitle="Zoning and Effective Impervious Area">
+			<Column displayOrder="1">
+				<Cell displayOrder="1" cellType="BLANK"></Cell>
+				<Cell displayOrder="2" data="Existing (2006)" cellType="ROWNAME"></Cell>
+				<Cell displayOrder="3" data="Future (2040)" cellType="ROWNAME"></Cell>
+			</Column>
+			<Column displayOrder="2">
+				<Cell displayOrder="1" data="Total Area (acres)" cellType="COLUMNNAME" footerID=""></Cell>
+				<Cell displayOrder="2" cellType="BLANK"></Cell>
+				<Cell displayOrder="3" cellType="BLANK"></Cell>
+			</Column>
+			<Column displayOrder="3">
+				<Cell displayOrder="1" data="Single Family Residential (acres)" cellType="COLUMNNAME"
+					footerID=""></Cell>
+				<Cell displayOrder="2" cellType="FUNCTION">
+					<Function functionName="ZoningByLanduse" isFraction="false">
+						<Parameter parameterName="TimeFrame" parameterValue="EX"></Parameter>
+						<Parameter parameterName="LandUse" parameterValue="SFR"></Parameter>
+					</Function>
+				</Cell>
+				<Cell displayOrder="3" cellType="FUNCTION">
+					<Function functionName="ZoningByLanduse" isFraction="false">
+						<Parameter parameterName="TimeFrame" parameterValue="FU"></Parameter>
+						<Parameter parameterName="LandUse" parameterValue="SFR"></Parameter>
+					</Function>
+				</Cell>
+			</Column>
+			<Column displayOrder="4">
+				<Cell displayOrder="1" data="Mutli-Family Residential (acres)" cellType="COLUMNNAME" footerID=""></Cell>
+				<Cell displayOrder="2" cellType="FUNCTION">
+					<Function functionName="ZoningByLanduse" isFraction="false">
+						<Parameter parameterName="TimeFrame" parameterValue="EX"></Parameter>
+						<Parameter parameterName="LandUse" parameterValue="MFR"></Parameter>
+					</Function>
+				</Cell>
+				<Cell displayOrder="3" cellType="FUNCTION">
+					<Function functionName="ZoningByLanduse" isFraction="false">
+						<Parameter parameterName="TimeFrame" parameterValue="FU"></Parameter>
+						<Parameter parameterName="LandUse" parameterValue="MFR"></Parameter>
+					</Function>
+				</Cell>
+			</Column>
+			<Column displayOrder="5">
+				<Cell displayOrder="1" data="Industrial (acres)" cellType="COLUMNNAME" footerID=""></Cell>
+				<Cell displayOrder="2" cellType="FUNCTION">
+					<Function functionName="ZoningByLanduse" isFraction="false">
+						<Parameter parameterName="TimeFrame" parameterValue="EX"></Parameter>
+						<Parameter parameterName="LandUse" parameterValue="IND"></Parameter>
+					</Function>
+				</Cell>
+				<Cell displayOrder="3" cellType="FUNCTION">
+					<Function functionName="ZoningByLanduse" isFraction="false">
+						<Parameter parameterName="TimeFrame" parameterValue="FU"></Parameter>
+						<Parameter parameterName="LandUse" parameterValue="IND"></Parameter>
+					</Function>
+				</Cell>
+			</Column>
+			<Column displayOrder="6">
+				<Cell displayOrder="1" data="Commercial (acres)" cellType="COLUMNNAME" footerID=""></Cell>
+				<Cell displayOrder="2" cellType="FUNCTION">
+					<Function functionName="ZoningByLanduse" isFraction="false">
+						<Parameter parameterName="TimeFrame" parameterValue="EX"></Parameter>
+						<Parameter parameterName="LandUse" parameterValue="COM"></Parameter>
+					</Function>
+				</Cell>
+				<Cell displayOrder="3" cellType="FUNCTION">
+					<Function functionName="ZoningByLanduse" isFraction="false">
+						<Parameter parameterName="TimeFrame" parameterValue="FU"></Parameter>
+						<Parameter parameterName="LandUse" parameterValue="COM"></Parameter>
+					</Function>
+				</Cell>
+			</Column>
+			<Column displayOrder="7">
+				<Cell displayOrder="1" data="Parks and Open Spaces (acres)" cellType="COLUMNNAME" footerID=""></Cell>
+				<Cell displayOrder="2" cellType="FUNCTION">
+					<Function functionName="ZoningByLanduse" isFraction="false">
+						<Parameter parameterName="TimeFrame" parameterValue="EX"></Parameter>
+						<Parameter parameterName="LandUse" parameterValue="POS"></Parameter>
+					</Function>
+				</Cell>
+				<Cell displayOrder="3" cellType="FUNCTION">
+					<Function functionName="ZoningByLanduse" isFraction="false">
+						<Parameter parameterName="TimeFrame" parameterValue="FU"></Parameter>
+						<Parameter parameterName="LandUse" parameterValue="POS"></Parameter>
+					</Function>
+				</Cell>
+			</Column>
+			<Column displayOrder="8">
+				<Cell displayOrder="1" data="Other (acres)" cellType="COLUMNNAME" footerID=""></Cell>
+				<Cell displayOrder="2" cellType="FUNCTION">
+					<Function functionName="ZoningByLanduse" isFraction="false">
+						<Parameter parameterName="TimeFrame" parameterValue="EX"></Parameter>
+						<Parameter parameterName="LandUse" parameterValue="OTH"></Parameter>
+					</Function>
+				</Cell>
+				<Cell displayOrder="3" cellType="FUNCTION">
+					<Function functionName="ZoningByLanduse" isFraction="false">
+						<Parameter parameterName="TimeFrame" parameterValue="FU"></Parameter>
+						<Parameter parameterName="LandUse" parameterValue="OTH"></Parameter>
+					</Function>
+				</Cell>
+			</Column>
+			<Column displayOrder="9">
+				<Cell displayOrder="1" data="Effective Impervious Area (acres)" cellType="COLUMNNAME"
+					footerID="*"></Cell>
+				<Cell displayOrder="2" cellType="BLANK"></Cell>
+				<Cell displayOrder="3" cellType="BLANK"></Cell>
+			</Column>
+			<Footer footerID="*" footerText="For information about how effective impervious area is calculated, refer to the Explicit Model Generation and Analysis Tool Set (EMGAATS) documentation provided in Appendix A of the Combined Sewer System Plan Characterization Summary. "></Footer>
+		</CharacterizationTable>
+		<CharacterizationTable tableNumber="3" tableTitle="Collection System Features">
+			<Column displayOrder="1">
+				<Cell displayOrder="1" data="Feature" cellType="COLUMNNAME"></Cell>
+				<Cell displayOrder="2" data="Combined sewer" cellType="ROWNAME"></Cell>
+				<Cell displayOrder="3" data="Stormwater" cellType="ROWNAME"></Cell>
+				<Cell displayOrder="4" data="Sanitary Sewer" cellType="ROWNAME"></Cell>
+				<Cell displayOrder="5" data="Interceptor" cellType="ROWNAME"></Cell>
+				<Cell displayOrder="6" data="Outfall line" cellType="ROWNAME"></Cell>
+			</Column>
+			<Column displayOrder="2">
+				<Cell displayOrder="1" data="No. of Segments" cellType="COLUMNNAME"></Cell>
+				<Cell displayOrder="2" cellType="FUNCTION">
+					<Function functionName="PipeSegmentCount" isFraction="false">
+						<Parameter parameterName="LinkType" parameterValue="C"></Parameter>
+					</Function>
+				</Cell>
+				<Cell displayOrder="3" cellType="FUNCTION">
+					<Function functionName="PipeSegmentCount" isFraction="false">
+						<Parameter parameterName="LinkType" parameterValue="D"></Parameter>
+					</Function>
+				</Cell>
+				<Cell displayOrder="4" cellType="FUNCTION">
+					<Function functionName="PipeSegmentCount" isFraction="false">
+						<Parameter parameterName="LinkType" parameterValue="S"></Parameter>
+					</Function>
+				</Cell>
+				<Cell displayOrder="5" cellType="BLANK"></Cell>
+				<Cell displayOrder="6" cellType="BLANK"></Cell>
+			</Column>
+			<Column displayOrder="3">
+				<Cell displayOrder="1" data="Length (miles)" cellType="COLUMNNAME"></Cell>
+				<Cell displayOrder="2" cellType="FUNCTION">
+					<Function functionName="PipeSegmentLength" isFraction="false">
+						<Parameter parameterName="LinkType" parameterValue="C"></Parameter>
+					</Function>
+				</Cell>
+				<Cell displayOrder="3" cellType="FUNCTION">
+					<Function functionName="PipeSegmentLength" isFraction="false">
+						<Parameter parameterName="LinkType" parameterValue="D"></Parameter>
+					</Function>
+				</Cell>
+				<Cell displayOrder="4" cellType="FUNCTION">
+					<Function functionName="PipeSegmentLength" isFraction="false">
+						<Parameter parameterName="LinkType" parameterValue="S"></Parameter>
+					</Function>
+				</Cell>
+				<Cell displayOrder="5" data="Not applicable" cellType="CONST"></Cell>
+				<Cell displayOrder="6" data="Not applicable" cellType="CONST"></Cell>
+			</Column>
+			<Column displayOrder="4">
+				<Cell displayOrder="1" data="Range in Diameter (inches)" cellType="COLUMNNAME"></Cell>
+				<Cell displayOrder="2" cellType="FUNCTION">
+					<Function functionName="PipeDiameterRange" isFraction="false">
+						<Parameter parameterName="LinkType" parameterValue="C"></Parameter>
+					</Function>
+				</Cell>
+				<Cell displayOrder="3" cellType="FUNCTION">
+					<Function functionName="PipeDiameterRange" isFraction="false">
+						<Parameter parameterName="LinkType" parameterValue="D"></Parameter>
+					</Function>
+				</Cell>
+				<Cell displayOrder="4" cellType="FUNCTION">
+					<Function functionName="PipeDiameterRange" isFraction="false">
+						<Parameter parameterName="LinkType" parameterValue="S"></Parameter>
+					</Function>
+				</Cell>
+				<Cell displayOrder="5" data="Not applicable" cellType="CONST"></Cell>
+				<Cell displayOrder="6" data="Not applicable" cellType="CONST"></Cell>
+			</Column>
+			<Column displayOrder="5">
+				<Cell displayOrder="1" data="Name and ID" cellType="COLUMNNAME"></Cell>
+				<Cell displayOrder="2" data="Not applicable" cellType="CONST">
+				</Cell>
+				<Cell displayOrder="3" data="Not applicable" cellType="CONST">
+				</Cell>
+				<Cell displayOrder="4" data="Not applicable" cellType="CONST">
+				</Cell>
+				<Cell displayOrder="5" cellType="FUNCTION"></Cell>
+				<Cell displayOrder="6" cellType="FUNCTION"></Cell>
+			</Column>
+		</CharacterizationTable>
+	</StudyArea>
