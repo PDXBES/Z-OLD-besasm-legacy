@@ -7,7 +7,8 @@ using System.Windows.Forms;
 namespace SystemsAnalysis.Tracer
 {
 	/// <summary>
-	/// Summary description for ProgressBar.
+	/// Displays a progressbar during tracing to show progress as features caught
+  /// by the native Arc tracer are collected into a GraphEdge collection
 	/// </summary>
 	public class FloatingProgressBar : System.Windows.Forms.Form
 	{

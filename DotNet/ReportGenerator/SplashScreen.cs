@@ -25,7 +25,7 @@ namespace SystemsAnalysis.Reporting
       //'Bitmap b = new Bitmap(this.BackgroundImage);
       //'b.MakeTransparent(b.GetPixel(1, 1));
       //this.BackgroundImage = b; 
-      timer1.Start();
+      tmrSplashScreen.Start();
 
     }
 
@@ -69,7 +69,7 @@ namespace SystemsAnalysis.Reporting
     {
       if (wait)
       {
-        timer1.Stop();
+        tmrSplashScreen.Stop();
       }
       return this.ShowDialog();
     }

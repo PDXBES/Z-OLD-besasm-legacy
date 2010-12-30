@@ -33,16 +33,18 @@ namespace SystemsAnalysis.Reporting
           Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarItem ultraExplorerBarItem1 = new Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarItem();
           Infragistics.Win.Appearance appearance1 = new Infragistics.Win.Appearance();
           Infragistics.Win.Appearance appearance2 = new Infragistics.Win.Appearance();
-          Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarGroup ultraExplorerBarGroup2 = new Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarGroup();
           Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarItem ultraExplorerBarItem2 = new Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarItem();
+          Infragistics.Win.Appearance appearance9 = new Infragistics.Win.Appearance();
+          Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarGroup ultraExplorerBarGroup2 = new Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarGroup();
+          Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarItem ultraExplorerBarItem3 = new Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarItem();
           Infragistics.Win.Appearance appearance3 = new Infragistics.Win.Appearance();
           Infragistics.Win.Appearance appearance4 = new Infragistics.Win.Appearance();
           Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarGroup ultraExplorerBarGroup3 = new Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarGroup();
-          Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarItem ultraExplorerBarItem3 = new Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarItem();
+          Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarItem ultraExplorerBarItem4 = new Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarItem();
           Infragistics.Win.Appearance appearance5 = new Infragistics.Win.Appearance();
           Infragistics.Win.Appearance appearance6 = new Infragistics.Win.Appearance();
           Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarGroup ultraExplorerBarGroup4 = new Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarGroup();
-          Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarItem ultraExplorerBarItem4 = new Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarItem();
+          Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarItem ultraExplorerBarItem5 = new Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarItem();
           Infragistics.Win.Appearance appearance7 = new Infragistics.Win.Appearance();
           Infragistics.Win.Appearance appearance8 = new Infragistics.Win.Appearance();
           System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ApplicationInterface));
@@ -51,7 +53,6 @@ namespace SystemsAnalysis.Reporting
           Infragistics.Win.UltraWinDock.DockAreaPane dockAreaPane2 = new Infragistics.Win.UltraWinDock.DockAreaPane(Infragistics.Win.UltraWinDock.DockedLocation.DockedLeft, new System.Guid("06568699-2f4d-4df6-a3dc-20fe0cb29ece"));
           Infragistics.Win.UltraWinDock.DockableControlPane dockableControlPane2 = new Infragistics.Win.UltraWinDock.DockableControlPane(new System.Guid("647f36e1-daa0-4825-9370-169f2cdc2952"), new System.Guid("00000000-0000-0000-0000-000000000000"), -1, new System.Guid("06568699-2f4d-4df6-a3dc-20fe0cb29ece"), -1);
           this.panel1 = new System.Windows.Forms.Panel();
-          this.statusDisplayControl = new SystemsAnalysis.Reporting.StatusDisplayControl();
           this.ultraExplorerBar1 = new Infragistics.Win.UltraWinExplorerBar.UltraExplorerBar();
           this.menuStrip = new System.Windows.Forms.MenuStrip();
           this.fileMenu = new System.Windows.Forms.ToolStripMenuItem();
@@ -92,6 +93,7 @@ namespace SystemsAnalysis.Reporting
           this.arrangeIconsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
           this.helpMenu = new System.Windows.Forms.ToolStripMenuItem();
           this.onlineHelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+          this.downloadEmdToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
           this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
           this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
           this.toolStrip = new System.Windows.Forms.ToolStrip();
@@ -113,6 +115,7 @@ namespace SystemsAnalysis.Reporting
           this.dockableWindow7 = new Infragistics.Win.UltraWinDock.DockableWindow();
           this.windowDockingArea1 = new Infragistics.Win.UltraWinDock.WindowDockingArea();
           this.windowDockingArea3 = new Infragistics.Win.UltraWinDock.WindowDockingArea();
+          this.statusDisplayControl = new SystemsAnalysis.Reporting.StatusDisplayControl();
           this.panel1.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.ultraExplorerBar1)).BeginInit();
           this.menuStrip.SuspendLayout();
@@ -134,20 +137,10 @@ namespace SystemsAnalysis.Reporting
           this.panel1.Size = new System.Drawing.Size(632, 77);
           this.panel1.TabIndex = 35;
           // 
-          // statusDisplayControl
-          // 
-          this.statusDisplayControl.Dock = System.Windows.Forms.DockStyle.Fill;
-          this.statusDisplayControl.Location = new System.Drawing.Point(0, 0);
-          this.statusDisplayControl.Margin = new System.Windows.Forms.Padding(2);
-          this.statusDisplayControl.Name = "statusDisplayControl";
-          this.statusDisplayControl.Size = new System.Drawing.Size(632, 77);
-          this.statusDisplayControl.TabIndex = 0;
-          // 
           // ultraExplorerBar1
           // 
           this.ultraExplorerBar1.AnimationSpeed = Infragistics.Win.UltraWinExplorerBar.AnimationSpeed.Fast;
           this.ultraExplorerBar1.ColumnSpacing = 0;
-          ultraExplorerBarItem1.Checked = true;
           ultraExplorerBarItem1.Key = "CreateReport";
           appearance1.Image = global::SystemsAnalysis.Reporting.Properties.Resources.icon_report;
           appearance1.TextVAlignAsString = "Middle";
@@ -157,45 +150,51 @@ namespace SystemsAnalysis.Reporting
           ultraExplorerBarItem1.Settings.Enabled = Infragistics.Win.DefaultableBoolean.True;
           ultraExplorerBarItem1.Settings.MaxLines = 2;
           ultraExplorerBarItem1.Text = "Create Report";
+          ultraExplorerBarItem2.Checked = true;
+          ultraExplorerBarItem2.Key = "DownloadXmlReader";
+          appearance9.Image = global::SystemsAnalysis.Reporting.Properties.Resources.icon_download_template;
+          ultraExplorerBarItem2.Settings.AppearancesLarge.Appearance = appearance9;
+          ultraExplorerBarItem2.Text = "Download XML Reader";
           ultraExplorerBarGroup1.Items.AddRange(new Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarItem[] {
-            ultraExplorerBarItem1});
+            ultraExplorerBarItem1,
+            ultraExplorerBarItem2});
           ultraExplorerBarGroup1.Settings.MaxLines = 2;
           ultraExplorerBarGroup1.Text = "Report Generator";
-          ultraExplorerBarItem2.Key = "ManageModelCatalog";
+          ultraExplorerBarItem3.Key = "ManageModelCatalog";
           appearance3.Image = global::SystemsAnalysis.Reporting.Properties.Resources.icon_catalog;
           appearance3.TextVAlignAsString = "Middle";
-          ultraExplorerBarItem2.Settings.AppearancesLarge.Appearance = appearance3;
+          ultraExplorerBarItem3.Settings.AppearancesLarge.Appearance = appearance3;
           appearance4.Image = global::SystemsAnalysis.Reporting.Properties.Resources.icon_catalog;
-          ultraExplorerBarItem2.Settings.AppearancesSmall.Appearance = appearance4;
-          ultraExplorerBarItem2.Settings.MaxLines = 2;
-          ultraExplorerBarItem2.Text = "Manage Model Catalog";
+          ultraExplorerBarItem3.Settings.AppearancesSmall.Appearance = appearance4;
+          ultraExplorerBarItem3.Settings.MaxLines = 2;
+          ultraExplorerBarItem3.Text = "Manage Model Catalog";
           ultraExplorerBarGroup2.Items.AddRange(new Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarItem[] {
-            ultraExplorerBarItem2});
+            ultraExplorerBarItem3});
           ultraExplorerBarGroup2.Settings.MaxLines = 2;
           ultraExplorerBarGroup2.Text = "Model Catalog";
           ultraExplorerBarGroup3.Enabled = false;
-          ultraExplorerBarItem3.Key = "CreateCostEstimate";
+          ultraExplorerBarItem4.Key = "CreateCostEstimate";
           appearance5.Image = global::SystemsAnalysis.Reporting.Properties.Resources.icon_cost;
           appearance5.TextVAlignAsString = "Middle";
-          ultraExplorerBarItem3.Settings.AppearancesLarge.Appearance = appearance5;
+          ultraExplorerBarItem4.Settings.AppearancesLarge.Appearance = appearance5;
           appearance6.Image = global::SystemsAnalysis.Reporting.Properties.Resources.icon_cost;
-          ultraExplorerBarItem3.Settings.AppearancesSmall.Appearance = appearance6;
-          ultraExplorerBarItem3.Settings.MaxLines = 2;
-          ultraExplorerBarItem3.Text = "Create Cost Estimate";
+          ultraExplorerBarItem4.Settings.AppearancesSmall.Appearance = appearance6;
+          ultraExplorerBarItem4.Settings.MaxLines = 2;
+          ultraExplorerBarItem4.Text = "Create Cost Estimate";
           ultraExplorerBarGroup3.Items.AddRange(new Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarItem[] {
-            ultraExplorerBarItem3});
+            ultraExplorerBarItem4});
           ultraExplorerBarGroup3.Settings.MaxLines = 2;
           ultraExplorerBarGroup3.Text = "Cost Estimator";
-          ultraExplorerBarItem4.Key = "StatusLog";
+          ultraExplorerBarItem5.Key = "StatusLog";
           appearance7.Image = global::SystemsAnalysis.Reporting.Properties.Resources.icon_status;
           appearance7.TextVAlignAsString = "Middle";
-          ultraExplorerBarItem4.Settings.AppearancesLarge.Appearance = appearance7;
+          ultraExplorerBarItem5.Settings.AppearancesLarge.Appearance = appearance7;
           appearance8.Image = global::SystemsAnalysis.Reporting.Properties.Resources.icon_status;
-          ultraExplorerBarItem4.Settings.AppearancesSmall.Appearance = appearance8;
-          ultraExplorerBarItem4.Settings.MaxLines = 2;
-          ultraExplorerBarItem4.Text = "Status Log";
+          ultraExplorerBarItem5.Settings.AppearancesSmall.Appearance = appearance8;
+          ultraExplorerBarItem5.Settings.MaxLines = 2;
+          ultraExplorerBarItem5.Text = "Status Log";
           ultraExplorerBarGroup4.Items.AddRange(new Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarItem[] {
-            ultraExplorerBarItem4});
+            ultraExplorerBarItem5});
           ultraExplorerBarGroup4.Settings.MaxLines = 2;
           ultraExplorerBarGroup4.Text = "Program";
           this.ultraExplorerBar1.Groups.AddRange(new Infragistics.Win.UltraWinExplorerBar.UltraExplorerBarGroup[] {
@@ -549,6 +548,7 @@ namespace SystemsAnalysis.Reporting
           // 
           this.helpMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.onlineHelpToolStripMenuItem,
+            this.downloadEmdToolStripMenuItem,
             this.toolStripSeparator8,
             this.aboutToolStripMenuItem});
           this.helpMenu.Name = "helpMenu";
@@ -559,19 +559,27 @@ namespace SystemsAnalysis.Reporting
           // 
           this.onlineHelpToolStripMenuItem.Name = "onlineHelpToolStripMenuItem";
           this.onlineHelpToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F1)));
-          this.onlineHelpToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+          this.onlineHelpToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
           this.onlineHelpToolStripMenuItem.Text = "&Online Help";
           this.onlineHelpToolStripMenuItem.Click += new System.EventHandler(this.onlineHelpToolStripMenuItem_Click);
+          // 
+          // downloadEmdToolStripMenuItem
+          // 
+          this.downloadEmdToolStripMenuItem.Name = "downloadEmdToolStripMenuItem";
+          this.downloadEmdToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F2)));
+          this.downloadEmdToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+          this.downloadEmdToolStripMenuItem.Text = "&Download EMD";
+          this.downloadEmdToolStripMenuItem.Click += new System.EventHandler(this.downloadEmdToolStripMenuItem_Click);
           // 
           // toolStripSeparator8
           // 
           this.toolStripSeparator8.Name = "toolStripSeparator8";
-          this.toolStripSeparator8.Size = new System.Drawing.Size(180, 6);
+          this.toolStripSeparator8.Size = new System.Drawing.Size(197, 6);
           // 
           // aboutToolStripMenuItem
           // 
           this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-          this.aboutToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+          this.aboutToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
           this.aboutToolStripMenuItem.Text = "&About ...";
           this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
           // 
@@ -772,6 +780,15 @@ namespace SystemsAnalysis.Reporting
           this.windowDockingArea3.Size = new System.Drawing.Size(185, 282);
           this.windowDockingArea3.TabIndex = 38;
           // 
+          // statusDisplayControl
+          // 
+          this.statusDisplayControl.Dock = System.Windows.Forms.DockStyle.Fill;
+          this.statusDisplayControl.Location = new System.Drawing.Point(0, 0);
+          this.statusDisplayControl.Margin = new System.Windows.Forms.Padding(2);
+          this.statusDisplayControl.Name = "statusDisplayControl";
+          this.statusDisplayControl.Size = new System.Drawing.Size(632, 77);
+          this.statusDisplayControl.TabIndex = 0;
+          // 
           // ApplicationInterface
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -878,6 +895,7 @@ namespace SystemsAnalysis.Reporting
         private Infragistics.Win.UltraWinDock.WindowDockingArea windowDockingArea3;
         private Infragistics.Win.UltraWinDock.DockableWindow dockableWindow6;
         private Infragistics.Win.UltraWinDock.DockableWindow dockableWindow7;
+        private System.Windows.Forms.ToolStripMenuItem downloadEmdToolStripMenuItem;
     }
 }
 
