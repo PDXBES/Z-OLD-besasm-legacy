@@ -1,5 +1,5 @@
-Microsoft Visual Studio Solution File, Format Version 9.00
-# Visual Studio 2005
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemsAnalysis.Tracer.FeatureClassTracer", "SystemsAnalysis.Tracer.FeatureClassTracer.csproj", "{D25581F1-959E-4E80-8F11-C393ACD9B916}"
 	ProjectSection(ProjectDependencies) = postProject
 		{C8B24858-1D99-4519-9A1D-CF129CED9ADA} = {C8B24858-1D99-4519-9A1D-CF129CED9ADA}

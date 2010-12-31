@@ -23,9 +23,9 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 	class TrafficControlAncillaryCost : AncillaryCost
 	{
 		#region Constants
-		private const int TRAFFIC_CONTROL_STREET_COST_PER_DAY = 1000;
-		private const int TRAFFIC_CONTROL_ARTERIAL_COST_PER_DAY = 2500;
-		private const int TRAFFIC_CONTROL_MAJOR_ARTERIAL_COST_PER_DAY = 6600;
+		private const int TRAFFIC_CONTROL_STREET_COST_PER_DAY = 500;
+		private const int TRAFFIC_CONTROL_ARTERIAL_COST_PER_DAY = 1000;
+		private const int TRAFFIC_CONTROL_MAJOR_ARTERIAL_COST_PER_DAY = 3000;
 		private const int TRAFFIC_CONTROL_FREEWAY_COST_PER_DAY = 0;
 		#endregion
 

@@ -9,10 +9,10 @@
         <Tables>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="SP_RP_BSBRTableAdapter" GeneratorDataComponentClassName="SP_RP_BSBRTableAdapter" Name="SP_RP_BSBR" UserDataComponentName="SP_RP_BSBRTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="modeling_devConnectionString (Settings)" DbObjectName="MODELING_DEV.ModelAdmin.SP_RP_BSBR" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="modeling_devConnectionString (Settings)" DbObjectName="MODELING_DEV.ModelAdmin.SP_RP_BSBR" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT     dsc_id, parcel_id, divide_id, us_jelev_ft, ds_jelev_ft, frac_2swr_beg, calculated_hgl_ft, calculated_dhgl_ft, surchage_ft, flood_ref_elev_ft, 
+                    <CommandText>SELECT     dsc_id, parcel_id, divide_id, us_jelev_ft, ds_jelev_ft, frac_2swr_beg, calculated_hgl_ft, calculated_dhgl_ft, surcharge_ft, flood_ref_elev_ft, 
                       san_swr_crown_ft, storm, basin, useflag, hgl_comp_rp_id, focus_area
 FROM         SP_RP_BSBR</CommandText>
                     <Parameters />
@@ -29,14 +29,14 @@ FROM         SP_RP_BSBR</CommandText>
               <Mapping SourceColumn="frac_2swr_beg" DataSetColumn="frac_2swr_beg" />
               <Mapping SourceColumn="calculated_hgl_ft" DataSetColumn="calculated_hgl_ft" />
               <Mapping SourceColumn="calculated_dhgl_ft" DataSetColumn="calculated_dhgl_ft" />
-              <Mapping SourceColumn="surchage_ft" DataSetColumn="surchage_ft" />
+              <Mapping SourceColumn="surcharge_ft" DataSetColumn="surcharge_ft" />
               <Mapping SourceColumn="flood_ref_elev_ft" DataSetColumn="flood_ref_elev_ft" />
               <Mapping SourceColumn="san_swr_crown_ft" DataSetColumn="san_swr_crown_ft" />
               <Mapping SourceColumn="storm" DataSetColumn="storm" />
               <Mapping SourceColumn="basin" DataSetColumn="basin" />
               <Mapping SourceColumn="useflag" DataSetColumn="useflag" />
-              <Mapping SourceColumn="hgl_comp_rp_id" DataSetColumn="hgl_comp_rp_id" />
               <Mapping SourceColumn="focus_area" DataSetColumn="focus_area" />
+              <Mapping SourceColumn="hgl_comp_rp_id" DataSetColumn="hgl_comp_rp_id" />
             </Mappings>
             <Sources />
           </TableAdapter>
@@ -51,7 +51,7 @@ FROM         SP_RP_BSBR</CommandText>
         <xs:element name="SP_RP_BSBR" msprop:Generator_UserTableName="SP_RP_BSBR" msprop:Generator_RowDeletedName="SP_RP_BSBRRowDeleted" msprop:Generator_RowChangedName="SP_RP_BSBRRowChanged" msprop:Generator_RowClassName="SP_RP_BSBRRow" msprop:Generator_RowChangingName="SP_RP_BSBRRowChanging" msprop:Generator_RowEvArgName="SP_RP_BSBRRowChangeEvent" msprop:Generator_RowEvHandlerName="SP_RP_BSBRRowChangeEventHandler" msprop:Generator_TableClassName="SP_RP_BSBRDataTable" msprop:Generator_TableVarName="tableSP_RP_BSBR" msprop:Generator_RowDeletingName="SP_RP_BSBRRowDeleting" msprop:Generator_TablePropName="SP_RP_BSBR">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="dsc_id" msprop:Generator_UserColumnName="dsc_id" msprop:Generator_ColumnVarNameInTable="columndsc_id" msprop:Generator_ColumnPropNameInRow="dsc_id" msprop:Generator_ColumnPropNameInTable="dsc_idColumn" type="xs:int" />
+              <xs:element name="dsc_id" msprop:Generator_UserColumnName="dsc_id" msprop:Generator_ColumnVarNameInTable="columndsc_id" msprop:Generator_ColumnPropNameInRow="dsc_id" msprop:Generator_ColumnPropNameInTable="dsc_idColumn" type="xs:int" minOccurs="0" />
               <xs:element name="parcel_id" msprop:Generator_UserColumnName="parcel_id" msprop:Generator_ColumnVarNameInTable="columnparcel_id" msprop:Generator_ColumnPropNameInRow="parcel_id" msprop:Generator_ColumnPropNameInTable="parcel_idColumn" type="xs:int" minOccurs="0" />
               <xs:element name="divide_id" msprop:Generator_UserColumnName="divide_id" msprop:Generator_ColumnVarNameInTable="columndivide_id" msprop:Generator_ColumnPropNameInRow="divide_id" msprop:Generator_ColumnPropNameInTable="divide_idColumn" type="xs:int" minOccurs="0" />
               <xs:element name="us_jelev_ft" msprop:Generator_UserColumnName="us_jelev_ft" msprop:Generator_ColumnVarNameInTable="columnus_jelev_ft" msprop:Generator_ColumnPropNameInRow="us_jelev_ft" msprop:Generator_ColumnPropNameInTable="us_jelev_ftColumn" type="xs:decimal" minOccurs="0" />
@@ -59,7 +59,7 @@ FROM         SP_RP_BSBR</CommandText>
               <xs:element name="frac_2swr_beg" msprop:Generator_UserColumnName="frac_2swr_beg" msprop:Generator_ColumnVarNameInTable="columnfrac_2swr_beg" msprop:Generator_ColumnPropNameInRow="frac_2swr_beg" msprop:Generator_ColumnPropNameInTable="frac_2swr_begColumn" type="xs:decimal" minOccurs="0" />
               <xs:element name="calculated_hgl_ft" msprop:Generator_UserColumnName="calculated_hgl_ft" msprop:Generator_ColumnVarNameInTable="columncalculated_hgl_ft" msprop:Generator_ColumnPropNameInRow="calculated_hgl_ft" msprop:Generator_ColumnPropNameInTable="calculated_hgl_ftColumn" type="xs:decimal" minOccurs="0" />
               <xs:element name="calculated_dhgl_ft" msprop:Generator_UserColumnName="calculated_dhgl_ft" msprop:Generator_ColumnVarNameInTable="columncalculated_dhgl_ft" msprop:Generator_ColumnPropNameInRow="calculated_dhgl_ft" msprop:Generator_ColumnPropNameInTable="calculated_dhgl_ftColumn" type="xs:decimal" minOccurs="0" />
-              <xs:element name="surchage_ft" msprop:Generator_UserColumnName="surchage_ft" msprop:Generator_ColumnVarNameInTable="columnsurchage_ft" msprop:Generator_ColumnPropNameInRow="surchage_ft" msprop:Generator_ColumnPropNameInTable="surchage_ftColumn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="surcharge_ft" msprop:Generator_UserColumnName="surcharge_ft" msprop:Generator_ColumnVarNameInTable="columnsurcharge_ft" msprop:Generator_ColumnPropNameInRow="surcharge_ft" msprop:Generator_ColumnPropNameInTable="surcharge_ftColumn" type="xs:decimal" minOccurs="0" />
               <xs:element name="flood_ref_elev_ft" msprop:Generator_UserColumnName="flood_ref_elev_ft" msprop:Generator_ColumnVarNameInTable="columnflood_ref_elev_ft" msprop:Generator_ColumnPropNameInRow="flood_ref_elev_ft" msprop:Generator_ColumnPropNameInTable="flood_ref_elev_ftColumn" type="xs:decimal" minOccurs="0" />
               <xs:element name="san_swr_crown_ft" msprop:Generator_UserColumnName="san_swr_crown_ft" msprop:Generator_ColumnVarNameInTable="columnsan_swr_crown_ft" msprop:Generator_ColumnPropNameInRow="san_swr_crown_ft" msprop:Generator_ColumnPropNameInTable="san_swr_crown_ftColumn" type="xs:decimal" minOccurs="0" />
               <xs:element name="storm" msprop:Generator_UserColumnName="storm" msprop:Generator_ColumnVarNameInTable="columnstorm" msprop:Generator_ColumnPropNameInRow="storm" msprop:Generator_ColumnPropNameInTable="stormColumn" minOccurs="0">
@@ -77,14 +77,14 @@ FROM         SP_RP_BSBR</CommandText>
                 </xs:simpleType>
               </xs:element>
               <xs:element name="useflag" msprop:Generator_UserColumnName="useflag" msprop:Generator_ColumnVarNameInTable="columnuseflag" msprop:Generator_ColumnPropNameInRow="useflag" msprop:Generator_ColumnPropNameInTable="useflagColumn" type="xs:short" minOccurs="0" />
-              <xs:element name="hgl_comp_rp_id" msprop:Generator_UserColumnName="hgl_comp_rp_id" msprop:Generator_ColumnVarNameInTable="columnhgl_comp_rp_id" msprop:Generator_ColumnPropNameInRow="hgl_comp_rp_id" msprop:Generator_ColumnPropNameInTable="hgl_comp_rp_idColumn" type="xs:int" />
-              <xs:element name="focus_area" msprop:Generator_UserColumnName="focus_area" msprop:Generator_ColumnVarNameInTable="columnfocus_area" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="focus_area" msprop:Generator_ColumnPropNameInTable="focus_areaColumn" minOccurs="0">
+              <xs:element name="focus_area" msprop:Generator_UserColumnName="focus_area" msprop:nullValue="_null" msprop:Generator_ColumnVarNameInTable="columnfocus_area" msprop:Generator_ColumnPropNameInTable="focus_areaColumn" msprop:Generator_ColumnPropNameInRow="focus_area" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="25" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
+              <xs:element name="hgl_comp_rp_id" msprop:Generator_UserColumnName="hgl_comp_rp_id" msprop:Generator_ColumnPropNameInRow="hgl_comp_rp_id" msprop:Generator_ColumnVarNameInTable="columnhgl_comp_rp_id" msprop:Generator_ColumnPropNameInTable="hgl_comp_rp_idColumn" type="xs:long" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

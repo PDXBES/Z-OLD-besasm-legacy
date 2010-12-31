@@ -118,13 +118,31 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
       {
         scDS = new StormwaterControlsDataSet();
         scDS.InitStormwaterControlDataSet(modelPath);
-        scDS.InitAltTargetDataTables(alternativePath);
+      }
+
+      catch (Exception ex)
+      {
+        throw new Exception("Could not initialize StormWaterControlsDataSet from 'ModelPath': " + ex.Message, ex);
+      }
+      
+      try
+      {
         scDS.InitResultsDataTables(swmmOutputFile);
       }
       catch (Exception ex)
       {
-        throw new Exception("Could not read auxilary data 'ModelPath': " + ex.Message, ex);
+        throw new Exception("Could not read SWMM output file from 'ModelPath': " + ex.Message, ex);
       }
+      try
+      {
+        scDS.InitAltTargetDataTables(alternativePath);
+      }
+
+      catch (Exception ex)
+      {
+        throw new Exception("Could not initialize alt targets tables from 'ModelPath': " + ex.Message, ex);
+      }
+      
       finally
       {
 
