@@ -696,8 +696,13 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
               {
                 foreach (CostItemFactor ancillaryCIF in ancillaryCIFs[item])
                 {
-                  string ancillaryName = ancillaryCIF.Name.StartsWith("Boring/jacking") ?
-                    "Boring/jacking" : ancillaryCIF.Name;
+                  string ancillaryName = string.Empty;
+                  if (ancillaryCIF.Name.StartsWith("Boring/jacking"))
+                    ancillaryName = "Boring/jacking";
+                  else if (ancillaryCIF.Name.StartsWith("Microtunneling"))
+                    ancillaryName = "Microtunnel";
+                  else
+                    ancillaryName = ancillaryCIF.Name;
                   pipeCostsStream.WriteLine(string.Format("\"{4}\",{0},{1},{2},{3:#}",
                     MLinkID, USNode, DSNode, ancillaryCIF.Cost,
                     ancillaryName));

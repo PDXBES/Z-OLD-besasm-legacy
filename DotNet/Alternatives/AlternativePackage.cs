@@ -344,23 +344,37 @@ namespace SystemsAnalysis.Modeling.Alternatives
       }
     }
 
+    //creates a list of alternative park targets whose ICID do not match 
+    //an ICID in the mst_ic_ParkingTargets_ac table in the base model
     public List<int> ValidateAltParkTargets(string alternativePath)
     {
-      List<int> missingAltParkTargets = new List<int>();
-      DataAccess.AlternativeDataSetTableAdapters.AltParkingTargetsTableAdapter altParkTargetsAdapter =
-        new SystemsAnalysis.DataAccess.AlternativeDataSetTableAdapters.AltParkingTargetsTableAdapter(alternativePath);
-      DataAccess.AlternativeDataSet.AltParkingTargetsDataTable altParkTargetsTable =
-        new SystemsAnalysis.DataAccess.AlternativeDataSet.AltParkingTargetsDataTable();
-      altParkTargetsAdapter.Fill(altParkTargetsTable);
-      altParkingTargets = new Dictionary<int, ParkingTarget>();
-      foreach (DataAccess.AlternativeDataSet.AltParkingTargetsRow row in altParkTargetsTable)
+      try
       {
-        if (!baseModel.ModelParkingTargets.ContainsKey(row.ICID))
+        List<int> missingAltParkTargets = new List<int>();
+        DataAccess.AlternativeDataSetTableAdapters.AltParkingTargetsTableAdapter altParkTargetsAdapter =
+          new SystemsAnalysis.DataAccess.AlternativeDataSetTableAdapters.AltParkingTargetsTableAdapter(alternativePath);
+        DataAccess.AlternativeDataSet.AltParkingTargetsDataTable altParkTargetsTable =
+          new SystemsAnalysis.DataAccess.AlternativeDataSet.AltParkingTargetsDataTable();
+        altParkTargetsAdapter.Fill(altParkTargetsTable);
+        altParkingTargets = new Dictionary<int, ParkingTarget>();
+        foreach (DataAccess.AlternativeDataSet.AltParkingTargetsRow row in altParkTargetsTable)
         {
-          missingAltParkTargets.Add(row.ICID);
+          if (!baseModel.ModelParkingTargets.ContainsKey(row.ICID))
+          {
+            missingAltParkTargets.Add(row.ICID);
+          }
         }
+        return missingAltParkTargets;
       }
-      return missingAltParkTargets;
+      catch (Exception ex)
+      {
+        throw new Exception("Error validating AltParkTargets: " + ex.Message);
+      }
+
+      finally
+      {
+        
+      }
     }  
     void LoadAltParkingTargets(string alternativePath)
     {
@@ -393,11 +407,15 @@ namespace SystemsAnalysis.Modeling.Alternatives
       }
     }
 
+    //creates a list of alternative roof targets whose ICID do not match 
+    //an ICID in the mst_ic_RoofTargets_ac table in the base model
     public List<int> ValidateAltRoofTargets(string alternativePath)
     {
-      List<int> missingAltRoofTargets = new List<int>();
-      DataAccess.AlternativeDataSetTableAdapters.AltRoofTargetsTableAdapter altRoofTargetsAdapter =
-          new SystemsAnalysis.DataAccess.AlternativeDataSetTableAdapters.AltRoofTargetsTableAdapter(alternativePath);
+      try
+      {
+        List<int> missingAltRoofTargets = new List<int>();
+        DataAccess.AlternativeDataSetTableAdapters.AltRoofTargetsTableAdapter altRoofTargetsAdapter =
+            new SystemsAnalysis.DataAccess.AlternativeDataSetTableAdapters.AltRoofTargetsTableAdapter(alternativePath);
         DataAccess.AlternativeDataSet.AltRoofTargetsDataTable altRoofTargetsTable =
           new SystemsAnalysis.DataAccess.AlternativeDataSet.AltRoofTargetsDataTable();
 
@@ -409,9 +427,21 @@ namespace SystemsAnalysis.Modeling.Alternatives
           if (!baseModel.ModelRoofTargets.ContainsKey(row.ICID))
           {
             missingAltRoofTargets.Add(row.ICID);
-          }          
+          }
         }
         return missingAltRoofTargets;
+      }
+
+      catch (Exception ex)
+      {
+        throw new Exception("Error validating AltRoofTargets: " + ex.Message);
+      }
+
+      finally
+      {
+
+      }
+
     }
     void LoadAltRoofTargets(string alternativePath)
     {
@@ -443,27 +473,36 @@ namespace SystemsAnalysis.Modeling.Alternatives
       }
     }
 
+    //creates a list of alternative street targets whose ICID do not match 
+    //an ICID in the mst_ic_StreetTargets_ac table in the base model
     public List<int> ValidateAltStreetTargets(string alternativePath)
     {
-      List<int> missingAltStreetTargets = new List<int>();
-      DataAccess.AlternativeDataSetTableAdapters.AltStreetTargetsTableAdapter altStreetTargetsAdapter =
-        new SystemsAnalysis.DataAccess.AlternativeDataSetTableAdapters.AltStreetTargetsTableAdapter(alternativePath);
-      DataAccess.AlternativeDataSet.AltStreetTargetsDataTable altStreetTargetsTable =
-        new SystemsAnalysis.DataAccess.AlternativeDataSet.AltStreetTargetsDataTable();
-
-      altStreetTargetsAdapter.Fill(altStreetTargetsTable);
-
-      altStreetTargets = new Dictionary<int, StreetTarget>();
-      foreach (DataAccess.AlternativeDataSet.AltStreetTargetsRow row in altStreetTargetsTable)
+      try
       {
-        if (!baseModel.ModelStreetTargets.ContainsKey(row.ICID))
+        List<int> missingAltStreetTargets = new List<int>();
+        DataAccess.AlternativeDataSetTableAdapters.AltStreetTargetsTableAdapter altStreetTargetsAdapter =
+          new SystemsAnalysis.DataAccess.AlternativeDataSetTableAdapters.AltStreetTargetsTableAdapter(alternativePath);
+        DataAccess.AlternativeDataSet.AltStreetTargetsDataTable altStreetTargetsTable =
+          new SystemsAnalysis.DataAccess.AlternativeDataSet.AltStreetTargetsDataTable();
+
+        altStreetTargetsAdapter.Fill(altStreetTargetsTable);
+
+        altStreetTargets = new Dictionary<int, StreetTarget>();
+        foreach (DataAccess.AlternativeDataSet.AltStreetTargetsRow row in altStreetTargetsTable)
         {
-          missingAltStreetTargets.Add(row.ICID);
+          if (!baseModel.ModelStreetTargets.ContainsKey(row.ICID))
+          {
+            missingAltStreetTargets.Add(row.ICID);
+          }
         }
+        return missingAltStreetTargets;
       }
-      return missingAltStreetTargets;
-    }
-    
+
+      catch (Exception ex)
+      {
+        throw new Exception("Error validating AltStreetTargets: " + ex.Message);
+      }
+    }   
     void LoadAltStreetTargets(string alternativePath)
     {
       try

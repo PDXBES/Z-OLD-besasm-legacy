@@ -35,6 +35,10 @@
           this.lblVersionInfo = new Infragistics.Win.Misc.UltraLabel();
           this.SuspendLayout();
           // 
+          // tmrSplashScreen
+          // 
+          this.tmrSplashScreen.Tick += new System.EventHandler(this.tmrSplashScreen_Tick);
+          // 
           // lblVersionInfo
           // 
           appearance2.BackColor = System.Drawing.Color.Transparent;
@@ -43,10 +47,10 @@
           this.lblVersionInfo.Location = new System.Drawing.Point(178, 237);
           this.lblVersionInfo.Name = "lblVersionInfo";
           this.lblVersionInfo.Size = new System.Drawing.Size(172, 23);
-          this.lblVersionInfo.TabIndex = 1;
+          this.lblVersionInfo.TabIndex = 0;
           this.lblVersionInfo.Text = "Version X.X, January 1st, 2000";
           // 
-          // SplashScreen
+          // frmSplashScreen
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
           this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -57,12 +61,13 @@
           this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
           this.MaximizeBox = false;
           this.MinimizeBox = false;
-          this.Name = "SplashScreen";
+          this.Name = "frmSplashScreen";
           this.ShowInTaskbar = false;
           this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
           this.Text = "SplashScreen";
           this.TopMost = true;
-          this.Load += new System.EventHandler(this.SplashScreen_Load);
+          this.Load += new System.EventHandler(this.frmSplashScreen_Load);
+          this.Click += new System.EventHandler(this.frmSplashScreen_Click);
           this.ResumeLayout(false);
 
         }

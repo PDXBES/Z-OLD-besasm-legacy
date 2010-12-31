@@ -13,8 +13,8 @@
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <ManifestCertificateThumbprint>627E8E8C31AC64218419727A20D1AFB4FB826838</ManifestCertificateThumbprint>
-    <ManifestKeyFile>DSCUpdater_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestCertificateThumbprint>B539E92D44F29042207D53CD9203958253EF676E</ManifestCertificateThumbprint>
+    <ManifestKeyFile>DSCUpdater_1_TemporaryKey.pfx</ManifestKeyFile>
     <GenerateManifests>true</GenerateManifests>
     <SignManifests>true</SignManifests>
     <PublishUrl>\\Cassio\ASM_Apps\Apps\DSCUpdater\</PublishUrl>
@@ -29,7 +29,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>DSCUpdaterPublish.htm</WebPage>
-    <ApplicationRevision>27</ApplicationRevision>
+    <ApplicationRevision>29</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -82,10 +82,6 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="Infragistics2.Shared.v10.1, Version=10.1.20101.1007, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files\Infragistics\NetAdvantage 2010.1\Windows Forms\Bin\Infragistics2.Shared.v10.1.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion>
-    </Reference>
     <Reference Include="Infragistics2.Win.Misc.v10.1, Version=10.1.20101.1007, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL">
       <HintPath>C:\Program Files\Infragistics\NetAdvantage 2010.1\Windows Forms\Bin\Infragistics2.Win.Misc.v10.1.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
@@ -166,7 +162,6 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="app.config" />
-    <None Include="DSCUpdater_TemporaryKey.pfx" />
     <None Include="ProjectDataSet.xsc">
       <DependentUpon>ProjectDataSet.xsd</DependentUpon>
     </None>
@@ -271,6 +266,7 @@
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="DSCUpdater_TemporaryKey.pfx" />
     <None Include="FfeIcon.jpg" />
     <Content Include="Template\test_db.mdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -288,16 +284,6 @@
   </ItemGroup>
   <ItemGroup>
     <PublishFile Include="Infragistics2.Documents.v10.1">
-      <Visible>False</Visible>
-      <Group>
-      </Group>
-      <TargetPath>
-      </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
-      <FileType>Assembly</FileType>
-    </PublishFile>
-    <PublishFile Include="Infragistics2.Shared.v10.1">
       <Visible>False</Visible>
       <Group>
       </Group>

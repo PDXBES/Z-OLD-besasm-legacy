@@ -1,6 +1,11 @@
 ﻿
 #region Using Directives
 
+using Microsoft.SqlServer.Server;
+using Microsoft.SqlServer;
+using Microsoft.Office;
+using Microsoft.VisualBasic;
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,18 +21,16 @@ using System.Data.Sql;
 using System.Data.SqlClient;
 using System.Data.SqlTypes;
 using System.Data.SqlServerCe;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Drawing;
+using System.Security.Principal;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Windows.Forms;
-using System.IO;
-using System.Security.Principal;
-using Microsoft.SqlServer.Server;
-using Microsoft.SqlServer;
-using Microsoft.Office;
-using Microsoft.VisualBasic;
+
 using SystemsAnalysis.DataAccess;
 using SystemsAnalysis.Utils.AccessUtils;
 
@@ -80,15 +83,53 @@ namespace DSCUpdater
      */
     #endregion
 
-#region Declarations
-    ArrayList arrTables;
-#endregion
+    #region Declarations
+      ArrayList arrTables;
+  #endregion
 
     public frmMain()
     {
+      Thread thread = new Thread(DoSplash);
+      thread.Start();
+      this.Hide();
       InitializeComponent();
     }
 
+    private static void DoSplash()
+    {
+      DoSplash(false);
+    }
+
+    private static void DoSplash(bool waitForClick)
+    {
+      string versionText = "x.x.x.x";
+      string dateText = "1/1/1900";
+      if (System.Deployment.Application.ApplicationDeployment.IsNetworkDeployed)
+      {
+        Version v = System.Deployment.Application.ApplicationDeployment.CurrentDeployment.CurrentVersion;
+        versionText =v.Major + "." + v.Minor + "." + v.Build + "." + v.Revision;
+        dateText = File.GetLastWriteTime(System.Reflection.Assembly.GetExecutingAssembly().Location).ToString("MMMM dd yyyy");
+      }
+      else
+      {
+        System.Reflection.AssemblyName assemblyName = 
+          System.Reflection.Assembly.GetExecutingAssembly().GetName(false);
+        int minorVersion = assemblyName.Version.Minor;
+        int majorVersion = assemblyName.Version.Major;
+        int build = assemblyName.Version.Build;
+        int revision = assemblyName.Version.Revision;
+        versionText = string.Format("{0}.{1}.{2}.{3}",majorVersion,minorVersion,build,revision);
+
+        FileInfo fi = new FileInfo("DSCUpdater.exe");
+        dateText = fi.CreationTime.Date.ToString("MMMM dd yyyy");
+
+        using (frmSplashScreen frmSp = new frmSplashScreen(versionText,dateText))
+        {
+          frmSp.ShowDialog(waitForClick);
+        }
+      }
+    }
+    
     private int SetProgress
     {
       get
@@ -1265,7 +1306,7 @@ namespace DSCUpdater
       }
     }
 
-    public static void ExportToCSV(DataTable dt, string strFilePath, string fileName)
+    public static void ExportToCsv(DataTable dt, string strFilePath, string fileName)
     {
       var sw = new StreamWriter(strFilePath + fileName, false);
 
@@ -1302,6 +1343,98 @@ namespace DSCUpdater
       }
 
       sw.Close();
+    }
+
+    #region events
+    public void frmMain_Load(object sender, EventArgs e)
+    {
+      SetStatus("Ready");
+      try
+      {
+        Cursor = Cursors.WaitCursor;
+        statusBarMain.Panels["dscEditorConnection"].Text = "Dsc Editor: " + ConnectionStringSummary(Properties.Settings.Default.DscEditorConnectionString);
+        statusBarMain.Panels["masterDataConnection"].Text = "Master Data: " + ConnectionStringSummary(Properties.Settings.Default.MasterDataConnectionString);
+
+        // TODO: This line of code loads data into the 'ProjectDataSet.DSCEDIT' table. You can move, or remove it, as needed.
+        projectDataSet.EnforceConstraints = false;
+        //this.dSCEDITTableAdapter.Fill(this.ProjectDataSet.DSCEDIT);
+        // TODO: This line of code loads data into the 'ProjectDataSet.SESSION' table. You can move, or remove it, as needed.
+        this.sessionTableAdapter.Fill(this.projectDataSet.SESSION);
+
+        //Initialize date range of assessment calendar
+        DateTime retrofitsStartDate =
+            (from s in projectDataSet.SESSION
+             select s.edit_date).Max();
+        DateTime retrofitsEndDate = System.DateTime.Now;
+
+        clndrRetrofitsChangesStart.Value = retrofitsStartDate;
+        clndrRetrofitsChangesEnd.Value = retrofitsEndDate;
+
+        updaterHistoryBindingNav.BindingSource = sessionBindingSource;
+      }
+      catch (SqlException sqlException)
+      {
+        MessageBox.Show(sqlException.Message + "\n" + "Please specify server and database connection parameters on the Database Connection Options tab.", "DSCUpdater: SQL Exception Thrown", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        UpdateDscEditorConnection();
+      }
+      catch (Exception ex)
+      {
+
+      }
+      finally
+      {
+        Cursor = Cursors.Default;
+        SetStatus("Ready");
+      }
+    }
+
+    private void expBarMain_ItemClick(object sender, Infragistics.Win.UltraWinExplorerBar.ItemEventArgs e)
+    {
+      LoadTab(e.Item.Key);
+    }
+
+    private void tabControlMain_SelectedTabChanged(object sender, Infragistics.Win.UltraWinTabControl.SelectedTabChangedEventArgs e)
+    {
+      this.Text = "DSC Updater";
+      if (e.Tab != null)
+      {
+        this.Text = this.Text + " - " + e.Tab.Text;
+      }
+    }
+
+    private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+      string fi;
+      fi = @"\\Cassio\asm_apps\Apps\DSCUpdater\DSCUpdaterPublish.htm";
+      System.Diagnostics.Process.Start("IEXPLORE.EXE", fi);
+    }
+
+    private void openViewConnectionToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+      UpdateFfeDataConnection();
+    }
+
+    private void loadDataForCurrentConnectionToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+      // get tables
+      StoreTableNames();
+
+      // clear internal list
+      lstFfeDbTables.Items.Clear();
+
+      //update the list
+      lstFfeDbTables.Items.AddRange(arrTables.ToArray());
+    }
+
+    private void closeToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+      RestartUpdate();
+    }
+
+    private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+      Application.Exit();
+      //TO-DO: change DSCUpdaterConfig.xml file DB connection settings back to default
     }
 
     private void btnCancel_Click(object sender, EventArgs e)
@@ -1805,6 +1938,34 @@ namespace DSCUpdater
       //TODO: Update text fields to reflect current selected data grid row.
     }
 
+    private void btnRevertSession_Click(object sender, EventArgs e)
+    {
+      //BatchRevertICEdits();
+    }
+
+    private void btnSubmitUpdaterEditorChanges_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    private void btnUpdaterEditorCloseCancel_Click(object sender, EventArgs e)
+
+    {
+      RestartUpdate();
+    }
+
+    private void clndrRetrofitsChangesStart_ValueChanged(object sender, EventArgs e)
+    {
+      retrofitsStartDate = clndrRetrofitsChangesStart.Value;
+      //MessageBox.Show("Start"+Convert.ToString(clndrRetrofitsChangesStart.Value)); 
+    }
+
+    private void clndrRetrofitsChangesEnd_ValueChanged(object sender, EventArgs e)
+    {
+      retrofitsEndDate = clndrRetrofitsChangesEnd.Value;
+      //MessageBox.Show("End"+Convert.ToString(clndrRetrofitsChangesEnd.Value));
+    }
+    
     private void btnViewNewRetroAssessments_Click(object sender, EventArgs e)
     {
       if (Convert.ToString(dgvIncomingRetroChanges.DataSource) != "")
@@ -1822,75 +1983,75 @@ namespace DSCUpdater
 
         SystemsAnalysis.DataAccess.RetrofitsDataSetTableAdapters.SiteAssessmentTableAdapter assessmentTA;
         assessmentTA = new SystemsAnalysis.DataAccess.RetrofitsDataSetTableAdapters.SiteAssessmentTableAdapter();
-        assessmentTA.FilterFillSiteAssessment(rDS.SiteAssessment, clndrRetrofitsChangesStart.Value, clndrRetrofitsChangesEnd.Value);   
+        assessmentTA.FilterFillSiteAssessment(rDS.SiteAssessment, clndrRetrofitsChangesStart.Value, clndrRetrofitsChangesEnd.Value);
 
         //QRY_USERFRIENDLYTableAdapter qryUserFriendlyTA;
         //qryUserFriendlyTA = new SystemsAnalysis.DataAccess.RetrofitsDataSetTableAdapters.QRY_USERFRIENDLYTableAdapter();
         //qryUserFriendlyTA.FillByDateRange(rDS.QRY_USERFRIENDLY, clndrRetrofitsChanges.SelectionStart, clndrRetrofitsChanges.SelectionEnd);
 
-          IEnumerable<int> qrySiteAssessMentsCount =
-            from r in rDS.SiteAssessment
-            where r.startDate >= retrofitsStartDate && r.endDate <= retrofitsEndDate
-            select r.site_assessment_id;
+        IEnumerable<int> qrySiteAssessMentsCount =
+          from r in rDS.SiteAssessment
+          where r.startDate >= retrofitsStartDate && r.endDate <= retrofitsEndDate
+          select r.site_assessment_id;
 
-          newSiteAssessmentsCount = qrySiteAssessMentsCount.Count();
+        newSiteAssessmentsCount = qrySiteAssessMentsCount.Count();
 
-          if (newSiteAssessmentsCount > 0)
+        if (newSiteAssessmentsCount > 0)
+        {
+          assessment = rDS.SiteAssessment;
+          EnumerableRowCollection<DataRow> qrySelectNewSiteAssessmentRecords =
+          (from r in assessment.AsEnumerable()
+           where r.Field<DateTime>("startDate") >= retrofitsStartDate && r.Field<DateTime>("endDate") <= System.DateTime.Now
+           select r);
+
+          //assessment = rDS.Tables["SITE_ASSESSMENT"];
+          //EnumerableRowCollection<DataRow> qrySelectNewSiteAssessmentRecords =
+          //(from r in assessment.AsEnumerable()
+          // where r.Field<DateTime>("update_date") >= retrofitsStartDate && r.Field<DateTime>("update_date") <= System.DateTime.Now
+          // select r);
+
+          assessmentDataView = qrySelectNewSiteAssessmentRecords.AsDataView();
+
+          DataTable siteAssessmentsDataTable = assessmentDataView.Table.Clone();
+          foreach (DataRowView drv in assessmentDataView)
           {
-            assessment = rDS.SiteAssessment;
-            EnumerableRowCollection<DataRow> qrySelectNewSiteAssessmentRecords =
-            (from r in assessment.AsEnumerable()
-             where r.Field<DateTime>("startDate") >= retrofitsStartDate && r.Field<DateTime>("endDate") <= System.DateTime.Now
-             select r);
-            
-            //assessment = rDS.Tables["SITE_ASSESSMENT"];
-            //EnumerableRowCollection<DataRow> qrySelectNewSiteAssessmentRecords =
-            //(from r in assessment.AsEnumerable()
-            // where r.Field<DateTime>("update_date") >= retrofitsStartDate && r.Field<DateTime>("update_date") <= System.DateTime.Now
-            // select r);
-
-            assessmentDataView = qrySelectNewSiteAssessmentRecords.AsDataView();
-
-            DataTable siteAssessmentsDataTable = assessmentDataView.Table.Clone();
-            foreach (DataRowView drv in assessmentDataView)
-            {
-              siteAssessmentsDataTable.ImportRow(drv.Row);
-            }
-
-            siteAssessmentsDataTable.Columns[0].ColumnName = "Property Id";
-            siteAssessmentsDataTable.Columns[5].ColumnName = "Hansen Id";
-            siteAssessmentsDataTable.Columns[6].ColumnName = "Management Type";
-            siteAssessmentsDataTable.Columns[7].ColumnName = "Area Type";
-            siteAssessmentsDataTable.Columns[8].ColumnName = "Destination Type";
-            siteAssessmentsDataTable.Columns[9].ColumnName = "Facility Type";
-            siteAssessmentsDataTable.Columns[10].ColumnName = "Update Date";
-            siteAssessmentsDataTable.PrimaryKey = null;
-            siteAssessmentsDataTable.Columns.Remove("ia_type_id");
-            siteAssessmentsDataTable.Columns.Remove("destination_id");
-            siteAssessmentsDataTable.Columns.Remove("management_id");
-            siteAssessmentsDataTable.Columns.Remove("facility_type_id");
-            siteAssessmentsDataTable.Columns.Remove("endDate");
-            siteAssessmentsDataTable.Columns.Remove("site_assessment_id");
-            siteAssessmentsDataTable.AcceptChanges();
-            
-            retroBindingSource.DataSource = siteAssessmentsDataTable;
-            
-            dgvIncomingRetroChanges.DataSource = retroBindingSource;
-            dgvIncomingRetroChanges.AutoResizeColumns();
-            
-            lblNewRetroSiteAssessments.Text = "New Site Assessments: " + Convert.ToString(newSiteAssessmentsCount);
-            MessageBox.Show("Current new site assessments list shows changes since " + Convert.ToString(retrofitsStartDate) + ". To change the date range, choose a start date on the calendar and re-click on the 'View New Site Assessments' button.");
-
-            ExportToCSV(siteAssessmentsDataTable, "c:\\temp\\", "SiteAssessments.csv");
-            btnExportToTemplate.Visible = true;
-            return;
+            siteAssessmentsDataTable.ImportRow(drv.Row);
           }
 
-          else
-          {
-            MessageBox.Show("No new site assessments added to RETRO database since " + retrofitsStartDate + ". Try the using the calendar to find potential ICs within specific time period.", "No Site Assesments within Date Range", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            return;
-          }
+          siteAssessmentsDataTable.Columns[0].ColumnName = "Property Id";
+          siteAssessmentsDataTable.Columns[5].ColumnName = "Hansen Id";
+          siteAssessmentsDataTable.Columns[6].ColumnName = "Management Type";
+          siteAssessmentsDataTable.Columns[7].ColumnName = "Area Type";
+          siteAssessmentsDataTable.Columns[8].ColumnName = "Destination Type";
+          siteAssessmentsDataTable.Columns[9].ColumnName = "Facility Type";
+          siteAssessmentsDataTable.Columns[10].ColumnName = "Update Date";
+          siteAssessmentsDataTable.PrimaryKey = null;
+          siteAssessmentsDataTable.Columns.Remove("ia_type_id");
+          siteAssessmentsDataTable.Columns.Remove("destination_id");
+          siteAssessmentsDataTable.Columns.Remove("management_id");
+          siteAssessmentsDataTable.Columns.Remove("facility_type_id");
+          siteAssessmentsDataTable.Columns.Remove("endDate");
+          siteAssessmentsDataTable.Columns.Remove("site_assessment_id");
+          siteAssessmentsDataTable.AcceptChanges();
+
+          retroBindingSource.DataSource = siteAssessmentsDataTable;
+
+          dgvIncomingRetroChanges.DataSource = retroBindingSource;
+          dgvIncomingRetroChanges.AutoResizeColumns();
+
+          lblNewRetroSiteAssessments.Text = "New Site Assessments: " + Convert.ToString(newSiteAssessmentsCount);
+          MessageBox.Show("Current new site assessments list shows changes since " + Convert.ToString(retrofitsStartDate) + ". To change the date range, choose a start date on the calendar and re-click on the 'View New Site Assessments' button.");
+
+          ExportToCsv(siteAssessmentsDataTable, "c:\\temp\\", "SiteAssessments.csv");
+          btnExportToTemplate.Visible = true;
+          return;
+        }
+
+        else
+        {
+          MessageBox.Show("No new site assessments added to RETRO database since " + retrofitsStartDate + ". Try the using the calendar to find potential ICs within specific time period.", "No Site Assesments within Date Range", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+          return;
+        }
       }
       catch (Exception ex)
       {
@@ -1917,77 +2078,77 @@ namespace DSCUpdater
         opportunityTA = new SystemsAnalysis.DataAccess.RetrofitsDataSetTableAdapters.SiteOpportunityTableAdapter();
         opportunityTA.FilterFillSiteOpportunity(rDS.SiteOpportunity, clndrRetrofitsChangesStart.Value, clndrRetrofitsChangesEnd.Value);
 
-          IEnumerable<int> qryNewIcTargetsCount =
-            from r in rDS.SiteOpportunity
-            where r.startDate >= retrofitsStartDate
-            && r.endDate <= retrofitsEndDate
-            && (r.opportunity_feasibility == 1 || r.opportunity_feasibility == 2)
-            select r.site_opportunity_id;
+        IEnumerable<int> qryNewIcTargetsCount =
+          from r in rDS.SiteOpportunity
+          where r.startDate >= retrofitsStartDate
+          && r.endDate <= retrofitsEndDate
+          && (r.opportunity_feasibility == 1 || r.opportunity_feasibility == 2)
+          select r.site_opportunity_id;
 
-          newIcTargetsCount = qryNewIcTargetsCount.Count();
+        newIcTargetsCount = qryNewIcTargetsCount.Count();
 
-          if (newIcTargetsCount > 0)
+        if (newIcTargetsCount > 0)
+        {
+          opportunity = rDS.SiteOpportunity;
+
+          EnumerableRowCollection<DataRow> qrySelectNewIcTargetsRecords =
+            (from r in opportunity.AsEnumerable()
+             where r.Field<DateTime>("startDate") >= retrofitsStartDate
+             && r.Field<DateTime>("endDate") <= retrofitsEndDate
+             && (r.Field<int>("opportunity_feasibility") == 1 || r.Field<int>("opportunity_feasibility") == 2)
+             select r);
+
+          icTargetsDataView = qrySelectNewIcTargetsRecords.AsDataView();
+
+          DataTable potentialICsDataTable = icTargetsDataView.Table.Clone();
+          foreach (DataRowView drv in icTargetsDataView)
           {
-            opportunity = rDS.SiteOpportunity;
-
-            EnumerableRowCollection<DataRow> qrySelectNewIcTargetsRecords =
-              (from r in opportunity.AsEnumerable()
-               where r.Field<DateTime>("startDate") >= retrofitsStartDate
-               && r.Field<DateTime>("endDate") <= retrofitsEndDate
-               && (r.Field<int>("opportunity_feasibility") == 1 || r.Field<int>("opportunity_feasibility") == 2)
-               select r);
-
-            icTargetsDataView = qrySelectNewIcTargetsRecords.AsDataView();
-
-            DataTable potentialICsDataTable = icTargetsDataView.Table.Clone();
-            foreach (DataRowView drv in icTargetsDataView)
-            {
-              potentialICsDataTable.ImportRow(drv.Row);
-            }
-            
-            potentialICsDataTable.Columns[0].ColumnName = "Property Id";
-            potentialICsDataTable.Columns[1].ColumnName = "Imp Area SqFt";
-            potentialICsDataTable.Columns[4].ColumnName = "Facility Type";
-            potentialICsDataTable.Columns[5].ColumnName = "Management Type";
-            potentialICsDataTable.Columns[6].ColumnName = "Modified Date";
-
-            potentialICsDataTable.PrimaryKey = null;
-            potentialICsDataTable.Columns.Remove("opportunity_feasibility");
-            potentialICsDataTable.Columns.Remove("site_opportunity_id");
-            potentialICsDataTable.Columns.Remove("endDate");
-            
-            potentialICsDataTable.AcceptChanges();
-
-            retroBindingSource.DataSource = potentialICsDataTable;
-            dgvIncomingRetroChanges.DataSource = retroBindingSource;
-            dgvIncomingRetroChanges.AutoResizeColumns();
-            
-            lblNewRetroIcTargets.Text = "New IC Targets: " + Convert.ToString(newIcTargetsCount);
-            MessageBox.Show("Current new potential ICs list shows changes since previous potential ICs update which occured on " + Convert.ToString(retrofitsStartDate)); 
-          
-            //TO-DO: join the icTargetsDataView to the SITE table on site_id to get property_id
-            //property_id will be returned in the exported "PotentialICs" table which the technician
-            //will use as reference for digitizing new IC alt targets
-
-            //TO-DO: also look to join other fields (such as ia_type_id from IMPERVIOUS_AREA_TYPE, management_id
-            //from MANAGEMENT, facility_type_id from FACILITY_TYPE, and opportunity_feasibility from OPPORTUNITY_FEASIBILITY)
-            //in order to provide actual descriptions of what each field means (e.g., facility_type_id 1 = "Infiltration", management_id 4 = "Rain Garden")
-            //Note: definition/description for opportunity_feasibility_id may not be needed since this won't affect the formatted IC alt record-it would only 
-            //serve as supplemental information.
-
-            //TO-DO: look at dropping some fields from the exported user file such as: update_by, update_date, opportunity_feasibility, etc.  These fields
-            //would only act as supplemental info and are not necessary for digitizing the IC alt record.
-
-            ExportToCSV(potentialICsDataTable, "c:\\temp\\", "PotentialICs.csv");
-
-            return;
+            potentialICsDataTable.ImportRow(drv.Row);
           }
-          else
-          {
-            MessageBox.Show("No new potential IC targets added to RETRO database since " + retrofitsStartDate + ". Try the using the calendar to find potential ICs within specific time period.", "No Potential ICs within Date Range", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            return;
-          }
+
+          potentialICsDataTable.Columns[0].ColumnName = "Property Id";
+          potentialICsDataTable.Columns[1].ColumnName = "Imp Area SqFt";
+          potentialICsDataTable.Columns[4].ColumnName = "Facility Type";
+          potentialICsDataTable.Columns[5].ColumnName = "Management Type";
+          potentialICsDataTable.Columns[6].ColumnName = "Modified Date";
+
+          potentialICsDataTable.PrimaryKey = null;
+          potentialICsDataTable.Columns.Remove("opportunity_feasibility");
+          potentialICsDataTable.Columns.Remove("site_opportunity_id");
+          potentialICsDataTable.Columns.Remove("endDate");
+
+          potentialICsDataTable.AcceptChanges();
+
+          retroBindingSource.DataSource = potentialICsDataTable;
+          dgvIncomingRetroChanges.DataSource = retroBindingSource;
+          dgvIncomingRetroChanges.AutoResizeColumns();
+
+          lblNewRetroIcTargets.Text = "New IC Targets: " + Convert.ToString(newIcTargetsCount);
+          MessageBox.Show("Current new potential ICs list shows changes since previous potential ICs update which occured on " + Convert.ToString(retrofitsStartDate));
+
+          //TO-DO: join the icTargetsDataView to the SITE table on site_id to get property_id
+          //property_id will be returned in the exported "PotentialICs" table which the technician
+          //will use as reference for digitizing new IC alt targets
+
+          //TO-DO: also look to join other fields (such as ia_type_id from IMPERVIOUS_AREA_TYPE, management_id
+          //from MANAGEMENT, facility_type_id from FACILITY_TYPE, and opportunity_feasibility from OPPORTUNITY_FEASIBILITY)
+          //in order to provide actual descriptions of what each field means (e.g., facility_type_id 1 = "Infiltration", management_id 4 = "Rain Garden")
+          //Note: definition/description for opportunity_feasibility_id may not be needed since this won't affect the formatted IC alt record-it would only 
+          //serve as supplemental information.
+
+          //TO-DO: look at dropping some fields from the exported user file such as: update_by, update_date, opportunity_feasibility, etc.  These fields
+          //would only act as supplemental info and are not necessary for digitizing the IC alt record.
+
+          ExportToCsv(potentialICsDataTable, "c:\\temp\\", "PotentialICs.csv");
+
+          return;
         }
+        else
+        {
+          MessageBox.Show("No new potential IC targets added to RETRO database since " + retrofitsStartDate + ". Try the using the calendar to find potential ICs within specific time period.", "No Potential ICs within Date Range", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+          return;
+        }
+      }
 
       catch (Exception ex)
       {
@@ -2056,7 +2217,7 @@ namespace DSCUpdater
           constructedICsDataTable.Columns.Remove("project_id");
 
           constructedICsDataTable.AcceptChanges();
-          
+
           retroBindingSource.DataSource = constructedICsDataTable;
           dgvIncomingRetroChanges.DataSource = retroBindingSource;
           dgvIncomingRetroChanges.AutoResizeColumns();
@@ -2077,7 +2238,7 @@ namespace DSCUpdater
           //infiltration_rate, project_status_id, update_by, update_date, opportunity_feasibility, etc.  These fields
           //would only act as supplemental info and are not necessary for digitizing the IC alt record.
 
-          ExportToCSV(constructedICsDataTable, "c:\\temp\\", "ConstructedICs.csv");
+          ExportToCsv(constructedICsDataTable, "c:\\temp\\", "ConstructedICs.csv");
           return;
         }
 
@@ -2274,6 +2435,11 @@ namespace DSCUpdater
       }
     }
 
+    private void btnRunFfeUpdates_Click(object sender, EventArgs e)
+    {
+      RunFfeUpdates();
+    }
+    
     private void btnExportErrors_Click(object sender, EventArgs e)
     {
       throw new NotImplementedException();
@@ -2282,80 +2448,6 @@ namespace DSCUpdater
     private void btnUpdateErrorCancel_Click(object sender, EventArgs e)
     {
       RestartUpdate();
-    }
-
-    public void frmMain_Load(object sender, EventArgs e)
-    {
-      SetStatus("Ready");
-      try
-      {
-        Cursor = Cursors.WaitCursor;
-        statusBarMain.Panels["dscEditorConnection"].Text = "Dsc Editor: " + ConnectionStringSummary(Properties.Settings.Default.DscEditorConnectionString);
-        statusBarMain.Panels["masterDataConnection"].Text = "Master Data: " + ConnectionStringSummary(Properties.Settings.Default.MasterDataConnectionString);
-
-        // TODO: This line of code loads data into the 'ProjectDataSet.DSCEDIT' table. You can move, or remove it, as needed.
-        projectDataSet.EnforceConstraints = false;
-        //this.dSCEDITTableAdapter.Fill(this.ProjectDataSet.DSCEDIT);
-        // TODO: This line of code loads data into the 'ProjectDataSet.SESSION' table. You can move, or remove it, as needed.
-        this.sessionTableAdapter.Fill(this.projectDataSet.SESSION);
-
-        //Initialize date range of assessment calendar
-        DateTime retrofitsStartDate =
-            (from s in projectDataSet.SESSION
-             select s.edit_date).Max();
-        DateTime retrofitsEndDate = System.DateTime.Now;
-
-        clndrRetrofitsChangesStart.Value = retrofitsStartDate;
-        clndrRetrofitsChangesEnd.Value= retrofitsEndDate;
-
-        updaterHistoryBindingNav.BindingSource = sessionBindingSource;
-      }
-      catch (SqlException sqlException)
-      {
-        MessageBox.Show(sqlException.Message + "\n" + "Please specify server and database connection parameters on the Database Connection Options tab.", "DSCUpdater: SQL Exception Thrown", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        UpdateDscEditorConnection();
-      }
-      catch (Exception ex)
-      {
-
-      }
-      finally
-      {
-        Cursor = Cursors.Default;
-        SetStatus("Ready");
-      }
-    }
-
-    private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
-    {
-
-    }
-
-    private void expBarMain_ItemClick(object sender, Infragistics.Win.UltraWinExplorerBar.ItemEventArgs e)
-    {
-      LoadTab(e.Item.Key);
-    }
-
-    private void tabControlMain_SelectedTabChanged(object sender, Infragistics.Win.UltraWinTabControl.SelectedTabChangedEventArgs e)
-    {
-      this.Text = "DSC Updater";
-      if (e.Tab != null)
-      {
-        this.Text = this.Text + " - " + e.Tab.Text;
-      }
-    }
-
-    private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
-    {
-      string fi;
-      fi = @"\\Cassio\asm_apps\Apps\DSCUpdater\DSCUpdaterPublish.htm";
-      System.Diagnostics.Process.Start("IEXPLORE.EXE", fi);
-    }
-
-    private void exitToolStripMenuItem_Click(object sender, EventArgs e)
-    {
-      Application.Exit();
-      //TO-DO: change DSCUpdaterConfig.xml file DB connection settings back to default
     }
 
     private void toolStripStatusLabel2_Click(object sender, EventArgs e)
@@ -2398,26 +2490,9 @@ namespace DSCUpdater
       }
     }
 
-    private void btnRevertSession_Click(object sender, EventArgs e)
+    private void statusBarMain_Click(object sender, EventArgs e)
     {
-      //BatchRevertICEdits();
-    }
 
-    private void btnUpdaterEditorCloseCancel_Click(object sender, EventArgs e)
-    {
-      RestartUpdate();
-    }
-
-    private void clndrRetrofitsChangesStart_ValueChanged(object sender, EventArgs e)
-    {
-      retrofitsStartDate = clndrRetrofitsChangesStart.Value;
-      //MessageBox.Show("Start"+Convert.ToString(clndrRetrofitsChangesStart.Value)); 
-    }
-
-    private void clndrRetrofitsChangesEnd_ValueChanged(object sender, EventArgs e)
-    {
-      retrofitsEndDate = clndrRetrofitsChangesEnd.Value;
-      //MessageBox.Show("End"+Convert.ToString(clndrRetrofitsChangesEnd.Value));
     }
 
     private void btnExportToTemplate_Click(object sender, EventArgs e)
@@ -2427,35 +2502,15 @@ namespace DSCUpdater
 
     private void lstFfeDbTables_SelectedIndexChanged(object sender, EventArgs e)
     {
-      lblSelectedFfeDbTable.Text = "Selected Table: "+ lstFfeDbTables.SelectedItem.ToString();
-    }
-
-    private void closeToolStripMenuItem_Click(object sender, EventArgs e)
-    {
-      RestartUpdate();
-    }
-
-    private void openViewConnectionToolStripMenuItem_Click(object sender, EventArgs e)
-    {
-      UpdateFfeDataConnection();
-    }
-
-    private void loadDataForCurrentConnectionToolStripMenuItem_Click(object sender, EventArgs e)
-    {
-      // get tables
-      StoreTableNames();
-      
-      // clear internal list
-      lstFfeDbTables.Items.Clear();
-
-      //update the list
-      lstFfeDbTables.Items.AddRange(arrTables.ToArray());
-    }
-
-    private void btnRunFfeUpdates_Click(object sender, EventArgs e)
-    {
-      RunFfeUpdates();
+      lblSelectedFfeDbTable.Text = "Selected Table: " + lstFfeDbTables.SelectedItem.ToString();
     }    
+
+    private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
+    {
+
+    }
+
+    #endregion
   }
 }
 
