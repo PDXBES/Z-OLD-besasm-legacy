@@ -116,6 +116,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="AccessHelper.cs" />
+    <Compile Include="DataMobility.cs" />
+    <Compile Include="SQLHelper.cs" />
     <Compile Include="SqlTableCreator.cs" />
   </ItemGroup>
   <ItemGroup>
