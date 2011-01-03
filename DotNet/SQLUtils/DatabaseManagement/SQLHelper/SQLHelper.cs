@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using Access = Microsoft.Office.Interop.Access;
-using dao;
+//using Access = Microsoft.Office.Interop.Access;
+//using dao;
 using System.Reflection;
 using System.IO;
 using System.Data.SqlClient;

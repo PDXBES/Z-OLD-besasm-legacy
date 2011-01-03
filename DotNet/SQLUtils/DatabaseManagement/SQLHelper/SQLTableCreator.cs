@@ -248,6 +248,145 @@ namespace SQLHelper
             return SQLGetType(column.DataType, column.MaxLength, 10, 2);
         }
 
+        public static void SQLCreateVIEW(string queryName, string queryText)
+        {
+            SQLDeleteVIEW(queryName);
+            string CREATEsql = "CREATE VIEW " + queryName + " AS  " + queryText;
+            SqlCommand cmd = new SqlCommand(CREATEsql, CurrentSQLDB);
+            cmd.CommandType = System.Data.CommandType.Text;
+            try
+            {
+                cmd.Prepare();
+                cmd.ExecuteNonQuery();
+            }
+            catch (SqlException ae)
+            {
+                //Handle this
+            }
+            return;
+        }
+
+        public static void SQLCreatePROCEDURE(string queryName, string queryText)
+        {
+            SQLDeletePROCEDURE(queryName);
+            string CREATEsql = "CREATE PROCEDURE " + queryName + " AS  BEGIN " + queryText + " END";
+            SqlCommand cmd = new SqlCommand(CREATEsql, CurrentSQLDB);
+            cmd.CommandType = System.Data.CommandType.Text;
+            try
+            {
+                cmd.Prepare();
+                cmd.ExecuteNonQuery();
+            }
+            catch (SqlException ae)
+            {
+                //Handle this
+            }
+            return;
+        }
+
+        public void SQLDeleteVIEW(string queryName)
+        {
+            string DROPsql = "DROP VIEW " + queryName;
+            SqlCommand cmd = new SqlCommand(DROPsql, CurrentSQLDB);
+            try
+            {
+                cmd.CommandTimeout = 0;
+                cmd.ExecuteNonQuery();
+            }
+            catch (SqlException ae)
+            {
+                //Could not drop table
+            }
+            return;
+        }
+
+        public void SQLDeletePROCEDURE(string queryName)
+        {
+            string DROPsql = "DROP PROCEDURE " + queryName;
+            SqlCommand cmd = new SqlCommand(DROPsql, CurrentSQLDB);
+            try
+            {
+                cmd.CommandTimeout = 0;
+                cmd.ExecuteNonQuery();
+            }
+            catch (SqlException ae)
+            {
+                //Could not drop table
+            }
+            return;
+        }
+
+        public void SQLExecuteActionQuery(string queryName)
+        {
+            SqlCommand cmd = new SqlCommand();
+            Int32 rowsAffected;
+
+            cmd.CommandText = queryName;
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Connection = CurrentSQLDB;
+
+            cmd.CommandTimeout = 0;
+            try
+            {
+                rowsAffected = cmd.ExecuteNonQuery();
+            }
+            catch (SqlException ae)
+            {
+                //Error message here
+            }
+        }
+
+        public void SQLExecuteActionQuery(string queryName, string parameterName, int parameter)
+        {
+            SqlCommand cmd = new SqlCommand();
+            Int32 rowsAffected;
+
+            cmd.CommandText = queryName;
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Connection = CurrentSQLDB;
+
+            cmd.Parameters.Add(new SqlParameter(parameterName, OleDbType.Integer)).Value = parameter;
+
+            /*string EXECUTEsql = queryName;
+            SqlCommand cmd = new SqlCommand(EXECUTEsql, CurrentSQLDB);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;*/
+            try
+            {
+                cmd.CommandTimeout = 0;
+                rowsAffected = cmd.ExecuteNonQuery();
+            }
+            catch (SqlException ae)
+            {
+                //Could not drop table
+            }
+        }
+
+        public void SQLExecuteActionQuery(string queryName, string parameterName, int parameter, string parameterName2, int parameter2)
+        {
+            SqlCommand cmd = new SqlCommand();
+            Int32 rowsAffected;
+
+            cmd.CommandText = queryName;
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Connection = CurrentSQLDB;
+
+            cmd.Parameters.Add(new SqlParameter(parameterName, OleDbType.Integer)).Value = parameter;
+            cmd.Parameters.Add(new SqlParameter(parameterName2, OleDbType.Integer)).Value = parameter2;
+
+            /*string EXECUTEsql = queryName;
+            SqlCommand cmd = new SqlCommand(EXECUTEsql, CurrentSQLDB);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;*/
+            try
+            {
+                cmd.CommandTimeout = 0;
+                rowsAffected = cmd.ExecuteNonQuery();
+            }
+            catch (SqlException ae)
+            {
+                //Could not drop table
+            }
+        }
+
         #endregion
     }
 }
