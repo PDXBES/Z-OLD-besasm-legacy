@@ -14,7 +14,7 @@ using SMO = Microsoft.SqlServer.Management.Smo;
 using System.Security.AccessControl;
 using Microsoft.SqlServer.Management.Smo.RegisteredServers;
 
-namespace SystemsAnalysis.Utils.AccessUtils
+namespace DataMobility
 {
     class DataMobility
     {
