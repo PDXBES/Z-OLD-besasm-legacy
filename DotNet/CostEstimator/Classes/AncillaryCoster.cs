@@ -3,7 +3,7 @@
 // Path: C:\Development\DotNet\CostEstimator\Classes, Author: Arnel
 // Code lines: 18, Size of file: 256 Bytes
 // Creation date: 5/12/2008 1:08 PM
-// Last modified: 8/26/2008 11:16 AM
+// Last modified: 1/6/2011 9:33 AM
 
 #region Using directives
 using System;
@@ -246,6 +246,31 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       	return ancillaryFactors;
       } // get
 		} // ModelAncillaryFactors
+
+    /// <summary>
+    /// Current alternative conflict package
+    /// </summary>
+    /// <returns>Conflict package</returns>
+    public ConflictPackage CurrentAltConflictPackage
+    {
+      get
+      {
+        return new ConflictPackage(_AltPackage, _AltLink, _AltPipXP);
+      }
+    } // CurrentConflictPackage
+
+    /// <summary>
+    /// Current conflict package
+    /// </summary>
+    /// <returns>Conflict package</returns>
+    public ConflictPackage CurrentConflictPackage
+    {
+      get
+      {
+        return new ConflictPackage(_Model, _Link, _PipXP);
+      }
+    } // CurrentConflictPackage
+
 		#endregion
 	}
 }

@@ -3,7 +3,7 @@
 // Path: C:\Development\DotNet\CostEstimator\Classes, Author: Arnel
 // Code lines: 25, Size of file: 527 Bytes
 // Creation date: 4/29/2008 12:31 PM
-// Last modified: 8/14/2008 11:20 AM
+// Last modified: 1/6/2011 9:18 AM
 
 #region Using directives
 using System;
@@ -192,6 +192,16 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 			get; // get
 			set; // set
 		} // Comment
+
+    /// <summary>
+    /// Construction duration
+    /// </summary>
+    /// <returns>String</returns>
+    public double ConstructionDuration
+    {
+      get;
+      set;
+    } // ConstructionDuration
 		#endregion
 
 		#region Methods
@@ -244,6 +254,10 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 			xw.WriteStartElement("pipeAndManholeID");
 			xw.WriteValue(PipeAndManhole.ID);
 			xw.WriteEndElement();
+
+      xw.WriteStartElement("constructionDuration");
+      xw.WriteValue(ConstructionDuration);
+      xw.WriteEndElement();
 		} // WriteXML()
 		#endregion
 	}

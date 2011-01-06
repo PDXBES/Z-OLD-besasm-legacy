@@ -45,12 +45,11 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       if (conflictPackage.Depth > BOREJACK_DEPTH_FT)
       {
         BoringJackingAncillaryCost testBoring = new BoringJackingAncillaryCost(conflictPackage);
-        if (testBoring.IsMicroTunnel)
-          numDays = testBoring.IsMicroTunnel ?
-            Math.Ceiling(conflictPackage.Length / MICROTUNNEL_BUILD_RATE_PER_DAY_FT) :
-            conflictPackage.Diameter <= BOREJACK_SLOWERDIAMETER_IN ?
-            Math.Ceiling(conflictPackage.Length / BOREJACK_FAST_BUILD_RATE_PER_DAY_FT) :
-            Math.Ceiling(conflictPackage.Length / BOREJACK_SLOW_BUILD_RATE_PER_DAY_FT);
+        numDays = testBoring.IsMicroTunnel ?
+          Math.Ceiling(conflictPackage.Length / MICROTUNNEL_BUILD_RATE_PER_DAY_FT) :
+          conflictPackage.Diameter <= BOREJACK_SLOWERDIAMETER_IN ?
+          Math.Ceiling(conflictPackage.Length / BOREJACK_FAST_BUILD_RATE_PER_DAY_FT) :
+          Math.Ceiling(conflictPackage.Length / BOREJACK_SLOW_BUILD_RATE_PER_DAY_FT);
       } // if
       else
       {
@@ -61,6 +60,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
         double mainlineConstructionDurationDays = pipeCoster.ExcavationVolume * conflictPackage.Length / MAINLINE_BUILD_RATE_PER_DAY_CUYD;
         // Utility crossings add 0.5 days per conflict
         int numUtilityCrossings =
+          (conflictPackage.Conflicts == null) ? 0 :
           conflictPackage.Conflicts.NumFiberOpticCrossings +
           conflictPackage.Conflicts.NumGasCrossings +
           conflictPackage.Conflicts.NumSewerCrossings +
