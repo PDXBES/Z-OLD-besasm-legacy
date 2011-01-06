@@ -588,6 +588,9 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
                             case "comment":
                               reportItem.Comment = dataIter.Current.Value;
                               break;
+                            case "constructionDuration":
+                              reportItem.ConstructionDuration = dataIter.Current.ValueAsDouble;
+                              break;
                             //case "manholeID":
                             //  reportItem.Manhole = dataIter.Current.ValueAsInt;
                             //  break;
@@ -1099,6 +1102,9 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
           reportPipeItem.Manhole = manholeCostItemFactor;
           reportPipeItem.Pipe = pipeCostItemFactor;
           reportPipeItem.PipeAndManhole = pipeAndManholeCostItemFactor;
+          reportPipeItem.ConstructionDuration = 
+            ConstructionDurationCalculator.ConstructionDurationDays(
+              ancillaryCoster.CurrentAltConflictPackage);
 
         } // foreach  (altLink)
 
@@ -1744,6 +1750,9 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
             reportPipeItem.Manhole = generateManholeCosts ? manholeCostItemFactor : null;
             reportPipeItem.Pipe = pipeCostItemFactor;
             reportPipeItem.PipeAndManhole = pipeAndManholeCostItemFactor;
+            reportPipeItem.ConstructionDuration = 
+              ConstructionDurationCalculator.ConstructionDurationDays(
+                ancillaryCoster.CurrentConflictPackage);
 
           } // foreach  (link)
           currentLink = null;
