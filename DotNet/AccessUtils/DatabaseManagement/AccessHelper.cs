@@ -26,7 +26,7 @@ namespace SystemsAnalysis.Utils.AccessUtils
     private bool disposed;
     private DateTime startTime;
     private dao.Database CurrentDB;
-    private SqlConnection CurrentSQLDB;
+    //private SqlConnection CurrentSQLDB;
 
     public static void CreateNewMdb(string database)
     {
@@ -62,7 +62,6 @@ namespace SystemsAnalysis.Utils.AccessUtils
       accessApp = ShellGetDB(databaseName, 2000);
       //accessApp = new Access.Application();
       CurrentDB = this.accessApp.CurrentDb();
-      CurrentSQLDB = null;
 
       disposed = false;
     }
@@ -77,15 +76,6 @@ namespace SystemsAnalysis.Utils.AccessUtils
         accessApp = ShellGetDB(databaseName, 2000);
         //accessApp = new Access.Application();
         CurrentDB = this.accessApp.CurrentDb();
-        CurrentSQLDB = new SqlConnection(SQLDatabaseName/*"Data Source=WS09858\\SQLEXPRESS;Initial Catalog=PortlandHarbor;Integrated Security=True"*/);
-        try
-        {
-            CurrentSQLDB.Open();
-        }
-        catch (Exception ex)
-        {
-            //handle this
-        }
 
         disposed = false;
     }
@@ -100,7 +90,6 @@ namespace SystemsAnalysis.Utils.AccessUtils
         //accessApp = ShellGetDB(databaseName, 2000);
         //accessApp = new Access.Application();
         CurrentDB = null;
-        CurrentSQLDB = null;
 
         disposed = false;
     }
@@ -573,105 +562,7 @@ namespace SystemsAnalysis.Utils.AccessUtils
       return;
     }
 
-    public void SQLExportTablePortion(string tableName, string strFilePath, FileType exportType, string columnName, string parameter)
-    {
-        System.Data.DataTable dt = new System.Data.DataTable();
-        //dao.TableDef linkTable;
-
-        try
-        {
-            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter("SELECT * FROM " + tableName + " WHERE " + columnName + " = '" + parameter + "'", CurrentSQLDB);
-            SqlCommandBuilder sqlCommandBuilder = new SqlCommandBuilder(sqlDataAdapter);
-            sqlDataAdapter.Fill(dt);
-
-            // Create the CSV file to which grid data will be exported.
-            StreamWriter sw = new StreamWriter(strFilePath, false);
-            // First we will write the headers.
-            //DataTable dt = m_dsProducts.Tables[0];
-            int iColCount = dt.Columns.Count;
-            for (int i = 0; i < iColCount; i++)
-            {
-                sw.Write(dt.Columns[i]);
-                if (i < iColCount - 1)
-                {
-                    sw.Write(",");
-                }
-            }
-            sw.Write(sw.NewLine);
-            // Now write all the rows.
-            foreach (System.Data.DataRow dr in dt.Rows)
-            {
-                for (int i = 0; i < iColCount; i++)
-                {
-                    if (!Convert.IsDBNull(dr[i]))
-                    {
-                        sw.Write(dr[i].ToString());
-                    }
-                    if (i < iColCount - 1)
-                    {
-                        sw.Write(",");
-                    }
-                }
-                sw.Write(sw.NewLine);
-            }
-            sw.Close();
-        }
-        catch (Exception ex)
-        {
-            //error message
-        }
-
-    }
-
-    public void SQLExportTable(string tableName, string strFilePath, FileType exportType)
-    {
-        System.Data.DataTable dt = new System.Data.DataTable();
-        //dao.TableDef linkTable;
-
-        try
-        {
-            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter("SELECT * FROM " + tableName, CurrentSQLDB);
-            SqlCommandBuilder sqlCommandBuilder = new SqlCommandBuilder(sqlDataAdapter);
-            sqlDataAdapter.Fill(dt);
-
-            // Create the CSV file to which grid data will be exported.
-            StreamWriter sw = new StreamWriter(strFilePath, false);
-            // First we will write the headers.
-            //DataTable dt = m_dsProducts.Tables[0];
-            int iColCount = dt.Columns.Count;
-            for (int i = 0; i < iColCount; i++)
-            {
-                sw.Write(dt.Columns[i]);
-                if (i < iColCount - 1)
-                {
-                    sw.Write(",");
-                }
-            }
-            sw.Write(sw.NewLine);
-            // Now write all the rows.
-            foreach (System.Data.DataRow dr in dt.Rows)
-            {
-                for (int i = 0; i < iColCount; i++)
-                {
-                    if (!Convert.IsDBNull(dr[i]))
-                    {
-                        sw.Write(dr[i].ToString());
-                    }
-                    if (i < iColCount - 1)
-                    {
-                        sw.Write(",");
-                    }
-                }
-                sw.Write(sw.NewLine);
-            }
-            sw.Close();
-        }
-        catch (Exception ex)
-        {
-            //error message
-        }
-
-    }
+    
 
     /// <summary>
     /// Writes a value to a field in a key/value table.
@@ -711,31 +602,7 @@ namespace SystemsAnalysis.Utils.AccessUtils
       throw new Exception("UpdateKeyValueTable Exception: Key '" + key + "' not found.");
     }
 
-    public void SQLWriteKeyValueTable(string tableName, string keyField, string key, string valueField, object value)
-    {
-        System.Data.DataTable dt = new System.Data.DataTable();
-        try
-        {
-            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter("SELECT * FROM " + tableName, CurrentSQLDB);
-            SqlCommandBuilder sqlCommandBuilder = new SqlCommandBuilder(sqlDataAdapter);
-            //sqlDataAdapter.InsertCommand = sqlCommandBuilder.GetInsertCommand();
-            sqlDataAdapter.UpdateCommand = sqlCommandBuilder.GetUpdateCommand();
-            //sqlDataAdapter.DeleteCommand = sqlCommandBuilder.GetDeleteCommand();
-            sqlDataAdapter.Fill(dt);
-
-            Dictionary<string, double> aggregateQueryResults;
-            aggregateQueryResults = new Dictionary<string, double>();
-            for (int i = 0; i < dt.Rows.Count; i++)
-            {
-                dt.Rows[i][keyField] = value;
-                dt.AcceptChanges();
-            }
-        }
-        catch (Exception ex)
-        {
-        }
-        return;
-    }
+    
 
     /// <summary>
     /// Returns a Field in the specified Recordset matching the provided field name.
@@ -1096,36 +963,7 @@ namespace SystemsAnalysis.Utils.AccessUtils
       return aggregateQueryResults;
     }
 
-    public Dictionary<string, double> SQLExecuteAggregateQueryDoubles(string queryName)
-    {
-        System.Data.DataTable dt = new System.Data.DataTable();
-        try
-        {
-            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter("SELECT * FROM " + queryName, CurrentSQLDB);
-            SqlCommandBuilder sqlCommandBuilder = new SqlCommandBuilder(sqlDataAdapter);
-            sqlDataAdapter.Fill(dt);
-
-            Dictionary<string, double> aggregateQueryResults;
-            aggregateQueryResults = new Dictionary<string, double>();
-            for (int i = 0; i < dt.Columns.Count; i++)
-            {
-                if (!Convert.IsDBNull(dt.Rows[0][i]))
-                {
-                    aggregateQueryResults.Add(dt.Columns[i].ColumnName, (double)dt.Rows[0][i]);
-                }
-                else
-                {
-                    aggregateQueryResults.Add(dt.Columns[i].ColumnName, (double)0);
-                }
-
-            }
-            return aggregateQueryResults;
-        }
-        catch (Exception ex)
-        {
-        }
-        return null;
-    }
+    
 
       
 
