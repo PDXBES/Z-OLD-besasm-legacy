@@ -1,0 +1,26 @@
+--------------------Configuration: AXTParse - Win32 Debug--------------------
+Begining build with project "D:\Development\F95\AXTParse\AXTParse.dsp", at root.
+Active configuration is Win32 (x86) Console Application (based on Win32 (x86) Console Application)
+
+Project's tools are:
+			"Fortran 90 Compiler for 80x86" with flags "/include:"Debug/" /compile_only /nologo /debug:full /optimize:0 /warn:nofileopt /module:"Debug/" /object:"Debug/" /pdbfile:"Debug/DF50.PDB" "
+			"Win32 Resource Compiler" with flags "/l 0x409 /d "_DEBUG" "
+			"Browser Database Maker" with flags "/nologo /o"Debug/AXTParse.bsc" "
+			"COFF Linker for 80x86" with flags "kernel32.lib /nologo /subsystem:console /incremental:yes /pdb:"Debug/AXTParse.pdb" /debug /machine:I386 /out:"Debug/AXTParse.exe" /pdbtype:sept "
+			"Custom Build" with flags ""
+			"<Component 0xa>" with flags ""
+
+Creating temp file "G:\TEMP\RSP10.tmp" with contents </include:"Debug/" /compile_only /nologo /debug:full /optimize:0 /warn:nofileopt /module:"Debug/" /object:"Debug/" /pdbfile:"Debug/DF50.PDB" 
+"D:\Development\F95\AXTParse\AXTPARSE.FOR"
+>
+Creating command line "link.exe kernel32.lib /nologo /subsystem:console /incremental:yes /pdb:"Debug/AXTParse.pdb" /debug /machine:I386 /out:"Debug/AXTParse.exe" /pdbtype:sept  .\Debug\AXTPARSE.OBJ" 
+Compiling Fortran...
+D:\Development\F95\AXTParse\AXTPARSE.FOR
+D:\Development\F95\AXTParse\AXTPARSE.FOR(182) : Warning: Expression does not contribute to result
+        SWMMFile = NMROOT//'.OUT'
+-------------------------^
+Linking...
+
+
+
+AXTParse.exe - 0 error(s), 1 warning(s)

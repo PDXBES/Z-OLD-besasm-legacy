@@ -1,0 +1,13 @@
+'
+'	Globals and defines for Communications / Logging routines
+'
+Global 	gstrCurrentMessage	as String
+Global		gstrReturnStatus as String
+Global		glPrintLog as logical			' send status to the MapInfo message window via "print"
+Global		glMsgLog as logical				' send status to partners via gstrCurrentMessage global
+Global		glStatusLog as logical			' send status via MapInfo "statusbar Message"
+Global		glFileLog as logical			' write status to file #1 (caller must open)
+
+Declare	Sub Loggit(ByVal Msg as String)
+Declare	Sub SetLogOptions(ByVal PrintLog as logical, Byval Msg as Logical, ByVal Status as logical, ByVal XFile as logical)
+Declare		Sub StopLogger()

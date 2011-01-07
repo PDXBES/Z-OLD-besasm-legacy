@@ -1,0 +1,13 @@
+!table
+!version 410
+!charset WindowsLatin1
+
+Definition Table
+  File "alternative_package.mdb"
+  Type ACCESS TABLE "alt_ssc_ac" Charset "WindowsLatin1"
+  Fields 5
+    AltSurfSCID Integer ;
+    MdlSurfSCID Integer ;
+    NGTO Char (6) ;
+    IsActive Logical ;
+    FocusArea Char (10) ;

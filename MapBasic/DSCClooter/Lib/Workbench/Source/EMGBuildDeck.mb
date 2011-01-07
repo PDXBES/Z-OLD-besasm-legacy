@@ -1,0 +1,66 @@
+' Collins 2003 May 26
+'   use the following fields c_RFtosurfFt,	c_PKtosurfFt,	c_RFtosurfImpFt, c_PKtosurfImpFt in mdl_DirSC 
+'   to transfer roof to surface acres.  The original join is very slow
+
+
+
+include "mapbasic.def"
+include "..\..\common\inc\EMGGlobal.def"
+include "..\..\common\inc\EMGLogger.def"
+include "..\inc\EMGBuildDeck.def"
+
+
+	
+ 
+
+
+'do SPATIAL Stuff required after alternative flags are set
+Sub RelateDSCtoSurfSC()
+
+  ' BEGIN GIS operations
+  
+  Call SetLogOptions (TRUE, TRUE, TRUE, TRUE)
+  Call Loggit("RelateDSCtoSurfSC - start")
+  
+  'unused as of 20030526
+  'Select * from mdl_DSC, mdl_DiscoVeg where mdl_DSC.ParcelID = mdl_DiscoVeg.ParcelID and mdl_DSC.divideID = mdl_DiscoVeg.divideID and mdl_DiscoVeg.RoofRPark = "R" into _joinR
+  
+  Add Column "mdl_SurfSC" (c_RFgrossacres )From mdl_DSC Set To proportion sum(RfareaFt/43560) Where intersects
+  Add Column "mdl_SurfSC" (c_RFtosurfacres )From mdl_DSC Set To proportion sum(c_RFtosurfFt/43560) Where intersects
+  Add Column "mdl_SurfSC" (c_RFtosurfimpacres )From mdl_DSC Set To proportion sum(c_RFtosurfImpFt/43560) Where intersects
+  
+  'unused as of 20030526
+  'commit table mdl_SurfSC
+  'drop table _joinR
+  'Select * from mdl_DSC, mdl_DiscoVeg where mdl_DSC.ParcelID = mdl_DiscoVeg.ParcelID and mdl_DSC.divideID = mdl_DiscoVeg.divideID and mdl_DiscoVeg.RoofRPark = "P" into _joinP
+  
+  Add Column "mdl_SurfSC" (c_PKgrossacres )From mdl_DSC Set To proportion sum(PkareaFt/43560) Where intersects
+  Add Column "mdl_SurfSC" (c_PKtosurfacres )From mdl_DSC Set To proportion sum(c_PKtosurfFt/43560) Where intersects
+  Add Column "mdl_SurfSC" (c_PKtosurfimpacres )From mdl_DSC Set To proportion sum(c_PKtosurfImpFt/43560) Where intersects
+  
+  
+  'unused as of 20030526
+  'commit table mdl_SurfSC
+  'drop table _joinP
+  
+  
+  
+  Update mdl_SurfSC set 
+    c_netacres = totalgrossacres 
+                    - pavetreeacres - c_RFgrossacres - c_PKgrossacres
+                    + c_RFtosurfacres + c_PKtosurfacres,
+                    
+    c_netimpacres = paveacres + SWacres * SWFactor + ROWAcres 
+                    - pavetreeacres 
+                    + c_RFtosurfimpacres + c_PKtosurfimpacres 
+  
+  
+  commit table mdl_SurfSC   
+  
+  Call Loggit("RelateDSCtoSurfSC - SUCCESS")
+  
+  gstrReturnStatus = "SUCCESS"
+    
+end  sub    
+
+    
