@@ -8,6 +8,7 @@ using System.Text;
 using System.IO;
 using System.Windows.Forms;
 using SystemsAnalysis.Utils.AccessUtils;
+using SystemsAnalysis.Utils.DataMobility;
 
 namespace SWI_2
 {
@@ -1321,7 +1322,7 @@ namespace SWI_2
         {
             string mst_linksDB = /*"E:\\MstLinksCopy\\mst_links_ac.mdb";*/"\\\\Cassio\\modeling\\SAMaster_22\\Links\\mst_links_ac.mdb";
             //copy the good tables to the mst_links database
-            AccessHelper.AccessCopySQLTable("GoodPipes_x", "ODBC;DSN=SIRTOBY;DATABASE = SANDBOX;Trusted_Connection=yes", "ROSE\\issacg.SWSP_PIPES_OK", mst_linksDB);
+            DataMobility.AccessCopySQLTable("GoodPipes_x", "ODBC;DSN=SIRTOBY;DATABASE = SANDBOX;Trusted_Connection=yes", "ROSE\\issacg.SWSP_PIPES_OK", mst_linksDB);
             AccessHelper.AccessCopyTable("GoodPipes", "GoodPipes_x", mst_linksDB); 
             
             //create join query for mst_links_ac and GoodPipes, call the join query "theMatches"
@@ -1385,7 +1386,7 @@ namespace SWI_2
 
 
             //copy the good culvert tables to the mst_links database
-            AccessHelper.AccessCopySQLTable("GoodPipes_x", "ODBC;DSN=SIRTOBY;DATABASE = SANDBOX;Trusted_Connection=yes", "ROSE\\issacg.SWSP_CULVERTS_OK", mst_linksDB);
+            DataMobility.AccessCopySQLTable("GoodPipes_x", "ODBC;DSN=SIRTOBY;DATABASE = SANDBOX;Trusted_Connection=yes", "ROSE\\issacg.SWSP_CULVERTS_OK", mst_linksDB);
             AccessHelper.AccessCopyTable("GoodPipes", "GoodPipes_x", mst_linksDB);
 
             //create join query for mst_links_ac and GoodPipes, call the join query "theMatches"
@@ -1450,7 +1451,7 @@ namespace SWI_2
 
 
             //copy the good ditch tables to the mst_links database
-            AccessHelper.AccessCopySQLTable("GoodPipes_x", "ODBC;DSN=SIRTOBY;DATABASE = SANDBOX;Trusted_Connection=yes", "ROSE\\issacg.SWSP_DITCHES_OK", mst_linksDB);
+            DataMobility.AccessCopySQLTable("GoodPipes_x", "ODBC;DSN=SIRTOBY;DATABASE = SANDBOX;Trusted_Connection=yes", "ROSE\\issacg.SWSP_DITCHES_OK", mst_linksDB);
             AccessHelper.AccessCopyTable("GoodPipes", "GoodPipes_x", mst_linksDB);
 
             //create join query for mst_links_ac and GoodPipes, call the join query "theMatches"
