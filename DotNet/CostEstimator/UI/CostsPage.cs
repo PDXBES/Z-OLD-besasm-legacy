@@ -589,11 +589,11 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
                 string[] itemNameItems = item.Name.Split(new char[] { ' ', '-' }, StringSplitOptions.None);
                 try
                 {
+                  
                   pipeCostsStream.WriteLine(string.Format("{0},{1},{2},{3:F0},{5:F0},{4}",
                     itemNameItems[0], itemNameItems[1], itemNameItems[2],
                     item.DirectConstructionCost,
-                    Math.Ceiling(item.ExcavationVolCuYd /
-                    ConstructionDurationCalculator.MAINLINE_BUILD_RATE_PER_DAY_CUYD),
+                    item.ConstructionDuration,
                     item.TotalConstructionCost));
                 } // try
                 catch (Exception e)
