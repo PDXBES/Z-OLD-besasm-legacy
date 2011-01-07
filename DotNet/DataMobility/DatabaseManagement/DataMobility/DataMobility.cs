@@ -10,13 +10,14 @@ using System.Data.SqlClient;
 using System.Data.OleDb;
 using System.Text;
 using System.Management;
-using SMO = Microsoft.SqlServer.Management.Smo;
+//using SMO = Microsoft.SqlServer.Management.Smo;
 using System.Security.AccessControl;
-using Microsoft.SqlServer.Management.Smo.RegisteredServers;
+///using Microsoft.SqlServer.Management.Smo.RegisteredServers;
+using SQLHelper;
 
-namespace SystemsAnalaysis.Utils.DataMobility
+namespace SystemsAnalysis.Utils.DataMobility
 {
-    class DataMobility
+    public class DataMobility
     {
         public static string SQLCopyAccessTable(string AccessTableName, string sourceDatabase, string SQLTableName, string SQLDB)
         {
@@ -114,10 +115,10 @@ namespace SystemsAnalaysis.Utils.DataMobility
             ws.Close();
         }
 
-        public string SQLCopyAccessTable(string AccessTableName, string sourceDatabase, string SQLTableName)
+        /*public string SQLCopyAccessTable(string AccessTableName, string sourceDatabase, string SQLTableName)
         {
             return SQLCopyAccessTable(AccessTableName, sourceDatabase, SQLTableName, CurrentSQLDB.ConnectionString);
-        }
+        }*/
 
         public static void SQLCopySQLTable(string SQLInputTableName, string inputDatabase, string SQLOutputTableName, string outputDatabase)
         {
