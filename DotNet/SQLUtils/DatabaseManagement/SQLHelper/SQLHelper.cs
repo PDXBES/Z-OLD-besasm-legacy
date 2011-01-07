@@ -18,6 +18,9 @@ namespace SQLHelper
 {
     class SQLHelper
     {
+
+        
+
         //get all available SQL Servers    
         public static Object[] SQLGetListOfServers()
         {
@@ -240,6 +243,300 @@ namespace SQLHelper
             }
         }
 
+        public static void SQLDeleteVIEW(string queryName, SqlConnection CurrentSQLDB)
+        {
+            string DROPsql = "DROP VIEW " + queryName;
+            SqlCommand cmd = new SqlCommand(DROPsql, CurrentSQLDB);
+            try
+            {
+                cmd.CommandTimeout = 0;
+                cmd.ExecuteNonQuery();
+            }
+            catch (SqlException ae)
+            {
+                //Could not drop table
+            }
+            return;
+        }
 
+        public static void SQLCreateVIEW(string queryName, string queryText, SqlConnection CurrentSQLDB)
+        {
+            SQLDeleteVIEW(queryName, CurrentSQLDB);
+            string CREATEsql = "CREATE VIEW " + queryName + " AS  " + queryText;
+            SqlCommand cmd = new SqlCommand(CREATEsql, CurrentSQLDB);
+            cmd.CommandType = System.Data.CommandType.Text;
+            try
+            {
+                cmd.Prepare();
+                cmd.ExecuteNonQuery();
+            }
+            catch (SqlException ae)
+            {
+                //Handle this
+            }
+            return;
+        }
+
+        public static void SQLDeletePROCEDURE(string queryName, SqlConnection CurrentSQLDB)
+        {
+            string DROPsql = "DROP PROCEDURE " + queryName;
+            SqlCommand cmd = new SqlCommand(DROPsql, CurrentSQLDB);
+            try
+            {
+                cmd.CommandTimeout = 0;
+                cmd.ExecuteNonQuery();
+            }
+            catch (SqlException ae)
+            {
+                //Could not drop table
+            }
+            return;
+        }
+
+        public static void SQLCreatePROCEDURE(string queryName, string queryText, SqlConnection CurrentSQLDB)
+        {
+            SQLDeletePROCEDURE(queryName, CurrentSQLDB);
+            string CREATEsql = "CREATE PROCEDURE " + queryName + " AS  BEGIN " + queryText + " END";
+            SqlCommand cmd = new SqlCommand(CREATEsql, CurrentSQLDB);
+            cmd.CommandType = System.Data.CommandType.Text;
+            try
+            {
+                cmd.Prepare();
+                cmd.ExecuteNonQuery();
+            }
+            catch (SqlException ae)
+            {
+                //Handle this
+            }
+            return;
+        }
+
+        public void SQLExecuteActionQuery(string queryName, SqlConnection CurrentSQLDB)
+        {
+            SqlCommand cmd = new SqlCommand();
+            Int32 rowsAffected;
+
+            cmd.CommandText = queryName;
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Connection = CurrentSQLDB;
+
+            cmd.CommandTimeout = 0;
+            try
+            {
+                rowsAffected = cmd.ExecuteNonQuery();
+            }
+            catch (SqlException ae)
+            {
+                //Error message here
+            }
+        }
+
+        public void SQLExecuteActionQuery(string queryName, string parameterName, int parameter, SqlConnection CurrentSQLDB)
+        {
+            SqlCommand cmd = new SqlCommand();
+            Int32 rowsAffected;
+
+            cmd.CommandText = queryName;
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Connection = CurrentSQLDB;
+
+            cmd.Parameters.Add(new SqlParameter(parameterName, OleDbType.Integer)).Value = parameter;
+
+            /*string EXECUTEsql = queryName;
+            SqlCommand cmd = new SqlCommand(EXECUTEsql, CurrentSQLDB);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;*/
+            try
+            {
+                cmd.CommandTimeout = 0;
+                rowsAffected = cmd.ExecuteNonQuery();
+            }
+            catch (SqlException ae)
+            {
+                //Could not drop table
+            }
+        }
+
+        public void SQLExecuteActionQuery(string queryName, string parameterName, int parameter, string parameterName2, int parameter2, SqlConnection CurrentSQLDB)
+        {
+            SqlCommand cmd = new SqlCommand();
+            Int32 rowsAffected;
+
+            cmd.CommandText = queryName;
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Connection = CurrentSQLDB;
+
+            cmd.Parameters.Add(new SqlParameter(parameterName, OleDbType.Integer)).Value = parameter;
+            cmd.Parameters.Add(new SqlParameter(parameterName2, OleDbType.Integer)).Value = parameter2;
+
+            /*string EXECUTEsql = queryName;
+            SqlCommand cmd = new SqlCommand(EXECUTEsql, CurrentSQLDB);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;*/
+            try
+            {
+                cmd.CommandTimeout = 0;
+                rowsAffected = cmd.ExecuteNonQuery();
+            }
+            catch (SqlException ae)
+            {
+                //Could not drop table
+            }
+        }
+
+        public void SQLExportTablePortion(string tableName, string strFilePath, string columnName, string parameter, SqlConnection CurrentSQLDB)
+        {
+            System.Data.DataTable dt = new System.Data.DataTable();
+            //dao.TableDef linkTable;
+
+            try
+            {
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter("SELECT * FROM " + tableName + " WHERE " + columnName + " = '" + parameter + "'", CurrentSQLDB);
+                SqlCommandBuilder sqlCommandBuilder = new SqlCommandBuilder(sqlDataAdapter);
+                sqlDataAdapter.Fill(dt);
+
+                // Create the CSV file to which grid data will be exported.
+                StreamWriter sw = new StreamWriter(strFilePath, false);
+                // First we will write the headers.
+                //DataTable dt = m_dsProducts.Tables[0];
+                int iColCount = dt.Columns.Count;
+                for (int i = 0; i < iColCount; i++)
+                {
+                    sw.Write(dt.Columns[i]);
+                    if (i < iColCount - 1)
+                    {
+                        sw.Write(",");
+                    }
+                }
+                sw.Write(sw.NewLine);
+                // Now write all the rows.
+                foreach (System.Data.DataRow dr in dt.Rows)
+                {
+                    for (int i = 0; i < iColCount; i++)
+                    {
+                        if (!Convert.IsDBNull(dr[i]))
+                        {
+                            sw.Write(dr[i].ToString());
+                        }
+                        if (i < iColCount - 1)
+                        {
+                            sw.Write(",");
+                        }
+                    }
+                    sw.Write(sw.NewLine);
+                }
+                sw.Close();
+            }
+            catch (Exception ex)
+            {
+                //error message
+            }
+
+        }
+
+        public void SQLExportTable(string tableName, string strFilePath, SqlConnection CurrentSQLDB)
+        {
+            System.Data.DataTable dt = new System.Data.DataTable();
+            //dao.TableDef linkTable;
+
+            try
+            {
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter("SELECT * FROM " + tableName, CurrentSQLDB);
+                SqlCommandBuilder sqlCommandBuilder = new SqlCommandBuilder(sqlDataAdapter);
+                sqlDataAdapter.Fill(dt);
+
+                // Create the CSV file to which grid data will be exported.
+                StreamWriter sw = new StreamWriter(strFilePath, false);
+                // First we will write the headers.
+                //DataTable dt = m_dsProducts.Tables[0];
+                int iColCount = dt.Columns.Count;
+                for (int i = 0; i < iColCount; i++)
+                {
+                    sw.Write(dt.Columns[i]);
+                    if (i < iColCount - 1)
+                    {
+                        sw.Write(",");
+                    }
+                }
+                sw.Write(sw.NewLine);
+                // Now write all the rows.
+                foreach (System.Data.DataRow dr in dt.Rows)
+                {
+                    for (int i = 0; i < iColCount; i++)
+                    {
+                        if (!Convert.IsDBNull(dr[i]))
+                        {
+                            sw.Write(dr[i].ToString());
+                        }
+                        if (i < iColCount - 1)
+                        {
+                            sw.Write(",");
+                        }
+                    }
+                    sw.Write(sw.NewLine);
+                }
+                sw.Close();
+            }
+            catch (Exception ex)
+            {
+                //error message
+            }
+
+        }
+
+        public void SQLWriteKeyValueTable(string tableName, string keyField, string key, string valueField, object value, SqlConnection CurrentSQLDB)
+        {
+            System.Data.DataTable dt = new System.Data.DataTable();
+            try
+            {
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter("SELECT * FROM " + tableName, CurrentSQLDB);
+                SqlCommandBuilder sqlCommandBuilder = new SqlCommandBuilder(sqlDataAdapter);
+                //sqlDataAdapter.InsertCommand = sqlCommandBuilder.GetInsertCommand();
+                sqlDataAdapter.UpdateCommand = sqlCommandBuilder.GetUpdateCommand();
+                //sqlDataAdapter.DeleteCommand = sqlCommandBuilder.GetDeleteCommand();
+                sqlDataAdapter.Fill(dt);
+
+                Dictionary<string, double> aggregateQueryResults;
+                aggregateQueryResults = new Dictionary<string, double>();
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    dt.Rows[i][keyField] = value;
+                    dt.AcceptChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+            return;
+        }
+
+        public Dictionary<string, double> SQLExecuteAggregateQueryDoubles(string queryName, SqlConnection CurrentSQLDB)
+        {
+            System.Data.DataTable dt = new System.Data.DataTable();
+            try
+            {
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter("SELECT * FROM " + queryName, CurrentSQLDB);
+                SqlCommandBuilder sqlCommandBuilder = new SqlCommandBuilder(sqlDataAdapter);
+                sqlDataAdapter.Fill(dt);
+
+                Dictionary<string, double> aggregateQueryResults;
+                aggregateQueryResults = new Dictionary<string, double>();
+                for (int i = 0; i < dt.Columns.Count; i++)
+                {
+                    if (!Convert.IsDBNull(dt.Rows[0][i]))
+                    {
+                        aggregateQueryResults.Add(dt.Columns[i].ColumnName, (double)dt.Rows[0][i]);
+                    }
+                    else
+                    {
+                        aggregateQueryResults.Add(dt.Columns[i].ColumnName, (double)0);
+                    }
+
+                }
+                return aggregateQueryResults;
+            }
+            catch (Exception ex)
+            {
+            }
+            return null;
+        }
     }
 }
