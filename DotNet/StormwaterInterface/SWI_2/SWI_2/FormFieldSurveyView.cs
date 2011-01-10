@@ -13,6 +13,8 @@ namespace SWI_2
     {
         public HashSet<int> deletedGlobalID;
         int tempGlobal_id;
+        //records the selected row in case we are trying to search for infos
+        int selectedRow = 0;
 
         public FormFieldSurveyView()
         {
@@ -50,7 +52,8 @@ namespace SWI_2
             this.sWSP_MESH1TableAdapter.Fill(this.sANDBOXDataSet.SWSP_MESH1);
             deletedGlobalID = new HashSet<int>();
             //this is to separate sessions.
-            tempGlobal_id = -1000 * (int)this.sWSP_MESH1TableAdapter.SWI_GET_SPID();
+            //MessageBox.Show((this.sWSP_MESH1TableAdapter.SWI_GET_SPID()).ToString());
+            tempGlobal_id = -1000 * (int)((Int16)this.sWSP_MESH1TableAdapter.SWI_GET_SPID());
             //fill the FieldSurveypageview datatable with the data from the MESH1 datatable
             foreach(DataRow r in this.sANDBOXDataSet.SWSP_MESH1)
             {
@@ -563,6 +566,8 @@ namespace SWI_2
         void dataGridViewLinkInfo_Leave(object sender, System.EventArgs e)
         {
             //yes this redundancy is really necessary
+            //record the record that is selected in case we are doing a search
+            selectedRow = dataGridViewLinkInfo.CurrentRow.Index;
             dataGridViewLinkInfo.CurrentRow.DataGridView.EndEdit();
             dataGridViewLinkInfo.EndEdit();
             CurrencyManager cm = (CurrencyManager)dataGridViewLinkInfo.BindingContext[dataGridViewLinkInfo.DataSource, dataGridViewLinkInfo.DataMember];
@@ -795,6 +800,222 @@ namespace SWI_2
                 child.ShowDialog();
                 this.Enabled = true;
             }
+        }
+
+        private void buttonSearchForNode_Click(object sender, EventArgs e)
+        {
+            string theNodeToSearchFor = textBoxSearchForNode.Text.Trim();
+
+            int lastGlobalID = 0;
+            int newGlobalID = 0;
+            DataRow[] theDataRows = null;
+            int page_number = 0;
+            int view_number = 0;
+            string watershed = "";
+            string subwatershed = "";
+
+            try
+            {
+                page_number = Int32.Parse(comboBoxSurveyPage.Text);
+                view_number = (int)((DataRowView)fKVIEWSUBWATERSHEDBindingSource.Current)[2];
+                watershed = (string)((DataRowView)sWSPWATERSHEDBindingSource.Current)[1];
+                subwatershed = (string)((DataRowView)fKSUBWATERSHEDWATERSHEDBindingSource.Current)[2];
+            }
+            catch (Exception ex)
+            {
+                //something is wrong with the selected data
+                page_number = 1;
+                view_number = 1;
+                watershed = "";
+                subwatershed = "";
+            }
+
+            foreach(DataGridViewRow R in dataGridViewLinkInfo.Rows)
+            {
+                R.Selected = false;
+            }
+
+            try
+            {
+                dataGridViewLinkInfo.Rows[selectedRow].Selected = true;
+            }
+            catch
+            {
+                //The page has been changed since the last search
+            }
+            //the global id of the selected record will be the global ID that we begin our search on.
+            try
+            {
+                lastGlobalID = (int)(dataGridViewLinkInfo.Rows[selectedRow].Cells["GlobID"].Value);
+            }
+            catch (Exception ex)
+            {
+                lastGlobalID = 0;
+            }
+
+            //start with this global id and find the next highest global id that has a matching node
+            //if there are no global ids above this one with a matching node, start back at 0 and
+            //look up until we reach this global id again
+            //if there are no matches at all, then just go back to the current global id
+            //MessageBox.Show(lastGlobalID.ToString());
+            theDataRows = this.sANDBOXDataSet.DataTableFieldSurvey.Select("(us_node = '" + theNodeToSearchFor + "' or ds_node = '" + theNodeToSearchFor + "') and global_id > " + lastGlobalID.ToString(), "global_id asc");
+            try
+            {
+                newGlobalID = (int)theDataRows[0][0];
+
+                try
+                {
+                    page_number = (int)theDataRows[0][16];
+                    view_number = (int)theDataRows[0][15];
+                    watershed = (string)theDataRows[0][17];
+                    subwatershed = (string)theDataRows[0][18];
+                }
+                catch (Exception ex)
+                {
+                    //something is wrong with the selected data
+                    page_number = 1;
+                    view_number = 1;
+                    watershed = "";
+                    subwatershed = "";
+                }
+
+                try
+                {
+                    newGlobalID = (int)theDataRows[0][0];
+
+                    if (watershed != "")
+                    {
+                        sWSPWATERSHEDBindingSource.MoveFirst();
+                        while (watershed != (string)((System.Data.DataRowView)sWSPWATERSHEDBindingSource.Current)["watershed"])
+                        {
+                            sWSPWATERSHEDBindingSource.MoveNext();
+                        }
+                    }
+                    if (subwatershed != "")
+                    {
+                        fKSUBWATERSHEDWATERSHEDBindingSource.MoveFirst();
+                        while (subwatershed != (string)((System.Data.DataRowView)fKSUBWATERSHEDWATERSHEDBindingSource.Current)["subwatershed"])
+                        {
+                            fKSUBWATERSHEDWATERSHEDBindingSource.MoveNext();
+                        }
+                    }
+                    if (view_number != 0)
+                    {
+                        fKVIEWSUBWATERSHEDBindingSource.MoveFirst();
+                        while (view_number != (int)((System.Data.DataRowView)fKVIEWSUBWATERSHEDBindingSource.Current)["view_number"])
+                        {
+                            fKVIEWSUBWATERSHEDBindingSource.MoveNext();
+                        }
+                    }
+                    if (page_number != 0)
+                    {
+                        fKSURVEYPAGEVIEWBindingSource.MoveFirst();
+                        while (page_number != (int)((System.Data.DataRowView)fKSURVEYPAGEVIEWBindingSource.Current)["page_number"])
+                        {
+                            fKSURVEYPAGEVIEWBindingSource.MoveNext();
+                        }
+                    }
+
+                }
+                catch
+                {
+                    //if there is no global ID, then no rows were returned, and there is no match at all in any of the records
+                }
+            }
+            catch
+            {
+                //if there is no globalID, then no rows were returned, and we need to check all records starting at the bottom
+                theDataRows = this.sANDBOXDataSet.DataTableFieldSurvey.Select("us_node = '" + theNodeToSearchFor + "' or ds_node = '" + theNodeToSearchFor + "' ", "global_id asc");
+                newGlobalID = (int)theDataRows[0][0];
+
+                try
+                {
+                    page_number = (int)theDataRows[0][16];
+                    view_number = (int)theDataRows[0][15];
+                    watershed = (string)theDataRows[0][17];
+                    subwatershed = (string)theDataRows[0][18];
+                }
+                catch (Exception ex)
+                {
+                    //something is wrong with the selected data
+                    page_number = 1;
+                    view_number = 1;
+                    watershed = "";
+                    subwatershed = "";
+                }
+
+                try
+                {
+                    newGlobalID = (int)theDataRows[0][0];
+
+                    if (watershed != "")
+                    {
+                        sWSPWATERSHEDBindingSource.MoveFirst();
+                        while (watershed != (string)((System.Data.DataRowView)sWSPWATERSHEDBindingSource.Current)["watershed"])
+                        {
+                            sWSPWATERSHEDBindingSource.MoveNext();
+                        }
+                    }
+                    if (subwatershed != "")
+                    {
+                        fKSUBWATERSHEDWATERSHEDBindingSource.MoveFirst();
+                        while (subwatershed != (string)((System.Data.DataRowView)fKSUBWATERSHEDWATERSHEDBindingSource.Current)["subwatershed"])
+                        {
+                            fKSUBWATERSHEDWATERSHEDBindingSource.MoveNext();
+                        }
+                    }
+                    if (view_number != 0)
+                    {
+                        fKVIEWSUBWATERSHEDBindingSource.MoveFirst();
+                        while (view_number != (int)((System.Data.DataRowView)fKVIEWSUBWATERSHEDBindingSource.Current)["view_number"])
+                        {
+                            fKVIEWSUBWATERSHEDBindingSource.MoveNext();
+                        }
+                    }
+                    if (page_number != 0)
+                    {
+                        fKSURVEYPAGEVIEWBindingSource.MoveFirst();
+                        while (page_number != (int)((System.Data.DataRowView)fKSURVEYPAGEVIEWBindingSource.Current)["page_number"])
+                        {
+                            fKSURVEYPAGEVIEWBindingSource.MoveNext();
+                        }
+                    }
+
+                }
+                catch
+                {
+                    //if there is no global ID, then no rows were returned, and there is no match at all in any of the records
+                }
+
+                
+            }
+            //MessageBox.Show(((int)theDataRows[0][0]).ToString());
+
+
+
+            //Now that we have the global ID of the record in question, we need to load up all the related tables
+            //with the matching data
+
+
+            //dataTableFieldSurveyEditableBindingSource.Position = dataTablePosition;
+            //MessageBox.Show(dataTableFieldSurveyEditableBindingSource.Position.ToString() + ", " + dataTablePosition.ToString());
+
+
+            //select top 1 global_id from datatablefieldsurveyeditable where global_id  > lastGlobalID and us_node = theNodeToSearchFor or ds_node = theNodeToSearchFor order by global_id
+            //remember that datatablefieldsurveyeditable is not zero-based, there should be negative global_ids in there, so when we hit the highest number with
+            //no matches, we have to start at the lowest negative number and then search back up to the starting global_id
+            /*if (string.Compare(currentSelected, theNodeToSearchFor) == 0)
+            {
+                _lastGlobalID = (int)this.sWSP_DITCHTableAdapter.FindFirstGlobalID(textBoxFindNode.Text);
+                RefreshInterfaceTables();
+                this.Refresh();
+                fKDITCHSURVEYPAGEBindingSource.MoveFirst();
+                while (_lastGlobalID != (int)((System.Data.DataRowView)fKDITCHSURVEYPAGEBindingSource.Current)["global_id"])
+                {
+                    fKDITCHSURVEYPAGEBindingSource.MoveNext();
+                }
+                this.Refresh();
+            }*/
         }
     }
 }
