@@ -75,6 +75,8 @@
             this.buttonAddSurveyPage = new System.Windows.Forms.Button();
             this.ultraDateTimeEditor = new Infragistics.Win.UltraWinEditors.UltraDateTimeEditor();
             this.swsP_PHOTOTableAdapter1 = new SWI_2.SANDBOXDataSetTableAdapters.SWSP_PHOTOTableAdapter();
+            this.buttonSearchForNode = new System.Windows.Forms.Button();
+            this.textBoxSearchForNode = new System.Windows.Forms.TextBox();
             this.usnodeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dsnodeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.linktypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
@@ -89,7 +91,7 @@
             this.lengthftDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.usdepthinDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dsdepthinDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.GlobID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.action = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLinkInfo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sWSPSHAPETYPEBindingSource)).BeginInit();
@@ -129,7 +131,7 @@
             this.lengthftDataGridViewTextBoxColumn,
             this.usdepthinDataGridViewTextBoxColumn,
             this.dsdepthinDataGridViewTextBoxColumn,
-            this.Column1,
+            this.GlobID,
             this.action});
             this.dataGridViewLinkInfo.DataSource = this.dataTableFieldSurveyEditableBindingSource;
             this.dataGridViewLinkInfo.Location = new System.Drawing.Point(12, 152);
@@ -437,6 +439,23 @@
             // 
             this.swsP_PHOTOTableAdapter1.ClearBeforeFill = true;
             // 
+            // buttonSearchForNode
+            // 
+            this.buttonSearchForNode.Location = new System.Drawing.Point(114, 503);
+            this.buttonSearchForNode.Name = "buttonSearchForNode";
+            this.buttonSearchForNode.Size = new System.Drawing.Size(103, 22);
+            this.buttonSearchForNode.TabIndex = 31;
+            this.buttonSearchForNode.Text = "Search for Node";
+            this.buttonSearchForNode.UseVisualStyleBackColor = true;
+            this.buttonSearchForNode.Click += new System.EventHandler(this.buttonSearchForNode_Click);
+            // 
+            // textBoxSearchForNode
+            // 
+            this.textBoxSearchForNode.Location = new System.Drawing.Point(12, 503);
+            this.textBoxSearchForNode.Name = "textBoxSearchForNode";
+            this.textBoxSearchForNode.Size = new System.Drawing.Size(90, 20);
+            this.textBoxSearchForNode.TabIndex = 32;
+            // 
             // usnodeDataGridViewTextBoxColumn
             // 
             this.usnodeDataGridViewTextBoxColumn.DataPropertyName = "us_node";
@@ -560,13 +579,13 @@
             this.dsdepthinDataGridViewTextBoxColumn.Name = "dsdepthinDataGridViewTextBoxColumn";
             this.dsdepthinDataGridViewTextBoxColumn.Width = 50;
             // 
-            // Column1
+            // GlobID
             // 
-            this.Column1.DataPropertyName = "global_id";
-            this.Column1.HeaderText = "GlobID";
-            this.Column1.Name = "Column1";
-            this.Column1.Visible = false;
-            this.Column1.Width = 25;
+            this.GlobID.DataPropertyName = "global_id";
+            this.GlobID.HeaderText = "GlobID";
+            this.GlobID.Name = "GlobID";
+            this.GlobID.Visible = false;
+            this.GlobID.Width = 25;
             // 
             // action
             // 
@@ -580,7 +599,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1031, 509);
+            this.ClientSize = new System.Drawing.Size(1031, 526);
+            this.Controls.Add(this.textBoxSearchForNode);
+            this.Controls.Add(this.buttonSearchForNode);
             this.Controls.Add(this.ultraDateTimeEditor);
             this.Controls.Add(this.buttonAddSurveyPage);
             this.Controls.Add(this.buttonAddMap);
@@ -679,6 +700,8 @@
         private System.Windows.Forms.Button buttonAddSurveyPage;
         private Infragistics.Win.UltraWinEditors.UltraDateTimeEditor ultraDateTimeEditor;
         private SWI_2.SANDBOXDataSetTableAdapters.SWSP_PHOTOTableAdapter swsP_PHOTOTableAdapter1;
+        private System.Windows.Forms.Button buttonSearchForNode;
+        private System.Windows.Forms.TextBox textBoxSearchForNode;
         private System.Windows.Forms.DataGridViewTextBoxColumn usnodeDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn dsnodeDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewComboBoxColumn linktypeDataGridViewTextBoxColumn;
@@ -693,7 +716,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn lengthftDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn usdepthinDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn dsdepthinDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn GlobID;
         private System.Windows.Forms.DataGridViewTextBoxColumn action;
     }
 }
