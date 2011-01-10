@@ -14,9 +14,9 @@ using System.Security.AccessControl;
 using Microsoft.SqlServer.Management.Smo.RegisteredServers;
 
 
-namespace SQLHelper
+namespace SystemsAnalysis.Utils.SQLHelper
 {
-    class SQLHelper
+    public class SQLHelper
     {
 
         
@@ -243,10 +243,12 @@ namespace SQLHelper
             }
         }
 
-        public static void SQLDeleteVIEW(string queryName, SqlConnection CurrentSQLDB)
+        public static void SQLDeleteVIEW(string queryName, string SQLDB)
         {
+            SqlConnection thisSQLDB = new SqlConnection(SQLDB);
+            thisSQLDB.Open();
             string DROPsql = "DROP VIEW " + queryName;
-            SqlCommand cmd = new SqlCommand(DROPsql, CurrentSQLDB);
+            SqlCommand cmd = new SqlCommand(DROPsql, thisSQLDB);
             try
             {
                 cmd.CommandTimeout = 0;
@@ -256,14 +258,17 @@ namespace SQLHelper
             {
                 //Could not drop table
             }
+            thisSQLDB.Close();
             return;
         }
 
-        public static void SQLCreateVIEW(string queryName, string queryText, SqlConnection CurrentSQLDB)
+        public static void SQLCreateVIEW(string queryName, string queryText, string SQLDB)
         {
-            SQLDeleteVIEW(queryName, CurrentSQLDB);
+            SQLDeleteVIEW(queryName, SQLDB);
+            SqlConnection thisSQLDB = new SqlConnection(SQLDB);
+            thisSQLDB.Open();
             string CREATEsql = "CREATE VIEW " + queryName + " AS  " + queryText;
-            SqlCommand cmd = new SqlCommand(CREATEsql, CurrentSQLDB);
+            SqlCommand cmd = new SqlCommand(CREATEsql, thisSQLDB);
             cmd.CommandType = System.Data.CommandType.Text;
             try
             {
@@ -274,13 +279,16 @@ namespace SQLHelper
             {
                 //Handle this
             }
+            thisSQLDB.Close();
             return;
         }
 
-        public static void SQLDeletePROCEDURE(string queryName, SqlConnection CurrentSQLDB)
+        public static void SQLDeletePROCEDURE(string queryName, string SQLDB)
         {
+            SqlConnection thisSQLDB = new SqlConnection(SQLDB);
+            thisSQLDB.Open();
             string DROPsql = "DROP PROCEDURE " + queryName;
-            SqlCommand cmd = new SqlCommand(DROPsql, CurrentSQLDB);
+            SqlCommand cmd = new SqlCommand(DROPsql, thisSQLDB);
             try
             {
                 cmd.CommandTimeout = 0;
@@ -290,14 +298,17 @@ namespace SQLHelper
             {
                 //Could not drop table
             }
+            thisSQLDB.Close();
             return;
         }
 
-        public static void SQLCreatePROCEDURE(string queryName, string queryText, SqlConnection CurrentSQLDB)
+        public static void SQLCreatePROCEDURE(string queryName, string queryText, string SQLDB)
         {
-            SQLDeletePROCEDURE(queryName, CurrentSQLDB);
+            SQLDeletePROCEDURE(queryName, SQLDB);
+            SqlConnection thisSQLDB = new SqlConnection(SQLDB);
+            thisSQLDB.Open();
             string CREATEsql = "CREATE PROCEDURE " + queryName + " AS  BEGIN " + queryText + " END";
-            SqlCommand cmd = new SqlCommand(CREATEsql, CurrentSQLDB);
+            SqlCommand cmd = new SqlCommand(CREATEsql, thisSQLDB);
             cmd.CommandType = System.Data.CommandType.Text;
             try
             {
@@ -308,17 +319,19 @@ namespace SQLHelper
             {
                 //Handle this
             }
+            thisSQLDB.Close();
             return;
         }
 
-        public void SQLExecuteActionQuery(string queryName, SqlConnection CurrentSQLDB)
+        public static void SQLExecuteActionQuery(string queryName, string SQLDB)
         {
             SqlCommand cmd = new SqlCommand();
             Int32 rowsAffected;
-
+            SqlConnection thisSQLDB = new SqlConnection(SQLDB);
+            thisSQLDB.Open();
             cmd.CommandText = queryName;
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.Connection = CurrentSQLDB;
+            cmd.Connection = thisSQLDB;
 
             cmd.CommandTimeout = 0;
             try
@@ -329,16 +342,18 @@ namespace SQLHelper
             {
                 //Error message here
             }
+            thisSQLDB.Close();
         }
 
-        public void SQLExecuteActionQuery(string queryName, string parameterName, int parameter, SqlConnection CurrentSQLDB)
+        public static void SQLExecuteActionQuery(string queryName, string parameterName, int parameter, string SQLDB)
         {
             SqlCommand cmd = new SqlCommand();
             Int32 rowsAffected;
-
+            SqlConnection thisSQLDB = new SqlConnection(SQLDB);
+            thisSQLDB.Open();
             cmd.CommandText = queryName;
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.Connection = CurrentSQLDB;
+            cmd.Connection = thisSQLDB;
 
             cmd.Parameters.Add(new SqlParameter(parameterName, OleDbType.Integer)).Value = parameter;
 
@@ -354,16 +369,18 @@ namespace SQLHelper
             {
                 //Could not drop table
             }
+            thisSQLDB.Close();
         }
 
-        public void SQLExecuteActionQuery(string queryName, string parameterName, int parameter, string parameterName2, int parameter2, SqlConnection CurrentSQLDB)
+        public static void SQLExecuteActionQuery(string queryName, string parameterName, int parameter, string parameterName2, int parameter2, string SQLDB)
         {
             SqlCommand cmd = new SqlCommand();
             Int32 rowsAffected;
-
+            SqlConnection thisSQLDB = new SqlConnection(SQLDB);
+            thisSQLDB.Open();
             cmd.CommandText = queryName;
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.Connection = CurrentSQLDB;
+            cmd.Connection = thisSQLDB;
 
             cmd.Parameters.Add(new SqlParameter(parameterName, OleDbType.Integer)).Value = parameter;
             cmd.Parameters.Add(new SqlParameter(parameterName2, OleDbType.Integer)).Value = parameter2;
@@ -380,16 +397,18 @@ namespace SQLHelper
             {
                 //Could not drop table
             }
+            thisSQLDB.Close();
         }
 
-        public void SQLExportTablePortion(string tableName, string strFilePath, string columnName, string parameter, SqlConnection CurrentSQLDB)
+        static public void SQLExportTablePortion(string tableName, string strFilePath, string columnName, string parameter, string SQLDB)
         {
             System.Data.DataTable dt = new System.Data.DataTable();
             //dao.TableDef linkTable;
-
+            SqlConnection thisSQLDB = new SqlConnection(SQLDB);
+            thisSQLDB.Open();
             try
             {
-                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter("SELECT * FROM " + tableName + " WHERE " + columnName + " = '" + parameter + "'", CurrentSQLDB);
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter("SELECT * FROM " + tableName + " WHERE " + columnName + " = '" + parameter + "'", thisSQLDB);
                 SqlCommandBuilder sqlCommandBuilder = new SqlCommandBuilder(sqlDataAdapter);
                 sqlDataAdapter.Fill(dt);
 
@@ -429,17 +448,18 @@ namespace SQLHelper
             {
                 //error message
             }
-
+            thisSQLDB.Close();
         }
 
-        public void SQLExportTable(string tableName, string strFilePath, SqlConnection CurrentSQLDB)
+        static public void SQLExportTable(string tableName, string strFilePath, string SQLDB)
         {
             System.Data.DataTable dt = new System.Data.DataTable();
             //dao.TableDef linkTable;
-
+            SqlConnection thisSQLDB = new SqlConnection(SQLDB);
+            thisSQLDB.Open();
             try
             {
-                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter("SELECT * FROM " + tableName, CurrentSQLDB);
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter("SELECT * FROM " + tableName, thisSQLDB);
                 SqlCommandBuilder sqlCommandBuilder = new SqlCommandBuilder(sqlDataAdapter);
                 sqlDataAdapter.Fill(dt);
 
@@ -479,15 +499,17 @@ namespace SQLHelper
             {
                 //error message
             }
-
+            thisSQLDB.Close();
         }
 
-        public void SQLWriteKeyValueTable(string tableName, string keyField, string key, string valueField, object value, SqlConnection CurrentSQLDB)
+        static public void SQLWriteKeyValueTable(string tableName, string keyField, string key, string valueField, object value, string SQLDB)
         {
             System.Data.DataTable dt = new System.Data.DataTable();
+            SqlConnection thisSQLDB = new SqlConnection(SQLDB);
+            thisSQLDB.Open();
             try
             {
-                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter("SELECT * FROM " + tableName, CurrentSQLDB);
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter("SELECT * FROM " + tableName, thisSQLDB);
                 SqlCommandBuilder sqlCommandBuilder = new SqlCommandBuilder(sqlDataAdapter);
                 //sqlDataAdapter.InsertCommand = sqlCommandBuilder.GetInsertCommand();
                 sqlDataAdapter.UpdateCommand = sqlCommandBuilder.GetUpdateCommand();
@@ -505,15 +527,18 @@ namespace SQLHelper
             catch (Exception ex)
             {
             }
+            thisSQLDB.Close();
             return;
         }
 
-        public Dictionary<string, double> SQLExecuteAggregateQueryDoubles(string queryName, SqlConnection CurrentSQLDB)
+        public static Dictionary<string, double> SQLExecuteAggregateQueryDoubles(string queryName, string SQLDB)
         {
             System.Data.DataTable dt = new System.Data.DataTable();
+            SqlConnection thisSQLDB = new SqlConnection(SQLDB);
+            thisSQLDB.Open();
             try
             {
-                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter("SELECT * FROM " + queryName, CurrentSQLDB);
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter("SELECT * FROM " + queryName, thisSQLDB);
                 SqlCommandBuilder sqlCommandBuilder = new SqlCommandBuilder(sqlDataAdapter);
                 sqlDataAdapter.Fill(dt);
 
@@ -536,6 +561,7 @@ namespace SQLHelper
             catch (Exception ex)
             {
             }
+            thisSQLDB.Close();
             return null;
         }
     }
