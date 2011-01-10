@@ -5,7 +5,7 @@ using System.Text;
 using System.Data.SqlClient;
 
 
-namespace SQLHelper
+namespace SystemsAnalysis.Utils.SQLHelper
 {
     public class SqlTableCreator
     {

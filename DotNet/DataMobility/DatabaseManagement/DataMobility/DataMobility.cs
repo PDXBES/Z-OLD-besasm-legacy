@@ -13,7 +13,7 @@ using System.Management;
 //using SMO = Microsoft.SqlServer.Management.Smo;
 using System.Security.AccessControl;
 ///using Microsoft.SqlServer.Management.Smo.RegisteredServers;
-using SQLHelper;
+using SystemsAnalysis.Utils.SQLHelper;
 
 namespace SystemsAnalysis.Utils.DataMobility
 {
