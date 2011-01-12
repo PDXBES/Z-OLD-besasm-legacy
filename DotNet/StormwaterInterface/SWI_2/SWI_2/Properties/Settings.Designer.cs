@@ -26,7 +26,7 @@ namespace SWI_2.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=SIRTOBY;Initial Catalog=SANDBOX;Integrated Security=SSPI;")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=SIRTOBY;Initial Catalog=SWI;Integrated Security=SSPI;")]
         public string SANDBOXConnectionString {
             get {
                 return ((string)(this["SANDBOXConnectionString"]));
