@@ -925,66 +925,71 @@ namespace SWI_2
             catch
             {
                 //if there is no globalID, then no rows were returned, and we need to check all records starting at the bottom
+                
                 theDataRows = this.sANDBOXDataSet.DataTableFieldSurvey.Select("us_node = '" + theNodeToSearchFor + "' or ds_node = '" + theNodeToSearchFor + "' ", "global_id asc");
-                newGlobalID = (int)theDataRows[0][0];
 
-                try
-                {
-                    page_number = (int)theDataRows[0][16];
-                    view_number = (int)theDataRows[0][15];
-                    watershed = (string)theDataRows[0][17];
-                    subwatershed = (string)theDataRows[0][18];
-                }
-                catch (Exception ex)
-                {
-                    //something is wrong with the selected data
-                    page_number = 1;
-                    view_number = 1;
-                    watershed = "";
-                    subwatershed = "";
-                }
-
-                try
+                if (theDataRows.Length != 0)
                 {
                     newGlobalID = (int)theDataRows[0][0];
 
-                    if (watershed != "")
+
+                    try
                     {
-                        sWSPWATERSHEDBindingSource.MoveFirst();
-                        while (watershed != (string)((System.Data.DataRowView)sWSPWATERSHEDBindingSource.Current)["watershed"])
-                        {
-                            sWSPWATERSHEDBindingSource.MoveNext();
-                        }
+                        page_number = (int)theDataRows[0][16];
+                        view_number = (int)theDataRows[0][15];
+                        watershed = (string)theDataRows[0][17];
+                        subwatershed = (string)theDataRows[0][18];
                     }
-                    if (subwatershed != "")
+                    catch (Exception ex)
                     {
-                        fKSUBWATERSHEDWATERSHEDBindingSource.MoveFirst();
-                        while (subwatershed != (string)((System.Data.DataRowView)fKSUBWATERSHEDWATERSHEDBindingSource.Current)["subwatershed"])
-                        {
-                            fKSUBWATERSHEDWATERSHEDBindingSource.MoveNext();
-                        }
-                    }
-                    if (view_number != 0)
-                    {
-                        fKVIEWSUBWATERSHEDBindingSource.MoveFirst();
-                        while (view_number != (int)((System.Data.DataRowView)fKVIEWSUBWATERSHEDBindingSource.Current)["view_number"])
-                        {
-                            fKVIEWSUBWATERSHEDBindingSource.MoveNext();
-                        }
-                    }
-                    if (page_number != 0)
-                    {
-                        fKSURVEYPAGEVIEWBindingSource.MoveFirst();
-                        while (page_number != (int)((System.Data.DataRowView)fKSURVEYPAGEVIEWBindingSource.Current)["page_number"])
-                        {
-                            fKSURVEYPAGEVIEWBindingSource.MoveNext();
-                        }
+                        //something is wrong with the selected data
                     }
 
+
+                    try
+                    {
+                        if (watershed != "")
+                        {
+                            sWSPWATERSHEDBindingSource.MoveFirst();
+                            while (watershed != (string)((System.Data.DataRowView)sWSPWATERSHEDBindingSource.Current)["watershed"])
+                            {
+                                sWSPWATERSHEDBindingSource.MoveNext();
+                            }
+                        }
+                        if (subwatershed != "")
+                        {
+                            fKSUBWATERSHEDWATERSHEDBindingSource.MoveFirst();
+                            while (subwatershed != (string)((System.Data.DataRowView)fKSUBWATERSHEDWATERSHEDBindingSource.Current)["subwatershed"])
+                            {
+                                fKSUBWATERSHEDWATERSHEDBindingSource.MoveNext();
+                            }
+                        }
+                        if (view_number != 0)
+                        {
+                            fKVIEWSUBWATERSHEDBindingSource.MoveFirst();
+                            while (view_number != (int)((System.Data.DataRowView)fKVIEWSUBWATERSHEDBindingSource.Current)["view_number"])
+                            {
+                                fKVIEWSUBWATERSHEDBindingSource.MoveNext();
+                            }
+                        }
+                        if (page_number != 0)
+                        {
+                            fKSURVEYPAGEVIEWBindingSource.MoveFirst();
+                            while (page_number != (int)((System.Data.DataRowView)fKSURVEYPAGEVIEWBindingSource.Current)["page_number"])
+                            {
+                                fKSURVEYPAGEVIEWBindingSource.MoveNext();
+                            }
+                        }
+
+                    }
+                    catch
+                    {
+                        //if there is no global ID, then no rows were returned, and there is no match at all in any of the records
+                    }
                 }
-                catch
+                else
                 {
-                    //if there is no global ID, then no rows were returned, and there is no match at all in any of the records
+                    MessageBox.Show("Node not found!");
                 }
 
                 
