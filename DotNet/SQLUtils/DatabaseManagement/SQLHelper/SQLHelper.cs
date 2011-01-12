@@ -133,7 +133,6 @@ namespace SystemsAnalysis.Utils.SQLHelper
             {
                 return null;
             }
-
         }
 
         //get all available databases in an SQLServer    
@@ -185,7 +184,6 @@ namespace SystemsAnalysis.Utils.SQLHelper
             {
                 return null;
             }
-
         }
 
         public static string SQLTestDatabase(string databaseName, string tableName)
