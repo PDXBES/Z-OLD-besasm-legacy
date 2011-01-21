@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<namespace name="utilMSaccess">
+  <function name="ACtblrelink" visibility="private">
+    <parameters>
+      <parameter name="myoleac" type="Variant" />
+      <parameter name="linktable" type="string" />
+      <parameter name="srctable" type="string" />
+      <parameter name="srcdatabase" type="string" />
+      <parameter name="verboseOleError" type="Boolean" />
+      <retval type="Integer" />
+    </parameters>
+  </function>
+  <function name="ACrunExportQueryTable" visibility="private">
+    <parameters>
+      <parameter name="myoleac" type="Variant" />
+      <parameter name="outfilename" type="string" />
+      <parameter name="stblname" type="string" />
+      <parameter name="sfieldname" type="string" />
+      <parameter name="sfieldvalue" type="string" />
+      <parameter name="iomode" type="Integer" />
+      <parameter name="emsg" type="string" />
+      <retval type="Integer" />
+    </parameters>
+  </function>
+  <function name="ACrunExecuteQueryTable" visibility="private">
+    <parameters>
+      <parameter name="myoleac" type="Variant" />
+      <parameter name="stblname" type="string" />
+      <parameter name="sfieldname" type="string" />
+      <parameter name="sfieldvalue" type="string" />
+      <parameter name="iomode" type="Integer" />
+      <parameter name="emsg" type="string" />
+      <retval type="Integer" />
+    </parameters>
+  </function>
+</namespace>

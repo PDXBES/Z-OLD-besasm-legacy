@@ -1,0 +1,361 @@
+'
+'	============ EMGAATS Workbench =================
+'
+'	Copyright (c) 2001,	2003  City of Portland,	OR Bureau of Environmental Services	
+'
+' 20Jul2006	Adapted
+'	22Mar2004 Collins added	call to	InitOpenUtilGlobals	so that	EMGOpenUtils can be	used here
+'
+'
+include "MapBasic.def"
+'include "\\cassio\modeling\Model_Programs\Emgaats\CodeV2.2\Common\Inc\EMGGlobal.def"
+include "\\cassio\modeling\Model_Programs\Emgaats\CodeV2.2\Common\Inc\EMGToolGlobal.def"
+include "\\cassio\modeling\Model_Programs\Emgaats\CodeV2.2\Common\Inc\EMGLogger.def"
+include "\\cassio\modeling\Model_Programs\Emgaats\CodeV2.2\Common\Inc\EMGOpenUtils.def"
+include "\\cassio\modeling\Model_Programs\Emgaats\CodeV2.2\Common\Inc\EMGMTabUtil.def"
+include "\\cassio\modeling\Model_Programs\Emgaats\CodeV2.2\Common\Inc\INIUtils.def"
+include "\\cassio\modeling\Model_Programs\Emgaats\CodeV2.2\Workbench\Inc\EMGInit.def"
+include "\\cassio\modeling\Model_Programs\Emgaats\CodeV2.2\LinkTool\Inc\EMGLinkColData.def"
+include "\\cassio\modeling\Model_Programs\Emgaats\CodeV2.2\common\inc\EMGCoordSys.def"
+
+Declare Sub Main()
+'Declare Sub EndHandler()
+
+'Required for all Framework MBX Apps
+Declare Sub ExitApplication()
+Declare Sub Function_Menu()
+
+'Globals required for all Framework Apps
+Global gReturnStatus as String
+Global gDebugMode as Logical
+
+'Functions specific to this Framework App
+Declare Sub UpdateLinks
+Declare Sub DeleteLinks
+Declare Sub CheckLinks
+Declare Sub AppendLinks
+Declare Sub SetupLinkProcessor
+Declare Sub SetAllLineStyles()
+Declare Function AlterLineStyle(ByVal oLine As Object, ByVal pNew As Pen) As Object
+
+'EMGAATS Link Append prototypes
+Declare Sub AddLinkCheck(ByVal TName as string)
+Declare Sub CheckOneLink
+Declare Function IsInt(byval InString as string) as logical
+Declare Function IsAlpha(byval InString as string) as logical
+Declare Sub CommitAppend(ByVal TName as string)
+Declare	Sub	OpenWarnBrowser(ByVal TName as string)
+Declare	Sub	OpenFailBrowser(ByVal TName as string)
+
+'Globals specific to this Framework App
+global gOutputModelPath as String
+global gLinkAlternative as String
+Global gTempDir as String
+Global gAltID as Integer
+Global gErrorCheckPath as String
+
+'---------------------------------------------------------
+' the following	is a delphi	code snippit that shows	how	the	MB globals are accessed
+'---------------------------------------------------------
+  'strMBmsg	= 'gstrCurrentMessage';
+  'strMBrc = 'gstrReturnStatus';
+
+  'STEP	ONE: Start mapinfo
+  'goleMI :=Zcreateoleobject('Mapinfo.Application');
+  
+  'STEP	TWO: find the full path	of the application
+  'mbxFullPath := systemini.ReadString('code','TestBench','notfound');	
+	
+	'STEP THREE: Run the mbx
+	'DoStr := 'Run Application '+ #34 +	mbxFullPath	+ #34;
+	'oleMI.do doStr
+	
+  'STEP	FOUR: Initialize global	to something that is not SUCCESS
+  'oleMI.mbapplications.item('TestBench').mbglobals.item(strMBrc).value	:= 'NULL';
+  
+  'STEP	FIVE: run subroutines within the mapinfo application and test for success
+  'olemi.do	('Run Menu Command ID '	+ cmdID);
+  'sleep(1000);
+  'if myrc <> 'SUCCESS'	Then
+	' error	stuff here
+  'end if
+
+
+'---------------------------------------------------------
+Sub UpdateLinks
+	gReturnStatus="Entered Update Links()"	
+	Open Table gLinkAlternative as LinkAlternative
+	Select * from LinkAlternative where Operation="UPD" into Alt_Update	
+	If TableInfo(Alt_Update, TAB_INFO_NROWS) = 0 Then
+		Print "No links for update."
+		gReturnStatus = "No links for update."
+		Exit Sub
+	End If
+	Print "Found " & SelectionInfo(SEL_INFO_NROWS) & " links for tabular update."
+	Commit Table Alt_Update As gTempDir & "Alt_Update.TAB" TYPE NATIVE Charset "WindowsLatin1"
+	Close Table Alt_Update
+	Open Table gTempDir & "Alt_Update.TAB"
+	Print "1"
+	Select Alt_Update.DiamWidth "newDiam", mdl_links.DiamWidth from mdl_links, Alt_Update where mdl_Links.LinkID = Alt_Update.MdlLinkID and Alt_Update.DiamWidth>0 into mdl_links_update_DIAM
+	Update mdl_links_update_DIAM Set DiamWidth = newDiam
+	Select Alt_Update.USIE "newUSIE", mdl_links.USIE from mdl_links, Alt_Update where mdl_Links.LinkID = Alt_Update.MdlLinkID and Alt_Update.USIE<>0 into mdl_links_update_USIE	
+	Update mdl_links_update_USIE Set USIE = newUSIE
+	Select Alt_Update.DSIE "newDSIE", mdl_links.DSIE from mdl_links, Alt_Update where mdl_Links.LinkID = Alt_Update.MdlLinkID and Alt_Update.DSIE<>0 into mdl_links_update_DSIE	
+	Update mdl_links_update_DSIE Set DSIE = newDSIE
+	Select Alt_Update.LinkType "newLinkType", mdl_links.PipeFlowType, mdl_links.LinkType from mdl_links, Alt_Update where mdl_Links.LinkID = Alt_Update.MdlLinkID and Alt_Update.LinkType = Any("C", "S", "D") into mdl_links_update_TYPE	
+	Update mdl_links_update_Type Set PipeFlowType = newLinkType
+	Update mdl_links_update_TYPE Set LinkType = newLinkType
+	Print "2"
+	Select Alt_Update.PipeShape "newPipeShape", mdl_links.PipeShape from mdl_links, Alt_Update where mdl_Links.LinkID = Alt_Update.MdlLinkID and Alt_Update.PipeShape <> "" into mdl_links_update_SHAPE	
+	Update mdl_links_update_SHAPE Set PipeShape = newPipeShape
+	Select Alt_Update.Height "newHeight", mdl_links.Height from mdl_links, Alt_Update where mdl_Links.LinkID = Alt_Update.MdlLinkID and Alt_Update.Height <> 0 into mdl_links_update_HEIGHT	
+	Update mdl_links_update_HEIGHT Set Height = newHeight
+	Select Alt_Update.Material "newMaterial", mdl_links.Material from mdl_links, Alt_Update where mdl_Links.LinkID = Alt_Update.MdlLinkID and Alt_Update.Material <> "" into mdl_links_update_MATERIAL	
+	Update mdl_links_update_MATERIAL Set Material = newMaterial
+	Select mdl_links.MLinkID, mdl_links.Source, mdl_links.DataSource, Alt_Update.AltLinkId from mdl_links, Alt_Update where mdl_links.LinkID = Alt_Update.MdlLinkID into mdl_links_update_MLINKID
+	Update mdl_links_update_MLINKID Set MLinkID = 0
+	Update mdl_links_update_MLINKID Set DataSource = "U"	
+	Update mdl_links_update_MLINKID Set Source = Str$(gAltID) & "." & Str$(AltLinkId)
+	Print "3"
+	Commit Table mdl_links
+	dim updateCount as integer
+	updateCount = TableInfo(Alt_Update, TAB_INFO_NROWS)
+	dim actualUpdate as integer
+	actualUpdate = TableInfo(mdl_links_update_DIAM, TAB_INFO_NROWS)
+	
+	If actualUpdate <> updateCount Then
+		Select * From Alt_Update, mdl_links where Alt_Update.mdllinkid = mdl_links.linkid
+		Run Menu Command 311 'M_QUERY_INVERTSELECT
+		Select * From Selection into update_failed
+		Commit Table update_failed as gErrorCheckPath & "\Link_Update_Failed.tab"
+	End If	
+		
+	gReturnStatus = "Found " & Str$(updateCount) & " link(s) specified for update. Succesfully updated " & Str$(actualUpdate) & " link(s)."
+	Print gReturnStatus
+	
+End Sub
+'---------------------------------------------------------
+Sub DeleteLinks
+	
+	gReturnStatus="Entered DeleteLinks()"	
+		
+	Open Table gLinkAlternative as LinkAlternative
+	Select * from LinkAlternative where Operation="DEL" or Operation="SPL" into Alt_Delete	
+	
+	If TableInfo(Alt_Delete, TAB_INFO_NROWS) = 0 Then
+		Print "No links for delete."
+		gReturnStatus = "No links for delete."
+		Exit Sub
+	End If
+	
+	Print "Found " & SelectionInfo(SEL_INFO_NROWS) & " links for deletion."
+	Commit Table Alt_Delete As gTempDir & "Alt_Delete.tab" TYPE NATIVE Charset "WindowsLatin1"
+	Close Table Alt_Delete
+	Open Table gTempDir & "Alt_Delete.tab"
+	
+	dim deleteCount as integer
+	deleteCount = TableInfo(Alt_Delete, TAB_INFO_NROWS)
+	
+	Select mdl_Links.MLinkID, alt_Delete.USNode, alt_Delete.DSNode, mdl_links.LinkType from mdl_Links, Alt_Delete where mdl_links.LinkID=Alt_Delete.MdlLinkID into mdl_links_delete
+	Update mdl_links_delete Set LinkType = "X"
+	Select * from mdl_links Where LinkType = "X" into qryDelete
+	
+	dim actualDelete as integer
+	actualDelete = TableInfo(qryDelete, TAB_INFO_NROWS)
+	Delete From qryDelete
+								
+	Commit Table mdl_links
+	Pack Table mdl_links Graphic Data		
+	
+	If actualDelete <> deleteCount Then
+		Select * From mdl_links_delete Where LinkType <> "X" Into delete_failed		
+		Commit Table delete_failed as gErrorCheckPath & "\Link_Delete_Failed.tab"
+	End If		
+	
+	gReturnStatus = "Found " & Str$(deleteCount) & " link(s) specified for deletion. Succesfully deleted " & Str$(actualDelete) & " link(s)."
+	
+
+End Sub
+'---------------------------------------------------------
+Sub CheckLinks
+	gReturnStatus="Entered CheckLinks()"	
+	
+	Open Table gLinkAlternative as LinkAlternative		
+
+	Select * from LinkAlternative where Operation="ADD" or Operation="CON" into Alt_Append
+	
+	If TableInfo(Alt_Append, TAB_INFO_NROWS) = 0 Then
+		Print "No links for pre-append."
+		gReturnStatus = "No links for pre-append."
+		Exit Sub
+	End If
+	
+	Print "Found " & SelectionInfo(SEL_INFO_NROWS) & " links for adding."
+
+	Commit Table Alt_Append As gTempDir & "Alt_Append.TAB" TYPE NATIVE Charset "WindowsLatin1"	
+	Close Table Alt_Append
+	Open Table gTempDir & "Alt_Append.TAB"			
+	Alter Table Alt_Append (Modify LinkType char(2))	
+	'Alter Table mdl_links_append (Rename Shape_1 Shape)
+
+	Update Alt_Append Set MdlLinkID = ""
+	Select * From Alt_Append Where PipeShape = "" Into NoPipeShape
+	If TableInfo(NoPipeShape, TAB_INFO_NROWS) > 0 Then
+		Update NoPipeShape Set PipeShape = "CIRC"
+		Close Table NoPipeShape
+	End If
+		Select * From Alt_Append Where Material = "" Into NoMaterial
+	If TableInfo(NoMaterial, TAB_INFO_NROWS) > 0 Then
+		Update NoMaterial Set Material = "CSP"
+		Close Table NoMaterial
+	End If
+		
+	Commit Table Alt_Append	
+	
+	Call LoadReqColumnArray()
+	Call LoadAuditColumnAdd()
+	Call LoadAuditColumnDel()
+	Call AddLinkCheck("Alt_Append")
+	
+	Call OpenWarnBrowser("Alt_Append")
+	Call OpenFailBrowser("Alt_Append")
+	
+	dim appendCount as integer
+	appendCount = TableInfo(Alt_Append, TAB_INFO_NROWS)
+	dim warnCount as integer
+	warnCount = TableInfo(_Warned, TAB_INFO_NROWS)
+	dim failCount as integer
+	failCount = TableInfo(_Failed, TAB_INFO_NROWS)
+	
+	'If warnCount <> 0 Then
+	'	Commit Table _Warned as gErrorCheckPath & "\Link_Add_Warning.tab"
+	'End If
+	If failCount <> 0 Then
+		Commit Table _Failed as gErrorCheckPath & "\Link_Add_Failed.tab"
+	End If
+			
+	gReturnStatus="Found " & appendCount & " link(s) to append. " & failCount & " link(s) failed."
+End Sub
+'---------------------------------------------------------
+Sub AppendLinks
+	
+	gReturnStatus="Entered AppendLinks()"	
+	Commit Table Alt_Append	
+	If TableInfo(Alt_Append, TAB_INFO_NROWS) = 0 Then
+		Print "No links for append."
+		gReturnStatus = "No links for append."
+	Else		
+		Alter Table Alt_Append (Add Source char(255))
+		Update Alt_Append Set Source = Str$(gAltID) & "." & Str$(AltLinkId)
+		'Add Column Alt_Append (Source char(255)) From Alt_Append Set to Str$(gAltID) & "." & Str$(AltLinkId)
+		Call CommitAppend("Alt_Append")		
+		Commit Table Alt_Append			
+	End If
+		
+	Commit Table mdl_links
+	Commit Table mdl_nodes
+	gReturnStatus="Succesfully called AppendLinks()"	
+			
+End Sub
+'---------------------------------------------------------
+Sub SetupLinkProcessor
+
+	gReturnStatus="Entered SetupLinkProcessor()"	
+	gmdlINIfullpath = gOutputModelPath
+	call InitOpenUtilGlobals()
+	Call SetStdCoordSys()
+	
+	dim mdlIndex(4) as integer
+	mdlIndex(1) = NDX_MDL_LINKS
+	mdlIndex(2) = NDX_MDL_NODES 				
+	mdlIndex(3) = NDX_MDL_DIRSC 				
+	mdlIndex(4) = NDX_MDL_SURFSC
+	
+	dim result as integer
+	result = setOKToOpen(gmdlFiles, mdlIndex)	
+	result = setAllowWrite(gmdlFiles, mdlIndex)
+	result = ReallyOpenModel()
+	gReturnStatus="Succesfully called SetupLinkProcessor()"	
+End Sub 
+'---------------------------------------------------------
+Sub ExitApplication()		
+	Close All		
+	End Program
+End Sub
+
+'---------------------------------------------------------
+' Modify to	add	menuitems for testing
+'---------------------------------------------------------
+
+Sub	Function_Menu() 'Required for all Framework MBX apps
+
+Create Menu	"Function Menu"	as 
+	"Setup Link Processor" ID 10003 calling SetupLinkProcessor,	
+	"Delete Link Alternatives" ID 10001 calling DeleteLinks,
+	"Update Link Alternatives" ID 10002 calling UpdateLinks,
+	"Check Link Alternatives" ID 10004 calling CheckLinks,
+	"Append Link Alternatives" ID 10000 calling AppendLinks,	
+	"Exit MBX Application" ID 9999 calling ExitApplication 'Required for all Framework MBX apps
+  
+  Alter	Menu Bar Remove	ID 6, ID 7 
+  Alter	Menu Bar Add "Function Menu", ID 6,	ID 7
+
+End	Sub
+
+'--------------------------------------------------------
+'No	changes	below here
+'--------------------------------------------------------
+
+Sub	Main()
+		 
+	gReturnStatus="Initialized"	
+	OnError GoTo ErrorHandler
+	Call InitHousekeeping		' have to init some globals before we can say hello
+  Call InitOpenUtilGlobals  ' this sets up table names for the EMGOpenUtils functions
+	
+	Call Function_Menu
+	
+	Exit Sub
+	
+	ErrorHandler:
+		gReturnStatus = "Error: " + Err()		
+		OnError GoTo 0
+		Error Err()
+	
+End	Sub
+'---------------------------------------------------------
+'All functions should be sure to save tables as needed. When MapInfo exits,
+'all tables will be closed without saving (to prevent user prompt in event of a crash
+'Sub EndHandler
+'	Close All
+'End Sub
+Sub SetAllLineStyles()
+	Dim penStyle as Pen
+		
+	Select * From alt_links Where LinkType = "C"
+	penStyle = MakePen(3,72,MAGENTA)
+	Update Selection Set obj = AlterLineStyle(obj, penStyle)
+	
+	Select * From alt_links Where LinkType = "S"
+	penStyle = MakePen(3,2,RED)
+	Update Selection Set obj = AlterLineStyle(obj, penStyle)
+	
+	Select * From alt_links Where LinkType = "D"
+	penStyle = MakePen(3,6,GREEN)
+	Update Selection Set obj = AlterLineStyle(obj, penStyle)
+	
+	Select * From alt_links Where LinkType = "IS"
+	penStyle = MakePen(1,74,RED)
+	Update Selection Set obj = AlterLineStyle(obj, penStyle)
+
+End Sub
+
+ 
+Function AlterLineStyle(ByVal oLine As Object, ByVal pNew As Pen) As Object
+ 
+ Alter Object  oLine 
+        Info  OBJ_INFO_PEN, pNew
+ 
+	AlterLineStyle = oLine
+ 
+End Function
