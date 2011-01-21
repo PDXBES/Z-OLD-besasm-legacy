@@ -1,0 +1,665 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CharacterizationTool</name>
+    </assembly>
+    <members>
+        <member name="T:SystemsAnalysis.Characterization.CharacterizationEngine">
+            <summary>
+            A class to perform characterization queries for collections of Model
+            components. Characterization operations are assumed to take place against
+            component collections, not a Model or StartLinks/StopLinks collections.
+            </summary>
+        </member>
+        <member name="M:SystemsAnalysis.Characterization.CharacterizationEngine.#ctor(SystemsAnalysis.Modeling.Links,System.String,SystemsAnalysis.Characterization.Settings)">
+            <summary>
+            Constructor for the CharacterizationEngine.
+            </summary>
+            <param name="charLinks">A Links collection to be characterized.</param>		
+            <param name="settings">A Settings DataSet that contains information regarding
+            the source files for the characterization engine.</param>
+            <param name="studyArea">A title for the study area used when creating table headers.</param>
+        </member>
+        <member name="M:SystemsAnalysis.Characterization.CharacterizationEngine.LoadCharacterizationTables">
+            <summary>
+            Loads the AGMaster and Results Warehouse DataSets.
+            </summary>
+        </member>
+        <member name="M:SystemsAnalysis.Characterization.CharacterizationEngine.Characterize">
+            <summary>
+            Generates an XML characterization report using the parameters specified in the constructor.
+            </summary>
+        </member>
+        <member name="M:SystemsAnalysis.Characterization.CharacterizationEngine.OnStatusChanged(SystemsAnalysis.Utils.Events.StatusChangedArgs)">
+            <summary>
+            Internally called function that fires the OnStatusChanged event.
+            </summary>
+            <param name="e">Parameter that contains the string describing the new state.</param>
+        </member>
+        <member name="E:SystemsAnalysis.Characterization.CharacterizationEngine.StatusChanged">
+            <summary>
+            Event that occurs when CharacterizationEngine reports that it's status has changed.
+            </summary>
+        </member>
+        <member name="T:SystemsAnalysis.Characterization.MismatchedLinkException">
+            <summary>
+            Summary description for CharacterizationExceptions.
+            </summary>
+        </member>
+        <member name="T:SystemsAnalysis.Characterization.CharacterizationForm">
+            <summary>
+            Summary description for Form1.
+            </summary>
+        </member>
+        <member name="F:SystemsAnalysis.Characterization.CharacterizationForm.m_AoInitialize">
+            <summary>
+            Required designer variable.
+            </summary>
+            
+        </member>
+        <member name="M:SystemsAnalysis.Characterization.CharacterizationForm.#ctor">
+            <summary>
+            Main user-input form for the characterization tool.
+            </summary>
+        </member>
+        <member name="M:SystemsAnalysis.Characterization.CharacterizationForm.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+        </member>
+        <member name="M:SystemsAnalysis.Characterization.CharacterizationForm.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:SystemsAnalysis.Characterization.CharacterizationForm.Main">
+            <summary>
+            The main entry point for the application.
+            </summary>
+        </member>
+        <member name="T:SystemsAnalysis.Characterization.DSCHydraulic">
+            <summary>
+            Summary description for DSCHydraulics.
+            </summary>
+        </member>
+        <member name="P:SystemsAnalysis.Characterization.DSCHydraulic.DSCID">
+            <summary>
+            Returns the DSCID associated with this DSC hydraulic modeling results.
+            The DSCID is equal to ParcelID * 100 + DivideID.
+            </summary>
+        </member>
+        <member name="P:SystemsAnalysis.Characterization.DSCHydraulic.HGL">
+            <summary>
+            Returns the peak HGL all the pipe that this DSC is connected to.
+            </summary>
+        </member>
+        <member name="P:SystemsAnalysis.Characterization.DSCHydraulic.DeltaHGL">
+            <summary>
+            Returns the difference between the peak HGL and the finished floor elevation
+            for a given DSC.
+            </summary>
+        </member>
+        <member name="P:SystemsAnalysis.Characterization.DSCHydraulic.Surcharge">
+            <summary>
+            Returns the surcharge elevation of pipe connected to this DSC, at the point of
+            connection.
+            </summary>
+        </member>
+        <member name="P:SystemsAnalysis.Characterization.DSCHydraulic.DSC">
+            <summary>
+            Gets or sets the DSC object associated with this DSC hydraulic results
+            object. Returns null is this DSC hydraulic result does not have an 
+            associated DSC object.  
+            </summary>
+        </member>
+        <member name="P:SystemsAnalysis.Characterization.DSCHydraulic.HasDSC">
+            <summary>
+            Indicates if this DSCHydraulic object contains a reference to 
+            an associated DSC object.
+            </summary>
+        </member>
+        <member name="T:SystemsAnalysis.Characterization.DSCHydraulics">
+            <summary>
+            A strongly-typed collection of DSCHydraulic objects.
+            </summary>
+        </member>
+        <member name="M:SystemsAnalysis.Characterization.DSCHydraulics.#ctor">
+            <summary>
+            Creates an empty DSCHydraulics collection.
+            </summary>
+        </member>
+        <member name="M:SystemsAnalysis.Characterization.DSCHydraulics.#ctor(SystemsAnalysis.Modeling.DSCs,System.Int32,System.String)">
+            <summary>
+            Constructor for a DSCHydraulics collection. This collection will contain a 
+            subset of the master DSCHydraulics table whose DSCID values exist in the 
+            provided DSCs collection.
+            </summary>
+            <param name="dscs">A DSCs collection whose DSCID values
+            should be added to this DSCHydraulics collection.</param>
+            <param name="scenarioID">The Scenario ID of the DSCHydraulics collection.</param>
+            <param name="modelCatalogDB">The database to read model results from. Typically will
+            be the Central Data Store for modeling results.</param>
+        </member>
+        <member name="M:SystemsAnalysis.Characterization.DSCHydraulics.CountBySewerBackupRisk(System.Double,System.Double)">
+            <summary>
+            Returns the number of DSCHydraulic objects in this collection that
+            have basement backup risk within the specified range. Basement backup
+            risk is determined using DSCHydraulic.DeltaHGL. Direct subcatchments that 
+            have a 'False Positive' (determined by DSC.FalseBFRisk) flooding risk 
+            are excluded from the total.
+            </summary>
+            <param name="min">The mininum basement backup risk to count (inclusive). To select
+            an upper bound only use System.Double.MinValue for this parameter.</param>
+            <param name="max">The maximum basement backup risk to count (inclusive). To select
+            an upper bound only use System.Double.MinValue for this parameter.</param>
+            <returns>The number of DSC objects in this collection within the specified range.</returns>
+        </member>
+        <member name="M:SystemsAnalysis.Characterization.DSCHydraulics.Add(SystemsAnalysis.Characterization.DSCHydraulic)">
+            <summary>
+            Adds a DSCHydraulic object to this collection.
+            </summary>
+            <param name="dsc">The DSCHydraulic object to add to this collection.</param>
+        </member>
+        <member name="M:SystemsAnalysis.Characterization.DSCHydraulics.Remove(System.Int32)">
+            <summary>
+            Removes a DSCHydraulic object from this DSCHydraulics collection.
+            </summary>
+            <param name="dscID">The dscID of the DSCHydraulic object to remove 
+            from this DSCHydraulics collection. </param>
+        </member>
+        <member name="M:SystemsAnalysis.Characterization.DSCHydraulics.Contains(System.Int32)">
+            <summary>
+            Determines whether this DSCHydraulics collection contains a DSCHydraulic 
+            object with the specified dscID.
+            </summary>
+            <param name="dscID"></param>
+            <returns>true if the specified dscID was found, otherwise false.</returns>
+        </member>
+        <member name="M:SystemsAnalysis.Characterization.DSCHydraulics.OnValidate(System.Object,System.Object)">
+            <summary>
+            Event that occurs when a DSCHydraulic object is added to this collection. Will throw
+            and exception if the object added is not of type DSCHydraulic.
+            </summary>
+            <param name="key">The DSCID of the DSCHydraulic object to be added to the collection.</param>
+            <param name="value">The DSCHydraulic object to be added to this collection.</param>
+        </member>
+        <member name="P:SystemsAnalysis.Characterization.DSCHydraulics.Item(System.Int32)">
+            <summary>
+            Gets the DSCHydraulic object with the specified dscID. 		
+            </summary>
+        </member>
+        <member name="P:SystemsAnalysis.Characterization.DSCHydraulics.Keys">
+            <summary>
+            Gets an ICollection containing a collection of dscID integers contained
+            in the DSCHydraulics collection.
+            </summary>
+        </member>
+        <member name="P:SystemsAnalysis.Characterization.DSCHydraulics.Values">
+            <summary>
+            Gets an ICollection containing a collection of DSCHydraulic objects
+            contained in this DSCHydraulics collection. Use this method to enumerate
+            through the DSCHydraulics collection using the "foreach" enumerator.
+            </summary>
+        </member>
+        <member name="T:SystemsAnalysis.Characterization.InputBox">
+            <summary>
+            A simple input box form. This should be moved to a utilities class.
+            </summary>
+        </member>
+        <member name="F:SystemsAnalysis.Characterization.InputBox.buttonOK">
+            <summary>
+            The OK button for this form.
+            </summary>
+        </member>
+        <member name="F:SystemsAnalysis.Characterization.InputBox.buttonCancel">
+            <summary>
+            The Cancel button for this form.
+            </summary>
+        </member>
+        <member name="F:SystemsAnalysis.Characterization.InputBox.labelPrompt">
+            <summary>
+            The label for this form.
+            </summary>
+        </member>
+        <member name="F:SystemsAnalysis.Characterization.InputBox.textBoxText">
+            <summary>
+            The text to be read by this form.
+            </summary>
+        </member>
+        <member name="F:SystemsAnalysis.Characterization.InputBox.errorProviderText">
+            <summary>
+            Error provider for this form.
+            </summary>
+        </member>
+        <member name="F:SystemsAnalysis.Characterization.InputBox.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="F:SystemsAnalysis.Characterization.InputBox._validator">
+            <summary>
+            Delegate used to validate the object
+            </summary>
+        </member>
+        <member name="M:SystemsAnalysis.Characterization.InputBox.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+        </member>
+        <member name="M:SystemsAnalysis.Characterization.InputBox.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:SystemsAnalysis.Characterization.InputBox.Show(System.String,System.String,System.String,SystemsAnalysis.Characterization.InputBoxValidatingHandler,System.Int32,System.Int32)">
+            <summary>
+            Displays a prompt in a dialog box, waits for the user to input text or click a button.
+            </summary>
+            <param name="prompt">String expression displayed as the message in the dialog box</param>
+            <param name="title">String expression displayed in the title bar of the dialog box</param>
+            <param name="defaultResponse">String expression displayed in the text box as the default response</param>
+            <param name="validator">Delegate used to validate the text</param>
+            <param name="xpos">Numeric expression that specifies the distance of the left edge of the dialog box from the left edge of the screen.</param>
+            <param name="ypos">Numeric expression that specifies the distance of the upper edge of the dialog box from the top of the screen</param>
+            <returns>An InputBoxResult object with the Text and the OK property set to true when OK was clicked.</returns>
+        </member>
+        <member name="M:SystemsAnalysis.Characterization.InputBox.Show(System.String,System.String,System.String,SystemsAnalysis.Characterization.InputBoxValidatingHandler)">
+            <summary>
+            Displays a prompt in a dialog box, waits for the user to input text or click a button.
+            </summary>
+            <param name="prompt">String expression displayed as the message in the dialog box</param>
+            <param name="title">String expression displayed in the title bar of the dialog box</param>
+            <param name="defaultText">String expression displayed in the text box as the default response</param>
+            <param name="validator">Delegate used to validate the text</param>
+            <returns>An InputBoxResult object with the Text and the OK property set to true when OK was clicked.</returns>
+        </member>
+        <member name="M:SystemsAnalysis.Characterization.InputBox.textBoxText_TextChanged(System.Object,System.EventArgs)">
+            <summary>
+            Reset the ErrorProvider
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:SystemsAnalysis.Characterization.InputBox.textBoxText_Validating(System.Object,System.ComponentModel.CancelEventArgs)">
+            <summary>
+            Validate the Text using the Validator
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="T:SystemsAnalysis.Characterization.InputBoxResult">
+            <summary>
+            Class used to store the result of an InputBox.Show message.
+            </summary>
+        </member>
+        <member name="T:SystemsAnalysis.Characterization.InputBoxValidatingArgs">
+            <summary>
+            EventArgs used to Validate an InputBox
+            </summary>
+        </member>
+        <member name="T:SystemsAnalysis.Characterization.InputBoxValidatingHandler">
+            <summary>
+            Delegate used to Validate an InputBox
+            </summary>
+        </member>
+        <member name="T:SystemsAnalysis.Characterization.LinkHydraulic">
+            <summary>
+            Summary description for LinkHydraulics.
+            </summary>
+        </member>
+        <member name="P:SystemsAnalysis.Characterization.LinkHydraulic.LinkID">
+            <summary>
+            The LinkID of this LinkHydraulic object.
+            </summary>
+        </member>
+        <member name="P:SystemsAnalysis.Characterization.LinkHydraulic.MLinkID">
+            <summary>
+            The MLinkID associated with this pipe, or 0 if the pipe is not
+            represented in the master links database.
+            </summary>
+        </member>
+        <member name="P:SystemsAnalysis.Characterization.LinkHydraulic.MaxQ">
+            <summary>
+            The peak modeled flow for this pipe in cfs.
+            </summary>
+        </member>
+        <member name="P:SystemsAnalysis.Characterization.LinkHydraulic.MaxV">
+            <summary>
+            The peak modeled velocity for this pipe in fps.
+            </summary>
+        </member>
+        <member name="P:SystemsAnalysis.Characterization.LinkHydraulic.QQRatio">
+            <summary>
+            The peak flow to design flow ratio for this pipe.
+            </summary>
+        </member>
+        <member name="P:SystemsAnalysis.Characterization.LinkHydraulic.MaxUSElev">
+            <summary>
+            The maximum modeled water surface elevation at the upstream 
+            end of the pipe.
+            </summary>
+        </member>
+        <member name="P:SystemsAnalysis.Characterization.LinkHydraulic.MaxDSElev">
+            <summary>
+            The maximum modeled water surface elevation at the downstream 
+            end of the pipe.
+            </summary>
+        </member>
+        <member name="P:SystemsAnalysis.Characterization.LinkHydraulic.Link">
+            <summary>
+            Gets or sets the Link object associated with this LinkHydraulic
+            object. Returns null if there is no associated Link object.
+            </summary>
+        </member>
+        <member name="P:SystemsAnalysis.Characterization.LinkHydraulic.HasLink">
+            <summary>
+            Indicates if this LinkHydraulic object contains a reference to 
+            an associated Link object.
+            </summary>
+        </member>
+        <member name="T:SystemsAnalysis.Characterization.LinkHydraulics">
+            <summary>
+            A strongly-typed collection of LinkHydraulic objects.
+            </summary>
+        </member>
+        <member name="M:SystemsAnalysis.Characterization.LinkHydraulics.#ctor">
+            <summary>
+            Creates an empty LinkHydraulics collection.
+            </summary>
+        </member>
+        <member name="M:SystemsAnalysis.Characterization.LinkHydraulics.#ctor(SystemsAnalysis.Modeling.Links,System.Int32,System.String)">
+            <summary>
+            Constructor for a LinksHydraulics collection. This collection will contain a 
+            subset of the master LinksHydraulics table whose MLinkIDs corresponds to those
+            in the provided Links collection.
+            </summary>
+            <param name="links">A Links collection whose MLinkID values
+            should be added to the this LinkHydraulics collection.</param>
+            <param name="scenarioID">The Scenario ID of the LinkHydraulics collection.</param>
+            <param name="modelCatalogDB">The database to read model results from. Typically will
+            be the Central Data Store for modeling results.</param>
+        </member>
+        <member name="M:SystemsAnalysis.Characterization.LinkHydraulics.CountByQQRatio(System.Double,System.Double)">
+            <summary>
+            Returns the number of LinkHydraulic objects in this collection that
+            have a Max Model Q to Design Q ratio within the specified range.
+            </summary>
+            <param name="min">The mininum Q/Q ratio to count (inclusive). To select
+            an upper bound only use System.Double.MinValue for this parameter.</param>
+            <param name="max">The maximum Q/Q ratio to count (inclusive). To select
+            a lower bound only use System.Double.Max for this parameter.</param>
+            <returns>The number of pipe segments within the specifed range.</returns>
+        </member>
+        <member name="M:SystemsAnalysis.Characterization.LinkHydraulics.CountByQQRatio(System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            Returns the number of LinkHydraulic objects in this collection that
+            have a Max Model Q to Design Q ratio within the specified range and a
+            pipe diameter within the specified range. 
+            </summary>
+            <param name="min">The mininum Q/Q ratio to count (inclusive). To select
+            an upper bound only use System.Double.MinValue for this parameter.</param>
+            <param name="max">The maximum Q/Q ratio to count (inclusive). To select
+            a lower bound only use System.Double.Max for this parameter.</param>
+            <param name="minPipeSize">The minimum pipe diameter to count (inclusive). To select
+            an upper bound only use System.Double.MinValue for this parameter.</param>
+            <param name="maxPipeSize">The maximum pipe diameter to count (inclusive). To select
+            an upper bound only use System.Double.MinValue for this parameter.</param>
+            <returns>The number of pipe segments within the specifed Q/Q range and
+            pipe diameter range.</returns>
+        </member>
+        <member name="M:SystemsAnalysis.Characterization.LinkHydraulics.CountByQQRatioLength(System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            Returns the length of LinkHydraulic objects in feet in this collection that
+            have a Max Model Q to Design Q ratio within the specified range and a
+            pipe diameter within the specified range. 
+            </summary>
+            <param name="min">The mininum Q/Q ratio to count (inclusive). To select
+            an upper bound only use System.Double.MinValue for this parameter.</param>
+            <param name="max">The maximum Q/Q ratio to count (inclusive). To select
+            a lower bound only use System.Double.Max for this parameter.</param>
+            <param name="minPipeSize">The minimum pipe diameter to count (inclusive). To select
+            an upper bound only use System.Double.MinValue for this parameter.</param>
+            <param name="maxPipeSize">The maximum pipe diameter to count (inclusive). To select
+            an upper bound only use System.Double.MinValue for this parameter.</param>
+            <returns>The length of pipe segments in feet within the specifed Q/Q range and
+            pipe diameter range.</returns>
+        </member>
+        <member name="M:SystemsAnalysis.Characterization.LinkHydraulics.PipeSurchargeCount(System.Double,System.Double)">
+            <summary>
+            Returns the number of LinkHydraulic objects in this collection that
+            have pipe surcharge within the specified range.
+            </summary>
+            <param name="min">The mininum pipe surcharge value to count (inclusive). To select
+            an upper bound only use System.Double.MinValue for this parameter.</param>
+            <param name="max">The maximum pipe surcharge value to count (inclusive). To select
+            an upper bound only use System.Double.MaxValue for this parameter.</param>
+            <returns>The number of pipes in this collection within the specified range.</returns>
+        </member>
+        <member name="M:SystemsAnalysis.Characterization.LinkHydraulics.PipeSurchargeLength(System.Double,System.Double)">
+            <summary>
+            Returns the total length of the surcharged pipe segments in this collection
+            have pipe surcharge within the specified range.
+            </summary>
+            <param name="min">The mininum pipe surcharge value to include (inclusive). To select
+            an upper bound only use System.Double.MinValue for this parameter.</param>
+            <param name="max">The maximum pipe surcharge value to include (inclusive). To select
+            an upper bound only use System.Double.MaxValue for this parameter.</param>
+            <returns>The total length of the pipe segments in this collection with surcharge
+            values within the specified range.</returns>
+        </member>
+        <member name="M:SystemsAnalysis.Characterization.LinkHydraulics.Add(SystemsAnalysis.Characterization.LinkHydraulic)">
+            <summary>
+            Adds a LinkHydraulic object to this collection.
+            </summary>
+            <param name="link">The LinkHydraulic object to add to this collection.</param>
+        </member>
+        <member name="M:SystemsAnalysis.Characterization.LinkHydraulics.Remove(System.Int32)">
+            <summary>
+            Removes a LinkHydraulic object from this LinkHydraulics collection.
+            </summary>
+            <param name="mLinkID">The MLinkID of the LinkHydraulic object to remove 
+            from this LinkHydraulic collection. </param>
+        </member>
+        <member name="M:SystemsAnalysis.Characterization.LinkHydraulics.Contains(System.Int32)">
+            <summary>
+            Determines whether this LinkHydraulics collection contains a LinkHydraulic 
+            object with the specified mLinkID.
+            </summary>
+            <param name="mLinkID"></param>
+            <returns>true if the specified mLinkID was found, otherwise false.</returns>
+        </member>
+        <member name="M:SystemsAnalysis.Characterization.LinkHydraulics.OnValidate(System.Object,System.Object)">
+            <summary>
+            Event that occurs when a LinkHydraulic object is added to this collection. Will throw
+            and exception if the object added is not of type LinkHydraulic.
+            </summary>
+            <param name="key">The LinkID of the LinkHydraulic object to be added to the collection.</param>
+            <param name="value">The LinkHydraulic object to be added to this collection.</param>
+        </member>
+        <member name="P:SystemsAnalysis.Characterization.LinkHydraulics.Item(System.Int32)">
+            <summary>
+            Gets the LinkHydraulic object with the specified mLinkID. 		
+            </summary>
+        </member>
+        <member name="P:SystemsAnalysis.Characterization.LinkHydraulics.Keys">
+            <summary>
+            Gets an ICollection containing a collection of MLinkID integers contained
+            in the LinkHydraulics collection.
+            </summary>
+        </member>
+        <member name="P:SystemsAnalysis.Characterization.LinkHydraulics.Values">
+            <summary>
+            Gets an ICollection containing a collection of LinkHydraulic objects
+            contained in the LinkHydraulics collection. Use this method to enumerate
+            through the LinkHydraulics collection using the "foreach" enumerator.
+            </summary>
+        </member>
+        <member name="T:SystemsAnalysis.Characterization.NodeHydraulic">
+            <summary>
+            Summary description for NodeHydraulics.
+            </summary>
+        </member>
+        <member name="M:SystemsAnalysis.Characterization.NodeHydraulic.#ctor(System.Data.OleDb.OleDbDataReader)">
+            <summary>
+            Constructs a NodeHydraulic object using a ADO.NET data reader. Should only be
+            called from the NodeHydraulics collection.
+            </summary>
+            <param name="mstNodeHydraulicsReader">An ADO.NET data reader containing a DataRow
+            that matches the node hydraulics schema.</param>
+        </member>
+        <member name="P:SystemsAnalysis.Characterization.NodeHydraulic.Name">
+            <summary>
+            The six character "licencse plate" ID of this node, AKA the Hansen ID.
+            </summary>
+        </member>
+        <member name="P:SystemsAnalysis.Characterization.NodeHydraulic.MaxElevation">
+            <summary>
+            The maximum water surface elevation at this node.
+            </summary>
+        </member>
+        <member name="P:SystemsAnalysis.Characterization.NodeHydraulic.Surcharge">
+            <summary>
+            The amount of surcharge at this node, measured relative to the crown
+            of the highest pipe connected to this node.
+            </summary>
+        </member>
+        <member name="P:SystemsAnalysis.Characterization.NodeHydraulic.Freeboard">
+            <summary>
+            The distance between the maximum water surface elevation and the ground
+            elvation in feet. If this is 0 or less, then street flooding is occcuring.
+            </summary>
+        </member>
+        <member name="P:SystemsAnalysis.Characterization.NodeHydraulic.SurchargeTime">
+            <summary>
+            The amount of time in minutes that pipes connected to this node are 
+            experiencing surcharging.
+            </summary>
+        </member>
+        <member name="P:SystemsAnalysis.Characterization.NodeHydraulic.FloodedTime">
+            <summary>
+            The amount of time in minutes that this node is flooding to the street.
+            </summary>
+        </member>
+        <member name="T:SystemsAnalysis.Characterization.NodeHydraulics">
+            <summary>
+             A strongly-typed collection of NodeHydraulic objects.
+            </summary>
+        </member>
+        <member name="M:SystemsAnalysis.Characterization.NodeHydraulics.#ctor">
+            <summary>
+            Creates an empty NodeHydraulics collection.
+            </summary>
+        </member>
+        <member name="M:SystemsAnalysis.Characterization.NodeHydraulics.#ctor(SystemsAnalysis.Modeling.Nodes,System.Int32,System.String)">
+            <summary>
+            Constructor for a NodeHydraulics collection. This collection will contain a 
+            subset of the master NodeHydraulics table which exist as the up- or downstream 
+            nodes in the provided Links collection.
+            </summary>		
+            <param name="nodes">A Links collection whose up- and downstream
+            nodes should be added to the this Nodes collection.</param>
+            <param name="scenarioID">The Scenario ID of the NodeHydraulics collection.</param>
+            <param name="modelCatalogDB">The database to read model results from. Typically will
+            be the Central Data Store for modeling results.</param>
+        </member>
+        <member name="M:SystemsAnalysis.Characterization.NodeHydraulics.Add(SystemsAnalysis.Characterization.NodeHydraulic)">
+            <summary>
+            Adds a NodeHydraulic object to this collection.
+            </summary>
+            <param name="node">The NodeHydraulic object to add to this collection.</param>
+        </member>
+        <member name="M:SystemsAnalysis.Characterization.NodeHydraulics.Remove(System.String)">
+            <summary>
+            Removes a NodeHydraulic object from this NodeHydraulics collection.
+            </summary>
+            <param name="nodeName">The nodeName of the NodeHydraulic object to remove 
+            from this NodeHydraulics collection. </param>
+        </member>
+        <member name="M:SystemsAnalysis.Characterization.NodeHydraulics.Contains(System.String)">
+            <summary>
+            Determines whether this NodeHydraulics collection contains a NodeHydraulic 
+            object with the specified nodeName.
+            </summary>
+            <param name="nodeName"></param>
+            <returns>true if the specified nodeName was found, otherwise false.</returns>
+        </member>
+        <member name="M:SystemsAnalysis.Characterization.NodeHydraulics.OnValidate(System.Object,System.Object)">
+            <summary>
+            Event that occurs when a NodeHydraulic object is added to this collection. Will throw
+            and exception if the object added is not of type NodeHydraulic.
+            </summary>
+            <param name="key">The node name of the NodeHydraulic object to be added to the collection.</param>
+            <param name="value">The DSCHydraulic object to be added to this collection.</param>
+        </member>
+        <member name="P:SystemsAnalysis.Characterization.NodeHydraulics.Item(System.String)">
+            <summary>
+            Gets the NodeHydraulic object with the specified nodeName. 		
+            </summary>
+        </member>
+        <member name="P:SystemsAnalysis.Characterization.NodeHydraulics.Keys">
+            <summary>
+            Gets an ICollection containing a collection of NodeName strings contained
+            in the NodeHydraulics collection.
+            </summary>
+        </member>
+        <member name="P:SystemsAnalysis.Characterization.NodeHydraulics.Values">
+            <summary>
+            Gets an ICollection containing a collection of NodeHydraulic objects
+            contained in this NodeHydraulics collection. Use this method to enumerate
+            through the NodeHydraulics collection using the "foreach" enumerator.
+            </summary>
+        </member>
+        <member name="T:SystemsAnalysis.Characterization.StatusForm">
+            <summary>
+            Summary description for StatusForm.
+            </summary>
+        </member>
+        <member name="F:SystemsAnalysis.Characterization.StatusForm.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:SystemsAnalysis.Characterization.StatusForm.#ctor">
+            <summary>
+            A Windows Form for logging status information and providing real-time
+            feedback of program status during log execution blocks.
+            </summary>
+        </member>
+        <member name="M:SystemsAnalysis.Characterization.StatusForm.AddInfo(System.String)">
+            <summary>
+            Adds text to the Status Form display.
+            </summary>
+            <param name="status">The string to be added to the display. The newline
+            character will be automatically appended to the end of this string
+            if it is not already present.</param>
+        </member>
+        <member name="M:SystemsAnalysis.Characterization.StatusForm.AddInfo(System.String,System.Boolean)">
+            <summary>
+            Adds text to the Status Form display.
+            </summary>
+            <param name="status">The string to be added to the display. The newline
+            character will be automatically appended to the end of this string
+            if it is not already present.</param>
+            <param name="newLine">Specifies whether a line break should be appended
+            to the end of the status text.</param>
+        </member>
+        <member name="M:SystemsAnalysis.Characterization.StatusForm.ClearText">
+            <summary>
+            Clears the Status Form display.
+            </summary>
+        </member>
+        <member name="M:SystemsAnalysis.Characterization.StatusForm.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+        </member>
+        <member name="M:SystemsAnalysis.Characterization.StatusForm.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+    </members>
+</doc>

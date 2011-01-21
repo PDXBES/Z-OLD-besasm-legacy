@@ -1,0 +1,437 @@
+'***********************************************************************************
+' Source for the str_lib library.  Users of this library should see str_lib.def 
+' for information on how to use the routines contained herein.
+' 
+' Version 1.0
+'***********************************************************************************
+
+Include "str_lib.def"
+Include "MAPBASIC.DEF"
+
+' Constant
+Define Delim ";"
+
+' Declare LOCAL routine
+'------------------------------
+Declare Sub Get_Pos_List_Index(byval ListString as string,
+					 byval ItemNum as smallint,
+					 Start_pos as smallint,
+					 End_Pos as smallint)	
+
+
+'****************************************************************************************
+' Given a semi-colon delimited list, this routine returns the count of items in the list
+' Modified by MAL to account for either ending in a ";" or not
+'****************************************************************************************
+Function count_items(byval ItemTitleList as String) as SmallInt
+Dim i, counter as SmallInt
+      ItemTitleList = rTrim$(ItemTitleList)
+	if len(itemtitlelist) = 0 then
+		count_items = 0
+		exit sub
+	end if 
+	For i = 1 to Len(itemTitleList)
+		If Mid$(itemTitleList, i, 1) = ";" Then
+			counter = counter + 1
+		End If
+	Next
+      if Right$(ItemTitleList,1) = ";" then 
+        count_items = counter
+      else
+        count_items = counter + 1
+      End If
+
+End Function
+
+'****************************************************************************************
+' This routine takes a semi delimited list and swaps the itemIndex item with the item
+' before it in the list.
+'****************************************************************************************
+Function list_move_up(ItemTitleList As String, ByVal itemIndex as SmallInt) as SmallInt
+Dim beforeStr, afterStr as String
+Dim beforePosCounter, counter, i, nextPos as SmallInt
+Dim insertStr, afterInsertStr as String
+Dim errCode as SmallInt
+Dim errString as String
+
+	If Len(ItemTitleList) < 2 OR Len(ItemTitleList) > LISTMAX then
+		errString = "LIST_MOVE_UP: ItemList empty or exceeds maximum length"
+		Goto ERRHANDLER
+	End If
+
+	Call extract(itemIndex, itemTitleList, insertStr)
+	Call extract(itemIndex-1, itemTitleList, afterInsertStr)	
+
+	' If we are moving the item into the first position, we have to special case it
+	If itemIndex = 2 Then 
+		beforeStr = insertStr + ";" + afterInsertStr
+		beforePosCounter = 1
+	Else
+		For i = 0 to Len(itemTitleList)
+			If Mid$(itemTitleList, i, 1) = ";" Then
+				counter = counter + 1
+				If counter = itemIndex-2 Then
+					Exit For
+				End If
+			End If
+			beforePosCounter = beforePosCounter + 1
+		Next
+		beforeStr = Left$(itemTitleList, beforePosCounter-1) + ";" + insertStr + ";" + afterInsertStr
+	End If
+
+	' Now we get the afterStr portion
+	nextPos = Instr(beforeposCounter+1, itemTitleList, ";")
+	nextPos = Instr(nextPos+1, itemTitleList, ";")
+	afterStr = Mid$(itemTitleList, nextPos, Len(itemTitleList)-nextPos)
+
+	itemTitleList = beforeStr + afterStr
+	errCode = set_list_end(itemTitleList)
+
+	Exit Sub
+ERRHANDLER:
+	LIST_MOVE_UP = FAILURE
+	Note errString
+		
+End Function
+
+
+'****************************************************************************************
+' This routine takes a semi delimited list and swaps the itemIndex item with the item
+' after it in the list.
+'****************************************************************************************
+Function list_move_down(ItemTitleList As String, ByVal itemIndex as SmallInt) as SmallInt
+Dim beforeStr, afterStr as String
+Dim beforePosCounter, counter, i, nextPos as SmallInt
+Dim insertStr, afterInsertStr as String
+Dim errCode as SmallInt
+Dim errString as String
+
+	If Len(ItemTitleList) < 2 OR Len(ItemTitleList) > LISTMAX then
+		errString = "LIST_MOVE_DOWN: ItemList empty or exceeds maximum length"
+		Goto ERRHANDLER
+	End If
+
+	Call extract(itemIndex, itemTitleList, insertStr)
+	Call extract(itemIndex+1, itemTitleList, afterInsertStr)	
+
+	' Unfortunately, the alogrithm for moving items down in the list is kind-o-klunky so,
+	' we have to handle the first item differently then the rest.
+	If itemIndex = 1 Then 
+		beforeStr = afterInsertStr+ ";" + insertStr
+		beforePosCounter = 1
+	Else
+		For i = 0 to Len(itemTitleList)
+			If Mid$(itemTitleList, i, 1) = ";" Then
+				counter = counter + 1
+				If counter = itemIndex-1 Then
+					Exit For
+				End If
+			End If
+			beforePosCounter = beforePosCounter + 1
+		Next
+		beforeStr = Left$(itemTitleList, beforePosCounter-1) + ";" + afterInsertStr+ ";" + insertStr
+	End If
+
+
+
+
+	' Now we get the afterStr portion
+	nextPos = Instr(beforeposCounter+1, itemTitleList, ";")
+	nextPos = Instr(nextPos+1, itemTitleList, ";")
+	afterStr = Mid$(itemTitleList, nextPos, Len(itemTitleList)-nextPos)
+
+	itemTitleList = beforeStr + afterStr
+	errCode = set_list_end(itemTitleList)
+
+	Exit Sub
+ERRHANDLER:
+	list_move_down = FAILURE
+	Note errString
+		
+End Function
+
+'****************************************************************************************
+' This routine makes sure that the string passed to it ends with a semi.
+'****************************************************************************************
+Function set_list_end(ItemTitleList as String) as SmallInt
+
+	If itemTitleList = "" OR Right$(RTrim$(ItemTitleList), 1) = ";" Then
+		set_list_end = SUCCESS
+	Else
+		ItemTitleList = ItemTitleList + ";"
+		set_list_end = SUCCESS
+	End If
+
+End Function
+
+
+'------------------------------------------------------------------------------------
+' Given a semi-colon delimited string, and and a substr, this routine removes
+' the substring
+'------------------------------------------------------------------------------------
+Sub remove_list_item(itemList as String, item2Remove as String, byval removeTrailingSemis as Logical)
+Dim curPos as Integer
+Dim StartStr, endStr as String
+
+	itemList = RTrim$(itemList)
+	curPos = Instr(1, itemList, item2Remove)
+	If curPos <> 0 Then
+		StartStr = Left$(itemList, curPos-1)
+		EndStr = Mid$(itemList, (curPos+Len(item2Remove )+1), Len(itemList) - (curPos+Len(item2Remove)))		
+		itemList = StartStr + endStr
+	End If
+
+	If removeTrailingSemis Then
+		While Right$(itemList, 1) = ";"
+			itemList = Mid$(itemList, 1, Len(itemList)-1)
+		Wend
+	End If			
+End Sub
+
+'****************************************************************************
+'
+' Sub procedure: Extract()
+'
+' From a ';' delimited list, extract specified element
+' Goal is number of item to return; s is string with list of 
+' items; rval is string that will contain selected item.
+'
+'****************************************************************************
+Sub Extract( ByVal StrIndex As Integer, ByVal StrToParse As String, retStr As String )
+Dim iBeg, iEnd, r As Integer
+
+  iBeg = 1
+  iEnd = InStr( iBeg, StrToParse, ";" )
+
+  For r = 2 To StrIndex
+    iBeg = iEnd + 1
+    iEnd = InStr( iBeg, StrToParse, ";" )
+  Next
+    
+  If iEnd = 0 Then
+    iEnd = 99
+  End If
+  retStr = Mid$( StrToParse, iBeg, iEnd - iBeg )
+
+End Sub 
+
+'****************************************************************************
+'
+' Sub procedure: sExtract()
+'
+' From a ';' delimited list, extract specified element
+' Goal is number of item to return; s is string with list of 
+' items; rval is string that will contain selected item.
+'
+'****************************************************************************
+FUnction sExtract( ByVal StrIndex As Integer, ByVal StrToParse As String) As String
+  Dim iBeg, iEnd, r As Integer
+
+  iBeg = 1
+  iEnd = InStr( iBeg, StrToParse, ";" )
+
+  For r = 2 To StrIndex
+    iBeg = iEnd + 1
+    iEnd = InStr( iBeg, StrToParse, ";" )
+  Next
+    
+  If iEnd = 0 Then
+    iEnd = 99
+  End If
+  sExtract = Mid$( StrToParse, iBeg, iEnd - iBeg )
+
+End Function
+
+
+'****************************************************************************
+'
+' Function : GetListString$()
+'
+' From a ';' delimited list, extract specified element.
+'
+'****************************************************************************
+Function GetListString$(ByVal inlist as String, ByVal choice as SmallInt) as String
+	Dim i, iIndex1, iIndex2 as SmallInt
+
+	iIndex2 = 0
+	i = 1
+	While i <= choice
+		iIndex1 = iIndex2+1
+		iIndex2 = instr(iIndex1,inlist,";")
+		If iIndex2 = 0 Then
+			GetListString$ = right$(inlist,len(inlist)-iIndex1+1)
+		Else
+			GetListString$ = mid$(inlist,iIndex1,iIndex2-iIndex1)
+		End If
+		i = i + 1
+	Wend
+End Function
+
+'****************************************************************************
+'
+' Sub : DelListString$()
+'
+' From a ';' delimited list, extract specified element
+' Goal is number of item to return; s is string with list of 
+' items; rval is string that will contain selected item.
+'
+'****************************************************************************
+Sub DelListString(inlist as String, ByVal choice as smallint)
+	Dim i, iIndex1, iIndex2, numinlist, pos as SmallInt
+	Dim Lstr, RStr as string
+	numinlist = Count_Items(inList)
+	if Choice > numinlist then
+		exit sub
+	else
+	Call Get_Pos_List_Index (inlist, Choice, iIndex1, iIndex2)
+      Do Case Choice
+	Case 0
+		Exit sub 
+      Case 1
+		if numinlist = 1 then
+			inlist = ""
+		else
+			inlist = ltrim$(right$(inlist,len(inlist)-iIndex2-1))
+		end if 
+	Case numinlist
+		if numinlist = 1 then
+			inlist = ""
+		else
+			inlist = rtrim$(left$(inlist,iIndex1-1))
+		end if 
+	Case else
+		LStr = rtrim$(left$(inlist,iIndex1-1))
+		RStr = ltrim$(right$(inlist,len(inlist)-iIndex2-1))
+		inlist = lStr + Rstr
+	End Case
+	End If
+End Sub
+
+'****************************************************************************
+'
+' LOCAL Function : Get_Pos_List_Index(byval ListString as string, byval IndexNum as smallint) as smallint)
+'
+' Determines the string position of a given index for a ';' delimited list.
+' Start_pos is position of FIRST CHAR of item string (after the ';')
+' End_pos is position of LAST CHAR of item string (before trailing ';' or last item)
+'****************************************************************************
+Sub Get_Pos_List_Index(byval InList as string,
+			     byval ItemNum as smallint,
+			     Start_pos as smallint,
+			     End_Pos as smallint)
+	Dim i, iIndex1, iIndex2 as SmallInt
+
+	iIndex2 = 0
+	i = 1
+	Do While i <= ItemNum
+		iIndex1 = iIndex2+1
+		iIndex2 = instr(iIndex1,inlist,";")
+		If iIndex2 = 0 Then
+			iIndex2 = len(inlist)
+			Exit Do
+		End If
+		i = i + 1
+	Loop	
+	Start_pos = iIndex1
+	End_Pos = iIndex2- 1
+End Sub
+
+'****************************************************************************
+'
+' Given a semi-colon delimited string and a desired string, this function will 
+' return true if that desitred string is in the original list.
+'
+' inlist - the delimited string
+' Searchstr - the string to be searched for
+'------------------------------------------------------------------------------
+Function IsInList(ByVal Searchlist as String, ByVal SearchStr as String) as Logical
+
+	Dim i_List, i as smallint
+	IsInList = FALSE
+	i_List = Count_Items(SearchList)
+	For i = 1 to i_List 
+		if SearchStr = GetListString$(SearchList, i) then
+			IsInList = TRUE
+			Exit Function
+		End if
+	Next
+End Function
+
+'****************************************************************************
+' This routine will strip all leading and trailing white spaces from a string
+' By Mark Liebe 8/4/99 5:32AM
+'-------------------------------------------------------------------------------
+Function Trim$(ByVal instring as string) As String
+	instring = ltrim$(instring)
+	Trim$ = rtrim$(instring)
+End Function
+
+'****************************************************************************
+' Given a string, will determine if it is a number
+' By Mark Liebe 8/4/99 5:29AM
+' instring - the string
+'------------------------------------------------------------------------------
+Function IsNumber$(ByVal instring as string) As Logical
+	dim strlen, i as integer
+	dim strchar as integer
+	dim deccount as integer
+		deccount = 0
+		strlen = len(instring)
+		IsNumber$ = False
+		for i = 1 to strlen 
+			strchar = asc(mid$(instring,i, 1))
+			Do Case strchar
+			Case 43	'positive
+				if i > 1 then
+					Exit Function
+				End If
+			Case 45	'negative
+				if i > 1 then
+					Exit Function
+				End If
+			Case 46	'decimal point
+				if deccount > 0 then
+					Exit Function
+				else
+					deccount = deccount + 1
+				End If
+			Case Else
+				if strchar < 48 or strchar > 57 then
+					Exit Function
+				end If
+			End Case
+		Next
+		IsNumber$ = True
+End Function
+
+'****************************************************************************
+' Given a list of delimited values, will determine position of specified value
+' By Mark Liebe 4/10/00
+' Targetstr - string to be found
+' Sourcestr - string to be searched
+' Returns index position of target string, otherwise 0 if not found
+'------------------------------------------------------------------------------
+Function Get_Index(byval Targetstr as string, byval SourceStr as string) as integer
+	Dim iIndex1, Beg_pos, Delim_pos1, Delim_pos2, Target_length as integer
+	Dim Searching as logical
+	Searching = True
+	Target_Length = len(Targetstr)
+	Delim_pos1 = 1	'init delimeter position
+	Beg_Pos = instr(1,SourceStr,Targetstr)
+	iIndex1 = 1
+	if Beg_Pos = 0 then
+		Get_Index = 0
+		exit sub
+	end if
+	Do while Searching
+	Delim_Pos2 = instr(delim_pos1+1,SourceStr,Delim)
+	if delim_pos2 <> 0 and delim_pos2 < Beg_Pos then
+		iIndex1 = iIndex1 + 1
+	else
+		Searching = False
+	end if
+	Delim_pos1 = Delim_pos2
+	loop
+	Get_Index = iIndex1
+	
+end function

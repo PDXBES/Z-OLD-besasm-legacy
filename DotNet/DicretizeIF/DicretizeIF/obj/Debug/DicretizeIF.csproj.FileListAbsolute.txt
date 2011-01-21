@@ -1,0 +1,28 @@
+C:\Documents and Settings\issacg\Desktop\DiscretizeIF\DicretizeIF\DicretizeIF\bin\Debug\DicretizeIF.exe.config
+C:\Documents and Settings\issacg\Desktop\DiscretizeIF\DicretizeIF\DicretizeIF\bin\Debug\DicretizeIF.exe.manifest
+C:\Documents and Settings\issacg\Desktop\DiscretizeIF\DicretizeIF\DicretizeIF\bin\Debug\DicretizeIF.application
+C:\Documents and Settings\issacg\Desktop\DiscretizeIF\DicretizeIF\DicretizeIF\bin\Debug\DicretizeIF.exe
+C:\Documents and Settings\issacg\Desktop\DiscretizeIF\DicretizeIF\DicretizeIF\bin\Debug\DicretizeIF.pdb
+C:\Documents and Settings\issacg\Desktop\DiscretizeIF\DicretizeIF\DicretizeIF\bin\Debug\Microsoft.Office.Interop.Access.dll
+C:\Documents and Settings\issacg\Desktop\DiscretizeIF\DicretizeIF\DicretizeIF\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\issacg\Desktop\DiscretizeIF\DicretizeIF\DicretizeIF\obj\Debug\DicretizeIF.MainForm.resources
+C:\Documents and Settings\issacg\Desktop\DiscretizeIF\DicretizeIF\DicretizeIF\obj\Debug\DicretizeIF.Properties.Resources.resources
+C:\Documents and Settings\issacg\Desktop\DiscretizeIF\DicretizeIF\DicretizeIF\obj\Debug\DicretizeIF.csproj.GenerateResource.Cache
+C:\Documents and Settings\issacg\Desktop\DiscretizeIF\DicretizeIF\DicretizeIF\obj\Debug\DicretizeIF.exe.manifest
+C:\Documents and Settings\issacg\Desktop\DiscretizeIF\DicretizeIF\DicretizeIF\obj\Debug\DicretizeIF.application
+C:\Documents and Settings\issacg\Desktop\DiscretizeIF\DicretizeIF\DicretizeIF\obj\Debug\DicretizeIF.exe
+C:\Documents and Settings\issacg\Desktop\DiscretizeIF\DicretizeIF\DicretizeIF\obj\Debug\DicretizeIF.pdb
+C:\Development\DotNet\DicretizeIF\DicretizeIF\bin\Debug\DicretizeIF.exe.config
+C:\Development\DotNet\DicretizeIF\DicretizeIF\obj\Debug\DicretizeIF.exe
+C:\Development\DotNet\DicretizeIF\DicretizeIF\obj\Debug\DicretizeIF.pdb
+C:\Development\DotNet\DicretizeIF\DicretizeIF\bin\Debug\DicretizeIF.exe.manifest
+C:\Development\DotNet\DicretizeIF\DicretizeIF\bin\Debug\DicretizeIF.application
+C:\Development\DotNet\DicretizeIF\DicretizeIF\bin\Debug\DicretizeIF.exe
+C:\Development\DotNet\DicretizeIF\DicretizeIF\bin\Debug\DicretizeIF.pdb
+C:\Development\DotNet\DicretizeIF\DicretizeIF\bin\Debug\Microsoft.Office.Interop.Access.dll
+C:\Development\DotNet\DicretizeIF\DicretizeIF\obj\Debug\ResolveAssemblyReference.cache
+C:\Development\DotNet\DicretizeIF\DicretizeIF\obj\Debug\DicretizeIF.MainForm.resources
+C:\Development\DotNet\DicretizeIF\DicretizeIF\obj\Debug\DicretizeIF.Properties.Resources.resources
+C:\Development\DotNet\DicretizeIF\DicretizeIF\obj\Debug\DicretizeIF.csproj.GenerateResource.Cache
+C:\Development\DotNet\DicretizeIF\DicretizeIF\obj\Debug\DicretizeIF.exe.manifest
+C:\Development\DotNet\DicretizeIF\DicretizeIF\obj\Debug\DicretizeIF.application
