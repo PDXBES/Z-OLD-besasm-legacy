@@ -57,9 +57,9 @@
             Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand4 = new Infragistics.Win.UltraWinGrid.UltraGridBand("FEProcessGroup_FEProcess", 2);
             Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn21 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("process_id");
             Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn22 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("process_group");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn23 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("process_order");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn24 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("process_name");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn25 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("critical");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn23 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("process_name");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn24 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("critical");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn25 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("process_order");
             Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand5 = new Infragistics.Win.UltraWinGrid.UltraGridBand("FE_SCENARIOSFE_MODEL_RUN", 0);
             Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn26 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("model_run_id");
             Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn27 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("scenario_id");
@@ -113,17 +113,17 @@
             Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand9 = new Infragistics.Win.UltraWinGrid.UltraGridBand("FEHyetographs", -1);
             Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn46 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("hyetograph_id");
             Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn47 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("description");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn48 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("time_step");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn49 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("time_step_units");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn50 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("source");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn48 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("time_step_units");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn49 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("source");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn50 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("time_step");
             Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn51 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FE_HYETOGRAPHSFE_HYETOGRAPH_DATA");
             Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn52 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FE_HYDROGRAPHSFE_GRID_MODEL_RUN");
             Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand10 = new Infragistics.Win.UltraWinGrid.UltraGridBand("FE_HYETOGRAPHSFE_HYETOGRAPH_DATA", 0);
             Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn53 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("hyetograph_data_id");
             Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn54 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("hyetograph_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn55 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("rainfall");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn56 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("run_order");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn57 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("comment");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn55 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("run_order");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn56 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("comment");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn57 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("rainfall");
             Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand11 = new Infragistics.Win.UltraWinGrid.UltraGridBand("FE_HYDROGRAPHSFE_GRID_MODEL_RUN", 0);
             Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn58 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("model_run_id");
             Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn59 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("scenario_id");
@@ -210,21 +210,21 @@
             Infragistics.Win.Appearance appearance61 = new Infragistics.Win.Appearance();
             Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand18 = new Infragistics.Win.UltraWinGrid.UltraGridBand("FEGridProjects_QryModelRun", -1);
             Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn97 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("time_period");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn98 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("scenario_description");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn99 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("scenario_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn100 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("selection_set_area_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn101 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("hyetograph_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn102 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("hyetograph_description");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn103 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("project_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn104 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("model_run_id");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn105 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("area");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn106 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("sub_area");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn107 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("include_instream_facilities");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn108 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("project_description");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn109 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("pollutant_loading_db");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn110 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("pollutant_loading_table");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn111 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("bmp_effectiveness_db");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn112 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("bmp_effectiveness_table");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn98 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("scenario_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn99 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("selection_set_area_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn100 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("hyetograph_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn101 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("project_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn102 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("model_run_id");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn103 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("area");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn104 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("sub_area");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn105 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("include_instream_facilities");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn106 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("project_description");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn107 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("pollutant_loading_db");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn108 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("pollutant_loading_table");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn109 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("bmp_effectiveness_db");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn110 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("bmp_effectiveness_table");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn111 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("scenario_description");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn112 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("hyetograph_description");
             Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn113 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FE_GRID_PROJECTSFE_SCENARIOS1");
             Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn114 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FE_GRID_PROJECTSFE_SELECTION_SET_AREAS1");
             Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand19 = new Infragistics.Win.UltraWinGrid.UltraGridBand("FE_GRID_PROJECTSFE_SCENARIOS1", 0);
@@ -253,9 +253,9 @@
             Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand22 = new Infragistics.Win.UltraWinGrid.UltraGridBand("FEProcessGroup_FEProcess", 3);
             Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn135 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("process_id");
             Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn136 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("process_group");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn137 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("process_order");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn138 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("process_name");
-            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn139 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("critical");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn137 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("process_name");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn138 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("critical");
+            Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn139 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("process_order");
             Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand23 = new Infragistics.Win.UltraWinGrid.UltraGridBand("FE_SCENARIOSFE_MODEL_RUN", 1);
             Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn140 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("model_run_id");
             Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn141 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("scenario_id");
@@ -777,7 +777,7 @@
             this.txtPollutantLoadingTable.DisplayStyle = Infragistics.Win.EmbeddableElementDisplayStyle.VisualStudio2005;
             this.txtPollutantLoadingTable.Location = new System.Drawing.Point(386, 109);
             this.txtPollutantLoadingTable.Name = "txtPollutantLoadingTable";
-            this.txtPollutantLoadingTable.Size = new System.Drawing.Size(384, 21);
+            this.txtPollutantLoadingTable.Size = new System.Drawing.Size(167, 21);
             this.txtPollutantLoadingTable.TabIndex = 7;
             // 
             // txtBMPEffectivenessTable
@@ -804,7 +804,7 @@
             this.txtPollutantLoadingDB.DisplayStyle = Infragistics.Win.EmbeddableElementDisplayStyle.VisualStudio2005;
             this.txtPollutantLoadingDB.Location = new System.Drawing.Point(386, 86);
             this.txtPollutantLoadingDB.Name = "txtPollutantLoadingDB";
-            this.txtPollutantLoadingDB.Size = new System.Drawing.Size(564, 21);
+            this.txtPollutantLoadingDB.Size = new System.Drawing.Size(167, 21);
             this.txtPollutantLoadingDB.TabIndex = 6;
             // 
             // lblBMPEffectiveness
@@ -971,9 +971,9 @@
             ultraGridColumn20});
             ultraGridColumn21.Header.VisiblePosition = 0;
             ultraGridColumn22.Header.VisiblePosition = 1;
-            ultraGridColumn23.Header.VisiblePosition = 2;
-            ultraGridColumn24.Header.VisiblePosition = 3;
-            ultraGridColumn25.Header.VisiblePosition = 4;
+            ultraGridColumn23.Header.VisiblePosition = 3;
+            ultraGridColumn24.Header.VisiblePosition = 4;
+            ultraGridColumn25.Header.VisiblePosition = 2;
             ultraGridBand4.Columns.AddRange(new object[] {
             ultraGridColumn21,
             ultraGridColumn22,
@@ -1184,9 +1184,9 @@
             this.grdHyetographs.DisplayLayout.Appearance = appearance26;
             ultraGridColumn46.Header.VisiblePosition = 0;
             ultraGridColumn47.Header.VisiblePosition = 1;
-            ultraGridColumn48.Header.VisiblePosition = 2;
-            ultraGridColumn49.Header.VisiblePosition = 3;
-            ultraGridColumn50.Header.VisiblePosition = 4;
+            ultraGridColumn48.Header.VisiblePosition = 3;
+            ultraGridColumn49.Header.VisiblePosition = 4;
+            ultraGridColumn50.Header.VisiblePosition = 2;
             ultraGridColumn51.Header.VisiblePosition = 5;
             ultraGridColumn52.Header.VisiblePosition = 6;
             ultraGridBand9.Columns.AddRange(new object[] {
@@ -1199,9 +1199,9 @@
             ultraGridColumn52});
             ultraGridColumn53.Header.VisiblePosition = 0;
             ultraGridColumn54.Header.VisiblePosition = 1;
-            ultraGridColumn55.Header.VisiblePosition = 2;
-            ultraGridColumn56.Header.VisiblePosition = 3;
-            ultraGridColumn57.Header.VisiblePosition = 4;
+            ultraGridColumn55.Header.VisiblePosition = 3;
+            ultraGridColumn56.Header.VisiblePosition = 4;
+            ultraGridColumn57.Header.VisiblePosition = 2;
             ultraGridBand10.Columns.AddRange(new object[] {
             ultraGridColumn53,
             ultraGridColumn54,
@@ -1928,30 +1928,30 @@
             appearance61.BorderColor = System.Drawing.SystemColors.InactiveCaption;
             this.grdModelRuns.DisplayLayout.Appearance = appearance61;
             ultraGridColumn97.Header.VisiblePosition = 0;
-            ultraGridColumn98.Header.VisiblePosition = 1;
-            ultraGridColumn99.Header.VisiblePosition = 2;
+            ultraGridColumn98.Header.VisiblePosition = 2;
+            ultraGridColumn98.Hidden = true;
+            ultraGridColumn99.Header.VisiblePosition = 3;
             ultraGridColumn99.Hidden = true;
-            ultraGridColumn100.Header.VisiblePosition = 3;
+            ultraGridColumn100.Header.VisiblePosition = 4;
             ultraGridColumn100.Hidden = true;
-            ultraGridColumn101.Header.VisiblePosition = 4;
+            ultraGridColumn101.Header.VisiblePosition = 6;
             ultraGridColumn101.Hidden = true;
-            ultraGridColumn102.Header.VisiblePosition = 5;
-            ultraGridColumn103.Header.VisiblePosition = 6;
-            ultraGridColumn103.Hidden = true;
-            ultraGridColumn104.Header.VisiblePosition = 7;
-            ultraGridColumn104.Hidden = true;
-            ultraGridColumn105.Header.VisiblePosition = 8;
-            ultraGridColumn106.Header.VisiblePosition = 9;
-            ultraGridColumn107.Header.VisiblePosition = 10;
-            ultraGridColumn108.Header.VisiblePosition = 11;
-            ultraGridColumn109.Header.VisiblePosition = 12;
+            ultraGridColumn102.Header.VisiblePosition = 7;
+            ultraGridColumn102.Hidden = true;
+            ultraGridColumn103.Header.VisiblePosition = 8;
+            ultraGridColumn104.Header.VisiblePosition = 9;
+            ultraGridColumn105.Header.VisiblePosition = 10;
+            ultraGridColumn106.Header.VisiblePosition = 11;
+            ultraGridColumn107.Header.VisiblePosition = 12;
+            ultraGridColumn107.Hidden = true;
+            ultraGridColumn108.Header.VisiblePosition = 13;
+            ultraGridColumn108.Hidden = true;
+            ultraGridColumn109.Header.VisiblePosition = 14;
             ultraGridColumn109.Hidden = true;
-            ultraGridColumn110.Header.VisiblePosition = 13;
+            ultraGridColumn110.Header.VisiblePosition = 15;
             ultraGridColumn110.Hidden = true;
-            ultraGridColumn111.Header.VisiblePosition = 14;
-            ultraGridColumn111.Hidden = true;
-            ultraGridColumn112.Header.VisiblePosition = 15;
-            ultraGridColumn112.Hidden = true;
+            ultraGridColumn111.Header.VisiblePosition = 1;
+            ultraGridColumn112.Header.VisiblePosition = 5;
             ultraGridColumn113.Header.VisiblePosition = 16;
             ultraGridColumn114.Header.VisiblePosition = 17;
             ultraGridBand18.Columns.AddRange(new object[] {
@@ -2018,9 +2018,9 @@
             ultraGridColumn134});
             ultraGridColumn135.Header.VisiblePosition = 0;
             ultraGridColumn136.Header.VisiblePosition = 1;
-            ultraGridColumn137.Header.VisiblePosition = 2;
-            ultraGridColumn138.Header.VisiblePosition = 3;
-            ultraGridColumn139.Header.VisiblePosition = 4;
+            ultraGridColumn137.Header.VisiblePosition = 3;
+            ultraGridColumn138.Header.VisiblePosition = 4;
+            ultraGridColumn139.Header.VisiblePosition = 2;
             ultraGridBand22.Columns.AddRange(new object[] {
             ultraGridColumn135,
             ultraGridColumn136,
