@@ -19,9 +19,12 @@ namespace SWI_2
         private int _lastGlobalID;
         private int _CurrentWatershed;
         private int _CurrentSubwatershed;
+        private string _SelectedWatershed;
+        private string _SelectedSubwatershed;
         private enum _lastSearchVar { ditch, culvert, pipe };
         private _lastSearchVar _lastSearch;
         private bool _returningFromForm;
+        private bool _UserClickedCancel;
 
         public FormMain()
         {
@@ -50,6 +53,24 @@ namespace SWI_2
         {
             get { return _CurrentSubwatershed; }
             set { _CurrentSubwatershed = value; }
+        }
+
+        public string SelectedSubwatershed
+        {
+            get { return _SelectedSubwatershed; }
+            set { _SelectedSubwatershed = value; }
+        }
+
+        public string SelectedWatershed
+        {
+            get { return _SelectedWatershed; }
+            set { _SelectedWatershed = value; }
+        }
+
+        public bool UserClickedCancel
+        {
+            get { return _UserClickedCancel; }
+            set { _UserClickedCancel = value; }
         }
 
         private void buttonUpdateDatabase_Click(object sender, EventArgs e)
@@ -1320,184 +1341,225 @@ namespace SWI_2
 
         private void updateMstlinksacToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-            string mst_linksDB = /*"E:\\MstLinksCopy\\mst_links_ac.mdb";*/"\\\\Cassio\\modeling\\SAMaster_22\\Links\\mst_links_ac.mdb";
-            //copy the good tables to the mst_links database
-            DataMobility.AccessCopySQLTable("GoodPipes_x", "ODBC;DSN=SIRTOBY;DATABASE = SANDBOX;Trusted_Connection=yes", "ROSE\\issacg.SWSP_PIPES_OK", mst_linksDB);
-            AccessHelper.AccessCopyTable("GoodPipes", "GoodPipes_x", mst_linksDB); 
-            
-            //create join query for mst_links_ac and GoodPipes, call the join query "theMatches"
-            string theMatches = "SELECT mst_links_ac.MLinkID, GoodPipes.inside_diam_in, GoodPipes.inside_width_in, GoodPipes.shape, GoodPipes.material AS MatNew, GoodPipes.length_ft, mst_links_ac.PipeShape, mst_links_ac.Length, mst_links_ac.DiamWidth, mst_links_ac.Height, mst_links_ac.Material AS MatOld FROM mst_links_ac INNER JOIN GoodPipes ON (mst_links_ac.USNode=GoodPipes.us_node) AND (mst_links_ac.DSNode=GoodPipes.ds_node);";
+            UserClickedCancel = true;
+            FormSelectWatershedSubwatershed child = new FormSelectWatershedSubwatershed();
+            child.MyParentForm = this;
+            this.Enabled = false;
+            child.ShowDialog();
+            this.Enabled = true;
 
-            //send the join query to access
-            AccessHelper.AccessCreateQuery("theMatches", theMatches, mst_linksDB);
+            if (UserClickedCancel == false)
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                string mst_linksDB = /*"E:\\MstLinksCopy\\mst_links_ac.mdb";*/"\\\\Cassio\\modeling\\SAMaster_22\\Links\\mst_links_ac.mdb" ;
+                //copy the good tables to the mst_links database
+                DataMobility.AccessCopySQLTable("GoodPipes_x", /*"ODBC;DSN=SIRTOBY;DATABASE = SWI;Trusted_Connection=yes"*/"ODBC;Driver={SQL Native Client};Server=SIRTOBY;Database=SWI;Trusted_Connection=yes;", "SWSP_PIPES_OK", mst_linksDB);
+                AccessHelper.AccessCopyTable("GoodPipes", "GoodPipes_x", mst_linksDB);
 
-            //update mst_links based on usnode and dsnode matches in the good pipe tables
-            //update the diamwidth field if there is no value for width in SWSP(diam in the SWSP database refers to height)
-            string theQuery =
-                "update theMatches " +
-                "set diamwidth = inside_diam_in " +
-                "where " +
-                "inside_diam_in <> 0 and " +
-                "inside_diam_in is not null and " +
-                "(inside_width_in = 0 or inside_width_in is null)";
-            AccessHelper.AccessCreateQuery("theQuery", theQuery, mst_linksDB);
-            AccessHelper.AccessExecuteActionQuery("theQuery", mst_linksDB);
-            //update the diamwidth field if there is a value for width in SWSP
-            theQuery =
-                "update theMatches " +
-                "set diamwidth = inside_width_in " +
-                "where " +
-                "inside_width_in <> 0 and " +
-                "inside_width_in is not null";
-            AccessHelper.AccessCreateQuery("theQuery", theQuery, mst_linksDB);
-            AccessHelper.AccessExecuteActionQuery("theQuery", mst_linksDB);
-            //update the height field if there is a value for width in SWSP
-            theQuery =
-                "update theMatches " +
-                "set Height = inside_diam_in " +
-                "where " +
-                "inside_width_in <> 0 and " +
-                "inside_width_in is not null";
-            AccessHelper.AccessCreateQuery("theQuery", theQuery, mst_linksDB);
-            AccessHelper.AccessExecuteActionQuery("theQuery", mst_linksDB);
-            //update the shape field
-            theQuery =
-                "update theMatches " +
-                "set PipeShape = shape ";
-            AccessHelper.AccessCreateQuery("theQuery", theQuery, mst_linksDB);
-            AccessHelper.AccessExecuteActionQuery("theQuery", mst_linksDB);
-            //update the material field
-            theQuery =
-                "update theMatches " +
-                "set MatOld = MatNew ";
-            AccessHelper.AccessCreateQuery("theQuery", theQuery, mst_linksDB);
-            AccessHelper.AccessExecuteActionQuery("theQuery", mst_linksDB);
-            //update the length field
-            theQuery =
-                "update theMatches " +
-                "set Length = length_ft " +
-                "WHERE length_ft <>0 AND length_ft is not null";
-            AccessHelper.AccessCreateQuery("theQuery", theQuery, mst_linksDB);
-            AccessHelper.AccessExecuteActionQuery("theQuery", mst_linksDB);
-            //delete copied tables
-            //AccessHelper.AccessCopyTable("Pipes", "GoodPipes_x", mst_linksDB);
-            AccessHelper.AccessDropTable("GoodPipes_x", mst_linksDB);
-            AccessHelper.AccessDropQuery("theQuery", mst_linksDB);
+                //create join query for mst_links_ac and GoodPipes, call the join query "theMatches"
+                string theMatches = "SELECT mst_links_ac.MLinkID, GoodPipes.inside_diam_in, GoodPipes.inside_width_in, GoodPipes.shape, GoodPipes.material AS MatNew, GoodPipes.length_ft, mst_links_ac.PipeShape, mst_links_ac.Length, mst_links_ac.DiamWidth, mst_links_ac.Height, mst_links_ac.Material AS MatOld, mst_links_ac.DataQual FROM mst_links_ac INNER JOIN GoodPipes ON (mst_links_ac.USNode=GoodPipes.us_node) AND (mst_links_ac.DSNode=GoodPipes.ds_node) WHERE GoodPipes.Watershed = '"
+                    + SelectedWatershed + "' and GoodPipes.Subwatershed = '" + SelectedSubwatershed + "';";
+
+                //send the join query to access
+                AccessHelper.AccessCreateQuery("theMatches", theMatches, mst_linksDB);
 
 
-            //copy the good culvert tables to the mst_links database
-            DataMobility.AccessCopySQLTable("GoodPipes_x", "ODBC;DSN=SIRTOBY;DATABASE = SANDBOX;Trusted_Connection=yes", "ROSE\\issacg.SWSP_CULVERTS_OK", mst_linksDB);
-            AccessHelper.AccessCopyTable("GoodPipes", "GoodPipes_x", mst_linksDB);
-
-            //create join query for mst_links_ac and GoodPipes, call the join query "theMatches"
-            theMatches = "SELECT mst_links_ac.MLinkID, GoodPipes.full_diam_in, GoodPipes.full_width_in, GoodPipes.shape, GoodPipes.material AS MatNew, GoodPipes.length_ft, mst_links_ac.PipeShape, mst_links_ac.Length, mst_links_ac.DiamWidth, mst_links_ac.Height, mst_links_ac.Material AS MatOld FROM mst_links_ac INNER JOIN GoodPipes ON (mst_links_ac.USNode=GoodPipes.us_node) AND (mst_links_ac.DSNode=GoodPipes.ds_node);";
-
-            //send the join query to access
-            AccessHelper.AccessCreateQuery("theMatches", theMatches, mst_linksDB);
-            //update mst_links based on usnode and dsnode matches in the good ditch tables
-            //update the diamwidth field if there is no value for width in SWSP(diam in the SWSP database refers to height)
-            theQuery =
-                "update theMatches " +
-                "set diamwidth = full_diam_in " +
-                "where " +
-                "full_diam_in <> 0 and " +
-                "full_diam_in is not null and " +
-                "(full_width_in = 0 or full_width_in is null)";
-            AccessHelper.AccessCreateQuery("theQuery", theQuery, mst_linksDB);
-            AccessHelper.AccessExecuteActionQuery("theQuery", mst_linksDB);
-            //update the diamwidth field if there is a value for width in SWSP
-            theQuery =
-                "update theMatches " +
-                "set diamwidth = full_width_in " +
-                "where " +
-                "full_width_in <> 0 and " +
-                "full_width_in is not null";
-            AccessHelper.AccessCreateQuery("theQuery", theQuery, mst_linksDB);
-            AccessHelper.AccessExecuteActionQuery("theQuery", mst_linksDB);
-            //update the height field if there is a value for width in SWSP
-            theQuery =
-                "update theMatches " +
-                "set Height = full_diam_in " +
-                "where " +
-                "full_width_in <> 0 and " +
-                "full_width_in is not null";
-            AccessHelper.AccessCreateQuery("theQuery", theQuery, mst_linksDB);
-            AccessHelper.AccessExecuteActionQuery("theQuery", mst_linksDB);
-            //update the shape field
-            theQuery =
-                "update theMatches " +
-                "set PipeShape = shape ";
-            AccessHelper.AccessCreateQuery("theQuery", theQuery, mst_linksDB);
-            AccessHelper.AccessExecuteActionQuery("theQuery", mst_linksDB);
-            //update the material field
-            theQuery =
-                "update theMatches " +
-                "set MatOld = MatNew ";
-            AccessHelper.AccessCreateQuery("theQuery", theQuery, mst_linksDB);
-            AccessHelper.AccessExecuteActionQuery("theQuery", mst_linksDB);
-            //update the length field
-            theQuery =
-                "update theMatches " +
-                "set Length = length_ft " +
-                "WHERE length_ft <>0 AND length_ft is not null";
-            AccessHelper.AccessCreateQuery("theQuery", theQuery, mst_linksDB);
-            AccessHelper.AccessExecuteActionQuery("theQuery", mst_linksDB);
-            //delete copied tables
-            //AccessHelper.AccessCopyTable("Culverts", "GoodPipes_x", mst_linksDB);
-            AccessHelper.AccessDropTable("GoodPipes_x", mst_linksDB);
-            AccessHelper.AccessDropQuery("theQuery", mst_linksDB);
-
-
+                //update mst_links based on usnode and dsnode matches in the good pipe tables
+                //Put a valid string in the dataqual field.  This is a necessary step
+                string theQuery =
+                    "update theMatches " +
+                    "set DataQual = \"????????\" " +
+                    "where Len(Trim(DataQual)) <> 8" +
+                    "";
+                AccessHelper.AccessCreateQuery("theQuery", theQuery, mst_linksDB);
+                AccessHelper.AccessExecuteActionQuery("theQuery", mst_linksDB);
+                //update mst_links based on usnode and dsnode matches in the good pipe tables
+                //update the diamwidth field if there is no value for width in SWSP(diam in the SWSP database refers to height)
+                theQuery =
+                    "update theMatches " +
+                    "set diamwidth = inside_diam_in, DataQual = \"L\" & Right(DataQual, 7)" +
+                    "where " +
+                    "inside_diam_in <> 0 and " +
+                    "inside_diam_in is not null and " +
+                    "(inside_width_in = 0 or inside_width_in is null)";
+                AccessHelper.AccessCreateQuery("theQuery", theQuery, mst_linksDB);
+                AccessHelper.AccessExecuteActionQuery("theQuery", mst_linksDB);
+                //update the diamwidth field if there is a value for width in SWSP
+                theQuery =
+                    "update theMatches " +
+                    "set diamwidth = inside_width_in, DataQual = \"L\" & Right(DataQual, 7) " +
+                    "where " +
+                    "inside_width_in <> 0 and " +
+                    "inside_width_in is not null";
+                AccessHelper.AccessCreateQuery("theQuery", theQuery, mst_linksDB);
+                AccessHelper.AccessExecuteActionQuery("theQuery", mst_linksDB);
+                //update the height field if there is a value for width in SWSP
+                theQuery =
+                    "update theMatches " +
+                    "set Height = inside_diam_in , DataQual = \"L\" & Right(DataQual, 7)" +
+                    "where " +
+                    "inside_width_in <> 0 and " +
+                    "inside_width_in is not null";
+                AccessHelper.AccessCreateQuery("theQuery", theQuery, mst_linksDB);
+                AccessHelper.AccessExecuteActionQuery("theQuery", mst_linksDB);
+                //update the shape field
+                theQuery =
+                    "update theMatches " +
+                    "set PipeShape = shape , DataQual = Left(DataQual, 1) & \"L\" & Right(DataQual, 6)";
+                AccessHelper.AccessCreateQuery("theQuery", theQuery, mst_linksDB);
+                AccessHelper.AccessExecuteActionQuery("theQuery", mst_linksDB);
+                //update the material field
+                theQuery =
+                    "update theMatches " +
+                    "set MatOld = MatNew , DataQual = Left(DataQual, 2) & \"L\" & Right(DataQual, 5)";
+                AccessHelper.AccessCreateQuery("theQuery", theQuery, mst_linksDB);
+                AccessHelper.AccessExecuteActionQuery("theQuery", mst_linksDB);
+                //update the length field
+                theQuery =
+                    "update theMatches " +
+                    "set Length = length_ft , DataQual = Left(DataQual, 6) &  \"L\" & Right(DataQual, 1)" +
+                    "WHERE length_ft <>0 AND length_ft is not null";
+                AccessHelper.AccessCreateQuery("theQuery", theQuery, mst_linksDB);
+                AccessHelper.AccessExecuteActionQuery("theQuery", mst_linksDB);
+                //delete copied tables
+                //AccessHelper.AccessCopyTable("Pipes", "GoodPipes_x", mst_linksDB);
+                AccessHelper.AccessDropTable("GoodPipes_x", mst_linksDB);
+                AccessHelper.AccessDropQuery("theQuery", mst_linksDB);
 
 
-            //copy the good ditch tables to the mst_links database
-            DataMobility.AccessCopySQLTable("GoodPipes_x", "ODBC;DSN=SIRTOBY;DATABASE = SANDBOX;Trusted_Connection=yes", "ROSE\\issacg.SWSP_DITCHES_OK", mst_linksDB);
-            AccessHelper.AccessCopyTable("GoodPipes", "GoodPipes_x", mst_linksDB);
+                //copy the good culvert tables to the mst_links database
+                DataMobility.AccessCopySQLTable("GoodPipes_x", /*"ODBC;DSN=SIRTOBY;DATABASE = SWI;Trusted_Connection=yes"*/"ODBC;Driver={SQL Native Client};Server=SIRTOBY;Database=SWI;Trusted_Connection=yes;", "SWSP_CULVERTS_OK", mst_linksDB);
+                AccessHelper.AccessCopyTable("GoodPipes", "GoodPipes_x", mst_linksDB);
 
-            //create join query for mst_links_ac and GoodPipes, call the join query "theMatches"
-            theMatches = "SELECT mst_links_ac.MLinkID, GoodPipes.bottom_width_in, GoodPipes.depth_in, GoodPipes.material AS MatNew, GoodPipes.length_ft, mst_links_ac.PipeShape, mst_links_ac.Length, mst_links_ac.DiamWidth, mst_links_ac.Height, mst_links_ac.Material AS MatOld FROM mst_links_ac INNER JOIN GoodPipes ON (mst_links_ac.USNode=GoodPipes.us_node) AND (mst_links_ac.DSNode=GoodPipes.ds_node);";
+                //create join query for mst_links_ac and GoodPipes, call the join query "theMatches"
+                theMatches = "SELECT mst_links_ac.MLinkID, GoodPipes.full_diam_in, GoodPipes.full_width_in, GoodPipes.shape, GoodPipes.material AS MatNew, GoodPipes.length_ft, mst_links_ac.PipeShape, mst_links_ac.Length, mst_links_ac.DiamWidth, mst_links_ac.Height, mst_links_ac.Material AS MatOld, mst_links_ac.DataQual FROM mst_links_ac INNER JOIN GoodPipes ON (mst_links_ac.USNode=GoodPipes.us_node) AND (mst_links_ac.DSNode=GoodPipes.ds_node) WHERE GoodPipes.Watershed = '"
+                    + SelectedWatershed + "' and GoodPipes.Subwatershed = '" + SelectedSubwatershed + "';";
 
-            //send the join query to access
-            AccessHelper.AccessCreateQuery("theMatches", theMatches, mst_linksDB);
-            //update mst_links based on usnode and dsnode matches in the good ditch tables
-            //update the diamwidth field if there is no value for width in SWSP(diam in the SWSP database refers to height)
-            theQuery =
-                "update theMatches " +
-                "set diamwidth = bottom_width_in ";
-            AccessHelper.AccessCreateQuery("theQuery", theQuery, mst_linksDB);
-            AccessHelper.AccessExecuteActionQuery("theQuery", mst_linksDB);
-            //update the height field if there is a value for width in SWSP
-            theQuery =
-                "update theMatches " +
-                "set Height = depth_in ";
-            AccessHelper.AccessCreateQuery("theQuery", theQuery, mst_linksDB);
-            AccessHelper.AccessExecuteActionQuery("theQuery", mst_linksDB);
-            //update the material field
-            theQuery =
-                "update theMatches " +
-                "set MatOld = MatNew ";
-            AccessHelper.AccessCreateQuery("theQuery", theQuery, mst_linksDB);
-            AccessHelper.AccessExecuteActionQuery("theQuery", mst_linksDB);
-            //update the length field
-            theQuery =
-                "update theMatches " +
-                "set Length = length_ft " +
-                "WHERE length_ft <>0 AND length_ft is not null";
-            AccessHelper.AccessCreateQuery("theQuery", theQuery, mst_linksDB);
-            AccessHelper.AccessExecuteActionQuery("theQuery", mst_linksDB);
-            //update the shape field - yes this should be done
-            theQuery =
-                "update theMatches " +
-                "set PipeShape = 'TR31' " ;
-            AccessHelper.AccessCreateQuery("theQuery", theQuery, mst_linksDB);
-            AccessHelper.AccessExecuteActionQuery("theQuery", mst_linksDB);
-            //delete copied tables
-            //AccessHelper.AccessCopyTable("Ditches", "GoodPipes_x", mst_linksDB);
-            AccessHelper.AccessDropTable("GoodPipes_x", mst_linksDB);
-            AccessHelper.AccessDropQuery("theQuery", mst_linksDB);
-            AccessHelper.AccessDropTable("GoodPipes", mst_linksDB);
-            AccessHelper.AccessDropQuery("theMatches", mst_linksDB);
+                //send the join query to access
+                AccessHelper.AccessCreateQuery("theMatches", theMatches, mst_linksDB);
+                //Put a valid string in the dataqual field.  This is a necessary step
+                theQuery =
+                    "update theMatches " +
+                    "set DataQual = \"????????\" " +
+                    "where Len(Trim(DataQual)) <> 8" +
+                    "";
+                AccessHelper.AccessCreateQuery("theQuery", theQuery, mst_linksDB);
+                AccessHelper.AccessExecuteActionQuery("theQuery", mst_linksDB);
+                //update mst_links based on usnode and dsnode matches in the good ditch tables
+                //update the diamwidth field if there is no value for width in SWSP(diam in the SWSP database refers to height)
+                theQuery =
+                    "update theMatches " +
+                    "set diamwidth = full_diam_in, DataQual = \"L\" & Right(DataQual, 7) " +
+                    "where " +
+                    "full_diam_in <> 0 and " +
+                    "full_diam_in is not null and " +
+                    "(full_width_in = 0 or full_width_in is null)";
+                AccessHelper.AccessCreateQuery("theQuery", theQuery, mst_linksDB);
+                AccessHelper.AccessExecuteActionQuery("theQuery", mst_linksDB);
+                //update the diamwidth field if there is a value for width in SWSP
+                theQuery =
+                    "update theMatches " +
+                    "set diamwidth = full_width_in, DataQual = \"L\" & Right(DataQual, 7) " +
+                    "where " +
+                    "full_width_in <> 0 and " +
+                    "full_width_in is not null";
+                AccessHelper.AccessCreateQuery("theQuery", theQuery, mst_linksDB);
+                AccessHelper.AccessExecuteActionQuery("theQuery", mst_linksDB);
+                //update the height field if there is a value for width in SWSP
+                theQuery =
+                    "update theMatches " +
+                    "set Height = full_diam_in, DataQual = \"L\" & Right(DataQual, 7) " +
+                    "where " +
+                    "full_width_in <> 0 and " +
+                    "full_width_in is not null";
+                AccessHelper.AccessCreateQuery("theQuery", theQuery, mst_linksDB);
+                AccessHelper.AccessExecuteActionQuery("theQuery", mst_linksDB);
+                //update the shape field
+                theQuery =
+                    "update theMatches " +
+                    "set PipeShape = shape , DataQual = Left(DataQual, 1) & \"L\" & Right(DataQual, 6)";
+                AccessHelper.AccessCreateQuery("theQuery", theQuery, mst_linksDB);
+                AccessHelper.AccessExecuteActionQuery("theQuery", mst_linksDB);
+                //update the material field
+                theQuery =
+                    "update theMatches " +
+                    "set MatOld = MatNew , DataQual = Left(DataQual, 2) & \"L\" & Right(DataQual, 5)";
+                AccessHelper.AccessCreateQuery("theQuery", theQuery, mst_linksDB);
+                AccessHelper.AccessExecuteActionQuery("theQuery", mst_linksDB);
+                //update the length field
+                theQuery =
+                    "update theMatches " +
+                    "set Length = length_ft , DataQual = Left(DataQual, 6) & \"L\" & Right(DataQual, 1)" +
+                    "WHERE length_ft <>0 AND length_ft is not null";
+                AccessHelper.AccessCreateQuery("theQuery", theQuery, mst_linksDB);
+                AccessHelper.AccessExecuteActionQuery("theQuery", mst_linksDB);
+                //delete copied tables
+                //AccessHelper.AccessCopyTable("Culverts", "GoodPipes_x", mst_linksDB);
+                AccessHelper.AccessDropTable("GoodPipes_x", mst_linksDB);
+                AccessHelper.AccessDropQuery("theQuery", mst_linksDB);
 
+
+
+
+                //copy the good ditch tables to the mst_links database
+                DataMobility.AccessCopySQLTable("GoodPipes_x", /*"ODBC;DSN=SIRTOBY;DATABASE = SWI;Trusted_Connection=yes"*/"ODBC;Driver={SQL Native Client};Server=SIRTOBY;Database=SWI;Trusted_Connection=yes;", "SWSP_DITCHES_OK", mst_linksDB);
+                AccessHelper.AccessCopyTable("GoodPipes", "GoodPipes_x", mst_linksDB);
+
+                //create join query for mst_links_ac and GoodPipes, call the join query "theMatches"
+                theMatches = "SELECT mst_links_ac.MLinkID, GoodPipes.bottom_width_in, GoodPipes.depth_in, GoodPipes.material AS MatNew, GoodPipes.length_ft, mst_links_ac.PipeShape, mst_links_ac.Length, mst_links_ac.DiamWidth, mst_links_ac.Height, mst_links_ac.Material AS MatOld, mst_links_ac.DataQual FROM mst_links_ac INNER JOIN GoodPipes ON (mst_links_ac.USNode=GoodPipes.us_node) AND (mst_links_ac.DSNode=GoodPipes.ds_node)WHERE GoodPipes.Watershed = '"
+                    + SelectedWatershed + "' and GoodPipes.Subwatershed = '" + SelectedSubwatershed + "';";
+
+                //send the join query to access
+                AccessHelper.AccessCreateQuery("theMatches", theMatches, mst_linksDB);
+                //Put a valid string in the dataqual field.  This is a necessary step
+                theQuery =
+                    "update theMatches " +
+                    "set DataQual = \"????????\" " +
+                    "where Len(Trim(DataQual)) <> 8" +
+                    "";
+                AccessHelper.AccessCreateQuery("theQuery", theQuery, mst_linksDB);
+                AccessHelper.AccessExecuteActionQuery("theQuery", mst_linksDB);
+                //update mst_links based on usnode and dsnode matches in the good ditch tables
+                //update the diamwidth field if there is no value for width in SWSP(diam in the SWSP database refers to height)
+                theQuery =
+                    "update theMatches " +
+                    "set diamwidth = bottom_width_in, DataQual = \"L\" & Right(DataQual, 7)  ";
+                AccessHelper.AccessCreateQuery("theQuery", theQuery, mst_linksDB);
+                AccessHelper.AccessExecuteActionQuery("theQuery", mst_linksDB);
+                //update the height field if there is a value for width in SWSP
+                theQuery =
+                    "update theMatches " +
+                    "set Height = depth_in, DataQual = \"L\" & Right(DataQual, 7)  ";
+                AccessHelper.AccessCreateQuery("theQuery", theQuery, mst_linksDB);
+                AccessHelper.AccessExecuteActionQuery("theQuery", mst_linksDB);
+                //update the material field
+                theQuery =
+                    "update theMatches " +
+                    "set MatOld = MatNew, DataQual = Left(DataQual, 2) & \"L\" & Right(DataQual, 5) ";
+                AccessHelper.AccessCreateQuery("theQuery", theQuery, mst_linksDB);
+                AccessHelper.AccessExecuteActionQuery("theQuery", mst_linksDB);
+                //update the length field
+                theQuery =
+                    "update theMatches " +
+                    "set Length = length_ft, DataQual = Left(DataQual, 6) & \"L\" & Right(DataQual, 1) " +
+                    "WHERE length_ft <>0 AND length_ft is not null";
+                AccessHelper.AccessCreateQuery("theQuery", theQuery, mst_linksDB);
+                AccessHelper.AccessExecuteActionQuery("theQuery", mst_linksDB);
+                //update the shape field - yes this should be done
+                theQuery =
+                    "update theMatches " +
+                    "set PipeShape = 'TR31', DataQual = Left(DataQual, 1) & \"L\" & Right(DataQual, 6) ";
+                AccessHelper.AccessCreateQuery("theQuery", theQuery, mst_linksDB);
+                AccessHelper.AccessExecuteActionQuery("theQuery", mst_linksDB);
+                //delete copied tables
+                //AccessHelper.AccessCopyTable("Ditches", "GoodPipes_x", mst_linksDB);
+                AccessHelper.AccessDropTable("GoodPipes_x", mst_linksDB);
+                AccessHelper.AccessDropQuery("theQuery", mst_linksDB);
+                AccessHelper.AccessDropTable("GoodPipes", mst_linksDB);
+                AccessHelper.AccessDropQuery("theMatches", mst_linksDB);
+
+                Cursor.Current = Cursors.Default;
+            }
         }
     }
 }
