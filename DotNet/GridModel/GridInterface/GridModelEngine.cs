@@ -69,6 +69,12 @@ namespace SystemsAnalysis.Grid.GridAnalysis
 
         public void populateGridData()
         {
+            //This function checks to see if the data in question resides on the current server
+            //or if the Gridmodel must import the data from another
+            //The input server connection and table name will be tested against the current gridmodels
+            //server connection(SQLDatabaseConnectionString) and the default table name
+            //if they both match up, then skip the copy/import, but if they do not both match up, then
+            //perform the copy/import.
             DataMobility.SQLCopyAccessTable(gridModelRuns[0].BMPEffectivenessTable,
                 gridModelRuns[0].BMPEffectivenessDB, "GRID_BMP_PERFORMANCE", SQLDatabaseConnectionString);
             DataMobility.SQLCopyAccessTable(gridModelRuns[0].PollutantLoadingTable,
