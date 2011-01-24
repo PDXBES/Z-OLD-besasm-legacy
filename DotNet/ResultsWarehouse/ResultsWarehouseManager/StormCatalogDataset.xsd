@@ -1,0 +1,27 @@
+<?xml version="1.0" standalone="yes"?>
+<xs:schema id="StormCatalogDataset" targetNamespace="http://www.tempuri.org/StormCatalogDataset.xsd" xmlns:mstns="http://www.tempuri.org/StormCatalogDataset.xsd" xmlns="http://www.tempuri.org/StormCatalogDataset.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:element name="StormCatalogDataset" msdata:IsDataSet="true">
+    <xs:complexType>
+      <xs:choice maxOccurs="unbounded">
+        <xs:element name="StormCatalog">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="description" type="xs:string" minOccurs="0" />
+              <xs:element name="duration" type="xs:int" minOccurs="0" />
+              <xs:element name="interfaceFile" type="xs:string" minOccurs="0" />
+              <xs:element name="recurrenceInterval" type="xs:int" minOccurs="0" />
+              <xs:element name="startDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="stormID" type="xs:int" />
+              <xs:element name="stormName" type="xs:string" minOccurs="0" />
+              <xs:element name="timeStep" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:StormCatalog" />
+      <xs:field xpath="mstns:stormID" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

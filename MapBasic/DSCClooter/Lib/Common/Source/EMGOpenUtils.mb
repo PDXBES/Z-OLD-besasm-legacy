@@ -1,0 +1,504 @@
+'
+'	============ EMGAATS Workbench =================
+'
+'	Copyright (c) 2001, 2002, 2003
+'	City of Portland, OR Bureau of Environmental Services 
+' David J Collins with a nod to Cautley 
+'
+' Generalized Master and Model file open routines to be used by all applications
+' that access the EMGAATS model and master data sturctures.  This code will replace
+' the EMGInit.mb functions in the workbench as well as other open table and init code.
+' 
+' 1/22/03	Collins Created.
+' 
+' 22Mar2004 Collins add Infilt and SWPlnt to standard project        
+'		
+' Collins 03Feb2005
+' modified really_open_model_function to utilize OKtoOpen and AllowWrite in 
+'
+
+include "MapBasic.def"
+include "..\inc\EMGOpenUtils.def"
+include "..\inc\EMGLogger.def"
+include "..\inc\EMGMTabUtil.def"
+include "..\inc\INIUtils.def"
+
+'declare Sub ReallyOpenMaster(ByVal Deny as logical)
+
+
+'This function intended to be one of the first calls in main
+'
+sub InitOpenUtilGlobals()
+  dim loopcount as integer
+  
+  For LoopCount = 1 to UBound(gmstFiles)
+    gmstFiles(loopcount).OKtoOpen = False
+    gmstFiles(loopcount).AllowWrite = False
+  Next
+
+  For LoopCount = 1 to UBound(gmdlFiles)
+    gmdlFiles(loopcount).OKtoOpen = False
+    gmdlFiles(loopcount).AllowWrite = False
+  Next
+
+
+	' the names and locations of model files are hard coded, relative to the "Model Root".
+	' AMM 2/7/2007 Removed superfluous tables
+	gmdlFiles(NDX_MDL_LINKS).Name = "Links"
+	gmdlFiles(NDX_MDL_LINKS).FullPath = "Links\mdl_Links_ac.tab"
+	gmdlFiles(NDX_MDL_LINKS).Alias = "mdl_Links"
+
+	gmdlFiles(NDX_MDL_NODES).Name = "Nodes"
+	gmdlFiles(NDX_MDL_NODES).Fullpath = "Nodes\mdl_Nodes_ac.tab"
+	gmdlFiles(NDX_MDL_NODES).Alias = "mdl_Nodes"
+
+	gmdlFiles(NDX_MDL_DIRSC).Name = "Direct Subcatchments"
+	gmdlFiles(NDX_MDL_DIRSC).FullPath = "DSC\mdl_DirSC_ac.tab"
+	gmdlFiles(NDX_MDL_DIRSC).Alias = "mdl_DSC"
+
+'	gmdlFiles(NDX_MDL_LATS).Name = "Laterals"
+'	gmdlFiles(NDX_MDL_LATS).FullPath = "Laterals\mdl_laterals_ac.tab"
+'	gmdlFiles(NDX_MDL_LATS).Alias = "mdl_Laterals"
+
+'	gmdlFiles(NDX_MDL_LATENDPT).Name = "Lateral End Points"
+'	gmdlFiles(NDX_MDL_LATENDPT).FullPath = "Laterals\mdl_lateralEndPts.tab"
+'	gmdlFiles(NDX_MDL_LATENDPT).Alias = "mdl_LatEndPts"
+
+'	gmdlFiles(NDX_MDL_LINKRES).Name = "Link Results"
+'	gmdlFiles(NDX_MDL_LINKRES).FullPath = "Links\mdl_LinkRes_ac.tab"
+'	gmdlFiles(NDX_MDL_LINKRES).Alias = "mdl_LinkRes"
+
+'	gmdlFiles(NDX_MDL_NODERES).Name = "Node Results"
+'	gmdlFiles(NDX_MDL_NODERES).FullPath = "Nodes\mdl_NodeRes_ac.tab"
+'	gmdlFiles(NDX_MDL_NODERES).Alias = "mdl_NodeRes"
+
+	gmdlFiles(NDX_MDL_SPECLINKS).Name = "Special Links"
+	gmdlFiles(NDX_MDL_SPECLINKS).FullPath = "Links\mdl_SpecLinks_ac.tab"
+	gmdlFiles(NDX_MDL_SPECLINKS).Alias = "mdl_SpecLinks"
+
+	gmdlFiles(NDX_MDL_SPECLINKDATA).Name = "Special Link Data"
+	gmdlFiles(NDX_MDL_SPECLINKDATA).FullPath = "Links\mdl_SpecLinkData_ac.tab"
+	gmdlFiles(NDX_MDL_SPECLINKDATA).Alias = "mdl_SpecLinkData"
+
+'	gmdlFiles(NDX_MDL_SPECNODEDATA).Name = "Special Node Data"
+'	gmdlFiles(NDX_MDL_SPECNODEDATA).FullPath = "Nodes\mdl_SpecNodeData_ac.tab"
+'	gmdlFiles(NDX_MDL_SPECNODEDATA).Alias = "mdl_SpecNodeData"
+
+'	gmdlFiles(NDX_MDL_DEFINETAGS).Name = "Tag Definitions"
+'	gmdlFiles(NDX_MDL_DEFINETAGS).FullPath = "Nodes\mdl_DefineTags_ac.tab"
+'	gmdlFiles(NDX_MDL_DEFINETAGS).Alias = "mdl_DefineTags"
+
+	gmdlFiles(NDX_MDL_SURFSC).Name = "Surface Subcatchments"
+	gmdlFiles(NDX_MDL_SURFSC).FullPath = "SurfSC\mdl_SurfSC_ac.tab"
+	gmdlFiles(NDX_MDL_SURFSC).Alias = "mdl_SurfSC"
+
+  gmdlFiles(NDX_MDL_SURFZING).Name = "Surface Zingers"
+	gmdlFiles(NDX_MDL_SURFZING).FullPath = "SurfSC\mdl_SurfZing.tab"
+	gmdlFiles(NDX_MDL_SURFZING).Alias = "mdl_SurfZing"
+
+' 12/14/2006 AMM: Model IC tables are Access-only
+'	gmdlFiles(NDX_MDL_DISCOVEG).Name = "Disco Veg"
+'	gmdlFiles(NDX_MDL_DISCOVEG).FullPath = "ic\mdl_ic_discoVeg_ac.tab"
+'	gmdlFiles(NDX_MDL_DISCOVEG).Alias = "mdl_discoveg"
+'
+'	gmdlFiles(NDX_MDL_DRYWELL).Name = "Drywell"
+'	gmdlFiles(NDX_MDL_DRYWELL).FullPath = "ic\mdl_ic_drywell_ac.tab"
+'	gmdlFiles(NDX_MDL_DRYWELL).Alias = "mdl_drywell"
+'
+'	gmdlFiles(NDX_MDL_GRNROOF).Name = "Green Roof"
+'	gmdlFiles(NDX_MDL_GRNROOF).FullPath = "ic\mdl_ic_grnroof_ac.tab"
+'	gmdlFiles(NDX_MDL_GRNROOF).Alias = "mdl_GrnRoof"
+'
+'	gmdlFiles(NDX_MDL_STORE).Name = "Storage"
+'	gmdlFiles(NDX_MDL_STORE).FullPath = "ic\mdl_ic_store_ac.tab"
+'	gmdlFiles(NDX_MDL_STORE).Alias = "mdl_store"
+'
+'	gmdlFiles(NDX_MDL_SWPLNT).Name = "SWPlnt"
+'	gmdlFiles(NDX_MDL_SWPLNT).FullPath = "ic\mdl_ic_SWPlnt_ac.tab"
+'	gmdlFiles(NDX_MDL_SWPLNT).Alias = "mdl_SWPlnt"
+'
+'	gmdlFiles(NDX_MDL_INFILT).Name = "Infilt"
+'	gmdlFiles(NDX_MDL_INFILT ).FullPath = "ic\mdl_ic_Infilt_ac.tab"
+'	gmdlFiles(NDX_MDL_INFILT ).Alias = "mdl_Infilt"
+'
+'	gmdlFiles(NDX_MDL_NGTOREDIR).Name = "NGTOredir"
+'	gmdlFiles(NDX_MDL_NGTOREDIR).FullPath = "ic\mdl_ic_NgtoRedir_ac.tab"
+'	gmdlFiles(NDX_MDL_NGTOREDIR).Alias = "mdl_NgtoRedir"
+
+	
+	' If the INI file contains a value for the "Root" Key, append the root key to the INIKey, otherwise just use the INIKey
+	gmstFiles(NDX_MASTER_LINKS).Name = "Master Links"
+	gmstFiles(NDX_MASTER_LINKS).FullPath = ""
+	gmstFiles(NDX_MASTER_LINKS).INISection = "masterfiles"
+	gmstFiles(NDX_MASTER_LINKS).INIKey = "links"
+	gmstFiles(NDX_MASTER_LINKS).Alias = "mst_links"
+
+	gmstFiles(NDX_MASTER_NODES).Name = "Master Nodes"
+	gmstFiles(NDX_MASTER_NODES).FullPath = ""
+	gmstFiles(NDX_MASTER_NODES).INISection = "masterfiles"
+	gmstFiles(NDX_MASTER_NODES).INIKey = "Nodes"
+	gmstFiles(NDX_MASTER_NODES).Alias = "mst_nodes"
+
+	gmstFiles(NDX_MASTER_DIVIDES).Name = "Master Divides"
+	gmstFiles(NDX_MASTER_DIVIDES).FullPath = ""
+	gmstFiles(NDX_MASTER_DIVIDES).INISection = "masterfiles"
+	gmstFiles(NDX_MASTER_DIVIDES).INIKey = "Divides"
+	gmstFiles(NDX_MASTER_DIVIDES).Alias = "mst_divides"
+
+	gmstFiles(NDX_MASTER_PARCELS).Name = "Master Parcels"
+	gmstFiles(NDX_MASTER_PARCELS).FullPath = ""
+	gmstFiles(NDX_MASTER_PARCELS).INISection = "masterfiles"
+	gmstFiles(NDX_MASTER_PARCELS).INIKey = "Parcels"
+	gmstFiles(NDX_MASTER_PARCELS).Alias = "mst_parcels"
+
+	gmstFiles(NDX_MASTER_LATERALS).Name = "Master Laterals"
+	gmstFiles(NDX_MASTER_LATERALS).FullPath = ""
+	gmstFiles(NDX_MASTER_LATERALS).INISection = "masterfiles"
+	gmstFiles(NDX_MASTER_LATERALS).INIKey = "Laterals"
+	gmstFiles(NDX_MASTER_LATERALS).Alias = "mst_laterals"
+
+	gmstFiles(NDX_MASTER_LATENDPTS).Name = "Master Lateral End Points"
+	gmstFiles(NDX_MASTER_LATENDPTS).FullPath = ""
+	gmstFiles(NDX_MASTER_LATENDPTS).INISection = "masterfiles"
+	gmstFiles(NDX_MASTER_LATENDPTS).INIKey = "LateralEndPts"
+	gmstFiles(NDX_MASTER_LATENDPTS).Alias = "mst_LatEndPts"
+
+	gmstFiles(NDX_MASTER_SPECLINKS).Name = "Master Special Links"
+	gmstFiles(NDX_MASTER_SPECLINKS).FullPath = ""
+	gmstFiles(NDX_MASTER_SPECLINKS).INISection = "masterfiles"
+	gmstFiles(NDX_MASTER_SPECLINKS).INIKey = "SpecLinks"
+	gmstFiles(NDX_MASTER_SPECLINKS).Alias = "mst_SpecLinks"
+
+	gmstFiles(NDX_MASTER_SURFSC).Name = "Master Surface Subcatchments"
+	gmstFiles(NDX_MASTER_SURFSC).FullPath = ""
+	gmstFiles(NDX_MASTER_SURFSC).INISection = "masterfiles"
+	gmstFiles(NDX_MASTER_SURFSC).INIKey = "surface"
+	gmstFiles(NDX_MASTER_SURFSC).Alias = "mst_SurfSC"
+
+	gmstFiles(NDX_MASTER_VIRTGAGE).Name = "Virtual Gage"
+	gmstFiles(NDX_MASTER_VIRTGAGE).FullPath = ""
+	gmstFiles(NDX_MASTER_VIRTGAGE).INISection = "masterfiles"
+	gmstFiles(NDX_MASTER_VIRTGAGE).INIKey = "VirtGage"
+	gmstFiles(NDX_MASTER_VIRTGAGE).Alias = "mst_VirtGage"
+
+	gmstFiles(NDX_MASTER_BUILDING).Name = "Master Buildings"
+	gmstFiles(NDX_MASTER_BUILDING).FullPath = ""
+	gmstFiles(NDX_MASTER_BUILDING).INISection = "masterfiles"
+	gmstFiles(NDX_MASTER_BUILDING).INIKey = "buildings"
+	gmstFiles(NDX_MASTER_BUILDING).Alias = "buildings"
+
+  gmstFiles(NDX_MASTER_PARKING).Name = "Master Parking"
+	gmstFiles(NDX_MASTER_PARKING).FullPath = ""
+	gmstFiles(NDX_MASTER_PARKING).INISection = "masterfiles"
+	gmstFiles(NDX_MASTER_PARKING).INIKey = "parking"
+	gmstFiles(NDX_MASTER_PARKING).Alias = "parking"
+	
+	gmstFiles(NDX_MASTER_ZONING).Name = "Zoning"
+  gmstFiles(NDX_MASTER_ZONING).FullPath = ""
+  gmstFiles(NDX_MASTER_ZONING).INIsection = "masterfiles"
+  gmstFiles(NDX_MASTER_ZONING).INIKey = "zoning"
+  gmstFiles(NDX_MASTER_ZONING).Alias = "zoning"
+    
+  gmstFiles(NDX_MASTER_GENZONE).Name = "GenZoneLookup"
+  gmstFiles(NDX_MASTER_GENZONE).FullPath = ""
+  gmstFiles(NDX_MASTER_GENZONE).INIsection = "masterfiles"
+  gmstFiles(NDX_MASTER_GENZONE).INIKey = "GenZoneLookup"
+  gmstFiles(NDX_MASTER_GENZONE).Alias = "zoning2Gen"
+ 
+  gmstFiles(NDX_MASTER_IC_DISCO).Name = "DiscoVeg"
+  gmstFiles(NDX_MASTER_IC_DISCO).FullPath = ""
+  gmstFiles(NDX_MASTER_IC_DISCO).INIsection = "MasterFiles"
+  gmstFiles(NDX_MASTER_IC_DISCO).INIKey = "DiscoVeg"
+  gmstFiles(NDX_MASTER_IC_DISCO).Alias = "DiscoVeg"
+  
+  gmstFiles(NDX_MASTER_IC_GREEN).Name = "GrnRoof"
+  gmstFiles(NDX_MASTER_IC_GREEN).FullPath = ""
+  gmstFiles(NDX_MASTER_IC_GREEN).INIsection = "MasterFiles"
+  gmstFiles(NDX_MASTER_IC_GREEN).INIKey = "GrnRoof"
+  gmstFiles(NDX_MASTER_IC_GREEN).Alias = "GrnRoof"
+  
+  gmstFiles(NDX_MASTER_IC_STORE).Name = "Store"
+  gmstFiles(NDX_MASTER_IC_STORE).FullPath = ""
+  gmstFiles(NDX_MASTER_IC_STORE).INIsection = "MasterFiles"
+  gmstFiles(NDX_MASTER_IC_STORE).INIKey = "Store"
+  gmstFiles(NDX_MASTER_IC_STORE).Alias = "Store"
+
+  gmstFiles(NDX_MASTER_IC_DRYWELL).Name = "DryWell"
+  gmstFiles(NDX_MASTER_IC_DRYWELL).FullPath = ""
+  gmstFiles(NDX_MASTER_IC_DRYWELL).INIsection = "MasterFiles"
+  gmstFiles(NDX_MASTER_IC_DRYWELL).INIKey = "DryWell"
+  gmstFiles(NDX_MASTER_IC_DRYWELL).Alias = "DryWell"
+  
+'	gmstFiles(NDX_MASTER_DSC).Name = "DirectSubcatchments"
+'	gmstFiles(NDX_MASTER_DSC).FullPath = ""
+'	gmstFiles(NDX_MASTER_DSC).INISection = "masterfiles"
+'	gmstFiles(NDX_MASTER_DSC).INIKey = "DSC"
+'	gmstFiles(NDX_MASTER_DSC).Alias = "mst_DSC"
+
+	gmstFiles(NDX_MASTER_IMPSA).Name = "Master Impervious"
+	gmstFiles(NDX_MASTER_IMPSA).FullPath = ""
+	gmstFiles(NDX_MASTER_IMPSA).INISection = "masterfiles"
+	gmstFiles(NDX_MASTER_IMPSA).INIKey = "Impervious"
+	gmstFiles(NDX_MASTER_IMPSA).Alias = "Impervious"
+
+  
+  
+end sub
+
+
+function setOKtoOpen(fspec() as FileSpec, ndxs() as integer) as integer
+dim loopcount as integer
+
+  for loopcount = 1 to Ubound(ndxs) 
+    if ndxs(loopcount) = 0 then
+      exit for
+    else
+      if ndxs(loopcount) > Ubound(fSpec) then
+        call loggit("Out of range in setOKtoOpen " & loopcount)
+        setOKtoOpen = RETURNFAILURE
+        exit function
+      else
+        fspec(ndxs(loopcount)).OKtoOpen = TRUE
+      end if
+    end if
+  next
+  
+  setOKtoOpen = RETURNSUCCESS
+  
+end function
+
+function setAllowWrite(fspec() as FileSpec, ndxs() as integer) as integer
+dim loopcount as integer
+
+  for loopcount = 1 to Ubound(ndxs) 
+    if ndxs(loopcount) = 0 then
+      exit for
+    else
+      if ndxs(loopcount) > Ubound(fSpec) then
+        call loggit("Out of range in setAllowWrite " & loopcount)
+        setAllowWrite = RETURNFAILURE
+        exit function
+      else
+        fspec(ndxs(loopcount)).AllowWrite = True
+      end if
+    end if
+  next
+  
+  setAllowWrite = RETURNSUCCESS
+  
+end function
+
+
+  
+function ReallyOpenMaster() as integer
+Dim		ProjFolderPath as string
+Dim		Gentle as logical
+Dim		FullPath as string
+Dim		PathName as string
+Dim		TableName as string
+Dim		AliasName as string
+Dim   IniValue as string
+Dim		LoopCount as integer
+Dim		lResult as logical
+Dim		ModelINIPath as string
+Dim		MasterRoot as string
+
+	'close all interactive
+	
+  Call SetLogOptions (TRUE, TRUE, TRUE, TRUE)
+
+  'If we know what our project folder is, open those, otherwise, ask
+  if len(gmstINIfullpath) = 0 then
+		gmstINIfullpath = FileOpenDlg(applicationDirectory$(), "","INI","Select ini file with [Master Tables] Section")
+	end if
+  
+  if len(gmstINIfullpath) = 0 then
+	  Call Loggit ("no master file selected")
+    ReallyOpenMaster = RETURNCAUTION
+		gstrReturnStatus = "ERROR"
+    exit function
+  end if
+  
+  if not FileExists(gmstINIfullpath) then
+    Call Loggit (gmstINIfullpath & " is not a file")
+    ReallyOpenMaster = RETURNFAILURE
+		gstrReturnStatus = "ERROR"
+    exit function
+  end if
+  
+  Call Loggit ( "master inifile: '" & gmstINIfullpath & "'")
+
+	MasterRoot = LTrim$(RTrim$(ReadINI(gmstINIfullpath, "masterfiles", "Root", "")))
+  
+  if MasterRoot <> "" then
+    MasterRoot = fixFolderSlash(masterRoot)
+  end if
+  	
+  Call Loggit("gmstFiles count = " & Str$(UBound(gmstFiles)))
+	For LoopCount = 1 to UBound(gmstFiles)
+	  if gmstFiles(LoopCount).OktoOpen = TRUE then
+	  	  
+		  AliasName = gmstFiles(LoopCount).Alias
+		  iniValue = ReadINI(gmstINIfullpath,gmstFiles(LoopCount).INISection, 
+		      gmstFiles(LoopCount).INIKey, "notfound")
+		
+		  if inivalue = "notfound" then
+		    Call Loggit("section: " & gmstFiles(LoopCount).INISection & ", key: " &  gmstFiles(LoopCount).INIKey & " does not exist" )
+        ReallyOpenMaster = RETURNFAILURE
+		    gstrReturnStatus = "ERROR"
+		    exit function
+		  end if 
+		
+  		FullPath = MasterRoot & inivalue & ".tab"
+
+      if Not fileexists(fullpath) then
+        Call Loggit(fullpath & " file does not exist")
+        ReallyOpenMaster = RETURNFAILURE
+		    gstrReturnStatus = "ERROR"
+		    exit function
+		  end if
+    
+      TableName = PathToTableName$(FullPath)
+		  PathName = PathToDirectory$(FullPath)
+  
+      if gmstFiles(LoopCount).AllowWrite then 
+		    Call Loggit ( "Open Table " & FullPath & " as " & AliasName)
+	      Open Table FullPath as AliasName
+	    else
+	      Call Loggit ( "Open Table " & FullPath & " as " & AliasName & " ReadOnly")
+	      Open Table FullPath as AliasName ReadOnly
+	      
+	    end if
+    
+    end if ' if OKtoOpen
+
+	Next
+	
+	gstrReturnStatus = "SUCCESS"
+	ReallyOpenMaster = RETURNSUCCESS
+	
+	
+End function
+
+function setModelAllOpen() as integer
+Dim LoopCount as integer
+
+	setModelAllOpen = RETURNFAILURE
+  For LoopCount = 1 to UBound(gmdlFiles)
+    gmdlFiles(loopcount).OKtoOpen = True
+    gmdlFiles(loopcount).AllowWrite = True
+  Next
+	setModelAllOpen = RETURNSUCCESS
+end function
+
+function setModelAllClose() as integer
+Dim LoopCount as integer
+
+	setModelAllClose = RETURNFAILURE
+  For LoopCount = 1 to UBound(gmdlFiles)
+    gmdlFiles(loopcount).OKtoOpen = False
+    gmdlFiles(loopcount).AllowWrite = False
+  Next
+	setModelAllClose = RETURNSUCCESS
+end function
+
+
+
+' Collins 03Feb2005
+' modified to utilize OKtoOpen and AllowWrite
+
+function ReallyOpenModel() as integer
+Dim		FullPath as string
+Dim		PathName as string
+Dim		TableName as string
+Dim		AliasName as string
+Dim		LoopCount as integer
+
+Dim ProjFolderPath as string
+Dim   mdlRootFolder as string
+
+	
+  Call SetLogOptions (TRUE, TRUE, TRUE, TRUE)
+  
+  if len(gmdlINIfullpath) = 0 then
+
+		ProjFolderPath = APIBrowseFolders("Select an EMGAATS Project Folder")
+		
+		if len(ProjFolderPath) <> 0 then
+			mdlRootFolder = FixFolderSlash(ProjFolderPath)
+			gmdlINIFullPath = mdlRootFolder & "model.ini"
+		else
+			call loggit ("no EMGAATS Project Selected")
+	  	ReallyOpenModel = RETURNFAILURE
+	 		exit function
+		end if	
+	else
+	  mdlRootFolder = pathtoDirectory$(gmdlINIFullpath)
+	  mdlRootFolder = FixFolderSlash(mdlRootFolder)
+	end if
+  
+  Call Loggit ( "ReallyOpenModel model directory '" & mdlRootFolder & "'")
+	
+	
+'	Get the path to the model files, and open them.
+	if not FileExists(gmdlINIfullpath) then
+		gstrCurrentMessage = "The current model directory does not contain a 'model.ini' file. " & mdlRootFolder
+		gstrReturnStatus = "ERROR"
+	  Call Loggit (gstrCurrentMessage)
+		ReallyOpenModel = RETURNFAILURE
+		
+		Exit function
+	end if
+	
+	Call Loggit ( "Model.ini exists where it's supposed to")
+
+	For LoopCount = 1 to UBound(gmdlfiles)
+	
+		if gmdlFiles(LoopCount).OktoOpen = TRUE then
+	  	  
+			AliasName = gmdlFiles(LoopCount).Alias
+			FullPath = mdlRootFolder & gmdlFiles(LoopCount).FullPath
+		
+      if Not fileexists(fullpath) then
+        Call Loggit(fullpath & " file does not exist")
+        ReallyOpenModel = RETURNFAILURE
+		    gstrReturnStatus = "ERROR"
+		    exit function
+		  end if
+    
+      TableName = PathToTableName$(FullPath)
+		  PathName = PathToDirectory$(FullPath)
+  
+      if gmdlFiles(LoopCount).AllowWrite then 
+		    Call Loggit ( "Open Table " & FullPath & " as " & AliasName)
+	      Open Table FullPath as AliasName
+	    else
+	      Call Loggit ( "Open Table " & FullPath & " as " & AliasName & " ReadOnly")
+	      Open Table FullPath as AliasName ReadOnly
+	      
+	    end if
+    
+    end if ' if OKtoOpen
+
+	Next
+
+
+	gstrReturnStatus = "SUCCESS"
+
+	ReallyOpenModel = RETURNSUCCESS
+	
+End function
+
+
+' Collins 22Mar2004 added this one
+Sub CommitModel()
+Dim 		LoopCount as integer
+Dim		AliasName as string
+
+	For LoopCount = 1 to UBound(gmdlFiles)
+		AliasName = gmdlFiles(LoopCount).Alias
+		if gmdlFiles(loopCount).OKtoOpen = TRUE and gmdlFiles(loopCount).AllowWrite = TRUE then 
+			commit table AliasName
+		end if
+	next
+End Sub
