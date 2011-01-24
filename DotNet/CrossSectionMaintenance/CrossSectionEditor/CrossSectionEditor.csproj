@@ -73,6 +73,11 @@
     <Compile Include="frmXSectEditor.Designer.cs">
       <DependentUpon>frmXSectEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="ProcessedXSectDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProcessedXSectDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmXSectEditor.resx">
@@ -101,6 +106,17 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="LandXML-1.2.xsd" />
+    <None Include="ProcessedXSectDataSet.xsc">
+      <DependentUpon>ProcessedXSectDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="ProcessedXSectDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ProcessedXSectDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="ProcessedXSectDataSet.xss">
+      <DependentUpon>ProcessedXSectDataSet.xsd</DependentUpon>
+    </None>
     <None Include="Resources\CrossSectionEditorIcon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
