@@ -294,19 +294,19 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class BmpPerformanceDataTable : global::System.Data.TypedTableBase<BmpPerformanceRow> {
             
-            private global::System.Data.DataColumn columnBmpTypeGenID;
-            
             private global::System.Data.DataColumn columnConstituent;
             
-            private global::System.Data.DataColumn columnValue;
-            
-            private global::System.Data.DataColumn columnValueLow;
-            
-            private global::System.Data.DataColumn columnValueHigh;
-            
-            private global::System.Data.DataColumn columnUnits;
-            
             private global::System.Data.DataColumn columnSource;
+            
+            private global::System.Data.DataColumn columnBMP_TYPE_GEN_ID;
+            
+            private global::System.Data.DataColumn columnVALUE;
+            
+            private global::System.Data.DataColumn columnVALUE_LOW;
+            
+            private global::System.Data.DataColumn columnVALUE_HIGH;
+            
+            private global::System.Data.DataColumn columnUNITS;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public BmpPerformanceDataTable() {
@@ -339,13 +339,6 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn BmpTypeGenIDColumn {
-                get {
-                    return this.columnBmpTypeGenID;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public global::System.Data.DataColumn ConstituentColumn {
                 get {
                     return this.columnConstituent;
@@ -353,37 +346,44 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn ValueColumn {
-                get {
-                    return this.columnValue;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn ValueLowColumn {
-                get {
-                    return this.columnValueLow;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn ValueHighColumn {
-                get {
-                    return this.columnValueHigh;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn UnitsColumn {
-                get {
-                    return this.columnUnits;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public global::System.Data.DataColumn SourceColumn {
                 get {
                     return this.columnSource;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn BMP_TYPE_GEN_IDColumn {
+                get {
+                    return this.columnBMP_TYPE_GEN_ID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn VALUEColumn {
+                get {
+                    return this.columnVALUE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn VALUE_LOWColumn {
+                get {
+                    return this.columnVALUE_LOW;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn VALUE_HIGHColumn {
+                get {
+                    return this.columnVALUE_HIGH;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn UNITSColumn {
+                get {
+                    return this.columnUNITS;
                 }
             }
             
@@ -416,16 +416,16 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public BmpPerformanceRow AddBmpPerformanceRow(int BmpTypeGenID, int Constituent, double Value, double ValueLow, double ValueHigh, string Units, string Source) {
+            public BmpPerformanceRow AddBmpPerformanceRow(int Constituent, string Source, int BMP_TYPE_GEN_ID, float VALUE, float VALUE_LOW, float VALUE_HIGH, string UNITS) {
                 BmpPerformanceRow rowBmpPerformanceRow = ((BmpPerformanceRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
-                        BmpTypeGenID,
                         Constituent,
-                        Value,
-                        ValueLow,
-                        ValueHigh,
-                        Units,
-                        Source};
+                        Source,
+                        BMP_TYPE_GEN_ID,
+                        VALUE,
+                        VALUE_LOW,
+                        VALUE_HIGH,
+                        UNITS};
                 rowBmpPerformanceRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowBmpPerformanceRow);
                 return rowBmpPerformanceRow;
@@ -445,38 +445,33 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             internal void InitVars() {
-                this.columnBmpTypeGenID = base.Columns["BmpTypeGenID"];
                 this.columnConstituent = base.Columns["Constituent"];
-                this.columnValue = base.Columns["Value"];
-                this.columnValueLow = base.Columns["ValueLow"];
-                this.columnValueHigh = base.Columns["ValueHigh"];
-                this.columnUnits = base.Columns["Units"];
                 this.columnSource = base.Columns["Source"];
+                this.columnBMP_TYPE_GEN_ID = base.Columns["BMP_TYPE_GEN_ID"];
+                this.columnVALUE = base.Columns["VALUE"];
+                this.columnVALUE_LOW = base.Columns["VALUE_LOW"];
+                this.columnVALUE_HIGH = base.Columns["VALUE_HIGH"];
+                this.columnUNITS = base.Columns["UNITS"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             private void InitClass() {
-                this.columnBmpTypeGenID = new global::System.Data.DataColumn("BmpTypeGenID", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnBmpTypeGenID);
                 this.columnConstituent = new global::System.Data.DataColumn("Constituent", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnConstituent);
-                this.columnValue = new global::System.Data.DataColumn("Value", typeof(double), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnValue);
-                this.columnValueLow = new global::System.Data.DataColumn("ValueLow", typeof(double), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnValueLow);
-                this.columnValueHigh = new global::System.Data.DataColumn("ValueHigh", typeof(double), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnValueHigh);
-                this.columnUnits = new global::System.Data.DataColumn("Units", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnUnits);
                 this.columnSource = new global::System.Data.DataColumn("Source", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnSource);
-                this.columnBmpTypeGenID.Caption = "BMP_TYPE_GEN_ID";
-                this.columnValue.Caption = "VALUE";
-                this.columnValueLow.Caption = "VALUE_LOW";
-                this.columnValueHigh.Caption = "VALUE_HIGH";
-                this.columnUnits.Caption = "UNITS";
-                this.columnUnits.MaxLength = 16;
+                this.columnBMP_TYPE_GEN_ID = new global::System.Data.DataColumn("BMP_TYPE_GEN_ID", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnBMP_TYPE_GEN_ID);
+                this.columnVALUE = new global::System.Data.DataColumn("VALUE", typeof(float), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnVALUE);
+                this.columnVALUE_LOW = new global::System.Data.DataColumn("VALUE_LOW", typeof(float), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnVALUE_LOW);
+                this.columnVALUE_HIGH = new global::System.Data.DataColumn("VALUE_HIGH", typeof(float), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnVALUE_HIGH);
+                this.columnUNITS = new global::System.Data.DataColumn("UNITS", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnUNITS);
                 this.columnSource.MaxLength = 120;
+                this.columnUNITS.MaxLength = 255;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -602,21 +597,21 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class PollutantLoadingsDataTable : global::System.Data.TypedTableBase<PollutantLoadingsRow> {
             
-            private global::System.Data.DataColumn columnLUCode;
-            
             private global::System.Data.DataColumn columnLanduse;
             
             private global::System.Data.DataColumn columnConstituent;
             
-            private global::System.Data.DataColumn columnValue;
-            
-            private global::System.Data.DataColumn columnUnits;
-            
             private global::System.Data.DataColumn columnSource;
             
-            private global::System.Data.DataColumn columnValueLow;
+            private global::System.Data.DataColumn columnLU_CODE;
             
-            private global::System.Data.DataColumn columnValueHigh;
+            private global::System.Data.DataColumn columnVALUE;
+            
+            private global::System.Data.DataColumn columnUNITS;
+            
+            private global::System.Data.DataColumn columnVALUE_LOW;
+            
+            private global::System.Data.DataColumn columnVALUE_HIGH;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public PollutantLoadingsDataTable() {
@@ -649,13 +644,6 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn LUCodeColumn {
-                get {
-                    return this.columnLUCode;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public global::System.Data.DataColumn LanduseColumn {
                 get {
                     return this.columnLanduse;
@@ -670,20 +658,6 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn ValueColumn {
-                get {
-                    return this.columnValue;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn UnitsColumn {
-                get {
-                    return this.columnUnits;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public global::System.Data.DataColumn SourceColumn {
                 get {
                     return this.columnSource;
@@ -691,16 +665,37 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn ValueLowColumn {
+            public global::System.Data.DataColumn LU_CODEColumn {
                 get {
-                    return this.columnValueLow;
+                    return this.columnLU_CODE;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn ValueHighColumn {
+            public global::System.Data.DataColumn VALUEColumn {
                 get {
-                    return this.columnValueHigh;
+                    return this.columnVALUE;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn UNITSColumn {
+                get {
+                    return this.columnUNITS;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn VALUE_LOWColumn {
+                get {
+                    return this.columnVALUE_LOW;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn VALUE_HIGHColumn {
+                get {
+                    return this.columnVALUE_HIGH;
                 }
             }
             
@@ -733,17 +728,17 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public PollutantLoadingsRow AddPollutantLoadingsRow(string LUCode, string Landuse, string Constituent, double Value, string Units, string Source, double ValueLow, double ValueHigh) {
+            public PollutantLoadingsRow AddPollutantLoadingsRow(string Landuse, string Constituent, string Source, string LU_CODE, float VALUE, string UNITS, float VALUE_LOW, float VALUE_HIGH) {
                 PollutantLoadingsRow rowPollutantLoadingsRow = ((PollutantLoadingsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
-                        LUCode,
                         Landuse,
                         Constituent,
-                        Value,
-                        Units,
                         Source,
-                        ValueLow,
-                        ValueHigh};
+                        LU_CODE,
+                        VALUE,
+                        UNITS,
+                        VALUE_LOW,
+                        VALUE_HIGH};
                 rowPollutantLoadingsRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowPollutantLoadingsRow);
                 return rowPollutantLoadingsRow;
@@ -763,44 +758,39 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             internal void InitVars() {
-                this.columnLUCode = base.Columns["LUCode"];
                 this.columnLanduse = base.Columns["Landuse"];
                 this.columnConstituent = base.Columns["Constituent"];
-                this.columnValue = base.Columns["Value"];
-                this.columnUnits = base.Columns["Units"];
                 this.columnSource = base.Columns["Source"];
-                this.columnValueLow = base.Columns["ValueLow"];
-                this.columnValueHigh = base.Columns["ValueHigh"];
+                this.columnLU_CODE = base.Columns["LU_CODE"];
+                this.columnVALUE = base.Columns["VALUE"];
+                this.columnUNITS = base.Columns["UNITS"];
+                this.columnVALUE_LOW = base.Columns["VALUE_LOW"];
+                this.columnVALUE_HIGH = base.Columns["VALUE_HIGH"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             private void InitClass() {
-                this.columnLUCode = new global::System.Data.DataColumn("LUCode", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnLUCode);
                 this.columnLanduse = new global::System.Data.DataColumn("Landuse", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnLanduse);
                 this.columnConstituent = new global::System.Data.DataColumn("Constituent", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnConstituent);
-                this.columnValue = new global::System.Data.DataColumn("Value", typeof(double), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnValue);
-                this.columnUnits = new global::System.Data.DataColumn("Units", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnUnits);
                 this.columnSource = new global::System.Data.DataColumn("Source", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnSource);
-                this.columnValueLow = new global::System.Data.DataColumn("ValueLow", typeof(double), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnValueLow);
-                this.columnValueHigh = new global::System.Data.DataColumn("ValueHigh", typeof(double), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnValueHigh);
-                this.columnLUCode.Caption = "LU_CODE";
-                this.columnLUCode.MaxLength = 6;
+                this.columnLU_CODE = new global::System.Data.DataColumn("LU_CODE", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnLU_CODE);
+                this.columnVALUE = new global::System.Data.DataColumn("VALUE", typeof(float), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnVALUE);
+                this.columnUNITS = new global::System.Data.DataColumn("UNITS", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnUNITS);
+                this.columnVALUE_LOW = new global::System.Data.DataColumn("VALUE_LOW", typeof(float), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnVALUE_LOW);
+                this.columnVALUE_HIGH = new global::System.Data.DataColumn("VALUE_HIGH", typeof(float), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnVALUE_HIGH);
                 this.columnLanduse.MaxLength = 25;
                 this.columnConstituent.MaxLength = 25;
-                this.columnValue.Caption = "VALUE";
-                this.columnUnits.Caption = "UNITS";
-                this.columnUnits.MaxLength = 16;
                 this.columnSource.MaxLength = 120;
-                this.columnValueLow.Caption = "VALUE_LOW";
-                this.columnValueHigh.Caption = "VALUE_HIGH";
+                this.columnLU_CODE.MaxLength = 255;
+                this.columnUNITS.MaxLength = 255;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -933,21 +923,6 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public int BmpTypeGenID {
-                get {
-                    try {
-                        return ((int)(this[this.tableBmpPerformance.BmpTypeGenIDColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'BmpTypeGenID\' in table \'BmpPerformance\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableBmpPerformance.BmpTypeGenIDColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public int Constituent {
                 get {
                     try {
@@ -959,66 +934,6 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
                 }
                 set {
                     this[this.tableBmpPerformance.ConstituentColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public double Value {
-                get {
-                    try {
-                        return ((double)(this[this.tableBmpPerformance.ValueColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Value\' in table \'BmpPerformance\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableBmpPerformance.ValueColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public double ValueLow {
-                get {
-                    try {
-                        return ((double)(this[this.tableBmpPerformance.ValueLowColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'ValueLow\' in table \'BmpPerformance\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableBmpPerformance.ValueLowColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public double ValueHigh {
-                get {
-                    try {
-                        return ((double)(this[this.tableBmpPerformance.ValueHighColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'ValueHigh\' in table \'BmpPerformance\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableBmpPerformance.ValueHighColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string Units {
-                get {
-                    try {
-                        return ((string)(this[this.tableBmpPerformance.UnitsColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Units\' in table \'BmpPerformance\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableBmpPerformance.UnitsColumn] = value;
                 }
             }
             
@@ -1038,13 +953,78 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsBmpTypeGenIDNull() {
-                return this.IsNull(this.tableBmpPerformance.BmpTypeGenIDColumn);
+            public int BMP_TYPE_GEN_ID {
+                get {
+                    try {
+                        return ((int)(this[this.tableBmpPerformance.BMP_TYPE_GEN_IDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'BMP_TYPE_GEN_ID\' in table \'BmpPerformance\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableBmpPerformance.BMP_TYPE_GEN_IDColumn] = value;
+                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetBmpTypeGenIDNull() {
-                this[this.tableBmpPerformance.BmpTypeGenIDColumn] = global::System.Convert.DBNull;
+            public float VALUE {
+                get {
+                    try {
+                        return ((float)(this[this.tableBmpPerformance.VALUEColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'VALUE\' in table \'BmpPerformance\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableBmpPerformance.VALUEColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public float VALUE_LOW {
+                get {
+                    try {
+                        return ((float)(this[this.tableBmpPerformance.VALUE_LOWColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'VALUE_LOW\' in table \'BmpPerformance\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableBmpPerformance.VALUE_LOWColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public float VALUE_HIGH {
+                get {
+                    try {
+                        return ((float)(this[this.tableBmpPerformance.VALUE_HIGHColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'VALUE_HIGH\' in table \'BmpPerformance\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableBmpPerformance.VALUE_HIGHColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public string UNITS {
+                get {
+                    try {
+                        return ((string)(this[this.tableBmpPerformance.UNITSColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'UNITS\' in table \'BmpPerformance\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableBmpPerformance.UNITSColumn] = value;
+                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1058,46 +1038,6 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsValueNull() {
-                return this.IsNull(this.tableBmpPerformance.ValueColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetValueNull() {
-                this[this.tableBmpPerformance.ValueColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsValueLowNull() {
-                return this.IsNull(this.tableBmpPerformance.ValueLowColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetValueLowNull() {
-                this[this.tableBmpPerformance.ValueLowColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsValueHighNull() {
-                return this.IsNull(this.tableBmpPerformance.ValueHighColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetValueHighNull() {
-                this[this.tableBmpPerformance.ValueHighColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsUnitsNull() {
-                return this.IsNull(this.tableBmpPerformance.UnitsColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetUnitsNull() {
-                this[this.tableBmpPerformance.UnitsColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public bool IsSourceNull() {
                 return this.IsNull(this.tableBmpPerformance.SourceColumn);
             }
@@ -1105,6 +1045,56 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public void SetSourceNull() {
                 this[this.tableBmpPerformance.SourceColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsBMP_TYPE_GEN_IDNull() {
+                return this.IsNull(this.tableBmpPerformance.BMP_TYPE_GEN_IDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetBMP_TYPE_GEN_IDNull() {
+                this[this.tableBmpPerformance.BMP_TYPE_GEN_IDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsVALUENull() {
+                return this.IsNull(this.tableBmpPerformance.VALUEColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetVALUENull() {
+                this[this.tableBmpPerformance.VALUEColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsVALUE_LOWNull() {
+                return this.IsNull(this.tableBmpPerformance.VALUE_LOWColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetVALUE_LOWNull() {
+                this[this.tableBmpPerformance.VALUE_LOWColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsVALUE_HIGHNull() {
+                return this.IsNull(this.tableBmpPerformance.VALUE_HIGHColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetVALUE_HIGHNull() {
+                this[this.tableBmpPerformance.VALUE_HIGHColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsUNITSNull() {
+                return this.IsNull(this.tableBmpPerformance.UNITSColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetUNITSNull() {
+                this[this.tableBmpPerformance.UNITSColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -1120,21 +1110,6 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
             internal PollutantLoadingsRow(global::System.Data.DataRowBuilder rb) : 
                     base(rb) {
                 this.tablePollutantLoadings = ((PollutantLoadingsDataTable)(this.Table));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string LUCode {
-                get {
-                    try {
-                        return ((string)(this[this.tablePollutantLoadings.LUCodeColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'LUCode\' in table \'PollutantLoadings\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tablePollutantLoadings.LUCodeColumn] = value;
-                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1168,36 +1143,6 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public double Value {
-                get {
-                    try {
-                        return ((double)(this[this.tablePollutantLoadings.ValueColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Value\' in table \'PollutantLoadings\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tablePollutantLoadings.ValueColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public string Units {
-                get {
-                    try {
-                        return ((string)(this[this.tablePollutantLoadings.UnitsColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Units\' in table \'PollutantLoadings\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tablePollutantLoadings.UnitsColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public string Source {
                 get {
                     try {
@@ -1213,43 +1158,78 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public double ValueLow {
+            public string LU_CODE {
                 get {
                     try {
-                        return ((double)(this[this.tablePollutantLoadings.ValueLowColumn]));
+                        return ((string)(this[this.tablePollutantLoadings.LU_CODEColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'ValueLow\' in table \'PollutantLoadings\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'LU_CODE\' in table \'PollutantLoadings\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tablePollutantLoadings.ValueLowColumn] = value;
+                    this[this.tablePollutantLoadings.LU_CODEColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public double ValueHigh {
+            public float VALUE {
                 get {
                     try {
-                        return ((double)(this[this.tablePollutantLoadings.ValueHighColumn]));
+                        return ((float)(this[this.tablePollutantLoadings.VALUEColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'ValueHigh\' in table \'PollutantLoadings\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'VALUE\' in table \'PollutantLoadings\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tablePollutantLoadings.ValueHighColumn] = value;
+                    this[this.tablePollutantLoadings.VALUEColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsLUCodeNull() {
-                return this.IsNull(this.tablePollutantLoadings.LUCodeColumn);
+            public string UNITS {
+                get {
+                    try {
+                        return ((string)(this[this.tablePollutantLoadings.UNITSColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'UNITS\' in table \'PollutantLoadings\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePollutantLoadings.UNITSColumn] = value;
+                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetLUCodeNull() {
-                this[this.tablePollutantLoadings.LUCodeColumn] = global::System.Convert.DBNull;
+            public float VALUE_LOW {
+                get {
+                    try {
+                        return ((float)(this[this.tablePollutantLoadings.VALUE_LOWColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'VALUE_LOW\' in table \'PollutantLoadings\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePollutantLoadings.VALUE_LOWColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public float VALUE_HIGH {
+                get {
+                    try {
+                        return ((float)(this[this.tablePollutantLoadings.VALUE_HIGHColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'VALUE_HIGH\' in table \'PollutantLoadings\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePollutantLoadings.VALUE_HIGHColumn] = value;
+                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1273,26 +1253,6 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsValueNull() {
-                return this.IsNull(this.tablePollutantLoadings.ValueColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetValueNull() {
-                this[this.tablePollutantLoadings.ValueColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsUnitsNull() {
-                return this.IsNull(this.tablePollutantLoadings.UnitsColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetUnitsNull() {
-                this[this.tablePollutantLoadings.UnitsColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public bool IsSourceNull() {
                 return this.IsNull(this.tablePollutantLoadings.SourceColumn);
             }
@@ -1303,23 +1263,53 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsValueLowNull() {
-                return this.IsNull(this.tablePollutantLoadings.ValueLowColumn);
+            public bool IsLU_CODENull() {
+                return this.IsNull(this.tablePollutantLoadings.LU_CODEColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetValueLowNull() {
-                this[this.tablePollutantLoadings.ValueLowColumn] = global::System.Convert.DBNull;
+            public void SetLU_CODENull() {
+                this[this.tablePollutantLoadings.LU_CODEColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsValueHighNull() {
-                return this.IsNull(this.tablePollutantLoadings.ValueHighColumn);
+            public bool IsVALUENull() {
+                return this.IsNull(this.tablePollutantLoadings.VALUEColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetValueHighNull() {
-                this[this.tablePollutantLoadings.ValueHighColumn] = global::System.Convert.DBNull;
+            public void SetVALUENull() {
+                this[this.tablePollutantLoadings.VALUEColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsUNITSNull() {
+                return this.IsNull(this.tablePollutantLoadings.UNITSColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetUNITSNull() {
+                this[this.tablePollutantLoadings.UNITSColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsVALUE_LOWNull() {
+                return this.IsNull(this.tablePollutantLoadings.VALUE_LOWColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetVALUE_LOWNull() {
+                this[this.tablePollutantLoadings.VALUE_LOWColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IsVALUE_HIGHNull() {
+                return this.IsNull(this.tablePollutantLoadings.VALUE_HIGHColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetVALUE_HIGHNull() {
+                this[this.tablePollutantLoadings.VALUE_HIGHColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -1504,26 +1494,27 @@ namespace SystemsAnalysis.Grid.GridAnalysis.PollutantLoadingMetadataDataSetTable
             global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
             tableMapping.SourceTable = "Table";
             tableMapping.DataSetTable = "BmpPerformance";
-            tableMapping.ColumnMappings.Add("BMP_TYPE_GEN_ID", "BmpTypeGenID");
             tableMapping.ColumnMappings.Add("Constituent", "Constituent");
-            tableMapping.ColumnMappings.Add("VALUE", "Value");
-            tableMapping.ColumnMappings.Add("VALUE_LOW", "ValueLow");
-            tableMapping.ColumnMappings.Add("VALUE_HIGH", "ValueHigh");
-            tableMapping.ColumnMappings.Add("UNITS", "Units");
             tableMapping.ColumnMappings.Add("Source", "Source");
+            tableMapping.ColumnMappings.Add("BMP_TYPE_GEN_ID", "BMP_TYPE_GEN_ID");
+            tableMapping.ColumnMappings.Add("VALUE", "VALUE");
+            tableMapping.ColumnMappings.Add("VALUE_LOW", "VALUE_LOW");
+            tableMapping.ColumnMappings.Add("VALUE_HIGH", "VALUE_HIGH");
+            tableMapping.ColumnMappings.Add("UNITS", "UNITS");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO `BMP_PERFORMANCE` (`BMP_TYPE_GEN_ID`, `Constituent`, `VALUE`, `VALUE_" +
-                "LOW`, `VALUE_HIGH`, `UNITS`, `Source`) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [GRID_BMP_PERFORMANCE] ([BMP_TYPE_GEN_ID], [Constituent], [VALUE], [V" +
+                "ALUE_LOW], [VALUE_HIGH], [UNITS], [Source]) VALUES (@BMP_TYPE_GEN_ID, @Constitue" +
+                "nt, @VALUE, @VALUE_LOW, @VALUE_HIGH, @UNITS, @Source)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("BMP_TYPE_GEN_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BMP_TYPE_GEN_ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("Constituent", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Constituent", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("VALUE", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "VALUE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("VALUE_LOW", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "VALUE_LOW", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("VALUE_HIGH", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "VALUE_HIGH", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("UNITS", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UNITS", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("Source", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Source", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@BMP_TYPE_GEN_ID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "BMP_TYPE_GEN_ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Constituent", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Constituent", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@VALUE", global::System.Data.SqlDbType.Real, 0, global::System.Data.ParameterDirection.Input, 0, 0, "VALUE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@VALUE_LOW", global::System.Data.SqlDbType.Real, 0, global::System.Data.ParameterDirection.Input, 0, 0, "VALUE_LOW", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@VALUE_HIGH", global::System.Data.SqlDbType.Real, 0, global::System.Data.ParameterDirection.Input, 0, 0, "VALUE_HIGH", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@UNITS", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UNITS", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Source", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Source", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1538,7 +1529,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis.PollutantLoadingMetadataDataSetTable
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT BMP_TYPE_GEN_ID, Constituent, [VALUE], VALUE_LOW, VALUE_HIGH, UNITS, Sourc" +
-                "e FROM BMP_PERFORMANCE";
+                "e FROM GRID_BMP_PERFORMANCE";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -1587,68 +1578,6 @@ namespace SystemsAnalysis.Grid.GridAnalysis.PollutantLoadingMetadataDataSetTable
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         public virtual int Update(global::System.Data.DataRow[] dataRows) {
             return this.Adapter.Update(dataRows);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(global::System.Nullable<int> BMP_TYPE_GEN_ID, global::System.Nullable<int> Constituent, global::System.Nullable<double> VALUE, global::System.Nullable<double> VALUE_LOW, global::System.Nullable<double> VALUE_HIGH, string UNITS, string Source) {
-            if ((BMP_TYPE_GEN_ID.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[0].Value = ((int)(BMP_TYPE_GEN_ID.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
-            }
-            if ((Constituent.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[1].Value = ((int)(Constituent.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
-            if ((VALUE.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[2].Value = ((double)(VALUE.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            if ((VALUE_LOW.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[3].Value = ((double)(VALUE_LOW.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            if ((VALUE_HIGH.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[4].Value = ((double)(VALUE_HIGH.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
-            if ((UNITS == null)) {
-                this.Adapter.InsertCommand.Parameters[5].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[5].Value = ((string)(UNITS));
-            }
-            if ((Source == null)) {
-                this.Adapter.InsertCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[6].Value = ((string)(Source));
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
-            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.InsertCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.InsertCommand.Connection.Close();
-                }
-            }
         }
     }
     
@@ -1767,28 +1696,15 @@ namespace SystemsAnalysis.Grid.GridAnalysis.PollutantLoadingMetadataDataSetTable
             global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
             tableMapping.SourceTable = "Table";
             tableMapping.DataSetTable = "PollutantLoadings";
-            tableMapping.ColumnMappings.Add("LU_CODE", "LUCode");
             tableMapping.ColumnMappings.Add("Landuse", "Landuse");
             tableMapping.ColumnMappings.Add("Constituent", "Constituent");
-            tableMapping.ColumnMappings.Add("VALUE", "Value");
-            tableMapping.ColumnMappings.Add("UNITS", "Units");
             tableMapping.ColumnMappings.Add("Source", "Source");
-            tableMapping.ColumnMappings.Add("VALUE_LOW", "ValueLow");
-            tableMapping.ColumnMappings.Add("VALUE_HIGH", "ValueHigh");
+            tableMapping.ColumnMappings.Add("LU_CODE", "LU_CODE");
+            tableMapping.ColumnMappings.Add("VALUE", "VALUE");
+            tableMapping.ColumnMappings.Add("UNITS", "UNITS");
+            tableMapping.ColumnMappings.Add("VALUE_LOW", "VALUE_LOW");
+            tableMapping.ColumnMappings.Add("VALUE_HIGH", "VALUE_HIGH");
             this._adapter.TableMappings.Add(tableMapping);
-            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO `pollutant_loadings` (`LU_CODE`, `Landuse`, `Constituent`, `VALUE`, `" +
-                "UNITS`, `Source`, `VALUE_LOW`, `VALUE_HIGH`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("LU_CODE", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "LU_CODE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("Landuse", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Landuse", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("Constituent", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Constituent", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("VALUE", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "VALUE", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("UNITS", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "UNITS", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("Source", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Source", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("VALUE_LOW", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "VALUE_LOW", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("VALUE_HIGH", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "VALUE_HIGH", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1803,7 +1719,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis.PollutantLoadingMetadataDataSetTable
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT LU_CODE, Landuse, Constituent, [VALUE], UNITS, Source, VALUE_LOW, VALUE_HI" +
-                "GH FROM pollutant_loadings";
+                "GH FROM GRID_pollutant_loadings";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -1828,99 +1744,6 @@ namespace SystemsAnalysis.Grid.GridAnalysis.PollutantLoadingMetadataDataSetTable
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(PollutantLoadingMetadataDataSet.PollutantLoadingsDataTable dataTable) {
-            return this.Adapter.Update(dataTable);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(PollutantLoadingMetadataDataSet dataSet) {
-            return this.Adapter.Update(dataSet, "PollutantLoadings");
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow dataRow) {
-            return this.Adapter.Update(new global::System.Data.DataRow[] {
-                        dataRow});
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow[] dataRows) {
-            return this.Adapter.Update(dataRows);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string LU_CODE, string Landuse, string Constituent, global::System.Nullable<double> VALUE, string UNITS, string Source, global::System.Nullable<double> VALUE_LOW, global::System.Nullable<double> VALUE_HIGH) {
-            if ((LU_CODE == null)) {
-                this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(LU_CODE));
-            }
-            if ((Landuse == null)) {
-                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(Landuse));
-            }
-            if ((Constituent == null)) {
-                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(Constituent));
-            }
-            if ((VALUE.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[3].Value = ((double)(VALUE.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            if ((UNITS == null)) {
-                this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[4].Value = ((string)(UNITS));
-            }
-            if ((Source == null)) {
-                this.Adapter.InsertCommand.Parameters[5].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[5].Value = ((string)(Source));
-            }
-            if ((VALUE_LOW.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[6].Value = ((double)(VALUE_LOW.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            if ((VALUE_HIGH.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[7].Value = ((double)(VALUE_HIGH.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[7].Value = global::System.DBNull.Value;
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
-            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.InsertCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.InsertCommand.Connection.Close();
-                }
-            }
-        }
     }
     
     /// <summary>
@@ -1937,8 +1760,6 @@ namespace SystemsAnalysis.Grid.GridAnalysis.PollutantLoadingMetadataDataSetTable
         private UpdateOrderOption _updateOrder;
         
         private BmpPerformanceTableAdapter _bmpPerformanceTableAdapter;
-        
-        private PollutantLoadingsTableAdapter _pollutantLoadingsTableAdapter;
         
         private bool _backupDataSetBeforeUpdate;
         
@@ -1968,19 +1789,6 @@ namespace SystemsAnalysis.Grid.GridAnalysis.PollutantLoadingMetadataDataSetTable
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
-            "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" +
-            "", "System.Drawing.Design.UITypeEditor")]
-        public PollutantLoadingsTableAdapter PollutantLoadingsTableAdapter {
-            get {
-                return this._pollutantLoadingsTableAdapter;
-            }
-            set {
-                this._pollutantLoadingsTableAdapter = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         public bool BackupDataSetBeforeUpdate {
             get {
                 return this._backupDataSetBeforeUpdate;
@@ -2001,10 +1809,6 @@ namespace SystemsAnalysis.Grid.GridAnalysis.PollutantLoadingMetadataDataSetTable
                             && (this._bmpPerformanceTableAdapter.Connection != null))) {
                     return this._bmpPerformanceTableAdapter.Connection;
                 }
-                if (((this._pollutantLoadingsTableAdapter != null) 
-                            && (this._pollutantLoadingsTableAdapter.Connection != null))) {
-                    return this._pollutantLoadingsTableAdapter.Connection;
-                }
                 return null;
             }
             set {
@@ -2020,9 +1824,6 @@ namespace SystemsAnalysis.Grid.GridAnalysis.PollutantLoadingMetadataDataSetTable
                 if ((this._bmpPerformanceTableAdapter != null)) {
                     count = (count + 1);
                 }
-                if ((this._pollutantLoadingsTableAdapter != null)) {
-                    count = (count + 1);
-                }
                 return count;
             }
         }
@@ -2033,15 +1834,6 @@ namespace SystemsAnalysis.Grid.GridAnalysis.PollutantLoadingMetadataDataSetTable
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private int UpdateUpdatedRows(PollutantLoadingMetadataDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
-            if ((this._pollutantLoadingsTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.PollutantLoadings.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._pollutantLoadingsTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
             if ((this._bmpPerformanceTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.BmpPerformance.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
@@ -2060,14 +1852,6 @@ namespace SystemsAnalysis.Grid.GridAnalysis.PollutantLoadingMetadataDataSetTable
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private int UpdateInsertedRows(PollutantLoadingMetadataDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
-            if ((this._pollutantLoadingsTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.PollutantLoadings.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._pollutantLoadingsTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
             if ((this._bmpPerformanceTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.BmpPerformance.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
@@ -2090,14 +1874,6 @@ namespace SystemsAnalysis.Grid.GridAnalysis.PollutantLoadingMetadataDataSetTable
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._bmpPerformanceTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
-            if ((this._pollutantLoadingsTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.PollutantLoadings.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._pollutantLoadingsTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -2143,11 +1919,6 @@ namespace SystemsAnalysis.Grid.GridAnalysis.PollutantLoadingMetadataDataSetTable
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
                         "tring.");
             }
-            if (((this._pollutantLoadingsTableAdapter != null) 
-                        && (this.MatchTableAdapterConnection(this._pollutantLoadingsTableAdapter.Connection) == false))) {
-                throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
-                        "tring.");
-            }
             global::System.Data.IDbConnection workConnection = this.Connection;
             if ((workConnection == null)) {
                 throw new global::System.ApplicationException("TableAdapterManager contains no connection information. Set each TableAdapterMana" +
@@ -2187,15 +1958,6 @@ namespace SystemsAnalysis.Grid.GridAnalysis.PollutantLoadingMetadataDataSetTable
                     if (this._bmpPerformanceTableAdapter.Adapter.AcceptChangesDuringUpdate) {
                         this._bmpPerformanceTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
                         adaptersWithAcceptChangesDuringUpdate.Add(this._bmpPerformanceTableAdapter.Adapter);
-                    }
-                }
-                if ((this._pollutantLoadingsTableAdapter != null)) {
-                    revertConnections.Add(this._pollutantLoadingsTableAdapter, this._pollutantLoadingsTableAdapter.Connection);
-                    this._pollutantLoadingsTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
-                    this._pollutantLoadingsTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
-                    if (this._pollutantLoadingsTableAdapter.Adapter.AcceptChangesDuringUpdate) {
-                        this._pollutantLoadingsTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
-                        adaptersWithAcceptChangesDuringUpdate.Add(this._pollutantLoadingsTableAdapter.Adapter);
                     }
                 }
                 // 
@@ -2259,10 +2021,6 @@ namespace SystemsAnalysis.Grid.GridAnalysis.PollutantLoadingMetadataDataSetTable
                 if ((this._bmpPerformanceTableAdapter != null)) {
                     this._bmpPerformanceTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._bmpPerformanceTableAdapter]));
                     this._bmpPerformanceTableAdapter.Transaction = null;
-                }
-                if ((this._pollutantLoadingsTableAdapter != null)) {
-                    this._pollutantLoadingsTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._pollutantLoadingsTableAdapter]));
-                    this._pollutantLoadingsTableAdapter.Transaction = null;
                 }
                 if ((0 < adaptersWithAcceptChangesDuringUpdate.Count)) {
                     global::System.Data.Common.DataAdapter[] adapters = new System.Data.Common.DataAdapter[adaptersWithAcceptChangesDuringUpdate.Count];

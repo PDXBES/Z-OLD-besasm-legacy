@@ -26,7 +26,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=SIRTOBY;Initial Catalog=GRIDMODEL;Integrated Security=True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Server=SIRTOBY;Database=GRIDMODEL;Integrated Security=True")]
         public string Waterqual_GIS_v5_0ConnectionString {
             get {
                 return ((string)(this["Waterqual_GIS_v5_0ConnectionString"]));

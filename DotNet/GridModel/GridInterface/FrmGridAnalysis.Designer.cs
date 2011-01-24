@@ -315,8 +315,8 @@
             this.label5 = new Infragistics.Win.Misc.UltraLabel();
             this.btnDeleteScenario = new Infragistics.Win.Misc.UltraButton();
             this.txtNewScenarioName = new Infragistics.Win.UltraWinEditors.UltraTextEditor();
-            this.label3 = new Infragistics.Win.Misc.UltraLabel();
-            this.label4 = new Infragistics.Win.Misc.UltraLabel();
+            this.lblBMPTableName = new Infragistics.Win.Misc.UltraLabel();
+            this.lblBMPDBName = new Infragistics.Win.Misc.UltraLabel();
             this.btnAddNewScenario = new Infragistics.Win.Misc.UltraButton();
             this.chkInstreamFacilities = new System.Windows.Forms.CheckBox();
             this.label2 = new Infragistics.Win.Misc.UltraLabel();
@@ -326,7 +326,7 @@
             this.lblTableName = new Infragistics.Win.Misc.UltraLabel();
             this.txtPollutantLoadingTable = new Infragistics.Win.UltraWinEditors.UltraTextEditor();
             this.txtBMPEffectivenessTable = new Infragistics.Win.UltraWinEditors.UltraTextEditor();
-            this.lblDBPath = new Infragistics.Win.Misc.UltraLabel();
+            this.lblDBName = new Infragistics.Win.Misc.UltraLabel();
             this.txtPollutantLoadingDB = new Infragistics.Win.UltraWinEditors.UltraTextEditor();
             this.lblBMPEffectiveness = new Infragistics.Win.Misc.UltraLabel();
             this.txtBMPEffectivenessDB = new Infragistics.Win.UltraWinEditors.UltraTextEditor();
@@ -609,8 +609,8 @@
             this.tabPageDefineScenarios.Controls.Add(this.label5);
             this.tabPageDefineScenarios.Controls.Add(this.btnDeleteScenario);
             this.tabPageDefineScenarios.Controls.Add(this.txtNewScenarioName);
-            this.tabPageDefineScenarios.Controls.Add(this.label3);
-            this.tabPageDefineScenarios.Controls.Add(this.label4);
+            this.tabPageDefineScenarios.Controls.Add(this.lblBMPTableName);
+            this.tabPageDefineScenarios.Controls.Add(this.lblBMPDBName);
             this.tabPageDefineScenarios.Controls.Add(this.btnAddNewScenario);
             this.tabPageDefineScenarios.Controls.Add(this.chkInstreamFacilities);
             this.tabPageDefineScenarios.Controls.Add(this.label2);
@@ -620,7 +620,7 @@
             this.tabPageDefineScenarios.Controls.Add(this.lblTableName);
             this.tabPageDefineScenarios.Controls.Add(this.txtPollutantLoadingTable);
             this.tabPageDefineScenarios.Controls.Add(this.txtBMPEffectivenessTable);
-            this.tabPageDefineScenarios.Controls.Add(this.lblDBPath);
+            this.tabPageDefineScenarios.Controls.Add(this.lblDBName);
             this.tabPageDefineScenarios.Controls.Add(this.txtPollutantLoadingDB);
             this.tabPageDefineScenarios.Controls.Add(this.lblBMPEffectiveness);
             this.tabPageDefineScenarios.Controls.Add(this.txtBMPEffectivenessDB);
@@ -662,7 +662,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(7, 251);
+            this.label5.Location = new System.Drawing.Point(7, 253);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(108, 14);
             this.label5.TabIndex = 55;
@@ -671,7 +671,7 @@
             // btnDeleteScenario
             // 
             this.btnDeleteScenario.ButtonStyle = Infragistics.Win.UIElementButtonStyle.VisualStudio2005Button;
-            this.btnDeleteScenario.Location = new System.Drawing.Point(99, 210);
+            this.btnDeleteScenario.Location = new System.Drawing.Point(99, 212);
             this.btnDeleteScenario.Name = "btnDeleteScenario";
             this.btnDeleteScenario.Size = new System.Drawing.Size(85, 35);
             this.btnDeleteScenario.TabIndex = 2;
@@ -681,33 +681,33 @@
             // txtNewScenarioName
             // 
             this.txtNewScenarioName.DisplayStyle = Infragistics.Win.EmbeddableElementDisplayStyle.VisualStudio2005;
-            this.txtNewScenarioName.Location = new System.Drawing.Point(7, 267);
+            this.txtNewScenarioName.Location = new System.Drawing.Point(7, 269);
             this.txtNewScenarioName.Name = "txtNewScenarioName";
             this.txtNewScenarioName.Size = new System.Drawing.Size(177, 21);
             this.txtNewScenarioName.TabIndex = 3;
             // 
-            // label3
+            // lblBMPTableName
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(280, 181);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(66, 14);
-            this.label3.TabIndex = 52;
-            this.label3.Text = "Table Name";
+            this.lblBMPTableName.AutoSize = true;
+            this.lblBMPTableName.Location = new System.Drawing.Point(308, 187);
+            this.lblBMPTableName.Name = "lblBMPTableName";
+            this.lblBMPTableName.Size = new System.Drawing.Size(66, 14);
+            this.lblBMPTableName.TabIndex = 52;
+            this.lblBMPTableName.Text = "Table Name";
             // 
-            // label4
+            // lblBMPDBName
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(280, 158);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(79, 14);
-            this.label4.TabIndex = 51;
-            this.label4.Text = "Database Path";
+            this.lblBMPDBName.AutoSize = true;
+            this.lblBMPDBName.Location = new System.Drawing.Point(280, 160);
+            this.lblBMPDBName.Name = "lblBMPDBName";
+            this.lblBMPDBName.Size = new System.Drawing.Size(94, 14);
+            this.lblBMPDBName.TabIndex = 51;
+            this.lblBMPDBName.Text = "Connection String";
             // 
             // btnAddNewScenario
             // 
             this.btnAddNewScenario.ButtonStyle = Infragistics.Win.UIElementButtonStyle.VisualStudio2005Button;
-            this.btnAddNewScenario.Location = new System.Drawing.Point(7, 210);
+            this.btnAddNewScenario.Location = new System.Drawing.Point(7, 212);
             this.btnAddNewScenario.Name = "btnAddNewScenario";
             this.btnAddNewScenario.Size = new System.Drawing.Size(85, 35);
             this.btnAddNewScenario.TabIndex = 1;
@@ -765,7 +765,7 @@
             // lblTableName
             // 
             this.lblTableName.AutoSize = true;
-            this.lblTableName.Location = new System.Drawing.Point(280, 112);
+            this.lblTableName.Location = new System.Drawing.Point(308, 113);
             this.lblTableName.Name = "lblTableName";
             this.lblTableName.Size = new System.Drawing.Size(66, 14);
             this.lblTableName.TabIndex = 43;
@@ -775,43 +775,43 @@
             // 
             this.txtPollutantLoadingTable.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.feScenariosBindingSource, "pollutant_loading_table", true));
             this.txtPollutantLoadingTable.DisplayStyle = Infragistics.Win.EmbeddableElementDisplayStyle.VisualStudio2005;
-            this.txtPollutantLoadingTable.Location = new System.Drawing.Point(386, 109);
+            this.txtPollutantLoadingTable.Location = new System.Drawing.Point(380, 106);
             this.txtPollutantLoadingTable.Name = "txtPollutantLoadingTable";
-            this.txtPollutantLoadingTable.Size = new System.Drawing.Size(167, 21);
+            this.txtPollutantLoadingTable.Size = new System.Drawing.Size(413, 21);
             this.txtPollutantLoadingTable.TabIndex = 7;
             // 
             // txtBMPEffectivenessTable
             // 
             this.txtBMPEffectivenessTable.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.feScenariosBindingSource, "bmp_effectiveness_table", true));
             this.txtBMPEffectivenessTable.DisplayStyle = Infragistics.Win.EmbeddableElementDisplayStyle.VisualStudio2005;
-            this.txtBMPEffectivenessTable.Location = new System.Drawing.Point(386, 178);
+            this.txtBMPEffectivenessTable.Location = new System.Drawing.Point(380, 180);
             this.txtBMPEffectivenessTable.Name = "txtBMPEffectivenessTable";
-            this.txtBMPEffectivenessTable.Size = new System.Drawing.Size(384, 21);
+            this.txtBMPEffectivenessTable.Size = new System.Drawing.Size(413, 21);
             this.txtBMPEffectivenessTable.TabIndex = 9;
             // 
-            // lblDBPath
+            // lblDBName
             // 
-            this.lblDBPath.AutoSize = true;
-            this.lblDBPath.Location = new System.Drawing.Point(280, 89);
-            this.lblDBPath.Name = "lblDBPath";
-            this.lblDBPath.Size = new System.Drawing.Size(79, 14);
-            this.lblDBPath.TabIndex = 40;
-            this.lblDBPath.Text = "Database Path";
+            this.lblDBName.AutoSize = true;
+            this.lblDBName.Location = new System.Drawing.Point(282, 86);
+            this.lblDBName.Name = "lblDBName";
+            this.lblDBName.Size = new System.Drawing.Size(94, 14);
+            this.lblDBName.TabIndex = 40;
+            this.lblDBName.Text = "Connection String";
             // 
             // txtPollutantLoadingDB
             // 
             this.txtPollutantLoadingDB.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.feScenariosBindingSource, "pollutant_loading_db", true));
             this.txtPollutantLoadingDB.DisplayStyle = Infragistics.Win.EmbeddableElementDisplayStyle.VisualStudio2005;
-            this.txtPollutantLoadingDB.Location = new System.Drawing.Point(386, 86);
+            this.txtPollutantLoadingDB.Location = new System.Drawing.Point(380, 79);
             this.txtPollutantLoadingDB.Name = "txtPollutantLoadingDB";
-            this.txtPollutantLoadingDB.Size = new System.Drawing.Size(167, 21);
+            this.txtPollutantLoadingDB.Size = new System.Drawing.Size(413, 21);
             this.txtPollutantLoadingDB.TabIndex = 6;
             // 
             // lblBMPEffectiveness
             // 
             this.lblBMPEffectiveness.AutoSize = true;
             this.lblBMPEffectiveness.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBMPEffectiveness.Location = new System.Drawing.Point(280, 135);
+            this.lblBMPEffectiveness.Location = new System.Drawing.Point(280, 133);
             this.lblBMPEffectiveness.Name = "lblBMPEffectiveness";
             this.lblBMPEffectiveness.Size = new System.Drawing.Size(103, 14);
             this.lblBMPEffectiveness.TabIndex = 39;
@@ -821,9 +821,9 @@
             // 
             this.txtBMPEffectivenessDB.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.feScenariosBindingSource, "bmp_effectiveness_db", true));
             this.txtBMPEffectivenessDB.DisplayStyle = Infragistics.Win.EmbeddableElementDisplayStyle.VisualStudio2005;
-            this.txtBMPEffectivenessDB.Location = new System.Drawing.Point(386, 155);
+            this.txtBMPEffectivenessDB.Location = new System.Drawing.Point(380, 153);
             this.txtBMPEffectivenessDB.Name = "txtBMPEffectivenessDB";
-            this.txtBMPEffectivenessDB.Size = new System.Drawing.Size(564, 21);
+            this.txtBMPEffectivenessDB.Size = new System.Drawing.Size(413, 21);
             this.txtBMPEffectivenessDB.TabIndex = 8;
             // 
             // lblPollutantLoads
@@ -839,7 +839,7 @@
             // btnUpdateSelectedProcesses
             // 
             this.btnUpdateSelectedProcesses.ButtonStyle = Infragistics.Win.UIElementButtonStyle.VisualStudio2005Button;
-            this.btnUpdateSelectedProcesses.Location = new System.Drawing.Point(601, 210);
+            this.btnUpdateSelectedProcesses.Location = new System.Drawing.Point(601, 212);
             this.btnUpdateSelectedProcesses.Name = "btnUpdateSelectedProcesses";
             this.btnUpdateSelectedProcesses.Size = new System.Drawing.Size(311, 35);
             this.btnUpdateSelectedProcesses.TabIndex = 11;
@@ -858,7 +858,7 @@
             // btnCommitScenarioChanges
             // 
             this.btnCommitScenarioChanges.ButtonStyle = Infragistics.Win.UIElementButtonStyle.VisualStudio2005Button;
-            this.btnCommitScenarioChanges.Location = new System.Drawing.Point(282, 210);
+            this.btnCommitScenarioChanges.Location = new System.Drawing.Point(282, 212);
             this.btnCommitScenarioChanges.Name = "btnCommitScenarioChanges";
             this.btnCommitScenarioChanges.Size = new System.Drawing.Size(313, 35);
             this.btnCommitScenarioChanges.TabIndex = 10;
@@ -2434,11 +2434,11 @@
         private Infragistics.Win.Misc.UltraLabel lblTimePeriod;
         private System.Windows.Forms.CheckBox chkInstreamFacilities;
         private Infragistics.Win.Misc.UltraLabel label2;
-        private Infragistics.Win.Misc.UltraLabel label3;
-        private Infragistics.Win.Misc.UltraLabel label4;
+        private Infragistics.Win.Misc.UltraLabel lblBMPTableName;
+        private Infragistics.Win.Misc.UltraLabel lblBMPDBName;
         private Infragistics.Win.Misc.UltraButton btnAddNewScenario;
         private Infragistics.Win.Misc.UltraLabel lblTableName;
-        private Infragistics.Win.Misc.UltraLabel lblDBPath;
+        private Infragistics.Win.Misc.UltraLabel lblDBName;
         private Infragistics.Win.Misc.UltraButton btnDeleteScenario;
         private Infragistics.Win.UltraWinEditors.UltraTextEditor txtNewScenarioName;
         private Infragistics.Win.Misc.UltraLabel label5;

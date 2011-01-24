@@ -37,7 +37,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis
             this.osfPath = osfPath;
             this.outputDirectory = outputDirectory;
             this.SQLDatabaseConnectionString = SQLDatabaseConnectionString;
-            accessHelper = new AccessHelper(gridModelPath, SQLDatabaseConnectionString);
+            accessHelper = new AccessHelper();//gridModelPath, SQLDatabaseConnectionString);
 
             
         }
@@ -51,7 +51,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis
 
             gridModelRuns = new List<GridModelRun>();
             gridModelResults = new List<GridModelResult>();
-            accessHelper = new AccessHelper(gridModelPath, SQLDatabaseConnectionString/*"Data Source=SIRTOBY;Initial Catalog=SANDBOX;"*/);
+            accessHelper = new AccessHelper();//gridModelPath, SQLDatabaseConnectionString/*"Data Source=SIRTOBY;Initial Catalog=SANDBOX;"*/);
 
         }
         //These constructors should not be connecting to the base access database to get the grid table
@@ -75,11 +75,20 @@ namespace SystemsAnalysis.Grid.GridAnalysis
             //server connection(SQLDatabaseConnectionString) and the default table name
             //if they both match up, then skip the copy/import, but if they do not both match up, then
             //perform the copy/import.
-            DataMobility.SQLCopyAccessTable(gridModelRuns[0].BMPEffectivenessTable,
-                gridModelRuns[0].BMPEffectivenessDB, "GRID_BMP_PERFORMANCE", SQLDatabaseConnectionString);
-            DataMobility.SQLCopyAccessTable(gridModelRuns[0].PollutantLoadingTable,
-                gridModelRuns[0].PollutantLoadingDB, "GRID_pollutant_loadings", SQLDatabaseConnectionString);
-            DataMobility.SQLCopyAccessTable(gridDataTableName, gridDataPath, "GRID_" + gridDataTableName, SQLDatabaseConnectionString);
+            if ((string.Compare(gridModelRuns[0].BMPEffectivenessDB, SQLDatabaseConnectionString) != 0) || (string.Compare("GRID_BMP_PERFORMANCE", gridModelRuns[0].BMPEffectivenessTable) != 0))
+            {
+                DataMobility.SQLCopySQLTable(gridModelRuns[0].BMPEffectivenessTable,
+                    gridModelRuns[0].BMPEffectivenessDB, "GRID_BMP_PERFORMANCE", SQLDatabaseConnectionString);
+            }
+            if ((string.Compare(gridModelRuns[0].PollutantLoadingDB, SQLDatabaseConnectionString) != 0) || (string.Compare("GRID_pollutant_loadings", gridModelRuns[0].PollutantLoadingTable) != 0))
+            {
+                DataMobility.SQLCopySQLTable(gridModelRuns[0].PollutantLoadingTable,
+                    gridModelRuns[0].PollutantLoadingDB, "GRID_pollutant_loadings", SQLDatabaseConnectionString);
+            }
+            if ((string.Compare(gridDataPath, SQLDatabaseConnectionString) != 0) || (string.Compare(gridDataTableName, "GRID_WshdGrd100FtOpt") != 0))
+            {
+                DataMobility.SQLCopySQLTable(gridDataTableName, gridDataPath, "GRID_WshdGrd100FtOpt", SQLDatabaseConnectionString);
+            }
         }
 
         #region Accessors for Xml serialization
@@ -137,13 +146,13 @@ namespace SystemsAnalysis.Grid.GridAnalysis
             int bmpSourceCount = 0;
             if (prfPath != "")
             {
-                DataMobility.SQLCopyAccessTable(bmpTableName, prfPath, "GRID_" + bmpTableName, SQLDatabaseConnectionString);
+                DataMobility.SQLCopySQLTable(bmpTableName, prfPath, "GRID_PDX_BMP_GRID", SQLDatabaseConnectionString);
                 bmpUnionQuery += "SELECT * FROM GRID_PRF_LIST ";
                 bmpSourceCount++;
             }
             if (mipPath != "")
             {
-                DataMobility.SQLCopyAccessTable(mipTableName, mipPath, "GRID_" + mipTableName, SQLDatabaseConnectionString);
+                DataMobility.SQLCopySQLTable(mipTableName, mipPath, "GRID_PDX_MIP_GRID", SQLDatabaseConnectionString);
                 if (bmpSourceCount > 0)
                 {
                     bmpUnionQuery += "UNION ";
@@ -153,7 +162,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis
             }
             if (osfPath != "")
             {
-                DataMobility.SQLCopyAccessTable(osfTableName, osfPath, "GRID_" + osfTableName, SQLDatabaseConnectionString);
+                DataMobility.SQLCopySQLTable(osfTableName, osfPath, "GRID_PDX_OSF_GRID", SQLDatabaseConnectionString);
                 if (bmpSourceCount > 0)
                 {
                     bmpUnionQuery += "UNION ";
