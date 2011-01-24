@@ -40,15 +40,7 @@ namespace SystemsAnalysis.EMGAATS.CrossSectionEditor
 
     private void ultraButton1_Click(object sender, EventArgs e)
     {
-      chrtXSectDisplay.DataBindings.Clear();
-      if (openFileDialog.ShowDialog() != DialogResult.OK)
-        return;
-
-      processedXSectDS.Clear();
-      ValidateRawXml(openFileDialog.FileName);
-      LoadXSect(0);
-
-      ConfigureChart();
+      
 
     }
 
@@ -59,6 +51,8 @@ namespace SystemsAnalysis.EMGAATS.CrossSectionEditor
       chrtXSectDisplay.ScatterChart.ColumnY = 2;
       chrtXSectDisplay.ScatterChart.GroupByColumn = 0;
       chrtXSectDisplay.ScatterChart.UseGroupByColumn = true;
+
+      this.bindingSource1.CurrentChanged += new System.EventHandler(this.bindingSource1_CurrentChanged);
     }
 
     private void ValidateRawXml(string rawXml)
@@ -125,14 +119,16 @@ namespace SystemsAnalysis.EMGAATS.CrossSectionEditor
         
       }
 
+      this.bindingSource1.CurrentChanged += new System.EventHandler(this.bindingSource1_CurrentChanged);
       reader.Close();
     }
 
-    private void LoadXSect(int index)
+    private void LoadXSect(string xSectName)
     {
       processedXSectDS.ChartTable.Clear();
-      ProcessedXSectDataSet.XSectsRow xSectRow 
-        = processedXSectDS.XSects[index];
+      
+      ProcessedXSectDataSet.XSectsRow xSectRow
+        = processedXSectDS.XSects.FindByXSectName(xSectName);
       
       double minElev = Double.MaxValue;
       double maxElev = Double.MinValue;
@@ -151,6 +147,8 @@ namespace SystemsAnalysis.EMGAATS.CrossSectionEditor
       processedXSectDS.ChartTable.AddChartTableRow("Left Overbank Station", xSectRow.LeftOverbankStation, maxElev);
       processedXSectDS.ChartTable.AddChartTableRow("Right Overbank Station", xSectRow.RightOverbankStation, minElev);
       processedXSectDS.ChartTable.AddChartTableRow("Right Overbank Station", xSectRow.RightOverbankStation, maxElev);
+
+      chrtXSectDisplay.TitleTop.Text = "Cross-Section " + xSectName + "(Longitudinal Station: " + xSectRow.LongName + ")";
     }
 
     void ValidationCallBacKHandler(object sender, ValidationEventArgs e)
@@ -162,6 +160,32 @@ namespace SystemsAnalysis.EMGAATS.CrossSectionEditor
     private void frmXSectEditor_Load(object sender, EventArgs e)
     {
 
+    }
+
+    private void txtXSectFile_ValueChanged(object sender, EventArgs e)
+    {
+
+    }
+
+    private void txtXSectFileBrowseButton_Clicked(object sender, Infragistics.Win.UltraWinEditors.EditorButtonEventArgs e)
+    {
+      chrtXSectDisplay.DataBindings.Clear();
+      if (openFileDialog.ShowDialog() != DialogResult.OK)
+        return;
+
+      processedXSectDS.Clear();
+      ValidateRawXml(openFileDialog.FileName);
+      LoadXSect(processedXSectDS.XSects[0].XSectName);
+
+      ConfigureChart();
+    }
+
+    private void bindingSource1_CurrentChanged(object sender, EventArgs e)
+    {
+
+      ProcessedXSectDataSet.XSectsRow xSectsRow =
+        (ProcessedXSectDataSet.XSectsRow)((System.Data.DataRowView)bindingSource1.Current).Row;      
+      LoadXSect(xSectsRow.XSectName);
     }
 
 
