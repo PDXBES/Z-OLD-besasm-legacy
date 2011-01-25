@@ -63,10 +63,10 @@ namespace SystemsAnalysis.Grid.GridAnalysis
 
                 
                 //test the connection information:
-                inputDatabase = "Data Source=" + server + ";Initial Catalog=" + database;
+                inputDatabase = "Server=" + server + ";Database=" + database;
                 if (trustedConnection == true)
                 {
-                    inputDatabase += ";Trusted_Connection=yes";
+                    inputDatabase += ";Trusted_Connection=yes;";
                 }
                 else
                 {
@@ -117,16 +117,16 @@ namespace SystemsAnalysis.Grid.GridAnalysis
                         string inputDatabaseStringForAccess = "ODBC;"/*DRIVER={sql server}*/+ ";DSN=" + server + ";DATABASE = " + database;
                         if (trustedConnection == true)
                         {
-                            inputDatabaseStringForAccess += ";Trusted_Connection=yes";
+                            inputDatabaseStringForAccess += ";Trusted_Connection=yes;";
                         }
                         else
                         {
                             inputDatabaseStringForAccess += ";Persist Security Info=True;User ID=" + userID + ";Password=" + password;
                         }
-                        string outputDatabaseStringForAccess = "Data Source=" + server + ";Initial Catalog=" + database;
+                        string outputDatabaseStringForAccess = "Server=" + server + ";Database=" + database;
                         if (trustedConnection == true)
                         {
-                            outputDatabaseStringForAccess += ";Trusted_Connection=yes";
+                            outputDatabaseStringForAccess += ";Trusted_Connection=yes;";
                         }
                         else
                         {
@@ -743,10 +743,10 @@ namespace SystemsAnalysis.Grid.GridAnalysis
             int projectID = (int)drv["project_id"];
             string projectDescription = (string)drv["project_description"];
 
-            string inputDatabase = "Data Source=" + server + ";Initial Catalog=" + database;
+            string inputDatabase = "Server=" + server + ";Database=" + database;
             if (trustedConnection == true)
             {
-                inputDatabase += ";Trusted_Connection=yes";
+                inputDatabase += ";Trusted_Connection=yes;";
             }
             else
             {
@@ -896,19 +896,19 @@ namespace SystemsAnalysis.Grid.GridAnalysis
             this.Enabled = true;
 
             //check to see if a connection can be made
-            string inputDatabase = "Data Source=" + server + ";Initial Catalog="+database;
+            string inputDatabase = "Server=" + server + ";Database="+database;
             if (trustedConnection == true)
             {
-                inputDatabase += ";Trusted_Connection=yes";
+                inputDatabase += ";Trusted_Connection=yes;";
             }
             else
             {
                 inputDatabase += ";Persist Security Info=True;User ID="+userID+";Password="+password;
             }
-            string outputDatabase = "Data Source=" + this.cboServers.Text + ";Initial Catalog=" + this.cboDatabases.Text;
+            string outputDatabase = "Server=" + this.cboServers.Text + ";Database=" + this.cboDatabases.Text;
             if (ArchiveTrustedConnection == true)
             {
-                outputDatabase += ";Trusted_Connection=yes";
+                outputDatabase += ";Trusted_Connection=yes;";
             }
             else
             {
@@ -928,10 +928,10 @@ namespace SystemsAnalysis.Grid.GridAnalysis
                     DataRowView drv = (DataRowView)cmbSelectedProject.SelectedItem;
                     int projectID = (int)drv["project_id"];
                     string projectDescription = (string)drv["project_description"];
-                    inputDatabase = "Data Source=" + server + ";Initial Catalog=" + database;
+                    inputDatabase = "Server=" + server + ";Database=" + database;
                     if (trustedConnection == true)
                     {
-                        inputDatabase += ";Trusted_Connection=yes";
+                        inputDatabase += ";Trusted_Connection=yes;";
                     }
                     else
                     {
@@ -984,10 +984,10 @@ namespace SystemsAnalysis.Grid.GridAnalysis
                             DataRowView drv = (DataRowView)cmbSelectedProject.SelectedItem;
                             int projectID = (int)drv["project_id"];
                             string projectDescription = (string)drv["project_description"];
-                            inputDatabase = "Data Source=" + server + ";Initial Catalog=" + database;
+                            inputDatabase = "Server=" + server + ";Database=" + database;
                             if (trustedConnection == true)
                             {
-                                inputDatabase += ";Trusted_Connection=yes";
+                                inputDatabase += ";Trusted_Connection=yes;";
                             }
                             else
                             {
