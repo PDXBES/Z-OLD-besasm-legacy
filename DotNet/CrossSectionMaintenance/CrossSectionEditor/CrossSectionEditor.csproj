@@ -73,6 +73,11 @@
     <Compile Include="frmXSectEditor.Designer.cs">
       <DependentUpon>frmXSectEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="MstXSectionDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MstXSectionDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="ProcessedXSectDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -106,6 +111,18 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="LandXML-1.2.xsd" />
+    <None Include="app.config" />
+    <None Include="MstXSectionDataSet.xsc">
+      <DependentUpon>MstXSectionDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="MstXSectionDataSet.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>MstXSectionDataSet.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="MstXSectionDataSet.xss">
+      <DependentUpon>MstXSectionDataSet.xsd</DependentUpon>
+    </None>
     <None Include="ProcessedXSectDataSet.xsc">
       <DependentUpon>ProcessedXSectDataSet.xsd</DependentUpon>
     </None>
@@ -118,6 +135,12 @@
       <DependentUpon>ProcessedXSectDataSet.xsd</DependentUpon>
     </None>
     <None Include="Resources\CrossSectionEditorIcon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="mst_xsections.mdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\CrossSectionEditorImage.bmp" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
