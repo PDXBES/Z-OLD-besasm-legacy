@@ -15,23 +15,35 @@ namespace SystemsAnalysis.EMGAATS.CrossSectionEditor
 {
   public partial class frmXSectEditor : Form
   {
-    private bool setLeftStation, setRightStation, validXml = false;
+    private bool setLeftStation, setRightStation = false;
 
     public frmXSectEditor()
     {
       InitializeComponent();
-      chrtXSectDisplay.DataBindings.Clear();
-      chrtXSectDisplay.InvalidDataReceived += new Infragistics.UltraChart.Shared.Events.ChartDataInvalidEventHandler(chrtXSectDisplay_InvalidDataReceived);
+      //chrtXSectDisplay.DataBindings.Clear();
+      chrtXSectDisplay.FillSceneGraph += new Infragistics.UltraChart.Shared.Events.FillSceneGraphEventHandler(chrtXSectDisplay_FillSceneGraph);
+
+    }
+
+    void chrtXSectDisplay_FillSceneGraph(object sender, Infragistics.UltraChart.Shared.Events.FillSceneGraphEventArgs e)
+    {
+      if (e.SceneGraph.Count > 2)
+        chrtXSectDisplay.InvalidDataReceived += new Infragistics.UltraChart.Shared.Events.ChartDataInvalidEventHandler(chrtXSectDisplay_InvalidDataReceived);
     }
 
     void chrtXSectDisplay_InvalidDataReceived(object sender, Infragistics.UltraChart.Shared.Events.ChartDataInvalidEventArgs e)
     {
-      e.Text = "Load a valid LandXml-1.2 file";
-      e.LabelStyle.FontColor = Color.Honeydew;
+      e.LabelStyle.FontColor = Color.Blue;
       e.LabelStyle.FontSizeBestFit = false;
       e.LabelStyle.HorizontalAlign = StringAlignment.Center;
       e.LabelStyle.Font = new Font("Verdana", 12);
+      e.Text = chrtXSectDisplay.EmptyChartText;      
+      chrtXSectDisplay.InvalidDataReceived -= new Infragistics.UltraChart.Shared.Events.ChartDataInvalidEventHandler(chrtXSectDisplay_InvalidDataReceived);
     }
+
+
+
+    //void chrtXSectDisplay_ValidDataReceived(
 
     private void ConfigureChart()
     {
@@ -44,10 +56,9 @@ namespace SystemsAnalysis.EMGAATS.CrossSectionEditor
       this.bindingSource1.CurrentChanged += new System.EventHandler(this.bindingSource1_CurrentChanged);
     }
 
-    private void ValidateRawXml(string rawXml)
+    private bool ValidateRawXml(string rawXml)
     {
-      chrtXSectDisplay.EmptyChartText = "Validating xml...";
-      validXml = true;
+      chrtXSectDisplay.EmptyChartText = "Validating xml...";      
 
       Stream xsdStream = System.Reflection.Assembly.
                       GetExecutingAssembly().GetManifestResourceStream("SystemsAnalysis.EMGAATS.CrossSectionEditor.LandXML-1.2.xsd");
@@ -58,13 +69,41 @@ namespace SystemsAnalysis.EMGAATS.CrossSectionEditor
       XmlSchemaSet schemaSet = new XmlSchemaSet();
       schemaSet.Add(rawSchema);
 
-      XmlReaderSettings xmlSettings = new XmlReaderSettings();
-      xmlSettings.ValidationType = ValidationType.Schema;
+      XmlReaderSettings settings = new XmlReaderSettings();
+      settings.Schemas.Add(schemaSet);
+      settings.ValidationType = ValidationType.Schema;
+      settings.ValidationFlags = XmlSchemaValidationFlags.ReportValidationWarnings;
 
-      xmlSettings.Schemas = schemaSet;
-      xmlSettings.ValidationEventHandler += new ValidationEventHandler(ValidationCallBacKHandler);
+      XmlReader reader = XmlReader.Create(rawXml, settings);
 
-      XmlReader reader = XmlReader.Create(openFileDialog.FileName, xmlSettings);
+      try
+      {
+        XmlDocument doc = new XmlDocument();
+        doc.Load(reader);
+        if (doc.DocumentElement.Name != "LandXML")
+          return false;
+
+        while (reader.Read())
+        {
+        }
+      }
+      catch
+      {
+        return false;
+      }
+      finally
+      {
+        chrtXSectDisplay.EmptyChartText = "Error reading LandXML File";
+        reader.Close();
+      }
+      return true;
+    }
+
+    private bool LoadRawXml(string rawXml)
+    {
+      chrtXSectDisplay.EmptyChartText = "Loading xml...";
+      XmlReader reader = XmlReader.Create(openFileDialog.FileName);
+      bool loaded = false;
 
       //landXmlDoc.Schemas.Add(
       while (reader.ReadToFollowing("CrossSect"))
@@ -92,6 +131,7 @@ namespace SystemsAnalysis.EMGAATS.CrossSectionEditor
 
         for (int i = 0; i < pointList.Length; i += 2)
         {
+          loaded = true;
           ProcessedXSectDataSet.PointListRow pointListRow =
             processedXSectDS.PointList.NewPointListRow();
 
@@ -110,6 +150,7 @@ namespace SystemsAnalysis.EMGAATS.CrossSectionEditor
 
       this.bindingSource1.CurrentChanged += new System.EventHandler(this.bindingSource1_CurrentChanged);
       reader.Close();
+      return loaded;
     }
 
     private void LoadXSect(string xSectName)
@@ -142,8 +183,8 @@ namespace SystemsAnalysis.EMGAATS.CrossSectionEditor
 
     void ValidationCallBacKHandler(object sender, ValidationEventArgs e)
     {
+      chrtXSectDisplay.DataSource = null;
       chrtXSectDisplay.EmptyChartText += "\nError: " + e.Message;
-      validXml = false;
     }
 
     private void frmXSectEditor_Load(object sender, EventArgs e)
@@ -151,33 +192,23 @@ namespace SystemsAnalysis.EMGAATS.CrossSectionEditor
 
     }
 
-    private void txtXSectFileBrowseButton_Clicked(object sender, Infragistics.Win.UltraWinEditors.EditorButtonEventArgs e)
-    {
-      chrtXSectDisplay.DataBindings.Clear();
-      if (openFileDialog.ShowDialog() != DialogResult.OK)
-        return;
-
-      txtXSectFile.Text = openFileDialog.FileName;
-
-      processedXSectDS.Clear();
-      ValidateRawXml(openFileDialog.FileName);
-      LoadXSect(processedXSectDS.XSects[0].XSectName);
-
-      ConfigureChart();
-    }
-
     private void bindingSource1_CurrentChanged(object sender, EventArgs e)
     {
-
-      ProcessedXSectDataSet.XSectsRow xSectsRow = SelectedXSectsRow;
-      LoadXSect(xSectsRow.XSectName);
+      if (bindingSource1.Count > 0)
+      {
+        ProcessedXSectDataSet.XSectsRow xSectsRow = SelectedXSectsRow;
+        LoadXSect(xSectsRow.XSectName);
+      }
     }
 
     private ProcessedXSectDataSet.XSectsRow SelectedXSectsRow
     {
       get
       {
-        return (ProcessedXSectDataSet.XSectsRow)((System.Data.DataRowView)bindingSource1.Current).Row;
+        if (bindingSource1.Current == null)
+          return null;
+        else
+          return (ProcessedXSectDataSet.XSectsRow)((System.Data.DataRowView)bindingSource1.Current).Row;
       }
     }
 
@@ -275,8 +306,6 @@ namespace SystemsAnalysis.EMGAATS.CrossSectionEditor
         e.Binding.BindingManagerBase.EndCurrentEdit();
     }
 
-
-
     private void ultraToolbarsManager1_ToolClick(object sender, Infragistics.Win.UltraWinToolbars.ToolClickEventArgs e)
     {
 
@@ -293,6 +322,14 @@ namespace SystemsAnalysis.EMGAATS.CrossSectionEditor
         case "btnLoadProcessedData":    // ButtonTool
           LoadProcessedData();
           break;
+
+        case "btnLoadRawXSect":    // ButtonTool
+          LoadRawData();
+          break;
+
+        case "btnExit":    // ButtonTool
+          Application.Exit();
+          break;
       }
 
       return;
@@ -300,14 +337,47 @@ namespace SystemsAnalysis.EMGAATS.CrossSectionEditor
 
     private void SaveProcessedData()
     {
+      if (saveFileDialog.ShowDialog() != DialogResult.OK)
+        return;
+
+      processedXSectDS.WriteXml(saveFileDialog.FileName);
     }
 
     private void LoadProcessedData()
     {
+      if (openFileDialog.ShowDialog() != DialogResult.OK)
+        return;
+
+      chrtXSectDisplay.DataBindings.Clear();
+      processedXSectDS.ReadXml(openFileDialog.FileName);
+      if (processedXSectDS.XSects.Count > 0)
+        LoadXSect(processedXSectDS.XSects[0].XSectName);
+      else
+        chrtXSectDisplay.EmptyChartText = "Error loading processed xml file";
+
+      ConfigureChart();
     }
 
     private void ExportToMaster()
     {
+    }
+
+    private void LoadRawData()
+    {
+      chrtXSectDisplay.DataBindings.Clear();
+      if (openFileDialog.ShowDialog() != DialogResult.OK)
+        return;
+
+      processedXSectDS.Clear();
+      if (!ValidateRawXml(openFileDialog.FileName))
+        return;
+
+      if (!LoadRawXml(openFileDialog.FileName))
+        return;
+
+      LoadXSect(processedXSectDS.XSects[0].XSectName);
+
+      ConfigureChart();
     }
 
 
