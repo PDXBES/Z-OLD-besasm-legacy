@@ -11,7 +11,6 @@ namespace SystemsAnalysis.Grid.GridAnalysis
 {
     public partial class FormServerDatabaseUserIDPasswordDomainEntry : Form
     {
-        public event EventHandler BigInfoFormClosed;
         public string Database = "";
         public string Server = "";
         public string UserID = "";
