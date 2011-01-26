@@ -114,8 +114,8 @@
           Infragistics.Win.UltraWinToolbars.RibbonGroup ribbonGroup1 = new Infragistics.Win.UltraWinToolbars.RibbonGroup("ribbonGroup1");
           Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool14 = new Infragistics.Win.UltraWinToolbars.ButtonTool("btnLoadRawXSect");
           Infragistics.Win.UltraWinToolbars.RibbonGroup ribbonGroup2 = new Infragistics.Win.UltraWinToolbars.RibbonGroup("ribbonGroup2");
-          Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool7 = new Infragistics.Win.UltraWinToolbars.ButtonTool("btnSaveProcessedData");
           Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool11 = new Infragistics.Win.UltraWinToolbars.ButtonTool("btnLoadProcessedData");
+          Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool7 = new Infragistics.Win.UltraWinToolbars.ButtonTool("btnSaveProcessedData");
           Infragistics.Win.UltraWinToolbars.RibbonGroup ribbonGroup3 = new Infragistics.Win.UltraWinToolbars.RibbonGroup("ribbonGroup3");
           Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool5 = new Infragistics.Win.UltraWinToolbars.ButtonTool("btnSendToMaster");
           Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool2 = new Infragistics.Win.UltraWinToolbars.ButtonTool("btnSaveProcessedData");
@@ -161,11 +161,12 @@
           this.lblRightRoughness = new Infragistics.Win.Misc.UltraLabel();
           this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
           this._frmXSectEditor_Toolbars_Dock_Area_Left = new Infragistics.Win.UltraWinToolbars.UltraToolbarsDockArea();
-          this.ultraToolbarsManager1 = new Infragistics.Win.UltraWinToolbars.UltraToolbarsManager(this.components);
           this._frmXSectEditor_Toolbars_Dock_Area_Right = new Infragistics.Win.UltraWinToolbars.UltraToolbarsDockArea();
           this._frmXSectEditor_Toolbars_Dock_Area_Top = new Infragistics.Win.UltraWinToolbars.UltraToolbarsDockArea();
           this._frmXSectEditor_Toolbars_Dock_Area_Bottom = new Infragistics.Win.UltraWinToolbars.UltraToolbarsDockArea();
           this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+          this.bindingNavigatorToggleExport = new System.Windows.Forms.ToolStripButton();
+          this.ultraToolbarsManager1 = new Infragistics.Win.UltraWinToolbars.UltraToolbarsManager(this.components);
           ((System.ComponentModel.ISupportInitialize)(this.optStationOrder)).BeginInit();
           this.frmXSectEditor_Fill_Panel.ClientArea.SuspendLayout();
           this.frmXSectEditor_Fill_Panel.SuspendLayout();
@@ -243,9 +244,9 @@
           this.frmXSectEditor_Fill_Panel.ClientArea.Controls.Add(this.pnlBottom);
           this.frmXSectEditor_Fill_Panel.Cursor = System.Windows.Forms.Cursors.Default;
           this.frmXSectEditor_Fill_Panel.Dock = System.Windows.Forms.DockStyle.Fill;
-          this.frmXSectEditor_Fill_Panel.Location = new System.Drawing.Point(4, 147);
+          this.frmXSectEditor_Fill_Panel.Location = new System.Drawing.Point(4, 176);
           this.frmXSectEditor_Fill_Panel.Name = "frmXSectEditor_Fill_Panel";
-          this.frmXSectEditor_Fill_Panel.Size = new System.Drawing.Size(914, 602);
+          this.frmXSectEditor_Fill_Panel.Size = new System.Drawing.Size(914, 573);
           this.frmXSectEditor_Fill_Panel.TabIndex = 0;
           // 
           //			'UltraChart' properties's serialization: Since 'ChartType' changes the way axes look,
@@ -285,7 +286,7 @@
           this.chrtXSectDisplay.Axis.X.MinorGridLines.Color = System.Drawing.Color.LightGray;
           this.chrtXSectDisplay.Axis.X.MinorGridLines.DrawStyle = Infragistics.UltraChart.Shared.Styles.LineDrawStyle.Dot;
           this.chrtXSectDisplay.Axis.X.MinorGridLines.Visible = true;
-          this.chrtXSectDisplay.Axis.X.TickmarkInterval = 5;
+          this.chrtXSectDisplay.Axis.X.TickmarkInterval = 10;
           this.chrtXSectDisplay.Axis.X.TickmarkIntervalType = Infragistics.UltraChart.Shared.Styles.AxisIntervalType.Hours;
           this.chrtXSectDisplay.Axis.X.TickmarkStyle = Infragistics.UltraChart.Shared.Styles.AxisTickStyle.Smart;
           this.chrtXSectDisplay.Axis.X.Visible = true;
@@ -313,7 +314,7 @@
           this.chrtXSectDisplay.Axis.X2.MinorGridLines.Color = System.Drawing.Color.LightGray;
           this.chrtXSectDisplay.Axis.X2.MinorGridLines.DrawStyle = Infragistics.UltraChart.Shared.Styles.LineDrawStyle.Dot;
           this.chrtXSectDisplay.Axis.X2.MinorGridLines.Visible = false;
-          this.chrtXSectDisplay.Axis.X2.TickmarkInterval = 5;
+          this.chrtXSectDisplay.Axis.X2.TickmarkInterval = 10;
           this.chrtXSectDisplay.Axis.X2.TickmarkIntervalType = Infragistics.UltraChart.Shared.Styles.AxisIntervalType.Hours;
           this.chrtXSectDisplay.Axis.X2.TickmarkStyle = Infragistics.UltraChart.Shared.Styles.AxisTickStyle.Smart;
           this.chrtXSectDisplay.Axis.X2.Visible = false;
@@ -445,7 +446,7 @@
           scatterChartAppearance1.LineAppearance.Thickness = 2;
           scatterChartAppearance1.UseGroupByColumn = true;
           this.chrtXSectDisplay.ScatterChart = scatterChartAppearance1;
-          this.chrtXSectDisplay.Size = new System.Drawing.Size(589, 424);
+          this.chrtXSectDisplay.Size = new System.Drawing.Size(589, 395);
           this.chrtXSectDisplay.TabIndex = 0;
           this.chrtXSectDisplay.TitleBottom.Font = new System.Drawing.Font("Verdana", 9.75F);
           this.chrtXSectDisplay.TitleBottom.HorizontalAlign = System.Drawing.StringAlignment.Center;
@@ -474,7 +475,7 @@
           this.pnlLeft.Dock = System.Windows.Forms.DockStyle.Left;
           this.pnlLeft.Location = new System.Drawing.Point(0, 0);
           this.pnlLeft.Name = "pnlLeft";
-          this.pnlLeft.Size = new System.Drawing.Size(325, 424);
+          this.pnlLeft.Size = new System.Drawing.Size(325, 395);
           this.pnlLeft.TabIndex = 11;
           // 
           // ultraGrid1
@@ -686,7 +687,7 @@
           this.ultraGrid1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
           this.ultraGrid1.Location = new System.Drawing.Point(0, 0);
           this.ultraGrid1.Name = "ultraGrid1";
-          this.ultraGrid1.Size = new System.Drawing.Size(325, 399);
+          this.ultraGrid1.Size = new System.Drawing.Size(325, 370);
           this.ultraGrid1.TabIndex = 0;
           this.ultraGrid1.Text = "Grid Caption Area";
           this.ultraGrid1.UseOsThemes = Infragistics.Win.DefaultableBoolean.False;
@@ -715,8 +716,9 @@
             this.bindingNavigatorCountItem,
             this.bindingNavigatorSeparator1,
             this.bindingNavigatorMoveNextItem,
-            this.bindingNavigatorMoveLastItem});
-          this.bindingNavigator1.Location = new System.Drawing.Point(0, 399);
+            this.bindingNavigatorMoveLastItem,
+            this.bindingNavigatorToggleExport});
+          this.bindingNavigator1.Location = new System.Drawing.Point(0, 370);
           this.bindingNavigator1.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
           this.bindingNavigator1.MoveLastItem = this.bindingNavigatorMoveLastItem;
           this.bindingNavigator1.MoveNextItem = this.bindingNavigatorMoveNextItem;
@@ -796,7 +798,7 @@
           // 
           this.pnlBottom.ClientArea.Controls.Add(this.ultraGridBagLayoutPanel1);
           this.pnlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-          this.pnlBottom.Location = new System.Drawing.Point(0, 424);
+          this.pnlBottom.Location = new System.Drawing.Point(0, 395);
           this.pnlBottom.Name = "pnlBottom";
           this.pnlBottom.Size = new System.Drawing.Size(914, 178);
           this.pnlBottom.TabIndex = 11;
@@ -1087,10 +1089,56 @@
           this._frmXSectEditor_Toolbars_Dock_Area_Left.DockedPosition = Infragistics.Win.UltraWinToolbars.DockedPosition.Left;
           this._frmXSectEditor_Toolbars_Dock_Area_Left.ForeColor = System.Drawing.SystemColors.ControlText;
           this._frmXSectEditor_Toolbars_Dock_Area_Left.InitialResizeAreaExtent = 4;
-          this._frmXSectEditor_Toolbars_Dock_Area_Left.Location = new System.Drawing.Point(0, 147);
+          this._frmXSectEditor_Toolbars_Dock_Area_Left.Location = new System.Drawing.Point(0, 176);
           this._frmXSectEditor_Toolbars_Dock_Area_Left.Name = "_frmXSectEditor_Toolbars_Dock_Area_Left";
-          this._frmXSectEditor_Toolbars_Dock_Area_Left.Size = new System.Drawing.Size(4, 602);
+          this._frmXSectEditor_Toolbars_Dock_Area_Left.Size = new System.Drawing.Size(4, 573);
           this._frmXSectEditor_Toolbars_Dock_Area_Left.ToolbarsManager = this.ultraToolbarsManager1;
+          // 
+          // _frmXSectEditor_Toolbars_Dock_Area_Right
+          // 
+          this._frmXSectEditor_Toolbars_Dock_Area_Right.AccessibleRole = System.Windows.Forms.AccessibleRole.Grouping;
+          this._frmXSectEditor_Toolbars_Dock_Area_Right.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(219)))), ((int)(((byte)(255)))));
+          this._frmXSectEditor_Toolbars_Dock_Area_Right.DockedPosition = Infragistics.Win.UltraWinToolbars.DockedPosition.Right;
+          this._frmXSectEditor_Toolbars_Dock_Area_Right.ForeColor = System.Drawing.SystemColors.ControlText;
+          this._frmXSectEditor_Toolbars_Dock_Area_Right.InitialResizeAreaExtent = 4;
+          this._frmXSectEditor_Toolbars_Dock_Area_Right.Location = new System.Drawing.Point(918, 176);
+          this._frmXSectEditor_Toolbars_Dock_Area_Right.Name = "_frmXSectEditor_Toolbars_Dock_Area_Right";
+          this._frmXSectEditor_Toolbars_Dock_Area_Right.Size = new System.Drawing.Size(4, 573);
+          this._frmXSectEditor_Toolbars_Dock_Area_Right.ToolbarsManager = this.ultraToolbarsManager1;
+          // 
+          // _frmXSectEditor_Toolbars_Dock_Area_Top
+          // 
+          this._frmXSectEditor_Toolbars_Dock_Area_Top.AccessibleRole = System.Windows.Forms.AccessibleRole.Grouping;
+          this._frmXSectEditor_Toolbars_Dock_Area_Top.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(219)))), ((int)(((byte)(255)))));
+          this._frmXSectEditor_Toolbars_Dock_Area_Top.DockedPosition = Infragistics.Win.UltraWinToolbars.DockedPosition.Top;
+          this._frmXSectEditor_Toolbars_Dock_Area_Top.ForeColor = System.Drawing.SystemColors.ControlText;
+          this._frmXSectEditor_Toolbars_Dock_Area_Top.Location = new System.Drawing.Point(0, 0);
+          this._frmXSectEditor_Toolbars_Dock_Area_Top.Name = "_frmXSectEditor_Toolbars_Dock_Area_Top";
+          this._frmXSectEditor_Toolbars_Dock_Area_Top.Size = new System.Drawing.Size(922, 176);
+          this._frmXSectEditor_Toolbars_Dock_Area_Top.ToolbarsManager = this.ultraToolbarsManager1;
+          // 
+          // _frmXSectEditor_Toolbars_Dock_Area_Bottom
+          // 
+          this._frmXSectEditor_Toolbars_Dock_Area_Bottom.AccessibleRole = System.Windows.Forms.AccessibleRole.Grouping;
+          this._frmXSectEditor_Toolbars_Dock_Area_Bottom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(219)))), ((int)(((byte)(255)))));
+          this._frmXSectEditor_Toolbars_Dock_Area_Bottom.DockedPosition = Infragistics.Win.UltraWinToolbars.DockedPosition.Bottom;
+          this._frmXSectEditor_Toolbars_Dock_Area_Bottom.ForeColor = System.Drawing.SystemColors.ControlText;
+          this._frmXSectEditor_Toolbars_Dock_Area_Bottom.InitialResizeAreaExtent = 4;
+          this._frmXSectEditor_Toolbars_Dock_Area_Bottom.Location = new System.Drawing.Point(0, 749);
+          this._frmXSectEditor_Toolbars_Dock_Area_Bottom.Name = "_frmXSectEditor_Toolbars_Dock_Area_Bottom";
+          this._frmXSectEditor_Toolbars_Dock_Area_Bottom.Size = new System.Drawing.Size(922, 4);
+          this._frmXSectEditor_Toolbars_Dock_Area_Bottom.ToolbarsManager = this.ultraToolbarsManager1;
+          // 
+          // bindingNavigatorToggleExport
+          // 
+          this.bindingNavigatorToggleExport.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+          this.bindingNavigatorToggleExport.Image = global::SystemsAnalysis.EMGAATS.CrossSectionEditor.Properties.Resources.CrossSectionEditorImage;
+          this.bindingNavigatorToggleExport.ImageTransparentColor = System.Drawing.Color.Magenta;
+          this.bindingNavigatorToggleExport.Name = "bindingNavigatorToggleExport";
+          this.bindingNavigatorToggleExport.Size = new System.Drawing.Size(23, 22);
+          this.bindingNavigatorToggleExport.Text = "Toggle Ready for Export";
+          this.bindingNavigatorToggleExport.ToolTipText = "Toggle Ready for Export";
+          this.bindingNavigatorToggleExport.Click += new System.EventHandler(this.bindingNavigatorToggleExport_Click);
           // 
           // ultraToolbarsManager1
           // 
@@ -1112,8 +1160,8 @@
             buttonTool14});
           ribbonGroup2.Caption = "Processed Data";
           ribbonGroup2.Tools.AddRange(new Infragistics.Win.UltraWinToolbars.ToolBase[] {
-            buttonTool7,
-            buttonTool11});
+            buttonTool11,
+            buttonTool7});
           ribbonGroup3.Caption = "Master Data";
           ribbonGroup3.Tools.AddRange(new Infragistics.Win.UltraWinToolbars.ToolBase[] {
             buttonTool5});
@@ -1138,41 +1186,6 @@
             buttonTool20});
           this.ultraToolbarsManager1.UseLargeImagesOnMenu = true;
           this.ultraToolbarsManager1.ToolClick += new Infragistics.Win.UltraWinToolbars.ToolClickEventHandler(this.ultraToolbarsManager1_ToolClick);
-          // 
-          // _frmXSectEditor_Toolbars_Dock_Area_Right
-          // 
-          this._frmXSectEditor_Toolbars_Dock_Area_Right.AccessibleRole = System.Windows.Forms.AccessibleRole.Grouping;
-          this._frmXSectEditor_Toolbars_Dock_Area_Right.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(219)))), ((int)(((byte)(255)))));
-          this._frmXSectEditor_Toolbars_Dock_Area_Right.DockedPosition = Infragistics.Win.UltraWinToolbars.DockedPosition.Right;
-          this._frmXSectEditor_Toolbars_Dock_Area_Right.ForeColor = System.Drawing.SystemColors.ControlText;
-          this._frmXSectEditor_Toolbars_Dock_Area_Right.InitialResizeAreaExtent = 4;
-          this._frmXSectEditor_Toolbars_Dock_Area_Right.Location = new System.Drawing.Point(918, 147);
-          this._frmXSectEditor_Toolbars_Dock_Area_Right.Name = "_frmXSectEditor_Toolbars_Dock_Area_Right";
-          this._frmXSectEditor_Toolbars_Dock_Area_Right.Size = new System.Drawing.Size(4, 602);
-          this._frmXSectEditor_Toolbars_Dock_Area_Right.ToolbarsManager = this.ultraToolbarsManager1;
-          // 
-          // _frmXSectEditor_Toolbars_Dock_Area_Top
-          // 
-          this._frmXSectEditor_Toolbars_Dock_Area_Top.AccessibleRole = System.Windows.Forms.AccessibleRole.Grouping;
-          this._frmXSectEditor_Toolbars_Dock_Area_Top.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(219)))), ((int)(((byte)(255)))));
-          this._frmXSectEditor_Toolbars_Dock_Area_Top.DockedPosition = Infragistics.Win.UltraWinToolbars.DockedPosition.Top;
-          this._frmXSectEditor_Toolbars_Dock_Area_Top.ForeColor = System.Drawing.SystemColors.ControlText;
-          this._frmXSectEditor_Toolbars_Dock_Area_Top.Location = new System.Drawing.Point(0, 0);
-          this._frmXSectEditor_Toolbars_Dock_Area_Top.Name = "_frmXSectEditor_Toolbars_Dock_Area_Top";
-          this._frmXSectEditor_Toolbars_Dock_Area_Top.Size = new System.Drawing.Size(922, 147);
-          this._frmXSectEditor_Toolbars_Dock_Area_Top.ToolbarsManager = this.ultraToolbarsManager1;
-          // 
-          // _frmXSectEditor_Toolbars_Dock_Area_Bottom
-          // 
-          this._frmXSectEditor_Toolbars_Dock_Area_Bottom.AccessibleRole = System.Windows.Forms.AccessibleRole.Grouping;
-          this._frmXSectEditor_Toolbars_Dock_Area_Bottom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(219)))), ((int)(((byte)(255)))));
-          this._frmXSectEditor_Toolbars_Dock_Area_Bottom.DockedPosition = Infragistics.Win.UltraWinToolbars.DockedPosition.Bottom;
-          this._frmXSectEditor_Toolbars_Dock_Area_Bottom.ForeColor = System.Drawing.SystemColors.ControlText;
-          this._frmXSectEditor_Toolbars_Dock_Area_Bottom.InitialResizeAreaExtent = 4;
-          this._frmXSectEditor_Toolbars_Dock_Area_Bottom.Location = new System.Drawing.Point(0, 749);
-          this._frmXSectEditor_Toolbars_Dock_Area_Bottom.Name = "_frmXSectEditor_Toolbars_Dock_Area_Bottom";
-          this._frmXSectEditor_Toolbars_Dock_Area_Bottom.Size = new System.Drawing.Size(922, 4);
-          this._frmXSectEditor_Toolbars_Dock_Area_Bottom.ToolbarsManager = this.ultraToolbarsManager1;
           // 
           // frmXSectEditor
           // 
@@ -1264,6 +1277,7 @@
         private Infragistics.Win.Misc.UltraLabel lblReadLeftToRight;
         private Infragistics.Win.UltraWinEditors.UltraCheckEditor chkReadyForExport;
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
+        private System.Windows.Forms.ToolStripButton bindingNavigatorToggleExport;
     }
 }
 
