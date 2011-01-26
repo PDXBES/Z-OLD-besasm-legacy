@@ -29,6 +29,14 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            Infragistics.Win.Appearance appearance17 = new Infragistics.Win.Appearance();
+            Infragistics.Win.Appearance appearance18 = new Infragistics.Win.Appearance();
+            Infragistics.Win.Appearance appearance19 = new Infragistics.Win.Appearance();
+            Infragistics.Win.Appearance appearance20 = new Infragistics.Win.Appearance();
+            Infragistics.Win.Appearance appearance14 = new Infragistics.Win.Appearance();
+            Infragistics.Win.Appearance appearance16 = new Infragistics.Win.Appearance();
+            Infragistics.Win.Appearance appearance13 = new Infragistics.Win.Appearance();
+            Infragistics.Win.Appearance appearance15 = new Infragistics.Win.Appearance();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmGridAnalysis));
             Infragistics.Win.Appearance appearance27 = new Infragistics.Win.Appearance();
             Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand1 = new Infragistics.Win.UltraWinGrid.UltraGridBand("FE_GRID_PROJECTSFE_SCENARIOS", -1);
@@ -309,6 +317,10 @@
             this.btnCommitHyetographChanges = new Infragistics.Win.Misc.UltraButton();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageDefineScenarios = new System.Windows.Forms.TabPage();
+            this.buttonPollutantLoadingConnectionStringEdit = new System.Windows.Forms.Button();
+            this.buttonBMPEffectivenessTableNameLocate = new System.Windows.Forms.Button();
+            this.buttonBMPEffectivenessConnectionStringEdit = new System.Windows.Forms.Button();
+            this.buttonPollutantLoadingTableLocate = new System.Windows.Forms.Button();
             this.txtScenarioID = new Infragistics.Win.UltraWinEditors.UltraTextEditor();
             this.feScenariosBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.lblScenarioID = new Infragistics.Win.Misc.UltraLabel();
@@ -367,6 +379,10 @@
             this.grdModelResults = new Infragistics.Win.UltraWinGrid.UltraGrid();
             this.gridModelResultsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tabPageDefineProjects = new System.Windows.Forms.TabPage();
+            this.buttonOSFPathEdit = new System.Windows.Forms.Button();
+            this.buttonMIPPathEdit = new System.Windows.Forms.Button();
+            this.buttonPRFPathEdit = new System.Windows.Forms.Button();
+            this.buttonGridPathEdit = new System.Windows.Forms.Button();
             this.ultraButtonArchiveInputOutput = new Infragistics.Win.Misc.UltraButton();
             this.cboDatabases = new System.Windows.Forms.ComboBox();
             this.labelArchiveDatabase = new System.Windows.Forms.Label();
@@ -448,11 +464,19 @@
             // 
             // txtGridPath
             // 
+            appearance17.AlphaLevel = ((short)(255));
+            appearance17.BorderAlpha = Infragistics.Win.Alpha.Opaque;
+            appearance17.BorderColor = System.Drawing.Color.Black;
+            appearance17.BorderColor2 = System.Drawing.Color.Black;
+            appearance17.BorderColor3DBase = System.Drawing.Color.Black;
+            this.txtGridPath.Appearance = appearance17;
+            this.txtGridPath.BorderStyle = Infragistics.Win.UIElementBorderStyle.Solid;
             this.txtGridPath.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.feGridProjectsBindingSource, "grid_path", true));
-            this.txtGridPath.DisplayStyle = Infragistics.Win.EmbeddableElementDisplayStyle.VisualStudio2005;
+            this.txtGridPath.DisplayStyle = Infragistics.Win.EmbeddableElementDisplayStyle.WindowsVista;
             this.txtGridPath.Location = new System.Drawing.Point(368, 25);
             this.txtGridPath.Name = "txtGridPath";
-            this.txtGridPath.Size = new System.Drawing.Size(509, 21);
+            this.txtGridPath.ReadOnly = true;
+            this.txtGridPath.Size = new System.Drawing.Size(509, 19);
             this.txtGridPath.TabIndex = 4;
             // 
             // feGridProjectsBindingSource
@@ -467,29 +491,47 @@
             // 
             // txtPRFPath
             // 
+            appearance18.BorderColor = System.Drawing.Color.Black;
+            appearance18.BorderColor2 = System.Drawing.Color.Black;
+            appearance18.BorderColor3DBase = System.Drawing.Color.Black;
+            this.txtPRFPath.Appearance = appearance18;
+            this.txtPRFPath.BorderStyle = Infragistics.Win.UIElementBorderStyle.Solid;
             this.txtPRFPath.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.feGridProjectsBindingSource, "bmp_path", true));
-            this.txtPRFPath.DisplayStyle = Infragistics.Win.EmbeddableElementDisplayStyle.VisualStudio2005;
+            this.txtPRFPath.DisplayStyle = Infragistics.Win.EmbeddableElementDisplayStyle.WindowsVista;
             this.txtPRFPath.Location = new System.Drawing.Point(368, 53);
             this.txtPRFPath.Name = "txtPRFPath";
-            this.txtPRFPath.Size = new System.Drawing.Size(509, 21);
+            this.txtPRFPath.ReadOnly = true;
+            this.txtPRFPath.Size = new System.Drawing.Size(509, 19);
             this.txtPRFPath.TabIndex = 5;
             // 
             // txtMIPPath
             // 
+            appearance19.BorderColor = System.Drawing.Color.Black;
+            appearance19.BorderColor2 = System.Drawing.Color.Black;
+            appearance19.BorderColor3DBase = System.Drawing.Color.Black;
+            this.txtMIPPath.Appearance = appearance19;
+            this.txtMIPPath.BorderStyle = Infragistics.Win.UIElementBorderStyle.Solid;
             this.txtMIPPath.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.feGridProjectsBindingSource, "mip_path", true));
-            this.txtMIPPath.DisplayStyle = Infragistics.Win.EmbeddableElementDisplayStyle.VisualStudio2005;
+            this.txtMIPPath.DisplayStyle = Infragistics.Win.EmbeddableElementDisplayStyle.WindowsVista;
             this.txtMIPPath.Location = new System.Drawing.Point(369, 81);
             this.txtMIPPath.Name = "txtMIPPath";
-            this.txtMIPPath.Size = new System.Drawing.Size(508, 21);
+            this.txtMIPPath.ReadOnly = true;
+            this.txtMIPPath.Size = new System.Drawing.Size(508, 19);
             this.txtMIPPath.TabIndex = 6;
             // 
             // txtOSFPath
             // 
+            appearance20.BorderColor = System.Drawing.Color.Black;
+            appearance20.BorderColor2 = System.Drawing.Color.Black;
+            appearance20.BorderColor3DBase = System.Drawing.Color.Black;
+            this.txtOSFPath.Appearance = appearance20;
+            this.txtOSFPath.BorderStyle = Infragistics.Win.UIElementBorderStyle.Solid;
             this.txtOSFPath.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.feGridProjectsBindingSource, "osf_path", true));
-            this.txtOSFPath.DisplayStyle = Infragistics.Win.EmbeddableElementDisplayStyle.VisualStudio2005;
+            this.txtOSFPath.DisplayStyle = Infragistics.Win.EmbeddableElementDisplayStyle.WindowsVista;
             this.txtOSFPath.Location = new System.Drawing.Point(368, 109);
             this.txtOSFPath.Name = "txtOSFPath";
-            this.txtOSFPath.Size = new System.Drawing.Size(509, 21);
+            this.txtOSFPath.ReadOnly = true;
+            this.txtOSFPath.Size = new System.Drawing.Size(509, 19);
             this.txtOSFPath.TabIndex = 7;
             // 
             // lblGridPath
@@ -604,6 +646,10 @@
             // 
             // tabPageDefineScenarios
             // 
+            this.tabPageDefineScenarios.Controls.Add(this.buttonPollutantLoadingConnectionStringEdit);
+            this.tabPageDefineScenarios.Controls.Add(this.buttonBMPEffectivenessTableNameLocate);
+            this.tabPageDefineScenarios.Controls.Add(this.buttonBMPEffectivenessConnectionStringEdit);
+            this.tabPageDefineScenarios.Controls.Add(this.buttonPollutantLoadingTableLocate);
             this.tabPageDefineScenarios.Controls.Add(this.txtScenarioID);
             this.tabPageDefineScenarios.Controls.Add(this.lblScenarioID);
             this.tabPageDefineScenarios.Controls.Add(this.label5);
@@ -634,6 +680,43 @@
             this.tabPageDefineScenarios.TabIndex = 4;
             this.tabPageDefineScenarios.Text = "Define Scenarios";
             this.tabPageDefineScenarios.UseVisualStyleBackColor = true;
+            // 
+            // buttonPollutantLoadingConnectionStringEdit
+            // 
+            this.buttonPollutantLoadingConnectionStringEdit.Location = new System.Drawing.Point(811, 77);
+            this.buttonPollutantLoadingConnectionStringEdit.Name = "buttonPollutantLoadingConnectionStringEdit";
+            this.buttonPollutantLoadingConnectionStringEdit.Size = new System.Drawing.Size(79, 22);
+            this.buttonPollutantLoadingConnectionStringEdit.TabIndex = 62;
+            this.buttonPollutantLoadingConnectionStringEdit.Text = "Edit";
+            this.buttonPollutantLoadingConnectionStringEdit.UseVisualStyleBackColor = true;
+            this.buttonPollutantLoadingConnectionStringEdit.Click += new System.EventHandler(this.buttonPollutantLoadingConnectionStringEdit_Click);
+            // 
+            // buttonBMPEffectivenessTableNameLocate
+            // 
+            this.buttonBMPEffectivenessTableNameLocate.Location = new System.Drawing.Point(811, 182);
+            this.buttonBMPEffectivenessTableNameLocate.Name = "buttonBMPEffectivenessTableNameLocate";
+            this.buttonBMPEffectivenessTableNameLocate.Size = new System.Drawing.Size(79, 22);
+            this.buttonBMPEffectivenessTableNameLocate.TabIndex = 61;
+            this.buttonBMPEffectivenessTableNameLocate.Text = "Find Table";
+            this.buttonBMPEffectivenessTableNameLocate.UseVisualStyleBackColor = true;
+            // 
+            // buttonBMPEffectivenessConnectionStringEdit
+            // 
+            this.buttonBMPEffectivenessConnectionStringEdit.Location = new System.Drawing.Point(811, 153);
+            this.buttonBMPEffectivenessConnectionStringEdit.Name = "buttonBMPEffectivenessConnectionStringEdit";
+            this.buttonBMPEffectivenessConnectionStringEdit.Size = new System.Drawing.Size(79, 22);
+            this.buttonBMPEffectivenessConnectionStringEdit.TabIndex = 60;
+            this.buttonBMPEffectivenessConnectionStringEdit.Text = "Edit";
+            this.buttonBMPEffectivenessConnectionStringEdit.UseVisualStyleBackColor = true;
+            // 
+            // buttonPollutantLoadingTableLocate
+            // 
+            this.buttonPollutantLoadingTableLocate.Location = new System.Drawing.Point(811, 105);
+            this.buttonPollutantLoadingTableLocate.Name = "buttonPollutantLoadingTableLocate";
+            this.buttonPollutantLoadingTableLocate.Size = new System.Drawing.Size(79, 22);
+            this.buttonPollutantLoadingTableLocate.TabIndex = 59;
+            this.buttonPollutantLoadingTableLocate.Text = "Find Table";
+            this.buttonPollutantLoadingTableLocate.UseVisualStyleBackColor = true;
             // 
             // txtScenarioID
             // 
@@ -773,20 +856,32 @@
             // 
             // txtPollutantLoadingTable
             // 
+            appearance14.BorderColor = System.Drawing.Color.Black;
+            appearance14.BorderColor2 = System.Drawing.Color.Black;
+            appearance14.BorderColor3DBase = System.Drawing.Color.Black;
+            this.txtPollutantLoadingTable.Appearance = appearance14;
+            this.txtPollutantLoadingTable.BorderStyle = Infragistics.Win.UIElementBorderStyle.Solid;
             this.txtPollutantLoadingTable.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.feScenariosBindingSource, "pollutant_loading_table", true));
-            this.txtPollutantLoadingTable.DisplayStyle = Infragistics.Win.EmbeddableElementDisplayStyle.VisualStudio2005;
+            this.txtPollutantLoadingTable.DisplayStyle = Infragistics.Win.EmbeddableElementDisplayStyle.WindowsVista;
             this.txtPollutantLoadingTable.Location = new System.Drawing.Point(380, 106);
             this.txtPollutantLoadingTable.Name = "txtPollutantLoadingTable";
-            this.txtPollutantLoadingTable.Size = new System.Drawing.Size(413, 21);
+            this.txtPollutantLoadingTable.ReadOnly = true;
+            this.txtPollutantLoadingTable.Size = new System.Drawing.Size(413, 19);
             this.txtPollutantLoadingTable.TabIndex = 7;
             // 
             // txtBMPEffectivenessTable
             // 
+            appearance16.BorderColor = System.Drawing.Color.Black;
+            appearance16.BorderColor2 = System.Drawing.Color.Black;
+            appearance16.BorderColor3DBase = System.Drawing.Color.Black;
+            this.txtBMPEffectivenessTable.Appearance = appearance16;
+            this.txtBMPEffectivenessTable.BorderStyle = Infragistics.Win.UIElementBorderStyle.Solid;
             this.txtBMPEffectivenessTable.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.feScenariosBindingSource, "bmp_effectiveness_table", true));
-            this.txtBMPEffectivenessTable.DisplayStyle = Infragistics.Win.EmbeddableElementDisplayStyle.VisualStudio2005;
+            this.txtBMPEffectivenessTable.DisplayStyle = Infragistics.Win.EmbeddableElementDisplayStyle.WindowsVista;
             this.txtBMPEffectivenessTable.Location = new System.Drawing.Point(380, 180);
             this.txtBMPEffectivenessTable.Name = "txtBMPEffectivenessTable";
-            this.txtBMPEffectivenessTable.Size = new System.Drawing.Size(413, 21);
+            this.txtBMPEffectivenessTable.ReadOnly = true;
+            this.txtBMPEffectivenessTable.Size = new System.Drawing.Size(413, 19);
             this.txtBMPEffectivenessTable.TabIndex = 9;
             // 
             // lblDBName
@@ -800,11 +895,17 @@
             // 
             // txtPollutantLoadingDB
             // 
+            appearance13.BorderColor = System.Drawing.Color.Black;
+            appearance13.BorderColor2 = System.Drawing.Color.Black;
+            appearance13.BorderColor3DBase = System.Drawing.Color.Black;
+            this.txtPollutantLoadingDB.Appearance = appearance13;
+            this.txtPollutantLoadingDB.BorderStyle = Infragistics.Win.UIElementBorderStyle.Solid;
             this.txtPollutantLoadingDB.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.feScenariosBindingSource, "pollutant_loading_db", true));
-            this.txtPollutantLoadingDB.DisplayStyle = Infragistics.Win.EmbeddableElementDisplayStyle.VisualStudio2005;
+            this.txtPollutantLoadingDB.DisplayStyle = Infragistics.Win.EmbeddableElementDisplayStyle.WindowsVista;
             this.txtPollutantLoadingDB.Location = new System.Drawing.Point(380, 79);
             this.txtPollutantLoadingDB.Name = "txtPollutantLoadingDB";
-            this.txtPollutantLoadingDB.Size = new System.Drawing.Size(413, 21);
+            this.txtPollutantLoadingDB.ReadOnly = true;
+            this.txtPollutantLoadingDB.Size = new System.Drawing.Size(413, 19);
             this.txtPollutantLoadingDB.TabIndex = 6;
             // 
             // lblBMPEffectiveness
@@ -819,11 +920,17 @@
             // 
             // txtBMPEffectivenessDB
             // 
+            appearance15.BorderColor = System.Drawing.Color.Black;
+            appearance15.BorderColor2 = System.Drawing.Color.Black;
+            appearance15.BorderColor3DBase = System.Drawing.Color.Black;
+            this.txtBMPEffectivenessDB.Appearance = appearance15;
+            this.txtBMPEffectivenessDB.BorderStyle = Infragistics.Win.UIElementBorderStyle.Solid;
             this.txtBMPEffectivenessDB.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.feScenariosBindingSource, "bmp_effectiveness_db", true));
-            this.txtBMPEffectivenessDB.DisplayStyle = Infragistics.Win.EmbeddableElementDisplayStyle.VisualStudio2005;
+            this.txtBMPEffectivenessDB.DisplayStyle = Infragistics.Win.EmbeddableElementDisplayStyle.WindowsVista;
             this.txtBMPEffectivenessDB.Location = new System.Drawing.Point(380, 153);
             this.txtBMPEffectivenessDB.Name = "txtBMPEffectivenessDB";
-            this.txtBMPEffectivenessDB.Size = new System.Drawing.Size(413, 21);
+            this.txtBMPEffectivenessDB.ReadOnly = true;
+            this.txtBMPEffectivenessDB.Size = new System.Drawing.Size(413, 19);
             this.txtBMPEffectivenessDB.TabIndex = 8;
             // 
             // lblPollutantLoads
@@ -1745,6 +1852,10 @@
             // 
             // tabPageDefineProjects
             // 
+            this.tabPageDefineProjects.Controls.Add(this.buttonOSFPathEdit);
+            this.tabPageDefineProjects.Controls.Add(this.buttonMIPPathEdit);
+            this.tabPageDefineProjects.Controls.Add(this.buttonPRFPathEdit);
+            this.tabPageDefineProjects.Controls.Add(this.buttonGridPathEdit);
             this.tabPageDefineProjects.Controls.Add(this.ultraButtonArchiveInputOutput);
             this.tabPageDefineProjects.Controls.Add(this.cboDatabases);
             this.tabPageDefineProjects.Controls.Add(this.labelArchiveDatabase);
@@ -1775,6 +1886,43 @@
             this.tabPageDefineProjects.Text = "Define Projects";
             this.tabPageDefineProjects.UseVisualStyleBackColor = true;
             this.tabPageDefineProjects.Click += new System.EventHandler(this.tabPageDefineProjects_Click);
+            // 
+            // buttonOSFPathEdit
+            // 
+            this.buttonOSFPathEdit.Location = new System.Drawing.Point(883, 108);
+            this.buttonOSFPathEdit.Name = "buttonOSFPathEdit";
+            this.buttonOSFPathEdit.Size = new System.Drawing.Size(66, 21);
+            this.buttonOSFPathEdit.TabIndex = 71;
+            this.buttonOSFPathEdit.Text = "Edit";
+            this.buttonOSFPathEdit.UseVisualStyleBackColor = true;
+            // 
+            // buttonMIPPathEdit
+            // 
+            this.buttonMIPPathEdit.Location = new System.Drawing.Point(883, 80);
+            this.buttonMIPPathEdit.Name = "buttonMIPPathEdit";
+            this.buttonMIPPathEdit.Size = new System.Drawing.Size(66, 21);
+            this.buttonMIPPathEdit.TabIndex = 70;
+            this.buttonMIPPathEdit.Text = "Edit";
+            this.buttonMIPPathEdit.UseVisualStyleBackColor = true;
+            // 
+            // buttonPRFPathEdit
+            // 
+            this.buttonPRFPathEdit.Location = new System.Drawing.Point(883, 52);
+            this.buttonPRFPathEdit.Name = "buttonPRFPathEdit";
+            this.buttonPRFPathEdit.Size = new System.Drawing.Size(66, 21);
+            this.buttonPRFPathEdit.TabIndex = 69;
+            this.buttonPRFPathEdit.Text = "Edit";
+            this.buttonPRFPathEdit.UseVisualStyleBackColor = true;
+            // 
+            // buttonGridPathEdit
+            // 
+            this.buttonGridPathEdit.Location = new System.Drawing.Point(883, 25);
+            this.buttonGridPathEdit.Name = "buttonGridPathEdit";
+            this.buttonGridPathEdit.Size = new System.Drawing.Size(66, 21);
+            this.buttonGridPathEdit.TabIndex = 68;
+            this.buttonGridPathEdit.Text = "Edit";
+            this.buttonGridPathEdit.UseVisualStyleBackColor = true;
+            this.buttonGridPathEdit.Click += new System.EventHandler(this.buttonGridPathEdit_Click);
             // 
             // ultraButtonArchiveInputOutput
             // 
@@ -2475,6 +2623,14 @@
         private System.Windows.Forms.ComboBox cboDatabases;
         private System.Windows.Forms.Label labelArchiveDatabase;
         private Infragistics.Win.Misc.UltraButton ultraButtonArchiveInputOutput;
+        private System.Windows.Forms.Button buttonBMPEffectivenessTableNameLocate;
+        private System.Windows.Forms.Button buttonBMPEffectivenessConnectionStringEdit;
+        private System.Windows.Forms.Button buttonPollutantLoadingTableLocate;
+        private System.Windows.Forms.Button buttonPollutantLoadingConnectionStringEdit;
+        private System.Windows.Forms.Button buttonOSFPathEdit;
+        private System.Windows.Forms.Button buttonMIPPathEdit;
+        private System.Windows.Forms.Button buttonPRFPathEdit;
+        private System.Windows.Forms.Button buttonGridPathEdit;
     }
 }
 

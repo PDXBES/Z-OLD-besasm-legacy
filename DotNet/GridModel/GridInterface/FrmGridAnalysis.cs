@@ -15,9 +15,11 @@ using SystemsAnalysis.Utils.DataMobility;
 namespace SystemsAnalysis.Grid.GridAnalysis
 {
     public partial class FrmGridAnalysis : Form
-    {
+    {    
         GridModelEngine gridModelEngine;
         GridModelOutput gridModelOutput;
+
+        //variables for the main server connection
         string userID = "";
         string password = "";
         string domain = "";
@@ -26,6 +28,17 @@ namespace SystemsAnalysis.Grid.GridAnalysis
         bool trustedConnection = false;
         bool SQLisSource = true;
 
+        //variables for the user selected server connections
+        //these variables are used for multiple different connections
+        //so they should not be expected to remain static
+        string dynamicUserID = "";
+        string dynamicPassword = "";
+        string dynamicDomain = "";
+        string dynamicServer = "";
+        string dynamicDatabase = "";
+        bool dynamicTrustedConnection = false;
+
+        //variables for the archive server connection
         string ArchiveUserID = "";
         string ArchivePassword = "";
         string ArchiveDomain = "";
@@ -1079,6 +1092,155 @@ namespace SystemsAnalysis.Grid.GridAnalysis
             domain = ((FormServerDatabaseUserIDPasswordDomainEntry)sender).Domain;
             trustedConnection = ((FormServerDatabaseUserIDPasswordDomainEntry)sender).useTrustedConnection;
             SQLisSource = ((FormServerDatabaseUserIDPasswordDomainEntry)sender).SQLisSource;
+        }
+
+        void child_FormClosing3(object sender, FormClosingEventArgs e)
+        {
+            userID = ((FormConnectionStringInterface)sender).UserID;
+            password = ((FormConnectionStringInterface)sender).Password;
+            database = ((FormConnectionStringInterface)sender).Database;
+            server = ((FormConnectionStringInterface)sender).Server;
+            domain = ((FormConnectionStringInterface)sender).Domain;
+            trustedConnection = ((FormConnectionStringInterface)sender).useTrustedConnection;
+        }
+
+        private void buttonPollutantLoadingConnectionStringEdit_Click(object sender, EventArgs e)
+        {
+            //we can't trust the user to simply type in a connection string and expect 
+            //it to work, the average person has no idea how to build or debug such a thing.
+            //So, we need to give the user a dialog box where they can search for and select
+            //the server, database, and table that they intend to use.
+
+        }
+
+        private void buttonGridPathEdit_Click(object sender, EventArgs e)
+        {
+            string serverIsUsable = "";
+            string inputDatabase = "";
+
+            FormConnectionStringInterface child = new FormConnectionStringInterface((string)txtGridPath.Value);
+            child.FormClosing += new FormClosingEventHandler(child_FormClosing3);
+
+            this.Enabled = false;
+            child.ShowDialog();
+            this.Enabled = true;
+
+            inputDatabase = "Server=" + dynamicServer + ";Database=" + dynamicDatabase;
+            if (dynamicTrustedConnection == true)
+            {
+                inputDatabase += ";Trusted_Connection=yes;";
+            }
+            else
+            {
+                inputDatabase += ";Persist Security Info=True;User ID=" + dynamicUserID + ";Password=" + dynamicPassword;
+            }
+
+            if (dynamicDomain != "")
+            {
+                dynamicDomain = dynamicDomain + ".";
+            }
+                
+            //verify the connection works.  IF the connection does not work,
+            //then notify the user that the connection does not work, but the
+            //user should still be in charge of deciding whether or not to keep
+            //a connection that does not work.  The gridmodel should not be allowed
+            //to run if a connection does not work, though.
+
+            //The grid path should connect to a table named GRID_WshdGrd100FtOpt
+            //later on the table name should be allowed to be user defined
+            serverIsUsable = SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_WshdGrd100FtOpt");
+
+            if (serverIsUsable != "")
+            {
+                MessageBox.Show("The connections you have selected are not acceptable to use for the GRIDMODEL");
+                MessageBox.Show(serverIsUsable);
+            }
+
+            //make sure the table also has all of the appropriate columns
+            //with all of the appropriate data types.
+            string columnSelectionString = "SELECT TOP 1 [MAPINFO_ID]" +
+              ",[Description]" +
+              ",[Col_Name]" +
+              ",[Row_Name]" +
+              ",[Area_ft2]" +
+              ",[Avg_Slope]" +
+              ",[Public]" +
+              ",[Private]" +
+              ",[VEG_LONcellCount]" +
+              ",[VEG_LOFFcellCount]" +
+              ",[CPY_LONcellCount]" +
+              ",[CPY_LOFFcellCount]" +
+              ",[ROW_CellCount]" +
+              ",[RF_CellCount]" +
+              ",[PKG_CellCount]" +
+              ",[IMP_CellCount]" +
+              ",[WAT_CellCount]" +
+              ",[TRA_LUcellCount]" +
+              ",[COM_LUcellCount]" +
+              ",[IND_LUcellCount]" +
+              ",[SFR_LUcellCount]" +
+              ",[MFR_LUcellCount]" +
+              ",[FOR_LUcellCount]" +
+              ",[AGR_LUcellCount]" +
+              ",[RUR_LUcellCount]" +
+              ",[VAC_LUcellCount]" +
+              ",[POS_LUcellCount]" +
+              ",[Blnk_LUcellCount]" +
+              ",[VEG_LON_pct]" +
+              ",[VEG_LOFF_pct]" +
+              ",[CPY_LON_pct]" +
+              ",[CPY_LOFF_pct]" +
+              ",[VEG_pct]" +
+              ",[ROW_pct]" +
+              ",[RF_pct]" +
+              ",[PKG_pct]" +
+              ",[IMP_pct]" +
+              ",[WAT_pct]" +
+              ",[CAL_point]" +
+              ",[WS_Code]" +
+              ",[BASIN_Code]" +
+              ",[BRANCH_ID]" +
+              ",[IN_PDX]" +
+              ",[RAINGAGE]" +
+              ",[COL_B]" +
+              ",[COL_C]" +
+              ",[COL_D]" +
+              ",[COL_E]" +
+              ",[COL_F]" +
+              ",[COL_G]" +
+              ",[COL_H]" +
+              ",[COL_I]" +
+              ",[COL_J]" +
+              ",[COL_K]" +
+              ",[COL_L]" +
+              ",[COL_M]" +
+              ",[COL_N]" +
+              ",[COL_O]" +
+              ",[COL_P]" +
+              ",[COL_Q]" +
+              ",[COL_1]" +
+              ",[COL_2]" +
+              ",[COL_3]" +
+              ",[TP]" +
+              ",[TSS]" +
+              ",[ECOLI]" +
+              ",[BOD]" +
+              ",[TP_WET]" +
+              ",[TSS_WET]" +
+              ",[ECOLI_WET]" +
+              ",[BOD_WET]" +
+              ",[TP_DRY]" +
+              ",[TSS_DRY]" +
+              ",[ECOLI_DRY]" +
+              ",[BOD_DRY]" +
+              ",[PbD]" +
+              ",[PbD_DRY]" +
+              ",[PbD_WET]" +
+              ",[ECOLI_REMOVAL]" +
+              ",[Xc]" +
+              ",[Yc]" +
+              ",[SSMA_TimeStamp]" +
+              "FROM [GRIDMODEL].[dbo].[GRID_WshdGrd100FtOpt]";
         }
     }
 }
