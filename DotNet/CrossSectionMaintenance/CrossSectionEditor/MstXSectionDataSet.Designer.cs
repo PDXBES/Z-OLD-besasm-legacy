@@ -525,6 +525,14 @@ namespace SystemsAnalysis.EMGAATS.CrossSectionEditor {
                 this.columnmst_xsections_id.AutoIncrementStep = -1;
                 this.columnmst_xsections_id.AllowDBNull = false;
                 this.columnmst_xsections_id.Unique = true;
+                this.columnmlinkid.AllowDBNull = false;
+                this.columnroughness_main.DefaultValue = ((double)(0.03));
+                this.columnroughness_left.DefaultValue = ((double)(0.05));
+                this.columnroughness_right.DefaultValue = ((double)(0.05));
+                this.columnstation_left.DefaultValue = ((double)(0));
+                this.columnstation_right.DefaultValue = ((double)(0));
+                this.columnlength_factor_left.DefaultValue = ((double)(1));
+                this.columnlength_factor_right.DefaultValue = ((double)(1));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -816,6 +824,9 @@ namespace SystemsAnalysis.EMGAATS.CrossSectionEditor {
                 this.columnmst_xsection_data_id.AutoIncrementStep = -1;
                 this.columnmst_xsection_data_id.AllowDBNull = false;
                 this.columnmst_xsection_data_id.Unique = true;
+                this.columnindex.DefaultValue = ((int)(0));
+                this.columnstation.DefaultValue = ((double)(0));
+                this.columnelevation.DefaultValue = ((double)(0));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -960,12 +971,7 @@ namespace SystemsAnalysis.EMGAATS.CrossSectionEditor {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public int mlinkid {
                 get {
-                    try {
-                        return ((int)(this[this.tablemst_xsections.mlinkidColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'mlinkid\' in table \'mst_xsections\' is DBNull.", e);
-                    }
+                    return ((int)(this[this.tablemst_xsections.mlinkidColumn]));
                 }
                 set {
                     this[this.tablemst_xsections.mlinkidColumn] = value;
@@ -1075,16 +1081,6 @@ namespace SystemsAnalysis.EMGAATS.CrossSectionEditor {
                 set {
                     this[this.tablemst_xsections.length_factor_rightColumn] = value;
                 }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsmlinkidNull() {
-                return this.IsNull(this.tablemst_xsections.mlinkidColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetmlinkidNull() {
-                this[this.tablemst_xsections.mlinkidColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1563,7 +1559,7 @@ namespace SystemsAnalysis.EMGAATS.CrossSectionEditor.MstXSectionDataSetTableAdap
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitConnection() {
             this._connection = new global::System.Data.OleDb.OleDbConnection();
-            this._connection.ConnectionString = global::SystemsAnalysis.EMGAATS.CrossSectionEditor.Properties.Settings.Default.mst_xsectionsConnectionString1;
+            this._connection.ConnectionString = global::SystemsAnalysis.EMGAATS.CrossSectionEditor.Properties.Settings.Default.mst_xsectionsConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1961,7 +1957,7 @@ namespace SystemsAnalysis.EMGAATS.CrossSectionEditor.MstXSectionDataSetTableAdap
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         private void InitConnection() {
             this._connection = new global::System.Data.OleDb.OleDbConnection();
-            this._connection.ConnectionString = global::SystemsAnalysis.EMGAATS.CrossSectionEditor.Properties.Settings.Default.mst_xsectionsConnectionString1;
+            this._connection.ConnectionString = global::SystemsAnalysis.EMGAATS.CrossSectionEditor.Properties.Settings.Default.mst_xsectionsConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

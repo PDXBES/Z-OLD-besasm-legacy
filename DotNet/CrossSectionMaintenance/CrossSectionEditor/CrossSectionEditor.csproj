@@ -73,6 +73,10 @@
     <Compile Include="frmXSectEditor.Designer.cs">
       <DependentUpon>frmXSectEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="MstXSectionDataSet.cs">
+      <DependentUpon>MstXSectionDataSet.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="MstXSectionDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -137,9 +141,6 @@
     <None Include="Resources\CrossSectionEditorIcon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="mst_xsections.mdb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Resources\CrossSectionEditorImage.bmp" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
