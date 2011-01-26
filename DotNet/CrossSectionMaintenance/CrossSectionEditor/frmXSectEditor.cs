@@ -207,13 +207,16 @@ namespace SystemsAnalysis.EMGAATS.CrossSectionEditor
         return;
 
       chrtXSectDisplay.DataBindings.Clear();
-      processedXSectDS.ReadXml(openFileDialog.FileName);
-      if (processedXSectDS.XSects.Count > 0)
+      try
+      {
+        processedXSectDS.ReadXml(openFileDialog.FileName);
         LoadXSect(processedXSectDS.XSects[0].XSectName);
-      else
-        chrtXSectDisplay.EmptyChartText = "Error loading processed xml file";
-
-      ConfigureChart();
+        ConfigureChart();
+      }
+      catch (Exception ex)
+      {
+        chrtXSectDisplay.EmptyChartText = "Error loading processed xml file: " + ex.Message;
+      }      
     }
 
     private void ExportToMaster()
@@ -224,17 +227,17 @@ namespace SystemsAnalysis.EMGAATS.CrossSectionEditor
         int xSectCount, xSectDataCount;
         xSectCount = UpdatedMstXSect(mstXSectDS);
         xSectDataCount = UpdateMstXSectData(mstXSectDS);
-        MessageBox.Show("Succesfully sent " + xSectCount + 
-          " cross-sections containing " + xSectDataCount + 
-          " points to master database.", "Successfully sent data to master", 
-          MessageBoxButtons.OK, MessageBoxIcon.Information);           
+        MessageBox.Show("Succesfully sent " + xSectCount +
+          " cross-sections containing " + xSectDataCount +
+          " points to master database.", "Successfully sent data to master",
+          MessageBoxButtons.OK, MessageBoxIcon.Information);
       }
       catch (Exception ex)
       {
-        MessageBox.Show("Error sending data to master: " + 
-          ex.Message, "Error sending data to master!", 
+        MessageBox.Show("Error sending data to master: " +
+          ex.Message, "Error sending data to master!",
           MessageBoxButtons.OK, MessageBoxIcon.Error);
-      }                    
+      }
       return;
     }
 
@@ -265,7 +268,7 @@ namespace SystemsAnalysis.EMGAATS.CrossSectionEditor
           mstXSectDataRow.SetParentRow(mstXSectRow);
           mstXSectDS.mst_xsection_data.Addmst_xsection_dataRow(mstXSectDataRow);
           i++;
-        }        
+        }
       }
       mstXSectDataTA.Update(mstXSectDS.mst_xsection_data);
       return i;
@@ -375,11 +378,11 @@ namespace SystemsAnalysis.EMGAATS.CrossSectionEditor
       }
       catch
       {
+        chrtXSectDisplay.EmptyChartText = "Error reading LandXML File";
         return false;
       }
       finally
-      {
-        chrtXSectDisplay.EmptyChartText = "Error reading LandXML File";
+      {        
         reader.Close();
       }
       return true;
@@ -469,7 +472,7 @@ namespace SystemsAnalysis.EMGAATS.CrossSectionEditor
 
     private void bindingNavigatorToggleExport_Click(object sender, EventArgs e)
     {
-      var q = from proc in processedXSectDS.XSects select proc.ReadyForExport;      
+      var q = from proc in processedXSectDS.XSects select proc.ReadyForExport;
       foreach (ProcessedXSectDataSet.XSectsRow row in processedXSectDS.XSects)
       {
         row.ReadyForExport = !row.ReadyForExport;

@@ -40,24 +40,24 @@
           System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmXSectEditor));
           Infragistics.Win.Appearance appearance40 = new Infragistics.Win.Appearance();
           Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand1 = new Infragistics.Win.UltraWinGrid.UltraGridBand("XSects", -1);
-          Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn18 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("XSectName");
-          Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn19 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Station");
-          Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn20 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("LongName");
-          Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn21 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Description");
-          Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn22 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("MainChannelRoughness");
-          Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn23 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("LeftOverbankRoughness");
-          Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn24 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("RightOverbankRoughness");
-          Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn25 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("LeftOverbankStation");
-          Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn26 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("RightOverbankStation");
-          Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn27 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("LeftOverbankLengthFactor");
-          Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn28 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("RightOverbankLengthFactor");
-          Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn29 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ReadyForExport");
-          Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn30 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_XSects_PointList");
+          Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn1 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("XSectName");
+          Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn2 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Station");
+          Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn3 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("LongName");
+          Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn4 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Description");
+          Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn5 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("MainChannelRoughness");
+          Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn6 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("LeftOverbankRoughness");
+          Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn7 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("RightOverbankRoughness");
+          Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn8 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("LeftOverbankStation");
+          Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn9 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("RightOverbankStation");
+          Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn10 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("LeftOverbankLengthFactor");
+          Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn11 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("RightOverbankLengthFactor");
+          Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn12 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ReadyForExport");
+          Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn13 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_XSects_PointList");
           Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand2 = new Infragistics.Win.UltraWinGrid.UltraGridBand("FK_XSects_PointList", 0);
-          Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn31 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("XSectName");
-          Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn32 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Station");
-          Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn33 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Elevation");
-          Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn34 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("PointListID");
+          Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn14 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("XSectName");
+          Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn15 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Station");
+          Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn16 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Elevation");
+          Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn17 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("PointListID");
           Infragistics.Win.Appearance appearance41 = new Infragistics.Win.Appearance();
           Infragistics.Win.Appearance appearance42 = new Infragistics.Win.Appearance();
           Infragistics.Win.Appearance appearance43 = new Infragistics.Win.Appearance();
@@ -141,6 +141,7 @@
           this.bindingNavigatorSeparator1 = new System.Windows.Forms.ToolStripSeparator();
           this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
           this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
+          this.bindingNavigatorToggleExport = new System.Windows.Forms.ToolStripButton();
           this.pnlBottom = new Infragistics.Win.Misc.UltraPanel();
           this.ultraGridBagLayoutPanel1 = new Infragistics.Win.Misc.UltraGridBagLayoutPanel();
           this.chkReadyForExport = new Infragistics.Win.UltraWinEditors.UltraCheckEditor();
@@ -161,12 +162,11 @@
           this.lblRightRoughness = new Infragistics.Win.Misc.UltraLabel();
           this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
           this._frmXSectEditor_Toolbars_Dock_Area_Left = new Infragistics.Win.UltraWinToolbars.UltraToolbarsDockArea();
+          this.ultraToolbarsManager1 = new Infragistics.Win.UltraWinToolbars.UltraToolbarsManager(this.components);
           this._frmXSectEditor_Toolbars_Dock_Area_Right = new Infragistics.Win.UltraWinToolbars.UltraToolbarsDockArea();
           this._frmXSectEditor_Toolbars_Dock_Area_Top = new Infragistics.Win.UltraWinToolbars.UltraToolbarsDockArea();
           this._frmXSectEditor_Toolbars_Dock_Area_Bottom = new Infragistics.Win.UltraWinToolbars.UltraToolbarsDockArea();
           this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
-          this.bindingNavigatorToggleExport = new System.Windows.Forms.ToolStripButton();
-          this.ultraToolbarsManager1 = new Infragistics.Win.UltraWinToolbars.UltraToolbarsManager(this.components);
           ((System.ComponentModel.ISupportInitialize)(this.optStationOrder)).BeginInit();
           this.frmXSectEditor_Fill_Panel.ClientArea.SuspendLayout();
           this.frmXSectEditor_Fill_Panel.SuspendLayout();
@@ -244,9 +244,9 @@
           this.frmXSectEditor_Fill_Panel.ClientArea.Controls.Add(this.pnlBottom);
           this.frmXSectEditor_Fill_Panel.Cursor = System.Windows.Forms.Cursors.Default;
           this.frmXSectEditor_Fill_Panel.Dock = System.Windows.Forms.DockStyle.Fill;
-          this.frmXSectEditor_Fill_Panel.Location = new System.Drawing.Point(4, 176);
+          this.frmXSectEditor_Fill_Panel.Location = new System.Drawing.Point(4, 147);
           this.frmXSectEditor_Fill_Panel.Name = "frmXSectEditor_Fill_Panel";
-          this.frmXSectEditor_Fill_Panel.Size = new System.Drawing.Size(914, 573);
+          this.frmXSectEditor_Fill_Panel.Size = new System.Drawing.Size(914, 602);
           this.frmXSectEditor_Fill_Panel.TabIndex = 0;
           // 
           //			'UltraChart' properties's serialization: Since 'ChartType' changes the way axes look,
@@ -286,7 +286,7 @@
           this.chrtXSectDisplay.Axis.X.MinorGridLines.Color = System.Drawing.Color.LightGray;
           this.chrtXSectDisplay.Axis.X.MinorGridLines.DrawStyle = Infragistics.UltraChart.Shared.Styles.LineDrawStyle.Dot;
           this.chrtXSectDisplay.Axis.X.MinorGridLines.Visible = true;
-          this.chrtXSectDisplay.Axis.X.TickmarkInterval = 10;
+          this.chrtXSectDisplay.Axis.X.TickmarkInterval = 5;
           this.chrtXSectDisplay.Axis.X.TickmarkIntervalType = Infragistics.UltraChart.Shared.Styles.AxisIntervalType.Hours;
           this.chrtXSectDisplay.Axis.X.TickmarkStyle = Infragistics.UltraChart.Shared.Styles.AxisTickStyle.Smart;
           this.chrtXSectDisplay.Axis.X.Visible = true;
@@ -314,7 +314,7 @@
           this.chrtXSectDisplay.Axis.X2.MinorGridLines.Color = System.Drawing.Color.LightGray;
           this.chrtXSectDisplay.Axis.X2.MinorGridLines.DrawStyle = Infragistics.UltraChart.Shared.Styles.LineDrawStyle.Dot;
           this.chrtXSectDisplay.Axis.X2.MinorGridLines.Visible = false;
-          this.chrtXSectDisplay.Axis.X2.TickmarkInterval = 10;
+          this.chrtXSectDisplay.Axis.X2.TickmarkInterval = 5;
           this.chrtXSectDisplay.Axis.X2.TickmarkIntervalType = Infragistics.UltraChart.Shared.Styles.AxisIntervalType.Hours;
           this.chrtXSectDisplay.Axis.X2.TickmarkStyle = Infragistics.UltraChart.Shared.Styles.AxisTickStyle.Smart;
           this.chrtXSectDisplay.Axis.X2.Visible = false;
@@ -446,7 +446,7 @@
           scatterChartAppearance1.LineAppearance.Thickness = 2;
           scatterChartAppearance1.UseGroupByColumn = true;
           this.chrtXSectDisplay.ScatterChart = scatterChartAppearance1;
-          this.chrtXSectDisplay.Size = new System.Drawing.Size(589, 395);
+          this.chrtXSectDisplay.Size = new System.Drawing.Size(589, 424);
           this.chrtXSectDisplay.TabIndex = 0;
           this.chrtXSectDisplay.TitleBottom.Font = new System.Drawing.Font("Verdana", 9.75F);
           this.chrtXSectDisplay.TitleBottom.HorizontalAlign = System.Drawing.StringAlignment.Center;
@@ -475,7 +475,7 @@
           this.pnlLeft.Dock = System.Windows.Forms.DockStyle.Left;
           this.pnlLeft.Location = new System.Drawing.Point(0, 0);
           this.pnlLeft.Name = "pnlLeft";
-          this.pnlLeft.Size = new System.Drawing.Size(325, 395);
+          this.pnlLeft.Size = new System.Drawing.Size(325, 424);
           this.pnlLeft.TabIndex = 11;
           // 
           // ultraGrid1
@@ -498,58 +498,58 @@
           appearance40.BackColor = System.Drawing.Color.White;
           this.ultraGrid1.DisplayLayout.Appearance = appearance40;
           ultraGridBand1.ColHeaderLines = 2;
-          ultraGridColumn18.Header.Caption = "MLinkID";
-          ultraGridColumn18.Header.VisiblePosition = 0;
-          ultraGridColumn18.Width = 96;
-          ultraGridColumn19.Header.VisiblePosition = 1;
-          ultraGridColumn19.Hidden = true;
-          ultraGridColumn20.Header.Caption = "Station";
-          ultraGridColumn20.Header.VisiblePosition = 2;
-          ultraGridColumn20.Width = 64;
-          ultraGridColumn21.Header.VisiblePosition = 3;
-          ultraGridColumn21.Hidden = true;
-          ultraGridColumn22.Header.VisiblePosition = 4;
-          ultraGridColumn22.Hidden = true;
-          ultraGridColumn23.Header.VisiblePosition = 5;
-          ultraGridColumn23.Hidden = true;
-          ultraGridColumn24.Header.VisiblePosition = 6;
-          ultraGridColumn24.Hidden = true;
-          ultraGridColumn25.Header.VisiblePosition = 7;
-          ultraGridColumn25.Hidden = true;
-          ultraGridColumn26.Header.VisiblePosition = 8;
-          ultraGridColumn26.Hidden = true;
-          ultraGridColumn27.Header.VisiblePosition = 9;
-          ultraGridColumn27.Hidden = true;
-          ultraGridColumn28.Header.VisiblePosition = 10;
-          ultraGridColumn28.Hidden = true;
-          ultraGridColumn29.Header.Caption = "Ready For Export";
-          ultraGridColumn29.Header.VisiblePosition = 11;
-          ultraGridColumn30.Header.VisiblePosition = 12;
+          ultraGridColumn1.Header.Caption = "MLinkID";
+          ultraGridColumn1.Header.VisiblePosition = 0;
+          ultraGridColumn1.Width = 96;
+          ultraGridColumn2.Header.VisiblePosition = 1;
+          ultraGridColumn2.Hidden = true;
+          ultraGridColumn3.Header.Caption = "Station";
+          ultraGridColumn3.Header.VisiblePosition = 2;
+          ultraGridColumn3.Width = 64;
+          ultraGridColumn4.Header.VisiblePosition = 3;
+          ultraGridColumn4.Hidden = true;
+          ultraGridColumn5.Header.VisiblePosition = 4;
+          ultraGridColumn5.Hidden = true;
+          ultraGridColumn6.Header.VisiblePosition = 5;
+          ultraGridColumn6.Hidden = true;
+          ultraGridColumn7.Header.VisiblePosition = 6;
+          ultraGridColumn7.Hidden = true;
+          ultraGridColumn8.Header.VisiblePosition = 7;
+          ultraGridColumn8.Hidden = true;
+          ultraGridColumn9.Header.VisiblePosition = 8;
+          ultraGridColumn9.Hidden = true;
+          ultraGridColumn10.Header.VisiblePosition = 9;
+          ultraGridColumn10.Hidden = true;
+          ultraGridColumn11.Header.VisiblePosition = 10;
+          ultraGridColumn11.Hidden = true;
+          ultraGridColumn12.Header.Caption = "Ready For Export";
+          ultraGridColumn12.Header.VisiblePosition = 11;
+          ultraGridColumn13.Header.VisiblePosition = 12;
           ultraGridBand1.Columns.AddRange(new object[] {
-            ultraGridColumn18,
-            ultraGridColumn19,
-            ultraGridColumn20,
-            ultraGridColumn21,
-            ultraGridColumn22,
-            ultraGridColumn23,
-            ultraGridColumn24,
-            ultraGridColumn25,
-            ultraGridColumn26,
-            ultraGridColumn27,
-            ultraGridColumn28,
-            ultraGridColumn29,
-            ultraGridColumn30});
+            ultraGridColumn1,
+            ultraGridColumn2,
+            ultraGridColumn3,
+            ultraGridColumn4,
+            ultraGridColumn5,
+            ultraGridColumn6,
+            ultraGridColumn7,
+            ultraGridColumn8,
+            ultraGridColumn9,
+            ultraGridColumn10,
+            ultraGridColumn11,
+            ultraGridColumn12,
+            ultraGridColumn13});
           ultraGridBand1.Expandable = false;
           ultraGridBand1.GroupHeaderLines = 2;
-          ultraGridColumn31.Header.VisiblePosition = 0;
-          ultraGridColumn32.Header.VisiblePosition = 1;
-          ultraGridColumn33.Header.VisiblePosition = 2;
-          ultraGridColumn34.Header.VisiblePosition = 3;
+          ultraGridColumn14.Header.VisiblePosition = 0;
+          ultraGridColumn15.Header.VisiblePosition = 1;
+          ultraGridColumn16.Header.VisiblePosition = 2;
+          ultraGridColumn17.Header.VisiblePosition = 3;
           ultraGridBand2.Columns.AddRange(new object[] {
-            ultraGridColumn31,
-            ultraGridColumn32,
-            ultraGridColumn33,
-            ultraGridColumn34});
+            ultraGridColumn14,
+            ultraGridColumn15,
+            ultraGridColumn16,
+            ultraGridColumn17});
           ultraGridBand2.Hidden = true;
           this.ultraGrid1.DisplayLayout.BandsSerializer.Add(ultraGridBand1);
           this.ultraGrid1.DisplayLayout.BandsSerializer.Add(ultraGridBand2);
@@ -687,7 +687,7 @@
           this.ultraGrid1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
           this.ultraGrid1.Location = new System.Drawing.Point(0, 0);
           this.ultraGrid1.Name = "ultraGrid1";
-          this.ultraGrid1.Size = new System.Drawing.Size(325, 370);
+          this.ultraGrid1.Size = new System.Drawing.Size(325, 399);
           this.ultraGrid1.TabIndex = 0;
           this.ultraGrid1.Text = "Grid Caption Area";
           this.ultraGrid1.UseOsThemes = Infragistics.Win.DefaultableBoolean.False;
@@ -718,7 +718,7 @@
             this.bindingNavigatorMoveNextItem,
             this.bindingNavigatorMoveLastItem,
             this.bindingNavigatorToggleExport});
-          this.bindingNavigator1.Location = new System.Drawing.Point(0, 370);
+          this.bindingNavigator1.Location = new System.Drawing.Point(0, 399);
           this.bindingNavigator1.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
           this.bindingNavigator1.MoveLastItem = this.bindingNavigatorMoveLastItem;
           this.bindingNavigator1.MoveNextItem = this.bindingNavigatorMoveNextItem;
@@ -791,6 +791,17 @@
           this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(23, 22);
           this.bindingNavigatorMoveLastItem.Text = "Move last";
           // 
+          // bindingNavigatorToggleExport
+          // 
+          this.bindingNavigatorToggleExport.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+          this.bindingNavigatorToggleExport.Image = global::SystemsAnalysis.EMGAATS.CrossSectionEditor.Properties.Resources.CrossSectionEditorImage;
+          this.bindingNavigatorToggleExport.ImageTransparentColor = System.Drawing.Color.Magenta;
+          this.bindingNavigatorToggleExport.Name = "bindingNavigatorToggleExport";
+          this.bindingNavigatorToggleExport.Size = new System.Drawing.Size(23, 22);
+          this.bindingNavigatorToggleExport.Text = "Toggle Ready for Export";
+          this.bindingNavigatorToggleExport.ToolTipText = "Toggle Ready for Export";
+          this.bindingNavigatorToggleExport.Click += new System.EventHandler(this.bindingNavigatorToggleExport_Click);
+          // 
           // pnlBottom
           // 
           // 
@@ -798,7 +809,7 @@
           // 
           this.pnlBottom.ClientArea.Controls.Add(this.ultraGridBagLayoutPanel1);
           this.pnlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-          this.pnlBottom.Location = new System.Drawing.Point(0, 395);
+          this.pnlBottom.Location = new System.Drawing.Point(0, 424);
           this.pnlBottom.Name = "pnlBottom";
           this.pnlBottom.Size = new System.Drawing.Size(914, 178);
           this.pnlBottom.TabIndex = 11;
@@ -1089,56 +1100,10 @@
           this._frmXSectEditor_Toolbars_Dock_Area_Left.DockedPosition = Infragistics.Win.UltraWinToolbars.DockedPosition.Left;
           this._frmXSectEditor_Toolbars_Dock_Area_Left.ForeColor = System.Drawing.SystemColors.ControlText;
           this._frmXSectEditor_Toolbars_Dock_Area_Left.InitialResizeAreaExtent = 4;
-          this._frmXSectEditor_Toolbars_Dock_Area_Left.Location = new System.Drawing.Point(0, 176);
+          this._frmXSectEditor_Toolbars_Dock_Area_Left.Location = new System.Drawing.Point(0, 147);
           this._frmXSectEditor_Toolbars_Dock_Area_Left.Name = "_frmXSectEditor_Toolbars_Dock_Area_Left";
-          this._frmXSectEditor_Toolbars_Dock_Area_Left.Size = new System.Drawing.Size(4, 573);
+          this._frmXSectEditor_Toolbars_Dock_Area_Left.Size = new System.Drawing.Size(4, 602);
           this._frmXSectEditor_Toolbars_Dock_Area_Left.ToolbarsManager = this.ultraToolbarsManager1;
-          // 
-          // _frmXSectEditor_Toolbars_Dock_Area_Right
-          // 
-          this._frmXSectEditor_Toolbars_Dock_Area_Right.AccessibleRole = System.Windows.Forms.AccessibleRole.Grouping;
-          this._frmXSectEditor_Toolbars_Dock_Area_Right.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(219)))), ((int)(((byte)(255)))));
-          this._frmXSectEditor_Toolbars_Dock_Area_Right.DockedPosition = Infragistics.Win.UltraWinToolbars.DockedPosition.Right;
-          this._frmXSectEditor_Toolbars_Dock_Area_Right.ForeColor = System.Drawing.SystemColors.ControlText;
-          this._frmXSectEditor_Toolbars_Dock_Area_Right.InitialResizeAreaExtent = 4;
-          this._frmXSectEditor_Toolbars_Dock_Area_Right.Location = new System.Drawing.Point(918, 176);
-          this._frmXSectEditor_Toolbars_Dock_Area_Right.Name = "_frmXSectEditor_Toolbars_Dock_Area_Right";
-          this._frmXSectEditor_Toolbars_Dock_Area_Right.Size = new System.Drawing.Size(4, 573);
-          this._frmXSectEditor_Toolbars_Dock_Area_Right.ToolbarsManager = this.ultraToolbarsManager1;
-          // 
-          // _frmXSectEditor_Toolbars_Dock_Area_Top
-          // 
-          this._frmXSectEditor_Toolbars_Dock_Area_Top.AccessibleRole = System.Windows.Forms.AccessibleRole.Grouping;
-          this._frmXSectEditor_Toolbars_Dock_Area_Top.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(219)))), ((int)(((byte)(255)))));
-          this._frmXSectEditor_Toolbars_Dock_Area_Top.DockedPosition = Infragistics.Win.UltraWinToolbars.DockedPosition.Top;
-          this._frmXSectEditor_Toolbars_Dock_Area_Top.ForeColor = System.Drawing.SystemColors.ControlText;
-          this._frmXSectEditor_Toolbars_Dock_Area_Top.Location = new System.Drawing.Point(0, 0);
-          this._frmXSectEditor_Toolbars_Dock_Area_Top.Name = "_frmXSectEditor_Toolbars_Dock_Area_Top";
-          this._frmXSectEditor_Toolbars_Dock_Area_Top.Size = new System.Drawing.Size(922, 176);
-          this._frmXSectEditor_Toolbars_Dock_Area_Top.ToolbarsManager = this.ultraToolbarsManager1;
-          // 
-          // _frmXSectEditor_Toolbars_Dock_Area_Bottom
-          // 
-          this._frmXSectEditor_Toolbars_Dock_Area_Bottom.AccessibleRole = System.Windows.Forms.AccessibleRole.Grouping;
-          this._frmXSectEditor_Toolbars_Dock_Area_Bottom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(219)))), ((int)(((byte)(255)))));
-          this._frmXSectEditor_Toolbars_Dock_Area_Bottom.DockedPosition = Infragistics.Win.UltraWinToolbars.DockedPosition.Bottom;
-          this._frmXSectEditor_Toolbars_Dock_Area_Bottom.ForeColor = System.Drawing.SystemColors.ControlText;
-          this._frmXSectEditor_Toolbars_Dock_Area_Bottom.InitialResizeAreaExtent = 4;
-          this._frmXSectEditor_Toolbars_Dock_Area_Bottom.Location = new System.Drawing.Point(0, 749);
-          this._frmXSectEditor_Toolbars_Dock_Area_Bottom.Name = "_frmXSectEditor_Toolbars_Dock_Area_Bottom";
-          this._frmXSectEditor_Toolbars_Dock_Area_Bottom.Size = new System.Drawing.Size(922, 4);
-          this._frmXSectEditor_Toolbars_Dock_Area_Bottom.ToolbarsManager = this.ultraToolbarsManager1;
-          // 
-          // bindingNavigatorToggleExport
-          // 
-          this.bindingNavigatorToggleExport.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-          this.bindingNavigatorToggleExport.Image = global::SystemsAnalysis.EMGAATS.CrossSectionEditor.Properties.Resources.CrossSectionEditorImage;
-          this.bindingNavigatorToggleExport.ImageTransparentColor = System.Drawing.Color.Magenta;
-          this.bindingNavigatorToggleExport.Name = "bindingNavigatorToggleExport";
-          this.bindingNavigatorToggleExport.Size = new System.Drawing.Size(23, 22);
-          this.bindingNavigatorToggleExport.Text = "Toggle Ready for Export";
-          this.bindingNavigatorToggleExport.ToolTipText = "Toggle Ready for Export";
-          this.bindingNavigatorToggleExport.Click += new System.EventHandler(this.bindingNavigatorToggleExport_Click);
           // 
           // ultraToolbarsManager1
           // 
@@ -1186,6 +1151,41 @@
             buttonTool20});
           this.ultraToolbarsManager1.UseLargeImagesOnMenu = true;
           this.ultraToolbarsManager1.ToolClick += new Infragistics.Win.UltraWinToolbars.ToolClickEventHandler(this.ultraToolbarsManager1_ToolClick);
+          // 
+          // _frmXSectEditor_Toolbars_Dock_Area_Right
+          // 
+          this._frmXSectEditor_Toolbars_Dock_Area_Right.AccessibleRole = System.Windows.Forms.AccessibleRole.Grouping;
+          this._frmXSectEditor_Toolbars_Dock_Area_Right.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(219)))), ((int)(((byte)(255)))));
+          this._frmXSectEditor_Toolbars_Dock_Area_Right.DockedPosition = Infragistics.Win.UltraWinToolbars.DockedPosition.Right;
+          this._frmXSectEditor_Toolbars_Dock_Area_Right.ForeColor = System.Drawing.SystemColors.ControlText;
+          this._frmXSectEditor_Toolbars_Dock_Area_Right.InitialResizeAreaExtent = 4;
+          this._frmXSectEditor_Toolbars_Dock_Area_Right.Location = new System.Drawing.Point(918, 147);
+          this._frmXSectEditor_Toolbars_Dock_Area_Right.Name = "_frmXSectEditor_Toolbars_Dock_Area_Right";
+          this._frmXSectEditor_Toolbars_Dock_Area_Right.Size = new System.Drawing.Size(4, 602);
+          this._frmXSectEditor_Toolbars_Dock_Area_Right.ToolbarsManager = this.ultraToolbarsManager1;
+          // 
+          // _frmXSectEditor_Toolbars_Dock_Area_Top
+          // 
+          this._frmXSectEditor_Toolbars_Dock_Area_Top.AccessibleRole = System.Windows.Forms.AccessibleRole.Grouping;
+          this._frmXSectEditor_Toolbars_Dock_Area_Top.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(219)))), ((int)(((byte)(255)))));
+          this._frmXSectEditor_Toolbars_Dock_Area_Top.DockedPosition = Infragistics.Win.UltraWinToolbars.DockedPosition.Top;
+          this._frmXSectEditor_Toolbars_Dock_Area_Top.ForeColor = System.Drawing.SystemColors.ControlText;
+          this._frmXSectEditor_Toolbars_Dock_Area_Top.Location = new System.Drawing.Point(0, 0);
+          this._frmXSectEditor_Toolbars_Dock_Area_Top.Name = "_frmXSectEditor_Toolbars_Dock_Area_Top";
+          this._frmXSectEditor_Toolbars_Dock_Area_Top.Size = new System.Drawing.Size(922, 147);
+          this._frmXSectEditor_Toolbars_Dock_Area_Top.ToolbarsManager = this.ultraToolbarsManager1;
+          // 
+          // _frmXSectEditor_Toolbars_Dock_Area_Bottom
+          // 
+          this._frmXSectEditor_Toolbars_Dock_Area_Bottom.AccessibleRole = System.Windows.Forms.AccessibleRole.Grouping;
+          this._frmXSectEditor_Toolbars_Dock_Area_Bottom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(219)))), ((int)(((byte)(255)))));
+          this._frmXSectEditor_Toolbars_Dock_Area_Bottom.DockedPosition = Infragistics.Win.UltraWinToolbars.DockedPosition.Bottom;
+          this._frmXSectEditor_Toolbars_Dock_Area_Bottom.ForeColor = System.Drawing.SystemColors.ControlText;
+          this._frmXSectEditor_Toolbars_Dock_Area_Bottom.InitialResizeAreaExtent = 4;
+          this._frmXSectEditor_Toolbars_Dock_Area_Bottom.Location = new System.Drawing.Point(0, 749);
+          this._frmXSectEditor_Toolbars_Dock_Area_Bottom.Name = "_frmXSectEditor_Toolbars_Dock_Area_Bottom";
+          this._frmXSectEditor_Toolbars_Dock_Area_Bottom.Size = new System.Drawing.Size(922, 4);
+          this._frmXSectEditor_Toolbars_Dock_Area_Bottom.ToolbarsManager = this.ultraToolbarsManager1;
           // 
           // frmXSectEditor
           // 
