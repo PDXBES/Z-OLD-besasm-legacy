@@ -36,6 +36,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis
         string dynamicDomain = "";
         string dynamicServer = "";
         string dynamicDatabase = "";
+        string dynamicTableName = "";
         bool dynamicTrustedConnection = false;
 
         //variables for the archive server connection
@@ -1096,12 +1097,12 @@ namespace SystemsAnalysis.Grid.GridAnalysis
 
         void child_FormClosing3(object sender, FormClosingEventArgs e)
         {
-            userID = ((FormConnectionStringInterface)sender).UserID;
-            password = ((FormConnectionStringInterface)sender).Password;
-            database = ((FormConnectionStringInterface)sender).Database;
-            server = ((FormConnectionStringInterface)sender).Server;
-            domain = ((FormConnectionStringInterface)sender).Domain;
-            trustedConnection = ((FormConnectionStringInterface)sender).useTrustedConnection;
+            dynamicUserID = ((FormConnectionStringInterface)sender).UserID;
+            dynamicPassword = ((FormConnectionStringInterface)sender).Password;
+            dynamicDatabase = ((FormConnectionStringInterface)sender).Database;
+            dynamicServer = ((FormConnectionStringInterface)sender).Server;
+            dynamicDomain = ((FormConnectionStringInterface)sender).Domain;
+            dynamicTrustedConnection = ((FormConnectionStringInterface)sender).useTrustedConnection;
         }
 
         private void buttonPollutantLoadingConnectionStringEdit_Click(object sender, EventArgs e)
@@ -1115,6 +1116,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis
 
         private void buttonGridPathEdit_Click(object sender, EventArgs e)
         {
+            Object ScalarQueryResults = new Object();
             string serverIsUsable = "";
             string inputDatabase = "";
 
@@ -1139,6 +1141,9 @@ namespace SystemsAnalysis.Grid.GridAnalysis
             {
                 dynamicDomain = dynamicDomain + ".";
             }
+
+            ((DataRowView)feGridProjectsBindingSource.Current)["grid_path"] = inputDatabase;
+            feGridProjectsBindingSource.EndEdit();
                 
             //verify the connection works.  IF the connection does not work,
             //then notify the user that the connection does not work, but the
@@ -1158,89 +1163,193 @@ namespace SystemsAnalysis.Grid.GridAnalysis
 
             //make sure the table also has all of the appropriate columns
             //with all of the appropriate data types.
-            string columnSelectionString = "SELECT TOP 1 [MAPINFO_ID]" +
-              ",[Description]" +
-              ",[Col_Name]" +
-              ",[Row_Name]" +
-              ",[Area_ft2]" +
-              ",[Avg_Slope]" +
-              ",[Public]" +
-              ",[Private]" +
-              ",[VEG_LONcellCount]" +
-              ",[VEG_LOFFcellCount]" +
-              ",[CPY_LONcellCount]" +
-              ",[CPY_LOFFcellCount]" +
-              ",[ROW_CellCount]" +
-              ",[RF_CellCount]" +
-              ",[PKG_CellCount]" +
-              ",[IMP_CellCount]" +
-              ",[WAT_CellCount]" +
-              ",[TRA_LUcellCount]" +
-              ",[COM_LUcellCount]" +
-              ",[IND_LUcellCount]" +
-              ",[SFR_LUcellCount]" +
-              ",[MFR_LUcellCount]" +
-              ",[FOR_LUcellCount]" +
-              ",[AGR_LUcellCount]" +
-              ",[RUR_LUcellCount]" +
-              ",[VAC_LUcellCount]" +
-              ",[POS_LUcellCount]" +
-              ",[Blnk_LUcellCount]" +
-              ",[VEG_LON_pct]" +
-              ",[VEG_LOFF_pct]" +
-              ",[CPY_LON_pct]" +
-              ",[CPY_LOFF_pct]" +
-              ",[VEG_pct]" +
-              ",[ROW_pct]" +
-              ",[RF_pct]" +
-              ",[PKG_pct]" +
-              ",[IMP_pct]" +
-              ",[WAT_pct]" +
-              ",[CAL_point]" +
-              ",[WS_Code]" +
-              ",[BASIN_Code]" +
-              ",[BRANCH_ID]" +
-              ",[IN_PDX]" +
-              ",[RAINGAGE]" +
-              ",[COL_B]" +
-              ",[COL_C]" +
-              ",[COL_D]" +
-              ",[COL_E]" +
-              ",[COL_F]" +
-              ",[COL_G]" +
-              ",[COL_H]" +
-              ",[COL_I]" +
-              ",[COL_J]" +
-              ",[COL_K]" +
-              ",[COL_L]" +
-              ",[COL_M]" +
-              ",[COL_N]" +
-              ",[COL_O]" +
-              ",[COL_P]" +
-              ",[COL_Q]" +
-              ",[COL_1]" +
-              ",[COL_2]" +
-              ",[COL_3]" +
-              ",[TP]" +
-              ",[TSS]" +
-              ",[ECOLI]" +
-              ",[BOD]" +
-              ",[TP_WET]" +
-              ",[TSS_WET]" +
-              ",[ECOLI_WET]" +
-              ",[BOD_WET]" +
-              ",[TP_DRY]" +
-              ",[TSS_DRY]" +
-              ",[ECOLI_DRY]" +
-              ",[BOD_DRY]" +
-              ",[PbD]" +
-              ",[PbD_DRY]" +
-              ",[PbD_WET]" +
-              ",[ECOLI_REMOVAL]" +
-              ",[Xc]" +
-              ",[Yc]" +
-              ",[SSMA_TimeStamp]" +
-              "FROM [GRIDMODEL].[dbo].[GRID_WshdGrd100FtOpt]";
+            //there must be 81 matches
+            string columnSelectionString = "SELECT COUNT(*) FROM  " +
+               "(SELECT * FROM information_schema.columns  "  +
+               "WHERE   " +
+                "((column_name = 'MAPINFO_ID' " +
+                " AND data_type = 'int') " +
+                " OR ( column_name = 'Description' " +
+                " AND data_type = 'nvarchar') " +
+                " OR ( column_name = 'Col_Name' " +
+                " AND data_type = 'nvarchar') " +
+                " OR ( column_name = 'Row_Name' " +
+                " AND data_type = 'nvarchar') " +
+                " OR ( column_name = 'Area_ft2' " +
+                " AND data_type = 'float') " +
+                " OR ( column_name = 'Avg_Slope' " +
+                " AND data_type = 'float') " +
+                " OR ( column_name = 'Public' " +
+                " AND data_type = 'nvarchar') " +
+                " OR ( column_name = 'Private' " +
+                " AND data_type = 'nvarchar') " +
+                " OR ( column_name = 'VEG_LONcellCount' " +
+                " AND data_type = 'int') " +
+                " OR ( column_name = 'VEG_LOFFcellCount' " +
+                " AND data_type = 'int') " +
+                " OR ( column_name = 'CPY_LONcellCount' " +
+                 " AND data_type = 'int')                " +
+                 " OR ( column_name = 'CPY_LOFFcellCount' " +
+                 " AND data_type = 'int')                " +
+                 " OR ( column_name = 'ROW_CellCount' " +
+                 " AND data_type = 'int')                " +
+                 " OR ( column_name = 'RF_CellCount' " +
+                 " AND data_type = 'int')                " +
+                 " OR ( column_name = 'PKG_CellCount' " +
+                 " AND data_type = 'int')                " +
+                 " OR ( column_name = 'IMP_CellCount' " +
+                 " AND data_type = 'int')                " +
+                 " OR ( column_name = 'WAT_CellCount' " +
+                 " AND data_type = 'int')                " +
+                 " OR ( column_name = 'TRA_LUcellCount' " +
+                 " AND data_type = 'int')                " +
+                 " OR ( column_name = 'COM_LUcellCount' " +
+                 " AND data_type = 'int')                " +
+                 " OR ( column_name = 'IND_LUcellCount' " +
+                 " AND data_type = 'int')                " +
+                 " OR ( column_name = 'SFR_LUcellCount' " +
+                 " AND data_type = 'int')                " +
+                 " OR ( column_name = 'MFR_LUcellCount' " +
+                 " AND data_type = 'int')                " +
+                 " OR ( column_name = 'FOR_LUcellCount' " +
+                 " AND data_type = 'int')                " +
+                 " OR ( column_name = 'AGR_LUcellCount' " +
+                 " AND data_type = 'int')                " +
+                 " OR ( column_name = 'RUR_LUcellCount' " +
+                 " AND data_type = 'int')                " +
+                 " OR ( column_name = 'VAC_LUcellCount' " +
+                 " AND data_type = 'int')                " +
+                 " OR ( column_name = 'POS_LUcellCount' " +
+                 " AND data_type = 'int')                " +
+                 " OR ( column_name = 'Blnk_LUcellCount' " +
+                 " AND data_type = 'int')                " +
+                 " OR ( column_name = 'VEG_LON_pct' " +
+                 " AND data_type = 'float')                " +
+                 " OR ( column_name = 'VEG_LOFF_pct' " +
+                 " AND data_type = 'float')                " +
+                 " OR ( column_name = 'CPY_LON_pct' " +
+                 " AND data_type = 'float')                " +
+                 " OR ( column_name = 'CPY_LOFF_pct' " +
+                 " AND data_type = 'float')                " +
+                 " OR ( column_name = 'VEG_pct' " +
+                 " AND data_type = 'float')                " +
+                 " OR ( column_name = 'ROW_pct' " +
+                 " AND data_type = 'float')                " +
+                 " OR ( column_name = 'RF_pct' " +
+                 " AND data_type = 'float')                " +
+                 " OR ( column_name = 'PKG_pct' " +
+                 " AND data_type = 'float')                " +
+                 " OR ( column_name = 'IMP_pct' " +
+                 " AND data_type = 'float')                " +
+                 " OR ( column_name = 'TSS' " +
+                 " AND data_type = 'float')               " +
+                 " OR ( column_name = 'WAT_pct' " +
+                 " AND data_type = 'float')                " +
+                 " OR ( column_name = 'CAL_point' " +
+                 " AND data_type = 'int')                " +
+                 " OR ( column_name = 'WS_Code'  " +
+                 " AND data_type = 'int')                " +
+                 " OR ( column_name = 'BASIN_Code' " +
+                 " AND data_type = 'nvarchar')                " +
+                 " OR ( column_name = 'BRANCH_ID' " +
+                 " AND data_type = 'nvarchar')                " +
+                 " OR ( column_name = 'IN_PDX' " +
+                 " AND data_type = 'int')                " +
+                 " OR ( column_name = 'RAINGAGE' " +
+                 " AND data_type = 'nvarchar')                " +
+                 " OR ( column_name = 'COL_B' " +
+                 " AND data_type = 'float')                " +
+                 " OR ( column_name = 'COL_C' " +
+                 " AND data_type = 'float')                " +
+                 " OR ( column_name = 'COL_D' " +
+                 " AND data_type = 'float')                " +
+                 " OR ( column_name = 'COL_E' "  +
+                 " AND data_type = 'float')                " +
+                 " OR ( column_name = 'COL_F' "  +
+                 " AND data_type = 'float')                " +
+                 " OR ( column_name = 'COL_G' "  +
+                 " AND data_type = 'float')                " +
+                 " OR ( column_name = 'COL_H' "  +
+                 " AND data_type = 'float')                " +
+                 " OR ( column_name = 'COL_I' "  +
+                 " AND data_type = 'float')                " +
+                 " OR ( column_name = 'COL_J' "  +
+                 " AND data_type = 'float')                " +
+                 " OR ( column_name = 'COL_K' "  +
+                 " AND data_type = 'float')                " +
+                 " OR ( column_name = 'COL_L' "  +
+                 " AND data_type = 'float')                " +
+                 " OR ( column_name = 'COL_M' "  +
+                 " AND data_type = 'float')                " +
+                 " OR ( column_name = 'COL_N' "  +
+                 " AND data_type = 'float')                " +
+                 " OR ( column_name = 'COL_O' "  +
+                 " AND data_type = 'float')                " +
+                 " OR ( column_name = 'COL_P' "  +
+                 " AND data_type = 'float')                " +
+                 " OR ( column_name = 'COL_Q' "  +
+                 " AND data_type = 'float')                " +
+                 " OR ( column_name = 'COL_1' "  +
+                 " AND data_type = 'float')                " +
+                 " OR ( column_name = 'COL_2' "  +
+                 " AND data_type = 'float')                " +
+                 " OR ( column_name = 'COL_3' "  +
+                 " AND data_type = 'float')                "  +
+                 " OR ( column_name = 'TP' " +
+                 " AND data_type = 'float')                " +
+                 " OR ( column_name = 'TSS' "  +
+                 " AND data_type = 'float')               " +
+                 " OR ( column_name = 'TSS' "  +
+                 " AND data_type = 'float')                " +
+                 " OR ( column_name = 'ECOLI' "  +
+                 " AND data_type = 'float')                " +
+                 " OR ( column_name = 'BOD' "  +
+                 " AND data_type = 'float')                " +
+                 " OR ( column_name = 'TP_WET' "  +
+                 " AND data_type = 'float')                " +
+                 " OR ( column_name = 'TSS_WET' "  +
+                 " AND data_type = 'float')                " +
+                 " OR ( column_name = 'ECOLI_WET' "  +
+                 " AND data_type = 'float')                " +
+                 " OR ( column_name = 'BOD_WET' "  +
+                 " AND data_type = 'float')                " +
+                 " OR ( column_name = 'TP_DRY' "  +
+                 " AND data_type = 'float')                " +
+                 " OR ( column_name = 'TSS_DRY' "  +
+                 " AND data_type = 'float')                " +
+                 " OR ( column_name = 'ECOLI_DRY' "  +
+                 " AND data_type = 'float')                " +
+                 " OR ( column_name = 'BOD_DRY' "  +
+                 " AND data_type = 'float')                " +
+                 " OR ( column_name = 'PbD' "  +
+                 " AND data_type = 'float')                " +
+                 " OR ( column_name = 'PbD_DRY' "  +
+                 " AND data_type = 'float')                " +
+                 " OR ( column_name = 'PbD_WET' "  +
+                 " AND data_type = 'float')                " +
+                 " OR ( column_name = 'ECOLI_REMOVAL' "  +
+                 " AND data_type = 'float')                " +
+                 " OR ( column_name = 'Xc' "  +
+                 " AND data_type = 'float')                " +
+                 " OR ( column_name = 'Yc' "  +
+                 " AND data_type = 'float'))   " +
+               " AND table_name =  'GRID_WshdGrd100FtOpt') AS A";
+
+            ScalarQueryResults = SQLHelper.SQLExecuteStringAsScalarQuery(columnSelectionString, inputDatabase, ScalarQueryResults);
+            //if ScalarQueryResults is not null, then we have a good answer
+            if (ScalarQueryResults == null)
+            {
+                MessageBox.Show("Could not test provided table for validity, please verify the source before trying to run the Grid Model");
+            }
+            else if ((int)ScalarQueryResults != 81)
+            {
+                MessageBox.Show("The table you indicated does not contain the necessary columns, please check the documentation for guidelines on creating a Grid Table");
+            }
+            else
+            {
+                MessageBox.Show(((int)ScalarQueryResults).ToString());
+            }
+            
         }
     }
 }
