@@ -300,6 +300,27 @@ namespace SystemsAnalysis.Utils.SQLHelper
             return;
         }
 
+        public static object SQLExecuteStringAsScalarQuery(string theQueryString, string SQLDB, object theDataToReturn)
+        {
+            SqlConnection thisSQLDB = new SqlConnection(SQLDB);
+            
+            try
+            {
+                thisSQLDB.Open();
+                string TheSQLToExecute = theQueryString;
+                SqlCommand cmd = new SqlCommand(theQueryString, thisSQLDB);
+                cmd.CommandTimeout = 0;
+                theDataToReturn = cmd.ExecuteScalar();
+            }
+            catch (SqlException ae)
+            {
+                //Could not execute the string
+                theDataToReturn = null;
+            }
+            thisSQLDB.Close();
+            return theDataToReturn;
+        }
+
         public static void SQLCreatePROCEDURE(string queryName, string queryText, string SQLDB)
         {
             SQLDeletePROCEDURE(queryName, SQLDB);
