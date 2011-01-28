@@ -708,6 +708,7 @@
             this.buttonBMPEffectivenessConnectionStringEdit.TabIndex = 60;
             this.buttonBMPEffectivenessConnectionStringEdit.Text = "Edit";
             this.buttonBMPEffectivenessConnectionStringEdit.UseVisualStyleBackColor = true;
+            this.buttonBMPEffectivenessConnectionStringEdit.Click += new System.EventHandler(this.buttonBMPEffectivenessConnectionStringEdit_Click);
             // 
             // buttonPollutantLoadingTableLocate
             // 
@@ -1895,6 +1896,7 @@
             this.buttonOSFPathEdit.TabIndex = 71;
             this.buttonOSFPathEdit.Text = "Edit";
             this.buttonOSFPathEdit.UseVisualStyleBackColor = true;
+            this.buttonOSFPathEdit.Click += new System.EventHandler(this.buttonOSFPathEdit_Click);
             // 
             // buttonMIPPathEdit
             // 
@@ -1904,6 +1906,7 @@
             this.buttonMIPPathEdit.TabIndex = 70;
             this.buttonMIPPathEdit.Text = "Edit";
             this.buttonMIPPathEdit.UseVisualStyleBackColor = true;
+            this.buttonMIPPathEdit.Click += new System.EventHandler(this.buttonMIPPathEdit_Click);
             // 
             // buttonPRFPathEdit
             // 
@@ -1913,6 +1916,7 @@
             this.buttonPRFPathEdit.TabIndex = 69;
             this.buttonPRFPathEdit.Text = "Edit";
             this.buttonPRFPathEdit.UseVisualStyleBackColor = true;
+            this.buttonPRFPathEdit.Click += new System.EventHandler(this.buttonPRFPathEdit_Click);
             // 
             // buttonGridPathEdit
             // 
