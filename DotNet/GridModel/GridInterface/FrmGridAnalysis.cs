@@ -37,6 +37,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis
         string dynamicServer = "";
         string dynamicDatabase = "";
         string dynamicTableName = "";
+        string dynamicInputDatabase = "";
         bool dynamicTrustedConnection = false;
 
         //variables for the archive server connection
@@ -1107,42 +1108,156 @@ namespace SystemsAnalysis.Grid.GridAnalysis
 
         private void buttonPollutantLoadingConnectionStringEdit_Click(object sender, EventArgs e)
         {
-            //we can't trust the user to simply type in a connection string and expect 
-            //it to work, the average person has no idea how to build or debug such a thing.
-            //So, we need to give the user a dialog box where they can search for and select
-            //the server, database, and table that they intend to use.
+            Object ScalarQueryResults = new Object();
+            string serverIsUsable = "";
+            dynamicInputDatabase = "";
 
+            getConnectionStringFromUser((string)(((DataRowView)feScenariosBindingSource.Current)["pollutant_loading_db"]));
+
+            ((DataRowView)feScenariosBindingSource.Current)["pollutant_loading_db"] = dynamicInputDatabase;
+            feScenariosBindingSource.EndEdit();
+
+            //The grid path should connect to a table named GRID_pollutant_loadings
+            //later on the table name should be allowed to be user defined
+            serverIsUsable = SQLHelper.SQLTestDatabase(dynamicInputDatabase, dynamicDomain + "GRID_pollutant_loadings");
+
+            if (serverIsUsable != "")
+            {
+                MessageBox.Show("The connections you have selected are not acceptable to use for the GRIDMODEL");
+                MessageBox.Show(serverIsUsable);
+            }
+
+            //make sure the table also has all of the appropriate columns
+            //with all of the appropriate data types.
+            string columnSelectionString = "SELECT COUNT(*) FROM  " +
+               "(SELECT * FROM information_schema.columns  " +
+               "WHERE   " +
+                "((column_name = 'LU_CODE' " +
+                " AND data_type = 'nvarchar') " +
+                " OR (column_name = 'Landuse' " +
+                " AND data_type = 'nvarchar') " +
+                " OR (column_name = 'Constituent' " +
+                " AND data_type = 'float') " +
+                " OR (column_name = 'VALUE_LOW' " +
+                " AND data_type = 'float') " +
+                " OR (column_name = 'UNITS' " +
+                " AND data_type = 'nvarchar') " +
+                " OR (column_name = 'Source' " +
+                " AND data_type = 'nvarchar') " +
+                " OR (column_name = 'VALUE_HIGH' " +
+                " AND data_type = 'float') " +
+                " OR (column_name = 'VALUE' " +
+                " AND data_type = 'float') " +
+                " AND table_name =  'GRID_pollutant_loadings') AS A";
+
+            ScalarQueryResults = SQLHelper.SQLExecuteStringAsScalarQuery(columnSelectionString, dynamicInputDatabase, ScalarQueryResults);
+            //if ScalarQueryResults is not null, then we have a good answer
+            if (ScalarQueryResults == null)
+            {
+                MessageBox.Show("Could not test provided table for validity, please verify the source before trying to run the Grid Model");
+            }
+            else if ((int)ScalarQueryResults != 4)
+            {
+                MessageBox.Show("The table you indicated does not contain the necessary columns, please check the documentation for guidelines on creating a pollutant loading Table");
+            }
+            else
+            {
+                MessageBox.Show(((int)ScalarQueryResults).ToString());
+            }
         }
 
-        private void buttonGridPathEdit_Click(object sender, EventArgs e)
+        private void buttonBMPEffectivenessConnectionStringEdit_Click(object sender, EventArgs e)
         {
             Object ScalarQueryResults = new Object();
             string serverIsUsable = "";
-            string inputDatabase = "";
+            dynamicInputDatabase = "";
 
-            FormConnectionStringInterface child = new FormConnectionStringInterface((string)txtGridPath.Value);
+            getConnectionStringFromUser((string)(((DataRowView)feScenariosBindingSource.Current)["bmp_effectiveness_db"]));
+
+            ((DataRowView)feScenariosBindingSource.Current)["bmp_effectiveness_db"] = dynamicInputDatabase;
+            feScenariosBindingSource.EndEdit();
+
+            //The grid path should connect to a table named GRID_pollutant_loadings
+            //later on the table name should be allowed to be user defined
+            serverIsUsable = SQLHelper.SQLTestDatabase(dynamicInputDatabase, dynamicDomain + "GRID_BMP_PERFORMANCE");
+
+            if (serverIsUsable != "")
+            {
+                MessageBox.Show("The connections you have selected are not acceptable to use for the GRIDMODEL");
+                MessageBox.Show(serverIsUsable);
+            }
+
+            //make sure the table also has all of the appropriate columns
+            //with all of the appropriate data types.
+            string columnSelectionString = "SELECT COUNT(*) FROM  " +
+               "(SELECT * FROM information_schema.columns  " +
+               "WHERE   " +
+                "((column_name = 'BMP_TYPE_GEN_ID' " +
+                " AND data_type = 'int') " +
+                " OR (column_name = 'Constituent' " +
+                " AND data_type = 'int') " +
+                " OR (column_name = 'VALUE_LOW' " +
+                " AND data_type = 'float') " +
+                " OR (column_name = 'UNITS' " +
+                " AND data_type = 'nvarchar') " +
+                " OR (column_name = 'Source' " +
+                " AND data_type = 'nvarchar') " +
+                " OR (column_name = 'VALUE_HIGH' " +
+                " AND data_type = 'float') " +
+                " OR (column_name = 'VALUE' " +
+                " AND data_type = 'float') " +
+                " AND table_name =  'GRID_BMP_PERFORMANCE') AS A";
+
+            ScalarQueryResults = SQLHelper.SQLExecuteStringAsScalarQuery(columnSelectionString, dynamicInputDatabase, ScalarQueryResults);
+            //if ScalarQueryResults is not null, then we have a good answer
+            if (ScalarQueryResults == null)
+            {
+                MessageBox.Show("Could not test provided table for validity, please verify the source before trying to run the Grid Model");
+            }
+            else if ((int)ScalarQueryResults != 4)
+            {
+                MessageBox.Show("The table you indicated does not contain the necessary columns, please check the documentation for guidelines on creating a pollutant loading Table");
+            }
+            else
+            {
+                MessageBox.Show(((int)ScalarQueryResults).ToString());
+            }
+        }
+
+        private void getConnectionStringFromUser(string currentConnectionString)
+        {
+            FormConnectionStringInterface child = new FormConnectionStringInterface(currentConnectionString);
             child.FormClosing += new FormClosingEventHandler(child_FormClosing3);
 
             this.Enabled = false;
             child.ShowDialog();
             this.Enabled = true;
 
-            inputDatabase = "Server=" + dynamicServer + ";Database=" + dynamicDatabase;
+            dynamicInputDatabase = "Server=" + dynamicServer + ";Database=" + dynamicDatabase;
             if (dynamicTrustedConnection == true)
             {
-                inputDatabase += ";Trusted_Connection=yes;";
+                dynamicInputDatabase += ";Trusted_Connection=yes;";
             }
             else
             {
-                inputDatabase += ";Persist Security Info=True;User ID=" + dynamicUserID + ";Password=" + dynamicPassword;
+                dynamicInputDatabase += ";Persist Security Info=True;User ID=" + dynamicUserID + ";Password=" + dynamicPassword;
             }
 
             if (dynamicDomain != "")
             {
                 dynamicDomain = dynamicDomain + ".";
             }
+        }
 
-            ((DataRowView)feGridProjectsBindingSource.Current)["grid_path"] = inputDatabase;
+        private void buttonGridPathEdit_Click(object sender, EventArgs e)
+        {
+            Object ScalarQueryResults = new Object();
+            string serverIsUsable = "";
+            dynamicInputDatabase = "";
+
+            getConnectionStringFromUser((string)(((DataRowView)feGridProjectsBindingSource.Current)["grid_path"]));
+
+            ((DataRowView)feGridProjectsBindingSource.Current)["grid_path"] = dynamicInputDatabase;
             feGridProjectsBindingSource.EndEdit();
                 
             //verify the connection works.  IF the connection does not work,
@@ -1153,7 +1268,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis
 
             //The grid path should connect to a table named GRID_WshdGrd100FtOpt
             //later on the table name should be allowed to be user defined
-            serverIsUsable = SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_WshdGrd100FtOpt");
+            serverIsUsable = SQLHelper.SQLTestDatabase(dynamicInputDatabase, dynamicDomain + "GRID_WshdGrd100FtOpt");
 
             if (serverIsUsable != "")
             {
@@ -1163,7 +1278,9 @@ namespace SystemsAnalysis.Grid.GridAnalysis
 
             //make sure the table also has all of the appropriate columns
             //with all of the appropriate data types.
-            //there must be 81 matches
+            //there must be 81 matches (there is no chance there could be more than 81
+            //matches even if there are more than 81 columns in the input table,
+            //and less than 81 matches means the input table isn't ready.)
             string columnSelectionString = "SELECT COUNT(*) FROM  " +
                "(SELECT * FROM information_schema.columns  "  +
                "WHERE   " +
@@ -1335,7 +1452,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis
                  " AND data_type = 'float'))   " +
                " AND table_name =  'GRID_WshdGrd100FtOpt') AS A";
 
-            ScalarQueryResults = SQLHelper.SQLExecuteStringAsScalarQuery(columnSelectionString, inputDatabase, ScalarQueryResults);
+            ScalarQueryResults = SQLHelper.SQLExecuteStringAsScalarQuery(columnSelectionString, dynamicInputDatabase, ScalarQueryResults);
             //if ScalarQueryResults is not null, then we have a good answer
             if (ScalarQueryResults == null)
             {
@@ -1351,5 +1468,164 @@ namespace SystemsAnalysis.Grid.GridAnalysis
             }
             
         }
+
+        private void buttonPRFPathEdit_Click(object sender, EventArgs e)
+        {
+            Object ScalarQueryResults = new Object();
+            string serverIsUsable = "";
+            dynamicInputDatabase = "";
+
+            getConnectionStringFromUser((string)(((DataRowView)feGridProjectsBindingSource.Current)["bmp_path"]));
+
+            ((DataRowView)feGridProjectsBindingSource.Current)["bmp_path"] = dynamicInputDatabase;
+            feGridProjectsBindingSource.EndEdit();
+
+            serverIsUsable = SQLHelper.SQLTestDatabase(dynamicInputDatabase, dynamicDomain + "GRID_PDX_BMP_GRID");
+
+            if (serverIsUsable != "")
+            {
+                MessageBox.Show("The connections you have selected are not acceptable to use for the GRIDMODEL");
+                MessageBox.Show(serverIsUsable);
+            }
+
+            //make sure the table also has all of the appropriate columns
+            //with all of the appropriate data types.
+            string columnSelectionString = "SELECT COUNT(*) FROM  " +
+               "(SELECT * FROM information_schema.columns  "  +
+               "WHERE   " +
+                "((column_name = 'MAPINFO_ID' " +
+                " AND data_type = 'int') " +
+                " OR (column_name = 'Description' " +
+                " AND data_type = 'nvarchar') " +
+                " OR (column_name = 'Percent_Overlap' " +
+                " AND data_type = 'float') " +
+                " OR (column_name = 'INSTREAM' " +
+                " AND data_type = 'bit') " +
+                " OR (column_name = 'BMP_ID' " +
+                " AND data_type = 'int') " +
+                " OR (column_name = 'BMP_Type1' " +
+                " AND data_type = 'nvarchar') " +
+                " OR (column_name = 'TimeFrame' " +
+                " AND data_type = 'nvarchar')) " +
+                " AND table_name =  'GRID_PDX_BMP_GRID') AS A";
+
+            ScalarQueryResults = SQLHelper.SQLExecuteStringAsScalarQuery(columnSelectionString, dynamicInputDatabase, ScalarQueryResults);
+            //if ScalarQueryResults is not null, then we have a good answer
+            if (ScalarQueryResults == null)
+            {
+                MessageBox.Show("Could not test provided table for validity, please verify the source before trying to run the Grid Model");
+            }
+            else if ((int)ScalarQueryResults != 7)
+            {
+                MessageBox.Show("The table you indicated does not contain the necessary columns, please check the documentation for guidelines on creating a BMP Table");
+            }
+            else
+            {
+                MessageBox.Show(((int)ScalarQueryResults).ToString());
+            }
+        }
+
+        private void buttonMIPPathEdit_Click(object sender, EventArgs e)
+        {
+            Object ScalarQueryResults = new Object();
+            string serverIsUsable = "";
+            dynamicInputDatabase = "";
+
+            getConnectionStringFromUser((string)(((DataRowView)feGridProjectsBindingSource.Current)["mip_path"]));
+
+            ((DataRowView)feGridProjectsBindingSource.Current)["mip_path"] = dynamicInputDatabase;
+            feGridProjectsBindingSource.EndEdit();
+
+            serverIsUsable = SQLHelper.SQLTestDatabase(dynamicInputDatabase, dynamicDomain + "GRID_PDX_MIP_GRID");
+
+            if (serverIsUsable != "")
+            {
+                MessageBox.Show("The connections you have selected are not acceptable to use for the GRIDMODEL");
+                MessageBox.Show(serverIsUsable);
+            }
+
+            //make sure the table also has all of the appropriate columns
+            //with all of the appropriate data types.
+            string columnSelectionString = "SELECT COUNT(*) FROM  " +
+               "(SELECT * FROM information_schema.columns  " +
+               "WHERE   " +
+                "((column_name = 'MAPINFO_ID' " +
+                " AND data_type = 'int') " +
+                " OR (column_name = 'Description' " +
+                " AND data_type = 'nvarchar') " +
+                " OR (column_name = 'Percent_Overlap' " +
+                " AND data_type = 'float') " +
+                " OR (column_name = 'BMP_Type' " +
+                " AND data_type = 'nvarchar') " +
+                " OR (column_name = 'Description_2' " +
+                " AND data_type = 'nvarchar')) " +
+                " AND table_name =  'GRID_PDX_MIP_GRID') AS A";
+
+            ScalarQueryResults = SQLHelper.SQLExecuteStringAsScalarQuery(columnSelectionString, dynamicInputDatabase, ScalarQueryResults);
+            //if ScalarQueryResults is not null, then we have a good answer
+            if (ScalarQueryResults == null)
+            {
+                MessageBox.Show("Could not test provided table for validity, please verify the source before trying to run the Grid Model");
+            }
+            else if ((int)ScalarQueryResults != 5)
+            {
+                MessageBox.Show("The table you indicated does not contain the necessary columns, please check the documentation for guidelines on creating a MIP Table");
+            }
+            else
+            {
+                MessageBox.Show(((int)ScalarQueryResults).ToString());
+            }
+        }
+
+        private void buttonOSFPathEdit_Click(object sender, EventArgs e)
+        {
+            Object ScalarQueryResults = new Object();
+            string serverIsUsable = "";
+            dynamicInputDatabase = "";
+
+            getConnectionStringFromUser((string)(((DataRowView)feGridProjectsBindingSource.Current)["osf_path"]));
+
+            ((DataRowView)feGridProjectsBindingSource.Current)["osf_path"] = dynamicInputDatabase;
+            feGridProjectsBindingSource.EndEdit();
+
+            serverIsUsable = SQLHelper.SQLTestDatabase(dynamicInputDatabase, dynamicDomain + "GRID_PDX_OSF_GRID");
+
+            if (serverIsUsable != "")
+            {
+                MessageBox.Show("The connections you have selected are not acceptable to use for the GRIDMODEL");
+                MessageBox.Show(serverIsUsable);
+            }
+            //make sure the table also has all of the appropriate columns
+            //with all of the appropriate data types.
+            string columnSelectionString = "SELECT COUNT(*) FROM  " +
+               "(SELECT * FROM information_schema.columns  " +
+               "WHERE   " +
+                "((column_name = 'MAPINFO_ID' " +
+                " AND data_type = 'int') " +
+                " OR (column_name = 'Description' " +
+                " AND data_type = 'nvarchar') " +
+                " OR (column_name = 'Percent_Overlap' " +
+                " AND data_type = 'float') " +
+                " OR (column_name = 'FAC_GRP' " +
+                " AND data_type = 'nvarchar') " +
+                " AND table_name =  'GRID_PDX_OSF_GRID') AS A";
+
+            ScalarQueryResults = SQLHelper.SQLExecuteStringAsScalarQuery(columnSelectionString, dynamicInputDatabase, ScalarQueryResults);
+            //if ScalarQueryResults is not null, then we have a good answer
+            if (ScalarQueryResults == null)
+            {
+                MessageBox.Show("Could not test provided table for validity, please verify the source before trying to run the Grid Model");
+            }
+            else if ((int)ScalarQueryResults != 4)
+            {
+                MessageBox.Show("The table you indicated does not contain the necessary columns, please check the documentation for guidelines on creating a OSF Table");
+            }
+            else
+            {
+                MessageBox.Show(((int)ScalarQueryResults).ToString());
+            }
+        }
+
+        
     }
 }
