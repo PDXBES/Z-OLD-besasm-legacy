@@ -40,24 +40,24 @@
           System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmXSectEditor));
           Infragistics.Win.Appearance appearance40 = new Infragistics.Win.Appearance();
           Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand1 = new Infragistics.Win.UltraWinGrid.UltraGridBand("XSects", -1);
-          Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn1 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("XSectName");
-          Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn2 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Station");
-          Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn3 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("LongName");
-          Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn4 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Description");
-          Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn5 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("MainChannelRoughness");
-          Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn6 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("LeftOverbankRoughness");
-          Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn7 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("RightOverbankRoughness");
-          Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn8 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("LeftOverbankStation");
-          Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn9 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("RightOverbankStation");
-          Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn10 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("LeftOverbankLengthFactor");
-          Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn11 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("RightOverbankLengthFactor");
-          Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn12 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ReadyForExport");
-          Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn13 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_XSects_PointList");
+          Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn35 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("XSectName");
+          Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn36 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Station");
+          Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn37 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("LongName");
+          Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn38 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Description");
+          Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn39 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("MainChannelRoughness");
+          Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn40 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("LeftOverbankRoughness");
+          Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn41 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("RightOverbankRoughness");
+          Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn42 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("LeftOverbankStation");
+          Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn43 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("RightOverbankStation");
+          Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn44 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("LeftOverbankLengthFactor");
+          Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn45 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("RightOverbankLengthFactor");
+          Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn46 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("ReadyForExport");
+          Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn47 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("FK_XSects_PointList");
           Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand2 = new Infragistics.Win.UltraWinGrid.UltraGridBand("FK_XSects_PointList", 0);
-          Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn14 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("XSectName");
-          Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn15 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Station");
-          Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn16 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Elevation");
-          Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn17 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("PointListID");
+          Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn48 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("XSectName");
+          Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn49 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Station");
+          Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn50 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Elevation");
+          Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn51 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("PointListID");
           Infragistics.Win.Appearance appearance41 = new Infragistics.Win.Appearance();
           Infragistics.Win.Appearance appearance42 = new Infragistics.Win.Appearance();
           Infragistics.Win.Appearance appearance43 = new Infragistics.Win.Appearance();
@@ -118,11 +118,14 @@
           Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool7 = new Infragistics.Win.UltraWinToolbars.ButtonTool("btnSaveProcessedData");
           Infragistics.Win.UltraWinToolbars.RibbonGroup ribbonGroup3 = new Infragistics.Win.UltraWinToolbars.RibbonGroup("ribbonGroup3");
           Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool5 = new Infragistics.Win.UltraWinToolbars.ButtonTool("btnSendToMaster");
+          Infragistics.Win.UltraWinToolbars.RibbonGroup ribbonGroup4 = new Infragistics.Win.UltraWinToolbars.RibbonGroup("Utilities");
+          Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool1 = new Infragistics.Win.UltraWinToolbars.ButtonTool("btnExportCSV");
           Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool2 = new Infragistics.Win.UltraWinToolbars.ButtonTool("btnSaveProcessedData");
           Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool3 = new Infragistics.Win.UltraWinToolbars.ButtonTool("btnSendToMaster");
           Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool6 = new Infragistics.Win.UltraWinToolbars.ButtonTool("btnLoadProcessedData");
           Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool12 = new Infragistics.Win.UltraWinToolbars.ButtonTool("btnLoadRawXSect");
           Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool20 = new Infragistics.Win.UltraWinToolbars.ButtonTool("btnExit");
+          Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool4 = new Infragistics.Win.UltraWinToolbars.ButtonTool("btnExportCSV");
           this.printForm1 = new Microsoft.VisualBasic.PowerPacks.Printing.PrintForm(this.components);
           this.optStationOrder = new Infragistics.Win.UltraWinEditors.UltraOptionSet();
           this.lblStationOrder = new Infragistics.Win.Misc.UltraLabel();
@@ -162,11 +165,11 @@
           this.lblRightRoughness = new Infragistics.Win.Misc.UltraLabel();
           this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
           this._frmXSectEditor_Toolbars_Dock_Area_Left = new Infragistics.Win.UltraWinToolbars.UltraToolbarsDockArea();
-          this.ultraToolbarsManager1 = new Infragistics.Win.UltraWinToolbars.UltraToolbarsManager(this.components);
           this._frmXSectEditor_Toolbars_Dock_Area_Right = new Infragistics.Win.UltraWinToolbars.UltraToolbarsDockArea();
           this._frmXSectEditor_Toolbars_Dock_Area_Top = new Infragistics.Win.UltraWinToolbars.UltraToolbarsDockArea();
           this._frmXSectEditor_Toolbars_Dock_Area_Bottom = new Infragistics.Win.UltraWinToolbars.UltraToolbarsDockArea();
           this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+          this.ultraToolbarsManager1 = new Infragistics.Win.UltraWinToolbars.UltraToolbarsManager(this.components);
           ((System.ComponentModel.ISupportInitialize)(this.optStationOrder)).BeginInit();
           this.frmXSectEditor_Fill_Panel.ClientArea.SuspendLayout();
           this.frmXSectEditor_Fill_Panel.SuspendLayout();
@@ -221,7 +224,7 @@
           this.optStationOrder.Name = "optStationOrder";
           this.ultraGridBagLayoutPanel1.SetPreferredSize(this.optStationOrder, new System.Drawing.Size(180, 20));
           this.optStationOrder.Size = new System.Drawing.Size(180, 31);
-          this.optStationOrder.TabIndex = 1;
+          this.optStationOrder.TabIndex = 11;
           this.optStationOrder.Text = "Left-to-Right";
           this.optStationOrder.ValueChanged += new System.EventHandler(this.optStationOrder_ValueChanged);
           // 
@@ -343,7 +346,7 @@
           this.chrtXSectDisplay.Axis.Y.MinorGridLines.Color = System.Drawing.Color.LightGray;
           this.chrtXSectDisplay.Axis.Y.MinorGridLines.DrawStyle = Infragistics.UltraChart.Shared.Styles.LineDrawStyle.Dot;
           this.chrtXSectDisplay.Axis.Y.MinorGridLines.Visible = true;
-          this.chrtXSectDisplay.Axis.Y.TickmarkInterval = 5;
+          this.chrtXSectDisplay.Axis.Y.TickmarkInterval = 10;
           this.chrtXSectDisplay.Axis.Y.TickmarkStyle = Infragistics.UltraChart.Shared.Styles.AxisTickStyle.Smart;
           this.chrtXSectDisplay.Axis.Y.Visible = true;
           this.chrtXSectDisplay.Axis.Y2.Labels.Font = new System.Drawing.Font("Verdana", 7F);
@@ -370,7 +373,7 @@
           this.chrtXSectDisplay.Axis.Y2.MinorGridLines.Color = System.Drawing.Color.LightGray;
           this.chrtXSectDisplay.Axis.Y2.MinorGridLines.DrawStyle = Infragistics.UltraChart.Shared.Styles.LineDrawStyle.Dot;
           this.chrtXSectDisplay.Axis.Y2.MinorGridLines.Visible = false;
-          this.chrtXSectDisplay.Axis.Y2.TickmarkInterval = 5;
+          this.chrtXSectDisplay.Axis.Y2.TickmarkInterval = 10;
           this.chrtXSectDisplay.Axis.Y2.TickmarkStyle = Infragistics.UltraChart.Shared.Styles.AxisTickStyle.Smart;
           this.chrtXSectDisplay.Axis.Y2.Visible = false;
           this.chrtXSectDisplay.Axis.Z.Labels.Font = new System.Drawing.Font("Verdana", 7F);
@@ -498,58 +501,58 @@
           appearance40.BackColor = System.Drawing.Color.White;
           this.ultraGrid1.DisplayLayout.Appearance = appearance40;
           ultraGridBand1.ColHeaderLines = 2;
-          ultraGridColumn1.Header.Caption = "MLinkID";
-          ultraGridColumn1.Header.VisiblePosition = 0;
-          ultraGridColumn1.Width = 96;
-          ultraGridColumn2.Header.VisiblePosition = 1;
-          ultraGridColumn2.Hidden = true;
-          ultraGridColumn3.Header.Caption = "Station";
-          ultraGridColumn3.Header.VisiblePosition = 2;
-          ultraGridColumn3.Width = 64;
-          ultraGridColumn4.Header.VisiblePosition = 3;
-          ultraGridColumn4.Hidden = true;
-          ultraGridColumn5.Header.VisiblePosition = 4;
-          ultraGridColumn5.Hidden = true;
-          ultraGridColumn6.Header.VisiblePosition = 5;
-          ultraGridColumn6.Hidden = true;
-          ultraGridColumn7.Header.VisiblePosition = 6;
-          ultraGridColumn7.Hidden = true;
-          ultraGridColumn8.Header.VisiblePosition = 7;
-          ultraGridColumn8.Hidden = true;
-          ultraGridColumn9.Header.VisiblePosition = 8;
-          ultraGridColumn9.Hidden = true;
-          ultraGridColumn10.Header.VisiblePosition = 9;
-          ultraGridColumn10.Hidden = true;
-          ultraGridColumn11.Header.VisiblePosition = 10;
-          ultraGridColumn11.Hidden = true;
-          ultraGridColumn12.Header.Caption = "Ready For Export";
-          ultraGridColumn12.Header.VisiblePosition = 11;
-          ultraGridColumn13.Header.VisiblePosition = 12;
+          ultraGridColumn35.Header.Caption = "MLinkID";
+          ultraGridColumn35.Header.VisiblePosition = 0;
+          ultraGridColumn35.Width = 96;
+          ultraGridColumn36.Header.VisiblePosition = 1;
+          ultraGridColumn36.Hidden = true;
+          ultraGridColumn37.Header.Caption = "Station";
+          ultraGridColumn37.Header.VisiblePosition = 2;
+          ultraGridColumn37.Width = 64;
+          ultraGridColumn38.Header.VisiblePosition = 3;
+          ultraGridColumn38.Hidden = true;
+          ultraGridColumn39.Header.VisiblePosition = 4;
+          ultraGridColumn39.Hidden = true;
+          ultraGridColumn40.Header.VisiblePosition = 5;
+          ultraGridColumn40.Hidden = true;
+          ultraGridColumn41.Header.VisiblePosition = 6;
+          ultraGridColumn41.Hidden = true;
+          ultraGridColumn42.Header.VisiblePosition = 7;
+          ultraGridColumn42.Hidden = true;
+          ultraGridColumn43.Header.VisiblePosition = 8;
+          ultraGridColumn43.Hidden = true;
+          ultraGridColumn44.Header.VisiblePosition = 9;
+          ultraGridColumn44.Hidden = true;
+          ultraGridColumn45.Header.VisiblePosition = 10;
+          ultraGridColumn45.Hidden = true;
+          ultraGridColumn46.Header.Caption = "Ready For Export";
+          ultraGridColumn46.Header.VisiblePosition = 11;
+          ultraGridColumn47.Header.VisiblePosition = 12;
           ultraGridBand1.Columns.AddRange(new object[] {
-            ultraGridColumn1,
-            ultraGridColumn2,
-            ultraGridColumn3,
-            ultraGridColumn4,
-            ultraGridColumn5,
-            ultraGridColumn6,
-            ultraGridColumn7,
-            ultraGridColumn8,
-            ultraGridColumn9,
-            ultraGridColumn10,
-            ultraGridColumn11,
-            ultraGridColumn12,
-            ultraGridColumn13});
+            ultraGridColumn35,
+            ultraGridColumn36,
+            ultraGridColumn37,
+            ultraGridColumn38,
+            ultraGridColumn39,
+            ultraGridColumn40,
+            ultraGridColumn41,
+            ultraGridColumn42,
+            ultraGridColumn43,
+            ultraGridColumn44,
+            ultraGridColumn45,
+            ultraGridColumn46,
+            ultraGridColumn47});
           ultraGridBand1.Expandable = false;
           ultraGridBand1.GroupHeaderLines = 2;
-          ultraGridColumn14.Header.VisiblePosition = 0;
-          ultraGridColumn15.Header.VisiblePosition = 1;
-          ultraGridColumn16.Header.VisiblePosition = 2;
-          ultraGridColumn17.Header.VisiblePosition = 3;
+          ultraGridColumn48.Header.VisiblePosition = 0;
+          ultraGridColumn49.Header.VisiblePosition = 1;
+          ultraGridColumn50.Header.VisiblePosition = 2;
+          ultraGridColumn51.Header.VisiblePosition = 3;
           ultraGridBand2.Columns.AddRange(new object[] {
-            ultraGridColumn14,
-            ultraGridColumn15,
-            ultraGridColumn16,
-            ultraGridColumn17});
+            ultraGridColumn48,
+            ultraGridColumn49,
+            ultraGridColumn50,
+            ultraGridColumn51});
           ultraGridBand2.Hidden = true;
           this.ultraGrid1.DisplayLayout.BandsSerializer.Add(ultraGridBand1);
           this.ultraGrid1.DisplayLayout.BandsSerializer.Add(ultraGridBand2);
@@ -837,7 +840,7 @@
           this.ultraGridBagLayoutPanel1.Location = new System.Drawing.Point(0, 0);
           this.ultraGridBagLayoutPanel1.Name = "ultraGridBagLayoutPanel1";
           this.ultraGridBagLayoutPanel1.Size = new System.Drawing.Size(914, 141);
-          this.ultraGridBagLayoutPanel1.TabIndex = 15;
+          this.ultraGridBagLayoutPanel1.TabIndex = 0;
           // 
           // chkReadyForExport
           // 
@@ -863,7 +866,7 @@
           this.ultraGridBagLayoutPanel1.SetPreferredSize(this.chkReadyForExport, new System.Drawing.Size(120, 20));
           this.chkReadyForExport.Size = new System.Drawing.Size(120, 97);
           this.chkReadyForExport.Style = Infragistics.Win.EditCheckStyle.Button;
-          this.chkReadyForExport.TabIndex = 20;
+          this.chkReadyForExport.TabIndex = 16;
           this.chkReadyForExport.Text = "Ready for Export";
           this.chkReadyForExport.CheckedValueChanged += new System.EventHandler(this.chkReadyForExport_CheckedValueChanged);
           // 
@@ -881,7 +884,7 @@
           this.lblReadLeftToRight.Name = "lblReadLeftToRight";
           this.ultraGridBagLayoutPanel1.SetPreferredSize(this.lblReadLeftToRight, new System.Drawing.Size(98, 33));
           this.lblReadLeftToRight.Size = new System.Drawing.Size(180, 33);
-          this.lblReadLeftToRight.TabIndex = 16;
+          this.lblReadLeftToRight.TabIndex = 6;
           this.lblReadLeftToRight.Text = "Read Station Data From:";
           // 
           // txtRightLengthFactor
@@ -896,7 +899,7 @@
           this.txtRightLengthFactor.Name = "txtRightLengthFactor";
           this.ultraGridBagLayoutPanel1.SetPreferredSize(this.txtRightLengthFactor, new System.Drawing.Size(45, 21));
           this.txtRightLengthFactor.Size = new System.Drawing.Size(70, 21);
-          this.txtRightLengthFactor.TabIndex = 18;
+          this.txtRightLengthFactor.TabIndex = 15;
           // 
           // txtRightStation
           // 
@@ -911,8 +914,9 @@
           this.txtRightStation.Location = new System.Drawing.Point(580, 55);
           this.txtRightStation.Name = "txtRightStation";
           this.ultraGridBagLayoutPanel1.SetPreferredSize(this.txtRightStation, new System.Drawing.Size(70, 21));
+          this.txtRightStation.ReadOnly = true;
           this.txtRightStation.Size = new System.Drawing.Size(70, 21);
-          this.txtRightStation.TabIndex = 17;
+          this.txtRightStation.TabIndex = 10;
           this.txtRightStation.EditorButtonClick += new Infragistics.Win.UltraWinEditors.EditorButtonEventHandler(this.txtRightStation_EditorButtonClick);
           // 
           // lblRightLengthFactor
@@ -926,7 +930,7 @@
           this.lblRightLengthFactor.Name = "lblRightLengthFactor";
           this.ultraGridBagLayoutPanel1.SetPreferredSize(this.lblRightLengthFactor, new System.Drawing.Size(98, 31));
           this.lblRightLengthFactor.Size = new System.Drawing.Size(98, 31);
-          this.lblRightLengthFactor.TabIndex = 11;
+          this.lblRightLengthFactor.TabIndex = 14;
           this.lblRightLengthFactor.Text = "Right Overbank Length Factor:";
           // 
           // txtLeftLengthFactor
@@ -941,7 +945,7 @@
           this.txtLeftLengthFactor.Name = "txtLeftLengthFactor";
           this.ultraGridBagLayoutPanel1.SetPreferredSize(this.txtLeftLengthFactor, new System.Drawing.Size(45, 21));
           this.txtLeftLengthFactor.Size = new System.Drawing.Size(70, 21);
-          this.txtLeftLengthFactor.TabIndex = 17;
+          this.txtLeftLengthFactor.TabIndex = 13;
           // 
           // lblLeftLengthFactor
           // 
@@ -954,7 +958,7 @@
           this.lblLeftLengthFactor.Name = "lblLeftLengthFactor";
           this.ultraGridBagLayoutPanel1.SetPreferredSize(this.lblLeftLengthFactor, new System.Drawing.Size(98, 31));
           this.lblLeftLengthFactor.Size = new System.Drawing.Size(98, 31);
-          this.lblLeftLengthFactor.TabIndex = 10;
+          this.lblLeftLengthFactor.TabIndex = 12;
           this.lblLeftLengthFactor.Text = "Left Overbank Length Factor:";
           // 
           // txtLeftStation
@@ -970,8 +974,9 @@
           this.txtLeftStation.Location = new System.Drawing.Point(412, 55);
           this.txtLeftStation.Name = "txtLeftStation";
           this.ultraGridBagLayoutPanel1.SetPreferredSize(this.txtLeftStation, new System.Drawing.Size(70, 21));
+          this.txtLeftStation.ReadOnly = true;
           this.txtLeftStation.Size = new System.Drawing.Size(70, 21);
-          this.txtLeftStation.TabIndex = 16;
+          this.txtLeftStation.TabIndex = 8;
           this.txtLeftStation.EditorButtonClick += new Infragistics.Win.UltraWinEditors.EditorButtonEventHandler(this.txtLeftStation_EditorButtonClick);
           // 
           // lblMainRoughness
@@ -985,7 +990,7 @@
           this.lblMainRoughness.Name = "lblMainRoughness";
           this.ultraGridBagLayoutPanel1.SetPreferredSize(this.lblMainRoughness, new System.Drawing.Size(99, 33));
           this.lblMainRoughness.Size = new System.Drawing.Size(99, 33);
-          this.lblMainRoughness.TabIndex = 9;
+          this.lblMainRoughness.TabIndex = 0;
           this.lblMainRoughness.Text = "Main Channel Roughness:";
           // 
           // txtRightRoughness
@@ -1000,7 +1005,7 @@
           this.txtRightRoughness.Name = "txtRightRoughness";
           this.ultraGridBagLayoutPanel1.SetPreferredSize(this.txtRightRoughness, new System.Drawing.Size(45, 33));
           this.txtRightRoughness.Size = new System.Drawing.Size(70, 21);
-          this.txtRightRoughness.TabIndex = 13;
+          this.txtRightRoughness.TabIndex = 5;
           // 
           // lblRightOverbankStation
           // 
@@ -1013,7 +1018,7 @@
           this.lblRightOverbankStation.Name = "lblRightOverbankStation";
           this.ultraGridBagLayoutPanel1.SetPreferredSize(this.lblRightOverbankStation, new System.Drawing.Size(98, 31));
           this.lblRightOverbankStation.Size = new System.Drawing.Size(98, 33);
-          this.lblRightOverbankStation.TabIndex = 6;
+          this.lblRightOverbankStation.TabIndex = 9;
           this.lblRightOverbankStation.Text = "Right Overbank Station:";
           // 
           // lblLeftOverbankStation
@@ -1027,7 +1032,7 @@
           this.lblLeftOverbankStation.Name = "lblLeftOverbankStation";
           this.ultraGridBagLayoutPanel1.SetPreferredSize(this.lblLeftOverbankStation, new System.Drawing.Size(98, 31));
           this.lblLeftOverbankStation.Size = new System.Drawing.Size(98, 33);
-          this.lblLeftOverbankStation.TabIndex = 5;
+          this.lblLeftOverbankStation.TabIndex = 7;
           this.lblLeftOverbankStation.Text = "Left Overbank Station:";
           // 
           // txtLeftRoughness
@@ -1042,7 +1047,7 @@
           this.txtLeftRoughness.Name = "txtLeftRoughness";
           this.ultraGridBagLayoutPanel1.SetPreferredSize(this.txtLeftRoughness, new System.Drawing.Size(45, 33));
           this.txtLeftRoughness.Size = new System.Drawing.Size(70, 21);
-          this.txtLeftRoughness.TabIndex = 12;
+          this.txtLeftRoughness.TabIndex = 3;
           // 
           // txtMainRoughness
           // 
@@ -1056,7 +1061,7 @@
           this.txtMainRoughness.Name = "txtMainRoughness";
           this.ultraGridBagLayoutPanel1.SetPreferredSize(this.txtMainRoughness, new System.Drawing.Size(45, 33));
           this.txtMainRoughness.Size = new System.Drawing.Size(81, 21);
-          this.txtMainRoughness.TabIndex = 11;
+          this.txtMainRoughness.TabIndex = 1;
           // 
           // lblLeftRoughness
           // 
@@ -1069,7 +1074,7 @@
           this.lblLeftRoughness.Name = "lblLeftRoughness";
           this.ultraGridBagLayoutPanel1.SetPreferredSize(this.lblLeftRoughness, new System.Drawing.Size(98, 33));
           this.lblLeftRoughness.Size = new System.Drawing.Size(98, 33);
-          this.lblLeftRoughness.TabIndex = 7;
+          this.lblLeftRoughness.TabIndex = 2;
           this.lblLeftRoughness.Text = "Left Overbank Roughness:";
           // 
           // lblRightRoughness
@@ -1083,7 +1088,7 @@
           this.lblRightRoughness.Name = "lblRightRoughness";
           this.ultraGridBagLayoutPanel1.SetPreferredSize(this.lblRightRoughness, new System.Drawing.Size(98, 33));
           this.lblRightRoughness.Size = new System.Drawing.Size(98, 33);
-          this.lblRightRoughness.TabIndex = 8;
+          this.lblRightRoughness.TabIndex = 4;
           this.lblRightRoughness.Text = "Right Overbank Roughness:";
           // 
           // openFileDialog
@@ -1104,53 +1109,6 @@
           this._frmXSectEditor_Toolbars_Dock_Area_Left.Name = "_frmXSectEditor_Toolbars_Dock_Area_Left";
           this._frmXSectEditor_Toolbars_Dock_Area_Left.Size = new System.Drawing.Size(4, 602);
           this._frmXSectEditor_Toolbars_Dock_Area_Left.ToolbarsManager = this.ultraToolbarsManager1;
-          // 
-          // ultraToolbarsManager1
-          // 
-          this.ultraToolbarsManager1.AlwaysShowMenusExpanded = Infragistics.Win.DefaultableBoolean.False;
-          appearance1.Image = global::SystemsAnalysis.EMGAATS.CrossSectionEditor.Properties.Resources.CrossSectionEditorImage;
-          this.ultraToolbarsManager1.Appearance = appearance1;
-          this.ultraToolbarsManager1.DesignerFlags = 1;
-          this.ultraToolbarsManager1.DockWithinContainer = this;
-          this.ultraToolbarsManager1.DockWithinContainerBaseType = typeof(System.Windows.Forms.Form);
-          this.ultraToolbarsManager1.Ribbon.ApplicationMenu.ToolAreaLeft.NonInheritedTools.AddRange(new Infragistics.Win.UltraWinToolbars.ToolBase[] {
-            buttonTool15,
-            buttonTool16,
-            buttonTool17,
-            buttonTool18,
-            buttonTool19});
-          ribbonTab1.Caption = "Synchronize Data";
-          ribbonGroup1.Caption = "Raw Data";
-          ribbonGroup1.Tools.AddRange(new Infragistics.Win.UltraWinToolbars.ToolBase[] {
-            buttonTool14});
-          ribbonGroup2.Caption = "Processed Data";
-          ribbonGroup2.Tools.AddRange(new Infragistics.Win.UltraWinToolbars.ToolBase[] {
-            buttonTool11,
-            buttonTool7});
-          ribbonGroup3.Caption = "Master Data";
-          ribbonGroup3.Tools.AddRange(new Infragistics.Win.UltraWinToolbars.ToolBase[] {
-            buttonTool5});
-          ribbonTab1.Groups.AddRange(new Infragistics.Win.UltraWinToolbars.RibbonGroup[] {
-            ribbonGroup1,
-            ribbonGroup2,
-            ribbonGroup3});
-          this.ultraToolbarsManager1.Ribbon.NonInheritedRibbonTabs.AddRange(new Infragistics.Win.UltraWinToolbars.RibbonTab[] {
-            ribbonTab1});
-          this.ultraToolbarsManager1.Ribbon.Visible = true;
-          this.ultraToolbarsManager1.ShowFullMenusDelay = 500;
-          buttonTool2.SharedPropsInternal.Caption = "Save Processed XSect File";
-          buttonTool3.SharedPropsInternal.Caption = "Send to Master";
-          buttonTool6.SharedPropsInternal.Caption = "Load Processed X-Sect File";
-          buttonTool12.SharedPropsInternal.Caption = "Load LandXml-1.2 File";
-          buttonTool20.SharedPropsInternal.Caption = "Exit";
-          this.ultraToolbarsManager1.Tools.AddRange(new Infragistics.Win.UltraWinToolbars.ToolBase[] {
-            buttonTool2,
-            buttonTool3,
-            buttonTool6,
-            buttonTool12,
-            buttonTool20});
-          this.ultraToolbarsManager1.UseLargeImagesOnMenu = true;
-          this.ultraToolbarsManager1.ToolClick += new Infragistics.Win.UltraWinToolbars.ToolClickEventHandler(this.ultraToolbarsManager1_ToolClick);
           // 
           // _frmXSectEditor_Toolbars_Dock_Area_Right
           // 
@@ -1186,6 +1144,59 @@
           this._frmXSectEditor_Toolbars_Dock_Area_Bottom.Name = "_frmXSectEditor_Toolbars_Dock_Area_Bottom";
           this._frmXSectEditor_Toolbars_Dock_Area_Bottom.Size = new System.Drawing.Size(922, 4);
           this._frmXSectEditor_Toolbars_Dock_Area_Bottom.ToolbarsManager = this.ultraToolbarsManager1;
+          // 
+          // ultraToolbarsManager1
+          // 
+          this.ultraToolbarsManager1.AlwaysShowMenusExpanded = Infragistics.Win.DefaultableBoolean.False;
+          appearance1.Image = global::SystemsAnalysis.EMGAATS.CrossSectionEditor.Properties.Resources.CrossSectionEditorImage;
+          this.ultraToolbarsManager1.Appearance = appearance1;
+          this.ultraToolbarsManager1.DesignerFlags = 1;
+          this.ultraToolbarsManager1.DockWithinContainer = this;
+          this.ultraToolbarsManager1.DockWithinContainerBaseType = typeof(System.Windows.Forms.Form);
+          this.ultraToolbarsManager1.Ribbon.ApplicationMenu.ToolAreaLeft.NonInheritedTools.AddRange(new Infragistics.Win.UltraWinToolbars.ToolBase[] {
+            buttonTool15,
+            buttonTool16,
+            buttonTool17,
+            buttonTool18,
+            buttonTool19});
+          ribbonTab1.Caption = "Synchronize Data";
+          ribbonGroup1.Caption = "Raw Data";
+          ribbonGroup1.Tools.AddRange(new Infragistics.Win.UltraWinToolbars.ToolBase[] {
+            buttonTool14});
+          ribbonGroup2.Caption = "Processed Data";
+          ribbonGroup2.Tools.AddRange(new Infragistics.Win.UltraWinToolbars.ToolBase[] {
+            buttonTool11,
+            buttonTool7});
+          ribbonGroup3.Caption = "Master Data";
+          ribbonGroup3.Tools.AddRange(new Infragistics.Win.UltraWinToolbars.ToolBase[] {
+            buttonTool5});
+          ribbonGroup4.Caption = "Utilities";
+          ribbonGroup4.Tools.AddRange(new Infragistics.Win.UltraWinToolbars.ToolBase[] {
+            buttonTool1});
+          ribbonTab1.Groups.AddRange(new Infragistics.Win.UltraWinToolbars.RibbonGroup[] {
+            ribbonGroup1,
+            ribbonGroup2,
+            ribbonGroup3,
+            ribbonGroup4});
+          this.ultraToolbarsManager1.Ribbon.NonInheritedRibbonTabs.AddRange(new Infragistics.Win.UltraWinToolbars.RibbonTab[] {
+            ribbonTab1});
+          this.ultraToolbarsManager1.Ribbon.Visible = true;
+          this.ultraToolbarsManager1.ShowFullMenusDelay = 500;
+          buttonTool2.SharedPropsInternal.Caption = "Save Processed XSect File";
+          buttonTool3.SharedPropsInternal.Caption = "Send to Master";
+          buttonTool6.SharedPropsInternal.Caption = "Load Processed X-Sect File";
+          buttonTool12.SharedPropsInternal.Caption = "Load LandXml-1.2 File";
+          buttonTool20.SharedPropsInternal.Caption = "Exit";
+          buttonTool4.SharedPropsInternal.Caption = "Export CSV";
+          this.ultraToolbarsManager1.Tools.AddRange(new Infragistics.Win.UltraWinToolbars.ToolBase[] {
+            buttonTool2,
+            buttonTool3,
+            buttonTool6,
+            buttonTool12,
+            buttonTool20,
+            buttonTool4});
+          this.ultraToolbarsManager1.UseLargeImagesOnMenu = true;
+          this.ultraToolbarsManager1.ToolClick += new Infragistics.Win.UltraWinToolbars.ToolClickEventHandler(this.ultraToolbarsManager1_ToolClick);
           // 
           // frmXSectEditor
           // 
