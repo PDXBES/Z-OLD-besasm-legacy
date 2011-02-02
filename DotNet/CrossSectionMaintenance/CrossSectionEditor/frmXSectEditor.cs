@@ -153,6 +153,10 @@ namespace SystemsAnalysis.EMGAATS.CrossSectionEditor
         case "btnLoadRawXSect":    // ButtonTool
           LoadRawData();
           break;
+        
+        case "btnExportCSV":
+          ExportCSV();
+          break;
 
         case "btnExit":    // ButtonTool
           Application.Exit();
@@ -160,6 +164,30 @@ namespace SystemsAnalysis.EMGAATS.CrossSectionEditor
       }
 
       return;
+    }
+
+    private void ExportCSV()
+    {
+      if (saveFileDialog.ShowDialog() != DialogResult.OK)
+        return;
+
+      string csvFile = saveFileDialog.FileName;
+
+      StreamWriter writer = new StreamWriter(csvFile);
+
+      writer.WriteLine("XSectName, Station, Description, " + 
+        "MainChannelRoughness, LeftOverbankRoughness, RightOverbankRoughness, " + 
+        "LeftOverbankStation, RightOverbankStation, " +
+        "LeftOverbankLengthFactor, RightOverbankLengthFactor");
+      foreach (ProcessedXSectDataSet.XSectsRow row in processedXSectDS.XSects)
+      {
+        writer.WriteLine(row.XSectName + "," + row.Station + "," + row.Description + "," +
+          row.MainChannelRoughness + "," +  
+          row.LeftOverbankRoughness + "," + row.RightOverbankRoughness + "," +
+          row.LeftOverbankStation + "," + row.RightOverbankStation + "," +
+          row.LeftOverbankLengthFactor + "," + row.RightOverbankLengthFactor);       
+      }      
+      writer.Close();
     }
 
     private ProcessedXSectDataSet.XSectsRow SelectedXSectsRow
@@ -478,7 +506,6 @@ namespace SystemsAnalysis.EMGAATS.CrossSectionEditor
         row.ReadyForExport = !row.ReadyForExport;
       }
     }
-
 
   }
 }
