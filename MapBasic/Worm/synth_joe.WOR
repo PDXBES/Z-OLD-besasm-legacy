@@ -1,0 +1,139 @@
+!Workspace
+!Version 600
+!Charset WindowsLatin1
+Open Table "W:\AGMaster\Links\mst_links_ac" As mst_links_ac Interactive
+Open Table "W:\AGTools\Synth\good_mst_links" As good_mst_links Interactive
+Open Table "W:\AGTools\Synth\Append_All_s" As Append_All_s Interactive
+Open Table "W:\AGTools\Synth\all_s_mi" As all_s_mi Interactive
+Open Table "W:\AGTools\Synth\good_all_s" As good_all_s Interactive
+Open Table "W:\AGTools\Synth\All_Hansen_Segs" As All_Hansen_Segs Interactive
+Open Table "W:\AGTools\Synth\Good_all_s_data" As Good_all_s_data Interactive
+Open Table "W:\AGTools\Synth\Append_Good" As Append_Good Interactive
+Open Table "W:\AGTools\Synth\All_synth_31602" As All_synth_31602 Interactive
+Open Table "W:\AGTools\Synth\abandoned" As abandoned Interactive
+Open Table "\\Oberon\GIS1\MI_DATA\STREET\CENTERLN\Cl_port" As Cl_port Interactive
+Open Table "\\Oberon\GIS1\MI_DATA\TAXLOTS\Multmerg" As Multmerg Interactive
+Open Table "\\Oberon\GIS1\MI_DATA\STREET\CENTERLN\test_streets" As test_streets Interactive
+Set Window Info
+  Position (4.9375,5.95833) Units "in"
+  Width 2.60417 Units "in" Height 0.979167 Units "in" 
+  Font ("Arial",0,8,0)
+Open Window Info
+Map From test_streets,Cl_port,abandoned,Append_Good,All_synth_31602,Good_all_s_data,
+  good_mst_links,mst_links_ac,all_s_mi,Multmerg 
+  Position (0.0520833,0.0520833) Units "in"
+  Width 7.76042 Units "in" Height 4.625 Units "in" 
+Set Window FrontWindow() ScrollBars Off Autoscroll On
+Set Map
+  CoordSys Earth Projection 3, 33, "ft", -120.5, 43.6666666667, 44.3333333333, 46, 8202099.7379999999, 0
+  Center (7642643.917,683256.8533)
+  Zoom 0.5468838394 Units "mi"
+  Preserve Zoom Display Zoom
+  Distance Units "mi" Area Units "sq mi" XY Units "ft"
+shade 5 with DataFlagSynth values 
+  "3" Line (2,2,255) ,
+  "33" Line (2,2,255) ,
+  "4" Line (2,2,65280) ,
+  "9" Line (2,2,16776960) 
+  default Line (1,2,0)   # color 1 # 
+Set Map
+  Layer 1
+    Display Graphic
+    Label Line Arrow Position Above Font ("Arial",0,9,0) Pen (1,2,0) 
+      With street_full
+      Parallel On Auto Off Overlap Off Duplicates Off Offset 2
+      Visibility On
+  Layer 2
+    Display Graphic
+    Label Line Arrow Position Above Font ("Arial",0,9,0) Pen (1,2,0) 
+      With street_full
+      Parallel On Auto Off Overlap Off Duplicates Off Offset 2
+      Visibility On
+  Layer 3
+    Display Global
+    Global    Line (1,27,0)  
+    Label Line Arrow Position Above Font ("Arial",0,9,0) Pen (1,2,0) 
+      With SEG_ID
+      Parallel On Auto Off Overlap Off Duplicates Off Offset 2
+      Visibility On
+  Layer 4
+    Display Global
+    Global    Line (2,2,16711680)  
+    Label Line Arrow Position Above Font ("Arial",0,9,0) Pen (1,2,0) 
+      With MapID
+      Parallel On Auto Off Overlap Off Duplicates Off Offset 2
+      Visibility On
+  Layer 5
+    Display Value
+    Selectable Off
+  Layer 6
+    Display Graphic
+    Arrows On
+    Nodes On
+    Label Line Arrow Position Above Font ("Arial",0,9,0) Pen (1,2,0) 
+      With MapID
+      Parallel On Auto Off Overlap Off Duplicates Off Offset 2
+      Visibility On
+  Layer 7
+    Display Global
+    Global    Line (2,2,16711680)  
+    Label Line Arrow Position Above Font ("Arial",0,9,0) Pen (1,2,0) 
+      With MapID
+      Parallel On Auto Off Overlap Off Duplicates Off Offset 2
+      Visibility On
+  Layer 8
+    Display Global
+    Global    Line (2,2,16711680)  
+    Label Line Arrow Position Above Font ("Arial",0,9,0) Pen (1,2,0) 
+      With Shape
+      Parallel On Auto Off Overlap Off Duplicates Off Offset 2
+      Visibility On
+  Layer 9
+    Display Global
+    Global    Line (2,2,65535)  
+    Label Line Arrow Position Above Font ("Arial",0,9,0) Pen (1,2,0) 
+      With Shape
+      Parallel On Auto Off Overlap Off Duplicates Off Offset 2
+      Visibility On
+  Layer 10
+    Display Global
+    Label Line Arrow Position Above Font ("Arial",0,9,0) Pen (1,2,0) 
+      With SEG_ID
+      Parallel On Auto Off Overlap Off Duplicates Off Offset 2
+      Visibility On
+  Layer 11
+    Display Graphic
+    Label Line None Position Center Font ("Arial",256,9,0,16776960) Pen (1,2,0) 
+      With SITESTRNO
+      Parallel On Auto On Overlap Off Duplicates On Offset 2
+      Visibility On
+Set CoordSys Earth Projection 3, 33, "ft", -120.5, 43.6666666667, 44.3333333333, 46, 8202099.7379999999, 0 Bounds (-348623368.682, -335442185.296) (365027568.158, 378208751.545)
+Set Map Layer 0 Editable
+Create Ellipse (7641733.9,683032) (7642251.3,683548)
+    Pen (2,2,16711935) 
+    Brush (1,0,16777215)
+Set Map Layer 0 Editable Off
+Set CoordSys Earth
+set legend 
+  layer 5 
+    display on 
+    shades off 
+    symbols off 
+    lines on 
+    count off 
+    title auto Font ("Arial",0,9,0)
+    subtitle auto Font ("Arial",0,8,0)
+    ascending on 
+    ranges Font ("Arial",0,8,0)
+      auto display off ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on  
+Set Window FrontWindow() Printer
+ Name "\\HAMLET\LPT66" Orientation Portrait Copies 1
+ Papersize 1
+Dim WorkspaceMaximizedWindow As Integer
+WorkspaceMaximizedWindow = Frontwindow()
+Set Window WorkspaceMaximizedWindow Max
+Undim WorkspaceMaximizedWindow

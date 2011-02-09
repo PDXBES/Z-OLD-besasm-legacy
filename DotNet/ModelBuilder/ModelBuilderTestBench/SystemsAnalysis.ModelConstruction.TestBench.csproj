@@ -1,0 +1,63 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{BA32E1E5-CBA1-4598-A3FC-3F59FEF3D071}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SystemsAnalysis.Construction</RootNamespace>
+    <AssemblyName>SystemsAnalysis.ModelConstruction.TestBench</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="TestBench.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestClass.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\AccessUtils\DatabaseManagement\SystemsAnalysis.Utils.AccessUtils.DatabaseManagement.csproj">
+      <Project>{1DCF1AAE-A211-4A29-AE5C-13AAAD890B08}</Project>
+      <Name>SystemsAnalysis.Utils.AccessUtils.DatabaseManagement</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ModelConfiguration\SystemsAnalysis.ModelConstruction.ModelConfiguration.csproj">
+      <Project>{19DE0713-65B7-4D46-A537-49704F93CB90}</Project>
+      <Name>SystemsAnalysis.ModelConstruction.Configuration</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ModelBuilder\SystemsAnalysis.ModelConstruction.ModelBuilder.csproj">
+      <Project>{B6E1DEF7-D4EB-4D0A-8867-A324FE226D34}</Project>
+      <Name>SystemsAnalysis.ModelConstruction.ModelBuilder</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

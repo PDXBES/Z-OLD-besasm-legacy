@@ -1,0 +1,186 @@
+include "MapBasic.def"
+'include "\\cassio\modeling\Model_Programs\Emgaats\CodeV2.2\Common\Inc\EMGGlobal.def"
+'include "\\cassio\modeling\Model_Programs\Emgaats\CodeV2.2\Common\Inc\EMGToolGlobal.def"
+'include "\\cassio\modeling\Model_Programs\Emgaats\CodeV2.2\Common\Inc\EMGLogger.def"
+'include "\\cassio\modeling\Model_Programs\Emgaats\CodeV2.2\Common\Inc\EMGOpenUtils.def"
+'include "\\cassio\modeling\Model_Programs\Emgaats\CodeV2.2\Common\Inc\EMGMTabUtil.def"
+'include "\\cassio\modeling\Model_Programs\Emgaats\CodeV2.2\Common\Inc\INIUtils.def"
+'include "\\cassio\modeling\Model_Programs\Emgaats\CodeV2.2\Workbench\Inc\EMGInit.def"
+'include "\\cassio\modeling\Model_Programs\Emgaats\CodeV2.2\LinkTool\Inc\EMGLinkColData.def"
+'include "\\cassio\modeling\Model_Programs\Emgaats\CodeV2.2\common\inc\EMGCoordSys.def"
+'
+Declare Sub Main()
+
+'Required for all Framework MBX Apps
+Declare Sub ExitApplication()
+Declare Sub Function_Menu()
+
+'Globals required for all Framework Apps
+Global gReturnStatus as String
+Global gDebugMode as Logical
+
+'Globals specific to this Framework App
+Global gAlternativePath as String
+Global gIncludeLinksAndNodes as Logical
+Global gIncludeCatchments as Logical
+Global gIncludeICTargets as Logical
+Global gFocusAreas as String
+
+Declare Sub UpdateFocusAreas
+Declare Sub AddFocusAreaColumn(ByVal TableName as String)
+
+
+Sub AddFocusAreaColumn(ByVal TableName as String)
+	Dim i as Integer
+	Dim columnCount as Integer
+	Dim addColumn as Logical
+	addColumn = True
+	columnCount = TableInfo(TableName, TAB_INFO_NCOLS)
+	For i = 1 To columnCount
+		If ColumnInfo(TableName , "COL" & i, COL_INFO_NAME) = "FocusArea" Then		
+			addColumn = False			
+		End If
+	Next
+	If addColumn = True Then
+		Alter Table TableName (Add FocusArea Char(10))
+	End If
+	addColumn = False	
+End Sub
+
+'---------------------------------------------------------
+' Select all alternatives elements for a focus area and add to a new alternative
+'---------------------------------------------------------
+Sub UpdateFocusAreas
+'1: Open alt tables located in gInputAlternativePath
+
+	Open Table gFocusAreas as focus_areas
+
+	If gIncludeLinksAndNodes = TRUE Then
+		Open Table gAlternativePath & "alt_links_ac.tab" as alt_links
+		Call AddFocusAreaColumn("alt_links")
+				
+		Select alt_links.FocusArea "old_fa", focus_areas.FocusArea "new_fa" From alt_links, focus_areas Where alt_links.obj Within focus_areas.obj Into alt_links_update
+		Update alt_links Set FocusArea = ""
+		Update alt_links_update Set old_fa = new_fa
+		Commit Table alt_links
+		
+		Open Table gAlternativePath & "alt_nodes_ac.tab" as alt_nodes
+		Call AddFocusAreaColumn("alt_nodes")
+		
+		Select alt_nodes.FocusArea "old_fa", focus_areas.FocusArea "new_fa" From alt_nodes, focus_areas Where alt_nodes.obj Within focus_areas.obj Into alt_nodes_update
+		Update alt_nodes Set FocusArea = ""
+		Update alt_nodes_update Set old_fa = new_fa
+		Commit Table alt_nodes
+		
+		Open Table gAlternativePath & "alt_speclinks_ac.tab" as alt_speclinks
+		Call AddFocusAreaColumn("alt_speclinks")	
+		
+		'Select alt_speclinks.FocusArea "old_fa", focus_areas.FocusArea "new_fa" From alt_speclinks, mdl_links, focus_areas Where alt_speclinks.mdlspeclinkid = mdl_links.linkid And alt_speclinks.mdllinkid <> 0 And mdl_links.obj Within focus_areas.obj Into alt_speclinks_update				
+		Select alt_speclinks.FocusArea "old_fa", focus_areas.FocusArea "new_fa" From alt_speclinks, alt_links, focus_areas Where alt_speclinks.altlinkid = alt_links.altlinkid And alt_links.obj Within focus_areas.obj Into alt_speclinks_update				
+		Update alt_speclinks Set FocusArea = ""
+		Update alt_speclinks_update Set old_fa = new_fa
+		Commit Table alt_speclinks
+		
+		Open Table gAlternativePath & "alt_speclinkdata_ac.tab" as alt_speclinkdata
+		Call AddFocusAreaColumn("alt_speclinkdata")	
+			
+		Select alt_speclinkdata.FocusArea "old_fa", alt_speclinks.FocusArea "new_fa" From alt_speclinkdata, alt_speclinks Where alt_speclinkdata.altspeclinkid = alt_speclinks.altspeclinkid Into alt_speclinkdata_update				
+		Update alt_speclinkdata Set FocusArea = ""
+		Update alt_speclinkdata_update Set old_fa = new_fa
+		Commit Table alt_speclinkdata
+		
+		
+	End If
+	
+	If gIncludeCatchments = TRUE Then	
+		Open Table gAlternativePath & "alt_dsc_ac.tab" as alt_dsc	
+		Call AddFocusAreaColumn("alt_dsc")
+		
+		Select alt_dsc.FocusArea "old_fa", focus_areas.FocusArea "new_fa" from alt_dsc, focus_areas where alt_dsc.obj Within focus_areas.obj into alt_dsc_update
+		Update alt_dsc Set FocusArea = ""
+		Update alt_dsc_update Set old_fa = new_fa
+		Commit Table alt_dsc
+		
+		Open Table gAlternativePath & "alt_ssc_ac.tab" as alt_ssc
+		Call AddFocusAreaColumn("alt_ssc")	
+		
+		Select alt_ssc.FocusArea "old_fa", focus_areas.FocusArea "new_fa" from alt_ssc, focus_areas where alt_ssc.obj Within focus_areas.obj into alt_ssc_update
+		Update alt_ssc Set FocusArea = ""
+		Update alt_ssc_update Set old_fa = new_fa
+		Commit Table alt_ssc
+	End If
+	
+	If gIncludeICTargets = TRUE Then
+		Open Table gAlternativePath & "alt_rooftargets_ac.tab" as alt_rooftargets
+		Call AddFocusAreaColumn("alt_rooftargets")
+		
+		Select alt_rooftargets.FocusArea "old_fa", focus_areas.FocusArea "new_fa" from alt_rooftargets, focus_areas where alt_rooftargets.obj Within focus_areas.obj into alt_rooftargets_update
+		Update alt_rooftargets Set FocusArea = ""
+		Update alt_rooftargets_update Set old_fa = new_fa
+		Commit Table alt_rooftargets
+
+		Open Table gAlternativePath & "alt_streettargets_ac.tab" as alt_streettargets
+		Call AddFocusAreaColumn("alt_streettargets")
+		
+		Select alt_streettargets.FocusArea "old_fa", focus_areas.FocusArea "new_fa" from alt_streettargets, focus_areas where alt_streettargets.obj Within focus_areas.obj into alt_streettargets_update
+		Update alt_streettargets Set FocusArea = ""
+		Update alt_streettargets_update Set old_fa = new_fa
+		Commit Table alt_streettargets
+
+		Open Table gAlternativePath & "alt_parkingtargets_ac.tab" as alt_parkingtargets
+		Call AddFocusAreaColumn("alt_parkingtargets")
+		
+		Select alt_parkingtargets.FocusArea "old_fa", focus_areas.FocusArea "new_fa" from alt_parkingtargets, focus_areas where alt_parkingtargets.obj Within focus_areas.obj into alt_parkingtargets_update
+		Update alt_parkingtargets Set FocusArea = ""
+		Update alt_parkingtargets_update Set old_fa = new_fa
+		Commit Table alt_parkingtargets
+	
+	End If
+	
+	
+	
+End Sub
+
+
+'---------------------------------------------------------
+' Modify to	add	menuitems for testing
+'---------------------------------------------------------
+
+Sub	Function_Menu() 'Required for all Framework MBX apps
+
+Create Menu	"Function Menu"	as 
+	"Update Focus Areas" ID 10000 calling UpdateFocusAreas,	
+	"Exit MBX Application" ID 9999 calling ExitApplication 'Required for all Framework MBX apps
+  
+  Alter	Menu Bar Remove	ID 6, ID 7 
+  Alter	Menu Bar Add "Function Menu", ID 6,	ID 7
+
+End	Sub
+
+'--------------------------------------------------------
+'No	changes	below here
+'--------------------------------------------------------
+
+Sub	Main()
+		 
+	gReturnStatus="Initialized"	
+	OnError GoTo ErrorHandler
+	'Call InitHousekeeping		' have to init some globals before we can say hello
+	'Call InitOpenUtilGlobals  ' this sets up table names for the EMGOpenUtils functions
+	
+	Call Function_Menu
+	
+	Exit Sub
+	
+	ErrorHandler:
+		gReturnStatus = "Error: " + Err()		
+		OnError GoTo 0
+		Error Err()
+	
+End	Sub
+
+'---------------------------------------------------------
+Sub ExitApplication()		
+	Close All		
+	End Program
+End Sub
