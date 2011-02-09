@@ -154,12 +154,60 @@ namespace SystemsAnalysis.EMGAATS.CrossSectionEditor
           LoadRawData();
           break;
 
+        case "btnExportCSV":
+          ExportCSV();
+          break;
+
         case "btnExit":    // ButtonTool
           Application.Exit();
           break;
+
+        case "btnPrint":    // ButtonTool
+          PrintXSects();
+          break;
+
       }
 
       return;
+    }
+
+    private void PrintXSects()
+    {
+     
+      //if (printPreviewDialog1.ShowDialog() != DialogResult.OK)
+      //  return;
+
+      if (printDialog1.ShowDialog() != DialogResult.OK)
+        return;
+
+      printDocument1.PrinterSettings = printDialog1.PrinterSettings;
+      printDocument1.Print();
+
+      //printPreviewDialog1.Document
+    }
+
+    private void ExportCSV()
+    {
+      if (saveFileDialog.ShowDialog() != DialogResult.OK)
+        return;
+
+      string csvFile = saveFileDialog.FileName;
+
+      StreamWriter writer = new StreamWriter(csvFile);
+
+      writer.WriteLine("XSectName, Station, Description, " +
+        "MainChannelRoughness, LeftOverbankRoughness, RightOverbankRoughness, " +
+        "LeftOverbankStation, RightOverbankStation, " +
+        "LeftOverbankLengthFactor, RightOverbankLengthFactor");
+      foreach (ProcessedXSectDataSet.XSectsRow row in processedXSectDS.XSects)
+      {
+        writer.WriteLine(row.XSectName + "," + row.Station + "," + row.Description + "," +
+          row.MainChannelRoughness + "," +
+          row.LeftOverbankRoughness + "," + row.RightOverbankRoughness + "," +
+          row.LeftOverbankStation + "," + row.RightOverbankStation + "," +
+          row.LeftOverbankLengthFactor + "," + row.RightOverbankLengthFactor);
+      }
+      writer.Close();
     }
 
     private ProcessedXSectDataSet.XSectsRow SelectedXSectsRow
@@ -216,7 +264,7 @@ namespace SystemsAnalysis.EMGAATS.CrossSectionEditor
       catch (Exception ex)
       {
         chrtXSectDisplay.EmptyChartText = "Error loading processed xml file: " + ex.Message;
-      }      
+      }
     }
 
     private void ExportToMaster()
@@ -382,7 +430,7 @@ namespace SystemsAnalysis.EMGAATS.CrossSectionEditor
         return false;
       }
       finally
-      {        
+      {
         reader.Close();
       }
       return true;
@@ -479,6 +527,53 @@ namespace SystemsAnalysis.EMGAATS.CrossSectionEditor
       }
     }
 
+    private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+    {
+      int x = this.chrtXSectDisplay.Location.X;
+      int y = this.chrtXSectDisplay.Location.Y;
+
+      int width = chrtXSectDisplay.Width;
+      int height = chrtXSectDisplay.Height;
+      
+      Rectangle bounds = new Rectangle(0, 0, width, height);
+
+      Bitmap img = new Bitmap(width, height);
+      chrtXSectDisplay.DrawToBitmap(img, bounds);                                    
+      
+      Point p = new Point(0, 0);
+      e.Graphics.DrawImage(img, e.MarginBounds.X, e.MarginBounds.Y, e.MarginBounds.Width, (int)(e.MarginBounds.Height * 0.7));
+      
+      Stream notesStream = System.Reflection.Assembly.
+                      GetExecutingAssembly().GetManifestResourceStream("SystemsAnalysis.EMGAATS.CrossSectionEditor.Resources.notes.png");
+      
+      e.Graphics.DrawImage(new Bitmap(notesStream), 
+        e.MarginBounds.X, 
+        (int)(e.MarginBounds.Height * 0.7)+100, 
+        e.MarginBounds.Width,
+        (int)(e.MarginBounds.Height * 0.3 )-30);
+
+      e.Graphics.DrawString(openFileDialog.FileName,
+        new Font("Verdana", 10), Brushes.Black,
+        new Point(e.MarginBounds.X, e.MarginBounds.Height + 130));
+
+      
+      if (bindingSource1.Position == bindingSource1.Count - 1)
+        e.HasMorePages = false;
+      else
+        e.HasMorePages = true;
+
+      bindingSource1.Position++;
+    }    
+
+    private void printDocument1_BeginPrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+    {
+      bindingSource1.Position = 0;
+    }
+
+    private void printDocument1_EndPrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+    {
+
+    }
 
   }
 }
