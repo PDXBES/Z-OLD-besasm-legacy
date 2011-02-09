@@ -57,6 +57,7 @@
     <Reference Include="Infragistics2.Win.UltraWinListView.v10.3, Version=10.3.20103.1000, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb">
       <Private>True</Private>
     </Reference>
+    <Reference Include="Infragistics2.Win.UltraWinPrintPreviewDialog.v10.3, Version=10.3.20103.1000, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb" />
     <Reference Include="Infragistics2.Win.UltraWinStatusBar.v10.3, Version=10.3.20103.1000, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb">
       <Private>True</Private>
     </Reference>
@@ -141,6 +142,7 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="LandXML-1.2.xsd" />
+    <EmbeddedResource Include="Resources\notes.png" />
     <None Include="app.config" />
     <None Include="MstXSectionDataSet.xsc">
       <DependentUpon>MstXSectionDataSet.xsd</DependentUpon>
@@ -167,6 +169,7 @@
     <None Include="Resources\CrossSectionEditorIcon.ico" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="notes.png" />
     <Content Include="Resources\CrossSectionEditorImage.bmp" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
