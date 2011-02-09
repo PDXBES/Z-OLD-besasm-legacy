@@ -1108,7 +1108,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis
 
         private void buttonPollutantLoadingConnectionStringEdit_Click(object sender, EventArgs e)
         {
-            Object ScalarQueryResults = new Object();
+            int numberOfMatchingColumns = 0;
             string serverIsUsable = "";
             dynamicInputDatabase = "";
 
@@ -1129,46 +1129,45 @@ namespace SystemsAnalysis.Grid.GridAnalysis
 
             //make sure the table also has all of the appropriate columns
             //with all of the appropriate data types.
-            string columnSelectionString = "SELECT COUNT(*) FROM  " +
-               "(SELECT * FROM information_schema.columns  " +
-               "WHERE   " +
-                "((column_name = 'LU_CODE' " +
-                " AND data_type = 'nvarchar') " +
-                " OR (column_name = 'Landuse' " +
-                " AND data_type = 'nvarchar') " +
-                " OR (column_name = 'Constituent' " +
-                " AND data_type = 'float') " +
-                " OR (column_name = 'VALUE_LOW' " +
-                " AND data_type = 'float') " +
-                " OR (column_name = 'UNITS' " +
-                " AND data_type = 'nvarchar') " +
-                " OR (column_name = 'Source' " +
-                " AND data_type = 'nvarchar') " +
-                " OR (column_name = 'VALUE_HIGH' " +
-                " AND data_type = 'float') " +
-                " OR (column_name = 'VALUE' " +
-                " AND data_type = 'float') " +
-                " AND table_name =  'GRID_pollutant_loadings') AS A";
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_pollutant_loadings", dynamicInputDatabase, "LU_CODE", "string");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_pollutant_loadings", dynamicInputDatabase, "Landuse", "string");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_pollutant_loadings", dynamicInputDatabase, "Constituent", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_pollutant_loadings", dynamicInputDatabase, "VALUE_LOW", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_pollutant_loadings", dynamicInputDatabase, "UNITS", "string");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_pollutant_loadings", dynamicInputDatabase, "Source", "string");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_pollutant_loadings", dynamicInputDatabase, "VALUE_HIGH", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_pollutant_loadings", dynamicInputDatabase, "VALUE", "number");
 
-            ScalarQueryResults = SQLHelper.SQLExecuteStringAsScalarQuery(columnSelectionString, dynamicInputDatabase, ScalarQueryResults);
             //if ScalarQueryResults is not null, then we have a good answer
-            if (ScalarQueryResults == null)
+            if (numberOfMatchingColumns == null)
             {
                 MessageBox.Show("Could not test provided table for validity, please verify the source before trying to run the Grid Model");
             }
-            else if ((int)ScalarQueryResults != 4)
+            else if ((int)numberOfMatchingColumns != 8)
             {
                 MessageBox.Show("The table you indicated does not contain the necessary columns, please check the documentation for guidelines on creating a pollutant loading Table");
-            }
-            else
-            {
-                MessageBox.Show(((int)ScalarQueryResults).ToString());
             }
         }
 
         private void buttonBMPEffectivenessConnectionStringEdit_Click(object sender, EventArgs e)
         {
-            Object ScalarQueryResults = new Object();
+            int numberOfMatchingColumns = 0;
             string serverIsUsable = "";
             dynamicInputDatabase = "";
 
@@ -1189,38 +1188,35 @@ namespace SystemsAnalysis.Grid.GridAnalysis
 
             //make sure the table also has all of the appropriate columns
             //with all of the appropriate data types.
-            string columnSelectionString = "SELECT COUNT(*) FROM  " +
-               "(SELECT * FROM information_schema.columns  " +
-               "WHERE   " +
-                "((column_name = 'BMP_TYPE_GEN_ID' " +
-                " AND data_type = 'int') " +
-                " OR (column_name = 'Constituent' " +
-                " AND data_type = 'int') " +
-                " OR (column_name = 'VALUE_LOW' " +
-                " AND data_type = 'float') " +
-                " OR (column_name = 'UNITS' " +
-                " AND data_type = 'nvarchar') " +
-                " OR (column_name = 'Source' " +
-                " AND data_type = 'nvarchar') " +
-                " OR (column_name = 'VALUE_HIGH' " +
-                " AND data_type = 'float') " +
-                " OR (column_name = 'VALUE' " +
-                " AND data_type = 'float') " +
-                " AND table_name =  'GRID_BMP_PERFORMANCE') AS A";
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_BMP_PERFORMANCE", dynamicInputDatabase, "BMP_TYPE_GEN_ID", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_BMP_PERFORMANCE", dynamicInputDatabase, "Constituent", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_BMP_PERFORMANCE", dynamicInputDatabase, "VALUE_LOW", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_BMP_PERFORMANCE", dynamicInputDatabase, "UNITS", "string");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_BMP_PERFORMANCE", dynamicInputDatabase, "Source", "string");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_BMP_PERFORMANCE", dynamicInputDatabase, "VALUE_HIGH", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_BMP_PERFORMANCE", dynamicInputDatabase, "VALUE", "number");
 
-            ScalarQueryResults = SQLHelper.SQLExecuteStringAsScalarQuery(columnSelectionString, dynamicInputDatabase, ScalarQueryResults);
-            //if ScalarQueryResults is not null, then we have a good answer
-            if (ScalarQueryResults == null)
+            if (numberOfMatchingColumns == null)
             {
                 MessageBox.Show("Could not test provided table for validity, please verify the source before trying to run the Grid Model");
             }
-            else if ((int)ScalarQueryResults != 4)
+            else if ((int)numberOfMatchingColumns != 7)
             {
                 MessageBox.Show("The table you indicated does not contain the necessary columns, please check the documentation for guidelines on creating a pollutant loading Table");
-            }
-            else
-            {
-                MessageBox.Show(((int)ScalarQueryResults).ToString());
             }
         }
 
@@ -1251,7 +1247,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis
 
         private void buttonGridPathEdit_Click(object sender, EventArgs e)
         {
-            Object ScalarQueryResults = new Object();
+            int numberOfMatchingColumns = 0;
             string serverIsUsable = "";
             dynamicInputDatabase = "";
 
@@ -1281,197 +1277,257 @@ namespace SystemsAnalysis.Grid.GridAnalysis
             //there must be 81 matches (there is no chance there could be more than 81
             //matches even if there are more than 81 columns in the input table,
             //and less than 81 matches means the input table isn't ready.)
-            string columnSelectionString = "SELECT COUNT(*) FROM  " +
-               "(SELECT * FROM information_schema.columns  "  +
-               "WHERE   " +
-                "((column_name = 'MAPINFO_ID' " +
-                " AND data_type = 'int') " +
-                " OR ( column_name = 'Description' " +
-                " AND data_type = 'nvarchar') " +
-                " OR ( column_name = 'Col_Name' " +
-                " AND data_type = 'nvarchar') " +
-                " OR ( column_name = 'Row_Name' " +
-                " AND data_type = 'nvarchar') " +
-                " OR ( column_name = 'Area_ft2' " +
-                " AND data_type = 'float') " +
-                " OR ( column_name = 'Avg_Slope' " +
-                " AND data_type = 'float') " +
-                " OR ( column_name = 'Public' " +
-                " AND data_type = 'nvarchar') " +
-                " OR ( column_name = 'Private' " +
-                " AND data_type = 'nvarchar') " +
-                " OR ( column_name = 'VEG_LONcellCount' " +
-                " AND data_type = 'int') " +
-                " OR ( column_name = 'VEG_LOFFcellCount' " +
-                " AND data_type = 'int') " +
-                " OR ( column_name = 'CPY_LONcellCount' " +
-                 " AND data_type = 'int')                " +
-                 " OR ( column_name = 'CPY_LOFFcellCount' " +
-                 " AND data_type = 'int')                " +
-                 " OR ( column_name = 'ROW_CellCount' " +
-                 " AND data_type = 'int')                " +
-                 " OR ( column_name = 'RF_CellCount' " +
-                 " AND data_type = 'int')                " +
-                 " OR ( column_name = 'PKG_CellCount' " +
-                 " AND data_type = 'int')                " +
-                 " OR ( column_name = 'IMP_CellCount' " +
-                 " AND data_type = 'int')                " +
-                 " OR ( column_name = 'WAT_CellCount' " +
-                 " AND data_type = 'int')                " +
-                 " OR ( column_name = 'TRA_LUcellCount' " +
-                 " AND data_type = 'int')                " +
-                 " OR ( column_name = 'COM_LUcellCount' " +
-                 " AND data_type = 'int')                " +
-                 " OR ( column_name = 'IND_LUcellCount' " +
-                 " AND data_type = 'int')                " +
-                 " OR ( column_name = 'SFR_LUcellCount' " +
-                 " AND data_type = 'int')                " +
-                 " OR ( column_name = 'MFR_LUcellCount' " +
-                 " AND data_type = 'int')                " +
-                 " OR ( column_name = 'FOR_LUcellCount' " +
-                 " AND data_type = 'int')                " +
-                 " OR ( column_name = 'AGR_LUcellCount' " +
-                 " AND data_type = 'int')                " +
-                 " OR ( column_name = 'RUR_LUcellCount' " +
-                 " AND data_type = 'int')                " +
-                 " OR ( column_name = 'VAC_LUcellCount' " +
-                 " AND data_type = 'int')                " +
-                 " OR ( column_name = 'POS_LUcellCount' " +
-                 " AND data_type = 'int')                " +
-                 " OR ( column_name = 'Blnk_LUcellCount' " +
-                 " AND data_type = 'int')                " +
-                 " OR ( column_name = 'VEG_LON_pct' " +
-                 " AND data_type = 'float')                " +
-                 " OR ( column_name = 'VEG_LOFF_pct' " +
-                 " AND data_type = 'float')                " +
-                 " OR ( column_name = 'CPY_LON_pct' " +
-                 " AND data_type = 'float')                " +
-                 " OR ( column_name = 'CPY_LOFF_pct' " +
-                 " AND data_type = 'float')                " +
-                 " OR ( column_name = 'VEG_pct' " +
-                 " AND data_type = 'float')                " +
-                 " OR ( column_name = 'ROW_pct' " +
-                 " AND data_type = 'float')                " +
-                 " OR ( column_name = 'RF_pct' " +
-                 " AND data_type = 'float')                " +
-                 " OR ( column_name = 'PKG_pct' " +
-                 " AND data_type = 'float')                " +
-                 " OR ( column_name = 'IMP_pct' " +
-                 " AND data_type = 'float')                " +
-                 " OR ( column_name = 'TSS' " +
-                 " AND data_type = 'float')               " +
-                 " OR ( column_name = 'WAT_pct' " +
-                 " AND data_type = 'float')                " +
-                 " OR ( column_name = 'CAL_point' " +
-                 " AND data_type = 'int')                " +
-                 " OR ( column_name = 'WS_Code'  " +
-                 " AND data_type = 'int')                " +
-                 " OR ( column_name = 'BASIN_Code' " +
-                 " AND data_type = 'nvarchar')                " +
-                 " OR ( column_name = 'BRANCH_ID' " +
-                 " AND data_type = 'nvarchar')                " +
-                 " OR ( column_name = 'IN_PDX' " +
-                 " AND data_type = 'int')                " +
-                 " OR ( column_name = 'RAINGAGE' " +
-                 " AND data_type = 'nvarchar')                " +
-                 " OR ( column_name = 'COL_B' " +
-                 " AND data_type = 'float')                " +
-                 " OR ( column_name = 'COL_C' " +
-                 " AND data_type = 'float')                " +
-                 " OR ( column_name = 'COL_D' " +
-                 " AND data_type = 'float')                " +
-                 " OR ( column_name = 'COL_E' "  +
-                 " AND data_type = 'float')                " +
-                 " OR ( column_name = 'COL_F' "  +
-                 " AND data_type = 'float')                " +
-                 " OR ( column_name = 'COL_G' "  +
-                 " AND data_type = 'float')                " +
-                 " OR ( column_name = 'COL_H' "  +
-                 " AND data_type = 'float')                " +
-                 " OR ( column_name = 'COL_I' "  +
-                 " AND data_type = 'float')                " +
-                 " OR ( column_name = 'COL_J' "  +
-                 " AND data_type = 'float')                " +
-                 " OR ( column_name = 'COL_K' "  +
-                 " AND data_type = 'float')                " +
-                 " OR ( column_name = 'COL_L' "  +
-                 " AND data_type = 'float')                " +
-                 " OR ( column_name = 'COL_M' "  +
-                 " AND data_type = 'float')                " +
-                 " OR ( column_name = 'COL_N' "  +
-                 " AND data_type = 'float')                " +
-                 " OR ( column_name = 'COL_O' "  +
-                 " AND data_type = 'float')                " +
-                 " OR ( column_name = 'COL_P' "  +
-                 " AND data_type = 'float')                " +
-                 " OR ( column_name = 'COL_Q' "  +
-                 " AND data_type = 'float')                " +
-                 " OR ( column_name = 'COL_1' "  +
-                 " AND data_type = 'float')                " +
-                 " OR ( column_name = 'COL_2' "  +
-                 " AND data_type = 'float')                " +
-                 " OR ( column_name = 'COL_3' "  +
-                 " AND data_type = 'float')                "  +
-                 " OR ( column_name = 'TP' " +
-                 " AND data_type = 'float')                " +
-                 " OR ( column_name = 'TSS' "  +
-                 " AND data_type = 'float')               " +
-                 " OR ( column_name = 'TSS' "  +
-                 " AND data_type = 'float')                " +
-                 " OR ( column_name = 'ECOLI' "  +
-                 " AND data_type = 'float')                " +
-                 " OR ( column_name = 'BOD' "  +
-                 " AND data_type = 'float')                " +
-                 " OR ( column_name = 'TP_WET' "  +
-                 " AND data_type = 'float')                " +
-                 " OR ( column_name = 'TSS_WET' "  +
-                 " AND data_type = 'float')                " +
-                 " OR ( column_name = 'ECOLI_WET' "  +
-                 " AND data_type = 'float')                " +
-                 " OR ( column_name = 'BOD_WET' "  +
-                 " AND data_type = 'float')                " +
-                 " OR ( column_name = 'TP_DRY' "  +
-                 " AND data_type = 'float')                " +
-                 " OR ( column_name = 'TSS_DRY' "  +
-                 " AND data_type = 'float')                " +
-                 " OR ( column_name = 'ECOLI_DRY' "  +
-                 " AND data_type = 'float')                " +
-                 " OR ( column_name = 'BOD_DRY' "  +
-                 " AND data_type = 'float')                " +
-                 " OR ( column_name = 'PbD' "  +
-                 " AND data_type = 'float')                " +
-                 " OR ( column_name = 'PbD_DRY' "  +
-                 " AND data_type = 'float')                " +
-                 " OR ( column_name = 'PbD_WET' "  +
-                 " AND data_type = 'float')                " +
-                 " OR ( column_name = 'ECOLI_REMOVAL' "  +
-                 " AND data_type = 'float')                " +
-                 " OR ( column_name = 'Xc' "  +
-                 " AND data_type = 'float')                " +
-                 " OR ( column_name = 'Yc' "  +
-                 " AND data_type = 'float'))   " +
-               " AND table_name =  'GRID_WshdGrd100FtOpt') AS A";
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "Description", "string");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "Col_Name", "string");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "Row_Name", "string");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "Area_ft2", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "Avg_Slope", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "Public", "string");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "Private", "string");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "VEG_LONcellCount", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "VEG_LOFFcellCount", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "CPY_LONcellCount", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "ROW_CellCount", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "RF_CellCount", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "PKG_CellCount", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "IMP_CellCount", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "WAT_CellCount", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "TRA_LUcellCount", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "COM_LUcellCount", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "IND_LUcellCount", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "SFR_LUcellCount", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "MFR_LUcellCount", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "FOR_LUcellCount", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "RUR_LUcellCount", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "VAC_LUcellCount", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "POS_LUcellCount", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "Blnk_LUcellCount", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "VEG_LON_pct", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "VEG_LOFF_pct", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "CPY_LON_pct", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "CPY_LOFF_pct", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "VEG_pct", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "ROW_pct", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "RF_pct", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "PKG_pct", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "IMP_pct", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "TSS", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "WAT_pct", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "CAL_point", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "WS_Code", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "BASIN_Code", "string");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "BRANCH_ID", "string");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "IN_PDX", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "RAINGAGE", "string");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "COL_B", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "COL_C", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "COL_D", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "COL_E", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "COL_F", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "COL_G", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "COL_H", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "COL_I", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "COL_J", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "COL_K", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "COL_L", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "COL_M", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "COL_N", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "COL_O", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "COL_P", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "COL_Q", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "COL_1", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "COL_2", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "COL_3", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "TP", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "TSS", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "ECOLI", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "BOD", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "TP_WET", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "TSS_WET", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "ECOLI_WET", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "BOD_WET", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "TP_DRY", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "TSS_DRY", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "ECOLI_DRY", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "BOD_DRY", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "PbD", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "PbD_DRY", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "PbD_WET", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "ECOLI_REMOVAL", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "Xc", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "Yc", "number");
 
-            ScalarQueryResults = SQLHelper.SQLExecuteStringAsScalarQuery(columnSelectionString, dynamicInputDatabase, ScalarQueryResults);
-            //if ScalarQueryResults is not null, then we have a good answer
-            if (ScalarQueryResults == null)
+            if (numberOfMatchingColumns == null)
             {
                 MessageBox.Show("Could not test provided table for validity, please verify the source before trying to run the Grid Model");
             }
-            else if ((int)ScalarQueryResults != 81)
+            else if ((int)numberOfMatchingColumns != 79)
             {
                 MessageBox.Show("The table you indicated does not contain the necessary columns, please check the documentation for guidelines on creating a Grid Table");
             }
-            else
-            {
-                MessageBox.Show(((int)ScalarQueryResults).ToString());
-            }
-            
         }
 
         private void buttonPRFPathEdit_Click(object sender, EventArgs e)
         {
-            Object ScalarQueryResults = new Object();
+            int numberOfMatchingColumns = 0;
             string serverIsUsable = "";
             dynamicInputDatabase = "";
 
@@ -1490,44 +1546,39 @@ namespace SystemsAnalysis.Grid.GridAnalysis
 
             //make sure the table also has all of the appropriate columns
             //with all of the appropriate data types.
-            string columnSelectionString = "SELECT COUNT(*) FROM  " +
-               "(SELECT * FROM information_schema.columns  "  +
-               "WHERE   " +
-                "((column_name = 'MAPINFO_ID' " +
-                " AND data_type = 'int') " +
-                " OR (column_name = 'Description' " +
-                " AND data_type = 'nvarchar') " +
-                " OR (column_name = 'Percent_Overlap' " +
-                " AND data_type = 'float') " +
-                " OR (column_name = 'INSTREAM' " +
-                " AND data_type = 'bit') " +
-                " OR (column_name = 'BMP_ID' " +
-                " AND data_type = 'int') " +
-                " OR (column_name = 'BMP_Type1' " +
-                " AND data_type = 'nvarchar') " +
-                " OR (column_name = 'TimeFrame' " +
-                " AND data_type = 'nvarchar')) " +
-                " AND table_name =  'GRID_PDX_BMP_GRID') AS A";
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_PDX_BMP_GRID", dynamicInputDatabase, "Description", "string");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_PDX_BMP_GRID", dynamicInputDatabase, "Percent_Overlap", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_PDX_BMP_GRID", dynamicInputDatabase, "INSTREAM", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_PDX_BMP_GRID", dynamicInputDatabase, "BMP_ID", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_PDX_BMP_GRID", dynamicInputDatabase, "BMP_Type1", "string");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_PDX_BMP_GRID", dynamicInputDatabase, "TimeFrame", "string");
 
-            ScalarQueryResults = SQLHelper.SQLExecuteStringAsScalarQuery(columnSelectionString, dynamicInputDatabase, ScalarQueryResults);
             //if ScalarQueryResults is not null, then we have a good answer
-            if (ScalarQueryResults == null)
+            if (numberOfMatchingColumns == null)
             {
                 MessageBox.Show("Could not test provided table for validity, please verify the source before trying to run the Grid Model");
             }
-            else if ((int)ScalarQueryResults != 7)
+            else if ((int)numberOfMatchingColumns != 6)
             {
                 MessageBox.Show("The table you indicated does not contain the necessary columns, please check the documentation for guidelines on creating a BMP Table");
-            }
-            else
-            {
-                MessageBox.Show(((int)ScalarQueryResults).ToString());
             }
         }
 
         private void buttonMIPPathEdit_Click(object sender, EventArgs e)
         {
-            Object ScalarQueryResults = new Object();
+            int numberOfMatchingColumns = 0;
             string serverIsUsable = "";
             dynamicInputDatabase = "";
 
@@ -1544,42 +1595,33 @@ namespace SystemsAnalysis.Grid.GridAnalysis
                 MessageBox.Show(serverIsUsable);
             }
 
-            //make sure the table also has all of the appropriate columns
-            //with all of the appropriate data types.
-            string columnSelectionString = "SELECT COUNT(*) FROM  " +
-               "(SELECT * FROM information_schema.columns  " +
-               "WHERE   " +
-                "((column_name = 'MAPINFO_ID' " +
-                " AND data_type = 'int') " +
-                " OR (column_name = 'Description' " +
-                " AND data_type = 'nvarchar') " +
-                " OR (column_name = 'Percent_Overlap' " +
-                " AND data_type = 'float') " +
-                " OR (column_name = 'BMP_Type' " +
-                " AND data_type = 'nvarchar') " +
-                " OR (column_name = 'Description_2' " +
-                " AND data_type = 'nvarchar')) " +
-                " AND table_name =  'GRID_PDX_MIP_GRID') AS A";
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_PDX_MIP_GRID", dynamicInputDatabase, "Description", "string");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_PDX_MIP_GRID", dynamicInputDatabase, "Percent_Overlap", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_PDX_MIP_GRID", dynamicInputDatabase, "BMP_Type", "string");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_PDX_MIP_GRID", dynamicInputDatabase, "Description_2", "string");
 
-            ScalarQueryResults = SQLHelper.SQLExecuteStringAsScalarQuery(columnSelectionString, dynamicInputDatabase, ScalarQueryResults);
             //if ScalarQueryResults is not null, then we have a good answer
-            if (ScalarQueryResults == null)
+            if (numberOfMatchingColumns == null)
             {
                 MessageBox.Show("Could not test provided table for validity, please verify the source before trying to run the Grid Model");
             }
-            else if ((int)ScalarQueryResults != 5)
+            else if ((int)numberOfMatchingColumns != 4)
             {
                 MessageBox.Show("The table you indicated does not contain the necessary columns, please check the documentation for guidelines on creating a MIP Table");
-            }
-            else
-            {
-                MessageBox.Show(((int)ScalarQueryResults).ToString());
             }
         }
 
         private void buttonOSFPathEdit_Click(object sender, EventArgs e)
         {
-            Object ScalarQueryResults = new Object();
+            int numberOfMatchingColumns = 0;
             string serverIsUsable = "";
             dynamicInputDatabase = "";
 
@@ -1597,35 +1639,25 @@ namespace SystemsAnalysis.Grid.GridAnalysis
             }
             //make sure the table also has all of the appropriate columns
             //with all of the appropriate data types.
-            string columnSelectionString = "SELECT COUNT(*) FROM  " +
-               "(SELECT * FROM information_schema.columns  " +
-               "WHERE   " +
-                "((column_name = 'MAPINFO_ID' " +
-                " AND data_type = 'int') " +
-                " OR (column_name = 'Description' " +
-                " AND data_type = 'nvarchar') " +
-                " OR (column_name = 'Percent_Overlap' " +
-                " AND data_type = 'float') " +
-                " OR (column_name = 'FAC_GRP' " +
-                " AND data_type = 'nvarchar') " +
-                " AND table_name =  'GRID_PDX_OSF_GRID') AS A";
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_PDX_OSF_GRID", dynamicInputDatabase, "Description", "string");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_PDX_OSF_GRID", dynamicInputDatabase, "Percent_Overlap", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_PDX_OSF_GRID", dynamicInputDatabase, "FAC_GRP", "string");
 
-            ScalarQueryResults = SQLHelper.SQLExecuteStringAsScalarQuery(columnSelectionString, dynamicInputDatabase, ScalarQueryResults);
             //if ScalarQueryResults is not null, then we have a good answer
-            if (ScalarQueryResults == null)
+            if (numberOfMatchingColumns == null)
             {
                 MessageBox.Show("Could not test provided table for validity, please verify the source before trying to run the Grid Model");
             }
-            else if ((int)ScalarQueryResults != 4)
+            else if ((int)numberOfMatchingColumns != 3)
             {
                 MessageBox.Show("The table you indicated does not contain the necessary columns, please check the documentation for guidelines on creating a OSF Table");
             }
-            else
-            {
-                MessageBox.Show(((int)ScalarQueryResults).ToString());
-            }
         }
-
-        
     }
 }
