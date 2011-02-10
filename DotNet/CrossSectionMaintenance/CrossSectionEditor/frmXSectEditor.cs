@@ -10,12 +10,22 @@ using System.Xml.Schema;
 using System.Xml;
 using System.Reflection;
 using System.IO;
+using Infragistics.UltraChart.Core;
 
 namespace SystemsAnalysis.EMGAATS.CrossSectionEditor
 {
   public partial class frmXSectEditor : Form
-  {
-    private bool setLeftStation, setRightStation = false;
+  {    
+    private enum ChartAction 
+    { 
+      None, SetLeftStation, SetRightStation, 
+      AddPoint, MovePoint, MovingPoint, DeletePoint 
+    };
+    private ChartAction chartAction = ChartAction.None;
+    private IAdvanceAxis XAxis { get; set; }
+    private IAdvanceAxis YAxis { get; set; }
+    private ProcessedXSectDataSet.PointListRow activePointListRow = null;
+    
 
     public frmXSectEditor()
     {
@@ -34,6 +44,9 @@ namespace SystemsAnalysis.EMGAATS.CrossSectionEditor
     {
       if (e.SceneGraph.Count > 2)
         chrtXSectDisplay.InvalidDataReceived += new Infragistics.UltraChart.Shared.Events.ChartDataInvalidEventHandler(chrtXSectDisplay_InvalidDataReceived);
+
+      this.XAxis = (IAdvanceAxis)e.Grid["X"];
+      this.YAxis = (IAdvanceAxis)e.Grid["Y"];
     }
 
     void chrtXSectDisplay_InvalidDataReceived(object sender, Infragistics.UltraChart.Shared.Events.ChartDataInvalidEventArgs e)
@@ -66,61 +79,8 @@ namespace SystemsAnalysis.EMGAATS.CrossSectionEditor
       if (e.BindingCompleteContext ==
         BindingCompleteContext.DataSourceUpdate && e.Exception == null)
         e.Binding.BindingManagerBase.EndCurrentEdit();
-    }
-
-    private void chrtXSectDisplay_ChartDataClicked(object sender, Infragistics.UltraChart.Shared.Events.ChartDataEventArgs e)
-    {
-      ProcessedXSectDataSet.XSectsRow xSectRow = SelectedXSectsRow;
-      if (setLeftStation)
-      {
-        if (e.DataValue < xSectRow.RightOverbankStation)
-          xSectRow.LeftOverbankStation = e.DataValue;
-        else
-          MessageBox.Show("Left station must be on left side of channel.");
-      }
-
-
-      if (setRightStation)
-      {
-        if (e.DataValue > xSectRow.LeftOverbankStation)
-          xSectRow.RightOverbankStation = e.DataValue;
-        else
-          MessageBox.Show("Right station must be on right side of channel.");
-      }
-
-      setLeftStation = false;
-      setRightStation = false;
-      this.LoadXSect(xSectRow.XSectName);
-      Cursor = Cursors.Default;
-    }
-
-    private void txtLeftStation_EditorButtonClick(object sender, Infragistics.Win.UltraWinEditors.EditorButtonEventArgs e)
-    {
-      setLeftStation = !setLeftStation;
-      setRightStation = false;
-      if (!setLeftStation)
-      {
-        Cursor = Cursors.Default;
-        return;
-      }
-      Cursor = Cursors.Cross;
-
-    }
-
-    private void txtRightStation_EditorButtonClick(object sender, Infragistics.Win.UltraWinEditors.EditorButtonEventArgs e)
-    {
-      setRightStation = !setRightStation;
-      setLeftStation = false;
-      if (!setRightStation)
-      {
-        Cursor = Cursors.Default;
-        return;
-      }
-      Cursor = Cursors.Cross;
-
-
-    }
-
+    }    
+  
     private void optStationOrder_ValueChanged(object sender, EventArgs e)
     {
       SwapLeftAndRight();
@@ -255,6 +215,7 @@ namespace SystemsAnalysis.EMGAATS.CrossSectionEditor
         return;
 
       chrtXSectDisplay.DataBindings.Clear();
+      processedXSectDS.Clear();
       try
       {
         processedXSectDS.ReadXml(openFileDialog.FileName);
@@ -500,7 +461,7 @@ namespace SystemsAnalysis.EMGAATS.CrossSectionEditor
       double minElev = Double.MaxValue;
       double maxElev = Double.MinValue;
 
-      foreach (ProcessedXSectDataSet.PointListRow pointRow in xSectRow.GetPointListRows())
+      foreach (ProcessedXSectDataSet.PointListRow pointRow in xSectRow.GetPointListRows().OrderBy(p => p.Station))
       {
         processedXSectDS.ChartTable.AddChartTableRow("Cross-Section", pointRow.Station, pointRow.Elevation);
 
@@ -574,6 +535,138 @@ namespace SystemsAnalysis.EMGAATS.CrossSectionEditor
     {
 
     }
+
+    private void chrtXSectDisplay_ChartDataClicked(object sender, Infragistics.UltraChart.Shared.Events.ChartDataEventArgs e)
+    {
+      ProcessedXSectDataSet.XSectsRow xSectRow = SelectedXSectsRow;
+      switch (chartAction)
+      {
+        case ChartAction.SetLeftStation:
+          if (e.DataValue < xSectRow.RightOverbankStation)
+            xSectRow.LeftOverbankStation = e.DataValue;
+          else
+            MessageBox.Show("Left station must be on left side of channel.");
+          chartAction = ChartAction.None;
+          break;
+        case ChartAction.SetRightStation:
+          if (e.DataValue > xSectRow.LeftOverbankStation)
+            xSectRow.RightOverbankStation = e.DataValue;
+          else
+            MessageBox.Show("Right station must be on right side of channel.");
+          chartAction = ChartAction.None;
+          break;
+        case ChartAction.AddPoint:
+          MessageBox.Show("A point already exits at this location.");
+          chartAction = ChartAction.None;
+          break;
+        case ChartAction.DeletePoint:
+          foreach (ProcessedXSectDataSet.PointListRow row in xSectRow.GetPointListRows())
+          {
+            if (row.Station == e.DataValue)
+            {
+              row.Delete();
+              break;
+            }
+          }          
+          break;
+        case ChartAction.MovePoint:
+          foreach (ProcessedXSectDataSet.PointListRow row in xSectRow.GetPointListRows())
+          {
+            if (row.Station == e.DataValue)
+            {
+              activePointListRow = row;
+              break;
+            }
+          }          
+          break;
+      }
+
+
+      this.LoadXSect(xSectRow.XSectName);
+      Cursor = Cursors.Default;
+    }
+
+    private void chrtXSectDisplay_MouseDown(object sender, MouseEventArgs e)
+    {
+      if (this.XAxis == null || this.YAxis == null)
+        return;
+
+      
+      double xValue = (double)this.XAxis.MapInverse(e.X);
+      double yValue = (double)this.YAxis.MapInverse(e.Y);
+      ProcessedXSectDataSet.XSectsRow xSectRow = SelectedXSectsRow;
+
+      switch (chartAction)
+      {
+        case ChartAction.AddPoint:
+          processedXSectDS.PointList.AddPointListRow(xSectRow, xValue, yValue);
+          LoadXSect(xSectRow.XSectName);
+          break;
+        case ChartAction.MovingPoint:
+          break;
+        default:
+          //chartAction = ChartAction.None;
+          break;
+      }      
+    }
+
+    private void txtLeftStation_EditorButtonClick(object sender, Infragistics.Win.UltraWinEditors.EditorButtonEventArgs e)
+    {
+      chartAction = ChartAction.SetLeftStation;
+    }
+
+    private void txtRightStation_EditorButtonClick(object sender, Infragistics.Win.UltraWinEditors.EditorButtonEventArgs e)
+    {
+      chartAction = ChartAction.SetRightStation;
+    }
+
+    private void btnSetLeftOverbank_Click(object sender, EventArgs e)
+    {
+      chartAction = ChartAction.SetLeftStation;
+    }
+
+    private void btnSetRightOverbank_Click(object sender, EventArgs e)
+    {
+      chartAction = ChartAction.SetRightStation;
+    }
+
+    private void btnMovePoint_Click(object sender, EventArgs e)
+    {
+      chartAction = ChartAction.MovePoint;
+    }
+
+    private void btnAddPoint_Click(object sender, EventArgs e)
+    {
+      chartAction = ChartAction.AddPoint;
+    }
+
+    private void btnDeletePoint_Click(object sender, EventArgs e)
+    {
+      chartAction = ChartAction.DeletePoint;
+    }
+
+    private void chrtXSectDisplay_MouseMove(object sender, MouseEventArgs e)
+    {
+      
+      ProcessedXSectDataSet.XSectsRow xSectRow = SelectedXSectsRow;
+
+      if (this.chartAction != ChartAction.MovePoint || activePointListRow == null)
+        return;
+
+      double xValue = (double)this.XAxis.MapInverse(e.X);
+      double yValue = (double)this.YAxis.MapInverse(e.Y);
+
+      activePointListRow.Station = xValue;
+      activePointListRow.Elevation = yValue;
+
+      LoadXSect(activePointListRow.XSectName);     
+     
+    }
+
+    private void chrtXSectDisplay_MouseUp(object sender, MouseEventArgs e)
+    {
+      activePointListRow = null;
+    } 
 
   }
 }
