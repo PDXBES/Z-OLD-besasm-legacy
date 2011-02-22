@@ -17,3 +17,4 @@ glob:TestResults/*
 glob:*.bak
 glob:Delphi/XPSWMMResultsProcessor/XPResults.identcache
 glob:Delphi/XPSWMMResultsProcessor/TestDLL.identcache
+glob:Delphi/EMGAATS Shell/EMGAATS.smp

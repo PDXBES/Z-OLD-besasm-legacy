@@ -68,25 +68,10 @@ uses
   fMain in 'fMain.pas' {frmMain},
   fChild in 'fChild.pas' {frmChild},
   fLabeledChild in 'fLabeledChild.pas' {frmLabeledChild},
-  fBuildModels in 'fBuildModels.pas' {frmBuildModels},
-  fModifyModelBoundaries in 'fModifyModelBoundaries.pas' {frmModifyModelBoundaries},
-  fBuildPipeSystem in 'fBuildPipeSystem.pas' {frmBuildPipeSystem},
-  fBuildLateralsAndParcels in 'fBuildLateralsAndParcels.pas' {frmBuildLateralsAndParcels},
-  fBuildSubcatchments in 'fBuildSubcatchments.pas' {frmBuildSubcatchments},
-  dmStateMachine in 'dmStateMachine.pas' {StateMachine: TDataModule},
   GlobalConstants in 'GlobalConstants.pas',
-  fDeployModelToEngine in 'fDeployModelToEngine.pas' {frmDeployModel},
   dmMapinfo in 'dmMapinfo.pas' {CobjMICB: CoClass},
-  fgetStormOption in 'fgetStormOption.pas' {frmStormOption},
-  utilMSaccess in 'utilMSaccess.pas',
-  unitmodelcontrols in 'unitmodelcontrols.pas',
   fSplash in 'fSplash.pas' {frmSplash},
   uWorkbenchDefs in 'uWorkbenchDefs.pas',
-  fgetTimeFrame in 'fgetTimeFrame.pas' {frmTimeFrame},
-  fModelResults in 'fModelResults.pas' {frmModelResults},
-  fStatus in 'fStatus.pas' {frmStatus},
-  fPerformQualityControl in 'fPerformQualityControl.pas' {frmPerformQualityControl},
-  dCopyBoundaries in 'dCopyBoundaries.pas' {dlgCopyBoundaries},
   EMGAATS_TLB in 'EMGAATS_TLB.pas',
   uUtilities in 'uUtilities.pas',
   pngimage,
@@ -175,12 +160,6 @@ begin
     PNGImage.Free;
     Sleep(2000);
   end;
-
-  Application.CreateForm(TStateMachine, StateMachine);
-  Application.CreateForm(TfrmStormOption, frmStormOption);
-  Application.CreateForm(TfrmTimeFrame, frmTimeFrame);
-  Application.CreateForm(TfrmStatus, frmStatus);
-  Application.CreateForm(TdlgCopyBoundaries, dlgCopyBoundaries);
 
   // Draw the original desktop image if splash was shown
   if SystemConfig.ShowSplashScreen then
