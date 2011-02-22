@@ -13,7 +13,6 @@ object frmMain: TfrmMain
   OldCreateOrder = False
   Position = poDesigned
   ShowHint = True
-  OnClose = FormClose
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow
@@ -21,9 +20,9 @@ object frmMain: TfrmMain
   TextHeight = 13
   object RzSizePanel1: TRzSizePanel
     Left = 0
-    Top = 25
+    Top = 23
     Width = 8
-    Height = 481
+    Height = 483
     Hint = 
       'Click hot-spot to shrink or expand tasks panel, or drag the grip' +
       ' to resize manually.'
@@ -40,7 +39,7 @@ object frmMain: TfrmMain
       Left = 0
       Top = 0
       Width = 0
-      Height = 481
+      Height = 483
       GradientColorStart = clBtnFace
       GradientColorStop = clBtnShadow
       GroupBorderSize = 4
@@ -53,10 +52,14 @@ object frmMain: TfrmMain
         CanClose = False
         Items = <
           item
-            Action = actNewModel
+            Caption = '&New Model...'
+            Hint = 'New Model...'
+            ImageIndex = 0
           end
           item
-            Action = actOpenModel
+            Caption = '&Open Model...'
+            Hint = 'Open Model...'
+            ImageIndex = 1
           end>
         Opened = True
         OpenedHeight = 92
@@ -67,19 +70,19 @@ object frmMain: TfrmMain
         CanClose = False
         Items = <
           item
-            Action = actBuildModelPipeSystem
+            Caption = 'Build pipe system'
           end
           item
-            Action = actBuildModelLateralsAndParcels
+            Caption = 'Build laterals and parcels'
           end
           item
-            Action = actBuildModelSubcatchments
+            Caption = 'Build subcatchments'
           end
           item
-            Action = actBuildModelDeployModel
+            Caption = 'Deploy model'
           end
           item
-            Action = actBuildModelPerformQualityControl
+            Caption = 'Perform quality control'
           end>
         Opened = True
         OpenedHeight = 240
@@ -90,19 +93,19 @@ object frmMain: TfrmMain
         CanClose = False
         Items = <
           item
-            Action = actToolsInterfaceMaster
+            Caption = 'InterfaceMaster'
           end
           item
-            Action = actToolsProfiler
+            Caption = 'Profiler'
           end
           item
-            Action = actToolsUpstreamTracer
+            Caption = 'UpstreamTracer'
           end
           item
-            Action = actToolsHoptimizer
+            Caption = 'Hoptimizer'
           end
           item
-            Action = actRestartWorkbenches
+            Caption = 'Restart Workbenches'
           end>
         Opened = True
         OpenedHeight = 140
@@ -113,20 +116,20 @@ object frmMain: TfrmMain
   end
   object RzPanel1: TRzPanel
     Left = 8
-    Top = 25
+    Top = 23
     Width = 704
-    Height = 481
+    Height = 483
     Align = alClient
     BorderOuter = fsNone
     TabOrder = 5
     DesignSize = (
       704
-      481)
+      483)
     object RzBackground1: TRzBackground
       Left = 0
       Top = 0
       Width = 704
-      Height = 481
+      Height = 483
       Active = True
       Align = alClient
       ImageStyle = isStretch
@@ -144,7 +147,7 @@ object frmMain: TfrmMain
       Left = 12
       Top = 12
       Width = 689
-      Height = 457
+      Height = 459
       Anchors = [akLeft, akTop, akRight, akBottom]
       BorderOuter = fsNone
       TabOrder = 0
@@ -152,14 +155,14 @@ object frmMain: TfrmMain
         Left = 0
         Top = 0
         Width = 689
-        Height = 438
+        Height = 440
         Align = alClient
         BorderOuter = fsNone
         TabOrder = 0
       end
       object RzStatusBar1: TRzStatusBar
         Left = 0
-        Top = 438
+        Top = 440
         Width = 689
         Height = 19
         BorderInner = fsNone
@@ -192,91 +195,12 @@ object frmMain: TfrmMain
     Left = 216
     Top = 288
     StyleName = 'XP Style'
-    object actBuildModels: TAction
-      Category = 'Tasks'
-      Caption = 'Build Models'
-      OnExecute = actBuildModelsExecute
-    end
-    object actNewModel: TAction
-      Category = 'File'
-      Caption = '&New Model...'
-      Hint = 'New Model...'
-      ImageIndex = 0
-      ShortCut = 16462
-      OnExecute = actNewModelExecute
-    end
-    object actOpenModel: TAction
-      Category = 'File'
-      Caption = '&Open Model...'
-      Hint = 'Open Model...'
-      ImageIndex = 1
-      ShortCut = 16463
-      OnExecute = actOpenModelExecute
-    end
-    object actMasterUpdateWithChangeLogs: TAction
-      Category = 'Master'
-      Caption = 'Update with Change Logs...'
-      OnExecute = actMasterUpdateWithChangeLogsExecute
-    end
     object actFileExit: TFileExit
       Category = 'File'
       Caption = 'E&xit'
       Hint = 'Exit|Quits the application'
       ImageIndex = 43
       ShortCut = 32883
-    end
-    object actToolsInterfaceMaster: TAction
-      Category = 'Tools'
-      Caption = 'InterfaceMaster'
-      OnExecute = actToolsInterfaceMasterExecute
-    end
-    object actToolsProfiler: TAction
-      Category = 'Tools'
-      Caption = 'Profiler'
-    end
-    object actToolsUpstreamTracer: TAction
-      Category = 'Tools'
-      Caption = 'UpstreamTracer'
-    end
-    object actToolsHoptimizer: TAction
-      Category = 'Tools'
-      Caption = 'Hoptimizer'
-    end
-    object actRestartWorkbenches: TAction
-      Category = 'Tools'
-      Caption = 'Restart Workbenches'
-      OnExecute = actRestartWorkbenchesExecute
-      OnUpdate = actRestartWorkbenchesUpdate
-    end
-    object actBuildModelPipeSystem: TAction
-      Category = 'BuildModel'
-      Caption = 'Build pipe system'
-      OnExecute = actBuildModelPipeSystemExecute
-      OnUpdate = actBuildModelPipeSystemUpdate
-    end
-    object actBuildModelLateralsAndParcels: TAction
-      Category = 'BuildModel'
-      Caption = 'Build laterals and parcels'
-      OnExecute = actBuildModelLateralsAndParcelsExecute
-      OnUpdate = actBuildModelLateralsAndParcelsUpdate
-    end
-    object actBuildModelSubcatchments: TAction
-      Category = 'BuildModel'
-      Caption = 'Build subcatchments'
-      OnExecute = actBuildModelSubcatchmentsExecute
-      OnUpdate = actBuildModelSubcatchmentsUpdate
-    end
-    object actBuildModelDeployModel: TAction
-      Category = 'BuildModel'
-      Caption = 'Deploy model'
-      OnExecute = actBuildModelDeployModelExecute
-      OnUpdate = actBuildModelDeployModelUpdate
-    end
-    object actBuildModelPerformQualityControl: TAction
-      Category = 'BuildModel'
-      Caption = 'Perform quality control'
-      OnExecute = actBuildModelPerformQualityControlExecute
-      OnUpdate = actBuildModelPerformQualityControlUpdate
     end
     object actHelpSendTicket: TAction
       Category = 'Help'
@@ -467,8 +391,8 @@ object frmMain: TfrmMain
   object barManager: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -12
-    Font.Name = 'Segoe UI'
+    Font.Height = -11
+    Font.Name = 'Tahoma'
     Font.Style = []
     Bars = <
       item
@@ -538,7 +462,7 @@ object frmMain: TfrmMain
     DockControlHeights = (
       0
       0
-      25
+      23
       0)
     object mnuFile: TdxBarSubItem
       Caption = '&File'
@@ -551,12 +475,20 @@ object frmMain: TfrmMain
         end>
     end
     object mnuFileNewModel: TdxBarButton
-      Action = actNewModel
+      Caption = '&New Model...'
       Category = 1
+      Hint = 'New Model...'
+      Visible = ivAlways
+      ImageIndex = 0
+      ShortCut = 16462
     end
     object mnuFileOpenModel: TdxBarButton
-      Action = actOpenModel
+      Caption = '&Open Model...'
       Category = 1
+      Hint = 'Open Model...'
+      Visible = ivAlways
+      ImageIndex = 1
+      ShortCut = 16463
     end
     object mnuFileExit: TdxBarButton
       Action = actFileExit

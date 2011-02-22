@@ -588,9 +588,6 @@ begin
 end;
 
 procedure TMacroCommand.Execute;
-var
-  i: Integer;
-  CurrentCommand: IEMGAATSModelCommand;
 begin
   CodeSite.EnterMethod('TMacroCommand.Execute: ' + fName);
   if fEnabled then
@@ -1206,8 +1203,6 @@ procedure TCreateEmptyModelDataCommand.Execute;
 var
   ICDirectoryPath: String;
   CommandText: String;
-  MDBsPath: String;
-  ModelPath: String;
 begin
   inherited;
   if not fEnabled then
@@ -2046,7 +2041,6 @@ begin
         EndYearOverride := adoQuery.FieldValues['EndYearOverride'];
         StartDateToWrite := IfThen(StartYearOverride = 0, YearOf(StartDate),
           StartYearOverride);
-        TimeStep := adoQuery.FieldValues['TimeStepMinutes'];
 
         Assert(EndDate > StartDate, Format('Start date of storm %s = %s is later than ' +
           'end date of storm = %s',

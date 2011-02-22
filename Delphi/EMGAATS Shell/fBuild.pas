@@ -550,7 +550,6 @@ var
   StartDate: TDateTime;
   EndDate: TDateTime;
   i: Integer;
-  StormsToBuild: TStringList;
   NumCommands: Integer;
 const
   ProgressPanelMargin = 500;
@@ -735,10 +734,6 @@ begin
 end;
 
 procedure TfrmBuild.btnLoadClick(Sender: TObject);
-var
-  TempModel: TEMGAATSModel;
-  Roots: TStringList;
-  Stops: TStringList;
 begin
   inherited;
   LoadModel;
@@ -815,14 +810,10 @@ end;
 
 procedure TfrmBuild.CheckBoxesFromStormListString(AStormList: String);
 var
-  EditValueTokens: TStringList;
-  CheckedValueTokens: TStringList;
-  i, j: Integer;
+  i: Integer;
   StormList: TStringList;
   CurrentStormID: String;
-  EditValue: String;
   OriginalFocusedRow: TcxCustomRow;
-  ComboBoxProperties: TcxCheckComboBoxProperties;
   ComboBox: TcxCheckComboBox;
   ComboBoxItemCounter: Integer;
 begin
