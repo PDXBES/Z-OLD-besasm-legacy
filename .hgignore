@@ -14,3 +14,6 @@ glob:Delphi/InterfaceMaster/ModelSupport_InterfaceMaster/InterfaceMaster.prjconf
 glob:DotNet/StormwaterInterface/SWI_2/AddInLog.txt
 glob:*.bkp
 glob:TestResults/*
+glob:*.bak
+glob:Delphi/XPSWMMResultsProcessor/XPResults.identcache
+glob:Delphi/XPSWMMResultsProcessor/TestDLL.identcache

@@ -152,7 +152,7 @@
 			<VersionInfo Name="MajorVer">2</VersionInfo>
 			<VersionInfo Name="MinorVer">2</VersionInfo>
 			<VersionInfo Name="Release">0</VersionInfo>
-			<VersionInfo Name="Build">32</VersionInfo>
+			<VersionInfo Name="Build">33</VersionInfo>
 			<VersionInfo Name="Debug">False</VersionInfo>
 			<VersionInfo Name="PreRelease">False</VersionInfo>
 			<VersionInfo Name="Special">False</VersionInfo>
@@ -164,7 +164,7 @@
 		<VersionInfoKeys>
 			<VersionInfoKeys Name="CompanyName">City of Portland, BES/DJC Eng/CH2M Hill</VersionInfoKeys>
 			<VersionInfoKeys Name="FileDescription">EMGAATS Shell</VersionInfoKeys>
-			<VersionInfoKeys Name="FileVersion">2.2.0.32</VersionInfoKeys>
+			<VersionInfoKeys Name="FileVersion">2.2.0.33</VersionInfoKeys>
 			<VersionInfoKeys Name="InternalName"></VersionInfoKeys>
 			<VersionInfoKeys Name="LegalCopyright"></VersionInfoKeys>
 			<VersionInfoKeys Name="LegalTrademarks"></VersionInfoKeys>

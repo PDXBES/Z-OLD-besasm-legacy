@@ -2169,11 +2169,6 @@
       <field name="ActionList1" type="TActionList" visibility="published" />
       <field name="actXPresults" type="TAction" visibility="published" />
       <field name="OpenDialog1" type="TOpenDialog" visibility="published" />
-      <procedure name="xpresults" visibility="published">
-        <parameters>
-          <parameter name="Sender" type="TObject" />
-        </parameters>
-      </procedure>
       <procedure name="FormShow" visibility="published">
         <parameters>
           <parameter name="Sender" type="TObject" />
@@ -2192,11 +2187,4 @@
     </members>
   </class>
   <variable name="frmModelResults" type="TfrmModelResults" />
-  <function name="getXPresults" visibility="private" callconv="stdcall">
-    <parameters>
-      <parameter name="InPath" type="PAnsiChar" />
-      <parameter name="OutPath" type="PAnsiChar" />
-      <retval type="Integer" />
-    </parameters>
-  </function>
 </namespace>

@@ -29,7 +29,7 @@ type
     actXPresults: TAction;
     OpenDialog1: TOpenDialog;
 
-    procedure xpresults(Sender: TObject);
+//    procedure xpresults(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure actXPresultsExecute(Sender: TObject);
     procedure Button2Click(Sender: TObject);
@@ -41,8 +41,8 @@ type
 
 var
   frmModelResults: TfrmModelResults;
-	function getXPresults(InPath, OutPath: PChar): Integer; stdcall;
-		external  'XPResults.dll';
+//	function getXPresults(InPath, OutPath: PChar): Integer; stdcall;
+//		external  'XPResults.dll';
 
 implementation
 
@@ -63,12 +63,12 @@ procedure TfrmModelResults.actXPresultsExecute(Sender: TObject);
 begin
   inherited;
   Screen.Cursor := crHourGlass;
-  XPresults(sender);
+//  XPresults(sender);
   Screen.Cursor := crDefault;
 
 end;
 
-procedure TfrmModelResults.XPresults(Sender: TObject);
+{procedure TfrmModelResults.XPresults(Sender: TObject);
 var
   rcxp : integer ;
   projdir : string;
@@ -177,7 +177,7 @@ begin
   showmessage('XP results successfully extracted');
 
 end;
-
+}
 
 
 
