@@ -754,7 +754,7 @@ namespace SystemsAnalysis.Utils.AccessUtils
         // Make sure specified database (sDBPath) exists:
         if (!System.IO.File.Exists(sDBPath))
         {
-          throw new Exception("AccessHelp can't find the file '" + sDBPath + "'");
+          throw new Exception("AccessHelper can't find the file '" + sDBPath + "'");
         }
 
         // Start a new instance of Access passing sDBPath and sCmdLine:

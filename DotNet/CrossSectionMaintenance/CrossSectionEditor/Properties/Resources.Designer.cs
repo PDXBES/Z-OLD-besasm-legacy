@@ -66,5 +66,19 @@ namespace SystemsAnalysis.EMGAATS.CrossSectionEditor.Properties {
                 return ((System.Drawing.Icon)(obj));
             }
         }
+        
+        internal static System.Drawing.Bitmap CrossSectionEditorImage {
+            get {
+                object obj = ResourceManager.GetObject("CrossSectionEditorImage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap notes {
+            get {
+                object obj = ResourceManager.GetObject("notes", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

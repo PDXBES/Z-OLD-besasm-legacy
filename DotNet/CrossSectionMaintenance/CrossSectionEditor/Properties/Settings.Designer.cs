@@ -22,5 +22,28 @@ namespace SystemsAnalysis.EMGAATS.CrossSectionEditor.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=\\\\cassio\\modeling\\SAMaster_22\\Links\\" +
+            "mst_xsections.mdb")]
+        public string mst_xsectionsConnectionString {
+            get {
+                return ((string)(this["mst_xsectionsConnectionString"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Dsn=MS Access Database;dbq=W:\\SAMaster_22\\Links\\mst_xsections.mdb;defaultdir=W:\\S" +
+            "AMaster_22\\Links;driverid=25;fil=MS Access;maxbuffersize=2048;pagetimeout=5;uid=" +
+            "admin")]
+        public string ConnectionString {
+            get {
+                return ((string)(this["ConnectionString"]));
+            }
+        }
     }
 }

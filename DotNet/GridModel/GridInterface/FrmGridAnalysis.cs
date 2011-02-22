@@ -15,9 +15,11 @@ using SystemsAnalysis.Utils.DataMobility;
 namespace SystemsAnalysis.Grid.GridAnalysis
 {
     public partial class FrmGridAnalysis : Form
-    {
+    {    
         GridModelEngine gridModelEngine;
         GridModelOutput gridModelOutput;
+
+        //variables for the main server connection
         string userID = "";
         string password = "";
         string domain = "";
@@ -26,6 +28,19 @@ namespace SystemsAnalysis.Grid.GridAnalysis
         bool trustedConnection = false;
         bool SQLisSource = true;
 
+        //variables for the user selected server connections
+        //these variables are used for multiple different connections
+        //so they should not be expected to remain static
+        string dynamicUserID = "";
+        string dynamicPassword = "";
+        string dynamicDomain = "";
+        string dynamicServer = "";
+        string dynamicDatabase = "";
+        string dynamicTableName = "";
+        string dynamicInputDatabase = "";
+        bool dynamicTrustedConnection = false;
+
+        //variables for the archive server connection
         string ArchiveUserID = "";
         string ArchivePassword = "";
         string ArchiveDomain = "";
@@ -63,10 +78,10 @@ namespace SystemsAnalysis.Grid.GridAnalysis
 
                 
                 //test the connection information:
-                inputDatabase = "Data Source=" + server + ";Initial Catalog=" + database;
+                inputDatabase = "Server=" + server + ";Database=" + database;
                 if (trustedConnection == true)
                 {
-                    inputDatabase += ";Trusted_Connection=yes";
+                    inputDatabase += ";Trusted_Connection=yes;";
                 }
                 else
                 {
@@ -117,16 +132,16 @@ namespace SystemsAnalysis.Grid.GridAnalysis
                         string inputDatabaseStringForAccess = "ODBC;"/*DRIVER={sql server}*/+ ";DSN=" + server + ";DATABASE = " + database;
                         if (trustedConnection == true)
                         {
-                            inputDatabaseStringForAccess += ";Trusted_Connection=yes";
+                            inputDatabaseStringForAccess += ";Trusted_Connection=yes;";
                         }
                         else
                         {
                             inputDatabaseStringForAccess += ";Persist Security Info=True;User ID=" + userID + ";Password=" + password;
                         }
-                        string outputDatabaseStringForAccess = "Data Source=" + server + ";Initial Catalog=" + database;
+                        string outputDatabaseStringForAccess = "Server=" + server + ";Database=" + database;
                         if (trustedConnection == true)
                         {
-                            outputDatabaseStringForAccess += ";Trusted_Connection=yes";
+                            outputDatabaseStringForAccess += ";Trusted_Connection=yes;";
                         }
                         else
                         {
@@ -743,10 +758,10 @@ namespace SystemsAnalysis.Grid.GridAnalysis
             int projectID = (int)drv["project_id"];
             string projectDescription = (string)drv["project_description"];
 
-            string inputDatabase = "Data Source=" + server + ";Initial Catalog=" + database;
+            string inputDatabase = "Server=" + server + ";Database=" + database;
             if (trustedConnection == true)
             {
-                inputDatabase += ";Trusted_Connection=yes";
+                inputDatabase += ";Trusted_Connection=yes;";
             }
             else
             {
@@ -896,19 +911,19 @@ namespace SystemsAnalysis.Grid.GridAnalysis
             this.Enabled = true;
 
             //check to see if a connection can be made
-            string inputDatabase = "Data Source=" + server + ";Initial Catalog="+database;
+            string inputDatabase = "Server=" + server + ";Database="+database;
             if (trustedConnection == true)
             {
-                inputDatabase += ";Trusted_Connection=yes";
+                inputDatabase += ";Trusted_Connection=yes;";
             }
             else
             {
                 inputDatabase += ";Persist Security Info=True;User ID="+userID+";Password="+password;
             }
-            string outputDatabase = "Data Source=" + this.cboServers.Text + ";Initial Catalog=" + this.cboDatabases.Text;
+            string outputDatabase = "Server=" + this.cboServers.Text + ";Database=" + this.cboDatabases.Text;
             if (ArchiveTrustedConnection == true)
             {
-                outputDatabase += ";Trusted_Connection=yes";
+                outputDatabase += ";Trusted_Connection=yes;";
             }
             else
             {
@@ -928,10 +943,10 @@ namespace SystemsAnalysis.Grid.GridAnalysis
                     DataRowView drv = (DataRowView)cmbSelectedProject.SelectedItem;
                     int projectID = (int)drv["project_id"];
                     string projectDescription = (string)drv["project_description"];
-                    inputDatabase = "Data Source=" + server + ";Initial Catalog=" + database;
+                    inputDatabase = "Server=" + server + ";Database=" + database;
                     if (trustedConnection == true)
                     {
-                        inputDatabase += ";Trusted_Connection=yes";
+                        inputDatabase += ";Trusted_Connection=yes;";
                     }
                     else
                     {
@@ -984,10 +999,10 @@ namespace SystemsAnalysis.Grid.GridAnalysis
                             DataRowView drv = (DataRowView)cmbSelectedProject.SelectedItem;
                             int projectID = (int)drv["project_id"];
                             string projectDescription = (string)drv["project_description"];
-                            inputDatabase = "Data Source=" + server + ";Initial Catalog=" + database;
+                            inputDatabase = "Server=" + server + ";Database=" + database;
                             if (trustedConnection == true)
                             {
-                                inputDatabase += ";Trusted_Connection=yes";
+                                inputDatabase += ";Trusted_Connection=yes;";
                             }
                             else
                             {
@@ -1079,6 +1094,570 @@ namespace SystemsAnalysis.Grid.GridAnalysis
             domain = ((FormServerDatabaseUserIDPasswordDomainEntry)sender).Domain;
             trustedConnection = ((FormServerDatabaseUserIDPasswordDomainEntry)sender).useTrustedConnection;
             SQLisSource = ((FormServerDatabaseUserIDPasswordDomainEntry)sender).SQLisSource;
+        }
+
+        void child_FormClosing3(object sender, FormClosingEventArgs e)
+        {
+            dynamicUserID = ((FormConnectionStringInterface)sender).UserID;
+            dynamicPassword = ((FormConnectionStringInterface)sender).Password;
+            dynamicDatabase = ((FormConnectionStringInterface)sender).Database;
+            dynamicServer = ((FormConnectionStringInterface)sender).Server;
+            dynamicDomain = ((FormConnectionStringInterface)sender).Domain;
+            dynamicTrustedConnection = ((FormConnectionStringInterface)sender).useTrustedConnection;
+        }
+
+        private void buttonPollutantLoadingConnectionStringEdit_Click(object sender, EventArgs e)
+        {
+            int numberOfMatchingColumns = 0;
+            string serverIsUsable = "";
+            dynamicInputDatabase = "";
+
+            getConnectionStringFromUser((string)(((DataRowView)feScenariosBindingSource.Current)["pollutant_loading_db"]));
+
+            ((DataRowView)feScenariosBindingSource.Current)["pollutant_loading_db"] = dynamicInputDatabase;
+            feScenariosBindingSource.EndEdit();
+
+            //The grid path should connect to a table named GRID_pollutant_loadings
+            //later on the table name should be allowed to be user defined
+            serverIsUsable = SQLHelper.SQLTestDatabase(dynamicInputDatabase, dynamicDomain + "GRID_pollutant_loadings");
+
+            if (serverIsUsable != "")
+            {
+                MessageBox.Show("The connections you have selected are not acceptable to use for the GRIDMODEL");
+                MessageBox.Show(serverIsUsable);
+            }
+
+            //make sure the table also has all of the appropriate columns
+            //with all of the appropriate data types.
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_pollutant_loadings", dynamicInputDatabase, "LU_CODE", "string");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_pollutant_loadings", dynamicInputDatabase, "Landuse", "string");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_pollutant_loadings", dynamicInputDatabase, "Constituent", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_pollutant_loadings", dynamicInputDatabase, "VALUE_LOW", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_pollutant_loadings", dynamicInputDatabase, "UNITS", "string");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_pollutant_loadings", dynamicInputDatabase, "Source", "string");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_pollutant_loadings", dynamicInputDatabase, "VALUE_HIGH", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_pollutant_loadings", dynamicInputDatabase, "VALUE", "number");
+
+            //if ScalarQueryResults is not null, then we have a good answer
+            if (numberOfMatchingColumns == null)
+            {
+                MessageBox.Show("Could not test provided table for validity, please verify the source before trying to run the Grid Model");
+            }
+            else if ((int)numberOfMatchingColumns != 8)
+            {
+                MessageBox.Show("The table you indicated does not contain the necessary columns, please check the documentation for guidelines on creating a pollutant loading Table");
+            }
+        }
+
+        private void buttonBMPEffectivenessConnectionStringEdit_Click(object sender, EventArgs e)
+        {
+            int numberOfMatchingColumns = 0;
+            string serverIsUsable = "";
+            dynamicInputDatabase = "";
+
+            getConnectionStringFromUser((string)(((DataRowView)feScenariosBindingSource.Current)["bmp_effectiveness_db"]));
+
+            ((DataRowView)feScenariosBindingSource.Current)["bmp_effectiveness_db"] = dynamicInputDatabase;
+            feScenariosBindingSource.EndEdit();
+
+            //The grid path should connect to a table named GRID_pollutant_loadings
+            //later on the table name should be allowed to be user defined
+            serverIsUsable = SQLHelper.SQLTestDatabase(dynamicInputDatabase, dynamicDomain + "GRID_BMP_PERFORMANCE");
+
+            if (serverIsUsable != "")
+            {
+                MessageBox.Show("The connections you have selected are not acceptable to use for the GRIDMODEL");
+                MessageBox.Show(serverIsUsable);
+            }
+
+            //make sure the table also has all of the appropriate columns
+            //with all of the appropriate data types.
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_BMP_PERFORMANCE", dynamicInputDatabase, "BMP_TYPE_GEN_ID", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_BMP_PERFORMANCE", dynamicInputDatabase, "Constituent", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_BMP_PERFORMANCE", dynamicInputDatabase, "VALUE_LOW", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_BMP_PERFORMANCE", dynamicInputDatabase, "UNITS", "string");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_BMP_PERFORMANCE", dynamicInputDatabase, "Source", "string");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_BMP_PERFORMANCE", dynamicInputDatabase, "VALUE_HIGH", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_BMP_PERFORMANCE", dynamicInputDatabase, "VALUE", "number");
+
+            if (numberOfMatchingColumns == null)
+            {
+                MessageBox.Show("Could not test provided table for validity, please verify the source before trying to run the Grid Model");
+            }
+            else if ((int)numberOfMatchingColumns != 7)
+            {
+                MessageBox.Show("The table you indicated does not contain the necessary columns, please check the documentation for guidelines on creating a pollutant loading Table");
+            }
+        }
+
+        private void getConnectionStringFromUser(string currentConnectionString)
+        {
+            FormConnectionStringInterface child = new FormConnectionStringInterface(currentConnectionString);
+            child.FormClosing += new FormClosingEventHandler(child_FormClosing3);
+
+            this.Enabled = false;
+            child.ShowDialog();
+            this.Enabled = true;
+
+            dynamicInputDatabase = "Server=" + dynamicServer + ";Database=" + dynamicDatabase;
+            if (dynamicTrustedConnection == true)
+            {
+                dynamicInputDatabase += ";Trusted_Connection=yes;";
+            }
+            else
+            {
+                dynamicInputDatabase += ";Persist Security Info=True;User ID=" + dynamicUserID + ";Password=" + dynamicPassword;
+            }
+
+            if (dynamicDomain != "")
+            {
+                dynamicDomain = dynamicDomain + ".";
+            }
+        }
+
+        private void buttonGridPathEdit_Click(object sender, EventArgs e)
+        {
+            int numberOfMatchingColumns = 0;
+            string serverIsUsable = "";
+            dynamicInputDatabase = "";
+
+            getConnectionStringFromUser((string)(((DataRowView)feGridProjectsBindingSource.Current)["grid_path"]));
+
+            ((DataRowView)feGridProjectsBindingSource.Current)["grid_path"] = dynamicInputDatabase;
+            feGridProjectsBindingSource.EndEdit();
+                
+            //verify the connection works.  IF the connection does not work,
+            //then notify the user that the connection does not work, but the
+            //user should still be in charge of deciding whether or not to keep
+            //a connection that does not work.  The gridmodel should not be allowed
+            //to run if a connection does not work, though.
+
+            //The grid path should connect to a table named GRID_WshdGrd100FtOpt
+            //later on the table name should be allowed to be user defined
+            serverIsUsable = SQLHelper.SQLTestDatabase(dynamicInputDatabase, dynamicDomain + "GRID_WshdGrd100FtOpt");
+
+            if (serverIsUsable != "")
+            {
+                MessageBox.Show("The connections you have selected are not acceptable to use for the GRIDMODEL");
+                MessageBox.Show(serverIsUsable);
+            }
+
+            //make sure the table also has all of the appropriate columns
+            //with all of the appropriate data types.
+            //there must be 81 matches (there is no chance there could be more than 81
+            //matches even if there are more than 81 columns in the input table,
+            //and less than 81 matches means the input table isn't ready.)
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "Description", "string");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "Col_Name", "string");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "Row_Name", "string");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "Area_ft2", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "Avg_Slope", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "Public", "string");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "Private", "string");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "VEG_LONcellCount", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "VEG_LOFFcellCount", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "CPY_LONcellCount", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "ROW_CellCount", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "RF_CellCount", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "PKG_CellCount", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "IMP_CellCount", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "WAT_CellCount", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "TRA_LUcellCount", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "COM_LUcellCount", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "IND_LUcellCount", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "SFR_LUcellCount", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "MFR_LUcellCount", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "FOR_LUcellCount", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "RUR_LUcellCount", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "VAC_LUcellCount", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "POS_LUcellCount", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "Blnk_LUcellCount", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "VEG_LON_pct", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "VEG_LOFF_pct", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "CPY_LON_pct", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "CPY_LOFF_pct", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "VEG_pct", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "ROW_pct", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "RF_pct", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "PKG_pct", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "IMP_pct", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "TSS", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "WAT_pct", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "CAL_point", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "WS_Code", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "BASIN_Code", "string");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "BRANCH_ID", "string");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "IN_PDX", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "RAINGAGE", "string");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "COL_B", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "COL_C", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "COL_D", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "COL_E", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "COL_F", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "COL_G", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "COL_H", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "COL_I", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "COL_J", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "COL_K", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "COL_L", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "COL_M", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "COL_N", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "COL_O", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "COL_P", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "COL_Q", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "COL_1", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "COL_2", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "COL_3", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "TP", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "TSS", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "ECOLI", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "BOD", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "TP_WET", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "TSS_WET", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "ECOLI_WET", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "BOD_WET", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "TP_DRY", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "TSS_DRY", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "ECOLI_DRY", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "BOD_DRY", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "PbD", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "PbD_DRY", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "PbD_WET", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "ECOLI_REMOVAL", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "Xc", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "Yc", "number");
+
+            if (numberOfMatchingColumns == null)
+            {
+                MessageBox.Show("Could not test provided table for validity, please verify the source before trying to run the Grid Model");
+            }
+            else if ((int)numberOfMatchingColumns != 79)
+            {
+                MessageBox.Show("The table you indicated does not contain the necessary columns, please check the documentation for guidelines on creating a Grid Table");
+            }
+        }
+
+        private void buttonPRFPathEdit_Click(object sender, EventArgs e)
+        {
+            int numberOfMatchingColumns = 0;
+            string serverIsUsable = "";
+            dynamicInputDatabase = "";
+
+            getConnectionStringFromUser((string)(((DataRowView)feGridProjectsBindingSource.Current)["bmp_path"]));
+
+            ((DataRowView)feGridProjectsBindingSource.Current)["bmp_path"] = dynamicInputDatabase;
+            feGridProjectsBindingSource.EndEdit();
+
+            serverIsUsable = SQLHelper.SQLTestDatabase(dynamicInputDatabase, dynamicDomain + "GRID_PDX_BMP_GRID");
+
+            if (serverIsUsable != "")
+            {
+                MessageBox.Show("The connections you have selected are not acceptable to use for the GRIDMODEL");
+                MessageBox.Show(serverIsUsable);
+            }
+
+            //make sure the table also has all of the appropriate columns
+            //with all of the appropriate data types.
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_PDX_BMP_GRID", dynamicInputDatabase, "Description", "string");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_PDX_BMP_GRID", dynamicInputDatabase, "Percent_Overlap", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_PDX_BMP_GRID", dynamicInputDatabase, "INSTREAM", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_PDX_BMP_GRID", dynamicInputDatabase, "BMP_ID", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_PDX_BMP_GRID", dynamicInputDatabase, "BMP_Type1", "string");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_PDX_BMP_GRID", dynamicInputDatabase, "TimeFrame", "string");
+
+            //if ScalarQueryResults is not null, then we have a good answer
+            if (numberOfMatchingColumns == null)
+            {
+                MessageBox.Show("Could not test provided table for validity, please verify the source before trying to run the Grid Model");
+            }
+            else if ((int)numberOfMatchingColumns != 6)
+            {
+                MessageBox.Show("The table you indicated does not contain the necessary columns, please check the documentation for guidelines on creating a BMP Table");
+            }
+        }
+
+        private void buttonMIPPathEdit_Click(object sender, EventArgs e)
+        {
+            int numberOfMatchingColumns = 0;
+            string serverIsUsable = "";
+            dynamicInputDatabase = "";
+
+            getConnectionStringFromUser((string)(((DataRowView)feGridProjectsBindingSource.Current)["mip_path"]));
+
+            ((DataRowView)feGridProjectsBindingSource.Current)["mip_path"] = dynamicInputDatabase;
+            feGridProjectsBindingSource.EndEdit();
+
+            serverIsUsable = SQLHelper.SQLTestDatabase(dynamicInputDatabase, dynamicDomain + "GRID_PDX_MIP_GRID");
+
+            if (serverIsUsable != "")
+            {
+                MessageBox.Show("The connections you have selected are not acceptable to use for the GRIDMODEL");
+                MessageBox.Show(serverIsUsable);
+            }
+
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_PDX_MIP_GRID", dynamicInputDatabase, "Description", "string");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_PDX_MIP_GRID", dynamicInputDatabase, "Percent_Overlap", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_PDX_MIP_GRID", dynamicInputDatabase, "BMP_Type", "string");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_PDX_MIP_GRID", dynamicInputDatabase, "Description_2", "string");
+
+            //if ScalarQueryResults is not null, then we have a good answer
+            if (numberOfMatchingColumns == null)
+            {
+                MessageBox.Show("Could not test provided table for validity, please verify the source before trying to run the Grid Model");
+            }
+            else if ((int)numberOfMatchingColumns != 4)
+            {
+                MessageBox.Show("The table you indicated does not contain the necessary columns, please check the documentation for guidelines on creating a MIP Table");
+            }
+        }
+
+        private void buttonOSFPathEdit_Click(object sender, EventArgs e)
+        {
+            int numberOfMatchingColumns = 0;
+            string serverIsUsable = "";
+            dynamicInputDatabase = "";
+
+            getConnectionStringFromUser((string)(((DataRowView)feGridProjectsBindingSource.Current)["osf_path"]));
+
+            ((DataRowView)feGridProjectsBindingSource.Current)["osf_path"] = dynamicInputDatabase;
+            feGridProjectsBindingSource.EndEdit();
+
+            serverIsUsable = SQLHelper.SQLTestDatabase(dynamicInputDatabase, dynamicDomain + "GRID_PDX_OSF_GRID");
+
+            if (serverIsUsable != "")
+            {
+                MessageBox.Show("The connections you have selected are not acceptable to use for the GRIDMODEL");
+                MessageBox.Show(serverIsUsable);
+            }
+            //make sure the table also has all of the appropriate columns
+            //with all of the appropriate data types.
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_PDX_OSF_GRID", dynamicInputDatabase, "Description", "string");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_PDX_OSF_GRID", dynamicInputDatabase, "Percent_Overlap", "number");
+            numberOfMatchingColumns = numberOfMatchingColumns +
+                SQLHelper.SQLTestTableForFuzzyColumn
+                ("GRID_PDX_OSF_GRID", dynamicInputDatabase, "FAC_GRP", "string");
+
+            //if ScalarQueryResults is not null, then we have a good answer
+            if (numberOfMatchingColumns == null)
+            {
+                MessageBox.Show("Could not test provided table for validity, please verify the source before trying to run the Grid Model");
+            }
+            else if ((int)numberOfMatchingColumns != 3)
+            {
+                MessageBox.Show("The table you indicated does not contain the necessary columns, please check the documentation for guidelines on creating a OSF Table");
+            }
         }
     }
 }
