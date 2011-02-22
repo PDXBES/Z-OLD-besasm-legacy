@@ -48,7 +48,7 @@
             // labelDatabase
             // 
             this.labelDatabase.AutoSize = true;
-            this.labelDatabase.Location = new System.Drawing.Point(80, 134);
+            this.labelDatabase.Location = new System.Drawing.Point(153, 123);
             this.labelDatabase.Name = "labelDatabase";
             this.labelDatabase.Size = new System.Drawing.Size(56, 13);
             this.labelDatabase.TabIndex = 0;
@@ -57,7 +57,7 @@
             // labelServer
             // 
             this.labelServer.AutoSize = true;
-            this.labelServer.Location = new System.Drawing.Point(95, 104);
+            this.labelServer.Location = new System.Drawing.Point(168, 93);
             this.labelServer.Name = "labelServer";
             this.labelServer.Size = new System.Drawing.Size(41, 13);
             this.labelServer.TabIndex = 1;
@@ -66,7 +66,7 @@
             // labelUserID
             // 
             this.labelUserID.AutoSize = true;
-            this.labelUserID.Location = new System.Drawing.Point(90, 164);
+            this.labelUserID.Location = new System.Drawing.Point(163, 172);
             this.labelUserID.Name = "labelUserID";
             this.labelUserID.Size = new System.Drawing.Size(46, 13);
             this.labelUserID.TabIndex = 2;
@@ -75,7 +75,7 @@
             // labelPassword
             // 
             this.labelPassword.AutoSize = true;
-            this.labelPassword.Location = new System.Drawing.Point(80, 194);
+            this.labelPassword.Location = new System.Drawing.Point(153, 202);
             this.labelPassword.Name = "labelPassword";
             this.labelPassword.Size = new System.Drawing.Size(56, 13);
             this.labelPassword.TabIndex = 3;
@@ -84,7 +84,7 @@
             // labelDomain
             // 
             this.labelDomain.AutoSize = true;
-            this.labelDomain.Location = new System.Drawing.Point(90, 224);
+            this.labelDomain.Location = new System.Drawing.Point(163, 232);
             this.labelDomain.Name = "labelDomain";
             this.labelDomain.Size = new System.Drawing.Size(46, 13);
             this.labelDomain.TabIndex = 4;
@@ -92,42 +92,42 @@
             // 
             // textBoxServer
             // 
-            this.textBoxServer.Location = new System.Drawing.Point(142, 101);
+            this.textBoxServer.Location = new System.Drawing.Point(215, 90);
             this.textBoxServer.Name = "textBoxServer";
             this.textBoxServer.Size = new System.Drawing.Size(167, 20);
             this.textBoxServer.TabIndex = 5;
             // 
             // textBoxDatabase
             // 
-            this.textBoxDatabase.Location = new System.Drawing.Point(142, 131);
+            this.textBoxDatabase.Location = new System.Drawing.Point(215, 120);
             this.textBoxDatabase.Name = "textBoxDatabase";
             this.textBoxDatabase.Size = new System.Drawing.Size(167, 20);
             this.textBoxDatabase.TabIndex = 6;
             // 
             // textBoxUserID
             // 
-            this.textBoxUserID.Location = new System.Drawing.Point(142, 161);
+            this.textBoxUserID.Location = new System.Drawing.Point(215, 169);
             this.textBoxUserID.Name = "textBoxUserID";
             this.textBoxUserID.Size = new System.Drawing.Size(167, 20);
             this.textBoxUserID.TabIndex = 7;
             // 
             // textBoxPassword
             // 
-            this.textBoxPassword.Location = new System.Drawing.Point(142, 191);
+            this.textBoxPassword.Location = new System.Drawing.Point(215, 199);
             this.textBoxPassword.Name = "textBoxPassword";
             this.textBoxPassword.Size = new System.Drawing.Size(167, 20);
             this.textBoxPassword.TabIndex = 8;
             // 
             // textBoxDomain
             // 
-            this.textBoxDomain.Location = new System.Drawing.Point(142, 221);
+            this.textBoxDomain.Location = new System.Drawing.Point(215, 229);
             this.textBoxDomain.Name = "textBoxDomain";
             this.textBoxDomain.Size = new System.Drawing.Size(167, 20);
             this.textBoxDomain.TabIndex = 9;
             // 
             // buttonOK
             // 
-            this.buttonOK.Location = new System.Drawing.Point(263, 284);
+            this.buttonOK.Location = new System.Drawing.Point(301, 284);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(82, 32);
             this.buttonOK.TabIndex = 10;
@@ -138,17 +138,18 @@
             // checkBoxUseTrustedConnection
             // 
             this.checkBoxUseTrustedConnection.AutoSize = true;
-            this.checkBoxUseTrustedConnection.Location = new System.Drawing.Point(168, 261);
+            this.checkBoxUseTrustedConnection.Location = new System.Drawing.Point(196, 146);
             this.checkBoxUseTrustedConnection.Name = "checkBoxUseTrustedConnection";
             this.checkBoxUseTrustedConnection.Size = new System.Drawing.Size(141, 17);
             this.checkBoxUseTrustedConnection.TabIndex = 11;
             this.checkBoxUseTrustedConnection.Text = "Use Trusted Connection";
             this.checkBoxUseTrustedConnection.UseVisualStyleBackColor = true;
+            this.checkBoxUseTrustedConnection.CheckedChanged += new System.EventHandler(this.checkBoxUseTrustedConnection_CheckedChanged);
             // 
             // radioButtonAccessDB
             // 
             this.radioButtonAccessDB.AutoSize = true;
-            this.radioButtonAccessDB.Location = new System.Drawing.Point(12, 52);
+            this.radioButtonAccessDB.Location = new System.Drawing.Point(21, 52);
             this.radioButtonAccessDB.Name = "radioButtonAccessDB";
             this.radioButtonAccessDB.Size = new System.Drawing.Size(78, 17);
             this.radioButtonAccessDB.TabIndex = 12;
@@ -160,7 +161,7 @@
             // radioButtonSQLServer
             // 
             this.radioButtonSQLServer.AutoSize = true;
-            this.radioButtonSQLServer.Location = new System.Drawing.Point(142, 52);
+            this.radioButtonSQLServer.Location = new System.Drawing.Point(215, 52);
             this.radioButtonSQLServer.Name = "radioButtonSQLServer";
             this.radioButtonSQLServer.Size = new System.Drawing.Size(80, 17);
             this.radioButtonSQLServer.TabIndex = 13;
@@ -182,7 +183,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(356, 327);
+            this.ClientSize = new System.Drawing.Size(395, 328);
             this.Controls.Add(this.labelInputSource);
             this.Controls.Add(this.radioButtonSQLServer);
             this.Controls.Add(this.radioButtonAccessDB);

@@ -300,6 +300,96 @@ namespace SystemsAnalysis.Utils.SQLHelper
             return;
         }
 
+        public static object SQLExecuteStringAsScalarQuery(string theQueryString, string SQLDB, object theDataToReturn)
+        {
+            SqlConnection thisSQLDB = new SqlConnection(SQLDB);
+            
+            try
+            {
+                thisSQLDB.Open();
+                string TheSQLToExecute = theQueryString;
+                SqlCommand cmd = new SqlCommand(TheSQLToExecute, thisSQLDB);
+                cmd.CommandTimeout = 0;
+                theDataToReturn = cmd.ExecuteScalar();
+            }
+            catch (SqlException ae)
+            {
+                //Could not execute the string
+                theDataToReturn = null;
+            }
+            thisSQLDB.Close();
+            return theDataToReturn;
+        }
+
+        //this function is used for tables that may have been imported from
+        //access or built by people unfamiliar with the data types that the
+        //table should be built in.  Foreseeable problems with this function
+        //is that it may allow users to pass integer values to power functions, which 
+        //in sql server is generally a big nono.  Use your own judgment when applying
+        //this function. Returns a 1 if the column is probably capable of being used
+        //for the intended purpose, and returns a 0 if it probably couldnt.
+        public static int SQLTestTableForFuzzyColumn(string theTableToTest, string theSQLDBConnectionStringToTest, string theColumnToTest, string theTypeToTestFor)
+        {
+            //the return value should be either 0 or 1.  Binarys or small ints
+            //might fit this datatype better, but not when considering the possible uses
+            //of the return value.
+            int returnValue = 0;
+            Object ScalarQueryResults = new Object();
+            string columnSelectionString = "";
+
+            if(theTypeToTestFor.CompareTo("number") == 0)
+            {
+            columnSelectionString = "SELECT COUNT(*) FROM  " +
+               "(SELECT * FROM information_schema.columns  " +
+               "WHERE   " +
+                "((column_name = '" + theColumnToTest + "' " +
+                " AND " +
+                    "(data_type = 'bigint' " +
+                    "OR data_type = 'decimal' " +
+                    "OR data_type = 'bit' " +
+                    "OR data_type = 'float' " +
+                    "OR data_type = 'int' " +
+                    "OR data_type = 'number' " +
+                    "OR data_type = 'real' " +
+                    "OR data_type = 'smallint' " +
+                    "OR data_type = 'tinyint') " +
+                ") AND table_name =  '" + theTableToTest + "')) AS A";
+            }
+            else if (theTypeToTestFor.CompareTo("string") == 0)
+            {
+                columnSelectionString = "SELECT COUNT(*) FROM  " +
+               "(SELECT * FROM information_schema.columns  " +
+               "WHERE   " +
+                "((column_name = '" + theColumnToTest + "' " +
+                " AND " +
+                    "(data_type = 'char' " +
+                    "OR data_type = 'nchar' " +
+                    "OR data_type = 'ntext' " +
+                    "OR data_type = 'nvarchar' " +
+                    "OR data_type = 'text' " +
+                    "OR data_type = 'varchar' " +
+                    "OR data_type = 'xml' ) " +
+                ") AND table_name =  '" + theTableToTest + "')) AS A";
+            }
+
+            ScalarQueryResults = SQLHelper.SQLExecuteStringAsScalarQuery(columnSelectionString, theSQLDBConnectionStringToTest, ScalarQueryResults);
+            //if ScalarQueryResults is not null, then we have a good answer
+            if (ScalarQueryResults == null)
+            {
+                returnValue = 0;
+            }
+            else if ((int)ScalarQueryResults != 1)
+            {
+                returnValue = 0;
+            }
+            else
+            {
+                returnValue = 1;
+            }
+
+            return returnValue;
+        }
+
         public static void SQLCreatePROCEDURE(string queryName, string queryText, string SQLDB)
         {
             SQLDeletePROCEDURE(queryName, SQLDB);

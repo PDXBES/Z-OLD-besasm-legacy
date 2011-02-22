@@ -11,14 +11,13 @@ namespace SystemsAnalysis.Grid.GridAnalysis
 {
     public partial class FormServerDatabaseUserIDPasswordDomainEntry : Form
     {
-        public event EventHandler BigInfoFormClosed;
         public string Database = "";
         public string Server = "";
         public string UserID = "";
         public string Password = "";
         public string Domain = "";
-        public bool useTrustedConnection = false;
-        public bool SQLisSource = false;
+        public bool useTrustedConnection = true;
+        public bool SQLisSource = true;
 
 
         public FormServerDatabaseUserIDPasswordDomainEntry()
@@ -32,6 +31,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis
             textBoxDomain.Text = Domain;
             checkBoxUseTrustedConnection.Checked = useTrustedConnection;
             radioButtonAccessDB.Checked = true;
+            radioButtonSQLServer.Checked = SQLisSource;
         }
 
         private void FormServerDatabaseUserIDPasswordDomainEntry_FormClosing(object sender, FormClosingEventArgs e)
@@ -64,6 +64,18 @@ namespace SystemsAnalysis.Grid.GridAnalysis
 
         private void radioButtonAccessDB_CheckedChanged(object sender, EventArgs e)
         {
+            //if the user wants to use an access database, they must still supply a
+            //SQL server to copy the database to.  
+        }
+
+        private void checkBoxUseTrustedConnection_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxUseTrustedConnection.Checked == true)
+            {
+                textBoxPassword.Enabled = false;
+                textBoxDomain.Enabled = false;
+                textBoxUserID.Enabled = false;
+            }
         }
     }
 }
