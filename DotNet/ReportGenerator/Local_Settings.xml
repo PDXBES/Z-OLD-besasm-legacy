@@ -1,0 +1,11 @@
+<?xml version="1.0" standalone="yes"?>
+<Settings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="SystemsAnalysis.Characterization.ProgramSettings">
+  <DataSource Name="PumpStationDB" Type="Database">\\cassio\modeling\AGMaster21\Pumps\PumpStationDB.mdb</DataSource>
+  <DataSource Name="AGMasterDB" Type="Database">D:\AGMaster\AGMaster21.mdb</DataSource>
+  <DataSource Name="ResultsWarehouseDB" Type="Database">\\Cassio\systems_planning\SPCommon\Char\Hydraulics\ModelResultsWarehouse.mdb</DataSource>
+  <DataSource Name="CharTemplate" Type="XML">\\Cassio\Modeling\Model_Programs\ResultsWarehouse\CharacterizationQueriesManager\xml\CharacterizationTable.xml</DataSource>
+  <DataSource Name="OutputDirectory" Type="Directory">\\Cassio\Modeling\Model_Programs\ResultsWarehouse\CharacterizationQueriesManager\xml\</DataSource>
+  <DataSource Name="MstLinks" Type="FeatureClass">\\Cassio\Modeling\Model_Programs\ResultsWarehouse\CharacterizationQueriesManager\mst_links.lyr</DataSource>
+  <DataSource Name="MstSSC" Type="FeatureClass">\\Cassio\Modeling\Model_Programs\ResultsWarehouse\CharacterizationQueriesManager\mst_surfsc.lyr</DataSource>
+  <DataSource Name="UICDB" Type="FeatureClass">\\Cassio\Modeling\Model_Programs\ResultsWarehouse\CharacterizationQueriesManager\BESUICs.lyr</DataSource>
+</Settings>
