@@ -91,6 +91,7 @@ type
     actPresetBuildStreetStormwaterControls: TAction;
     Buildstreetstormwatercontrols1: TMenuItem;
     vgrdTraceStormwater: TcxEditorRow;
+    vgrdRemoveSanitaryUponDeploy: TcxEditorRow;
     procedure btnBrowseModelDirectoryClick(Sender: TObject);
     procedure btnBuildModelClick(Sender: TObject);
     procedure btnCancelBuildClick(Sender: TObject);
@@ -243,7 +244,7 @@ implementation
 
 uses fMain, uEMGAATSModel, uEMGWorkbenchManager, uEMGAATSSystemConfig,
   uUtilities, GlobalConstants, dModelExists, fBuildReport, fChild, DateUtils,
-  CodeSiteLogging, fWelcome, StStrL, StrUtils;
+  CodeSiteLogging, fWelcome, StStrL, StrUtils, uEMGAATSModelConfig;
 
 resourcestring
   PromptModelDirectory = 'Type a full path and filename, or click Browse...';
@@ -617,6 +618,7 @@ begin
       CurrentModel.Config.EngineExportFileName := vgrdEngineBaseFileName.Properties.Value;
       CurrentModel.Config.UseBaseflow := vgrdUseBaseflow.Properties.Value;
       CurrentModel.Config.TraceStormwater := vgrdTraceStormwater.Properties.Value;
+      CurrentModel.Config.RemoveSanitaryUponDeploy := vgrdRemoveSanitaryUponDeploy.Properties.Value;
       CurrentModel.Config.Update;
 
       // Set status
@@ -1066,6 +1068,7 @@ begin
   vgrdEngineBaseFileName.Properties.Value := CurrentModel.Config.EngineExportFileName;
   vgrdUseBaseflow.Properties.Value := CurrentModel.Config.UseBaseflow;
   vgrdTraceStormwater.Properties.Value := CurrentModel.Config.TraceStormwater;
+  vgrdRemoveSanitaryUponDeploy.Properties.Value := CurrentModel.Config.RemoveSanitaryUponDeploy;
 
   pnlBuild.Enabled := True;
   pnlProgress.Hide;

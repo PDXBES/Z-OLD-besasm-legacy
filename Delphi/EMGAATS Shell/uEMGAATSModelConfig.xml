@@ -63,6 +63,7 @@
       <field name="fForcedStopLinks" type="THashedStringList" visibility="private" />
       <field name="fStormsToBuild" type="TStringList" visibility="private" />
       <field name="fTraceStormwater" type="Boolean" visibility="private" />
+      <field name="fRemoveSanitaryUponDeploy" type="Boolean" visibility="private" />
       <function name="GetAndUpdateString" visibility="private">
         <parameters>
           <parameter name="SectionName" type="string" />
@@ -763,6 +764,16 @@
           <retval type="Boolean" />
         </parameters>
       </function>
+      <function name="GetRemoveSanitaryUponDeploy" visibility="private">
+        <parameters>
+          <retval type="Boolean" />
+        </parameters>
+      </function>
+      <procedure name="SetRemoveSanitaryUponDeploy" visibility="private">
+        <parameters>
+          <parameter name="Value" type="Boolean" paramflags="const" />
+        </parameters>
+      </procedure>
       <procedure name="GetMDBFiles" visibility="protected">
       </procedure>
       <procedure name="GetStandardDirectories" visibility="protected">
@@ -851,6 +862,7 @@
       <procedure name="ClearStormsToBuild" visibility="public">
       </procedure>
       <property name="UseBaseflow" visibility="public" read="GetUseBaseflow" write="SetUseBaseflow" type="Boolean" />
+      <property name="RemoveSanitaryUponDeploy" visibility="public" read="GetRemoveSanitaryUponDeploy" write="SetRemoveSanitaryUponDeploy" type="Boolean" />
       <property name="RootLinks" visibility="public" read="GetRootLink" write="SetRootLink" type="Integer" />
       <property name="RootLinksAsString" visibility="public" read="GetRootLinkAsString" type="string" />
       <property name="RootLinkComments" visibility="public" read="GetRootLinkComment" write="SetRootLinkComment" type="string" />
