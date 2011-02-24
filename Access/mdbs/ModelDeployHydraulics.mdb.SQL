@@ -489,7 +489,16 @@ GROUP BY XPLinks.USNODE
 
 UNION SELECT XPLinks.DSNode AS Node
 FROM XPLinks
-GROUP BY XPLinks.DSNode]. AS [%$##@_Alias]
+GROUP BY XPLinks.DSNode
+
+UNION SELECT [_XPSpecialLinks].[USNode] AS Node
+FROM [_XPSpecialLinks]
+GROUP BY [_XPSpecialLinks].[USNode]
+
+UNION SELECT [_XPSpecialLinks].[DSNode] AS Node
+FROM [_XPSpecialLinks]
+GROUP BY [_XPSpecialLinks].[DSNode]
+]. AS [%$##@_Alias]
 GROUP BY Node;
 
 
