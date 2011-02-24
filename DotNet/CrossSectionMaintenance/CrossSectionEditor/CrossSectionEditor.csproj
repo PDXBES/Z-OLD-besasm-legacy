@@ -109,6 +109,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MstXSectionDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="ProcessedXSectDataSet.cs">
+      <DependentUpon>ProcessedXSectDataSet.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ProcessedXSectDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
