@@ -134,6 +134,13 @@
           <retval type="Boolean" />
         </parameters>
       </function>
+      <function name="SetQueryDef" visibility="public">
+        <parameters>
+          <parameter name="QueryName" type="string" />
+          <parameter name="QueryDef" type="string" />
+          <retval type="Boolean" />
+        </parameters>
+      </function>
     </members>
   </class>
   <variable name="MSAccessManager" type="TMSAccessManager" />

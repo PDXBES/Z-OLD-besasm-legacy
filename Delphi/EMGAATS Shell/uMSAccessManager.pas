@@ -25,6 +25,7 @@ type
     function RecordSetCount(ARecordSet: String): Integer;
     function RecordCount(TableName: String): Integer;
     function TableExists(TableName: String): Boolean;
+    function SetQueryDef(QueryName: String; QueryDef: String): Boolean;
   end;
 
 var
@@ -202,6 +203,15 @@ begin
   fCommand.CommandText := ACommand;
   fCommand.Execute;
   Sleep(SystemConfig.MSAccessWaitMilliseconds);
+end;
+
+function TMSAccessManager.SetQueryDef(QueryName, QueryDef: String): Boolean;
+var
+  AQueryDef: Variant;
+begin
+  AQueryDef := fAccessApp.CurrentDB.QueryDefs[QueryName];
+  AQueryDef.SQL := QueryDef;
+  Result := True;
 end;
 
 function TMSAccessManager.TableExists(TableName: String): Boolean;
