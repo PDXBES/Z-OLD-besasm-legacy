@@ -1,0 +1,16 @@
+'
+'	============ EMGAATS Workbench =================
+'
+'	Copyright (c) 2001  City of Portland, OR Bureau of Environmental Services and David J Collins Engineering and CH2M HILL, Inc.
+'
+include "MapBasic.def"
+include "..\..\common\inc\EMGGlobal.def"
+include "..\inc\EMGAbout.def"
+
+sub ShowAbout()
+Dialog
+    Title "About " + gstrAppName + " (Version " + gstrVersion + ")"
+
+    Control StaticText Title "Blah blah" Position 10, 10
+    Control OKButton
+End Sub
