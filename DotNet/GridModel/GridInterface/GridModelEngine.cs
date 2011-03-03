@@ -304,6 +304,26 @@ namespace SystemsAnalysis.Grid.GridAnalysis
                     {
                         SQLHelper.SQLExecuteActionQuery(gridProcessGroup.GroupName, "@SelectionSetID", gridModelRun.SelectionSetAreaID, SQLDatabaseConnectionString);
                     }
+                    else if (gridProcessGroup.GroupName == "GRID_LOAD_BOD")
+                    {
+                        SQLHelper.SQLExecuteActionQuery(gridProcessGroup.GroupName, "@SelectionSetID", gridModelRun.SelectionSetAreaID, SQLDatabaseConnectionString);
+                    }
+                    else if (gridProcessGroup.GroupName == "GRID_LOAD_ECOLI")
+                    {
+                        SQLHelper.SQLExecuteActionQuery(gridProcessGroup.GroupName, "@SelectionSetID", gridModelRun.SelectionSetAreaID, SQLDatabaseConnectionString);
+                    }
+                    else if (gridProcessGroup.GroupName == "GRID_LOAD_PbD")
+                    {
+                        SQLHelper.SQLExecuteActionQuery(gridProcessGroup.GroupName, "@SelectionSetID", gridModelRun.SelectionSetAreaID, SQLDatabaseConnectionString);
+                    }
+                    else if (gridProcessGroup.GroupName == "GRID_LOAD_TP")
+                    {
+                        SQLHelper.SQLExecuteActionQuery(gridProcessGroup.GroupName, "@SelectionSetID", gridModelRun.SelectionSetAreaID, SQLDatabaseConnectionString);
+                    }
+                    else if (gridProcessGroup.GroupName == "GRID_LOAD_TSS")
+                    {
+                        SQLHelper.SQLExecuteActionQuery(gridProcessGroup.GroupName, "@SelectionSetID", gridModelRun.SelectionSetAreaID, SQLDatabaseConnectionString);
+                    }
                     else
                     {
                         SQLHelper.SQLExecuteActionQuery(gridProcessGroup.GroupName, SQLDatabaseConnectionString);
