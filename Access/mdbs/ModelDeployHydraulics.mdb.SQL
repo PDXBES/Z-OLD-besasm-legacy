@@ -480,6 +480,28 @@ SELECT Sum(XPXDataBF_QINST.DMII) AS SumOfDMII, Sum(XPXDataBF_SEWAGE.flow) AS Sum
 FROM XPXDataBF_QINST INNER JOIN XPXDataBF_SEWAGE ON XPXDataBF_QINST.Node = XPXDataBF_SEWAGE.Node;
 
 
+NodesInXPLinks
+----------
+SELECT NODE
+FROM [SELECT XPLinks.USNODE AS Node
+FROM XPLinks
+GROUP BY XPLinks.USNODE
+
+UNION SELECT XPLinks.DSNode AS Node
+FROM XPLinks
+GROUP BY XPLinks.DSNode
+
+UNION SELECT [_XPSpecialLinks].[USNode] AS Node
+FROM [_XPSpecialLinks]
+GROUP BY [_XPSpecialLinks].[USNode]
+
+UNION SELECT [_XPSpecialLinks].[DSNode] AS Node
+FROM [_XPSpecialLinks]
+GROUP BY [_XPSpecialLinks].[DSNode]
+]. AS [%$##@_Alias]
+GROUP BY Node;
+
+
 Query1
 ----------
 SELECT [_tXPSpecialLinks].DSNode, xlinks.LinkID, xlinks.USIE, xlinks.USNode, xlinks.DSNode
@@ -501,7 +523,7 @@ FROM mdl_nodes_ac;
 
 XPLinks
 ----------
-SELECT IIf(IsNull([_parallel_links].[linkID]),[explink],IIf(IsNull([_false_parallel_links].[linkID]),[PlinkID],[explink])) AS xplink, IIf(IsNull([_parallel_links].[linkID]),0,IIf(IsNull([_false_parallel_links].[linkID]),[Plinkndx],0)) AS instance, IIf(IsNull([_tXPSpecialLinks].[toLinkID]),[xlinks].[usnode],[_tXPSpecialLinks].[DSnode]) AS USNODE, xLinks.DSNode, xLinks.PipeShape, IIf(IsNull([XPNKLASS]),100,[XPNKLASS]) AS xNKLass, xLinks.USIE, xLinks.DSIE, xLinks.Length, IIf(IsNull([_pipeshapes].[xpnklass]),86,IIf([_pipeshapes].[xpnklass]=1,[diamwidth],[xlinks].[height])) AS xHeight, IIf(IsNull([_pipeshapes].[xpnklass]),86,IIf([_pipeshapes].[xpnklass]=1,0,[xlinks].[diamwidth])) AS xWidth, xLinks.xSlope, [_PipeShapes].Roughness, xLinks.Material, IIf(IsNull([_parallel_links].[linkID]),"F",IIf(IsNull([_false_parallel_links].[LinkID]),"T","F")) AS isparallel, xLinks.PipeFlowType
+SELECT xLinks.MLinkID, IIf(IsNull([_parallel_links].[linkID]),[explink],IIf(IsNull([_false_parallel_links].[linkID]),[PlinkID],[explink])) AS xplink, IIf(IsNull([_parallel_links].[linkID]),0,IIf(IsNull([_false_parallel_links].[linkID]),[Plinkndx],0)) AS instance, IIf(IsNull([_tXPSpecialLinks].[toLinkID]),[xlinks].[usnode],[_tXPSpecialLinks].[DSnode]) AS USNODE, xLinks.DSNode, xLinks.PipeShape, IIf(IsNull([XPNKLASS]),100,[XPNKLASS]) AS xNKLass, xLinks.USIE, xLinks.DSIE, xLinks.Length, IIf(IsNull([_pipeshapes].[xpnklass]),86,IIf([_pipeshapes].[xpnklass]=1,[diamwidth],[xlinks].[height])) AS xHeight, IIf(IsNull([_pipeshapes].[xpnklass]),86,IIf([_pipeshapes].[xpnklass]=1,0,[xlinks].[diamwidth])) AS xWidth, xLinks.xSlope, [_PipeShapes].Roughness, xLinks.Material, IIf(IsNull([_parallel_links].[linkID]),"F",IIf(IsNull([_false_parallel_links].[LinkID]),"T","F")) AS isparallel, xLinks.PipeFlowType
 FROM (((xLinks LEFT JOIN _parallel_links ON xLinks.LinkID = [_parallel_links].LinkID) LEFT JOIN _PipeShapes ON xLinks.PipeShape = [_PipeShapes].Shape) LEFT JOIN _tXPSpecialLinks ON xLinks.LinkID = [_tXPSpecialLinks].toLinkID) LEFT JOIN _false_parallel_links ON xLinks.LinkID = [_false_parallel_links].LinkID;
 
 
@@ -526,6 +548,58 @@ XPX_EXTRAN_JOBCONTROL
 SELECT "DATA" AS Expr3, JobControlExtran.Tag, Chr(34) & " " & Chr(34) AS Expr2, "0 1" AS Instance, IIf([texttag?],Chr(34),"") & [TValue] & IIf([texttag?],Chr(34),"") AS MyValue, "/*  " & [Description] & "  */" AS Expr1
 FROM JobControlExtran
 ORDER BY JobControlExtran.Order;
+
+
+XPX_Global_EL
+----------
+TRANSFORM First(mst_xsection_data.elevation) AS FirstOfelevation
+SELECT "GLDBDATA EL " & Chr(34) & "Natural Section Shape" & Chr(34) AS Expr1, Chr(34) & [xplink] & Chr(34) AS Expr2, Count(mst_xsection_data.index) AS CountOfindex
+FROM XPLinks INNER JOIN (mst_xsections INNER JOIN mst_xsection_data ON mst_xsections.mst_xsections_id = mst_xsection_data.mst_xsections_id) ON XPLinks.MLinkID = mst_xsections.mlinkid
+GROUP BY "GLDBDATA EL " & Chr(34) & "Natural Section Shape" & Chr(34), Chr(34) & [xplink] & Chr(34)
+ORDER BY mst_xsection_data.index
+PIVOT mst_xsection_data.index;
+
+
+XPX_Global_NaturalChannel
+----------
+SELECT DISTINCTROW "GLDBITEM " & Chr(34) & "Natural Section Shape" & Chr(34) AS EXPR1, Chr(34) & Trim([xplink]) & Chr(34) AS EXPR2
+FROM xpLinks INNER JOIN mst_xsections ON xpLinks.MLinkID = mst_xsections.mlinkid
+ORDER BY Chr(34) & Trim([xplink]) & Chr(34);
+
+
+XPX_Global_NSGD_STCHL
+----------
+SELECT DISTINCTROW "GLDBDATA NSGD_STCHL " & Chr(34) & "Natural Section Shape" & Chr(34) AS EXPR1, Chr(34) & Trim([xplink]) & Chr(34) AS EXPR2, " 1" AS Expr3, mst_xsections.station_left, "/* station of left bank */" AS Expr5
+FROM xpLinks INNER JOIN mst_xsections ON xpLinks.MLinkID = mst_xsections.mlinkid
+ORDER BY Chr(34) & Trim([xplink]) & Chr(34);
+
+
+XPX_Global_NSGD_STCHR
+----------
+SELECT DISTINCTROW "GLDBDATA NSGD_STCHR " & Chr(34) & "Natural Section Shape" & Chr(34) AS EXPR1, Chr(34) & Trim([xplink]) & Chr(34) AS EXPR2, " 1" AS Expr3, mst_xsections.station_right, "/* right bank roughness */" AS Expr5
+FROM xpLinks INNER JOIN mst_xsections ON xpLinks.MLinkID = mst_xsections.mlinkid
+ORDER BY Chr(34) & Trim([xplink]) & Chr(34);
+
+
+XPX_Global_NSGD_XNCH
+----------
+SELECT DISTINCTROW "GLDBDATA NSGD_XNCH " & Chr(34) & "Natural Section Shape" & Chr(34) AS EXPR1, Chr(34) & Trim([xplink]) & Chr(34) AS EXPR2, " 1" AS Expr3, mst_xsections.roughness_main, "/* main channel roughness */" AS Expr5
+FROM xpLinks INNER JOIN mst_xsections ON xpLinks.MLinkID = mst_xsections.mlinkid
+ORDER BY Chr(34) & Trim([xplink]) & Chr(34);
+
+
+XPX_Global_NSGD_XNL
+----------
+SELECT DISTINCTROW "GLDBDATA NSGD_XNL " & Chr(34) & "Natural Section Shape" & Chr(34) AS EXPR1, Chr(34) & Trim([xplink]) & Chr(34) AS EXPR2, " 1" AS Expr3, mst_xsections.roughness_left, "/* left bank roughness */" AS Expr5
+FROM xpLinks INNER JOIN mst_xsections ON xpLinks.MLinkID = mst_xsections.mlinkid
+ORDER BY Chr(34) & Trim([xplink]) & Chr(34);
+
+
+XPX_Global_NSGD_XNR
+----------
+SELECT DISTINCTROW "GLDBDATA NSGD_XNR " & Chr(34) & "Natural Section Shape" & Chr(34) AS EXPR1, Chr(34) & Trim([xplink]) & Chr(34) AS EXPR2, " 1" AS Expr3, mst_xsections.roughness_right, "/*right bank roughness */" AS Expr5
+FROM xpLinks INNER JOIN mst_xsections ON xpLinks.MLinkID = mst_xsections.mlinkid
+ORDER BY Chr(34) & Trim([xplink]) & Chr(34);
 
 
 XPX_Global_PRATEX
@@ -554,6 +628,16 @@ SELECT "GLDBITEM " & Chr(34) & "Pump Ratings" & Chr(34) AS Expr1, Chr(34) & [TVa
 FROM _PumpCurves INNER JOIN _xpSpecialLinkData ON [_PumpCurves].PumpType = [_xpSpecialLinkData].TValue
 WHERE ((([_xpSpecialLinkData].Tag)="PSEL") AND (([_PumpCurves].Index)=1))
 ORDER BY Chr(34) & [TValue] & Chr(34);
+
+
+XPX_Global_STA
+----------
+TRANSFORM First(mst_xsection_data.station) AS FirstOfstation
+SELECT "GLDBDATA STA " & Chr(34) & "Natural Section Shape" & Chr(34) AS Expr1, Chr(34) & [xplink] & Chr(34) AS Expr2, Count(mst_xsection_data.index) AS CountOfindex
+FROM XPLinks INNER JOIN (mst_xsections INNER JOIN mst_xsection_data ON mst_xsections.mst_xsections_id = mst_xsection_data.mst_xsections_id) ON XPLinks.MLinkID = mst_xsections.mlinkid
+GROUP BY "GLDBDATA STA " & Chr(34) & "Natural Section Shape" & Chr(34), Chr(34) & [xplink] & Chr(34)
+ORDER BY mst_xsection_data.index
+PIVOT mst_xsection_data.index;
 
 
 XPX_Global_TDV
@@ -686,15 +770,8 @@ XPXDataDeep
 ----------
 SELECT DISTINCTROW "DATA DEEP" AS EXPR1, Chr(34) & Trim([xplink]) & Chr(34) AS EXPR2, [instance] & " 1" AS Expr3, IIf([xHeight]=0,19,Format$([xHeight]/12,"0.000")) AS Expr4
 FROM xpLinks
+WHERE (([xNKlass]<>8))
 ORDER BY Chr(34) & Trim([xplink]) & Chr(34);
-
-
-XPXDataDeepTrap
-----------
-SELECT DISTINCTROW "DATA DEEP" AS EXPR1, Chr(34) & Trim([conduit_name]) & Chr(34) AS EXPR2, (IIf([tblConduitData]![Multi_or_Single]="136","0",[instance])) & " 1" AS Expr3, IIf([Depth_or_Diameter]=0,19,[Depth_or_Diameter]) AS Expr4
-FROM tblConduitData
-WHERE (((tblConduitData.Link_Type)="6" Or (tblConduitData.Link_Type)="2"))
-ORDER BY Chr(34) & Trim([conduit_name]) & Chr(34);
 
 
 XPXDataDORIF
@@ -796,6 +873,13 @@ FROM xpLinks
 ORDER BY Chr(34) & Trim([xplink]) & Chr(34);
 
 
+XPXDataNATS_SHAPE
+----------
+SELECT DISTINCTROW "DATA NATS_SHAPE" AS EXPR1, Chr(34) & Trim([xplink]) & Chr(34) AS EXPR2, [instance] & " 1" AS Expr3, Chr(34) & Trim([xplink]) & Chr(34) AS EXPR4, "/* associates link with natural channel */" AS Expr5
+FROM xpLinks INNER JOIN mst_xsections ON xpLinks.MLinkID = mst_xsections.mlinkid
+ORDER BY Chr(34) & Trim([xplink]) & Chr(34);
+
+
 XPXDataNKCTL
 ----------
 SELECT DISTINCTROW "DATA NKCTL" AS EXPR1, Chr(34) & [xplink] & Chr(34) AS EXPR2, [instance] & " 1" AS Expr3, [_PipeShapes].XLNKCTL AS Expr4, "/* " & [xplinks].[PipeShape] & "*/" AS comment
@@ -808,14 +892,6 @@ XPXDataNKLass
 SELECT DISTINCTROW "DATA NKLASS" AS expr1, Chr(34) & Trim([xplink]) & Chr(34) AS EXPR2, [instance] & " 1" AS Expr3, xpLinks.xNKLass AS Expr4, "/* " & [PipeShape] & "*/" AS Expr5
 FROM xpLinks
 ORDER BY Chr(34) & Trim([xplink]) & Chr(34);
-
-
-XPXDataNKLassNEW
-----------
-SELECT DISTINCTROW "DATA NKLASS" AS expr1, Chr(34) & Trim([explink]) & Chr(34) AS EXPR2, (IIf([xLinks]![ISSpecLink],"1","0")) & " 1" AS Expr3, xLinks.xNKLass
-FROM xLinks
-WHERE (((xLinks.xNKLass) Is Not Null And (xLinks.xNKLass)<>""))
-ORDER BY Chr(34) & Trim([explink]) & Chr(34);
 
 
 XPXDataNode
@@ -985,20 +1061,6 @@ FROM xpLinks
 ORDER BY Chr(34) & Trim([xplink]) & Chr(34);
 
 
-XPXDataSTCHL
-----------
-SELECT DISTINCTROW "DATA STCHL" AS expr1, Chr(34) & Trim([conduit_name]) & Chr(34) AS expr2, (IIf([tblConduitData]![Multi_or_Single]="136","0",[instance])) & " 1" AS Expr3, tblConduitData.Station_Left
-FROM tblConduitData
-WHERE (((tblConduitData.Station_Left) Is Not Null) AND ((tblConduitData.Link_Type)="8"));
-
-
-XPXDataSTCHR
-----------
-SELECT DISTINCTROW "DATA STCHR" AS expr1, Chr(34) & Trim([conduit_name]) & Chr(34) AS EXPR2, (IIf([tblConduitData]![Multi_or_Single]="136","0",[instance])) & " 1" AS Expr3, tblConduitData.Station_Right
-FROM tblConduitData
-WHERE (((tblConduitData.Station_Right) Is Not Null) AND ((tblConduitData.Link_Type)="8"));
-
-
 XPXDataStorageZ
 ----------
 SELECT DISTINCTROW "DATA Z" AS EXPR1, Chr(34) & Trim([Node]) & Chr(34) AS Expr2, "0 1" AS EXPR3, Min([TValue]-0.2) AS Expr4
@@ -1016,16 +1078,16 @@ WHERE ((([_BaseFlowComponents].avesanflow)<>0));
 
 XPXDataTPhi
 ----------
-SELECT DISTINCTROW "DATA TPHI" AS EXPR1, Chr(34) & Trim([conduit_name]) & Chr(34) AS EXPR2, (IIf([tblConduitData]![Multi_or_Single]="138",[INSTANCE],"0")) & " 1" AS EXPR3, tblConduitData.Right_Side_Slope
-FROM tblConduitData
-WHERE (((tblConduitData.Right_Side_Slope)>0 And (tblConduitData.Right_Side_Slope) Is Not Null));
+SELECT DISTINCTROW "DATA TPHI" AS EXPR1, Chr(34) & Trim([xplink]) & Chr(34) AS EXPR2, [INSTANCE] & " 1" AS EXPR3, IIf([PipeShape]="TR31",3,-1) AS Expr4
+FROM XPLinks
+WHERE (((XPLinks.xNKLass)=6));
 
 
 XPXDataTTheta
 ----------
-SELECT DISTINCTROW "DATA TTHETA" AS EXPR1, Chr(34) & Trim([conduit_name]) & Chr(34) AS EXPR2, (IIf([tblConduitData]![Multi_or_Single]="138",[INSTANCE],"0")) & " 1" AS EXPR3, tblConduitData.Left_Side_Slope
-FROM tblConduitData
-WHERE (((tblConduitData.Left_Side_Slope)>0 And (tblConduitData.Left_Side_Slope) Is Not Null) AND ((tblConduitData.Link_Type) Like "6"));
+SELECT DISTINCTROW "DATA TTHETA" AS EXPR1, Chr(34) & Trim([xplink]) & Chr(34) AS EXPR2, [INSTANCE] & " 1" AS EXPR3, IIf([PipeShape]="TR31",3,-1) AS Expr4
+FROM XPLinks
+WHERE (((XPLinks.xNKLass)=6));
 
 
 XPXDataWeir
@@ -1048,7 +1110,7 @@ XPXDataWide
 ----------
 SELECT DISTINCTROW "DATA WIDE" AS EXPR1, Chr(34) & Trim([xplink]) & Chr(34) AS EXPR2, [instance] & " 1" AS Expr3, Format$([xWidth]/12,"0.000") AS Expr4
 FROM xpLinks
-WHERE (((xpLinks.xWidth)<>0))
+WHERE (((xpLinks.xWidth)<>0) AND ((xpLinks.xNKLass)<>8))
 ORDER BY Chr(34) & Trim([xplink]) & Chr(34);
 
 
@@ -1060,25 +1122,18 @@ WHERE ((([_XPSpecialLinkData].Tag) Like "WLEN"))
 ORDER BY Chr(34) & [speclinkID] & Chr(34);
 
 
-XPXDataXNCH
+XPXDataXNLEN_L
 ----------
-SELECT DISTINCTROW "DATA XNCH" AS expr1, Chr(34) & Trim([conduit_name]) & Chr(34) AS EXPR2, (IIf([tblConduitData]![Multi_or_Single]="136","0",[instance])) & " 1" AS Expr3, IIf([tblConduitData].[ROUGHNESS_CHANNEL]=0,0.045,[rOUGHNESS_CHANNEL]) AS Expr4
-FROM tblConduitData
-WHERE (((tblConduitData.Roughness_Channel) Is Not Null) AND ((tblConduitData.Link_Type)="8"));
+SELECT DISTINCTROW "DATA XNLEN_L" AS EXPR1, Chr(34) & Trim([xplink]) & Chr(34) AS EXPR2, [instance] & " 1" AS Expr3, Format$([length]*[length_factor_left],"0") AS Expr4, "/* left bank length factor: " & [length_factor_left] & " */" AS Expr5
+FROM xpLinks INNER JOIN mst_xsections ON xpLinks.MLinkID = mst_xsections.mlinkid
+ORDER BY Chr(34) & Trim([xplink]) & Chr(34);
 
 
-XPXDataXNL
+XPXDataXNLEN_R
 ----------
-SELECT DISTINCTROW "DATA XNL" AS expr1, Chr(34) & Trim([conduit_name]) & Chr(34) AS expr2, (IIf([tblConduitData]![Multi_or_Single]="136","0",[instance])) & " 1" AS Expr3, IIf([tblConduitData].[ROUGHNESS_lEFT]=0,0.075,[rOUGHNESS_lEFT]) AS Expr4
-FROM tblConduitData
-WHERE (((tblConduitData.Roughness_Left) Is Not Null) AND ((tblConduitData.Link_Type)="8"));
-
-
-XPXDataXNR
-----------
-SELECT DISTINCTROW "DATA XNR" AS expr1, Chr(34) & Trim([conduit_name]) & Chr(34) AS expr2, (IIf([tblConduitData]![Multi_or_Single]="136","0",[instance])) & " 1" AS Expr3, IIf([tblConduitData].[ROUGHNESS_RIGHT]=0,0.075,[rOUGHNESS_RIGHT]) AS Expr4
-FROM tblConduitData
-WHERE (((tblConduitData.Roughness_Right) Is Not Null) AND ((tblConduitData.Link_Type)="8"));
+SELECT DISTINCTROW "DATA XNLEN_R" AS EXPR1, Chr(34) & Trim([xplink]) & Chr(34) AS EXPR2, [instance] & " 1" AS Expr3, Format$([length]*[length_factor_right],"0") AS Expr4, "/* right bank length factor: " & [length_factor_left] & " */" AS Expr5
+FROM xpLinks INNER JOIN mst_xsections ON xpLinks.MLinkID = mst_xsections.mlinkid
+ORDER BY Chr(34) & Trim([xplink]) & Chr(34);
 
 
 XPXDataYCOEFF

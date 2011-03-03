@@ -16,6 +16,7 @@ type
     fForcedStopLinks: THashedStringList;
     fStormsToBuild: TStringList;
     fTraceStormwater: Boolean;
+    fRemoveSanitaryUponDeploy: Boolean;
     function GetAndUpdateString(SectionName: String; KeyName: String;
       DefaultValue: String): String;
     function GetAndUpdateBool(SectionName: String; KeyName: String;
@@ -153,6 +154,8 @@ type
     procedure SetSystemMDBRefreshDate(const Value: TDateTime);
     procedure SetTraceStormwater(const Value: Boolean);
     function GetTraceStormwater: Boolean;
+    function GetRemoveSanitaryUponDeploy: Boolean;
+    procedure SetRemoveSanitaryUponDeploy(const Value: Boolean);
   protected
     procedure GetMDBFiles;
     procedure GetStandardDirectories;
@@ -261,6 +264,7 @@ type
     property StormsToBuildList: String read GetStormsToBuildList write SetStormsToBuildList;
     procedure ClearStormsToBuild;
     property UseBaseflow: Boolean read GetUseBaseflow write SetUseBaseflow;
+    property RemoveSanitaryUponDeploy: Boolean read GetRemoveSanitaryUponDeploy write SetRemoveSanitaryUponDeploy;
 
     // Trace params
     property RootLinks[Index: Integer]: Integer read GetRootLink write SetRootLink;
@@ -300,6 +304,7 @@ type
     procedure CopyBoundariesFromModel(AModelPath: String);
 
     property TraceStormwater: Boolean read GetTraceStormwater write SetTraceStormwater;
+
     // Operations
     // Copies standard entries from model template file
     procedure CopyConfigFromModelTemplate;
@@ -420,6 +425,7 @@ resourcestring
   DefaultEngineFileValue = 'xpextran.xpx';
   StormsToBuildKey = 'StormsToBuild';
   UseBaseflowKey = 'UseBaseflow';
+  RemoveSanitaryUponDeployKey = 'RemoveSanitaryUponDeploy';
 
   // Result Views Keys
   ProjectNumberKey = 'ProjectNumber';
@@ -883,6 +889,11 @@ begin
   Result := GetAndUpdateString(TreeVerseSection, ReachKey, '');
 end;
 
+function TModelConfig.GetRemoveSanitaryUponDeploy: Boolean;
+begin
+  Result := GetAndUpdateBool(SimulationSection, RemoveSanitaryUponDeployKey, False);
+end;
+
 function TModelConfig.GetResultViewsProjectDescription: String;
 begin
   Result := GetAndUpdateString(ResultViewsSection, ProjectDescriptionKey, '');
@@ -1320,6 +1331,11 @@ end;
 procedure TModelConfig.SetResultViewsStudyAreaID(const Value: String);
 begin
   fConfig.WriteString(ResultViewsSection, StudyAreaIDKey, Value);
+end;
+
+procedure TModelConfig.SetRemoveSanitaryUponDeploy(const Value: Boolean);
+begin
+  fConfig.WriteBool(SimulationSection, RemoveSanitaryUponDeployKey, Value);
 end;
 
 procedure TModelConfig.SetRootLink(Index: Integer; const Value: Integer);

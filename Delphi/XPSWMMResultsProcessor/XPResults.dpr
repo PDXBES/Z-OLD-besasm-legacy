@@ -149,6 +149,7 @@ begin
 						'CONSTRAINT idxPrimary PRIMARY KEY (NodeName));';
 					adoOutCommand.Execute;
 					// Read Version
+          CodeSite.SendMsg('Reading version');
 					CurrentLine := InTextStream.ReadLine;
 					while not InTextStream.AtEndOfStream do
 					begin
@@ -162,23 +163,53 @@ begin
               Break;
 					end;
 					CurrentLine := InTextStream.ReadLine;
+          CodeSite.SendMsg('First version attempt: ' + CurrentLine);
 					ExtractTokensL(CurrentLine, ' ', '''', False, Tokens);
 					Version := Tokens[2];  // These pre 10.x versions always in x.x format
           if not TryStrToFloat(Version, VersionNum) then
           begin
             CurrentLine := InTextStream.ReadLine;
+            CodeSite.SendMsg('Second version attempt: ' + CurrentLine);
   					ExtractTokensL(CurrentLine, ' ', '''', False, Tokens);
-  					Version := Tokens[3];
+            if Tokens.Count > 3 then
+    					Version := Tokens[3]
+            else
+              Version := Tokens[0]; // Read gibberish to make the next test true and move to the next version read
             if not TryStrToFloat(Version, VersionNum) then // 10.x versions user "Engine Version: x.x" instead of "Version: x.x"
             begin
-              MultiVersionTokens := TStringList.Create;
-              ExtractTokensL(Tokens[3], '.', '''', False, MultiVersionTokens);
-              if MultiVersionTokens.Count > 3 then
-                if TryStrToInt(MultiVersionTokens[0], MajorVersionNum) then
-                  if TryStrToInt(MultiVersionTokens[1], MinorVersionNum) then
-                    Version := Format('%d.%d', [MajorVersionNum, MinorVersionNum])
+              if Tokens.Count > 3 then
+              begin
+                MultiVersionTokens := TStringList.Create;
+                ExtractTokensL(Tokens[3], '.', '''', False, MultiVersionTokens);
+                if MultiVersionTokens.Count > 3 then
+                  if TryStrToInt(MultiVersionTokens[0], MajorVersionNum) then
+                    if TryStrToInt(MultiVersionTokens[1], MinorVersionNum) then
+                      Version := Format('%d.%d', [MajorVersionNum, MinorVersionNum])
+              end
+              else
+              begin
+                // 2010 version really switches crap around
+                CurrentLine := InTextStream.ReadLine;
+                CodeSite.SendMsg('Third version attempt: ' + CurrentLine);
+                while not InTextStream.AtEndOfStream do
+                begin
+                  if (CurrentLine <> '          |                                               |')then
+                  begin
+                    CurrentLine := InTextStream.ReadLine;
+                    Continue;
+                  end
                   else
-                    raise Exception.Create('Can''t detect version.');
+                    Break;
+                end;
+                CurrentLine := InTextStream.ReadLine;
+                CurrentLine := InTextStream.ReadLine;
+                CurrentLine := InTextStream.ReadLine;
+                CurrentLine := InTextStream.ReadLine;
+                ExtractTokensL(CurrentLine, ' ', '''', False, Tokens);
+                Version := Tokens[4];
+                if not TryStrToFloat(Version, VersionNum) then
+                  raise Exception.Create('Can''t detect version.');
+              end;
             end;
           end;
 

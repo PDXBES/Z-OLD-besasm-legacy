@@ -11,10 +11,10 @@
             <MainSource>
               <DbSource ConnectionRef="modeling_devConnectionString (Settings)" DbObjectName="MODELING_DEV.ModelAdmin.SP_RP_BSBR" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
                 <SelectCommand>
-                  <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT     dsc_id, parcel_id, divide_id, us_jelev_ft, ds_jelev_ft, frac_2swr_beg, calculated_hgl_ft, calculated_dhgl_ft, surcharge_ft, flood_ref_elev_ft, 
-                      san_swr_crown_ft, storm, basin, useflag, hgl_comp_rp_id, focus_area
-FROM         SP_RP_BSBR</CommandText>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT        dsc_id, parcel_id, divide_id, us_jelev_ft, ds_jelev_ft, frac_2swr_beg, calculated_hgl_ft, calculated_dhgl_ft, surcharge_ft, flood_ref_elev_ft, san_swr_crown_ft,
+                          storm, basin, use_flag, hgl_comp_rp_id, focus_area
+FROM            SP_RP_BSBR</CommandText>
                     <Parameters />
                   </DbCommand>
                 </SelectCommand>
@@ -34,7 +34,7 @@ FROM         SP_RP_BSBR</CommandText>
               <Mapping SourceColumn="san_swr_crown_ft" DataSetColumn="san_swr_crown_ft" />
               <Mapping SourceColumn="storm" DataSetColumn="storm" />
               <Mapping SourceColumn="basin" DataSetColumn="basin" />
-              <Mapping SourceColumn="useflag" DataSetColumn="useflag" />
+              <Mapping SourceColumn="use_flag" DataSetColumn="use_flag" />
               <Mapping SourceColumn="focus_area" DataSetColumn="focus_area" />
               <Mapping SourceColumn="hgl_comp_rp_id" DataSetColumn="hgl_comp_rp_id" />
             </Mappings>
@@ -76,7 +76,7 @@ FROM         SP_RP_BSBR</CommandText>
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="useflag" msprop:Generator_UserColumnName="useflag" msprop:Generator_ColumnVarNameInTable="columnuseflag" msprop:Generator_ColumnPropNameInRow="useflag" msprop:Generator_ColumnPropNameInTable="useflagColumn" type="xs:short" minOccurs="0" />
+              <xs:element name="use_flag" msprop:Generator_UserColumnName="use_flag" msprop:Generator_ColumnVarNameInTable="columnuse_flag" msprop:Generator_ColumnPropNameInRow="use_flag" msprop:Generator_ColumnPropNameInTable="use_flagColumn" type="xs:short" minOccurs="0" />
               <xs:element name="focus_area" msprop:Generator_UserColumnName="focus_area" msprop:nullValue="_null" msprop:Generator_ColumnVarNameInTable="columnfocus_area" msprop:Generator_ColumnPropNameInTable="focus_areaColumn" msprop:Generator_ColumnPropNameInRow="focus_area" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
@@ -84,7 +84,7 @@ FROM         SP_RP_BSBR</CommandText>
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="hgl_comp_rp_id" msprop:Generator_UserColumnName="hgl_comp_rp_id" msprop:Generator_ColumnPropNameInRow="hgl_comp_rp_id" msprop:Generator_ColumnVarNameInTable="columnhgl_comp_rp_id" msprop:Generator_ColumnPropNameInTable="hgl_comp_rp_idColumn" type="xs:long" minOccurs="0" />
+              <xs:element name="hgl_comp_rp_id" msdata:DataType="System.Guid, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" msprop:Generator_UserColumnName="hgl_comp_rp_id" msprop:Generator_ColumnPropNameInRow="hgl_comp_rp_id" msprop:Generator_ColumnVarNameInTable="columnhgl_comp_rp_id" msprop:Generator_ColumnPropNameInTable="hgl_comp_rp_idColumn" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

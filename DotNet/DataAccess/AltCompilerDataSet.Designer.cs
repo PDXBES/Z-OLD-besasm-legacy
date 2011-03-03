@@ -288,7 +288,7 @@ namespace SystemsAnalysis.DataAccess {
             
             private global::System.Data.DataColumn columnbasin;
             
-            private global::System.Data.DataColumn columnuseflag;
+            private global::System.Data.DataColumn columnuse_flag;
             
             private global::System.Data.DataColumn columnfocus_area;
             
@@ -416,9 +416,9 @@ namespace SystemsAnalysis.DataAccess {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public global::System.Data.DataColumn useflagColumn {
+            public global::System.Data.DataColumn use_flagColumn {
                 get {
-                    return this.columnuseflag;
+                    return this.columnuse_flag;
                 }
             }
             
@@ -479,9 +479,9 @@ namespace SystemsAnalysis.DataAccess {
                         decimal san_swr_crown_ft, 
                         string storm, 
                         string basin, 
-                        short useflag, 
+                        short use_flag, 
                         string focus_area, 
-                        long hgl_comp_rp_id) {
+                        System.Guid hgl_comp_rp_id) {
                 SP_RP_BSBRRow rowSP_RP_BSBRRow = ((SP_RP_BSBRRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         dsc_id,
@@ -497,7 +497,7 @@ namespace SystemsAnalysis.DataAccess {
                         san_swr_crown_ft,
                         storm,
                         basin,
-                        useflag,
+                        use_flag,
                         focus_area,
                         hgl_comp_rp_id};
                 rowSP_RP_BSBRRow.ItemArray = columnValuesArray;
@@ -532,7 +532,7 @@ namespace SystemsAnalysis.DataAccess {
                 this.columnsan_swr_crown_ft = base.Columns["san_swr_crown_ft"];
                 this.columnstorm = base.Columns["storm"];
                 this.columnbasin = base.Columns["basin"];
-                this.columnuseflag = base.Columns["useflag"];
+                this.columnuse_flag = base.Columns["use_flag"];
                 this.columnfocus_area = base.Columns["focus_area"];
                 this.columnhgl_comp_rp_id = base.Columns["hgl_comp_rp_id"];
             }
@@ -565,11 +565,11 @@ namespace SystemsAnalysis.DataAccess {
                 base.Columns.Add(this.columnstorm);
                 this.columnbasin = new global::System.Data.DataColumn("basin", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnbasin);
-                this.columnuseflag = new global::System.Data.DataColumn("useflag", typeof(short), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnuseflag);
+                this.columnuse_flag = new global::System.Data.DataColumn("use_flag", typeof(short), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnuse_flag);
                 this.columnfocus_area = new global::System.Data.DataColumn("focus_area", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnfocus_area);
-                this.columnhgl_comp_rp_id = new global::System.Data.DataColumn("hgl_comp_rp_id", typeof(long), null, global::System.Data.MappingType.Element);
+                this.columnhgl_comp_rp_id = new global::System.Data.DataColumn("hgl_comp_rp_id", typeof(global::System.Guid), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnhgl_comp_rp_id);
                 this.columnstorm.MaxLength = 255;
                 this.columnbasin.MaxLength = 255;
@@ -901,17 +901,17 @@ namespace SystemsAnalysis.DataAccess {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public short useflag {
+            public short use_flag {
                 get {
                     try {
-                        return ((short)(this[this.tableSP_RP_BSBR.useflagColumn]));
+                        return ((short)(this[this.tableSP_RP_BSBR.use_flagColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'useflag\' in table \'SP_RP_BSBR\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'use_flag\' in table \'SP_RP_BSBR\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableSP_RP_BSBR.useflagColumn] = value;
+                    this[this.tableSP_RP_BSBR.use_flagColumn] = value;
                 }
             }
             
@@ -931,10 +931,10 @@ namespace SystemsAnalysis.DataAccess {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public long hgl_comp_rp_id {
+            public System.Guid hgl_comp_rp_id {
                 get {
                     try {
-                        return ((long)(this[this.tableSP_RP_BSBR.hgl_comp_rp_idColumn]));
+                        return ((global::System.Guid)(this[this.tableSP_RP_BSBR.hgl_comp_rp_idColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'hgl_comp_rp_id\' in table \'SP_RP_BSBR\' is DBNull.", e);
@@ -1076,13 +1076,13 @@ namespace SystemsAnalysis.DataAccess {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public bool IsuseflagNull() {
-                return this.IsNull(this.tableSP_RP_BSBR.useflagColumn);
+            public bool Isuse_flagNull() {
+                return this.IsNull(this.tableSP_RP_BSBR.use_flagColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            public void SetuseflagNull() {
-                this[this.tableSP_RP_BSBR.useflagColumn] = global::System.Convert.DBNull;
+            public void Setuse_flagNull() {
+                this[this.tableSP_RP_BSBR.use_flagColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1269,7 +1269,7 @@ namespace SystemsAnalysis.DataAccess.AltCompilerDataSetTableAdapters {
             tableMapping.ColumnMappings.Add("san_swr_crown_ft", "san_swr_crown_ft");
             tableMapping.ColumnMappings.Add("storm", "storm");
             tableMapping.ColumnMappings.Add("basin", "basin");
-            tableMapping.ColumnMappings.Add("useflag", "useflag");
+            tableMapping.ColumnMappings.Add("use_flag", "use_flag");
             tableMapping.ColumnMappings.Add("focus_area", "focus_area");
             tableMapping.ColumnMappings.Add("hgl_comp_rp_id", "hgl_comp_rp_id");
             this._adapter.TableMappings.Add(tableMapping);
@@ -1286,9 +1286,9 @@ namespace SystemsAnalysis.DataAccess.AltCompilerDataSetTableAdapters {
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = @"SELECT     dsc_id, parcel_id, divide_id, us_jelev_ft, ds_jelev_ft, frac_2swr_beg, calculated_hgl_ft, calculated_dhgl_ft, surcharge_ft, flood_ref_elev_ft, 
-                      san_swr_crown_ft, storm, basin, useflag, hgl_comp_rp_id, focus_area
-FROM         SP_RP_BSBR";
+            this._commandCollection[0].CommandText = @"SELECT        dsc_id, parcel_id, divide_id, us_jelev_ft, ds_jelev_ft, frac_2swr_beg, calculated_hgl_ft, calculated_dhgl_ft, surcharge_ft, flood_ref_elev_ft, san_swr_crown_ft,
+                          storm, basin, use_flag, hgl_comp_rp_id, focus_area
+FROM            SP_RP_BSBR";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
