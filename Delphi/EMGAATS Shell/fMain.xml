@@ -2160,10 +2160,6 @@
     </ancestor>
     <members>
       <field name="actManager" type="TActionManager" visibility="published" />
-      <field name="actBuildModels" type="TAction" visibility="published" />
-      <field name="actNewModel" type="TAction" visibility="published" />
-      <field name="actOpenModel" type="TAction" visibility="published" />
-      <field name="actMasterUpdateWithChangeLogs" type="TAction" visibility="published" />
       <field name="actFileExit" type="TFileExit" visibility="published" />
       <field name="dlgOpen" type="TOpenDialog" visibility="published" />
       <field name="ImageList1" type="TImageList" visibility="published" />
@@ -2175,16 +2171,6 @@
       <field name="RzGroup2" type="TRzGroup" visibility="published" />
       <field name="appLauncher" type="TRzLauncher" visibility="published" />
       <field name="RzGroup3" type="TRzGroup" visibility="published" />
-      <field name="actToolsInterfaceMaster" type="TAction" visibility="published" />
-      <field name="actToolsProfiler" type="TAction" visibility="published" />
-      <field name="actToolsUpstreamTracer" type="TAction" visibility="published" />
-      <field name="actToolsHoptimizer" type="TAction" visibility="published" />
-      <field name="actRestartWorkbenches" type="TAction" visibility="published" />
-      <field name="actBuildModelPipeSystem" type="TAction" visibility="published" />
-      <field name="actBuildModelLateralsAndParcels" type="TAction" visibility="published" />
-      <field name="actBuildModelSubcatchments" type="TAction" visibility="published" />
-      <field name="actBuildModelDeployModel" type="TAction" visibility="published" />
-      <field name="actBuildModelPerformQualityControl" type="TAction" visibility="published" />
       <field name="errHandler" type="TRzErrorHandler" visibility="published" />
       <field name="barManager" type="TdxBarManager" visibility="published" />
       <field name="mnuFile" type="TdxBarSubItem" visibility="published" />
@@ -2213,103 +2199,12 @@
       <field name="mnuModelBuild" type="TdxBarButton" visibility="published" />
       <field name="CSGlobalObject1" type="TCSGlobalObject" visibility="published" />
       <field name="versionInfo" type="TRzVersionInfo" visibility="published" />
-      <procedure name="actBuildModelsExecute" visibility="published">
-        <parameters>
-          <parameter name="Sender" type="TObject" />
-        </parameters>
-      </procedure>
       <procedure name="FormCreate" visibility="published">
         <parameters>
           <parameter name="Sender" type="TObject" />
         </parameters>
       </procedure>
       <procedure name="FormDestroy" visibility="published">
-        <parameters>
-          <parameter name="Sender" type="TObject" />
-        </parameters>
-      </procedure>
-      <procedure name="actMasterUpdateWithChangeLogsExecute" visibility="published">
-        <parameters>
-          <parameter name="Sender" type="TObject" />
-        </parameters>
-      </procedure>
-      <procedure name="actNewModelExecute" visibility="published">
-        <parameters>
-          <parameter name="Sender" type="TObject" />
-        </parameters>
-      </procedure>
-      <procedure name="actOpenModelExecute" visibility="published">
-        <parameters>
-          <parameter name="Sender" type="TObject" />
-        </parameters>
-      </procedure>
-      <procedure name="FormClose" visibility="published">
-        <parameters>
-          <parameter name="Sender" type="TObject" />
-          <parameter name="Action" type="TCloseAction" paramflags="var" />
-        </parameters>
-      </procedure>
-      <procedure name="actToolsInterfaceMasterExecute" visibility="published">
-        <parameters>
-          <parameter name="Sender" type="TObject" />
-        </parameters>
-      </procedure>
-      <procedure name="actRestartWorkbenchesUpdate" visibility="published">
-        <parameters>
-          <parameter name="Sender" type="TObject" />
-        </parameters>
-      </procedure>
-      <procedure name="actRestartWorkbenchesExecute" visibility="published">
-        <parameters>
-          <parameter name="Sender" type="TObject" />
-        </parameters>
-      </procedure>
-      <procedure name="actBuildModelPipeSystemExecute" visibility="published">
-        <parameters>
-          <parameter name="Sender" type="TObject" />
-        </parameters>
-      </procedure>
-      <procedure name="actBuildModelLateralsAndParcelsExecute" visibility="published">
-        <parameters>
-          <parameter name="Sender" type="TObject" />
-        </parameters>
-      </procedure>
-      <procedure name="actBuildModelSubcatchmentsExecute" visibility="published">
-        <parameters>
-          <parameter name="Sender" type="TObject" />
-        </parameters>
-      </procedure>
-      <procedure name="actBuildModelDeployModelExecute" visibility="published">
-        <parameters>
-          <parameter name="Sender" type="TObject" />
-        </parameters>
-      </procedure>
-      <procedure name="actBuildModelPerformQualityControlExecute" visibility="published">
-        <parameters>
-          <parameter name="Sender" type="TObject" />
-        </parameters>
-      </procedure>
-      <procedure name="actBuildModelPipeSystemUpdate" visibility="published">
-        <parameters>
-          <parameter name="Sender" type="TObject" />
-        </parameters>
-      </procedure>
-      <procedure name="actBuildModelLateralsAndParcelsUpdate" visibility="published">
-        <parameters>
-          <parameter name="Sender" type="TObject" />
-        </parameters>
-      </procedure>
-      <procedure name="actBuildModelSubcatchmentsUpdate" visibility="published">
-        <parameters>
-          <parameter name="Sender" type="TObject" />
-        </parameters>
-      </procedure>
-      <procedure name="actBuildModelDeployModelUpdate" visibility="published">
-        <parameters>
-          <parameter name="Sender" type="TObject" />
-        </parameters>
-      </procedure>
-      <procedure name="actBuildModelPerformQualityControlUpdate" visibility="published">
         <parameters>
           <parameter name="Sender" type="TObject" />
         </parameters>
@@ -2325,58 +2220,8 @@
         </parameters>
       </procedure>
       <field name="FirstRun" type="Boolean" visibility="private" />
-      <field name="UserRegistry" type="TRegistryIniFile" visibility="public" />
-      <field name="SystemIni" type="TMemIniFile" visibility="public" />
-      <field name="ModelIni" type="TMemIniFile" visibility="public" />
-      <field name="PatchIni" type="TMemIniFile" visibility="public" />
-      <field name="goleMI" type="Variant" visibility="public" />
-      <field name="goleCB" type="Variant" visibility="public" />
-      <field name="goleMItest" type="Variant" visibility="public" />
-      <field name="goleCBtest" type="Variant" visibility="public" />
-      <field name="EMGInitialized" type="Boolean" visibility="public" />
-      <field name="modelversion" type="string" visibility="public" />
-      <function name="EnterModel" visibility="public">
-        <parameters>
-          <parameter name="Sender" type="TObject" />
-          <parameter name="IsNewModel" type="Boolean" />
-          <retval type="TmdlChangeStatus" />
-        </parameters>
-      </function>
-      <function name="ExitModel" visibility="public">
-        <parameters>
-          <retval type="TmdlChangeStatus" />
-        </parameters>
-      </function>
-      <function name="installmodelpatch" visibility="public">
-        <parameters>
-          <parameter name="ptype" type="Integer" />
-          <retval type="Boolean" />
-        </parameters>
-      </function>
-      <function name="copymastermdbs" visibility="public">
-        <parameters>
-          <retval type="Boolean" />
-        </parameters>
-      </function>
-      <procedure name="InitMapInfo" visibility="public">
-      </procedure>
       <procedure name="HideWindows" visibility="public">
       </procedure>
-      <function name="CreateNewModel" visibility="public">
-        <parameters>
-          <retval type="Boolean" />
-        </parameters>
-      </function>
-      <function name="OpenExistingModel" visibility="public">
-        <parameters>
-          <retval type="Boolean" />
-        </parameters>
-      </function>
-      <function name="CopyStandardDirectories" visibility="public">
-        <parameters>
-          <retval type="Boolean" />
-        </parameters>
-      </function>
       <procedure name="ConfigureSystem" visibility="public">
       </procedure>
       <function name="DisplayForm" visibility="public">
@@ -2388,11 +2233,6 @@
       <procedure name="InitializeGlobalObjects" visibility="public">
       </procedure>
       <procedure name="FinalizeGlobalObjects" visibility="public">
-      </procedure>
-      <procedure name="CreateParams" visibility="protected" procflags="override">
-        <parameters>
-          <parameter name="Params" type="TCreateParams" paramflags="var" />
-        </parameters>
       </procedure>
     </members>
   </class>

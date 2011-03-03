@@ -173,7 +173,7 @@ namespace SystemsAnalysis.Reporting.ReportLibraries
         on tableSpRpBsbr.focus_area equals faList
         join mdlDsc in scDS.mdl_dirsc_ac
         on tableSpRpBsbr.dsc_id equals mdlDsc.DSCID
-        where (tableSpRpBsbr.useflag == useFlag)
+        where (tableSpRpBsbr.use_flag == useFlag)
           && (tableSpRpBsbr.storm == stormEvent)         
         group tableSpRpBsbr by tableSpRpBsbr.focus_area into gFocusArea
         orderby gFocusArea.Key
