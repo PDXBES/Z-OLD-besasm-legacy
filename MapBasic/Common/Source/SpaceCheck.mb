@@ -1,0 +1,121 @@
+'
+'	Function to do a spatial check of the to, from nodes and a link.
+'
+Include "MapBasic.def"
+Include "..\inc\EMGLineGeo.def"
+Include "..\inc\EMGMTabUtil.def"
+Include "..\inc\SpaceCheck.def"
+
+DEFINE SNAP_TOLERANCE 2.0
+ 
+dim msymNodeProblem as Symbol
+dim mpenNodeZinger as Pen
+
+Declare Sub PutPoint(X as float, Y as float)
+Declare Sub DrawZinger(FromX as float, FromY as float, ToX as float, ToY as Float)
+' =========================================================================
+'
+' =========================================================================
+Function SpaceCheck(
+	TheLink as Object,
+	FromNode as Object,
+	ToNode as Object
+	) as Logical
+
+Dim 	BegX, BegY, EndX, EndY as float
+Dim 	FromX, FromY as float
+Dim		ToX, ToY as float
+Dim		lResult as logical
+Dim		TempType as string
+
+SpaceCheck = FALSE
+
+onerror goto BadObj
+TempType = ObjectInfo(TheLink, OBJ_INFO_TYPE)
+Goto GoodObj
+BadObj:
+	print "Link has no spatial representation!"
+	resume BailOut
+GoodObj:
+'print "Good Space Object"
+lResult = CalcEnds (TheLink, BegX, BegY, EndX, EndY)
+FromX = ObjectGeography(FromNode, OBJ_GEO_POINTX)
+FromY = ObjectGeography(FromNode, OBJ_GEO_POINTY)
+ToX = ObjectGeography(ToNode, OBJ_GEO_POINTX)
+ToY = ObjectGeography(ToNode, OBJ_GEO_POINTY)
+
+If Distance(BegX, BegY, FromX, FromY, "ft") > SNAP_TOLERANCE then
+	call PutPoint(BegX, BegY)
+	call DrawZinger(BegX, BegY, FromX, FromY)
+end if
+If Distance(EndX, EndY, ToX, ToY, "ft") > SNAP_TOLERANCE then
+	call PutPoint(EndX, EndY)
+	call DrawZinger(EndX, EndY, ToX, ToY)
+end if
+
+SpaceCheck = TRUE
+Exit Function
+
+BailOut:
+SpaceCheck = FALSE
+Exit Function
+End Function
+
+' =========================================================================
+'
+' =========================================================================
+Sub PutPoint(X as float, Y as float)
+Dim		NewPoint as object
+Dim		MyComment as string
+
+	Create Point into Variable NewPoint (X, Y) Symbol msymNodeProblem
+	MyComment = ""
+	insert into SpaceCheckMarks (
+		obj,
+		comment
+	) values (
+		NewPoint,
+		MyComment
+	)
+End Sub
+' =========================================================================
+'
+' =========================================================================
+Sub DrawZinger(BegX as float, BegY as float, EndX as float, EndY as float)
+Dim		NewZing as object
+Dim		MyComment as string
+
+	create line into variable NewZing (BegX, BegY)(EndX, EndY) pen mpenNodeZinger
+	MyComment = ""
+
+	insert into SpaceCheckMarks (
+		obj,
+		Comment
+	) values (
+		NewZing,
+		MyComment
+	)
+
+
+End Sub
+' =========================================================================
+'	*** eventually this should come from INI file or some such
+' =========================================================================
+Sub InitSpaceCheck()
+
+	msymNodeProblem = MakeSymbol(67, RED, 16)   ' this be push-pin 
+	mpenNodeZinger = MakePen(3, 59, RED)				' this be arrow
+
+	if IsTableOpen("SpaceCheckMarks") then
+		delete from SpaceCheckMarks
+	else
+		Create Table SpaceCheckMarks (
+			Comment	char(100)
+			)
+		File "SpaceCheck.tab"
+		Type	Native
+
+		Create Map for SpaceCheckMarks
+		'Using segments
+	end if
+End Sub

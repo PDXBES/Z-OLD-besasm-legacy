@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<namespace name="uUtilities">
+  <function name="CopyFile" visibility="private">
+    <parameters>
+      <parameter name="SourceFile" type="TFileName" />
+      <parameter name="DestFile" type="TFileName" />
+      <retval type="Boolean" />
+    </parameters>
+  </function>
+  <function name="CopyFileExtensionGroup" visibility="private">
+    <parameters>
+      <parameter name="Extensions" type="string" />
+      <parameter name="SourceDir" type="string" />
+      <parameter name="DestDir" type="string" />
+      <retval type="Boolean" />
+    </parameters>
+  </function>
+  <function name="CopyDir" visibility="private">
+    <parameters>
+      <parameter name="SourceDir" type="string" paramflags="const" />
+      <parameter name="DestDir" type="string" paramflags="const" />
+      <retval type="Boolean" />
+    </parameters>
+  </function>
+  <function name="GetApplicationPath" visibility="private">
+    <parameters>
+      <retval type="string" />
+    </parameters>
+  </function>
+  <function name="GetApplicationName" visibility="private">
+    <parameters>
+      <retval type="string" />
+    </parameters>
+  </function>
+  <function name="GetApplicationUserConfigPath" visibility="private">
+    <parameters>
+      <retval type="string" />
+    </parameters>
+  </function>
+  <function name="GetApplicationUserConfigFileName" visibility="private">
+    <parameters>
+      <retval type="TFileName" />
+    </parameters>
+  </function>
+  <function name="Ellipsize" visibility="private">
+    <parameters>
+      <parameter name="Text" type="string" />
+      <parameter name="MaxLength" type="Integer" />
+      <retval type="string" />
+    </parameters>
+  </function>
+  <function name="DelTree" visibility="private">
+    <parameters>
+      <parameter name="Path" type="string" />
+      <retval type="Boolean" />
+    </parameters>
+  </function>
+  <function name="IsValidFileName" visibility="private">
+    <parameters>
+      <parameter name="AFileName" type="TFileName" />
+      <retval type="Boolean" />
+    </parameters>
+  </function>
+</namespace>

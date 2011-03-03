@@ -1,0 +1,24 @@
+[MSF Status File]
+Version=1.00
+ProjectType=0
+ArgsOrCaller=fi06fu00.xot
+External=0
+BrkptCount=0
+WatchCount=17
+WatchExpr1=inline2
+WatchExpr2=ncond
+WatchExpr3=dummy
+WatchExpr4=aconddat(ncond)
+WatchExpr5=classdummy
+WatchExpr6=areadummy
+WatchExpr7=ndummy
+WatchExpr8=widthdummy
+WatchExpr9=depthdummy
+WatchExpr10=njunc1(ncond)
+WatchExpr11=njunc2(ncond)
+WatchExpr12=zp1dat(ncond)
+WatchExpr13=zp2dat(ncond)
+WatchExpr14=depthdat(ncond)
+WatchExpr15=pipelength
+WatchExpr16=length(1)
+WatchExpr17=acond
