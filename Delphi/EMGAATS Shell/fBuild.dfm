@@ -1,6 +1,6 @@
 inherited frmBuild: TfrmBuild
-  Left = 177
-  Top = 140
+  Left = 0
+  Top = 0
   Caption = 'frmBuild'
   ClientHeight = 575
   ClientWidth = 769
@@ -178,7 +178,7 @@ inherited frmBuild: TfrmBuild
             LookAndFeel.NativeStyle = True
             OptionsView.CellEndEllipsis = True
             OptionsView.ShowEditButtons = ecsbAlways
-            OptionsView.RowHeaderWidth = 122
+            OptionsView.RowHeaderWidth = 171
             OptionsBehavior.AlwaysShowEditor = True
             TabOrder = 0
             OnDrawBackground = vgrdBuildOptionsDrawBackground
@@ -254,6 +254,12 @@ inherited frmBuild: TfrmBuild
             end
             object vgrdTraceStormwater: TcxEditorRow
               Properties.Caption = 'Trace stormwater'
+              Properties.EditPropertiesClassName = 'TcxCheckBoxProperties'
+              Properties.DataBinding.ValueType = 'String'
+              Properties.Value = 'False'
+            end
+            object vgrdRemoveSanitaryUponDeploy: TcxEditorRow
+              Properties.Caption = 'Remove sanitary upon deploy'
               Properties.EditPropertiesClassName = 'TcxCheckBoxProperties'
               Properties.DataBinding.ValueType = 'String'
               Properties.Value = 'False'
@@ -654,7 +660,7 @@ inherited frmBuild: TfrmBuild
       Width = 769
       Height = 41
       Caption = 'Build'
-      ExplicitWidth = 769
+      ExplicitWidth = 60
     end
     object btnHome: TPngSpeedButton
       Left = 729

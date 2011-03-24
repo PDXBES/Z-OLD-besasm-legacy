@@ -91,6 +91,7 @@ type
     actPresetBuildStreetStormwaterControls: TAction;
     Buildstreetstormwatercontrols1: TMenuItem;
     vgrdTraceStormwater: TcxEditorRow;
+    vgrdRemoveSanitaryUponDeploy: TcxEditorRow;
     procedure btnBrowseModelDirectoryClick(Sender: TObject);
     procedure btnBuildModelClick(Sender: TObject);
     procedure btnCancelBuildClick(Sender: TObject);
@@ -243,7 +244,7 @@ implementation
 
 uses fMain, uEMGAATSModel, uEMGWorkbenchManager, uEMGAATSSystemConfig,
   uUtilities, GlobalConstants, dModelExists, fBuildReport, fChild, DateUtils,
-  CodeSiteLogging, fWelcome, StStrL, StrUtils;
+  CodeSiteLogging, fWelcome, StStrL, StrUtils, uEMGAATSModelConfig;
 
 resourcestring
   PromptModelDirectory = 'Type a full path and filename, or click Browse...';
@@ -550,7 +551,6 @@ var
   StartDate: TDateTime;
   EndDate: TDateTime;
   i: Integer;
-  StormsToBuild: TStringList;
   NumCommands: Integer;
 const
   ProgressPanelMargin = 500;
@@ -618,6 +618,7 @@ begin
       CurrentModel.Config.EngineExportFileName := vgrdEngineBaseFileName.Properties.Value;
       CurrentModel.Config.UseBaseflow := vgrdUseBaseflow.Properties.Value;
       CurrentModel.Config.TraceStormwater := vgrdTraceStormwater.Properties.Value;
+      CurrentModel.Config.RemoveSanitaryUponDeploy := vgrdRemoveSanitaryUponDeploy.Properties.Value;
       CurrentModel.Config.Update;
 
       // Set status
@@ -735,10 +736,6 @@ begin
 end;
 
 procedure TfrmBuild.btnLoadClick(Sender: TObject);
-var
-  TempModel: TEMGAATSModel;
-  Roots: TStringList;
-  Stops: TStringList;
 begin
   inherited;
   LoadModel;
@@ -815,14 +812,10 @@ end;
 
 procedure TfrmBuild.CheckBoxesFromStormListString(AStormList: String);
 var
-  EditValueTokens: TStringList;
-  CheckedValueTokens: TStringList;
-  i, j: Integer;
+  i: Integer;
   StormList: TStringList;
   CurrentStormID: String;
-  EditValue: String;
   OriginalFocusedRow: TcxCustomRow;
-  ComboBoxProperties: TcxCheckComboBoxProperties;
   ComboBox: TcxCheckComboBox;
   ComboBoxItemCounter: Integer;
 begin
@@ -1075,6 +1068,7 @@ begin
   vgrdEngineBaseFileName.Properties.Value := CurrentModel.Config.EngineExportFileName;
   vgrdUseBaseflow.Properties.Value := CurrentModel.Config.UseBaseflow;
   vgrdTraceStormwater.Properties.Value := CurrentModel.Config.TraceStormwater;
+  vgrdRemoveSanitaryUponDeploy.Properties.Value := CurrentModel.Config.RemoveSanitaryUponDeploy;
 
   pnlBuild.Enabled := True;
   pnlProgress.Hide;

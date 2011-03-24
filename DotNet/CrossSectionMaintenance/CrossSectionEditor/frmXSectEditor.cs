@@ -10,12 +10,22 @@ using System.Xml.Schema;
 using System.Xml;
 using System.Reflection;
 using System.IO;
+using Infragistics.UltraChart.Core;
 
 namespace SystemsAnalysis.EMGAATS.CrossSectionEditor
 {
   public partial class frmXSectEditor : Form
   {
-    private bool setLeftStation, setRightStation = false;
+    private enum ChartAction
+    {
+      None, SetLeftStation, SetRightStation,
+      AddPoint, MovePoint, MovingPoint, DeletePoint
+    };
+    private ChartAction chartAction = ChartAction.None;
+    private IAdvanceAxis XAxis { get; set; }
+    private IAdvanceAxis YAxis { get; set; }
+    private ProcessedXSectDataSet.PointListRow activePointListRow = null;
+
 
     public frmXSectEditor()
     {
@@ -34,6 +44,9 @@ namespace SystemsAnalysis.EMGAATS.CrossSectionEditor
     {
       if (e.SceneGraph.Count > 2)
         chrtXSectDisplay.InvalidDataReceived += new Infragistics.UltraChart.Shared.Events.ChartDataInvalidEventHandler(chrtXSectDisplay_InvalidDataReceived);
+
+      this.XAxis = (IAdvanceAxis)e.Grid["X"];
+      this.YAxis = (IAdvanceAxis)e.Grid["Y"];
     }
 
     void chrtXSectDisplay_InvalidDataReceived(object sender, Infragistics.UltraChart.Shared.Events.ChartDataInvalidEventArgs e)
@@ -66,59 +79,6 @@ namespace SystemsAnalysis.EMGAATS.CrossSectionEditor
       if (e.BindingCompleteContext ==
         BindingCompleteContext.DataSourceUpdate && e.Exception == null)
         e.Binding.BindingManagerBase.EndCurrentEdit();
-    }
-
-    private void chrtXSectDisplay_ChartDataClicked(object sender, Infragistics.UltraChart.Shared.Events.ChartDataEventArgs e)
-    {
-      ProcessedXSectDataSet.XSectsRow xSectRow = SelectedXSectsRow;
-      if (setLeftStation)
-      {
-        if (e.DataValue < xSectRow.RightOverbankStation)
-          xSectRow.LeftOverbankStation = e.DataValue;
-        else
-          MessageBox.Show("Left station must be on left side of channel.");
-      }
-
-
-      if (setRightStation)
-      {
-        if (e.DataValue > xSectRow.LeftOverbankStation)
-          xSectRow.RightOverbankStation = e.DataValue;
-        else
-          MessageBox.Show("Right station must be on right side of channel.");
-      }
-
-      setLeftStation = false;
-      setRightStation = false;
-      this.LoadXSect(xSectRow.XSectName);
-      Cursor = Cursors.Default;
-    }
-
-    private void txtLeftStation_EditorButtonClick(object sender, Infragistics.Win.UltraWinEditors.EditorButtonEventArgs e)
-    {
-      setLeftStation = !setLeftStation;
-      setRightStation = false;
-      if (!setLeftStation)
-      {
-        Cursor = Cursors.Default;
-        return;
-      }
-      Cursor = Cursors.Cross;
-
-    }
-
-    private void txtRightStation_EditorButtonClick(object sender, Infragistics.Win.UltraWinEditors.EditorButtonEventArgs e)
-    {
-      setRightStation = !setRightStation;
-      setLeftStation = false;
-      if (!setRightStation)
-      {
-        Cursor = Cursors.Default;
-        return;
-      }
-      Cursor = Cursors.Cross;
-
-
     }
 
     private void optStationOrder_ValueChanged(object sender, EventArgs e)
@@ -173,7 +133,7 @@ namespace SystemsAnalysis.EMGAATS.CrossSectionEditor
 
     private void PrintXSects()
     {
-     
+
       //if (printPreviewDialog1.ShowDialog() != DialogResult.OK)
       //  return;
 
@@ -255,6 +215,7 @@ namespace SystemsAnalysis.EMGAATS.CrossSectionEditor
         return;
 
       chrtXSectDisplay.DataBindings.Clear();
+      processedXSectDS.Clear();
       try
       {
         processedXSectDS.ReadXml(openFileDialog.FileName);
@@ -304,13 +265,13 @@ namespace SystemsAnalysis.EMGAATS.CrossSectionEditor
           mstXSectDS.mst_xsections.FindByMLinkId(mlinkID);
 
         int j = 1;
-        foreach (ProcessedXSectDataSet.PointListRow pointRow in procRow.GetPointListRows())
+        foreach (ProcessedXSectDataSet.PointListRow pointRow in procRow.GetPointListRows().OrderBy(p => p.Station))
         {
           MstXSectionDataSet.mst_xsection_dataRow mstXSectDataRow =
             mstXSectDS.mst_xsection_data.Newmst_xsection_dataRow();
 
-          mstXSectDataRow.elevation = pointRow.Elevation;
-          mstXSectDataRow.station = pointRow.Station;
+          mstXSectDataRow.elevation = Math.Round(pointRow.Elevation, 2);
+          mstXSectDataRow.station = Math.Round(pointRow.Station, 2);
           mstXSectDataRow.index = j++;
           mstXSectDataRow.mst_xsections_id = mstXSectRow.mst_xsections_id;
           mstXSectDataRow.SetParentRow(mstXSectRow);
@@ -349,8 +310,8 @@ namespace SystemsAnalysis.EMGAATS.CrossSectionEditor
         mstXSectRow.roughness_main = procRow.MainChannelRoughness;
         mstXSectRow.roughness_left = procRow.LeftOverbankRoughness;
         mstXSectRow.roughness_right = procRow.RightOverbankRoughness;
-        mstXSectRow.station_left = procRow.LeftOverbankStation;
-        mstXSectRow.station_right = procRow.RightOverbankStation;
+        mstXSectRow.station_left = Math.Round(procRow.LeftOverbankStation, 2);
+        mstXSectRow.station_right = Math.Round(procRow.RightOverbankStation, 2);
         mstXSectRow.length_factor_left = procRow.LeftOverbankLengthFactor;
         mstXSectRow.length_factor_right = procRow.RightOverbankLengthFactor;
 
@@ -500,7 +461,7 @@ namespace SystemsAnalysis.EMGAATS.CrossSectionEditor
       double minElev = Double.MaxValue;
       double maxElev = Double.MinValue;
 
-      foreach (ProcessedXSectDataSet.PointListRow pointRow in xSectRow.GetPointListRows())
+      foreach (ProcessedXSectDataSet.PointListRow pointRow in xSectRow.GetPointListRows().OrderBy(p => p.Station))
       {
         processedXSectDS.ChartTable.AddChartTableRow("Cross-Section", pointRow.Station, pointRow.Elevation);
 
@@ -534,36 +495,36 @@ namespace SystemsAnalysis.EMGAATS.CrossSectionEditor
 
       int width = chrtXSectDisplay.Width;
       int height = chrtXSectDisplay.Height;
-      
+
       Rectangle bounds = new Rectangle(0, 0, width, height);
 
       Bitmap img = new Bitmap(width, height);
-      chrtXSectDisplay.DrawToBitmap(img, bounds);                                    
-      
+      chrtXSectDisplay.DrawToBitmap(img, bounds);
+
       Point p = new Point(0, 0);
       e.Graphics.DrawImage(img, e.MarginBounds.X, e.MarginBounds.Y, e.MarginBounds.Width, (int)(e.MarginBounds.Height * 0.7));
-      
+
       Stream notesStream = System.Reflection.Assembly.
                       GetExecutingAssembly().GetManifestResourceStream("SystemsAnalysis.EMGAATS.CrossSectionEditor.Resources.notes.png");
-      
-      e.Graphics.DrawImage(new Bitmap(notesStream), 
-        e.MarginBounds.X, 
-        (int)(e.MarginBounds.Height * 0.7)+100, 
+
+      e.Graphics.DrawImage(new Bitmap(notesStream),
+        e.MarginBounds.X,
+        (int)(e.MarginBounds.Height * 0.7) + 100,
         e.MarginBounds.Width,
-        (int)(e.MarginBounds.Height * 0.3 )-30);
+        (int)(e.MarginBounds.Height * 0.3) - 30);
 
       e.Graphics.DrawString(openFileDialog.FileName,
         new Font("Verdana", 10), Brushes.Black,
         new Point(e.MarginBounds.X, e.MarginBounds.Height + 130));
 
-      
+
       if (bindingSource1.Position == bindingSource1.Count - 1)
         e.HasMorePages = false;
       else
         e.HasMorePages = true;
 
       bindingSource1.Position++;
-    }    
+    }
 
     private void printDocument1_BeginPrint(object sender, System.Drawing.Printing.PrintEventArgs e)
     {
@@ -572,6 +533,223 @@ namespace SystemsAnalysis.EMGAATS.CrossSectionEditor
 
     private void printDocument1_EndPrint(object sender, System.Drawing.Printing.PrintEventArgs e)
     {
+
+    }
+
+    private void chrtXSectDisplay_ChartDataClicked(object sender, Infragistics.UltraChart.Shared.Events.ChartDataEventArgs e)
+    {
+      ProcessedXSectDataSet.XSectsRow xSectRow = SelectedXSectsRow;
+      switch (chartAction)
+      {
+        case ChartAction.SetLeftStation:
+          if (e.DataValue < xSectRow.RightOverbankStation)
+            xSectRow.LeftOverbankStation = e.DataValue;
+          else
+            MessageBox.Show("Left station must be on left side of channel.");
+          chartAction = ChartAction.None;
+          break;
+        case ChartAction.SetRightStation:
+          if (e.DataValue > xSectRow.LeftOverbankStation)
+            xSectRow.RightOverbankStation = e.DataValue;
+          else
+            MessageBox.Show("Right station must be on right side of channel.");
+          chartAction = ChartAction.None;
+          break;
+        case ChartAction.AddPoint:
+          MessageBox.Show("A point already exits at this location.");
+          chartAction = ChartAction.None;
+          break;
+        case ChartAction.DeletePoint:
+          foreach (ProcessedXSectDataSet.PointListRow row in xSectRow.GetPointListRows())
+          {
+            if (row.Station == e.DataValue)
+            {
+              row.Delete();
+              break;
+            }
+          }
+          break;
+        case ChartAction.MovePoint:
+          foreach (ProcessedXSectDataSet.PointListRow row in xSectRow.GetPointListRows())
+          {
+            if (row.Station == e.DataValue)
+            {
+              activePointListRow = row;
+              break;
+            }
+          }
+          break;
+      }
+
+
+      this.LoadXSect(xSectRow.XSectName);
+      Cursor = Cursors.Default;
+    }
+
+    private void chrtXSectDisplay_MouseDown(object sender, MouseEventArgs e)
+    {
+      if (this.XAxis == null || this.YAxis == null)
+        return;
+
+
+      double xValue = (double)this.XAxis.MapInverse(e.X);
+      double yValue = (double)this.YAxis.MapInverse(e.Y);
+      ProcessedXSectDataSet.XSectsRow xSectRow = SelectedXSectsRow;
+
+      switch (chartAction)
+      {
+        case ChartAction.AddPoint:
+          processedXSectDS.PointList.AddPointListRow(xSectRow, xValue, yValue);
+          LoadXSect(xSectRow.XSectName);
+          break;
+        case ChartAction.MovingPoint:
+          break;
+        default:
+          //chartAction = ChartAction.None;
+          break;
+      }
+    }
+
+    private void txtLeftStation_EditorButtonClick(object sender, Infragistics.Win.UltraWinEditors.EditorButtonEventArgs e)
+    {
+      chartAction = ChartAction.SetLeftStation;
+    }
+
+    private void txtRightStation_EditorButtonClick(object sender, Infragistics.Win.UltraWinEditors.EditorButtonEventArgs e)
+    {
+      chartAction = ChartAction.SetRightStation;
+    }
+
+    private void btnSetLeftOverbank_Click(object sender, EventArgs e)
+    {
+      chartAction = ChartAction.SetLeftStation;
+    }
+
+    private void btnSetRightOverbank_Click(object sender, EventArgs e)
+    {
+      chartAction = ChartAction.SetRightStation;
+    }
+
+    private void btnMovePoint_Click(object sender, EventArgs e)
+    {
+      chartAction = ChartAction.MovePoint;
+    }
+
+    private void btnAddPoint_Click(object sender, EventArgs e)
+    {
+      chartAction = ChartAction.AddPoint;
+    }
+
+    private void btnDeletePoint_Click(object sender, EventArgs e)
+    {
+      chartAction = ChartAction.DeletePoint;
+    }
+
+    private void chrtXSectDisplay_MouseMove(object sender, MouseEventArgs e)
+    {
+
+      ProcessedXSectDataSet.XSectsRow xSectRow = SelectedXSectsRow;
+
+      if (this.chartAction != ChartAction.MovePoint || activePointListRow == null)
+        return;
+
+      double xValue = (double)this.XAxis.MapInverse(e.X);
+      double yValue = (double)this.YAxis.MapInverse(e.Y);
+
+      activePointListRow.Station = xValue;
+      activePointListRow.Elevation = yValue;
+
+      LoadXSect(activePointListRow.XSectName);
+
+    }
+
+    private void chrtXSectDisplay_MouseUp(object sender, MouseEventArgs e)
+    {
+      activePointListRow = null;
+    }
+
+    private void bindingNavigatorAddNewItem_Click(object sender, EventArgs e)
+    {
+      DialogResult result = MessageBox.Show(
+        "Copy selected item? Select 'yes' to copy existing or 'no' to create an empty cross-section.",
+        "Copy Existing Cross-Section?", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+
+      if (result == DialogResult.Cancel)
+        return;
+
+      try
+      {
+
+        ProcessedXSectDataSet.XSectsRow newRow;
+        newRow = this.processedXSectDS.XSects.NewXSectsRow();
+        
+        newRow.Description = "New Cross-Section";
+        newRow = processedXSectDS.XSects.NewXSectsRow();
+        if (result == DialogResult.Yes)
+        {
+
+          newRow.XSectName = SelectedXSectsRow.XSectName + "_copy";
+          newRow.LongName = SelectedXSectsRow.LongName;
+          newRow.Station = SelectedXSectsRow.Station;
+          newRow.ReadyForExport = false;
+          processedXSectDS.XSects.AddXSectsRow(newRow);
+
+          ProcessedXSectDataSet.PointListRow[] points = SelectedXSectsRow.GetPointListRows();
+          foreach (ProcessedXSectDataSet.PointListRow point in points)
+          {
+            ProcessedXSectDataSet.PointListRow newPoint = processedXSectDS.PointList.NewPointListRow(point.Station, point.Elevation);
+            newPoint.Station = point.Station;
+            newPoint.Elevation = point.Elevation;
+
+            newPoint.SetParentRow(newRow);
+            processedXSectDS.PointList.AddPointListRow(newPoint);
+          }
+        }
+        else
+        {
+          newRow.XSectName = "_new";
+          newRow.LongName = "";
+          newRow.Station = 0.0;
+          newRow.ReadyForExport = false;
+          processedXSectDS.XSects.AddXSectsRow(newRow);
+          ProcessedXSectDataSet.PointListRow newPoint = processedXSectDS.PointList.NewPointListRow(-5.0, 5.0);          
+          newPoint.SetParentRow(newRow);
+          processedXSectDS.PointList.AddPointListRow(newPoint);
+
+          newPoint = processedXSectDS.PointList.NewPointListRow(-1.0, 0.0);          
+          newPoint.SetParentRow(newRow);
+          processedXSectDS.PointList.AddPointListRow(newPoint);
+
+          newPoint = processedXSectDS.PointList.NewPointListRow(1.0, 0.0);
+          newPoint.SetParentRow(newRow);
+          processedXSectDS.PointList.AddPointListRow(newPoint);
+
+          newPoint = processedXSectDS.PointList.NewPointListRow(5.0, 5.0);
+          newPoint.SetParentRow(newRow);
+          processedXSectDS.PointList.AddPointListRow(newPoint);
+
+        }
+
+        
+
+      }
+      catch (Exception ex)
+      {
+        MessageBox.Show("Error creating new cross-section: " + ex.Message);
+      }
+
+    }
+   
+    private void bindingNavigatorDeleteItem_Click(object sender, EventArgs e)
+    {
+      DialogResult result = MessageBox.Show(
+        "Delete select cross-section?", "Delete Selected?",
+        MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+      if (result != DialogResult.OK)
+        return;
+
+      SelectedXSectsRow.Delete();
 
     }
 

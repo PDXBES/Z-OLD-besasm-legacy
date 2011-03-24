@@ -588,9 +588,6 @@ begin
 end;
 
 procedure TMacroCommand.Execute;
-var
-  i: Integer;
-  CurrentCommand: IEMGAATSModelCommand;
 begin
   CodeSite.EnterMethod('TMacroCommand.Execute: ' + fName);
   if fEnabled then
@@ -1206,8 +1203,6 @@ procedure TCreateEmptyModelDataCommand.Execute;
 var
   ICDirectoryPath: String;
   CommandText: String;
-  MDBsPath: String;
-  ModelPath: String;
 begin
   inherited;
   if not fEnabled then
@@ -2046,7 +2041,6 @@ begin
         EndYearOverride := adoQuery.FieldValues['EndYearOverride'];
         StartDateToWrite := IfThen(StartYearOverride = 0, YearOf(StartDate),
           StartYearOverride);
-        TimeStep := adoQuery.FieldValues['TimeStepMinutes'];
 
         Assert(EndDate > StartDate, Format('Start date of storm %s = %s is later than ' +
           'end date of storm = %s',
@@ -2249,6 +2243,32 @@ var
   TimeFrameText: String;
   DHIFileName: String;
   UpdateBaseflowSettingsText: String;
+  XPNodesRemoveSanitarySQL: string;
+  XPNodesNormalSQL: string;
+  xlinksRemoveSanitarySQL: string;
+  xlinksNormalSQL: string;
+  XPXDataSFloodRemoveSanitarySQL: string;
+  XPXDataSFloodNormalSQL: string;
+  XPXDataNTIDERemoveSanitarySQL: string;
+  XPXDataNTIDENormalSQL: string;
+  XPXDataBF_DRY_WTH_INITOffRemoveSanitarySQL: string;
+  XPXDataBF_DRY_WTH_INITOffNormalSQL: string;
+  XPXDataBF_DRY_WTH_ONRemoveSanitarySQL: string;
+  XPXDataBF_DRY_WTH_ONNormalSQL: string;
+  XPXDataBF_HDR_SEWAGE_CFSRemoveSanitarySQL: string;
+  XPXDataBF_HDR_SEWAGE_CFSNormalSQL: string;
+  XPXDataBF_HDR_SEWAGE_InitZeroRemoveSanitarySQL: string;
+  XPXDataBF_HDR_SEWAGE_InitZeroNormalSQL: string;
+  XPXDataBF_QINSTRemoveSanitarySQL: string;
+  XPXDataBF_QINSTNormalSQL: string;
+  XPXDataBF_QINST_InitZeroRemoveSanitarySQL: string;
+  XPXDataBF_QINST_InitZeroNormalSQL: string;
+  XPXDataINTFLG_ONRemoveSanitarySQL: string;
+  XPXDataINTFLG_ONNormalSQL: string;
+  XPXDataBF_HDR_PFACRemoveSanitarySQL: string;
+  XPXDataBF_HDR_PFACNormalSQL: string;
+  XPXDataTMPVRemoveSanitarySQL: string;
+  XPXDataTMPVNormalSQL: string;
 begin
   inherited;
   if not fEnabled then
@@ -2292,6 +2312,209 @@ begin
       BoolToStr(fModel.Config.UseBaseflow) +
       ' WHERE (((XPExportQueryTable.Class)="BaseFlow"));';
     MSAccessManager.RunQuery(UpdateBaseflowSettingsText);
+
+    if fModel.Config.RemoveSanitaryUponDeploy then
+    begin
+      xlinksRemoveSanitarySQL :=
+        'SELECT IIf([isspeclink],"S"+CStr([linkid]),IIf([mlinkid]=0,"F"+CStr([linkid]),'+
+        '"M"+CStr([mlinkid]))) AS explink, mdl_Links_ac.LinkID, mdl_Links_ac.MLinkID, '+
+        'mdl_Links_ac.CompKey AS HLinkID, mdl_Links_ac.USNode, mdl_Links_ac.DSNode, '+
+        'mdl_Links_ac.PipeShape, mdl_Links_ac.USIE, mdl_Links_ac.DSIE, mdl_Links_ac.Length, '+
+        'mdl_Links_ac.Height, mdl_Links_ac.DiamWidth, Format$(IIf([length]=0,-99,'+
+        '(([usie]-[dsie])/[length])),"0.00000") AS xSlope, mdl_Links_ac.Material, '+
+        'mdl_Links_ac.AsBuilt, IIf(IsNull([_pipeshapes].[shape]),0.014,'+
+        '[_pipeshapes].[roughness]) AS Roughness, mdl_Links_ac.LinkType, '+
+        'mdl_Links_ac.LinkReach, mdl_Links_ac.ReachElement, mdl_Links_ac.IsSpecLink, '+
+        'mdl_Links_ac.PipeFlowType FROM mdl_Links_ac LEFT JOIN _PipeShapes ON '+
+        'mdl_Links_ac.PipeShape = [_PipeShapes].Shape WHERE '+
+        '((Not (mdl_Links_ac.PipeFlowType)="S"));';
+      MSAccessManager.SetQueryDef('xlinks', xlinksRemoveSanitarySQL);
+
+      XPNodesRemoveSanitarySQL :=
+        'SELECT mdl_nodes_ac.Node, mdl_nodes_ac.XCoord, mdl_nodes_ac.YCoord, '+
+        'mdl_nodes_ac.GrndElev, IIf(IsNull([MinOfZ]),-99,Format$([minofZ],"Fixed")) '+
+        'AS NodeIE FROM (mdl_nodes_ac LEFT JOIN _minNodeIEfromLink ON mdl_nodes_ac.Node = '+
+        '[_minNodeIEfromLink].Node) LEFT JOIN NodesInXPLinks ON mdl_nodes_ac.Node = '+
+        'NodesInXPLinks.NODE WHERE (((NodesInXPLinks.NODE) Is Not Null)) UNION '+
+        'SELECT [_tXPVirtNodes].Node, [_tXPVirtNodes].xcoord, [_tXPVirtNodes].ycoord, '+
+        '[_tXPVirtNodes].GrndElev, IIf(IsNull([MinOfZ]),-99,Format$([minofZ],"Fixed")) '+
+        'AS NodeIE FROM _tXPVirtNodes LEFT JOIN _minNodeIEfromLink ON [_tXPVirtNodes].Node '+
+        '= [_minNodeIEfromLink].Node;';
+      MSAccessManager.SetQueryDef('XPNodes', XPNodesRemoveSanitarySQL);
+
+      XPXDataSFloodRemoveSanitarySQL :=
+        'SELECT DISTINCTROW "DATA SFLOOD" AS EXPR1, Chr(34) & Trim([mdl_nodes_ac].[NODE]) & '+
+        'Chr(34) AS EXPR2, "0 1" AS EXPR3, "1" AS EXPR4 FROM mdl_nodes_ac '+
+        'LEFT JOIN NodesInXPLinks ON mdl_nodes_ac.Node = NodesInXPLinks.NODE '+
+        'WHERE (((NodesInXPLinks.NODE) Is Not Null)) ORDER BY Chr(34) & '+
+        'Trim([mdl_nodes_ac].[NODE]) & Chr(34);';
+      MSAccessManager.SetQueryDef('XPXDataSFlood', XPXDataSFloodRemoveSanitarySQL);
+
+      XPXDataNTIDERemoveSanitarySQL :=
+        'SELECT "DATA NTIDE" AS Tag, Chr(34) & Trim([Node]) & Chr(34) AS NODEID, '+
+        '" 0 1 1" AS Expr3, "/* MLINKID  " & CStr([mlinkid]) & "  */" AS comment '+
+        'FROM (_Outfalls LEFT JOIN mdl_links_ac ON [_Outfalls].Node = mdl_links_ac.DSNode) '+
+        'LEFT JOIN NodesInXPLinks ON [_Outfalls].Node = NodesInXPLinks.NODE WHERE '+
+        '(((NodesInXPLinks.NODE) Is Not Null)) GROUP BY "DATA NTIDE", Chr(34) & '+
+        'Trim([Node]) & Chr(34), " 0 1 1", "/* MLINKID  " & CStr([mlinkid]) & "  */";';
+      MSAccessManager.SetQueryDef('XPXDataNTIDE', XPXDataNTIDERemoveSanitarySQL);
+
+      XPXDataBF_DRY_WTH_INITOffRemoveSanitarySQL :=
+        'SELECT "DATA DRY_WTH " & Chr$(34) & [mdl_nodes_ac].[Node] & Chr$(34) AS Expr3, '+
+        '"0 1 0" AS Expr1 FROM mdl_nodes_ac LEFT JOIN NodesInXPLinks ON '+
+        'mdl_nodes_ac.Node = NodesInXPLinks.NODE WHERE (((NodesInXPLinks.NODE) Is Not Null)) '+
+        'GROUP BY "DATA DRY_WTH " & Chr$(34) & [mdl_nodes_ac].[Node] & Chr$(34), "0 1 0";';
+      MSAccessManager.SetQueryDef('XPXDataBF_DRY_WTH_InitOff', XPXDataBF_DRY_WTH_INITOffRemoveSanitarySQL);
+
+      XPXDataBF_DRY_WTH_ONRemoveSanitarySQL :=
+        'SELECT "DATA DRY_WTH " & Chr$(34) & [NGTOsan] & Chr$(34) AS Node, "0 1 1" AS instance '+
+        'FROM _BaseFlowComponents LEFT JOIN NodesInXPLinks ON '+
+        '[_BaseFlowComponents].NGTOSan = NodesInXPLinks.NODE WHERE (((NodesInXPLinks.NODE) Is Not Null));';
+      MSAccessManager.SetQueryDef('XPXDataBF_DRY_WTH_ON', XPXDataBF_DRY_WTH_ONRemoveSanitarySQL);
+
+      XPXDataBF_HDR_SEWAGE_CFSRemoveSanitarySQL :=
+        'SELECT "DATA HDR_SEWAGE " AS Tag, Chr$(34) & [NGTOsan] & Chr$(34) AS Node, '+
+        '"0 1" AS instance, [_BaseFlowComponents].avesanflow AS flow FROM '+
+        '_BaseFlowComponents LEFT JOIN NodesInXPLinks ON '+
+        '[_BaseFlowComponents].NGTOSan = NodesInXPLinks.NODE WHERE '+
+        '(((NodesInXPLinks.NODE) Is Not Null)) ORDER BY Chr$(34) & [NGTOsan] & Chr$(34);';
+      MSAccessManager.SetQueryDef('XPXDataBF_HDR_SEWAGE_CFS', XPXDataBF_HDR_SEWAGE_CFSRemoveSanitarySQL);
+
+      XPXDataBF_HDR_SEWAGE_InitZeroRemoveSanitarySQL :=
+        'SELECT "DATA HDR_SEWAGE " & Chr$(34) & [mdl_nodes_ac].[Node] & Chr$(34) AS Expr3, '+
+        '"0 1 0" AS Expr1 FROM mdl_nodes_ac '+
+        'LEFT JOIN NodesInXPLinks ON mdl_nodes_ac.Node = NodesInXPLinks.NODE '+
+        'WHERE (((NodesInXPLinks.NODE) Is Not Null));';
+      MSAccessManager.SetQueryDef('XPXDataBF_HDR_SEWAGE_InitZero', XPXDataBF_HDR_SEWAGE_InitZeroRemoveSanitarySQL);
+
+      XPXDataBF_QINSTRemoveSanitarySQL :=
+        'SELECT "DATA QINST " AS Tag, Chr$(34) & [NGTOSan] & Chr$(34) AS Node, "0 1" '+
+        'AS Instance, [_BaseFlowComponents].DMII FROM '+
+        '_BaseFlowComponents LEFT JOIN NodesInXPLinks ON [_BaseFlowComponents].NGTOSan '+
+        '= NodesInXPLinks.NODE WHERE (((NodesInXPLinks.NODE) Is Not Null));';
+      MSAccessManager.SetQueryDef('XPXDataBF_QINST', XPXDataBF_QINSTRemoveSanitarySQL);
+
+      XPXDataBF_QINST_InitZeroRemoveSanitarySQL :=
+        'SELECT "DATA QINST " & Chr$(34) & [mdl_nodes_ac].[Node] & Chr$(34) AS Expr3, '+
+        '"0 1 0" AS Expr1 FROM mdl_nodes_ac '+
+        'LEFT JOIN NodesInXPLinks ON mdl_nodes_ac.Node = NodesInXPLinks.NODE '+
+        'WHERE (((NodesInXPLinks.NODE) Is Not Null));';
+      MSAccessManager.SetQueryDef('XPXDataBF_QINST_InitZero', XPXDataBF_QINST_InitZeroRemoveSanitarySQL);
+
+      XPXDataINTFLG_ONRemoveSanitarySQL :=
+        'SELECT DISTINCTROW "DATA USEINTFLG" AS EXPR1, Chr(34) & Trim([mdl_nodes_ac].[NODE]) '+
+        '& Chr(34) AS EXPR2, "0 1" AS EXPR3, "1" AS EXPR4 FROM mdl_nodes_ac '+
+        'LEFT JOIN NodesInXPLinks ON mdl_nodes_ac.Node = NodesInXPLinks.NODE '+
+        'WHERE (((NodesInXPLinks.NODE) Is Not Null)) ORDER BY Chr(34) & '+
+        'Trim([mdl_nodes_ac].[NODE]) & Chr(34);';
+      MSAccessManager.SetQueryDef('XPXDataINTFLG_ON', XPXDataINTFLG_ONRemoveSanitarySQL);
+
+      XPXDataBF_HDR_PFACRemoveSanitarySQL :=
+        'SELECT "DATA HDR_PFAC " & Chr$(34) & [NGTOsan] & Chr$(34) AS Expr3, "0 1 1" AS Expr1 '+
+        'FROM _BaseFlowComponents LEFT JOIN NodesInXPLinks ON '+
+        '[_BaseFlowComponents].NGTOSan = NodesInXPLinks.NODE WHERE '+
+        '(((NodesInXPLinks.NODE) Is Not Null))';
+      MSAccessManager.SetQueryDef('XPXDataBF_HDR_PFAC', XPXDataBF_HDR_PFACRemoveSanitarySQL);
+
+      XPXDataTMPVRemoveSanitarySQL :=
+        'SELECT "DATA HDR_TMPV " & Chr$(34) & [NGTOSAN] & Chr$(34) AS Expr3, '+
+        '"0 1" AS Expr1, Chr(34) & "Default" & Chr(34) AS Expr2 FROM '+
+        '_BaseFlowComponents LEFT JOIN NodesInXPLinks ON '+
+        '[_BaseFlowComponents].NGTOSan = NodesInXPLinks.NODE WHERE '+
+        '((([_BaseFlowComponents].avesanflow)<>0) AND ((NodesInXPLinks.NODE) Is Not Null));';
+      MSAccessManager.SetQueryDef('XPXDataTMPV', XPXDataTMPVRemoveSanitarySQL);
+    end
+    else
+    begin
+      xlinksNormalSQL :=
+        'SELECT IIf([isspeclink],"S"+CStr([linkid]),IIf([mlinkid]=0,"F"+CStr([linkid]),'+
+        '"M"+CStr([mlinkid]))) AS explink, mdl_Links_ac.LinkID, mdl_Links_ac.MLinkID, '+
+        'mdl_Links_ac.CompKey AS HLinkID, mdl_Links_ac.USNode, mdl_Links_ac.DSNode, '+
+        'mdl_Links_ac.PipeShape, mdl_Links_ac.USIE, mdl_Links_ac.DSIE, mdl_Links_ac.Length, '+
+        'mdl_Links_ac.Height, mdl_Links_ac.DiamWidth, Format$(IIf([length]=0,-99,'+
+        '(([usie]-[dsie])/[length])),"0.00000") AS xSlope, mdl_Links_ac.Material, '+
+        'mdl_Links_ac.AsBuilt, IIf(IsNull([_pipeshapes].[shape]),0.014,'+
+        '[_pipeshapes].[roughness]) AS Roughness, mdl_Links_ac.LinkType, '+
+        'mdl_Links_ac.LinkReach, mdl_Links_ac.ReachElement, mdl_Links_ac.IsSpecLink, '+
+        'mdl_Links_ac.PipeFlowType FROM mdl_Links_ac LEFT JOIN _PipeShapes ON '+
+        'mdl_Links_ac.PipeShape = [_PipeShapes].Shape';
+      MSAccessManager.SetQueryDef('xlinks', xlinksNormalSQL);
+
+      XPNodesNormalSQL :=
+        'SELECT mdl_nodes_ac.Node, mdl_nodes_ac.XCoord, mdl_nodes_ac.YCoord, '+
+        'mdl_nodes_ac.GrndElev, IIf(IsNull([MinOfZ]),-99,Format$([minofZ],"Fixed")) '+
+        'AS NodeIE FROM (mdl_nodes_ac LEFT JOIN _minNodeIEfromLink ON mdl_nodes_ac.Node = '+
+        '[_minNodeIEfromLink].Node) UNION '+
+        'SELECT [_tXPVirtNodes].Node, [_tXPVirtNodes].xcoord, [_tXPVirtNodes].ycoord, '+
+        '[_tXPVirtNodes].GrndElev, IIf(IsNull([MinOfZ]),-99,Format$([minofZ],"Fixed")) '+
+        'AS NodeIE FROM _tXPVirtNodes LEFT JOIN _minNodeIEfromLink ON [_tXPVirtNodes].Node '+
+        '= [_minNodeIEfromLink].Node;';
+      MSAccessManager.SetQueryDef('XPNodes', XPNodesNormalSQL);
+
+      XPXDataSFloodNormalSQL :=
+        'SELECT DISTINCTROW "DATA SFLOOD" AS EXPR1, Chr(34) & Trim([mdl_nodes_ac].[NODE]) & '+
+        'Chr(34) AS EXPR2, "0 1" AS EXPR3, "1" AS EXPR4 FROM mdl_nodes_ac '+
+        'ORDER BY Chr(34) & Trim([mdl_nodes_ac].[NODE]) & Chr(34);';
+      MSAccessManager.SetQueryDef('XPXDataSFlood', XPXDataSFloodNormalSQL);
+
+      XPXDataNTIDENormalSQL :=
+        'SELECT "DATA NTIDE" AS Tag, Chr(34) & Trim([Node]) & Chr(34) AS NODEID, '+
+        '" 0 1 1" AS Expr3, "/* MLINKID  " & CStr([mlinkid]) & "  */" AS comment '+
+        'FROM (_Outfalls LEFT JOIN mdl_links_ac ON [_Outfalls].Node = mdl_links_ac.DSNode) '+
+        'GROUP BY "DATA NTIDE", Chr(34) & Trim([Node]) & Chr(34), " 0 1 1", "/* MLINKID  " '+
+        '& CStr([mlinkid]) & "  */";';
+      MSAccessManager.SetQueryDef('XPXDataNTIDE', XPXDataNTIDENormalSQL);
+
+      XPXDataBF_DRY_WTH_INITOffNormalSQL :=
+        'SELECT "DATA DRY_WTH " & Chr$(34) & [mdl_nodes_ac].[Node] & Chr$(34) AS Expr3, '+
+        '"0 1 0" AS Expr1 FROM mdl_nodes_ac '+
+        'GROUP BY "DATA DRY_WTH " & Chr$(34) & [mdl_nodes_ac].[Node] & Chr$(34), "0 1 0";';
+      MSAccessManager.SetQueryDef('XPXDataBF_DRY_WTH_InitOff', XPXDataBF_DRY_WTH_INITOffNormalSQL);
+
+      XPXDataBF_DRY_WTH_ONNormalSQL :=
+        'SELECT "DATA DRY_WTH " & Chr$(34) & [NGTOsan] & Chr$(34) AS Node, "0 1 1" AS instance '+
+        'FROM _BaseFlowComponents;';
+      MSAccessManager.SetQueryDef('XPXDataBF_DRY_WTH_ON', XPXDataBF_DRY_WTH_ONNormalSQL);
+
+      XPXDataBF_HDR_SEWAGE_CFSNormalSQL :=
+        'SELECT "DATA HDR_SEWAGE " AS Tag, Chr$(34) & [NGTOsan] & Chr$(34) AS Node, '+
+        '"0 1" AS instance, [_BaseFlowComponents].avesanflow AS flow FROM '+
+        '_BaseFlowComponents ORDER BY Chr$(34) & [NGTOsan] & Chr$(34);';
+      MSAccessManager.SetQueryDef('XPXDataBF_HDR_SEWAGE_CFS', XPXDataBF_HDR_SEWAGE_CFSNormalSQL);
+
+      XPXDataBF_HDR_SEWAGE_InitZeroNormalSQL :=
+        'SELECT "DATA HDR_SEWAGE " & Chr$(34) & [mdl_nodes_ac].[Node] & Chr$(34) AS Expr3, '+
+        '"0 1 0" AS Expr1 FROM mdl_nodes_ac';
+      MSAccessManager.SetQueryDef('XPXDataBF_HDR_SEWAGE_InitZero', XPXDataBF_HDR_SEWAGE_InitZeroNormalSQL);
+
+      XPXDataBF_QINSTNormalSQL :=
+        'SELECT "DATA QINST " AS Tag, Chr$(34) & [NGTOSan] & Chr$(34) AS Node, "0 1" '+
+        'AS Instance, [_BaseFlowComponents].DMII FROM '+
+        '_BaseFlowComponents';
+      MSAccessManager.SetQueryDef('XPXDataBF_QINST', XPXDataBF_QINSTNormalSQL);
+
+      XPXDataBF_QINST_InitZeroNormalSQL :=
+        'SELECT "DATA QINST " & Chr$(34) & [mdl_nodes_ac].[Node] & Chr$(34) AS Expr3, '+
+        '"0 1 0" AS Expr1 FROM mdl_nodes_ac';
+      MSAccessManager.SetQueryDef('XPXDataBF_QINST_InitZero', XPXDataBF_QINST_InitZeroNormalSQL);
+
+      XPXDataINTFLG_ONNormalSQL :=
+        'SELECT DISTINCTROW "DATA USEINTFLG" AS EXPR1, Chr(34) & Trim([mdl_nodes_ac].[NODE]) '+
+        '& Chr(34) AS EXPR2, "0 1" AS EXPR3, "1" AS EXPR4 FROM mdl_nodes_ac '+
+        'ORDER BY Chr(34) & Trim([mdl_nodes_ac].[NODE]) & Chr(34);';
+      MSAccessManager.SetQueryDef('XPXDataINTFLG_ON', XPXDataINTFLG_ONNormalSQL);
+
+      XPXDataBF_HDR_PFACNormalSQL :=
+        'SELECT "DATA HDR_PFAC " & Chr$(34) & [NGTOsan] & Chr$(34) AS Expr3, "0 1 1" AS Expr1 '+
+        'FROM _BaseFlowComponents';
+      MSAccessManager.SetQueryDef('XPXDataBF_HDR_PFAC', XPXDataBF_HDR_PFACNormalSQL);
+
+      XPXDataTMPVNormalSQL :=
+        'SELECT "DATA HDR_TMPV " & Chr$(34) & [NGTOSAN] & Chr$(34) AS Expr3, '+
+        '"0 1" AS Expr1, Chr(34) & "Default" & Chr(34) AS Expr2 FROM '+
+        '_BaseFlowComponents WHERE (([_BaseFlowComponents].avesanflow)<>0);';
+      MSAccessManager.SetQueryDef('XPXDataTMPV', XPXDataTMPVNormalSQL);
+    end;
 
     MSAccessManager.RunQuery('_UpdateSimLinkID');
     MSAccessManager.Run('ExportQueryTable',[EngineFileName, 'XPExportQueryTable',
