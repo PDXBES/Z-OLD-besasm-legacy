@@ -955,9 +955,6 @@ namespace SystemsAnalysis.Grid.GridAnalysis
                     gridModelEngine = new GridModelEngine(projectID, projectDescription,
                 txtGridPath.Text, txtPRFPath.Text, txtMIPPath.Text, txtOSFPath.Text, txtOutputDirectory.Text, inputDatabase);
                     DataMobility.SQLCopySQLTable("GRID_GridResults", inputDatabase, "GRID_GridResults", outputDatabase);
-                //"Data Source=SIRTOBY;Initial Catalog=SANDBOX;Integrated Security=SSPI;",//;User ID=GIS;Password=Extra$hade",
-                //"GRID_GridResults",
-                //"Data Source=" + this.cboServers.Text + ";Initial Catalog=" + this.cboDatabases.Text + ";Trusted_Connection=yes");
 
                     DataMobility.SQLCopySQLTable("GRID_ZONING_IMP", inputDatabase, "GRID_ZONING_IMP", outputDatabase);
                     DataMobility.SQLCopySQLTable("GRID_variables", inputDatabase, "GRID_variables", outputDatabase);
@@ -1011,9 +1008,6 @@ namespace SystemsAnalysis.Grid.GridAnalysis
                             gridModelEngine = new GridModelEngine(projectID, projectDescription,
                 txtGridPath.Text, txtPRFPath.Text, txtMIPPath.Text, txtOSFPath.Text, txtOutputDirectory.Text, inputDatabase);
                             DataMobility.SQLCopySQLTable("GRID_GridResults", inputDatabase, "GRID_GridResults", outputDatabase);
-                //"Data Source=SIRTOBY;Initial Catalog=SANDBOX;Persist Security Info=True;User ID=GIS;Password=Extra$hade",
-                //"GRID_GridResults",
-                //"Data Source=" + this.cboServers.Text + ";Initial Catalog=" + this.cboDatabases.Text + ";Trusted_Connection=yes");
 
                             DataMobility.SQLCopySQLTable("GRID_ZONING_IMP", inputDatabase, "GRID_ZONING_IMP", outputDatabase);
                             DataMobility.SQLCopySQLTable("GRID_variables", inputDatabase, "GRID_variables", outputDatabase);
@@ -1041,15 +1035,13 @@ namespace SystemsAnalysis.Grid.GridAnalysis
                 }
                 //we have trapped for all instances that would require only archiving the input tables,
                 //so now we can just archive all of the tables in the current gridmodelEngine
+                    
                 else
                 {
                     //archiveEverything()
                     try
                     {
                         DataMobility.SQLCopySQLTable("GRID_GridResults", inputDatabase, "GRID_GridResults", outputDatabase);
-                //"Data Source=SIRTOBY;Initial Catalog=SANDBOX;Persist Security Info=True;User ID=GIS;Password=Extra$hade",
-                //"GRID_GridResults",
-                //"Data Source=" + this.cboServers.Text + ";Initial Catalog=" + this.cboDatabases.Text + ";Trusted_Connection=yes");
 
                         DataMobility.SQLCopySQLTable("GRID_ZONING_IMP", inputDatabase, "GRID_ZONING_IMP", outputDatabase);
                         DataMobility.SQLCopySQLTable("GRID_variables", inputDatabase, "GRID_variables", outputDatabase);
