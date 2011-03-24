@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="\\Cassio\Modeling\Model_Programs\bin\ReportGenerator\excel_char.xsl" ?>
+<ReportGenerator reportName="SSSP Calibration Report" studyArea="" >
+	<CharacterizationTable tableNumber="1" tableTitle="Flow Monitor Summary" columnCount="7">
+		<Header>
+			<Cell data="Location" cellType="COLUMNNAME" footerID="" rowSpan="2"></Cell>
+			<Cell data="Equipment Type" cellType="COLUMNNAME" rowSpan="2"></Cell>
+			<Cell data="Period of Record and Sampling Interval" cellType="COLUMNNAME" rowSpan="2"></Cell>			
+			<Cell data="Data Rating" cellType="COLUMNNAME" rowSpan="2"></Cell>			
+			<Cell data="Data Review Summary" cellType="COLUMNNAME" rowSpan="2"></Cell>			
+			<Cell data="Recommended Calibration Periods" cellType="COLUMNNAME" colSpan="2"></Cell>						
+		</Header>		
+		<Header>		
+			<Cell data="Dry Weather Baseflow" cellType="COLUMNNAME"></Cell>			
+			<Cell data="Wet Weather Events" cellType="COLUMNNAME"></Cell>						
+		</Header>		
+		<Row>			
+			<Cell cellType="CONST" data="MANUAL ENTRY" />				
+			<Cell cellType="CONST" data="MANUAL ENTRY" />				
+			<Cell cellType="CONST" data="MANUAL ENTRY" />				
+			<Cell cellType="CONST" data="MANUAL ENTRY" />				
+			<Cell cellType="CONST" data="MANUAL ENTRY" />				
+			<Cell cellType="CONST" data="MANUAL ENTRY" />				
+			<Cell cellType="CONST" data="MANUAL ENTRY" />
+		</Row>	
+	</CharacterizationTable>
+	<CharacterizationTable tableNumber="2" tableTitle="Flow Estimation Catchment Summary" columnCount="10">
+		<Header>
+			<Cell data="FE Catchment" cellType="COLUMNNAME"></Cell>
+			<Cell data="Flow Estimation Method" cellType="COLUMNNAME" footerID="1"></Cell>
+			<Cell data="Total Dsc Area (acres)" cellType="COLUMNNAME" footerID="2"></Cell>
+			<Cell data="Total Sewered Area (acres)" cellType="COLUMNNAME"></Cell>
+			<Cell data="Number of Sewered Dscs" cellType="COLUMNNAME"></Cell>
+			<Cell data="SFR Sewered Area (acres)" cellType="COLUMNNAME"></Cell>
+			<Cell data="MFR Sewered Area (acres)" cellType="COLUMNNAME"></Cell>
+			<Cell data="IND Sewered Area (acres)" cellType="COLUMNNAME"></Cell>
+			<Cell data="COM Sewered Area (acres)" cellType="COLUMNNAME"></Cell>			
+			<Cell data="POS Area (acres)" cellType="COLUMNNAME"></Cell>	
+		</Header>		
+		<Row isMultiRow="true" multiRowKey="FECID">
+			<Cell cellType="FUNCTION">
+				<Function functionName="Name" library="FecReport">
+					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="Method" library="FecReport">		
+					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+				</Function>						
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="DscArea" library="FecReport" format="N1">		
+					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+				</Function>							
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="DscArea" library="FecReport" format="N1">		
+					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+					<Parameter parameterName="Sewerable" parameterValue="3"></Parameter>
+				</Function>							
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="DscCount" library="FecReport" format="N0">
+					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+					<Parameter parameterName="Sewerable" parameterValue="3"></Parameter>
+				</Function>								
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="DscArea" library="FecReport" format="N1">	
+					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+					<Parameter parameterName="Sewerable" parameterValue="3"></Parameter>
+					<Parameter parameterName="Zoning" parameterValue="SFR"></Parameter>	
+					<Parameter parameterName="TimeFrame" parameterValue="EX"></Parameter>	
+				</Function>							
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="DscArea" library="FecReport" format="N1">	
+					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+					<Parameter parameterName="Sewerable" parameterValue="3"></Parameter>
+					<Parameter parameterName="Zoning" parameterValue="MFR"></Parameter>	
+					<Parameter parameterName="TimeFrame" parameterValue="EX"></Parameter>	
+				</Function>								
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="DscArea" library="FecReport" format="N1">	
+					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+					<Parameter parameterName="Sewerable" parameterValue="3"></Parameter>
+					<Parameter parameterName="Zoning" parameterValue="IND"></Parameter>	
+					<Parameter parameterName="TimeFrame" parameterValue="EX"></Parameter>	
+				</Function>								
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="DscArea" library="FecReport" format="N1">						
+					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+					<Parameter parameterName="Sewerable" parameterValue="3"></Parameter>
+					<Parameter parameterName="Zoning" parameterValue="COM"></Parameter>	
+					<Parameter parameterName="TimeFrame" parameterValue="EX"></Parameter>	
+				</Function>								
+			</Cell>	
+			<Cell cellType="FUNCTION">
+				<Function functionName="DscArea" library="FecReport" format="N1">						
+					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>					
+					<Parameter parameterName="Zoning" parameterValue="POS"></Parameter>	
+					<Parameter parameterName="TimeFrame" parameterValue="EX"></Parameter>	
+				</Function>								
+			</Cell>			
+		</Row>			
+		<Row>
+			<Cell cellType="CONST" data="Total">				
+			</Cell>
+			<Cell cellType="CONST" data="">				
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="DscArea" library="ModelReport" format="N1">							
+				</Function>							
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="DscArea" library="ModelReport" format="N1">							
+					<Parameter parameterName="Sewerable" parameterValue="3"></Parameter>
+				</Function>							
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="DscCountBySewerable" library="ModelReport" format="N0">
+					<Parameter parameterName="Sewerable" parameterValue="3"></Parameter>
+				</Function>								
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="DscArea" library="ModelReport" format="N1">						
+					<Parameter parameterName="Sewerable" parameterValue="3"></Parameter>
+					<Parameter parameterName="Zoning" parameterValue="SFR"></Parameter>	
+					<Parameter parameterName="TimeFrame" parameterValue="EX"></Parameter>	
+				</Function>							
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="DscArea" library="ModelReport" format="N1">						
+					<Parameter parameterName="Sewerable" parameterValue="3"></Parameter>
+					<Parameter parameterName="Zoning" parameterValue="MFR"></Parameter>	
+					<Parameter parameterName="TimeFrame" parameterValue="EX"></Parameter>	
+				</Function>								
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="DscArea" library="ModelReport" format="N1">						
+					<Parameter parameterName="Sewerable" parameterValue="3"></Parameter>
+					<Parameter parameterName="Zoning" parameterValue="IND"></Parameter>	
+					<Parameter parameterName="TimeFrame" parameterValue="EX"></Parameter>	
+				</Function>								
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="DscArea" library="ModelReport" format="N1">											
+					<Parameter parameterName="Sewerable" parameterValue="3"></Parameter>
+					<Parameter parameterName="Zoning" parameterValue="COM"></Parameter>	
+					<Parameter parameterName="TimeFrame" parameterValue="EX"></Parameter>	
+				</Function>								
+			</Cell>	
+			<Cell cellType="FUNCTION">
+				<Function functionName="DscArea" library="ModelReport" format="N1">																
+					<Parameter parameterName="Zoning" parameterValue="POS"></Parameter>	
+					<Parameter parameterName="TimeFrame" parameterValue="EX"></Parameter>	
+				</Function>								
+			</Cell>			
+		</Row>
+		<Footer footerID="1" footerText="TM: Temporary Monitor; PM: Permanent Monitor; PS: Pump Station; ME: Manual Estimate; NS: Not Sewered" />
+    <Footer footerID="2" footerText="Dsc: A tax lot or portion of a tax lot used to assign modeled flows to a manhole" />
+	</CharacterizationTable>
+	<CharacterizationTable tableNumber="3" tableTitle="Flow Estimation Catchment Sewer System Summary" columnCount="5">
+		<Header>
+			<Cell data="FE Catchment" cellType="COLUMNNAME" footerID=""></Cell>
+			<Cell data="Modeled Pipes" cellType="COLUMNNAME"></Cell>
+			<Cell data="Total Length of Pipes in FE Catchment (mi)" cellType="COLUMNNAME"></Cell>			
+			<Cell data="Range of Pipe Diameters (in)" cellType="COLUMNNAME"></Cell>			
+			<Cell data="Installation Date Range" cellType="COLUMNNAME"></Cell>			
+		</Header>		
+		<Row isMultiRow="true" multiRowKey="FECID">
+			<Cell cellType="FUNCTION">
+				<Function functionName="Name" library="FecReport">
+					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeCount" library="FecReport" format="N0">
+					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeLength" library="FecReport" format="N1">
+					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+				</Function>
+			</Cell>			
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeDiamRange" library="FecReport">
+					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+				</Function>
+			</Cell>			
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeInstallDateRange" library="FecReport">
+					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+				</Function>
+			</Cell>			
+		</Row>	
+		<Row>
+			<Cell cellType="CONST" data="Total">				
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeCount" library="ModelReport" format="N0">					
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeLength" library="ModelReport" format="N1">					
+				</Function>
+			</Cell>			
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeDiameterRange" library="ModelReport">					
+				</Function>
+			</Cell>			
+			<Cell cellType="FUNCTION">
+				<Function functionName="PipeInstallDateRange" library="ModelReport">					
+				</Function>
+			</Cell>			
+		</Row>	
+	</CharacterizationTable>
+	<CharacterizationTable tableNumber="4" tableTitle="Base flow Calculation Results" columnCount="8">
+		<Header>
+			<Cell data="FE Catchment" cellType="COLUMNNAME" footerID="" rowSpan="2"></Cell>
+			<Cell data="Base Flow Period" cellType="COLUMNNAME" footerID="" rowSpan="2"></Cell>
+			<Cell data="Flow Monitor Data" cellType="COLUMNNAME" colSpan="3"></Cell>
+			<Cell data="Design Manual" cellType="COLUMNNAME" colSpan="3"></Cell>			
+		</Header>		
+		<Header>
+			<Cell data="Average Base Flow" cellType="COLUMNNAME" footerID="1"></Cell>
+			<Cell data="Peaking Factor" cellType="COLUMNNAME" footerID="2"></Cell>
+			<Cell data="Peak Hour Base Flow" cellType="COLUMNNAME" footerID="3"></Cell>
+			<Cell data="Average Base Flow" cellType="COLUMNNAME" footerID="4"></Cell>
+			<Cell data="Peaking Factor" cellType="COLUMNNAME" footerID="5"></Cell>
+			<Cell data="Peak Base Flow" cellType="COLUMNNAME" footerID="6"></Cell>			
+		</Header>		
+		<Row isMultiRow="true" multiRowKey="FECID">			
+			<Cell cellType="FUNCTION">
+				<Function functionName="Name" library="FecReport">
+					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="CONST" data="WEEKDAY/WEEKEND" />
+			<Cell cellType="CONST" data="MANUAL ENTRY" />				
+			<Cell cellType="CONST" data="MANUAL ENTRY" />
+			<Cell cellType="CONST" data="MANUAL ENTRY" />
+			<Cell cellType="FUNCTION">				
+				<Function functionName="DMBaseFlow" library="FecReport" format="N2">
+					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+				</Function>									
+			</Cell>
+			<Cell cellType="CONST" data="MANUAL ENTRY" />
+			<Cell cellType="CONST" data="MANUAL ENTRY" />	
+		</Row>	
+		<Footer footerID="" footerText="Note: All flows in cubic feet per second"></Footer>
+		<Footer footerID="1" footerText="Average of all monitored flow during the specified dry weather periods"></Footer>
+		<Footer footerID="2" footerText="Peaking Factor = Maximum average hourly flow / Average Base Flow"></Footer>
+		<Footer footerID="3" footerText="Maximum average hourly flow during the specified dry weather periods"></Footer>
+		<Footer footerID="4" footerText="Design Flow = net acres x average flow for sewered lots"></Footer>
+		<Footer footerID="5" footerText="From Design Manual Chart 7: Ratio of Peak Flow to Average Daily Flow"></Footer>
+		<Footer footerID="6" footerText="Total Peak Flow = net acres x average flow x peaking factor"></Footer>
+	</CharacterizationTable>	
+	<CharacterizationTable tableNumber="5" tableTitle="Wet Weather Calibration Storm Results Assessment" columnCount="3">
+		<Header>
+			<Cell data="FE Catchment &#x00A0;&amp; Assessment" cellType="COLUMNNAME" footerID=""></Cell>
+			<Cell data="Calibration Period" cellType="COLUMNNAME"></Cell>
+			<Cell data="Qualitative Calibration Assessment" cellType="COLUMNNAME"></Cell>						
+		</Header>		
+		<Row isMultiRow="true" multiRowKey="FECID">
+			<Cell cellType="FUNCTION">
+				<Function functionName="Name" library="FecReport">
+					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="CONST" data="MANUAL ENTRY" />
+			<Cell cellType="CONST" data="MANUAL ENTRY" />					
+		</Row>	
+	</CharacterizationTable>
+	<CharacterizationTable tableNumber="6" tableTitle="5-Year Winter Design Storm Comparison to Calibration Events" columnCount="4">
+		<Header>
+			<Cell data="" cellType="COLUMNNAME"></Cell>
+			<Cell data="24-hour Rainfall Depth (in)" cellType="COLUMNNAME" footerID=""></Cell>
+			<Cell data="72-hour Rainfall Depth (in)" cellType="COLUMNNAME"></Cell>
+			<Cell data="Maximum Observed RDII (gpad)" cellType="COLUMNNAME"></Cell>						
+		</Header>		
+		<Row>
+			<Cell cellType="CONST" data="5-Year Winter Design Storm" />
+			<Cell cellType="CONST" data="0.00" />
+			<Cell cellType="CONST" data="0.00" />
+			<Cell cellType="CONST" data="N/A" />
+		</Row>
+		<Row isMultiRow="true" multiRowKey="FECID">
+			<Cell cellType="FUNCTION">
+				<Function functionName="Name" library="FecReport">
+					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="CONST" data="MANUAL ENTRY" />
+			<Cell cellType="CONST" data="MANUAL ENTRY" />	
+			<Cell cellType="CONST" data="MANUAL ENTRY" />
+		</Row>	
+		<Footer footerID="" footerText="N/A = Not Applicable" />
+		<Footer footerID="" footerText="gpad = gallons per acre per day	" />		
+	</CharacterizationTable>
+	<CharacterizationTable tableNumber="7" tableTitle="Regression Calibration Results" columnCount="2">
+		<Header>
+			<Cell data="FE Catchment" cellType="COLUMNNAME"></Cell>
+			<Cell data="Regression Equation" cellType="COLUMNNAME" footerID=""></Cell>			
+		</Header>		
+		<Row isMultiRow="true" multiRowKey="FECID">
+			<Cell cellType="FUNCTION">
+				<Function functionName="Name" library="FecReport">
+					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="CONST" data="MANUAL ENTRY" />						
+		</Row>	
+	</CharacterizationTable>
+	<CharacterizationTable tableNumber="8" tableTitle="Wet Weather Verification Storm Results Assessment" columnCount="2">
+		<Header>
+			<Cell data="Verification Event" cellType="COLUMNNAME"></Cell>
+			<Cell data="Qualitative Verification Assessment" cellType="COLUMNNAME" footerID=""></Cell>			
+		</Header>		
+		<Row>
+			<Cell cellType="CONST" data="MANUAL ENTRY">				
+			</Cell>
+			<Cell cellType="CONST" data="MANUAL ENTRY" />						
+		</Row>	
+	</CharacterizationTable>
+	<CharacterizationTable tableNumber="9" tableTitle="Unmonitored FE Catchment Base Flow and RDII Models" columnCount="6">
+		<Header>
+			<Cell data="FE Catchment" cellType="COLUMNNAME" footerID="" rowSpan="2"></Cell>
+			<Cell data="Base Flow" cellType="COLUMNNAME" colSpan="2"></Cell>
+			<Cell data="RDII Model" cellType="COLUMNNAME" colSpan="3"></Cell>			
+		</Header>		
+		<Header>
+			<Cell data="Design Manual ABF" cellType="COLUMNNAME"></Cell>
+			<Cell data="Diurnal Pattern" cellType="COLUMNNAME" footerID="1"></Cell>
+			<Cell data="Monitored FE Catchment" cellType="COLUMNNAME"></Cell>
+			<Cell data="Regression Equation" cellType="COLUMNNAME"></Cell>
+			<Cell data="RDII Factor" cellType="COLUMNNAME"></Cell>			
+		</Header>		
+		<Row isMultiRow="true" multiRowKey="FECID">			
+			<Cell cellType="FUNCTION">
+				<Function functionName="Name" library="FecReport">
+					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+				</Function>
+			</Cell>
+			<Cell cellType="FUNCTION">				
+				<Function functionName="DMBaseFlow" library="FecReport" format="N2">
+					<Parameter parameterName="FECID" parameterValue="@FECID"></Parameter>
+				</Function>									
+			</Cell>
+			<Cell cellType="CONST" data="MANUAL ENTRY" />				
+			<Cell cellType="CONST" data="MANUAL ENTRY" />
+			<Cell cellType="CONST" data="MANUAL ENTRY" />						
+			<Cell cellType="CONST" data="MANUAL ENTRY" />	
+		</Row>	
+		<Footer footerID="" footerText="Note: All flows in cubic feet per second"></Footer>
+		<Footer footerID="1" footerText="See Figure 1 and Attachment 6 (Base Flow Model Development) for diurnal patterns"></Footer>		
+	</CharacterizationTable>	
+</ReportGenerator>

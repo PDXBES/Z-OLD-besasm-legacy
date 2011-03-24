@@ -1,0 +1,64 @@
+[Config]
+Relative path=1
+Compilator.SaveAll=0
+Compilator.Capture=0
+Compilator.HideOutput=0
+DefaultCPIndex=0
+LogtoEnd=0
+DontOpen=0
+FileFormat=0
+[Project tree]
+QCWorkspace
+	-Common
+		+Include
+			..\..\Common\Inc\TableUtils.DEF
+			..\..\Common\Inc\SpaceCheck.def
+			..\..\Common\Inc\INIUtils.def
+			..\..\Common\Inc\EMGToolGlobal.def
+			..\..\Common\Inc\EMGOpenUtils.def
+			..\..\Common\Inc\EMGMTabUtil.def
+			..\..\Common\Inc\EMGModMake.def
+			..\..\Common\Inc\EMGLogger.def
+			..\..\Common\Inc\EMGLineGeo.def
+			..\..\Common\Inc\EMGLatSnap.def
+			..\..\Common\Inc\EMGLatShare.def
+			..\..\Common\Inc\EMGLaterals.def
+			..\..\Common\Inc\EMGGlobal.def
+			..\..\Common\Inc\EMGfuncts.def
+			..\..\Common\Inc\EMGCoordSys.def
+			..\..\Common\Inc\EMGCircleGeo.def
+		..\..\Common\Source\SpaceCheck.mb
+		..\..\Common\Source\INIUtils.mb
+		..\..\Common\Source\EMGOpenUtils.mb
+		..\..\Common\Source\EMGMTabUtil.mb
+		..\..\Common\Source\EMGModMake.mb
+		..\..\Common\Source\EMGLogger.mb
+		..\..\Common\Source\EMGLineGeo.MB
+		..\..\Common\Source\EMGLatSnap.mb
+		..\..\Common\Source\EMGLaterals.mb
+		..\..\Common\Source\EMGfuncts.mb
+		..\..\Common\Source\EMGCoordSys.mb
+		..\..\Common\Source\EMGCircleGeo.mb
+	+QCWorkspace
+		QCWorkspace.mbp
+		QAQC_wors4.mb
+[Open project files]
+0=..\..\..\..\..\AGMaster21\Wors\ModelOverview.WOR
+1=..\..\EMGAATS Shell\EMGAATSSystem.ini
+2=..\..\..\TestModel_2.2.3\model.ini
+3=QAQC_wors4.mb
+[Selected Project Files]
+Main=
+Selected=QAQC_wors4.mb
+[..\..\..\..\..\AGMaster21\Wors\ModelOverview.WOR]
+TopLine=1
+Caret=1,1
+[..\..\EMGAATS Shell\EMGAATSSystem.ini]
+TopLine=1
+Caret=10,21
+[..\..\..\TestModel_2.2.3\model.ini]
+TopLine=43
+Caret=1,1
+[QAQC_wors4.mb]
+TopLine=289
+Caret=220,310
