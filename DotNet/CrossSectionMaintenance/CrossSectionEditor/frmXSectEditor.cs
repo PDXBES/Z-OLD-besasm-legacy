@@ -265,13 +265,13 @@ namespace SystemsAnalysis.EMGAATS.CrossSectionEditor
           mstXSectDS.mst_xsections.FindByMLinkId(mlinkID);
 
         int j = 1;
-        foreach (ProcessedXSectDataSet.PointListRow pointRow in procRow.GetPointListRows())
+        foreach (ProcessedXSectDataSet.PointListRow pointRow in procRow.GetPointListRows().OrderBy(p => p.Station))
         {
           MstXSectionDataSet.mst_xsection_dataRow mstXSectDataRow =
             mstXSectDS.mst_xsection_data.Newmst_xsection_dataRow();
 
-          mstXSectDataRow.elevation = pointRow.Elevation;
-          mstXSectDataRow.station = pointRow.Station;
+          mstXSectDataRow.elevation = Math.Round(pointRow.Elevation, 2);
+          mstXSectDataRow.station = Math.Round(pointRow.Station, 2);
           mstXSectDataRow.index = j++;
           mstXSectDataRow.mst_xsections_id = mstXSectRow.mst_xsections_id;
           mstXSectDataRow.SetParentRow(mstXSectRow);
@@ -310,8 +310,8 @@ namespace SystemsAnalysis.EMGAATS.CrossSectionEditor
         mstXSectRow.roughness_main = procRow.MainChannelRoughness;
         mstXSectRow.roughness_left = procRow.LeftOverbankRoughness;
         mstXSectRow.roughness_right = procRow.RightOverbankRoughness;
-        mstXSectRow.station_left = procRow.LeftOverbankStation;
-        mstXSectRow.station_right = procRow.RightOverbankStation;
+        mstXSectRow.station_left = Math.Round(procRow.LeftOverbankStation, 2);
+        mstXSectRow.station_right = Math.Round(procRow.RightOverbankStation, 2);
         mstXSectRow.length_factor_left = procRow.LeftOverbankLengthFactor;
         mstXSectRow.length_factor_right = procRow.RightOverbankLengthFactor;
 
