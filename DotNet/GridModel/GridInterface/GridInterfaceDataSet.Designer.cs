@@ -3979,8 +3979,8 @@ namespace SystemsAnalysis.Grid.GridAnalysis {
                                 this.columnprocess_group}, true));
                 this.columnprocess_group.AllowDBNull = false;
                 this.columnprocess_group.Unique = true;
-                this.columnprocess_group.MaxLength = 20;
-                this.columndescription.MaxLength = 100;
+                this.columnprocess_group.MaxLength = 255;
+                this.columndescription.MaxLength = 255;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
