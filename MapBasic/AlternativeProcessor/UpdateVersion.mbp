@@ -1,0 +1,4 @@
+[Link] 
+Application=..\exe\UpdateVersion.mbx 
+Module=UpdateVersion.mbo
+

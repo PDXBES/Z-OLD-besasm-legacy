@@ -1,0 +1,77 @@
+<mockup version="1.0" skin="sketch" measuredW="866" measuredH="665" mockupW="792" mockupH="628">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::TitleWindow" x="64" y="27" w="792" h="628" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>SWSP%20Field%20Data%20Administration</text>
+      </controlProperties>
+    </control>
+    <control controlID="1" controlTypeID="com.balsamiq.mockups::VerticalTabBar" x="79" y="63" w="762" h="520" measuredW="200" measuredH="194" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <hrefs>AdminWatersheds%26bm%3BAdminWatersheds.bmml%26bm%3BAdminWatersheds.bmml%26bm%3BAdminWatersheds.bmml%2CAdminEvaluators%26bm%3BAdminEvaluators.bmml%26bm%3BAdminEvaluators.bmml%26bm%3BAdminEvaluators.bmml%2CAdminTypes%26bm%3BAdminTypes.bmml%26bm%3BAdminTypes.bmml%26bm%3BAdminTypes.bmml%2C</hrefs>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2215%2C56%2C147%2C89%22%20href%3D%22AdminWatersheds.bmml%22%20alt%3D%22AdminWatersheds%22%20id%3D%221_0%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%2215%2C89%2C147%2C122%22%20href%3D%22AdminEvaluators.bmml%22%20alt%3D%22AdminEvaluators%22%20id%3D%221_1%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%2215%2C122%2C147%2C155%22%20href%3D%22AdminTypes.bmml%22%20alt%3D%22AdminTypes%22%20id%3D%221_2%22/%3E%0A</map>
+        <position>left</position>
+        <selectedIndex>3</selectedIndex>
+        <text>Watersheds%0AEvaluators%0ATypes%0AViews%20and%20Surveys</text>
+      </controlProperties>
+    </control>
+    <control controlID="2" controlTypeID="com.balsamiq.mockups::Label" x="217" y="78" w="-1" h="-1" measuredW="40" measuredH="25" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Views</text>
+      </controlProperties>
+    </control>
+    <control controlID="10" controlTypeID="com.balsamiq.mockups::Button" x="776" y="592" w="-1" h="-1" measuredW="65" measuredH="28" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Cancel</text>
+      </controlProperties>
+    </control>
+    <control controlID="11" controlTypeID="com.balsamiq.mockups::Button" x="727" y="592" w="-1" h="-1" measuredW="43" measuredH="28" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>OK</text>
+      </controlProperties>
+    </control>
+    <control controlID="12" controlTypeID="com.balsamiq.mockups::DataGrid" x="217" y="135" w="609" h="398" measuredW="93" measuredH="118" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>View%2C%20Map%0A7%2C1%0A7%2C2%0A7%2C4</text>
+      </controlProperties>
+    </control>
+    <control controlID="13" controlTypeID="com.balsamiq.mockups::ComboBox" x="290" y="103" w="-1" h="-1" measuredW="98" measuredH="25" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Willamette</text>
+      </controlProperties>
+    </control>
+    <control controlID="14" controlTypeID="com.balsamiq.mockups::ComboBox" x="496" y="101" w="-1" h="-1" measuredW="131" measuredH="25" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Stephens%20Creek</text>
+      </controlProperties>
+    </control>
+    <control controlID="15" controlTypeID="com.balsamiq.mockups::Label" x="217" y="102" w="-1" h="-1" measuredW="73" measuredH="25" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Watershed</text>
+      </controlProperties>
+    </control>
+    <control controlID="16" controlTypeID="com.balsamiq.mockups::Label" x="403" y="102" w="-1" h="-1" measuredW="93" measuredH="25" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Subwatershed</text>
+      </controlProperties>
+    </control>
+    <control controlID="17" controlTypeID="com.balsamiq.mockups::Button" x="762" y="533" w="64" h="28" measuredW="64" measuredH="28" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Delete</text>
+      </controlProperties>
+    </control>
+    <control controlID="18" controlTypeID="com.balsamiq.mockups::Button" x="514" y="533" w="-1" h="-1" measuredW="99" measuredH="28" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>AddView%26bm%3BAddView.bmml%26bm%3BAddView.bmml%26bm%3BAddView.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22450%2C506%2C549%2C534%22%20href%3D%22AddView.bmml%22%20alt%3D%22AddView%22%20id%3D%2218%22/%3E</map>
+        <text>Add%20view...</text>
+      </controlProperties>
+    </control>
+    <control controlID="20" controlTypeID="com.balsamiq.mockups::Button" x="613" y="533" w="-1" h="-1" measuredW="149" measuredH="28" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>AddSurveyPage%26bm%3BAddSurveyPage.bmml%26bm%3BAddSurveyPage.bmml%26bm%3BAddSurveyPage.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22549%2C506%2C698%2C534%22%20href%3D%22AddSurveyPage.bmml%22%20alt%3D%22AddSurveyPage%22%20id%3D%2220%22/%3E</map>
+        <text>Add%20survey%20page...</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>

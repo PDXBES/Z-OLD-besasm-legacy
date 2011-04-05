@@ -1,0 +1,10 @@
+!table
+!version 410
+!charset WindowsLatin1
+
+Definition Table
+  Type NATIVE Charset "WindowsLatin1"
+  Fields 3
+    Qcheck_ID Char (15) ;
+    Comment Char (40) ;
+    File_Name Char (20) ;

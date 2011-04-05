@@ -1,0 +1,7 @@
+'
+'
+declare Function SnapLatToSewer(
+	tblSewers as string, 
+	TheLateral as Lateral, 
+	ObjectChanged as logical
+	) as logical
