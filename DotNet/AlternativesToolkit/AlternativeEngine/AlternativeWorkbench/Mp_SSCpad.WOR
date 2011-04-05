@@ -1,0 +1,256 @@
+!Workspace
+!Version 600
+!Charset WindowsLatin1
+'Open Table "W:\Model_Programs\Emgaats\CodeV2.2\Alternatives_Toolkit\test_models\SE_FUBase\Links\mdl_Links_ac" As mdl_Links Interactive ReadOnly
+'Open Table "W:\Model_Programs\Emgaats\CodeV2.2\Alternatives_Toolkit\test_models\SE_FUBase\Nodes\mdl_Nodes_ac" As mdl_Nodes Interactive ReadOnly
+'Open Table "W:\Model_Programs\Emgaats\CodeV2.2\Alternatives_Toolkit\test_models\SE_FUBase\DSC\mdl_DirSC_ac" As mdl_DSC Interactive ReadOnly
+'Open Table "W:\Model_Programs\Emgaats\CodeV2.2\Alternatives_Toolkit\test_models\SE_FUBase\SurfSC\mdl_SurfSC_ac" As mdl_SurfSC Interactive ReadOnly
+'Open Table "W:\Model_Programs\Emgaats\CodeV2.2\Alternatives_Toolkit\test_models\SE_FUBase\alternatives\Att111406\alt_dsc_ac" As alt_dsc Interactive
+'Open Table "W:\Model_Programs\Emgaats\CodeV2.2\Alternatives_Toolkit\test_models\SE_FUBase\alternatives\Att111406\alt_links_ac" As alt_links Interactive
+'Open Table "W:\Model_Programs\Emgaats\CodeV2.2\Alternatives_Toolkit\test_models\SE_FUBase\alternatives\Att111406\alt_nodes_ac" As alt_nodes Interactive
+'Open Table "W:\Model_Programs\Emgaats\CodeV2.2\Alternatives_Toolkit\test_models\SE_FUBase\alternatives\Att111406\alt_speclinks_ac" As alt_speclinks Interactive
+'Open Table "W:\Model_Programs\Emgaats\CodeV2.2\Alternatives_Toolkit\test_models\SE_FUBase\alternatives\Att111406\alt_ssc_ac" As alt_ssc Interactive
+Open Table "\\Cassio\modeling\AGMaster21_calcs\ImpA\IAprocessing\ImpAreaSA" As ImpAreaSA Interactive
+Open Table "\\Cassio\GIS1\MI_DATA\STREET\CENTERLN\Centerli" As Centerli Interactive
+Select *  from mdl_nodes  where mdl_nodes . Node not in ( select mdl_nodes . Node from alt_nodes , mdl_nodes where operation in ( "DEL" ) and alt_nodes . node = mdl_nodes . node )  into mdl_nodes_applied noselect  
+Select *  from alt_nodes  where Operation not in ( "DEL" )  into alt_nodes_applied noselect  
+Set Window Info
+  Position (8.50833,1.90833) Units "in"
+  Width 2.125 Units "in" Height 5.83333 Units "in" 
+  Font ("Arial",0,8,0)
+Open Window Info
+Set Window MapBasic
+  Position (0.608333,5.45) Units "in"
+  Width 3.49167 Units "in" Height 0.733333 Units "in" 
+Open Window MapBasic
+Map From alt_nodes_applied,mdl_nodes_applied,alt_links_applied,mdl_links_applied,Centerli,alt_ssc,
+  mdl_SurfSC,mdl_DSC,ImpAreaSA 
+  Position (2.20833,0.0333333) Units "in"
+  Width 6.65 Units "in" Height 5.11667 Units "in"
+Set Window FrontWindow() ScrollBars Off Autoscroll On
+Set Map
+  CoordSys Earth Projection 3, 33, "ft", -120.5, 43.6666666667, 44.3333333333, 46, 8202099.7379999999, 0
+  Center (7649553.209,662680.6734)
+  Zoom 4327.821276 Units "ft"
+  Preserve Zoom Display Position
+  Distance Units "ft" Area Units "sq ft" XY Units "ft"
+shade 7 with issumped values
+  0 Brush (1,16711680,16777215) Pen (2,2,16750640) ,
+  1 Brush (18,9502608) Pen (1,2,9502608)
+  default Brush (1,0,16777215) Pen (1,2,0)   # color 1 #
+shade 6 with IsActive values
+  0 Brush (8,8421504) Pen (2,2,8421504) ,
+  1 Brush (16,32768) Pen (2,2,32768) 
+  default Brush (1,0,16777215) Pen (1,2,0)   # color 1 # 
+shade 4 with LinkType values 
+  "C" Line (1,2,16711935) ,
+  "D" Line (1,2,65280) ,
+  "IC" Line (1,84,16711935) ,
+  "IS" Line (1,84,16711680) ,
+  "PS" Line (3,5,16711680) ,
+  "S" Line (1,2,16711680) 
+  default Line (1,2,0)   # color 1 # 
+shade 3 with LinkType values 
+  "C" Line (3,2,16711935) ,
+  "D" Line (3,2,65280) ,
+  "S" Line (3,2,16711680) 
+  default Line (1,2,0)   # color 1 # 
+shade 1 with Operation values 
+  "ADD" Symbol (49,8388608,18,"MapInfo Cartographic",257,0) ,
+  "DEL" Symbol (50,16711680,18,"MapInfo Cartographic",256,45) 
+  default Symbol (40,0,12)   # color 1 # 
+Set Map
+  Layer 1
+    Display Value
+    Global Pen (1,2,9502608)  Brush (15,15597520)  Symbol (34,16776960,5)  Line (1,2,10526975)  Font ("Arial Narrow",1,8,0)
+    Selectable Off
+  Layer 2
+    Display Graphic
+    Global Pen (1,2,9502608)  Brush (15,15597520)  Symbol (34,16776960,5)  Line (1,2,10526975)  Font ("Arial Narrow",1,8,0)
+    Label Line Simple Position Above Right Font ("Arial Narrow",1,9,8388608) Pen (1,5,16736352) 
+      With Node+Chr$(10)+"Elev.  "+GrndElev
+      Parallel On Auto On Overlap On Duplicates Off PartialSegments On Offset 5
+      Visibility Zoom (0, 2000) Units "ft"
+  Layer 3
+    Display Global
+    Global Pen (1,2,9502608)  Brush (15,15597520)  Symbol (34,16776960,9)  Line (1,2,10526975)  Font ("Arial Narrow",1,8,0)
+    Zoom (0, 9000) Units "ft" 
+    Label Line Simple Position Above Right Font ("Arial Narrow",1,9,255) Pen (1,5,7368959) 
+      With Node
+      Parallel On Auto On Overlap Off Duplicates Off Offset 5
+      Visibility Zoom (0, 2000) Units "ft"
+  Layer 4
+    Display Value
+    Global   Symbol (35,0,12)   
+    Selectable Off
+    Arrows On
+  Layer 5
+    Display Graphic
+    Global   Symbol (35,0,12)   
+    Arrows On
+    Label Line Simple Position Above Font ("Arial Narrow",257,8,8388608,16777215) Pen (1,5,9474303) 
+      With AltLinkID
+      Parallel On Auto Off Overlap On Duplicates On PartialSegments On Offset 2
+      Visibility Zoom (0, 1500) Units "ft"
+  Layer 6
+    Display Value
+    Global   Symbol (35,0,12)   
+    Selectable Off
+    Arrows On
+  Layer 7
+    Display Graphic
+    Global   Symbol (35,0,12)   
+    Arrows On
+    Label Line Simple Position Above Right Font ("Arial Narrow",257,9,16711935,16777215) Pen (1,5,16744640) 
+      With LinkID
+      Parallel Off Auto Off Overlap On Duplicates On PartialSegments On Offset 3
+      Visibility Zoom (0, 2000) Units "ft"
+  Layer 8
+    Display Global
+    Global   Symbol (35,0,12)  Line (1,1,0)  
+    Selectable Off
+    Label Line Arrow Position Above Font ("Arial",257,9,16777215,32768) Pen (1,2,0) 
+      With street_full
+      Parallel On Auto On Overlap Off Duplicates Off Offset 2
+      Visibility Zoom (0, 2000) Units "ft"
+  Layer 9
+    Display Value
+    Global   Symbol (35,0,12)   
+    Selectable Off
+  Layer 10
+    Display Graphic
+    Global   Symbol (35,0,12)   
+    Label Line Arrow Position Right Font ("Arial",0,9,0) Pen (1,2,0) 
+      With NGTO
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+  Layer 11
+    Display Value
+    Global Pen (3,2,16752768)  Brush (1,15597520)  Symbol (34,16776960,5)  Line (1,2,10526975)  Font ("Arial Narrow",1,8,0)
+    Selectable Off
+  Layer 12
+    Display Global
+    Global Pen (3,2,16752768)  Brush (1,15597520)  Symbol (34,16776960,5)  Line (1,2,10526975)  Font ("Arial Narrow",1,8,0)
+    Label Line None Position Center Font ("Arial",0,9,0) Pen (1,2,0) 
+      With NGTO
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+  Layer 13
+    Display Global
+    Global Pen (1,2,12632256)  Brush (17,15597520)  Symbol (34,16776960,5)  Line (1,2,10526975)  Font ("Arial Narrow",1,8,0)
+    Selectable Off
+    Label Line None Position Center Font ("Arial",0,9,0) Pen (1,2,0) 
+      With NGTOSan
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+  Layer 14
+    Display Graphic
+    Global   Symbol (35,0,12)   
+    Selectable Off
+    Zoom (0, 2500) Units "ft" 
+    Label Line None Position Center Font ("Arial",0,9,0) Pen (1,2,0) 
+      With GenSource
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+set legend 
+  layer 1 
+    display on 
+    shades off 
+    symbols on 
+    lines off 
+    count on 
+    title "Alternative Nodes by Operation" Font ("Arial Narrow",5,9,0)
+    subtitle "" Font ("Arial",0,8,0)
+    ascending on 
+    ranges Font ("Arial Narrow",1,8,0)
+      auto display off ,
+      "Added Nodes (A)" display on ,
+      "Deleted Nodes (D)" display on  
+set legend 
+  layer 4 
+    display on 
+    shades off 
+    symbols off 
+    lines on 
+    count on 
+    title "New Alternative Links By LinkType" Font ("Arial Narrow",5,9,0)
+    subtitle auto Font ("Arial",0,8,0)
+    ascending on 
+    ranges Font ("Arial Narrow",1,8,0)
+      auto display off ,
+      auto display on ,
+      auto display on ,
+      auto display on  
+set legend 
+  layer 6 
+    display on 
+    shades off 
+    symbols off 
+    lines on 
+    count on 
+    title "Existing Model Links by Link Type" Font ("Arial Narrow",5,9,0)
+    subtitle auto Font ("Arial",0,8,0)
+    ascending on 
+    ranges Font ("Arial Narrow",1,8,0)
+      auto display off ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on ,
+      auto display on  
+set legend 
+  layer 9 
+    display on 
+    shades on 
+    symbols off 
+    lines off 
+    count on 
+    title "Alternative Surface Subcatchments" Font ("Arial Narrow",5,9,0)
+    subtitle auto Font ("Arial",0,8,0)
+    ascending off 
+    ranges Font ("Arial",1,8,0)
+      auto display off ,
+      "Inactive" display on ,
+      "Redirected" display on  
+set legend 
+  layer 11 
+    display on 
+    shades on 
+    symbols off 
+    lines off 
+    count on 
+    title "Surface Subcatchments" Font ("Arial Narrow",5,9,0)
+    subtitle auto Font ("Arial",0,8,0)
+    ascending on 
+    ranges Font ("Arial",1,8,0)
+      auto display off ,
+      "Connected to Sewer" display on ,
+      "Sumped" display on  
+Set Window FrontWindow() Title "SSC Main Map"
+Create Cartographic Legend
+  Position (0.075,0.0333333) Units "in"
+  Width 2.05 Units "in" Height 4.19167 Units "in" 
+  Window Title "LGD: SSC Main Map"
+  Scrollbars Off
+  Custom
+  Default Frame Style "# Legend" Font ("Arial Narrow",1,8,0)
+  Frame From Layer 1
+    Position (29.9583,270.117) Units "in"
+    Border Pen (1,1,0) 
+  Frame From Layer 6
+    Position (29.925,267.141) Units "in"
+    Border Pen (1,1,0) 
+  Frame From Layer 4
+    Position (29.875,267.842) Units "in"
+    Border Pen (1,1,0) 
+  Frame From Layer 9
+    Position (29.85,268.524) Units "in"
+    Border Pen (0,1,0) 
+  Frame From Layer 11
+    Position (29.9084,269.199) Units "in"
+    Border Pen (1,1,0) 
+Browse * From alt_ssc
+  Position (0.266667,5.41667) Units "in"
+  Width 7.93333 Units "in" Height 1.24167 Units "in" 
+Set Window Frontwindow() Font ("Arial",0,8,0)

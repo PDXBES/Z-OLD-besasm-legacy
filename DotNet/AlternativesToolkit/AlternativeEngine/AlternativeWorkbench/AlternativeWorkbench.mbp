@@ -1,0 +1,21 @@
+[Link] 
+Application=AlternativeWorkbench.mbx 
+Module=AlternativeWorkbench.mbo
+Module=..\Common\trunk\source\EMGOpenUtils.mbo
+Module=..\Common\trunk\source\INIUtils.MBO
+Module=..\Common\trunk\source\EMGLogger.MBO
+Module=..\Common\trunk\source\EMGMTabUtil.mbo
+Module=..\Workbench\trunk\source\EMGInit.MBO
+Module=..\Common\trunk\source\EMGLineGeo.MBO
+Module=..\LinkTool\trunk\source\EMGLinkCheck.MBO
+Module=..\Common\trunk\source\EMGCircleGeo.MBO
+Module=..\NodeTool\src\NodeGroundElevations.MBO
+Module=..\Common\trunk\source\EMGCoordSys.mbo
+Module=LinkToolPad.mbo
+Module=DSCToolPad.mbo
+Module=SSCToolPad.mbo
+Module=SpecialToolPad.mbo
+Module=ICToolPad.mbo
+'Application=C:\Program Files\BES_SystemsAnalysis\Alternatives_Toolkit\MBWorkbench\AlternativeWorkbench.MBX
+'Module=QCAlternative.mbo
+'
