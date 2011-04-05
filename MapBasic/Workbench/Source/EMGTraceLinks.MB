@@ -365,16 +365,15 @@ Dim   cQdes as float
 	cLinkType = _newLinks.LinkType
 	' we want to re-compute this field ***
 	Do Case cLinkType
-		Case "IS", "S"
-
-			cPipeFlowType = "S"
 		Case "IC", "C"
 			cPipeFlowType = "C"
-		Case "ID", "D"
+		Case "ID", "D", "PN", "TC", "NC", "DC", "DT", "SW", "ND", "NV", "NX"
 			cPipeFlowType = "D"
+		Case "IS", "S", "SI", "TR"
+			cPipeFlowType = "S"
 		Case "PS", "PD", "PC", "FD", "PI"
 			cPipeFlowType = "F"
-		Case "V", "F", "X"
+		Case "V", "F", "X", "CC", "E", "PE"
 			cPipeFlowType = "I"
 		case else
 			cPipeFlowType = "U"		

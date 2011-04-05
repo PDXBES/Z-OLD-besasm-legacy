@@ -253,6 +253,7 @@ getDSC_PX
 ----------
 SELECT Count(sc_DD.MAPINFO_ID) AS Rcount, First(sc_DD.ddGageID) AS FirstOfGageID, First([NGTO] & "PX") AS SC_Name, CStr([NGTO]) AS ExtNGTO, Sum(CLng(([pkareaft]-[sc_dd].[icftparking])/43560*10000)/10000) AS area, Avg(([areaFT])^0.5) AS LengthBasis, 0 AS pervarea
 FROM sc_DD
+WHERE (((sc_DD.AreaFt)>=0))
 GROUP BY CStr([NGTO])
 HAVING (((Sum(CLng(([pkareaft]-[sc_dd].[icftparking])/43560*10000)/10000))>0));
 
@@ -261,6 +262,7 @@ getDSC_RX
 ----------
 SELECT Count(sc_DD.MAPINFO_ID) AS Rcount, First(sc_DD.ddGageID) AS FirstOfGageID, First([NGTO] & "RX") AS SC_Name, CStr([NGTO]) AS ExtNGTO, Sum(CLng(([rfareaft]-[sc_DD].[ICFtRoof])/43560*10000)/10000) AS area, Avg(([areaFT])^0.5) AS LengthBasis, 0 AS pervarea
 FROM sc_DD
+WHERE (((sc_DD.AreaFt)>=0))
 GROUP BY CStr([NGTO])
 HAVING (((Sum(CLng(([rfareaft]-[sc_DD].[ICFtRoof])/43560*10000)/10000))>0));
 
@@ -283,13 +285,13 @@ GROUP BY CStr([NGTO]);
 
 getSSC_A
 ----------
-SELECT 1 AS Rcount, sc_surf.scgage, sc_surf.SurfSCID, Trim$(CStr([NGTO])) AS xNGTO, CLng([c_netacres]*100000)/100000 AS acres, CLng([c_netImpacres]*100000)/100000 AS impacres, CLng([width_subcatch]) AS w_sc, sc_surf.issumped, sc_surf.totalgrossacres, sc_surf.Slope AS SC_Slope_ft_ft, sc_surf.Imp_n, sc_surf.Per_n, sc_surf.Imp_sto, sc_surf.Per_sto, sc_surf.Suct, sc_surf.Hydcon, sc_surf.SMDMax
+SELECT 1 AS Rcount, sc_surf.scgage, sc_surf.SurfSCID, Trim$(CStr([NGTO])) AS xNGTO, CLng([c_netacres]*100000)/100000 AS acres, CLng([c_netImpacres]*100000)/100000 AS impacres, CLng([width_subcatch]) AS w_sc, sc_surf.issumped, sc_surf.totalgrossacres, sc_surf.Slope AS SC_Slope_ft_ft, sc_surf.Imp_n, sc_surf.Per_n, sc_surf.Imp_sto, sc_surf.Per_sto, sc_surf.Suct, sc_surf.Hydcon, sc_surf.SMDMax, sc_surf.IsActive
 FROM sc_surf;
 
 
 getSSC_T
 ----------
-SELECT 1 AS Rcount, sc_surf.scgage, sc_surf.SurfSCID, Trim$(CStr([NGTO])) AS ExtNGTO, CLng([pavetreeacres]*100000)/100000 AS area, CLng(([pavetreeacres]*43560)^0.5/2) AS w_sc, sc_surf.issumped
+SELECT 1 AS Rcount, sc_surf.scgage, sc_surf.SurfSCID, Trim$(CStr([NGTO])) AS ExtNGTO, CLng([pavetreeacres]*100000)/100000 AS area, CLng(([pavetreeacres]*43560)^0.5/2) AS w_sc, sc_surf.issumped, sc_surf.IsActive
 FROM sc_surf
 WHERE (((CLng([pavetreeacres]*100000)/100000)>0));
 
@@ -414,7 +416,7 @@ UPDATE _RerouteSPL INNER JOIN R_Data_H1 ON [_RerouteSPL].NAMEW = R_Data_H1.NAMEW
 R_build_H1_SSC_A
 ----------
 INSERT INTO R_Data_H1 ( Source, Rcount, NAMEW, JK, ExtNGTO, NGTO, Area, PctImp, Width, Slope, Imp_n, Per_n, Imp_Sto, Per_Sto, Suct, Hydcon, SMDmax )
-SELECT "A" & IIf([issumped],"W","U") AS source, getSSC_A.Rcount, [SurfSCID] & IIf([issumped],"AW","AU") AS NameW, getSSC_A.scgage, getSSC_A.xNGTO, IIf([issumped],[xNGTO] & "W",[xNGTO]) AS ModelNGTO, getSSC_A.acres, CInt(IIf((([impacres])/[acres])*100>100,100,(([impacres])/[acres])*100)*100)/100 AS pctinp, getSSC_A.w_sc, CInt([SC_Slope_ft_ft]*10000)/10000 AS Expr3, getSSC_A.Imp_n, getSSC_A.Per_n, getSSC_A.Imp_sto, getSSC_A.Per_sto, getSSC_A.Suct, getSSC_A.Hydcon, getSSC_A.SMDMax
+SELECT "A" & IIf([issumped] Or Not [IsActive],"W","U") AS source, getSSC_A.Rcount, [SurfSCID] & IIf([issumped] Or Not [IsActive],"AW","AU") AS NameW, getSSC_A.scgage, getSSC_A.xNGTO, IIf([issumped] Or Not [IsActive],[xNGTO] & "W",[xNGTO]) AS ModelNGTO, getSSC_A.acres, CInt(IIf((([impacres])/[acres])*100>100,100,(([impacres])/[acres])*100)*100)/100 AS pctinp, getSSC_A.w_sc, CInt([SC_Slope_ft_ft]*10000)/10000 AS Expr3, getSSC_A.Imp_n, getSSC_A.Per_n, getSSC_A.Imp_sto, getSSC_A.Per_sto, getSSC_A.Suct, getSSC_A.Hydcon, getSSC_A.SMDMax
 FROM getSSC_A
 WHERE (((getSSC_A.acres)>0));
 
@@ -422,7 +424,7 @@ WHERE (((getSSC_A.acres)>0));
 R_build_H1_SSC_T
 ----------
 INSERT INTO R_Data_H1 ( Source, Rcount, JK, NAMEW, ExtNGTO, NGTO, Area, PctImp, Width )
-SELECT "T" & IIf([issumped],"W","U") AS Source, getSSC_T.Rcount, getSSC_T.scgage, [SurfSCID] & IIf([issumped],"TW","TU") AS NameW, getSSC_T.ExtNGTO, IIf([issumped],[EXtNGTO] & "W",[EXtNGTO]) AS ModelNGTO, getSSC_T.area, 0 AS Pctimp, getSSC_T.w_sc
+SELECT "T" & IIf([issumped] Or Not [IsActive],"W","U") AS Source, getSSC_T.Rcount, getSSC_T.scgage, [SurfSCID] & IIf([issumped] Or Not [IsActive],"TW","TU") AS NameW, getSSC_T.ExtNGTO, IIf([issumped] Or Not [IsActive],[EXtNGTO] & "W",[EXtNGTO]) AS ModelNGTO, getSSC_T.area, 0 AS Pctimp, getSSC_T.w_sc
 FROM getSSC_T
 WHERE (((getSSC_T.area)>0));
 
@@ -440,7 +442,7 @@ FROM R_control_A1;
 
 R_export_B1
 ----------
-SELECT "B1" AS ID, R_Control_B1.Metric, R_Control_B1.Isnow, IIf([designstorm?],1,[countofjk]) AS NRGAG, R_Control_B1.INFILM, R_Control_B1.KWALTY, R_Control_B1.IVAP, R_Control_B1.NHR, R_Control_B1.NMN, R_Control_B1.NDAY, R_Control_B1.MONTH, R_Control_B1.IYRSTR
+SELECT "B1" AS ID, R_Control_B1.Metric, R_Control_B1.Isnow, R_Control_B1.NRGAG, R_Control_B1.INFILM, R_Control_B1.KWALTY, R_Control_B1.IVAP, R_Control_B1.NHR, R_Control_B1.NMN, R_Control_B1.NDAY, R_Control_B1.MONTH, R_Control_B1.IYRSTR
 FROM R_Control_B1, R_export_B1_02NRGAG;
 
 
@@ -456,6 +458,12 @@ R_export_B1_02NRGAG
 ----------
 SELECT Count(R_export_B1_01UniqueRG.JK) AS CountOfJK
 FROM R_export_B1_01UniqueRG;
+
+
+R_export_B1_EMG211
+----------
+SELECT "B1" AS ID, R_Control_B1.Metric, R_Control_B1.Isnow, IIf([designstorm?],1,[countofjk]) AS NRGAG, R_Control_B1.INFILM, R_Control_B1.KWALTY, R_Control_B1.IVAP, R_Control_B1.NHR, R_Control_B1.NMN, R_Control_B1.NDAY, R_Control_B1.MONTH, R_Control_B1.IYRSTR
+FROM R_Control_B1, R_export_B1_02NRGAG;
 
 
 R_export_B2
@@ -532,7 +540,6 @@ FROM R_Data_H1, R_Control_B1, _R_Globals
 ORDER BY R_Data_H1.ExtNGTO, R_Data_H1.Source;
 
 
-
 R_export_M1
 ----------
 SELECT "M1" AS ID, R_Print_M1.NPRINT, R_Print_M1.ITNERV
@@ -572,7 +579,7 @@ WHERE (((sc_DD.ICFtRoof)>[RFareaFt]) AND ((IIf([ICFtRoof]-[rfareaft]>1,[ICFtRoof
 
 sc_surf
 ----------
-SELECT CLng(IIf([flowlengthft]<100,([totalgrossacres]*43560)^0.5,[totalgrossacres]*43560/[flowlengthft])) AS width_subcatch, CLng(IIf(IsNumeric([gageid]),IIf(IsNull([gageid]),0,[gageid]),0)) AS scgage, mdl_Surfsc_ac.SurfSCID, IIf(IsNull([mdl_ic_Ngtoredir_ac].[ngto]),[mdl_surfsc_ac].[ngto],[mdl_ic_Ngtoredir_ac].[ngto]) AS Ngto, mdl_Surfsc_ac.Slope, mdl_Surfsc_ac.FlowLengthFt, mdl_Surfsc_ac.dH, mdl_Surfsc_ac.Imp_n, mdl_Surfsc_ac.Per_n, mdl_Surfsc_ac.Imp_sto, mdl_Surfsc_ac.Per_sto, mdl_Surfsc_ac.Suct, mdl_Surfsc_ac.Hydcon, mdl_Surfsc_ac.SMDMax, mdl_Surfsc_ac.issumped, mdl_Surfsc_ac.totalgrossacres, mdl_Surfsc_ac.paveacres, mdl_Surfsc_ac.SWacres, mdl_Surfsc_ac.SWAcresOther, mdl_Surfsc_ac.SWfactor, mdl_Surfsc_ac.PaveTreeAcres, mdl_Surfsc_ac.TraceVisit, mdl_Surfsc_ac.UpdateAtts, mdl_Surfsc_ac.DataSource, mdl_Surfsc_ac.ROWAcres, mdl_Surfsc_ac.ROWAcresOther, mdl_Surfsc_ac.c_RFgrossacres, mdl_Surfsc_ac.c_RFtosurfacres, mdl_Surfsc_ac.c_RFtosurfIMPacres, mdl_Surfsc_ac.c_PKgrossacres, mdl_Surfsc_ac.c_PKtosurfacres, mdl_Surfsc_ac.c_PKtosurfIMPacres, mdl_Surfsc_ac.c_netacres, mdl_Surfsc_ac.c_netIMPacres
+SELECT CLng(IIf([flowlengthft]<100,([totalgrossacres]*43560)^0.5,[totalgrossacres]*43560/[flowlengthft])) AS width_subcatch, CLng(IIf(IsNumeric([gageid]),IIf(IsNull([gageid]),0,[gageid]),0)) AS scgage, mdl_Surfsc_ac.SurfSCID, IIf(IsNull([mdl_ic_Ngtoredir_ac].[ngto]),[mdl_surfsc_ac].[ngto],[mdl_ic_Ngtoredir_ac].[ngto]) AS Ngto, mdl_Surfsc_ac.Slope, mdl_Surfsc_ac.FlowLengthFt, mdl_Surfsc_ac.dH, mdl_Surfsc_ac.Imp_n, mdl_Surfsc_ac.Per_n, mdl_Surfsc_ac.Imp_sto, mdl_Surfsc_ac.Per_sto, mdl_Surfsc_ac.Suct, mdl_Surfsc_ac.Hydcon, mdl_Surfsc_ac.SMDMax, mdl_Surfsc_ac.issumped, mdl_Surfsc_ac.IsActive, mdl_Surfsc_ac.totalgrossacres, mdl_Surfsc_ac.paveacres, mdl_Surfsc_ac.SWacres, mdl_Surfsc_ac.SWAcresOther, mdl_Surfsc_ac.SWfactor, mdl_Surfsc_ac.PaveTreeAcres, mdl_Surfsc_ac.TraceVisit, mdl_Surfsc_ac.UpdateAtts, mdl_Surfsc_ac.DataSource, mdl_Surfsc_ac.ROWAcres, mdl_Surfsc_ac.ROWAcresOther, mdl_Surfsc_ac.c_RFgrossacres, mdl_Surfsc_ac.c_RFtosurfacres, mdl_Surfsc_ac.c_RFtosurfIMPacres, mdl_Surfsc_ac.c_PKgrossacres, mdl_Surfsc_ac.c_PKtosurfacres, mdl_Surfsc_ac.c_PKtosurfIMPacres, mdl_Surfsc_ac.c_netacres, mdl_Surfsc_ac.c_netIMPacres
 FROM (mdl_Surfsc_ac LEFT JOIN mdl_nodes_ac ON mdl_Surfsc_ac.NGTO = mdl_nodes_ac.Node) LEFT JOIN mdl_ic_NgtoRedir_ac ON mdl_Surfsc_ac.SurfSCID = mdl_ic_NgtoRedir_ac.SurfSCID;
 
 
