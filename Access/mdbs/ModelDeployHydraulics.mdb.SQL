@@ -529,11 +529,7 @@ FROM (((xLinks LEFT JOIN _parallel_links ON xLinks.LinkID = [_parallel_links].Li
 
 XPNodes
 ----------
-SELECT mdl_nodes_ac.Node, mdl_nodes_ac.XCoord, mdl_nodes_ac.YCoord, mdl_nodes_ac.GrndElev, IIf(IsNull([MinOfZ]),-99,Format$([minofZ],"Fixed")) AS NodeIE
-FROM mdl_nodes_ac LEFT JOIN _minNodeIEfromLink ON mdl_nodes_ac.Node = [_minNodeIEfromLink].Node;
-
-UNION SELECT [_tXPVirtNodes].Node, [_tXPVirtNodes].xcoord, [_tXPVirtNodes].ycoord, [_tXPVirtNodes].GrndElev, IIf(IsNull([MinOfZ]),-99,Format$([minofZ],"Fixed")) AS NodeIE
-FROM _tXPVirtNodes LEFT JOIN _minNodeIEfromLink ON [_tXPVirtNodes].Node = [_minNodeIEfromLink].Node;
+SELECT mdl_nodes_ac.Node, mdl_nodes_ac.XCoord, mdl_nodes_ac.YCoord, mdl_nodes_ac.GrndElev, IIf(IsNull([MinOfZ]),-99,Format$([minofZ],"Fixed")) AS NodeIE FROM (mdl_nodes_ac LEFT JOIN _minNodeIEfromLink ON mdl_nodes_ac.Node = [_minNodeIEfromLink].Node) LEFT JOIN NodesInXPLinks ON mdl_nodes_ac.Node = NodesInXPLinks.NODE WHERE (((NodesInXPLinks.NODE) Is Not Null)) UNION SELECT [_tXPVirtNodes].Node, [_tXPVirtNodes].xcoord, [_tXPVirtNodes].ycoord, [_tXPVirtNodes].GrndElev, IIf(IsNull([MinOfZ]),-99,Format$([minofZ],"Fixed")) AS NodeIE FROM _tXPVirtNodes LEFT JOIN _minNodeIEfromLink ON [_tXPVirtNodes].Node = [_minNodeIEfromLink].Node;
 
 
 xport_MakeXPXSelected
@@ -552,9 +548,9 @@ ORDER BY JobControlExtran.Order;
 
 XPX_Global_EL
 ----------
-TRANSFORM First(mst_xsection_data.elevation) AS FirstOfelevation
+TRANSFORM Format(First(Round([elevation],2)),"#0.00") AS Expr3
 SELECT "GLDBDATA EL " & Chr(34) & "Natural Section Shape" & Chr(34) AS Expr1, Chr(34) & [xplink] & Chr(34) AS Expr2, Count(mst_xsection_data.index) AS CountOfindex
-FROM XPLinks INNER JOIN (mst_xsections INNER JOIN mst_xsection_data ON mst_xsections.mst_xsections_id = mst_xsection_data.mst_xsections_id) ON XPLinks.MLinkID = mst_xsections.mlinkid
+FROM (XPLinks INNER JOIN mst_xsections ON XPLinks.MLinkID = mst_xsections.mlinkid) INNER JOIN mst_xsection_data ON mst_xsections.mst_xsections_id = mst_xsection_data.mst_xsections_id
 GROUP BY "GLDBDATA EL " & Chr(34) & "Natural Section Shape" & Chr(34), Chr(34) & [xplink] & Chr(34)
 ORDER BY mst_xsection_data.index
 PIVOT mst_xsection_data.index;
@@ -569,14 +565,14 @@ ORDER BY Chr(34) & Trim([xplink]) & Chr(34);
 
 XPX_Global_NSGD_STCHL
 ----------
-SELECT DISTINCTROW "GLDBDATA NSGD_STCHL " & Chr(34) & "Natural Section Shape" & Chr(34) AS EXPR1, Chr(34) & Trim([xplink]) & Chr(34) AS EXPR2, " 1" AS Expr3, mst_xsections.station_left, "/* station of left bank */" AS Expr5
+SELECT DISTINCTROW "GLDBDATA NSGD_STCHL " & Chr(34) & "Natural Section Shape" & Chr(34) AS EXPR1, Chr(34) & Trim([xplink]) & Chr(34) AS EXPR2, " 1" AS Expr3, Format(Round([station_left],2),"#0.00") AS Expr4, "/* station of left bank */" AS Expr5
 FROM xpLinks INNER JOIN mst_xsections ON xpLinks.MLinkID = mst_xsections.mlinkid
 ORDER BY Chr(34) & Trim([xplink]) & Chr(34);
 
 
 XPX_Global_NSGD_STCHR
 ----------
-SELECT DISTINCTROW "GLDBDATA NSGD_STCHR " & Chr(34) & "Natural Section Shape" & Chr(34) AS EXPR1, Chr(34) & Trim([xplink]) & Chr(34) AS EXPR2, " 1" AS Expr3, mst_xsections.station_right, "/* right bank roughness */" AS Expr5
+SELECT DISTINCTROW "GLDBDATA NSGD_STCHR " & Chr(34) & "Natural Section Shape" & Chr(34) AS EXPR1, Chr(34) & Trim([xplink]) & Chr(34) AS EXPR2, " 1" AS Expr3, Format(Round([station_right],2),"#0.00") AS Expr4, "/* right bank roughness */" AS Expr5
 FROM xpLinks INNER JOIN mst_xsections ON xpLinks.MLinkID = mst_xsections.mlinkid
 ORDER BY Chr(34) & Trim([xplink]) & Chr(34);
 
@@ -632,9 +628,9 @@ ORDER BY Chr(34) & [TValue] & Chr(34);
 
 XPX_Global_STA
 ----------
-TRANSFORM First(mst_xsection_data.station) AS FirstOfstation
+TRANSFORM Format(First(Round([station],2)),"#0.00") AS Expr3
 SELECT "GLDBDATA STA " & Chr(34) & "Natural Section Shape" & Chr(34) AS Expr1, Chr(34) & [xplink] & Chr(34) AS Expr2, Count(mst_xsection_data.index) AS CountOfindex
-FROM XPLinks INNER JOIN (mst_xsections INNER JOIN mst_xsection_data ON mst_xsections.mst_xsections_id = mst_xsection_data.mst_xsections_id) ON XPLinks.MLinkID = mst_xsections.mlinkid
+FROM (XPLinks INNER JOIN mst_xsections ON XPLinks.MLinkID = mst_xsections.mlinkid) INNER JOIN mst_xsection_data ON mst_xsections.mst_xsections_id = mst_xsection_data.mst_xsections_id
 GROUP BY "GLDBDATA STA " & Chr(34) & "Natural Section Shape" & Chr(34), Chr(34) & [xplink] & Chr(34)
 ORDER BY mst_xsection_data.index
 PIVOT mst_xsection_data.index;
@@ -684,47 +680,53 @@ ORDER BY Chr(34) & [USNode] & Chr(34);
 
 XPXDataBF_DRY_WTH_InitOFF
 ----------
-SELECT "DATA DRY_WTH " & Chr$(34) & [Node] & Chr$(34) AS Expr3, "0 1 0" AS Expr1
-FROM mdl_nodes_ac
-GROUP BY "DATA DRY_WTH " & Chr$(34) & [Node] & Chr$(34), "0 1 0";
+SELECT "DATA DRY_WTH " & Chr$(34) & [mdl_nodes_ac].[Node] & Chr$(34) AS Expr3, "0 1 0" AS Expr1
+FROM mdl_nodes_ac LEFT JOIN NodesInXPLinks ON mdl_nodes_ac.Node = NodesInXPLinks.NODE
+WHERE (((NodesInXPLinks.NODE) Is Not Null))
+GROUP BY "DATA DRY_WTH " & Chr$(34) & [mdl_nodes_ac].[Node] & Chr$(34), "0 1 0";
 
 
 XPXDataBF_DRY_WTH_ON
 ----------
 SELECT "DATA DRY_WTH " & Chr$(34) & [NGTOsan] & Chr$(34) AS Node, "0 1 1" AS instance
-FROM _BaseFlowComponents;
+FROM _BaseFlowComponents LEFT JOIN NodesInXPLinks ON [_BaseFlowComponents].NGTOSan = NodesInXPLinks.NODE
+WHERE (((NodesInXPLinks.NODE) Is Not Null));
 
 
 XPXDataBF_HDR_PFAC
 ----------
 SELECT "DATA HDR_PFAC " & Chr$(34) & [NGTOsan] & Chr$(34) AS Expr3, "0 1 1" AS Expr1
-FROM _BaseFlowComponents
-GROUP BY "DATA HDR_PFAC " & Chr$(34) & [NGTOsan] & Chr$(34), "0 1 1";
+FROM _BaseFlowComponents LEFT JOIN NodesInXPLinks ON [_BaseFlowComponents].NGTOSan = NodesInXPLinks.NODE
+WHERE (((NodesInXPLinks.NODE) Is Not Null));
 
 
 XPXDataBF_HDR_SEWAGE_CFS
 ----------
 SELECT "DATA HDR_SEWAGE " AS Tag, Chr$(34) & [NGTOsan] & Chr$(34) AS Node, "0 1" AS instance, [_BaseFlowComponents].avesanflow AS flow
-FROM _BaseFlowComponents
+FROM _BaseFlowComponents LEFT JOIN NodesInXPLinks ON [_BaseFlowComponents].NGTOSan = NodesInXPLinks.NODE
+WHERE (((NodesInXPLinks.NODE) Is Not Null))
 ORDER BY Chr$(34) & [NGTOsan] & Chr$(34);
 
 
 XPXDataBF_HDR_SEWAGE_InitZero
 ----------
-SELECT "DATA HDR_SEWAGE " & Chr$(34) & [Node] & Chr$(34) AS Expr3, "0 1 0" AS Expr1
-FROM mdl_nodes_ac;
+SELECT "DATA HDR_SEWAGE " & Chr$(34) & [mdl_nodes_ac].[Node] & Chr$(34) AS Expr3, "0 1 0" AS Expr1
+FROM mdl_nodes_ac LEFT JOIN NodesInXPLinks ON mdl_nodes_ac.Node = NodesInXPLinks.NODE
+WHERE (((NodesInXPLinks.NODE) Is Not Null));
 
 
 XPXDataBF_QINST
 ----------
 SELECT "DATA QINST " AS Tag, Chr$(34) & [NGTOSan] & Chr$(34) AS Node, "0 1" AS Instance, [_BaseFlowComponents].DMII
-FROM _BaseFlowComponents;
+FROM _BaseFlowComponents LEFT JOIN NodesInXPLinks ON [_BaseFlowComponents].NGTOSan = NodesInXPLinks.NODE
+WHERE (((NodesInXPLinks.NODE) Is Not Null));
 
 
 XPXDataBF_QINST_InitZero
 ----------
-SELECT "DATA QINST " & Chr$(34) & [Node] & Chr$(34) AS Expr3, "0 1 0" AS Expr1
-FROM mdl_nodes_ac;
+SELECT "DATA QINST " & Chr$(34) & [mdl_nodes_ac].[Node] & Chr$(34) AS Expr3, "0 1 0" AS Expr1
+FROM mdl_nodes_ac LEFT JOIN NodesInXPLinks ON mdl_nodes_ac.Node = NodesInXPLinks.NODE
+WHERE (((NodesInXPLinks.NODE) Is Not Null));
 
 
 XPXDataCName
@@ -830,9 +832,10 @@ ORDER BY Chr$(34) & [NGTO] & Chr$(34);
 
 XPXDataINTFLG_ON
 ----------
-SELECT DISTINCTROW "DATA USEINTFLG" AS EXPR1, Chr(34) & Trim([NODE]) & Chr(34) AS EXPR2, "0 1" AS EXPR3, "1" AS EXPR4
-FROM mdl_nodes_ac
-ORDER BY Chr(34) & Trim([NODE]) & Chr(34);
+SELECT DISTINCTROW "DATA USEINTFLG" AS EXPR1, Chr(34) & Trim([mdl_nodes_ac].[NODE]) & Chr(34) AS EXPR2, "0 1" AS EXPR3, "1" AS EXPR4
+FROM mdl_nodes_ac LEFT JOIN NodesInXPLinks ON mdl_nodes_ac.Node = NodesInXPLinks.NODE
+WHERE (((NodesInXPLinks.NODE) Is Not Null))
+ORDER BY Chr(34) & Trim([mdl_nodes_ac].[NODE]) & Chr(34);
 
 
 XPXDataINTPERCENT
@@ -919,7 +922,8 @@ ORDER BY Chr(34) & Trim([conduit_name]) & Chr(34), tblConduitData.Instance;
 XPXDataNTIDE
 ----------
 SELECT "DATA NTIDE" AS Tag, Chr(34) & Trim([Node]) & Chr(34) AS NODEID, " 0 1 1" AS Expr3, "/* MLINKID  " & CStr([mlinkid]) & "  */" AS comment
-FROM _Outfalls LEFT JOIN mdl_links_ac ON [_Outfalls].Node = mdl_links_ac.DSNode
+FROM (_Outfalls LEFT JOIN mdl_links_ac ON [_Outfalls].Node = mdl_links_ac.DSNode) LEFT JOIN NodesInXPLinks ON [_Outfalls].Node = NodesInXPLinks.NODE
+WHERE (((NodesInXPLinks.NODE) Is Not Null))
 GROUP BY "DATA NTIDE", Chr(34) & Trim([Node]) & Chr(34), " 0 1 1", "/* MLINKID  " & CStr([mlinkid]) & "  */";
 
 
@@ -1041,9 +1045,10 @@ ORDER BY Chr(34) & Trim([conduit_name]) & Chr(34);
 
 XPXDataSFlood
 ----------
-SELECT DISTINCTROW "DATA SFLOOD" AS EXPR1, Chr(34) & Trim([NODE]) & Chr(34) AS EXPR2, "0 1" AS EXPR3, "1" AS EXPR4
-FROM mdl_nodes_ac
-ORDER BY Chr(34) & Trim([NODE]) & Chr(34);
+SELECT DISTINCTROW "DATA SFLOOD" AS EXPR1, Chr(34) & Trim([mdl_nodes_ac].[NODE]) & Chr(34) AS EXPR2, "0 1" AS EXPR3, "1" AS EXPR4
+FROM mdl_nodes_ac LEFT JOIN NodesInXPLinks ON mdl_nodes_ac.Node = NodesInXPLinks.NODE
+WHERE (((NodesInXPLinks.NODE) Is Not Null))
+ORDER BY Chr(34) & Trim([mdl_nodes_ac].[NODE]) & Chr(34);
 
 
 XPXDataSFloodFM
@@ -1072,8 +1077,8 @@ GROUP BY Chr(34) & Trim([Node]) & Chr(34);
 XPXDataTMPV
 ----------
 SELECT "DATA HDR_TMPV " & Chr$(34) & [NGTOSAN] & Chr$(34) AS Expr3, "0 1" AS Expr1, Chr(34) & "Default" & Chr(34) AS Expr2
-FROM _BaseFlowComponents
-WHERE ((([_BaseFlowComponents].avesanflow)<>0));
+FROM _BaseFlowComponents LEFT JOIN NodesInXPLinks ON [_BaseFlowComponents].NGTOSan = NodesInXPLinks.NODE
+WHERE ((([_BaseFlowComponents].avesanflow)<>0) AND ((NodesInXPLinks.NODE) Is Not Null));
 
 
 XPXDataTPhi
