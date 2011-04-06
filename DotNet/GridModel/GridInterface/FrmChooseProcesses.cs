@@ -64,8 +64,6 @@ namespace SystemsAnalysis.Grid.GridAnalysis
                 MessageBox.Show("Could not save changes to process group list: " + ex.Message, "Error saving changes", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.Close();
             }
-            
-
         }
 
         private void SaveProcesses()
