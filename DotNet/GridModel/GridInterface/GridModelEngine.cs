@@ -292,15 +292,15 @@ namespace SystemsAnalysis.Grid.GridAnalysis
                 try
                 {
                     this.StatusChanged(gridModelRun.ModelDescription + ": Executing process '" + gridProcessGroup.GroupName + "'");/*gridProcess.ProcessName + "'");*/
-                    if (gridProcessGroup.GroupName == "GRID_SETUP_RAINMESH" )
+                    if (gridProcessGroup.GroupName == "GRID_SETUP" )
                     {
                         SQLHelper.SQLExecuteActionQuery(gridProcessGroup.GroupName, "@SelectionSetID", gridModelRun.SelectionSetAreaID, "@ProjectID", ProjectID, SQLDatabaseConnectionString);
                     }
-                    else if (gridProcessGroup.GroupName == "GRID_RUNOFF_RAINMESH")
+                    else if (gridProcessGroup.GroupName == "GRID_RUNOFF")
                     {
                         SQLHelper.SQLExecuteActionQuery(gridProcessGroup.GroupName, "@SelectionSetID", gridModelRun.SelectionSetAreaID, SQLDatabaseConnectionString);
                     }
-                    else if (gridProcessGroup.GroupName == "GRID_COMMON_RAINMESH")
+                    else if (gridProcessGroup.GroupName == "GRID_COMMON")
                     {
                         SQLHelper.SQLExecuteActionQuery(gridProcessGroup.GroupName, "@SelectionSetID", gridModelRun.SelectionSetAreaID, SQLDatabaseConnectionString);
                     }
