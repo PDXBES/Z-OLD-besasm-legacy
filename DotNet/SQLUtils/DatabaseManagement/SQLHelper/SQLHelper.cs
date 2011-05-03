@@ -488,6 +488,35 @@ namespace SystemsAnalysis.Utils.SQLHelper
             thisSQLDB.Close();
         }
 
+        public static void SQLExecuteActionQuery(string queryName, string parameterName, int parameter, string parameterName2, int parameter2, string parameterName3, int parameter3, string SQLDB)
+        {
+            SqlCommand cmd = new SqlCommand();
+            Int32 rowsAffected;
+            SqlConnection thisSQLDB = new SqlConnection(SQLDB);
+            thisSQLDB.Open();
+            cmd.CommandText = queryName;
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Connection = thisSQLDB;
+
+            cmd.Parameters.Add(new SqlParameter(parameterName, OleDbType.Integer)).Value = parameter;
+            cmd.Parameters.Add(new SqlParameter(parameterName2, OleDbType.Integer)).Value = parameter2;
+            cmd.Parameters.Add(new SqlParameter(parameterName3, OleDbType.Integer)).Value = parameter3;
+
+            /*string EXECUTEsql = queryName;
+            SqlCommand cmd = new SqlCommand(EXECUTEsql, CurrentSQLDB);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;*/
+            try
+            {
+                cmd.CommandTimeout = 0;
+                rowsAffected = cmd.ExecuteNonQuery();
+            }
+            catch (SqlException ae)
+            {
+                //Could not drop table
+            }
+            thisSQLDB.Close();
+        }
+
         static public void SQLExportTablePortion(string tableName, string strFilePath, string columnName, string parameter, string SQLDB)
         {
             System.Data.DataTable dt = new System.Data.DataTable();
