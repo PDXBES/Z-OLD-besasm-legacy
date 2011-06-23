@@ -256,9 +256,8 @@ begin
   end
   else
   begin
-    TableIndex := fMapInfoApp.Eval('TableInfo("' + ATable + '", ' +
-      IntToStr(MB_TAB_INFO_NUM) + ')');
-    fMapInfoApp.Do('Set Map Window Frontwindow() Zoom Entire Layer ' + IntToStr(TableIndex));
+    fMapInfoApp.Do('Set Map Window Frontwindow() Zoom Entire Layer "' +
+      ATable +'"');
   end;
 end;
 

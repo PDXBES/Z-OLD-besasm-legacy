@@ -135,7 +135,7 @@ begin
 	NumRows := StrToInt(Eval('TableInfo(mdl_SurfSC,8)'));
   if NumRows > 0 then
   begin
-    RunCommand('select obj from mdl_SurfSC where col1= -1 into QyTmp ');
+    RunCommand('select obj from mdl_SurfSC where col1 = -1 into QyTmp ');
     RunCommand('Commit Table QyTmp As Str$("'+ModelPath+'" + "surfsc\ProjAreaTmp.TAB") TYPE NATIVE Charset "WindowsLatin1"');
     RunCommand('Open Table Str$("'+ModelPath+'" + "surfsc\ProjAreaTmp.TAB") Interactive');
     RunCommand('select * from mdl_SurfSC where obj into QyTmp');
@@ -154,21 +154,28 @@ begin
   // If there's direct subcatchments, buffer those too
   if Result then
   begin
-    RunCommand('select * from mdl_DSC into QyTmp');
-    RunCommand('Create Object As Buffer From Selection Width 10 Units "ft" Type Cartesian Resolution 12 Into Table ProjAreaTmp');
-    NumRows := StrToInt(Eval('TableInfo(QyTmp,8)'));
+    NumRows := StrToInt(Eval('TableInfo(mdl_DSC,8)'));
     if NumRows > 0 then
     begin
+      RunCommand('select * from mdl_DSC into QyTmp');
+      RunCommand('Create Object As Buffer From Selection Width 10 Units "ft" Type Cartesian Resolution 12 Into Table ProjAreaTmp');
       // Create Project Area
       RunCommand('Select * from ProjAreaTmp into QyTmp');
       RunCommand('Objects Combine');
       RunCommand('Create Object As Buffer From Selection Width -10 Units "ft" Type Cartesian Resolution 12 Into Table ProjAreaTmp');
       RunCommand('Commit Table ProjAreaTmp');
+      RunCommand('Select * from ProjAreaTmp where rowid<>INT(tableinfo("ProjAreaTmp",8)) into QyTmp');
+      RunCommand('Commit Table QyTmp As Str$("'+ModelPath+'" + "surfsc\ProjArea.TAB") TYPE NATIVE Charset "WindowsLatin1"');
+      RunCommand('Open Table Str$("'+ModelPath+'" + "surfsc\ProjArea.TAB") Interactive');
+      RunCommand('Drop Table ProjAreaTmp');
+    end
+    else
+    begin
+      RunCommand('Select * from ProjAreaTmp where rowid=INT(tableinfo("ProjAreaTmp",8)) into QyTmp');
+      RunCommand('Commit Table QyTmp As Str$("'+ModelPath+'" + "surfsc\ProjArea.TAB") TYPE NATIVE Charset "WindowsLatin1"');
+      RunCommand('Open Table Str$("'+ModelPath+'" + "surfsc\ProjArea.TAB") Interactive');
+      RunCommand('Drop Table ProjAreaTmp');
     end;
-    RunCommand('Select * from ProjAreaTmp where rowid<>INT(tableinfo("ProjAreaTmp",8)) into QyTmp');
-    RunCommand('Commit Table QyTmp As Str$("'+ModelPath+'" + "surfsc\ProjArea.TAB") TYPE NATIVE Charset "WindowsLatin1"');
-    RunCommand('Open Table Str$("'+ModelPath+'" + "surfsc\ProjArea.TAB") Interactive');
-    RunCommand('Drop Table ProjAreaTmp');
   end
   else
   begin
@@ -218,8 +225,12 @@ begin
   RunCommand('select * from ProjMask');
   RunCommand('set target on');
   RunCommand('select * from Eraser');
-  RunCommand('Objects Erase Into Target');
-  RunCommand('Close Table eraser');
+  NumRows := StrToInt(Eval('TableInfo(Eraser,8)'));
+  if NumRows > 0 then
+  begin
+    RunCommand('Objects Erase Into Target');
+    RunCommand('Close Table eraser');
+  end;
   RunCommand('Commit Table ProjMask');
   RunCommand('Close Table ProjMask');
 end;
