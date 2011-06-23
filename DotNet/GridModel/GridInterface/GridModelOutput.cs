@@ -130,8 +130,22 @@ namespace SystemsAnalysis.Grid.GridAnalysis
             bmpTA = new PollutantLoadingMetadataDataSetTableAdapters.BmpPerformanceTableAdapter();
             PollutantLoadingMetadataDataSetTableAdapters.PollutantLoadingsTableAdapter pollutantLoadTA;
             pollutantLoadTA = new PollutantLoadingMetadataDataSetTableAdapters.PollutantLoadingsTableAdapter();
-            bmpTA.Fill(plmdDS.BmpPerformance);
-            pollutantLoadTA.Fill(plmdDS.PollutantLoadings);
+            try
+            {
+                bmpTA.Fill(plmdDS.BmpPerformance);
+            }
+            catch (Exception ex)
+            {
+                //put in a placeholder for bmp info, as this model contains none.
+            }
+            try
+            {
+                pollutantLoadTA.Fill(plmdDS.PollutantLoadings);
+            }
+            catch (Exception ex)
+            {
+                //put in a placeholder for pollutant loadings, as this model contains none.
+            }
             plmdDS.ScenarioDescription = scenarioDescription;
             this.pollutantLoadingMetadataDataSets.Add(plmdDS);
         }

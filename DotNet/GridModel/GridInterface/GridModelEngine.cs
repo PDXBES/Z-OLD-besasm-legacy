@@ -22,11 +22,12 @@ namespace SystemsAnalysis.Grid.GridAnalysis
         private List<GridModelResult> gridModelResults;
         public string GridDataTable = null;
         private string SQLDatabaseConnectionString;
+        private bool isAccessBased;
 
         private AccessHelper accessHelper;
 
         public GridModelEngine(int projectID, string projectDescription, string gridDataPath,
-            string bmpPath, string mipPath, string osfPath, string outputDirectory, string SQLDatabaseConnectionString)
+            string bmpPath, string mipPath, string osfPath, string outputDirectory, string SQLDatabaseConnectionString, bool isAccessBased)
             : this(SQLDatabaseConnectionString)
         {
             this.projectID = projectID;
@@ -37,6 +38,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis
             this.osfPath = osfPath;
             this.outputDirectory = outputDirectory;
             this.SQLDatabaseConnectionString = SQLDatabaseConnectionString;
+            this.isAccessBased = isAccessBased;
             accessHelper = new AccessHelper();//gridModelPath, SQLDatabaseConnectionString);
 
             
@@ -75,19 +77,42 @@ namespace SystemsAnalysis.Grid.GridAnalysis
             //server connection(SQLDatabaseConnectionString) and the default table name
             //if they both match up, then skip the copy/import, but if they do not both match up, then
             //perform the copy/import.
+
+            //will really need to know what kind of connection it is by the string
             if ((string.Compare(gridModelRuns[0].BMPEffectivenessDB, SQLDatabaseConnectionString) != 0) || (string.Compare("GRID_BMP_PERFORMANCE", gridModelRuns[0].BMPEffectivenessTable) != 0))
             {
-                DataMobility.SQLCopySQLTable(gridModelRuns[0].BMPEffectivenessTable,
-                    gridModelRuns[0].BMPEffectivenessDB, "GRID_BMP_PERFORMANCE", SQLDatabaseConnectionString);
+                if (gridModelRuns[0].BMPEffectivenessDB.IndexOf('\\')>=0)
+                {
+                    DataMobility.SQLCopyAccessTable(gridModelRuns[0].BMPEffectivenessTable, gridModelRuns[0].BMPEffectivenessDB, "GRID_BMP_PERFORMANCE", SQLDatabaseConnectionString);
+                }
+                else
+                {
+                    DataMobility.SQLCopySQLTable(gridModelRuns[0].BMPEffectivenessTable,
+                        gridModelRuns[0].BMPEffectivenessDB, "GRID_BMP_PERFORMANCE", SQLDatabaseConnectionString);
+                }
             }
             if ((string.Compare(gridModelRuns[0].PollutantLoadingDB, SQLDatabaseConnectionString) != 0) || (string.Compare("GRID_pollutant_loadings", gridModelRuns[0].PollutantLoadingTable) != 0))
             {
-                DataMobility.SQLCopySQLTable(gridModelRuns[0].PollutantLoadingTable,
-                    gridModelRuns[0].PollutantLoadingDB, "GRID_pollutant_loadings", SQLDatabaseConnectionString);
+                if (gridModelRuns[0].PollutantLoadingDB.IndexOf('\\') >= 0)
+                {
+                    DataMobility.SQLCopyAccessTable(gridModelRuns[0].PollutantLoadingTable, gridModelRuns[0].PollutantLoadingDB, "GRID_pollutant_loadings", SQLDatabaseConnectionString);
+                }
+                else
+                {
+                    DataMobility.SQLCopySQLTable(gridModelRuns[0].PollutantLoadingTable,
+                        gridModelRuns[0].PollutantLoadingDB, "GRID_pollutant_loadings", SQLDatabaseConnectionString);
+                }
             }
             if ((string.Compare(gridDataPath, SQLDatabaseConnectionString) != 0) || (string.Compare(gridDataTableName, "GRID_WshdGrd100FtOpt") != 0))
             {
-                DataMobility.SQLCopySQLTable(gridDataTableName, gridDataPath, "GRID_WshdGrd100FtOpt", SQLDatabaseConnectionString);
+                if (gridDataPath.IndexOf('\\') >= 0)
+                {
+                    DataMobility.SQLCopyAccessTable(gridDataTableName, gridDataPath, "GRID_WshdGrd100FtOpt", SQLDatabaseConnectionString);
+                }
+                else
+                {
+                    DataMobility.SQLCopySQLTable(gridDataTableName, gridDataPath, "GRID_WshdGrd100FtOpt", SQLDatabaseConnectionString);
+                }
             }
         }
 
@@ -146,13 +171,27 @@ namespace SystemsAnalysis.Grid.GridAnalysis
             int bmpSourceCount = 0;
             if (prfPath != "")
             {
-                DataMobility.SQLCopySQLTable(bmpTableName, prfPath, "GRID_PDX_BMP_GRID", SQLDatabaseConnectionString);
+                if (prfPath.IndexOf('\\') >= 0)
+                {
+                    DataMobility.SQLCopyAccessTable("PDX_BMP_GRID", prfPath, "GRID_PDX_BMP_GRID", SQLDatabaseConnectionString);
+                }
+                else
+                {
+                    DataMobility.SQLCopySQLTable(bmpTableName, prfPath, "GRID_PDX_BMP_GRID", SQLDatabaseConnectionString);
+                }
                 bmpUnionQuery += "SELECT * FROM GRID_PRF_LIST ";
                 bmpSourceCount++;
             }
             if (mipPath != "")
             {
-                DataMobility.SQLCopySQLTable(mipTableName, mipPath, "GRID_PDX_MIP_GRID", SQLDatabaseConnectionString);
+                if (mipPath.IndexOf('\\') >= 0)
+                {
+                    DataMobility.SQLCopyAccessTable("PDX_MIP_GRID", mipPath, "GRID_PDX_MIP_GRID", SQLDatabaseConnectionString);
+                }
+                else
+                {
+                    DataMobility.SQLCopySQLTable(mipTableName, mipPath, "GRID_PDX_MIP_GRID", SQLDatabaseConnectionString);
+                }
                 if (bmpSourceCount > 0)
                 {
                     bmpUnionQuery += "UNION ";
@@ -162,7 +201,14 @@ namespace SystemsAnalysis.Grid.GridAnalysis
             }
             if (osfPath != "")
             {
-                DataMobility.SQLCopySQLTable(osfTableName, osfPath, "GRID_PDX_OSF_GRID", SQLDatabaseConnectionString);
+                if (osfPath.IndexOf('\\') >= 0)
+                {
+                    DataMobility.SQLCopyAccessTable("PDX_OSF_GRID", osfPath, "GRID_PDX_OSF_GRID", SQLDatabaseConnectionString);
+                }
+                else
+                {
+                    DataMobility.SQLCopySQLTable(osfTableName, osfPath, "GRID_PDX_OSF_GRID", SQLDatabaseConnectionString);
+                }
                 if (bmpSourceCount > 0)
                 {
                     bmpUnionQuery += "UNION ";
@@ -207,7 +253,18 @@ namespace SystemsAnalysis.Grid.GridAnalysis
             {
                 prfListQuery += "((GRID_PDX_BMP_GRID.TimeFrame)= 'EX');";
             }
-            SQLHelper.SQLCreateVIEW("GRID_PRF_LIST", prfListQuery, SQLDatabaseConnectionString);
+            try
+            {
+                SQLHelper.SQLCreateVIEW("GRID_PRF_LIST", prfListQuery, SQLDatabaseConnectionString);
+                if (timePeriod == "EX")
+                {
+                    SQLHelper.SQLCreateVIEW("GRID_PRF_LIST_EX", prfListQuery, SQLDatabaseConnectionString);
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
 
         /// <summary>
@@ -221,16 +278,23 @@ namespace SystemsAnalysis.Grid.GridAnalysis
             
             //copy all of the important tables from the access database to the SQL server database
            
-
-            CreatePRFListQuery(gridModelRuns[0].InstreamFacilities, gridModelRuns[0].TimePeriod);
-            CreateBMPUnionQuery();
             SQLHelper.SQLExecuteActionQuery("GRID_ClearCompiledResults", SQLDatabaseConnectionString);
             foreach (GridModelRun gridModelRun in gridModelRuns)
             {
+                bool boolContainsBMP = false;
+                foreach (GridProcessGroup gridProcessGroup in gridModelRun.GridProcessGroups.OrderBy(gridProcessGroup => gridProcessGroup.GroupOrder))
+                {
+                    if (gridProcessGroup.GroupName.Contains("GRID_BMP") && boolContainsBMP == false)
+                    {
+                        CreatePRFListQuery(gridModelRun.InstreamFacilities, gridModelRun.TimePeriod);
+                        CreateBMPUnionQuery();
+                        boolContainsBMP = true;
+                    }
+                }
+
                 try
                 {
                     this.StatusChanged("Executing " + gridModelRun.ModelDescription);
-                    //////
                     
                     ExecuteModel(gridModelRun);
                     SQLHelper.SQLExecuteActionQuery("GRID_CompileResults", SQLDatabaseConnectionString);
@@ -262,7 +326,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis
                 string runDescription = GetFormattedRunCount(runCount, totalRunCount);
                 string outputFile = outputDirectory + "\\" + gridModelRun.Area + "_" + gridModelRun.SubArea + "\\" + gridModelRun.ScenarioDescription + "\\" + runDescription + "_" + gridModelTimeStep.Comment + ".csv";
 
-                ExportResultsAllTimeSteps(outputFile);
+                ExportResultsAllTimeSteps(outputFile, totalRunCount);
                 GridModelResult gridModelResult;
                 gridModelResult = new GridModelResult(outputFile, gridModelRun.Area, gridModelRun.SubArea, gridModelRun.ModelDescription, gridModelTimeStep.Comment);
                 gridModelResults.Add(gridModelResult);
@@ -292,15 +356,15 @@ namespace SystemsAnalysis.Grid.GridAnalysis
                 try
                 {
                     this.StatusChanged(gridModelRun.ModelDescription + ": Executing process '" + gridProcessGroup.GroupName + "'");/*gridProcess.ProcessName + "'");*/
-                    if (gridProcessGroup.GroupName == "GRID_SETUP_RAINMESH" )
+                    if (gridProcessGroup.GroupName == "GRID_SETUP" )
                     {
-                        SQLHelper.SQLExecuteActionQuery(gridProcessGroup.GroupName, "@SelectionSetID", gridModelRun.SelectionSetAreaID, "@ProjectID", ProjectID, SQLDatabaseConnectionString);
+                        SQLHelper.SQLExecuteActionQuery(gridProcessGroup.GroupName, "@SelectionSetID", gridModelRun.SelectionSetAreaID, "@ProjectID", ProjectID, "@ScenarioID", gridModelRun.ScenarioID, SQLDatabaseConnectionString);
                     }
-                    else if (gridProcessGroup.GroupName == "GRID_RUNOFF_RAINMESH")
+                    else if (gridProcessGroup.GroupName == "GRID_RUNOFF")
                     {
                         SQLHelper.SQLExecuteActionQuery(gridProcessGroup.GroupName, "@SelectionSetID", gridModelRun.SelectionSetAreaID, SQLDatabaseConnectionString);
                     }
-                    else if (gridProcessGroup.GroupName == "GRID_COMMON_RAINMESH")
+                    else if (gridProcessGroup.GroupName == "GRID_COMMON")
                     {
                         SQLHelper.SQLExecuteActionQuery(gridProcessGroup.GroupName, "@SelectionSetID", gridModelRun.SelectionSetAreaID, SQLDatabaseConnectionString);
                     }
@@ -344,16 +408,11 @@ namespace SystemsAnalysis.Grid.GridAnalysis
         private static string GetFormattedRunCount(int runCount, int totalRunCount)
         {
             string runDescription;
-            if (totalRunCount == 1)
-            {
-                runDescription = "01";
-            }
-            else
-            {
-                runDescription = runCount.ToString();
-                string totalRunCountToString = totalRunCount.ToString();
-                runDescription = runDescription.PadLeft(totalRunCountToString.Length, '0');
-            }
+
+            runDescription = runCount.ToString();
+            string totalRunCountToString = totalRunCount.ToString();
+            runDescription = runDescription.PadLeft(totalRunCountToString.Length, '0');
+        
             return runDescription;
         }
 
@@ -368,19 +427,20 @@ namespace SystemsAnalysis.Grid.GridAnalysis
             SQLHelper.SQLWriteKeyValueTable(variableTableName, variableKeyFieldName, name, variableValueFieldName, value, SQLDatabaseConnectionString);
         }
 
-        private void ExportResultsAllTimeSteps(string outputFileName)
+        private void ExportResultsAllTimeSteps(string outputFileName, int totalRunCount)
         {
+            string totalRunCountToString = totalRunCount.ToString();
             if (!Directory.Exists(Path.GetFullPath(outputFileName)))
             {
                 Directory.CreateDirectory(Path.GetDirectoryName(outputFileName));
             }
             try
             {
-                SQLHelper.SQLExportTablePortion("GRID_GridResults", outputFileName, "comment", (Path.GetFileNameWithoutExtension(outputFileName)).Remove(0, 3), SQLDatabaseConnectionString);
+                SQLHelper.SQLExportTablePortion("GRID_GridResults", outputFileName, "comment", (Path.GetFileNameWithoutExtension(outputFileName)).Remove(0, totalRunCountToString.Length+1), SQLDatabaseConnectionString);
             }
             catch (System.Runtime.InteropServices.COMException ex)
             {
-                SQLHelper.SQLExportTablePortion("GRID_GridResults", outputFileName, "comment", (Path.GetFileNameWithoutExtension(outputFileName)).Remove(0, 3), SQLDatabaseConnectionString);
+                SQLHelper.SQLExportTablePortion("GRID_GridResults", outputFileName, "comment", (Path.GetFileNameWithoutExtension(outputFileName)).Remove(0, totalRunCountToString.Length+1), SQLDatabaseConnectionString);
             }
             return;
         }
