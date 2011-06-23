@@ -1,0 +1,19 @@
+!table
+!version 410
+!charset WindowsLatin1
+
+Definition Table
+  File "alternative_package.mdb"
+  Type ACCESS TABLE "alt_dsc_ac" Charset "WindowsLatin1"
+  Fields 11
+    AltDSCID Integer Index 1 ;
+    MdlDSCID Integer Index 2 ;
+    LinkIDSan Integer Index 3 ;
+    LinkSourceSan Char (3) ;
+    ConnectFractionSan Float ;
+    LinkIDStorm Integer Index 4 ;
+    LinkSourceStorm Char (3) ;
+    ConnectFractionStorm Float ;
+    DiscoClass Char (1) ;
+    IsActive Logical ;
+    FocusArea Char (10) ;

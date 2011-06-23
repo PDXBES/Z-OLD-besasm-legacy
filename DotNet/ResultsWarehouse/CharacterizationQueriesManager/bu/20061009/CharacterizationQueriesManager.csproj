@@ -1,0 +1,375 @@
+<VisualStudioProject>
+    <CSHARP
+        ProjectType = "Local"
+        ProductVersion = "7.10.3077"
+        SchemaVersion = "2.0"
+        ProjectGuid = "{1489F1BD-4E32-4A0E-9613-241A87836FBC}"
+    >
+        <Build>
+            <Settings
+                ApplicationIcon = "\\Cassio\Modeling\Model_Programs\ResultsWarehouse\CharacterizationQueriesManager\App.ico"
+                AssemblyKeyContainerName = ""
+                AssemblyName = "CharacterizationTool"
+                AssemblyOriginatorKeyFile = ""
+                DefaultClientScript = "JScript"
+                DefaultHTMLPageLayout = "Grid"
+                DefaultTargetSchema = "IE50"
+                DelaySign = "false"
+                OutputType = "WinExe"
+                PreBuildEvent = ""
+                PostBuildEvent = ""
+                RootNamespace = "SystemsAnalysis.Characterization"
+                RunPostBuildEvent = "OnBuildSuccess"
+                StartupObject = ""
+            >
+                <Config
+                    Name = "Debug"
+                    AllowUnsafeBlocks = "false"
+                    BaseAddress = "285212672"
+                    CheckForOverflowUnderflow = "false"
+                    ConfigurationOverrideFile = ""
+                    DefineConstants = "DEBUG;TRACE"
+                    DocumentationFile = "SystemsAnalysis.Characterization.CharacterizationTool.xml"
+                    DebugSymbols = "true"
+                    FileAlignment = "4096"
+                    IncrementalBuild = "false"
+                    NoStdLib = "false"
+                    NoWarn = ""
+                    Optimize = "false"
+                    OutputPath = "bin\Debug\"
+                    RegisterForComInterop = "false"
+                    RemoveIntegerChecks = "false"
+                    TreatWarningsAsErrors = "false"
+                    WarningLevel = "4"
+                />
+                <Config
+                    Name = "Release"
+                    AllowUnsafeBlocks = "false"
+                    BaseAddress = "285212672"
+                    CheckForOverflowUnderflow = "false"
+                    ConfigurationOverrideFile = ""
+                    DefineConstants = "TRACE"
+                    DocumentationFile = "SystemsAnalysis.Characterization.CharacterizationTool.xml"
+                    DebugSymbols = "false"
+                    FileAlignment = "4096"
+                    IncrementalBuild = "false"
+                    NoStdLib = "false"
+                    NoWarn = ""
+                    Optimize = "true"
+                    OutputPath = "bin\Release\"
+                    RegisterForComInterop = "false"
+                    RemoveIntegerChecks = "false"
+                    TreatWarningsAsErrors = "false"
+                    WarningLevel = "4"
+                />
+            </Settings>
+            <References>
+                <Reference
+                    Name = "System"
+                    AssemblyName = "System"
+                    HintPath = "C:\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.dll"
+                />
+                <Reference
+                    Name = "System.Data"
+                    AssemblyName = "System.Data"
+                    HintPath = "C:\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.Data.dll"
+                />
+                <Reference
+                    Name = "System.Drawing"
+                    AssemblyName = "System.Drawing"
+                    HintPath = "C:\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.Drawing.dll"
+                />
+                <Reference
+                    Name = "System.Windows.Forms"
+                    AssemblyName = "System.Windows.Forms"
+                    HintPath = "C:\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.Windows.Forms.dll"
+                />
+                <Reference
+                    Name = "System.XML"
+                    AssemblyName = "System.Xml"
+                    HintPath = "C:\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.XML.dll"
+                />
+                <Reference
+                    Name = "ESRI.ArcGIS.AxMapControl"
+                    AssemblyName = "ESRI.ArcGIS.AxMapControl"
+                    HintPath = "C:\Program Files\ArcGIS\DotNet\ESRI.ArcGIS.AxMapControl.dll"
+                    AssemblyFolderKey = "hklm\dn\arcgis desktop"
+                    Private = "True"
+                />
+                <Reference
+                    Name = "ESRI.ArcGIS.MapControl"
+                    AssemblyName = "ESRI.ArcGIS.MapControl"
+                    HintPath = "C:\Program Files\ArcGIS\DotNet\ESRI.ArcGIS.MapControl.dll"
+                    AssemblyFolderKey = "hklm\dn\arcgis desktop"
+                    Private = "True"
+                />
+                <Reference
+                    Name = "ESRI.ArcGIS.SystemUI"
+                    AssemblyName = "ESRI.ArcGIS.SystemUI"
+                    HintPath = "C:\Program Files\ArcGIS\DotNet\ESRI.ArcGIS.SystemUI.dll"
+                    AssemblyFolderKey = "hklm\dn\arcgis desktop"
+                    Private = "True"
+                />
+                <Reference
+                    Name = "ESRI.ArcGIS.Carto"
+                    AssemblyName = "ESRI.ArcGIS.Carto"
+                    HintPath = "C:\Program Files\ArcGIS\DotNet\ESRI.ArcGIS.Carto.dll"
+                    AssemblyFolderKey = "hklm\dn\arcgis desktop"
+                    Private = "True"
+                />
+                <Reference
+                    Name = "ESRI.ArcGIS.Geometry"
+                    AssemblyName = "ESRI.ArcGIS.Geometry"
+                    HintPath = "C:\Program Files\ArcGIS\DotNet\ESRI.ArcGIS.Geometry.dll"
+                    AssemblyFolderKey = "hklm\dn\arcgis desktop"
+                    Private = "True"
+                />
+                <Reference
+                    Name = "ESRI.ArcGIS.System"
+                    AssemblyName = "ESRI.ArcGIS.System"
+                    HintPath = "C:\Program Files\ArcGIS\DotNet\ESRI.ArcGIS.System.dll"
+                    AssemblyFolderKey = "hklm\dn\arcgis desktop"
+                    Private = "True"
+                />
+                <Reference
+                    Name = "stdole"
+                    AssemblyName = "stdole"
+                    HintPath = "C:\Program Files\Microsoft.NET\Primary Interop Assemblies\stdole.dll"
+                    AssemblyFolderKey = "hklm\primary interop assemblies"
+                />
+                <Reference
+                    Name = "ESRI.ArcGIS.Display"
+                    AssemblyName = "ESRI.ArcGIS.Display"
+                    HintPath = "C:\Program Files\ArcGIS\DotNet\ESRI.ArcGIS.Display.dll"
+                    AssemblyFolderKey = "hklm\dn\arcgis desktop"
+                    Private = "True"
+                />
+                <Reference
+                    Name = "ESRI.ArcGIS.Geodatabase"
+                    AssemblyName = "ESRI.ArcGIS.Geodatabase"
+                    HintPath = "C:\Program Files\ArcGIS\DotNet\ESRI.ArcGIS.Geodatabase.dll"
+                    AssemblyFolderKey = "hklm\dn\arcgis desktop"
+                    Private = "True"
+                />
+                <Reference
+                    Name = "ESRI.ArcGIS.Utility"
+                    AssemblyName = "ESRI.ArcGIS.Utility"
+                    HintPath = "C:\Program Files\ArcGIS\DotNet\ESRI.ArcGIS.Utility.dll"
+                    AssemblyFolderKey = "hklm\dn\arcgis desktop"
+                    Private = "True"
+                />
+                <Reference
+                    Name = "ESRI.ArcGIS.DataSourcesGDB"
+                    AssemblyName = "ESRI.ArcGIS.DataSourcesGDB"
+                    HintPath = "C:\Program Files\ArcGIS\DotNet\ESRI.ArcGIS.DataSourcesGDB.dll"
+                    AssemblyFolderKey = "hklm\dn\arcgis desktop"
+                    Private = "True"
+                />
+                <Reference
+                    Name = "ESRI.ArcGIS.Catalog"
+                    AssemblyName = "ESRI.ArcGIS.Catalog"
+                    HintPath = "C:\Program Files\ArcGIS\DotNet\ESRI.ArcGIS.Catalog.dll"
+                    AssemblyFolderKey = "hklm\dn\arcgis desktop"
+                    Private = "True"
+                />
+                <Reference
+                    Name = "ESRI.ArcGIS.Framework"
+                    AssemblyName = "ESRI.ArcGIS.Framework"
+                    HintPath = "C:\Program Files\ArcGIS\DotNet\ESRI.ArcGIS.Framework.dll"
+                    AssemblyFolderKey = "hklm\dn\arcgis desktop"
+                    Private = "True"
+                />
+                <Reference
+                    Name = "SystemsAnalysis.DataAccess"
+                    Project = "{D81499E0-ED3E-4C85-9F8E-72C263AA24C4}"
+                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
+                />
+                <Reference
+                    Name = "SystemsAnalysis.MapControl.PanZoom"
+                    Project = "{120CF791-801E-4669-8D65-174DCABF47EC}"
+                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
+                />
+                <Reference
+                    Name = "SystemsAnalysis.MapControl.SelectCommands"
+                    Project = "{63AD8943-A61C-4AC7-B6F8-DA20E063E64F}"
+                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
+                />
+                <Reference
+                    Name = "SystemsAnalysis.Tracer"
+                    Project = "{C8B24858-1D99-4519-9A1D-CF129CED9ADA}"
+                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
+                />
+                <Reference
+                    Name = "SystemsAnalysis.Modeling"
+                    Project = "{54555B74-906E-4D29-9BC3-7653805B6AD0}"
+                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
+                />
+                <Reference
+                    Name = "SystemsAnalysis.Utils.ArcObjects.MapControl.MapControlHelper"
+                    Project = "{D08971DD-9DAD-4DE1-88CA-35EE30AB6B23}"
+                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
+                />
+                <Reference
+                    Name = "SystemsAnalysis.Types"
+                    Project = "{AFB81561-9859-4FA2-86AD-0C6833488E41}"
+                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
+                />
+                <Reference
+                    Name = "SHDocVw"
+                    Guid = "{EAB22AC0-30C1-11CF-A7EB-0000C05BAE0B}"
+                    VersionMajor = "1"
+                    VersionMinor = "1"
+                    Lcid = "0"
+                    WrapperTool = "tlbimp"
+                />
+                <Reference
+                    Name = "AxSHDocVw"
+                    Guid = "{EAB22AC0-30C1-11CF-A7EB-0000C05BAE0B}"
+                    VersionMajor = "1"
+                    VersionMinor = "1"
+                    Lcid = "0"
+                    WrapperTool = "aximp"
+                />
+                <Reference
+                    Name = "SystemsAnalysis.Modeling.PumpStations"
+                    Project = "{3623E8C3-4DFB-4635-801C-C577328937C3}"
+                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
+                />
+                <Reference
+                    Name = "SystemsAnalysis.Utils.EventHandlerUtils"
+                    Project = "{9AE8BF25-3ABF-402D-BC63-841E8588D20C}"
+                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
+                />
+                <Reference
+                    Name = "CGIS.MapWorks.ESRIUtils"
+                    AssemblyName = "CGIS.MapWorks.ESRIUtils"
+                    HintPath = "..\..\DotNet\ArcObjectsUtils\CGISUtils\ESRIUtils\bin\Release\CGIS.MapWorks.ESRIUtils.dll"
+                />
+            </References>
+        </Build>
+        <Files>
+            <Include>
+                <File
+                    RelPath = "App.ico"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "AssemblyInfo.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "CharacterizationEngine.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "CharacterizationExceptions.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "CharacterizationForm.cs"
+                    SubType = "Form"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "CharacterizationForm.resx"
+                    DependentUpon = "CharacterizationForm.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "Default_Settings.xml"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "DSCHydraulic.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "DSCHydraulics.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "InputBox.cs"
+                    SubType = "Form"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "InputBox.resx"
+                    DependentUpon = "InputBox.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "LinkHydraulic.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "LinkHydraulics.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "NodeHydraulic.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "NodeHydraulics.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Settings.xsd"
+                    BuildAction = "Content"
+                    Generator = "MSDataSetGenerator"
+                    LastGenOutput = "Settings.cs"
+                />
+                <File
+                    RelPath = "Settings.cs"
+                    DependentUpon = "Settings.xsd"
+                    SubType = "code"
+                    BuildAction = "Compile"
+                    DesignTime = "True"
+                    AutoGen = "True"
+                />
+                <File
+                    RelPath = "Settings.xsx"
+                    DependentUpon = "Settings.xsd"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "StatusForm.cs"
+                    SubType = "Form"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "StatusForm.resx"
+                    DependentUpon = "StatusForm.cs"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "xml\CharacterizationTable.xml"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "xml\CharacterizationTableSchema.xsd"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "xml\CharacterizationTableSchema.xsx"
+                    DependentUpon = "CharacterizationTableSchema.xsd"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "xml\excel_char.xsl"
+                    BuildAction = "Content"
+                />
+            </Include>
+        </Files>
+    </CSHARP>
+</VisualStudioProject>
+

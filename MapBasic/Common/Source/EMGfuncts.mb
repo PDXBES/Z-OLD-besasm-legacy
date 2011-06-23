@@ -1,0 +1,85 @@
+include "MapBasic.def"
+include "..\inc\EMGfuncts.def"
+
+
+Function GetDiscoClass(SanFlowType as string, StormFlowType as string) As String
+    Do Case StormFlowType
+    Case "C", "D"
+        GetDiscoClass = "D"
+        Exit Function
+    Case "0"
+        'need to check san
+    Case Else
+    'should not occur
+        GetDiscoClass = "E"
+        Exit Function
+    End Case
+    
+    DO Case SanFlowType
+    Case "C"
+        GetDiscoClass = "C"
+        Exit Function
+    Case "S"
+        GetDiscoClass = "S"
+        Exit Function
+    Case Else
+        'should not occur
+        GetDiscoClass = "E"
+    End Case
+        
+End Function
+
+
+    
+
+'***********************************************************************
+' The following subs are local to the module
+'***********************************************************************
+
+'algorithm to convert decimal to binary
+'Let D= the number we wish to convert from decimal to binary 
+'Find P, such that 2^P is the largest power of two smaller than D. 
+'Repeat until P<0 
+    'If 2^P<=D then 
+        'put 1 into column P 
+        'subtract 2^P from D 
+    'Else 
+        'put 0 into column P 
+    'End if 
+    'Subtract 1 from P 
+    
+sub andstringdec(strflag as string, decflag as integer)
+    dim i, d, p as integer
+    dim s as string
+    
+    's one bit (character)  greater than strflag
+    s = ""
+    p = 0
+    d = decflag
+    
+    'do while 2^p < decflag
+    '    p = p+1
+    'loop
+    
+    p = len(strflag)
+    do while not (P<0) 
+        If 2^P<=D then 
+            s = s + "1"
+            d = d - 2^p
+        Else 
+            s = s + "0"
+        End if 
+        p = p - 1 
+    loop
+    
+    i = 1
+    p = len(strflag)
+    do while i <=p 
+        if mid$(s,i+1,1) = "1" then 
+		    strflag = mid$(strflag,1,i-1) + "1" + mid$(strflag,i+1,p)
+ 	    end if
+        i = i + 1
+    loop
+    'Call loggit(s + ",->> " + strflag)
+    
+end sub

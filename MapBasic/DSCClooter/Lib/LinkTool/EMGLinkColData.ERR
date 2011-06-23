@@ -1,0 +1,15 @@
+(emglinkcoldata.mb:5) No prototype declared for Sub procedure or Function LoadReqColumnArray.  Too many errors.  Error information has been lost.
+(emglinkcoldata.mb:7) Variable gReqCols not defined.  Too many errors.  Error information has been lost.
+(emglinkcoldata.mb:7) Unrecognized command: (.  Too many errors.  Error information has been lost.
+(emglinkcoldata.mb:10) type is an invalid command in a Sub procedure or Function.  Too many errors.  Error information has been lost.
+(emglinkcoldata.mb:14) Found [=] while searching for [An identifier].  Too many errors.  Error information has been lost.
+(emglinkcoldata.mb:18) Found [=] while searching for [An identifier].  Too many errors.  Error information has been lost.
+(emglinkcoldata.mb:22) Found [=] while searching for [An identifier].  Too many errors.  Error information has been lost.
+(emglinkcoldata.mb:26) [End sub] found without corresponding sub statement.  Too many errors.  Error information has been lost.
+(emglinkcoldata.mb:28) No prototype declared for Sub procedure or Function LoadReqColumnArrayDelMst.  Too many errors.  Error information has been lost.
+(emglinkcoldata.mb:30) Variable gReqCols not defined.  Too many errors.  Error information has been lost.
+(emglinkcoldata.mb:30) Unrecognized command: (.  Too many errors.  Error information has been lost.
+(emglinkcoldata.mb:33) type is an invalid command in a Sub procedure or Function.  Too many errors.  Error information has been lost.
+(emglinkcoldata.mb:35) print is not valid outside a Sub procedure or Function.  Too many errors.  Error information has been lost.
+(emglinkcoldata.mb:36) end is not valid outside a Sub procedure or Function.  Too many errors.  Error information has been lost.
+(emglinkcoldata.mb:37) No prototype declared for Sub procedure or Function Sub.  Too many errors.  Error information has been lost.

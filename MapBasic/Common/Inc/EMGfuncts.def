@@ -1,0 +1,4 @@
+
+
+declare Function GetDiscoClass(SanFlowType as string, StormFlowType as string) As String
+declare sub andstringdec(strflag as string, decflag as integer)

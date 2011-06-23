@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<namespace name="uMSAccessManager">
+  <class name="TMSAccessManager">
+    <ancestor name="TObject" namespace="System">
+      <methodref name="Create" visibility="public">
+      </methodref>
+      <methodref name="Free" visibility="public">
+      </methodref>
+      <methodref name="InitInstance" visibility="public">
+      </methodref>
+      <methodref name="CleanupInstance" visibility="public">
+      </methodref>
+      <methodref name="ClassType" visibility="public">
+      </methodref>
+      <methodref name="ClassName" visibility="public">
+      </methodref>
+      <methodref name="ClassNameIs" visibility="public">
+      </methodref>
+      <methodref name="ClassParent" visibility="public">
+      </methodref>
+      <methodref name="ClassInfo" visibility="public">
+      </methodref>
+      <methodref name="InstanceSize" visibility="public">
+      </methodref>
+      <methodref name="InheritsFrom" visibility="public">
+      </methodref>
+      <methodref name="MethodAddress" visibility="public">
+      </methodref>
+      <methodref name="MethodName" visibility="public">
+      </methodref>
+      <methodref name="FieldAddress" visibility="public">
+      </methodref>
+      <methodref name="GetInterface" visibility="public">
+      </methodref>
+      <methodref name="GetInterfaceEntry" visibility="public">
+      </methodref>
+      <methodref name="GetInterfaceTable" visibility="public">
+      </methodref>
+      <methodref name="SafeCallException" visibility="public">
+      </methodref>
+      <methodref name="AfterConstruction" visibility="public">
+      </methodref>
+      <methodref name="BeforeDestruction" visibility="public">
+      </methodref>
+      <methodref name="Dispatch" visibility="public">
+      </methodref>
+      <methodref name="DefaultHandler" visibility="public">
+      </methodref>
+      <methodref name="NewInstance" visibility="public">
+      </methodref>
+      <methodref name="FreeInstance" visibility="public">
+      </methodref>
+      <methodref name="Destroy" visibility="public">
+      </methodref>
+    </ancestor>
+    <members>
+      <field name="fAccessApp" type="OleVariant" visibility="private" />
+      <field name="fCommand" type="TADOCommand" visibility="private" />
+      <field name="fConnection" type="TADOConnection" visibility="private" />
+      <constructor name="Create" visibility="public">
+        <parameters>
+        </parameters>
+      </constructor>
+      <constructor name="Create" visibility="public">
+        <parameters>
+          <parameter name="ADatabase" type="TFileName" />
+        </parameters>
+      </constructor>
+      <destructor name="Destroy" visibility="public">
+        <parameters>
+        </parameters>
+      </destructor>
+      <procedure name="Relink" visibility="public">
+        <parameters>
+          <parameter name="LinkTable" type="string" />
+          <parameter name="SourceTable" type="string" />
+          <parameter name="SourceDatabase" type="string" />
+        </parameters>
+      </procedure>
+      <procedure name="Run" visibility="public">
+        <parameters>
+          <parameter name="FunctionName" type="string" />
+          <parameter name="Arguments">
+            <array name="Arguments">
+              <element type="Variant" />
+            </array>
+          </parameter>
+        </parameters>
+      </procedure>
+      <procedure name="RunQuery" visibility="public">
+        <parameters>
+          <parameter name="QueryName" type="string" />
+        </parameters>
+      </procedure>
+      <procedure name="Link" visibility="public">
+        <parameters>
+          <parameter name="LinkTable" type="string" />
+          <parameter name="SourceTable" type="string" />
+          <parameter name="SourceDatabase" type="string" />
+        </parameters>
+      </procedure>
+      <procedure name="CreateDatabase" visibility="public">
+        <parameters>
+          <parameter name="ADatabase" type="TFileName" />
+        </parameters>
+      </procedure>
+      <procedure name="OpenDatabase" visibility="public">
+        <parameters>
+          <parameter name="ADatabase" type="TFileName" />
+        </parameters>
+      </procedure>
+      <procedure name="CloseDatabase" visibility="public">
+      </procedure>
+      <procedure name="SendCommand" visibility="public">
+        <parameters>
+          <parameter name="ACommand" type="string" />
+        </parameters>
+      </procedure>
+      <function name="RecordSetCount" visibility="public">
+        <parameters>
+          <parameter name="ARecordSet" type="string" />
+          <retval type="Integer" />
+        </parameters>
+      </function>
+      <function name="RecordCount" visibility="public">
+        <parameters>
+          <parameter name="TableName" type="string" />
+          <retval type="Integer" />
+        </parameters>
+      </function>
+      <function name="TableExists" visibility="public">
+        <parameters>
+          <parameter name="TableName" type="string" />
+          <retval type="Boolean" />
+        </parameters>
+      </function>
+      <function name="SetQueryDef" visibility="public">
+        <parameters>
+          <parameter name="QueryName" type="string" />
+          <parameter name="QueryDef" type="string" />
+          <retval type="Boolean" />
+        </parameters>
+      </function>
+    </members>
+  </class>
+  <variable name="MSAccessManager" type="TMSAccessManager" />
+</namespace>
