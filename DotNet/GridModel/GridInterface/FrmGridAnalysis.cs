@@ -15,7 +15,7 @@ using SystemsAnalysis.Utils.DataMobility;
 namespace SystemsAnalysis.Grid.GridAnalysis
 {
     public partial class FrmGridAnalysis : Form
-    {    
+    { 
         GridModelEngine gridModelEngine;
         GridModelOutput gridModelOutput;
 
@@ -92,28 +92,31 @@ namespace SystemsAnalysis.Grid.GridAnalysis
                 {
                     domain = domain + ".";
                 }
-
-                serverIsUsable = SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_GridResults");
-                serverIsUsable = serverIsUsable + SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_ZONING_IMP");
-                serverIsUsable = serverIsUsable + SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_variables");
-                serverIsUsable = serverIsUsable + SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_FE_SELECTION_SETS");
-                serverIsUsable = serverIsUsable + SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_FE_SELECTION_SET_AREAS");
-                serverIsUsable = serverIsUsable + SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_FE_SCENARIOS");
-                serverIsUsable = serverIsUsable + SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_FE_SCENARIO_X_PROCESS");
-                serverIsUsable = serverIsUsable + SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_FE_PROCESS_GROUP");
-                serverIsUsable = serverIsUsable + SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_FE_PROCESS");
-                serverIsUsable = serverIsUsable + SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_FE_MODEL_RUN");
-                serverIsUsable = serverIsUsable + SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_FE_HYETOGRAPHS");
-                serverIsUsable = serverIsUsable + SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_FE_HYETOGRAPH_DATA");
-                serverIsUsable = serverIsUsable + SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_FE_GRID_PROJECTS");
-                serverIsUsable = serverIsUsable + SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_Contaminants");
-                serverIsUsable = serverIsUsable + SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_BMP_TYPE_TABLE_GENERAL");
-                serverIsUsable = serverIsUsable + SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_BMP_PERFORMANCE");
-                serverIsUsable = serverIsUsable + SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_pollutant_loadings");
-                if (serverIsUsable != "")
+                if (SQLisSource == true)
                 {
-                    MessageBox.Show("The server you have selected is not acceptable to use for the GRIDMODEL");
-                    MessageBox.Show(serverIsUsable);
+                    serverIsUsable = SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_GridResults");
+                    serverIsUsable = serverIsUsable + SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_ZONING_IMP");
+                    serverIsUsable = serverIsUsable + SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_variables");
+                    serverIsUsable = serverIsUsable + SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_FE_SELECTION_SETS");
+                    serverIsUsable = serverIsUsable + SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_FE_SELECTION_SET_AREAS");
+                    serverIsUsable = serverIsUsable + SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_FE_SCENARIOS");
+                    serverIsUsable = serverIsUsable + SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_FE_SCENARIO_X_PROCESS");
+                    serverIsUsable = serverIsUsable + SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_FE_PROCESS_GROUP");
+                    serverIsUsable = serverIsUsable + SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_FE_PROCESS");
+                    serverIsUsable = serverIsUsable + SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_FE_MODEL_RUN");
+                    serverIsUsable = serverIsUsable + SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_FE_HYETOGRAPHS");
+                    serverIsUsable = serverIsUsable + SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_FE_HYETOGRAPH_DATA");
+                    serverIsUsable = serverIsUsable + SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_FE_GRID_PROJECTS");
+                    //serverIsUsable = serverIsUsable + SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_Contaminants");
+                    serverIsUsable = serverIsUsable + SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_BMP_TYPE_TABLE_GENERAL");
+                    serverIsUsable = serverIsUsable + SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_BMP_PERFORMANCE");
+                    serverIsUsable = serverIsUsable + SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_pollutant_loadings");
+
+                    if (serverIsUsable != "")
+                    {
+                        MessageBox.Show("The server you have selected is not acceptable to use for the GRIDMODEL");
+                        MessageBox.Show(serverIsUsable);
+                    }
                 }
                 //if the user has selected the access source radio button, then you also have to try to import the 
                 //access database.  If the access database import fails, then you need to return to the
@@ -122,12 +125,12 @@ namespace SystemsAnalysis.Grid.GridAnalysis
                 {
 
                     //user provided path of the source access database
-                    System.Windows.Forms.FolderBrowserDialog theFolderBrowserDialog = new FolderBrowserDialog();
+                    System.Windows.Forms.OpenFileDialog theFolderBrowserDialog = new OpenFileDialog();
 
                     DialogResult result = theFolderBrowserDialog.ShowDialog();
                     if(result == DialogResult.OK)
                     {
-                        string AccessString = theFolderBrowserDialog.SelectedPath;
+                        string AccessString = theFolderBrowserDialog.FileName;
 
                         string inputDatabaseStringForAccess = "ODBC;"/*DRIVER={sql server}*/+ ";DSN=" + server + ";DATABASE = " + database;
                         if (trustedConnection == true)
@@ -147,20 +150,27 @@ namespace SystemsAnalysis.Grid.GridAnalysis
                         {
                             outputDatabaseStringForAccess += ";Persist Security Info=True;User ID=" + userID + ";Password=" + password;
                         }
-                        serverIsUsable = serverIsUsable + DataMobility.SQLCopyAccessTable("ZONING_IMP", AccessString, "GRID_ZONING_IMP", outputDatabaseStringForAccess);
+                        //We do not need zoning_imp for the grid model to work
+                        //however, ZONING_IMP isn't actually stored in any access databases I can find.
+                        //DataMobility.SQLCopyAccessTable("ZONING_IMP", AccessString, "GRID_ZONING_IMP", outputDatabaseStringForAccess);
+                        //serverIsUsable = DataMobility.SQLCopyAccessTable("variables", AccessString, "GRID_variables", outputDatabaseStringForAccess);
+                        serverIsUsable = "";
+                        serverIsUsable = serverIsUsable + DataMobility.SQLCopyAccessTable("FE_SELECTION_SETS", AccessString, "GRID_FE_SELECTION_SETS", outputDatabaseStringForAccess, "selection_set_id");
+                        serverIsUsable = serverIsUsable + DataMobility.SQLCopyAccessTable("FE_SELECTION_SET_AREAS", AccessString, "GRID_FE_SELECTION_SET_AREAS", outputDatabaseStringForAccess, "selection_set_area_id");
+                        serverIsUsable = serverIsUsable + DataMobility.SQLCopyAccessTable("FE_SCENARIOS", AccessString, "GRID_FE_SCENARIOS", outputDatabaseStringForAccess, "scenario_id");
+                        serverIsUsable = serverIsUsable + DataMobility.SQLCopyAccessTable("FE_SCENARIO_X_PROCESS", AccessString, "GRID_FE_SCENARIO_X_PROCESS", outputDatabaseStringForAccess, "scenario_x_process_id");
+                        serverIsUsable = serverIsUsable + DataMobility.SQLCopyAccessTable("FE_PROCESS_GROUP", AccessString, "GRID_FE_PROCESS_GROUP", outputDatabaseStringForAccess, "process_group_id");
+                        serverIsUsable = serverIsUsable + DataMobility.SQLCopyAccessTable("FE_PROCESS", AccessString, "GRID_FE_PROCESS", outputDatabaseStringForAccess, "process_id");
+                        serverIsUsable = serverIsUsable + DataMobility.SQLCopyAccessTable("FE_MODEL_RUN", AccessString, "GRID_FE_MODEL_RUN", outputDatabaseStringForAccess, "model_run_id");
+                        serverIsUsable = serverIsUsable + DataMobility.SQLCopyAccessTable("FE_HYETOGRAPHS", AccessString, "GRID_FE_HYETOGRAPHS", outputDatabaseStringForAccess, "hyetograph_id");
+                        serverIsUsable = serverIsUsable + DataMobility.SQLCopyAccessTable("FE_HYETOGRAPH_DATA", AccessString, "GRID_FE_HYETOGRAPH_DATA", outputDatabaseStringForAccess, "hyetograph_data_id");
+                        serverIsUsable = serverIsUsable + DataMobility.SQLCopyAccessTable("FE_GRID_PROJECTS", AccessString, "GRID_FE_GRID_PROJECTS", outputDatabaseStringForAccess, "project_id");
                         serverIsUsable = serverIsUsable + DataMobility.SQLCopyAccessTable("variables", AccessString, "GRID_variables", outputDatabaseStringForAccess);
-                        serverIsUsable = serverIsUsable + DataMobility.SQLCopyAccessTable("FE_SELECTION_SETS", AccessString, "GRID_FE_SELECTION_SETS", outputDatabaseStringForAccess);
-                        serverIsUsable = serverIsUsable + DataMobility.SQLCopyAccessTable("FE_SELECTION_SET_AREAS", AccessString, "GRID_FE_SELECTION_SET_AREAS", outputDatabaseStringForAccess);
-                        serverIsUsable = serverIsUsable + DataMobility.SQLCopyAccessTable("FE_SCENARIOS", AccessString, "GRID_FE_SCENARIOS", outputDatabaseStringForAccess);
-                        serverIsUsable = serverIsUsable + DataMobility.SQLCopyAccessTable("FE_SCENARIO_X_PROCESS", AccessString, "GRID_FE_SCENARIO_X_PROCESS", outputDatabaseStringForAccess);
-                        serverIsUsable = serverIsUsable + DataMobility.SQLCopyAccessTable("FE_PROCESS_GROUP", AccessString, "GRID_FE_PROCESS_GROUP", outputDatabaseStringForAccess);
-                        serverIsUsable = serverIsUsable + DataMobility.SQLCopyAccessTable("FE_PROCESS", AccessString, "GRID_FE_PROCESS", outputDatabaseStringForAccess);
-                        serverIsUsable = serverIsUsable + DataMobility.SQLCopyAccessTable("FE_MODEL_RUN", AccessString, "GRID_FE_MODEL_RUN", outputDatabaseStringForAccess);
-                        serverIsUsable = serverIsUsable + DataMobility.SQLCopyAccessTable("FE_HYETOGRAPHS", AccessString, "GRID_FE_HYETOGRAPHS", outputDatabaseStringForAccess);
-                        serverIsUsable = serverIsUsable + DataMobility.SQLCopyAccessTable("FE_HYETOGRAPH_DATA", AccessString, "GRID_FE_HYETOGRAPH_DATA", outputDatabaseStringForAccess);
-                        serverIsUsable = serverIsUsable + DataMobility.SQLCopyAccessTable("FE_GRID_PROJECTS", AccessString, "GRID_FE_GRID_PROJECTS", outputDatabaseStringForAccess);
-                        serverIsUsable = serverIsUsable + DataMobility.SQLCopyAccessTable("Contaminants", AccessString, "GRID_Contaminants", outputDatabaseStringForAccess);
-                        serverIsUsable = serverIsUsable + DataMobility.SQLCopyAccessTable("BMP_TYPE_TABLE_GENERAL", AccessString, "GRID_BMP_TYPE_TABLE_GENERAL", outputDatabaseStringForAccess);
+                        serverIsUsable = serverIsUsable + DataMobility.SQLCopyAccessTable("ZONING_IMP", AccessString, "GRID_ZONING_IMP", outputDatabaseStringForAccess, "ZONING_CODE");
+                        //We do not need the contaminants table for the grid model to work
+                        //DataMobility.SQLCopyAccessTable("Contaminants", AccessString, "GRID_Contaminants", outputDatabaseStringForAccess);
+                        //We do not need BMP_TYPE_TABLE_GENERAL for the grid model to work
+                        //DataMobility.SQLCopyAccessTable("BMP_TYPE_TABLE_GENERAL", AccessString, "GRID_BMP_TYPE_TABLE_GENERAL", outputDatabaseStringForAccess);
                     }
                     else serverIsUsable = serverIsUsable + "Chosen access file is unacceptable";
                 }
@@ -768,7 +778,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis
                 inputDatabase += ";Persist Security Info=True;User ID=" + userID + ";Password=" + password;
             }
             gridModelEngine = new GridModelEngine(projectID, projectDescription,
-                txtGridPath.Text, txtPRFPath.Text, txtMIPPath.Text, txtOSFPath.Text, txtOutputDirectory.Text, inputDatabase);
+                txtGridPath.Text, txtPRFPath.Text, txtMIPPath.Text, txtOSFPath.Text, txtOutputDirectory.Text, inputDatabase, !SQLisSource);
             gridModelEngineBindingSource.DataSource = gridModelEngine.GridModelRuns;
         }
 
@@ -953,7 +963,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis
                         inputDatabase += ";Persist Security Info=True;User ID=" + userID + ";Password=" + password;
                     }
                     gridModelEngine = new GridModelEngine(projectID, projectDescription,
-                txtGridPath.Text, txtPRFPath.Text, txtMIPPath.Text, txtOSFPath.Text, txtOutputDirectory.Text, inputDatabase);
+                txtGridPath.Text, txtPRFPath.Text, txtMIPPath.Text, txtOSFPath.Text, txtOutputDirectory.Text, inputDatabase, !SQLisSource);
                     DataMobility.SQLCopySQLTable("GRID_GridResults", inputDatabase, "GRID_GridResults", outputDatabase);
 
                     DataMobility.SQLCopySQLTable("GRID_ZONING_IMP", inputDatabase, "GRID_ZONING_IMP", outputDatabase);
@@ -968,7 +978,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis
                     DataMobility.SQLCopySQLTable("GRID_FE_HYETOGRAPHS", inputDatabase, "GRID_FE_HYETOGRAPHS", outputDatabase);
                     DataMobility.SQLCopySQLTable("GRID_FE_HYETOGRAPH_DATA", inputDatabase, "GRID_FE_HYETOGRAPH_DATA", outputDatabase);
                     DataMobility.SQLCopySQLTable("GRID_FE_GRID_PROJECTS", inputDatabase, "GRID_FE_GRID_PROJECTS", outputDatabase);
-                    DataMobility.SQLCopySQLTable("GRID_Contaminants", inputDatabase, "GRID_Contaminants", outputDatabase);
+                    //DataMobility.SQLCopySQLTable("GRID_Contaminants", inputDatabase, "GRID_Contaminants", outputDatabase);
                     DataMobility.SQLCopySQLTable("GRID_BMP_TYPE_TABLE_GENERAL", inputDatabase, "GRID_BMP_TYPE_TABLE_GENERAL", outputDatabase);
                     DataMobility.SQLCopySQLTable("GRID_BMP_PERFORMANCE", inputDatabase, "GRID_BMP_PERFORMANCE", outputDatabase);
                     DataMobility.SQLCopySQLTable("GRID_pollutant_loadings", inputDatabase, "GRID_pollutant_loadings", outputDatabase);
@@ -1006,7 +1016,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis
                                 inputDatabase += ";Persist Security Info=True;User ID=" + userID + ";Password=" + password;
                             }
                             gridModelEngine = new GridModelEngine(projectID, projectDescription,
-                txtGridPath.Text, txtPRFPath.Text, txtMIPPath.Text, txtOSFPath.Text, txtOutputDirectory.Text, inputDatabase);
+                txtGridPath.Text, txtPRFPath.Text, txtMIPPath.Text, txtOSFPath.Text, txtOutputDirectory.Text, inputDatabase, !SQLisSource);
                             DataMobility.SQLCopySQLTable("GRID_GridResults", inputDatabase, "GRID_GridResults", outputDatabase);
 
                             DataMobility.SQLCopySQLTable("GRID_ZONING_IMP", inputDatabase, "GRID_ZONING_IMP", outputDatabase);
@@ -1021,7 +1031,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis
                             DataMobility.SQLCopySQLTable("GRID_FE_HYETOGRAPHS", inputDatabase, "GRID_FE_HYETOGRAPHS", outputDatabase);
                             DataMobility.SQLCopySQLTable("GRID_FE_HYETOGRAPH_DATA", inputDatabase, "GRID_FE_HYETOGRAPH_DATA", outputDatabase);
                             DataMobility.SQLCopySQLTable("GRID_FE_GRID_PROJECTS", inputDatabase, "GRID_FE_GRID_PROJECTS", outputDatabase);
-                            DataMobility.SQLCopySQLTable("GRID_Contaminants", inputDatabase, "GRID_Contaminants", outputDatabase);
+                            //DataMobility.SQLCopySQLTable("GRID_Contaminants", inputDatabase, "GRID_Contaminants", outputDatabase);
                             DataMobility.SQLCopySQLTable("GRID_BMP_TYPE_TABLE_GENERAL", inputDatabase, "GRID_BMP_TYPE_TABLE_GENERAL", outputDatabase);
                             DataMobility.SQLCopySQLTable("GRID_BMP_PERFORMANCE", inputDatabase, "GRID_BMP_PERFORMANCE", outputDatabase);
                             DataMobility.SQLCopySQLTable("GRID_pollutant_loadings", inputDatabase, "GRID_pollutant_loadings", outputDatabase);
@@ -1055,7 +1065,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis
                         DataMobility.SQLCopySQLTable("GRID_FE_HYETOGRAPHS", inputDatabase, "GRID_FE_HYETOGRAPHS", outputDatabase);
                         DataMobility.SQLCopySQLTable("GRID_FE_HYETOGRAPH_DATA", inputDatabase, "GRID_FE_HYETOGRAPH_DATA", outputDatabase);
                         DataMobility.SQLCopySQLTable("GRID_FE_GRID_PROJECTS", inputDatabase, "GRID_FE_GRID_PROJECTS", outputDatabase);
-                        DataMobility.SQLCopySQLTable("GRID_Contaminants", inputDatabase, "GRID_Contaminants", outputDatabase);
+                        //DataMobility.SQLCopySQLTable("GRID_Contaminants", inputDatabase, "GRID_Contaminants", outputDatabase);
                         DataMobility.SQLCopySQLTable("GRID_BMP_TYPE_TABLE_GENERAL", inputDatabase, "GRID_BMP_TYPE_TABLE_GENERAL", outputDatabase);
                         DataMobility.SQLCopySQLTable("GRID_BMP_PERFORMANCE", inputDatabase, "GRID_BMP_PERFORMANCE", outputDatabase);
                         DataMobility.SQLCopySQLTable("GRID_pollutant_loadings", inputDatabase, "GRID_pollutant_loadings", outputDatabase);

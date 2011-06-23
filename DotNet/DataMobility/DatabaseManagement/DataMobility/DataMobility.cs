@@ -19,6 +19,78 @@ namespace SystemsAnalysis.Utils.DataMobility
 {
     public class DataMobility
     {
+        //this version of SQLCopyAccessTable is for tables that have primary keys you want to preserve.
+        public static string SQLCopyAccessTable(string AccessTableName, string sourceDatabase, string SQLTableName, string SQLDB, string primaryKey)
+        {
+            System.Data.DataColumn[] keys = new System.Data.DataColumn[1];
+            System.Data.DataColumn column;
+
+            string exceptionString = "";
+            System.Data.DataTable table = new System.Data.DataTable();
+            //dao.TableDef linkTable;
+            string linkTableConnection = "Provider=Microsoft.Jet.OleDb.4.0;DATA SOURCE=" + sourceDatabase;
+            //linkTable.SourceTableName = tableName;
+            SqlConnection thisSQLDB = new SqlConnection(SQLDB);
+            thisSQLDB.Open();
+
+            string DROPsql = "DECLARE @result int SELECT @result = case when object_id('" + SQLTableName + "')is not null then 1 else 0  end; if @result = 1 Drop Table " + SQLTableName;
+            SqlCommand cmd = new SqlCommand(DROPsql, thisSQLDB);
+            try
+            {
+                cmd.CommandTimeout = 0;
+                cmd.ExecuteNonQuery();
+                OleDbDataAdapter accDataAdapter = new OleDbDataAdapter("SELECT * FROM " + AccessTableName, linkTableConnection);
+                accDataAdapter.Fill(table);
+                SqlTableCreator theCreator = new SqlTableCreator(thisSQLDB);
+                table.TableName = SQLTableName;
+                column = table.Columns[primaryKey];
+                keys[0] = column;
+                table.PrimaryKey = keys;
+
+                try
+                {
+                    theCreator.CreateFromDataTable(table);
+                    //Open a connection with destination database;
+                    using (SqlConnection connection =
+                           new SqlConnection(thisSQLDB.ConnectionString))
+                    {
+                        connection.Open();
+
+                        //Open bulkcopy connection.
+                        using (SqlBulkCopy bulkcopy = new SqlBulkCopy(connection))
+                        {
+                            //Set destination table name
+                            //to table previously created.
+                            bulkcopy.DestinationTableName = table.TableName;
+
+                            try
+                            {
+                                bulkcopy.BulkCopyTimeout = 0;
+                                bulkcopy.WriteToServer(table);
+                            }
+                            catch (Exception ex)
+                            {
+                                Console.WriteLine(ex.Message);
+                                exceptionString = exceptionString + ex.ToString();
+                            }
+
+                            connection.Close();
+                        }
+                    }
+                }
+                catch (SqlException ae)
+                {
+                    exceptionString = exceptionString + ae.ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                exceptionString = exceptionString + ex.ToString();
+            }
+            thisSQLDB.Close();
+            return exceptionString;
+        }
+
         public static string SQLCopyAccessTable(string AccessTableName, string sourceDatabase, string SQLTableName, string SQLDB)
         {
             string exceptionString = "";
@@ -29,7 +101,7 @@ namespace SystemsAnalysis.Utils.DataMobility
             SqlConnection thisSQLDB = new SqlConnection(SQLDB);
             thisSQLDB.Open();
 
-            string DROPsql = "DROP TABLE " + SQLTableName;
+            string DROPsql = "DECLARE @result int SELECT @result = case when object_id('"+ SQLTableName+"')is not null then 1 else 0  end; if @result = 1 Drop Table " + SQLTableName;
             SqlCommand cmd = new SqlCommand(DROPsql, thisSQLDB);
             try
             {
@@ -125,6 +197,7 @@ namespace SystemsAnalysis.Utils.DataMobility
             System.Data.DataTable inputTable = new System.Data.DataTable();
             //System.Data.DataTable outputTable = new System.Data.DataTable();
             SqlConnection outputDatabaseConnection = new SqlConnection(outputDatabase);
+            SqlDataAdapter SQLInputDataAdapter;
             outputDatabaseConnection.Open();
 
             //remove any existing matching output table from the output database
@@ -141,10 +214,9 @@ namespace SystemsAnalysis.Utils.DataMobility
             }
             try
             {
-                //copying to access should be ok here.
-                SqlDataAdapter SQLInputDataAdapter = new SqlDataAdapter("SELECT * FROM " + SQLInputTableName, inputDatabase);
-
+                SQLInputDataAdapter = new SqlDataAdapter("SELECT * FROM " + SQLInputTableName, inputDatabase);
                 SQLInputDataAdapter.Fill(inputTable);
+
                 SqlTableCreator theCreator = new SqlTableCreator(outputDatabaseConnection);
                 inputTable.TableName = SQLInputTableName;
                 try
@@ -187,7 +259,6 @@ namespace SystemsAnalysis.Utils.DataMobility
                 //write error message
             }
         }
-
 
     }
 }
