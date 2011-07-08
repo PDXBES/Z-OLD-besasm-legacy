@@ -21,9 +21,6 @@ namespace SWI_2
             InitializeComponent();
         }
 
-
-
-
         private void FormFieldSurveyView_Load(object sender, EventArgs e)
         {
             //System.Security.Principal.WindowsIdentity ident = System.Security.Principal.WindowsIdentity.GetCurrent();
@@ -55,12 +52,13 @@ namespace SWI_2
             //MessageBox.Show((this.sWSP_MESH1TableAdapter.SWI_GET_SPID()).ToString());
             tempGlobal_id = -1000 * (int)((Int16)this.sWSP_MESH1TableAdapter.SWI_GET_SPID());
             //fill the FieldSurveypageview datatable with the data from the MESH1 datatable
-            foreach(DataRow r in this.sANDBOXDataSet.SWSP_MESH1)
+            /*foreach(DataRow r in this.sANDBOXDataSet.SWSP_MESH1)
             {
                 sANDBOXDataSet.DataTableFieldSurvey.LoadDataRow(r.ItemArray, false);
                 sANDBOXDataSet.DataTableFieldSurvey.EndLoadData();
                 sANDBOXDataSet.DataTableFieldSurvey.AcceptChanges();
-            }
+            }*/
+            this.sANDBOXDataSet.SWSP_MESH1.CopyToDataTable(sANDBOXDataSet.DataTableFieldSurvey, LoadOption.PreserveChanges);
 
             //every time the datagridview is refreshed, the default values have to be changed
             sANDBOXDataSet.DataTableFieldSurveyEditable.Columns["watershed"].DefaultValue = comboBoxWatershed.Text;
@@ -127,23 +125,34 @@ namespace SWI_2
                         sANDBOXDataSet.DataTableFieldSurvey.EndLoadData();
                         sANDBOXDataSet.DataTableFieldSurvey.AcceptChanges();
                     }
-                    //this is not the place for this logic.  This should be moved to someplace
-                    //where it wont occur n times per rowAlter
-                    if (r.RowState == DataRowState.Deleted)
+                    
+                    
+                    /*if (r.RowState == DataRowState.Deleted)
                     {
-                        foreach (int globalID in deletedGlobalID)
+                        
+                    }*/
+                }
+
+                //change the action for deleted entries.
+                //If the row is intended to be deleted,
+                //look in the hash set deletedGlobalID
+                //and then in datatablefieldSurvey
+                //if the globalID in deletedGlobalID matches
+                //the globalID from datatablefieldSurvey,
+                //change the action flag in datatablefieldSurvey to 1
+                //and save that change in datatablefieldSurvey.
+                foreach (int globalID in deletedGlobalID)
+                {
+                    foreach (DataRow DR in sANDBOXDataSet.DataTableFieldSurvey)
+                    {
+                        if (globalID == (int)DR["global_id"])
                         {
-                            foreach (DataRow DR in sANDBOXDataSet.DataTableFieldSurvey)
-                            {
-                                if (globalID == (int)DR["global_id"])
-                                {
-                                    DR["action"] = 1;
-                                    sANDBOXDataSet.DataTableFieldSurvey.AcceptChanges();
-                                }
-                            }
+                            DR["action"] = 1;
+                            sANDBOXDataSet.DataTableFieldSurvey.AcceptChanges();
                         }
                     }
                 }
+
                 sANDBOXDataSet.DataTableFieldSurveyEditable.Clear();
                 sANDBOXDataSet.DataTableFieldSurveyEditable.AcceptChanges();
                 foreach (DataRow r in this.sANDBOXDataSet.DataTableFieldSurvey)
@@ -328,7 +337,8 @@ namespace SWI_2
                                                             (string)r["photo_id"],
                                                             (int?)((r["length_ft"] is System.DBNull) ? null :(int?)r["length_ft"]),
                                                             (string)r["node"],
-                                                            (double?)((r["dimension3"] is System.DBNull) ? null : (double?)r["dimension3"]));
+                                                            (double?)((r["dimension3"] is System.DBNull) ? null : (double?)r["dimension3"]),
+                                                            culvert_opening_type/*(int?) ((r["culvert_opening"] is System.DBNull) ? null : (int?)r["culvert_opening"])*/);
                     }
                     else if ((string)r["linktype"] == "Ditch")
                     {
@@ -374,7 +384,10 @@ namespace SWI_2
                                                             (string)r["photo_id"],
                                                             (string)r["ds_node"],
                                                             (string)r["us_node"],
-                                                            (int?)((r["length_ft"] is System.DBNull) ? null : (int?)r["length_ft"]));
+                                                            (int?)((r["length_ft"] is System.DBNull) ? null : (int?)r["length_ft"]),
+                                                            (double?)((r["us_depth_in"] is System.DBNull) ? null : (double?)r["us_depth_in"]),
+                                                            (double?)((r["ds_depth_in"] is System.DBNull) ? null : (double?)r["ds_depth_in"])
+                                                            );
                     }
 
                     this.swsP_PHOTOTableAdapter1.UpdateQueryNewGlobalID(globalID, old_global_id);
@@ -431,7 +444,9 @@ namespace SWI_2
                                                             (string)r["photo_id"],
                                                             (int?)((r["length_ft"] is System.DBNull) ? null : (int?)r["length_ft"]),
                                                             (string)r["node"],
-                                                            (double?)((r["dimension3"] is System.DBNull) ? null : (double?)r["dimension3"])
+                                                            (double?)((r["dimension3"] is System.DBNull) ? null : (double?)r["dimension3"]),
+                                                            culvert_opening_type//(int?)((r["culvert_opening"] is System.DBNull) ? null : (int?)r["culvert_opening"])
+                                                            
                                                             );
                         }
                         else{
@@ -449,6 +464,8 @@ namespace SWI_2
                                                             (int?)((r["length_ft"] is System.DBNull) ? null : (int?)r["length_ft"]),
                                                             ((r["node"] is System.DBNull) ? "" : (string)r["node"]),
                                                             (double?)((r["dimension3"] is System.DBNull) ? null : (double?)r["dimension3"]),
+                                                            culvert_opening_type,//(int?)((r["culvert_opening"] is System.DBNull) ? null : (int?)r["culvert_opening"]),
+                                                            
                                                             (int)r["global_id"]);
                         }
                     }
@@ -516,7 +533,10 @@ namespace SWI_2
                                                                 (string)r["photo_id"],
                                                                 ((r["ds_node"] is System.DBNull) ? "" : (string)r["ds_node"]),
                                                                 ((r["us_node"] is System.DBNull) ? "" : (string)r["us_node"]),
-                                                                (int?)((r["length_ft"] is System.DBNull) ? null : (int?)r["length_ft"])
+                                                                (int?)((r["length_ft"] is System.DBNull) ? null : (int?)r["length_ft"]),
+                                                                (double?)((r["us_depth_in"] is System.DBNull) ? null : (double?)r["us_depth_in"]),
+                                                                (double?)((r["ds_depth_in"] is System.DBNull) ? null : (double?)r["ds_depth_in"])
+                                                                
                                                                 );
                         }
                         else
@@ -535,6 +555,9 @@ namespace SWI_2
                                                                 ((r["ds_node"] is System.DBNull) ? "" : (string)r["ds_node"]),
                                                                 ((r["us_node"] is System.DBNull) ? "" : (string)r["us_node"]),
                                                                 (int?)((r["length_ft"] is System.DBNull) ? null : (int?)r["length_ft"]),
+                                                                (double?)((r["us_depth_in"] is System.DBNull) ? null : (double?)r["us_depth_in"]),
+                                                                (double?)((r["ds_depth_in"] is System.DBNull) ? null : (double?)r["ds_depth_in"]),
+                                                                
                                                                 (int)r["global_id"]);
                         }
                     }
