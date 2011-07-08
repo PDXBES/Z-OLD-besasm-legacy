@@ -13,8 +13,9 @@
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <ManifestCertificateThumbprint>B3F35511E50C436BB83F04275888985CB369393F</ManifestCertificateThumbprint>
-    <ManifestKeyFile>SWI_2_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestCertificateThumbprint>959D3898E772216CD36464E124D5F3A8DC19ECE0</ManifestCertificateThumbprint>
+    <ManifestKeyFile>
+    </ManifestKeyFile>
     <GenerateManifests>true</GenerateManifests>
     <SignManifests>true</SignManifests>
     <PublishUrl>\\Cassio\ASM_Apps\Apps\SWI_2\</PublishUrl>
@@ -27,7 +28,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>94</ApplicationRevision>
+    <ApplicationRevision>98</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
