@@ -108,7 +108,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis
                     serverIsUsable = serverIsUsable + SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_FE_HYETOGRAPH_DATA");
                     serverIsUsable = serverIsUsable + SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_FE_GRID_PROJECTS");
                     //serverIsUsable = serverIsUsable + SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_Contaminants");
-                    serverIsUsable = serverIsUsable + SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_BMP_TYPE_TABLE_GENERAL");
+                    //serverIsUsable = serverIsUsable + SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_BMP_TYPE_TABLE_GENERAL");
                     serverIsUsable = serverIsUsable + SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_BMP_PERFORMANCE");
                     serverIsUsable = serverIsUsable + SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_pollutant_loadings");
 

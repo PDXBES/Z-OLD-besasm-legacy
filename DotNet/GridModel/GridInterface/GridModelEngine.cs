@@ -47,7 +47,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis
         //the grid table is really too large to be placing in the base access database, it should just be a linked table.
         public GridModelEngine(string SQLDatabaseConnectionString)
         {            
-            ///*waterqualReference* this.gridModelPath = System.AppDomain.CurrentDomain.BaseDirectory + "Waterqual_GIS_v5_0.mdb";
+            /// *waterqualReference* this.gridModelPath = System.AppDomain.CurrentDomain.BaseDirectory + "Waterqual_GIS_v5_0.mdb";
             
             gridDataTableName = ConfigurationManager.AppSettings.Get("gridDataTableName");
 
@@ -260,6 +260,10 @@ namespace SystemsAnalysis.Grid.GridAnalysis
                 {
                     SQLHelper.SQLCreateVIEW("GRID_PRF_LIST_EX", prfListQuery, SQLDatabaseConnectionString);
                 }
+                if (timePeriod == "FU")
+                {
+                    SQLHelper.SQLCreateVIEW("GRID_PRF_LIST_FU", prfListQuery, SQLDatabaseConnectionString);
+                }
             }
             catch (Exception ex)
             {
@@ -286,6 +290,21 @@ namespace SystemsAnalysis.Grid.GridAnalysis
                 {
                     if (gridProcessGroup.GroupName.Contains("GRID_BMP") && boolContainsBMP == false)
                     {
+                        if (string.Compare(gridModelRuns[0].BMPEffectivenessDB, SQLDatabaseConnectionString) != 0)
+                        {
+                            if (gridModelRuns[0].BMPEffectivenessDB.IndexOf('\\') >= 0)
+                            {
+                                DataMobility.SQLCopyAccessTable("BMP_TYPE_TABLE_GENERAL", gridModelRuns[0].BMPEffectivenessDB, "GRID_BMP_TYPE_TABLE_GENERAL", SQLDatabaseConnectionString);
+                                DataMobility.SQLCopyAccessTable("BMP_TABLES", gridModelRuns[0].BMPEffectivenessDB, "GRID_BMP_TABLES", SQLDatabaseConnectionString);
+                            }
+                            else
+                            {
+                                DataMobility.SQLCopySQLTable("GRID_BMP_TABLES",
+                                    gridModelRuns[0].BMPEffectivenessDB, "GRID_BMP_TABLES", SQLDatabaseConnectionString);
+                                DataMobility.SQLCopySQLTable("GRID_BMP_TABLES",
+                                    gridModelRuns[0].BMPEffectivenessDB, "GRID_BMP_TABLES", SQLDatabaseConnectionString);
+                            }
+                        }
                         CreatePRFListQuery(gridModelRun.InstreamFacilities, gridModelRun.TimePeriod);
                         CreateBMPUnionQuery();
                         boolContainsBMP = true;
@@ -332,7 +351,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis
                 gridModelResults.Add(gridModelResult);
                 Dictionary<string, double> modelResultsSummary;
 
-                modelResultsSummary = SQLHelper.SQLExecuteAggregateQueryDoubles("GRID_calc_table_summary", SQLDatabaseConnectionString);
+                /*modelResultsSummary = SQLHelper.SQLExecuteAggregateQueryDoubles("GRID_calc_table_summary", SQLDatabaseConnectionString);
                 foreach (KeyValuePair<string, double> kvp in modelResultsSummary)
                 {
                     try
@@ -343,7 +362,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis
                     {
                         gridModelResult.PollutantLoads.Add(new PollutantLoad(kvp.Key, (double)0));
                     }
-                }
+                }*/
                 runCount++;
             }
             return;
@@ -494,6 +513,20 @@ namespace SystemsAnalysis.Grid.GridAnalysis
             {
                 get { return this.status; }
             }
+
+        }
+
+        ///<summary>
+        /// This function should populate empty database with new queries.
+        /// Its kind of necessary since people who want to make their own
+        /// grid model shouldnt have to be weighted down by inserting the actual
+        /// queries and views.  It is however unfortunate that I should
+        /// have to make this thing since it is so long.  Isn't there some way
+        /// I can just stick all the queries in a text file and have that file
+        /// be read and placed in the server as the queries?
+        /// </summary>
+        private void heresYourFreakinQueries()
+        {
 
         }
         #endregion
