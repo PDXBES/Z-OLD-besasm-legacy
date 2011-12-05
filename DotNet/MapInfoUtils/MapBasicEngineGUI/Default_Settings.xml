@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<EngineConfiguration xmlns="SystemsAnalysis.Utils.MapInfoUtils.MapInfoEngineGUI.EngineConfiguration">
+<MapBasicFramework>
+	<Library>
+      <LibraryName>AlternativeWorkbench</LibraryName>      
+      <Location>\\Cassio\Modeling\Model_Programs\Emgaats\CodeV2.2\Alternatives_Toolkit\MBWorkbench\exe\AlternativeWorkbench.MBX</Location>      
+      <ExecGroup>Edit</ExecGroup>
+      <GlobalVariable Name="gBaseModelPath" Value="W:\Model_Programs\Emgaats\CodeV2.2\Alternatives_Toolkit\test_models\SE_FUBase\" />
+      <GlobalVariable Name="gAlternativePath" Value="W:\Model_Programs\Emgaats\CodeV2.2\Alternatives_Toolkit\test_models\SE_FUBase\alternatives\Att111406\" />
+      <GlobalVariable Name="gIconFile" Value="\\Cassio\Modeling\Model_Programs\Emgaats\CodeV2.2\Alternatives_Toolkit\MBWorkbench\exe\CustomIcons.dll" />
+      <GlobalVariable Name="gLinkEditingTemplate" Value="\\Cassio\Modeling\Model_Programs\Emgaats\CodeV2.2\Alternatives_Toolkit\MBWorkbench\Mp_LINKpad.WOR" />
+      <GlobalVariable Name="gDSCEditingTemplate" Value="\\Cassio\Modeling\Model_Programs\Emgaats\CodeV2.2\Alternatives_Toolkit\MBWorkbench\Mp_DSCpad.WOR" />
+      <GlobalVariable Name="gSSCEditingTemplate" Value="\\Cassio\Modeling\Model_Programs\Emgaats\CodeV2.2\Alternatives_Toolkit\MBWorkbench\Mp_SSCpad.WOR" />
+      <GlobalVariable Name="gSpecLinkEditingTemplate" Value="\\Cassio\Modeling\Model_Programs\Emgaats\CodeV2.2\Alternatives_Toolkit\MBWorkbench\Mp_SPLpad.WOR" />
+      <GlobalVariable Name="gDefaultNodeSuffix" Value="" RelativeTo="AlternativeConfiguration" />
+      <Function>
+        <Name>SetupAltWorkbench</Name>
+        <CommandID>10000</CommandID>
+      </Function>
+      <Function>
+        <Name>LinkToolPad</Name>
+        <CommandID>10002</CommandID>
+      </Function>      
+    </Library>
+	<Library>
+		<LibraryName>LinkProcessor</LibraryName>
+		<Location>\\Cassio\Modeling\Model_Programs\Emgaats\CodeV2.2\Alternatives_Toolkit\AlternativeEngine\MBFramework\exe\LinkProcessor.MBX</Location>
+		<ExecGroup>Apply</ExecGroup>
+		<GlobalVariable Name="gLinkAlternative" Value="alt_links_ac.tab" RelativeTo="Alternative" />
+		<GlobalVariable Name="gMasterModelMode" Value="2" />
+		<GlobalVariable Name="gOutputModelPath" Value="" RelativeTo="OutputModel" />
+		<Function>
+			<Name>SetupLinkProcessor</Name>
+			<CommandID>10003</CommandID>
+		</Function>
+		<Function>
+			<Name>UpdateLinks</Name>
+			<CommandID>10002</CommandID>
+		</Function>
+		<Function>
+			<Name>DeleteLinks</Name>
+			<CommandID>10001</CommandID>
+		</Function>
+		<Function>
+			<Name>CheckLinks</Name>
+			<CommandID>10004</CommandID>
+		</Function>
+		<Function>
+			<Name>AppendLinks</Name>
+			<CommandID>10000</CommandID>
+		</Function>
+    </Library>
+    <Library>
+      <LibraryName>NodeProcessor</LibraryName>
+      <Location>\\Cassio\Modeling\Model_Programs\Emgaats\CodeV2.2\Alternatives_Toolkit\AlternativeEngine\MBFramework\exe\NodeProcessor.mbx</Location>
+      <ExecGroup>Apply</ExecGroup>
+      <GlobalVariable Name="gOutputModelPath" Value="" RelativeTo="OutputModel" />
+      <GlobalVariable Name="gElevField" Value="GrndElev" />
+      <GlobalVariable Name="gMasterModelMode" Value="2" />
+      <GlobalVariable Name="gElevationSubSectionList" Value="\\cassio\modeling\Model_Programs\Emgaats\CodeV2.2\NodeTool\data\WshdPts.txt" />
+      <Function>
+        <Name>SetupNodeProcessor</Name>
+        <CommandID>10003</CommandID>
+      </Function>
+      <Function>
+        <Name>DeleteOrphanNodes</Name>
+        <CommandID>10001</CommandID>
+      </Function>
+      <Function>
+        <Name>AddGroundElevations</Name>
+        <CommandID>10002</CommandID>
+      </Function>
+    </Library>    
+  </MapBasicFramework>
+</EngineConfiguration>

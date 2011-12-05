@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nodeSet>
+  <view uin="qm1smievj_v">
+    <property name="$name" value="fProgress" />
+    <property name="$defaultDiagram" value="True" />
+    <property name="$metaclass" value="Package Diagram" />
+    <reference referencedUin="delphi:e_class:src:ArchiveAssistant:fProgress.TfrmProgress">
+      <property name="$shortcutReference" value="true" />
+      <reference referencedUin="delphi:e_field:src:ArchiveAssistant:fProgress.TfrmProgress.RzPanel1" />
+      <reference referencedUin="delphi:e_field:src:ArchiveAssistant:fProgress.TfrmProgress.prgScan" />
+      <reference referencedUin="delphi:e_field:src:ArchiveAssistant:fProgress.TfrmProgress.lblProgress" />
+    </reference>
+  </view>
+</nodeSet>

@@ -1,0 +1,23 @@
+'
+'	============ EMGAATS Workbench =================
+'
+'	Copyright (c) 2001  City of Portland, OR Bureau of Environmental Services and CH2M HILL, Inc.
+'
+declare Sub InitHousekeeping ()
+declare Sub	SayHello()
+Declare Sub	OpenTables()
+Declare Sub 	OpenTablesDenyWrite()
+Declare Sub	OpenModel()
+
+
+'22Mar2004 Collins this gets declared in EMGOpenUtils
+'Declare Sub	CommitModel()
+
+'22Mar2004 Collins this gets defined in EMGOpenUtils
+'Type FileSpec
+'	Name as string
+'	FullPath as string
+'	Alias as string
+'	IniSection as string
+'	IniKey as string
+'End Type
