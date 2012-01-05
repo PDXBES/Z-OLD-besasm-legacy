@@ -1,0 +1,432 @@
+'
+'	============ EMGAATS Workbench =================
+'
+'	Copyright (c) 2001,	2003  City of Portland,	OR Bureau of Environmental Services	
+'
+' 20Jul2006	Adapted
+'	22Mar2004 Collins added	call to	InitOpenUtilGlobals	so that	EMGOpenUtils can be	used here
+'
+'
+include "MapBasic.def"
+include "AlternativeWorkbench.def"
+include "..\Common\Inc\EMGGlobal.def"
+include "..\Common\Inc\EMGLogger.def"
+include "..\Common\Inc\EMGOpenUtils.def"
+include "..\Common\Inc\EMGMTabUtil.def"
+include "..\Common\Inc\INIUtils.def"
+include "..\Workbench\Inc\EMGInit.def"
+include "..\Common\inc\EMGCoordSys.def"
+
+declare sub Main()
+
+'Required for all Framework MBX Apps
+declare sub ExitApplication()
+declare sub Function_Menu()
+declare Function IsTableOpened2 (ByVal sTab As String) as logical
+
+'---------------------------------------------------------
+' the following	is a delphi	code snippit that shows	how	the	MB globals are accessed
+'---------------------------------------------------------
+  'strMBmsg	= 'gstrCurrentMessage';
+  'strMBrc = 'gstrReturnStatus';
+
+  'STEP	ONE: Start mapinfo
+  'goleMI :=Zcreateoleobject('Mapinfo.Application');
+  
+  'STEP	TWO: find the full path	of the application
+  'mbxFullPath := systemini.ReadString('code','TestBench','notfound');	
+	
+	'STEP THREE: Run the mbx
+	'DoStr := 'Run Application '+ #34 +	mbxFullPath	+ #34;
+	'oleMI.do doStr
+	
+  'STEP	FOUR: Initialize global	to something that is not SUCCESS
+  'oleMI.mbapplications.item('TestBench').mbglobals.item(strMBrc).value	:= 'NULL';
+  
+  'STEP	FIVE: run subroutines within the mapinfo application and test for success
+  'olemi.do	('Run Menu Command ID '	+ cmdID);
+  'sleep(1000);
+  'if myrc <> 'SUCCESS'	Then
+	' error	stuff here
+  'end if
+
+'---------------------------------------------------------
+'This is an	example	subroutine that	gets called	from external program
+'---------------------------------------------------------
+
+Sub	SetupAltWorkbench()
+	gReturnStatus = "Entered SetupAltWorkbench()" 
+	dim result as integer
+	gmdlINIfullpath = gBaseModelPath
+	gDefaultPctSlope = 1.0
+	
+	Call InitHousekeeping		' have to init some globals before we can say hello
+	Call InitOpenUtilGlobals  ' this sets up table names for the EMGOpenUtils functions
+	Call SetStdCoordSys()
+	
+	dim mdlIndex(6) as integer
+	mdlIndex(1) = NDX_MDL_LINKS
+	mdlIndex(2) = NDX_MDL_NODES 				
+	mdlIndex(3) = NDX_MDL_DIRSC 				
+	mdlIndex(4) = NDX_MDL_SURFSC
+	mdlIndex(5) = NDX_MDL_SPECLINKS
+	mdlIndex(6) = NDX_MDL_SPECLINKDATA
+	
+	result = setOKToOpen(gmdlFiles, mdlIndex)	
+	result = ReallyOpenModel()
+	Open Table gAlternativePath & "alt_dsc_ac.tab" as alt_dsc
+	Open Table gAlternativePath & "alt_links_ac.tab" as alt_links
+	Open Table gAlternativePath & "alt_nodes_ac.tab" as alt_nodes
+	Open Table gAlternativePath & "alt_speclinks_ac.tab" as alt_speclinks
+	Open Table gAlternativePath & "alt_ssc_ac.tab" as alt_ssc
+	Open Table gAlternativePath & "alt_rooftargets_ac.tab" as alt_rooftargets
+	Open Table gAlternativePath & "alt_streettargets_ac.tab" as alt_streettargets
+	Open Table gAlternativePath & "alt_parkingtargets_ac.tab" as alt_parkingtargets
+
+	Call InitLinkToolPad
+	Call InitSpecialToolPad
+	Call InitDSCToolPad
+	Call InitSSCToolPad
+	Call InitICToolPad
+	Call ResetStandardToolPads
+	Call LinkToolPad
+			
+	gReturnStatus = "Succesfully called SetupAltWorkbench()"
+		
+End	Sub           
+'---------------------------------------------------------
+Sub ResetAltWorkbench()
+	OnError Goto Recover
+
+	dim result as integer
+	dim mdlIndex(6) as integer
+	mdlIndex(1) = NDX_MDL_LINKS
+	mdlIndex(2) = NDX_MDL_NODES
+	mdlIndex(3) = NDX_MDL_DIRSC
+	mdlIndex(4) = NDX_MDL_SURFSC
+	mdlIndex(5) = NDX_MDL_SPECLINKS
+	mdlIndex(6) = NDX_MDL_SPECLINKDATA
+
+	Alter ButtonPad "Link Editing Tools" Hide
+	Alter ButtonPad "DSC Editing Tools" Hide
+	Alter ButtonPad "SSC Editing Tools" Hide
+	Alter ButtonPad "Special Link Editing Tools" Hide	
+	Alter ButtonPad "IC Editing Tools" Hide
+	
+	Close All Interactive
+	result = setOKToOpen(gmdlFiles, mdlIndex)	
+	result = ReallyOpenModel()
+	Open Table gAlternativePath & "alt_dsc_ac.tab" as alt_dsc
+	Open Table gAlternativePath & "alt_links_ac.tab" as alt_links
+	Open Table gAlternativePath & "alt_nodes_ac.tab" as alt_nodes
+	Open Table gAlternativePath & "alt_speclinks_ac.tab" as alt_speclinks
+	Open Table gAlternativePath & "alt_speclinkdata_ac.tab" as alt_speclinkdata
+	Open Table gAlternativePath & "alt_ssc_ac.tab" as alt_ssc	
+	Open Table gAlternativePath & "alt_rooftargets_ac.tab" as alt_rooftargets
+	Open Table gAlternativePath & "alt_streettargets_ac.tab" as alt_streettargets
+	Open Table gAlternativePath & "alt_parkingtargets_ac.tab" as alt_parkingtargets
+	
+	Pack Table alt_links Graphic Data
+	
+	Exit Sub
+	Recover:
+		Resume Next
+End Sub
+'---------------------------------------------------------
+'All MapBasic programs will end here. Changes should be saved
+'prior to this point, since unsaved changes will be discarded here
+Sub ExitApplication()
+'	Packings table and exiting
+	OnError Goto PackTableError
+	Pack table alt_links Graphic Data
+	Pack table alt_nodes Graphic Data
+	Pack table alt_speclinks Graphic Data
+	Pack table alt_ssc Graphic Data
+	Pack table alt_dsc Graphic Data
+	End MapInfo
+	Exit Sub
+PackTableError:
+	Note "Warning, there are unsaved changes. Please save or revert your changes before exiting."	
+End Sub
+
+'---------------------------------------------------------
+' Modify to	add	menuitems for testing
+'---------------------------------------------------------
+Sub	Function_Menu()  	
+	
+	Create Menu	"Alternati&ve Workbench"	as                                       		   
+	"Load &Link Editor Toolpad" ID 10002 calling LinkToolPad,	   	
+	"Load &DSC Editor Toolpad" ID 10003 calling DSCToolPad,	 
+	"Load &SSC Editor Toolpad" ID 10004 calling SSCToolPad,
+	"Load S&pecial Structure Toolpad" ID 10005 calling SpecialToolPad,
+	"Load &IC Targets Toolpad" ID 1007 calling ICToolPad,
+	"&QC Alternative" ID 10006, 'calling QCAlternative	 	 
+	"Reset Alternative Workbench" ID 10000 calling SetupAltWorkbench,
+'	"(Setup Alternative Tool Pad" ID 10001 calling SetupAltToolPad,	   	
+	"E&xit Alternative Workbench" ID 9999 calling ExitApplication 'Required for all Framework MBX apps
+  
+	Alter Menu Bar Remove ID 6, ID 7 
+	Alter Menu Bar Add "Alternative Workbench", ID 6,	ID 7
+	Alter ButtonPad "Standard" Show Fixed 'ToolbarPosition(0,0)
+	Alter ButtonPad "Tools" Show Fixed 'ToolbarPosition (0,1)	
+	Alter ButtonPad "Main" Show Fixed 'ToolbarPosition(1,0)	
+	Alter ButtonPad "Drawing" Show Fixed 'ToolbarPosition(1,1)		
+	StatusBar Show
+			
+	Alter Menu Item ID 10006 Disable
+
+'	Call altToolPad
+
+End	Sub
+
+'--------------------------------------------------------
+'No	changes	below here
+'--------------------------------------------------------
+
+Sub	Main()
+
+	gReturnStatus="Initialized"		
+	OnError GoTo ErrorHandler
+			
+	Call Function_Menu
+		
+	Exit Sub
+				
+	ErrorHandler:
+		gReturnStatus = "Error: " + Err()		
+		OnError GoTo 0
+		Error Err()
+End	Sub
+'---------------------------------------------------------
+Sub EditSave
+
+OnError goto skipSaveLine
+	Set Map Layer alt_links Editable Off
+	Set Map Layer alt_nodes Editable Off
+	Set Map Layer alt_speclinks Editable Off
+	Set Map Layer alt_speclinkdata Editable Off
+	Set Map Layer alt_ssc Editable Off
+	Set Map Layer alt_dsc Editable Off
+	Set Map Layer alt_rooftargets Editable Off
+	Set Map Layer alt_streettargets Editable Off
+	Set Map Layer alt_parkingtargets Editable Off	
+	
+	Commit table alt_links interactive
+	Commit table alt_nodes interactive
+	Commit table alt_speclinks interactive
+	Commit table alt_speclinkdata interactive
+	Commit table alt_ssc interactive
+	Commit table alt_dsc interactive
+	Commit table alt_rooftargets interactive
+	Commit table alt_streettargets interactive
+	Commit table alt_parkingtargets interactive
+	
+	IF IsTableOpened2("VisibleSpecials") = TRUE THEN
+		Set Map Layer VisibleSpecials Editable Off
+		close table VisibleSpecials
+	END IF
+	
+	IF IsTableOpened2("alt_pumpcurves") = TRUE THEN
+		Set Map Layer alt_pumpcurves Editable Off
+		Commit table alt_pumpcurves interactive
+		close table VisibleSpecials
+	END IF
+	
+	IF IsTableOpened2("VisibleModelSpecials") = TRUE THEN
+		Set Map Layer VisibleModelSpecials Editable Off
+		close table VisibleModelSpecials
+	END IF
+
+Set Map Redraw On
+
+Exit sub
+skipSaveLine:
+Resume Next
+	Note "Did not save - Please save manually."
+End Sub
+'--------------------------------------------------------
+Sub EditRevert
+OnError goto skipRevertLine
+	
+	IF Ask(("Are you sure you wish to revert changes?"), "Yes", "No")=0 THEN
+			Exit Sub
+	END IF
+	Print "Reverting tables..."
+	Rollback table alt_links
+	Rollback table alt_nodes
+	Rollback table alt_speclinks
+	Rollback table alt_speclinkdata
+	Rollback table VisibleSpecials
+	Rollback table alt_ssc
+	Rollback table alt_dsc
+	Rollback table alt_rooftargets
+	Rollback table alt_streettargets
+	Rollback table alt_parkingtargets
+
+Exit Sub
+
+skipRevertLine:
+Resume Next
+
+End Sub
+'--------------------------------------------------------
+Function FindLayerIDByName(ByVal WindowID as Integer, ByVal LayerName as String) as Integer
+	Dim iLayer as integer
+	For iLayer= 1 to MapperInfo(WindowID, MAPPER_INFO_LAYERS)
+		If LayerInfo(WindowID, iLayer, LAYER_INFO_NAME) = LayerName Then
+				FindLayerIDByName = iLayer
+				Exit Function				
+		End If	
+	Next
+	FindLayerIDByName = -1
+End Function
+'--------------------------------------------------------
+Function FindWindowIDByName(ByVal WindowName as String) as Integer
+	Dim iRun as integer
+	FOR iRun = 1 to Numwindows()
+			IF windowinfo(iRun,1) = WindowName THEN				
+				FindWindowIDByName = WindowInfo(iRun,13)
+				Exit Function
+			END IF
+	NEXT
+	FindWindowIDByName = -1
+End Function
+'--------------------------------------------------------
+Sub ZoomToLayer(ByVal WindowName as String, ByVal LayerName as string)
+	OnError goto ZoomError
+	Dim cmd as string
+	Dim winID as integer
+	winID = FindWindowIDByName(WindowName)
+	cmd = "Set Map Window " & str$(winID) & " Zoom Entire Layer " & str$(FindLayerIDByName(winID, LayerName))
+	Run Command cmd
+	Exit Sub
+ZoomError:
+		Print "Unhandled zoom error - Exit toolpad and restart."
+End Sub
+'--------------------------------------------------------
+Sub DebugNote(ByVal debugStatus as string)
+'	If gDebugMode = True Then
+		Print debugStatus		
+'	End If
+End Sub
+'--------------------------------------------------------
+Sub	ResetStandardToolPads
+	gReturnStatus = "Entered ResetStandardToolPads" 
+	
+	'Alter ButtonPad "Main"	Remove 1701, 1705,1706,1702,304	'Selector/Zin/Zout/Recenter/Unselect
+	Alter ButtonPad "Drawing"	Remove 1711,1712,1713,1714,1715,1716,1717,1718 'Point/Line/Pline/Polygon/Ellipse/Arc/Rect/RndRect
+	Alter ButtonPad "Standard" Remove 105,201,202 'Save, Undo
+	Alter ButtonPad "Menu" 	Remove 201,202 ' Undo, Cut
+	Alter Menu ID 2  	Remove 201, 202, 107, 206     'Undo/Cut/Revert/ClearObjects
+	
+	Alter ButtonPad "Standard" Hide
+	Alter ButtonPad "Tools" Hide	
+	Alter ButtonPad "Main" Hide	
+	Alter ButtonPad "Drawing" Hide		
+		
+	STATUSBAR Hide
+									
+	Alter ButtonPad "Standard" Show Fixed ToolbarPosition(0,0)
+	Alter ButtonPad "Tools" Show Fixed ToolbarPosition (0,1)	
+	Alter ButtonPad "Main" Show Fixed ToolbarPosition(1,0)	
+	Alter ButtonPad "Drawing" Show Fixed ToolbarPosition(1,1)	
+	
+'	Alter Menu Item ID 10001 Disable
+'	Alter Menu item  Remove ID 10100,ID 10001
+'initializing miWindows
+	
+	set window MESSAGE position(7,0.15) units "IN"
+	set window INFO position(0.5,1.5) units "IN"
+	STATUSBAR Show
+	
+	gReturnStatus = "Succesfully called ResetStandardToolPads" 
+
+End Sub
+'---------------------------------------------------------
+Sub	CreateAppliedLinks
+	Select *  from mdl_Links, alt_links where mdl_Links.LinkID = alt_links.MdlLinkID and alt_links.operation = any("DEL", "SPL", "UPD") into mdl_links_removed
+	Run Menu Command 311 'M_QUERY_INVERTSELECT
+	If SelectionInfo(SEL_INFO_NROWS) > 0 Then
+		Select * from selection into mdl_links_applied	
+	Else
+		Select * from mdl_links into mdl_links_applied
+	End If
+	'mdl_Links . LinkID not in ( select LinkID from alt_links , mdl_links where operation in ( "DEL" , "SPL" , "UPD" ) and alt_links . mdllinkid = mdl_links . linkid )  into mdl_links_applied noselect  
+
+	Select *  from alt_links  where Operation not in ( "DEL" , "SPL" )  into alt_links_applied noselect  
+	Commit Table mdl_links_applied as gTempDir & "mdl_links_applied.tab"
+	Commit Table alt_links_applied as gTempDir & "alt_links_applied.tab"
+	Close Table mdl_links_applied
+	Close Table alt_links_applied
+	Open Table gTempDir & "mdl_links_applied.tab"
+	Open Table gTempDir & "alt_links_applied.tab"
+End Sub
+'--------------------------------------------------------
+Function IsTableOpened2 (ByVal sTab As String) 'Name of (possibly) open table 
+as logical 'TRUE is table is open
+
+	dim i as smallint
+
+	OnError goto Trap
+	i = TableInfo (sTab, TAB_INFO_NUM)
+	IsTableOpened2 = TRUE
+exit function
+
+Trap:
+	IsTableOpened2 = FALSE
+End Function
+'--------------------------------------------------------
+Sub AddChicklets
+	OnError Goto ChickletError
+	Dim DSCResultsFile as String
+	DSCResultsFile = FileOpenDlg(gBaseModelPath & "sim", "FU_25_ModelResults_DSCHGLs.tab", "TAB", "Select a DSC Results File:")
+	If DSCResultsFile = "" Then
+		Exit Sub
+	End If
+	Open Table DSCResultsFile As DSCHGLs Interactive
+	
+	Select *  from mdl_dsc  where ( FloodRefElev - 8 ) <= SanSwrCrown  into Qy_FalsePositive noselect  
+	Select *  from mdl_dsc , DSCHGLs  where ( ( FloodRefElev - 8 ) > SanSwrCrown ) and ( mdl_dsc . DSCID = DSCHGLs . DSCID ) into Qy_TruePositive noselect  
+	Add Map Layer Qy_TruePositive
+	Add Map Layer Qy_FalsePositive
+	shade Qy_TruePositive with CalculatedDHGL ranges apply all use all Brush (2,14737632,16777215) 
+	  -500: 6 Brush (2,16711680,16777215) Pen (1,2,0) ,
+	  6: 8 Brush (2,16767072,16777215) Pen (1,2,0) ,
+	  8: 10 Brush (2,6356832,16777215) Pen (1,2,0) ,
+	  10: 1000 Brush (2,14737632,16777215) Pen (1,2,0) 
+	  default Brush (2,16777215,16777215) Pen (1,2,0) 
+	  '# use 1 round 1 inflect off Brush (0,0,0) at 0 by 0 color 1 # 
+	  
+	Set Map
+		Layer 1
+		  Display Global
+		  Global Pen (1,2,65535)  Brush (8,65535,14737632)  Symbol (35,0,12)  Line (1,2,16754768)  Font ("Arial Narrow",1,9,0)
+		  Label Line None Position Center Font ("Arial",0,9,0) Pen (1,2,0) 
+		    With NGTOSan
+		    Parallel On Auto Off Overlap Off Duplicates On Offset 2
+		    Visibility On
+	  Layer 2
+	    Display Value
+	    Global Pen (1,2,16777215)  Brush (1,16777072)  Symbol (35,0,12)   
+	    Selectable Off
+	  Layer 3
+	    Display Global
+	    Global Pen (1,2,16777215)  Brush (1,16777072)  Symbol (35,0,12)   
+	    Label Line None Position Center Font ("Arial",0,9,0) Pen (1,2,0) 
+	      With ""
+	      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+	      Visibility On
+	Dim ReOrder as String
+	Dim i as Integer
+	
+	For i = 4 To MapperInfo(FrontWindow(),MAPPER_INFO_LAYERS)
+		ReOrder = Reorder & i & ", "
+	Next  	
+	ReOrder = ReOrder & "1, 2, 3"
+	Run Command  "Set Map Order " & ReOrder
+	Exit Sub
+ChickletError:
+	Note "Could not create chicklet map!" & gBaseModelPath
+	Print Error$()
+End Sub
+

@@ -1,0 +1,474 @@
+'		19-apr-02  DFC
+'			major logic revision as per Collins re-design
+'
+'	13Mar03 DFC
+'		Set DiscoClass = "X", meaning "all inflow controls data is invalid"
+'
+'	26Mar03 DJC
+'		Set DiscoClass = getdiscoclass a function of san and storm type"
+'
+' 05Aug03 Collins 
+'   fixed bug (skip table close) when DSC total = 0, this happens if no laterals are got
+'
+' 10Sep04 Collins 
+' resolve bugs that result when access adds and delete records outside of mapinfo
+' the subs InitHydPre and InitHydPost were added and THEN NOT USED BECAUSE OF ACCESS- MAPINFO BUG
+'
+' added function to QAQC scdd
+'
+' 28Nov05 Collins 
+'
+' added function to check for duplicate dscs
+'
+' 12/26/2006 AMM: CalcDSC will no longer be called as link IDs for the DSC are already
+' burned into mst_DSC_ac
+
+
+include "MapBasic.def"
+include "..\inc\EMGCalcDSC.def"
+include "..\..\common\inc\EMGLogger.def"
+include "..\..\common\inc\EMGfuncts.def"
+include "..\..\common\inc\EMGOpenUtils.def"
+include "..\inc\EMGInit.def"
+
+'
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+'	CalcDSC()
+'
+'
+'		For each DSC (ie from flow down, instead of up from outfall)
+'		set the LinkID's where the flow goes
+'		"use" the laterals such that unused laterals are extra / problems
+'	Assert:
+'		Model is open
+'
+' 12/6/2006 AMM: This routine will no longer be called as the link IDs
+' for the DSCs are already burned into mst_DSC_ac
+'
+'
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+Sub CalcDSC()
+Dim		DSCCount as integer
+Dim		DSCTotal as integer ' used to detect if any were gotten as well as status bar text
+Dim		Msg as string
+Dim		CurRec as integer
+Dim		CurParcelID as integer
+Dim		CurDivideID as integer
+
+Dim		NewSanID as integer
+Dim		NewStormID as integer
+Dim		NewNGTOSan as string
+Dim		NewNGTOStorm as string
+Dim 	NewTypeSan as string
+Dim		NewTypeStorm as string
+Dim   NewDiscoClass as string
+
+Dim		LatAFT as string				' current actual flow type of lateral
+Dim		CurLatID as integer			' lateralID of current lateral
+Dim		CurLatRowID as integer
+
+Dim		SanCount as integer
+Dim		StormCount as integer
+Dim		CombCount as integer
+Dim		DecisionIndex as integer
+
+Dim		LatIDSan as integer
+Dim		LinkIDSan as integer
+Dim		LatIDComb as integer
+Dim		LinkIDComb as integer
+Dim		LatIDStorm as integer
+Dim		LinkIDStorm as integer
+Dim		RowIDSan as integer
+Dim		RowIDStorm as integer
+Dim		RowIDComb as integer
+
+'	Un-mark all laterals
+Call SetLogOptions (TRUE, TRUE, TRUE, TRUE)
+
+Create Index on mdl_Laterals (ParcelID)
+Create Index on mdl_Laterals (DivideID)
+Create Index on mdl_Laterals (LinkID)
+Set Table mdl_DSC Fastedit On
+Set Table mdl_Laterals Fastedit on
+
+Update mdl_Laterals
+set LatPickedFlag = "F"
+
+DSCTotal = TableInfo(mdl_DSC, TAB_INFO_NROWS)
+DSCCount = 0
+
+' 20030805 Collins note if DSC total is 0 then we skip the loop, and go through the close operations
+Fetch First from mdl_DSC
+Do While NOT (EOT(mdl_DSC))
+	CurRec = mdl_DSC.RowID
+	DSCCount = DSCCount + 1
+	if (DSCCount MOD 10) = 0 then
+		statusbar message "Record " & str$(DSCCount) & " of " & str$(DSCTotal)
+	end if
+	NewSanID = 0
+	NewStormID = 0
+	NewNGTOSan = 0
+	NewNGTOStorm = 0
+	NewTypeSan = 0
+	NewTypeStorm = 0
+	NewDiscoClass = "X"
+	DecisionIndex = 0
+
+	CurParcelID = mdl_DSC.ParcelID
+	CurDivideID = mdl_DSC.DivideID
+
+	Select * from mdl_Laterals
+	where ParcelID = CurParcelID
+	  and DivideID = CurDivideID
+	  and PipeFlowType = "S"
+	  and LinkID <> 0						' the lateral has to be connected to a sewer to be usable.
+	into _SanLats
+
+	SanCount = TableInfo(_SanLats, TAB_INFO_NROWS)
+	If SanCount > 0 then
+		DecisionIndex = DecisionIndex + 10
+		LinkIDSan = _SanLats.LinkID
+		LatIDSan = _SanLats.LateralID
+		RowIDSan = _SanLats.ROWID
+	end if
+	msg = "San lats: " & str$(SanCount)
+	'call loggit(msg)
+
+	Select * from mdl_Laterals
+	where ParcelID = CurParcelID
+	  and DivideID = CurDivideID
+	  and PipeFlowType = "C"
+	  and LinkID <> 0						' the lateral has to be connected to a sewer to be usable.
+	into _CombLats
+
+	CombCount = TableInfo(_CombLats, TAB_INFO_NROWS)
+	If CombCount > 0 then
+		DecisionIndex = DecisionIndex + 100
+		LatIDComb = _CombLats.LateralID
+		LinkIDComb = _CombLats.LinkID
+		RowIDComb = _CombLats.ROWID
+	end if
+	msg = "Combined lats: " & str$(CombCount)
+	'call loggit(msg)
+
+	Select * from mdl_Laterals
+	where ParcelID = CurParcelID
+	  and DivideID = CurDivideID
+	  and PipeFlowType = "D"
+	  and LinkID <> 0						' the lateral has to be connected to a sewer to be usable.
+	into _StormLats
+
+	StormCount = TableInfo(_StormLats, TAB_INFO_NROWS)
+	If StormCount > 0 then
+		DecisionIndex = DecisionIndex + 1000
+		LatIDStorm = _StormLats.LateralID
+		LinkIDStorm = _StormLats.LinkID
+		RowIDStorm = _StormLats.ROWID
+	end if
+	msg = "Storm lats: " & str$(StormCount)
+	'call loggit(msg)
+	
+' The big decision table
+'	all values set to default of zero above; only set the ones that are different.
+	do case DecisionIndex
+		case 0
+			' do nothing
+		case 10
+			NewNGTOSan = GetNGTO(LinkIDSan)
+			NewSanID = LatIDSan
+			NewTypeSan = "S"
+			Update _SanLats
+			Set LatPickedFlag = "T"
+			where ROWID = RowIDSan
+		case 100
+			msg = "Combined only. Count = " & str$(CombCount) & " lat ID " & str$(LatIDComb) & " LinkID " & str$(LinkIDComb)
+			'call loggit(msg)
+			NewNGTOSan = GetNGTO(LinkIDComb)
+			NewSanID = LatIDComb
+			NewTypeSan = "C"
+			Update _CombLats
+			Set LatPickedFlag = "T"
+			where ROWID = RowIDComb
+		Case 110
+			NewNGTOSan = GetNGTO(LinkIDSan)
+			NewSanID = LatIDSan
+			NewNGTOStorm = GetNGTO(LinkIDComb)
+			NewStormID = LatIDComb
+			NewTypeSan = "S"
+			NewTypeStorm = "C"
+			Update _SanLats
+			set LatPickedFlag = "T"
+			where ROWID = RowIDSan
+			Update _Comblats
+			set LatPickedFlag = "T"
+			where ROWID = RowIDComb
+
+		Case 1000
+			NewNGTOStorm = GetNGTO(LinkIDStorm)
+			NewStormID = LatIDStorm
+			NewTypeStorm = "D"
+			Update _StormLats
+			set LatPickedFlag = "T"
+			where ROWID = RowIDStorm
+
+		Case 1010
+			NewNGTOStorm = GetNGTO(LinkIDStorm)
+			NewStormID = LatIDStorm
+			NewTypeStorm = "D"
+			Update _StormLats
+			set LatPickedFlag = "T"
+			where ROWID = RowIDStorm
+
+			NewNGTOSan = GetNGTO(LinkIDSan)
+			NewSanID = LatIDSan
+			newTypeSan = "S"
+			Update _SanLats
+			set LatPickedFlag = "T"
+			where ROWID = RowIDSan
+
+		Case 1100
+			NewNGTOStorm = GetNGTO(LinkIDStorm)
+			NewStormID = LatIDStorm
+			NewTypeStorm = "D"
+			Update _StormLats
+			set LatPickedFlag = "T"
+			where ROWID = RowIDStorm
+
+			NewNGTOSan = GetNGTO(LinkIDComb)
+			NewSanID = LatIDComb
+			NewTypeSan = "C"
+			Update _CombLats
+			set LatPickedFlag = "T"
+			where ROWID = RowIDcomb
+		Case 1110
+			NewNGTOStorm = GetNGTO(LinkIDStorm)
+			NewStormID = LatIDStorm
+			NewTypeStorm = "D"
+			Update _StormLats
+			set LatPickedFlag = "T"
+			where ROWID = RowIDStorm
+
+			NewNGTOSan = GetNGTO(LinkIDSan )
+			NewSanID = LatIDSan
+			NewTypeSan = "S"
+			Update mdl_Laterals
+			set LatPickedFlag = "T"
+			where ROWID = RowIDSan
+	end case
+	msg = "ParcelID " & str$(mdl_DSC.ParcelID) & " decision: " & str$(DecisionIndex)
+	'call	loggit(msg)
+
+  NewDiscoClass = getdiscoclass(NewTypeSan, NewTypeStorm)
+  
+	Update mdl_DSC
+	Set
+		LateralIDSan = NewSanID,
+		LateralIDStorm = NewStormID,
+		NGTOSan = NewNGToSan,
+		NGTOStorm = NewNGTOStorm,
+		PipeFlowTypeSan = NewTypeSan,
+		PipeFlowTypeStorm = NewTypeStorm,
+		DiscoClass = NewDiscoClass
+	Where RowID = CurRec
+	Fetch Next from mdl_DSC
+Loop
+
+if DSCTotal > 0 then
+	close table _StormLats
+	close table _SanLats
+	Close table _CombLats
+end if
+
+	call CommitModel()
+	Set Table mdl_DSC Fastedit Off
+	Set Table mdl_Laterals Fastedit off
+
+	gstrReturnStatus = "SUCCESS"
+	gstrCurrentMessage = "DSC Trace complete."
+
+End Sub
+
+Function GetNGTO(Byval MyLinkID as integer) as string
+Dim Msg as string
+
+	msg = "Looking for link " & MyLinkID
+	'call loggit(msg)
+
+	Select USNode
+	from mdl_links
+	where LinkID = MyLinkID
+	into _tmpLink
+
+	if not EOT(_tmpLink) then
+		GetNGTO = _tmpLink.USNode
+		Msg = "Found Link NGTO: " & _tmpLink.USNode & " Link: " & MyLinkID
+	else
+		GetNGTO = ""
+		Msg = "Link not found: " & MyLinkID
+	end if
+	'call Loggit(msg)
+	close table _tmpLink
+End Function
+
+'----------------------------------------------------------------------
+' Collins 2005 Nov 28
+' check for DSCs that are duplicated - this should never happen
+
+sub QADupDSC()
+	dim nbad as integer
+	gstrReturnStatus = "FAILURE"
+    
+
+	Select ParcelID, DivideID, Count(*) "npid" from mdl_DSC group by ParcelID, DivideID into _SCDD_ERRORS_01
+	Select * from _SCDD_ERRORS_01 where npid>1 into _SCDD_ERRORS_02
+	
+	nbad = Tableinfo(_SCDD_ERRORS_02,TAB_INFO_NROWS)
+	
+	if nbad = 0 then
+		gstrReturnStatus = "SUCCESS"
+		gstrCurrentMessage = "No errors found"  
+  
+	else 
+		gstrReturnStatus = "FAILURE"
+		gstrCurrentMessage = "EMGCalcDSC: QADupDsc, " & str$(nbad) & " duplicate dscs"
+	end if
+	close table _SCDD_ERRORS_02
+	close table _SCDD_ERRORS_01
+	
+	
+end sub	  	
+	
+	
+
+
+'----------------------------------------------------------------------
+' Collins 2004 Sep 10
+
+sub QAICmax()
+	dim nbad as integer
+	gstrReturnStatus = "FAILURE"
+    
+	' JHB 7/8/2007 changed error threshold to 10 for roof area. This is consistent with QC check in stormwatercontrolsv12.
+	Select * from mdl_DSC where (ICFtRoof - RfAreaFt )> 10 or (ICFtParking - PkAreaFt) >10 into _SCDD_ERRORS
+	nbad = Tableinfo(_SCDD_ERRORS,TAB_INFO_NROWS)
+	
+	if nbad = 0 then
+		gstrReturnStatus = "SUCCESS"
+		gstrCurrentMessage = "No errors found"  
+  
+	else 
+		gstrReturnStatus = "FAILURE"
+		gstrCurrentMessage = "EMGCalcDSC: QAICmax, " & str$(nbad) & " dscs where ICs are greater than area"
+	end if
+	close table _SCDD_ERRORS
+	
+end sub	  	
+	
+	
+	
+
+
+'----------------------------------------------------------------------
+' Collins 2004 Sep 10
+
+sub InitHydPre()
+	dim msg as string
+    
+    gstrReturnStatus = "FAILURE"
+    msg = "InitHydPre"  
+    call loggit(msg)
+    
+    exit sub
+    
+    commit table mdl_DSC
+   	commit table mdl_DiscoVeg
+    commit table mdl_Drywell
+    commit table mdl_SWPlnt
+    commit table mdl_Infilt
+    commit table mdl_GrnRoof
+    	
+    pack table mdl_DiscoVeg data
+    pack table mdl_Drywell data
+    pack table mdl_SWPlnt data
+    pack table mdl_Infilt data
+    pack table mdl_GrnRoof data
+    
+		'delete the sanitary redirects
+		Select * from mdl_DiscoVeg where assumeKey="_san" into san_target
+		delete From san_target
+    commit table mdl_DiscoVeg
+    close Table san_target
+    
+    Select * from mdl_DiscoVeg where SqFt<=0 into _delete_target
+    delete From _delete_target
+    commit table mdl_DiscoVeg
+    close table _delete_target
+    
+    Select * from mdl_Drywell where SqFt<=0 into _delete_target
+		delete From _delete_target
+		commit table mdl_Drywell
+    close table _delete_target
+    
+    Select * from mdl_SWPlnt where SqFt<=0 into _delete_target
+		delete From _delete_target
+		commit table mdl_SWPlnt 
+		close table _delete_target
+		
+    Select * from mdl_Infilt where SqFt<=0 into _delete_target
+		delete From _delete_target
+		commit table mdl_Infilt
+    close table _delete_target
+    
+    Select * from mdl_GrnRoof where SqFt<=0 into _delete_target
+		delete From _delete_target
+		commit table mdl_GrnRoof
+    close table _delete_target
+    
+    commit table mdl_DiscoVeg
+    commit table mdl_Drywell
+    commit table mdl_SWPlnt
+    commit table mdl_Infilt
+    commit table mdl_GrnRoof
+
+		pack table mdl_DiscoVeg data
+    pack table mdl_Drywell data
+    pack table mdl_SWPlnt data
+    pack table mdl_Infilt data
+    pack table mdl_GrnRoof data
+    
+    
+    gstrReturnStatus = "SUCCESS"
+    msg = "InitHydPre completed successfully"  
+    call loggit(msg)
+   	
+		'now run the access stuff the delphi command is as follows:
+		'xrc := myoleac.run('executequerytable','listexecuteInitDSC', 'Block' , 'INIT_HYD' , 0);
+
+end sub
+
+sub InitHydPost()
+	dim msg as string
+	
+	gstrReturnStatus = "FAILURE"
+	exit sub
+    	
+    msg = "commit mapinfo tables"
+
+    commit table mdl_DSC
+    commit table mdl_DiscoVeg
+    commit table mdl_Drywell
+    commit table mdl_SWPlnt
+    commit table mdl_Infilt
+    commit table mdl_GrnRoof 
+    
+    pack table mdl_DiscoVeg data
+    pack table mdl_Drywell data
+    pack table mdl_SWPlnt data
+    pack table mdl_Infilt data
+    pack table mdl_GrnRoof data
+ 		
+ 		gstrReturnStatus = "SUCCESS"
+		msg = "InitHydPost completed successfully"  
+    call loggit(msg)
+   
+end sub

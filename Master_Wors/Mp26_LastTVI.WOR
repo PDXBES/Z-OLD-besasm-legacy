@@ -1,0 +1,293 @@
+!Workspace
+!Version 650
+!Charset WindowsLatin1
+Open Table "\\CASSIO\MODELING\AGMaster21\Pumps\mst_pumps_ac" As mst_pumps_ac Interactive
+Open Table "\\CASSIO\SYSTEMS_PLANNING\7977_Rehab\Phase1\tv_prioritization\Pipe_data_tv_Map" As Pipe_data_tv_Map Interactive
+Select *  from mdl_Links_ac , Pipe_data_tv_Map  where mdl_Links_ac . USNode = Pipe_data_tv_Map . UNITID and mdl_Links_ac . DSNode = Pipe_data_tv_Map . UNITID2  into QyPipLastInspect noselect  
+Set Window MapBasic
+  Position (0.239583,5.25) Units "in"
+  Width 8 Units "in" Height 1.375 Units "in" Min
+Open Window MapBasic
+Map From mst_pumps_ac,PDX_Cad_Str_Lbl,mdl_Nodes_ac,mdl_Links_ac,mdl_Links_ac,QyPipLastInspect,
+  Qy2ExternalMdl,QyInflowNodes,QyOutfalls,QySumpedSC,mdl_SurfSC_ac,mdl_Links_ac,
+  mdl_DirSC_ac,Tric_row,PDX_Bridges,mdl_SurfSC_ac,Waternew_rev0922,ProjMask,ProjArea,Citylimi 
+  Position (0.708333,0.125) Units "in"
+  Width 5.92708 Units "in" Height 5.0625 Units "in" Min
+Set Window FrontWindow() ScrollBars Off Autoscroll On
+Set Map
+  CoordSys Earth Projection 3, 33, "ft", -120.5, 43.6666666667, 44.3333333333, 46, 8202099.7379999999, 0
+  Center (7656686.401,677712.2765)
+  Zoom 20900 Units "ft"
+  Preserve Zoom Display Zoom
+  Distance Units "ft" Area Units "sq mi" XY Units "ft"
+  Distance Type Cartesian
+shade 12 with DiamWidth ranges apply all use all Line (70,2,16776960) 
+  0: 12 Line (70,2,16776960) ,
+  12: 24 Line (80,2,11796288) ,
+  24: 36 Line (90,2,16762032) ,
+  36: 72 Line (80,2,13697023) ,
+  72: 200 Line (90,2,13152144) 
+  default Line (1,2,16777215) 
+  # use 1 round 1 inflect off Line (1,2,0) at 0 by 0 color 1 # 
+shade 6 with lastDate ranges apply all use all Line (6,2,16748688) 
+  19690207: 19900101 Line (6,2,16748688) ,
+  19900101: 19950101 Line (6,2,16760832) ,
+  19950101: 20000101 Line (6,2,12648288) ,
+  20000101: 20060104 Line (6,2,6356832) 
+  default Line (1,2,16777215) 
+  # use 0 round 1 inflect off Line (1,2,16777215) at 2 by 0 color 1 # 
+shade 5 with LinkType values 
+  "" Line (20,2,11559167) ,
+  " C" Line (20,2,16732415) ,
+  "A" Line (17,5,11559167) ,
+  "C" Line (20,2,16732415) ,
+  "CI" Line (20,6,16744703) ,
+  "D" Line (20,2,45056) ,
+  "F" Line (20,4,6356832) ,
+  "FD" Brush (2,32768,16777215) Pen (1,2,0) Line (20,4,6356832) Symbol (34,32768,12) ,
+  "IC" Brush (2,128,16777215) Pen (1,2,0) Line (15,92,16744640) Symbol (34,128,12) ,
+  "ID" Brush (2,53352,16777215) Pen (1,2,0) Line (15,92,53352) Symbol (34,53352,12) ,
+  "IS" Brush (2,45056,16777215) Pen (1,2,0) Line (15,92,16744448) Symbol (34,45056,12) ,
+  "PC" Brush (2,32896,16777215) Pen (1,2,0) Line (15,90,16711935) Symbol (34,32896,12) ,
+  "PD" Brush (2,32768,16777215) Pen (1,2,0) Line (15,90,32768) Symbol (34,32768,12) ,
+  "PS" Brush (2,45056,16777215) Pen (1,2,0) Line (15,90,14708736) Symbol (34,45056,12) ,
+  "S" Brush (2,40960,16777215) Pen (1,2,0) Line (17,2,12595200) Symbol (34,40960,12) ,
+  "SD" Brush (2,16750640,16777215) Pen (1,2,0) Line (20,2,6356832) Symbol (34,16750640,12) ,
+  "V" Brush (2,14694400,16777215) Pen (1,2,0) Line (20,2,255) Symbol (34,14694400,12) ,
+  "X" Brush (2,16711680,16777215) Pen (1,2,0) Line (15,2,0) Symbol (34,16711680,12) 
+  default   # color 1 # 
+Set Map
+  Layer 1
+    Display Off
+    Global Pen (1,2,9502608)  Brush (15,15597520)  Symbol (35,8388608,12,"MapInfo Real Estate",256,0)  Line (1,2,10526975)  Font ("Arial Narrow",1,8,0)
+    Label Line None Position Below Font ("Arial Narrow",257,7,8404992,16777215) Pen (1,2,0) 
+      With Str$(PUMPSTATION+" PS")
+      Parallel On Auto On Overlap On Duplicates On Offset 3
+      Visibility On
+  Layer 2
+    Display Graphic
+    Global Pen (1,2,9502608)  Brush (15,15597520)  Symbol (35,0,12)  Line (1,2,10526975)  Font ("Arial Narrow",0,9,49344)
+    Label Line Arrow Position Right Font ("Arial",0,9,0) Pen (1,2,0) 
+      With ""
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+  Layer 3
+    Display Off
+    Global Pen (1,2,9502608)  Brush (15,15597520)  Symbol (32,16777215,4)  Line (1,2,10526975)  Font ("Arial Narrow",1,8,0)
+    Label Line Arrow Position Right Font ("Arial",0,9,0) Pen (1,2,0) 
+      With ""
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+  Layer 4
+    Display Global
+    Global Pen (1,2,9502608)  Brush (15,15597520)  Symbol (35,0,12)  Line (12,1,0)  Font ("Arial Narrow",1,8,0)
+    Arrows On
+    Label Line Arrow Position Above Font ("Arial",0,9,0) Pen (1,2,0) 
+      With ""
+      Parallel On Auto Off Overlap Off Duplicates Off Offset 2
+      Visibility On
+  Layer 5
+    Display Value
+    Global Pen (1,2,9502608)  Brush (15,15597520)  Symbol (35,0,12)  Line (1,2,10526975)  Font ("Arial Narrow",1,8,0)
+    Selectable Off
+  Layer 6
+    Display Off
+    Global Pen (1,2,9502608)  Brush (15,15597520)  Symbol (35,0,12)  Line (1,2,10526975)  Font ("Arial Narrow",1,8,0)
+    Label Line Arrow Position Above Font ("Arial",0,9,0) Pen (1,2,0) 
+      With ""
+      Parallel On Auto Off Overlap Off Duplicates Off Offset 2
+      Visibility On
+  Layer 7
+    Display Value
+    Global   Symbol (35,0,12)   
+    Selectable Off
+  Layer 8
+    Display Graphic
+    Global   Symbol (35,0,12)   
+    Label Line Arrow Position Above Font ("Arial",0,9,0) Pen (1,2,0) 
+      With USNode
+      Parallel On Auto Off Overlap Off Duplicates Off Offset 2
+      Visibility On
+  Layer 9
+    Display Off
+    Global Pen (1,2,9502608)  Brush (15,15597520)  Symbol (68,8388608,24,"MapInfo Cartographic",288,0)  Line (1,2,10526975)  Font ("Arial Narrow",1,8,0)
+    Label Line Arrow Position Above Right Font ("Arial Narrow",259,7,8388608,16777215) Pen (1,2,0) 
+      With "To External"+Chr$(10)+" Model"
+      Parallel On Auto On Overlap On Duplicates On Offset 5
+      Visibility On
+  Layer 10
+    Display Off
+    Global Pen (1,2,9502608)  Brush (15,15597520)  Symbol (68,8388608,24,"MapInfo Cartographic",288,270)  Line (1,2,10526975)  Font ("Arial Narrow",1,8,0)
+    Label Line None Position Below Right Font ("Arial Narrow",259,7,8388608,16777215) Pen (1,2,0) 
+      With "External"+Chr$(10)+"Model Inflow"
+      Parallel Off Auto On Overlap Off Duplicates On Offset 9
+      Visibility On
+  Layer 11
+    Display Off
+    Global Pen (1,2,9502608)  Brush (15,15597520)  Symbol (46,32768,18,"MapInfo Cartographic",256,0)  Line (1,2,10526975)  Font ("Arial Narrow",1,8,0)
+    Label Line Arrow Position Right Font ("Arial",0,9,0) Pen (1,2,0) 
+      With ""
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+  Layer 12
+    Display Off
+    Global Pen (30,2,9493503)  Brush (44,10526975)  Symbol (35,0,12)  Line (1,2,10526975)  Font ("Arial Narrow",1,8,0)
+    Label Line None Position Center Font ("Arial",0,9,0) Pen (1,2,0) 
+      With ""
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+  Layer 13
+    Display Off
+    Global Pen (30,2,10526880)  Brush (1,16777215,16777215)  Symbol (35,0,12)  Line (1,2,10526975)  Font ("Arial Narrow",1,8,0)
+    Label Line None Position Center Font ("Arial",0,9,0) Pen (1,2,0) 
+      With ""
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+  Layer 14
+    Display Off
+    Global Pen (1,2,9502608)  Brush (15,15597520)  Symbol (35,0,12)  Line (1,2,10526975)  Font ("Arial Narrow",1,8,0)
+    Selectable Off
+  Layer 15
+    Display Off
+    Global Pen (1,2,9502608)  Brush (15,15597520)  Symbol (35,0,12)  Line (1,2,10526975)  Font ("Arial Narrow",1,8,0)
+    Selectable Off
+    Label Line Arrow Position Above Font ("Arial",0,9,0) Pen (1,2,0) 
+      With ""
+      Parallel On Auto Off Overlap Off Duplicates Off Offset 2
+      Visibility On
+  Layer 16
+    Display Off
+    Global Pen (1,2,32768)  Brush (15,16777104)  Symbol (35,0,12)  Line (1,2,10526975)  Font ("Arial Narrow",1,8,0)
+    Label Line None Position Center Font ("Arial",0,9,0) Pen (1,2,0) 
+      With ""
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+  Layer 17
+    Display Global
+    Global Pen (12,2,9493503)  Brush (1,16777215,16777215)  Symbol (35,0,12)  Line (1,2,10526975)  Font ("Arial Narrow",1,8,0)
+    Label Line None Position Center Font ("Arial",0,9,0) Pen (1,2,0) 
+      With ""
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+  Layer 18
+    Display Global
+    Global Pen (1,2,5293567)  Brush (1,16777215,16777215)  Symbol (35,0,12)  Line (1,2,10526975)  Font ("Arial Narrow",1,8,0)
+    Label Line None Position Center Font ("Arial",0,9,0) Pen (1,2,0) 
+      With Name
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+  Layer 19
+    Display Off
+    Global Pen (1,1,0)  Brush (15,15597520)  Symbol (35,0,12)  Line (1,2,10526975)  Font ("Arial Narrow",1,8,0)
+    Label Line None Position Center Font ("Arial",0,9,0) Pen (1,2,0) 
+      With ""
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+  Layer 20
+    Display Global
+    Global Pen (1,24,255)  Brush (2,12632319,16777215)  Symbol (46,40960,18,"MapInfo Cartographic",256,0)  Line (1,2,10526975)  Font ("Arial",0,9,16777215)
+    Label Line Arrow Position Right Font ("Arial",0,9,0) Pen (1,2,0) 
+      With ""
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+  Layer 21
+    Display Off
+    Global Pen (1,2,12632256)  Brush (16,15790320)  Symbol (35,0,12)  Line (1,2,10526975)  Font ("Arial Narrow",1,8,0)
+    Label Line None Position Center Font ("Arial",0,9,0) Pen (1,2,0) 
+      With ""
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+  Layer 22
+    Display Global
+    Global Pen (50,2,13672703)   Symbol (35,0,12)  Line (1,2,10526975)  Font ("Arial Narrow",1,8,0)
+    Label Line None Position Center Font ("Arial",0,9,0) Pen (1,2,0) 
+      With ""
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+  Layer 23
+    Display Global
+    Global Pen (1,1,0)  Brush (2,15790320,16777215)  Symbol (35,0,12)   
+    Label Line None Position Center Font ("Arial",0,9,0) Pen (1,2,0) 
+      With cityname
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+set legend 
+  layer 5 
+    display on 
+    shades off 
+    symbols off 
+    lines on 
+    count off 
+    title "Modeled Sewers by LinkType" Font ("Arial Narrow",5,10,0)
+    subtitle auto Font ("Arial",0,8,0)
+    ascending on 
+    ranges Font ("Arial Narrow",1,8,0)
+      "Unknown" display off ,
+      "Unknown (Blank)" display off ,
+      "Combined ( C)" display off ,
+      "Unknown (A)" display on ,
+      "Combined (C)" display on ,
+      "CSO Interceptor - (CI)" display off ,
+      "Storm (D)" display on ,
+      "Frontage Culvert (F)" display on ,
+      "French Drain (FD)" display on ,
+      "CSO Interceptor (CI)" display on ,
+      "Storm Interceptor" display on ,
+      "SAN Interceptor (IS)" display on ,
+      "Pumped CSO (PC)" display on ,
+      "Pumped Storm (PD)" display on ,
+      "Pumped SAN(PS)" display on ,
+      "Sanitary (S)" display on ,
+      "SD -" display off ,
+      "Culvert (V)" display on ,
+      "Crossing Culvert (X)" display on  
+set legend 
+  layer 7 
+    display on 
+    shades off 
+    symbols off 
+    lines on 
+    count on 
+    title "Inspected Pipes by Last Inspection Date" Font ("Arial Narrow",517,10,0)
+    subtitle "(Pipe_data_tv_Map by lastDate)" Font ("Arial Narrow",0,8,0)
+    ascending off 
+    ranges Font ("Arial Narrow",513,10,0)
+      auto display off ,
+      "Earlier than 1990" display on ,
+      "1990 to 1995" display on ,
+      "1995 to 2000" display on ,
+      "2000 to 2006" display on  
+set legend 
+  layer 14 
+    display on 
+    shades off 
+    symbols off 
+    lines on 
+    count off 
+    title "Modeled Sewers" Font ("Arial Narrow",1,10,0)
+    subtitle "by Diameter" Font ("Arial Narrow",5,10,0)
+    ascending on 
+    ranges Font ("Arial Narrow",1,8,0)
+      auto display off ,
+      "< 12''" display on ,
+      "12'' to 24''" display on ,
+      "24'' to 36''" display on ,
+      "36'' to 72''" display on ,
+      "Over 72''" display on  
+Set Window FrontWindow() Title "Main Map"
+Set map window  Frontwindow() Zoom 10 units "ft"
+Set Map Window  windowinfo(Frontwindow(),13) Zoom Entire Layer "ProjArea"
+Set map window  Frontwindow() Zoom (mapperinfo( Frontwindow(), 1) * 1.01) units "ft"
+Create Cartographic Legend
+  Position (6.57292,0.166667) Units "in"
+  Width 3.42708 Units "in" Height 2.97917 Units "in" 
+  Window Title "Legend of Main Map"
+  Portrait
+  Default Frame Style "# Legend" Font ("Arial Narrow",1,8,0)
+  Frame From Layer 22
+    Border Pen (0,1,0) 
+    Using Column object 
+    Style Font ("Arial Narrow",1,8,0)
+      Text "Project Area" Region Pen (90,2,11559167)  Brush (1,0,16777215) 
+  Frame From Layer 7
+    Border Pen (1,1,0) 

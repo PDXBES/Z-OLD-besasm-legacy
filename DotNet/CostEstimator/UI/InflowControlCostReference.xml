@@ -1,0 +1,23 @@
+﻿<InflowControlCostOptions>
+	<GreenStreetPlanterMinCost>0</GreenStreetPlanterMinCost>
+	<GreenStreetPlanterCostPerAcre>64600</GreenStreetPlanterCostPerAcre>
+	<InfiltrationPlanterMinCost>3500</InfiltrationPlanterMinCost>
+	<InfiltrationPlanterCostPerAcre>117000</InfiltrationPlanterCostPerAcre>
+	<VegetatedInfiltrationBasinMinCost>3700</VegetatedInfiltrationBasinMinCost>
+  <VegetatedInfiltrationBasinCostPerAcre>134000</VegetatedInfiltrationBasinCostPerAcre>
+	<DownspoutDisconnectionMinCost>520</DownspoutDisconnectionMinCost>
+  <DownspoutDisconnectionCostPerAcre>2900</DownspoutDisconnectionCostPerAcre>
+	<EcoroofMinCost>7300</EcoroofMinCost>
+  <EcoroofCostPerAcre>286000</EcoroofCostPerAcre>
+  <CurbExtensionMinCost>8850</CurbExtensionMinCost>
+  <CurbExtensionCostPerCuFt>49</CurbExtensionCostPerCuFt>
+  <CurbExtensionMinCuFt>75</CurbExtensionMinCuFt>
+  <CurbExtensionTrafficControl>1000</CurbExtensionTrafficControl>
+  <CurbExtensionAdaRamp>1000</CurbExtensionAdaRamp>
+  <CurbExtensionWaterLineSleeving>3150</CurbExtensionWaterLineSleeving>
+  <StormwaterPlanterMinCost>5600</StormwaterPlanterMinCost>
+  <StormwaterPlanterCostPerCuFt>121</StormwaterPlanterCostPerCuFt>
+  <StormwaterPlanterMinCuFt>46</StormwaterPlanterMinCuFt>
+  <FlowRestrictorCost>22500</FlowRestrictorCost>
+  <BaseENR>6580</BaseENR>
+</InflowControlCostOptions>
