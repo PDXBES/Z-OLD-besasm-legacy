@@ -86,7 +86,7 @@ namespace SWI_2
             this.sWSP_SUBWATERSHEDTableAdapter.Fill(this.sANDBOXDataSet.SWSP_SUBWATERSHED);
 
             //_MyParentForm is for base users, so they need to be told what they were doing.
-            //homefully administrators can remember.
+            //hopefully administrators can remember.
             if (_MyParentForm != null)
             {
                 while (_MyParentForm.CurrentWatershed != (int)((System.Data.DataRowView)sWSPWATERSHEDBindingSource.Current)["watershed_id"])
