@@ -20,6 +20,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 	class DifficultAreaAncillaryFactor : AncillaryFactor
 	{
     private const int MIN_PIPE_SLOPE_FOR_DIFFICULT_AREA = 10;
+    private const int DIST_TO_RAIL_FOR_DIFFICULT_PARALLEL = 30;
 		private ConflictPackage _ConflictPackage;
 
 		/// <summary>
@@ -63,16 +64,20 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 
 		public double Factor
 		{
-			get
-			{
-				if ((_ConflictPackage != null && _ConflictPackage.Conflicts != null) && 
-					((!_ConflictPackage.Conflicts.IsInStreet &&
-					Math.Abs(_ConflictPackage.Conflicts.SurfaceSlopePct) >= MIN_PIPE_SLOPE_FOR_DIFFICULT_AREA) ||
-					_ConflictPackage.Conflicts.IsHardArea))
-					return 0.50;
-				else
-					return 0;
-			} // get
+      get
+      {
+        bool HasConflicts = _ConflictPackage != null && _ConflictPackage.Conflicts != null;
+        bool NotInStreetAndSurfaceSlopeIsSteep = !_ConflictPackage.Conflicts.IsInStreet &&
+                  Math.Abs(_ConflictPackage.Conflicts.SurfaceSlopePct) >= MIN_PIPE_SLOPE_FOR_DIFFICULT_AREA;
+        bool ParallelToRailroad = (_ConflictPackage.Conflicts.HasRailroadParallel) && (_ConflictPackage.Conflicts.DistToRailroadParallelFeet <= DIST_TO_RAIL_FOR_DIFFICULT_PARALLEL);
+        bool ParallelToLTR = (_ConflictPackage.Conflicts.HasLightRailParallel) && (_ConflictPackage.Conflicts.DistToLightRailParallelFeet <= DIST_TO_RAIL_FOR_DIFFICULT_PARALLEL);
+        if (HasConflicts &&
+          (NotInStreetAndSurfaceSlopeIsSteep || _ConflictPackage.Conflicts.IsHardArea ||
+          ParallelToRailroad || ParallelToLTR))
+          return 0.50;
+        else
+          return 0;
+      } // get
 		} // Factor
 
 		/// <summary>
