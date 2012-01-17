@@ -21,6 +21,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 	{
 		#region Constants
 		private const decimal UNIT_COST_ENVIRONMENTAL_MITIGATION_PER_ACRE = 100000;
+    private const double ENVIRONMENTAL_ZONE_AFFECTED_WIDTH = 50;
 		#endregion
 
 		#region Variables
@@ -95,8 +96,10 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 		{
 			get
 			{
-				return (double)(_ConflictPackage.Conflicts.AreaConservationZoneSqFt +
-          _ConflictPackage.Conflicts.AreaPreservationZoneSqFt) / Common.SQUARE_FEET_PER_ACRE;
+				return (double)(
+          _ConflictPackage.Conflicts.LengthInConservationZoneFeet * ENVIRONMENTAL_ZONE_AFFECTED_WIDTH +
+          _ConflictPackage.Conflicts.LengthInPreservationZoneFeet * ENVIRONMENTAL_ZONE_AFFECTED_WIDTH) /
+          Common.SQUARE_FEET_PER_ACRE;
 			} // get
 		} // Units
 

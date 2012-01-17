@@ -15,122 +15,175 @@ namespace SystemsAnalysis.Modeling
 	public class PipXP : PipeConflict
 	{
 		#region Variables
-		// Identifying data
-		private int _MstLinkID;
-		private string _USNode;
-		private string _DSNode;
-		private int _CompKey;
+    private SortedList<double, double> _parallelWaterLookup = new SortedList<double, double>();
+    private SortedList<double, double> _parallelSewerLookup = new SortedList<double, double>();
+
+    // Identifying data
+		private int _MstLinkID; // MLINKID
+		private string _USNode; // USNODE
+		private string _DSNode; // DSNODE
+		private int _CompKey; // COMPKEY
+
+    // Location data
+    private double _USX; // xa
+    private double _USY; // ya
+    private double _DSX; // xb
+    private double _DSY; // yb
+    private double _Azimuth; // Deg2N
 
 		// Water facilities
-		private int _NumWaterCrossings;
-		private int _SmallestWaterCrossingDiameterInches;
-		private int _LargestWaterCrossingDiameterInches;
-		private bool _HasWaterParallel;
-		private int _LargestWaterParallelDiameterInches;
-		private int _DistToWaterParallelFeet;
+		private int _NumWaterCrossings; // xWtr
+		private int _SmallestWaterCrossingDiameterInches; // xWMinD
+		private int _LargestWaterCrossingDiameterInches; // xWMaxD
+		private bool _HasWaterParallel; // pWtr
+    private double _ParallelWaterLenWithin2ft; // pWtr2
+    private double _ParallelWaterLenWithin4ft; // pWtr4
+    private double _ParallelWaterLenWithin6ft; // pWtr6
+    private double _ParallelWaterLenWithin8ft; // pWtr8
+    private double _ParallelWaterLenWithin10ft; // pWtr10
+    private double _ParallelWaterLenWithin12ft; // pWtr12
+		private int _LargestWaterParallelDiameterInches; // pWtrMaxD
+		private int _DistToWaterParallelFeet; // pFt2Wtr
 
 		// Sewer Facilities
-		private int _NumSewerCrossings;
-		private int _SmallestSewerCrossingDiameterInches;
-		private int _LargestSewerCrossingDiameterInches;
-		private bool _HasSewerParallel;
-		private int _LargestSewerParallelDiameterInches;
-		private int _DistToSewerParallelFeet;
+		private int _NumSewerCrossings; // xSewer
+		private int _SmallestSewerCrossingDiameterInches; // xSwrMinD
+		private int _LargestSewerCrossingDiameterInches; // xSwrMaxD
+		private bool _HasSewerParallel; // pSewer
+    private double _ParallelSewerLenWithin2ft; // pSwr2
+    private double _ParallelSewerLenWithin4ft; // pSwr4
+    private double _ParallelSewerLenWithin6ft; // pSwr6
+    private double _ParallelSewerLenWithin8ft; // pSwr8
+    private double _ParallelSewerLenWithin10ft; // pSwr10
+		private int _LargestSewerParallelDiameterInches; // pSwrMaxD
+		private int _DistToSewerParallelFeet; // pFt2Swr
 
 		// Transportation facilities
-		private int _NumStreetCrossings;
-		private int _NumArterialCrossings;
-		private int _NumMajorArterialCrossings;
-		private int _NumFreewayCrossings;
-		private bool _IsInStreet;
-		private Enumerators.StreetTypeKind _StreetType;
-		private int _DistToStreetCenterlineFeet;
-		private int _NumStreetsIfUSNodeInIntersection;
-		private int _DistUSNodeToIntersectionFeet;
-		private int _NumStreetsIfDSNodeInIntersection;
-		private int _DistDSNodeToIntersectionFeet;
-		private int _TrafficVolVehiclesPerDay;
+		private int _NumStreetCrossings; // xStrt
+		private int _NumArterialCrossings; // xArt
+		private int _NumMajorArterialCrossings; // xMJArt
+		private int _NumFreewayCrossings; // xFrwy
+		private bool _IsInStreet; //pStrt
+		private Enumerators.StreetTypeKind _StreetType; // pStrtTyp
+		private int _DistToStreetCenterlineFeet; // pFt2Strt
+		private int _NumStreetsIfUSNodeInIntersection; // uxCLx
+		private int _DistUSNodeToIntersectionFeet; // uxFt2CLx
+		private int _NumStreetsIfDSNodeInIntersection; // dxCLx
+		private int _DistDSNodeToIntersectionFeet; // dxFt2CLx
+    private int _TrafficVolVehiclesPerDay; // pTraffic
 
 		// Railroad facilities
-		private int _NumRailroadCrossings;
-		private bool _HasRailroadParallel;
-		private int _DistToRailroadParallelFeet;
-		private int _NumLightRailCrossings;
-		private bool _HasLightRailParallel;
-		private int _DistToLightRailParallelFeet;
+		private int _NumRailroadCrossings; // xRail
+		private bool _HasRailroadParallel; // pRail
+		private int _DistToRailroadParallelFeet; // pFt2Rail
+		private int _NumLightRailCrossings; // xLRT
+		private bool _HasLightRailParallel; // pLRT
+		private int _DistToLightRailParallelFeet; // pFt2LRT
 
 		// Fiber Optic & Gas facilities
-		private int _NumFiberOpticCrossings;
-		private bool _HasFiberOpticParallel;
-		private int _DistToFiberOpticParallelFeet;
-		private int _NumGasCrossings;
-		private bool _HasGasParallel;
-		private int _DistToGasParallel;
+		private int _NumFiberOpticCrossings; // xFiber
+		private bool _HasFiberOpticParallel; // pFiber
+		private int _DistToFiberOpticParallelFeet; // pFt2Fiber
+		private int _NumGasCrossings; // xGas
+		private bool _HasGasParallel; // pGas
+		private int _DistToGasParallel; // pFt2Gas
 
 		// Environmental zones
-		private bool _IsInConservationZone;
-		private int _LengthInConservationZoneFeet;
-		private int _AreaConservationZoneSqFt;
-		private bool _IsInPreservationZone;
-		private int _LengthInPreservationZoneFeet;
-		private int _AreaPreservationZoneSqFt;
-		private bool _IsNearContaminationSite;
-		private int _DistToNearestEcsiFeet;
-		private int _VolHazardousConflictCuYd;
+		private bool _IsInConservationZone; // xEzonC
+		private int _LengthInConservationZoneFeet; // xFtEzonC
+		private int _AreaConservationZoneSqFt; // xEzAreaC
+		private bool _IsInPreservationZone; // xEzonP
+		private int _LengthInPreservationZoneFeet; // xFtEzonP
+		private int _AreaPreservationZoneSqFt; // xEzAreaP
+		private bool _IsNearContaminationSite; // xEcsi
+		private int _DistToNearestEcsiFeet; // xFt2Ecsi
+    private double _LengthInEcsiFeet; // xEcsiLen
+		private int _VolHazardousConflictCuYd; // xEcsiVol
+    private bool _IsNearLUST; // xLUST
+    private int _DistToNearestLUSTFeet; // xFt2LUST
 
 		// Public safety
-		private bool _IsNearSchool;
-		private int _DistToSchoolFeet;
-		private bool _IsNearHospital;
-		private int _DistToHospitalFeet;
-		private bool _IsNearPoliceStation;
-		private int _DistToPoliceStationFeet;
-		private bool _IsNearFireStation;
-		private int _DistToFireStationFeet;
-		private int _NumEmergencyRouteCrossings;
-		private bool _IsInEmergencyRoute;
-		private int _DistToEmergencyRouteCenterlineFeet;
+		private bool _IsNearSchool; // xSchl
+		private int _DistToSchoolFeet; // xFt2Schl
+		private bool _IsNearHospital; // xHosp
+		private int _DistToHospitalFeet; // xFt2Hosp
+		private bool _IsNearPoliceStation; // xPol
+		private int _DistToPoliceStationFeet; // xFt2Pol
+		private bool _IsNearFireStation; // xFire
+		private int _DistToFireStationFeet; // xFt2Fire
+		private int _NumEmergencyRouteCrossings; // xEmt
+		private bool _IsInEmergencyRoute; // pEmt
+		private int _DistToEmergencyRouteCenterlineFeet; // pFt2Emt
 
 		// Other
-		private bool _USNodeInMS4;
-		private bool _USNodeInUIC;
-		private double _USNodeDepth;
-		private double _DSNodeDepth;
-		private int _SurfaceSlopePct;
-		private bool _IsNearBuilding;
-		private int _DistToBuildingFeet;
-		private bool _IsNearHydrant;
-		private int _DistToHydrant;
-		private bool _IsHardArea;
+		private bool _USNodeInMS4; // uxMS4
+		private bool _USNodeInUIC; // uxUIC
+		private double _USNodeDepth; // uDepth
+		private double _DSNodeDepth; // dDepth
+		private int _SurfaceSlopePct; // gSlope
+		private bool _IsNearBuilding; // xBldg
+		private int _DistToBuildingFeet; // xFt2Bldg
+		private bool _IsNearHydrant; // xHyd
+		private int _DistToHydrant; // xFt2Hyd
+		private bool _IsHardArea; // HardArea
 		#endregion
 
 		#region Constructors
 		public PipXP(DataAccess.ModelDataSet.MdlPipXPRow mdlPipXPRow)
 		{
-			_MstLinkID = mdlPipXPRow.MLinkID;
-			_USNode = mdlPipXPRow.USNode;
-			_DSNode = mdlPipXPRow.DSNode;
-			_CompKey = mdlPipXPRow.COMPKEY;
+			_MstLinkID = Convert.ToInt32(mdlPipXPRow.MLINKID);
+			_USNode = mdlPipXPRow.USNODE;
+			_DSNode = mdlPipXPRow.DSNODE;
+			_CompKey = Convert.ToInt32(mdlPipXPRow.COMPKEY);
+      _USX = mdlPipXPRow.xa;
+      _USY = mdlPipXPRow.ya;
+      _DSX = mdlPipXPRow.xb;
+      _DSY = mdlPipXPRow.yb;
+      _Azimuth = mdlPipXPRow.Deg2N;
 
 			_NumWaterCrossings = mdlPipXPRow.xWtr;
 			_SmallestWaterCrossingDiameterInches = mdlPipXPRow.xWMinD;
 			_LargestWaterCrossingDiameterInches = mdlPipXPRow.xWMaxD;
-			_HasWaterParallel = mdlPipXPRow.pWtr == 1;
+			_HasWaterParallel = mdlPipXPRow.pWtr >= 1;
+      _ParallelWaterLenWithin2ft = mdlPipXPRow.pWtr2;
+      _ParallelWaterLenWithin4ft = mdlPipXPRow.pWtr4;
+      _ParallelWaterLenWithin6ft = mdlPipXPRow.pWtr6;
+      _ParallelWaterLenWithin8ft = mdlPipXPRow.pWtr8;
+      _ParallelWaterLenWithin10ft = mdlPipXPRow.pWtr10;
+      _ParallelWaterLenWithin12ft = mdlPipXPRow.pWtr12;
 			_LargestWaterParallelDiameterInches = mdlPipXPRow.pWtrMaxD;
 			_DistToWaterParallelFeet = mdlPipXPRow.pFt2Wtr;
+
+      _parallelWaterLookup.Add(2, _ParallelWaterLenWithin2ft);
+      _parallelWaterLookup.Add(4, _ParallelWaterLenWithin4ft);
+      _parallelWaterLookup.Add(6, _ParallelWaterLenWithin6ft);
+      _parallelWaterLookup.Add(8, _ParallelWaterLenWithin8ft);
+      _parallelWaterLookup.Add(10, _ParallelWaterLenWithin10ft);
+      _parallelWaterLookup.Add(12, _ParallelWaterLenWithin12ft);
 
 			_NumSewerCrossings = mdlPipXPRow.xSewer;
 			_SmallestSewerCrossingDiameterInches = mdlPipXPRow.xSwrMinD;
 			_LargestSewerCrossingDiameterInches = mdlPipXPRow.xSwrMaxD;
-			_HasSewerParallel = mdlPipXPRow.pSewer == 1;
+			_HasSewerParallel = mdlPipXPRow.pSewer >= 1;
+      _ParallelSewerLenWithin2ft = mdlPipXPRow.pSwr2;
+      _ParallelSewerLenWithin4ft = mdlPipXPRow.pSwr4;
+      _ParallelSewerLenWithin6ft = mdlPipXPRow.pSwr6;
+      _ParallelSewerLenWithin8ft = mdlPipXPRow.pSwr8;
+      _ParallelSewerLenWithin10ft = mdlPipXPRow.pSwr10;
 			_LargestSewerParallelDiameterInches = mdlPipXPRow.pSwrMaxD;
 			_DistToSewerParallelFeet = mdlPipXPRow.pFt2Swr;
 
-			_NumStreetCrossings = mdlPipXPRow.xStrt;
+      _parallelSewerLookup.Add(2, _ParallelSewerLenWithin2ft);
+      _parallelSewerLookup.Add(4, _ParallelSewerLenWithin4ft);
+      _parallelSewerLookup.Add(6, _ParallelSewerLenWithin6ft);
+      _parallelSewerLookup.Add(8, _ParallelSewerLenWithin8ft);
+      _parallelSewerLookup.Add(10, _ParallelSewerLenWithin10ft);
+
+      _NumStreetCrossings = mdlPipXPRow.xStrt;
 			_NumArterialCrossings = mdlPipXPRow.xArt;
 			_NumMajorArterialCrossings = mdlPipXPRow.xMJArt;
 			_NumFreewayCrossings = mdlPipXPRow.xFrwy;
-			_IsInStreet = mdlPipXPRow.pStrt == 1;
+			_IsInStreet = mdlPipXPRow.pStrt >= 1;
 			switch (mdlPipXPRow.pStrtTyp)
       {
       	case 1110:
@@ -170,10 +223,10 @@ namespace SystemsAnalysis.Modeling
 			_TrafficVolVehiclesPerDay = mdlPipXPRow.pTraffic;
 
 			_NumRailroadCrossings = mdlPipXPRow.xRail;
-			_HasRailroadParallel = mdlPipXPRow.pRail == 1;
+			_HasRailroadParallel = mdlPipXPRow.pRail >= 1;
 			_DistToRailroadParallelFeet = mdlPipXPRow.pFt2Rail;
 			_NumLightRailCrossings = mdlPipXPRow.xLRT;
-			_HasLightRailParallel = mdlPipXPRow.pLRT == 1;
+			_HasLightRailParallel = mdlPipXPRow.pLRT >= 1;
 			_DistToLightRailParallelFeet = mdlPipXPRow.pFt2LRT;
 
 			_NumFiberOpticCrossings = mdlPipXPRow.xFiber;
@@ -191,6 +244,9 @@ namespace SystemsAnalysis.Modeling
 			_AreaPreservationZoneSqFt = mdlPipXPRow.xEzAreaP;
 			_IsNearContaminationSite = mdlPipXPRow.xEcsi == 1;
 			_DistToNearestEcsiFeet = mdlPipXPRow.xFt2Ecsi;
+      _LengthInEcsiFeet = mdlPipXPRow.xEcsiLen;
+      _IsNearLUST = mdlPipXPRow.xLUST == 1;
+      _DistToNearestLUSTFeet = mdlPipXPRow.xFt2LUST;
 			_VolHazardousConflictCuYd = mdlPipXPRow.xEcsiVol;
 
 			_IsNearSchool = mdlPipXPRow.xSchl == 1;
@@ -209,7 +265,7 @@ namespace SystemsAnalysis.Modeling
 			_USNodeInUIC = mdlPipXPRow.uxUIC == 1;
 			_USNodeDepth = mdlPipXPRow.uDepth;
 			_DSNodeDepth = mdlPipXPRow.dDepth;
-			_SurfaceSlopePct = mdlPipXPRow.gSlope;
+			_SurfaceSlopePct = Convert.ToInt32(mdlPipXPRow.gSlope);
 			_IsNearBuilding = mdlPipXPRow.xBldg == 1;
 			_DistToBuildingFeet = mdlPipXPRow.xFt2Bldg;
 			_IsNearHydrant = mdlPipXPRow.xHyd == 1;
@@ -267,6 +323,62 @@ namespace SystemsAnalysis.Modeling
 			} // get
 		} // CompKey
 
+    /// <summary>
+    /// Upstream X-coordinate
+    /// </summary>
+    public double US_XCoord
+    {
+      get
+      {
+        return _USX;
+      }
+    }
+
+    /// <summary>
+    /// Upstream Y-coordinate
+    /// </summary>
+    public double US_YCoord
+    {
+      get
+      {
+        return _USY;
+      }
+    }
+
+    /// <summary>
+    /// Downstream X-coordinate
+    /// </summary>
+    public double DS_XCoord
+    {
+      get
+      {
+        return _DSX;
+      }
+    }
+
+    /// <summary>
+    /// Downstream y-coordinate
+    /// </summary>
+    public double DS_YCoord
+    {
+      get
+      {
+        return _DSY;
+      }
+    }
+
+    /// <summary>
+    /// Direction of line as compared to North (0 degrees), considering only direction of line
+    /// from 0 to 180 degrees
+    /// </summary>
+    public double Direction
+    {
+      get
+      {
+        return _Azimuth;
+      }
+    }
+
 		/// <summary>
 		/// Num water crossings
 		/// </summary>
@@ -314,6 +426,45 @@ namespace SystemsAnalysis.Modeling
 				return _HasWaterParallel;
 			} // get
 		} // HasWaterParallel
+
+    public double LengthOfPipeFtNearElementByFt(
+      SortedList<double, double> elementDistTable,
+      double distFromElement)
+    {
+      List<double> elementDistTableKeys = new List<double>(elementDistTable.Keys);
+      int lookupIndex = elementDistTableKeys.BinarySearch(distFromElement);
+      if (lookupIndex > 0)
+        return elementDistTable.Values[lookupIndex];
+      else
+      {
+        int nearestLookupIndex = ~lookupIndex;
+        if ((nearestLookupIndex >= 0) && (nearestLookupIndex < elementDistTable.Count))
+        {
+          if (nearestLookupIndex > 0)
+          {
+            return elementDistTable.Values[nearestLookupIndex];
+          }
+          else
+          {
+            return elementDistTable.Values[0];
+          }
+        }
+        else
+        {
+          return elementDistTable.Values[elementDistTable.Count - 1];
+        }
+      }
+    }
+
+    /// <summary>
+    /// Returns the length of pipe considered parallel to a water pipe at less than the given distance
+    /// </summary>
+    /// <param name="distFromWater">Distance to consider from water pipes</param>
+    /// <returns>Length of pipe from nearby parallel water pipes</returns>
+    public double LengthOfPipeFtNearWaterByFt(double distFromWater)
+    {
+      return LengthOfPipeFtNearElementByFt(_parallelWaterLookup, distFromWater);
+    }
 
 		/// <summary>
 		/// Largest water parallel diameter inches
@@ -411,7 +562,17 @@ namespace SystemsAnalysis.Modeling
 			} // get
 		} // DistToSewerParallelFeet
 
-		/// <summary>
+    /// <summary>
+    /// Returns the length of pipe considered parallel to a sewer pipe at less than the given distance
+    /// </summary>
+    /// <param name="distFromSewer">Distance to consider from sewer pipes</param>
+    /// <returns>Length of pipe from nearby parallel sewer pipes</returns>
+    public double LengthOfPipeFtNearSewerByFt(double distFromSewer)
+    {
+      return LengthOfPipeFtNearElementByFt(_parallelSewerLookup, distFromSewer);
+    }
+
+    /// <summary>
 		/// Num street crossings
 		/// </summary>
 		/// <returns>Int</returns>
@@ -783,6 +944,17 @@ namespace SystemsAnalysis.Modeling
 			} // get
 		} // DistToNearestEcsiFeet
 
+    /// <summary>
+    /// Length of pipe influenced by ECSI in feet
+    /// </summary>
+    public double LengthInEcsiFeet
+    {
+      get
+      {
+        return _LengthInEcsiFeet;
+      }
+    }
+
 		/// <summary>
 		/// Vol hazardous materials cu yd
 		/// </summary>
@@ -794,6 +966,28 @@ namespace SystemsAnalysis.Modeling
 				return _VolHazardousConflictCuYd;
 			} // get
 		} // VolHazardousMaterialsCuYd
+
+    /// <summary>
+    /// True if pipe is near a LUST (leaking underground storage tank)
+    /// </summary>
+    public bool IsNearLUST
+    {
+      get
+      {
+        return _IsNearLUST;
+      }
+    }
+
+    /// <summary>
+    /// Distance from pipe to nearest LUST
+    /// </summary>
+    public int DistToNearestLUSTFeet
+    {
+      get
+      {
+        return _DistToNearestLUSTFeet;
+      }
+    }
 
 		/// <summary>
 		/// Is near school
