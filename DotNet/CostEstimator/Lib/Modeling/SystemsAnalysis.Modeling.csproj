@@ -128,6 +128,7 @@
     <Compile Include="AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="LookupTable.cs" />
     <Compile Include="ParkingTarget.cs" />
     <Compile Include="DiversionStructure.cs">
       <SubType>Code</SubType>

@@ -1,4 +1,4 @@
-// Project: Classes, File: ReportItem.cs
+﻿// Project: Classes, File: ReportItem.cs
 // Namespace: SystemsAnalysis.Analysis.CostEstimator.Classes, Class: 
 // Path: C:\Development\DotNet\CostEstimator\Classes, Author: Arnel
 // Code lines: 17, Size of file: 326 Bytes
@@ -12,16 +12,20 @@ using System.Xml;
 
 namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 {
-	public enum ReportItemType
-	{
-		Unassigned, Generic, Summary, Pipe, InflowControl
-	} // enum ReportItemType
+  public enum ReportItemType
+  {
+    Unassigned,
+    Generic,
+    Summary,
+    Pipe,
+    InflowControl
+  } // enum ReportItemType
 
   /// <summary>
   /// Common functions for all report items
   /// </summary>
-	public interface ReportItem
-	{
-		void WriteXML(XmlWriter xw);
-	}
+  public interface ReportItem
+  {
+    void WriteXML(XmlWriter xw);
+  }
 }

@@ -1,9 +1,10 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using Access = Microsoft.Office.Interop.Access;
 using dao;
 using System.Reflection;
+
 //using Microsoft.Office.Interop.Access.Dao;
 using System.IO;
 using System.Data.SqlClient;
@@ -51,7 +52,7 @@ namespace SystemsAnalysis.Utils.AccessUtils
     /// could refactor to allow shared access).
     /// </summary>
     /// <param name="databaseName">The fully qualifed path to an existing
-    /// Access database.</param>
+    /// Access database.  </param>
     public AccessHelper(string databaseName)
     {
       //force shutdown of access before we try to open a new instance of ms Access
@@ -68,30 +69,30 @@ namespace SystemsAnalysis.Utils.AccessUtils
 
     public AccessHelper(string databaseName, string SQLDatabaseName)
     {
-        //force shutdown of access before we try to open a new instance of ms Access
-        //This is necessary because if we are doing many many runs, eventually
-        //access will fail to close completely (managed code doesn't always
-        //implement a destructor completely).
-        startTime = System.DateTime.Now;
-        accessApp = ShellGetDB(databaseName, 2000);
-        //accessApp = new Access.Application();
-        CurrentDB = this.accessApp.CurrentDb();
+      //force shutdown of access before we try to open a new instance of ms Access
+      //This is necessary because if we are doing many many runs, eventually
+      //access will fail to close completely (managed code doesn't always
+      //implement a destructor completely).
+      startTime = System.DateTime.Now;
+      accessApp = ShellGetDB(databaseName, 2000);
+      //accessApp = new Access.Application();
+      CurrentDB = this.accessApp.CurrentDb();
 
-        disposed = false;
+      disposed = false;
     }
 
     public AccessHelper()
     {
-        //force shutdown of access before we try to open a new instance of ms Access
-        //This is necessary because if we are doing many many runs, eventually
-        //access will fail to close completely (managed code doesn't always
-        //implement a destructor completely).
-        startTime = System.DateTime.Now;
-        //accessApp = ShellGetDB(databaseName, 2000);
-        //accessApp = new Access.Application();
-        CurrentDB = null;
+      //force shutdown of access before we try to open a new instance of ms Access
+      //This is necessary because if we are doing many many runs, eventually
+      //access will fail to close completely (managed code doesn't always
+      //implement a destructor completely).
+      startTime = System.DateTime.Now;
+      //accessApp = ShellGetDB(databaseName, 2000);
+      //accessApp = new Access.Application();
+      CurrentDB = null;
 
-        disposed = false;
+      disposed = false;
     }
 
 
@@ -128,83 +129,79 @@ namespace SystemsAnalysis.Utils.AccessUtils
       linkTable.SourceTableName = tableName;
       CurrentDB.TableDefs.Append(linkTable);
     }
-   
     public static void AccessDropTable(string AccessTableName, string outputDatabase)
     {
+      string linkTableConnection = outputDatabase;
+      //linkTable.SourceTableName = tableName;
+      dao._DBEngine dbEng = new dao.DBEngineClass();
+      dao.Workspace ws = dbEng.CreateWorkspace("", "admin", "", dao.WorkspaceTypeEnum.dbUseJet);
+      dao.Database db = ws.OpenDatabase(outputDatabase, true, false, "");
 
-        string linkTableConnection = outputDatabase;
-        //linkTable.SourceTableName = tableName;
-        dao._DBEngine dbEng = new dao.DBEngineClass();
-        dao.Workspace ws = dbEng.CreateWorkspace("", "admin", "", dao.WorkspaceTypeEnum.dbUseJet);
-        dao.Database db = ws.OpenDatabase(outputDatabase, true, false, "");
+      //get rid of the table if it already exists in access
+      try
+      {
+        db.Execute("DROP TABLE " + AccessTableName, Type.Missing);
+      }
+      catch (Exception ex)
+      {
+        //table doesnt exist
+      }
 
-        //get rid of the table if it already exists in access
-        try
-        {
-            db.Execute("DROP TABLE " + AccessTableName, Type.Missing);
-        }
-        catch (Exception ex)
-        {
-            //table doesnt exist
-        }
-
-        db.Close();
-        ws.Close();
+      db.Close();
+      ws.Close();
     }
 
     public static void AccessDropQuery(string AccessQueryName, string outputDatabase)
     {
+      string linkTableConnection = outputDatabase;
+      //linkTable.SourceTableName = tableName;
+      dao._DBEngine dbEng = new dao.DBEngineClass();
+      dao.Workspace ws = dbEng.CreateWorkspace("", "admin", "", dao.WorkspaceTypeEnum.dbUseJet);
+      dao.Database db = ws.OpenDatabase(outputDatabase, true, false, "");
 
-        string linkTableConnection = outputDatabase;
-        //linkTable.SourceTableName = tableName;
-        dao._DBEngine dbEng = new dao.DBEngineClass();
-        dao.Workspace ws = dbEng.CreateWorkspace("", "admin", "", dao.WorkspaceTypeEnum.dbUseJet);
-        dao.Database db = ws.OpenDatabase(outputDatabase, true, false, "");
+      //get rid of the table if it already exists in access
+      try
+      {
+        db.DeleteQueryDef(AccessQueryName);
+      }
+      catch (Exception ex)
+      {
+        //table doesnt exist
+      }
 
-        //get rid of the table if it already exists in access
-        try
-        {
-            db.DeleteQueryDef(AccessQueryName);
-        }
-        catch (Exception ex)
-        {
-            //table doesnt exist
-        }
-
-        db.Close();
-        ws.Close();
+      db.Close();
+      ws.Close();
     }
 
     public static void AccessCopyTable(string CopiedTableName, string OriginalTableName, string outputDatabase)
     {
+      string linkTableConnection = outputDatabase;
+      //linkTable.SourceTableName = tableName;
+      dao._DBEngine dbEng = new dao.DBEngineClass();
+      dao.Workspace ws = dbEng.CreateWorkspace("", "admin", "", dao.WorkspaceTypeEnum.dbUseJet);
+      dao.Database db = ws.OpenDatabase(outputDatabase, true, false, "");
 
-        string linkTableConnection = outputDatabase;
-        //linkTable.SourceTableName = tableName;
-        dao._DBEngine dbEng = new dao.DBEngineClass();
-        dao.Workspace ws = dbEng.CreateWorkspace("", "admin", "", dao.WorkspaceTypeEnum.dbUseJet);
-        dao.Database db = ws.OpenDatabase(outputDatabase, true, false, "");
+      //get rid of the table if it already exists in access
+      try
+      {
+        db.Execute("DROP TABLE " + CopiedTableName, Type.Missing);
+      }
+      catch (Exception ex)
+      {
+        //table doesn't exist
+      }
 
-        //get rid of the table if it already exists in access
-        try
-        {
-            db.Execute("DROP TABLE " + CopiedTableName, Type.Missing);
-        }
-        catch (Exception ex)
-        {
-            //table doesn't exist
-        }
+      try
+      {
+        db.Execute("SELECT * INTO " + CopiedTableName + " FROM " + OriginalTableName, Type.Missing);
+      }
+      catch (Exception ex)
+      {
+        //table doesn't exist
+      }
 
-        try
-        {
-            db.Execute("SELECT * INTO " +CopiedTableName + " FROM " + OriginalTableName, Type.Missing);
-        }
-        catch (Exception ex)
-        {
-            //table doesn't exist
-        }
-
-        db.Close();
-        ws.Close();
+      db.Close();
+      ws.Close();
     }
 
     /// <summary>
@@ -222,7 +219,7 @@ namespace SystemsAnalysis.Utils.AccessUtils
     /// </summary>
     /// <param name="tableName">The name of the table to find</param>
     /// <returns>A TableDef in the current database matching table name,
-    /// or null if no table is found</returns>
+    /// or null if no table is found  </returns>
     private dao.TableDef GetTableDef(string tableName)
     {
       dao.TableDefs tableDefs = CurrentDB.TableDefs;
@@ -243,7 +240,7 @@ namespace SystemsAnalysis.Utils.AccessUtils
     /// </summary>
     /// <param name="queryName">The name of the query to find</param>
     /// <returns>A QueryDef in the current database matching query name,
-    /// or null if no query is found</returns>
+    /// or null if no query is found  </returns>
     private dao.QueryDef GetQueryDef(string queryName)
     {
       dao.QueryDefs queryDefs = CurrentDB.QueryDefs;
@@ -284,29 +281,29 @@ namespace SystemsAnalysis.Utils.AccessUtils
     /// The name of a query to create in a database.
     /// The name of the database to create the query in
     /// </summary>
-    /// <param name ="queryName">The name of the query to create</param>
-    /// <param name ="queryText">An SQL statement to store in a query in the database</param>
-    /// <param name ="DatabaseName">The location of the access database in which to place the query</param>
+    /// <param name="queryName">The name of the query to create</param>
+    /// <param name="queryText">An SQL statement to store in a query in the database</param>
+    /// <param name="DatabaseName">The location of the access database in which to place the query</param>
     public static void AccessCreateQuery(string queryName, string queryText, string accessDBLocation)
     {
-        //delete the query, if it already exists
-        AccessDropQuery(queryName, accessDBLocation);
+      //delete the query, if it already exists
+      AccessDropQuery(queryName, accessDBLocation);
 
-        dao._DBEngine dbEng = new dao.DBEngineClass();
-        dao.Workspace ws = dbEng.CreateWorkspace("", "admin", "", dao.WorkspaceTypeEnum.dbUseJet);
-        dao.Database db = ws.OpenDatabase(accessDBLocation, true, false, "");
+      dao._DBEngine dbEng = new dao.DBEngineClass();
+      dao.Workspace ws = dbEng.CreateWorkspace("", "admin", "", dao.WorkspaceTypeEnum.dbUseJet);
+      dao.Database db = ws.OpenDatabase(accessDBLocation, true, false, "");
 
-        try
-        {
-            db.CreateQueryDef(queryName, queryText);
-        }
-        catch (Exception ex)
-        {
-            //
-        }
+      try
+      {
+        db.CreateQueryDef(queryName, queryText);
+      }
+      catch (Exception ex)
+      {
+        //
+      }
 
-        db.Close();
-        ws.Close();
+      db.Close();
+      ws.Close();
     }
 
     /// <summary>
@@ -314,12 +311,12 @@ namespace SystemsAnalysis.Utils.AccessUtils
     /// </summary>
     /// <param name="queryName">The name of the query to create</param>
     /// <param name="queryText">An SQL statement to store in a query in the 
-    /// current database</param>
+    /// current database  </param>
     public void CreateQuery(string queryName, string queryText)
     {
       DeleteQuery(queryName);
       CurrentDB.CreateQueryDef(queryName, queryText);
-    }    
+    }
 
     /// <summary>
     /// Deletes a query from the current database.
@@ -332,7 +329,7 @@ namespace SystemsAnalysis.Utils.AccessUtils
         CurrentDB.QueryDefs.Delete(queryName);
       }
       return;
-    }    
+    }
 
     /// <summary>
     /// Executes an action query in the current database.
@@ -352,35 +349,35 @@ namespace SystemsAnalysis.Utils.AccessUtils
     /// <param name="accessDBLocation">The location of the database in which to execute the action query</param>
     public static void AccessExecuteActionQuery(string queryName, string accessDBLocation)
     {
-        dao._DBEngine dbEng = new dao.DBEngineClass();
-        dao.Workspace ws = dbEng.CreateWorkspace("", "admin", "", dao.WorkspaceTypeEnum.dbUseJet);
-        dao.Database db = ws.OpenDatabase(accessDBLocation, true, false, "");
+      dao._DBEngine dbEng = new dao.DBEngineClass();
+      dao.Workspace ws = dbEng.CreateWorkspace("", "admin", "", dao.WorkspaceTypeEnum.dbUseJet);
+      dao.Database db = ws.OpenDatabase(accessDBLocation, true, false, "");
 
-        try
+      try
+      {
+        dao.QueryDef queryDef = null;
+
+        dao.QueryDefs queryDefs = db.QueryDefs;
+
+        for (int i = 0; i < queryDefs.Count; i++)
         {
-            dao.QueryDef queryDef = null;
-
-            dao.QueryDefs queryDefs = db.QueryDefs;
-
-            for (int i = 0; i < queryDefs.Count; i++)
-            {
-                dao.QueryDef queryDefMatch = queryDefs[i];
-                if (queryName.ToUpper() == queryDefMatch.Name.ToUpper())
-                {
-                    queryDef = queryDefMatch;
-                }
-            }
-
-            queryDef.Execute(null);
-        }
-        catch (Exception ex)
-        {
-            //
+          dao.QueryDef queryDefMatch = queryDefs[i];
+          if (queryName.ToUpper() == queryDefMatch.Name.ToUpper())
+          {
+            queryDef = queryDefMatch;
+          }
         }
 
-        db.Close();
-        ws.Close();
-    }    
+        queryDef.Execute(null);
+      }
+      catch (Exception ex)
+      {
+        //
+      }
+
+      db.Close();
+      ws.Close();
+    }
 
     /// <summary>
     /// translates a CSV file to an access file for MapInfo consumption
@@ -421,10 +418,10 @@ namespace SystemsAnalysis.Utils.AccessUtils
     /// access table.  Both tables must belong to the same database.
     /// </summary>
     /// <param name="sourceTable">The contents of the source table will be copied and added to the
-    /// destination table.  The source table will remain fully populated after the process.</param>
+    /// destination table.  The source table will remain fully populated after the process.  </param>
     /// <param name="destinationTable">The destination table will retain the original values
     /// as well as a copy of the records in the sourceTable.  It is recommended that the
-    /// function which calls AppendTable first checks that the two tables are compatible.</param>
+    /// function which calls AppendTable first checks that the two tables are compatible.  </param>
     public void AppendTable(string sourceTable, string destinationTable)
     {
       CurrentDB.Execute("INSERT INTO " + destinationTable + " SELECT * FROM " + sourceTable, Type.Missing);
@@ -445,7 +442,7 @@ namespace SystemsAnalysis.Utils.AccessUtils
     /// <param name="tableA">Table A is one of two tables to check for schema compatibility.</param>
     /// <param name="tableB">Table B is one of two tables to check for schema compatibility.</param>
     /// <returns>Returns boolean fieldsMatch, which is false if the fields do not match, and 
-    /// true if the fields do match.</returns>
+    /// true if the fields do match.  </returns>
     public bool SchemasMatch(string tableA, string tableB)
     {
       int namesMatch = 0;
@@ -497,7 +494,7 @@ namespace SystemsAnalysis.Utils.AccessUtils
     /// <param name="queryName">The name of the query in the current database to export</param>
     /// <param name="outputFile">The file contents of the table should be exported to</param>
     /// <param name="exportType">The type of file to write to; .csv file is the only implemented
-    /// type at this time, although .xml file should be implemented</param>
+    /// type at this time, although .xml file should be implemented  </param>
     public void ExportQuery(string queryName, string outputFile, FileType exportType)
     {
       StreamWriter streamWriter;
@@ -554,15 +551,13 @@ namespace SystemsAnalysis.Utils.AccessUtils
     /// <param name="tableName">The name of the table in the current database to export</param>
     /// <param name="outputFile">The file contents of the table should be exported to</param>
     /// <param name="exportType">The type of file to write to; .csv file is the only implemented
-    /// type at this time, although .xml file should be implemented</param>
+    /// type at this time, although .xml file should be implemented  </param>
     public void ExportTable(string tableName, string outputFile, FileType exportType)
     {
       accessApp.DoCmd.TransferText(Microsoft.Office.Interop.Access.AcTextTransferType.acExportDelim,
-         Type.Missing, tableName, outputFile, true, Type.Missing, Type.Missing);
+      Type.Missing, tableName, outputFile, true, Type.Missing, Type.Missing);
       return;
     }
-
-    
 
     /// <summary>
     /// Writes a value to a field in a key/value table.
@@ -602,15 +597,13 @@ namespace SystemsAnalysis.Utils.AccessUtils
       throw new Exception("UpdateKeyValueTable Exception: Key '" + key + "' not found.");
     }
 
-    
-
     /// <summary>
     /// Returns a Field in the specified Recordset matching the provided field name.
     /// </summary>
     /// <param name="rs">The Recordset containing the field to be located</param>
     /// <param name="fieldName">The name of the field to be found</param>
     /// <returns>The field in the provided recordset that matches the provided field name, or null if the
-    /// field is not found</returns>
+    /// field is not found  </returns>
     private dao.Field FindField(Recordset rs, string fieldName)
     {
       rs.MoveFirst();
@@ -666,7 +659,9 @@ namespace SystemsAnalysis.Utils.AccessUtils
         }
         System.Runtime.InteropServices.Marshal.ReleaseComObject(accessApp.CurrentDb());
       }
-      catch { }
+      catch
+      {
+      }
 
       try
       {
@@ -700,11 +695,12 @@ namespace SystemsAnalysis.Utils.AccessUtils
         }
         System.Runtime.InteropServices.Marshal.ReleaseComObject(accessApp);
       }
-      catch { }
+      catch
+      {
+      }
 
       accessApp = null;
       this.disposed = true;
-
     }
 
     /// <summary>
@@ -806,7 +802,7 @@ namespace SystemsAnalysis.Utils.AccessUtils
       try
       {
         Microsoft.Win32.RegistryKey oReg =
-           Microsoft.Win32.Registry.LocalMachine;
+        Microsoft.Win32.Registry.LocalMachine;
         Microsoft.Win32.RegistryKey oKey = null;
         string sCLSID = null;
         string sPath = null;
@@ -822,7 +818,7 @@ namespace SystemsAnalysis.Utils.AccessUtils
         // HKEY_LOCAL_MACHINE\Software\Classes\CLSID\ 
         // {xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxx}\LocalServer32:
         oKey = oReg.OpenSubKey(@"Software\Classes\CLSID\" + sCLSID +
-           @"\LocalServer32");
+        @"\LocalServer32");
         sPath = oKey.GetValue("").ToString();
         oKey.Close();
 
@@ -858,7 +854,6 @@ namespace SystemsAnalysis.Utils.AccessUtils
       {
         CurrentDB.Execute("ALTER TABLE " + tableName + " ADD COLUMN " + fieldName + " " + fieldTypeToString + ";", Type.Missing);
       }
-
     }
 
     /// <summary>
@@ -870,7 +865,7 @@ namespace SystemsAnalysis.Utils.AccessUtils
     /// <param name="fieldName">The name of the field to look for</param>
     /// <param name="fieldType">Unused.  Symmetry</param>
     /// <returns>Returns boolean true if the table already contains a field
-    /// with the proposed field name, false otherwise.</returns>
+    /// with the proposed field name, false otherwise.  </returns>
     public bool FieldNameExists(string tableName, string fieldName, FieldType fieldType)
     {
       TableDef tbl;
@@ -930,9 +925,7 @@ namespace SystemsAnalysis.Utils.AccessUtils
       dao.Fields fields = recordSet.Fields;
       for (int i = 0; i < fields.Count; i++)
       {
-
         aggregateQueryResults.Add(fields[i].Name, fields[i].Value);
-
       }
       return aggregateQueryResults;
     }
@@ -958,15 +951,8 @@ namespace SystemsAnalysis.Utils.AccessUtils
         {
           aggregateQueryResults.Add(fields[i].Name, (double)0);
         }
-
       }
       return aggregateQueryResults;
     }
-
-    
-
-      
-
-
   }
 }

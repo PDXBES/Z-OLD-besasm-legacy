@@ -10,13 +10,14 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using SystemsAnalysis.Modeling.Alternatives;
+
 #endregion
 
 namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 {
-	public class ConstructionDurationCalculator
-	{
-		public const int MAINLINE_BUILD_RATE_PER_DAY_CUYD = 140;
+  public class ConstructionDurationCalculator
+  {
+    public const int MAINLINE_BUILD_RATE_PER_DAY_CUYD = 140;
     public const double MANHOLE_BUILD_RATE_PER_DAY_FT = 10;
     public const double CROSSING_RATE_PER_DAY_EA = 0.5;
     public const int PAVEMENT_REPAIR_RATE_PER_DAY_FT = 250;
@@ -26,19 +27,19 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     public const double BOREJACK_FAST_BUILD_RATE_PER_DAY_FT = 125;
     public const double BOREJACK_SLOW_BUILD_RATE_PER_DAY_FT = 75;
 
-		#region Properties
-		/// <summary>
-		/// Duration of construction based on build rates of components (mainline,
+    #region Properties
+    /// <summary>
+    /// Duration of construction based on build rates of components (mainline,
     /// manhole, pavement, and crossings)
-		/// </summary>
-		/// <returns>Number of fractional days needed to build pipe</returns>
-    static public double ConstructionDurationDays(ConflictPackage conflictPackage)
-		{
-			PipeCoster pipeCoster = new PipeCoster();
+    /// </summary>
+    /// <returns>Number of fractional days needed to build pipe</returns>
+    public static double ConstructionDurationDays(ConflictPackage conflictPackage)
+    {
+      PipeCoster pipeCoster = new PipeCoster();
 
-			pipeCoster.InsideDiameter = conflictPackage.Diameter;
-			pipeCoster.Depth = conflictPackage.Depth;
-			pipeCoster.Material = conflictPackage.PipeMaterial;
+      pipeCoster.InsideDiameter = conflictPackage.Diameter;
+      pipeCoster.Depth = conflictPackage.Depth;
+      pipeCoster.Material = conflictPackage.PipeMaterial;
 
       double numDays = 0;
 
@@ -46,40 +47,40 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       {
         BoringJackingAncillaryCost testBoring = new BoringJackingAncillaryCost(conflictPackage);
         numDays = testBoring.IsMicroTunnel ?
-          Math.Ceiling(conflictPackage.Length / MICROTUNNEL_BUILD_RATE_PER_DAY_FT) :
-          conflictPackage.Diameter <= BOREJACK_SLOWERDIAMETER_IN ?
-          Math.Ceiling(conflictPackage.Length / BOREJACK_FAST_BUILD_RATE_PER_DAY_FT) :
-          Math.Ceiling(conflictPackage.Length / BOREJACK_SLOW_BUILD_RATE_PER_DAY_FT);
+        Math.Ceiling(conflictPackage.Length / MICROTUNNEL_BUILD_RATE_PER_DAY_FT) :
+        conflictPackage.Diameter <= BOREJACK_SLOWERDIAMETER_IN ?
+        Math.Ceiling(conflictPackage.Length / BOREJACK_FAST_BUILD_RATE_PER_DAY_FT) :
+        Math.Ceiling(conflictPackage.Length / BOREJACK_SLOW_BUILD_RATE_PER_DAY_FT);
       } // if
       else
       {
         // 1 day per 10 ft vertical of manhole
         double manholeConstructionDurationDays = conflictPackage.Depth /
-          MANHOLE_BUILD_RATE_PER_DAY_FT;
+        MANHOLE_BUILD_RATE_PER_DAY_FT;
         // Mainline at 140 cy per day
         double mainlineConstructionDurationDays = pipeCoster.ExcavationVolume * conflictPackage.Length / MAINLINE_BUILD_RATE_PER_DAY_CUYD;
         // Utility crossings add 0.5 days per conflict
         int numUtilityCrossings =
-          (conflictPackage.Conflicts == null) ? 0 :
-          conflictPackage.Conflicts.NumFiberOpticCrossings +
-          conflictPackage.Conflicts.NumGasCrossings +
-          conflictPackage.Conflicts.NumSewerCrossings +
-          conflictPackage.Conflicts.NumWaterCrossings;
+        (conflictPackage.Conflicts == null) ? 0 :
+        conflictPackage.Conflicts.NumFiberOpticCrossings +
+        conflictPackage.Conflicts.NumGasCrossings +
+        conflictPackage.Conflicts.NumSewerCrossings +
+        conflictPackage.Conflicts.NumWaterCrossings;
         double utilityCrossingDurationDays = numUtilityCrossings * CROSSING_RATE_PER_DAY_EA;
         // Pavement repair at 250 feet per day
         double pavementRepairDurationDays = conflictPackage.Length / PAVEMENT_REPAIR_RATE_PER_DAY_FT;
 
         numDays = Math.Ceiling(
-          manholeConstructionDurationDays +
-          mainlineConstructionDurationDays +
-          utilityCrossingDurationDays +
-          pavementRepairDurationDays);
+        manholeConstructionDurationDays +
+        mainlineConstructionDurationDays +
+        utilityCrossingDurationDays +
+        pavementRepairDurationDays);
       } // else
 
-			if (numDays < 0)
-				throw new Exception(string.Format("Check pipe for negative length or depth:\n\n{0} {1}-{2}", conflictPackage.MstLinkID, conflictPackage.USNode, conflictPackage.DSNode));
-			return numDays;
-		} // ConstructionDuration
-		#endregion
-	}
+      if (numDays < 0)
+        throw new Exception(string.Format("Check pipe for negative length or depth:\n\n{0} {1}-{2}", conflictPackage.MstLinkID, conflictPackage.USNode, conflictPackage.DSNode));
+      return numDays;
+    } // ConstructionDuration
+    #endregion
+  }
 }
