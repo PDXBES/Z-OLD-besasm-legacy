@@ -1,9 +1,9 @@
-﻿namespace SystemsAnalysis.DataAccess {
-    
-    
-    public partial class PumpStationDataSet {
-        partial class ForceMainsDataTable
-        {
-        }
+﻿namespace SystemsAnalysis.DataAccess
+{
+  public partial class PumpStationDataSet
+  {
+    partial class ForceMainsDataTable
+    {
     }
+  }
 }

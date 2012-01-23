@@ -5501,6 +5501,18 @@ namespace SystemsAnalysis.DataAccess {
             
             private global::System.Data.DataColumn columnTXT50;
             
+            private global::System.Data.DataColumn columnpRail10;
+            
+            private global::System.Data.DataColumn columnpRail20;
+            
+            private global::System.Data.DataColumn columnpRail30;
+            
+            private global::System.Data.DataColumn columnpLRT10;
+            
+            private global::System.Data.DataColumn columnpLRT20;
+            
+            private global::System.Data.DataColumn columnpLRT30;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public MdlPipXPDataTable() {
                 this.TableName = "MdlPipXP";
@@ -6211,6 +6223,48 @@ namespace SystemsAnalysis.DataAccess {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn pRail10Column {
+                get {
+                    return this.columnpRail10;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn pRail20Column {
+                get {
+                    return this.columnpRail20;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn pRail30Column {
+                get {
+                    return this.columnpRail30;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn pLRT10Column {
+                get {
+                    return this.columnpLRT10;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn pLRT20Column {
+                get {
+                    return this.columnpLRT20;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public global::System.Data.DataColumn pLRT30Column {
+                get {
+                    return this.columnpLRT30;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -6335,7 +6389,13 @@ namespace SystemsAnalysis.DataAccess {
                         int INT02, 
                         double FLT01, 
                         double FLT02, 
-                        string TXT50) {
+                        string TXT50, 
+                        double pRail10, 
+                        double pRail20, 
+                        double pRail30, 
+                        double pLRT10, 
+                        double pLRT20, 
+                        double pLRT30) {
                 MdlPipXPRow rowMdlPipXPRow = ((MdlPipXPRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -6434,7 +6494,13 @@ namespace SystemsAnalysis.DataAccess {
                         INT02,
                         FLT01,
                         FLT02,
-                        TXT50};
+                        TXT50,
+                        pRail10,
+                        pRail20,
+                        pRail30,
+                        pLRT10,
+                        pLRT20,
+                        pLRT30};
                 rowMdlPipXPRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowMdlPipXPRow);
                 return rowMdlPipXPRow;
@@ -6556,6 +6622,12 @@ namespace SystemsAnalysis.DataAccess {
                 this.columnFLT01 = base.Columns["FLT01"];
                 this.columnFLT02 = base.Columns["FLT02"];
                 this.columnTXT50 = base.Columns["TXT50"];
+                this.columnpRail10 = base.Columns["pRail10"];
+                this.columnpRail20 = base.Columns["pRail20"];
+                this.columnpRail30 = base.Columns["pRail30"];
+                this.columnpLRT10 = base.Columns["pLRT10"];
+                this.columnpLRT20 = base.Columns["pLRT20"];
+                this.columnpLRT30 = base.Columns["pLRT30"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -6754,6 +6826,18 @@ namespace SystemsAnalysis.DataAccess {
                 base.Columns.Add(this.columnFLT02);
                 this.columnTXT50 = new global::System.Data.DataColumn("TXT50", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnTXT50);
+                this.columnpRail10 = new global::System.Data.DataColumn("pRail10", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnpRail10);
+                this.columnpRail20 = new global::System.Data.DataColumn("pRail20", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnpRail20);
+                this.columnpRail30 = new global::System.Data.DataColumn("pRail30", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnpRail30);
+                this.columnpLRT10 = new global::System.Data.DataColumn("pLRT10", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnpLRT10);
+                this.columnpLRT20 = new global::System.Data.DataColumn("pLRT20", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnpLRT20);
+                this.columnpLRT30 = new global::System.Data.DataColumn("pLRT30", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnpLRT30);
                 this.columnMAPINFO_ID.AutoIncrement = true;
                 this.columnUSNODE.MaxLength = 6;
                 this.columnDSNODE.MaxLength = 6;
@@ -13571,6 +13655,96 @@ namespace SystemsAnalysis.DataAccess {
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public double pRail10 {
+                get {
+                    try {
+                        return ((double)(this[this.tableMdlPipXP.pRail10Column]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'pRail10\' in table \'MdlPipXP\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableMdlPipXP.pRail10Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public double pRail20 {
+                get {
+                    try {
+                        return ((double)(this[this.tableMdlPipXP.pRail20Column]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'pRail20\' in table \'MdlPipXP\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableMdlPipXP.pRail20Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public double pRail30 {
+                get {
+                    try {
+                        return ((double)(this[this.tableMdlPipXP.pRail30Column]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'pRail30\' in table \'MdlPipXP\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableMdlPipXP.pRail30Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public double pLRT10 {
+                get {
+                    try {
+                        return ((double)(this[this.tableMdlPipXP.pLRT10Column]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'pLRT10\' in table \'MdlPipXP\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableMdlPipXP.pLRT10Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public double pLRT20 {
+                get {
+                    try {
+                        return ((double)(this[this.tableMdlPipXP.pLRT20Column]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'pLRT20\' in table \'MdlPipXP\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableMdlPipXP.pLRT20Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public double pLRT30 {
+                get {
+                    try {
+                        return ((double)(this[this.tableMdlPipXP.pLRT30Column]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'pLRT30\' in table \'MdlPipXP\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableMdlPipXP.pLRT30Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public bool IsMAPINFO_IDNull() {
                 return this.IsNull(this.tableMdlPipXP.MAPINFO_IDColumn);
             }
@@ -14538,6 +14712,66 @@ namespace SystemsAnalysis.DataAccess {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             public void SetTXT50Null() {
                 this[this.tableMdlPipXP.TXT50Column] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IspRail10Null() {
+                return this.IsNull(this.tableMdlPipXP.pRail10Column);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetpRail10Null() {
+                this[this.tableMdlPipXP.pRail10Column] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IspRail20Null() {
+                return this.IsNull(this.tableMdlPipXP.pRail20Column);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetpRail20Null() {
+                this[this.tableMdlPipXP.pRail20Column] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IspRail30Null() {
+                return this.IsNull(this.tableMdlPipXP.pRail30Column);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetpRail30Null() {
+                this[this.tableMdlPipXP.pRail30Column] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IspLRT10Null() {
+                return this.IsNull(this.tableMdlPipXP.pLRT10Column);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetpLRT10Null() {
+                this[this.tableMdlPipXP.pLRT10Column] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IspLRT20Null() {
+                return this.IsNull(this.tableMdlPipXP.pLRT20Column);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetpLRT20Null() {
+                this[this.tableMdlPipXP.pLRT20Column] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public bool IspLRT30Null() {
+                return this.IsNull(this.tableMdlPipXP.pLRT30Column);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            public void SetpLRT30Null() {
+                this[this.tableMdlPipXP.pLRT30Column] = global::System.Convert.DBNull;
             }
         }
         
@@ -24579,10 +24813,16 @@ WHERE        (Constructed > 0) OR
             tableMapping.ColumnMappings.Add("FLT01", "FLT01");
             tableMapping.ColumnMappings.Add("FLT02", "FLT02");
             tableMapping.ColumnMappings.Add("TXT50", "TXT50");
+            tableMapping.ColumnMappings.Add("pRail10", "pRail10");
+            tableMapping.ColumnMappings.Add("pRail20", "pRail20");
+            tableMapping.ColumnMappings.Add("pRail30", "pRail30");
+            tableMapping.ColumnMappings.Add("pLRT10", "pLRT10");
+            tableMapping.ColumnMappings.Add("pLRT20", "pLRT20");
+            tableMapping.ColumnMappings.Add("pLRT30", "pLRT30");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.InsertCommand = new global::System.Data.OleDb.OleDbCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO `mdl_pipxp_ac` (`MLINKID`, `USNODE`, `DSNODE`, `COMPKEY`, `xa`, `ya`, `xb`, `yb`, `Deg2N`, `xWtr`, `xWMinD`, `xWMaxD`, `pWtr`, `pWtr2`, `pWtr4`, `pWtr6`, `pWtr8`, `pWtr10`, `pWtr12`, `pWtrMaxD`, `pFt2Wtr`, `xSewer`, `xSwrMinD`, `xSwrMaxD`, `pSewer`, `pSwr2`, `pSwr4`, `pSwr6`, `pSwr8`, `pSwr10`, `pSwrMaxD`, `pFt2Swr`, `xStrt`, `xArt`, `xMJArt`, `xFrwy`, `pStrt`, `pStrtTyp`, `pFt2Strt`, `pTraffic`, `uxCLx`, `uxFt2CLx`, `dxCLx`, `dxFt2CLx`, `xFiber`, `pFiber`, `pFt2Fiber`, `xGas`, `pGas`, `pFt2Gas`, `xRail`, `pRail`, `pFt2Rail`, `xLRT`, `pLRT`, `pFt2LRT`, `xEmt`, `pEmt`, `pFt2Emt`, `xEzonC`, `xEzonP`, `xFtEzonC`, `xFtEzonP`, `xEzAreaC`, `xEzAreaP`, `uxMS4`, `uxUIC`, `uDepth`, `dDepth`, `xPipSlope`, `gSlope`, `xEcsi`, `xFt2Ecsi`, `xEcsiLen`, `xEcsiVol`, `xLUST`, `xFt2LUST`, `xSchl`, `xFt2Schl`, `xHosp`, `xFt2Hosp`, `xPol`, `xFt2Pol`, `xFire`, `xFt2Fire`, `xBldg`, `xFt2Bldg`, `xHyd`, `xFt2Hyd`, `HardArea`, `xpDeg2N`, `INT01`, `INT02`, `FLT01`, `FLT02`, `TXT50`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO `mdl_pipxp_ac` (`MLINKID`, `USNODE`, `DSNODE`, `COMPKEY`, `xa`, `ya`, `xb`, `yb`, `Deg2N`, `xWtr`, `xWMinD`, `xWMaxD`, `pWtr`, `pWtr2`, `pWtr4`, `pWtr6`, `pWtr8`, `pWtr10`, `pWtr12`, `pWtrMaxD`, `pFt2Wtr`, `xSewer`, `xSwrMinD`, `xSwrMaxD`, `pSewer`, `pSwr2`, `pSwr4`, `pSwr6`, `pSwr8`, `pSwr10`, `pSwrMaxD`, `pFt2Swr`, `xStrt`, `xArt`, `xMJArt`, `xFrwy`, `pStrt`, `pStrtTyp`, `pFt2Strt`, `pTraffic`, `uxCLx`, `uxFt2CLx`, `dxCLx`, `dxFt2CLx`, `xFiber`, `pFiber`, `pFt2Fiber`, `xGas`, `pGas`, `pFt2Gas`, `xRail`, `pRail`, `pRail10`, `pRail20`, `pRail30`, `pFt2Rail`, `xLRT`, `pLRT`, `pLRT10`, `pLRT20`, `pLRT30`, `pFt2LRT`, `xEmt`, `pEmt`, `pFt2Emt`, `xEzonC`, `xEzonP`, `xFtEzonC`, `xFtEzonP`, `xEzAreaC`, `xEzAreaP`, `uxMS4`, `uxUIC`, `uDepth`, `dDepth`, `xPipSlope`, `gSlope`, `xEcsi`, `xFt2Ecsi`, `xEcsiLen`, `xEcsiVol`, `xLUST`, `xFt2LUST`, `xSchl`, `xFt2Schl`, `xHosp`, `xFt2Hosp`, `xPol`, `xFt2Pol`, `xFire`, `xFt2Fire`, `xBldg`, `xFt2Bldg`, `xHyd`, `xFt2Hyd`, `HardArea`, `xpDeg2N`, `INT01`, `INT02`, `FLT01`, `FLT02`, `TXT50`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("MLINKID", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "MLINKID", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("USNODE", global::System.Data.OleDb.OleDbType.VarWChar, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "USNODE", global::System.Data.DataRowVersion.Current, false, null));
@@ -24636,9 +24876,15 @@ WHERE        (Constructed > 0) OR
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("pFt2Gas", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "pFt2Gas", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("xRail", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "xRail", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("pRail", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "pRail", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("pRail10", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "pRail10", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("pRail20", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "pRail20", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("pRail30", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "pRail30", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("pFt2Rail", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "pFt2Rail", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("xLRT", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "xLRT", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("pLRT", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "pLRT", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("pLRT10", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "pLRT10", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("pLRT20", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "pLRT20", global::System.Data.DataRowVersion.Current, false, null));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("pLRT30", global::System.Data.OleDb.OleDbType.Double, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "pLRT30", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("pFt2LRT", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "pFt2LRT", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("xEmt", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "xEmt", global::System.Data.DataRowVersion.Current, false, null));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("pEmt", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "pEmt", global::System.Data.DataRowVersion.Current, false, null));
@@ -24801,9 +25047,15 @@ WHERE        (Constructed > 0) OR
                     global::System.Nullable<int> pFt2Gas, 
                     global::System.Nullable<int> xRail, 
                     global::System.Nullable<int> pRail, 
+                    global::System.Nullable<double> pRail10, 
+                    global::System.Nullable<double> pRail20, 
+                    global::System.Nullable<double> pRail30, 
                     global::System.Nullable<int> pFt2Rail, 
                     global::System.Nullable<int> xLRT, 
                     global::System.Nullable<int> pLRT, 
+                    global::System.Nullable<double> pLRT10, 
+                    global::System.Nullable<double> pLRT20, 
+                    global::System.Nullable<double> pLRT30, 
                     global::System.Nullable<int> pFt2LRT, 
                     global::System.Nullable<int> xEmt, 
                     global::System.Nullable<int> pEmt, 
@@ -25157,269 +25409,305 @@ WHERE        (Constructed > 0) OR
             else {
                 this.Adapter.InsertCommand.Parameters[51].Value = global::System.DBNull.Value;
             }
-            if ((pFt2Rail.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[52].Value = ((int)(pFt2Rail.Value));
+            if ((pRail10.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[52].Value = ((double)(pRail10.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[52].Value = global::System.DBNull.Value;
             }
-            if ((xLRT.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[53].Value = ((int)(xLRT.Value));
+            if ((pRail20.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[53].Value = ((double)(pRail20.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[53].Value = global::System.DBNull.Value;
             }
-            if ((pLRT.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[54].Value = ((int)(pLRT.Value));
+            if ((pRail30.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[54].Value = ((double)(pRail30.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[54].Value = global::System.DBNull.Value;
             }
-            if ((pFt2LRT.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[55].Value = ((int)(pFt2LRT.Value));
+            if ((pFt2Rail.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[55].Value = ((int)(pFt2Rail.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[55].Value = global::System.DBNull.Value;
             }
-            if ((xEmt.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[56].Value = ((int)(xEmt.Value));
+            if ((xLRT.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[56].Value = ((int)(xLRT.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[56].Value = global::System.DBNull.Value;
             }
-            if ((pEmt.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[57].Value = ((int)(pEmt.Value));
+            if ((pLRT.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[57].Value = ((int)(pLRT.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[57].Value = global::System.DBNull.Value;
             }
-            if ((pFt2Emt.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[58].Value = ((int)(pFt2Emt.Value));
+            if ((pLRT10.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[58].Value = ((double)(pLRT10.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[58].Value = global::System.DBNull.Value;
             }
-            if ((xEzonC.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[59].Value = ((int)(xEzonC.Value));
+            if ((pLRT20.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[59].Value = ((double)(pLRT20.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[59].Value = global::System.DBNull.Value;
             }
-            if ((xEzonP.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[60].Value = ((int)(xEzonP.Value));
+            if ((pLRT30.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[60].Value = ((double)(pLRT30.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[60].Value = global::System.DBNull.Value;
             }
-            if ((xFtEzonC.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[61].Value = ((int)(xFtEzonC.Value));
+            if ((pFt2LRT.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[61].Value = ((int)(pFt2LRT.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[61].Value = global::System.DBNull.Value;
             }
-            if ((xFtEzonP.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[62].Value = ((int)(xFtEzonP.Value));
+            if ((xEmt.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[62].Value = ((int)(xEmt.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[62].Value = global::System.DBNull.Value;
             }
-            if ((xEzAreaC.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[63].Value = ((int)(xEzAreaC.Value));
+            if ((pEmt.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[63].Value = ((int)(pEmt.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[63].Value = global::System.DBNull.Value;
             }
-            if ((xEzAreaP.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[64].Value = ((int)(xEzAreaP.Value));
+            if ((pFt2Emt.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[64].Value = ((int)(pFt2Emt.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[64].Value = global::System.DBNull.Value;
             }
-            if ((uxMS4.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[65].Value = ((int)(uxMS4.Value));
+            if ((xEzonC.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[65].Value = ((int)(xEzonC.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[65].Value = global::System.DBNull.Value;
             }
-            if ((uxUIC.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[66].Value = ((int)(uxUIC.Value));
+            if ((xEzonP.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[66].Value = ((int)(xEzonP.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[66].Value = global::System.DBNull.Value;
             }
-            if ((uDepth.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[67].Value = ((double)(uDepth.Value));
+            if ((xFtEzonC.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[67].Value = ((int)(xFtEzonC.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[67].Value = global::System.DBNull.Value;
             }
-            if ((dDepth.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[68].Value = ((double)(dDepth.Value));
+            if ((xFtEzonP.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[68].Value = ((int)(xFtEzonP.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[68].Value = global::System.DBNull.Value;
             }
-            if ((xPipSlope.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[69].Value = ((double)(xPipSlope.Value));
+            if ((xEzAreaC.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[69].Value = ((int)(xEzAreaC.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[69].Value = global::System.DBNull.Value;
             }
-            if ((gSlope.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[70].Value = ((double)(gSlope.Value));
+            if ((xEzAreaP.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[70].Value = ((int)(xEzAreaP.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[70].Value = global::System.DBNull.Value;
             }
-            if ((xEcsi.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[71].Value = ((int)(xEcsi.Value));
+            if ((uxMS4.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[71].Value = ((int)(uxMS4.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[71].Value = global::System.DBNull.Value;
             }
-            if ((xFt2Ecsi.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[72].Value = ((int)(xFt2Ecsi.Value));
+            if ((uxUIC.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[72].Value = ((int)(uxUIC.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[72].Value = global::System.DBNull.Value;
             }
-            if ((xEcsiLen.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[73].Value = ((int)(xEcsiLen.Value));
+            if ((uDepth.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[73].Value = ((double)(uDepth.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[73].Value = global::System.DBNull.Value;
             }
-            if ((xEcsiVol.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[74].Value = ((int)(xEcsiVol.Value));
+            if ((dDepth.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[74].Value = ((double)(dDepth.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[74].Value = global::System.DBNull.Value;
             }
-            if ((xLUST.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[75].Value = ((int)(xLUST.Value));
+            if ((xPipSlope.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[75].Value = ((double)(xPipSlope.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[75].Value = global::System.DBNull.Value;
             }
-            if ((xFt2LUST.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[76].Value = ((int)(xFt2LUST.Value));
+            if ((gSlope.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[76].Value = ((double)(gSlope.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[76].Value = global::System.DBNull.Value;
             }
-            if ((xSchl.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[77].Value = ((int)(xSchl.Value));
+            if ((xEcsi.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[77].Value = ((int)(xEcsi.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[77].Value = global::System.DBNull.Value;
             }
-            if ((xFt2Schl.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[78].Value = ((int)(xFt2Schl.Value));
+            if ((xFt2Ecsi.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[78].Value = ((int)(xFt2Ecsi.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[78].Value = global::System.DBNull.Value;
             }
-            if ((xHosp.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[79].Value = ((int)(xHosp.Value));
+            if ((xEcsiLen.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[79].Value = ((int)(xEcsiLen.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[79].Value = global::System.DBNull.Value;
             }
-            if ((xFt2Hosp.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[80].Value = ((int)(xFt2Hosp.Value));
+            if ((xEcsiVol.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[80].Value = ((int)(xEcsiVol.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[80].Value = global::System.DBNull.Value;
             }
-            if ((xPol.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[81].Value = ((int)(xPol.Value));
+            if ((xLUST.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[81].Value = ((int)(xLUST.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[81].Value = global::System.DBNull.Value;
             }
-            if ((xFt2Pol.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[82].Value = ((int)(xFt2Pol.Value));
+            if ((xFt2LUST.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[82].Value = ((int)(xFt2LUST.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[82].Value = global::System.DBNull.Value;
             }
-            if ((xFire.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[83].Value = ((int)(xFire.Value));
+            if ((xSchl.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[83].Value = ((int)(xSchl.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[83].Value = global::System.DBNull.Value;
             }
-            if ((xFt2Fire.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[84].Value = ((int)(xFt2Fire.Value));
+            if ((xFt2Schl.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[84].Value = ((int)(xFt2Schl.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[84].Value = global::System.DBNull.Value;
             }
-            if ((xBldg.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[85].Value = ((int)(xBldg.Value));
+            if ((xHosp.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[85].Value = ((int)(xHosp.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[85].Value = global::System.DBNull.Value;
             }
-            if ((xFt2Bldg.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[86].Value = ((int)(xFt2Bldg.Value));
+            if ((xFt2Hosp.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[86].Value = ((int)(xFt2Hosp.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[86].Value = global::System.DBNull.Value;
             }
-            if ((xHyd.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[87].Value = ((int)(xHyd.Value));
+            if ((xPol.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[87].Value = ((int)(xPol.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[87].Value = global::System.DBNull.Value;
             }
-            if ((xFt2Hyd.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[88].Value = ((int)(xFt2Hyd.Value));
+            if ((xFt2Pol.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[88].Value = ((int)(xFt2Pol.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[88].Value = global::System.DBNull.Value;
             }
-            if ((HardArea.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[89].Value = ((int)(HardArea.Value));
+            if ((xFire.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[89].Value = ((int)(xFire.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[89].Value = global::System.DBNull.Value;
             }
-            if ((xpDeg2N.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[90].Value = ((double)(xpDeg2N.Value));
+            if ((xFt2Fire.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[90].Value = ((int)(xFt2Fire.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[90].Value = global::System.DBNull.Value;
             }
-            if ((INT01.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[91].Value = ((int)(INT01.Value));
+            if ((xBldg.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[91].Value = ((int)(xBldg.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[91].Value = global::System.DBNull.Value;
             }
-            if ((INT02.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[92].Value = ((int)(INT02.Value));
+            if ((xFt2Bldg.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[92].Value = ((int)(xFt2Bldg.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[92].Value = global::System.DBNull.Value;
             }
-            if ((FLT01.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[93].Value = ((double)(FLT01.Value));
+            if ((xHyd.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[93].Value = ((int)(xHyd.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[93].Value = global::System.DBNull.Value;
             }
-            if ((FLT02.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[94].Value = ((double)(FLT02.Value));
+            if ((xFt2Hyd.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[94].Value = ((int)(xFt2Hyd.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[94].Value = global::System.DBNull.Value;
             }
-            if ((TXT50 == null)) {
-                this.Adapter.InsertCommand.Parameters[95].Value = global::System.DBNull.Value;
+            if ((HardArea.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[95].Value = ((int)(HardArea.Value));
             }
             else {
-                this.Adapter.InsertCommand.Parameters[95].Value = ((string)(TXT50));
+                this.Adapter.InsertCommand.Parameters[95].Value = global::System.DBNull.Value;
+            }
+            if ((xpDeg2N.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[96].Value = ((double)(xpDeg2N.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[96].Value = global::System.DBNull.Value;
+            }
+            if ((INT01.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[97].Value = ((int)(INT01.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[97].Value = global::System.DBNull.Value;
+            }
+            if ((INT02.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[98].Value = ((int)(INT02.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[98].Value = global::System.DBNull.Value;
+            }
+            if ((FLT01.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[99].Value = ((double)(FLT01.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[99].Value = global::System.DBNull.Value;
+            }
+            if ((FLT02.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[100].Value = ((double)(FLT02.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[100].Value = global::System.DBNull.Value;
+            }
+            if ((TXT50 == null)) {
+                this.Adapter.InsertCommand.Parameters[101].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[101].Value = ((string)(TXT50));
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 

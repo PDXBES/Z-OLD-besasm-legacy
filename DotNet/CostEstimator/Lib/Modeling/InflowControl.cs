@@ -1,26 +1,16 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace SystemsAnalysis.Modeling
 {
-    public interface InflowControl
-    {
+  public interface InflowControl
+  {
+    int ID { get;
+      set; }
 
-        int ID
-        {
-            get;
-            set;
-        }
+    Types.Enumerators.InflowControlTypes ICType { get; }
 
-        Types.Enumerators.InflowControlTypes ICType
-        {
-            get;
-        }
-
-        bool InModel
-        {
-            get;
-        }
-    }
+    bool InModel { get; }
+  }
 }

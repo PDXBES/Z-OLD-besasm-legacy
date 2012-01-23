@@ -1,10 +1,9 @@
-﻿namespace SystemsAnalysis.DataAccess {
-
-
-    partial class SAMasterDataSet
+﻿namespace SystemsAnalysis.DataAccess
+{
+  partial class SAMasterDataSet
+  {
+    partial class MstSscDataTable
     {
-        partial class MstSscDataTable
-            {
-            }
     }
+  }
 }

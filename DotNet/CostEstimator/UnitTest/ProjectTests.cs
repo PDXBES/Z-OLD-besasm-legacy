@@ -1,4 +1,4 @@
-// Project: UnitTest, File: ProjectTests.cs
+﻿// Project: UnitTest, File: ProjectTests.cs
 // Namespace: CostEstimator.UnitTests, Class: ProjectTests
 // Path: C:\Development\CostEstimatorV2\UnitTest, Author: Arnel
 // Code lines: 19, Size of file: 312 Bytes
@@ -11,30 +11,31 @@ using System.Collections.Generic;
 using System.Text;
 using NUnit.Framework;
 using SystemsAnalysis.Analysis.CostEstimator.Classes;
+
 #endregion
 
 namespace CostEstimator.UnitTests
 {
-	//[TestFixture]
-	public class ProjectTests
-	{
-		private Project _project;
+  //[TestFixture]
+  public class ProjectTests
+  {
+    private Project _project;
 
-		/// <summary>
-		/// Set up
-		/// </summary>
-		[SetUp]
-		public void SetUp()
-		{
-			_project = new Project();
-		} // SetUp()
+    /// <summary>
+    /// Set up
+    /// </summary>
+    [SetUp]
+    public void SetUp()
+    {
+      _project = new Project();
+    } // SetUp()
 
-		/// <summary>
-		/// Tear down
-		/// </summary>
-		[TearDown]
-		public void TearDown()
-		{
-		} // TearDown()
-	}
+    /// <summary>
+    /// Tear down
+    /// </summary>
+    [TearDown]
+    public void TearDown()
+    {
+    } // TearDown()
+  }
 }
