@@ -538,6 +538,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
         case "PVC":
         case "HDPE":
           return PipeMaterial.PVCHDPE;
+        case "PIPEBUR":
         case "PIPEBURST":
           return PipeMaterial.Pipeburst;
         case "CIPP":
