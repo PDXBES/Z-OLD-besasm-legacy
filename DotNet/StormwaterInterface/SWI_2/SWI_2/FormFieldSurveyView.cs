@@ -807,8 +807,8 @@ namespace SWI_2
             if (e.ColumnIndex == 10)//check whether is it button column or not.....
             {
                 int currentrow = this.dataGridViewLinkInfo.CurrentRow.Index;
-                this.dataGridViewLinkInfo.CurrentRow.DataGridView.EndEdit();
-                this.dataGridViewLinkInfo.EndEdit();
+                //this.dataGridViewLinkInfo.CurrentRow.DataGridView.EndEdit();
+                //this.dataGridViewLinkInfo.EndEdit();
                 CurrencyManager cm = (CurrencyManager)dataGridViewLinkInfo.BindingContext[dataGridViewLinkInfo.DataSource, dataGridViewLinkInfo.DataMember];
                 cm.EndCurrentEdit();
                 PopulateLinkInfo();
