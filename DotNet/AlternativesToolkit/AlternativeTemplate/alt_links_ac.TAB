@@ -1,0 +1,23 @@
+!table
+!version 410
+!charset WindowsLatin1
+
+Definition Table
+  File "alternative_package.mdb"
+  Type ACCESS TABLE "alt_links_ac" Charset "WindowsLatin1"
+  Fields 15
+    AltLinkID Integer Index 1 ;
+    MdlLinkID Integer Index 1 ;
+    USNode Char (6) Index 2 ;
+    DSNode Char (6) Index 3 ;
+    Operation Char (3) Index 4 ;
+    LinkType Char (2) ;
+    DiamWidth Float ;
+    Height Float ;
+    USIE Float ;
+    DSIE Float ;
+    PipeShape Char (4) ;
+    Material Char (6) ;
+    Length Float ;
+    IsSpecLink Logical ;
+    FocusArea Char (10) ;
