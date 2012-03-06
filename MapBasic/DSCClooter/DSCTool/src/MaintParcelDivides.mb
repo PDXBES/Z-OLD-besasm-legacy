@@ -925,367 +925,371 @@ end function
 '
 '
 function Check_Divide_Areas() as integer
- dim nrows, thisrow, mycount as integer
- dim ThisPID as integer
- dim ThisDID as integer
- dim areadiff, adjustment, areanew, arealeft as integer
- dim strQCstatus, msg as string
- dim sfailed as string
+	dim nrows, thisrow, mycount as integer
+	dim ThisPID as integer
+	dim ThisDID as integer
+	dim areadiff, adjustment, areanew, arealeft as integer
+	dim strQCstatus, msg as string
+	dim sfailed as string
  
- select ParcelID, DivideID from _UpdateDivideTargets into _ParcelIDset group by ParcelID, DivideID into _ParcelIDset order by ParcelID
- if tableinfo("_ParcelIDset",TAB_INFO_NROWS) = 0 then
- close table _ParcelIDset
- print " NO DIVIDES TO CHECK"
- Check_Divide_Areas = RETURNCAUTION
- exit function
- end if
+	select ParcelID, DivideID from _UpdateDivideTargets into _ParcelIDset group by ParcelID, DivideID into _ParcelIDset order by ParcelID
+	
+	if tableinfo("_ParcelIDset",TAB_INFO_NROWS) = 0 then
+		close table _ParcelIDset
+		print " NO DIVIDES TO CHECK"
+		Check_Divide_Areas = RETURNCAUTION
+		exit function
+	end if
  
- MyCount = 0
- Fetch First from _ParcelIDset
- Do While Not (EOT(_ParcelIDset))
- ThisPID = _ParcelIDset.ParcelID
- ThisDID = _ParcelIDset.DivideID
- if M_DEBUG = TRUE then
- print "Check_Divide_Areas: " & ThisPID
- end if
+	MyCount = 0
+	Fetch First from _ParcelIDset
+	Do While Not (EOT(_ParcelIDset))
+		ThisPID = _ParcelIDset.ParcelID
+		ThisDID = _ParcelIDset.DivideID
+		if M_DEBUG = TRUE then
+			print "Check_Divide_Areas: " & ThisPID
+		end if
 
- 'get the dsc information 
- Select 
- AreaFt,
- DivideID,
- RfAreaFtEX, 
- PkAreaFtEX,
- RfAreaFtFB,
- PkAreaFtFB,
- ICFtRoofEX,
- ICFtRoofFB,
- ICFtParkEX,
- ICFtParkFB,
- EICFtRoofEX,
- EICFtParkEX,
- EICFtRoofFB,
- EICFtParkFB
- from mst_DSC 
- where ParcelID = ThisPID and DivideID = ThisDID
- into _ThisParcel
-
- Select 
- sum(AreaFt) "AreaFt", 
- sum(RfAreaFtEX) "RfAreaFtEX", 
- sum(PkAreaFtEX) "PkAreaFtEX",
- DivideID,
- RfAreaFtFB,
- PkAreaFtFB,
- ICFtRoofEX,
-
- ICFtRoofFB,
- ICFtParkEX,
- ICFtParkFB,
- EICFtRoofEX,
- EICFtParkEX,
- EICFtRoofFB,
- EICFtParkFB
- from _ThisParcel 
- where DivideID = ThisDID
- into _ThisParcel1
-
- ' make sure you got a parcel
- nrows = tableinfo("_ThisParcel",TAB_INFO_NROWS) 
- if nrows < 1 then
- print ThisPID & " master parcels - nrows = " & nrows & " UNREACHED" 
- close table _ThisParcel
- close table _ThisParcel1
- goto Check_Divides_Skip_Parcel
- end if
+	 'get the dsc information 
+		Select 
+			AreaFt,
+			DivideID,
+			RfAreaFtEX, 
+			PkAreaFtEX,
+			RfAreaFtFB,
+			PkAreaFtFB,
+			ICFtRoofEX,
+			ICFtRoofFB,
+			ICFtParkEX,
+			ICFtParkFB,
+			EICFtRoofEX,
+			EICFtParkEX,
+			EICFtRoofFB,
+			EICFtParkFB
+		from mst_DSC 
+		where 
+			ParcelID = ThisPID and DivideID = ThisDID
+		into _ThisParcel
+	
+		Select 
+			sum(AreaFt) "AreaFt", 
+			sum(RfAreaFtEX) "RfAreaFtEX", 
+			sum(PkAreaFtEX) "PkAreaFtEX",
+			DivideID,
+			RfAreaFtFB,
+			PkAreaFtFB,
+			ICFtRoofEX,
+			
+			ICFtRoofFB,
+			ICFtParkEX,
+			ICFtParkFB,
+			EICFtRoofEX,
+			EICFtParkEX,
+			EICFtRoofFB,
+			EICFtParkFB
+		from _ThisParcel 
+		where DivideID = ThisDID
+		into _ThisParcel1
+		
+		' make sure you got a parcel
+		nrows = tableinfo("_ThisParcel",TAB_INFO_NROWS) 
+		if nrows < 1 then
+			print ThisPID & " master parcels - nrows = " & nrows & " UNREACHED" 
+			close table _ThisParcel
+			close table _ThisParcel1
+			goto Check_Divides_Skip_Parcel
+		end if
+		
+	 'update _ThisDivideSet set DivideQCStatus = strQCstatus
+	 
+		' Update building areas
+		Print " Updating Parcel building area"
+		Select * From Impervious Where GenSource = "BLDG" Into TheBuildings
+		
+		Add Column _ThisParcel (RfAreaFtEX) From TheBuildings
+		Set To proportion sum(Round(area(obj, "sq ft"),1)) Where intersects
+		Close Table TheBuildings
+		
+		' Update parking areas
+		Print " Updating Parcel parking area"
+		Select * From Impervious Where GenSource = "PRKG" Into TheParkingLots
+		Add Column _ThisParcel (PkAreaFtEX) From TheParkingLots
+		Set To proportion sum(Round(area(obj, "sq ft"),1)) Where intersects
+		Close Table TheParkingLots
+		
+		' now get the divides to be created that are related to this parcel
+		select * from _UpdateDivideTargets where ParcelID = ThisPID and DivideID = ThisDID into _ThisDivideSet
+		
+		' there must be at least one but check anyway 
+		nrows = tableinfo("_ThisDivideSet",TAB_INFO_NROWS)
+		if nrows = 0 then
+			call loggit(ThisPID & " no divides found SHOULD BE UNREACHED")
+			close table _ThisDivideSet
+			close table _ThisParcel
+			close table _ThisParcel1
+			goto Check_Divides_Skip_Parcel
+		end if
+	
+		' get the totals for the divides
+		select 
+			sum(AreaFt) "SumAreaFt", 
+			sum(RfAreaFtEX) "sumRfEX", 
+			sum(PkAreaFtEX) "sumPkEX" 
+		from _ThisDivideSet
+		into _ThisDivideSet_Totals
+	 
+		' if no area in either parcel or sum of divides then we can't go on
+		if (_ThisDivideSet_Totals.SumAreaFt < 1) or (_ThisParcel1.AreaFt < 1 )then
+			print ThisPID & " Total Area Fails"
+			strQCStatus = "0XX" 
+			update _ThisDivideSet set DivideQCStatus = strQCstatus
+			close table _ThisDivideSet_Totals
+			close table _ThisDivideSet
+			close table _ThisParcel
+			close table _ThisParcel1
+			goto Check_Divides_Skip_Parcel
+		end if
+	
+		' check area diff and adjust the value if within tolerance
+		areadiff = _ThisParcel1.AreaFt - _ThisDivideSet_Totals.SumAreaFt
+		if M_DEBUG then 
+			print ThisPID & " Diff:" & areadiff 
+		end if
+		'exit sub
+		if (areadiff = 0) then
+			'no adjustments needed
+			update _ThisDivideSet Set DivideQCstatus = "TXX"
+		else
+			'verify the difference is within tolerance
+			if ( abs(areadiff) > M_AREA_MINDIFF) and (abs(areaDiff) > M_AREA_TOLERANCE*_ThisParcel1.AreaFt) then
+			'the areas are too different to fix so skip
+				if M_DEBUG then
+					print " EXCEEDED tolerance"
+				end if
+				if areadiff > 0 then
+					strQCstatus = "LXX"
+				else
+					strQCstatus = "HXX"
+				end if
+				update _ThisDivideSet Set DivideQCstatus = strQCstatus
+				close table _ThisDivideSet
+				close table _ThisParcel
+				close table _ThisParcel1
+				goto Check_Divides_Skip_Parcel
+			else
+				'adjust divide areas to match parcel
+				arealeft = areadiff
+				Fetch First from _ThisDivideSet
+	
+				Do while NOT EOT(_ThisDivideSet)
+					thisrow = _thisDivideSet.ROWID
+					adjustment = areadiff * _ThisDivideSet.Areaft / _ThisParcel1.AreaFt
+					arealeft = arealeft - adjustment
+					
+					areanew = adjustment + _ThisDivideSet.Areaft
+					update _ThisDivideSet Set AreaFT = areanew Where ROWID = thisrow
+					if M_DEBUG then 
+						print " AL:" & arealeft & " AN:" & areanew & " AJ:" & adjustment 
+					end if
+					Fetch Next from _ThisDivideSet
+				loop
+	 
+				if arealeft <> 0 then
+					Fetch Last from _ThisDivideSet
+					thisrow = _thisDivideSet.ROWID
+					areanew = _ThisDivideSet.Areaft + arealeft
+					update _ThisDivideSet Set AreaFT = areanew Where ROWID = thisrow
+				end if
+	 
+				update _ThisDivideSet Set DivideQCstatus = "TXX"
+	
+			end if
+		end if
+	
+		'ASSERT: the total areas are OK
+		' if no roof area then no need to do this
+		if (_ThisDivideSet_Totals.SumRfEX = 0) and (_ThisParcel.RfAreaFtEX = 0 )then
+			print ThisPID & " No roof area"
+			strQCStatus = "TTX"
+			update _ThisDivideSet set DivideQCStatus = strQCstatus
+			
+			goto Check_Divides_Skip_Roof
+		end if
+	
+		' check roof ex diff and adjust the value if within tolerance
+		areadiff = _ThisParcel.RfAreaFtEX - _ThisDivideSet_Totals.SumRfEX
+		if M_DEBUG then 
+			print ThisPID & " Roof Diff:" & areadiff 
+		end if
+	 
+		'exit sub
+	 
+		if (areadiff = 0) then
+			'no adjustments needed
+			update _ThisDivideSet Set DivideQCstatus = "TTX"
+		
+		elseif(areadiff <> 0) then
+			'verify the difference is within tolerance
+			if (_ThisParcel.RfAreaFtEX = 0) OR
+				((abs(areadiff) > M_AREA_MINDIFF) and (abs(areaDiff) > M_AREA_TOLERANCE*_ThisParcel.RfAreaFtEX)) then
+				'EITHER the areas are too different to fix OR there is no roof in the PARCEL
+				if M_DEBUG then 
+					print " EXCEEDED tolerance for roof" 
+				end if
+		 
+				if areadiff > 0 then
+					strQCstatus = "TLX"
+				else
+					strQCstatus = "THX"
+				end if
+		
+		 		'exit sub
+				update _ThisDivideSet Set DivideQCstatus = strQCstatus
+				close table _ThisDivideSet
+				goto Check_Divides_Skip_Parcel
+			else
+	 		'adjust divide areas to match parcel
+	 			arealeft = areadiff
+				Fetch First from _ThisDivideSet
+	
+				Do while NOT EOT(_ThisDivideSet)
+					thisrow = _thisDivideSet.ROWID
+					
+					adjustment = areadiff * _ThisDivideSet.RfAreaFtEX / _ThisParcel.RfAreaFtEX
+					arealeft = arealeft - adjustment
+					areanew = adjustment + _ThisDivideSet.RfAreaFtEX
+					update _ThisDivideSet Set RfAreaFtEX = areanew Where ROWID = thisrow
+					if M_DEBUG then 
+						print " RL:" & arealeft & " RN:" & areanew & " RJ:" & adjustment 
+					end if
+					
+					Fetch Next from _ThisDivideSet
+				loop
+	
+				if arealeft <> 0 then
+					Fetch Last from _ThisDivideSet
+					thisrow = _thisDivideSet.ROWID
+					areanew = _ThisDivideSet.RfAreaFtEX + arealeft
+					update _ThisDivideSet Set RfAreaFtEX = areanew Where ROWID = thisrow
+				end if
+	 
+				update _ThisDivideSet Set DivideQCstatus = "TTX"
+	
+			end if
+		end if
+	
+	Check_Divides_Skip_Roof:
+		'ASSERT: ROOF EX is OK
+		' if no parking area then no need to do this
+		if (_ThisDivideSet_Totals.SumPkEX = 0) and (_ThisParcel.PkAreaFtEX = 0 )then
+		 print ThisPID & " No parking area"
+		 strQCStatus = "TTT"
+		 update _ThisDivideSet set DivideQCStatus = strQCstatus
+		
+		 goto Check_Divides_Skip_Parking
+		end if
+	
+		' check parking diff and adjust the value if within tolerance
+	
+		areadiff = _ThisParcel.PkAreaFtEX - _ThisDivideSet_Totals.SumPkEX
+		if M_DEBUG then 
+			print ThisPID & " Park Diff:" & areadiff 
+		end if
+	
+		if (areadiff = 0) then
+			'no adjustments needed
+			update _ThisDivideSet Set DivideQCstatus = "TTT"
+		else
+			'verify the difference is within tolerance
+			if (_ThisParcel.PkAreaFtEX = 0) OR
+				((abs(areadiff) > M_AREA_MINDIFF) and (abs(areaDiff) > M_AREA_TOLERANCE*_ThisParcel.PkAreaFtEX)) then
+				'EITHER the areas are too different to fix OR there is no park in the PARCEL
+				if M_DEBUG then 
+					print " EXCEEDED tolerance for parking" 
+				end if
+				if areadiff > 0 then
+					strQCstatus = "TTL"
+				else
+					strQCstatus = "TTH"
+				end if
+				update _ThisDivideSet Set DivideQCstatus = strQCstatus
+				close table _ThisDivideSet
+		
+				'end program
+				goto Check_Divides_Skip_Parcel
+		
+			else
+				'adjust divide areas to match parcel
+				arealeft = areadiff
+				Fetch First from _ThisDivideSet
+		
+				Do while NOT EOT(_ThisDivideSet)
+					thisrow = _thisDivideSet.ROWID
+					adjustment = areadiff * _ThisDivideSet.PkAreaFtEX / _ThisParcel.PkAreaFtEX
+					arealeft = arealeft - adjustment
+					areanew = adjustment + _ThisDivideSet.PkAreaFtEX
+					update _ThisDivideSet Set PkAreaFtEX = areanew Where ROWID = thisrow
+					if M_DEBUG then 
+						print " PL:" & arealeft & " PN:" & areanew & " PJ:" & adjustment 
+					end if
+					Fetch Next from _ThisDivideSet
+				loop
+		
+				if arealeft <> 0 then
+					Fetch Last from _ThisDivideSet
+					thisrow = _thisDivideSet.ROWID
+					areanew = _ThisDivideSet.PkAreaFtEX + arealeft
+					update _ThisDivideSet Set PkAreaFtEX = areanew Where ROWID = thisrow
+				end if
+				update _ThisDivideSet Set DivideQCstatus = "TTT"
+			end if
+		end if
+	
+	Check_Divides_Skip_Parking:
+		'you must do these if you got here without a goto Check_Divides_Skip_Parcel
+		close table _ThisParcel
+		close table _ThisParcel1
+		close table _ThisDivideSet_Totals
+		close table _ThisDivideSet
+	
+	Check_Divides_Skip_Parcel:
+		Fetch Next from _ParcelIDset
+	Loop
  
- 'update _ThisDivideSet set DivideQCStatus = strQCstatus
- 
- ' Update building areas
- Print " Updating Parcel building area"
- Select * From Impervious Where GenSource = "BLDG" Into TheBuildings
- 
- Add Column _ThisParcel (RfAreaFtEX) From TheBuildings
- Set To proportion sum(Round(area(obj, "sq ft"),1)) Where intersects
- Close Table TheBuildings
- 
- ' Update parking areas
- Print " Updating Parcel parking area"
- Select * From Impervious Where GenSource = "PRKG" Into TheParkingLots
- Add Column _ThisParcel (PkAreaFtEX) From TheParkingLots
- Set To proportion sum(Round(area(obj, "sq ft"),1)) Where intersects
- Close Table TheParkingLots
-
- ' now get the divides to be created that are related to this parcel
- select * from _UpdateDivideTargets where ParcelID = ThisPID and DivideID = ThisDID into _ThisDivideSet
-
- ' there must be at least one but check anyway 
- nrows = tableinfo("_ThisDivideSet",TAB_INFO_NROWS)
- if nrows = 0 then
- call loggit(ThisPID & " no divides found SHOULD BE UNREACHED")
- close table _ThisDivideSet
- close table _ThisParcel
- close table _ThisParcel1
- goto Check_Divides_Skip_Parcel
- end if
-
- ' get the totals for the divides
- select 
- sum(AreaFt) "SumAreaFt", 
- sum(RfAreaFtEX) "sumRfEX", 
- sum(PkAreaFtEX) "sumPkEX" 
- from _ThisDivideSet
- into _ThisDivideSet_Totals
- 
- ' if no area in either parcel or sum of divides then we can't go on
- if (_ThisDivideSet_Totals.SumAreaFt < 1) or (_ThisParcel1.AreaFt < 1 )then
- print ThisPID & " Total Area Fails"
- strQCStatus = "0XX" 
- update _ThisDivideSet set DivideQCStatus = strQCstatus
- close table _ThisDivideSet_Totals
- close table _ThisDivideSet
- close table _ThisParcel
- close table _ThisParcel1
- goto Check_Divides_Skip_Parcel
- end if
-
- ' check area diff and adjust the value if within tolerance
- areadiff = _ThisParcel1.AreaFt - _ThisDivideSet_Totals.SumAreaFt
- if M_DEBUG then 
- print ThisPID & " Diff:" & areadiff 
- end if
- 'exit sub
- if (areadiff = 0) then
- 'no adjustments needed
- update _ThisDivideSet Set DivideQCstatus = "TXX"
- else
- 'verify the difference is within tolerance
- if ( abs(areadiff) > M_AREA_MINDIFF) and (abs(areaDiff) > M_AREA_TOLERANCE*_ThisParcel1.AreaFt) then
- 'the areas are too different to fix so skip
- if M_DEBUG then print " EXCEEDED tolerance" end if
- if areadiff > 0 then
- strQCstatus = "LXX"
- else
- strQCstatus = "HXX"
- end if
- update _ThisDivideSet Set DivideQCstatus = strQCstatus
- close table _ThisDivideSet
- close table _ThisParcel
- close table _ThisParcel1
- goto Check_Divides_Skip_Parcel
- else
- 'adjust divide areas to match parcel
- arealeft = areadiff
- Fetch First from _ThisDivideSet
-
- Do while NOT EOT(_ThisDivideSet)
- thisrow = _thisDivideSet.ROWID
- adjustment = areadiff * _ThisDivideSet.Areaft / _ThisParcel1.AreaFt
- arealeft = arealeft - adjustment
-
- areanew = adjustment + _ThisDivideSet.Areaft
- update _ThisDivideSet Set AreaFT = areanew Where ROWID = thisrow
- if M_DEBUG then 
- print " AL:" & arealeft & " AN:" & areanew & " AJ:" & adjustment 
- end if
- Fetch Next from _ThisDivideSet
- loop
- 
- if arealeft <> 0 then
- Fetch Last from _ThisDivideSet
- thisrow = _thisDivideSet.ROWID
- areanew = _ThisDivideSet.Areaft + arealeft
- update _ThisDivideSet Set AreaFT = areanew Where ROWID = thisrow
- end if
- 
- update _ThisDivideSet Set DivideQCstatus = "TXX"
-
- end if
- end if
-
- 'ASSERT: the total areas are OK
- ' if no roof area then no need to do this
- if (_ThisDivideSet_Totals.SumRfEX = 0) and (_ThisParcel.RfAreaFtEX = 0 )then
- print ThisPID & " No roof area"
- strQCStatus = "TTX"
- update _ThisDivideSet set DivideQCStatus = strQCstatus
-
- goto Check_Divides_Skip_Roof
- end if
-
- ' check roof ex diff and adjust the value if within tolerance
- areadiff = _ThisParcel.RfAreaFtEX - _ThisDivideSet_Totals.SumRfEX
- if M_DEBUG then 
- print ThisPID & " Roof Diff:" & areadiff 
- end if
- 
- 'exit sub
- 
- if (areadiff = 0) then
- 'no adjustments needed
- update _ThisDivideSet Set DivideQCstatus = "TTX"
- 
- elseif(areadiff <> 0) then
- 'verify the difference is within tolerance
- if (_ThisParcel.RfAreaFtEX = 0) OR
- ((abs(areadiff) > M_AREA_MINDIFF) and (abs(areaDiff) > M_AREA_TOLERANCE*_ThisParcel.RfAreaFtEX)) then
- 'EITHER the areas are too different to fix OR there is no roof in the PARCEL
- if M_DEBUG then 
- print " EXCEEDED tolerance for roof" 
- end if
- 
- if areadiff > 0 then
- strQCstatus = "TLX"
- else
- strQCstatus = "THX"
- end if
- 'exit sub
- update _ThisDivideSet Set DivideQCstatus = strQCstatus
- close table _ThisDivideSet
- goto Check_Divides_Skip_Parcel
- else
- 'adjust divide areas to match parcel
- arealeft = areadiff
- Fetch First from _ThisDivideSet
-
- Do while NOT EOT(_ThisDivideSet)
- thisrow = _thisDivideSet.ROWID
-
- adjustment = areadiff * _ThisDivideSet.RfAreaFtEX / _ThisParcel.RfAreaFtEX
- arealeft = arealeft - adjustment
- areanew = adjustment + _ThisDivideSet.RfAreaFtEX
- update _ThisDivideSet Set RfAreaFtEX = areanew Where ROWID = thisrow
- if M_DEBUG then 
- print " RL:" & arealeft & " RN:" & areanew & " RJ:" & adjustment 
- end if
- 
- Fetch Next from _ThisDivideSet
- loop
-
- if arealeft <> 0 then
- Fetch Last from _ThisDivideSet
- thisrow = _thisDivideSet.ROWID
- areanew = _ThisDivideSet.RfAreaFtEX + arealeft
- update _ThisDivideSet Set RfAreaFtEX = areanew Where ROWID = thisrow
- end if
- 
- update _ThisDivideSet Set DivideQCstatus = "TTX"
-
- end if
- end if
-
-Check_Divides_Skip_Roof:
- 'ASSERT: ROOF EX is OK
- ' if no parking area then no need to do this
- if (_ThisDivideSet_Totals.SumPkEX = 0) and (_ThisParcel.PkAreaFtEX = 0 )then
- print ThisPID & " No parking area"
- strQCStatus = "TTT"
- update _ThisDivideSet set DivideQCStatus = strQCstatus
-
- goto Check_Divides_Skip_Parking
- end if
-
- ' check parking diff and adjust the value if within tolerance
-
- areadiff = _ThisParcel.PkAreaFtEX - _ThisDivideSet_Totals.SumPkEX
- if M_DEBUG then 
- print ThisPID & " Park Diff:" & areadiff 
- end if
-
- if (areadiff = 0) then
- 'no adjustments needed
- update _ThisDivideSet Set DivideQCstatus = "TTT"
-
- else
- 'verify the difference is within tolerance
- if (_ThisParcel.PkAreaFtEX = 0) OR
- ((abs(areadiff) > M_AREA_MINDIFF) and (abs(areaDiff) > M_AREA_TOLERANCE*_ThisParcel.PkAreaFtEX)) then
- 'EITHER the areas are too different to fix OR there is no park in the PARCEL
- if M_DEBUG then 
- print " EXCEEDED tolerance for parking" 
- end if
- if areadiff > 0 then
- strQCstatus = "TTL"
- else
- strQCstatus = "TTH"
- end if
- update _ThisDivideSet Set DivideQCstatus = strQCstatus
- close table _ThisDivideSet
- 
- 'end program
- goto Check_Divides_Skip_Parcel
-
- else
- 'adjust divide areas to match parcel
- arealeft = areadiff
- Fetch First from _ThisDivideSet
-
- Do while NOT EOT(_ThisDivideSet)
- thisrow = _thisDivideSet.ROWID
- adjustment = areadiff * _ThisDivideSet.PkAreaFtEX / _ThisParcel.PkAreaFtEX
- arealeft = arealeft - adjustment
- areanew = adjustment + _ThisDivideSet.PkAreaFtEX
- update _ThisDivideSet Set PkAreaFtEX = areanew Where ROWID = thisrow
- if M_DEBUG then 
- print " PL:" & arealeft & " PN:" & areanew & " PJ:" & adjustment 
- end if
- Fetch Next from _ThisDivideSet
- loop
-
- if arealeft <> 0 then
- Fetch Last from _ThisDivideSet
- thisrow = _thisDivideSet.ROWID
- areanew = _ThisDivideSet.PkAreaFtEX + arealeft
- update _ThisDivideSet Set PkAreaFtEX = areanew Where ROWID = thisrow
- end if
- update _ThisDivideSet Set DivideQCstatus = "TTT"
- end if
- end if
-
-Check_Divides_Skip_Parking:
- 'you must do these if you got here without a goto Check_Divides_Skip_Parcel
- close table _ThisParcel
- close table _ThisParcel1
- close table _ThisDivideSet_Totals
- close table _ThisDivideSet
-
-Check_Divides_Skip_Parcel:
- Fetch Next from _ParcelIDset
- Loop
- 
- commit table DSCChanges
- close table _ParcelIDset
- close table _UpdateDivideTargets
- 
- sfailed = "F_" & pathtotablename$(mDividePolyPath) 
- 
- Select * from DSCChanges where DivideQCStatus <> "TTT" into _sfailed
- Select * from DSCChanges where DivideQCStatus <> "TTT" into _sfailedDelete
- 
- mFailedRecs = tableinfo(_sfailed, TAB_INFO_NROWS)
- if mFailedRecs > 0 then
- Commit Table _sfailed As gtempdir & "\" & "F_" & pathtotablename$(mDividePolyPath) & ".TAB" TYPE NATIVE Charset "WindowsLatin1"
- Print "Append Failed"
- 'this deletes the recs from smart table
- delete from _sfailedDelete
- 
- Open table mDividePolyPath as ModifiedDSC 
- else
- call loggit ("All records passed area tests")
- end if
- 
- close table _sfailed
- 
- commit table DSCChanges
- pack table DSCChanges graphic data
- 
- if mfailedRecs > 0 then
- msg = mFailedRecs & " failed records saved to:" & chr$(13) 
- & gtempdir & "\" & sfailed & ".TAB"
- else
- msg = "All records passed check" 
- end if
- 
- Check_Divide_Areas = RETURNSUCCESS
+	commit table DSCChanges
+	close table _ParcelIDset
+	close table _UpdateDivideTargets
+	
+	sfailed = "F_" & pathtotablename$(mDividePolyPath) 
+	
+	Select * from DSCChanges where DivideQCStatus <> "TTT" into _sfailed
+	Select * from DSCChanges where DivideQCStatus <> "TTT" into _sfailedDelete
+	
+	mFailedRecs = tableinfo(_sfailed, TAB_INFO_NROWS)
+	if mFailedRecs > 0 then
+		Commit Table _sfailed As gtempdir & "\" & "F_" & pathtotablename$(mDividePolyPath) & ".TAB" TYPE NATIVE Charset "WindowsLatin1"
+		Print "Append Failed"
+		'this deletes the recs from smart table
+		delete from _sfailedDelete
+		
+		Open table mDividePolyPath as ModifiedDSC 
+	else
+		call loggit ("All records passed area tests")
+	end if
+	
+	close table _sfailed
+	
+	commit table DSCChanges
+	pack table DSCChanges graphic data
+	
+	if mfailedRecs > 0 then
+		msg = mFailedRecs & " failed records saved to:" & chr$(13) 
+		& gtempdir & "\" & sfailed & ".TAB"
+	else
+		msg = "All records passed check" 
+	end if
+	
+	Check_Divide_Areas = RETURNSUCCESS
  
 end function
 '-------------------------------------------------------------------------------
