@@ -1010,7 +1010,9 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
             case "HDPE":
               _PipeCoster.Material = PipeMaterial.PVCHDPE;
               break;
+            case "PIPEBUR":
             case "PIPEBURST":
+            case "PBURST":
               _PipeCoster.Material = PipeMaterial.Pipeburst;
               break;
             case "CIPP":
