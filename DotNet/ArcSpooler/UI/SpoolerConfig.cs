@@ -360,7 +360,7 @@ namespace ArcSpooler.UI
           master.Descendants("highlightLayer");
         foreach (XElement element in highlightLayerNodes)
         {
-          MasterDataFrame.HighlightLayers.Add(new HighlightLayer(
+          aMasterDataFrame.HighlightLayers.Add(new HighlightLayer(
             Convert.ToBoolean(element.Attribute("hide").Value),
             element.Attribute("layerName").Value,
             element.Attribute("layerField").Value));

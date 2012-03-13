@@ -14,58 +14,62 @@ using System.Text;
 
 namespace ArcSpooler.UI
 {
-	public class HighlightLayer
-	{
-		/// <summary>
-		/// Create highlight layer
-		/// </summary>
-		/// <param name="Hide">Hide</param>
-		/// <param name="layerName">Layer name</param>
-		/// <param name="layerField">Layer field</param>
-		public HighlightLayer(bool hide, string layerName, string layerField)
-		{
-			Hide = hide;
-			LayerName = layerName;
-			LayerField = layerField;
-		} // HighlightLayer(Hide, layerName, layerField)
+  public class HighlightLayer
+  {
+    /// <summary>
+    /// Create highlight layer
+    /// </summary>
+    /// <param name="Hide">Hide</param>
+    /// <param name="layerName">Layer name</param>
+    /// <param name="layerField">Layer field</param>
+    public HighlightLayer(bool hide, string layerName, string layerField)
+    {
+      Hide = hide;
+      LayerName = layerName;
+      LayerField = layerField;
+    } // HighlightLayer(Hide, layerName, layerField)
 
-		/// <summary>
-		/// Hide
-		/// </summary>
-		/// <returns>Bool</returns>
-		public bool Hide { get; set; } // Hide
+    /// <summary>
+    /// Hide
+    /// </summary>
+    /// <returns>Bool</returns>
+    public bool Hide { get; set; } // Hide
 
-		/// <summary>
-		/// Layer name
-		/// </summary>
-		/// <returns>String</returns>
-		public string LayerName { get; set; } // LayerName
+    /// <summary>
+    /// Layer name
+    /// </summary>
+    /// <returns>String</returns>
+    public string LayerName { get; set; } // LayerName
 
-		/// <summary>
-		/// Layer field
-		/// </summary>
-		/// <returns>String</returns>
-		public string LayerField { get; set; } // LayerField
+    /// <summary>
+    /// Layer field
+    /// </summary>
+    /// <returns>String</returns>
+    public string LayerField { get; set; } // LayerField
 
-		/// <summary>
-		/// Value
-		/// </summary>
-		/// <returns>String</returns>
-		public string Value { get; set; } // Value
+    /// <summary>
+    /// Value
+    /// </summary>
+    /// <returns>String</returns>
+    public string Value { get; set; } // Value
 
-		/// <summary>
-		/// Def query
-		/// </summary>
-		/// <returns>String</returns>
-		public string DefQuery
-		{
-			get
-			{
-				if (Hide)
-					return string.Format("[{0}] NOT LIKE '{1}'", LayerField, Value);
-				else
-					return string.Format("[{0}]='{1}'", LayerField, Value);
-			} // get
-		} // DefQuery
-	}
+    /// <summary>
+    /// Def query
+    /// </summary>
+    /// <returns>String</returns>
+    public string DefQuery
+    {
+      get
+      {
+        string beginQuoteDelim = "[";
+        string endQuoteDelim = "]";
+        if (Hide)
+          return string.Format("{2}{0}{3} NOT LIKE '{1}'", LayerField, Value,
+            beginQuoteDelim, endQuoteDelim);
+        else
+          return string.Format("{2}{0}{3} = '{1}'", LayerField, Value,
+            beginQuoteDelim, endQuoteDelim);
+      } // get
+    } // DefQuery
+  }
 }
