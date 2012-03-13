@@ -336,10 +336,10 @@ namespace ArcSpooler.UI
       foreach (HighlightLayer item in master.HighlightLayers)
       {
         if (log.IsDebugEnabled)
-          log.Debug("Shifiting highlight layer " + item.LayerName);
+          log.Debug("Shifting highlight layer " + item.LayerName);
 
         item.Value = key;
-        mdocHelper.ChangeDefinitionQuery(mdocHelper.Map(_Config.MasterDataFrame.Name),
+        mdocHelper.ChangeDefinitionQuery(mdocHelper.Map(master.Name),
           item.LayerName, item.DefQuery);
       } // foreach  (item)
     }
