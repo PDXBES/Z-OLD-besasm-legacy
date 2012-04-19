@@ -647,6 +647,30 @@ namespace SWI_2
 
         private void buttonAddMap_Click(object sender, EventArgs e)
         {
+            //yes this redundancy is really necessary
+            try
+            {
+                //sometimes the user will not have a row selected when they close out.
+                dataGridViewLinkInfo.CurrentRow.DataGridView.EndEdit();
+            }
+            catch (Exception ex)
+            {
+            }
+            dataGridViewLinkInfo.EndEdit();
+            CurrencyManager cm = (CurrencyManager)dataGridViewLinkInfo.BindingContext[dataGridViewLinkInfo.DataSource, dataGridViewLinkInfo.DataMember];
+            cm.EndCurrentEdit();
+
+            PopulateLinkInfo();
+            DialogResult theAnswer = MessageBox.Show("Do you wish to save changes to the database?", "Save before adding map", MessageBoxButtons.YesNo);
+            if (theAnswer == DialogResult.No)
+            {
+                //do nothing
+            }
+            else if (theAnswer == DialogResult.Yes)
+            {
+                translateChangesAndSaveToDatabase();
+            }
+
             int CurrentView = 0;
             int CurrentSurveyPage = 0;
             int CurrentWatershed = 0;
@@ -726,6 +750,30 @@ namespace SWI_2
 
         private void buttonAddSurveyPage_Click(object sender, EventArgs e)
         {
+            //yes this redundancy is really necessary
+            try
+            {
+                //sometimes the user will not have a row selected when they close out.
+                dataGridViewLinkInfo.CurrentRow.DataGridView.EndEdit();
+            }
+            catch (Exception ex)
+            {
+            }
+            dataGridViewLinkInfo.EndEdit();
+            CurrencyManager cm = (CurrencyManager)dataGridViewLinkInfo.BindingContext[dataGridViewLinkInfo.DataSource, dataGridViewLinkInfo.DataMember];
+            cm.EndCurrentEdit();
+
+            PopulateLinkInfo();
+            DialogResult theAnswer = MessageBox.Show("Do you wish to save changes to the database?", "Save before adding page", MessageBoxButtons.YesNo);
+            if (theAnswer == DialogResult.No)
+            {
+                //do nothing
+            }
+            else if (theAnswer == DialogResult.Yes)
+            {
+                translateChangesAndSaveToDatabase();
+            }
+
             int CurrentView = 0;
             int CurrentSurveyPage = 0;
             int CurrentWatershed = 0;
