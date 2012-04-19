@@ -12,67 +12,68 @@ namespace SystemsAnalysis.DataAccess.AlternativeDataSetTableAdapters
 
 namespace SystemsAnalysis.DataAccess.AlternativeDataSetTableAdapters
 {
-    public partial class AltDscTableAdapter
+  public partial class AltDscTableAdapter
+  {
+    public AltDscTableAdapter(string alternativePath)
+      : this()
     {
-        public AltDscTableAdapter(string alternativePath)
-            : this()
-        {
-					alternativePath = alternativePath + (alternativePath.EndsWith(Path.DirectorySeparatorChar.ToString()) ? "" :
-						Path.DirectorySeparatorChar.ToString());
-          this.Connection.ConnectionString = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + alternativePath + "alternative_package.mdb";
-        }
+      alternativePath = alternativePath + (alternativePath.EndsWith(Path.DirectorySeparatorChar.ToString()) ? "" :
+      Path.DirectorySeparatorChar.ToString());
+      this.Connection.ConnectionString = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + alternativePath + "alternative_package.mdb";
     }
+  }
 
-    public partial class AltLinksTableAdapter
+  public partial class AltLinksTableAdapter
+  {
+    public AltLinksTableAdapter(string alternativePath)
+      : this()
     {
-        public AltLinksTableAdapter(string alternativePath)
-            : this()
-        {
-					alternativePath = alternativePath + (alternativePath.EndsWith(Path.DirectorySeparatorChar.ToString()) ? "" :
-						Path.DirectorySeparatorChar.ToString());
-          this.Connection.ConnectionString = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + alternativePath + "alternative_package.mdb";
-        }
+      alternativePath = alternativePath + (alternativePath.EndsWith(Path.DirectorySeparatorChar.ToString()) ? "" :
+      Path.DirectorySeparatorChar.ToString());
+      this.Connection.ConnectionString = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + alternativePath + "alternative_package.mdb";
     }
+  }
 
-    public partial class AltNodesTableAdapter
+  public partial class AltNodesTableAdapter
+  {
+    public AltNodesTableAdapter(string alternativePath)
+      : this()
     {
-        public AltNodesTableAdapter(string alternativePath)
-            : this()
-        {
-					alternativePath = alternativePath + (alternativePath.EndsWith(Path.DirectorySeparatorChar.ToString()) ? "" :
-						Path.DirectorySeparatorChar.ToString());
-          this.Connection.ConnectionString = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + alternativePath + "alternative_package.mdb";
-        }
+      alternativePath = alternativePath + (alternativePath.EndsWith(Path.DirectorySeparatorChar.ToString()) ? "" :
+      Path.DirectorySeparatorChar.ToString());
+      this.Connection.ConnectionString = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + alternativePath + "alternative_package.mdb";
     }
+  }
 
-    public partial class AltSpecLinksTableAdapter
+  public partial class AltSpecLinksTableAdapter
+  {
+    public AltSpecLinksTableAdapter(string alternativePath)
+      : this()
     {
-        public AltSpecLinksTableAdapter(string alternativePath)
-            : this()
-        {
-					alternativePath = alternativePath + (alternativePath.EndsWith(Path.DirectorySeparatorChar.ToString()) ? "" :
-						Path.DirectorySeparatorChar.ToString());
-          this.Connection.ConnectionString = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + alternativePath + "alternative_package.mdb";
-        }
+      alternativePath = alternativePath + (alternativePath.EndsWith(Path.DirectorySeparatorChar.ToString()) ? "" :
+      Path.DirectorySeparatorChar.ToString());
+      this.Connection.ConnectionString = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + alternativePath + "alternative_package.mdb";
     }
+  }
 
-    public partial class AltSpecLinkDataTableAdapter
+  public partial class AltSpecLinkDataTableAdapter
+  {
+    public AltSpecLinkDataTableAdapter(string alternativePath)
+      : this()
     {
-        public AltSpecLinkDataTableAdapter(string alternativePath)
-            : this()
-        {
-					alternativePath = alternativePath + (alternativePath.EndsWith(Path.DirectorySeparatorChar.ToString()) ? "" :
-						Path.DirectorySeparatorChar.ToString());
-            this.Connection.ConnectionString = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + alternativePath + "alternative_package.mdb";
-        }
+      alternativePath = alternativePath + (alternativePath.EndsWith(Path.DirectorySeparatorChar.ToString()) ? "" :
+      Path.DirectorySeparatorChar.ToString());
+      this.Connection.ConnectionString = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + alternativePath + "alternative_package.mdb";
     }
+  }
 
   public partial class AltStreetTargetsTableAdapter
   {
-    public AltStreetTargetsTableAdapter(string alternativePath) : this()
+    public AltStreetTargetsTableAdapter(string alternativePath)
+      : this()
     {
-			alternativePath = alternativePath + (alternativePath.EndsWith(Path.DirectorySeparatorChar.ToString()) ? "" :
-				Path.DirectorySeparatorChar.ToString());
+      alternativePath = alternativePath + (alternativePath.EndsWith(Path.DirectorySeparatorChar.ToString()) ? "" :
+      Path.DirectorySeparatorChar.ToString());
       this.Connection.ConnectionString = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + alternativePath + "alternative_package.mdb";
     }
   }
@@ -82,8 +83,8 @@ namespace SystemsAnalysis.DataAccess.AlternativeDataSetTableAdapters
     public AltRoofTargetsTableAdapter(string alternativePath)
       : this()
     {
-			alternativePath = alternativePath + (alternativePath.EndsWith(Path.DirectorySeparatorChar.ToString()) ? "" :
-				Path.DirectorySeparatorChar.ToString());
+      alternativePath = alternativePath + (alternativePath.EndsWith(Path.DirectorySeparatorChar.ToString()) ? "" :
+      Path.DirectorySeparatorChar.ToString());
       this.Connection.ConnectionString = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + alternativePath + "alternative_package.mdb";
     }
   }
@@ -93,36 +94,35 @@ namespace SystemsAnalysis.DataAccess.AlternativeDataSetTableAdapters
     public AltParkingTargetsTableAdapter(string alternativePath)
       : this()
     {
-			alternativePath = alternativePath + (alternativePath.EndsWith(Path.DirectorySeparatorChar.ToString()) ? "" :
-				Path.DirectorySeparatorChar.ToString());
+      alternativePath = alternativePath + (alternativePath.EndsWith(Path.DirectorySeparatorChar.ToString()) ? "" :
+      Path.DirectorySeparatorChar.ToString());
       this.Connection.ConnectionString = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + alternativePath + "alternative_package.mdb";
     }
   }
 
-	/// <summary>
-	/// Alt pip xp table adapter
-	/// </summary>
-	public partial class AltPipXPTableAdapter
-	{
-		/// <summary>
-		/// Create alt pip xp table adapter
-		/// </summary>
-		/// <param name="alternativePath">Alternative path</param>
-		public AltPipXPTableAdapter(string alternativePath)
-			: this()
-		{
-
-			alternativePath = alternativePath + (alternativePath.EndsWith(Path.DirectorySeparatorChar.ToString()) ? "" :
-				Path.DirectorySeparatorChar.ToString());
-			this.Connection.ConnectionString = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + alternativePath + "alternative_package.mdb";
-		} // AltPipXpTableAdapter(alternativePath)
-	} // class AltPipXpTableAdapter
+  /// <summary>
+  /// Alt pip xp table adapter
+  /// </summary>
+  public partial class AltPipXPTableAdapter
+  {
+    /// <summary>
+    /// Create alt pip xp table adapter
+    /// </summary>
+    /// <param name="alternativePath">Alternative path</param>
+    public AltPipXPTableAdapter(string alternativePath)
+      : this()
+    {
+      alternativePath = alternativePath + (alternativePath.EndsWith(Path.DirectorySeparatorChar.ToString()) ? "" :
+      Path.DirectorySeparatorChar.ToString());
+      this.Connection.ConnectionString = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + alternativePath + "alternative_package.mdb";
+    } // AltPipXpTableAdapter(alternativePath)
+  } // class AltPipXpTableAdapter
 }
 
 
-namespace SystemsAnalysis.DataAccess {
-    
-    
-    public partial class AlternativeDataSet {
-    }
+namespace SystemsAnalysis.DataAccess
+{
+  public partial class AlternativeDataSet
+  {
+  }
 }

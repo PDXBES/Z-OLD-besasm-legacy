@@ -1,4 +1,4 @@
-// Project: UI, File: LoadModelPackage.cs
+﻿// Project: UI, File: LoadModelPackage.cs
 // Namespace: SystemsAnalysis.Analysis.CostEstimator.UI, Class: LoadModelPackage
 // Path: C:\Development\DotNet\CostEstimator\UI, Author: Arnel
 // Code lines: 26, Size of file: 397 Bytes
@@ -11,43 +11,43 @@ using System.Text;
 
 namespace SystemsAnalysis.Analysis.CostEstimator.UI
 {
-	public class LoadModelPackage
-	{
-		private string _ModelPath;
-		private List<int> _LinksToEstimate;
+  public class LoadModelPackage
+  {
+    private string _ModelPath;
+    private List<int> _LinksToEstimate;
 
-		/// <summary>
-		/// Model path
-		/// </summary>
-		/// <returns>String</returns>
-		public string ModelPath
-		{
-			get
-			{
-				return _ModelPath;
-			} // get
+    /// <summary>
+    /// Model path
+    /// </summary>
+    /// <returns>String</returns>
+    public string ModelPath
+    {
+      get
+      {
+        return _ModelPath;
+      } // get
 
-			set
-			{
-				_ModelPath = value;
-			} // set
-		} // ModelPath
+      set
+      {
+        _ModelPath = value;
+      } // set
+    } // ModelPath
 
-		/// <summary>
-		/// Links to estimate
-		/// </summary>
-		/// <returns>List</returns>
-		public List<int> LinksToEstimate
-		{
-			get
-			{
-				return _LinksToEstimate;
-			} // get
+    /// <summary>
+    /// Links to estimate
+    /// </summary>
+    /// <returns>List</returns>
+    public List<int> LinksToEstimate
+    {
+      get
+      {
+        return _LinksToEstimate;
+      } // get
 
-			set
-			{
-				_LinksToEstimate = value;
-			} // set
-		} // LinksToEstimate
-	}
+      set
+      {
+        _LinksToEstimate = value;
+      } // set
+    } // LinksToEstimate
+  }
 }

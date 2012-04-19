@@ -15,6 +15,7 @@ using System.Xml.XPath;
 using System.ComponentModel;
 using SystemsAnalysis.Modeling;
 using SystemsAnalysis.Modeling.Alternatives;
+
 #endregion
 
 namespace SystemsAnalysis.Analysis.CostEstimator.Classes
@@ -419,7 +420,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
                 break;
               case "factortype":
                 factortype = (CostFactorType)Enum.Parse(typeof(CostFactorType),
-                  childIter.Current.Value, true);
+                childIter.Current.Value, true);
                 break;
               case "comment":
                 comment = childIter.Current.Value;
@@ -430,7 +431,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
           maxCostFactorID = Math.Max(maxCostFactorID, id);
           CostFactor newCostFactor = new CostFactor(id, name, factorvalue, factortype, comment);
           AddFactorToPool(newCostFactor);
-        };
+        }
+        ;
         CostFactor.SetCurrentID(maxCostFactorID + 1);
 
         // Read in Standard CostFactors
@@ -521,7 +523,6 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
           ReportItem genericReportItem = null;
           while (childIter.MoveNext())
           {
-
             switch (childIter.Current.Name)
             {
               //case "id": // deprecated
@@ -725,7 +726,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
           foreach (int factorID in factorIDs)
             costItemFactor.AddFactor(FactorFromPool(factorID));
           AddCostItemFactorToPool(costItemFactor);
-        };
+        }
+        ;
         CostItemFactor.SetCurrentID(maxCostItemID + 1);
 
         // Pass over the CostItemFactors again to recalculate costs and costitemfactors
@@ -807,15 +809,17 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
             costItemFactor.AddCostItemFactor(CostItemFactorFromPool(costItemFactorID));
             CostItemFactorFromPool(costItemFactorID).AddAsParent(costItemFactor);
           } // foreach  (costItemFactorID)
-        };
+        }
+        ;
 
         foreach (KeyValuePair<int, CostItemFactor> kvPair in _CostItemFactors)
         {
           CostItemFactor item = kvPair.Value;
           if (item.Data is ReportSummaryItem)
             (item.Data as ReportSummaryItem).Cost = item.Cost;
-          else if (item.Data is ReportInflowControlItem)
-            (item.Data as ReportInflowControlItem).Cost = item.Cost;
+          else
+            if (item.Data is ReportInflowControlItem)
+              (item.Data as ReportInflowControlItem).Cost = item.Cost;
         } // foreach  (kvPair)
 
         xpathQuery = "/Project/Estimates/*";
@@ -874,10 +878,10 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// <param name="alternativeID">Alternative ID</param>
     /// <returns>Bool</returns>
     public bool CreateEstimateFromAlternative(BackgroundWorker bw, string modelPath, string alternativeID,
-      out string errorMessage)
+    out string errorMessage)
     {
       string alternativePath = modelPath + Path.DirectorySeparatorChar + "alternatives" +
-        Path.DirectorySeparatorChar + alternativeID;
+      Path.DirectorySeparatorChar + alternativeID;
       try
       {
         if (Directory.Exists(alternativePath))
@@ -976,7 +980,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// </summary>
     /// <param name="altLinks">Alt links</param>
     private bool CreatePipeEstimatesFromAlternative(BackgroundWorker bw, AlternativePackage altPackage, List<string> focusAreas,
-      out string errorMessage)
+    out string errorMessage)
     {
       try
       {
@@ -990,9 +994,9 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
           // Skip the pipe if it's a delete (abandon), split/connect (these are original
           // pipes), and replace-in-kinds if no focus area was assigned
           if (altLink.Operation == SystemsAnalysis.Types.Enumerators.AlternativeOperation.DEL ||
-            altLink.Operation == SystemsAnalysis.Types.Enumerators.AlternativeOperation.SPL ||
-            altLink.Operation == SystemsAnalysis.Types.Enumerators.AlternativeOperation.CON ||
-            (altLink.Operation == SystemsAnalysis.Types.Enumerators.AlternativeOperation.RIK && altLink.FocusArea == ""))
+          altLink.Operation == SystemsAnalysis.Types.Enumerators.AlternativeOperation.SPL ||
+          altLink.Operation == SystemsAnalysis.Types.Enumerators.AlternativeOperation.CON ||
+          (altLink.Operation == SystemsAnalysis.Types.Enumerators.AlternativeOperation.RIK && altLink.FocusArea == ""))
             continue;
 
           CheckFocusArea(focusAreas, altLink.FocusArea);
@@ -1006,7 +1010,9 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
             case "HDPE":
               _PipeCoster.Material = PipeMaterial.PVCHDPE;
               break;
+            case "PIPEBUR":
             case "PIPEBURST":
+            case "PBURST":
               _PipeCoster.Material = PipeMaterial.Pipeburst;
               break;
             case "CIPP":
@@ -1019,7 +1025,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 
           // Pipe and Manhole CostItemFactor
           CostItemFactor pipeAndManholeCostItemFactor = new CostItemFactor(string.Format("{0} {1}-{2}",
-            altLink.AltLinkID, altLink.USNodeName, altLink.DSNodeName));
+          altLink.AltLinkID, altLink.USNodeName, altLink.DSNodeName));
           _CostItemFactors.Add(pipeAndManholeCostItemFactor.ID, pipeAndManholeCostItemFactor);
           int pipeAndManholeIndex = currentCostItem.AddCostItemFactor(pipeAndManholeCostItemFactor);
           if (pipeAndManholeIndex == -1)
@@ -1028,22 +1034,22 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 
           // Manhole CostItem
           string manholeCostItemName = string.Format("Manhole {0:F0} in diam {1:F0} ft deep",
-            _PipeCoster.ManholeDiameter, _PipeCoster.Depth);
+          _PipeCoster.ManholeDiameter, _PipeCoster.Depth);
           bool outsideManholeTable;
           CostItem manholeCostItem = CostItemFromPool(manholeCostItemName);
           if (manholeCostItem == null)
           {
             manholeCostItem = new CostItem(manholeCostItemName,
-              1, _PipeCoster.ManholeCost(_PipeCoster.InsideDiameter,
-                _PipeCoster.Depth, out outsideManholeTable), "ea");
+            1, _PipeCoster.ManholeCost(_PipeCoster.InsideDiameter,
+            _PipeCoster.Depth, out outsideManholeTable), "ea");
             AddCostItemToPool(manholeCostItem);
           } // if
 
           // Pipe CostItemFactor
           string pipeItemName = string.Format("Pipe {0:F1} in diam, {1:F0} ft deep, {2}",
-            altLink.Diameter,
-            altPackage.PipeDepth(altLink),
-            altLink.Material);
+          altLink.Diameter,
+          altPackage.PipeDepth(altLink),
+          altLink.Material);
           CostItemFactor pipeCostItemFactor = new CostItemFactor(pipeItemName, null, null, altLink.Length);
           _CostItemFactors.Add(pipeCostItemFactor.ID, pipeCostItemFactor);
           _PipeCoster.CreateDirectConstructionCostItems(this, pipeCostItemFactor);
@@ -1053,9 +1059,9 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 
           // Manhole CostItemFactor
           string manholeItemName = string.Format("Manhole {0:F0} in diam, {1:F0} ft deep",
-            _PipeCoster.ManholeDiameter, _PipeCoster.Depth);
+          _PipeCoster.ManholeDiameter, _PipeCoster.Depth);
           CostItemFactor manholeCostItemFactor = new CostItemFactor(manholeItemName,
-              manholeCostItem, null, 1);
+          manholeCostItem, null, 1);
           _CostItemFactors.Add(manholeCostItemFactor.ID, manholeCostItemFactor);
           int manholeIndex = pipeAndManholeItem.AddCostItemFactor(manholeCostItemFactor);
           if (manholeIndex == -1)
@@ -1102,10 +1108,9 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
           reportPipeItem.Manhole = manholeCostItemFactor;
           reportPipeItem.Pipe = pipeCostItemFactor;
           reportPipeItem.PipeAndManhole = pipeAndManholeCostItemFactor;
-          reportPipeItem.ConstructionDuration = 
-            ConstructionDurationCalculator.ConstructionDurationDays(
-              ancillaryCoster.CurrentAltConflictPackage);
-
+          reportPipeItem.ConstructionDuration =
+          ConstructionDurationCalculator.ConstructionDurationDays(
+          ancillaryCoster.CurrentAltConflictPackage);
         } // foreach  (altLink)
 
         _IsDirty = true;
@@ -1149,7 +1154,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// <param name="totalTargets">Total targets</param>
     /// <param name="targetCounter">Target counter</param>
     private void CreateParkingTargets(BackgroundWorker bw, AlternativePackage altPackage,
-      List<string> focusAreas, int totalTargets, ref int targetCounter)
+    List<string> focusAreas, int totalTargets, ref int targetCounter)
     {
       foreach (ParkingTarget parkingTarget in altPackage.ModelAltParkingTargets.Values)
       {
@@ -1159,7 +1164,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
           continue;
 
         bw.ReportProgress((int)((double)targetCounter / (double)totalTargets * 100),
-          "Reading parking targets");
+        "Reading parking targets");
 
         CheckFocusArea(focusAreas, parkingTarget.FocusArea);
         CostItemFactor currentCostItem = Estimate(parkingTarget.FocusArea).ChildCostItemFactor(DESC_INFLOW_CONTROL_DIRECT_CONSTRUCTION).ChildCostItemFactor("Parking");
@@ -1169,15 +1174,15 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
         decimal icCost = _ICCoster.Cost;
 
         string itemName = string.Format("{0} {1}",
-          _ICCoster.InflowControl.ToString(),
-          parkingTarget.ID);
+        _ICCoster.InflowControl.ToString(),
+        parkingTarget.ID);
         CostItem newCostItem = new CostItem(_ICCoster.InflowControl.ToString(),
-          1, icCost, "ac");
+        1, icCost, "ac");
         CostItem poolCostItem = AddCostItemToPool(newCostItem);
         CostItemFactor parkingTargetCostItemFactor = new CostItemFactor(itemName,
-          null, null, 1);
+        null, null, 1);
         CostItemFactor baseParkingTargetCostItemFactor = new CostItemFactor(newCostItem.Name,
-          poolCostItem, null, parkingTarget.ControlledArea / Common.SQUARE_FEET_PER_ACRE);
+        poolCostItem, null, parkingTarget.ControlledArea / Common.SQUARE_FEET_PER_ACRE);
         parkingTargetCostItemFactor.MinCost = _ICCoster.VegetatedInfiltrationBasinMinCost;
         AddCostItemFactorToPool(parkingTargetCostItemFactor);
         AddCostItemFactorToPool(baseParkingTargetCostItemFactor);
@@ -1229,7 +1234,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// <param name="totalTargets">Total targets</param>
     /// <param name="targetCounter">Target counter</param>
     private void CreateRoofTargets(BackgroundWorker bw, AlternativePackage altPackage,
-      List<string> focusAreas, int totalTargets, ref int targetCounter)
+    List<string> focusAreas, int totalTargets, ref int targetCounter)
     {
       foreach (RoofTarget roofTarget in altPackage.ModelAltRoofTargets.Values)
       {
@@ -1241,7 +1246,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
         bw.ReportProgress((int)((double)targetCounter / (double)totalTargets * 100), "Reading roof targets");
 
         CheckFocusArea(focusAreas, roofTarget.FocusArea);
-        CostItemFactor currentCostItem = Estimate(roofTarget.FocusArea).ChildCostItemFactor(DESC_INFLOW_CONTROL_DIRECT_CONSTRUCTION).ChildCostItemFactor("Roof"); ;
+        CostItemFactor currentCostItem = Estimate(roofTarget.FocusArea).ChildCostItemFactor(DESC_INFLOW_CONTROL_DIRECT_CONSTRUCTION).ChildCostItemFactor("Roof");
+        ;
 
         _ICCoster.DrainageAreaSqFt = Common.SQUARE_FEET_PER_ACRE;
         CostItemFactor roofTargetCostItemFactor = null;
@@ -1251,14 +1257,14 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
           decimal icCost = _ICCoster.Cost;
 
           string itemName = string.Format("{0} {1}",
-            _ICCoster.InflowControl.ToString(),
-            roofTarget.ID);
+          _ICCoster.InflowControl.ToString(),
+          roofTarget.ID);
           CostItem newCostItem = new CostItem(_ICCoster.InflowControl.ToString(), 1, icCost, "ac");
           CostItem poolCostItem = AddCostItemToPool(newCostItem);
           roofTargetCostItemFactor = new CostItemFactor(itemName,
-            null, null, 1);
+          null, null, 1);
           CostItemFactor baseRoofTargetCostItemFactor = new CostItemFactor(newCostItem.Name,
-            poolCostItem, null, roofTarget.AreaToBioretention / Common.SQUARE_FEET_PER_ACRE);
+          poolCostItem, null, roofTarget.AreaToBioretention / Common.SQUARE_FEET_PER_ACRE);
           roofTargetCostItemFactor.MinCost = _ICCoster.VegetatedInfiltrationBasinMinCost;
           AddCostItemFactorToPool(roofTargetCostItemFactor);
           AddCostItemFactorToPool(baseRoofTargetCostItemFactor);
@@ -1279,14 +1285,14 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
           decimal icCost = _ICCoster.Cost;
 
           string itemName = string.Format("{0} {1}",
-            _ICCoster.InflowControl.ToString(),
-            roofTarget.ID);
+          _ICCoster.InflowControl.ToString(),
+          roofTarget.ID);
           CostItem newCostItem = new CostItem(_ICCoster.InflowControl.ToString(), 1, icCost, "ac");
           CostItem poolCostItem = AddCostItemToPool(newCostItem);
           roofTargetCostItemFactor = new CostItemFactor(itemName,
-            null, null, 1);
+          null, null, 1);
           CostItemFactor baseRoofTargetCostItemFactor = new CostItemFactor(newCostItem.Name,
-            poolCostItem, null, roofTarget.AreaToEcoroof / Common.SQUARE_FEET_PER_ACRE);
+          poolCostItem, null, roofTarget.AreaToEcoroof / Common.SQUARE_FEET_PER_ACRE);
           roofTargetCostItemFactor.MinCost = _ICCoster.EcoroofMinCost;
           AddCostItemFactorToPool(roofTargetCostItemFactor);
           AddCostItemFactorToPool(baseRoofTargetCostItemFactor);
@@ -1307,14 +1313,14 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
           decimal icCost = _ICCoster.Cost;
 
           string itemName = string.Format("{0} {1}",
-            _ICCoster.InflowControl.ToString(),
-            roofTarget.ID);
+          _ICCoster.InflowControl.ToString(),
+          roofTarget.ID);
           CostItem newCostItem = new CostItem(_ICCoster.InflowControl.ToString(), 1, icCost, "ac");
           CostItem poolCostItem = AddCostItemToPool(newCostItem);
           roofTargetCostItemFactor = new CostItemFactor(itemName,
-            null, null, 1);
+          null, null, 1);
           CostItemFactor baseRoofTargetCostItemFactor = new CostItemFactor(newCostItem.Name,
-            poolCostItem, null, roofTarget.AreaToPlanter / Common.SQUARE_FEET_PER_ACRE);
+          poolCostItem, null, roofTarget.AreaToPlanter / Common.SQUARE_FEET_PER_ACRE);
           roofTargetCostItemFactor.MinCost = _ICCoster.InfiltrationPlanterMinCost;
           AddCostItemFactorToPool(roofTargetCostItemFactor);
           AddCostItemFactorToPool(baseRoofTargetCostItemFactor);
@@ -1335,14 +1341,14 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
           decimal icCost = _ICCoster.Cost;
 
           string itemName = string.Format("{0} {1}",
-            _ICCoster.InflowControl.ToString(),
-            roofTarget.ID);
+          _ICCoster.InflowControl.ToString(),
+          roofTarget.ID);
           CostItem newCostItem = new CostItem(_ICCoster.InflowControl.ToString(), 1, icCost, "ac");
           CostItem poolCostItem = AddCostItemToPool(newCostItem);
           roofTargetCostItemFactor = new CostItemFactor(itemName,
-            null, null, 1);
+          null, null, 1);
           CostItemFactor baseRoofTargetCostItemFactor = new CostItemFactor(newCostItem.Name,
-            poolCostItem, null, roofTarget.AreaToVeg / Common.SQUARE_FEET_PER_ACRE);
+          poolCostItem, null, roofTarget.AreaToVeg / Common.SQUARE_FEET_PER_ACRE);
           roofTargetCostItemFactor.MinCost = _ICCoster.DownspoutDisconnectionMinCost;
           AddCostItemFactorToPool(roofTargetCostItemFactor);
           AddCostItemFactorToPool(baseRoofTargetCostItemFactor);
@@ -1385,7 +1391,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     } // PrepareStreetReportItem(streetTarget, streetTargetCostItemFactor)
 
     private void CreateStreetTargets(BackgroundWorker bw, AlternativePackage altPackage,
-      List<string> focusAreas, int totalTargets, int targetCounter)
+    List<string> focusAreas, int totalTargets, int targetCounter)
     {
       foreach (StreetTarget streetTarget in altPackage.ModelAltStreetTargets.Values)
       {
@@ -1395,7 +1401,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
           continue;
 
         bw.ReportProgress((int)((double)targetCounter / (double)totalTargets * 100),
-          "Reading street targets");
+        "Reading street targets");
 
         CheckFocusArea(focusAreas, streetTarget.FocusArea);
         CostItemFactor currentCostItem = Estimate(streetTarget.FocusArea).ChildCostItemFactor(DESC_INFLOW_CONTROL_DIRECT_CONSTRUCTION).ChildCostItemFactor("Street");
@@ -1408,8 +1414,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
         CostItem poolCostItem = null;
 
         CostItemFactor CETrafficControlCIF = null;
-            CostItemFactor CEAdaRampCIF = null;
-            CostItemFactor CEWaterLineSleevingCIF = null;
+        CostItemFactor CEAdaRampCIF = null;
+        CostItemFactor CEWaterLineSleevingCIF = null;
 
         switch (streetTarget.TypeCode)
         {
@@ -1418,29 +1424,29 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
             _ICCoster.FacilitySizeCuFt = 1;
             icCost = _ICCoster.Cost;
             itemName = string.Format("{0} {1}",
-              _ICCoster.InflowControl.ToString(),
-              streetTarget.ID);
+            _ICCoster.InflowControl.ToString(),
+            streetTarget.ID);
             newCostItem = new CostItem(_ICCoster.InflowControl.ToString(), 1, icCost, "ea");
             poolCostItem = AddCostItemToPool(newCostItem);
             streetTargetCostItemFactor = new CostItemFactor(itemName,
-              null, null, 1);
+            null, null, 1);
             baseStreetTargetCostItemFactor = new CostItemFactor(newCostItem.Name,
-              poolCostItem, null, 1);
+            poolCostItem, null, 1);
             break;
           case "p":
             _ICCoster.InflowControl = InflowControl.StormwaterPlanter;
             _ICCoster.FacilitySizeCuFt = _ICCoster.StormwaterPlanterMinCuFt + 10;
             icCost = _ICCoster.Cost;
             itemName = string.Format("{0} {1}",
-              _ICCoster.InflowControl.ToString(),
-              streetTarget.ID);
+            _ICCoster.InflowControl.ToString(),
+            streetTarget.ID);
             newCostItem = new CostItem(_ICCoster.InflowControl.ToString(), 1,
-              (decimal)((double)icCost / _ICCoster.FacilitySizeCuFt), "cuft");
+            (decimal)((double)icCost / _ICCoster.FacilitySizeCuFt), "cuft");
             poolCostItem = AddCostItemToPool(newCostItem);
             streetTargetCostItemFactor = new CostItemFactor(itemName,
-              null, null, 1);
+            null, null, 1);
             baseStreetTargetCostItemFactor = new CostItemFactor(newCostItem.Name,
-              poolCostItem, null, streetTarget.CurbExtensionVol);
+            poolCostItem, null, streetTarget.CurbExtensionVol);
             streetTargetCostItemFactor.MinCost = _ICCoster.StormwaterPlanterMinCost;
             break;
           case "c":
@@ -1448,43 +1454,42 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
             _ICCoster.FacilitySizeCuFt = _ICCoster.CurbExtensionMinCuFt + 10;
             icCost = _ICCoster.Cost;
             itemName = string.Format("{0} {1}",
-              _ICCoster.InflowControl.ToString(),
-              streetTarget.ID);
+            _ICCoster.InflowControl.ToString(),
+            streetTarget.ID);
             newCostItem = new CostItem(_ICCoster.InflowControl.ToString(), 1,
-              (decimal)((double)icCost / _ICCoster.FacilitySizeCuFt), "cuft");
+            (decimal)((double)icCost / _ICCoster.FacilitySizeCuFt), "cuft");
             poolCostItem = AddCostItemToPool(newCostItem);
-            
             CostItem newCETrafficControlCostItem = new CostItem("Curb extension traffic control",
-              1, _ICCoster.CurbExtensionTrafficControl, "ea");
+            1, _ICCoster.CurbExtensionTrafficControl, "ea");
             CostItem poolCETrafficControlCostItem = AddCostItemToPool(newCETrafficControlCostItem);
-            CETrafficControlCIF = new CostItemFactor(poolCETrafficControlCostItem.Name, 
-              poolCETrafficControlCostItem, null, 1);
+            CETrafficControlCIF = new CostItemFactor(poolCETrafficControlCostItem.Name,
+            poolCETrafficControlCostItem, null, 1);
 
-            CostItem newCEAdaRampCostItem = new CostItem("Curb extension ADA ramp", 
-              1, _ICCoster.CurbExtensionAdaRamp, "ea");
+            CostItem newCEAdaRampCostItem = new CostItem("Curb extension ADA ramp",
+            1, _ICCoster.CurbExtensionAdaRamp, "ea");
             CostItem poolCEAdaRampCostItem = AddCostItemToPool(newCEAdaRampCostItem);
-            CEAdaRampCIF = new CostItemFactor(poolCEAdaRampCostItem.Name, 
-              poolCEAdaRampCostItem, null, 1);
+            CEAdaRampCIF = new CostItemFactor(poolCEAdaRampCostItem.Name,
+            poolCEAdaRampCostItem, null, 1);
 
-            CostItem newCEWaterLineSleevingCostItem = new CostItem("Curb extension water line sleeving", 
-              1, _ICCoster.CurbExtensionWaterLineSleeving, "ea");
+            CostItem newCEWaterLineSleevingCostItem = new CostItem("Curb extension water line sleeving",
+            1, _ICCoster.CurbExtensionWaterLineSleeving, "ea");
             CostItem poolCEWaterLineSleevingCostItem = AddCostItemToPool(newCEWaterLineSleevingCostItem);
             CEWaterLineSleevingCIF = new CostItemFactor(poolCEWaterLineSleevingCostItem.Name,
-              poolCEWaterLineSleevingCostItem, null, 1);
+            poolCEWaterLineSleevingCostItem, null, 1);
 
             AddCostItemFactorToPool(CETrafficControlCIF);
             AddCostItemFactorToPool(CEAdaRampCIF);
             AddCostItemFactorToPool(CEWaterLineSleevingCIF);
 
             streetTargetCostItemFactor = new CostItemFactor(itemName,
-              null, null, 1);
+            null, null, 1);
 
             streetTargetCostItemFactor.AddCostItemFactor(CETrafficControlCIF);
             streetTargetCostItemFactor.AddCostItemFactor(CEAdaRampCIF);
             streetTargetCostItemFactor.AddCostItemFactor(CEWaterLineSleevingCIF);
 
             baseStreetTargetCostItemFactor = new CostItemFactor(newCostItem.Name,
-              poolCostItem, null, streetTarget.CurbExtensionVol);
+            poolCostItem, null, streetTarget.CurbExtensionVol);
 
             streetTargetCostItemFactor.MinCost = _ICCoster.CurbExtensionMinCost;
             break;
@@ -1501,7 +1506,6 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
           throw new Exception("Cannot add CostItemFactor");
         if (streetTargetCostItemFactor.PrefactoredCost < streetTargetCostItemFactor.Cost)
           streetTargetCostItemFactor.Comment = "Raised to minimum cost";
-    
         PrepareStreetReportItem(streetTarget, streetTargetCostItemFactor);
       } // foreach  (streetTarget)
 
@@ -1514,12 +1518,12 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// <param name="altPackage">Alt package</param>
     /// <param name="focusAreas">Focus areas</param>
     private bool CreateInflowControlEstimatesFromAlternative(BackgroundWorker bw,
-      AlternativePackage altPackage, List<string> focusAreas, out string errorMessage)
+    AlternativePackage altPackage, List<string> focusAreas, out string errorMessage)
     {
       try
       {
         int totalTargets = altPackage.ModelAltParkingTargets.Count +
-          altPackage.ModelAltRoofTargets.Count + altPackage.ModelAltStreetTargets.Count;
+        altPackage.ModelAltRoofTargets.Count + altPackage.ModelAltStreetTargets.Count;
         int targetCounter = 0;
 
         CreateParkingTargets(bw, altPackage, focusAreas, totalTargets, ref targetCounter);
@@ -1558,7 +1562,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// <param name="errorMessage">Error message</param>
     /// <returns>Bool</returns>
     public bool CreateEstimateFromModel(BackgroundWorker bw, string modelPath, List<int> selectedMLinkIds,
-      out string errorMessage)
+    out string errorMessage)
     {
       return CreateEstimateFromModel(bw, modelPath, selectedMLinkIds, true, out errorMessage);
     } // CreateEstimateFromModel(bw, modelPath, selectedMLinkIds)
@@ -1569,7 +1573,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// <param name="bw">Bw</param>
     /// <param name="modelPath">Model path</param>
     public bool CreateEstimateFromModel(BackgroundWorker bw, string modelPath, List<int> selectedMLinkIds,
-      bool generateManholeCosts, out string errorMessage)
+    bool generateManholeCosts, out string errorMessage)
     {
       int linkCounter = 0;
       Link currentLink = null;
@@ -1616,8 +1620,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
             int expectedDuration = Convert.ToInt32((DateTime.Now - startTime).Duration().TotalMinutes / fractionDone);
             int durationLeft = expectedDuration - elapsedDuration;
             bw.ReportProgress((int)(fractionDone * 100),
-              string.Format("Reading links: {0} out of {1}, {2} minutes left",
-              linkCounter, totalLinks, durationLeft));
+            string.Format("Reading links: {0} out of {1}, {2} minutes left",
+            linkCounter, totalLinks, durationLeft));
 
             currentStage = "Assigning PipeCoster depth";
             _PipeCoster.Depth = model.PipeDepth(link);
@@ -1646,7 +1650,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
             // Pipe and Manhole CostItemFactor
             currentStage = "Creating pipe/manhole CostItemFactor";
             CostItemFactor pipeAndManholeCostItemFactor = new CostItemFactor(string.Format("{0} {1}-{2}",
-              link.MLinkID, link.USNodeName, link.DSNodeName));
+            link.MLinkID, link.USNodeName, link.DSNodeName));
             _CostItemFactors.Add(pipeAndManholeCostItemFactor.ID, pipeAndManholeCostItemFactor);
             int pipeAndManholeIndex = directConstructionCIF.AddCostItemFactor(pipeAndManholeCostItemFactor);
             if (pipeAndManholeIndex == -1)
@@ -1659,14 +1663,14 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
             if (generateManholeCosts)
             {
               string manholeCostItemName = string.Format("Manhole {0:F0} in diam {1:F0} ft deep",
-                _PipeCoster.InsideDiameter, _PipeCoster.Depth);
+              _PipeCoster.InsideDiameter, _PipeCoster.Depth);
               bool outsideManholeTable;
               manholeCostItem = CostItemFromPool(manholeCostItemName);
               if (manholeCostItem == null)
               {
                 manholeCostItem = new CostItem(manholeCostItemName,
-                  1, _PipeCoster.ManholeCost(_PipeCoster.ManholeDiameter,
-                    _PipeCoster.Depth, out outsideManholeTable), "ea");
+                1, _PipeCoster.ManholeCost(_PipeCoster.ManholeDiameter,
+                _PipeCoster.Depth, out outsideManholeTable), "ea");
                 AddCostItemToPool(manholeCostItem);
               } // if
             }
@@ -1674,9 +1678,9 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
             // Pipe CostItemFactor
             currentStage = "Creating pipe CostItemFactor";
             string pipeItemName = string.Format("Pipe {0:F1} in diam, {1:F0} ft deep, {2}",
-              link.Diameter,
-              model.PipeDepth(link),
-              link.Material);
+            link.Diameter,
+            model.PipeDepth(link),
+            link.Material);
             CostItemFactor pipeCostItemFactor = new CostItemFactor(pipeItemName, null, null, link.Length);
             _CostItemFactors.Add(pipeCostItemFactor.ID, pipeCostItemFactor);
             _PipeCoster.CreateDirectConstructionCostItems(this, pipeCostItemFactor);
@@ -1690,9 +1694,9 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
             if (generateManholeCosts)
             {
               string manholeItemName = string.Format("Manhole {0:F0} in diam, {1:F0} ft deep",
-                _PipeCoster.ManholeDiameter, _PipeCoster.Depth);
+              _PipeCoster.ManholeDiameter, _PipeCoster.Depth);
               manholeCostItemFactor = new CostItemFactor(manholeItemName,
-                  manholeCostItem, null, 1);
+              manholeCostItem, null, 1);
               _CostItemFactors.Add(manholeCostItemFactor.ID, manholeCostItemFactor);
               int manholeIndex = pipeAndManholeItem.AddCostItemFactor(manholeCostItemFactor);
               if (manholeIndex == -1)
@@ -1727,13 +1731,16 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 
             // Ancillary CostFactors
             currentStage = "Creating ancillary CostFactors";
-            List<AncillaryFactor> ancillaryFactors = ancillaryCoster.ModelAncillaryFactors;
-            foreach (AncillaryFactor ancillaryFactor in ancillaryFactors)
+            if (ancillaryCoster.PipXP != null)
             {
-              CostFactor factor = new CostFactor(ancillaryFactor.Name, ancillaryFactor.Factor, ancillaryFactor.FactorType);
-              CostFactor factorItem = AddFactorToPool(factor);
-              pipeAndManholeCostItemFactor.AddFactor(factorItem);
-            } // foreach  (ancillaryFactor)
+              List<AncillaryFactor> ancillaryFactors = ancillaryCoster.ModelAncillaryFactors;
+              foreach (AncillaryFactor ancillaryFactor in ancillaryFactors)
+              {
+                CostFactor factor = new CostFactor(ancillaryFactor.Name, ancillaryFactor.Factor, ancillaryFactor.FactorType);
+                CostFactor factorItem = AddFactorToPool(factor);
+                pipeAndManholeCostItemFactor.AddFactor(factorItem);
+              } // foreach  (ancillaryFactor)
+            }
 
             // Prepare report item
             currentStage = "Preparing report item";
@@ -1750,10 +1757,9 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
             reportPipeItem.Manhole = generateManholeCosts ? manholeCostItemFactor : null;
             reportPipeItem.Pipe = pipeCostItemFactor;
             reportPipeItem.PipeAndManhole = pipeAndManholeCostItemFactor;
-            reportPipeItem.ConstructionDuration = 
-              ConstructionDurationCalculator.ConstructionDurationDays(
-                ancillaryCoster.CurrentConflictPackage);
-
+            reportPipeItem.ConstructionDuration =
+            ConstructionDurationCalculator.ConstructionDurationDays(
+            ancillaryCoster.CurrentConflictPackage);
           } // foreach  (link)
           currentLink = null;
 
@@ -1775,7 +1781,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       {
         _IsDirty = true;
         errorMessage = string.Format("Ran out of memory while processing model. Loaded {1} links. (System message:{0})",
-          e.Message, linkCounter);
+        e.Message, linkCounter);
         return false;
       } // catch
       catch (Exception e)
@@ -1783,12 +1789,12 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
         _IsDirty = true;
         string currentLinkMessage = "";
         if (currentLink != null)
-          currentLinkMessage = string.Format("{0} {1}->{2}:", currentLink.MLinkID, 
-            currentLink.USNodeName, currentLink.DSNodeName);
+          currentLinkMessage = string.Format("{0} {1}->{2}:", currentLink.MLinkID,
+          currentLink.USNodeName, currentLink.DSNodeName);
 
-        errorMessage = currentLink != null ? 
-          string.Format("{0} {1} {2}", currentStage, currentLinkMessage, e.Message) :
-          e.Message;
+        errorMessage = currentLink != null ?
+        string.Format("{0} {1} {2}", currentStage, currentLinkMessage, e.Message) :
+        e.Message;
         return false;
       } // catch (Exception)
 
@@ -2210,7 +2216,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     public List<ReportInflowControlItem> ReportInflowControlItems(string kind, int estimateIndex)
     {
       SortedList<string, ReportInflowControlItem> sortedInflowControlList =
-        new SortedList<string, ReportInflowControlItem>();
+      new SortedList<string, ReportInflowControlItem>();
       CostItemFactor estimate = Estimate(estimateIndex);
       CostItemFactor icDirectConstructionCIF = estimate.ChildCostItemFactor(DESC_INFLOW_CONTROL_DIRECT_CONSTRUCTION);
       if (icDirectConstructionCIF == null)
@@ -2281,7 +2287,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
           CostFactor currentFactor = childCostItemFactor.CostFactor(i);
           ReportGenericItem reportItem = new ReportGenericItem();
           reportItem.Name = string.Format("{2} {0} ({1:P0})", currentFactor.Name, currentFactor.FactorValue,
-            childCostItemFactor.Name);
+          childCostItemFactor.Name);
           reportItem.Quantity = 1;
           reportItem.UnitName = "ls";
           reportItem.UnitPrice = childCostItemFactor.CostFactorValue(i);
@@ -2300,10 +2306,10 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
             reportItem.Name = item.Name;
             reportItem.Quantity = item.Quantity;
             reportItem.UnitName = item.CostItem != null ?
-              item.CostItem.UnitName : "ea";
+            item.CostItem.UnitName : "ea";
             reportItem.UnitPrice = item.CostItem != null ?
-              (decimal)((double)item.CostItem.UnitCost *
-              item.Factor) : item.Cost;
+            (decimal)((double)item.CostItem.UnitCost *
+            item.Factor) : item.Cost;
             reportItem.Group = "General";
             reportItem.Item = item;
             reportItem.Comment = item.Comment;
@@ -2328,7 +2334,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       foreach (CostItemFactor genericCIF in estimate.ChildCostItemFactors)
       {
         if ((genericCIF != pipeDirectConstructionCIF) &&
-          (genericCIF != icDirectConstructionCIF))
+        (genericCIF != icDirectConstructionCIF))
         {
           ReportGenericItem genericItem = new ReportGenericItem();
           genericItem.Name = genericCIF.Name;

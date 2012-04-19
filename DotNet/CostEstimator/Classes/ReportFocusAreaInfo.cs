@@ -1,4 +1,4 @@
-// Project: Classes, File: ReportFocusAreaInfo.cs
+﻿// Project: Classes, File: ReportFocusAreaInfo.cs
 // Namespace: SystemsAnalysis.Analysis.CostEstimator.Classes, Class: ReportFocusAreaInfo
 // Path: C:\Development\DotNet\CostEstimator\Classes, Author: Arnel
 // Code lines: 25, Size of file: 326 Bytes
@@ -9,6 +9,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+
 #endregion
 
 namespace SystemsAnalysis.Analysis.CostEstimator.Classes
@@ -16,34 +17,34 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
   /// <summary>
   /// Holds the focus area name
   /// </summary>
-	public class ReportFocusAreaInfo
-	{
-		string _Name;
+  public class ReportFocusAreaInfo
+  {
+    string _Name;
 
-		/// <summary>
-		/// Create report focus area info
-		/// </summary>
-		/// <param name="focusArea">Focus area</param>
-		public ReportFocusAreaInfo(string focusArea)
-		{
-			_Name = focusArea;
-		} // ReportFocusAreaInfo(focusArea)
+    /// <summary>
+    /// Create report focus area info
+    /// </summary>
+    /// <param name="focusArea">Focus area</param>
+    public ReportFocusAreaInfo(string focusArea)
+    {
+      _Name = focusArea;
+    } // ReportFocusAreaInfo(focusArea)
 
-		/// <summary>
-		/// Name
-		/// </summary>
-		/// <returns>String</returns>
-		public string Name
-		{
-			get
-			{
-				return _Name;
-			} // get
+    /// <summary>
+    /// Name
+    /// </summary>
+    /// <returns>String</returns>
+    public string Name
+    {
+      get
+      {
+        return _Name;
+      } // get
 
-			set
-			{
-				_Name = value;
-			} // set
-		} // Name
-	}
+      set
+      {
+        _Name = value;
+      } // set
+    } // Name
+  }
 }

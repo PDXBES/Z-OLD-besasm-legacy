@@ -1,11 +1,11 @@
-using System;
+﻿using System;
 using System.Collections;
 using SystemsAnalysis.DataAccess;
 using SystemsAnalysis.Modeling;
 
 namespace SystemsAnalysis.Modeling
 {
-    /*
+  /*
     /// <summary>
     /// Strongly typed collection of DiversionStructure objects.
     /// </summary>
