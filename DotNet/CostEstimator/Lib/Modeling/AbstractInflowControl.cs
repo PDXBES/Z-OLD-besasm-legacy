@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -11,7 +11,7 @@ namespace SystemsAnalysis.Modeling
     internal bool _BuildModelIC;
     internal int _Constructed;
     internal string _FocusArea;
-    internal double _ControlledArea;      
+    internal double _ControlledArea;
 
     public int ID
     {
@@ -21,7 +21,7 @@ namespace SystemsAnalysis.Modeling
       }
       set
       {
-      	_ID = value;
+        _ID = value;
       }
     }
 
@@ -69,16 +69,16 @@ namespace SystemsAnalysis.Modeling
       }
     }
 
-      public int Constructed
+    public int Constructed
+    {
+      get
       {
-          get
-          {
-              return _Constructed;
-          }
-				set
-        {
-        	_Constructed = value;
-        }
+        return _Constructed;
       }
+      set
+      {
+        _Constructed = value;
+      }
+    }
   }
 }

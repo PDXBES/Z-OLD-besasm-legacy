@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,12 +8,12 @@ using System.Windows.Forms;
 
 namespace SystemsAnalysis.Analysis.CostEstimator.UI
 {
-	public partial class SelectAlternativePage : CostEstimator.UI.ChildFormTemplate
-	{
-		public SelectAlternativePage()
-		{
-			InitializeComponent();
-		}
-	}
+  public partial class SelectAlternativePage : CostEstimator.UI.ChildFormTemplate
+  {
+    public SelectAlternativePage()
+    {
+      InitializeComponent();
+    }
+  }
 }
 

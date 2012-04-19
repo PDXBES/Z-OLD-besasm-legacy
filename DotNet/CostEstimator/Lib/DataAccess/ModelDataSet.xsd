@@ -2,9 +2,10 @@
 <xs:schema id="ModelDataSet" targetNamespace="http://tempuri.org/ModelDataSet.xsd" xmlns:mstns="http://tempuri.org/ModelDataSet.xsd" xmlns="http://tempuri.org/ModelDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
   <xs:annotation>
     <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
-      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="1" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
         <Connections>
           <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="DataAccessConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Public" Name="DataAccessConnectionString (Settings)" PropertyReference="ApplicationSettings.SystemsAnalysis.DataAccess.Properties.Settings.GlobalReference.Default.DataAccessConnectionString" Provider="System.Data.OleDb" />
+          <Connection ConnectionStringObject="Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\Development\ALD_EX\mdbs\DataAccess.mdb" IsAppSettingsProperty="false" Modifier="Assembly" Name="DataAccess.mdb" Provider="System.Data.OleDb" />
         </Connections>
         <Tables>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="MdlDscTableAdapter" GeneratorDataComponentClassName="MdlDscTableAdapter" Name="MdlDsc" UserDataComponentName="MdlDscTableAdapter">
@@ -1752,26 +1753,41 @@ WHERE        (Constructed &gt; 0) OR
           </TableAdapter>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="MdlPipXPTableAdapter" GeneratorDataComponentClassName="MdlPipXPTableAdapter" Name="MdlPipXP" UserDataComponentName="MdlPipXPTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="DataAccessConnectionString (Settings)" DbObjectName="mdl_pipxp_ac" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="DataAccess.mdb" DbObjectName="mdl_pipxp_ac" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <InsertCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>INSERT INTO `mdl_pipxp_ac` (`MLinkID`, `USNode`, `DSNode`, `MLinkID_2`, `COMPKEY`, `xWtr`, `xWMinD`, `xWMaxD`, `pWtr`, `pWtrMaxD`, `pFt2Wtr`, `xSewer`, `xSwrMinD`, `xSwrMaxD`, `pSewer`, `pSwrMaxD`, `pFt2Swr`, `xStrt`, `xArt`, `xMJArt`, `xFrwy`, `pStrt`, `pStrtTyp`, `pFt2Strt`, `pTraffic`, `uxCLx`, `uxFt2CLx`, `dxCLx`, `dxFt2CLx`, `xFiber`, `pFiber`, `pFt2Fiber`, `xGas`, `pGas`, `pFt2Gas`, `xRail`, `pRail`, `pFt2Rail`, `xLRT`, `pLRT`, `pFt2LRT`, `xEmt`, `pEmt`, `pFt2Emt`, `xEzonC`, `xEzonP`, `xFtEzonC`, `xFtEzonP`, `xEzAreaC`, `xEzAreaP`, `uxMS4`, `uxUIC`, `uDepth`, `dDepth`, `xPipSlope`, `gSlope`, `xEcsi`, `xFt2Ecsi`, `xEcsiLen`, `xEcsiVol`, `xSchl`, `xFt2Schl`, `xHosp`, `xFt2Hosp`, `xPol`, `xFt2Pol`, `xFire`, `xFt2Fire`, `xBldg`, `xFt2Bldg`, `xHyd`, `xFt2Hyd`, `HardArea`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)</CommandText>
+                    <CommandText>INSERT INTO `mdl_pipxp_ac` (`MLINKID`, `USNODE`, `DSNODE`, `COMPKEY`, `xa`, `ya`, `xb`, `yb`, `Deg2N`, `xWtr`, `xWMinD`, `xWMaxD`, `pWtr`, `pWtr2`, `pWtr4`, `pWtr6`, `pWtr8`, `pWtr10`, `pWtr12`, `pWtrMaxD`, `pFt2Wtr`, `xSewer`, `xSwrMinD`, `xSwrMaxD`, `pSewer`, `pSwr2`, `pSwr4`, `pSwr6`, `pSwr8`, `pSwr10`, `pSwrMaxD`, `pFt2Swr`, `xStrt`, `xArt`, `xMJArt`, `xFrwy`, `pStrt`, `pStrtTyp`, `pFt2Strt`, `pTraffic`, `uxCLx`, `uxFt2CLx`, `dxCLx`, `dxFt2CLx`, `xFiber`, `pFiber`, `pFt2Fiber`, `xGas`, `pGas`, `pFt2Gas`, `xRail`, `pRail`, `pRail10`, `pRail20`, `pRail30`, `pFt2Rail`, `xLRT`, `pLRT`, `pLRT10`, `pLRT20`, `pLRT30`, `pFt2LRT`, `xEmt`, `pEmt`, `pFt2Emt`, `xEzonC`, `xEzonP`, `xFtEzonC`, `xFtEzonP`, `xEzAreaC`, `xEzAreaP`, `uxMS4`, `uxUIC`, `uDepth`, `dDepth`, `xPipSlope`, `gSlope`, `xEcsi`, `xFt2Ecsi`, `xEcsiLen`, `xEcsiVol`, `xLUST`, `xFt2LUST`, `xSchl`, `xFt2Schl`, `xHosp`, `xFt2Hosp`, `xPol`, `xFt2Pol`, `xFire`, `xFt2Fire`, `xBldg`, `xFt2Bldg`, `xHyd`, `xFt2Hyd`, `HardArea`, `xpDeg2N`, `INT01`, `INT02`, `FLT01`, `FLT02`, `TXT50`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)</CommandText>
                     <Parameters>
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="MLinkID" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="MLinkID" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="USNode" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="USNode" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="DSNode" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="DSNode" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="MLinkID_2" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="MLinkID_2" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="COMPKEY" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="COMPKEY" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="MLINKID" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="MLINKID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="USNODE" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="USNODE" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="DSNODE" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="DSNODE" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="COMPKEY" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="COMPKEY" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="xa" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="xa" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="ya" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="ya" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="xb" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="xb" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="yb" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="yb" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="Deg2N" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="Deg2N" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="xWtr" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="xWtr" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="xWMinD" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="xWMinD" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="xWMaxD" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="xWMaxD" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="pWtr" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="pWtr" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="pWtr2" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="pWtr2" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="pWtr4" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="pWtr4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="pWtr6" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="pWtr6" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="pWtr8" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="pWtr8" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="pWtr10" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="pWtr10" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="pWtr12" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="pWtr12" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="pWtrMaxD" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="pWtrMaxD" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="pFt2Wtr" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="pFt2Wtr" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="xSewer" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="xSewer" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="xSwrMinD" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="xSwrMinD" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="xSwrMaxD" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="xSwrMaxD" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="pSewer" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="pSewer" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="pSwr2" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="pSwr2" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="pSwr4" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="pSwr4" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="pSwr6" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="pSwr6" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="pSwr8" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="pSwr8" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="pSwr10" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="pSwr10" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="pSwrMaxD" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="pSwrMaxD" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="pFt2Swr" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="pFt2Swr" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="xStrt" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="xStrt" SourceColumnNullMapping="false" SourceVersion="Current" />
@@ -1794,9 +1810,15 @@ WHERE        (Constructed &gt; 0) OR
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="pFt2Gas" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="pFt2Gas" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="xRail" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="xRail" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="pRail" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="pRail" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="pRail10" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="pRail10" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="pRail20" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="pRail20" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="pRail30" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="pRail30" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="pFt2Rail" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="pFt2Rail" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="xLRT" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="xLRT" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="pLRT" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="pLRT" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="pLRT10" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="pLRT10" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="pLRT20" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="pLRT20" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="pLRT30" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="pLRT30" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="pFt2LRT" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="pFt2LRT" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="xEmt" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="xEmt" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="pEmt" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="pEmt" SourceColumnNullMapping="false" SourceVersion="Current" />
@@ -1812,11 +1834,13 @@ WHERE        (Constructed &gt; 0) OR
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="uDepth" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="uDepth" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="dDepth" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="dDepth" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="xPipSlope" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="xPipSlope" SourceColumnNullMapping="false" SourceVersion="Current" />
-                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="gSlope" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="gSlope" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="gSlope" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="gSlope" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="xEcsi" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="xEcsi" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="xFt2Ecsi" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="xFt2Ecsi" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="xEcsiLen" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="xEcsiLen" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="xEcsiVol" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="xEcsiVol" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="xLUST" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="xLUST" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="xFt2LUST" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="xFt2LUST" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="xSchl" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="xSchl" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="xFt2Schl" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="xFt2Schl" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="xHosp" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="xHosp" SourceColumnNullMapping="false" SourceVersion="Current" />
@@ -1830,6 +1854,12 @@ WHERE        (Constructed &gt; 0) OR
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="xHyd" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="xHyd" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="xFt2Hyd" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="xFt2Hyd" SourceColumnNullMapping="false" SourceVersion="Current" />
                       <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="HardArea" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="HardArea" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="xpDeg2N" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="xpDeg2N" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="INT01" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="INT01" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="INT02" Precision="0" ProviderType="Integer" Scale="0" Size="0" SourceColumn="INT02" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="FLT01" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="FLT01" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="Double" Direction="Input" ParameterName="FLT02" Precision="0" ProviderType="Double" Scale="0" Size="0" SourceColumn="FLT02" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="true" AutogeneratedName="" DataSourceName="" DbType="String" Direction="Input" ParameterName="TXT50" Precision="0" ProviderType="VarWChar" Scale="0" Size="0" SourceColumn="TXT50" SourceColumnNullMapping="false" SourceVersion="Current" />
                     </Parameters>
                   </DbCommand>
                 </InsertCommand>
@@ -1844,11 +1874,6 @@ FROM         mdl_pipxp_ac</CommandText>
             </MainSource>
             <Mappings>
               <Mapping SourceColumn="MAPINFO_ID" DataSetColumn="MAPINFO_ID" />
-              <Mapping SourceColumn="MLinkID" DataSetColumn="MLinkID" />
-              <Mapping SourceColumn="USNode" DataSetColumn="USNode" />
-              <Mapping SourceColumn="DSNode" DataSetColumn="DSNode" />
-              <Mapping SourceColumn="MLinkID_2" DataSetColumn="MLinkID_2" />
-              <Mapping SourceColumn="COMPKEY" DataSetColumn="COMPKEY" />
               <Mapping SourceColumn="xWtr" DataSetColumn="xWtr" />
               <Mapping SourceColumn="xWMinD" DataSetColumn="xWMinD" />
               <Mapping SourceColumn="xWMaxD" DataSetColumn="xWMaxD" />
@@ -1899,7 +1924,6 @@ FROM         mdl_pipxp_ac</CommandText>
               <Mapping SourceColumn="uDepth" DataSetColumn="uDepth" />
               <Mapping SourceColumn="dDepth" DataSetColumn="dDepth" />
               <Mapping SourceColumn="xPipSlope" DataSetColumn="xPipSlope" />
-              <Mapping SourceColumn="gSlope" DataSetColumn="gSlope" />
               <Mapping SourceColumn="xEcsi" DataSetColumn="xEcsi" />
               <Mapping SourceColumn="xFt2Ecsi" DataSetColumn="xFt2Ecsi" />
               <Mapping SourceColumn="xEcsiLen" DataSetColumn="xEcsiLen" />
@@ -1917,6 +1941,41 @@ FROM         mdl_pipxp_ac</CommandText>
               <Mapping SourceColumn="xHyd" DataSetColumn="xHyd" />
               <Mapping SourceColumn="xFt2Hyd" DataSetColumn="xFt2Hyd" />
               <Mapping SourceColumn="HardArea" DataSetColumn="HardArea" />
+              <Mapping SourceColumn="MLINKID" DataSetColumn="MLINKID" />
+              <Mapping SourceColumn="USNODE" DataSetColumn="USNODE" />
+              <Mapping SourceColumn="DSNODE" DataSetColumn="DSNODE" />
+              <Mapping SourceColumn="COMPKEY" DataSetColumn="COMPKEY" />
+              <Mapping SourceColumn="xa" DataSetColumn="xa" />
+              <Mapping SourceColumn="ya" DataSetColumn="ya" />
+              <Mapping SourceColumn="xb" DataSetColumn="xb" />
+              <Mapping SourceColumn="yb" DataSetColumn="yb" />
+              <Mapping SourceColumn="Deg2N" DataSetColumn="Deg2N" />
+              <Mapping SourceColumn="pWtr2" DataSetColumn="pWtr2" />
+              <Mapping SourceColumn="pWtr4" DataSetColumn="pWtr4" />
+              <Mapping SourceColumn="pWtr6" DataSetColumn="pWtr6" />
+              <Mapping SourceColumn="pWtr8" DataSetColumn="pWtr8" />
+              <Mapping SourceColumn="pWtr10" DataSetColumn="pWtr10" />
+              <Mapping SourceColumn="pWtr12" DataSetColumn="pWtr12" />
+              <Mapping SourceColumn="pSwr2" DataSetColumn="pSwr2" />
+              <Mapping SourceColumn="pSwr4" DataSetColumn="pSwr4" />
+              <Mapping SourceColumn="pSwr6" DataSetColumn="pSwr6" />
+              <Mapping SourceColumn="pSwr8" DataSetColumn="pSwr8" />
+              <Mapping SourceColumn="pSwr10" DataSetColumn="pSwr10" />
+              <Mapping SourceColumn="gSlope" DataSetColumn="gSlope" />
+              <Mapping SourceColumn="xLUST" DataSetColumn="xLUST" />
+              <Mapping SourceColumn="xFt2LUST" DataSetColumn="xFt2LUST" />
+              <Mapping SourceColumn="xpDeg2N" DataSetColumn="xpDeg2N" />
+              <Mapping SourceColumn="INT01" DataSetColumn="INT01" />
+              <Mapping SourceColumn="INT02" DataSetColumn="INT02" />
+              <Mapping SourceColumn="FLT01" DataSetColumn="FLT01" />
+              <Mapping SourceColumn="FLT02" DataSetColumn="FLT02" />
+              <Mapping SourceColumn="TXT50" DataSetColumn="TXT50" />
+              <Mapping SourceColumn="pRail10" DataSetColumn="pRail10" />
+              <Mapping SourceColumn="pRail20" DataSetColumn="pRail20" />
+              <Mapping SourceColumn="pRail30" DataSetColumn="pRail30" />
+              <Mapping SourceColumn="pLRT10" DataSetColumn="pLRT10" />
+              <Mapping SourceColumn="pLRT20" DataSetColumn="pLRT20" />
+              <Mapping SourceColumn="pLRT30" DataSetColumn="pLRT30" />
             </Mappings>
             <Sources />
           </TableAdapter>
@@ -2627,23 +2686,6 @@ FROM         mdl_pipxp_ac</CommandText>
           <xs:complexType>
             <xs:sequence>
               <xs:element name="MAPINFO_ID" msdata:AutoIncrement="true" msprop:Generator_UserColumnName="MAPINFO_ID" msprop:Generator_ColumnVarNameInTable="columnMAPINFO_ID" msprop:Generator_ColumnPropNameInRow="MAPINFO_ID" msprop:Generator_ColumnPropNameInTable="MAPINFO_IDColumn" type="xs:int" minOccurs="0" />
-              <xs:element name="MLinkID" msprop:Generator_UserColumnName="MLinkID" msprop:Generator_ColumnVarNameInTable="columnMLinkID" msprop:Generator_ColumnPropNameInRow="MLinkID" msprop:Generator_ColumnPropNameInTable="MLinkIDColumn" type="xs:int" minOccurs="0" />
-              <xs:element name="USNode" msprop:Generator_UserColumnName="USNode" msprop:Generator_ColumnVarNameInTable="columnUSNode" msprop:Generator_ColumnPropNameInRow="USNode" msprop:Generator_ColumnPropNameInTable="USNodeColumn" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="6" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="DSNode" msprop:Generator_UserColumnName="DSNode" msprop:Generator_ColumnVarNameInTable="columnDSNode" msprop:Generator_ColumnPropNameInRow="DSNode" msprop:Generator_ColumnPropNameInTable="DSNodeColumn" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="6" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="MLinkID_2" msprop:Generator_UserColumnName="MLinkID_2" msprop:Generator_ColumnVarNameInTable="columnMLinkID_2" msprop:Generator_ColumnPropNameInRow="MLinkID_2" msprop:Generator_ColumnPropNameInTable="MLinkID_2Column" type="xs:int" minOccurs="0" />
-              <xs:element name="COMPKEY" msprop:Generator_UserColumnName="COMPKEY" msprop:Generator_ColumnVarNameInTable="columnCOMPKEY" msprop:Generator_ColumnPropNameInRow="COMPKEY" msprop:Generator_ColumnPropNameInTable="COMPKEYColumn" type="xs:int" minOccurs="0" />
               <xs:element name="xWtr" msprop:Generator_UserColumnName="xWtr" msprop:Generator_ColumnVarNameInTable="columnxWtr" msprop:Generator_ColumnPropNameInRow="xWtr" msprop:Generator_ColumnPropNameInTable="xWtrColumn" type="xs:int" minOccurs="0" />
               <xs:element name="xWMinD" msprop:Generator_UserColumnName="xWMinD" msprop:Generator_ColumnVarNameInTable="columnxWMinD" msprop:Generator_ColumnPropNameInRow="xWMinD" msprop:Generator_ColumnPropNameInTable="xWMinDColumn" type="xs:int" minOccurs="0" />
               <xs:element name="xWMaxD" msprop:Generator_UserColumnName="xWMaxD" msprop:Generator_ColumnVarNameInTable="columnxWMaxD" msprop:Generator_ColumnPropNameInRow="xWMaxD" msprop:Generator_ColumnPropNameInTable="xWMaxDColumn" type="xs:int" minOccurs="0" />
@@ -2694,7 +2736,6 @@ FROM         mdl_pipxp_ac</CommandText>
               <xs:element name="uDepth" msprop:Generator_UserColumnName="uDepth" msprop:Generator_ColumnVarNameInTable="columnuDepth" msprop:Generator_ColumnPropNameInRow="uDepth" msprop:Generator_ColumnPropNameInTable="uDepthColumn" type="xs:double" minOccurs="0" />
               <xs:element name="dDepth" msprop:Generator_UserColumnName="dDepth" msprop:Generator_ColumnVarNameInTable="columndDepth" msprop:Generator_ColumnPropNameInRow="dDepth" msprop:Generator_ColumnPropNameInTable="dDepthColumn" type="xs:double" minOccurs="0" />
               <xs:element name="xPipSlope" msprop:Generator_UserColumnName="xPipSlope" msprop:Generator_ColumnVarNameInTable="columnxPipSlope" msprop:Generator_ColumnPropNameInRow="xPipSlope" msprop:Generator_ColumnPropNameInTable="xPipSlopeColumn" type="xs:double" minOccurs="0" />
-              <xs:element name="gSlope" msprop:Generator_UserColumnName="gSlope" msprop:Generator_ColumnVarNameInTable="columngSlope" msprop:Generator_ColumnPropNameInRow="gSlope" msprop:Generator_ColumnPropNameInTable="gSlopeColumn" type="xs:int" minOccurs="0" />
               <xs:element name="xEcsi" msprop:Generator_UserColumnName="xEcsi" msprop:Generator_ColumnVarNameInTable="columnxEcsi" msprop:Generator_ColumnPropNameInRow="xEcsi" msprop:Generator_ColumnPropNameInTable="xEcsiColumn" type="xs:int" minOccurs="0" />
               <xs:element name="xFt2Ecsi" msprop:Generator_UserColumnName="xFt2Ecsi" msprop:Generator_ColumnVarNameInTable="columnxFt2Ecsi" msprop:Generator_ColumnPropNameInRow="xFt2Ecsi" msprop:Generator_ColumnPropNameInTable="xFt2EcsiColumn" type="xs:int" minOccurs="0" />
               <xs:element name="xEcsiLen" msprop:Generator_UserColumnName="xEcsiLen" msprop:Generator_ColumnVarNameInTable="columnxEcsiLen" msprop:Generator_ColumnPropNameInRow="xEcsiLen" msprop:Generator_ColumnPropNameInTable="xEcsiLenColumn" type="xs:int" minOccurs="0" />
@@ -2712,6 +2753,59 @@ FROM         mdl_pipxp_ac</CommandText>
               <xs:element name="xHyd" msprop:Generator_UserColumnName="xHyd" msprop:Generator_ColumnVarNameInTable="columnxHyd" msprop:Generator_ColumnPropNameInRow="xHyd" msprop:Generator_ColumnPropNameInTable="xHydColumn" type="xs:int" minOccurs="0" />
               <xs:element name="xFt2Hyd" msprop:Generator_UserColumnName="xFt2Hyd" msprop:Generator_ColumnVarNameInTable="columnxFt2Hyd" msprop:Generator_ColumnPropNameInRow="xFt2Hyd" msprop:Generator_ColumnPropNameInTable="xFt2HydColumn" type="xs:int" minOccurs="0" />
               <xs:element name="HardArea" msprop:Generator_UserColumnName="HardArea" msprop:Generator_ColumnVarNameInTable="columnHardArea" msprop:Generator_ColumnPropNameInRow="HardArea" msprop:Generator_ColumnPropNameInTable="HardAreaColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="MLINKID" msprop:Generator_UserColumnName="MLINKID" msprop:Generator_ColumnVarNameInTable="columnMLINKID" msprop:Generator_ColumnPropNameInRow="MLINKID" msprop:Generator_ColumnPropNameInTable="MLINKIDColumn" type="xs:double" minOccurs="0" />
+              <xs:element name="USNODE" msprop:Generator_UserColumnName="USNODE" msprop:Generator_ColumnVarNameInTable="columnUSNODE" msprop:Generator_ColumnPropNameInRow="USNODE" msprop:Generator_ColumnPropNameInTable="USNODEColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="6" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DSNODE" msprop:Generator_UserColumnName="DSNODE" msprop:Generator_ColumnVarNameInTable="columnDSNODE" msprop:Generator_ColumnPropNameInRow="DSNODE" msprop:Generator_ColumnPropNameInTable="DSNODEColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="6" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="COMPKEY" msprop:Generator_UserColumnName="COMPKEY" msprop:Generator_ColumnVarNameInTable="columnCOMPKEY" msprop:Generator_ColumnPropNameInRow="COMPKEY" msprop:Generator_ColumnPropNameInTable="COMPKEYColumn" type="xs:double" minOccurs="0" />
+              <xs:element name="xa" msprop:Generator_UserColumnName="xa" msprop:Generator_ColumnVarNameInTable="columnxa" msprop:Generator_ColumnPropNameInRow="xa" msprop:Generator_ColumnPropNameInTable="xaColumn" type="xs:double" minOccurs="0" />
+              <xs:element name="ya" msprop:Generator_UserColumnName="ya" msprop:Generator_ColumnVarNameInTable="columnya" msprop:Generator_ColumnPropNameInRow="ya" msprop:Generator_ColumnPropNameInTable="yaColumn" type="xs:double" minOccurs="0" />
+              <xs:element name="xb" msprop:Generator_UserColumnName="xb" msprop:Generator_ColumnVarNameInTable="columnxb" msprop:Generator_ColumnPropNameInRow="xb" msprop:Generator_ColumnPropNameInTable="xbColumn" type="xs:double" minOccurs="0" />
+              <xs:element name="yb" msprop:Generator_UserColumnName="yb" msprop:Generator_ColumnVarNameInTable="columnyb" msprop:Generator_ColumnPropNameInRow="yb" msprop:Generator_ColumnPropNameInTable="ybColumn" type="xs:double" minOccurs="0" />
+              <xs:element name="Deg2N" msprop:Generator_UserColumnName="Deg2N" msprop:Generator_ColumnVarNameInTable="columnDeg2N" msprop:Generator_ColumnPropNameInRow="Deg2N" msprop:Generator_ColumnPropNameInTable="Deg2NColumn" type="xs:double" minOccurs="0" />
+              <xs:element name="pWtr2" msprop:Generator_UserColumnName="pWtr2" msprop:Generator_ColumnVarNameInTable="columnpWtr2" msprop:Generator_ColumnPropNameInRow="pWtr2" msprop:Generator_ColumnPropNameInTable="pWtr2Column" type="xs:double" minOccurs="0" />
+              <xs:element name="pWtr4" msprop:Generator_UserColumnName="pWtr4" msprop:Generator_ColumnVarNameInTable="columnpWtr4" msprop:Generator_ColumnPropNameInRow="pWtr4" msprop:Generator_ColumnPropNameInTable="pWtr4Column" type="xs:double" minOccurs="0" />
+              <xs:element name="pWtr6" msprop:Generator_UserColumnName="pWtr6" msprop:Generator_ColumnVarNameInTable="columnpWtr6" msprop:Generator_ColumnPropNameInRow="pWtr6" msprop:Generator_ColumnPropNameInTable="pWtr6Column" type="xs:double" minOccurs="0" />
+              <xs:element name="pWtr8" msprop:Generator_UserColumnName="pWtr8" msprop:Generator_ColumnVarNameInTable="columnpWtr8" msprop:Generator_ColumnPropNameInRow="pWtr8" msprop:Generator_ColumnPropNameInTable="pWtr8Column" type="xs:double" minOccurs="0" />
+              <xs:element name="pWtr10" msprop:Generator_UserColumnName="pWtr10" msprop:Generator_ColumnVarNameInTable="columnpWtr10" msprop:Generator_ColumnPropNameInRow="pWtr10" msprop:Generator_ColumnPropNameInTable="pWtr10Column" type="xs:double" minOccurs="0" />
+              <xs:element name="pWtr12" msprop:Generator_UserColumnName="pWtr12" msprop:Generator_ColumnVarNameInTable="columnpWtr12" msprop:Generator_ColumnPropNameInRow="pWtr12" msprop:Generator_ColumnPropNameInTable="pWtr12Column" type="xs:double" minOccurs="0" />
+              <xs:element name="pSwr2" msprop:Generator_UserColumnName="pSwr2" msprop:Generator_ColumnVarNameInTable="columnpSwr2" msprop:Generator_ColumnPropNameInRow="pSwr2" msprop:Generator_ColumnPropNameInTable="pSwr2Column" type="xs:double" minOccurs="0" />
+              <xs:element name="pSwr4" msprop:Generator_UserColumnName="pSwr4" msprop:Generator_ColumnVarNameInTable="columnpSwr4" msprop:Generator_ColumnPropNameInRow="pSwr4" msprop:Generator_ColumnPropNameInTable="pSwr4Column" type="xs:double" minOccurs="0" />
+              <xs:element name="pSwr6" msprop:Generator_UserColumnName="pSwr6" msprop:Generator_ColumnVarNameInTable="columnpSwr6" msprop:Generator_ColumnPropNameInRow="pSwr6" msprop:Generator_ColumnPropNameInTable="pSwr6Column" type="xs:double" minOccurs="0" />
+              <xs:element name="pSwr8" msprop:Generator_UserColumnName="pSwr8" msprop:Generator_ColumnVarNameInTable="columnpSwr8" msprop:Generator_ColumnPropNameInRow="pSwr8" msprop:Generator_ColumnPropNameInTable="pSwr8Column" type="xs:double" minOccurs="0" />
+              <xs:element name="pSwr10" msprop:Generator_UserColumnName="pSwr10" msprop:Generator_ColumnVarNameInTable="columnpSwr10" msprop:Generator_ColumnPropNameInRow="pSwr10" msprop:Generator_ColumnPropNameInTable="pSwr10Column" type="xs:double" minOccurs="0" />
+              <xs:element name="gSlope" msprop:Generator_UserColumnName="gSlope" msprop:Generator_ColumnVarNameInTable="columngSlope" msprop:Generator_ColumnPropNameInRow="gSlope" msprop:Generator_ColumnPropNameInTable="gSlopeColumn" type="xs:double" minOccurs="0" />
+              <xs:element name="xLUST" msprop:Generator_UserColumnName="xLUST" msprop:Generator_ColumnVarNameInTable="columnxLUST" msprop:Generator_ColumnPropNameInRow="xLUST" msprop:Generator_ColumnPropNameInTable="xLUSTColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="xFt2LUST" msprop:Generator_UserColumnName="xFt2LUST" msprop:Generator_ColumnVarNameInTable="columnxFt2LUST" msprop:Generator_ColumnPropNameInRow="xFt2LUST" msprop:Generator_ColumnPropNameInTable="xFt2LUSTColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="xpDeg2N" msprop:Generator_UserColumnName="xpDeg2N" msprop:Generator_ColumnVarNameInTable="columnxpDeg2N" msprop:Generator_ColumnPropNameInRow="xpDeg2N" msprop:Generator_ColumnPropNameInTable="xpDeg2NColumn" type="xs:double" minOccurs="0" />
+              <xs:element name="INT01" msprop:Generator_UserColumnName="INT01" msprop:Generator_ColumnVarNameInTable="columnINT01" msprop:Generator_ColumnPropNameInRow="INT01" msprop:Generator_ColumnPropNameInTable="INT01Column" type="xs:int" minOccurs="0" />
+              <xs:element name="INT02" msprop:Generator_UserColumnName="INT02" msprop:Generator_ColumnVarNameInTable="columnINT02" msprop:Generator_ColumnPropNameInRow="INT02" msprop:Generator_ColumnPropNameInTable="INT02Column" type="xs:int" minOccurs="0" />
+              <xs:element name="FLT01" msprop:Generator_UserColumnName="FLT01" msprop:Generator_ColumnVarNameInTable="columnFLT01" msprop:Generator_ColumnPropNameInRow="FLT01" msprop:Generator_ColumnPropNameInTable="FLT01Column" type="xs:double" minOccurs="0" />
+              <xs:element name="FLT02" msprop:Generator_UserColumnName="FLT02" msprop:Generator_ColumnVarNameInTable="columnFLT02" msprop:Generator_ColumnPropNameInRow="FLT02" msprop:Generator_ColumnPropNameInTable="FLT02Column" type="xs:double" minOccurs="0" />
+              <xs:element name="TXT50" msprop:Generator_UserColumnName="TXT50" msprop:Generator_ColumnVarNameInTable="columnTXT50" msprop:Generator_ColumnPropNameInRow="TXT50" msprop:Generator_ColumnPropNameInTable="TXT50Column" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="pRail10" msprop:Generator_UserColumnName="pRail10" msprop:Generator_ColumnPropNameInRow="pRail10" msprop:Generator_ColumnVarNameInTable="columnpRail10" msprop:Generator_ColumnPropNameInTable="pRail10Column" type="xs:double" minOccurs="0" />
+              <xs:element name="pRail20" msprop:Generator_UserColumnName="pRail20" msprop:Generator_ColumnPropNameInRow="pRail20" msprop:Generator_ColumnVarNameInTable="columnpRail20" msprop:Generator_ColumnPropNameInTable="pRail20Column" type="xs:double" minOccurs="0" />
+              <xs:element name="pRail30" msprop:Generator_UserColumnName="pRail30" msprop:Generator_ColumnPropNameInRow="pRail30" msprop:Generator_ColumnVarNameInTable="columnpRail30" msprop:Generator_ColumnPropNameInTable="pRail30Column" type="xs:double" minOccurs="0" />
+              <xs:element name="pLRT10" msprop:Generator_UserColumnName="pLRT10" msprop:Generator_ColumnPropNameInRow="pLRT10" msprop:Generator_ColumnVarNameInTable="columnpLRT10" msprop:Generator_ColumnPropNameInTable="pLRT10Column" type="xs:double" minOccurs="0" />
+              <xs:element name="pLRT20" msprop:Generator_UserColumnName="pLRT20" msprop:Generator_ColumnPropNameInRow="pLRT20" msprop:Generator_ColumnVarNameInTable="columnpLRT20" msprop:Generator_ColumnPropNameInTable="pLRT20Column" type="xs:double" minOccurs="0" />
+              <xs:element name="pLRT30" msprop:Generator_UserColumnName="pLRT30" msprop:Generator_ColumnPropNameInRow="pLRT30" msprop:Generator_ColumnVarNameInTable="columnpLRT30" msprop:Generator_ColumnPropNameInTable="pLRT30Column" type="xs:double" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

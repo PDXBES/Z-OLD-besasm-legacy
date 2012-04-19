@@ -1,6 +1,6 @@
-﻿namespace SystemsAnalysis.DataAccess {
-    
-    
-    public partial class DiversionStructureDataSet {
-    }
+﻿namespace SystemsAnalysis.DataAccess
+{
+  public partial class DiversionStructureDataSet
+  {
+  }
 }

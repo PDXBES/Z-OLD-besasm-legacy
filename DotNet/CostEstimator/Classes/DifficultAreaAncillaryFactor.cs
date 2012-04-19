@@ -9,6 +9,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+
 #endregion
 
 namespace SystemsAnalysis.Analysis.CostEstimator.Classes
@@ -17,77 +18,81 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
   /// Cost for building a pipe in a difficult area (unpaved and steep, or
   /// historically difficult area [e.g., downtown area])
   /// </summary>
-	class DifficultAreaAncillaryFactor : AncillaryFactor
-	{
+  class DifficultAreaAncillaryFactor : AncillaryFactor
+  {
     private const int MIN_PIPE_SLOPE_FOR_DIFFICULT_AREA = 10;
-		private ConflictPackage _ConflictPackage;
+    private ConflictPackage _ConflictPackage;
 
-		/// <summary>
-		/// Create difficult area ancillary factor
-		/// </summary>
-		/// <param name="conflictPackage">Conflict package</param>
-		public DifficultAreaAncillaryFactor(ConflictPackage conflictPackage)
-		{
-			_ConflictPackage = conflictPackage;
-		} // DifficultAreaAncillaryFactor(conflictPackage)
+    /// <summary>
+    /// Create difficult area ancillary factor
+    /// </summary>
+    /// <param name="conflictPackage">Conflict package</param>
+    public DifficultAreaAncillaryFactor(ConflictPackage conflictPackage)
+    {
+      _ConflictPackage = conflictPackage;
+    } // DifficultAreaAncillaryFactor(conflictPackage)
 
-		public string Name
-		{
-			get
-			{
-				StringBuilder reason = new StringBuilder();
-				if (_ConflictPackage != null)
-				{
-					if (!_ConflictPackage.Conflicts.IsInStreet && 
-						Math.Abs(_ConflictPackage.Conflicts.SurfaceSlopePct) >= MIN_PIPE_SLOPE_FOR_DIFFICULT_AREA)
-						reason.Append("unpaved/steep surface,");
-					if (_ConflictPackage.Conflicts.IsHardArea)
-						reason.Append("difficult area,");
-				} // if
+    public string Name
+    {
+      get
+      {
+        StringBuilder reason = new StringBuilder();
+        if (_ConflictPackage != null)
+        {
+          if (!_ConflictPackage.Conflicts.IsInStreet &&
+          Math.Abs(_ConflictPackage.Conflicts.SurfaceSlopePct) >= MIN_PIPE_SLOPE_FOR_DIFFICULT_AREA)
+            reason.Append("unpaved/steep surface,");
+          if (_ConflictPackage.Conflicts.IsHardArea)
+            reason.Append("difficult area,");
+        } // if
 
-				if (reason.Length > 0)
-					return ("Difficult work area (" +
-						reason.ToString().Substring(0, reason.Length - 1) + ")");
-				else
-					return "Difficult work area";
-			} // get
-		} // Name
+        if (reason.Length > 0)
+          return ("Difficult work area (" +
+          reason.ToString().Substring(0, reason.Length - 1) + ")");
+        else
+          return "Difficult work area";
+      } // get
+    } // Name
 
-		public CostFactorType FactorType
-		{
-			get
-			{
-				return CostFactorType.Additive;
-			} // get
-		} // FactorType
+    public CostFactorType FactorType
+    {
+      get
+      {
+        return CostFactorType.Additive;
+      } // get
+    } // FactorType
 
-		public double Factor
-		{
-			get
-			{
-				if ((_ConflictPackage != null && _ConflictPackage.Conflicts != null) && 
-					((!_ConflictPackage.Conflicts.IsInStreet &&
-					Math.Abs(_ConflictPackage.Conflicts.SurfaceSlopePct) >= MIN_PIPE_SLOPE_FOR_DIFFICULT_AREA) ||
-					_ConflictPackage.Conflicts.IsHardArea))
-					return 0.50;
-				else
-					return 0;
-			} // get
-		} // Factor
+    public double Factor
+    {
+      get
+      {
+        bool HasConflicts = _ConflictPackage != null && _ConflictPackage.Conflicts != null;
+        bool NotInStreetAndSurfaceSlopeIsSteep = !_ConflictPackage.Conflicts.IsInStreet &&
+        Math.Abs(_ConflictPackage.Conflicts.SurfaceSlopePct) >= MIN_PIPE_SLOPE_FOR_DIFFICULT_AREA;
+        bool ParallelToRailroad = _ConflictPackage.Conflicts.HasRailroadParallel;
+        bool ParallelToLTR = _ConflictPackage.Conflicts.HasLightRailParallel;
+        if (HasConflicts &&
+        (NotInStreetAndSurfaceSlopeIsSteep || _ConflictPackage.Conflicts.IsHardArea ||
+        ParallelToRailroad || ParallelToLTR))
+          return 0.50;
+        else
+          return 0;
+      } // get
+    } // Factor
 
-		/// <summary>
-		/// Ancillary factor
-		/// </summary>
-		/// <returns>Ancillary factor</returns>
-		public AncillaryFactor AncillaryFactor
-		{
-			get
-			{
-				if (Factor > 0)
-					return this;
-				else
-					return null;
-			} // get
-		} // AncillaryFactor
-	}
+    /// <summary>
+    /// Ancillary factor
+    /// </summary>
+    /// <returns>Ancillary factor</returns>
+    public AncillaryFactor AncillaryFactor
+    {
+      get
+      {
+        if (Factor > 0)
+          return this;
+        else
+          return null;
+      } // get
+    } // AncillaryFactor
+  }
 }
