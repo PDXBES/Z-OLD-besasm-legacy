@@ -1,0 +1,23 @@
+glob:bin/*
+glob:obj/*
+glob:*.suo
+glob:*.dll
+glob:*.DLL
+glob:*.exe
+glob:*.dcu
+glob:__history/*
+glob:*.local
+glob:*.orig
+glob:DotNet/StormwaterInterface/SWI_2/SWI_2/Properties/licenses.licx
+glob:Delphi/InterfaceMaster/ModelSupport_InterfaceMaster/default.txaPackage
+glob:Delphi/InterfaceMaster/ModelSupport_InterfaceMaster/InterfaceMaster.prjconfig
+glob:DotNet/StormwaterInterface/SWI_2/AddInLog.txt
+glob:*.bkp
+glob:TestResults/*
+glob:*.bak
+glob:Delphi/XPSWMMResultsProcessor/XPResults.identcache
+glob:Delphi/XPSWMMResultsProcessor/TestDLL.identcache
+glob:Delphi/EMGAATS Shell/EMGAATS.smp
+syntax: glob
+*.MBO
+*.MBX
