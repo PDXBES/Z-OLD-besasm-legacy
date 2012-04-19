@@ -13,6 +13,7 @@ namespace RXI
     {
         public Form1()
         {
+            Application.EnableVisualStyles();
             InitializeComponent();
         }
 
@@ -23,6 +24,7 @@ namespace RXI
 
             // TODO: This line of code loads data into the 'rEHABDataSet.REHAB10FTSEGS' table. You can move, or remove it, as needed.
             this.rEHAB10FTSEGSTableAdapter.FillByCK(this.rEHABDataSet.REHAB10FTSEGS, -1);
+
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -195,6 +197,15 @@ namespace RXI
             {
                 textBoxConsequenceOfFailure.Enabled = false;
             }
+        }
+
+        private void resetCostsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // TODO: This line of code loads data into the 'rEHABDataSet.Constants' table. You can move, or remove it, as needed.
+            this.constantsTableAdapter.PrepFill(this.rEHABDataSet.Constants);
+
+            // TODO: This line of code loads data into the 'rEHABDataSet.REHAB10FTSEGS' table. You can move, or remove it, as needed.
+            button1_Click(null, null);
         }
     }
 }
