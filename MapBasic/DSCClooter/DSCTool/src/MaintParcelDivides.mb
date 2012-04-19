@@ -147,6 +147,9 @@ sub menuitem_process_dividefile_for_master()
 
  if Finalize_Checked_Divides() <> RETURNSUCCESS then
  print "Finalize_Checked_Divides"
+ close table mst_DSC
+ Open Table sMstDSC as mst_DSC
+ Add Map Layer mst_DSC
  mState = M_ERROR
  NOTE "Check failed"
  exit sub
