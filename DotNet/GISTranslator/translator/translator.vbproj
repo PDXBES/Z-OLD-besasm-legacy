@@ -168,14 +168,14 @@
     <Compile Include="FCConverter.vb">
       <SubType>Code</SubType>
     </Compile>
+    <EmbeddedResource Include="template_10.1.mdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Component1.resx">
       <DependentUpon>Component1.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <Content Include="star[1].gif" />
-    <Content Include="template91.mdb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\ArcObjectsUtils\SystemsAnalysisUtils\SystemsAnalysis.Utilities.ArcObjects.vbproj">

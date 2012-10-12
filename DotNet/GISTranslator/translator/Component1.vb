@@ -117,9 +117,6 @@ Public Class GISTranslator
 
     On Error GoTo ErrHandler
 
-    Dim bound As Boolean
-    bound = ESRI.ArcGIS.RuntimeManager.Bind(ESRI.ArcGIS.ProductCode.EngineOrDesktop)
-
     strTmpDir = Environment.GetEnvironmentVariable("TEMP") & "\"
     If File.Exists(strTmpDir & strFMEFile1) Then
       Kill(strTmpDir & strFMEFile1)
@@ -208,6 +205,7 @@ Public Class GISTranslator
           callIMUT = -7 'Autotranslate did not find valid .shp file
         Else
           callIMUT = 1
+          File.Copy("\\cassio\modeling\Model_Programs\GISTranslator\translator_10.1\bin\template.prj", strOutputDirectory & IO.Path.GetFileNameWithoutExtension(strInputFile) & ".prj", True)
         End If
         Exit Function
       Case OutputTypes.Point
@@ -221,7 +219,7 @@ Public Class GISTranslator
     End Select
     'File.Delete(strOutputDirectory & FileUtils.removeExtension(FileUtils.extractFileName(strInputFile)) & ".prj")
 
-    File.Copy("\\cassio\modeling\Model_Programs\GISTranslator\translator\bin\template.prj", strOutputDirectory & IO.Path.GetFileNameWithoutExtension(strInputFile) & ".prj", True)
+    File.Copy("\\cassio\modeling\Model_Programs\GISTranslator\translator_10.1\bin\template.prj", strOutputDirectory & IO.Path.GetFileNameWithoutExtension(strInputFile) & ".prj", True)
     FileClose()
     If filesFound = 0 Then
       callIMUT = -5
@@ -259,8 +257,9 @@ ErrHandler:
 
     Dim pPGDBWorkspaceName As IWorkspaceName
 
+    Directory.SetCurrentDirectory("\\cassio\modeling\Model_Programs\GISTranslator\translator_10.1\bin")
     If Not File.Exists(strPGDBFile) Then
-      File.Copy("template91.mdb", strPGDBFile)
+      File.Copy("template_10.1.mdb", strPGDBFile)
       'pPGDBWorkspaceName = pPGDBWorkspaceFactory.Create(IO.Path.GetDirectoryName(strPGDBFile), IO.Path.GetFileName(strPGDBFile), Nothing, 0)
     End If
     pPGDBWorkspaceName = New WorkspaceNameClass
@@ -331,7 +330,7 @@ ErrHandler:
 
     pDatasetEnum = pWS.Datasets(esriDatasetType.esriDTFeatureClass)
     Dim pSpatRef As ISpatialReference
-    pSpatRef = pSpatialRefFactory.CreateESRISpatialReferenceFromPRJFile("W:\Model_Programs\GISTranslator\translator\bin\template.prj")
+    pSpatRef = pSpatialRefFactory.CreateESRISpatialReferenceFromPRJFile("\\cassio\modeling\Model_Programs\GISTranslator\translator_10.1\bin\template.prj")
     pFC = pDatasetEnum.Next()
     Do Until pFC Is Nothing
       Dim pGeometryDef As IGeometryDef
