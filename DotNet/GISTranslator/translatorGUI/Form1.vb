@@ -11,18 +11,23 @@ Public Class Form1
 
   'Private Shared m_AOLicenseInitializer As LicenseInitializer = New translatorGUI.LicenseInitializer()
   <STAThread()> Shared Sub Main()
-    Dim bound As Boolean
-    bound = ESRI.ArcGIS.RuntimeManager.Bind(ESRI.ArcGIS.ProductCode.EngineOrDesktop)
+    Try
+      Dim bound As Boolean
+      bound = ESRI.ArcGIS.RuntimeManager.Bind(ESRI.ArcGIS.ProductCode.EngineOrDesktop)
 
-    System.Windows.Forms.MessageBox.Show("Bound! " & bound)
+      Dim aoInitialize As IAoInitialize
+      aoInitialize = New AoInitialize
+      Dim status As esriLicenseStatus
+      status = aoInitialize.Initialize(esriLicenseProductCode.esriLicenseProductCodeAdvanced)
 
-    'ESRI License Initializer generated code.
-    'm_AOLicenseInitializer.InitializeApplication(New esriLicenseProductCode() {esriLicenseProductCode.esriLicenseProductCodeStandard}, _
-    '   New esriLicenseExtensionCode() {})
-    Application.Run(New Form1())
-    'ESRI License Initializer generated code.
-    'Do not make any call to ArcObjects after ShutDownApplication()
-    'm_AOLicenseInitializer.ShutdownApplication()
+      Application.Run(New Form1())
+
+      aoInitialize.Shutdown()
+
+    Catch ex As Exception
+      MessageBox.Show("Unable to initialize ArcGIS license. Do you have ArcGIS 10.1 installend and licensed?")
+    End Try        
+
   End Sub
 #Region " Windows Form Designer generated code "
 
@@ -557,8 +562,8 @@ Public Class Form1
       log.writeLog("Attempting translation: '" & inputFile & "' to '" & outputPGDB & "' located at '" & outputDir & "'.")
       returnCode = TranslateOneFile(inputFile, outputDir, outputPGDB, blOverwritePGDB)
       If returnCode = 1 Then
-        log.writeLog("Translation Succesful.")
-        MsgBox("Translation Succesful!")
+        log.writeLog("Translation Successful.")
+        MsgBox("Translation Successful!")
       End If
     ElseIf blTranslateWorkspace Then
       'Dim fis() As System.IO.FileInfo
@@ -638,8 +643,7 @@ Public Class Form1
     If rdbTypePolygon.Checked Then outputType = OutputTypes.Polygon
     ProgressBar1.PerformStep()
     returnCode = translator.callIMUT(inputFile, tmpDir, TranslationTypes.TABtoSHAPE, outputType)
-    If returnCode = -5 And outputType <> OutputTypes.Automatic Then
-      MsgBox("No objects of selected geometry '" & outputType.ToString & "' were found")
+    If returnCode = -5 And outputType <> OutputTypes.Automatic Then      
       log.writeLog("No objects of selected geometry '" & outputType.ToString & "' were found")
       TranslateOneFile = -1
       Exit Function
@@ -649,8 +653,7 @@ Public Class Form1
       TranslateOneFile = -1
       Exit Function
     End If
-    If returnCode <> 1 Then
-      MsgBox("CallIMUT failed with error code: " & returnCode)
+    If returnCode <> 1 Then      
       log.writeLog("CallIMUT failed with error code: " & returnCode)
       TranslateOneFile = -1
       Exit Function
@@ -662,8 +665,7 @@ Public Class Form1
       log.writeLog("Convert to PGDB failed due to invalid geometry - Likely the source MI file had no .obj.")
       TranslateOneFile = -1
       Exit Function
-    ElseIf returnCode <> 1 Then
-      MsgBox("shapeToPGDB failed with error code: " & returnCode)
+    ElseIf returnCode <> 1 Then      
       log.writeLog("shapeToPGDB failed with error code: " & returnCode)
       TranslateOneFile = -1
       Exit Function
@@ -684,8 +686,7 @@ Public Class Form1
     'End If
     ProgressBar1.PerformStep()
     returnCode = translator.reprojectPGDB(outputDir & "\" & outputPGDB)
-    If returnCode <> 1 Then
-      MsgBox("reprojectPGDB failed with error code: " & returnCode)
+    If returnCode <> 1 Then      
       log.writeLog("reprojectPGDB failed with error code: " & returnCode)
       TranslateOneFile = -1
       Exit Function
