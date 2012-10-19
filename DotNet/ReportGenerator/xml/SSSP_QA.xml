@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="\\Cassio\Modeling\Model_Programs\bin\ReportGenerator\excel_char.xsl" ?>
+<!--<?xml-stylesheet type="text/xsl" href="excel_char.xsl" ?>-->
+<ReportGenerator reportName="SSSP QA Database Creator" studyArea="" >
+<CharacterizationTable tableNumber="QA3" tableTitle="FEC QA in Database" columnCount="2">
+    <Row>
+      <Cell cellType="ROWNAME" data="Write FEC QA to Database" />
+      <Cell cellType="FUNCTION">
+        <Function functionName="WriteFecQaDatabase" library="FecQaReport">          
+          <Parameter parameterName="studyArea" parameterValue="@studyArea" />                    
+        </Function>          
+      </Cell>
+    </Row>
+   </CharacterizationTable>
+   </ReportGenerator>
