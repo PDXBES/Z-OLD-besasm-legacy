@@ -1112,6 +1112,10 @@ NoXpipes:
 
 '			DISAGGREGATE MULTI REGION LINES INTO INDIVIDUAL OBJECTS
 			Select * from ECSIpip2 into QyExplode
+				IF tableinfo(QyExplode,8)= 0 THEN
+					Print "No xEcsi...exiting gracefully!"
+					Exit Sub
+				END IF
 			Objects Disaggregate All Into Table ECSIpip2 Data 
 				AltLinkID=AltLinkID,USNode=USNode,DSNode=DSNode,MstLinkID=MstLinkID,COMPKEY=COMPKEY,
 				uDepth=uDepth,dDepth=dDepth,xPipSlope=xPipSlope,gSlope=gSlope,
