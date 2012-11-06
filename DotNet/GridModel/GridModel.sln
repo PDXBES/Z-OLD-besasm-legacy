@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GridInterface", "GridInterface\GridInterface.csproj", "{BE83CB01-A97D-46A2-A503-37B2B368CE20}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemsAnalysis.Utils.AccessUtils.DatabaseManagement", "..\AccessUtils\DatabaseManagement\SystemsAnalysis.Utils.AccessUtils.DatabaseManagement.csproj", "{1DCF1AAE-A211-4A29-AE5C-13AAAD890B08}"
