@@ -1,5 +1,5 @@
-Microsoft Visual Studio Solution File, Format Version 9.00
-# Visual Studio 2005
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "translatorGUI", "translatorGUI.vbproj", "{69D1F9F0-D094-4DF0-98B1-6D1217F05909}"
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "translator", "..\translator\translator.vbproj", "{1D54C2B6-8494-42A5-A4B9-68BC9FBB8B03}"
