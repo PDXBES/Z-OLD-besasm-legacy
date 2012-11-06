@@ -198,8 +198,8 @@
             this.exportReportToolStripMenuItem,
             this.updateMstlinksacToolStripMenuItem});
             this.fIleToolStripMenuItem.Name = "fIleToolStripMenuItem";
-            this.fIleToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
-            this.fIleToolStripMenuItem.Text = "FIle";
+            this.fIleToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
+            this.fIleToolStripMenuItem.Text = "File";
             // 
             // exportReportToolStripMenuItem
             // 

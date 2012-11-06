@@ -993,7 +993,7 @@ namespace ViRT {
             return type;
         }
         
-        public delegate void DOWNTIMERowChangeEventHandler(object sender, DOWNTIMERowChangeEvent e);
+        /*public delegate void DOWNTIMERowChangeEventHandler(object sender, DOWNTIMERowChangeEvent e);
         
         public delegate void RAIN_DATARowChangeEventHandler(object sender, RAIN_DATARowChangeEvent e);
         
@@ -1041,7 +1041,7 @@ namespace ViRT {
         
         public delegate void VELOCITY_DATARowChangeEventHandler(object sender, VELOCITY_DATARowChangeEvent e);
         
-        public delegate void DataTable1RowChangeEventHandler(object sender, DataTable1RowChangeEvent e);
+        public delegate void DataTable1RowChangeEventHandler(object sender, DataTable1RowChangeEvent e);*/
         
         /// <summary>
         ///Represents the strongly named DataTable class.

@@ -140,6 +140,12 @@ namespace SWI_2 {
         
         private global::System.Data.DataRelation relationEditableSurveyPages_EditablePAGES_EVALUATORS;
         
+        private global::System.Data.DataRelation relationSWSP_SHAPE_TYPE_datatable1;
+        
+        private global::System.Data.DataRelation relationSWSP_CULVERT_OPENING_TYPE_datatable1;
+        
+        private global::System.Data.DataRelation relationSWSP_MATERIAL_TYPE_datatable1;
+        
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -953,6 +959,9 @@ namespace SWI_2 {
             this.relationSWSP_SUBWATERSHED_EditableViews = this.Relations["SWSP_SUBWATERSHED_EditableViews"];
             this.relationEditableSurveyPages_datatable1 = this.Relations["EditableSurveyPages_datatable1"];
             this.relationEditableSurveyPages_EditablePAGES_EVALUATORS = this.Relations["EditableSurveyPages_EditablePAGES_EVALUATORS"];
+            this.relationSWSP_SHAPE_TYPE_datatable1 = this.Relations["SWSP_SHAPE_TYPE_datatable1"];
+            this.relationSWSP_CULVERT_OPENING_TYPE_datatable1 = this.Relations["SWSP_CULVERT_OPENING_TYPE_datatable1"];
+            this.relationSWSP_MATERIAL_TYPE_datatable1 = this.Relations["SWSP_MATERIAL_TYPE_datatable1"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1137,6 +1146,18 @@ namespace SWI_2 {
                         this.tableEditableSurveyPages.survey_page_idColumn}, new global::System.Data.DataColumn[] {
                         this.tableEditablePAGES_EVALUATORS.survey_page_idColumn}, false);
             this.Relations.Add(this.relationEditableSurveyPages_EditablePAGES_EVALUATORS);
+            this.relationSWSP_SHAPE_TYPE_datatable1 = new global::System.Data.DataRelation("SWSP_SHAPE_TYPE_datatable1", new global::System.Data.DataColumn[] {
+                        this.tableSWSP_SHAPE_TYPE.shape_type_idColumn}, new global::System.Data.DataColumn[] {
+                        this.tabledatatable1.shape_type_idColumn}, false);
+            this.Relations.Add(this.relationSWSP_SHAPE_TYPE_datatable1);
+            this.relationSWSP_CULVERT_OPENING_TYPE_datatable1 = new global::System.Data.DataRelation("SWSP_CULVERT_OPENING_TYPE_datatable1", new global::System.Data.DataColumn[] {
+                        this.tableSWSP_CULVERT_OPENING_TYPE.culvert_opening_type_idColumn}, new global::System.Data.DataColumn[] {
+                        this.tabledatatable1.culvert_opening_type_idColumn}, false);
+            this.Relations.Add(this.relationSWSP_CULVERT_OPENING_TYPE_datatable1);
+            this.relationSWSP_MATERIAL_TYPE_datatable1 = new global::System.Data.DataRelation("SWSP_MATERIAL_TYPE_datatable1", new global::System.Data.DataColumn[] {
+                        this.tableSWSP_MATERIAL_TYPE.material_type_idColumn}, new global::System.Data.DataColumn[] {
+                        this.tabledatatable1.material_type_idColumn}, false);
+            this.Relations.Add(this.relationSWSP_MATERIAL_TYPE_datatable1);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -10974,12 +10995,12 @@ namespace SWI_2 {
                         string ds_node, 
                         string LinkType, 
                         string node, 
-                        int shape_type_id, 
+                        SWSP_SHAPE_TYPERow parentSWSP_SHAPE_TYPERowBySWSP_SHAPE_TYPE_datatable1, 
                         double dimension1, 
                         double dimension2, 
                         double dimension3, 
-                        int material_type_id, 
-                        int culvert_opening_type_id, 
+                        SWSP_MATERIAL_TYPERow parentSWSP_MATERIAL_TYPERowBySWSP_MATERIAL_TYPE_datatable1, 
+                        SWSP_CULVERT_OPENING_TYPERow parentSWSP_CULVERT_OPENING_TYPERowBySWSP_CULVERT_OPENING_TYPE_datatable1, 
                         int length_ft, 
                         double us_depth_in, 
                         double ds_depth_in, 
@@ -10995,12 +11016,12 @@ namespace SWI_2 {
                         ds_node,
                         LinkType,
                         node,
-                        shape_type_id,
+                        null,
                         dimension1,
                         dimension2,
                         dimension3,
-                        material_type_id,
-                        culvert_opening_type_id,
+                        null,
+                        null,
                         length_ft,
                         us_depth_in,
                         ds_depth_in,
@@ -11009,6 +11030,15 @@ namespace SWI_2 {
                         watershed_id,
                         subwatershed_id,
                         action};
+                if ((parentSWSP_SHAPE_TYPERowBySWSP_SHAPE_TYPE_datatable1 != null)) {
+                    columnValuesArray[5] = parentSWSP_SHAPE_TYPERowBySWSP_SHAPE_TYPE_datatable1[0];
+                }
+                if ((parentSWSP_MATERIAL_TYPERowBySWSP_MATERIAL_TYPE_datatable1 != null)) {
+                    columnValuesArray[9] = parentSWSP_MATERIAL_TYPERowBySWSP_MATERIAL_TYPE_datatable1[0];
+                }
+                if ((parentSWSP_CULVERT_OPENING_TYPERowBySWSP_CULVERT_OPENING_TYPE_datatable1 != null)) {
+                    columnValuesArray[10] = parentSWSP_CULVERT_OPENING_TYPERowBySWSP_CULVERT_OPENING_TYPE_datatable1[0];
+                }
                 if ((parentEditableSurveyPagesRowByEditableSurveyPages_datatable1 != null)) {
                     columnValuesArray[15] = parentEditableSurveyPagesRowByEditableSurveyPages_datatable1[0];
                 }
@@ -11700,7 +11730,6 @@ namespace SWI_2 {
                 this.columncomment = new global::System.Data.DataColumn("comment", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columncomment);
                 this.columnphoto_id.AllowDBNull = false;
-                this.columnglobal_id.AllowDBNull = false;
                 this.columnlocation.MaxLength = 255;
             }
             
@@ -13057,6 +13086,17 @@ namespace SWI_2 {
                     return ((SWSP_CULVERTRow[])(base.GetChildRows(this.Table.ChildRelations["FK_CULVERT_CULVERT_OPENING_TYPE"])));
                 }
             }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public datatable1Row[] Getdatatable1Rows() {
+                if ((this.Table.ChildRelations["SWSP_CULVERT_OPENING_TYPE_datatable1"] == null)) {
+                    return new datatable1Row[0];
+                }
+                else {
+                    return ((datatable1Row[])(base.GetChildRows(this.Table.ChildRelations["SWSP_CULVERT_OPENING_TYPE_datatable1"])));
+                }
+            }
         }
         
         /// <summary>
@@ -13827,6 +13867,17 @@ namespace SWI_2 {
                     return ((SWSP_CULVERTRow[])(base.GetChildRows(this.Table.ChildRelations["FK_CULVERT_MATERIAL_TYPE"])));
                 }
             }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public datatable1Row[] Getdatatable1Rows() {
+                if ((this.Table.ChildRelations["SWSP_MATERIAL_TYPE_datatable1"] == null)) {
+                    return new datatable1Row[0];
+                }
+                else {
+                    return ((datatable1Row[])(base.GetChildRows(this.Table.ChildRelations["SWSP_MATERIAL_TYPE_datatable1"])));
+                }
+            }
         }
         
         /// <summary>
@@ -14522,6 +14573,17 @@ namespace SWI_2 {
                 }
                 else {
                     return ((SWSP_CULVERTRow[])(base.GetChildRows(this.Table.ChildRelations["FK_CULVERT_SHAPE_TYPE"])));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public datatable1Row[] Getdatatable1Rows() {
+                if ((this.Table.ChildRelations["SWSP_SHAPE_TYPE_datatable1"] == null)) {
+                    return new datatable1Row[0];
+                }
+                else {
+                    return ((datatable1Row[])(base.GetChildRows(this.Table.ChildRelations["SWSP_SHAPE_TYPE_datatable1"])));
                 }
             }
         }
@@ -18635,6 +18697,39 @@ namespace SWI_2 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public SWSP_SHAPE_TYPERow SWSP_SHAPE_TYPERow {
+                get {
+                    return ((SWSP_SHAPE_TYPERow)(this.GetParentRow(this.Table.ParentRelations["SWSP_SHAPE_TYPE_datatable1"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["SWSP_SHAPE_TYPE_datatable1"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public SWSP_CULVERT_OPENING_TYPERow SWSP_CULVERT_OPENING_TYPERow {
+                get {
+                    return ((SWSP_CULVERT_OPENING_TYPERow)(this.GetParentRow(this.Table.ParentRelations["SWSP_CULVERT_OPENING_TYPE_datatable1"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["SWSP_CULVERT_OPENING_TYPE_datatable1"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public SWSP_MATERIAL_TYPERow SWSP_MATERIAL_TYPERow {
+                get {
+                    return ((SWSP_MATERIAL_TYPERow)(this.GetParentRow(this.Table.ParentRelations["SWSP_MATERIAL_TYPE_datatable1"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["SWSP_MATERIAL_TYPE_datatable1"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool Isus_nodeNull() {
                 return this.IsNull(this.tabledatatable1.us_nodeColumn);
             }
@@ -18904,7 +18999,12 @@ namespace SWI_2 {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public int global_id {
                 get {
-                    return ((int)(this[this.tableEditablePhotos.global_idColumn]));
+                    try {
+                        return ((int)(this[this.tableEditablePhotos.global_idColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'global_id\' in table \'EditablePhotos\' is DBNull.", e);
+                    }
                 }
                 set {
                     this[this.tableEditablePhotos.global_idColumn] = value;
@@ -18952,6 +19052,18 @@ namespace SWI_2 {
                 set {
                     this.SetParentRow(value, this.Table.ParentRelations["datatable1_EditablePhotos"]);
                 }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool Isglobal_idNull() {
+                return this.IsNull(this.tableEditablePhotos.global_idColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void Setglobal_idNull() {
+                this[this.tableEditablePhotos.global_idColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -32534,12 +32646,12 @@ FROM         SWSP_MESH_Numbered";
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._sWSP_SHAPE_TYPETableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.SWSP_SHAPE_TYPE.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+            if ((this._sWSP_CULVERT_OPENING_TYPETableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.SWSP_CULVERT_OPENING_TYPE.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
-                    result = (result + this._sWSP_SHAPE_TYPETableAdapter.Update(updatedRows));
+                    result = (result + this._sWSP_CULVERT_OPENING_TYPETableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -32549,6 +32661,15 @@ FROM         SWSP_MESH_Numbered";
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
                     result = (result + this._sWSP_SURVEY_PAGETableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._sWSP_SHAPE_TYPETableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.SWSP_SHAPE_TYPE.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._sWSP_SHAPE_TYPETableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -32588,15 +32709,6 @@ FROM         SWSP_MESH_Numbered";
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._sWSP_CULVERT_OPENING_TYPETableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.SWSP_CULVERT_OPENING_TYPE.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._sWSP_CULVERT_OPENING_TYPETableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
             if ((this._sWSP_PIPETableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.SWSP_PIPE.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
@@ -32606,21 +32718,21 @@ FROM         SWSP_MESH_Numbered";
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._sWSP_DITCHTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.SWSP_DITCH.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._sWSP_DITCHTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
             if ((this._sWSP_CULVERTTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.SWSP_CULVERT.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
                     result = (result + this._sWSP_CULVERTTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._sWSP_DITCHTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.SWSP_DITCH.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._sWSP_DITCHTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -32676,11 +32788,11 @@ FROM         SWSP_MESH_Numbered";
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._sWSP_SHAPE_TYPETableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.SWSP_SHAPE_TYPE.Select(null, null, global::System.Data.DataViewRowState.Added);
+            if ((this._sWSP_CULVERT_OPENING_TYPETableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.SWSP_CULVERT_OPENING_TYPE.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
-                    result = (result + this._sWSP_SHAPE_TYPETableAdapter.Update(addedRows));
+                    result = (result + this._sWSP_CULVERT_OPENING_TYPETableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -32689,6 +32801,14 @@ FROM         SWSP_MESH_Numbered";
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
                     result = (result + this._sWSP_SURVEY_PAGETableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._sWSP_SHAPE_TYPETableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.SWSP_SHAPE_TYPE.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._sWSP_SHAPE_TYPETableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -32724,14 +32844,6 @@ FROM         SWSP_MESH_Numbered";
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._sWSP_CULVERT_OPENING_TYPETableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.SWSP_CULVERT_OPENING_TYPE.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._sWSP_CULVERT_OPENING_TYPETableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
             if ((this._sWSP_PIPETableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.SWSP_PIPE.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
@@ -32740,19 +32852,19 @@ FROM         SWSP_MESH_Numbered";
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._sWSP_DITCHTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.SWSP_DITCH.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._sWSP_DITCHTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
             if ((this._sWSP_CULVERTTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.SWSP_CULVERT.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
                     result = (result + this._sWSP_CULVERTTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._sWSP_DITCHTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.SWSP_DITCH.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._sWSP_DITCHTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -32798,14 +32910,6 @@ FROM         SWSP_MESH_Numbered";
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._sWSP_CULVERTTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.SWSP_CULVERT.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._sWSP_CULVERTTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
             if ((this._sWSP_DITCHTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.SWSP_DITCH.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
@@ -32814,19 +32918,19 @@ FROM         SWSP_MESH_Numbered";
                     allChangedRows.AddRange(deletedRows);
                 }
             }
+            if ((this._sWSP_CULVERTTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.SWSP_CULVERT.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._sWSP_CULVERTTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
             if ((this._sWSP_PIPETableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.SWSP_PIPE.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._sWSP_PIPETableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
-            if ((this._sWSP_CULVERT_OPENING_TYPETableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.SWSP_CULVERT_OPENING_TYPE.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._sWSP_CULVERT_OPENING_TYPETableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -32862,6 +32966,14 @@ FROM         SWSP_MESH_Numbered";
                     allChangedRows.AddRange(deletedRows);
                 }
             }
+            if ((this._sWSP_SHAPE_TYPETableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.SWSP_SHAPE_TYPE.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._sWSP_SHAPE_TYPETableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
             if ((this._sWSP_SURVEY_PAGETableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.SWSP_SURVEY_PAGE.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
@@ -32870,11 +32982,11 @@ FROM         SWSP_MESH_Numbered";
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._sWSP_SHAPE_TYPETableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.SWSP_SHAPE_TYPE.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+            if ((this._sWSP_CULVERT_OPENING_TYPETableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.SWSP_CULVERT_OPENING_TYPE.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    result = (result + this._sWSP_SHAPE_TYPETableAdapter.Update(deletedRows));
+                    result = (result + this._sWSP_CULVERT_OPENING_TYPETableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
