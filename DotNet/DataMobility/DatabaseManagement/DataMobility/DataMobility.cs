@@ -200,6 +200,10 @@ namespace SystemsAnalysis.Utils.DataMobility
             SqlDataAdapter SQLInputDataAdapter;
             outputDatabaseConnection.Open();
 
+            //if the output Database and the input database are the same, and the output table and input table are the same, then DO NOT CONTINUE
+            if (SQLInputTableName.CompareTo(SQLOutputTableName) == 0 && inputDatabase.CompareTo(outputDatabase) == 0)
+                return;
+
             //remove any existing matching output table from the output database
             string DROPsql = "DROP TABLE " + SQLOutputTableName;
             SqlCommand cmd = new SqlCommand(DROPsql, outputDatabaseConnection);
