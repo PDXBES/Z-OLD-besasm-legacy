@@ -290,6 +290,8 @@ namespace SystemsAnalysis.Grid.GridAnalysis
                 {
                     if (gridProcessGroup.GroupName.Contains("GRID_BMP") && boolContainsBMP == false)
                     {
+                        CreatePRFListQuery(gridModelRun.InstreamFacilities, gridModelRun.TimePeriod);
+                        CreateBMPUnionQuery();
                         if (string.Compare(gridModelRuns[0].BMPEffectivenessDB, SQLDatabaseConnectionString) != 0)
                         {
                             if (gridModelRuns[0].BMPEffectivenessDB.IndexOf('\\') >= 0)
@@ -305,8 +307,6 @@ namespace SystemsAnalysis.Grid.GridAnalysis
                                     gridModelRuns[0].BMPEffectivenessDB, "GRID_BMP_TABLES", SQLDatabaseConnectionString);
                             }
                         }
-                        CreatePRFListQuery(gridModelRun.InstreamFacilities, gridModelRun.TimePeriod);
-                        CreateBMPUnionQuery();
                         boolContainsBMP = true;
                     }
                 }
@@ -370,6 +370,19 @@ namespace SystemsAnalysis.Grid.GridAnalysis
 
         private void ExecuteTimeSteps(GridModelRun gridModelRun)
         {
+            //Determine if the model is based on mapped impervious or zoning impervious.
+            int ImperviousMethod = 0;
+            foreach (GridProcessGroup gridProcessGroup in gridModelRun.GridProcessGroups)
+            {
+                if (gridProcessGroup.GroupName == "GRID_MAPPED_IA")
+                {
+                    ImperviousMethod = 1;
+                }
+                else if (gridProcessGroup.GroupName == "GRID_ZONING_IA")
+                {
+                    ImperviousMethod = 2;
+                }
+            }
             foreach (GridProcessGroup gridProcessGroup in gridModelRun.GridProcessGroups.OrderBy(gridProcessGroup => gridProcessGroup.GroupOrder))
             {
                 try
@@ -389,23 +402,23 @@ namespace SystemsAnalysis.Grid.GridAnalysis
                     }
                     else if (gridProcessGroup.GroupName == "GRID_LOAD_BOD")
                     {
-                        SQLHelper.SQLExecuteActionQuery(gridProcessGroup.GroupName, "@SelectionSetID", gridModelRun.SelectionSetAreaID, SQLDatabaseConnectionString);
+                        SQLHelper.SQLExecuteActionQuery(gridProcessGroup.GroupName, "@SelectionSetID", gridModelRun.SelectionSetAreaID, "@ImperviousType", ImperviousMethod, SQLDatabaseConnectionString);
                     }
                     else if (gridProcessGroup.GroupName == "GRID_LOAD_ECOLI")
                     {
-                        SQLHelper.SQLExecuteActionQuery(gridProcessGroup.GroupName, "@SelectionSetID", gridModelRun.SelectionSetAreaID, SQLDatabaseConnectionString);
+                        SQLHelper.SQLExecuteActionQuery(gridProcessGroup.GroupName, "@SelectionSetID", gridModelRun.SelectionSetAreaID, "@ImperviousType", ImperviousMethod, SQLDatabaseConnectionString);
                     }
                     else if (gridProcessGroup.GroupName == "GRID_LOAD_PbD")
                     {
-                        SQLHelper.SQLExecuteActionQuery(gridProcessGroup.GroupName, "@SelectionSetID", gridModelRun.SelectionSetAreaID, SQLDatabaseConnectionString);
+                        SQLHelper.SQLExecuteActionQuery(gridProcessGroup.GroupName, "@SelectionSetID", gridModelRun.SelectionSetAreaID, "@ImperviousType", ImperviousMethod, SQLDatabaseConnectionString);
                     }
                     else if (gridProcessGroup.GroupName == "GRID_LOAD_TP")
                     {
-                        SQLHelper.SQLExecuteActionQuery(gridProcessGroup.GroupName, "@SelectionSetID", gridModelRun.SelectionSetAreaID, SQLDatabaseConnectionString);
+                        SQLHelper.SQLExecuteActionQuery(gridProcessGroup.GroupName, "@SelectionSetID", gridModelRun.SelectionSetAreaID, "@ImperviousType", ImperviousMethod, SQLDatabaseConnectionString);
                     }
                     else if (gridProcessGroup.GroupName == "GRID_LOAD_TSS")
                     {
-                        SQLHelper.SQLExecuteActionQuery(gridProcessGroup.GroupName, "@SelectionSetID", gridModelRun.SelectionSetAreaID, SQLDatabaseConnectionString);
+                        SQLHelper.SQLExecuteActionQuery(gridProcessGroup.GroupName, "@SelectionSetID", gridModelRun.SelectionSetAreaID, "@ImperviousType", ImperviousMethod, SQLDatabaseConnectionString);
                     }
                     else
                     {

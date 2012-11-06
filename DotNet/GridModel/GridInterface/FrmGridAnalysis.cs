@@ -94,9 +94,35 @@ namespace SystemsAnalysis.Grid.GridAnalysis
                 }
                 if (SQLisSource == true)
                 {
+                    //Currently, the most important tables should be tested for, and 
+                    //any person wishing to establish a new gridmodel database should
+                    //be given a tool that creates a gridmodel database on a server of their choosing.
+                    //That tool should be integrated with the GridModel tool, but as things stand now,
+                    //it is more important to concentrate on some of the more production breaking bugs.
+
+                    //The tables that the user may want to specify are as follows:
+                    //GRID_pollutant_loadings
+                    //GRID_BMP_PERFORMANCE
+
+                    //The tables that the user may want to edit, but probably should not specify are as follows:
+                    //GRID_variables - it may be possible that the user will want to supply their own variables, editing this directly
+                    //GRID_FE_HYETOGRAPHS
+                    //GRID_FE_HYETOGRAPH_DATA
+                    //GRID_ZONING_IMP
+
+                    //If the user wants to supply their own pollutant_loadings and bmp_performance table,
+                    //then that table should exist on a SERVER, not in an access database.  There are plenty
+                    //of applications that allow a person to upload an access database table to an sql server,
+                    //so I'm not going to supply that ability here.
+
+                    //In order to implement this, the archive function should not retain the external locations
+                    //of tables that are not inside the database, but instead should map to the table that
+                    //was copied into it, and then perhaps identify the original path somewhere within
+                    //metadata for that table.  This is to ensure that the table's integrity is not compromised
+                    //in between gridmodel runs.
                     serverIsUsable = SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_GridResults");
                     serverIsUsable = serverIsUsable + SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_ZONING_IMP");
-                    serverIsUsable = serverIsUsable + SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_variables");
+                    //serverIsUsable = serverIsUsable + SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_variables");
                     serverIsUsable = serverIsUsable + SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_FE_SELECTION_SETS");
                     serverIsUsable = serverIsUsable + SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_FE_SELECTION_SET_AREAS");
                     serverIsUsable = serverIsUsable + SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_FE_SCENARIOS");
@@ -107,10 +133,8 @@ namespace SystemsAnalysis.Grid.GridAnalysis
                     serverIsUsable = serverIsUsable + SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_FE_HYETOGRAPHS");
                     serverIsUsable = serverIsUsable + SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_FE_HYETOGRAPH_DATA");
                     serverIsUsable = serverIsUsable + SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_FE_GRID_PROJECTS");
-                    //serverIsUsable = serverIsUsable + SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_Contaminants");
-                    //serverIsUsable = serverIsUsable + SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_BMP_TYPE_TABLE_GENERAL");
-                    serverIsUsable = serverIsUsable + SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_BMP_PERFORMANCE");
-                    serverIsUsable = serverIsUsable + SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_pollutant_loadings");
+                    //serverIsUsable = serverIsUsable + SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_BMP_PERFORMANCE");
+                    //serverIsUsable = serverIsUsable + SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_pollutant_loadings");
 
                     if (serverIsUsable != "")
                     {
@@ -1131,7 +1155,11 @@ namespace SystemsAnalysis.Grid.GridAnalysis
 
             //make sure the table also has all of the appropriate columns
             //with all of the appropriate data types.
-            numberOfMatchingColumns = numberOfMatchingColumns +
+
+            //We are actually getting rid of the table testing portion of the gridmodel
+            //The user is supposed to research how to use this program and
+            //should do his or her best to get the input correct.
+            /*numberOfMatchingColumns = numberOfMatchingColumns +
                 SQLHelper.SQLTestTableForFuzzyColumn
                 ("GRID_pollutant_loadings", dynamicInputDatabase, "LU_CODE", "string");
             numberOfMatchingColumns = numberOfMatchingColumns +
@@ -1139,7 +1167,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis
                 ("GRID_pollutant_loadings", dynamicInputDatabase, "Landuse", "string");
             numberOfMatchingColumns = numberOfMatchingColumns +
                 SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_pollutant_loadings", dynamicInputDatabase, "Constituent", "number");
+                ("GRID_pollutant_loadings", dynamicInputDatabase, "Constituent", "string");
             numberOfMatchingColumns = numberOfMatchingColumns +
                 SQLHelper.SQLTestTableForFuzzyColumn
                 ("GRID_pollutant_loadings", dynamicInputDatabase, "VALUE_LOW", "number");
@@ -1154,17 +1182,17 @@ namespace SystemsAnalysis.Grid.GridAnalysis
                 ("GRID_pollutant_loadings", dynamicInputDatabase, "VALUE_HIGH", "number");
             numberOfMatchingColumns = numberOfMatchingColumns +
                 SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_pollutant_loadings", dynamicInputDatabase, "VALUE", "number");
+                ("GRID_pollutant_loadings", dynamicInputDatabase, "VALUE", "number");*/
 
             //if ScalarQueryResults is not null, then we have a good answer
-            if (numberOfMatchingColumns == null)
+            /*if (numberOfMatchingColumns == null)
             {
                 MessageBox.Show("Could not test provided table for validity, please verify the source before trying to run the Grid Model");
             }
             else if ((int)numberOfMatchingColumns != 8)
             {
                 MessageBox.Show("The table you indicated does not contain the necessary columns, please check the documentation for guidelines on creating a pollutant loading Table");
-            }
+            }*/
         }
 
         private void buttonBMPEffectivenessConnectionStringEdit_Click(object sender, EventArgs e)
@@ -1660,6 +1688,11 @@ namespace SystemsAnalysis.Grid.GridAnalysis
             {
                 MessageBox.Show("The table you indicated does not contain the necessary columns, please check the documentation for guidelines on creating a OSF Table");
             }
+        }
+
+        private void buttonPollutantLoadingTableLocate_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
