@@ -1,0 +1,8 @@
+'
+'	Definition for Surface Subcatchment Trace
+'
+Declare Sub TraceSurfaceSC()
+Declare Sub MakeSurfZingers()
+Declare Sub ReTraceSurfaceSC()
+
+
