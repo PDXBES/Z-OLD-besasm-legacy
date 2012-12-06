@@ -100,7 +100,7 @@
             this.textBoxServer.Name = "textBoxServer";
             this.textBoxServer.Size = new System.Drawing.Size(167, 20);
             this.textBoxServer.TabIndex = 17;
-            this.textBoxServer.Text = "SIRTOBY";
+            this.textBoxServer.Text = "B";
             // 
             // labelDomain
             // 

@@ -53,7 +53,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis
 
             gridModelRuns = new List<GridModelRun>();
             gridModelResults = new List<GridModelResult>();
-            accessHelper = new AccessHelper();//gridModelPath, SQLDatabaseConnectionString/*"Data Source=SIRTOBY;Initial Catalog=SANDBOX;"*/);
+            accessHelper = new AccessHelper();//gridModelPath, SQLDatabaseConnectionString/*"Data Source=BESDBDEV1;Initial Catalog=SANDBOX;"*/);
 
         }
         //These constructors should not be connecting to the base access database to get the grid table

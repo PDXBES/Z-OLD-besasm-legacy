@@ -96,7 +96,7 @@
             this.textBoxServer.Name = "textBoxServer";
             this.textBoxServer.Size = new System.Drawing.Size(167, 20);
             this.textBoxServer.TabIndex = 5;
-            this.textBoxServer.Text = "SIRTOBY";
+            this.textBoxServer.Text = "BESDBDEV1";
             // 
             // textBoxDatabase
             // 

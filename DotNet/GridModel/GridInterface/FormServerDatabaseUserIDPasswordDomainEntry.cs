@@ -12,7 +12,7 @@ namespace SystemsAnalysis.Grid.GridAnalysis
     public partial class FormServerDatabaseUserIDPasswordDomainEntry : Form
     {
         public string Database = "GRIDMODEL";
-        public string Server = "SIRTOBY";
+        public string Server = "BESDBDEV1";
         public string UserID = "";
         public string Password = "";
         public string Domain = "";
