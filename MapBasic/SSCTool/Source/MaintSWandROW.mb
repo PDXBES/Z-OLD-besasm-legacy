@@ -1,0 +1,407 @@
+' Collins 2004 feb 23
+'		add upzone options
+
+
+include "MapBasic.def"
+include "..\..\Common\inc\EMGMTabUtil.def"
+include "..\..\Common\inc\INIUtils.def"
+
+define _PARKPLUS TRUE
+define _SIZEADJUST FALSE
+
+Type FileSpec
+	Name as string
+	FullPath as string
+	Alias as string
+	IniSection as string
+	IniKey as string
+End Type
+
+Dim gmaintINIpath as string
+Dim mFiles(8) as FileSpec
+
+
+declare sub main
+Declare sub OpenSWandROWMaintTables
+Declare sub CloseSWandROWMaintTables
+declare sub killProgram
+declare sub SWandROWMainMenu
+declare sub InitSW
+declare sub UpdateSW
+declare sub InitROW
+declare sub UpdateROW
+
+
+
+sub main
+Dim i as integer
+
+  gmaintINIpath = applicationdirectory$() + "MaintSWandROW.ini"
+  
+  set window message position (2,4) units "cm" width 6 height 4 front 
+  Open Window Message
+  Print Chr$(12)
+ 	print "Starting Maint SW and ROW Tool"
+
+	
+  i=1
+  mFiles(i).Name = "Sidewalks"
+  mFiles(i).FullPath = ""
+  mFiles(i).Alias = "Sidewalks"
+  mFiles(i).INIsection = "MasterFiles"
+  mFiles(i).INIKey = "Sidewalks"
+  
+  i=i+1
+  mFiles(i).Name = "FBROWGrowth"
+  mFiles(i).FullPath = ""
+  mFiles(i).Alias = "FBROWGrowth"
+  mFiles(i).INIsection = "MasterFiles"
+  mFiles(i).INIKey = "FBROWGrowth"
+ 
+  i=i+1
+  mFiles(i).Name = "Zoning"
+  mFiles(i).FullPath = ""
+  mFiles(i).Alias = "zoning"
+  mFiles(i).INIsection = "Reference"
+  mFiles(i).INIKey = "zoning"
+  
+  i=i+1
+  mFiles(i).Name = "GenZoneLookup"
+  mFiles(i).FullPath = ""
+  mFiles(i).Alias = "zoning2Gen"
+  mFiles(i).INIsection = "Reference"
+  mFiles(i).INIKey = "GenZoneLookup"
+   
+  i=i+1
+  mFiles(i).Name = "MainStreet"
+  mFiles(i).FullPath = ""
+  mFiles(i).Alias = "MainStreet"
+  mFiles(i).INIsection = "upzone"
+  mFiles(i).INIKey = "MainStreet"
+  
+  i=i+1
+  mFiles(i).Name = "RefillCom"
+  mFiles(i).FullPath = ""
+  mFiles(i).Alias = "RefillCom"
+  mFiles(i).INIsection = "upzone"
+  mFiles(i).INIKey = "RefillCom"
+  
+  i=i+1
+  mFiles(i).Name = "RefillRes"
+  mFiles(i).FullPath = ""
+  mFiles(i).Alias = "RefillRes"
+  mFiles(i).INIsection = "upzone"
+  mFiles(i).INIKey = "RefillRes"
+
+	i=i+1
+	mFiles(i).Name = "Vacant"
+  mFiles(i).FullPath = ""
+  mFiles(i).Alias = "Vacant"
+  mFiles(i).INIsection = "upzone"
+  mFiles(i).INIKey = "Vacant"
+  
+   
+    
+  call SWandROWMainMenu
+end sub
+
+
+sub SWandROWMainMenu()
+
+Create Menu "SW and ROW Maint" as 
+  "Open Tables" ID 11001 calling OpenSWandROWMaintTables,
+	"Close Tables" ID 11002 calling CloseSWandROWMaintTables,
+	"InitSW" ID 11003 calling InitSW,
+  "InitROW" ID 11004 calling InitROW,
+  "end program" ID 11086 calling killProgram
+  
+  Alter Menu Bar Remove ID 6, ID 7 
+  Alter Menu Bar Add "SW and ROW Maint", ID 6, ID 7
+
+End Sub
+
+
+sub OpenSWandROWMaintTables()
+	Dim		LoopCount as integer
+  Dim		AliasName as string
+  Dim		FullPath as string
+  Dim		TableName as string
+  Dim		PathName as string
+  
+  
+  For LoopCount = 1 to UBound(mFiles)
+   
+    AliasName = mFiles(LoopCount).Alias
+		
+    FullPath = ReadINI(gmaintINIpath, mFiles(LoopCount).INISection, 
+					mFiles(LoopCount).INIKey, "not found")
+		
+	  mFiles(LoopCount).FullPath = FullPath
+		
+    print "Open Table " & FullPath & " as " & AliasName
+		Open Table FullPath as AliasName
+	Next
+  
+end sub
+
+
+sub CloseSWandROWMaintTables
+	Dim		LoopCount as integer
+  Dim		AliasName as string
+
+  For LoopCount = 1 to UBound(mFiles)
+    AliasName = mFiles(LoopCount).Alias
+		close table AliasName
+	Next
+	
+end sub
+
+sub killProgram()
+  'call CloseSWandROWMaintTables
+  end program
+end sub   
+
+
+
+sub InitSW
+  
+  Dim strgdate as string
+  dim tabname, colname as string
+	dim rc as integer, columnexists as logical
+
+   
+  ' set progress start
+  strgdate = curdate() & " " & time(24)
+	rc = WriteINI(gmaintINIpath, "Admin", "UpdateInit", strgdate)
+  strgdate = ""
+  rc = WriteINI(gmaintINIpath, "Admin", "UpdateDone", strgdate)
+  
+  
+  
+  tabname = "SideWalks"
+  colname = "ZoneEX"
+  ColumnExists = iscolumnThere(tabname , colname)
+  if not ColumnExists then
+  	Alter Table "Sidewalks" (add ZoneEX Char(5))
+  else 
+  	Update Sidewalks Set ZoneEX = "UNK"
+  end if
+  
+  colname = "ZoneCP"
+  ColumnExists = iscolumnThere(tabname , colname)
+  if not ColumnExists then
+  	Alter Table "Sidewalks" (add ZoneCP Char(5))
+  else 
+  	Update Sidewalks Set ZoneCP = "UNK"
+  	commit table sidewalks
+  end if
+  
+  colname = "GenEX"
+  ColumnExists = iscolumnThere(tabname , colname)
+  if not ColumnExists then
+  	Alter Table "Sidewalks" (add GenEX Char(3))
+  else 
+  	Update Sidewalks Set GenEX = "UNK"
+  	commit table sidewalks
+  end if
+  
+  colname = "GenCP"
+  ColumnExists = iscolumnThere(tabname , colname)
+  if not ColumnExists then
+  	Alter Table "Sidewalks" (add GenCP Char(3))
+  else
+  	Update Sidewalks Set GenCP = "UNK"
+  	commit table sidewalks
+  end if
+  
+  colname = "SWinEX"
+  ColumnExists = iscolumnThere(tabname , colname)
+  if not ColumnExists then
+  	Alter Table "Sidewalks" (add "SWinEX" logical)
+  else
+  	Update Sidewalks Set SWinEX = "F"
+  	commit table sidewalks
+  end if
+  
+  colname = "SWinFB"
+  ColumnExists = iscolumnThere(tabname , colname)
+  if not ColumnExists then
+  	Alter Table "Sidewalks" (add "SWinFB" logical)
+  else
+  	Update Sidewalks Set SWinFB = "F"
+  	commit table sidewalks
+  end if
+  
+  colname = "IncIA4FB"
+  ColumnExists = iscolumnThere(tabname , colname)
+  if not ColumnExists then
+  	Alter Table "Sidewalks" (add "IncIA4FB" logical)
+  else
+  	Update Sidewalks Set IncIA4FB = "F"
+  end if
+  
+  strgdate = curdate() & " " & time(24)
+  rc = WriteINI(gmaintINIpath, "Admin", "UpdateDone", strgdate)
+  
+  call updateSW
+  
+end sub
+  
+
+
+sub UpdateSW
+  
+  Dim rc as integer, strgdate as string
+  Dim ColumnExists as Logical
+  dim tabname, colname as string
+
+  
+  print "put zoning data in sidewalk layer from zoning layer"
+	'get the zoning from the GIS layer -- assumes sidewalks are within
+	Add Column "Sidewalks" (ZoneEX )From zoning Set To ZONE Where contains
+	Add Column "Sidewalks" (ZoneCP )From zoning Set To CMP Where contains
+	
+	'assign general zoning
+	Add Column "Sidewalks" (GenEX )From zoning2Gen Set To GenZone Where ZoneEX = zone 
+	Add Column "Sidewalks" (GenCP )From zoning2Gen Set To GenZone Where ZoneCP = zone 
+	
+	'initialize the both sidewalks flags based on existing conditions
+	Add Column "Sidewalks" (SWinEX )From zoning2Gen Set To SWinModel Where ZoneEX = zone 
+	Update Sidewalks Set SWinFB = SWinEX
+	  
+  strgdate = curdate() & " " & time(24)
+  rc = WriteINI(gmaintINIpath, "Admin", "InitIncIA4FB", strgdate)
+  
+  Print "  flag upzones for main traffic paths"
+  Select * from sidewalks, MainStreet where MainStreet.Obj contains sidewalks.obj into _Update_Temp
+  select * from _Update_Temp where DESType= "main" into _update_target 
+  update _Update_Target set IncIA4FB = "T" 
+	close table _Update_Target
+	close table _Update_Temp
+  
+  print "  flag from RefillCom"
+  select * from sidewalks, RefillCom where RefillCom.Obj contains sidewalks.obj into _update_target
+  update _Update_Target set IncIA4FB = "T" 
+  close table _Update_Target
+	
+  print "  flag from RefillRes"
+  select * from sidewalks, RefillRes where RefillRes.Obj contains sidewalks.obj into _update_target
+  update _Update_Target set IncIA4FB = "T" 
+  close table _Update_Target
+	
+  print "  flag from Vacant"
+  select * from sidewalks, Vacant where Vacant.Obj contains sidewalks.obj into _Update_target
+  update _Update_Target set IncIA4FB = "T" 
+  close table _Update_Target
+  
+  select * from sidewalks where IncIA4FB = "T" and (GenCP = "COM" or GenCP = "IND") into _update_target
+  Update _Update_Target Set SWinFB = "T"
+	close table _Update_Target
+	
+	commit table sidewalks
+	print "EXITING SUB"
+
+end sub  
+  
+sub InitROW
+  
+  Dim strgdate as string
+  dim tabname, colname as string
+	dim columnExists as logical
+	dim rc as integer
+
+  print "init ROW" 
+    
+  
+  tabname = "FBROWGrowth"
+  colname = "ZoneCP"
+  ColumnExists = iscolumnThere(tabname , colname)
+  if not ColumnExists then
+  	Alter Table "FBROWGrowth" (add ZoneCP Char(5))
+  else 
+  	Update FBROWGrowth Set ZoneCP = "UNK"
+  	commit table FBROWGrowth
+  end if
+  
+  
+  colname = "GenCP"
+  ColumnExists = iscolumnThere(tabname , colname)
+  if not ColumnExists then
+  	Alter Table "FBROWGrowth" (add GenCP Char(3))
+  else
+  	Update FBROWGrowth Set GenCP = "UNK"
+  	commit table FBROWGrowth
+  end if
+  
+  
+  colname = "IncIA4FB"
+  ColumnExists = iscolumnThere(tabname , colname)
+  if not ColumnExists then
+  	Alter Table "FBROWGrowth" (add "IncIA4FB" logical)
+  else
+  	Update FBROWGrowth Set IncIA4FB = "F"
+  	commit table FBROWGrowth
+  end if
+  
+  colname = "IncludeFB"
+  ColumnExists = iscolumnThere(tabname , colname)
+  if not ColumnExists then
+  	Alter Table "FBROWGrowth" (add "IncludeFB" logical)
+  else
+  	Update FBROWGrowth Set IncludeFB = "F"
+  	commit table FBROWGrowth
+  end if
+  
+  strgdate = curdate() & " " & time(24)
+  rc = WriteINI(gmaintINIpath, "Admin", "ROWInitDone", strgdate)
+  
+  call updateROW
+  
+end sub
+  
+sub UpdateROW
+  
+  Dim rc as integer, strgdate as string
+  Dim ColumnExists as Logical
+  dim tabname, colname as string
+
+  
+  print "put zoning data in ROW layer from zoning layer"
+	'get the zoning from the GIS layer -- assumes sidewalks are within
+	Add Column "FBROWGrowth" (ZoneCP )From zoning Set To CMP Where contains
+	
+	'assign general zoning
+	Add Column "FBROWGrowth" (GenCP )From zoning2Gen Set To GenZone Where ZoneCP = zone 
+	
+  Print "  flag upzones for main traffic paths in ROW"
+  Select * from FBROWGrowth, MainStreet where MainStreet.Obj contains FBROWGrowth.obj into _Update_Temp
+  select * from _Update_Temp where DESType= "main" into _update_target 
+  update _Update_Target set IncIA4FB = "T" 
+	close table _Update_Target
+	close table _Update_Temp
+  
+  print "  flag from RefillCom"
+  select * from FBROWGrowth, RefillCom where RefillCom.Obj contains FBROWGrowth.obj into _update_target
+  update _Update_Target set IncIA4FB = "T" 
+  close table _Update_Target
+	
+  print "  flag from RefillRes"
+  select * from FBROWGrowth, RefillRes where RefillRes.Obj contains FBROWGrowth.obj into _update_target
+  update _Update_Target set IncIA4FB = "T" 
+  close table _Update_Target
+	
+  print "  flag from Vacant"
+  select * from FBROWGrowth, Vacant where Vacant.Obj contains FBROWGrowth.obj into _Update_target
+  update _Update_Target set IncIA4FB = "T" 
+  close table _Update_Target
+  
+  select * from FBROWGrowth where IncIA4FB = "T" and (GenCP = "COM" or GenCP = "IND") into _update_target
+  Update _Update_Target Set IncludeFB = "T"
+	close table _Update_Target
+	
+	commit table FBROWGrowth
+	print "EXITING SUB"
+
+end sub  
+  
+  
