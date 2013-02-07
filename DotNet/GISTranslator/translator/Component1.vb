@@ -81,7 +81,7 @@ Public Class GISTranslator
   Const strFMEFile2 = "FMEFile2.fme"
   Const strFMELogFile = "imutlog.txt"
   'Const IMUTPath = "C:\Program Files\MapInfo\Professional\UT\IMUT.EXE"
-  Const strDefaultIMUTPath = "\\cassio\modeling\model_programs\gistranslator\imut\IMUT.exe"
+  Const strDefaultIMUTPath = "c:\GISTranslator\imut\IMUT.exe"
 
   'Calls IMUT.exe (the MapInfo Universal Translator
   'Input:
@@ -205,7 +205,7 @@ Public Class GISTranslator
           callIMUT = -7 'Autotranslate did not find valid .shp file
         Else
           callIMUT = 1
-          File.Copy("\\cassio\modeling\Model_Programs\GISTranslator\translator_10.1\bin\template.prj", strOutputDirectory & IO.Path.GetFileNameWithoutExtension(strInputFile) & ".prj", True)
+          File.Copy("c:\GISTranslator\bin\template.prj", strOutputDirectory & IO.Path.GetFileNameWithoutExtension(strInputFile) & ".prj", True)
         End If
         Exit Function
       Case OutputTypes.Point
@@ -257,7 +257,7 @@ ErrHandler:
 
     Dim pPGDBWorkspaceName As IWorkspaceName
 
-    Directory.SetCurrentDirectory("\\cassio\modeling\Model_Programs\GISTranslator\translator_10.1\bin")
+    Directory.SetCurrentDirectory("C:\GISTranslator\bin")
     If Not File.Exists(strPGDBFile) Then
       File.Copy("template_10.1.mdb", strPGDBFile)
       'pPGDBWorkspaceName = pPGDBWorkspaceFactory.Create(IO.Path.GetDirectoryName(strPGDBFile), IO.Path.GetFileName(strPGDBFile), Nothing, 0)
@@ -330,7 +330,7 @@ ErrHandler:
 
     pDatasetEnum = pWS.Datasets(esriDatasetType.esriDTFeatureClass)
     Dim pSpatRef As ISpatialReference
-    pSpatRef = pSpatialRefFactory.CreateESRISpatialReferenceFromPRJFile("\\cassio\modeling\Model_Programs\GISTranslator\translator_10.1\bin\template.prj")
+    pSpatRef = pSpatialRefFactory.CreateESRISpatialReferenceFromPRJFile("c:\GISTranslator\bin\template.prj")
     pFC = pDatasetEnum.Next()
     Do Until pFC Is Nothing
       Dim pGeometryDef As IGeometryDef
@@ -384,7 +384,7 @@ ErrHandler:
   End Function
 
   Public Function translateModel(ByVal strModelRoot As String, _
-  Optional ByVal strLogFile As String = "\\cassio\modeling\model_programs\GISTranslator\log_10.1.txt", _
+  Optional ByVal strLogFile As String = "c:\GISTranslator\log_10.1.txt", _
   Optional ByVal blQuiet As Boolean = True) As Integer
 
     translateModel = 1
@@ -601,7 +601,7 @@ ErrHandler:
 
 
   Public Function translateModelResults(ByVal strModelRoot As String, _
-  Optional ByVal strLogFile As String = "\\cassio\modeling\model_programs\GISTranslator\log_10.1.txt", _
+  Optional ByVal strLogFile As String = "c:\GISTranslator\log_10.1.txt", _
   Optional ByVal blQuiet As Boolean = True) As Integer
 
     translateModelResults = 1
@@ -651,7 +651,7 @@ ErrHandler:
 
   End Function
 
-  Public Function translateFromAccessTable(ByVal sTranslationDB As String, ByVal sTable As String, ByVal sOutputDB As String, Optional ByVal sLogFile As String = "\\cassio\modeling\model_programs\GISTranslator\log_10.1.txt")
+  Public Function translateFromAccessTable(ByVal sTranslationDB As String, ByVal sTable As String, ByVal sOutputDB As String, Optional ByVal sLogFile As String = "c:\GISTranslator\log_10.1.txt")
     Dim rs As ADODB.Recordset = New ADODB.Recordset
     Dim conn As ADODB.Connection = New ADODB.Connection
     Dim result As Integer

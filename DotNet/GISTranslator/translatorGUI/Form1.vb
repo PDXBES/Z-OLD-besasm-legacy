@@ -4,7 +4,7 @@ Imports translator
 Imports dotnetutils
 Imports ESRI.ArcGIS.Geodatabase
 Imports ESRI.ArcGIS.Geometry
-Imports ESRI.ArcGIS.Utility
+'Imports ESRI.ArcGIS.Utility
 
 Public Class Form1
   Inherits System.Windows.Forms.Form
@@ -25,7 +25,7 @@ Public Class Form1
       aoInitialize.Shutdown()
 
     Catch ex As Exception
-      MessageBox.Show("Unable to initialize ArcGIS license. Do you have ArcGIS 10.1 installend and licensed?")
+      MessageBox.Show("Unable to initialize ArcGIS license. Do you have ArcGIS 10.1 installed and licensed?")
     End Try        
 
   End Sub
@@ -380,7 +380,7 @@ Public Class Form1
     Me.txtLogFile.Name = "txtLogFile"
     Me.txtLogFile.Size = New System.Drawing.Size(336, 20)
     Me.txtLogFile.TabIndex = 16
-    Me.txtLogFile.Text = "\\cassio\modeling\model_programs\gistranslator\log_10.1.txt"
+    Me.txtLogFile.Text = "c:\GISTranslator\log_10.1.txt"
     '
     'cmdBrowseLogFile
     '
@@ -743,7 +743,7 @@ End Class
 Public Class translationLog
   'Inherits dotnetutils.LogFile
 
-  Const strDefaultLogPath = "\\cassio\modeling\model_programs\gistranslator\log_10.1.txt"
+  Const strDefaultLogPath = "c:\GISTranslator\log_10.1.txt"
   Dim fi As System.IO.FileInfo
   Dim strMyLogPath As String
   Dim intFileID As Integer
