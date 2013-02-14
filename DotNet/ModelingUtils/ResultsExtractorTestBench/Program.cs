@@ -11,7 +11,7 @@ namespace ResultsExtractorTestBench
         static void Main(string[] args)
         {
           //XPSWMMResults xpResults = new XPSWMMResults(@"C:\Data\Projects\41800023-1 BES_DataManagement\TGD_FU_2011\sim\25");
-          XPSWMMResults xpResults = new XPSWMMResults(@"\\Cassio\systems_planning\8063_CombinedFacPlan\Models\Alts\Beech_Essex\BEE_NP-Pipe\sim\4S6\BEE_NP-Pipe_FU_4S6.out");
+          XPSWMMResults xpResults = new XPSWMMResults(@"c:\temp\BEE_NP-Pipe_FU_4S6.out");
 
             //TableE19DataSet.TableE19DataTable tableE19 = xpResults.GetTableE19();
 
