@@ -1,5 +1,5 @@
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemsAnalysis.ModelConstruction.AlternativesToolkit", "SystemsAnalysis.ModelConstruction.AlternativesToolkit.csproj", "{850D0E8C-3967-4DD8-8123-E7E72DC3899B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemsAnalysis.Utils.MapInfoUtils.MapBasicEngine", "..\..\MapInfoUtils\MapBasicEngine\SystemsAnalysis.Utils.MapInfoUtils.MapBasicEngine.csproj", "{E12CE615-5246-4A44-BC31-510316BC743D}"
