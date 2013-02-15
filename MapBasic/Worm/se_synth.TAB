@@ -1,0 +1,44 @@
+!table
+!version 410
+!charset WindowsLatin1
+
+Definition Table
+  Type NATIVE Charset "WindowsLatin1"
+  Fields 37
+    Compkey Integer ;
+    COMPKEY_2 Integer Index 1 ;
+    UNITID Char (16) ;
+    UNITID2 Char (16) ;
+    UNITTYPE Char (6) ;
+    COMPCODE Char (4) ;
+    PIPELEN Float ;
+    PIPEDIAM Float ;
+    PIPEHT Float ;
+    PIPESHP Char (4) ;
+    PIPETYPE Char (6) ;
+    Type_Dataflag Char (5) ;
+    UPSDPTH Float ;
+    UPSELEV Float ;
+    Up_data_flag Char (5) ;
+    DWNDPTH Float ;
+    DWNELEV Float ;
+    dwn_data_flag Char (254) ;
+    mhfrom Char (9) ;
+    mhfrom_type Char (6) ;
+    mhto Char (9) ;
+    mhto_type Char (6) ;
+    ASBLT Char (10) ;
+    INSTDATE Date ;
+    STNO Char (6) ;
+    PREDIR Char (3) ;
+    STNAME Char (20) ;
+    SUFFIX Char (4) ;
+    Synth_Flag Smallint ;
+    segid Char (254) ;
+    RecNum Char (15) ;
+    From_X Float ;
+    From_Y Float ;
+    To_X Float ;
+    To_Y Float ;
+    ADDRQUAL Char (70) ;
+    SERVSTAT Char (4) ;

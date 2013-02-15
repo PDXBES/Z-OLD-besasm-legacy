@@ -1,0 +1,9 @@
+'
+'	Declares for CalcDSC()
+'
+Declare Sub CalcDSC()
+Declare Sub InitHydPre()
+Declare Sub InitHydPost()
+Declare Sub QAICmax()
+Declare Sub QADupDsc()
+Declare Function GetNGTO(Byval MyLinkID as integer) as string
