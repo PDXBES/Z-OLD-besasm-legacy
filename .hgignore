@@ -21,3 +21,5 @@ glob:Delphi/EMGAATS Shell/EMGAATS.smp
 syntax: glob
 *.MBO
 *.MBX
+*.csproj.user
+*.vbproj.user
