@@ -817,8 +817,16 @@ namespace SystemsAnalysis.Utils.AccessUtils
         // Now that we have the CLSID, locate the server path at
         // HKEY_LOCAL_MACHINE\Software\Classes\CLSID\ 
         // {xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxx}\LocalServer32:
-        oKey = oReg.OpenSubKey(@"Software\Classes\CLSID\" + sCLSID +
-        @"\LocalServer32");
+        if (Is64BitOS())
+        {
+          oKey = oReg.OpenSubKey(@"Software\Classes\Wow6432Node\CLSID\" + sCLSID +
+         @"\LocalServer32");
+        }
+        else
+        {
+          oKey = oReg.OpenSubKey(@"Software\Classes\CLSID\" + sCLSID +
+          @"\LocalServer32");
+        }
         sPath = oKey.GetValue("").ToString();
         oKey.Close();
 
@@ -833,6 +841,14 @@ namespace SystemsAnalysis.Utils.AccessUtils
       }
     }
     #endregion
+
+    public bool Is64BitOS()
+    {
+      if (IntPtr.Size == 8)
+        return true;
+      else
+        return false;
+    }
 
     public void AddField(string tableName, string fieldName, FieldType fieldType)
     {
