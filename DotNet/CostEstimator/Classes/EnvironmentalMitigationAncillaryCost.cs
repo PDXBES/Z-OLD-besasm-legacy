@@ -21,7 +21,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
   class EnvironmentalMitigationAncillaryCost : AncillaryCost
   {
     #region Constants
-    private const decimal UNIT_COST_ENVIRONMENTAL_MITIGATION_PER_ACRE = 100000;
+    private const decimal UNIT_COST_ENVIRONMENTAL_MITIGATION_PER_ACRE = 150000;
     private const double ENVIRONMENTAL_ZONE_AFFECTED_WIDTH = 50;
     #endregion
 
