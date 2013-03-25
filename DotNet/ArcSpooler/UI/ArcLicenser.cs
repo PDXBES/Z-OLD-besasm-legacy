@@ -55,6 +55,7 @@ namespace ArcSpooler.UI
 		public ESRI.ArcGIS.esriSystem.esriLicenseStatus CheckOutArcLicense(
 			ESRI.ArcGIS.esriSystem.esriLicenseProductCode productCode)
 		{
+      ESRI.ArcGIS.RuntimeManager.Bind(ESRI.ArcGIS.ProductCode.Desktop);
 			ArcLicense = new ESRI.ArcGIS.esriSystem.AoInitializeClass();
 			ESRI.ArcGIS.esriSystem.esriLicenseStatus licenseStatus =
 				ArcLicense.IsProductCodeAvailable(productCode);
@@ -70,7 +71,7 @@ namespace ArcSpooler.UI
 		public void GetLicense()
 		{
 			ESRI.ArcGIS.esriSystem.esriLicenseStatus licenseStatus =
-				CheckOutArcLicense(ESRI.ArcGIS.esriSystem.esriLicenseProductCode.esriLicenseProductCodeArcView);
+				CheckOutArcLicense(ESRI.ArcGIS.esriSystem.esriLicenseProductCode.esriLicenseProductCodeStandard);
 
 			if (licenseStatus == ESRI.ArcGIS.esriSystem.esriLicenseStatus.esriLicenseUnavailable)
 				MessageBox.Show("Could not check out ArcView license.");
