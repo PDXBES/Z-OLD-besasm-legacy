@@ -612,6 +612,7 @@
     </Content>
     <Content Include="PipeCostReference.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="QaQc_PipXP.WOR">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
