@@ -496,7 +496,7 @@ namespace SystemsAnalysis.Modeling
         modelConflicts = new Dictionary<int, PipXP>();
         foreach (DataAccess.ModelDataSet.MdlPipXPRow row in mdlPipXPTable)
         {
-          int currentMLinkID = Convert.ToInt32(row.MLINKID);
+          int currentMLinkID = Convert.ToInt32(row.MLinkID);
           modelConflicts.Add(currentMLinkID, new PipXP(row));
         } // foreach  (row)
       } // try
