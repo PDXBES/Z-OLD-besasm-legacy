@@ -1742,6 +1742,9 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
               } // foreach  (ancillaryFactor)
             }
 
+            foreach (KeyValuePair<int, CostFactor> kvpair in _StandardCostFactorPool)
+              pipeAndManholeItem.AddFactor(kvpair.Value);
+
             // Prepare report item
             currentStage = "Preparing report item";
             pipeAndManholeCostItemFactor.Data = new ReportPipeItem();
