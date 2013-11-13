@@ -1,0 +1,16 @@
+!table
+!version 410
+!charset WindowsLatin1
+
+Definition Table
+  File "alternative_package.mdb"
+  Type ACCESS TABLE "alt_speclinks_ac" Charset "WindowsLatin1"
+  Fields 8
+    AltSpecLinkID Integer ;
+    MdlSpecLinkID Integer ;
+    AltLinkID Integer ;
+    Operation Char (3) ;
+    SpecLinkIndex Integer ;
+    SpecLinkType Char (2) ;
+    SLNode Char (6) ;
+    FocusArea Char (10) ;

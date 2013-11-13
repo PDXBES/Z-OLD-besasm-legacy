@@ -1,0 +1,66 @@
+'
+'	Integrated Mapping Communication and Loggins support
+'
+include "MapBasic.def"
+include "..\inc\EMGLogger.def"
+Dim		mFileIsOpen as integer
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  
+'
+'	Loggit()
+'
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  
+Sub Loggit(Byval Msg as string)
+
+	if glPrintLog then
+		print Msg
+	end if
+	if glMsgLog then
+		gstrCurrentMessage = Msg
+	end if
+	If glStatusLog then
+		StatusBar Message msg
+	End if
+	if glFileLog then
+		if mFileIsOpen <> 2 then
+			Open File "c:\EMGLogfile.txt" for output as #1
+			mFileIsOpen = 2
+		end if
+		Write #1, msg
+	end if
+End Sub
+
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  
+'
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  
+
+Sub SetLogOptions(ByVal PrintLog as logical, Byval MsgLog as Logical, ByVal StatusLog as logical, ByVal FileLog as Logical)
+	dim msg as string
+	dim	LogPath as string
+
+	'LogPath = ApplicationDirectory$() & "\EMGLogfile.txt"
+	LogPath = "C:\EMGLogfile.txt"
+
+	glPrintLog = PrintLog
+	glMsgLog = MsgLog
+	glStatusLog = StatusLog
+	glFileLog = FileLog
+	
+	If glFileLog then
+		if mFileIsOpen <> 2 then				' relies upon uninit variables being zero... (or at least not two)
+			Open File LogPath for output as #1
+		end if
+		msg = "SetLogOptions(" & glprintlog  & "," & glMsgLog & "," & glStatusLog & "," & glFileLog & "), mFileIsOpen[" & mFileIsOpen & "]"
+		mFileIsOpen = 2
+		Write #1, msg
+	End if
+End Sub
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  
+'	terminate all logging operations
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  
+Sub StopLogger()
+	if mFileIsOpen = 2 then
+		close file #1
+	end if
+End Sub
+
+

@@ -1,0 +1,233 @@
+<VisualStudioProject>
+    <VisualBasic
+        ProjectType = "Local"
+        ProductVersion = "7.10.3077"
+        SchemaVersion = "2.0"
+        ProjectGuid = "{545B59A9-C327-45EA-87A9-17D1996C8183}"
+    >
+        <Build>
+            <Settings
+                ApplicationIcon = ""
+                AssemblyKeyContainerName = ""
+                AssemblyName = "ResultsWarehouseManager"
+                AssemblyOriginatorKeyFile = ""
+                AssemblyOriginatorKeyMode = "None"
+                DefaultClientScript = "JScript"
+                DefaultHTMLPageLayout = "Grid"
+                DefaultTargetSchema = "IE50"
+                DelaySign = "false"
+                OutputType = "WinExe"
+                OptionCompare = "Binary"
+                OptionExplicit = "On"
+                OptionStrict = "Off"
+                RootNamespace = "ResultsWarehouseManager"
+                StartupObject = "ResultsWarehouseManager.ResultsWarehouseManagerForm"
+            >
+                <Config
+                    Name = "Debug"
+                    BaseAddress = "285212672"
+                    ConfigurationOverrideFile = ""
+                    DefineConstants = ""
+                    DefineDebug = "true"
+                    DefineTrace = "true"
+                    DebugSymbols = "true"
+                    IncrementalBuild = "true"
+                    Optimize = "false"
+                    OutputPath = "bin\"
+                    RegisterForComInterop = "false"
+                    RemoveIntegerChecks = "false"
+                    TreatWarningsAsErrors = "false"
+                    WarningLevel = "1"
+                />
+                <Config
+                    Name = "Release"
+                    BaseAddress = "285212672"
+                    ConfigurationOverrideFile = ""
+                    DefineConstants = ""
+                    DefineDebug = "false"
+                    DefineTrace = "true"
+                    DebugSymbols = "false"
+                    IncrementalBuild = "false"
+                    Optimize = "true"
+                    OutputPath = "bin\"
+                    RegisterForComInterop = "false"
+                    RemoveIntegerChecks = "false"
+                    TreatWarningsAsErrors = "false"
+                    WarningLevel = "1"
+                />
+            </Settings>
+            <References>
+                <Reference
+                    Name = "System"
+                    AssemblyName = "System"
+                />
+                <Reference
+                    Name = "System.Data"
+                    AssemblyName = "System.Data"
+                />
+                <Reference
+                    Name = "System.Drawing"
+                    AssemblyName = "System.Drawing"
+                />
+                <Reference
+                    Name = "System.Windows.Forms"
+                    AssemblyName = "System.Windows.Forms"
+                />
+                <Reference
+                    Name = "System.XML"
+                    AssemblyName = "System.Xml"
+                />
+                <Reference
+                    Name = "ESRI.ArcGIS.ArcMap"
+                    AssemblyName = "ESRI.ArcGIS.ArcMap"
+                    HintPath = "C:\Program Files\ArcGIS\DotNet\ESRI.ArcGIS.ArcMap.dll"
+                    AssemblyFolderKey = "hklm\dn\arcgis desktop"
+                />
+                <Reference
+                    Name = "ESRI.ArcGIS.DataSourcesGDB"
+                    AssemblyName = "ESRI.ArcGIS.DataSourcesGDB"
+                    HintPath = "C:\Program Files\ArcGIS\DotNet\ESRI.ArcGIS.DataSourcesGDB.dll"
+                    AssemblyFolderKey = "hklm\dn\arcgis desktop"
+                />
+                <Reference
+                    Name = "ESRI.ArcGIS.Geometry"
+                    AssemblyName = "ESRI.ArcGIS.Geometry"
+                    HintPath = "C:\Program Files\ArcGIS\DotNet\ESRI.ArcGIS.Geometry.dll"
+                    AssemblyFolderKey = "hklm\dn\arcgis desktop"
+                />
+                <Reference
+                    Name = "ESRI.ArcGIS.Output"
+                    AssemblyName = "ESRI.ArcGIS.Output"
+                    HintPath = "C:\Program Files\ArcGIS\DotNet\ESRI.ArcGIS.Output.dll"
+                    AssemblyFolderKey = "hklm\dn\arcgis desktop"
+                />
+                <Reference
+                    Name = "ESRI.ArcGIS.System"
+                    AssemblyName = "ESRI.ArcGIS.System"
+                    HintPath = "C:\Program Files\ArcGIS\DotNet\ESRI.ArcGIS.System.dll"
+                    AssemblyFolderKey = "hklm\dn\arcgis desktop"
+                />
+                <Reference
+                    Name = "ArcObjectsUtils"
+                    AssemblyName = "ArcObjectsUtils"
+                    HintPath = "..\..\DotNet\ArcObjectsUtils\bin\ArcObjectsUtils.dll"
+                />
+                <Reference
+                    Name = "dotnetutils"
+                    AssemblyName = "DotNetUtils"
+                    HintPath = "..\..\DotNet\DotNetUtils\bin\dotnetutils.dll"
+                />
+                <Reference
+                    Name = "INIFile"
+                    AssemblyName = "INIFile"
+                    HintPath = "\\Cassio\modeling\Model_Programs\DotNet\INIFile\bin\INIFile.dll"
+                />
+            </References>
+            <Imports>
+                <Import Namespace = "Microsoft.VisualBasic" />
+                <Import Namespace = "System" />
+                <Import Namespace = "System.Collections" />
+                <Import Namespace = "System.Data" />
+                <Import Namespace = "System.Drawing" />
+                <Import Namespace = "System.Diagnostics" />
+                <Import Namespace = "System.Windows.Forms" />
+            </Imports>
+        </Build>
+        <Files>
+            <Include>
+                <File
+                    RelPath = "App.ico"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "AssemblyInfo.vb"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "frmEditModelCatalog.vb"
+                    SubType = "Form"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "frmEditModelCatalog.resx"
+                    DependentUpon = "frmEditModelCatalog.vb"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "ModelCatalogDataset.xsd"
+                    BuildAction = "Content"
+                    Generator = "MSDataSetGenerator"
+                    LastGenOutput = "ModelCatalogDataset.vb"
+                />
+                <File
+                    RelPath = "ModelCatalogDataset.vb"
+                    DependentUpon = "ModelCatalogDataset.xsd"
+                    SubType = "code"
+                    BuildAction = "Compile"
+                    DesignTime = "True"
+                    AutoGen = "True"
+                />
+                <File
+                    RelPath = "ModelCatalogDataset.xsx"
+                    DependentUpon = "ModelCatalogDataset.xsd"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "ModelResults.vb"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "ModelResultsSchema.xsd"
+                    BuildAction = "Content"
+                    Generator = "MSDataSetGenerator"
+                    LastGenOutput = "ModelResultsSchema.vb"
+                />
+                <File
+                    RelPath = "ModelResultsSchema.vb"
+                    DependentUpon = "ModelResultsSchema.xsd"
+                    SubType = "code"
+                    BuildAction = "Compile"
+                    DesignTime = "True"
+                    AutoGen = "True"
+                />
+                <File
+                    RelPath = "ModelResultsSchema.xsx"
+                    DependentUpon = "ModelResultsSchema.xsd"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "Module1.vb"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "ResultsWarehouseManager.vb"
+                    SubType = "Component"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "ResultsWarehouseManager.resx"
+                    DependentUpon = "ResultsWarehouseManager.vb"
+                    BuildAction = "EmbeddedResource"
+                />
+                <File
+                    RelPath = "StormCatalogDataset.xsd"
+                    BuildAction = "Content"
+                    Generator = "MSDataSetGenerator"
+                    LastGenOutput = "StormCatalogDataset.vb"
+                />
+                <File
+                    RelPath = "StormCatalogDataset.vb"
+                    DependentUpon = "StormCatalogDataset.xsd"
+                    SubType = "code"
+                    BuildAction = "Compile"
+                    DesignTime = "True"
+                    AutoGen = "True"
+                />
+            </Include>
+        </Files>
+    </VisualBasic>
+</VisualStudioProject>
+

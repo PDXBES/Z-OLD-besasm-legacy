@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="BREDataSet" targetNamespace="http://tempuri.org/BREDataSet.xsd" xmlns:mstns="http://tempuri.org/BREDataSet.xsd" xmlns="http://tempuri.org/BREDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+        </Connections>
+        <Tables>
+        </Tables>
+        <Sources>
+        </Sources>
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="BREDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="BREDataSet" msprop:Generator_DataSetName="BREDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="CostPerComponent" msprop:Generator_UserTableName="CostPerComponent" msprop:Generator_RowDeletedName="CostPerComponentRowDeleted" msprop:Generator_RowChangedName="CostPerComponentRowChanged" msprop:Generator_RowClassName="CostPerComponentRow" msprop:Generator_RowChangingName="CostPerComponentRowChanging" msprop:Generator_RowEvArgName="CostPerComponentRowChangeEvent" msprop:Generator_RowEvHandlerName="CostPerComponentRowChangeEventHandler" msprop:Generator_TableClassName="CostPerComponentDataTable" msprop:Generator_TableVarName="tableCostPerComponent" msprop:Generator_RowDeletingName="CostPerComponentRowDeleting" msprop:Generator_TablePropName="CostPerComponent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="CostPerComponentID" msdata:AutoIncrement="true" msprop:Generator_UserColumnName="CostPerComponentID" msprop:Generator_ColumnPropNameInRow="CostPerComponentID" msprop:Generator_ColumnVarNameInTable="columnCostPerComponentID" msprop:Generator_ColumnPropNameInTable="CostPerComponentIDColumn" type="xs:int" />
+              <xs:element name="MLinkID" msprop:Generator_UserColumnName="MLinkID" msprop:Generator_ColumnPropNameInRow="MLinkID" msprop:Generator_ColumnVarNameInTable="columnMLinkID" msprop:Generator_ColumnPropNameInTable="MLinkIDColumn" type="xs:int" />
+              <xs:element name="LevelOfServiceID" msprop:Generator_UserColumnName="LevelOfServiceID" msprop:Generator_ColumnPropNameInRow="LevelOfServiceID" msprop:Generator_ColumnVarNameInTable="columnLevelOfServiceID" msprop:Generator_ColumnPropNameInTable="LevelOfServiceIDColumn" type="xs:int" />
+              <xs:element name="Year" msprop:Generator_UserColumnName="Year" msprop:Generator_ColumnPropNameInRow="Year" msprop:Generator_ColumnVarNameInTable="columnYear" msprop:Generator_ColumnPropNameInTable="YearColumn" type="xs:int" />
+              <xs:element name="BRECost" msprop:Generator_UserColumnName="BRECost" msprop:Generator_ColumnPropNameInRow="BRECost" msprop:Generator_ColumnVarNameInTable="columnBRECost" msprop:Generator_ColumnPropNameInTable="BRECostColumn" type="xs:double" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="LevelOfService" msprop:Generator_UserTableName="LevelOfService" msprop:Generator_RowDeletedName="LevelOfServiceRowDeleted" msprop:Generator_RowChangedName="LevelOfServiceRowChanged" msprop:Generator_RowClassName="LevelOfServiceRow" msprop:Generator_RowChangingName="LevelOfServiceRowChanging" msprop:Generator_RowEvArgName="LevelOfServiceRowChangeEvent" msprop:Generator_RowEvHandlerName="LevelOfServiceRowChangeEventHandler" msprop:Generator_TableClassName="LevelOfServiceDataTable" msprop:Generator_TableVarName="tableLevelOfService" msprop:Generator_RowDeletingName="LevelOfServiceRowDeleting" msprop:Generator_TablePropName="LevelOfService">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="LevelOfServiceID" msdata:AutoIncrement="true" msprop:Generator_UserColumnName="LevelOfServiceID" msprop:Generator_ColumnPropNameInRow="LevelOfServiceID" msprop:Generator_ColumnVarNameInTable="columnLevelOfServiceID" msprop:Generator_ColumnPropNameInTable="LevelOfServiceIDColumn" type="xs:int" />
+              <xs:element name="LevelOfServiceType" msprop:Generator_UserColumnName="LevelOfServiceType" msprop:Generator_ColumnPropNameInRow="LevelOfServiceType" msprop:Generator_ColumnVarNameInTable="columnLevelOfServiceType" msprop:Generator_ColumnPropNameInTable="LevelOfServiceTypeColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="ServiceFailureMechanism" msprop:Generator_UserColumnName="ServiceFailureMechanism" msprop:Generator_ColumnPropNameInRow="ServiceFailureMechanism" msprop:Generator_ColumnVarNameInTable="columnServiceFailureMechanism" msprop:Generator_ColumnPropNameInTable="ServiceFailureMechanismColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="DescriptionOfFailure" msprop:Generator_UserColumnName="DescriptionOfFailure" msprop:Generator_ColumnPropNameInRow="DescriptionOfFailure" msprop:Generator_ColumnVarNameInTable="columnDescriptionOfFailure" msprop:Generator_ColumnPropNameInTable="DescriptionOfFailureColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="BRECostID" msprop:Generator_UserColumnName="BRECostID" msprop:Generator_ColumnPropNameInRow="BRECostID" msprop:Generator_ColumnVarNameInTable="columnBRECostID" msprop:Generator_ColumnPropNameInTable="BRECostIDColumn" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="BRECost" msprop:Generator_UserTableName="BRECost" msprop:Generator_RowDeletedName="BRECostRowDeleted" msprop:Generator_RowChangedName="BRECostRowChanged" msprop:Generator_RowClassName="BRECostRow" msprop:Generator_RowChangingName="BRECostRowChanging" msprop:Generator_RowEvArgName="BRECostRowChangeEvent" msprop:Generator_RowEvHandlerName="BRECostRowChangeEventHandler" msprop:Generator_TableClassName="BRECostDataTable" msprop:Generator_TableVarName="tableBRECost" msprop:Generator_RowDeletingName="BRECostRowDeleting" msprop:Generator_TablePropName="BRECost">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="BRECostID" msdata:AutoIncrement="true" msprop:Generator_UserColumnName="BRECostID" msprop:Generator_ColumnPropNameInRow="BRECostID" msprop:Generator_ColumnVarNameInTable="columnBRECostID" msprop:Generator_ColumnPropNameInTable="BRECostIDColumn" type="xs:int" />
+              <xs:element name="BRECostDescription" msprop:Generator_UserColumnName="BRECostDescription" msprop:Generator_ColumnPropNameInRow="BRECostDescription" msprop:Generator_ColumnVarNameInTable="columnBRECostDescription" msprop:Generator_ColumnPropNameInTable="BRECostDescriptionColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="BRECost" msprop:Generator_UserColumnName="BRECost" msprop:Generator_ColumnPropNameInRow="BRECost" msprop:Generator_ColumnVarNameInTable="columnBRECost" msprop:Generator_ColumnPropNameInTable="BRECostColumn" type="xs:double" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="CostPerLevelOfService" msprop:Generator_UserTableName="CostPerLevelOfService" msprop:Generator_RowDeletedName="CostPerLevelOfServiceRowDeleted" msprop:Generator_RowChangedName="CostPerLevelOfServiceRowChanged" msprop:Generator_RowClassName="CostPerLevelOfServiceRow" msprop:Generator_RowChangingName="CostPerLevelOfServiceRowChanging" msprop:Generator_RowEvArgName="CostPerLevelOfServiceRowChangeEvent" msprop:Generator_RowEvHandlerName="CostPerLevelOfServiceRowChangeEventHandler" msprop:Generator_TableClassName="CostPerLevelOfServiceDataTable" msprop:Generator_TableVarName="tableCostPerLevelOfService" msprop:Generator_RowDeletingName="CostPerLevelOfServiceRowDeleting" msprop:Generator_TablePropName="CostPerLevelOfService">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="CostPerLevelOfServiceID" msdata:AutoIncrement="true" msprop:Generator_UserColumnName="CostPerLevelOfServiceID" msprop:Generator_ColumnVarNameInTable="columnCostPerLevelOfServiceID" msprop:Generator_ColumnPropNameInRow="CostPerLevelOfServiceID" msprop:Generator_ColumnPropNameInTable="CostPerLevelOfServiceIDColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="LevelOfServiceID" msprop:Generator_UserColumnName="LevelOfServiceID" msprop:Generator_ColumnVarNameInTable="columnLevelOfServiceID" msprop:Generator_ColumnPropNameInRow="LevelOfServiceID" msprop:Generator_ColumnPropNameInTable="LevelOfServiceIDColumn" type="xs:int" />
+              <xs:element name="Year" msprop:Generator_UserColumnName="Year" msprop:Generator_ColumnVarNameInTable="columnYear" msprop:Generator_ColumnPropNameInRow="Year" msprop:Generator_ColumnPropNameInTable="YearColumn" type="xs:int" />
+              <xs:element name="BRECost" msprop:Generator_UserColumnName="BRECost" msprop:Generator_ColumnVarNameInTable="columnBRECost" msprop:Generator_ColumnPropNameInRow="BRECost" msprop:Generator_ColumnPropNameInTable="BRECostColumn" type="xs:double" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:CostPerComponent" />
+      <xs:field xpath="mstns:MLinkID" />
+      <xs:field xpath="mstns:LevelOfServiceID" />
+      <xs:field xpath="mstns:Year" />
+    </xs:unique>
+    <xs:unique name="LevelOfService_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:LevelOfService" />
+      <xs:field xpath="mstns:LevelOfServiceID" />
+    </xs:unique>
+    <xs:unique name="BRECost_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:BRECost" />
+      <xs:field xpath="mstns:BRECostID" />
+    </xs:unique>
+    <xs:unique name="CostPerLevelOfService_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:CostPerLevelOfService" />
+      <xs:field xpath="mstns:LevelOfServiceID" />
+      <xs:field xpath="mstns:Year" />
+    </xs:unique>
+  </xs:element>
+  <xs:annotation>
+    <xs:appinfo>
+      <msdata:Relationship name="LevelOfService_BREDataTable" msdata:parent="CostPerComponent" msdata:child="LevelOfService" msdata:parentkey="LevelOfServiceID" msdata:childkey="LevelOfServiceID" msprop:Generator_UserRelationName="LevelOfService_BREDataTable" msprop:Generator_RelationVarName="relationLevelOfService_BREDataTable" msprop:Generator_UserChildTable="LevelOfService" msprop:Generator_UserParentTable="CostPerComponent" msprop:Generator_ParentPropName="BREDataTableRow" msprop:Generator_ChildPropName="GetLevelOfServiceRows" />
+      <msdata:Relationship name="BRECost_LevelOfService" msdata:parent="BRECost" msdata:child="LevelOfService" msdata:parentkey="BRECostID" msdata:childkey="BRECostID" msprop:Generator_UserRelationName="BRECost_LevelOfService" msprop:Generator_RelationVarName="relationBRECost_LevelOfService" msprop:Generator_UserChildTable="LevelOfService" msprop:Generator_UserParentTable="BRECost" msprop:Generator_ParentPropName="BRECostRow" msprop:Generator_ChildPropName="GetLevelOfServiceRows" />
+      <msdata:Relationship name="LevelOfService_CostPerLevelOfService" msdata:parent="CostPerLevelOfService" msdata:child="LevelOfService" msdata:parentkey="LevelOfServiceID" msdata:childkey="LevelOfServiceID" msprop:Generator_UserRelationName="LevelOfService_CostPerLevelOfService" msprop:Generator_RelationVarName="relationLevelOfService_CostPerLevelOfService" msprop:Generator_UserChildTable="LevelOfService" msprop:Generator_UserParentTable="CostPerLevelOfService" msprop:Generator_ParentPropName="CostPerLevelOfServiceRow" msprop:Generator_ChildPropName="GetLevelOfServiceRows" />
+    </xs:appinfo>
+  </xs:annotation>
+</xs:schema>

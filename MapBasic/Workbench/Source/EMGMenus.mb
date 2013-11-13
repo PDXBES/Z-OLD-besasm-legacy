@@ -1,0 +1,98 @@
+'	============ EMGAATS Workbench =================
+'
+'	Copyright (c) 2001, 2003
+'	City of Portland, OR Bureau of Environmental Services and CH2M HILL, Inc.
+'
+'	14mar03	Cautley
+'		Add hook for Re-Smart Model laterals
+'	18Mar03	Cautley
+'		Add hook for re-trace SurfSC
+'	03Apr03	Collins
+'		Add hook for relating dsc to surfsc - the last vestige of HYDworkbench
+'	10Sep04	Collins
+'		Add hook for relating inithydpre and inithydpost
+'
+include "MapBasic.def"
+include "Icons.def"
+include "..\..\common\inc\EMGGlobal.def"
+include "..\inc\EMGMenus.def"
+include "..\inc\EMGHelp.def"
+include "..\inc\EMGAbout.def"
+include "..\inc\EMGEnd.def"
+include "..\..\common\inc\EMGLaterals.def"
+include "..\inc\EMGTraceLinks.def"
+include "..\inc\EMGInit.def"
+include "..\..\common\inc\EMGModMake.def"
+include "..\inc\EMGCalcDSC.def"
+include "..\inc\EMGSurfSC.def"
+include "..\inc\EMGBuildDeck.def"
+include "..\inc\EMGPatch.def"
+
+sub BuildMenus()
+
+Create Menu "Laterals" as
+	"Compute Lateral &End points" ID 4001 calling ShowLatEndDialog,
+	"Snap Laterals to &Sewers" ID 4002 calling ShowLatSnapDialog,
+	'"&Import Dumb Laterals" ID 4003 calling ShowLatImportDialog,
+	"&Compute Lateral Data" calling ShowLatComputeDialog,
+	"Re-Trace Model Laterals & DSCs" ID 4050 calling ReSnapModelLaterals
+
+'	NOte that this menu isn't currently visible, it exists only to have itself
+'	selected via integrated mapping via Delphi or VB
+'
+Create Menu "ModelBuilding" as
+	"Do all for Test" ID 5020 calling DoAllTraceLinks,
+	"Rebuild for Test" calling RebuildTraceLinks
+
+Create Menu "HiddenModels" as
+	"Set Globals for Test" ID 5000 calling SetGlobals,
+	"Open Tables" ID 5004 Calling OpenTables,
+	"Open Tables DenyWrite mode" ID 5005 Calling OpenTablesDenyWrite,
+	"Build mdl_Links using text trace" ID 5001 calling BuildMDL_Links,
+	"Build model tables" ID 5002 calling CreateModelTables,
+	"Get Model Nodes" ID 5003 calling GetNodes, 
+	"Relate DSC area to SurfSC" ID 5006 calling RelateDSCtoSurfSC, 
+	"Add New IC tables" ID 5007 calling AddICTables,
+	"Add New IC tables" ID 5008 calling InitHydPre,
+	"Add New IC tables" ID 5009 calling InitHydPost,
+	"Add New IC tables" ID 5010 calling QAICmax,
+	"Add New IC tables" ID 5011 calling QADupDsc
+	
+	
+
+Create Menu "AlternateLateralMenu" as
+	'"Append Temp Lats to Master or Model" ID 6001 calling ImportTempLats,
+	'"Import Dumb laterals to Model" ID 6002 calling ImpLatsToModel,
+	'"Friendly Create New Temp Laterals Table" ID 6003 calling NewLatsTable,
+	'"IntegratedMapping Create New Temp Lats Table" ID 6004 calling CreateTempLatsTable,
+	'"Import Graphics Only" ID 6005 calling ImportGraphicsOnly,
+	'"Compute Temp Lats Table" ID 6006 calling ComputeLatTemp,
+	"Trace Laterals in Model" ID 6007 calling TraceLaterals,
+	"Calc & Audit DSC connections" ID 6008 calling CalcDSC,
+	"Trace Surface Subcatchments" ID 6010 calling TraceSurfaceSC,
+	"Re-Trace Surface Subcatchments" ID 6012 calling ReTraceSurfaceSC,
+	"Draw Surface SC Zingers" ID 6011 calling MakeSurfZingers,
+	"Delete unpicked model laterals from Master" ID 6009 calling DeleteUnpickedLatsFromMaster,
+	"Trace DSCs in Model" ID 6013 calling TraceDSCs
+
+Create Menu "EMGAATS &Workbench" As 
+	"&Open Model" Calling OpenModel,
+	"&Laterals" as "Laterals",
+	"&Alternate Lateral Menu" as "AlternateLateralMenu",
+	"Model Building" as "ModelBuilding",
+	"Hidden Models" as "HiddenModels",
+	"(-",
+    "&Help" Calling ShowHelp,
+    "&About EMGAATS Workbench" Calling ShowAbout,
+    "(-",
+    "E&xit EMGAATS Workbench" ID 5005 Calling EndEMGAATS
+
+Alter Menu Bar Remove ID 6, ID 7 
+    	Alter Menu Bar Add "EMGAATS Workbench", ID 6, ID 7
+
+End Sub
+
+Sub BuildButtonBars()
+
+
+End Sub
