@@ -2,10 +2,11 @@ unit dmHydroStats;
 
 interface
 
-uses Windows, SysUtils, DB, ADODB, Classes, ComObj, Variants, StrUtils,
+uses Windows, SysUtils, DB, ADODB, Classes, ComObj, Variants, StrUtils, Math,
   uEMGAATSModel, RzErrHnd;
 
 type
+  TIneffectiveDscToSscType = ( idtsNoIneffectiveDisco, idtsCheckGood, idtsCheckBad);
   TdatmodHydroStats = class(TDataModule)
     adoQuery: TADOQuery;
     adoConnection: TADOConnection;
@@ -29,6 +30,7 @@ type
     csHCardIA : Variant;
     csdscTA : Variant;
     csdscIA : Variant;
+    ineffectiveDscToSscCheck: TIneffectiveDscToSscType;
     constructor Initialize(AModel: TEMGAATSModel);
     procedure Calculate(AFile: TFileName);
     property ErrHandler: TRzErrorHandler read fErrHandler write fErrHandler;
@@ -573,6 +575,9 @@ var
   QueryVal: Variant;
   i: Integer;
   Formula: string;
+  TotalDSCICArea: Double;
+  EffectiveDiscoToVeg: Double;
+  IneffectiveDiscoToSSC: Double;
 begin
   // QUERY 6
   CurrentRow := iQ6;
@@ -617,6 +622,17 @@ begin
   csHCardTA := fExcelApp.sheets['Recon'].Range['Checksum_Hcard_IA'].Value;
   csHCardTA := fExcelApp.sheets['Recon'].Range['Checksum_dsc_TA'].Value;
   csHCardTA := fExcelApp.sheets['Recon'].Range['Checksum_dsc_IA'].Value;
+
+  TotalDSCICArea := fExcelApp.sheets['Recon'].Range['B53'];
+  EffectiveDiscoToVeg := fExcelApp.sheets['Recon'].Range['C55'];
+  IneffectiveDiscoToSSC := fExcelApp.sheets['Recon'].Range['C98'];
+
+  if IsZero(EffectiveDiscoToVeg, 0.001) then
+    ineffectiveDscToSscCheck := idtsNoIneffectiveDisco
+  else if (TotalDSCICArea - EffectiveDiscoToVeg > 0) and (IneffectiveDiscoToSSC > 0) then
+    ineffectiveDscToSscCheck := idtsCheckGood
+  else
+    ineffectiveDscToSscCheck := idtsCheckBad;
 
   adoQuery.Close;
 end;
