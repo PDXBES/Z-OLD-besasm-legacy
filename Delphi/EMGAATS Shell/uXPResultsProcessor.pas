@@ -88,7 +88,7 @@ begin
   dmodXPExport.adoOutCommand.Execute;
   dmodXPExport.adoOutCommand.CommandText :=
     'CREATE TABLE tableE10 ('+
-    'CondName TEXT(10),'+
+    'CondName TEXT(20),'+
     'DesignQ DOUBLE,'+
     'DesignV DOUBLE,'+
     'MaxD DOUBLE,'+

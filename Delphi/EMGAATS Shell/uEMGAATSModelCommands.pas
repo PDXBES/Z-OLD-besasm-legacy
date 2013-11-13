@@ -2223,6 +2223,18 @@ begin
       [RSSWarn]), eetInfo));
   fModel.AddError(TEMGAATSError.Create('---------------------------', eetInfo));
 
+  case datModHydroStats.ineffectiveDscToSscCheck of
+    idtsNoIneffectiveDisco:
+      fModel.AddError(TEMGAATSError.Create('No ineffective disco area in this model',
+        eetInfo));
+    idtsCheckGood:
+      fModel.AddError(TEMGAATSError.Create('Ineffective disco to ssc calculated',
+        eetInfo));
+    idtsCheckBad:
+      fModel.AddError(TEMGAATSError.Create(
+        'Ineffective disco to ssc not calculated properly. Rebuild with Recalculate Hydrology.',
+        eetError));
+  end;
 end;
 
 { TDeployEngineFileCommand }
