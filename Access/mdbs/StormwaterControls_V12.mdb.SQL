@@ -30,7 +30,7 @@ _filter_street
 ----------
 SELECT IC_StreetTargets.*
 FROM IC_StreetTargets
-WHERE (((IC_StreetTargets.BuildModelIC)=True) AND ((IC_StreetTargets.Evaluation)<>"N" And (IC_StreetTargets.Evaluation)<>"L")) OR (((IC_StreetTargets.Constructed)>0));
+WHERE (((IC_StreetTargets.buildModelIC)=True) AND ((IC_StreetTargets.evaluation)<>"N" And (IC_StreetTargets.evaluation)<>"L")) OR (((IC_StreetTargets.evaluation)<>"N" And (IC_StreetTargets.evaluation)<>"L") AND ((IC_StreetTargets.constructed)>0));
 
 
 _IC_00:clear mdl_DirSC_NGTOs
@@ -1095,10 +1095,9 @@ ORDER BY ICNode.FacNode;
 
 QAQC_01:Local_dup_NgtoRdirs
 ----------
-SELECT StreetTargets_ac.SurfSCID, Count(StreetTargets_ac.MAPINFO_ID) AS Nrecs
-FROM StreetTargets_ac INNER JOIN _filter_street ON StreetTargets_ac.SurfSCID = [_filter_street].SurfSCID
-WHERE (((StreetTargets_ac.Evaluation)<>"N"))
-GROUP BY StreetTargets_ac.SurfSCID
+SELECT StreetTargets_ac.surfSCID, Count(StreetTargets_ac.MAPINFO_ID) AS Nrecs
+FROM StreetTargets_ac INNER JOIN _filter_street ON StreetTargets_ac.surfSCID = [_filter_street].surfSCID
+GROUP BY StreetTargets_ac.surfSCID
 HAVING (((Count(StreetTargets_ac.MAPINFO_ID))>1));
 
 
@@ -1152,8 +1151,9 @@ HAVING (((Count([ic_RoofTargets].[MAPINFO_ID]))>1));
 
 StreetTargets_ac
 ----------
-SELECT [_filter_street].*
-FROM _filter_street INNER JOIN mdl_SurfSC_ac ON [_filter_street].SurfSCID = mdl_SurfSC_ac.SurfSCID;
+SELECT [_filter_street].*, mdl_SurfSC_ac.IsActive
+FROM _filter_street INNER JOIN mdl_SurfSC_ac ON [_filter_street].surfSCID = mdl_SurfSC_ac.SurfSCID
+WHERE (((mdl_SurfSC_ac.IsActive)=True));
 
 
 VI_00_clear_ICNODE
