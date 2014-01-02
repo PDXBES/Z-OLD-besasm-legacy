@@ -483,12 +483,14 @@ var
   i: Integer;
   RunoffFileName: string;
 begin
+  CodeSite.EnterMethod('InitReport');
   Screen.Cursor := crHourglass;
 
   try
     fModel := AModel;
 
     // Prepare summary tab
+    CodeSite.Send('Prepare summary tab');
     treeErrors.Clear;
     treeErrors.Sorted := True;
 
@@ -502,28 +504,40 @@ begin
     end;
 
     // Prepare QC worksheet and statistics if build wasn't aborted
+    CodeSite.Send('Prepare QC worksheet and stats');
     if not Aborted then
     begin
-      if FileExists(AModel.QCWorkbookFileName) then
-      begin
-        ssQualityControl.LoadFromFile(AModel.QCWorkbookFileName);
-        ssQualityControl.Show;
-      end
-      else
-        ssQualityControl.Hide;
-
-      StatsList := TStringList.Create;
       try
-        fModel.TransferStats(StatsList);
-        AnalyzeStats(StatsList);
-      finally
-        StatsList.Free;
+        if FileExists(AModel.QCWorkbookFileName) then
+        begin
+          ssQualityControl.LoadFromFile(AModel.QCWorkbookFileName);
+          ssQualityControl.Show;
+        end
+        else
+          ssQualityControl.Hide;
+
+        StatsList := TStringList.Create;
+        try
+          fModel.TransferStats(StatsList);
+          AnalyzeStats(StatsList);
+        finally
+          StatsList.Free;
+        end;
+      except
+        on E: exception do
+        begin
+          with ssQualityControl.Sheet.GetCellObject(0,0) do
+            Text := 'Display not supported with Excel 2013';
+          with ssQualityControl.Sheet.GetCellObject(0,1) do
+            Text := 'Go to Model Directory tab and Open qc\HydroC.xls to see reconciliation sheet';
+        end
       end;
 
       InitMap;
     end;
 
     // Prepare summary tab's error type buttons
+    CodeSite.Send('Prepare summary tab''s error type buttons');
     actShowErrors.Enabled := fNumErrors > 0;
     btnShowErrors.Down := fNumErrors > 0;
     if fNumErrors = 1 then
@@ -560,7 +574,9 @@ begin
       actShowStats.Caption := Format('%d Stats', [fNumStats]);
 
     actShowRunCommands.Enabled := fNumRunCommands > 0;
+
     // Turn off the Commands by default
+    CodeSite.Send('Turn off commands by default');
     btnShowRunCommands.Down := False;
     if fNumRunCommands = 1 then
       actShowRunCommands.Caption := '1 Command'
@@ -575,9 +591,11 @@ begin
       actShowToDos.Caption := Format('%d To-Do''s', [fNumToDos]);
 
     // Prepare Model Directory tab
+    CodeSite.Send('Prepare model directory tab');
     dtreeModel.SelectedPathName := fModel.Path;
 
     // Prepare Runoff tab
+    CodeSite.Send('Prepare runoff tab');
     if fModel.Config.StormsToBuildCount > 0 then
     begin
       cmbRunoffStormToView.Items.Clear;
@@ -597,6 +615,7 @@ begin
   finally
     Screen.Cursor := crDefault;
   end;
+  CodeSite.ExitMethod('InitReport');
 end;
 
 procedure TfrmBuildReport.pnlMapResize(Sender: TObject);
