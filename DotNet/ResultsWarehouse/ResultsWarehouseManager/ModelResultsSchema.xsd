@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema id="ModelResultsSchema" targetNamespace="http://tempuri.org/XMLSchema1.xsd" elementFormDefault="qualified"
+	xmlns="http://tempuri.org/XMLSchema1.xsd" xmlns:mstns="http://tempuri.org/XMLSchema1.xsd"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+	<xs:element name="tableE09">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="NodeName" type="xs:string" />
+				<xs:element name="GrElev" type="xs:double" minOccurs="0" />
+				<xs:element name="MaxCrown" type="xs:double" minOccurs="0" />
+				<xs:element name="MaxJElev" type="xs:double" minOccurs="0" />
+				<xs:element name="TimeOfMax" type="xs:dateTime" minOccurs="0" />
+				<xs:element name="Surcharge" type="xs:double" minOccurs="0" />
+				<xs:element name="Freeboard" type="xs:double" minOccurs="0" />
+				<xs:element name="MaxArea" type="xs:double" minOccurs="0" />
+				<xs:element name="MAPINFO_ID" msdata:AutoIncrement="true" type="xs:int" minOccurs="0" />
+			</xs:sequence>
+		</xs:complexType>
+		<xs:key name="tableE09Key1" msdata:PrimaryKey="true">
+			<xs:selector xpath="." />
+			<xs:field xpath="mstns:NodeName" />
+		</xs:key>
+	</xs:element>
+	<xs:element name="tableE10">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="CondName" type="xs:string" />
+				<xs:element name="DesignQ" type="xs:double" minOccurs="0" />
+				<xs:element name="DesignV" type="xs:double" minOccurs="0" />
+				<xs:element name="MaxD" type="xs:double" minOccurs="0" />
+				<xs:element name="MaxQ" type="xs:double" minOccurs="0" />
+				<xs:element name="TimeMaxQ" type="xs:dateTime" minOccurs="0" />
+				<xs:element name="MaxV" type="xs:double" minOccurs="0" />
+				<xs:element name="TimeMaxV" type="xs:dateTime" minOccurs="0" />
+				<xs:element name="QqRatio" type="xs:double" minOccurs="0" />
+				<xs:element name="MaxUsElev" type="xs:double" minOccurs="0" />
+				<xs:element name="MaxDsElev" type="xs:double" minOccurs="0" />
+				<xs:element name="MAPINFO_ID" msdata:AutoIncrement="true" type="xs:int" minOccurs="0" />
+			</xs:sequence>
+		</xs:complexType>
+		<xs:key name="tableE10Key1" msdata:PrimaryKey="true">
+			<xs:selector xpath="." />
+			<xs:field xpath="mstns:CondName" />
+		</xs:key>
+	</xs:element>
+	<xs:element name="tableE20">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="NodeName" type="xs:string" />
+				<xs:element name="SurchargeTime" type="xs:double" minOccurs="0" />
+				<xs:element name="FloodedTime" type="xs:double" minOccurs="0" />
+				<xs:element name="FloodVol" type="xs:double" minOccurs="0" />
+				<xs:element name="MaxStoredVol" type="xs:double" minOccurs="0" />
+				<xs:element name="PondingVol" type="xs:double" minOccurs="0" />
+				<xs:element name="MAPINFO_ID" msdata:AutoIncrement="true" type="xs:int" minOccurs="0" />
+			</xs:sequence>
+		</xs:complexType>
+		<xs:key name="tableE20Key1" msdata:PrimaryKey="true">
+			<xs:selector xpath="." />
+			<xs:field xpath="mstns:NodeName" />
+		</xs:key>
+	</xs:element>
+	<xs:element name="_ComputeHGL">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="ParcelID" type="xs:int" minOccurs="0" />
+				<xs:element name="DivideID" type="xs:int" minOccurs="0" />
+				<xs:element name="USJelev" type="xs:double" minOccurs="0" />
+				<xs:element name="DSJelev" type="xs:double" minOccurs="0" />
+				<xs:element name="Frac2SwrBeg" type="xs:double" minOccurs="0" />
+				<xs:element name="HGL" msdata:ReadOnly="true" type="xs:double" minOccurs="0" />
+				<xs:element name="dHGL" msdata:ReadOnly="true" type="xs:double" minOccurs="0" />
+				<xs:element name="Surcharge" msdata:ReadOnly="true" type="xs:double" minOccurs="0" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

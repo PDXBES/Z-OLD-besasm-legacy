@@ -1,0 +1,8 @@
+'
+'	Declarations for EMGLatColData
+'
+Declare	Sub				LoadReqColumnArray()
+Declare	Sub				LoadReqColumnArrayDelMst()
+Declare	Sub				LoadReqColumnArrayDelMdl()
+Declare	Sub				LoadAuditColumnAdd()
+Declare	Sub				LoadAuditColumnDel()

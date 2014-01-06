@@ -1,0 +1,4 @@
+'
+'	Define standard coordinate systems
+'
+declare sub SetStdCoordSys()
