@@ -1417,7 +1417,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
         CostItemFactor CEAdaRampCIF = null;
         CostItemFactor CEWaterLineSleevingCIF = null;
 
-        switch (streetTarget.TypeCode)
+        switch (streetTarget.TypeCode.ToLower())
         {
           case "v":
             _ICCoster.InflowControl = InflowControl.FlowRestrictor;
