@@ -1,0 +1,794 @@
+'
+'	Trace Surface Subcatchments for currently open model.
+'
+'	18Mar03	Cautley
+'		Add ReTrace function.
+'		Change data format of SurfSC table
+'			add dH, FlowLengthFt
+'			remove redundent NGTOs and issumped flags in model
+'	24Mar03	Cautley
+'		Check / update latest changes to table structure (3.08)
+'	04Apr04 Collins
+'		remove FutOrEx and replace with gstrTimeFrame
+'	04Apr03	Cautley
+'		pavetreeacres change, FU is now FB in var names
+'	07Sep04	Collins
+'		change doonezinger to a function
+'   
+'
+include "MapBasic.def"
+include "..\inc\EMGSurfSC.def"
+include "..\..\common\inc\INIUtils.def"
+include "..\..\common\inc\EMGLogger.def"
+include "..\..\common\inc\EMGGlobal.def"
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+'	Trace Surface Sub-catchments
+'	Called directly from EMGWorkbench menu
+'
+'
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+Sub TraceSurfaceSC
+Dim		SSCPath as string
+Dim		SSCDir as string
+Dim		SSCTemp as string
+Dim SSCAltTemp as string
+Dim		ModelINIPath as string
+'Dim		FutOrEx as string
+Dim		Msg as string
+
+'	Need to consult INI file to find out whether current or future is being extracted...
+'
+'	Get the path to the master files, and open them.
+'	ModelINIPath = gmdlRootFolder & "model.ini"
+'	if not FileExists(ModelINIPath) then
+'		gstrCurrentMessage = "The current model directory does not contain a 'model.ini' file. " & ModelINIPath
+'		gstrReturnStatus = "ERROR"
+'		call loggit (gstrCurrentMessage)
+'		Exit Sub
+	'end if
+	
+	'FutOrEx = ReadINI(ModelINIPath, "ModelState", "timeframe", "")
+'	Msg = "Fut Or Ex flag: " & FutOrEx
+'	call loggit(msg)		
+
+  'Collins 11/15/2002 add error check
+  if Ucase$(gstrTimeFrame) <> "FU" and Ucase$(gstrTimeFrame) <> "EX" then
+    msg = "illegal time frame:" & gstrtimeframe
+    call loggit(msg)
+	  gstrReturnStatus = "ERROR"
+	  exit sub
+  end if
+
+	SSCPath = TableInfo(mdl_SurfSC, TAB_INFO_TABFILE)
+	SSCDir = PathToDirectory$(SSCPath)	
+	SSCTemp = SSCDir & "_SurfSCTemp.tab"
+	SSCAltTemp = SSCDir & "_SurfSCAltTemp.tab"
+
+	commit table mdl_SurfSC
+	delete from mdl_SurfSC
+	commit table mdl_SurfSC
+	Pack Table mdl_SurfSC Graphic Data
+
+  'Collins 11/15/2002 fix existing/future trace
+  'get a list of SCID's that match nodes  -- the trace
+  'AMM 11/29/2006 Added Alt_TraceNode for tracing in sumped subcatchments (can't do this, must separate joins)
+  
+  do case ucase$(gstrTimeFrame)
+  	case "EX"  
+			select SurfSCID
+	    		from	mst_SurfSC, mdl_Nodes
+	    		where (mst_SurfSC.NGTO_EX = mdl_Nodes.Node)
+			Group By SurfSCID
+	    		into	_SurfSCs
+
+			select SurfSCID
+	    		from	mst_SurfSC, mdl_Nodes
+	    		where (mst_SurfSC.Alt_TraceNode = mdl_Nodes.Node) and (mst_SurfSC.IsSumped_EX = True)
+			Group By SurfSCID
+	    		into	_SurfSCAlts
+
+		case "FU"
+			select SurfSCID
+	    		from	mst_SurfSC, mdl_Nodes
+	    		where (mst_SurfSC.NGTO_FB = mdl_Nodes.Node)
+			Group By SurfSCID
+	    		into	_SurfSCs
+	    		
+			select SurfSCID
+	    		from	mst_SurfSC, mdl_Nodes
+	    		where (mst_SurfSC.Alt_TraceNode = mdl_Nodes.Node) and (mst_SurfSC.IsSumped_FB = True)
+			Group By SurfSCID
+	    		into	_SurfSCAlts
+	    
+ 	end case
+  
+  ' make it a base table so the join works  	
+	Commit Table _SurfSCs as SSCTemp
+	Close Table _SurfSCs
+  Open Table SSCTemp as _SurfSCs
+
+	Select SurfSCID
+	From _SurfSCs
+	Group By SurfSCID
+	Into _UniqueSurfSCID
+	
+	Commit Table _SurfSCAlts as SSCAltTemp
+	Close Table _SurfSCAlts
+	Open Table SSCAltTemp as _SurfSCAlts
+
+	Select SurfSCID
+	From _SurfSCAlts
+	Group By SurfSCID
+	Into _UniqueAltSurfSCID
+
+  ' Collins 20030228 add sidewalks
+  ' Insert regular traced subcatchments (from NGTO_XX)
+	do case ucase$(gstrTimeFrame)
+		case "EX"
+			select
+				SurfSCID,
+				NGTo_EX,
+				Slope,
+				FlowLengthFt,
+				dH,
+				Imp_n,
+				Per_n,
+				Imp_sto,
+				Per_sto,
+				Suct,
+				Hydcon,
+				SMDMax,
+				issumped_EX,
+				totalgrossacres,
+				paveacres,
+				SWAcresEX,
+				SWAcresEXOther,
+				SWFactor,
+				pavetreeacres,
+				"T",				' tracevisit
+				UpdateAtts,
+				"M",				' data source
+				0 ,         'ROWAcres
+				0 ,         'ROWAcresOther
+				"T" "IsActive"
+			from mst_SurfSC, _UniqueSurfSCID
+			where mst_SurfSC.SurfSCID = _UniqueSurfSCID.SurfSCID
+			into _ModelSurfSC
+		case "FU"
+			select
+				SurfSCID,
+				NGTo_FB,
+				Slope,
+				FlowLengthFt,
+				dH,
+				Imp_n,
+				Per_n,
+				Imp_sto,
+				Per_sto,
+				Suct,
+				Hydcon,
+				SMDMax,
+				issumped_FB,
+				totalgrossacres,
+				paveacres,
+				SWAcresFB,
+				SWAcresFBOther,
+				SWFactor,
+				pavetreeacres,
+				"T",				' tracevisit
+				UpdateAtts,
+				"M",				' data source
+				ROWAcresFB,
+				ROWAcresFBOther,
+				"T" "IsActive"
+			from mst_SurfSC, _UniqueSurfSCID
+			where mst_SurfSC.SurfSCID = _UniqueSurfSCID.SurfSCID
+			into _ModelSurfSC
+	end case
+	Insert into mdl_SurfSC (
+		SurfSCID,
+		NGTO,
+		Slope,
+		FlowLengthFt,
+		dH,
+		Imp_n,
+		Per_n,
+		Imp_sto,
+		Per_sto,
+		Suct,
+		Hydcon,
+		SMDMax,
+		issumped,
+		totalgrossacres,
+		paveacres,
+		SWacres,
+		SWAcresOther,
+		SWfactor,
+		pavetreeacres,
+		TraceVisit,
+		UpdateAtts,
+		DataSource,
+		ROWAcres,
+		ROWAcresOther,
+		IsActive
+	) select * from _ModelSurfSC 
+
+	' Insert Alt_TraceNode-traced subcatchments
+	' These are always rendered inactive
+	do case ucase$(gstrTimeFrame)
+		case "EX"
+			select
+				SurfSCID,
+				NGTo_EX,
+				Slope,
+				FlowLengthFt,
+				dH,
+				Imp_n,
+				Per_n,
+				Imp_sto,
+				Per_sto,
+				Suct,
+				Hydcon,
+				SMDMax,
+				issumped_EX,
+				totalgrossacres,
+				paveacres,
+				SWAcresEX,
+				SWAcresEXOther,
+				SWFactor,
+				pavetreeacres,
+				"T",				' tracevisit
+				UpdateAtts,
+				"M",				' data source
+				0 ,         'ROWAcres
+				0 ,         'ROWAcresOther
+				"F" "IsActive"
+			from mst_SurfSC, _UniqueAltSurfSCID
+			where mst_SurfSC.SurfSCID = _UniqueAltSurfSCID.SurfSCID
+			into _ModelSurfSCAlt
+		case "FU"
+			select
+				SurfSCID,
+				NGTo_FB,
+				Slope,
+				FlowLengthFt,
+				dH,
+				Imp_n,
+				Per_n,
+				Imp_sto,
+				Per_sto,
+				Suct,
+				Hydcon,
+				SMDMax,
+				issumped_FB,
+				totalgrossacres,
+				paveacres,
+				SWAcresFB,
+				SWAcresFBOther,
+				SWFactor,
+				pavetreeacres,
+				"T",				' tracevisit
+				UpdateAtts,
+				"M",				' data source
+				ROWAcresFB,
+				ROWAcresFBOther,
+				"F" "IsActive"
+			from mst_SurfSC, _UniqueAltSurfSCID
+			where mst_SurfSC.SurfSCID = _UniqueAltSurfSCID.SurfSCID
+			into _ModelSurfSCAlt
+	end case
+	Insert into mdl_SurfSC (
+		SurfSCID,
+		NGTO,
+		Slope,
+		FlowLengthFt,
+		dH,
+		Imp_n,
+		Per_n,
+		Imp_sto,
+		Per_sto,
+		Suct,
+		Hydcon,
+		SMDMax,
+		issumped,
+		totalgrossacres,
+		paveacres,
+		SWacres,
+		SWAcresOther,
+		SWfactor,
+		pavetreeacres,
+		TraceVisit,
+		UpdateAtts,
+		DataSource,
+		ROWAcres,
+		ROWAcresOther,
+		IsActive
+	) select * from _ModelSurfSCAlt
+
+	drop table _SurfSCs
+	drop table _SurfSCAlts
+	commit table mdl_SurfSC
+	gstrReturnStatus = "SUCCESS"
+
+End Sub
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+'	Re-trace the surface subcatchments (in a model)
+'		flag those that are properly connected,
+'		pull newly needed ones from master
+'		orphans are left unflagged.
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+Sub	ReTraceSurfaceSC()
+Dim		SSCPath as string
+Dim		SSCDir as string
+Dim		SSCTemp as string
+Dim		ModelINIPath as string
+Dim		FutOrEx as string
+Dim		Msg as string
+Dim		MyID as integer
+Dim		RowCount as integer
+Dim		RowNum as integer
+
+'	Need to consult INI file to find out whether current or future is being extracted...
+'
+'	Get the path to the master files, and open them.
+	ModelINIPath = gmdlRootFolder & "model.ini"
+	if not FileExists(ModelINIPath) then
+
+		gstrCurrentMessage = "The current model directory does not contain a 'model.ini' file. " & ModelINIPath
+		gstrReturnStatus = "ERROR"
+		call loggit(gstrCurrentMessage)
+		Exit Sub
+	end if
+	FutOrEx = ReadINI(ModelINIPath, "ModelState", "timeframe", "")
+	Msg = "Fut Or Ex flag: " & FutOrEx
+	call loggit(msg)		
+
+  'Collins 11/15/2002 add error check
+  if Ucase$(FutOrEx) <> "FU" and Ucase$(FutOrEx) <> "EX" then
+    gstrReturnStatus = "ERROR"
+    exit sub
+  end if
+
+' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+'	set everything to orphan status
+
+	msg = "Everybody starts out orphaned..."
+	call loggit(msg)
+
+	Update mdl_SurfSC
+	set TraceVisit = "F"
+' - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+'	Get list of unique Surface Subcatchment ID's used in the model.
+		
+	do case ucase$(FutOrEX)
+		case "FU"
+			select SurfSCID
+	    		from	mst_SurfSC, mdl_Nodes
+	    		where (mst_SurfSC.NGTO_FB = mdl_Nodes.Node)
+			Group By SurfSCID
+	    		into	_SurfSCs
+	    		
+			select SurfSCID
+	    		from	mst_SurfSC, mdl_Nodes
+	    		where (mst_SurfSC.Alt_TraceNode = mdl_Nodes.Node)
+			Group By SurfSCID
+	    		into	_SurfSCAlts
+	    
+  	case "EX"  
+			select SurfSCID
+	    		from	mst_SurfSC, mdl_Nodes
+	    		where (mst_SurfSC.NGTO_EX = mdl_Nodes.Node)
+			Group By SurfSCID
+	    		into	_SurfSCs
+
+			select SurfSCID
+	    		from	mst_SurfSC, mdl_Nodes
+	    		where (mst_SurfSC.Alt_TraceNode = mdl_Nodes.Node)
+			Group By SurfSCID
+	    		into	_SurfSCAlts
+  	end case
+
+	msg = "now have list of unique surface subcatchments"
+	call loggit(msg)
+
+'	Loop though, either flag or get the new one.
+	Fetch First from _SurfSCs
+	Do While NOT EOT(_SurfSCs)
+		MyId = _SurfSCs.SurfSCID
+		RowNum = _SurfSCs.ROWID
+	
+		Select TraceVisit
+		from mdl_SurfSC
+		where SurfSCID = MyID
+		into	_ModelSSC
+
+		RowCount = TableInfo(_ModelSSC, TAB_INFO_NROWS)
+		Do Case RowCOunt
+			Case 0
+				msg = "Need to get SurfSCID = " + str$(MyID)
+				call loggit(msg)
+			' need to get
+				Select * from mst_SurfSC
+				where SurfSCID = MyID		' this is the guy I don't have
+				into _MyMasterSSC
+
+				do case ucase$(FutOrEX)
+					case "FU"
+				insert into mdl_SurfSC (
+					SurfSCID,
+					NGTO,
+					Slope,
+					FlowLengthFt,
+					dH,
+					Imp_n,
+					Per_n,
+					Imp_sto,
+					Per_sto,
+					Suct,
+					Hydcon,
+					SMDMax,
+					issumped,
+					totalgrossacres,
+					paveacres,
+					SWacresEx,
+					SWAcresExModel,
+					SWAcresExOther,
+					SWfactor,
+					pavetreeacres,
+					UpdateAtts,
+					TraceVisit
+				) select
+					SurfSCID,
+					NGTO_FB,
+					Slope,
+					FlowLengthFt,
+					dH,
+					Imp_n,
+					Per_n,
+					Imp_sto,
+					Per_sto,
+					Suct,
+					Hydcon,
+					SMDMax,
+					issumped_FB,
+					totalgrossacres,
+					paveacres,
+					SWacresEx,
+					SWAcresExModel,
+					SWAcresExOther,
+					SWfactor,
+					pavetreeacres,
+					UpdateAtts,
+					"T"				'  TraceVisit
+				from _MyMasterSSC
+			
+				  	case "EX"  
+				insert into mdl_SurfSC (
+					SurfSCID,
+					NGTO,
+					Slope,
+					FlowLengthFt,
+					dH,
+					Imp_n,
+					Per_n,
+					Imp_sto,
+					Per_sto,
+					Suct,
+					Hydcon,
+					SMDMax,
+					issumped,
+					totalgrossacres,
+					paveacres,
+					SWacresEx,
+					SWAcresExModel,
+					SWAcresExOther,
+					SWfactor,
+					pavetreeacres,
+					UpdateAtts,
+					TraceVisit
+				) select
+					SurfSCID,
+					NGTO_Ex,
+					Slope,
+					FlowLengthFt,
+					dH,
+					Imp_n,
+					Per_n,
+					Imp_sto,
+					Per_sto,
+					Suct,
+					Hydcon,
+					SMDMax,
+					issumped_Ex,
+					totalgrossacres,
+					paveacres,
+					SWacresEx,
+					SWAcresExModel,
+					SWAcresExOther,
+					SWfactor,
+					pavetreeacres,
+					UpdateAtts,
+					"T"				'  TraceVisit
+				from _MyMasterSSC
+			
+			  	end case
+				
+			case 1
+			' good, set flag
+				msg = "Found SurfSCID = " + str$(MyID)
+				call loggit(msg)
+				select * from mdl_SurfSC
+				where SurfSCID = MyID
+				into _UpdateSSC
+				
+				RowNum = _UpdateSSC.ROWID	
+		
+				update _UpdateSSC
+					set TraceVisit = "T"
+					where ROWID = RowNum
+			case else
+			' not good, duplicate
+				gstrCurrentMessage = "Unexpected duplicate SurfSCID"
+				gstrReturnStatus = "ERROR"
+				call loggit(gstrCurrentMessage)
+
+		end case
+
+		Fetch Next from _SurfSCs
+	Loop
+
+	Fetch First from _SurfSCAlts
+	Do While NOT EOT(_SurfSCAlts)
+		MyId = _SurfSCAlts.SurfSCID
+		RowNum = _SurfSCAlts.ROWID
+	
+		Select TraceVisit
+		from mdl_SurfSC
+		where SurfSCID = MyID
+		into	_ModelSSC
+
+		RowCount = TableInfo(_ModelSSC, TAB_INFO_NROWS)
+		Do Case RowCOunt
+			Case 0
+				msg = "Need to get SurfSCID = " + str$(MyID)
+				call loggit(msg)
+			' need to get
+				Select * from mst_SurfSC
+				where SurfSCID = MyID		' this is the guy I don't have
+				into _MyMasterSSC
+
+				do case ucase$(FutOrEX)
+					case "FU"
+				insert into mdl_SurfSC (
+					SurfSCID,
+					NGTO,
+					Slope,
+					FlowLengthFt,
+					dH,
+					Imp_n,
+					Per_n,
+					Imp_sto,
+					Per_sto,
+					Suct,
+					Hydcon,
+					SMDMax,
+					issumped,
+					totalgrossacres,
+					paveacres,
+					SWacresEx,
+					SWAcresExModel,
+					SWAcresExOther,
+					SWfactor,
+					pavetreeacres,
+					UpdateAtts,
+					TraceVisit
+				) select
+					SurfSCID,
+					NGTO_FB,
+					Slope,
+					FlowLengthFt,
+					dH,
+					Imp_n,
+					Per_n,
+					Imp_sto,
+					Per_sto,
+					Suct,
+					Hydcon,
+					SMDMax,
+					issumped_FB,
+					totalgrossacres,
+					paveacres,
+					SWacresEx,
+					SWAcresExModel,
+					SWAcresExOther,
+					SWfactor,
+					pavetreeacres,
+					UpdateAtts,
+					"T"				'  TraceVisit
+				from _MyMasterSSC
+			
+				  	case "EX"  
+				insert into mdl_SurfSC (
+					SurfSCID,
+					NGTO,
+					Slope,
+					FlowLengthFt,
+					dH,
+					Imp_n,
+					Per_n,
+					Imp_sto,
+					Per_sto,
+					Suct,
+					Hydcon,
+					SMDMax,
+					issumped,
+					totalgrossacres,
+					paveacres,
+					SWacresEx,
+					SWAcresExModel,
+					SWAcresExOther,
+					SWfactor,
+					pavetreeacres,
+					UpdateAtts,
+					TraceVisit
+				) select
+					SurfSCID,
+					NGTO_Ex,
+					Slope,
+					FlowLengthFt,
+					dH,
+					Imp_n,
+					Per_n,
+					Imp_sto,
+					Per_sto,
+					Suct,
+					Hydcon,
+					SMDMax,
+					issumped_Ex,
+					totalgrossacres,
+					paveacres,
+					SWacresEx,
+					SWAcresExModel,
+					SWAcresExOther,
+					SWfactor,
+					pavetreeacres,
+					UpdateAtts,
+					"T"				'  TraceVisit
+				from _MyMasterSSC
+			
+			  	end case
+				
+			case 1
+			' good, set flag
+				msg = "Found SurfSCID = " + str$(MyID)
+				call loggit(msg)
+				select * from mdl_SurfSC
+				where SurfSCID = MyID
+				into _UpdateSSC
+				
+				RowNum = _UpdateSSC.ROWID	
+		
+				update _UpdateSSC
+					set TraceVisit = "T"
+					where ROWID = RowNum
+			case else
+			' not good, duplicate
+				gstrCurrentMessage = "Unexpected duplicate SurfSCID"
+				gstrReturnStatus = "ERROR"
+				call loggit(gstrCurrentMessage)
+
+		end case
+
+		Fetch Next from _SurfSCAlts
+	Loop
+
+End Sub
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+'	Construct Zingers from centroid of the surface subcatchment
+'	to the NGTO its connected to.
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+Declare function DoOneZinger() as logical
+
+Dim		mRowCount as integer
+Dim		mLineWidth, mLineStyle, mLineColor as integer
+Dim		NotDone as logical
+
+Sub MakeSurfZingers()
+Dim		SurfSCCount as integer
+Dim		StatMsg as string
+
+	SurfSCCount = TableInfo(mdl_SurfSC, TAB_INFO_NROWS)
+
+	mRowCount = 0
+
+	mLineWidth = 1
+	mLineStyle = 2
+	mLineColor = 0
+
+	delete from mdl_SurfZing
+	commit table mdl_surfZing
+	pack Table mdl_SurfZing Graphic Data
+
+	fetch First from mdl_SurfSC
+
+'	ProgressBar "Creating Surface SC Zingers"
+'		calling DoOneZinger
+'	range SurfSCCount
+	NotDone = TRUE
+	do while NotDone
+		if not DoOneZinger() then
+			commit table mdl_SurfZing
+			gstrReturnStatus = "FAILURE"
+
+			exit sub
+		end if
+			
+		if mRowCount MOD 10 = 0 then
+			StatMsg = "Record " & str$(MRowCount) & " of " & str$(SurfSCCount)
+			StatusBar Message StatMsg
+		end if
+	Loop
+
+	commit table mdl_SurfZing
+	gstrReturnStatus = "SUCCESS"	
+End Sub
+
+
+function DoOneZinger() as logical
+Dim		SCObj as object
+Dim		SurfSCKey as string
+Dim		DaNode as object
+Dim		NewLine as object
+Dim		NGTO as string
+Dim		BegX, BegY, EndX, EndY as float
+Dim		msg as string
+
+	if not EOT(mdl_SurfSC) then
+		mRowCount = mRowCount + 1
+		'ProgressBar = mRowCount
+		SCObj = mdl_SurfSC.obj
+		SurfSCKey = mdl_SurfSC.SurfSCID
+		NGTO = mdl_SurfSC.NGTO
+
+		Select
+			obj
+		from mdl_Nodes
+		where Node = NGTO
+		into _SelNode
+	
+		if TableInfo(_SelNode, TAB_INFO_NROWS) <> 1 then
+			msg = "Node missing or not unique: " & NGTO
+			call loggit(msg)
+			DoOneZinger = false	
+			exit function
+		else
+			DaNode = _SelNode.obj
+			EndX = ObjectGeography(DaNode, OBJ_GEO_POINTX)
+			EndY = ObjectGeography(DaNode, OBJ_GEO_POINTY)
+
+			BegX = CentroidX(SCobj)
+			BegY = CentroidY(SCobj)
+
+		Create Line into Variable NewLine (BegX, BegY) (EndX, EndY)
+			PEN MakePen(mLineWidth, mLineStyle, mLineColor)
+
+		insert into mdl_SurfZing (
+			obj,
+			SurfSCID,
+			Node
+		) values (
+			NewLine,
+			SurfSCKey,
+			NGTO
+		)
+
+		end if
+	else
+		'ProgressBar = -1
+		NotDone = False
+	end if
+
+	fetch Next from mdl_SurfSC
+	DoOneZinger = true				
+End function
