@@ -5,7 +5,7 @@ include "MapBasic.def"
 include "Menu.def"
 include "Icons.def"
 
-include "C:\Development\MapBasic\Common\trunk\Inc\EMGCoordSys.def"
+include "E:\ASM_LEGACY\MapBasic\Common\Inc\EMGCoordSys.def"
 
 declare sub MkStubPt
 declare sub MkZinger

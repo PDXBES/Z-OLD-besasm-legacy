@@ -1,22 +1,17 @@
 'mapbasic fillename = DSCCleaver.mb 
-'
-'
 include "MapBasic.def"
 include "Menu.def"
 include "Icons.def"
-include "C:\Development\MapBasic\Common\trunk\Inc\EMGCoordSys.def"
-'include "C:\Development\MapBasic\Common\trunk\Inc\EMGOpenUtils.def"
-include "C:\Development\MapBasic\Common\trunk\Inc\EMGLogger.def"
-include "C:\Development\MapBasic\Common\trunk\Inc\EMGMTabUtil.def"
-include "C:\Development\MapBasic\Common\trunk\Inc\INIUtils.def"
-
-include "C:\Development\MapBasic\Common\trunk\Inc\EMGGlobal.def"
-include "C:\Development\MapBasic\Common\trunk\Inc\EMGModMake.def"
-
+include "E:\ASM_LEGACY\MapBasic\Common\Inc\EMGCoordSys.def"
+'include "E:\ASM_LEGACY\MapBasic\Common\Inc\EMGOpenUtils.def"
+include "E:\ASM_LEGACY\MapBasic\Common\Inc\EMGLogger.def"
+include "E:\ASM_LEGACY\MapBasic\Common\Inc\EMGMTabUtil.def"
+include "E:\ASM_LEGACY\MapBasic\Common\Inc\INIUtils.def"
+include "E:\ASM_LEGACY\MapBasic\Common\Inc\EMGGlobal.def"
+include "E:\ASM_LEGACY\MapBasic\Common\Inc\EMGModMake.def"
 global gIconFile as String
 global gTempDir as String
 global gmstINIfullpath as String
-
 declare sub main
 declare sub ButtonSelectDivideDSC
 declare sub PointFromDS(ByVal LineObj as object,ByVal fDist as float)
@@ -30,9 +25,7 @@ declare sub SetSanFLOW
 declare sub SetStormFLOW
 declare sub RefreshDSCZingers
 declare sub ProcessBatchFile
-
 declare function VerifyDSCSelection() as logical
-
 global mState as integer
 global sMstDSC as String
 global smst_DSCDivides as String
@@ -43,7 +36,6 @@ global PipReady as Logical
 global alwaysVerifyDiscoClass as logical
 global UserClickedSplitDSCOnce as Logical
 global StayInvisible as logical
-
 define M_PARKPLUS TRUE
 define M_AREA_TOLERANCE 0.04
 define M_AREA_MINDIFF 100
@@ -57,7 +49,7 @@ define M_GETFILE		2
 define M_CHECKED		3
 define M_APPEND			4
 
-'---------------------------------------------------------
+'-------------
 sub Main
 	UserClickedSplitDSCOnce = false
 	StayInvisible = false
@@ -71,7 +63,7 @@ sub Main
 	'call Initialize_DSC_Divides_Tool()
 	mState = M_INIT
 End sub
-'---------------------------------------------------------
+'-----------
 'Starting point for the DSC Toolpad
 sub DSCCleaver
 	
@@ -110,7 +102,7 @@ skipPad:
 	Resume Next
 
 End Sub
-'-------------------------------------------------------------------------------------------------
+'-----------------------
 Sub InitializeCleaverSourceData
 	giconfile = ReadINI(gmstINIfullpath, "Admin", "IconFile", "NONE")
 	gtempdir = ReadINI(gmstINIfullpath, "Admin", "TempDir", "NONE")
@@ -166,7 +158,7 @@ Sub InitializeCleaverSourceData
 	'--These commands will only create new directories.  If the directory already exists,
 	'--no change will be made.
 	'Run Program "command.com /c cd c:\temp"
-	Run Program "command.com /c md "& gtempdir & ""
+	'Run Program "command.com /c md "& gtempdir & ""
 	Print gtempdir
 		
 	Call Loggit("Creating scratch table ModifiedDSC in " & gTempDir)

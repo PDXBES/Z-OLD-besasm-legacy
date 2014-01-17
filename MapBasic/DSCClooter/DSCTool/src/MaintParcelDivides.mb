@@ -1,20 +1,17 @@
 include "MapBasic.def"
 include "Menu.def"
 include "Icons.def"
-include "C:\Development\MapBasic\Common\trunk\Inc\EMGCoordSys.def"
-include "C:\Development\MapBasic\Common\trunk\Inc\EMGOpenUtils.def"
-include "C:\Development\MapBasic\Common\trunk\Inc\EMGLogger.def"
-include "C:\Development\MapBasic\Common\trunk\Inc\EMGMTabUtil.def"
-include "C:\Development\MapBasic\Common\trunk\Inc\INIUtils.def"
-
-include "C:\Development\MapBasic\Common\trunk\Inc\EMGGlobal.def"
-include "C:\Development\MapBasic\Common\trunk\Inc\EMGModMake.def"
-
+include "E:\ASM_LEGACY\MapBasic\Common\Inc\EMGCoordSys.def"
+include "E:\ASM_LEGACY\MapBasic\Common\Inc\EMGOpenUtils.def"
+include "E:\ASM_LEGACY\MapBasic\Common\Inc\EMGLogger.def"
+include "E:\ASM_LEGACY\MapBasic\Common\Inc\EMGMTabUtil.def"
+include "E:\ASM_LEGACY\MapBasic\Common\Inc\INIUtils.def"
+include "E:\ASM_LEGACY\MapBasic\Common\Inc\EMGGlobal.def"
+include "E:\ASM_LEGACY\MapBasic\Common\Inc\EMGModMake.def"
 declare sub menuitem_get_raw_divide_filename
 declare sub menuitem_process_dividefile_for_master
 declare sub menuitem_append_processed_dividefile_to_master
 declare sub menuitem_killDSCDividesMaint
-
 define M_PARKPLUS TRUE
 define M_AREA_TOLERANCE 0.04
 define M_AREA_MINDIFF 100
@@ -22,11 +19,10 @@ define M_DEBUG TRUE
 define M_INI_SECTION "DivideMaint"
 define M_PRINT_INTERVAL 100
 define M_ERROR  -1
-define M_INIT				1
-define M_GETFILE		2
-define M_CHECKED		3
-define M_APPEND			4
-
+define M_INIT		1
+define M_GETFILE	2
+define M_CHECKED	3
+define M_APPEND	4
 declare Sub CreateDivideAppendTable(ByVal LP as string, ByVal Alias as string )
 declare sub CreateICAppendTable_VEG(ByVal LP as string, ByVal Alias as string )
 declare sub CreateICAppendTable_DW(ByVal LP as string, ByVal Alias as string )
@@ -67,7 +63,6 @@ Dim mFailedRecs as integer
 
 Dim sareatol as integer
 
-'------------------------------------------------------------------------------
 sub menuitem_get_raw_divide_filename()
 	dim msg as string
 	dim Attempt as integer
@@ -86,7 +81,7 @@ sub menuitem_get_raw_divide_filename()
   end if
   
 end sub
-'------------------------------------------------------------------------------
+
 sub menuitem_process_dividefile_for_master()
   dim rc as integer
   dim strgdate as string	
@@ -176,8 +171,6 @@ sub menuitem_process_dividefile_for_master()
   			
     print msg
     mState = M_CHECKED
-
-    'exit sub
     call menuitem_append_processed_dividefile_to_master
   else
     msg = msg & "no records failed"
@@ -188,14 +181,13 @@ sub menuitem_process_dividefile_for_master()
     call menuitem_append_processed_dividefile_to_master
     end if
 end sub
-'------------------------------------------------------------------------------
+
 sub menuitem_append_processed_dividefile_to_master
   dim rc as integer
   dim msg as string
   dim attempt as integer
 
   attempt = M_APPEND
-  'msg = getErrorDesc(attempt)
   if msg <> "" then
     NOTE msg
     exit sub
@@ -209,16 +201,12 @@ sub menuitem_append_processed_dividefile_to_master
   else
     mState = M_ERROR
   end if
-	
-  'Close table _RawDividePolys
   Open table mDividePolyPath as ModifiedDSC
-  'delete from ModifiedDSC
-	
   Add Map Layer ModifiedDSC
   Set Map Layer ModifiedDSC Display Global
   Commit Table ModifiedDSC
 end sub
-'------------------------------------------------------------------------------
+
 function Append_Divides_and_ICs() as integer
   dim ThisPID as integer
   dim ThisDSCID as integer
@@ -261,7 +249,6 @@ function Append_Divides_and_ICs() as integer
     end if
 		
     'DELETE DIVIDES	that already exist in mst DSC
-    'Print ThisDSCID
     select * from mst_DSC where ParcelID = ThisPID and (DivideID = newDivideID or DivideID = 0) into _deleteset	
 		
     Insert Into mst_DSCdivides
@@ -403,13 +390,7 @@ function Append_Divides_and_ICs() as integer
   
   Dim iP As Integer
   Dim iD As Integer
-  'Fetch first from DeleteFromMstDSC
-  'do while not EOT(DeleteFromMstDSC)
-    'iP = DeleteFromMstDSC.ParcelID
-    'iD = DeleteFromMstDSC.DivideID
-		
-    'if Allmasters = true then
-      'DELETE VEG ICs
+
       select * from DiscoVeg,DeleteFromMstDSC where (DiscoVeg.ParcelID = DeleteFromMstDSC.ParcelID) and (DiscoVeg.divideid <>0) and (DiscoVeg.divideid = DeleteFromMstDSC.divideid) into _deleteset
       if tableinfo(_deleteset,TAB_INFO_NROWS) > 0 then
         Update _deleteset Set SqFt = -1
@@ -599,56 +580,11 @@ function Append_Divides_and_ICs() as integer
 	Fetch first from DSCChangesHelper
 
 	do while not (EOT(DSCChangesHelper))
-		'iParcelID = DSCChanges.ParcelID
-		'iSource = DSCChanges.Source
-		'iDSCID = iParcelID * 100 + Source
-		'iDivideID = DSCChanges.DivideID
-		'This query may select two objects, one for sanitary and one for storm.
-		'Select * From mst_dsc_zingers where DSCID = iDSCID into TheZingers
-		'iDSCID = iParcelID * 100 + iDivideID
 
 		Call MkZingerFromMstDscId(DSCChangesHelper.DSCID)
-
-		'I need to have an object from mst_DSC selected
-		'Select * From mst_dsc where DSCID = iDSCID
-		'Fetch first from TheZingers
-		'do while not EOT(TheZingers)
-			'now I have the divide that I am trying to make a zinger for
-			'I have a list of the zingers coming from the original parcel (or divide)
-			'I should get all of the info for creating the new zinger,
-			'then if the dSCID of the new zinger will be the same as the DSCID of the
-			'old zinger AND the LinkType are the same for the new zinger and the old zinger,
-			'then delete the old zinger and any associated zinger with a divideID of 0
-			'.  Then insert the new zinger regardless
-			'of whether there was an matching old zinger.
-			
-			'The info required to make the new zinger is
-			'DSCID, LinkID, LinkType, Endpoint
-			'iLinkID = TheZingers.LinkID
-			'sLinkType = TheZingers.LinkType
-			'arrowx2 = ObjectNodeX(TheZingers.obj, 1, 2)
-			'arrowy2 = ObjectNodeY(TheZingers.obj, 1, 2)
-			'Now I need to know the centroid of the DSC object
-			
-			
-			'if ToMLinkStorm <> 0 then
-			'	sFlowTO = "toSTORM"
-			'end if
-			'if ToMLinkSan <> 0 then
-			'	sFlowTO = "toSAN"
-			'end if
-			
-			'Fetch next from TheZingers
-		'loop
 		
 		Fetch next from DSCChangesHelper
 	loop
-
-	'pack table mst_DSC graphic data
-	'drop index mst_DSC (ParcelID)
-  'drop index mst_DSC (DivideID)
-  'Create Index On mst_DSC (ParcelID)
-  'Create Index On mst_DSC (DivideID)
 
 	'record that we are about to save the "divides to append" table
 	Call Loggit("saving " & gtempdir & "\C_" & pathtotablename$(mDividePolyPath)) 
@@ -657,8 +593,6 @@ function Append_Divides_and_ICs() as integer
 	Commit Table DSCChanges As  gtempdir & "\C_" & pathtotablename$(mDividePolyPath)  TYPE NATIVE Charset "WindowsLatin1"
 	drop table DSCChanges
 	
-	'I'm gonna ignore this case for now
-	'if Allmasters = true then
 		if TableInfo("DSCChanges_VEG",TAB_INFO_NROWS) > 0 then
 			Insert Into DiscoVeg
 			(
@@ -691,12 +625,6 @@ function Append_Divides_and_ICs() as integer
 			
 			Call Loggit("saving  discoveg")
 			commit table DiscoVeg
-			'pack table discoveg data
-			
-			'drop index DiscoVeg (ParcelID)
-	    'drop index DiscoVeg (DivideID)
-	    'Create Index On DiscoVeg (ParcelID)
-	    'Create Index On DiscoVeg (DivideID)
 	
 		Call Loggit("saving " & gtempdir & "\C_" & pathtotablename$(mDividePolyPath) & "_VEG" ) 
 			
@@ -736,18 +664,10 @@ function Append_Divides_and_ICs() as integer
 			Call Loggit("saving  discoveg")
 			
 			commit table DRYWELL
-			'pack table Drywell data
-		'	
-			'drop index Drywell(ParcelID)
-	    'drop index Drywell (DivideID)
-	    'Create Index On Drywell (ParcelID)
-	    'Create Index On Drywell (DivideID)
 	    
 	    Call Loggit("saving " & gtempdir & "\C_" & pathtotablename$(mDividePolyPath) & "_DW" ) 
 			Commit Table "DSCChanges_DW"	As  gtempdir & "\C_" &  pathtotablename$(mDividePolyPath) & "_DW" TYPE NATIVE Charset "WindowsLatin1"
-			
 		end if
-	'end if
 	
 	drop table "DSCChanges_DW"
 	close table DeleteFromMstDSC
@@ -760,22 +680,11 @@ function Append_Divides_and_ICs() as integer
 	
 end function
 
-'------------------------------------------------------------------------------
 sub menuitem_killDSCDividesMaint()
   close all interactive
   end program
 end sub   
-'------------------------------------------------------------------------------
-'
-'	Initialize_Target_Divides
-' PRE:
-'
-' POST:
-'	 	The selection set called _UpdateDivideTargets is open 
-'		The targets have a parcelID
-'		Existing building and parking areas are set
-'	
-'
+
 function Initialize_Target_Divides() as integer
   dim nrecs as integer
 
@@ -783,10 +692,6 @@ function Initialize_Target_Divides() as integer
   set window message position (2,13) units "cm" width 4 front 
   Open Window Message
 
-  '-----------------------------------------------------------------------------
-  ' Select any divide that is within any parcel that contains a divide where updateatts="T"
-  ' If a single divide is selected within a parcel all divides within will be updated
-  '-----------------------------------------------------------------------------
   
   Print "selecting divdes"
   Select * from DSCChanges into _UpdateDivideTargets
@@ -892,21 +797,6 @@ end function
 '	 	The selection set called _UpdateDivideTargets is open
 '		The targets have a parcelID
 '		Existing building and parking areas are set
-'
-' POST:
-'		All records in _UpdateDivideTargets are in one of two catagories
-'		Success
-'			- divide areaFT and rfAreaFtEX and pkAreaFtEX adds up to parcel fields
-'			- the QC flag is 000
-'		Failure
-' 		- NOT (divide areaFT and rfAreaFtEX and pkAreaFtEX adds up to parcel fields)
-'			- the QC flag is NOT 000
-'
-'
-' QC Flag states
-'
-'    Note that X indicates no checks
-'
 '	Total  Roof  Parking  WHAT IT IS
 '   P      E      E			  PARCEL area is less than existing PARCEL roof and parking (divides not checked)
 '   P      F      F			  PARCEL area is less than future PARCEL roof and parking (divides not checked)
@@ -1483,6 +1373,7 @@ function Finalize_Checked_Divides() as integer
                newDivideID = ThisDID
              END IF
            
+
              Insert Into DeleteFromMstDSC SELECT * FROM _ThisParcel
            ELSE
              'Get the maximum divideID for this divideset
@@ -1900,7 +1791,7 @@ Function CreateDivideIC(byval ICtarget as string, byval strIC as string) as inte
 	CreateDivideIC = RETURNSUCCESS
 
 End Function
-'------------------------------------------------------------------------------
+
 function getMItabpath() as string
   dim myfile as string
 
@@ -1918,7 +1809,7 @@ function getMItabpath() as string
 	getMItabpath = myfile
 
 end function
-'------------------------------------------------------------------------------
+
 Sub CreateDivideAppendTable(ByVal LP as string, ByVal Alias as string )
   Dim		Msg as string
 
@@ -2006,7 +1897,7 @@ Sub CreateDivideAppendTable(ByVal LP as string, ByVal Alias as string )
 	Call Loggit (" Divide Append table create... " & LP)
 	
 end sub
-'------------------------------------------------------------------------------
+
 Sub CreateICAppendTable_VEG(ByVal LP as string, ByVal Alias as string )
   Dim		Msg as string
   
@@ -2033,7 +1924,7 @@ Sub CreateICAppendTable_VEG(ByVal LP as string, ByVal Alias as string )
 	Call Loggit (" Divide Append table create... " & LP)
 
 end sub
-'------------------------------------------------------------------------------
+
 Sub CreateICAppendTable_DW(ByVal LP as string, ByVal Alias as string )
   Dim		Msg as string
 
