@@ -150,26 +150,15 @@ namespace SystemsAnalysis.Modeling
     /// <param name="mdlPipXPRow">A row from the PipXP table</param>
     public PipXP(DataAccess.ModelDataSet.MdlPipXPRow mdlPipXPRow)
     {
-      _MstLinkID = Convert.ToInt32(mdlPipXPRow.MLINKID);
-      _USNode = mdlPipXPRow.USNODE;
-      _DSNode = mdlPipXPRow.DSNODE;
+      _MstLinkID = Convert.ToInt32(mdlPipXPRow.MLinkID);
+      _USNode = mdlPipXPRow.USNode;
+      _DSNode = mdlPipXPRow.DSNode;
       _CompKey = Convert.ToInt32(mdlPipXPRow.COMPKEY);
-      _USX = mdlPipXPRow.xa;
-      _USY = mdlPipXPRow.ya;
-      _DSX = mdlPipXPRow.xb;
-      _DSY = mdlPipXPRow.yb;
-      _Azimuth = mdlPipXPRow.Deg2N;
 
       _NumWaterCrossings = mdlPipXPRow.xWtr;
       _SmallestWaterCrossingDiameterInches = mdlPipXPRow.xWMinD;
       _LargestWaterCrossingDiameterInches = mdlPipXPRow.xWMaxD;
       _HasWaterParallel = mdlPipXPRow.pWtr >= 1;
-      _ParallelToWaterLenWithin2ft = mdlPipXPRow.pWtr2;
-      _ParallelToWaterLenWithin4ft = mdlPipXPRow.pWtr4;
-      _ParallelToWaterLenWithin6ft = mdlPipXPRow.pWtr6;
-      _ParallelToWaterLenWithin8ft = mdlPipXPRow.pWtr8;
-      _ParallelToWaterLenWithin10ft = mdlPipXPRow.pWtr10;
-      _ParallelToWaterLenWithin12ft = mdlPipXPRow.pWtr12;
       _LargestWaterParallelDiameterInches = mdlPipXPRow.pWtrMaxD;
       _DistToWaterParallelFeet = mdlPipXPRow.pFt2Wtr;
 
@@ -186,11 +175,6 @@ namespace SystemsAnalysis.Modeling
       _SmallestSewerCrossingDiameterInches = mdlPipXPRow.xSwrMinD;
       _LargestSewerCrossingDiameterInches = mdlPipXPRow.xSwrMaxD;
       _HasSewerParallel = mdlPipXPRow.pSewer >= 1;
-      _ParallelToSewerLenWithin2ft = mdlPipXPRow.pSwr2;
-      _ParallelToSewerLenWithin4ft = mdlPipXPRow.pSwr4;
-      _ParallelToSewerLenWithin6ft = mdlPipXPRow.pSwr6;
-      _ParallelToSewerLenWithin8ft = mdlPipXPRow.pSwr8;
-      _ParallelToSewerLenWithin10ft = mdlPipXPRow.pSwr10;
       _LargestSewerParallelDiameterInches = mdlPipXPRow.pSwrMaxD;
       _DistToSewerParallelFeet = mdlPipXPRow.pFt2Swr;
 
@@ -248,10 +232,7 @@ namespace SystemsAnalysis.Modeling
       _NumRailroadCrossings = mdlPipXPRow.xRail;
       _HasRailroadParallel = mdlPipXPRow.pRail >= 1;
       _DistToRailroadParallelFeet = mdlPipXPRow.pFt2Rail;
-      _ParallelToRailLenWithin10ft = mdlPipXPRow.pRail10;
-      _ParallelToRailLenWithin20ft = mdlPipXPRow.pRail20;
-      _ParallelToRailLenWithin30ft = mdlPipXPRow.pRail30;
-
+      
       SortedList<double, double> parallelRailLookup = new SortedList<double, double>();
       parallelRailLookup.Add(10, _ParallelToRailLenWithin10ft);
       parallelRailLookup.Add(20, _ParallelToRailLenWithin20ft);
@@ -261,9 +242,6 @@ namespace SystemsAnalysis.Modeling
       _NumLightRailCrossings = mdlPipXPRow.xLRT;
       _HasLightRailParallel = mdlPipXPRow.pLRT >= 1;
       _DistToLightRailParallelFeet = mdlPipXPRow.pFt2LRT;
-      _ParallelToLightRailLenWithin10ft = mdlPipXPRow.pLRT10;
-      _ParallelToLightRailLenWithin20ft = mdlPipXPRow.pLRT20;
-      _ParallelToLightRailLenWithin30ft = mdlPipXPRow.pLRT30;
 
       SortedList<double, double> parallelLRTLookup = new SortedList<double, double>();
       parallelLRTLookup.Add(10, _ParallelToLightRailLenWithin10ft);
@@ -287,8 +265,6 @@ namespace SystemsAnalysis.Modeling
       _IsNearContaminationSite = mdlPipXPRow.xEcsi == 1;
       _DistToNearestEcsiFeet = mdlPipXPRow.xFt2Ecsi;
       _LengthInEcsiFeet = mdlPipXPRow.xEcsiLen;
-      _IsNearLUST = mdlPipXPRow.xLUST == 1;
-      _DistToNearestLUSTFeet = mdlPipXPRow.xFt2LUST;
       _VolHazardousConflictCuYd = mdlPipXPRow.xEcsiVol;
 
       _IsNearSchool = mdlPipXPRow.xSchl == 1;
