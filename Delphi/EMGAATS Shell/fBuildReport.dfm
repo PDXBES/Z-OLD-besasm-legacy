@@ -5,7 +5,7 @@ inherited frmBuildReport: TfrmBuildReport
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   ExplicitWidth = 1006
-  ExplicitHeight = 480
+  ExplicitHeight = 486
   PixelsPerInch = 96
   TextHeight = 13
   object pgcBuildReport: TRzPageControl [0]
@@ -13,19 +13,14 @@ inherited frmBuildReport: TfrmBuildReport
     Top = 41
     Width = 998
     Height = 363
-    ActivePage = tabSummary
+    ActivePage = tabHydroQualityControl
     Align = alClient
     BoldCurrentTab = True
-    TabIndex = 0
+    TabIndex = 2
     TabOrder = 0
-    ExplicitWidth = 712
     FixedDimension = 19
     object tabSummary: TRzTabSheet
       Caption = 'Summary'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 708
-      ExplicitHeight = 0
       object treeErrors: TcxTreeList
         AlignWithMargins = True
         Left = 3
@@ -46,7 +41,6 @@ inherited frmBuildReport: TfrmBuildReport
         OptionsView.ShowRoot = False
         TabOrder = 0
         OnCustomDrawCell = treeErrorsCustomDrawCell
-        ExplicitWidth = 702
         Data = {
           02000400560100000F00000044617461436F6E74726F6C6C6572310300000012
           000000546378537472696E6756616C7565547970651200000054637853747269
@@ -100,7 +94,6 @@ inherited frmBuildReport: TfrmBuildReport
         Align = alTop
         BorderOuter = fsNone
         TabOrder = 1
-        ExplicitWidth = 708
         DesignSize = (
           994
           37)
@@ -120,7 +113,6 @@ inherited frmBuildReport: TfrmBuildReport
           BorderOuter = fsNone
           Anchors = [akLeft, akTop, akRight]
           TabOrder = 0
-          ExplicitWidth = 665
           object btnShowErrors: TRzBitBtn
             AlignWithMargins = True
             Left = 3
@@ -224,10 +216,6 @@ inherited frmBuildReport: TfrmBuildReport
     end
     object tabMap: TRzTabSheet
       Caption = 'Map'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 708
-      ExplicitHeight = 0
       object RzPanel2: TRzPanel
         Left = 0
         Top = 31
@@ -506,16 +494,17 @@ inherited frmBuildReport: TfrmBuildReport
         BorderOuter = fsNone
         TabOrder = 1
         OnResize = pnlMapResize
-        ExplicitWidth = 659
         object RzLabel2: TRzLabel
           Left = 0
           Top = 0
-          Width = 84
-          Height = 13
+          Width = 945
+          Height = 309
           Align = alClient
           Alignment = taCenter
           Caption = 'Map not available'
           Layout = tlCenter
+          ExplicitWidth = 84
+          ExplicitHeight = 13
         end
       end
       object RzPanel3: TRzPanel
@@ -526,7 +515,6 @@ inherited frmBuildReport: TfrmBuildReport
         Align = alTop
         BorderOuter = fsFlat
         TabOrder = 2
-        ExplicitWidth = 708
         DesignSize = (
           994
           31)
@@ -566,25 +554,22 @@ inherited frmBuildReport: TfrmBuildReport
           HotTrack = True
           TabOrder = 1
           OnClick = btnOpenMapClick
-          ExplicitLeft = 600
         end
       end
     end
     object tabHydroQualityControl: TRzTabSheet
       Caption = 'Hydro QC'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 708
-      ExplicitHeight = 0
       object RzLabel1: TRzLabel
         Left = 0
         Top = 0
-        Width = 248
-        Height = 13
+        Width = 994
+        Height = 340
         Align = alClient
         Alignment = taCenter
         Caption = 'Hydrologic quality control spreadsheet not available'
         Layout = tlCenter
+        ExplicitWidth = 248
+        ExplicitHeight = 13
       end
       object ssQualityControl: TcxSpreadSheet
         Left = 0
@@ -599,15 +584,10 @@ inherited frmBuildReport: TfrmBuildReport
         HeaderFont.Name = 'Tahoma'
         HeaderFont.Style = []
         PainterType = ptOfficeXPStyle
-        ExplicitWidth = 708
       end
     end
     object tabModelDirectory: TRzTabSheet
       Caption = 'Model Directory'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 708
-      ExplicitHeight = 0
       object RzSizePanel1: TRzSizePanel
         AlignWithMargins = True
         Left = 3
@@ -646,10 +626,6 @@ inherited frmBuildReport: TfrmBuildReport
     end
     object tabRunoff: TRzTabSheet
       Caption = 'Runoff'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 708
-      ExplicitHeight = 0
       object RzPanel6: TRzPanel
         Left = 0
         Top = 0
@@ -658,7 +634,6 @@ inherited frmBuildReport: TfrmBuildReport
         Align = alTop
         BorderOuter = fsFlat
         TabOrder = 0
-        ExplicitWidth = 708
         object RzLabel5: TRzLabel
           Left = 8
           Top = 12
@@ -734,10 +709,6 @@ inherited frmBuildReport: TfrmBuildReport
     object tabXPX: TRzTabSheet
       TabEnabled = False
       Caption = 'XPX'
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 708
-      ExplicitHeight = 0
     end
   end
   object RzPanel1: TRzPanel [1]
@@ -748,7 +719,6 @@ inherited frmBuildReport: TfrmBuildReport
     Align = alBottom
     BorderOuter = fsNone
     TabOrder = 1
-    ExplicitWidth = 712
     DesignSize = (
       998
       48)
@@ -761,13 +731,12 @@ inherited frmBuildReport: TfrmBuildReport
       HotTrack = True
       TabOrder = 0
       OnClick = btnReturnToBuildClick
-      ExplicitLeft = 565
     end
   end
   inherited RzPanel4: TRzPanel
     Width = 998
     TabOrder = 2
-    ExplicitWidth = 712
+    ExplicitWidth = 998
     inherited RzBackground1: TRzBackground
       Width = 998
       Image.Data = {
@@ -2073,7 +2042,8 @@ inherited frmBuildReport: TfrmBuildReport
       ExplicitWidth = 712
     end
     inherited lblLabel: TRzLabel
-      Width = 148
+      Width = 998
+      Height = 41
       Caption = 'Build Report'
       ExplicitWidth = 148
     end
