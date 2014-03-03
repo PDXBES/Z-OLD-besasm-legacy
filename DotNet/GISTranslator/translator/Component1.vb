@@ -384,7 +384,7 @@ ErrHandler:
   End Function
 
   Public Function translateModel(ByVal strModelRoot As String, _
-  Optional ByVal strLogFile As String = "c:\GISTranslator\log_10.1.txt", _
+  Optional ByVal strLogFile As String = "c:\GISTranslator\log_10.2.txt", _
   Optional ByVal blQuiet As Boolean = True) As Integer
 
     translateModel = 1
@@ -601,7 +601,7 @@ ErrHandler:
 
 
   Public Function translateModelResults(ByVal strModelRoot As String, _
-  Optional ByVal strLogFile As String = "c:\GISTranslator\log_10.1.txt", _
+  Optional ByVal strLogFile As String = "c:\GISTranslator\log_10.2.txt", _
   Optional ByVal blQuiet As Boolean = True) As Integer
 
     translateModelResults = 1
@@ -651,7 +651,7 @@ ErrHandler:
 
   End Function
 
-  Public Function translateFromAccessTable(ByVal sTranslationDB As String, ByVal sTable As String, ByVal sOutputDB As String, Optional ByVal sLogFile As String = "c:\GISTranslator\log_10.1.txt")
+  Public Function translateFromAccessTable(ByVal sTranslationDB As String, ByVal sTable As String, ByVal sOutputDB As String, Optional ByVal sLogFile As String = "c:\GISTranslator\log_10.2.txt")
     Dim rs As ADODB.Recordset = New ADODB.Recordset
     Dim conn As ADODB.Connection = New ADODB.Connection
     Dim result As Integer
