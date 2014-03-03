@@ -25,7 +25,7 @@ Public Class Form1
       aoInitialize.Shutdown()
 
     Catch ex As Exception
-      MessageBox.Show("Unable to initialize ArcGIS license. Do you have ArcGIS 10.1 installed and licensed?")
+      MessageBox.Show("Unable to initialize ArcGIS license. Do you have ArcGIS 10.2 installed and licensed?")
     End Try        
 
   End Sub
@@ -380,7 +380,7 @@ Public Class Form1
     Me.txtLogFile.Name = "txtLogFile"
     Me.txtLogFile.Size = New System.Drawing.Size(336, 20)
     Me.txtLogFile.TabIndex = 16
-    Me.txtLogFile.Text = "c:\GISTranslator\log_10.1.txt"
+    Me.txtLogFile.Text = "c:\GISTranslator\log_10.2.txt"
     '
     'cmdBrowseLogFile
     '
@@ -446,7 +446,7 @@ Public Class Form1
     Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
     Me.Menu = Me.MainMenu1
     Me.Name = "Form1"
-    Me.Text = "GIS Translator - ArcGIS v. 10.1"
+    Me.Text = "GIS Translator - ArcGIS v. 10.2"
     Me.Panel1.ResumeLayout(False)
     Me.Panel1.PerformLayout()
     Me.grpTranslationType.ResumeLayout(False)
@@ -743,7 +743,7 @@ End Class
 Public Class translationLog
   'Inherits dotnetutils.LogFile
 
-  Const strDefaultLogPath = "c:\GISTranslator\log_10.1.txt"
+  Const strDefaultLogPath = "c:\GISTranslator\log_10.2.txt"
   Dim fi As System.IO.FileInfo
   Dim strMyLogPath As String
   Dim intFileID As Integer
