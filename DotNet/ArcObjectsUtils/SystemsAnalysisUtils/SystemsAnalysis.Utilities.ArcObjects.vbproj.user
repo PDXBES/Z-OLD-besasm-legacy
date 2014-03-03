@@ -4,7 +4,7 @@
     <LastOpenVersion>7.10.3077</LastOpenVersion>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ReferencePath>C:\Program Files (x86)\ArcGIS\DeveloperKit10.1\DotNet\;C:\Users\jburns_adm\Documents\Visual Studio 2010\Projects\besasm-legacy\DotNet\GISTranslator\translatorGUI\ref\;W:\Model_Programs\DotNet\DotNetUtils\bin\</ReferencePath>
+    <ReferencePath>C:\Program Files (x86)\ArcGIS\DeveloperKit10.2\DotNet\;C:\Users\jburns_adm\Documents\Visual Studio 2010\Projects\besasm-legacy\DotNet\GISTranslator\translatorGUI\ref\;W:\Model_Programs\DotNet\DotNetUtils\bin\</ReferencePath>
     <CopyProjectDestinationFolder>
     </CopyProjectDestinationFolder>
     <CopyProjectUncPath>
