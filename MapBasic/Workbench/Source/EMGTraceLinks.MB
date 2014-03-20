@@ -1,0 +1,1090 @@
+'
+'	============ EMGAATS Workbench =================
+'
+'	Copyright (c) 2001, 2002, 2003  
+'	City of Portland, OR Bureau of Environmental Services 
+' and David J Collins Engineering 
+'	and CH2M HILL, Inc. (you guys always want all the credit)
+'
+'Collins 26Mar04
+' Fixed short file in mdl_trace table
+'
+'Collins 15Jan04
+' Make all special links 5 feet long or 1/2 the to link distance, which ever is LEAST
+' use the length from the field unless it is zero for the link DS of the special link
+'
+'
+' 22Sep03 Collins 
+'    fix special link distance when between 10 and 30 feet in DoDaLink Function
+'         IF NewNodeDistance < 10.0 then changed to  IF NewNodeDistance <= 30.0 then
+'    get the coordinates of the special node using  GIS function instead of the coordinates in the mst_nodes table
+'
+'	25Aug03	Collins
+'   UNDO 22Aug03 change
+'
+'	22Aug03	Collins
+' redo the way we get special link names
+' OLD  -> NewNOdeKey = format$(mNewNodeCount,"000") & "SPL"
+' NEW  -> NewNOdeKey = Mid$(dSNodeKey,4,3) & Mid$(dSNodeKey,1,3) 
+'
+'	12Mar03	Cautley
+'		set TraceVisit flag = "T" on initial trace and during handling
+'		of special links
+'		Add DataSource flag too
+'
+'	Module that handles the First Steps of building a model,
+'	that is, building mdl_links_ac and mdl_nodes_ac
+'
+include "MapBasic.def"
+include "..\inc\EMGTraceLinks.def"
+include "..\..\common\inc\EMGMTabUtil.def"
+include "..\..\common\inc\EMGGlobal.def"
+include "..\..\common\inc\INIUtils.def"
+include "..\..\common\inc\EMGLineGeo.def"
+include "..\..\common\inc\EMGCoordsys.def"
+include "..\..\common\inc\EMGLogger.def"
+include "..\..\common\inc\EMGModMake.def"
+include "..\..\common\inc\EMGOpenUtils.def"
+include "..\inc\EMGInit.def"
+
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+'	Module level variables and function declarations
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+declare Function DoOneLink() as integer
+Declare Sub DoDaLink(ByVal LinkIDIN as integer)
+
+Dim		mRecCount as integer
+Dim		mNewNodeCount as integer
+
+Dim			LINK_SNAP_TOLERANCE	as float
+DEFINE		PIOVERTWO 		1.570795
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+Sub		DoAllTraceLinks()
+Dim		ProjFolderPath as string
+	'call 	SetGlobals()
+	Call	SetLogOptions(TRUE, TRUE, TRUE, TRUE)
+	ProjFolderPath = APIBrowseFolders("Select an EMGAATS Project Folder")
+	'ProjFolderPath = FileOpenDlg( "" ,  "Model.ini" ,  "*.INI" ,  "Browse for EMGAATS Project Folder" ) 
+
+	'gmdlRootFolder = PathToDirectory$(ProjFolderPath)
+	gmdlRootFolder = FixFolderSlash(ProjFolderPath)
+	print "Selected directory '" & gmdlRootFolder & "'"
+
+	Call	CreateModelTables()
+	'call OpenTables()
+	Call	OpenTables()
+	Call	BuildMDL_Links()
+
+End Sub
+Sub		ReBuildTraceLinks()
+Dim		ProjFolderPath as string
+	Call	SetLogOptions(TRUE, TRUE, TRUE, FALSE)
+	ProjFolderPath = APIBrowseFolders("Select an EMGAATS Project Folder")
+	gmdlRootFolder = FixFolderSlash(ProjFolderPath)
+	print "Selected directory '" & gmdlRootFolder & "'"
+
+	Call	OpenTables()
+	Call	BuildMDL_Links()
+End Sub
+
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+'
+'	BuildMDL_Links()
+'
+'	Will build a model links table based upon the master table and a
+'	trace text file.
+'
+'	ASSERT:
+'		Model (and master) tables are all open.
+'
+'	INPUT:
+'
+'	OUTPUT:
+'
+'	AT END:
+'
+
+Sub BuildMDL_Links()
+Dim 	OKToGO as logical
+Dim		NumLinks as integer
+Dim		NumTrace as integer
+Dim		TempPath as string
+Dim 	NumRecs as integer
+Dim		ModelINIPath as string
+Dim		FullPath as string
+Dim		AliasName as string
+Dim		TableName as string
+Dim		PathName as string
+Dim		Gentle as logical
+Dim		lResult as logical
+Dim 	TraceTablePath as String
+Dim		TraceTableTempPath as String
+Dim		msg as string
+
+	' Check that all required data is present and ready to go
+
+	Call SetLogOptions(TRUE, TRUE, TRUE, TRUE)
+
+	OKTOGO = TRUE
+	if len(gmdlRootFolder) = 0 then
+		OKToGO = FALSE
+		msg = "gmdlRootFolder not specified."
+		gstrCurrentMessage = msg
+		call loggit(msg)
+		gstrReturnStatus = "ERROR"
+		exit sub
+	end if
+	if not OKToGO then
+		call Loggit( "FAILURE:  At least one required global not set.")
+		gstrReturnStatus = "FAILURE"
+		exit sub
+	end if
+
+	call SetStdCoordSys()
+
+	gmdlRootFolder = FixFolderSlash(gmdlRootFolder)
+	' ***** need to read snap tolerance from INI file.
+	LINK_SNAP_TOLERANCE = ReadINI(ModelINIPath, "TraceLinks","SnapTolerance", "20.0")
+	msg = "Snap Tolerance set to: " & str$(LINK_SNAP_TOLERANCE)
+	call Loggit(msg)
+	
+	' All is in order, proceed...
+
+	TraceTablePath = gmdlRootFolder & "links\mdl_Trace"
+	TraceTableTempPath = TraceTablePath & "_Temp"
+	
+	ModelINIPath = gmdlRootFolder & "model.ini"
+
+	FullPath = gmdlRootFolder & PathtoFileName$(ReadINI(ModelINIPath, "treeverse","tracefile", "found.not"))		' this is the text file
+	gmdlTracePath = FullPath
+
+	'Commit Table mdl_links
+	delete from mdl_links
+	Commit Table mdl_links
+	Pack Table mdl_links Graphic Data
+
+	'Commit Table mdl_nodes
+	delete from mdl_nodes
+	Commit Table mdl_nodes
+	Pack Table mdl_nodes Graphic Data
+	
+	'Commit Table mdl_linkRes
+'	delete from mdl_LinkRes
+'	Commit Table mdl_linkRes
+'	Pack Table mdl_LinkRes Graphic Data
+	
+	'Commit Table mdl_NodeRes
+'	delete from mdl_NodeRes
+'	Commit Table mdl_NodeRes
+'	Pack Table mdl_NodeRes Graphic Data
+	
+	'Commit Table mdl_Speclinks
+	delete from mdl_SpecLinks
+	Commit Table mdl_Speclinks
+	Pack Table mdl_Speclinks Graphic Data
+	
+	'Commit Table mdl_SpeclinkData
+	delete from mdl_SpecLinkData
+	Commit Table mdl_SpeclinkData
+	Pack Table mdl_SpeclinkData Graphic Data
+	
+	'Commit Table mdl_SpecNodeData
+'	delete from mdl_SpecNodeData
+'	Commit Table mdl_SpecNodeData
+'	Pack Table mdl_SpecNodeData Graphic Data
+
+	msg = "Trace File path: " & FullPath	
+	call Loggit(msg)
+
+	Register table gmdlTracePath
+		type "ASCII"
+		Delimiter ","
+		Titles
+		into TraceTableTempPath
+
+	msg = gmdlTracePath & " Registered into " & TraceTableTempPath
+	call Loggit(msg)
+
+	
+	Open table TraceTableTempPath as mdl_TraceTemp
+
+	msg = TraceTableTempPath & " opened as " & mdl_TraceTemp
+	call loggit(msg) 
+
+	Create Table mdl_Trace
+	(
+	MLinkID	integer,
+	USNode		char(6),
+	DSNode		char(6),
+	LinkReach	char(255),
+	ReachElement	integer
+	)
+	File TraceTablePath
+	Type Native
+
+	' This is done, instead of just using the registered table, to ensure that everything
+	' that needs to be a long integer is long.  Sometimes, when you just register, you get
+	' a short integer.
+
+	Insert Into mdl_Trace
+	Select * from mdl_TraceTemp
+
+	drop table mdl_TraceTemp
+	commit table mdl_Trace
+
+	Gentle = FALSE
+	AliasName = "mdl_Trace"
+	TableName = PathToTableName$(FullPath)
+	PathName = PathToDirectory$(FullPath)
+	lResult = OpenTable(PathName,  TableName, AliasName, Gentle)	
+	if lResult then
+		print "Table " & FullPath & " open."
+	else
+		print "Table " & FullPath & " not found."
+	end if
+
+	call Loggit("Joining trace to master links...")
+
+	Create Index On  mst_Links ( MLinkID )
+	Create Index On  mdl_Trace ( MLinkID )
+
+	Select 
+		mst_Links.CompKey, 
+		mst_Links.MLinkID, 
+		mst_Links.USNode, 
+		mst_Links.DSNode, 
+		mst_Links.PipeShape,
+		mst_Links.LinkType,
+		mst_Links.PipeFlowType, 
+		mst_Links.Length, 
+		mst_Links.DiamWidth, 
+		mst_Links.Height, 
+		mst_Links.Material, 
+			mst_Links.Upsdpth,
+			mst_Links.USIE,
+			mst_Links.DSIE,
+			mst_Links.AsBuilt,
+			mst_Links.InstDate,
+			mst_Links.FromX,
+			mst_Links.FromY,
+			mst_Links.ToX,
+			mst_Links.ToY,
+			mst_Links.Roughness,
+		mst_Links.DataFlagSynth,
+		mst_Links.DataQual,
+		mst_Links.Qdes,
+		mdl_trace.LinkReach, 
+		mdl_trace.ReachElement 
+	from mst_Links, mdl_Trace 
+	where mst_Links.MLinkID = mdl_Trace.MLinkID 
+	into _NewLinks
+
+	TempPath = gmdlRootFolder & "Links\_NewLinks.tab"
+	
+
+	NumLinks = TableInfo(_NewLinks, TAB_INFO_NROWS)
+	NumTrace = TableInfo(mdl_Trace, TAB_INFO_NROWS)
+	
+	msg = "There are " & str$(NumTrace) & " traced links and " & str$(NumLinks) & " in the join."
+	call loggit(msg)
+	mRecCount = 0
+
+	' Erase all existing links...	
+	delete from mdl_Links
+
+	Do While True
+		NumRecs = DoOneLink()
+		if NumRecs < 1 then 
+			exit do
+		end if
+		if (NumRecs MOD 20) = 1 then
+
+			statusbar message "Processed " & str$(NumRecs) & " of " & str$(NumLinks) & " records."
+		end if
+	loop
+
+	call GetNodes()
+	'call	DiversionMagic()		' should really be "special link" magic, but too lazy to change name.
+
+	Call CommitModel()
+	Close Table mdl_Trace
+
+	'close table _NewLinks
+	create index on mdl_links(LinkID)
+	create index on mdl_links(MLinkID)
+	
+	Call Loggit( "SUCCESS:  Links and Nodes have been extracted.")
+
+	gstrReturnStatus = "SUCCESS"
+
+End Sub
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+'		Called from Progress bar... move one link to model plus anything else you need to do..
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+Function DoOneLink as integer
+Dim		cObj as object
+DIm		cMLinkID as integer
+Dim		cCompKey as integer
+Dim		cUSNode as string
+Dim		cDSNode as string
+Dim		cShape as string
+Dim		cLinkType as string
+Dim		cPipeFlowType as string
+Dim		cLength as float
+Dim		cDiameter as float
+Dim		cHeight as float
+Dim		cMaterial as string
+Dim		cUpsdepth as float
+Dim		cUSIE as float
+Dim		cDSIE as float
+Dim		cAsBuilt as string
+Dim 	cInstDate as date
+Dim		cFromX as float
+Dim 	cToX as float
+Dim		cFromY as float
+Dim		cToY as float
+Dim		cRoughness as float
+Dim		cLinkreach as string
+Dim		cReachElement as integer
+Dim		cDataFlagSynth as integer
+Dim		cDataQual as string
+Dim   cQdes as float
+
+	if EOT(_NewLinks) then
+		DoOneLink = -1
+		exit sub
+	end if
+
+	mRecCount = mRecCount + 1
+	cObj = _NewLinks.obj
+	cMLinkID = _newLinks.MlinkID
+	cCompKey = _newLinks.CompKey
+	cUSNode = _newLinks.USNode
+	cDSNode = _newLinks.DSNode
+	cShape = _newLinks.PipeShape
+	cLinkType = _newLinks.LinkType
+	' we want to re-compute this field ***
+	Do Case cLinkType
+		Case "IC", "C"
+			cPipeFlowType = "C"
+		Case "ID", "D", "PN", "TC", "NC", "DC", "DT", "SW", "ND", "NV", "NX"
+			cPipeFlowType = "D"
+		Case "IS", "S", "SI", "TR"
+			cPipeFlowType = "S"
+		Case "PS", "PD", "PC", "FD", "PI"
+			cPipeFlowType = "F"
+		Case "V", "F", "X", "CC", "E", "PE"
+			cPipeFlowType = "I"
+		case else
+			cPipeFlowType = "U"		
+	end case
+
+	cLength = _newLinks.Length
+	cDiameter = _newLinks.DiamWidth
+	cHeight = _newLinks.Height
+	cMaterial = _newLinks.Material
+	cUpsdepth = _newLinks.upsdpth
+	cUSIE = _newLinks.USIE
+	cDSIE = _newLinks.DSIE
+	cAsBuilt = _newLinks.AsBuilt
+	cInstDate = _newLinks.InstDate
+	cFromX = _newLinks.FromX
+	cFromY = _newLinks.FromY
+	cToX = _newLinks.ToX
+	cToY = _newLinks.ToY
+	cRoughness = _newLinks.Roughness
+	cLinkreach = _newLinks.LinkReach
+	cReachElement = _newLinks.ReachElement
+	cDataFlagSynth = _newLinks.DataFlagSynth
+	cDataQual = _newLinks.DataQual
+	cQdes = _newLinks.Qdes
+
+	Insert Into mdl_Links (
+		obj,
+		LinkID,
+		LinkType,
+		PipeFlowType,
+		MLinkID,
+		CompKey,
+		USNode,
+		DSNode,
+		Length,
+		DiamWidth,
+		Height,
+		PipeShape,
+		Material,
+		Upsdpth,
+		USIE,
+		DSIE,
+		AsBuilt,
+		InstDate,
+		FromX,
+		FromY,
+		ToX,
+		ToY,
+		Roughness,
+		LinkReach,
+		ReachElement,
+		DataQual,
+		Qdes,
+		IsSpecLink,
+		TraceVisit,
+		DataSource,
+		IsActive
+	) Values (
+		cObj,
+		mRecCount,
+		cLinktype,
+		cPipeFlowType,
+		cMLinkID,
+		cCompKey,
+		cUSNode,
+		cDSNode,
+		cLength,
+		cDiameter,
+		cHeight,
+		cShape,
+		cMaterial,
+		cUpsdepth,
+		cUSIE,
+		cDSIE,
+		cAsBuilt,
+		cInstDate,
+		cFromX,
+		cFromY,
+		cToX,
+		cToY,
+		cRoughness,
+		cLinkReach,
+		cReachElement,
+		cDataQual,
+		cQdes,
+		"F",
+		"T",
+		"M",			' we came from master
+		"T"
+	)
+
+	DoOneLink = mRecCount
+	Fetch Next from _NewLinks
+End Function
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+'
+'	For testing only.... and hardcoded for Cautley's machine
+'		normally done by your integrated mapping partner.
+'
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+Sub  SetGlobals
+Dim EMGRoot as string
+
+	EMGRoot = "C:\projects\BES Emgaats\"
+    gmdlRootFolder = EMGRoot & "Workbench\ProjectData\TestModel\"
+
+
+End Sub
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+'	 Get Relevant Nodes from master, based on the mdl_links_ac table.
+'		Note:  one could use the trace table to get the node list, I'm not doing that.
+'		in other words, what's in the links, rules.
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+Sub GetNodes
+Dim		lResult as logical
+Dim		NodesFolder, NodesPath as string
+Dim		msg as string
+
+Call	SetLogOptions(TRUE, TRUE, TRUE, TRUE)
+'Note "Hello from GetNOdes..."
+
+
+'Collins 2003/03/04 attempt to path names in this function
+gmdlRootFolder = FixFolderSlash(gmdlRootFolder)
+NodesFolder = gmdlRootFolder & "nodes\"
+
+select USNode
+from mdl_links
+into _Nodes
+Group by USNode
+
+NodesPath = NodesFolder & "_Nodes.tab"
+msg = "nodes path: " & NodesPath
+call loggit(msg)
+
+Commit Table _Nodes
+as NodesPath
+
+Close table _Nodes
+
+Open Table NodesPath as _Nodes
+
+Call Loggit ( "Got unique US Nodes")
+
+Select DSNode
+from mdl_links
+into _DSNodes
+Group by DSNode
+
+Call Loggit( "Got unique DS Nodes")
+
+Insert Into _Nodes
+Select * from _DSNodes
+
+Call Loggit ("Combined Nodes")
+
+close table _DSNOdes
+
+Select col1
+from _Nodes
+into _UniqueNodes
+Group By col1
+
+
+Call Loggit( "Got unique Nodes")
+
+NodesPath = NodesFolder & "_UniqueNodes.tab"
+Call Loggit( "NodesPath: " & Nodespath)
+
+commit table _UniqueNodes as nodespath
+Close table _UniqueNodes
+
+drop table _Nodes
+
+Open Table NodesPath as _UniqueNodes
+
+Select
+	Node,
+	XCoord,
+	YCoord,
+	NodeType,
+	GrndElev,
+	HasSpecNode,
+	HasSpecLink,
+	GageID
+From mst_Nodes, _UniqueNodes
+where mst_nodes.Node = _UniqueNodes.USNode
+into _mdl_Nodes
+
+call Loggit("Making model nodes table...")
+
+Insert Into mdl_nodes (
+	Node,
+	XCoord,
+	YCoord,
+	NodeType,
+	GrndElev,
+	HasSpecNode,
+	HasSpecLink,
+	GageID,
+	TraceVisit,
+	IsActive
+)
+Select 
+	Node,
+	XCoord,
+	YCoord,
+	NodeType,
+	GrndElev,
+	HasSpecNode,
+	HasSpecLink,
+	GageID,
+	"T",
+	"T"
+from _mdl_nodes
+
+drop table _mdl_nodes
+
+
+' **** 
+'	get rid of any temporary stuff
+drop table _UniqueNodes
+
+
+'	At this point, you want all the SpecLinks copied to the model.
+'	TF:  Needs to respect the timeframe table ...
+'		"AB" will never be traced, its already abandoned
+'		EX --> EX, CE 	(stuff that exists now)
+'		FU --> EX, FU, FC (stuff that will exist in the future)
+'		As always one has to duplicate the SELECT statement because
+'		mapbasic apparantly doesnt support using a variable in an IN (foo) clause.
+'
+
+	Do Case gstrTimeFrame
+		case "EX"
+			Select
+				mdl_nodes.Node,
+				mdl_Links.LinkID,
+				ToLinkNDX,
+				SpecLinkType,
+				MSpecLinkID,
+				"T" "IsActive",
+				SLID,
+				SLNode
+			From mdl_nodes, mst_SpecLinks, mdl_Links
+			where HasSpecLink = "T"
+			  and mst_SpecLinks.TimeFrame in ("EX", "CE")
+			  and mdl_nodes.node = mst_SpecLinks.node
+			  and mdl_Links.MLinkID = mst_SpecLinks.ToMLinkID
+			group by SLID
+			into _SpecLinks
+		case "FU"
+			Select
+				mdl_nodes.Node,
+				mdl_Links.LinkID,
+				ToLinkNDX,
+				SpecLinkType,
+				MSpecLinkID,
+				"T" "IsActive",
+				SLID,
+				SLNode
+			From mdl_nodes, mst_SpecLinks, mdl_Links
+			where HasSpecLink = "T"
+			  and mst_SpecLinks.TimeFrame in ("EX", "FC", "FU")
+			  and mdl_nodes.node = mst_SpecLinks.node
+			  and mdl_Links.MLinkID = mst_SpecLinks.ToMLinkID
+			group by SLID
+			into _SpecLinks
+
+	End Case
+'	Now, the linkID in mst_SpecLinks is relative to the master database, 
+'	while what we want is relative to the model database.  So we have to dereference MLINKID to get it...
+
+Insert into mdl_SpecLinks (
+	Node,
+	ToLinkID,
+	ToLinkNDX,
+	SpecLinkType,
+	MSpecLinkID,
+	IsActive,
+	SLID,
+	SLNode
+	)
+	Select
+		Node,
+		Col2,
+		ToLinkNDX,
+		SpecLinkType,
+		MSpecLinkID,
+		IsActive,
+		SLID,
+		SLNode
+	From _SpecLinks
+
+Commit Table mdl_SpecLinks
+
+Close table _SpecLinks
+
+End Sub
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+'	DiversionMagic  (should really be special links magic)
+'
+'	For each special link involved in the model, generate additional links/nodes
+'	and alter the existing "real" links that will result in the selected modeling
+'	approach.  Diversions are modeled using equivalent links inserted into the model.
+'	Note:  there is much data related to model deck generation that is not copied, this
+'			is up to the Delphi / MS Access code.
+'
+'		ASSERT:
+'			the tables mdl_nodes, mdl_links, mdl_diversions are open.
+'
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+Sub DiversionMagic()
+Dim 	OKToGO as logical
+Dim		TotRecs, NumRecs as integer
+Dim		Msg as string
+Dim		LinkType as string
+Dim		SpecLinkID as integer
+
+	OKToGo = TRUE
+
+	if len(gmdlRootFolder) = 0 then
+		OKToGO = FALSE
+		gstrCurrentMessage = "gmdlRootFolder not specified."
+		gstrReturnStatus = "ERROR"
+		call loggit (gstrCurrentMessage)
+	end if
+
+	if not OKToGO then
+		Call Loggit( "FAILURE:  At least one required global not set.")
+		gstrReturnStatus = "FAILURE"
+		exit sub
+	end if
+	msg = "Processing Special Links..."
+	call Loggit(msg)
+
+	Select
+			Node, ToLinkID
+		from mdl_SpecLinks
+		into _SpecLinks
+		Group By Node, ToLinkID				' only want do to each Node, ToLinkID once even if there are more
+
+	TotRecs = TableInfo(_SpecLinks, TAB_INFO_NROWS)
+	NumRecs = 0
+	mNewNodeCount = 0
+
+	fetch first from _SpecLinks
+
+	Do While not EOT(_SpecLinks)
+		NumRecs = NumRecs + 1
+		mNewNodeCount = mNewNodeCount + 1
+		msg = "----------------------------------------------------"
+		call loggit(msg)
+		msg = "Diversion " & str$(NumRecs) & " of " & str$(TotRecs) & " Node: " & _SpecLinks.Node
+		call Loggit(msg)
+		'StatusBar Message "Diversion " & str$(NumRecs) & " of " & str$(TotRecs)
+		SpecLinkID = _SpecLinks.ToLinkID
+		call DoDaLink(SpecLinkID )
+
+		fetch next from _SpecLinks
+	Loop
+
+	Close Table _SpecLinks
+
+End Sub
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+'
+'
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+Sub DoDaLink(ByVal LinkIDIn as integer)
+
+Dim		OFlowLink as integer
+Dim		UFlowLink as integer
+Dim		Msg as string
+Dim		LookForLink as logical
+Dim		LinkBegX, LinkBegY, LinkEndX, LinkEndY as float
+Dim		LinkObj as object
+Dim		DiversionX, DiversionY as float
+Dim		LinkDistance as float
+Dim		DivDistance as float
+Dim		NewNodeDistance as float
+Dim		DeltaX, DeltaY as float
+Dim		NewNodeX, NewNodeY as float
+Dim		lResult as logical
+Dim		SignX, SignY as float
+Dim		Theta as float
+Dim		NewNode as object
+
+Dim		NewNodeKey as string
+Dim		AvgGrndElev as float
+Dim 	USNodeKey as string
+Dim		DSNodeKey as string
+Dim		USGrndElev as float
+Dim		DSGrndElev as float
+Dim		NewLine as object
+Dim 	MyRowID as integer
+Dim		NewLength as float
+Dim		NewLength2 as float
+Dim 	ModelLength as float
+Dim 	ModPen as Pen
+Dim 	NLBegX, NLBegY, NLEndX, NLEndY as float
+Dim		OLBegX, OLBegY, OLEndX, OLEndY as float
+Dim		NumLinks as integer
+Dim		OrigMLinkID as integer
+Dim		CurLinkType as string
+
+Call	SetLogOptions(TRUE, TRUE, TRUE, TRUE)
+
+Select * from mdl_Links
+where LinkID = LinkIDIn
+into _DivLink
+
+NumLInks = TableInfo(_DivLink, TAB_INFO_NROWS)
+
+Msg = "Looking for linkID = " & str$(LinkIDIn) & " found " & NumLinks & " of them."
+call loggit(msg)
+
+'	Remember what this guy's MLinkID is, you'll need it later.
+OrigMLinkID = _DivLink.MLinkID
+
+'	Be sure of the link's spatial location
+LInkObj = _DivLink.obj
+lResult = CalcEnds(LinkObj, LinkBegX, LinkBegY, LinkEndX, LinkEndY)
+
+
+'	Read the US and DS nodes
+'	Ground elevation:  proportional average of the two ends?
+
+USNodeKey = _DivLink.USNode
+
+call SetStdCoordSys()
+
+' Sep 22 2003 Collins
+'NEW WAY
+Select Node, CentroidX(obj) "XCoord", CentroidY(obj) "YCoord", GrndElev from mdl_nodes 
+where Node = USNodeKey 
+into _USNode
+
+'OLD WAY
+'Select Node, XCoord, YCoord, GrndElev from mdl_nodes
+'where Node = USNodeKey
+'into _USNode
+
+msg = "US Node: " & USNodeKey & "  " & _USNode.Node & " Coords: " & str$(_USNode.XCoord) & ", " & str$(_USNode.YCoord)
+call loggit(msg)
+
+DiversionX = _USNode.XCoord
+DiversionY = _USNode.YCoord
+USGrndElev = _USNode.GrndElev
+
+If TableInfo(_USNOde, TAB_INFO_NROWS) <> 1 then
+	msg = "ERR: Wrong number of US Nodes! " & str$(TableInfo(_USNode, TAB_INFO_NROWS))
+	call Loggit(msg)
+	exit sub
+end if
+
+DSNodeKey = _DivLink.DSNode
+
+
+
+' Sep 22 2003 Collins
+'NEW WAY
+Select Node, CentroidX(obj) "XCoord", CentroidY(obj) "YCoord", GrndElev from mdl_nodes 
+where Node = DSNodeKey 
+into _DSNode
+
+'OLD WAY
+'Select Node, XCoord, YCoord, GrndElev from mdl_nodes
+'where Node = DSNodeKey
+'into _DSNode
+
+msg = "DS Node: " & DSNodeKey & "  " & _DSNode.Node
+call loggit(msg)
+
+If TableInfo(_DSNOde, TAB_INFO_NROWS) <> 1 then
+	msg = "ERR: Wrong number of DS Nodes! " & str$(TableInfo(_DSNode, TAB_INFO_NROWS))
+	call Loggit(msg)
+	exit sub
+end if
+
+DSGrndElev = _DSNode.GrndElev
+
+' do a weighted average
+AvgGrndElev = ((10.0 * USGrndElev) + DSGrndElev ) / 11.0
+
+NewNOdeKey = format$(mNewNodeCount,"000") & "SPL"
+'the following commented code does not work so don't try it.
+'NewNOdeKey = Mid$(dSNodeKey,4,3) & Mid$(dSNodeKey,1,3) 
+
+Msg = "Avg Gnd Elevation: " & str$(AvgGrndElev)
+call Loggit(msg)
+msg = "New node key: " & NewNodeKey
+call Loggit (msg)
+
+
+Msg = "File Diversion Coordinates: " & str$(DiversionX) & ", " & str$(DiversionY)
+call loggit (msg)
+
+
+
+Msg = "Link Beginning Coordinates: " & str$(LinkBegX) & ", " & str$(LinkBegY)
+call loggit(msg)
+Msg = "Link End Coordinates: " & str$(LinkEndX) & ", " & str$(LinkEndY)
+call loggit(msg)
+
+LinkDistance = Distance(DiversionX, DiversionY, LinkEndX, LinkEndY, "Ft")
+DivDistance = Distance(DiversionX, DiversionY, LinkBegX, LinkBegY, "Ft")
+Msg = "Head end distance: " & str$(DivDistance)
+call Loggit(msg)
+
+
+' Jan 15 2004 Collins 
+' Make all special links 5 feet long or 1/2 the to link distance, which ever is LEAST
+NewNodeDistance = 5.0 
+
+IF NewNodeDistance * 2.0 > LinkDistance then
+	NewNodeDistance = LinkDistance / 2.0
+	msg = "Small distance: " & str$(NewNodeDistance)
+	call loggit(msg)
+end if
+Msg = "Link Distance: " & str$(LinkDistance) & " New Node Distance: " & str$(NewNodeDistance)
+call loggit(msg)
+
+If DivDistance > LINK_SNAP_TOLERANCE then
+	Msg = "Node " & DiversionNode & " not snapped to Overflow link " & OFlowlinkIn
+	call loggit(msg)
+	exit sub
+end if
+
+'
+'	compute the angle of the line from the diversion to the next node
+
+DeltaX = LinkEndX - DiversionX
+DeltaY = LinkEndY - DiversionY
+msg = "Div: " & str$(DiversionX) & ", " & str$(DiversionY) & " End " & str$(LinkEndX) & ", " & str$(LinkEndY)
+call loggit(msg)
+
+Msg = "DeltaX: " & str$(DeltaX) & " DeltaY: " & str$(DeltaY)
+call loggit(msg)
+
+If DeltaX > 0 then
+	SignY = 1.0
+	SignX = 1.0
+else
+	SignY = -1.0
+	SignX = -1.0
+end if
+
+If abs(DeltaX) < .0001 then
+	msg = "Delta X too small to compute angle"
+	call loggit(msg)
+	If DeltaY > 0 then
+		Theta = 4.712385		' 270 degrees
+	Else
+		Theta = 1.570795		' 90 degrees
+	End IF
+else
+	Theta = atn(DeltaY/DeltaX)
+
+end if
+
+Msg = "Theta: " & str$(Theta)
+
+call loggit (msg)
+
+'
+'	Compute the coordinates of the new (inserted) node
+
+NewNodeY = NewNodeDistance * sin(Theta) * signY
+NewNodeX = NewNodeDistance * cos(Theta) * signX
+Msg = "New Node Offset: " & str$(NewNodeX) & ", " & Str$(NewNodeY)
+Call loggit(msg)
+
+NewNodeX = DiversionX +NewNodeX
+NewNodeY = DiversionY + NewNodeY
+'NewNodeX = LinkBegX + NewNodeX
+'NewNodeY = LinkBegY + NewNodeY
+
+Msg = "New Node X,Y: " & str$(NewNodeX) & ", " & str$(NewNodeY) & " (from " & str$(DiversionX) & ", " & str$(DiversionY) & ")"
+call loggit(msg)
+
+Msg = "Moving link..."
+call Loggit(msg)
+lResult = MoveStart(LinkObj, NewNodeX, NewNodeY)
+'lResult = MoveEnd(LinkObj, NewNodeX, NewNodeY)
+
+ModPen = MakePen(2.5, 2, RGB(128,128,128))
+Alter Object LinkObj Info OBJ_INFO_PEN, ModPen
+
+
+msg = "the link to bang is: " & str$(LinkIDIn)
+call Loggit(msg)
+
+Select 
+	RowID, 
+	LinkID, 
+	USNode,
+	LinkType, 
+	Length, 
+	FromX, 
+	FromY, 
+	ToX, 
+	ToY
+from mdl_Links
+where LinkID = LinkIDIN			' ** could be MLinkID if this doesn't work...
+into _LinkUpdater
+
+ModelLength = _LinkUpdater.Length
+NewLength = _LinkUpdater.Length
+NewLength2 = ObjectLen(_LinkUpdater.obj, "Ft")
+msg = "Old link lengths:  " & str$(NewLength) & " (field) " & str$(newLength2) & " (gis)"
+call loggit(msg)
+
+
+MyRowID = _LinkUpdater.RowID
+CurLinktype = _LinkUpdater.LinkType
+NewLength = ObjectLen(LinkObj, "ft")
+
+msg = "Revised Length (gis): " & str$(NewLength) & " start at " & str$(NewNodeX) & ", " & str$(NewNodeY)
+call loggit(msg)
+
+lResult= CalcEnds(LinkObj, OLBegX, OLBegY, OLEndX, OLEndY)
+
+update _LinkUpdater
+	set 
+		obj = LinkObj,
+		USNode = NewNodeKey,
+		Length = ModelLength,
+		FromX = OLBegX,
+		FromY = OLBegY,
+		ToX = OLEndX,
+		ToY = OLEndY
+
+where RowID = MyRowID
+
+Create Point into Variable NewNode (NewNodeX, NewNodeY)
+
+Insert into mdl_Nodes (
+	obj,
+	Node,
+	XCoord,
+	YCoord,
+	NodeType,
+	GrndElev,
+	TraceVisit
+	) 
+Values (
+	NewNode,
+	NewNodeKey,
+	NewNodeX,
+	NewNodeY,
+	"SPL",
+	AvgGrndElev,
+	"T"
+	)
+
+msg = "Inserted node " & NewNodeKey
+call Loggit(msg)
+
+
+'	Create pseudo-link and insert into mdl_links
+Create Pline 
+	Into Variable NewLine 
+		2
+		 ( DiversionX,  DiversionY)  ( NewNodeX,  NewNodeY)
+	Pen MakePen(2.5, 2, BLUE) 
+msg = "New Link from " & USNodeKey & " to " & NewNodeKey
+call Loggit(msg)
+msg = "New Link ID " & str$(mRecCount) & " from " & str$(DiversionX) & ", " & str$(DiversionY) & " to " & str$(NewNodeX) & ", " & str$(NewNodeY)
+call Loggit(msg)
+NewLength2 = ObjectLen(NewLine, "ft")
+msg = "Actual length of new line: " & str$(Newlength2)
+call loggit(msg)
+
+lResult = CalcEnds(NewLine, NLBegX, NLBegY, NLEndX, NLEndY)
+
+mRecCount = mRecCount + 1
+Insert into Mdl_Links (
+	obj,
+	LinkID,
+	MLinkID,
+	CompKey,
+	LinkType,
+	USNode,
+	DSNode,
+	FromX,
+	FromY,
+	ToX,
+	ToY,
+	IsSpecLink,
+	TraceVisit,
+	DataSource
+	) 
+Values (
+	NewLine,
+	mRecCount,
+	OrigMLinkID,
+	-1,
+	CurLinkType,
+	USNodeKey,
+	NewNodeKey,
+	NLBegX,
+	NLBegY,
+	NLEndX,
+
+	NLEndY,
+	"T",				' it is a special link
+	"T",				' trace visit = yes
+	"S"				' We be a special link	
+	)
+End Sub

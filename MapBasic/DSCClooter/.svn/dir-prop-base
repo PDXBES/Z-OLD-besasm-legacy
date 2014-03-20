@@ -1,0 +1,9 @@
+K 13
+svn:externals
+V 392
+Lib/Common file:///W:/Model_Programs/SubversionRepositories/ModelPrograms/MapBasic/Common/trunk
+Lib/LinkTool file:///W:/Model_Programs/SubversionRepositories/ModelPrograms/MapBasic/LinkTool/trunk
+Lib/NodeTool file:///W:/Model_Programs/SubversionRepositories/ModelPrograms/MapBasic/NodeTool
+Lib/Workbench file:///W:/Model_Programs/SubversionRepositories/ModelPrograms/MapBasic/Workbench/trunk
+
+END

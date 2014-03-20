@@ -1,0 +1,1387 @@
+Attribute VB_Name = "ModelBuilder"
+Option Compare Database
+Option Explicit
+Public Function DumpAllBranches()
+
+    Dim dbs As Database, dumpset As Recordset, x As Integer
+    
+    Set dbs = CurrentDb
+    Set dumpset = dbs.OpenRecordset("DumpBranchesBatch")
+    
+    If dumpset.RecordCount <> 0 Then
+    
+        dumpset.MoveFirst
+        
+        Do While Not dumpset.EOF
+            If dumpset("Process?") Then
+                x = dump_branches(dumpset("PipeSource"), "modelviewsubbasin", "modelviewsubbasinPF", dumpset("destination"))
+           
+                If x <> 1 Then
+                    msgbox "bad return from dump_branches"
+                End If
+            End If
+               
+            dumpset.MoveNext
+            
+        Loop
+    End If
+    
+End Function
+
+
+'1/23/2001 Collins created
+'used for variables when construct query strings on the fly
+'this function returns the appropritate text string depending on the data type of field "ftype"
+'
+Function constquery(ftype, fvalue) As String
+Select Case ftype
+    Case dbBigInt, dbInteger, dbCurrency, dbFloat, dbLong, dbNumeric, dbDecimal, dbSingle, dbDouble
+        constquery = CStr(fvalue)
+    
+    Case dbDate 'Date / Time
+    Case dbTime 'Time
+    Case dbTimeStamp 'Time Stamp
+        constquery = "#" & CStr(fvalue) & "#"
+    
+    Case dbText 'Text
+        constquery = Chr(34) & CStr(fvalue) & Chr(34)
+        
+    Case Else
+        msgbox "illegal type to constquery" & Chr(13) & "error checking should be added prior to call to prevent this"
+        Exit Function
+    End Select
+    'Case dbMemo 'Memo
+    'Case dbBinary 'Binary
+    'Case dbBoolean   'Boolean
+    'Case dbByte  'Byte
+    'Case dbChar 'Char
+    'Case dbGUID 'Guid
+    'Case dbLongBinary '   Long Binary (OLE Object)
+    'Case dbVarBinary 'VarBinary
+    
+End Function
+
+Public Function TraverseAllRoots(fromname, toname, pkeyname, stable, dtable As String, roottable, rnname, stoptable)
+    Dim rootset As Recordset, RC As Integer
+    
+    Set rootset = CurrentDb.OpenRecordset(roottable)
+    
+    If Not rootset.EOF Then
+        rootset.MoveFirst
+    
+        RC = TraverseTree(fromname, toname, pkeyname, stable, dtable, rootset(rnname), stoptable, True)
+    End If
+    If Not rootset.EOF Then
+        rootset.MoveNext
+    End If
+    While Not rootset.EOF
+        RC = TraverseTree(fromname, toname, pkeyname, stable, dtable, rootset(rnname), stoptable, False)
+        rootset.MoveNext
+    Wend
+    
+    rootset.Close
+
+End Function
+
+
+
+'03/01/2001 Collins, added flag to allow either overwrite or append
+'01/23/2001 Collins Added error checking to ensure stable is in the database
+'fromname: field name of the upstream manhole
+'toname: field name of the downstream manhole
+'stable: source table for pipes
+'dtable: destination table for tree
+'rootnode: downstream manhole of the tree to be traversed
+'RETURNS: branch number if successful, 0 if error
+Public Function TraverseTree(fromname, toname, pkeyname, stable, dtable As String, rootnode As String, stoptable, OverWrite As Boolean) As Integer
+    Dim dbs As Database, y, lngerr, intloop, done  As Long, sqlstring As String
+    Dim btdf, stack As TableDef, bfld, sfld As Field, stackname As String
+    Dim branch, element, testint, nflowsplit As Integer
+    Dim stackset, destset, tempset, ckset, inqset, stopset As Recordset
+    Dim c_link, c_dsnode As String
+    Dim foundfldcount, foundtabcount, debugmode As Integer
+    Dim i As Long
+    Dim fromtype, totype, pktype As Variant
+    Dim dexist As Boolean       'does the destination table exist
+    
+    
+    stackname = "stack"
+    Set dbs = CurrentDb
+    y = 0
+    debugmode = 0
+    
+    
+    
+    foundtabcount = 0
+    For i = 0 To dbs.TableDefs.Count - 1
+        If UCase$(dbs.TableDefs(i).Name) = UCase$(stable) Then
+            foundtabcount = 1
+        End If
+    Next i
+    
+    If foundtabcount = 0 Then
+        msgbox stable & " not found", vbExclamation
+        TraverseTree = 0
+        Exit Function
+    End If
+        
+    
+    DoCmd.SetWarnings False
+    Application.Echo True, "destination --> " & dtable
+    
+    
+    ' if not overwrite then the table must exist
+    If OverWrite = True Then
+        Err.Clear
+        On Error Resume Next
+        DoCmd.DeleteObject acTable, dtable
+        Select Case Err.Number
+        Case Is = 0, 3011
+            'ok
+        Case Else
+            msgbox CStr(Err.Number) & ": " & Err.Description & Str$(13) & "Destination Table" ' Print error to Debug window.
+            TraverseTree = 0
+            Exit Function
+        End Select
+        On Error GoTo 0
+    End If
+    
+    'Assert: Overwrite = FALSE OR dtable does not exist in this data base
+    
+    Err.Clear
+    On Error Resume Next
+    DoCmd.DeleteObject acTable, stackname
+    Select Case Err.Number
+    Case Is = 0, 3011
+        'ok
+    Case Else
+        msgbox CStr(Err.Number) & ": " & Err.Description & Str$(13) & "Stack Table" ' Print error to Debug window.
+        TraverseTree = 0
+        Exit Function
+    End Select
+    On Error GoTo 0
+    
+    'Assert: stackname table does not exist in this data base
+    
+    
+    'determine if destination table exists.
+    dexist = False
+    For i = 1 To CurrentDb.TableDefs.Count - 1
+        If CurrentDb.TableDefs(i).Name = dtable Then
+            dexist = True
+            Exit For
+        End If
+    Next i
+    
+    'create destination table if it does not exist
+    If Not dexist Then
+        Set btdf = dbs.CreateTableDef(dtable)
+        Set bfld = btdf.CreateField("branch", dbInteger)
+        btdf.Fields.Append bfld
+        Set bfld = btdf.CreateField("element", dbInteger)
+        btdf.Fields.Append bfld
+    End If
+    
+    Set stack = dbs.CreateTableDef(stackname)
+    
+           
+    intloop = 0
+    foundfldcount = 0
+    
+    ' establish and error check the data types in the source table
+    ' clone the required fields in the source table
+    For intloop = 0 To dbs.TableDefs(stable).Fields.Count - 1
+        
+        'create the stack field definitions
+        Select Case dbs.TableDefs(stable).Fields(intloop).Name
+            Case fromname
+                 fromtype = dbs.TableDefs(stable).Fields(intloop).Type
+            Case toname
+                 totype = dbs.TableDefs(stable).Fields(intloop).Type
+            Case pkeyname
+                 pktype = dbs.TableDefs(stable).Fields(intloop).Type
+        End Select
+        
+            
+        
+       If dbs.TableDefs(stable).Fields(intloop).Name = fromname Or dbs.TableDefs(stable).Fields(intloop).Name = toname Or dbs.TableDefs(stable).Fields(intloop).Name = pkeyname Then
+           ' make sure the field has the correct type
+            
+            Select Case dbs.TableDefs(stable).Fields(intloop).Type
+            Case dbBigInt, dbInteger, dbCurrency, dbFloat, dbLong, dbNumeric, dbDecimal, dbSingle, dbDouble, dbText
+            'OK
+            Case Else
+                msgbox "illegal field type in stable, field=" & dbs.TableDefs(stable).Fields(intloop).Name & ", type=" & CStr(dbs.TableDefs(stable).Fields(intloop).Type)
+                Exit Function
+            End Select
+               
+            If Not dexist Then
+                Set bfld = btdf.CreateField(dbs.TableDefs(stable).Fields(intloop).Name, dbs.TableDefs(stable).Fields(intloop).Type, dbs.TableDefs(stable).Fields(intloop).Size)
+                btdf.Fields.Append bfld
+            End If
+           
+            Set sfld = stack.CreateField(dbs.TableDefs(stable).Fields(intloop).Name, dbs.TableDefs(stable).Fields(intloop).Type, dbs.TableDefs(stable).Fields(intloop).Size)
+            stack.Fields.Append sfld
+           
+            foundfldcount = foundfldcount + 1
+            'MsgBox dbs.TableDefs(stable).Fields(intloop).Name
+       End If
+    Next
+    
+    If foundfldcount <> 3 Then
+        msgbox "Missing fields in source table" & Chr(13) & "Verify field Names", vbCritical, "TraverseTree"
+        TraverseTree = 0
+        Exit Function
+    End If
+    
+    If Not dexist Then
+        dbs.TableDefs.Append btdf
+    End If
+    
+    dbs.TableDefs.Append stack
+    
+    'Assert: the stack and destination table exist
+          
+    sqlstring = "INSERT INTO " & stackname & " ( " & pkeyname & "," & fromname & "," & toname & ")"
+    sqlstring = sqlstring & " SELECT " & pkeyname & "," & fromname & "," & toname
+    sqlstring = sqlstring & " from " & stable
+    sqlstring = sqlstring & " WHERE (" & toname & " = " & constquery(totype, rootnode) & ")"
+    DoCmd.RunSQL sqlstring
+     
+    'CAVEATS:
+    '   1) nothing goes on the stack that has been visited previously
+    nflowsplit = 0
+    branch = 0
+    element = 0
+    Set stackset = dbs.OpenRecordset(stackname)
+    Set destset = dbs.OpenRecordset(dtable)
+    Do While Not stackset.EOF
+        branch = branch + 1
+        element = 1
+    
+        stackset.MoveFirst
+        c_link = stackset(pkeyname)
+        
+        sqlstring = "select * from " & stoptable & " where (" & pkeyname & " = " & constquery(pktype, c_link) & ")"
+        Set stopset = dbs.OpenRecordset(sqlstring)
+        
+        
+        If stopset.RecordCount = 0 Then
+        
+            sqlstring = "select * from " & dtable & " where (" & pkeyname & " = " & constquery(pktype, c_link) & ")"
+            Set ckset = dbs.OpenRecordset(sqlstring)
+            If ckset.RecordCount = 0 Then
+                Application.Echo True, "POP " & CStr(stackset(pkeyname)) & " -- branch " & CStr(branch)
+                'the top of stack is a link which is element 1 in a branch
+                'put element 1 into destination table
+                destset.AddNew
+                destset("branch") = branch
+                destset("element") = element
+                destset(pkeyname) = stackset(pkeyname)
+                destset(fromname) = stackset(fromname)
+                destset(toname) = stackset(toname)
+                destset.Update
+                c_dsnode = stackset(fromname)
+                done = 0
+            Else
+                'the link has already been visited
+                'the link is already in the destinataion table so stop
+                done = 1
+            End If
+        Else
+            'msgbox "STOPPED AT PIPE " & CStr(c_link)
+        
+            DoCmd.Echo True, "STOPPED AT PIPE " & CStr(c_link)
+            'don't go down that reach
+            done = 1
+        End If
+        
+        stackset.Delete
+        'put the next 2 to n elements into the destination table
+        Do While done = 0
+            sqlstring = "SELECT " & stable & "." & pkeyname & "," & stable & "." & fromname & "," & stable & "." & toname
+            sqlstring = sqlstring & " FROM " & stable & " INNER JOIN " & dtable & " ON " & stable & "." & toname & " = " & dtable & "." & fromname
+            'sqlstring = sqlstring & " WHERE (( " & dtable & "." & pkeyname & " Is Null) AND (" & stable & "." & toname & " = " & Chr$(34) & c_link & Chr$(34) & "))"
+            sqlstring = sqlstring & " WHERE ((" & stable & "." & toname & " = " & constquery(totype, c_dsnode) & "))"
+            
+            
+            Set tempset = dbs.OpenRecordset(sqlstring)
+            If tempset.RecordCount <> 0 Then
+                tempset.MoveLast
+            End If
+            Select Case tempset.RecordCount
+            Case 0
+                If debugmode = 1 Then
+                    msgbox CStr(c_dsnode) & " 0"
+                End If
+                done = 1
+            Case 1
+                If debugmode = 1 Then
+                    msgbox CStr(c_dsnode) & " 1"
+                End If
+                
+                sqlstring = "select * from " & stoptable & " where (" & pkeyname & " = " & constquery(pktype, tempset(pkeyname)) & ")"
+                Set stopset = dbs.OpenRecordset(sqlstring)
+                If stopset.RecordCount = 0 Then
+        
+                    'put all links in this branch into destination table (dtable)
+                    'this assumes no flow splits
+                    'need to check if current record of stable has two DS records
+                    sqlstring = "select * from " & dtable & " where (" & pkeyname & " = " & constquery(pktype, tempset(pkeyname)) & ")"
+                    Set ckset = dbs.OpenRecordset(sqlstring)
+                    If ckset.RecordCount = 0 Then
+                        element = element + 1
+                        destset.AddNew
+                        destset("branch") = branch
+                        destset("element") = element
+                        destset(pkeyname) = tempset(pkeyname)
+                        destset(fromname) = tempset(fromname)
+                        destset(toname) = tempset(toname)
+                        destset.Update
+                        c_dsnode = tempset(fromname)
+                    Else
+                        done = 1
+                        nflowsplit = nflowsplit + 1
+                        msgbox "flow split encountered on branch " & CStr(branch)
+                    End If
+                Else
+                    'msgbox "STOPPED AT PIPE " & CStr(c_link)
+                    
+                    DoCmd.Echo True, "STOPPED AT PIPE " & CStr(c_link)
+                    'don't go down that reach
+                    done = 1
+                End If
+            Case Else
+                'this could be EITHER a flow split or a branch
+                If debugmode = 1 Then
+                    msgbox CStr(c_dsnode) & " >1"
+                End If
+                'push all upstream links onto the stack
+                'this assumes no cycles in the digraph
+                testint = 0
+                Do While Not tempset.BOF
+                'make sure whatever we are putting on the stack is not already there
+                    sqlstring = "select * from " & stackname & " where (" & pkeyname & " = " & constquery(pktype, tempset(pkeyname)) & ")"
+                    Set ckset = dbs.OpenRecordset(sqlstring)
+                    If ckset.RecordCount = 0 Then
+                        testint = testint + 1
+                        Application.Echo True, "PUSH pause" & CStr(testint) & " - " & CStr(tempset(pkeyname))
+                        stackset.AddNew
+                        stackset(pkeyname) = tempset(pkeyname)
+                        stackset(fromname) = tempset(fromname)
+                        stackset(toname) = tempset(toname)
+                        stackset.Update
+                    End If
+                    tempset.MovePrevious
+                Loop
+                done = 1
+            End Select
+            'stay in loop if only one element was found
+        Loop
+        stackset.MoveFirst
+    Loop
+    
+    TraverseTree = branch
+    
+End Function
+
+
+'the recordset is at the first record
+' this function NOT USED
+Function add_worksheet(ByRef viewset As Recordset, ByRef XLsheet As Object) As Integer
+    Dim rownum, colnum As Integer
+    
+    rownum = 1
+    Do While Not viewset.EOF
+        For colnum = 0 To viewset.Fields.Count - 1
+            XLsheet.cells(colnum + 1, rownum).Value = viewset(rownum).Value
+        Next colnum
+        rownum = rownum + 1
+        viewset.MoveNext
+        If rownum - 1 Mod 10 = 0 Then
+            DoCmd.Echo True, CStr(rownum)
+        End If
+    Loop
+End Function
+
+'
+'
+Function dump_subbasin(C_sheet, objworkbook As Object, dbs As Database, sbviewname, pipeviewname, xlnametxt)
+    Dim tempset As Recordset
+    Dim sqlstring, msgtxt, tempstr, arg1, arg2 As String 'used for misc string construction
+    Dim genericNullName As String
+    Dim colnum, rownum As Integer
+    Dim debugint, debugcount As Integer, debugstr As String
+    
+    Dim sblistset As Recordset
+    Dim AC_SBID, AC_BASINID, AC_SBTOTIDM As Integer
+    Dim sbflowpairs, xlcolnum As Integer
+    
+    genericNullName = "NUL" ' used for pipes that are not in any defined subbasin
+    
+    
+    ' get a view of the whole table so we know how many fields there are
+    Set tempset = dbs.OpenRecordset("SELECT * from [" & sbviewname & "] ")
+    If tempset.EOF Then
+        msgbox "No Subbasin Records Found in " & sbviewname, vbCritical
+        dump_subbasin = 0
+        Exit Function
+    End If
+    
+    tempset.MoveFirst
+    
+    sbflowpairs = 0
+    
+    AC_BASINID = 0
+    AC_SBID = 0
+    AC_SBTOTIDM = 0
+    
+    For colnum = 0 To tempset.Fields.Count - 1
+        Select Case UCase(tempset.Fields(colnum).Name)
+        Case "XL_BASINID"
+            AC_BASINID = colnum
+        Case "XL_SBID"
+            AC_SBID = colnum
+        Case "XL_SBTOTIDM"
+            AC_SBTOTIDM = colnum
+        Case Else
+            sbflowpairs = sbflowpairs + 1
+        End Select
+    Next
+    
+    If sbflowpairs = 0 Then
+        msgbox "No flow parameters found in " & sbviewname, vbCritical
+        dump_subbasin = 0
+        Exit Function
+    End If
+    
+    'MsgBox "flow pairs " & CStr(sbflowpairs)
+    
+    
+    'print the standard titles
+    C_sheet.cells(1, 1).Value = tempset.Fields(AC_BASINID).Name
+    C_sheet.cells(1, 2).Value = tempset.Fields(AC_SBID).Name
+    C_sheet.cells(1, 3).Value = tempset.Fields(AC_SBTOTIDM).Name
+    
+    'print the flow parameter t
+    xlcolnum = 2
+    For colnum = 0 To tempset.Fields.Count - 1
+        Select Case colnum
+        Case Is = AC_BASINID
+        Case Is = AC_SBID
+        Case Is = AC_SBTOTIDM
+            'do nothing
+        Case Else
+            xlcolnum = xlcolnum + 2
+            C_sheet.cells(1, xlcolnum).Value = tempset.Fields(colnum).Name
+        End Select
+    Next
+    xlcolnum = xlcolnum + 2
+    C_sheet.cells(1, xlcolnum).Value = "SubBasin Flow"
+    
+    Set tempset = Nothing
+    
+    
+    'ASSERT: we have the required fields and 1 or more additional
+    
+    
+    
+    
+    
+    'get a list of basinid, subbasin from the pipes table
+    sqlstring = "SELECT XL_basinID,XL_SBID FROM [" & pipeviewname & "] "
+    sqlstring = sqlstring & "GROUP BY XL_basinID, XL_sbid "
+    sqlstring = sqlstring & "HAVING (((XL_BasinID)<>'NUL') AND ((XL_SBID)<>'NUL'))"
+    
+    
+    
+    Set sblistset = dbs.OpenRecordset(sqlstring)
+    DoCmd.Echo True, "Got Basin Recordset..."
+    If sblistset.EOF Then
+        msgbox "No Records Found in " & pipeviewname, vbCritical
+        dump_subbasin = 0
+        Exit Function
+    End If
+    
+    sblistset.MoveFirst
+    
+    'ASSERT: we have at least subbasin record to look for
+    
+    
+        
+    rownum = 3
+    ' go through the list of Basin, Subbasin Pairs and find them in the subbasin view table
+    Do While Not sblistset.EOF
+    
+        DoCmd.Echo True, "Processing sub-basin " + Trim$(sblistset("XL_SBID"))
+        sqlstring = "SELECT * from [" & sbviewname & "] "
+        sqlstring = sqlstring & "WHERE ((XL_basinID = " & Chr(34) & sblistset("XL_basinID") & Chr(34) & ") AND (XL_SBID = "
+        sqlstring = sqlstring & """" & Trim$(sblistset("XL_SBID")) & """" & ")) "
+        'MsgBox sqlstring
+        
+        Set tempset = dbs.OpenRecordset(sqlstring)
+        'if no subbasin records match and we weren't looling for nuls this is a problem
+        If tempset.EOF And Not (UCase(sblistset("XL_basinID")) = "NUL" Or UCase(sblistset("XL_SBID")) = "NUL") Then
+            ' no records
+            msgbox "no record found in " & sbviewname & Chr(34) & "with basinID = " & sblistset("XL_basinID") & "subbasinID = " & Trim$(sblistset("XL_sbID"))
+            dump_subbasin = 0
+            Exit Function
+        End If
+        
+        tempset.MoveLast
+        'there should be one and only one BasinID, SubbasinID match
+        If tempset.RecordCount <> 1 Then
+            ' no records
+            msgtxt = CStr(tempset.RecordCount) & "records found in " & sbviewname & Chr(34)
+            msgtxt = msgtxt & "basinID = " & sblistset("XL_basinID") & "subbasinID = " & Trim$(sblistset("XL_sbID")) & Chr(34)
+            msgtxt = msgtxt & "1 record expected"
+            msgbox msgtxt, vbCritical
+            dump_subbasin = 0
+            Exit Function
+        End If
+        
+        'ASSERT we have one record
+       'print the subbasin ID
+        C_sheet.cells(rownum, 1).Value = tempset("XL_BasinID").Value
+        C_sheet.cells(rownum, 2).Value = tempset("XL_SBID").Value
+        C_sheet.cells(rownum, 3).Value = tempset("XL_SBTOTIDM").Value
+        
+          
+        xlcolnum = 4
+        For colnum = 0 To tempset.Fields.Count - 1
+            Select Case colnum
+            Case Is = AC_BASINID
+            Case Is = AC_SBID
+            Case Is = AC_SBTOTIDM
+                'do nothing
+            Case Else
+                If IsNumeric(tempset.Fields(colnum).Value) Then
+                    'the parameter
+                    C_sheet.cells(rownum, xlcolnum).Value = tempset.Fields(colnum).Value
+                    'the factor
+                    C_sheet.cells(rownum, xlcolnum + 1).Value = 0
+                Else
+                    C_sheet.cells(rownum, xlcolnum).Value = -1
+                    C_sheet.cells(rownum, xlcolnum + 1).Value = 0
+                End If
+                xlcolnum = xlcolnum + 2
+            End Select
+        Next
+        
+        
+        'sbflowpairs > 0 -- see above
+        tempstr = "="
+        For xlcolnum = 0 To sbflowpairs - 1 Step 1
+            tempstr = tempstr & "+RC" & CStr((xlcolnum * 2) + 4) & "*RC" & CStr(xlcolnum * 2 + 5)
+        Next xlcolnum
+        
+        'put in the fomula
+        'MsgBox "totalQ formula: " & tempstr
+        C_sheet.cells(rownum, sbflowpairs * 2 + 4).FormulaR1C1 = tempstr
+        
+        'build the total Q name
+        arg1 = xlnametxt & "_" & Trim$(sblistset("XL_BASINID")) & "_" & Trim$(sblistset("XL_SBID")) & "_TOTALQ"
+        'build the reference
+        arg2 = "=" & CStr(C_sheet.Name) & "!R" & CStr(rownum) & "C" & CStr(4 + 2 * sbflowpairs)
+        
+        'MsgBox "total Q name: " & arg1
+        'MsgBox "total Q ref: " & arg2
+        
+        objworkbook.names.Add Name:=arg1, RefersTor1c1:=arg2
+        
+        'build the total IDM name
+        arg1 = xlnametxt & "_" & Trim$(sblistset("XL_BASINID")) & "_" & Trim$(sblistset("XL_SBID")) & "_TOTALIDM"
+        'build the reference
+        arg2 = "=" & CStr(C_sheet.Name) & "!R" & CStr(rownum) & "C3"
+        
+        
+        
+        objworkbook.names.Add Name:=arg1, RefersTor1c1:=arg2
+        'increment the excel row
+        rownum = rownum + 1
+        'get the next basinID, sbid
+        sblistset.MoveNext
+        
+    Loop
+    
+        
+    'build the NULL total Q name
+    arg1 = xlnametxt & "_" & Trim$(genericNullName) & "_" & Trim$(genericNullName) & "_TOTALQ"
+    'build the reference
+    arg2 = "=0"
+    'put the NULL name in the workbook
+    objworkbook.names.Add Name:=arg1, RefersTor1c1:=arg2
+     
+    'build the NULL total IDM name
+    arg1 = xlnametxt & "_" & Trim$(genericNullName) & "_" & Trim$(genericNullName) & "_TOTALIDM"
+    'build the reference
+    arg2 = "=1"
+    ' put the NULL IDM in the workbook
+    objworkbook.names.Add Name:=arg1, RefersTor1c1:=arg2
+    'increment the excel row
+    rownum = rownum + 1
+       
+
+    
+    dump_subbasin = 1
+End Function
+
+
+
+
+'viewname is a table or query
+'wkbkname is the name of the excel workbook with full path
+'
+'viewname MUST have the numeric fields branch and element
+'
+'
+'NOTES:
+'1) need to populate SUBBASIN_?_TOTALIDM, SUBBASIN_?_TOTALQ
+'        and other subbasin parameters
+'2) need to check for EOF before movefirst
+'
+'3) data errors at or near branch 30 (majtest1)
+Function dump_branches(viewname, sbviewname, sbviewPFname, wkbkname As String)
+    Dim ExcelApp1 As Object
+    Dim objworkbook As Object
+    Dim C_sheet As Object
+    Dim dbs As Database, viewset, branchset, tempset As Recordset
+    Dim sqlstring, msgtxt, tempstr, formstr, arg1, arg2 As String 'used for misc string construction
+    Dim colnum, rownum, temprownum As Integer
+    Dim XL_BRANCH, XL_ELEMENT, XL_BASINID, XL_SBID, XL_NODEKEYFROM, XL_NODEKEYTO As Integer 'location data
+    Dim XL_SLOPE, XL_LENGTH, XL_DIAMETER, XL_N As Integer 'pipe characteristics
+    Dim XL_IDM, XL_PF, XL_LOCALQ, XL_LOCALPQ, XL_SUMQ, XL_SUMPQ, XL_TOTALQ, XL_CAPACITYQ, XL_DIFFQ, XL_BRINNAME, XL_BRINQ, XL_BRINPQ As Integer 'calculated EXCEL column locations
+    Dim XL_EXCEED, XL_RDIAQ, XL_RDIA, XL_RDIAS, XL_PDIAQ, XL_PDIA, XL_PDIAS, XL_BLOCK As Integer
+    Dim XLSUBtxt, XLSUBPtxt As String
+   
+    Dim debugint, debugcount As Integer, debugstr As String
+    Dim sbdrc As Integer
+    
+    debugint = 0
+    Set dbs = CurrentDb
+    
+    '
+    XLSUBtxt = "SUBB"
+    XLSUBPtxt = "SUBBPF"
+    
+    
+        
+    'XL variables correspond to column numbers in branch spread sheets
+    'arrays in view columns are 0 based, columns in spread sheet are 1 based
+    'integers assigned to XL variables are spreadsheet column numbers (1 based)
+    
+    XL_BRANCH = 0
+    XL_ELEMENT = 0
+    XL_BASINID = 0
+    XL_SBID = 0     ' subbasin ID
+    XL_NODEKEYFROM = 0
+    XL_NODEKEYTO = 0
+    
+    
+    XL_SLOPE = 0        ' pipe slope in foot/foot
+    XL_LENGTH = 0       ' pipe length in feet
+    XL_DIAMETER = 0     ' pipe diameter in inches
+    
+    XL_IDM = 0          ' pipe diameter in inches multiplied by length in miles
+    XL_LOCALQ = 0       ' flow entering system within this pipe
+    XL_TOTALQ = 0       ' local flow + flow from upstream pipe(s)
+    XL_CAPACITYQ = 0     ' pipe full flow based on mannings
+    XL_DIFFQ = 0        ' difference between full flow and total flow
+    XL_BRINQ = 0        ' branch input flow
+    
+    XL_BLOCK = 0        ' pressure or gravity
+    
+    ' open the input view
+    Set viewset = dbs.OpenRecordset("select * from [" & viewname & "]")
+    viewset.MoveFirst
+    
+    'do QC on the input view
+    'locate the critical columns on the input view
+    If Not viewset.EOF Then
+        For colnum = 0 To viewset.Fields.Count - 1
+            
+            Select Case Format(viewset.Fields(colnum).Name, ">")
+            Case "XL_BRANCH"
+                XL_BRANCH = colnum + 1
+            Case "XL_ELEMENT"
+                XL_ELEMENT = colnum + 1
+            Case "XL_NODEKEYFROM"
+                XL_NODEKEYFROM = colnum + 1
+            Case "XL_NODEKEYTO"
+                XL_NODEKEYTO = colnum + 1
+            Case "XL_BASINID"
+                XL_BASINID = colnum + 1
+            Case "XL_SBID"
+                XL_SBID = colnum + 1
+            Case "XL_SLOPE"
+                XL_SLOPE = colnum + 1
+            Case "XL_LENGTH"
+                XL_LENGTH = colnum + 1
+            Case "XL_DIAMETER"
+                XL_DIAMETER = colnum + 1
+            Case "XL_BLOCK"
+                XL_BLOCK = colnum + 1
+            Case "XL_N"
+                XL_N = colnum + 1
+            End Select
+        Next colnum
+            
+        If XL_BRANCH * XL_BLOCK * XL_ELEMENT * XL_BASINID * XL_SBID * XL_SLOPE * XL_LENGTH * XL_DIAMETER * XL_NODEKEYFROM * XL_NODEKEYTO * XL_N = 0 Then
+            msgtxt = "Input view must contain the following fields:" & Chr(13) & _
+             "XL_BRANCH - numeric branch ID" & Chr(13) & _
+             "XL_ELEMENT - numeric element" & Chr(13) & _
+             "XL_SBID - subbasin" & Chr(13) & _
+             "XL_SLOPE - slope" & Chr(13) & _
+             "XL_LENGTH - pipe length" & Chr(13) & _
+             "XL_DIAMETER - pipe diameter in inches" & Chr(13) & _
+             "XL_N - manning n"
+               
+             msgbox msgtxt, 16
+             dump_branches = 0
+             Exit Function
+        End If
+            
+        'determine the calculated column numbers
+        XL_IDM = colnum + 1
+        XL_LOCALQ = colnum + 2
+        XL_LOCALPQ = colnum + 3
+        XL_SUMQ = colnum + 4
+        XL_SUMPQ = colnum + 5
+        XL_PF = colnum + 6
+        XL_TOTALQ = colnum + 7
+        XL_CAPACITYQ = colnum + 8
+        XL_DIFFQ = colnum + 9
+        
+        'replacement options
+        'added 12/1/97 by collins
+        XL_EXCEED = colnum + 10
+        XL_RDIAQ = colnum + 11
+        XL_RDIA = colnum + 12
+        XL_RDIAS = colnum + 13
+        XL_PDIAQ = colnum + 14
+        XL_PDIA = colnum + 15
+        XL_PDIAS = colnum + 16
+        
+        'branch inflow
+        XL_BRINNAME = colnum + 18
+        XL_BRINQ = colnum + 19
+        XL_BRINPQ = colnum + 20
+        
+    Else
+        msgbox "No records found in " & viewname
+        dump_branches = 0
+        Exit Function
+    End If
+        
+    'ASSERT: the input view has the required fields
+    'ASSERT: XL variables have been assiged spreadsheet column numbers
+       
+          
+    ' Start Excel
+    ' probably need ERROR checking here
+    Set ExcelApp1 = CreateObject("Excel.Application")
+    ExcelApp1.workbooks.Add
+    Set objworkbook = ExcelApp1.ActiveWorkbook
+    
+    
+    ' Get a list of branches from the viewset
+    sqlstring = "SELECT XL_branch FROM [" & viewname & "] GROUP BY XL_branch"
+    Set branchset = dbs.OpenRecordset(sqlstring)
+    branchset.MoveFirst
+    
+    '***** total debug ******
+    
+    ' Build a sheet for each branch
+    Do While Not branchset.EOF
+    'Do While branchset("XL_branch") < 4
+     
+        ' get the full branch record set
+        ' the element with highest integer value is the most upstream element
+        ' order upstream to downstream
+        sqlstring = "SELECT * FROM [" & viewname & "] "
+        sqlstring = sqlstring & " WHERE (XL_branch = " & CStr(branchset("XL_branch")) & ")"
+        sqlstring = sqlstring & " ORDER BY XL_element DESC "
+        
+        Set viewset = dbs.OpenRecordset(sqlstring)
+        viewset.MoveFirst
+        
+        DoCmd.Echo True, "creating " & "Branch " & CStr(branchset("XL_branch"))
+            
+        ' add a new sheet to the workbook and make active
+        ExcelApp1.Sheets.Add
+        Set C_sheet = objworkbook.ActiveSheet
+        C_sheet.Name = "Branch_" & CStr(branchset("XL_branch"))
+        
+        If debugint = 1 Then
+            DoCmd.Echo True, "titles"
+        End If
+        
+        'Use view field names as columns titles in the worksheet
+        For colnum = 0 To viewset.Fields.Count - 1
+            C_sheet.cells(1, colnum + 1).Value = viewset.Fields(colnum).Name
+        Next colnum
+        
+        If debugint = 1 Then
+           DoCmd.Echo True, "calc titles"
+        End If
+        
+        'Put titles on columns that are caluclated in the worksheet
+        C_sheet.cells(1, XL_IDM).Value = "in-dia-mile"
+        C_sheet.cells(1, XL_LOCALQ).Value = "Local Flow w/o PF"
+        C_sheet.cells(1, XL_LOCALPQ).Value = "Local Flow PF"
+        C_sheet.cells(1, XL_SUMQ).Value = "NonPeaked Base"
+        C_sheet.cells(1, XL_SUMPQ).Value = "Peaked Base"
+        C_sheet.cells(1, XL_PF).Value = "Peak Fact"
+        
+        
+        C_sheet.cells(1, XL_TOTALQ).Value = "Total Flow"
+        C_sheet.cells(1, XL_CAPACITYQ).Value = "Pipe Capacity"
+        C_sheet.cells(1, XL_DIFFQ).Value = "Excess Flow"
+        
+        C_sheet.cells(1, XL_EXCEED).Value = "Exceed Cap?"
+        
+        C_sheet.cells(1, XL_PDIAQ).Value = "Para Des Q"
+        C_sheet.cells(1, XL_PDIA).Value = "Para Dia Calc'd"
+        C_sheet.cells(1, XL_PDIAS).Value = "Para Dia Selc'd"
+        
+        C_sheet.cells(1, XL_RDIAQ).Value = "Repl Des Q"
+        C_sheet.cells(1, XL_RDIA).Value = "Repl Dia Calc'd"
+        C_sheet.cells(1, XL_RDIAS).Value = "Repl Dia Selc'd"
+        
+              
+        If debugint = 1 Then
+            DoCmd.Echo True, "names titles"
+            arg1 = "=" & CStr(C_sheet.Name) & "_IDM"
+            arg2 = "=" & CStr(C_sheet.Name) & "!C" & CStr(XL_IDM)
+            msgbox arg1 & Chr(13) & arg2
+        End If
+        
+        'Create column names for each sheet
+        'Column names are of the form Branch_?_*
+        '   where   ? is the branch number and
+        '           * is the XL variable name right of the underscore
+        
+        objworkbook.names.Add Name:=CStr(C_sheet.Name) & "_DIAMETER", RefersTor1c1:="=" & CStr(C_sheet.Name) & "!C" & CStr(XL_DIAMETER)
+        'objworkbook.names.Add Name:=CStr(C_sheet.Name) & "_LENGTH", RefersTor1c1:="=" & CStr(C_sheet.Name) & "!C" & CStr(XL_LENGTH)
+        objworkbook.names.Add Name:=CStr(C_sheet.Name) & "_SLOPE", RefersTor1c1:="=" & CStr(C_sheet.Name) & "!C" & CStr(XL_SLOPE)
+        objworkbook.names.Add Name:=CStr(C_sheet.Name) & "_N", RefersTor1c1:="=" & CStr(C_sheet.Name) & "!C" & CStr(XL_N)
+                
+        objworkbook.names.Add Name:=CStr(C_sheet.Name) & "_IDM", RefersTor1c1:="=" & CStr(C_sheet.Name) & "!C" & CStr(XL_IDM)
+        'objworkbook.names.Add Name:=CStr(C_sheet.Name) & "_LOCALQ", RefersTor1c1:="=" & CStr(C_sheet.Name) & "!C" & CStr(XL_LOCALQ)
+        'objworkbook.names.Add Name:=CStr(C_sheet.Name) & "_TOTALQ", RefersTor1c1:="=" & CStr(C_sheet.Name) & "!C" & CStr(XL_TOTALQ)
+        'objworkbook.names.Add Name:=CStr(C_sheet.Name) & "_MANNINGQ", RefersTor1c1:="=" & CStr(C_sheet.Name) & "!C" & CStr(XL_CAPACITYQ)
+        
+        
+        'Build the worksheet one row at a time
+        rownum = 3
+        Do While Not viewset.EOF
+            If debugint = 1 Then
+                msgbox "row=" & CStr(rownum) & " looping through columns"
+            End If
+                
+            'write the row data one field (column) at a time
+            For colnum = 0 To viewset.Fields.Count - 1
+                C_sheet.cells(rownum, colnum + 1).Value = viewset.Fields(colnum).Value
+            Next colnum
+            
+            'Begin writing the formulae in the calculated columns
+                        
+            If debugint = 1 Then DoCmd.Echo True, "IDM"
+            
+            
+            
+            'calculate inch-diameter-mile
+            C_sheet.cells(rownum, XL_IDM).FormulaR1C1 = "=R" & CStr(rownum) & "C" & CStr(XL_DIAMETER) & "*R" & CStr(rownum) & "C" & CStr(XL_LENGTH) & "/5280"
+            
+            If debugint = 1 Then DoCmd.Echo True, "localq"
+            
+            'here
+            'calculate local flow for non PF flow
+            'local flow = BRANCH_?_IDM/SUB_?_TOTALIDM*SUB_?_TOTALQ
+            tempstr = XLSUBtxt & "_" & Trim$(viewset.Fields("XL_BASINID").Value) & "_" & Trim$(viewset.Fields("XL_SBID").Value) & "_"
+            C_sheet.cells(rownum, XL_LOCALQ).FormulaR1C1 = "=" & C_sheet.Name & "_IDM/" & tempstr & "TOTALIDM*" & tempstr & "TOTALQ"
+            
+            'calculate local flow for flows subject to PF
+            'local flow = BRANCH_?_IDM/SUBP_?_TOTALIDM*SUBP_?_TOTALQ
+            tempstr = XLSUBPtxt & "_" & Trim$(viewset.Fields("XL_BASINID").Value) & "_" & Trim$(viewset.Fields("XL_SBID").Value) & "_"
+            C_sheet.cells(rownum, XL_LOCALPQ).FormulaR1C1 = "=" & C_sheet.Name & "_IDM/" & tempstr & "TOTALIDM*" & tempstr & "TOTALQ"
+            
+            
+            'calculate local flow
+            'local flow = BRANCH_?_IDM/SUBBASIN_?_TOTALIDM*SUBBASIN_?_TOTALQ
+            'tempstr = "SUBBASIN_" & Trim$(viewset.Fields("XL_SBID").Value) & "_"
+            'C_sheet.Cells(rownum, XL_LOCALQ).FormulaR1C1 = "=" & C_sheet.Name & "_IDM/" & tempstr & "TOTALIDM*" & tempstr & "TOTALQ"
+            
+            
+            
+            If debugint = 1 Then
+            DoCmd.Echo True, "total q"
+            End If
+            
+            'calculate sum non PF flow
+            If rownum > 3 Then
+                C_sheet.cells(rownum, XL_SUMQ).FormulaR1C1 = "=R" & CStr(rownum - 1) & "C" & CStr(XL_SUMQ) & "+R" & CStr(rownum) & "C" & CStr(XL_LOCALQ)
+            Else
+                C_sheet.cells(rownum, XL_SUMQ).FormulaR1C1 = "=SUM(" & C_sheet.Name & "_BRINQ)+R" & CStr(rownum) & "C" & CStr(XL_LOCALQ)
+            End If
+            
+            'calculate sum PF Flow
+            If rownum > 3 Then
+                C_sheet.cells(rownum, XL_SUMPQ).FormulaR1C1 = "=R" & CStr(rownum - 1) & "C" & CStr(XL_SUMPQ) & "+R" & CStr(rownum) & "C" & CStr(XL_LOCALPQ)
+            Else
+                C_sheet.cells(rownum, XL_SUMPQ).FormulaR1C1 = "=SUM(" & C_sheet.Name & "_BRINPQ)+R" & CStr(rownum) & "C" & CStr(XL_LOCALPQ)
+            End If
+            
+            'caluclate Peaking Factor
+            C_sheet.cells(rownum, XL_PF).FormulaR1C1 = "=(1/R" & CStr(rownum) & "C" & CStr(XL_SUMPQ) & "^0.0931)*10^0.3979"
+            
+            
+            'calculate total flow
+            tempstr = "=SUM(R" & CStr(rownum) & "C" & CStr(XL_SUMQ) & ",R" & CStr(rownum) & "C" & CStr(XL_SUMPQ) & "*R" & CStr(rownum) & "C" & CStr(XL_PF) & ")"
+            C_sheet.cells(rownum, XL_TOTALQ).FormulaR1C1 = tempstr
+            
+            'END HERE 12/31/97 -- dont forget to define new cell indexes like XL_SUMQ, XLSUMPQ...
+            
+            
+            'the sum flow and sump flow in element 1 is outflow for the branch
+            tempstr = "=R" & CStr(rownum) & "C" & CStr(XL_SUMQ)
+            objworkbook.names.Add Name:=C_sheet.Name & "_BROUTQ", RefersTor1c1:=tempstr
+            
+            tempstr = "=R" & CStr(rownum) & "C" & CStr(XL_SUMPQ)
+            objworkbook.names.Add Name:=C_sheet.Name & "_BROUTPQ", RefersTor1c1:=tempstr
+            
+            If debugint = 1 Then
+                DoCmd.Echo True, "manning q"
+                arg1 = "=0.463*(" & C_sheet.Name & "_DIAMETER" & "/12)^(8/3)/(" & C_sheet.Name & "_N)*" & C_sheet.Name & "_SLOPE^(1/2)"
+                msgbox arg1
+            End If
+            
+            '*********Modified by JKS 12/30/97************
+            'calculate pipe capacity
+            Select Case Trim(CStr(C_sheet.cells(rownum, XL_BLOCK).Value))
+            Case "SSPRS"
+                C_sheet.cells(rownum, XL_CAPACITYQ).FormulaR1C1 = "=10*(" & C_sheet.Name & "_DIAMETER" & "/12)^(2)/4 * Pi()"
+            Case Else
+                C_sheet.cells(rownum, XL_CAPACITYQ).FormulaR1C1 = "=0.463*(" & C_sheet.Name & "_DIAMETER" & "/12)^(8/3)/(" & C_sheet.Name & "_N)*" & C_sheet.Name & "_SLOPE^(1/2)"
+            End Select
+            
+            '*********************************************
+            
+            
+            If debugint = 1 Then
+                DoCmd.Echo True, "deficit"
+            End If
+            
+            'calculate the excess/deficit capacity
+            C_sheet.cells(rownum, XL_DIFFQ).FormulaR1C1 = "=R" & CStr(rownum) & "C" & CStr(XL_TOTALQ) & "-R" & CStr(rownum) & "C" & CStr(XL_CAPACITYQ)
+            
+            
+            'set surcharge flag
+            formstr = "=R" & CStr(rownum) & "C" & CStr(XL_TOTALQ) & ">R" & CStr(rownum) & "C" & CStr(XL_CAPACITYQ)
+            C_sheet.cells(rownum, XL_EXCEED).FormulaR1C1 = formstr
+            
+            
+            objworkbook.names.Add Name:="ReplFlowFactor", RefersTor1c1:="=1.25"
+            
+            
+            
+            'calc replacment design flow
+            tempstr = "R" & CStr(rownum) & "C"
+            formstr = "=if(" & tempstr & CStr(XL_EXCEED) & ",ReplFlowFactor*" & tempstr & CStr(XL_TOTALQ) & ")"
+            C_sheet.cells(rownum, XL_RDIAQ).FormulaR1C1 = formstr
+            
+            '*********Modified by JKS 12/30/97************
+            'calc replacment pipe size
+            tempstr = "R" & CStr(rownum) & "C"
+            Select Case Trim(CStr(C_sheet.cells(rownum, XL_BLOCK).Value))
+            Case "SSPRS"
+                formstr = "=if(" & tempstr & CStr(XL_EXCEED) & ",ROUNDUP((12*(4*(" & tempstr & CStr(XL_RDIAQ) & ")/(10 * Pi())) ^ 0.5),0))"
+            Case Else
+                formstr = "=if(" & tempstr & CStr(XL_EXCEED) & ",ROUNDUP((1630*" & tempstr & CStr(XL_RDIAQ) & "*" & CStr(0.013) & "/" & tempstr & CStr(XL_SLOPE) & "^0.5)^0.375,0))"
+            End Select
+            C_sheet.cells(rownum, XL_RDIA).FormulaR1C1 = formstr
+            '*********************************************
+            
+            'calc selected replacement pipe size
+            tempstr = "R" & CStr(rownum) & "C" & CStr(XL_RDIA)
+            formstr = "=if(" & tempstr & "<12,ROUNDUP(" & tempstr & "/2,0)*2, if(" & tempstr & "<24,ROUNDUP(" & tempstr & "/3,0)*3,if(" & tempstr & "<60,ROUNDUP(" & tempstr & "/6,0)*6,ROUNDUP(" & tempstr & "/12,0)*12)))"
+            C_sheet.cells(rownum, XL_RDIAS).FormulaR1C1 = formstr
+            
+            
+            objworkbook.names.Add Name:="ParaFlowFactor", RefersTor1c1:="=1.25"
+            
+            
+            'calc parallel design flow
+            tempstr = "R" & CStr(rownum) & "C"
+            formstr = "=if(" & tempstr & CStr(XL_EXCEED) & ",ParaFlowFactor*" & tempstr & CStr(XL_TOTALQ) & "-" & tempstr & CStr(XL_CAPACITYQ) & ")"
+            C_sheet.cells(rownum, XL_PDIAQ).FormulaR1C1 = formstr
+            
+            '*********Modified by JKS 12/30/97************
+            'calc parallel pipe size
+            tempstr = "R" & CStr(rownum) & "C"
+            Select Case Trim(CStr(C_sheet.cells(rownum, XL_BLOCK).Value))
+            Case "SSPRS"
+                 formstr = "=if(" & tempstr & CStr(XL_EXCEED) & ",ROUNDUP(12*(((" & tempstr & CStr(XL_TOTALQ) & "-" & tempstr & CStr(XL_CAPACITYQ) & ")/(10 * Pi())) ^ 0.5),0))"
+            Case Else
+                formstr = "=if(" & tempstr & CStr(XL_EXCEED) & ",ROUNDUP((1630*" & tempstr & CStr(XL_PDIAQ) & "*" & CStr(0.013) & "/" & tempstr & CStr(XL_SLOPE) & "^0.5)^0.375,0))"
+           End Select
+            C_sheet.cells(rownum, XL_PDIA).FormulaR1C1 = formstr
+            '*********************************************
+            
+            
+            'calc selected replacement pipe size
+            tempstr = "R" & CStr(rownum) & "C" & CStr(XL_PDIA)
+            formstr = "=if(" & tempstr & "<12,ROUNDUP(" & tempstr & "/2,0)*2, if(" & tempstr & "<24,ROUNDUP(" & tempstr & "/3,0)*3,if(" & tempstr & "<60,ROUNDUP(" & tempstr & "/6,0)*6,ROUNDUP(" & tempstr & "/12,0)*12)))"
+            C_sheet.cells(rownum, XL_PDIAS).FormulaR1C1 = formstr
+                    
+            
+            
+            rownum = rownum + 1
+            viewset.MoveNext
+        Loop
+            
+        'If debugint > 10 Then
+        If debugint = 1 Then DoCmd.Echo True, "begin upstream branches"
+      
+        ' BEGIN THE PROCESS OF FINDING UPSTREAM BRANCHES
+            
+        ' find the max element of the current branch
+        sqlstring = "SELECT Max(XL_element) AS Max_element "
+        sqlstring = sqlstring & " FROM [" & viewname & "] "
+        sqlstring = sqlstring & " WHERE (XL_branch= " & CStr(branchset("XL_branch")) & ")"
+        If debugint = 1 Then msgbox sqlstring
+            
+        Set tempset = dbs.OpenRecordset(sqlstring)
+        tempset.MoveLast
+        If debugint = 1 Then DoCmd.Echo True, "found " & CStr(tempset.RecordCount) & " max elements"
+            
+        If tempset.RecordCount <> 1 Then
+        'should write a function to do this bailout
+            msgbox "1 max element expected " & Chr(13) & CStr(tempset.RecordCount) & " elements found", vbCritical
+            msgbox msgtxt, 48
+            ' get rid of excel objects
+            ExcelApp1.Quit
+            Set C_sheet = Nothing
+            Set ExcelApp1 = Nothing
+            Exit Function
+        End If
+            
+                    
+            
+        ' find the nodekey of the max element of the current branch
+        sqlstring = "SELECT XL_NodeKeyFrom, XL_element as MAX_element from [" & viewname & "] "
+        sqlstring = sqlstring & "WHERE ( (XL_branch= " & CStr(branchset("XL_branch")) & ") AND "
+        sqlstring = sqlstring & "(XL_element= " & CStr(tempset("MAX_element")) & ") ) "
+         
+        If debugint = 1 Then msgbox sqlstring
+        
+        Set tempset = dbs.OpenRecordset(sqlstring)
+        tempset.MoveLast
+            
+        If debugint = 1 Then DoCmd.Echo True, "found " & CStr(tempset.RecordCount) & " NodekeyFrom"
+            
+        If tempset.RecordCount <> 1 Then
+        'should write a function to do this bailout
+            msgtxt = "1 NodeKeyFrom expected " & Chr(13) & "[" & CStr(tempset.RecordCount) & "] XL_NodeKeyFrom found"
+            msgtxt = msgtxt & Chr(13) & "if >1 check for duplicate pipe"
+            msgbox msgtxt, vbCritical
+            ' get rid of excel objects
+            ExcelApp1.Quit
+            Set C_sheet = Nothing
+            Set ExcelApp1 = Nothing
+        End If
+            
+        If debugint = 1 Then
+            DoCmd.Echo True, "get inflow branches"
+            debugstr = ""
+            For debugcount = 0 To branchset.Fields.Count - 1
+               debugstr = debugstr & branchset.Fields(debugcount).Name & Chr(13)
+            Next
+            msgbox debugstr, vbInformation, "Branchset: prior to getting all us branches"
+                
+            debugstr = ""
+            For debugcount = 0 To tempset.Fields.Count - 1
+               debugstr = debugstr & tempset.Fields(debugcount).Name & Chr(13)
+            Next
+            msgbox debugstr, vbInformation, "Tempset: prior to getting all us branches"
+        End If
+            
+        'find the branches that flow into the current branch
+        sqlstring = "SELECT XL_branch from [" & viewname & "] "
+        sqlstring = sqlstring & " WHERE (XL_NodeKeyTo =" & Chr(34) & CStr(tempset("XL_NodeKeyFrom")) & Chr(34) & ")"
+        sqlstring = sqlstring & " GROUP BY XL_branch "
+            
+        'shouldn't need the group by clause but just incase two elements in a branch
+        'have the same downstream node this avoids a crash
+        If debugint > 0 Then msgbox sqlstring
+            
+        If debugint > 0 Then msgbox "before query"
+        Set tempset = Nothing
+        Set tempset = dbs.OpenRecordset(sqlstring)
+        If debugint > 0 Then msgbox "before movefirst"
+        
+        If Not tempset.EOF Then tempset.MoveFirst
+        If debugint > 0 Then msgbox "after movefirst, before loop"
+            
+        'loop through the temps
+        temprownum = 3
+        Do While Not tempset.EOF
+            tempstr = "branch_" & CStr(tempset("XL_BRANCH"))
+            If debugint = 1 Then DoCmd.Echo True, tempstr
+            
+            
+            C_sheet.cells(temprownum, XL_BRINNAME).FormulaR1C1 = tempstr
+            If debugint = 1 Then DoCmd.Echo True, tempstr
+            C_sheet.cells(temprownum, XL_BRINQ).FormulaR1C1 = "=" & tempstr & "_BROUTQ"
+            
+            C_sheet.cells(temprownum, XL_BRINPQ).FormulaR1C1 = "=" & tempstr & "_BROUTPQ"
+            
+            
+            
+            
+            temprownum = temprownum + 1
+            tempset.MoveNext
+        Loop
+                
+        'set up the branch inflow names
+        If temprownum > 3 Then
+            tempstr = "=" & CStr(C_sheet.Name) & "!R3C" & CStr(XL_BRINQ) & ":R" & CStr(temprownum - 1) & "C" & CStr(XL_BRINQ)
+        Else
+            tempstr = "=0"
+        End If
+            
+        ' the name refers to group of cells
+        If debugint = 1 Then DoCmd.Echo True, "setting BRINQ" & tempstr
+        objworkbook.names.Add Name:=CStr(C_sheet.Name) & "_BRINQ", RefersTor1c1:=tempstr
+        If debugint > 0 Then msgbox "end of BRANCH " & CStr(branchset("XL_branch"))
+        
+        'set up the branch inflow names for Peaked FLows
+        If temprownum > 3 Then
+            tempstr = "=" & CStr(C_sheet.Name) & "!R3C" & CStr(XL_BRINPQ) & ":R" & CStr(temprownum - 1) & "C" & CStr(XL_BRINPQ)
+        Else
+            tempstr = "=0"
+        End If
+            
+        ' the name refers to group of cells
+        If debugint = 1 Then DoCmd.Echo True, "setting BRINPQ" & tempstr
+        objworkbook.names.Add Name:=CStr(C_sheet.Name) & "_BRINPQ", RefersTor1c1:=tempstr
+        If debugint > 0 Then msgbox "end of BRANCH " & CStr(branchset("XL_branch"))
+        
+        
+        
+        
+        branchset.MoveNext
+        
+    Loop
+    
+    ExcelApp1.Sheets.Add
+    Set C_sheet = objworkbook.ActiveSheet
+    'BEGIN Sub_basin dump
+    C_sheet.Name = XLSUBtxt
+    DoCmd.Echo True, "Now Creating " & XLSUBtxt & " Sub-basin tab..."
+    sbdrc = dump_subbasin(C_sheet, objworkbook, dbs, sbviewname, viewname, XLSUBtxt)
+    
+      
+    If (sbdrc = 0) Then
+         msgbox "sub basin dump failed for Non-PF factors"
+    End If
+
+
+    ExcelApp1.Sheets.Add
+    Set C_sheet = objworkbook.ActiveSheet
+    'BEGIN Sub_basin dump
+    C_sheet.Name = XLSUBPtxt
+    DoCmd.Echo True, "Now Creating " & XLSUBPtxt & " Sub-basin tab..."
+    
+    sbdrc = dump_subbasin(C_sheet, objworkbook, dbs, sbviewPFname, viewname, XLSUBPtxt)
+    
+      
+    If (sbdrc = 0) Then
+         msgbox "sub basin dump failed for PF factors"
+    End If
+
+
+
+
+      
+    ' check to make sure we can save the file
+    ' this error checking was borrowed and needs to be verified
+    DoCmd.Echo True, "saving file as " & wkbkname
+    
+    On Error Resume Next
+    Kill wkbkname & ".xls"
+    Err.Clear
+    On Error GoTo 0
+
+    On Error Resume Next
+    objworkbook.SaveAs wkbkname
+    If Err.Number Then
+        msgtxt = "Plot file not saved, error = " & CStr(Err)
+        msgtxt = msgtxt & Chr(13) & "select the no option on excel message"
+       
+        On Error GoTo 0
+        msgbox msgtxt, 48
+        ' get rid of excel objects
+        ExcelApp1.Quit
+        Set C_sheet = Nothing
+        Set ExcelApp1 = Nothing
+        
+        ' fatal exit
+        dump_branches = -1
+        Exit Function
+    End If
+    
+    ExcelApp1.Quit
+    Set C_sheet = Nothing
+    Set ExcelApp1 = Nothing
+    
+    dump_branches = 1
+
+End Function
+
+
+Function AccessAndJetErrorsTable() As Boolean
+    Dim dbs As Database, tdf As TableDef, fld As Field
+    Dim rst As Recordset, lngCode As Long
+    Dim strAccessErr As String
+    Const conAppObjectError = "Application-defined or object-defined error"
+
+    On Error GoTo Error_AccessAndJetErrorsTable
+    ' Create Errors table with ErrorNumber and ErrorDescription fields.
+    Set dbs = CurrentDb
+    Set tdf = dbs.CreateTableDef("AccessAndJetErrors")
+    Set fld = tdf.CreateField("ErrorCode", dbLong)
+
+tdf.Fields.Append fld
+    Set fld = tdf.CreateField("ErrorString", dbMemo)
+    tdf.Fields.Append fld
+
+    dbs.TableDefs.Append tdf
+    ' Open recordset on Errors table.
+    Set rst = dbs.OpenRecordset("AccessAndJetErrors")
+    ' Loop through error codes.
+    For lngCode = 0 To 3500
+        On Error Resume Next
+        ' Raise each error.
+        strAccessErr = AccessError(lngCode)
+        DoCmd.Hourglass True
+        ' Skip error numbers without associated strings.
+        If strAccessErr <> "" Then
+
+' Skip codes that generate application or object-defined errors.
+            If strAccessErr <> conAppObjectError Then
+                ' Add each error code and string to Errors table.
+                rst.AddNew
+                rst!ErrorCode = lngCode
+                ' Append string to memo field.
+                rst!ErrorString.AppendChunk strAccessErr
+                rst.Update
+            End If
+        End If
+    Next lngCode
+    ' Close recordset.
+    rst.Close
+    DoCmd.Hourglass False
+    RefreshDatabaseWindow
+    msgbox "Access and Jet errors table created."
+
+AccessAndJetErrorsTable = True
+
+Exit_AccessAndJetErrorsTable:
+    Exit Function
+
+Error_AccessAndJetErrorsTable:
+    msgbox Err & ": " & Err.Description
+    AccessAndJetErrorsTable = False
+    Resume Exit_AccessAndJetErrorsTable
+End Function
+
+Public Function teststr()
+Dim ExcelApp1 As Object
+    Dim objworkbook As Object
+    Dim C_sheet As Object
+    Dim dbs As Database, viewset, branchset, tempset As Recordset
+    Dim sqlstring, msgtxt, tempstr, arg1, arg2 As String 'used for misc string construction
+    Dim colnum, rownum, temprownum As Integer
+    Dim XL_BRANCH, XL_ELEMENT, XL_BASINID, XL_SBID, XL_NODEKEYFROM, XL_NODEKEYTO As Integer 'location data
+    Dim XL_SLOPE, XL_LENGTH, XL_DIAMETER, XL_N As Integer 'pipe characteristics
+    Dim XL_IDM, XL_LOCALQ, XL_TOTALQ, XL_CAPACITYQ, XL_DIFFQ, XL_BRINQ, XL_BRINNAME As Integer 'calculated EXCEL column locations
+    Dim XL_EXCEED, XL_PDIA, XL_PDIAS, XL_RDIA, XL_RDIAS As Integer
+    
+        
+    
+    
+    Dim debugint, debugcount As Integer, debugstr As String
+    Dim sbdrc As Integer
+    
+    debugint = 0
+    Set dbs = CurrentDb
+    XL_BRANCH = 0
+    XL_ELEMENT = 0
+    XL_BASINID = 0
+    XL_SBID = 0     ' subbasin ID
+    XL_NODEKEYFROM = 0
+    XL_NODEKEYTO = 0
+    
+    
+    XL_SLOPE = 0        ' pipe slope in foot/foot
+    XL_LENGTH = 0       ' pipe length in feet
+    XL_DIAMETER = 0     ' pipe diameter in inches
+    
+    XL_IDM = 0          ' pipe diameter in inches multiplied by length in miles
+    XL_LOCALQ = 0       ' flow entering system within this pipe
+    XL_TOTALQ = 0       ' local flow + flow from upstream pipe(s)
+    XL_CAPACITYQ = 0     ' pipe full flow based on mannings
+    XL_DIFFQ = 0        ' difference between full flow and total flow
+    XL_BRINQ = 0        ' branch input flow
+    
+    colnum = 0
+    
+    'determine the calculated column numbers
+        XL_IDM = colnum + 1
+        XL_LOCALQ = colnum + 2
+        XL_TOTALQ = colnum + 3
+        XL_CAPACITYQ = colnum + 4
+        XL_DIFFQ = colnum + 5
+        
+        'replacement options
+        'added 12/1/97 by collins
+        XL_EXCEED = colnum + 6
+        XL_RDIA = colnum + 7
+        XL_RDIAS = colnum + 8
+        XL_PDIA = colnum + 9
+        XL_PDIAS = colnum + 10
+        
+        'branch inflow
+        XL_BRINNAME = colnum + 12
+        XL_BRINQ = colnum + 13
+        
+        'set surcharge flag
+        teststr = "=R" & CStr(rownum) & "C" & CStr(XL_TOTALQ) & ">R" & CStr(rownum) & "C" & CStr(XL_CAPACITYQ)
+            
+        msgbox teststr
+        
+                
+            
+        'calc replacment pipe size
+        tempstr = "R" & CStr(rownum) & "C"
+        teststr = "=if(" & tempstr & CStr(XL_EXCEED) & ",ROUNDUP((1630*" & tempstr & CStr(XL_TOTALQ) & "*" & CStr(0.013) & "/" & tempstr & CStr(XL_SLOPE) & "^0.5)^0.375,0))"
+        msgbox teststr
+           
+        'calc selected replacement pipe size
+        tempstr = "R" & CStr(rownum) & "C" & CStr(XL_RDIA)
+        teststr = "=if(" & tempstr & "<12,ROUNDUP(" & tempstr & "/2,0)*2, if(" & tempstr & "<24,ROUNDUP(" & tempstr & "/3,0)*3,if(" & tempstr & "<60,ROUNDUP(" & tempstr & "/6,0)*6,ROUNDUP(" & tempstr & "/12,0)*12))))"
+        msgbox teststr
+        
+        'calc parallel pipe size
+        tempstr = "R" & CStr(rownum) & "C"
+        teststr = "=if(" & tempstr & CStr(XL_EXCEED) & ",ROUNDUP((1630*" & tempstr & CStr(XL_DIFFQ) & "*" & CStr(0.013) & "/" & tempstr & CStr(XL_SLOPE) & "^0.5)^0.375,0))"
+        msgbox teststr
+        
+        'calc selected replacement pipe size
+        tempstr = "R" & CStr(rownum) & "C" & CStr(XL_PDIA)
+        teststr = "=if(" & tempstr & "<12,ROUNDUP(" & tempstr & "/2,0)*2, if(" & tempstr & "<24,ROUNDUP(" & tempstr & "/3,0)*3,if(" & tempstr & "<60,ROUNDUP(" & tempstr & "/6,0)*6,ROUNDUP(" & tempstr & "/12,0)*12))))"
+        msgbox teststr
+        
+        
+End Function
