@@ -1,0 +1,370 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<namespace name="uEMGAATSSystemConfig">
+  <const name="vpaCloseAll" type="TVitalProgramsAction">
+    <value>
+      vpaCloseAll
+    </value>
+  </const>
+  <const name="vpaContinue" type="TVitalProgramsAction">
+    <value>
+      vpaContinue
+    </value>
+  </const>
+  <const name="vpaExit" type="TVitalProgramsAction">
+    <value>
+      vpaExit
+    </value>
+  </const>
+  <enum name="TVitalProgramsAction">
+    <element name="vpaCloseAll" />
+    <element name="vpaContinue" />
+    <element name="vpaExit" />
+  </enum>
+  <class name="TSystemConfig">
+    <ancestor name="TObject" namespace="System">
+      <methodref name="Create" visibility="public">
+      </methodref>
+      <methodref name="Free" visibility="public">
+      </methodref>
+      <methodref name="InitInstance" visibility="public">
+      </methodref>
+      <methodref name="CleanupInstance" visibility="public">
+      </methodref>
+      <methodref name="ClassType" visibility="public">
+      </methodref>
+      <methodref name="ClassName" visibility="public">
+      </methodref>
+      <methodref name="ClassNameIs" visibility="public">
+      </methodref>
+      <methodref name="ClassParent" visibility="public">
+      </methodref>
+      <methodref name="ClassInfo" visibility="public">
+      </methodref>
+      <methodref name="InstanceSize" visibility="public">
+      </methodref>
+      <methodref name="InheritsFrom" visibility="public">
+      </methodref>
+      <methodref name="MethodAddress" visibility="public">
+      </methodref>
+      <methodref name="MethodName" visibility="public">
+      </methodref>
+      <methodref name="FieldAddress" visibility="public">
+      </methodref>
+      <methodref name="GetInterface" visibility="public">
+      </methodref>
+      <methodref name="GetInterfaceEntry" visibility="public">
+      </methodref>
+      <methodref name="GetInterfaceTable" visibility="public">
+      </methodref>
+      <methodref name="SafeCallException" visibility="public">
+      </methodref>
+      <methodref name="AfterConstruction" visibility="public">
+      </methodref>
+      <methodref name="BeforeDestruction" visibility="public">
+      </methodref>
+      <methodref name="Dispatch" visibility="public">
+      </methodref>
+      <methodref name="DefaultHandler" visibility="public">
+      </methodref>
+      <methodref name="NewInstance" visibility="public">
+      </methodref>
+      <methodref name="FreeInstance" visibility="public">
+      </methodref>
+      <methodref name="Destroy" visibility="public">
+      </methodref>
+    </ancestor>
+    <members>
+      <field name="fStandardDirectories" type="THashedStringList" visibility="private" />
+      <field name="fSystemConfigFile" type="IConfigFile" visibility="private" />
+      <field name="fUserConfigFile" type="IConfigFile" visibility="private" />
+      <field name="fMasterFilesConfigFile" type="IConfigFile" visibility="private" />
+      <field name="fMRUModels" type="TMRUStringList" visibility="private" />
+      <field name="fDataAccessSources" type="THashedStringList" visibility="private" />
+      <field name="fMasterFiles" type="THashedStringList" visibility="private" />
+      <field name="fMDBs" type="THashedStringList" visibility="private" />
+      <function name="GetVersion" visibility="private">
+        <parameters>
+          <retval type="string" />
+        </parameters>
+      </function>
+      <function name="GetRefreshMDBs" visibility="private">
+        <parameters>
+          <retval type="Boolean" />
+        </parameters>
+      </function>
+      <function name="GetStandardDirectory" visibility="private">
+        <parameters>
+          <parameter name="Index" type="Integer" />
+          <retval type="string" />
+        </parameters>
+      </function>
+      <function name="GetStandardDirectoryCount" visibility="private">
+        <parameters>
+          <retval type="Integer" />
+        </parameters>
+      </function>
+      <function name="GetMRUModel" visibility="private">
+        <parameters>
+          <parameter name="Index" type="Integer" />
+          <retval type="TFileName" />
+        </parameters>
+      </function>
+      <function name="GetMRUModelsCount" visibility="private">
+        <parameters>
+          <retval type="Integer" />
+        </parameters>
+      </function>
+      <procedure name="SetMRUModelCountLimit" visibility="private">
+        <parameters>
+          <parameter name="Value" type="Integer" />
+        </parameters>
+      </procedure>
+      <function name="GetStandardDirectoryByName" visibility="private">
+        <parameters>
+          <parameter name="Index" type="string" />
+          <retval type="string" />
+        </parameters>
+      </function>
+      <procedure name="SetStandardDirectory" visibility="private">
+        <parameters>
+          <parameter name="Index" type="Integer" />
+          <parameter name="AValue" type="string" />
+        </parameters>
+      </procedure>
+      <function name="GetDataAccessSource" visibility="private">
+        <parameters>
+          <parameter name="Index" type="Integer" />
+          <retval type="string" />
+        </parameters>
+      </function>
+      <function name="GetDataAccessSourceCount" visibility="private">
+        <parameters>
+          <retval type="Integer" />
+        </parameters>
+      </function>
+      <function name="GetDataAccessSourcesByName" visibility="private">
+        <parameters>
+          <parameter name="Index" type="string" />
+          <retval type="string" />
+        </parameters>
+      </function>
+      <function name="GetDataAccessName" visibility="private">
+        <parameters>
+          <retval type="string" />
+        </parameters>
+      </function>
+      <procedure name="SetDataAccessName" visibility="private">
+        <parameters>
+          <parameter name="Value" type="string" paramflags="const" />
+        </parameters>
+      </procedure>
+      <function name="GetDataAccessID" visibility="private">
+        <parameters>
+          <parameter name="Index" type="Integer" />
+          <retval type="string" />
+        </parameters>
+      </function>
+      <function name="GetEMGWorkbench" visibility="private">
+        <parameters>
+          <retval type="string" />
+        </parameters>
+      </function>
+      <function name="GetMasterFile" visibility="private">
+        <parameters>
+          <parameter name="Index" type="Integer" />
+          <retval type="string" />
+        </parameters>
+      </function>
+      <function name="GetMasterFileByName" visibility="private">
+        <parameters>
+          <parameter name="Index" type="string" />
+          <retval type="string" />
+        </parameters>
+      </function>
+      <function name="GetMasterFileCount" visibility="private">
+        <parameters>
+          <retval type="Integer" />
+        </parameters>
+      </function>
+      <function name="GetMDB" visibility="private">
+        <parameters>
+          <parameter name="Index" type="Integer" />
+          <retval type="string" />
+        </parameters>
+      </function>
+      <function name="GetMDBByName" visibility="private">
+        <parameters>
+          <parameter name="Index" type="string" />
+          <retval type="string" />
+        </parameters>
+      </function>
+      <function name="GetMDBCount" visibility="private">
+        <parameters>
+          <retval type="Integer" />
+        </parameters>
+      </function>
+      <function name="GetStandardDirectoryID" visibility="private">
+        <parameters>
+          <parameter name="Index" type="Integer" />
+          <retval type="string" />
+        </parameters>
+      </function>
+      <function name="GetShowSplashScreen" visibility="private">
+        <parameters>
+          <retval type="Boolean" />
+        </parameters>
+      </function>
+      <procedure name="SetShowSplashScreen" visibility="private">
+        <parameters>
+          <parameter name="Value" type="Boolean" paramflags="const" />
+        </parameters>
+      </procedure>
+      <function name="GetShowVitalProgramsWarning" visibility="private">
+        <parameters>
+          <retval type="Boolean" />
+        </parameters>
+      </function>
+      <procedure name="SetShowVitalProgramsWarning" visibility="private">
+        <parameters>
+          <parameter name="Value" type="Boolean" paramflags="const" />
+        </parameters>
+      </procedure>
+      <function name="GetVitalProgramsAction" visibility="private">
+        <parameters>
+          <retval type="TVitalProgramsAction" />
+        </parameters>
+      </function>
+      <procedure name="SetVitalProgramsAction" visibility="private">
+        <parameters>
+          <parameter name="Value" type="TVitalProgramsAction" paramflags="const" />
+        </parameters>
+      </procedure>
+      <function name="GetDataAccessFileByName" visibility="private">
+        <parameters>
+          <parameter name="Index" type="string" />
+          <retval type="string" />
+        </parameters>
+      </function>
+      <function name="GetQCWorkspace" visibility="private">
+        <parameters>
+          <retval type="string" />
+        </parameters>
+      </function>
+      <function name="GetStudyAreaMaxExtents" visibility="private">
+        <parameters>
+          <retval type="string" />
+        </parameters>
+      </function>
+      <procedure name="SetStudyAreaMaxExtents" visibility="private">
+        <parameters>
+          <parameter name="Value" type="string" paramflags="const" />
+        </parameters>
+      </procedure>
+      <function name="GetMSAccessWaitMilliseconds" visibility="private">
+        <parameters>
+          <retval type="Integer" />
+        </parameters>
+      </function>
+      <procedure name="SetMSAccessWaitMilliseconds" visibility="private">
+        <parameters>
+          <parameter name="Value" type="Integer" paramflags="const" />
+        </parameters>
+      </procedure>
+      <function name="GetBasinBoundaries" visibility="private">
+        <parameters>
+          <retval type="string" />
+        </parameters>
+      </function>
+      <procedure name="SetBasinBoundaries" visibility="private">
+        <parameters>
+          <parameter name="Value" type="string" paramflags="const" />
+        </parameters>
+      </procedure>
+      <function name="GetMasterFilesVersion" visibility="private">
+        <parameters>
+          <retval type="string" />
+        </parameters>
+      </function>
+      <function name="GetMasterFilesConfigFileName" visibility="private">
+        <parameters>
+          <retval type="string" />
+        </parameters>
+      </function>
+      <function name="GetLayoutSetupFileName_MapLandscape_LegendLandscape" visibility="private">
+        <parameters>
+          <retval type="string" />
+        </parameters>
+      </function>
+      <function name="GetLayoutSetupFileName_MapLandscape_LegendPortrait" visibility="private">
+        <parameters>
+          <retval type="string" />
+        </parameters>
+      </function>
+      <function name="GetLayoutSetupFileName_MapPortrait_LegendLandscape" visibility="private">
+        <parameters>
+          <retval type="string" />
+        </parameters>
+      </function>
+      <function name="GetLayoutSetupFileName_MapPortrait_LegendPortrait" visibility="private">
+        <parameters>
+          <retval type="string" />
+        </parameters>
+      </function>
+      <constructor name="Create" visibility="public">
+        <parameters>
+        </parameters>
+      </constructor>
+      <destructor name="Destroy" visibility="public">
+        <parameters>
+        </parameters>
+      </destructor>
+      <property name="Version" visibility="public" read="GetVersion" type="string" />
+      <property name="MasterFilesVersion" visibility="public" read="GetMasterFilesVersion" type="string" />
+      <property name="MasterFilesConfigFileName" visibility="public" read="GetMasterFilesConfigFileName" type="string" />
+      <property name="RefreshMDBs" visibility="public" read="GetRefreshMDBs" type="Boolean" />
+      <property name="MasterFiles" visibility="public" read="GetMasterFile" type="string" />
+      <property name="MasterFilesByName" visibility="public" read="GetMasterFileByName" type="string" />
+      <property name="MasterFileCount" visibility="public" read="GetMasterFileCount" type="Integer" />
+      <property name="MDBs" visibility="public" read="GetMDB" type="string" />
+      <property name="MDBsByName" visibility="public" read="GetMDBByName" type="string" />
+      <property name="MDBCount" visibility="public" read="GetMDBCount" type="Integer" />
+      <property name="EMGWorkbench" visibility="public" read="GetEMGWorkbench" type="string" />
+      <property name="QCWorkspace" visibility="public" read="GetQCWorkspace" type="string" />
+      <property name="StandardDirectories" visibility="public" read="GetStandardDirectory" type="string" />
+      <property name="StandardDirectoriesByName" visibility="public" read="GetStandardDirectoryByName" type="string" />
+      <property name="StandardDirectoriesID" visibility="public" read="GetStandardDirectoryID" type="string" />
+      <property name="StandardDirectoryCount" visibility="public" read="GetStandardDirectoryCount" type="Integer" />
+      <property name="MRUModels" visibility="public" read="GetMRUModel" type="TFileName" />
+      <procedure name="AddMRUModel" visibility="public">
+        <parameters>
+          <parameter name="AFileName" type="TFileName" />
+        </parameters>
+      </procedure>
+      <property name="MRUModelsCount" visibility="public" read="GetMRUModelsCount" type="Integer" />
+      <property name="DataAccessName" visibility="public" read="GetDataAccessName" write="SetDataAccessName" type="string" />
+      <property name="DataAccessSources" visibility="public" read="GetDataAccessSource" type="string" />
+      <property name="DataAccessSourceCount" visibility="public" read="GetDataAccessSourceCount" type="Integer" />
+      <property name="DataAccessSourcesByName" visibility="public" read="GetDataAccessSourcesByName" type="string" />
+      <property name="DataAccessID" visibility="public" read="GetDataAccessID" type="string" />
+      <property name="DataAccessFileByName" visibility="public" read="GetDataAccessFileByName" type="string" />
+      <procedure name="CopySystemToModelConfig" visibility="public">
+        <parameters>
+          <parameter name="AConfig" type="IConfigFile" />
+        </parameters>
+      </procedure>
+      <property name="ShowSplashScreen" visibility="public" read="GetShowSplashScreen" write="SetShowSplashScreen" type="Boolean" />
+      <property name="ShowVitalProgramsWarning" visibility="public" read="GetShowVitalProgramsWarning" write="SetShowVitalProgramsWarning" type="Boolean" />
+      <property name="VitalProgramsAction" visibility="public" read="GetVitalProgramsAction" write="SetVitalProgramsAction" type="TVitalProgramsAction" />
+      <property name="MSAccessWaitMilliseconds" visibility="public" read="GetMSAccessWaitMilliseconds" write="SetMSAccessWaitMilliseconds" type="Integer" />
+      <property name="StudyAreaMaxExtents" visibility="public" read="GetStudyAreaMaxExtents" write="SetStudyAreaMaxExtents" type="string" />
+      <property name="BasinBoundaries" visibility="public" read="GetBasinBoundaries" write="SetBasinBoundaries" type="string" />
+      <property name="LayoutSetupFileName_MapLandscape_LegendPortrait" visibility="public" read="GetLayoutSetupFileName_MapLandscape_LegendPortrait" type="string" />
+      <property name="LayoutSetupFileName_MapLandscape_LegendLandscape" visibility="public" read="GetLayoutSetupFileName_MapLandscape_LegendLandscape" type="string" />
+      <property name="LayoutSetupFileName_MapPortrait_LegendPortrait" visibility="public" read="GetLayoutSetupFileName_MapPortrait_LegendPortrait" type="string" />
+      <property name="LayoutSetupFileName_MapPortrait_LegendLandscape" visibility="public" read="GetLayoutSetupFileName_MapPortrait_LegendLandscape" type="string" />
+      <procedure name="Update" visibility="public">
+      </procedure>
+    </members>
+  </class>
+  <variable name="SystemConfig" type="TSystemConfig" />
+</namespace>

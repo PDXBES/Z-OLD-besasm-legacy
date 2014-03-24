@@ -1,0 +1,25 @@
+# Compiler
+FC = gfortran
+
+# Compile flags
+FCFLAGS = -g -c -fdefault-real-8 -fbacktrace -fno-align-commons -fbounds-check -std=legacy
+
+# Link flags
+FLFLAGS =
+
+# source files and objects
+SRCS = $(patsubst %.FOR, %.o, $(wildcard *.FOR)) $(patsubst %.for, %.o, $(wildcard *.for))
+
+# program name
+PROGRAM = xswmm95y2k
+
+all: $(PROGRAM)
+
+$(PROGRAM): $(SRCS)
+	$(FC) $(FLFLAGS) -o $@ $^
+	
+%.o: %.FOR
+	$(FC) $(FCFLAGS) -o $@ $<
+	
+clean:
+	rm -f *.o *.mod

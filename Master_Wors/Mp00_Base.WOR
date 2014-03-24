@@ -1,0 +1,199 @@
+!Workspace
+!Version 650
+!Charset WindowsLatin1
+
+Map From QyScale,_MiFt_scale   
+  Position (0.260417,0.0833333) Units "in"
+  Width 6.26042 Units "in" Height 2.71875 Units "in" Min
+Set Window FrontWindow() ScrollBars Off Autoscroll On
+Set Map
+  CoordSys NonEarth Units "ft"
+  Center (718.445225,88708.15)
+  Zoom 10 Units "ft"
+  Preserve Zoom Display Zoom
+  XY Units "ft" Distance Units "ft" Area Units "sq ft"
+Set Map
+  Layer 1
+    Display Graphic
+    Label Line None Position Center Font ("Arial",0,9,0) Pen (1,2,0)   
+      With ZmUnits
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+  Layer 2
+    Display Graphic
+    Label Line None Position Center Font ("Arial",0,9,0) Pen (1,2,0)   
+      With ZmUnits
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+Set Window FrontWindow() Title "Scalebar Map"  
+Set Map Window Frontwindow() Zoom Entire Layer "QyScale"  
+'Print MpZoom
+Set Map Window Frontwindow() Zoom  (3.52*(mapperinfo( Windowinfo(windowid(1),13), 1))/11.95) units "Ft"
+Close Table QyScale
+Map From freeways_metro,Citylimi,freeways_metro,arterial,Waternew_rev0922,hillshadehi 
+  Position (1.38542,1.5) Units "in" Min
+  Width 3.5625 Units "in" Height 3.0625 Units "in" 
+Set Window FrontWindow() ScrollBars Off Autoscroll On
+Set Map
+  CoordSys Earth Projection 3, 33, "ft", -120.5, 43.6666666667, 44.3333333333, 46, 8202099.7379999999, 0
+  Center (7652322.007,690736.0838)
+  Zoom 21.62603352 Units "mi"
+  Preserve Zoom Display Zoom
+  Distance Units "mi" Area Units "sq mi" XY Units "ft"
+  Distance Type Cartesian
+Set Map
+  Layer 1
+    Display Global
+    Global    Line (20,2,8421504)  
+    Label Line Arrow Position Above Font ("Arial",0,9,0) Pen (1,2,0) 
+      With ""
+      Parallel On Auto Off Overlap Off Duplicates Off Offset 2
+      Visibility On
+  Layer 2
+    Display Global
+    Global Pen (20,2,16776960)  Brush (1,16777215,16777215)    
+    Label Line None Position Center Font ("Arial",0,9,0) Pen (1,2,0) 
+      With cityname
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+  Layer 3
+    Display Global
+    Global    Line (2,2,16711680)  
+    Label Line Arrow Position Above Font ("Arial",0,9,0) Pen (1,2,0) 
+      With ""
+      Parallel On Auto Off Overlap Off Duplicates Off Offset 2
+      Visibility On
+  Layer 4
+    Display Global
+    Label Line Arrow Position Above Font ("Arial",0,9,0) Pen (1,2,0) 
+      With PREFIX
+      Parallel On Auto Off Overlap Off Duplicates Off Offset 2
+      Visibility On
+  Layer 5
+    Display Global
+    Global Pen (1,24,49344)  Brush (15,49344,16777215)   Line (20,24,49344)  Font ("Arial",0,9,16777215)
+    Label Line Arrow Position Above Font ("Arial",0,9,0) Pen (1,2,0) 
+      With Subbasin
+      Parallel On Auto Off Overlap Off Duplicates Off Offset 2
+      Visibility On
+  Layer 6
+    Display Graphic
+    Selectable Off
+    Zoom (0.25, 98) Units "mi" 
+'  contrast 59 
+'  brightness 45 
+'  alpha 255 
+'    transparency off 
+'  color 0 
+'    grayscale off 
+Set CoordSys Earth Projection 3, 33, "ft", -120.5, 43.6666666667, 44.3333333333, 46, 8202099.7379999999, 0 Bounds (-348623368.682, -335442185.296) (365027568.158, 378208751.545)
+Set Map Layer 0 Editable
+Create Point (7643244.3,713530.9)
+    Symbol ("INTE1-32.BMP",2105599,14,0) 
+Create Point (7698920.2,688517.1)
+    Symbol ("INTE1-32.BMP",2105599,14,0) 
+Create Point (7671082.4,655030.8)
+    Symbol ("INTE1-32.BMP",2105599,14,0) 
+Create Point (7608548,684482.5)
+    Symbol ("INTE1-32.BMP",2105599,14,0) 
+Create Point (7626703,652206.6)
+    Symbol ("INTE1-32.BMP",2105599,14,0) 
+Create Point (7675520.3,720793)
+    Symbol ("INTE1-32.BMP",2105599,14,0) 
+'CREATING BOX FOR MAIN MAP WINDOW
+
+Create rect 
+		(mapperinfo( Windowinfo(windowid(1),13),5),mapperinfo( Windowinfo(windowid(1),13),6)) 
+		(mapperinfo( Windowinfo(windowid(1),13),7),mapperinfo( Windowinfo(windowid(1),13),8)) 
+    Pen (5,2,16776960) 
+    Brush (1,0,16777215)
+Create rect 
+		(mapperinfo( Windowinfo(windowid(1),13),5),mapperinfo( Windowinfo(windowid(1),13),6)) 
+		(mapperinfo( Windowinfo(windowid(1),13),7),mapperinfo( Windowinfo(windowid(1),13),8)) 
+    Pen (3,2,16711680) 
+    Brush (1,0,16777215)
+Create Text
+    "Project \nArea"
+'    ((Centroidx(ProjArea.obj)), (CentroidY(ProjArea.obj))) 
+'    ((Centroidx(ProjArea.obj))+12500 , (CentroidY(ProjArea.obj))+10000)
+'	(mapperinfo( Windowinfo(windowid(1),13),3), mapperinfo( Windowinfo(windowid(1),13),4)) 
+'	(mapperinfo( Windowinfo(windowid(1),13),3)+12500) ,(mapperinfo( Windowinfo(windowid(1),13),4)+10000) )
+	(mapperinfo( Windowinfo(windowid(1),13),3), mapperinfo( Windowinfo(windowid(1),13),4)) 
+	(mapperinfo( Windowinfo(windowid(1),13),3)+12500 ,(mapperinfo( Windowinfo(windowid(1),13),4)+10000) )
+    Font ("Arial Narrow",257,0,0,16776960)
+    Justify Center
+
+Set CoordSys Earth
+Set Map Layer 0 Editable
+Set Window FrontWindow() Title "Overview Mp"
+Map From North2   
+  Position (5.33333,2.10417) Units "in"
+  Width 1.19792 Units "in" Height 1.15625 Units "in" Min
+Set Window FrontWindow() ScrollBars Off Autoscroll On
+Set Map
+  CoordSys NonEarth Units "ft"
+  Center (1.065814104e-014,0.4867357599)
+  Zoom 84.66827684 Units "ft"
+  Preserve Zoom Display Zoom
+  XY Units "ft" Distance Units "ft" Area Units "sq ft"
+Set Map
+  Layer 1
+    Display Graphic
+    Label Line None Position Center Font ("Arial",0,9,0) Pen (1,2,0)   
+      With ID
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+Map From North2   
+  Position (0.166667,0.21875) Units "in"
+  Width 1.57292 Units "in" Height 1.11458 Units "in" Min
+Set Window FrontWindow() ScrollBars Off Autoscroll On
+Set Map
+  CoordSys NonEarth Units "ft"
+  Center (-11.06057243,-0.41705)
+  Zoom 107.5707242 Units "ft"
+  Preserve Zoom Display Zoom
+  XY Units "ft" Distance Units "ft" Area Units "sq ft"
+Set Map
+  Layer 1
+    Display Global
+    Global Pen (1,1,0)  Brush (1,16777215,16777215)   Line (1,1,0)  Font ("Arial",0,9,16777215)
+    Label Line None Position Center Font ("Arial Narrow",1,10,0) Pen (1,2,0)   
+      With CurDate()
+      Parallel On Auto On Overlap Off Duplicates Off PartialSegments On Offset 2
+      Visibility On
+Set Window FrontWindow() Title "Date Map"
+Map From Mapinfo2   
+  Position (0.291667,2.71875) Units "in"
+  Width 1.08333 Units "in" Height 1.07292 Units "in" Min
+Set Window FrontWindow() ScrollBars Off Autoscroll On
+Set Map
+  CoordSys NonEarth Units "ft"
+  Center (129.9555664,46.96170044)
+  Zoom 32.58730887 Units "ft"
+  Preserve Zoom Display Zoom
+  XY Units "ft" Distance Units "ft" Area Units "sq ft"
+Set Map
+  Layer 1
+    Display Graphic
+    Selectable Off
+    Zoom (25, 10000) Units "ft"   
+
+
+
+Map From SysAnaLog 
+  Position (0.677083,0.770833) Units "in"
+  Width 6.41667 Units "in" Height 1.96875 Units "in" Min
+Set Window FrontWindow() ScrollBars Off Autoscroll On
+Set Map
+  CoordSys NonEarth Units "ft"
+  Center (2652,-850)
+  Zoom 6240.666667 Units "ft"
+  Preserve Zoom Display Zoom
+  Distance Units "ft" Area Units "sq ft" XY Units "ft"
+  Distance Type Cartesian
+Set Map
+  Layer 1
+    Display Graphic
+    Global Pen (1,2,12632319)  Brush (1,16777215,16777215)  Symbol (59,255,12)  Line (1,2,16754768)  Font ("Arial Narrow",1,9,0)
+    Selectable Off
+    Zoom (25, 10000) Units "ft" 
