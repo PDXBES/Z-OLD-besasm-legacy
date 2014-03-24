@@ -9,6 +9,9 @@ namespace SystemsAnalysis.DataAccess
 {
   partial class ModelDataSet
   {
+    partial class MdlPipXPDataTable
+    {
+    }
   }
 }
 

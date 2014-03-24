@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Access = Microsoft.Office.Interop.Access;
-using dao;
+using dao = Microsoft.Office.Interop.Access.Dao;
 using System.Reflection;
 
 //using Microsoft.Office.Interop.Access.Dao;
@@ -26,7 +26,7 @@ namespace SystemsAnalysis.Utils.AccessUtils
     private Access.Application accessApp;
     private bool disposed;
     private DateTime startTime;
-    private dao.Database CurrentDB;
+    private Microsoft.Office.Interop.Access.Dao.Database CurrentDB;
     //private SqlConnection CurrentSQLDB;
 
     public static void CreateNewMdb(string database)
@@ -62,7 +62,7 @@ namespace SystemsAnalysis.Utils.AccessUtils
       startTime = System.DateTime.Now;
       accessApp = ShellGetDB(databaseName, 2000);
       //accessApp = new Access.Application();
-      CurrentDB = this.accessApp.CurrentDb();
+      CurrentDB = accessApp.CurrentDb();
 
       disposed = false;
     }
@@ -604,7 +604,7 @@ namespace SystemsAnalysis.Utils.AccessUtils
     /// <param name="fieldName">The name of the field to be found</param>
     /// <returns>The field in the provided recordset that matches the provided field name, or null if the
     /// field is not found  </returns>
-    private dao.Field FindField(Recordset rs, string fieldName)
+    private dao.Field FindField(dao.Recordset rs, string fieldName)
     {
       rs.MoveFirst();
       for (int i = 0; i < rs.Fields.Count; i++)
@@ -817,8 +817,16 @@ namespace SystemsAnalysis.Utils.AccessUtils
         // Now that we have the CLSID, locate the server path at
         // HKEY_LOCAL_MACHINE\Software\Classes\CLSID\ 
         // {xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxx}\LocalServer32:
-        oKey = oReg.OpenSubKey(@"Software\Classes\CLSID\" + sCLSID +
-        @"\LocalServer32");
+        if (Is64BitOS())
+        {
+          oKey = oReg.OpenSubKey(@"Software\Classes\Wow6432Node\CLSID\" + sCLSID +
+         @"\LocalServer32");
+        }
+        else
+        {
+          oKey = oReg.OpenSubKey(@"Software\Classes\CLSID\" + sCLSID +
+          @"\LocalServer32");
+        }
         sPath = oKey.GetValue("").ToString();
         oKey.Close();
 
@@ -833,6 +841,14 @@ namespace SystemsAnalysis.Utils.AccessUtils
       }
     }
     #endregion
+
+    public bool Is64BitOS()
+    {
+      if (IntPtr.Size == 8)
+        return true;
+      else
+        return false;
+    }
 
     public void AddField(string tableName, string fieldName, FieldType fieldType)
     {
@@ -868,11 +884,11 @@ namespace SystemsAnalysis.Utils.AccessUtils
     /// with the proposed field name, false otherwise.  </returns>
     public bool FieldNameExists(string tableName, string fieldName, FieldType fieldType)
     {
-      TableDef tbl;
+      dao.TableDef tbl;
       bool returnValue = false;
 
       tbl = GetTableDef(tableName);
-      foreach (Field fld in tbl.Fields)
+      foreach (dao.Field fld in tbl.Fields)
       {
         if (fld.Name == fieldName)
         {
@@ -892,8 +908,8 @@ namespace SystemsAnalysis.Utils.AccessUtils
     /// <returns>Returns true if the field has a matching field type, false otherwise.</returns>
     public bool FieldTypeMatches(string tableName, string fieldName, FieldType fieldType)
     {
-      TableDef tbl = GetTableDef(tableName);
-      Field fld = tbl.Fields[fieldName];
+      dao.TableDef tbl = GetTableDef(tableName);
+      dao.Field fld = tbl.Fields[fieldName];
       bool fieldTypeMatches = false;
 
       switch ((FieldType)fieldType)

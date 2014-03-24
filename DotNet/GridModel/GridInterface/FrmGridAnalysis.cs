@@ -94,9 +94,35 @@ namespace SystemsAnalysis.Grid.GridAnalysis
                 }
                 if (SQLisSource == true)
                 {
+                    //Currently, the most important tables should be tested for, and 
+                    //any person wishing to establish a new gridmodel database should
+                    //be given a tool that creates a gridmodel database on a server of their choosing.
+                    //That tool should be integrated with the GridModel tool, but as things stand now,
+                    //it is more important to concentrate on some of the more production breaking bugs.
+
+                    //The tables that the user may want to specify are as follows:
+                    //GRID_pollutant_loadings
+                    //GRID_BMP_PERFORMANCE
+
+                    //The tables that the user may want to edit, but probably should not specify are as follows:
+                    //GRID_variables - it may be possible that the user will want to supply their own variables, editing this directly
+                    //GRID_FE_HYETOGRAPHS
+                    //GRID_FE_HYETOGRAPH_DATA
+                    //GRID_ZONING_IMP
+
+                    //If the user wants to supply their own pollutant_loadings and bmp_performance table,
+                    //then that table should exist on a SERVER, not in an access database.  There are plenty
+                    //of applications that allow a person to upload an access database table to an sql server,
+                    //so I'm not going to supply that ability here.
+
+                    //In order to implement this, the archive function should not retain the external locations
+                    //of tables that are not inside the database, but instead should map to the table that
+                    //was copied into it, and then perhaps identify the original path somewhere within
+                    //metadata for that table.  This is to ensure that the table's integrity is not compromised
+                    //in between gridmodel runs.
                     serverIsUsable = SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_GridResults");
                     serverIsUsable = serverIsUsable + SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_ZONING_IMP");
-                    serverIsUsable = serverIsUsable + SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_variables");
+                    //serverIsUsable = serverIsUsable + SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_variables");
                     serverIsUsable = serverIsUsable + SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_FE_SELECTION_SETS");
                     serverIsUsable = serverIsUsable + SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_FE_SELECTION_SET_AREAS");
                     serverIsUsable = serverIsUsable + SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_FE_SCENARIOS");
@@ -107,10 +133,8 @@ namespace SystemsAnalysis.Grid.GridAnalysis
                     serverIsUsable = serverIsUsable + SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_FE_HYETOGRAPHS");
                     serverIsUsable = serverIsUsable + SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_FE_HYETOGRAPH_DATA");
                     serverIsUsable = serverIsUsable + SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_FE_GRID_PROJECTS");
-                    //serverIsUsable = serverIsUsable + SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_Contaminants");
-                    //serverIsUsable = serverIsUsable + SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_BMP_TYPE_TABLE_GENERAL");
-                    serverIsUsable = serverIsUsable + SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_BMP_PERFORMANCE");
-                    serverIsUsable = serverIsUsable + SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_pollutant_loadings");
+                    //serverIsUsable = serverIsUsable + SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_BMP_PERFORMANCE");
+                    //serverIsUsable = serverIsUsable + SQLHelper.SQLTestDatabase(inputDatabase, domain + "GRID_pollutant_loadings");
 
                     if (serverIsUsable != "")
                     {
@@ -1128,43 +1152,6 @@ namespace SystemsAnalysis.Grid.GridAnalysis
                 MessageBox.Show("The connections you have selected are not acceptable to use for the GRIDMODEL");
                 MessageBox.Show(serverIsUsable);
             }
-
-            //make sure the table also has all of the appropriate columns
-            //with all of the appropriate data types.
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_pollutant_loadings", dynamicInputDatabase, "LU_CODE", "string");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_pollutant_loadings", dynamicInputDatabase, "Landuse", "string");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_pollutant_loadings", dynamicInputDatabase, "Constituent", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_pollutant_loadings", dynamicInputDatabase, "VALUE_LOW", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_pollutant_loadings", dynamicInputDatabase, "UNITS", "string");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_pollutant_loadings", dynamicInputDatabase, "Source", "string");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_pollutant_loadings", dynamicInputDatabase, "VALUE_HIGH", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_pollutant_loadings", dynamicInputDatabase, "VALUE", "number");
-
-            //if ScalarQueryResults is not null, then we have a good answer
-            if (numberOfMatchingColumns == null)
-            {
-                MessageBox.Show("Could not test provided table for validity, please verify the source before trying to run the Grid Model");
-            }
-            else if ((int)numberOfMatchingColumns != 8)
-            {
-                MessageBox.Show("The table you indicated does not contain the necessary columns, please check the documentation for guidelines on creating a pollutant loading Table");
-            }
         }
 
         private void buttonBMPEffectivenessConnectionStringEdit_Click(object sender, EventArgs e)
@@ -1186,39 +1173,6 @@ namespace SystemsAnalysis.Grid.GridAnalysis
             {
                 MessageBox.Show("The connections you have selected are not acceptable to use for the GRIDMODEL");
                 MessageBox.Show(serverIsUsable);
-            }
-
-            //make sure the table also has all of the appropriate columns
-            //with all of the appropriate data types.
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_BMP_PERFORMANCE", dynamicInputDatabase, "BMP_TYPE_GEN_ID", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_BMP_PERFORMANCE", dynamicInputDatabase, "Constituent", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_BMP_PERFORMANCE", dynamicInputDatabase, "VALUE_LOW", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_BMP_PERFORMANCE", dynamicInputDatabase, "UNITS", "string");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_BMP_PERFORMANCE", dynamicInputDatabase, "Source", "string");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_BMP_PERFORMANCE", dynamicInputDatabase, "VALUE_HIGH", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_BMP_PERFORMANCE", dynamicInputDatabase, "VALUE", "number");
-
-            if (numberOfMatchingColumns == null)
-            {
-                MessageBox.Show("Could not test provided table for validity, please verify the source before trying to run the Grid Model");
-            }
-            else if ((int)numberOfMatchingColumns != 7)
-            {
-                MessageBox.Show("The table you indicated does not contain the necessary columns, please check the documentation for guidelines on creating a pollutant loading Table");
             }
         }
 
@@ -1273,258 +1227,6 @@ namespace SystemsAnalysis.Grid.GridAnalysis
                 MessageBox.Show("The connections you have selected are not acceptable to use for the GRIDMODEL");
                 MessageBox.Show(serverIsUsable);
             }
-
-            //make sure the table also has all of the appropriate columns
-            //with all of the appropriate data types.
-            //there must be 81 matches (there is no chance there could be more than 81
-            //matches even if there are more than 81 columns in the input table,
-            //and less than 81 matches means the input table isn't ready.)
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "Description", "string");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "Col_Name", "string");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "Row_Name", "string");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "Area_ft2", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "Avg_Slope", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "Public", "string");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "Private", "string");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "VEG_LONcellCount", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "VEG_LOFFcellCount", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "CPY_LONcellCount", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "ROW_CellCount", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "RF_CellCount", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "PKG_CellCount", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "IMP_CellCount", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "WAT_CellCount", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "TRA_LUcellCount", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "COM_LUcellCount", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "IND_LUcellCount", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "SFR_LUcellCount", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "MFR_LUcellCount", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "FOR_LUcellCount", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "RUR_LUcellCount", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "VAC_LUcellCount", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "POS_LUcellCount", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "Blnk_LUcellCount", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "VEG_LON_pct", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "VEG_LOFF_pct", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "CPY_LON_pct", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "CPY_LOFF_pct", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "VEG_pct", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "ROW_pct", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "RF_pct", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "PKG_pct", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "IMP_pct", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "TSS", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "WAT_pct", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "CAL_point", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "WS_Code", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "BASIN_Code", "string");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "BRANCH_ID", "string");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "IN_PDX", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "RAINGAGE", "string");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "COL_B", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "COL_C", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "COL_D", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "COL_E", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "COL_F", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "COL_G", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "COL_H", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "COL_I", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "COL_J", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "COL_K", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "COL_L", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "COL_M", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "COL_N", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "COL_O", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "COL_P", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "COL_Q", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "COL_1", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "COL_2", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "COL_3", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "TP", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "TSS", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "ECOLI", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "BOD", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "TP_WET", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "TSS_WET", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "ECOLI_WET", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "BOD_WET", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "TP_DRY", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "TSS_DRY", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "ECOLI_DRY", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "BOD_DRY", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "PbD", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "PbD_DRY", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "PbD_WET", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "ECOLI_REMOVAL", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "Xc", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_WshdGrd100FtOpt", dynamicInputDatabase, "Yc", "number");
-
-            if (numberOfMatchingColumns == null)
-            {
-                MessageBox.Show("Could not test provided table for validity, please verify the source before trying to run the Grid Model");
-            }
-            else if ((int)numberOfMatchingColumns != 79)
-            {
-                MessageBox.Show("The table you indicated does not contain the necessary columns, please check the documentation for guidelines on creating a Grid Table");
-            }
         }
 
         private void buttonPRFPathEdit_Click(object sender, EventArgs e)
@@ -1544,37 +1246,6 @@ namespace SystemsAnalysis.Grid.GridAnalysis
             {
                 MessageBox.Show("The connections you have selected are not acceptable to use for the GRIDMODEL");
                 MessageBox.Show(serverIsUsable);
-            }
-
-            //make sure the table also has all of the appropriate columns
-            //with all of the appropriate data types.
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_PDX_BMP_GRID", dynamicInputDatabase, "Description", "string");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_PDX_BMP_GRID", dynamicInputDatabase, "Percent_Overlap", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_PDX_BMP_GRID", dynamicInputDatabase, "INSTREAM", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_PDX_BMP_GRID", dynamicInputDatabase, "BMP_ID", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_PDX_BMP_GRID", dynamicInputDatabase, "BMP_Type1", "string");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_PDX_BMP_GRID", dynamicInputDatabase, "TimeFrame", "string");
-
-            //if ScalarQueryResults is not null, then we have a good answer
-            if (numberOfMatchingColumns == null)
-            {
-                MessageBox.Show("Could not test provided table for validity, please verify the source before trying to run the Grid Model");
-            }
-            else if ((int)numberOfMatchingColumns != 6)
-            {
-                MessageBox.Show("The table you indicated does not contain the necessary columns, please check the documentation for guidelines on creating a BMP Table");
             }
         }
 
@@ -1596,29 +1267,6 @@ namespace SystemsAnalysis.Grid.GridAnalysis
                 MessageBox.Show("The connections you have selected are not acceptable to use for the GRIDMODEL");
                 MessageBox.Show(serverIsUsable);
             }
-
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_PDX_MIP_GRID", dynamicInputDatabase, "Description", "string");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_PDX_MIP_GRID", dynamicInputDatabase, "Percent_Overlap", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_PDX_MIP_GRID", dynamicInputDatabase, "BMP_Type", "string");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_PDX_MIP_GRID", dynamicInputDatabase, "Description_2", "string");
-
-            //if ScalarQueryResults is not null, then we have a good answer
-            if (numberOfMatchingColumns == null)
-            {
-                MessageBox.Show("Could not test provided table for validity, please verify the source before trying to run the Grid Model");
-            }
-            else if ((int)numberOfMatchingColumns != 4)
-            {
-                MessageBox.Show("The table you indicated does not contain the necessary columns, please check the documentation for guidelines on creating a MIP Table");
-            }
         }
 
         private void buttonOSFPathEdit_Click(object sender, EventArgs e)
@@ -1639,27 +1287,11 @@ namespace SystemsAnalysis.Grid.GridAnalysis
                 MessageBox.Show("The connections you have selected are not acceptable to use for the GRIDMODEL");
                 MessageBox.Show(serverIsUsable);
             }
-            //make sure the table also has all of the appropriate columns
-            //with all of the appropriate data types.
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_PDX_OSF_GRID", dynamicInputDatabase, "Description", "string");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_PDX_OSF_GRID", dynamicInputDatabase, "Percent_Overlap", "number");
-            numberOfMatchingColumns = numberOfMatchingColumns +
-                SQLHelper.SQLTestTableForFuzzyColumn
-                ("GRID_PDX_OSF_GRID", dynamicInputDatabase, "FAC_GRP", "string");
+        }
 
-            //if ScalarQueryResults is not null, then we have a good answer
-            if (numberOfMatchingColumns == null)
-            {
-                MessageBox.Show("Could not test provided table for validity, please verify the source before trying to run the Grid Model");
-            }
-            else if ((int)numberOfMatchingColumns != 3)
-            {
-                MessageBox.Show("The table you indicated does not contain the necessary columns, please check the documentation for guidelines on creating a OSF Table");
-            }
+        private void buttonPollutantLoadingTableLocate_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -114,6 +114,8 @@ namespace SWI_2
                         sANDBOXDataSet.DataTableFieldSurvey.LoadDataRow(r.ItemArray, false);
                         sANDBOXDataSet.DataTableFieldSurvey.EndLoadData();
                         sANDBOXDataSet.DataTableFieldSurvey.AcceptChanges();
+                        //insert an empty photo record into the photo table?
+                        //This may be necessary for the datatable records.
                         this.swsP_PHOTOTableAdapter1.InsertQuery(tempGlobal_id, "", "");
                     }
 
@@ -157,11 +159,11 @@ namespace SWI_2
                 sANDBOXDataSet.DataTableFieldSurveyEditable.AcceptChanges();
                 foreach (DataRow r in this.sANDBOXDataSet.DataTableFieldSurvey)
                 {
-                    if ((int)r.ItemArray[15] == (int)((DataRowView)fKVIEWSUBWATERSHEDBindingSource.Current)[2] &&
-                        (int)r.ItemArray[16] == Int32.Parse(comboBoxSurveyPage.Text)&&// (int) ((DataRowView)fKSURVEYPAGEVIEWBindingSource.Current)[2] &&
-                       (string)r.ItemArray[17] == (string) ((DataRowView)sWSPWATERSHEDBindingSource.Current)[1] &&
-                       (string)r.ItemArray[18] == (string)((DataRowView)fKSUBWATERSHEDWATERSHEDBindingSource.Current)[2] &&
-                        (int)((r.ItemArray[19] is System.DBNull) ? 0 : (int)r.ItemArray[19]) != 1)
+                    if ((int)r["view_number"]/*[15]*/ == (int)((DataRowView)fKVIEWSUBWATERSHEDBindingSource.Current)["view_number"]/*[2]*/ &&
+                        (int)r["page_number"]/*[16]*/ == Int32.Parse(comboBoxSurveyPage.Text)&&// (int) ((DataRowView)fKSURVEYPAGEVIEWBindingSource.Current)[2] &&
+                       (string)r["watershed"]/*[17]*/ == (string)((DataRowView)sWSPWATERSHEDBindingSource.Current)["watershed"]/*[1]*/ &&
+                       (string)r["subwatershed"]/*[18]*/ == (string)((DataRowView)fKSUBWATERSHEDWATERSHEDBindingSource.Current)["subwatershed"]/*[2]*/ &&
+                        (int)((r["action"] is System.DBNull) ? 0 : (int)r["action"]) != 1)
                     {
                         sANDBOXDataSet.DataTableFieldSurveyEditable.LoadDataRow(r.ItemArray, false);
                         sANDBOXDataSet.DataTableFieldSurveyEditable.EndLoadData();
@@ -194,7 +196,7 @@ namespace SWI_2
             }
         }
 
-        private void CheckEvaluatorsAssociatedWithThisSurveyPage()
+        /*private void CheckEvaluatorsAssociatedWithThisSurveyPage()
         {
             //check the objects in the checkedListBox the evaluator_id is in
             //the Survey_Page_Evaluator Dataset for this SurveyPage
@@ -217,7 +219,7 @@ namespace SWI_2
             catch (Exception ex)
             {
             }
-        }
+        }*/
 
         private void comboBoxMapNo_SelectedValueChanged(object sender, System.EventArgs e)
         {
@@ -236,13 +238,13 @@ namespace SWI_2
 
         private void SurveyPageValueChanged(object sender, System.EventArgs e)
         {
-            CheckEvaluatorsAssociatedWithThisSurveyPage();
+            //CheckEvaluatorsAssociatedWithThisSurveyPage();
             PopulateLinkInfo();
         }
 
         private void checkedListBoxEvaluators_SelectedIndexChanged(object sender, EventArgs e)
         {
-            System.Data.DataRowView item;
+            /*System.Data.DataRowView item;
             //check the index of the selected items.
             //Update Survey_Page_Evaluator according to which ones are selected
 
@@ -266,7 +268,7 @@ namespace SWI_2
             }
             catch (Exception ex)
             {
-            }
+            }*/
         }
 
         private void translateChangesAndSaveToDatabase()
@@ -647,6 +649,30 @@ namespace SWI_2
 
         private void buttonAddMap_Click(object sender, EventArgs e)
         {
+            //yes this redundancy is really necessary
+            try
+            {
+                //sometimes the user will not have a row selected when they close out.
+                dataGridViewLinkInfo.CurrentRow.DataGridView.EndEdit();
+            }
+            catch (Exception ex)
+            {
+            }
+            dataGridViewLinkInfo.EndEdit();
+            CurrencyManager cm = (CurrencyManager)dataGridViewLinkInfo.BindingContext[dataGridViewLinkInfo.DataSource, dataGridViewLinkInfo.DataMember];
+            cm.EndCurrentEdit();
+
+            PopulateLinkInfo();
+            DialogResult theAnswer = MessageBox.Show("Do you wish to save changes to the database?", "Save before adding map", MessageBoxButtons.YesNo);
+            if (theAnswer == DialogResult.No)
+            {
+                //do nothing
+            }
+            else if (theAnswer == DialogResult.Yes)
+            {
+                translateChangesAndSaveToDatabase();
+            }
+
             int CurrentView = 0;
             int CurrentSurveyPage = 0;
             int CurrentWatershed = 0;
@@ -726,6 +752,30 @@ namespace SWI_2
 
         private void buttonAddSurveyPage_Click(object sender, EventArgs e)
         {
+            //yes this redundancy is really necessary
+            try
+            {
+                //sometimes the user will not have a row selected when they close out.
+                dataGridViewLinkInfo.CurrentRow.DataGridView.EndEdit();
+            }
+            catch (Exception ex)
+            {
+            }
+            dataGridViewLinkInfo.EndEdit();
+            CurrencyManager cm = (CurrencyManager)dataGridViewLinkInfo.BindingContext[dataGridViewLinkInfo.DataSource, dataGridViewLinkInfo.DataMember];
+            cm.EndCurrentEdit();
+
+            PopulateLinkInfo();
+            DialogResult theAnswer = MessageBox.Show("Do you wish to save changes to the database?", "Save before adding page", MessageBoxButtons.YesNo);
+            if (theAnswer == DialogResult.No)
+            {
+                //do nothing
+            }
+            else if (theAnswer == DialogResult.Yes)
+            {
+                translateChangesAndSaveToDatabase();
+            }
+
             int CurrentView = 0;
             int CurrentSurveyPage = 0;
             int CurrentWatershed = 0;

@@ -1417,7 +1417,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
         CostItemFactor CEAdaRampCIF = null;
         CostItemFactor CEWaterLineSleevingCIF = null;
 
-        switch (streetTarget.TypeCode)
+        switch (streetTarget.TypeCode.ToLower())
         {
           case "v":
             _ICCoster.InflowControl = InflowControl.FlowRestrictor;
@@ -1741,6 +1741,9 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
                 pipeAndManholeCostItemFactor.AddFactor(factorItem);
               } // foreach  (ancillaryFactor)
             }
+
+            foreach (KeyValuePair<int, CostFactor> kvpair in _StandardCostFactorPool)
+              pipeAndManholeItem.AddFactor(kvpair.Value);
 
             // Prepare report item
             currentStage = "Preparing report item";

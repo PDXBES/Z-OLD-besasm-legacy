@@ -84,6 +84,9 @@ Sub UpdateSSC
 	'Select (Correct colums) From NewToServiceAreaDSC
 	'Append into mdl_dsc From NewToServiceAreaDSC
 			
+	Pack Table mdl_surfsc Graphic Data
+	Pack Table alt_ssc Graphic Data
+	
 	Select mdl_surfSC.NGTO "oldNGTO", alt_ssc.NGTO "newNGTO" From mdl_surfSC, alt_ssc 
 		Where mdl_surfSC.SurfSCID = alt_ssc.MdlSurfSCID 	
 		Into update_ssc

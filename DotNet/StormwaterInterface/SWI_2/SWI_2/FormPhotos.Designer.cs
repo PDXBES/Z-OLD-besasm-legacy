@@ -30,6 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             this.dataGridViewPhotos = new System.Windows.Forms.DataGridView();
+            this.photoidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.globalidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.locationDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.commentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sWSPPHOTOBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.sANDBOXDataSet = new SWI_2.SANDBOXDataSet();
             this.buttonDone = new System.Windows.Forms.Button();
@@ -38,10 +42,6 @@
             this.buttonDeletePhoto = new System.Windows.Forms.Button();
             this.buttonAddRow = new System.Windows.Forms.Button();
             this.sWSP_PHOTOTableAdapter = new SWI_2.SANDBOXDataSetTableAdapters.SWSP_PHOTOTableAdapter();
-            this.photoidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.globalidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.locationDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.commentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPhotos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sWSPPHOTOBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sANDBOXDataSet)).BeginInit();
@@ -65,6 +65,35 @@
             this.dataGridViewPhotos.Name = "dataGridViewPhotos";
             this.dataGridViewPhotos.Size = new System.Drawing.Size(988, 230);
             this.dataGridViewPhotos.TabIndex = 0;
+            // 
+            // photoidDataGridViewTextBoxColumn
+            // 
+            this.photoidDataGridViewTextBoxColumn.DataPropertyName = "photo_id";
+            this.photoidDataGridViewTextBoxColumn.HeaderText = "photo_id";
+            this.photoidDataGridViewTextBoxColumn.Name = "photoidDataGridViewTextBoxColumn";
+            this.photoidDataGridViewTextBoxColumn.ReadOnly = true;
+            this.photoidDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // globalidDataGridViewTextBoxColumn
+            // 
+            this.globalidDataGridViewTextBoxColumn.DataPropertyName = "global_id";
+            this.globalidDataGridViewTextBoxColumn.HeaderText = "global_id";
+            this.globalidDataGridViewTextBoxColumn.Name = "globalidDataGridViewTextBoxColumn";
+            this.globalidDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // locationDataGridViewTextBoxColumn
+            // 
+            this.locationDataGridViewTextBoxColumn.DataPropertyName = "location";
+            this.locationDataGridViewTextBoxColumn.HeaderText = "File Path";
+            this.locationDataGridViewTextBoxColumn.Name = "locationDataGridViewTextBoxColumn";
+            this.locationDataGridViewTextBoxColumn.Width = 600;
+            // 
+            // commentDataGridViewTextBoxColumn
+            // 
+            this.commentDataGridViewTextBoxColumn.DataPropertyName = "comment";
+            this.commentDataGridViewTextBoxColumn.HeaderText = "comment";
+            this.commentDataGridViewTextBoxColumn.Name = "commentDataGridViewTextBoxColumn";
+            this.commentDataGridViewTextBoxColumn.Width = 300;
             // 
             // sWSPPHOTOBindingSource
             // 
@@ -132,35 +161,6 @@
             // sWSP_PHOTOTableAdapter
             // 
             this.sWSP_PHOTOTableAdapter.ClearBeforeFill = true;
-            // 
-            // photoidDataGridViewTextBoxColumn
-            // 
-            this.photoidDataGridViewTextBoxColumn.DataPropertyName = "photo_id";
-            this.photoidDataGridViewTextBoxColumn.HeaderText = "photo_id";
-            this.photoidDataGridViewTextBoxColumn.Name = "photoidDataGridViewTextBoxColumn";
-            this.photoidDataGridViewTextBoxColumn.ReadOnly = true;
-            this.photoidDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // globalidDataGridViewTextBoxColumn
-            // 
-            this.globalidDataGridViewTextBoxColumn.DataPropertyName = "global_id";
-            this.globalidDataGridViewTextBoxColumn.HeaderText = "global_id";
-            this.globalidDataGridViewTextBoxColumn.Name = "globalidDataGridViewTextBoxColumn";
-            this.globalidDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // locationDataGridViewTextBoxColumn
-            // 
-            this.locationDataGridViewTextBoxColumn.DataPropertyName = "location";
-            this.locationDataGridViewTextBoxColumn.HeaderText = "File Path";
-            this.locationDataGridViewTextBoxColumn.Name = "locationDataGridViewTextBoxColumn";
-            this.locationDataGridViewTextBoxColumn.Width = 600;
-            // 
-            // commentDataGridViewTextBoxColumn
-            // 
-            this.commentDataGridViewTextBoxColumn.DataPropertyName = "comment";
-            this.commentDataGridViewTextBoxColumn.HeaderText = "comment";
-            this.commentDataGridViewTextBoxColumn.Name = "commentDataGridViewTextBoxColumn";
-            this.commentDataGridViewTextBoxColumn.Width = 300;
             // 
             // FormPhotos
             // 

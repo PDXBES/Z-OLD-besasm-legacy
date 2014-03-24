@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.mlinkidDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.compkeyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -150,6 +153,9 @@
             this.labelConsequenceOfFailure = new System.Windows.Forms.Label();
             this.checkBoxChangeReplacementCost = new System.Windows.Forms.CheckBox();
             this.checkBoxChangeConsequenceOfFailure = new System.Windows.Forms.CheckBox();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.resetCostsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rEHAB10FTSEGSBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rEHABDataSet)).BeginInit();
@@ -175,11 +181,23 @@
             ((System.ComponentModel.ISupportInitialize)(this.constantsBindingSource)).BeginInit();
             this.groupBoxConstants.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridView1
             // 
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.AutoGenerateColumns = false;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.mlinkidDataGridViewTextBoxColumn,
@@ -230,9 +248,25 @@
             this.aCCUMRISKREPLACEYEARDataGridViewTextBoxColumn,
             this.aCCUMRISKINSPECTYEARDataGridViewTextBoxColumn});
             this.dataGridView1.DataSource = this.rEHAB10FTSEGSBindingSource;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 12);
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dataGridView1.Location = new System.Drawing.Point(12, 27);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(929, 354);
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.dataGridView1.Size = new System.Drawing.Size(927, 337);
             this.dataGridView1.TabIndex = 0;
             // 
             // mlinkidDataGridViewTextBoxColumn
@@ -580,7 +614,7 @@
             // 
             this.labelReplacementCost.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.labelReplacementCost.AutoSize = true;
-            this.labelReplacementCost.Location = new System.Drawing.Point(790, 442);
+            this.labelReplacementCost.Location = new System.Drawing.Point(788, 440);
             this.labelReplacementCost.Name = "labelReplacementCost";
             this.labelReplacementCost.Size = new System.Drawing.Size(139, 13);
             this.labelReplacementCost.TabIndex = 7;
@@ -590,7 +624,7 @@
             // 
             this.textBoxReplacementCost.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxReplacementCost.Enabled = false;
-            this.textBoxReplacementCost.Location = new System.Drawing.Point(793, 459);
+            this.textBoxReplacementCost.Location = new System.Drawing.Point(791, 457);
             this.textBoxReplacementCost.Name = "textBoxReplacementCost";
             this.textBoxReplacementCost.Size = new System.Drawing.Size(100, 20);
             this.textBoxReplacementCost.TabIndex = 8;
@@ -598,7 +632,7 @@
             // buttonGetResults
             // 
             this.buttonGetResults.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonGetResults.Location = new System.Drawing.Point(793, 550);
+            this.buttonGetResults.Location = new System.Drawing.Point(791, 548);
             this.buttonGetResults.Name = "buttonGetResults";
             this.buttonGetResults.Size = new System.Drawing.Size(100, 23);
             this.buttonGetResults.TabIndex = 9;
@@ -609,7 +643,7 @@
             // textBoxGetPipeByCompkey
             // 
             this.textBoxGetPipeByCompkey.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxGetPipeByCompkey.Location = new System.Drawing.Point(793, 419);
+            this.textBoxGetPipeByCompkey.Location = new System.Drawing.Point(791, 417);
             this.textBoxGetPipeByCompkey.Name = "textBoxGetPipeByCompkey";
             this.textBoxGetPipeByCompkey.Size = new System.Drawing.Size(100, 20);
             this.textBoxGetPipeByCompkey.TabIndex = 10;
@@ -618,7 +652,7 @@
             // 
             this.labelGetPipeByCompkey.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.labelGetPipeByCompkey.AutoSize = true;
-            this.labelGetPipeByCompkey.Location = new System.Drawing.Point(794, 400);
+            this.labelGetPipeByCompkey.Location = new System.Drawing.Point(792, 398);
             this.labelGetPipeByCompkey.Name = "labelGetPipeByCompkey";
             this.labelGetPipeByCompkey.Size = new System.Drawing.Size(54, 13);
             this.labelGetPipeByCompkey.TabIndex = 11;
@@ -914,6 +948,7 @@
             // 
             // textBoxEstimateENR
             // 
+            this.textBoxEstimateENR.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.textBoxEstimateENR.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.constantsBindingSource, "EstimateENR", true));
             this.textBoxEstimateENR.Location = new System.Drawing.Point(127, 176);
             this.textBoxEstimateENR.Name = "textBoxEstimateENR";
@@ -941,6 +976,7 @@
             // 
             // textBoxManholeFloodFarFromSchool
             // 
+            this.textBoxManholeFloodFarFromSchool.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.textBoxManholeFloodFarFromSchool.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.constantsBindingSource, "MHFloodFarSchoolCost", true));
             this.textBoxManholeFloodFarFromSchool.Location = new System.Drawing.Point(127, 326);
             this.textBoxManholeFloodFarFromSchool.Name = "textBoxManholeFloodFarFromSchool";
@@ -950,6 +986,7 @@
             // 
             // textBoxManholeFloodFreewayCleanup
             // 
+            this.textBoxManholeFloodFreewayCleanup.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.textBoxManholeFloodFreewayCleanup.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.constantsBindingSource, "MHFloodCleanupFrwy", true));
             this.textBoxManholeFloodFreewayCleanup.Location = new System.Drawing.Point(127, 374);
             this.textBoxManholeFloodFreewayCleanup.Name = "textBoxManholeFloodFreewayCleanup";
@@ -959,6 +996,7 @@
             // 
             // textBoxManholeFloodMajorArterialCleanup
             // 
+            this.textBoxManholeFloodMajorArterialCleanup.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.textBoxManholeFloodMajorArterialCleanup.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.constantsBindingSource, "MHFloodCleanupMajArt", true));
             this.textBoxManholeFloodMajorArterialCleanup.Location = new System.Drawing.Point(130, 424);
             this.textBoxManholeFloodMajorArterialCleanup.Name = "textBoxManholeFloodMajorArterialCleanup";
@@ -968,6 +1006,7 @@
             // 
             // textBoxManholeFloodNearSchool
             // 
+            this.textBoxManholeFloodNearSchool.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.textBoxManholeFloodNearSchool.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.constantsBindingSource, "MHFloodNearSchoolCost", true));
             this.textBoxManholeFloodNearSchool.Location = new System.Drawing.Point(130, 480);
             this.textBoxManholeFloodNearSchool.Name = "textBoxManholeFloodNearSchool";
@@ -977,6 +1016,7 @@
             // 
             // textBoxManholeFloodStreetCleanup
             // 
+            this.textBoxManholeFloodStreetCleanup.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.textBoxManholeFloodStreetCleanup.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.constantsBindingSource, "MHFloodCleanupStreet", true));
             this.textBoxManholeFloodStreetCleanup.Location = new System.Drawing.Point(130, 528);
             this.textBoxManholeFloodStreetCleanup.Name = "textBoxManholeFloodStreetCleanup";
@@ -995,6 +1035,7 @@
             // 
             // textBoxRawCostENR
             // 
+            this.textBoxRawCostENR.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.textBoxRawCostENR.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.constantsBindingSource, "RawCostENR", true));
             this.textBoxRawCostENR.Location = new System.Drawing.Point(130, 615);
             this.textBoxRawCostENR.Name = "textBoxRawCostENR";
@@ -1040,6 +1081,7 @@
             // 
             // textBoxTrafficCostPerVehiclePerDay
             // 
+            this.textBoxTrafficCostPerVehiclePerDay.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.textBoxTrafficCostPerVehiclePerDay.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.constantsBindingSource, "TrafficImpactCostPerVehiclePerDay", true));
             this.textBoxTrafficCostPerVehiclePerDay.Location = new System.Drawing.Point(130, 856);
             this.textBoxTrafficCostPerVehiclePerDay.Name = "textBoxTrafficCostPerVehiclePerDay";
@@ -1049,6 +1091,7 @@
             // 
             // textBoxUtilityCrossingCost
             // 
+            this.textBoxUtilityCrossingCost.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.textBoxUtilityCrossingCost.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.constantsBindingSource, "UtilityCrossingCost", true));
             this.textBoxUtilityCrossingCost.Location = new System.Drawing.Point(130, 905);
             this.textBoxUtilityCrossingCost.Name = "textBoxUtilityCrossingCost";
@@ -1068,7 +1111,7 @@
             // 
             this.groupBoxConstants.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.groupBoxConstants.Controls.Add(this.panel1);
-            this.groupBoxConstants.Location = new System.Drawing.Point(12, 372);
+            this.groupBoxConstants.Location = new System.Drawing.Point(12, 370);
             this.groupBoxConstants.Name = "groupBoxConstants";
             this.groupBoxConstants.Size = new System.Drawing.Size(248, 201);
             this.groupBoxConstants.TabIndex = 63;
@@ -1145,7 +1188,7 @@
             // 
             this.textBoxConsequenceOfFailure.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxConsequenceOfFailure.Enabled = false;
-            this.textBoxConsequenceOfFailure.Location = new System.Drawing.Point(793, 499);
+            this.textBoxConsequenceOfFailure.Location = new System.Drawing.Point(791, 497);
             this.textBoxConsequenceOfFailure.Name = "textBoxConsequenceOfFailure";
             this.textBoxConsequenceOfFailure.Size = new System.Drawing.Size(100, 20);
             this.textBoxConsequenceOfFailure.TabIndex = 65;
@@ -1154,7 +1197,7 @@
             // 
             this.labelConsequenceOfFailure.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.labelConsequenceOfFailure.AutoSize = true;
-            this.labelConsequenceOfFailure.Location = new System.Drawing.Point(790, 482);
+            this.labelConsequenceOfFailure.Location = new System.Drawing.Point(788, 480);
             this.labelConsequenceOfFailure.Name = "labelConsequenceOfFailure";
             this.labelConsequenceOfFailure.Size = new System.Drawing.Size(164, 13);
             this.labelConsequenceOfFailure.TabIndex = 64;
@@ -1162,8 +1205,9 @@
             // 
             // checkBoxChangeReplacementCost
             // 
+            this.checkBoxChangeReplacementCost.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.checkBoxChangeReplacementCost.AutoSize = true;
-            this.checkBoxChangeReplacementCost.Location = new System.Drawing.Point(772, 462);
+            this.checkBoxChangeReplacementCost.Location = new System.Drawing.Point(770, 460);
             this.checkBoxChangeReplacementCost.Name = "checkBoxChangeReplacementCost";
             this.checkBoxChangeReplacementCost.Size = new System.Drawing.Size(15, 14);
             this.checkBoxChangeReplacementCost.TabIndex = 66;
@@ -1172,19 +1216,45 @@
             // 
             // checkBoxChangeConsequenceOfFailure
             // 
+            this.checkBoxChangeConsequenceOfFailure.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.checkBoxChangeConsequenceOfFailure.AutoSize = true;
-            this.checkBoxChangeConsequenceOfFailure.Location = new System.Drawing.Point(772, 502);
+            this.checkBoxChangeConsequenceOfFailure.Location = new System.Drawing.Point(770, 500);
             this.checkBoxChangeConsequenceOfFailure.Name = "checkBoxChangeConsequenceOfFailure";
             this.checkBoxChangeConsequenceOfFailure.Size = new System.Drawing.Size(15, 14);
             this.checkBoxChangeConsequenceOfFailure.TabIndex = 67;
             this.checkBoxChangeConsequenceOfFailure.UseVisualStyleBackColor = true;
             this.checkBoxChangeConsequenceOfFailure.CheckedChanged += new System.EventHandler(this.checkBoxChangeConsequenceOfFailure_CheckedChanged);
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolsToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(956, 24);
+            this.menuStrip1.TabIndex = 68;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // toolsToolStripMenuItem
+            // 
+            this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.resetCostsToolStripMenuItem});
+            this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(45, 20);
+            this.toolsToolStripMenuItem.Text = "Tools";
+            // 
+            // resetCostsToolStripMenuItem
+            // 
+            this.resetCostsToolStripMenuItem.Name = "resetCostsToolStripMenuItem";
+            this.resetCostsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.resetCostsToolStripMenuItem.Text = "Reset Costs";
+            this.resetCostsToolStripMenuItem.Click += new System.EventHandler(this.resetCostsToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(958, 593);
+            this.ClientSize = new System.Drawing.Size(956, 591);
             this.Controls.Add(this.checkBoxChangeConsequenceOfFailure);
             this.Controls.Add(this.checkBoxChangeReplacementCost);
             this.Controls.Add(this.textBoxConsequenceOfFailure);
@@ -1196,6 +1266,8 @@
             this.Controls.Add(this.textBoxReplacementCost);
             this.Controls.Add(this.labelReplacementCost);
             this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "RXi";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -1225,6 +1297,8 @@
             this.groupBoxConstants.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1353,6 +1427,9 @@
         private System.Windows.Forms.Label labelConsequenceOfFailure;
         private System.Windows.Forms.CheckBox checkBoxChangeReplacementCost;
         private System.Windows.Forms.CheckBox checkBoxChangeConsequenceOfFailure;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem resetCostsToolStripMenuItem;
     }
 }
 

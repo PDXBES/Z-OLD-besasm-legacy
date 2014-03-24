@@ -11,8 +11,8 @@ namespace SystemsAnalysis.Grid.GridAnalysis
 {
     public partial class FormServerDatabaseUserIDPasswordDomainEntry : Form
     {
-        public string Database = "";
-        public string Server = "";
+        public string Database = "GRIDMODEL";
+        public string Server = "BESDBDEV1";
         public string UserID = "";
         public string Password = "";
         public string Domain = "";
@@ -70,12 +70,10 @@ namespace SystemsAnalysis.Grid.GridAnalysis
 
         private void checkBoxUseTrustedConnection_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBoxUseTrustedConnection.Checked == true)
-            {
-                textBoxPassword.Enabled = false;
-                textBoxDomain.Enabled = false;
-                textBoxUserID.Enabled = false;
-            }
+
+            textBoxPassword.Enabled = !textBoxPassword.Enabled;
+            textBoxDomain.Enabled = !textBoxDomain.Enabled;
+            textBoxUserID.Enabled = !textBoxUserID.Enabled;
         }
     }
 }

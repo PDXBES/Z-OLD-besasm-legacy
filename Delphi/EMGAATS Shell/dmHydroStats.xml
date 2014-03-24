@@ -1,5 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <namespace name="dmHydroStats">
+  <const name="idtsNoIneffectiveDisco" type="TIneffectiveDscToSscType">
+    <value>
+      idtsNoIneffectiveDisco
+    </value>
+  </const>
+  <const name="idtsCheckGood" type="TIneffectiveDscToSscType">
+    <value>
+      idtsCheckGood
+    </value>
+  </const>
+  <const name="idtsCheckBad" type="TIneffectiveDscToSscType">
+    <value>
+      idtsCheckBad
+    </value>
+  </const>
+  <enum name="TIneffectiveDscToSscType">
+    <element name="idtsNoIneffectiveDisco" />
+    <element name="idtsCheckGood" />
+    <element name="idtsCheckBad" />
+  </enum>
   <class name="TdatmodHydroStats">
     <ancestor name="TDataModule" namespace="Classes">
       <methodref name="ReadHeight" visibility="private">
@@ -306,6 +326,7 @@
       <field name="csHCardIA" type="Variant" visibility="public" />
       <field name="csdscTA" type="Variant" visibility="public" />
       <field name="csdscIA" type="Variant" visibility="public" />
+      <field name="ineffectiveDscToSscCheck" type="TIneffectiveDscToSscType" visibility="public" />
       <constructor name="Initialize" visibility="public">
         <parameters>
           <parameter name="AModel" type="TEMGAATSModel" />

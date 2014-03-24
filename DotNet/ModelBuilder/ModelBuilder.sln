@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 9.00
-# Visual Studio 2005
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemsAnalysis.ModelConstruction.ModelConfiguration", "ModelConfiguration\SystemsAnalysis.ModelConstruction.ModelConfiguration.csproj", "{19DE0713-65B7-4D46-A537-49704F93CB90}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemsAnalysis.ModelConstruction.TestBench", "ModelBuilderTestBench\SystemsAnalysis.ModelConstruction.TestBench.csproj", "{BA32E1E5-CBA1-4598-A3FC-3F59FEF3D071}"
