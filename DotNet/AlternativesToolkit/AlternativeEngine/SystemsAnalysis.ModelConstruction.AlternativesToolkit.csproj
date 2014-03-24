@@ -45,6 +45,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
+    <InstallUrl>\\CASSIO\ASM_Apps\Apps\AlternativesToolkit\</InstallUrl>
     <UpdateUrl>\\Cassio\ASM_Apps\Apps\AlternativesToolkit\</UpdateUrl>
     <SupportUrl>http://twiki.bes-sa.org/bin/view/Development/AlternativesToolkit</SupportUrl>
     <ProductName>Alternatives Toolkit</ProductName>
