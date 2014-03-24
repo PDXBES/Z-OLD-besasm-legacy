@@ -1,4 +1,5 @@
-﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <LastOpenVersion>7.10.3077</LastOpenVersion>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -53,6 +54,12 @@
     </StartURL>
     <StartWorkingDirectory>
     </StartWorkingDirectory>
+    <StartWithIE>true</StartWithIE>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <StartWithIE>true</StartWithIE>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <StartWithIE>true</StartWithIE>
   </PropertyGroup>
 </Project>

@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViRT", "ViRT\ViRT.csproj", "{23FA43E2-0BCF-403A-BD95-E030CE2BA371}"
 EndProject
 Global

@@ -45,6 +45,8 @@
             // checkBoxUseTrustedConnection
             // 
             this.checkBoxUseTrustedConnection.AutoSize = true;
+            this.checkBoxUseTrustedConnection.Checked = true;
+            this.checkBoxUseTrustedConnection.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxUseTrustedConnection.Location = new System.Drawing.Point(17, 89);
             this.checkBoxUseTrustedConnection.Name = "checkBoxUseTrustedConnection";
             this.checkBoxUseTrustedConnection.Size = new System.Drawing.Size(141, 17);
@@ -90,6 +92,7 @@
             this.textBoxDatabase.Name = "textBoxDatabase";
             this.textBoxDatabase.Size = new System.Drawing.Size(167, 20);
             this.textBoxDatabase.TabIndex = 18;
+            this.textBoxDatabase.Text = "GRIDMODEL";
             // 
             // textBoxServer
             // 
@@ -97,6 +100,7 @@
             this.textBoxServer.Name = "textBoxServer";
             this.textBoxServer.Size = new System.Drawing.Size(167, 20);
             this.textBoxServer.TabIndex = 17;
+            this.textBoxServer.Text = "B";
             // 
             // labelDomain
             // 

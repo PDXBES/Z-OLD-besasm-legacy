@@ -6,7 +6,6 @@
     <textField name="filename" modifyTo="$FILENAME" />
     <dynamicTextField baseName="viewname" replaceFormat="View {0} ({1:F})">
       <fieldSpec name="FID_Text" type="string" />
-      <fieldSpec name="TestDate" type="datetime" />
     </dynamicTextField>
     <dynamicTextField baseName="figurenum" replaceFormat="{0}" modifyToField="Figure_ID" />
     <textField name="date" modifyTo="$DATE" />
@@ -17,10 +16,10 @@
     <sourceField>FID_Text</sourceField>
   </sourceDatabase>
   <output createMXD="true" createPDF="true" pdfResolution="300">
-    <path>C:\temp\ArcSpooler</path>
+    <path>C:\Users\arnelm\Temp</path>
     <baseName />
   </output>
   <selection name="ErrorPending">
-    <objectID>Fanno-1</objectID>
+    <objectID>Fanno-10</objectID>
   </selection>
 </configuration>

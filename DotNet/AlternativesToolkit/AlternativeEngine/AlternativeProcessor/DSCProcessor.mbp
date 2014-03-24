@@ -1,5 +1,5 @@
 [Link] 
-Application=..\exe\DSCProcessor.mbx 
+Application=DSCProcessor.mbx 
 Module=DSCProcessor.mbo
 Module=\\Cassio\modeling\Model_Programs\Emgaats\CodeV2.2\Common\source\EMGOpenUtils.mbo
 Module=\\Cassio\modeling\Model_Programs\Emgaats\CodeV2.2\Common\source\INIUtils.MBO

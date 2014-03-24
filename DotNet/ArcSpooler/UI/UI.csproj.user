@@ -1,6 +1,7 @@
-﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <PublishUrlHistory>\\cassio\ASM_Apps\Apps\ArcSpooler\|publish\</PublishUrlHistory>
+    <PublishUrlHistory>\\cassio\ASM_Apps\Apps\ArcSpooler_10.2\|\\cassio\ASM_Apps\Apps\ArcSpooler_10.1\|\\cassio\ASM_Apps\Apps\ArcSpooler\|publish\</PublishUrlHistory>
     <InstallUrlHistory>
     </InstallUrlHistory>
     <SupportUrlHistory>

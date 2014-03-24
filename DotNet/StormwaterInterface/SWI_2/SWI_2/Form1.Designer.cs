@@ -49,6 +49,7 @@
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataAdministratorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.surveyViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newSurveyViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fKCULVERTFACINGTYPEBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.fKPIPEMATERIALTYPEBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.fKPIPEMATERIALTYPEBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
@@ -198,19 +199,19 @@
             this.updateMstlinksacToolStripMenuItem});
             this.fIleToolStripMenuItem.Name = "fIleToolStripMenuItem";
             this.fIleToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
-            this.fIleToolStripMenuItem.Text = "FIle";
+            this.fIleToolStripMenuItem.Text = "File";
             // 
             // exportReportToolStripMenuItem
             // 
             this.exportReportToolStripMenuItem.Name = "exportReportToolStripMenuItem";
-            this.exportReportToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.exportReportToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
             this.exportReportToolStripMenuItem.Text = "Export Report";
             this.exportReportToolStripMenuItem.Click += new System.EventHandler(this.exportReportToolStripMenuItem_Click);
             // 
             // updateMstlinksacToolStripMenuItem
             // 
             this.updateMstlinksacToolStripMenuItem.Name = "updateMstlinksacToolStripMenuItem";
-            this.updateMstlinksacToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.updateMstlinksacToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
             this.updateMstlinksacToolStripMenuItem.Text = "Update mst_links_ac";
             this.updateMstlinksacToolStripMenuItem.Click += new System.EventHandler(this.updateMstlinksacToolStripMenuItem_Click_1);
             // 
@@ -218,24 +219,33 @@
             // 
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.dataAdministratorToolStripMenuItem,
-            this.surveyViewToolStripMenuItem});
+            this.surveyViewToolStripMenuItem,
+            this.newSurveyViewToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(45, 20);
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.toolsToolStripMenuItem.Text = "Tools";
             // 
             // dataAdministratorToolStripMenuItem
             // 
             this.dataAdministratorToolStripMenuItem.Name = "dataAdministratorToolStripMenuItem";
-            this.dataAdministratorToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.dataAdministratorToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             this.dataAdministratorToolStripMenuItem.Text = "Data Administrator";
             this.dataAdministratorToolStripMenuItem.Click += new System.EventHandler(this.dataAdministratorToolStripMenuItem_Click);
             // 
             // surveyViewToolStripMenuItem
             // 
+            this.surveyViewToolStripMenuItem.Enabled = false;
             this.surveyViewToolStripMenuItem.Name = "surveyViewToolStripMenuItem";
-            this.surveyViewToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.surveyViewToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             this.surveyViewToolStripMenuItem.Text = "Survey View";
             this.surveyViewToolStripMenuItem.Click += new System.EventHandler(this.surveyViewToolStripMenuItem_Click);
+            // 
+            // newSurveyViewToolStripMenuItem
+            // 
+            this.newSurveyViewToolStripMenuItem.Name = "newSurveyViewToolStripMenuItem";
+            this.newSurveyViewToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.newSurveyViewToolStripMenuItem.Text = "New Survey View";
+            this.newSurveyViewToolStripMenuItem.Click += new System.EventHandler(this.newSurveyViewToolStripMenuItem_Click);
             // 
             // fKCULVERTFACINGTYPEBindingSource1
             // 
@@ -483,6 +493,7 @@
         private System.Windows.Forms.ToolStripMenuItem surveyViewToolStripMenuItem;
         private System.Windows.Forms.BindingSource sWSPGLOBALIDBindingSource;
         private System.Windows.Forms.ToolStripMenuItem updateMstlinksacToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem newSurveyViewToolStripMenuItem;
     }
 }
 
