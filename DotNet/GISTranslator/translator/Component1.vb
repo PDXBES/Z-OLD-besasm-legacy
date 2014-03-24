@@ -892,10 +892,12 @@ ErrHandler:
     Input(intFreeFile, strFMELine)
     Do While Not EOF(intFreeFile)
       Try
-        If strFMELine.Substring(33, 5) = "ERROR" Then
-          checkIMUTStatus = -1
-          FileClose(intFreeFile)
-          Exit Function
+        If strFMELine.Length > 37 Then
+          If strFMELine.Substring(33, 5) = "ERROR" Then
+            checkIMUTStatus = -1
+            FileClose(intFreeFile)
+            Exit Function
+          End If
         End If
         Input(intFreeFile, strFMELine)
       Catch
