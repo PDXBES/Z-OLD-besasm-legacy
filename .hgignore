@@ -21,3 +21,7 @@ glob:Delphi/EMGAATS Shell/EMGAATS.smp
 syntax: glob
 *.MBO
 *.MBX
+*.o
+DotNet/CostEstimator/_UpgradeReport_Files/*
+DotNet/CostEstimator/UpgradeLog.XML
+Delphi/EMGAATS Shell/Thumbs.db
