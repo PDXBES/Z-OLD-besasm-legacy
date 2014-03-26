@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<namespace name="uWorkbenchDefs">
+  <const name="EMG_AppName" type="string">
+    <value>
+      EMGWorkbench
+    </value>
+  </const>
+  <const name="EMG_ShowLatEndDialog" type="string">
+    <value>
+      4001
+    </value>
+  </const>
+  <const name="EMG_ShowLatSnapDialog" type="string">
+    <value>
+      4002
+    </value>
+  </const>
+  <const name="EMG_ShowLatComputeDialog" type="string">
+    <value>
+      
+    </value>
+  </const>
+  <const name="EMG_ReSnapModelLaterals" type="string">
+    <value>
+      4050
+    </value>
+  </const>
+  <const name="EMG_DoAllTraceLinks" type="string">
+    <value>
+      5020
+    </value>
+  </const>
+  <const name="EMG_RebuildTraceLinks" type="string">
+    <value>
+      
+    </value>
+  </const>
+  <const name="EMG_SetGlobals" type="string">
+    <value>
+      5000
+    </value>
+  </const>
+  <const name="EMG_OpenTables" type="string">
+    <value>
+      5004
+    </value>
+  </const>
+  <const name="EMG_OpenTablesDenyWrite" type="string">
+    <value>
+      5005
+    </value>
+  </const>
+  <const name="EMG_BuildMDL_Links" type="string">
+    <value>
+      5001
+    </value>
+  </const>
+  <const name="EMG_CreateModelTables" type="string">
+    <value>
+      5002
+    </value>
+  </const>
+  <const name="EMG_GetNodes" type="string">
+    <value>
+      5003
+    </value>
+  </const>
+  <const name="EMG_RelateDSCtoSurfSC" type="string">
+    <value>
+      5006
+    </value>
+  </const>
+  <const name="EMG_ADDICTables" type="string">
+    <value>
+      5007
+    </value>
+  </const>
+  <const name="EMG_INITHydPre" type="string">
+    <value>
+      5008
+    </value>
+  </const>
+  <const name="EMG_INITHydPost" type="string">
+    <value>
+      5009
+    </value>
+  </const>
+  <const name="EMG_QAICmax" type="string">
+    <value>
+      5010
+    </value>
+  </const>
+  <const name="EMG_QADupDsc" type="string">
+    <value>
+      5011
+    </value>
+  </const>
+  <const name="EMG_TraceLaterals" type="string">
+    <value>
+      6007
+    </value>
+  </const>
+  <const name="EMG_CalcDSC" type="string">
+    <value>
+      6008
+    </value>
+  </const>
+  <const name="EMG_DeleteUnpickedLatsFromMaster" type="string">
+    <value>
+      6009
+    </value>
+  </const>
+  <const name="EMG_TraceSurfaceSC" type="string">
+    <value>
+      6010
+    </value>
+  </const>
+  <const name="EMG_MakeSurfZingers" type="string">
+    <value>
+      6011
+    </value>
+  </const>
+  <const name="EMG_RetraceSurfaceSC" type="string">
+    <value>
+      6012
+    </value>
+  </const>
+  <const name="EMG_TraceDSCs" type="string">
+    <value>
+      6013
+    </value>
+  </const>
+  <const name="EMG_OpenModel" type="string">
+    <value>
+      
+    </value>
+  </const>
+  <const name="EMG_Laterals" type="string">
+    <value>
+      
+    </value>
+  </const>
+  <const name="EMG_AlternateLateralMenu" type="string">
+    <value>
+      
+    </value>
+  </const>
+  <const name="EMG_ModelBuilding" type="string">
+    <value>
+      
+    </value>
+  </const>
+  <const name="EMG_HiddenModels" type="string">
+    <value>
+      
+    </value>
+  </const>
+  <const name="EMG_Help" type="string">
+    <value>
+      
+    </value>
+  </const>
+  <const name="EMG_ShowAbout" type="string">
+    <value>
+      
+    </value>
+  </const>
+  <const name="EMG_EndEMGAATS" type="string">
+    <value>
+      5005
+    </value>
+  </const>
+  <const name="QCW_AppName" type="string">
+    <value>
+      QCWorkspace
+    </value>
+  </const>
+  <const name="QCW_QCWorkspace" type="string">
+    <value>
+      6700
+    </value>
+  </const>
+</namespace>

@@ -1,0 +1,341 @@
+'
+'	EMG Finder Utilities
+'
+include "MapBasic.def"
+include "..\..\common\inc\EMGToolGlobal.def"
+include "..\inc\EMGFinder.def"
+
+
+Declare	Sub		FindSelectedNode(ByVal What as string)
+
+'	Hooks to button bar
+'
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+'
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+Sub		FindSelectedLink()
+Dim		NumWin as integer
+Dim		LoopCount as integer
+Dim		Found as logical
+Dim		BaseTable as string
+Dim		NumRows as integer
+Dim		SelObject as object
+Dim		SelX, SelY as float
+Dim		SelUSNode, SelDSNode as string
+Dim		SelRowID as integer
+
+	' window if right name open??
+	NumWin = NumWindows()
+	For LoopCount = 1 to NumWin
+		if WindowInfo(LoopCount, WIN_INFO_NAME) = "Links" then
+			Found = true
+			gintLinkWindow = WindowInfo(LoopCount, WIN_INFO_WINDOWID)
+			'print "Found links window: " & str$(gintLinkWindow)
+			exit for
+		end if
+	Next
+	If not Found then
+		if gstrSelectedTableName <> "Pre-Check First!" then
+			print "New table open"
+			Map From   mst_links, mst_nodes, gstrSelectedTableName
+				Position (.5, .5) Units "in"
+				Width (3.0) Units "in"
+				Height (3.0) Units "in" 
+		else
+			print "Just masters"
+			Map From   mst_links, mst_nodes
+				Position (.5, .5) Units "in"
+				Width (3.0) Units "in"
+				Height (3.0) Units "in" 
+
+		end if
+		gintLinkWindow = WindowID(0)		' most recent window
+		set Window gintLinkWindow title "Links"
+		print "Created links window: " & str$(gintLinkWindow)
+	end if
+
+	'print "Bring " & str$(gintLinkWindow) & " to front"
+	set window gintLinkWindow Front
+
+	if gstrSelectedTableName = "Pre-Check First!" then
+		note "Append table isn't open yet."
+		exit sub
+	end if
+
+
+	BaseTable = SelectionInfo(SEL_INFO_TABLENAME)
+	if BaseTable = "" then
+		Beep
+		note "Nothing is selected!"
+		exit sub
+	end if
+	if BaseTable <> gstrSelectedTableName then
+		Beep
+		note "Please select something from table: " & gstrSelectedTableName
+	end if
+	NumRows = SelectionInfo(SEL_INFO_NROWS)
+	if NumRows > 1 then
+		Beep
+		print "More than one row selected, first one will be processed"
+	end if
+
+	SelObject = selection.obj
+	SelUSNode = selection.USNode
+	SelDSNode = selection.DSNode
+	SelRowID = selection.ROWID
+
+	SelX = CentroidX(SelObject)
+	SelY = CentroidY(SelObject)
+	Print "Link from " & SelUSNode & " to " & SelDSNode
+	Print "Moving to " & str$(SelX) & ", " & str$(SelY)
+	set map window gintLinkWindow
+		Center (SelX, SelY)
+	set window info
+		Table gstrSelectedTableName Rec SelRowID
+End Sub
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+'
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+Sub		FindSelectedUSNode()
+
+
+	call FindSelectedNode("U")
+
+End Sub
+Sub		FindSelectedDSNode()
+	call FindSelectedNode("D")
+
+End Sub
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+'
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+Sub		FindSelectedNode(ByVal WhichNode as string)
+Dim		NumWin as integer
+Dim		LoopCount as integer
+Dim		Found as logical
+Dim		BaseTable as string
+Dim		NumRows as integer
+Dim		SelObject as object
+Dim		SelX, SelY as float
+Dim		WhatNode as string
+Dim		SelUSNode, SelDSNode as string
+Dim		NumNodes as integer
+
+	' window if right name open??
+	NumWin = NumWindows()
+	For LoopCount = 1 to NumWin
+		if WindowInfo(LoopCount, WIN_INFO_NAME) = "Nodes" then
+			Found = true
+			gintNodeWindow = WindowInfo(LoopCount, WIN_INFO_WINDOWID)
+			print "Found nodes window: " & str$(gintLinkWindow)
+			exit for
+		end if
+	Next
+	If not Found then
+		if gstrSelectedTableName <> "Pre-Check First!" then
+			print "New table open"
+			Map From   mst_links, mst_nodes, gstrSelectedTableName
+				Position (4.0, .5) Units "in"
+				Width (3.0) Units "in"
+				Height (3.0) Units "in" 
+		else
+			print "Just masters"
+			Map From   mst_links, mst_nodes
+				Position (4.0, .5) Units "in"
+				Width (3.0) Units "in"
+				Height (3.0) Units "in" 
+
+		end if
+		gintNodeWindow = WindowID(0)		' most recent window
+		set Window gintNodeWindow title "Nodes"
+		print "Created nodes window: " & str$(gintLinkWindow)
+	end if
+
+	'print "Bring " & str$(gintLinkWindow) & " to front"
+	set window gintNodeWindow Front
+
+	BaseTable = SelectionInfo(SEL_INFO_TABLENAME)
+	if BaseTable = "" then
+		Beep
+		note "Nothing is selected!"
+		exit sub
+	end if
+	if BaseTable <> gstrSelectedTableName then
+		Beep
+		note "Please select something from table: " & gstrSelectedTableName
+	end if
+	NumRows = SelectionInfo(SEL_INFO_NROWS)
+	if NumRows > 1 then
+		Beep
+		print "More than one row selected, first one will be processed"
+	end if
+
+	SelObject = selection.obj
+	SelUSNode = selection.USNode
+	SelDSNode = selection.DSNode
+	print "Saved: " & SelUSNode & " - " & selDSNode
+
+	If WhichNode = "U" then
+		WhatNode = SelUSNode
+	else
+		WhatNode = SelDSNode
+	end if
+	Select * from mst_nodes
+	where Node = WhatNode
+	into _SelNodes
+
+	NumNodes = TableInfo(_SelNodes, TAB_INFO_NROWS)
+	Do Case NumNodes
+		case 0
+			Beep
+			note "Node " & WhatNode & " doesn't exist."
+		case 1
+			SelObject = _SelNodes.obj
+			SelX = CentroidX(SelObject)
+			SelY = CentroidY(SelObject)
+			Print "Moving to " & str$(SelX) & ", " & str$(SelY)
+			set map window gintNodeWindow
+				Center (SelX, SelY)
+
+		case else
+			note "Node " & WhatNode & " not unique."
+	End Case
+	'
+	' put the selection back where it was...
+	'
+	select * from gstrSelectedTableName
+	where USNode = SelUSNode and DSNode = selDSNode
+	print "Reset to: " & SelUSNode & " - " & SelDSNode
+
+	close table _SelNodes
+
+End Sub
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+'
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+Dim		mTableNames() as string
+
+Sub		SetAppendTable
+dim 	lResult as logical
+
+Dim 	LoopCount as integer
+Dim 	Semi as string
+dim 	TableCount as integer
+dim		BaseTableCount as integer
+dim		TableList as string
+Dim		Msg as string
+
+Dim 	dlgWidth as integer
+dim		dlgHeight as integer
+dim 	dlgButtonWidth as integer
+dim 	dlgButtonHeight as integer
+dim 	dlgButtonY as integer
+dim 	dlgButtonOKX, dlgButtonCancelX as integer
+Dim		AppendTableIndex as integer
+Dim		NumWin as integer
+Dim		LayerMax as integer
+Dim		Found as logical
+
+
+
+TableCount = numtables()
+Semi = ""
+For LoopCount = 1 to TableCount
+	' Only load names of base tables...
+	if TableInfo(LoopCount, TAB_INFO_TYPE) = TAB_TYPE_BASE then
+		BaseTableCount = BaseTableCOunt + 1		
+		redim mTableNames(BaseTableCount)
+		TableList = TableList + Semi + TableInfo(LoopCount, TAB_INFO_NAME)
+		mTableNames(BaseTableCount) = TableInfo(LoopCount, TAB_INFO_NAME)
+		Semi = ";"
+	end if
+Next
+
+dlgWidth = 300
+dlgHeight = 200
+dlgButtonWidth = 40
+dlgButtonHeight = 15
+
+dlgButtonY = dlgHeight - 25
+dlgButtonOKX = (dlgwidth / 3.0) - (dlgButtonWidth / 2.0)
+dlgButtonCancelX = ((dlgwidth / 3.0) * 2) - (dlgButtonWidth / 2.0)
+
+If gstrSelectedTableName <> "" then
+	For LoopCount = 1 to BaseTableCount
+		if mTableNames(LoopCount) = gstrSelectedTableName then
+			AppendTableIndex = LoopCount
+			exit for
+		end if
+	Next
+else
+	AppendTableIndex = 1
+End If
+
+Dialog  
+	Title   "Select Currently Open Table"
+	Width   dlgWIdth  Height   dlgHeight 
+	Position  150 , 150
+
+	Control StaticText
+		Position	30, 25
+		Title		"Link table or selection for Append:"
+	Control PopupMenu  
+		Title  from variable mTableNames
+		Value AppendTableIndex
+		ID 5 
+		Into  AppendTableIndex
+		Position  155, 25
+		Width 75
+'	Control Button
+'		Position  235 , 25
+'		Width  40
+'		Height 13 
+'		Calling GettaFileName
+'		Title  "Find" 
+
+ 	Control OKButton
+		Position	dlgButtonOKX, dlgButtonY
+		Width	dlgButtonWidth
+		Height	dlgButtonHeight
+		Title		"OK"
+		
+	Control CancelButton
+		Position	dlgButtonCancelX, dlgButtonY
+		Width	dlgButtonWidth
+		Height	dlgButtonHeight
+		Title		"Cancel"
+If CommandInfo(CMD_INFO_DLG_OK) Then 
+'	do the deed here...
+	gstrSelectedTableName = mTableNames(AppendTableIndex)
+
+	NumWin = NumWindows()
+	For LoopCount = 1 to NumWin
+		if WindowInfo(LoopCount, WIN_INFO_NAME) = "Links" then
+			Found = true
+			gintLinkWindow = WindowInfo(LoopCount, WIN_INFO_WINDOWID)
+			'print "Found links window: " & str$(gintLinkWindow)
+			exit for
+		end if
+	Next
+	if Found then
+		LayerMax = MapperInfo(gintLinkWindow, MAPPER_INFO_LAYERS)
+		Found = False
+		For LoopCount = 1 to layerMax
+			if LayerInfo(gintLinkWindow, LoopCount, LAYER_INFO_NAME) = gstrSelectedTableName then
+				Found = True
+				exit for
+			end if
+		Next
+		if not found then
+			Add Map Window gintLinkWindow Layer gstrSelectedTableName
+		else
+			print "Append layer found in map"
+		end if
+	end if
+	Alter Menu Item ID 3001 Enable
+	Alter Menu Item ID 3002 Enable
+	Alter Menu Item ID 3003 Enable
+
+End If
+
+End Sub

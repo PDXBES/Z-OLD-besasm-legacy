@@ -1,0 +1,1051 @@
+' 20061010 Collins - add Alt_TraceNode field
+' DJC 2004 mar 19 modified to accomodate revised SW and ROW processes
+' AMM 3/19/2003 Added future sidewalks fields and future ROW growth fields
+
+include "mapbasic.def"
+include "..\..\Common\inc\EMGMTabUtil.def"
+include "..\..\Common\inc\INIUtils.def"
+
+Type FileSpec
+	Name as string
+	FullPath as string
+	Alias as string
+	IniSection as string
+	IniKey as string
+End Type
+
+Type	CheckColumn
+	Name	as string			' name of required column
+	Width	as smallint		' width of char or decimal types
+	Type  as smallint		' data type
+	sType as string     ' string representation of type
+End Type
+
+
+Dim mACols(1) as CheckColumn
+Dim mFiles(8) as FileSpec
+Dim mTargetDir as String
+Dim mUniqueIDCheck as logical
+Dim mCommands(7) as logical
+
+Dim gmaintINIpath as string
+Dim gstrSelectedTableName as string
+Dim gintLinkWindow as Integer
+
+
+Declare Sub Main()
+declare sub surfacemaintMenu()
+declare sub createsurfids()
+declare sub createsurfidsExecute()
+declare sub openmastertables()
+declare sub killsurfacemaint()
+declare sub getssctargets() 
+declare sub setsscparams()
+declare sub setsscacres()
+declare sub setsscSWacres()
+declare sub test()
+declare sub slopecalc()
+declare sub appendSSCTomaster()
+declare Sub SetAppendTable()
+declare sub checkandcommit()
+declare function UniqueIDCheck() as logical
+
+
+'Define COL_TYPE_CHAR                    1
+'Define COL_TYPE_DECIMAL                 2
+'Define COL_TYPE_INTEGER                 3
+'Define COL_TYPE_SMALLINT                4
+'Define COL_TYPE_DATE                    5
+'Define COL_TYPE_LOGICAL                 6
+'Define COL_TYPE_GRAPHIC                 7
+'Define COL_TYPE_FLOAT                   8
+
+
+Sub main()
+	dim i as integer
+	
+	for i = 1 to ubound(mCommands)
+		mCommands(i) = False
+	next 
+	
+	  
+  gmaintINIpath = applicationdirectory$() + "maintSurfaceSC.ini"
+  
+  mACols(1).name = "discopct_PreProg"
+  mACols(1).type = COL_TYPE_FLOAT
+  mACols(1).stype = "FLOAT"
+    
+  mFiles(1).Name = "surface"
+  mFiles(1).FullPath = ""
+  mFiles(1).Alias = "mst_SurfSC"
+  mFiles(1).INIsection = "masterfiles"
+  mFiles(1).INIKey = "Surface"
+  
+  mFiles(2).Name = "Nodes"
+  mFiles(2).FullPath = ""
+  mFiles(2).Alias = "mst_Nodes"
+  mFiles(2).INIsection = "masterfiles"
+  mFiles(2).INIKey = "Nodes"
+    
+  mFiles(3).Name = "SurfaceParams"
+  mFiles(3).FullPath = ""
+  mFiles(3).Alias = "ssc_param"
+  mFiles(3).INIsection = "Reference"
+  mFiles(3).INIKey = "surfaceparameters"
+
+  mFiles(4).Name = "streets"
+  mFiles(4).FullPath = ""
+  mFiles(4).Alias = "streetregions"
+  mFiles(4).INIsection = "Reference"
+  mFiles(4).INIKey = "streetregions"
+
+  mFiles(5).Name = "StreetTrees"
+  mFiles(5).FullPath = ""
+  mFiles(5).Alias = "treebits"
+  mFiles(5).INIsection = "Reference"
+  mFiles(5).INIKey = "StreetTrees"
+    
+  mFiles(6).Name = "Sidewalks"
+  mFiles(6).FullPath = ""
+  mFiles(6).Alias = "Sidewalks"
+  mFiles(6).INIsection = "Reference"
+  mFiles(6).INIKey = "Sidewalks"
+  
+  
+  mFiles(7).Name = "Elevation"
+  mFiles(7).FullPath = ""
+  mFiles(7).Alias = "Elevation"
+  mFiles(7).INIsection = "Reference"
+  mFiles(7).INIKey = "Elevation"
+  
+  mFiles(8).Name = "FBROWGrowth"
+  mFiles(8).FullPath = ""
+  mFiles(8).Alias = "FBROWGrowth"
+  mFiles(8).INISection = "Reference"
+  mFiles(8).INIKey = "ROWFB"
+  
+    set window message position (2,13) units "cm" width 4 front 
+  Open Window Message
+  Print Chr$(12)
+  
+  Close All 
+  
+  call openmastertables()
+  call surfacemaintmenu()
+
+  
+end sub
+
+sub surfacemaintMenu()
+
+Create Menu "surface maint" as 
+  "1) append ssc_append to master" ID 11007 calling appendssctomaster,
+  "2) check and create unique IDs" ID 11001 calling CreateSurfIDs,
+	"3) set surface targets" ID 11002 calling getssctargets,
+	"4) set parameters" ID 11003 calling setsscparams,
+	"5) set ssc acres" ID 11004 calling setsscacres,
+	"6) set ssc Sidewalk,ROW acres" ID 11005 calling setsscSWacres,
+  "7) calculate slopes" ID 11006 calling slopecalc,
+  "8) commit table" ID 11008 calling checkandcommit,
+  "9) end program" ID 11086 calling killsurfacemaint
+  
+  Alter Menu Bar Remove ID 6, ID 7 
+  Alter Menu Bar Add "surface maint", ID 6, ID 7
+
+End Sub
+
+
+sub checkandcommit()
+
+dim LoopCount as integer
+dim sresults as string
+dim checkOK as logical
+
+	checkOK = True
+	sresults = "The following commands were not executed"
+	For LoopCount = 1 to UBound(mCommands)
+	
+		if not mCommands(loopcount) then
+			sresults = sresults + chr$(13) + 
+			"Command " + loopcount 
+			checkOK = False
+		end if
+	
+	next
+	
+	if CheckOK then 
+		commit table mst_surfSC
+	else
+		Note "Table not saved " + chr$(13) + chr$(13) + sresults 
+	end if
+end sub
+
+sub OpenmasterTables()
+  Dim		LoopCount as integer
+  Dim		AliasName as string
+  Dim		FullPath as string
+  Dim		TableName as string
+  Dim		PathName as string
+  
+  mUniqueIDCheck = false
+  
+  
+  
+  For LoopCount = 1 to UBound(mFiles)
+   
+    AliasName = mFiles(LoopCount).Alias
+		
+    FullPath = ReadINI(gmaintINIpath, mFiles(LoopCount).INISection, 
+					mFiles(LoopCount).INIKey, "not found")
+		
+	  mFiles(LoopCount).FullPath = FullPath
+		
+    print "Open Table " & FullPath & " as " & AliasName
+		Open Table FullPath as AliasName
+	Next
+
+  
+end sub
+
+sub test()
+  dim x as integer
+  call getssctargets()
+end sub
+
+sub getssctargets() 
+  dim x as integer
+  Select * from mst_surfSC where UpdateAtts="T" into ssc_target
+  x = tableinfo(ssc_target, TAB_INFO_NROWS)
+  note str$(x) + " records selected for update"
+  'getsurftargets = x
+  
+  mcommands(3) = true
+
+end sub 
+ 
+ 
+
+sub setsscparams() 
+	
+	if not UniqueIDcheck() then
+		exit sub
+	end if
+	
+	
+  if not istableopen("ssc_target") then 
+    note "ssc_target not open"
+    exit sub
+  end if
+
+  if tableinfo(ssc_target, TAB_INFO_NROWS) = 0 then 
+    note("no target records selected")
+    exit sub
+  end if
+  
+  print "per_n"
+  Add Column "ssc_target" (Per_n )From ssc_param Set To Per_n Where contains
+  print "Imp_n"
+  Add Column "ssc_target" (Imp_n )From ssc_param Set To Imp_n Where contains
+  print "Per_Sto"
+  Add Column "ssc_target" (Per_Sto )From ssc_param Set To Per_Sto Where contains
+  print "Imp_Sto"
+  Add Column "ssc_target" (Imp_Sto )From ssc_param Set To Imp_Sto Where contains
+  print "Suct"
+  Add Column "ssc_target" (Suct )From ssc_param Set To Suct Where contains
+  print "Hydcon"
+  Add Column "ssc_target" (HydCon )From ssc_param Set To Hydcon Where contains
+  print "SMDmax"
+  Add Column "ssc_target" (SMDmax )From ssc_param Set To SMDmax Where contains
+  
+  print " --- ssc parameters set"
+  mcommands(4) = true
+  print ""
+end sub
+
+
+sub setsscacres()
+
+	if not UniqueIDcheck() then
+		exit sub
+	end if
+
+  if not istableopen("ssc_target") then 
+    note "ssc_target not open; make sure there are targets available (surfsc.UpdateAtts=""T"") and choose 3) select SSC targets"
+    exit sub
+  end if
+  
+  print "POPULATING SURFACE SUBCATCHMENT"
+  Update ssc_target Set totalgrossacres = round(Area(obj, "acre"),0.001)
+  
+  print "pavement acres"
+  Add Column "ssc_target" (paveacres )From streetregions Set To proportion sum(Area(obj, "acre")) Where intersects
+  Update ssc_target Set  paveacres = round(paveacres,0.001)
+
+  print "tree acres"
+  Add Column "ssc_target" (PaveTreeAcres )From treebits Set To proportion sum(Area(obj, "acre")) Where intersects
+  Update ssc_target Set  PaveTreeAcres = round(PaveTreeAcres,0.001)
+  
+  print "setting tree acres to pavement acres if tree acres>pavement acres"
+  Select * From mst_surfSC Where PaveTreeAcres > paveacres Into ssc_target_bigtrees
+  Update ssc_target_bigtrees Set PaveTreeAcres = paveacres
+  
+  print " --- ssc acres set"
+  print ""
+  mcommands(5) = true
+end sub
+  
+sub setsscSWacres()
+	
+	if not UniqueIDcheck() then
+		exit sub
+	end if
+
+  if not istableopen("ssc_target") then 
+    note "ssc_target not open; make sure there are targets available (surfsc.UpdateAtts=""T"") and choose 3) select SSC targets"
+    exit sub
+  end if
+
+  'Set effective existing sidewalks impervious areas (swacresEXmodel, swacresEX)
+  Print "effective EX sidewalks"
+  Select * from Sidewalks where SWinEX into _SelectionINMODEL
+  Add Column "ssc_target" (swacresEX )From _SelectionINMODEL Set To proportion sum(Area(obj, "acre")) Where intersects
+  Update ssc_target Set  swacresEX = round(swacresEX,0.001)
+  'Update ssc_target Set  swacresEXmodel = swacresEX
+  close table _SelectionINMODEL
+  
+  'Set ineffective existing sidewalks impervious areas (swacresEXother)
+  Print "ineffective EX sidewalks"
+  Select * from Sidewalks where NOT SWinEX into _SelectionNOTinMODEL
+  Add Column "ssc_target" (swacresEXother )From _SelectionNOTinMODEL Set To proportion sum(Area(obj, "acre")) Where intersects
+  Update ssc_target Set  swacresEXother = round(swacresEXother,0.001)
+  close table _SelectionNOTinMODEL
+
+  'Set effective future sidewalks impervious areas (swacresFBmodel, swacresFB)
+  Print "effective FB sidewalks"
+  Select * from Sidewalks where SWinFB into _SelectionINMODEL
+  Add Column "ssc_target" (swacresFB )From _SelectionINMODEL Set To proportion sum(Area(obj, "acre")) Where intersects
+  Update ssc_target Set  swacresFB = round(swacresFB,0.001)
+  close table _SelectionINMODEL
+  
+  'Set ineffective future sidewalks impervious areas (swacresFBother)
+  Print "ineffective FB sidewalks"
+  Select * from Sidewalks where NOT SWinFB into _SelectionNOTinMODEL
+  Add Column "ssc_target" (swacresFBother )From _SelectionNOTinMODEL Set To proportion sum(Area(obj, "acre")) Where intersects
+  Update ssc_target Set  swacresFBother = round(swacresFBother,0.001)
+  close table _SelectionNOTinMODEL
+
+  'Set effective Future ROW impervious areas (rowgrowthacresFB)
+  Print "effective FB ROW development"
+  Select * from FBRowGrowth where includeFB into _SelectionINMODEL
+  Add Column "ssc_target" (ROWacresFB)From _SelectionINMODEL Set To proportion sum(Area(obj, "acre")) Where intersects
+  Update ssc_target Set ROWacresFB = round(ROWacresFB,0.001)
+  close table _SelectionINMODEL
+
+  'Set effective Future ROW impervious areas (rowgrowthacresFB)
+  Print "ineffective FB ROW development"
+  Select * from FBRowGrowth where not includeFB into _SelectionNOTinMODEL
+  Add Column "ssc_target" (ROWacresFBother)From _SelectionNOTinMODEL Set To proportion sum(Area(obj, "acre")) Where intersects
+  Update ssc_target Set ROWacresFBother = round(ROWacresFBother,0.001)
+  close table _SelectionNOTinMODEL
+
+  Update ssc_target Set  swfactor = 1
+
+  print " --- Sidewalk and ROW acres set"
+  print ""
+  mcommands(6) = true
+end sub  
+
+Sub createsurfids()
+  dim mytable as string
+  dim loopcount as integer
+  Dim		AliasName as string
+  Dim		FullPath as string
+  
+  for loopcount = 1 to ubound(mFiles)
+    mytable = mFiles(loopcount).alias
+    
+    if not istableopen(mytable) then
+      AliasName = mFiles(LoopCount).Alias
+      FullPath = mFiles(LoopCount).FullPath
+		  print "Attempt to open Table " & FullPath & " as " & AliasName
+		  Open Table FullPath as AliasName
+		  if not istableopen(mytable) then
+        Dialog 
+          Title "Checking Required Source Tables"
+          Control StaticText
+            Title  mFiles(loopcount).fullpath + " not open                  " 
+          Control OKButton
+        exit sub
+      else
+        print "Table " & FullPath & " opened as " & AliasName
+      end if
+    end if
+  next   
+  
+  'ASSERT: ALL REQUIRED TABLES ARE OPEN    
+  call createsurfidsExecute()  
+  
+  mcommands(2) = true
+  muniqueidcheck = true
+
+    
+    
+end sub
+
+Sub createsurfidsExecute()
+  Dim LoopCount as integer
+  Dim reccount,ThisRowID, NextSurfSCID, lastSurfSCID, ThisSurfSCID  as integer
+  
+  print "packing table"
+  
+  pack table mst_surfsc Graphic Data
+
+  'look for dup SURFSCIDS and make them 0
+  
+  print "checking non-zero surface subcatchments for duplicate IDs"
+  
+  reccount = 0 
+  Select * from mst_SurfSC where SurfSCID <>0 order by SurfSCID into _ordered_nonzero
+  
+  
+  if NOT EOT(_ordered_nonzero) then 
+    LastSurfSCID = _ordered_nonzero.SurfSCID
+  end if
+  Fetch Next From _ordered_nonzero
+  
+  Do While NOT (EOT(_ordered_nonzero))        
+    ThisRowID = _ordered_nonzero.RowID
+    ThisSurfSCID = _ordered_nonzero.SurfSCID
+	  if ThisSurfSCID = LastSurfSCID then
+	    update _ordered_nonzero set 
+	      SurfSCID = 0 
+      Where RowID = ThisRowID
+      reccount = reccount + 1
+    else
+      LastSurfSCID = ThisSurfSCID
+    end if
+     
+    Fetch Next From _ordered_nonzero    
+  loop
+  
+  commit table mst_SurfSC  
+  close table _ordered_nonzero
+  note str$(reccount) + " duplicates found"
+  
+  Select count(*) from mst_SurfSC where SurfSCID = 0 into _countzero
+  reccount = _countzero.COL1
+  note str$(reccount) + " records require IDs"
+  
+  if reccount > 0 then
+    print "setting IDs"
+  end if
+  
+  Select Max(SurfSCID) from mst_SurfSC where SurfSCID <>0 order by SurfSCID into _maxSurfSCID
+  NextSurfSCID =  _maxSurfSCID.COL1 + 1
+  close table _maxSurfSCID
+  
+  Select * from mst_SurfSC where SurfSCID = 0 into _targetzero
+  Do While NOT (EOT(_targetzero))        
+    ThisRowID = _targetzero.RowID
+    update _targetzero set 
+	    SurfSCID = NextSurfSCID
+    Where RowID = ThisRowID
+    
+    NextSurfSCID = NextSurfSCID + 1
+     
+    Fetch Next From _targetzero    
+  loop
+  
+  commit table mst_SurfSC  
+  close table _targetzero
+  
+  print " --- ssc ids created"
+  print ""
+  
+end sub
+  
+sub killsurfacemaint()
+  close all
+  end program
+end sub   
+
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+    
+
+sub slopecalc()
+
+  dim Thenode as string
+  dim cSurfSCID as integer
+  dim cNode as string
+  dim cNodeX,cNodeY,cNodeZ as float
+  dim cVertex as Integer
+  dim cVX, cVY, cVZ as float
+  dim cVZrad, cMaxLen as Integer
+  dim cError as string
+	
+	dim i, rc, NVertex, ThisLen, ThisRowID, displayid as Integer
+	dim cdH, cSlope as float
+	dim cFlowLength as Integer
+  dim scratchdir, strgdate as string
+  dim nBadSlopes as integer
+	dim bad_list as string
+	dim cmdstr as string
+  
+  
+	if not UniqueIDcheck() then
+		exit sub
+	end if
+
+  
+  if not istableopen("ssc_target") then 
+    note "ssc_target not open"
+    exit sub
+  end if
+  
+  
+  scratchdir= ReadINI(gmaintINIpath,"resultsfiles","scratchdir","unknown")
+  
+  if scratchdir = "unknown" then 
+    note "scratch directory (scratchdir) missing in resultsfiles section of INI file"
+    exit sub
+  end if
+  
+  strgdate = curdate() & " " & time(24)
+  
+  rc = WriteINI(gmaintINIpath, "Admin", "startslope", strgdate)
+  
+  scratchdir = fixfolderslash(scratchdir)
+  
+  Set  CoordSys Earth Projection 3, 33, "ft", -120.5, 43.6666666667, 44.3333333333, 46, 8202099.7379999999, 0
+	
+	Create Table ssc_slope
+	(
+	SurfSCID    Integer,
+	Node		char(6),
+	NodeX   float,
+	NodeY   float,
+	NodeZ   float,
+	Vertex  Integer,
+	VX      float,
+	VY      float,
+	VZ      float,
+	VZrad   Integer,
+	MaxLen Integer, 
+	Error   Char(30)
+	)
+	File scratchdir + "_ssc_slope"
+	Type Native
+
+  Create Table elevcircle
+  (
+    SurfSCID    Integer,
+	  VX      float,
+	  VY      float,
+	  VZ      float
+	)
+	File scratchdir + "_elevcircle"
+	Type Native
+  
+	Create Map for elevcircle
+	  CoordSys Earth Projection 3, 33, "ft", -120.5, 43.6666666667, 44.3333333333, 46, 8202099.7379999999, 0
+	
+	Create Map for ssc_slope
+	  CoordSys Earth Projection 3, 33, "ft", -120.5, 43.6666666667, 44.3333333333, 46, 8202099.7379999999, 0
+
+  displayid = 0
+  fetch first from ssc_target
+  do while not EOT(ssc_target)
+    if displayid mod 50 = 0 then
+      statusbar show message "calculating distance, " + str$(displayid)
+    end if
+    displayid = displayid + 1
+    
+    cSurfSCID = ssc_target.SurfSCID
+    cNode = ssc_target.NGTO_ex
+    cNodeX = 0
+    cNodeY = 0
+    cNodeZ = 0
+    cVertex = 0 
+    cVX = 0 
+    cVY = 0
+    cVZ = 0
+    cVZrad = 0
+    cMaxLen = 0
+    cError = "OK"
+    
+    Nvertex = objectinfo(ssc_target.obj,OBJ_INFO_NPNTS)
+
+    'get the NODE    
+    Select node, GrndElev, centroidx(obj), centroidy(obj) from mst_Nodes where Node = cNode into _NodeRow
+    
+    'Test Node Info
+    if SelectionInfo(SEL_INFO_NROWS) <> 1 then 
+      cError = "found " + str$(SelectionInfo(SEL_INFO_NROWS)) + " nodes"
+      
+    else
+    
+      if objectinfo(ssc_Target.obj,OBJ_INFO_NPOLYGONS) <> 1 then
+        cError = str$(objectinfo(ssc_Target.obj,OBJ_INFO_NPOLYGONS)) + "polygons"
+      end if
+    
+    end if  
+    
+    'ASSERT: IF cError = "OK" then we have a good node
+    
+    cNodeX = _nodeRow.COL3
+    cNodeY = _nodeRow.COL4
+    cNodeZ= _NodeRow.GrndElev
+    
+    if cError = "OK" then
+      for i = 1 to Nvertex 
+      
+        ThisLen = distance(cNodeX, cNodeY, ObjectNodeX(ssc_Target.obj,1,i), ObjectNodeY(ssc_Target.obj,1,i), "ft")
+    
+        if cMaxLen < ThisLen then
+          cVX = ObjectNodeX(ssc_Target.obj,1,i)
+	        cVY = ObjectNodeY(ssc_Target.obj,1,i)
+	    
+          cMaxLen = ThisLen
+          cVertex = i
+        end if
+      Next      
+    end if
+    
+    Insert Into ssc_slope 
+    (
+      SurfSCID,
+      Node,
+	    NodeX,
+  	  NodeY,
+  	  NodeZ,
+	    Vertex,
+	    VX,
+	    VY,
+	    VZ,
+	    VZrad,
+	    MaxLen,
+	    Error
+    ) values (
+      cSurfSCID,
+
+      cNode,
+	    cNodeX,
+  	  cNodeY,
+	    cNodeZ,
+	    cVertex,
+	    cVX,
+	    cVY,
+	    cVZ,
+	    cVZrad,
+	    cMaxLen,
+	    cError
+	  )
+    
+    fetch next from ssc_target
+    
+  loop
+  
+  
+  
+  insert Into elevcircle 
+  ( 
+    SurfSCID,	  
+    VX,
+    VY,
+    VZ
+    
+  )	values (
+		0,
+	  0,
+	  0,
+	  0
+	)
+	
+	Select * from ssc_slope where Error="OK" into ssc_good
+	Select * from ssc_slope where Error<>"OK" into ssc_bad
+	
+  set distance units "FT"
+	
+  fetch first from elevcircle
+  fetch first from ssc_good
+  
+  displayid = 0 
+  do while not EOT(ssc_good)
+    if displayid mod 50 = 0 then
+      statusbar show message "locating vertex elevations, " + str$(displayid)
+    end if
+    displayid = displayid + 1
+    
+    ThisRowID = ssc_good.rowid
+    cVX= ssc_good.VX
+    cVY= ssc_good.VY
+    cVZ=0
+    cVZrad=0
+    
+    for i = 1 to 100
+    
+      update elevcircle set obj = createcircle(cVX, cVY, i*10)
+      
+      Select max(ELEVATION) from elevcircle, Elevation where Elevation.obj Intersects elevcircle.obj into _thisElev
+      
+      if SelectionInfo(SEL_INFO_NROWS) <> 0 then
+        fetch first from _ThisElev
+      
+        cVZ = _ThisElev.COL1
+        cVZrad = i*10
+        
+        Update ssc_good set
+          VZ = cVZ,
+          VZrad = cVZrad
+        Where RowID = ThisRowID    
+        
+        exit for
+      end if
+    next 
+    
+    fetch next from ssc_good
+    
+  loop    
+  
+  update ssc_good set obj = createline (VX, VY,NodeX, NodeY)
+  
+  Commit Table ssc_slope 
+  Commit Table elevcircle
+  
+  'FUTURE ERROR CHECKING need to look for zero flow lengths
+
+
+  displayid = 0
+  fetch first from ssc_good
+  
+  do while not EOT(ssc_good)
+    if displayid mod 50 = 0 then
+      statusbar show message "updating mst_surfSC, " + str$(displayid)
+    end if
+    displayid = displayid + 1
+  
+    cSurfSCID = ssc_good.SurfSCID
+    
+    cdH = ssc_good.VZ - ssc_good.NodeZ
+    cFlowLength = ssc_good.MaxLen
+    cSlope = int(cdH/cFlowlength*100000)/100000
+    
+    Select * from ssc_target where ssc_target.SurfSCID = cSurfSCID into _thisTarget
+    
+    if SelectionInfo(SEL_INFO_NROWS) = 0 then
+      note "unreached condition updating str$(cSurfSCID)"
+    else
+      Fetch First from _thisTarget
+      ThisRowid = _thisTarget.RowID
+      update _thisTarget set
+        dH = cdH,
+        FlowLengthFt = cFlowLength,  
+        Slope = cSlope
+      where RowID = ThisRowID
+	  end if
+	  fetch next from ssc_good
+	loop
+  
+
+
+	nBadslopes =  TableInfo( ssc_bad  , TAB_INFO_NROWS)
+  
+  'Aug 29, 2005 add check 
+  if nBadslopes = 0 then 
+  	print " all slopes calculated correctly"
+  	close table ssc_bad
+  else
+  	
+  	bad_list = ""
+  	fetch first from ssc_bad
+  	Do While Not EOT(ssc_bad)
+  		i = i + 1
+  		
+  		if bad_list <> "" then
+  			bad_list = bad_list + ","
+  		end if
+  		
+  		bad_list = bad_list + ssc_bad.SurfSCID
+  		
+  		Fetch Next From ssc_bad
+  	loop
+  	
+  	cmdstr = "Select * from mst_SurfSC where SurfSCID in (" + bad_list + ") into mst_SurfSC_badslopes"
+	run command cmdstr
+  	
+  	
+  	Note nBadSlopes + " bad slopes found, browse ssc_bad table for details" + chr$(13) + 
+  		"  a map of bad sscs will appear"
+  		
+  	Map From mst_SurfSC_badslopes
+  		
+  	
+  end if
+
+  strgdate = str$(curdate()) & " " & time(24)
+    
+  rc = WriteINI(gmaintINIpath, "Admin", "endslope", strgdate)
+  
+  
+  
+  print " --- slope calc done"
+  print ""
+  mcommands(7) = true
+end sub  
+
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+' 20061010 Collins - add Alt_TraceNode
+sub appendSSCTomaster()
+  Dim sscACols(5) as CheckColumn
+  Dim i as integer
+  Dim sgdate as string
+  
+  
+  sscACols(1).name = "NGTO_ex"
+  sscACols(1).type = COL_TYPE_CHAR
+  sscACols(1).stype = "Char"
+  
+  sscACols(2).name = "NGTO_fb"
+  sscACols(2).type = COL_TYPE_CHAR
+  sscACols(2).stype = "Char"
+  
+  sscACols(3).name = "IsSumped_ex"
+  sscACols(3).type = COL_TYPE_LOGICAL
+  sscACols(3).stype = "Logical"
+  
+  sscACols(4).name = "IsSumped_fb"
+  sscACols(4).type = COL_TYPE_LOGICAL
+  sscACols(4).stype = "Logical"
+  
+  sscACols(5).name = "Alt_TraceNode"
+  sscACols(5).type = COL_TYPE_CHAR
+  sscACols(5).stype = "Char"
+  
+    
+  gstrSelectedTableName = ""
+  call setappendtable()
+  
+  if gstrSelectedTableName = "" then
+    note "no table selected"
+    exit sub
+  else
+    if tableinfo(gstrSelectedTableName, TAB_INFO_EDITED) then
+      note gstrSelectedTableName + " has unsaved changes"
+      exit sub
+    end if
+  
+    note gstrSelectedTableName + " selected"
+  end if
+
+  for i = 1 to 5
+    if Not IsColumnThere(gstrSelectedTableName, sscACols(i).name) then
+      note "column " + sscACols(i).name + " not found in " + gstrSelectedTableName
+      exit sub
+    end if
+  next
+  
+  print "packing table"
+  pack table mst_surfsc Graphic Data
+	
+	' existing sscs attributes set to false so than only new sscs will be T
+	Update mst_SurfSC Set UpdateAtts = "F"
+	
+	
+	' add date/time stamp + filename
+	
+	
+	sgdate = str$(year(curdate())) + right$("0" + str$(month(curdate())),2) + right$("0" + str$(day(curdate())),2) + "_" + time(24)
+	
+  insert into mst_surfSC
+    ( 
+    NGTO_ex, 
+    NGTO_fb,
+    Alt_TraceNode,
+    issumped_ex, 
+    issumped_fb,
+    updateatts,
+    sscsource,
+    sscgdate
+    ) select NGTO_ex,NGTO_fb,Alt_TraceNode,issumped_ex, issumped_fb,"T", gstrSelectedTableName, sgdate from gstrSelectedTableName
+    
+  commit table mst_surfSC  
+  
+  mcommands(1) = true
+  mcommands(2) = false
+  mUniqueIDCheck = false
+  
+  
+  print " --- append ssc done"
+  
+  
+end sub
+
+function UniqueIDCheck() as logical
+	if not mUniqueIDCheck then
+		note "must check for uniqueIDs first"
+		call CreateSurfIDs
+	end if
+	
+	UniqueIDCheck = mUniqueIDCheck
+end function
+
+
+
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+'
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+
+Sub		SetAppendTable()
+  
+  Dim		mTableNames() as string
+
+  dim 	lResult, isspecial as logical 
+
+  Dim 	i, LoopCount as integer
+  Dim 	Semi as string
+  dim 	TableCount as integer
+  dim		BaseTableCount as integer
+  dim		TableList as string
+  Dim		Msg as string
+
+  Dim 	dlgWidth as integer
+  dim		dlgHeight as integer
+  dim 	dlgButtonWidth as integer
+  dim 	dlgButtonHeight as integer
+  dim 	dlgButtonY as integer
+  dim 	dlgButtonOKX, dlgButtonCancelX as integer
+  Dim		AppendTableIndex as integer
+  Dim		NumWin as integer
+  Dim		LayerMax as integer
+  Dim		Found as logical
+
+  TableCount = numtables()
+  Semi = ""
+  
+  ' create a list of tables that were not opened automatically
+  For LoopCount = 1 to TableCount
+	  ' Only load names of base tables that are not master file tables 
+	  if TableInfo(LoopCount, TAB_INFO_TYPE) = TAB_TYPE_BASE then
+	    isspecial = False
+	    for i = 1 to Ubound(mFiles)
+	      if TableInfo(LoopCount, TAB_INFO_NAME) = mFiles(i).Alias then
+	        isspecial = True
+	        exit for
+	      end if
+	    next 
+	    
+	    if not isspecial then  
+	      BaseTableCount = BaseTableCOunt + 1		
+	  	  redim mTableNames(BaseTableCount)
+		    TableList = TableList + Semi + TableInfo(LoopCount, TAB_INFO_NAME)
+		    mTableNames(BaseTableCount) = TableInfo(LoopCount, TAB_INFO_NAME)
+		    Semi = ";"
+		  end if
+		  
+	  end if  
+  Next
+
+  if BaseTableCount = 0 then 
+    Note "only master and reference tables are open"
+    exit sub
+  end if
+  
+  
+  dlgWidth = 300
+  dlgHeight = 200
+  dlgButtonWidth = 40
+  dlgButtonHeight = 15
+
+  dlgButtonY = dlgHeight - 25
+  dlgButtonOKX = (dlgwidth / 3.0) - (dlgButtonWidth / 2.0)
+  dlgButtonCancelX = ((dlgwidth / 3.0) * 2) - (dlgButtonWidth / 2.0)
+
+  If gstrSelectedTableName <> "" then
+	  For LoopCount = 1 to BaseTableCount
+		  if mTableNames(LoopCount) = gstrSelectedTableName then
+			  AppendTableIndex = LoopCount
+			  exit for
+		  end if
+	  Next
+  else
+	  AppendTableIndex = 1
+  End If
+
+  Dialog  
+	  Title   "Select Currently Open Table"
+	  Width   dlgWIdth  Height   dlgHeight 
+	  Position  150 , 150
+
+	Control StaticText
+		Position	30, 25
+		Title		"Link table or selection for Append:"
+	Control PopupMenu  
+		Title  from variable mTableNames
+		Value AppendTableIndex
+		ID 5 
+		Into  AppendTableIndex
+		Position  155, 25
+		Width 75
+'	Control Button
+'		Position  235 , 25
+'		Width  40
+'		Height 13 
+'		Calling GettaFileName
+'		Title  "Find" 
+
+ 	Control OKButton
+		Position	dlgButtonOKX, dlgButtonY
+		Width	dlgButtonWidth
+		Height	dlgButtonHeight
+		Title		"OK"
+		
+	Control CancelButton
+		Position	dlgButtonCancelX, dlgButtonY
+		Width	dlgButtonWidth
+		Height	dlgButtonHeight
+		Title		"Cancel"
+  If CommandInfo(CMD_INFO_DLG_OK) Then 
+  '	do the deed here...
+	  gstrSelectedTableName = mTableNames(AppendTableIndex)
+
+	  NumWin = NumWindows()
+	  For LoopCount = 1 to NumWin
+		  if WindowInfo(LoopCount, WIN_INFO_NAME) = "Links" then
+			  Found = true
+			  gintLinkWindow = WindowInfo(LoopCount, WIN_INFO_WINDOWID)
+			  'print "Found links window: " & str$(gintLinkWindow)
+			  exit for
+		  end if
+	  Next
+	  
+	  if Found then
+		  LayerMax = MapperInfo(gintLinkWindow, MAPPER_INFO_LAYERS)
+		  Found = False
+		  For LoopCount = 1 to layerMax
+			  if LayerInfo(gintLinkWindow, LoopCount, LAYER_INFO_NAME) = gstrSelectedTableName then
+				  Found = True
+				  exit for
+			  end if
+		  Next
+		  if not found then
+			  Add Map Window gintLinkWindow Layer gstrSelectedTableName
+		  else
+			  print "Append layer found in map"
+		  end if
+	  end if
+	  'Alter Menu Item ID 3001 Enable
+	  'Alter Menu Item ID 3002 Enable
+	  'Alter Menu Item ID 3003 Enable
+
+  End If
+
+End Sub
+  
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+'
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+

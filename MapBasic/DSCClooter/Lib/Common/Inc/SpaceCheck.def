@@ -1,0 +1,11 @@
+'
+'	Definintion of SpaceCheck module
+'
+
+Declare Function SpaceCheck(
+	TheLink as Object,
+	FromNode as Object,
+	ToNode as Object
+	) as Logical
+
+Declare Sub InitSpaceCheck()

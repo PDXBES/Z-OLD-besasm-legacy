@@ -1,0 +1,311 @@
+!Workspace
+!Version 700
+!Charset WindowsLatin1
+Close Table mst_links_ac Interactive
+Close Table mst_Nodes_ac Interactive
+Set Window MapBasic
+  Position (0.15625,0.489583) Units "in"
+  Width 11.125 Units "in" Height 4.70833 Units "in" Min
+Open Window MapBasic
+Map From GroundZero,AbsJumps,AnyJump,DownSizeDiameter,DeepMH,NegSlope,
+  PipesZeroIE,NonCirc,NoDSConduit,CordLength,mdl_SurfSC_ac,mdl_links_ac,
+  MatlMissg,mdl_Nodes_ac,QyInflowNodes,Qy2ExternalMdl,PDX_Cad_Str_Lbl,QyOutfalls,
+  PDX_Bridges,Tric_row,ProjMask,ProjArea,Waternew_rev0922 
+  Position (0.354167,0.0729167) Units "in"
+  Width 8.03125 Units "in" Height 7.8125 Units "in" Min
+Set Window FrontWindow() ScrollBars Off Autoscroll On
+Set Map
+  CoordSys Earth Projection 3, 33, "ft", -120.5, 43.6666666667, 44.3333333333, 46, 8202099.7379999999, 0
+  Center (7656686.369,677712.2588)
+  Zoom 20737.08588 Units "ft"
+  Preserve Zoom Display Zoom
+  Distance Units "ft" Area Units "sq mi" XY Units "ft"
+  Distance Type Cartesian
+Set Map
+  Layer 1
+    Display Global
+    Global Pen (1,2,12632319)  Brush (1,16777215,16777215)  Symbol (34,16776960,12)  Line (1,2,16754768)  Font ("Arial Narrow",1,9,0)
+    Label Line Arrow Position Right Font ("Arial",0,9,0) Pen (1,2,0) 
+      With "" 'Node
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+  Layer 2
+    Display Global
+    Global Pen (1,2,12632319)  Brush (1,16777215,16777215)  Symbol (45,65280,12)  Line (1,2,16754768)  Font ("Arial Narrow",1,9,0)
+    Label Line Arrow Position Right Font ("Arial",0,9,0) Pen (1,2,0) 
+      With "" 'Node
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+  Layer 3
+    Display Global
+    Global Pen (1,2,12632319)  Brush (1,16777215,16777215)  Symbol (45,16776960,12)  Line (1,2,16754768)  Font ("Arial Narrow",1,9,0)
+    Label Line Arrow Position Right Font ("Arial",0,9,0) Pen (1,2,0) 
+      With "" 'Node
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+  Layer 4
+    Display Global
+    Global Pen (1,2,12632319)  Brush (1,16777215,16777215)  Symbol (37,16711935,14)  Line (1,2,16754768)  Font ("Arial Narrow",1,9,0)
+    Label Line Arrow Position Right Font ("Arial",0,9,0) Pen (1,2,0) 
+      With "" 'exp_IN
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+  Layer 5
+    Display Global
+    Global Pen (1,2,12632319)  Brush (1,16777215,16777215)  Symbol (44,53456,12)  Line (1,2,16754768)  Font ("Arial Narrow",1,9,0)
+    Label Line Arrow Position Right Font ("Arial",0,9,0) Pen (1,2,0) 
+      With "" 'Node
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+  Layer 6
+    Display Global
+    Global Pen (1,2,12632319)  Brush (1,16777215,16777215)  Symbol (59,255,12)  Line (2,112,15774720)  Font ("Arial Narrow",1,9,0)
+    Label Line Arrow Position Above Font ("Arial",0,9,0) Pen (1,2,0) 
+      With  "" 'explink
+      Parallel On Auto Off Overlap Off Duplicates Off Offset 2
+      Visibility On
+  Layer 7
+    Display Global
+    Global Pen (1,2,12632319)  Brush (1,16777215,16777215)  Symbol (59,255,12)  Line (1,220,8388608)  Font ("Arial Narrow",1,9,0)
+    Label Line Arrow Position Above Font ("Arial",0,9,0) Pen (1,2,0) 
+      With "" 'explink
+      Parallel On Auto Off Overlap Off Duplicates Off Offset 2
+      Visibility On
+  Layer 8
+    Display Global
+    Global Pen (1,2,12632319)  Brush (1,16777215,16777215)  Symbol (59,255,12)  Line (1,92,255)  Font ("Arial Narrow",1,9,0)
+    Label Line Arrow Position Above Font ("Arial",0,9,0) Pen (1,2,0) 
+      With  "" 'Shape
+      Parallel On Auto Off Overlap Off Duplicates Off Offset 2
+      Visibility On
+  Layer 9
+    Display Global
+    Global Pen (1,2,12632319)  Brush (1,16777215,16777215)  Symbol (59,255,12)  Line (1,92,16711680)  Font ("Arial Narrow",1,9,0)
+    Label Line Arrow Position Above Font ("Arial",0,9,0) Pen (1,2,0) 
+      With  "" 'explink
+      Parallel On Auto Off Overlap Off Duplicates Off Offset 2
+      Visibility On
+  Layer 10
+    Display Global
+    Global Pen (1,2,12632319)  Brush (1,16777215,16777215)  Symbol (59,255,12)  Line (6,2,16750640)  Font ("Arial Narrow",1,9,0)
+    Label Line Arrow Position Above Font ("Arial",0,9,0) Pen (1,2,0) 
+      With  "" 'explink
+      Parallel On Auto Off Overlap Off Duplicates Off Offset 2
+      Visibility On
+  Layer 11
+    Display Global
+    Global Pen (30,2,10526880)  Brush (1,16777215,16777215)  Symbol (35,0,12)  Line (1,2,16754768)  Font ("Arial Narrow",1,9,0)
+    Selectable Off
+    Label Line None Position Center Font ("Arial",0,9,0) Pen (1,2,0) 
+      With ""
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+  Layer 12
+    Display Global
+    Global Pen (1,2,12632319)  Brush (1,16777215,16777215)  Symbol (35,0,12)  Line (12,2,8421504)  Font ("Arial Narrow",1,9,0)
+    Arrows On
+    Zoom (0, 5000) Units "ft" 
+    Label Line Arrow Position Above Font ("Arial",0,9,0) Pen (1,2,0) 
+      With ""
+      Parallel On Auto Off Overlap Off Duplicates Off Offset 2
+      Visibility On
+  Layer 13
+    Display Global
+    Global Pen (1,2,12632319)  Brush (1,16777215,16777215)  Symbol (59,255,12)  Line (110,2,16776960)  Font ("Arial Narrow",1,9,0)
+    Label Line Arrow Position Above Font ("Arial",0,9,0) Pen (1,2,0) 
+      With  "" 'explink
+      Parallel On Auto Off Overlap Off Duplicates Off Offset 2
+      Visibility On
+  Layer 14
+    Display Global
+    Global Pen (1,2,12632319)  Brush (1,16777215,16777215)  Symbol (32,16777215,5)  Line (1,2,16754768)  Font ("Arial Narrow",1,9,0)
+    Zoom (0, 5000) Units "ft" 
+    Label Line None Position Above Right Font ("Arial Narrow",256,8,16728319,16777215) Pen (1,2,0) 
+      With  "" 'Node
+      Parallel On Auto On Overlap Off Duplicates On Offset 3
+      Visibility On
+  Layer 15
+    Display Global
+    Global Pen (1,2,12632319)  Brush (1,16777215,16777215)  Symbol (68,8388608,18,"MapInfo Cartographic",289,270)  Line (1,2,16754768)  Font ("Arial Narrow",1,9,0)
+    Selectable Off
+    Label Line None Position Below Right Font ("Arial Narrow",259,7,8388608,16777215) Pen (1,2,0) 
+      With  "" '"External Model"+Chr$(10)+"   Inflow"
+      Parallel On Auto On Overlap On Duplicates On PartialSegments On Offset 5
+      Visibility On
+  Layer 16
+    Display Global
+    Global Pen (1,2,12632319)  Brush (1,16777215,16777215)  Symbol (68,8388608,18,"MapInfo Cartographic",289,0)  Line (1,2,16754768)  Font ("Arial Narrow",1,9,0)
+    Selectable Off
+    Label Line Arrow Position Above Right Font ("Arial Narrow",259,7,8388608,16777215) Pen (1,2,0) 
+      With  "" '"To External"+Chr$(10)+"   Model"
+      Parallel On Auto On Overlap On Duplicates On Offset 5
+      Visibility On
+  Layer 17
+    Display Global
+    Global Pen (1,2,12632319)  Brush (1,16777215,16777215)  Symbol (35,0,12)  Line (1,2,16754768)  Font ("Arial Narrow",0,9,49344)
+    Selectable Off
+    Zoom (5000, 100000) Units "ft" 
+    Label Line Arrow Position Right Font ("Arial",0,9,0) Pen (1,2,0) 
+      With ""
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+  Layer 18
+    Display Global
+    Global Pen (1,2,12632319)  Brush (1,16777215,16777215)  Symbol (46,32768,18,"MapInfo Cartographic",256,0)  Line (1,2,16754768)  Font ("Arial Narrow",1,9,0)
+    Selectable Off
+    Label Line None Position Right Font ("Arial",0,9,0) Pen (1,2,0) 
+      With ""
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+  Layer 19
+    Display Global
+    Global Pen (1,2,6343679)  Brush (1,16777215,16777215)  Symbol (35,0,12)  Line (1,2,16754768)  Font ("Arial Narrow",1,9,0)
+    Selectable Off
+    Label Line None Position Center Font ("Arial",0,9,0) Pen (1,2,0) 
+      With ""
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+  Layer 20
+    Display Global
+    Global Pen (1,2,44031)  Brush (1,16777215,16777215)  Symbol (35,0,12)  Line (1,2,16754768)  Font ("Arial Narrow",1,9,0)
+    Selectable Off
+    Label Line None Position Center Font ("Arial",0,9,0) Pen (1,2,0) 
+      With ""
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+  Layer 21
+    Display Global
+    Global Pen (1,2,16777215)  Brush (15,14737632)  Symbol (35,0,12)  Line (1,2,16754768)  Font ("Arial Narrow",1,9,0)
+    Selectable Off
+    Label Line None Position Center Font ("Arial",0,9,0) Pen (1,2,0) 
+      With  "" 'ID
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+  Layer 22
+    Display Global
+    Global Pen (90,2,11559167)  Brush (1,16777215,16777215)  Symbol (35,0,12)  Line (1,2,16754768)  Font ("Arial Narrow",1,9,0)
+    Selectable Off
+    Label Line None Position Center Font ("Arial",0,9,0) Pen (1,2,0) 
+      With ""
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+  Layer 23
+    Display Global
+    Global Pen (1,24,255)  Brush (2,12632319,16777215)  Symbol (46,40960,18,"MapInfo Cartographic",256,0)  Line (1,2,16754768)  Font ("Arial",0,9,16777215)
+    Selectable Off
+    Label Line Arrow Position Right Font ("Arial",0,9,0) Pen (1,2,0) 
+      With ""
+      Parallel On Auto Off Overlap Off Duplicates On Offset 2
+      Visibility On
+Set Window FrontWindow() Title "Main Map"
+Set map window  Frontwindow() Zoom 10 units "ft"
+Set Map Window  windowinfo(Frontwindow(),13) Zoom Entire Layer "ProjArea"
+Set map window  Frontwindow() Zoom (mapperinfo( Frontwindow(), 1) * 1.01) units "ft"
+Create Cartographic Legend
+  Position (8.32292,0.0625) Units "in"
+  Width 3.70833 Units "in" Height 3.95833 Units "in" 
+  Window Title "Legend of Main Map"
+  Custom
+  Default Frame Style "# Legend" Font ("Arial Narrow",1,8,0)
+  Frame From Layer 11
+    Position (30,270) Units "in"
+    Border Pen (0,1,0) 
+    Using Column object 
+    Style Font ("Arial Narrow",1,8,0)
+      Text "Surface Subcatchment" Region Pen (30,2,10526880)  Brush (1,0,16777215) 
+  Frame From Layer 22
+    Position (30,269.802) Units "in"
+    Border Pen (0,1,0) 
+    Using Column object 
+    Style Font ("Arial Narrow",1,8,0)
+      Text "Project Area" Region Pen (90,2,11559167)  Brush (1,0,16777215) 
+  Frame From Layer 18
+    Position (30,269.521) Units "in"
+    Border Pen (0,1,0) 
+    Using Column object 
+    Style Font ("Arial Narrow",1,8,0)
+      Text "Outfall Location" Symbol (46,32768,18,"MapInfo Cartographic",256,0) 
+  Frame From Layer 12
+    Position (30,269.229) Units "in"
+    Border Pen (0,1,0) 
+    Using Column object 
+    Style Font ("Arial Narrow",1,8,0)
+      Text "Model Sewers" Line Pen (12,2,8421504) 
+  Frame From Layer 2
+    Position (30,269.052) Units "in"
+    Border Pen (0,1,0) 
+    Using Column object 
+    Style Font ("Arial Narrow",1,8,0)
+      Text "Absolute Invert Elev. Jumps" Symbol (45,65280,12) 
+  Frame From Layer 3
+    Position (30,268.875) Units "in"
+    Border Pen (0,1,0) 
+    Using Column object 
+    Style Font ("Arial Narrow",1,8,0)
+      Text "Any Invert Elev. Jump" Symbol (45,16776960,12) 
+  Frame From Layer 4
+    Position (30,268.698) Units "in"
+    Border Pen (0,1,0) 
+    Using Column object 
+    Style Font ("Arial Narrow",1,8,0)
+      Text " Downsized DS Pipe" Symbol (37,16711935,14) 
+  Frame From Layer 5
+    Position (30,268.521) Units "in"
+    Border Pen (0,1,0) 
+    Using Column object 
+    Style Font ("Arial Narrow",1,8,0)
+      Text "Deep MH ( [GrElev-MhIE] >= 20)" Symbol (44,53456,12) 
+  Frame From Layer 1
+    Position (30,268.344) Units "in"
+    Border Pen (0,1,0) 
+    Using Column object 
+    Style Font ("Arial Narrow",1,8,0)
+      Text "Zero Ground Elevation" Symbol (34,16776960,12) 
+  Frame From Layer 6
+    Position (30,268.167) Units "in"
+    Border Pen (0,1,0) 
+    Using Column object 
+    Style Font ("Arial Narrow",1,8,0)
+      Text "Negative Slope" Line Pen (2,112,15774720) 
+  Frame From Layer 7
+    Position (30,267.99) Units "in"
+    Border Pen (0,1,0) 
+    Using Column object 
+    Style Font ("Arial Narrow",1,8,0)
+      Text "Zero Invert Elevation" Line Pen (1,220,8388608) 
+  Frame From Layer 8
+    Position (30,267.812) Units "in"
+    Border Pen (0,1,0) 
+    Using Column object 
+    Style Font ("Arial Narrow",1,8,0)
+      Text "Non Circular Shape" Line Pen (1,92,255) 
+  Frame From Layer 9
+    Position (30,267.635) Units "in"
+    Border Pen (0,1,0) 
+    Using Column object 
+    Style Font ("Arial Narrow",1,8,0)
+      Text "No Downstream Conduit" Line Pen (1,92,16711680) 
+  Frame From Layer 10
+    Position (30,267.458) Units "in"
+    Border Pen (0,1,0) 
+    Using Column object 
+    Style Font ("Arial Narrow",1,8,0)
+      Text "Difference of Attribute Length to\nObject Length > 10 Ft" Line Pen (6,2,16750640) 
+  Frame From Layer 13
+    Position (30,267.052) Units "in"
+    Border Pen (0,1,0) 
+    Using Column object 
+    Style Font ("Arial Narrow",1,8,0)
+      Text "Material Attribute Missing" Line Pen (110,2,16776960) 
+  Frame From Layer 16
+    Position (31.6562,270.031) Units "in"
+    Border Pen (0,1,0) 
+    Using Column object 
+    Style Font ("Arial Narrow",1,8,0)
+      Text "Transfer Point to\nExternal Model" Symbol (68,8388608,18,"MapInfo Cartographic",289,0) 
+  Frame From Layer 15
+    Position (31.6667,269.708) Units "in"
+    Border Pen (0,1,0) 
+    Using Column object 
+    Style Font ("Arial Narrow",1,8,0)
+      Text "Inflow from \nExternal Model" Symbol (68,8388608,18,"MapInfo Cartographic",289,270) 

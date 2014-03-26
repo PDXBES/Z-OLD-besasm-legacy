@@ -1,0 +1,152 @@
+'
+'	============ EMGAATS Workbench =================
+'
+'	Copyright (c) 2001,	2003  City of Portland,	OR Bureau of Environmental Services	
+'
+' 20Jul2006	Adapted
+'	22Mar2004 Collins added	call to	InitOpenUtilGlobals	so that	EMGOpenUtils can be	used here
+'
+'
+include "MapBasic.def"
+include "\\cassio\modeling\Model_Programs\Emgaats\CodeV2.1\Common\Inc\EMGToolGlobal.def"
+
+Declare Sub Main()
+
+'Required for all Framework MBX Apps
+Declare Sub ExitApplication()
+Declare Sub Function_Menu()
+
+'Globals required for all Framework Apps
+Global gReturnStatus as String
+Global gDebugMode as Logical
+
+'Functions specific to this Framework App
+Declare Sub CopyObjectByFields()
+Declare Sub PrepareAutoConveyance
+Declare Sub DebugNote(ByVal debugStatus as string)
+
+'Globals specific to this Framework App
+global gMdlLinkTable as String
+global gAltLinkTable as String
+
+'---------------------------------------------------------
+' the following	is a delphi	code snippit that shows	how	the	MB globals are accessed
+'---------------------------------------------------------
+  'strMBmsg	= 'gstrCurrentMessage';
+  'strMBrc = 'gstrReturnStatus';
+
+  'STEP	ONE: Start mapinfo
+  'goleMI :=Zcreateoleobject('Mapinfo.Application');
+  
+  'STEP	TWO: find the full path	of the application
+  'mbxFullPath := systemini.ReadString('code','TestBench','notfound');	
+	
+	'STEP THREE: Run the mbx
+	'DoStr := 'Run Application '+ #34 +	mbxFullPath	+ #34;
+	'oleMI.do doStr
+	
+  'STEP	FOUR: Initialize global	to something that is not SUCCESS
+  'oleMI.mbapplications.item('TestBench').mbglobals.item(strMBrc).value	:= 'NULL';
+  
+  'STEP	FIVE: run subroutines within the mapinfo application and test for success
+  'olemi.do	('Run Menu Command ID '	+ cmdID);
+  'sleep(1000);
+  'if myrc <> 'SUCCESS'	Then
+	' error	stuff here
+  'end if
+
+'---------------------------------------------------------
+Sub CopyObjectByFields()
+
+	Dim dostr as string
+	Dim InsertOBj as object
+	Dim i as integer
+	Dim currentID as string
+	Call DebugNote("1")
+	
+	Select * From alt_links Where Str$(obj)= "" into uTbl
+	
+	'insert into uTbl(obj) select obj from Mdl_links where alt_links.MdlLinkID = mdl_links.LinkID
+	For i = 1 to tableinfo(alt_links, 4)
+		Drop Index alt_links(columninfo(alt_links,str$("COL" + i), 1))
+	Next
+	
+	For i = 1 to tableinfo(uTbl,8)
+
+		Select * From uTbl Where rowid = i Into QyUpdt
+		'Call DebugNote("3")
+		currentID =Str$(QyUpdt.MdlLinkID)
+		
+		dostr = "select obj from mdl_links where LinkID = " + currentID + " into QyObj"
+		Run Command dostr
+		insertObj = QyObj.obj
+		'Call DebugNote("4")
+		Update QyUpdt set obj = InsertObj		
+	Next
+	
+	Commit Table alt_links
+	
+	For i = 1 to 4
+		Create Index On alt_links(columninfo(alt_links,str$("COL" + i), 1))
+	Next
+		
+End Sub
+'---------------------------------------------------------
+Sub PrepareAutoConveyance	
+	Open Table gAltLinkTable as alt_links
+	Open Table gMdlLinkTable as mdl_links ReadOnly
+	Call CopyObjectByFields()
+End Sub
+'---------------------------------------------------------
+Sub ExitApplication()		
+	Close All		
+	End Program
+End Sub
+
+'---------------------------------------------------------
+' Modify to	add	menuitems for testing
+'---------------------------------------------------------
+
+Sub	Function_Menu() 'Required for all Framework MBX apps
+
+Create Menu	"Function Menu"	as 
+	"Prepare Auto-Conveyance" ID 10000 calling PrepareAutoConveyance,	
+	"Exit MBX Application" ID 9999 calling ExitApplication 'Required for all Framework MBX apps
+  
+  Alter	Menu Bar Remove	ID 6, ID 7 
+  Alter	Menu Bar Add "Function Menu", ID 6,	ID 7    
+
+End	Sub
+
+'--------------------------------------------------------
+'No	changes	below here
+'--------------------------------------------------------
+
+Sub	Main()
+		 
+	gReturnStatus="Initialized"	
+	OnError GoTo ErrorHandler
+	
+	Call Function_Menu
+	
+	Exit Sub
+	
+	ErrorHandler:
+		gReturnStatus = "Error: " + Err()		
+		OnError GoTo 0
+		Error Err()
+	
+End	Sub
+'---------------------------------------------------------
+'All functions should be sure to save tables as needed. When MapInfo exits,
+'all tables will be closed without saving (to prevent user prompt in event of a crash
+'Sub EndHandler
+'	Close All
+'End Sub
+'---------------------------------------------------------
+Sub DebugNote(ByVal debugStatus as string)
+	If gDebugMode = True Then
+		Print debugStatus		
+	End If
+End Sub
+'---------------------------------------------------------
