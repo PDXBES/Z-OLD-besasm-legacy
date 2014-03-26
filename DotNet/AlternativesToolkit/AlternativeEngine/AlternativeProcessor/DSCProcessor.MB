@@ -179,8 +179,8 @@ End Sub
 'in alt_links
 Sub ExtractAltLinkID
 	gReturnStatus="Entered ExtractAltLinkID()"	
-	Add Column mdl_links (ExtractedAltLinkId Integer) From mdl_links Set To Val(Right$(Source, Len(Source)-InStr(1, Source, "."))) Where MLinkID = MLinkID
-	Add Column mdl_links (ExtractedAltId Integer) From mdl_links Set To Val(Left$(Source, InStr(1, Source, ".") - 1)) Where MLinkID = MLinkID
+	Add Column mdl_links (ExtractedAltLinkId Integer) From mdl_links Set To Val(Right$(Source, Len(Source)-InStr(1, Source, "."))) Where LinkID = LinkID
+	Add Column mdl_links (ExtractedAltId Integer) From mdl_links Set To Val(Left$(Source, InStr(1, Source, ".") - 1)) Where LinkID = LinkID
 	Select * From mdl_links Where ExtractedAltID = gAltId Into mdl_links_extracted
 	Commit Table mdl_links_extracted As gTempDir & "mdl_links_extracted.tab"
 	If TableInfo(mdl_links_extracted, TAB_INFO_NROWS) = 0 Then
