@@ -641,5 +641,12 @@ namespace CostEstimator.UnitTests
     {
       Assert.That(_pipeCoster.BaseENR.Value, Is.EqualTo(8090));
     } // BaseENR_Is8090()
+
+    [Test]
+    public void CIPPCost_10dot0_Is_43dot27()
+    {
+      bool outsideTable;
+      Assert.That(_pipeCoster.CIPPPipeCost(10.0, out outsideTable), Is.EqualTo(35.10).Within(0.1));
+    }
   }
 }

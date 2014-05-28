@@ -1459,49 +1459,16 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     } // FlowDiversionCost(insideDiameter, outsideTable)
 
     /// <summary>
-    /// CIP p pipe cost
+    /// CIPP pipe cost
     /// </summary>
     /// <param name="insideDiameter">Inside diameter</param>
     /// <param name="outsideTable">Outside table</param>
     /// <returns>Decimal</returns>
     public decimal CIPPPipeCost(double insideDiameter, out bool outsideTable)
     {
-      if (insideDiameter < _CIPPCostTable.Keys[0])
-      {
-        outsideTable = true;
-        return _CIPPCostTable.Values[0];
-      } // if
-      else
-        if (insideDiameter > _CIPPCostTable.Keys[_CIPPCostTable.Count - 1])
-        {
-          outsideTable = true;
-          return _CIPPCostTable.Values[_CIPPCostTable.Count - 1];
-        } // if
-        else
-        {
-          int foundIndex = -1;
-          for (int i = 0; i < _CIPPCostTable.Count; i++)
-          {
-            if (_CIPPCostTable.Keys[i] >= insideDiameter)
-            {
-              foundIndex = i;
-              break;
-            } // if
-          } // for
-          System.Diagnostics.Debug.Assert(foundIndex != -1);
-
-          if (foundIndex > -1)
-          {
-            outsideTable = false;
-            return _CIPPCostTable.Values[foundIndex];
-          } // if
-          else
-          {
-            // should never be reached; provided for compiler syntax check
-            outsideTable = true;
-            return -1;
-          } // else
-        } // else
+      outsideTable = false;
+      double cost = insideDiameter < 0 ? 0 : 1.1406 * Math.Pow(insideDiameter, 1.4882);
+      return (decimal)cost;
     } // CIPPPipeCost(insideDiameter, outsideTable)
 
     /// <summary>

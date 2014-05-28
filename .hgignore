@@ -24,3 +24,7 @@ syntax: glob
 *.csproj.user
 *.vbproj.user
 DotNet/ArcSpooler/packages/NUnit.2.6.3/*
+*/Thumbs.db
+Fortran/*/*.o
+DotNet/CostEstimator/UpgradeLog.XML
+DotNet/CostEstimator/_UpgradeReport_Files/*

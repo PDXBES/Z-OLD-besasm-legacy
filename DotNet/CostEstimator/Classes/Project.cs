@@ -1577,7 +1577,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     {
       int linkCounter = 0;
       Link currentLink = null;
-      string currentStage = "";
+      string currentStage = ""; // for errors, indicates where exception occurred
 
       try
       {
@@ -1807,6 +1807,79 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       return true;
     } // CreateEstimateFromModel(bw, modelPath, selectedMLinkIds)
 
+    private void ReadSegmentsTable(string segmentsTableFileName, string segmentsTableName)
+    {
+      throw new NotImplementedException();
+    }
+    
+    private void ReadConflictsTable(string conflictsTableFileName, string conflictsTableName)
+    {
+      throw new NotImplementedException();
+    }
+
+    /// <summary>
+    /// Creates a cost estimate from a rehab segmentations table and accompanying conflicts table
+    /// </summary>
+    /// <param name="bw">A background worker</param>
+    /// <param name="modelPath">Path to the folder containing the segmentation and conflicts table</param>
+    /// <param name="segmentsTableDB">Filename of the database containing the segmentation table</param>
+    /// <param name="segmentsTableName">Name of the segment table</param>
+    /// <param name="conflictsTableDB">Filename of the database containing the conflicts table</param>
+    /// <param name="errorMessage">Contains an error message if one is generated</param>
+    /// <returns>True if the estimate creation succeeded</returns>
+    public bool CreateEstimateFromRehab(
+      BackgroundWorker bw, 
+      string modelPath, 
+      string segmentsTableDB,
+      string segmentsTableName,
+      string conflictsTableDB,
+      string conflictsTableName,
+      out string errorMessage)
+    {
+      // Set up status counters for progress
+      int segmentCounter = 0;
+      string currentStage = ""; // for errors, indicates where exception occurred
+
+      try
+      {
+        // Set up project info
+        if (Directory.Exists(modelPath))
+        {
+          _ProjectInfo.Source = modelPath;
+          _ProjectInfo.BaseENR = _PipeCoster.BaseENR;
+          _ProjectInfo.ENR = _PipeCoster.CurrentENR;
+        }
+
+        // Read in segmentation table
+        string segmentsTableFileName = Path.Combine(modelPath, segmentsTableDB);
+        ReadSegmentsTable(segmentsTableFileName, segmentsTableName);
+
+        // Read in conflicts table
+        string conflictsTableFileName = Path.Combine(modelPath, conflictsTableDB);
+        ReadConflictsTable(conflictsTableFileName, conflictsTableName);
+        
+        // Join segmentation and conflict info
+        var costingInfo = 
+
+        // Set up whole pipe estimate
+        CostItemFactor wholePipeRehabEstimate = 
+          new CostItemFactor("WholePipe " + Path.GetFileName(modelPath));
+        _CostItemFactors.Add(wholePipeRehabEstimate.ID, wholePipeRehabEstimate);
+        _Estimates.Add(wholePipeRehabEstimate.ID, wholePipeRehabEstimate);
+
+        // Set up liner estimate
+        CostItemFactor linerRehabEstimate =
+          new CostItemFactor("Liner" + Path.GetFileName(modelPath));
+        _CostItemFactors.Add(linerRehabEstimate.ID, linerRehabEstimate);
+        _Estimates.Add(linerRehabEstimate.ID, linerRehabEstimate);
+
+      }
+      catch (Exception e)
+      {
+
+        throw;
+      }
+    }
     /// <summary>
     /// Write estimates as strings
     /// </summary>
