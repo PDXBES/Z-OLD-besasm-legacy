@@ -342,6 +342,29 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
     } // SelectModel()
 
     /// <summary>
+    ///  Opens a UI for selecting the segment and conflict tables for costing systemwide rehab
+    /// </summary>
+    private void SelectRehabFiles()
+    {
+      string segmentsDBFileName = string.Empty;
+      dlgOpen.Title = "Open Segments Table";
+      if (dlgOpen.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+        segmentsDBFileName = dlgOpen.FileName;
+      string segmentsTableName = Path.GetFileNameWithoutExtension(segmentsDBFileName);
+
+      string conflictsDBFileName = string.Empty;
+      dlgOpen.Title = "Open Conflicts Table";
+      if (dlgOpen.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+        conflictsDBFileName = dlgOpen.FileName;
+      string conflictsTableName = Path.GetFileNameWithoutExtension(conflictsDBFileName);
+
+      AddRehabEstimateToProject(segmentsDBFileName, segmentsTableName, conflictsDBFileName,
+        conflictsTableName);
+
+      EnableRibbon(true);
+    }
+
+    /// <summary>
     /// View progress page
     /// </summary>
     public void ViewProgress()
@@ -998,7 +1021,18 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 
       bkgWorkerLoadModel.RunWorkerAsync(loadModelPackage);
     } // AddModelEstimateToProjectWithItemSelection()
+    
+    /// <summary>
+    /// Add systemwide rehab estimate to project
+    /// </summary>
+    private void AddRehabEstimateToProject(string segmentsFile, string segmentsTable,
+      string conflictsFile, string conflictsTable)
+    {
+      if (_project == null)
+        _project = new Project();
 
+
+    }
     /// <summary>
     /// Setup project for cost grid
     /// </summary>
@@ -1397,7 +1431,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       BackgroundWorker bw = sender as BackgroundWorker;
       string error = string.Empty;
       bool noError = _project.CreateEstimateFromModel(bw, modelPath, linksToEstimate,
-      GenerateManholeCosts, out error);
+        GenerateManholeCosts, out error);
       e.Result = new ErrorInfo(noError, error);
     }
 
@@ -1497,6 +1531,32 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
             edtMasterPipXPLocation.Text = dlgOpen.FileName;
           break;
       } // switch
+    }
+
+    private void btnEstimateSystemwideRehab_Click(object sender, EventArgs e)
+    {
+      SelectRehabFiles();
+    }
+
+    private void bkgWorkerLoadRehab_DoWork(object sender, DoWorkEventArgs e)
+    {
+      LoadRehabPackage loadRehabPackage = (LoadRehabPackage)e.Argument;
+      BackgroundWorker bw = sender as BackgroundWorker;
+      string error = string.Empty;
+      bool noError = _project.CreateEstimateFromRehab(bw, loadRehabPackage.SegmentsDBFileName,
+        loadRehabPackage.SegmentsTableName, loadRehabPackage.ConflictsDBFileName,
+        loadRehabPackage.ConflictsTableName, out error);
+      e.Result = new ErrorInfo(noError, error);
+    }
+
+    private void bkgWorkerLoadRehab_ProgressChanged(object sender, ProgressChangedEventArgs e)
+    {
+
+    }
+
+    private void bkgWorkerLoadRehab_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+    {
+
     }
   }
 }
