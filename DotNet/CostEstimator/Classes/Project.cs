@@ -15,6 +15,7 @@ using System.Xml.XPath;
 using System.ComponentModel;
 using SystemsAnalysis.Modeling;
 using SystemsAnalysis.Modeling.Alternatives;
+using System.Data.OleDb;
 
 #endregion
 
@@ -1807,14 +1808,55 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       return true;
     } // CreateEstimateFromModel(bw, modelPath, selectedMLinkIds)
 
-    private void ReadSegmentsTable(string segmentsTableFileName, string segmentsTableName)
+    private Dictionary<int, Segment>  ReadSegmentsTable(
+      string segmentsTableFileName, 
+      string segmentsTableName)
     {
-      throw new NotImplementedException();
+      Dictionary<int, Segment> segmentsTable = new Dictionary<int,Segment>();
+
+      string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + 
+        segmentsTableFileName + @";Persist Security Info=False";
+      using (OleDbConnection conn = new OleDbConnection(connectionString))
+      {
+      	conn.Open();
+        OleDbDataReader reader = null;
+        OleDbCommand command = new OleDbCommand("SELECT * FROM " + segmentsTableName);
+        reader = command.ExecuteReader();
+
+        while (reader.Read())
+        {
+          Segment newSegment = new Segment(reader);
+          segmentsTable.Add(newSegment.ID, newSegment);
+        }
+        
+      }
+
+      return segmentsTable;
     }
     
-    private void ReadConflictsTable(string conflictsTableFileName, string conflictsTableName)
+    private Dictionary<int, Conflict> ReadConflictsTable(
+      string conflictsTableFileName, 
+      string conflictsTableName)
     {
-      throw new NotImplementedException();
+      Dictionary<int, Conflict> conflictsTable = new Dictionary<int, Conflict>();
+
+      string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
+        conflictsTableFileName + @";Persist Security Info=False";
+      using (OleDbConnection conn = new OleDbConnection(connectionString))
+      {
+        conn.Open();
+        OleDbDataReader reader = null;
+        OleDbCommand command = new OleDbCommand("SELECT * FROM " + conflictsTableName);
+        reader = command.ExecuteReader();
+
+        while (reader.Read())
+        {
+          Conflict newConflict = new Conflict(reader);
+          conflictsTable.Add(newConflict.ID, newConflict);
+        }
+      }
+
+      return conflictsTable;
     }
 
     /// <summary>
@@ -1836,10 +1878,6 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       string conflictsTableName,
       out string errorMessage)
     {
-      // Set up status counters for progress
-      int segmentCounter = 0;
-      string currentStage = ""; // for errors, indicates where exception occurred
-
       try
       {
         // Set up project info
@@ -1852,20 +1890,26 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 
         // Read in segmentation table
         string segmentsTableFileName = Path.Combine(modelPath, segmentsTableDB);
-        ReadSegmentsTable(segmentsTableFileName, segmentsTableName);
+        var segmentsTable = ReadSegmentsTable(segmentsTableFileName, segmentsTableName);
 
         // Read in conflicts table
         string conflictsTableFileName = Path.Combine(modelPath, conflictsTableDB);
-        ReadConflictsTable(conflictsTableFileName, conflictsTableName);
+        var conflictsTable = ReadConflictsTable(conflictsTableFileName, conflictsTableName);
         
-        // Join segmentation and conflict info
-        var costingInfo = 
-
         // Set up whole pipe estimate
         CostItemFactor wholePipeRehabEstimate = 
           new CostItemFactor("WholePipe " + Path.GetFileName(modelPath));
         _CostItemFactors.Add(wholePipeRehabEstimate.ID, wholePipeRehabEstimate);
         _Estimates.Add(wholePipeRehabEstimate.ID, wholePipeRehabEstimate);
+
+        CostItemFactor wholePipeDirectConstructionCIF = new CostItemFactor(DESC_PIPE_DIRECT_CONSTRUCTION);
+        _CostItemFactors.Add(wholePipeDirectConstructionCIF.ID, wholePipeDirectConstructionCIF);
+        wholePipeRehabEstimate.AddCostItemFactor(wholePipeDirectConstructionCIF);
+
+        CostItemFactor wholePipeOtherDirectConstructionCIF = 
+          new CostItemFactor(DESC_OTHER_DIRECT_CONSTRUCTION);
+        _CostItemFactors.Add(wholePipeOtherDirectConstructionCIF.ID, wholePipeOtherDirectConstructionCIF);
+        wholePipeRehabEstimate.AddCostItemFactor(wholePipeOtherDirectConstructionCIF);
 
         // Set up liner estimate
         CostItemFactor linerRehabEstimate =
@@ -1873,6 +1917,35 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
         _CostItemFactors.Add(linerRehabEstimate.ID, linerRehabEstimate);
         _Estimates.Add(linerRehabEstimate.ID, linerRehabEstimate);
 
+        CostItemFactor linerDirectConstructionCIF = new CostItemFactor(DESC_PIPE_DIRECT_CONSTRUCTION);
+        _CostItemFactors.Add(linerDirectConstructionCIF.ID, linerDirectConstructionCIF);
+        linerRehabEstimate.AddCostItemFactor(linerDirectConstructionCIF);
+
+        CostItemFactor linerOtherDirectConstructionCIF = new CostItemFactor(DESC_OTHER_DIRECT_CONSTRUCTION);
+        _CostItemFactors.Add(linerOtherDirectConstructionCIF.ID, linerOtherDirectConstructionCIF);
+        linerRehabEstimate.AddCostItemFactor(linerOtherDirectConstructionCIF);
+
+        // Process segments
+        int totalSegments = segmentsTable.Count;
+        int segmentCounter = 0;
+
+        DateTime startTime = DateTime.Now;
+
+        foreach (Segment segment in segmentsTable.Values)
+        {
+          segmentCounter++;
+          double fractionDone = (double)segmentCounter / (double)totalSegments;
+          int elapsedDuration = Convert.ToInt32((DateTime.Now - startTime).Duration().TotalMinutes);
+          int expectedDuration = Convert.ToInt32((DateTime.Now - startTime).Duration().TotalMinutes / fractionDone);
+          int durationLeft = expectedDuration - elapsedDuration;
+          bw.ReportProgress((int)(fractionDone * 100), 
+            string.Format("Reading segments: {0} out of {1}, {2} minutes left",
+            segmentCounter, totalSegments, durationLeft));
+        }
+
+        errorMessage = string.Empty;
+        _IsDirty = true;
+        return true;
       }
       catch (Exception e)
       {
