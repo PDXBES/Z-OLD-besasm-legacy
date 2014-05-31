@@ -1031,7 +1031,13 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       if (_project == null)
         _project = new Project();
 
+      lblProgress.Text = "Loading rehab data";
+      prgMainProgress.Value = 0;
+      tabMain.SelectedTab = tabMain.Tabs["Progress"];
+      LoadRehabPackage loadRehabPackage = new LoadRehabPackage(segmentsFile, segmentsTable,
+        conflictsFile, conflictsTable);
 
+      bkgWorkerLoadRehab.RunWorkerAsync(loadRehabPackage);
     }
     /// <summary>
     /// Setup project for cost grid
@@ -1543,7 +1549,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       LoadRehabPackage loadRehabPackage = (LoadRehabPackage)e.Argument;
       BackgroundWorker bw = sender as BackgroundWorker;
       string error = string.Empty;
-      bool noError = _project.CreateEstimateFromRehab(bw, loadRehabPackage.SegmentsDBFileName,
+      bool noError = _project.CreateEstimateFromRehab(bw,
+        Path.GetFullPath(loadRehabPackage.SegmentsDBFileName), loadRehabPackage.SegmentsDBFileName,
         loadRehabPackage.SegmentsTableName, loadRehabPackage.ConflictsDBFileName,
         loadRehabPackage.ConflictsTableName, out error);
       e.Result = new ErrorInfo(noError, error);
@@ -1551,12 +1558,26 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 
     private void bkgWorkerLoadRehab_ProgressChanged(object sender, ProgressChangedEventArgs e)
     {
-
+      prgMainProgress.Value = e.ProgressPercentage;
+      prgMainProgress.Refresh();
+      if (e.UserState != null)
+      {
+        lblProgress.Text = (string)e.UserState;
+        lblProgress.Refresh();
+      }
     }
 
     private void bkgWorkerLoadRehab_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
     {
-
+      ErrorInfo errorInfo = (ErrorInfo)e.Result;
+      if (errorInfo.NoError == false)
+      {
+        MessageBox.Show("An error occurred while costing the model. " +
+        "Check the model for consistency.\n" + errorInfo.Message);
+        CloseProject(true);
+      }
+      else
+        SetupProjectForCostGrid();
     }
   }
 }
