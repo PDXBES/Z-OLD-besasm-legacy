@@ -133,7 +133,7 @@ namespace SystemsAnalysis.Utils.AccessUtils
     {
       string linkTableConnection = outputDatabase;
       //linkTable.SourceTableName = tableName;
-      dao._DBEngine dbEng = new dao.DBEngineClass();
+      dao.DBEngine dbEng = new dao.DBEngine();
       dao.Workspace ws = dbEng.CreateWorkspace("", "admin", "", dao.WorkspaceTypeEnum.dbUseJet);
       dao.Database db = ws.OpenDatabase(outputDatabase, true, false, "");
 
@@ -155,7 +155,7 @@ namespace SystemsAnalysis.Utils.AccessUtils
     {
       string linkTableConnection = outputDatabase;
       //linkTable.SourceTableName = tableName;
-      dao._DBEngine dbEng = new dao.DBEngineClass();
+      dao.DBEngine dbEng = new dao.DBEngine();
       dao.Workspace ws = dbEng.CreateWorkspace("", "admin", "", dao.WorkspaceTypeEnum.dbUseJet);
       dao.Database db = ws.OpenDatabase(outputDatabase, true, false, "");
 
@@ -177,7 +177,7 @@ namespace SystemsAnalysis.Utils.AccessUtils
     {
       string linkTableConnection = outputDatabase;
       //linkTable.SourceTableName = tableName;
-      dao._DBEngine dbEng = new dao.DBEngineClass();
+      dao.DBEngine dbEng = new dao.DBEngine();
       dao.Workspace ws = dbEng.CreateWorkspace("", "admin", "", dao.WorkspaceTypeEnum.dbUseJet);
       dao.Database db = ws.OpenDatabase(outputDatabase, true, false, "");
 
@@ -289,7 +289,7 @@ namespace SystemsAnalysis.Utils.AccessUtils
       //delete the query, if it already exists
       AccessDropQuery(queryName, accessDBLocation);
 
-      dao._DBEngine dbEng = new dao.DBEngineClass();
+      dao.DBEngine dbEng = new dao.DBEngine();
       dao.Workspace ws = dbEng.CreateWorkspace("", "admin", "", dao.WorkspaceTypeEnum.dbUseJet);
       dao.Database db = ws.OpenDatabase(accessDBLocation, true, false, "");
 
@@ -349,8 +349,8 @@ namespace SystemsAnalysis.Utils.AccessUtils
     /// <param name="accessDBLocation">The location of the database in which to execute the action query</param>
     public static void AccessExecuteActionQuery(string queryName, string accessDBLocation)
     {
-      dao._DBEngine dbEng = new dao.DBEngineClass();
-      dao.Workspace ws = dbEng.CreateWorkspace("", "admin", "", dao.WorkspaceTypeEnum.dbUseJet);
+        dao.DBEngine dbEng = new dao.DBEngine();
+        dao.Workspace ws = dbEng.CreateWorkspace("", "admin", "", dao.WorkspaceTypeEnum.dbUseJet);
       dao.Database db = ws.OpenDatabase(accessDBLocation, true, false, "");
 
       try
@@ -527,7 +527,7 @@ namespace SystemsAnalysis.Utils.AccessUtils
           dao.Fields fields = recordSet.Fields;
           for (int i = 0; i < fields.Count; i++)
           {
-            streamWriter.Write((string)fields[i].Value.ToString());
+            streamWriter.Write((string)fields[i].Value);
             streamWriter.Write(", ");
           }
           streamWriter.WriteLine(fields[fields.Count]);
@@ -585,7 +585,7 @@ namespace SystemsAnalysis.Utils.AccessUtils
       rs.MoveFirst();
       while (!rs.EOF)
       {
-        if (((string)rs.Fields[keyField].Value).ToUpper() == key.ToUpper())
+        if (((string)rs.Fields[keyField].ToString()).ToUpper() == key.ToUpper())
         {
           rs.Edit();
           rs.Fields[valueField].Value = value;
