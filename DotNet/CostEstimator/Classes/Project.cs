@@ -1809,24 +1809,45 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     } // CreateEstimateFromModel(bw, modelPath, selectedMLinkIds)
 
     private Dictionary<int, Segment>  ReadSegmentsTable(
+      BackgroundWorker bw,
       string segmentsTableFileName, 
       string segmentsTableName)
     {
       Dictionary<int, Segment> segmentsTable = new Dictionary<int,Segment>();
 
-      string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + 
+      string connectionString = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + 
         segmentsTableFileName + @";Persist Security Info=False";
       using (OleDbConnection conn = new OleDbConnection(connectionString))
       {
       	conn.Open();
         OleDbDataReader reader = null;
-        OleDbCommand command = new OleDbCommand("SELECT * FROM " + segmentsTableName);
+        OleDbCommand command = new OleDbCommand("SELECT * FROM " + segmentsTableName, conn);
         reader = command.ExecuteReader();
 
+        int segmentCounter = 0;
+        int totalSegments = reader.RecordsAffected;
+        DateTime startTime = DateTime.Now;
         while (reader.Read())
         {
-          Segment newSegment = new Segment(reader);
-          segmentsTable.Add(newSegment.ID, newSegment);
+          try
+          {
+            segmentCounter++;
+            int countOf100000 =
+              Convert.ToInt32((double)(segmentCounter - (segmentCounter / 100000 * 100000)) / (double)100000 * 100);
+            if (countOf100000 % 10 == 0)
+            {
+              bw.ReportProgress(countOf100000,
+                string.Format("Reading segments: {0}", segmentCounter));
+            }
+
+            Segment newSegment = new Segment(reader);
+            segmentsTable.Add(newSegment.ID, newSegment);
+            
+          }
+          catch (Exception e)
+          {
+            throw new Exception(string.Format("Read segment error: {0}", segmentCounter));
+          }
         }
         
       }
@@ -1835,24 +1856,44 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     }
     
     private Dictionary<int, Conflict> ReadConflictsTable(
+      BackgroundWorker bw,
       string conflictsTableFileName, 
       string conflictsTableName)
     {
       Dictionary<int, Conflict> conflictsTable = new Dictionary<int, Conflict>();
 
-      string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" +
+      string connectionString = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" +
         conflictsTableFileName + @";Persist Security Info=False";
       using (OleDbConnection conn = new OleDbConnection(connectionString))
       {
         conn.Open();
         OleDbDataReader reader = null;
-        OleDbCommand command = new OleDbCommand("SELECT * FROM " + conflictsTableName);
+        OleDbCommand command = new OleDbCommand("SELECT * FROM " + conflictsTableName, conn);
         reader = command.ExecuteReader();
 
+        int conflictCounter = 0;
+        DateTime startTime = DateTime.Now;
         while (reader.Read())
         {
-          Conflict newConflict = new Conflict(reader);
-          conflictsTable.Add(newConflict.ID, newConflict);
+          try
+          {
+            conflictCounter++;
+            int countOf100000 =
+              Convert.ToInt32((double)(conflictCounter - (conflictCounter / 100000 * 100000)) / (double)100000 * 100);
+            if (countOf100000 % 10 == 0)
+            {
+              bw.ReportProgress(countOf100000,
+                string.Format("Reading segments: {0}", conflictCounter));
+            }
+            
+            Conflict newConflict = new Conflict(reader);
+            conflictsTable.Add(newConflict.ID, newConflict);
+          }
+          catch (Exception e)
+          {
+
+            throw new Exception(string.Format("Read conflict error: {0}", conflictCounter));
+          }
         }
       }
 
@@ -1888,14 +1929,14 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
           _ProjectInfo.ENR = _PipeCoster.CurrentENR;
         }
 
-        // Read in segmentation table
-        string segmentsTableFileName = Path.Combine(modelPath, segmentsTableDB);
-        var segmentsTable = ReadSegmentsTable(segmentsTableFileName, segmentsTableName);
-
         // Read in conflicts table
         string conflictsTableFileName = Path.Combine(modelPath, conflictsTableDB);
-        var conflictsTable = ReadConflictsTable(conflictsTableFileName, conflictsTableName);
+        var conflictsTable = ReadConflictsTable(bw, conflictsTableFileName, conflictsTableName);
         
+        // Read in segmentation table
+        string segmentsTableFileName = Path.Combine(modelPath, segmentsTableDB);
+        var segmentsTable = ReadSegmentsTable(bw, segmentsTableFileName, segmentsTableName);
+
         // Set up whole pipe estimate
         CostItemFactor wholePipeRehabEstimate = 
           new CostItemFactor("WholePipe " + Path.GetFileName(modelPath));
