@@ -1,0 +1,10 @@
+'
+' 	Line geometry support
+'	mostly handles testing for and different handling of lines & polylines
+'
+declare Function CalcEnds(TheLine as object, BegX as float, BegY as float, EndX as float, EndY as float) as logical
+declare Function MoveEnd(TheLine as object, EndX as float, EndY as Float) as logical
+declare Function MoveStart(TheLine as object, BegX as float, BegY as Float) as logical
+declare Function NodeAtPoint (TheLine as object, ThePoint as object, TheMsg as string, NodeFound as integer, NodeDist as float, NodeFract as float) as logical
+declare Function InsertNodeAtPoint (TheLine as object, ThePoint as object, TheMsg as string) as logical
+

@@ -1,0 +1,17 @@
+!table
+!version 450
+!charset WindowsLatin1
+
+Definition Table
+  Type NATIVE Charset "WindowsLatin1"
+  Fields 10
+    USNode Char (6) ;
+    DSNode Char (6) ;
+    LinkType Char (2) ;
+    Length Float ;
+    TimeFrame Char (2) ;
+    AuditNodeID Char (20) ;
+    AuditDups Char (30) ;
+    AuditSpatial Char (30) ;
+    AuditOK2Go Logical ;
+    AuditProcTimestamp Char (30) ;

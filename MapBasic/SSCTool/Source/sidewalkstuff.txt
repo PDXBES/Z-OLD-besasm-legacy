@@ -1,0 +1,212 @@
+Update SidewalksExisting Set ZONE = ""
+Update SidewalksExisting Set GENZONE = ""
+Update SidewalksExisting Set CMP = ""
+Update SidewalksExisting Set GENCMP = ""
+Update SidewalksExisting Set ID = ""
+Commit Table SidewalksExisting Interactive
+Add Column "SidewalksExisting" (ZONE )From AG_zoning_pdx Set To Zone Where contains
+Select * from SidewalksExisting where ZONE="" into Selection
+Commit Table SidewalksExisting Interactive
+Open Table "W:\MasterTables\Street_Surface\Mdl_Str_Surface.TAB" Interactive
+Add Map Auto Layer Mdl_Str_Surface
+
+Select * from SidewalksExisting into Selection
+Set Target On
+Select * from Mdl_Str_Surface into Selection
+Objects Erase Into Target Data ID=ID,CMP=CMP,GENCMP=GENCMP,ZONE=ZONE,GENZONE=GENZONE
+Commit Table SidewalksExisting Interactive
+Close All Interactive
+
+
+
+Update SidewalksExisting Set ZONE = ""
+Update SidewalksExisting Set GENZONE = ""
+Update SidewalksExisting Set CMP = ""
+Update SidewalksExisting Set GENCMP = ""
+Update SidewalksExisting Set ID = ""
+Commit Table SidewalksExisting Interactive
+Add Column "SidewalksExisting" (ZONE )From AG_zoning_pdx Set To Zone Where contains
+Select * from SidewalksExisting where ZONE="" into Selection
+Commit Table SidewalksExisting Interactive
+Open Table "W:\MasterTables\Street_Surface\Mdl_Str_Surface.TAB" Interactive
+Add Map Auto Layer Mdl_Str_Surface
+set map redraw off
+Set Map Layer 2 Display Off
+set map redraw on
+Select * from SidewalksExisting into Selection
+Browse * From Selection
+set map redraw off
+Set Map Order 2,3,1,4 
+Set Map Layer 2 Editable On
+set map redraw on
+Select * from SidewalksExisting into Selection
+Browse * From Selection
+Select * from SidewalksExisting into Selection
+Set Target On
+Select * from Mdl_Str_Surface into Selection
+Objects Erase Into Target Data ID=ID,CMP=CMP,GENCMP=GENCMP,ZONE=ZONE,GENZONE=GENZONE
+Commit Table SidewalksExisting Interactive
+Close All Interactive
+Open Table "W:\MasterTables\Sidewalks\SidewalksExisting.TAB" Interactive
+Map From SidewalksExisting
+Open Table "W:\MasterTables\Street_Surface\Mdl_Str_Surface.TAB" Interactive
+Map From Mdl_Str_Surface
+set map redraw off
+Set Map Layer 1 Display Global Global Pen (1,2,12632256)  Global Brush (2,12632256,16777215) 
+set map redraw on
+set map redraw off
+Add Map Layer SidewalksExisting 
+Set Map Layer 1 Display Graphic Editable Off Selectable On Global Line (1,2,0)  Global Pen (1,2,0)  Global Brush (2,16777215,16777215)  Global Symbol (35,0,12)  Global Font ("Arial",0,9,0) Zoom (0, 100000) Units "mi" Off Label Line None Position Center Font ("Arial",0,9,0) Pen (1,2,0)  With CMP Parallel On Auto Off Overlap Off PartialSegments Off Duplicates On Offset 2 Max Visibility On Nodes Off Arrows Off Centroids Off
+set map redraw on
+set map redraw off
+Set Map Layer 1 Display Global Global Pen (1,2,16711680)  Global Brush (2,16711680,16777215) 
+set map redraw on
+set map redraw off
+Set Map Layer 2 Display Off
+set map redraw on
+set map redraw off
+Set Map Layer 2 Display Global
+set map redraw on
+Create Table "~MAP0140" (ID Integer,CMP Char(6),GENCMP Char(3),ZONE Char(6),GENZONE Char(3)) file "W:\MasterTables\Sidewalks\~MAP0140.TMP" TYPE NATIVE Version 450
+Create Map For ~MAP0140 CoordSys Earth Projection 1, 0
+Set Table ~MAP0140 FastEdit On Undo Off
+Insert Into ~MAP0140 (ID, CMP, GENCMP, ZONE, GENZONE) Select ID, CMP, GENCMP, ZONE, GENZONE From ~MAP0139
+Commit Table ~MAP0140
+Set Table ~MAP0140 FastEdit Off Undo On
+drop index SidewalksExisting (ZONE)
+Create Index On SidewalksExisting (ZONE)
+drop index SidewalksExisting (GENZONE)
+Create Index On SidewalksExisting (GENZONE)
+set map redraw off
+Add Map Layer SidewalksExisting 
+Set Map Layer 1 Display Graphic Editable Off Selectable On Global Line (1,2,0)  Global Pen (1,2,0)  Global Brush (2,16777215,16777215)  Global Symbol (35,0,12)  Global Font ("Arial",0,9,0) Zoom (0, 100000) Units "mi" Off Label Line None Position Center Font ("Arial",0,9,0) Pen (1,2,0)  With CMP Parallel On Auto Off Overlap Off PartialSegments Off Duplicates On Offset 2 Max Visibility On Nodes Off Arrows Off Centroids Off
+set map redraw on
+Alter Table "SidewalksExisting" ( add include Logical ) Interactive
+Open Table "W:\MasterTables\Sidewalks\SidewalksExisting.TAB" Interactive
+Close All Interactive
+Map From SidewalksExisting
+Open Table "W:\MasterTables\Sidewalks\SidewalksExisting.TAB" Interactive
+Add Map Auto Layer SidewalksExisting_2
+set map redraw off
+Set Map Layer 1 Display Global Global Pen (1,2,65535)  Global Brush (2,65535,16777215) 
+set map redraw on
+set map redraw off
+Set Map Order 2,1 
+set map redraw on
+Open Table "W:\MasterTables\Street_Surface\Mdl_Str_Surface.TAB" Interactive
+Add Map Auto Layer Mdl_Str_Surface
+set map redraw off
+Set Map Order 1,3,2 
+set map redraw on
+set map redraw off
+Set Map Layer 1 Display Off
+set map redraw on
+set map redraw off
+Set Map Order 1,3,2 
+set map redraw on
+set map redraw off
+Set Map Layer 2 Display Global Global Pen (1,2,16711680)  Global Brush (2,16711680,16777215) 
+set map redraw on
+set map redraw off
+Set Map Layer 1 Display Graphic
+set map redraw on
+set map redraw off
+Set Map Order 1,3,2 
+set map redraw on
+Create Index On SidewalksExisting (ZONE)
+Create Index On SidewalksExisting (xnclude)
+Update SidewalksExisting Set xnclude = F
+Update SidewalksExisting Set xnclude = "F"
+Browse * From SidewalksExisting
+set map redraw off
+Set Map Layer 2 Display Off
+set map redraw on
+set map redraw off
+Set Map Layer 2 Display Global
+set map redraw on
+set map redraw off
+Set Map Order 1,3,2 
+set map redraw on
+set map redraw off
+Set Map Layer 1 Display Off
+set map redraw on
+set map redraw off
+Set Map Layer 1 Display Graphic
+set map redraw on
+set map redraw off
+Set Map Layer 1 Display Global Global Brush (17,0) 
+set map redraw on
+Commit Table SidewalksExisting Interactive
+Open Table "W:\AGMaster2\zoning\AG_zoning_pdx.TAB" Interactive
+Add Map Auto Layer AG_zoning_pdx
+Close All Interactive
+Map From SidewalksExisting
+Open Table "W:\AGMaster2\zoning\AG_zoning_pdx.TAB" Interactive
+Add Map Auto Layer AG_zoning_pdx
+Select Zone, Count(*) from AG_zoning_pdx group by Zone into Selection
+Browse * From Selection
+Commit Table Query1 As "W:\AGMaster2\zoning\zoning2GEN.TAB" TYPE NATIVE Charset "WindowsLatin1"
+Close Table Query1 Interactive
+Open Table "W:\AGMaster2\zoning\zoning2GEN.TAB" Interactive
+Browse * From zoning2GEN
+Alter Table "zoning2GEN" ( drop _COL2 add GenZone Char(3) ) Interactive
+Browse * From zoning2GEN
+Select Zone, Count(*) from AG_zoning_pdx group by Zone into Selection
+Browse * From Selection
+Commit Table zoning2GEN Interactive
+Select * from zoning2GEN order by GenZone,Zone into Selection
+Browse * From Selection
+Export "Query3" Into "W:\AGMaster2\zoning\Query3.txt" Type "ASCII" Delimiter "," CharSet "WindowsLatin1" Titles
+Commit Table zoning2GEN Interactive
+Alter Table "zoning2GEN" ( add SWinModel Logical ) Interactive
+Browse * From zoning2GEN
+Select * from zoning2GEN order by GenZone,Zone,zone into Selection
+Browse * From Selection
+Commit Table zoning2GEN Interactive
+Select * from zoning2GEN, SidewalksExisting where zoning2GEN.Zone=SidewalksExisting.ZONE and zoning2GEN.SWinModel="T" into SelectionTarget
+set map redraw off
+Add Map Layer SelectionTarget 
+Set Map Layer 1 Display Global Editable Off Selectable On Global Line (1,2,0)  Global Pen (1,2,0)  Global Brush (2,0,16777215)  Global Symbol (35,0,12)  Global Font ("Arial",0,9,0) Zoom (0, 100000) Units "mi" Off Label Line None Position Center Font ("Arial",0,9,0) Pen (1,2,0)  With Zone Parallel On Auto Off Overlap Off PartialSegments Off Duplicates On Offset 2 Max Visibility On Nodes Off Arrows Off Centroids Off
+set map redraw on
+set map redraw off
+Set Map Layer 1 Global Pen (1,2,16711935)  Global Brush (2,16711935,16777215) 
+set map redraw on
+set map redraw off
+Set Map Layer 3 Display Global Global Pen (1,2,65535)  Global Brush (2,65535,16777215) 
+set map redraw on
+set map redraw off
+Set Map Order 1,3,2 
+set map redraw on
+Update SelectionTarget Set xnclude = "T"
+Commit Table SidewalksExisting Interactive
+Alter Table "SidewalksExisting" ( rename xnclude SWinModel ) Interactive
+drop index SidewalksExisting (SWinModel)
+Create Index On SidewalksExisting (SWinModel)
+set map redraw off
+Add Map Layer SidewalksExisting 
+Set Map Layer 1 Display Graphic Editable Off Selectable On Global Line (1,2,0)  Global Pen (1,2,0)  Global Brush (2,16777215,16777215)  Global Symbol (35,0,12)  Global Font ("Arial",0,9,0) Zoom (0, 100000) Units "mi" Off Label Line None Position Center Font ("Arial",0,9,0) Pen (1,2,0)  With CMP Parallel On Auto Off Overlap Off PartialSegments Off Duplicates On Offset 2 Max Visibility On Nodes Off Arrows Off Centroids Off
+set map redraw on
+Select * from SidewalksExisting where SWinModel="T" into SelectionINMODEL
+Browse * From SelectionINMODEL
+set map redraw off
+Add Map Layer SelectionINMODEL 
+Set Map Layer 1 Display Global Editable Off Selectable On Global Line (1,2,0)  Global Pen (1,2,65280)  Global Brush (2,65280,16777215)  Global Symbol (35,0,12)  Global Font ("Arial",0,9,0) Zoom (0, 100000) Units "mi" Off Label Line None Position Center Font ("Arial",0,9,0) Pen (1,2,0)  With CMP Parallel On Auto Off Overlap Off PartialSegments Off Duplicates On Offset 2 Max Visibility On Nodes Off Arrows Off Centroids Off
+set map redraw on
+Close Table Selection Interactive
+Close Table AG_zoning_pdx Interactive
+Close Table Query2 Interactive
+Close Table zoning2GEN Interactive
+Close Table Query4 Interactive
+
+Objects Erase Into Target Data ID=ID,CMP=CMP,GENCMP=GENCMP,ZONE=ZONE,GENZONE=GENZONE,SWinModel=SWinModel
+Commit Table SidewalksExisting Interactive
+Create Table "~MAP0105" (ID Integer,CMP Char(6),GENCMP Char(3),ZONE Char(6),GENZONE Char(3),SWinModel Logical) file "W:\MasterTables\Sidewalks\~MAP0105.TMP" TYPE NATIVE Version 450
+Create Map For ~MAP0105 CoordSys Earth Projection 1, 0
+Set Table ~MAP0105 FastEdit On Undo Off
+Insert Into ~MAP0105 (ID, CMP, GENCMP, ZONE, GENZONE, SWinModel) Select ID, CMP, GENCMP, ZONE, GENZONE, SWinModel From ~MAP0104
+Commit Table ~MAP0105
+Set Table ~MAP0105 FastEdit Off Undo On
+drop index SidewalksExisting (ZONE)
+Create Index On SidewalksExisting (ZONE)
+drop index SidewalksExisting (SWinModel)
+Create Index On SidewalksExisting (SWinModel)

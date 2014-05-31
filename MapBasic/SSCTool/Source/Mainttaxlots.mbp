@@ -1,0 +1,7 @@
+[Link] 
+Application=..\exe\MaintSWandROW.mbx 
+Module=MaintSWandROW.mbo
+Module=..\..\Common\source\EMGMTabUtil.MBO
+Module=..\..\Common\Source\INIUtils.MBO
+Module=..\..\Common\Source\EMGLogger.MBO
+

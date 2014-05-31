@@ -1,0 +1,13 @@
+'
+'	============ EMGAATS Workbench =================
+'
+'	Copyright (c) 2001  City of Portland, OR Bureau of Environmental Services and CH2M HILL, Inc.
+'
+include "MapBasic.def"
+include "..\inc\EMGHelp.def"
+
+sub ShowHelp()
+
+	note "No help for the wicked!"
+	
+End Sub

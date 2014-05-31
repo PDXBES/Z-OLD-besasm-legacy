@@ -1,0 +1,89 @@
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+'	EVENTUALLY THIS NEEDS TO COME FROM INI FILE
+'	HARD CODED AT THIS POINT
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+Sub		LoadReqColumnArray()
+	
+	Redim	gReqCols(4)
+
+	gReqCols(1).name = "USNode"
+	gReqCols(1).type = COL_TYPE_CHAR
+	gReqCols(1).width = 6
+
+	gReqCols(2).name = "DSNode"
+	gReqCols(2).type = COL_TYPE_CHAR
+	gReqCols(2).width = 6
+
+	gReqCols(3).name = "LinkType"
+	gReqCols(3).type = COL_TYPE_CHAR
+	gReqCols(3).width = 2
+
+	gReqCols(4).name = "Length"
+	gReqCols(4).type = COL_TYPE_FLOAT
+	gReqCols(4).width = 0
+
+	print "LoadReqColumnArray() complete."
+End Sub
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+Sub		LoadReqColumnArrayDelMst()
+	
+	Redim	gReqCols(1)
+
+	gReqCols(1).name = "MLinkID"
+	gReqCols(1).type = COL_TYPE_INTEGER
+
+	print "LoadReqColumnArrayDelMsg() complete."
+End Sub
+Sub		LoadReqColumnArrayDelMdl()
+	
+	Redim	gReqCols(1)
+
+	gReqCols(1).name = "LinkID"
+	gReqCols(1).type = COL_TYPE_INTEGER
+
+	print "LoadReqColumnArrayDelMsg() complete."
+End Sub
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+'	this function defines the columns to be added to "Add" tables
+'	these columns will contain auditing information
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+Sub		LoadAuditColumnAdd()
+
+	Redim gAuditCOlAdd(5)
+
+	gAuditColAdd(1).Name = "AuditNodeID"
+	gAuditColAdd(1).Type = "char(20)"
+
+	gAuditColAdd(2).Name = "AuditDups"
+	gAuditColAdd(2).Type = "char(30)"
+
+	gAuditColAdd(3).Name = "AuditSpatial"
+	gAuditColAdd(3).Type = "char(30)"
+
+	gAuditColAdd(4).Name = "AuditOK2Go"
+	gAuditColAdd(4).Type = "logical"
+
+	gAuditColAdd(5).Name = "AuditProcTimestamp"
+	gAuditColAdd(5).Type = "char(30)"
+
+	print "LoadAuditColumnAdd() complete."
+End Sub
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+'	This function defines the columns to be added to the "delete" table
+'	these columns will contain auditing information
+' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+Sub		LoadAuditColumnDel()
+
+	Redim	gAuditColDel(3)
+
+	gAuditColDel(1).Name = "AuditExistLinkID"
+	gAuditColDel(1).Type = "char(20)"
+
+	gAuditColDel(2).Name = "AuditOK2Go"
+	gAuditColDel(2).Type = "logical"
+
+	gAuditColDel(3).Name = "AuditProcTimestamp"
+	gAuditColDel(3).Type = "char(30)"
+
+	print "LoadAuditColumnDel() complete."
+End Sub
