@@ -23,7 +23,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     private int _Id;
     private string _ControlType;
     private string _ControlSubtype;
-    private decimal _Cost;
+    private float _Cost;
     private string _Comment = string.Empty;
     #endregion
 
@@ -99,8 +99,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// <summary>
     /// Cost
     /// </summary>
-    /// <returns>Decimal</returns>
-    public decimal Cost
+    /// <returns>float</returns>
+    public float Cost
     {
       get
       {

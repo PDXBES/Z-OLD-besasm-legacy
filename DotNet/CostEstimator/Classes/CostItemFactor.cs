@@ -23,8 +23,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
   {
     #region Variables
     private static int _CurrentId = 0;
-    private double _Quantity = 1;
-    private decimal _MinCost = decimal.MinValue / 2;
+    private float _Quantity = 1;
+    private float _MinCost = float.MinValue / 2;
     private List<CostFactor> _CostFactors =  new List<CostFactor>();
     private List<CostItemFactor> _ChildCostItemFactors = new List<CostItemFactor>();
     private List<CostItemFactor> _ParentCostItemFactors = new List<CostItemFactor>();
@@ -58,7 +58,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// <param name="costItem">Cost item</param>
     /// <param name="costFactor">Cost factor</param>
     /// <param name="quantity">Quantity</param>
-    public CostItemFactor(string name, CostItem costItem, CostFactor costFactor, double quantity)
+    public CostItemFactor(string name, CostItem costItem, CostFactor costFactor, float quantity)
     {
       ID = _CurrentId;
       _CurrentId++;
@@ -91,7 +91,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// <param name="comment">Comment</param>
     /// <param name="quantity">Quantity</param>
     /// <param name="minCost">Min cost</param>
-    public CostItemFactor(int id, string name, string comment, double quantity, decimal minCost)
+    public CostItemFactor(int id, string name, string comment, float quantity, float minCost)
     {
       ID = id;
       Name = name;
@@ -112,12 +112,12 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// <summary>
     /// Cost
     /// </summary>
-    /// <returns>Decimal</returns>
-    public decimal Cost
+    /// <returns>float</returns>
+    public float Cost
     {
       get
       {
-        decimal cost = (decimal)((double)(ParentCost + ChildCost) * Factor * Quantity);
+        float cost = (float)((ParentCost + ChildCost) * Factor * Quantity);
         return cost < MinCost ? MinCost : cost;
       } // get
     } // Cost
@@ -125,24 +125,24 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// <summary>
     /// Prefactored cost (does not prefactor child costs, however)
     /// </summary>
-    /// <returns>Decimal</returns>
-    public decimal PrefactoredCost
+    /// <returns>float</returns>
+    public float PrefactoredCost
     {
       get
       {
-        return (decimal)((double)(ParentCost + ChildCost) * Quantity);
+        return (float)((ParentCost + ChildCost) * Quantity);
       }
     } // PrefactoredCost
 
     /// <summary>
     /// Parent cost
     /// </summary>
-    /// <returns>Decimal</returns>
-    public decimal ParentCost
+    /// <returns>float</returns>
+    public float ParentCost
     {
       get
       {
-        return CostItem == null ? 0m : CostItem.Cost;
+        return CostItem == null ? 0.0f : CostItem.Cost;
       } // get
     } // ParentCost
 
@@ -161,14 +161,14 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// <summary>
     /// Sum of child CostItemFactors
     /// </summary>
-    /// <returns>Decimal</returns>
-    public decimal ChildCost
+    /// <returns>float</returns>
+    public float ChildCost
     {
       get
       {
         if (_ChildCostItemFactors.Count > 0)
         {
-          decimal totalChildCost = 0;
+          float totalChildCost = 0;
           foreach (CostItemFactor costItemFactor in _ChildCostItemFactors)
           {
             totalChildCost += costItemFactor.Cost;
@@ -177,7 +177,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
           return totalChildCost;
         } // if
         else
-          return 0m;
+          return 0.0f;
       } // get
     } // ChildCost
 
@@ -221,7 +221,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// Aggregated factor
     /// </summary>
     /// <returns>Double</returns>
-    public double Factor
+    public float Factor
     {
       get
       {
@@ -229,10 +229,10 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
           return 1;
         else
         {
-          double indirectAdditiveFactors = 1;
-          double indirectSimpleFactors = 0;
+          float indirectAdditiveFactors = 1;
+          float indirectSimpleFactors = 0;
 
-          double currentFactor = 1;
+          float currentFactor = 1;
           for (int i = 0; i < _CostFactors.Count; i++)
           {
             switch (_CostFactors[i].FactorType)
@@ -285,7 +285,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// Quantity
     /// </summary>
     /// <returns>Double</returns>
-    public double Quantity
+    public float Quantity
     {
       get
       {
@@ -328,8 +328,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// <summary>
     /// Min cost
     /// </summary>
-    /// <returns>Decimal</returns>
-    public decimal MinCost
+    /// <returns>float</returns>
+    public float MinCost
     {
       get
       {
@@ -691,14 +691,14 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// Cost factor value
     /// </summary>
     /// <param name="index">Index</param>
-    public decimal CostFactorValue(int index)
+    public float CostFactorValue(int index)
     {
-      decimal prefactoredCost = PrefactoredCost;
-      decimal previousCost = 0;
-      decimal currentCost = prefactoredCost;
-      double currentFactor = 1;
-      double currentIndirectAdditiveFactor = 1;
-      double currentIndirectSimpleFactor = 0;
+      float prefactoredCost = PrefactoredCost;
+      float previousCost = 0;
+      float currentCost = prefactoredCost;
+      float currentFactor = 1;
+      float currentIndirectAdditiveFactor = 1;
+      float currentIndirectSimpleFactor = 0;
       for (int i = 0; i <= index; i++)
       {
         switch (_CostFactors[i].FactorType)
@@ -716,7 +716,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
               currentIndirectSimpleFactor = 0;
             } // if
             previousCost = currentCost;
-            currentCost = (decimal)((double)prefactoredCost * currentFactor);
+            currentCost = (float)(prefactoredCost * currentFactor);
             break;
           case CostFactorType.IndirectAdditive:
             currentIndirectAdditiveFactor += _CostFactors[i].FactorValue;
@@ -734,7 +734,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
               currentIndirectSimpleFactor = 0;
             } // if
             previousCost = currentCost;
-            currentCost = (decimal)((double)prefactoredCost * currentFactor);
+            currentCost = (float)((double)prefactoredCost * currentFactor);
             break;
           case CostFactorType.IndirectSimple:
             currentIndirectSimpleFactor += _CostFactors[i].FactorValue;
@@ -744,7 +744,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 
       if (_CostFactors[index].FactorType == CostFactorType.IndirectAdditive ||
       _CostFactors[index].FactorType == CostFactorType.IndirectSimple)
-        return currentCost = (decimal)((double)currentCost * _CostFactors[index].FactorValue);
+        return currentCost = (float)((double)currentCost * _CostFactors[index].FactorValue);
       else
         return currentCost - previousCost;
     } // CostFactorValue(index)

@@ -34,26 +34,26 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
   public class InflowControlCoster
   {
     #region Variables
-    private decimal _GreenStreetPlanterMinCost;
-    private decimal _GreenStreetPlanterCostPerAcre;
-    private decimal _InfiltrationPlanterMinCost;
-    private decimal _InfiltrationPlanterCostPerAcre;
-    private decimal _VegetatedInfiltrationBasinMinCost;
-    private decimal _VegetatedInfiltrationBasinCostPerAcre;
-    private decimal _DownspoutDisconnectionMinCost;
-    private decimal _DownspoutDisconnectionCostPerAcre;
-    private decimal _EcoroofMinCost;
-    private decimal _EcoroofCostPerAcre;
-    private decimal _CurbExtensionMinCost;
-    private decimal _CurbExtensionCostPerCuFt;
+    private float _GreenStreetPlanterMinCost;
+    private float _GreenStreetPlanterCostPerAcre;
+    private float _InfiltrationPlanterMinCost;
+    private float _InfiltrationPlanterCostPerAcre;
+    private float _VegetatedInfiltrationBasinMinCost;
+    private float _VegetatedInfiltrationBasinCostPerAcre;
+    private float _DownspoutDisconnectionMinCost;
+    private float _DownspoutDisconnectionCostPerAcre;
+    private float _EcoroofMinCost;
+    private float _EcoroofCostPerAcre;
+    private float _CurbExtensionMinCost;
+    private float _CurbExtensionCostPerCuFt;
     private double _CurbExtensionMinCuFt;
-    private decimal _CurbExtensionTrafficControl;
-    private decimal _CurbExtensionAdaRamp;
-    private decimal _CurbExtensionWaterLineSleeving;
-    private decimal _StormwaterPlanterMinCost;
-    private decimal _StormwaterPlanterCostPerCuFt;
+    private float _CurbExtensionTrafficControl;
+    private float _CurbExtensionAdaRamp;
+    private float _CurbExtensionWaterLineSleeving;
+    private float _StormwaterPlanterMinCost;
+    private float _StormwaterPlanterCostPerCuFt;
     private double _StormwaterPlanterMinCuFt;
-    private decimal _FlowRestrictorCost;
+    private float _FlowRestrictorCost;
     private int _BaseENR;
 
     private InflowControl _InflowControl;
@@ -119,8 +119,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// <summary>
     /// Cost
     /// </summary>
-    /// <returns>Decimal</returns>
-    public decimal Cost
+    /// <returns>float</returns>
+    public float Cost
     {
       get
       {
@@ -129,49 +129,49 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
         {
           case Classes.InflowControl.GreenStreetPlanter:
             {
-              decimal calcCost = (decimal)((double)_GreenStreetPlanterCostPerAcre *
+              float calcCost = (float)((double)_GreenStreetPlanterCostPerAcre *
               _DrainageAreaSqFt / Common.SQUARE_FEET_PER_ACRE);
               _MinCostUsed = calcCost < _GreenStreetPlanterMinCost;
               return Math.Max(_GreenStreetPlanterMinCost, calcCost);
             } // block
           case Classes.InflowControl.InfiltrationPlanter:
             {
-              decimal calcCost = (decimal)((double)_InfiltrationPlanterCostPerAcre *
+              float calcCost = (float)((double)_InfiltrationPlanterCostPerAcre *
               _DrainageAreaSqFt / Common.SQUARE_FEET_PER_ACRE);
               _MinCostUsed = calcCost < _InfiltrationPlanterMinCost;
               return Math.Max(_InfiltrationPlanterMinCost, calcCost);
             } // block
           case Classes.InflowControl.VegetatedInfiltrationBasin:
             {
-              decimal calcCost = (decimal)((double)_VegetatedInfiltrationBasinCostPerAcre *
+              float calcCost = (float)((double)_VegetatedInfiltrationBasinCostPerAcre *
               _DrainageAreaSqFt / Common.SQUARE_FEET_PER_ACRE);
               _MinCostUsed = calcCost < _VegetatedInfiltrationBasinMinCost;
               return Math.Max(_VegetatedInfiltrationBasinMinCost, calcCost);
             } // block
           case Classes.InflowControl.DownspoutDisconnection:
             {
-              decimal calcCost = (decimal)((double)_DownspoutDisconnectionCostPerAcre *
+              float calcCost = (float)((double)_DownspoutDisconnectionCostPerAcre *
               _DrainageAreaSqFt / Common.SQUARE_FEET_PER_ACRE);
               _MinCostUsed = calcCost < _DownspoutDisconnectionMinCost;
               return Math.Max(_DownspoutDisconnectionMinCost, calcCost);
             } // block
           case Classes.InflowControl.Ecoroof:
             {
-              decimal calcCost = (decimal)((double)_EcoroofCostPerAcre *
+              float calcCost = (float)((double)_EcoroofCostPerAcre *
               _DrainageAreaSqFt / Common.SQUARE_FEET_PER_ACRE);
               _MinCostUsed = calcCost < _EcoroofMinCost;
               return Math.Max(_EcoroofMinCost, calcCost);
             } // block
           case Classes.InflowControl.CurbExtension:
             {
-              decimal calcCost = (decimal)((double)_CurbExtensionCostPerCuFt * _FacilitySizeCuFt);
+              float calcCost = (float)((double)_CurbExtensionCostPerCuFt * _FacilitySizeCuFt);
               _MinCostUsed = _FacilitySizeCuFt <= _CurbExtensionMinCuFt;
               return (_FacilitySizeCuFt <= _CurbExtensionMinCuFt) ?
               _CurbExtensionMinCost : calcCost;
             } // block
           case Classes.InflowControl.StormwaterPlanter:
             {
-              decimal calcCost = (decimal)((double)_StormwaterPlanterCostPerCuFt * _FacilitySizeCuFt);
+              float calcCost = (float)((double)_StormwaterPlanterCostPerCuFt * _FacilitySizeCuFt);
               _MinCostUsed = _FacilitySizeCuFt <= _StormwaterPlanterMinCuFt;
               return (_FacilitySizeCuFt <= _StormwaterPlanterMinCuFt) ?
               _StormwaterPlanterMinCost : calcCost;
@@ -199,8 +199,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// <summary>
     /// Green street planter min cost
     /// </summary>
-    /// <returns>Decimal</returns>
-    public decimal GreenStreetPlanterMinCost
+    /// <returns>float</returns>
+    public float GreenStreetPlanterMinCost
     {
       get
       {
@@ -211,8 +211,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// <summary>
     /// Infiltration planter min cost
     /// </summary>
-    /// <returns>Decimal</returns>
-    public decimal InfiltrationPlanterMinCost
+    /// <returns>float</returns>
+    public float InfiltrationPlanterMinCost
     {
       get
       {
@@ -223,8 +223,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// <summary>
     /// Vegetated infiltration basin min cost
     /// </summary>
-    /// <returns>Decimal</returns>
-    public decimal VegetatedInfiltrationBasinMinCost
+    /// <returns>float</returns>
+    public float VegetatedInfiltrationBasinMinCost
     {
       get
       {
@@ -235,8 +235,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// <summary>
     /// Downspout disconnection min cost
     /// </summary>
-    /// <returns>Decimal</returns>
-    public decimal DownspoutDisconnectionMinCost
+    /// <returns>float</returns>
+    public float DownspoutDisconnectionMinCost
     {
       get
       {
@@ -247,8 +247,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// <summary>
     /// Ecoroof min cost
     /// </summary>
-    /// <returns>Decimal</returns>
-    public decimal EcoroofMinCost
+    /// <returns>float</returns>
+    public float EcoroofMinCost
     {
       get
       {
@@ -272,7 +272,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// Curb extension min cost
     /// </summary>
     /// <returns>Double</returns>
-    public decimal CurbExtensionMinCost
+    public float CurbExtensionMinCost
     {
       get
       {
@@ -283,8 +283,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// <summary>
     /// Curb extension traffic control
     /// </summary>
-    /// <returns>Decimal</returns>
-    public decimal CurbExtensionTrafficControl
+    /// <returns>float</returns>
+    public float CurbExtensionTrafficControl
     {
       get
       {
@@ -295,8 +295,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// <summary>
     /// Curb extension ada ramp
     /// </summary>
-    /// <returns>Decimal</returns>
-    public decimal CurbExtensionAdaRamp
+    /// <returns>float</returns>
+    public float CurbExtensionAdaRamp
     {
       get
       {
@@ -307,8 +307,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// <summary>
     /// Curb extension water line sleeving
     /// </summary>
-    /// <returns>Decimal</returns>
-    public decimal CurbExtensionWaterLineSleeving
+    /// <returns>float</returns>
+    public float CurbExtensionWaterLineSleeving
     {
       get
       {
@@ -331,8 +331,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// <summary>
     /// Stormwater planter min cost
     /// </summary>
-    /// <returns>Decimal</returns>
-    public decimal StormwaterPlanterMinCost
+    /// <returns>float</returns>
+    public float StormwaterPlanterMinCost
     {
       get
       {
@@ -349,47 +349,47 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     {
       CosterParameter param;
 
-      param = new CosterParameter("Green street planter minimum cost", "System.Decimal", _GreenStreetPlanterMinCost);
+      param = new CosterParameter("Green street planter minimum cost", "System.float", _GreenStreetPlanterMinCost);
       CosterParameters.Add(param.Name, param);
-      param = new CosterParameter("Green street planter cost per acre", "System.Decimal", _GreenStreetPlanterCostPerAcre);
+      param = new CosterParameter("Green street planter cost per acre", "System.float", _GreenStreetPlanterCostPerAcre);
       CosterParameters.Add(param.Name, param);
-      param = new CosterParameter("Infiltration planter minimum cost", "System.Decimal", _InfiltrationPlanterMinCost);
+      param = new CosterParameter("Infiltration planter minimum cost", "System.float", _InfiltrationPlanterMinCost);
       CosterParameters.Add(param.Name, param);
-      param = new CosterParameter("Infiltration planter cost per acre", "System.Decimal", _InfiltrationPlanterCostPerAcre);
+      param = new CosterParameter("Infiltration planter cost per acre", "System.float", _InfiltrationPlanterCostPerAcre);
       CosterParameters.Add(param.Name, param);
-      param = new CosterParameter("Vegetated infiltration basin minimum cost", "System.Decimal", _VegetatedInfiltrationBasinMinCost);
+      param = new CosterParameter("Vegetated infiltration basin minimum cost", "System.float", _VegetatedInfiltrationBasinMinCost);
       CosterParameters.Add(param.Name, param);
-      param = new CosterParameter("Vegetated infiltration basin cost per acre", "System.Decimal", _VegetatedInfiltrationBasinCostPerAcre);
+      param = new CosterParameter("Vegetated infiltration basin cost per acre", "System.float", _VegetatedInfiltrationBasinCostPerAcre);
       CosterParameters.Add(param.Name, param);
-      param = new CosterParameter("Downspout disconnection minimum cost", "System.Decimal", _DownspoutDisconnectionMinCost);
+      param = new CosterParameter("Downspout disconnection minimum cost", "System.float", _DownspoutDisconnectionMinCost);
       CosterParameters.Add(param.Name, param);
-      param = new CosterParameter("Downspout disconnection cost per acre", "System.Decimal", _DownspoutDisconnectionCostPerAcre);
+      param = new CosterParameter("Downspout disconnection cost per acre", "System.float", _DownspoutDisconnectionCostPerAcre);
       CosterParameters.Add(param.Name, param);
-      param = new CosterParameter("Ecoroof minimum cost", "System.Decimal", _EcoroofMinCost);
+      param = new CosterParameter("Ecoroof minimum cost", "System.float", _EcoroofMinCost);
       CosterParameters.Add(param.Name, param);
-      param = new CosterParameter("Ecoroof cost per acre", "System.Decimal", _EcoroofCostPerAcre);
+      param = new CosterParameter("Ecoroof cost per acre", "System.float", _EcoroofCostPerAcre);
       CosterParameters.Add(param.Name, param);
-      param = new CosterParameter("Curb extension minimum cost", "System.Decimal", _CurbExtensionMinCost);
+      param = new CosterParameter("Curb extension minimum cost", "System.float", _CurbExtensionMinCost);
       CosterParameters.Add(param.Name, param);
-      param = new CosterParameter("Curb extension cost per cu ft", "System.Decimal", _CurbExtensionCostPerCuFt);
+      param = new CosterParameter("Curb extension cost per cu ft", "System.float", _CurbExtensionCostPerCuFt);
       CosterParameters.Add(param.Name, param);
-      param = new CosterParameter("Curb extension minimum cost equivalent cu ft", "System.Decimal", _CurbExtensionMinCuFt);
+      param = new CosterParameter("Curb extension minimum cost equivalent cu ft", "System.float", _CurbExtensionMinCuFt);
       CosterParameters.Add(param.Name, param);
-      param = new CosterParameter("Curb extension traffic control", "System.Decimal", _CurbExtensionTrafficControl);
+      param = new CosterParameter("Curb extension traffic control", "System.float", _CurbExtensionTrafficControl);
       CosterParameters.Add(param.Name, param);
-      param = new CosterParameter("Curb extension ADA ramp", "System.Decimal", _CurbExtensionAdaRamp);
+      param = new CosterParameter("Curb extension ADA ramp", "System.float", _CurbExtensionAdaRamp);
       CosterParameters.Add(param.Name, param);
-      param = new CosterParameter("Curb extension water line sleeving", "System.Decimal", _CurbExtensionWaterLineSleeving);
+      param = new CosterParameter("Curb extension water line sleeving", "System.float", _CurbExtensionWaterLineSleeving);
       CosterParameters.Add(param.Name, param);
-      param = new CosterParameter("Stormwater planter minimum cost", "System.Decimal", _StormwaterPlanterMinCost);
+      param = new CosterParameter("Stormwater planter minimum cost", "System.float", _StormwaterPlanterMinCost);
       CosterParameters.Add(param.Name, param);
-      param = new CosterParameter("Stormwater planter cost per cu ft", "System.Decimal", _StormwaterPlanterCostPerCuFt);
+      param = new CosterParameter("Stormwater planter cost per cu ft", "System.float", _StormwaterPlanterCostPerCuFt);
       CosterParameters.Add(param.Name, param);
-      param = new CosterParameter("Stormwater planter minimum cost equivalent cu ft", "System.Decimal", _StormwaterPlanterMinCuFt);
+      param = new CosterParameter("Stormwater planter minimum cost equivalent cu ft", "System.float", _StormwaterPlanterMinCuFt);
       CosterParameters.Add(param.Name, param);
-      param = new CosterParameter("Flow restrictor cost", "System.Decimal", _FlowRestrictorCost);
+      param = new CosterParameter("Flow restrictor cost", "System.float", _FlowRestrictorCost);
       CosterParameters.Add(param.Name, param);
-      param = new CosterParameter("Base ENR", "System.Decimal", _BaseENR);
+      param = new CosterParameter("Base ENR", "System.float", _BaseENR);
       CosterParameters.Add(param.Name, param);
     } // InitializeCosterParameters()
 
@@ -418,64 +418,64 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
         switch (xpathIter.Current.Name)
         {
           case "GreenStreetPlanterMinCost":
-            _GreenStreetPlanterMinCost = (decimal)xpathIter.Current.ValueAsDouble;
+            _GreenStreetPlanterMinCost = (float)xpathIter.Current.ValueAsDouble;
             break;
           case "GreenStreetPlanterCostPerAcre":
-            _GreenStreetPlanterCostPerAcre = (decimal)xpathIter.Current.ValueAsDouble;
+            _GreenStreetPlanterCostPerAcre = (float)xpathIter.Current.ValueAsDouble;
             break;
           case "InfiltrationPlanterMinCost":
-            _InfiltrationPlanterMinCost = (decimal)xpathIter.Current.ValueAsDouble;
+            _InfiltrationPlanterMinCost = (float)xpathIter.Current.ValueAsDouble;
             break;
           case "InfiltrationPlanterCostPerAcre":
-            _InfiltrationPlanterCostPerAcre = (decimal)xpathIter.Current.ValueAsDouble;
+            _InfiltrationPlanterCostPerAcre = (float)xpathIter.Current.ValueAsDouble;
             break;
           case "VegetatedInfiltrationBasinMinCost":
-            _VegetatedInfiltrationBasinMinCost = (decimal)xpathIter.Current.ValueAsDouble;
+            _VegetatedInfiltrationBasinMinCost = (float)xpathIter.Current.ValueAsDouble;
             break;
           case "VegetatedInfiltrationBasinCostPerAcre":
-            _VegetatedInfiltrationBasinCostPerAcre = (decimal)xpathIter.Current.ValueAsDouble;
+            _VegetatedInfiltrationBasinCostPerAcre = (float)xpathIter.Current.ValueAsDouble;
             break;
           case "DownspoutDisconnectionMinCost":
-            _DownspoutDisconnectionMinCost = (decimal)xpathIter.Current.ValueAsDouble;
+            _DownspoutDisconnectionMinCost = (float)xpathIter.Current.ValueAsDouble;
             break;
           case "DownspoutDisconnectionCostPerAcre":
-            _DownspoutDisconnectionCostPerAcre = (decimal)xpathIter.Current.ValueAsDouble;
+            _DownspoutDisconnectionCostPerAcre = (float)xpathIter.Current.ValueAsDouble;
             break;
           case "EcoroofMinCost":
-            _EcoroofMinCost = (decimal)xpathIter.Current.ValueAsDouble;
+            _EcoroofMinCost = (float)xpathIter.Current.ValueAsDouble;
             break;
           case "EcoroofCostPerAcre":
-            _EcoroofCostPerAcre = (decimal)xpathIter.Current.ValueAsDouble;
+            _EcoroofCostPerAcre = (float)xpathIter.Current.ValueAsDouble;
             break;
           case "CurbExtensionMinCost":
-            _CurbExtensionMinCost = (decimal)xpathIter.Current.ValueAsDouble;
+            _CurbExtensionMinCost = (float)xpathIter.Current.ValueAsDouble;
             break;
           case "CurbExtensionCostPerCuFt":
-            _CurbExtensionCostPerCuFt = (decimal)xpathIter.Current.ValueAsDouble;
+            _CurbExtensionCostPerCuFt = (float)xpathIter.Current.ValueAsDouble;
             break;
           case "CurbExtensionMinCuFt":
             _CurbExtensionMinCuFt = xpathIter.Current.ValueAsDouble;
             break;
           case "CurbExtensionTrafficControl":
-            _CurbExtensionTrafficControl = (decimal)xpathIter.Current.ValueAsDouble;
+            _CurbExtensionTrafficControl = (float)xpathIter.Current.ValueAsDouble;
             break;
           case "CurbExtensionAdaRamp":
-            _CurbExtensionAdaRamp = (decimal)xpathIter.Current.ValueAsDouble;
+            _CurbExtensionAdaRamp = (float)xpathIter.Current.ValueAsDouble;
             break;
           case "CurbExtensionWaterLineSleeving":
-            _CurbExtensionWaterLineSleeving = (decimal)xpathIter.Current.ValueAsDouble;
+            _CurbExtensionWaterLineSleeving = (float)xpathIter.Current.ValueAsDouble;
             break;
           case "StormwaterPlanterMinCost":
-            _StormwaterPlanterMinCost = (decimal)xpathIter.Current.ValueAsDouble;
+            _StormwaterPlanterMinCost = (float)xpathIter.Current.ValueAsDouble;
             break;
           case "StormwaterPlanterCostPerCuFt":
-            _StormwaterPlanterCostPerCuFt = (decimal)xpathIter.Current.ValueAsDouble;
+            _StormwaterPlanterCostPerCuFt = (float)xpathIter.Current.ValueAsDouble;
             break;
           case "StormwaterPlanterMinCuFt":
             _StormwaterPlanterMinCuFt = xpathIter.Current.ValueAsDouble;
             break;
           case "FlowRestrictorCost":
-            _FlowRestrictorCost = (decimal)xpathIter.Current.ValueAsDouble;
+            _FlowRestrictorCost = (float)xpathIter.Current.ValueAsDouble;
             break;
           case "BaseENR":
             _BaseENR = xpathIter.Current.ValueAsInt;

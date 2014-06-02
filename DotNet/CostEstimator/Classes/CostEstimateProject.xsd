@@ -25,7 +25,7 @@
     <xs:sequence>
       <xs:element name="name" type="xs:string" />
       <xs:element name="quantity" type="xs:double" />
-      <xs:element name="unitCost" type="xs:decimal" />
+      <xs:element name="unitCost" type="xs:float" />
       <xs:element name="unitName" type="xs:string" />
     </xs:sequence>
   </xs:complexType>

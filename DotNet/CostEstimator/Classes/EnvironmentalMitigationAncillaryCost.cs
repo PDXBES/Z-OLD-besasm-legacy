@@ -21,7 +21,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
   class EnvironmentalMitigationAncillaryCost : AncillaryCost
   {
     #region Constants
-    private const decimal UNIT_COST_ENVIRONMENTAL_MITIGATION_PER_ACRE = 150000;
+    private const float UNIT_COST_ENVIRONMENTAL_MITIGATION_PER_ACRE = 150000;
     private const double ENVIRONMENTAL_ZONE_AFFECTED_WIDTH = 50;
     #endregion
 
@@ -56,20 +56,20 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// <summary>
     /// Cost
     /// </summary>
-    /// <returns>Decimal</returns>
-    public decimal Cost
+    /// <returns>float</returns>
+    public float Cost
     {
       get
       {
-        return (decimal)((double)UnitCost * Units);
+        return (float)((double)UnitCost * Units);
       }
     } // Cost
 
     /// <summary>
     /// Unit cost
     /// </summary>
-    /// <returns>Decimal</returns>
-    public decimal UnitCost
+    /// <returns>float</returns>
+    public float UnitCost
     {
       get
       {
@@ -93,11 +93,11 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// Units
     /// </summary>
     /// <returns>Double</returns>
-    public double Units
+    public float Units
     {
       get
       {
-        return (double)(
+        return (float)(
         _ConflictPackage.Conflicts.LengthInConservationZoneFeet * ENVIRONMENTAL_ZONE_AFFECTED_WIDTH +
         _ConflictPackage.Conflicts.LengthInPreservationZoneFeet * ENVIRONMENTAL_ZONE_AFFECTED_WIDTH) /
         Common.SQUARE_FEET_PER_ACRE;

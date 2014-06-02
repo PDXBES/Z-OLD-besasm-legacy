@@ -62,7 +62,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       } // get
     } // FactorType
 
-    public double Factor
+    public float Factor
     {
       get
       {
@@ -74,7 +74,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
         if (HasConflicts &&
         (NotInStreetAndSurfaceSlopeIsSteep || _ConflictPackage.Conflicts.IsHardArea ||
         ParallelToRailroad || ParallelToLTR))
-          return 0.50;
+          return 0.50f;
         else
           return 0;
       } // get

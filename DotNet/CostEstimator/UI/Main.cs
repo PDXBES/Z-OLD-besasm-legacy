@@ -1348,7 +1348,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
               material = PipeMaterial.PVCHDPE;
               break;
           }
-          SortedList<double, decimal> costTable = _project.PipeCoster.PipeCostTable(material);
+          SortedList<float, float> costTable = _project.PipeCoster.PipeCostTable(material);
           switch (e.Column.Key)
           {
             case "Name":
@@ -1362,7 +1362,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
         case "Lateral":
           break;
         case "Manhole":
-          SortedList<double, ManholeCosts> manholeCostTable = _project.PipeCoster.ManholeCostTable();
+          SortedList<float, ManholeCosts> manholeCostTable = _project.PipeCoster.ManholeCostTable();
           switch (e.Column.Key)
           {
             case "Name":
@@ -1377,7 +1377,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
           }
           break;
         case "FlowDiversion":
-          SortedList<double, decimal> flowDiversionCostTable = _project.PipeCoster.FlowDiversionCostTable();
+          SortedList<float, float> flowDiversionCostTable = _project.PipeCoster.FlowDiversionCostTable();
           switch (e.Column.Key)
           {
             case "Name":

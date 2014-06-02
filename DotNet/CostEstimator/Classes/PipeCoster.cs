@@ -26,17 +26,17 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 
   public struct ManholeCosts
   {
-    public decimal BaseCost;
-    public decimal CostPerFtDepthAbove8Ft;
-    public decimal RimFrameCost;
+    public float BaseCost;
+    public float CostPerFtDepthAbove8Ft;
+    public float RimFrameCost;
 
     /// <summary>
     /// Create manhole costs
     /// </summary>
     /// <param name="baseCost">Base cost</param>
     /// <param name="costPerFtDepthAbove8Ft">Cost per ft depth above 8 ft</param>
-    public ManholeCosts(decimal baseCost, decimal costPerFtDepthAbove8Ft,
-    decimal rimFrameCost)
+    public ManholeCosts(float baseCost, float costPerFtDepthAbove8Ft,
+    float rimFrameCost)
     {
       BaseCost = baseCost;
       CostPerFtDepthAbove8Ft = costPerFtDepthAbove8Ft;
@@ -171,56 +171,56 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     #region Constants
     #endregion
     #region Variables
-    private decimal _SawcuttingACPavementPerSqFt;
-    private decimal _AsphaltRemovalPerSqYd;
-    private decimal _TruckHaulExcavationSpoilsPerCuYd;
-    private decimal _TrenchShoringPerSqFt;
-    private decimal _AsphaltTrenchPatchBaseCoursePerCuYd;
-    private decimal _AsphaltTrenchPathPerSqYd;
-    private decimal _PipeZoneBackfillLessThanEqualTo12InDiamPerCuYd;
-    private decimal _PipeZoneBackfillGreater12InDiamPerCuYd;
-    private decimal _FillAbovePipeZoneLessThanEqualTo12InDiamPerCuYd;
-    private decimal _FillAbovePipeZoneGreater12InDiamPerCuYd;
-    private double _SpoilsFactor;
+    private float _SawcuttingACPavementPerSqFt;
+    private float _AsphaltRemovalPerSqYd;
+    private float _TruckHaulExcavationSpoilsPerCuYd;
+    private float _TrenchShoringPerSqFt;
+    private float _AsphaltTrenchPatchBaseCoursePerCuYd;
+    private float _AsphaltTrenchPathPerSqYd;
+    private float _PipeZoneBackfillLessThanEqualTo12InDiamPerCuYd;
+    private float _PipeZoneBackfillGreater12InDiamPerCuYd;
+    private float _FillAbovePipeZoneLessThanEqualTo12InDiamPerCuYd;
+    private float _FillAbovePipeZoneGreater12InDiamPerCuYd;
+    private float _SpoilsFactor;
 
-    private Dictionary<PipeMaterial, SortedList<double, double>> _InsideDiameterToOutsideDiameterTable =
-    new Dictionary<PipeMaterial, SortedList<double, double>>();
-    private SortedList<double, double> _InsideDiameterToManholeDiameterTable =
-    new SortedList<double, double>();
-    private SortedList<double, double> _OutsideDiameterToTrenchWidthTable =
-    new SortedList<double, double>();
-    private SortedList<double, decimal> _DepthToTrenchExcavationCostPerCuYd =
-    new SortedList<double, decimal>();
-    private Dictionary<PipeMaterial, SortedList<double, decimal>> _PipeCostTable =
-    new Dictionary<PipeMaterial, SortedList<double, decimal>>();
-    private decimal _DefaultLateralCostPerFt;
-    private SortedList<double, SortedList<double, decimal>> _LateralCostTable =
-    new SortedList<double, SortedList<double, decimal>>();
-    private SortedList<double, ManholeCosts> _ManholeCostsTable =
-    new SortedList<double, ManholeCosts>();
-    private SortedList<double, ManholeDepthFactorDiameterRange> _ManholeDepthFactorsTable =
-    new SortedList<double, ManholeDepthFactorDiameterRange>();
+    private Dictionary<PipeMaterial, SortedList<float, float>> _InsideDiameterToOutsideDiameterTable =
+    new Dictionary<PipeMaterial, SortedList<float, float>>();
+    private SortedList<float, float> _InsideDiameterToManholeDiameterTable =
+    new SortedList<float, float>();
+    private SortedList<float, float> _OutsideDiameterToTrenchWidthTable =
+    new SortedList<float, float>();
+    private SortedList<float, float> _DepthToTrenchExcavationCostPerCuYd =
+    new SortedList<float, float>();
+    private Dictionary<PipeMaterial, SortedList<float, float>> _PipeCostTable =
+    new Dictionary<PipeMaterial, SortedList<float, float>>();
+    private float _DefaultLateralCostPerFt;
+    private SortedList<float, SortedList<float, float>> _LateralCostTable =
+    new SortedList<float, SortedList<float, float>>();
+    private SortedList<float, ManholeCosts> _ManholeCostsTable =
+    new SortedList<float, ManholeCosts>();
+    private SortedList<float, ManholeDepthFactorDiameterRange> _ManholeDepthFactorsTable =
+    new SortedList<float, ManholeDepthFactorDiameterRange>();
 
-    private decimal _LateralLessThanEqualTo24InDiamCost;
-    private decimal _LateralGreaterThan24InDiamCost;
-    private decimal _TvCleanLessThanEqualTo24InDiamCost;
-    private decimal _TvCleanGreaterThan24InDiamCost;
-    private decimal _PipeburstLateralCost;
-    private decimal _PipeburstTVCleanLessThanEqualTo24InDiamCost;
+    private float _LateralLessThanEqualTo24InDiamCost;
+    private float _LateralGreaterThan24InDiamCost;
+    private float _TvCleanLessThanEqualTo24InDiamCost;
+    private float _TvCleanGreaterThan24InDiamCost;
+    private float _PipeburstLateralCost;
+    private float _PipeburstTVCleanLessThanEqualTo24InDiamCost;
 
-    private SortedList<double, decimal> _FlowDiversionCostsTable =
-    new SortedList<double, decimal>();
-    private SortedList<double, decimal> _CIPPCostTable =
-    new SortedList<double, decimal>();
-    private SortedList<double, decimal> _PipeburstCostTable =
-    new SortedList<double, decimal>();
+    private SortedList<float, float> _FlowDiversionCostsTable =
+    new SortedList<float, float>();
+    private SortedList<float, float> _CIPPCostTable =
+    new SortedList<float, float>();
+    private SortedList<float, float> _PipeburstCostTable =
+    new SortedList<float, float>();
 
     private ENR _BaseENR;
     private ENR _CurrentENR;
 
     private PipeMaterial _Material;
-    private double _InsideDiameter;
-    private double _Depth;
+    private float _InsideDiameter;
+    private float _Depth;
     private Dictionary<string, string> _OutsideTableMessages = new Dictionary<string, string>();
 
     public SortedList<string, CosterParameter> CosterParameters = new SortedList<string, CosterParameter>();
@@ -259,7 +259,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// Inside diameter
     /// </summary>
     /// <returns>Double</returns>
-    public double InsideDiameter
+    public float InsideDiameter
     {
       get
       {
@@ -275,7 +275,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// Depth
     /// </summary>
     /// <returns>Double</returns>
-    public double Depth
+    public float Depth
     {
       get
       {
@@ -291,7 +291,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// Outside diameter
     /// </summary>
     /// <returns>Double</returns>
-    public double OutsideDiameter
+    public float OutsideDiameter
     {
       get
       {
@@ -304,7 +304,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// Manhole diameter
     /// </summary>
     /// <returns>Double</returns>
-    public double ManholeDiameter
+    public float ManholeDiameter
     {
       get
       {
@@ -318,7 +318,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// Trench base width (ft)
     /// </summary>
     /// <returns>Double</returns>
-    public double TrenchBaseWidth
+    public float TrenchBaseWidth
     {
       get
       {
@@ -331,7 +331,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// Asphal removal width (ft)
     /// </summary>
     /// <returns>Double</returns>
-    public double AsphaltRemovalWidth
+    public float AsphaltRemovalWidth
     {
       get
       {
@@ -343,7 +343,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// Asphalt removal surface area (sq ft)
     /// </summary>
     /// <returns>Double</returns>
-    public double AsphaltRemovalSurfaceArea
+    public float AsphaltRemovalSurfaceArea
     {
       get
       {
@@ -355,7 +355,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// Asphalt patch surface area per foot of pipe (sq ft)
     /// </summary>
     /// <returns>Double</returns>
-    public double AsphaltPatchSurfaceArea
+    public float AsphaltPatchSurfaceArea
     {
       get
       {
@@ -367,7 +367,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// Excavation volume per foot of pipe (cu yd)
     /// </summary>
     /// <returns>Double</returns>
-    public double ExcavationVolume
+    public float ExcavationVolume
     {
       get
       {
@@ -379,7 +379,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// Spoils volume per foot of pipe (cu yd)
     /// </summary>
     /// <returns>Double</returns>
-    public double SpoilsVolume
+    public float SpoilsVolume
     {
       get
       {
@@ -391,11 +391,11 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// Pipe zone depth (ft)
     /// </summary>
     /// <returns>Double</returns>
-    public double PipeZoneDepth
+    public float PipeZoneDepth
     {
       get
       {
-        return 0.5 + 1 + OutsideDiameter / 12;
+        return (float)(0.5 + 1 + OutsideDiameter / 12);
       } // get
     } // PipeZoneDepth
 
@@ -403,11 +403,11 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// Pipe volume per foot of pipe (ft)
     /// </summary>
     /// <returns>Double</returns>
-    public double PipeVolume
+    public float PipeVolume
     {
       get
       {
-        return Math.Pow(OutsideDiameter / 12, 2) * Math.PI / 4 / 27;
+        return (float)(Math.Pow(OutsideDiameter / 12, 2) * Math.PI / 4 / 27);
       } // get
     } // PipeVolume
 
@@ -415,7 +415,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// Shoring per foot of pipe (sq ft)
     /// </summary>
     /// <returns>Double</returns>
-    public double Shoring
+    public float Shoring
     {
       get
       {
@@ -427,7 +427,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// Pipe zone volume per foot of pipe (cu yd)
     /// </summary>
     /// <returns>Double</returns>
-    public double PipeZoneVolume
+    public float PipeZoneVolume
     {
       get
       {
@@ -439,7 +439,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// Asphalt base volume per foot of pipe (cu yd)
     /// </summary>
     /// <returns>Double</returns>
-    public double AsphaltBaseVolume
+    public float AsphaltBaseVolume
     {
       get
       {
@@ -452,7 +452,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// Above zone volume per foot of pipe (cu yd)
     /// </summary>
     /// <returns>Double</returns>
-    public double AboveZoneVolume
+    public float AboveZoneVolume
     {
       get
       {
@@ -463,19 +463,19 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// <summary>
     /// Direct construction cost
     /// </summary>
-    /// <returns>Decimal</returns>
-    public decimal DirectConstructionCost
+    /// <returns>float</returns>
+    public float DirectConstructionCost
     {
       get
       {
         AssignDirectConstructionCostItems();
 
-        decimal directCost = 0m;
+        float directCost = 0.0f;
 
         foreach (KeyValuePair<string, UnitCost> kvpair in DirectConstructionCostItems)
         {
           UnitCost item = kvpair.Value;
-          directCost += item.CostPerUnit * (decimal)item.Units;
+          directCost += item.CostPerUnit * (float)item.Units;
         }
 
         return directCost;
@@ -555,41 +555,41 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     public void InitializeCosterParameters()
     {
       CosterParameter param;
-      param = new CosterParameter("Sawcutting AC pavement per sq ft", "System.Decimal", _SawcuttingACPavementPerSqFt);
+      param = new CosterParameter("Sawcutting AC pavement per sq ft", "System.float", _SawcuttingACPavementPerSqFt);
       CosterParameters.Add(param.Name, param);
-      param = new CosterParameter("Asphalt removal per sq yd", "System.Decimal", _AsphaltRemovalPerSqYd);
+      param = new CosterParameter("Asphalt removal per sq yd", "System.float", _AsphaltRemovalPerSqYd);
       CosterParameters.Add(param.Name, param);
-      param = new CosterParameter("Truck haul excavation spoils per cu yd", "System.Decimal", _TruckHaulExcavationSpoilsPerCuYd);
+      param = new CosterParameter("Truck haul excavation spoils per cu yd", "System.float", _TruckHaulExcavationSpoilsPerCuYd);
       CosterParameters.Add(param.Name, param);
-      param = new CosterParameter("Trench shoring per sq ft", "System.Decimal", _TrenchShoringPerSqFt);
+      param = new CosterParameter("Trench shoring per sq ft", "System.float", _TrenchShoringPerSqFt);
       CosterParameters.Add(param.Name, param);
-      param = new CosterParameter("Asphalt trench patch base course per cu yd", "System.Decimal", _AsphaltTrenchPatchBaseCoursePerCuYd);
+      param = new CosterParameter("Asphalt trench patch base course per cu yd", "System.float", _AsphaltTrenchPatchBaseCoursePerCuYd);
       CosterParameters.Add(param.Name, param);
-      param = new CosterParameter("Asphalt trench patch per sq yd", "System.Decimal", _AsphaltTrenchPathPerSqYd);
+      param = new CosterParameter("Asphalt trench patch per sq yd", "System.float", _AsphaltTrenchPathPerSqYd);
       CosterParameters.Add(param.Name, param);
-      param = new CosterParameter("Pipe zone backfill less than or equal to 12 in diam per cu yd", "System.Decimal", _PipeZoneBackfillLessThanEqualTo12InDiamPerCuYd);
+      param = new CosterParameter("Pipe zone backfill less than or equal to 12 in diam per cu yd", "System.float", _PipeZoneBackfillLessThanEqualTo12InDiamPerCuYd);
       CosterParameters.Add(param.Name, param);
-      param = new CosterParameter("Pipe zone backfill greater than 12 in diam per cu yd", "System.Decimal", _PipeZoneBackfillGreater12InDiamPerCuYd);
+      param = new CosterParameter("Pipe zone backfill greater than 12 in diam per cu yd", "System.float", _PipeZoneBackfillGreater12InDiamPerCuYd);
       CosterParameters.Add(param.Name, param);
-      param = new CosterParameter("Fill above pipe zone less than or equal to 12 in diam per cu yd", "System.Decimal", _FillAbovePipeZoneLessThanEqualTo12InDiamPerCuYd);
+      param = new CosterParameter("Fill above pipe zone less than or equal to 12 in diam per cu yd", "System.float", _FillAbovePipeZoneLessThanEqualTo12InDiamPerCuYd);
       CosterParameters.Add(param.Name, param);
-      param = new CosterParameter("Fill above pipe zone greater than 12 in diam per cu yd", "System.Decimal", _FillAbovePipeZoneGreater12InDiamPerCuYd);
+      param = new CosterParameter("Fill above pipe zone greater than 12 in diam per cu yd", "System.float", _FillAbovePipeZoneGreater12InDiamPerCuYd);
       CosterParameters.Add(param.Name, param);
-      param = new CosterParameter("Lateral less than or equal to 24 in diam", "System.Decimal", _LateralLessThanEqualTo24InDiamCost);
+      param = new CosterParameter("Lateral less than or equal to 24 in diam", "System.float", _LateralLessThanEqualTo24InDiamCost);
       CosterParameters.Add(param.Name, param);
-      param = new CosterParameter("Lateral greater than 24 in diam", "System.Decimal", _LateralGreaterThan24InDiamCost);
+      param = new CosterParameter("Lateral greater than 24 in diam", "System.float", _LateralGreaterThan24InDiamCost);
       CosterParameters.Add(param.Name, param);
-      param = new CosterParameter("TV cleaning less than or equal to 24 in diam", "System.Decimal", _TvCleanLessThanEqualTo24InDiamCost);
+      param = new CosterParameter("TV cleaning less than or equal to 24 in diam", "System.float", _TvCleanLessThanEqualTo24InDiamCost);
       CosterParameters.Add(param.Name, param);
-      param = new CosterParameter("TV cleaning greater than 24 in diam", "System.Decimal", _TvCleanGreaterThan24InDiamCost);
+      param = new CosterParameter("TV cleaning greater than 24 in diam", "System.float", _TvCleanGreaterThan24InDiamCost);
       CosterParameters.Add(param.Name, param);
-      param = new CosterParameter("Pipeburst lateral", "System.Decimal", _PipeburstLateralCost);
+      param = new CosterParameter("Pipeburst lateral", "System.float", _PipeburstLateralCost);
       CosterParameters.Add(param.Name, param);
-      param = new CosterParameter("Pipeburst TV cleaning less than or equal to 24 in diam", "System.Decimal", _PipeburstTVCleanLessThanEqualTo24InDiamCost);
+      param = new CosterParameter("Pipeburst TV cleaning less than or equal to 24 in diam", "System.float", _PipeburstTVCleanLessThanEqualTo24InDiamCost);
       CosterParameters.Add(param.Name, param);
-      param = new CosterParameter("Base ENR", "System.Decimal", _BaseENR);
+      param = new CosterParameter("Base ENR", "System.float", _BaseENR);
       CosterParameters.Add(param.Name, param);
-      param = new CosterParameter("Current ENR", "System.Decimal", _CurrentENR);
+      param = new CosterParameter("Current ENR", "System.float", _CurrentENR);
       CosterParameters.Add(param.Name, param);
     } // InitializeCosterParameters()
 
@@ -618,37 +618,37 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
         switch (xpathIter.Current.Name)
         {
           case "sawCuttingACPavementPerSqFt":
-            _SawcuttingACPavementPerSqFt = (decimal)xpathIter.Current.ValueAsDouble;
+            _SawcuttingACPavementPerSqFt = (float)xpathIter.Current.ValueAsDouble;
             break;
           case "asphaltRemovalPerSqYd":
-            _AsphaltRemovalPerSqYd = (decimal)xpathIter.Current.ValueAsDouble;
+            _AsphaltRemovalPerSqYd = (float)xpathIter.Current.ValueAsDouble;
             break;
           case "truckHaulExcavationSpoilsPerCuYd":
-            _TruckHaulExcavationSpoilsPerCuYd = (decimal)xpathIter.Current.ValueAsDouble;
+            _TruckHaulExcavationSpoilsPerCuYd = (float)xpathIter.Current.ValueAsDouble;
             break;
           case "trenchShoringPerSqFt":
-            _TrenchShoringPerSqFt = (decimal)xpathIter.Current.ValueAsDouble;
+            _TrenchShoringPerSqFt = (float)xpathIter.Current.ValueAsDouble;
             break;
           case "asphaltTrenchPatchBaseCoursePerCuYd":
-            _AsphaltTrenchPatchBaseCoursePerCuYd = (decimal)xpathIter.Current.ValueAsDouble;
+            _AsphaltTrenchPatchBaseCoursePerCuYd = (float)xpathIter.Current.ValueAsDouble;
             break;
           case "asphaltTrenchPatchPerSqYd":
-            _AsphaltTrenchPathPerSqYd = (decimal)xpathIter.Current.ValueAsDouble;
+            _AsphaltTrenchPathPerSqYd = (float)xpathIter.Current.ValueAsDouble;
             break;
           case "pipeZoneBackfillLessThanEqualTo12InDiamPerCuYd":
-            _PipeZoneBackfillLessThanEqualTo12InDiamPerCuYd = (decimal)xpathIter.Current.ValueAsDouble;
+            _PipeZoneBackfillLessThanEqualTo12InDiamPerCuYd = (float)xpathIter.Current.ValueAsDouble;
             break;
           case "pipeZoneBackfillGreaterThan12InDiamPerCuYd":
-            _PipeZoneBackfillGreater12InDiamPerCuYd = (decimal)xpathIter.Current.ValueAsDouble;
+            _PipeZoneBackfillGreater12InDiamPerCuYd = (float)xpathIter.Current.ValueAsDouble;
             break;
           case "fillAbovePipeZoneLessThanEqualTo12InDiamPerCuYd":
-            _FillAbovePipeZoneLessThanEqualTo12InDiamPerCuYd = (decimal)xpathIter.Current.ValueAsDouble;
+            _FillAbovePipeZoneLessThanEqualTo12InDiamPerCuYd = (float)xpathIter.Current.ValueAsDouble;
             break;
           case "fillAbovePipeZoneGreaterThan12InDiamPerCuYd":
-            _FillAbovePipeZoneGreater12InDiamPerCuYd = (decimal)xpathIter.Current.ValueAsDouble;
+            _FillAbovePipeZoneGreater12InDiamPerCuYd = (float)xpathIter.Current.ValueAsDouble;
             break;
           case "spoilsFactor":
-            _SpoilsFactor = xpathIter.Current.ValueAsDouble;
+            _SpoilsFactor = (float)xpathIter.Current.ValueAsDouble;
             break;
         } // switch
       } // while
@@ -658,28 +658,28 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       while (xpathIter.MoveNext())
       {
         XPathNodeIterator childIter = xpathIter.Current.SelectChildren(XPathNodeType.Element);
-        double insideDiameterIn = 0;
+        float insideDiameterIn = 0;
         PipeMaterial material = new PipeMaterial();
-        double outsideDiameterIn = 0;
+        float outsideDiameterIn = 0;
 
         while (childIter.MoveNext())
         {
           switch (childIter.Current.Name)
           {
             case "insideDiameterIn":
-              insideDiameterIn = childIter.Current.ValueAsDouble;
+              insideDiameterIn = (float)childIter.Current.ValueAsDouble;
               break;
             case "material":
               material = (PipeMaterial)Enum.Parse(typeof(PipeMaterial), childIter.Current.Value, true);
               break;
             case "outsideDiameterIn":
-              outsideDiameterIn = childIter.Current.ValueAsDouble;
+              outsideDiameterIn = (float)childIter.Current.ValueAsDouble;
               break;
           } // switch
         } // while
 
         if (!_InsideDiameterToOutsideDiameterTable.ContainsKey(material))
-          _InsideDiameterToOutsideDiameterTable.Add(material, new SortedList<double, double>());
+          _InsideDiameterToOutsideDiameterTable.Add(material, new SortedList<float, float>());
         _InsideDiameterToOutsideDiameterTable[material].Add(insideDiameterIn, outsideDiameterIn);
       } // while
 
@@ -688,18 +688,18 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       while (xpathIter.MoveNext())
       {
         XPathNodeIterator childIter = xpathIter.Current.SelectChildren(XPathNodeType.Element);
-        double insideDiameterIn = 0;
-        double manholeDiameterIn = 0;
+        float insideDiameterIn = 0;
+        float manholeDiameterIn = 0;
 
         while (childIter.MoveNext())
         {
           switch (childIter.Current.Name)
           {
             case "insideDiameterIn":
-              insideDiameterIn = childIter.Current.ValueAsDouble;
+              insideDiameterIn = (float)childIter.Current.ValueAsDouble;
               break;
             case "manholeDiameterIn":
-              manholeDiameterIn = childIter.Current.ValueAsDouble;
+              manholeDiameterIn = (float)childIter.Current.ValueAsDouble;
               break;
           } // switch
         } // while
@@ -711,18 +711,18 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       while (xpathIter.MoveNext())
       {
         XPathNodeIterator childIter = xpathIter.Current.SelectChildren(XPathNodeType.Element);
-        double outsideDiameterIn = 0;
-        double widthFt = 0;
+        float outsideDiameterIn = 0;
+        float widthFt = 0;
 
         while (childIter.MoveNext())
         {
           switch (childIter.Current.Name)
           {
             case "outsideDiameterIn":
-              outsideDiameterIn = childIter.Current.ValueAsDouble;
+              outsideDiameterIn = (float)childIter.Current.ValueAsDouble;
               break;
             case "widthFt":
-              widthFt = childIter.Current.ValueAsDouble;
+              widthFt = (float)childIter.Current.ValueAsDouble;
               break;
           } // switch
         } // while
@@ -735,18 +735,18 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       while (xpathIter.MoveNext())
       {
         XPathNodeIterator childIter = xpathIter.Current.SelectChildren(XPathNodeType.Element);
-        double depthFt = 0;
-        decimal costPerCuYd = 0;
+        float depthFt = 0;
+        float costPerCuYd = 0;
 
         while (childIter.MoveNext())
         {
           switch (childIter.Current.Name)
           {
             case "depthFt":
-              depthFt = childIter.Current.ValueAsDouble;
+              depthFt = (float)childIter.Current.ValueAsDouble;
               break;
             case "costPerCuYd":
-              costPerCuYd = (decimal)childIter.Current.ValueAsDouble;
+              costPerCuYd = (float)childIter.Current.ValueAsDouble;
               break;
           } // switch
         } // while
@@ -759,27 +759,27 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       while (xpathIter.MoveNext())
       {
         XPathNodeIterator childIter = xpathIter.Current.SelectChildren(XPathNodeType.Element);
-        double diameterIn = 0;
+        float diameterIn = 0;
         PipeMaterial material = new PipeMaterial();
-        decimal costPerFt = 0;
+        float costPerFt = 0;
 
         while (childIter.MoveNext())
         {
           switch (childIter.Current.Name)
           {
             case "diameterIn":
-              diameterIn = childIter.Current.ValueAsDouble;
+              diameterIn = (float)childIter.Current.ValueAsDouble;
               break;
             case "material":
               material = (PipeMaterial)Enum.Parse(typeof(PipeMaterial), childIter.Current.Value, true);
               break;
             case "costPerFt":
-              costPerFt = (decimal)childIter.Current.ValueAsDouble;
+              costPerFt = (float)childIter.Current.ValueAsDouble;
               break;
           } // switch
         } // while
         if (!_PipeCostTable.ContainsKey(material))
-          _PipeCostTable.Add(material, new SortedList<double, decimal>());
+          _PipeCostTable.Add(material, new SortedList<float, float>());
         _PipeCostTable[material].Add(diameterIn, costPerFt);
       } // while
 
@@ -789,33 +789,33 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       {
         if (xpathIter.Current.Name == "DefaultLateralCostPerFt")
         {
-          _DefaultLateralCostPerFt = (decimal)xpathIter.Current.ValueAsDouble;
+          _DefaultLateralCostPerFt = (float)xpathIter.Current.ValueAsDouble;
           continue;
         } // if
 
         XPathNodeIterator childIter = xpathIter.Current.SelectChildren(XPathNodeType.Element);
-        double insideDiameterIn = 0;
-        double depthFt = 0;
-        decimal costPerFt = 0;
+        float insideDiameterIn = 0;
+        float depthFt = 0;
+        float costPerFt = 0;
 
         while (childIter.MoveNext())
         {
           switch (childIter.Current.Name)
           {
             case "insideDiameterIn":
-              insideDiameterIn = childIter.Current.ValueAsDouble;
+              insideDiameterIn = (float)childIter.Current.ValueAsDouble;
               break;
             case "depthFt":
-              depthFt = childIter.Current.ValueAsDouble;
+              depthFt = (float)childIter.Current.ValueAsDouble;
               break;
             case "costPerFt":
-              costPerFt = (decimal)childIter.Current.ValueAsDouble;
+              costPerFt = (float)childIter.Current.ValueAsDouble;
               break;
           } // switch
         } // while
 
         if (!_LateralCostTable.ContainsKey(insideDiameterIn))
-          _LateralCostTable.Add(insideDiameterIn, new SortedList<double, decimal>());
+          _LateralCostTable.Add(insideDiameterIn, new SortedList<float, float>());
         _LateralCostTable[insideDiameterIn].Add(depthFt, costPerFt);
       } // while
 
@@ -824,26 +824,26 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       while (xpathIter.MoveNext())
       {
         XPathNodeIterator childIter = xpathIter.Current.SelectChildren(XPathNodeType.Element);
-        double manholeDiameterIn = 0;
-        decimal baseCost = 0;
-        decimal costPerFtDepthAbove8Ft = 0;
-        decimal rimFrameCost = 0;
+        float manholeDiameterIn = 0;
+        float baseCost = 0;
+        float costPerFtDepthAbove8Ft = 0;
+        float rimFrameCost = 0;
 
         while (childIter.MoveNext())
         {
           switch (childIter.Current.Name)
           {
             case "manholeDiameterIn":
-              manholeDiameterIn = childIter.Current.ValueAsDouble;
+              manholeDiameterIn = (float)childIter.Current.ValueAsDouble;
               break;
             case "baseCost":
-              baseCost = (decimal)childIter.Current.ValueAsDouble;
+              baseCost = (float)childIter.Current.ValueAsDouble;
               break;
             case "costPerFtDepthAbove8Ft":
-              costPerFtDepthAbove8Ft = (decimal)childIter.Current.ValueAsDouble;
+              costPerFtDepthAbove8Ft = (float)childIter.Current.ValueAsDouble;
               break;
             case "rimFrameCost":
-              rimFrameCost = (decimal)childIter.Current.ValueAsDouble;
+              rimFrameCost = (float)childIter.Current.ValueAsDouble;
               break;
           } // switch
         } // while
@@ -856,12 +856,12 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       while (xpathIter.MoveNext())
       {
         string manholeMinDiamAsString = xpathIter.Current.GetAttribute("MinDiam", string.Empty);
-        double manholeMinDiam = manholeMinDiamAsString == string.Empty ?
-        0 : Convert.ToDouble(manholeMinDiamAsString);
+        float manholeMinDiam = manholeMinDiamAsString == string.Empty ?
+        0 : (float)Convert.ToDouble(manholeMinDiamAsString);
 
         string manholeMaxDiamAsString = xpathIter.Current.GetAttribute("MaxDiam", string.Empty);
-        double manholeMaxDiam = manholeMaxDiamAsString == string.Empty ?
-        double.MaxValue : Convert.ToDouble(manholeMaxDiamAsString);
+        float manholeMaxDiam = manholeMaxDiamAsString == string.Empty ?
+        float.MaxValue : (float)Convert.ToDouble(manholeMaxDiamAsString);
 
 
         _ManholeDepthFactorsTable.Add(manholeMinDiam, new ManholeDepthFactorDiameterRange(manholeMinDiam, manholeMaxDiam));
@@ -870,19 +870,19 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
         XPathNodeIterator childIter = xpathIter.Current.SelectChildren(XPathNodeType.Element);
         while (childIter.MoveNext())
         {
-          double manholeMinDepth;
-          double manholeMaxDepth;
-          double factor;
+          float manholeMinDepth;
+          float manholeMaxDepth;
+          float factor;
           switch (childIter.Current.Name)
           {
             case "factor":
               string manholeMinDepthAsString = childIter.Current.GetAttribute("MinDepth", string.Empty);
               manholeMinDepth = manholeMinDepthAsString == string.Empty ?
-              0 : Convert.ToDouble(manholeMinDepthAsString);
+              0 : (float)Convert.ToDouble(manholeMinDepthAsString);
               string manholeMaxDepthAsString = childIter.Current.GetAttribute("MaxDepth", string.Empty);
               manholeMaxDepth = manholeMaxDepthAsString == string.Empty ?
-              double.MaxValue : Convert.ToDouble(manholeMaxDepthAsString);
-              factor = childIter.Current.ValueAsDouble;
+              float.MaxValue : (float)Convert.ToDouble(manholeMaxDepthAsString);
+              factor = (float)childIter.Current.ValueAsDouble;
 
               currentDiameterRange.ManholeDepthFactors.Add(manholeMinDepth,
               new ManholeDepthFactor(manholeMinDepth, manholeMaxDepth, factor));
@@ -898,16 +898,16 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
         switch (xpathIter.Current.Name)
         {
           case "lateralLessThanEqualTo24InDiamCost":
-            _LateralLessThanEqualTo24InDiamCost = (decimal)xpathIter.Current.ValueAsDouble;
+            _LateralLessThanEqualTo24InDiamCost = (float)xpathIter.Current.ValueAsDouble;
             break;
           case "lateralGreaterThan24InDiamCost":
-            _LateralGreaterThan24InDiamCost = (decimal)xpathIter.Current.ValueAsDouble;
+            _LateralGreaterThan24InDiamCost = (float)xpathIter.Current.ValueAsDouble;
             break;
           case "tvCleanLessThanEqualTo24InDiamCost":
-            _TvCleanLessThanEqualTo24InDiamCost = (decimal)xpathIter.Current.ValueAsDouble;
+            _TvCleanLessThanEqualTo24InDiamCost = (float)xpathIter.Current.ValueAsDouble;
             break;
           case "tvCleanGreaterThan24InDiamCost":
-            _TvCleanGreaterThan24InDiamCost = (decimal)xpathIter.Current.ValueAsDouble;
+            _TvCleanGreaterThan24InDiamCost = (float)xpathIter.Current.ValueAsDouble;
             break;
         } // switch
       } // while
@@ -919,10 +919,10 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
         switch (xpathIter.Current.Name)
         {
           case "lateralCost":
-            _PipeburstLateralCost = (decimal)xpathIter.Current.ValueAsDouble;
+            _PipeburstLateralCost = (float)xpathIter.Current.ValueAsDouble;
             break;
           case "tvCleanLessThanEqualTo24InDiamCost":
-            _PipeburstTVCleanLessThanEqualTo24InDiamCost = (decimal)xpathIter.Current.ValueAsDouble;
+            _PipeburstTVCleanLessThanEqualTo24InDiamCost = (float)xpathIter.Current.ValueAsDouble;
             break;
         } // switch
       } // while
@@ -932,18 +932,18 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       while (xpathIter.MoveNext())
       {
         XPathNodeIterator childIter = xpathIter.Current.SelectChildren(XPathNodeType.Element);
-        double insideDiameterIn = 0;
-        decimal costPerFt = 0;
+        float insideDiameterIn = 0;
+        float costPerFt = 0;
 
         while (childIter.MoveNext())
         {
           switch (childIter.Current.Name)
           {
             case "insideDiameterIn":
-              insideDiameterIn = childIter.Current.ValueAsDouble;
+              insideDiameterIn = (float)childIter.Current.ValueAsDouble;
               break;
             case "costPerFt":
-              costPerFt = (decimal)childIter.Current.ValueAsDouble;
+              costPerFt = (float)childIter.Current.ValueAsDouble;
               break;
           } // switch
         } // while
@@ -956,18 +956,18 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       while (xpathIter.MoveNext())
       {
         XPathNodeIterator childIter = xpathIter.Current.SelectChildren(XPathNodeType.Element);
-        double insideDiameterIn = 0;
-        decimal costPerFt = 0;
+        float insideDiameterIn = 0;
+        float costPerFt = 0;
 
         while (childIter.MoveNext())
         {
           switch (childIter.Current.Name)
           {
             case "insideDiameterIn":
-              insideDiameterIn = childIter.Current.ValueAsDouble;
+              insideDiameterIn = (float)childIter.Current.ValueAsDouble;
               break;
             case "costPerFt":
-              costPerFt = (decimal)childIter.Current.ValueAsDouble;
+              costPerFt = (float)childIter.Current.ValueAsDouble;
               break;
           } // switch
         } // while
@@ -980,18 +980,18 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       while (xpathIter.MoveNext())
       {
         XPathNodeIterator childIter = xpathIter.Current.SelectChildren(XPathNodeType.Element);
-        double insideDiameterIn = 0;
-        decimal costPerFt = 0;
+        float insideDiameterIn = 0;
+        float costPerFt = 0;
 
         while (childIter.MoveNext())
         {
           switch (childIter.Current.Name)
           {
             case "insideDiameterIn":
-              insideDiameterIn = childIter.Current.ValueAsDouble;
+              insideDiameterIn = (float)childIter.Current.ValueAsDouble;
               break;
             case "costPerFt":
-              costPerFt = (decimal)childIter.Current.ValueAsDouble;
+              costPerFt = (float)childIter.Current.ValueAsDouble;
               break;
           } // switch
         } // while
@@ -1053,7 +1053,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// </summary>
     /// <param name="insideDiameter">Inside diameter</param>
     /// <returns>Double</returns>
-    public double OutsideDiameterFromInsideDiameter(PipeMaterial material, double insideDiameter, out bool outsideTable)
+    public float OutsideDiameterFromInsideDiameter(PipeMaterial material, double insideDiameter, out bool outsideTable)
     {
       if (!_InsideDiameterToOutsideDiameterTable.ContainsKey(material))
       {
@@ -1105,7 +1105,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// <param name="insideDiameter">Inside diameter</param>
     /// <param name="outsideTable">Outside table</param>
     /// <returns>Double</returns>
-    public double ManholeDiameterFromInsideDiameter(double insideDiameter, out bool outsideTable)
+    public float ManholeDiameterFromInsideDiameter(double insideDiameter, out bool outsideTable)
     {
       if (insideDiameter < _InsideDiameterToManholeDiameterTable.Keys[0])
       {
@@ -1151,7 +1151,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// <param name="outsideDiameter">Outside diameter</param>
     /// <param name="outsideTable">Outside table</param>
     /// <returns>Double</returns>
-    public double TrenchWidthFromOutsideDiameter(double outsideDiameter, out bool outsideTable)
+    public float TrenchWidthFromOutsideDiameter(double outsideDiameter, out bool outsideTable)
     {
       if (outsideDiameter < _OutsideDiameterToTrenchWidthTable.Keys[0])
       {
@@ -1195,8 +1195,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// Trench excavation cost per cu yd from pipe depth
     /// </summary>
     /// <param name="depth">Depth in ft</param>
-    /// <returns>Decimal</returns>
-    public decimal TrenchExcavationCostPerCuYdFromDepth(double depth)
+    /// <returns>float</returns>
+    public float TrenchExcavationCostPerCuYdFromDepth(double depth)
     {
       if (depth < _DepthToTrenchExcavationCostPerCuYd.Keys[0])
       {
@@ -1226,7 +1226,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
           } // if
           else
           {
-            return 0.0M;
+            return 0.0f;
           } // else
         } // else
     } // TrenchExcavationPerCuYdFromDepth(diameter)
@@ -1237,8 +1237,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// <param name="material">Material</param>
     /// <param name="diameter">Diameter in ft</param>
     /// <param name="outsideTable">Returns true if the supplied material and diameter falls out of the cost table</param>
-    /// <returns>Decimal</returns>
-    public decimal PipeCost(PipeMaterial material, double diameter, out bool outsideTable)
+    /// <returns>float</returns>
+    public float PipeCost(PipeMaterial material, double diameter, out bool outsideTable)
     {
       if (!_PipeCostTable.ContainsKey(material))
       {
@@ -1290,8 +1290,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// <param name="InsideDiameter">Inside diameter</param>
     /// <param name="depth">Depth</param>
     /// <param name="outsideTable">Outside table</param>
-    /// <returns>Decimal</returns>
-    public decimal LateralCost(double insideDiameter, double depth, out bool outsideTable)
+    /// <returns>float</returns>
+    public float LateralCost(double insideDiameter, double depth, out bool outsideTable)
     {
       int diameterIndex = -1;
       // find the inside diameter first
@@ -1363,8 +1363,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// <param name="pipeDiameter">Pipe diameter</param>
     /// <param name="depth">Depth</param>
     /// <param name="outsideTable">Outside table</param>
-    /// <returns>Decimal</returns>
-    public decimal ManholeCost(double pipeDiameter, double depth, out bool outsideTable)
+    /// <returns>float</returns>
+    public float ManholeCost(double pipeDiameter, double depth, out bool outsideTable)
     {
       // CH2M Hill Formulas convert the diameter to feet first in this formula
       // for some reason
@@ -1374,9 +1374,9 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       double finalManholeSize = Math.Ceiling(requiredManholeSize / 12) * 12;
 
       int diameterIndex;
-      decimal baseCost;
-      decimal incrementalCostAbove8FtDepth;
-      decimal rimFrameCost;
+      float baseCost;
+      float incrementalCostAbove8FtDepth;
+      float rimFrameCost;
       if (finalManholeSize < _ManholeCostsTable.Keys[0])
       {
         outsideTable = true;
@@ -1408,8 +1408,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       incrementalCostAbove8FtDepth = _ManholeCostsTable.Values[diameterIndex].CostPerFtDepthAbove8Ft;
       rimFrameCost = _ManholeCostsTable.Values[diameterIndex].RimFrameCost;
 
-      return (decimal)((double)(baseCost +
-      (decimal)((double)incrementalCostAbove8FtDepth * ((depth - 8) > 0 ? depth - 8 : 0)) +
+      return (float)((double)(baseCost +
+      (float)((double)incrementalCostAbove8FtDepth * ((depth - 8) > 0 ? depth - 8 : 0)) +
       rimFrameCost) * ManholeCostDepthFactor(finalManholeSize, depth));
     } // ManholeCost(diameter, depth, outsideTable)
 
@@ -1417,8 +1417,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// Flow diversion cost
     /// </summary>
     /// <param name="diameter">Diameter</param>
-    /// <returns>Decimal</returns>
-    public decimal FlowDiversionCost(double insideDiameter, out bool outsideTable)
+    /// <returns>float</returns>
+    public float FlowDiversionCost(double insideDiameter, out bool outsideTable)
     {
       if (insideDiameter < _FlowDiversionCostsTable.Keys[0])
       {
@@ -1463,12 +1463,12 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// </summary>
     /// <param name="insideDiameter">Inside diameter</param>
     /// <param name="outsideTable">Outside table</param>
-    /// <returns>Decimal</returns>
-    public decimal CIPPPipeCost(double insideDiameter, out bool outsideTable)
+    /// <returns>float</returns>
+    public float CIPPPipeCost(double insideDiameter, out bool outsideTable)
     {
       outsideTable = false;
       double cost = insideDiameter < 0 ? 0 : 1.1406 * Math.Pow(insideDiameter, 1.4882);
-      return (decimal)cost;
+      return (float)cost;
     } // CIPPPipeCost(insideDiameter, outsideTable)
 
     /// <summary>
@@ -1476,8 +1476,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// </summary>
     /// <param name="insideDiamter">Inside diamter</param>
     /// <param name="outsideTable">Outside table</param>
-    /// <returns>Decimal</returns>
-    public decimal PipeburstPipeCost(double insideDiameter, out bool outsideTable)
+    /// <returns>float</returns>
+    public float PipeburstPipeCost(double insideDiameter, out bool outsideTable)
     {
       if (insideDiameter < _PipeburstCostTable.Keys[0])
       {
@@ -1522,7 +1522,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// </summary>
     /// <param name="material">Material</param>
     /// <returns>Double</returns>
-    public double Min_InsideDiameterToOutsideDiameterTable(PipeMaterial material)
+    public float Min_InsideDiameterToOutsideDiameterTable(PipeMaterial material)
     {
       return _InsideDiameterToOutsideDiameterTable[material].Keys[0];
     } // Min_InsideDiameterToOutsideDiameterTable(material)
@@ -1532,7 +1532,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// </summary>
     /// <param name="material">Material</param>
     /// <returns>Double</returns>
-    public double Max_InsideDiameterToOutsideDiameterTable(PipeMaterial material)
+    public float Max_InsideDiameterToOutsideDiameterTable(PipeMaterial material)
     {
       return _InsideDiameterToOutsideDiameterTable[material].Keys[_InsideDiameterToOutsideDiameterTable[material].Count - 1];
     } // Max_InsideDiameterToOutsideDiameterTable(material)
@@ -1541,7 +1541,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// Min _ inside diamter to manhole diameter table
     /// </summary>
     /// <returns>Double</returns>
-    public double Min_InsideDiameterToManholeDiameterTable()
+    public float Min_InsideDiameterToManholeDiameterTable()
     {
       return _InsideDiameterToManholeDiameterTable.Keys[0];
     } // Min_InsideDiameterToManholeDiameterTable()
@@ -1550,7 +1550,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// Max _ inside diameter to manhole diameter table
     /// </summary>
     /// <returns>Double</returns>
-    public double Max_InsideDiameterToManholeDiameterTable()
+    public float Max_InsideDiameterToManholeDiameterTable()
     {
       return _InsideDiameterToManholeDiameterTable.Keys[_InsideDiameterToManholeDiameterTable.Count - 1];
     } // Max_InsideDiameterToManholeDiameterTable()
@@ -1559,7 +1559,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// Min _ outside diameter to trench width table
     /// </summary>
     /// <returns>Double</returns>
-    public double Min_OutsideDiameterToTrenchWidthTable()
+    public float Min_OutsideDiameterToTrenchWidthTable()
     {
       return _OutsideDiameterToTrenchWidthTable.Keys[0];
     } // Min_OutsideDiameterToTrenchWidthTable()
@@ -1568,7 +1568,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// Max _ outside diameter to trench width table
     /// </summary>
     /// <returns>Double</returns>
-    public double Max_OutsideDiameterToTrenchWidthTable()
+    public float Max_OutsideDiameterToTrenchWidthTable()
     {
       return _OutsideDiameterToTrenchWidthTable.Keys[_OutsideDiameterToTrenchWidthTable.Count - 1];
     } // Max_OutsideDiameterToTrenchWidthTable()
@@ -1578,7 +1578,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// </summary>
     /// <param name="material">Material</param>
     /// <returns>Double</returns>
-    public double Min_PipeCostTable(PipeMaterial material)
+    public float Min_PipeCostTable(PipeMaterial material)
     {
       return _PipeCostTable[material].Keys[0];
     } // Min_PipeCostTable(material)
@@ -1588,7 +1588,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// </summary>
     /// <param name="material">Material</param>
     /// <returns>Double</returns>
-    public double Max_PipeCostTable(PipeMaterial material)
+    public float Max_PipeCostTable(PipeMaterial material)
     {
       return _PipeCostTable[material].Keys[_PipeCostTable[material].Count - 1];
     } // Max_PipeCostTable(material)
@@ -1597,7 +1597,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// Min diameter _ lateral cost table
     /// </summary>
     /// <returns>Double</returns>
-    public double MinDiameter_LateralCostTable()
+    public float MinDiameter_LateralCostTable()
     {
       return _LateralCostTable.Keys[0];
     } // MinDiameter_LateralCostTable()
@@ -1606,7 +1606,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// Max diameter _ lateral cost table
     /// </summary>
     /// <returns>Double</returns>
-    public double MaxDiameter_LateralCostTable()
+    public float MaxDiameter_LateralCostTable()
     {
       return _LateralCostTable.Keys[_LateralCostTable.Count - 1];
     } // MaxDiameter_LateralCostTable()
@@ -1615,12 +1615,12 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// Min depth _ lateral cost table
     /// </summary>
     /// <returns>Double</returns>
-    public double MinDepth_LateralCostTable()
+    public float MinDepth_LateralCostTable()
     {
-      double minDepth_LateralCostTable = double.MinValue;
-      foreach (KeyValuePair<double, SortedList<double, decimal>> kvPair in _LateralCostTable)
+      float minDepth_LateralCostTable = float.MinValue;
+      foreach (KeyValuePair<float, SortedList<float, float>> kvPair in _LateralCostTable)
       {
-        minDepth_LateralCostTable = Math.Min(minDepth_LateralCostTable, kvPair.Value.Keys[0]);
+        minDepth_LateralCostTable = (float)Math.Min(minDepth_LateralCostTable, kvPair.Value.Keys[0]);
       } // foreach  (kvPair)
       return minDepth_LateralCostTable;
     } // MinDepth_LateralCostTable()
@@ -1629,12 +1629,12 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// Max depth _ lateral cost table
     /// </summary>
     /// <returns>Double</returns>
-    public double MaxDepth_LateralCostTable()
+    public float MaxDepth_LateralCostTable()
     {
-      double maxDepth_LateralCostTable = double.MaxValue;
-      foreach (KeyValuePair<double, SortedList<double, decimal>> kvPair in _LateralCostTable)
+      float maxDepth_LateralCostTable = float.MaxValue;
+      foreach (KeyValuePair<float, SortedList<float, float>> kvPair in _LateralCostTable)
       {
-        maxDepth_LateralCostTable = Math.Max(maxDepth_LateralCostTable, kvPair.Value.Keys[kvPair.Value.Count - 1]);
+        maxDepth_LateralCostTable = (float)Math.Max(maxDepth_LateralCostTable, kvPair.Value.Keys[kvPair.Value.Count - 1]);
       } // foreach  (kvPair)
       return maxDepth_LateralCostTable;
     } // MaxDepth_LateralCostTable()
@@ -1643,7 +1643,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// Min _ manhole costs table
     /// </summary>
     /// <returns>Double</returns>
-    public double Min_ManholeCostsTable()
+    public float Min_ManholeCostsTable()
     {
       return _ManholeCostsTable.Keys[0];
     } // Min_ManholeCostsTable()
@@ -1652,7 +1652,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// Max _ manhole costs table
     /// </summary>
     /// <returns>Double</returns>
-    public double Max_ManholeCostsTable()
+    public float Max_ManholeCostsTable()
     {
       return _ManholeCostsTable.Keys[_ManholeCostsTable.Count - 1];
     } // Max_ManholeCostsTable()
@@ -1661,7 +1661,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// Min _ flow diversion costs table
     /// </summary>
     /// <returns>Double</returns>
-    public double Min_FlowDiversionCostsTable()
+    public float Min_FlowDiversionCostsTable()
     {
       return _FlowDiversionCostsTable.Keys[0];
     } // Min_FlowDiversionCostsTable()
@@ -1670,7 +1670,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// Max _ flow diversion costs table
     /// </summary>
     /// <returns>Double</returns>
-    public double Max_FlowDiversionCostsTable()
+    public float Max_FlowDiversionCostsTable()
     {
       return _FlowDiversionCostsTable.Keys[_FlowDiversionCostsTable.Count - 1];
     } // Max_FlowDiversionCostsTable()
@@ -1679,7 +1679,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// Min _CIPP cost table
     /// </summary>
     /// <returns>Double</returns>
-    public double Min_CIPPCostTable()
+    public float Min_CIPPCostTable()
     {
       return _CIPPCostTable.Keys[0];
     } // Min_CIPPCostTable()
@@ -1784,42 +1784,42 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
           _OutsideTableMessages.Clear();
 
           DirectConstructionCostItems.Add("Sawcutting AC pavement",
-          new UnitCost((decimal)((double)_SawcuttingACPavementPerSqFt), "sqft", 4));
+          new UnitCost((float)((double)_SawcuttingACPavementPerSqFt), "sqft", 4));
           DirectConstructionCostItems.Add(string.Format("Asphalt removal {0:F0} in inside diam", _InsideDiameter),
-          new UnitCost((decimal)((double)_AsphaltRemovalPerSqYd), "sqyd", AsphaltRemovalWidth / 9));
+          new UnitCost((float)((double)_AsphaltRemovalPerSqYd), "sqyd", AsphaltRemovalWidth / 9));
           DirectConstructionCostItems.Add(string.Format("Trench excavation {0:F0} ft deep, {1:F0} in inside diam", _Depth, _InsideDiameter),
-          new UnitCost((decimal)((double)TrenchExcavationCostPerCuYdFromDepth(_Depth)), "cuyd", ExcavationVolume));
+          new UnitCost((float)((double)TrenchExcavationCostPerCuYdFromDepth(_Depth)), "cuyd", ExcavationVolume));
           DirectConstructionCostItems.Add(string.Format("Truck haul excavation spoils {0:F0} ft deep, {1:F0} in inside diam", _Depth, _InsideDiameter),
-          new UnitCost((decimal)((double)_TruckHaulExcavationSpoilsPerCuYd), "cuyd", SpoilsVolume));
+          new UnitCost((float)((double)_TruckHaulExcavationSpoilsPerCuYd), "cuyd", SpoilsVolume));
           DirectConstructionCostItems.Add(string.Format("Trench shoring {0:F0} ft deep", _Depth),
-          new UnitCost((decimal)((double)_TrenchShoringPerSqFt), "sqft",  _Depth));
+          new UnitCost((float)((double)_TrenchShoringPerSqFt), "sqft",  _Depth));
           DirectConstructionCostItems.Add(string.Format("Pipe cost {0:F0} in inside diam", _InsideDiameter),
-          new UnitCost((decimal)((double)PipeCost(_Material, _InsideDiameter, out outsidePipeCostTable) * baseCostMultiplierForDepth), "ft"));
+          new UnitCost((float)((double)PipeCost(_Material, _InsideDiameter, out outsidePipeCostTable) * baseCostMultiplierForDepth), "ft"));
           if (outsidePipeCostTable)
             _OutsideTableMessages.Add("Pipe Cost", "Outside pipe cost table");
           DirectConstructionCostItems.Add(string.Format("Pipe zone backfill {0:F0} ft deep, {1:F0} in inside diam", _Depth, _InsideDiameter),
-          new UnitCost((decimal)((double)(_InsideDiameter <= 12 ?
+          new UnitCost((float)((double)(_InsideDiameter <= 12 ?
           _PipeZoneBackfillLessThanEqualTo12InDiamPerCuYd :
           _PipeZoneBackfillGreater12InDiamPerCuYd)), "cuyd", PipeZoneVolume));
           DirectConstructionCostItems.Add(string.Format("Above zone fill {0:F0} ft deep, {1:F0} in inside diam", _Depth, _InsideDiameter),
-          new UnitCost((decimal)((double)(_InsideDiameter <= 12 ?
+          new UnitCost((float)((double)(_InsideDiameter <= 12 ?
           _FillAbovePipeZoneLessThanEqualTo12InDiamPerCuYd :
           _FillAbovePipeZoneGreater12InDiamPerCuYd)), "cuyd", AboveZoneVolume));
           DirectConstructionCostItems.Add("Lateral", new UnitCost(_DefaultLateralCostPerFt, "ft", 1));
           //DirectConstructionCostItems.Add(string.Format("Lateral {0:F0} ft deep {1:F0} in inside diam", _Depth, _InsideDiameter),
-          //  new UnitCost((decimal)((double)LateralCost(_InsideDiameter, _Depth, out outsideLateralCostTable)), "ea"));
+          //  new UnitCost((float)((double)LateralCost(_InsideDiameter, _Depth, out outsideLateralCostTable)), "ea"));
           //if (outsideLateralCostTable)
           //  _OutsideTableMessages.Add("Lateral Cost", "Outside lateral cost table");
           DirectConstructionCostItems.Add(string.Format("Asphalt trench patch base course {0:F0} in inside diam", _InsideDiameter),
-          new UnitCost((decimal)((double)_AsphaltTrenchPatchBaseCoursePerCuYd), "cuyd", AsphaltBaseVolume));
+          new UnitCost((float)((double)_AsphaltTrenchPatchBaseCoursePerCuYd), "cuyd", AsphaltBaseVolume));
           DirectConstructionCostItems.Add(string.Format("Asphalt trench patch {0:F0} in inside diam", _InsideDiameter),
-          new UnitCost((decimal)((double)_AsphaltTrenchPathPerSqYd), "sqyd", AsphaltPatchSurfaceArea / 9));
+          new UnitCost((float)((double)_AsphaltTrenchPathPerSqYd), "sqyd", AsphaltPatchSurfaceArea / 9));
           break;
         case PipeMaterial.CIPP:
           _OutsideTableMessages.Clear();
 
           DirectConstructionCostItems.Add(string.Format("CIPP pipe cost {0:F0} in inside diam", _InsideDiameter),
-          new UnitCost((decimal)((double)CIPPPipeCost(_InsideDiameter, out outsideCIPPCostTable)), "ft"));
+          new UnitCost((float)((double)CIPPPipeCost(_InsideDiameter, out outsideCIPPCostTable)), "ft"));
           if (outsideCIPPCostTable)
             _OutsideTableMessages.Add("CIPP Cost", "Outside CIPP cost table");
           break;
@@ -1827,13 +1827,13 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
           _OutsideTableMessages.Clear();
 
           DirectConstructionCostItems.Add(string.Format("Pipeburst pipe cost {0:F0} in inside diam", _InsideDiameter),
-          new UnitCost((decimal)((double)PipeburstPipeCost(_InsideDiameter, out outsidePipeburstCostTable)), "ft"));
+          new UnitCost((float)((double)PipeburstPipeCost(_InsideDiameter, out outsidePipeburstCostTable)), "ft"));
           if (outsidePipeburstCostTable)
             _OutsideTableMessages.Add("Pipeburst Cost", "Outside pipeburst cost table");
           DirectConstructionCostItems.Add("Lateral (pipeburst)",
-          new UnitCost((decimal)((double)_PipeburstLateralCost), "ea"));
+          new UnitCost((float)((double)_PipeburstLateralCost), "ea"));
           DirectConstructionCostItems.Add(string.Format("TV cleaning {0:F0} in inside diameter", _InsideDiameter),
-          new UnitCost((decimal)((double)(_PipeburstTVCleanLessThanEqualTo24InDiamCost)), "ft"));
+          new UnitCost((float)((double)(_PipeburstTVCleanLessThanEqualTo24InDiamCost)), "ft"));
           break;
       } // switch
 
@@ -1870,7 +1870,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// </summary>
     /// <param name="material">Material</param>
     /// <returns>Sorted list</returns>
-    public SortedList<double, decimal> PipeCostTable(PipeMaterial material)
+    public SortedList<float, float> PipeCostTable(PipeMaterial material)
     {
       switch (material)
       {
@@ -1889,7 +1889,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// Manhole cost table
     /// </summary>
     /// <returns>Sorted list</returns>
-    public SortedList<double, ManholeCosts> ManholeCostTable()
+    public SortedList<float, ManholeCosts> ManholeCostTable()
     {
       return _ManholeCostsTable;
     } // ManholeCostTable()
@@ -1898,7 +1898,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// Flow diversion costs table
     /// </summary>
     /// <returns>Sorted list</returns>
-    public SortedList<double, decimal> FlowDiversionCostTable()
+    public SortedList<float, float> FlowDiversionCostTable()
     {
       return _FlowDiversionCostsTable;
     } // FlowDiversionCostTable()

@@ -41,7 +41,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 
     private int _Id;
     private string _Name;
-    private double _FactorValue;
+    private float _FactorValue;
     private CostFactorType _FactorType;
     private string _Comment;
     #endregion
@@ -60,7 +60,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// Create cost factor
     /// </summary>
     /// <param name="factorValue">Factor value</param>
-    public CostFactor(string name, double factorValue)
+    public CostFactor(string name, float factorValue)
     {
       _Id = _CurrentID;
       _CurrentID++;
@@ -76,7 +76,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// <param name="name">Name</param>
     /// <param name="factorValue">Factor value</param>
     /// <param name="factorType">Factor type</param>
-    public CostFactor(string name, double factorValue, CostFactorType factorType)
+    public CostFactor(string name, float factorValue, CostFactorType factorType)
     {
       _Id = _CurrentID;
       _CurrentID++;
@@ -119,7 +119,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// Create cost factor
     /// </summary>
     /// <param name="id">Id</param>
-    public CostFactor(int id, string name, double factorValue, CostFactorType factorType, string comment)
+    public CostFactor(int id, string name, float factorValue, CostFactorType factorType, string comment)
     {
       _Id = id;
       _Name = name;
@@ -165,7 +165,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// Factor value
     /// </summary>
     /// <returns>Double</returns>
-    public double FactorValue
+    public float FactorValue
     {
       get
       {

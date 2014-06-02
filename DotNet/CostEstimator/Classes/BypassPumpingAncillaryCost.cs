@@ -66,20 +66,20 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// <summary>
     /// Cost
     /// </summary>
-    /// <returns>Decimal</returns>
-    public decimal Cost
+    /// <returns>float</returns>
+    public float Cost
     {
       get
       {
-        return (decimal)((double)UnitCost * Units);
+        return (float)((double)UnitCost * Units);
       }
     } // Cost
 
     /// <summary>
     /// Unit cost
     /// </summary>
-    /// <returns>Decimal</returns>
-    public decimal UnitCost
+    /// <returns>float</returns>
+    public float UnitCost
     {
       get
       {
@@ -119,7 +119,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// Units
     /// </summary>
     /// <returns>Double</returns>
-    public double Units
+    public float Units
     {
       get
       {
@@ -146,12 +146,12 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// Pipe capacity
     /// </summary>
     /// <returns>Double</returns>
-    private double PipeCapacity
+    private float PipeCapacity
     {
       get
       {
-        double pipeCapacity = 0.464 / 0.013 * Math.Pow(_ConflictPackage.Diameter / 12, 8 / 3) *
-        Math.Sqrt(_ConflictPackage.Slope);
+        float pipeCapacity = (float)(0.464 / 0.013 * Math.Pow(_ConflictPackage.Diameter / 12, 8 / 3) *
+                                            Math.Sqrt(_ConflictPackage.Slope));
         return pipeCapacity;
       } // get
     } // PipeCapacity
@@ -160,7 +160,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// Bypass flow
     /// </summary>
     /// <returns>Double</returns>
-    private double BypassFlow
+    private float BypassFlow
     {
       get
       {

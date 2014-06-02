@@ -6,6 +6,6 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 {
   class Common
   {
-    public const double SQUARE_FEET_PER_ACRE = 43560;
+    public const float SQUARE_FEET_PER_ACRE = 43560;
   }
 }

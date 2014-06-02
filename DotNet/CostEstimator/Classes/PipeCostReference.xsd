@@ -7,17 +7,17 @@
         <xs:element minOccurs="1" maxOccurs="1" name="TrenchedConstants">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="sawCuttingACPavementPerSqFt" type="xs:decimal" />
-              <xs:element name="asphaltRemovalPerSqYd" type="xs:decimal" />
-              <xs:element name="trenchExcavationPerCuYd" type="xs:decimal" />
-              <xs:element name="truckHaulExcavationSpoilsPerCuYd" type="xs:decimal" />
-              <xs:element name="trenchShoringPerSqFt" type="xs:decimal" />
-              <xs:element name="asphaltTrenchPatchBaseCoursePerCuYd" type="xs:decimal" />
-              <xs:element name="asphaltTrenchPatchPerSqYd" type="xs:decimal" />
-              <xs:element name="pipeZoneBackfillLessThanEqualTo12InDiamPerCuYd" type="xs:decimal" />
-              <xs:element name="pipeZoneBackfillGreaterThan12InDiamPerCuYd" type="xs:decimal" />
-              <xs:element name="fillAbovePipeZoneLessThanEqualTo12InDiamPerCuYd" type="xs:decimal" />
-              <xs:element name="fillAbovePipeZoneGreaterThan12InDiamPerCuYd" type="xs:decimal" />
+              <xs:element name="sawCuttingACPavementPerSqFt" type="xs:float" />
+              <xs:element name="asphaltRemovalPerSqYd" type="xs:float" />
+              <xs:element name="trenchExcavationPerCuYd" type="xs:float" />
+              <xs:element name="truckHaulExcavationSpoilsPerCuYd" type="xs:float" />
+              <xs:element name="trenchShoringPerSqFt" type="xs:float" />
+              <xs:element name="asphaltTrenchPatchBaseCoursePerCuYd" type="xs:float" />
+              <xs:element name="asphaltTrenchPatchPerSqYd" type="xs:float" />
+              <xs:element name="pipeZoneBackfillLessThanEqualTo12InDiamPerCuYd" type="xs:float" />
+              <xs:element name="pipeZoneBackfillGreaterThan12InDiamPerCuYd" type="xs:float" />
+              <xs:element name="fillAbovePipeZoneLessThanEqualTo12InDiamPerCuYd" type="xs:float" />
+              <xs:element name="fillAbovePipeZoneGreaterThan12InDiamPerCuYd" type="xs:float" />
               <xs:element name="spoilsFactor" type="xs:double" />
             </xs:sequence>
           </xs:complexType>
@@ -87,7 +87,7 @@
                   <xs:sequence>
                     <xs:element name="diameterIn" type="xs:double" />
                     <xs:element name="material" type="xs:string" />
-                    <xs:element name="costPerFt" type="xs:decimal" />
+                    <xs:element name="costPerFt" type="xs:float" />
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>
@@ -102,7 +102,7 @@
                   <xs:sequence>
                     <xs:element name="insideDiameterIn" type="xs:double" />
                     <xs:element name="depthFt" type="xs:double" />
-                    <xs:element name="costPerFt" type="xs:decimal" />
+                    <xs:element name="costPerFt" type="xs:float" />
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>
@@ -116,8 +116,8 @@
                 <xs:complexType>
                   <xs:sequence>
                     <xs:element name="manholeDiameterIn" type="xs:double" />
-                    <xs:element name="baseCost" type="xs:decimal" />
-                    <xs:element name="costPerFtDepthAbove8Ft" type="xs:decimal" />
+                    <xs:element name="baseCost" type="xs:float" />
+                    <xs:element name="costPerFtDepthAbove8Ft" type="xs:float" />
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>
@@ -127,18 +127,18 @@
         <xs:element minOccurs="1" maxOccurs="1" name="TrenchlessCIPPConstants">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="lateralLessThanEqualTo24InDiamCost" type="xs:decimal" />
-              <xs:element name="lateralGreaterThan24InDiamCost" type="xs:decimal" />
-              <xs:element name="tvCleanLessThanEqualTo24InDiamCost" type="xs:decimal" />
-              <xs:element name="tvCleanGreaterThan24InDiamCost" type="xs:decimal" />
+              <xs:element name="lateralLessThanEqualTo24InDiamCost" type="xs:float" />
+              <xs:element name="lateralGreaterThan24InDiamCost" type="xs:float" />
+              <xs:element name="tvCleanLessThanEqualTo24InDiamCost" type="xs:float" />
+              <xs:element name="tvCleanGreaterThan24InDiamCost" type="xs:float" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
         <xs:element minOccurs="1" maxOccurs="1" name="TrenchlessPipeburstConstants">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="lateralCost" type="xs:decimal" />
-              <xs:element name="tvCleanLessThanEqualTo24InDiamCost" type="xs:decimal" />
+              <xs:element name="lateralCost" type="xs:float" />
+              <xs:element name="tvCleanLessThanEqualTo24InDiamCost" type="xs:float" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
@@ -149,7 +149,7 @@
                 <xs:complexType>
                   <xs:sequence>
                     <xs:element name="insideDiameterIn" type="xs:double" />
-                    <xs:element name="costPerFt" type="xs:decimal" />
+                    <xs:element name="costPerFt" type="xs:float" />
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>
@@ -163,7 +163,7 @@
                 <xs:complexType>
                   <xs:sequence>
                     <xs:element name="insideDiameterIn" type="xs:double" />
-                    <xs:element name="costPerFt" type="xs:decimal" />
+                    <xs:element name="costPerFt" type="xs:float" />
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>
@@ -177,7 +177,7 @@
                 <xs:complexType>
                   <xs:sequence>
                     <xs:element name="insideDiameterIn" type="xs:double" />
-                    <xs:element name="costPerFt" type="xs:decimal" />
+                    <xs:element name="costPerFt" type="xs:float" />
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>

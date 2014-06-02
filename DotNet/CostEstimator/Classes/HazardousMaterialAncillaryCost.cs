@@ -22,7 +22,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
   class HazardousMaterialAncillaryCost : AncillaryCost
   {
     #region Constants
-    private const decimal UNIT_COST_HAZARDOUS_MATERIAL_HANDLING_PER_CUBIC_YARD = 50;
+    private const float UNIT_COST_HAZARDOUS_MATERIAL_HANDLING_PER_CUBIC_YARD = 50;
     private const int HAZARDOUS_MATERIAL_TRENCH_IMPACT_LENGTH_FEET = 50;
     #endregion
 
@@ -57,20 +57,20 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// <summary>
     /// Cost
     /// </summary>
-    /// <returns>Decimal</returns>
-    public decimal Cost
+    /// <returns>float</returns>
+    public float Cost
     {
       get
       {
-        return (decimal)((double)UnitCost * Units);
+        return (float)((double)UnitCost * Units);
       }
     } // Cost
 
     /// <summary>
     /// Unit cost
     /// </summary>
-    /// <returns>Decimal</returns>
-    public decimal UnitCost
+    /// <returns>float</returns>
+    public float UnitCost
     {
       get
       {
@@ -94,7 +94,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// Units
     /// </summary>
     /// <returns>Double</returns>
-    public double Units
+    public float Units
     {
       get
       {
@@ -109,8 +109,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
         if (pipeCoster.ExcavationVolume <= 0 || _ConflictPackage.Length <= 0)
           return 0;
         else
-          return (affectedLength / _ConflictPackage.Length) *
-          (pipeCoster.ExcavationVolume * _ConflictPackage.Length);
+          return (float)((affectedLength / _ConflictPackage.Length) *
+                                  (pipeCoster.ExcavationVolume * _ConflictPackage.Length));
       } // get
     } // Units
 
