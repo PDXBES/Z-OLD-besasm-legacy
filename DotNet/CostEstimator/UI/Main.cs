@@ -1579,5 +1579,11 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       else
         SetupProjectForCostGrid();
     }
+
+    private void btnCancel_Click(object sender, EventArgs e)
+    {
+      if (bkgWorkerLoadRehab.IsBusy)
+        bkgWorkerLoadRehab.CancelAsync();
+    }
   }
 }

@@ -64,7 +64,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand10 = new Infragistics.Win.UltraWinGrid.UltraGridBand("FlowDiversion", 0);
       Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn27 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Name");
       Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn28 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Value");
-      Infragistics.Win.Layout.GridBagConstraint gridBagConstraint21 = new Infragistics.Win.Layout.GridBagConstraint();
+      Infragistics.Win.Layout.GridBagConstraint gridBagConstraint22 = new Infragistics.Win.Layout.GridBagConstraint();
       Infragistics.Win.UltraWinDataSource.UltraDataBand ultraDataBand1 = new Infragistics.Win.UltraWinDataSource.UltraDataBand("Params");
       Infragistics.Win.UltraWinDataSource.UltraDataColumn ultraDataColumn3 = new Infragistics.Win.UltraWinDataSource.UltraDataColumn("Name");
       Infragistics.Win.UltraWinDataSource.UltraDataColumn ultraDataColumn4 = new Infragistics.Win.UltraWinDataSource.UltraDataColumn("Value");
@@ -91,7 +91,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       Infragistics.Win.UltraWinDataSource.UltraDataColumn ultraDataColumn18 = new Infragistics.Win.UltraWinDataSource.UltraDataColumn("Name");
       Infragistics.Win.UltraWinDataSource.UltraDataColumn ultraDataColumn19 = new Infragistics.Win.UltraWinDataSource.UltraDataColumn("Value");
       Infragistics.Win.UltraWinDataSource.UltraDataColumn ultraDataColumn20 = new Infragistics.Win.UltraWinDataSource.UltraDataColumn("Name");
-      Infragistics.Win.Layout.GridBagConstraint gridBagConstraint22 = new Infragistics.Win.Layout.GridBagConstraint();
+      Infragistics.Win.Layout.GridBagConstraint gridBagConstraint23 = new Infragistics.Win.Layout.GridBagConstraint();
       Infragistics.Win.UltraWinGrid.UltraGridBand ultraGridBand1 = new Infragistics.Win.UltraWinGrid.UltraGridBand("InflowControlCosterParameters", -1);
       Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn1 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Name");
       Infragistics.Win.UltraWinGrid.UltraGridColumn ultraGridColumn2 = new Infragistics.Win.UltraWinGrid.UltraGridColumn("Value");
@@ -109,8 +109,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       Infragistics.Win.Layout.GridBagConstraint gridBagConstraint5 = new Infragistics.Win.Layout.GridBagConstraint();
       Infragistics.Win.Appearance appearance1 = new Infragistics.Win.Appearance();
       Infragistics.Win.Layout.GridBagConstraint gridBagConstraint6 = new Infragistics.Win.Layout.GridBagConstraint();
-      Infragistics.Win.Layout.GridBagConstraint gridBagConstraint19 = new Infragistics.Win.Layout.GridBagConstraint();
       Infragistics.Win.Layout.GridBagConstraint gridBagConstraint20 = new Infragistics.Win.Layout.GridBagConstraint();
+      Infragistics.Win.Layout.GridBagConstraint gridBagConstraint21 = new Infragistics.Win.Layout.GridBagConstraint();
       Infragistics.Win.UltraWinTabControl.UltraTab ultraTab1 = new Infragistics.Win.UltraWinTabControl.UltraTab();
       Infragistics.Win.UltraWinTabControl.UltraTab ultraTab2 = new Infragistics.Win.UltraWinTabControl.UltraTab();
       Infragistics.Win.Layout.GridBagConstraint gridBagConstraint7 = new Infragistics.Win.Layout.GridBagConstraint();
@@ -122,8 +122,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       Infragistics.Win.Appearance appearance3 = new Infragistics.Win.Appearance();
       Infragistics.Win.Layout.GridBagConstraint gridBagConstraint11 = new Infragistics.Win.Layout.GridBagConstraint();
       Infragistics.Win.Appearance appearance4 = new Infragistics.Win.Appearance();
-      Infragistics.Win.Layout.GridBagConstraint gridBagConstraint17 = new Infragistics.Win.Layout.GridBagConstraint();
       Infragistics.Win.Layout.GridBagConstraint gridBagConstraint18 = new Infragistics.Win.Layout.GridBagConstraint();
+      Infragistics.Win.Layout.GridBagConstraint gridBagConstraint19 = new Infragistics.Win.Layout.GridBagConstraint();
       Infragistics.Win.UltraWinTabControl.UltraTab ultraTab3 = new Infragistics.Win.UltraWinTabControl.UltraTab();
       Infragistics.Win.UltraWinTabControl.UltraTab ultraTab4 = new Infragistics.Win.UltraWinTabControl.UltraTab();
       Infragistics.Win.UltraWinTabControl.UltraTab ultraTab5 = new Infragistics.Win.UltraWinTabControl.UltraTab();
@@ -192,6 +192,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool35 = new Infragistics.Win.UltraWinToolbars.ButtonTool("Cleanup AltPipXP");
       Infragistics.Win.UltraWinToolbars.ListTool listTool2 = new Infragistics.Win.UltraWinToolbars.ListTool("Most Recently Used Files");
       Infragistics.Win.UltraWinToolbars.ButtonTool buttonTool36 = new Infragistics.Win.UltraWinToolbars.ButtonTool("Options");
+      Infragistics.Win.Layout.GridBagConstraint gridBagConstraint17 = new Infragistics.Win.Layout.GridBagConstraint();
       this.ultraTabPageControl9 = new Infragistics.Win.UltraWinTabControl.UltraTabPageControl();
       this.ultraGridBagLayoutPanel8 = new Infragistics.Win.Misc.UltraGridBagLayoutPanel();
       this.gridGlobalPipeSettings = new Infragistics.Win.UltraWinGrid.UltraGrid();
@@ -254,6 +255,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       this.dlgSave = new System.Windows.Forms.SaveFileDialog();
       this.bkgWorkerLoadModel = new System.ComponentModel.BackgroundWorker();
       this.bkgWorkerLoadRehab = new System.ComponentModel.BackgroundWorker();
+      this.btnCancel = new Infragistics.Win.Misc.UltraButton();
       this.ultraTabPageControl9.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.ultraGridBagLayoutPanel8)).BeginInit();
       this.ultraGridBagLayoutPanel8.SuspendLayout();
@@ -405,13 +407,13 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       this.gridGlobalPipeSettings.DisplayLayout.BandsSerializer.Add(ultraGridBand10);
       this.gridGlobalPipeSettings.DisplayLayout.CaptionVisible = Infragistics.Win.DefaultableBoolean.False;
       this.gridGlobalPipeSettings.DisplayLayout.ScrollStyle = Infragistics.Win.UltraWinGrid.ScrollStyle.Immediate;
-      gridBagConstraint21.Fill = Infragistics.Win.Layout.FillType.Both;
-      gridBagConstraint21.Insets.Bottom = 8;
-      gridBagConstraint21.OriginX = 0;
-      gridBagConstraint21.OriginY = 0;
-      gridBagConstraint21.WeightX = 1F;
-      gridBagConstraint21.WeightY = 1F;
-      this.ultraGridBagLayoutPanel8.SetGridBagConstraint(this.gridGlobalPipeSettings, gridBagConstraint21);
+      gridBagConstraint22.Fill = Infragistics.Win.Layout.FillType.Both;
+      gridBagConstraint22.Insets.Bottom = 8;
+      gridBagConstraint22.OriginX = 0;
+      gridBagConstraint22.OriginY = 0;
+      gridBagConstraint22.WeightX = 1F;
+      gridBagConstraint22.WeightY = 1F;
+      this.ultraGridBagLayoutPanel8.SetGridBagConstraint(this.gridGlobalPipeSettings, gridBagConstraint22);
       this.gridGlobalPipeSettings.Location = new System.Drawing.Point(0, 0);
       this.gridGlobalPipeSettings.Name = "gridGlobalPipeSettings";
       this.ultraGridBagLayoutPanel8.SetPreferredSize(this.gridGlobalPipeSettings, new System.Drawing.Size(550, 80));
@@ -466,10 +468,10 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       // 
       // btnExportPipeCostTables
       // 
-      gridBagConstraint22.Anchor = Infragistics.Win.Layout.AnchorType.Right;
-      gridBagConstraint22.OriginX = 0;
-      gridBagConstraint22.OriginY = 1;
-      this.ultraGridBagLayoutPanel8.SetGridBagConstraint(this.btnExportPipeCostTables, gridBagConstraint22);
+      gridBagConstraint23.Anchor = Infragistics.Win.Layout.AnchorType.Right;
+      gridBagConstraint23.OriginX = 0;
+      gridBagConstraint23.OriginY = 1;
+      this.ultraGridBagLayoutPanel8.SetGridBagConstraint(this.btnExportPipeCostTables, gridBagConstraint23);
       this.btnExportPipeCostTables.Location = new System.Drawing.Point(612, 387);
       this.btnExportPipeCostTables.Name = "btnExportPipeCostTables";
       this.ultraGridBagLayoutPanel8.SetPreferredSize(this.btnExportPipeCostTables, new System.Drawing.Size(150, 23));
@@ -518,7 +520,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       // pageHome
       // 
       this.pageHome.Controls.Add(this.pnlHome);
-      this.pageHome.Location = new System.Drawing.Point(9, 32);
+      this.pageHome.Location = new System.Drawing.Point(-10000, -10000);
       this.pageHome.Name = "pageHome";
       this.pageHome.Size = new System.Drawing.Size(874, 459);
       // 
@@ -765,10 +767,10 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       // 
       // btnCloseGlobalSettings
       // 
-      gridBagConstraint19.Anchor = Infragistics.Win.Layout.AnchorType.Right;
-      gridBagConstraint19.OriginX = 0;
-      gridBagConstraint19.OriginY = 1;
-      this.ultraGridBagLayoutPanel7.SetGridBagConstraint(this.btnCloseGlobalSettings, gridBagConstraint19);
+      gridBagConstraint20.Anchor = Infragistics.Win.Layout.AnchorType.Right;
+      gridBagConstraint20.OriginX = 0;
+      gridBagConstraint20.OriginY = 1;
+      this.ultraGridBagLayoutPanel7.SetGridBagConstraint(this.btnCloseGlobalSettings, gridBagConstraint20);
       this.btnCloseGlobalSettings.Location = new System.Drawing.Point(799, 436);
       this.btnCloseGlobalSettings.Name = "btnCloseGlobalSettings";
       this.ultraGridBagLayoutPanel7.SetPreferredSize(this.btnCloseGlobalSettings, new System.Drawing.Size(75, 23));
@@ -782,13 +784,13 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       this.tabGlobalSettings.Controls.Add(this.ultraTabSharedControlsPage2);
       this.tabGlobalSettings.Controls.Add(this.ultraTabPageControl9);
       this.tabGlobalSettings.Controls.Add(this.ultraTabPageControl10);
-      gridBagConstraint20.Fill = Infragistics.Win.Layout.FillType.Both;
-      gridBagConstraint20.Insets.Bottom = 8;
-      gridBagConstraint20.OriginX = 0;
-      gridBagConstraint20.OriginY = 0;
-      gridBagConstraint20.WeightX = 1F;
-      gridBagConstraint20.WeightY = 1F;
-      this.ultraGridBagLayoutPanel7.SetGridBagConstraint(this.tabGlobalSettings, gridBagConstraint20);
+      gridBagConstraint21.Fill = Infragistics.Win.Layout.FillType.Both;
+      gridBagConstraint21.Insets.Bottom = 8;
+      gridBagConstraint21.OriginX = 0;
+      gridBagConstraint21.OriginY = 0;
+      gridBagConstraint21.WeightX = 1F;
+      gridBagConstraint21.WeightY = 1F;
+      this.ultraGridBagLayoutPanel7.SetGridBagConstraint(this.tabGlobalSettings, gridBagConstraint21);
       this.tabGlobalSettings.Location = new System.Drawing.Point(0, 0);
       this.tabGlobalSettings.Name = "tabGlobalSettings";
       this.ultraGridBagLayoutPanel7.SetPreferredSize(this.tabGlobalSettings, new System.Drawing.Size(905, 449));
@@ -921,13 +923,14 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       // pageProgress
       // 
       this.pageProgress.Controls.Add(this.ultraGridBagLayoutPanel4);
-      this.pageProgress.Location = new System.Drawing.Point(-10000, -10000);
+      this.pageProgress.Location = new System.Drawing.Point(9, 32);
       this.pageProgress.Name = "pageProgress";
       this.pageProgress.Size = new System.Drawing.Size(874, 459);
       // 
       // ultraGridBagLayoutPanel4
       // 
       this.ultraGridBagLayoutPanel4.BackColor = System.Drawing.Color.Transparent;
+      this.ultraGridBagLayoutPanel4.Controls.Add(this.btnCancel);
       this.ultraGridBagLayoutPanel4.Controls.Add(this.lblProgress);
       this.ultraGridBagLayoutPanel4.Controls.Add(this.prgMainProgress);
       this.ultraGridBagLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -941,11 +944,11 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       // 
       appearance4.TextHAlignAsString = "Center";
       this.lblProgress.Appearance = appearance4;
-      gridBagConstraint17.Fill = Infragistics.Win.Layout.FillType.Both;
-      gridBagConstraint17.OriginX = 0;
-      gridBagConstraint17.OriginY = 0;
-      this.ultraGridBagLayoutPanel4.SetGridBagConstraint(this.lblProgress, gridBagConstraint17);
-      this.lblProgress.Location = new System.Drawing.Point(16, 206);
+      gridBagConstraint18.Fill = Infragistics.Win.Layout.FillType.Both;
+      gridBagConstraint18.OriginX = 0;
+      gridBagConstraint18.OriginY = 0;
+      this.ultraGridBagLayoutPanel4.SetGridBagConstraint(this.lblProgress, gridBagConstraint18);
+      this.lblProgress.Location = new System.Drawing.Point(16, 191);
       this.lblProgress.Name = "lblProgress";
       this.ultraGridBagLayoutPanel4.SetPreferredSize(this.lblProgress, new System.Drawing.Size(100, 23));
       this.lblProgress.Size = new System.Drawing.Size(842, 23);
@@ -953,12 +956,13 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       // 
       // prgMainProgress
       // 
-      gridBagConstraint18.Fill = Infragistics.Win.Layout.FillType.Both;
-      gridBagConstraint18.OriginX = 0;
-      gridBagConstraint18.OriginY = 1;
-      gridBagConstraint18.WeightX = 1F;
-      this.ultraGridBagLayoutPanel4.SetGridBagConstraint(this.prgMainProgress, gridBagConstraint18);
-      this.prgMainProgress.Location = new System.Drawing.Point(16, 229);
+      gridBagConstraint19.Fill = Infragistics.Win.Layout.FillType.Both;
+      gridBagConstraint19.Insets.Bottom = 8;
+      gridBagConstraint19.OriginX = 0;
+      gridBagConstraint19.OriginY = 1;
+      gridBagConstraint19.WeightX = 1F;
+      this.ultraGridBagLayoutPanel4.SetGridBagConstraint(this.prgMainProgress, gridBagConstraint19);
+      this.prgMainProgress.Location = new System.Drawing.Point(16, 214);
       this.prgMainProgress.Name = "prgMainProgress";
       this.ultraGridBagLayoutPanel4.SetPreferredSize(this.prgMainProgress, new System.Drawing.Size(75, 23));
       this.prgMainProgress.Size = new System.Drawing.Size(842, 23);
@@ -1272,9 +1276,23 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       // bkgWorkerLoadRehab
       // 
       this.bkgWorkerLoadRehab.WorkerReportsProgress = true;
+      this.bkgWorkerLoadRehab.WorkerSupportsCancellation = true;
       this.bkgWorkerLoadRehab.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bkgWorkerLoadRehab_DoWork);
       this.bkgWorkerLoadRehab.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bkgWorkerLoadRehab_ProgressChanged);
       this.bkgWorkerLoadRehab.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bkgWorkerLoadRehab_RunWorkerCompleted);
+      // 
+      // btnCancel
+      // 
+      gridBagConstraint17.OriginX = 0;
+      gridBagConstraint17.OriginY = 2;
+      this.ultraGridBagLayoutPanel4.SetGridBagConstraint(this.btnCancel, gridBagConstraint17);
+      this.btnCancel.Location = new System.Drawing.Point(387, 245);
+      this.btnCancel.Name = "btnCancel";
+      this.ultraGridBagLayoutPanel4.SetPreferredSize(this.btnCancel, new System.Drawing.Size(100, 23));
+      this.btnCancel.Size = new System.Drawing.Size(100, 23);
+      this.btnCancel.TabIndex = 2;
+      this.btnCancel.Text = "Cancel";
+      this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
       // 
       // Main
       // 
@@ -1397,6 +1415,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
     internal Infragistics.Win.UltraWinToolbars.UltraToolbarsManager toolbarManager;
     private Infragistics.Win.Misc.UltraButton btnEstimateSystemwideRehab;
     private System.ComponentModel.BackgroundWorker bkgWorkerLoadRehab;
+    private Infragistics.Win.Misc.UltraButton btnCancel;
 	}
 }
 
