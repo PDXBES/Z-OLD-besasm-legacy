@@ -2016,6 +2016,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
                   string.Format("Reading segments: {0} out of {1}, {2} minutes left (elapsed: {3}/expected: {4} {5:G5}, {6}, {7})",
                   segmentCounter, totalCount, durationLeft, elapsedDuration, expectedDuration, fractionDone,
                   startTime, DateTime.Now));
+                GC.Collect();
               }
 
               currentSegment = new Segment(reader);
@@ -2165,6 +2166,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
               //reportPipeItem.ConstructionDuration =
               //ConstructionDurationCalculator.ConstructionDurationDays(
               //ancillaryCoster.CurrentConflictPackage);
+
             }
             catch (Exception e)
             {
