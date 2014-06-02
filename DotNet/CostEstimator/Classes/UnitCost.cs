@@ -19,16 +19,16 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
   /// </summary>
   public struct UnitCost
   {
-    public decimal CostPerUnit;
+    public float CostPerUnit;
     public string UnitName;
-    public double Units;
+    public float Units;
 
     /// <summary>
     /// Create unit cost
     /// </summary>
     /// <param name="units">Units</param>
     /// <param name="unitName">Unit name</param>
-    public UnitCost(decimal costPerUnit, string unitName)
+    public UnitCost(float costPerUnit, string unitName)
       : this(costPerUnit, unitName, 1)
     {
     } // UnitCost(units, unitName)
@@ -39,7 +39,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// <param name="costPerUnit">Cost per unit</param>
     /// <param name="unitName">Unit name</param>
     /// <param name="units">Units</param>
-    public UnitCost(decimal costPerUnit, string unitName, double units)
+    public UnitCost(float costPerUnit, string unitName, float units)
     {
       CostPerUnit = costPerUnit;
       UnitName = unitName;

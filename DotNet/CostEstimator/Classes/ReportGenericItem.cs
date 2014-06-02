@@ -24,7 +24,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     private string _Name;
     private double _Quantity;
     private string _UnitName;
-    private decimal _UnitPrice;
+    private float _UnitPrice;
     private string _Group;
     private CostItemFactor _Item;
     private string _Comment = string.Empty;
@@ -85,8 +85,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// <summary>
     /// Unit price
     /// </summary>
-    /// <returns>Decimal</returns>
-    public decimal UnitPrice
+    /// <returns>float</returns>
+    public float UnitPrice
     {
       get
       {
@@ -135,12 +135,12 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// <summary>
     /// Total cost
     /// </summary>
-    /// <returns>Decimal</returns>
-    public decimal TotalCost
+    /// <returns>float</returns>
+    public float TotalCost
     {
       get
       {
-        return (decimal)((double)_UnitPrice * _Quantity);
+        return (float)((double)_UnitPrice * _Quantity);
       } // get
     } // TotalCost
 

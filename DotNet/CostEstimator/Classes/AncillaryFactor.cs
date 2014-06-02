@@ -32,7 +32,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// Factor value
     /// </summary>
     /// <returns>Double</returns>
-    double Factor { get; } // Factor
+    float Factor { get; } // Factor
 
     /// <summary>
     /// Ancillary factor

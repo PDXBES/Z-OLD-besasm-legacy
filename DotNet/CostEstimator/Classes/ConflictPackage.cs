@@ -66,11 +66,11 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// Diameter in feet
     /// </summary>
     /// <returns>Double</returns>
-    public double Diameter
+    public float Diameter
     {
       get
       {
-        return _AltPackage == null ? _Link.Diameter : _AltLink.Diameter;
+        return _AltPackage == null ? (float)_Link.Diameter : (float)_AltLink.Diameter;
       } // get
     } // Diameter
 
@@ -78,12 +78,12 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// Average depth in feet (average of upstream and downstream depths)
     /// </summary>
     /// <returns>Double</returns>
-    public double Depth
+    public float Depth
     {
       get
       {
-        return _AltPackage == null ? _Model.PipeDepth(_Link) :
-        _AltPackage.PipeDepth(_AltLink);
+        return _AltPackage == null ? (float)_Model.PipeDepth(_Link) :
+          (float)_AltPackage.PipeDepth(_AltLink);
       } // get
     } // Depth
 
@@ -91,12 +91,12 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// Length in feet
     /// </summary>
     /// <returns>Double</returns>
-    public double Length
+    public float Length
     {
       get
       {
-        return _AltPackage == null ? _Link.Length :
-        _AltLink.Length;
+        return _AltPackage == null ? (float)_Link.Length :
+          (float)_AltLink.Length;
       } // get
     } // Length
 
@@ -104,12 +104,12 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// Slope in ft/ft
     /// </summary>
     /// <returns>Double</returns>
-    public double Slope
+    public float Slope
     {
       get
       {
-        return _AltPackage == null ? (_Link.USIE - _Link.DSIE) / _Link.Length :
-        (_AltLink.USIE - _AltLink.DSIE) / _AltLink.Length;
+        return _AltPackage == null ? (float)((_Link.USIE - _Link.DSIE) / _Link.Length) :
+          (float)((_AltLink.USIE - _AltLink.DSIE) / _AltLink.Length);
       }
     } // Slope
 

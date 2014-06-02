@@ -3,18 +3,18 @@
   <xs:element name="InflowControlCostOptions">
     <xs:complexType>
       <xs:sequence>
-        <xs:element name="GreenStreetPlanterCostPerAcre" type="xs:decimal" />
-        <xs:element name="InfiltrationPlanterCostPerAcre" type="xs:decimal" />
-        <xs:element name="VegetatedInfiltrationBasinCostPerAcre" type="xs:decimal" />
-        <xs:element name="DownspoutDisconnectionCostPerAcre" type="xs:decimal" />
-        <xs:element name="EcoroofCostPerAcre" type="xs:decimal" />
-        <xs:element name="CurbExtensionMinCost" type="xs:decimal" />
-        <xs:element name="CurbExtensionCostPerCuFt" type="xs:decimal" />
+        <xs:element name="GreenStreetPlanterCostPerAcre" type="xs:float" />
+        <xs:element name="InfiltrationPlanterCostPerAcre" type="xs:float" />
+        <xs:element name="VegetatedInfiltrationBasinCostPerAcre" type="xs:float" />
+        <xs:element name="DownspoutDisconnectionCostPerAcre" type="xs:float" />
+        <xs:element name="EcoroofCostPerAcre" type="xs:float" />
+        <xs:element name="CurbExtensionMinCost" type="xs:float" />
+        <xs:element name="CurbExtensionCostPerCuFt" type="xs:float" />
         <xs:element name="CurbExtensionMinCuFt" type="xs:double" />
-        <xs:element name="StormwaterPlanterMinCost" type="xs:decimal" />
-        <xs:element name="StormwaterPlanterCostPerCuFt" type="xs:decimal" />
+        <xs:element name="StormwaterPlanterMinCost" type="xs:float" />
+        <xs:element name="StormwaterPlanterCostPerCuFt" type="xs:float" />
         <xs:element name="StormwaterPlanterMinCuFt" type="xs:double" />
-        <xs:element name="FlowRestrictorCost" type="xs:decimal" />
+        <xs:element name="FlowRestrictorCost" type="xs:float" />
         <xs:element name="BaseENR" type="xs:int" />
       </xs:sequence>
     </xs:complexType>

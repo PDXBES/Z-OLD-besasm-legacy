@@ -33,7 +33,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// manhole, pavement, and crossings)
     /// </summary>
     /// <returns>Number of fractional days needed to build pipe</returns>
-    public static double ConstructionDurationDays(ConflictPackage conflictPackage)
+    public static float ConstructionDurationDays(ConflictPackage conflictPackage)
     {
       PipeCoster pipeCoster = new PipeCoster();
 
@@ -41,16 +41,16 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       pipeCoster.Depth = conflictPackage.Depth;
       pipeCoster.Material = conflictPackage.PipeMaterial;
 
-      double numDays = 0;
+      float numDays = 0;
 
       if (conflictPackage.Depth > BOREJACK_DEPTH_FT)
       {
         BoringJackingAncillaryCost testBoring = new BoringJackingAncillaryCost(conflictPackage);
         numDays = testBoring.IsMicroTunnel ?
-        Math.Ceiling(conflictPackage.Length / MICROTUNNEL_BUILD_RATE_PER_DAY_FT) :
-        conflictPackage.Diameter <= BOREJACK_SLOWERDIAMETER_IN ?
-        Math.Ceiling(conflictPackage.Length / BOREJACK_FAST_BUILD_RATE_PER_DAY_FT) :
-        Math.Ceiling(conflictPackage.Length / BOREJACK_SLOW_BUILD_RATE_PER_DAY_FT);
+          (float)Math.Ceiling(conflictPackage.Length / MICROTUNNEL_BUILD_RATE_PER_DAY_FT) :
+          conflictPackage.Diameter <= BOREJACK_SLOWERDIAMETER_IN ?
+          (float)Math.Ceiling(conflictPackage.Length / BOREJACK_FAST_BUILD_RATE_PER_DAY_FT) :
+          (float)Math.Ceiling(conflictPackage.Length / BOREJACK_SLOW_BUILD_RATE_PER_DAY_FT);
       } // if
       else
       {
@@ -70,11 +70,11 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
         // Pavement repair at 250 feet per day
         double pavementRepairDurationDays = conflictPackage.Length / PAVEMENT_REPAIR_RATE_PER_DAY_FT;
 
-        numDays = Math.Ceiling(
-        manholeConstructionDurationDays +
-        mainlineConstructionDurationDays +
-        utilityCrossingDurationDays +
-        pavementRepairDurationDays);
+        numDays = (float)Math.Ceiling(
+          manholeConstructionDurationDays +
+          mainlineConstructionDurationDays +
+          utilityCrossingDurationDays +
+          pavementRepairDurationDays);
       } // else
 
       if (numDays < 0)

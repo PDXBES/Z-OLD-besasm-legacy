@@ -25,14 +25,14 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// <summary>
     /// Cost
     /// </summary>
-    /// <returns>Decimal</returns>
-    decimal Cost { get; } // Cost
+    /// <returns>float</returns>
+    float Cost { get; } // Cost
 
     /// <summary>
     /// Unit cost
     /// </summary>
-    /// <returns>Decimal</returns>
-    decimal UnitCost { get; } // UnitCost
+    /// <returns>float</returns>
+    float UnitCost { get; } // UnitCost
 
     /// <summary>
     /// Unit
@@ -44,7 +44,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// Units
     /// </summary>
     /// <returns>Double</returns>
-    double Units { get; } // Units
+    float Units { get; } // Units
 
     /// <summary>
     /// Ancillary cost; generally returns a reference to self if there is a

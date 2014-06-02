@@ -499,7 +499,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       {
         DirectConstructionSelection dcItem = new DirectConstructionSelection { Selected = false,
         Name = item,
-        Factor = 0.0 };
+        Factor = 0.0f };
         _directConstructionSelection.Add(dcItem);
       } // foreach  (item)
       dsOtherDirectConstructionFactors.Rows.SetCount(_directConstructionItems.Count);
@@ -872,7 +872,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
               string.Empty : Convert.ToString(e.NewValue);
               break;
             case "Quantity":
-              _project.CostItemFactorFromPool(id).Quantity = Convert.ToDouble(e.NewValue);
+              _project.CostItemFactorFromPool(id).Quantity = (float)Convert.ToDouble(e.NewValue);
               break;
             case "Comment":
               _project.CostItemFactorFromPool(id).Comment = e.NewValue == null ?
@@ -888,10 +888,10 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
               string.Empty : Convert.ToString(e.NewValue);
               break;
             case "Quantity":
-              _project.CostItemFromPool(id).Quantity = Convert.ToDouble(e.NewValue);
+              _project.CostItemFromPool(id).Quantity = (float)Convert.ToDouble(e.NewValue);
               break;
             case "UnitCost":
-              _project.CostItemFromPool(id).UnitCost = Convert.ToDecimal(e.NewValue);
+              _project.CostItemFromPool(id).UnitCost = (float)Convert.ToDecimal(e.NewValue);
               break;
             case "UnitName":
               _project.CostItemFromPool(id).UnitName = e.NewValue == null ?
@@ -911,7 +911,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
               string.Empty : Convert.ToString(e.NewValue);
               break;
             case "FactorValue":
-              _project.FactorFromPool(id).FactorValue = Convert.ToDouble(e.NewValue);
+              _project.FactorFromPool(id).FactorValue = (float)Convert.ToDouble(e.NewValue);
               break;
             case "FactorType":
               _project.FactorFromPool(id).FactorType = (CostFactorType)Enum.Parse(typeof(CostFactorType), e.NewValue.ToString());
@@ -972,7 +972,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
 
           break;
         case "CostItem":
-          CostItem newCostItem = new CostItem("New item", 1, 0m, "ea");
+          CostItem newCostItem = new CostItem("New item", 1, 0f, "ea");
           parentCostItemFactor.CostItem = newCostItem;
           _project.AddCostItemToPool(newCostItem);
           e.Row["ID"] = newCostItem.ID;
@@ -1056,8 +1056,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       reportItem.UnitName = costItemFactor.CostItem != null ?
       costItemFactor.CostItem.UnitName : "ea";
       reportItem.UnitPrice = costItemFactor.CostItem != null ?
-      (decimal)((double)costItemFactor.CostItem.UnitCost *
-      costItemFactor.Factor) : costItemFactor.Cost;
+        (float)((double)costItemFactor.CostItem.UnitCost *
+        costItemFactor.Factor) : costItemFactor.Cost;
       reportItem.Group = "General";
       reportItem.Item = costItemFactor;
       reportItem.Comment = costItemFactor.Comment ?? string.Empty;
@@ -1159,7 +1159,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
       {
         edtENR.Text = trackENR.Value.ToString();
         _project.FactorFromPool("ENR").FactorValue = trackENR.MidpointSettings.Value == null ? 1 :
-        (double)trackENR.Value / (double)((int)trackENR.MidpointSettings.Value);
+          (float)trackENR.Value / (float)((int)trackENR.MidpointSettings.Value);
         ENR newENRValue = new ENR(trackENR.Value, _project.ProjectInfo.ENR.Month,
         _project.ProjectInfo.ENR.Year);
         _project.ProjectInfo.ENR = newENRValue;
@@ -1363,7 +1363,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
             _directConstructionSelection[currentRow].Name = Convert.ToString(e.NewValue);
             break;
           case "Factor":
-            _directConstructionSelection[currentRow].Factor = Convert.ToDouble(e.NewValue);
+            _directConstructionSelection[currentRow].Factor = (float)Convert.ToDouble(e.NewValue);
             break;
         }
       } // if
@@ -1403,7 +1403,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
         if (item.Selected)
         {
           string itemFactorName = item.Name;
-          CostFactor otherDCCIFFactor = new CostFactor(itemFactorName, item.Factor, CostFactorType.IndirectSimple);
+          CostFactor otherDCCIFFactor = 
+            new CostFactor(itemFactorName, item.Factor, CostFactorType.IndirectSimple);
           _project.AddFactorToPool(otherDCCIFFactor);
           if (detailOtherDCCostItemFactor.CostFactorIndex(otherDCCIFFactor) == -1)
             detailOtherDCCostItemFactor.AddFactor(otherDCCIFFactor);

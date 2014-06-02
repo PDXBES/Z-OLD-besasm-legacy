@@ -91,40 +91,40 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// <summary>
     /// Manhole cost
     /// </summary>
-    /// <returns>Decimal</returns>
-    public decimal ManholeCost
+    /// <returns>float</returns>
+    public float ManholeCost
     {
       get
       {
-        return (decimal)((double)Manhole.Cost * PipeAndManhole.Factor);
+        return (float)((double)Manhole.Cost * PipeAndManhole.Factor);
       } // get
     } // ManholeCost
 
     /// <summary>
     /// Direct construction cost per ft
     /// </summary>
-    /// <returns>Decimal</returns>
-    public decimal DirectConstructionCostPerFt
+    /// <returns>float</returns>
+    public float DirectConstructionCostPerFt
     {
       get
       {
         return Manhole != null ?
-        (decimal)((double)(PipeAndManhole.ChildCost - Manhole.Cost ) / _Length * PipeAndManhole.Factor) :
-        (decimal)((double)(PipeAndManhole.ChildCost) / _Length * PipeAndManhole.Factor);
+        (float)((double)(PipeAndManhole.ChildCost - Manhole.Cost ) / _Length * PipeAndManhole.Factor) :
+        (float)((double)(PipeAndManhole.ChildCost) / _Length * PipeAndManhole.Factor);
       } // get
     } // DirectConstructionCostPerFt
 
     /// <summary>
     /// Total construction cost
     /// </summary>
-    /// <returns>Decimal</returns>
-    public decimal TotalConstructionCost
+    /// <returns>float</returns>
+    public float TotalConstructionCost
     {
       get
       {
         CostItemFactor estimate = PipeAndManhole.ParentCostItemFactor.ParentCostItemFactor;
         double factor = estimate.Factor;
-        return (decimal)((double)DirectConstructionCost * factor);
+        return (float)((double)DirectConstructionCost * factor);
       }
     } // TotalConstructionCost
 
@@ -155,12 +155,12 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// <summary>
     /// Direct construction pipe cost
     /// </summary>
-    /// <returns>Decimal</returns>
-    public decimal DirectConstructionCost
+    /// <returns>float</returns>
+    public float DirectConstructionCost
     {
       get
       {
-        return (decimal)(_Length * (double)DirectConstructionCostPerFt) +
+        return (float)(_Length * (double)DirectConstructionCostPerFt) +
         ManholeCost;
       } // get
     } // DirectConstructionPipeCost

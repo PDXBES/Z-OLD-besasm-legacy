@@ -76,24 +76,24 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// <summary>
     /// Cost
     /// </summary>
-    /// <returns>Decimal</returns>
-    public decimal Cost
+    /// <returns>float</returns>
+    public float Cost
     {
       get
       {
-        return (decimal)(Units * (double)UnitCost);
+        return (float)(Units * (double)UnitCost);
       } // get
     } // Cost
 
     /// <summary>
     /// Unit cost
     /// </summary>
-    /// <returns>Decimal</returns>
-    public decimal UnitCost
+    /// <returns>float</returns>
+    public float UnitCost
     {
       get
       {
-        decimal unitCostPerDayOfTrafficControl = 0;
+        float unitCostPerDayOfTrafficControl = 0;
         switch (_ConflictPackage.Conflicts.StreetType)
         {
           case Enumerators.StreetTypeKind.Street:
@@ -129,7 +129,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// Units
     /// </summary>
     /// <returns>Double</returns>
-    public double Units
+    public float Units
     {
       get
       {

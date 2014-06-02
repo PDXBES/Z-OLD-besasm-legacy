@@ -27,8 +27,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 
     private int _Id;
     private string _Name;
-    private double _Quantity;
-    private decimal _UnitCost;
+    private float _Quantity;
+    private float _UnitCost;
     private string _UnitName;
     private string _Comment;
     #endregion
@@ -60,7 +60,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// <param name="quantity">Quantity</param>
     /// <param name="unitCost">Unit cost</param>
     /// <param name="unitName">Unit name</param>
-    public CostItem(string name, double quantity, decimal unitCost, string unitName)
+    public CostItem(string name, float quantity, float unitCost, string unitName)
     {
       AssignID();
 
@@ -108,7 +108,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// <param name="unitCost">Unit cost</param>
     /// <param name="unitName">Unit name</param>
     /// <param name="comment">Comment</param>
-    public CostItem(int id, string name, double quantity, decimal unitCost,
+    public CostItem(int id, string name, float quantity, float unitCost,
     string unitName, string comment)
     {
       _Id = id;
@@ -139,12 +139,12 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// <summary>
     /// Cost
     /// </summary>
-    /// <returns>Decimal</returns>
-    public decimal Cost
+    /// <returns>float</returns>
+    public float Cost
     {
       get
       {
-        return (decimal)((double)UnitCost * Quantity);
+        return (float)(UnitCost * Quantity);
       } // get
     } // Cost
 
@@ -168,7 +168,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// Quantity
     /// </summary>
     /// <returns>Double</returns>
-    public double Quantity
+    public float Quantity
     {
       get
       {
@@ -183,8 +183,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// <summary>
     /// Unit cost
     /// </summary>
-    /// <returns>Decimal</returns>
-    public decimal UnitCost
+    /// <returns>float</returns>
+    public float UnitCost
     {
       get
       {

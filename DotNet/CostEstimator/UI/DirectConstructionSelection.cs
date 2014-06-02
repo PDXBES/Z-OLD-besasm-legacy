@@ -23,6 +23,6 @@ namespace SystemsAnalysis.Analysis.CostEstimator.UI
     /// The factor to be used to figure the direct construction item's cost
     /// when multiplying against a linked item's cost
     /// </summary>
-    public double Factor;
+    public float Factor;
   }
 }

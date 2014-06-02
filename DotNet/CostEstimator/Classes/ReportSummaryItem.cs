@@ -22,7 +22,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
   {
     #region Variables
     private string _Name;
-    private decimal _Cost;
+    private float _Cost;
     private string _Group;
     private string _SummaryGroup;
     #endregion
@@ -48,8 +48,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// <summary>
     /// Cost
     /// </summary>
-    /// <returns>Decimal</returns>
-    public decimal Cost
+    /// <returns>float</returns>
+    public float Cost
     {
       get
       {

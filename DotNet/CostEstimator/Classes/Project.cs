@@ -402,7 +402,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
         {
           int id = 0;
           string name = null;
-          double factorvalue = 1.0;
+          float factorvalue = 1.0f;
           CostFactorType factortype = CostFactorType.Simple;
           string comment = null;
 
@@ -418,7 +418,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
                 name = childIter.Current.Value;
                 break;
               case "factorvalue":
-                factorvalue = childIter.Current.ValueAsDouble;
+                factorvalue = (float)childIter.Current.ValueAsDouble;
                 break;
               case "factortype":
                 factortype = (CostFactorType)Enum.Parse(typeof(CostFactorType),
@@ -467,8 +467,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
         {
           int id = 0;
           string name = null;
-          double quantity = 0;
-          decimal unitcost = 0m;
+          float quantity = 0.0f;
+          float unitcost = 0.0f;
           string unitname = "ea";
           string comment = null;
 
@@ -484,10 +484,10 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
                 name = childIter.Current.Value;
                 break;
               case "quantity":
-                quantity = childIter.Current.ValueAsDouble;
+                quantity = (float)childIter.Current.ValueAsDouble;
                 break;
               case "unitcost":
-                unitcost = (decimal)childIter.Current.ValueAsDouble;
+                unitcost = (float)childIter.Current.ValueAsDouble;
                 break;
               case "unitname":
                 unitname = childIter.Current.Value;
@@ -516,8 +516,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
           int id = Convert.ToInt32(xpathIter.Current.GetAttribute("id", string.Empty));
           string name = null;
           string comment = null;
-          double quantity = 0;
-          decimal mincost = 0;
+          float quantity = 0.0f;
+          float mincost = 0.0f;
           int costitemid = -1;
           List<int> factorIDs = new List<int>();
 
@@ -537,10 +537,10 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
                 comment = childIter.Current.Value;
                 break;
               case "quantity":
-                quantity = childIter.Current.ValueAsDouble;
+                quantity = (float)childIter.Current.ValueAsDouble;
                 break;
               case "mincost":
-                mincost = (decimal)childIter.Current.ValueAsDouble;
+                mincost = (float)childIter.Current.ValueAsDouble;
                 break;
               case "CostItemId":
                 if (childIter.Current.Value != "")
@@ -629,7 +629,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
                               reportItem.ControlSubtype = dataIter.Current.Value;
                               break;
                             case "cost":
-                              reportItem.Cost = (decimal)dataIter.Current.ValueAsDouble;
+                              reportItem.Cost = (float)dataIter.Current.ValueAsDouble;
                               break;
                             case "comment":
                               reportItem.Comment = dataIter.Current.Value;
@@ -657,7 +657,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
                               reportItem.UnitName = dataIter.Current.Value;
                               break;
                             case "unitPrice":
-                              reportItem.UnitPrice = (decimal)dataIter.Current.ValueAsDouble;
+                              reportItem.UnitPrice = (float)dataIter.Current.ValueAsDouble;
                               break;
                             case "group":
                               reportItem.Group = dataIter.Current.Value;
@@ -685,7 +685,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
                               reportItem.Name = dataIter.Current.Value;
                               break;
                             case "cost":
-                              reportItem.Cost = (decimal)dataIter.Current.ValueAsDouble;
+                              reportItem.Cost = (float)dataIter.Current.ValueAsDouble;
                               break;
                             case "group":
                               reportItem.Group = dataIter.Current.Value;
@@ -845,11 +845,11 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
     /// </summary>
     private void CreateStandardFactors()
     {
-      CostFactor newCostFactor = new CostFactor("General conditions", 0.10, CostFactorType.Additive);
+      CostFactor newCostFactor = new CostFactor("General conditions", 0.10f, CostFactorType.Additive);
       _StandardCostFactorPool.Add(newCostFactor.ID, newCostFactor);
-      newCostFactor = new CostFactor("Waste allowance", 0.05, CostFactorType.Additive);
+      newCostFactor = new CostFactor("Waste allowance", 0.05f, CostFactorType.Additive);
       _StandardCostFactorPool.Add(newCostFactor.ID, newCostFactor);
-      newCostFactor = new CostFactor("ENR", (double)_PipeCoster.CurrentENR.Value / (double)_PipeCoster.BaseENR.Value, CostFactorType.Simple);
+      newCostFactor = new CostFactor("ENR", (float)_PipeCoster.CurrentENR.Value / (float)_PipeCoster.BaseENR.Value, CostFactorType.Simple);
       _StandardCostFactorPool.Add(newCostFactor.ID, newCostFactor);
     } // CreateStandardFactors()
 
@@ -861,15 +861,15 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
       foreach (KeyValuePair<int, CostFactor> kvpair in _StandardCostFactorPool)
         _CostFactorPool.Add(kvpair.Key, kvpair.Value);
 
-      CostFactor newCostFactor = new CostFactor(DESC_CONTINGENCY, 0.25, CostFactorType.Additive);
+      CostFactor newCostFactor = new CostFactor(DESC_CONTINGENCY, 0.25f, CostFactorType.Additive);
       _CostFactorPool.Add(newCostFactor.ID, newCostFactor);
-      newCostFactor = new CostFactor("Const mgt, Insp, Test", 0.15, CostFactorType.IndirectAdditive);
+      newCostFactor = new CostFactor("Const mgt, Insp, Test", 0.15f, CostFactorType.IndirectAdditive);
       _CostFactorPool.Add(newCostFactor.ID, newCostFactor);
-      newCostFactor = new CostFactor("Design", 0.20, CostFactorType.IndirectAdditive);
+      newCostFactor = new CostFactor("Design", 0.20f, CostFactorType.IndirectAdditive);
       _CostFactorPool.Add(newCostFactor.ID, newCostFactor);
-      newCostFactor = new CostFactor("PI, I&C, Easements, Environmental", 0.03, CostFactorType.IndirectAdditive);
+      newCostFactor = new CostFactor("PI, I&C, Easements, Environmental", 0.03f, CostFactorType.IndirectAdditive);
       _CostFactorPool.Add(newCostFactor.ID, newCostFactor);
-      newCostFactor = new CostFactor("Startup/closeout", 0.01, CostFactorType.IndirectAdditive);
+      newCostFactor = new CostFactor("Startup/closeout", 0.01f, CostFactorType.IndirectAdditive);
       _CostFactorPool.Add(newCostFactor.ID, newCostFactor);
     } // CreateFactors()
 
@@ -1004,8 +1004,8 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
           CheckFocusArea(focusAreas, altLink.FocusArea);
           CostItemFactor currentCostItem = Estimate(altLink.FocusArea).ChildCostItemFactor(DESC_PIPE_DIRECT_CONSTRUCTION);
 
-          _PipeCoster.Depth = altPackage.PipeDepth(altLink);
-          _PipeCoster.InsideDiameter = altLink.Diameter;
+          _PipeCoster.Depth = (float)altPackage.PipeDepth(altLink);
+          _PipeCoster.InsideDiameter = (float)altLink.Diameter;
           switch (altLink.Material.ToUpper())
           {
             case "PVC":
@@ -1052,7 +1052,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
           altLink.Diameter,
           altPackage.PipeDepth(altLink),
           altLink.Material);
-          CostItemFactor pipeCostItemFactor = new CostItemFactor(pipeItemName, null, null, altLink.Length);
+          CostItemFactor pipeCostItemFactor = new CostItemFactor(pipeItemName, null, null, (float)altLink.Length);
           _CostItemFactors.Add(pipeCostItemFactor.ID, pipeCostItemFactor);
           _PipeCoster.CreateDirectConstructionCostItems(this, pipeCostItemFactor);
           int pipeIndex = pipeAndManholeItem.AddCostItemFactor(pipeCostItemFactor);
@@ -1173,7 +1173,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 
         _ICCoster.DrainageAreaSqFt = Common.SQUARE_FEET_PER_ACRE;
         _ICCoster.InflowControl = InflowControl.VegetatedInfiltrationBasin;
-        decimal icCost = _ICCoster.Cost;
+        float icCost = _ICCoster.Cost;
 
         string itemName = string.Format("{0} {1}",
         _ICCoster.InflowControl.ToString(),
@@ -1184,7 +1184,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
         CostItemFactor parkingTargetCostItemFactor = new CostItemFactor(itemName,
         null, null, 1);
         CostItemFactor baseParkingTargetCostItemFactor = new CostItemFactor(newCostItem.Name,
-        poolCostItem, null, parkingTarget.ControlledArea / Common.SQUARE_FEET_PER_ACRE);
+          poolCostItem, null, (float)parkingTarget.ControlledArea / Common.SQUARE_FEET_PER_ACRE);
         parkingTargetCostItemFactor.MinCost = _ICCoster.VegetatedInfiltrationBasinMinCost;
         AddCostItemFactorToPool(parkingTargetCostItemFactor);
         AddCostItemFactorToPool(baseParkingTargetCostItemFactor);
@@ -1256,7 +1256,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
         if (roofTarget.DSToBioretention > 0)
         {
           _ICCoster.InflowControl = InflowControl.VegetatedInfiltrationBasin;
-          decimal icCost = _ICCoster.Cost;
+          float icCost = _ICCoster.Cost;
 
           string itemName = string.Format("{0} {1}",
           _ICCoster.InflowControl.ToString(),
@@ -1266,7 +1266,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
           roofTargetCostItemFactor = new CostItemFactor(itemName,
           null, null, 1);
           CostItemFactor baseRoofTargetCostItemFactor = new CostItemFactor(newCostItem.Name,
-          poolCostItem, null, roofTarget.AreaToBioretention / Common.SQUARE_FEET_PER_ACRE);
+          poolCostItem, null, (float)roofTarget.AreaToBioretention / Common.SQUARE_FEET_PER_ACRE);
           roofTargetCostItemFactor.MinCost = _ICCoster.VegetatedInfiltrationBasinMinCost;
           AddCostItemFactorToPool(roofTargetCostItemFactor);
           AddCostItemFactorToPool(baseRoofTargetCostItemFactor);
@@ -1284,7 +1284,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
         if (roofTarget.DSToEcoroof > 0)
         {
           _ICCoster.InflowControl = InflowControl.Ecoroof;
-          decimal icCost = _ICCoster.Cost;
+          float icCost = _ICCoster.Cost;
 
           string itemName = string.Format("{0} {1}",
           _ICCoster.InflowControl.ToString(),
@@ -1294,7 +1294,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
           roofTargetCostItemFactor = new CostItemFactor(itemName,
           null, null, 1);
           CostItemFactor baseRoofTargetCostItemFactor = new CostItemFactor(newCostItem.Name,
-          poolCostItem, null, roofTarget.AreaToEcoroof / Common.SQUARE_FEET_PER_ACRE);
+          poolCostItem, null, (float)roofTarget.AreaToEcoroof / Common.SQUARE_FEET_PER_ACRE);
           roofTargetCostItemFactor.MinCost = _ICCoster.EcoroofMinCost;
           AddCostItemFactorToPool(roofTargetCostItemFactor);
           AddCostItemFactorToPool(baseRoofTargetCostItemFactor);
@@ -1312,7 +1312,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
         if (roofTarget.DSToPlanter > 0)
         {
           _ICCoster.InflowControl = InflowControl.InfiltrationPlanter;
-          decimal icCost = _ICCoster.Cost;
+          float icCost = _ICCoster.Cost;
 
           string itemName = string.Format("{0} {1}",
           _ICCoster.InflowControl.ToString(),
@@ -1322,7 +1322,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
           roofTargetCostItemFactor = new CostItemFactor(itemName,
           null, null, 1);
           CostItemFactor baseRoofTargetCostItemFactor = new CostItemFactor(newCostItem.Name,
-          poolCostItem, null, roofTarget.AreaToPlanter / Common.SQUARE_FEET_PER_ACRE);
+          poolCostItem, null, (float)roofTarget.AreaToPlanter / Common.SQUARE_FEET_PER_ACRE);
           roofTargetCostItemFactor.MinCost = _ICCoster.InfiltrationPlanterMinCost;
           AddCostItemFactorToPool(roofTargetCostItemFactor);
           AddCostItemFactorToPool(baseRoofTargetCostItemFactor);
@@ -1340,7 +1340,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
         if (roofTarget.DSToVeg > 0)
         {
           _ICCoster.InflowControl = InflowControl.DownspoutDisconnection;
-          decimal icCost = _ICCoster.Cost;
+          float icCost = _ICCoster.Cost;
 
           string itemName = string.Format("{0} {1}",
           _ICCoster.InflowControl.ToString(),
@@ -1350,7 +1350,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
           roofTargetCostItemFactor = new CostItemFactor(itemName,
           null, null, 1);
           CostItemFactor baseRoofTargetCostItemFactor = new CostItemFactor(newCostItem.Name,
-          poolCostItem, null, roofTarget.AreaToVeg / Common.SQUARE_FEET_PER_ACRE);
+          poolCostItem, null, (float)roofTarget.AreaToVeg / Common.SQUARE_FEET_PER_ACRE);
           roofTargetCostItemFactor.MinCost = _ICCoster.DownspoutDisconnectionMinCost;
           AddCostItemFactorToPool(roofTargetCostItemFactor);
           AddCostItemFactorToPool(baseRoofTargetCostItemFactor);
@@ -1409,7 +1409,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
         CostItemFactor currentCostItem = Estimate(streetTarget.FocusArea).ChildCostItemFactor(DESC_INFLOW_CONTROL_DIRECT_CONSTRUCTION).ChildCostItemFactor("Street");
 
         CostItem newCostItem = null;
-        decimal icCost;
+        float icCost;
         CostItemFactor streetTargetCostItemFactor = null;
         string itemName = "";
         CostItemFactor baseStreetTargetCostItemFactor = null;
@@ -1443,12 +1443,12 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
             _ICCoster.InflowControl.ToString(),
             streetTarget.ID);
             newCostItem = new CostItem(_ICCoster.InflowControl.ToString(), 1,
-            (decimal)((double)icCost / _ICCoster.FacilitySizeCuFt), "cuft");
+            (float)((double)icCost / _ICCoster.FacilitySizeCuFt), "cuft");
             poolCostItem = AddCostItemToPool(newCostItem);
             streetTargetCostItemFactor = new CostItemFactor(itemName,
             null, null, 1);
             baseStreetTargetCostItemFactor = new CostItemFactor(newCostItem.Name,
-            poolCostItem, null, streetTarget.CurbExtensionVol);
+            poolCostItem, null, (float)streetTarget.CurbExtensionVol);
             streetTargetCostItemFactor.MinCost = _ICCoster.StormwaterPlanterMinCost;
             break;
           case "c":
@@ -1459,7 +1459,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
             _ICCoster.InflowControl.ToString(),
             streetTarget.ID);
             newCostItem = new CostItem(_ICCoster.InflowControl.ToString(), 1,
-            (decimal)((double)icCost / _ICCoster.FacilitySizeCuFt), "cuft");
+            (float)((double)icCost / _ICCoster.FacilitySizeCuFt), "cuft");
             poolCostItem = AddCostItemToPool(newCostItem);
             CostItem newCETrafficControlCostItem = new CostItem("Curb extension traffic control",
             1, _ICCoster.CurbExtensionTrafficControl, "ea");
@@ -1491,7 +1491,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
             streetTargetCostItemFactor.AddCostItemFactor(CEWaterLineSleevingCIF);
 
             baseStreetTargetCostItemFactor = new CostItemFactor(newCostItem.Name,
-            poolCostItem, null, streetTarget.CurbExtensionVol);
+            poolCostItem, null, (float)streetTarget.CurbExtensionVol);
 
             streetTargetCostItemFactor.MinCost = _ICCoster.CurbExtensionMinCost;
             break;
@@ -1626,10 +1626,10 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
             linkCounter, totalLinks, durationLeft));
 
             currentStage = "Assigning PipeCoster depth";
-            _PipeCoster.Depth = model.PipeDepth(link);
+            _PipeCoster.Depth = (float)model.PipeDepth(link);
 
             currentStage = "Assigning PipeCoster inside diameter";
-            _PipeCoster.InsideDiameter = link.Diameter;
+            _PipeCoster.InsideDiameter = (float)link.Diameter;
 
             currentStage = "Assigning PipeCoster material";
             switch (link.Material.ToUpper())
@@ -1683,7 +1683,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
             link.Diameter,
             model.PipeDepth(link),
             link.Material);
-            CostItemFactor pipeCostItemFactor = new CostItemFactor(pipeItemName, null, null, link.Length);
+            CostItemFactor pipeCostItemFactor = new CostItemFactor(pipeItemName, null, null, (float)link.Length);
             _CostItemFactors.Add(pipeCostItemFactor.ID, pipeCostItemFactor);
             _PipeCoster.CreateDirectConstructionCostItems(this, pipeCostItemFactor);
             int pipeIndex = pipeAndManholeItem.AddCostItemFactor(pipeCostItemFactor);
@@ -2020,7 +2020,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
 
               currentSegment = new Segment(reader);
 
-              var segmentDepths = new double[] { currentSegment.USDepth, currentSegment.DSDepth };
+              var segmentDepths = new float[] { currentSegment.USDepth, currentSegment.DSDepth };
               _PipeCoster.Depth = segmentDepths.Average();
 
               _PipeCoster.InsideDiameter = currentSegment.PipeDiamWidth;
@@ -2707,7 +2707,7 @@ namespace SystemsAnalysis.Analysis.CostEstimator.Classes
             reportItem.UnitName = item.CostItem != null ?
             item.CostItem.UnitName : "ea";
             reportItem.UnitPrice = item.CostItem != null ?
-            (decimal)((double)item.CostItem.UnitCost *
+            (float)((double)item.CostItem.UnitCost *
             item.Factor) : item.Cost;
             reportItem.Group = "General";
             reportItem.Item = item;
